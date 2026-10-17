@@ -11,9 +11,75 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The presheaf infinity-category $\\mathcal P(C)=\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal S)$ admits all small colimits by the free-cocompletion theorem for a small infinity category. Therefore the coherent diagram $y\\circ p$ has a colimit cocone with apex $B_\\lambda$, and the coherent cocone $y\\lambda:y\\circ p\\to\\Delta_Ky(a)$ induces a map $s_\\lambda:B_\\lambda\\to y(a)$ by the universal property of that colimit.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.1.2.4 (presheaf colimits), and Proposition 5.3.6.2 proof of (3), printed pp. 414–415 (the induced relation map)"
+   }
+  },
+  {
+   "text": "Apply the Yoneda evaluation equivalence in the presheaf category to the object $a$. For every $X\\in\\mathcal P(C)$, evaluation at $\\operatorname{id}_a$ gives the natural equivalence $\\operatorname{Map}_{\\mathcal P(C)}(y(a),X)\\simeq X(a)$, including its coherent dependence on $X$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.2, pp. 324–325, in the representable-presheaf variance used here"
+   }
+  },
+  {
+   "text": "Use the dual colimiting-cocone mapping-space criterion in the Yoneda limits lemma with $\\mathcal E=\\mathcal P(C)$, diagram $y\\circ p$, and its colimit cocone. It gives $\\operatorname{Map}_{\\mathcal P(C)}(B_\\lambda,X)\\simeq\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal P(C)}(y(p(k)),X)$. The equivalences are natural in the diagram, cocone, and testing object. Substituting the Yoneda evaluation equivalence at each $p(k)$ identifies the right side with $\\lim_{k\\in K^{\\mathrm{op}}}X(p(k))$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.1.2.2 and Corollary 5.1.2.3, together with the opposite/cocone form of Propositions 5.1.3.1–5.1.3.2"
+   }
+  },
+  {
+   "text": "Write $\\iota:yp\\to\\Delta_K B_\\lambda$ for the colimit cocone. By the defining universal property of $s_\\lambda$, the coherent composite $s_\\lambda\\iota$ is $y\\lambda$, with its specified higher homotopies. Under step 3, precomposition by $s_\\lambda$ therefore sends a coherent map $f:y(a)\\to X$ to the whole compatible family $f\\circ y\\lambda$. Let $\\eta_{b,X}:\\operatorname{Map}(y(b),X)\\simeq X(b)$ be the natural equivalence of step 2. Its naturality on $\\lambda_k:p(k)\\to a$ gives $\\eta_{p(k),X}(f\\circ y(\\lambda_k))=X(\\lambda_k)(\\eta_{a,X}(f))$ up to its specified homotopy. This is an equality of coherent cones, rather than only components: naturality of $\\eta$ on $C^{\\mathrm{op}}\\times\\mathcal P(C)$ applies to every simplex of $\\lambda$, and the mapping-space comparison in step 3 is natural in the diagram. Thus the resulting map is the comparison induced by $X\\lambda$, coherently in $X$ and the cocone. Conjugating a map by equivalences preserves and reflects being an equivalence, proving the locality assertion.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2, proof of (3), pp. 414–415, with the Yoneda and colimit mapping-space naturality from Propositions 5.1.2.2–5.1.3.2"
+   }
+  },
+  {
+   "text": "For $X=y(c)$ and a colimiting cocone $\\lambda$ in $C$, the dual colimiting-cocone mapping-space criterion in $C$ gives $\\operatorname{Map}_C(a,c)\\simeq\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}_C(p(k),c)$. Its map is induced by the original cocone $\\lambda$, so it is exactly the comparison $X(a)\\to\\lim Xp$ identified in step 4. For $K=\\varnothing$, step 1 makes $B_\\lambda$ an initial presheaf and step 3 identifies $\\operatorname{Map}(B_\\lambda,X)$ with the terminal space; for arbitrary apex $a$ the comparison is simply $X(a)\\to *$. Only when this empty cocone is colimiting in $C$ must $a$ itself be initial, and then the same mapping-space criterion gives $\\operatorname{Map}_C(a,c)\\simeq *$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 5.1.2.2–5.1.3.2, including the colimiting-cocone criterion and its empty-diagram case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Auxiliary compact-hull argument extracted from the paragraph beginning ‘For K in D^b_c(X,R)’; HTT Proposition 5.3.6.2 mapping-space test for the relation s_alpha"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +115,52 @@
    "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.PresheafedSpace.colimitCocone; AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit; CategoryTheory.Presheaf.colimitOfRepresentable; AlgebraicGeometry.PresheafedSpace.colimitCocone_pt; CategoryTheory.Presheaf.isColimitTautologicalCocone; TopCat.Presheaf.isLimitOpensLeEquivGenerate₁; AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.desc; PresheafOfModules.colimitCocone. Logged digest 1d0b57c2a79a4c23.",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary categories or simplicial-set finiteness, not the stated coherent infinity-categorical assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda.*colimit|colimit.*yoneda|coyoneda.*limit Mathlib/",
+   "results": "{\"t\": \"2026-10-17T11:36:21Z\", \"tool\": \"grep\", \"query\": \"yoneda.*colimit|colimit.*yoneda|coyoneda.*limit Mathlib/\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\"], \"digest\": \"d0c2ca1f14a8f8c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary-category IndYoneda.lean (Category instances and Type-valued Hom) and search hit types; none states a mapping-space equivalence for coherent space-valued presheaves on a quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presheaf of spaces is local for the map from a colimit of representables if and only if it sends that cocone to a limit",
+   "results": "{\"t\": \"2026-10-17T11:36:21Z\", \"tool\": \"leansearch\", \"query\": \"A presheaf of spaces is local for the map from a colimit of representables if and only if it sends that cocone to a limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.colimitCocone\", \"AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit\", \"CategoryTheory.Presheaf.colimitOfRepresentable\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone_pt\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"TopCat.Presheaf.isLimitOpensLeEquivGenerate₁\", \"AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.desc\", \"PresheafOfModules.colimitCocone\"], \"digest\": \"1d0b57c2a79a4c23\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary-category IndYoneda.lean (Category instances and Type-valued Hom) and search hit types; none states a mapping-space equivalence for coherent space-valued presheaves on a quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yoneda, CategoryTheory.Limits.colimit",
+   "results": "{\"t\": \"2026-10-17T11:36:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.yoneda, CategoryTheory.Limits.colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.final_of_isTerminal_colimit_comp_yoneda\", \"CategoryTheory.yonedaYonedaColimit\", \"CategoryTheory.yonedaYonedaColimit_app_inv\", \"CategoryTheory.CostructuredArrow.toOverCompYonedaColimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.compYonedaColimitIsoColimitCompYoneda\"], \"digest\": \"fde17bef42db6cf7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary-category IndYoneda.lean (Category instances and Type-valued Hom) and search hit types; none states a mapping-space equivalence for coherent space-valued presheaves on a quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a presheaf of spaces X and a cocone p to a the map out of colim Yoneda p to Yoneda a is sent by Map into X to X a mapping to the limit X p",
+   "results": "{\"t\": \"2026-10-17T11:36:22Z\", \"tool\": \"leanfinder\", \"query\": \"For a presheaf of spaces X and a cocone p to a the map out of colim Yoneda p to Yoneda a is sent by Map into X to X a mapping to the limit X p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone_ι_app_c\", \"CategoryTheory.colimitYonedaHomEquiv_π_apply\", \"CategoryTheory.Limits.colimitYonedaHomIsoLimit'_π_apply\", \"CategoryTheory.Limits.colimitYonedaHomIsoLimit_π_apply\", \"AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.desc_c_naturality\", \"AlgebraicGeometry.PresheafedSpace.colimitPresheafObjIsoComponentwiseLimit_hom_π\", \"AlgebraicGeometry.PresheafedSpace.colimitPresheafObjIsoComponentwiseLimit_inv_ι_app\"], \"digest\": \"a2ebca15e9c3a3c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary-category IndYoneda.lean (Category instances and Type-valued Hom) and search hit types; none states a mapping-space equivalence for coherent space-valued presheaves on a quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitYonedaHomIsoLimit|colimitHomIsoLimitYoneda",
+   "results": "{\"t\": \"2026-10-17T11:48:26Z\", \"tool\": \"grep\", \"query\": \"colimitYonedaHomIsoLimit|colimitHomIsoLimitYoneda\", \"sub\": \"CategoryTheory/Limits/IndYoneda.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"69\", \"76\", \"77\", \"79\", \"87\"], \"digest\": \"924e3cccff8ac9c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary-category IndYoneda.lean (Category instances and Type-valued Hom) and search hit types; none states a mapping-space equivalence for coherent space-valued presheaves on a quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a space valued presheaf infinity category orthogonality to a map from a colimit of representables is equivalent to preserving that specified cocone as a limit",
+   "results": "{\"t\": \"2026-10-17T11:48:28Z\", \"tool\": \"leanfinder\", \"query\": \"In a space valued presheaf infinity category orthogonality to a map from a colimit of representables is equivalent to preserving that specified cocone as a limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit\", \"AlgebraicGeometry.PresheafedSpace.colimitPresheafObjIsoComponentwiseLimit\", \"CategoryTheory.Limits.Cocone.isColimitYonedaEquiv\", \"CategoryTheory.Limits.PushoutCocone.isColimitYonedaEquiv\", \"CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.iso\", \"CategoryTheory.Sieve.forallYonedaIsSheaf_iff_colimit\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone'\"], \"digest\": \"bfa091e930574fbc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary-category IndYoneda.lean (Category instances and Type-valued Hom) and search hit types; none states a mapping-space equivalence for coherent space-valued presheaves on a quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-compact-generated-filtered-hull",
@@ -79,5 +187,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-presheaf-colimit-locality",
+  "worker": "stage1",
+  "summary": "Split the coherent presheaf locality assertion into colimit existence, Yoneda evaluation, the colimit-to-limit mapping-space formula, its natural identification with precomposition by the induced map, and the representable and empty-shape consequences. The statement and seeded dependencies are unchanged; no new nodes were needed because the cited Yoneda and presheaf free-cocompletion lemmas already state every non-elementary ingredient.",
+  "blueprint": "Realizes the auxiliary HTT mapping-space test extracted from the compact-hull argument in the second proof paragraph of prop-coef-integral-exceptional-adjoint, through the retained blueprint.from.via chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-ba8927076",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-ba8927076 (reviewer sub-agent of L); spot-checked: Reviewed full item, route, cited nodes, blueprint proof, HTT source locations, searches, hypotheses, coherences, variance, and edge cases. No mathematical or structural fault found; review written to review.md."
  }
 }

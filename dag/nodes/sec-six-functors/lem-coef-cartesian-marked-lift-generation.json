@@ -13,9 +13,97 @@
   "def-coef-infinity-fibrations",
   "lem-coef-relative-marked-anodyne-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The simplex $\\Delta^n=N([n])$ is a quasicategory: the vertices of an inner horn determine a weakly increasing list, and hence its simplex filler. The relative marked calculus, applied also after pullback to each vertex, makes $Y$ and its fibres quasicategories. The prescribed-target lifting clause of the fibration definition supplies the allowed chosen edges. Directly from the right-pinched mapping-space definition, $\\operatorname{Map}_{\\Delta^n}(a,b)$ is a point if $a\\le b$ and empty otherwise: a simplex with its initial face constant at $a$ and final vertex $b$ is the unique monotone list $(a,\\ldots,a,b)$. In particular every base mapping space used below with endpoints $i\\le j$ is a point.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 2.4.1.1 and 2.4.2.1; simplex specialization of Proposition 2.4.4.3"
+   }
+  },
+  {
+   "text": "First prove stability and reflection under fibre equivalences. For an edge $a:r\\to s$, apply [lem-coef-infinity-cartesian-mapping-criterion] for each test vertex $w$. Precomposing $a$ by a fibre equivalence $u:r'\\to r$ changes the upper-left corner of its mapping square by postcomposition with $u$, leaving the lower corners fixed. Postcomposing $a$ by a fibre equivalence $v:s\\to s'$ changes its upper-right corner by postcomposition with $v$, again leaving the lower corners fixed. These maps of spaces have homotopy inverses: compose with inverse edges; the inverse triangles and associativity and unit homotopies in [lem-coef-infinity-mapping-composition] give the two inverse homotopies. Thus they identify the mapping squares up to homotopy. In the path-space description of a homotopy pullback, apply the same inverse maps to the endpoint coordinates and concatenate the comparison homotopies with the path coordinate; the inverse homotopies give the inverse on that path-space pullback. This is the homotopy pullback invariance of [lem-coef-kan-homotopy-pullback-invariance]. Consequently the comparison map is an equivalence before a change exactly when it is after the change, proving preservation and reflection of Cartesianity. The composition lemma also says that postcomposition depends only on the component class of the edge, so the conclusion holds for every triangle composite and for edges representing the same class in $hY$.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, invariance of its mapping-space square under fibre equivalences"
+   }
+  },
+  {
+   "text": "Given a Cartesian edge $d:x\\to y$ over $i\\to j$, choose $b\\in B_j$ and a fibre equivalence $v:b\\to y$ (reverse an equivalence using its inverse if necessary). Fill the inner $2$-horn on $e=e_{i,j,b}$ and $v$ to get a composite $k:c_{i,j,b}\\to y$. Its projection is the unique triangle $(i,j,j)$, and Step 2 makes $k$ Cartesian. Put $c=c_{i,j,b}$. For $w=c,x$, the Cartesian mapping-fibre theorem identifies both postcomposition maps\n$$\\operatorname{Map}_{Y_i}(w,x)\\longrightarrow\\operatorname{Map}_{Y}(w,y),\\qquad \\operatorname{Map}_{Y_i}(w,c)\\longrightarrow\\operatorname{Map}_{Y}(w,y)$$\nwith equivalences: the homotopy fibre on the right is the whole mapping space because $\\operatorname{Map}_{\\Delta^n}(i,j)$ is a point. Surjectivity on components gives edges $u:c\\to x$ and $t:x\\to c$ in $Y_i$ with $[d][u]=[k]$ and $[k][t]=[d]$. Now $[d][u][t]=[d]$ and $[k][t][u]=[k]$; injectivity on components of those same maps for $w=x,c$ gives $[u][t]=1_x$ and $[t][u]=1_c$. Mapping spaces of $Y$ between vertices over $i$ are exactly those of $Y_i$, since a simplex of $\\Delta^n$ all of whose vertices are $i$ is constant. Thus the inverse equations hold in $hY_i$, and the equivalence-edge characterization makes $u$ a fibre equivalence. Finally $[k]=[v][e]$ by its defining triangle, yielding the required equation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.2; mapping-space comparison of two Cartesian lifts"
+   }
+  },
+  {
+   "text": "The forward preservation implication follows because each chosen $e_{i,j,b}$ is Cartesian. For the reverse implication suppose all their images under $f$ are Cartesian. A simplicial map sends inverse-triangle witnesses to inverse-triangle witnesses, so sends $u,v$ in Step 3 to fibre equivalences. It also sends the triangle defining $k$ and the component relation $[d][u]=[k]$ to the corresponding relations in $hZ$: the latter relation is a path-component equality of mapping spaces, and the induced simplicial map preserves paths. The triangle composite $f(k)$ of $f(v)$ and $f(e)$ is Cartesian by Step 2 applied to $Z$. Applying the reflection direction of that step to $[f(d)][f(u)]=[f(k)]$ shows that $f(d)$ is Cartesian. Since $d$ was arbitrary, this proves the asserted equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.14, marking-reflection sentence in the proof, expanded using Propositions 2.4.4.2 and 2.4.4.3"
+   }
+  },
+  {
+   "text": "Let $\\tau:f\\to g$ be a coherent natural equivalence over the base. Evaluation of its inverse and its inverse-triangle witnesses at a vertex $x$ shows that $\\tau_x:f(x)\\to g(x)$ is an equivalence in the appropriate fibre; its projection is degenerate since the transformation is over the base. For an edge $d:x\\to y$, restrict the transformation to $\\Delta^1\\times\\Delta^1$. The two triangles of this square have the same diagonal and give\n$$[g(d)][\\tau_x]=[\\tau_y][f(d)]\\quad\\text{in }hZ.$$\nStep 2, applied first at the source and then at the target, shows that $g(d)$ is Cartesian exactly when $f(d)$ is Cartesian. This proves invariance of preservation under coherent natural equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.14, full-subcategory argument; naturality square and Proposition 2.4.4.3"
+   }
+  },
+  {
+   "text": "An empty fibre has $B_j=\\varnothing$ and contributes no target $y$ and no chosen edge. Every choice in Step 3 is made only after an actual edge $d:x\\to y$ supplies its target, so a globally nonempty fibre is unnecessary. When $n=0$ the same arguments use only the point mapping space of $\\Delta^0$. More explicitly the identity edge is Cartesian by the mapping criterion's identity square; comparing any Cartesian edge with that identity as in Step 3 makes it an equivalence. Conversely Step 2 makes every equivalence Cartesian by composition with an identity. Thus the preservation assertion at $n=0$ is also covered, since every simplicial map preserves the inverse-triangle witnesses.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 2.4.4.2 and 2.4.4.3, point-base and empty-fibre special cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cartesian-mapping-criterion",
+  "lem-coef-infinity-cartesian-mapping-fiber",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-relative-marked-anodyne-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 3.2.2.14 marking reflection, expanded directly from Propositions 2.4.4.2 and 2.4.4.3 (read online 2026-10-17; archival copy WANTED)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-cone-fiber-comparison",
@@ -66,7 +154,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed finite-coefficient derived mapping-complex adjunction preceding the derived inverse limit; relative marked simplicial foundations below lem-coef-algebroid-external-product: Cartesian base-equivalence invariance and extension. Technical input: the canonical fiber-to-cone comparison for a naturally marked Cartesian fibration, before deriving base extension. Extracted prerequisite: returned proof Step 25, Chosen Cartesian lifts detect preservation of all Cartesian edges.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed finite-coefficient derived mapping-complex adjunction preceding the derived inverse limit; extracted prerequisite: chosen Cartesian lifts detect preservation of all Cartesian edges.",
    "via": [
     "lem-coef-cartesian-cone-fiber-comparison",
     "lem-coef-cartesian-base-equivalence-invariance",
@@ -83,5 +171,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-marked-lift-generation",
+  "worker": "stage1",
+  "summary": "Recovered the interrupted four-step split and its search records. Removed its uncommitted Cartesian-lift terminality prerequisite after finding the existing Cartesian mapping-fibre and mapping-criterion nodes. Six steps now give the comparison arrows and inverse equations explicitly, prove equivalence stability through mapping squares, and deduce marking detection, coherent-equivalence invariance and the edge cases. The statement is unchanged and no new nodes are delivered.",
+  "blueprint": "Realizes the extracted prerequisite sentence in Step 25 of lem-coef-cartesian-cone-fiber-comparison: chosen Cartesian lifts detect all Cartesian edges up to fibre equivalence, with marking reflection and coherent-equivalence invariance.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q106-34c6e80ca",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q106-34c6e80ca (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited node statements and sources, unit/chapter route, edge cases, DAG duplication/cycles, and archived target coefficient/base-change statements. No faults or repairs required."
  }
 }

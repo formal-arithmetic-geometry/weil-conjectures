@@ -10,9 +10,76 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $a=d(t)$, $D=\\operatorname{Fun}(J,\\mathcal C)$ and $B(w)=\\operatorname{Map}_D(d,\\Delta_Jw)$. All the simplicial sets fit in the stipulated containing universe; choose the space universe to contain their mapping simplicial sets. The functor-category and Kan assertions of [lem-cbc-enhanced-functor-cone-calculus] apply with shape $J$, so $D$ is a quasicategory and the mapping spaces in question are Kan. Apply [lem-coef-infinity-final-index-colimit] to the given $J,t,d$. Its finality hypothesis is exactly the assumed contractibility of $\\operatorname{Map}_J(j,t)$. It supplies a cocone $\\alpha:d\\to\\Delta_Ja$ with $\\alpha_t=\\operatorname{id}_a$, such that for every $w$ the induced map $c_w:\\operatorname{Map}_{\\mathcal C}(a,w)\\to B(w)$, $u\\mapsto\\Delta_J(u)\\circ\\alpha$, is a weak homotopy equivalence. This is the mapping-space universal property expressly included in that node's statement, with no assumption of any other colimits.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-final-index-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03LQ",
+    "place": "Example 7.2.1.4 (03LQ), with the colimit dual of Corollary 7.2.2.11 (02XU); use the existing identity-leg mapping-space colimit statement."
+   }
+  },
+  {
+   "text": "Let $r_w:B(w)\\to\\operatorname{Map}_{\\mathcal C}(a,w)$ be restriction to $t$. Apply [lem-coef-infinity-hom-bifunctor-functoriality] to the simplicial evaluation functor $D\\to\\mathcal C$ and the constant-diagram functor $\\mathcal C\\to D$. Its induced maps are the actual right-pinched maps and preserve composition and identity classes on entire mapping spaces. Evaluation of a constant diagram or constant transformation is the original object or transformation, in every simplicial degree. Therefore\n$$r_wc_w(u)\\simeq u\\circ\\alpha_t=u\\circ\\operatorname{id}_a\\simeq u.$$\nThese are homotopies of maps of spaces, not just equations on components. Since $c_w$ is a weak equivalence by Step 1 and $r_wc_w$ is homotopic to the identity, $r_w$ is a weak equivalence. Explicitly on components its map is the inverse of that of $c_w$; on every based homotopy group the same equation makes its induced homomorphism inverse to that of $c_w$, after the basepoint identifications supplied by the homotopy. This proves the first assertion, including all higher homotopy groups.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Corollary 8.3.5.8 (046J) and Remark 8.3.5.9 (03PD); agent two-out-of-three argument using the identity leg."
+   }
+  },
+  {
+   "text": "Fix a specified cocone $\\mu:d\\to\\Delta_Jl$ and put $f=\\mu_t:a\\to l$. The dual cocone assertion of [lem-cbc-enhanced-functor-cone-calculus] says that $\\mu$ is initial in the coherent cocone category, hence colimiting by the coherent cocone definition, exactly when\n$$q_w:\\operatorname{Map}_{\\mathcal C}(l,w)\\longrightarrow B(w),\\qquad u\\longmapsto\\Delta_J(u)\\circ\\mu$$\nis a weak equivalence for every $w$. In particular this is the criterion for the specified cocone, not only for the chosen $\\alpha$. Apply [lem-coef-infinity-hom-bifunctor-functoriality] to evaluation again. It gives the homotopy of entire mapping-space maps\n$$r_wq_w\\simeq f^*,\\qquad f^*(u)=u\\circ f.$$\nAs $r_w$ is a weak equivalence by Step 2, the induced maps on components and based homotopy groups show that $q_w$ is a weak equivalence if and only if $f^*$ is. Thus $\\mu$ is colimiting exactly when every precomposition map $f^*:\\operatorname{Map}_{\\mathcal C}(l,w)\\to\\operatorname{Map}_{\\mathcal C}(a,w)$ is a weak equivalence.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XV",
+    "place": "Corollary 7.2.2.5 (02XV), absolute colimit clause; agent expansion using the existing coherent comma cocone criterion and Hom-functor naturality."
+   }
+  },
+  {
+   "text": "Suppose $f$ is an equivalence edge. Its inverse data gives an edge $g:l\\to a$ with $[g][f]=[\\operatorname{id}_a]$ and $[f][g]=[\\operatorname{id}_l]$. By the associative and unital composition homotopies and the dependence of precomposition only on the edge's component class in [lem-coef-infinity-mapping-composition], precomposition by $g$ is a homotopy inverse to precomposition by $f$: for $v:l\\to w$ and $u:a\\to w$ the two composites are homotopic to $v\\circ(f\\circ g)\\simeq v$ and $u\\circ(g\\circ f)\\simeq u$, respectively. Consequently $f^*$ is a weak equivalence for every $w$, since homotopy inverse maps induce inverse maps on components and all homotopy groups. Step 3 proves that $\\mu$ is colimiting.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Subsection 4.6.8: Propositions 4.6.8.11 and 4.6.8.12 and Notation 4.6.8.15; precomposition by an equivalence has an inverse."
+   }
+  },
+  {
+   "text": "Conversely suppose $\\mu:d\\to\\Delta_Jl$ is colimiting, and write $a=d(t)$ and $f=\\mu_t:a\\to l$. Step 3 makes $f^*$ a bijection on components for every $w$. With $w=a$, surjectivity supplies a component represented by an edge $g:l\\to a$ such that $[g][f]=[\\operatorname{id}_a]$. The edge representative and the ordinary category law on components are supplied by [lem-coef-infinity-mapping-composition]. With $w=l$, injectivity of $f^*$ and\n$$([f][g])[f]=[f]([g][f])=[f]=[\\operatorname{id}_l][f]$$\ngive $[f][g]=[\\operatorname{id}_l]$. Hence $[f]$ is invertible in $h\\mathcal C$. The same cited node states precisely that an edge whose component class is invertible admits an inverse edge with both inverse-triangle $2$-simplices. By definition, an edge in a quasicategory is an equivalence edge exactly when such an inverse edge and the two inverse-triangle $2$-simplices exist. Therefore $\\mu_t=f$ is an equivalence edge. This proves the other direction without invoking a Yoneda theorem or assuming any further colimits.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Subsection 4.6.8, Remark 4.6.8.14 and Notation 4.6.8.15; Definition 1.4.6.1 and Remarks 1.4.6.6 and 1.4.6.8 for equivalence edges. Agent two-test-object inverse argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Inherited proof-paragraph-2 adjunction infrastructure, through the existing blueprint ancestry. Agent proof from the existing identity-leg mapping-space colimit, coherent comma cocone criterion, Hom-functor naturality and mapping-space composition. Checked against online Kerodon 02XV, 03LQ, 02XU, 02XY, 046J, 03PD and 01PF; these sources are not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +129,52 @@
    "results": "{\"t\": \"2026-10-17T08:31:15Z\", \"tool\": \"grep\", \"query\": \"[Cc]olimit|[Cc]ocone|[Ff]inal|[Tt]erminal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"5b96a086ca62d79f\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned colimitOfDiagramTerminal and IsColimit.isIso_ι_app_of_isTerminal (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:395-404), and Final.isColimitWhiskerEquiv (Mathlib/CategoryTheory/Limits/Final.lean:294-295), require ordinary categories with Hom sets. Read their source. They do not specialize in one line to quasicategories with full coherent cocone mapping spaces. Quasicategory/Basic.lean:33-57 defines inner-horn fillers; its terminal-object hits at 70-86 concern a terminal simplicial set, not a final vertex inside a quasicategory. No coherent cocone criterion found."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitOfDiagramTerminal|isIso_ι_app_of_isTerminal|isColimitWhiskerEquiv",
+   "results": "{\"t\": \"2026-10-17T12:06:43Z\", \"tool\": \"grep\", \"query\": \"colimitOfDiagramTerminal|isIso_ι_app_of_isTerminal|isColimitWhiskerEquiv\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\"], \"digest\": \"d0f41e84419fe346\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Final.coconesEquiv and isColimitWhiskerEquiv (Mathlib/CategoryTheory/Limits/Final.lean:283-295) and colimitOfDiagramTerminal/isIso_ι_app_of_isTerminal (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:395-404) are ordinary-category results, not the entire coherent cocone mapping spaces of arbitrary quasicategories. Read these sources. coconeTypesEquiv (Limits/Types/Colimits.lean:39-49, read) also concerns ordinary Type-valued diagrams. The StrictSegal lift in AlgebraicTopology/SimplicialSet/Coskeletal.lean:68-88 (read) constructs a simplex for a strictly Segal simplicial set and does not give this theorem for arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a quasicategory a diagram indexed by a category with final object has coherent cocone spaces given by evaluation at that final object",
+   "results": "{\"t\": \"2026-10-17T12:06:44Z\", \"tool\": \"leansearch\", \"query\": \"In a quasicategory a diagram indexed by a category with final object has coherent cocone spaces given by evaluation at that final object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coconeOfDiagramTerminal_pt\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Limits.colimitOfDiagramTerminal\", \"CategoryTheory.Functor.Final.colimitCoconeOfComp_cocone\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.pi.coconeCompEval\", \"CategoryTheory.Limits.coconeOfDiagramTerminal\"], \"digest\": \"467987f52da7d03c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Final.coconesEquiv and isColimitWhiskerEquiv (Mathlib/CategoryTheory/Limits/Final.lean:283-295) and colimitOfDiagramTerminal/isIso_ι_app_of_isTerminal (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:395-404) are ordinary-category results, not the entire coherent cocone mapping spaces of arbitrary quasicategories. Read these sources. coconeTypesEquiv (Limits/Types/Colimits.lean:39-49, read) also concerns ordinary Type-valued diagrams. The StrictSegal lift in AlgebraicTopology/SimplicialSet/Coskeletal.lean:68-88 (read) constructs a simplex for a strictly Segal simplicial set and does not give this theorem for arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Cocone\"",
+   "results": "{\"t\": \"2026-10-17T12:06:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Cocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for Quasicategory and Cocone together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Terminal vertex evaluation on natural transformations from a homotopy coherent diagram to a constant diagram is a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T12:06:47Z\", \"tool\": \"leanfinder\", \"query\": \"Terminal vertex evaluation on natural transformations from a homotopy coherent diagram to a constant diagram is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"SSet.hoFunctor.terminalIso\", \"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.hoFunctor.preservesTerminal\", \"CategoryTheory.CosimplicialObject.cechConerveEquiv\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"SSet.hoFunctor.unitHomEquiv\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"8e3ba8259409fdc6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hoFunctor.terminalIso and isTerminalHoFunctorDeltaZero (Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean:560-569, read) concern the homotopy category of the terminal simplicial set. The model-category hits concern resolution or localization morphisms, not final vertices of indexing quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the terminal vertex of a quasicategory induces an equivalence between the mapping space of coherent cocones and the mapping space out of the diagram value",
+   "results": "{\"t\": \"2026-10-17T12:06:48Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation at the terminal vertex of a quasicategory induces an equivalence between the mapping space of coherent cocones and the mapping space out of the diagram value\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.coconeTypesEquiv_apply_pt\", \"CategoryTheory.Functor.Final.coconesEquiv_functor\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.Functor.coconeTypesEquiv_apply_ι_app\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.WithInitial.coconeEquiv_functor_obj_ι_app_star\", \"CategoryTheory.WithInitial.coconeEquiv_functor_obj_ι_app_of\"], \"digest\": \"a1ad60386a2a8595\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Final.coconesEquiv and isColimitWhiskerEquiv (Mathlib/CategoryTheory/Limits/Final.lean:283-295) and colimitOfDiagramTerminal/isIso_ι_app_of_isTerminal (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:395-404) are ordinary-category results, not the entire coherent cocone mapping spaces of arbitrary quasicategories. Read these sources. coconeTypesEquiv (Limits/Types/Colimits.lean:39-49, read) also concerns ordinary Type-valued diagrams. The StrictSegal lift in AlgebraicTopology/SimplicialSet/Coskeletal.lean:68-88 (read) constructs a simplex for a strictly Segal simplicial set and does not give this theorem for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "isPointwiseRightKanExtensionAt.lift|terminalIso|isTerminalHoFunctorDeltaZero",
+   "results": "{\"t\": \"2026-10-17T12:08:40Z\", \"tool\": \"grep\", \"query\": \"isPointwiseRightKanExtensionAt.lift|terminalIso|isTerminalHoFunctorDeltaZero\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\"], \"digest\": \"f414ef4a74a92ed9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hoFunctor.terminalIso and isTerminalHoFunctorDeltaZero (Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean:560-569, read) concern the homotopy category of the terminal simplicial set. The model-category hits concern resolution or localization morphisms, not final vertices of indexing quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocartesian-relative-cylinder-extension",
@@ -94,5 +203,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-final-index-cocone-criterion",
+  "worker": "stage1",
+  "summary": "Q62: wrote a five-step proof of both clauses, using the existing identity-leg colimit to prove evaluation is a weak equivalence, translating initiality in the coherent cocone category with the existing mapping-space criterion, and constructing an inverse to the final leg on the two testing objects a and l. Reused every needed lemma; no new nodes or Mathlib leaves. Retained the exact statement, source, inherited searches and blueprint ancestry. The fresh Mathlib question concerns the full evaluation mapping spaces rather than just colimit existence.",
+  "blueprint": "Realizes the inherited blueprint.from place: the final-index cocone evaluation and recognition input at the K-vertices of the relative-cylinder extension. Step 1 supplies the identity-leg cocone, Step 2 the full evaluation equivalence, and Steps 3-5 the specified-cocone criterion needed before and after transport. This is generic categorical infrastructure below the unit route; no unit step or statement is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 1 and 3 use the general functor-quasicategory/Kan theorem and the dual coherent comma mapping-space criterion to identify colimiting cocones as initial objects. No node of this unit provides that comma-category criterion; the final-index-colimit node explicitly uses only the mapping-space formulation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q62-79722e361",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-79722e361 (reviewer sub-agent of L); spot-checked: Read the mathematics in full; verified all five steps against cited statements and Kerodon sources, checked edge cases and dependency cycles. No new nodes or repairs. Accepted the declared generic cone-calculus tool use. Detailed findings are in review.md."
  }
 }

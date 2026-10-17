@@ -11,9 +11,77 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-cbc-enhanced-diagrams-cones], an $r$-simplex of $\\Delta^n$ is a monotone map $\\alpha:[r]\\to[n]$, with operators given by precomposition. For every vertex set $V$, membership in $\\Delta^V$ means $\\operatorname{im}(\\alpha)\\subseteq V$. Thus unions of these faces are simplicial subsets and their membership is tested in every degree by the image set. In particular $\\alpha\\in K$ if and only if $n\\notin\\operatorname{im}(\\alpha)$ or $\\operatorname{im}(\\alpha)\\subseteq\\{n-1,n\\}$. This criterion includes degenerate simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 3.2.2.9, printed pp.182–183 (PDF pages 199–200); direct image-set expansion of the initial-face/final-edge inclusion used in the second pushout diagram. Online source read 2026-10-17; no local archive or matching Stacks tag."
+   }
+  },
+  {
+   "text": "For $n=1$, the final edge $I$ is already $\\Delta^1$, so $K=\\Delta^1$ and take $N=0$. Assume henceforth $n\\geq2$. Let $P$ be the collection of vertex sets $V\\subseteq[n]$ containing $\\{n-1,n\\}$ and at least one element of $\\{0,\\ldots,n-2\\}$. This is a finite collection. Enumerate its distinct members $V_1,\\ldots,V_N$ in increasing cardinality, choosing any order within a cardinality. Define $K_0=K$ and $K_j=K\\cup\\bigcup_{b\\leq j}\\Delta^{V_b}$. These are increasing simplicial subsets by Step 1. The full vertex set $[n]$ is the unique largest member of $P$, so $V_N=[n]$ and $K_N=\\Delta^n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 3.2.2.9, printed pp.182–183 (PDF pages 199–200); direct image-set expansion of the initial-face/final-edge inclusion used in the second pushout diagram. Online source read 2026-10-17; no local archive or matching Stacks tag."
+   }
+  },
+  {
+   "text": "At stage $j$, write $V=V_j=\\{v_0<\\cdots<v_d\\}$ and let $a$ be the index of $n-1$. The last vertex is $n$, and there is an earlier vertex less than $n-1$, so $d\\geq2$ and $0<a<d$ (indeed $a=d-1$). For each $v\\in V\\setminus\\{n-1\\}$, the face $\\Delta^{V\\setminus\\{v\\}}$ lies in $K_{j-1}$. If $v=n$, it lies in the initial face $T$. If $v<n-1$ and it is the sole earlier vertex of $V$, the remaining face is $I$. Otherwise $V\\setminus\\{v\\}$ belongs to $P$ and has smaller cardinality, so it occurred earlier. Thus all codimension-one faces except possibly the $a$th are present.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 3.2.2.9, printed pp.182–183 (PDF pages 199–200); direct image-set expansion of the initial-face/final-edge inclusion used in the second pushout diagram. Online source read 2026-10-17; no local archive or matching Stacks tag."
+   }
+  },
+  {
+   "text": "Put $F=V\\setminus\\{n-1\\}$. Neither the simplex on $F$ nor the simplex on $V$ is in $K_{j-1}$. For $F$, the criterion of Step 1 excludes membership in $K$: it contains $n$ and a vertex less than $n-1$. If $F$ were contained in an earlier $V_b$, then $n-1\\in V_b$ gives $V=F\\cup\\{n-1\\}\\subseteq V_b$. But $b<j$ gives $|V_b|\\leq|V|$, forcing $V_b=V$, contrary to distinctness. The same argument, or restriction to the face $F$, excludes the simplex on $V$. More generally no simplex whose image is $F$ or $V$ is present: membership in any part of the defining union requires that entire image be contained in its vertex set.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 3.2.2.9, printed pp.182–183 (PDF pages 199–200); direct image-set expansion of the initial-face/final-edge inclusion used in the second pushout diagram. Online source read 2026-10-17; no local archive or matching Stacks tag."
+   }
+  },
+  {
+   "text": "Use the increasing bijection $[d]\\to V$ to identify $\\Delta^d$ with $\\Delta^V$. Its inverse image of $K_{j-1}$ is exactly $\\Lambda_a^d$. Indeed the horn definition of [def-cbc-enhanced-diagrams-cones] says that its simplices omit some vertex of $V$ other than $n-1$; such simplices lie in one of the faces present by Step 3. Conversely, if a simplex omits no vertex other than possibly $n-1$, its image is $F$ or $V$, which Step 4 excludes. This is an equality in every degree, including degeneracies, and the identification commutes with precomposition. Step 3 verified that this horn is inner.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 3.2.2.9, printed pp.182–183 (PDF pages 199–200); direct image-set expansion of the initial-face/final-edge inclusion used in the second pushout diagram. Online source read 2026-10-17; no local archive or matching Stacks tag."
+   }
+  },
+  {
+   "text": "We have $K_j=K_{j-1}\\cup\\Delta^V$ and, by Step 5, the intersection is the image of $\\Lambda_a^d$. The square of these inclusions is a degreewise pushout in sets: its set pushout identifies precisely the two copies of their intersection, and its image is precisely the union, without further identifications. Equivalently maps from the two parts agreeing on the horn glue uniquely by using the specified map on each part. Precomposition preserves both parts and their intersection, so gluing simplicial maps gives a simplicial map. This proves the pushout universal property of [def-weil-pbc-category-colimit] in simplicial sets as well. Thus each stage is the required inner horn pushout, with $d_j=d$ and $a_j=a$. Together with Step 2 this is the asserted finite filtration.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 3.2.2.9, printed pp.182–183 (PDF pages 199–200); direct image-set expansion of the initial-face/final-edge inclusion used in the second pushout diagram. Online source read 2026-10-17; no local archive or matching Stacks tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit finite cardinality-ordered face attachment proof of the inclusion used in HTT Lemma 3.2.2.9, pp.182–183, read online. HTT is absent from literature/; archival copy WANTED in report.md. The attachment and intersection arguments are supplied here, not taken as a black box."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +117,45 @@
    "results": "{\"t\": \"2026-10-17T09:01:46Z\", \"tool\": \"leanfinder\", \"query\": \"For every positive n the union of the initial (n minus one) face of the standard n simplex and its last edge admits a finite filtration by inner horn pushouts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn_eq_iSup\", \"SSet.face_le_horn\", \"SSet.horn₂₁.isPushout\", \"SSet.horn_obj\", \"SSet.horn₂₂.isPushout\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"585f10630ca09783\"}",
    "date": "2026-10-17",
    "verdict": "no match: horn face descriptions, the n=2 horn pushout and closure instances do not state the finite filtration for every n. Read Inner/Basic.lean:43-97 and SubcomplexColimits.lean:84-104; a pairing theorem requires constructing the pairing and regularity, so is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "innerAnodyne|inner_anodyne|horn.*face|face.*horn",
+   "results": "{\"t\": \"2026-10-17T11:26:06Z\", \"tool\": \"grep\", \"query\": \"innerAnodyne|inner_anodyne|horn.*face|face.*horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"cb9912c0eb3f6a72\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Horn.lean:32–63 and Inner/Basic.lean:43–97,135–160. Horn definitions, horn colimits and single-horn fillings do not state this finite filtration. Closure or regular-inner-pairing theorems require a construction of the attachments/pairing and are not one-line specializations. HornColimits.lean treats individual low-dimensional horns. The second semantic phrasing also returned no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite inner horn filtration of the union of the initial face and final edge of a standard simplex",
+   "results": "{\"t\": \"2026-10-17T11:26:06Z\", \"tool\": \"leansearch\", \"query\": \"Finite inner horn filtration of the union of the initial face and final edge of a standard simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn\", \"SSet.horn_obj\", \"SSet.horn.edge\", \"Simplicial.term∂Δ[_]\", \"SSet.horn.faceι_ι\", \"SSet.stdSimplex.face\", \"SSet.horn.faceι_ι_assoc\", \"SSet.boundary\"], \"digest\": \"f8e191aa246bad0d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Horn.lean:32–63 and Inner/Basic.lean:43–97,135–160. Horn definitions, horn colimits and single-horn fillings do not state this finite filtration. Closure or regular-inner-pairing theorems require a construction of the attachments/pairing and are not one-line specializations. HornColimits.lean treats individual low-dimensional horns. The second semantic phrasing also returned no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"innerAnodyne\", \"standard simplex\"",
+   "results": "{\"t\": \"2026-10-17T11:26:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"innerAnodyne\\\", \\\"standard simplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Horn.lean:32–63 and Inner/Basic.lean:43–97,135–160. Horn definitions, horn colimits and single-horn fillings do not state this finite filtration. Closure or regular-inner-pairing theorems require a construction of the attachments/pairing and are not one-line specializations. HornColimits.lean treats individual low-dimensional horns. The second semantic phrasing also returned no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every positive n, the union of the initial face Delta^{0,...,n-1} and final edge Delta^{n-1,n} in Delta^n admits a finite filtration by inner horn pushouts",
+   "results": "{\"t\": \"2026-10-17T11:26:13Z\", \"tool\": \"leanfinder\", \"query\": \"For every positive n, the union of the initial face Delta^{0,...,n-1} and final edge Delta^{n-1,n} in Delta^n admits a finite filtration by inner horn pushouts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn_eq_iSup\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn.isColimit\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₂.isPushout\"], \"digest\": \"9f1b2d69d407060f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Horn.lean:32–63 and Inner/Basic.lean:43–97,135–160. Horn definitions, horn colimits and single-horn fillings do not state this finite filtration. Closure or regular-inner-pairing theorems require a construction of the attachments/pairing and are not one-line specializations. HornColimits.lean treats individual low-dimensional horns. The second semantic phrasing also returned no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of a full initial simplex together with its last composable edge into the next simplex is a finite composite of inner horn attachments",
+   "results": "{\"t\": \"2026-10-17T11:41:02Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of a full initial simplex together with its last composable edge into the next simplex is a finite composite of inner horn attachments\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.ι\", \"SSet.horn.ι_ι\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.StrictSegalCore.concat\", \"SSet.horn.ι_ι_assoc\", \"SSet.horn.faceι_ι\", \"SSet.horn₃₁.ι₃_desc\"], \"digest\": \"f9014d30e657b200\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Horn.lean:32–63 and Inner/Basic.lean:43–97,135–160. Horn definitions, horn colimits and single-horn fillings do not state this finite filtration. Closure or regular-inner-pairing theorems require a construction of the attachments/pairing and are not one-line specializations. HornColimits.lean treats individual low-dimensional horns. The second semantic phrasing also returned no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-mapping-simplex-final-edge",
@@ -81,5 +184,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-final-face-edge-horn-filtration",
+  "worker": "stage1",
+  "summary": "Q23 supplies the complete finite face-attachment proof, preserving the statement and ancestry. Enumerates faces containing the final edge and an earlier vertex, verifies the missing n-1 face is absent, identifies the exact inner-horn intersection in every degree and proves the degreewise pushout by gluing. Checked n=1 separately, searched Lean/DAG/blueprint/Mathlib, and retained all inherited search records. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the initial-face/final-edge filtration in step 2 of lem-coef-mapping-simplex-final-edge, the HTT 3.2.2.9 supporting argument below prop-coef-integral-exceptional-adjoint paragraph 2, derived finite-coefficient mapping-complex adjunction before R lim. The historical blueprint paragraph is main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md. No unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q23-aec42df9f",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-aec42df9f (reviewer sub-agent of L); spot-checked: Read the mathematics in full. All six steps check: cardinality ordering gives exact inner-horn intersections and degreewise pushouts. Independent tests for n=1–9 passed. Checked HTT 3.2.2.9, cited definitions, blueprint route, and duplicate candidates; no repairs or tool_uses needed. Findings recorded in review.md."
  }
 }

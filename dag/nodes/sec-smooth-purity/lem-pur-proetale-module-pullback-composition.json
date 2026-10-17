@@ -12,11 +12,89 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "def-pc-fibre-product",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $h=f\\circ g$ and use the base-change functors $u_a$ of [def-weil-proetale-inverse-image]. For $V\\to Y$, the universal property in [def-pc-fibre-product] gives $q_V:u_gu_f(V)=Z\\times_X(X\\times_YV)\\xrightarrow{\\sim}Z\\times_YV=u_h(V)$. Its components are the projection to $Z$ and the projection to $V$; its inverse has components the projection to $Z$ and the pair consisting of $g$ after that projection and the projection to $V$. Both composites have the identity projections, hence are identities. For an arrow $V'\\to V$, both paths in the naturality square have the same projections to $Z$ and $V$, so are equal. Thus for any abelian sheaf $H$ on $Z$, restriction along $q_V$ defines a natural isomorphism $d_H:h_*H\\to f_*g_*H$ on underlying abelian sheaves. It commutes with restrictions in $V$ by the naturality just checked, and with maps in $H$ by their presheaf naturality; its inverse is restriction along $q_V^{-1}$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules: direct-image comparison, expanded using the fibre-product universal property"
+   }
+  },
+  {
+   "text": "Use the same restriction formula on the ring sheaf $\\Lambda_Z$, obtaining a ring-sheaf isomorphism $d_{\\Lambda_Z}:h_*\\Lambda_Z\\to f_*g_*\\Lambda_Z$. Write $\\rho^a:\\Lambda_{\\mathrm{target}(a)}\\to a_*\\Lambda_{\\mathrm{source}(a)}$ for the maps defined in [def-weil-proetale-inverse-image]. Then\n$$d_{\\Lambda_Z}\\circ\\rho^h=f_*(\\rho^g)\\circ\\rho^f.$$\nIndeed, precompose both sides with the constant-presheaf sheafification map to $\\Lambda_Y$ of [def-weil-pbc-constant-sheaf]. At every $V$ they send $\\lambda\\in\\Lambda$ to the constant section $\\lambda$ on $u_gu_f(V)$: $\\rho^f$ and $\\rho^g$ do so by definition, and restriction along $q_V$ preserves that constant section by naturality of the constant-presheaf map. The uniqueness clause of [def-weil-pbc-sheafification] proves equality on all of $\\Lambda_Y$, not merely on its global constant sections.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules, with the coefficient maps of definition-pushforward; constant-section compatibility checked explicitly"
+   }
+  },
+  {
+   "text": "For a $\\Lambda_Z$-module sheaf $H$, $s\\in\\Lambda_Y(V)$ and $m\\in H(u_h(V))$, semilinearity of restriction in [def-weil-sheaf-of-modules-category] gives\n$$H(q_V)(\\rho^h_V(s)m)=\\Lambda_Z(q_V)(\\rho^h_V(s))\\,H(q_V)(m)=\\rho^g_{u_f(V)}(\\rho^f_V(s))\\,H(q_V)(m).$$\nThe second equality is step 2. By the direct-image action formula of [def-weil-proetale-inverse-image], the last expression is precisely $s$ acting on $d_{H,V}(m)$ in $f_*g_*H(V)$. Hence $d_H$ is $\\Lambda_Y$-linear. Its inverse is linear too: for $n=d_H(m)$ the displayed equality reads $d_H^{-1}(sn)=s\\,d_H^{-1}(n)$. The naturality from step 1 therefore gives the required natural isomorphism $d:h_*\\xrightarrow{\\sim}f_*g_*$ on module categories, with exactly the prescribed actions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules: linearity of the direct-image comparison"
+   }
+  },
+  {
+   "text": "For each $a=f,g,h$, the inverse image in [def-weil-proetale-inverse-image] preserves finite limits and is left adjoint to the sectionwise direct image. Its ring map $c^a_\\Lambda$ is, by that definition, adjoint to the very $\\rho^a$ used above. Apply [lem-weil-pbc-ringed-topoi-module-adjunction] with $R=\\Lambda_{\\mathrm{target}(a)}$, $S=\\Lambda_{\\mathrm{source}(a)}$ and $c=c^a_\\Lambda$. Its tensor-formula pullback is the stated $a^*$ (commuting the two tensor factors over the commutative ring is the balanced map $x\\otimes b\\mapsto b\\otimes x$, inverse to the same switch), and its pushforward action is through $\\rho^a$. Thus $a^*\\dashv a_*$. The composite adjunction [def-weil-pbc-composite-adjunction] gives $g^*f^*\\dashv f_*g_*$; also $h^*\\dashv h_*$. All sites and module categories are in the compatible universes specified in the item, so the cited adjunctions apply without a size change.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; composition of adjunctions as in Categories Tag 0DV0, lemma-compose-counits"
+   }
+  },
+  {
+   "text": "Apply the bijection on natural isomorphisms in [def-weil-pbc-adjunction-conjugate] to $L_1=h^*$, $R_1=h_*$ and $L_2=g^*f^*$, $R_2=f_*g_*$. The isomorphism $d:R_1\\xrightarrow{\\sim}R_2$ of step 3 has a unique conjugate $t:L_2\\xrightarrow{\\sim}L_1$. Set $b=t^{-1}:h^*\\xrightarrow{\\sim}g^*f^*$. This proves the claimed natural isomorphism. Its inverse $b^{-1}$ is conjugate to $d$, equivalently $b$ is conjugate to $d^{-1}$ under the reversed adjunctions. Consequently it is exactly the canonical comparison of left adjoints attached to the fibre-product direct-image identification of the statement, rather than a choice of an unrelated isomorphism.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules: inverse-image comparison; expanded by the adjunction conjugation bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-pc-fibre-product",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03D8, labels lemma-adjoint-pullback-pushforward-modules and lemma-push-pull-composition-modules; explicit expansion of the latter’s omitted argument using the prescribed constant-section maps"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,10 +130,38 @@
    "results": "SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pushforwardComp_inv_app_val_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; SheafOfModules.pushforwardNatIso_inv; SheafOfModules.pushforwardComp",
    "date": "2026-10-17",
    "verdict": "no exact match: general sheaf-site ingredients; the canonical scheme/coefficient identification remains to prove"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pushforwardComp|conjugateEquiv_pullbackComp [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; 10 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: general site/module adjunction and composition tools; the canonical scheme base-change and constant-section identification is the present proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of inverse image functors on sheaves of modules over constant rings on small pro-etale sites is the canonical left-adjoint comparison",
+   "results": "SheafOfModules.instIsLeftAdjointPullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullback; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: general site/module adjunction and composition tools; the canonical scheme base-change and constant-section identification is the present proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackComp\"",
+   "results": "PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; 2 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: general site/module adjunction and composition tools; the canonical scheme base-change and constant-section identification is the present proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module pullbacks for composable scheme morphisms with constant coefficients agree by the canonical adjoint of the fibre product pushforward comparison",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullbackCongr; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_id_comp; SheafOfModules.pullback_comp_id; SheafOfModules.pullbackObjFreeIso; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; 8 returned hits",
+   "date": "2026-10-17",
+   "verdict": "no exact match: general site/module adjunction and composition tools; the canonical scheme base-change and constant-section identification is the present proof"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-proetale-dbc-triangulated",
@@ -81,5 +187,29 @@
    "def-sfb-module-upper-star-comp"
   ],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-proetale-module-pullback-composition",
+  "worker": "stage1",
+  "summary": "Expanded the canonical fibre-product pushforward comparison, proved coefficient compatibility by the universal property of constant-sheaf sheafification, checked module linearity, and conjugated using the existing ringed-topos module adjunction and Mathlib adjunction tools. No new nodes; statement unchanged.",
+  "blueprint": "Realizes iterated restriction in the second paragraph (restriction to strata) and final paragraph (constructible cohomology) of def-weil-finite-torsion-constructibility; in the parent lem-weil-proetale-dbc-triangulated this is the composition identification in step 6. The parallel condensed-coefficient convention is def-sfb-module-upper-star-comp, not a replacement of its coefficient category.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "General ringed-topos tensor-formula module adjunction, applied to the explicit constant ring maps; the ambient operations unit has no proof steps or alternate adjunction lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-92711f7f7",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-92711f7f7 (reviewer sub-agent of L); spot-checked: Read the item, every cited node, Stacks Tags 03D7/03D8, the unit/chapter route, current blueprint comparison, and recorded searches. Verified fibre-product base change, constant-section compatibility, module linearity, adjunction composition, mate direction, coefficient categories, hypotheses, edge cases, and duplicate risks. Wrote review.md; no repairs or dropped nodes needed."
  }
 }

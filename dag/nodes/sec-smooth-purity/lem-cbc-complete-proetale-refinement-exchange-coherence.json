@@ -18,41 +18,144 @@
   "def-weil-proper-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a refinement u:c_1\\to c_2, the equations u j_1=j_2 and p_2u=p_1 make Q_u the commutative proper/open square with top j_1, bottom j_2, left identity, and right u. The strict-tower operations and open extension therefore identify its two compactification candidates as F_i=R_{p_i}^{\\mathcal T}J_{j_i}, with all direct-image and open-extension compositors canonical. Under these identifications the normalized comparison supplied by the proper/open calculus is exactly C_u=R_{p_2}^{\\mathcal T}\\gamma_{Q_u}.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "def-weil-pbc-projection-compactification",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
+    "place": "Proof, last sentence: 'independent of the compactification and natural by the corresponding properties of the two factors' and 'compatibility of the comparisons of [def-compact-support-direct-image-detailed] with the completed maps'; definition of the normalized refinement comparison"
+   }
+  },
+  {
+   "text": "The stated hypothesis on M is exactly the finite scalar etale-origin hypothesis of the strict-tower proper/open calculus, with V=X and r=1_X. Thus gamma_{Q_u,M} is an isomorphism. Applying R_{p_2}^{\\mathcal T} preserves its inverse, proving that C_u is invertible. This also applies after base change: evaluation commutes with G, scalar restriction commutes with the constant-coefficient inverse image by the inverse-image comparison of the transport definition, and the site-comparison pullback isomorphism identifies g'^*nu_X^*L_n with nu_{X'}^*g'_{et}^{-1}L_n. The latter remains bounded below: [prop-weil-pbc-inverse-image-modules-exact], applied with R=Lambda_n to g', makes etale inverse image exact, so it preserves the vanishing of cohomology below the bound for L_n. Hence G_{g'}M has the required finite scalar etale origins, without any uniform bound in n.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
+    "place": "Proof, last sentence: 'independent of the compactification and natural by the corresponding properties of the two factors' and 'compatibility of the comparisons of [def-compact-support-direct-image-detailed] with the completed maps'; finite scalar etale-origin hypothesis and its preservation by pullback; exactness of finite constant-coefficient etale inverse image: Stacks sites-modules.tex Tag 04JC (lemma-flat-pullback-exact), and sites-cohomology.tex Section 0735 (section-base-change-map), preservation of bounded-below subcategories"
+   }
+  },
+  {
+   "text": "Write bar g_i:overline X_i'->overline X_i for the base-change projections. The cofilteredness node states that base change preserves supplied compactifications and refinement arrows, so Q_u pulls back to Q_u'. Apply the proper/open calculus base-change identity with p=u, r=1_X, k=j_1, i=j_2 and b=bar g_2; the identity mate E_{1_X} is the identity. Apply R_{p_2'}^{\\mathcal T} to this identity and precompose with E_{p_2}^{\\mathcal T}J_{j_2}. Naturality of E_{p_2} moves gamma_{Q_u} across this precomposition. The mate-pasting law for the proper maps u,p_2 identifies the resulting composite (R_{p_2'}E_u)(E_{p_2}R_u) with E_{p_2u}=E_{p_1}, using the canonical direct-image compositors from the operation definition. The two resulting paths are therefore exactly C_u' e_2 and e_1 G_g C_u. Their equality is an equality of strict-tower transformations from the cited calculus, not an inference from evaluations.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
+    "place": "Proof, last sentence: 'independent of the compactification and natural by the corresponding properties of the two factors' and 'compatibility of the comparisons of [def-compact-support-direct-image-detailed] with the completed maps'; base-change compatibility of the refinement comparison"
+   }
+  },
+  {
+   "text": "For the identity refinement, Q_u has identity vertical maps, so the identity clause of the calculus gives C_{\\mathrm{id}}=1. If c_1\\xrightarrow{u}c_2\\xrightarrow{v}c_3 are refinements, the pasted square is Q_{v\\circ u}; the vertical pasting identity for \\gamma, followed by the canonical direct-image compositors, gives C_{v\\circ u}=C_uC_v. These are equalities of strict-tower transformations before any evaluation.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
+    "place": "Proof, last sentence: 'independent of the compactification and natural by the corresponding properties of the two factors' and 'compatibility of the comparisons of [def-compact-support-direct-image-detailed] with the completed maps'; identity and composition of refinement comparisons"
+   }
+  },
+  {
+   "text": "Let d,d' be common refinements, with arrows u_i:d->c_i and u_i':d'->c_i. Cofilteredness gives e with arrows a:e->d and b:e->d'. For i=1 the composites u_1a,u_1'b:e->c_1 are parallel, so an equalizing refinement h_1:e_1->e exists. Equalize the remaining parallel composites u_2ah_1,u_2'bh_1 by h_2:e_2->e_1. Put t=h_1h_2; then u_iat=u_i'bt for both i. The composition law gives C_{at}C_{u_i}=C_{bt}C_{u_i'}. All factors are invertible by step 2, and therefore (C_{u_2})^{-1}C_{u_1}=(C_{u_2'})^{-1}C_{u_1'}. This proves independence of the common refinement and of its arrows, including d=d' with different choices of arrows.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
+    "place": "Proof, last sentence: 'independent of the compactification and natural by the corresponding properties of the two factors' and 'compatibility of the comparisons of [def-compact-support-direct-image-detailed] with the completed maps'; independence of the common refinement and its arrows"
+   }
+  },
+  {
+   "text": "Repeatedly taking common refinements gives one d with arrows u_i:d->c_i for any three compactifications. By step 5 every I_{ij} may be computed there. Associativity and cancellation give I_{23}I_{12}=C_{u_3}^{-1}C_{u_2}C_{u_2}^{-1}C_{u_1}=I_{13}. For base change, d' with arrows u_i' is a common refinement by the base-change clause of cofilteredness; step 2 guarantees that C_{u_i'} is invertible on G_{g'}M. The equation of step 3 for each u_i reads C_{u_i'}e_i=e_d G_g C_{u_i}. Consequently C_{u_2'} e_2 G_g I_{12}=e_d G_g(C_{u_2}I_{12})=e_d G_g C_{u_1}=C_{u_1'}e_1. Cancel C_{u_2'} to obtain e_2 G_g I_{12}=I_{12}'e_1, as required. All cancellations take place in the derived strict-tower categories.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-compactifiable-cofiltered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
+    "place": "Proof, last sentence: 'independent of the compactification and natural by the corresponding properties of the two factors' and 'compatibility of the comparisons of [def-compact-support-direct-image-detailed] with the completed maps'; cocycle and base-change intertwining"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-finite-constant-coefficient-transport",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-projection-compactification",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-mate-pasting",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
+  "place": "Proof, last sentence: independence of the compactification and compatibility of the compactification comparisons with the completed maps; strict-tower refinement, exchange and cocycle argument"
+ },
  "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Proper refinement comparison for compactifications commutes with the composite of proper base change and open extension by zero",
-   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange, HasCompactSupport.extend_zero, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.IsProper.instCompScheme, IsProperMap.isCompact_preimage; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A proper compactification refinement comparison commutes with compact support base change exchange as an identity of strict derived tower maps",
-   "results": "CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, TopCat.Presheaf.Pushforward.comp_inv_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, TopCat.Presheaf.Pushforward.comp_hom_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Adjunction, \"mate\"",
-   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp; no exact match for this node.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "compactification.*(exchange|refinement)|properOpen|proper_open|strictTower|strict_tower",
-   "results": "No hits; no match for this node: general exact-functor/mate laws do not supply its normalized tower comparison.",
+   "results": "No hits; no match for this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactification refinement isomorphisms for compact support direct image commute with base change in derived categories of towers of sheaves",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, TopCat.Sheaf.pushforwardForgetIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.constantCommuteCompose, KaehlerDifferential.tensorKaehlerEquiv, SheafOfModules.pullbackComp, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; no exact match for this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper compactification refinement comparisons in derived strict towers of sheaves commute with the proper base change and extension by zero exchange and are independent of common refinement",
+   "results": "Condensed.lanSheafProfinite, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, TopCat.Sheaf.interUnionPullbackConeLift_right, TopCat.Sheaf.interUnionPullbackConeLift_left, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.fac', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.RanIsSheafOfIsCocontinuous.fac; no exact match for this node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independence of compactification of derived direct image with compact support, with naturality of the refinement isomorphism under proper base change",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.sheafPushforwardContinuousComp', AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app; no exact match for this node.",
    "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-cbc-complete-proetale",
@@ -69,5 +172,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-complete-proetale-refinement-exchange-coherence",
+  "worker": "stage1",
+  "summary": "Refinement comparisons specialize the existing strict-tower proper/open calculus. Finite scalar etale origin gives invertibility and is preserved by pullback. The calculus cube identity and proper-adjunction mate pasting prove the refinement/base-change equation; vertical pasting proves composition. Two successive equalizers make both legs of any two common-refinement diagrams agree, giving independence by cancellation, followed by the cocycle and intertwining identities.",
+  "blueprint": "Realizes the last sentence of the parent blueprint proof: 'independent of the compactification and natural by the corresponding properties of the two factors' and 'compatibility of the comparisons of [def-compact-support-direct-image-detailed] with the completed maps', by strict-tower refinement comparisons, their base-change compatibility and identity/composition laws, and common-refinement independence with cocycle/intertwining.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic site-comparison pullback isomorphism used solely to verify that the finite scalar etale-origin domain is preserved under the base changes in the statement; no compact-support argument or unit route is replaced."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exactness of etale inverse image for fixed constant Lambda_n coefficients, used only to preserve each witness lower bound in step 2; this supplies no compact-support comparison or replacement unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q26-f9dc684da",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-f9dc684da (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources, and unit/chapter route. All six steps check out, including noncartesian refinements and strict-tower exchange coherence. Repaired one C1 omission: step 2 now cites existing étale module inverse-image exactness to preserve witness lower bounds. Statement and targets unchanged; no new nodes or cycles. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
  }
 }

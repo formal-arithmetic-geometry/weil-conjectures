@@ -1,226 +1,397 @@
 {
-  "id": "lem-fd-l2-middle-extension",
-  "blueprint": {
-    "is": "lem-fd-l2-middle-extension",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The middle extension does not change the $L^2$-weight",
-  "statement": "Let $j:U_0\\hookrightarrow\\mathbf A^1_{k_0}$ be a dense open immersion\nwith finite complement $S_0$, and let $\\mathcal M$ be a lisse Weil\nsheaf of rank $r$ on $U_0$, punctually\n$\\iota$-pure of weight $w$. Write $\\|f_{\\mathcal M}\\|_m^2$ for\nthe sum of squares of the trace function of $\\mathcal M$ over\n$U_0(k_m)$ as in [def-wf-l2-norm], and\n$\\|f_{j_*\\mathcal M}\\|_m^2$ for the same sum for the\nmiddle extension over\n$\\mathbf A^1_{k_0}(k_m)$. Then the two parameters that these sums\ndefine through the ratio of [def-wf-l2-norm] coincide, and equal\n$w$:\n\n$$\n\\|j_*\\mathcal M\\|=\\|\\mathcal M\\|=w .\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.md",
-    "place": "node lem-fd-l2-middle-extension, order 2769"
-  },
-  "stmt_deps": [
-    "def-wf-l2-norm",
-    "def-wf-middle-extension"
-  ],
-  "proof": [
-    {
-      "text": "The rigidity [lem-wf-l2-purity-rigidity] gives\n$\\|\\mathcal M\\|=w$ directly. For the comparison, the two sums agree\non $U_0(k_m)$, so\n\n$$\n\\|f_{j_*\\mathcal M}\\|_m^2=\\|f_{\\mathcal M}\\|_m^2+E_m,\n\\qquad\nE_m=\\sum_{y\\in S_0(k_m)}\\bigl|t_{j_*\\mathcal M}(y)\\bigr|^2\\ge0 .\n$$",
-      "uses": [
-        "lem-wf-l2-purity-rigidity"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Since $S_0$ is finite, $\\#S_0(k_m)\\le D:=\\sum_{s\\in S_0}d(s)$ for\nevery $m$; and at $y\\in S_0(k_m)$ lying above the closed point\n$s\\in S_0$, the local Frobenius $F_y$ has the eigenvalues\n$\\alpha^{m/d(s)}$ for $\\alpha$ running over the eigenvalues of\n$F_s$ on the boundary stalk of the middle extension, which by the\nboundary semicontinuity [lem-wf-boundary-semicontinuity] — applied\nto $\\mathcal M$ with $\\beta=w$, the punctual purity of\n[def-weil-punctual-weights] exhibiting $\\mathcal M$ as punctually\nmixed of weights at most $w$ — satisfy\n$|\\iota(\\alpha)|^2\\le q_s^{w}=q^{d(s)w}$. Hence\n$|\\iota(\\alpha^{m/d(s)})|^2\\le q^{mw}$ and\n\n$$\nE_m\\le D\\,r^2q^{mw}=C\\,q^{mw}\n$$\n\nfor every $m$, with the constant $C:=D\\,r^2$.",
-      "uses": [
-        "lem-wf-boundary-semicontinuity",
-        "def-weil-punctual-weights"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Now $\\|f_{\\mathcal M}\\|_m^2\\le\\|f_{j_*\\mathcal M}\\|_m^2$ for every\n$m$, so every parameter with a positive limit superior for\n$\\mathcal M$ has one for $j_*\\mathcal M$ as well: this gives\n$\\|j_*\\mathcal M\\|\\ge\\|\\mathcal M\\|$. Conversely, for $\\beta>w$ the\nratio of [def-wf-l2-norm] for $j_*\\mathcal M$ is bounded by the\nratio for $\\mathcal M$, which has limit superior $0$ because\n$\\beta>\\|\\mathcal M\\|$, plus $Cq^{m(w-\\beta-1)}$, which also has\nlimit superior $0$ because $\\beta+1>w$. No $\\beta>w$ therefore has\na positive limit superior, so $\\|j_*\\mathcal M\\|\\le w$, and the two\nparameters agree and equal $w$.",
-      "uses": [
-        "def-wf-l2-norm"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-wf-l2-purity-rigidity",
-    "lem-wf-boundary-semicontinuity",
-    "def-weil-punctual-weights",
-    "def-wf-l2-norm"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2769,
-  "blueprint_uses": [
-    "def-weil-punctual-weights",
-    "def-wf-l2-norm",
-    "def-wf-middle-extension",
-    "lem-wf-boundary-semicontinuity",
+ "id": "lem-fd-l2-middle-extension",
+ "blueprint": {
+  "is": "lem-fd-l2-middle-extension",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The middle extension does not change the $L^2$-weight",
+ "statement": "Let $j:U_0\\hookrightarrow\\mathbf A^1_{k_0}$ be a dense open immersion\nwith finite complement $S_0$, and let $\\mathcal M$ be a nonzero lisse\nWeil sheaf of rank $r$ on $U_0$, punctually\n$\\iota$-pure of weight $w$. Write $\\|f_{\\mathcal M}\\|_m^2$ for\nthe sum of squares of the trace function of $\\mathcal M$ over\n$U_0(k_m)$ as in [def-wf-l2-norm], and\n$\\|f_{j_*\\mathcal M}\\|_m^2$ for the same sum for the\nmiddle extension over\n$\\mathbf A^1_{k_0}(k_m)$. Then the two parameters that these sums\ndefine through the ratio of [def-wf-l2-norm] coincide, and equal\n$w$:\n\n$$\n\\|j_*\\mathcal M\\|=\\|\\mathcal M\\|=w .\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.md",
+  "place": "node lem-fd-l2-middle-extension, order 2769"
+ },
+ "stmt_deps": [
+  "def-wf-l2-norm",
+  "def-wf-middle-extension",
+  "def-weil-punctual-weights"
+ ],
+ "proof": [
+  {
+   "text": "The open $U_0$ is a smooth geometrically connected affine curve: it is the principal open obtained by inverting the product of the irreducible polynomials defining the finitely many points of $S_0$ (the empty product is $1$), and after extending the field it is a nonempty open of the irreducible affine line. Its lisse sheaf $\\mathcal M$ is nonzero by hypothesis, hence its constant rank is $r\\ge1$. Apply [lem-wf-l2-purity-rigidity] to this curve and sheaf, obtaining $\\|\\mathcal M\\|=w$.",
+   "uses": [
     "lem-wf-l2-purity-rigidity"
-  ],
-  "uses_not_cited": [
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.proof.md",
+    "place": "paragraphs 1–3 (expanded argument)"
+   }
+  },
+  {
+   "text": "Put $a_m=\\|f_{\\mathcal M}\\|_m^2$ and $b_m=\\|f_{j_*\\mathcal M}\\|_m^2$ for $m\\ge1$, using [def-wf-l2-norm]. For an etale test scheme $V$ over $U_0$, the section formula of [def-wf-middle-extension] gives $(j_*\\mathcal M)(V)=\\mathcal M(V\\times_{\\mathbf A^1}U_0)=\\mathcal M(V)$, with the same restrictions and Weil maps. Thus the stalk traces agree over $U_0$. Partitioning the finite set of rational points into the open and its complement gives\n$$b_m=a_m+E_m,\\qquad E_m=\\sum_{y\\in S_0(k_m)}|\\iota t_{j_*\\mathcal M}(y)|^2\\ge0.$$\nThis is an equality for ordinary sheaf direct image, not for $Rj_*$.",
+   "uses": [
+    "def-wf-l2-norm",
     "def-wf-middle-extension"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.traceEnergy_directImage_eq_add",
-        "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_boundaryEnergy_le",
-        "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.l2Weight_directImage"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.traceEnergy_directImage_eq_add",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            641,
-            647
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_boundaryEnergy_le",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            649,
-            657
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.l2Weight_directImage",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            677,
-            702
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.l2Weight_directImage"
-      ],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
-          "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
-          "lines": [
-            405,
-            415
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            476,
-            488
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-wf-l2-upper"
-          ],
-          "below": true
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isReal",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            540,
-            557
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "thm-wf-l2-dictionary"
-          ],
-          "below": true
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.traceEnergy_constantTwist",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            420,
-            427
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.traceEnergy_realEnvelope_le",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            429,
-            436
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.proof.md",
+    "place": "paragraphs 1–3 (expanded argument)"
+   }
   },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-p-dl-a1-correction",
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-    "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.traceEnergy_directImage_eq_add",
-    "branch": "slopmaster2",
-    "line": 643,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.traceEnergy_directImage_eq_add",
-      "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_boundaryEnergy_le",
-      "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.l2Weight_directImage"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "For $s\\in S_0$ let $d_s=[\\kappa(s):k_0]$ and $V_s=(j_*\\mathcal M)_{\\bar s}$. By [lem-wf-boundary-stalk-invariants], $V_s$ is the inertia-invariant subspace of the rank-$r$ local generic stalk; hence $n_s:=\\dim V_s\\le r$. By [def-weil-punctual-weights], purity gives $|\\iota\\alpha|^2=q_x^w$ for every closed-point eigenvalue on $U_0$. The hypotheses of [lem-wf-boundary-semicontinuity] therefore hold with $\\beta=w$ on the smooth geometrically connected curve $\\mathbf A^1_{k_0}$, with $r\\ge1$. Its conclusion gives $|\\iota\\alpha|^2\\le q_s^w=q^{d_sw}$ for every eigenvalue of $F_s$ on $V_s$.",
+   "uses": [
+    "lem-wf-boundary-stalk-invariants",
+    "def-weil-punctual-weights",
+    "lem-wf-boundary-semicontinuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.proof.md",
+    "place": "paragraphs 1–3 (expanded argument)"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $j:U_0\\hookrightarrow\\mathbf A^1_{k_0}$ be a dense open immersion\nwith finite complement $S_0$, and let $\\mathcal M$ be a nonzero lisse\nWeil sheaf of rank $r$ on $U_0$, punctually\n$\\iota$-pure of weight $w$. Write $\\|f_{\\mathcal M}\\|_m^2$ for\nthe sum of squares of the trace function of $\\mathcal M$ over\n$U_0(k_m)$ as in [def-wf-l2-norm], and\n$\\|f_{j_*\\mathcal M}\\|_m^2$ for the same sum for the\nmiddle extension over\n$\\mathbf A^1_{k_0}(k_m)$. Then the two parameters that these sums\ndefine through the ratio of [def-wf-l2-norm] coincide, and equal\n$w$:\n\n$$\n\\|j_*\\mathcal M\\|=\\|\\mathcal M\\|=w .\n$$",
-    "proof": [
-      {
-        "text": "The rigidity [lem-wf-l2-purity-rigidity] gives\n$\\|\\mathcal M\\|=w$ directly. For the comparison, the two sums agree\non $U_0(k_m)$, so\n\n$$\n\\|f_{j_*\\mathcal M}\\|_m^2=\\|f_{\\mathcal M}\\|_m^2+E_m,\n\\qquad\nE_m=\\sum_{y\\in S_0(k_m)}\\bigl|t_{j_*\\mathcal M}(y)\\bigr|^2\\ge0 .\n$$",
-        "uses": [
-          "lem-wf-l2-purity-rigidity"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Since $S_0$ is finite, $\\#S_0(k_m)\\le D:=\\sum_{s\\in S_0}d(s)$ for\nevery $m$; and at $y\\in S_0(k_m)$ lying above the closed point\n$s\\in S_0$, the local Frobenius $F_y$ has the eigenvalues\n$\\alpha^{m/d(s)}$ for $\\alpha$ running over the eigenvalues of\n$F_s$ on the boundary stalk of the middle extension, which by the\nboundary semicontinuity [lem-wf-boundary-semicontinuity] — applied\nto $\\mathcal M$ with $\\beta=w$, the punctual purity of\n[def-weil-punctual-weights] exhibiting $\\mathcal M$ as punctually\nmixed of weights at most $w$ — satisfy\n$|\\iota(\\alpha)|^2\\le q_s^{w}=q^{d(s)w}$. Hence\n$|\\iota(\\alpha^{m/d(s)})|^2\\le q^{mw}$ and\n\n$$\nE_m\\le D\\,r^2q^{mw}=C\\,q^{mw}\n$$\n\nfor every $m$, with the constant $C:=D\\,r^2$.",
-        "uses": [
-          "lem-wf-boundary-semicontinuity",
-          "def-weil-punctual-weights"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Now $\\|f_{\\mathcal M}\\|_m^2\\le\\|f_{j_*\\mathcal M}\\|_m^2$ for every\n$m$, so every parameter with a positive limit superior for\n$\\mathcal M$ has one for $j_*\\mathcal M$ as well: this gives\n$\\|j_*\\mathcal M\\|\\ge\\|\\mathcal M\\|$. Conversely, for $\\beta>w$ the\nratio of [def-wf-l2-norm] for $j_*\\mathcal M$ is bounded by the\nratio for $\\mathcal M$, which has limit superior $0$ because\n$\\beta>\\|\\mathcal M\\|$, plus $Cq^{m(w-\\beta-1)}$, which also has\nlimit superior $0$ because $\\beta+1>w$. No $\\beta>w$ therefore has\na positive limit superior, so $\\|j_*\\mathcal M\\|\\le w$, and the two\nparameters agree and equal $w$.",
-        "uses": [
-          "def-wf-l2-norm"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Apply the point-count identity of [prop-euler-product] to the reduced finite $k_0$-scheme $S_0$. If $c_d$ counts its degree-$d$ closed points, then\n$$\\#S_0(k_m)=\\sum_{d\\mid m}d c_d\\le\\sum_{s\\in S_0}d_s=:D.$$\nIn particular a rational point $y$ over $s$ can occur only if $d_s\\mid m$: the residue-field map $\\kappa(s)\\hookrightarrow k_m$ makes $m$ a multiple of $d_s$ by the degree formula for a tower of finite fields. When $S_0$ is empty, $D=0$.",
+   "uses": [
+    "prop-euler-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.proof.md",
+    "place": "paragraphs 1–3 (expanded argument)"
+   }
+  },
+  {
+   "text": "Restrict to $\\operatorname{Spec}\\kappa(s)$. By [prop-weil-pbc-common-stage-calculus], represent the underlying object, Weil isomorphism, inverse and inverse identities at one finite coefficient stage $E$ of [def-weil-pbc-qbar-category]. On each geometric component, the point equivalence [lem-weil-point-fibre-equivalence] identifies this sheaf with its finite-dimensional $E$-space. Choose a basis and the lattice $\\mathcal O_E^{n_s}$ there, using completed integral coefficients. Its reductions are finite free in degree zero, hence bounded constructible of finite Tor dimension. These choices provide an integral representative of the underlying object; no Frobenius-stable lattice is needed.\n\nFor $y\\in S_0(k_m)$ above $s$, apply [lem-trf-rational-local-frobenius-powers] to obtain conjugacy of its normalized operator with $F_s^{m/d_s}$. This is also the operator of [def-weil-local-frobenius-trace]: [lem-trf-local-frobenius-transport-normalization] identifies the successive point transport $t_{y,m}$ with the specified scheme-Frobenius transport $J_y(\\kappa^{(m)})\\rho_{y,m}$ at the rational stage. Postcomposition with the pulled-back iterated Weil map therefore gives the same local operator. Restriction uses the same point and Weil iterates, so computes the original boundary stalk. The normalization lemma also supplies coefficient coherence. Extending the conjugacy from $E$ to $\\overline{\\mathbf Q}_\\ell$ preserves composition and inverse; thus $F_y^{(m)}$ on the original stalk is conjugate to $F_s^{m/d_s}$.",
+   "uses": [
+    "lem-trf-rational-local-frobenius-powers",
+    "def-weil-pbc-qbar-category",
+    "def-weil-local-frobenius-trace",
+    "prop-weil-pbc-common-stage-calculus",
+    "lem-weil-point-fibre-equivalence",
+    "lem-trf-local-frobenius-transport-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.proof.md",
+    "place": "paragraphs 1–3 (expanded argument)"
+   }
+  },
+  {
+   "text": "Over the algebraically closed field $\\overline{\\mathbf Q}_\\ell$, use [p-linear-triangular] on $F_s$ and choose a basis adapted to its invariant full flag. Its matrix is upper triangular, with diagonal $\\alpha_1,\\ldots,\\alpha_{n_s}$; these are its eigenvalues, since its characteristic polynomial is the product of $T-\\alpha_i$. For upper triangular matrices $A,B$, $(AB)_{ii}=A_{ii}B_{ii}$, since a nonzero term $A_{ij}B_{ji}$ forces both $i\\le j$ and $j\\le i$. Induction therefore gives diagonal entries $\\alpha_i^{m/d_s}$ for $F_s^{m/d_s}$. The basis-independent trace of [def-weil-endomorphism-trace] and Step 5 yield\n$$|\\iota t_{j_*\\mathcal M}(y)|=\\left|\\sum_{i=1}^{n_s}\\iota(\\alpha_i)^{m/d_s}\\right|\\le\\sum_{i=1}^{n_s}|\\iota(\\alpha_i)|^{m/d_s}\\le r q^{mw/2}.$$\nHere Step 3 gives each summand at most $(q^{d_sw/2})^{m/d_s}=q^{mw/2}$; no semisimplicity is used. Squaring and using Step 4 in the sum of Step 2 proves\n$$0\\le E_m\\le D r^2 q^{mw}=:Cq^{mw}.$$\nThe zero-dimensional stalk has an empty sum and satisfies the same bound.",
+   "uses": [
+    "p-linear-triangular",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.proof.md",
+    "place": "paragraphs 1–3 (expanded argument)"
+   }
+  },
+  {
+   "text": "Use the supremum definition [def-wf-l2-norm]. Since $a_m\\le b_m$, positivity of the limit superior of $a_m/q^{m(\\beta+1)}$ implies positivity for $b_m/q^{m(\\beta+1)}$. Inclusion of these parameter sets gives $\\|j_*\\mathcal M\\|\\ge\\|\\mathcal M\\|=w$. For the reverse bound fix any real $\\beta>w$. Step 1 and the definition of supremum imply that the nonnegative sequence $a_m/q^{m(\\beta+1)}$ has limit superior zero (a positive limit superior would put $\\beta$ in a set with supremum $w$), so it tends to zero. Steps 2 and 6 give\n$$0\\le\\frac{b_m}{q^{m(\\beta+1)}}\\le\\frac{a_m}{q^{m(\\beta+1)}}+Cq^{m(w-\\beta-1)}.$$\nThe final term tends to zero because $q>1$ and $w-\\beta-1<0$: it is $C\\rho^m$ with $0<\\rho=q^{w-\\beta-1}<1$. Hence the middle sequence tends to zero by the elementary squeeze argument. No parameter greater than $w$ belongs to its positive-limsup set, whose supremum is therefore at most $w$. Together the bounds give $\\|j_*\\mathcal M\\|=\\|\\mathcal M\\|=w$.",
+   "uses": [
+    "def-wf-l2-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.proof.md",
+    "place": "paragraphs 1–3 (expanded argument)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-wf-l2-purity-rigidity",
+  "def-wf-l2-norm",
+  "def-wf-middle-extension",
+  "lem-wf-boundary-stalk-invariants",
+  "def-weil-punctual-weights",
+  "lem-wf-boundary-semicontinuity",
+  "prop-euler-product",
+  "lem-trf-rational-local-frobenius-powers",
+  "def-weil-pbc-qbar-category",
+  "def-weil-local-frobenius-trace",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-weil-point-fibre-equivalence",
+  "lem-trf-local-frobenius-transport-normalization",
+  "p-linear-triangular",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/lem-fd-l2-middle-extension.proof.md",
+  "place": "paragraphs 1–3 (expanded argument)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The L2 weight of a nonzero pure lisse Weil sheaf on a dense open of the affine line equals the L2 weight of its middle extension",
+   "results": "BoundingSieve.weights, LieModule.exists₂_genWeightSpace_smul_add_eq_bot, LieModule.exists_genWeightSpace_smul_add_eq_bot, LieModule.genWeightSpace_nsmul_add_ne_bot_of_le, LieModule.genWeightSpace_zsmul_add_ne_bot, LieModule.genWeightSpace_neg_zsmul_add_ne_bot, Finsupp.NonTorsionWeight.ne_zero, Mathlib.Meta.Positivity.evalBoundingSieveWeights",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the Weil-sheaf middle-extension L2 comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilSheaf, l2Weight",
+   "results": "loogle: unknown identifier 'WeilSheaf'",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the Weil-sheaf middle-extension L2 comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "l2Weight|boundaryEnergy|LisseOnDenseOpen",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the Weil-sheaf middle-extension L2 comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "L2 growth exponent of the trace function of a middle extension of a pure lisse sheaf",
+   "results": "Function.HasTemperateGrowth, Function.hasTemperateGrowth_one_add_norm_sq_rpow, Function.hasTemperateGrowth_iff_isBigO, Function.HasTemperateGrowth.pow, Function.HasTemperateGrowth.id', Function.HasTemperateGrowth.isBigO, ModularForm.trace, ExpGrowth.expGrowthSup_def",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the Weil-sheaf middle-extension L2 comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a constructible l-adic Weil sheaf, adding finitely many boundary stalks with smaller trace growth does not change its asymptotic L2 weight",
+   "results": "BoundingSieve.multSum_eq_main_err, AkraBazziRecurrence.eventually_atTop_sumTransform_le, BoundingSieve.siftedSum_le_mainSum_errSum_of_upperMoebius, AkraBazziRecurrence.eventually_atTop_sumTransform_ge, BoundingSieve.weights, WeakFEPair.hg_top, WeakFEPair.hf_top, AkraBazziRecurrence.isTheta_smoothingFn_sub_self",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the Weil-sheaf middle-extension L2 comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2769,
+ "blueprint_uses": [
+  "def-weil-punctual-weights",
+  "def-wf-l2-norm",
+  "def-wf-middle-extension",
+  "lem-wf-boundary-semicontinuity",
+  "lem-wf-l2-purity-rigidity"
+ ],
+ "uses_not_cited": [
+  "def-wf-middle-extension"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.traceEnergy_directImage_eq_add",
+    "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_boundaryEnergy_le",
+    "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.l2Weight_directImage"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.traceEnergy_directImage_eq_add",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      641,
+      647
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_boundaryEnergy_le",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      649,
+      657
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.l2Weight_directImage",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      677,
+      702
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.l2Weight_directImage"
+   ],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.exists_traceEnergy_le_of_hasWeightsAtMost",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      476,
+      488
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-wf-l2-upper"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isReal",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      540,
+      557
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "thm-wf-l2-dictionary"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.traceEnergy_constantTwist",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      420,
+      427
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.traceEnergy_realEnvelope_le",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      429,
+      436
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-correction",
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+  "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.traceEnergy_directImage_eq_add",
+  "branch": "slopmaster2",
+  "line": 643,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.traceEnergy_directImage_eq_add",
+   "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_boundaryEnergy_le",
+   "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.l2Weight_directImage"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $j:U_0\\hookrightarrow\\mathbf A^1_{k_0}$ be a dense open immersion\nwith finite complement $S_0$, and let $\\mathcal M$ be a nonzero lisse\nWeil sheaf of rank $r$ on $U_0$, punctually\n$\\iota$-pure of weight $w$. Write $\\|f_{\\mathcal M}\\|_m^2$ for\nthe sum of squares of the trace function of $\\mathcal M$ over\n$U_0(k_m)$ as in [def-wf-l2-norm], and\n$\\|f_{j_*\\mathcal M}\\|_m^2$ for the same sum for the\nmiddle extension over\n$\\mathbf A^1_{k_0}(k_m)$. Then the two parameters that these sums\ndefine through the ratio of [def-wf-l2-norm] coincide, and equal\n$w$:\n\n$$\n\\|j_*\\mathcal M\\|=\\|\\mathcal M\\|=w .\n$$",
+  "proof": [
+   {
+    "text": "The rigidity [lem-wf-l2-purity-rigidity] gives\n$\\|\\mathcal M\\|=w$ directly. For the comparison, the two sums agree\non $U_0(k_m)$, so\n\n$$\n\\|f_{j_*\\mathcal M}\\|_m^2=\\|f_{\\mathcal M}\\|_m^2+E_m,\n\\qquad\nE_m=\\sum_{y\\in S_0(k_m)}\\bigl|t_{j_*\\mathcal M}(y)\\bigr|^2\\ge0 .\n$$",
+    "uses": [
+     "lem-wf-l2-purity-rigidity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Since $S_0$ is finite, $\\#S_0(k_m)\\le D:=\\sum_{s\\in S_0}d(s)$ for\nevery $m$; and at $y\\in S_0(k_m)$ lying above the closed point\n$s\\in S_0$, the local Frobenius $F_y$ has the eigenvalues\n$\\alpha^{m/d(s)}$ for $\\alpha$ running over the eigenvalues of\n$F_s$ on the boundary stalk of the middle extension, which by the\nboundary semicontinuity [lem-wf-boundary-semicontinuity] — applied\nto $\\mathcal M$ with $\\beta=w$, the punctual purity of\n[def-weil-punctual-weights] exhibiting $\\mathcal M$ as punctually\nmixed of weights at most $w$ — satisfy\n$|\\iota(\\alpha)|^2\\le q_s^{w}=q^{d(s)w}$. Hence\n$|\\iota(\\alpha^{m/d(s)})|^2\\le q^{mw}$ and\n\n$$\nE_m\\le D\\,r^2q^{mw}=C\\,q^{mw}\n$$\n\nfor every $m$, with the constant $C:=D\\,r^2$.",
+    "uses": [
+     "lem-wf-boundary-semicontinuity",
+     "def-weil-punctual-weights"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Now $\\|f_{\\mathcal M}\\|_m^2\\le\\|f_{j_*\\mathcal M}\\|_m^2$ for every\n$m$, so every parameter with a positive limit superior for\n$\\mathcal M$ has one for $j_*\\mathcal M$ as well: this gives\n$\\|j_*\\mathcal M\\|\\ge\\|\\mathcal M\\|$. Conversely, for $\\beta>w$ the\nratio of [def-wf-l2-norm] for $j_*\\mathcal M$ is bounded by the\nratio for $\\mathcal M$, which has limit superior $0$ because\n$\\beta>\\|\\mathcal M\\|$, plus $Cq^{m(w-\\beta-1)}$, which also has\nlimit superior $0$ because $\\beta+1>w$. No $\\beta>w$ therefore has\na positive limit superior, so $\\|j_*\\mathcal M\\|\\le w$, and the two\nparameters agree and equal $w$.",
+    "uses": [
+     "def-wf-l2-norm"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fd-l2-middle-extension",
+  "worker": "stage1",
+  "summary": "Adopt the current blueprint nonzero hypothesis, expose the boundary-stalk dimension, closed-point counts, rational Frobenius powers and triangular-matrix trace estimate, and finish by the defining supremum. No new nodes. The zero sheaf disproves the older imported statement.",
+  "blueprint": "Current lem-fd-l2-middle-extension.proof.md: paragraph 1 is Steps 1–2; paragraph 2 is Steps 3–6; paragraph 3 is Step 7. The unit boundary-weight route is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-l2-purity-rigidity",
+    "why": "Pure nonzero lisse sheaves have L2 parameter w; this is the explicitly cited energy input of the blueprint proof, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-wf-boundary-stalk-invariants",
+    "why": "Identifies boundary stalks with invariant subspaces to bound their dimension by r; the correction unit does not itself state the local stalk formula."
+   },
+   {
+    "node": "lem-wf-boundary-semicontinuity",
+    "why": "Supplies the boundary eigenvalue bound, exactly the boundary-weight input of the correction unit."
+   },
+   {
+    "node": "lem-trf-rational-local-frobenius-powers",
+    "why": "Generic rational-coefficient local operator conjugacy under finite-field extension, needed to interpret boundary rational-point traces; no statement of the correction unit supplies this normalization."
+   },
+   {
+    "node": "def-weil-local-frobenius-trace",
+    "why": "Defines stalk traces and iterated Weil operators, identifying the restriction to the boundary point with the original stalk calculation."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Represents the Weil map, its inverse and their identities at one finite coefficient field; this is generic coefficient descent, not a replacement of the boundary-weight route."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Identifies the sheaf on each geometric point with its coefficient space, so the chosen finite free lattice represents its underlying object; no step of the correction unit supplies this coefficient tool."
+   },
+   {
+    "node": "lem-trf-local-frobenius-transport-normalization",
+    "why": "Identifies the specified successive point transports with the normalized scheme-Frobenius transports used by the rational powers lemma, including rationalization and coefficient coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-l2-purity-rigidity",
+  "lem-wf-boundary-stalk-invariants",
+  "lem-wf-boundary-semicontinuity",
+  "lem-trf-rational-local-frobenius-powers",
+  "def-weil-local-frobenius-trace",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-weil-point-fibre-equivalence",
+  "lem-trf-local-frobenius-transport-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q108-d30914b36",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q108-d30914b36 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, source passages and chapter/unit route. Repaired three Step 5 citation gaps using existing common-stage, point-fibre and Frobenius-normalization lemmas. Verified all seven steps, edge cases and absence of dependency cycles. Corrected whole-node JSON and detailed review.md are written; no new nodes or target changes.; 1 file(s) fixed by the reviewer"
+ }
 }

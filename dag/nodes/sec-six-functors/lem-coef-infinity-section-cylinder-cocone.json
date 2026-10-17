@@ -12,9 +12,136 @@
   "def-coef-infinity-fibrations",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a small simplicial set $Z$ and $a:Z\\to A$, write $\\Gamma_a$ for the simplicial set of maps $Z\\times\\Delta^n\\to I$ over $a$. The pullback $Z\\times_A I\\to Z$ is a right fibration: project a horn lifting square to $I\\to A$ and pair its filler with the prescribed simplex of $Z$. By the constant-functor and pullback clauses of [lem-coef-space-transport-classification], the identity right fibration $Z\\to Z$ classifies $\\Delta *$, the pullback classifies $Xa^{\\mathrm{op}}$, and the mapping-space formula gives\n$$\\Gamma_a\\simeq\\operatorname{Map}_{\\operatorname{Fun}(Z^{\\mathrm{op}},\\mathcal S)}(\\Delta *,Xa^{\\mathrm{op}}).$$\nIn particular $\\Gamma_a$ is Kan. This holds for arbitrary simplicial $Z$. At $Z=K$ the section $t$ is precisely the stated point $s_t$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.11, contravariant mapping-space and pullback comparison; setup for the auxiliary lifting calculation below Corollary 5.3.5.4."
+   }
+  },
+  {
+   "text": "We need restriction on strict sections, not only its effect on components. Let $J\\subseteq Z$ be a simplicial subset and fix $a:Z\\to A$. Restriction $\\Gamma_a\\to\\Gamma_{a|_J}$ is a right fibration. Indeed a lifting square for $\\Lambda_i^n\\subseteq\\Delta^n$, $0<i\\leq n$, transposes to the lifting square for $q$ with domain\n$$(Z\\times\\Lambda_i^n)\\cup_{J\\times\\Lambda_i^n}(J\\times\\Delta^n)\\ \\subseteq\\ Z\\times\\Delta^n.$$\nThis is right anodyne by [lem-coef-infinity-right-anodyne-product], applied to the right horn and $J\\subseteq Z$, after interchanging factors. The trivial-Kan exponential corner of [lem-coef-infinity-right-fibration-exponentiation] supplies the lift of this square. By Step 1 the target section space is Kan, so [lem-cbc-right-fibration-space-fiber] makes restriction a Kan fibration. This argument also applies after fixing any compatible section on $J$ by pullback.",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-product",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries 2.1.2.7 and 2.1.2.9, right-handed forms; explicit adjunction of each horn problem."
+   }
+  },
+  {
+   "text": "Put $C=K\\times\\Delta^1$, with its prescribed map $\\lambda:C\\to A$, and set\n$$T=\\{H:C\\to I\\text{ over }\\lambda\\mid H|_{K\\times\\{1\\}}=\\Delta_Kx\\},$$\nwhere degree $n$ means maps $C\\times\\Delta^n$ with this endpoint condition throughout the parameter. The inclusion $K\\times\\{1\\}\\subseteq C$ is right anodyne: it is the pushout-product of $\\{1\\}=\\Lambda_1^1\\subseteq\\Delta^1$ and $\\varnothing\\subseteq K$, by [lem-coef-infinity-right-anodyne-product]. Pull back the trivial Kan fibration of [lem-coef-infinity-right-fibration-exponentiation] over the fixed pair $(\\lambda,\\Delta_Kx)$. It gives $T\\to *$ a trivial Kan fibration. Boundary lifting is preserved by this pullback. By [lem-coef-kan-quillen-right-proper], $T$ is a nonempty contractible Kan complex. Choose $H_0\\in T$ and write $u=H_0|_{K\\times\\{0\\}}$. The initial restriction $r:T\\to\\Gamma_p$ is a Kan fibration: apply Step 2 to $K\\times\\partial\\Delta^1\\subseteq C$, and then pull back along the subspace of endpoint sections with final section $\\Delta_Kx$.",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-product",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries 2.1.2.7, 2.1.2.9 and 2.1.2.10, right-handed forms, with fixed final section."
+   }
+  },
+  {
+   "text": "Identify $u$ under Step 1. Pullback compatibility in [lem-coef-space-transport-classification] identifies the classifier over $C$ with $F=X\\lambda^{\\mathrm{op}}$. Currying in the interval direction regards $F$ as the edge\n$$X\\lambda:\\Delta_K X(b)\\longrightarrow Xp^{\\mathrm{op}}$$\nin $\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal S)$; the interval is reversed because $X$ is contravariant. The section $H_0$ corresponds to a coherent transformation $\\Delta *\\to F$. Its restrictions at the two ends are respectively $u$ and the constant point $x$. The naturality data of this transformation along the reversed interval identify its value $u$ with the composite $(X\\lambda)\\circ\\Delta x$. This identification is on the mapping spaces, with their homotopies: the classification comparison preserves composition and pullbacks, not merely vertex fibers. Thus $u$ represents exactly $s_{\\lambda,x}$ under the coherent identifications allowed in the statement. All choices here may be retained as the contractible space $T$, rather than selecting unrelated endpoint identifications.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.11, composition and pullback compatibility; explicit endpoint calculation for the cylinder, not a quotation from Corollary 5.3.5.4."
+   }
+  },
+  {
+   "text": "We compare the stated homotopy fiber with strict cylinders. Put $D=\\operatorname{Fun}(K,I)$, $B=\\operatorname{Fun}(K,A)$, and $Q=\\operatorname{Fun}(K,q)$. They are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. The map $Q$ is an inner fibration: an inner-horn lifting problem transposes to $K\\times\\Lambda_i^n\\subseteq K\\times\\Delta^n$, which is inner anodyne by [lem-coef-inner-anodyne-pushout-product] with $\\varnothing\\subseteq K$, and $q$ lifts it. Write $U_D(t,\\Delta_Kx)$ and $U_B(p,\\Delta_Kb)$ for fixed-endpoint arrow spaces. By [lem-coef-infinity-isofibration-exponentiation] their map induced by $Q$ is a Kan fibration. The natural pinch equivalences of [lem-coef-infinity-pinch-comparison] give a commutative square from the right-pinched mapping-space map in the item to this arrow-space map, with both horizontal maps weak equivalences. [lem-coef-spaces-homotopy-fiber-detection], with the lower map the pinch equivalence, identifies their homotopy fibers over $\\lambda$. On vertices the pinch sends an edge to that same edge, so this is the prescribed cylinder $\\lambda$. Finally [lem-coef-kan-pullback-path-comparison] identifies the latter homotopy fiber with its strict fiber. By currying, that strict fiber is exactly $L=r^{-1}(t)$: its simplices are cylinders over $\\lambda$ with initial section $t$ and final section $\\Delta_Kx$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.2.7.3, Corollary 2.3.2.4 and the natural arrow/right-pinched mapping-space comparison; explicit strict-fiber comparison."
+   }
+  },
+  {
+   "text": "Now use the contractibility of $T$, rather than discarding its higher simplices. Form the path pullback $P(t,r)$ of $\\{t\\}\\to\\Gamma_p\\leftarrow T$: a simplex consists of $H\\in T$ and a path from $t$ to $r(H)$. Since $r$ is a Kan fibration, [lem-coef-kan-pullback-path-comparison] gives a weak equivalence $L\\to P(t,r)$ by the constant path. The inclusion $\\{H_0\\}\\to T$ is a weak equivalence because $T\\to *$ is one and their composite is the identity of $*$. Apply [lem-coef-kan-homotopy-pullback-invariance] to the maps of cospans with components $1_{\\{t\\}}$, $1_{\\Gamma_p}$ and $\\{H_0\\}\\hookrightarrow T$. It gives a weak equivalence\n$$\\operatorname{Path}_{\\Gamma_p}(t,u)=P(t,u)\\longrightarrow P(t,r).$$\nHere paths go from $t$ to $u$, in the required direction. Hence $L\\simeq\\operatorname{Path}_{\\Gamma_p}(s_t,s_{\\lambda,x})$ by Step 4. Together with Step 5 this proves the claimed equivalence of spaces, including cases where both sides are empty.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent-written path-pullback calculation of the fixed-initial-endpoint fiber; Kan homotopy pullback comparison."
+   }
+  },
+  {
+   "text": "There is also an actual lift over the prescribed cylinder. Given a path $\\alpha:\\Delta^1\\to\\Gamma_p$ from $t$ to $u$, use the right-fibration lifting property of $r$ (Step 2) on $\\{1\\}=\\Lambda_1^1\\subseteq\\Delta^1$ with target $H_0$. Its lift $\\widetilde\\alpha$ has $r(\\widetilde\\alpha(0))=t$. The vertex $H=\\widetilde\\alpha(0)\\in T$ is an actual map $K\\times\\Delta^1\\to I$ with $qH=\\lambda$, initial section $t$ and final section $\\Delta_Kx$. Thus it is a coherent cocone with apex $x$, with exact prescribed image. More generally Step 5 shows that every point of the original homotopy fiber is represented up to its homotopy-fiber identification by such an $H$: the strict-fiber comparison is an equivalence of Kan spaces, so every component has a strict representative. This assertion does not identify arbitrary chosen simplicial models of the homotopy fiber literally with the strict fiber.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-kan-quillen-right-proper",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.1.2.10, right-handed endpoint lifting; actual representative, not only existence of a path class."
+   }
+  },
+  {
+   "text": "All the comparisons before choosing $H_0$ are restriction, pullback, currying, pinch, or constant-path maps. They commute with restriction along every $K'\\to K$: on a parameter simplex the map is precomposition with $K'\\times\\Delta^1\\times\\Delta^n\\to K\\times\\Delta^1\\times\\Delta^n$. The choice-free intermediate cospan in Step 6 uses $T$ itself. Choosing $H_0$ only replaces its contractible end by a point; the contractible Kan space $T$ supplies paths between choices and their higher compatibility data, and applying $r$ supplies exactly the endpoint comparisons. Thus the resulting equivalence is natural as an equivalence of spaces under restriction, with simplicial parameters retained. Step 7 has relative parameters too: the right-anodyne pushout-product with a parameter boundary and the exponential corner of [lem-coef-infinity-right-fibration-exponentiation] extend prescribed compatible target-lift data. No step uses a horn filler in $K$ or assumes $K$ nonempty. If $K=\\varnothing$, all functor, section, cylinder and mapping spaces here are points. For constant $q:I\\to *$ with $I$ Kan, the calculation reduces to the usual paths in $\\operatorname{Fun}(K,I)$; unequal components give empty lift and path spaces.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-right-anodyne-product",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries 2.1.2.7 and 2.1.2.9 with parameter boundaries; naturality of Proposition 2.2.3.11 and the explicit cylinder construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary 5.3.5.4 motivates the use in the presheaf Ind criterion; the present auxiliary proof is an explicit cylinder lifting calculation using right-handed Corollaries 2.1.2.7, 2.1.2.9, 2.1.2.10 and the mapping-space classification. HTT consulted online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +212,45 @@
    "results": "{\"t\": \"2026-10-17T10:13:52Z\", \"tool\": \"loogle\", \"query\": \"SSet, \\\"Cocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.coconeN\", \"SSet.isColimitCoconeN\", \"SSet.coconeN'\", \"SSet.isColimitCoconeN'\", \"SSet.coconeN'_pt\", \"SSet.coconeN'_ι_app\"], \"digest\": \"51cefb7a58e7bd35\"}",
    "date": "2026-10-17",
    "verdict": "No match: the six coconeN/coconeN-prime hits express strict colimits of simplicial sets in SSet, not cocones in arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?[Ff]ibration|section.*cylinder|cylinder.*section",
+   "results": "{\"t\": \"2026-10-17T11:38:35Z\", \"tool\": \"grep\", \"query\": \"right.?[Ff]ibration|section.*cylinder|cylinder.*section\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RightFibration\"",
+   "results": "{\"t\": \"2026-10-17T11:38:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"RightFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The space of lifted coherent cocones in a right fibration is the path space between sections of the pulled back fibration",
+   "results": "{\"t\": \"2026-10-17T11:38:35Z\", \"tool\": \"leansearch\", \"query\": \"The space of lifted coherent cocones in a right fibration is the path space between sections of the pulled back fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LiftableCocone.mk.noConfusion\", \"CategoryTheory.LiftableCocone.noConfusion\", \"CategoryTheory.LiftableCocone.noConfusionType\", \"CategoryTheory.Over.liftCone\", \"CategoryTheory.LiftableCocone\", \"CategoryTheory.LiftableCocone.liftedCocone\", \"CategoryTheory.Over.liftCocone_ι_app\", \"CategoryTheory.Under.liftCocone_ι_app\"], \"digest\": \"f656ba14241a995e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary categorical fiber/cocone declarations and generic model path objects do not give the quasicategorical right-fibration section/cocone equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifts of a natural transformation through a right fibration with fixed target are paths from a section to the transported target section",
+   "results": "{\"t\": \"2026-10-17T11:38:36Z\", \"tool\": \"leanfinder\", \"query\": \"Lifts of a natural transformation through a right fibration with fixed target are paths from a section to the transported target section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.homLift\", \"HasFibers.Fib.homMk\", \"CategoryTheory.IsHomLift.of_fac\", \"HasFibers.inducedMap\", \"CategoryTheory.Functor.Fiber.homMk\", \"CategoryTheory.Functor.IsHomLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"HasFibers.Fib.mkIsoSelfIsHomLift\"], \"digest\": \"d47676d9ad6971fd\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary categorical fiber/cocone declarations and generic model path objects do not give the quasicategorical right-fibration section/cocone equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy fiber of the map of mapping spaces induced by a right fibration is the path space from the source point to pullback of the target",
+   "results": "{\"t\": \"2026-10-17T11:39:09Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy fiber of the map of mapping spaces induced by a right fibration is the path space from the source point to pullback of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"ContinuousMap.Homotopy.diagonalPath'\", \"HomotopicalAlgebra.PathObject.trans_p₁\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.PathObject.trans_p₀\"], \"digest\": \"b82f0923e1ef046c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary categorical fiber/cocone declarations and generic model path objects do not give the quasicategorical right-fibration section/cocone equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-presheaf-ind-criterion",
@@ -115,5 +277,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-section-cylinder-cocone",
+  "worker": "stage1",
+  "summary": "Gave an eight-step proof without changing the statement or creating nodes. All-section restriction is a Kan fibration by right-anodyne pushout products; fixed-final cylinder lifts form a contractible Kan space. Its initial-endpoint fiber is the strict lifted-cocone space, compared with the original homotopy fiber by the natural pinch map. A path-pullback calculation identifies it with the section path space, and endpoint lifting gives actual prescribed-cylinder representatives. Checked empty shapes, disconnected fibers, arbitrary simplicial shapes, all cited statements and logged Mathlib searches.",
+  "blueprint": "Realizes the cylinder endpoint/path argument extracted from step 4 of lem-coef-infinity-presheaf-ind-criterion, below paragraph 2 (derived coefficient mapping-complex adjunction) of prop-coef-integral-exceptional-adjoint. This is supporting infrastructure, not a replacement of the fixed unit route. Main-20261015 paragraph 2 was read.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory/space tool used exactly as stated in the cylinder and homotopy-fiber calculation; no coefficient-unit result supplies this foundational comparison, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic quasicategory/space tool used exactly as stated in the cylinder and homotopy-fiber calculation; no coefficient-unit result supplies this foundational comparison, and no unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-space-fiber"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-d09200c51",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-d09200c51 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, sources, and unit/chapter route. All eight steps check, including the strict-cylinder/homotopy-fiber comparison, endpoint direction, parameters, naturality, and empty shapes. No new nodes, duplicates, cycles, target changes, or repairs. Both declared generic tool uses accepted; findings written to review.md."
  }
 }

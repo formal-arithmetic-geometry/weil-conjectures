@@ -18,9 +18,73 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r_j:P_j\\to B$ and $h_j:H_j\\to B$ for $t$ on the last $E$ coordinate. Construct $c_j$ recursively, keeping all $E$ coordinates. Set $c_1=1_E$. Given $c_j$ with $h_jc_j=r_j$, send an $n$-simplex $(p,e)$ of $P_{j+1}$ to $(c_j(p),\\operatorname{const}(r_j(p)),e)$ of $H_{j+1}$. Here the constant path on an $n$-simplex $b:\\Delta^n\\to B$ is the map $\\Delta^1\\times\\Delta^n\\to\\Delta^n\\xrightarrow{b}B$. Its two endpoint restrictions are both $b$. Thus $h_jc_j(p)=r_j(p)=s(e)$ verifies both pullback equations. Precomposition in $\\Delta^n$ commutes with this projection, so the displayed construction is simplicial by [def-cbc-enhanced-diagrams-cones]. Its last coordinate is $e$, hence $h_{j+1}c_{j+1}(p,e)=t(e)=r_{j+1}(p,e)$. This constructs all the stated constant-path maps and proves the strict endpoint identity by induction, independently of their weak equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/010B",
+    "place": "Construction 3.4.0.3: degreewise path pullback and its constant-path map; recursive coordinate verification."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-iterated-pullback-fibrancy] with the given Kan complexes $E,B$ and the two given Kan fibrations $s,t$. Its recursively defined tower and endpoint maps are exactly $P_j$ and $r_j$. Therefore every $P_j$ is Kan (and $r_j$ is a Kan fibration). In particular the strict tower supplies Kan inputs for each application of the binary comparison below.",
+   "uses": [
+    "lem-coef-kan-iterated-pullback-fibrancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00T0",
+    "place": "Subsection 3.1.1, Remarks 3.1.1.6, 3.1.1.10 and 3.1.1.11, packaged by the existing finite-tower node."
+   }
+  },
+  {
+   "text": "Induct on positive $j$ for the simultaneous claim that $H_j$ is Kan and $c_j$ is a weak homotopy equivalence. For $j=1$, $H_1=E$ is Kan by hypothesis and $c_1=1_E$ induces identity maps on components and all based homotopy groups. Fix $j\\geq1$ and assume this claim for $j$; the next two steps establish it for $j+1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Finite induction set-up and identity base case; agent expansion."
+   }
+  },
+  {
+   "text": "Put $J_{j+1}=P_j\\times_{B,r_j,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)\\times_{\\operatorname{ev}_1,B,s}E$. The three inputs $P_j,E,B$ are Kan by step 2 and the hypotheses. Since $s:E\\to B$ is a Kan fibration, [lem-coef-kan-pullback-path-comparison] gives a weak homotopy equivalence $a_{j+1}:P_{j+1}\\to J_{j+1}$ with formula $(p,e)\\mapsto(p,\\operatorname{const}(r_j(p)),e)$, and also says $J_{j+1}$ is Kan. Apply the Kan assertion of that same node to $h_j:H_j\\to B$ and $s:E\\to B$. The induction hypothesis gives that $H_j$ is Kan, so it follows that $H_{j+1}$ is Kan. This last application uses no fibration hypothesis on $h_j$.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Proposition 3.4.0.7 and the Kan path-model assertion of the existing binary comparison node."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-homotopy-pullback-invariance] to the two spans $P_j\\xrightarrow{r_j}B\\xleftarrow{s}E$ and $H_j\\xrightarrow{h_j}B\\xleftarrow{s}E$, with vertical maps $c_j,1_E,1_B$. All their objects are Kan by step 2, the induction hypothesis and the original hypotheses. Their vertical maps are weak homotopy equivalences by the induction hypothesis and the identity case, and the required squares commute strictly by step 1. The node therefore gives a weak homotopy equivalence $b_{j+1}:J_{j+1}\\to H_{j+1}$ sending $(p,\\gamma,e)$ to $(c_j(p),\\gamma,e)$. Composing with $a_{j+1}$ yields $(p,e)\\mapsto(c_j(p),\\operatorname{const}(r_j(p)),e)$, exactly $c_{j+1}$ as constructed in step 1. By the definition in [def-cbc-enhanced-diagrams-cones], the map on components of a composite is the composite of the two bijections, and its map on the homotopy group at a source basepoint is the composite of the two isomorphisms, using the image basepoint for the second. Thus $c_{j+1}$ is a weak homotopy equivalence. Together with step 4 this closes the induction. Step 1 already proves strict endpoint preservation in every degree. The argument requires no vertices to be chosen in $E$ or $B$, so it also covers empty complexes.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/032B",
+    "place": "Proposition 3.4.0.9, applied to the endpoint-preserving inductive comparison; identification of the composite and completion of the finite induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-iterated-pullback-fibrancy",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0329",
+  "place": "Finite induction from Kerodon Propositions 3.4.0.7 (0329) and 3.4.0.9 (032B), with Construction 3.4.0.3 (010B). Online sources read 2026-10-17, not archived in literature/. The induction and strict endpoint verification are agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +128,58 @@
    "results": "Actual search returned 8 hits: HomotopicalAlgebra.PathObject.weakEquivalence_ι, HomotopicalAlgebra.PathObject.trans_ι, HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁, HomotopicalAlgebra.PathObject.instWeakEquivalenceP₀, HomotopicalAlgebra.PathObject.instFibrationP₀, HomotopicalAlgebra.PathObject.instFibrationP₁, HomotopicalAlgebra.PathObject.trans, HomotopicalAlgebra.PathObject.instIsFibrantP. ",
    "date": "2026-10-17",
    "verdict": "no match: read the finite-simplicial-set and abstract model path-object hits; none states the finite endpoint-matched tower theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*pullback|PathObject.trans|iterated.*pullback",
+   "results": "{\"t\": \"2026-10-17T10:13:28Z\", \"tool\": \"grep\", \"query\": \"homotopy.*pullback|PathObject.trans|iterated.*pullback\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\"], \"digest\": \"cb07effbff89085b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and PathObject.lean:275-285, Instances.lean:227-242 and RightHomotopy.lean:77-82. Gluing path objects of one object and binary pullback stability do not state the finite comparison for arbitrary E with prescribed endpoints; no one-line specialization.",
+   "subdirectory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For Kan complexes B and E and fibrations s t from E to B the comparison from finite composable strings to iterated path homotopy pullbacks is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-17T10:13:31Z\", \"tool\": \"leansearch\", \"query\": \"For Kan complexes B and E and fibrations s t from E to B the comparison from finite composable strings to iterated path homotopy pullbacks is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PrepathObject.trans\", \"CategoryTheory.Limits.pullbackPullbackRightIsPullback\", \"HomotopicalAlgebra.PathObject.trans\", \"CategoryTheory.Limits.pullbackAssocSymmIsPullback\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback\"], \"digest\": \"df9ea0ed1d13b127\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and PathObject.lean:275-285, Instances.lean:227-242 and RightHomotopy.lean:77-82. Gluing path objects of one object and binary pullback stability do not state the finite comparison for arbitrary E with prescribed endpoints; no one-line specialization.",
+   "subdirectory": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PathObject\", \"trans\"",
+   "results": "{\"t\": \"2026-10-17T10:13:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"PathObject\\\", \\\"trans\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PrepathObject.trans\", \"HomotopicalAlgebra.PrepathObject.trans_P\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PrepathObject.trans_ι\", \"HomotopicalAlgebra.PrepathObject.trans_p₀\", \"HomotopicalAlgebra.PrepathObject.trans_p₁\", \"HomotopicalAlgebra.PathObject.instIsGoodTrans\", \"HomotopicalAlgebra.PathObject.trans_P\"], \"digest\": \"7815e519bf49bc4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and PathObject.lean:275-285, Instances.lean:227-242 and RightHomotopy.lean:77-82. Gluing path objects of one object and binary pullback stability do not state the finite comparison for arbitrary E with prescribed endpoints; no one-line specialization.",
+   "subdirectory": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite iterated pullbacks of Kan fibrations compare by constant paths to iterated homotopy pullbacks by weak homotopy equivalences preserving the last endpoint",
+   "results": "{\"t\": \"2026-10-17T10:13:37Z\", \"tool\": \"leanfinder\", \"query\": \"Finite iterated pullbacks of Kan fibrations compare by constant paths to iterated homotopy pullbacks by weak homotopy equivalences preserving the last endpoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.trans_p₁\", \"HomotopicalAlgebra.PathObject.trans_p₀\", \"HomotopicalAlgebra.PathObject.trans\"], \"digest\": \"89e06cf3be0893ca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and PathObject.lean:275-285, Instances.lean:227-242 and RightHomotopy.lean:77-82. Gluing path objects of one object and binary pullback stability do not state the finite comparison for arbitrary E with prescribed endpoints; no one-line specialization.",
+   "subdirectory": ""
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyPullback|homotopy_pullback|constantPath|constant_path|iteratedPullback",
+   "results": "{\"t\": \"2026-10-17T10:15:02Z\", \"tool\": \"grep\", \"query\": \"homotopyPullback|homotopy_pullback|constantPath|constant_path|iteratedPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and PathObject.lean:275-285, Instances.lean:227-242 and RightHomotopy.lean:77-82. Gluing path objects of one object and binary pullback stability do not state the finite comparison for arbitrary E with prescribed endpoints; no one-line specialization.",
+   "subdirectory": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An iterated fiber product over a Kan complex along fibrations is weakly equivalent to the finite path space homotopy limit of the same composable arrows",
+   "results": "{\"t\": \"2026-10-17T10:15:11Z\", \"tool\": \"leanfinder\", \"query\": \"An iterated fiber product over a Kan complex along fibrations is weakly equivalent to the finite path space homotopy limit of the same composable arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.IsGood\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.IsVeryGood\", \"HomotopicalAlgebra.PathObject.IsVeryGood.toIsGood\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.trans\"], \"digest\": \"b1a0b31b1a2c4734\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and PathObject.lean:275-285, Instances.lean:227-242 and RightHomotopy.lean:77-82. Gluing path objects of one object and binary pullback stability do not state the finite comparison for arbitrary E with prescribed endpoints; no one-line specialization.",
+   "subdirectory": ""
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
@@ -87,5 +199,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-iterated-chain-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the finite constant-path comparisons degreewise and verified strict preservation of the last endpoint. Proved the weak-equivalence and Kan assertions by positive-length induction, using existing strict-tower fibrancy, binary constant-path comparison, and homotopy-pullback invariance. No new nodes, no statement changes, no Lean work.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed derived coefficient adjunction: mapping-space foundation through the existing cosimplicial-frame/cofibrant-inversion chain. This finite Kan-space induction supplies the strict-to-homotopy Segal comparison in lem-coef-quasicategory-classification-realization; the historical via chain is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-c6ff276ee",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-c6ff276ee (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources and route. All five induction steps preserve the exact constant-path map and endpoint identity; Kan and weak-equivalence hypotheses hold, including empty cases. No duplicates, circularity, missing citations or repairs found. Detailed checks recorded in review.md; no tool_uses accepted."
  }
 }

@@ -15,9 +15,213 @@
   "lem-sp-proper-open-tower-comparison",
   "lem-sf-product-compactification-identity"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O_E$ and $A_m=R/\\varpi_E^m$. The valuation ring is a DVR with finite residue field, hence is Noetherian, and each $A_m$ is finite. Finite-type schemes over the field $k$ are Noetherian. All opens in question are quasi-compact since their source schemes are Noetherian. Base change and composition of proper morphisms show that the proper projections and the product structural map $c$ used below are proper. These check the coefficient, scheme and properness hypotheses of the tower proper/open comparison; they do not impose any additional condition on the compactifications. Completeness of $E$ also gives $R\\cong\\lim_m R/\\varpi_E^m$: representatives of compatible residue classes are Cauchy since successive differences lie in $\\varpi_E^mR$; their limit has absolute value at most one and represents every residue class. Injectivity follows since $|\\varpi_E|^m\\to0$. Thus $\\varpi_E$ is a non-zero-divisor and the complete-ring hypothesis of the coefficient-system comparison is satisfied.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-l-adic-extension-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; diagram-site application and explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Work first in $D(\\mathscr S_Z)$, where $\\mathscr S_Z$ is the abelian category of strict semilinear $(A_m)_Z$-module systems. The actual reductions of $K,L,M$ are objects of this category, not independently chosen derived levels. Use its simultaneous system pullbacks $P_v$, right adjoints $S_v$, derived tensor, and exact $J_j\\dashv P_j$. The system comparison theorem supplies their evaluations, units, counits and quotient compatibility. The simultaneous section model supplies the projection and exchange maps as actual counit mates. At the end forget the ring-system action to obtain maps in the derived categories of constant-$R$ towers. This direction only applies a functor to equalities; it never infers an equality from forgotten or evaluated maps. Tensor throughout this construction is over the ring system $(A_m)_m$, not the tensor of the forgotten $R$-module towers.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); simultaneous system models are the assertions of the two cited DAG nodes"
+   }
+  },
+  {
+   "text": "Factor $u=j_1k_1$ through $X\\times_B\\bar Y$, where $j_1$ is the base change of $j$ and $k_1$ the base change of $k$. Apply the diagram-site maps $\\beta,\\gamma$ of open-tensor normalization: first replace $P_{\\bar p}J_jK_\\bullet$ by $J_{j_1}P K_\\bullet$; move the other tensor factor inside $J_{j_1}$ by $\\gamma_{j_1}$; replace its restricted $k$-extension by $J_{k_1}q^*L_\\bullet$; move this extension outside the inner tensor using signed symmetry and $\\gamma_{k_1}$; finally compose open extensions. Every arrow is an isomorphism. Their composite is $e^\\bullet_{j,k}$. Each $\\beta,\\gamma$ restricts to the identity under the open units, so $P_u e^\\bullet_{j,k}=1_{K_\\bullet\\boxtimes L_\\bullet}$. All arrows were formed over $(A_m)_m$, so in particular they preserve quotient actions and transitions.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I; normalized ringed diagram-site maps of the cited node"
+   }
+  },
+  {
+   "text": "The opposite factorization gives a second map between the same objects, both of which the preceding construction identifies with $J_u(K_\\bullet\\boxtimes L_\\bullet)$. Full faithfulness of $J_u$ implies that restriction to $u$ is injective on the Hom set between these objects. Both restrictions are the identity, hence the two maps agree. For a swap, compare $e^\\bullet_{k,j}\\sigma$ with $J_u(\\sigma)e^\\bullet_{j,k}$ after identifying the swapped product schemes. Their restrictions are the same signed symmetry. For three factors both iterated maps have objects in the essential image of the total open extension; their restrictions are the canonical tensor associator. The same injectivity proves the signed symmetry and associativity equalities in the derived system category itself.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; diagram-site application and explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "For the compactification calculation, use instead the factorization through $V=\\bar X\\times_B Y$. Write $i:V\\hookrightarrow\\bar T$, $v:T\\hookrightarrow V$, $r:V\\to Y$, $s:V\\to\\bar X$ and $z:\\bar T\\to\\bar Y$ for its maps, so $u=iv$, $zi=kr$, and $r,z$ are proper. Put $F=S_aJ_jK_\\bullet$, $H=P_bF$, $N=J_kL_\\bullet$, $V_0=P_{\\bar p}J_jK_\\bullet$ and $E=\\operatorname{Ex}_{a,b}(J_jK_\\bullet):H\\to S_zV_0$. Set $D=K_\\bullet\\boxtimes L_\\bullet$. Denote by $\\tau:(P_iV_0)\\otimes P_rL_\\bullet\\xrightarrow{\\sim}J_vD$ the open base-change and tensor comparison. The $k$-first factorization in Step 3 gives $e^\\bullet$ as $V_0\\otimes P_zJ_kL_\\bullet\\to J_i((P_iV_0)\\otimes P_rL_\\bullet)\\xrightarrow{J_i\\tau}J_iJ_vD$. Let $\\lambda_Q:P_kS_zJ_i\\cong S_r$ and $\\Gamma_Q:J_kS_r\\to S_zJ_i$ be the normalized proper/open maps for this square.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; diagram-site application and explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Let $B_z:P_kS_z\\xrightarrow{\\sim}S_rP_i$ be open restriction of direct image in this square. Its normalization on $J_i$ is $\\lambda_Q$. Pullback pasting for the two squares defining $E$ and $B_z$ gives\n$$B_z\\,P_kE=\\operatorname{Ex}_{a,bk}(J_jK_\\bullet):P_kH\\longrightarrow S_rP_iV_0.$$\nThis is the mate-pasting equation: the right-side pullback square is the composite of the square over $b$ and the square over $k$. Its counit is the pasted counit, so the canonical compositors are those in the left side. The open base-change identification $P_iV_0\\cong J_vP_pK_\\bullet$ then gives precisely the exchange for $aj$ along $bk$ before its compact-support notation is applied. These are identities of ringed diagram-site adjunctions, not conclusions from their finite evaluations.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-sf-integral-compactification-system-realization",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change); explicit pasting of the square over b with its restriction over k"
+   }
+  },
+  {
+   "text": "Write $\\pi_z$ and $\\pi_r$ for counit-defined ordinary projection maps. The proper/open tensor equality, or equivalently its open-adjunction transpose, gives\n$$S_z(e^\\bullet)\\,\\pi_z(E\\otimes1_N)\n=\\Gamma_{Q,J_vD}\\,J_k\\!\\left(S_r\\tau\\,\\pi_r((B_zP_kE)\\otimes1_L)\\right)\\,\\gamma'_k.$$\nHere $\\gamma'_k:H\\otimes J_kL\\to J_k(P_kH\\otimes L)$ is the open tensor comparison with its signed symmetry. To see the equality, first precompose both sides with $(\\gamma'_k)^{-1}$ and transpose under $J_k\\dashv P_k$. On the right $\\lambda_Q P_k\\Gamma_Q=1$ leaves $S_r\\tau\\,\\pi_r((B_zP_kE)\\otimes1)$. On the left the exchange/tensor compatibility square for $z$ restricted along $k$ replaces $P_k\\pi_z$ by $\\pi_r(B_z\\otimes1)$; the normalized open maps restrict to identities and give exactly that same expression. Thus equality follows from injectivity of the adjunction bijection, with no claim that $P_k$ is faithful on arbitrary Hom sets.",
+   "uses": [
+    "lem-sf-proper-open-tensor-compatibility",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48 (remark-compatible-with-diagram); open-adjunction transpose calculation using the normalized proper/open map"
+   }
+  },
+  {
+   "text": "Expand the left compact-support expression using $aj$, $bk$ and $q=rv$. By definition its exchange is the map identified in Step 6. Its projection for $q$ is $S_r(\\gamma_v)\\pi_r$, so the middle exchange/projection expression is $S_r\\tau\\,\\pi_r((B_zP_kE)\\otimes1)$. Its projection for $bk$ first applies the projection for $b$ and then $S_b\\gamma'_k$, after the two specified symmetries. Finally composition across the proper/open square $zi=kr$ applies $S_b\\Gamma_Q$, with target $S_bS_zJ_uD$. The system composition comparison uses exactly this normalized $\\Gamma_Q$, by the horizontal and vertical pasting laws. Consequently the right-hand expression of Step 7, after $S_b$ and this initial projection for $b$, is the actual diagram expansion of $\\lambda_{aj,bk}$. The left-hand expression is $S_bS_z(e^\\bullet)\\lambda_{a,b}(J_jK_\\bullet,J_kL_\\bullet)$. The direct-image compositor identifies $S_bS_z$ with $S_c$, proving the asserted diagram compactification identity.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-sf-product-compactification-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 and more-etale.tex Tags 0F7C/0F7D (proper/open pasting); expansion of the specified exchange and projection composites"
+   }
+  },
+  {
+   "text": "Check the realization domain rather than adding transitions to the supplied witnesses. The integral finite-Tor definition gives common Tor intervals for all reductions. Finite pullback preserves these intervals, tensor adds them, and open extension preserves both the cohomological and Tor intervals. Bounded constructible reductions have bounded etale origin. If coherent etale models are needed for realization, apply $R\\nu_{A,*}$ to the actual bounded-below system: the coefficient-system comparison gives an invertible counit $\\nu_A^*R\\nu_{A,*}N\\to N$, since each evaluation has etale origin. It also preserves normalization. This constructs a coherent origin presentation from the actual system; it assumes no transitions between the initially supplied witnesses. Thus all open and tensor expressions of Steps 3--4 are normalized with common finite bounds.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-trf-open-ctf",
+    "lem-sf-proetale-constructible-origin",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0941; bounds and origin checks from the cited finite coefficient and system comparison statements"
+   }
+  },
+  {
+   "text": "The same check applies to the proper expressions in Steps 5--8. There are only finitely many source schemes. Each has finite dimension; choose a finite dimension bound $d$ for each, taking $d=0$ for an empty source. The etale direct-image vanishing bound $2d$ works for every $A_m$, independently of $m$. The direct-image Tor-amplitude theorem therefore sends an interval $[a,b]$ to $[a,b+2d]$, preserving constructibility. Transport these finite images through the etale-origin comparison and the evaluated system adjunctions. The operation/reduction comparisons preserve the normalized transitions. Repeating for the finitely many proper factors gives common cohomological and Tor intervals for all intermediate expressions. No unbounded collection of dimension bounds or uniform choice of etale witnesses is involved.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-sf-etale-direct-image-vanishing",
+    "thm-sf-direct-image-tor-amplitude",
+    "lem-sf-proetale-constructible-origin",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941; finite dimension, uniform vanishing and finite-Tor checks supplied by the cited DAG statements"
+   }
+  },
+  {
+   "text": "Apply the functorial total limit to the actual system map $e^\\bullet$ and the equalities of Steps 4 and 8, using termwise scalar restriction. The realization comparisons $c_V$ intertwine open maps, tensor/pullback, adjunction units and counits, proper/open interchange and all their whiskerings. Their hypotheses were checked in Steps 9--10. They therefore identify the limit of $e^\\bullet$ with a specified natural map\n$$e^c_{j,k}:(j_!K)\\boxtimes(k_!L)\\longrightarrow u_!(K\\boxtimes L).$$\nA functor preserves isomorphisms and equalities, hence $e^c$ is invertible and satisfies the same signed symmetry and associativity equations. The comparison for the proper/open generator is the one whose constant-$R$ tower version is $\\Gamma_Q$ in the item: both are adjunct to the inverse normalized open restriction. Its finite evaluations are the canonical proper/open maps on each bounded etale-origin input. Thus the diagram identity already proved uses exactly the comparisons required in the statement.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sp-proper-open-tower-comparison",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); total-limit functor and generator-intertwining realization comparisons of the cited nodes"
+   }
+  },
+  {
+   "text": "Under the same realization comparisons, the limit of the diagram expansion of $\\lambda$ is its completed exchange/projection definition: each factor is a canonical unit, counit, open map, tensor identification, composition comparison or a whiskering of one. The factor-intertwining property therefore identifies their ordered composite, not just its endpoints. Applying it to Step 8 gives\n$$\\lambda_{aj,bk}(K,L)=Rc_*(e^c_{j,k})\\circ\\lambda_{a,b}(j_!K,k_!L).$$\nThe definition in [lem-sf-product-compactification-identity] fixes the order of these factors; its finite-coefficient theorem is not being used to lift an equality. At no point is equality of integral maps deduced from equality of all finite reductions.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "def-exchange-projection",
+    "lem-sf-product-compactification-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941; applying a functor to the system identity of Step 8 and its specified generator comparisons"
+   }
+  },
+  {
+   "text": "Rationalize the integral maps and equations. The operation comparisons commute with rationalization and preserve the tensor associators, evaluations, units and counits, so the resulting maps are the prescribed $E$-coefficient open and compactification maps. For algebraically closed coefficients represent the finite list of objects and maps over a common finite coefficient field, apply its scalar-extension functor, and take their class in the common-stage category. The coefficient comparisons preserve the same canonical generators and their composition, and successive field extensions obey the cocycle stipulated in the exchange definition. Functoriality preserves all the equations, including the signed symmetry and three-factor associativity, and makes them independent of enlarging the common finite field. There is no finite-reduction functor used on field coefficients.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Coefficient transport clauses of the cited nodes; functorial preservation of the equations already proved"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-finite-tor-amplitude",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-fix-operation-reduction",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-product-compactification-identity",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-proper-open-tensor-compatibility",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sp-proper-open-tower-comparison",
+  "lem-trf-open-ctf",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-valued-dvr-finite-quotients",
+  "thm-sf-direct-image-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Expansion of the blueprint proper-reduction sentence in ringed coefficient-system categories; Stacks Tags 0GL1, 0E48, 07A7, 0941 and 0F7C/0F7D are foundations, not statements of the full normalization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +257,45 @@
    "results": "8 hits. AdicCompletion.ofTensorProduct_naturality; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProductEquivOfPiFintype; ModuleCat.extendScalarsComp_hom_app_one_tmul; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply Algebraic AdicCompletion and affine scheme limit sections are not completed derived sheaf operations or strict coefficient-diagram comparisons.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|strictTower|semilinear",
+   "results": "0 hits: .  Hits concern algebraic open immersions, local cohomology, ordinary module presentations, profinite topology or algebraic completion; none states the derived coefficient-system open product and compactification identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion extension by zero derived tensor product of inverse systems with quotient ring coefficients and proper compactification compatibility",
+   "results": "8 hits: Algebra.instIsStandardOpenImmersionTensorProduct, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.instIsOpenImmersionCommRingCatOfIsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpace_isOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict.  Hits concern algebraic open immersions, local cohomology, ordinary module presentations, profinite topology or algebraic completion; none states the derived coefficient-system open product and compactification identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "0 hits: .  Hits concern algebraic open immersions, local cohomology, ordinary module presentations, profinite topology or algebraic completion; none states the derived coefficient-system open product and compactification identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open extension product coherence in derived categories of diagrams of module sheaves over a tower of quotient rings",
+   "results": "8 hits: localCohomology.diagram, SheafOfModules.Presentation.map_π_eq, ModuleCat.Tilde.toOpen_res, localCohomology.ofDiagram, Profinite.NobelingProof.GoodProducts.square_commutes, SheafOfModules.Presentation.mapRelations_mapGenerators_assoc, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, SheafOfModules.ιFree_mapFree_inv_assoc.  Hits concern algebraic open immersions, local cohomology, ordinary module presentations, profinite topology or algebraic completion; none states the derived coefficient-system open product and compactification identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict coefficient systems extension by zero external derived tensor products and compactification projection formula identities before inverse limit",
+   "results": "8 hits: Profinite.NobelingProof.GoodProducts.square_commutes, Profinite.NobelingProof.CC_comp_zero, LightProfinite.proj_comp_transitionMap, Profinite.NobelingProof.CC_exact, IsAdicComplete.StrictMono.factorPow_comp_extend, TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.directLimitRight_symm_of_tmul, IsAdicComplete.StrictMono.extend_eq.  Hits concern algebraic open immersions, local cohomology, ordinary module presentations, profinite topology or algebraic completion; none states the derived coefficient-system open product and compactification identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-kunneth-coherence",
@@ -73,5 +312,144 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-integral-open-product-diagram-normalization",
+  "worker": "stage1",
+  "summary": "No new nodes. Constructed the open product map intrinsically over the quotient-ring system, proved coherence by full faithfulness of open extension, and derived compactification compatibility by an explicit open-adjunction calculation. Applied generator-intertwining total-limit realization after checking uniform bounds and obtaining coherent origin models from actual systems, without imposing transitions on the supplied witnesses. No equality is inferred from finite evaluations. Statement unchanged.",
+  "blueprint": "Nearest blueprint ancestor lem-sf-kunneth-coherence: the symmetry proof sentence after reduction to proper f,g by independence of compactification. Steps 3--4 construct coherent open comparisons, 5--8 prove the product compactification identity before total limit, and 9--13 realize the integral and field stages.",
+  "tool_uses": [
+   {
+    "node": "def-exchange-projection",
+    "why": "Supplies the explicit ordered exchange and counit-defined projection composites and the rational/common-stage conventions; used as a definition, not as an invertibility theorem. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "Supplies the common finite Tor interval for all reductions of one integral input in Step 9. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Supplies horizontal and vertical proper/open pasting before evaluation in Step 8; needed to identify the compactification composition map. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Supplies simultaneous strict-system pullbacks, tensors and counit-mate models in Step 2, so identities are proved before evaluation. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Supplies operation/reduction compatibility in Step 10 and rationalization/scalar-extension compatibility in Step 13. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Supplies a finite dimension bound for each finite-type intermediate scheme in Step 10. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Supplies evaluated system adjunctions and the normalized coherent etale-origin presentation in Steps 2, 9 and 10. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sf-etale-direct-image-vanishing",
+    "why": "Supplies the uniform 2d bound for all finite quotient coefficients in Step 10. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Supplies normalized system proper/open maps and generator-intertwining realization in Steps 5–8 and 11–12; the open-product calculation itself is carried out here. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Supplies unit-normalized open base-change and tensor maps and full faithfulness on derived systems in Steps 3–7; the external-product construction and coherence are proved here. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies bounded etale-origin witnesses for bounded constructible finite reductions in Steps 9–10. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sf-proper-open-tensor-compatibility",
+    "why": "Supplies the general proper/open projection compatibility used in Step 7, for arbitrary system inputs; it does not state the product compactification identity. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Supplies preservation of the finite Tor interval by finite-level pullback in Step 9. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Supplies bounded constructibility and addition of Tor intervals for finite-level tensor in Step 9. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sp-proper-open-tower-comparison",
+    "why": "Identifies the constant-R tower comparison with the specified open-adjunction normalization and its finite evaluations in Step 11. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Supplies preservation of constructibility and cohomological/Tor bounds by open extension in Step 9. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Supplies the DVR structure and finite residue field of the valuation ring in Step 1. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Supplies Noetherianity of the finite-type schemes in Step 1. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Supplies the horizontal mate-pasting identity for exchange restricted to the open in Step 6. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Supplies base-change and composition stability of proper maps in Step 1. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Supplies the exchange/projection compatibility square for the Step 7 adjunction transpose. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Supplies a functor on the derived category of strict constant-R towers in Step 11, preserving already-proved equations. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Supplies finiteness of each quotient ring in Step 1. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   },
+   {
+    "node": "thm-sf-direct-image-tor-amplitude",
+    "why": "Supplies constructibility and the interval [a,b+N] for proper finite images once uniform vanishing is checked in Step 10. This is auxiliary to the unit’s proper-reduction route; it does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-exchange-projection",
+  "def-weil-finite-tor-amplitude",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-fix-operation-reduction",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-proper-open-tensor-compatibility",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sp-proper-open-tower-comparison",
+  "lem-trf-open-ctf",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-valued-dvr-finite-quotients",
+  "thm-sf-direct-image-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-0d365d519",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-0d365d519 (reviewer sub-agent of L); spot-checked: Read all 13 steps, 29 cited statements, sources, and unit/chapter route. Checked system-level mate identities, coherent étale origin, uniform bounds, realization compatibility, edge cases, duplicates, and cycles. No repairs needed; accepted tool uses and detailed checks are recorded in review.md."
  }
 }

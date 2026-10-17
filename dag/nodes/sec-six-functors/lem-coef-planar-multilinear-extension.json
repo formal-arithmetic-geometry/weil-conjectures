@@ -12,9 +12,102 @@
   "def-coef-presentable-infinity-category",
   "lem-coef-monoidal-block-projection-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C_r=\\operatorname{Fun}_{\\mathrm{sep}}(B^r,B)$. These full subcategories are replete: a natural equivalence transports each colimit cocone and its universal property, so colimit preservation is unchanged. They contain $\\mathrm{id}_B$. To check block-substitution closure, fix all external inputs except one, in the $i$th inner block. The resulting functor is the composite of the corresponding one-variable specialization of the inner operation and the $i$th specialization of the outer operation; both preserve colimits, so mapping a colimit cocone successively through them gives a colimit cocone. If that block is empty, there is no variable to check. If all blocks are empty, the composite is nullary and the condition is vacuous. Repeating this for every external input proves closure. This uses disjoint input lists: it makes no claim about a variable repeated in two inner blocks.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited enriched-localization chain; explicit agent proof of the reduced-input coherence tool. HA pointwise arrow endomorphisms and planar operads supply the formulation, as detailed in report.md."
+   }
+  },
+  {
+   "text": "Apply the arrow-endomorphism construction to this family and $f$, obtaining $p:E_C(f)\\to E_A$. Write $U_r=\\operatorname{Fun}(A^r,A)^\\simeq$, $V_r=C_r^\\simeq$, and $W_r=\\operatorname{Fun}(A^r,B)^\\simeq$. Its operation map is the projection $p_r:U_r\\times^h_{W_r}V_r\\to U_r$. The restriction map $R_r:V_r\\to W_r$ is an equivalence: take the core of the assumed equivalence of functor infinity categories; its coherent quasi-inverse and inverse equivalences restrict to the cores. For each $u\\in U_r$, the homotopy fiber of $p_r$ is exactly the homotopy fiber of $R_r$ over $fu$, by the displayed triple description. It is contractible, so $p_r$ is an equivalence by the contractible-fiber criterion. For $r=0$, $R_0$ is the identity of $B^\\simeq$, so this also covers nullary operations. No full faithfulness of $f$ is used.",
+   "uses": [
+    "lem-coef-arrow-endomorphism-planar-operad",
+    "lem-coef-space-contractible-fiber-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited enriched-localization chain; explicit agent proof of the reduced-input coherence tool. HA pointwise arrow endomorphisms and planar operads supply the formulation, as detailed in report.md."
+   }
+  },
+  {
+   "text": "For any base arrow $\\alpha:[n]\\to[m]$, the operation-space formula gives the map on fixed-base mapping spaces of $p$ as $\\prod_{j=1}^m p_{a(j)-a(j-1)}$. These products record reduced block operations, not full functor spaces after adding discarded variables. Each factor has a coherent inverse by step 2; their finite product is an inverse, with inverse homotopies taken coordinatewise. Taking the disjoint union over the discrete base arrows therefore gives equivalences of the whole mapping spaces. Thus $p$ is fully faithful. Every tuple object of $E_A$ is the image of the tuple of copies of the sole color of $E_C(f)$, so its essential image is all of $E_A$. The full-essential-image theorem gives a coherent inverse to $p$. Every isomorphism of $\\Delta^{\\mathrm{op}}$ is an identity, since an order-preserving bijection of a finite ordinal fixes its successive elements. Apply [lem-coef-equivalence-over-gaunt-nerve]: this inverse and both inverse equivalences are strictly over $N(\\Delta^{\\mathrm{op}})$. Inert edges are characterized by the cocartesian mapping squares over inert base arrows. Those squares are unchanged up to equivalence by a fully faithful, essentially surjective functor over the base; the homotopy-pullback invariance theorem verifies their invariance. Consequently the inverse preserves inert edges. Hence $p$ is an equivalence of nonsymmetric infinity operads.",
+   "uses": [
+    "lem-coef-arrow-endomorphism-planar-operad",
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-equivalence-over-gaunt-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited enriched-localization chain; explicit agent proof of the reduced-input coherence tool. HA pointwise arrow endomorphisms and planar operads supply the formulation, as detailed in report.md."
+   }
+  },
+  {
+   "text": "Use the unary identity equivalences in the hypotheses as the identifications of unary operations with identities. In the notation of the endomorphism construction let $X=\\operatorname{Map}_{J/}(\\mathsf{Ass}_{\\mathrm{pl}},E_C(f))$ and $Y=\\operatorname{Map}_{J/}(\\mathsf{Ass}_{\\mathrm{pl}},E_A)$. Postcomposition by $p$ induces an equivalence $X\\to Y$: postcompose with its inverse to obtain the inverse map, and postcompose the inverse homotopies to obtain the two inverse homotopies. The same reasoning applies under $J$, retaining the chosen color identifications and the unary identity. The given complete system $(m_r)$, including its higher substitution simplices, determines a point $y\\in Y$. By the construction's parameterized interpretation, the homotopy fiber of $X\\to Y$ at $y$ is the space of coherent systems together with a specified identification of their $A$-system with the given one. This interpretation retains all tree coherences, rather than just coherence equations in a homotopy category.",
+   "uses": [
+    "lem-coef-arrow-endomorphism-planar-operad",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited enriched-localization chain; explicit agent proof of the reduced-input coherence tool. HA pointwise arrow endomorphisms and planar operads supply the formulation, as detailed in report.md."
+   }
+  },
+  {
+   "text": "It remains to impose the specified vertex comparisons, not just the system on $A$. Evaluate at every corolla of arity $r\\ne1$. Put $U=\\prod_{r\\ne1}E_C(f)(r)$ and $V=\\prod_{r\\ne1}E_A(r)$. The map $U\\to V$ is an equivalence: choose the inverse and inverse homotopies of each $p_r$ from step 2 and take them coordinatewise, giving an (arbitrary, possibly infinite) product inverse and product homotopies. In Kan models such simplicial inverse homotopies imply weak equivalence. Evaluation gives a coherent square from $X\\to Y$ to $U\\to V$. The induced corner map $X\\to Y\\times^h_V U$ is an equivalence. Indeed the projection $Y\\times^h_V U\\to Y$ has the same contractible homotopy fibers as $U\\to V$, so is an equivalence by the fiber criterion; its composite with the corner is the equivalence $X\\to Y$ from step 4. Two-out-of-three proves the assertion.",
+   "uses": [
+    "lem-coef-arrow-endomorphism-planar-operad",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-space-contractible-fiber-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited enriched-localization chain; explicit agent proof of the reduced-input coherence tool. HA pointwise arrow endomorphisms and planar operads supply the formulation, as detailed in report.md."
+   }
+  },
+  {
+   "text": "For each $r\\ne1$, the prescribed $(m_r,M_r,\\theta_r)$ is a point of $E_C(f)(r)$ lying over $m_r$; this includes $(m_0,f(m_0),\\theta_0)$. Together with $y$, these points and the stated comparisons determine a point of $Y\\times^h_VU$. Its homotopy fiber under the corner map of step 5 is contractible and nonempty by the fiber criterion. By the parameterized, fixed-color interpretation of the endomorphism construction this fiber is exactly the space of coherent lifts with those specified vertices and identifications. The unary vertex and its comparison are already fixed by working under $J$ with the given identity comparison. Projecting the lifted system to $B$ gives the required substitution equivalences and all their higher simplices; projecting its arrow comparisons makes the $\\theta_r$ a morphism of systems. Every tree is evaluated on its ordered external input list, by the construction and the planar-system convention. Nullary vertices cause empty blocks, not discarded variables. Thus this proves both existence and the claimed contractible space of lifts on the reduced external lists.",
+   "uses": [
+    "lem-coef-arrow-endomorphism-planar-operad",
+    "lem-coef-space-contractible-fiber-equivalence",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited enriched-localization chain; explicit agent proof of the reduced-input coherence tool. HA pointwise arrow endomorphisms and planar operads supply the formulation, as detailed in report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-monoidal-block-projection-coherence",
+  "lem-coef-arrow-endomorphism-planar-operad",
+  "lem-coef-space-contractible-fiber-equivalence",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-equivalence-over-gaunt-nerve",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, inherited enriched-localization ancestry: agent proof of reduced-input planar coherence transport via relative endomorphism operations, fully faithful operator categories and homotopy fibers."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +144,75 @@
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary finite coproducts, quotient uniqueness, or ordinary monoidal Kan extensions. Read Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean:214-238 and Monoidal/ExternalProduct/KanExtension.lean:50-94: Category-typed statements, with no coherent planar-tree lifting in quasicategories. Quasicategory/StrictBicategory.lean:48-72 provides an ordinary enriched bicategory, not this result.",
    "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor inducing equivalences on separately cocontinuous multivariable functor infinity categories transports unital planar monoidal coherences uniquely",
+   "results": "{\"t\": \"2026-10-17T10:10:08Z\", \"tool\": \"leanfinder\", \"query\": \"A functor inducing equivalences on separately cocontinuous multivariable functor infinity categories transports unital planar monoidal coherences uniquely\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.InducingFunctorData.mk.inj\", \"CategoryTheory.Functor.CoreMonoidal.mk.inj\", \"CategoryTheory.Monoidal.InducingFunctorData.μIso\", \"CategoryTheory.Functor.Monoidal.transport_δ\", \"CategoryTheory.Functor.Monoidal.transport_ε_assoc\", \"CategoryTheory.Functor.Monoidal.transport_η_assoc\", \"CategoryTheory.Functor.Monoidal.transport_δ_assoc\", \"CategoryTheory.MonoidalCategory.DayConvolution.unit_uniqueUpToIso_inv_assoc\"], \"digest\": \"5301af71d65847a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary category/arrow/monoidal or simplicial-object declarations, not the quasicategorical planar operation-space construction or coherent transport assertion. Read CategoryTheory/Comma/Arrow.lean:29-65, Endomorphism.lean:15-52, Monoidal/Transport.lean:25-65, and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:20-65; these use ordinary categories or ordinary enriched nerves. Limits/Preserves/Bifunctor.lean:214-238 only proves an ordinary bifunctor colimit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|separately.*[Cc]olimit|planar",
+   "results": "{\"t\": \"2026-10-17T10:10:48Z\", \"tool\": \"grep\", \"query\": \"operad|separately.*[Cc]olimit|planar\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\"], \"digest\": \"8890a0d64787c7ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary category/arrow/monoidal or simplicial-object declarations, not the quasicategorical planar operation-space construction or coherent transport assertion. Read CategoryTheory/Comma/Arrow.lean:29-65, Endomorphism.lean:15-52, Monoidal/Transport.lean:25-65, and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:20-65; these use ordinary categories or ordinary enriched nerves. Limits/Preserves/Bifunctor.lean:214-238 only proves an ordinary bifunctor colimit assertion.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\", \"equiv\"",
+   "results": "{\"t\": \"2026-10-17T10:10:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\", \\\"equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no operad declaration found by this name/concept search."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent monoidal structures extend along an equivalence of multivariable functor infinity categories",
+   "results": "{\"t\": \"2026-10-17T10:11:35Z\", \"tool\": \"leansearch\", \"query\": \"Coherent monoidal structures extend along an equivalence of multivariable functor infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instMonoidalFunctorFunctorCongrLeft\", \"CategoryTheory.Equivalence.monoidalOfPostcompInverse\", \"CategoryTheory.instIsMonoidalFunctorCongrLeft\", \"CategoryTheory.Equivalence.monoidalOfPrecompFunctor\", \"CategoryTheory.Equivalence.monoidalOfPostcompFunctor\", \"CategoryTheory.Monoidal.transportStruct\", \"CategoryTheory.Monoidal.instInhabitedTransported\", \"CategoryTheory.Equivalence.monoidalOfPrecompInverse\"], \"digest\": \"2c51c35faef8b766\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary category/arrow/monoidal or simplicial-object declarations, not the quasicategorical planar operation-space construction or coherent transport assertion. Read CategoryTheory/Comma/Arrow.lean:29-65, Endomorphism.lean:15-52, Monoidal/Transport.lean:25-65, and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:20-65; these use ordinary categories or ordinary enriched nerves. Limits/Preserves/Bifunctor.lean:214-238 only proves an ordinary bifunctor colimit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|nonsymmetric|dendroidal",
+   "results": "{\"t\": \"2026-10-17T10:14:59Z\", \"tool\": \"grep\", \"query\": \"operad|nonsymmetric|dendroidal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"87457169ff2dfc4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary category/arrow/monoidal or simplicial-object declarations, not the quasicategorical planar operation-space construction or coherent transport assertion. Read CategoryTheory/Comma/Arrow.lean:29-65, Endomorphism.lean:15-52, Monoidal/Transport.lean:25-65, and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:20-65; these use ordinary categories or ordinary enriched nerves. Limits/Preserves/Bifunctor.lean:214-238 only proves an ordinary bifunctor colimit assertion.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Aritywise weak equivalences of homotopy coherent planar operads preserve spaces of algebra structures with fixed colors",
+   "results": "{\"t\": \"2026-10-17T10:14:59Z\", \"tool\": \"leansearch\", \"query\": \"Aritywise weak equivalences of homotopy coherent planar operads preserve spaces of algebra structures with fixed colors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences\", \"HomotopicalAlgebra.instWeakEquivalenceOppositeOp\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.weakEquivalences_op_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.weakEquivalences_op\", \"HomotopicalAlgebra.instWeakEquivalenceCompOfIsStableUnderCompositionWeakEquivalences\"], \"digest\": \"0be74b0086dd4a61\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary category/arrow/monoidal or simplicial-object declarations, not the quasicategorical planar operation-space construction or coherent transport assertion. Read CategoryTheory/Comma/Arrow.lean:29-65, Endomorphism.lean:15-52, Monoidal/Transport.lean:25-65, and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:20-65; these use ordinary categories or ordinary enriched nerves. Limits/Preserves/Bifunctor.lean:214-238 only proves an ordinary bifunctor colimit assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-17T10:14:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no operad declaration found by this name/concept search."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of one colored nonsymmetric infinity operads which is an equivalence on every finite arity operation space is an equivalence and induces equivalences on derived mapping spaces under a fixed suboperad",
+   "results": "{\"t\": \"2026-10-17T10:15:10Z\", \"tool\": \"leanfinder\", \"query\": \"A map of one colored nonsymmetric infinity operads which is an equivalence on every finite arity operation space is an equivalence and induces equivalences on derived mapping spaces under a fixed suboperad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.opEquivalence\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"SimplicialObject.opEquivalence\", \"EquivFunctor.mapEquiv\", \"SimplicialObject.opEquivalence_functor\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"AlgebraicTopology.DoldKan.Compatibility.τ₀\", \"CategoryTheory.Equivalence.mkHom\"], \"digest\": \"99be611719244a3b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary category/arrow/monoidal or simplicial-object declarations, not the quasicategorical planar operation-space construction or coherent transport assertion. Read CategoryTheory/Comma/Arrow.lean:29-65, Endomorphism.lean:15-52, Monoidal/Transport.lean:25-65, and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:20-65; these use ordinary categories or ordinary enriched nerves. Limits/Preserves/Bifunctor.lean:214-238 only proves an ordinary bifunctor colimit assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful and essentially surjective morphisms of infinity operads are equivalences; maps out of any operad preserve these equivalences",
+   "results": "{\"t\": \"2026-10-17T10:15:22Z\", \"tool\": \"leanfinder\", \"query\": \"Fully faithful and essentially surjective morphisms of infinity operads are equivalences; maps out of any operad preserve these equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.nerveFunctor.full\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"SSet.opEquivalence_functor\", \"SSet.opEquivalence\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"d489bc52a7207866\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary category/arrow/monoidal or simplicial-object declarations, not the quasicategorical planar operation-space construction or coherent transport assertion. Read CategoryTheory/Comma/Arrow.lean:29-65, Endomorphism.lean:15-52, Monoidal/Transport.lean:25-65, and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:20-65; these use ordinary categories or ordinary enriched nerves. Limits/Preserves/Bifunctor.lean:214-238 only proves an ordinary bifunctor colimit assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-monoidal-yoneda-embedding",
@@ -80,5 +238,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-planar-multilinear-extension",
+  "worker": "stage1",
+  "summary": "No exact project declaration or Mathlib attachment. Keep the statement; construct the relative endomorphism planar operad as one generic statement-only helper, verify separately cocontinuous operations are closed under disjoint substitution, prove the operator projection is an equivalence, and impose the prescribed operation comparisons by an explicit homotopy-pullback corner. This retains nullary vertices, unary identities and all higher coherences.",
+  "blueprint": "The ancestry points to paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent finite-level enriched adjunction. In the extracted monoidal-Yoneda tool, these six steps realize precisely reduced-input tree lifting, before unused-input projection pullback. The unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Step 5 applies only the generic implication from displayed simplicial inverse homotopies to weak equivalence for a coordinatewise product; it does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q128-6b80ef1b3",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q128-6b80ef1b3 (reviewer sub-agent of L); spot-checked: Full review passed mathematically and source-by-source. Step 5 incorrectly called the product over all r≠1 finite; corrected item JSON is in fixes/dag/nodes/sec-six-functors/lem-coef-planar-multilinear-extension.json, changing this to an arbitrary possibly infinite product inverse. No nodes dropped.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,7 +1,7 @@
 {
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-segal-localization-model",
@@ -9,9 +9,150 @@
   "group": "N8"
  },
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Left fibrations are closed under composition and degreewise pullback, directly from [def-coef-infinity-fibrations]. For a left-horn lifting problem for $pq$, first lift its image in $E_F$ along $p$, then lift the resulting simplex along $q$; the second lift solves the original problem. For a pullback, lift in the original left fibration and pair the lift with the prescribed base simplex. In particular $pq$ is a left fibration. These operations preserve smallness. Since a left fibration lifts all inner horns, its total space is a quasicategory whenever its base is one.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.0.0.3; elementary lifting argument"
+   }
+  },
+  {
+   "text": "Let $\\mathcal C_B$ be the ordinary category of small left fibrations over $B$, with all maps over $B$. Give it the weak equivalences $W$ and fibrations $P$ inherited from the covariant model structure of [lem-coef-simplicial-right-fibration-presentation]. Apply [lem-coef-contravariant-fibrations-between-right-fibrations] over $B^{\\mathrm{op}}$. The opposite equivalence in the presentation converts this criterion into: a map in $\\mathcal C_B$ lies in $P$ exactly when its underlying map is a left fibration. This uses opposites only as an ordinary equivalence of model categories. The terminal object is $1_B$. Model weak equivalences satisfy retract closure and two-out-of-three. Model fibrations and trivial fibrations are stable under pullback and composition, since their right lifting properties are. Pulling back a fibration in $\\mathcal C_B$ remains in $\\mathcal C_B$ by step 1. Factor any map in $\\mathcal C_B$ in the ambient model category as a trivial cofibration followed by a fibration; the intermediate object is fibrant because its target is fibrant. Thus $\\mathcal C_B$ satisfies every all-fibrant Brown hypothesis of [lem-coef-brown-slice-fraction-calculus].",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-contravariant-fibrations-between-right-fibrations",
+    "lem-coef-brown-slice-fraction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.3.14 and its covariant dual; simplicial covariant model structure"
+   }
+  },
+  {
+   "text": "Write $\\mathcal C_B(E_F)$ for the Brown fibrant slice: its objects are fibrations $X\\to E_F$ in $\\mathcal C_B$. By step 2 these are exactly small left fibrations over $E_F$, with the same strict maps. We must also compare weak equivalences. If $u:X\\to Y$ is such a map, then over $b\\in B$ both $X_b\\to (E_F)_b$ and $Y_b\\to (E_F)_b$ are left fibrations. The fiber $(E_F)_b\\to\\Delta^0$ is itself a left fibration, so HTT Lemma 2.1.3.3 (applied over the Kan point) makes $(E_F)_b$ Kan; applying the same lemma to the two displayed maps then makes their total spaces Kan and the maps Kan fibrations. Equivalently, apply [lem-cbc-right-fibration-space-fiber] to their opposites. (Opposite reverses horn indices and preserves all-horn lifting.) By [lem-coef-kan-fibration-arbitrary-base-fibers], $u_b$ is a weak homotopy equivalence exactly when $u_e:X_e\\to Y_e$ is one for every vertex $e\\in(E_F)_b$. The fiberwise criterion in [lem-coef-simplicial-right-fibration-presentation] now says that $u$ is a weak equivalence over $B$ exactly when it is a covariant weak equivalence over $E_F$. This proves equality of relative categories, including their weak equivalences; no total-space equivalence has been inferred merely from equality of point sets.",
+   "uses": [
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-coef-kan-fibration-arbitrary-base-fibers",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 2.1.3.3 and Corollary 2.2.3.13, covariant versions; fiberwise Kan-fibration criterion"
+   }
+  },
+  {
+   "text": "For any of the bases $A=B,E_F$, every object of the covariant model category is cofibrant, and its fibrant objects are the left fibrations, by [lem-coef-simplicial-right-fibration-presentation]. The fibrant-subcategory and coherent-nerve assertions of [lem-coef-simplicial-model-nerve-localization] identify $L\\mathcal C_A$ with the coherent nerve of the simplicial category of left fibrations over $A$, with its actual over-$A$ mapping complexes. These are equivalences of infinity categories and universal localizations on entire functor categories. Then [lem-coef-space-transport-classification] gives $L\\mathcal C_A\\simeq\\operatorname{Fun}(A,\\mathcal S)$. At $A=B$ it takes $E_F$ to $F$ and a map $X\\to E_F$ to the corresponding coherent transformation of classifying functors. This also fixes the comparison on every higher simplex.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2; coherent simplicial-model localization comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-brown-slice-fraction-calculus] to the all-fibrant category $\\mathcal C_B$ verified in step 2 and its object $E_F$. It gives $L(\\mathcal C_B(E_F))\\simeq(L\\mathcal C_B)_{/E_F}$, induced by localization of the arrows themselves. By steps 3 and 4 the left side is $\\operatorname{Fun}(E_F,\\mathcal S)$, and the right side is $\\operatorname{Fun}(B,\\mathcal S)_{/F}$. To identify the latter slice explicitly, apply the classifier equivalence to an arrow and its entire coherent triangle; a quasi-inverse on slices is obtained by applying an inverse classifier and then composing its target with the counit equivalence to $E_F$. The unit and counit give inverse equivalences on slices, including triangle homotopies and higher simplices. An object $q:E_G\\to E_F$ is sent to the arrow from the classifying functor of $pq$ to $F$, since the Brown comparison is induced by precisely this arrow in $\\mathcal C_B$. This is the asserted assignment, rather than just an abstract equivalence between the two categories.",
+   "uses": [
+    "lem-coef-brown-slice-fraction-calculus",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.18 and Corollary 7.6.13; canonical localization functor on fibrant slices"
+   }
+  },
+  {
+   "text": "For the inverse, represent an arbitrary coherent arrow $T\\to F$ in the Brown fibrant slice using the essential surjectivity in [lem-coef-brown-slice-fraction-calculus]. This yields a left fibration $X\\to E_F$ whose localized arrow classifies $T\\to F$. On the fiber at $b$ it is a left fibration $X_b\\to(E_F)_b$. As in step 3, $(E_F)_b$ is Kan by HTT Lemma 2.1.3.3 applied to the fiber over the Kan point, and the same lemma makes $X_b$ Kan and $X_b\\to(E_F)_b$ a Kan fibration. Thus, equivalently by the opposite form of [lem-cbc-right-fibration-space-fiber], its strict fiber at $e$ represents its homotopy fiber. Thus its classifying functor on $E_F$ has value $\\operatorname{hofib}_e(T(b)\\to F(b))$. The naturality of that strict-to-homotopy-fiber comparison and [lem-coef-space-transport-classification] include transport along paths in $F(b)$, along arrows in $B$, and all higher simplices. These fibers refer to the arrow $T\\to F$ together with its slice coherence, so no arbitrary non-coherent choices of pointwise fibers define the inverse.",
+   "uses": [
+    "lem-coef-brown-slice-fraction-calculus",
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13, combined with HTT Lemma 2.1.3.3 and the homotopy-fiber comparison"
+   }
+  },
+  {
+   "text": "For the given $G$, restrict $q$ to the fiber $(E_F)_b$ of $p$. This is again a left fibration, classifying $G|_{(E_F)_b}$ by the base-pullback clause of [lem-coef-space-transport-classification]. By [lem-cbc-right-fibration-space-fiber] applied to opposites its total space $(E_G)_b$ is Kan and is the total space of that space-family. The fiber clauses of classification identify $(E_F)_b\\simeq F(b)$ and $(E_G)_b\\simeq T_G(b)$, so $T_G(b)\\simeq\\int_{e\\in F(b)}G(e)$. Here the integral means the total space of the restricted family, as in the statement; it does not invoke a separate colimit theorem. The map to $F(b)$ is the restriction of $q$. Since all these restrictions are pullbacks of the same $q$, their transports and coherence are the ones of $T_G\\to F$ from step 5.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 and Lemma 2.1.3.3; restriction and fiber comparisons"
+   }
+  },
+  {
+   "text": "For $h:B\\prime\\to B$, pull back both $p$ and $q$ degreewise. The identity $h^*(pq)=(h^*p)(h^*q)$ is the associativity identification of the pullbacks. The same identity holds on maps and on maps with any simplicial parameter. Pullback between the ordinary categories of left fibrations preserves weak equivalences by the vertex-fiber criterion of [lem-coef-simplicial-right-fibration-presentation]. Therefore it descends to their coherent localizations by the entire-functor universal property in [lem-coef-simplicial-model-nerve-localization]. The Brown comparison of step 5 is induced by the localization of these same arrows, so the identity supplies the comparison also on the localized slices. The base-pullback clause of [lem-coef-space-transport-classification] identifies this with restriction of $G$ and $T_G\\to F$. Composition of several base changes is coherent because the identifications are induced by the same degreewise tuples, whose rebracketing satisfies associativity.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2, naturality under base pullback; localization universal property"
+   }
+  },
+  {
+   "text": "For a map $F\\prime\\to F$ on the same $B$, the classification [lem-coef-space-transport-classification] represents its coherent arrow, up to equivalence in the slice, by a strict map $f:E_{F\\prime}\\to E_F$. Indeed a vertex of the stated Kan mapping complex is exactly such a map. Pull back $q$ along $f$. In $\\mathcal C_B$ this is an ordinary pullback along the fibration $q$, so [lem-coef-brown-fibrant-localization-pullbacks] sends its entire cone to a limiting coherent square. Under classification that square is $T_G\\times_F F\\prime\\to F\\prime$, with its specified projection. Over $E_{F\\prime}$ it classifies the restricted family by the base-pullback clause of classification. This proves the second pullback compatibility. A different representative of the same arrow gives the same result through the localization universal property; maps of the pullback squares and simplicial parameters give the higher coherence, as stipulated by the pullback-localization theorem.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-brown-fibrant-localization-pullbacks",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.18 and Corollary 7.5.20; naturality for maps of fibrant pullback squares"
+   }
+  },
+  {
+   "text": "For a second family $r:E_H\\to E_{F_2}$ over a small base $B_2$, the external product is represented over $B\\times B_2$ by $q\\times r:E_G\\times E_H\\to E_F\\times E_{F_2}$. Coordinatewise horn lifting proves that $p\\times p_2:E_F\\times E_{F_2}\\to B\\times B_2$ and $q\\times r$ are left fibrations. Their composition is exactly $(pq)\\times(p_2r)$ on every simplex. In $\\mathcal C_{B\\times B_2}$ each of these products is the product of the two objects pulled back from the separate bases. The terminal and pullback assertions of [lem-coef-brown-fibrant-localization-pullbacks] identify this strict product cone with a product cone after localization. Thus [lem-coef-space-transport-classification] identifies these objects with the external products of the classified functors, and step 5 takes the product family to the product total space with its map to $F\\boxtimes F_2$. The coordinatewise formulas commute with maps and simplex operators, giving compatibility on transformations and higher simplices. If $B=\\varnothing$, its only total simplicial set is empty, so both categories in step 5 are terminal. If $B=\\Delta^0$, a left fibration over $B$ is a Kan complex and step 5 is exactly $\\operatorname{Fun}(F(*),\\mathcal S)\\simeq\\mathcal S_{/F(*)}$. Empty values and empty fibers remain allowed throughout.",
+   "uses": [
+    "lem-coef-brown-fibrant-localization-pullbacks",
+    "lem-coef-space-transport-classification",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.18 and Corollary 7.5.20; elementary product horn lifting and empty/point specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-contravariant-fibrations-between-right-fibrations",
+  "lem-coef-brown-slice-fraction-calculus",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-kan-fibration-arbitrary-base-fibers",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-space-transport-classification",
+  "lem-coef-brown-fibrant-localization-pullbacks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Brown fibrant-slice localization (Theorem 7.5.18, Corollary 7.6.13), applied to the existing covariant straightening presentation; full application and compatibilities written here. Sources read online; archival copies absent."
+ },
  "id": "lem-coef-left-fibration-dependent-sum",
  "kind": "statement",
  "title": "Composition of left fibrations and dependent total spaces",
@@ -58,12 +199,47 @@
    "results": "{\"t\": \"2026-10-17T07:58:34Z\", \"tool\": \"leanfinder\", \"query\": \"Dependent sum straightening slice equivalence Fun E spaces equivalent Fun B spaces over F\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Equiv.piCongrFiberwise\", \"Equiv.psigmaEquivSigma\", \"Equiv.sigmaFiberEquiv_apply\", \"Equiv.sigmaSigmaSubtypeEq_apply\", \"Equiv.sigmaFiberEquiv\", \"Equiv.piCongrSigmaFiber\", \"Equiv.sigmaCongrLeft\", \"Equiv.sigmaEquivProdOfEquiv\"], \"digest\": \"93ad96d833835390\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary Grothendieck constructions and sigma-type equivalences do not identify the full infinity category of space-valued functors with its slice."
+  },
+  {
+   "tool": "grep",
+   "query": "dependent.?sum|left.?fibration|unstraighten",
+   "results": "{\"t\": \"2026-10-17T11:24:26Z\", \"tool\": \"grep\", \"query\": \"dependent.?sum|left.?fibration|unstraighten\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary categorical Grothendieck constructions, not coherent space-valued straightening or its slice. Read CategoryTheory/Grothendieck.lean:318-346: compAsSmallFunctorEquivalence only changes the universe of the category-valued fibers. The AlgebraicTopology grep finds no left-fibration/dependent-sum/unstraightening declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Space valued functors on a Grothendieck construction correspond to functors over its classifying functor",
+   "results": "{\"t\": \"2026-10-17T11:24:27Z\", \"tool\": \"leansearch\", \"query\": \"Space valued functors on a Grothendieck construction correspond to functors over its classifying functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.Grothendieck.category\", \"CategoryTheory.Pseudofunctor.Grothendieck\", \"CategoryTheory.Pseudofunctor.Grothendieck.categoryStruct\", \"CategoryTheory.Grothendieck.functorFrom\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\", \"CategoryTheory.Grothendieck.instCategory\", \"CategoryTheory.Grothendieck.functor\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instHasFibersForget\"], \"digest\": \"223921c31bf3843f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary categorical Grothendieck constructions, not coherent space-valued straightening or its slice. Read CategoryTheory/Grothendieck.lean:318-346: compAsSmallFunctorEquivalence only changes the universe of the category-valued fibers. The AlgebraicTopology grep finds no left-fibration/dependent-sum/unstraightening declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dependent sum space valued functors over a left fibration equivalence with slice functor category",
+   "results": "{\"t\": \"2026-10-17T11:24:33Z\", \"tool\": \"leanfinder\", \"query\": \"Dependent sum space valued functors over a left fibration equivalence with slice functor category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"HasFibers.canonical\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber\", \"CategoryTheory.Grothendieck.functorFrom\", \"CategoryTheory.Grothendieck.grothendieckTypeToCat\", \"HasFibers.ι\", \"HasFibers.inducedFunctor\", \"CategoryTheory.Grothendieck.functorFrom_obj\"], \"digest\": \"3507a8f8624d3ca3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary categorical Grothendieck constructions, not coherent space-valued straightening or its slice. Read CategoryTheory/Grothendieck.lean:318-346: compAsSmallFunctorEquivalence only changes the universe of the category-valued fibers. The AlgebraicTopology grep finds no left-fibration/dependent-sum/unstraightening declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Space valued functors on the total space of a left fibration are equivalent to the slice over the classifying functor",
+   "results": "{\"t\": \"2026-10-17T11:26:04Z\", \"tool\": \"leanfinder\", \"query\": \"Space valued functors on the total space of a left fibration are equivalent to the slice over the classifying functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"HasFibers.canonical\", \"HasFibers.inducedFunctor.natIso\", \"HasFibers.inducedFunctor\", \"CategoryTheory.Grothendieck.grothendieckTypeToCat\", \"HasFibers.ι\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber\", \"CategoryTheory.Grothendieck.grothendieckTypeToCatInverse\"], \"digest\": \"692ac5596a85e255\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary categorical Grothendieck constructions, not coherent space-valued straightening or its slice. Read CategoryTheory/Grothendieck.lean:318-346: compAsSmallFunctorEquivalence only changes the universe of the category-valued fibers. The AlgebraicTopology grep finds no left-fibration/dependent-sum/unstraightening declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "compAsSmallFunctorEquivalence|pseudofunctor.*Grothendieck|grothendieckTypeToCat",
+   "results": "{\"t\": \"2026-10-17T11:40:23Z\", \"tool\": \"grep\", \"query\": \"compAsSmallFunctorEquivalence|pseudofunctor.*Grothendieck|grothendieckTypeToCat\", \"sub\": \"CategoryTheory/Grothendieck.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"318\", \"320\", \"327\", \"329\", \"341\"], \"digest\": \"8cb415f32b0bc852\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary categorical Grothendieck constructions, not coherent space-valued straightening or its slice. Read CategoryTheory/Grothendieck.lean:318-346: compAsSmallFunctorEquivalence only changes the universe of the category-valued fibers. The AlgebraicTopology grep finds no left-fibration/dependent-sum/unstraightening declaration."
   }
  ],
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: composition of the tuple left fibration with the coefficient-family left fibration and the resulting total-space presheaf.",
+   "place": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: mapping-complex adjunction before the derived inverse limit. In the inherited algebroid Segal-localization branch this item justifies composition of tuple and coefficient-family left fibrations and the total-space presheaf; it does not replace the integral adjunction proof.",
    "via": [
     "lem-coef-algebroid-segal-localization-model",
     "lem-coef-algebroid-bilinear-colimits",
@@ -76,5 +252,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-left-fibration-dependent-sum",
+  "worker": "stage1",
+  "summary": "Ten-step split with zero new nodes: elementary left-horn composition; covariant Brown category and its fibrant slice; explicit equality of weak equivalences by Kan-fibration fiber detection; coherent slice equivalence; inverse homotopy-fiber family; total-space formula; both base changes, external products and empty/point cases. Every non-elementary input is an existing node. Statement unchanged.",
+  "blueprint": "Historical prop-coef-integral-exceptional-adjoint paragraph 2 and its inherited enrichment/algebroid ancestry. Read main-20261015 proof in sk-thm-sf-package: its RHom comparison is the historical root, not a claim that it explicitly contains left fibrations. Steps provide the dependent-total-space infrastructure of lem-coef-algebroid-segal-localization-model. Whole-blueprint searches for left fibration, dependent sum, slice model and slice equivalence found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic one-sided fibration over a Kan base is a Kan fibration and its strict fibers compute homotopy fibers, applied to opposites. This is foundational space calculus, not a replacement of any coefficient-unit step; the unit has no substitute statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-right-fibration-space-fiber"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-d3ccfe052",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-d3ccfe052 (reviewer sub-agent of L); spot-checked: Found and repaired an omitted hypothesis justification in steps 3 and 6: fibers of left fibrations over vertices are Kan by HTT Lemma 2.1.3.3 applied over the Kan point. Corrected DAG JSON is under fixes/dag/nodes/sec-six-functors/lem-coef-left-fibration-dependent-sum.json; review.md records all source, dependency, edge-case, route, and cycle checks.; 1 file(s) fixed by the reviewer"
  }
 }

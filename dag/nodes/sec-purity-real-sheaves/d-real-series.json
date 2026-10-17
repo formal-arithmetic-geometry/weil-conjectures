@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "d-real-series",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-d-real-series"
+  ]
  },
  "kind": "definition",
  "title": "Radius of a formal series",
@@ -12,13 +14,76 @@
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-series/d-real-series.md",
   "place": "node d-real-series, order 2605"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-d-real-series"
+ ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-series/d-real-series.md",
+  "place": "node d-real-series, order 2605; definition statement duplicated by sk-d-real-series"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "formal power series radius of convergence nonnegative coefficients coefficientwise products exponentials locally finite infinite products",
+   "results": "8 hits: FormalMultilinearSeries.le_radius_pi; PowerSeries.WithPiTopology.summable_prod_of_tendsto_order_atTop_nhds_top; PowerSeries.WithPiTopology.multipliable_one_add_of_tendsto_order_atTop_nhds_top; Nat.Partition.multipliable_genFun; FormalMultilinearSeries.radius_pi_le; one_le_formalMultilinearSeries_geometric_radius; FormalMultilinearSeries.radius_pi_eq_iInf; FormalMultilinearSeries.radius_prod_eq_min. None states the full PowerSeries definition or nonnegative predicate.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; candidates concern finite multilinear products or infinite products with order tending to infinity."
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.radius, PowerSeries.HasNonnegCoeffs, PowerSeries.exp, PowerSeries.coeff_mul",
+   "results": "0 hits; unknown identifier 'PowerSeries.radius'.",
+   "date": "2026-10-17",
+   "verdict": "unavailable for the project declarations; source defines PowerSeries.radius and HasNonnegCoeffs."
+  },
+  {
+   "tool": "grep",
+   "query": "(def radius|def HasNonnegCoeffs|def exp|coeff_mul|tprod)",
+   "results": "0 hits in Mathlib/RingTheory/PowerSeries.",
+   "date": "2026-10-17",
+   "verdict": "no exact match in the requested subdirectory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "formal power series radius of convergence and nonnegative coefficients",
+   "results": "8 hits including FormalMultilinearSeries.radius and radius_eq_top_of_summable_norm; no PowerSeries.radius or HasNonnegCoeffs.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic FormalMultilinearSeries radius only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "PowerSeries radius definition supremum of real numbers with summable norm coefficient power series and nonnegative complex coefficients",
+   "results": "8 hits including FormalMultilinearSeries.radius, le_radius_of_summable, radius_eq_top_of_summable_norm; no full PowerSeries definition.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic radius candidates do not include the complex nonnegative-coefficient predicate or all conventions."
+  },
+  {
+   "tool": "loogle",
+   "query": "FormalMultilinearSeries.radius, PowerSeries.exp, PowerSeries.coeff_mul",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "PowerSeries\\.(radius|HasNonnegCoeffs|exp)|coeff_mul",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; the project extension is not in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "PowerSeries radius supremum convergence nonnegative coefficients exponential coefficientwise product",
+   "results": "8 hits including FormalMultilinearSeries.radius, FormalMultilinearSeries.le_radius_pi, NormedSpace.hasFPowerSeriesOnBall_exp_of_radius_pos; no full item declaration.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; only generic radius, product, and exponential analytic results."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -37,5 +102,21 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-series"
+ "unit": "sk-d-real-series",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "d-real-series",
+  "worker": "Q60",
+  "summary": "The item is textually identical to the existing node sk-d-real-series from the synchronized main-20261015 snapshot. I found no distinct child notion to create: the radius and nonnegative-coefficient declarations are already recorded on sk-d-real-series, while the product, exponential, and locally finite coefficient conventions are part of the same definition statement. The item therefore cites sk-d-real-series as its statement dependency and leaves no proof steps or new nodes; the maintainer can merge the duplicate while preserving all existing citers of d-real-series.",
+  "blueprint": "The imported d-real-series definition is the master-snapshot counterpart of sk-d-real-series; the full statement and the synchronized section text are identical. The duplicate search is recorded in same_as, and the existing closed declarations are attached to sk-d-real-series rather than copied.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q60-766d897b0",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-766d897b0 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited definition, blueprint sources, and unit/chapter route. The sole dependency states the identical definition; no new nodes, cycles, target changes, or forbidden SGA uses. Checked radius and formal-product edge cases. Recorded declarations cover only radius and nonnegative coefficients, as the report acknowledges. Full review written to review.md."
+ }
 }

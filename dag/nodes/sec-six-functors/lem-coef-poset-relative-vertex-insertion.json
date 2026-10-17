@@ -12,9 +12,75 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-slice-right-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $M=(A_{\\leq a}\\times B)\\cup(A_{<a}\\times\\{\\infty\\})$ and $T=A_{\\geq a}$. Minimality of $a$ in the complement of the order ideal gives $A_{<a}\\subseteq L$. These are exactly the vertices strictly below and strictly above $(a,\\infty)$, with the upper vertices indexed by $(t,\\infty')$, $t\\in T$. Every element of $M$ is below every such upper vertex. Thus $N(M)\\star N(T)$ is a simplicial subset of $N(Q_L)$. Write $p=F|_{N(T)}$ and $S=\\mathcal E_{0,/p}$. The definition of the join slice turns the restriction of $U$ to this join into $h:N(M)\\to S$: on an $n$-simplex it is the restriction to its concatenation with $N(T)$. Its source lies in $\\mathcal E_0$ because all lower vertices do, and $\\mathcal E_0$ is full. Restriction to $a\\in T$ gives $v:N(M)\\to R$; on $C=\\{a\\}\\times B$ it is precisely $\\rho_U$, including every simplex.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15(a), lower and upper links in the vertex induction; relative version for (b)"
+   }
+  },
+  {
+   "text": "Form the simplicial pushout $K=N(M)\\amalg_{N(C)}N(B^{\\triangleleft})$, identifying $C$ with $B$. The maps $v$ and $\\beta$ agree on the identified subcomplex, so define $w:K\\to R$. The canonical maps from both factors into $K$ are inclusions, since this pushout is computed degreewise along injections. The set of vertices of $M$ has cardinality at most $|A|(|B|+1)$. If $\\kappa=\\aleph_0$, $M$ is finite and a nondegenerate chain has bounded length, so $N(M)$ has finitely many nondegenerate simplices. For uncountable regular $\\kappa$, each finite-chain set has cardinality $<\\kappa$, and their countable union still does. The same reasoning applies to $B^{\\triangleleft}$. Every simplex of $K$ comes from one of the two factors, so $K$ is $\\kappa$-small in the stated nondegenerate-simplex convention.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15(b), explicit augmented lower-link diagram for the comma variation"
+   }
+  },
+  {
+   "text": "Apply the definition of $\\kappa$-filteredness of $R$ to $w:K\\to R$ to obtain a coherent cocone, hence a vertex of its fixed-diagram coherent cocone category $P_w$. The join-slice/cocone comparison gives a functor equivalence $J_w\\to P_w$, where a vertex of $J_w$ is a map $K\\star\\Delta^0\\to R$ restricting exactly to $w$. Apply a quasi-inverse to the cocone vertex to obtain $\\bar w:K\\star\\Delta^0\\to R$ with $\\bar w|_K=w$; this boundary equality is part of membership in $J_w$. Denote its new final vertex by $y$. Restrict to $N(M)\\star\\{y\\}$ to get $c:N(M)\\star\\Delta^0\\to R$ with $c|_{N(M)}=v$. The other factor gives a map $N(B^{\\triangleleft})\\star\\{y\\}\\to R$ extending $\\beta$. Only a cocone is used; no colimit is required.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15(a)-(b), filteredness on the augmented lower link; Proposition 4.2.1.5, printed p.241, converts the coherent cocone to a join extension with fixed boundary"
+   }
+  },
+  {
+   "text": "The poset $T=A_{\\geq a}$ has least element $a$. The least-vertex slice-restriction theorem gives a trivial Kan fibration $r:S\\to R$. Apply its stated relative lifting property with simplicial inclusion $N(M)\\subseteq N(M)\\star\\Delta^0$, prescribed map $h:N(M)\\to S$, and bottom map $c$. The equality $rh=v=c|_{N(M)}$ makes the lifting square commute. We obtain $H:N(M)\\star\\Delta^0\\to S$ with $H|_{N(M)}=h$ and $rH=c$. Crucially the entire lower diagram is held fixed, not just the new cone vertex; therefore the already prescribed mixed simplices with every upper vertex are preserved.",
+   "uses": [
+    "lem-coef-initial-poset-slice-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15(a), restriction along the least upper vertex; relative boundary lift needed for (b)"
+   }
+  },
+  {
+   "text": "Unpack the join-slice definition: $H$ is a map $(N(M)\\star\\{y\\})\\star N(T)\\to\\mathcal E$ restricting to $p$ on $N(T)$ and to the old $U$ on $N(M)\\star N(T)$. The equality of these joins under reassociation follows directly from concatenating their three ordered blocks of vertices. Every chain newly added to $Q_L$ is uniquely a lower chain in $M$, then $(a,\\infty)$, then an upper chain in $T$, allowing empty lower or upper blocks. Hence the new join and $N(Q_L)$ have intersection exactly $N(M)\\star N(T)$ and union $N(Q_{L+a})$. Glue the two maps along their equal restrictions to define $U'$. Its new vertex is the source of $H(y)\\in S$, hence lies in $\\mathcal E_0$. Define $\\beta'$ by restricting $\\bar w$ to $N(B^{\\triangleleft})\\star\\{y\\}=N((B^{\\triangleright})^{\\triangleleft})$ (ordered $z<b<y$). It restricts to $\\beta$ on the old left cone. On $N(B)\\star\\{y\\}$ it is $c$; the equality $rH=c$ identifies this exactly with the final-vertex row map $\\rho_{U'}$. All equalities hold degreewise, including degeneracies and higher triangles. When $B$ or $M$ is empty, the same joins allow empty blocks; in particular the restriction on $\\{z,y\\}$ is the required edge from $d$ to the new row object.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15(b), explicit reconstruction of the relative extension from the lifted lower cone"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-initial-poset-slice-restriction",
+  "lem-coef-join-slice-cocone-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 5.3.5.15, proof (b), local relative vertex insertion; the source is online but not archived"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +116,52 @@
    "results": "{\"t\": \"2026-10-17T08:43:23Z\", \"tool\": \"leanfinder\", \"query\": \"Fill the augmented lower link at a vertex of a finite partially ordered diagram of an infinity category using filteredness and restriction of a join slice along a least vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Augmented.StandardSimplex.shift\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"PartialOrder.mem_range_nerve_σ_iff\", \"AugmentedSimplexCategory.inr'_eval\", \"CategoryTheory.SimplicialThickening\", \"AugmentedSimplexCategory.inl'_eval\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\"], \"digest\": \"563cb4cec218e833\"}",
    "date": "2026-10-17",
    "verdict": "No match. Read CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean:15-18,30-32,127 and CategoryTheory/Filtered/Basic.lean:286-311: these extend an ordinary functor on a linear successor interval or choose an ordinary finite cocone. They do not extend coherent diagrams on an arbitrary finite poset with prescribed join-slice boundary. Other hits are simplex degeneracies and strict Segal identities, not this quasicategorical extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative extension of a finite poset coherent diagram by inserting one vertex with prescribed incoming arrow into a filtered join slice",
+   "results": "{\"t\": \"2026-10-17T11:34:25Z\", \"tool\": \"leanfinder\", \"query\": \"relative extension of a finite poset coherent diagram by inserting one vertex with prescribed incoming arrow into a filtered join slice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.SuccStruct.extendToSucc\", \"CategoryTheory.SmallObject.SuccStruct.extendToSucc.obj\", \"CategoryTheory.SmallObject.SuccStruct.extendToSucc.map\", \"CategoryTheory.SmallObject.coconeOfLE\", \"CategoryTheory.SmallObject.SuccStruct.arrowSucc_extendToSucc\", \"CategoryTheory.SmallObject.SuccStruct.extendToSucc_obj_eq\", \"CategoryTheory.SmallObject.SuccStruct.ofCocone\", \"CategoryTheory.SmallObject.SuccStruct.arrowMap_extendToSucc\"], \"digest\": \"692fe21abfad8bea\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary successor-interval functors and ordinary filtered cocones do not give the relative quasicategorical join-slice extension. Read ExtendToSucc.lean:15-48, Quasicategory/Basic.lean:34-50, and Filtered/Basic.lean:286-311; inner-horn fillers alone do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, filtered slice, join",
+   "results": "{\"t\": \"2026-10-17T11:34:25Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, filtered slice, join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `filtered`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Invalid query: loogle: Unknown identifier `filtered`; not evidence of absence; replaced by the subsequent quoted SSet/slice query."
+  },
+  {
+   "tool": "grep",
+   "query": "vertex.*insert|insert.*vertex|quasicategory.*filtered",
+   "results": "{\"t\": \"2026-10-17T11:34:26Z\", \"tool\": \"grep\", \"query\": \"vertex.*insert|insert.*vertex|quasicategory.*filtered\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary successor-interval functors and ordinary filtered cocones do not give the relative quasicategorical join-slice extension. Read ExtendToSucc.lean:15-48, Quasicategory/Basic.lean:34-50, and Filtered/Basic.lean:286-311; inner-horn fillers alone do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered quasicategory cocone extending prescribed lower link through trivial Kan fibration of join slices",
+   "results": "{\"t\": \"2026-10-17T11:35:46Z\", \"tool\": \"leanfinder\", \"query\": \"filtered quasicategory cocone extending prescribed lower link through trivial Kan fibration of join slices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"CategoryTheory.IsFiltered.cocone\", \"SSet.Quasicategory.hornFilling'\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.cocone\", \"CategoryTheory.IsFiltered.cocone_nonempty\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.IsFiltered.rightToMax\", \"SSet.horn₃₁.desc.multicofork\"], \"digest\": \"78baca46e66c06cd\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary successor-interval functors and ordinary filtered cocones do not give the relative quasicategorical join-slice extension. Read ExtendToSucc.lean:15-48, Quasicategory/Basic.lean:34-50, and Filtered/Basic.lean:286-311; inner-horn fillers alone do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"slice\"",
+   "results": "{\"t\": \"2026-10-17T11:35:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"slice\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary successor-interval functors and ordinary filtered cocones do not give the relative quasicategorical join-slice extension. Read ExtendToSucc.lean:15-48, Quasicategory/Basic.lean:34-50, and Filtered/Basic.lean:286-311; inner-horn fillers alone do not state this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extend coherent poset diagram in quasicategory with filtered slice and fixed boundary",
+   "results": "{\"t\": \"2026-10-17T11:35:47Z\", \"tool\": \"leansearch\", \"query\": \"extend coherent poset diagram in quasicategory with filtered slice and fixed boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFiltered.cocone_nonempty\", \"PartOrdEmb.Limits.instHasColimit\", \"CategoryTheory.Comma.isFiltered_of_final\", \"PartOrdEmb.Limits.instHasFilteredColimitsOfSize\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.IsFiltered.sup_exists\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\", \"CategoryTheory.IsFiltered.filteredClosure.coeq\"], \"digest\": \"d7855c2946aa7819\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary successor-interval functors and ordinary filtered cocones do not give the relative quasicategorical join-slice extension. Read ExtendToSucc.lean:15-48, Quasicategory/Basic.lean:34-50, and Filtered/Basic.lean:286-311; inner-horn fillers alone do not state this result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ind-finite-poset-realization",
@@ -82,5 +190,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-poset-relative-vertex-insertion",
+  "worker": "stage1",
+  "summary": "Retained the item statement and prior valid searches. Repaired the gluing gap by lifting the entire filtered lower cocone through least-vertex slice restriction relative to N(M), then reconstructing U prime by explicit simplicial join gluing. Removed unrelated retained dependency/search contamination; no new nodes. Continuation: made the coherent-cocone to sharp-join conversion explicit using the existing fixed-diagram join-slice/cocone comparison; no extra hypotheses or nodes.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, derived coefficient adjunction paragraph: inherited auxiliary presentable-category infrastructure through the recorded ancestry. The local Ind-diagram argument is HTT Proposition 5.3.5.15(a), with the distinguished incoming arrow needed in (b); it is not asserted literally in that blueprint paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q95-00c13490a",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q95-00c13490a (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited interfaces; checked HTT and Kerodon sources. Exact boundary lifting and gluing are valid. All 2,220 finite-poset checks passed; no duplicates, cycles, new nodes, or repairs found. Full findings recorded in review.md."
  }
 }

@@ -12,9 +12,102 @@
   "lem-coef-infinity-relative-cone-equivalence",
   "lem-coef-infinity-join-cone-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r_n(i)=n-i$ and $\\alpha^\\vee=r_n\\alpha r_m$ for $\\alpha:[m]\\to[n]$. Clause (4) of [lem-coef-infinity-relative-cone-equivalence] says $X^{\\mathrm{op}}(\\alpha)=X(\\alpha^\\vee)$. Since $r_n^2=1$, we have $(\\alpha^\\vee)^\\vee=\\alpha$ and $(\\alpha\\beta)^\\vee=\\alpha^\\vee\\beta^\\vee$. Products are degreewise by [def-cbc-enhanced-diagrams-cones], so $(X\\times Y)^{\\mathrm{op}}=X^{\\mathrm{op}}\\times Y^{\\mathrm{op}}$. The map $j_n:(\\Delta^n)^{\\mathrm{op}}\\to\\Delta^n$ sends $t:[m]\\to[n]$ to $t^\\vee=r_nt r_m$. It is simplicial because $(t\\alpha^\\vee)^\\vee=t^\\vee\\alpha$, and its inverse has the identical formula. These are literal identities of functions; no reversal $r_n$ is being treated as a monotone simplex operator.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2; agent degreewise calculation from the specified definitions. Join convention checked against Subsection 4.3.3 (016K), Remark 4.3.3.22. Kerodon identifiers, not Stacks tags; archival copies WANTED."
+   }
+  },
+  {
+   "text": "An $n$-simplex of $K\\star\\Delta^0$ is specified by a cut $p\\in\\{0,\\ldots,n+1\\}$, the number of initial $K$-vertices, and, when $p>0$, a simplex $x\\in K_{p-1}$; $p=0$ is the unique pure-apex simplex. Define $R_n$ by sending this to a simplex of $\\Delta^0\\star K^{\\mathrm{op}}$ with $n+1-p$ initial apex vertices and final simplex the same $x$, regarded in $K^{\\mathrm{op}}_{p-1}$. This uses the ordered-block definition of the left join in [lem-coef-infinity-join-cone-calculus]. For $\\alpha:[m]\\to[n]$, the source operator uses $\\alpha^\\vee$. Its retained $K$-indices are exactly the reversals of the final indices $i$ with $\\alpha(i)\\geq n+1-p$ in the target join. On these indices the two restriction maps are related by $r_{p-1}(-)r_{q-1}$, where $q$ is the number retained. Thus the opposite operator on $x$ is exactly the operator of $K^{\\mathrm{op}}$ on the final block. For $q=0$ both outputs are pure apex. Hence $R$ is simplicial. Reversing the cut and the blocks a second time returns $p,x$, giving its inverse. This argument includes $p=n+1$ (pure $K$) and $K=\\varnothing$.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2; agent degreewise calculation from the specified definitions. Join convention checked against Subsection 4.3.3 (016K), Remark 4.3.3.22. Kerodon identifiers, not Stacks tags; archival copies WANTED."
+   }
+  },
+  {
+   "text": "For an $n$-simplex $h:S\\times\\Delta^n\\to\\mathcal E$ of the opposite functor simplicial set, define $\\Phi_n(h):S^{\\mathrm{op}}\\times\\Delta^n\\to\\mathcal E^{\\mathrm{op}}$ by $\\Phi_n(h)_m(s,t)=h_m(s,t^\\vee)$, using equality of the underlying degreewise sets. Here $s\\in S_m$ and $t:[m]\\to[n]$. For $\\gamma:[l]\\to[m]$, simpliciality of $h$ gives\n$$\\mathcal E(\\gamma^\\vee)h_m(s,t^\\vee)=h_l(S(\\gamma^\\vee)s,t^\\vee\\gamma^\\vee)=h_l(S^{\\mathrm{op}}(\\gamma)s,(t\\gamma)^\\vee).$$\nThis is precisely the required simpliciality equation for $\\Phi_n(h)$, using the internal functor definition in [def-cbc-enhanced-diagrams-cones] and the opposite definition of [lem-coef-infinity-relative-cone-equivalence]. Equivalently $\\Phi_n(h)$ is $h^{\\mathrm{op}}$ precomposed with $1\\times j_n^{-1}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2; agent degreewise calculation from the specified definitions. Join convention checked against Subsection 4.3.3 (016K), Remark 4.3.3.22. Kerodon identifiers, not Stacks tags; archival copies WANTED."
+   }
+  },
+  {
+   "text": "For $\\alpha:[m]\\to[n]$, the operator in $\\operatorname{Fun}(S,\\mathcal E)^{\\mathrm{op}}$ takes $h$ to $h\\circ(1\\times\\Delta(\\alpha^\\vee))$, by the two cited definitions. For an $l$-simplex $(s,t)$, $t:[l]\\to[m]$, its image under $\\Phi_m$ is $h_l(s,\\alpha^\\vee t^\\vee)=h_l(s,(\\alpha t)^\\vee)$, exactly the value of $\\Phi_n(h)\\circ(1\\times\\Delta(\\alpha))$. Thus $\\Phi$ commutes with every parameter operator. Apply the construction again with $S^{\\mathrm{op}},\\mathcal E^{\\mathrm{op}}$: the value becomes $h_l(s,(t^\\vee)^\\vee)=h_l(s,t)$. Reversal twice is the identity, so this gives a degreewise inverse and hence the claimed simplicial isomorphism. Quasicategory axioms are not needed for this calculation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2; agent degreewise calculation from the specified definitions. Join convention checked against Subsection 4.3.3 (016K), Remark 4.3.3.22. Kerodon identifiers, not Stacks tags; archival copies WANTED."
+   }
+  },
+  {
+   "text": "For a simplicial map $a:S'\\to S$, the two orders of restriction and $\\Phi$ both have value $h_l(a_l(s'),t^\\vee)$. For $b:\\mathcal E\\to\\mathcal E'$, postcomposition in the two orders has value $b_l(h_l(s,t^\\vee))$. For $a:K'\\to K$, the two orders of joining and $R$ both keep the same cut and replace the retained simplex $x$ by $a(x)$ in the reversed block. In particular $R$ carries the pure-$K$ inclusion to the pure-$K^{\\mathrm{op}}$ inclusion and the apex to the apex. Apply the restriction identity for $\\Phi$ to these two inclusions: it gives the asserted commuting restriction and evaluation squares on all parameter simplices. This uses evaluation as restriction, as specified in [def-cbc-enhanced-diagrams-cones]; it proves strict commutation, not merely agreement on objects.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2; agent degreewise calculation from the specified definitions. Join convention checked against Subsection 4.3.3 (016K), Remark 4.3.3.22. Kerodon identifiers, not Stacks tags; archival copies WANTED."
+   }
+  },
+  {
+   "text": "Describe $u_K$ in degree $n$ on $(x,\\epsilon)$, where $x\\in K_n$ and $\\epsilon:[n]\\to[1]$. If $p$ is the number of zeros of $\\epsilon$, its image has initial $K$-block $x|_{\\{0,\\ldots,p-1\\}}$ and final apex block. Restrictions commute with this prescription because the zero block of $\\epsilon\\alpha$ is the inverse image under $\\alpha$ of that of $\\epsilon$; this also covers the pure-block cases. Under the product identification of step 1 put\n$$w=R\\circ u_K^{\\mathrm{op}}\\circ(1\\times j_1^{-1}):K^{\\mathrm{op}}\\times\\Delta^1\\to\\Delta^0\\star K^{\\mathrm{op}}.$$\nFor $(x,\\eta)$ in degree $n$, $j_1^{-1}$ gives $\\eta^\\vee(i)=1-\\eta(n-i)$. Thus the zeros retained by $u_K$ are the reversed final ones of $\\eta$. After $R$ they form exactly the final $K^{\\mathrm{op}}$-block restricted from $x$ by the opposite operator; the initial zeros of $\\eta$ form the apex block. This proves the cylinder identity with its indicated orientation, in every degree. In particular $\\eta=0$ gives the apex and $\\eta=1$ gives $x$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2; agent degreewise calculation from the specified definitions. Join convention checked against Subsection 4.3.3 (016K), Remark 4.3.3.22. Kerodon identifiers, not Stacks tags; archival copies WANTED."
+   }
+  },
+  {
+   "text": "By the definition in [lem-coef-infinity-join-cone-calculus], $T_{K^{\\mathrm{op}}}$ is the degreewise pushout $\\Delta^0\\amalg_{K^{\\mathrm{op}}\\times\\{0\\}}(K^{\\mathrm{op}}\\times\\Delta^1)$. The map $w$ of step 6 is constant at the apex on the glued zero end. Assign the adjoined point to that apex. These assignments agree on the overlap, so the set-theoretic quotient in each degree defines a map $T_{K^{\\mathrm{op}}}\\to\\Delta^0\\star K^{\\mathrm{op}}$; its operators commute since they do on both pieces. The formula in step 6 identifies it with the fat left-cone collapse specified by that node. For $K=\\varnothing$ the cylinder is empty but $T_{K^{\\mathrm{op}}}=\\Delta^0$, and the same apex assignment defines the required factorization. All formulas commute with restriction of $x$ and of interval and parameter simplices, so the cylinder comparison has the same shape naturality and apex compatibility as the preceding isomorphisms.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2; agent degreewise calculation from the specified definitions. Join convention checked against Subsection 4.3.3 (016K), Remark 4.3.3.22. Kerodon identifiers, not Stacks tags; archival copies WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-join-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/003N",
+  "place": "Explicit degreewise argument from opposite, ordered-block join and internal functor definitions; join convention checked against Kerodon 016K, Remark 4.3.3.22. Archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,14 +150,62 @@
    "results": "{\"t\": \"2026-10-17T09:26:11Z\", \"tool\": \"loogle\", \"query\": \"SSet.opFunctor, MonoidalClosed.ihom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MonoidalClosed.ihom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: SSet.op/opFunctor/op_map and SimplicialObject.opEquivalence construct reversal only (AlgebraicTopology/SimplicialSet/Op.lean:45-105); Join.opEquiv is an ordinary-category join. No simplicial internal-functor, restriction and cylinder assertion is stated. The Loogle MonoidalClosed.ihom identifier was unknown."
+  },
+  {
+   "tool": "grep",
+   "query": "op.*[Jj]oin|[Jj]oin.*op|op.*[iI]hom|[iI]hom.*op",
+   "results": "{\"t\": \"2026-10-17T11:28:27Z\", \"tool\": \"grep\", \"query\": \"op.*[Jj]oin|[Jj]oin.*op|op.*[iI]hom|[iI]hom.*op\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"512ee1bc4dcaedaa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and ordinary-category join declarations do not state this combined simplicial join, exponential, restriction and cylinder assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The opposite of the exponential simplicial set Fun(S,E) is isomorphic to Fun(S opposite,E opposite) and opposite reverses simplicial joins",
+   "results": "{\"t\": \"2026-10-17T11:28:27Z\", \"tool\": \"leansearch\", \"query\": \"The opposite of the exponential simplicial set Fun(S,E) is isomorphic to Fun(S opposite,E opposite) and opposite reverses simplicial joins\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op\", \"SimplicialObject.opEquivalence\", \"SSet.opFunctor\", \"CategoryTheory.cosimplicialSimplicialEquiv\", \"SimplicialObject.opFunctor\", \"SimplicialObject.opEquivalence_functor\", \"CategoryTheory.simplicialCosimplicialEquiv\", \"CategoryTheory.simplicialCosimplicialEquiv_inverse_obj\"], \"digest\": \"436b7deb0ab094a8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and ordinary-category join declarations do not state this combined simplicial join, exponential, restriction and cylinder assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.opFunctor",
+   "results": "{\"t\": \"2026-10-17T11:28:27Z\", \"tool\": \"loogle\", \"query\": \"SSet.opFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"SSet.opFunctor\", \"SSet.opEquivalence_functor\", \"SSet.opEquivalence_inverse\", \"SSet.opFunctorCompOpFunctorIso\", \"SSet.opEquivalence_counitIso\", \"SSet.opEquivalence_unitIso\", \"SSet.opFunctor_map\", \"SSet.opFunctorCompOpFunctorIso_hom_app_app_hom_apply\"], \"digest\": \"5ecce28184e7f0c4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and ordinary-category join declarations do not state this combined simplicial join, exponential, restriction and cylinder assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite simplicial sets reverse join factors and commute with simplicial internal hom by reversing source and target",
+   "results": "{\"t\": \"2026-10-17T11:28:28Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite simplicial sets reverse join factors and commute with simplicial internal hom by reversing source and target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op_map\", \"CategoryTheory.Join.opEquiv_functor_map_op_edge\", \"SSet.opFunctor_map\", \"CategoryTheory.Join.opEquiv_inverse_obj_right_op\", \"CategoryTheory.Join.opEquiv_inverse_map_edge_op\", \"CategoryTheory.Join.opEquiv_functor_obj_op_right\", \"CategoryTheory.Join.opEquiv_inverse_obj_left_op\", \"CategoryTheory.Join.opEquiv_functor_obj_op_left\"], \"digest\": \"db7da3b2cd4a1126\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and ordinary-category join declarations do not state this combined simplicial join, exponential, restriction and cylinder assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Jj]oin|[iI]hom|[Ee]xponential|[Cc]losed",
+   "results": "{\"t\": \"2026-10-17T11:39:23Z\", \"tool\": \"grep\", \"query\": \"[Jj]oin|[iI]hom|[Ee]xponential|[Cc]losed\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean\"], \"digest\": \"ed0743a2b37b108b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and ordinary-category join declarations do not state this combined simplicial join, exponential, restriction and cylinder assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Order reversal on the simplex category carries the exponential of simplicial sets to the exponential of their opposites",
+   "results": "{\"t\": \"2026-10-17T11:39:29Z\", \"tool\": \"leanfinder\", \"query\": \"Order reversal on the simplex category carries the exponential of simplicial sets to the exponential of their opposites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op_map\", \"SSet.opEquivalence\", \"SSet.opFunctor\", \"SSet.opFunctorCompOpFunctorIso_hom_app_app\", \"SSet.opFunctor_map\", \"SSet.opObjEquiv\", \"SSet.opEquivalence_functor\", \"SSet.stdSimplex.map_apply\"], \"digest\": \"2ab6fb279fac98b7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and ordinary-category join declarations do not state this combined simplicial join, exponential, restriction and cylinder assertion"
   }
  ],
  "split_report": {
   "date": "2026-10-17",
-  "item": "lem-coef-infinity-cocone-restriction-initial",
+  "item": "lem-coef-infinity-cocone-opposite-join-functor",
   "worker": "stage1",
-  "summary": "Extracted the opposite join and internal-functor reversal used by the parent proof into a statement node; no Lean declaration or Mathlib theorem states the full simplicial assertion.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, local opposite cone reversal."
+  "summary": "Verified all clauses by explicit simplex formulas, with no new helper nodes. Constructed both inverses, checked every simplex operator, shape restriction, apex evaluation, and the reversed cylinder factorization including the empty shape. Retained the statement and its three statement dependencies. No closed project declaration or Mathlib theorem states the entire assertion.",
+  "blueprint": "Realizes the local opposite cone reversal in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the ancestry already recorded in blueprint.from; the degreewise identities supply the opposite step of lem-coef-infinity-cocone-restriction-initial. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Uses only the definitions of simplicial products, internal functor simplicial sets and evaluation as restriction; this generic foundation is filed in the smooth-purity unit and supplies the same notions used in the item."
+   }
+  ]
  },
  "created": {
   "by": "worker",
@@ -73,7 +214,7 @@
   "group": "Q126"
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "blueprint": {
@@ -94,5 +235,16 @@
   },
   "same_as": [],
   "is": null
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q73-ab4381a5f",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q73-ab4381a5f (reviewer sub-agent of L); spot-checked: Read the complete item, all seven steps, cited DAG statements, unit route, Kerodon 003N/016K source places, and delivery materials. Checked hypotheses, operator identities, join reversal, internal-functor isomorphism, restriction/evaluation naturality, cylinder/fat-cone factorization, empty and pure-block cases, duplicate candidates, and all recorded searches. No mathematical or route defect found; review.md written."
  }
 }

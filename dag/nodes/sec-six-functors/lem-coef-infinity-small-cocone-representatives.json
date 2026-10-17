@@ -11,9 +11,76 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $N(K)$ denote the disjoint union of the nondegenerate simplices of $K$, with their dimensions. By the definition of $\\kappa$-smallness choose an injection $j:N(K)\\hookrightarrow\\kappa$. The nondegenerate decomposition gives each $x\\in K_n$ a unique pair $(y,\\sigma)$, with $y$ nondegenerate of dimension $r$ and $\\sigma:[n]\\twoheadrightarrow[r]$, such that $x=K(\\sigma)y$. The set of triples $(n,r,\\sigma)$ is countable: for fixed $n,r$ it consists of finitely many maps between finite sets, and the pairs $(n,r)$ are countable. Choose a numerical encoding $e(n,r,\\sigma)$. Thus $(n,x)\\mapsto(j(y),e(n,r,\\sigma))$ embeds $\\coprod_nK_n$ into the fixed small set $A=\\kappa\\times\\mathbb N$. This bound is by a small set, not a claim that all simplices number less than $\\kappa$; it works also for $\\kappa=\\aleph_0$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; elementary encoding consequence of the nondegenerate decomposition"
+   }
+  },
+  {
+   "text": "Form the set $B$ of all simplicial structures whose degree-$n$ sets $L_n$ are subsets of $A$ and which have fewer than $\\kappa$ nondegenerate simplices. This is a small set: the carriers are elements of $\\prod_{n\\in\\mathbb N}\\mathcal P(A)$, and all operator graphs are elements of $\\prod_{\\alpha\\in\\operatorname{Mor}(\\Delta)}\\mathcal P(A\\times A)$; the source/target, identity and composition equations and the cardinal condition merely select a subset. These products, powersets and their subsets belong to the Grothendieck universe $\\mathcal U$, since $A$ and the countable object and arrow sets of $\\Delta$ do. For any $K$ in the question, restrict the embedding of step 1 to bijections $b_n:K_n\\to L_n\\subseteq A$, and define $L(\\alpha)=b_mK(\\alpha)b_n^{-1}$ for $\\alpha:[m]\\to[n]$. Substitution proves the functor equations and shows $u_n=b_n^{-1}$ defines a simplicial isomorphism $u:L\\cong K$. An invertible simplicial map preserves degeneracy in both directions by commuting with all simplex operators. Therefore $L\\in B$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary descendant size argument for paragraph 2; agent-written explicit carrier/operator encoding, expanding the small collection of diagrams in HTT Proposition 5.3.6.2, proof, p. 413"
+   }
+  },
+  {
+   "text": "For each $L\\in B$ take all pairs $(a,H)$ with $a\\in C_0$ and $H:L\\times\\Delta^1\\to C$ a simplicial map whose restriction at $1$ is constant at $a$. Put $p=H|_{L\\times\\{0\\}}$ and regard $H$ as the coherent cocone $p\\to\\Delta_La$. This uses exactly the internal-functor definition of coherent transformation. There are a small set of these pairs: simplicial maps form a subset of $\\prod_{n\\geq0}\\operatorname{Maps}(L_n\\times(\\Delta^1)_n,C_n)$, and $C_0$, all factors and the countable product belong to $\\mathcal U$. The disjoint union of these sets over the small set $B$ is a small index set $R$. Its triples $(L,a,H)$ are the required family; retaining all pairs avoids any choice of cocones or any colimit-existence assumption.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary descendant size argument for paragraph 2; agent-written count of the coherent transformations defined in def-cbc-enhanced-diagrams-cones"
+   }
+  },
+  {
+   "text": "Given $(K,a,\\lambda)$ choose $u:L\\cong K$ from step 2 and write $H:K\\times\\Delta^1\\to C$ for its coherent transformation. The pair $(a,H\\circ(u\\times\\mathrm{id}_{\\Delta^1}))$ occurs in $R$. Its endpoint at $0$ is $pu$, and its endpoint at $1$ is the constant diagram at the very same vertex $a$. Consequently the indexed cocone equals $u^*\\lambda$ as actual simplicial map data, including all higher simplices, with $a_r=a$ literally. This proves the representative property without replacing $a$ by an equivalent object.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary descendant size argument for paragraph 2; agent-written restriction calculation for coherent transformations"
+   }
+  },
+  {
+   "text": "Select $R_{\\mathrm{col}}\\subseteq R$ by the predicate that the indexed cocone is colimiting; this subset is small. To check that it still represents every colimiting cocone, precomposition with $u\\times\\mathrm{id}_{\\Delta^n}$ gives, in every degree, a simplicial isomorphism $\\operatorname{Fun}(K,C)\\cong\\operatorname{Fun}(L,C)$, with inverse precomposition with $u^{-1}\\times\\mathrm{id}$. It commutes with constants and with the two endpoint maps. Apply these inverse maps to the explicit simplicial pullbacks defining the cocone categories of $p$ and $pu$: they give inverse simplicial isomorphisms, fixing the apex and sending $\\lambda$ to $u^*\\lambda$. For each pair of cocones they also give inverse maps on the right-pinched mapping spaces, by postcomposition on the maps from $\\Delta^{n+1}$ in the definition. Hence all mapping spaces out of $\\lambda$ are contractible if and only if those out of $u^*\\lambda$ are; the initial-object definition of colimiting is preserved. For $K=\\varnothing$ all carriers and operators in step 2 are empty, and step 3 contains the unique transformation for each separately indexed $a\\in C_0$. If $C$ is empty there are no such apices and $R$ is empty. These cases require no initial object in $C$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary descendant size argument for paragraph 2; agent-written strict reindexing on the explicit comma pullbacks and mapping spaces, followed by subset selection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, supporting compact-generation infrastructure: explicit bounded-shape and coherent-cocone counting argument. HTT Proposition 5.3.6.2, p. 413, and Definition 5.3.6.5 / Example 5.3.6.8, p. 415, motivate the application but do not contain this counting proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +116,52 @@
    "results": "[leansearch] OK 8 hit(s); SSet.Quasicategory; CategoryTheory.Limits.Cocones.eta; SSet.QCat; SSet.quasicategory_of_filler; CategoryTheory.IsCardinalFiltered.cocone; CategoryTheory.isCardinalFiltered_iff_aux₁; SSet.Quasicategory.mk; HasCardinalLT.Set.cocone. Logged digest 9abe78ff1f80c096.",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary categories or simplicial-set finiteness, not the stated coherent infinity-categorical assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cocone.*(small|cardinal)|small.*cocone|Nondegenerate.*[Cc]ardinal",
+   "results": "{\"t\": \"2026-10-17T11:37:02Z\", \"tool\": \"grep\", \"query\": \"cocone.*(small|cardinal)|small.*cocone|Nondegenerate.*[Cc]ardinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/Grp/Ulift.lean\", \"Mathlib/Algebra/Category/Grp/Colimits.lean\", \"Mathlib/Algebra/Category/Grp/Colimits.lean\", \"Mathlib/Algebra/Category/Grp/Colimits.lean\", \"Mathlib/Algebra/Category/Grp/LargeColimits.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\"], \"digest\": \"f6816ca346571d92\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary-category cardinal-filtered cocones, the category of quasicategories, finite simplicial sets, or nondegenerate decomposition; none states the bounded coherent-cocone representative assertion. The decomposition hit is already cited through its existing Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded size simplicial sets and coherent cocones into a fixed small quasicategory have a small set of representatives",
+   "results": "{\"t\": \"2026-10-17T11:37:03Z\", \"tool\": \"leansearch\", \"query\": \"Bounded size simplicial sets and coherent cocones into a fixed small quasicategory have a small set of representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.finite_of_isColimit\", \"SSet.hasDimensionLT_of_finite\", \"SSet.hasDimensionLT_of_isColimit\", \"SSet.instFiniteObjOppositeSimplexCategoryOfFinite\", \"SSet.Finite\", \"SSet.Finite.instIsFinitelyPresentable\", \"SSet.Finite.mk\", \"instHasLimitsOfSizeLightCondSet\"], \"digest\": \"733077fe5c5807a6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary-category cardinal-filtered cocones, the category of quasicategories, finite simplicial sets, or nondegenerate decomposition; none states the bounded coherent-cocone representative assertion. The decomposition hit is already cited through its existing Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, Cardinal",
+   "results": "{\"t\": \"2026-10-17T11:37:03Z\", \"tool\": \"loogle\", \"query\": \"SSet, Cardinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary-category cardinal-filtered cocones, the category of quasicategories, finite simplicial sets, or nondegenerate decomposition; none states the bounded coherent-cocone representative assertion. The decomposition hit is already cited through its existing Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small quasicategory has a small family of representatives of kappa small coherent cocones up to simplicial isomorphism of the base",
+   "results": "{\"t\": \"2026-10-17T11:37:04Z\", \"tool\": \"leanfinder\", \"query\": \"A small quasicategory has a small family of representatives of kappa small coherent cocones up to simplicial isomorphism of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.QCat\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.Quasicategory₂\", \"CategoryTheory.IsCardinalFiltered.cocone\", \"CategoryTheory.IsCardinalFiltered.nonempty_cocone\", \"SSet.hasColimits\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"88c2dc13f1fdf505\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary-category cardinal-filtered cocones, the category of quasicategories, finite simplicial sets, or nondegenerate decomposition; none states the bounded coherent-cocone representative assertion. The decomposition hit is already cited through its existing Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_nonDegenerate|unique_nonDegenerate|EssentiallySmall|SmallModel",
+   "results": "{\"t\": \"2026-10-17T11:37:36Z\", \"tool\": \"grep\", \"query\": \"exists_nonDegenerate|unique_nonDegenerate|EssentiallySmall|SmallModel\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\"], \"digest\": \"e0bdf8fdcbd33d83\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary-category cardinal-filtered cocones, the category of quasicategories, finite simplicial sets, or nondegenerate decomposition; none states the bounded coherent-cocone representative assertion. The decomposition hit is already cited through its existing Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial sets with bounded cardinality of nondegenerate simplices form an essentially small category",
+   "results": "{\"t\": \"2026-10-17T11:37:39Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial sets with bounded cardinality of nondegenerate simplices form an essentially small category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.largeCategory\", \"SSet.Finite\", \"SimplexCategory.smallCategory\", \"SSet.largeCategory\", \"SSet.instFiniteInitial\", \"SSet.finite_of_hasDimensionLT\", \"SSet.instFiniteElemObjOppositeSimplexCategoryOpMkNonDegenerateOfFinite\", \"SSet.Finite.finite\"], \"digest\": \"9a7dc3d84e66fe28\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary-category cardinal-filtered cocones, the category of quasicategories, finite simplicial sets, or nondegenerate decomposition; none states the bounded coherent-cocone representative assertion. The decomposition hit is already cited through its existing Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-compact-generated-filtered-hull",
@@ -79,5 +188,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-small-cocone-representatives",
+  "worker": "stage1",
+  "summary": "Constructed small coded simplicial shapes from the existing nondegenerate-decomposition Mathlib leaf, counted all literal coherent transformation data with apex retained, and proved colimit invariance using strict inverse reindexing on the defined comma categories. No new nodes, no statement change and no colimit-existence assumption. Checked empty bases, empty C and kappa=aleph_0.",
+  "blueprint": "Realizes the auxiliary size reduction extracted from compact-generated-filtered-hull step 4, through the retained ancestor/via chain under paragraph 2 of prop-coef-integral-exceptional-adjoint; this is not claimed to be explicit text of that paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q12-e4c66e44c",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-e4c66e44c (reviewer sub-agent of L); spot-checked: Reviewed item, unit/chapter route, all cited nodes and sources, HTT pp. 413/415, Stacks Tag 017R, Mathlib searches, edge cases, cardinal coding, strict cocone reindexing, and colimit invariance. No mathematical or DAG faults found; review.md written."
  }
 }
