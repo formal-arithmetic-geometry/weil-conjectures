@@ -203,5 +203,29 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-4f54d2430 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, ILO VI 1.8 (p.70) and VIII 3.3.8-3.3.11 (pp.107-108), and Mathlib Noetherian.lean lines 57-59, 103 and 197-203. The item's statement is byte-identical to the side and live DAGs (still unsplit live), so nothing is weakened. Tested on Q=P, P=N with Q=Z, the N^2 blowup chart, trivial monoids and C=0. All six steps are correct. Step 1: g^gp is an isomorphism. Step 2: finite type over a Noetherian ring gives Noetherian. Step 3: the map f^{-1}N->M_X respects the pushout relation, since f#alpha(e)=beta(g e) is a unit; the map is compatible with structure maps and the charts. Step 4: by pullbackSpecIso with both projections, the comparison is an isomorphism, hence etale. Step 5: every hypothesis of lem-trf-log-smooth-log-regular (same unit) is matched. Step 6: C=0 is vacuous. FIX (C5): the new Mathlib leaf lem-trf-affine-locnoeth-coordinate-ring is true but redundant. Its forward direction is the existing leaf pqf-lem-affine-open-locnoeth applied to Spec A as an affine open of itself, and its converse is the definition pqf-def-locnoeth with a one-member cover. Step 2 now cites those (plus def-weil-affine-spectrum), proof_deps is recomputed, and the node is dropped; nothing else cites it. No tool_uses, no SGA, no cycle, no duplicate of the item found among the 20 log-regular nodes. Corrected item in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LogRegularToricRefinement",
+  "declaration": "AlgebraicGeometry.logRegular_toricChartRefinement",
+  "declarations": [
+   "AlgebraicGeometry.toricChartRing",
+   "AlgebraicGeometry.toricChartMap",
+   "AlgebraicGeometry.logRegular_toricChartRefinement"
+  ],
+  "file": "lean/Sheaf/TraceFormula/LogRegularToricRefinement.lean",
+  "statement": "theorem logRegular_toricChartRefinement (Y : FineSaturatedLogScheme.{u}) (A : Type u) [CommRing A] (eA : Y.scheme ≅ Scheme.Spec.obj (Opposite.op (CommRingCat.of A))) (hY : Y.IsLogRegular) (P : Type u) [CommMonoid P] (pFine : IsFineSaturatedMonoid P) (β : P →* A) (βY : P →* Y.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 Y.scheme)))) (hβY : Y.logStructure.IsChart (Scheme.Etale.mk (𝟙 Y.scheme)) βY) (hβ : ∀ p : P, Y.logStructure.alpha.app (op (Scheme.Etale.mk (𝟙 Y.scheme))) (βY p) = eA.hom.appTop ((Scheme.ΓSpecIso (CommRingCat.of A)).inv (β p))) (Q : Submonoid (Algebra.GrothendieckGroup P)) (qFine : IsFineSaturatedMonoid Q) (i : P →* Q) (hi : ∀ p : P, (i p : Algebra.GrothendieckGroup P) = Algebra.GrothendieckGroup.of p) : ∃ (X : FineSaturatedLogScheme.{u}) (eC : X.scheme ≅ Scheme.Spec.obj (Opposite.op (CommRingCat.of (toricChartRing β Q i)))) (βX : Q →* X.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 X.scheme)))), X.IsLogRegular ∧ X.logStructure.IsChart (Scheme.Etale.mk (𝟙 X.scheme)) βX ∧ ∀ q : Q, X.logStructure.alpha.app (op (Scheme.Etale.mk (𝟙 X.scheme))) (βX q) = eC.hom.appTop ((Scheme.ΓSpecIso (CommRingCat.of (toricChartRing β Q i))).inv (toricChartMap β Q i q))",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The explicit tensor ring and canonical chart are real constructions. Global IsChart plus structural compatibility characterizes the associated log structure; no change to the natural-language statement is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-df64838ff",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, declarations, docstrings, edge cases, route-pivot constraints, and report sections checked; per-file scompile passed in sandbox and library forms."
  }
 }

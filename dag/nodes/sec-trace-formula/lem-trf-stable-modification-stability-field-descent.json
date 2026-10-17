@@ -435,5 +435,23 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-151b67bce (reviewer sub-agent of L); spot-checked: Read the item, all eleven proof steps, every cited node statement and source route, including Temkin §1.2 and Remark 3.1.1 online. Closure independence, Jacobian descent, fpqc marking descent, and exceptional-component reflection are correct; edge cases and route restrictions check out. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.StableModificationStabilityFieldDescent",
+  "declaration": "AlgebraicGeometry.MultipointedPair.stable_modification_stability_field_descent",
+  "file": "lean/Sheaf/TraceFormula/StableModificationStabilityFieldDescent.lean",
+  "branch": "newtargets-dag",
+  "statement": "theorem stable_modification_stability_field_descent {k k' : Type u} [Field k] [Field k'] [Algebra k k'] (Y X : MultipointedCurve (Spec (.of k))) (f : Y.Hom X) [IsProper f.curve] [IsProper f.marking] : (let P := MultipointedPair.ofCurve Y let Q := MultipointedPair.ofCurve X let g : Spec (.of k') ⟶ Spec (.of k) := Spec.map (CommRingCat.ofHom (algebraMap k k')) let φ : P.curve ⟶ Q.curve := Over.homMk f.curve f.curve_over (P.IsSemistable ↔ (P.baseChange g).IsSemistable) ∧ ((P.IsSemistable ∧ P.HasGeometricStability Q φ) ↔ ((P.baseChange g).IsSemistable ∧ (P.baseChange g).HasGeometricStability (Q.baseChange g) ((Over.pullback g).map φ))))",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d4fe89fb2",
+  "group": "N9",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source/docstrings, report sections, edge cases, route-pivot status, and exact Lean signature. scompile.py side-overlay/server compilation passed with no errors; review.md records all checks and no findings."
  }
 }
