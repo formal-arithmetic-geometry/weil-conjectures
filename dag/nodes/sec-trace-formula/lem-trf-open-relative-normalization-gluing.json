@@ -2,7 +2,7 @@
  "id": "lem-trf-open-relative-normalization-gluing",
  "kind": "statement",
  "title": "Localization-compatible affine charts for an arbitrary-open integral map",
- "statement": "Let $S$ be a scheme [def-pc-scheme], let $j:U\\hookrightarrow S$ be an arbitrary open immersion [def-weil-open-immersion], and let $g:V\\to U$ be an integral morphism [def-weil-finite-integral-morphism]. For every affine open $W=\\operatorname{Spec}(A)\\subseteq S$, after refining $W\\cap U$ by a principal affine open cover $W_i=D(f_i)$ with $V_i=g^{-1}(W_i)=\\operatorname{Spec}(B_i)$, the integral closures $C_i$ of $A$ in $B_i$ have canonical identifications after restricting to every affine overlap, induced by localization of integral closure. These identifications satisfy the cocycle condition, so the affine schemes $\\operatorname{Spec}(C_i)$ glue compatibly as $W$ and the affine cover vary; the resulting glued scheme is integral over $S$ and restricts over $U$ to $V$.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $j:U\\hookrightarrow S$ be an arbitrary open immersion [def-weil-open-immersion], and let $g:V\\to U$ be an integral morphism [def-weil-finite-integral-morphism]. For every affine open $W=\\operatorname{Spec}(A)\\subseteq S$, after refining $W\\cap U$ by a principal affine open cover $W_i=D(f_i)$ with $V_i=g^{-1}(W_i)=\\operatorname{Spec}(B_i)$, let $C_i$ be the integral closure of $A$ in $B_i$. The canonical localization identifications $(C_i)_{f_i f_j}\\cong(C_j)_{f_i f_j}$ on every affine overlap are induced by localization of integral closure. They satisfy the cocycle condition, so the affine schemes $\\operatorname{Spec}(C_i)$ glue compatibly as $W$ and the affine cover vary; the resulting glued scheme is integral over $S$ and restricts over $U$ to $V$.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "Stacks Project, Morphisms Lemma 0CNX (lemma-extend-integral-surjective-morphisms), proof; Morphisms Lemmas 035F and 035K for localization-compatible charts"
@@ -14,14 +14,77 @@
   "def-pc-fibre-product",
   "def-weil-affine-spectrum",
   "def-weil-pbc-integral-closure",
-  "def-weil-pbc-module-localization"
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-glue-schemes"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Fix an affine open $W=\\operatorname{Spec}(A)$ of $S$ and a principal affine cover $W\\cap U=\\bigcup_iD(f_i)$, with $V_i=V\\times_U D(f_i)=\\operatorname{Spec}(B_i)$. Since $g$ is integral, the induced map $A_{f_i}\\to B_i$ is integral. Regard $A\\to B_i$ through $A\\to A_{f_i}$ and define $C_i\\subseteq B_i$ to be the integral closure of $A$ in $B_i$. This produces an affine chart $\\operatorname{Spec}(C_i)\\to\\operatorname{Spec}(A)$, integral by the definition of integral closure and of an integral affine morphism.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNX proof, affine normalization charts; Morphisms Section 29.54"
+   }
+  },
+  {
+   "text": "On the overlap $D(f_if_j)$, the localization theorem for integral closure identifies $(C_i)_{f_if_j}$ with the integral closure of $A_{f_if_j}$ in $(B_i)_{f_if_j}$. Because $A_{f_i}\\to B_i$ is integral, every element of $B_i$ is integral over $A_{f_i}$, so after localizing at $f_j$ this closure is $(B_i)_{f_j}$. The same calculation from the $j$-chart gives $(B_j)_{f_i}$, and the two are canonically identified with the restriction of $V$ to the common principal open. Localization is transitive, so these identifications agree on triple overlaps and obey the cocycle condition.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-weil-pbc-module-localization",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Lemma 035K (normalization-localization), together with Tag 0307; more-morphisms.tex Tag 0CNX proof"
+   }
+  },
+  {
+   "text": "Apply the scheme-gluing theorem to the schemes $\\operatorname{Spec}(C_i)$, their principal-open overlap subschemes, and the transition isomorphisms from Step 2. The identity, inverse, and triple-overlap equations just checked are precisely its gluing-data hypotheses. The glued scheme $V_W$ has open affine charts mapping to $W$; each chart ring $C_i$ is integral over $A$, hence $V_W\\to W$ is integral, and its restriction over $W\\cap U$ is identified with $V\\times_U(W\\cap U)$ by the localized chart identifications.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "def-weil-finite-integral-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JA, 01JB, 01JC, Section 26.14; more-morphisms.tex Tag 0CNX proof"
+   }
+  },
+  {
+   "text": "If $W'$ is another affine open of $S$, the constructions on $W$ and $W'$ restrict to the same charts on every affine principal refinement of $W\\cap W'$, by the localization identifications of Step 2. The resulting chart isomorphisms satisfy the same cocycle condition, so the $V_W$ glue over an affine cover of $S$ to a scheme $V'\\to S$. Integrality is affine-local on the target and therefore survives this gluing. On $U$ the localized charts are exactly the given $V_i$, so the base change $V'\\times_SU$ is canonically isomorphic to $V$ over $U$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-pc-fibre-product",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNX proof, final gluing over affine cover of S and restriction to U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-integral-closure-commutes-localization"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Lemma 0CNX proof at lines 13686-13704, with the affine integral-closure and localization constructions of Morphisms 035F and 035K"
+  "place": "Lemma 0CNX proof at lines 13686-13704, with Morphisms Lemmas 035F and 035K and Schemes Section 26.14"
  },
  "mathlib_searches": [
   {
@@ -54,7 +117,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-integral-surjective-open-extension",
@@ -73,5 +136,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-open-relative-normalization-gluing",
+  "worker": "stage1",
+  "summary": "Audited the arbitrary-open extension chart argument. The charts are the integral closures of A in B_i (with A acting through A_{f_i}); localization of integral closure identifies their principal-open restrictions with the given integral charts, and the identifications satisfy the cocycle condition. Existing DAG leaves for integral-closure localization and scheme gluing suffice, so no new nodes were created.",
+  "blueprint": "Realizes the extension step in the ancestor proof route for lem-trf-local-term-locality: construct affine integral-closure charts over a principal cover of W∩U, identify them on overlaps by localization, and glue over W and then S.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q74-529932cea",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-529932cea (reviewer sub-agent of L); spot-checked: Read the item, parent, unit/chapter route, all cited DAG statements, and the cited Stacks passages. Verified the affine integral-closure construction, localization identifications, cocycle, scheme gluing, base-change recovery, integrality, hypotheses, and edge cases including empty opens and non-integral global localization examples. No hidden long-step lemma, duplicate, route-pivot violation, or repair is present. Review written to review.md."
  }
 }

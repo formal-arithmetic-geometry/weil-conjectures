@@ -10,9 +10,110 @@
  "stmt_deps": [
   "def-trf-fine-fan-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Q=P^{\\mathrm{sat}}$. Since $P$ is fine, it is finitely generated and embeds in $G$. By [lem-trf-fine-monoid-finite-saturation], $Q$ is finitely generated, integral and saturated, its group completion is $G$, and $k[Q]$ is a finite $k[P]$-module. This proves the finiteness clause and supplies the finite-generation hypothesis for $Q$ used next.",
+   "uses": [
+    "lem-trf-fine-monoid-finite-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9 and its proof, printed p.104, specialized to S=Spec(k) and F=Spec_mon(P) with torsion-free group completion; finite saturation is 3.1.17 and the finite-map sentence of that proof. No Stacks tag states this monoid-algebra normalization identification."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-monoid-algebra-domain-fraction] to $P\\subseteq G$ and to $Q\\subseteq G$. Both monoids are finitely generated and generate the torsion-free group $G$. The monomial maps embed $k[P]\\subseteq k[Q]\\subseteq k[G]$, all three are domains, and their fraction fields identify with $K=\\operatorname{Frac}(k[G])$. In particular the inclusion is $k[G]\\subseteq K$.",
+   "uses": [
+    "lem-trf-monoid-algebra-domain-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9 and its proof, printed p.104, specialized to S=Spec(k) and F=Spec_mon(P) with torsion-free group completion; finite saturation is 3.1.17 and the finite-map sentence of that proof. No Stacks tag states this monoid-algebra normalization identification."
+   }
+  },
+  {
+   "text": "For each $g\\in Q$, the monomial criterion [lem-trf-monomial-integrality] gives that $e^g$ is integral over $k[P]$. The final clause of that node gives that every element of $k[Q]$ is integral over $k[P]$. Thus $k[Q]$ is contained in the integral closure of $k[P]$ inside $K$.",
+   "uses": [
+    "lem-trf-monomial-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9 and its proof, printed p.104, specialized to S=Spec(k) and F=Spec_mon(P) with torsion-free group completion; finite saturation is 3.1.17 and the finite-map sentence of that proof. No Stacks tag states this monoid-algebra normalization identification."
+   }
+  },
+  {
+   "text": "The finite generators of $P$ generate $G$ as a group. Since $G$ is torsion free, [lem-trf-fg-torsionfree-group-free] gives a finite basis $u_1,\\ldots,u_r$ of $G$. Put $B_0=k$ and $B_i=B_{i-1}[X_i]$ for $1\\leq i\\leq r$. The field $k$ is a normal domain: its fraction field is itself. Inductively [lem-weil-pbc-polynomial-ring-normal-domain] says that $B_i$ is a normal domain whenever $B_{i-1}$ is one. Hence $B=B_r=k[X_1,\\ldots,X_r]$ is a normal domain, including $B=k$ when $r=0$.",
+   "uses": [
+    "lem-trf-fg-torsionfree-group-free",
+    "lem-weil-pbc-polynomial-ring-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030A, lemma-polynomial-domain-normal, iterated r times; finite-basis input is the existing Mathlib leaf lem-trf-fg-torsionfree-group-free."
+   }
+  },
+  {
+   "text": "Let $S=\\{X_1^{b_1}\\cdots X_r^{b_r}:b_i\\in\\mathbf N\\}\\subset B$. Since $B$ is a domain and these monomials are nonzero, $0\\notin S$. The map $X_i\\mapsto e^{u_i}$ defines $B\\to k[G]$; the elements of $S$ map to units, with $(e^{u_i})^{-1}=e^{-u_i}$, so it extends to $\\theta:S^{-1}B\\to k[G]$. Define its inverse on the monomial basis by $e^{\\sum_i n_i u_i}\\mapsto\\prod_iX_i^{n_i^+}/\\prod_iX_i^{n_i^-}$, where $n_i^+=\\max(n_i,0)$ and $n_i^-=\\max(-n_i,0)$, and extend $k$-linearly. The unique basis coordinates make this well defined; multiplying fractions adds the exponent vectors, so this is a ring map. Both composites fix the coefficients, all $X_i$ and $X_i^{-1}$, respectively every $e^g$, and hence are identities. Thus $k[G]\\simeq S^{-1}B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104, identification k[P^gp] with k[Z^n]; explicit monomial maps and inverses."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-normal-domain] to the normal domain $B$ and the multiplicative subset $S$, which does not contain zero. It gives that $S^{-1}B$ is a normal domain. The explicit isomorphism of the previous step therefore shows that $k[G]$ is integrally closed in its fraction field $K$: every $z\\in K$ satisfying a monic polynomial over $k[G]$ lies in $k[G]$. This is the ambient-field assertion needed before discussing support.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GY, lemma-localize-normal-domain (lines 8048--8062): any localization of a normal domain is normal; Tag 0309, definition-domain-normal."
+   }
+  },
+  {
+   "text": "Let $x\\in K$ be integral over $k[P]$. A monic equation $x^n+a_{n-1}x^{n-1}+\\cdots+a_0=0$ with $a_i\\in k[P]$ is also a monic equation over $k[G]$, because $k[P]\\subseteq k[G]$. The ambient-field assertion just proved implies $x\\in k[G]$. Only now write its finite support $x=\\sum_{g\\in T}c_ge^g$. By [lem-trf-integral-support-saturation], every $g\\in T$ belongs to $Q$. Therefore $x\\in k[Q]$. Together with Step 3, this proves that $k[Q]$ is exactly the integral closure of $k[P]$ in $K$.",
+   "uses": [
+    "lem-trf-integral-support-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9 and its proof, printed p.104, specialized to S=Spec(k) and F=Spec_mon(P) with torsion-free group completion; finite saturation is 3.1.17 and the finite-map sentence of that proof. No Stacks tag states this monoid-algebra normalization identification."
+   }
+  },
+  {
+   "text": "Finally let $y\\in K$ be integral over $k[Q]$. Its monic equation also has coefficients in $k[G]$, so Step 6 gives $y\\in k[G]$. By Step 1, $Q$ is finitely generated and saturated, with torsion-free group completion $G$. Apply [lem-trf-saturated-monoid-algebra-normal] to $Q$ and this element $y$ of $k[G]$: its statement gives $y\\in k[Q]$. This proves integral closedness in the full field $K$, rather than only in the group algebra. All arguments allow $r=0$ and negative basis coordinates, so neither the zero-rank case nor monoids with units require an exception.",
+   "uses": [
+    "lem-trf-saturated-monoid-algebra-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9 and its proof, printed p.104, specialized to S=Spec(k) and F=Spec_mon(P) with torsion-free group completion; finite saturation is 3.1.17 and the finite-map sentence of that proof. No Stacks tag states this monoid-algebra normalization identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fine-monoid-finite-saturation",
+  "lem-trf-monoid-algebra-domain-fraction",
+  "lem-trf-monomial-integrality",
+  "lem-trf-fg-torsionfree-group-free",
+  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-trf-integral-support-saturation",
+  "lem-trf-saturated-monoid-algebra-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose VIII Lemma 3.2.9, printed p.104, algebraic expansion using monomial support; the missing ambient normality is supplied by Stacks Tags 030A and 00GY and the explicit group-algebra/Laurent-localization identification."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-toric-monoid-comparison",
@@ -71,5 +172,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-affine-monoid-algebra-normalization",
+  "worker": "stage1",
+  "summary": "Repair of E4/E5: removed the false inclusion Frac(k[G]) subset k[G]. Proved normality of k[G] in its actual fraction field using the existing finite-basis, polynomial-normality and localization-normality Mathlib leaves, with explicit inverse monomial maps. Applied support only after the monic equation and ambient normality place the integral element in k[G]. Applied the same ambient reduction before the relative normality lemma in the final clause. Reordered finite saturation before its finite-generation hypothesis is used. Item statement and the five retained supporting nodes are unchanged.",
+  "blueprint": "Retains the affine-normalization input for ILO Expose VIII Lemma 3.2.9 in the toric comparison. Steps 1--3 give the finite integral birational inclusion, Steps 4--6 supply ambient-field normality, Step 7 identifies the integral closure by support, and Step 8 proves normality in K.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-82c6c40fe",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-82c6c40fe (reviewer sub-agent of L); spot-checked: Reviewed item and all five new nodes, cited DAG statements, unit route, ILO Exposé VIII §3.2.9, and Stacks Tags 030A/00GY. The repaired proof correctly establishes ambient group-algebra normality before applying support, handles edge cases, avoids duplicates/cycles and prohibited routes, and is documented in review.md."
  }
 }

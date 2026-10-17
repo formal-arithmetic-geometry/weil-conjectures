@@ -20,9 +20,113 @@
   "def-trf-geometric-morphism",
   "def-weil-geometric-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-trf-etale-topos-points-geometric] and [lem-trf-oriented-product-universal], points of an oriented product $A_{\\mathrm{Et}}\\overleftarrow\\times_{B_{\\mathrm{Et}}}C_{\\mathrm{Et}}$ are triples $(a,b,u)$ with $a$ a geometric point of $A$, $b$ a geometric point of $C$, and $u:gb\\Rightarrow fa$ over $B$. In particular the points of $V_f$ with second support $s$ are exactly the triples with $b$ supported at $s$. The arrow is retained as data throughout; changing geometric representatives means transporting this whole triple.",
+   "uses": [
+    "lem-trf-etale-topos-points-geometric",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "ILO Exposé XI 1.8 and Theorem 1.4, printed pp. 172–174; Orgogozo §1, point triples."
+   }
+  },
+  {
+   "text": "For triples $(a,b,u)$ and $(a',b',u')$, a $2$-morphism is precisely a pair $(\\alpha:a\\Rightarrow a',\\beta:b\\Rightarrow b')$ satisfying $f\\alpha\\circ u=u'\\circ g\\beta$. Here is the converse construction, not an extra hypothesis: on a triple-site generator $(U\\to V\\leftarrow W)^a$, [lem-trf-oriented-product-universal] gives the fibre $a^{-1}U\\times_{(gb)^{-1}V}b^{-1}W$. The inverse-image mates of $\\alpha,\\beta$ send a pair in the primed fibre to the pair of its component images in the unprimed fibre; the displayed equation makes it a pair in that pullback. These maps are natural in the generators. The colimit formula of [lem-trf-site-point-reconstruction-sets] extends them uniquely to all sheaves: a germ represented by $(Z,z,t)$ is sent to $(Z,\\gamma_Z(z),t)$, where $\\gamma_Z$ is the constructed fibre map. Naturality makes this well-defined on the colimit. Taking mates gives the desired $2$-morphism. Conversely the two projections of any $2$-morphism give this pair and equation, and the pullback formula recovers its value on every generator. An invertible pair gives an isomorphism by the same construction with the inverse pair.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-site-point-reconstruction-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "ILO Exposé XI 1.4–1.8, fibre formula; Stacks sites.tex, reconstruction on site generators, through the cited reconstruction node."
+   }
+  },
+  {
+   "text": "Put $H=\\operatorname{Spec}\\kappa(s)$ and $E_s=X_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}H_{\\mathrm{Et}}$. The canonical functor $\\operatorname{Pt}(E_s)\\to\\mathcal P_s$ is an equivalence of categories. Indeed [lem-trf-etale-point-support-fibre] lifts the second coordinate of each triple to a point of $H_{\\mathrm{Et}}$, giving essential surjectivity. For two such lifted triples, the same statement gives a bijection on the second-coordinate Hom-sets. Step 2 therefore gives a bijection on their compatible pairs, with exactly the same equation over $S$, which proves full faithfulness. This equivalence preserves the first projection and preserves and reflects existence of all $2$-morphisms, including noninvertible ones.",
+   "uses": [
+    "lem-trf-etale-point-support-fibre",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, proof of Lemma 8.3.2, initial restriction E′ = X oriented-over-S s, printed p. 18."
+   }
+  },
+  {
+   "text": "The Noetherian topological space $S$ is quasi-separated: an intersection of affine opens is an open subspace of a Noetherian space and is quasi-compact. Apply [lem-weil-pbc-normalization-in-residue-field-extension] to $s\\in S$ and the identity extension $\\kappa(s)/\\kappa(s)$, which has degree one. Its last clause permits taking precisely the normalization $N_s$ of the reduced closure $Z_s$ appearing in the statement; it supplies an integral morphism $\\nu_s:N_s\\to S$, normal integrality of $N_s$, and the generic inclusion $j:H\\to N_s$ with $\\nu_sj=i_s$. With $g:Y_s\\to N_s$ the projection, [lem-trf-integral-middle-base-equivalence] applied to $X\\to S\\leftarrow N_s\\leftarrow H$ gives a canonical equivalence\n$$F_s=(Y_s)_{\\mathrm{Et}}\\overleftarrow\\times_{(N_s)_{\\mathrm{Et}}}H_{\\mathrm{Et}}\\ \\longrightarrow\\ E_s.$$\nIt preserves the first projection after $Y_s\\to X$. Composing with Step 3 gives an equivalence $\\operatorname{Pt}(F_s)\\simeq\\mathcal P_s$, which preserves and reflects all $2$-morphisms. This is a topos equivalence induced by an integral change of the middle base, not an inference from a bijection of branches.",
+   "uses": [
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-trf-integral-middle-base-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo Lemma 8.3.1 applied in the normalization paragraph of the proof of Lemma 8.3.2; normalization properties are Stacks 035I/035L, as stated by the cited existing node."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure of $\\kappa(s)$ and its generic geometric point $\\bar\\eta$ of $N_s$ using [lem-pc-algebraic-closure-exists-unique]. By [lem-trf-etale-point-support-fibre], all choices for the second coordinate in $H_{\\mathrm{Et}}$ are isomorphic, so every point of $F_s$ can be represented as $(\\bar y,\\bar\\eta,u)$. Every $y\\in Y_s$ admits a geometric representative by the same algebraic-closure existence statement and [def-weil-geometric-point]. By [lem-trf-normal-generic-arrow-transitivity], there exists $u:j\\bar\\eta\\Rightarrow g\\bar y$, giving such a triple. If two triples have the same support $y$, choose an isomorphism $\\alpha:\\bar y\\xrightarrow{\\sim}\\bar y'$ using [lem-trf-etale-point-support-fibre]. Transitivity gives $\\sigma\\in\\operatorname{Aut}_{(N_s)_{\\mathrm{Et}}}(j\\bar\\eta)$ with $g\\alpha\\circ u=u'\\circ\\sigma$. The same-support full-faithfulness statement for the generic inclusion $j$ lifts $\\sigma$ uniquely to an automorphism $\\beta$ of $\\bar\\eta$ in $H_{\\mathrm{Et}}$. Step 2 makes $(\\alpha,\\beta)$ an isomorphism of triples. Conversely isomorphic triples project to isomorphic geometric points, which have the same support. Thus the first projection gives a bijection from point isomorphism classes of $F_s$ to $|Y_s|$. Through Step 4 this is $\\theta_s$; it is compatible with $|X|$ and independent of all representative choices.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-trf-etale-point-support-fibre",
+    "def-weil-geometric-point",
+    "lem-trf-normal-generic-arrow-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, proof of Lemma 8.3.2: unique point class over each point of the normalized base change, from normal-base transitivity, printed p. 18."
+   }
+  },
+  {
+   "text": "If $q\\Rightarrow p$ in $\\mathcal P_s$, Step 4 gives a $2$-morphism between the corresponding triples in $F_s$ and hence one between their first coordinates $\\bar y_q\\Rightarrow\\bar y_p$. Its inverse-image mate on an open subterminal is a map from the singleton at $y_p$ to the fibre at $y_q$. Therefore every open containing $y_p$ contains $y_q$, and $y_p\\in\\overline{\\{y_q\\}}$. Conversely assume that closure relation. On an affine open $W=\\operatorname{Spec}(C)$ containing $y_p$, it says that $y_q\\in W$ and the primes in the same ring $C$ satisfy $P_q\\subseteq P_p$. By [lem-weil-pbc-geometric-specialization-strict-local-lift] on $Y_s$, $\\bar y_q$ lifts to the strict localization at $\\bar y_p$. Its projections to pointed etale neighbourhoods send every germ $(U,\\bar u,t)$ at $\\bar y_p$ to $(U,\\bar v,t)$ at $\\bar y_q$. These natural, restriction-compatible maps on set-valued stalks define the mate of a $2$-morphism $\\alpha:\\bar y_q\\Rightarrow\\bar y_p$; the colimit formula [lem-trf-site-point-reconstruction-sets] ensures well-definedness. By [lem-trf-normal-generic-arrow-transitivity], $g\\alpha\\circ u_q=u_p\\circ\\sigma$ for an automorphism $\\sigma$ of $j\\bar\\eta$. Lift it to $\\beta$ on $H$ by [lem-trf-etale-point-support-fibre]. The pair $(\\alpha,\\beta)$ satisfies Step 2's commutation equation, hence gives the required $2$-morphism in $F_s$. Step 4 carries it to $q\\Rightarrow p$. This proves both directions without comparing primes from different residue-field tensor rings.",
+   "uses": [
+    "lem-weil-pbc-geometric-specialization-strict-local-lift",
+    "lem-trf-site-point-reconstruction-sets",
+    "lem-trf-normal-generic-arrow-transitivity",
+    "lem-trf-etale-point-support-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Orgogozo, final normal-base order assertion in the proof of Lemma 8.3.2, printed p. 18; Stacks etale-cohomology.tex Tag 0GJ5 for the geometric lift and section-specialization for its germ map."
+   }
+  },
+  {
+   "text": "If $y_p$ and $y_q$ lie in each other's singleton closures, those closures are equal. Each point is a generic point of this common irreducible closed subset. By [lem-weil-pbc-scheme-sober] the generic point is unique, so $y_p=y_q$. The bijection and Step 6 therefore make the stated relation antisymmetric on point isomorphism classes.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS, lemma-scheme-sober."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-geometric-point",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-trf-etale-point-support-fibre",
+  "lem-trf-etale-topos-points-geometric",
+  "lem-trf-integral-middle-base-equivalence",
+  "lem-trf-normal-generic-arrow-transitivity",
+  "lem-trf-oriented-product-universal",
+  "lem-trf-site-point-reconstruction-sets",
+  "lem-weil-pbc-geometric-specialization-strict-local-lift",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Lemmas 8.3.1–8.3.2, printed p. 18 (PDF page index 17), read online; expanded compatible-pair construction and generic-arrow alignment, with the integral-base and transitivity facts separated as statement-only auxiliaries."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -75,7 +179,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-maximal-point-finiteness",
@@ -100,5 +204,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-point-normalized-stratum",
+  "worker": "stage1",
+  "summary": "Reconstructed the returned branch/orbit route using the genuine general integral middle-base topos equivalence and the smaller one-group transitivity lemma. The false independent-product action and branch/tensor identification are withdrawn. Explicit compatible-pair and germ constructions now prove the point bijection and both directions of the order clause; geometric automorphisms are aligned by the equation g(alpha) u_q = u_p sigma, and residue-field point full faithfulness lifts sigma to the right factor. The item statement is unchanged, and no finite-type or finite-normalization assumption is introduced.",
+  "blueprint": "Current main-20261015 lem-trf-local-term-locality (1)–(2), through the retained nearby-cycle constructibility ancestry: the geometric classification in Orgogozo Lemma 8.3.2 uses Lemma 8.3.1 and normal-generic transitivity before the component-finiteness argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometric-specialization-strict-local-lift",
+    "why": "Generic scheme tool giving a lift of a chosen geometric generization into the target strict localization (Stacks 0GJ5); no same-unit node gives this."
+   },
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "Generic field tool used only to choose geometric representatives at an arbitrary scheme point and a fixed geometric generic point; no unit-specific route replaces field algebraic-closure existence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometric-specialization-strict-local-lift",
+  "lem-pc-algebraic-closure-exists-unique"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-29a282607",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-29a282607 (reviewer sub-agent of L); spot-checked: Read the item, all seven proof steps, all three new nodes, cited DAG statements, unit/chapter route, and source passages. The repaired split is mathematically coherent, preserves the unrestricted hypotheses, uses the correct integral base-change morphism and point categories, removes the former branch-orbit error, has no route-pivot or forbidden SGA citations, and passes edge-case and duplicate checks. Review written to review.md."
  }
 }

@@ -1,0 +1,96 @@
+{
+ "id": "lem-trf-tensor-kernel-factorization",
+ "kind": "statement",
+ "title": "Finite tensor-kernel tests detect factorization when the cokernel is finitely presented",
+ "statement": "Let $R$ be a commutative ring, $U,V,W$ be $R$-modules, and $f:U\\to V$ and $g:U\\to W$ be $R$-linear maps. Suppose the quotient $V/f(U)$, namely the cokernel of $f$, is finitely presented [def-sc-finitely-presented-module]. If for every finitely presented $R$-module $Q$ one has $\\ker(f\\otimes_R\\mathrm{id}_Q)\\subseteq\\ker(g\\otimes_R\\mathrm{id}_Q)$ as submodules of $U\\otimes_RQ$, then there is an $R$-linear map $h:V\\to W$ with $g=h\\circ f$. Tensor products and their induced maps are [def-weil-pbc-module-tensor-product]. No finite-generation, flatness or injectivity hypothesis on $U,V,W$ or $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059D, lemma-domination, combined with Tag 059C, lemma-domination-fp: finite-presentation tests suffice for domination, and domination implies factorization when the cokernel of f is finitely presented."
+ },
+ "stmt_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dominat|[Pp]ure.*[Ss]plit|[Ss]plit.*[Pp]ure|universally.*[Ii]njective|[Ff]initePresentation.*[Ff]actor",
+   "results": "{\"t\": \"2026-10-17T21:29:19Z\", \"tool\": \"grep\", \"query\": \"dominat|[Pp]ure.*[Ss]plit|[Ss]plit.*[Pp]ure|universally.*[Ii]njective|[Ff]initePresentation.*[Ff]actor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Ideal.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\"], \"digest\": \"07591a473debf31c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor right exactness and tensorKer do not give the required factorization. Module.Flat.exists_factorization_of_finitePresentation (Flat/EquationalCriterion.lean:270) assumes a flat target and factors through an unspecified finite free module. IsLocalRing.split_injective_iff_lTensor_residueField_injective (LocalRing/Module.lean:334) assumes a local ring and a finite free target. Neither states this kernel-test criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.rTensor, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-17T21:29:20Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.rTensor, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"rTensor_mkQ\", \"TensorProduct.map_ker\", \"Module.FaithfullyFlat.range_le_ker_of_exact_rTensor\"], \"digest\": \"360c4d90a7a963fe\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor right exactness and tensorKer do not give the required factorization. Module.Flat.exists_factorization_of_finitePresentation (Flat/EquationalCriterion.lean:270) assumes a flat target and factors through an unspecified finite free module. IsLocalRing.split_injective_iff_lTensor_residueField_injective (LocalRing/Module.lean:334) assumes a local ring and a finite free target. Neither states this kernel-test criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let f A to B and g A to C be linear maps with finitely presented cokernel of f. If every finitely presented tensor test has kernel of f tensor identity contained in kernel of g tensor identity then g factors through f",
+   "results": "{\"t\": \"2026-10-17T21:29:25Z\", \"tool\": \"leanfinder\", \"query\": \"Let f A to B and g A to C be linear maps with finitely presented cokernel of f. If every finitely presented tensor test has kernel of f tensor identity contained in kernel of g tensor identity then g factors through f\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"lTensor.toFun\", \"TensorProduct.map_ker\", \"rTensor.toFun\", \"lTensor.inverse_of_rightInverse\", \"Module.Relations.Solution.isPresentationCoreTensor\", \"rTensor.inverse_of_rightInverse\", \"LinearMap.kerLTensorEquivOfSurjective\"], \"digest\": \"a04f6a84be9c5a91\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor right exactness and tensorKer do not give the required factorization. Module.Flat.exists_factorization_of_finitePresentation (Flat/EquationalCriterion.lean:270) assumes a flat target and factors through an unspecified finite free module. IsLocalRing.split_injective_iff_lTensor_residueField_injective (LocalRing/Module.lean:334) assumes a local ring and a finite free target. Neither states this kernel-test criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Domination of linear maps by inclusions of tensor kernels detects factorization if the cokernel is finitely presented",
+   "results": "{\"t\": \"2026-10-17T21:29:36Z\", \"tool\": \"leansearch\", \"query\": \"Domination of linear maps by inclusions of tensor kernels detects factorization if the cokernel is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.tensorKer\", \"LinearMap.tensorKer_coe\", \"Algebra.TensorProduct.lTensor_ker\", \"LinearMap.tensorKerEquiv\", \"LinearMap.tensorKer_tmul\", \"Algebra.TensorProduct.rTensor_ker\", \"Module.finitePresentation_of_ker\", \"LinearMap.map_le_map_iff\"], \"digest\": \"ebdcfbb9d8ed21a2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor right exactness and tensorKer do not give the required factorization. Module.Flat.exists_factorization_of_finitePresentation (Flat/EquationalCriterion.lean:270) assumes a flat target and factors through an unspecified finite free module. IsLocalRing.split_injective_iff_lTensor_residueField_injective (LocalRing/Module.lean:334) assumes a local ring and a finite free target. Neither states this kernel-test criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally injective map with finitely presented quotient splits and tensor kernel inclusions imply a factorization of linear maps",
+   "results": "{\"t\": \"2026-10-17T21:29:39Z\", \"tool\": \"leanfinder\", \"query\": \"A universally injective map with finitely presented quotient splits and tensor kernel inclusions imply a factorization of linear maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"Module.Flat.exists_factorization_of_apply_eq_zero_of_free\", \"Module.Flat.iff_forall_exists_factorization\", \"Module.Flat.of_forall_exists_factorization\", \"Module.finitePresentation_of_split_exact\", \"LinearMap.split_surjective_of_localization_maximal\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\"], \"digest\": \"f1e3cb44f929e4e0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor right exactness and tensorKer do not give the required factorization. Module.Flat.exists_factorization_of_finitePresentation (Flat/EquationalCriterion.lean:270) assumes a flat target and factors through an unspecified finite free module. IsLocalRing.split_injective_iff_lTensor_residueField_injective (LocalRing/Module.lean:334) assumes a local ring and a finite free target. Neither states this kernel-test criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "059C|059D|[Pp]ure|[Dd]ominat|universally.*injective",
+   "results": "{\"t\": \"2026-10-17T21:31:10Z\", \"tool\": \"grep\", \"query\": \"059C|059D|[Pp]ure|[Dd]ominat|universally.*injective\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean\"], \"digest\": \"6783ce40b521df9f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor right exactness and tensorKer do not give the required factorization. Module.Flat.exists_factorization_of_finitePresentation (Flat/EquationalCriterion.lean:270) assumes a flat target and factors through an unspecified finite free module. IsLocalRing.split_injective_iff_lTensor_residueField_injective (LocalRing/Module.lean:334) assumes a local ring and a finite free target. Neither states this kernel-test criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-mittag-leffler-hom-systems",
+  "date": "2026-10-18",
+  "group": "Q89"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). Last sentence: 'countably generated, flat and Mittag-Leffler ... whence projective'. Supporting Tag 059X (lemma-countgen-projective), the sentence 'Since M is Mittag-Leffler, (Hom_R(M_i,N_1)) is a Mittag-Leffler inverse system'. Supporting proof of Tag 059E, (2) implies (3): tensor-kernel domination gives a factorization through each transition map with finitely presented cokernel, using Tags 059C and 059D.",
+   "via": [
+    "lem-trf-mittag-leffler-hom-systems",
+    "lem-trf-countable-flat-mittag-leffler-projective",
+    "lem-trf-local-flat-pure-complete-projective",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -11,9 +11,75 @@
   "def-trf-mittag-leffler-module",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a sequence $(x_n)$ (finite and repeated when necessary) whose finite $R$-linear span is $M$; if the generating set is empty then $M=0$ and we use the empty sequence. By [lem-weil-pbc-filtered-colimit-modules-elementwise], each $x_n$ is the image of an element of some $M_i$. Choose one such index for each $n$, and also choose $i_*\\in I$; let $S_0$ be the resulting countable nonempty set of indices.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W, proof, first paragraph (choice of countable generators and stage representatives)"
+   }
+  },
+  {
+   "text": "Fix $i\\in I$. Apply [lem-trf-mittag-leffler-hom-systems] with $N=\\prod_{s\\in I}M_s$. It gives $j\\ge i$ such that the image of $\\operatorname{Hom}_R(M_j,N)\to\\operatorname{Hom}_R(M_i,N)$ equals the image for every $k\\ge j$. Taking the $j$-component and the identity of $M_j$ yields, for every $k\\ge j$, a map $h_k:M_k\to M_j$ with $f_{ij}=h_k f_{ik}$. For an arbitrary $k\\ge i$, choose $\\ell\\ge j,k$ by directedness; then $f_{ij}=h_\\ell f_{i\\ell}=h_\\ell f_{k\\ell}f_{ik}$, so $f_{ij}$ factors through $f_{ik}$. Thus every $i$ has a stabilizing index $j$ with this factorization property for all $k\\ge i$.",
+   "uses": [
+    "lem-trf-mittag-leffler-hom-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 059M and 059E, proposition-ML-characterization, proof of (5) implies (3); the upper-bound argument for incomparable $j,k$ is written here explicitly"
+   }
+  },
+  {
+   "text": "Starting from $S_0$, alternate stabilization and directed enlargement. For every $i$ in the current countable set, adjoin a stabilizing index from Step 2, obtained using [lem-trf-mittag-leffler-hom-systems]. To enlarge any resulting nonempty countable set $T$ to a countable directed subset, enumerate it as $(t_n)_{n\\ge0}$, repeating entries if finite. Set $u_0=t_0$ and recursively choose $u_{n+1}\\ge u_n,t_{n+1}$ in $I$. Then $T\\cup\\{u_n:n\\ge0\\}$ is countable and directed: each of its two elements lies below some common $u_n$. Repeat the two operations countably many times, retaining all earlier indices, and let $J$ be the union. It is countable and nonempty. Any two elements lie together in some stage and have an upper bound at the next directed enlargement. Every $i\\in J$ receives its stabilizing index in a subsequent stabilization stage. Thus $J$ is directed and has the factorization property from Step 2 for every $i\\in J$.",
+   "uses": [
+    "lem-trf-mittag-leffler-hom-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W, proof, second through fourth paragraphs (successive countable sets, directed closures, and their union)"
+   }
+  },
+  {
+   "text": "The canonical map $\\operatorname{colim}_{i\\in J}M_i\to M$ is surjective. Indeed, each generator $x_n$ comes from a stage in $J$ by construction. A finite sum of such generators and scalar multiples is represented at one stage of $J$ after taking a common upper bound of the finitely many stages, and these sums exhaust $M$; if $M=0$ the assertion is immediate. The map is the canonical map induced by the restricted cocone in [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W, proof, penultimate paragraph (surjectivity from the chosen generators)"
+   }
+  },
+  {
+   "text": "For injectivity, let a class represented by $\\tilde{x}\\in M_i$ with $i\\in J$ map to zero in $M$. The equality and zero clauses of [lem-weil-pbc-filtered-colimit-modules-elementwise] give $k\\ge i$ with $f_{ik}(\\tilde{x})=0$. By the factorization property of $J$ from Step 3, choose $j\\in J$ and $h:M_k\\to M_j$ with $f_{ij}=h f_{ik}$; hence $f_{ij}(\\tilde{x})=0$. Applying the same zero clause to the restricted filtered system indexed by $J$ shows that the original class is zero in $\\operatorname{colim}_{i\\in J}M_i$. The canonical map is therefore injective and surjective, hence an isomorphism of $R$-modules.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W, proof, final paragraph (injectivity via eventual vanishing)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-trf-mittag-leffler-hom-systems",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059W (lemma-ML-countable-colimit), with the tensor-product ML-to-factorization step from Tags 059M and 059E"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-countable-flat-mittag-leffler-projective",
@@ -64,7 +130,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). Last sentence: 'countably generated, flat and Mittag-Leffler ... whence projective'. Supporting Tag 059X (lemma-countgen-projective), the sentence 'By Lemma ... ML-countable-colimit, we may assume I is countable'.",
+   "place": "Supporting proof of Tag 059X (lemma-countgen-projective), the sentence 'By Lemma ... ML-countable-colimit, we may assume I is countable'; the countable extraction argument is the full proof of Tag 059W.",
    "via": [
     "lem-trf-countable-flat-mittag-leffler-projective",
     "lem-trf-local-flat-pure-complete-projective",
@@ -84,5 +150,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ml-countable-colimit",
+  "worker": "stage1",
+  "summary": "Split Tag 059W into five steps: choose stage representatives for a countable generating sequence, derive the factorization condition from the tensor-product Mittag-Leffler Hom-system criterion, construct a countable directed union closed under those stabilizing indices, and prove surjectivity and injectivity of the restricted colimit map. The source proof omitted the case of incomparable indices in its factorization sentence; the split inserts a common upper bound and the resulting composite factorization. No new nodes were needed because the DAG already has the module elementwise filtered-colimit leaf and the Hom-system stabilization statement.",
+  "blueprint": "Realizes the ancestor proof's supporting Tag 059X/059W sentence that a countably generated Mittag-Leffler module permits the presentation index to be made countable.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q96-a71c01fcc",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-a71c01fcc (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, unit/chapter route, and Stacks 059W, 059E, 059M and 059X. Repaired malformed TeX and made Step 3’s countable directed enlargement explicit. Mathematics and edge cases check; no new nodes or target changes. Proof-only corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
  }
 }

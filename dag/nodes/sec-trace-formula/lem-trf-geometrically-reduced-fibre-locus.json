@@ -14,9 +14,150 @@
   "def-weil-affine-spectrum",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $f:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ be the morphism induced by $A\\to B$ [def-weil-affine-spectrum]. At every point of $\\operatorname{Spec}B$, take the whole source and the whole target as affine open neighbourhoods in [def-sbc-locally-finite-presentation]. Their induced ring map is the given finitely presented map [def-weil-pbc-finitely-presented-algebra]. Thus $f$ is locally of finite presentation. When the source is empty this condition is vacuous.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TP (definition-finite-presentation), applying the pointwise definition to whole affine schemes"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-affine-scheme-qcqs] separately to $\\operatorname{Spec}B$ and $\\operatorname{Spec}A$. Both schemes are quasi-compact and quasi-separated. In particular the source is quasi-compact and the target is quasi-separated, so clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes $f$ quasi-compact. These are precisely the morphism and base finiteness hypotheses needed below.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Algebra Tag 00E8 (lemma-quasi-compact); Schemes Tags 01KN (lemma-affine-separated) and 03GI (lemma-quasi-compact-permanence), for affine qcqs and quasi-compactness of the morphism"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak p\\in\\operatorname{Spec}A$ and put $k=\\kappa(\\mathfrak p)$ [def-weil-residue-field] and $C=B\\otimes_A k$. By [def-pc-scheme-fibre] and [lem-weil-pbc-fibre-product-affine-spectra], $X_{\\mathfrak p}\\cong\\operatorname{Spec}C$ as $k$-schemes: the projection to $\\operatorname{Spec}k$ is induced by $c\\mapsto1\\otimes c$. By [def-weil-geometric-fibre], $X_{\\bar{\\mathfrak p}}$ is the base change of this fibre to a chosen algebraic closure of $k$. The criterion [lem-trf-geometric-reducedness-algebraic-closure-test], applied to $\\operatorname{Spec}C/k$, therefore gives $X_{\\bar{\\mathfrak p}}$ reduced if and only if $\\operatorname{Spec}C$ is geometrically reduced. The latter is exactly the meaning of geometric reducedness of $C$ in the item. Thus the reduced geometric-fibre locus of $f$ equals $E_{\\mathrm{red}}(B/A)$. This comparison uses no finiteness assumption on the ring map.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-geometric-fibre",
+    "lem-trf-geometric-reducedness-algebraic-closure-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 035X (lemma-geometrically-reduced) and 020I (lemma-perfect-reduced), with Schemes Tag 01I4 (lemma-fibre-product-affine-schemes)"
+   }
+  },
+  {
+   "text": "Given any $a:A\\to A\\prime$, put $g=\\operatorname{Spec}a$ and $B\\prime=B\\otimes_A A\\prime$. The isomorphism [lem-weil-pbc-fibre-product-affine-spectra] identifies the base change $\\operatorname{Spec}B\\times_{\\operatorname{Spec}A}\\operatorname{Spec}A\\prime$ with $\\operatorname{Spec}B\\prime$, including its projection to $\\operatorname{Spec}A\\prime$. Apply [lem-trf-geometric-reduced-fibre-locus-base-change]: it says that the reduced geometric-fibre locus of this projection equals $g^{-1}$ of that of $f$. Apply the comparison in Step 3 to $A\\to B$ and to $A\\prime\\to B\\prime$; that comparison needed no finite presentation. The two loci are respectively $E_{\\mathrm{red}}(B/A)$ and $E_{\\mathrm{red}}(B\\prime/A\\prime)$. Substitution gives exactly the asserted equality for every $a$, including non-flat maps.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-geometric-reduced-fibre-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0576 (lemma-base-change-fibres-geometrically-reduced), with affine fibre-product projection identification from Schemes Tag 01I4"
+   }
+  },
+  {
+   "text": "Choose a presentation $B\\cong A[t_1,\\ldots,t_n]/(F_1,\\ldots,F_m)$ [def-weil-pbc-finitely-presented-algebra]. There are finitely many coefficients in the $F_j$. By [lemma-nagata-ring-finite-type-subalgebras] they lie in a finitely generated $\\mathbf Z$-subalgebra $A_0\\subseteq A$. The case $n=0$ of [lem-trf-mvpolynomial-noetherian] says that $\\mathbf Z$ is Noetherian (a polynomial ring on no variables is its coefficient ring). Hence [lem-weil-pbc-finite-type-algebra-noetherian], applied to $\\mathbf Z\\to A_0$, makes $A_0$ Noetherian. Write $F_j^0\\in A_0[t_1,\\ldots,t_n]$ for the same polynomials with coefficients in $A_0$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lemma-nagata-ring-finite-type-subalgebras",
+    "lem-trf-mvpolynomial-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579, reduction to a Noetherian coefficient ring; Algebra Tag 00FN for Noetherian permanence"
+   }
+  },
+  {
+   "text": "Put $B_0=A_0[t_1,\\ldots,t_n]/(F_1^0,\\ldots,F_m^0)$, a finitely presented $A_0$-algebra [def-weil-pbc-finitely-presented-algebra]. There is an $A$-algebra isomorphism $B_0\\otimes_{A_0}A\\cong B$. Explicitly, $[P]\\otimes a\\mapsto aP(\\bar t)$ is well-defined by bilinearity and the quotient relations [def-weil-pbc-module-tensor-product, def-weil-pbc-algebra-hom-quotient]. Its inverse is evaluation on the generators $a\\mapsto1\\otimes a$, $\\bar t_i\\mapsto[t_i]\\otimes1$ [def-weil-pbc-mv-polynomial-ring]: each $F_j$ evaluates to $[F_j^0]\\otimes1=0$, by tensor balancing, so evaluation factors through the quotient. Both maps preserve units and products, since pure tensors multiply by $(b\\otimes a)(c\\otimes e)=bc\\otimes ae$; their composites fix the polynomial generators and all pure tensors, which generate the respective rings. This argument works for any base ring map in place of $A_0\\to A$. Thus $f$ is the base change of $f_0:\\operatorname{Spec}B_0\\to T_0=\\operatorname{Spec}A_0$, including its projection, by [lem-weil-pbc-fibre-product-affine-spectra]. Applying Steps 1 and 2 to $A_0\\to B_0$ makes $f_0$ quasi-compact and locally of finite presentation.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579, finite-presentation descent to a coefficient ring, written directly from the chosen presentation"
+   }
+  },
+  {
+   "text": "Let $E_0$ be the reduced geometric-fibre locus of $f_0$. Fix an irreducible closed subset $Z\\subseteq T_0$. By [lem-weil-pbc-reduced-induced-closed-subscheme] it has a reduced closed subscheme structure $j:Z_{\\mathrm{red}}\\to T_0$; by [def-weil-closed-immersion] its underlying space is homeomorphic to $Z$, hence irreducible. By [lem-sc-scheme-sober], $Z_{\\mathrm{red}}$ has a generic point $\\xi$. The pullback $h:X_0\\times_{T_0}Z_{\\mathrm{red}}\\to Z_{\\mathrm{red}}$ is quasi-compact and locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Apply [lem-trf-generic-constancy-geometric-reducedness] to $h$: on a nonempty open $V$ every ordinary fibre is geometrically reduced, or every ordinary fibre is not. For each point, [def-weil-geometric-fibre] and [lem-trf-geometric-reducedness-algebraic-closure-test] identify this condition with reducedness of its geometric fibre. By [lem-trf-geometric-reduced-fibre-locus-base-change], the latter locus is $j^{-1}(E_0)$. Transporting $V$ through the homeomorphism onto $Z$ gives a nonempty relatively open subset either contained in $E_0$ or disjoint from it.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "def-weil-geometric-fibre",
+    "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "lem-trf-geometric-reduced-fibre-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579, Noetherian constructibility argument on irreducible closed subsets; Tags 0577, 0578, 0576; Schemes 01J3 for the reduced closed structure"
+   }
+  },
+  {
+   "text": "The affine scheme $T_0$ has a one-member affine cover by a Noetherian ring, by Step 5. Step 7 verifies the hypothesis on every irreducible closed subset in [lem-trf-noetherian-constructible-subset-criterion]; hence $E_0$ is constructible. By Step 6, $f$ is the base change of $f_0$ along $g:\\operatorname{Spec}A\\to T_0$. The equality [lem-trf-geometric-reduced-fibre-locus-base-change] gives its reduced geometric-fibre locus as $g^{-1}(E_0)$, which is constructible by [lem-pur-scheme-constructible-preimage]. Step 3 identifies this locus with $E_{\\mathrm{red}}(B/A)$, proving constructibility. Step 4 already proved the required arbitrary-base-change equality, so both assertions follow.",
+   "uses": [
+    "lem-trf-noetherian-constructible-subset-criterion",
+    "lem-trf-geometric-reduced-fibre-locus-base-change",
+    "lem-pur-scheme-constructible-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579, final Noetherian criterion (Topology 053Z) and return by base change (0576); Morphisms 054I for constructible inverse images"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-geometric-fibre",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "lemma-nagata-ring-finite-type-subalgebras",
+  "lem-trf-mvpolynomial-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-sc-scheme-sober",
+  "lem-trf-generic-constancy-geometric-reducedness",
+  "lem-trf-noetherian-constructible-subset-criterion",
+  "lem-pur-scheme-constructible-preimage"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0579, proof: finite-presentation descent by coefficients, generic-fibre alternatives 0577 and 0578 on irreducible closed subsets, and Topology 053Z; Tag 0576 for base-change equality, using affine fibre products 01I4 and the existing algebraic-closure test."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,7 +210,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-noetherian-approximation",
@@ -100,5 +241,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometrically-reduced-fibre-locus",
+  "worker": "stage1",
+  "summary": "Repaired all four returned faults, with explicit affine fibre-product projections, cited qcqs/permanence hypotheses, the existing algebraic-closure comparison, and valid TeX arrows. Avoided the cycle through the now-split scheme constructibility node by following the Noetherian coefficient-ring and generic-fibre proof of 0579. One new unsplit generic-constancy node, zero new Mathlib leaves; statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FG, good reduced-fibre locus and its base-change equality.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-ring-finite-type-subalgebras",
+    "why": "Step 5 uses only its finite-coefficient subalgebra existence to construct a Noetherian model for the unit's affine fibre-locus input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Steps 2 and 7 use only quasi-compactness and base-change permanence to discharge hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Step 7 equips each irreducible closed subset with its canonical scheme structure for the generic-fibre argument."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Step 7 uses existence of a generic point of an irreducible scheme; this is a topology tool, not an alternative route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-ring-finite-type-subalgebras",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-scheme-sober"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q68-973901b18",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-973901b18 (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all eight steps against cited statements and Stacks 0576–0579, 053Z, 054I and affine fibre-product sources. Verified hypotheses, structural projections, edge cases, duplicate candidates and acyclicity. No long steps, forbidden machinery or repairs found. Detailed checks and accepted tool_uses are in review.md."
  }
 }

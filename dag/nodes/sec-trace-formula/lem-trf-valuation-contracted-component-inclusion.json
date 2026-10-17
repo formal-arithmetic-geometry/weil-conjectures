@@ -13,6 +13,8 @@
   "def-kun-topological-krull-dimension",
   "def-sbc-locally-finite-presentation",
   "def-sbc-smooth-morphisms",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification",
   "def-weil-affine-spectrum",
   "def-weil-closed-immersion",
   "def-weil-etale-morphism",
@@ -23,9 +25,66 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and a component $Z\\subset W_s$ with $b_s(Z)$ a singleton. By [lem-trf-sepclosed-valuation-geometric-components], $k=\\kappa(s)$ is separably closed. An algebraic closure $\\Omega/k$ is purely inseparable by [lem-pc-kbar-pure-insep]. Thus [lem-pc-homeo-pure-insep] makes the projections $W_\\Omega\\to W_s$, $X_\\Omega\\to X_s$ and $Y_\\Omega\\to Y_s$ homeomorphisms. Let $\\bar Z$ be the component corresponding to $Z$. The base-change diagrams commute and their vertical maps are bijective, so $b_\\Omega(\\bar Z)$ is a singleton. These same diagrams will descend the assertion for $a$. This argument concerns topological images and does not assume that $Z$ stays irreducible under a general field extension.",
+   "uses": [
+    "lem-trf-sepclosed-valuation-geometric-components",
+    "lem-pc-kbar-pure-insep",
+    "lem-pc-homeo-pure-insep"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 4.4.3(i), printed p. 31; Lemma 4.4.2 and Appendix Lemma B.3. Online primary text read; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Since $f$, $g$, $a$ and $b$ are isomorphisms on the generic pairs, the generic curves of $X$, $Y$ and $W$ are smooth and their generic markings are etale. The sources and targets of $a$ and $b$ are semistable multipointed $S$-curves: for $X$ this is included in stability of $f$, and for $Y$ in semistability of $g$. Apply [lem-trf-semistable-modification-fibre-contractions] separately to $a$ and $b$, retaining their given family $\\eta$-modification hypotheses. It gives finite elementary exceptional-contraction sequences for both $a_\\Omega$ and $b_\\Omega$, with proper quotient maps, semistable intermediate pairs and compatible markings. This supplies the precise blowdown hypothesis; no claim of modification or a common dense open for the whole geometric-fibre maps is needed. By [lem-trf-semistable-marked-base-change], $f_\\Omega$ has the geometric stability predicate as well as semistable source.",
+   "uses": [
+    "lem-trf-semistable-modification-fibre-contractions",
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 4.4.3(i), printed p. 31; Lemma 4.4.2 and Appendix Lemma B.3. Online primary text read; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Put $r=f_\\Omega a_\\Omega=g_\\Omega b_\\Omega:W_\\Omega\\to C_\\Omega$. Every component contracted at a stage of the $a_\\Omega$ sequence has singleton image under the remaining map to $X_\\Omega$, hence under its composite with $f_\\Omega$; thus that stage is $r$-exceptional. The same argument using $g_\\Omega$ applies to the $b_\\Omega$ sequence. The terminal $a_\\Omega$ quotient has induced map $f_\\Omega$ and has no exceptional component by Step 2. Apply [lem-trf-valuation-stable-blowdown-uniqueness] with $\\pi=a_\\Omega$ and $q=b_\\Omega$: it gives $a_\\Omega=u\\circ b_\\Omega$ for a morphism of geometric pointed curves. Therefore $a_\\Omega(\\bar Z)=u(b_\\Omega(\\bar Z))$ is a singleton. The cited result concerns explicit contraction sequences, so no connectedness of $W_\\Omega$ and no unproved comparison of fibre genera is being assumed.",
+   "uses": [
+    "lem-trf-valuation-stable-blowdown-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 4.4.3(i), printed p. 31; Lemma 4.4.2 and Appendix Lemma B.3. Online primary text read; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Write $p_W:W_\\Omega\\to W_s$ and $p_X:X_\\Omega\\to X_s$. By Step 1, $p_W(\\bar Z)=Z$ and $p_Xa_\\Omega=a_sp_W$. Consequently $a_s(Z)=p_X(a_\\Omega(\\bar Z))$ is a singleton. Since $s$ and $Z$ were arbitrary, this proves the asserted inclusion of contracted fibre components.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 4.4.3(i), printed p. 31; Lemma 4.4.2 and Appendix Lemma B.3. Online primary text read; archival PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-homeo-pure-insep",
+  "lem-pc-kbar-pure-insep",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-semistable-modification-fibre-contractions",
+  "lem-trf-sepclosed-valuation-geometric-components",
+  "lem-trf-valuation-stable-blowdown-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Expanded Corollary 4.4.3(i) argument using single-modification fibre-contraction sequences and Appendix B.3; online primary source read, local archival copy WANTED. The elementary topological descent uses purely inseparable scalar extension."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-semistable-dominates-stable",
@@ -85,5 +144,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-contracted-component-inclusion",
+  "worker": "stage1",
+  "summary": "Repair of E1/C4: replaced the invalid geometric-fibre modification/common-dense-open application by a single-family-modification lemma giving explicit finite exceptional-contraction sequences on geometric fibres. Corrected the child to the actual Appendix B.3 universal property for such sequences, with the factorization direction a=u b. Removed global fibre connectedness assumptions; established descent using separably closed valuation residue fields, purely inseparable algebraic closure, and homeomorphic scalar extension. The target statement is unchanged.",
+  "blueprint": "Keeps the inherited nearest blueprint ancestor and unit; expands the Temkin Corollary 4.4.3(i) component-contraction sentence named in the item source, with its Lemma 4.4.2 and Appendix B.3 inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-homeo-pure-insep",
+    "why": "General purely inseparable scalar-extension homeomorphism supplies descent of topological component images; it is a field/scheme tool, with no replacement in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-homeo-pure-insep"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q79-95538ade4",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q79-95538ade4 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, unit, chapter, instructions, and delivery-error rules. Verified all four proof steps, hypotheses, edge cases, source locations, searches, non-duplication, and route compliance. Temkin archival PDF is absent locally but the cited primary text was read online and the delivery records it as WANTED. Review written to review.md."
  }
 }

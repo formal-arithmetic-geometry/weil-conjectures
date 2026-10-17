@@ -13,9 +13,81 @@
   "def-weil-pbc-flat-ring-map",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Replace a finite generating family by its finitely many homogeneous components; their span contains the original generators, so they still generate. Choose these homogeneous generators $m_1,\\ldots,m_r$ of $L$ over $P$ (finite generation). With $d_i=\\deg(m_i)$, they give a graded exact sequence $0\\to K\\to\\bigoplus_i P(-d_i)\\to L\\to0$, whose degree-$d$ part is $0\\to K_d\\to\\bigoplus_i P_{d-d_i}\\to L_d\\to0$. For each $d$, the module $P_{d-d_i}$ is finite free over $R$: only finitely many exponent vectors $\\alpha$ satisfy $\\sum_j w_j\\alpha_j=d-d_i$, because all $w_j>0$; its monomials form a finite basis. The inclusion and degree projection exhibit $L_d$ as an $R$-linear retract of $L$, so $L_d$ is flat by [lem-weil-pbc-flat-module-retract]. The middle term is finite free and hence flat (tensoring with it is a finite direct sum, which preserves injections). Thus each $K_d$ is flat by [lem-weil-pbc-flat-ses-kernel-flat].",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-ses-kernel-flat",
+    "lem-weil-pbc-flat-module-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053C, proof lines 5871--5887"
+   }
+  },
+  {
+   "text": "Each $L_d$ is a finite flat $R$-module: it is generated over $R$ by the finitely many products of the chosen $m_i$ with monomials of degree $d-d_i$, and it is a direct graded summand of the flat $R$-module $L$, hence flat by [lem-weil-pbc-flat-module-retract]. Therefore [lem-weil-pbc-finite-flat-local-free] makes every $L_d$ finite free. The surjection $\\bigoplus_i P_{d-d_i}\\to L_d$ then splits because $L_d$ is free, so $K_d$ is a retract of the finite free source and is finite. Together with Step 1 and [lem-weil-pbc-finite-flat-local-free], each $K_d$ is finite free.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-module-retract",
+    "lem-weil-pbc-finite-flat-local-free",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053C, proof lines 5882--5890"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak m$ be the unique maximal ideal of $R$ and $\\kappa=R/\\mathfrak m$. Since each $L_d$ is flat over $R$, [lem-weil-pbc-flat-quotient-tensor-injective] shows that tensoring the degreewise exact sequences with $\\kappa$ preserves exactness. The ring $P\\otimes_R\\kappa\\cong\\kappa[x_1,\\ldots,x_n]$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (the base $\\kappa$ is a field, hence Noetherian), and the injected module $K\\otimes_R\\kappa$ is a submodule of the finite $P\\otimes_R\\kappa$-module $\\bigoplus_i(P\\otimes_R\\kappa)(-d_i)$. Thus [lem-weil-pbc-noetherian-submodule-finite] makes $K\\otimes_R\\kappa$ finite over $P\\otimes_R\\kappa$, and homogeneous finite generators $\\bar k_1,\\ldots,\\bar k_t$ may be chosen. Choose homogeneous lifts $k_j\\in K$ and write $e_j=\\deg(k_j)$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053C, proof lines 5893--5898"
+   }
+  },
+  {
+   "text": "For every degree $d$, the homogeneous map $\\bigoplus_j P_{d-e_j}\\to K_d$ induced by the $k_j$ becomes surjective after tensoring with $\\kappa$, because the $\\bar k_j$ generate $K\\otimes_R\\kappa$ homogeneously. Its cokernel is a finite $R$-module: both source and target are finite $R$-modules by Step 2. Nakayama's lemma [lem-weil-pbc-nakayama-local-generators] therefore makes this map surjective over $R$. Hence the finite set $k_1,\\ldots,k_t$ generates $K$ as a graded $P$-module. Thus $K$ is finitely generated, and the exact sequence in Step 1 is a finite presentation of $L$ over $P$ by [def-sc-finitely-presented-module].",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053C, proof lines 5899--5909"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-finite-flat-local-free",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-module-retract",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-flat-ses-kernel-flat",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 053C, lemma-flat-graded-finite-type-finite-presentation-module, proof lines 5871--5909"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-finite-type-module-presentation",
@@ -93,5 +165,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-graded-flat-module-finite-presentation",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 053C proof into four steps. The homogeneous finite presentation is formed from finite homogeneous generators; degree pieces are finite free over the local base, and the kernel pieces are flat by the cited flat short-exact-sequence lemma and finite free by the cited local finite-flat freeness leaf. After residue-field reduction, finite homogeneous kernel generators lift and Nakayama gives generation of the kernel, yielding finite presentation. No new nodes were needed because all non-elementary inputs are existing DAG nodes or Mathlib-backed definitions.",
+  "blueprint": "Realizes the ancestor lem-trf-local-term-locality proof route where the valuation-ring finite-presentation input invokes Tag 053C for a finite flat graded polynomial module."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q82-09666a798",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-09666a798 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, Stacks 053C proof, and unit/chapter route. Added the existing Tag 00HL tensor-exactness citation and made degree-piece flatness explicit. Statement unchanged; no new nodes, long steps, or dependency cycles. Corrected JSON and concrete source/edge-case checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
  }
 }

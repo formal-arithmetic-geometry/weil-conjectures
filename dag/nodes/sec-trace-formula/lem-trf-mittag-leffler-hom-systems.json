@@ -11,9 +11,91 @@
   "def-trf-mittag-leffler-module",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $i\\in I$ and write $u_s:M_s\\to M$ for the given colimit maps. Form the set $B=\\coprod_{a,b\\ge0}\\operatorname{Mat}_{b\\times a}(R)$ and, for $t\\in\\operatorname{Mat}_{b\\times a}(R)$, put $Q_t=R^b/\\operatorname{im}(t)$. Every $Q_t$ is finitely presented and every finitely presented $R$-module is isomorphic to some $Q_t$, directly from its finite presentation [def-sc-finitely-presented-module]. Consequently $A=\\{(t,z):t\\in B,\\ z\\in\\ker(u_i\\otimes\\mathrm{id}_{Q_t})\\}$ is a set. For $\\alpha=(t,z)$ put $Q_\\alpha=Q_t$ and $z_\\alpha=z$, and let $T=\\prod_{\\alpha\\in A}Q_\\alpha$, the module of all families. This explicitly supplies the set of test modules used by the source; no product over a proper class is taken.",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M, proposition-ML-tensor, proof of (2) implies (1), choice of the set B and pairs (Q,x)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-presentation-tensor-products] to $M_i$ and the family $(Q_\\alpha)$ to obtain $z\\in M_i\\otimes_RT$ whose image under the canonical comparison is $(z_\\alpha)_\\alpha$. Put $y=(u_i\\otimes\\mathrm{id}_T)(z)$. Its image under $\\theta_{M,(Q_\\alpha)}$ is zero: the $\\alpha$-coordinate is $(u_i\\otimes\\mathrm{id}_{Q_\\alpha})(z_\\alpha)=0$. The comparison square commutes because on a pure tensor $m\\otimes(q_\\alpha)_\\alpha$ both composites have $\\alpha$-coordinate $u_i(m)\\otimes q_\\alpha$; pure tensors generate [def-weil-pbc-module-tensor-product]. The tensor-product Mittag-Leffler hypothesis [def-trf-mittag-leffler-module] makes $\\theta_{M,(Q_\\alpha)}$ injective. Thus $y=0$.",
+   "uses": [
+    "lem-trf-finite-presentation-tensor-products",
+    "def-weil-pbc-module-tensor-product",
+    "def-trf-mittag-leffler-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M, proposition-ML-tensor, proof of (2) implies (1), the first commutative square and the kernel element x."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-tensor-commutes-with-colimits], the maps $u_s\\otimes\\mathrm{id}_T$ exhibit $M\\otimes_RT$ as the colimit of $M_s\\otimes_RT$. Since the image of $z$ is zero, [lem-weil-pbc-filtered-colimit-modules-elementwise] gives $j\\ge i$ with $(f_{ij}\\otimes\\mathrm{id}_T)(z)=0$. Project to each $Q_\\alpha$. The resulting equality is $(f_{ij}\\otimes\\mathrm{id}_{Q_\\alpha})(z_\\alpha)=0$, by the same pure-tensor calculation as in step 2 [def-weil-pbc-module-tensor-product]. In particular, for every $t\\in B$ and every $v\\in\\ker(u_i\\otimes\\mathrm{id}_{Q_t})$, the coordinate $\\alpha=(t,v)$ gives $(f_{ij}\\otimes\\mathrm{id}_{Q_t})(v)=0$. For any finitely presented $Q$, choose an isomorphism $e:Q\\to Q_t$. The maps $1\\otimes e$ and $1\\otimes e^{-1}$ are inverse and intertwine all these maps: on $m\\otimes q$ the commutation identity sends it to $f(m)\\otimes e(q)$. Applying this identity and then the inverse transfers the kernel inclusion to $Q$. Therefore, for every finitely presented $Q$, $\\ker(u_i\\otimes\\mathrm{id}_Q)\\subseteq\\ker(f_{ij}\\otimes\\mathrm{id}_Q)$. The single index $j$ works for all these $Q$.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M, proposition-ML-tensor, proof of (2) implies (1), killing the universal kernel element; use the given finitely presented directed system directly, as in Tag 059L, lemma-kernel-tensored-fp."
+   }
+  },
+  {
+   "text": "Fix $k\\ge j$. Since $u_i=u_k\\circ f_{ik}$, functoriality of tensor [def-weil-pbc-module-tensor-product] and step 3 give $\\ker(f_{ik}\\otimes\\mathrm{id}_Q)\\subseteq\\ker(f_{ij}\\otimes\\mathrm{id}_Q)$ for every finitely presented $Q$. The cokernel of $f_{ik}$ is finitely presented, as the following finite presentation shows. Choose generators $p_1,\\ldots,p_c$ of $M_i$ and a presentation $M_k=R^b/\\operatorname{im}(D)$ with $D:R^a\\to R^b$, with all integers finite [def-sc-finitely-presented-module]. Choose lifts $v_r\\in R^b$ of $f_{ik}(p_r)$. Then $M_k/f_{ik}(M_i)$ is the quotient of $R^b$ by $\\operatorname{im}(D)+\\sum_{r=1}^cRv_r$, hence is the cokernel of the finite matrix $(D\\ v_1\\ \\cdots\\ v_c):R^{a+c}\\to R^b$. Indeed an element of $R^b$ maps to zero in this quotient exactly when its image in $M_k$ is a linear combination of the $f_{ik}(p_r)$, which is exactly membership in that displayed submodule.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E, proposition-ML-characterization, proof of (2) implies (3), transitivity of domination and finite presentation of the transition cokernel."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-tensor-kernel-factorization] with $U=M_i$, $V=M_k$, $W=M_j$, $f=f_{ik}$ and $g=f_{ij}$. Both required hypotheses were verified in step 4: the cokernel of $f_{ik}$ is finitely presented and every finitely presented tensor test gives the stated kernel inclusion. Obtain an $R$-linear $h_k:M_k\\to M_j$ with $f_{ij}=h_k\\circ f_{ik}$. This applies to every $k\\ge j$, with the same $j$ chosen in step 3.",
+   "uses": [
+    "lem-trf-tensor-kernel-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E, proposition-ML-characterization, proof of (2) implies (3), application of Tag 059D."
+   }
+  },
+  {
+   "text": "Let $N$ be any $R$-module and $k\\ge j$. An element of the image of $\\operatorname{Hom}_R(M_j,N)\\to\\operatorname{Hom}_R(M_i,N)$ has the form $a\\circ f_{ij}$ for $a:M_j\\to N$. Step 5 rewrites it as $(a\\circ h_k)\\circ f_{ik}$, so it is in the image from $M_k$. Conversely, if $b:M_k\\to N$, then $b\\circ f_{ik}=(b\\circ f_{jk})\\circ f_{ij}$ by the directed-system identity $f_{ik}=f_{jk}\\circ f_{ij}$. Thus the two images are equal for every $k\\ge j$. This proves the required assertion for all $i$ and $N$, without countability or any finiteness condition on $N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E, proposition-ML-characterization, (3) implies (4); both image inclusions written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "lem-trf-finite-presentation-tensor-products",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-mittag-leffler-module",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-trf-tensor-kernel-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059M, proposition-ML-tensor, (2) implies (1), and Tag 059E, proposition-ML-characterization, (2) implies (3) implies (4). The universal kernel element is killed in the given system directly, as in Tag 059L."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +131,45 @@
    "results": "{\"t\": \"2026-10-17T21:16:18Z\", \"tool\": \"grep\", \"query\": \"Mittag|mittag|059E|059M|059W|059X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\"], \"digest\": \"fb061e33f8cfe26f\"}",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations do not assert countable extraction or the tensor-product module Mittag-Leffler/Hom-system bridge"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mittag\"",
+   "results": "{\"t\": \"2026-10-17T21:29:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Mittag\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Lean.IR.EmitLLVM.emitTag\", \"CategoryTheory.Functor.IsMittagLeffler\", \"CategoryTheory.Functor.IsMittagLeffler.toPreimages\", \"CategoryTheory.Functor.isMittagLeffler_of_surjective\", \"CategoryTheory.Functor.IsMittagLeffler.eq_image_eventualRange\", \"CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range\", \"CategoryTheory.Functor.isMittagLeffler_iff_eventualRange\", \"CategoryTheory.Functor.IsMittagLeffler.subset_image_eventualRange\"], \"digest\": \"4c4505e3803ac15c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: CofilteredSystem only supplies the inverse-system predicate and results assuming it, and tensor/direct-limit declarations do not infer that predicate from module tensor-to-product injectivity. The semantic alternatives found no such bridge."
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|059M|059E",
+   "results": "{\"t\": \"2026-10-17T21:29:35Z\", \"tool\": \"grep\", \"query\": \"Mittag|mittag|059M|059E\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\"], \"digest\": \"f65f2bd9cd9fed7d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: CofilteredSystem only supplies the inverse-system predicate and results assuming it, and tensor/direct-limit declarations do not infer that predicate from module tensor-to-product injectivity. The semantic alternatives found no such bridge."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor-product Mittag Leffler module presented as a directed colimit of finitely presented modules has Mittag Leffler inverse Hom systems into every module",
+   "results": "{\"t\": \"2026-10-17T21:29:36Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor-product Mittag Leffler module presented as a directed colimit of finitely presented modules has Mittag Leffler inverse Hom systems into every module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.fromDirectLimit\", \"TensorProduct.directLimitLeft\", \"TensorProduct.directLimitRight\", \"Submodule.FG.lTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directedSystem\", \"TensorProduct.toDirectLimit\", \"Submodule.FG.lTensor.directLimit_apply\", \"Submodule.FG.rTensor.directLimit_apply'\"], \"digest\": \"5d119d2cd12dacaf\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: CofilteredSystem only supplies the inverse-system predicate and results assuming it, and tensor/direct-limit declarations do not infer that predicate from module tensor-to-product injectivity. The semantic alternatives found no such bridge."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective tensor comparison with arbitrary products implies eventual stabilization of precomposition images in Hom from finite presentations",
+   "results": "{\"t\": \"2026-10-17T21:30:08Z\", \"tool\": \"leanfinder\", \"query\": \"Injective tensor comparison with arbitrary products implies eventual stabilization of precomposition images in Hom from finite presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isFinitelyPresentable\", \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\"], \"digest\": \"379aa9318bb895b2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: CofilteredSystem only supplies the inverse-system predicate and results assuming it, and tensor/direct-limit declarations do not infer that predicate from module tensor-to-product injectivity. The semantic alternatives found no such bridge."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product Mittag Leffler module implies inverse Hom systems have eventually constant images",
+   "results": "{\"t\": \"2026-10-17T21:30:08Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product Mittag Leffler module implies inverse Hom systems have eventually constant images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectedSystem.rTensor\", \"TensorProduct.directLimitLeft_symm_of_tmul\", \"TensorProduct.toDirectLimit\", \"Module.Invertible.rTensorInv\", \"TensorProduct.directLimitLeft_rTensor_of\", \"lTensorHomEquivHomLTensor\", \"Module.Invertible.rTensorInv_injective\", \"TensorProduct.directLimitRight_symm_of_tmul\"], \"digest\": \"a19af5f960648cdc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: CofilteredSystem only supplies the inverse-system predicate and results assuming it, and tensor/direct-limit declarations do not infer that predicate from module tensor-to-product injectivity. The semantic alternatives found no such bridge."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-countable-flat-mittag-leffler-projective",
@@ -84,5 +201,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-mittag-leffler-hom-systems",
+  "worker": "stage1",
+  "summary": "Read Stacks Tags 059M and 059E and the supporting Tags 059K, 059C and 059D. Retained the statement with arbitrary small directed index and arbitrary target N. Wrote the set of finite-matrix test modules, the universal product-kernel argument, its death at one later stage, the finite presentation of each transition cokernel, and both Hom image inclusions. Added only two supporting statement-only nodes (tensoring finite presentations with arbitrary products; tensor-kernel tests detecting factorization); reused the existing tensor-colimit and elementwise-colimit Mathlib leaves. No project Lean attachment was found.",
+  "blueprint": "Realizes the inherited ancestor proof supporting Tag 059X, lemma-countgen-projective, sentence that (Hom_R(M_i,N_1)) is Mittag-Leffler: steps 1-3 implement Tag 059M product-kernel argument, steps 4-5 implement Tag 059E (2) to (3), and step 6 implements (3) to (4). Historical blueprint ancestry and unit binding are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q89-0b45ab9c9",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-0b45ab9c9 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and wrote review.md. Stacks 059M/059E support all six steps; 059K and 059C–059D support both new nodes with the stated hypotheses. Checked kernel directions, uniform index, edge cases, duplicates, and acyclic dependencies. No long steps, prohibited machinery, missing citations, or repairs found."
  }
 }
