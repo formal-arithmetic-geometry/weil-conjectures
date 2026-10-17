@@ -87,7 +87,6 @@ lemma sum_const_mul_fiberCharFn [CompactSpace T] (c : LocallyConstant T V) (F : 
     fiberCharFn_apply, mul_ite, mul_one, mul_zero, map_apply]
   rw [Finset.sum_ite_eq, if_pos (c.range_finite.mem_toFinset.2 (Set.mem_range_self t))]
   rfl
-  rfl
 
 /-- On a compact space, the characteristic functions of the fibres of a locally constant
 function sum to `1`. -/
@@ -267,7 +266,7 @@ theorem sum_tmul_eq_zero [CompactSpace X] [CompactSpace Y] [CompactSpace Z] [T2S
       rw [← hx, ← hy]
       exact this
     rw [h0, show const Z (0 : R) = 0 from rfl, zero_smul]
-  · push_neg at hm
+  · push Not at hm
     obtain ⟨W, hW, hKW, hWK⟩ := exists_clopen_of_closed_subset_open
       ((cX.isLocallyConstant.isClopen_fiber α).isClosed.isCompact.image f.continuous).isClosed
       ((cY.isLocallyConstant.isClopen_fiber β).isClosed.isCompact.image
@@ -319,17 +318,17 @@ theorem isPushout_locallyConstant {X Y Z : Profinite.{u}} (f : X ⟶ Z) (g : Y �
   let P := CompHausLike.pullback f g
   let fst := (CompHausLike.pullback.fst f g).hom.hom
   let snd := (CompHausLike.pullback.snd f g).hom.hom
-  letI : Algebra (LocallyConstant Z ℤ) (LocallyConstant X ℤ) :=
+  let _ : Algebra (LocallyConstant Z ℤ) (LocallyConstant X ℤ) :=
     (comapRingHom f.hom.hom).toAlgebra
-  letI : Algebra (LocallyConstant Z ℤ) (LocallyConstant Y ℤ) :=
+  let _ : Algebra (LocallyConstant Z ℤ) (LocallyConstant Y ℤ) :=
     (comapRingHom g.hom.hom).toAlgebra
-  letI : Algebra (LocallyConstant X ℤ) (LocallyConstant P ℤ) := (comapRingHom fst).toAlgebra
-  letI : Algebra (LocallyConstant Y ℤ) (LocallyConstant P ℤ) := (comapRingHom snd).toAlgebra
-  letI : Algebra (LocallyConstant Z ℤ) (LocallyConstant P ℤ) :=
+  let _ : Algebra (LocallyConstant X ℤ) (LocallyConstant P ℤ) := (comapRingHom fst).toAlgebra
+  let _ : Algebra (LocallyConstant Y ℤ) (LocallyConstant P ℤ) := (comapRingHom snd).toAlgebra
+  let _ : Algebra (LocallyConstant Z ℤ) (LocallyConstant P ℤ) :=
     (comapRingHom (f.hom.hom.comp fst)).toAlgebra
-  haveI : IsScalarTower (LocallyConstant Z ℤ) (LocallyConstant X ℤ) (LocallyConstant P ℤ) :=
+  have : IsScalarTower (LocallyConstant Z ℤ) (LocallyConstant X ℤ) (LocallyConstant P ℤ) :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  haveI : IsScalarTower (LocallyConstant Z ℤ) (LocallyConstant Y ℤ) (LocallyConstant P ℤ) :=
+  have : IsScalarTower (LocallyConstant Z ℤ) (LocallyConstant Y ℤ) (LocallyConstant P ℤ) :=
     IsScalarTower.of_algebraMap_eq fun a ↦ by
       ext q
       exact congrArg a q.2

@@ -50,7 +50,7 @@ lemma boundedConstructibleFiniteTor_of_constructibleFiniteTor {X : Scheme.{u}}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     boundedConstructibleFiniteTor Λ X K := by
   obtain ⟨hbc, a, b, h⟩ := hK
-  exact ⟨hbc, a, b, hasTorAmplitudeIn_of_torAmplitudeIn Λ h⟩
+  exact ⟨hbc, a, b, hasTorAmplitudeIn_of_torAmplitudeIn h⟩
 
 /-- Smooth purity in tensor form: `Rf^! K ≅ Lf^* K ⊗ᴸ Λ_X(d)[2d]`. -/
 lemma nonempty_iso_rightDerivedUpperShriek_tensor_tateObject [HasTateTwist.IsNormalized Λ]
@@ -60,7 +60,8 @@ lemma nonempty_iso_rightDerivedUpperShriek_tensor_tateObject [HasTateTwist.IsNor
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K) :
     Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj K ≅
-      (L((f)^*[ModuleCat.{u + 1} Λ])).obj K ⊗ (tateObject Λ X d)⟦2 * (d : ℤ)⟧) := by
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
+        ((tateObject Λ X d)⟦2 * (d : ℤ)⟧)) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_twistShift Λ (d := d) f aY K
     (boundedConstructibleFiniteTor_of_constructibleFiniteTor Λ hK)
   exact ⟨e ≪≫ twistShiftObjIso Λ X d _ ≪≫
@@ -133,7 +134,8 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_smooth
   exact ⟨((derivedTensor _ P).mapIso ((L((p)^*[ModuleCat.{u + 1} Λ])).mapIso e₁)).app _ ≪≫
     ((derivedTensor _ P).obj _).mapIso ((L((q)^*[ModuleCat.{u + 1} Λ])).mapIso e₂) ≪≫
     ((derivedTensor _ P).mapIso t₁).app _ ≪≫ ((derivedTensor _ P).obj _).mapIso t₂ ≪≫
-    tensorTensorTensorComm _ _ _ _ ≪≫ whiskerLeftIso _ tw ≪≫
+    α_ _ _ _ ≪≫ whiskerLeftIso _ ((α_ _ _ _).symm ≪≫ whiskerRightIso (β_ _ _) _ ≪≫ α_ _ _ _) ≪≫
+    (α_ _ _ _).symm ≪≫ whiskerLeftIso _ tw ≪≫
     whiskerRightIso g.symm _ ≪≫ e.symm⟩
 
 end Etale

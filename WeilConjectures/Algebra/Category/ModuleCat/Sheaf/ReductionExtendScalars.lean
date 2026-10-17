@@ -65,20 +65,20 @@ the unit being the reduction map. -/
 noncomputable def adjunction : D.Φ ⊣ res :=
   Adjunction.mkOfHomEquiv
     { homEquiv F M := Equiv.ofBijective _ (D.bijective_r_app_comp_map F M)
-      homEquiv_naturality_left_symm {F F' M} f g := by
-        apply (Equiv.ofBijective _ (D.bijective_r_app_comp_map F' M)).injective
-        rw [Equiv.apply_symm_apply]
+      homEquiv_naturality_left_symm f g := by
+        rw [Equiv.symm_apply_eq]
         simp only [Equiv.ofBijective_apply, Functor.map_comp]
-        have := D.r.naturality f
-        dsimp at this
-        rw [reassoc_of% this]
-        exact congrArg (f ≫ ·)
-          ((Equiv.ofBijective _ (D.bijective_r_app_comp_map F M)).apply_symm_apply g).symm
+        have h := D.r.naturality f
+        dsimp at h
+        rw [← reassoc_of% h]
+        congr 1
+        exact (Equiv.ofBijective_apply_symm_apply _ _ g).symm
       homEquiv_naturality_right f g := by simp }
 
 @[simp]
 lemma adjunction_unit_app (F : 𝒜) : D.adjunction.unit.app F = D.r.app F := by
-  simp [adjunction]
+  change D.r.app F ≫ res.map (𝟙 _) = _
+  simp
 
 end CategoryTheory.Functor.ReductionDatum
 

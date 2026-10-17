@@ -63,6 +63,8 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
+set_option maxHeartbeats 2000000 in
+-- the kernel unfolds the monoidal instances of the two statements to identify them
 /-- The projection map of `Rf_!` is compatible with the associativity of the derived tensor
 product, for a general coefficient category: this is
 `AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc` for the chosen
@@ -73,6 +75,7 @@ theorem projectionMapAssociativity_general {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end General
 
+omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
 The projection map `PF : Rf_!M ⊗ᴸ N ⟶ Rf_!(M ⊗ᴸ Lf^*N)` is compatible with the associativity of
@@ -81,7 +84,6 @@ the derived tensor product: the two maps
 to `N ⊗ᴸ N'` followed by the tensor comparison `Lf^*(N ⊗ᴸ N') ≅ Lf^*N ⊗ᴸ Lf^*N'`, agree. This is
 the identification of "the two tensor reassociations" in the blueprint proof of the coherence of
 the projection formula. -/
-omit [Finite Λ] in
 theorem projectionMapAssociativity {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     ProjectionMapAssociativity (ModuleCat.{u + 1} Λ) f :=
   projectionMapAssociativity_general f

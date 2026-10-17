@@ -106,6 +106,89 @@ theorem isIso_derivedBaseChangeMap_app_of_nsmul_id_eq_zero {X Y X' Y' : Scheme.{
     (isIso_baseChange_of_isProper_of_torsionHomology Λ sq _
       fun q ↦ isTorsionModuleSheaf_homology_of_nsmul_id_eq_zero hN hM q)
 
+/-! ### General coefficients -/
+
+section General
+
+variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
+  [HasSmallSiteSheafify A]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+omit [CommRing Λ] in
+private lemma isIso_of_comp_eq {C : Type*} [Category C] {P Q R : C} {a : P ⟶ Q} {g : Q ⟶ R}
+    {r : P ⟶ R} (h : a ≫ g = r) [IsIso g] [IsIso r] : IsIso a := by
+  have : a = r ≫ inv g := by rw [← h]; simp
+  rw [this]
+  infer_instance
+
+/-- **The pullback of the projection map to a base change.** For a commutative square
+`g' ≫ f = f' ≫ g`, a compactification `c` of `f` and a compactification `c'` of `f'` lying over
+`c`, the pullback `Lg^* PF_{c, K, L}` of the projection map is an isomorphism as soon as the
+derived base change maps of the proper parts are invertible at `i_! K` and `i_!(K ⊗ᴸ Lf^* L)`
+and the projection formula for `c'` holds at `(Lg'^* K, Lg^* L)`. -/
+theorem isIso_leftDerivedUpperStar_map_projectionMapOfCompactification {X' X Y' Y : Scheme.{u}}
+    {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq g' f' f g)
+    (c : Compactification f) (c' : Compactification f') (q : c'.Z ⟶ c.Z)
+    (hi : IsPullback g' c'.i c.i q) (hp : CommSq q c'.g c.g g)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
+    (h₁ : IsIso ((derivedBaseChangeMap A hp).app (D((c.i)_!open[A]).obj K)))
+    (h₂ : IsIso ((derivedBaseChangeMap A hp).app
+      (D((c.i)_!open[A]).obj (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)))))
+    (h₃ : HasProjectionFormulaOfCompactification A c' ((L((g')^*[A])).obj K)
+      ((L((g)^*[A])).obj L)) :
+    IsIso ((L((g)^*[A])).map (((projectionMapOfCompactification A c).app K).app L)) := by
+  have key := projectionMapOfCompactification_baseChange' A sq c c' q hi hp K L
+  have : IsIso ((rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp).app
+      K) := by
+    rw [rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app]
+    infer_instance
+  have : IsIso ((rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp).app
+      (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L))) := by
+    rw [rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app]
+    infer_instance
+  have : IsIso (((projectionMapOfCompactification A c').app ((L((g')^*[A])).obj K)).app
+      ((L((g)^*[A])).obj L)) := h₃
+  exact isIso_of_comp_eq key
+
+/-- The projection formula at the first two objects of a distinguished triangle gives it at the
+third. -/
+lemma HasProjectionFormulaOfCompactification.obj₃ {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {T : Pretriangulated.Triangle (_root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))}
+    (hT : T ∈ distTriang _) (h₁ : HasProjectionFormulaOfCompactification A c K T.obj₁)
+    (h₂ : HasProjectionFormulaOfCompactification A c K T.obj₂) :
+    HasProjectionFormulaOfCompactification A c K T.obj₃ := by
+  let τ : (-⊗ᴸ-(Y)[A]).obj ((Rf_!(c)[A]).obj K) ⟶
+      L((f)^*[A]) ⋙ (-⊗ᴸ-(X)[A]).obj K ⋙ Rf_!(c)[A] := (projectionMapOfCompactification A c).app K
+  have h₁ : IsIso (τ.app T.obj₁) := h₁
+  have h₂ : IsIso (τ.app T.obj₂) := h₂
+  exact NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂ τ hT h₁ h₂
+
+/-- **Dévissage of the projection formula in the second variable.** If the projection formula
+holds at `(K, F[0])` for every sheaf `F` with a property `P`, it holds at `(K, L)` for every
+bounded `L` whose cohomology sheaves have the property `P`. -/
+lemma HasProjectionFormulaOfCompactification.of_bounded {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (P : ObjectProperty (Sheaf Y.smallEtaleTopology A)) [P.IsClosedUnderIsomorphisms]
+    (hP : ∀ F, P F → HasProjectionFormulaOfCompactification A c K
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
+    (hL : _root_.DerivedCategory.TStructure.t.bounded L)
+    (hLP : ∀ n, P ((_root_.DerivedCategory.homologyFunctor _ n).obj L)) :
+    HasProjectionFormulaOfCompactification A c K L := by
+  let τ : (-⊗ᴸ-(Y)[A]).obj ((Rf_!(c)[A]).obj K) ⟶
+      L((f)^*[A]) ⋙ (-⊗ᴸ-(X)[A]).obj K ⋙ Rf_!(c)[A] := (projectionMapOfCompactification A c).app K
+  exact _root_.DerivedCategory.prop_of_bounded τ.isoLocus P hP L hL hLP
+
+end General
+
 /-! ### The geometric point criterion -/
 
 /-- **The projection formula can be checked on geometric fibres.** Let `c` be a compactification
@@ -127,24 +210,14 @@ theorem hasProjectionFormulaOfCompactification_of_forall_algClosurePoint {X Y : 
       (c.ofIsPullback (IsPullback.of_hasPullback f (Y.algClosurePoint y)))
       ((L((pullback.fst f (Y.algClosurePoint y))^*[ModuleCat.{u + 1} Λ])).obj K)
       ((L((Y.algClosurePoint y)^*[ModuleCat.{u + 1} Λ])).obj L)) :
-    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L := by
-  refine isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map Λ _ fun y ↦ ?_
-  have sq := IsPullback.of_hasPullback f (Y.algClosurePoint y)
-  have key := projectionMapOfCompactification_baseChange' (ModuleCat.{u + 1} Λ) sq.toCommSq c
-    (c.ofIsPullback sq) (pullback.fst c.g (Y.algClosurePoint y))
-    (c.isPullback_i_ofIsPullback sq)
-    (IsPullback.of_hasPullback c.g (Y.algClosurePoint y)).toCommSq K L
-  simp only [rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app] at key
-  have := h₁ y
-  have := h₂ y
-  have : IsIso (((projectionMapOfCompactification (ModuleCat.{u + 1} Λ)
-      (c.ofIsPullback sq)).app
-        ((L((pullback.fst f (Y.algClosurePoint y))^*[ModuleCat.{u + 1} Λ])).obj K)).app
-        ((L((Y.algClosurePoint y)^*[ModuleCat.{u + 1} Λ])).obj L)) := h₃ y
-  have hR : IsIso (L((Y.algClosurePoint y)^*[ModuleCat.{u + 1} Λ]).map
-      (((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c).app K).app L) ≫ _) := by
-    rw [key]; infer_instance
-  exact IsIso.of_isIso_comp_right _ _
+    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L :=
+  isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map Λ _ fun y ↦
+    isIso_leftDerivedUpperStar_map_projectionMapOfCompactification _
+      (IsPullback.of_hasPullback f (Y.algClosurePoint y)).toCommSq c
+      (c.ofIsPullback (IsPullback.of_hasPullback f (Y.algClosurePoint y)))
+      (pullback.fst c.g (Y.algClosurePoint y))
+      (c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback f (Y.algClosurePoint y)))
+      (IsPullback.of_hasPullback c.g (Y.algClosurePoint y)).toCommSq K L (h₁ y) (h₂ y) (h₃ y)
 
 /-! ### Separably closed fields -/
 
@@ -203,42 +276,41 @@ theorem hasProjectionFormulaOfCompactification_of_isSepClosed [IsPrincipalIdealR
     {f' : X' ⟶ Spec (.of Ω)} (c' : Compactification f') (E : 𝐃(X')) {C : 𝐃(Spec (.of Ω))}
     (hC : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of Ω)) C) :
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c' E C := by
-  let τ := (projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c').app E
   let e := constantSheafEquivalenceOfIsSepClosed Λ (k := Ω)
   -- the projection formula at a constant sheaf with finitely generated value
   have hM : ∀ M : ModuleCat.{u + 1} Λ, Module.Finite Λ M →
-      τ.isoLocus ((_root_.DerivedCategory.singleFunctor _ 0).obj (e.functor.obj M)) := by
+      HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c' E
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj (e.functor.obj M)) := by
     intro M _
     obtain ⟨a, b, S, hS, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := exists_shortExact_pi Λ M
     have hT := (hS.map_of_exact e.functor).singleTriangle_distinguished
-    have h₁ : IsIso (τ.app ((_root_.DerivedCategory.singleFunctor _ 0).obj
-        (e.functor.obj S.X₁))) :=
-      (NatTrans.isIso_app_iff_of_iso τ ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-        (e.functor.mapIso e₁))).2
+    refine HasProjectionFormulaOfCompactification.of_iso_right _ c'
+      ((_root_.DerivedCategory.singleFunctor _ 0).mapIso (e.functor.mapIso e₃))
+      (HasProjectionFormulaOfCompactification.obj₃ _ c' E hT ?_ ?_)
+    · exact HasProjectionFormulaOfCompactification.of_iso_right _ c'
+        ((_root_.DerivedCategory.singleFunctor _ 0).mapIso (e.functor.mapIso e₁)).symm
         (hasProjectionFormulaOfCompactification_constantSheaf_pi Λ c' E b)
-    have h₂ : IsIso (τ.app ((_root_.DerivedCategory.singleFunctor _ 0).obj
-        (e.functor.obj S.X₂))) :=
-      (NatTrans.isIso_app_iff_of_iso τ ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-        (e.functor.mapIso e₂))).2
+    · exact HasProjectionFormulaOfCompactification.of_iso_right _ c'
+        ((_root_.DerivedCategory.singleFunctor _ 0).mapIso (e.functor.mapIso e₂)).symm
         (hasProjectionFormulaOfCompactification_constantSheaf_pi Λ c' E a)
-    have h₃ := NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂ τ hT h₁ h₂
-    exact (NatTrans.isIso_app_iff_of_iso τ ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-      (e.functor.mapIso e₃))).1 h₃
-  have hP : ∀ F : Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ),
-      Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) (Spec (.of Ω)) F →
-      τ.isoLocus ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
-    intro F hF
-    have : IsConstructibleSheaf F := hF
-    have hfin := finite_Γ_of_isConstructibleSheaf (Λ := Λ) (k := Ω) F
-    have : Module.Finite Λ (e.inverse.obj F) :=
-      Module.Finite.equiv ((Sheaf.ΓNatIsoSheafSections (Spec (.of Ω)).smallEtaleTopology
-        (ModuleCat.{u + 1} Λ) isTerminalEtalePoint).app F).toLinearEquiv
-    exact (NatTrans.isIso_app_iff_of_iso τ ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-      (e.counitIso.app F))).1 (hM _ this)
-  exact _root_.DerivedCategory.prop_of_bounded τ.isoLocus
-    (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) (Spec (.of Ω))) hP C hC.1 hC.2
+  refine HasProjectionFormulaOfCompactification.of_bounded _ c' E
+    (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) (Spec (.of Ω))) (fun F hF ↦ ?_) C hC.1 hC.2
+  have : IsConstructibleSheaf F := hF
+  have hfin := finite_Γ_of_isConstructibleSheaf (Λ := Λ) (k := Ω) F
+  have : Module.Finite Λ (e.inverse.obj F) :=
+    Module.Finite.equiv ((Sheaf.ΓNatIsoSheafSections (Spec (.of Ω)).smallEtaleTopology
+      (ModuleCat.{u + 1} Λ) isTerminalEtalePoint).app F).toLinearEquiv
+  exact HasProjectionFormulaOfCompactification.of_iso_right _ c'
+    ((_root_.DerivedCategory.singleFunctor _ 0).mapIso (e.counitIso.app F)) (hM _ this)
 
 /-! ### Torsion objects -/
+
+omit [CommRing Λ] in
+private lemma nsmul_id_eq_zero_of_iso {C : Type*} [Category C] [Preadditive C] {P Q : C}
+    (e : P ≅ Q) {N : ℕ} (h : N • 𝟙 Q = 0) : N • 𝟙 P = 0 := by
+  have h2 : e.hom ≫ (N • 𝟙 Q) ≫ e.inv = N • 𝟙 P := by
+    rw [Preadditive.nsmul_comp, Preadditive.comp_nsmul, Category.id_comp, e.hom_inv_id]
+  rw [← h2, h, zero_comp, comp_zero]
 
 /-- **The projection formula for torsion objects.** Let `Λ` be a principal ideal domain and `c`
 a compactification of `f : X ⟶ Y`. If `K` is killed by a nonzero integer and bounded below,
@@ -254,8 +326,12 @@ theorem hasProjectionFormulaOfCompactification_of_nsmul_id_eq_zero [IsPrincipalI
   have : IsOpenImmersion c.i := c.isOpenImmersion
   have hKL : N • 𝟙 (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj
       (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) = 0 := by
-    rw [← NatTrans.id_app, ← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hK,
-      Functor.map_zero, NatTrans.app_zero]
+    obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    refine nsmul_id_eq_zero_of_iso (β_ K (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) ?_
+    change N • 𝟙 (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj
+      (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)).obj K) = 0
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hK, Functor.map_zero]
   have hi : ∀ T : 𝐃(X), N • 𝟙 T = 0 →
       N • 𝟙 (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj T) = 0 := fun T hT ↦ by
     rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hT, Functor.map_zero]
