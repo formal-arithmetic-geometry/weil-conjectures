@@ -28,7 +28,8 @@ namespace Polynomial
 
 /-- `Xⁿ - π` is Eisenstein at `(π)` for an irreducible element `π` and `n ≠ 0`. -/
 theorem isEisensteinAt_X_pow_sub_C {O : Type*} [CommRing O] [IsDomain O] {π : O}
-    (hπ : Irreducible π) {n : ℕ} (hn : n ≠ 0) : (X ^ n - C π).IsEisensteinAt (Ideal.span {π}) where
+    (hπ : Irreducible π) {n : ℕ} (hn : n ≠ 0) :
+    (X ^ n - C π).IsEisensteinAt (Ideal.span {π}) where
   leading := by
     rw [(monic_X_pow_sub_C π hn).leadingCoeff, Ideal.mem_span_singleton, ← isUnit_iff_dvd_one]
     exact hπ.not_isUnit
@@ -155,7 +156,8 @@ theorem maximalIdeal_eq_span_root (hπ : Irreducible π) (hn : n ≠ 0) :
 include h in
 /-- `O[X]/(Xⁿ - π)` is a discrete valuation ring (it is a domain by
 `IsAdjoinRoot.isDomain_of_X_pow_sub_C`). -/
-theorem isDiscreteValuationRing_of_X_pow_sub_C [IsDomain O₂] (hπ : Irreducible π) (hn : n ≠ 0) :
+theorem isDiscreteValuationRing_of_X_pow_sub_C [IsDomain O₂] (hπ : Irreducible π)
+    (hn : n ≠ 0) :
     IsDiscreteValuationRing O₂ := by
   have := h.isLocalRing_of_X_pow_sub_C hπ hn
   have : Module.Finite O O₂ := (h.toMonicOfXPowSubC hn).powerBasis.finite
