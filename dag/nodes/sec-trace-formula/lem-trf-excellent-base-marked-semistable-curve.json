@@ -24,48 +24,101 @@
   "def-sbc-smooth-morphisms",
   "def-weil-geometric-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-excellent-base-generic-curve-preparation] to $f:C\\to B$ and $Z$. It gives alterations $a_0:C_0\\to C$ and $b_0:B_0\\to B$, a proper dominant $f_0$ with $fa_0=b_0f_0$, a smooth geometrically integral generic fibre, and the nowhere-dense reduced boundary $Z_0$ with finite etale generic fibre. No projectivity or separatedness of $B$ or $B_0$ is required.",
+   "uses": [
+    "lem-trf-excellent-base-generic-curve-preparation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Theorem 2.4 proof, §§2.7–2.10, pp. 603–605"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-dejong-arbitrary-base-marked-semistable] to $(f_0,Z_0)$. Its hypotheses hold by Step 1. We obtain integral excellent $C_1,B_1$, alterations $a_1,b_1$, a proper flat finitely presented nodal curve $f_1:C_1\\to B_1$, a smooth geometrically integral generic fibre, a proper etale Cartier divisor $D$ in the smooth locus, a nowhere-dense $T_1$, and $a_1^{-1}(Z_0)\\subset |D|\\cup f_1^{-1}(T_1)$.",
+   "uses": [
+    "lem-trf-excellent-base-generic-curve-preparation",
+    "lem-trf-dejong-arbitrary-base-marked-semistable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX Theorem 1.2(i),(iii)–(vi), p. 131"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-etale-marking-sections] to $g=f_1:C_1\\to B_1$ and the divisor $D$ of Step 2; its hypotheses (proper flat finitely presented, integral excellent Noetherian schemes, geometrically integral generic curve, $D$ effective Cartier in the smooth locus and proper etale over $B_1$) are exactly the outputs of [lem-trf-dejong-arbitrary-base-marked-semistable] in Step 2. We get a finite surjective $c:B_2\\to B_1$ with $B_2$ integral excellent Noetherian, the base change $C_2=C_1\\times_{B_1}B_2$, integral excellent Noetherian, with finite surjective projection $e:C_2\\to C_1$ and curve map $f_2:C_2\\to B_2$, and sections $s_1,\\dots,s_n$ with pairwise disjoint images whose disjoint union is $e^{-1}(D)$, landing in the smooth locus of $f_2$. Put $T=c^{-1}(T_1)$: it is closed, and proper because $c$ is finite dominant between integral schemes, so the generic point of $B_2$ maps to that of $B_1$, which is not in the nowhere-dense $T_1$. Since $|Z_0|=a_0^{-1}(|Z|)$, Step 2 gives $e^{-1}a_1^{-1}a_0^{-1}(Z)\\subseteq e^{-1}(|D|)\\cup e^{-1}f_1^{-1}(T_1)=\\bigcup_is_i(B_2)\\cup f_2^{-1}(T)$, using $f_1e=cf_2$.",
+   "uses": [
+    "lem-trf-finite-etale-marking-sections",
+    "lem-trf-dejong-arbitrary-base-marked-semistable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL; ILO Exposé IX 1.2(v),(vi), p. 131"
+   }
+  },
+  {
+   "text": "Set $C'=C_2$, $B'=B_2$, $f'=f_2$, $a=a_0a_1e$ and $b=b_0b_1c$; then $fa=bf'$ by the three commutative squares. Each factor is proper (finite morphisms are proper), so $a,b$ are proper by [lem-weil-pbc-proper-fp-permanence], and surjective as composites of surjections. Finiteness over a dense open: if $u:P\\to Q$ is finite over a dense open $U\\subseteq Q$ and $w:R\\to P$ is finite over a dense open $W\\subseteq P$, with $P,Q,R$ integral and $u$ dominant, then $u(u^{-1}(U)\\setminus W)$ is closed in $U$ (a finite morphism is closed) and omits the generic point of $Q$ (over $U$ the fibre at the generic point of $Q$ is the spectrum of a localization of an affine domain finite over a domain, hence a field: its only point is the generic point of $P$, which lies in the nonempty open $W$); on the dense open $U'=U\\setminus u(u^{-1}(U)\\setminus W)$ we have $u^{-1}(U')\\subseteq W$, so $uw$ is finite over $U'$, affine locally by products of module generators [def-weil-finite-integral-morphism]. Hence $a$ and $b$ are alterations. By [lem-trf-finite-etale-marking-sections](ii), $f'$ is proper, flat and of finite presentation, its generic fibre is smooth and geometrically integral (the base change by a field extension of the smooth geometrically integral generic fibre of $f_1$), and each geometric fibre of $f'$ is a geometric fibre of $f_1$, hence a nonempty connected reduced curve of pure dimension $1$ smooth except at ordinary double points by Step 2. The sections and $T$ come from Step 3, and $C',B'$ are integral excellent Noetherian by Steps 1--3. If $Z=\\varnothing$ or $D=\\varnothing$, then $n=0$ and the containment is still that of Step 3.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-finite-integral-morphism",
+    "lem-trf-finite-etale-marking-sections",
+    "lem-trf-dejong-arbitrary-base-marked-semistable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IX Theorem 1.2(iii),(iv), p. 131"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-trf-dejong-arbitrary-base-marked-semistable",
+  "lem-trf-excellent-base-generic-curve-preparation",
+  "lem-trf-finite-etale-marking-sections",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf; literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "ILO Exposé IX Theorem 1.2; de Jong 1997 Theorem 2.4 §§2.2, 2.7–2.10; local de Jong PDF WANTED"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "semistable|semiStable|nodal|ordinaryDouble",
-   "results": "{\"t\": \"2026-10-17T17:55:27Z\", \"tool\": \"grep\", \"query\": \"semistable|semiStable|nodal|ordinaryDouble\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures: ordinary Proj properness, smoothness, flatness, Weierstrass good reduction over a DVR and Lagrange nodal polynomials do not construct a marked semistable alteration over an arbitrary excellent base.",
-   "date": "2026-10-18",
+   "query": "smooth.*geometrically integral|generic.*curve|Alteration",
+   "results": "0 hits in Mathlib AlgebraicGeometry.",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Alteration of a family of curves to a flat projective nodal curve with smooth geometrically integral generic fibre",
-   "results": "{\"t\": \"2026-10-17T17:55:28Z\", \"tool\": \"leansearch\", \"query\": \"Alteration of a family of curves to a flat projective nodal curve with smooth geometrically integral generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.comp\", \"WeierstrassCurve.toProjective\", \"AlgebraicGeometry.flat_iff\", \"WeierstrassCurve.VariableChange\"], \"digest\": \"75c3b4185281908c\"}; Read all returned signatures: ordinary Proj properness, smoothness, flatness, Weierstrass good reduction over a DVR and Lagrange nodal polynomials do not construct a marked semistable alteration over an arbitrary excellent base.",
-   "date": "2026-10-18",
+   "query": "A proper dominant morphism of integral excellent schemes with one dimensional generic fibre admits an alteration with smooth geometrically integral generic fibre",
+   "results": "8 hits on IsSmooth/IsProper/IsDominant declarations; no alteration theorem.",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"Nodal\"",
-   "results": "{\"t\": \"2026-10-17T17:55:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lagrange.nodalWeight\", \"Lagrange.nodal\", \"Lagrange.nodal_monic\", \"Lagrange.natDegree_nodal\", \"Lagrange.degree_nodal\", \"Lagrange.nodal_empty\", \"Lagrange.nodal_ne_zero\", \"Lagrange.eval_nodal_at_node\"], \"digest\": \"6fe8341e0729cc44\"}; Read all returned signatures: ordinary Proj properness, smoothness, flatness, Weierstrass good reduction over a DVR and Lagrange nodal polynomials do not construct a marked semistable alteration over an arbitrary excellent base.",
-   "date": "2026-10-18",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsProper",
+   "results": "0 hits; unknown identifier AlgebraicGeometry.IsSmooth.",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "A proper family of curves over an excellent integral scheme admits an alteration to a projective semistable family with marked disjoint sections",
-   "results": "{\"t\": \"2026-10-17T17:55:39Z\", \"tool\": \"leanfinder\", \"query\": \"A proper family of curves over an excellent integral scheme admits an alteration to a projective semistable family with marked disjoint sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj\"], \"digest\": \"6907c0cc5fd82812\"}; Read all returned signatures: ordinary Proj properness, smoothness, flatness, Weierstrass good reduction over a DVR and Lagrange nodal polynomials do not construct a marked semistable alteration over an arbitrary excellent base.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Semistable reduction of a proper relative curve after altering both the source and arbitrary excellent base",
-   "results": "{\"t\": \"2026-10-17T17:55:39Z\", \"tool\": \"leanfinder\", \"query\": \"Semistable reduction of a proper relative curve after altering both the source and arbitrary excellent base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"WeierstrassCurve.reduction\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"b9dff92d2f56bc55\"}; Read all returned signatures: ordinary Proj properness, smoothness, flatness, Weierstrass good reduction over a DVR and Lagrange nodal polynomials do not construct a marked semistable alteration over an arbitrary excellent base.",
-   "date": "2026-10-18",
+   "query": "Alteration of a proper dominant family of curves over an excellent base to a model with smooth geometrically integral generic fibre",
+   "results": "8 hits on smoothness, normalization, dominance and properness; no alteration theorem.",
+   "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-de-jong-geometrically-irreducible-tower",
@@ -77,7 +130,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof of (1) and (2): \"Varshavsky's theorem is proved by specialization to the normal cone of Z\"; the Orgogozo modification input, via the application of de Jong Theorem 5.9 in Lemma 3.3.2.",
+   "place": "Proof of (1) and (2): the de Jong alteration input used in the Orgogozo modification branch; Theorem 2.4 and its generic-fibre preparation §§2.7–2.10.",
    "via": [
     "lem-trf-de-jong-geometrically-irreducible-tower",
     "lem-trf-plurinodal-proper-hypercover",
@@ -89,5 +142,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-excellent-base-marked-semistable-curve",
+  "worker": "stage1",
+  "summary": "Repaired the false projective-base preparation route. Generic preparation is now over an arbitrary excellent base; the proof applies the arbitrary-base trivial-group form of ILO Exposé IX Theorem 1.2, then uses a finite-etale splitting node to pass through components, normalize a finite compositum, recheck integrality, and obtain disjoint sections.",
+  "blueprint": "Realizes the de Jong marked semistable alteration input in lem-trf-local-term-locality via arbitrary-base generic preparation, ILO IX 1.2, and finite-etale section extraction."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-b1c9cb702",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-b1c9cb702 (reviewer sub-agent of L); spot-checked: FIX with three repairs. Mathematics read in full: the item, all three new nodes, the unit sk-i-curve-zero, the only citer (lem-trf-de-jong-geometrically-irreducible-tower, which applies the item with empty boundary only), and ILO arXiv 1207.3648 Exp. IX Thm 1.2 and §§1.3–1.4, pp. 131–133. (1) C4/E: lem-trf-finite-etale-marking-sections only said the sections' images 'lie in the pullback of D'. Zero sections satisfy that, so Step 3 did not get the covering it needs for a^{-1}(Z) ⊆ ∪s_i ∪ f'^{-1}(T). The node also assumed only a geometrically connected generic fibre yet claimed an integral, flat 'induced' X_1. I restated it: geometrically integral hypothesis; finite surjective B_1→B with X_1 = X×_B B_1; X_1 integral; base-change properties; D_1 is exactly the disjoint union of finitely many section images. It is true: normalize B in a Galois closure of the residue fields of D_η, then each component of D_1 is integral normal with function field L (Stacks 0BQL), so it has degree 1 and gives a section. I rewrote Step 3 with T = c^{-1}(T_1) and the containment spelled out (the extra vertical-component clause was dropped, true but not needed), and Step 4 with the dense-open finiteness argument written out. (2) B9: blueprint.from.via of lem-trf-dejong-arbitrary-base-marked-semistable and lem-trf-finite-etale-marking-sections left out lem-trf-de-jong-geometrically-irreducible-tower; corrected, and def-weil-geometric-fibre added to the arbitrary-base node's stmt_deps since its statement cites it. (3) The declared tool_uses name two nodes in the item's own unit, so they are not off-route; removed, no tool use accepted. Source checks: the arbitrary-base node matches the trivial-group case of ILO IX 1.2 (i),(iii)–(vi), which has no separatedness or projectivity hypothesis on the base; the node assumes more (geometrically integral generic fibre), and every conclusion follows. It generalizes, and does not duplicate, the two projective-base nodes. The generic-preparation node is true by the ILO IX 1.3 reduction (finite field extension, normalization, Stein factorization) and is not a duplicate of the field or trait versions. The item's statement is unchanged, so no target or citer is weakened; no SGA cited; no cycle.; 3 file(s) fixed by the reviewer"
  }
 }
