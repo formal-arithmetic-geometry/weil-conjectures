@@ -1,0 +1,78 @@
+{
+ "id": "lem-pur-affine-space-trace-factorization",
+ "kind": "statement",
+ "title": "Ordered affine-space integration and the binary relative product",
+ "statement": "In the finite-coefficient conventions [def-pur-conventions], put $A=A_{E,n}$ and let $Y$ be a separated finite-type $k$-scheme. Write $p_m:X_m=\\mathbf A^m_Y\\to Y$, $m\\geq1$, and $q_m:X_{m+1}\\to X_m$ for the last-coordinate affine-line projection [def-sbc-affine-space], so $p_{m+1}=p_mq_m$. Put $T_m=A_{X_m}(m)[2m]$ using [def-coefficient-twists-detailed], $V_m=Rp_{m!}T_m$, $a=p_1$, $T=T_1$, and $U=Ra_!T$. Let $t_Y:U\\to A_Y$ be exactly the normalized integration in [def-pur-affine-line-purity-comparison]. Let $\\gamma_{p_m,A_Y}$ be the ordered comparison [def-pur-affine-space-comparison], and define its actual exceptional transpose by\n$$I_m=\\varepsilon_{p_m,A_Y}\\circ Rp_{m!}(\\gamma_{p_m,A_Y}):V_m\\longrightarrow A_Y,$$\nusing the constructible exceptional adjunction [def-weil-exceptional-inverse-image] and the tensor-unit identification of the source. Assume that the $V_m$ are bounded constructible of finite Tor amplitude, and that these affine-line integrations commute with base change: for every $v:Y'\\to Y$ between separated finite-type $k$-schemes, $v^*t_Y=t_{Y'}\\circ\\operatorname{Ex}_!$ under the canonical Tate pullback identifications; make the same assumption over each such base $Y'$. Let\n$$\\kappa_{m,1}:V_{m+1}\\xrightarrow{\\sim}V_m\\otimes_A^LU$$\nbe the specified relative compact-support product construction of [thm-sf-kunneth-relative] for $(p_m,T_m)$ and $(a,T)$, with $T_m\\boxtimes T=T_{m+1}$ under canonical twist, shift and pullback identifications. Then the actual maps satisfy\n$$I_1=t_Y,\\qquad I_{m+1}=(I_m\\otimes t_Y)\\circ\\kappa_{m,1}\\quad(m\\geq1),$$\nwhere $A_Y\\otimes_A^LA_Y\\cong A_Y$ is understood. The assertion uses the canonical finite-coefficient exchanges, projection transformations and compact-support composition comparisons; it makes no coordinate-permutation assertion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
+  "place": "Proof Steps 3--4, as expanded in returned split Step 7: identifying the pasted ordered integration with (I_m tensor t) composed with the canonical binary product map"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-coefficient-twists-detailed",
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-affine-space-comparison",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-kunneth-relative"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional adjoint transpose of ordered affine line purity comparisons equals the tensor product of line integration maps under the compact support Kunneth isomorphism",
+   "results": "LightCondensed.ihomPoints_symm_comp; CharacterModule.dual_rTensor_conj_homEquiv; TensorPower.pairingDual; TensorPower.pairingDual_tprod_tprod; contractLeft_assoc_coevaluation; contractLeft_assoc_coevaluation'; comp_dualTensorHom; dualTensorHom_prodMap_zero. Read returned signatures: these do not assert the etale compact-support claim; generic tensor/adjunction identities do not supply its geometric comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fubini identity for etale integration along affine spaces: the ordered composite adjunction counit is the tensor product of normalized affine line traces",
+   "results": "AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp; AlgebraicGeometry.AffineSpace.map_toSpecMvPoly; AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc; AlgebraicGeometry.AffineSpace.map_Spec_map; AlgebraicGeometry.AffineSpace.SpecIso_inv_over; AlgebraicGeometry.AffineSpace.map_SpecMap; AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc. Read returned signatures: these do not assert the etale compact-support claim; generic tensor/adjunction identities do not supply its geometric comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace of iterated affine line exceptional inverse image purity is the tensor power of the affine line trace under the relative compact support Kunneth isomorphism",
+   "results": "Algebra.trace; LinearMap.trace_tensorProduct'; LinearMap.trace_baseChange; Matrix.trace_kroneckerTMul; Algebra.trace_eq_of_algEquiv; LinearMap.trace_map; Algebra.intTrace.congr_simp; LinearMap.trace_tensorProduct. Read returned signatures: these do not assert the etale compact-support claim; generic tensor/adjunction identities do not supply its geometric comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"comp\"",
+   "results": "CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.comp_map_bijective_iff; CategoryTheory.Adjunction.left_triangle_components; CategoryTheory.Adjunction.map_comp_bijective_iff; CategoryTheory.Adjunction.right_triangle_components; CategoryTheory.Adjunction.compCoyonedaIso; CategoryTheory.Adjunction.compUliftCoyonedaIso; CategoryTheory.Adjunction.left_triangle_components_assoc. Read returned signatures: these do not assert the etale compact-support claim; generic tensor/adjunction identities do not supply its geometric comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*(tensor|affine)|integrat.*kunneth|purity.*comp",
+   "results": "No hits in Mathlib/AlgebraicGeometry (subdirectory argument AlgebraicGeometry).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-affine-space-composition-law",
+  "date": "2026-10-17",
+  "group": "Q121"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4, as expanded in returned split Step 7: identifying the pasted ordered integration with (I_m tensor t) composed with the canonical binary product map",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -112,24 +112,43 @@
    }
   },
   {
-   "text": "Use the compact-support relative product [thm-sf-kunneth-relative] with the $m$ copies of $(a:L_Y\\to Y,T)$. Denote its iterated isomorphism by $\\kappa_m:Rp_{m!}T_m\\xrightarrow{\\sim}U^{\\otimes^Lm}$. Only (A2), (A3), (A4) of [def-sf-datum] are involved: their concrete finite-level inputs are respectively [thm-cbc-finite-torsion], [lem-weil-finite-compact-projection-formula], and [thm-sf-comp-composition]. The objects on the source factors are shifted locally free rank-one sheaves, so meet the finite-Tor and constructibility conditions. One further condition must be checked: the second projection formula in the binary relative product uses $V_m=Rp_{m!}T_m$ as its base coefficient. For $m=1$, apply [lem-amb-affine-space-top-trace] with $S=Y$, $d=1$ and $N=\\ell^r$ chosen in Step 2. Its finite commutative coefficient ring is $A=A_{E,n}$, with $NA=0$; $N$ is invertible on the $k$-scheme $Y$ since $\\ell\\ne p$, and $Y$ is Noetherian by Step 1. The input $A_{\\mathbf A^1_Y}(1)[2]$ is bounded below. The cited statement identifies the source of its counit with $Ra_!A_{\\mathbf A^1_Y}(1)[2]$ and says the counit is an isomorphism. Used only in dimension one, it therefore gives an isomorphism of objects $U\\cong A_Y$ on the ordinary etale site; Step 2 identifies its ordinary finite Tate sheaf $\\mu_N\\otimes_{\\mathbf Z/N}A$ with $T[-2]$, and Step 1 realizes it pro-etale. Thus $U$ is bounded constructible of Tor amplitude $[0,0]$. Inductively suppose $V_m$ is bounded constructible of finite Tor amplitude. The binary relative product on $(p_m,T_m)$ and $(a,T)$ then uses projection formulas only with finite-Tor coefficients $T$ (pulled back to the inner base) and $V_m$ on $Y$. Its concrete hypotheses are supplied by the three finite-level inputs just cited, so it gives $V_{m+1}\\cong V_m\\otimes^LU$, which is again bounded constructible of finite Tor amplitude since $U\\cong A_Y$. In particular the object induction gives $V_m\\cong A_Y$ and Tor amplitude $[0,0]$ for every $m\\geq1$: the base is $V_1=U\\cong A_Y$, and $V_{m+1}\\cong V_m\\otimes^LU\\cong A_Y\\otimes_A^LA_Y\\cong A_Y$. The tensor-unit equalities are elementary. This proves the required domain condition at every stage, independently of any identification of the ordered maps $I_m$ with the top-trace counits. Thus this use imposes neither a duality axiom nor a general ambient pro-etale adjoint assumption. The definition of the binary product map in [thm-sf-kunneth-relative] identifies the successive projection maps and exchanges in Step 6 with $\\kappa_{m+1}$. More explicitly the inner line trace, after exchange, is $1\\otimes t$ by Step 5; the outer integration is $I_m$. Hence\n$$I_1=t,\\qquad I_{m+1}=(I_m\\otimes t)\\circ\\kappa_{m,1},\\qquad I_m=t^{\\otimes m}\\circ\\kappa_m,$$\nwhere $\\kappa_{m,1}$ has target $(Rp_{m!}T_m)\\otimes U$ and tensor units in $A_Y^{\\otimes m}$ are suppressed. The triple-product and projection-formula clauses of [lem-sf-kunneth-coherence] identify every parenthesization with this same $\\kappa_m$. This is a calculation of the integration map, not an appeal to a purity or supported Kunneth theorem.",
+   "text": "First verify the one-factor object needed for the product-domain induction. Apply [lem-amb-affine-space-top-trace] only with $S=Y$, $d=1$, and $N=\\ell^r$ from Step 2. The ring $A$ is finite with $NA=0$, $N$ is invertible since $\\ell\\ne p$, and $Y$ is Noetherian by Step 1. Its bounded-below input is $A_{\\mathbf A^1_Y}(1)[2]$. The source of its isomorphic counit is the ordinary etale representative of $U$. Step 2 identifies its twist, and [lem-sf-class-compact-support-comparison] realizes this object on the pro-etale site, giving $U\\cong A_Y$. This is only an object isomorphism; no identification of $I_m$ with a higher-dimensional top-trace counit is used.",
    "uses": [
-    "thm-sf-kunneth-relative",
-    "lem-sf-kunneth-coherence",
-    "def-sf-datum",
-    "thm-cbc-finite-torsion",
-    "lem-weil-finite-compact-projection-formula",
-    "thm-sf-comp-composition",
-    "lem-amb-affine-space-top-trace"
+    "lem-amb-affine-space-top-trace",
+    "lem-sf-class-compact-support-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof, Steps 3--4: identifying coordinate interchange with tensor interchange using the relative compact-support product"
+    "place": "Proof Steps 3--4, as expanded in returned split Step 7: extracted product-domain and actual-integration arguments"
    }
   },
   {
-   "text": "For an adjacent transposition of the $m$ line factors, the symmetry clause of [lem-sf-kunneth-coherence] identifies the induced map on $Rp_{m!}T_m$ with the corresponding symmetry of $U^{\\otimes m}$. Tensor naturality gives\n$$(t\\otimes t)\\circ\\sigma_{U,U}=\\sigma_{A_Y,A_Y}\\circ(t\\otimes t)=t\\otimes t,$$\nsince the symmetry of two tensor units is the identity. On the source, the tensor sign symmetry of [def-kun-derived-tensor] is $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$; for $T=A(1)[2]$ the two degrees are $-2,-2$, so the sign is $+1$. Locally choose a generator $b$ of the rank-one twist [prop-weil-twist-preserves]; the unshifted interchange sends $b\\otimes b$ to itself, and consequently is the identity under the twist-additivity identification. For blocks of sizes $d,e$, interchange sends $b^{\\otimes d}\\otimes b^{\\otimes e}$ to $b^{\\otimes e}\\otimes b^{\\otimes d}$; both identify with $b^{\\otimes(d+e)}$, and the shift sign is $(-1)^{(-2d)(-2e)}=+1$. It follows from Step 7 that each adjacent coordinate transposition preserves $I_m$, and hence that every coordinate permutation does. By the projection-formula compatibility in [lem-sf-kunneth-coherence] and Step 6 it preserves $\\tau_{m,K}$ for every $K$, without moving $K$ past a shifted coordinate factor. Finally the exceptional Hom bijection of [thm-sf-ambient-adjoint-class] is injective and natural, so equality of these transposes proves equality of the two transported comparisons. Combined with Step 4 this gives the asserted composition law and equality for the two block orderings.",
+   "text": "Apply [lem-pur-affine-space-product-domain] to $B=Y$, $f=a:L_Y\\to Y$, $M=T=A_{L_Y}(1)[2]$ and the object isomorphism $U\\cong A_Y$ just obtained. The source coefficient is bounded constructible of finite Tor amplitude because it is a shifted rank-one locally free Tate sheaf, by [prop-weil-twist-preserves]. Its relative external powers are $T_m$ by tensor-power additivity and the even shift identifications. The cited lemma supplies $V_m\\cong A_Y$, Tor amplitude $[0,0]$, and all the typed canonical binary product isomorphisms $\\kappa_{m,1}$. In particular the coefficient $V_m$ has its required finite Tor amplitude before the second projection formula is invoked; this is the original object induction, now a separate node.",
+   "uses": [
+    "lem-pur-affine-space-product-domain",
+    "prop-weil-twist-preserves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
+    "place": "Proof Steps 3--4, as expanded in returned split Step 7: extracted product-domain and actual-integration arguments"
+   }
+  },
+  {
+   "text": "The base-change identities of Step 5 hold over every separated finite-type base used in the tower; Step 6 identifies $I_m$ with the exceptional transpose specified in [lem-pur-affine-space-trace-factorization]. Its finite-Tor hypothesis is now Step 8, so that lemma gives\n$$I_1=t,\\qquad I_{m+1}=(I_m\\otimes t)\\kappa_{m,1}.$$\nDefine $\\kappa_1=1_U$ and $\\kappa_{m+1}=(\\kappa_m\\otimes1_U)\\kappa_{m,1}$. Induction substitutes $I_m=t^{\\otimes m}\\kappa_m$ into the binary equality, giving $I_{m+1}=t^{\\otimes(m+1)}\\kappa_{m+1}$, with tensor units suppressed. This substitution uses only functoriality of tensor. Clause (ii) of [lem-sf-kunneth-coherence] identifies every parenthesization with this same iterated product, and clause (iv) supplies its projection-formula identification.",
+   "uses": [
+    "lem-pur-affine-space-trace-factorization",
+    "lem-sf-kunneth-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
+    "place": "Proof Steps 3--4, as expanded in returned split Step 7: extracted product-domain and actual-integration arguments"
+   }
+  },
+  {
+   "text": "For an adjacent transposition of the $m$ line factors, the symmetry clause of [lem-sf-kunneth-coherence] identifies the induced map on $Rp_{m!}T_m$ with the corresponding symmetry of $U^{\\otimes m}$. Tensor naturality gives\n$$(t\\otimes t)\\circ\\sigma_{U,U}=\\sigma_{A_Y,A_Y}\\circ(t\\otimes t)=t\\otimes t,$$\nsince the symmetry of two tensor units is the identity. On the source, the tensor sign symmetry of [def-kun-derived-tensor] is $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$; for $T=A(1)[2]$ the two degrees are $-2,-2$, so the sign is $+1$. Locally choose a generator $b$ of the rank-one twist [prop-weil-twist-preserves]; the unshifted interchange sends $b\\otimes b$ to itself, and consequently is the identity under the twist-additivity identification. For blocks of sizes $d,e$, interchange sends $b^{\\otimes d}\\otimes b^{\\otimes e}$ to $b^{\\otimes e}\\otimes b^{\\otimes d}$; both identify with $b^{\\otimes(d+e)}$, and the shift sign is $(-1)^{(-2d)(-2e)}=+1$. It follows from Step 9 that each adjacent coordinate transposition preserves $I_m$, and hence that every coordinate permutation does. By the projection-formula compatibility in [lem-sf-kunneth-coherence] and Step 6 it preserves $\\tau_{m,K}$ for every $K$, without moving $K$ past a shifted coordinate factor. Finally the exceptional Hom bijection of [thm-sf-ambient-adjoint-class] is injective and natural, so equality of these transposes proves equality of the two transported comparisons. Combined with Step 4 this gives the asserted composition law and equality for the two block orderings.",
    "uses": [
     "lem-sf-kunneth-coherence",
     "def-kun-derived-tensor",
@@ -165,10 +184,10 @@
   "lem-weil-pbc-etale-shriek-base-change-modules",
   "thm-cbc-finite-torsion",
   "prop-sf-pf-coherence",
-  "thm-sf-kunneth-relative",
-  "lem-sf-kunneth-coherence",
-  "def-sf-datum",
   "lem-amb-affine-space-top-trace",
+  "lem-pur-affine-space-product-domain",
+  "lem-pur-affine-space-trace-factorization",
+  "lem-sf-kunneth-coherence",
   "def-kun-derived-tensor"
  ],
  "proof_origin": {
@@ -253,10 +272,38 @@
    "results": "Service returned OK, 0 hits. The generic identity-mate calculation was instead checked directly in Mathlib/CategoryTheory/Adjunction/Mates.lean lines 300--340; this search supplies no affine-space purity declaration.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AffineSpace.*composition|composition.*AffineSpace",
+   "results": "Retained interrupted-attempt search: No hits. No affine-space purity-comparison declaration; returned geometric reindexing and adjunction signatures do not assert the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine space purity comparison is compatible with composition",
+   "results": "Retained interrupted-attempt search: ContinuousAffineMap.comp_apply; AffineSubspace.comap_comap; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp; Affine.Simplex.map_comp; AffineIndependent.of_comp; AlgebraicGeometry.AffineSpace.map_comp; AffineMap.coe_comp; AffineMap.pi_comp. No affine-space purity-comparison declaration; returned geometric reindexing and adjunction signatures do not assert the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction mate composition",
+   "results": "Retained interrupted-attempt search: No hits. loogle: Unknown identifier `mate`. No affine-space purity-comparison declaration; returned geometric reindexing and adjunction signatures do not assert the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine-space purity comparison exceptional inverse image composition law",
+   "results": "Retained interrupted-attempt search: AlgebraicGeometry.AffineSpace.reindex_over_assoc; AlgebraicGeometry.AffineSpace.reindex_comp_assoc; AlgebraicGeometry.AffineSpace.map_over; AlgebraicGeometry.AffineSpace.map_over_assoc; AlgebraicGeometry.AffineSpace.map_reindex_assoc; AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc; AlgebraicGeometry.AffineSpace.map_reindex; AlgebraicGeometry.AffineSpace.map_comp_assoc. No affine-space purity-comparison declaration; returned geometric reindexing and adjunction signatures do not assert the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -295,11 +342,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "prop-pur-affine-space-composition-law",
   "worker": "stage1",
-  "summary": "Made the implicit Y and K domains explicit, proved regrouping by induction using adjunction mates, and replaced the unsupported inference from even signs to equality of coordinate towers by a calculation of the transposed trace as a symmetric compact-support tensor product. Reused existing DAG nodes throughout; checked the ordinary-etale/pro-etale finite-stage bridge without imposing ramification divisibility. No new nodes, Lean edits, or compiles. Second reading checks finite-Tor domains of intermediate compact-support products using only the existing one-dimensional top trace, types the compactification counit explicitly, and spells out identity mates and block symmetry. Citation-drift repair rereads the expanded one-dimensional top-trace and twist-preservation statements, explicitly verifies the finite invertible-annihilator and Noetherian hypotheses, and refreshes their verbatim citations. Lock-return repair revalidates all 42 citations against the current DAG, distinguishes the unrelated NW metadata message, and writes out the object-isomorphism induction V_m ≅ A_Y so every product projection formula has its finite-Tor coefficient before it is applied.",
-  "blueprint": "Realizes node Proof Steps 1--2 by steps 1--4 (typed ordered tower and coherent regrouping), and Steps 3--4 by steps 5--8 (base-changed line traces, pasted counits, relative product, and sign-free tensor symmetry). Retains unit sk-prop-an Step 6: iteration of the normalized affine-line comparisons.",
+  "summary": "Made the implicit Y and K domains explicit, proved regrouping by induction using adjunction mates, and replaced the unsupported inference from even signs to equality of coordinate towers by a calculation of the transposed trace as a symmetric compact-support tensor product. Reused existing DAG nodes throughout; checked the ordinary-etale/pro-etale finite-stage bridge without imposing ramification divisibility. No new nodes, Lean edits, or compiles. Second reading checks finite-Tor domains of intermediate compact-support products using only the existing one-dimensional top trace, types the compactification counit explicitly, and spells out identity mates and block symmetry. Citation-drift repair rereads the expanded one-dimensional top-trace and twist-preservation statements, explicitly verifies the finite invertible-annihilator and Noetherian hypotheses, and refreshes their verbatim citations. Lock-return repair revalidates all 42 citations against the current DAG, distinguishes the unrelated NW metadata message, and writes out the object-isomorphism induction V_m ≅ A_Y so every product projection formula has its finite-Tor coefficient before it is applied. Q121 long-step repair: preserved the statement and Lean/audit records and the original route; extracted the finite-Tor product-domain induction and the binary actual-trace identification as two statement-only nodes. Replaced former 3097-character Step 7 by three short applications (new Steps 7--9), retained Steps 1--6 and the final symmetry calculation (now Step 10). All non-elementary steps are shorter than 2000 characters.",
+  "blueprint": "Realizes node Proof Steps 1--2 by steps 1--4 (typed ordered tower and coherent regrouping), and Steps 3--4 by steps 5--8 (base-changed line traces, pasted counits, relative product, and sign-free tensor symmetry). Retains unit sk-prop-an Step 6: iteration of the normalized affine-line comparisons. Q121 extracts the two hidden arguments of old Step 7 into lem-pur-affine-space-product-domain and lem-pur-affine-space-trace-factorization; new Steps 7--9 still realize blueprint Steps 3--4. The final permutation step is now Step 10.",
   "tool_uses": [
    {
     "node": "prop-sf-pf-coherence",
@@ -396,11 +443,11 @@
   "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NZ-7773a20fc",
-  "group": "NZ",
+  "reviewer": "NT-cc-Q121-aa4531cb2",
+  "group": "Q121",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-7773a20fc (reviewer sub-agent of L); spot-checked: Read the full item, all eight steps, every cited statement and source location, and the unit/chapter route. Checked coefficient domains, canonical maps, finite-Tor induction, coordinate symmetry, small cases, duplicates and dependency cycles. No repairs needed; 18 tool uses accepted. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-aa4531cb2 (reviewer sub-agent of L); spot-checked: Read the whole item, all ten steps, both new nodes and every cited statement. Also read the sk-prop-an unit and the blueprint source in master and in main-20261015, which are identical; the item has no blueprint_update. The repair answers the one returned point. Old Step 7 is now two statement-only nodes and three short steps (7-9); Steps 1-6 are unchanged and old Step 8 is now Step 10. Statement, stmt_deps, lean_audit and import flags are unchanged. proof_deps equals the union of the step uses. Every cited id exists and is unmerged, there is no cycle and no SGA source. lem-pur-affine-space-product-domain: the base coefficients of the two inverse projection maps in kappa_{m,1} are M on X and V_m on B, as the statement says; the projection map of def-exchange-projection needs a finite-Tor base coefficient, so the induction is needed. It is true by Kunneth: V_{m+1} = V_m tensor Rf_!M = A tensor A = A_B, which is flat, so Tor amplitude [0,0]. I tested m=1, f=id with M=A, and empty B. lem-pur-affine-space-trace-factorization: I_1 = t_Y holds by the identity conventions. The recurrence I_{m+1} = (I_m tensor t) kappa_{m,1} is a Fubini identity that uses base change of I_m along a; the hypothesis that line traces commute with base change over every base Y' covers that. All shifts are even, so there are no signs, and there is no permutation claim, so it is not circular. Neither node restates a parent clause. Neither duplicates thm-sf-kunneth-relative, lem-sf-kunneth-coherence, lem-amb-affine-space-top-trace, lem-pur-vector-integration-site-comparison, det-sp-composition-factors or det-sp-trace-basic. Step 7: lem-amb-affine-space-top-trace applies with S=Y, d=1, N=ell^r, A finite with NA=0, N invertible and Y Noetherian; with the compact-support comparison it gives U = A_Y. Steps 8-9 meet their hypotheses from Steps 5 and 7. The tensor-power induction and lem-sf-kunneth-coherence clauses (ii) and (iv) are correct, and so is the Step 10 sign and symmetry argument. I accept 17 off-unit tool uses, listed in review.md. The split_report still declares thm-sf-kunneth-relative, which no proof step cites now; that is harmless and unchanged. No fixes written."
  }
 }

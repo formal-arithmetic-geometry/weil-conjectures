@@ -32,15 +32,38 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-coef-model-colimit-localization-comparison] to the given combinatorial model category and every small indexing category in the statement. It supplies the projective structures and a coherent localization $q:N\\mathcal M\\to\\mathcal C$ in which $qH_I(V)$, with $H_I(V)=\\operatorname{colim}_I Q_IV$, has the colimit cocone $\\lambda_V:qV\\to\\operatorname{const}(qH_I(V))$ obtained by inverting $q(Q_IV\\to V)$. Relate this to the ordinary homotopy category as follows. Form $h\\mathcal C$ with objects the vertices and morphisms composable edge paths modulo the relations that a degenerate edge is an identity and that the long edge of each $2$-simplex equals its two-edge composite. A simplicial map $\\mathcal C\\to N\\mathcal D$ into an ordinary nerve is exactly an ordinary functor $h\\mathcal C\\to\\mathcal D$: these are precisely the nerve's identity/composition relations, and its higher simplices are determined by their composable edges. For a map $\\mathcal C\\times\\Delta^1\\to N\\mathcal D$, the vertical edges give components between the endpoint functors. The two triangles over each edge of $\\mathcal C$ impose its naturality square. Conversely a natural transformation supplies these vertical and mixed arrows; its naturality squares and the endpoint composition relations determine every simplex in the ordinary nerve. Thus prisms correspond exactly to natural transformations. Apply the full localization universal property from [lem-coef-model-colimit-localization-comparison] with targets $N\\mathcal D$. It identifies functors out of $h\\mathcal C$ with weak-equivalence-inverting functors out of $\\mathcal M$: restriction along $\\gamma:\\mathcal M\\to h\\mathcal C$ is an equivalence of categories $\\operatorname{Fun}(h\\mathcal C,\\mathcal D)\\to\\operatorname{Fun}_W(\\mathcal M,\\mathcal D)$ for every $\\mathcal D$ in the enlarged universe. Compare with a strict localization $L:\\mathcal M\\to\\mathcal M[W^{-1}]$, initial on the nose among $W$-inverting functors. The strict property gives $\\Phi$ with $\\Phi L=\\gamma$; essential surjectivity of restriction along $\\gamma$, with $\\mathcal D=\\mathcal M[W^{-1}]$, gives $\\Psi:h\\mathcal C\\to\\mathcal M[W^{-1}]$ with $\\Psi\\gamma\\cong L$. Then $\\Psi\\Phi L\\cong L$, so $\\Psi\\Phi\\cong1$ by the strict property, and $\\Phi\\Psi\\gamma\\cong\\Phi L=\\gamma$, so $\\Phi\\Psi\\cong1$ by full faithfulness of restriction along $\\gamma$. Thus $\\Phi$ is an equivalence; it preserves and reflects isomorphisms, so a morphism of $\\mathcal M$ becomes invertible under $\\gamma$ if and only if it does under $L$. We may therefore compute in this model of $\\operatorname{Ho}(\\mathcal M)$. An equivalence edge becomes an isomorphism because its two inverse witnesses in [def-cbc-enhanced-diagrams-cones] are among the $2$-simplex relations. All nerves and localizations fit in the enlarged universe; all indexing categories remain small.",
+   "text": "Apply [lem-coef-model-colimit-localization-comparison] to the given combinatorial model category and each small indexing category. It supplies the projective structures and the coherent localization $q:N\\mathcal M\\to\\mathcal C$. Put $H_I(V)=\\operatorname{colim}_I Q_IV$. The cited statement makes the ordinary colimit cocone, after applying $q$ and inverting $q(Q_IV\\to V)$, a coherent colimit cocone $\\lambda_V:qV\\to\\operatorname{const}(qH_I(V))$. No simplicial-model-category hypothesis or objectwise cofibrancy of $V$ is required.",
    "uses": [
-    "lem-coef-model-colimit-localization-comparison",
-    "def-cbc-enhanced-diagrams-cones"
+    "lem-coef-model-colimit-localization-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
     "place": "Remark A.3, choice of homotopy-colimit model; projective/coherent comparison via the cited existing node. The explicit ordinary-localization passage is an agent-supplied expansion."
+   }
+  },
+  {
+   "text": "Use [lem-coef-localization-homotopy-category] for this particular $q$, with $C=\\mathcal M$ and $W$ its weak equivalences. The weak equivalences contain all identities and are closed under composition by two-out-of-three, so form the required wide subcategory. The full coherent localization property needed there is exactly the property supplied in Step 1. Enlarge universes as in both cited statements. It follows that $\\gamma=hq:\\mathcal M\\to h\\mathcal C$ has the ordinary localization universal property for functors and natural transformations. The same cited statement says that equivalence edges in $\\mathcal C$ become isomorphisms in $h\\mathcal C$. This supplies both functor and natural-transformation parts of the ordinary localization property.",
+   "uses": [
+    "lem-coef-localization-homotopy-category",
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 1.6.6, Corollary 1.6.8 and Remark 7.1.6, printed pp.24-25 and 325; ordinary-localization conclusion supplied by the existing cited node."
+   }
+  },
+  {
+   "text": "Compare $\\gamma$ with a strict ordinary localization $L:\\mathcal M\\to\\mathcal M[W^{-1}]$, initial on the nose among $W$-inverting functors. Its defining property gives $\\Phi$ with $\\Phi L=\\gamma$. Apply the functor and natural-transformation universal property from Step 2, in the form stated in [lem-weil-pbc-localization-universal-property], to obtain $\\Psi:h\\mathcal C\\to\\mathcal M[W^{-1}]$ and $\\Psi\\gamma\\cong L$. Both $L$ and $\\gamma$ have fully faithful restriction on functor categories by that cited statement. Hence the isomorphisms $\\Psi\\Phi L\\cong L$ and $\\Phi\\Psi\\gamma\\cong\\gamma$ lift uniquely to $\\Psi\\Phi\\cong1$ and $\\Phi\\Psi\\cong1$; the lifted transformations are isomorphisms because their inverses lift too and faithfulness verifies the inverse equations. Thus $\\Phi$ is an equivalence and $\\gamma(u)$ is invertible exactly when $L(u)$ is. We compute in $h\\mathcal C$ and use this comparison whenever model saturation requires the strict localization.",
+   "uses": [
+    "lem-coef-localization-homotopy-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Remark 7.1.6, printed p.325; uniqueness of ordinary localizations, using the full functor/natural-transformation universal property of the two cited statements."
    }
   },
   {
@@ -69,7 +92,7 @@
    }
   },
   {
-   "text": "Let $a:g\\Rightarrow g'$ be a natural transformation of functors $J\\to I$. On $J\\times[1]$ the corresponding functor sends $(j,0)$ to $g(j)$, $(j,1)$ to $g'(j)$, and a mixed arrow $(j,0)\\to(j',1)$ to $g'(j\\to j')a_j=a_{j'}g(j\\to j')$. Naturality is precisely the equality needed for this to be a functor. Its nerve gives the coherent transformation $qV(a):qVg\\to qVg'$ in the sense of [def-cbc-enhanced-diagrams-cones]. The naturality data of the cocone $\\lambda_V$ on this prism identify the two cocones $\\lambda_V|_g$ and $(\\lambda_V|_{g'})\\circ qV(a)$. Apply the cocone mapping-space criterion in [lem-cbc-enhanced-functor-cone-calculus] to $q(Vg)$: these cocone homotopies identify their lift classes. Consequently\n$$g_*^V=(g')_*^V\\circ H_J(V(a))$$\nin $\\operatorname{Ho}(\\mathcal M)$. If $V(a)$ is objectwise a weak equivalence, Step 2 makes its $H_J$-map invertible, so $g_*^V$ is invertible if and only if $(g')_*^V$ is invertible. This assertion works in either orientation of a zigzag link.",
+   "text": "Let $a:g\\Rightarrow g'$ be a natural transformation of functors $J\\to I$. On $J\\times[1]$ the corresponding functor sends $(j,0)$ to $g(j)$, $(j,1)$ to $g'(j)$, and a mixed arrow $(j,0)\\to(j',1)$ to $g'(j\\to j')a_j=a_{j'}g(j\\to j')$. Naturality is precisely the equality needed for this to be a functor. Its nerve gives the coherent transformation $qV(a):qVg\\to qVg'$ in the sense of [def-cbc-enhanced-diagrams-cones]. The naturality data of the cocone $\\lambda_V$ on this prism identify the two cocones $\\lambda_V|_g$ and $(\\lambda_V|_{g'})\\circ qV(a)$. Apply the cocone mapping-space criterion in [lem-cbc-enhanced-functor-cone-calculus] to $q(Vg)$: these cocone homotopies identify their lift classes. Consequently\n$$g_*^V=(g')_*^V\\circ H_J(V(a))$$\nin $\\operatorname{Ho}(\\mathcal M)$. If $V(a)$ is objectwise a weak equivalence, Step 4 makes its $H_J$-map invertible, so $g_*^V$ is invertible if and only if $(g')_*^V$ is invertible. This assertion works in either orientation of a zigzag link.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-cbc-enhanced-functor-cone-calculus"
@@ -81,7 +104,7 @@
    }
   },
   {
-   "text": "Write the first stipulated finite zigzag as endofunctors $h_0=gf,h_1,\\ldots,h_r=\\mathrm{id}_I$, with either orientation allowed for each adjacent transformation. Step 4, applied to $V$, shows successively that $(h_i)_*^V$ is invertible if and only if $(h_{i+1})_*^V$ is. The endpoint identity comparison is invertible by Step 3; backwards induction therefore makes $(gf)_*^V$ invertible. Write the second zigzag as $k_0=fg,k_1,\\ldots,k_s=\\mathrm{id}_J$. For each link $k_i\\Rightarrow k_{i+1}$, Step 4 for the value diagram $Vg$ gives $(k_i)_*^{Vg}=(k_{i+1})_*^{Vg}\\circ H_J(Vg(a))$; the last factor is invertible by the second component hypothesis and Step 2. For a reverse link the displayed equality has its two comparison terms exchanged, which gives the identical invertibility equivalence. Starting with $(k_s)_*^{Vg}=1$ and inducting backwards proves $(fg)_*^{Vg}$ invertible. A zero-link zigzag is just the identity case; no compatibility between the two chosen zigzags has been assumed or used.",
+   "text": "Write the first stipulated finite zigzag as endofunctors $h_0=gf,h_1,\\ldots,h_r=\\mathrm{id}_I$, with either orientation allowed for each adjacent transformation. Step 6, applied to $V$, shows successively that $(h_i)_*^V$ is invertible if and only if $(h_{i+1})_*^V$ is. The endpoint identity comparison is invertible by Step 5; backwards induction therefore makes $(gf)_*^V$ invertible. Write the second zigzag as $k_0=fg,k_1,\\ldots,k_s=\\mathrm{id}_J$. For each link $k_i\\Rightarrow k_{i+1}$, Step 6 for the value diagram $Vg$ gives $(k_i)_*^{Vg}=(k_{i+1})_*^{Vg}\\circ H_J(Vg(a))$; the last factor is invertible by the second component hypothesis and Step 4. For a reverse link the displayed equality has its two comparison terms exchanged, which gives the identical invertibility equivalence. Starting with $(k_s)_*^{Vg}=1$ and inducting backwards proves $(fg)_*^{Vg}$ invertible. A zero-link zigzag is just the identity case; no compatibility between the two chosen zigzags has been assumed or used.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -90,16 +113,16 @@
    }
   },
   {
-   "text": "Keep the two occurrences of the $g$ comparison distinct. Put\n$$A=H_J(Vgfg),\\quad B=H_I(Vgf),\\quad C=H_J(Vg),\\quad D=H_I(V),$$\nand let $u=g_*^{Vgf}:A\\to B$, $v=f_*^{Vg}:B\\to C$, and $w=g_*^V:C\\to D$. The composition formula of Step 3 identifies $vu=(fg)_*^{Vg}$ and $wv=(gf)_*^V$, so Step 5 makes both composites invertible. Then $l=(wv)^{-1}w:C\\to B$ is a left inverse of $v$, and $r=u(vu)^{-1}:C\\to B$ is a right inverse. They agree since $l=l(vr)=(lv)r=r$. Hence $v$ is invertible, and $w=(wv)v^{-1}$ is invertible as well. This is the required isomorphism $g_*^V$. The argument does not identify $g_*^{Vgf}$ with $g_*^V$.",
+   "text": "Keep the two occurrences of the $g$ comparison distinct. Put\n$$A=H_J(Vgfg),\\quad B=H_I(Vgf),\\quad C=H_J(Vg),\\quad D=H_I(V),$$\nand let $u=g_*^{Vgf}:A\\to B$, $v=f_*^{Vg}:B\\to C$, and $w=g_*^V:C\\to D$. The composition formula of Step 5 identifies $vu=(fg)_*^{Vg}$ and $wv=(gf)_*^V$, so Step 7 makes both composites invertible. Then $l=(wv)^{-1}w:C\\to B$ is a left inverse of $v$, and $r=u(vu)^{-1}:C\\to B$ is a right inverse. They agree since $l=l(vr)=(lv)r=r$. Hence $v$ is invertible, and $w=(wv)v^{-1}$ is invertible as well. This is the required isomorphism $g_*^V$. The argument does not identify $g_*^{Vgf}$ with $g_*^V$.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
-    "place": "Proposition A.4, proof, printed p.199; explicit inverse calculation for the two adjacent composites."
+    "place": "Proposition A.4, proof, printed p.200; explicit inverse calculation for the two adjacent composites."
    }
   },
   {
-   "text": "If an actual model-category comparison map represents $g_*^V$, its image under $\\gamma$ of Step 1 is the isomorphism of Step 6, so by the comparison $\\Phi$ of Step 1 its image under the strict localization $L$ is an isomorphism. Apply [lem-coef-model-localization-detects-weak-equivalences] to $L$, with no cofibrancy or fibrancy condition on its endpoints, to conclude that this map is a weak equivalence. Natural isomorphisms of indexing functors satisfy the component hypotheses because their images under any value functor are isomorphisms and every localization sends isomorphisms to isomorphisms; the same saturation statement then makes these images weak equivalences. Strict identities give zero-link zigzags and the identity comparisons of Step 3.",
+   "text": "If an actual model-category comparison map represents $g_*^V$, its image under $\\gamma$ of Step 3 is the isomorphism of Step 8, so by the comparison $\\Phi$ of Step 3 its image under the strict localization $L$ is an isomorphism. Apply [lem-coef-model-localization-detects-weak-equivalences] to $L$, with no cofibrancy or fibrancy condition on its endpoints, to conclude that this map is a weak equivalence. Natural isomorphisms of indexing functors satisfy the component hypotheses because their images under any value functor are isomorphisms and every localization sends isomorphisms to isomorphisms; the same saturation statement then makes these images weak equivalences. Strict identities give zero-link zigzags and the identity comparisons of Step 5.",
    "uses": [
     "lem-coef-model-localization-detects-weak-equivalences"
    ],
@@ -113,8 +136,10 @@
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-localization-homotopy-category",
   "lem-coef-model-colimit-localization-comparison",
-  "lem-coef-model-localization-detects-weak-equivalences"
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
@@ -236,7 +261,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dugger-homotopically-surjective-map",
@@ -249,8 +274,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-hocolim-reindexing-zigzags",
   "worker": "stage1",
-  "summary": "Kept the statement and statement dependencies. Used the existing projective-model/coherent-colimit, cone-calculus and model-saturation nodes; added no nodes. Constructed reindexing maps from restricted coherent cocones, proved the natural-transformation triangle, expanded both finite zigzags, and distinguished the two g-comparisons in the explicit inverse calculation. Searched the project and Mathlib; no exact attachment or Mathlib leaf. Second reading expands the prism/natural-transformation correspondence and the second finite-zigzag induction.",
-  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint (current main-20261015 proof), displayed finite coefficient mapping-complex adjunction and inverse limit, including its naturality/triangle sentences. This descendant supplies the model-category presentation foundation, not an alternative geometric route. Steps 1-4 establish the homotopy-colimit calculus, Step 5 handles zigzags, and Steps 6-7 finish Dugger A.4-A.5.",
+  "summary": "Repair of the human return on the 2863-character first step. Kept the statement, statement dependencies and Lean record unchanged. Replaced the long first step by three short steps: coherent projective-colimit setup, the existing coherent-to-ordinary localization theorem, and the ordinary-localization comparison using the existing full functor/natural-transformation universal-property leaf. Preserved all later arguments with step references renumbered. No new node is needed because existing nodes state the hidden arguments; no duplicates created. Rebuilt verbatim citation witnesses and checked all steps against delivery-errors B-E.",
+  "blueprint": "Same route as the returned split: paragraph 2 of prop-coef-integral-exceptional-adjoint, technical model-category foundations for the derived coefficient adjunction. Steps 1-3 replace the returned Step 1 without changing its coherent-localization route; Steps 4-9 retain returned Steps 2-7 (homotopy invariance, reindexing, prism triangle, zigzags, inverse calculation, saturation).",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -262,12 +287,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q57-c3dc6628d",
-  "group": "Q57",
+  "reviewer": "NT-cc-Q15-eb84e1c7e",
+  "group": "Q15",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-c3dc6628d (reviewer sub-agent of L); spot-checked: Read in full: the item's statement and Steps 1-7, the statements of all six cited nodes, unit sk-prop-sf-biduality-general, the report, and delivery-errors A-F. Source is Dugger App. A, Rem. A.3, Prop. A.4 and Rem. A.5, cited by URL because it is not in literature/; proof_origin is agent. The statement is unchanged and matches A.4/A.5: the first zigzag is tested with V, the second with Vg, and nothing is weakened. Small cases: empty categories; I=[1], J=*, g=0, which shows the value-diagram hypothesis is needed; and a terminal-object reindexing, which needs a reverse link. I recomputed Step 4's direction g_*=g'_* o H_J(V(a)) and Step 6's composites wv=(gf)^V_* and vu=(fg)^{Vg}_*; both are correct. The two g-comparisons are kept distinct. One minor fault (E1-type), repaired: Step 1 proved only that restriction along gamma:M->hC is an equivalence of functor categories, while the saturation node lem-coef-model-localization-detects-weak-equivalences assumes a localization that is initial on the nose. Step 1 now builds an equivalence Phi from a strict localization L to hC, so invertibility under gamma and under L agree, and Step 7 applies the saturation node to L. Only those proof texts changed, in fixes/dag/nodes/sec-six-functors/lem-coef-hocolim-reindexing-zigzags.json. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc), a generic cocone and componentwise-equivalence black box, already accepted on the same-unit lem-coef-model-colimit-localization-comparison. No cycle (traversed 215 nodes). No duplicate among the zigzag/hocolim/cofinal candidates in the DAG. No new nodes. No SGA.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-eb84e1c7e (reviewer sub-agent of L); spot-checked: Read the item and all 9 steps in full, plus the full statements of all 8 cited nodes, the unit, the chapter and the ancestor proof in main-20261015. There are no new nodes. The repair splits the human-returned 2863-character Step 1 into three cited steps (max step now 1109 characters). Step 1, lem-coef-model-colimit-localization-comparison: gives q, the projective structures and the coherent colimit cocones, with no cofibrancy of V needed. Step 2, lem-coef-localization-homotopy-category: W is wide, universes are enlarged, and the coherent universal property is supplied, so hq is an ordinary localization and the edge/iso criterion holds. Step 3, the Mathlib leaf lem-weil-pbc-localization-universal-property: clauses (2)/(3) give fully faithful whiskering, so Phi is an equivalence to a strict L; this is needed because the saturation node assumes a localization initial on the nose. Recomputed: Step 6 direction g_* = g'_* H_J(V(a)); Step 8 vu=(fg)_*^{Vg}, wv=(gf)_*^V, l=r. Edge cases: empty categories; I=[1], J=*, g=0 (the value-diagram hypothesis is needed); terminal g (the hypothesis is sufficient, as in Dugger A.4); zero-link zigzag. The statement is unchanged and matches Dugger A.4/A.5. The source is URL-only and the reviewer has no network, so I could not reopen it; the WANTED lines and agent origin are correct. No cycle (523-node DFS). No duplicate among the hocolim/zigzag candidates. No SGA. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus. No fixes."
  },
  "lean_audit": {
   "master": {

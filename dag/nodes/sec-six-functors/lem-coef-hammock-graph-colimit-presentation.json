@@ -55,14 +55,16 @@
    }
   },
   {
-   "text": "Fix a row degree and allow two reduction moves: delete an entirely identity column, or compose two adjacent columns of the same sign. Both preserve commutativity and membership of leftward and vertical maps in $T$ and strictly decrease word length, so every sequence terminates. Check any two first moves from one diagram. Identical moves agree. Moves on disjoint columns can be performed in either order and give the same diagram. Two compositions sharing a column concern three equally directed columns; composing the remaining pair on either side gives the same triple composite by associativity. A deletion sharing a column with a composition deletes an identity factor, so the composition already gives the diagram obtained by deletion, by the unit law. Two distinct identity deletions commute, even if adjacent. Equality of the vertical data in these comparisons follows from the identity-column square calculation in step 2. These cases exhaust the first-move pairs and give a common further reduct. Now prove uniqueness of a terminal reduct by strong induction on the initial word length. An irreducible diagram has only itself as terminal reduct, including length zero. Otherwise two reduction sequences start with diagrams $D_1,D_2$ of smaller length. Their first moves have a common further reduct $E$ by the cases just checked. Choose a terminal reduct of $E$, which exists by termination. The induction hypothesis for $D_1$ identifies this with the terminal reduct of the first sequence, and the hypothesis for $D_2$ identifies it with that of the second. Thus both sequences have the same terminal reduct, denoted $R(D)$. Irreducibility is exactly alternating directions with no entirely identity column. A length-zero diagram exists exactly for equal endpoints and is the constant identity hammock. Composing a same-sign pair is a surjective word-map relation, while deletion of an identity column is the reverse of an injective word-map relation. Consequently every $D$ represents the same colimit class as $R(D)$.",
+   "text": "Fix a row degree. Use the two elementary reductions of [lem-coef-hammock-reduction-diamond]. Each reduces the column count by one, so successively reducing while a move is available ends in at most the original number of columns. Apply [lem-coef-rewrite-common-reduct] to this relation on the small set of all unreduced hammocks of this degree and these endpoints. Its fork hypothesis follows from [lem-coef-hammock-reduction-diamond]: equal outputs have themselves as common reduct, and unequal outputs have the stated one-step common reduct; one step is in particular a finite sequence. Consequently any two finite reduction sequences from $D$ have a common further reduct. If both outputs are terminal, neither can take a step, so that common reduct equals both outputs. This proves existence and uniqueness of the terminal reduct $R(D)$. By the two move definitions, terminal means alternating directions and no entirely identity column. Length zero exists exactly for equal endpoints and is the constant identity hammock. Finally, by the word-map definition of [lem-coef-proper-word-colimit-invariance], composing a same-sign pair is a surjective word-map relation, while deleting an identity column reverses an injective word-map relation. Thus every $D$ represents the same colimit class as $R(D)$.",
    "uses": [
-    "def-coef-zigzag-homotopy-calculus"
+    "lem-coef-hammock-reduction-diamond",
+    "lem-coef-rewrite-common-reduct",
+    "lem-coef-proper-word-colimit-invariance"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
-    "place": "Definition 2.1 and Proposition 5.5, printed pp.19,24; written-out termination and induction on word length"
+    "place": "Definition 2.1 and Proposition 5.5, printed pp.19,24; termination by column count, strong diamond input, and the existing general common-reduct lemma"
    }
   },
   {
@@ -91,7 +93,9 @@
  ],
  "proof_deps": [
   "def-coef-zigzag-homotopy-calculus",
-  "lem-coef-proper-word-colimit-invariance"
+  "lem-coef-hammock-reduction-diamond",
+  "lem-coef-proper-word-colimit-invariance",
+  "lem-coef-rewrite-common-reduct"
  ],
  "proof_origin": {
   "by": "agent",
@@ -248,7 +252,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-hammock-pair-homotopy-invariance",
@@ -261,17 +265,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-hammock-graph-colimit-presentation",
   "worker": "stage1",
-  "summary": "Rechecked the earlier sandbox against the actual Dwyer–Kan PDF and both cited node statements. Retained the statement, wrote the identity-column recovery argument, supplied a complete strong-induction proof of uniqueness of reduction, factored arbitrary word maps to identify all colimit relations, verified reduced simplicial identities, and corrected naturality to allow functors creating additional identity columns. No auxiliary lemma is hidden behind confluence, and no new nodes are necessary. The independent second reading specifies retained vertex/vertical data for arbitrary word maps and writes the mixed simplicial-operator equality explicitly.",
-  "blueprint": "Technical hammock-pair input under prop-coef-integral-exceptional-adjoint proof paragraph 2 (displayed derived adjunction/inverse-limit calculation): Definitions 4.1/5.1/5.3 and Propositions 5.4/5.5, through the inherited via chain. Steps 1–2 construct the proper graph functor, steps 3–4 give the reduction colimit, and step 5 gives its naturality. Current main-20261015 ancestor statement and proof were read; inherited chapter/unit bindings are preserved.",
+  "summary": "Repair of the human’s 2026-10-17 re-split return: extracted the overlapping-reduction argument from former step 3 as the statement-only lem-coef-hammock-reduction-diamond and replaced the inline uniqueness induction by the existing Mathlib leaf lem-coef-rewrite-common-reduct. Step 3 now checks its strong-diamond hypothesis, termination and the terminal-output equality explicitly. The statement, Lean record and all other proof steps are unchanged. Prior Mathlib searches and blueprint ancestry are retained; new-node searches and verbatim citation coverage were added.",
+  "blueprint": "Technical hammock-pair input under prop-coef-integral-exceptional-adjoint proof paragraph 2 (displayed derived adjunction/inverse-limit calculation): Definitions 4.1/5.1/5.3 and Propositions 5.4/5.5, through the inherited via chain. Steps 1–2 construct the proper graph functor, steps 3–4 give the reduction colimit, and step 5 gives its naturality. Current main-20261015 ancestor statement and proof were read; inherited chapter/unit bindings are preserved. Repair: step 3 now cites the extracted local overlap lemma and the existing general confluence leaf, along the same finite-reduction route.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q28-cab9132c6",
-  "group": "Q28",
+  "reviewer": "NT-cc-Q83-a3aac560e",
+  "group": "Q83",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-cab9132c6 (reviewer sub-agent of L); spot-checked: Read the item's full statement and all five steps, the statements of both cited nodes (def-coef-zigzag-homotopy-calculus, lem-coef-proper-word-colimit-invariance; both in unit sk-prop-sf-biduality-general, so no tool uses) and Dwyer–Kan, Calculating simplicial localizations, printed pp.19–24 (2.1, 3.4, 4.1, 4.4, 5.1, 5.3, 5.4, 5.5) from the scan at the node's URL. The paper is still not in literature/, so proof_origin=agent is correct. The statement matches DK 5.4/5.5 with 3.4, hypothesis by hypothesis: wide T as in O-Cat, endpoint identities, leftward and vertical arrows in T, length 0 exactly when x=y. DK number columns in composition order (letter n+1-i) and the item numbers them left to right. Reversing positions is an automorphism of II that keeps maps monotone and sign-preserving, so the colimit is the same. Nothing is weakened. This is not a target node, so no coefficient category or base-change morphism is involved. Step 1: checked the vertex bookkeeping k_i=|{j:f(j)<=i}| (k_0=0, k_l=l', each fibre is one consecutive single-sign block) and functoriality. Step 2: a square with identity horizontal sides forces its two verticals to be equal, which gives injectivity and the image-intersection condition, including the empty intersection. Step 3: checked all first-move overlap cases myself; the Newman-style strong induction is set up properly and is not circular. Step 4: every word map factors as surjection then injection; R(alpha R)=R alpha gives well-defined reduced simplicial operators and the bijection. Step 5: RFR=RF and RFR alpha=RF alpha=R alpha F=R alpha RF are correct. Small cases tested: empty word, a one-letter word, a discrete category, inverse arrows in a groupoid composing to an identity, and a functor collapsing everything to the terminal category (which shows the apply-then-reduce formula is needed). Duplicate check over the 60 hammock nodes: none states this colimit presentation, and the parent lem-coef-hammock-pair-homotopy-invariance uses it as one input, so it is not a restated clause. A Mathlib grep for hammock/Dwyer found nothing, and the recorded searches cover all three kinds. No fixes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-a3aac560e (reviewer sub-agent of L); spot-checked: Read the item in full: its statement, all 5 steps and its records. Read the new node lem-coef-hammock-reduction-diamond in full, the full statements of def-coef-zigzag-homotopy-calculus, lem-coef-proper-word-colimit-invariance and the Mathlib leaf lem-coef-rewrite-common-reduct, and Mathlib Relation.lean:890-950 (church_rosser, equivalence_join_reflTransGen), whose fork hypothesis matches the leaf. The repair answers the human's return: the overlap lemma is now a statement-only node and generic confluence comes from the existing leaf. The rewritten step 3 checks the fork hypothesis (equal outputs need zero steps, otherwise one step on each side), termination by column count, and uniqueness of terminal reducts. The statement, the Lean record and steps 1, 2, 4 and 5 are unchanged. I checked every overlap case of the diamond myself: disjoint moves; a triple of same-direction columns (associativity); deleting an identity column against composing it with a neighbour (equal outputs); two adjacent identity columns of opposite signs (outputs differ, each reduces to the same E in one step); identical moves. Equal objects and vertical arrows across an identity column keep the retained data equal. Small cases: q=0, l=1 with x=y, a discrete category, groupoid inverses, and q=1 with non-identity equal verticals. Steps 4-5: a row face can create a new identity column, so R(alpha R(D))=R(alpha D) is the needed formula; RFR=RF gives naturality and the mixed simplicial compatibility. The node is self-contained (B1-B4), its searches are recorded, from/via/created are correct and same_as is []. It is not a restated clause of the parent and has no duplicate (rg over dag/nodes; free-factor-category-normal-form concerns words in a coproduct of categories). Everything stays on the same unit's route, there is no cycle, no tool_uses and no SGA. The Dwyer-Kan PDF is not archived and network access was blocked for this reviewer, so I could not reopen it. The statement is the one Q28 already checked against DK 2.1/3.4/4.1/4.4/5.1/5.3-5.5. The changed material is the agent's own argument, verified above. Only the source label '(iv)′/(v)′' in the new node's source.place is unconfirmed, and it has no mathematical effect. This is not a target node, so the base-change and coefficient checks do not apply. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.HammockGraphColimitPresentation",
