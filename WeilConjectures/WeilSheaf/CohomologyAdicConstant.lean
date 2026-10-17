@@ -33,6 +33,11 @@ universe u
 
 open CategoryTheory
 
+-- `Mathlib.AlgebraicGeometry.Group.Affine`, imported through the étale cohomological dimension
+-- bound, makes `Spec k₀` over itself also an instance of `AlgebraicGeometry.specOverSpec`; Weil
+-- sheaves on `Spec k₀` are stated with the identity structure `CategoryTheory.instOverClass`.
+attribute [instance 1100] CategoryTheory.instOverClass
+
 namespace AlgebraicGeometry
 
 /-- The geometric fiber of a smooth scheme of relative dimension `d` over a field has dimension at
