@@ -144,6 +144,7 @@ lemma Etale.freeSheafHomEquiv_map {W W' : X.Etale} (v : W' ⟶ W)
 
 end RawFreeSheaf
 
+/-- Morphisms out of `h^* Λ[W]` are morphisms out of `Λ[W ×_X Y]`. -/
 noncomputable def Etale.upperStarFreeSheafHomEquiv {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale)
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ⟶ G) ≃
@@ -774,7 +775,7 @@ section FilteredColimits
 
 open Opposite
 
-/-- Morphisms out of `h^* Λ[W]` are morphisms out of `Λ[W ×_X Y]`. -/
+/-- The map of higher direct image presheaves induced by a morphism of complexes. -/
 noncomputable def Etale.higherDirectImagePresheafMap {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     {K K' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : K ⟶ K') :
