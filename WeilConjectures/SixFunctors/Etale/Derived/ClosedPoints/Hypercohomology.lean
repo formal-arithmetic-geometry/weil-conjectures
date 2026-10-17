@@ -168,6 +168,7 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic (K : DerivedCat
         asIso ((DerivedCategory.homologyFunctor C q).map T.mor₁))
     · exact IsRightAcyclic.of_isZero (DerivedCategory.isZero_of_isLE _ (n - 1) q (by omega))
   obtain ⟨k, hk⟩ : ∃ k : ℕ, (n - 1) + 1 - k ≤ m := ⟨(n - m).toNat, by omega⟩
+  have : T'.obj₁.IsGE m := (inferInstance : ((t.truncLT n).obj L).IsGE m)
   have hge : T'.obj₁.IsGE ((n - 1) + 1 - k) := t.isGE_of_ge _ _ m hk
   have hvan := F.isZero_homology_rightDerivedFunctor_obj_of_isLE k T'.obj₁ (n - 1) hge
     inferInstance hac₁

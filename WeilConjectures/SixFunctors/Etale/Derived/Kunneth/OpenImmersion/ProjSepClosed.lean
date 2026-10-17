@@ -7,11 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.ExchangeCompat
-public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Point
-public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Detection
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 
 /-!
@@ -112,14 +108,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_isSepClosed {K : Type u
   have : LocallyOfFiniteType (q₁ ≫ aX) := by
     have : LocallyOfFiniteType q₁ := MorphismProperty.of_isPullback hW.flip inferInstance
     infer_instance
-  have h0f1g : (∀ k : ℤ, ∀ z ∉ closedPoints W,
-      IsZero ((pointSmallEtale (W.algClosurePoint z)).sheafFiber.obj
-        ((DerivedCategory.homologyFunctor _ k).obj (DerivedCategory.Plus.ι.obj Q)))) →
-      (∀ k : ℤ, IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) k).obj
-        ((Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).obj
-          (DerivedCategory.Plus.ι.obj Q)))) → IsZero (DerivedCategory.Plus.ι.obj Q) := by
-    sorry
-  refine h0f1g (fun k z hz ↦ ?_) (fun k ↦ ?_)
+  refine (Etale.isZero_iff_forall_isZero_homology_rightDerivedGlobalSections_of_isGE (q₁ ≫ aX)
+    (DerivedCategory.Plus.ι.obj Q) m (fun k z hz ↦ ?_)).2 (fun k ↦ ?_)
   · have : LocallySmall.{u + 1} W.Etale := locallySmall_max.{u + 1, u}
     have hiso (k' : ℤ) : IsIso ((W.uliftPointSmallEtale z).sheafFiber.map
         ((DerivedCategory.homologyFunctor _ k').map (DerivedCategory.Plus.ι.map β))) :=
