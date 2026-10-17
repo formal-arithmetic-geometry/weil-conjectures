@@ -156,7 +156,8 @@ theorem etale_localization_integralClosure_of_baseChange (ε : B →ₐ[R₀] R�
     by
       have h := congr($hjl ((1 : B₁) ⊗ₜ[B] x))
       have e (k : Fin (Nat.card G)) : φ₁ k ((1 : B₁) ⊗ₜ[B] x) = ιK (φ k x) :=
-        (Algebra.TensorProduct.lift_tmul f₁ (f₂ k) (fun _ _ ↦ Commute.all _ _) 1 x).trans (by rw [map_one, one_mul]; rfl)
+        (Algebra.TensorProduct.lift_tmul f₁ (f₂ k) (fun _ _ ↦ Commute.all _ _) 1 x).trans
+          (by rw [map_one, one_mul]; rfl)
       rwa [e, e] at h
   obtain ⟨hE, hF⟩ := etale_localization_integralClosure_of_isPrimitiveRoot (A := A₁) (B := B₁)
     (Bk := Bk₁) (L := L₁) ε₁ G hfix₁ hrank₁ hG₁ (K := K₁) φ₁ hφ₁ hφ₁inj hζ
