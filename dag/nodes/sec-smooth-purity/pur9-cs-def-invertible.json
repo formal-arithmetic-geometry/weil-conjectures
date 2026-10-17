@@ -3,22 +3,94 @@
  "blueprint": {
   "is": "pur9-cs-def-invertible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Invertible object",
- "statement": "An invertible object of $D(X_{\\Proet},\\mathcal O_E/\\varpi^n)$ is a triple $(L,L',e)$ consisting of objects $L,L'$ and an isomorphism $e:L\\otimes^L_{\\mathcal O_E/\\varpi^n}L'\\xrightarrow{\\sim}(\\mathcal O_E/\\varpi^n)_X$. One says that $L$ is invertible if such $L',e$ exist. The same definition is made in $D(X_{\\Et},\\mathcal O_E/\\varpi^n)$.",
+ "statement": "Let $X$ be a scheme, let $\\ell$ be a prime, let $E/\\mathbf Q_\\ell$ be a finite extension with valuation ring $\\mathcal O_E$ and chosen uniformizer $\\varpi$, and let $n\\geq1$. Put $A=\\mathcal O_E/\\varpi^n\\mathcal O_E$ as in [def-weil-l-adic-coefficient-extension]. Use the small pro-etale site $X_{\\Proet}$ [def-weil-pbc-proetale-site] or the small etale site $X_{\\Et}$ [def-weil-pbc-etale-site], with the size convention incorporated in [def-weil-pbc-proetale-site]. On either site write $A_X$ for the constant sheaf of rings [def-weil-pbc-constant-sheaf], and also for its complex concentrated in degree zero. Write $D(X_{\\Proet},A)$ for the unbounded derived category of sheaves of $A_X$-modules specified in [def-weil-pbc-proetale-site], and $D(X_{\\Et},A)$ for that of [def-weil-pbc-derived-categories]. Use the derived tensor product $-\\otimes^L_{A_X}-$ of [def-weil-derived-tensor] on $D(X_{\\Proet},A)$ and that of [def-kun-derived-tensor] on $D(X_{\\Et},A)$, each computed with a K-flat resolution of the first factor.\n\nAn invertible object of $D(X_{\\Proet},A)$ with chosen inverse data is a triple $(L,L',e)$ consisting of objects $L,L'$ and an isomorphism\n$$\ne:L\\otimes^L_{A_X}L'\\xrightarrow{\\sim}A_X.\n$$\nOne says that $L$ is invertible if such $L',e$ exist. The same definition, including the chosen triple and the existence condition on $L$, is made in $D(X_{\\Et},A)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/pur9-cs-def-invertible.md",
   "place": "node pur9-cs-def-invertible, order 2349"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-derived-categories",
+  "def-weil-derived-tensor",
+  "def-kun-derived-tensor"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An object of a symmetric monoidal category is tensor invertible if it has an inverse object whose tensor product is isomorphic to the unit",
+   "results": "No match. Hits concerned symmetric/braided categories, half-braidings, the center, and construction of a monoidal category; none defines tensor-invertible objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsInvertible|structure Invertible|def IsInvertible",
+   "results": "No match in Mathlib/CategoryTheory: zero hits for the declaration-name pattern.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible object in a monoidal category has an inverse object with tensor product isomorphic to the unit",
+   "results": "No match. Hits concerned tensor inverses of morphisms, monoidal actions, monoidal equivalences, and group objects; none defines an invertible object.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\"",
+   "results": "No match. Hits were ContinuousLinearMap.IsInvertible and its lemmas, concerning invertible continuous linear maps rather than tensor-invertible category objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor invertibility of objects defined by existence of an object M with L tensor M isomorphic to the tensor unit",
+   "results": "No match on the second phrasing. Hits concerned tensor unitors, coherence, and exactPairingUnit; they do not define objects with a tensor inverse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "invertible|Invertible|TensorInverse",
+   "results": "No match. The seven hits in Mathlib/CategoryTheory/Monoidal concern invertible morphisms in group-object constructions and imports of Algebra.Group.Invertible, rather than tensor-invertible objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard groupoid objects in a monoidal category admitting an inverse under tensor product",
+   "results": "Eight hits, including RigidCategory, monoidal object properties and CommRing.Pic. Read Mathlib/RingTheory/PicardGroup.lean lines 17-29 and 73-84: its invertibility is for ordinary modules over a commutative semiring, not objects of either derived sheaf category or their chosen inverse triples.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorInvertible|HasTensorInverse|Picard|InvertibleObject",
+   "results": "23 hits. The relevant PicardGroup file concerns ordinary modules; other hits concern imports, Picard-Lindelof theory, and elliptic curve comments. No definition matching this item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\"",
+   "results": "12 hits for pick/pickle and PiBase identifiers, none a tensor-invertible object definition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -40,5 +112,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur9-cs-def-invertible",
+  "worker": "stage1",
+  "summary": "Read the current blueprint definition, its coprojection unit and chapter, and all six dependency statements. Made the finite coefficient datum, the two unbounded derived module-sheaf categories, the degree-zero constant coefficient sheaf, and the derived tensor of each site explicit (on review: the pro-etale tensor of def-weil-derived-tensor used by the purity conventions, the etale tensor of def-kun-derived-tensor). Preserved precisely the chosen inverse triple and existential invertibility on each site. Reused existing nodes throughout; no theorem, new node, or Mathlib leaf was introduced. Logged six actual Mathlib searches, including two semantic phrasings, with no matching definition.",
+  "blueprint": "Realizes all three sentences of pur9-cs-def-invertible.md: the triple in the pro-etale category, the existence predicate, and the same definition on the etale site; this supplies the invertibility notion used in sk-lem-coprojection, without changing that unit or its proof route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-94678d024",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-94678d024 (reviewer sub-agent of L); spot-checked: I read the item in full against main-20261015 sec-smooth-purity/sk-lem-coprojection/pur9-cs-def-invertible.md (order 2349). It matches the source's three sentences: the triple (L,L',e) with e: L⊗^L L' ≅ A_X, the existence predicate, and the same definition on X_Et. It adds no hypothesis and is not weakened. Dependencies read: def-weil-l-adic-coefficient-extension (A_{E,n}, n≥1); def-weil-pbc-proetale-site (site, size convention, sheafified A_Y, unbounded D); def-weil-pbc-etale-site; def-weil-pbc-derived-categories (unbounded D(T_Et,R)); def-weil-pbc-constant-sheaf. It is a definition with no proof, no citations and no new nodes, so B and D have nothing to check. Duplicate search over the whole DAG: def-kun-torsion-invertible is a different notion; def-pur-section-invariant and def-pur-co-smoothness only use tensor-invertibility; lem-pur-coprojection cites this item. same_as=[] is right. The nine Mathlib searches cover all three kinds and find no leaf (CommRing.Pic is about ordinary modules). Small cases checked: shifts of A_X are invertible, 0 on nonempty X is not, for n≥2 A/ϖ is not, the empty and disconnected cases work. One fault, repaired (E6/C4): the item took ⊗^L from the statement node lem-weil-pbc-site-derived-tensor-descent, which resolves both factors. The purity conventions (def-pur-conventions → def-weil-derived-pullback-tensor-hom → def-weil-derived-tensor) and the consumer lem-pur-coprojection use the tensor that resolves only the first factor, and the chapter's etale tensor is def-kun-derived-tensor. The two constructions agree only up to a comparison no node states. The fix file fixes/dag/nodes/sec-smooth-purity/pur9-cs-def-invertible.json cites def-weil-derived-tensor on D(X_Proet,A) and def-kun-derived-tensor on D(X_Et,A) and replaces the lemma with these two in stmt_deps. I checked that each defines the tensor on the same category with the same unit sheaf, and that neither depends on the item, so there is no cycle. No SGA is cited, the route and unit are unchanged, and no tool_uses are needed.; 1 file(s) fixed by the reviewer"
  }
 }

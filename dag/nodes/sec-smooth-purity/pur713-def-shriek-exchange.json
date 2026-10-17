@@ -3,26 +3,98 @@
  "blueprint": {
   "is": "pur713-def-shriek-exchange",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-exchange-projection"
+  ]
  },
  "kind": "definition",
  "title": "Compact-support exchange, finite coefficients",
- "statement": "For the chosen compactification $c_f=(j,p)$ of $f$ and its base change $c'=(j',p')$ of Definition [pur713-def-base-changed-compactification], the finite-coefficient compact-support exchange\n\n$$\n\\operatorname{Ex}_{!,\\square,\\mathcal O_E/\\varpi^n}:\nLg^*_{\\mathcal O_E/\\varpi^n}Rf_{!,\\mathcal O_E/\\varpi^n}\n\\longrightarrow R_{c'}Lg'^*_{\\mathcal O_E/\\varpi^n},\n$$\n\na natural transformation of functors $D(X_{\\Proet},\\mathcal O_E/\\varpi^n)\\to D(Y'_{\\Proet},\\mathcal O_E/\\varpi^n)$ between the functors of Definitions “Finite-coefficient compact-support direct image” (`pur713-def-lower-shriek`) and “Compact-support direct image for an auxiliary compactification” (`pur713-def-lower-shriek-auxiliary`), has component at $K$ the composite\n\n$$\n\\begin{aligned}\nLg^*_{\\mathcal O_E/\\varpi^n}Rp_{*,\\mathcal O_E/\\varpi^n}\\mathrm D(j_{!,\\mathcal O_E/\\varpi^n})K\n&\\xrightarrow{\\operatorname{Ex}_{*,\\square_p,\\mathcal O_E/\\varpi^n}}Rp'_{*,\\mathcal O_E/\\varpi^n}L\\bar g^*_{\\mathcal O_E/\\varpi^n}\\mathrm D(j_{!,\\mathcal O_E/\\varpi^n})K\\\\\n&\\xrightarrow{Rp'_{*,\\mathcal O_E/\\varpi^n}(b_{j,\\bar g,\\mathcal O_E/\\varpi^n,K})}\nRp'_{*,\\mathcal O_E/\\varpi^n}\\mathrm D(j'_{!,\\mathcal O_E/\\varpi^n})Lg'^*_{\\mathcal O_E/\\varpi^n}K,\n\\end{aligned}\n$$\n\nwith $\\operatorname{Ex}_{*,\\square_p,\\mathcal O_E/\\varpi^n}$ of Definition [pur713-def-star-exchange] for the square $\\square_p$ and $b$ of Lemma “Finite-coefficient open-extension base change” (`pur713-lem-open-exchange`, in [sk-def-sf-exchanges]). Its target is formed with the base-changed compactification $c'$, which in general differs from $c_{f'}$; passing to $Rf'_{!,\\mathcal O_E/\\varpi^n}$ requires a comparison $R_{c'}\\cong R_{c_{f'}}$, see Input “Comparison of compactifications, finite coefficients” (`pur713-input-comparison`, in [sk-def-sf-exchanges]).",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and an integer $n\\geq1$, and write $A=\\mathcal O_E/\\varpi^n$ [def-weil-l-adic-coefficient-extension]. Let\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\nbe a Cartesian square of schemes [def-weil-pbc-cartesian-square]. Use the small pro-etale constant-$A$-module derived categories [def-weil-pbc-proetale-site] and their ordinary unbounded derived operations $Lu_A^*\\dashv Ru_{*,A}$ [def-weil-pbc-proetale-operations]; thus $Lu_A^*=u^{-1}$ for these constant coefficients. Suppose a compactification $c_f=(j,p)$ of $f$ has been chosen: $j:X\\hookrightarrow\\overline X$ is open, $p:\\overline X\\to Y$ is proper, and $pj=f$. Let $c'=(j',p')$ be its base change, with $\\bar g:\\overline X'\\to\\overline X$ and Cartesian proper square $\\square_p$, as in [pur713-def-base-changed-compactification]. Write $\\mathrm D(j_{!,A})$ for termwise extension by zero on the derived categories, justified by the exactness of [lem-cbc-proetale-extension-zero]: an exact functor applied termwise preserves quasi-isomorphisms and induces a functor on the derived categories represented by its termwise value [lem-weil-pbc-exact-functor-derived-factorization]; similarly for $j'$. In this definition the chosen and auxiliary compact-support functors mean the explicit composites\n$$\nRf_{!,A}:=Rp_{*,A}\\mathrm D(j_{!,A}),\\qquad\nR_{c'}:=Rp'_{*,A}\\mathrm D(j'_{!,A}).\n$$\nBoth are functors on the full unbounded derived categories; these formulas make no compactification-independence assertion.\n\nThe finite-coefficient compact-support exchange\n\n$$\n\\operatorname{Ex}_{!,\\square,\\mathcal O_E/\\varpi^n}:\nLg^*_{\\mathcal O_E/\\varpi^n}Rf_{!,\\mathcal O_E/\\varpi^n}\n\\longrightarrow R_{c'}Lg'^*_{\\mathcal O_E/\\varpi^n},\n$$\n\na natural transformation of functors $D(X_{\\Proet},\\mathcal O_E/\\varpi^n)\\to D(Y'_{\\Proet},\\mathcal O_E/\\varpi^n)$ between the two composite functors just defined, has component at $K$ the composite\n\n$$\n\\begin{aligned}\nLg^*_{\\mathcal O_E/\\varpi^n}Rp_{*,\\mathcal O_E/\\varpi^n}\\mathrm D(j_{!,\\mathcal O_E/\\varpi^n})K\n&\\xrightarrow{\\operatorname{Ex}_{*,\\square_p,\\mathcal O_E/\\varpi^n}}Rp'_{*,\\mathcal O_E/\\varpi^n}L\\bar g^*_{\\mathcal O_E/\\varpi^n}\\mathrm D(j_{!,\\mathcal O_E/\\varpi^n})K\\\\\n&\\xrightarrow{Rp'_{*,\\mathcal O_E/\\varpi^n}(b_{j,\\bar g,\\mathcal O_E/\\varpi^n,K})}\nRp'_{*,\\mathcal O_E/\\varpi^n}\\mathrm D(j'_{!,\\mathcal O_E/\\varpi^n})Lg'^*_{\\mathcal O_E/\\varpi^n}K,\n\\end{aligned}\n$$\n\nwith $\\operatorname{Ex}_{*,\\square_p,\\mathcal O_E/\\varpi^n}$ of Definition [pur713-def-star-exchange] for the square $\\square_p$ and\n$$\nb_{j,\\bar g,A,K}:L\\bar g_A^*\\mathrm D(j_{!,A})K\\xrightarrow{\\sim}\\mathrm D(j'_{!,A})Lg'^*_AK\n$$\nthe canonical natural pro-etale open-extension base-change isomorphism of complexes of [lem-cbc-proetale-extension-zero-base-change], using $Lu_A^*=u^{-1}$, read on the derived categories: all four functors $\\bar g^{-1},j_!,j'_!,g'^{-1}$ are exact and applied termwise, so by [lem-weil-pbc-exact-functor-derived-factorization] both composites are computed by their termwise values and the natural isomorphism of complexes gives the displayed natural isomorphism. Its target is formed with the base-changed compactification $c'$, which in general differs from $c_{f'}$; passing to $Rf'_{!,\\mathcal O_E/\\varpi^n}=R_{c_{f'}}$ requires a separately supplied natural comparison $R_{c'}\\cong R_{c_{f'}}$. This definition does not supply that comparison or assert that the displayed exchange is invertible.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/pur713-def-shriek-exchange.md",
   "place": "node pur713-def-shriek-exchange, order 2357"
  },
  "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
   "pur713-def-base-changed-compactification",
+  "lem-cbc-proetale-extension-zero",
   "pur713-def-star-exchange",
-  "sk-def-sf-exchanges"
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.whiskerLeft",
+   "results": "loogle: unknown identifier 'CategoryTheory.whiskerLeft'",
+   "date": "2026-10-17",
+   "verdict": "no match: the attempted identifier is unknown; corrected in the subsequent Loogle query"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactSupport.*baseChange|baseChange.*compactSupport",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the pro-etale site with finite constant ring coefficients, define compact support base change using a compactification and the composition of proper direct image base change with open extension by zero base change",
+   "results": "Condensed.profiniteSolid; Condensed.lanSheafProfinite; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; Condensed.profiniteSolidCounit; Condensed.profiniteSolidification; CompHausLike.LocallyConstantModule.functor; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed functors, base-change stability of morphisms, or compactly supported functions, not this derived exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support direct image base change for finite coefficient sheaves on the pro-etale site defined using a compactification",
+   "results": "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; IsBaseChange.finsuppPow; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; HasCompactSupport.comp_isClosedEmbedding; AlgebraicGeometry.IsProper.isStableUnderBaseChange; Condensed.lanSheafProfinite; AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed functors, base-change stability of morphisms, or compactly supported functions, not this derived exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose whiskered natural transformations to define a base change morphism for a composite of functors",
+   "results": "CategoryTheory.BasedCategory.whiskerLeft; CategoryTheory.BasedCategory.whiskerRight; CategoryTheory.BasedCategory.whiskerRight_toNatTrans; CategoryTheory.BasedCategory.whiskerLeft_toNatTrans; CategoryTheory.BasedFunctor.comp; CategoryTheory.BasedNatTrans.comp; CategoryTheory.TwoSquare.lanBaseChange_app; CategoryTheory.NatTrans.Equifibered.whiskerLeft",
+   "date": "2026-10-17",
+   "verdict": "generic categorical whiskering and Kan-extension maps only; no matching scheme-level construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskerLeft",
+   "results": "CategoryTheory.Functor.whiskerLeft; CategoryTheory.Functor.whiskerLeft_id; CategoryTheory.Functor.isIso_whiskerLeft; CategoryTheory.Functor.whiskerLeft_id'; CategoryTheory.Functor.id_hcomp; CategoryTheory.Functor.whiskerLeft_app; CategoryTheory.Functor.isoWhiskerLeft_hom; CategoryTheory.Functor.isoWhiskerLeft_inv",
+   "date": "2026-10-17",
+   "verdict": "generic whiskering only; not the finite-coefficient pro-etale compactification exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|extensionByZero|lowerShriek|compactification",
+   "results": "Mathlib/NumberTheory/ModularForms/Cusps.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: pro-etale sites and ell-adic cohomology occur, but no compactification-relative lower-shriek exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "BeckChevalley|extensionByZero.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*extensionByZero|lowerShriek",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley natural transformation for derived pushforward with proper support, composed with extension by zero for an open immersion",
+   "results": "SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardNatTrans_comp; SheafOfModules.pushforwardNatIso_hom; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; SheafOfModules.pushforwardComp; CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app; CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf pushforward composition and natural transformations, not derived compact-support pro-etale exchange"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -48,5 +120,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-shriek-exchange",
+  "worker": "stage1",
+  "summary": "Definition-only split, no new nodes: spelled out the coefficient and square data, ordinary unbounded pro-etale operations, termwise exact open extension, and the chosen and base-changed compactification composites. Replaced dangling source labels by the existing canonical pro-etale open-extension base-change lemma; removed the generic exchanges sketch as a dependency because it does not supply these missing named interfaces. Preserved the two-arrow component formula and its auxiliary-compactification target. No ambient compactification comparison or invertibility is claimed. Searches found only generic categorical machinery, not a Mathlib definition or an exact project attachment.",
+  "blueprint": "main-20261015 pur713-def-shriek-exchange, defining display and its two component arrows: the source/target composites are written inline from the already existing operation and exact-open-extension nodes, the first arrow is pur713-def-star-exchange for square_p, and the second is lem-cbc-proetale-extension-zero-base-change pushed by Rp_prime. The closing distinction between c_prime and c_f_prime is retained. This is a definition, so there are no proof steps or unit-realization changes."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NN-82edfc777",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-82edfc777 (reviewer sub-agent of L); spot-checked: I read the whole delivery against main-20261015 pur713-def-shriek-exchange.md (order 2357). It is a definition-only split with no new nodes. The source, target, domain D(X_proet,O_E/ϖ^n) -> D(Y'_proet,O_E/ϖ^n) and the two-arrow component formula match the source exactly. The first arrow is pur713-def-star-exchange applied to the square of p and g at D(j_!)K. The second is Rp'_*(b), and b is in the source's direction. The source cites four labels that exist nowhere in the DAG or in either blueprint snapshot: pur713-def-lower-shriek, pur713-def-lower-shriek-auxiliary, pur713-lem-open-exchange and pur713-input-comparison. The delivery handles them correctly. It writes Rf_! = Rp_*D(j_!) and R_{c'} = Rp'_*D(j'_!) out explicitly, as def-exchange-projection does. It takes b from lem-cbc-proetale-extension-zero-base-change; I read that lemma's proof (steps 3-5), and b is a specific canonical map in the direction ḡ^{-1}j_! -> j'_!g'^{-1}, not the reverse map b'. It keeps the comparison of c' with c_{f'} as an unsupplied comparison and asserts no invertibility. No hypothesis is added and nothing is weakened. I read all eight dependencies in full. A is finite, as both cbc lemmas need. The constant-coefficient pullback is the plain inverse image, so Lu^* = u^{-1}. The upper square of the base-changed compactification is an open-immersion square, which is the hypothesis of the base-change lemma. Small cases pass: K=0, j=id, p=id, empty X and n=1. Not duplicates: def-exchange-projection contains the same construction inside a broader definition with extra hypotheses and is correctly recorded in same_as; the étale D^+, completed-coefficient and module-coefficient variants are different. One repair (a C3 citation gap): the base-change lemma's statement gives the isomorphism only on complexes, and its passage to derived categories appears only in its proof. D(j_!) was likewise justified only by the word exactness. I added the existing Mathlib-leaf node lem-weil-pbc-exact-functor-derived-factorization to the statement and stmt_deps (fixes/dag/nodes/sec-smooth-purity/pur713-def-shriek-exchange.json). Nothing else changed and no cycle arises. I accept the two sk-prop-sf-cbc lemmas as tool uses in the item's statement dependencies, since no node of this unit supplies them. No SGA source is cited. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

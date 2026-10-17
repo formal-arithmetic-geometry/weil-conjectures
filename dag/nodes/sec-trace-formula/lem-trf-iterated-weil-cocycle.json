@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-iterated-weil-cocycle",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cocycle identity for the iterated Weil isomorphism",
@@ -15,32 +15,133 @@
  "stmt_deps": [
   "def-trf-strict-weil-complex",
   "def-trf-scheme-frobenius",
-  "def-trf-iterated-weil-map"
+  "def-trf-iterated-weil-map",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "proof": [
   {
-   "text": "By [def-trf-strict-weil-complex], $\\varphi$ is an isomorphism\n$Lg_\\gamma^*K\\to K$ with $K\\in D^b_{ctf}(X,A)$; by\n[def-trf-scheme-frobenius], $g_\\gamma$ is an automorphism of\n$X$ satisfying $g_\\gamma^{m+n}=g_\\gamma^m\\circ g_\\gamma^n$, so that\nthe derived pullbacks satisfy $Lg_\\gamma^{m+n*}\\cong Lg_\\gamma^{m*}Lg_\\gamma^{n*}$ under the canonical identification\ndisplayed in the statement. Under this identification both sides of\nthe identity are the composite of the $m+n$ maps\n\n$$\nLg_\\gamma^{m+n*}K\\xrightarrow{Lg_\\gamma^{m+n-1*}\\varphi}\\cdots\n\\xrightarrow{Lg_\\gamma^*\\varphi}K\n$$\n\nof [def-trf-strict-weil-complex]: the left-hand side is the\ncomposite defining $\\varphi^{[m+n]}$ in\n[def-trf-iterated-weil-map], while the right-hand side is the\nconcatenation of the composites defining $\\varphi^{[m]}$ and\n$\\varphi^{[n]}$ in [def-trf-iterated-weil-map]; the\nconcatenation is identified with the composite of the $m+n$ maps by\nthe associativity of composition and the naturality of the canonical\npullback identifications.",
+   "text": "By [def-trf-strict-weil-complex], $\\varphi:Lg_\\gamma^*K\\to K$ is an isomorphism in the underlying derived category of pro-etale $A$-modules. By [def-trf-scheme-frobenius], $g=g_\\gamma$ is an automorphism. By [def-weil-derived-pullback-tensor-hom], $A$ denotes the constant coefficient sheaf, so all powers of $g$ preserve it with the canonical identifications. Apply [lem-weil-pbc-proetale-derived-pullback-composition] to $h=g^m$, $k=g^n$: its natural comparison is $L(g^{m+n})^*\\cong L(g^m)^*L(g^n)^*$. Put $F=Lg^*$ and identify $L(g^r)^*$ with the parenthesized iterate $F^r$ by repeated such comparisons. These identifications are natural on every derived morphism, since the comparison is an isomorphism of functors, not just an objectwise isomorphism.\n\nHere is the coherence check needed when regrouping powers. For an arbitrary input derived object, take a representing complex and a K-flat resolution with flat terms by [lem-pc-kflat-resolution], on the small pro-etale site with its constant commutative ring sheaf $A$. The computation clause of [lem-weil-pbc-proetale-derived-pullback-composition] identifies each comparison on this representative with its ordinary termwise comparison; that same clause says successive pullbacks of this representative remain K-flat with flat terms. In the identified-coefficient case [def-weil-pbc-proetale-operations] defines derived pullback by the exact module pullback applied termwise. After cancelling extension of scalars along the coefficient isomorphism, this is the inverse-image functor on underlying modules. Its ordinary composition identifications associate by identifying the same successive inverse images; equivalently, in the tensor presentations the two ways to expand three pullbacks both send a generator $v\\otimes a$ to $((v\\otimes1)\\otimes1)\\otimes a$. Tensor balancing and associativity of scalar multiplication give the same inverse in both cases. Thus these are equal maps in each degree on that representative, commute with differentials and localize to equal maps in the derived category. Every derived object admits the chosen representative, so this proves the required associativity for the canonical comparisons on all objects. Consequently regrouping the iterates, and mapping a morphism under them, uses compatible identifications. We may henceforth calculate with $F^mF^n=F^{m+n}$ and $F^0=\\mathrm{id}$ in this notation.",
    "uses": [
     "def-trf-strict-weil-complex",
     "def-trf-scheme-frobenius",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; termwise construction and explicit associativity calculation for constant coefficients"
+   }
+  },
+  {
+   "text": "For $i\\geq0$ put\n\n$$\na_i=F^i(\\varphi):F^{i+1}K\\longrightarrow F^iK.\n$$\n\nThe definition [def-trf-iterated-weil-map] gives $\\varphi^{[r]}=a_0\\circ\\cdots\\circ a_{r-1}$ for every $r\\geq1$ (a single factor when $r=1$). Functoriality of $F^m$ gives\n\n$$\nF^m(\\varphi^{[n]})\n=F^m(a_0)\\circ\\cdots\\circ F^m(a_{n-1})\n=a_m\\circ\\cdots\\circ a_{m+n-1},\n$$\n\nsince $F^m(F^j(\\varphi))=F^{m+j}(\\varphi)$ for $0\\leq j<n$. The naturality and associativity verified in step 1 justify precisely these power identifications on each factor. Thus associativity of composition gives\n\n$$\n\\varphi^{[m]}\\circ Lg_\\gamma^{m*}\\varphi^{[n]}\n=(a_0\\circ\\cdots\\circ a_{m-1})\\circ(a_m\\circ\\cdots\\circ a_{m+n-1})\n=a_0\\circ\\cdots\\circ a_{m+n-1}\n=\\varphi^{[m+n]}.\n$$\n\nEvery factor has the displayed source and target; in particular the last arrow toward $K$ is $a_0=\\varphi:FK\\to K$.",
+   "uses": [
     "def-trf-iterated-weil-map"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-iterated-weil-cocycle.proof.md",
+    "place": "Proof paragraph 1, with the factor indices and the final arrow corrected and the functoriality calculation expanded"
+   }
   }
  ],
  "proof_deps": [
   "def-trf-strict-weil-complex",
   "def-trf-scheme-frobenius",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pc-kflat-resolution",
   "def-trf-iterated-weil-map"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-iterated-weil-cocycle.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-iterated-weil-cocycle.proof.md",
+  "place": "Proof paragraph 1, expanded using Stacks Tag 0D6D and the explicit constant-coefficient coherence calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "iterated Weil cocycle identity phi m+n equals phi m after pullback phi n",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd, cocycle_snd_fst_snd, cocycle_snd_fst_fst, cocycle_snd_snd, cocycle_fst_fst_snd, cocycle_fst_fst_fst, cocycle, and Scheme.Cover.glued_cover_cocycle; none states the Weil-complex identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.Functor.comp_obj, pullback composition",
+   "results": "0 hits; service reported unknown identifier pullback.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp|Functor.*composition|pullback.*comp [Mathlib/CategoryTheory]",
+   "results": "The recorded command returned 0 hits, but its subdirectory argument Mathlib/CategoryTheory repeated the Mathlib path component, so it did not search the intended source directory. Superseded by the second reader's successful grep under CategoryTheory/Functor.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "iterated Weil isomorphisms compose under pullback",
+   "results": "8 hits headed by SheafOfModules.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp variants, CategoryTheory.Functor.IsFibered.pullbackPullbackIso, AlgebraicGeometry.Scheme.Modules.pullbackComp and CategoryTheory.Over.pullbackComp; none states the Weil-complex identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition law for iterated pullback isomorphism defined by repeated Weil structure",
+   "results": "8 hits headed by AlgebraicGeometry.Scheme.Modules.pullbackComp and Scheme.Pullback pullbackP1Iso/t' lemmas; none states the Weil-complex identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp, CategoryTheory.Over.pullbackComp",
+   "results": "0 hits; service reported unknown identifier Functor.map_comp.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|map_comp|comp_map [Mathlib/CategoryTheory]",
+   "results": "The recorded command returned 0 hits, but its subdirectory argument Mathlib/CategoryTheory repeated the Mathlib path component, so it did not search the intended source directory. Superseded by the second reader's successful grep under CategoryTheory/Functor.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cocycle identity for an iterated natural isomorphism under a functor",
+   "results": "8 hits headed by groupCohomology.cocyclesMap_id_comp(_assoc), CategoryTheory.Functor.associator, CategoryTheory.Functor.mapCommGrpCompIso and unrelated functoriality declarations; none states the Weil-complex identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an endofunctor F and a morphism u from F X to X, the composites u_r of r successive images satisfy u_(m+n) = u_m composed with F^m(u_n)",
+   "results": "8 hits: SmallObject.SuccStruct.Iteration.mapObj_trans_assoc, List.iterate_add, SmallObject.SuccStruct.Iteration.mapObj_trans, Function.iterate_add_apply, SmallObject.SuccStruct.Iteration.mapObj, SmallObject.SuccStruct.iterationFunctor_map_succ_assoc, Function.Commute.iterate_iterate_self, Function.iterate_add. Function/list iteration does not state the composite of morphisms with varying domains; small-object iteration has additional categorical data and is not this statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "iterate.*(map|comp)|map.*iterate|map_comp",
+   "results": "25 hits under CategoryTheory/Functor (correct relative subdirectory), including OfSequence.map_comp at Mathlib/CategoryTheory/Functor/OfSequence.lean:72 and uses of Functor.map_comp. These concern functorial composition, not the iterated Weil morphism. Also read CategoryTheory/Endofunctor/Algebra.lean:35-150: it defines an algebra structure map and its category, not the iterated cocycle.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iterate\", \"map\"",
+   "results": "12 hits, all Std.DTreeMap.Internal iterated insertion/erasure structures; none concerns endofunctor algebra morphism iteration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -64,5 +165,34 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-weil"
+ "unit": "sk-d-weil",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-iterated-weil-cocycle",
+  "worker": "stage1",
+  "summary": "Revalidated the retained two-step split against the current DAG after the returned delivery cited changed Frobenius and strict-Weil definitions. Step 1 uses the strict-Weil pair and geometric-Frobenius automorphism clauses, the existing natural derived-pullback composition comparison, identified-coefficient operations, and K-flat resolutions with flat terms; it checks associativity termwise. Step 2 writes the indexed factors and concatenates them by functoriality and categorical associativity, correcting the blueprint proof's ill-typed final arrow. Refreshed the Frobenius citation to its current definition reference; the changed scheme-Frobenius finiteness discussion and strict-Weil rational-category discussion are unused. The item statement, proof argument, six existing dependencies, actual search log, and blueprint route are retained. No new nodes or Mathlib leaves.",
+  "blueprint": "The single proof paragraph of literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-iterated-weil-cocycle.proof.md: identify both sides with the same m+n-fold composite using the canonical pullback identification, then associativity and naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Canonical natural composition of derived pro-etale module pullbacks, already needed by the reviewed iterated-map definition; the Weil-data unit has no statement supplying this generic comparison."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat representatives with flat terms for checking canonical comparison associativity on every derived object; no Weil-data unit node provides this general ringed-site resolution theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-f1600e319",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-f1600e319 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It has one commit with the item and the report, and no new nodes. The item statement is identical to the blueprint in both the master (order 2297) and main-20261015 (order 2641) snapshots. All hypotheses are kept: the strict pair in D^b_ctf,W(X,A_{E,n}) on the small pro-etale site, the geometric-Galois g_gamma rather than the scheme Frobenius, m,n>=1, and the identity holding after the canonical comparisons. The type check holds: c_{h,k}: L(kh)^* -> Lh^*Lk^* with h=g^m, k=g^n, and g^n g^m = g^m g^n. Step 1 is correctly marked non-elementary. Its pair clause comes from def-trf-strict-weil-complex and the automorphism from def-trf-scheme-frobenius, both checked with their blueprint_update. def-weil-derived-pullback-tensor-hom supplies the constant sheaf and termwise pullback. The coefficient identifications are compatible because each c_u in prop-weil-pbc-proetale-constant-ring-map is the unique map preserving constant sections. lem-weil-pbc-proetale-derived-pullback-composition (read with Stacks 0D6D, sites-cohomology.tex l.3657, statement and proof) gives the natural isomorphism, termwise on K-flat complexes with flat terms, and says pullback preserves that class. lem-pc-kflat-resolution (Stacks 06YS) gives such a resolution for every complex, with no boundedness hypothesis. def-weil-pbc-proetale-operations supplies termwise exact pullback and cancellation of scalar extension. The triple-comparison associativity is written out at generator level; it is the routine coherence of inverse images and not a hidden theorem. Step 2 is elementary: with a_i = F^i(phi): F^{i+1}K -> F^iK, def-trf-iterated-weil-map gives phi^[r] = a_0...a_{r-1}, applying F^m shifts the second block to a_m..a_{m+n-1}, and concatenation gives phi^[m+n]. The documented source error is genuine: the blueprint's final arrow is phi, not Lg^*phi. Edge cases checked: m=n=1, single-factor first or second block, m=n=2, K=0, X empty, and a scalar automorphism T on the point (T^{m+n} = T^m T^n). There is no cycle: the forward reference is only a pointer, and no dependency reaches back to the item. No duplicate exists; the Picard-framework coherence lemmas are for Zariski O_X-modules and the two trf neighbours concern R Gamma_c transport and traces. Accepted tool_uses: lem-weil-pbc-proetale-derived-pullback-composition and lem-pc-kflat-resolution, both generic black boxes that replace no step of unit sk-d-weil. No SGA is cited. Mathlib searches are recorded honestly, with failed Loogle queries and the misdirected grep marked unavailable. source.document still names the master copy, whose text is identical; I left it unchanged. No fixes were written."
+ }
 }

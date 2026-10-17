@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-trf-kunneth-verdier",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Kunneth–Verdier isomorphism; the $\\kappa$ map",
@@ -19,28 +19,138 @@
  ],
  "proof": [
   {
-   "text": "Apply the external Hom [prop-trf-external-hom] to the pairs\n$(A_X,M)$ and $(N,\\omega_Y)$, followed by\n$\\RHom(1,\\alpha)$ from [prop-trf-exceptional-kunneth] for the\nidentification $M\\boxtimes_A^{\\mathrm L}\\omega_Y\\simeq p_X^!M$ of\n[def-trf-dualizing-complex]. Their composite is exactly\n$\\kappa_{M,N}$, and both factors are isomorphisms, so $\\kappa_{M,N}$\nis an isomorphism.",
+   "text": "Check the inputs for external Hom. The coefficient objects $A_X$ and $A_s$, concentrated in degree zero, are constructible in the sense of [def-weil-finite-torsion-constructibility] (take the one-piece partition): the constant coefficient sheaf is already locally constant with finite stalk $A$. They have Tor amplitude $[0,0]$ in the sense of [def-weil-finite-tor-amplitude], since tensoring the rank-one free coefficient sheaf with any sheaf in degree zero gives that sheaf in degree zero. The admissibility clause of [def-trf-admissibility] explicitly equips the restriction of the specified constructible exceptional inverse image with the functor type $Ra_Y^!:D^b_{ctf}(s,A)\\to D^b_{ctf}(Y,A)$ and the adjunction $Ra_{Y!}\\dashv Ra_Y^!$. Apply this restriction to $A_s$. By [def-trf-dualizing-complex], its value is $\\omega_Y=Ra_Y^!A_s$, so $\\omega_Y$ belongs to $D^b_{ctf}(Y,A)$. Thus all four inputs $(A_X,M,N,\\omega_Y)$ meet the finite-Tor constructibility hypotheses of external Hom. These are the constructible exceptional functors throughout; no ambient right adjoint on all pro-etale sheaves is used. The identity morphism $\\operatorname{id}_X$ is a separated finite-type $k$-morphism between finite-type $k$-schemes, so it is exceptionally admissible by [def-trf-admissibility], whose datum is available for every such morphism; its compact-support image is canonically the identity, so its specified exceptional adjoint $R\\operatorname{id}_X^!$ is canonically isomorphic to the identity functor (uniqueness of right adjoints). This supplies the remaining exceptional-adjoint input.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-trf-dualizing-complex",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-trf-kunneth-verdier.proof.md",
+    "place": "Proof, first sentence: input hypotheses for the pairs $(A_X,M)$ and $(N,\\omega_Y)$"
+   }
+  },
+  {
+   "text": "Use [def-sf-kv-maps] at its finite coefficient stage $\\Lambda=A=A_{E,n}$, where it explicitly identifies its geometric functors and adjunction maps with the finite-stage exceptional-admissibility datum. Its $\\mathbb D_YN=\\RHom_A(N,Ra_Y^!A_s)$ is the same $D_YN$ as in [def-trf-dualizing-complex]. Here $p_Y^*$ in the item denotes the derived pullback $Lp_Y^*$ displayed in the current map definition. Apply [prop-trf-external-hom] on the separated finite-type schemes $X$ and $Y$ with $(E_1,L_1)=(A_X,M)$ and $(E_2,L_2)=(N,\\omega_Y)$. This gives the specified evaluation-defined isomorphism $\\beta:\\RHom_A(A_X,M)\\boxtimes_A^{\\mathrm L}\\RHom_A(N,\\omega_Y)\\xrightarrow{\\sim}\\RHom_A(A_X\\boxtimes_A^{\\mathrm L}N,M\\boxtimes_A^{\\mathrm L}\\omega_Y)$. Use $D_YN=\\RHom_A(N,\\omega_Y)$ from [def-trf-dualizing-complex] and the unit identifications $\\RHom_A(A_X,M)\\cong M$, $A_X\\boxtimes_A^{\\mathrm L}N\\cong Lp_Y^*N$ in [def-sf-kv-maps] (iv). We obtain an isomorphism $b:M\\boxtimes_A^{\\mathrm L}D_YN\\xrightarrow{\\sim}\\RHom_A(Lp_Y^*N,M\\boxtimes_A^{\\mathrm L}\\omega_Y)$, precisely the first arrow defining $\\kappa_{M,N}$.",
    "uses": [
     "prop-trf-external-hom",
-    "prop-trf-exceptional-kunneth",
-    "def-trf-dualizing-complex"
+    "def-trf-dualizing-complex",
+    "def-sf-kv-maps"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-trf-kunneth-verdier.proof.md",
+    "place": "Proof, first sentence: apply external Hom to the two indicated pairs"
+   }
+  },
+  {
+   "text": "Apply [prop-trf-exceptional-kunneth] with $f_1=\\operatorname{id}_X$, $f_2=a_Y:Y\\to s$, $L_1=M$ and $L_2=A_s$. The coefficients are in $D^b_{ctf}$ by the hypotheses and step 1; the required exceptional adjoints are those of the identity, $a_Y$, and their product $p_X$, as assumed. Under the canonical target-base identification $X\\times_k s\\cong X$ and the unit identification for the constant coefficient $A_s$, the target coefficient is $L_1\\boxtimes_A^{\\mathrm L}L_2\\cong M$; on the source side $R\\operatorname{id}_X^!M\\cong M$ by step 1, while $a_Y^!A_s=\\omega_Y$ by [def-trf-dualizing-complex]. Thus its canonical comparison is the isomorphism $a=\\alpha_{\\operatorname{id}_X,a_Y}:M\\boxtimes_A^{\\mathrm L}\\omega_Y\\xrightarrow{\\sim}p_X^!M$ occurring in [def-sf-kv-maps] (iv), whose current statement explicitly specifies these four inputs and identifies their product morphism with $p_X$. The map is formed with the same geometric exceptional adjunction counits as in (ii).",
+   "uses": [
+    "prop-trf-exceptional-kunneth",
+    "def-trf-dualizing-complex",
+    "def-sf-kv-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-trf-kunneth-verdier.proof.md",
+    "place": "Proof, first sentence: exceptional Kunneth for $\\operatorname{id}_X\\times a_Y$"
+   }
+  },
+  {
+   "text": "Let $H=\\RHom_A(Lp_Y^*N,-)$. The morphism $H(a)$ is invertible with inverse $H(a^{-1})$: functoriality sends $a^{-1}a$ and $aa^{-1}$ to identities. By [def-sf-kv-maps] (iv), the canonical map in the statement is exactly $\\kappa_{M,N}=H(a)\\circ b$. Its inverse is $b^{-1}\\circ H(a^{-1})$; composing in either order cancels the adjacent inverse pairs. Hence the specified $\\kappa_{M,N}$ is an isomorphism.",
+   "uses": [
+    "def-sf-kv-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-trf-kunneth-verdier.proof.md",
+    "place": "Proof, second sentence: identify the composite with kappa and compose the inverses"
+   }
   }
  ],
  "proof_deps": [
+  "def-trf-admissibility",
+  "def-trf-dualizing-complex",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
   "prop-trf-external-hom",
-  "prop-trf-exceptional-kunneth",
-  "def-trf-dualizing-complex"
+  "def-sf-kv-maps",
+  "prop-trf-exceptional-kunneth"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-trf-kunneth-verdier.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-trf-kunneth-verdier.proof.md",
+  "place": "Proof, both sentences; expanded input checks and inverse calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth Verdier isomorphism external product Verdier dual derived internal Hom exceptional inverse image",
+   "results": "8 hits: CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, LightCondensed.ihomPoints_symm_comp, CategoryTheory.Tor'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kunnethVerdier|KunnethVerdier|verdierDual|exceptional.*[Kk]unneth",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The external product of a constructible complex and a Verdier dual is the internal Hom from the pulled back complex to the exceptional inverse image.",
+   "results": "8 hits: CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft, CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft, CategoryTheory.MonoidalCategory.prodCompExternalProduct, CategoryTheory.MonoidalCategory.externalProduct, CategoryTheory.MonoidalCategory.ExternalProduct.extensionUnitLeft, CategoryTheory.MonoidalCategory.ExternalProduct.extensionUnitRight, HomologicalComplex.opEquivalence_inverse, CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.IsIso",
+   "results": "7 hits: CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.MonoidalClosedFunctor.mk, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.prodComparison_iso",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Vv]erdier|[Kk][uü]nneth",
+   "results": "0 hits: none; subdirectory AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kunneth Verdier duality for bounded constructible etale sheaves on products of finite type schemes over a field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etalePretopology, CategoryTheory.Sheaf.instHasFiniteProducts, AlgebraicGeometry.Scheme.etaleTopology, Algebra.FormallyEtale.iff_exists_algEquiv_prod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, AlgebraicGeometry.Scheme.instHasPullbacksEtale, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For schemes over a field the derived external tensor product with the dualizing complex computes exceptional pullback and the external Hom comparison is invertible on constructible finite Tor complexes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical morphism obtained by applying internal Hom to an isomorphism and composing with an external tensor Hom comparison is an isomorphism; constructible etale sheaf Verdier duality product formula",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, LightCondensed.ihomPoints_symm_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.bijection, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.ihomPoints; the displayed types concern light condensed internal Hom and sheaf pullback units, not constructible exceptional inverse image or the canonical Kunneth-Verdier comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For constructible complexes on a product of schemes, the exceptional inverse image along the first projection is external tensor with the dualizing complex of the second factor, and gives the internal Hom product duality isomorphism",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.coev_ev, LightCondensed.ihomPoints_symm_comp, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', CategoryTheory.ExponentiableMorphism.coev_ev_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev_coev_assoc. Displayed types concern exponentiable morphism triangle identities, light condensed internal projectivity and structure-sheaf module pullback; none states constructible exceptional product duality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -66,5 +176,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-kunneth-verdier"
+ "unit": "sk-thm-sf-kunneth-verdier",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-kunneth-verdier",
+  "worker": "stage1",
+  "summary": "Repaired the returned delivery after def-sf-kv-maps changed: re-read all five current cited statements and the current blueprint sources; replaced all three stale map-definition quotes; made the finite-stage Lambda=A identification, derived-pullback notation, canonical unit isomorphisms and product-target identification explicit in the proof. Retained the four-step argument, statement, dependencies and all eight logged Mathlib searches. No new nodes or Mathlib leaves.",
+  "blueprint": "The item realizes the kappa paragraph (step 3) of sk-thm-sf-kunneth-verdier: steps 1-2 expand its beta specialization, step 3 expands its alpha specialization, and step 4 proves invertibility of the defining composite. The alpha and beta arguments remain in prop-trf-exceptional-kunneth and prop-trf-external-hom, respectively.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-7c6823dac",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-7c6823dac (reviewer sub-agent of L); spot-checked: FIX for two small faults; the corrected item is in fixes/dag/nodes/sec-six-functors/thm-trf-kunneth-verdier.json. Read in full: the contract documents, delivery-errors A-F, the packet, the report, the item, all five cited DAG statements (current admissibility and map definitions, dualizing definition, external Hom, exceptional Kunneth), the definitions def-weil-finite-tor-amplitude, def-weil-finite-torsion-constructibility and def-weil-exceptional-inverse-image, and the unit record. Sources: main-20261015 sec-six-functors/sk-thm-sf-kunneth-verdier (thm-trf-kunneth-verdier.md, .proof.md, _section.md, prop-trf-external-hom.md, prop-trf-exceptional-kunneth.md) and the master copy of the item. The statement is verbatim the current blueprint statement and is unchanged and not weakened. The coefficient category is pro-etale D^b_ctf(-,A_{E,n}) throughout: def-sf-kv-maps explicitly identifies its datum at Lambda=A_{E,n} with the def-trf-admissibility datum. Step 2 is external Hom with (A_X,M),(N,omega_Y), all inputs in ctf, plus the unit identifications that clause (iv) states. Step 3 is exceptional Kunneth with id_X and a_Y, inputs M and A_s, target base X x_k s = X and product morphism p_X, as clause (iv) states, so it is the canonical alpha. Step 4 is an elementary inverse calculation. There are no new nodes. sk-thm-sf-kunneth-verdier is a generalization over all Lambda, not a duplicate. There is no cycle and nothing off route. Edge cases checked: M=0, N=0, an empty factor, Y=s, and X=Y=s with M=N=A. Faults repaired: (1) B3/C4: elementary step 1 used constructibility and finite Tor amplitude without citing their definition nodes; both are added to step 1 uses and to proof_deps. (2) E wording: steps 1 and 3 said id_X has 'the identity exceptional adjoint'. In fact the specified R id_X^! is only canonically isomorphic to the identity, and id_X is admissible because the admissibility definition gives the datum for every separated finite-type morphism. Step 3 also wrongly attributed L1 boxtimes L2 = M to the identity adjoint; it comes from the unit. Both reworded. No tool_uses. No Lean was opened or compiled.; 1 file(s) fixed by the reviewer"
+ }
 }

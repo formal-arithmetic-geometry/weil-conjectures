@@ -1,54 +1,248 @@
 {
-  "id": "def-pod-derived-poincare-pairing",
-  "blueprint": {
-    "is": "def-pod-derived-poincare-pairing",
-    "from": null,
-    "same_as": null
+ "id": "def-pod-derived-poincare-pairing",
+ "blueprint": {
+  "is": "def-pod-derived-poincare-pairing",
+  "from": null,
+  "same_as": [
+   "def-sf-pairing",
+   "sk-def-pairing"
+  ]
+ },
+ "kind": "definition",
+ "title": "Derived Poincare pairing",
+ "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $\\Lambda\\in\\{A,\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell}\\}$ and let $K\\in D^b_{ctf}(X,\\Lambda)$ be perfect over $\\Lambda_X$ as in [def-pod-perfect-complex-on-x] (the case $\\Lambda=A$ is the finite stage; the other coefficients are its transports). The *derived Poincare pairing* is the composite\n\n$$\n\\beta _K:\\   R\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] \\longrightarrow \\Lambda,\n$$\n\n$$\n\\begin{array}{lll} R\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] & \\xrightarrow {\\  \\smile _c\\  }&  R\\Gamma _c\\bigl(X,K\\otimes ^L_{\\Lambda _X}K^\\vee (d)\\bigr)[2d]\\\\ & \\xrightarrow {R\\Gamma _c(\\operatorname {ev}_K(d))[2d]}&  R\\Gamma _c\\bigl(X,\\Lambda _X(d)\\bigr)[2d]\\\\ & \\xrightarrow {\\  \\operatorname {Tr}^{\\mathrm{sm}}_{a_X,\\Lambda }\\  }&  \\Lambda, \\end{array}\n$$\n\nwhere $\\smile _c$ is the mixed-support cup product, $\\operatorname {ev}_K$ is the evaluation of [def-pod-coefficient-dual-on-x], and $\\operatorname {Tr}^{\\mathrm{sm}}_{a_X,\\Lambda }$ is the normalized smooth trace of the purity chapter for the structure morphism $a_X$, i.e. the counit of $Ra_{X!}\\dashv Ra_X^!$ through the canonical orientation $\\eta _X$. None of these ingredients uses properness: the cup product and the trace only involve $Ra_{X!}$, $Ra_{X*}$ and $Ra_X^!$ for the separated finite-type smooth morphism $a_X$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-derived-poincare-pairing.md",
+  "place": "node def-pod-derived-poincare-pairing, order 2251"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-pod-perfect-complex-on-x",
+  "def-pod-coefficient-dual-on-x",
+  "def-pod-mixed-support-cup-product",
+  "def-pur-smooth-trace",
+  "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+  "lem-pod-coefficient-dual-perfect",
+  "thm-sf-ctf-stability"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mixedSupportCupProduct|poincarePairing|smoothTrace|coefficientEvaluation",
+   "results": "0 hits: .  No hit states the geometric derived Poincare pairing.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Derived Poincare pairing",
-  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $\\Lambda\\in\\{A,\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell}\\}$ and let $K\\in D^b_{ctf}(X,\\Lambda)$ be perfect over $\\Lambda_X$ (the case $\\Lambda=A$ is the finite stage; the other coefficients are its transports). The *derived Poincare pairing* is the composite\n\n$$\n\\beta _K:\\   R\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] \\longrightarrow \\Lambda,\n$$\n\n$$\n\\begin{array}{lll} R\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] & \\xrightarrow {\\  \\smile _c\\  }&  R\\Gamma _c\\bigl(X,K\\otimes ^L_{\\Lambda _X}K^\\vee (d)\\bigr)[2d]\\\\ & \\xrightarrow {R\\Gamma _c(\\operatorname {ev}_K(d))[2d]}&  R\\Gamma _c\\bigl(X,\\Lambda _X(d)\\bigr)[2d]\\\\ & \\xrightarrow {\\  \\operatorname {Tr}^{\\mathrm{sm}}_{a_X,\\Lambda }\\  }&  \\Lambda, \\end{array}\n$$\n\nwhere $\\smile _c$ is the mixed-support cup product, $\\operatorname {ev}_K$ is the evaluation of Definition 9.5, and $\\operatorname {Tr}^{\\mathrm{sm}}_{a_X,\\Lambda }$ is the normalized smooth trace of the purity chapter for the structure morphism $a_X$, i.e. the counit of $Ra_{X!}\\dashv Ra_X^!$ through the canonical orientation $\\eta _X$. None of these ingredients uses properness: the cup product and the trace only involve $Ra_{X!}$, $Ra_{X*}$ and $Ra_X^!$ for the separated finite-type smooth morphism $a_X$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-derived-poincare-pairing.md",
-    "place": "node def-pod-derived-poincare-pairing, order 2251"
+  {
+   "tool": "leansearch",
+   "query": "derived Poincare pairing compactly supported global sections tensor ordinary global sections dual Tate twist cup evaluation trace",
+   "results": "8 hits: Module.dualPairing_apply, LinearMap.IsPerfPair.dualEval, topDualPairing_apply, CategoryTheory.ExactPairing.evaluation, RootPairing.root'In_corootSpanMem_eq_pairingIn, LinearMap.dualPairing_nondegenerate, RootPairing.root_coroot'_eq_pairing, FGModuleCat.exactPairing.  No hit states the geometric derived Poincare pairing.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-pod-coefficient-dual-on-x"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2251,
-  "blueprint_uses": [
-    "def-pod-coefficient-dual-on-x"
-  ],
-  "uses_not_cited": [
-    "def-pod-coefficient-dual-on-x"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "poincarePairing mixedSupportCupProduct smoothTrace",
+   "results": "0 hits: . loogle: Unknown identifier `poincarePairing`",
+   "date": "2026-10-16",
+   "verdict": "unavailable: query rejected for unknown identifier; independent semantic and source searches supply the negative-match evidence"
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-thm-sf-package",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $\\Lambda\\in\\{A,\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell}\\}$ and let $K\\in D^b_{ctf}(X,\\Lambda)$ be perfect over $\\Lambda_X$ (the case $\\Lambda=A$ is the finite stage; the other coefficients are its transports). The *derived Poincare pairing* is the composite\n\n$$\n\\beta _K:\\   R\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] \\longrightarrow \\Lambda,\n$$\n\n$$\n\\begin{array}{lll} R\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] & \\xrightarrow {\\  \\smile _c\\  }&  R\\Gamma _c\\bigl(X,K\\otimes ^L_{\\Lambda _X}K^\\vee (d)\\bigr)[2d]\\\\ & \\xrightarrow {R\\Gamma _c(\\operatorname {ev}_K(d))[2d]}&  R\\Gamma _c\\bigl(X,\\Lambda _X(d)\\bigr)[2d]\\\\ & \\xrightarrow {\\  \\operatorname {Tr}^{\\mathrm{sm}}_{a_X,\\Lambda }\\  }&  \\Lambda, \\end{array}\n$$\n\nwhere $\\smile _c$ is the mixed-support cup product, $\\operatorname {ev}_K$ is the evaluation of [def-pod-coefficient-dual-on-x], and $\\operatorname {Tr}^{\\mathrm{sm}}_{a_X,\\Lambda }$ is the normalized smooth trace of the purity chapter for the structure morphism $a_X$, i.e. the counit of $Ra_{X!}\\dashv Ra_X^!$ through the canonical orientation $\\eta _X$.\n\nNone of these ingredients uses properness: the cup product and the trace\nonly involve $Ra_{X!}$, $Ra_{X*}$ and $Ra_X^!$ for the separated\nfinite-type smooth morphism $a_X$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "derived Poincare pairing compact support cup evaluation smooth trace",
+   "results": "8 hits: SchwartzMap.pairing_apply, ContDiffMapSupportedIn.structureMapLM, SchwartzMap.pairing_apply_apply, SchwartzMap.integral_bilinear_laplacian_right_eq_left, SchwartzMap.integral_clm_comp_laplacian_right_eq_left, TestFunction.coe_ofSupportedInCLM, TestFunction.coe_ofSupportedInLM, continuousOn_integral_bilinear_of_locally_integrable_of_compact_support.  No hit states the geometric derived Poincare pairing.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare pairing|poincarePairing|mixed support",
+   "results": "0 hits: .  No hit states the geometric derived Poincare pairing.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Poincare pairing in a derived category from compact support, cup product, dual evaluation, and trace",
+   "results": "8 hits: LinearMap.IsPerfPair.dualEval, Module.dualPairing_apply, LinearMap.dualPairing_nondegenerate, topDualPairing_apply, RootPairing.root'In_corootSpanMem_eq_pairingIn, RootPairing.root_coroot'_eq_pairing, FGModuleCat.exactPairing, Module.Basis.traceDual.  No hit states the geometric derived Poincare pairing.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing.evaluation, AlgebraicGeometry.Etale.poincarePairing",
+   "results": "0 hits: . loogle: unknown identifier 'AlgebraicGeometry.Etale.poincarePairing'",
+   "date": "2026-10-16",
+   "verdict": "unavailable: query rejected for unknown identifier; independent semantic and source searches supply the negative-match evidence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category Poincare pairing evaluation trace compactly supported cohomology",
+   "results": "8 hits: CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom, CategoryTheory.Abelian.Ext.homLinearEquiv, CochainComplex.HomComplex.CohomologyClass.toHom, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom.  No hit states the geometric derived Poincare pairing.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare|Verdier|compactSupport|compactlySupported|lowerShriek",
+   "results": "25 returned hits (tool cap): Mathlib/MeasureTheory/Function/ContinuousMapDense.lean, Mathlib/MeasureTheory/Function/ContinuousMapDense.lean, Mathlib/MeasureTheory/Function/ContinuousMapDense.lean, Mathlib/MeasureTheory/Function/ContinuousMapDense.lean, Mathlib/MeasureTheory/Function/ContinuousMapDense.lean, Mathlib/MeasureTheory/Function/SimpleFuncDense.lean, Mathlib/MeasureTheory/Function/SimpleFuncDense.lean, Mathlib/MeasureTheory/Function/SimpleFuncDense.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary sheaf cohomology, internal Hom or analytic compact support; none constructs this normalized four-stage pro-etale pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pair compactly supported derived cohomology with sections of internal Hom to a dualizing complex using evaluation and an adjunction counit",
+   "results": "8 returned hits (tool cap): CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, Rep.standardResolution.extIso, LightCondensed.ihomPoints, CategoryTheory.Sheaf.cohomologyPresheaf, LightCondensed.ihomPoints_apply, groupCohomologyIsoExt, CochainComplex.HomComplex.homologyAddEquiv. ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary sheaf cohomology, internal Hom or analytic compact support; none constructs this normalized four-stage pro-etale pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Poincare\"",
+   "results": "0 returned hits: none.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"counit\"",
+   "results": "2 returned hits: CategoryTheory.evaluationAdjunctionLeft_counit_app, CategoryTheory.evaluationAdjunctionRight_counit_app_app.",
+   "date": "2026-10-17",
+   "verdict": "no match: evaluation-functor adjunction counit formulas, not a geometric cohomological pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized Poincare duality pairing of compactly supported derived cohomology with the Tate twisted coefficient dual",
+   "results": "8 returned hits: continuousCohomology, groupCohomologyIsoExt, CochainComplex.HomComplex.leftHomologyData'_H_coe, groupCohomology.isoShortComplexH2_hom, CochainComplex.HomComplex.leftHomologyData_H_coe, groupCohomology.isoShortComplexH1_hom, Rep.FiniteCyclicGroup.groupCohomologyIsoOdd, CharacterModule.dual.",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern algebraic pairings, ordinary Hom or cohomology, coalgebras, or manifold sheaves; none gives the normalized four-stage pro-etale pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose cup product, internal Hom evaluation and exceptional adjunction counit to define a pairing in the derived category of etale sheaves",
+   "results": "8 returned hits: LightCondensed.ihomPoints_symm_comp, CategoryTheory.ExponentiableMorphism.coev_ev, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, SheafOfModules.unitHomEquiv_comp_apply, CategoryTheory.ExponentiableMorphism.coev_naturality, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_apply.",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern algebraic pairings, ordinary Hom or cohomology, coalgebras, or manifold sheaves; none gives the normalized four-stage pro-etale pairing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Poincare duality pairing compactly supported derived cohomology evaluation trace Tate twist",
+   "results": "8 returned hits: Submodule.dualPairing_apply, LinearMap.dualPairing_nondegenerate, Module.dualPairing_apply, topDualPairing_apply, LinearMap.IsPerfPair.dualEval, RootPairing.root'In_corootSpanMem_eq_pairingIn, CategoryTheory.ExactPairing.evaluation, RootPairing.root_coroot'_eq_pairing.",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern algebraic pairings, ordinary Hom or cohomology, coalgebras, or manifold sheaves; none gives the normalized four-stage pro-etale pairing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compose the mixed support cup product with twisted evaluation and the counit trace of a smooth scheme",
+   "results": "8 returned hits: TensorProduct.counit_def, smoothSheaf.eval, Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap, Algebra.traceForm_apply, TensorProduct.counit_tmul, smoothSheafCommRing.forgetStalk_hom_comp_evalHom_apply, DFinsupp.comul_comp_lapply, contractLeft.",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern algebraic pairings, ordinary Hom or cohomology, coalgebras, or manifold sheaves; none gives the normalized four-stage pro-etale pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "poincarePairing|mixedSupportCupProduct|smoothTrace|twistedEvaluation",
+   "results": "0 returned hits: none.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincar[eé]|Verdier|lowerShriek|compactly.supported.cohomology",
+   "results": "19 returned hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean. Searched Mathlib/CategoryTheory/.",
+   "date": "2026-10-17",
+   "verdict": "no match: Verdier bibliography and Verdier-localization references, not this smooth cohomological pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "mixedSupport|smoothTrace|poincarePairing|Poincaré duality",
+   "results": "0 returned hits: none.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf cohomology pairing from tensor internal Hom evaluation followed by compact support integration",
+   "results": "8 returned hits: LightCondensed.ihomPoints, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, LightCondensed.ihomPoints_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.cohomologyPresheaf, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihom_map_val_app.",
+   "date": "2026-10-17",
+   "verdict": "no match: internal Hom for light condensed modules and ordinary sheaf cohomology; none supplies compact-support integration or this normalized four-stage pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cup\", \"pairing\"",
+   "results": "0 returned hits: none.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "poincare|Poincare|mixed.support|integration.pairing",
+   "results": "1 returned hits: Mathlib/Dynamics/Ergodic/Conservative.lean.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern continuous/group cohomology, root-system traces, or dynamical recurrence, not the normalized four-stage pro-etale pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"pairing\"",
+   "results": "2 returned hits: RootPairing.GeckConstruction.trace_h_eq_zero, RootPairing.GeckConstruction.trace_toEnd_eq_zero.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern continuous/group cohomology, root-system traces, or dynamical recurrence, not the normalized four-stage pro-etale pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support cohomology paired with the shifted Tate twist of the internal dual via cup evaluation and integration",
+   "results": "8 returned hits: continuousCohomology, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.homogeneousCochains, groupCohomologyIsoExt, groupCohomology.isoShortComplexH2_hom, groupCohomology.isoShortComplexH1_hom, groupCohomology.isoShortComplexH2, groupCohomology.isoCocycles₁_hom_comp_i.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern continuous/group cohomology, root-system traces, or dynamical recurrence, not the normalized four-stage pro-etale pairing"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2251,
+ "blueprint_uses": [
+  "def-pod-coefficient-dual-on-x"
+ ],
+ "uses_not_cited": [
+  "def-pod-coefficient-dual-on-x"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $\\Lambda\\in\\{A,\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell}\\}$ and let $K\\in D^b_{ctf}(X,\\Lambda)$ be perfect over $\\Lambda_X$ (the case $\\Lambda=A$ is the finite stage; the other coefficients are its transports). The *derived Poincare pairing* is the composite\n\n$$\n\\beta _K:\\   R\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] \\longrightarrow \\Lambda,\n$$\n\n$$\n\\begin{array}{lll} R\\Gamma _c(X,K)\\otimes _\\Lambda ^LR\\Gamma \\bigl(X,K^\\vee (d)\\bigr)[2d] & \\xrightarrow {\\  \\smile _c\\  }&  R\\Gamma _c\\bigl(X,K\\otimes ^L_{\\Lambda _X}K^\\vee (d)\\bigr)[2d]\\\\ & \\xrightarrow {R\\Gamma _c(\\operatorname {ev}_K(d))[2d]}&  R\\Gamma _c\\bigl(X,\\Lambda _X(d)\\bigr)[2d]\\\\ & \\xrightarrow {\\  \\operatorname {Tr}^{\\mathrm{sm}}_{a_X,\\Lambda }\\  }&  \\Lambda, \\end{array}\n$$\n\nwhere $\\smile _c$ is the mixed-support cup product, $\\operatorname {ev}_K$ is the evaluation of [def-pod-coefficient-dual-on-x], and $\\operatorname {Tr}^{\\mathrm{sm}}_{a_X,\\Lambda }$ is the normalized smooth trace of the purity chapter for the structure morphism $a_X$, i.e. the counit of $Ra_{X!}\\dashv Ra_X^!$ through the canonical orientation $\\eta _X$.\n\nNone of these ingredients uses properness: the cup product and the trace\nonly involve $Ra_{X!}$, $Ra_{X*}$ and $Ra_X^!$ for the separated\nfinite-type smooth morphism $a_X$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pod-derived-poincare-pairing",
+  "worker": "stage1",
+  "summary": "Checked the current main-20261015 definition and retained its complete three-arrow composite without properness. Existing definitions supply the conventions, site-perfectness, coefficient dual/evaluation, mixed-support cup, and finite-stage normalized trace; the existing purity corollary supplies the other three coefficient traces. No new node is needed. Related blueprint formulations are recorded in same_as. The orientation-based etale Lean definitions do not cover the normalized four-stage pro-etale definition. The resumed worker read every statement input and reran all four Mathlib search kinds in two phrasings, including successful Loogle searches, with exact logged queries. Repair of the returned landing: reread all six current statement inputs, especially the updated def-pod-perfect-complex-on-x and its site-perfect coefficient-stage interpretation. Bound the perfectness hypothesis explicitly to that existing definition; the three maps, hypotheses and coefficient categories are unchanged. Revalidated the finite-projective, completed integral, localized rational and common finite-extension interpretations, without substituting dualizability or ordinary constant non-torsion sheaves. Maintainer review (2026-10-17): the first arrow applies the mixed-support cup product, which takes L in D^b_ctf, to L=K^vee(d); its well-definedness is now cited by name: lem-pod-coefficient-dual-perfect gives K^vee perfect and in D^b_ctf, and thm-sf-ctf-stability ((ii) at the finite stage, (vii) at the integral, rational and common stages) keeps the twist K^vee(d)=K^vee tensor Lambda_X(d) in D^b_ctf.",
+  "blueprint": "Realizes the definition paragraph of main-20261015/sec-six-functors/sk-thm-sf-package/def-pod-derived-poincare-pairing.md: the displayed composite and the final sentence that its ingredients use no properness."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-5187e4c69",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-5187e4c69 (reviewer sub-agent of L); spot-checked: I read the whole item, all six statement inputs and the current (order 2595) and master (2251) source. The statement matches main-20261015, plus an explicit citation of def-pod-perfect-complex-on-x. All four coefficient stages, twist d, shift 2d and the no-properness sentence are kept, so nothing is weakened. The arrows check out. The cup product's setting (sk-def-set) is weaker than def-pod-conventions, so it applies. ev_K(d) is reassociate, then ev⊗1, then the unit isomorphism. At A, def-pur-smooth-trace builds its purity map from the diagonal-purity isomorphism (thm-pur-diagonal-dualizing-object), which is where η_X comes from at A, so the map is η_X^{-1}. At O_E, E and Q̄_ℓ, cor-pur-adic-and-rational-smooth-dualizing-complexes supplies the transported normalized integration map; the coefficient categories agree. Edge cases checked: K=0, d=0 with X=Spec k, P^1 (degrees -2 and 0), A^1 not proper, n=1 and n>1. One fault (C4/C1, well-definedness argued only in the report): the cup product requires L in D^b_ctf, but nothing cited showed K^vee(d) is in D^b_ctf. Fix: I added the existing lem-pod-coefficient-dual-perfect (K^vee perfect and in D^b_ctf, same hypotheses) and thm-sf-ctf-stability ((ii) finite stage, (vii) other stages, for the twist) to stmt_deps, and noted this in split_report. Neither new dependency reaches the item, so there is no cycle. No new nodes. same_as {def-sf-pairing, sk-def-pairing} is correct: their hypotheses differ, so they are not merges. No SGA source; no tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }
