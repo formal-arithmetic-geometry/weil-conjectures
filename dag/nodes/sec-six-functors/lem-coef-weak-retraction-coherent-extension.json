@@ -1,0 +1,98 @@
+{
+ "id": "lem-coef-weak-retraction-coherent-extension",
+ "kind": "statement",
+ "title": "Weak homotopy retractions extend to coherent retraction diagrams",
+ "statement": "Use the universes, simplicial nerves, quasicategories, coherent functors, homotopies and equivalences of [def-cbc-enhanced-diagrams-cones]. Let $R$ be the small ordinary category with objects $X,Y$, morphism sets $\\operatorname{Hom}_R(X,X)=\\{1_X,e\\}$, $\\operatorname{Hom}_R(X,Y)=\\{r\\}$, $\\operatorname{Hom}_R(Y,X)=\\{s\\}$ and $\\operatorname{Hom}_R(Y,Y)=\\{1_Y\\}$, and composition determined by $r\\circ s=1_Y$, $s\\circ r=e$, $e^2=e$, $r\\circ e=r$ and $e\\circ s=s$, together with the identity laws. For any quasicategory $\\mathcal E$, objects $u,v\\in\\mathcal E$ and arrows $a:v\\to u$, $b:u\\to v$ whose composite $b\\circ a$ is homotopic to $1_v$, there is a coherent functor $F:N(R)\\to\\mathcal E$ with $F(X)=u$, $F(Y)=v$, $F(s)=a$ and $F(r)=b$. More precisely, let $\\operatorname{Ret}\\subseteq N(R)$ be the image of the $2$-simplex with successive edges $s,r$ and long edge $1_Y$; it is $\\Delta^2$ with its long edge collapsed to a point. Every simplicial map $\\operatorname{Ret}\\to\\mathcal E$ extends to $N(R)\\to\\mathcal E$, retaining that whole weak-retraction triangle.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Definition 4.4.5.2, Remark 4.4.5.5 and Corollary 4.4.5.7, printed pp.304-305 (PDF pp.321-322); the homotopy-category retraction criterion is explained at the start of Section 4.4.5, printed p.303. Ret to Idem+ is inner anodyne by Proposition 4.4.5.6. Read online; no local archive or matching Stacks tag."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A weak retraction in a quasicategory, two arrows with composite homotopic to the identity, extends to a functor from the nerve of the walking split idempotent category",
+   "results": "{\"t\": \"2026-10-17T04:10:10Z\", \"tool\": \"leanfinder\", \"query\": \"A weak retraction in a quasicategory, two arrows with composite homotopic to the identity, extends to a functor from the nerve of the walking split idempotent category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\"], \"digest\": \"b20bc733b6d4b1e2\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned types and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-50 and InnerFibration.lean:61-66. Quasicategory.hornFilling fills one inner horn, not Ret into Idem+; the only grep hit says inner fibrations are stable under ordinary retracts. NerveAdjunction results construct maps INTO ordinary-category nerves, the opposite direction to the needed coherent extension. SimplicialObject.Splitting and Dold-Kan hits concern ordinary split simplicial objects, not homotopy retractions in arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-17T04:10:08Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\"], \"digest\": \"9c4099b45a4b423f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned types and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-50 and InnerFibration.lean:61-66. Quasicategory.hornFilling fills one inner horn, not Ret into Idem+; the only grep hit says inner fibrations are stable under ordinary retracts. NerveAdjunction results construct maps INTO ordinary-category nerves, the opposite direction to the needed coherent extension. SimplicialObject.Splitting and Dold-Kan hits concern ordinary split simplicial objects, not homotopy retractions in arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "Retraction|Idem|idempotent|retract",
+   "results": "{\"t\": \"2026-10-17T04:10:08Z\", \"tool\": \"grep\", \"query\": \"Retraction|Idem|idempotent|retract\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"35cc29356b4d24f6\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned types and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-50 and InnerFibration.lean:61-66. Quasicategory.hornFilling fills one inner horn, not Ret into Idem+; the only grep hit says inner fibrations are stable under ordinary retracts. NerveAdjunction results construct maps INTO ordinary-category nerves, the opposite direction to the needed coherent extension. SimplicialObject.Splitting and Dold-Kan hits concern ordinary split simplicial objects, not homotopy retractions in arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an infinity category every weak retraction extends to a coherent strong retraction diagram",
+   "results": "{\"t\": \"2026-10-17T04:10:08Z\", \"tool\": \"leansearch\", \"query\": \"In an infinity category every weak retraction extends to a coherent strong retraction diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Retract.ctorIdx\", \"HomotopicalAlgebra.ModelCategory.cm3a\", \"CategoryTheory.Retract.r\", \"CategoryTheory.Retract\", \"CategoryTheory.Retract.recOn\", \"CategoryTheory.RetractArrow.leftLiftingProperty\", \"CategoryTheory.RetractArrow.rightLiftingProperty\", \"CategoryTheory.MorphismProperty.rlp_retracts\"], \"digest\": \"61d1c674a1b858f6\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned types and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-50 and InnerFibration.lean:61-66. Quasicategory.hornFilling fills one inner horn, not Ret into Idem+; the only grep hit says inner fibrations are stable under ordinary retracts. NerveAdjunction results construct maps INTO ordinary-category nerves, the opposite direction to the needed coherent extension. SimplicialObject.Splitting and Dold-Kan hits concern ordinary split simplicial objects, not homotopy retractions in arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion Ret into Idem+ is inner anodyne so a homotopy retract has a homotopy coherent splitting",
+   "results": "{\"t\": \"2026-10-17T04:10:11Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion Ret into Idem+ is inner anodyne so a homotopy retract has a homotopy coherent splitting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.instIsIdempotentCompleteSimplicialObject\", \"SimplicialObject.Splitting\", \"AlgebraicTopology.DoldKan.Γ₀.splitting\", \"SimplicialObject.Split.s\", \"SimplicialObject.Split\", \"AlgebraicTopology.DoldKan.splitMonoInclusionOfMooreComplexMap\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self_assoc\"], \"digest\": \"ac1d1ea9289be91a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned types and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-50 and InnerFibration.lean:61-66. Quasicategory.hornFilling fills one inner horn, not Ret into Idem+; the only grep hit says inner fibrations are stable under ordinary retracts. NerveAdjunction results construct maps INTO ordinary-category nerves, the opposite direction to the needed coherent extension. SimplicialObject.Splitting and Dold-Kan hits concern ordinary split simplicial objects, not homotopy retractions in arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split pair in a quasi-category extends from a two-simplex with degenerate composite to a coherent diagram on the nerve of the walking split epimorphism",
+   "results": "{\"t\": \"2026-10-17T04:21:06Z\", \"tool\": \"leanfinder\", \"query\": \"A split pair in a quasi-category extends from a two-simplex with degenerate composite to a coherent diagram on the nerve of the walking split epimorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"CategoryTheory.nerve.edgeMk\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy\", \"CategoryTheory.nerve.right_edge\", \"SSet.Truncated.liftOfStrictSegal.f₂\", \"SSet.Truncated.liftOfStrictSegal.spineEquiv_f₂_arrow_zero\", \"SSet.Truncated.liftOfStrictSegal.spineEquiv_f₂_arrow_one\"], \"digest\": \"31c9605fdb147e1f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The returned nerveHomEquiv, nerve.edgeMk and Nerve.strictSegal declarations concern nerves of ordinary categories; liftOfStrictSegal requires a strict Segal target. Arrow.AugmentedCechNerve.extraDegeneracy uses an ordinary category, strict SplitEpi and wide pullbacks. None extends a fixed Ret triangle into an arbitrary quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "Idem|retract|split",
+   "results": "{\"t\": \"2026-10-17T04:20:55Z\", \"tool\": \"grep\", \"query\": \"Idem|retract|split\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"35cc29356b4d24f6\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The sole grep hit is the derived IsStableUnderRetracts property of innerFibrations in AlgebraicTopology/Quasicategory/InnerFibration.lean:66; it is stability of an ordinary morphism class and does not assert a coherent retraction extension or colimit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-retract-colimit",
+  "date": "2026-10-17",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim (supporting operadic-algebra presentability via the presentable Cartesian fibration theorem), through step 3 of lem-coef-small-right-adjoint-diagram-compact-model (the compact-object diagram F_0 and H = Ind^R F_0^op); GHN arXiv:1501.02161v3 proof of Theorem 10.3, final paragraph, and Definition 10.4. Supporting the representability of all lambda-compact Ind objects: HTT 5.5.7.8–5.5.7.10 use idempotent completeness, automatic for uncountable lambda because the walking idempotent is countable. In the supporting retract-closure argument: HTT Section 4.4.5, coherence of a weak retraction and its countable walking-idempotent colimit. HTT Definition 4.4.5.2, Remark 4.4.5.5 and Corollary 4.4.5.7, printed pp.304-305 (PDF pp.321-322); the homotopy-category retraction criterion is explained at the start of Section 4.4.5, printed p.303. Ret to Idem+ is inner anodyne by Proposition 4.4.5.6. Read online; no local archive or matching Stacks tag.",
+   "via": [
+    "lem-coef-infinity-retract-colimit",
+    "lem-coef-compact-model-pr-duality",
+    "lem-coef-small-right-adjoint-diagram-compact-model",
+    "lem-coef-presentable-cartesian-fibration",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

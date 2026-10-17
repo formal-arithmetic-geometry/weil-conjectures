@@ -10,9 +10,94 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $R$ be the explicitly described two-object retraction category in [lem-coef-weak-retraction-coherent-extension], and let $I=N(R|_{\\{X\\}})$. Thus $I$ is the nerve of the one-object category with endomorphisms $1,e$ and $e^2=e$. By the nerve definition [def-cbc-enhanced-diagrams-cones], an $n$-simplex is a string of $n$ endomorphisms. Any string containing $1$ is a degeneracy, obtained by inserting that identity, and every degeneracy contains an identity. Hence the only nondegenerate $n$-simplex is the string of $n$ copies of $e$; for $n=0$ it is the unique vertex. There is exactly one nondegenerate simplex in every degree, so $I$ is countable in the precise sense of the hypothesis. All these sets lie in the fixed universe.",
+   "uses": [
+    "lem-coef-weak-retraction-coherent-extension",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 4.4.5.2 and Remark 4.4.5.3, printed p.304; elementary count of strings in the nerve."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-weak-retraction-coherent-extension] with $\\mathcal E=\\mathcal D$, $u=i(c)$, $v=x$ and the given arrows $a,b$ and homotopy $ba\\simeq1_x$. It supplies $F:N(R)\\to\\mathcal D$ with those same objects and arrows, retaining a weak-retraction triangle. Put $H=F|_I$. The cocone $\\lambda_F:H\\to\\Delta_I x$ of [lem-coef-strong-retraction-idem-colimit] is colimiting in $\\mathcal D$. This supplies all the coherences of $H$ and its cocone; an equation for the component of $ab$ in a homotopy category alone is not substituted for that data.",
+   "uses": [
+    "lem-coef-weak-retraction-coherent-extension",
+    "lem-coef-strong-retraction-idem-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 4.4.5.7 and Proposition 4.4.5.12, printed pp.305,307."
+   }
+  },
+  {
+   "text": "Let $\\mathcal D_0$ be the full replete essential image of $i$. Since the only vertex of $H$ is $i(c)$, every simplex of $H$ has its vertices in $\\mathcal D_0$, so $H$ factors as $H_0:I\\to\\mathcal D_0$ by the full-subcategory definition. Apply [lem-coef-infinity-full-essential-image] to the given fully faithful $i$; with $i_0:\\mathcal C\\to\\mathcal D_0$ it supplies a coherent inverse $K:\\mathcal D_0\\to\\mathcal C$ and $i_0K\\simeq1_{\\mathcal D_0}$. Set $G=KH_0$. Restrict the latter natural equivalence along $H_0$ and then include into $\\mathcal D$ to obtain a coherent equivalence $\\epsilon:iG\\simeq H$. The inverse and its two triangle witnesses restrict and include too. Thus the entire coherent diagram lifts, without choosing independent lifts of its simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "The full-essential-image lifting argument applied to HTT Section 4.4.5; agent expansion using the existing coherent quasi-inverse theorem."
+   }
+  },
+  {
+   "text": "By Step 1 the shape $I$ is countable. Apply the assumed existence of countable colimits in $\\mathcal C$ to $G$, and choose a colimiting cocone $\\mu:G\\to\\Delta_I c\\prime$. The assumed preservation by $i$ makes $\\bar\\mu=i\\mu:iG\\to\\Delta_I i(c\\prime)$ a colimiting cocone in $\\mathcal D$. Only this particular countable colimit is used. This is an application of the two explicit hypotheses, using the definition of colimiting cocone; no cocompleteness of $\\mathcal D$ is invoked.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries 4.4.5.14-4.4.5.15, printed p.308; direct application of the item hypotheses to the countable shape I."
+   }
+  },
+  {
+   "text": "Write $T=\\operatorname{Fun}(I,\\mathcal D)$, which is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. Choose the inverse equivalence $\\epsilon^{-1}:H\\to iG$, and form $\\nu=\\bar\\mu\\circ\\epsilon^{-1}:H\\to\\Delta_I i(c\\prime)$ using composition in $T$. For every $z\\in\\mathcal D$ the universal map for this cocone factors, up to the canonical associativity homotopy, as $$\\operatorname{Map}_{\\mathcal D}(i(c\\prime),z)\\xrightarrow{\\bar\\mu^*}\\operatorname{Map}_T(iG,\\Delta_I z)\\xrightarrow{(\\epsilon^{-1})^*}\\operatorname{Map}_T(H,\\Delta_I z).$$ The first map is an equivalence by the dual universal mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] and Step 4. The second has homotopy inverse $\\epsilon^*$: for any $q$, the two composites are $q\\circ(\\epsilon\\circ\\epsilon^{-1})\\simeq q$ and $q\\circ(\\epsilon^{-1}\\circ\\epsilon)\\simeq q$, using the inverse triangles, associativity, units and component dependence of [lem-coef-infinity-mapping-composition], now applied in $T$. Its mapping spaces are Kan by the cone calculus, and [lem-cbc-simplicial-homotopy-equivalence-weak] turns these simplicial homotopy inverses into weak equivalences. The composite is therefore an equivalence of spaces. Applying the same dual criterion again proves that $\\nu$ is colimiting. This writes out the comparison along $\\epsilon$ rather than silently identifying equivalent diagrams.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.4.5.12 and Corollary 4.4.5.14, printed pp.307-308; agent expansion of invariance under the coherent equivalence of the lifted diagram, using the cited mapping-space criteria."
+   }
+  },
+  {
+   "text": "The cocones $\\lambda_F$ of Step 2 and $\\nu$ of Step 5 are initial objects of the same coherent cocone quasicategory on $H$. By [lem-cbc-enhanced-functor-cone-calculus], its full subcategory of initial objects is a contractible Kan complex, so these two cocones are equivalent. Project this equivalence and its inverse-triangle witnesses to their apices, using the degreewise cocone projection of [def-cbc-enhanced-diagrams-cones]. It gives an equivalence $i(c\\prime)\\simeq x$ in $\\mathcal D$, as required. No property of the initial choice of $c$ beyond its membership in $\\mathcal C$ was used.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.4.5.12, printed p.307, and uniqueness of colimits; explicit use of the existing initial-object contractibility theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-weak-retraction-coherent-extension",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-strong-retraction-idem-colimit",
+  "lem-coef-infinity-full-essential-image",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Section 4.4.5, especially Definition 4.4.5.2, Remark 4.4.5.3, Corollary 4.4.5.7 and Proposition 4.4.5.12, printed pp.303-308, read online. Agent expansion through the existing full-essential-image and coherent comma mapping-space calculus; local archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -83,10 +168,45 @@
    "results": "{\"t\": \"2026-10-17T03:42:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.IsStableUnderRetracts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.IsStableUnderRetracts\", \"CategoryTheory.ObjectProperty.instIsStableUnderRetractsRetractClosure\", \"CategoryTheory.ObjectProperty.IsStableUnderRetracts.instIsClosedUnderIsomorphisms\", \"CategoryTheory.ObjectProperty.instIsStableUnderRetractsBot\", \"CategoryTheory.ObjectProperty.instIsStableUnderRetractsTop\", \"CategoryTheory.ObjectProperty.prop_of_retract\", \"CategoryTheory.ObjectProperty.retractClosure_eq_self\", \"CategoryTheory.ObjectProperty.IsStableUnderRetracts.mk\"], \"digest\": \"071140f37cc72d26\"}",
    "date": "2026-10-17",
    "verdict": "no match: second-reader search. Returned types use ordinary Category instances and equality of morphisms. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean:395-402, ObjectProperty/Retract.lean:26-37 and Idempotents/Basic.lean:56-68. The ordinary coequalizer proof does not apply to general quasicategories or coherent idempotents."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor of infinity categories preserving countable colimits has essential image closed under homotopy retracts",
+   "results": "{\"t\": \"2026-10-17T04:10:30Z\", \"tool\": \"leanfinder\", \"query\": \"A fully faithful functor of infinity categories preserving countable colimits has essential image closed under homotopy retracts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instIsClosedUnderColimitsOfShapeEssImageOfHasColimitsOfShapeOfPreservesColimitsOfShapeOfFullOfFaithful\", \"HomotopicalAlgebra.CofibrantObject.instFullHoCatToHoCat\", \"DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_obj_surjective\", \"ComplexShape.Embedding.instFullHomotopyCategoryExtendHomotopyFunctor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\"], \"digest\": \"5ca58e33e4683d9e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean:395-402, ObjectProperty/Retract.lean:30-37 and Idempotents/Basic.lean:52-68, and the search-returned types. These use ordinary Category instances, strict morphism equalities and ordinary coequalizers. They do not specialize to arbitrary quasicategories with coherent diagrams and homotopy retracts."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsStableUnderRetracts",
+   "results": "{\"t\": \"2026-10-17T04:10:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.IsStableUnderRetracts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.IsStableUnderRetracts\", \"CategoryTheory.ObjectProperty.instIsStableUnderRetractsRetractClosure\", \"CategoryTheory.ObjectProperty.IsStableUnderRetracts.instIsClosedUnderIsomorphisms\", \"CategoryTheory.ObjectProperty.instIsStableUnderRetractsBot\", \"CategoryTheory.ObjectProperty.instIsStableUnderRetractsTop\", \"CategoryTheory.ObjectProperty.prop_of_retract\", \"CategoryTheory.ObjectProperty.retractClosure_eq_self\", \"CategoryTheory.ObjectProperty.IsStableUnderRetracts.mk\"], \"digest\": \"071140f37cc72d26\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean:395-402, ObjectProperty/Retract.lean:30-37 and Idempotents/Basic.lean:52-68, and the search-returned types. These use ordinary Category instances, strict morphism equalities and ordinary coequalizers. They do not specialize to arbitrary quasicategories with coherent diagrams and homotopy retracts."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStableUnderRetracts|IsClosedUnderColimitsOfShape.*EssImage",
+   "results": "{\"t\": \"2026-10-17T04:10:25Z\", \"tool\": \"grep\", \"query\": \"IsStableUnderRetracts|IsClosedUnderColimitsOfShape.*EssImage\", \"sub\": \"CategoryTheory/ObjectProperty\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Retract.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Retract.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Retract.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Retract.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Retract.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\"], \"digest\": \"e1a451f5072efd85\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean:395-402, ObjectProperty/Retract.lean:30-37 and Idempotents/Basic.lean:52-68, and the search-returned types. These use ordinary Category instances, strict morphism equalities and ordinary coequalizers. They do not specialize to arbitrary quasicategories with coherent diagrams and homotopy retracts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full embedding of quasicategories with countable colimits preserving those colimits is closed under retract objects",
+   "results": "{\"t\": \"2026-10-17T04:10:26Z\", \"tool\": \"leansearch\", \"query\": \"A full embedding of quasicategories with countable colimits preserving those colimits is closed under retract objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.isStableUnderRetracts_colimitsCardinalClosure\", \"CategoryTheory.Functor.preservesEpimorphisms.ofRetract\", \"CategoryTheory.ObjectProperty.instIsStableUnderRetractsOfIsClosedUnderColimitsOfShapeWalkingParallelPair\", \"CategoryTheory.ShortComplex.quasiIso_of_retract\", \"HomologicalComplex.instIsStableUnderRetractsQuasiIso\", \"CategoryTheory.Limits.instIsClosedUnderColimitsOfShapeEssImageOfHasColimitsOfShapeOfPreservesColimitsOfShapeOfFullOfFaithful\", \"CategoryTheory.ObjectProperty.retractClosure\", \"CategoryTheory.MorphismProperty.retracts\"], \"digest\": \"628fd4177557f960\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean:395-402, ObjectProperty/Retract.lean:30-37 and Idempotents/Basic.lean:52-68, and the search-returned types. These use ordinary Category instances, strict morphism equalities and ordinary coequalizers. They do not specialize to arbitrary quasicategories with coherent diagrams and homotopy retracts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An infinity category closed under countable colimits inside another infinity category contains the splitting of every idempotent on one of its objects",
+   "results": "{\"t\": \"2026-10-17T04:10:28Z\", \"tool\": \"leanfinder\", \"query\": \"An infinity category closed under countable colimits inside another infinity category contains the splitting of every idempotent on one of its objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsIdempotentComplete.idempotents_split\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteSimplicialObject\", \"CategoryTheory.IsIdempotentComplete\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteKaroubi\", \"CategoryTheory.Limits.splitEpiOfIdempotentOfIsColimitCofork\", \"CategoryTheory.Idempotents.isIdempotentComplete_of_abelian\", \"CategoryTheory.Idempotents.Karoubi\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteCosimplicialObject\"], \"digest\": \"5ecb25acc0571b02\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean:395-402, ObjectProperty/Retract.lean:30-37 and Idempotents/Basic.lean:52-68, and the search-returned types. These use ordinary Category instances, strict morphism equalities and ordinary coequalizers. They do not specialize to arbitrary quasicategories with coherent diagrams and homotopy retracts."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-compact-model-pr-duality",
@@ -114,5 +234,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-retract-colimit",
+  "worker": "stage1",
+  "summary": "Retained the statement exactly and split into six steps: count the walking-idempotent simplices, coherently extend the given retraction, lift its whole diagram through the full essential image, take and preserve its countable colimit, compare cocones through the coherent equivalence using explicit mapping-space inverse homotopies, and use uniqueness. Two strictly smaller HTT interface nodes are stated only and searched with actual logged queries. No ordinary-category Mathlib hit was misidentified as an infinity-categorical theorem. No Lean or compiler was used.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim (supporting operadic-algebra presentability via the presentable Cartesian fibration theorem), through step 3 of lem-coef-small-right-adjoint-diagram-compact-model (the compact-object diagram F_0 and H = Ind^R F_0^op); GHN arXiv:1501.02161v3 proof of Theorem 10.3, final paragraph, and Definition 10.4. Supporting the representability of all lambda-compact Ind objects: HTT 5.5.7.8–5.5.7.10 use idempotent completeness, automatic for uncountable lambda because the walking idempotent is countable. Steps 1-6 supply precisely the countable-colimit retract-closure input to step 6 of lem-coef-compact-model-pr-duality, hence the compact Ind-object model in the retained ancestry of prop-coef-integral-exceptional-adjoint, its finite-coefficient adjunction paragraph. Neither the chapter nor unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory mapping-space universal property and contractible uniqueness of colimit cocones, used in Steps 5-6. No coefficient or geometric step of this unit is replaced."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial homotopy invariance, converting the explicit precomposition homotopy inverse in Step 5 into a weak equivalence of mapping spaces. No coefficient or geometric step of this unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-c76ce857b",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-c76ce857b (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus the full statements of every cited node: def-cbc-enhanced-diagrams-cones, lem-coef-infinity-full-essential-image, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-mapping-composition and lem-cbc-simplicial-homotopy-equivalence-weak. The item statement is unchanged and true, and it fits parent lem-coef-compact-model-pr-duality step 6: λ is uncountable, so every countable simplicial set is λ-small. Step 1 is elementary: Idem has exactly one nondegenerate simplex per degree, because e∘e=e never produces an identity. Step 2 substitutes u=i(c), v=x with the correct variance into both new nodes. Step 3 restricts and includes the coherent equivalence and its 2-simplex witnesses, using the full-subcategory clause of the definition node; it relies on the lemma's statement, not its proof. Step 4 applies the two item hypotheses. Step 5 uses the dual mapping-space criterion, associativity and units, and simplicial homotopy inverses being weak equivalences. Step 6 uses that the initial objects form a contractible Kan complex, then projects to the apex. proof_deps equals the union of uses, and the elementary flags are correct. lem-coef-weak-retraction-coherent-extension: R is a category (r e=r, e s=s), and Ret is the image of the 2-simplex with long edge r s=1_Y, which I checked is Δ²/Δ^{0,2}. The statement is HTT Cor. 4.4.5.7 via the inner-anodyne Prop. 4.4.5.6. lem-coef-strong-retraction-idem-colimit: the transformation with component r is natural since 1_Y∘r=r∘e, and its nerve gives an edge ending exactly at Δ_I F(Y). Ordinary test: q with q e=q factors uniquely as (q s) r. The ∞-version is HTT's result that every Idem+-diagram is a colimit diagram, since the slice over Y is Idem. Neither node is elementary; both are statement-only, self-contained and singly escaped, carry logged searches and correct blueprint from/via fields, and are strictly smaller than the item. Searching the DAG for idempotent/retract/Idem/HTT 4.4.5 found no duplicate, and I see no cycle. I accept both tool_uses (cone calculus and simplicial-homotopy-weak from sk-prop-sf-cbc): they are generic black boxes that replace no unit step. No target, coefficient category or base-change morphism is touched, and no SGA source is used. No fixes. Limitation: HTT is not archived and network access is blocked for reviewers, so the exact HTT label of the Idem+-colimit proposition (cited as 4.4.5.12) was not checked against the page; its mathematics was verified independently."
  }
 }
