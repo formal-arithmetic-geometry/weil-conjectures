@@ -89,14 +89,8 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         if d["statement_changed"]: bad.append("changes the statement of " + short(d["statement_changed"]))
         if d["removed"]: bad.append("removes " + short(d["removed"]))
         if d["public_added"]: bad.append("adds public declaration(s) " + short(d["public_added"]))
-        # Proof holes can occur inside structure-valued definitions and instances.  A stage-3
-        # delivery is allowed to replace the body of such a declaration when the base
-        # declaration itself contained a sorry; statements and attributes remain guarded
-        # below.  Keep rejecting edits to already-proved non-theorems.
-        data = [k for k in d["body_changed"]
-                if d["old"][k]["kw"] not in ("theorem", "lemma")
-                and not d["old"][k]["sorry"]]
-        if data: bad.append("changes the body of already-proved non-theorem declaration(s) " + short(data))
+        data = [k for k in d["body_changed"] if d["old"][k]["kw"] not in ("theorem", "lemma")]
+        if data: bad.append("changes the body of non-theorem declaration(s) " + short(data))
         attrs = [k for k in d["new"] if k in d["old"] and d["old"][k].get("head") != d["new"][k].get("head")]
         if attrs: bad.append("changes attributes of " + short(attrs))
         # a private `import Sheaf.*` is allowed: proofs of upstream sorries use our lemmas, and the integration agent sends
