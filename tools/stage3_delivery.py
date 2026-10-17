@@ -33,7 +33,7 @@ file). An import that only a proof needs is written `import X` (seen by no other
     python3 tools/stage3_delivery.py probe <file.lean>                       the text compiled for check f
 """
 from __future__ import annotations
-import collections, json, pathlib, re, subprocess, sys
+import collections, json, os, pathlib, re, subprocess, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402
@@ -360,11 +360,36 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
         for x in D["nodes"].values()) or any(m["diff"]["new_sorry"] for m in D["modules"])
     nodes_base = s2.nodes_at(git, base) if needs_nodes else {}
     dmap = s2.declaration_map({**nodes_base, **{k: v["node"] for k, v in D["nodes"].items()}})
+    for L, x in route_pivot_fails(D):
+        f(L, x)
     check_lean(D, f, dmap)
     check_nodes(D, f, git, base, group, item, nodes_base)
     check_changes(D, f, group, nodes_base)
     check_report(D, f, group)
     return D
+
+
+
+ROUTE_PIVOT_MODULES = pathlib.Path(os.environ.get("SHEAF_ROUTE_PIVOT_MODULES",
+                                                  "/home/ubuntu/weil-newtargets/coord/route-pivot-dropped-modules.txt"))
+
+
+def route_pivot_fails(D: dict) -> list[tuple[str, str]]:
+    """Route pivot (the human, 2026-10-18): a delivered module may not import, or be, the Lean module of a node of the
+    dropped infinity/dg/model machinery or the Zariski-gluing branch (the side project's
+    coord/route-pivot-dropped-modules.txt, derived from coord/route-pivot-dropped.txt)."""
+    try:
+        drop = {l.split()[0] for l in ROUTE_PIVOT_MODULES.read_text().splitlines() if l.strip() and not l.startswith("#")}
+    except OSError:
+        return []
+    out = []
+    for m in D.get("modules") or []:
+        if m.get("role") == "new" and m.get("module") in drop:
+            out.append(("c", f"{m['file']}: the module of a route-pivot dropped node ({ROUTE_PIVOT_MODULES.name})"))
+        hit = sorted(i for i in s2.imports(m.get("text") or "") if i in drop)
+        if hit:
+            out.append(("c", f"{m['file']}: imports route-pivot dropped module(s) {', '.join(hit)} ({ROUTE_PIVOT_MODULES.name})"))
+    return out
 
 
 def check_lean(D, f, dmap):
