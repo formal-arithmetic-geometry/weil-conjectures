@@ -12,9 +12,104 @@
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Treat either inclusion as $i:A\\to B$, with $B$ sharply marked, in the slice of marked simplicial sets over $\\bar C$. The seven generating families form a small set: the pattern, its cone shapes, the natural numbers and all their structural maps are small. Marked colimits are degreewise colimits with the images of the input markings, as follows by testing marking-preserving maps out; the same holds in the slice. Every generator is degreewise injective. Choose an infinite regular $\\kappa$ larger than the total sets of simplices of their domains, using [lem-coef-small-family-regular-bound]. A map from a domain into a continuous $\\kappa$-chain of such cell attachments factors through one stage: choose a stage for each simplex and each required marked edge, then bound these fewer than $\\kappa$ stages by regularity. The relations already hold there because the stage maps are injective. The same argument detects equality. Thus [lem-coef-small-object-cell-factorization] factors $i$ as $A\\xrightarrow{j}Z\\xrightarrow{r}B$, with $j$ a generator-cell map and $r$ lifting all seven types over $C$. Serialize each coproduct of attachments by well-ordering its summands; hence $j\\in W_{\\mathfrak P}$. We will show that its underlying map extends to a marked section $s:B\\to Z$ of $r$.",
+   "uses": [
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.11-B.1.12, lifting-class reduction; explicit small-object factorization."
+   }
+  },
+  {
+   "text": "The underlying $B$ is a quasicategory. For $\\Delta^2$ this is the nerve of $[2]$. For $\\Delta^1\\star K_\\alpha$, an inner-horn problem splits by its ordered initial-simplex block and final $K_\\alpha$ block; if its missing face affects only the final block, its inner horn is filled in $K_\\alpha$, and otherwise the fixed concatenation supplies the filler. This also includes the empty final block. Type (C1) makes $r$ inner, so $Z$ and each fiber $Z_b$ are quasicategories by projecting and lifting inner horns. Since all edges of $B$ map into $S$, (C0) makes every marked edge $r$-cocartesian by [def-coef-infinity-fibrations], and (B0) supplies a marked cocartesian lift from every specified source over every edge of $B$. If $a$ is an equivalence in $Z_b$, [lem-coef-finite-inverse-tetrahedron] extends it as the central edge of a map $Q\\to Z_b$. Its base is constant at $b$, and (A1) marks its central edge. Therefore every fiber equivalence is marked.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-finite-inverse-tetrahedron"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.6, conditions (1)-(4), used in B.1.11-B.1.12; restricted to the sharply marked codomain."
+   }
+  },
+  {
+   "text": "Conversely, let $a:x\\to y$ be $r$-cocartesian. Choose a marked cocartesian lift $a':x\\to y'$ of the same base edge by Step 2. Both are initial objects of $L(x,r(a))$ in [lem-coef-infinity-cocartesian-composition-initiality]. The universal comparison from $a'$ to $a$ supplies a triangle $(a',b,a)$ whose edge $b:y'\\to y$ is an equivalence in the target fiber. Step 2 marks $b$. Its base triangle has the edge $r(a)$, a degenerate edge, and $r(a)$, all mapping into $S$. Applying (A0) to this triangle marks $a$. We have thus proved that the markings of $Z$ are exactly its $r$-cocartesian edges. The comparison and its triangle are supplied by the cited statement, not merely by a definition of cocartesian lifts.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.6 (3), the exact-marking argument needed by B.1.11-B.1.12."
+   }
+  },
+  {
+   "text": "For (i), let $u,v,w$ be the edges $01,12,02$ of the triangle $j:\\Delta^2\\to Z$. The edges $u,w$ are marked, hence $r$-cocartesian by Step 2. The composition-and-cancellation assertion of [lem-coef-infinity-cocartesian-composition-initiality] applies to the inner fibration of quasicategories $r$ and says, since $u$ is cocartesian, that $v$ is cocartesian if and only if $w$ is. Thus $v$ is cocartesian and is marked by Step 3. All edges of $B$ now have marked images under $j$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.1.11; HTT Proposition 2.4.1.7 in the cocartesian convention."
+   }
+  },
+  {
+   "text": "For (ii), label the original initial vertices $x,z$, put $K=K_\\alpha$, and write $h:\\{x\\}\\star\\{z\\}\\star K\\to Z$ for the underlying map of $j$. Choose a marked lift $e:h(x)\\to y$ over $xz$ by (B0). Insert a vertex between $x,z$: the base map $\\{x\\}\\star\\{y\\}\\star\\{z\\}\\star K\\to B$ identifies $y,z$ with the original vertex $z$ and fixes $x,K$. Extend $h$ and $e$ over this join by (C0), as follows. For every nondegenerate nonempty simplex $\\sigma$ of $\\{z\\}\\star K$, in increasing dimension attach the pair of missing simplices $\\{y\\}\\star\\sigma$ and $\\{x,y\\}\\star\\sigma$. The second attaches along the initial horn missing the face opposite $x$: its face opposite $y$ is already in $h$, and each other face is present from a proper face of $\\sigma$, with edge $xy=e$. This is a (C0) horn since its dimension is at least two and its first edge is marked. At limit stages take the union. Every missing nondegenerate simplex occurs once, so the result is a map $h'$ on the entire enlarged join, over that exact base map. No finiteness of $K$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.1.12, extension along the chosen cocartesian edge; explicit initial-horn attachment argument."
+   }
+  },
+  {
+   "text": "For each vertex $k$ of $K$, the triangle $(x,y,k)$ in $h'$ has consecutive first edge $e$ and long edge $h(xk)$ cocartesian, because both are marked. By [lem-coef-infinity-cocartesian-composition-initiality], its edge $yk$ is cocartesian and thus marked by Step 3. Edges wholly in $K$ were already marked. Consequently the cones $c_y=h'|_{\\{y\\}\\star K}$ and $c_z=h'|_{\\{z\\}\\star K}$ are sharply marked and agree exactly on $K$. Both lie over the same base cone $\\{z\\}\\star K\\to B$, whose composite into $C$ is $p_\\alpha$. The restriction to $\\{y,z\\}\\star K$ gives a coherent edge $a:c_y\\to c_z$ over that constant base cone. We next construct its inverse without invoking the pattern-model theorem or the lifting-products theorem, which depend on this item.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.1.12, cocartesian legs of the inserted cone; direct use of the final-cone generators."
+   }
+  },
+  {
+   "text": "Apply (C2) with $n=1$, boundary cones $c_z,c_y$ in that order, and base $\\Delta^1\\star K\\to B$ collapsing the initial interval to $z$. The final cone $c_y$ is sharp, so the lift gives $b:c_z\\to c_y$ agreeing exactly with the common diagram on $K$. Apply (C2) with $n=2$ to the boundary with vertices $(c_y,c_z,c_y)$ and edges $(a,b,1_{c_y})$, again over the collapsed base and with final cone $c_y$ sharp. Apply it again to $(c_z,c_y,c_z)$ and edges $(b,a,1_{c_z})$. The boundary maps exist: their join maps agree on the shared vertex cones and on $K$. These two lifted $2$-simplices, evaluated at their initial vertices, are inverse-triangle witnesses for the edge $h'(yz)$ in the fiber $Z_z$. Step 2 therefore marks $h'(yz)$. Finally (A0) on $(x,y,z)$ marks the original edge $h(xz)$, since $e$ and $h'(yz)$ are marked. All the other edges were marked from the start. If $K=\\varnothing$, the same (C2) lifts are simply interval and triangle lifts over the constant vertex, so this argument retains the empty cone.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.1.12, equivalence comparison of the two limit cones; explicit C2 inverse witnesses replacing the omitted limit-uniqueness argument."
+   }
+  },
+  {
+   "text": "In each case the underlying map $j$ now preserves the sharp marking of $B$, and defines $s:B\\to Z$. Since $i$ is the underlying identity and $rj=i$, we have $si=j$ and $rs=1_B$. In the arrow category $(1_A,s):i\\to j$ and $(1_A,r):j\\to i$ have composite $1_i$. Thus $i$ is a retract of $j\\in W_{\\mathfrak P}$. Retract closure proves both assertions. Every base map and every inserted simplex used above is the given structural map composed with a specified simplex or join map, so all constructions are over $\\bar C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.11-B.1.12, concluding arrow retract."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-coef-finite-inverse-tetrahedron",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-small-object-cell-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "HA B.1.11-B.1.12, read online 2026-10-17; archive unavailable. Explicit generator-based proof, avoiding cyclic recognition/model inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +145,59 @@
    "results": "{\"t\": \"2026-10-17T04:20:23Z\", \"tool\": \"leansearch\", \"query\": \"Marked simplicial categorical pattern triangle cancellation and limit cone comparison anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.noConfusionType\", \"CategoryTheory.Limits.IsLimit.mk.congr_simp\", \"CategoryTheory.Limits.LimitCone.noConfusion\", \"CategoryTheory.ShortComplex.isLimitLimitCone\", \"CategoryTheory.Limits.IsLimit.noConfusion\", \"CategoryTheory.ShortComplex.limitCone\", \"CategoryTheory.Limits.LimitCone.mk.noConfusion\", \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\"], \"digest\": \"9b987d5259003515\"}",
    "date": "2026-10-17",
    "verdict": "no match: read hits; ordinary triangulated-category completions, unmarked simplex composition and horn statements do not assert either marking inclusion. Targeted marked/pattern searches return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial categorical pattern anodyne cancellation for a triangle and a cone join",
+   "results": "{\"t\": \"2026-10-17T05:30:29Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial categorical pattern anodyne cancellation for a triangle and a cone join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₁.ι₃_desc\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn₃₂.desc.multicofork\", \"SSet.horn₃₂.ι₃_desc\", \"SSet.horn₃₂.ι₁_desc\", \"SSet.horn₃₁.ι₂_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₂.desc\"], \"digest\": \"276f4a5c82546265\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; the SSet horn/Quillen generators are unmarked, and the triangle/cone hits concern ordinary or triangulated categories. No hit states pattern-specific marking-only cancellation. Targeted Loogle and grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "P-anodyne marking inclusion triangle cone categorical pattern",
+   "results": "{\"t\": \"2026-10-17T05:30:31Z\", \"tool\": \"leanfinder\", \"query\": \"P-anodyne marking inclusion triangle cone categorical pattern\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn₃₂.desc\", \"SSet.horn₃₁.desc\", \"SSet.horn₃₂.desc.multicofork\", \"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₁.ι₃_desc\"], \"digest\": \"a9ed390db88d4688\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; the SSet horn/Quillen generators are unmarked, and the triangle/cone hits concern ordinary or triangulated categories. No hit states pattern-specific marking-only cancellation. Targeted Loogle and grep have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MarkedSSet\", \"anodyne\"",
+   "results": "{\"t\": \"2026-10-17T05:30:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"MarkedSSet\\\", \\\"anodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; the SSet horn/Quillen generators are unmarked, and the triangle/cone hits concern ordinary or triangulated categories. No hit states pattern-specific marking-only cancellation. Targeted Loogle and grep have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"cocartesian\"",
+   "results": "{\"t\": \"2026-10-17T05:30:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"cocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; the SSet horn/Quillen generators are unmarked, and the triangle/cone hits concern ordinary or triangulated categories. No hit states pattern-specific marking-only cancellation. Targeted Loogle and grep have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "marked.*anodyne|categorical pattern|cocartesian",
+   "results": "{\"t\": \"2026-10-17T05:30:32Z\", \"tool\": \"grep\", \"query\": \"marked.*anodyne|categorical pattern|cocartesian\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; the SSet horn/Quillen generators are unmarked, and the triangle/cone hits concern ordinary or triangulated categories. No hit states pattern-specific marking-only cancellation. Targeted Loogle and grep have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked simplicial categorical pattern anodyne cancellation triangle cone",
+   "results": "{\"t\": \"2026-10-17T05:30:33Z\", \"tool\": \"leansearch\", \"query\": \"Marked simplicial categorical pattern anodyne cancellation triangle cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.triangle\", \"CategoryTheory.Pretriangulated.contractibleTriangle\", \"CategoryTheory.CommSq.cocone\", \"CategoryTheory.Limits.Cone.noConfusionType\", \"CategoryTheory.Limits.Cone.noConfusion\", \"CategoryTheory.Pretriangulated.TriangleMorphism.mk.congr_simp\", \"SimplexCategory.instHasStrongEpiMonoFactorisations\", \"CategoryTheory.Limits.Cone.mk.noConfusion\"], \"digest\": \"c875016f519cc6d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; the SSet horn/Quillen generators are unmarked, and the triangle/cone hits concern ordinary or triangulated categories. No hit states pattern-specific marking-only cancellation. Targeted Loogle and grep have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A marked triangle with two cocartesian edges forces the third edge marked in a categorical pattern",
+   "results": "{\"t\": \"2026-10-17T05:30:33Z\", \"tool\": \"leansearch\", \"query\": \"A marked triangle with two cocartesian edges forces the third edge marked in a categorical pattern\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.Triangle.homMk_hom₃\", \"CategoryTheory.Pretriangulated.TriangleMorphism.ext\", \"CategoryTheory.Pretriangulated.TriangleMorphism.mk.congr_simp\", \"CategoryTheory.Pretriangulated.TriangleMorphism.mk.injEq\", \"CategoryTheory.Pretriangulated.Triangle.distinguished_iff_of_isZero₂\", \"CategoryTheory.Pretriangulated.Triangle.mk'.inj\", \"CategoryTheory.Pretriangulated.Triangle.homMk.congr_simp\", \"CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts.triangle\"], \"digest\": \"41edee990865807b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; the SSet horn/Quillen generators are unmarked, and the triangle/cone hits concern ordinary or triangulated categories. No hit states pattern-specific marking-only cancellation. Targeted Loogle and grep have zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pattern-generator-product-cells",
@@ -82,5 +226,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-pattern-marking-cancellation",
+  "worker": "stage1",
+  "summary": "Eight-step generator-based proof with no new nodes. Small-object factorization reduces both assertions to missing markings; horn lifting gives exact cocartesian markings, triangle cancellation proves (i), and explicit initial-horn insertions plus C2 inverse triangles prove (ii), including empty and infinite cone shapes. Avoided circular citations to the pattern recognition/product/model nodes. Statement unchanged.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction: auxiliary marking inclusions in HA B.1.11-B.1.12 used in the generator product computation of B.1.9 and the two-dimensional case of B.1.13. Steps 1-8 supply B.1.11-B.1.12 beneath the existing generator-product computation; no unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-c3a2eadf5",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-c3a2eadf5 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, all 8 steps, the full statements of all 8 cited nodes, and HA Def B.1.1, Rem B.1.5, Prop B.1.6 with its proof, and Lemmas B.1.11-B.1.12 with their proofs (local PDF, pp.1470-1474 and 1480-1481). The statement is the exact fully scaled specialization of HA: (i) is the Lambda^2_0 marking of B.1.11, and (ii) is the all-but-initial-edge marking of B.1.12. Under full scaling the (C0)/T conditions are vacuous or forced by the marked base. I tested the point pattern, K empty and K a point. Step 1 is a correct use of the cited small-object factorization: generators are monomorphisms and kappa bounds the domain sizes. Step 2 is correct: C1 makes r inner, C0 gives the horn definition of cocartesian edges, B0 gives marked lifts, and the inverse tetrahedron with A1 marks fibre equivalences. I also checked the join quasicategory argument. Step 3 uses the initiality node at statement level and applies A0 over the degenerate s1 base. Step 4 uses cancellation in the u=01, v=12, w=02 orientation. Step 5 is correct: I enumerated the missing simplices {y}*sigma and {x,y}*sigma attached along Lambda^n_0, n>=2, with first edge e marked over xz in S. Step 6 marks the yk legs by cancellation. Step 7 is correct: C2 with n=1 and twice with n=2 gives inverse 2-simplices in Z_z, which is exactly the equivalence definition of def-cbc-enhanced-diagrams-cones; A0 then marks xz. Step 8's retract equations hold. There is no cycle: I computed the dependency closure myself (507 nodes) and it excludes the item. The only citer is generator-product-cells, which uses (i) and (ii) as stated. There are no new nodes and no duplicates (marked-triangle-cancellation is the opposite orientation over a point, and pattern-anodyne-lifting-products states something else). All cited nodes are in the item's unit, so there are no tool_uses. No SGA is cited. I made no changes."
  }
 }

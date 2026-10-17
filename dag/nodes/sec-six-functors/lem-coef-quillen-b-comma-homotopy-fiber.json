@@ -29,9 +29,123 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D_b=(U\\downarrow b)$. Define a bisimplicial set $Z_{m,n}=\\coprod_{b_0\\to\\cdots\\to b_m}N_nD_{b_0}$. A simplex is equivalently a pair of chains $e_0\\to\\cdots\\to e_n$, $b_0\\to\\cdots\\to b_m$, and an arrow $\\alpha:Ue_n\\to b_0$. The $m$-faces compose/delete base arrows, applying postcomposition to $\\alpha$ when deleting $b_0$; the $n$-faces are comma-nerve faces, composing $\\alpha$ with $U(e_{n-1}\\to e_n)$ when deleting $e_n$. Identities give degeneracies. Functoriality of composition verifies all simplicial identities and commutation of the two directions. Write $Y_m$ for the discrete simplicial set of base $m$-chains; $\\operatorname{diag}Y=N\\mathcal B$. The projection $Z_m\\to Y_m$ and the augmentation $t:\\operatorname{diag}Z\\to N\\mathcal E$ forget respectively the $e$-data and the $b$-data.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p.183 (PDF p.198); agent-written two-sided bisimplicial resolution of its ordinary-category specialization. The equifibered diagonal input is an existing cited theorem."
+   }
+  },
+  {
+   "text": "For each base chain replace its comma nerve by $RN D_{b_0}$, giving $X_m=\\coprod_{b_0\\to\\cdots\\to b_m}RN D_{b_0}$ and $p_m:X_m\\to Y_m$. Every singular realization is Kan: by the realization--singular adjunction a horn map is a continuous map from the realized horn, and the realized horn-pair retraction extends it over the simplex. A horn in a coproduct lies in one summand (also in dimension one), so $X_m$ is Kan and $p_m$ is a Kan fibration to its discrete base. The characteristic-map units give a rowwise weak equivalence $Z_m\\to X_m$ by [lem-cbc-realization-singular-unit-weak]. Naturality of those units also shows that $R$ preserves weak equivalences, by cancellation of component bijections and homotopy-group isomorphisms. Thus [lem-coef-bisimplicial-diagonal-equivalence] makes $d:\\operatorname{diag}Z\\to\\operatorname{diag}X$ a weak equivalence over $N\\mathcal B$. Choose a single larger universe containing all singular-simplex sets.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits",
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p.183 (PDF p.198); agent-written two-sided bisimplicial resolution of its ordinary-category specialization. The equifibered diagonal input is an existing cited theorem."
+   }
+  },
+  {
+   "text": "For an operator $a:[l]\\to[m]$, the induced map over a base chain restricts on its fiber to $RN D_{b_0}\\to RN D_{b_{a(0)}}$, given by the composite base arrow $b_0\\to b_{a(0)}$. This is a weak equivalence by the comma-transition hypothesis and Step 2. All structure squares of $p:X\\to Y$ are homotopy pullbacks: the strict pullback has a summand $RN D_{b_{a(0)}}$ over each original $m$-chain and its comparison from $X_m$ is the just-verified weak equivalence on each summand. Its path-space pullback is exactly that strict pullback, since every path in a discrete simplicial set is constant. Apply [lem-coef-equifibered-bisimplicial-diagonal] to $p$. For each $b$ the strict fiber of $p_0$ is $RN D_b$, so its canonical constant-base comparison to $\\operatorname{hofib}_b(R\\operatorname{diag}p)$ is a weak equivalence. All hypotheses concern rowwise Kan complexes and rowwise Kan fibrations, not fibrancy of the diagonals.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-equifibered-bisimplicial-diagonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p.183 (PDF p.198); agent-written two-sided bisimplicial resolution of its ordinary-category specialization. The equifibered diagonal input is an existing cited theorem."
+   }
+  },
+  {
+   "text": "Let $A=ND_b$, $W=\\operatorname{diag}Z$, and $V=\\operatorname{diag}X$. Let $i_b:A\\to W$ repeat $b$ and its identity base arrows, and let $j_b:RA\\to V$ be the row-zero inclusion. Degreewise $d i_b=j_b u_A$, where $u$ is the characteristic-map unit. Write $F_W=\\operatorname{hofib}_b(Rq)$ and $F_V=\\operatorname{hofib}_b(R\\operatorname{diag}p)$. Step 3 gives a weak equivalence $a_b:RA\\to F_V$ whose total-space component is $u_Vj_b$ and whose path is constant. Define $k_b:RRA\\to F_V$ using $Rj_b$ and constant paths. Naturality of $u$ gives $k_bu_{RA}=a_b$, so $k_b$ is a weak equivalence. Define $f_b:RA\\to F_W$ using $Ri_b$ and constant paths. Apply [lem-coef-spaces-homotopy-fiber-detection] to $Rd$ over $\\mathrm{id}_{RN\\mathcal B}$: both total spaces and the common base are Kan, $Rd$ is a weak equivalence, and the square commutes strictly. Its induced fiber map $h_b:F_W\\to F_V$ is therefore a weak equivalence. Applying $R$ to $d i_b=j_bu_A$ gives $h_bf_b=k_bR(u_A)$. The unit $u_{RA}$ and the map $R(u_A)$ are weak equivalences by Step 2. Thus the right-hand side is a weak equivalence, and cancellation with $h_b$ proves that the specified constant-path comparison $f_b$ is a weak equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p.183 (PDF p.198); agent-written two-sided bisimplicial resolution of its ordinary-category specialization. The equifibered diagonal input is an existing cited theorem."
+   }
+  },
+  {
+   "text": "Fix $n$ and a chain $e_0\\to\\cdots\\to e_n$. In the $m$-direction its summand of $Z$ is the nerve of $Ue_n\\downarrow\\mathcal B$: its chains are precisely $Ue_n\\to b_0\\to\\cdots\\to b_m$. This category has initial object $(Ue_n,1)$, and its unique arrows from that object give a natural transformation from the constant functor at it to the identity. By [lem-coef-nerve-natural-homotopy-equivalence] its nerve maps weakly equivalently to a point. The augmentation $Z_{\\bullet,n}\\to(N\\mathcal E)_n$, regarded as a discrete simplicial set, is consequently a weak equivalence on each summand and hence on their disjoint union: path components and every based homotopy group are computed inside a summand. The exchanged-direction clause of [lem-coef-bisimplicial-diagonal-equivalence] now proves that the particular augmentation $t:\\operatorname{diag}Z\\to N\\mathcal E$ is a weak equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p.183 (PDF p.198); agent-written two-sided bisimplicial resolution of its ordinary-category specialization. The equifibered diagonal input is an existing cited theorem."
+   }
+  },
+  {
+   "text": "Write $q:\\operatorname{diag}Z\\to N\\mathcal B$ for the base-chain projection. There is a specific simplicial homotopy $N U\\,t\\simeq q$. On a diagonal $n$-simplex its natural-transformation components are $Ue_i\\to Ue_n\\xrightarrow{\\alpha}b_0\\to b_i$. Commutativity follows by associativity along the two chains. To specify the entire homotopy, a monotone $\\theta:[n]\\to[1]$ selects $Ue_i$ when $\\theta(i)=0$ and $b_i$ when $\\theta(i)=1$; at the single switch use the corresponding composite $Ue_i\\to b_j$. These formulas commute with every simplex operator; in particular deleting the last $e$-vertex precomposes $\\alpha$ with its last $U$-arrow, which preserves each displayed component. Realize this homotopy using [lem-coef-simplicial-realization-cylinder], then apply singular complexes and the characteristic singular interval. This gives exactly a specified homotopy $RNU\\,Rt\\simeq Rq$. Apply [lem-coef-spaces-homotopy-fiber-detection] to $Rt$ over the identity of $RN\\mathcal B$, with this homotopy. Step 5 and naturality of the units make $Rt$ a weak equivalence, so the resulting map $\\operatorname{hofib}_b(Rq)\\to\\operatorname{hofib}_b(RNU)$ is a weak equivalence for every $b$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p.183 (PDF p.198); agent-written two-sided bisimplicial resolution of its ordinary-category specialization. The equifibered diagonal input is an existing cited theorem."
+   }
+  },
+  {
+   "text": "Compose the comparison of Step 4 with the fiber map of Step 6. On the included comma nerve $ND_b$, all $b$-vertices and all base arrows are constant identities. The components in Step 6 reduce to $Ue_i\\to Ue_n\\xrightarrow{\\alpha}b$, precisely the nerve of the natural transformation from $U$ of the forgetful functor to the constant functor at $b$. Denote its realized homotopy by $H_b:|ND_b|\\times[0,1]\\to|N\\mathcal B|$. The composite comparison has the same point component as $c_{U,b}$ and follows $H_b$ before the constant endpoint path. Use equal half-intervals for this concatenation, so its path coordinate is $H_b(z,\\min(2t,1))$; the path coordinate of $c_{U,b}$ is $H_b(z,t)$. The continuous formula $H_b(z,\\lambda_s(t))$, where $\\lambda_s(t)=\\min(t/(1-s/2),1)$ for $0\\leq s,t\\leq1$, interpolates between them and fixes both path endpoints. It defines a simplicial cylinder homotopy on $RN D_b$: for a singular simplex $\\sigma:|\\Delta^n|\\to|ND_b|$ and a monotone $\\theta:[n]\\to[1]$, substitute $z=\\sigma(x)$ and $s=\\sum_{\\theta(i)=1}x_i$. The formula commutes with precomposition by every affine simplex operator and keeps the point component fixed. For any simplicial set $L$, the cylinder projection $L\\times\\Delta^1\\to L$ is a simplicial homotopy equivalence: its section at zero has the homotopy $(a,s,t)\\mapsto(a,\\min(s,t))$ from section-composed-with-projection to the identity. By [lem-cbc-simplicial-homotopy-equivalence-weak] the projection is a weak equivalence, so both endpoint inclusions are weak equivalences by their identity composites with it. The two endpoint maps of our comparison homotopy consequently have the same weak-equivalence status by two-out-of-three. Both factors of the composite comparison are weak equivalences, hence $c_{U,b}$ is one as well.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p.183 (PDF p.198); agent-written two-sided bisimplicial resolution of its ordinary-category specialization. The equifibered diagonal input is an existing cited theorem."
+   }
+  },
+  {
+   "text": "For a strictly commuting square $GU=U\\prime F$, applying $F$ to the $e$-chain and $G$ to the $b$-chain and connecting arrow gives maps of every bisimplicial construction above. They commute with the characteristic-map units, both augmentations, and the explicit prism formula in Step 6. On the repeated-$b$ row-zero summand the map is $(e,\\alpha)\\mapsto(F(e),G\\alpha)$, and on the target fiber it applies $RNF$ and $RNG$ to the point and path. This proves the specified naturality of $c$, rather than just existence of an abstract fiber equivalence. If $\\mathcal E$ is empty, every $Z_m,X_m$ and both fiber comparisons are empty. If $\\mathcal B$ is empty there is no $b$ to check. If $D_b$ is empty its inclusion and all comparisons above remain defined; Step 3 detects the empty fiber without imposing contractibility or nonemptiness.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p.183 (PDF p.198); agent-written two-sided bisimplicial resolution of its ordinary-category specialization. The equifibered diagonal input is an existing cited theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-realization-finite-limits",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-equifibered-bisimplicial-diagonal",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Corollary 4.6.12, printed p.183 (PDF p.198); agent-written two-sided bisimplicial resolution of its ordinary-category specialization. The equifibered diagonal input is an existing cited theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -130,10 +244,66 @@
    "results": "{\"t\": \"2026-10-16T23:13:55Z\", \"tool\": \"grep\", \"query\": \"TheoremB|[Pp]ropertyB|[Qq]uillenB|comma.*[Ff]iber|[Ff]iber.*comma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Additive/Corner/Roth.lean\", \"Mathlib/Combinatorics/Additive/Corner/Roth.lean\", \"Mathlib/Combinatorics/Additive/Corner/Roth.lean\", \"Mathlib/Combinatorics/Additive/Corner/Roth.lean\", \"Mathlib/Combinatorics/Additive/Corner/Roth.lean\", \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\"], \"digest\": \"777f3e6e7fa26d1d\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search; returned ordinary categorical fibers and Grothendieck/comma component formulas, unrelated corner-theorem bounds, commutative-algebra fibers, or no hits; none identifies classifying-space homotopy fibers under the comma-transition hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "Quillen.*theorem.*B|quillenB|comma.*homotopy|homotopy.*comma",
+   "results": "{\"t\": \"2026-10-16T23:56:29Z\", \"tool\": \"grep\", \"query\": \"Quillen.*theorem.*B|quillenB|comma.*homotopy|homotopy.*comma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern nerve adjunctions, ordinary comma equivalences, classifying-space resolutions or abstract over-model structures; none proves the comma homotopy-fiber theorem. Read the returned signatures; the two focused AlgebraicTopology greps and two valid Loogle conjunctions return zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comma category over an object has nerve weakly equivalent to homotopy fiber of classifying spaces under Quillen B assumptions",
+   "results": "{\"t\": \"2026-10-16T23:56:29Z\", \"tool\": \"leansearch\", \"query\": \"Comma category over an object has nerve weakly equivalent to homotopy fiber of classifying spaces under Quillen B assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalences_over_def\", \"HomotopicalAlgebra.weakEquivalences_over_iff\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesOver\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Comma.toIdPUnitEquiv\", \"HomotopicalAlgebra.fibrations_over_iff\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverWeakEquivalences\"], \"digest\": \"ddc17d84fc86772a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern nerve adjunctions, ordinary comma equivalences, classifying-space resolutions or abstract over-model structures; none proves the comma homotopy-fiber theorem. Read the returned signatures; the two focused AlgebraicTopology greps and two valid Loogle conjunctions return zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comma\", \"nerve\"",
+   "results": "{\"t\": \"2026-10-16T23:56:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comma\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern nerve adjunctions, ordinary comma equivalences, classifying-space resolutions or abstract over-model structures; none proves the comma homotopy-fiber theorem. Read the returned signatures; the two focused AlgebraicTopology greps and two valid Loogle conjunctions return zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quillen theorem B comma category nerve models homotopy fiber under weakly equivalent comma transition functors",
+   "results": "{\"t\": \"2026-10-16T23:56:39Z\", \"tool\": \"leanfinder\", \"query\": \"Quillen theorem B comma category nerve models homotopy fiber under weakly equivalent comma transition functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"5b59540af3d1b6d6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern nerve adjunctions, ordinary comma equivalences, classifying-space resolutions or abstract over-model structures; none proves the comma homotopy-fiber theorem. Read the returned signatures; the two focused AlgebraicTopology greps and two valid Loogle conjunctions return zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "TheoremB|quasifibration|QuillenB|bisimplicial|homotopy.*fiber",
+   "results": "{\"t\": \"2026-10-16T23:59:59Z\", \"tool\": \"grep\", \"query\": \"TheoremB|quasifibration|QuillenB|bisimplicial|homotopy.*fiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern nerve adjunctions, ordinary comma equivalences, classifying-space resolutions or abstract over-model structures; none proves the comma homotopy-fiber theorem. Read the returned signatures; the two focused AlgebraicTopology greps and two valid Loogle conjunctions return zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nerve\", \"WeakEquivalence\"",
+   "results": "{\"t\": \"2026-10-17T00:00:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerve\\\", \\\"WeakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern nerve adjunctions, ordinary comma equivalences, classifying-space resolutions or abstract over-model structures; none proves the comma homotopy-fiber theorem. Read the returned signatures; the two focused AlgebraicTopology greps and two valid Loogle conjunctions return zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classifying space homotopy fiber theorem for a functor with homotopically constant overcategories, natural in functors",
+   "results": "{\"t\": \"2026-10-17T00:00:00Z\", \"tool\": \"leanfinder\", \"query\": \"Classifying space homotopy fiber theorem for a functor with homotopically constant overcategories, natural in functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FundamentalGroupoidFunctor.homotopicMapsNatIso\", \"classifyingSpaceUniversalCover.cechNerveTerminalFromIsoCompForget\", \"SSet.Truncated.hoFunctor₂_naturality\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"classifyingSpaceUniversalCover.cechNerveTerminalFromIso\"], \"digest\": \"9a5095edb5e64d01\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern nerve adjunctions, ordinary comma equivalences, classifying-space resolutions or abstract over-model structures; none proves the comma homotopy-fiber theorem. Read the returned signatures; the two focused AlgebraicTopology greps and two valid Loogle conjunctions return zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalences_over_def|weakEquivalences_over_iff|toIdPUnitEquiv|homToNerveMk|nerveFunctorCompHoFunctorIso",
+   "results": "{\"t\": \"2026-10-17T00:49:38Z\", \"tool\": \"grep\", \"query\": \"weakEquivalences_over_def|weakEquivalences_over_iff|toIdPUnitEquiv|homToNerveMk|nerveFunctorCompHoFunctorIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Over.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Over.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Over.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Over.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Over.lean\", \"Mathlib/CategoryTheory/Comma/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Basic.lean\"], \"digest\": \"e7f6593f1a7a4587\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source-location check of previously logged service hits. Read ModelCategory/Over.lean:88-103 (weak equivalences in an overcategory), CategoryTheory/Comma/Basic.lean:513-519 (ordinary comma equivalence over a point), and SimplicialSet/NerveAdjunction.lean:227-238,410-421 (truncated nerve adjunction). None is a comma homotopy-fiber theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quillen-b-discrete-fibration-base-change",
@@ -141,5 +311,34 @@
   "group": "NZ"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-quillen-b-comma-homotopy-fiber",
+  "worker": "stage1",
+  "summary": "Two-sided bisimplicial proof of Quillen B for comma categories (U downarrow b) with postcomposition transitions: Step 1 builds Z_{m,n}=coprod_{b_0->...->b_m} N_n(U downarrow b_0); Steps 2-4 replace rows by R=Sing|-|, apply the rowwise diagonal theorem and the equifibered diagonal theorem over the discrete base Y_m, and transfer the row-zero fiber comparison to diag Z by fiber detection over the identity base; Step 5 shows diag Z -> N E is a weak equivalence because each column is the nerve of U(e_n) downarrow B, which has an initial object; Steps 6-7 build the explicit prism homotopy N U t ~ q, apply fiber detection, and identify the composite with c_{U,b} by an endpoint-preserving reparametrization; Step 8 checks strict naturality. Zero new nodes. The second reading expanded Steps 4 and 7. The dependency closure (158 nodes at the delivered base) is acyclic after maintenance repointed lem-coef-sharp-simplex-criterion and lem-coef-ex-infinity-finite-products to lem-coef-kan-quillen-model-right-proper-core; the earlier cycle diagnostics in the report are historical. Off-unit generic tools from sk-prop-sf-cbc are declared in tool_uses.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed derived coefficient-adjunction calculation: this is the comma-fiber input through the recorded infrastructure ancestry, not a literal assertion of the coefficient paragraph. Current blueprint sk-thm-sf-package proof was read; no unit-level route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "Steps 2 and 4 need that the characteristic-map unit K -> Sing|K| is a weak equivalence for arbitrary simplicial sets (rowwise Z_m -> X_m, u_{RA}, R(u_A), and R preserving weak equivalences); a generic simplicial-homotopy fact used as a black box, which no node of sk-prop-sf-biduality-general states."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Step 7 needs that a simplicial homotopy equivalence (the cylinder projection L x Delta^1 -> L with its zero section) is a weak equivalence, to transfer weak-equivalence status across the endpoint-preserving reparametrization homotopy; a generic tool lemma, not supplied by a node of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-d77da677c",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-d77da677c (reviewer sub-agent of L); spot-checked: Read in full: the item (statement, 8 steps, searches, blueprint, split_report), the statements of all 9 cited nodes, the parent lem-coef-quillen-b-discrete-fibration-base-change (statement and its Step 4 use), the unit sk-prop-sf-biduality-general with its uses closure, and the ancestor prop-coef-integral-exceptional-adjoint. Statement: Quillen Theorem B for (U\\downarrow b) with postcomposition transitions and R=Sing|.|; true as written, not weakened, no hypothesis added. Cisinski Cor. 4.6.12 is not in literature/ and I could not read it at the cited place; I checked the statement mathematically against classical Quillen B (opposite of Quillen's b\\U form; Goerss-Jardine IV.5 bisimplicial proof). The proof is correctly marked agent-written, with the WANTED notice recorded. Tested E empty, B=[0] (comma = E), U=id (B/b contractible), point->BG (comma = discrete G, fiber ΩBG ≃ G), and U:E->[1]. All 8 steps are checked against the cited statements. Step 1: faces of Z_{m,n}. Step 2: rows Kan and discrete-base fibrations, unit gives rowwise weak equivalences, rowwise diagonal clause. Step 3: fiber map = R(postcomposition along b0->b_{a(0)}), homotopy-pullback squares over a discrete base, equifibered fiber clause with R as the functorial Kan replacement. Step 4: detection with v=id; k_b u_{RA}=a_b and h_b f_b=k_b R(u_A). Step 5: columns are N(Ue_n\\downarrow B) with an initial object; exchanged-direction clause. Step 6: prism cross arrows β_{0j}αU(e_i->e_n); homotopy direction qu->vr. Step 7: λ_s(t)=min(t/(1-s/2),1) fixes endpoints, then the cylinder-projection argument. Step 8: naturality, as the parent's Step 4 needs. On the immutable snapshot the closure has 158 nodes and no cycle: sharp-simplex-criterion and ex-infinity-finite-products now cite kan-quillen-model-right-proper-core. No new nodes; no duplicate found in the DAG (Thomason-Grothendieck and the ∞-cofinality nodes state different things). Two repairable faults, both fixed in fixes/dag/nodes/sec-six-functors/lem-coef-quillen-b-comma-homotopy-fiber.json. (1) Route/C8: lem-cbc-realization-singular-unit-weak (Steps 2, 4) and lem-cbc-simplicial-homotopy-equivalence-weak (Step 7) are statements of sk-prop-sf-cbc, outside the unit's route, and split_report.tool_uses was empty. I declared both, and I accept them as generic tools, as 27 sibling nodes including the parent already do. (2) split_report.summary claimed a current blocking cycle and pending maintenance; this is stale at this snapshot, so I rewrote it. No other field was changed.; 1 file(s) fixed by the reviewer"
+ }
 }
