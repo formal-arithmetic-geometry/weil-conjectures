@@ -546,10 +546,16 @@ invertible in `k` and `f : X ⟶ Y` separated of finite type between finite-type
 
 The blueprint deduces this from the finite-coefficient case
 `boundedConstructible_rightDerivedLowerShriek` by passing to the limit over the `ℤ/ℓⁿ` and
-inverting `ℓ`; that passage is not formalised. -/
+inverting `ℓ`; that passage is not formalised.
+
+As for `Rf_!` with finite coefficients, `Y` has to be quasi-compact: for the proper morphism
+`f : ⊔ₙ Xₙ ⟶ ⊔ₙ Spec k`, with `Xₙ` the union of the `n + 2` coordinate hyperplanes of `ℙⁿ⁺¹_k`,
+the constant sheaf has `Hⁿ(Xₙ, ℚ̄_ℓ) ≠ 0` (the nerve of the cover of `Xₙ` by its components is
+the boundary of an `(n + 1)`-simplex, and the components and their intersections are normal, so
+have no higher cohomology with rational coefficients), so `Rf_! ℚ̄_ℓ` is not bounded. -/
 theorem boundedConstructible_rightDerivedLowerShriek_padicAlgCl (l : ℕ) [Fact l.Prime]
     (hl : ringChar k ≠ l) (f : X ⟶ Y) [HasCompactification f] (aX : X ⟶ Spec (.of k))
-    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY]
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
     (hf : f ≫ aY = aX)
     (K : _root_.DerivedCategory
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l)))))

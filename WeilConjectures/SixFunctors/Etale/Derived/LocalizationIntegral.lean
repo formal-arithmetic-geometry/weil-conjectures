@@ -728,7 +728,7 @@ restriction of `Ri^!`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), under the
 hypotheses providing the exceptional adjunction `Ri_! ⊣ Ri^!` on `D(X_ét, Λ)`. -/
 noncomputable abbrev boundedConstructibleIntegralRightDerivedUpperShriek [IsDomain Λ]
-    [IsAdicComplete I Λ] [Finite (Λ ⧸ I)] (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    [IsAdicComplete I Λ] (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aZ] [QuasiCompact aZ]
     [IsSeparated aX] [IsSeparated aZ] [HasCompactification aX] [HasCompactification aZ]

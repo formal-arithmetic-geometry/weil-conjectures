@@ -105,18 +105,20 @@ noncomputable def symmetricAlgebraPresheaf : X.AffineZariskiSiteᵒᵖ ⥤ CommR
   map_id U := by
     ext1
     refine SymmetricAlgebra.ringHom_ext (fun r ↦ ?_) fun m ↦ ?_
-    · simp only [SymmetricAlgebra.mapSemilinear_algebraMap]
-      simp
-    · simp only [SymmetricAlgebra.mapSemilinear_ι, restrictSemilinear_apply]
+    · simp
+    · change SymmetricAlgebra.ι _ _ (M.presheaf.map (𝟙 _) m) = _
       simp
   map_comp {U V W} i j := by
     ext1
     refine SymmetricAlgebra.ringHom_ext (fun r ↦ ?_) fun m ↦ ?_
-    · simp only [CommRingCat.hom_comp, RingHom.comp_apply,
-        SymmetricAlgebra.mapSemilinear_algebraMap]
-      simp
-    · simp only [CommRingCat.hom_comp, RingHom.comp_apply, SymmetricAlgebra.mapSemilinear_ι]
-      simp
+    · simp <;> rfl
+    · simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.coe_comp,
+        Function.comp_apply, SymmetricAlgebra.mapSemilinear_ι]
+      change SymmetricAlgebra.ι _ _
+          (M.presheaf.map ((toOpensFunctor X).map (j.unop ≫ i.unop)).op m) =
+        SymmetricAlgebra.ι _ _ (M.presheaf.map ((toOpensFunctor X).map j.unop).op
+          (M.presheaf.map ((toOpensFunctor X).map i.unop).op m))
+      rw [Functor.map_comp, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
 
 /-- The structure map `𝒪_X ⟶ Sym_{𝒪_X}(M)`. -/
 @[simps]
@@ -126,7 +128,11 @@ noncomputable def toSymmetricAlgebraPresheaf :
     (SymmetricAlgebra Γ(X, U.unop.toOpens) Γ(M, U.unop.toOpens)))
   naturality {U V} i := by
     ext r
-    simp [symmetricAlgebraPresheaf]
+    simp only [Functor.comp_obj, Functor.op_obj, Functor.comp_map,
+      CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.coe_comp, Function.comp_apply]
+    exact (SymmetricAlgebra.mapSemilinear_algebraMap
+      (M.restrictSemilinear ((toOpensFunctor X).map i.unop)) (R := Γ(X, U.unop.toOpens))
+      (M := Γ(M, U.unop.toOpens)) (S := Γ(X, V.unop.toOpens)) (N := Γ(M, V.unop.toOpens)) r).symm
 
 /-- The augmentation `Sym_{𝒪_X}(M) ⟶ 𝒪_X`, which kills `M`. -/
 @[simps]
@@ -136,12 +142,15 @@ noncomputable def symmetricAlgebraPresheafAugmentation :
     (M := Γ(M, U.unop.toOpens))).toRingHom
   naturality {U V} i := by
     ext1
-    exact (SymmetricAlgebra.algebraMapInv_mapSemilinear _).symm
+    simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom]
+    exact SymmetricAlgebra.algebraMapInv_mapSemilinear
+      (M.restrictSemilinear ((toOpensFunctor X).map i.unop))
 
 lemma toSymmetricAlgebraPresheaf_comp_augmentation :
     M.toSymmetricAlgebraPresheaf ≫ M.symmetricAlgebraPresheafAugmentation = 𝟙 _ := by
   ext U r
-  simp [SymmetricAlgebra.algebraMapInv]
+  exact AlgHom.commutes (SymmetricAlgebra.algebraMapInv (R := Γ(X, U.unop.toOpens))
+    (M := Γ(M, U.unop.toOpens))) r
 
 variable [M.IsQuasicoherent]
 

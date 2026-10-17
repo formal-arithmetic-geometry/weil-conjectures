@@ -32,6 +32,10 @@ universe u' u
 
 open CategoryTheory Limits Pretriangulated
 
+open scoped CategoryTheory.Functor
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
 noncomputable section
 
 namespace AlgebraicGeometry
@@ -39,12 +43,11 @@ namespace AlgebraicGeometry
 open Scheme Etale Scheme.Hom
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [HasSmallSiteSheafify A]
 
 section Stalk
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-  (y : Spec (.of Ω) ⟶ Y)
+  (y : Spec (.of Ω) ⟶ Y) [HasSmallSiteSheafify A]
 
 /-- Blueprint `lemma-weil-pbc-finite-stalk-formula`: for a finite morphism `f : X ⟶ Y` and a
 geometric point `y` of `Y` with algebraically closed residue field, the restrictions of stalks
@@ -57,6 +60,7 @@ def Etale.stalkIsoBiproduct (G : Sheaf X.smallEtaleTopology A) :
       ⨁ fun t : GeometricFiber f y ↦ (pointSmallEtale t.1).sheafFiber.obj G :=
   Etale.stalkIsoPi A f y G ≪≫ (biproduct.isoProduct _).symm
 
+omit [HasSmallSiteSheafify A] in
 @[reassoc (attr := simp)]
 lemma Etale.stalkIsoBiproduct_hom_π (G : Sheaf X.smallEtaleTopology A)
     (t : GeometricFiber f y) :
@@ -92,8 +96,10 @@ theorem Etale.isZero_homology_rightDerivedFunctor_lowerStar_of_isFinite
     ((f)_*[A].mapDerivedCategorySingleFunctor 0).app G
   refine IsZero.of_iso ?_ ((DerivedCategory.homologyFunctor _ q).mapIso e)
   obtain hq | hq := hq.lt_or_gt
-  · exact DerivedCategory.isZero_of_isGE _ 0 q hq
-  · exact DerivedCategory.isZero_of_isLE _ 0 q hq
+  · exact DerivedCategory.isZero_of_isGE
+      ((DerivedCategory.singleFunctor _ 0).obj ((f)_*[A].obj G)) 0 q hq
+  · exact DerivedCategory.isZero_of_isLE
+      ((DerivedCategory.singleFunctor _ 0).obj ((f)_*[A].obj G)) 0 q hq
 
 end HigherDirectImage
 
