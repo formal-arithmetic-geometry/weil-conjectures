@@ -16,7 +16,8 @@
   "place": "Kerodon Proposition 3.4.0.7 (0329), together with Proposition 3.4.0.9 (032B), applied inductively to the finite endpoint-matched tower; the finite induction and strict endpoint compatibility are expanded here."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-iterated-pullback-fibrancy"
  ],
  "proof": [
   {
@@ -225,18 +226,19 @@
    "SSet.Enhanced.kan_iterated_chain_comparison"
   ],
   "file": "lean/Sheaf/AlgebraicTopology/KanIteratedChainComparison.lean",
-  "statement": "theorem kan_iterated_chain_comparison {B E : SSet.{u}} [B.KanComplex] [E.KanComplex] (s t : E ⟶ B) [Fibration s] [Fibration t] : ∀ n : ℕ, ∃ c : kanPullbackLevel s t n ⟶ kanHomotopyPullbackLevel s t n, IsWeakHomotopyEquivalence c ∧ c ≫ kanHomotopyPullbackEndpoint s t n = kanPullbackEndpoint s t n ∧ KanComplex (kanHomotopyPullbackLevel s t n)",
+  "statement": "theorem kan_iterated_chain_comparison {B E : SSet.{u}} [B.KanComplex] [E.KanComplex] (s t : E ⟶ B) [Fibration s] [Fibration t] : ∃ c : ∀ n : ℕ, kanPullbackLevel s t n ⟶ kanHomotopyPullbackLevel s t n, c 0 = 𝟙 E ∧ (∀ n : ℕ, c (n + 1) ≫ pullback.fst _ _ ≫ pullback.fst _ _ = pullback.fst (kanPullbackEndpoint s t n) s ≫ c n ∧ c (n + 1) ≫ pullback.fst _ _ ≫ pullback.snd _ _ = pullback.fst (kanPullbackEndpoint s t n) s ≫ kanPullbackEndpoint s t n ≫ constantDiagrams Δ[1] B ∧ c (n + 1) ≫ pullback.snd _ _ = pullback.snd (kanPullbackEndpoint s t n) s) ∧ (∀ n : ℕ, IsWeakHomotopyEquivalence (c n) ∧ c n ≫ kanHomotopyPullbackEndpoint s t n = kanPullbackEndpoint s t n ∧ KanComplex (kanHomotopyPullbackLevel s t n))",
   "branch": "newtargets-dag",
-  "by": "Q68",
+  "by": "Q159",
   "date": "2026-10-17",
-  "existing": false
+  "existing": false,
+  "note": "Repairs the previous existential-only interface: the family is specified by its identity base case and all three successor projection equations, including the constant path coordinate. These equations uniquely determine the actual constant-path comparisons. The node statement and tower constructions are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-0cc2cea0a",
-  "group": "Q68",
+  "reviewer": "NT-stage2-Codex-403002ff8",
+  "group": "Q159",
   "result": "pass",
-  "note": "Statement, source, dependencies, definitions, edge cases, docstrings, report sections, and exact Lean signature checked; scompile.py local/server compile passed."
+  "note": "Statement, dependencies, canonical path tower, docstrings, edge cases, source correspondence, and scompile evidence all checked; no fixes required."
  }
 }

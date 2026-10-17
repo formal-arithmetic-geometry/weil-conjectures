@@ -13,7 +13,10 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-proetale-operations",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
  "proof": [
   {
@@ -332,5 +335,35 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-242fd7494 (reviewer sub-agent of L); spot-checked: I read all of the item, its 9 steps and the statement of every one of its 19 dependencies. I also read the unit record, the blueprint thm-cbc-qbar.proof.md opening paragraph, and the parent's citing step. The statement is unchanged and true: the finite-free case of 0B56/0944, where S_Z≅R_Z^d follows by pullback, so both sides become (Rq_*M)^d. I tested d=0, S=R, q=id and the tower basis e_if_j, and checked the tower equation on generators using the ring-square hypothesis. Step 4: the mate is set up correctly (G=C_W, H=C_Z, L_1=L_R, L_2=L_S), and its transpose matches the definition of pi. Step 5: the adjunct identity of lem-weil-pbc-ring-sheaf-change-adjunction applies with all its hypotheses. Step 6: the inverse of the product comparison is correct and only conservativity is used. Step 9: clause (1) mate pasting plus transport along a_W, a_Z gives exactly the displayed equation, factor order checked. No new nodes. The rg duplicate search found nothing equivalent (lem-fix-compact-support-coefficient-change, lem-pur-compact-support-integral-coefficient-comparison, lem-sf-projection-finite-constant and lem-pd-module-ringed-topos-derived-comparison are all narrower or different). review_split passes. No SGA. I accept the 7 declared generic tool_uses. Two small repairs are in fixes/: Step 7 now shows that the K-flat-resolution shift of lem-weil-pbc-derived-adjunction-shift agrees with the termwise exact-functor shift (q^*(P[1])=(q^*P)[1]), citing def-weil-pbc-proetale-operations. Step 8 now writes out the transport of the mate along the multiplication isomorphisms m_W, m_Z, citing lem-weil-pbc-adjunction-of-natural-bijection. Both added citations were already in proof_deps; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bcec2936b",
+  "group": "N4",
+  "result": "fix",
+  "note": "Statement, dependencies, canonical maps, universes, edge cases and verbatim signature checked; compile reproduced cleanly. Fixed H11 by supplying an independent second reading in fixes/lem-sp-finite-free-direct-image-coherence.report.md. Details in review.md; no Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.finiteFreeDirectImageCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Presentation",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.ScalarModel",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.scalarCommShift",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.Coefficients",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.CoefficientMap",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.CoefficientMap.id",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.CoefficientMap.comp",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.balancing",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.comparison",
+   "AlgebraicGeometry.Scheme.FiniteFreeDirectImage.finiteFreeDirectImageCoherence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDirectImageCoherence.lean",
+  "statement": "theorem finiteFreeDirectImageCoherence {Z W : Scheme.{u}} (q : Z ⟶ W) : ∃ (sW : ScalarModel W) (sZ : ScalarModel Z), (∀ {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S), (sW.presentation a).derived.IsTriangulated ∧ NatTrans.CommShift (sW.presentation a).counit ℤ) ∧ (∀ {R S : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}} (a : R ⟶ S), (sZ.presentation a).derived.IsTriangulated ∧ NatTrans.CommShift (sZ.presentation a).counit ℤ) ∧ (∀ (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ), Nonempty ((proEtaleRingRestrictScalars a.target).obj (SheafOfModules.unit ((sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≅ SheafOfModules.free (R := (sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.target) (ULift.{u + 1} (Fin d))) → IsIso (comparison sW sZ a) ∧ NatTrans.CommShift (comparison sW sZ a) ℤ ∧ (proEtaleRingDerivedDirectImage q R.target R.source R.identification ⋙ (sW.presentation a.target).derived).IsTriangulated ∧ ((sZ.presentation a.source).derived ⋙ proEtaleRingDerivedDirectImage q S.target S.source S.identification).IsTriangulated) ∧ (∀ (R : Coefficients q) (M : DerivedCategory (proEtaleRingModules Z R.source)), (sW.unit R.target).inv.app ((proEtaleRingDerivedDirectImage q R.target R.source R.identification).obj M) ≫ (comparison sW sZ (CoefficientMap.id R)).app M ≫ (proEtaleRingDerivedDirectImage q R.target R.source R.identification).map ((sZ.unit R.source).hom.app M) = 𝟙 _) ∧ (∀ (R S B : Coefficients q) (a : CoefficientMap R S) (b : CoefficientMap S B) (d e : ℕ), Nonempty ((proEtaleRingRestrictScalars a.target).obj (SheafOfModules.unit ((sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target)) ≅ SheafOfModules.free (R := (sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R.target) (ULift.{u + 1} (Fin d))) → Nonempty ((proEtaleRingRestrictScalars b.target).obj (SheafOfModules.unit ((sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B.target)) ≅ SheafOfModules.free (R := (sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S.target) (ULift.{u + 1} (Fin e))) → ∀ M : DerivedCategory (proEtaleRingModules Z R.source), (comparison sW sZ (a.comp b)).app M = (sW.normalization.derived a.target b.target).inv.app ((proEtaleRingDerivedDirectImage q R.target R.source R.identification).obj M) ≫ (sW.presentation b.target).derived.map ((comparison sW sZ a).app M) ≫ (comparison sW sZ b).app ((sZ.presentation a.source).derived.obj M) ≫ (proEtaleRingDerivedDirectImage q B.target B.source B.identification).map ((sZ.normalization.derived a.source b.source).hom.app M))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

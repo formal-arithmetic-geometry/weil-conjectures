@@ -204,5 +204,23 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-a124179f9 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, sources, and route in full. Repaired C1/C2 and E4 issues: intermediate reduced atoms were incorrectly treated as open subschemes, and Noetherianness lacked supporting citations. Corrected JSON and review.md written; statement unchanged, no new nodes. Verified dependencies and 5,058 finite-set cases. Accepted affine-partition tool use.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3a9d4e33c",
+  "group": "NG",
+  "result": "pass",
+  "note": "Statement, dependencies, source, edge cases, docstrings, report sections, and per-file compilation all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianBooleanAffineRefinement",
+  "declaration": "AlgebraicGeometry.exists_noetherian_boolean_affine_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianBooleanAffineRefinement.lean",
+  "statement": "theorem exists_noetherian_boolean_affine_refinement {X : Scheme.{u}} [IsAffine X] [CompactSpace X] [IsLocallyNoetherian X] (r : ℕ) (C : Fin r → Scheme.{u}) (i : ∀ j, C j ⟶ X) [∀ j, IsClosedImmersion (i j)] : ∃ (n : ℕ) (R : Fin n → Scheme.{u}) (ι : ∀ α, R α ⟶ X), (∀ α, IsImmersion (ι α) ∧ IsAffine (R α) ∧ IsReduced (R α) ∧ IsLocallyClosed (Set.range (ι α))) ∧ Pairwise (fun α β : Fin n ↦ Disjoint (Set.range (ι α)) (Set.range (ι β))) ∧ (∀ x : X, ∃ α, x ∈ Set.range (ι α)) ∧ ∀ (α : Fin n) (j : Fin r), Set.range (pullback.snd (i j) (ι α)) = ∅ ∨ Set.range (pullback.snd (i j) (ι α)) = Set.univ",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
