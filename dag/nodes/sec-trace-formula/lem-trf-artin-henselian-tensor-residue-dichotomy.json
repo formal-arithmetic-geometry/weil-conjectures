@@ -181,7 +181,7 @@
   ],
   "statement": "theorem artin_henselian_tensor_residue_dichotomy (R B₁ B₂ : Type u) [CommRing R] [CommRing B₁] [CommRing B₂] [Algebra R B₁] [Algebra R B₂] [Algebra.IndEtale R B₁] [Algebra.IndEtale R B₂] (h₁ : ∀ x : PrimeSpectrum B₁, HenselianLocalRing (AlgebraicGeometry.componentRing B₁ x)) (h₂ : ∀ x : PrimeSpectrum B₂, HenselianLocalRing (AlgebraicGeometry.componentRing B₂ x)) : (∀ x : PrimeSpectrum (TensorProduct R B₁ B₂), HenselianLocalRing (AlgebraicGeometry.componentRing (TensorProduct R B₁ B₂) x) ∧ Set.range (AlgebraicGeometry.componentSpectrumMap (TensorProduct R B₁ B₂) x) = connectedComponent x) ∧ ∀ (m : Ideal (TensorProduct R B₁ B₂)) [m.IsMaximal], Ideal.IsSepClosedQuotient m ‹m.IsMaximal› ∨ (∃ (n : Ideal B₁), ∃ hn : n.IsMaximal, n = m.comap Algebra.TensorProduct.includeLeftRingHom ∧ ∃ f : (B₁ ⧸ n) →+* ((TensorProduct R B₁ B₂) ⧸ m), f.comp (Ideal.Quotient.mk n) = (Ideal.Quotient.mk m).comp Algebra.TensorProduct.includeLeftRingHom ∧ f.IsSeparableAlgebraic n m hn ‹m.IsMaximal›) ∨ (∃ (n : Ideal B₂), ∃ hn : n.IsMaximal, n = m.comap Algebra.TensorProduct.includeRight.toRingHom ∧ ∃ f : (B₂ ⧸ n) →+* ((TensorProduct R B₁ B₂) ⧸ m), f.comp (Ideal.Quotient.mk n) = (Ideal.Quotient.mk m).comp Algebra.TensorProduct.includeRight.toRingHom ∧ f.IsSeparableAlgebraic n m hn ‹m.IsMaximal›)",
   "branch": "newtargets-dag",
-  "by": "NU",
+  "by": "NB",
   "date": "2026-10-18",
   "file": "lean/Sheaf/AlgebraicGeometry/ArtinHenselianTensorResidueDichotomy.lean",
   "existing": false,
@@ -191,9 +191,9 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-fca212c11",
-  "group": "NU",
+  "reviewer": "NT-stage2-Codex-be98962b3",
+  "group": "NB",
   "result": "fix",
-  "note": "Statement matches node clause by clause: ind-etale factors (Algebra.IndEtale, same universe forced by the recorded class), henselian local component rings via points, range clause = Z, both conclusions, dichotomy with n = m.comap of includeLeft/includeRight, the commuting square and IsAlgebraic ∧ IsSeparable. No extra hypotheses; B=0 and Bj=0 vacuous; Hübner–Schmidt PDF not available locally, so checked against the node. H4 fixed: the delivered PrimeSpectrum.componentIdeal/componentRing/commRing duplicated AlgebraicGeometry.componentIdeal/componentRing/componentSpectrumMap, already in the delivery's base (05b876bbde, lem-trf-affine-etale-cover-component-criterion, Sheaf.TraceFormula.AffineEtaleCoverComponentCriterion); fixed module imports and uses them. H8 fixed: docstring now lists the node's six proof steps. Unused Mathlib.AlgebraicGeometry.Scheme import dropped. Delivered and fixed files both compile clean via nt_compile.py; check_lean_text passes. fixes/: ArtinHenselianTensorResidueDichotomy.lean, lem-trf-artin-henselian-tensor-residue-dichotomy.lean-record.json, lem-trf-artin-henselian-tensor-residue-dichotomy.report.md."
+  "note": "Mathematics, source, dependency interfaces, universes, edge cases, and statement record checked. Added one required proof-dependency import; complete replacement module and report are in fixes/. Original and corrected modules compile successfully through scompile.py. Full findings are in review.md; snapshot and branch head unchanged."
  }
 }
