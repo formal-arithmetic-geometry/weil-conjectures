@@ -54,13 +54,6 @@ objects of `Over (Spec (.of k))` and `p` a morphism of `Over (Spec (.of k))`.
 
 @[expose] public section
 
--- Keep elaboration from expanding the K-injective internal-Hom and coefficient pullback
--- constructions while checking the definitions and proofs in this module.
-attribute [local irreducible] DerivedCategory.monoidalClosed
-  CategoryTheory.Mod.monoidalClosed AlgebraicGeometry.ProEtale.upperStarFromPoint
-
-attribute [local instance 2000] CategoryTheory.ObjectProperty.fullMonoidalSubcategory
-
 universe u
 
 open CategoryTheory MonoidalCategory MonoidalClosed

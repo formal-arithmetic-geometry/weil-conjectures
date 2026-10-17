@@ -15855,4 +15855,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:16 L: merged deliver/A2/Sheaf.CategoryTheory.DerivedPerfectSmallClass (stage 3; reviewer PASS; first push; landing 20261017T171631-L-4161371 (interface); batch 20261017T171628; modules 3; new nodes 2)
 - 18:25 L: merged deliver/B4/Sheaf.Paper.IntegralResidueTensorRouteModel (stage 3; reviewer PASS; first push; landing 20261017T182557-L-1569109 (interface); batch 20261017T182552; modules 1; new nodes 1; change records: coord/changes/integral-residue-tensor-route-model.md)
 - 18:31 L: returned deliver/C3/WeilConjectures.PoincareDuality.ProjectionFormula (reviewer RETURN: (the landing tools, head 8a654f430) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
-- 18:31 L: merged deliver/B3/WeilConjectures.PoincareDuality.Poincare (stage 3; reviewer PASS; first push; landing 20261017T183135-L-1718844 (interface); batch 20261017T183131; modules 1; new nodes 0; change records: coord/changes/B3-poincare-local-reducibility.md)
+
+- 02:37 L: batch 20261017T183131 dependency take-out
