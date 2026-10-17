@@ -169,6 +169,7 @@ lemma connecting_comp_eq_zero (α : LimitStage B W) (n₀ n₁ : ℤ) (h : n₀ 
   (DerivedCategory.Plus.homologyFunctor _ 0).comp_homologySequenceδ _
     ((functor Λ α).map_distinguished _ hT) n₀ n₁ h
 
+set_option maxHeartbeats 4000000 in
 /-- The transition maps commute with the connecting maps. -/
 lemma connecting_naturality {α β : LimitStage B W} (φ : Hom α β) (n₀ n₁ : ℤ)
     (h : n₀ + 1 = n₁) :
