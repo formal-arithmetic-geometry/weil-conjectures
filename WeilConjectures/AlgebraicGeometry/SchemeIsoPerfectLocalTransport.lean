@@ -154,21 +154,21 @@ theorem scheme_iso_local_perfect_transport {X Y : Scheme.{u}}
     (K : CochainComplex
       (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V)) ℤ)
     (hK : IsStrictlyPerfect Y V K)
-    (hE : Nonempty ((SheafOfModules.overFunctor
+    (hE : Nonempty ((SheafOfModules.overFunctor.{u}
       (moduleRings Y.toRingedSpace) V).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K)) :
     ∃ U : X.Opens, x ∈ U ∧
       ∃ K' : CochainComplex
           (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,
         IsStrictlyPerfect X U K' ∧
-        Nonempty ((SheafOfModules.overFunctor
+        Nonempty ((SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (e.inverse.obj E) ≅
           DerivedCategory.Q.obj K') := by
   obtain ⟨eO, hA, hB, ⟨square⟩, ⟨inverseIso⟩⟩ := localRestrictionSquare s e he V
   have : eO.functor.Additive := hA
   have : eO.inverse.Additive := hB
   let d := eO.mapDerivedCategory
-  let RX := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) (s.hom ⁻¹ᵁ V)
-  let RY := SheafOfModules.overFunctor (moduleRings Y.toRingedSpace) V
+  let RX := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (s.hom ⁻¹ᵁ V)
+  let RY := SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V
   let F := Modules.localizedPullback s.hom V
   let K' := (F.mapHomologicalComplex (.up ℤ)).obj K
   refine ⟨s.hom ⁻¹ᵁ V, hx, K',
