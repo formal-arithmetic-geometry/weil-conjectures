@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 public import WeilConjectures.AlgebraicGeometry.AbelianCounitResolutionCalculation
-import WeilConjectures.Algebra.Homology.KInjectiveComparisonPrinciple
+import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
 @[expose] public section
 universe u
@@ -27,8 +27,8 @@ private theorem lift_to_nat_injective
   let R' : CochainComplex C ℤ := R.extend e
   let : R'.IsKInjective := CochainComplex.isKInjective_of_injective R' 0
   let := HasDerivedCategory.standard C
-  have hbij := CochainComplex.IsKInjective.precomp_bijective_of_quasiIso
-    (HomologicalComplex.extendMap l e) R'
+  have hbij := CochainComplex.IsKInjective.bijective_quotient_map_comp (J := R')
+      (HomologicalComplex.extendMap l e)
   obtain ⟨k, hk⟩ := hbij.surjective (q.map (HomologicalComplex.extendMap r e))
   obtain ⟨k, rfl⟩ := q.map_surjective k
   obtain ⟨k, rfl⟩ := (e.extendFunctor C).map_surjective k
@@ -48,8 +48,8 @@ private theorem homotopy_of_comp_nat_injective
   let R' : CochainComplex C ℤ := R.extend e
   let : R'.IsKInjective := CochainComplex.isKInjective_of_injective R' 0
   let := HasDerivedCategory.standard C
-  have hbij := CochainComplex.IsKInjective.precomp_bijective_of_quasiIso
-    (HomologicalComplex.extendMap l e) R'
+  have hbij := CochainComplex.IsKInjective.bijective_quotient_map_comp (J := R')
+      (HomologicalComplex.extendMap l e)
   refine ⟨Homotopy.ofExtend (e := e) (HomotopyCategory.homotopyOfEq _ _ ?_)⟩
   apply hbij.injective
   simpa only [HomologicalComplex.extendMap_comp, Functor.map_comp] using
