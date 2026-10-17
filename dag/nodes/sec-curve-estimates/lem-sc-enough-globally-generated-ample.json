@@ -152,18 +152,17 @@
   "file": "lean/Sheaf/AlgebraicGeometry/ExistsAmpleOfEnoughGloballyGenerated.lean",
   "statement": "theorem exists_isAmple_of_enough_globallyGenerated (X : Scheme.{u}) [CompactSpace X] (h : ∀ x : X, ∃ L : X.Modules, L.IsInvertible ∧ Nonempty (SheafOfModules.GeneratingSections L) ∧ ∃ s : L.val.presheaf.obj (Opposite.op ⊤), ∃ U : X.Opens, (U : Set X) = nonvanishingLocus L s ∧ x ∈ U ∧ IsAffineOpen U) : ∃ (L : X.Modules) (hL : L.IsInvertible), @IsAmple X L hL",
   "branch": "newtargets-dag",
-  "by": "Q24",
+  "by": "NU",
   "date": "2026-10-17",
-  "existing": false,
-  "note": "Restores the withdrawn interface after upstream sync e47efb5a5: same statement, stage-2 sorry proof, and proof-only import of the upstream AmpleIso module. No use of the unavailable private nonvanishingLocus_iso helper."
+  "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-a0b03afc1",
-  "group": "Q24",
+  "reviewer": "NT-stage2-cc-1d725c4e5",
+  "group": "NU",
   "result": "pass",
-  "note": "Statement matches Stacks 09NC and the node clause by clause: CompactSpace X; for each x, an IsInvertible L with Nonempty GeneratingSections, a top section s and U with U = nonvanishingLocus L s, x ∈ U, IsAffineOpen U; conclusion ∃ L hL, @IsAmple X L hL (project def confirmed by #check). No extra hypotheses; one explicit universe u. Empty-scheme, zero-section and empty-generator cases checked. Only the lean record changed; lean.statement matches the file verbatim. Single sorry theorem, no definitions; source/blueprint docstrings present and the 4-step proof in the docstring. Stale import all and private nonvanishingLocus_iso reference removed. Consumer IntegralDimOneAmple.lean:53 is compatible with the unchanged signature. No existing Mathlib/project version found. nt_compile on the local side overlay: clean, 1.7 s; axioms propext/sorryAx/choice/Quot.sound. No findings."
+  "note": "Lean signature matches node/Stacks 09NC clause by clause: Scheme.{u} with explicit universe, CompactSpace, ∀ x, invertible L, Nonempty GeneratingSections (arbitrary index, no extra finiteness), global section s, U with (U:Set X)=nonvanishingLocus L s, x∈U, IsAffineOpen U, conclusion ∃ invertible L with recorded IsAmple. No extra hypotheses. Edge cases (empty X, affine X, zero section, empty index) are fine. Node diff vs side clone: only the lean field. lean.statement matches the file verbatim. Signature identical to the withdrawn M1 version, so consumer IntegralDimOneAmple is unaffected. Retired Sheaf AmpleIso import replaced by WeilConjectures.AlgebraicGeometry.AmpleIso. Proof is sorry only, docstrings carry source and blueprint tag and the proof route, report has Worker report and Second reading by NU. nt_compile.py --json on the snapshot file: rc 0, 1.8 s, no errors or warnings. No findings."
  },
  "lean_audit": {
   "master": {

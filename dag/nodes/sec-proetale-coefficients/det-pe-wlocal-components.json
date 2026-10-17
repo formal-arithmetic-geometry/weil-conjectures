@@ -271,5 +271,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7aa9d8af4",
+  "group": "Q96",
+  "result": "pass",
+  "note": "All four clauses of det-pe-wlocal-components match the node and Stacks 096A/0968 hypothesis by hypothesis and clause by clause. Closed points are profinite. The retraction r is pinned to the closed specialization and is continuous, with fibres = components = generalizations, the specified composite T^c -> pi0(T) a homeomorphism, and pi0 profinite. The converse holds and the space- and ring-level w-local agreement keeps closedness explicit. The clause-4 component equals the range of PrimeSpectrum.comap of the algebraMap to Localization.AtPrime m. No extra hypotheses; universes u and v are independent; the specialization direction is correct. Edge cases checked: empty space, zero ring, local ring, product of fields, non-unique specialization. Gates: the delivery has only 3 files and the node differs from the base only in lean. The statement is verbatim, there are no definitions, the proof is sorry only, and the docstrings carry the source places and blueprint tag. The recorded WLocalSpace and IsWLocalRing are reused, with no duplicates, and the report has the Worker report and Second reading by Q96 sections. nt_compile.py --json: rc 0, no errors or warnings, module compiled in 1.3 s. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.WLocalComponents",
+  "declaration": "WLocalSpace.spectralSpace_closedPoints_components",
+  "file": "lean/Sheaf/Topology/WLocalComponents.lean",
+  "statement": "theorem spectralSpace_closedPoints_components (T : Type u) [TopologicalSpace T] [SpectralSpace T] (hclosed : IsClosed (closedPoints T)) : (CompactSpace (closedPoints T) ∧ T2Space (closedPoints T) ∧ TotallyDisconnectedSpace (closedPoints T)) ∧ ((∀ x : T, ∃! c : closedPoints T, x ⤳ c.val) → (∃ r : T → closedPoints T, Continuous r ∧ (∀ x : T, x ⤳ (r x).val) ∧ (∀ c : closedPoints T, r c.val = c) ∧ ∀ c : closedPoints T, r ⁻¹' {c} = connectedComponent c.val ∧ connectedComponent c.val = {x : T | x ⤳ c.val}) ∧ IsHomeomorph (ConnectedComponents.mk ∘ (Subtype.val : closedPoints T → T)) ∧ CompactSpace (ConnectedComponents T) ∧ T2Space (ConnectedComponents T) ∧ TotallyDisconnectedSpace (ConnectedComponents T)) ∧ ((∀ x : T, ∃! c : closedPoints T, c.val ∈ connectedComponent x) → ∀ x : T, ∃! c : closedPoints T, x ⤳ c.val) ∧ (WLocalSpace T ↔ ∀ x : T, ∃! c : closedPoints T, c.val ∈ connectedComponent x) ∧ (∀ (R : Type v) [CommRing R], IsWLocalRing R ↔ IsClosed (closedPoints (PrimeSpectrum R)) ∧ ∀ x : PrimeSpectrum R, ∃! c : closedPoints (PrimeSpectrum R), c.val ∈ connectedComponent x) ∧ (∀ (R : Type v) [CommRing R] [IsWLocalRing R] (m : Ideal R) [m.IsMaximal], connectedComponent (⟨m, inferInstance⟩ : PrimeSpectrum R) = Set.range (PrimeSpectrum.comap (algebraMap R (Localization.AtPrime m))))",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
