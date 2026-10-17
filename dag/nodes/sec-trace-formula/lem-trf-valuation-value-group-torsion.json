@@ -224,5 +224,23 @@
   "group": "Q105",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-6db617960 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full; I made no changes and wrote no fixes. The delivery has no new nodes, the statement and stmt_deps are unchanged, and proof_deps=[def-weil-algebraic-element] (Mathlib leaf IsAlgebraic). Source checks: Stacks more-algebra.tex lemma-inequality-general (0ASH, lines 37334-37374) normalizes a vanishing sum at its minimal term, and lemma-etale-extension-valuation-ring (0ASJ, line 37480, first proof paragraph) supplies f = w h^n from finite index. The node uses the 0ASH idea directly on the polynomial of x and is correctly marked agent-written. Each step checks out: (1) nonunits M times V stays in M, with 0 and -r in M; (2) M is closed under addition through r+s = s(1+r/s); (3) a nonzero polynomial with x≠0 gives at least two nonzero terms; (4) a finite selection finds a term dividing all others; (5) the sum of the other ratios is -1, so some ratio is a unit; (6) both orders i>j and i<j give x^|i-j| = a u with a in K^× and u a unit; (7) V^× is a subgroup, so the class of x has finite order over K^×. Small cases tested: V=E; E=K; Q(√2) at 2 with x^2=2; T^p-a in characteristic p; higher-rank V; infinite algebraic E/K. No hypothesis is missing and no target is weakened. The parent lem-trf-valuation-algebraic-height Step 5 uses exactly the conclusion x^n = a u, and the item does not cite the parent, so there is no cycle. An rg search of the DAG for value group, 0ASH/0ASJ and power-times-unit wording found no duplicate. No off-unit statement is used, so there are no tool_uses. The 13 recorded Mathlib searches across three kinds of tool are adequate. One harmless wording slip: the report mentions a citations.json that the commit does not contain."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ValuationValueGroupTorsion",
+  "declaration": "WeilConjectures.algebraic_extension_value_group_torsion",
+  "file": "lean/Sheaf/RingTheory/ValuationValueGroupTorsion.lean",
+  "statement": "theorem algebraic_extension_value_group_torsion (K : Type u) (E : Type v) [Field K] [Field E] [Algebra K E] [Algebra.IsAlgebraic K E] (V : Subring E) (hV : ∀ z : E, z ≠ 0 → z ∈ V ∨ z⁻¹ ∈ V) : ∀ x : E, x ≠ 0 → ∃ n : ℕ, 0 < n ∧ ∃ a : K, a ≠ 0 ∧ ∃ u : E, u ≠ 0 ∧ u ∈ V ∧ u⁻¹ ∈ V ∧ x ^ n = algebraMap K E a * u",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-58ba5e339",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Statement and dependencies match; source and edge cases checked; scompile.py passed with local overlay and server confirmation; no findings."
  }
 }

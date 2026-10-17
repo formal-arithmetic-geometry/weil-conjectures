@@ -290,10 +290,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d48e74b5f",
-  "group": "Q38",
+  "reviewer": "NT-stage2-Codex-5dbb35ec3",
+  "group": "Q28",
   "result": "pass",
-  "note": "Read node, 5 stmt deps (CoherentTopos, GeometricMorphism, SiteCoveringAxioms sources), module, report, Gabber XI Lemma 2.5 (pp.178-179). Lean matches every clause: finite-limit small site via Precoverage+IsSiteForCoverings+finite presieves, topology toGrothendieck, H_U = presheafToSheaf(uliftYoneda) without subcanonicity; conclusions: IsCoherentTopos, each H_U coherent, generation via epi Sigma.desc, an ObjectProperty containing H_U, all coherent, closed under finite limits (equivalent to closure coherent), and the inverse-image criterion concluding IsCoherentGeometricMorphism. No extra hypotheses. pp.universes check: .{max u v w} instantiates the coproduct universe; all universes bound. Statement field verbatim; only the lean field changed; sorry-only proof; docstrings carry source and blueprint; no duplicate found. nt_compile clean (3.9 s); scratch #check/#print axioms clean. Second-reading section is the direct-delivery placeholder; this review is the independent reading."
+  "note": "Statement, dependencies, universes, edge cases, docstrings, report sections, route-pivot compliance, and per-file compilation all checked."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.FinitarySiteCoherentGenerators",
@@ -301,8 +301,8 @@
   "file": "lean/Sheaf/TraceFormula/FinitarySiteCoherentGenerators.lean",
   "statement": "theorem finitarySiteCoherentGenerators {C : Type u} [Category.{v} C] [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (hfinite : ∀ (X : C) (R : Presieve X), R ∈ J X → R.uncurry.Finite) : ∃ hE : IsCoherentTopos.{max u v w} (Sheaf J.toGrothendieck (Type (max u v w))), (∀ (U : C), IsCoherentObject.{max u v w} ((presheafToSheaf J.toGrothendieck (Type (max u v w))).obj (uliftYoneda.{max u w}.obj U))) ∧ (∀ (X : Sheaf J.toGrothendieck (Type (max u v w))), ∃ (I : Type (max u v w)) (U : I → C) (f : ∀ i, (presheafToSheaf J.toGrothendieck (Type (max u v w))).obj (uliftYoneda.{max u w}.obj (U i)) ⟶ X), Epi (Sigma.desc f)) ∧ (∃ (P : ObjectProperty (Sheaf J.toGrothendieck (Type (max u v w)))), (∀ (U : C), P ((presheafToSheaf J.toGrothendieck (Type (max u v w))).obj (uliftYoneda.{max u w}.obj U))) ∧ (∀ X, P X → IsCoherentObject.{max u v w} X) ∧ ∀ (K : Type) [SmallCategory K] [FinCategory K], P.IsClosedUnderLimitsOfShape K) ∧ (∀ (E' : Type u') [Category.{v'} E'] [HasCoproducts.{max u v w} E'] [HasFiniteLimits E'] (hE' : IsCoherentTopos.{max u v w} E') (f : GeometricMorphism E' (Sheaf J.toGrothendieck (Type (max u v w)))), (∀ (U : C), IsCoherentObject.{max u v w} (f.inverse.obj ((presheafToSheaf J.toGrothendieck (Type (max u v w))).obj (uliftYoneda.{max u w}.obj U)))) → IsCoherentGeometricMorphism hE' hE f)",
   "branch": "newtargets-dag",
-  "by": "Q38",
-  "date": "2026-10-17",
+  "by": "Q28",
+  "date": "2026-10-18",
   "existing": false
  }
 }
