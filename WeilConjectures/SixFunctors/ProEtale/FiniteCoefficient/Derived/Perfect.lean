@@ -488,6 +488,7 @@ theorem isLocallyPerfect_of_isDualizable [IsNoetherianRing Λ]
 
 set_option maxHeartbeats 1000000 in
 -- the kernel checks the instances of the derived projection formula
+set_option maxHeartbeats 1000000 in
 omit [Finite Λ] in
 /-- Locally perfect objects are dualizable (`sk-def-perfect`): dualizability is local for the
 pro-étale topology, and a bounded complex of finite projective modules is dualizable.
