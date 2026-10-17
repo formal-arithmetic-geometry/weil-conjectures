@@ -1,0 +1,123 @@
+{
+ "id": "new-stage3-coherent-formal-quotients-affine-sections",
+ "kind": "statement",
+ "title": "Affine section finiteness from a formal quotient and torsion kernel",
+ "statement": "Let X be affine Noetherian, J an ideal sheaf, F quasi-coherent, H coherent, and a : F -> H. Let s >= 1. If the quotient F/J^s F (the formal completion component at index s-1) is coherent and J^s annihilates kernel(a), then Gamma(U,F) is finite over Gamma(U,O_X) for every affine open U.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), finiteness paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open U, quasi-coherent affine section and quotient comparisons identify the formal quotient with P/(J(U)^s P), and identify the kernel annihilation with annihilation of the kernel of the section map. The coherent quotient and target have finite sections.",
+   "uses": [
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-ideal-power-product-zero-affine-cover",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the existing private lemmas exists_fg_lift and finite_of_quotient_and_torsion_kernel in the assigned module: lift finite generating families of the image and quotient to L1 and L2. Since I kills the kernel, I P is contained in L1. Since L2 maps onto P/I P, P=I P+L2, hence P=L1+L2 is finite.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-ideal-power-product-zero-affine-cover",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "date": "2026-10-17",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Tag 0889(1), finiteness paragraph"
+  },
+  "note": "Affine section finiteness is the strict affine component of the global coherence argument. Repair: the bridge lives beside and reuses the original private finite-generator lemmas; no duplicate copies are introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite affine sections from coherent formal quotient and annihilated kernel",
+   "results": "No exact match; relevant affine finite section and quotient declarations found in the source library.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite quotient kernel annihilator affine sections",
+   "results": "No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalModuleQuotient.*Module.Finite|torsion.*kernel.*coherent",
+   "results": "No exact existing theorem; used multiplication_range and affine cokernel declarations.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKernel",
+  "date": "2026-10-17",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-of-formal-quotients-torsion-kernel",
+   "place": "affine finiteness paragraph"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentOfFormalQuotientsAndTorsionKernel.lean",
+  "declaration": "AlgebraicGeometry.finite_sections_of_formalQuotient_and_torsionKernel",
+  "statement": "theorem finite_sections_of_formalQuotient_and_torsionKernel\n    {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)\n    (F : X.Modules) [F.IsQuasicoherent] (H : CoherentModules X) (a : F ⟶ H.obj)\n    (s : ℕ) (hs : 1 ≤ s)\n    (hquot : RingedSpace.IsCoherent X.toRingedSpace\n      (((formalCompletionFunctor J).obj F).obj (op (s - 1))))\n    (hker : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n      (kernel a))) (U : X.affineOpens) :\n    Module.Finite Γ(X, U.1) Γ(F, U.1)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261017T003419-L-3314440",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261017T003419-L-3314440",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
