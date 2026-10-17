@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-fixed-map-proper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The induced map of fixed schemes is proper",
@@ -19,40 +19,127 @@
  ],
  "proof": [
   {
-   "text": "Put $G=C\\times_DF_b$, with projections $\\pi:G\\to F_b$ and\n$j:G\\to C$. By [def-trf-fixed-scheme],\n$F_b=D\\times_{Y\\times_sY,\\Delta_Y}Y$, so a $T$-point of $G$ is a pair\n$(t,y)$ of $t\\in C(T)$ and $y\\in Y(T)$ with $b(g(t))=(y,y)$, i.e. with\n$fc_1(t)=y=fc_2(t)$. Hence $(c_1,c_2)\\circ j$ factors through\n$X\\times_YX\\subset X\\times_sX$, giving a morphism $\\lambda:G\\to X\\times_YX$.\nThe morphism $X\\times_YX\\to X\\times_sX$ is a monomorphism (it is the base\nchange of the monomorphism $\\Delta_Y$). Therefore a $T$-point of\n$G\\times_{X\\times_YX,\\lambda,\\Delta_{X/Y}}X$ is a pair $((t,y),x)$ with\n$(c_1t,c_2t)=(x,x)$, and then $y=fx$ is determined; that is, exactly a\npair $(t,x)$ with $c(t)=\\Delta_X(x)$, which is a $T$-point of\n$F_c=C\\times_{X\\times_sX,c,\\Delta_X}X$. These identifications are natural\nin $T$, so\n\n$$\nF_c\\cong G\\times_{X\\times_YX,\\Delta_{X/Y}}X,\n$$\n\nand the first projection $\\kappa:F_c\\to G$, $\\kappa=(i_c,f d_c)$, is the\nbase change of $\\Delta_{X/Y}$. Since $\\pi\\kappa=(g i_c,fd_c)$ as a map to\n$D\\times_{Y\\times_sY}Y$, the identities $i_bh=gi_c$, $d_bh=fd_c$ of\n[def-trf-coefficient-pushforward] give $\\pi\\kappa=h$. This is (1),\nexcept for the closed immersion claim.",
+   "text": "The proper-pushforward-diagram data in [def-trf-coefficient-pushforward] give proper morphisms $f:X\\to Y$ and $g:C\\to D$ with $b_ig=fc_i$ for $i=1,2$. Its clause \"The induced map of fixed schemes\" defines $h$ by the two identities $i_bh=gi_c$ and $d_bh=fd_c$; no properness of $h$ is taken from that definition. Put $G=C\\times_DF_b$, with projections $\\pi:G\\to F_b$ and $j:G\\to C$. The current definition [def-trf-fixed-scheme] gives $F_b=D\\times_{Y\\times_sY,b,\\Delta_Y}Y$ and $b_1i_b=d_b=b_2i_b$. The fibre-product relation of [def-pc-fibre-product] gives $gj=i_b\\pi$, while [def-trf-coefficient-pushforward] gives $b_ig=fc_i$. We have $fc_1j=b_1gj=b_1i_b\\pi=d_b\\pi=b_2i_b\\pi=b_2gj=fc_2j$. Thus the universal property in [def-pc-fibre-product] gives $\\lambda=(c_1j,c_2j):G\\to X\\times_YX$.\n\nPut $H=G\\times_{X\\times_YX,\\lambda,\\Delta_{X/Y}}X$. For every test scheme $T$, a map $T\\to H$ is a triple $(t,y,x)$ where $t:T\\to C$, $y:T\\to Y$, $x:T\\to X$, with $fc_1t=y=fc_2t$ and $c_1t=x=c_2t$: equality in $X\\times_YX$ is exactly equality of both projections by [def-pc-fibre-product]. A map $T\\to F_c$ is a pair $(t,x)$ with $c_1t=x=c_2t$. The mutually inverse assignments are $(t,y,x)\\mapsto(t,x)$ and $(t,x)\\mapsto(t,fx,x)$; their composites are identities since $y=fx$. Equivalently these formulas define inverse morphisms by the fibre-product universal properties. Hence $F_c\\cong H$, compatibly with the maps to $G$ and $X$.\n\nThe first projection $\\kappa:F_c\\to G$ is therefore a base change of $\\Delta_{X/Y}$. Its projection to $C$ is $i_c$. The composites of $\\pi\\kappa$ with $i_b$ and $d_b$ are $gi_c$ and $fd_c$, respectively. These are also the composites of $h$ by [def-trf-coefficient-pushforward], so uniqueness in the defining fibre product of $F_b$ gives $\\pi\\kappa=h$. This proves the factorization and base-change assertion of (1).",
    "uses": [
     "def-trf-fixed-scheme",
-    "def-trf-coefficient-pushforward"
+    "def-trf-coefficient-pushforward",
+    "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-proper-pushforward/lem-trf-fixed-map-proper.proof.md",
+    "place": "Proof, first paragraph"
+   }
   },
   {
-   "text": "The proper $f$ is separated, so $\\Delta_{X/Y}$ is a closed immersion\n([def-weil-scheme-morphism-properties]), and so is its base change\n$\\kappa$. Closed immersions are proper\n([lem-weil-pbc-closed-immersion-proper]); $\\pi$ is proper as a base change\nof the proper $g$, and $h=\\pi\\kappa$ is proper as a composite\n([lem-kun-proper-stability]). Finally\n$q=(f\\times\\operatorname{id}_Y)\\circ(\\operatorname{id}_X\\times f)$ is a\ncomposite of base changes of $f$, hence proper by\n[lem-kun-proper-stability]. This proves (2). The last assertion is the\ndefinition of [def-trf-borel-moore-pushforward] applied to the proper $h$,\n$T=F_c$, $T'=F_b$ and $\\alpha=\\operatorname{Tr}_c(u)$.",
+   "text": "By the definition of properness and separatedness in [def-weil-proper-morphism], the proper $f$ has closed-immersion diagonal $\\Delta_{X/Y}$. Its base change $\\kappa$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], completing (1), and is proper by [lem-weil-pbc-closed-immersion-proper]. The map $\\pi$ is the base change of the proper $g$, so $h=\\pi\\kappa$ is proper by base-change and composition stability [lem-kun-proper-stability]. Also $\\operatorname{id}_X\\times f:X\\times_sX\\to X\\times_sY$ is the base change of $f$ along the second projection $X\\times_sY\\to Y$, and $f\\times\\operatorname{id}_Y:X\\times_sY\\to Y\\times_sY$ is the base change of $f$ along the first projection $Y\\times_sY\\to Y$. Their composite is $q=f\\times f$, so [lem-kun-proper-stability] proves (2).\n\nThe current [def-trf-admissibility] specifies the constructible exceptional inverse image and its adjunction for separated finite-type morphisms of finite-type $k$-schemes. The assumed exceptional admissibility of the structure maps of $F_c,F_b$ therefore places these schemes in this domain, with the specified adjunction data; no strong ambient exceptional-adjoint datum is used. By [def-trf-trace-class], $\\operatorname{Tr}_c(u)$ is a morphism $A_{F_c}\\to\\omega_{F_c}$. All hypotheses of [def-trf-borel-moore-pushforward] now hold: $h$ is proper, and $h$ and the two structure morphisms are exceptionally admissible by assumption. Applying that definition with $T=F_c$, $T'=F_b$ and $\\alpha=\\operatorname{Tr}_c(u)$ gives the stated pushforward.",
    "uses": [
-    "def-weil-scheme-morphism-properties",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
     "lem-weil-pbc-closed-immersion-proper",
     "lem-kun-proper-stability",
+    "def-trf-admissibility",
+    "def-trf-trace-class",
     "def-trf-borel-moore-pushforward"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-proper-pushforward/lem-trf-fixed-map-proper.proof.md",
+    "place": "Proof, second paragraph"
+   }
   }
  ],
  "proof_deps": [
   "def-trf-fixed-scheme",
   "def-trf-coefficient-pushforward",
-  "def-weil-scheme-morphism-properties",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-kun-proper-stability",
+  "def-trf-admissibility",
+  "def-trf-trace-class",
   "def-trf-borel-moore-pushforward"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-proper-pushforward/lem-trf-fixed-map-proper.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-proper-pushforward/lem-trf-fixed-map-proper.proof.md",
+  "place": "Proof, first and second paragraphs; explicit universal-property and product base-change details supplied on second reading"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "properness of the induced map between fixed schemes in a proper correspondence pushforward diagram",
+   "results": "AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.stableUnderComposition; these are generic proper pullback/composition declarations and do not state the fixed-scheme factorization.",
+   "date": "2026-10-17",
+   "verdict": "generalization: generic proper pullback/composition only; no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, IsClosedImmersion, pullback, diagonal",
+   "results": "0 hits; service reported unknown identifier 'IsClosedImmersion'.",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper|IsClosedImmersion|pullback.*diagonal [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits in the queried Mathlib/AlgebraicGeometry subdirectory.",
+   "date": "2026-10-17",
+   "verdict": "no match in queried path"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper induced map on fixed schemes from a proper correspondence pushforward",
+   "results": "AlgebraicGeometry.IsProper and generic sheaf pushforward declarations; no fixed-scheme theorem.",
+   "date": "2026-10-17",
+   "verdict": "generalization only; no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper fixed point scheme map factorization through pullback and proper product morphism",
+   "results": "Generic scheme pullback carrier/preimage declarations and AlgebraicGeometry.IsProper.instFstScheme; no theorem for fixed schemes or the stated factorization.",
+   "date": "2026-10-17",
+   "verdict": "generalization only; no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.IsProper.instCompScheme",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.snd|instCompScheme|IsClosedImmersion.isStableUnderBaseChange [Mathlib/AlgebraicGeometry/Morphisms]",
+   "results": "0 hits in the queried Mathlib/AlgebraicGeometry/Morphisms subdirectory.",
+   "date": "2026-10-17",
+   "verdict": "no match in queried path"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism between equalizers of two scheme morphisms compatible with a separated morphism",
+   "results": "8 hits, including AlgebraicGeometry.isClosedImmersion_equalizer_ι_left, Scheme.instIsClosedImmersionιOfIsSeparated, IsImmersion.instιScheme, IsSeparated.instFstScheme/instSndScheme, IsProper.instFstScheme/instSndScheme. The equalizer statements assert closedness of the equalizer inclusion, not the induced fixed-scheme factorization or the Borel–Moore conclusion. Read Separated.lean:281–288.",
+   "date": "2026-10-17",
+   "verdict": "related generic tools only; not the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|fixed",
+   "results": "25 hits under AlgebraicGeometry (correct subdirectory, without Mathlib/ prefix): equalizer closed-immersion instances in Morphisms/Separated.lean:281–288, immersion in Immersion.lean:232 and quasi-compact equalizers in QuasiSeparated.lean:208–215; remaining matches concern unrelated fixed choices or multiequalizers. No complete fixed-scheme pushforward theorem.",
+   "date": "2026-10-17",
+   "verdict": "related generic tools only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper pushforward of a correspondence induces a proper morphism on equalizer schemes",
+   "results": "8 hits, including AlgebraicGeometry.IsProper.instOfIsFinite, IsProper, Scheme.Hom.isProperMap, IsProper.instMorphismRestrict, IsProper.of_comp_of_isSeparated, isProper_eq, Scheme.Modules.pushforward_obj_obj and instIsProperOfIsFinite. None states the fixed-scheme pullback factorization and Borel–Moore conclusion.",
+   "date": "2026-10-17",
+   "verdict": "generic properness tools only; no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -80,5 +167,21 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-proper-pushforward"
+ "unit": "sk-d-proper-pushforward",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-fixed-map-proper",
+  "worker": "stage1",
+  "summary": "Repaired the landing return concerning the changed def-trf-coefficient-pushforward: reread its entire current statement, refreshed its verbatim citation, and made step 1 explicitly extract proper f and g, both leg equalities, and the fourth clause defining h by its two projection identities. The current definition removed an old Varshavsky parenthesis and the forward-reference sentence about properness of h, neither of which this proof uses. Revalidated all ten current cited statements, the relative-diagonal pullback argument, and the Borel–Moore section types. Restored the item source metadata from the current DAG while retaining the current-blueprint proof references. No statement, hypothesis, dependency union, new node, or search claim changed. The delivery tool reconstructs the owned split on current origin/newtargets-dag.",
+  "blueprint": "Realizes the two paragraphs of the current blueprint proof: construction of G and the pullback identification of F_c with the relative diagonal base change, followed by closed-immersion/properness stability and the Borel–Moore pushforward definition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-e03ab21ea",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-e03ab21ea (reviewer sub-agent of L); spot-checked: Read in full: the item and all ten cited statements, the main-20261015 blueprint statement/proof and the unit text. The item statement matches the blueprint word for word. There are no new nodes. All cited units are on the transitive route of sk-d-proper-pushforward, so no tool_uses are needed. Step 1 (elementary) checks out: f c_1 j = b_1 i_b π = d_b π = f c_2 j gives λ into X×_Y X; the inverse T-point maps (t,y,x)↦(t,x) and (t,x)↦(t,fx,x) give F_c ≅ G×_{X×_YX,λ,Δ_{X/Y}} X; πκ = h follows from both F_b projections (g i_c and f d_c) and uniqueness. Step 2: def-weil-proper-morphism gives the closed relative diagonal over Y. Stacks 01QR (lem-weil-pbc-closed-immersion-base-change) makes κ a closed immersion, and 01W5 makes it proper. lem-kun-proper-stability (01W4/01W3) makes π and h = πκ proper. id×f and f×id are base changes of f along pr_2 and pr_1, so q = f×f is proper. Borel–Moore clause: Tr_c(u) ∈ Hom(A_F, ω_{F,A}) at A_{E,n} is exactly a Borel–Moore section, and h, a_{F_c}, a_{F_b} are admissible by hypothesis. Small cases checked: empty C, identities on a non-proper affine X, and the dual-number example (F_c is the nonreduced diagonal and h = Δ_X). No duplicate node found by rg. No SGA cited. No fixes needed."
+ }
 }
