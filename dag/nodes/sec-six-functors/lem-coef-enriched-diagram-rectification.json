@@ -28,7 +28,10 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-simplicial-model-nerve-localization",
   "lem-coef-joyal-model-structure",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-coherent-nerve-comparison"
  ],
  "proof": [
   {
@@ -271,5 +274,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17fe06dbf",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_deps declarations (Joyal criterion, SCat/IsLocallyKan/nerveFunctor, DwyerKanEquivalence, Pinched.rigidification/coherentSimplexInclusion, SatisfiesSM7/Bif, SimplicialTensorCotensor, CombinatorialModelCategory), the module, the report and the prior Q54 return. Clause by clause: canonical adjunction with the unit pinned per simplex; DK counit for locally Kan T; arbitrary DK r with no Kan hypothesis on C; simplicial model hypotheses identical to simplicial_model_nerve_localization; landed CombinatorialModelCategory.{w,u,u} (earlier H4 fixed); enriched-end diagram category via IsFunctorEnd, with ForgetEnrichment supplying a consistent simplicial structure; objectwise projective classes; Joyal criterion verbatim with universe enlargement t; the evaluation comparison is uniquely determined by its object and hom formulas and agrees with HTT 4.2.4.4; independent universes u/w. Edge cases (empty K or T, point, non-locally-Kan C, identity r, large M) are covered. Gates: no hollow definitions, only the theorem's proof is sorry, source and blueprint docstrings with the 8 steps, lines within 100, statement verbatim, node changed only in lean and stmt_deps, real Worker report and Second reading. nt_compile --json exit 0 with no warnings, and the tool was shown to catch an injected error. Note: the stmt_deps additions are landed nodes (acyclic, as the earlier return requested)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedDiagramRectification",
+  "declaration": "CategoryTheory.EnrichedRectification.enriched_diagram_rectification",
+  "declarations": [
+   "CategoryTheory.EnrichedRectification.EndProjections",
+   "CategoryTheory.EnrichedRectification.IsFunctorEnd",
+   "CategoryTheory.EnrichedRectification.Diagrams",
+   "CategoryTheory.EnrichedRectification.component",
+   "CategoryTheory.EnrichedRectification.IsProjective",
+   "CategoryTheory.EnrichedRectification.DiagramComparison",
+   "CategoryTheory.EnrichedRectification.enriched_diagram_rectification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedDiagramRectification.lean",
+  "statement": "theorem enriched_diagram_rectification : ∃ a : SSet.Pinched.rigidification.{u} ⊣ CoherentNerve.nerveFunctor, (∀ (K : SSet.{u}) (n : ℕ) (k : K _⦋n⦌), HEq ((a.unit.app K).app _ k) (SSet.Pinched.coherentSimplexInclusion.app ⦋n⦌ ≫ SSet.Pinched.rigidification.map (SSet.yonedaEquiv.symm k : SSet.stdSimplex.obj ⦋n⦌ ⟶ K))) ∧ (∀ (T : SCat.{u}), IsLocallyKan T → DwyerKanEquivalence (A := underlying (SSet.Pinched.rigidification.obj (CoherentNerve.nerveFunctor.obj T))) (B := underlying T) (a.counit.app T)) ∧ ∀ (K : SSet.{u}) (C : SCat.{u}) (r : SSet.Pinched.rigidification.obj K ⟶ C), DwyerKanEquivalence (A := underlying (SSet.Pinched.rigidification.obj K)) (B := underlying C) r → ∀ (M : Type w) [Category.{u} M] [SimplicialCategory M] [ModelCategory M] [HasLimitsOfSize.{u, u} M] [HasColimitsOfSize.{u, u} M] [(cofibrations M).HasFunctorialFactorization (trivialFibrations M)] [(trivialCofibrations M).HasFunctorialFactorization (fibrations M)] (_TM : SimplicialTensorCotensor M), SimplicialModelLocalization.SatisfiesSM7 M → HomotopicalAlgebra.CombinatorialModelCategory.{w, u, u} M → ∀ [EnrichedCategory SSet.{u} (EnrichedFunctor SSet C M)] [ModelCategory (Diagrams C M)] [HasLimitsOfSize.{u, u} (Diagrams C M)] [HasColimitsOfSize.{u, u} (Diagrams C M)] [(cofibrations (Diagrams C M)).HasFunctorialFactorization (trivialFibrations (Diagrams C M))] [(trivialCofibrations (Diagrams C M)).HasFunctorialFactorization (fibrations (Diagrams C M))] (_TD : SimplicialTensorCotensor (Diagrams C M)) (π : EndProjections C M), IsFunctorEnd π → IsProjective π → SimplicialModelLocalization.SatisfiesSM7 (Diagrams C M) → DiagramComparison.{u, w, t} a K C r M π",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed simplex-colimit rigidification, DK predicate, and HomotopicalAlgebra.CombinatorialModelCategory from the landed model-colimit localization interface. Helpers specify the actual enriched end and its projective model structure; no assumed equivalence or arbitrary comparison is supplied as input. The output comparison is characterized on every coherent simplex and mapping simplex. The small index universe u and model object universe w are independent."
  }
 }
