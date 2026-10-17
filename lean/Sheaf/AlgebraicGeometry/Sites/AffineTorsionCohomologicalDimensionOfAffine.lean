@@ -9,43 +9,6 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.AffineScheme
 
-import Mathlib.RingTheory.NoetherNormalization
-import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
-import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimensionGroundField
-import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension
-import Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModel
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import Sheaf.FieldTheory.OneVariableFieldCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.GeometricFiberFinite
-import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.AlgebraicGeometry.SupportDimensionUnion
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
-import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound
-import Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
-
 /-!
 # The affine torsion cohomological dimension bound
 

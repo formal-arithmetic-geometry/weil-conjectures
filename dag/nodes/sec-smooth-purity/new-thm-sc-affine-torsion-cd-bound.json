@@ -11,9 +11,10 @@
  },
  "proof_origin": {
   "by": "worker",
-  "document": "lean/WeilConjectures/AlgebraicGeometry/Sites/AffineTorsionCohomologicalDimension.lean",
-  "place": "theorem hasTorsionCohomologicalDimensionLE_of_isAffine",
-  "group": "F2"
+  "group": "B3",
+  "date": "2026-10-17",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Returned import repaired by a fully proved explicit-dimension Sheaf variant; source bridge only transports the cohomology convention"
  },
  "created": {
   "by": "worker",
@@ -22,7 +23,8 @@
   "group": "S2"
  },
  "proof_deps": [
-  "thm-sc-affine-torsion-cd"
+  "lem-sc-affine-torsion-cd-explicit-bound",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
  ],
  "stmt_deps": [
   "def-sc-etale-torsion-cd",
@@ -94,9 +96,10 @@
  "statement": "For a field K with torsion cohomological dimension at most c, an affine finite-type K-scheme X of dimension at most d has Subsingleton (H^q(X,F)) for every torsion abelian etale sheaf F and every q with d + c < q.",
  "proof": [
   {
-   "text": "Apply AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine in WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension, the existing upstream declaration of the affine bound thm-sc-affine-torsion-cd. Unfolding HasTorsionCohomologicalDimensionLE identifies both the field hypothesis and conclusion with the displayed Sheaf.H statements; evaluate the conclusion at F, hF, q, hq. This upstream declaration still has sorry; the affine theorem remains an open proof dependency, rather than a proved or pruned node. The extra quasi-compactness hypothesis is unused by that declaration.",
+   "text": "The wrapper applies the unchanged source-library theorem hasTorsionCohomologicalDimensionLE_of_isAffine to F,hF,q,hq. Its complete bridge proof installs the explicit structure morphism as X.Over, converts the field bound from Sheaf.H to ordinary derived-section cohomology using lem-weil-pbc-sheafH-ext-derived-comparison, and applies the fully proved Sheaf variant lem-sc-affine-torsion-cd-explicit-bound. That variant handles both the natural-number dimension comparison and the empty-scheme clause using the existing thm-sc-affine-torsion-cd. The source bridge converts the resulting vanishing back to Sheaf.H by the same comparison. No new sorry is introduced and all existing source signatures and public imports are unchanged.",
    "uses": [
-    "thm-sc-affine-torsion-cd"
+    "lem-sc-affine-torsion-cd-explicit-bound",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
    "elementary": false
   }
@@ -122,13 +125,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261015T205839-L-1763877",
-  "kind": "proof",
+  "landing": "20261017T013731-L-112670",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {

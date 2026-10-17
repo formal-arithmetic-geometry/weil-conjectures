@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-affine-torsion-cd-explicit-bound",
+ "kind": "statement",
+ "title": "Affine torsion cohomological dimension with an explicit dimension bound",
+ "statement": "Let K be a field and c,d natural numbers. Suppose Spec K has torsion etale cohomological dimension at most c, in the derived-section convention [def-sc-etale-torsion-cd]. Let X be an affine finite-type K-scheme [def-weil-pbc-scheme-conventions] with topological Krull dimension at most d [def-kun-topological-krull-dimension]. Then X has torsion etale cohomological dimension at most d+c in that convention, including when X is empty.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Nonempty dimension bound and the all-degree empty-scheme clause of thm-sc-affine-torsion-cd"
+ },
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Apply thm-sc-affine-torsion-cd to obtain its nonempty dimension-plus-c bound and its separate empty-scheme clause. If X is empty, the latter gives vanishing in every degree and in particular above d+c.",
+   "uses": [
+    "thm-sc-affine-torsion-cd"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If X is nonempty, apply WithBot.unbotD_le_iff with default zero to the assumed inequality dim X <= d, then ENat.toNat_le_of_le_natCast. This gives ((dim X).unbotD 0).toNat <= d. For q>d+c, transitivity and Nat.add_le_add_right imply q>((dim X).unbotD 0).toNat+c; apply the nonempty clause to each torsion sheaf. The argument includes d=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "thm-sc-affine-torsion-cd"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-17",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Fully proved numerical-dimension and empty-scheme variant requested by the returned delivery"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HasTorsionEtaleCohomologicalDimensionLE",
+   "results": "0 hits: . loogle: unknown identifier 'HasTorsionEtaleCohomologicalDimensionLE' No direct matching affine cohomological-dimension theorem.",
+   "date": "2026-10-17",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme torsion etale cohomological dimension bound by dimension plus field cohomological dimension",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.formallyEtale_iff, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.etaleLocus_eq_univ_iff, Algebra.Etale.formallyEtale.  No direct matching affine cohomological-dimension theorem.",
+   "date": "2026-10-17",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasTorsionEtaleCohomologicalDimensionLE|toNat_le_of_le_natCast|unbotD_le_iff",
+   "results": "10 hits: Mathlib/Data/ENat/Lattice.lean, Mathlib/Data/ENat/Basic.lean, Mathlib/Data/ENat/Basic.lean, Mathlib/Data/ENat/Basic.lean, Mathlib/Algebra/Polynomial/Degree/TrailingDegree.lean, Mathlib/Algebra/Polynomial/Degree/Defs.lean, Mathlib/Order/KrullDimension.lean, Mathlib/Order/WithBot.lean.  The numerical order lemmas are used; no affine cohomological-dimension theorem in Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine finite type scheme over a field of torsion cohomological dimension c has cohomological dimension at most d+c when its Krull dimension is at most d",
+   "results": "8 hits: AlgebraicGeometry.AffineScheme, AlgebraicGeometry.IsAffine.recOn, Order.coheight_le_krullDim, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.isAffine_of_isAffineHom.  No direct matching affine cohomological-dimension theorem.",
+   "date": "2026-10-17",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension",
+  "date": "2026-10-17",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-affine-torsion-cd",
+   "place": "explicit dimension upper bound variant",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/AffineTorsionCohomologicalDimensionBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.hasTorsionEtaleCohomologicalDimensionLE_of_isAffine_of_dimension_le",
+  "statement": "theorem hasTorsionEtaleCohomologicalDimensionLE_of_isAffine_of_dimension_le\n    (K : Type u) [Field K] (c d : ℕ)\n    (hK : HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) c)\n    (X : Scheme.{u}) [X.Over (Spec (.of K))] [IsAffine X]\n    [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))]\n    (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :\n    HasTorsionEtaleCohomologicalDimensionLE X (d + c)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261017T013731-L-112670",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261017T013731-L-112670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
