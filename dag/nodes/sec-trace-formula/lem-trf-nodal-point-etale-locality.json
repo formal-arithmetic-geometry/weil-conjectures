@@ -18,9 +18,41 @@
   "def-weil-algebraic-closure",
   "def-weil-closed-points"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume $\\widehat{\\mathcal O}_{C,x}\\cong k[[u,v]]/(uv)$ as $k$-algebras. The nodal ring is local with maximal ideal $(u,v)$ and residue field $k$ (as a $k$-algebra). The local ring $\\mathcal O_{C,x}$ is Noetherian, being a localization of a finitely generated $k$-algebra on an affine open of $C$ (Hilbert basis theorem; Mathlib's locally Noetherian instance for schemes locally of finite type over a field). Hence [lem-weil-pbc-local-completion-local-ring] applies: the canonical $k$-algebra map $\\mathcal O_{C,x}\\to\\widehat{\\mathcal O}_{C,x}$ induces an isomorphism of residue fields, so $k\\to\\kappa(x)$ is an isomorphism. Apply [lem-trf-etale-completed-local-ring-iso] to this $k$-algebra isomorphism $\\kappa(x)\\cong k$: it makes $x$ and $y$ closed, identifies $\\kappa(x)$ with $\\kappa(y)$, and identifies the completed local rings. Transporting the displayed ring isomorphism across that completion isomorphism gives $\\widehat{\\mathcal O}_{D,y}\\cong k[[u,v]]/(uv)$. Both points are closed.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-trf-etale-completed-local-ring-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C57, lemma-node-etale-local, using the nodal completed-local-algebra definition and Tag 039M after the residue-field/closed-point reduction"
+   }
+  },
+  {
+   "text": "Conversely, assume $\\widehat{\\mathcal O}_{D,y}\\cong k[[u,v]]/(uv)$ as $k$-algebras. The local ring $\\mathcal O_{D,y}$ is Noetherian, $D$ being locally of finite type over $k$ (etale morphisms are locally of finite presentation, and compositions of morphisms locally of finite type are locally of finite type). The same completion-residue-field argument using [lem-weil-pbc-local-completion-local-ring] gives that $k\\to\\kappa(y)$ is an isomorphism. Apply [lem-trf-etale-completed-local-ring-iso] in its second case: $x$ and $y$ are closed, $\\kappa(x)\\to\\kappa(y)$ is an isomorphism, and the completed local rings are isomorphic. Transporting the nodal presentation back along this isomorphism gives $\\widehat{\\mathcal O}_{C,x}\\cong k[[u,v]]/(uv)$. Thus the two conditions are equivalent and either one implies closedness of both points.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-trf-etale-completed-local-ring-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C57, converse direction of lemma-node-etale-local, using the same Tag 039M completion identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-completed-local-ring-iso",
+  "lem-weil-pbc-local-completion-local-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C57, lemma-node-etale-local; proof via Tag 039M and the section-nodal completed-local-algebra definition."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +84,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-family-etale-source-locality",
@@ -64,7 +96,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Nodal curves are etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route. Auxiliary input to the source-locality proof of Stacks Tag 0C5D: Tag 0C57, lemma-node-etale-local; section-nodal completed-local-algebra definition over an algebraically closed field. The arbitrary-point formulation includes the automatic closedness forced by the residue k of the displayed completed k-algebra..",
+   "place": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via Stacks Tag 0C57: étale locality of nodal completed local rings at points with algebraically closed residue field.",
    "via": [
     "lem-trf-nodal-family-etale-source-locality",
     "lem-trf-valuation-symmetric-nodal-blowup",
@@ -84,5 +116,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-point-etale-locality",
+  "worker": "stage1",
+  "summary": "Split Tag 0C57 into a residue-field/closed-point and completed-local-ring invariance lemma for an etale map, then apply it in the two directions to the nodal completion. The statement is unchanged; arbitrary points are handled because a nodal completion has residue field k.",
+  "blueprint": "Realizes the historical auxiliary nodal-locality sentence in the Proof (1)--(2) ancestry of lem-trf-local-term-locality, via Tag 0C57; this does not alter the current contracting-correspondence route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-3404de256",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-3404de256 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited node's statement, the parent's steps 7-8, the unit sk-i-curve-zero, and Stacks curves.tex 0C57 (line 4445) with its proof, 0C56, lemma-split-node(iii), etale.tex 039M (line 1110) with the remark after it, varieties.tex 0478, and morphisms.tex 01TE/01TF. The item's statement is a faithful specialization of 0C57 to an algebraically closed field, using the nodal-completion criterion; the closedness at an arbitrary point follows because the residue field is k. Nothing is weakened and the statement is unchanged. The new node is true when read with k-algebra residue fields: 02GL(2) gives the trivial residue extension, 01TE(2) gives closedness, and 0AGX or 039M with rank 1 gives the isomorphism of completions. It is strictly smaller than the item (no nodal ring, no curve). It is not a duplicate: lem-weil-pbc-flat-local-completion-iso (0AGX), lem-trf-finite-residue-point-closed-in-fibre (01TE) and the completion-approximation nodes are ingredients or converses. Small cases checked: identity, the node uv=0 under an open immersion and under C⊔C, a smooth point, the generic point, empty D, and a degree-2 étale cover over F_p (excluded by the hypothesis). Three repairs in fixes/: (1) B2/E6: the new node's 'κ isomorphic to k' now says 'as a k-algebra (structure map an isomorphism)'; the abstract reading would need an unsourced non-algebraic-closedness argument. (2) B5: the new node's source cited 0478 for closedness, but 0478 gives only the converse; it now cites 01TE(2), 02GL(2), 0AGX/039M. (3) E1: the item's steps applied lem-weil-pbc-local-completion-local-ring without its Noetherian hypothesis; they now say O_{C,x} and O_{D,y} are Noetherian and the isomorphisms are of k-algebras. No tool_uses, no SGA, no node dropped.; 2 file(s) fixed by the reviewer"
  }
 }
