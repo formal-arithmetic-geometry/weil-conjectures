@@ -23,7 +23,8 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules",
   "def-weil-pbc-etale-constructible-sheaf",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence"
  ],
  "proof": [
   {
@@ -250,5 +251,28 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-bf50eb152 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no fixes. Statement: unchanged and not weakened; it matches the parent det-rem-sf-matrix-hom-devissage (Step 5 applies it with E=P^q|_U, G=Q^r|_U) and the main-20261015 Step 2 sentence on the termwise flat constructible Hom. Every notion cites a node that defines it (flat is 03ER(3); constructible is 095E(3)/03RU with finite Lambda). Small cases tested: U empty; E=0 or G=0; t=0; E=A_U; G=A_U; A=F2xF2 with the summand for the idempotent (1,0); G=j_!A_W. The non-flat G=Z/2 over Z/4 is correctly excluded. Noetherianity is unused but harmless. Step 1: a=h->hp and b=f->fi with ba=1 make H|_V the image of e^* on (G|_V)^t. The 03P5 node makes the matrix entries Zariski-locally constant, and a Zariski refinement is still an etale covering. Step 2: restriction is the exact v^{-1} of prop-weil-pbc-inverse-image-modules-exact; G|_V is flat by the 05VD node; a summand cut out by the natural idempotent 1(x)e^* is exact; geometric stalks plus conservativity glue. The fact that the stalk of F|_V equals the stalk of F is uncited but elementary, and plain sheaf locality gives the same conclusion. Step 3: G's original strata are kept; exact inverse image carries im(e^*) to im(e^*) on constant M^t, which is the constant sheaf N, finite. No descent is needed and no Hom/inverse-image commutation is claimed. Step 4 is elementary. No new nodes. I checked duplicates (lem-sf-hom-finite-projective, lem-pc-finite-projective-internal-hom-evaluation, thm-sf-hom-ctf, lem-weil-pbc-flc-dual-stalk, lem-sfb-finite-field-internal-hom-finiteness, lem-per-dual-lisse-tensor): none states this item. No cycle (closure of 227 nodes); proof_deps equal the union of uses; no SGA. I accept the four generic tool_uses: constant-sheaf sections (03P5), exact constant-coefficient inverse image, flat pullback (05VD) and geometric-stalk conservativity. Sources checked at their labels: etale-cohomology remark-constant-locally-constant-maps and definition-finite-locally-constant; sites-modules definition-flat, lemma-pullback-flat and lemma-flat-pullback-exact."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LisseSplitHomFlatConstructible",
+  "declaration": "AlgebraicGeometry.Scheme.hom_isFlat_constructible_of_etaleLocallySplit",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseSplitHomFlatConstructible.lean",
+  "statement": "theorem hom_isFlat_constructible_of_etaleLocallySplit (A : Type (u + 1)) [CommRing A] [Finite A] (U : Scheme.{u}) [IsNoetherian U] (E G : SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))) (_hE : ∃ 𝒰 : Cover.{u} etalePrecoverage U, ∀ α : 𝒰.I₀, ∃ t : ℕ, ∃ i : E.over (𝒰.etalePrecoverageToEtale α) ⟶ SheafOfModules.free (R := ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))).over (𝒰.etalePrecoverageToEtale α)) (ULift.{u + 1} (Fin t)), ∃ p : SheafOfModules.free (R := ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))).over (𝒰.etalePrecoverageToEtale α)) (ULift.{u + 1} (Fin t)) ⟶ E.over (𝒰.etalePrecoverageToEtale α), i ≫ p = 𝟙 _) (_hflat : SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) G) (_hconstructible : IsConstructibleEtaleModuleSheaf (etaleConstantModuleRestriction U A ((SheafOfModules.restrictScalars.{u + 1} (etaleConstantCommRingComparison U A)).obj G))) : SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) (SheafOfModules.homObj.{u + 1, u, u + 1, u + 1} (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) E G) ∧ IsConstructibleEtaleModuleSheaf (etaleConstantModuleRestriction U A ((SheafOfModules.restrictScalars.{u + 1} (etaleConstantCommRingComparison U A)).obj (SheafOfModules.homObj.{u + 1, u, u + 1, u + 1} (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) E G)))",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Local splitting is an existential etale cover with explicit finite-free retraction maps, including rank zero. Flatness uses the recorded IsFlatOnSite; constructibility uses the recorded predicate after canonical scalar restriction. The helper etaleConstantCommRingComparison is the real adjoint transpose of the commutative-ring sheafification unit, supplying the constant-coefficient encoding transport under the human-authorized missing-canonical-map rule.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleConstantCommRingComparison",
+   "AlgebraicGeometry.Scheme.hom_isFlat_constructible_of_etaleLocallySplit"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7932ecbe8",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Clause-by-clause match of node lem-sfb-lisse-split-hom-flat-constructible to AlgebraicGeometry.Scheme.hom_isFlat_constructible_of_etaleLocallySplit: finite CommRing A (universe u+1 forced by recorded IsConstructibleEtaleModuleSheaf), IsNoetherian U, constant CommRingCat sheaf on smallEtaleTopology, SheafOfModules E G, existential etale Cover with per-member t and split i≫p=𝟙 into free (ULift (Fin t)) over R.over V, recorded IsFlatOnSite and IsConstructibleEtaleModuleSheaf hypotheses, conclusion both properties of recorded SheafOfModules.homObj E G. Helper etaleConstantCommRingComparison is the canonical sheafification-adjunction transpose (real data, docstrings, listed), gives back the original A-action through etaleConstantModuleRestriction. Added stmt_dep lem-weil-pbc-etale-constant-ring-module-equivalence is landed and acyclic. lean.statement verbatim. Only proof is sorry; source/blueprint docstrings present; no added assumptions; etale site, no pro-etale substitute. Edge cases (empty U, E=0/G=0, t=0, zero ring, F2xF2) covered. nt_compile.py on snapshot file: exit 0, no errors, 5.4 s. No findings."
  }
 }

@@ -14,7 +14,9 @@
   "def-weil-pbc-strict-perfect-coefficient-package",
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "lem-sfb-ringed-site-duality-maps",
+  "def-coef-ringed-tensor-hom-model"
  ],
  "proof": [
   {
@@ -364,5 +366,24 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-960e65008 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, the unit, the main-20261015 internal-Hom proof, and Stacks 08JJ, 08JD, 0A97, 0A98, 08JH, 06YQ, 06YS and 08FI in sites-cohomology.tex. Item statement: it matches 08JJ, perfectness is the Stacks local strictly-perfect notion, and nothing is weakened. Signs recomputed: d_D^q=(-1)^{q+1}(d_E^{-q-1})^vee and d_DD=-(d_E)^{vv}; beta=(-1)^i ev is a chain map; tensor evaluation commutes with the differentials, with coefficient (-1)^{p+q+1}. Hypotheses checked: bounded-exact-term lemma with an arbitrary target, D bounded flat so K-flat, F and D in the descent class, and the sieve condition of the cover criterion. The ten tool_uses are generic ringed-site tools and are accepted. Fault 1, long step 8 (2057 characters): it held three arguments (local-to-global invertibility, perfectness of the dual via a global K-injective J and 08FI, naturality). Each is correct and cites its nodes; no existing node states the generic cover-local criterion. Split into steps 8, 9 and 10, with proof_deps unchanged. Fault 2 (C3/C4): the new node said the maps are graded evaluation on K-flat and K-injective representatives, but steps 5 and 7 use the ordinary models Hom(E,O[0]), Hom(D,O[0]) and Hom(E,F). Restated the clause precisely under the augmentation quasi-isomorphisms (e = y⊗phi ↦ (x ↦ y phi(x)) with no sign; b = x ↦ (phi ↦ (-1)^{|x||phi|} phi(x))). Checked that it is true against the 0A98 composition and the end of the 08JJ proof, and steps 5 and 7 now name the steps that supply the hypotheses. No duplicates: the scheme, pro-étale and coefficient nodes are narrower. Maintenance notes: lem-pc-bounded-above-flat-kflat-site cites 06YS where it should be 06YQ; lem-pur-kinjective-restrict-localized gives the 08FI label wrong. Neither was edited.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSitePerfectDuality",
+  "declaration": "CategoryTheory.ringedSitePerfectDuality",
+  "file": "lean/Sheaf/CategoryTheory/RingedSitePerfectDuality.lean",
+  "statement": "theorem ringedSitePerfectDuality {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max c v r}] [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (R : Sheaf J CommRingCat.{max c v r}) [HasDerivedCategory.{w} (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))] (P : DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))) (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{c, v, r, w} R P) : ∃ M : RingedSiteDualityModel.{c, v, r, w} J R, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{c, v, r, w} R ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj (op P, ringedSiteDualityUnit.{c, v, r, w} J R)) ∧ IsIso (ringedSiteBidual M.closed M.symmetric (ringedSiteDualityUnit.{c, v, r, w} J R) P) ∧ IsIso (ringedSiteDualEvaluationLeftNatTrans M.closed M.symmetric (ringedSiteDualityUnit.{c, v, r, w} J R) M.unitIso P)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading: the previous existential bidual morphism and arbitrary natural isomorphism did not assert invertibility of the canonical maps. The normalized closed tensor-Hom presentation reuses CoefficientTensorModels, with ordinary unit, associator and Koszul symmetry. Its explicitly defined bidual and evaluation natural transformation are the maps whose IsIso is asserted. Independent coefficient universe r is retained. No mathematical statement changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c388dfe49",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Item ringedSitePerfectDuality matches node/Stacks 08JJ clause by clause: small ringed site with independent universes c,v,r,w; recorded IsPerfectOnRingedSiteOfUniverses hypothesis (extra slice-sheafify instances are exactly those the predicate requires); conclusions are perfectness of derivedInternalHomOfUniverses(op P, O[0]), IsIso of the transposed signed bidual, and IsIso of the evaluation NatTrans in the dual⊗N order. The ∃ M : RingedSiteDualityModel is a presentation pinned by CoefficientTensorModels.uncurry_model plus symmetry/unit/associator normalizations on K-flats, so it is equivalent to ∀ M, not an arbitrary choice. Dependency module RingedSiteDualityMaps (lem-sfb-ringed-site-duality-maps, genuine prerequisite supplied in the same delivery): real transposes, correct signs ((i*q).negOnePow, unsigned φ(x)•y), unique-characterization choices, normalization hypotheses exactly as in the node, restriction via overFunctor (= recorded localizedModuleRestriction) with true coefficient equality; the existential evaluation-compatible restriction comparisons are acceptable because no general recorded comparison exists. merge_delivery stage 2 keeps the upstream Q41 proof of the dependency node. Statements verbatim, 31 declarations present, all sorrys named theorems with source/blueprint/proof docstrings, no pro-etale substitute, report has Worker report and Second reading by Q32. nt_compile --json of both files: rc 0, no warnings besides sorry (DualityMaps 57.2 s of the 60 s limit, PerfectDuality 3.9 s)."
  }
 }
