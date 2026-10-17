@@ -31,9 +31,115 @@
   "prop-weil-pbc-proetale-constant-ring-map",
   "def-pur-roots-of-unity-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each finite extension H and each n, the comparison on the finite quotient A_{H,n} is the canonical constant-ring map gamma_{A_{H,n}}. By det-prop-sfb-qlbar-colimit-x-integral-limit, R_{H,T} is canonically the inverse limit of these finite constant sheaves, and by det-prop-sfb-qlbar-colimit-x-pullback (1), inverse image carries this limit presentation from S to S'. The finite maps in that statement are the constant-section maps of prop-weil-pbc-proetale-constant-ring-map. Therefore the unique map alpha_{h,H} whose n-th projection is gamma_{A_{H,n}} composed with h^{-1}(pi_n) is an isomorphism of rings. Its characterization by all projections also gives compatibility with every quotient transition.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "det-prop-sfb-qlbar-colimit-x-pullback",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "The integral twist paragraph: inverse-limit presentation and inverse image of the completed coefficient line."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-inverse-image-compatible-free-tower] to the base-change functor $u_h:S_{\\mathrm{proet}}\\to S'_{\\mathrm{proet}}$ of [def-weil-proetale-inverse-image] (it preserves the final object, fibre products and coverings), to the ring tower $R_r=(\\mathbf Z/\\ell^r)_S$ with its reductions, and to $M_r=\\mu_{\\ell^r,S}$ with $t_r(u)=u^\\ell$, a transition semilinear over the reductions by [def-pur-roots-of-unity-sheaf]. Hypothesis on $\\kappa$: Step 1 for $H=\\mathbf Q_\\ell$ ($\\mathcal O_H=\\mathbf Z_\\ell$, $\\varpi=\\ell$) says that $\\alpha_{h,\\mathbf Q_\\ell}=(\\varprojlim_r\\gamma_{\\mathbf Z/\\ell^r})\\circ\\kappa$ is an isomorphism, and $\\varprojlim_r\\gamma_{\\mathbf Z/\\ell^r}$ is an isomorphism because every $\\gamma_{\\mathbf Z/\\ell^r}$ is [prop-weil-pbc-proetale-constant-ring-map]; hence $\\kappa$ is an isomorphism. Local bases: [det-def-sp-tate-twist-locally-free] (1), with $\\ell$ invertible on $S$, gives a pro-etale cover $\\widetilde S\\to S$ and $\\zeta_r\\in\\mu_{\\ell^r,S}(\\widetilde S)$ with $\\zeta_{r+1}^\\ell=\\zeta_r$ such that $a\\mapsto\\zeta_r^a$ is an isomorphism $(\\mathbf Z/\\ell^r)_{\\widetilde S}\\to\\mu_{\\ell^r,\\widetilde S}$; by [lem-weil-proetale-weakly-etale-localization] (1)-(3) the site $\\widetilde S_{\\mathrm{proet}}$ is the localized site $S_{\\mathrm{proet}}/\\widetilde S$, with $(\\mathbf Z/\\ell^r)_S|_{\\widetilde S}=(\\mathbf Z/\\ell^r)_{\\widetilde S}$ and $\\mu_{\\ell^r,S}|_{\\widetilde S}=\\mu_{\\ell^r,\\widetilde S}$ (both have sections $\\Gamma(V,\\mathcal O_V)$-roots on the same objects $V$). So $b_r(a)=\\zeta_r^a$ are linear isomorphisms, and $t_rb_{r+1}(a)=\\zeta_{r+1}^{\\ell a}=\\zeta_r^a=b_r(\\bar a)$. The tower lemma gives the isomorphism $\\theta:h^{-1}\\mathbf Z_\\ell(1)_S\\to\\varprojlim_rh^{-1}\\mu_{\\ell^r,S}$ whose $r$-th coordinate is $h^{-1}(\\mathrm{pr}_r)$, linear over $\\kappa$. By [lem-pur-roots-of-unity-inverse-image-iso] (1) the maps $c^h_{\\mu_{\\ell^r}}$ form a morphism of inverse systems, so $\\varprojlim_rc^h_{\\mu_{\\ell^r}}$ is defined [def-pur-sheaf-inverse-limit]; each $c^h_{\\mu_{\\ell^r}}$ is an isomorphism by the first displayed isomorphism of [det-prop-sfb-cartesian-coefficients-twists] ($\\ell$ invertible on $S$ and $S'$), the canonical comparison of roots of unity being the adjoint comparison of [def-pur-roots-of-unity-inverse-image]. Put $\\tau_h=(\\varprojlim_rc^h_{\\mu_{\\ell^r}})\\circ\\theta$: an isomorphism whose $r$-th projection is $c^h_{\\mu_{\\ell^r}}\\circ h^{-1}(\\mathrm{pr}_r)$, and it is the only map with these projections. Semilinearity: $\\theta$ is linear over $\\kappa$, and $c^h_{\\mu_{\\ell^r}}$ is semilinear over $c^h_{\\mathbf Z/\\ell^r}$ [lem-pur-roots-of-unity-inverse-image-iso] (2), which is $\\gamma_{\\mathbf Z/\\ell^r}$ by the last clause of [prop-weil-pbc-proetale-constant-ring-map]; so $\\tau_h$ is semilinear over $(\\varprojlim_r\\gamma_{\\mathbf Z/\\ell^r})\\circ\\kappa=\\alpha_{h,\\mathbf Q_\\ell}$ for the coordinatewise action of $\\widehat{\\mathbf Z}_{\\ell,T}=R_{\\mathbf Q_\\ell,T}$ on $\\mathbf Z_\\ell(1)_T$ of [lem-pur-twist-sheaf-locally-free] (2).",
+   "uses": [
+    "lem-pur-inverse-image-compatible-free-tower",
+    "def-weil-proetale-inverse-image",
+    "def-pur-roots-of-unity-sheaf",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "det-def-sp-tate-twist-locally-free",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-roots-of-unity-inverse-image-iso",
+    "def-pur-sheaf-inverse-limit",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "def-pur-roots-of-unity-inverse-image",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Roots of unity paragraph and the inverse-limit construction of the integral twist."
+   }
+  },
+  {
+   "text": "For a discrete ring $\\Lambda\\in\\{\\mathbf Z_\\ell,\\mathcal O_H\\}$ (infinite, so [prop-weil-pbc-proetale-constant-ring-map] does not apply) [lem-pe-constant-left-module-inverse-image], applied to the geometric morphism of [def-weil-proetale-inverse-image], gives the ring isomorphism $\\delta_\\Lambda:h^{-1}\\Lambda_S\\to\\Lambda_{S'}$ carrying constant sections to the same scalars. Two ring maps out of $h^{-1}\\Lambda_S$ that agree on the images of constant sections agree, since $\\Lambda_S$ is the sheafification of the constant presheaf [def-weil-pbc-constant-sheaf] and $h^{-1}$ is the sheafified colimit construction of [def-weil-proetale-inverse-image]; hence $\\delta_{\\mathcal O_H}$ restricts to $\\delta_{\\mathbf Z_\\ell}$, and the projections of $\\alpha_{h,\\mathbf Q_\\ell}\\circ h^{-1}(\\epsilon_S)$ and $\\epsilon_{S'}\\circ\\delta_{\\mathbf Z_\\ell}$ to $(\\mathbf Z/\\ell^r)_{S'}$ agree (both send $a$ to $\\bar a$), where $\\epsilon_T:(\\mathbf Z_\\ell)_T\\to\\widehat{\\mathbf Z}_{\\ell,T}$ is the map of constants through which $(\\mathbf Z_\\ell)_T$ acts on $\\mathbf Z_\\ell(1)_T$. By Step 2, $\\tau_h$ is therefore semilinear over $\\delta_{\\mathbf Z_\\ell}$. Since $\\delta_{\\mathbf Z_\\ell}$ is an isomorphism, the module pullback $(\\mathbf Z_\\ell)_{S'}\\otimes_{h^{-1}(\\mathbf Z_\\ell)_S}h^{-1}M$ of [lem-weil-pbc-ringed-topoi-module-pullback-tensor] (with $c=\\delta_{\\mathbf Z_\\ell}$) is $h^{-1}M$ with its action transported along $\\delta_{\\mathbf Z_\\ell}$, and that lemma gives an isomorphism $h^{-1}(\\mathbf Z_\\ell(1)_S\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_H)_S)\\cong h^{-1}\\mathbf Z_\\ell(1)_S\\otimes h^{-1}(\\mathcal O_H)_S$, $h^{-1}(t\\otimes a)\\mapsto h^{-1}t\\otimes h^{-1}a$ [def-pur-sheaf-tensor-product]. Compose with $\\tau_h\\otimes\\delta_{\\mathcal O_H}$, a tensor product of isomorphisms semilinear over the same isomorphism $\\delta_{\\mathbf Z_\\ell}$; the composite $\\rho_{h,H}$ is an isomorphism onto $\\mathcal O_H(1)_{S'}$ [def-coefficient-twists-detailed] and sends $h^{-1}(t\\otimes a)$ to $\\tau_h(h^{-1}t)\\otimes a$. Semilinearity over $\\alpha_{h,H}$: the $R_{H,T}$-action on $\\mathcal O_H(1)_T$ is through the isomorphism $\\widehat{\\mathbf Z}_{\\ell,T}\\otimes_{(\\mathbf Z_\\ell)_T}(\\mathcal O_H)_T\\cong R_{H,T}$ of [lem-pur-twist-sheaf-locally-free] (3), $(x\\otimes b)\\cdot(t\\otimes a)=xt\\otimes ba$, the canonical map whose $n$-th projection sends $x\\otimes b$ to $\\mathrm{pr}_k(x)\\bar b\\in(A_{H,n})_T$ for $\\ell^k\\mathcal O_H\\subseteq\\varpi_H^n\\mathcal O_H$. After each projection, $\\alpha_{h,H}(h^{-1}(x\\otimes b))$ and $\\alpha_{h,\\mathbf Q_\\ell}(h^{-1}x)\\otimes\\delta_{\\mathcal O_H}(h^{-1}b)$ both give $\\gamma_{A_{H,n}}(h^{-1}(\\mathrm{pr}_k(x)\\bar b))$, because $\\gamma$ is a ring map fixing constants (Step 1). Hence $\\rho_{h,H}((x\\otimes b)(t\\otimes a))=\\alpha_{h,\\mathbf Q_\\ell}(x)\\tau_h(t)\\otimes ba=\\alpha_{h,H}(x\\otimes b)\\,\\rho_{h,H}(t\\otimes a)$ on local pure tensors, which generate locally, so $\\rho_{h,H}$ is semilinear over $\\alpha_{h,H}$.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-pur-sheaf-tensor-product",
+    "def-coefficient-twists-detailed",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "The integral twist paragraph: tensoring the roots-of-unity comparison with the coefficient ring."
+   }
+  },
+  {
+   "text": "For E contained in F, the inclusions of valuation rings induce compatible maps of the finite quotient towers A_{E,k} to A_{F,n}; the condition varpi_E^k O_F contained in varpi_F^n O_F is exactly what makes the map at level n well defined. The maps iota_{EF} are therefore the induced maps between the inverse limits in Step 1. Naturality for homomorphisms of ring towers in lem-pur-inverse-image-compatible-free-tower, together with the defining constant-section naturality in prop-weil-pbc-proetale-constant-ring-map, gives alpha_{h,F} composed with h^{-1}(iota_{EF}) equal to iota_{EF} composed with alpha_{h,E}. The equality can be checked after every finite projection, where it is the same inclusion of residue rings.",
+   "uses": [
+    "lem-pur-inverse-image-compatible-free-tower",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-completed-integral-coefficients",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "The integral twist paragraph and the coefficient-field compatibility used in the final base-change sentence."
+   }
+  },
+  {
+   "text": "The maps j_{EF} are obtained by tensoring the identity on Z_ell(1)_T with the inclusion of constant coefficient rings. Apply the naturality clause for compatible semilinear morphisms of module towers in lem-pur-inverse-image-compatible-free-tower to the tower maps defining j_{EF}; together with the formula for rho in Step 3, both composites carry h^{-1}(t tensor a) to tau_h(h^{-1}t) tensor a. Hence rho_{h,F} composed with h^{-1}(j_{EF}) equals j_{EF} composed with rho_{h,E}. This also shows that the two compatibilities are independent of the chosen local generators, since all maps are induced by the universal tensor and inverse-limit constructions.",
+   "uses": [
+    "lem-pur-inverse-image-compatible-free-tower",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-pur-sheaf-tensor-product",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "The final field-inclusion compatibility sentence for the integral twist."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-sfb-qlbar-colimit-x-pullback",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-inverse-image-compatible-free-tower",
+  "def-weil-proetale-inverse-image",
+  "def-pur-roots-of-unity-sheaf",
+  "det-def-sp-tate-twist-locally-free",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "def-pur-sheaf-inverse-limit",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-pur-roots-of-unity-inverse-image",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-pur-sheaf-tensor-product",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity and integral twist paragraphs, with the inverse-limit and tensor constructions written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +168,38 @@
    "results": "not run: LeanSearch is not reachable from the review service on the project server",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of completed integral Tate twist line along a morphism of schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback; generic scheme inverse-image and normalization declarations; no completed Tate-twist sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme/module pullback only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf inverse image inverse limit tensor roots of unity",
+   "results": "0 hits; loogle reported Unknown identifier inverse",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|TateTwist|inverse.*limit [Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of the l-adic Tate twist sheaf along a morphism of schemes on the pro-etale site",
+   "results": "8 generic hits: Scheme.Hom.inv_image, Equivalence.sheafCongr, Scheme.Modules.pullbackPushforwardAdjunction; no pro-etale Tate-twist result",
+   "date": "2026-10-17",
+   "verdict": "no match: generic site/scheme declarations only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -82,5 +216,69 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-integral-twist-line-inverse-image",
+  "worker": "stage1",
+  "summary": "Split the inverse-image statement into five complete arguments: the completed coefficient-ring comparison, the compatible roots-of-unity tower, the tensor construction of the integral twist line, and the two coefficient-inclusion compatibilities. Reused existing DAG nodes for the completed integral limit, cartesian twists, locally free twist trivializations, finite constant-ring maps, tensor pullback, and compatible inverse towers; created no new nodes.",
+  "blueprint": "Realizes the Roots of unity paragraph and the Integral twist paragraph of sk-prop-sfb-cartesian-coefficients-twists.proof.md. Step 1 is the inverse-limit coefficient comparison, Step 2 the compatible Kummer tower, Step 3 the tensor twist line, and Steps 4-5 the E subset F naturality asserted in the final sentence.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "The generic completed coefficient inverse-limit identification supplies the coefficient-ring comparison used in Step 1."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-pullback",
+    "why": "The generic inverse-image compatibility of the completed coefficient tower supplies the isomorphism in Step 1."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Its first displayed isomorphism (inverse image of roots of unity for any morphism, ell invertible) makes each c^h_mu an isomorphism in Step 2; the unit sk-prop-sf-existence has no roots-of-unity node."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic ringed-topos tensor pullback, used in Step 3 to commute inverse image with the tensor product defining O_H(1)."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic finite constant-ring inverse-image isomorphism gamma, used in Steps 1, 2 and 4 and its constant-section description in Step 3."
+   },
+   {
+    "node": "lem-pur-inverse-image-compatible-free-tower",
+    "why": "Generic inverse-image comparison for a locally free tower, used in Step 2 (and its naturality in Steps 4-5)."
+   },
+   {
+    "node": "det-def-sp-tate-twist-locally-free",
+    "why": "Compatible generators zeta_r on a pro-etale cover, the local bases of Step 2."
+   },
+   {
+    "node": "lem-pur-roots-of-unity-inverse-image-iso",
+    "why": "Transition compatibility and semilinearity of c^h_mu, Step 2."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the localized site S_proet/S~ with S~_proet in Step 2."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-sfb-qlbar-colimit-x-pullback",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pur-inverse-image-compatible-free-tower",
+  "det-def-sp-tate-twist-locally-free",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-79705b949",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-79705b949 (reviewer sub-agent of L); spot-checked: I read the item and every cited node in full, plus the blueprint source sk-prop-sfb-cartesian-coefficients-twists.{md,proof.md} (paragraphs Roots of unity and The integral twist). The delivery has no new nodes and the statement is unchanged. The statement is true; I checked it on S' empty, H=Q_ell, E=F, h an isomorphism, and mu_2. There is no cycle and no duplicate: det-prop-sfb-cartesian-coefficients-twists uses the sk-def-sp-tate-twist twist and alpha_f, so it does not say the same thing. Step 1 is correct: det-...-integral-limit (3) plus det-...-pullback (1) give alpha, and the finite canonical isos are gamma (same pro-etale site). Steps 4 and 5 are correct: I checked them after each projection and on pure tensors. I repaired three faults in fixes/dag/nodes/sec-smooth-purity/lem-pur-integral-twist-line-inverse-image.json. (1) C4, Step 2: the tower lemma only reaches lim h^{-1}mu_{ell^r,S}. Getting to Z_ell(1)_{S'} needs c^h_mu to be an isomorphism for general h, but lem-pur-roots-of-unity-inverse-image-iso (3) proves this only when h is an isomorphism of schemes. The step now cites the first iso of det-prop-sfb-cartesian-coefficients-twists, identified with def-pur-roots-of-unity-inverse-image. It also cites lem-weil-proetale-weakly-etale-localization for the localized site and proves that tau is semilinear over alpha_{h,Q_ell}. (2) C4, Step 3: h^{-1}(Z_ell)_S and h^{-1}(O_H)_S were identified through prop-weil-pbc-proetale-constant-ring-map, which covers only finite rings. Replaced by lem-pe-constant-left-module-inverse-image, which covers any ring and is on the unit's route. (3) E5, Step 3: semilinearity over alpha_{h,H} was asserted as 'transported', not shown. The step now gives the explicit argument: it uses the action Zhat_ell tensor (O_H) = R_H from lem-pur-twist-sheaf-locally-free (3) and checks it projection by projection. The parenthetical that mixed in the other twist definition is dropped. proof_deps is again the union of the step uses. I accepted the declared tool_uses and added four off-unit generic tools: lem-pur-inverse-image-compatible-free-tower, det-def-sp-tate-twist-locally-free, lem-pur-roots-of-unity-inverse-image-iso, lem-weil-proetale-weakly-etale-localization. No SGA source is cited. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -10,9 +10,114 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the string model of [lem-coef-adjunction-squiggle-normal-form]. The faces of $\\beta=(-,2,1,+)$ are $\\ell\\eta,s_0\\ell,\\epsilon\\ell$. The faces of $\\eta$ and $\\epsilon$ are words in $\\ell,u$ and identities. Thus the words of degeneracies of the five atoms $\\ell,u,\\eta,\\epsilon,\\beta$ form a simplicial subcategory closed under taking atomic factors. It is precisely the stated $A_0$: it contains the generators, and closure of this set of words proves the reverse inclusion. Given their arbitrary images with these boundaries, define the image of a general arrow by its unique word of degeneracies. Uniqueness of the normal form makes this well-defined and forces preservation of composition and degeneracies. For faces, expand the face of each atomic generator using the listed boundaries; simplicial identities give the same expansion on its degeneracies, and faces preserve the word composition. Hence this defines a simplicial functor with no further relations. This proves the freeness assertion, including existence.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Example 4.2.3 and Proposition 2.2.6, derived here from the string normal form"
+   }
+  },
+  {
+   "text": "Call a factor-closed simplicial subcategory parental when it contains $\\ell$ and, for every nonfillable nondegenerate atom it contains, it also contains that atom's fillable parent. By [lem-coef-adjunction-fillable-parent-bijection], the parents of $u$ and $\\eta$ are respectively $\\epsilon$ and $\\beta$ (substitute their strings from [lem-coef-adjunction-squiggle-normal-form]). The other three initial atoms are fillable, so $A_0$ is parental. Every missing nonfillable atom has a unique fillable parent; thus it suffices to exhaust the fillable atoms. Put $\\rho(a)=(w(a),k(a),\\dim a)$, with $k(\\ell)=0$. Enumerate in increasing lexicographic order the nonempty sets $X_i$ of fillable atoms outside $A_0$ having the same rank. These sets are finite: for fixed width the normal-form lemma bounds the dimension by $w-1$ and gives finitely many strings. Each rank has only finitely many preceding possible ranks, since $1\\leq k\\leq n<w$ away from $\\ell$. This gives a sequence indexed by natural numbers, rather than a longer ordinal; if it terminates, repeat the last stage using empty coproducts.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Definitions 4.2.1--4.2.2, Example 4.2.3, and finite lexicographic indexing in Proposition 4.2.15"
+   }
+  },
+  {
+   "text": "Inductively maintain that $A_i$ is parental and contains $A_0$ and all fillable atoms at ranks before $X_i$, together with their children. The base case was just checked. For $a\\in X_i$, every face except $d_{k(a)}a$ is already in $A_i$: [lem-coef-adjunction-nondistinguished-face-rank] expresses each of its nondegenerate atomic factors either as an earlier fillable atom or as an earlier fillable atom's child; take its degeneracies and then their word. If such an earlier parent is in $A_0$, its child is in $A_0$ as a face, or as an atomic factor of $d_n a=\\ell a^-$; factor closure handles the latter. The child $a^-$ itself is absent from $A_i$, because parentality would otherwise put its unique parent $a$ in $A_i$. Distinct $a\\in X_i$ have distinct children by the parent bijection. The children are nonfillable, so none is another member of $X_i$.",
+   "uses": [
+    "lem-coef-adjunction-nondistinguished-face-rank",
+    "lem-coef-adjunction-fillable-parent-bijection",
+    "lem-coef-adjunction-squiggle-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proposition 4.2.15: induction and nondistinguished-face membership; Lemma 4.2.10: absence of the child"
+   }
+  },
+  {
+   "text": "Let $B$ consist of words of degeneracies of the old nondegenerate atoms and the new pairs $a,a^-$ for $a\\in X_i$. Faces of each new parent other than the distinguished one are old by step 3; the distinguished face is $a^-$ or $\\ell a^-$. Faces of each child are old: if $k<n$, apply the simplicial face identities to $a^-=d_k a$; each double face can be written using a face of $a$ other than $d_k a$. If $k=n$, the same identities show that $\\ell d_j a^-$ is old for every $j$; factor closure then gives $d_j a^-$ old. The normal form now shows that $B$ is closed under faces, degeneracies, composition and atomic factors. Its nondegenerate atoms are exactly the old atoms and those pairs. It is parental, since each new nonfillable atom is paired with its new fillable parent. Set $A_{i+1}=B$. This proves the induction hypothesis at the successor; it also proves there are no unlisted new generators or relations at this stage.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Lemma 4.2.10 and Corollary 4.2.13: the two new atomic arrows and parental closure"
+   }
+  },
+  {
+   "text": "For a new $n$-arrow $a$ with depth $0<k<n$, the hom simplex $a$ induces $2[\\Delta^n]\\to A_{i+1}$. All faces other than $k$ land in $A_i$, so this restricts to an attaching map $2[\\Lambda_k^n]\\to A_i$. For any target simplicial category $K$ and functor $F:A_i\\to K$, an extension across this pair is exactly the choice of an $n$-simplex $x$ in the appropriate hom of $K$ with $d_jx=F(d_ja)$ for $j\\ne k$; the image of the child is forced to be $d_kx$. The unique-word normal form makes these choices both sufficient and unique for extending the functor, by the same face check as step 1. This is exactly the universal property of attaching $2[\\Delta^n]$ along its inner horn. The depth inequalities force $n\\geq2$.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Definition 4.2.9 and Lemma 4.2.10, pushout (4.2.11), including its universal-property proof"
+   }
+  },
+  {
+   "text": "For a new $n$-arrow $a$ with depth $n$, let $b$ be its source. Map $3[\\Delta^{n-1}]$ to $A_{i+1}$ by sending objects to $b,+,-$, its $1\\to2$ hom to $\\ell$, the top $(n-1)$-simplex of its $0\\to1$ hom to $a^-$, and the top $n$-simplex of its cone hom to $a$. The equality $d_na=\\ell a^-$ is exactly compatibility with composition. Step 3 and the child-face check in step 4 show that $3[\\partial\\Delta^{n-1}]$ lands in $A_i$. For a target $K$ and $F:A_i\\to K$, an extension is exactly a pair of simplices $y$ of dimension $n-1$ and $x$ of dimension $n$, with the prescribed old faces and $d_nx=F(\\ell)y$. This is exactly a functor from $3[\\Delta^{n-1}]$ agreeing on its boundary; normal form extends it uniquely on words. Hence this is the type (ii) pushout. The only fillable $1$-arrow is $\\epsilon=(-,1,-)$, already in $A_0$; $\\ell$ is also old. Consequently all these attachments have $n\\geq2$, so $m=n-1\\geq1$.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Definition 4.2.9 and Lemma 4.2.10, pushout (4.2.12), including its universal-property proof"
+   }
+  },
+  {
+   "text": "For a fixed finite $X_i$, combine the choices in steps 5 and 6. Distinct pairs have no common new atom, and every boundary condition other than the stated relation $d_na=\\ell a^-$ is old. Thus a functor from $A_{i+1}$ is equivalent to a functor from $A_i$ together with one compatible functor from each cell codomain, agreeing on each cell domain. This is the pushout universal property for their finite coproduct, with the attaching object maps allowed to identify objects. Finally every fillable atom is in $A_0$ or some $X_i$, and every nonfillable atom is the child of one by [lem-coef-adjunction-fillable-parent-bijection]. Every arrow is a finite word of degeneracies of atoms by the normal-form lemma, so it lies in a common finite stage. The increasing union is therefore the whole $\\mathsf{Adj}$.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Corollary 4.2.13 and Proposition 4.2.15: finite simultaneous cells and exhaustion"
+   }
+  },
+  {
+   "text": "It remains to identify the boundary data for a type (ii) cell. Its fillable parent has string $a=(-,n,a_2,\\ldots,a_w)$, with every other internal letter strictly less than $n$. Restriction to its last edge $\\{n-1,n\\}$ sends each letter below $n$ to $-$, the letter $n$ to $1$, and $+$ to $+$. Thus the resulting string is $(-,1,-,\\ldots,-)$ for source $-$ and $(-,1,-,\\ldots,-,+)$ for source $+$. Alternation fixes the endpoint parity, so cancellation of adjacent equal pairs gives respectively $(-,1,-)=\\epsilon$ and $(-,1,-,+)=\\epsilon\\ell$. The last vertex (the cone apex) is therefore $1_-$ or $\\ell$; call it $v$. Before the cone, the last vertex of $a^-$ is $u$ or $u\\ell$: delete the leading $\\ell$ from $d_na$, or apply the same letter restriction to its string. Hence it is $uv$, and the final cone edge is $\\epsilon v$. Renaming $v$ as the $a$ in the statement gives exactly its last-vertex, apex and counit formulas. Since $m\\geq1$, all these vertices and the last cone edge already belong to the attaching boundary. The object and $\\ell$ assignments were fixed explicitly in step 6.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form",
+    "lem-coef-adjunction-fillable-parent-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proof of Theorem 4.3.8, p. 845: explicit restriction to the last edge and its two source cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-adjunction-squiggle-normal-form",
+  "lem-coef-adjunction-fillable-parent-bijection",
+  "lem-coef-adjunction-nondistinguished-face-rank"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Agent-written finite-rank assembly following Riehl--Verity 2.2.6, 4.2.3, 4.2.10--4.2.15 and final-edge calculation of 4.3.8; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +160,38 @@
    "results": "{\"t\": \"2026-10-17T13:03:15Z\", \"tool\": \"grep\", \"query\": \"computad|walkingAdjunction|parental|fillable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: SimplicialCategory/Basic.lean:45-80 supplies enrichment primitives; Quillen I/J and generic relative cell complexes do not identify a cell filtration of this walking adjunction. Both semantic phrasings and all returned types read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The walking adjunction relative to one triangle admits finite inner horn and three object cone boundary cell attachments",
+   "results": "{\"t\": \"2026-10-17T15:01:08Z\", \"tool\": \"leanfinder\", \"query\": \"The walking adjunction relative to one triangle admits finite inner horn and three object cone boundary cell attachments\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₁.desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₂.desc\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₂.ι₃_desc\"], \"digest\": \"e212a279cc95bc53\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-horn filling and horn colimits do not construct the stated simplicial-category filtration. Basic.lean:45-70 only supplies simplicial-category primitives. Both semantic phrasings read."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialCategory, SSet",
+   "results": "{\"t\": \"2026-10-17T15:01:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialCategory, SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"867bbdf9b22a7e8c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-horn filling and horn colimits do not construct the stated simplicial-category filtration. Basic.lean:45-70 only supplies simplicial-category primitives. Both semantic phrasings read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Parental simplicial subcomputads of the free adjunction have a countable finite cell filtration",
+   "results": "{\"t\": \"2026-10-17T15:01:06Z\", \"tool\": \"leansearch\", \"query\": \"Parental simplicial subcomputads of the free adjunction have a countable finite cell filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFiniteObjOppositeSimplexCategoryOfFinite\", \"SSet.Finite.instIsFinitelyPresentable\", \"SSet.stdSimplex.instFiniteToSSetOfSimplex\", \"CategoryTheory.SimplicialObject.coskAdj\", \"SSet.instFiniteToSSet\", \"SSet.Finite\", \"SSet.coskAdj\", \"SSet.skAdj\"], \"digest\": \"61399e069249d368\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-horn filling and horn colimits do not construct the stated simplicial-category filtration. Basic.lean:45-70 only supplies simplicial-category primitives. Both semantic phrasings read."
+  },
+  {
+   "tool": "grep",
+   "query": "computad|walkingAdjunction|parental|fillable",
+   "results": "{\"t\": \"2026-10-17T15:01:05Z\", \"tool\": \"grep\", \"query\": \"computad|walkingAdjunction|parental|fillable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inner-horn filling and horn colimits do not construct the stated simplicial-category filtration. Basic.lean:45-70 only supplies simplicial-category primitives. Both semantic phrasings read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-coherent-adjunction-extension",
@@ -81,5 +214,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-walking-adjunction-cell-filtration",
+  "worker": "stage1",
+  "summary": "NI: proved initial freeness from a unique string-word model; constructed finite rank stages from a fillable matching, proved their horn/cone pushout universal properties, and computed both final counit edges. Three statement-only combinatorial dependencies; no Lean edits or compiles. Statement unchanged.",
+  "blueprint": "Nearest blueprint ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (middle enriched derived mapping-complex adjunction before inverse limit), through the existing via chain. This item supplies the cellular induction used by lem-coef-enriched-coherent-adjunction-extension, which retains its monad and counit-module simplices. No unit/chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NI-ea0ff847f",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-ea0ff847f (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, the parent lem-coef-enriched-coherent-adjunction-extension and unit sk-prop-sf-biduality-general in full. The Riehl–Verity PDF is not in literature/, network access is blocked and the machine has no copy, so I could not read the cited pages; the delivery correctly marks it WANTED and the proof by: agent. Instead I checked every claim against my own implementation of the string model. The model is right: the simplicial identities hold, every hom is a nerve (an n-simplex is determined by its spine), and the hom-category counts give N(Δ+), N(Δ+)^op and C(m+p,m) for the two mixed homs, matching W=N(Δ_∞). β=(-,2,1,+) has faces ℓη, s0ℓ and εℓ. Parent bijection, over all atoms of dimension ≤4 and width ≤9: the only fillable atoms of dimension ≤1 are ℓ and ε; the d_k child for k<n and the ℓa^- child for k=n have the stated widths; the inverse formula returns each of 186 fillables exactly and works for all 239 nonfillables of dimension ≤3; u†=ε and η†=β. The factorwise rank inequality holds in all 1379 factor checks, including identity faces. The last-edge calculation holds in all 74 cases: εv with v=1_- or ℓ, and the last vertex of the child is uv. Item steps 1–8: A_0 is closed under faces, degeneracies and factors and its words define functors uniquely. Rank classes are finite with finitely many predecessors, so the sequence is ω-indexed. Nondistinguished faces are old because the rank inequality is strict. Faces of the child are old by d_j d_k = d_{k-1} d_j (j<k), d_j d_k = d_k d_{j+1} (j≥k), and factor closure when k=n. The functor-extension arguments for 2[Λ^n_k] and 3[∂Δ^m] are correct, with n≥2 and m≥1 because ε and ℓ are already in A_0. The steps marked elementary (2, 7, 8) are elementary. The parent uses exactly the clauses provided. No duplicates in the DAG (bead normal form and relative cells concern C[K]; weight cells concern a D-module) or in the blueprint. No new node restates a clause of the item. All citations are same-unit, so there are no tool_uses. No SGA source is used, no statement changed, and this is not a target node. Cosmetic only, not fixed: the from.place strings concatenate several places. No fixes were written."
  }
 }

@@ -13,9 +13,108 @@
   "def-weil-open-immersion",
   "def-weil-pbc-cartesian-square"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}(k)$. Since $S$ is quasi-compact and quasi-separated and each of $X,Y,C,B$ is separated and of finite type over $S$, [sk-thm-nagata-compactification] gives dense compactifications. Choose first a proper compactification $u_Y:Y\\hookrightarrow Y^*$ of $Y$, and choose auxiliary compactifications $j_B:B\\hookrightarrow B'$, $j_X:X\\hookrightarrow X'$, and $j_C:C\\hookrightarrow C'$; these auxiliary schemes will only supply the first factors of the later scheme-theoretic closures. All four auxiliary compactifications are proper and finite type over $S$.",
+   "uses": [
+    "sk-thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Remark 1.1.3 and §4.1.4(a), final paragraph: choose compactifications before taking closures"
+   }
+  },
+  {
+   "text": "Define the tuple map $h_B=(j_B,u_Yb_1,u_Yb_2):B\\to B'\\times_S Y^*\\times_S Y^*$. It is quasi-compact because $B$ is Noetherian. It is an immersion: it is the composite of the graph $\\Gamma=(\\mathrm{id}_B,u_Yb_1,u_Yb_2):B\\to B\\times_S Y^*\\times_S Y^*$, a section of the projection to $B$, which is separated as the base change of the separated $Y^*\\times_SY^*\\to S$, hence a closed immersion by [lem-weil-pbc-section-separated-closed-immersion], followed by $j_B\\times\\mathrm{id}$, the base change of the open immersion $j_B$, hence an open immersion by [lem-weil-pbc-open-immersion-base-change]. Let $B^*$ be the scheme-theoretic image of $h_B$. By [sk-lem-nagata-sketch-closure], the factor $u_B:B\\hookrightarrow B^*$ is a dense open immersion. The two projections of the ambient product define maps $b_i^*:B^*\\to Y^*$ and, by construction, $b_i^*u_B=u_Yb_i$. The product $B'\\times_SY^*\\times_SY^*\\to S$ is proper as a composite of base changes of proper maps [lem-weil-pbc-proper-base-change], [lem-weil-pbc-proper-composition], so its closed subscheme $B^*$ is proper (hence finite type) over $S$ by [lem-weil-pbc-closed-immersion-proper](c).",
+   "uses": [
+    "sk-lem-nagata-sketch-closure",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Remark 1.1.3: closure of the tuple $(j',j_1c_1,j_2c_2)$ and projection maps"
+   }
+  },
+  {
+   "text": "Define $h_X=(j_X,u_Yp):X\\to T_X:=X'\\times_S Y^*$ and let $X^*$ be its scheme-theoretic image. It is a quasi-compact immersion, and hence separated by the immersion clause of [lem-weil-pbc-separated-cancellation]. The closure node gives a dense open immersion $u_X:X\\hookrightarrow X^*$, while projection to $Y^*$ gives $p^*:X^*\\to Y^*$ and $p^*u_X=u_Yp$. We prove the Cartesian assertion over $Y$. Put $T_{X,Y}=X'\\times_S Y$, an open subscheme of $T_X$, and let $h_{X,Y}=(j_X,p):X\\to T_{X,Y}$. This is an immersion (the graph $(\\mathrm{id}_X,p):X\\to X\\times_SY$ is a section of the separated projection to $X$, hence a closed immersion by [lem-weil-pbc-section-separated-closed-immersion], followed by $j_X\\times\\mathrm{id}_Y$, an open immersion by [lem-weil-pbc-open-immersion-base-change]; likewise for $h_X$, quasi-compact as $X$ is Noetherian), and it is separated by [lem-weil-pbc-separated-cancellation]. Its composite with the projection $T_{X,Y}\\to Y$ is the proper map $p$. The target projection is separated and locally of finite type, so [lem-weil-pbc-scheme-theoretic-image-proper] says that the scheme-theoretic image $Z_X$ of $h_{X,Y}$ is proper over $Y$ and that $X\\to Z_X$ is surjective. The closure node says that $X\\to Z_X$ is also an open immersion, hence an isomorphism; therefore $h_{X,Y}$ is a closed immersion and in particular is proper. Applying [lem-weil-pbc-proper-immersion-closed] to this proper immersion confirms the closed-immersion conclusion. Apply [lemma-nagata-scheme-image-restrict-open] to $h_X:X\\to T_X$ with the open $T_{X,Y}=T_X\\times_{Y^*}Y$. It identifies $X^*\\times_{T_X}T_{X,Y}=X^*\\times_{Y^*}Y$ with the scheme-theoretic image of $h_{X,Y}$, namely $X$, giving the required isomorphism. The projection $X^*\\to Y^*$ is proper: $X'\\times_SY^*\\to Y^*$ is the base change of the proper $X'\\to S$ [lem-weil-pbc-proper-base-change], and its composite with the closed immersion $X^*\\to X'\\times_SY^*$ is proper by [lem-weil-pbc-closed-immersion-proper](b).",
+   "uses": [
+    "sk-lem-nagata-sketch-closure",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-scheme-theoretic-image-proper",
+    "lem-weil-pbc-proper-immersion-closed",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a), final paragraph, with the scheme-theoretic closure and open restriction supplying the Cartesian refinement"
+   }
+  },
+  {
+   "text": "Define $h_C=(j_C,u_Bq,u_Xc_1,u_Xc_2):C\\to T_C:=C'\\times_S B^*\\times_S X^*\\times_S X^*$ and let $C^*$ be its scheme-theoretic image. It is a quasi-compact immersion, and hence separated by the immersion clause of [lem-weil-pbc-separated-cancellation]. The closure node gives a dense open immersion $u_C:C\\hookrightarrow C^*$; the projections give $q^*:C^*\\to B^*$ and $c_i^*:C^*\\to X^*$, with $q^*u_C=u_Bq$ and $c_i^*u_C=u_Xc_i$. To prove the Cartesian assertion over $B$, restrict to the open $T_{C,B}:=C'\\times_S B\\times_S X^*\\times_S X^*$ and the tuple map $h_{C,B}=(j_C,q,u_Xc_1,u_Xc_2)$. It is an immersion (graph of $(q,u_Xc_1,u_Xc_2)$, a section of a separated projection [lem-weil-pbc-section-separated-closed-immersion], followed by the open immersion $j_C\\times\\mathrm{id}$ [lem-weil-pbc-open-immersion-base-change]; likewise for $h_C$, quasi-compact as $C$ is Noetherian) and is separated by [lem-weil-pbc-separated-cancellation]; its composite with the projection to $B$ is the proper map $q$. Applying [lem-weil-pbc-scheme-theoretic-image-proper] gives a proper scheme-theoretic image over $B$ and a surjective factor from $C$, while [sk-lem-nagata-sketch-closure] makes that factor an open immersion. Hence it is an isomorphism, so $h_{C,B}$ is a proper closed immersion; [lem-weil-pbc-proper-immersion-closed] applies as well. Apply [lemma-nagata-scheme-image-restrict-open] to $h_C:C\\to T_C$ with the open $T_{C,B}=T_C\\times_{B^*}B$. It identifies the image of $h_{C,B}$ with $C^*\\times_{T_C}T_{C,B}=C^*\\times_{B^*}B$, so the canonical map $C\\to C^*\\times_{B^*}B$ is an isomorphism. The projection $q^*$ is proper: $T_C\\to B^*$ is a base change of the proper $C'\\times_SX^*\\times_SX^*\\to S$ (proper by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition], $X^*$ being proper by [lem-weil-pbc-closed-immersion-proper](c)), and composing with the closed immersion $C^*\\to T_C$ keeps it proper by [lem-weil-pbc-closed-immersion-proper](b).",
+   "uses": [
+    "sk-lem-nagata-sketch-closure",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-scheme-theoretic-image-proper",
+    "lem-weil-pbc-proper-immersion-closed",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a), final paragraph, applying the same closure construction to the source correspondence"
+   }
+  },
+  {
+   "text": "The tuple definitions give $b_i^*u_B=u_Yb_i$, $c_i^*u_C=u_Xc_i$, and the displayed equations for $p^*$ and $q^*$. On the dense open $C$ the two maps $b_i^*q^*,p^*c_i^*:C^*\\to Y^*$ agree, because $b_iq=pc_i$; since $Y^*\\to S$ is separated, [sk-lem-nagata-sketch-closure] makes them equal on all of $C^*$. The closures are proper over $S$ by Steps 2-4 and $Y^*$ by Step 1. The four open immersions are scheme-theoretically dense ([sk-thm-nagata-compactification] for $u_Y$, [sk-lem-nagata-sketch-closure] for the others), hence topologically dense: if an open $V$ of the compactification missed the open image $U$, then $\\mathcal O(V)\\to\\mathcal O_U(U\\cap V)=0$ would be injective, so $\\mathcal O(V)=0$ and $V=\\emptyset$. The two isomorphisms just proved are exactly the Cartesian squares under [def-weil-pbc-cartesian-square]. No Cartesian property of the original leg squares and no properness of the original schemes over $k$ was used.",
+   "uses": [
+    "sk-lem-nagata-sketch-closure",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-proper-morphism",
+    "sk-thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Remark 1.1.3 and §4.1.4(a), final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-scheme-theoretic-image-proper",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-separated-cancellation",
+  "lemma-nagata-scheme-image-restrict-open",
+  "sk-lem-nagata-sketch-closure",
+  "sk-thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Remark 1.1.3 and §4.1.4(a), final paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,7 +160,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-direct-image-comparison",
@@ -82,5 +181,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-proper-diagram-compactification",
+  "worker": "stage1",
+  "summary": "Repaired the returned proof by following the required ordered scheme-theoretic-image route. First choose Y* and auxiliary compactifications; form B* as the closure of the tuple (j_B,u_Yb_1,u_Yb_2), then X* as the closure of (j_X,u_Yp), and finally C* as the closure of (j_C,u_Bq,u_Xc_1,u_Xc_2). The proper-image, separated-cancellation, proper-immersion, and open-restriction nodes now prove the two Cartesian inverse-image identities. The invalid independent graph closures, common-modification step, and tuple replacement were removed.",
+  "blueprint": "Varshavsky Remark 1.1.3 tuple-closure construction and §4.1.4(a), final paragraph: ordered compactification of the target correspondence, proper-leg closure, and source-correspondence closure; the Cartesian restrictions are proved from scheme-theoretic image restriction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-bf7c5569d",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-bf7c5569d (reviewer sub-agent of L); spot-checked: FIX after reading the whole item. I checked the statement against Varshavsky Remark 1.1.3 (p.7) and §4.1.4(a), last paragraph (p.27): it keeps every hypothesis (separated finite type over k, proper p and q, b_iq=pc_i). The source's 'dominant' is topological density. The added Cartesian clause is a strengthening and it is true: h_X^{-1}(X'xY)=X, so lemma-nagata-scheme-image-restrict-open (h_X is quasi-compact because X is Noetherian, and quasi-separated by lem-weil-pbc-separated-cancellation(b)) gives X*x_{Y*}Y = SIm(h_{X,Y}). Stacks 0AH6 (lem-weil-pbc-scheme-theoretic-image-proper, with f=p proper and the projection separated and locally of finite type) makes X->SIm surjective, and the closure node makes it an open immersion, so it is an isomorphism. The same argument works for C over B. Step 5 commutation: b_i*q*u_C = u_Yb_iq = u_Ypc_i = p*c_i*u_C, then the uniqueness clause of sk-lem-nagata-sketch-closure into the separated Y*. Small cases checked: empty Y and B; p=id; the inclusion 0 in A^1 inside P^1. All cited units lie in the transitive route of sk-i-curve-zero, so tool_uses=[] is accepted. No new nodes, no duplicate found, no SGA cited. Repairs, all C1/E5, applied in fixes/dag/nodes/sec-trace-formula/lem-trf-proper-diagram-compactification.json (proof text, uses and proof_deps only): (1) Steps 2-4 used two facts without citation: a graph is a closed immersion, and j x id is an open immersion. They now cite lem-weil-pbc-section-separated-closed-immersion and lem-weil-pbc-open-immersion-base-change, and the steps say why the tuple maps are quasi-compact. (2) The properness of B*, X*, C*, p* and q* was asserted without citation. It now cites lem-weil-pbc-proper-base-change, lem-weil-pbc-proper-composition and lem-weil-pbc-closed-immersion-proper(b),(c). (3) Step 5 said the immersions were 'dense by construction', but the statement asks for topological density. The step now derives it from scheme-theoretic density in one line and cites sk-thm-nagata-compactification for u_Y. The statement is unchanged, and every step stays under 2000 characters.; 1 file(s) fixed by the reviewer"
  }
 }

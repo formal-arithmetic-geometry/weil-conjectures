@@ -23,9 +23,77 @@
   "lem-weil-pbc-etale-shriek-base-change-modules",
   "lem-weil-pbc-etale-sheaf-clopen-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form $W=V_1\\times_{V_2}j_2(U)$ and write $q:W\\to U$ for the projection (using the identification of $j_2(U)$ with $U$). The fibre-product universal property gives a section $s=j_1:U\\to W$ with $q s=1_U$; [lem-weil-pbc-open-immersion-base-change] and the definition of open immersion show that this section is open. By [lem-weil-pbc-proper-base-change], $q$ is proper, hence separated by [def-weil-proper-morphism]. Thus [lem-weil-pbc-open-section-clopen] gives a disjoint open decomposition $W=s(U)\\amalg W^c$. For a module sheaf $M$, [lem-weil-pbc-etale-sheaf-clopen-product] identifies a sheaf on this binary coproduct with its two components. The inverse of the specified base-change map of [def-weil-pbc-etale-shriek-base-change-map, lem-weil-pbc-etale-shriek-base-change-modules] identifies $p^*j_{2!}M$ with the extension by zero from $W$ of $q^*M$. Define its map to $j_{1!}M$ to be the identity on the $s(U)$ component and zero on $W^c$. This is $\\pi_{p,M}$, and the componentwise description proves its naturality in $M$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-open-section-clopen",
+    "lem-weil-pbc-etale-sheaf-clopen-product",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-shriek-base-change-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change), module-sheaf comparison; Tag 01KT (lemma-section-immersion), separated open-section decomposition"
+   }
+  },
+  {
+   "text": "The inverse-image functor is exact and extension by zero is exact, as recorded in [def-kun-unbounded-exchange, lem-weil-pbc-extension-by-zero-exact]. Applying the natural sheaf map $\\pi_{p,-}$ degreewise to an arbitrary unbounded complex gives a chain map $p^*Dj_{2!}K\\to Dj_{1!}K$. Exactness makes this construction preserve quasi-isomorphisms, so it descends to the unbounded derived categories and defines $D\\pi_p$. The construction is binary and componentwise, hence uses no boundedness or infinite-product assertion.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor): an exact functor applied degreewise preserves quasi-isomorphisms and descends to the derived categories; with the degreewise construction of the natural map"
+   }
+  },
+  {
+   "text": "Let $J$ be a K-injective complex on $U$ and let $\\rho:j_{1!}J\\to I$ be the chosen K-injective resolution used to normalize $b_p$. The representative clause of [lem-amb-unbounded-proper-open-interchange] gives $b_p$ as $j_{2!}J\\cong p_*j_{1!}J\\xrightarrow{p_*\\rho}p_*I$. By [lem-asd-derived-counit-k-injective-termwise], the derived counit at $QI$ is represented, under the canonical comparison, by the ordinary counit $p^*p_*I\\to I$. Naturality of that counit along $\\rho$ therefore rewrites the composite $p^*j_{2!}J\\to p^*p_*I\\to I$ as $\\psi_J$ followed by $\\rho$, where $\\psi_J:p^*j_{2!}J\\to j_{1!}J$ is the ordinary counit composite obtained from $j_{2!}J=p_*j_{1!}J$.\n\nIt remains to identify $\\psi_M$ with $\\pi_{p,M}$ for a sheaf $M$. Put $W=V_1\\times_{V_2}U$, let $w:W\\hookrightarrow V_1$ be the open base change and $q:W\\to U$ its projection, and let $s=j_1:U\\to W$. Outside $W$, both maps vanish by the definition of extension by zero. On $W$, the pullback clause of [lem-cbc-proper-support-sheaf-composition], applied to the proper map $p$ and the base change by $j_2$, identifies the restriction of $p_*j_{1!}M$ with $q_*s_*M$; the proper/open specializations and support-composition identification in that same statement identify $j_{2!}M$ with $p_*j_{1!}M$. Thus the restriction of $\\psi_M$ is the counit $q^*q_*s_*M\\to s_*M$, which is the map $q^*M\\to s_*M$ induced by $qs=1_U$. By the clopen decomposition of [lem-weil-pbc-open-section-clopen] and [lem-weil-pbc-etale-sheaf-clopen-product], this map is identity on $s(U)$ and zero on the complementary component, exactly the definition of $\\pi_{p,M}$. The inverse base-change identification is the $\\beta^{-1}$ of [def-weil-pbc-etale-shriek-base-change-map, lem-weil-pbc-etale-shriek-base-change-modules], so the calculation is compatible with the Step 1 construction. Hence the representative composite is $\\pi_{p,J}$, and naturality in chain maps and resolution independence descend the equality to every unbounded complex.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-asd-derived-counit-k-injective-termwise",
+    "lem-cbc-proper-support-sheaf-composition",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-open-section-clopen",
+    "lem-weil-pbc-etale-sheaf-clopen-product",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-shriek-base-change-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), case (b), specified K-injective map; explicit clopen-section counit calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-proper-morphism",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-asd-derived-counit-k-injective-termwise",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-section-clopen",
+  "lem-weil-pbc-proper-base-change",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, case (b), with the explicit clopen-section projection calculation extracted from the normalized K-injective map"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-asd-etale-compact-support-normalization",
@@ -91,5 +159,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-asd-proper-open-refinement-adjoint-projection",
+  "worker": "stage1",
+  "summary": "Repaired the returned Step 3. The derived counit is now backed by a new statement-only K-injective representative node; naturality rewrites the representative composite through the underived map psi_J, and restriction to W uses proper-support pullback, open/proper support composition, and the clopen section counit to prove psi_M=pi_{p,M}. The false inclusion and zero-target claims were removed; no statement was changed.",
+  "blueprint": "Realizes prop-asd-smooth-base-change, coherences (i) and (iii), specifically the extracted normalization argument: proper/open comparison on a refinement, followed by the derived counit and clopen-section projection identification; the helper node records the K-injective counit normalization used in that calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-dc59ef9fa",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-dc59ef9fa (reviewer sub-agent of L); spot-checked: I read all of the item and the new node, every cited node statement, and Stacks 0F7B, 0DVC, 09T5 and 015F. The mathematics is correct. Statement: b_p is Gamma_Q of lem-amb-unbounded-proper-open-interchange with k=j1, r=1_U, i=j2. Its representative j2!J = p_*j1!J -> p_*I is exactly the map in the proof of Stacks 0F7B, and case (b) applies because A is finite. Truth check on my own: the adjunct of pi_p is the sheaf identity j2! = p_*j1!. Over U it is the unit followed by restriction along the section (qs=1). Away from j2(U) both sides are 0, since a fibre there lies outside W. Tested on U empty, p=id, V1 = U plus a proper extra component, the zero ring and one-degree complexes. Step 1: the hypotheses of the clopen-section lemma (q separated by base change, s open) and of 03S6 base change (j2 open, beta^{-1} in the right direction) hold. Step 2: exact functors applied degreewise, correct. Step 3: the new counit node gives the derived counit at a K-injective complex, and naturality along rho reduces the claim to psi_J. Then lem-cbc-proper-support-sheaf-composition (p and j1 separated and locally of finite type) gives j2!=p_*j1! and j2^{-1}p_* = q_*w^{-1}. The counit of the clopen section q^*q_*s_*M -> s_*M is the identity on s(U) and zero on W^c. Matching this with the beta^{-1} identification is a short coherence from the conjugate formula; I accept it. New node lem-asd-derived-counit-k-injective-termwise: statement only, self-contained, true by 0DVC/09T5 (counit at a K-injective complex is the class of the ordinary counit), strictly smaller than the item. Searched for duplicates: prop-weil-pbc-derived-inverse-image-adjunction(1) is the same fact but bounded below and for abelian sheaves only; lem-sc-exact-derived-adjunction-single-counit, lem-kun-derived-adjoint-square-comparison and lem-sfb-derived-composition-adjunction-normalization say different things, so no duplicate. No cycle. I accept six generic tool uses outside the unit's route: lem-amb-unbounded-proper-open-interchange, prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-open-section-clopen, lem-weil-pbc-etale-sheaf-clopen-product, lem-weil-pbc-etale-shriek-base-change-modules and lem-weil-pbc-extension-by-zero-exact. Fixes in fixes/dag/nodes/sec-smooth-purity: (1) the wrong source 'Tag 08BJ, lemma-K-injective' (08BJ is adjoint-preserve-K-injectives) is replaced by 0DVC/09T5/070K/015F in the new node, and by 015F in item step 2; (2) the new node's stmt_deps now include the nodes its statement cites inline (def-pc-scheme, def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category, lem-weil-pbc-exact-functor-derived-functor, def-kun-unbounded-exchange); (3) the new node's blueprint.from.via is set to [item, lem-asd-etale-compact-support-normalization]. No statement, proof text or uses changed.; 2 file(s) fixed by the reviewer"
  }
 }

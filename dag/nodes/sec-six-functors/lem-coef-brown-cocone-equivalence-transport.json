@@ -10,9 +10,87 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], $\\mathscr D=\\operatorname{Fun}(K,\\mathcal C)$ is a quasicategory. Apply [lem-coef-infinity-isofibration-exponentiation] to the degreewise inclusion $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ and the quasicategory $\\mathscr D$. Its restriction map is an isofibration\n$$r:\\operatorname{Fun}(\\Delta^1,\\mathscr D)\\longrightarrow\\mathscr D\\times\\mathscr D.$$\nThe target identifies degreewise with the two endpoint restrictions. The constant-diagram functor sends the inverse edge and inverse triangles for $a$ to inverse witnesses for $\\Delta_Ka$. The edge $(e,\\Delta_Ka)$ is an equivalence in the target: equivalently it is a transformation on the discrete two-point shape, whose two components are equivalences, so the pointwise criterion in the cone-calculus node applies. Its source is $r(\\sigma)$. The specified-source equivalence-lifting clause of the isofibration node therefore gives an equivalence $H$ starting at $\\sigma$, with $r(H)=(e,\\Delta_Ka)$ exactly. Its terminal object is an arrow $\\sigma':d'\\to\\Delta_Kp'$, the required cocone.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3 (01F3), applied to the boundary of the interval; pointwise equivalences are Theorem 4.4.4.4 (01DK)."
+   }
+  },
+  {
+   "text": "Write $c$ for the canonical composition classes of [lem-coef-infinity-mapping-composition] (in $\\mathcal C$, and in $\\mathscr D$, which is a quasicategory by step 1); precomposition $v^*=c(-,v)$ and postcomposition $v_*=c(v,-)$ by an edge $v$ are the restrictions of $c$ to the vertex $v$, and depend only on its component class. Let $v:x\\to y$ be an equivalence edge with inverse edge $w:y\\to x$ and inverse $2$-simplices with boundary triples $(v,w,\\mathrm{id}_x)$ and $(w,v,\\mathrm{id}_y)$. The $2$-simplex clause of that node gives $[w][v]=[\\mathrm{id}_x]$ and $[v][w]=[\\mathrm{id}_y]$. For a vertex $z$, the composite $v^*w^*:\\operatorname{Map}(x,z)\\to\\operatorname{Map}(x,z)$ is $f\\mapsto c(c(f,w),v)$, the restriction of $c\\circ(c\\times1)$ to $\\operatorname{Map}(x,z)\\times\\{w\\}\\times\\{v\\}$; restricting the associativity homotopy for the vertices $x,y,x,z$ gives $v^*w^*\\simeq c(-,c(w,v))$. The vertex $c(w,v)$ lies in the component $[w][v]=[\\mathrm{id}_x]$, so by component dependence and unitality $c(-,c(w,v))\\simeq c(-,\\mathrm{id}_x)\\simeq\\mathrm{id}$. The same argument gives $w^*v^*\\simeq\\mathrm{id}$, and, using the other associativity order, $v_*w_*\\simeq\\mathrm{id}$ and $w_*v_*\\simeq\\mathrm{id}$. Hence $v^*:\\operatorname{Map}(y,z)\\to\\operatorname{Map}(x,z)$ and $v_*$ are simplicial homotopy equivalences of Kan complexes with homotopy inverses $w^*$, $w_*$. Apply this to $v=a$ in $\\mathcal C$ and to $v=e$ in $\\mathscr D$. No Hom bifunctor is used.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Corollary 8.3.5.8 (046J) and Remark 8.3.5.9 (03PD); written out from the associativity, unit and component-dependence clauses of lem-coef-infinity-mapping-composition."
+   }
+  },
+  {
+   "text": "Fix any $\\sigma'$ and $H$ as in the statement, with $c$ as in step 2. For $z\\in\\mathcal C$ let $U_{\\sigma,z}:\\operatorname{Map}_{\\mathcal C}(p,z)\\to\\operatorname{Map}_{\\mathscr D}(d,\\Delta_Kz)$, $u\\mapsto c(\\Delta_K(u),\\sigma)$, be the map of the cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], and define $U_{\\sigma',z}$ similarly; here $\\Delta_K$ on mapping spaces is postcomposition of pinched simplices with the simplicial map $\\Delta_K:\\mathcal C\\to\\mathscr D$.\n\n(a) Functoriality. Let $F:\\mathcal A\\to\\mathcal B$ be any simplicial map of quasicategories. Postcomposition with $F$ gives maps $F_M$, $F_U$, $F_V$ of the right-pinched spaces, the arrow spaces $U(-,-)$ and the triangle spaces $V(-,-,-)$ of [lem-coef-infinity-mapping-composition], and strictly $\\theta F_V=(F_U\\times F_U)\\theta$, $\\ell F_V=F_U\\ell$. By [lem-coef-infinity-pinch-comparison], $j F_M=F_Uj$. Since the $\\theta$ and $j$ are homotopy equivalences of Kan complexes, $[\\theta]^{-1}(F_U\\times F_U)=[F_V][\\theta]^{-1}$, hence\n$$[j]\\,c\\,(F_M\\times F_M)=[\\ell][\\theta]^{-1}([F_Uj]\\times[F_Uj])=[F_U][\\ell][\\theta]^{-1}([j]\\times[j])=[F_U][j]c=[j][F_M]c,$$\nand cancelling the invertible $[j]$ gives $c(F_M\\times F_M)\\simeq F_Mc$ as maps of whole mapping spaces. With $F=\\Delta_K$ and the second variable restricted to the vertex $a$: $c(\\Delta_K(u),\\Delta_Ka)\\simeq\\Delta_K(c(u,a))$ as maps in $u\\in\\operatorname{Map}_{\\mathcal C}(p',z)$.\n\n(b) The square. $H:\\Delta^1\\times\\Delta^1\\to\\mathscr D$ has vertices $d,\\Delta_Kp,d',\\Delta_Kp'$, edges $\\sigma,\\sigma',e,\\Delta_Ka$ and a diagonal $\\delta:d\\to\\Delta_Kp'$, and its two nondegenerate $2$-simplices have edge triples $(e,\\sigma',\\delta)$ and $(\\sigma,\\Delta_Ka,\\delta)$. The $2$-simplex clause of [lem-coef-infinity-mapping-composition] gives $[\\sigma'][e]=[\\delta]=[\\Delta_Ka][\\sigma]$, so the vertices $c(\\sigma',e)$ and $c(\\Delta_Ka,\\sigma)$ of $\\operatorname{Map}_{\\mathscr D}(d,\\Delta_Kp')$ lie in one component.\n\n(c) Restricting the associativity homotopies to vertices, using component dependence of precomposition and then (a), one gets homotopies of maps of the whole space $\\operatorname{Map}_{\\mathcal C}(p',z)$:\n$$e^*U_{\\sigma',z}(u)=c(c(\\Delta_Ku,\\sigma'),e)\\simeq c(\\Delta_Ku,c(\\sigma',e))\\simeq c(\\Delta_Ku,c(\\Delta_Ka,\\sigma))\\simeq c(c(\\Delta_Ku,\\Delta_Ka),\\sigma)\\simeq c(\\Delta_K(c(u,a)),\\sigma)=U_{\\sigma,z}a^*(u).$$\nThus $e^*U_{\\sigma',z}\\simeq U_{\\sigma,z}a^*$, using the actual square $H$, not merely the existence of endpoint equivalences.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Corollary 8.3.5.8 (046J) and Remark 8.3.5.9 (03PD); the functoriality of composition classes (a) is written out from the characterization in lem-coef-infinity-mapping-composition and the naturality of j in lem-coef-infinity-pinch-comparison."
+   }
+  },
+  {
+   "text": "The cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], dualized, says that $\\sigma$ (resp. $\\sigma'$) is colimiting if and only if $U_{\\sigma,z}$ (resp. $U_{\\sigma',z}$) is a weak homotopy equivalence for every $z$. By step 2, $a^*$ and $e^*$ are simplicial homotopy equivalences, hence weak homotopy equivalences by [lem-cbc-simplicial-homotopy-equivalence-weak]. Simplicially homotopic maps $f_0,f_1:A\\to B$ are weak homotopy equivalences together: if $h:A\\times\\Delta^1\\to B$ is the homotopy, the endpoint inclusions $i_0,i_1:A\\to A\\times\\Delta^1$ have homotopy inverse the projection (the homotopy $A\\times\\Delta^1\\times\\Delta^1\\to A\\times\\Delta^1$ induced by $\\min:[1]\\times[1]\\to[1]$), so they are weak equivalences by the same node, and $f_k=hi_k$. Weak homotopy equivalences satisfy two-out-of-three, since bijections and group isomorphisms do. Applied to $e^*U_{\\sigma',z}\\simeq U_{\\sigma,z}a^*$ from step 3: if $U_{\\sigma',z}$ is a weak equivalence, so are $e^*U_{\\sigma',z}$, $U_{\\sigma,z}a^*$ and hence $U_{\\sigma,z}$; conversely if $U_{\\sigma,z}$ is, so are $U_{\\sigma,z}a^*$, $e^*U_{\\sigma',z}$ and hence $U_{\\sigma',z}$. Taking all $z$, $\\sigma$ is colimiting if and only if $\\sigma'$ is.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Agent consequence of the dual cocone criterion and the whole-space homotopy of steps 2–3."
+   }
+  },
+  {
+   "text": "For a functor $G:\\mathcal C\\to\\mathcal E$, postcomposition defines a simplicial functor $G_K:\\mathscr D\\to\\operatorname{Fun}(K,\\mathcal E)$ by [def-cbc-enhanced-diagrams-cones]. It sends constant diagrams to constant diagrams and sends the displayed square $H$ to a square with endpoint edges $G_Ke$ and $\\Delta_KG(a)$. A simplicial map preserves equivalence edges by applying it to inverse triangles, and $G_K\\Delta_K=\\Delta_KG$ as simplicial maps $\\mathcal C\\to\\operatorname{Fun}(K,\\mathcal E)$, so the endpoint edge $G_K(\\Delta_Ka)$ is exactly $\\Delta_K(Ga)$; steps 2–4 (which need of the square only its two $2$-simplices and of the endpoints only that they are equivalence edges) apply in $\\mathcal E$ and give colimitingness of $G\\sigma$ if and only if that of $G\\sigma'$. No colimit-preservation assumption on $G$ is used. When $K=\\varnothing$, the functor simplicial set is the point and the cocone category is $\\mathcal C$ by the degreewise definition, so the criterion specializes to invariance of initiality under the given apex equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Agent specialization of steps 2–4; degreewise postcomposition and the empty-shape pullback are the definitions in the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Auxiliary coherent-cocone comparison underlying the existing Brown right-exact extension ancestry of proof paragraph 2; explicit proof from the cited DAG statements, with online Kerodon checks 01F3, 01DK, 046J and 03PD. Cisinski CatLR is not archived here."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +119,45 @@
    "results": "{\"t\": \"2026-10-17T08:38:27Z\", \"tool\": \"leanfinder\", \"query\": \"Given equivalent diagrams of a quasicategory and colimit cocones on them the full cocones are connected by a coherent equivalence retaining the diagram comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_apply_desc\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.of_equiv\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence_hom\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_symm_apply_desc\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"CategoryTheory.Functor.CoconeTypes.IsColimitCore.precompose\", \"CategoryTheory.Functor.CoconeTypes.isColimit_precompose_iff\"], \"digest\": \"0d554d2e9fbf8510\"}",
    "date": "2026-10-17",
    "verdict": "no match: spanIsoMk/spanExt and IsColimit.ofCoconeEquiv are ordinary category statements. The SSet homotopy-category hits describe the quotient and induced ordinary natural isomorphisms, not a lift to coherent diagrams or cocone squares."
+  },
+  {
+   "tool": "grep",
+   "query": "ofCoconeEquiv|equivOfNatIsoOfIso|Quasicategory",
+   "results": "{\"t\": \"2026-10-17T13:02:37Z\", \"tool\": \"grep\", \"query\": \"ofCoconeEquiv|equivOfNatIsoOfIso|Quasicategory\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FunctorCategory/BinaryBiproducts.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/BinaryBiproducts.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Terminal.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Terminal.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/MonoCoprod.lean\", \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"Mathlib/CategoryTheory/Limits/IsLimit.lean\"], \"digest\": \"48c2303b7df79380\"}; Read hits: ordinary categorical IsColimit transport and strict-Segal/inner-horn basics do not give the coherent square lifting and colimit assertion. Inspected Mathlib/CategoryTheory/Limits/IsLimit.lean lines 270-281 and 325-335; the latter generates the dual IsColimit.equivOfNatIsoOfIso.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an infinity category equivalences of diagrams and of cocone apices preserve the colimit universal property",
+   "results": "{\"t\": \"2026-10-17T13:02:37Z\", \"tool\": \"leansearch\", \"query\": \"In an infinity category equivalences of diagrams and of cocone apices preserve the colimit universal property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.of_equiv\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_apply_desc\", \"CategoryTheory.IsUniversalColimit.whiskerEquivalence_iff\", \"CategoryTheory.Limits.IsColimit.mapCoconeEquiv\", \"CategoryTheory.IsVanKampenColimit.mapCocone_iff\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Limits.isColimitMapCoconePushoutCoconeEquiv\"], \"digest\": \"15d10b6cef05d54b\"}; Read hits: ordinary categorical IsColimit transport and strict-Segal/inner-horn basics do not give the coherent square lifting and colimit assertion. Inspected Mathlib/CategoryTheory/Limits/IsLimit.lean lines 270-281 and 325-335; the latter generates the dual IsColimit.equivOfNatIsoOfIso.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.equivOfNatIsoOfIso",
+   "results": "{\"t\": \"2026-10-17T13:02:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsColimit.equivOfNatIsoOfIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.equivOfNatIsoOfIso\", \"SheafOfModules.Presentation.map_relations_I\", \"CategoryTheory.Limits.pointwiseBinaryBicone.isBilimit_isColimit\"], \"digest\": \"925de934ac09c748\"}; Read hits: ordinary categorical IsColimit transport and strict-Segal/inner-horn basics do not give the coherent square lifting and colimit assertion. Inspected Mathlib/CategoryTheory/Limits/IsLimit.lean lines 270-281 and 325-335; the latter generates the dual IsColimit.equivOfNatIsoOfIso.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalences in a quasicategory lift along endpoint restriction of the arrow functor category and preserve colimit cocones",
+   "results": "{\"t\": \"2026-10-17T13:02:41Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalences in a quasicategory lift along endpoint restriction of the arrow functor category and preserve colimit cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.Truncated.liftOfStrictSegal_app_1\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\"], \"digest\": \"712d755497f5ab98\"}; Read hits: ordinary categorical IsColimit transport and strict-Segal/inner-horn basics do not give the coherent square lifting and colimit assertion. Inspected Mathlib/CategoryTheory/Limits/IsLimit.lean lines 270-281 and 325-335; the latter generates the dual IsColimit.equivOfNatIsoOfIso.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For quasicategories the restriction from functors on the interval to their two endpoints is an isofibration and lifts equivalences with prescribed endpoints",
+   "results": "{\"t\": \"2026-10-17T13:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"For quasicategories the restriction from functors on the interval to their two endpoints is an isofibration and lifts equivalences with prescribed endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.liftOfStrictSegal\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.Truncated.liftOfStrictSegal.f₂\", \"SSet.Truncated.liftOfStrictSegal.app\", \"SSet.Truncated.liftOfStrictSegal_app_1\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"aefd7ef54ecd2008\"}; Read hits: ordinary categorical IsColimit transport and strict-Segal/inner-horn basics do not give the coherent square lifting and colimit assertion. Inspected Mathlib/CategoryTheory/Limits/IsLimit.lean lines 270-281 and 325-335; the latter generates the dual IsColimit.equivOfNatIsoOfIso.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-right-exact-extension",
@@ -75,5 +188,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-brown-cocone-equivalence-transport",
+  "worker": "stage1",
+  "summary": "Repaired the returned circular dependency: the invalid Hom-bifunctor node is no longer used. Maintainer reader fix (2026-10-17): the delivered helper on inverse pre/postcomposition was a few-line consequence of lem-coef-infinity-mapping-composition and is dropped; its inverse and 2-simplex arguments are written into steps 2-3, step 3 now proves that a simplicial functor preserves canonical composition classes (from the naturality of j in lem-coef-infinity-pinch-comparison), and step 4 writes out the passage from homotopy classes to weak homotopy equivalences. The statement and the endpoint-isofibration step are unchanged.",
+  "blueprint": "Retains the supplied ancestry to prop-coef-integral-exceptional-adjoint proof paragraph 2. Steps 1–5 realize endpoint lifting, inverse pre/postcomposition, the functoriality of composition and the square homotopy, the universal-property comparison, functor images, and the empty-shape case, without the invalid Hom bifunctor route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic functor-category closure, pointwise equivalences, and the dual mapping-space criterion for colimits. This foundational tool is used for arbitrary simplicial shapes; no node of the item unit supplies that criterion."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic fact that a simplicial homotopy equivalence is a weak homotopy equivalence, used in step 4 to pass from the homotopy-class square to the weak-equivalence criterion of the cone calculus; no node of the item unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-ef0f4d1fc",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-ef0f4d1fc (reviewer sub-agent of L); spot-checked: I read the item, the new node, the full statements of every cited node (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-isofibration-exponentiation, lem-coef-infinity-mapping-composition, lem-coef-infinity-pinch-comparison), the parent's use of the item, the unit and the blueprint paragraph 2. The statement is true and unchanged. I tested it on K empty (initiality invariance), K a point, ordinary nerves, a functor G that preserves no colimits, and identity edges. Step 1 (isofibration lifting with prescribed source, Fun(boundary of Delta^1, D)=DxD, Delta_K preserves inverse triangles) is correct. Three faults, all repaired in fixes/dag/nodes/sec-six-functors/lem-coef-brown-cocone-equivalence-transport.json. (1) E5/C1: step 3 wrote Delta_K(u)Delta_K(a)sigma = Delta_K(ua)sigma, which needs a functor to preserve canonical composition classes as a homotopy of whole maps. No cited node stated this; only the invalidated Hom-bifunctor node did. Step 3(a) now proves it from the characterization of c in lem-coef-infinity-mapping-composition and the naturality of j in lem-coef-infinity-pinch-comparison, and 3(c) writes out the 5-homotopy chain using the two 2-simplices of H. (2) C1: the new node lem-coef-infinity-equivalence-composition is a 2-4 line consequence of the associativity, unit and component-dependence clauses of mapping-composition, and its last clause is vague. I folded it into steps 2-3 and dropped it; it had no other citer. (3) Step 4 now states the passage from homotopy classes to weak equivalences (lem-cbc-simplicial-homotopy-equivalence-weak, homotopy invariance via the min-contraction, two-out-of-three). Accepted tool uses: lem-cbc-enhanced-functor-cone-calculus (declared by the worker) and lem-cbc-simplicial-homotopy-equivalence-weak (added by me), both generic sk-prop-sf-cbc tools. Not a duplicate: lem-coef-colimit-cocone-transport-equivalence is the diagram-only special case, and the item strictly generalizes it. The dependency closure has 144 nodes with no cycle; there is no SGA and no target or base-change content. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
