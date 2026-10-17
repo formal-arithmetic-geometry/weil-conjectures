@@ -10,9 +10,96 @@
  "stmt_deps": [
   "lem-weil-pbc-localization-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identities and composites in $W_{\\mathcal B}$ remain identities and composites in $W$. For the right Ore axiom take $f:X\\to Z$ and $s:Y\\to Z$ in $\\mathcal B$ with only $s\\in W_{\\mathcal B}$. The ambient axiom gives $t:T\\to X$ in $W$ and $g:T\\to Y$ with $f\\circ t=s\\circ g$. Choose $r:B_T\\to T$ in $W$ with $B_T\\in\\mathcal B$. Then $t\\circ r\\in W$, and $f\\circ t\\circ r=s\\circ g\\circ r$. Fullness puts both $t\\circ r$ and $g\\circ r$ in $\\mathcal B$, so these are the required restricted Ore square. This is a direct application of the hypotheses; $f$ need not be in $W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0GSL (lemma-localization-subcategory), categorical refinement argument; right-fraction axioms in Categories Tag 04VC (definition-multiplicative-system)."
+   }
+  },
+  {
+   "text": "For the cancellation axiom take $f,g:X\\to Y$ and $s:Y\\to Z$ in $\\mathcal B$ with $s\\in W_{\\mathcal B}$ and $s\\circ f=s\\circ g$. Ambient cancellation gives $t:T\\to X$ in $W$ with $f\\circ t=g\\circ t$. Choose $r:B_T\\to T$ as in step 1. Then $t\\circ r$ belongs to $W_{\\mathcal B}$ and equalizes $f,g$. Together with step 1 this proves all the right-fraction axioms for $W_{\\mathcal B}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0GSL (lemma-localization-subcategory), categorical refinement argument; right-fraction axioms in Categories Tag 04VC (definition-multiplicative-system)."
+   }
+  },
+  {
+   "text": "Write $i:\\mathcal B\\hookrightarrow\\mathcal C$ for inclusion and let $Q_B:\\mathcal B\\to\\mathcal L_B$, $Q_C:\\mathcal C\\to\\mathcal L_C$ denote the indicated universal-property localizations. Since $Q_Ci$ inverts $W_{\\mathcal B}$, [lem-weil-pbc-localization-universal-property](1) gives $F:\\mathcal L_B\\to\\mathcal L_C$ and a natural isomorphism $\\alpha:FQ_B\\xrightarrow{\\sim}Q_Ci$. For $X,Y\\in\\mathcal B$ put $H_{X,Y}(u)=\\alpha_Y\\circ F(u)\\circ\\alpha_X^{-1}$. Naturality and preservation of inverses give, for each roof $X\\xleftarrow{s}P\\xrightarrow{a}Y$ in $\\mathcal B$, $$H_{X,Y}(Q_B(a)Q_B(s)^{-1})=Q_C(a)Q_C(s)^{-1}.$$ Thus bijectivity of $H_{X,Y}$ is precisely bijectivity of the corresponding Hom map of $F$.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VK (lemma-properties-right-localization), factorization; natural-isomorphism formulation as in lem-weil-pbc-localization-universal-property."
+   }
+  },
+  {
+   "text": "Fix $X,Y\\in\\mathcal B$ and $h:Q_C(X)\\to Q_C(Y)$. By [lem-pc-right-fraction-representation] for $(\\mathcal C,W,Q_C)$, write $h=Q_C(a)Q_C(s)^{-1}$ with $s:P\\to X$ in $W$ and $a:P\\to Y$. Choose $r:B_P\\to P$ in $W$ with $B_P\\in\\mathcal B$. Both $s\\circ r$ and $a\\circ r$ are arrows in $\\mathcal B$, and $s\\circ r\\in W_{\\mathcal B}$. Inverting $Q_C(r)$ gives $$Q_C(a\\circ r)Q_C(s\\circ r)^{-1}=Q_C(a)Q_C(s)^{-1}=h.$$ The roof $(s\\circ r,a\\circ r)$ in $\\mathcal B$ therefore supplies a preimage under $H_{X,Y}$ by step 3. This proves surjectivity.",
+   "uses": [
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0GSL (lemma-localization-subcategory), categorical refinement argument; right-fraction axioms in Categories Tag 04VC (definition-multiplicative-system)."
+   }
+  },
+  {
+   "text": "For injectivity let $u,v:Q_B(X)\\to Q_B(Y)$ have equal images under $H_{X,Y}$. By [lem-pc-right-fraction-representation] applied in $\\mathcal B$, write them as roofs $(s_j:P_j\\to X,a_j:P_j\\to Y)$, $j=1,2$, with $s_j\\in W_{\\mathcal B}$. Their ambient roofs have equal images by step 3. By [lem-pc-right-fraction-common-refinement] in $\\mathcal C$ there are $R$ and $b_j:R\\to P_j$ such that $s_1b_1=s_2b_2\\in W$ and $a_1b_1=a_2b_2$. Choose $r:B_R\\to R$ in $W$ with $B_R\\in\\mathcal B$. Fullness makes $b_jr$ arrows of $\\mathcal B$, while multiplicativity gives $s_1b_1r=s_2b_2r\\in W_{\\mathcal B}$ and $a_1b_1r=a_2b_2r$. The reverse implication of [lem-pc-right-fraction-common-refinement], now in $\\mathcal B$ using steps 1-2, yields $u=v$. The arrows $b_j$ need not belong to $W$: only their common denominator and then its composite with $r$ do.",
+   "uses": [
+    "lem-pc-right-fraction-representation",
+    "lem-pc-right-fraction-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0GSL (lemma-localization-subcategory), categorical refinement argument; right-fraction axioms in Categories Tag 04VC (definition-multiplicative-system)."
+   }
+  },
+  {
+   "text": "By [lem-trf-localization-essentially-surjective] for $Q_B$, every object $A\\in\\mathcal L_B$ admits an isomorphism $e_A:Q_B(X_A)\\xrightarrow{\\sim}A$. Conjugation sends $u:A\\to A'$ bijectively to $e_{A'}^{-1}ue_A$. Its image under $F$ is $F(e_{A'})^{-1}F(u)F(e_A)$. Thus the bijections on Hom sets established in steps 4-5 transport to every pair $A,A'$. Hence $F$ is fully faithful.",
+   "uses": [
+    "lem-trf-localization-essentially-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0GSL (lemma-localization-subcategory), categorical refinement argument; right-fraction axioms in Categories Tag 04VC (definition-multiplicative-system)."
+   }
+  },
+  {
+   "text": "By [lem-trf-localization-essentially-surjective] for $Q_C$, every $D\\in\\mathcal L_C$ is isomorphic to $Q_C(X)$ for some $X\\in\\mathcal C$. Choose a denominator $s:B\\to X$ with $B\\in\\mathcal B$. The composite $$F(Q_B(B))\\xrightarrow{\\alpha_B}Q_C(B)\\xrightarrow{Q_C(s)}Q_C(X)\\xrightarrow{\\sim}D$$ is an isomorphism, since $Q_C$ inverts $W$. Hence $F$ is essentially surjective. Applying [lem-trf-fully-faithful-ess-surj-equivalence] with step 6 proves the claimed equivalence. No functorial choices of denominators, saturation of $W$, or triangulated structure entered the argument.",
+   "uses": [
+    "lem-trf-localization-essentially-surjective",
+    "lem-trf-fully-faithful-ess-surj-equivalence",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0GSL (lemma-localization-subcategory), categorical refinement argument; right-fraction axioms in Categories Tag 04VC (definition-multiplicative-system)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-trf-localization-essentially-surjective",
+  "lem-trf-fully-faithful-ess-surj-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0GSL (lemma-localization-subcategory), generalized categorical refinement route. Restricted axioms and injectivity are written out using Categories Tags 04VC, 04VH-04VK; this is not a verbatim Stacks statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +177,31 @@
    "results": "8 hits: CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence, CategoryTheory.Functor.IsLocalization.isEquivalence, CategoryTheory.Localization.isEquivalence, CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isEquivalence, CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_equivalence, CategoryTheory.Localization.instIsEquivalenceLocalizationLift, CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence, CategoryTheory.Functor.IsLocalization.of_isEquivalence",
    "date": "2026-10-17",
    "verdict": "Independent second reading: no exact match. Localized-equivalence predicates and consequences assume the conclusion; equivalence-source constructors assume an equivalence before localization; calculus instances give the axioms, not restriction to a denominator-dense full subcategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category with right calculus of fractions has an equivalence on localizations induced by any full subcategory from which every object receives a denominator",
+   "results": "8 hits: CategoryTheory.Localization.isEquivalence, CategoryTheory.Localization.Construction.objEquiv, CategoryTheory.Localization.instIsEquivalenceLocalizationLift, CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_equivalence, CategoryTheory.Localization.functorEquivalence, CategoryTheory.Functor.IsLocalization.isEquivalence, CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence, CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isEquivalence",
+   "date": "2026-10-17",
+   "verdict": "no match: read generic localized-equivalence and functorial-resolution constructors; they require an already localized equivalence or functorial resolution (and two-out-of-three), not this objectwise right-calculus criterion. Existing fraction representation/equality hits are used as separate tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasRightCalculusOfFractions\"",
+   "results": "12 hits: CategoryTheory.MorphismProperty.HasRightCalculusOfFractions, CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.toIsMultiplicative, CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsOppositeOpOfHasRightCalculusOfFractions, CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsOppositeOpOfHasLeftCalculusOfFractions, CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsUnopOfHasRightCalculusOfFractionsOpposite, CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsUnopOfHasLeftCalculusOfFractionsOpposite, CategoryTheory.Localization.essSurj_mapArrow_of_hasRightCalculusOfFractions, CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.exists_rightFraction",
+   "date": "2026-10-17",
+   "verdict": "no match: read generic localized-equivalence and functorial-resolution constructors; they require an already localized equivalence or functorial resolution (and two-out-of-three), not this objectwise right-calculus criterion. Existing fraction representation/equality hits are used as separate tools."
+  },
+  {
+   "tool": "grep",
+   "query": "resolution|subcategory|fullyFaithful",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: read generic localized-equivalence and functorial-resolution constructors; they require an already localized equivalence or functorial resolution (and two-out-of-three), not this objectwise right-calculus criterion. Existing fraction representation/equality hits are used as separate tools."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-filtered-flat-resolution",
@@ -113,5 +221,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-right-fraction-dense-subcategory",
+  "worker": "stage1",
+  "summary": "Proved the restricted Ore and cancellation axioms directly. Reused existing Mathlib roof representation and common-refinement nodes to prove Hom bijectivity. Added only the generic Mathlib essential-surjectivity and equivalence-criterion leaves, so the argument works for arbitrary universal-property presentations without assuming they have the original objects. The statement is unchanged.",
+  "blueprint": "Additivity paragraph, filtered derived category and filtered bifunctors: passage from split-flat replacements to the finite filtered localization, through lem-trf-finite-filtered-flat-resolution; generic categorical tool for the right-fraction density comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-b77895c70",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-b77895c70 (reviewer sub-agent of L); spot-checked: PASS with no changes; review.md has the full checks. Item: a categorical generalization of Stacks 0GSL (derived.tex:1497), flagged as such in source.place. The Stacks proof uses only the right axioms RMS1-3 (categories.tex:3930-3944) and the density of denominators from the subcategory, not saturation or the triangulated structure. Axiom directions match Mathlib HasRightCalculusOfFractions. The only user is step 9 of lem-trf-finite-filtered-flat-resolution, which applies the item within its hypotheses. Small cases checked: B=C; W=identities; W=isos; B empty with C nonempty (density fails); C empty. Steps 1-2: the Ore square and cancellation refine correctly through r:B_T->T in W; f need not be in W; elementary. Step 3: clause (1) of lem-weil-pbc-localization-universal-property gives F and a natural iso to Q_C i; the roof formula is verified through naturality at a and s. Step 4: lem-pc-right-fraction-representation (generic, matching exists_rightFraction) plus refinement gives surjectivity. Step 5: in common-refinement only the common composite s1b1=s2b2 must be in W (Mathlib RightFractionRel at CalculusOfFractions.lean:894-898); composing with r puts the witness in W_B, so the reverse implication in B applies once steps 1-2 hold. No two-out-of-three is used. Steps 6-7: conjugation by the e_A isomorphisms and the composite alpha_B, Q_C(s), iso are correct. proof_deps equals the union of the uses. New leaves are exact Mathlib facts and not duplicates: lem-trf-localization-essentially-surjective is Localization.essSurj (Predicate.lean:201-206, holds for any IsLocalization W); lem-trf-fully-faithful-ess-surj-equivalence is IsEquivalence (Equivalence.lean:606-609) and asEquivalence (642, tagged stacks 02C3). Both are statement-only, with searches of three kinds recorded. The DAG duplicate search (derivability structure, multivariable derived calculus, nattrans-from-resolving-class, fibrant-subcategory infinity localization, D+ localization, all 02C3/asEquivalence citers) found no duplicate. Mathlib's isLocalizedEquivalence_of_functorial_right_resolutions needs functorial resolutions, so the item is not a Mathlib leaf. All cited proof nodes are Mathlib leaves, so tool_uses is empty and none is needed. The blueprint from/via fields are correct. No SGA is cited. Not a target node, so the base-change and coefficient checks do not apply."
  }
 }
