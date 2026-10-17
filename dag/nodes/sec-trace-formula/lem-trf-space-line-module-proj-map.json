@@ -15,7 +15,8 @@
   "def-nagata-relative-proj",
   "def-sc-invertible-module",
   "def-pc-module-pullback",
-  "lemma-nagata-relative-proj-base-change-arbitrary"
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "def-trf-space-line-module-proj-input"
  ],
  "proof": [
   {
@@ -179,5 +180,26 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-664f87dd6 (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited nodes, and Stacks Tags 0D2Z and 01O9. The unrestricted arbitrary-base-change statement, generation-locus formula, Proj comparison, hypotheses, and coefficient category are correct. All proof steps are concrete, non-circular, below the long-step threshold, and use only cited statements; edge cases and non-flat base change were checked. No new nodes or repairs are needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SpaceLineModuleProjMap",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_line_module_proj_map",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.space_line_module_proj_map"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SpaceLineModuleProjMap.lean",
+  "statement": "theorem space_line_module_proj_map (S : Scheme.{u}) (T : Over S) (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T) (A : T.left.GradedAlgebraData) (L : X.Modules) (hL : X.IsLineModule L) (ψ : GradedLineMap f A (lineTestFamily X L hL)) : ∃ (U : Subfunctor X.obj.obj) (hU : Presheaf.IsSheaf (Scheme.fppfTopology.over S) U.toFunctor), IsAlgebraicSpace ⟨U.toFunctor, hU⟩ ∧ IsRepresentableWith (fun _ _ j ↦ IsOpenImmersion j.left) U.ι ∧ ψ.IsGenerationOpen U ∧ ∃! r : U.toFunctor ⟶ yoneda.obj (projOver T A), ψ.IsCanonicalMap U r ∧ ∀ (X' T' : Over S) (g : T' ⟶ T) (f' : X' ⟶ T') (k : yoneda.obj X' ⟶ X.obj.obj) (_hcomm : k ≫ f = yoneda.map f' ≫ yoneda.map g) (A' : T'.left.GradedAlgebraData) (D : Scheme.GradedAlgebraData.PullbackData g.left A A') (ψ' : GradedLineMap (yoneda.map f') A' ((lineTestFamily X L hL).pullback k)), ψ.IsBaseChange k g D ψ' → ψ'.IsGenerationOpen (U.preimage k) ∧ ∃! r' : (U.preimage k).toFunctor ⟶ yoneda.obj (projOver T' A'), ψ'.IsCanonicalMap (U.preimage k) r' ∧ ∀ (W : Over S) (a : (U.preimage k).toFunctor.obj (op W)), (r'.app (op W) a).left ≫ D.relProjComparison = (r.app (op W) ((U.fromPreimage k).app (op W) a)).left",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-76e4d3b1a",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read the full packet, immutable node/dependencies, both Lean modules, source/report/docstrings, and route-pivot records. Verified clause and hypothesis correspondence, edge cases, real definitions, canonical dependencies, required report sections, and successful per-file scompile.py compilation with no errors."
  }
 }

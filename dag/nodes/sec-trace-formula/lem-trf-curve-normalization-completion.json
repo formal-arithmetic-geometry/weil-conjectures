@@ -342,5 +342,23 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-f64e3b420 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited statements against Stacks 0C3S/0C3V and supporting algebra sources. All eleven steps, hypotheses, canonical denominator map, edge cases, dependency closure and generic tool uses check out. No repairs needed; review.md written. Pivot metadata was absent from the snapshot; no prohibited machinery appears in the inspected closure."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CurveNormalizationCompletion",
+  "declaration": "RingTheory.curve_normalization_completion",
+  "file": "lean/Sheaf/TraceFormula/CurveNormalizationCompletion.lean",
+  "statement": "theorem curve_normalization_completion (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] [IsLocalRing A] [IsReduced A] [Algebra.EssFiniteType k A] (hdim : ringKrullDim A = (1 : WithBot ℕ∞)) : Module.Finite A (integralClosure A (FractionRing A)) ∧ IsReduced (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) = (1 : WithBot ℕ∞) ∧ ∃ hreg : ∀ s : A, s ∈ nonZeroDivisors A → algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A) s ∈ nonZeroDivisors (AdicCompletion (IsLocalRing.maximalIdeal A) A), ∃ (e : ((AdicCompletion (IsLocalRing.maximalIdeal A) A) ⊗[A] (integralClosure A (FractionRing A))) ≃ₐ[ AdicCompletion (IsLocalRing.maximalIdeal A) A] integralClosure (AdicCompletion (IsLocalRing.maximalIdeal A) A) (FractionRing (AdicCompletion (IsLocalRing.maximalIdeal A) A))) (φ : FractionRing A →+* FractionRing (AdicCompletion (IsLocalRing.maximalIdeal A) A)), (∀ (a : A) (s : nonZeroDivisors A), φ (IsLocalization.mk' (FractionRing A) a s) = IsLocalization.mk' (FractionRing (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A) a) ⟨algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A) s, hreg s s.property⟩) ∧ (∀ b : integralClosure A (FractionRing A), (e ((1 : AdicCompletion (IsLocalRing.maximalIdeal A) A) ⊗ₜ[A] b) : FractionRing (AdicCompletion (IsLocalRing.maximalIdeal A) A)) = φ b.1)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5a1281416",
+  "group": "Q52",
+  "result": "fix",
+  "note": "Statement and source checks passed; scompile.py returned exit code 0. Repaired the H11 placeholder second-reading section with a complete replacement report under fixes/. Full findings are recorded in review.md."
  }
 }

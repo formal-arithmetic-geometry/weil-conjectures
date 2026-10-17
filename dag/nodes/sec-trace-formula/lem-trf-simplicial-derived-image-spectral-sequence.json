@@ -16,7 +16,10 @@
   "def-trf-geometric-morphism",
   "def-trf-total-simplicial-etale-site",
   "def-sp-double-complex-total",
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-trf-total-etale-augmentation-adjunction",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
  ],
  "proof": [
   {
@@ -430,5 +433,55 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-395bcb6aa (reviewer sub-agent of L); spot-checked: Read in full: the item, its 15 steps, the new def-trf-total-simplicial-etale-site, every cited statement, the two citers, and Stacks spaces-simplicial 09WC, 0D72, 0D74/0D75, 0D70, 0DH0/0DH1, 0D7C/0D7D/0D7F at their labels; the tags were checked against tags/tags. The mathematics is correct for constant commutative Λ on arbitrary schemes. The total site matches 09WC Case A, and the omitted fibre-product details are written in step 1. Step 4's ℓ_n is 0D72's g_{n!}, exact because the coefficients are constant (so 0D75's flatness holds); hence e_n preserves injectives. The equalizer adjunction (0D70) is proved by the vertex/edge argument. The contraction s(α)=(0,α) gives ds+sd=1, checked including degree -1. For the Hom-exactness of step 10 I checked the test G=kernel. I checked the orientation of lem-sc-first-quadrant-column-augmentation (K.X 0 is the column, K.flip.X r is the row, Mathlib's up/up sign d1+(-1)^p d2 agrees with def-sp-double-complex-total). The filtration bound max(n-c+1,0) is right, tested at n<c, n=c and n=0 with c=-2. I recomputed the filtered homotopy (-1)^p s. The new definition is not a duplicate (rg over the DAG and the hypercover nodes) and does not restate the item; its searches are real. Small case: a constant one-point simplicial scheme gives cosimplicial modules and the expected E2. All 13 declared tool uses are generic and accepted, and no SGA source is used. Repair, under C1/C4: step 1 used the component module adjunction without a citation. It now cites lem-weil-pbc-sets-etale-inverse-image-exact and lem-pe-constant-left-module-inverse-image in its text and uses; both were already in proof_deps. The corrected item file is in fixes/dag/nodes/sec-trace-formula/. Nothing is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SimplicialDerivedImageSpectralSequence",
+  "declaration": "AlgebraicGeometry.simplicial_derived_image_spectral_sequence",
+  "declarations": [
+   "AlgebraicGeometry.SimplicialEtaleMod",
+   "AlgebraicGeometry.EtaleMod",
+   "AlgebraicGeometry.simplicialEtaleRestrict",
+   "AlgebraicGeometry.simplicialEtaleDegreeToOver",
+   "AlgebraicGeometry.simplicialEtaleCosimplicialPresheaf",
+   "AlgebraicGeometry.simplicialEtaleCosimplicialDirect",
+   "AlgebraicGeometry.simplicialEtaleRestrict_additive",
+   "AlgebraicGeometry.simplicialEtaleMorphismToComma",
+   "AlgebraicGeometry.simplicialEtaleMorphismDirectPresheaf",
+   "AlgebraicGeometry.simplicialEtaleMorphismDirect",
+   "AlgebraicGeometry.simplicialEtaleMorphismDirect_additive",
+   "AlgebraicGeometry.simplicial_etale_restriction_exact",
+   "AlgebraicGeometry.simplicial_etale_morphism_direct_image",
+   "AlgebraicGeometry.simplicial_etale_derived_component",
+   "AlgebraicGeometry.DerivedCohomologicalLower",
+   "AlgebraicGeometry.simplicialEtaleRestrictOver",
+   "AlgebraicGeometry.simplicialEtaleRestrictOver_additive",
+   "AlgebraicGeometry.simplicialEtaleComponentDirect",
+   "AlgebraicGeometry.augmentationStableTerm",
+   "AlgebraicGeometry.augmentationStableMap",
+   "AlgebraicGeometry.augmentationCoface",
+   "AlgebraicGeometry.augmentationIntegerTotal",
+   "AlgebraicGeometry.SimplicialAugmentationSpectralSequence",
+   "AlgebraicGeometry.simplicial_derived_image_spectral_sequence",
+   "AlgebraicGeometry.simplicial_etale_augmentation_component",
+   "AlgebraicGeometry.simplicial_etale_direct_image_composition",
+   "AlgebraicGeometry.simplicial_etale_composite_adjunction_normalization",
+   "AlgebraicGeometry.simplicial_etale_augmented_diagram_comparison",
+   "AlgebraicGeometry.simplicial_etale_augmented_adjunction_normalization"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SimplicialDerivedImageSpectralSequence.lean",
+  "statement": "theorem simplicial_derived_image_spectral_sequence {X : Scheme.{u}} (U : SimplicialObject (Over X)) (Λ : Type (u + 1)) [CommRing Λ] [HasDerivedCategory.{w} (SimplicialEtaleMod (U ⋙ Over.forget X) Λ)] [HasDerivedCategory.{w} (EtaleMod X Λ)] (c : ℤ) : Functor.IsTriangulated (totalEtaleAugmentationDirect U Λ).rightDerivedFunctorPlus ∧ Nonempty (SimplicialAugmentationSpectralSequence (totalEtaleAugmentationDirect U Λ) (simplicialEtaleComponentDirect U Λ) (simplicialEtaleCosimplicialDirect U Λ) c)",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 52d712dec528. Uses canonical compatible-section direct images, the landed augmentation adjunction, and their actual rightDerivedFunctorPlus. The helper statements supply exact restriction, component comparisons, triangulatedness, composite-adjunction and augmented-diagram normalization. The spectral-sequence conclusion fixes d1 to the alternating derived coface sum, realizes all pages and differentials by the same filtered injective double complex, identifies actual stable pages with all integer graded pieces, and states functoriality of pages and the abutment filtration. Source statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8725c4406",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, edge cases, route-pivot compliance, report sections, and scompile evidence checked; no substantive or mechanical issues found."
  }
 }

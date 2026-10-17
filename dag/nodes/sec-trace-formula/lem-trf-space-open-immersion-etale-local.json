@@ -211,5 +211,23 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-5214109af (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and relevant Stacks sources. All seven steps correctly establish representability using compatible-open descent and explicit fppf sheaf gluing. No new nodes, cycles, missing dependencies, long steps or duplicate theorem found. Both declared tool uses accepted. Detailed checks and the unavailable external route-pivot-list limitation are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceOpenImmersionEtaleLocal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isOpenImmersion_of_etale_cover",
+  "statement": "theorem isOpenImmersion_of_etale_cover {S : Scheme.{u}} {X P : AlgebraicSpace S} (a : X ⟶ P) (I : Type u) (P_i : I → Over S) (p_i : ∀ i, yoneda.obj (P_i i) ⟶ P.obj.obj) (h_etale : ∀ i, IsEtale (p_i i)) (h_joint : ∀ (T : Over S) (x : P.obj.obj.obj (Opposite.op T)), ∃ (R : Sieve T.left), R ∈ Scheme.fppfTopology T.left ∧ ∀ (U : Over S) (f : U ⟶ T), R f.left → ∃ (i : I) (y : (yoneda.obj (P_i i)).obj (Opposite.op U)), (p_i i).app (Opposite.op U) y = P.obj.obj.map f.op x) (h_open : ∀ i, AlgebraicSpace.IsRepresentableWith (fun _ _ q => IsOpenImmersion q.left) (pullback.snd a.hom.hom (p_i i))) : AlgebraicSpace.IsRepresentableWith (fun _ _ q => IsOpenImmersion q.left) a.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceOpenImmersionEtaleLocal.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4a287bac2",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Audited the immutable node, all dependencies, source tags 03M4/041X/03N0, Lean declaration, docstrings, hypotheses, universes, edge cases, report sections, route-pivot compliance, and searches. scompile.py local/server compilation passed with no errors; review.md records all checks."
  }
 }

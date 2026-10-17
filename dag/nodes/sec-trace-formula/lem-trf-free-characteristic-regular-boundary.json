@@ -17,7 +17,8 @@
   "def-weil-pbc-regular-system-of-parameters",
   "def-weil-geometric-point",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "def-nagata-effective-cartier-ideal"
+  "def-nagata-effective-cartier-ideal",
+  "def-trf-normal-crossings-divisor"
  ],
  "proof": [
   {
@@ -343,5 +344,23 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-43b587192 (reviewer sub-agent of L); spot-checked: Read in full: the item, which is unchanged from base and was split in eleven steps, the three new statement-only nodes, every cited statement, the parent's use (lem-trf-log-regular-desingularization step 5) and the sources. ILO VI 1.2/1.4/1.6/1.7 (pp. 69-70) and VIII 3.4.1/3.4.3/3.4.4/4.1.1-4.1.2 (pp. 110, 117) give the equivalence and the étale normal-crossings boundary; the proof is correctly marked agent-written because the source defers it to Nizioł. Stacks 083C/034E/01J3 were checked against their labels. Steps 1-11 check out: the sharp chart gives M=P×A^×; indecomposables and torsion-freeness are correct; the contraction and Nakayama give dim I/mI=n; the kernel-parameter lemma and the parameter quotient give n=c=r, and rank over Q gives N^r≅P; the converse is lift-and-count; regularity uses the strict-henselization invariance (Noetherian hypothesis met); the chart face computation gives N^J; the canonical cotangent isomorphism and Nakayama give parameters in the ordinary local ring; primality, non-divisibility and the product=intersection induction hold; openness comes from flat-lfp-open; reduced-pullback uniqueness gives Cartier descent; elementary density holds. Step 7's use of step 5 at a non-sharp point needs only I=(t_j, j∈J) and |J|=rank, which the step's computation supplies. New nodes: the sharp chart (VI 1.6/Kato 3.2) is true; the contraction is the stalk form of VIII 3.4.3, with the empty J handled by injectivity of α (3.4.1), tested on N and on xy=zw; the étale reduced-Cartier descent is true from 034E+01J3+083C and differs from etale-proposition-etale-reduced. An rg duplicate search over the DAG found no duplicates and no restatements of the item's clauses. The six declared generic local-algebra tool_uses are accepted, no SGA source is cited, and review_split passes. One remark, not repaired: the inherited statement cites def-weil-pbc-scheme-reduction for the reduced induced closed structure, but stmt_deps now include lem-weil-pbc-reduced-induced-closed-subscheme. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeCharacteristicRegularBoundary",
+  "declaration": "AlgebraicGeometry.FineSaturatedLogScheme.free_characteristic_regular_boundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeCharacteristicRegularBoundary.lean",
+  "statement": "theorem free_characteristic_regular_boundary (X : FineSaturatedLogScheme.{u}) (hlog : X.IsLogRegular) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), IsRegularLocalRing (X.scheme.presheaf.stalk (Scheme.SpecToEquivOfField Ω X.scheme t).1) ↔ ∃ r : ℕ, Nonempty (X.logStructure.characteristic t ≃* Multiplicative (Fin r → ℕ))) ∧ ((∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), ∃ r : ℕ, Nonempty (X.logStructure.characteristic t ≃* Multiplicative (Fin r → ℕ))) → IsRegularScheme X.scheme ∧ ∃ U : X.scheme.Opens, (U : Set X.scheme) = X.logStructure.trivialityLocus ∧ Dense (U : Set X.scheme) ∧ (Scheme.IdealSheafData.vanishingIdeal ⟨(U : Set X.scheme)ᶜ, U.isOpen.isClosed_compl⟩).IsNormalCrossingsDivisor)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-732d3a14c",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, route-pivot compliance, and recorded per-file compilation evidence checked; no findings."
  }
 }

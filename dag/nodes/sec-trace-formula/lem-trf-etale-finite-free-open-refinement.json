@@ -251,5 +251,23 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-af4560dd9 (reviewer sub-agent of L); spot-checked: The refinement proof and all cited steps check out, but the new node incorrectly requires r≥1 while allowing R=0. Over the zero ring every unital algebra is zero and has only the empty basis. Repairs written under fixes/dag/nodes: change to r≥0, add r≥1 for nonzero R, and update Step 3 accordingly. Sources 00UF, 02LG, 02LI and all cited DAG statements were checked; review.md records edge cases, route, searches, and accepted tool use.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.EtaleFiniteFreeOpenRefinement",
+  "declaration": "AlgebraicGeometry.etale_finite_free_open_refinement",
+  "statement": "theorem etale_finite_free_open_refinement {S : Scheme.{u}} {I : Type u} (E : I → Scheme.{u}) (e : ∀ i, E i ⟶ S) [he : ∀ i, Etale (e i)] (hjoint : ∀ s : S, ∃ i x, e i x = s) : ∃ (J : Type u) (U : J → Scheme.{u}) (u : ∀ j, U j ⟶ S) (W : J → Scheme.{u}) (q : ∀ j, W j ⟶ U j) (K : ∀ j, Type u) (V : ∀ j, K j → Scheme.{u}) (ι : ∀ j k, V j k ⟶ W j) (a : ∀ j k, I) (h : ∀ j k, V j k ⟶ E (a j k)), (∀ j, IsOpenImmersion (u j)) ∧ (∀ s : S, ∃ j x, u j x = s) ∧ (∀ j, Scheme.Hom.IsFiniteLocallyFree (q j)) ∧ (∀ j, Surjective (q j)) ∧ (∀ j k, IsOpenImmersion (ι j k)) ∧ (∀ j t, ∃ k x, ι j k x = t) ∧ (∀ j k, h j k ≫ e (a j k) = ι j k ≫ q j ≫ u j)",
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/EtaleFiniteFreeOpenRefinement.lean",
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-43bd934b6",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause; dependencies and declarations checked; edge cases and universes covered; report sections present; scompile.py reproduced successfully."
  }
 }

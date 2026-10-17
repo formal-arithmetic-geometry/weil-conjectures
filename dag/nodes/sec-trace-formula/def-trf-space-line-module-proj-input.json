@@ -1,0 +1,154 @@
+{
+ "id": "def-trf-space-line-module-proj-input",
+ "kind": "definition",
+ "title": "Scheme-test presentation of a line module and its graded Proj input",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ with its small-etale category of modules [def-trf-algebraic-space], and $L$ a line module on $X$. A cartesian scheme-test realization of $L$ consists, for every scheme $W$ over $S$ and map $a:h_W\\to X$, of an invertible $\\mathcal O_W$-module $L_a$ [def-sc-invertible-module], with specified isomorphisms $j^*L_a\\simeq L_{a\\circ h_j}$ for every scheme-test map $j$, using tensor pullback [def-pc-module-pullback]. These isomorphisms satisfy the identity and composition equations as sheaf isomorphisms. On every small-etale test $W\\to X$, identify $\\Gamma(W,L_a)$ with $L(W)$ linearly over regular functions and compatibly with every small-etale restriction. Such realizations exist and are determined up to the unique cartesian isomorphism preserving these identifications; use this universal property to denote the family of scheme pullbacks of $L$.\n\nLet $T$ be a scheme over $S$, $f:X\\to T$, and $\\mathcal A$ the quasi-coherent graded algebra input of relative Proj [def-nagata-relative-proj]. A graded map into the tensor powers of $L$ is presented by the additive maps $\\mathcal A_n(V)\\to\\Gamma(W,L_a^{\\otimes n})$ for every affine open $V\\subseteq T$ containing the image of the test $W\\to X\\to T$. They are linear for the structure map $\\mathcal O_T(V)\\to\\mathcal O_W(W)$, preserve the degree-zero unit and homogeneous multiplication, and commute with every test-scheme pullback and every affine base restriction. This is the adjoint description of $f^*\\mathcal A\\to\\bigoplus_{n\\geq0}L^{\\otimes n}$. Its generation set on $W$ is the union of open neighbourhoods where the image of some positive-degree homogeneous section is a free generator. A subfunctor is its generation open when a scheme test factors through it exactly when this generation set is all of $W$.\n\nThe canonical map from a generation open to relative Proj is specified over $T$ and, on every globally trivializing scheme test above an affine base chart, by the usual homogeneous-section construction into Proj followed by the relative-Proj chart embedding. A trivialization specifies the ring map by its value on every homogeneous element, and the usual construction is used wherever the image of the irrelevant ideal is the unit ideal. For a base-change identification [lemma-nagata-relative-proj-base-change-arbitrary], the pulled-back graded map is specified by equality of all homogeneous images after the coefficientwise base-change maps.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-nagata-relative-proj",
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0D2Z, assumptions, generation open and parts (2),(3); Tag 03G7, modules on the small etale site; Constructions Tag 01O9, homogeneous-section chart construction"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A line module on an algebraic space presented by its cartesian tensor pullbacks to every scheme test and the induced graded algebra homomorphism on affine base charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.presheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) : TopCat.Presheaf Ab X\", \"doc\": \"Given a scheme $X$ and a sheaf of modules over its structure sheaf (obtained via the forgetful functor from commutative rings to rings), this function returns the underlying presheaf of abelian groups\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"{S T : Scheme.{max u v}} (f : S ⟶ T) : IsPullback (map n f) (𝔸(n; S) ↘ S) (𝔸(n; T) ↘ T) f\", \"doc\": \"Given a morphism $f: S \\\\to T$ of schemes, the induced morphism $\\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_T$ between affine spaces forms a pullback square with the canonical projections $\\\\mathbb{A}^n_S \\\\to S$ a\"}\n  {\"name\": \"GradedTensorProduct.instModule\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Graded.Internal\", \"type\": \"{R : Type u_1} →\\n  {ι : Type u_2} →\\n    {A : Type u_3} →\\n      {B : Type u_4} →\\n        [inst : CommSemiring ι] →\\n          [inst_1 : DecidableEq ι] →\\n            [inst_2 : CommRing R] →\\n              [inst_3 : Ring A] →\\n                [inst_4 : Ring B] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"This instance equips the graded tensor product of two graded algebras over a commutative ring $ R $ with an $ R $-module structure. Scalar multiplication acts component-wise on homogeneous elements, p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M N : X.Modules) : Type u\", \"doc\": \"Given a scheme $X$, this defines the type of homomorphisms between two sheaves of modules over the structure sheaf of $X$. Each homomorphism is a morphism of modules that satisfies the sheaf condition\"}\n  {\"name\": \"GradedTensorProduct.mulHom\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Graded.Internal\", \"type\": \"{R : Type u_1} →\\n  {ι : Type u_2} →\\n    {A : Type u_3} →\\n      {B : Type u_4} →\\n        [inst : CommSemiring ι] →\\n          [inst_1 : DecidableEq ι] →\\n            [inst_2 : CommRing R] →\\n              [inst_3 : Ring A] →\\n                [inst_4 : Ring B] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"The R-linear map defining the multiplication operation on the graded tensor product of two graded R-algebras, which respects the grading by mapping homogeneous components of degree i and j to the comp\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \": 𝔸(n; S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian scheme test presentation of a small etale invertible module on an algebraic space with compatible graded maps into tensor powers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → StandardEtalePresentation R S → Algebra.Presentation R S (Fin 2) (Fin 2)\", \"doc\": \"The algebra presentation of $ S $ over a commutative ring $ R $ using two generators and two relations derived from a standard étale pair $ (f, g) $. Specifically, it constructs $ S $ as the quotient \"}\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_σ'\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (x : S), P.toPresentation.σ' x = ⋯.choose\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation $ P $ of $ S $ over $ R $, the function $ \\\\sigma' $ associated to the presentation\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_val\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (a : Fin 2),\\n  P.toPresentation.val a =\\n    (P.lift P.x ⋯)\\n      (P.equivMvPolynomialQuotient.symm\\n        ((Ideal.Quotient.mk\\n            (Ideal.span\\n              \", \"doc\": \"Given a standard étale presentation $ P $ of an $ R $-algebra $ S $, the $ i $-th generator ($ i = 0, 1 $) of the algebra presentation corresponds to the image of $ X_i $ in the quotient ring $ R[X_0,\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TestLineFamily|GradedLineMap|EtaleLinePresentation|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'TestLineFamily|GradedLineMap|EtaleLinePresentation' /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "No matches (rg exit status 1; empty stdout).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'TestLineFamily|GradedLineMap|EtaleLinePresentation' /home/ubuntu/weil-newtargets-shared/lean/Sheaf",
+   "results": "No matches (rg exit status 1; empty stdout).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'TestLineFamily|GradedLineMap|EtaleLinePresentation' /home/ubuntu/weil-newtargets-shared/dag/nodes",
+   "results": "No matches (rg exit status 1; empty stdout).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-line-module-proj-map",
+  "date": "2026-10-17",
+  "group": "Q69"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The scheme-test tensor pullbacks, graded maps, generation open and chart characterization used to state the line-module relative-Proj map.",
+   "via": [
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.SpaceLineModuleProjInput",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.GradedLineMap",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SchemeTests",
+   "AlgebraicGeometry.AlgebraicSpace.testToBase",
+   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily",
+   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily.sectionMap",
+   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily.powerMap",
+   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily.IsCoherent",
+   "AlgebraicGeometry.AlgebraicSpace.TestLineFamily.pullback",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleLinePresentation",
+   "AlgebraicGeometry.AlgebraicSpace.TestLineIso",
+   "AlgebraicGeometry.AlgebraicSpace.TestLineIso.IsEtaleCompatible",
+   "AlgebraicGeometry.AlgebraicSpace.exists_linePresentation",
+   "AlgebraicGeometry.AlgebraicSpace.linePresentation",
+   "AlgebraicGeometry.AlgebraicSpace.lineTestFamily",
+   "AlgebraicGeometry.AlgebraicSpace.GradedLineMap",
+   "AlgebraicGeometry.AlgebraicSpace.GradedLineMap.generationSet",
+   "AlgebraicGeometry.AlgebraicSpace.GradedLineMap.IsGenerationOpen",
+   "AlgebraicGeometry.AlgebraicSpace.trivializedPower",
+   "AlgebraicGeometry.AlgebraicSpace.projOver",
+   "AlgebraicGeometry.AlgebraicSpace.GradedLineMap.IsCanonicalMap",
+   "AlgebraicGeometry.AlgebraicSpace.GradedLineMap.IsBaseChange"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SpaceLineModuleProjInput.lean",
+  "statement": "structure GradedLineMap {F : (Over S)ᵒᵖ ⥤ Type u} {T : Over S} (f : F ⟶ yoneda.obj T) (A : T.left.GradedAlgebraData) (L : TestLineFamily F)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The arbitrary scheme pullbacks are selected only from the stated descent universal property, which determines them up to the unique cartesian isomorphism preserving the given small-etale line module. The input is not an arbitrary family of line modules. Existing generic tensor-power comparisons from SquareZeroTensorBoundaryComparisons are reused without copying their definitions."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-76e4d3b1a",
+  "group": "Q69",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-76e4d3b1a",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read the full packet, immutable node/dependencies, both Lean modules, source/report/docstrings, and route-pivot records. Verified clause and hypothesis correspondence, edge cases, real definitions, canonical dependencies, required report sections, and successful per-file scompile.py compilation with no errors."
+ }
+}
