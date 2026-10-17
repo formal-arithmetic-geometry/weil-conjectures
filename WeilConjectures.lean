@@ -1169,6 +1169,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorResidue
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorUnits
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCoverConstruction
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCoverLift
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroupDense
 public import WeilConjectures.AlgebraicGeometry.GabberH0EtaleCoverSection
@@ -2702,9 +2703,14 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Transport
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryGenericPath
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryGenericPoint
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryGenericRep
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryInertia
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryNeighbourhoodData
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryPurity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryStalk
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryStalkInvariants
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.CharacterLogarithm
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.ConstantExtension
@@ -4336,6 +4342,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverPullb
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverRepresentation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExtension
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyLift
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
@@ -4451,6 +4458,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Germ
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GermComp
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GermLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GermMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
@@ -4584,7 +4592,9 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierFrobenius
 public import WeilConjectures.WeilSheaf.ArtinSchreierPurity
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.BoundaryStalk
+public import WeilConjectures.WeilSheaf.BoundaryStalkFrobenius
 public import WeilConjectures.WeilSheaf.BoundaryStalkGaloisInvariants
+public import WeilConjectures.WeilSheaf.BoundaryStalkSpecialization
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyExact
@@ -4669,6 +4679,7 @@ public import WeilConjectures.WeilSheaf.StalkPairing
 public import WeilConjectures.WeilSheaf.StalkStrictlyHenselian
 public import WeilConjectures.WeilSheaf.StalkTateTwist
 public import WeilConjectures.WeilSheaf.StalkTensor
+public import WeilConjectures.WeilSheaf.StalkTransportGeneral
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.WeilSheaf.TateTwist
