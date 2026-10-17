@@ -8,12 +8,8 @@ module
 public import Sheaf.CategoryTheory.FilteredComplexDecalageTower
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
-import Sheaf.CategoryTheory.CartanEilenbergTruncationResolution
-import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
-import Sheaf.CategoryTheory.LeftExactTruncationIso
-import Sheaf.CategoryTheory.DerivedInjectiveResolutionNaturality
-import Sheaf.CategoryTheory.DoubleComplexTruncationDecalage
-import Sheaf.CategoryTheory.DerivedUpperTruncationComparison
+import Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObjectIso
+import Sheaf.CategoryTheory.SpectralObjectBottomIsoCriterion
 
 /-! # The Cartan--Eilenberg decalage spectral object
 
@@ -190,6 +186,11 @@ theorem cartanEilenberg_decalage_spectralObject
           ((CartanEilenbergPresentation.mappedFunctor G).map d.α) (ComplexShape.up ℤ) →
         (filteredComplexDecalageSpectralObjectFunctor C).map t ≫ (e Q).hom =
           (e P).hom ≫ (F.grothendieckSpectralObjectFunctor G).map d.f := by
-  sorry
+  obtain ⟨f, hf, hnat⟩ := cartanEilenberg_decalage_spectralObject_iso_exists F G L hL
+  have (P : CartanEilenbergPresentation F) : IsIso (f P) :=
+    Abelian.SpectralObject.isIso_of_bottom_intervals (f P) (hf P)
+  refine ⟨fun P ↦ asIso (f P), ?_⟩
+  intro P Q d t ht
+  exact hnat P Q d t ht
 
 end CategoryTheory

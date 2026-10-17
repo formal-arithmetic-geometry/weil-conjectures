@@ -1,0 +1,109 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 015X, Remark 13.26.15; Tag 015K, Remark 13.21.4."
+ },
+ "stmt_deps": [],
+ "proof_deps": [],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObject",
+  "date": "2026-10-17",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ce-decalage-spectral-object",
+   "place": "General interval invertibility after construction of the natural comparison morphism.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism between spectral objects from isomorphisms on bottom intervals",
+   "results": "Generic derived-category and spectral-object APIs only; no bottom-interval criterion.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono",
+   "results": "Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four provides the ordinary abelian five lemma; used in the proof, not the whole spectral-object statement.",
+   "date": "2026-10-17",
+   "verdict": "partial match used"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_bottom_intervals",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of spectral objects is invertible if its maps on all bottom intervals are invertible",
+   "results": "Eight hits including Triangulated.SpectralObject.Hom.hom, Hom.ext and instCategory; no abelian bottom-interval five-lemma criterion.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tag 015K, Remark 13.21.4; long exact sequences of spectral objects",
+  "note": "The ordinary abelian five lemma on interval long exact sequences."
+ },
+ "id": "lem-sp-spectral-object-bottom-iso-criterion",
+ "title": "Five lemma for spectral-object bottom intervals",
+ "statement": "In any abelian category C, a morphism f of EInt-indexed spectral objects is an isomorphism if for all integer degrees n and all cutoffs b, its cohomology component on the interval (minus infinity,b) is invertible.",
+ "proof": [
+  {
+   "text": "For any a <= b, take the five consecutive interval terms H^n(bottom,a), H^n(bottom,b), H^n(a,b), H^(n+1)(bottom,a), H^(n+1)(bottom,b). The spectral-object morphism yields a commuting map between exact five-term sequences. The four outside vertical maps are invertible; apply the abelian five lemma to deduce invertibility of the middle component.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "All components of every H^n natural transformation are now invertible. Assemble their natural inverses; cancellation transports connecting-arrow commutativity to these inverses. The spectral-object inverse identities hold componentwise.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpectralObjectBottomIsoCriterion",
+  "file": "lean/Sheaf/CategoryTheory/SpectralObjectBottomIsoCriterion.lean",
+  "declaration": "CategoryTheory.Abelian.SpectralObject.isIso_of_bottom_intervals",
+  "statement": "theorem isIso_of_bottom_intervals {C : Type u} [Category.{v} C] [Abelian C] {X Y : SpectralObject C EInt} (f : X ⟶ Y) (h : ∀ (n : ℤ) (b : EInt), IsIso ((f.hom n).app (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ b))))) : IsIso f",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-17"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261017T060645-L-51477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261017T060645-L-51477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

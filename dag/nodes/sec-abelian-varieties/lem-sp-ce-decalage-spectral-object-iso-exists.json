@@ -1,0 +1,146 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 015X, Remark 13.26.15; Tag 015K, Remark 13.21.4."
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtered-complex-decalage-tower",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_deps": [
+  "lem-sp-double-complex-truncation-decalage",
+  "lem-sp-left-exact-truncation-iso",
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-ce-truncation-resolution",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sp-derived-upper-truncation-comparison",
+  "def-sp-filtered-complex-decalage-tower"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObject",
+  "date": "2026-10-17",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ce-decalage-spectral-object",
+   "place": "Decomposition of the comparison into objectwise existence and naturality.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "objectwise isomorphism and hom-level naturality for decalage spectral objects",
+   "results": "No complete comparison theorem found; only generic derived-category truncation and spectral-object APIs.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty subtype of spectral-object isomorphism families",
+   "results": "Only generic Iso.nonempty_iso_refl and unrelated constructions.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalageSpectralObject Grothendieck hom naturality",
+   "results": "No existing declaration matches the required comparison data.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg decalage comparison morphism invertible on bottom intervals",
+   "results": "Eight hits, mostly ShortComplex.leftRightHomologyComparison and isIso_leftRightHomologyComparison; none compares the CE and derived-truncation spectral objects.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 015X, Remark 13.26.15; Tag 015K, Remark 13.21.4.",
+  "note": "Construction of the comparison morphism and its invertibility on bottom intervals only. The general interval invertibility is handled separately by the five lemma."
+ },
+ "id": "lem-sp-ce-decalage-spectral-object-iso-exists",
+ "title": "CE comparison morphism and bottom-interval quasi-isomorphisms",
+ "statement": "With the hypotheses of the CE decalage comparison, there is a family of spectral-object morphisms from the decalage model to the Grothendieck spectral object, natural for all presentation comparisons and all filtered lifts of the prescribed total map. Only the components on intervals from minus infinity to an arbitrary cutoff are asserted invertible. No invertibility on general intervals is asserted.",
+ "proof": [
+  {
+   "text": "Identify each finite decalage step with the totalized horizontal smart truncation using the proved isomorphism and its naturality. Left exactness commutes G with the boundary cycles, and the mapped-total comparison commutes G with the finite diagonals.",
+   "uses": [
+    "lem-sp-double-complex-truncation-decalage",
+    "lem-sp-left-exact-truncation-iso",
+    "lem-sp-cartan-eilenberg-mapped-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the uniquely specified CE truncated augmentation into a bounded-below injective total. The proved cartanEilenberg_truncatedAugmentation_square cancels the truncation inclusion to give compatibility between cutoffs, and cartanEilenberg_totalAugmentation_square uses the total coordinates to transport every augmentation square to totals. Its proved equations give compatibility with truncation inclusions and presentation maps. Compute RG through these specified augmentations; use the inverse-unit naturality theorem to normalize the comparisons already in the bounded-below derived category, rather than choosing arbitrary objectwise cohomology isomorphisms.",
+   "uses": [
+    "lem-sp-ce-truncation-resolution",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved unique cochain/derived upper-truncation comparison and its complex-map and cutoff naturality. In the derived category these truncated resolutions identify the upper-truncation tower of F(J) with the mapped CE tower: at integer q its cochain cutoff is q-1, which is the canonical derived truncation strictly below q. Their augmentations give the commuting diagrams of triangles. The proved cone quasi-isomorphism and injectivity APIs, followed by rightDerivedFunctorPlusConeResolutionNatIso, compute all cone intervals naturally. Before applying RG, compare the cone triangle tau_<a X -> tau_<b X -> Cone with the truncation triangle of tau_<b X at a. Normalize the first two components by the truncation inclusions. Its third map to tau_>=a tau_<b X is unique, since any difference factors through Hom((tau_<a X)[1], tau_>=a tau_<b X), which vanishes by orthogonality. This proves naturality in cutoff squares. For three cutoffs compare the mapping-cone octahedral triangles with the truncation triangles; uniqueness forces the interval squares, including their last arrows, to commute, fixing the connecting-map signs. The triangulated RG preserves these squares. Minus infinity is zero and plus infinity is the full total. Finally compare Q F(J) with RF(X) by the injective-resolution computation.",
+   "uses": [
+    "lem-sp-ce-truncation-resolution",
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-sp-derived-upper-truncation-comparison",
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply cohomology to the normalized interval triangle comparison maps to obtain a spectral-object morphism. The comparison on bottom intervals is invertible because each tower step is computed by the specified injective resolution. Augmentation squares imply naturality under presentation comparisons; cancellation of monic step inclusions gives the same equation for every filtered lift with the specified total map. General interval invertibility is not part of this construction theorem.",
+   "uses": [
+    "lem-sp-double-complex-truncation-decalage",
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObjectIso",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergDecalageSpectralObjectIso.lean",
+  "declaration": "CategoryTheory.cartanEilenberg_decalage_spectralObject_iso_exists",
+  "statement": "theorem cartanEilenberg_decalage_spectralObject_iso_exists {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B] {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C] [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteLimits G] (L : ∀ P : CartanEilenbergPresentation F, DecreasingFiltration (P.total G)) (hL : ∀ (P : CartanEilenbergPresentation F) (p n : ℤ), (L P).complexStep p n = ((((CartanEilenbergPresentation.mappedFunctor G).obj P.I).secondFiltration n).step p)) : ∃ e : ∀ P : CartanEilenbergPresentation F, (filteredComplexDecalageSpectralObjectFunctor C).obj (⟨P.total G, L P⟩ : FilteredObject (CochainComplex C ℤ)) ⟶ F.grothendieckSpectralObject G P.X, (∀ (P : CartanEilenbergPresentation F) (n : ℤ) (b : EInt), IsIso (((e P).hom n).app (ComposableArrows.mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ b))))) ∧ ∀ (P Q : CartanEilenbergPresentation F) (d : P.Comparison Q) (t : (⟨P.total G, L P⟩ : FilteredObject (CochainComplex C ℤ)) ⟶ (⟨Q.total G, L Q⟩ : FilteredObject (CochainComplex C ℤ))), t.hom = HomologicalComplex₂.total.map ((CartanEilenbergPresentation.mappedFunctor G).map d.α) (ComplexShape.up ℤ) → (filteredComplexDecalageSpectralObjectFunctor C).map t ≫ e Q = e P ≫ (F.grothendieckSpectralObjectFunctor G).map d.f",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-17"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261017T060645-L-51477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261017T060645-L-51477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
