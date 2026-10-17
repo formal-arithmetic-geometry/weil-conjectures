@@ -13,9 +13,45 @@
   "def-trf-geometric-morphism",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For r=0, the assertion (V_0) is vacuous: there is no integer i satisfying 1 ≤ i ≤ 0, so the required vanishing holds for every X and H in A_X.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZF, lemma-V-C-all-n-general, proof, first sentence (V_0 is the empty condition)."
+   }
+  },
+  {
+   "text": "The induction lemma for the comparison situation gives (V_r) ⇒ (V_{r+1}) for every r ≥ 0. Starting from (V_0) and applying this implication successively proves (V_n) for every integer n ≥ 0.",
+   "uses": [
+    "lem-trf-comparison-induction-step"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZE, lemma-induction-step-V-C-general, together with Tag 0EZF proof."
+   }
+  },
+  {
+   "text": "For the fixed n, X, and H in the statement, (V_n) is exactly the assertion R^i ε_{X,*}H = 0 for all 1 ≤ i ≤ n. This is the claimed conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZF, lemma-V-C-all-n-general, first assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-comparison-induction-step"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0EZE and 0EZF, lemmas lemma-induction-step-V-C-general and lemma-V-C-all-n-general"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +83,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-big-etale-torsion-acyclicity",
@@ -59,7 +95,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Normal-cone specialization via Orgogozo Lemma 3.1.1 first descent isomorphism: general (V_n) comparison induction underlying the ph-to-big-etale acyclicity in 0DE4(1).",
+   "place": "The first assertion of the imported proof: define (V_n), establish (V_0), iterate the induction lemma (Tag 0EZE), and identify the resulting (V_n) with the stated higher-direct-image vanishing (Tag 0EZF, lemma-V-C-all-n-general).",
    "via": [
     "lem-trf-ph-big-etale-torsion-acyclicity",
     "lem-trf-ph-etale-torsion-comparison",
@@ -73,5 +109,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-refined-topology-comparison-vanishing",
+  "worker": "stage1",
+  "summary": "Checked the imported comparison-vanishing statement against Stacks Tags 0EZ3, 0EZE and 0EZF. The proof is the source induction: (V_0) is empty, Tag 0EZE advances V_r to V_{r+1}, and the resulting V_n is the stated conclusion. Added one statement-only node for the non-elementary induction step and recorded fresh Mathlib searches for both nodes.",
+  "blueprint": "Realizes the ancestor proof clause describing the general (V_n) comparison induction underlying the refined-topology vanishing."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-cd25299ef",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-cd25299ef (reviewer sub-agent of L); spot-checked: The new induction node incorrectly calls τ′ finer than τ while requiring every τ′-cover to be a τ-cover; Stacks Section section-compare and Tag 0EZ3 give Cov(τ′)⊆Cov(τ), so τ′ is coarser. Corrected the statement and blueprint.from.via ancestry in fixes/dag/nodes/sec-trace-formula/lem-trf-comparison-induction-step.json. Full source, dependency, route, edge-case, and proof-step checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

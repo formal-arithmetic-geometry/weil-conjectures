@@ -15,9 +15,123 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $d=\\dim D$ and $r=\\operatorname{rank}_{\\mathbf Z}T^{\\rm gp}$. The singleton $F=\\{0\\}$ is a face of $T$: if $u+v=0$, both terms are units and hence zero. Apply [lem-trf-fs-face-sharpening] with $Q=T$, $F=\\{0\\}$. Its localization and quotient are just $T$, so $G=T^{\\rm gp}$ is free abelian of finite rank $r$. Since $T$ is sharp, $T\\cap(-T)=\\{0\\}$ inside $G$. Apply [lem-trf-sharp-monoid-positive-grading] to choose $w:G\\to\\mathbf Z$ positive on every nonzero element of $T$. Choose nonzero generators $g_1,\\ldots,g_s$ of $T$ (the list is empty for $T=\\{0\\}$).",
+   "uses": [
+    "lem-trf-fs-face-sharpening",
+    "lem-trf-sharp-monoid-positive-grading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 sharp fs monoid; VIII 3.1.1 and 3.1.10; positive-weight refinement."
+   }
+  },
+  {
+   "text": "The map $D[X_1,\\ldots,X_s]\\to D[T]$, $X_i\\mapsto[g_i]$, is surjective: every basis monomial is a product of the chosen generators. Thus [lem-weil-pbc-finite-type-algebra-noetherian] makes $D[T]$ Noetherian, and [lem-weil-pbc-adic-completion-noetherian] makes $H$ Noetherian. Apply [lem-trf-monoid-completion-coefficients] with $A=D$, $P=T$ and the weight of step 1. We may now write every element of $H$ uniquely as a family $\\sum_t a_t[t]$, with the convolution rule, and use its exact formula for $\\mathfrak a^nH$. In particular $D$ embeds as the constant families. All the coefficient lemma hypotheses hold: $D$ is complete separated Noetherian local, $T$ is finitely generated and embeds in the finite free group just obtained.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence; Tag 0316, lemma-completion-Noetherian-Noetherian; VI 1.6 coefficient refinement."
+   }
+  },
+  {
+   "text": "Constant coefficient $c:H\\to D$ is a surjective ring map: sharpness implies $u+v=0$ only for $u=v=0$. Its kernel is $L$. Indeed, partition $T\\setminus\\{0\\}$ into $s$ subsets by choosing, for each $t$, one generator $g_i$ with $t-g_i\\in T$. For a family with $a_0=0$, assign $a_t[t-g_i]$ to the corresponding family $f_i$. The coefficient description gives $f_i\\in H$ and $f=\\sum_i[g_i]f_i$; conversely every such sum has zero constant coefficient. Hence $H/L\\cong D$. A family with unit constant coefficient is a unit: after factoring that coefficient, write it as $1+h$ with $h\\in L$, and $\\sum_{j\\ge0}(-h)^j$ converges since $h^j\\in\\mathfrak a^jH$; multiplication of partial sums gives its inverse. A unit must have unit constant coefficient by applying $c$. Thus the nonunits form $\\mathfrak n=c^{-1}(\\mathfrak m)$. The coefficient formula for $n=1$ identifies $\\mathfrak n=\\mathfrak aH$, so $H$ is local with residue field $D/\\mathfrak m$. This argument includes $s=0$, when $H=D$ and $L=0$.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6: direct constant-coefficient and geometric-series computation in the formal models."
+   }
+  },
+  {
+   "text": "By [lem-sc-regular-local-domain], $D$ is an integral domain. Choose coordinates $G\\cong\\mathbf Z^r$ and order $G$ lexicographically by $(w(t),t_1,\\ldots,t_r)$; this is an addition-invariant total order. Each set $\\{t\\in T:w(t)\\le B\\}$ is finite: a generator expression has at most $B$ terms because every $w(g_i)\\ge1$. Hence every nonempty subset of $T$ has a least element in this order. If $f,g\\in H$ are nonzero, let $u,v$ be their least exponents with nonzero coefficient. In the convolution coefficient at $u+v$, any nonzero term has exponents $u'\\ge u$ and $v'\\ge v$; if either inequality is strict, addition invariance gives $u'+v'>u+v$. Consequently the coefficient there is exactly $a_ub_v\\ne0$. Thus $fg\\ne0$, proving that $H$ is a nonzero integral domain.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "VI 1.6: least-monomial argument; regular-domain input Stacks Tag 00NP, lemma-regular-domain."
+   }
+  },
+  {
+   "text": "Write $\\nu(t)$ for the order in [lem-trf-monoid-completion-coefficients] and $\\ell_D(k)=\\mathrm{length}_D(D/\\mathfrak m^k)$ for $k\\ge1$. For fixed $n$, the set $S_n=\\{t:\\nu(t)<n\\}$ is finite, and the coefficient lemma gives the quotient coefficients $D/\\mathfrak m^{n-\\nu(t)}$. Order $S_n$ by the addition-invariant order in step 4. The submodules of $H/\\mathfrak n^n$ supported on successive final segments give a finite filtration: multiplication by any nonzero monomial strictly raises the exponent, and coefficients outside $S_n$ vanish. The factor for $t$ is $D/\\mathfrak m^{n-\\nu(t)}$, with $H$ acting by constant coefficient. Its $H$-submodules are exactly its $D$-submodules, since $D\\subset H$ acts by all scalars and every $h$ acts by $c(h)$. Therefore repeated length additivity [lem-weil-pbc-length-additive-short-exact] gives\n$$\\mathrm{length}_H(H/\\mathfrak n^n)=\\sum_{\\nu(t)<n}\\ell_D(n-\\nu(t)).$$\nEach summand is finite: [lem-trf-hilbert-samuel-growth-dimension] gives finiteness for large powers, and smaller quotients are surjective images of those (a submodule chain lifts under a surjection).",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients",
+    "lem-weil-pbc-length-additive-short-exact",
+    "lem-trf-hilbert-samuel-growth-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IV, lemma-length-additive; Tag 00K8, proposition-hilbert-function-polynomial; VI 1.6 monomial filtration computation."
+   }
+  },
+  {
+   "text": "First suppose $r>0$. Put $M=\\max_i w(g_i)\\ge1$. For every $t$, each decomposition into nonzero terms has length at most $w(t)$, whereas any expression in the generators has length at least $w(t)/M$. Hence\n$$w(t)/M\\le\\nu(t)\\le w(t).$$\nIn fixed lattice coordinates let $C\\ge1$ bound all $|(g_i)_j|$. If $\\nu(t)<n$, a generator expression has fewer than $n$ terms, so every coordinate of $t$ has absolute value at most $Cn$. The injective lattice coordinates bound $|S_n|\\le(2Cn+1)^r$. All summands in step 5 are at most $\\ell_D(n)$ because reduction from $D/\\mathfrak m^n$ is surjective. The Hilbert--Samuel theorem applied to $D$ gives positive constants $b,B$ with $b k^d\\le\\ell_D(k)\\le B k^d$ for all sufficiently large $k$. Thus step 5 is bounded above by a constant times $n^{d+r}$.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients",
+    "lem-trf-hilbert-samuel-growth-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KQ, proposition-dimension, with Tag 00K8; elementary upper bound on monomial counts."
+   }
+  },
+  {
+   "text": "The generators span $G\\otimes\\mathbf Q$, so select $r$ linearly independent ones $v_1,\\ldots,v_r$ by finite-dimensional elimination. Put $W=\\max_j w(v_j)$. The elements $t=\\sum_j b_jv_j$ for $0\\le b_j\\le\\lfloor n/(4rW)\\rfloor$ are distinct, and satisfy $\\nu(t)\\le w(t)\\le n/4$. There are $(\\lfloor n/(4rW)\\rfloor+1)^r$ of them, bounded below by a positive constant times $n^r$. Each contributes at least $\\ell_D(\\lfloor n/2\\rfloor)$ to step 5. The lower Hilbert--Samuel bound of step 6 therefore gives a positive constant times $n^{d+r}$. Apply [lem-trf-hilbert-samuel-growth-dimension] also to the nonzero Noetherian local ring $H$. Its length polynomial has positive leading coefficient; the two bounds force its degree to be exactly $d+r$ (a polynomial of degree $e$ grows between positive multiples of $n^e$). Its degree is $\\dim H$, so $\\dim H=d+r$. For $r=0$, the injection $T\\hookrightarrow G=0$ gives $T=\\{0\\}$ and step 3 gives $H=D$, proving the same equality without choosing $M,W$ or dividing by $r$.",
+   "uses": [
+    "lem-trf-hilbert-samuel-growth-dimension",
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KQ, proposition-dimension, with Tag 00K8; elementary lower monomial count and comparison of polynomial degrees."
+   }
+  },
+  {
+   "text": "Let $\\eta$ be as in the statement and put $f=c(\\eta)\\in\\mathfrak m\\setminus\\mathfrak m^2$. Then $f\\ne0$, hence $\\eta\\ne0$, and the domain result of step 4 makes multiplication by $\\eta$ injective. Since $\\mathfrak n=c^{-1}(\\mathfrak m)$, $\\eta\\in\\mathfrak n$. Apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] to $(H,\\mathfrak n)$ and $\\eta$ to obtain $\\dim(H/(\\eta))+1=\\dim H=d+r$. Apply [lem-weil-pbc-regular-local-hypersurface-criterion] to $(D,\\mathfrak m)$ and $f$ to obtain that $D/(f)$ is regular local. Finally $D$ is a domain by [lem-sc-regular-local-domain], so its nonzero element $f$ is a nonzerodivisor; the same dimension-drop node applied to $D$ gives $\\dim(D/(f))+1=d$. These are the two claimed formulas. If $d=0$, $D$ is a field and $\\mathfrak m\\setminus\\mathfrak m^2$ is empty, so this universal assertion has no instances; no negative dimension of a nonzero ring is asserted.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-weil-pbc-regular-local-hypersurface-criterion",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KW, lemma-one-equation; Tag 00NQ, lemma-regular-ring-CM; Tag 00NP, lemma-regular-domain."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-sharp-monoid-positive-grading",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-trf-monoid-completion-coefficients",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-trf-hilbert-samuel-growth-dimension",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-regular-local-hypersurface-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i)--(ii), printed p. 70, agent-supplied dimension input proved by the explicit monomial length calculation and Stacks 00K8/00KQ; the parameter step uses 00KW/00NQ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +167,45 @@
    "results": "{\"t\": \"2026-10-17T18:40:00Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension of completed saturated affine semigroup rings and parameter hypersurfaces is dimension of coefficients plus lattice rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim\", \"Polynomial.ringKrullDim_le\", \"ringKrullDim_succ_le_ringKrullDim_powerseries\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"Polynomial.ringKrullDim_of_isNoetherianRing\"], \"digest\": \"c79136f9967d89ef\"}; PowerSeries domain/Noetherian instances and MvPolynomial dimension cover free monoids, not arbitrary sharp fs monoids. The regular-element dimension-drop theorem covers only the hypersurface subclause, not the dimension or domain assertion for H. No exact or one-line match.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of a completed sharp saturated affine monoid algebra over a complete regular local ring, and quotient by a parameter",
+   "results": "{\"t\": \"2026-10-17T19:04:28Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension of a completed sharp saturated affine monoid algebra over a complete regular local ring, and quotient by a parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_succ_le_ringKrullDim_powerseries\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"Ring.KrullDimLE\"], \"digest\": \"72d1817edb88f002\"}; The regular-element quotient results cover only the hypersurface subclause. PowerSeries and MvPowerSeries statements cover free monoids; no theorem here gives dimension or the domain assertion for arbitrary sharp fs T. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"ringKrullDim\"",
+   "results": "{\"t\": \"2026-10-17T19:04:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"AddMonoidAlgebra\\\", \\\"ringKrullDim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The regular-element quotient results cover only the hypersurface subclause. PowerSeries and MvPowerSeries statements cover free monoids; no theorem here gives dimension or the domain assertion for arbitrary sharp fs T. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*(AddMonoidAlgebra|MonoidAlgebra)|(AddMonoidAlgebra|MonoidAlgebra).*ringKrullDim",
+   "results": "{\"t\": \"2026-10-17T19:04:26Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*(AddMonoidAlgebra|MonoidAlgebra)|(AddMonoidAlgebra|MonoidAlgebra).*ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The regular-element quotient results cover only the hypersurface subclause. PowerSeries and MvPowerSeries statements cover free monoids; no theorem here gives dimension or the domain assertion for arbitrary sharp fs T. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal power series on a finitely generated sharp saturated monoid over a regular local coefficient ring have dimension coefficient dimension plus monoid rank",
+   "results": "{\"t\": \"2026-10-17T19:04:27Z\", \"tool\": \"leansearch\", \"query\": \"Formal power series on a finitely generated sharp saturated monoid over a regular local coefficient ring have dimension coefficient dimension plus monoid rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_succ_le_ringKrullDim_powerseries\", \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_X_mem\", \"MvPowerSeries\", \"PowerSeries.coeff_subst\", \"PowerSeries.hasSum_of_monomials_self\", \"PowerSeries.mk\", \"PowerSeries.instIsDomain\", \"MvPowerSeries.IsHomogeneous\"], \"digest\": \"6cf02b4c2403b598\"}; The regular-element quotient results cover only the hypersurface subclause. PowerSeries and MvPowerSeries statements cover free monoids; no theorem here gives dimension or the domain assertion for arbitrary sharp fs T. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian local domain formal semigroup ring and dimension of its quotient by a nonzero parameter",
+   "results": "{\"t\": \"2026-10-17T19:04:29Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherian local domain formal semigroup ring and dimension of its quotient by a nonzero parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"isFiniteLength_quotient_span_singleton\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"ringKrullDim_le_ringKrullDim_add_card\"], \"digest\": \"fa46cba8214a5ac2\"}; The regular-element quotient results cover only the hypersurface subclause. PowerSeries and MvPowerSeries statements cover free monoids; no theorem here gives dimension or the domain assertion for arbitrary sharp fs T. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-smooth-log-regular",
@@ -81,5 +230,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-formal-monoid-ring-dimension",
+  "worker": "stage1",
+  "summary": "Kept the full statement, including rank zero and arbitrary eta with parameter constant coefficient. Proved Noetherianity from finite generation, the stratum quotient and locality by coefficient calculations, the domain property by least monomials, and dimension by upper/lower monomial counts and Hilbert--Samuel growth. Reused existing parameter quotient and dimension-drop nodes. Three strictly more general statement-only inputs; no Mathlib leaf or Lean attachment found.",
+  "blueprint": "Historical nearby-duality/alteration algebra under lem-trf-local-term-locality proof (1)--(2), through lem-trf-log-smooth-log-regular: ILO VI 1.6(i)--(ii) formal chart models; this input expands the formal-monoid dimension argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra input: The completion of a Noetherian ring is Noetherian. The formal-chart unit supplies no replacement of this algebraic theorem."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic commutative-algebra input: Regular local rings are domains. The formal-chart unit supplies no replacement of this algebraic theorem."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-hypersurface-criterion",
+    "why": "Generic commutative-algebra input: A non-square element cuts a regular local hypersurface. The formal-chart unit supplies no replacement of this algebraic theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-regular-local-hypersurface-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-740017213",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-740017213 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited statements, unit/chapter route, ILO VI 1.6, and exact Stacks tags 05GG, 00FN, 0316, 00IV, 00K8, 00KA, 00KQ, 00NP, 00NQ, 00KW. Checked all eight proof steps, hypotheses, edge cases, coefficient filtration, domain and dimension arguments, duplicate candidates, searches, blueprint ancestry, route restrictions, and no long-step violations. Wrote review.md; no repairs needed."
  }
 }

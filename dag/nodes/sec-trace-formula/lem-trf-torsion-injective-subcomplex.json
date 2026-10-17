@@ -13,9 +13,100 @@
   "def-weil-abstract-derived-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T^r=I^r_{\\mathrm{tor}}$. These are subsheaves: restrictions preserve local annihilation; on a common refinement, if $ns=0$ and $mt=0$ then $nm(s+t)=0$ and $n(-s)=0$; a glued section is locally torsion by composing its gluing cover with the annihilating covers. The covering refinements and composition are those of [def-weil-pbc-sites-and-cohomology]. Since $d(ns)=n\\,d(s)$, every differential carries $T^r$ into $T^{r+1}$. The identities $d^2=0$ restrict, so the inclusions form a morphism of complexes $j:T^\\bullet\\to I^\\bullet$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, label lemma-torsion, first two proof paragraphs; agent-written local cycle expansion: the torsion subsheaves form a subcomplex."
+   }
+  },
+  {
+   "text": "For every degree $q$ and positive integer $n$, [lem-trf-injective-abelian-sheaf-divisible] makes $n:I^q\\to I^q$ epic. By [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective], every section $b\\in I^q(U)$ therefore has, after a covering of $U$, a section $b'$ with $nb'=b$. This assertion applies to every integer degree, including $r-1$ and $r-2$, and does not choose an annihilator for an entire sheaf.",
+   "uses": [
+    "lem-trf-injective-abelian-sheaf-divisible",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, label lemma-torsion, first two proof paragraphs; agent-written local cycle expansion: divisibility of injective terms, used in the local corrections."
+   }
+  },
+  {
+   "text": "For either complex $A^\\bullet=I^\\bullet$ or $T^\\bullet$, put $Z_A^q=\\ker d_A^q$ and $B_A^q=\\operatorname{im}d_A^{q-1}$. By [def-weil-abstract-derived-category], $H^q(A)=Z_A^q/B_A^q$. The quotient $Z_A^q\\twoheadrightarrow H^q(A)$ and the image-factorization arrow $A^{q-1}\\twoheadrightarrow B_A^q$ are epimorphisms. The local lifting criterion [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] and sectionwise kernels [lem-weil-pbc-sheafification-exact] give two precise rules: a cohomology section is locally represented by a genuine cycle $z\\in A^q(U)$, and a cycle represents zero exactly when, after a covering, $z=d b$ for a section $b\\in A^{q-1}$. For the reverse implication, local vanishing is global vanishing by the sheaf separation axiom. These rules concern sheaf quotients; no quotient of global-section groups is assumed.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, label lemma-torsion, first two proof paragraphs; agent-written local cycle expansion: local meaning of cycles, boundaries, and cohomology classes."
+   }
+  },
+  {
+   "text": "Fix $r$ and a local section $h$ of $H^r(I)$. Using step 3, first refine to represent it by a cycle $z\\in I^r(U)$. The torsion hypothesis gives a further cover and, on each member, a positive integer $n$ with $nh=0$. Step 3 then gives, after another cover, $b\\in I^{r-1}(U)$ with $db=nz$. By step 2 choose locally $b'\\in I^{r-1}(U)$ with $nb'=b$. The section $z'=z-db'$ satisfies $d z'=0$ and $nz'=nz-db=0$; hence it is a cycle in $T^r$ with image $h$. Covers compose by [def-weil-pbc-sites-and-cohomology]. Thus every section of $H^r(I)$ locally lifts to $H^r(T)$, and [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] makes $H^r(j)$ epic.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-trf-injective-abelian-sheaf-divisible",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, label lemma-torsion, first two proof paragraphs; agent-written local cycle expansion: local surjectivity on cohomology by dividing a primitive."
+   }
+  },
+  {
+   "text": "Fix a section $a\\in H^r(T)(U)$ with $H^r(j)(a)=0$. Step 3 lets us represent $a$ locally by a cycle $z\\in T^r(U)$ and, since its image vanishes, refine until $z=db$ for $b\\in I^{r-1}(U)$. Refine once more until a positive integer $n$ kills $z$. Then $d(nb)=nz=0$. The class of $nb$ in $H^{r-1}(I)$ is torsion, so locally there is a positive integer $m$ with $[mnb]=0$; by step 3 refine until $mnb=dc$ for $c\\in I^{r-2}(U)$. Step 2, now in degree $r-2$ with the positive integer $mn$, gives locally $c'$ with $mn c'=c$. Set $b'=b-dc'$. Then $mn b'=mnb-dc=0$ and $db'=db=z$, so $b'\\in T^{r-1}(U)$ is a torsion primitive of $z$. Consequently $a$ is locally zero in $H^r(T)$, hence zero by sheaf separation. Sectionwise kernels [lem-weil-pbc-sheafification-exact] imply that $H^r(j)$ has zero kernel and is monic.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-trf-injective-abelian-sheaf-divisible",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, label lemma-torsion, first two proof paragraphs; agent-written local cycle expansion: local injectivity on cohomology, using torsion also in degree $r-1$."
+   }
+  },
+  {
+   "text": "For each $r$, steps 4 and 5 show that every section of $H^r(I)$ has locally a unique preimage in $H^r(T)$. The preimages agree on overlaps by injectivity, and therefore glue by the sheaf axiom [def-weil-pbc-sites-and-cohomology]. Thus $H^r(j)$ is an isomorphism for every integer $r$. This is exactly the definition of a quasi-isomorphism [def-weil-abstract-derived-category]. The argument uses only the finitely many degrees $r,r-1,r-2$ for each $r$ and only integers chosen after local refinements, so it imposes neither a bound on the complex nor a common annihilator.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, label lemma-torsion, first two proof paragraphs; agent-written local cycle expansion: conclusion in every degree, with no boundedness assumption."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-trf-injective-abelian-sheaf-divisible",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DD7, label lemma-torsion, first two proof paragraphs. Direct local cycle proof from the divisibility observation; the source instead packages these corrections through rationalization and its cohomology long exact sequence."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +135,38 @@
    "results": "QuasiIso, HomologicalComplex.quasiIso, CategoryTheory.ShortComplex.QuasiIso; no torsion-subsheaf theorem.",
    "date": "2026-10-18",
    "verdict": "no match: only generic quasi-isomorphism declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*(complex|quasiIso)|((complex|quasiIso).*torsion)",
+   "results": "{\"t\": \"2026-10-17T19:04:05Z\", \"tool\": \"grep\", \"query\": \"torsion.*(complex|quasiIso)|((complex|quasiIso).*torsion)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CMField.lean\", \"Mathlib/NumberTheory/NumberField/CMField.lean\", \"Mathlib/NumberTheory/NumberField/CMField.lean\", \"Mathlib/NumberTheory/NumberField/CMField.lean\", \"Mathlib/NumberTheory/NumberField/CMField.lean\", \"Mathlib/NumberTheory/NumberField/Units/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Units/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Units/Basic.lean\"], \"digest\": \"b0113ad759c16f75\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only generic quasi-isomorphism or injective-resolution declarations and number-field complex-conjugation torsion hits; none states the torsion-subcomplex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of the torsion subcomplex of an injective sheaf complex with torsion cohomology is a quasi-isomorphism",
+   "results": "{\"t\": \"2026-10-17T19:04:06Z\", \"tool\": \"leansearch\", \"query\": \"The inclusion of the torsion subcomplex of an injective sheaf complex with torsion cohomology is a quasi-isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.QuasiIso.casesOn\", \"HomologicalComplex.quasiIso\", \"quasiIsoAt_comp\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"QuasiIso\", \"HomologicalComplex.instRespectsIsoQuasiIso\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"quasiIsoAt_iff_isIso_homologyMap\"], \"digest\": \"d7c79dc3a817bf86\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only generic quasi-isomorphism or injective-resolution declarations and number-field complex-conjugation torsion hits; none states the torsion-subcomplex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"torsion\"",
+   "results": "{\"t\": \"2026-10-17T19:04:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiIso\\\", \\\"torsion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only generic quasi-isomorphism or injective-resolution declarations and number-field complex-conjugation torsion hits; none states the torsion-subcomplex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of injective sheaves with locally torsion cohomology is quasi-isomorphic to its termwise torsion subsheaf",
+   "results": "{\"t\": \"2026-10-17T19:04:13Z\", \"tool\": \"leanfinder\", \"query\": \"A complex of injective sheaves with locally torsion cohomology is quasi-isomorphic to its termwise torsion subsheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CochainComplex.IsKInjective\"], \"digest\": \"a7510ca42e75507f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only generic quasi-isomorphism or injective-resolution declarations and number-field complex-conjugation torsion hits; none states the torsion-subcomplex comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-torsion-sheaf-complex-representative",
@@ -73,5 +192,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-torsion-injective-subcomplex",
+  "worker": "stage1",
+  "summary": "Preserved the full unbounded statement and proved both local surjectivity and local injectivity on cohomology by explicit division of primitives in injective terms. The only new helper is the single-sheaf divisibility statement already proved by CategoryTheory.Sheaf.epi_nsmul_id_of_injective; the sorry map records s=false and ts=false. Local representatives and local boundaries use the existing general-site epimorphism criterion and sectionwise kernels. No tensor exactness or cohomology long exact sequence is used implicitly.",
+  "blueprint": "Realizes the Stacks 0DD7 reduction inside the inherited normal-cone/Orgogozo descent ancestry of lem-trf-local-term-locality, through lem-trf-torsion-sheaf-complex-representative. Current main-20261015 sk-i-curve-zero proof continues to use normal-cone specialization. All historical ancestry is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-9d26cb6bc",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-9d26cb6bc (reviewer sub-agent of L); spot-checked: The mathematics and all six proof steps check against Stacks Tag 0DD7, including unbounded complexes and local annihilators; no route, duplicate, or hypothesis faults found. The new helper omits required lean_audit metadata despite its verified sorry-free declaration attachment. Corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-injective-abelian-sheaf-divisible.json.; 1 file(s) fixed by the reviewer"
  }
 }
