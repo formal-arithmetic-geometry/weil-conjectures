@@ -283,5 +283,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac55e614a",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Every clause of the node matches SSet.Enhanced.exists_minimal_deformation_retract: M is a Subcomplex with M.ι, is a quasicategory, and is minimal for all n including 0 (homotopy fixed on the boundary, constant on ∂Δ[n]×Δ[1], equivalence edge at each vertex, conclusion f = g); r satisfies M.ι ≫ r = 𝟙; e has δ1 = id_C and δ0 = r≫ι, is an equivalence edge, and its uncurried prism is strictly fst ≫ M.ι on M ⊗ Δ[1]; both maps are functor equivalences. No extra hypotheses, fully universe-polymorphic, empty C allowed. Checked the dependency's IsEquivalenceEdge, diagramVertex and IsFunctorEquivalence and Mathlib's ι₀/ι₁. No duplicate notion in the project, upstream or Mathlib. No definitions; proof is sorry; docstrings carry the source place, blueprint tag and 8-step plan. lean.statement appears verbatim in the file; the node differs from the clone only in the lean field. nt_compile --json with the local overlay exited 0 with no errors or warnings. Cosmetic only: the report wrongly says the presentability node has no Lean record, and the HTT section numbers in the report text are garbled."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialSet.MinimalQuasicategoryRetract",
+  "declaration": "SSet.Enhanced.exists_minimal_deformation_retract",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialSet/MinimalQuasicategoryRetract.lean",
+  "statement": "theorem exists_minimal_deformation_retract (C : SSet.{u}) [Quasicategory C] : ∃ (M : C.Subcomplex) (r : C ⟶ M.toSSet) (e : ((ihom C).obj C) _⦋1⦌), Quasicategory M.toSSet ∧ (∀ (n : ℕ) (f g : Δ[n] ⟶ M.toSSet), ∂Δ[n].ι ≫ f = ∂Δ[n].ι ≫ g → (∃ H : Δ[n] ⊗ Δ[1] ⟶ M.toSSet, ι₀ ≫ H = f ∧ ι₁ ≫ H = g ∧ (∂Δ[n].ι ▷ Δ[1]) ≫ H = fst _ _ ≫ ∂Δ[n].ι ≫ f ∧ ∀ v : Fin (n + 1), IsEquivalenceEdge M.toSSet (H.app (op ⦋1⦌) ((Δ[n] : SSet.{u}).σ 0 (stdSimplex.obj₀Equiv.symm v), stdSimplex.objEquiv.symm (𝟙 ⦋1⦌)))) → f = g) ∧ M.ι ≫ r = 𝟙 M.toSSet ∧ ((ihom C).obj C).δ 1 e = diagramVertex (𝟙 C) ∧ ((ihom C).obj C).δ 0 e = diagramVertex (r ≫ M.ι) ∧ IsEquivalenceEdge ((ihom C).obj C) e ∧ (M.ι ▷ Δ[1]) ≫ MonoidalClosed.uncurry (yonedaEquiv.symm e) = fst M.toSSet Δ[1] ≫ M.ι ∧ IsFunctorEquivalence M.ι ∧ IsFunctorEquivalence r",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

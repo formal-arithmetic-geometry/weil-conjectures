@@ -284,5 +284,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02bde5fa2",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Delivery 02bde5fa adds only the lean field, one sorry-only theorem module and the report; node statement unchanged. Each clause checked against PresentableInfinityCategory definitions (IsPresentable.{u,v}, IsKappaAccessible/IsKappaCompact/IsEssentiallySmall at max(u+1) v, fullSubcomplex on all κ₂-compact vertices, both faces δ0/δ1, power bound μ<κ₂, ν<κ₁ with no positivity restriction, IsRegular includes aleph0_le, aleph0<κ₂): exact, no extra hypotheses or universe restriction. Mathematically true via κ=(2^θ)^+ (HTT 5.4.2.9/5.3.4.15/5.4.2.2). Edge cases S=∅, degenerate edges, 0^0, Δ⁰ fine. lean.statement byte-identical to file; lines ≤98; docstrings carry source, blueprint tag and all 7 proof steps; imports cover stated proof deps (DirectedCoverColimitAssembly, Cardinal.Regular leaf). nt_compile.py --json: exit 0, 35 overlay modules, no errors or warnings. Only cosmetic finding: hostname-scrubbed HTT numbers in the second-reading prose."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresentableCardinalEnlargement",
+  "declaration": "SSet.Presentability.presentable_cardinal_enlargement",
+  "file": "lean/Sheaf/CategoryTheory/PresentableCardinalEnlargement.lean",
+  "statement": "theorem presentable_cardinal_enlargement {C : SSet.{max (u + 1) v}} [SSet.Quasicategory C] (hC : IsPresentable.{u, v} C) (S : Set (C _⦋1⦌)) [Small.{u} S] : ∃ (κ₁ κ₂ : Cardinal.{u}), κ₁.IsRegular ∧ κ₂.IsRegular ∧ κ₁ < κ₂ ∧ Cardinal.aleph0 < κ₂ ∧ IsKappaAccessible.{u, max (u + 1) v} C κ₁ ∧ IsKappaAccessible.{u, max (u + 1) v} C κ₂ ∧ (∀ (μ ν : Cardinal.{u}), μ < κ₂ → ν < κ₁ → μ ^ ν < κ₂) ∧ (∀ (s : S), IsKappaCompact.{u, max (u + 1) v} C κ₂ (C.δ 0 s.1) ∧ IsKappaCompact.{u, max (u + 1) v} C κ₂ (C.δ 1 s.1)) ∧ IsEssentiallySmall.{u, max (u + 1) v} (SSet.Enhanced.fullSubcomplex C (fun c => IsKappaCompact.{u, max (u + 1) v} C κ₂ c)).toSSet",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -225,5 +225,36 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-e346a35a4 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the full statements of all 9 cited nodes, the citer lem-coef-functor-spine-tower-mapping-descent, and the unit record. The source is HTT Lemma 5.3.4.11, read in a local htt.pdf. It covers towers of left fibrations over S, and at S = point (Kan model) it gives the item exactly, with no hypothesis added. Edge cases checked: one stage, a constant identity tower, empty stages, and fibrations that are not surjective on components; all hold. Without fibrations the claim would be false (lim^1), and that hypothesis is present. Step 1: for N^op the matching category at n has initial object n→n-1, so M_n = X_{n-1}, the matching map is p_{n-1}, M_0 = *, and the tower is Reedy fibrant. Step 2: the latching objects are empty, so Reedy cofibrations are objectwise; c ⊣ lim is Quillen and X is Kan. Step 3: the derived adjunction has the ordinary counit (the projections) as its derived counit. Step 4: the rectification node, the cone-calculus mapping criterion, and the simplicial-model nerve localization apply; the SM7 check uses the anodyne pushout-product leaf (trivial cofibration = anodyne by the weak factorization system), and M^cf is the Kan_W of the spaces definition. Step 5 (naturality and uniqueness of terminal objects) is genuinely elementary. proof_deps equals the union of the step uses, there is no cycle, there are no new nodes, I found no duplicate, and no SGA source is cited. The declared tool use of lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc) is accepted: it is generic cone calculus that this unit's nodes already cite as a black box. No target node is involved, so no base-change or coefficient-category check applies. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6a1f3155",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Hypotheses X : ℕ → SSet.{u}, p, hX (KanComplex), hp (J.rlp, all horns of dimension ≥ 1 including outer) match the node with nothing stronger. strictInverseLimit is the real degreewise compatible-family limit with coordinatewise operators. Kan-ness of the limit is concluded, not assumed. InducedTowerCone fixes the coherent diagram, apex and every simplex of the projection transformation (via SimplicialThickening.Path/homEquiv') to the nerve image of the strict tower and cone. The interval-0 = constant side convention matches coneCategory = comma … true in EnhancedDiagramsCones, so the cone exists and IsLimiting is exactly the node's limit clause. Strict naturality is stated as commuting projection squares; this is nearly definitional, but coherent naturality follows from the fixed cones (remark only). Edge cases: empty stages, n=0 simplices, the index starting at 0, and universes (index nerve lifted 0→u+1, no universe equality) are all fine. Node fields other than lean are unchanged; lean.statement is verbatim in the file; both dependency nodes are unchanged; docstrings carry the source, blueprint tag and five proof steps; the report has the Worker report and Second reading by Q55 sections. nt_compile.py --json compiled the item cleanly (rc 0, 2.1 s, no errors or warnings)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanFibrationTowerLimit",
+  "declaration": "SSet.Enhanced.kan_fibration_tower_limit",
+  "declarations": [
+   "SSet.Enhanced.strictInverseLimit",
+   "SSet.Enhanced.strictInverseLimit.eval",
+   "SSet.Enhanced.strictInverseLimitProjection",
+   "SSet.Enhanced.strictKanTower",
+   "SSet.Enhanced.strictKanCone",
+   "SSet.Enhanced.IsStrictKanSimplex",
+   "SSet.Enhanced.strictTransformationSimplex",
+   "SSet.Enhanced.InducedTowerCone",
+   "SSet.Enhanced.strictInverseLimitMap",
+   "SSet.Enhanced.kan_fibration_tower_limit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KanFibrationTowerLimit.lean",
+  "statement": "theorem kan_fibration_tower_limit (X : ℕ → SSet.{u}) (p : ∀ n : ℕ, X (n + 1) ⟶ X n) (hX : ∀ n : ℕ, KanComplex (X n)) (hp : ∀ n : ℕ, SSet.modelCategoryQuillen.J.rlp (p n)) : (∃ hL : KanComplex (strictInverseLimit X p), ∃ c : InducedTowerCone X p hX hL, IsLimiting c.F c.t) ∧ (∀ (Y : ℕ → SSet.{u}) (q : ∀ n : ℕ, Y (n + 1) ⟶ Y n), (∀ n : ℕ, KanComplex (Y n)) → (∀ n : ℕ, SSet.modelCategoryQuillen.J.rlp (q n)) → ∀ (a : ∀ n : ℕ, X n ⟶ Y n) (ha : ∀ n : ℕ, p n ≫ a n = a (n + 1) ≫ q n) (n : ℕ), strictInverseLimitMap a ha ≫ strictInverseLimitProjection Y q n = strictInverseLimitProjection X p n ≫ a n)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Degreewise compatible-family limit and canonical strict-map action. InducedTowerCone now pins the entire coherent diagram, apex and projection transformation in every simplicial degree by constant enriched mapping-simplex formulas. The conclusion states limitingness of that specified cone and projection naturality for strict tower maps. Reuses the recorded Kan coherent nerve and comma cone category; no dependency or natural node statement changed."
  }
 }

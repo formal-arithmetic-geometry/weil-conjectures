@@ -26,7 +26,9 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-suspension-square-comparison"
  ],
  "proof": [
   {
@@ -302,5 +304,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f54c7432e",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps' Lean (EnhancedDiagramsCones, PresentableInfinityCategory, InfinityFibrations.fiber, SuspensionSquareComparison, plus InfinityCategoryOfSpaces.mappedCocone), module, report (real Worker + Q38 second-reading sections). All 9 clauses match: coherentCoslice is the strict fiber of ev0; endpoint colimits A,B and b via cocone t; CoslicePushoutConstruction is a real comparison edge t -> mappedCocone(tau), with square corners A,B,X,P and puncture false removing corner (1,1), so the pushout span is X<-A->B; existence and universality of the colimit asserted; weakly contractible K gives the specific a = e.1.1 as an equivalence; kappa-filtered contractibility for every regular kappa incl. aleph0; point-functor preservation; terminal accessibility with Quasicategory concluded. No added hypotheses or universe equalities; edge cases (empty K, point, initial X, empty I) fine. Node diff only lean + stmt_deps gaining two landed nodes (allowed); lean.statement verbatim; 4 declarations listed; no hollow defs; one sorry; docstrings OK; lines <=100. nt_compile --json rc 0, no errors/warnings (2.8 s). Non-blocking: sanitiser artifacts in report text; step-5 source names Hovey (outside delivery)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCosliceColimitFormula",
+  "declaration": "SSet.Enhanced.infinity_coslice_colimit_formula",
+  "declarations": [
+   "SSet.Enhanced.coherentCoslice",
+   "SSet.Enhanced.coherentCosliceInclusion",
+   "SSet.Enhanced.CoslicePushoutConstruction",
+   "SSet.Enhanced.infinity_coslice_colimit_formula"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCosliceColimitFormula.lean",
+  "statement": "theorem infinity_coslice_colimit_formula (C : SSet.{max (u + 1) v}) [Quasicategory C] (hC : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} C) : (∀ (K : SSet.{max (u + 1) v}), SSet.Presentability.IsSmall.{u, max (u + 1) v} K → ∀ (X : C _⦋0⦌) (q : K ⟶ coherentCoslice C X), (∃ t : (coconeCategory (q ≫ coherentCosliceInclusion C X)) _⦋0⦌, IsColimiting ((q ≫ coherentCosliceInclusion C X) ≫ evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 0)) (CategoryTheory.Spaces.mappedCocone (evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 0)) (q ≫ coherentCosliceInclusion C X) t) ∧ IsColimiting ((q ≫ coherentCosliceInclusion C X) ≫ evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 1)) (CategoryTheory.Spaces.mappedCocone (evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 1)) (q ≫ coherentCosliceInclusion C X) t)) ∧ (∀ t : (coconeCategory (q ≫ coherentCosliceInclusion C X)) _⦋0⦌, (∀ i : Fin 2, IsColimiting ((q ≫ coherentCosliceInclusion C X) ≫ evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm i)) (CategoryTheory.Spaces.mappedCocone (evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm i)) (q ≫ coherentCosliceInclusion C X) t)) → (∃ τ : (coconeCategory q) _⦋0⦌, Nonempty (CoslicePushoutConstruction X q t τ)) ∧ (∀ τ : (coconeCategory q) _⦋0⦌, CoslicePushoutConstruction X q t τ → IsColimiting q τ))) ∧ (∀ (K : SSet.{max (u + 1) v}), SSet.Presentability.IsSmall.{u, max (u + 1) v} K → IsContractible K → ∀ (X : C _⦋0⦌) (t s : (coconeCategory (SSet.const (X := K) X)) _⦋0⦌), IsColimiting (SSet.const (X := K) X) t → s.1.1 = X → s.1.2 = (constantDiagrams Δ[1] ((ihom K).obj C)).app _ (diagramVertex (SSet.const (X := K) X)) → ∀ e : (coconeCategory (SSet.const (X := K) X)) _⦋1⦌, (coconeCategory (SSet.const (X := K) X)).δ 1 e = t → (coconeCategory (SSet.const (X := K) X)).δ 0 e = s → IsEquivalenceEdge C e.1.1) ∧ (∀ (κ : Cardinal.{u}), κ.IsRegular → (∀ (I : SSet.{max (u + 1) v}) [Quasicategory I], SSet.Presentability.IsSmall.{u, max (u + 1) v} I → SSet.Presentability.IsKappaFiltered κ I → IsContractible I) ∧ (∀ X : C _⦋0⦌, SSet.Presentability.PreservesColimitsIn (SSet.const (X := Δ[0]) X) (fun I _ _ ↦ ∃ hI : Quasicategory I, SSet.Presentability.IsSmall.{u, max (u + 1) v} I ∧ @SSet.Presentability.IsKappaFiltered κ I hI))) ∧ (∃ hT : Quasicategory (Δ[0] : SSet.{max (u + 1) v}), @SSet.Presentability.IsAccessible.{u, v} Δ[0] hT)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The source fiber and square cocone are the recorded fiber and SuspensionComparison.SquareCocone constructions. A morphism of coherent arrow-diagram cocones records the induced constant-source comparison, the pushout square and the resulting coslice cocone together. The endpoint colimits exist and every such pushout construction is colimiting. The remaining conjuncts state the canonical constant-diagram comparison, filtered weak contractibility, point-functor preservation and terminal accessibility. Helpers contain real data; the only postponed theorem is the node itself."
  }
 }

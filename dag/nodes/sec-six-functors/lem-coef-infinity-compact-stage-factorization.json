@@ -28,7 +28,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -235,5 +236,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5558ea0e8",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read the node, the three statement deps (EnhancedDiagramsCones, PresentableInfinityCategory, FinalIndexColimit Lean read in full) and the module. The node differs from base only in lean and the added stmt_dep lem-coef-infinity-final-index-colimit (owner of the reused coconeHomotopy; no cycle). The statement is unchanged and lean.statement is verbatim. Clauses match exactly: u < max(u+1) v universes, regular γ, Quasicategory/IsLocallySmall/HasSmallKappaFilteredColimits on E, small γ-filtered quasicategory I, the given colimiting cocone t kept. The leg direction F(i)->apex was verified from comma(...,false). The triangle faces δ2=v, δ0=leg, δ1=w and π₀ w = π₀ h give the same-component conclusion, and the retract clause uses the identity σ0 apex. No stage compactness. Edge cases: empty I excluded by IsKappaFiltered; empty E/mapping space vacuous; point; nerves; ℵ₀. Gates: no defs, sorry only, source/blueprint docstrings, real Worker report and Second reading sections. nt_compile --json against the side overlay is clean (1.6 s, rc 0). Informational: IsKappaCompact tests diagrams one universe up, so the proof must lift F/t; this is true and not a statement fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCompactStageFactorization",
+  "declaration": "SSet.Enhanced.compact_stage_factorization",
+  "declarations": [
+   "SSet.Enhanced.compact_stage_factorization",
+   "SSet.Enhanced.compact_colimit_retract"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCompactStageFactorization.lean",
+  "statement": "theorem compact_stage_factorization (γ : Cardinal.{u}) (_hγ : γ.IsRegular) (E : SSet.{max (u + 1) v}) [Quasicategory E] (_hE : Presentability.IsLocallySmall.{u, max (u + 1) v} E) (_hcolimits : Presentability.HasSmallKappaFilteredColimits E γ) (I : SSet.{max (u + 1) v}) [Quasicategory I] (_hsmall : Presentability.IsSmall.{u, max (u + 1) v} I) (_hfiltered : Presentability.IsKappaFiltered γ I) (F : I ⟶ E) (t : (coconeCategory F) _⦋0⦌) (_ht : IsColimiting F t) (x : E _⦋0⦌) (_hx : Presentability.IsKappaCompact E γ x) (h : (mappingSpace E x t.1.1) _⦋0⦌) : ∃ (i : I _⦋0⦌) (v : (mappingSpace E x (F.app _ i)) _⦋0⦌) (w : (mappingSpace E x t.1.1) _⦋0⦌) (s : E _⦋2⦌), E.δ 2 s = v.1 ∧ E.δ 0 s = (coconeHomotopy F t).app (op ⦋1⦌) (I.σ 0 i, stdSimplex.objEquiv.symm (𝟙 ⦋1⦌)) ∧ E.δ 1 s = w.1 ∧ π₀.mk w = π₀.mk h",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The general morphism clause and the identity/retract specialization use the original coherent cocone. A two-simplex specifies composition and equality in the right-pinched mapping space π₀ specifies homotopy. The added landed statement dependency supplies the existing coconeHomotopy extraction; no notion is duplicated."
  }
 }

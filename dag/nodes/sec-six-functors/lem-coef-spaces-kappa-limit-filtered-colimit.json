@@ -245,5 +245,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aba57f20d",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Read node, HTT 5.3.3.3 (1)=>(2), both stmt_deps modules (PresentableInfinityCategory, EnhancedDiagramsCones) and InfinityCategoryOfSpaces, delivered module and report. Every clause matches: kappa : Cardinal.{u} regular; K kappa-small (nondegenerate count), no nonempty/quasicategory assumption; I quasicategory, Small.{u}, kappa-filtered; X : K x I -> S; interchangeRows curry with braiding correct; InterchangeColimit = functor + strict unit id -> const o L with colimiting components (a left adjoint to const by HTT 5.2.2.8; Nonempty is concluded and true); IsInterchangeImageCone fixes the full image cone (strict comma membership holds by naturality); every cone edge q -> limiting t has equivalence apex, plus IsLimiting q. Edge cases: empty K, point K/I, kappa=aleph0, empty I excluded by filteredness, empty spaces allowed; universes u/u+1 with smallness measured in u. Gates: one sorry (theorem), no hollow defs, docstrings with source/blueprint and the 8 proof steps, imports = statement + 4 recorded proof-dep modules, lines <=100, node differs from base only in lean, statement verbatim, both report sections present. nt_compile.py --json against the local side overlay: clean, exit 0, twice. Non-blocking: FiniteReedy.IsColimitAdjunction is an equivalent helper in an unrelated lemma module, which H2 forbids citing; the report says 'Proposition the project server' for 5.3.3.3."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpacesKappaLimitFilteredColimit",
+  "declaration": "CategoryTheory.Spaces.spaces_kappa_limit_filtered_colimit",
+  "declarations": [
+   "CategoryTheory.Spaces.InterchangeColimit",
+   "CategoryTheory.Spaces.interchangeRows",
+   "CategoryTheory.Spaces.IsInterchangeImageCone",
+   "CategoryTheory.Spaces.spaces_kappa_limit_filtered_colimit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpacesKappaLimitFilteredColimit.lean",
+  "statement": "theorem spaces_kappa_limit_filtered_colimit (κ : Cardinal.{u}) (_hκ : κ.IsRegular) (K I : SSet.{u + 1}) [SSet.Quasicategory I] (_hK : IsKappaSmall κ K) (_hI : IsSmall.{u, u + 1} I) (_hfiltered : IsKappaFiltered κ I) : Nonempty (InterchangeColimit I) ∧ ∀ (L : InterchangeColimit I) (X : K ⊗ I ⟶ infinityCategory.{u}), (∃ c : (coneCategory (interchangeRows X)) _⦋0⦌, IsLimiting (interchangeRows X) c) ∧ ∀ c : (coneCategory (interchangeRows X)) _⦋0⦌, IsLimiting (interchangeRows X) c → ∃ q : (coneCategory (interchangeRows X ≫ L.functor)) _⦋0⦌, IsInterchangeImageCone L X c q ∧ IsLimiting (interchangeRows X ≫ L.functor) q ∧ ∀ t : (coneCategory (interchangeRows X ≫ L.functor)) _⦋0⦌, IsLimiting (interchangeRows X ≫ L.functor) t → (∃ e : (coneCategory (interchangeRows X ≫ L.functor)) _⦋1⦌, (coneCategory (interchangeRows X ≫ L.functor)).δ 1 e = q ∧ (coneCategory (interchangeRows X ≫ L.functor)).δ 0 e = t) ∧ ∀ e : (coneCategory (interchangeRows X ≫ L.functor)) _⦋1⦌, (coneCategory (interchangeRows X ≫ L.functor)).δ 1 e = q → (coneCategory (interchangeRows X ≫ L.functor)).δ 0 e = t → IsEquivalenceEdge infinityCategory.{u} e.1.1",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Coherent cone formulation of the canonical comparison. InterchangeColimit specifies the actual coherent colimit functor and its universal cocones; interchangeRows transposes the given bifunctor; IsInterchangeImageCone fixes the complete image transformation. Existence is explicit, and every comparison induced by a morphism of these cones is an equivalence. Uses the landed presentability and infinity-category-of-spaces interfaces, with no independent replacement notion or choice of data from sorry."
  }
 }

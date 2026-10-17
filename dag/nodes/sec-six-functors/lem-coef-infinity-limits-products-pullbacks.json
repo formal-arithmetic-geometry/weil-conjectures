@@ -265,5 +265,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac90b5808",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Lean signature matches node clause by clause: kappa:Cardinal.{u} regular (aleph0 included), U-small shapes SSet.{u} lifted into SSet.{max (u+1) v} with no universe equality, IsKappaSmall from the stmt-dep (nondegenerate count), HasKappaLimits for C and D as the node says, iff with cospan (ulift nerve WalkingCospan) and products over I:Type u with #I<kappa and no Nonempty binder (empty product = terminal). IsImageCone fixes both comma coordinates, so the image cone is unique, and it lies in coneCategory(F≫H) by naturality, so preservation = actual image cone is limiting; cone direction checked against commaSubcomplex outgoing=true. Node diff vs base is only the lean record; statement verbatim. No hollow defs, single sorry, docstrings with source/blueprint and steps 1-8 verbatim, lines <=100, autoImplicit off; all proof-dep modules imported (Mathlib Skeleton for boundary-cells). nt_compile.py --json on the snapshot: rc=0, no errors or warnings (lakefile sets warn.sorry=false; a probe confirmed errors are reported). Report has Worker report and Second reading by Q39. Non-blocking: PreservesJIndexedLimits/ConeImagesAgree in the landed lemma module MarkedSectionsPointwiseLimits are the same notion as PreservesLimitsOfShape/IsImageCone, not required because they are lemma-node helpers and H2 forbids adding lemma stmt_deps, consolidation recommended; the name PreservesLimitsOfShape is ambiguous with Mathlib's when both namespaces are open; report.md has HTT numbers 4.4.2.x scrubbed to 'the project server' (cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityLimitsProductsPullbacks",
+  "declaration": "SSet.Enhanced.infinity_limits_products_pullbacks",
+  "declarations": [
+   "SSet.Enhanced.IsImageCone",
+   "SSet.Enhanced.PreservesLimitsOfShape",
+   "SSet.Enhanced.HasKappaLimits",
+   "SSet.Enhanced.PreservesKappaLimits",
+   "SSet.Enhanced.infinityCospan",
+   "SSet.Enhanced.infinityDiscrete",
+   "SSet.Enhanced.infinity_limits_products_pullbacks"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityLimitsProductsPullbacks.lean",
+  "statement": "theorem infinity_limits_products_pullbacks (κ : Cardinal.{u}) (hκ : κ.IsRegular) (C D : SSet.{max (u + 1) v}) [Quasicategory C] [Quasicategory D] (hC : HasKappaLimits.{u, v} κ C) (hD : HasKappaLimits.{u, v} κ D) (H : C ⟶ D) : PreservesKappaLimits.{u, v} κ H ↔ PreservesLimitsOfShape H infinityCospan.{max (u + 1) v} ∧ ∀ I : Type u, Cardinal.mk I < κ → PreservesLimitsOfShape H (SSet.uliftFunctor.{max (u + 1) v}.obj (infinityDiscrete I))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the newly published SSet.Presentability.IsKappaSmall and existing coherent comma cones. Image cones are determined by the actual postcomposed apex and full transformation, in both coordinates. Helpers express the preservation and existence notions of this same statement; no arbitrary comparison map or extra hypothesis is introduced. The ambient universe max (u + 1) v retains the stipulated strict containment of the small universe. Every proof dependency with a declaration or Mathlib match is imported."
  }
 }

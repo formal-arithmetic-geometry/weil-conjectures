@@ -273,5 +273,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-d1aad4431 (reviewer sub-agent of L); spot-checked: I read the whole item, all 7 steps, the 4 cited nodes (def-weil-pbc-category-colimit and three Mathlib leaves: cardinal-filtered-poset-reindex at Directed.lean:528 plus Final.lean:294, filtered-colimit-sets-elementwise, ordinary-small-colimit-presentable at Limits.lean:185) and the parent lem-coef-weak-saturation-tree-presentation, whose step 9 is the only citer. HTT A.1.5.10 is not in literature/; I read it, printed pp. 805-806, in a local 2012 HTT PDF left in /tmp by another review, so its provenance is unverified. Hypotheses and all three conclusions match; requiring tau uncountable is a harmless specialization, and no endpoint compactness is added. I recomputed every equation. Step 1: bc=1, cg'=h, bh=g', so e=cb is idempotent with eh=h. Step 4: lambda_i ju = edu = eha = ha. Step 5: e_k v_ik = v_ik e_i on both legs, and e_k^2 = e_k with no monic transition maps assumed. Step 6: coequalizer gives tq=e_i and qt=1; u' is an arrow retract of h_i, which is a pushout of u, so u' is in wsat({u}). Step 7: delta q = b lambda_i via be=b; Fe=F; mediator Fc; uniqueness l=lbc. Small cases (u an isomorphism, Sets with empty->point, empty index, tau=aleph_1) all hold. No new nodes, no duplicate (grep for A.1.5.10 and retract+pushout over dag/nodes), no cycle, no off-route use, no tool_uses needed, no SGA. FIX: the hypothesis 'generated under small tau-filtered colimits by a small family' could be read as iterated closure, while step 2 needs every object to be a single tau-filtered colimit of the family (otherwise an E1 gap). I rewrote it with the meaning of HTT Def 5.4.2.1, word for word the hypothesis the parent already assumes, so the citer is unaffected, and aligned step 2's first sentence. The whole corrected node is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94c0d268c",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: universes v/u, uncountable regular tau, IsCardinalLocallyPresentable (single small tau-filtered presentation plus small colimits), presentable P and Q, IsPushout f a b g with g opposite f, RetractArrow g' g in the right direction, and the conclusion (presentable P' and Q', IsPushout f' a' b' g' on the given g', membership in every class containing f and isomorphisms and closed under cobase change, transfinite composition in universe v and retracts). Nothing extra assumed, endpoints not assumed presentable. Weak saturation uses the citer's universal-class form; no general definition exists, so H4 is fine. Node changed only in lean; statement verbatim; imports are statement plus recorded proof-dependency Mathlib files; docstrings carry source, blueprint id and all 7 steps; sorry-only proof (axioms checked); no line over 100 characters; report has both sections. nt_compile --json returned 0 with no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompactPushoutRetractDescent",
+  "declaration": "CategoryTheory.exists_presentable_pushout_of_retract",
+  "file": "lean/Sheaf/CategoryTheory/CompactPushoutRetractDescent.lean",
+  "statement": "theorem exists_presentable_pushout_of_retract {A : Type u} [Category.{v} A] (τ : Cardinal.{v}) [Fact τ.IsRegular] (hτ : Cardinal.aleph0 < τ) [IsCardinalLocallyPresentable A τ] {P Q V W V' W' : A} (f : P ⟶ Q) [IsCardinalPresentable P τ] [IsCardinalPresentable Q τ] (a : P ⟶ V) (b : Q ⟶ W) (g : V ⟶ W) (hg : IsPushout f a b g) (g' : V' ⟶ W') (hret : RetractArrow g' g) : ∃ (P' Q' : A) (f' : P' ⟶ Q') (a' : P' ⟶ V') (b' : Q' ⟶ W'), IsCardinalPresentable P' τ ∧ IsCardinalPresentable Q' τ ∧ IsPushout f' a' b' g' ∧ ∀ S : MorphismProperty A, S f → MorphismProperty.isomorphisms A ≤ S → S.IsStableUnderCobaseChange → S.IsStableUnderTransfiniteComposition.{v} → S.IsStableUnderRetracts → S f'",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

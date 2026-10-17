@@ -336,5 +336,28 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-eaabf10f5 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 12 steps, the statements of all 8 cited nodes, Stacks 002V and 04AX in categories.tex, and the Mathlib lines behind the leaves (Presentable/Limits.lean:185-195 with its arrow-count bound, Directed.lean:527-539, CardinalFilteredPresentation.lean:174-178, Types/Filtered.lean:153), plus the citer good-subset-enlargement. The statement and stmt_deps are byte-identical to the side-DAG base, and the citer uses exactly the clauses stated. There are no new nodes and no cycle. The only non-leaf dependency, weak-saturation-tree-presentation, is in the same unit, so no tool_uses are needed. No SGA. small-cellular-tree-descent (a single descent for |T|<tau) is strictly weaker, not a duplicate. Mathematics checked: the tail is tau-filtered; presentability is proved by induction using the arrow-count bound; descent maps are unique by the colimit, the pushout and the fixed Q_t leg, which gives a small preorder via essential smallness; the predecessor-closed enumeration stops below tau; in the successor step, presentability of P_t and clauses (1) and (3) at a common stage equalize fewer than tau attaching maps, and attaching at stage l gives the labelled comparison maps and base change Y_t; the limit step glues by uniqueness; the poset quotient and root colimit are correct; the filtered-union tree over J_t uses only ordinary filteredness; and the pushout identification and weak saturation follow from the L-tree clause with E empty. The standing hypothesis on C in the weak-saturation node is satisfiable with C = isomorphisms, so that clause is usable. Edge cases checked: T empty, one cell, incomparable cells, a chain, a singleton Q, Q filtered but not tau-filtered, non-monic cells. HTT could not be opened (not in literature/, network blocked); the proof is marked agent-written with a WANTED line and does not depend on HTT statements. No fixes; review.md written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c27f54fe",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Node changes only its lean field; statement, stmt_deps and proof are byte-identical to the side base, and lean.statement is verbatim in the file. Every hypothesis and conclusion clause is matched: A : Type u with Category.{v}, regular uncountable κ : Cardinal.{v}, IsCardinalLocallyPresentable, arbitrary L and root, good CellularTree; small κ-filtered P with downward-closed, increasing supports of size <κ; presentable arrow endpoints; trees with totalIso and fixed cell labels via LabeledMap; objectwise IsPushout identifications; canonical toSupport; transitions with total, original, id and comp laws; colimiting cocone with apex X→Y_univ; cofinal supports; filtered_unions over every IsFiltered Q (nonempty) with a canonical IsPushout and the weak-saturation clause in the dependency's convention. Edge cases checked: empty T, supports and E, singleton or large Q, non-presentable root. Helper structures are not hollow, single sorry, docstrings complete, lines <=100, no duplicate notion found. nt_compile --json with dependency overlay: no errors and no warnings besides the hidden sorry warning; the wrapper was confirmed to print an injected error. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CellularTreePresentableApproximations",
+  "declaration": "CategoryTheory.CellularTree.exists_presentableApproximations",
+  "declarations": [
+   "CategoryTheory.CellularTree.LabeledMap",
+   "CategoryTheory.CellularTree.PresentableApproximations",
+   "CategoryTheory.CellularTree.exists_presentableApproximations"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CellularTreePresentableApproximations.lean",
+  "statement": "theorem exists_presentableApproximations {A : Type u} [Category.{v} A] (κ : Cardinal.{v}) [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < κ) [IsCardinalLocallyPresentable A κ] (L : MorphismProperty A) (X : A) (T : Type v) [PartialOrder T] [WellFoundedLT T] (tree : CellularTree L X T) (hgood : tree.IsGood κ) : Nonempty (PresentableApproximations tree κ)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

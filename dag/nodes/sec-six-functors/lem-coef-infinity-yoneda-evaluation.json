@@ -25,7 +25,10 @@
   "place": "Lemma 5.1.5.2 and the correctly oriented Yoneda-evaluation assertion needed in Lemma 5.5.2.1, printed pp. 324-325 and 462-463. The printed corepresented formulation of Lemma 5.5.2.1 has a variance error; the formula here is the representable-presheaf evaluation formula. Also Kerodon Subsection 8.3.1 (Tag 03M2), Proposition 8.3.1.3 and Remark 8.3.1.5, applied to the opposite category Read online; not archived in literature/. No Stacks Project tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-twisted-arrow-left-fibration",
+  "def-coef-infinity-presheaf-yoneda"
  ],
  "proof": [
   {
@@ -605,5 +608,45 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-b54b49885 (reviewer sub-agent of L); spot-checked: I read all nine steps against the full statements of the 14 cited nodes, plus Stacks 017R and 08NS in simplicial.tex and the main-20261015 ancestor paragraph 'For K in D^b_c(X,R)'. HTT and Kerodon are not archived locally, so I checked those from memory only (the proof is marked agent-written). Steps 2-3: I recomputed the extra degeneracy h=s_{n+1} identities and the right-horn (Lambda^{n+1}_{n+1}) pairing filtration; nondegeneracy and face presence hold. Step 4: the pullback of the exponentiation trivial fibration along z->(r_d,z) is valid. Step 5: classification pullback and identity clauses are used correctly. Step 6: the derived unit of the C -| N_hc Quillen equivalence, the counit DK-equivalence for locally Kan A^op, and the projective structure on sSet^{A^op} are all used within their hypotheses; N_hc(A^op)=N_hc(A)^op by vertex reversal. Step 7: the strict enriched Yoneda lemma is correct; Y_a = I(a,-) tensor Delta^0 is bifibrant; the naturality chain and inverse are checked, with variance P(b)->Q(a). Step 8: the interval simplicial functor is correct; the endpoint identifications rest on the nerve-localization and coherent-nerve clauses, which state composition-compatibility with coherent homotopies, as in HTT 5.1.3. Step 9: the cone-calculus criterion is used at U'. Edge cases checked: empty D, a point, an empty value, a single arrow, and an S^1 value. The statement and stmt_deps are unchanged, and proof_deps equals the union of uses. A transitive-closure check on the snapshot shows no dependency reaches the item, so the reported cycle is gone. I accepted both tool_uses (trivial-Kan homotopy equivalence; pointwise functor-equivalence criterion). No fixes and no new nodes. Maintainer note: lem-coef-space-yoneda-density (split, reviewed 2026-10-16) states this item verbatim as its first clause and does not reach it, contrary to the report's stale claim. The two existing nodes should be merged, and the better direction is for that node to cite this more explicit coherence proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a8a44664a",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Delivery adds InfinityYonedaEvaluation.lean, the report (real Worker report and Second reading by Q53), and the node's lean record plus three published stmt_deps; no cycle (checked over snapshot nodes). Matches the node: P(D) and j reuse the existing infinityPresheaves/infinityYoneda (orientation checked: j(d)(x)=Hom(x,d)); Map(j(d),F) is the pulled-back twisted-arrow family; F(d) is the pulled-back point family Map(*,F(d)); the natural equivalence is a homotopy equivalence over D^op x P(D), the straightened form; ε is pinned to evaluation at id_d by a homotopy over the base on all of Tw(D). The 'for every r' form is true and the existence conjunct prevents vacuity. Edge cases (empty D, empty F(d), D a point, universes with v free) covered; no extra hypotheses. No hollow definitions; only sorry; source and blueprint docstrings on every declaration; lean.statement verbatim; the 19 declarations match the file exactly. nt_compile.py: module compiled clean in 2.5 s; a control run with a deliberate error confirmed diagnostics are reported and the signature elaborates. Minor, non-blocking: the Representation-existence conjunct goes slightly beyond the node's text (a true bridge, but thinly justified; cite lem-coef-enriched-hom-twisted-arrow-comparison at stage 3); a universe linter is off on `points`, harmless."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityYonedaEvaluation",
+  "declaration": "SSet.Enhanced.Yoneda.infinity_yoneda_evaluation",
+  "declarations": [
+   "SSet.Enhanced.Yoneda.pointKan",
+   "SSet.Enhanced.Yoneda.point",
+   "SSet.Enhanced.Yoneda.base",
+   "SSet.Enhanced.Yoneda.presheaves",
+   "SSet.Enhanced.Yoneda.yoneda",
+   "SSet.Enhanced.Yoneda.parameters",
+   "SSet.Enhanced.Yoneda.evaluate",
+   "SSet.Enhanced.Yoneda.points",
+   "SSet.Enhanced.Yoneda.pointsProjection",
+   "SSet.Enhanced.Yoneda.values",
+   "SSet.Enhanced.Yoneda.valuesProjection",
+   "SSet.Enhanced.Yoneda.transformations",
+   "SSet.Enhanced.Yoneda.transformationsProjection",
+   "SSet.Enhanced.Yoneda.representableParameters",
+   "SSet.Enhanced.Yoneda.representedValues",
+   "SSet.Enhanced.Yoneda.EquivalenceOver",
+   "SSet.Enhanced.Yoneda.Representation",
+   "SSet.Enhanced.Yoneda.fromArrows",
+   "SSet.Enhanced.Yoneda.infinity_yoneda_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityYonedaEvaluation.lean",
+  "statement": "theorem infinity_yoneda_evaluation (D : SSet.{u}) [Quasicategory D] : Nonempty (Representation D (yoneda.{u, v} D)) ∧ ∀ r : Representation D (yoneda.{u, v} D), ∃ ε : transformations D (yoneda D) ⟶ values.{u, v} D, EquivalenceOver (transformationsProjection D (yoneda D)) (valuesProjection D) ε ∧ ∃ h : SSet.Homotopy (fromArrows D (yoneda D) ≫ ε) (r.comparison ≫ pullback.fst _ _), h.h ≫ valuesProjection D = fst (twistedArrow (base D)) Δ[1] ≫ twistedProjection (base D) ≫ representableParameters D (yoneda D)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published infinityPresheaves and constructed infinityYoneda, transported by ULift to any containing ambient universe. The conclusion supplies the twisted-arrow Hom identification and states identity-normalized evaluation for every such identification over the full parameter category. Neither a Yoneda functor nor a model-comparison witness is an additional hypothesis. All constructions have real data."
  }
 }
