@@ -40,7 +40,7 @@ variable {R : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] {ϖ :
   (hϖ : Irreducible ϖ) {ℓ : ℕ} [hℓ : Fact ℓ.Prime] {e : ℕ} (he : 0 < e)
   (hℓe : Associated (ℓ : R) (ϖ ^ e)) [Algebra ℤ_[ℓ] R] (N : ℕ)
 
-omit [IsDiscreteValuationRing R] in
+omit [IsDiscreteValuationRing R] hℓ [Algebra ℤ_[ℓ] R] in
 include hϖ hℓe in
 /-- `ℓ` is nonzero in `R`. -/
 lemma natCast_ne_zero_of_associated : (ℓ : R) ≠ 0 := by
@@ -101,6 +101,7 @@ noncomputable def quotientLinearEquivTensor :
 
 variable [Module.Finite ℤ_[ℓ] R]
 
+omit [Algebra ℤ_[ℓ] R] [Module.Finite ℤ_[ℓ] R] in
 include hϖ he hℓe in
 /-- The residue field `R/ϖ` has characteristic `ℓ`. -/
 lemma charP_quotient_span : CharP (R ⧸ Ideal.span {ϖ}) ℓ := by
@@ -134,10 +135,10 @@ theorem free_quotient_span_pow (hN : 0 < N) :
         Module.finrank ℤ_[ℓ] R ∧
       Module.finrank (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)}) =
         e * Module.finrank (ZMod ℓ) (R ⧸ Ideal.span {ϖ}) := by
-  haveI := charP_quotient_span_pow hϖ hℓ.out he hℓe N
-  letI := ZMod.algebra (R ⧸ Ideal.span {ϖ ^ (e * N)}) (ℓ ^ N)
-  haveI := charP_quotient_span hϖ he hℓe
-  letI := ZMod.algebra (R ⧸ Ideal.span {ϖ}) ℓ
+  have := charP_quotient_span_pow hϖ hℓ.out he hℓe N
+  let := ZMod.algebra (R ⧸ Ideal.span {ϖ ^ (e * N)}) (ℓ ^ N)
+  have := charP_quotient_span hϖ he hℓe
+  let := ZMod.algebra (R ⧸ Ideal.span {ϖ}) ℓ
   have hfree : Module.IsTorsionFree ℤ_[ℓ] R :=
     (Module.isTorsionFree_iff_algebraMap_injective).2 (injective_algebraMap_padicInt hϖ hℓe)
   have : Module.Free ℤ_[ℓ] R := Module.free_of_finite_type_torsion_free'
