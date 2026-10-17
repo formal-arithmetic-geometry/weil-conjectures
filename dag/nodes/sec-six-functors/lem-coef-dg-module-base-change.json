@@ -64,10 +64,43 @@
    }
   },
   {
-   "text": "Suppose $u$ is a quasi-equivalence. Apply [lem-coef-dg-module-semi-free-replacement] to $\\mathcal C^{\\mathrm{op}}$ to obtain, for every covariant module $M$, a quasi-isomorphism $q:P\\to M$ with a graded-split filtration $0=P_0\\subset P_1\\subset\\cdots$, whose successive quotients are sums of shifts of $r^c$. Such a semi-free module is projectively cofibrant. For a summand generated at an object $c$ in degree $n$ of $P_{i+1}/P_i$, lift its identity generator to $e\\in P_{i+1}(c)^n$. Its quotient differential is zero, so $z=de$ belongs to $P_i(c)^{n+1}$ and $dz=0$. Send the generator of $r^c\\otimes S^{n+1}$ to $z$, and the degree-$n$ disk generator of $r^c\\otimes D^n$ to $e$. On the other disk generator the latter map is necessarily $z$. These are dg-module maps by the free-diagram adjunction in [lem-coef-enriched-projective-diagram-model]. Taking their coproduct over the quotient generators gives a pushout square: the induced map from the pushout to $P_{i+1}$ is the identity on $P_i$ and an isomorphism on its graded free quotient, hence is an isomorphism of complexes. Thus each inclusion is a pushout of a coproduct of the cited sphere-to-disk generating cofibrations. A compatible lifting across any trivial fibration is obtained stage by stage using these generating lifts, and then by taking the union.\n\nFor this $P$, prove that the actual unit $\\eta_P:P\\to u^*u_!P$ is an objectwise quasi-isomorphism by induction on the filtration. The coend, even on graded modules, preserves colimits and graded-split direct sums, so the filtrations after extension and restriction remain graded-split, and the quotient unit is a direct sum of shifts of\n$$\\mathcal C(c,x)\\longrightarrow\\mathcal E(u(c),u(x)).$$\nThese are quasi-isomorphisms by the hypothesis on $u$. The cone of the unit at the next stage is a graded-split extension of the preceding cone by this acyclic quotient cone. To check acyclicity, map a cycle into the quotient, express it as a boundary there, subtract a lifted boundary, and then express the remaining cycle in the preceding cone as a boundary. This starts at zero. At the union a cycle and its differential equation occur at a common finite stage, so it too is a boundary. For an arbitrary cofibrant $M$, both $P$ and $M$ are cofibrant, and [lem-coef-model-infinity-derived-adjunction] makes $u_!q$ a quasi-isomorphism. Naturality of $\\eta$ and two-out-of-three then make $\\eta_M$ a quasi-isomorphism. For a general $M$, the replacement $QM\\to M$ now proves that its derived unit is invertible.",
+   "text": "Suppose $u$ is a quasi-equivalence. Apply [lem-coef-dg-module-semi-free-replacement] to $\\mathcal C^{\\mathrm{op}}$ to obtain, for every covariant module $M$, a quasi-isomorphism $q:P\\to M$ with a graded-split filtration whose successive quotients are sums of shifts of representables. The semi-free cell-presentation and cofibrancy assertion [lem-coef-dg-semi-free-cofibrant] applies to this $P$.",
    "uses": [
     "lem-coef-dg-module-semi-free-replacement",
-    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-dg-semi-free-cofibrant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "Give $u_!P$ the filtration $u_!P_i$. Forgetting differentials, each $P_i\\subset P_{i+1}$ is a split sum of graded modules. The graded coend is additive and preserves direct sums and quotients by its explicit direct-sum quotient formula (step 1), so these remain split inclusions with quotient $u_!(P_{i+1}/P_i)$, and their union is $u_!P$. Restriction is objectwise, so the target filtration of $\\eta_P:P\\to u^*u_!P$ is also graded-split and exhaustive. On each quotient, the representable computation of step 2 identifies the unit with sums of shifts of $\\mathcal C(c,x)\\to\\mathcal E(u(c),u(x))$. Each is a quasi-isomorphism by the hypothesis on $u$. A cycle in a direct sum has finite support, so taking primitives in those finitely many summands proves that direct sums preserve these quasi-isomorphisms.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement",
+    "lem-coef-enriched-projective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-dg-filtered-quasi-iso] objectwise to the unit with the two exhaustive graded-split filtrations of step 5, starting at zero. Its successive quotient maps are quasi-isomorphisms by that step, so $\\eta_P$ is an objectwise quasi-isomorphism.",
+   "uses": [
+    "lem-coef-dg-filtered-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "For an arbitrary cofibrant $M$, both $P$ and $M$ are cofibrant, and [lem-coef-model-infinity-derived-adjunction] makes $u_!q$ a quasi-isomorphism. Naturality of $\\eta$ and two-out-of-three then make $\\eta_M$ a quasi-isomorphism. For a general $M$, the replacement $QM\\to M$ now proves that its derived unit is invertible.",
+   "uses": [
     "lem-coef-model-infinity-derived-adjunction"
    ],
    "elementary": false,
@@ -77,10 +110,11 @@
    }
   },
   {
-   "text": "Restriction detects objectwise quasi-isomorphisms of $\\mathcal E$-modules when $u$ is a quasi-equivalence. Indeed for every $e$ choose an isomorphism $u(c)\\cong e$ in $H^0\\mathcal E$, represented by closed degree-zero arrows $a,b$ with $ba-1=dh$, $ab-1=dk$. Applying any dg module carries these equations to chain homotopies: for example $N(b)N(a)-1=dN(h)+N(h)d$. Thus a natural map of modules is a quasi-isomorphism at $e$ if it is so at $u(c)$, by the naturality square with these homotopy equivalences. For $N$ choose $q:Q(u^*N)\\to u^*N$. The derived counit is the ordinary-adjoint transpose $\\epsilon:u_!Q(u^*N)\\to N$. Its restriction satisfies\n$$u^*\\epsilon\\circ\\eta_{Q(u^*N)}=q.$$\nThe unit is a quasi-isomorphism by step 4, so $u^*\\epsilon$ is a quasi-isomorphism, and detection makes $\\epsilon$ one too. The derived adjunction of step 3 therefore has invertible unit and counit. This proves the asserted Quillen equivalence without imposing local cofibrancy on $\\mathcal C$ or $\\mathcal E$.",
+   "text": "Restriction detects objectwise quasi-isomorphisms of $\\mathcal E$-modules when $u$ is a quasi-equivalence. Indeed for every $e$ choose an isomorphism $u(c)\\cong e$ in $H^0\\mathcal E$, represented by closed degree-zero arrows $a,b$ with $ba-1=dh$, $ab-1=dk$. Applying any dg module carries these equations to chain homotopies: for example $N(b)N(a)-1=dN(h)+N(h)d$. Thus a natural map of modules is a quasi-isomorphism at $e$ if it is so at $u(c)$, by the naturality square with these homotopy equivalences. For $N$ choose $q:Q(u^*N)\\to u^*N$. The derived counit is the ordinary-adjoint transpose $\\epsilon:u_!Q(u^*N)\\to N$. Its restriction satisfies\n$$u^*\\epsilon\\circ\\eta_{Q(u^*N)}=q.$$\nThe unit is a quasi-isomorphism by steps 4–7, so $u^*\\epsilon$ is a quasi-isomorphism, and detection makes $\\epsilon$ one too. The derived adjunction of step 3 therefore has invertible unit and counit. This proves the asserted Quillen equivalence without imposing local cofibrancy on $\\mathcal C$ or $\\mathcal E$.",
    "uses": [
     "lem-coef-model-infinity-derived-adjunction",
-    "lem-coef-dg-module-semi-free-replacement"
+    "lem-coef-dg-module-semi-free-replacement",
+    "lem-coef-dgcat-model-structure"
    ],
    "elementary": false,
    "source": {
@@ -89,7 +123,7 @@
    }
   },
   {
-   "text": "Set $\\mathcal N=\\operatorname{Mod}(\\mathcal B^{\\mathrm{op}})$. Apply [lem-coef-enriched-projective-diagram-model] first with coefficient model $\\mathrm{Ch}(\\mathbf Z)$ and index $\\mathcal B^{\\mathrm{op}}$. It says that $\\mathcal N$ is complete, cocomplete, locally presentable, enriched, tensored and cotensored, satisfies the enriched model axiom, and has generating cofibrations between cofibrant objects. It therefore satisfies every hypothesis for a second application of that node with index $\\mathcal C$. Its evaluation clause applies because each $\\mathcal C(c,c')$ is projectively cofibrant, and gives cofibrant values of projectively cofibrant $\\mathcal C$-diagrams. Write $A(a)$ for the degree-$|a|$ action of $a\\in\\mathcal C(c,c')$ and $B(\\beta)$ for that of $\\beta\\in\\mathcal B^{\\mathrm{op}}(b,b')$. The enriched naturality equation from the cited node is $B(\\beta)A(a)=(-1)^{|a||\\beta|}A(a)B(\\beta)$. Set $T(a\\otimes\\beta)=A(a)B(\\beta)$ on the complexes $T(c,b)$. For composable homogeneous pairs, the composite of these operators is $(-1)^{|\\beta'||a|}A(a'a)B(\\beta'\\beta)$, exactly the tensor-category composition. The differential rule follows from the Leibniz rule for the two actions. Conversely restrict a tensor-category action to $a\\otimes1_b$ and $1_c\\otimes\\beta$; their two composites give this same signed equation and recover the original action on $a\\otimes\\beta$. Degree-zero chain maps commute with the tensor action exactly when they commute with both restricted actions. These inverse constructions give the currying identification $\\mathcal N^{\\mathcal C}\\cong\\operatorname{Mod}(\\mathcal C\\otimes\\mathcal B^{\\mathrm{op}})$. Objectwise weak equivalences and fibrations agree in the two descriptions, so their left lifting classes, hence projectively cofibrant objects, agree. This proves the evaluation assertion, with no hypothesis on the Hom complexes of $\\mathcal B$.",
+   "text": "Set $\\mathcal N=\\operatorname{Mod}(\\mathcal B^{\\mathrm{op}})$. Apply [lem-coef-enriched-projective-diagram-model] first with coefficient model $\\mathrm{Ch}(\\mathbf Z)$ and index $\\mathcal B^{\\mathrm{op}}$. It says that $\\mathcal N$ is complete, cocomplete, locally presentable, enriched, tensored and cotensored, satisfies the enriched model axiom and the tensor-cell acyclicity condition, has all objects fibrant, and has generating cofibrations between cofibrant objects. It therefore satisfies every hypothesis for a second application of that node with index $\\mathcal C$. Its evaluation clause applies because each $\\mathcal C(c,c')$ is projectively cofibrant, and gives cofibrant values of projectively cofibrant $\\mathcal C$-diagrams. Write $A(a)$ for the degree-$|a|$ action of $a\\in\\mathcal C(c,c')$ and $B(\\beta)$ for that of $\\beta\\in\\mathcal B^{\\mathrm{op}}(b,b')$. The enriched naturality equation from the cited node is $B(\\beta)A(a)=(-1)^{|a||\\beta|}A(a)B(\\beta)$. Set $T(a\\otimes\\beta)=A(a)B(\\beta)$ on the complexes $T(c,b)$. For composable homogeneous pairs, the composite of these operators is $(-1)^{|\\beta'||a|}A(a'a)B(\\beta'\\beta)$, exactly the tensor-category composition. The differential rule follows from the Leibniz rule for the two actions. Conversely restrict a tensor-category action to $a\\otimes1_b$ and $1_c\\otimes\\beta$; their two composites give this same signed equation and recover the original action on $a\\otimes\\beta$. Degree-zero chain maps commute with the tensor action exactly when they commute with both restricted actions. These inverse constructions give the currying identification $\\mathcal N^{\\mathcal C}\\cong\\operatorname{Mod}(\\mathcal C\\otimes\\mathcal B^{\\mathrm{op}})$. Objectwise weak equivalences and fibrations agree in the two descriptions, so their left lifting classes, hence projectively cofibrant objects, agree. This proves the evaluation assertion, with no hypothesis on the Hom complexes of $\\mathcal B$.",
    "uses": [
     "lem-coef-enriched-projective-diagram-model"
    ],
@@ -100,9 +134,10 @@
    }
   },
   {
-   "text": "Here is the complex argument needed for the final tensor assertion. Apply [lem-coef-dg-module-semi-free-replacement] to the one-object dg category with endomorphisms $\\mathbf Z[0]$. It gives every complex $V$ a quasi-isomorphism $P\\to V$, where $P$ has a graded-split increasing filtration with quotients sums of shifts of $\\mathbf Z$. For any acyclic complex $A$, the tensor filtration of $P\\otimes A$ is still graded-split and its quotients are sums of shifts of $A$, hence acyclic. In a direct sum a cycle has finite support; choose a primitive in each of those finitely many summands to see this last assertion directly. The cycle/subtract-a-lifted-boundary argument of step 4 proves acyclicity at successors, and each cycle occurs at a finite stage at the union. Therefore $P\\otimes A$ is acyclic. Tensor commutes with the direct-sum cone: for $f:X\\to Y$ put $\\operatorname{Cone}(f)^n=Y^n\\oplus X^{n+1}$ with $d(y,x)=(dy+f(x),-dx)$. The total tensor differential identifies $\\operatorname{Cone}(f)\\otimes P$ with $\\operatorname{Cone}(f\\otimes1_P)$. It follows that $P$ is homotopically flat.\n\nIf $K$ is both acyclic and homotopically flat, then $K\\otimes V$ is acyclic for every $V$: for the replacement $P\\to V$ just constructed, $K\\otimes P\\to K\\otimes V$ is a quasi-isomorphism by flatness of $K$, while $K\\otimes P$ is acyclic by flatness of $P$ applied to $K\\to0$. Finally, the cone of a map between homotopically flat complexes is homotopically flat. For an acyclic $A$, its tensor with that cone is the cone between two acyclic complexes, hence acyclic by the same cycle calculation. Applied to the cone of an arbitrary quasi-isomorphism, this is precisely the defining flatness test. This argument requires no flatness of $V$.",
+   "text": "Here is the complex argument needed for the final tensor assertion. Apply [lem-coef-dg-module-semi-free-replacement] to the one-object dg category with endomorphisms $\\mathbf Z[0]$. It gives every complex $V$ a quasi-isomorphism $P\\to V$, where $P$ has a graded-split increasing filtration with quotients sums of shifts of $\\mathbf Z$. For any acyclic complex $A$, the tensor filtration of $P\\otimes A$ is still graded-split and its quotients are sums of shifts of $A$, hence acyclic. In a direct sum a cycle has finite support; choose a primitive in each of those finitely many summands to see this last assertion directly. Apply [lem-coef-dg-filtered-quasi-iso] to $0\\to P\\otimes A$ with its zero source filtration and this exhaustive graded-split target filtration: the quotient maps are quasi-isomorphisms because their targets are acyclic. Thus $P\\otimes A$ is acyclic. Tensor commutes with the direct-sum cone: for $f:X\\to Y$ put $\\operatorname{Cone}(f)^n=Y^n\\oplus X^{n+1}$ with $d(y,x)=(dy+f(x),-dx)$. The total tensor differential identifies $\\operatorname{Cone}(f)\\otimes P$ with $\\operatorname{Cone}(f\\otimes1_P)$. It follows that $P$ is homotopically flat.\n\nIf $K$ is both acyclic and homotopically flat, then $K\\otimes V$ is acyclic for every $V$: for the replacement $P\\to V$ just constructed, $K\\otimes P\\to K\\otimes V$ is a quasi-isomorphism by flatness of $K$, while $K\\otimes P$ is acyclic by flatness of $P$ applied to $K\\to0$. Finally, the cone of a map between homotopically flat complexes is homotopically flat. For an acyclic $A$, its tensor with that cone is the cone between two acyclic complexes, hence acyclic by the same cycle calculation. Applied to the cone of an arbitrary quasi-isomorphism, this is precisely the defining flatness test. This argument requires no flatness of $V$.",
    "uses": [
-    "lem-coef-dg-module-semi-free-replacement"
+    "lem-coef-dg-module-semi-free-replacement",
+    "lem-coef-dg-filtered-quasi-iso"
    ],
    "elementary": false,
    "source": {
@@ -111,7 +146,7 @@
    }
   },
   {
-   "text": "For every pair $c,c'$ the local map $f:\\mathcal C(c,c')\\to\\mathcal E(u(c),u(c'))$ is a quasi-isomorphism between homotopically flat complexes. By step 7 its cone is acyclic and homotopically flat, so its tensor with $\\mathcal D(d,d')$ is acyclic even when that latter complex is not flat. The cone-tensor identity there says exactly that $f\\otimes1_{\\mathcal D(d,d')}$ is a quasi-isomorphism. Thus $u\\otimes\\mathrm{id}_{\\mathcal D}$ is locally a quasi-isomorphism. For an object $(e,d)$ choose the closed degree-zero arrows $a:u(c)\\to e$, $b:e\\to u(c)$ from essential surjectivity. The arrows $a\\otimes1_d$, $b\\otimes1_d$ are inverse in $H^0$ because the boundaries $dh$, $dk$ become $d(h\\otimes1_d)$, $d(k\\otimes1_d)$. This proves essential surjectivity and hence quasi-equivalence. Steps 3-5 applied to this dg functor give the asserted localized module equivalence with inverse derived extension. Finally [lem-coef-dgcat-model-structure] explicitly states that the Hom complexes of a cofibrant dg category are projectively cofibrant and homotopically flat, so cofibrant $\\mathcal C,\\mathcal E$ meet the hypotheses. Empty source or tensor categories cause no exception: a quasi-equivalence from an empty category has empty target, and the module category of an empty category has its single empty diagram.",
+   "text": "For every pair $c,c'$ the local map $f:\\mathcal C(c,c')\\to\\mathcal E(u(c),u(c'))$ is a quasi-isomorphism between homotopically flat complexes. By step 10 its cone is acyclic and homotopically flat, so its tensor with $\\mathcal D(d,d')$ is acyclic even when that latter complex is not flat. The cone-tensor identity there says exactly that $f\\otimes1_{\\mathcal D(d,d')}$ is a quasi-isomorphism. Thus $u\\otimes\\mathrm{id}_{\\mathcal D}$ is locally a quasi-isomorphism. For an object $(e,d)$ choose the closed degree-zero arrows $a:u(c)\\to e$, $b:e\\to u(c)$ from essential surjectivity. The arrows $a\\otimes1_d$, $b\\otimes1_d$ are inverse in $H^0$ because the boundaries $dh$, $dk$ become $d(h\\otimes1_d)$, $d(k\\otimes1_d)$. This proves essential surjectivity and hence quasi-equivalence. Steps 3–8 applied to this dg functor give the asserted localized module equivalence with inverse derived extension. Finally [lem-coef-dgcat-model-structure] explicitly states that the Hom complexes of a cofibrant dg category are projectively cofibrant and homotopically flat, so cofibrant $\\mathcal C,\\mathcal E$ meet the hypotheses. Empty source or tensor categories cause no exception: a quasi-equivalence from an empty category has empty target, and the module category of an empty category has its single empty diagram.",
    "uses": [
     "lem-coef-dgcat-model-structure"
    ],
@@ -123,9 +158,11 @@
   }
  ],
  "proof_deps": [
-  "lem-coef-enriched-projective-diagram-model",
-  "lem-coef-dgcat-model-structure",
+  "lem-coef-dg-filtered-quasi-iso",
   "lem-coef-dg-module-semi-free-replacement",
+  "lem-coef-dg-semi-free-cofibrant",
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-enriched-projective-diagram-model",
   "lem-coef-model-infinity-derived-adjunction"
  ],
  "proof_origin": {
@@ -192,7 +229,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dgcat-bimodule-mapping-space",
   "by": "worker",
@@ -204,16 +241,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-dg-module-base-change",
   "worker": "stage1",
-  "summary": "Preserved the statement and every hypothesis. Constructed the scalar-extension coend, its adjunction, representable comparison and associative unital coherences on generators. Proved quasi-equivalence invariance using existing semi-free replacements, the unit filtration, and counit detection. Reused the enriched projective diagram model for cofibrant evaluation and the general model derived adjunction. Proved the K-flat cone argument for arbitrary unchanged tensor factors. All substantive steps are marked non-elementary and cite the precise existing interfaces they use. No new nodes or Mathlib leaves. Second reading makes the semi-free cell attachments and signed tensor/currying actions explicit; direct-sum acyclicity is checked by finite support.",
-  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint, the middle finite enriched adjunction before total inverse limit: dg-module change of indices/values underlying the bimodule mapping-space construction; steps 1-5 scalar extension, step 6 cofibrant evaluation, steps 7-8 flat tensor comparison. The current main-20261015 proof agrees with the historical ancestry; no unit step is replaced."
+  "summary": "Repair of the returned long step 4: extracted the semi-free sphere/disk cell presentation and cofibrancy into lem-coef-dg-semi-free-cofibrant, and the exhaustive filtration criterion into lem-coef-dg-filtered-quasi-iso. Four short steps retain the original semi-free unit route. The statement and Lean record are unchanged; the other steps retain their arguments with updated internal references.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint, the middle finite enriched adjunction before total inverse limit: dg-module change of indices/values underlying the bimodule mapping-space construction; steps 1-8 scalar extension and quasi-equivalence, step 9 cofibrant evaluation, steps 10-11 flat tensor comparison. The two new nodes refine the semi-free unit argument without changing its route."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NI-380472111",
-  "group": "NI",
+  "reviewer": "NT-cc-Q87-d871cb9be",
+  "group": "Q87",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-380472111 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statements of the six cited nodes. Statement: it is byte-identical to the live unsplit node. The coefficients are Ch(Z) throughout, matching the enriched diagram model's Ch(Z) specialization, and nothing is weakened. There are no new nodes. All citations are within the item's own unit sk-prop-sf-biduality-general, so there are no tool_uses. proof_deps equals the union of the steps' uses. No cited node depends back on the item (196 nodes traversed). Step 1: checked the coend relation f∘u(a) and the balancing of t̄ by naturality. Step 2: checked the representable inverse [f u(a)⊗1_c]=[f⊗a], the opposite-composition sign, and the associator and unitor on generators. Step 3: objectwise fibrations give the adjoint lifting argument; the derived-adjunction node supplies the cofibrant-replacement formula and preservation of weak equivalences between cofibrant objects. Step 4: checked that the sphere/disk pushout cell attachment rebuilds P_{i+1}, that graded splitting survives u_!, and the induction and union for the unit. Step 5: checked N(dh)=dN(h)+N(h)d, the detection argument and u^*ε∘η=q. Step 6: checked that the two applications of the enriched node chain together, and the Koszul sign in currying (-1)^{|β'||a|}; no hypothesis is placed on B. Step 7: checked the Cone(f)⊗P=Cone(f⊗1) sign, that an acyclic K-flat complex tensors to acyclic, and closure of K-flat under cones. Step 8: checked the local quasi-isomorphism via the K-flat cone, H^0 essential surjectivity, and the cofibrant-dg-category clause. Small cases tested: empty source, identity functor, dg rings, D with End Z/2[0]. Not duplicates: lem-coef-locally-cofibrant-dg-restriction needs both categories locally cofibrant, and lem-coef-dg-two-sided-bar-derived-tensor is about balanced tensor. Toën math/0408337 is absent from the local literature; the WANTED line is recorded and proof_origin.by is agent. No SGA is cited. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-d871cb9be (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, which is byte-identical to the base with Ch(Z) coefficients and dg-module scalar extension u_! given as a coend; all 11 steps; and the full statements of all six cited nodes. All six are split, in the item's own unit sk-prop-sf-biduality-general, so no tool_uses are needed and none were accepted. I also read paragraph 2 of the blueprint ancestor prop-coef-integral-exceptional-adjoint. Toën math/0408337 is absent locally, so proof_origin is correctly agent, the WANTED line is recorded, and no SGA is cited. Each step holds: the coend adjunction and its balancing; the representable and coherence isomorphisms with the opposite-composition sign; the Quillen adjunction by adjoint lifting; the unit on semi-free P through the graded-split filtration u_!P_i, shown by the new filtered criterion; two-out-of-three for cofibrant and general M; counit detection through H^0 homotopy equivalences and u^*ε∘η=q; currying with the Koszul signs; the K-flat argument through P⊗A, the cone identity and closure under cones; and a⊗1 for quasi-equivalence. proof_deps equals the union of the uses, every step is under 2000 characters, and there is no cycle. New node lem-coef-dg-semi-free-cofibrant is true: lifts of generators have boundaries in P_i, which gives pushouts of C(c,-)⊗(S^{k+1}→D^k) and a countable cell complex. I tested it on P=0 and on a single representable shift. It is not a duplicate of semi-free-homotopically-projective, the simplicial coend node, the algebra cell-filtration node or kun-split-cell-kflat, and it is not a clause of the item. New node lem-coef-dg-filtered-quasi-iso is true by the five lemma plus cohomology commuting with unions. I tested it on the zero filtration and on 0→acyclic. It is not a duplicate of the finite-decreasing-filtration nodes, pc-complex-hocolim-colimit or pc-telescope-splitting. FIX, two files: (1) filtered-quasi-iso: the statement now says the filtrations are by subcomplexes and that f(P_i)⊆Q_i, and the vague 'filtered diagrams' sentence is made explicit for dg modules. Its source and from.place had been copied from the sibling node and are corrected to the actual auxiliary place. No hypothesis was changed. (2) Item step 9: the list of hypotheses for the second application of the enriched-diagram node omitted the tensor-cell acyclicity condition and fibrancy of all objects; both are now named. That node's statement supplies both. No nodes dropped.; 2 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

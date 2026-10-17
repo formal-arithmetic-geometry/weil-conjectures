@@ -77,25 +77,72 @@
    }
   },
   {
-   "text": "Form the cocartesian fibration $p:E\\to A$ classified by $F_0$ using [lem-coef-cocartesian-straightening]. Its smallness convention makes $E$ small; the relative cone $D=E_A^{\\triangleleft}=A\\amalg_{E\\times\\{0\\}}(E\\times\\Delta^1)$ is small as well. By [lem-coef-ghn-ind-presheaf-cartesian-realization], the Cartesian fibration classified by the limit extension is restriction $j^*:\\mathcal P^{\\mathrm{cocart}}_\\lambda(D)\\to\\mathcal P(A)$ from the full subcategory defined by its two relative-cone conditions. Here is the locality argument, including the small set of tests. For a presheaf $\\phi$, the cone arrows make its fiber restriction a functor $E_a^{\\mathrm{op}}\\to\\mathcal S_{/\\phi(-\\infty_a)}$. Condition (ii) says this functor preserves $\\lambda$-small limits: a limit in this slice is computed by adjoining the common target to the underlying diagram and taking its limit in spaces. This slice formula follows from the mapping-space limit criterion of [lem-coef-infinity-yoneda-presheaf-limits], which also gives the small limits in spaces. Apply [lem-coef-infinity-limits-products-pullbacks] to this restriction. Thus (ii) is equivalent to testing only pushout cocones and coproduct cocones indexed by sets of cardinality less than $\\lambda$, including the empty one. Choose one representative of each such indexing set and of the relevant diagrams and colimit cocones in the small fibers. Together with the cocartesian-edge squares in (i), these give a small set of cocones $r:B^{\\triangleright}\\to D$. For each take the map $s_r:\\operatorname{colim}_{b\\in B}y_D(r(b))\\to y_D(r(\\infty))$ in $\\mathcal P(D)$. Yoneda evaluation [lem-coef-infinity-yoneda-evaluation] and the mapping-space colimit criterion [lem-coef-infinity-yoneda-presheaf-limits] identify $\\operatorname{Map}(s_r,\\phi)$ with the comparison $\\phi(r(\\infty))\\to\\lim_{b\\in B^{\\mathrm{op}}}\\phi(r(b))$. For the squares in (i), $B$ is the span of the three other vertices; for (ii), $B=K^{\\triangleleft}$ includes the common cone point. Hence the subcategory is exactly the local objects for this small set $S_0=\\{s_r\\}$. The ambient presheaf category is presentable by [lem-coef-infinity-presheaf-presentability]. The small-localization clause of [lem-coef-presentable-infinity-adjoints] gives a reflector $L$ onto this local subcategory with inclusion $i$, and its colimits are $L$ applied to ambient colimits. To apply [lem-coef-infinity-reflector-accessibility], every $s_r$ is inverted by $L$ since its mapping spaces into every local object are equivalences; conversely an $S_0$-local object lies in the reflective subcategory and therefore is local for every map inverted by $L$, by the adjunction. That lemma makes the local category accessible and $iL$ accessible. Choose an infinite regular $\\mu$ for which $iL$ preserves small $\\mu$-filtered colimits. For a $\\mu$-filtered diagram $Z$ of local objects, $i\\operatorname{colim}Z\\simeq iL\\operatorname{colim}iZ\\simeq\\operatorname{colim}iLiZ\\simeq\\operatorname{colim}iZ$, so $i$ is accessible. Finally, restriction $j^*:\\mathcal P(D)\\to\\mathcal P(A)$ preserves colimits by the pointwise criterion of [lem-coef-infinity-yoneda-presheaf-limits]. Its composite with $i$ therefore preserves the same $\\mu$-filtered colimits. This proves accessibility of both the total category and its projection.",
+   "text": "Form the cocartesian fibration $p:E\\to A$ classified by $F_0$ using [lem-coef-cocartesian-straightening]. Its smallness convention makes $E$ and the relative cone $D=E_A^{\\triangleleft}$ small. The classification node [lem-coef-ghn-ind-presheaf-cartesian-realization] identifies the desired Cartesian fibration with restriction from the full relative-cone presheaf subcategory defined by conditions (i) and (ii).",
    "uses": [
     "lem-coef-cocartesian-straightening",
+    "lem-coef-ghn-ind-presheaf-cartesian-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 10.5 proof, using Corollary 9.17"
+   }
+  },
+  {
+   "text": "Condition (ii) of [lem-coef-ghn-ind-presheaf-cartesian-realization] is exactly that $E_a^{\\mathrm{op}}\\to\\mathcal S_{/X(a)}$ take $\\lambda$-small colimits in $E_a$ to limits in the slice. The source has the required limits by the hypothesis on $F_0(a)$. Spaces have small limits by [lem-coef-infinity-yoneda-presheaf-limits]; applying [lem-coef-infinity-coslice-colimit-formula] to $\\mathcal S^{\\mathrm{op}}$ shows that its slices have small limits as well. Thus [lem-coef-infinity-limits-products-pullbacks] applies to this functor: it suffices to test fiber pushouts and coproducts indexed by sets of cardinality less than $\\lambda$, including the empty one. The relative limit interpretation, including the common target $X(a)$, is part of the cited GHN statement.",
+   "uses": [
     "lem-coef-ghn-ind-presheaf-cartesian-realization",
-    "lem-coef-infinity-presheaf-presentability",
-    "lem-coef-presentable-infinity-adjoints",
-    "lem-coef-infinity-reflector-accessibility",
-    "lem-coef-infinity-limits-products-pullbacks",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-coslice-colimit-formula",
+    "lem-coef-infinity-limits-products-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 9.16 proof, slice interpretation of the double-cone limit, and Proposition 10.5 proof, reduction to pushouts and small coproducts; existing dual coslice formula supplies slice completeness."
+   }
+  },
+  {
+   "text": "Choose one representative of each such fiber diagram and cocartesian-edge square. By [lem-coef-ind-presheaf-small-locality-generators] these representatives give a small set $S_0$ of maps $s_r:\\operatorname{colim}_{b\\in B}y_D(r(b))\\to y_D(r(\\infty))$ whose local objects are exactly the relative-cone presheaves. The comparison for each $s_r$ is the map $\\phi(r(\\infty))\\to\\lim_{b\\in B^{\\mathrm{op}}}\\phi(r(b))$, by [lem-coef-infinity-yoneda-evaluation] and [lem-coef-infinity-yoneda-presheaf-limits].",
+   "uses": [
+    "lem-coef-ind-presheaf-small-locality-generators",
     "lem-coef-infinity-yoneda-evaluation",
     "lem-coef-infinity-yoneda-presheaf-limits"
    ],
    "elementary": false,
    "source": {
     "document": "https://arxiv.org/html/1501.02161v3",
-    "place": "Proposition 10.5 proof, using Corollary 9.17 and Lemma 10.6; the reduction to pushouts and small coproducts is made explicit by the cited limit-preservation criterion."
+    "place": "Proposition 10.5 proof, Lemma 10.6 and Yoneda locality test"
    }
   },
   {
-   "text": "Use the opposite of the straightening equivalence [lem-coef-cocartesian-straightening] in a containing universe to unstraighten $\\widehat H$ as a Cartesian fibration $q:\\widehat{\\mathcal E}\\to\\mathcal P(A)$. The classification identifies its fiber over $X$ with $\\widehat H(X)$ and its restriction maps with the prescribed right-adjoint transports. The accessible-total-category and accessible-projection conclusion of step 4 is invariant under this straightening/unstraightening equivalence, so $\\widehat{\\mathcal E}$ is accessible and $q$ preserves small $\\mu$-filtered colimits for some infinite regular $\\mu$, as required.",
+   "text": "The ambient presheaf category is presentable by [lem-coef-infinity-presheaf-presentability]. The small-localization clause of [lem-coef-presentable-infinity-adjoints] supplies a reflector $L$ with inclusion $i$, and local colimits are $L$ of ambient colimits. For $s\\in S_0$, the adjunction identifies $\\operatorname{Map}(Ls,Z)$ with $\\operatorname{Map}(s,iZ)$, an equivalence for every local $Z$; Yoneda therefore makes $Ls$ an equivalence. Conversely the same adjunction makes every local $Z$ local for every map inverted by $L$. Both hypotheses of [lem-coef-infinity-reflector-accessibility] hold, so the local category and $iL$ are accessible.",
+   "uses": [
+    "lem-coef-infinity-presheaf-presentability",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-infinity-reflector-accessibility",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 10.5 proof, accessible localization argument"
+   }
+  },
+  {
+   "text": "Choose an infinite regular $\\mu$ for which $iL$ preserves $\\mu$-filtered colimits. For a $\\mu$-filtered diagram $Z$ of local objects, $i\\operatorname{colim}Z\\simeq iL\\operatorname{colim}iZ\\simeq\\operatorname{colim}iLiZ\\simeq\\operatorname{colim}iZ$, so $i$ is accessible. Restriction $j^*:\\mathcal P(D)\\to\\mathcal P(A)$ preserves colimits pointwise by [lem-coef-infinity-yoneda-presheaf-limits]; therefore the classified projection is accessible and the total category is accessible.",
+   "uses": [
+    "lem-coef-infinity-reflector-accessibility",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 10.5 proof, final accessibility argument"
+   }
+  },
+  {
+   "text": "Use the opposite of the straightening equivalence [lem-coef-cocartesian-straightening] in a containing universe to unstraighten $\\widehat H$ as a Cartesian fibration $q:\\widehat{\\mathcal E}\\to\\mathcal P(A)$. The classification identifies its fiber over $X$ with $\\widehat H(X)$ and its restriction maps with the prescribed right-adjoint transports. The accessible-total-category and accessible-projection conclusion of steps 4–8 is invariant under this straightening/unstraightening equivalence, so $\\widehat{\\mathcal E}$ is accessible and $q$ preserves small $\\mu$-filtered colimits for some infinite regular $\\mu$, as required.",
    "uses": [
     "lem-coef-cocartesian-straightening"
    ],
@@ -107,20 +154,22 @@
   }
  ],
  "proof_deps": [
-  "lem-coef-ind-kappa-presentability",
-  "lem-coef-ind-kappa-extension",
-  "lem-coef-presentable-infinity-adjoints",
-  "lem-coef-ind-right-adjoint-coherent",
-  "lem-coef-infinity-presheaf-free-cocompletion",
   "lem-coef-cat-infinity-colimits-cartesian-closure",
-  "lem-coef-infinity-presheaf-representable-slice-density",
   "lem-coef-cocartesian-straightening",
   "lem-coef-ghn-ind-presheaf-cartesian-realization",
-  "lem-coef-infinity-presheaf-presentability",
-  "lem-coef-infinity-reflector-accessibility",
+  "lem-coef-ind-kappa-extension",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-ind-presheaf-small-locality-generators",
+  "lem-coef-ind-right-adjoint-coherent",
+  "lem-coef-infinity-coslice-colimit-formula",
   "lem-coef-infinity-limits-products-pullbacks",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-presheaf-presentability",
+  "lem-coef-infinity-presheaf-representable-slice-density",
+  "lem-coef-infinity-reflector-accessibility",
   "lem-coef-infinity-yoneda-evaluation",
-  "lem-coef-infinity-yoneda-presheaf-limits"
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-presentable-infinity-adjoints"
  ],
  "proof_origin": {
   "by": "agent",
@@ -221,7 +270,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-cartesian-fibration",
@@ -234,16 +283,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-ind-presheaf-fibration-accessibility",
   "worker": "stage1",
-  "summary": "Independent second reading: repaired the small test set and explicit locality maps, supplied missing category-limit and pointwise citations, and made the accessibility cardinal and source labels precise.",
-  "blueprint": "Realizes the ancestor proof paragraph 2 presentable Cartesian-fibration route: Definition 10.4/Proposition 10.5 via GHN Proposition 9.12/9.16, Corollary 9.17, and the accessible-localization argument."
+  "summary": "Repaired the returned long step 4 into five short cited steps. Reused existing GHN slice interpretation, dual coslice colimit formula and products/pullbacks criterion instead of introducing a duplicate slice lemma; extracted the small coherent locality-test family as one statement-only node. Preserved the statement, Lean record, original route and other proof steps (only renumbered the final cross-reference).",
+  "blueprint": "Historical ancestor proof paragraph 2, presentable Cartesian-fibration support through Definition 10.4/Proposition 10.5: Corollary 9.17 realization, slice tests from Proposition 9.16, small locality maps from Lemma 10.6, and the existing reflector/inclusion accessibility argument."
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q23-34188d182",
-  "group": "Q23",
+  "reviewer": "NT-cc-Q85-d5f9571ed",
+  "group": "Q85",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-34188d182 (reviewer sub-agent of L); spot-checked: I read GHN arXiv:1501.02161v3 online (it is not archived; the report's WANTED line stands), at Def 9.1, Props 9.12/9.16, Def 9.15, Cor 9.17, Def 10.4, Prop 10.5 with its proof, and Lemmas 10.6/10.7. The item matches Def 10.4/Prop 10.5: Ind_lambda inside Fun(C^op, small spaces), right-adjoint transports H(f^op), the limit-preserving extension along y^op, the category-of-elements formula, and accessibility of the total category and of q. Replacing 'uncountable' with 'infinite regular' follows GHN, where kappa is only regular. That strengthens the item rather than weakening it, and the parent supplies an uncountable lambda, so its call (steps 5-7) still applies. The new realization node matches Cor 9.17: (i) is GHN's pullback square for cocartesian edges, (ii) is the relative limit over (K^{◁▷})^op, and the variance is correct. I tested it on A=*, where the fibre over x is Fun(x, Ind C), as claimed, on an empty K and on lambda=aleph_0. It is the classification theorem, not a restatement of the item's accessibility clause. lem-coef-ind-right-adjoint-coherent is true for every regular lambda: it asserts a functor, not the Pr^L equivalence that fails at aleph_0. It generalizes the uncountable-lambda clauses in lem-coef-small-right-adjoint-diagram-compact-model and lem-coef-compact-model-pr-duality, so it is not a duplicate. Steps 1-5 check out against the cited statements. In step 4 I checked the slice reformulation of (ii), the hypotheses of the products/pullbacks reduction including aleph_0 and the empty product, the smallness of S_0, the locality maps (the span edges exist in E_A^◁), both hypotheses of reflector-accessibility, and the accessibility of i for mu-filtered colimits. proof_deps equals the union of the uses. Every dependency is in unit sk-prop-sf-biduality-general apart from a definition, so no tool_uses are needed; no SGA is cited and there is no cycle. One mechanical fault (B9), repaired in fixes/: in both new nodes blueprint.from.via listed only the item. It now lists the item followed by the item's own via chain up to prop-coef-integral-exceptional-adjoint. Nothing else changed. Details are in review.md.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-d5f9571ed (reviewer sub-agent of L); spot-checked: I read the repaired item (all 9 steps), the one new node lem-coef-ind-presheaf-small-locality-generators, and the full statements of all 15 proof dependencies. I also read GHN arXiv:1501.02161v3 online (it is not archived; the WANTED line stays) at Def 9.15, Prop 9.16 with its proof, Cor 9.17, Def 10.4, Prop 10.5 with its proof, and Lemma 10.6 with its proof. Steps 4-8 follow the Prop 10.5 proof: the Cor 9.17 restriction, the cocartesian-edge tests, the reduction of fibre colimits to pushouts and coproducts of fewer than lambda objects, the S'-locality of Lemma 10.6, and pointwise colimits for j^*. Step 5's use of products-pullbacks has all its hypotheses: E_a^op has lambda-small limits, and the dual coslice formula gives limits in S_{/X(a)}, including the empty coproduct and lambda=aleph0. Step 7 checks both hypotheses of reflector-accessibility through the adjunction and Yoneda. Step 8's equivalences i colim = iL colim i = colim iLi = colim i are correct. The new node is true: the span -inf_b <- -inf_a -> e with cone point alpha_!e gives square (i); the K^< test with cone point -inf_a gives the double-cone limit; K empty gives Psi(0_a)=X(a). The test set is small. Edge cases A empty, terminal base and fibre, identity edges and aleph0 behave correctly. The node is statement-only and self-contained, has six searches over all four tools, has correct blueprint.from/via, and is not a restatement of the item (it is GHN Lemma 10.6 applied to the Prop 10.5 tests). rg over the whole DAG and blueprint found no duplicate; accessible-localization-small-generators is the converse direction. proof_deps equals the union of uses, all steps are under 2000 characters, all dependencies are in the item's unit, there is no SGA and no tool_uses. The statement and Lean record are unchanged, so no target is weakened. Minor and accepted: the new node lacks merged_into/lean_audit fields, which the preflight accepted. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.IndPresheafFibrationAccessibility",

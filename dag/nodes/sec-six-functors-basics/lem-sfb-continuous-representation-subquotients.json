@@ -11,9 +11,86 @@
   "def-weil-l-adic-coefficient-extension",
   "def-pod-l-adic-representations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite extension $E/\\mathbf Q_\\ell$ is complete for the nontrivial absolute value $|\\cdot|_E$ [def-weil-l-adic-coefficient-extension]. The $\\ell$-adic topology on a finite-dimensional $E$-vector space (the product topology for a basis, as in [def-pod-l-adic-representations](2)) makes it a Hausdorff topological $E$-vector space, since $E$ is a Hausdorff topological field. The subspace $U$ is finite-dimensional; by [lem-sfb-finite-dimensional-subspace-closed] it is closed in $V$ and $U\\hookrightarrow V$ is a closed embedding. The subspace topology on $U$ is again Hausdorff with continuous addition, negation and scalar multiplication (restrictions of those of $V$). The identity of $U$ from its $\\ell$-adic topology to the subspace topology, and back, is $E$-linear with finite-dimensional Hausdorff source in both directions, hence continuous both ways by [lem-sfb-finite-dimensional-linear-map-continuous]: the two topologies agree. The restricted action $\\Pi\\times U\\to U$ is continuous: its composite with the embedding $U\\hookrightarrow V$ is the restriction of the ambient action to $\\Pi\\times U$, and $U$ carries the subspace topology. The inclusion is equivariant by definition and continuous.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-pod-l-adic-representations",
+    "lem-sfb-finite-dimensional-subspace-closed",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, proof, p. 60; finite-dimensional subspace input expanded using the cited Mathlib topology lemma"
+   }
+  },
+  {
+   "text": "Give $V/U$ the quotient topology. By [lem-sfb-finite-dimensional-quotient-open] the canonical map $q:V\\to V/U$ is continuous, surjective and open. A product of open maps is open, so $\\operatorname{id}_A\\times q:A\\times V\\to A\\times(V/U)$ is a continuous open surjection, hence a quotient map, for $A=E$, $A=\\Pi$ or $A=V$ (for the latter use $q\\times q$). The maps $(a,q(v))\\mapsto q(av)$ on $E\\times(V/U)$, $(q(v),q(w))\\mapsto q(v+w)$, and $(g,q(v))\\mapsto q(gv)$ on $\\Pi\\times(V/U)$ are well defined because $U$ is an $E$-subspace and $\\Pi$-stable; their composites with these quotient maps are the continuous maps $q\\circ(\\text{scalar multiplication, addition, action})$, so they are continuous. Negation is scalar multiplication by $-1$. Thus $V/U$ with the quotient topology is a topological $E$-vector space with jointly continuous $\\Pi$-action, and $q$ is equivariant and continuous. Comparison with the $\\ell$-adic topology: the composite of $q$ with the identity from the quotient topology to the $\\ell$-adic topology is the linear map $V\\to V/U$ with finite-dimensional Hausdorff source, continuous by [lem-sfb-finite-dimensional-linear-map-continuous], so that identity is continuous because $q$ is a quotient map; the identity in the other direction is linear from the finite-dimensional Hausdorff $\\ell$-adic topology to the topological vector space just constructed, continuous by the same node. Hence the quotient topology is the $\\ell$-adic topology and $V/U$ is a continuous representation.",
+   "uses": [
+    "def-pod-l-adic-representations",
+    "lem-sfb-finite-dimensional-quotient-open",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, proof, p. 60; quotient action descended along the open quotient map"
+   }
+  },
+  {
+   "text": "Let $h:V\\to W$ be equivariant and $E$-linear. Then $K=\\ker h$ is a $\\Pi$-stable subspace of $V$ ($h(gv)=gh(v)=0$) and $I=h(V)$ is a $\\Pi$-stable subspace of $W$ ($gh(v)=h(gv)$); both are finite-dimensional. By steps 1 and 2, applied to $K\\subseteq V$, $I\\subseteq W$ and $W/I$, the spaces $K$, $I$ and $Q=W/I$ with the induced actions and their $\\ell$-adic topologies are continuous finite-dimensional $E$-representations, and the inclusions $K\\hookrightarrow V$, $I\\hookrightarrow W$ and the quotient $W\\to Q$ are equivariant continuous linear maps. The corestriction $V\\to I$ of $h$ is equivariant and linear with finite-dimensional Hausdorff source, hence continuous by [lem-sfb-finite-dimensional-linear-map-continuous]; the same node shows $h$ itself is continuous.",
+   "uses": [
+    "def-pod-l-adic-representations",
+    "lem-sfb-finite-dimensional-linear-map-continuous",
+    "lem-sfb-finite-dimensional-quotient-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, proof, p. 60; kernels, images and cokernels of equivariant maps"
+   }
+  },
+  {
+   "text": "The canonical sequences $0\\to K\\to V\\to I\\to0$ and $0\\to I\\to W\\to Q\\to0$ are exact as sequences of underlying vector spaces, and all their arrows are equivariant and continuous by the preceding steps. Therefore they are exact sequences of continuous representations in the stated sense.",
+   "uses": [
+    "def-pod-l-adic-representations",
+    "lem-sfb-finite-dimensional-subspace-closed",
+    "lem-sfb-finite-dimensional-quotient-open",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, proof, p. 60; underlying exact sequences"
+   }
+  },
+  {
+   "text": "Kernel: if $f:X\\to V$ is a morphism of continuous representations with $h\\circ f=0$, then $f(X)\\subseteq K$ and $f$ factors uniquely as an $E$-linear map $f':X\\to K$ followed by the inclusion. It is equivariant because the inclusion is injective and equivariant and $f$ is equivariant, and it is continuous by [lem-sfb-finite-dimensional-linear-map-continuous] (finite-dimensional Hausdorff source $X$). Cokernel: if $g:W\\to Y$ is a morphism with $g\\circ h=0$, then $g$ vanishes on $I$ and factors uniquely through an $E$-linear $g':Q\\to Y$; it is equivariant because $W\\to Q$ is surjective and equivariant, and continuous by the same node (finite-dimensional Hausdorff source $Q$). Thus $K\\to V$ and $W\\to Q$ satisfy the kernel and cokernel universal properties among continuous representations.",
+   "uses": [
+    "def-pod-l-adic-representations",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, proof, p. 60; universal properties of kernels and cokernels"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-l-adic-representations",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-sfb-finite-dimensional-quotient-open",
+  "lem-sfb-finite-dimensional-subspace-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 6.8.5, proof, p. 60, expanded with finite-dimensional topological linear algebra"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -80,7 +157,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-coefficient-heart-closure",
@@ -92,10 +169,26 @@
  "blueprint": {
   "from": {
    "node": "det-lem-coefficient-heart-closure",
-   "place": "Proof paragraph (2), the sentence that continuous finite-dimensional E-representations form an abelian category; the invariant image, kernel and quotient actions used before applying integral-monodromy realization.",
+   "place": "Proof paragraph (2), the sentence that continuous finite-dimensional E-representations form an abelian category and therefore admit kernels and cokernels; this node supplies the topological representation subquotients used before monodromy realization.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-continuous-representation-subquotients",
+  "worker": "stage1",
+  "summary": "Preserved the imported statement exactly. Split its proof into the finite-dimensional subspace, quotient-action, image/kernel, exact-sequence, and universal-property arguments. Added three Mathlib leaves for closed finite-dimensional subspaces, open quotient maps, and continuity of linear maps from finite-dimensional spaces; checked the finite-extension topology and all edge cases listed below.",
+  "blueprint": "The five steps realize the parent closure proof paragraph (2), specifically the sentence that continuous finite-dimensional E-representations have kernels and cokernels, with the finite-dimensional topological input made explicit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-df54b6b43",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-df54b6b43 (reviewer sub-agent of L); spot-checked: Read the whole item, the three new Mathlib leaves, def-pod-l-adic-representations, def-weil-l-adic-coefficient-extension, the parent det-lem-coefficient-heart-closure (its step 3 uses exactly the item's conclusions) and unit sk-lem-coefficient-heart. Source: Bhatt-Scholze Cor. 6.8.5 proof, p. 60, which says only 'obviously admits kernels and cokernels'. Mathlib checks: FiniteDimension.lean lines 283, 530 and 565, and Module/Basic.lean lines 319 and 322; all three leaves are exact or one-line specializations. The item's statement and stmt_deps are identical to the live base, so nothing is weakened. Small cases tested: U=0, U=V, V=0, h=0, h iso/injective/surjective, and a unipotent Z_ell action on E^2. No duplicates: the nearest node, lem-weil-pbc-finite-dimensional-linear-homeomorphism, covers linear equivalences only, and step 3 needs non-bijective maps. Fixed two faults. (1) B3 in all three leaves: def-weil was cited for 'nontrivially normed field', which it does not define, and def-pod was a spurious stmt_dep that the statements do not use. The leaves now state the field and topological-vector-space hypotheses themselves, and def-pod is removed. (2) C1/E5 in item steps 1-3: the agreement of the subspace and quotient topologies with the ell-adic topology was asserted, not proved. The quotient topology was never shown to be a vector-space topology, and step 3 did not show that K, I and Q are continuous representations. Steps 1-3 now argue this through the linear-map continuity leaf, applied to the identity map in both directions, and through descent along open quotient maps. Step 5 is written out in full. Batch-5 check: def-pod is a general definition, already in the base stmt_deps. It is neither assumption leaf nor a step of either proof, so the item's citation stands. After the fix the leaves reach only def-weil-l-adic-coefficient-extension, so no trace-formula or Poincare-duality closure is reached. tool_uses stay empty; no SGA is used.; 4 file(s) fixed by the reviewer"
  }
 }
