@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "cor-trf-point-counting",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Point-counting trace formula",
@@ -16,36 +16,181 @@
   "thm-trf-grothendieck-lefschetz-qbar",
   "def-weil-finite-field-fiber",
   "def-weil-scheme-morphism-properties",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constant-weil-structure",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-endomorphism-trace"
  ],
  "proof": [
   {
-   "text": "The constant finite-level sheaves $A_{E,n}$ on the etale sites,\nwith their identity identifications after comparison pullback,\ngive the explicit witnesses of\n[def-weil-pbc-etale-origin-witness] for the reductions\n$(A_{E,n})_X$ of the constant lattice $(\\mathcal O_E)_X$ of $K_E=E_X$.\nThus the finite-level hypotheses of\n[thm-trf-grothendieck-lefschetz-qbar] hold for this lattice, and that\ntheorem applies to $K$.\nFor the constant Weil sheaf, the local geometric Frobenius\n[def-trf-frobenius-operators] is the identity of the one-dimensional\nstalk\n$(\\Qlb)_{\\bar y}$, so\n\n$$\n\\sum_{j}(-1)^j\\operatorname{Tr}\\bigl(F_{y,m}\\mid H^j(K_{\\bar y})\\bigr)=1\n$$\n\nfor every rational point $y$ (the unit stalk trace of [cor-trf-constant-stalk-trace], read at the field stage), and the right-hand side of\n[thm-trf-grothendieck-lefschetz-qbar] is the cardinality of\n$X_0(\\mathbf F_{q^m})$, which is finite because $X_0$ is of finite\ntype. This is the first identity; the second is the identification\n$H_c^i\\simeq H^i$ for proper $X_0$ of\n[def-weil-ordinary-compact-cohomology].",
+   "text": "Write $A_n=\\mathcal O_E/\\varpi_E^n$ for the finite coefficient levels in the hypothesis. Take the completed constant lattice $K_{\\mathcal O}=\\widehat{\\mathcal O}_{E,X}$ and its rationalization $K_E=E_X$. By [lem-weil-constant-coefficient-objects-constructible], $K_{\\mathcal O}$ is constructible and derived complete, and its derived reductions are exactly $K_n=(A_n)_X[0]$. A reduction is a one-term free rank-one coefficient module, so it has Tor-amplitude $[0,0]$; constructibility is also given by that lemma. The canonical Weil maps $\\theta_{\\mathcal O}$ and $\\theta_n$ of [def-weil-constant-weil-structure] commute with the reduction maps. The canonical isomorphisms $K_{n+1}\\otimes^L_{A_{n+1}}A_n\\cong K_n$ are the multiplication maps $A_{n+1}\\otimes_{A_{n+1}}A_n\\to A_n$ on these free models; thus the tower with its reduction transitions is normalized in [def-trf-adic-system]. The rationalization of $\\theta_{\\mathcal O}$ is the canonical $\\theta_E$. By [lem-weil-constant-weil-structure-stage-independence], the pair $(E,(E_X,\\theta_E))$ represents the specified constant $\\Qlb$-Weil object $K$, even when the hypothesis uses a coefficient field larger than $\\Ql$.",
    "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-constant-weil-structure",
+    "def-trf-adic-system",
+    "lem-weil-constant-weil-structure-stage-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/cor-trf-point-counting.proof.md",
+    "place": "first sentence: the constant lattice and its finite reductions"
+   }
+  },
+  {
+   "text": "At each $n$, $K_n$ is locally constant on the single stratum $X$, with finite stalk module $A_n$, by [lem-weil-constant-coefficient-objects-constructible]. Apply clause (b) of [lem-sf-proetale-locally-constant-origin] with $\\Lambda=A_n$, retaining a lisse etale sheaf $G_n$ and an isomorphism $\\alpha_n:\\nu_X^*G_n\\xrightarrow{\\sim}(A_n)_X$. Place $G_n$ and $\\alpha_n$ in degree zero and retain the pair $(G_n[0],\\alpha_n[0])$ as the etale-origin witness of [def-weil-pbc-etale-origin-witness]. This supplies actual witness data at each level, rather than assuming an origin predicate. No compatibility between these witness choices is required by the statement of [thm-trf-grothendieck-lefschetz-qbar]; the compatible transition and Weil maps are those of the constant tower in Step 1. The other finite-level input of that theorem, compactification admissibility for this constant lattice, is exactly the hypothesis of the item. Therefore its finite-level assumptions all hold.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-sf-proetale-locally-constant-origin",
     "def-weil-pbc-etale-origin-witness",
-    "thm-trf-grothendieck-lefschetz-qbar",
-    "def-trf-frobenius-operators",
+    "thm-trf-grothendieck-lefschetz-qbar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/cor-trf-point-counting.proof.md",
+    "place": "first two sentences: supplying the finite-level witnesses; Stacks Tag 099Y, proetale.tex label lemma-compare-locally-constant"
+   }
+  },
+  {
+   "text": "Fix $m\\geq1$ and $y\\in X_0(\\mathbf F_{q^m})$. For the constant tower take $u=\\theta_{\\mathcal O}$ and $N=0$ in [prop-trf-rational-frobenius-integral-model]. Its finite coefficient morphisms are $\\psi_n=\\theta_n\\circ\\kappa_{K_n}$ and their iterates are $\\theta_n^{[m]}\\circ\\kappa^{(m)}_{K_n}$. These are the canonical maps on the pullback of the constant coefficient unit: under the canonical coefficient identifications, each factor sends the constant generator $1$ to $1$, and their composite does too. Thus [cor-trf-constant-stalk-trace], applied with $A=A_n$ and $h=\\Phi^m$, gives trace $1\\in A_n$ for each finite-level fixed-stalk operator. The normalization of the local operators in [prop-trf-rational-frobenius-integral-model] identifies these fixed-stalk maps with $\\psi_{n,m,\\bar y}$, and its integral operator $U_{y,m}$ reduces to them. Clauses (3) and (4) of [prop-trf-adic-coefficient-morphism-systems] then say that the trace of $U_{y,m}$ is the compatible family $(1\\bmod\\varpi_E^n)_n$, hence is $1\\in\\mathcal O_E$. By the local-operator formula in [prop-trf-rational-frobenius-integral-model] with $N=0$, $F_{y,m}$ at the $E$-stage is $U_{y,m}\\otimes_{\\mathcal O_E}E$. Scalar extension along $\\mathcal O_E\\to E\\to\\Qlb$ and the field supertrace law in [prop-trf-trace-formal-laws] give\n$$\\sum_j(-1)^j\\operatorname{Tr}(F_{y,m}\\mid H^j(K_{\\bar y}))=1\\in\\Qlb.$$\nIn particular, this passage uses the integral realization before rationalization; it does not use a nonexistent ring map $A_n\\to E$.",
+   "uses": [
+    "prop-trf-rational-frobenius-integral-model",
     "cor-trf-constant-stalk-trace",
+    "prop-trf-adic-coefficient-morphism-systems",
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/cor-trf-point-counting.proof.md",
+    "place": "local trace paragraph: unit trace at each finite level, followed through the integral and field stages"
+   }
+  },
+  {
+   "text": "Apply [thm-trf-grothendieck-lefschetz-qbar] to the representative of Step 1 and the hypotheses verified in Step 2. It gives the alternating compact-cohomology trace as the sum of the local supertraces of Step 3. Its statement also gives finite-dimensionality of all the vector spaces and boundedness of the cohomological degrees, so the alternating sums are finite. Its global operator is the $m$-th power of the compactly supported geometric Frobenius denoted $F$ in [def-weil-global-geometric-frobenius]: at finite level this identification is [lem-trf-frobenius-operator-compact-description], and [prop-trf-rational-frobenius-integral-model] identifies its integral realization and its rationalization with the specified field-stage operator (here $N=0$). Realization, rationalization and scalar extension preserve compositions and identities, so they preserve the equality with the $m$-fold composite. Finally [def-weil-ordinary-compact-cohomology] identifies $H_c^i(X,K)$ with the notation $H_c^i(X,\\Qlb)$ used in the conclusion.",
+   "uses": [
+    "thm-trf-grothendieck-lefschetz-qbar",
+    "def-weil-global-geometric-frobenius",
+    "lem-trf-frobenius-operator-compact-description",
+    "prop-trf-rational-frobenius-integral-model",
     "def-weil-ordinary-compact-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/cor-trf-point-counting.proof.md",
+    "place": "conclusion of the local trace paragraph: applying the general trace formula"
+   }
+  },
+  {
+   "text": "The rational-point set $S=X_0(\\mathbf F_{q^m})$ is finite by clause (1) of [lem-weil-point-counts-finite], applied to the finite extension $\\mathbf F_{q^m}/k_0$. Substitute the local value $1$ from Step 3 into the finite sum in Step 4. Then $\\sum_{y\\in S}1=\\#S$ (the natural number viewed in $\\Qlb$), including when $S$ is empty. Reversing the resulting equality gives exactly the first displayed formula.",
+   "uses": [
+    "lem-weil-point-counts-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/cor-trf-point-counting.proof.md",
+    "place": "last part of the local trace paragraph: finiteness and summing the unit local terms"
+   }
+  },
+  {
+   "text": "Suppose now that $X_0$ is proper. By [prop-weil-proper-compact-coincidence] there is the natural comparison $\\kappa_M:Ra_{X!}M\\xrightarrow{\\sim}Ra_{X*}M$, giving $j_M=\\operatorname{Fib}_s(\\kappa_M):R\\Gamma_c(X,M)\\xrightarrow{\\sim}R\\Gamma(X,M)$. Use the identity compactification specified in [lem-pod-proper-coincidence-frobenius] for its $\\operatorname{FrEx}_{X,!}$ and $\\tau_{c,M}$. Clause (2) of [lem-pod-proper-coincidence-frobenius] gives $\\tau_Mj_M=j_{Lg^*M}\\tau_{c,M}$ at $\\Lambda=\\Qlb$. Write $M=\\operatorname{For}K$ and $\\theta:Lg^*M\\to M$ for its Weil map. Naturality of $j$ gives $R\\Gamma(\\theta)j_{Lg^*M}=j_MR\\Gamma_c(\\theta)$. Multiply these two equalities to obtain\n$$Fj_M=R\\Gamma(\\theta)\\tau_Mj_M=j_MR\\Gamma_c(\\theta)\\tau_{c,M},$$\nwhere $F,F_c$ are the two operators of [def-weil-global-geometric-frobenius], evaluated stagewise for $\\Qlb$. Inducting on $m$ gives $F^mj_M=j_MF_c^m$. Conjugacy invariance and the field supertrace law of [prop-trf-trace-formal-laws] therefore identify the alternating trace on $H_c^i(X,K)$ with that on $H^i(X,K)$. Replace the former by the first formula and use the abbreviations of [def-weil-ordinary-compact-cohomology]. This proves the proper formula, including compatibility of the cohomology comparison with the Frobenius action.",
+   "uses": [
+    "prop-weil-proper-compact-coincidence",
+    "lem-pod-proper-coincidence-frobenius",
+    "def-weil-global-geometric-frobenius",
+    "prop-trf-trace-formal-laws",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/cor-trf-point-counting.proof.md",
+    "place": "final sentence: proper comparison, with its Frobenius equivariance made explicit"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-constant-weil-structure",
+  "def-trf-adic-system",
+  "lem-weil-constant-weil-structure-stage-independence",
+  "lem-sf-proetale-locally-constant-origin",
   "def-weil-pbc-etale-origin-witness",
   "thm-trf-grothendieck-lefschetz-qbar",
-  "def-trf-frobenius-operators",
+  "prop-trf-rational-frobenius-integral-model",
   "cor-trf-constant-stalk-trace",
-  "def-weil-ordinary-compact-cohomology"
+  "prop-trf-adic-coefficient-morphism-systems",
+  "prop-trf-trace-formal-laws",
+  "def-weil-global-geometric-frobenius",
+  "lem-trf-frobenius-operator-compact-description",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-weil-point-counts-finite",
+  "prop-weil-proper-compact-coincidence",
+  "lem-pod-proper-coincidence-frobenius"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/cor-trf-point-counting.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/cor-trf-point-counting.proof.md",
+  "place": "proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Lefschetz|[Ff]robenius.*trace|trace.*[Ff]robenius",
+   "results": "Mathlib/FieldTheory/AxGrothendieck.lean; Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean; Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean; Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean; Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean; Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state an etale-cohomology point-counting trace identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, LinearMap.trace",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state an etale-cohomology point-counting trace identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Number of rational points of a scheme over a finite field is the alternating sum of Frobenius traces on etale cohomology",
+   "results": "FiniteField.coe_frobeniusAlgHom; AlgHom.IsArithFrobAt; FiniteField.algebraMap_trace_eq_sum_pow; AlgebraicGeometry.IsEtale; FiniteField.orderOf_frobeniusAlgHom; FiniteField.frobeniusAlgEquiv; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; FiniteField.frobeniusAlgHom",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state an etale-cohomology point-counting trace identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck Lefschetz trace formula counts rational points by alternating Frobenius traces on compactly supported cohomology",
+   "results": "FiniteField.algebraMap_trace_eq_sum_pow; FiniteField.trace_to_zmod_nondegenerate; groupCohomology.Hilbert90.aux; FiniteField.trace_pow_card; groupCohomology.Hilbert90.aux_ne_zero; FiniteField.algebraMap_norm_eq_pow_sum; jacobiSum_one_one; Algebra.normalizedTrace_eq_of_fininteDimensional",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state an etale-cohomology point-counting trace identity"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|[Ff]robenius|pointCount",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state an etale-cohomology point-counting trace identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\"",
+   "results": "Lean.Macro.trace; Lean.Macro.State.traceMsgs; Lean.Parser.Tactic.bvTrace; Lean.Parser.Tactic.dbgTrace; Lean.Parser.Tactic.dsimpTrace; Lean.Parser.Tactic.dsimpTraceArgsRest; Lean.Parser.Tactic.simpAllTrace; Lean.Parser.Tactic.simpAllTraceArgsRest",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state an etale-cohomology point-counting trace identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating trace of geometric Frobenius on etale cohomology with compact supports equals number of finite field valued points",
+   "results": "FiniteField.algebraMap_trace_eq_sum_pow; FiniteField.algebraMap_norm_eq_pow_sum; groupCohomology.Hilbert90.aux; FiniteField.algebraMap_norm_eq_prod_pow; FiniteField.trace_to_zmod_nondegenerate; groupCohomology.Hilbert90.aux_ne_zero; groupCohomology.exists_mul_galRestrict_of_norm_eq_one; FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state an etale-cohomology point-counting trace identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace",
+   "results": "LinearMap.trace; LinearMap.trace_id; LinearMap.trace_one; LinearMap.trace_lie; LinearMap.isNilpotent_trace_of_isNilpotent; LinearMap.trace_smulRight; LinearMap.trace_mul_comm; Matrix.trace_toLin_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state an etale-cohomology point-counting trace identity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -82,5 +227,79 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-thm-trace-transport"
+ "unit": "sk-thm-trace-transport",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-trf-point-counting",
+  "worker": "stage1",
+  "summary": "Expanded the one-paragraph constant-coefficient specialization into six steps, checking the actual completed lattice and finite reductions, retaining etale-origin pairs using Stacks 099Y, transporting the unit stalk trace through the integral realization, citing rational-point finiteness, and proving Frobenius equivariance of proper coincidence. No statement change or new nodes.",
+  "blueprint": "Current main-20261015 cor-trf-point-counting.proof.md: Steps 1-2 realize the constant lattice and witnesses; Step 3 expands the finite-to-field unit trace; Steps 4-5 specialize the trace identity and sum the local terms; Step 6 realizes the proper-case sentence with the missing equivariance. The unit sk-thm-trace-transport route is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Constructibility and canonical finite reductions of the completed constant coefficient lattice; the trace-transport unit does not construct that lattice."
+   },
+   {
+    "node": "lem-weil-constant-weil-structure-stage-independence",
+    "why": "Identifies the constant Weil object represented over the finite coefficient field of the hypothesis with the canonical one; no trace-formula route is replaced."
+   },
+   {
+    "node": "lem-sf-proetale-locally-constant-origin",
+    "why": "Generic finite-lisse comparison, Stacks 099Y, supplies retained etale-origin pairs for the constant finite reductions; the trace formula assumes these witnesses."
+   },
+   {
+    "node": "cor-trf-constant-stalk-trace",
+    "why": "Generic unit-stalk trace calculation used at finite levels before transporting the value to the field stages."
+   },
+   {
+    "node": "prop-trf-rational-frobenius-integral-model",
+    "why": "Operator normalization and the N=0 integral/rational local and global formulas identify the operators being traced."
+   },
+   {
+    "node": "prop-trf-adic-coefficient-morphism-systems",
+    "why": "Generic reduction-compatible trace realization takes the compatible finite-level unit traces to the integral trace."
+   },
+   {
+    "node": "prop-trf-trace-formal-laws",
+    "why": "Generic scalar-extension, supertrace and conjugacy laws used for coefficient passage and proper comparison."
+   },
+   {
+    "node": "lem-trf-frobenius-operator-compact-description",
+    "why": "Identifies the finite global m-operator with the m-th iterate, transported to the field stages."
+   },
+   {
+    "node": "lem-weil-point-counts-finite",
+    "why": "Generic finite-type-over-finite-field point finiteness; the trace-transport unit has no point-finiteness lemma."
+   },
+   {
+    "node": "prop-weil-proper-compact-coincidence",
+    "why": "Generic comparison of proper compact and ordinary direct images for the proper clause; the nonproper trace identity is unchanged."
+   },
+   {
+    "node": "lem-pod-proper-coincidence-frobenius",
+    "why": "Generic compatibility of the proper comparison with the two Frobenius transports; the unit trace theorem only gives compact cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-constant-weil-structure-stage-independence",
+  "lem-sf-proetale-locally-constant-origin",
+  "cor-trf-constant-stalk-trace",
+  "prop-trf-rational-frobenius-integral-model",
+  "prop-trf-adic-coefficient-morphism-systems",
+  "prop-trf-trace-formal-laws",
+  "lem-trf-frobenius-operator-compact-description",
+  "lem-weil-point-counts-finite",
+  "prop-weil-proper-compact-coincidence",
+  "lem-pod-proper-coincidence-frobenius"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-bea3bd199",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-bea3bd199 (reviewer sub-agent of L); spot-checked: PASS: read in full, no changes, fixes/ empty. Item statement matches main-20261015 cor-trf-point-counting.md word for word (only order 2401 to 2745 changed from master); no target weakened, no new nodes, no SGA. Stacks proetale.tex lemma-compare-locally-constant (099Y) read: it is an equivalence for locally constant finitely presented sheaves over any ring, so lem-sf-proetale-locally-constant-origin (b) applies to (A_n)_X. Step 1: constructible lemma (2) gives the lattice, derived reductions (A_n)_X and support [0,0]; normalization maps are multiplication isos; theta_O=c_O.lambda reduces to the finite-level maps and rationalizes to theta_E; stage-independence (2) gives the Qbar object. Step 2: lisse witness pair G_n[0], alpha_n[0]; admissibility is the item's hypothesis, and thm-trf-trace-formula-e needs nothing else at finite level. Step 3: with N=0, psi_{n,m} is the canonical unit comparison for h=Phi^m (an endomorphism of A_X sending 1 to 1 is the canonical one); constant-stalk trace gives 1 in A_n; adic (2)-(4) give tr=1 in O_E; scalar extension and supertrace give 1 in Qbar; no map A_n to E is used. Step 4: thm-qbar plus integral-model m=1 identification give F_c=F. F^m=F_c^m is only sketched ('functors preserve composition') but follows from cited statements: levelwise compact-description, a composite of lifts is a lift, and adic trace (4) does not depend on the lift. Accepted. Step 5: lem-weil-point-counts-finite (1), elementary, empty case included. Step 6: lem-pod (2) plus naturality of kappa give F j=j F_c, written out correctly; the identity compactification is a legitimate model, and admissibility is not tied to the model (def-trf-admissibility). Edge cases checked: empty, Spec F_q, Spec F_{q^2} (2 if 2|m, else 0), A^1 (q^m), P^1 (1+q^m), nonreduced and disconnected. Acyclic. Accepted tool_uses (off unit sk-thm-trace-transport): lem-weil-point-counts-finite, prop-weil-proper-compact-coincidence, lem-pod-proper-coincidence-frobenius. The other declared tool_uses are on the route and need no record. Remark: the report's last 'Changes' bullet says source/order were updated to main-20261015, but the node still has the master source and order 2401. These are maintainer fields, so the node is correct and the report sentence is inaccurate; the maintainer may refresh the metadata."
+ }
 }

@@ -12,9 +12,74 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-yoneda-presheaf-limits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=\\operatorname{Fun}(K,\\mathcal C)$. The coherent functor construction in [def-cbc-enhanced-diagrams-cones] makes $H$ a quasicategory, and [lem-coef-functor-spine-tower-mapping-descent] gives its local smallness and identifies mapping spaces with the coherent restriction limits used below. Let $I$ be a small $\\kappa$-filtered quasicategory and let $D:I\\to H$ have a colimiting cocone with apex $b$. Since $\\mathcal C$ has the required filtered colimits, [lem-coef-infinity-yoneda-presheaf-limits] computes this cocone objectwise: for every vertex $v$ of $K$, the cocone $D(i)(v)\\to b(v)$ is colimiting in $\\mathcal C$. We will compare the mapping-space cocone for $a$ with these vertexwise colimits.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.4.13, setup and Corollary 5.1.2.3 (pointwise colimits)"
+   }
+  },
+  {
+   "text": "For a standard simplex $\\Delta^n$, prove by induction on $n$ that a diagram $a:\\Delta^n\\to\\mathcal C$ whose vertex values are $\\kappa$-compact has mapping space out of $a$ commuting with the given $I$-colimit. The case $n=0$ is the vertex compactness hypothesis. For $n=1$, [lem-coef-infinity-arrow-morphism-square] identifies the mapping space with a homotopy pullback of the two endpoint mapping spaces over the intervening mapping space; [lem-coef-spaces-kappa-limit-filtered-colimit] interchanges this finite homotopy limit with the $I$-colimit, and naturality identifies the resulting comparison with postcomposition by the given cocone. For $n>1$, let $S_0=\\Delta^{\\{0\\}}$ and, for $0\\leq j<n$, let $S_{j+1}$ be the union of the first $j+1$ consecutive spine edges and their vertices. The spine equivalence in [lem-coef-functor-spine-tower-mapping-descent] identifies mapping spaces for $a$ with those for $a|_{S_n}=a|_{\\operatorname{Sp}[n]}$. For each $j$, $S_{j+1}=S_j\\amalg_{\\Delta^{\\{j\\}}}\\Delta^{\\{j,j+1\\}}$, where the vertex inclusion is degreewise injective; [lem-coef-infinity-mapping-excision] therefore expresses the mapping space for $S_{j+1}$ as a homotopy pullback of the spaces for $S_j$ and that edge over the common vertex. Induction on $j$, the already proved $n=1$ case for the edge, and the spaces lemma give the filtered-colimit comparison at every stage. Thus the comparison from the colimit of the mapping-space diagram to the mapping space into $b$ is an equivalence, including its coherent cocone maps.",
+   "uses": [
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "lem-coef-infinity-mapping-excision"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.4.13, proof of (1)--(3), and Lemma 5.3.4.9"
+   }
+  },
+  {
+   "text": "For $m\\geq-1$ let $P(m)$ be the claim: for every $\\kappa$-small simplicial set $L$ of dimension at most $m$ (all nondegenerate simplices of dimension $\\leq m$; dimension $-1$ means $L=\\varnothing$) and every $a:L\\to\\mathcal C$ with $\\kappa$-compact vertex values, $a$ is $\\kappa$-compact in $\\operatorname{Fun}(L,\\mathcal C)$ in the explicit sense of the statement, with the actual postcomposition cocone maps. By Step 1 the restriction of the given colimiting cocone along any map $L'\\to K$, in particular along a skeleton or along a simplex $\\Delta^n\\to K$, is again colimiting, so $P(m)$ may be applied to these restrictions. Base $P(-1)$: $\\operatorname{Fun}(\\varnothing,\\mathcal C)=\\Delta^0$ by the defining formula, every mapping space is terminal, and the empty-shape clause of [lem-coef-spaces-kappa-limit-filtered-colimit] shows that the $I$-colimit of terminal spaces is terminal. Inductive step $P(n-1)\\Rightarrow P(n)$ for $n\\geq0$: let $L$ have dimension at most $n$, so $L=L_n$, writing $L_k=\\operatorname{sk}_kL$. Write $A_n=\\coprod_{\\sigma\\in(L_n)^{\\mathrm{nd}}}\\partial\\Delta^n$ and $E_n=\\coprod_{\\sigma\\in(L_n)^{\\mathrm{nd}}}\\Delta^n$, the coproducts over the nondegenerate $n$-simplices of $L$, with the attaching map $A_n\\to L_{n-1}$ and the boundary inclusion $A_n\\hookrightarrow E_n$ ($\\partial\\Delta^0=\\varnothing$). The decomposition of simplices in [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] gives the degreewise pushout $L_n\\cong L_{n-1}\\amalg_{A_n}E_n$: a simplex of $L_n$ not in $L_{n-1}$ is uniquely a degeneracy of a unique nondegenerate $n$-simplex, and a simplex of $\\Delta^n$ not in $\\partial\\Delta^n$ is uniquely a degeneracy of the top simplex. The map $A_n\\hookrightarrow E_n$ is degreewise injective, so it is the injective leg required by [lem-coef-infinity-mapping-excision]. The defining formula for coherent functors gives $\\operatorname{Fun}(E_n,\\mathcal C)=\\prod_\\sigma\\operatorname{Fun}(\\Delta^n,\\mathcal C)$ and likewise for $A_n$, and the right-pinched mapping spaces of a product are the products of the mapping spaces; so the mapping space on $E_n$ (and on $A_n$) is the product of the mapping spaces on its cells (and their boundaries). Each cell is covered by Step 2; each boundary $\\partial\\Delta^n$ and $L_{n-1}$ have dimension at most $n-1$ and are $\\kappa$-small, so they are covered by $P(n-1)$; and there are fewer than $\\kappa$ cells because $L$ is $\\kappa$-small. Mapping excision expresses the mapping space on $L_n$ as the corresponding homotopy pullback, naturally in the target diagram, while [lem-coef-spaces-kappa-limit-filtered-colimit] commutes both the products of fewer than $\\kappa$ factors (a discrete $\\kappa$-small shape) and the pullback (the finite shape $\\Lambda^2_2$) with the $I$-colimit. This proves $P(n)$. Hence $P(m)$ holds for all $m$: every finite-dimensional $\\kappa$-small $L$ with pointwise $\\kappa$-compact values is $\\kappa$-compact in $\\operatorname{Fun}(L,\\mathcal C)$, with the actual postcomposition cocone maps.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-infinity-mapping-excision",
+    "lem-coef-spaces-kappa-limit-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 5.3.4.13, proof of (4)--(5)"
+   }
+  },
+  {
+   "text": "For arbitrary $K$, write $K=\\bigcup_{n\\ge0}\\operatorname{sk}_nK$. If $\\kappa=\\aleph_0$, then $K$ has only finitely many nondegenerate simplices, hence bounded dimension, so it is one of the finite-dimensional cases of Step 3. If $\\kappa>\\aleph_0$, the indexing nerve $N(\\mathbb N^{\\mathrm{op}})$ is $\\kappa$-small. The tower clause of [lem-coef-functor-spine-tower-mapping-descent] identifies the mapping space out of $a$ with the homotopy limit of the mapping spaces out of its skeleta. Each skeleton comparison is an equivalence by Step 3, and [lem-coef-spaces-kappa-limit-filtered-colimit] interchanges this $\\kappa$-small homotopy limit with the $I$-filtered colimit. Hence the comparison cocone for $a$ is colimiting. If $K=\\varnothing$, the defining formula gives $\\operatorname{Fun}(K,\\mathcal C)=\\Delta^0$ and all relevant mapping spaces are terminal; their filtered colimit is terminal by the empty-shape clause of the same spaces lemma.",
+   "uses": [
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "lem-coef-spaces-kappa-limit-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.4.13, proof of (6), including the empty-shape case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-functor-spine-tower-mapping-descent",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-mapping-excision",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proof of Proposition 5.3.4.13, pp.399-401 (PDF pp.416-418); source read online and unavailable in literature archive"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,7 +146,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-compact-diagram-cocone-transport",
@@ -110,5 +175,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-pointwise-compact-diagrams",
+  "worker": "stage1",
+  "summary": "Split the pointwise compactness assertion into simplex mapping-space induction, finite-dimensional skeletal cell attachment, and the arbitrary-shape skeletal tower. The statement and hypotheses are unchanged; no new nodes were needed because all non-elementary mapping-space, excision, filtered-limit and simplicial-decomposition inputs already exist in the DAG. Mathlib searches found only ordinary-category presentability analogues.",
+  "blueprint": "Realizes the compactness clause in Proposition 5.3.4.13 used by the second paragraph of prop-coef-integral-exceptional-adjoint, before the compact cocone transport and relative factorization steps.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-40da1dba7",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-40da1dba7 (reviewer sub-agent of L); spot-checked: Read the item, its four steps and the statements of all eight cited nodes. The source is HTT Prop. 5.3.4.13 (not archived; the worker's WANTED line stands). The statement matches the source hypothesis by hypothesis: kappa regular in U, C locally small with small kappa-filtered colimits, K kappa-small, vertexwise kappa-compact values, arbitrary non-constant targets, actual postcomposition cocone, and K empty included. Nothing is weakened. There are no new nodes, no cycle (checked over the 427-node closure), and no departure from the unit route: five cited statements are in sk-prop-sf-biduality-general, the other two are a definition and a Mathlib leaf, so tool_uses [] is correct. No SGA is cited. lem-coef-accessible-diagram-presentations states the same compactness only as a special case under accessibility hypotheses, so it is not a duplicate. Step 1: the Yoneda/presheaf-limits lemma gives the vertexwise (and restricted) colimit cocones, and the spine-tower lemma gives local smallness. Step 2: the arrow mapping square plus the finite-limit interchange handles Delta^1, and the spine equivalence with excision along injective vertex legs handles Delta^n. Step 3: the skeletal pushout follows from the nondegenerate decomposition, Fun of a coproduct is a product of fewer than kappa factors, and excision applies. Step 4: kappa = aleph_0 gives finite dimension; for uncountable kappa the tower clause and interchange over N(N^op), which is kappa-small, finish the proof; K empty is the terminal case. Small cases checked: Delta^0, an arrow of finite sets, K empty, and an infinite discrete K, which shows the kappa-smallness hypothesis is needed. One D4 fault repaired: Step 3's induction had no stated claim or base case and applied the 'induction hypothesis' to the boundaries of Delta^n. The fix rewrites only Step 3's text: it states P(m) for all kappa-small L of dimension at most m, the base P(-1) via the empty-shape clause, and the step from P(n-1) to P(n). uses and proof_deps are unchanged. Universe re-indexing from S_U to S_{U'} for the spaces lemma is accepted as standard.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -11,9 +11,129 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $O=S_0\\amalg\\{v\\}$ and $\\mathcal A=\\mathrm{sSet}_{/S}$, $\\mathcal B=\\mathrm{sCat}_O$. The category $\\Delta/S$ is small: its objects are simplices $\\sigma:\\Delta^n\\to S$, and its arrows $\\sigma\\to\\tau$ are monotone maps $\\alpha:[n]\\to[m]$ with $\\sigma=\\tau\\alpha$. The assignment $(X\\to S)\\mapsto((n,\\sigma)\\mapsto\\{x\\in X_n:a(x)=\\sigma\\})$ identifies $\\mathcal A$ with set-valued presheaves on $\\Delta/S$; its inverse takes the disjoint union of these fibers over each $S_n$. Thus [lem-coef-presheaf-local-presentability] makes $\\mathcal A$ locally presentable. Colimits in the slice are underlying simplicial-set colimits with the induced map to $S$; pullbacks of a cospan over $S$ are underlying simplicial-set pullbacks with the induced map to $S$. For $\\mathcal B$ use the small finite-limit sketch with sorts $B_n(x,y)$ for $n\\geq0$, $x,y\\in O$, face/degeneracy operations, identity constants and binary composition operations on $B_n(x,y)\\times B_n(y,z)$, imposing the simplicial, associativity, unit and compatibility equations. It has exactly simplicial categories with object set $O$ as models. Apply [lem-coef-finite-limit-model-presentability]: $\\mathcal B$ is locally presentable, complete and cocomplete, and its filtered colimits are computed on each mapping simplicial set. Both arrow categories are locally presentable by [lem-coef-presheaf-local-presentability] with index $[1]^{\\mathrm{op}}$, since both endpoint categories have pullbacks. Their colimits are computed at the endpoints, as is checked by applying the colimit universal property to a commuting square. The operations in the sketch are finitary and its sorts form a small set; all these assertions therefore hold relative to the chosen input universe.",
+   "uses": [
+    "lem-coef-presheaf-local-presentability",
+    "lem-coef-finite-limit-model-presentability",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.4.7 setup; Appendix A.3.2; presentability inputs are the cited existing presheaf and finite-limit-model theorems."
+   }
+  },
+  {
+   "text": "Define $F:\\mathcal A\\to\\mathcal B$ by $F(a)=\\mathfrak C[C_S(a)]$. The cone formula gives, in every degree $r$, the disjoint union $C_S(a)_r=S_r\\amalg\\{v_r\\}\\amalg\\coprod_{0\\leq u<r}X_u$: only the pure $X_r$ summand is glued to $S_r$. Each induced map is the identity on $S_r$ and $v_r$ and is $f_u$ on the mixed summand indexed by $u$. In particular every cone has exactly vertex set $O$ and every cone map fixes it. This formula preserves every small connected colimit: the constant summands have connected indexing category, while the other summands are evaluated colimits of $X_u$; these identifications commute with every simplicial operator by its ordered-block formula. Hence $C_S$ preserves filtered colimits and pushouts. To check the required colimit property of $\\mathfrak C$, define $N(A)_n=\\operatorname{Fun}_{\\mathrm{sCat}}(\\mathfrak C[\\Delta^n],A)$ with restriction along monotone maps. By the defining simplex colimit in [lem-coef-pinched-cube-latching], a functor $\\mathfrak C[K]\\to A$ is exactly a compatible family indexed by simplices of $K$, equivalently a simplicial map $K\\to N(A)$. For any colimit diagram in $K$, this description identifies maps out of $\\mathfrak C[\\operatorname{colim}K]$ with compatible maps out of its terms; it proves preservation of colimits. For a connected diagram of simplicial categories whose object maps are all the identity on $O$, the colimit in $\\mathrm{sCat}$ has object set $O$ and is the colimit in $\\mathrm{sCat}_O$: a compatible family to any simplicial category chooses one common object function from $O$, and its remaining data are precisely compatible maps on the enriched homs. Thus $F$ preserves filtered colimits and pushouts in $\\mathcal B$.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.1.4.2 and Proposition 2.1.4.7(1)-(2), right-cone version; the displayed summand and Hom calculations expand colimit preservation directly."
+   }
+  },
+  {
+   "text": "For any $g:A\\to B$ in $\\mathcal B$, the identity on objects makes essential surjectivity of $\\pi_0g$ automatic; if all mapping-set maps are weak homotopy equivalences, they induce bijections on path components, so $\\pi_0g$ is also fully faithful. Consequently $g$ is a Dwyer--Kan equivalence exactly when it is a weak equivalence of the fixed-object model structure of [lem-coef-simplicial-interval-lifting]. Thus $f\\in W_S$ exactly when every $F(f)(x,y)$ is a weak homotopy equivalence. Isomorphisms and two-out-of-three now follow on every mapping simplicial set from the Kan model structure of [lem-coef-kan-quillen-right-proper], using $F(gf)=F(g)F(f)$. In particular this class is replete in the arrow category.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.4.7(1); Definition A.2.6.12(1)-(2), specialized to a common object set."
+   }
+  },
+  {
+   "text": "Let $I$ be any small filtered category and let $f_i$ be an $I$-diagram of arrows in $W_S$. Step 2 identifies $F(\\operatorname{colim}_I f_i)$ with $\\operatorname{colim}_I F(f_i)$ in the arrow category of $\\mathcal B$. By the finite-limit-model theorem in Step 1 this last colimit is computed separately on every $B(x,y)$; this uses filteredness, not arbitrary mappingwise computation of enriched pushouts. The statement [lem-coef-filtered-colimit-weak-equivalences] applies to those diagrams of mapping simplicial sets, with no injectivity condition on their transitions. Every resulting mapping-set map is therefore a weak homotopy equivalence. Step 3 gives $\\operatorname{colim}_I f_i\\in W_S$.",
+   "uses": [
+    "lem-coef-finite-limit-model-presentability",
+    "lem-coef-filtered-colimit-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.4.7(1), Definition A.2.6.12(3), with filtered closure proved mappingwise; arbitrary filtered index categories are allowed."
+   }
+  },
+  {
+   "text": "We next obtain the small generating family without using the downstream coherent-nerve comparison. Fixed-object ordinary categories are algebras for the $O\\times O$-sorted theory whose operations are identities and composable finite strings, with the unit and associativity equations; strict simplicial algebras for this theory are exactly $\\mathcal B$. Write $L_{xy}$ for the free algebra left adjoint to evaluation at $(x,y)$, and put $I_O=\\{L_{xy}(\\partial\\Delta^n)\\to L_{xy}(\\Delta^n)\\}$ and $J_O=\\{L_{xy}(\\Lambda_i^n)\\to L_{xy}(\\Delta^n)\\}$, where $(x,y)\\in O^2$, $n\\geq0$ for boundaries and $n\\geq1$, $0\\leq i\\leq n$ for horns. Both families are small. By [lem-coef-sorted-simplicial-algebra-model] they generate the two weak factorization systems of the same fixed-object model structure: the free/evaluation adjunction identifies their right lifting classes with objectwise trivial Kan fibrations and objectwise Kan fibrations respectively. The dimension-zero boundary is included, as required by [lem-coef-kan-quillen-right-proper]. Apply [lem-coef-accessible-small-object-factorization] to $J_O$ in the locally presentable $\\mathcal B$. It gives $g=p_g i_g$ functorially, with $p_g\\in J_O^{\\square}$ and a middle-object functor $E$ preserving $\\kappa$-filtered colimits for some infinite regular $\\kappa$. Here $i_g$ is a trivial cofibration: the model left class ${}^{\\square}(J_O^{\\square})$ contains $J_O$, is closed under pushouts and arrow retracts by [lem-coef-lifting-class-closure], and under small continuous transfinite compositions by [lem-coef-transfinite-left-lifting]. It also contains isomorphisms, since a square with invertible left side $j$ has filler $u j^{-1}$. It therefore contains the weak saturation of $J_O$, in which the factorization theorem places $i_g$. The second-factor functor $T(g)=p_g:E(g)\\to\\operatorname{target}(g)$, on a square $(a,b)$ given by $(E(a,b),b)$, preserves those $\\kappa$-filtered colimits: its first endpoint does by construction, its second endpoint is a projection, and the comparison square commutes by naturality of $p_g$.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-accessible-small-object-factorization",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8, proof of accessibility by the second-factor functor, expanded from Proposition A.1.2.5; Appendix A.3.2 fixed-object model. This is the accessibility input to A.2.6.14, not the slice-model existence theorem."
+   }
+  },
+  {
+   "text": "By [lem-coef-small-right-lifting-accessibility], the replete full subcategory $R\\subseteq\\mathcal B^{[1]}$ of maps with the right lifting property against $I_O$ is accessible. Put $H=T\\circ F^{[1]}:\\mathcal A^{[1]}\\to\\mathcal B^{[1]}$, where $F^{[1]}$ applies $F$ at both endpoints of an arrow and both sides of a square. Steps 2 and 5 show that $H$ preserves $\\kappa$-filtered colimits. For each $f$, the first factor $i_{F(f)}$ is a weak equivalence, so two-out-of-three in the fixed-object model gives $F(f)$ weak equivalent if and only if $p_{F(f)}$ is weak equivalent. The latter map is already a fibration; therefore it is a weak equivalence if and only if it is an $I_O$-injective, by the two generating families in Step 5. We have proved the equality of full subcategories $W_S=H^{-1}R$. Apply [lem-coef-accessible-full-inverse-image] to the locally presentable arrow categories from Step 1, the functor $H$ and the replete accessible subcategory $R$. It supplies an infinite regular $\\lambda$ and a small family $W_{S,0}\\subseteq W_S$ generating $W_S$ under small $\\lambda$-filtered colimits in the ambient arrow category. Every $\\lambda$-filtered category is filtered since $\\lambda$ is infinite, so this is the required small filtered-colimit generating family. Its cardinal need not be the factorization cardinal. Along with Steps 3 and 4 this proves every stated perfectness clause in the input universe.",
+   "uses": [
+    "lem-coef-small-right-lifting-accessibility",
+    "lem-coef-accessible-full-inverse-image",
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries A.2.6.7 and A.2.6.8, proof, and Corollary A.2.6.14; Definition A.2.6.12(4). The full inverse-image result applies to the second-factor functor on arrow categories, not just a functor induced on endpoints."
+   }
+  },
+  {
+   "text": "Let $i:(X,a)\\to(X',a')$ be degreewise injective over $S$. In the disjoint-union formula of Step 2, $C_S(i)$ is the identity on the pure $S_r$ and apex summands and equals $i_u$ on each mixed summand. Therefore it is degreewise injective, including degree zero where it is the identity on $O$. Apply [lem-coef-coherent-fixed-vertex-cofibrations] to $C_S(i)$. It follows that $F(i)$ is a cofibration in $\\mathcal B=\\mathrm{sCat}_O$; all its objects are the fixed vertices, even if $X$ is empty or its structure map identifies vertices in $S$.",
+   "uses": [
+    "lem-coef-coherent-fixed-vertex-cofibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.4.7(2), using only the initial boundary-cube cofibration calculation in the proof of Theorem 2.2.5.1, printed p. 90."
+   }
+  },
+  {
+   "text": "Apply $F$ to the pushout square of the statement. By Step 2 it is a pushout square in $\\mathcal B$, not merely a square of underlying graphs. Since $f\\in W_S$, Step 3 makes $F(f)$ an objectwise weak homotopy equivalence; Step 7 makes $F(i)$ a fixed-object cofibration. The statement [lem-coef-fixed-object-scat-left-proper] applies to exactly these hypotheses, without local Kan assumptions, and says that $F(f'):F(X')\\to F(Y')$ is an objectwise weak homotopy equivalence. Step 3 translates this back to $f'\\in W_S$. The proof used no horn filling assumption on $S$ and all the signatures, indexing categories and generating families used above are small in the chosen universe, proving the arbitrary-base and universe clauses as well.",
+   "uses": [
+    "lem-coef-fixed-object-scat-left-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.4.7(2), right-cone argument corresponding to Remark 2.1.4.12; use the existing fixed-object left properness theorem directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-accessible-full-inverse-image",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-coherent-fixed-vertex-cofibrations",
+  "lem-coef-filtered-colimit-weak-equivalences",
+  "lem-coef-finite-limit-model-presentability",
+  "lem-coef-fixed-object-scat-left-proper",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-presheaf-local-presentability",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-small-right-lifting-accessibility",
+  "lem-coef-sorted-simplicial-algebra-model",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 2.1.4.7(1)-(2), right-cone variant; Appendix A.2.6.8 proof expanded with existing independent fixed-object and accessibility inputs. Read online; not archived in literature/, WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,7 +207,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-contravariant-slice-model",
@@ -99,7 +219,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent foundation of the derived coefficient-adjunction: saturation properties used to construct the contravariant slice model before the straightening comparison.",
+   "place": "Current main-20261015 blueprint prop-coef-integral-exceptional-adjoint.proof.md, second paragraph: \"use the reduction of integral compact supports ... and derived coefficient adjunction to compute\", followed by the displayed R Hom / R lim adjunction. This is the coherent mapping-space foundation of that calculation, through contravariant-slice-model. The historical master node has the same proof paragraph inline.",
    "via": [
     "lem-coef-contravariant-slice-model",
     "lem-coef-right-straightening-fiber-comparison",
@@ -116,5 +236,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cone-equivalence-saturation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved all perfectness clauses and pushout stability using the fixed cone vertex set, explicit connected-colimit calculation, mappingwise filtered closure, and an expanded accessible factorization / inverse-image argument. One statement-only general coherent fixed-vertex cofibration input is added. Avoided the cyclic downstream Joyal and coherent-nerve comparisons; all non-elementary inputs are cited and checked.",
+  "blueprint": "Current main-20261015 blueprint prop-coef-integral-exceptional-adjoint.proof.md, second paragraph: \"use the reduction of integral compact supports ... and derived coefficient adjunction to compute\", followed by the displayed R Hom / R lim adjunction. This is the coherent mapping-space foundation of that calculation, through contravariant-slice-model. The historical master node has the same proof paragraph inline. Steps 1-6 establish the cone-equivalence saturation needed before contravariant model recognition; Steps 7-8 establish its cobase stability. The new node supplies only the general coherent boundary cofibration calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-4f30d5d27",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-4f30d5d27 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node, the 16 cited statements and the parent contravariant-slice-model (Steps 4, 5, 11). The item statement is unchanged and correct for the right-cone (contravariant) version of HTT Prop 2.1.4.7(1)-(2) and A.2.6.12. The 8 steps check out: Step 1 presheaf/sketch local presentability; Step 2 the degreewise summand formula, which gives connected-colimit preservation and a common vertex set O=S_0+{v}; Step 3 identity-on-objects reduces DK equivalence to objectwise weak equivalence; Step 4 filtered colimits are computed mappingwise, with arbitrary filtered I; Steps 5-6 use the O x O-sorted Bergner model, small-object factorization with an accessible E, the I_O-injective accessible R, W_S=H^-1R by two-out-of-three, and accessible-full-inverse-image; Step 7 C_S(i) is injective and bijective on vertices; Step 8 fixed-object left properness, with the orientation checked. New node lem-coef-coherent-fixed-vertex-cofibrations is true: vertex-bijective cells have n>=1; C[dDelta^n]->C[Delta^n] is the free attachment of L_xy(d cube^{n-1})->L_xy(cube^{n-1}), also when x=y; the n=1 cell is a generator. Tested on the empty case, K=L, dDelta^1 and dDelta^2. It is statement-only and self-contained, not a restatement of an item clause, and not a duplicate (scanned every DAG statement mentioning coherent realization, cofibration and mono). All cited statements are in unit sk-prop-sf-biduality-general, so no tool_uses; no cycle among the 220 reachable nodes; no SGA source. The blueprint.from.place matches main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2. HTT is not archived; it is recorded as WANTED and the item is marked agent-origin. Minor: lean_audit is absent on both files, as on about 10% of side-project nodes created since 2026-10-16; not treated as a fault. No fixes."
  }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-trf-rational-frobenius-integral-model",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral models of rational Frobenius operators",
@@ -30,62 +30,228 @@
  ],
  "proof": [
   {
-   "text": "*(1).* By [def-weil-rationalization-karoubi] the morphisms of\n$D^b_c(X,E)$ are\n$\\operatorname{Hom}_{D^b_c(X,\\mathcal O_E)}(Lg_\\gamma^*K_{\\mathcal O},K_{\\mathcal O})\\otimes_{\\mathcal O_E}E$,\nthe rationalized pullback being that of the integral one\n([prop-weil-pbc-rational-transport]). Since $E=\\mathcal O_E[1/\\varpi]$,\nevery element of $H\\otimes_{\\mathcal O_E}E=H[1/\\varpi]$, for an\n$\\mathcal O_E$-module $H$, has the form $u\\otimes\\varpi^{-N}$ with\n$u\\in H$ and $N\\geq0$. This is $\\varphi_E=\\varpi^{-N}u$.",
+   "text": "*(1).* By [def-weil-rationalization-karoubi] the morphisms of\n$D^b_c(X,E)$ are\n$\\operatorname{Hom}_{D^b_c(X,\\mathcal O_E)}(Lg_\\gamma^*K_{\\mathcal O},K_{\\mathcal O})\\otimes_{\\mathcal O_E}E$,\nthe rationalized pullback being that of the integral one\n([prop-weil-pbc-rational-transport]). Since $E=\\mathcal O_E[1/\\varpi]$,\nevery element of $H\\otimes_{\\mathcal O_E}E=H[1/\\varpi]$, for an\n$\\mathcal O_E$-module $H$, has the form $u\\otimes\\varpi^{-N}$ with\n$u\\in H$ and $N\\geq0$. Explicitly, write a tensor element as a finite sum $\\sum_j h_j\\otimes(a_j/\\varpi^{e_j})$, choose $N=\\max_j e_j$ (take $N=0$ for an empty sum), and put $u=\\sum_j a_j\\varpi^{N-e_j}h_j$. Balancing gives $\\sum_j h_j\\otimes(a_j/\\varpi^{e_j})=u\\otimes\\varpi^{-N}$. This is $\\varphi_E=\\varpi^{-N}u$.",
    "uses": [
     "def-weil-rationalization-karoubi",
     "prop-weil-pbc-rational-transport"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(1)*, with the displayed elementary expansions and cited tower constructions"
+   }
   },
   {
-   "text": "*(2).* The reduction $u_n$ is the $n$-th evaluation of the morphism of\ntowers attached to $u$ by the functorial reduction tower of\n[def-weil-pbc-adic-coefficient-datum], using\n$(Lg_\\gamma^*K_{\\mathcal O})\\otimes^L A_n\\cong Lg_\\gamma^*K_n$: since\n$g_\\gamma$ is an automorphism, $Lg_\\gamma^*$ is an exact monoidal\nequivalence fixing the constant coefficient sheaves\n([def-weil-derived-pullback-tensor-hom]), so it commutes with the\nreductions and with the transitions. Hence the $u_n$ are compatible with\nthe transitions. The isomorphism $\\kappa$ of\n[prop-trf-scheme-galois-comparison] is composed of the functoriality of\npullback for $\\Phi=g_\\gamma F_X^{(q)}$ and the trivialization of\nabsolute-Frobenius pullback of [lem-trf-absolute-frobenius-site], which is\ninduced on the pro-etale site itself; both are natural in the object and\ncompatible with the monoidal reduction $-\\otimes^L_{A_{n+1}}A_n$.\nTherefore $\\psi_n=u_n\\circ\\kappa_{K_n}$ is a morphism\n$L\\Phi^*K_n\\to K_n$, i.e. a Frobenius coefficient morphism, and the\n$\\psi_n$ are compatible with the transitions.\n\nFor the iterates argue by induction on $m$, the case $m=1$ being the\ndefinition. Suppressing the composition isomorphisms of pullback (they\nare part of both recursive definitions), the recursion of\n[def-trf-frobenius-coefficient-morphism] and the induction hypothesis\ngive\n\n$$\n\\psi_{n,m}=\\psi_n\\circ L\\Phi^*\\psi_{n,m-1}\n=u_n\\circ\\kappa_{K_n}\\circ L\\Phi^*\\bigl(u_n^{[m-1]}\\bigr)\\circ\nL\\Phi^*\\bigl(\\kappa^{(m-1)}_{K_n}\\bigr).\n$$\n\nNaturality of $\\kappa$ applied to\n$u_n^{[m-1]}:Lg_\\gamma^{(m-1)*}K_n\\to K_n$ gives\n$\\kappa_{K_n}\\circ L\\Phi^*(u_n^{[m-1]})\n=Lg_\\gamma^*(u_n^{[m-1]})\\circ\\kappa_{Lg_\\gamma^{(m-1)*}K_n}$, and the\nmultiplicativity of the iterates in [prop-trf-scheme-galois-comparison],\nfor $m=1+(m-1)$, gives\n$\\kappa_{Lg_\\gamma^{(m-1)*}K_n}\\circ L\\Phi^*(\\kappa^{(m-1)}_{K_n})\n=\\kappa^{(m)}_{K_n}$. Hence\n$\\psi_{n,m}=u_n\\circ Lg_\\gamma^*(u_n^{[m-1]})\\circ\\kappa^{(m)}_{K_n}\n=u_n^{[m]}\\circ\\kappa^{(m)}_{K_n}$.",
+   "text": "*(2).* Use the current construction of [def-trf-scheme-frobenius]: on a base-changed affine chart the model Frobenius is $a\\otimes b\\mapsto a^q\\otimes b$, while $g_\\gamma$ acts on the scalar factor through $\\gamma=\\sigma^{-1}$. The factorization statement [prop-trf-frobenius-factorization], with $m=1$, gives $F_X^{(q)}=g_\\sigma\\circ\\Phi$; composing on the left with $g_\\gamma=g_\\sigma^{-1}$ gives $\\Phi=g_\\gamma\\circ F_X^{(q)}$. This fixes the orientation of the comparison used below. Each finite ring $A_n$ is annihilated by a power of $\\ell$, invertible in $k$ because $\\ell\\neq p$, so the finite-coefficient hypothesis of [prop-trf-scheme-galois-comparison] holds at every level.\n\nThe reduction $u_n$ is the $n$-th evaluation of the morphism of\ntowers attached to $u$ by the functorial reduction tower of\n[def-weil-pbc-adic-coefficient-datum], using\n$(Lg_\\gamma^*K_{\\mathcal O})\\otimes^L A_n\\cong Lg_\\gamma^*K_n$: the displayed reduction comparison is the canonical comparison in clause (1) of [lem-pur-integral-operations-preserve-constructible], applied to $g_\\gamma$ and $K_{\\mathcal O}$. The finite pullback is the exact termwise inverse image described in [def-weil-derived-pullback-tensor-hom]. For a coefficient quotient $A_b\\to A_a$, its tensor normalization sends $(x\\otimes r)\\otimes s$ to $x\\otimes q_{b,a}(r)s$; inverse image carries this formula to the identical formula on the pulled-back coefficients. Thus the canonical comparisons commute with transitions and normalization. Hence the $u_n$ are compatible with\nthe transitions. The isomorphism $\\kappa$ of\n[prop-trf-scheme-galois-comparison] is composed of the functoriality of\npullback for $\\Phi=g_\\gamma F_X^{(q)}$ and the trivialization of\nabsolute-Frobenius pullback of [lem-trf-absolute-frobenius-site], which is\ninduced on the pro-etale site itself; the first is a composition comparison, while the second is the canonical site-level trivialization of the cited lemma. Applying any coefficient quotient before or after restriction along this same site isomorphism gives the same map on sections: the quotient changes only coefficients and the site isomorphism changes only the site argument. The balancing formula just given then shows that these maps commute with derived coefficient reduction. Hence the comparison $\\kappa$ is compatible with the reduction transitions, without requiring a Weil structure.\nTherefore $\\psi_n=u_n\\circ\\kappa_{K_n}$ is a morphism\n$L\\Phi^*K_n\\to K_n$, i.e. a Frobenius coefficient morphism, and the\n$\\psi_n$ are compatible with the transitions.\n\nFor the iterates argue by induction on $m$, the case $m=1$ being the\ndefinition. Suppressing the composition isomorphisms of pullback (they\nare part of both recursive definitions), the recursion of\n[def-trf-frobenius-coefficient-morphism] and the induction hypothesis\ngive\n\n$$\n\\psi_{n,m}=\\psi_n\\circ L\\Phi^*\\psi_{n,m-1}\n=u_n\\circ\\kappa_{K_n}\\circ L\\Phi^*\\bigl(u_n^{[m-1]}\\bigr)\\circ\nL\\Phi^*\\bigl(\\kappa^{(m-1)}_{K_n}\\bigr).\n$$\n\nNaturality of $\\kappa$ applied to\n$u_n^{[m-1]}:Lg_\\gamma^{(m-1)*}K_n\\to K_n$ gives\n$\\kappa_{K_n}\\circ L\\Phi^*(u_n^{[m-1]})\n=Lg_\\gamma^*(u_n^{[m-1]})\\circ\\kappa_{Lg_\\gamma^{(m-1)*}K_n}$, and the\nmultiplicativity of the iterates in [prop-trf-scheme-galois-comparison],\nfor $m=1+(m-1)$, gives\n$\\kappa_{Lg_\\gamma^{(m-1)*}K_n}\\circ L\\Phi^*(\\kappa^{(m-1)}_{K_n})\n=\\kappa^{(m)}_{K_n}$. Hence\n$\\psi_{n,m}=u_n\\circ Lg_\\gamma^*(u_n^{[m-1]})\\circ\\kappa^{(m)}_{K_n}\n=u_n^{[m]}\\circ\\kappa^{(m)}_{K_n}$.",
    "uses": [
+    "def-trf-scheme-frobenius",
+    "prop-trf-frobenius-factorization",
     "def-weil-pbc-adic-coefficient-datum",
     "def-weil-derived-pullback-tensor-hom",
     "prop-trf-scheme-galois-comparison",
     "lem-trf-absolute-frobenius-site",
-    "def-trf-frobenius-coefficient-morphism"
+    "def-trf-frobenius-coefficient-morphism",
+    "lem-pur-integral-operations-preserve-constructible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(2)*, with the displayed elementary expansions and cited tower constructions"
+   }
   },
   {
-   "text": "*(3).* The first equality is the definition of $F_{c,m}(\\psi_n)$ in\n[def-trf-frobenius-coefficient-morphism]. By (2),\n$\\psi_{n,m}=v\\circ\\kappa^{(m)}_{K_n}$ with $v=u_n^{[m]}$, and the general\nclause of [prop-trf-graph-frobenius-operator], which allows an arbitrary,\nnot necessarily invertible $v$ and no Weil structure on $K_n$, gives\n$T_{c_m}(\\psi_{n,m})=R\\Gamma_c(X,u_n^{[m]})\\circ g_{\\gamma,c}^{m,*}$.\n\nBy [def-weil-integral-rational-qbar-compact-support],\n$R\\Gamma_c(X,-)$ on $D^b_c(X,\\mathcal O_E)$ is the derived limit of the\nlevelwise compact-support cohomology of the reduction tower of\n[def-weil-pbc-adic-coefficient-datum]; on morphisms it is the derived\nlimit of the levelwise maps. The integral morphism $u^{[m]}$ (formed from\n$u$ by the integral pullbacks) has reductions $u_n^{[m]}$, because\n$Lg_\\gamma^{i*}$ commutes with the reductions as in (2); and the integral\nbase-change isomorphism $g_{\\gamma,c}^{m,*}$ is the derived limit of the\nlevelwise ones, the pullback $Lg_\\gamma^{m*}$ carrying the reduction tower\nof $K_{\\mathcal O}$ to that of $Lg_\\gamma^{m*}K_{\\mathcal O}$. Hence\n$U_m$ is the derived limit of the levelwise composites\n$R\\Gamma_c(X,u_n^{[m]})\\circ g_{\\gamma,c}^{m,*}=F_{c,m}(\\psi_n)$.\n\nAt the stage $E$, $R\\Gamma_c(X,K_E)=R\\Gamma_c(X,K_{\\mathcal O})\\otimes_{\\mathcal O_E}E$\n([def-weil-integral-rational-qbar-compact-support]), and every\nrationalized functor or natural transformation acts on\n$\\operatorname{Hom}\\otimes_{\\mathcal O_E}E$ by $f\\otimes\\lambda\\mapsto\nF(f)\\otimes\\lambda$ ([prop-weil-pbc-rational-transport]); composition in\n$D^b_c(X,E)$ is $E$-bilinear. Hence\n$L(g_\\gamma^{i})^*\\varphi_E=\\varpi^{-N}\\,L(g_\\gamma^{i})^*u$ for each $i$,\nthe composition isomorphisms are those of the integral pullbacks, and\n\n$$\n\\varphi_E^{[m]}=\\prod_{i=0}^{m-1}\\varpi^{-N}\\cdot\n\\bigl(u\\circ Lg_\\gamma^*u\\circ\\cdots\\circ L(g_\\gamma^{m-1})^*u\\bigr)\n=\\varpi^{-Nm}u^{[m]}.\n$$\n\nApplying the $E$-linear map induced by the rationalized $R\\Gamma_c(X,-)$\nand composing with the rationalization of the integral\n$g_{\\gamma,c}^{m,*}$ gives\n$F_{c,K_E}^{\\,m}=\\varpi^{-Nm}\\bigl(R\\Gamma_c(X,u^{[m]})\\circ g_{\\gamma,c}^{m,*}\\bigr)\\otimes E\n=\\varpi^{-Nm}(U_m\\otimes E)$.",
+   "text": "*(3).* The first equality is the definition of $F_{c,m}(\\psi_n)$ in\n[def-trf-frobenius-coefficient-morphism]. By (2),\n$\\psi_{n,m}=v\\circ\\kappa^{(m)}_{K_n}$ with $v=u_n^{[m]}$, and the general\nclause of [prop-trf-graph-frobenius-operator], which allows an arbitrary,\nnot necessarily invertible $v$ and no Weil structure on $K_n$, gives\n$T_{c_m}(\\psi_{n,m})=R\\Gamma_c(X,u_n^{[m]})\\circ g_{\\gamma,c}^{m,*}$.\n\nBy [def-weil-integral-rational-qbar-compact-support],\n$R\\Gamma_c(X,-)$ on $D^b_c(X,\\mathcal O_E)$ is the derived limit of the\nlevelwise compact-support cohomology of the reduction tower of\n[def-weil-pbc-adic-coefficient-datum]; on morphisms this uses the exact linear tower lift of [lem-weil-compact-support-reduction-tower-functor], whose evaluations are the levelwise compact-support maps and whose transition comparisons compose compatibly. Thus the derived limit is applied to a morphism of the tower, not to an arbitrary collection of morphisms in separate derived categories. The integral morphism $u^{[m]}$ (formed from\n$u$ by the integral pullbacks) has reductions $u_n^{[m]}$, because\n$Lg_\\gamma^{i*}$ commutes with the reductions as in (2); and the integral base-change map is the limit of a specified system map: item (2) of [def-weil-frobenius-square-exchange] defines the integral compact-support exchange as $\\beta_!\\circ\\mathcal L_Y(e_f^c)\\circ\\alpha_!$, using the same compactification at every level. Apply it to $f_0=a_{X_0}$; this is a separated finite-type morphism, although the horizontal automorphisms are semilinear. The compact-support transport of [def-weil-frobenius-cohomology-transport] composes that exchange with the point transport of [def-weil-frobenius-point-transport]. For its integral comparison with completed pullback, use part (b) of [def-weil-inverse-image-pullback-comparison]: on a K-flat representative $P$ the map into $\\operatorname{Cone}(1-s)[-1]$ is $z\\mapsto(0,(\\theta_n(z))_n)$, where $\\theta_n$ is reduction followed by the finite coefficient comparison and $t_n\\theta_{n+1}=\\theta_n$. The restriction map defining the point transport sends a section to its restriction along $g_s$ and then to the inverse-image colimit; reduction of its coefficient before this restriction or afterwards gives the same section. Consequently, after the canonical completeness identification, this map into the cone is induced by the finite point transports on the single quotient tower, including its transitions. The point fiber is exact termwise evaluation at the final object by [def-weil-finite-coefficient-point]. Evaluation preserves products, since sheaf products are computed sectionwise, and preserves finite sums and differentials; it therefore sends the displayed shifted cone of $1-s$ to the shifted cone of the evaluated $1-s$. Thus the integral point transport is the derived limit of these levelwise maps on coefficient complexes. Finally [def-trf-frobenius-operators] defines $g_{\\gamma,c}^{m,*}$ as the composite of $m$ such transports and the pullback-composition comparison. A functor preserves this finite composite. Thus the integral $g_{\\gamma,c}^{m,*}$ is the derived limit of the levelwise ones, the pullback $Lg_\\gamma^{m*}$ carrying the reduction tower of $K_{\\mathcal O}$ to that of $Lg_\\gamma^{m*}K_{\\mathcal O}$. Hence\n$U_m$ is the derived limit of the levelwise composites\n$R\\Gamma_c(X,u_n^{[m]})\\circ g_{\\gamma,c}^{m,*}=F_{c,m}(\\psi_n)$.\n\nAt the stage $E$, $R\\Gamma_c(X,K_E)=R\\Gamma_c(X,K_{\\mathcal O})\\otimes_{\\mathcal O_E}E$\n([def-weil-integral-rational-qbar-compact-support]), and every\nrationalized functor or natural transformation acts on\n$\\operatorname{Hom}\\otimes_{\\mathcal O_E}E$ by $f\\otimes\\lambda\\mapsto\nF(f)\\otimes\\lambda$ ([prop-weil-pbc-rational-transport]); composition in\n$D^b_c(X,E)$ is $E$-bilinear. Hence\n$L(g_\\gamma^{i})^*\\varphi_E=\\varpi^{-N}\\,L(g_\\gamma^{i})^*u$ for each $i$,\nthe composition isomorphisms are those of the integral pullbacks, and\n\n$$\n\\varphi_E^{[m]}=\\prod_{i=0}^{m-1}\\varpi^{-N}\\cdot\n\\bigl(u\\circ Lg_\\gamma^*u\\circ\\cdots\\circ L(g_\\gamma^{m-1})^*u\\bigr)\n=\\varpi^{-Nm}u^{[m]}.\n$$\n\nApplying the $E$-linear map induced by the rationalized $R\\Gamma_c(X,-)$\nand composing with the rationalization of the integral\n$g_{\\gamma,c}^{m,*}$ gives\n$F_{c,K_E}^{\\,m}=\\varpi^{-Nm}\\bigl(R\\Gamma_c(X,u^{[m]})\\circ g_{\\gamma,c}^{m,*}\\bigr)\\otimes E\n=\\varpi^{-Nm}(U_m\\otimes E)$.",
    "uses": [
     "def-trf-frobenius-coefficient-morphism",
     "prop-trf-graph-frobenius-operator",
     "def-weil-integral-rational-qbar-compact-support",
     "def-weil-pbc-adic-coefficient-datum",
-    "prop-weil-pbc-rational-transport"
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "def-weil-frobenius-square-exchange",
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-frobenius-point-transport",
+    "def-trf-frobenius-operators",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-finite-coefficient-point"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(3)*, with the displayed elementary expansions and cited tower constructions"
+   }
   },
   {
-   "text": "*(4).* By the stalk normalization and (2),\n$\\psi_{n,m,\\bar y}=(u_n^{[m]})_{\\bar y}\\circ(\\kappa^{(m)}_{K_n})_{\\bar y}\\circ\\iota_{K_n}\n=u^{[m]}_{n,\\bar y}\\circ\\tau_{y,m}$. The stalk functor $L\\bar y^*$ is a\npullback, hence monoidal and compatible with the reductions\n([def-weil-derived-pullback-tensor-hom]), and $\\tau_{y,m}$ is natural and\ncompatible with the reductions by the same argument as for $\\kappa$ in\n(2), its integral form being the derived limit of the levelwise ones; so\n$U_{y,m}=u^{[m]}_{\\bar y}\\circ\\tau_{y,m}$ reduces modulo\n$\\varpi^n$ to $u^{[m]}_{n,\\bar y}\\circ\\tau_{y,m}=\\psi_{n,m,\\bar y}$. At\nthe stage $E$, the stalk of $K_E$ is $K_{\\mathcal O,\\bar y}\\otimes E$ and,\nexactly as in (3), $\\varphi^{[m]}_{E,\\bar y}=\\varpi^{-Nm}(u^{[m]}_{\\bar y}\\otimes E)$,\nwhence $F_{y,m}=\\varphi^{[m]}_{E,\\bar y}\\circ\\tau_{y,m}\n=\\varpi^{-Nm}(U_{y,m}\\otimes E)$.\n\nThe remark on $(N+1,\\varpi u)$ is $(\\varpi u)^{[m]}=\\varpi^mu^{[m]}$, by\n$\\mathcal O_E$-linearity of the pullbacks. In the example, identify the\ncoefficient categories of $X=\\Spec k$ with complexes of modules, so that\n$u=\\operatorname{diag}(1,\\ell)$ is an endomorphism of the lattice\n$\\mathcal O_E^2$. If $c\\,\\varphi_E$ were an automorphism of some lattice\n$L\\subset E^2$, then its characteristic polynomial and that of its inverse\nwould have coefficients in $\\mathcal O_E$, so its eigenvalues $c$ and\n$c\\ell$ would both be units of the integral closure of $\\mathcal O_E$;\nthen so would be their quotient $\\ell$, which is absurd.",
+   "text": "*(4).* By the stalk normalization and (2),\n$\\psi_{n,m,\\bar y}=(u_n^{[m]})_{\\bar y}\\circ(\\kappa^{(m)}_{K_n})_{\\bar y}\\circ\\iota_{K_n}\n=u^{[m]}_{n,\\bar y}\\circ\\tau_{y,m}$. Here the integral stalk coefficient complex is $\\operatorname{Fib}_s(L\\bar y^*K_{\\mathcal O})$, with completed pullback as in [def-weil-derived-pullback-tensor-hom] and exact point evaluation as in [def-weil-finite-coefficient-point]. Clause (1) of [lem-pur-integral-operations-preserve-constructible], with $f=\\bar y$, identifies the reductions of this completed pullback with $L\\bar y_n^*K_n$. Point evaluation commutes with reduction: the coefficient sheaf $\\widehat{\\mathcal O}_{E,s}=\\varprojlim_r(A_r)_s$ has no $\\varpi$-torsion, since $\\varpi a=0$ makes the component $a_{r+1}$ divisible by $\\varpi^r$, hence $a_r=0$ for every $r$. The projection to $(A_n)_s$ is locally surjective by constant lifts; its kernel is $\\varpi^n\\widehat{\\mathcal O}_{E,s}$, by dividing the compatible residues $a_{r+n}$ by $\\varpi^n$. Thus the two-term free uniformizer resolution computes reduction as the cone of $\\varpi^n$; exact termwise evaluation preserves that cone and multiplication by $\\varpi^n$. Thus the reductions of the integral stalk coefficient complex are the finite stalk coefficient complexes. This uses the completed pullback construction, without interchanging an ordinary sheaf stalk with an arbitrary inverse limit.\n\nFor the transport, the fixed-point identification $\\Phi^m\\bar y=\\bar y$ is an equality of scheme maps independent of the coefficient ring, so its induced pullback-composition identification $\\iota$ commutes with every coefficient quotient. The comparison $\\kappa^{(m)}$ is the finite composite of the comparisons in (2), each of which commutes with the quotients by the section-balancing calculation there. The two factors in $\\tau_{y,m}=(\\kappa^{(m)})_{\\bar y}\\circ\\iota$ therefore commute with those quotients, and the integral transport is their specified derived limit in the statement's stalk normalization. Reduction is a functor, so reduction of $u^{[m]}_{\\bar y}\\circ\\tau_{y,m}$ is $(u_n^{[m]})_{\\bar y}\\circ\\tau_{y,m}=\\psi_{n,m,\\bar y}$. This proves the assertion about $U_{y,m}$.\n\nAt the stage $E$ the point fiber is $\\Gamma(s,-)\\otimes_{\\mathcal O_E}E$, with morphisms extended linearly by [def-weil-finite-coefficient-point]; the completed pullback extends linearly by [prop-weil-pbc-rational-transport]. The identity already proved in (3), $\\varphi_E^{[m]}=\\varpi^{-Nm}u^{[m]}$, consequently gives $\\varphi^{[m]}_{E,\\bar y}=\\varpi^{-Nm}(u^{[m]}_{\\bar y}\\otimes E)$. The rational transport is $\\tau^{\\mathrm{int}}_{y,m}\\otimes E$ by the stipulated normalization. Bilinearity of composition now gives\n$$\nF_{y,m}=\\bigl(\\varpi^{-Nm}(u^{[m]}_{\\bar y}\\otimes E)\\bigr)\\circ(\\tau^{\\mathrm{int}}_{y,m}\\otimes E)\n=\\varpi^{-Nm}\\bigl((u^{[m]}_{\\bar y}\\circ\\tau^{\\mathrm{int}}_{y,m})\\otimes E\\bigr)\n=\\varpi^{-Nm}(U_{y,m}\\otimes E).\n$$\n\nThe remark on $(N+1,\\varpi u)$ is $(\\varpi u)^{[m]}=\\varpi^mu^{[m]}$, by\n$\\mathcal O_E$-linearity of the pullbacks. In the example, take the constant free integral object on $X=\\Spec k$ with point fiber $\\mathcal O_E^2$ and coefficient map $u=\\operatorname{diag}(1,\\ell)$. If $T=c\\,\\varphi_E$ preserved a lattice $L$ bijectively, choose $b\\geq0$ such that $\\varpi^b\\mathcal O_E^2\\subset L\\subset\\varpi^{-b}\\mathcal O_E^2$: the upper inclusion follows by bounding the coordinates of finitely many lattice generators, and the lower by expressing the standard basis in an $E$-basis chosen from $L$ and clearing its finitely many denominators. For every integer $j$, $T^j(\\varpi^be_1)=\\varpi^bc^je_1$ and $T^j(\\varpi^be_2)=\\varpi^b(c\\ell)^je_2$ belong to $L$. Thus $b+jv(c)\\geq-b$ and $b+jv(c\\ell)\\geq-b$ for all $j\\in\\mathbf Z$, forcing $v(c)=v(c\\ell)=0$. This contradicts $v(\\ell)>0$. This works for every finite $E/\\mathbf Q_\\ell$, including ramified extensions.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom"
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-integral-operations-preserve-constructible",
+    "prop-weil-pbc-rational-transport",
+    "def-weil-finite-coefficient-point"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause *(4)*, with the displayed elementary expansions and cited tower constructions"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-rationalization-karoubi",
   "prop-weil-pbc-rational-transport",
+  "def-trf-scheme-frobenius",
+  "prop-trf-frobenius-factorization",
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-derived-pullback-tensor-hom",
   "prop-trf-scheme-galois-comparison",
   "lem-trf-absolute-frobenius-site",
   "def-trf-frobenius-coefficient-morphism",
+  "lem-pur-integral-operations-preserve-constructible",
   "prop-trf-graph-frobenius-operator",
-  "def-weil-integral-rational-qbar-compact-support"
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-point-transport",
+  "def-trf-frobenius-operators",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-finite-coefficient-point"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.md",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "clearing denominators for morphisms in a scalar localization of an O_E-linear derived category",
+   "results": "Top hits: CategoryTheory.Shift.linear_of_localization, CategoryTheory.Localization.functor_linear_iff, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Localization.linear, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinear, CategoryTheory.Localization.instLinearLocalizationQ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Mathlib declarations do not state this project-level proposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct, Hom",
+   "results": "No hits (loogle: unknown identifier 'Hom')",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier reported; replaced below by a successful Functor.Linear query"
+  },
+  {
+   "tool": "grep",
+   "query": "Localization|invert.*uniformizer|tensor.*field",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Mathlib declarations do not state this project-level proposition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism after tensoring an O_E-module with E = O_E[1/varpi] is represented by an integral morphism multiplied by varpi^{-N}",
+   "results": "Top hits: Algebra.FormallyEtale.instTensorProduct, IsLocalizedModule.rTensor, IsLocalization.moduleLid, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1, IsLocalRing.map_tensorProduct_mk_eq_top, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme, TensorProduct.toIntegralClosure, IsLocalization.instIsLocalizedModuleTensorProductMap",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Mathlib declarations do not state this project-level proposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism in a localized category represented by numerator and power of a uniformizer",
+   "results": "Top hits: Localization.awayLift_mk, fontaineThetaInvertP, IsLocalization.Away.sec, IsLocalization.lift_mk', Localization.mkHom_apply, IsLocalization.lift_mk'_spec, IsLocalization.Away.surj, HomogeneousLocalization.awayMapAux_mk",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Mathlib declarations do not state this project-level proposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule S f",
+   "results": "No hits (loogle: Unknown identifier `S`)",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier reported; replaced below by a successful Functor.Linear query"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule|Localization.*module",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Mathlib declarations do not state this project-level proposition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scalar localization Hom tensor localization every element is a fraction",
+   "results": "Top hits: IsLocalization.tmul_mk', IsLocalization.instIsLocalizedModuleTensorProductMap, Localization.mkHom, IsLocalization.tensorProduct_isLocalizedModule, IsLocalizedModule.mk'_smul_mk', IsLocalization.mk', IsLocalizedModule.mapExtendScalars, instIsScalarTowerAtPrimeFractionRing_1",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Mathlib declarations do not state this project-level proposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary rational Frobenius morphism of a constructible adic derived object admits an integral multiple, with compatible finite reduction and global and stalk iterates scaled by the mth power",
+   "results": "Top hits: IsArithFrobAt, PreTilt.untilt_iterate_frobeniusEquiv_symm_pow, IsArithFrobAt.arithFrobAt, BDeRham, BDeRhamPlus, WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.exists_frobenius_solution_fractionRing, PreTilt.exists_smodEq_untiltAux",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Mathlib declarations do not state this project-level proposition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius operators on compactly supported l-adic cohomology admit integral models after clearing denominators",
+   "results": "Top hits: LinearMap.frobenius, WittVector.StandardOneDimIsocrystal.frobenius_apply, WeierstrassCurve.integralModel, IsLocalization.integerMultiple, FiniteField.Extension.frob, AlgHom.IsArithFrobAt, FiniteField.frobeniusAlgEquivOfAlgebraic, WittVector.frobenius",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Mathlib declarations do not state this project-level proposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattice models for endomorphisms of localized linear categories and compatibility with iterated Frobenius cohomology operators",
+   "results": "Top hits: PreTilt.coeff_iterate_frobeniusEquiv_symm, IsPurelyInseparable.iterateFrobeniusₛₗ, LinearMap.iterateFrobenius, PreTilt.untilt_iterate_frobeniusEquiv_symm_pow, iterateFrobeniusEquiv_add, iterateFrobeniusEquiv_symm_add, WittVector.Isocrystal, Perfection.coeff_iterate_frobeniusEquiv_symm",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Mathlib declarations do not state this project-level proposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattice models of rational Frobenius morphisms, compatible with finite reductions and cohomology and stalk operators",
+   "results": "Read search signatures; top hits: WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal, WittVector.Isocrystal.frobenius, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.Isocrystal.frob, WittVector.Isocrystal.toModule, WittVector.IsocrystalHom.frob_equivariant, WittVector.instModuleFractionRingStandardOneDimIsocrystal",
+   "date": "2026-10-17",
+   "verdict": "no match: these results concern general linear functors, ring Frobenius or Witt isocrystals, not constructible adic complexes and their global/stalk operators"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear",
+   "results": "Read search signatures; top hits: CategoryTheory.Functor.instLinearId, CategoryTheory.Functor.Linear, CategoryTheory.Functor.intLinear, CategoryTheory.Functor.natLinear, CategoryTheory.Functor.ratLinear, CategoryTheory.Functor.fullSubcategoryInclusionLinear, CategoryTheory.Functor.inducedFunctorLinear, CategoryTheory.Equivalence.inverseLinear",
+   "date": "2026-10-17",
+   "verdict": "no match: these results concern general linear functors, ring Frobenius or Witt isocrystals, not constructible adic complexes and their global/stalk operators"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|frobenius",
+   "results": "No hits; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: these results concern general linear functors, ring Frobenius or Witt isocrystals, not constructible adic complexes and their global/stalk operators"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clear denominators of a morphism in a rationalized linear category and compare its iterated Frobenius actions on compact support and stalks",
+   "results": "Read search signatures; top hits: DenomsClearable, CategoryTheory.frobeniusMorphism, denomsClearable_zero, LinearMap.frobenius, denomsClearable_C_mul_X_pow, IsPurelyInseparable.iterateFrobeniusₛₗ, CategoryTheory.Localization.instLinearLocalization', WittVector.map_frobeniusPoly",
+   "date": "2026-10-17",
+   "verdict": "no match: these results concern general linear functors, ring Frobenius or Witt isocrystals, not constructible adic complexes and their global/stalk operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism of a constructible l-adic complex over a finite field has an integral multiple, whose iterates realize the rational compact-support and stalk Frobenius maps",
+   "results": "Read search signatures; top hits: WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal.frobenius, WittVector.Isocrystal.frob, WittVector.IsocrystalHom.frob_equivariant, WittVector.Isocrystal, WittVector.StandardOneDimIsocrystal, IsPurelyInseparable.iterateFrobeniusₛₗ",
+   "date": "2026-10-17",
+   "verdict": "no match: these results concern general linear functors, ring Frobenius or Witt isocrystals, not constructible adic complexes and their global/stalk operators"
+  },
+  {
+   "tool": "grep",
+   "query": "class Linear|theorem map_smul",
+   "results": "Mathlib/CategoryTheory/Linear/LinearFunctor.lean:58 Functor.map_smul; Mathlib/CategoryTheory/Linear/Basic.lean:48 class Linear. Read their displayed signatures; neither constructs the coefficient reduction or compact-support/stalk realization. Subdirectory CategoryTheory/Linear.",
+   "date": "2026-10-17",
+   "verdict": "no match: these results concern general linear functors, ring Frobenius or Witt isocrystals, not constructible adic complexes and their global/stalk operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a linear category to a fraction field: each morphism has an integral numerator and scalar linear functors preserve products of endomorphisms",
+   "results": "Top hits: CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.instLinearLocalization', CategoryTheory.Localization.linear, CategoryTheory.Localization.instLinearLocalization, CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.functor_linear, ModuleCat.linearOverField",
+   "date": "2026-10-17",
+   "verdict": "no match: linear localization structures and linearity of functors, not the constructible Frobenius integral-model proposition"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -127,5 +293,54 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-weil"
+ "unit": "sk-d-weil",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-rational-frobenius-integral-model",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint and every cited statement. Made denominator clearing, reduction compatibility, the inductive iterate calculation, coherent compact-support exchange and tower passage, completed stalks, and the valuation obstruction explicit. Reused existing pullback-reduction and tower-functor lemmas. No new nodes or Mathlib leaves; no statement change. Preserved maintainer-owned source metadata. Repair of the landing refusal: revalidated the current scheme-Frobenius construction and all retained statement quotes; Step 2 now cites the current affine construction and the existing factorization theorem explicitly, including the direction of geometric Frobenius and the finite-coefficient hypothesis. Independent second reading: expanded the point-transport cone comparison and the completed-stalk reduction and scalar calculations, citing the existing comparison and point-fiber definitions directly.",
+  "blueprint": "Steps 1–4 realize, respectively, proof clauses *(1)*, *(2)*, *(3)*, and *(4)* of the current blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic scalar-localization transport of supplied linear functors and transformations; sk-d-weil does not construct scalar localization."
+   },
+   {
+    "node": "prop-trf-scheme-galois-comparison",
+    "why": "Natural multiplicative comparison of the two Frobenius pullbacks, used as the fixed comparison interface of the unit."
+   },
+   {
+    "node": "lem-trf-absolute-frobenius-site",
+    "why": "Canonical trivialization of absolute-Frobenius site pullback supplies the coefficient-independent comparison; not a change of trace-formula route."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic reduction formula for completed integral pullback, needed for g_gamma and the geometric point; the unit defines Frobenius data, not integral reconstruction."
+   },
+   {
+    "node": "lem-weil-compact-support-reduction-tower-functor",
+    "why": "Generic coherent derived tower lift of compact support, needed to take limits on morphisms; no such tower construction is given by sk-d-weil."
+   },
+   {
+    "node": "prop-trf-frobenius-factorization",
+    "why": "The existing finite-field factorization identifies the model Frobenius with geometric Galois Frobenius composed with absolute Frobenius; Step 2 uses it to fix the comparison orientation after the scheme-Frobenius definition changed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-rational-transport",
+  "prop-trf-scheme-galois-comparison",
+  "lem-trf-absolute-frobenius-site",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "prop-trf-frobenius-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-2f86baef0",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-2f86baef0 (reviewer sub-agent of L); spot-checked: I read the item, all four steps, the main-20261015 blueprint statement and proof clauses (1)-(4), the sk-d-weil unit and its uses, and the current statements of all 19 proof dependencies, including the blueprint_update texts. The statement is byte-identical to the current blueprint and nothing is weakened. The coefficient categories are consistent: completed O_E-sheaf integral category, raw scalar localization with no Karoubi completion (agreeing with def-weil-pbc-rational-category), adic datum with A=O_E, I=(varpi). The base change g_{gamma,c}^{m,*} is def-trf-frobenius-operators (1): m transports of def-weil-frobenius-cohomology-transport, built on the system mate of def-weil-frobenius-square-exchange (2). Step 1: denominator clearing is correct, with N=0 for an empty sum and no torsion-freeness needed. Step 2: Phi=g_gamma Fr^{(q)} correctly derived from the factorization; A_n is finite and ell-primary; lem-pur (1) applies to g_gamma; the transition balancing matches the adic datum; the kappa naturality and multiplicativity induction was checked against the coefficient-morphism recursion. Step 3: the hypotheses of the arbitrary-v graph clause hold (K_n ctf); the tower functor's hypotheses hold for a_X; the cone map of inverse-image comparison (b) is quoted correctly; varpi^{-Nm} follows from bilinearity. Step 4: I verified the inline proof that completed point sections commute with reduction (the completed sheaf on s is varpi-torsion-free, the kernel of the projection is varpi^n times it, so reduction is the cone of varpi^n); this is distinct from lem-trf-point-sections-finite-reduction (A_n to A_j). The rescaling remark is correct. The lattice-valuation argument for the diag(1,ell) example is correct for ramified E. Edge cases checked: K=0, u=0, m=n=1, empty X, X_0=Spec F_q, N=0. There are no new nodes. The duplicate search found only the item's own users. There is no cycle, no missing or merged citation, and proof_deps equals the union of the step uses. I accept the six declared tool_uses; scheme-galois-comparison, absolute-frobenius-site and frobenius-factorization are off-route and generic. No SGA source is used. No changes; fixes/ is empty."
+ }
 }
