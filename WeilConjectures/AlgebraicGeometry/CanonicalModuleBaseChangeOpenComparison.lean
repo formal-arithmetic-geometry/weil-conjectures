@@ -9,7 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
-import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonC0
+import WeilConjectures.AlgebraicGeometry.DerivedModulePullbackComparison
 import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat
 
 /-! # Canonical module base change under open restriction
@@ -55,8 +55,7 @@ counit is invertible on K-flat representatives and has the left-derived universa
 property. Naturality at the extension-by-zero counit j_!(M|U) -> M shows that its
 value on M|U agrees with epsilon on M restricted to Z. In particular this holds
 for M = G[0]. Compose the value on H[0] with the single-complex identification
-to obtain c0 and its comparison predicate. This transports the supplied epsilon,
-including any automorphism in its choice, rather than choosing an unrelated one.
+to obtain c0 and its comparison predicate (exists_isDerivedModulePullbackComparison).
 4. Transpose the derived mate of Tag 08HY under the restricted adjunction.
 The open-square identity for underived mates commutes with restriction on
 complexes. Localizing and using the derived adjunction equations gives the same
@@ -109,7 +108,8 @@ theorem exists_canonicalModuleBaseChange_open_comparison
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
       := by
   dsimp
-  obtain ⟨c0, hc0⟩ := exists_restricted_module_pullback_comparison f g g' f' sq G c hc V W hWV
+  obtain ⟨c0, hc0⟩ := exists_isDerivedModulePullbackComparison
+    (pullback.fst (f ∣_ V) (g.resLE V W hWV)) ((schemeOpenRestriction X (f ⁻¹ᵁ V)).obj G)
   obtain h := restricted_base_change_compatibility f g g' f' sq G c hc V W hWV c0 hc0
   exact ⟨c0, hc0, h⟩
 

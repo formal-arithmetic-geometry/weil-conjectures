@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.AlgebraicGeometry.EventuallyProper
@@ -116,26 +117,13 @@ private theorem flatOver_restrict
       Category.comp_id]
   exact congrArg (fun t : Γ(T, V.1) ⟶ Γ(Q, U'.1) ↦ (M.smul (t.hom r)).hom m) hring
 
-/-- Relative flatness transfers along an isomorphism of modules. -/
-private theorem flatOver_of_iso_local
-    {X S : Scheme.{u}} (f : X ⟶ S) {M N : X.Modules} (eMN : M ≅ N)
-    (hflat : N.IsFlatOver f) : M.IsFlatOver f := by
-  intro V U e
-  let φ := (f.appLE V.1 U.1 e).hom
-  let : Module Γ(S, V.1) Γ(M, U.1) := Module.compHom _ φ
-  let : Module Γ(S, V.1) Γ(N, U.1) := Module.compHom _ φ
-  have : Module.Flat Γ(S, V.1) Γ(N, U.1) := hflat V U e
-  let E := (ModuleCat.restrictScalars φ).mapIso
-    ((SheafOfModules.evaluation (R := X.ringCatSheaf) (Opposite.op U.1)).mapIso eMN)
-  exact (Module.Flat.equiv_iff E.toLinearEquiv).mpr (hflat V U e)
-
 private theorem flatOver_tensorPullback_iso
     {P Q T : Scheme.{u}} (e : P ≅ Q) (b : Q ⟶ T) (M : Q.Modules)
     (hflat : M.IsFlatOver b) :
     ((Scheme.Modules.tensorPullback e.hom).obj M).IsFlatOver (e.hom ≫ b) := by
   obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction e.hom
   let δ := adj.leftAdjointUniq (Scheme.Modules.restrictAdjunction e.hom)
-  exact flatOver_of_iso_local _ (δ.app M) (flatOver_restrict e.hom b M hflat)
+  exact (flatOver_restrict e.hom b M hflat).of_iso (δ.app M).symm
 
 /-- Geometric Noetherian descent, with no derived category or direct-image assertion.
 Source: Stacks Project, Tag 0A1H, Noetherian approximation paragraph, and Tag 081F.
