@@ -3,12 +3,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeStageTail
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare
-import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
-import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
-import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
-import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
+import Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionAt
 
 /-! # A component of composite overlap compatibility
 Source: Stacks Project, Tags 08DW and 0D5S.
@@ -16,6 +11,7 @@ Source: Stacks Project, Tags 08DW and 0D5S.
 
 @[expose] public section
 set_option autoImplicit false
+set_option linter.unusedVariables false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
@@ -112,6 +108,13 @@ theorem perfectOverlapTailProjectionComponent
         else (derivedPullback (Y.homOfLE (inf_le_left : W ≤ U))).obj A) =
       (perfectOverlapStageTransport g f pX pK pY b q hg hf U V r m hmap).hom.app (F a) ≫
         (derivedPullback m).map (σ a).hom
-    := by sorry
+    := by
+  intro W s r m eY eK hmap data F apex η σ D a
+  clear data apex η
+  cases a
+  · exact perfectOverlapTailProjectionAt f gk g hgf pX pK pY b q hg hf l U V U
+      inf_le_left A hmap
+  · exact perfectOverlapTailProjectionAt f gk g hgf pX pK pY b q hg hf l U V V
+      inf_le_right B hmap
 
 end AlgebraicGeometry

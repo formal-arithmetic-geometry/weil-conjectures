@@ -1,8 +1,8 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectOverlapTailNormalForm
-import Sheaf.AlgebraicGeometry.PerfectOverlapStageObjectTail
+public import Sheaf.AlgebraicGeometry.PerfectOverlapTailStageProjection
+public import Sheaf.AlgebraicGeometry.PerfectOverlapStageObjectTail
 
 /-! # Component factors of the stage object comparison -/
 
