@@ -173,12 +173,14 @@ noncomputable def sndRes (A B : S.Opens) (h : A ≤ B) :
 
 @[reassoc (attr := simp)]
 lemma fstRes_ι (A B : S.Opens) (h : A ≤ B) :
-    fstRes (π := π) (ρ := ρ) A B h ≫ (π ⁻¹ᵁ B).ι = (sumπ (π := π) (ρ := ρ) ⁻¹ᵁ A).ι ≫ pullback.fst π ρ :=
+    fstRes (π := π) (ρ := ρ) A B h ≫ (π ⁻¹ᵁ B).ι
+      = (sumπ (π := π) (ρ := ρ) ⁻¹ᵁ A).ι ≫ pullback.fst π ρ :=
   Scheme.Hom.resLE_comp_ι _ _
 
 @[reassoc (attr := simp)]
 lemma sndRes_ι (A B : S.Opens) (h : A ≤ B) :
-    sndRes (π := π) (ρ := ρ) A B h ≫ (ρ ⁻¹ᵁ B).ι = (sumπ (π := π) (ρ := ρ) ⁻¹ᵁ A).ι ≫ pullback.snd π ρ :=
+    sndRes (π := π) (ρ := ρ) A B h ≫ (ρ ⁻¹ᵁ B).ι
+      = (sumπ (π := π) (ρ := ρ) ⁻¹ᵁ A).ι ≫ pullback.snd π ρ :=
   Scheme.Hom.resLE_comp_ι _ _
 
 @[reassoc]
@@ -189,7 +191,8 @@ lemma homOfLE_fstRes (A A' B : S.Opens) (h : A ≤ B) (h' : A' ≤ A) :
 
 @[reassoc]
 lemma fstRes_homOfLE (A B B' : S.Opens) (h : A ≤ B) (h' : B ≤ B') :
-    fstRes (π := π) (ρ := ρ) A B h ≫ V.homOfLE (π.preimage_mono h') = fstRes (π := π) (ρ := ρ) A B' (h.trans h') := by
+    fstRes (π := π) (ρ := ρ) A B h ≫ V.homOfLE (π.preimage_mono h')
+      = fstRes (π := π) (ρ := ρ) A B' (h.trans h') := by
   rw [← cancel_mono (π ⁻¹ᵁ B').ι, Category.assoc, Scheme.homOfLE_ι, fstRes_ι, fstRes_ι]
 
 @[reassoc]
@@ -200,7 +203,8 @@ lemma homOfLE_sndRes (A A' B : S.Opens) (h : A ≤ B) (h' : A' ≤ A) :
 
 @[reassoc]
 lemma sndRes_homOfLE (A B B' : S.Opens) (h : A ≤ B) (h' : B ≤ B') :
-    sndRes (π := π) (ρ := ρ) A B h ≫ X.homOfLE (ρ.preimage_mono h') = sndRes (π := π) (ρ := ρ) A B' (h.trans h') := by
+    sndRes (π := π) (ρ := ρ) A B h ≫ X.homOfLE (ρ.preimage_mono h')
+      = sndRes (π := π) (ρ := ρ) A B' (h.trans h') := by
   rw [← cancel_mono (ρ ⁻¹ᵁ B').ι, Category.assoc, Scheme.homOfLE_ι, sndRes_ι, sndRes_ι]
 
 @[reassoc]
@@ -219,7 +223,8 @@ lemma sndRes_morphismRestrict (A B : S.Opens) (h : A ≤ B) :
 restrictions. -/
 lemma isPullback_fstRes_sndRes (W : S.Opens) :
     IsPullback (fstRes (π := π) (ρ := ρ) W W le_rfl) (sndRes (π := π) (ρ := ρ) W W le_rfl) (π ∣_ W) (ρ ∣_ W) := by
-  have w : fstRes (π := π) (ρ := ρ) W W le_rfl ≫ π ∣_ W = sndRes (π := π) (ρ := ρ) W W le_rfl ≫ ρ ∣_ W := by
+  have w : fstRes (π := π) (ρ := ρ) W W le_rfl ≫ π ∣_ W
+      = sndRes (π := π) (ρ := ρ) W W le_rfl ≫ ρ ∣_ W := by
     rw [fstRes_morphismRestrict, sndRes_morphismRestrict]
   have hR : IsPullback (sumπ (π := π) (ρ := ρ) ⁻¹ᵁ W).ι (sndRes (π := π) (ρ := ρ) W W le_rfl)
       (pullback.snd π ρ) (ρ ⁻¹ᵁ W).ι := by
@@ -259,6 +264,193 @@ noncomputable def sumChart (p : E.ι × F.ι) :
     (sumπ (π := π) (ρ := ρ) ⁻¹ᵁ E.sumU F p).toScheme ≅
       𝔸(ULift.{u} (Fin (d + e)); E.sumU F p) :=
   (E.isPullback_sumChart F p).isoIsPullback _ _ (AffineSpace.isPullback_reindex_add _ d e)
+@[reassoc (attr := simp)]
+lemma sumChart_hom_projLeft (p : E.ι × F.ι) :
+    (E.sumChart F p).hom ≫ AffineSpace.projLeft _ d e =
+      fstRes (π := π) (ρ := ρ) (E.sumU F p) (E.sumU F p) le_rfl ≫
+        (E.chartRestrict p.1 (E.sumU F p) inf_le_left).hom :=
+  IsPullback.isoIsPullback_hom_fst _ _ _ _
+
+@[reassoc (attr := simp)]
+lemma sumChart_hom_projRight (p : E.ι × F.ι) :
+    (E.sumChart F p).hom ≫ AffineSpace.projRight _ d e =
+      sndRes (π := π) (ρ := ρ) (E.sumU F p) (E.sumU F p) le_rfl ≫
+        (F.chartRestrict p.2 (E.sumU F p) inf_le_right).hom :=
+  IsPullback.isoIsPullback_hom_snd _ _ _ _
+
+lemma appTop_comp {X₁ X₂ X₃ : Scheme.{u}} (f : X₁ ⟶ X₂) (k : X₂ ⟶ X₃) (x : Γ(X₃, ⊤)) :
+    (f ≫ k).appTop x = f.appTop (k.appTop x) := by
+  rw [Scheme.Hom.comp_appTop]
+  rfl
+
+/-- The first `d` coordinates of the chart of the direct sum are those of `V`. -/
+lemma sumChart_hom_appTop_coord_castAdd (p : E.ι × F.ι) (a : Fin d) :
+    (E.sumChart F p).hom.appTop (AffineSpace.coord _ (ULift.up (Fin.castAdd e a))) =
+      (fstRes (π := π) (ρ := ρ) (E.sumU F p) (E.U p.1) inf_le_left).appTop (E.coord p.1 a) := by
+  rw [← AffineSpace.reindex_appTop_coord
+    (fun a : ULift.{u} (Fin d) ↦ ULift.up (Fin.castAdd e a.down)),
+    ← appTop_comp, sumChart_hom_projLeft, appTop_comp, chartRestrict_hom_appTop_coord,
+    ← appTop_comp, fstRes_homOfLE _ _ _ _ inf_le_left]
+
+/-- The last `e` coordinates of the chart of the direct sum are those of `X`. -/
+lemma sumChart_hom_appTop_coord_natAdd (p : E.ι × F.ι) (b : Fin e) :
+    (E.sumChart F p).hom.appTop (AffineSpace.coord _ (ULift.up (Fin.natAdd d b))) =
+      (sndRes (π := π) (ρ := ρ) (E.sumU F p) (F.U p.2) inf_le_right).appTop (F.coord p.2 b) := by
+  rw [← AffineSpace.reindex_appTop_coord
+    (fun b : ULift.{u} (Fin e) ↦ ULift.up (Fin.natAdd d b.down)),
+    ← appTop_comp, sumChart_hom_projRight, appTop_comp, chartRestrict_hom_appTop_coord,
+    ← appTop_comp, sndRes_homOfLE _ _ _ _ inf_le_right]
+
+/-- The zero section of the direct sum. -/
+noncomputable def sumZero : S ⟶ pullback π ρ :=
+  pullback.lift E.zero F.zero (by rw [E.zero_comp, F.zero_comp])
+
+@[reassoc (attr := simp)]
+lemma sumZero_fst : E.sumZero F ≫ pullback.fst π ρ = E.zero := pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma sumZero_snd : E.sumZero F ≫ pullback.snd π ρ = F.zero := pullback.lift_snd _ _ _
+
+@[reassoc (attr := simp)]
+lemma sumZero_comp : E.sumZero F ≫ sumπ (π := π) (ρ := ρ) = 𝟙 S := by
+  rw [sumZero_snd_assoc, F.zero_comp]
+
+lemma sumZero_resLE_fstRes (p : E.ι × F.ι) :
+    (E.sumZero F).resLE _ (E.sumU F p)
+        (Scheme.Hom.le_preimage_preimage_of_comp_eq_id (E.sumZero_comp F) _) ≫
+      fstRes (π := π) (ρ := ρ) (E.sumU F p) (E.U p.1) inf_le_left =
+      S.homOfLE inf_le_left ≫ E.zeroRestrict p.1 := by
+  rw [← cancel_mono (π ⁻¹ᵁ E.U p.1).ι, Category.assoc, fstRes_ι, Scheme.Hom.resLE_comp_ι_assoc,
+    sumZero_fst, Category.assoc, zeroRestrict_ι, Scheme.homOfLE_ι_assoc]
+
+lemma sumZero_resLE_sndRes (p : E.ι × F.ι) :
+    (E.sumZero F).resLE _ (E.sumU F p)
+        (Scheme.Hom.le_preimage_preimage_of_comp_eq_id (E.sumZero_comp F) _) ≫
+      sndRes (π := π) (ρ := ρ) (E.sumU F p) (F.U p.2) inf_le_right =
+      S.homOfLE inf_le_right ≫ F.zeroRestrict p.2 := by
+  rw [← cancel_mono (ρ ⁻¹ᵁ F.U p.2).ι, Category.assoc, sndRes_ι, Scheme.Hom.resLE_comp_ι_assoc,
+    sumZero_snd, Category.assoc, zeroRestrict_ι, Scheme.homOfLE_ι_assoc]
+
+lemma sumChart_hom_over (p : E.ι × F.ι) :
+    (E.sumChart F p).hom ≫ 𝔸(ULift.{u} (Fin (d + e)); E.sumU F p) ↘ E.sumU F p =
+      sumπ (π := π) (ρ := ρ) ∣_ E.sumU F p := by
+  rw [← AffineSpace.reindex_over (fun a : ULift.{u} (Fin d) ↦ ULift.up (Fin.castAdd e a.down)),
+    sumChart_hom_projLeft_assoc, chartRestrict_hom_over,
+    fstRes_morphismRestrict, Scheme.homOfLE_rfl, Category.comp_id]
+
+/-- Blueprint `def-asd-vector-bundle-zero-section`: Vector bundles
+
+**Direct sum.** For vector bundles `π : V ⟶ S` of rank `d` and `ρ : X ⟶ S` of rank `e`, the fibre
+product `V ×_S X ⟶ S` is a vector bundle of rank `d + e`, trivialised over the intersections of
+the trivialising opens, with the coordinates of `V` followed by those of `X`. -/
+noncomputable def sum : VectorBundle (d + e) (sumπ (π := π) (ρ := ρ)) where
+  zero := E.sumZero F
+  zero_comp := E.sumZero_comp F
+  ι := E.ι × F.ι
+  U := E.sumU F
+  iSup_U := by
+    rw [← iSup_inf_iSup, E.iSup_U, F.iSup_U, top_inf_eq]
+  chart := E.sumChart F
+  chart_over := E.sumChart_hom_over F
+  zero_chart p := by
+    refine AffineSpace.hom_ext ?_ fun ⟨k⟩ ↦ ?_
+    · rw [Category.assoc, sumChart_hom_over, AffineSpace.zeroSection_over,
+        ← cancel_mono (E.sumU F p).ι, Category.assoc, morphismRestrict_ι,
+        Scheme.Hom.resLE_comp_ι_assoc, sumZero_comp, Category.comp_id, Category.id_comp]
+    · rw [appTop_comp, AffineSpace.zeroSection_appTop_coord]
+      induction k using Fin.addCases with
+      | left a =>
+        rw [sumChart_hom_appTop_coord_castAdd, ← appTop_comp, sumZero_resLE_fstRes,
+          appTop_comp, coord_zeroRestrict, map_zero]
+      | right b =>
+        rw [sumChart_hom_appTop_coord_natAdd, ← appTop_comp, sumZero_resLE_sndRes,
+          appTop_comp, coord_zeroRestrict, map_zero]
+  linear p q := by
+    obtain ⟨ME, hME, hlinE⟩ := E.linear p.1 q.1
+    obtain ⟨MF, hMF, hlinF⟩ := F.linear p.2 q.2
+    have hOE : E.sumU F p ⊓ E.sumU F q ≤ E.U p.1 ⊓ E.U q.1 :=
+      inf_le_inf inf_le_left inf_le_left
+    have hOF : E.sumU F p ⊓ E.sumU F q ≤ F.U p.2 ⊓ F.U q.2 :=
+      inf_le_inf inf_le_right inf_le_right
+    let rE := (S.homOfLE hOE).appTop.hom
+    let rF := (S.homOfLE hOF).appTop.hom
+    let M : Matrix (Fin (d + e)) (Fin (d + e)) Γ((E.sumU F p ⊓ E.sumU F q).toScheme, ⊤) :=
+      Matrix.of fun k l ↦ Fin.addCases (fun a ↦ Fin.addCases (fun b ↦ rE (ME a b)) (fun _ ↦ 0) l)
+        (fun a ↦ Fin.addCases (fun _ ↦ 0) (fun b ↦ rF (MF a b)) l) k
+    have hM : M = Matrix.reindex finSumFinEquiv finSumFinEquiv
+        (Matrix.fromBlocks (ME.map rE) 0 0 (MF.map rF)) := by
+      ext k l
+      induction k using Fin.addCases <;> induction l using Fin.addCases <;> simp [M]
+    refine ⟨M, ?_, fun k ↦ ?_⟩
+    · have h₁ := hME.map rE
+      have h₂ := hMF.map rF
+      rw [RingHom.map_det] at h₁ h₂
+      rw [hM, Matrix.det_reindex_self, Matrix.det_fromBlocks_zero₂₁]
+      exact h₁.mul h₂
+    have hfst : ∀ (k : E.ι) (A : S.Opens) (h : E.sumU F p ⊓ E.sumU F q ≤ E.U k) (h₀ : A ≤ E.U k)
+        (h' : E.sumU F p ⊓ E.sumU F q ≤ A) (x : Γ((π ⁻¹ᵁ E.U k).toScheme, ⊤)),
+        ((pullback π ρ).homOfLE (Scheme.Hom.preimage_mono _ h')).appTop
+          ((fstRes (π := π) (ρ := ρ) _ _ h₀).appTop x) =
+          (fstRes (π := π) (ρ := ρ) _ _ h).appTop x := fun k A h h₀ h' x ↦ by
+      rw [← appTop_comp, homOfLE_fstRes _ _ _ h₀ h']
+    have hfst' : ∀ (k : E.ι) (h : E.sumU F p ⊓ E.sumU F q ≤ E.U k)
+        (h₀ : E.sumU F p ⊓ E.sumU F q ≤ E.U p.1 ⊓ E.U q.1)
+        (h' : E.U p.1 ⊓ E.U q.1 ≤ E.U k) (x : Γ((π ⁻¹ᵁ E.U k).toScheme, ⊤)),
+        (fstRes (π := π) (ρ := ρ) _ _ h₀).appTop ((V.homOfLE (π.preimage_mono h')).appTop x) =
+          (fstRes (π := π) (ρ := ρ) _ _ h).appTop x := fun k h h₀ h' x ↦ by
+      rw [← appTop_comp, fstRes_homOfLE _ _ _ h₀ h']
+    have hsnd : ∀ (k : F.ι) (A : S.Opens) (h : E.sumU F p ⊓ E.sumU F q ≤ F.U k) (h₀ : A ≤ F.U k)
+        (h' : E.sumU F p ⊓ E.sumU F q ≤ A) (x : Γ((ρ ⁻¹ᵁ F.U k).toScheme, ⊤)),
+        ((pullback π ρ).homOfLE (Scheme.Hom.preimage_mono _ h')).appTop
+          ((sndRes (π := π) (ρ := ρ) _ _ h₀).appTop x) =
+          (sndRes (π := π) (ρ := ρ) _ _ h).appTop x := fun k A h h₀ h' x ↦ by
+      rw [← appTop_comp, homOfLE_sndRes _ _ _ h₀ h']
+    have hsnd' : ∀ (k : F.ι) (h : E.sumU F p ⊓ E.sumU F q ≤ F.U k)
+        (h₀ : E.sumU F p ⊓ E.sumU F q ≤ F.U p.2 ⊓ F.U q.2)
+        (h' : F.U p.2 ⊓ F.U q.2 ≤ F.U k) (x : Γ((ρ ⁻¹ᵁ F.U k).toScheme, ⊤)),
+        (sndRes (π := π) (ρ := ρ) _ _ h₀).appTop ((X.homOfLE (ρ.preimage_mono h')).appTop x) =
+          (sndRes (π := π) (ρ := ρ) _ _ h).appTop x := fun k h h₀ h' x ↦ by
+      rw [← appTop_comp, sndRes_homOfLE _ _ _ h₀ h']
+    have hrE : ∀ x, (fstRes (π := π) (ρ := ρ) _ _ hOE).appTop
+        ((π ∣_ (E.U p.1 ⊓ E.U q.1)).appTop x) =
+        (sumπ (π := π) (ρ := ρ) ∣_ (E.sumU F p ⊓ E.sumU F q)).appTop (rE x) := fun x ↦ by
+      rw [← appTop_comp, fstRes_morphismRestrict, appTop_comp]
+    have hrF : ∀ x, (sndRes (π := π) (ρ := ρ) _ _ hOF).appTop
+        ((ρ ∣_ (F.U p.2 ⊓ F.U q.2)).appTop x) =
+        (sumπ (π := π) (ρ := ρ) ∣_ (E.sumU F p ⊓ E.sumU F q)).appTop (rF x) := fun x ↦ by
+      rw [← appTop_comp, sndRes_morphismRestrict, appTop_comp]
+    change (_ ≫ (E.sumChart F q).hom).appTop _ = ∑ l, _ * (_ ≫ (E.sumChart F p).hom).appTop _
+    simp only [appTop_comp]
+    rw [Fin.sum_univ_add]
+    induction k using Fin.addCases with
+    | left a =>
+      have hl := hlinE a
+      simp only [appTop_comp] at hl
+      rw [sumChart_hom_appTop_coord_castAdd,
+        hfst _ _ (inf_le_right.trans inf_le_left) _ inf_le_right,
+        ← hfst' _ _ hOE inf_le_right, coord, hl, map_sum]
+      simp only [sumChart_hom_appTop_coord_castAdd, sumChart_hom_appTop_coord_natAdd,
+        M,
+        Matrix.of_apply, Fin.addCases_left, Fin.addCases_right, map_zero, zero_mul,
+        Finset.sum_const_zero, add_zero, map_mul, hrE]
+      refine Finset.sum_congr rfl fun b _ ↦ ?_
+      rw [hfst' _ (inf_le_left.trans inf_le_left) hOE inf_le_left,
+        hfst _ _ (inf_le_left.trans inf_le_left) _ inf_le_left]
+      rfl
+    | right a =>
+      have hl := hlinF a
+      simp only [appTop_comp] at hl
+      rw [sumChart_hom_appTop_coord_natAdd,
+        hsnd _ _ (inf_le_right.trans inf_le_right) _ inf_le_right,
+        ← hsnd' _ _ hOF inf_le_right, coord, hl, map_sum]
+      simp only [sumChart_hom_appTop_coord_castAdd, sumChart_hom_appTop_coord_natAdd,
+        M,
+        Matrix.of_apply, Fin.addCases_left, Fin.addCases_right, map_zero, zero_mul,
+        Finset.sum_const_zero, zero_add, map_mul, hrF]
+      refine Finset.sum_congr rfl fun b _ ↦ ?_
+      rw [hsnd' _ (inf_le_left.trans inf_le_right) hOF inf_le_left,
+        hsnd _ _ (inf_le_left.trans inf_le_right) _ inf_le_left]
+      rfl
 
 end Sum
 
