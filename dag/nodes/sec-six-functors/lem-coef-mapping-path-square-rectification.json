@@ -10,9 +10,95 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=E_r$ and write $\\Gamma:A\\times\\Delta^1\\to S$ for evaluation of its path coordinate. The pullback condition gives $\\Gamma|_0=re_r$ and $\\Gamma|_1=R$. On $A\\times[0,1]$ prescribe $H(e_r,-)$, and on $A\\times[1,2]$ prescribe $v\\Gamma$, identifying each displayed edge with $\\Delta^1$ in increasing order. Their restrictions to the common vertex $1$ are both $vre_r$. The horn $\\Lambda^2_1$ is the union of exactly these edges, so these prescriptions agree on the intersection in every degree and give a simplicial map $h:A\\times\\Lambda^2_1\\to T$ by degreewise gluing.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "dag/nodes/sec-smooth-purity/def-cbc-enhanced-diagrams-cones.json",
+    "place": "Agent application: definition of the horn map; internal evaluation and degreewise gluing."
+   }
+  },
+  {
+   "text": "Use the lifting-property convention of [lem-coef-inner-anodyne-pushout-product]. The inclusion $i:\\Lambda^2_1\\hookrightarrow\\Delta^2$ is inner anodyne directly: every inner fibration has the right lifting property against this particular inner horn, so $i$ has the required left lifting property. Apply the cited pushout-product theorem to $i$ and the degreewise injective map $\\varnothing\\to A$. Up to switching the product factors its resulting map is $k:A\\times\\Lambda^2_1\\hookrightarrow A\\times\\Delta^2$, so $k$ is inner anodyne. Since $T$ is Kan, $T\\to\\Delta^0$ lifts every inner horn and is an inner fibration. Its lifting property against $k$ extends $h$ to $C:A\\times\\Delta^2\\to T$. The argument does not require $A$ to be Kan or nonempty.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean",
+    "place": "Lines 103-109 (SSet.innerAnodyneExtensions_pushoutObjObjι'); definitions at Inner/Basic.lean:39-43 and Quasicategory/InnerFibration.lean:61-64; application with empty source in the second factor."
+   }
+  },
+  {
+   "text": "Let $c:A\\times\\Delta^1\\to T$ be restriction of $C$ to its edge $02$. Its endpoints are $que_r$ and $vR$, because all three vertices lie in the prescribed horn. The internal functor definition gives a simplicial map $\\widehat c:A\\to\\operatorname{Fun}(\\Delta^1,T)$: on $a:\\Delta^n\\to A$ it is the map $(t,z)\\mapsto c(a(z),t)$ on $\\Delta^1\\times\\Delta^n$. This formula commutes with precomposition by every simplicial operator. Its initial evaluation is $que_r$; hence the pair $(ue_r,\\widehat c)$ lies in the degreewise pullback $E_q$. This constructs $U$, and the two coordinate evaluations give $e_qU=ue_r$ and $QU=vR$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "dag/nodes/sec-smooth-purity/def-cbc-enhanced-diagrams-cones.json",
+    "place": "Agent application: adjunction by the explicit internal-functor formula and pullback equations."
+   }
+  },
+  {
+   "text": "For a vertex $s\\in S$, the definition of homotopy fiber in [def-cbc-enhanced-diagrams-cones] identifies $R^{-1}(s)$ with the model consisting of $(x,\\gamma)$ with $\\gamma(0)=r(x)$ and $\\gamma(1)=s$, including all higher simplices of these data. Likewise $Q^{-1}(v(s))$ is the specified model for $q$ at $v(s)$. The equation $QU=vR$ restricts $U$ to these models. Its formula is $(x,\\gamma)\\mapsto(u(x),c_{(x,\\gamma)})$. Restricting $C$ to this parameter gives a triangle with successive edges $H_x$, $v\\gamma$ and long edge $c_{(x,\\gamma)}$. Thus this is exactly the coherently composed-path model of the fiber map for $H$, with the triangle giving its composition witness in every simplicial degree.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "dag/nodes/sec-smooth-purity/def-cbc-enhanced-diagrams-cones.json",
+    "place": "Agent application: homotopy-fiber definition and the constructed triangle."
+   }
+  },
+  {
+   "text": "For two fillers $C_0,C_1$, put $B=A\\times\\Delta^2$ and $K=A\\times\\Lambda^2_1$. Step 2 proved $k:K\\hookrightarrow B$ inner anodyne. The map $j:\\partial\\Delta^1\\hookrightarrow\\Delta^1$ is degreewise injective. Apply [lem-coef-inner-anodyne-pushout-product] to $k,j$: the inclusion $D=(K\\times\\Delta^1)\\amalg_{K\\times\\partial\\Delta^1}(B\\times\\partial\\Delta^1)\\hookrightarrow B\\times\\Delta^1$ is inner anodyne. Define $D\\to T$ by $C_0$ on $B\\times\\{0\\}$, $C_1$ on $B\\times\\{1\\}$, and $h\\operatorname{pr}_K$ on $K\\times\\Delta^1$. These maps agree on each overlap because both fillers restrict to $h$. Lifting against the inner fibration $T\\to\\Delta^0$ gives $F:B\\times\\Delta^1\\to T$. It restricts to $C_0,C_1$ at the homotopy endpoints and is constant in that coordinate on $K$. This is the required simplicial homotopy relative to the entire horn.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean",
+    "place": "Lines 103-109; application to the inner-anodyne map of step 2 and the boundary monomorphism of the homotopy interval."
+   }
+  },
+  {
+   "text": "Restrict $F$ to $A\\times[0,2]\\times\\Delta^1$, and call the resulting path family $f$. Its path endpoints are $que_r\\operatorname{pr}_A$ and $vR\\operatorname{pr}_A$, independent of the homotopy coordinate, since the vertices $0,2$ belong to the horn on which $F$ is fixed. The same internal-functor formula as in step 3 therefore pairs $f$ with $ue_r\\operatorname{pr}_A$ to give $\\mathcal U:A\\times\\Delta^1\\to E_q$. It has endpoint maps $U_0,U_1$, projection to $Y$ equal to $ue_r\\operatorname{pr}_A$, and projection under $Q$ equal to $vR\\operatorname{pr}_A$. Restricting its $A$ coordinate to $R^{-1}(s)$ consequently lands in $Q^{-1}(v(s))$ for the whole homotopy, proving the claimed fiberwise independence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "dag/nodes/sec-smooth-purity/def-cbc-enhanced-diagrams-cones.json",
+    "place": "Agent application: restriction of the relative homotopy and its endpoint equations."
+   }
+  },
+  {
+   "text": "Fix a vertex $a=(x,\\gamma)\\in A$. The simplex $C_a$ gives the continuous characteristic map $\\sigma:|\\Delta^2|\\to|T|$, namely $w\\mapsto[C_a,w]$ in the realization quotient. Let $e_0,e_1,e_2$ be the three standard vertices and set $d(t)=(1-t)e_0+te_2$. Set $b(t)=(1-2t)e_0+2te_1$ for $0\\leq t\\leq1/2$, and $b(t)=(2-2t)e_1+(2t-1)e_2$ for $1/2\\leq t\\leq1$. The two formulas agree at $1/2$, so $b$ is continuous. The convex interpolation $(t,z)\\mapsto\\sigma((1-z)d(t)+zb(t))$ stays in the triangle and fixes its endpoints for every $z$. At $z=0$ it is the realized $02$ edge; at $z=1$ it traverses the $01$ and $12$ edges in succession, which are $|H_x|$ and $|v\\gamma|$ by the quotient relation for faces. This is the asserted endpoint-relative path homotopy. All constructions above are conditional only on the displayed data: if $A$ or a strict fiber is empty its restrictions are unique, while a vertex $a$ is chosen only for this last assertion. No equivalence condition on $u,v$ or fibration condition on $r,q$ was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "dag/nodes/sec-smooth-purity/def-cbc-enhanced-diagrams-cones.json",
+    "place": "Agent application: explicit convex interpolation in the characteristic two-simplex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-inner-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean",
+  "place": "Explicit application of the inner-anodyne pushout-product theorem, lines 103-109, to the parameterized inner two-horn and its relative cylinder. Source route: HTT Corollaries 2.3.2.2 and 2.3.2.4 (archival copy WANTED); all application details and the realized path homotopy are written here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +141,52 @@
    "results": "{\"t\": \"2026-10-17T07:26:37Z\", \"tool\": \"grep\", \"query\": \"strictif|homotopy.*square|square.*homotopy|path.*compos\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read PathObject.trans in Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:276-285 (glues path objects rather than producing a map into the fixed interval path object); PrepathObject.RightHomotopy.trans in ModelCategory/RightHomotopy.lean:77-82 (lands in a new composite path object); BinaryProduct.square in SimplicialSet/HoFunctorMonoidal.lean:118-125 (an equality in a truncated homotopy category); FundamentalGroupoid/InducedMaps.lean:220-226 (only a class of a single topological path); and Algebra/Homology/HomotopyFiber.lean:33-56 (homological complexes). None gives a parameterized simplicial square and relative homotopies on all strict fibers. Both simplicial-set grep and the second semantic phrasing were read."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingPath|mapping_path|pathObject.*[Hh]omotopy|[Hh]omotopy.*strictif",
+   "results": "{\"t\": \"2026-10-17T09:10:17Z\", \"tool\": \"grep\", \"query\": \"mappingPath|mapping_path|pathObject.*[Hh]omotopy|[Hh]omotopy.*strictif\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\"], \"digest\": \"2b60f6d7fb18562b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read RelativeMorphism.lean:83-99 (homotopy data only), ModelCategory/PathObject.lean:276-285 (changes the path object), ModelCategory/RightHomotopy.lean:77-82 (composition into that new object), Quasicategory/TwoTruncated.lean:169-176 (single-edge homotopy, no parameterized relative fillers), HoFunctorMonoidal.lean:118-125 (truncated homotopy category), and Algebra/Homology/HomotopyFiber.lean:33-56 (homological complexes). None states all clauses of this square rectification. The reusable inner-anodyne pushout-product theorem is already a DAG Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy square of Kan complexes can be made strictly commutative using mapping path objects with endpoint preserving homotopies between composition choices",
+   "results": "{\"t\": \"2026-10-17T09:10:17Z\", \"tool\": \"leansearch\", \"query\": \"A homotopy square of Kan complexes can be made strictly commutative using mapping path objects with endpoint preserving homotopies between composition choices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyRel.rightHomotopy\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.mk\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.square\", \"HomotopicalAlgebra.PathObject.RightHomotopy\", \"CategoryTheory.CommSq.recOn\", \"CategoryTheory.CatCommSq.iso\", \"CategoryTheory.CatCommSq.casesOn\", \"CategoryTheory.CatCommSq.noConfusion\"], \"digest\": \"927609f2010ad5db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read RelativeMorphism.lean:83-99 (homotopy data only), ModelCategory/PathObject.lean:276-285 (changes the path object), ModelCategory/RightHomotopy.lean:77-82 (composition into that new object), Quasicategory/TwoTruncated.lean:169-176 (single-edge homotopy, no parameterized relative fillers), HoFunctorMonoidal.lean:118-125 (truncated homotopy category), and Algebra/Homology/HomotopyFiber.lean:33-56 (homological complexes). None states all clauses of this square rectification. The reusable inner-anodyne pushout-product theorem is already a DAG Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"path\"",
+   "results": "{\"t\": \"2026-10-17T09:10:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"path\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomologicalComplex.pathObject.homotopyEquiv\", \"HomologicalComplex.pathObject.homotopy₀₁\", \"HomologicalComplex.pathObject.homotopyEquiv_hom\", \"HomologicalComplex.pathObject.homotopyEquiv_inv\", \"HomologicalComplex.pathObject.π₀CompιHomotopy\", \"HomologicalComplex.pathObject.homotopyEquiv_homotopyInvHomId\", \"HomologicalComplex.pathObject.homotopyEquiv_homotopyHomInvId\", \"HomologicalComplex.instHasHomotopyCofiberOppositeLiftSymmIdOpNegHomOfHasPathObject\"], \"digest\": \"c6e031100c075426\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read RelativeMorphism.lean:83-99 (homotopy data only), ModelCategory/PathObject.lean:276-285 (changes the path object), ModelCategory/RightHomotopy.lean:77-82 (composition into that new object), Quasicategory/TwoTruncated.lean:169-176 (single-edge homotopy, no parameterized relative fillers), HoFunctorMonoidal.lean:118-125 (truncated homotopy category), and Algebra/Homology/HomotopyFiber.lean:33-56 (homological complexes). None states all clauses of this square rectification. The reusable inner-anodyne pushout-product theorem is already a DAG Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy commutative square of Kan complexes induces a strictly commutative map of mapping path replacements with a homotopy relative to both endpoints between choices",
+   "results": "{\"t\": \"2026-10-17T09:10:18Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy commutative square of Kan complexes induces a strictly commutative map of mapping path replacements with a homotopy relative to both endpoints between choices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.Homotopy.rel\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\", \"SSet.RelativeMorphism.Homotopy.h₁\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.h\", \"SSet.RelativeMorphism.Homotopy.h₀\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.h₁\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.h₁_assoc\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy\"], \"digest\": \"07edc1a3e64650b3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read RelativeMorphism.lean:83-99 (homotopy data only), ModelCategory/PathObject.lean:276-285 (changes the path object), ModelCategory/RightHomotopy.lean:77-82 (composition into that new object), Quasicategory/TwoTruncated.lean:169-176 (single-edge homotopy, no parameterized relative fillers), HoFunctorMonoidal.lean:118-125 (truncated homotopy category), and Algebra/Homology/HomotopyFiber.lean:33-56 (homological complexes). None states all clauses of this square rectification. The reusable inner-anodyne pushout-product theorem is already a DAG Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|homotopy.*square|square.*homotopy|path.*compos",
+   "results": "{\"t\": \"2026-10-17T09:10:29Z\", \"tool\": \"grep\", \"query\": \"strictif|homotopy.*square|square.*homotopy|path.*compos\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read RelativeMorphism.lean:83-99 (homotopy data only), ModelCategory/PathObject.lean:276-285 (changes the path object), ModelCategory/RightHomotopy.lean:77-82 (composition into that new object), Quasicategory/TwoTruncated.lean:169-176 (single-edge homotopy, no parameterized relative fillers), HoFunctorMonoidal.lean:118-125 (truncated homotopy category), and Algebra/Homology/HomotopyFiber.lean:33-56 (homological complexes). None states all clauses of this square rectification. The reusable inner-anodyne pushout-product theorem is already a DAG Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two composable paths in a Kan complex, filling the inner two horn gives a composite path and any two parametrized fillings are simplicially homotopic relative to that horn",
+   "results": "{\"t\": \"2026-10-17T09:10:31Z\", \"tool\": \"leanfinder\", \"query\": \"For two composable paths in a Kan complex, filling the inner two horn gives a composite path and any two parametrized fillings are simplicially homotopic relative to that horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.Path.mk₂\", \"SSet.horn₃₁.ι₂_desc\", \"SSet.horn₃₂.ι₃_desc\", \"SSet.Truncated.Edge.CompStruct.comp_unique\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₂.ι₁_desc\", \"SSet.horn₃₂.ι₀_desc\", \"SSet.OneTruncation₂.HoRel₂.mk\"], \"digest\": \"a8329abec31f56ea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read RelativeMorphism.lean:83-99 (homotopy data only), ModelCategory/PathObject.lean:276-285 (changes the path object), ModelCategory/RightHomotopy.lean:77-82 (composition into that new object), Quasicategory/TwoTruncated.lean:169-176 (single-edge homotopy, no parameterized relative fillers), HoFunctorMonoidal.lean:118-125 (truncated homotopy category), and Algebra/Homology/HomotopyFiber.lean:33-56 (homological complexes). None states all clauses of this square rectification. The reusable inner-anodyne pushout-product theorem is already a DAG Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-spaces-homotopy-fiber-detection",
@@ -84,5 +212,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-mapping-path-square-rectification",
+  "worker": "stage1",
+  "summary": "Seven steps give the parameterized horn, its filler, the strict map, fiber formula, relative cylinder lift, fiberwise homotopy, and explicit realized path comparison. Reused the existing Mathlib inner-anodyne pushout-product leaf; no new nodes and no statement change. Checked exact cited statements, all endpoint orientations and empty cases.",
+  "blueprint": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim, via lem-coef-algebroid-presentability: the mapping-space comparison for the transported fiber colimit is an equivalence because its base comparison and every homotopy-fiber comparison are equivalences. Auxiliary strictification needed before the homotopy-fiber detection argument: replace the specified homotopy square by a strict mapping-path square, including coherent fiber maps and independence of composite fillers.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-0d2072ae0",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-0d2072ae0 (reviewer sub-agent of L); spot-checked: I read the item in full: all 7 steps, its statement and its metadata. I read the full statements of the two cited nodes, def-cbc-enhanced-diagrams-cones and the Mathlib leaf lem-coef-inner-anodyne-pushout-product, and the parent lem-coef-spaces-homotopy-fiber-detection, whose steps 2 and 4 use this item. I checked the leaf against pinned Mathlib: Inner/PushoutProduct.lean:103-109 innerAnodyneExtensions_pushoutObjObjι', Inner/Basic.lean:43 (llp of inner fibrations), Inner/Basic.lean:54-57 (horn_ι) and InnerFibration.lean:64. The leaf statement matches. Step 1: the shared vertex value v r e_r agrees on both edges and the horn is glued degreewise. Step 2: Λ^2_1→Δ^2 is inner anodyne by definition, the pushout product with ∅→A is A×Λ^2_1→A×Δ^2, and T Kan makes T→Δ^0 an inner fibration. Step 3: the endpoints q u e_r and vR come from the horn vertices, and the internal-hom adjoint satisfies the ev0 pullback condition for E_q, so e_qU=ue_r and QU=vR. Step 4: R^{-1}(s) is literally the definition's homotopy-fiber model, and the faces of C_a are H_x, vγ and c_a. Step 5: the leaf applies to k and ∂Δ^1→Δ^1, with the domain matching exactly and the overlaps agreeing because both fillers restrict to h. Step 6: vertices 0 and 2 lie in the fixed horn, so the projections to Y and T stay constant and the homotopy restricts to each fiber. Step 7: a straight-line homotopy in |Δ^2| joins the 02 edge to the double-speed 01·12 path, and the face relations of the realization quotient identify the pieces. Edge cases tested: A empty, an empty fiber, the one-point case and a discrete T. No new nodes. An rg search found no duplicate; the nearest candidates are path-fibration-replacement, kan-pullback-path-comparison, simplicial-composition-spine and internal-hom-fibration-corner-map. No off-route tool, no tool_uses, no SGA, and no target node is involved. HTT is absent from literature/; it is recorded as WANTED and the proof is agent-written, which is self-contained. No fixes."
  }
 }

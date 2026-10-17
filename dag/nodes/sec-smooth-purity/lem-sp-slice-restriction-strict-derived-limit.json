@@ -14,9 +14,93 @@
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $j=j_U^*$ and $E=j_{U!}$. By [lem-pur-site-restriction-module-adjunction-exact], $E\\dashv j$ and both functors are exact. Define $E^{\\operatorname{Tow}}$ by applying $E$ to each term and transition. The componentwise adjunction bijections identify tower maps $E^{\\operatorname{Tow}}T\\to S$ with tower maps $T\\to j^{\\operatorname{Tow}}S$: naturality of the bijection changes the equation for each transition on one side into the equation on the other. Hence $E^{\\operatorname{Tow}}\\dashv j^{\\operatorname{Tow}}$. Both are additive and exact, since addition and exactness are levelwise by [lem-weil-tower-category-levelwise-abelian]. Exactness preserves $\\ker d/\\operatorname{im}d$, so $j$ and $j^{\\operatorname{Tow}}$ preserve quasi-isomorphisms and induce the termwise derived functors in [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact); componentwise lift of the adjunction to strict towers"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to the additive adjunction $E^{\\operatorname{Tow}}\\dashv j^{\\operatorname{Tow}}$ of Step 1, whose left adjoint is exact. It follows that if $I$ is a K-injective complex of strict towers, then $j^{\\operatorname{Tow}}I$ is K-injective as a complex of strict towers on $\\mathcal C/U$. This is K-injectivity in the whole tower category, rather than just K-injectivity of each evaluated complex.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives), applied to the two abelian tower categories"
+   }
+  },
+  {
+   "text": "For a tower of module sheaves $T$, its ordinary limit is the sheaf assigning to $V$ the compatible tuples $(t_n)$ in $\\prod_n T_n(V)$. Indeed a matching family of compatible tuples glues coordinate by coordinate; uniqueness of gluing makes the glued coordinates satisfy each transition equation. This gives the limit universal property for module sheaves [def-weil-sheaf-of-modules-category]. Restriction is sectionwise by [def-pur-localized-ringed-site]. Therefore on $V\\to U$ both $j(\\lim T)$ and $\\lim(j^{\\operatorname{Tow}}T)$ are precisely those tuples in $\\prod_nT_n(V)$. The identity on tuples gives a natural isomorphism $c_T:j\\lim T\\to\\lim j^{\\operatorname{Tow}}T$. It commutes with projections and with differentials when $T$ is a tower complex.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX (definition-localize-ringed-site), rule j_U^*F(V/U)=F(V); sectionwise compatible-tuple calculation"
+   }
+  },
+  {
+   "text": "Represent $X$ by a tower complex and take a K-injective tower resolution $q:X\\to I$ using [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Then $L_{\\mathcal A}(X)$ is represented by $\\lim I$. Step 1 makes $j^{\\operatorname{Tow}}q$ a quasi-isomorphism, and Step 2 makes its target K-injective. The same cited strict-tower model on the small slice site thus computes $L_{\\mathcal A_U}(j^{\\operatorname{Tow}}X)$ by $\\lim j^{\\operatorname{Tow}}I$. Exactness of $j$ computes the other side by $j\\lim I$. Apply $c_I$ of Step 3 to obtain the asserted isomorphism. It uses the original coefficient ring restricted to the slice, with no change of coefficients.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940 (section-derived-limits) and 0941 (lemma-derived-limit-is-ok), K-injective strict-tower computation on C and C/U"
+   }
+  },
+  {
+   "text": "This construction is canonical on the derived tower category. By [lem-weil-pbc-kinjective-hom-derived], a morphism between two objects is represented by a unique homotopy class of maps between their chosen K-injective tower representatives. The isomorphisms $c_I$ commute with these maps by the tuple formula of Step 3. Applying either restriction or inverse limit to the equations defining a chain homotopy again gives those equations, since both functors are additive. Thus the construction respects the representing homotopy classes and is natural on the derived category. Replacing a K-injective representative uses a homotopy equivalence by that same cited statement; the naturality equation identifies the two constructions. On a K-injective representative its map is exactly the underived comparison $c_I$, so this is the derived comparison specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), Hom bijection and homotopy-equivalence comparison; applied to tower categories"
+   }
+  },
+  {
+   "text": "For each $n$, the projection is represented by $\\lim I\\to I_n$. To view its target as $X_n$, invert the evaluated resolution map $q_n:X_n\\to I_n$, which is a quasi-isomorphism by [lem-weil-tower-category-levelwise-abelian]. The tuple formula gives $\\operatorname{pr}_n\\,c_I=j(\\operatorname{pr}_n)$, with source $j\\lim I$; exact restriction also inverts $j(q_n)$. This proves compatibility with every derived tower projection. Finally, for a representative $H^\\bullet$ of $H$, multiplication by a global $a$ defines a strict tower complex. A different representative is connected through quasi-isomorphisms, which are levelwise quasi-isomorphisms of these towers, so its derived tower is well defined. Sectionwise restriction [def-pur-localized-ringed-site] sends each transition $a:H^\\bullet\\to H^\\bullet$ to multiplication by $a|_U$. Applying Steps 4–5 to this tower proves the final assertion with its actual scalar transitions.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), evaluated strict tower and its projections; sites-modules.tex Tag 04IX for restricted scalar action"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940/0941 strict-tower K-injective model, combined with sites-modules.tex Tags 03DI/03DJ and derived.tex Tags 08BJ/070I; the levelwise adjunction, tuple comparison and its normalization are expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +143,31 @@
    "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.restrict, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.LocallyRingedSpace.ofRestrict, SheafOfModules.hasLimit, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply, SheafOfModules.hasLimitsOfShape, TopCat.Presheaf.restrictOpenCommRingCat_apply",
    "date": "2026-10-17",
    "verdict": "no match: hits give ordinary restrictions, sheaf limits and K-injective definitions; no canonical derived strict-tower slice comparison. Read KInjective.lean and RightDerived.lean; the comparison still needs the exact slice adjunction on tower resolutions."
+  },
+  {
+   "tool": "grep",
+   "query": "(restrict|restriction).*(derivedLimit|homotopyLimit)|(derivedLimit|homotopyLimit).*restrict",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits; ordinary restriction, exact derived-functor lifting and K-injective definitions do not state the strict-tower slice comparison or supply its exact levelwise adjunction in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a slice ringed site commutes with total derived inverse limit of strict towers",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, localCohomology.diagramComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits; ordinary restriction, exact derived-functor lifting and K-injective definitions do not state the strict-tower slice comparison or supply its exact levelwise adjunction in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact right adjoint preserves K-injective tower complexes and commutes with right derived inverse limits",
+   "results": "8 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure', CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure', CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits; ordinary restriction, exact derived-functor lifting and K-injective definitions do not state the strict-tower slice comparison or supply its exact levelwise adjunction in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-completed-pullback-adjunction",
@@ -81,5 +186,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-slice-restriction-strict-derived-limit",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all existing metadata. Proved the strict-tower restriction comparison using the existing exact slice adjunction, K-injective preservation and strict-limit model; wrote out the levelwise adjunction, sectionwise limit identification, derived naturality, tower projections and scalar transitions. No new nodes. Searched both phrasings and read the hits; no exact Mathlib or project attachment.",
+  "blueprint": "Realizes fix-lem-exchanges Proof Steps 2 and 3, integral adjunction-mate stage, through Step 3 of lem-sp-completed-pullback-adjunction. Supplies its slice/strict-derived-limit input; leaves the unit compact-support route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic K-injective computation of total strict inverse limit on each small ringed site; the compact-support unit has no separate foundational strict-limit model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-f21dd0085",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-f21dd0085 (reviewer sub-agent of L); spot-checked: Read the item, the parent lem-sp-completed-pullback-adjunction (Step 3 is the only citer), unit sk-prop-sf-cbc and every cited statement in full. Checked the Stacks sources at the cited places: 0940/0941 (sites-cohomology.tex l.5016-5106), 04IX (sites-modules.tex l.2019), 03DI and 03DJ with proof (l.2058, l.2160), 08BJ (derived.tex l.9857) and 070I (l.9632). The statement is true, unchanged and keeps the coefficient ring O|_U. Steps: (1) the exact j_{U!} -| j_U^* adjunction lifts levelwise to towers, which is elementary. (2) The 08BJ node applied to the tower adjunction gives K-injectivity in the whole tower category; every hypothesis is checked. (3) Limits of module sheaves are sectionwise compatible tuples, so the comparison is the identity. (4) The strict-tower model on C and on the small slice C/U, using a quasi-isomorphism plus a K-injective target. (5) Naturality and canonicity via the K-injective Hom leaf. (6) The projections and the multiplication-by-a tower, which restricts to multiplication by a|_U. Small cases tested: X=0, O=0, U terminal, a point site, a=0, a=1 and nilpotent a. No new nodes. Duplicate sweep: lem-pur-kinjective-restrict-localized (termwise only), lem-weil-ringed-tower-pushforward-limit-comparison (direct image), lem-sp-levelwise-kinjective-tower-image and det-sf-open-closed-pullback-limits are not duplicates. proof_deps equals the union of the uses, and 9 searches cover all three kinds. Accepted tool_use: lem-weil-pbc-ringed-strict-tower-homotopy-limit, the generic strict R lim model already accepted for the parent. The other off-unit citations are Lean-closed or Mathlib leaves. No SGA, no target touched, no fixes."
  }
 }

@@ -1,0 +1,84 @@
+{
+ "id": "lem-sf-exceptional-product-direct-image-compatibility",
+ "kind": "statement",
+ "title": "Exceptional external product is compatible with immersion direct images",
+ "statement": "Fix the finite coefficient datum of [def-trf-coefficient-conventions]: $k=\\overline{\\mathbf F}_q$ has characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\ge1$, and $A=\\mathcal O_E/\\varpi_E^n$. All schemes below are separated and of finite type over $k$. Work on their small pro-etale sites with bounded constructible constant-$A$ module complexes of finite Tor amplitude, denoted $D^b_{ctf}(-,A)$ [def-weil-finite-tor-amplitude]. Use the geometric operations and specified constructible exceptional adjunctions of [def-trf-admissibility], and the external tensor product and canonical comparisons of [def-sf-kv-maps] specialized to $A$.\n\nLet $f_i:X_i\\to Y_i$ ($i=1,2$) be separated finite-type $k$-morphisms. Let $g:Z\\hookrightarrow Y_1$ be either an open or a closed immersion, put $X_1'=X_1\\times_{Y_1}Z$, and write $g':X_1'\\to X_1$, $f_1':X_1'\\to Z$. Put $f=f_1\\times f_2$, $F=f_1'\\times f_2$, $G=g\\times\\operatorname{id}_{Y_2}$ and $G'=g'\\times\\operatorname{id}_{X_2}$. For the first-factor square let\n$$D_{f_1,g}:f_1^!Rg_*\\xrightarrow{\\sim}Rg'_*f_1'^!$$\nbe the inverse of the specified conjugate exchange of [def-trf-admissibility]; let $D_{f,G}:f^!RG_*\\xrightarrow{\\sim}RG'_*F^!$ denote the same comparison for the product square. Both are conjugates under the ordinary pullback/direct-image and constructible compact-support/exceptional adjunctions, as in [def-weil-pbc-adjunction-conjugate]. For $M\\in D^b_{ctf}(Z,A)$ and $L\\in D^b_{ctf}(Y_2,A)$ define $\\sigma$ as\n$$f_1^!Rg_*M\\boxtimes f_2^!L\\xrightarrow{D_{f_1,g}\\boxtimes1}Rg'_*f_1'^!M\\boxtimes f_2^!L\\xrightarrow{\\mathrm{Ku}_*}RG'_*(f_1'^!M\\boxtimes f_2^!L),$$\nand define $\\tau$ as\n$$f^!(Rg_*M\\boxtimes L)\\xrightarrow{f^!(\\mathrm{Ku}_*)}f^!RG_*(M\\boxtimes L)\\xrightarrow{D_{f,G}}RG'_*F^!(M\\boxtimes L),$$\nwhere each $\\mathrm{Ku}_*$ is the specified ordinary identity-factor comparison of [lem-trf-ordinary-kunneth]. Then the equality of canonical morphisms\n$$\\tau\\circ\\alpha_{f_1,f_2}(Rg_*M,L)=RG'_*\\bigl(\\alpha_{f_1',f_2}(M,L)\\bigr)\\circ\\sigma$$\nholds, naturally in $M,L$. The analogous equality in the second variable holds after the signed tensor symmetry interchanges the two factors. All ordinary direct images here mean $R(-)_*$, including for an open immersion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+  "place": "Paragraph 5: closed pushforward compatibility with alpha as an exceptional adjoint (mate-calculus check); paragraph 6: the same compatibility for open direct images; retained Step 10; the precise compatibility assertion is extracted from the retained stage-1 argument, rather than quoted as a separate theorem of the source."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-trf-admissibility",
+  "def-sf-kv-maps",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-trf-ordinary-kunneth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional external product comparison is compatible with ordinary direct image by an open or closed immersion under dual base change",
+   "results": "AlgebraicGeometry.Scheme.Hom.comp_appIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: restriction/pushforward composition for scheme module sheaves is not this extraordinary comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under dual Beck Chevalley and ordinary Kunneth identifications the canonical extraordinary product map on direct image coefficients equals the direct image of the product map",
+   "results": "CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, dualTensorHom_prodMap_zero, LightCondensed.ihomPoints_symm_comp, ContinuousMap.piComparison_fac, instMonoidalClosedCondensedSet, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.ExponentiableMorphism.coev_naturality; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: locally cartesian closed and condensed structures do not state this equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exceptional external tensor comparison commutes with ordinary direct image by open and closed immersions through the canonical dual base change isomorphism",
+   "results": "IsBaseChange.toDualBaseChange, KaehlerDifferential.tensorKaehlerEquiv, IsBaseChange.toDual_apply, Module.Dual.baseChange, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, Module.Dual.baseChange_baseChange, IsBaseChange; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: module dual base change and underived open immersions are different assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"vcomp\"",
+   "results": "CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_vcomp; 6 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate pasting is already cited by the retained argument but does not identify the geometric product maps in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|upperShriek|exceptional",
+   "results": "none; 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_comp|CommShiftCore|complete_distinguished_triangle_morphism",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean; 25 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract mates and triangle axioms do not assert this geometric equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-trf-exceptional-kunneth",
+  "date": "2026-10-17",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-verdier",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-exceptional-kunneth",
+   "place": "Paragraph 5: closed pushforward compatibility with alpha as an exceptional adjoint (mate-calculus check); paragraph 6: the same compatibility for open direct images; retained Step 10",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -117,10 +117,35 @@
    }
   },
   {
-   "text": "Put $A=\\mathcal F_S(RX,Z)$ and $B=\\mathcal F_S(RY,Z)$. Precomposition with $r$ gives the functor $r^*:A\\to B$. Write the sharp homotopies of Step 6 as $H_X:RX\\times(\\Delta^1)^\\sharp\\to RX$ from $rRf$ to $1_{RX}$ and $H_Y:RY\\times(\\Delta^1)^\\sharp\\to RY$ from $Rf r$ to $1_{RY}$, treating each edge of a path separately if necessary. Define $\\Phi_X:A\\times\\Delta^1\\to A$ as follows: on a $k$-simplex $(a,\\tau)$, where $a:RX\\times\\Delta^k\\to Z$ represents a simplex of $A$ and $\\tau:\\Delta^k\\to\\Delta^1$, its output is the map $(x,v)\\mapsto a(H_X(x,\\tau(v)),v)$. At each parameter vertex $v$, $H_X(-,\\tau(v))$ preserves marked edges, so this output is a simplex of $A$. Substituting a simplicial operator in $v$ commutes with the formula; hence it defines the stated simplicial map, with endpoints $(Rf)^*r^*$ and $1_A$. At a vertex $a$ of $A$, the component is $aH_X:RX\\times(\\Delta^1)^\\sharp\\to Z^\\natural$, which preserves markings because both $a$ and $H_X$ do. It is therefore an edge of the relative sharp mapping complex, hence an equivalence edge of $A$ by the opposite relative lifting calculus. Apply pointwise detection with $K=A$ and $\\mathcal C=A$ to conclude that $\\Phi_X$ is an equivalence edge in $\\operatorname{Fun}(A,A)$. For the other identity define $\\Phi_Y:B\\times\\Delta^1\\to B$ on $(b,\\tau)$ by $(y,v)\\mapsto b(H_Y(y,\\tau(v)),v)$. Its parameter-vertex restrictions preserve marked edges since $b_v$ and $H_Y(-,\\tau(v))$ do, and restriction in $v$ commutes with this formula. Its endpoints are $r^*(Rf)^*$ and $1_B$; its component at $b$ is the sharp edge $bH_Y$ in the core of $B$. Pointwise detection with $K=B$ and $\\mathcal C=B$ gives an equivalence edge in $\\operatorname{Fun}(B,B)$. For a multi-edge path, these constructions give a chain of equivalence edges; their inverses and composites give an equivalence of the endpoints. These are the two coherent inverse identities for $(Rf)^*$ and $r^*$ on the entire mapping quasicategories; no edge in a parameter simplex $a$ or $b$ is required to be invertible.",
+   "text": "Put $A=\\mathcal F_S(RX,Z)$ and $B=\\mathcal F_S(RY,Z)$. Precomposition with the marked inverse $r:RY\\to RX$ of Step 6 gives $r^*:A\\to B$. For each sharp edge $H_X$ in the path from $rRf$ to $1_{RX}$, apply [lem-cbc-marked-homotopy-precomposition] with $U=V=RX$, $W=Z$ and $H=H_X$. It gives a simplicial transformation between the corresponding precomposition endofunctors of $A$, with component $aH_X$ at every vertex $a:RX\\to Z$. Apply the same lemma with $U=V=RY$, $W=Z$ and each edge $H_Y$ of the other sharp path to obtain transformations on $B$ with components $bH_Y$. The lemma applies because each edge in these paths is a marked map with sharp parameter over $S$, and hence also with flat parameter. Its formula retains all parameter simplices of $A$ and $B$.",
    "uses": [
+    "lem-cbc-marked-homotopy-precomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, strong inverse data; Remark 3.1.3.1; the pointwise natural-equivalence test is Kerodon Theorem 4.4.4.4, Tag 01DK"
+   }
+  },
+  {
+   "text": "For each transformation just constructed, its vertex components are sharp mapping edges by [lem-cbc-marked-homotopy-precomposition]. The opposite relative marked lifting calculus identifies the sharp mapping complexes into $Z^\\natural$ with the cores of $A$ and $B$. Thus all those components are equivalence edges. Apply [lem-coef-infinity-pointwise-equivalences] with $(K,\\mathcal C)=(A,A)$ and $(B,B)$ respectively: each transformation is an equivalence edge in its functor simplicial set. The objects $A,B$ are quasicategories by Step 1, and their functor simplicial sets are quasicategories by [lem-coef-joyal-homotopy-exponentials].",
+   "uses": [
+    "lem-cbc-marked-homotopy-precomposition",
     "lem-coef-relative-marked-anodyne-calculus",
     "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-joyal-homotopy-exponentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, strong inverse data; Remark 3.1.3.1; the pointwise natural-equivalence test is Kerodon Theorem 4.4.4.4, Tag 01DK"
+   }
+  },
+  {
+   "text": "The endpoint identities in [lem-cbc-marked-homotopy-precomposition] identify the resulting chains in $\\operatorname{Fun}(A,A)$ and $\\operatorname{Fun}(B,B)$ as chains from $(Rf)^*r^*$ to $1_A$ and from $r^*(Rf)^*$ to $1_B$. To replace each chain by one equivalence edge, use [lem-coef-infinity-mapping-composition] in these functor quasicategories: every edge has a class in the ordinary homotopy category, equivalence edges have precisely invertible classes, and each component class is represented by an edge. Compose the classes, inverting any backwards edge. Their composite is invertible and therefore has an equivalence-edge representative with the required endpoints. For a length-zero chain use the identity edge. These two coherent natural equivalences exhibit $(Rf)^*$ and $r^*$ as inverse functor equivalences by [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-cbc-marked-homotopy-precomposition",
+    "lem-coef-infinity-mapping-composition",
     "def-cbc-enhanced-diagrams-cones"
    ],
    "elementary": false,
@@ -130,7 +155,7 @@
    }
   },
   {
-   "text": "Precomposition and $Rf\\,i_X=i_Y f$ give the strictly commuting square whose top map is $(Rf)^*:\\mathcal F_S(RY,Z)\\to\\mathcal F_S(RX,Z)$, bottom map is $f^*:\\mathcal F_S(Y,Z)\\to\\mathcal F_S(X,Z)$, and vertical maps are $i_Y^*$ and $i_X^*$. The top is a coherent functor equivalence by Step 8, and the vertical maps are such equivalences by Step 7. Regard these as Joyal weak equivalences by the quasicategory characterization. Two-out-of-three applied to the two equal composites makes $f^*$ a Joyal weak equivalence, and the same characterization makes this specified simplicial precomposition map a coherent functor equivalence. This proves the entire mapping-quasicategory assertion, rather than only its assertion about cores.",
+   "text": "Precomposition and $Rf\\,i_X=i_Y f$ give the strictly commuting square whose top map is $(Rf)^*:\\mathcal F_S(RY,Z)\\to\\mathcal F_S(RX,Z)$, bottom map is $f^*:\\mathcal F_S(Y,Z)\\to\\mathcal F_S(X,Z)$, and vertical maps are $i_Y^*$ and $i_X^*$. The top is a coherent functor equivalence by Steps 8-10, and the vertical maps are such equivalences by Step 7. Regard these as Joyal weak equivalences by the quasicategory characterization. Two-out-of-three applied to the two equal composites makes $f^*$ a Joyal weak equivalence, and the same characterization makes this specified simplicial precomposition map a coherent functor equivalence. This proves the entire mapping-quasicategory assertion, rather than only its assertion about cores.",
    "uses": [
     "lem-coef-joyal-model-structure",
     "lem-coef-joyal-quasicategory-characterizations"
@@ -142,7 +167,7 @@
    }
   },
   {
-   "text": "All indexing sets $I_n$, the countable skeleton sequence, degreewise constructions, and functorial marked replacements lie in the universe of the input. To check compatibility with a larger universe, use the same replacements and $Rf$. The small marked inverse $r$ and its sharp homotopies from Step 6 are still inverse data there. The same small coanodyne replacement maps are still trivial cofibrations: their opposite marked-anodyne cell presentations remain such presentations in the larger universe, where those same generating maps are allowed. The relative model inverse criterion and two-out-of-three consequently show that a small relative weak equivalence remains one after enlargement; the converse follows by restricting the class of test fibrations. Steps 7-9 then apply also to test cocartesian fibrations $Z$ from the larger universe. In particular the same simplicial precomposition comparison has the required meaning in every containing universe.",
+   "text": "All indexing sets $I_n$, the countable skeleton sequence, degreewise constructions, and functorial marked replacements lie in the universe of the input. To check compatibility with a larger universe, use the same replacements and $Rf$. The small marked inverse $r$ and its sharp homotopies from Step 6 are still inverse data there. The same small coanodyne replacement maps are still trivial cofibrations: their opposite marked-anodyne cell presentations remain such presentations in the larger universe, where those same generating maps are allowed. The relative model inverse criterion and two-out-of-three consequently show that a small relative weak equivalence remains one after enlargement; the converse follows by restricting the class of test fibrations. Steps 7-11 then apply also to test cocartesian fibrations $Z$ from the larger universe. In particular the same simplicial precomposition comparison has the required meaning in every containing universe.",
    "uses": [
     "lem-coef-relative-marked-anodyne-replacement",
     "lem-coef-marked-anodyne-lifting-calculus",
@@ -167,7 +192,10 @@
   "lem-coef-marked-anodyne-lifting-calculus",
   "lem-coef-joyal-model-structure",
   "lem-coef-joyal-quasicategory-characterizations",
-  "lem-coef-infinity-pointwise-equivalences"
+  "lem-cbc-marked-homotopy-precomposition",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-joyal-homotopy-exponentials",
+  "lem-coef-infinity-mapping-composition"
  ],
  "proof_origin": {
   "by": "agent",
@@ -324,7 +352,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-strict-presentation-transport-representation",
@@ -349,7 +377,7 @@
   "date": "2026-10-17",
   "item": "lem-cbc-marked-mapping-simplex-descent",
   "worker": "stage1",
-  "summary": "Ten proof steps retain the statement and derive marked simplex descent from a simultaneous finite-dimensional skeletal induction and the ordinal omega colimit comparison. Functorial coanodyne replacements, explicit flat-boundary lifting and marked inverse homotopies establish the equivalence on entire mapping quasicategories. All supporting nodes already exist: no new nodes or Mathlib leaves. Checked the empty and zero-dimensional cases, noninjective maps, arbitrary cell sets, both markings, and universe enlargement.",
+  "summary": "Repair of the human return: retain the statement, Lean record and skeletal/descent route; replace former Step 8 by three short steps. A new statement-only marked-homotopy precomposition lemma exposes the parameterized construction and sharp components. Existing pointwise equivalence, functor-quasicategory and mapping-composition nodes explicitly carry the natural-equivalence and path-composition arguments. All other proof texts are retained, with subsequent step references renumbered. One new unsplit node; zero Mathlib leaves.",
   "blueprint": "Opening 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale: the existing strict-presentation transport ancestry needs the marked local-to-global comparison as a generic simplicial foundation. No compact-support or purity step is replaced.",
   "tool_uses": [
    {
@@ -391,6 +419,14 @@
    {
     "node": "lem-coef-infinity-pointwise-equivalences",
     "why": "Detects natural equivalences between the full mapping-quasicategory endofunctors by their vertex components."
+   },
+   {
+    "node": "lem-coef-joyal-homotopy-exponentials",
+    "why": "Uses only that Fun(K,Q) is a quasicategory when Q is, to apply the existing edge-composition result inside the functor objects."
+   },
+   {
+    "node": "lem-coef-infinity-mapping-composition",
+    "why": "Uses only the ordinary homotopy category, edge representatives, and invertible-class characterization to join equivalence-edge chains in functor quasicategories."
    }
   ]
  },
@@ -404,15 +440,17 @@
   "lem-coef-marked-anodyne-lifting-calculus",
   "lem-coef-joyal-model-structure",
   "lem-coef-joyal-quasicategory-characterizations",
-  "lem-coef-infinity-pointwise-equivalences"
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-joyal-homotopy-exponentials",
+  "lem-coef-infinity-mapping-composition"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N6-0862880bd",
-  "group": "N6",
+  "reviewer": "NT-cc-Q09-b4233a978",
+  "group": "Q09",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-0862880bd (reviewer sub-agent of L); spot-checked: Read the item and all 10 steps in full, the full statements of all 12 cited nodes, and HTT Prop. 3.1.3.3 with its proof, Remark 3.1.3.4 and Prop. 3.2.2.8 with its full proof (a local copy of the HTT PDF, pp. 155-156 and 181). The statement and stmt_deps are byte-identical to the base on the side DAG; nothing is weakened. No new nodes. Checks by step: (1) the flat product marking is (marked edge, degenerate edge), so F_S equals the flat mapping object, and taking opposites gives the cocartesian form. (2) sigma_! is left Quillen and every object is cofibrant. (3) Pulling back the skeletal pushout works degreewise; I checked the markings myself, and the boundary-cell node with X empty gives the skeleta. (4) Induction over all T of dimension at most n; parts (a) and (b) of the colimit comparison need cofibrant spans with a monomorphism leg, which holds, and no left properness is needed. (5) Part (c) with theta = omega has no limit stages to check. (6)-(7) The coanodyne replacement and the order of the pushout product match the calculus; lifting against all monomorphisms makes i^* a Joyal trivial fibration. (8) The formula Phi_X(a,tau) = a(H_X(x,tau(v)),v) is over S, simplicial, has the right endpoints, and its components are sharp edges; the pointwise criterion applies with K = C = A, and the Y side is symmetric. (9) i_X^*(Rf)^* = f^* i_Y^*, so two-out-of-three gives f^*. (10) The universe enlargement is fine. Small cases: S = Delta^0 with (Delta^1)^flat (the hypothesis fails, correctly) and with (Delta^1)^sharp (true), S empty, f = identity. My own traversal of 338 reachable nodes finds no cycle. Duplicate candidates (cartesian-base-equivalence-invariance, mapping-simplex-universal-equivalence, cocartesian-categorical-base-change, cocartesian-mapping-criterion) state other results. All 10 declared tool_uses are accepted as generic foundations from sk-prop-sf-biduality-general. No SGA is cited and no coefficient category or base-change morphism is involved. Cosmetic only: the mathlib_searches list repeats queries with verdict strings that do not line up. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-b4233a978 (reviewer sub-agent of L); spot-checked: I read the item, the new node and all 15 cited nodes, plus HTT pp. 153-156 (§3.1.3: Map^flat/Map^sharp, Rem 3.1.3.1, Prop 3.1.3.3, Rem 3.1.3.4, Prop 3.1.3.5) from a copy of HTT already on this machine at /tmp/q09htt/htt.pdf. The statement, stmt_deps, Lean record and blueprint ancestry are identical to the side DAG; steps 1-7 are byte-identical; old steps 9-10 became 11-12 with the same uses. Old step 8 is replaced by steps 8-10 and one new node, lem-cbc-marked-homotopy-precomposition. Checking it degree by degree: the map lies over S, the flat markings are preserved because a degenerate parameter edge maps under tau to a degenerate edge, the map is simplicial, the endpoints are h0* and h1*, the component at a is aH, and the sharp clause holds. Small cases: U empty, S empty, a point, constant H, (Delta^1)^flat. The new node is true and strictly smaller than the item (no D1), and the duplicate search over the whole DAG found nothing. Step 8: the sharp path edges also satisfy the flat hypothesis, and (rRf)* = (Rf)*r* holds strictly. Step 9: the sharp mapping complex is the core (relative-marked-anodyne-calculus), then pointwise-equivalences with K = C = A, and Fun(A,A) is a quasicategory (joyal-homotopy-exponentials). Step 10: mapping-composition (edge representatives, invertible class iff equivalence edge) joins chains with backward edges, and the length-zero case is handled. proof_deps equals the union of uses, there is no cycle, B1-B9 hold and four search kinds are recorded. I accept the new tool_uses lem-coef-joyal-homotopy-exponentials and lem-coef-infinity-mapping-composition as generic quasicategory tools. No SGA is cited; this is not a target node and involves no coefficient category or base-change morphism. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

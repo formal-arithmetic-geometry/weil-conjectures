@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-rp-positive-product-radius",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Positive products and radii of convergence",
@@ -17,20 +17,179 @@
  ],
  "proof": [
   {
-   "text": "Nonnegativity and the constant terms $1$ give the coefficientwise\ninequality $0\\le a_{j,n}\\le A_n$. Fix $0<r<R$. Cauchy's estimate for\nthe holomorphic function represented by $F$ gives a constant $C_r$ with\n$|A_n|\\le C_r r^{-n}$ for all $n$. Hence\n$\\limsup_n a_{j,n}^{1/n}\\le r^{-1}$, so the radius of $f_j$ is at least\n$r$. Letting $r\\uparrow R$ proves the first assertion. For a reciprocal\npolynomial, a zero of $P_j$ would be a pole of its reciprocal power series,\nso no such zero can lie in the open disc.",
+   "text": "Write $a_{j,0}=1$. Fix $j\\in J$ and $n\\ge0$. By degreewise local finiteness in [d-real-series], choose a finite subset $S\\subset J$ containing $j$ and every factor with a nonzero positive-degree coefficient of degree at most $n$. The coefficient of $t^n$ in $F$ is that in $\\prod_{i\\in S}f_i$. In the coefficient expansion, the term choosing degree $n$ in factor $j$ and degree zero in every other factor is $a_{j,n}$; all other terms are nonnegative. Thus $0\\le a_{j,n}\\le A_n$. This also gives $A_n\\ge0$ (and $A_0=1$).",
+   "uses": [
+    "d-real-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-positive-product-radius.md",
+    "place": "## Proof, first sentence: coefficientwise domination"
+   }
+  },
+  {
+   "text": "Let $h$ be the function in the hypothesis, with Taylor coefficients $A_n=h^{(n)}(0)/n!$. For each real $0\\le t<R$, apply [lem-rp-taylor-sum-on-disc] at $c=0$ and $z=t$ to obtain summability of $\\sum_n A_nt^n$ in $\\mathbf C$. Taking real parts gives summability of the same real series; its terms are nonnegative by step 1. The hypotheses needed by the cited result are exactly holomorphy on $|z|<R$ and $|t|<R$; no regularity on the boundary $|z|=R$ is used.",
+   "uses": [
+    "lem-rp-taylor-sum-on-disc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-positive-product-radius.md",
+    "place": "## Proof, analytic convergence input replacing the Cauchy coefficient estimate"
+   }
+  },
+  {
+   "text": "For every $0\\le t<R$ and fixed $j$, step 1 gives $0\\le a_{j,n}t^n\\le A_nt^n$. Apply [lem-rp-nonnegative-summable-comparison] with $I=\\mathbf N$, $u_n=a_{j,n}t^n$, and $v_n=A_nt^n$, summable by step 2. Thus $\\sum_n|a_{j,n}|t^n$ converges for every such $t$. By the supremum definition of radius in [d-real-series], $R(f_j)\\ge R$. For $R=\\infty$ this means convergence at every finite $t\\ge0$. If $R=0$, the radius bound is automatic and the disc is empty.",
+   "uses": [
+    "lem-rp-nonnegative-summable-comparison",
+    "d-real-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-positive-product-radius.md",
+    "place": "## Proof, radius comparison and passage to R"
+   }
+  },
+  {
+   "text": "For the last assertion write $P=P_j=\\sum_{k=0}^d p_kt^k$ and $f_j=\\sum_{n\\ge0}b_nt^n$ with $b_n=a_{j,n}\\ge0$. By the coefficientwise product convention in [d-real-series], $Pf_j=1$ says $\\sum_{k=0}^{\\min(d,m)}p_kb_{m-k}=\\delta_{m,0}$. Put $s_N(z)=\\sum_{n=0}^N b_nz^n$. For $N\\ge d$, multiply these coefficient equations by $z^m$ and sum over $0\\le m\\le N$. Rearranging this finite sum gives $1=\\sum_{k=0}^d p_kz^k s_{N-k}(z)$.",
+   "uses": [
+    "d-real-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-positive-product-radius.md",
+    "place": "## Proof, last sentence: expand the inverse-polynomial identity"
+   }
+  },
+  {
+   "text": "Suppose $P(z)=0$ with $|z|<R$. Subtract $P(z)s_N(z)=0$ from step 4 and use the triangle inequality to obtain $1\\le\\sum_{k=0}^d |p_k||z|^k\\sum_{n=N-k+1}^N b_n|z|^n$, where the inner sum is empty for $k=0$. Step 3 gives convergence of the real series $\\sum_n b_n|z|^n$. For each fixed $k$ its displayed tail tends to zero, being a difference of two partial sums with the same limit. There are only finitely many $k$, so the right side tends to zero, contradicting $1\\le0$. Thus $P(z)\\ne0$ throughout the disc; this also covers $P=1$ and $z=0$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-positive-product-radius.md",
+    "place": "## Proof, last sentence: finite-tail contradiction prevents cancellation of numerator 1"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "d-real-series",
+  "lem-rp-taylor-sum-on-disc",
+  "lem-rp-nonnegative-summable-comparison"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-positive-product-radius.md",
-  "place": "## Proof"
+  "place": "## Proof, coefficient domination and inverse-polynomial argument; analytic input replaced by Mathlib Taylor convergence and comparison test"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "radius.*(tprod|coeff)|cauchy.*estimate|norm.*coeff.*le",
+   "results": "Hits: Mathlib/Analysis/Meromorphic/FactorizedRational.lean, Mathlib/Analysis/Polynomial/MahlerMeasure.lean, Mathlib/Analysis/Polynomial/MahlerMeasure.lean, Mathlib/Analysis/Polynomial/MahlerMeasure.lean, Mathlib/Analysis/Polynomial/MahlerMeasure.lean, Mathlib/Analysis/Polynomial/MahlerMeasure.lean, Mathlib/Analysis/Polynomial/Fourier.lean, Mathlib/Analysis/Polynomial/Fourier.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "FormalMultilinearSeries.radius",
+   "results": "Hits: FormalMultilinearSeries.constFormalMultilinearSeries_radius, FormalMultilinearSeries.radius, FormalMultilinearSeries.le_radius_of_bound, FormalMultilinearSeries.le_radius_of_eventually_le, FormalMultilinearSeries.le_radius_of_summable, FormalMultilinearSeries.le_radius_of_summable_norm, FormalMultilinearSeries.radius_eq_top_of_summable_norm, FormalMultilinearSeries.radius_eq_top_iff_summable_norm. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite product of power series with nonnegative coefficients and constant term one dominates each factor coefficientwise and each factor has at least the radius of convergence of the product",
+   "results": "Hits: FormalMultilinearSeries.le_radius_pi, FormalMultilinearSeries.radius_pi_le, FormalMultilinearSeries.radius_prod_eq_min, FormalMultilinearSeries.radius_le_of_le, PowerSeries.IsRestricted.mul, FormalMultilinearSeries.radius_pi_eq_iInf, PowerSeries.WithPiTopology.summable_prod_of_tendsto_order_atTop_nhds_top, FormalMultilinearSeries.radius_right_inv_pos_of_radius_pos_aux1. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*(iteratedDeriv|cauchy)|hasFPowerSeriesOnBall|le_radius",
+   "results": "Hits: Mathlib/Analysis/Complex/AbelLimit.lean, Mathlib/Analysis/Complex/Liouville.lean, Mathlib/Analysis/Complex/Liouville.lean, Mathlib/Analysis/Complex/Liouville.lean, Mathlib/Analysis/Complex/RemovableSingularity.lean, Mathlib/Analysis/Complex/Norm.lean, Mathlib/Analysis/Complex/TaylorSeries.lean, Mathlib/Analysis/Complex/CauchyIntegral.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cauchy estimates bound coefficients of the Taylor power series of a holomorphic function on a closed disk",
+   "results": "Hits: norm_cauchyPowerSeries_le, Complex.norm_iteratedDeriv_le_of_forall_mem_sphere_norm_le, Complex.norm_cderiv_le, Complex.norm_deriv_le_of_forall_mem_sphere_norm_le, Complex.hasSum_taylorSeries_on_ball, HasFPowerSeriesWithinOnBall.image_sub_sub_deriv_le, Complex.hasSum_taylorSeries_on_emetric_ball, Complex.taylorSeries_eq_on_emetric_ball. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "hasSum_taylorSeries_on_eball|hasSum_taylorSeries_on_ball",
+   "results": "Hits: 15, 20, 45, 67, 87. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hasSum_taylorSeries_on_eball\"",
+   "results": "Hits: Complex.hasSum_taylorSeries_on_eball. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonnegative formal power series factor of infinite product has radius of convergence at least that of product",
+   "results": "Hits: FormalMultilinearSeries.le_radius_pi, FormalMultilinearSeries.radius_prod_eq_min, FormalMultilinearSeries.radius_pi_eq_iInf, FormalMultilinearSeries.radius_pi_le, HasFPowerSeriesWithinOnBall.prod, HasFPowerSeriesWithinOnBall.radius_pos, FormalMultilinearSeries.radius, HasFPowerSeriesOnBall.radius_pos. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taylor series of a complex differentiable function on an open disk converges to the function at every point of the disk",
+   "results": "Hits: Complex.taylorSeries_eq_on_ball, Complex.taylorSeries_eq_on_ball', Complex.hasSum_taylorSeries_on_ball, Complex.taylorSeries_eq_on_emetric_ball, Complex.taylorSeries_eq_on_emetric_ball', Complex.hasSum_taylorSeries_on_emetric_ball, Differentiable.hasFPowerSeriesOnBall, DifferentiableOn.hasFPowerSeriesOnBall. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem Summable.of_nonneg_of_le",
+   "results": "Hits: Mathlib/Topology/Algebra/InfiniteSum/ENNReal.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma hasSum_taylorSeries_on_eball",
+   "results": "Hits: Mathlib/Analysis/Complex/TaylorSeries.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Taylor series of a complex differentiable function converges to the function everywhere in an open disk centered at the expansion point",
+   "results": "Hits: Complex.taylorSeries_eq_of_entire, Complex.taylorSeries_eq_on_emetric_ball', Complex.taylorSeries_eq_on_ball, Complex.hasSum_taylorSeries_on_ball, Complex.taylorSeries_eq_on_ball', Complex.hasSum_taylorSeries_on_emetric_ball, Complex.taylorSeries_eq_on_emetric_ball, Complex.taylorSeries_eq_of_entire'. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonnegative real sequence dominated termwise by a summable real sequence is summable",
+   "results": "Hits: NNReal.summable_of_le, Summable.of_nonneg_of_le, NNReal.exists_le_hasSum_of_le, Summable.of_nnnorm_bounded, Summable.of_norm_bounded, summable_of_sum_le, ENNReal.tsum_le_tsum, Summable.of_norm_bounded_eventually_nat. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "Summable.of_nonneg_of_le",
+   "results": "Hits: Summable.of_nonneg_of_le. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If two real sequences satisfy zero less than or equal to u n less than or equal to v n and v is summable then u is summable",
+   "results": "Hits: Summable.of_nonneg_of_le, NNReal.summable_of_le, Summable.tsum_lt_tsum_of_nonneg, NNReal.exists_le_hasSum_of_le, summable_of_sum_range_le, NNReal.tsum_lt_tsum, NNReal.summable_of_sum_range_le, summable_of_sum_le. ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: product-valued FormalMultilinearSeries.pi/prod is not multiplication of scalar series. Taylor convergence and summability comparison are recorded as separate Mathlib leaves."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -52,5 +211,21 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankin"
+ "unit": "sk-p-real-rankin",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-rp-positive-product-radius",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged; wrote degreewise coefficient domination, Taylor convergence at positive real arguments, summability comparison, and the finite polynomial-times-partial-sum identity and tail estimate. Created two generic Mathlib leaves. Existing project radius_tprod_le_radius and eval_ne_zero_of_lt_radius_inv cover the analytic-radius comparison and polynomial clause but do not state the full holomorphic-Taylor hypothesis of this item. No exact attachment was found.",
+  "blueprint": "Realizes the coefficient comparison and analytic radius comparison in sk-p-real-rankin step 1, and the no-cancellation assertion of step 2. The old blueprint proof is expanded without changing either unit step. Current main-20261015 statement was read and agrees with the imported statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-8e708bacd",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-8e708bacd (reviewer sub-agent of L); spot-checked: Read the item, both new leaves, d-real-series, unit sk-p-real-rankin (both steps), the chapter record, and the blueprint text in master and main-20261015. The statement and proof are identical in both snapshots; the item's statement is unchanged and not weakened. Step 1: a finite subset S from local finiteness gives 0<=a_{j,n}<=A_n by the coefficient expansion; elementary and correct. Step 2: Complex.hasSum_taylorSeries_on_eball (TaylorSeries.lean:87; CompleteSpace, DifferentiableOn on eball, z in eball, r in ENNReal) applied at c=0, z=t in [0,R); the terms are real, so the series is summable in R. Step 3: Summable.of_nonneg_of_le (ENNReal.lean:530) with u=a_{j,n}t^n, v=A_nt^n; R itself is then admissible in the sup of d-real-series, so R(f_j)>=R, including R=0 and R=infinity. Step 4: double-sum identity 1=sum_k p_k z^k s_{N-k}(z) for N>=d, checked. Step 5: subtracting P(z)s_N gives 1 <= finitely many tails of the convergent sum b_n|z|^n, which tend to 0; contradiction, checked. The steps realize unit step 1 (domination, radius definition) and unit step 2 (a zero cannot cancel the numerator 1); route kept, no tool_uses needed. Both leaves are exact or one-line Mathlib specializations, self-contained, not clauses of the item. A scan of all DAG statements and mathlib_match fields found no duplicates. Project Lean radius_tprod_le_radius and eval_ne_zero_of_lt_radius_inv do not state the item's holomorphic-Taylor hypothesis, so I agree nothing is attached. Small cases tested: (1-t)^{-1}(1-2t)^{-1} with R=1/2; the counterexample 1+t times (1+t)^{-1} shows the nonnegativity hypothesis is necessary. No SGA. Not a target node, so the base-change check does not apply. No fixes."
+ }
 }

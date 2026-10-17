@@ -1,0 +1,88 @@
+{
+ "id": "lem-trf-graph-frobenius-point-exchange",
+ "kind": "statement",
+ "title": "Ordinary Frobenius exchange followed by point transport is pullback",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber] and the finite coefficient ring $A=\\mathcal O_E/\\varpi_E^n$, with $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ finite and $n\\geq1$, of [def-trf-coefficient-conventions]. Let $Y_0$ be proper of finite type over $k_0$, put $Y=Y_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and write $a_Y:Y\\to s$. Put $\\gamma=(z\\mapsto z^q)^{-1}$, $g_Y=\\operatorname{id}_{Y_0}\\times\\operatorname{Spec}(\\gamma)$ and $h=\\operatorname{Spec}(\\gamma)$ [def-trf-scheme-frobenius]. For each $m\\geq1$ the relation $a_Yg_Y^m=h^ma_Y$ specifies the Frobenius Cartesian square [lem-weil-frobenius-square-cartesian]. Use derived pullback [def-weil-derived-pullback-tensor-hom] and direct image [def-weil-derived-direct-image] at $A$. For $M\\in D^b_{ctf}(Y,A)$ let\n$$\ne_{m,M}:L(h^m)^*Ra_{Y*}M\\longrightarrow Ra_{Y*}L(g_Y^m)^*M\n$$\nbe the direct-image exchange mate of [def-weil-frobenius-square-exchange], with the Frobenius automorphisms replaced by their $m$-th powers, and let $\\iota^{(m)}$ be the restriction--colimit-insertion--derived-pullback point transport [def-weil-frobenius-point-transport] along $h^m$. Use the point fiber [def-weil-finite-coefficient-point] and $R\\Gamma(Y,-)=\\operatorname{Fib}_s(Ra_{Y*}(-))$ [def-weil-ordinary-compact-cohomology]. Let $\\rho_{g_Y^m,M}:R\\Gamma(Y,M)\\to R\\Gamma(Y,L(g_Y^m)^*M)$ be ordinary pullback induced by its adjunction unit and the canonical constant-sheaf identification. Then\n$$\n\\operatorname{Fib}_s(e_{m,M})\\circ\\iota^{(m)}_{Ra_{Y*}M}=\\rho_{g_Y^m,M}\n$$\nin $D(A)$, naturally in $M$. In particular this uses the semilinear base map $h^m$, without assuming that $g_Y^m$ is a $k$-morphism.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+  "place": "Step 2: the semilinear ordinary exchange/point-transport mate and derived adjunction calculation"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "lem-weil-frobenius-square-cartesian",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-frobenius-point-transport",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a Frobenius Cartesian square, the derived direct image base change mate composed with geometric point transport equals ordinary global sections pullback along the source automorphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjUnitToUnit\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\"], \"digest\": \"4d42d31a1bd05084\", \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate formulas, scheme pullback comparisons and stalk maps do not identify this specified derived point-transport composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjoint base change mate and transport at a point induce the canonical derived cohomology pullback for a semilinear automorphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.baseChangeHom\", \"IsBaseChange.dual\", \"IsBaseChange.toDual_apply\", \"IsBaseChange.ofEquiv\", \"IsBaseChange.endHom\", \"IsBaseChange.linearMapLeftRightHom\", \"CategoryTheory.mateEquiv\", \"LinearMap.liftBaseChange_comp\"], \"digest\": \"6d83073578bd93c6\", \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate formulas, scheme pullback comparisons and stalk maps do not identify this specified derived point-transport composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\", \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate formulas, scheme pullback comparisons and stalk maps do not identify this specified derived point-transport composite"
+  },
+  {
+   "tool": "grep",
+   "query": "(baseChange|exchange|mate).*(globalSections|sections)|((globalSections|sections).*(baseChange|exchange|mate))",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/CStarAlgebra/ApproximateUnit.lean\", \"Mathlib/Analysis/CStarAlgebra/ApproximateUnit.lean\"], \"digest\": \"760d6f3558836702\", \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate formulas, scheme pullback comparisons and stalk maps do not identify this specified derived point-transport composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image exchange mate for a semilinear automorphism composed with geometric point transport equals ordinary cohomology pullback",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"groupCohomology.map_H0Iso_hom_f_apply\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁\", \"groupCohomology.map_H0Iso_hom_f\", \"groupCohomology.cocyclesMap_comp_isoCocycles₁_hom_apply\", \"groupCohomology.cochainsMap_f_2_comp_cochainsIso₂_apply\"], \"digest\": \"062e1b714c513446\", \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate formulas, scheme pullback comparisons and stalk maps do not identify this specified derived point-transport composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback morphism on cohomology of a geometric fiber equals the exchange transformation composed with the canonical point transport",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.pullbackMap\", \"TopCat.Presheaf.stalkPullbackHom\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"CategoryTheory.Limits.pullbackComparison\", \"TopCat.Presheaf.stalkPullbackInv\", \"HasFibers.pullbackMap.isCartesian\", \"AlgebraicGeometry.Scheme.Cover.pullbackHom_map\"], \"digest\": \"1fa10b1818f5a3be\", \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate formulas, scheme pullback comparisons and stalk maps do not identify this specified derived point-transport composite"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-trf-graph-frobenius-operator",
+  "date": "2026-10-17",
+  "group": "N4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-graph-frobenius-operator",
+   "place": "Step 2, identification with compact-support base change; ordinary direct-image exchange and point transport before the open-square exchange",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

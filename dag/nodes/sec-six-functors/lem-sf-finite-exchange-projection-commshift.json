@@ -1,0 +1,85 @@
+{
+ "id": "lem-sf-finite-exchange-projection-commshift",
+ "kind": "statement",
+ "title": "Finite geometric exchange and projection commute with shifts",
+ "statement": "Fix the finite coefficient datum of [def-trf-coefficient-conventions]: $k=\\overline{\\mathbf F}_q$ has characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\ge1$, and $A=\\mathcal O_E/\\varpi_E^n$. All schemes below are separated and of finite type over $k$. Work on their small pro-etale sites with bounded constructible constant-$A$ module complexes of finite Tor amplitude, denoted $D^b_{ctf}(-,A)$ [def-weil-finite-tor-amplitude]. Use the geometric operations and specified constructible exceptional adjunctions of [def-trf-admissibility], and the external tensor product and canonical comparisons of [def-sf-kv-maps] specialized to $A$.\n\nLet $f:X\\to Y$ and $g:Y'\\to Y$ be separated finite-type $k$-morphisms, and let $X'=X\\times_Y Y'$ with projections $f':X'\\to Y'$ and $g':X'\\to X$. Use the exchange and projection transformations whose chosen-compactification formulas are those of [def-exchange-projection]; on the bounded etale-origin domain they are independent of the compactification by [fix-lem-exchanges](4) and [fix-prop-projection-formula] (compatibility with the compactification comparisons):\n$$\\operatorname{Ex}_{!,K}:Lg^*Rf_!K\\longrightarrow Rf'_!Lg'^*K,\\qquad\n\\operatorname{PF}_{f,K,L}:Rf_!K\\otimes_A^L L\\longrightarrow Rf_!(K\\otimes_A^L Lf^*L),$$\nfor $K\\in D^b_{ctf}(X,A)$ and $L\\in D^b_{ctf}(Y,A)$. Give pullback, tensor and compact support their canonical derived integer-shift comparisons, including the signed total-tensor comparisons in either tensor input. The exchange commutes with shifting $K$, and the projection transformation commutes separately with shifting $K$ and with shifting $L$. Precisely, for each of these three one-variable transformations $\\tau:\\Phi\\to\\Psi$, every integer $m$, and every input $M$, the equality\n$$\\chi_{\\Psi,m,M}\\circ\\tau_{M[m]}=\\tau_M[m]\\circ\\chi_{\\Phi,m,M}$$\nholds, where $\\chi_{F,m,M}:F(M[m])\\xrightarrow{\\sim}F(M)[m]$ is the indicated canonical composite shift. These are the actual geometric maps. Their inverses, wherever the maps are isomorphisms, satisfy the same equation with source and target reversed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+  "place": "Paragraph 4: both sides of alpha are exact in each coefficient, so triangle two-out-of-three applies; retained Step 9, geometric exchange/projection shift check; the precise compatibility assertion is extracted from the retained stage-1 argument, rather than quoted as a separate theorem of the source."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-trf-admissibility",
+  "def-sf-kv-maps",
+  "def-exchange-projection",
+  "fix-lem-exchanges",
+  "fix-prop-projection-formula"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact support base change exchange and projection formula for derived etale sheaves commute with integer shifts",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, SheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: underived sheaf pullbacks and differentials do not assert compact-support shift equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric derived shriek Beck Chevalley and tensor projection transformations are natural transformations of triangulated functors",
+   "results": "CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ', CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ, CategoryTheory.Adjunction.IsTriangulated.comp, CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.Functor.mapTriangleCompIso, CategoryTheory.Functor.isTriangulated_iff_comp_right, CategoryTheory.Functor.mapTriangleCompIso_hom_app_hom₁, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic exact-functor/adjunction structures leave these geometric equations to prove"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support base change exchange and compact support projection maps of finite coefficient etale derived categories commute with shifting either coefficient complex",
+   "results": "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.commShiftMapCochainComplex, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.shiftFunctorComm_hom_app_f, CochainComplex.isStrictlyGE_shift, CategoryTheory.Equivalence.commShiftFunctor, IsBaseChange.finsuppPow; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: derived exact-functor shift instances do not identify these structural maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans.CommShift\"",
+   "results": "CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.NatTrans.CommShiftCore, CategoryTheory.NatTrans.CommShiftCore.zero, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor; 12 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: this defines shift compatibility and its closure properties, not compatibility of geometric exchange/projection"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|shriek|projectionFormula",
+   "results": "none; 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactSupport|projectionFormula",
+   "results": "none; 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in CategoryTheory"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-trf-exceptional-kunneth",
+  "date": "2026-10-17",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-verdier",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-exceptional-kunneth",
+   "place": "Paragraph 4: both sides of alpha are exact in each coefficient, so triangle two-out-of-three applies; retained Step 9, geometric exchange/projection shift check",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

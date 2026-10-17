@@ -1,0 +1,84 @@
+{
+ "id": "lem-sf-supported-external-triangle-comparison",
+ "kind": "statement",
+ "title": "External product compares the supported localization triangles",
+ "statement": "Fix the finite coefficient datum of [def-trf-coefficient-conventions]: $k=\\overline{\\mathbf F}_q$ has characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\ge1$, and $A=\\mathcal O_E/\\varpi_E^n$. All schemes below are separated and of finite type over $k$. Work on their small pro-etale sites with bounded constructible constant-$A$ module complexes of finite Tor amplitude, denoted $D^b_{ctf}(-,A)$ [def-weil-finite-tor-amplitude]. Use the geometric operations and specified constructible exceptional adjunctions of [def-trf-admissibility], and the external tensor product and canonical comparisons of [def-sf-kv-maps] specialized to $A$.\n\nLet $i:Z\\hookrightarrow Y$ be a closed immersion, $j:V\\hookrightarrow Y$ its complementary open immersion, $T$ another such scheme, $L\\in D^b_{ctf}(Y,A)$ and $Q\\in D^b_{ctf}(T,A)$. Put $I=i\\times\\operatorname{id}_T$, $J=j\\times\\operatorname{id}_T$, $K=L\\boxtimes Q$. Write $\\mathcal T_Y(L)$ and $\\mathcal T_{Y\\times T}(K)$ for the supported distinguished triangles of [prop-sf-localization-all-stages](3), with their specified exceptional counit, ordinary open unit and connecting map. Write\n$$c_i:(i_*i^!L)\\boxtimes Q\\xrightarrow{\\sim}I_*(i^!L\\boxtimes Q),\\qquad c_j:(Rj_*j^*L)\\boxtimes Q\\xrightarrow{\\sim}RJ_*(j^*L\\boxtimes Q)$$\nfor the canonical ordinary product isomorphisms of [lem-trf-ordinary-kunneth], identifying $j^*L\\boxtimes Q=J^*K$ by the pullback-composition and tensor comparisons. Then\n$$\\bigl(I_*\\alpha_{i,\\operatorname{id}_T}(L,Q)\\circ c_i,\\ \\operatorname{id}_K,\\ c_j\\bigr)$$\nis a morphism of distinguished triangles from $\\mathcal T_Y(L)\\boxtimes Q$ to $\\mathcal T_{Y\\times T}(K)$. In particular, all three squares, including the connecting square with the shift of its first component, commute. The assertion identifies the specified first component; it does not assume that the exceptional product comparison is invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-exceptional-kunneth.proof.md",
+  "place": "Paragraph 2: closed immersions by localization together with open-product base change; retained proof Step 6, comparison of supported triangles; the precise compatibility assertion is extracted from the retained stage-1 argument, rather than quoted as a separate theorem of the source."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-trf-admissibility",
+  "def-sf-kv-maps",
+  "prop-sf-localization-all-stages",
+  "lem-trf-ordinary-kunneth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion the counit and ordinary open direct image Kunneth map extend to a morphism of distinguished localization triangles",
+   "results": "CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.isHomological_of_localization, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic TR3 completion does not identify the specified geometric first component"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of distinguished localization triangles for external tensor product whose middle and last arrows are isomorphisms has an isomorphism first arrow",
+   "results": "CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃, CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃, CategoryTheory.Localization.Monoidal.triangle_aux₁, CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂, CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso, CategoryTheory.Triangulated.TStructure.triangle_iso_exists, CategoryTheory.Localization.Monoidal.tensorBifunctorIso; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract triangle isomorphism detection is already lem-sf-triangle-morphism-iso, not this geometric comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical external tensor product comparison gives a morphism between supported localization triangles for a closed immersion and its product with an identity",
+   "results": "IsLocalization.tensorProduct_tensorProduct, CategoryTheory.MonoidalCategory.externalProductCompDiagIso, finsuppTensorFinsuppRid, CategoryTheory.Localization.Monoidal.id_tensorHom_id, IsLocalizedModule.rTensor, TensorProduct.toIntegralClosure_bijective_of_isLocalization, CategoryTheory.Pretriangulated.productTriangle, CategoryTheory.prodCoprodDistrib; 8 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: monoidal external products and ring localization, not supported etale localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TriangleMorphism\", \"comm\"",
+   "results": "CategoryTheory.Pretriangulated.TriangleMorphism.comm₁, CategoryTheory.Pretriangulated.TriangleMorphism.comm₂, CategoryTheory.Pretriangulated.TriangleMorphism.comm₁_assoc, CategoryTheory.Pretriangulated.TriangleMorphism.comm₂_assoc, CategoryTheory.Pretriangulated.TriangleMorphism.comm₃, CategoryTheory.Pretriangulated.TriangleMorphism.comm₁_map, CategoryTheory.Pretriangulated.TriangleMorphism.comm₂_map, CategoryTheory.Pretriangulated.TriangleMorphism.comm₃_assoc; 12 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: fields of a triangle morphism do not construct this geometric morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*external|external.*localization|supported.*triangle",
+   "results": "none; 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "supported|localization",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; 25 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: AlgebraicGeometry hits concern localizations of rings and schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-trf-exceptional-kunneth",
+  "date": "2026-10-17",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-verdier",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-exceptional-kunneth",
+   "place": "Paragraph 2: closed immersions by localization together with open-product base change; retained proof Step 6, comparison of supported triangles",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
