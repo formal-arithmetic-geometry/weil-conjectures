@@ -11,9 +11,92 @@
   "def-pc-scheme",
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A_i=\\mathcal O_X(U_i)$. Each $A_i$ is Noetherian by the G-ring definition [def-weil-pbc-g-ring]. The given affine cover therefore witnesses that $X$ is locally Noetherian [pqf-def-locnoeth].",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 0HA5 (lemma-locally-G-scheme), 0HA4 (lemma-characterize-G-scheme), and 01OV (definition-noetherian)."
+   }
+  },
+  {
+   "text": "Fix an arbitrary affine open $V\\subseteq X$ and put $B=\\mathcal O_X(V)$. Since $X$ is locally Noetherian, [pqf-lem-affine-open-locnoeth] gives that $B$ is Noetherian. It remains, by [def-weil-pbc-g-ring], to check the completion map at each prime of $B$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OW (lemma-locally-Noetherian), as used in Tags 0HA4 and 0HA5."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be any prime of $B$. The canonical open immersion of [lem-weil-pbc-affine-open-spec-points] sends $\\mathfrak q$ to a point $x\\in V$. Choose $i$ with $x\\in U_i$ and let $\\mathfrak p$ be its corresponding prime of $A_i$. By clause (c) of [lem-weil-pbc-affine-open-stalk-localization] for $V$ and for $U_i$, there are ring isomorphisms $B_{\\mathfrak q}\\cong\\mathcal O_{X,x}\\cong(A_i)_{\\mathfrak p}$. Composing them gives $e:(A_i)_{\\mathfrak p}\\xrightarrow{\\sim}B_{\\mathfrak q}$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0HA4, implication (1) implies (2), and the affine-local interpretation in its final paragraph; Schemes Tag 01HV (lemma-spec-sheaves), via affine-open stalk localizations."
+   }
+  },
+  {
+   "text": "Put $R=(A_i)_{\\mathfrak p}$ and $S=B_{\\mathfrak q}$, with maximal ideals $\\mathfrak m_R$ and $\\mathfrak m_S$. The equivalence $e:R\\cong S$ carries nonunits to nonunits (an inverse to $e(r)$ pulls back to an inverse to $r$), so $e(\\mathfrak m_R)=\\mathfrak m_S$. Apply [lem-weil-pbc-adic-completion-ring-equiv] to these ideals. It supplies $E:\\widehat R\\xrightarrow{\\sim}\\widehat S$ such that $E\\circ\\iota_R=\\iota_S\\circ e$, where $\\iota_R$ and $\\iota_S$ are the canonical maximal-ideal completion maps.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-ring-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0HA4, stalk identifications with localizations; completion transport from algebra.tex Section 00M9 and More on Algebra Definition 07GH."
+   }
+  },
+  {
+   "text": "The map $\\iota_R:R\\to\\widehat R$ is regular because $A_i$ is a G-ring and $\\mathfrak p$ is a prime of $A_i$, by [def-weil-pbc-g-ring]. Apply [lem-weil-pbc-regular-ring-map-ring-equiv] to $f=\\iota_R$, $g=\\iota_S$, $a=e$, $b=E$, and the equality from step 4. Its conclusion is that $\\iota_S:B_{\\mathfrak q}\\to\\widehat{B_{\\mathfrak q}}$ is regular.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-ring-map-ring-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0HA4, regular local completion maps; More on Algebra Tags 07GH (definition-G-ring) and 07BZ (definition-regular)."
+   }
+  },
+  {
+   "text": "The ring $B$ is Noetherian by step 2 and its completion maps at every prime $\\mathfrak q$ are regular by steps 3–5. These are exactly the defining conditions of a G-ring [def-weil-pbc-g-ring]. Thus $\\mathcal O_X(V)$ is a G-ring for every affine open $V$.",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0HA5 (lemma-locally-G-scheme), (3) implies (2), expanding the stalk criterion of Tag 0HA4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-regular-ring-map-ring-equiv",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0HA5 (lemma-locally-G-scheme), (3) implies (2), expanding Tag 0HA4 (lemma-characterize-G-scheme): identify localizations through the same stalk; use Tag 01OW for Noetherianity."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-excellent-scheme-affine-cover",
@@ -71,7 +154,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Expose X, proof of Theorem 3.5, Step 5 (as recorded on lem-trf-projective-inseparable-spread-normalization): the spread Y' and the replacement of X must again be excellent schemes; excellence is verified on an affine cover of the finite normalization charts and passed to every affine open. Component-locality fact used to pass excellence from normalization charts to arbitrary affine opens: The G-ring property passes from an affine open cover to every affine open.",
+   "place": "Expose X, proof of Theorem 3.5, Step 5 (as recorded on lem-trf-projective-inseparable-spread-normalization): the spread Y' and the replacement of X must again be excellent schemes; excellence is verified on an affine cover of the finite normalization charts and passed to every affine open. Component-locality fact used to pass excellence from normalization charts to arbitrary affine opens: the G-ring property passes from an affine open cover to every affine open.",
    "via": [
     "lem-trf-excellent-scheme-affine-cover",
     "lem-trf-projective-inseparable-spread-normalization",
@@ -80,5 +163,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-g-ring-affine-cover",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0HA5 through its local-completion argument: derive local Noetherianity from the given cover, obtain Noetherianity of an arbitrary affine section ring from the existing Mathlib leaf, identify its prime localizations with localizations of a covering chart through their common stalk, and transport completion regularity by the existing compatible-completion and regular-map equivalence nodes. No new nodes, no statement change.",
+  "blueprint": "The item realizes the component-locality sentence in the ancestor lem-trf-local-term-locality route (Expose X, proof of Theorem 3.5, Step 5, via lem-trf-excellent-scheme-affine-cover): excellence/G-ring verification on affine normalization charts passes to arbitrary affine opens. Steps 1-2 realize the local Noetherianity and Noetherian-section-ring part of that passage, steps 3-5 the comparison of completion maps at a point through its stalk, and step 6 the G-ring conclusion on an arbitrary affine open. The delivery creates no new node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-ring-equiv",
+    "why": "Generic ring-equivalence compatibility of adic completions; this unit supplies no such algebraic transport theorem."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "why": "Generic invariance of regular ring maps under a commuting square of ring equivalences; this unit supplies no such algebraic transport theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "lem-weil-pbc-regular-ring-map-ring-equiv"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-f2c45e1c2",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-f2c45e1c2 (reviewer sub-agent of L); spot-checked: I read the item in full, the statement of every cited node, unit sk-i-curve-zero and the parent lem-trf-excellent-scheme-affine-cover. The statement is unchanged and matches Stacks properties.tex Tag 0HA5 (3)=>(2): arbitrary scheme, any index set, any affine open V, nothing added or dropped. The six steps expand the source's proof ('combine 01OW and 0HA4'). Step 1 (elementary): the G-ring definition includes Noetherian, so the cover witnesses pqf-def-locnoeth. Step 2: the Mathlib leaf pqf-lem-affine-open-locnoeth makes B Noetherian. Step 3: spec-points plus clause (c) of the stalk-localization lemma, applied to V and to some U_i containing x, give B_q = O_{X,x} = (A_i)_p; the prime matches by uniqueness, and no affineness of V cap U_i is assumed. Step 4: a ring isomorphism of local rings sends the maximal ideal onto the maximal ideal, so adic-completion-ring-equiv applies with J = e(I) and gives E with E o iota_R = iota_S o e. Step 5: G-ring regularity of (A_i)_p -> its completion, plus regular-ring-map-ring-equiv (f=iota_R, g=iota_S, a=e, b=E, with b o f = g o a checked), gives regularity of iota_S. Step 6 is assembly from the definition. proof_deps equals the union of the uses. I accept the two declared tool_uses: lem-weil-pbc-adic-completion-ring-equiv and lem-weil-pbc-regular-ring-map-ring-equiv are generic algebra lemmas from unit sk-thm-p1, which is off this unit's route. Duplicate search: grep for 0HA4/0HA5 and their labels finds only the item and its parent; lem-weil-pbc-g-ring-ring-equiv and lem-weil-pbc-g-ring-maximal-ideal-criterion (07PT) state different things. The item is a real lemma, not a restated clause of its parent, which also needs J-2 and universal catenarity. Edge cases checked: V empty, I empty, V equal to a chart, non-quasi-compact X, Spec Z with D(n). No SGA source is used, and this is not a target node. One fix: split_report.blueprint still said 'The two new nodes realize...' from the withdrawn draft, but the delivery creates no nodes. I replaced it with the actual step-to-blueprint mapping; the corrected whole file is fixes/dag/nodes/sec-trace-formula/lem-trf-g-ring-affine-cover.json and that sentence is its only change.; 1 file(s) fixed by the reviewer"
  }
 }
