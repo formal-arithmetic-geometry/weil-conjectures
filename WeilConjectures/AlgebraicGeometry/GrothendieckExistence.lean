@@ -193,7 +193,7 @@ theorem grothendieck_existence
       intro V a ha t
       have hmem : a ∈ K.idealOfOpens V := by simpa using ha
       exact hkG V a (Scheme.IdealSheafData.idealOfOpens_mono hleG V hmem) t
-    have hb := grothendieckExistence_supported_hom A I f i hi hp c hc
+    have hb := grothendieckExistence_supported_hom A I f i hi hp c
       F G hF hG K.subscheme K.subschemeι hkKF hkKG
     obtain ⟨w, hw⟩ := hb.surjective ⟨v, hv⟩
     refine ⟨w, ?_, ?_⟩

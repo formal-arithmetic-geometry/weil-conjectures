@@ -169,9 +169,6 @@ theorem grothendieckExistence_supported_hom
       (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅
       Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
       (Ideal.Quotient.mk (I ^ (n + 1)))))))
-    (hc : ∀ n : ℕ, c n = (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
-      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 +
-      1)))))))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n)))
     (F G : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F)
     (hG : RingedSpace.IsCoherent X.toRingedSpace G)
@@ -193,7 +190,7 @@ theorem grothendieckExistence_supported_hom
           (Scheme.Modules.tensorPullback (i n)).map (v (n + 1)) ≫ (c n).hom.app F})) := by
   classical
   obtain ⟨e, he⟩ := thickeningSystems_completion_hom_equiv
-    A I f i hi hp c hc F G hF hG
+    A I f i hi hp c F G hF hG
   have hcompletion := supported_formalCompletionMap_bijective
     I f F G hF hG Z j hkillF hkillG
   have h := e.bijective.comp hcompletion
