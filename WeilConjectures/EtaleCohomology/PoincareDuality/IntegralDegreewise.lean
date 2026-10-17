@@ -413,6 +413,41 @@ theorem integralDegreewiseDuality {T : DerivedCategoryModule Λ X}
     Module.Finite.equiv (M := Module.Dual Λ ((H_c(a)[ModuleCat.{u + 1} Λ](i)).obj K))
       e.toLinearEquiv.symm, ⟨e⟩⟩
 
+/-- Blueprint `prop-pod-integral-degreewise-form`: Integral degreewise form (the adjoint maps).
+
+In the situation of `AlgebraicGeometry.Etale.integralDegreewiseDuality`, without any
+projectivity assumption: the dual `RΓ_c(X, K)^∨` has universal coefficient sequences
+`0 ⟶ H^{-i}(RΓ_c(X, K)^∨) ⊗ Λ/(ϖⁿ) ⟶ H^{-i}(D) ⟶ H^{1-i}(RΓ_c(X, K)^∨)[ϖⁿ] ⟶ 0` for every
+reduction triangle `RΓ_c(X, K)^∨ ⟶[ϖⁿ] RΓ_c(X, K)^∨ ⟶ D ⟶ RΓ_c(X, K)^∨⟦1⟧` (for instance
+`D = RΓ_c(X, K)^∨ ⊗ᴸ Λ/(ϖⁿ)`), and the adjoint of the derived Poincaré pairing identifies the
+cohomology of `RΓ_c(X, K)^∨` with that of the second variable,
+`H^{-i}(RΓ_c(X, K)^∨) ≅ H^{2d-i}(X, K^∨(d))`, so that these sequences correspond to the
+sequences of the second variable
+(`AlgebraicGeometry.Etale.shortExact_cohomologyReductionSequence`). -/
+theorem integralDegreewise_adjoint {T : DerivedCategoryModule Λ X}
+    (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) a)
+    {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) {ϖ : Λ} (n : ℕ)
+    {D : _root_.DerivedCategory (ModuleCat.{u + 1} Λ)}
+    {g : (ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K)).obj
+      (𝟙_ _) ⟶ D}
+    {h : D ⟶ ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K)).obj
+      (𝟙_ _))⟦(1 : ℤ)⟧}
+    (hT : Triangle.mk (ϖ ^ n • 𝟙 _) g h ∈ distTriang _) (i : ℤ) :
+    (_root_.DerivedCategory.universalCoefficientSequence hT (-i) (-i + 1) rfl).ShortExact ∧
+      Nonempty ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) (-i)).obj
+          ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K)).obj
+            (𝟙_ _)) ≅
+        (cohomology (ModuleCat.{u + 1} Λ) X (2 * d - i)).obj
+          (((derivedTensor _ X).obj ((DerivedCategory.coefficientDual _ X).obj (op K))).obj
+            T)) := by
+  refine ⟨_root_.DerivedCategory.universalCoefficientSequence_shortExact _ _ _ _, ?_⟩
+  let RΓ := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
+  have hb := isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a γ hKd
+  obtain ⟨eA⟩ := (nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence _ _
+    ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).map fun e ↦ RΓ.mapIso hb.iso ≪≫ e
+  exact ⟨((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) (-i)).mapIso eA.symm ≪≫
+    (cohomologyIsoHomologyShift a (d := d) _ i).symm)⟩
+
 end Duality
 
 end Etale

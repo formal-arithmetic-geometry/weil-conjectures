@@ -40,8 +40,11 @@ and `K ∈ D(X_ét, Λ)` perfect over `Λ_X`. This file proves blueprint
 
 - `AlgebraicGeometry.Etale.isIso_poincareAdjoint`,
   `AlgebraicGeometry.Etale.nonempty_iso_ihom_compactlySupportedGlobalSections`: the duality
-  isomorphism, in `D(Spec k_ét, Λ)` and in `D(Λ)`.
-- `AlgebraicGeometry.Etale.poincareAdjoint_reduction`: the finite-level dualities are the
+- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_poincareAdjoint`,
+  `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_poincareAdjoint_source`,
+  `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_poincareAdjoint_target`,
+  `AlgebraicGeometry.Etale.poincareAdjoint_reduction_naturality`: the finite-level dualities
+  are the reductions of `β_K^♯`, and they form a morphism of towers.
   reductions of `β_K^♯`, and they form a morphism of towers.
 - `AlgebraicGeometry.Etale.adicReconstruction_scalarExtension`: the integral stage and the
   transport to `E` and to finite extensions of `E`.
@@ -180,6 +183,7 @@ theorem isIso_reductionModIdeal_map_poincareAdjoint (hKd : IsDualizable K) (J : 
   have := isIso_poincareAdjoint a γ hKd
   infer_instance
 
+omit [IsSepClosed k] in
 /-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: the reductions of `β_K^♯`
 along the finite stages form a morphism of towers: for `J ≤ J'` (for example
 `(ϖ)ᵐ ≤ (ϖ)ⁿ` for `n ≤ m`) they commute with the transitions `Λ/J ⟶ Λ/J'`. -/
@@ -191,6 +195,8 @@ theorem poincareAdjoint_reduction_naturality {J J' : Ideal Λ} (h : J ≤ J') :
   (reductionModIdealMap Λ (Spec (.of k)) h).naturality (poincareAdjoint a γ K)
 
 include hϖ in
+omit [IsSepClosed k] [HasCompactification a]
+  [(R(a)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] in
 /-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: the source of the reduction
 of `β_K^♯` is `RΓ(X, K^∨(d)_n)[2d]`. -/
 theorem nonempty_iso_reductionModIdeal_poincareAdjoint_source (n : ℕ) :
@@ -204,6 +210,7 @@ theorem nonempty_iso_reductionModIdeal_poincareAdjoint_source (n : ℕ) :
   exact ⟨e.symm⟩
 
 include hϖ in
+omit [IsSepClosed k] [(R(a)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] in
 /-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: the target of the reduction
 of `β_K^♯` is `RHom(RΓ_c(X, K), A_n)`, and `RΓ_c(X, K_n) ≅ RΓ_c(X, K) ⊗ᴸ A_n`. -/
 theorem nonempty_iso_reductionModIdeal_poincareAdjoint_target (n : ℕ) :
@@ -220,6 +227,68 @@ theorem nonempty_iso_reductionModIdeal_poincareAdjoint_target (n : ℕ) :
     nonempty_iso_map_reductionModIdeal (R(a)_![ModuleCat.{u + 1} Λ]) hϖ n K⟩
 
 end Adjoint
+
+section Integral
+
+variable (l : ℕ) [Fact l.Prime] (E L : Type w) [Field E] [Field L]
+  [Algebra E (PadicAlgCl l)] [Algebra L (PadicAlgCl l)] [Algebra E L]
+  [IsScalarTower E L (PadicAlgCl l)] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
+  [FiniteDimensional ℚ_[l] E] [Algebra ℚ_[l] L] [IsScalarTower ℚ_[l] L (PadicAlgCl l)]
+  [FiniteDimensional ℚ_[l] L] [Small.{u + 1} E] [Small.{u + 1} L]
+  {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
+  [HasCompactification a]
+  [(R(a)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).IsLeftAdjoint]
+  {d : ℕ} {T : DerivedCategoryModule (Shrink.{u + 1} (PadicAlgCl.integers l E)) X}
+  (γ : T⟦(2 * d : ℤ)⟧ ≅
+    dualizingComplex (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) a)
+  {K : DerivedCategoryModule (Shrink.{u + 1} (PadicAlgCl.integers l E)) X}
+
+/-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: Adic reconstruction and
+scalar extension (the integral stage and the scalar extension).
+
+Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, `𝒪_E` its ring of integers, `L ⊇ E` a
+further finite extension, and `K ∈ D(X_ét, 𝒪_E)` perfect over `𝒪_{E,X}`. Assume that the
+constant complex `𝒪_E` of the point is derived complete. Then the adjoint
+`β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of the `𝒪_E`-valued derived Poincaré pairing is an
+isomorphism between derived complete objects: it is an isomorphism `e` of the adic category
+`D_comp(Spec k, 𝒪_E)`, so `β_K^♯` is the realization of its tower of reductions, the
+finite-level dualities (`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_poincareAdjoint`).
+Its inverse is the duality isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]` over `𝒪_E`.
+Localization `𝒪_E ⟶ E` (`DerivedCategoryDerivedCompleteRational.fromIntegral`) and the finite
+coefficient-field extension `E ⊆ L`, both integrally
+(`AlgebraicGeometry.Etale.derivedCompleteIntegralScalarExtension`) and rationally
+(`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtension`), carry `e` to
+isomorphisms: the duality isomorphism over `E` and over `L`. -/
+theorem adicReconstruction_scalarExtension (hKd : IsDualizable K)
+    (hΛ : DerivedCategory.derivedCompleteIntegral (Spec (.of k)).smallEtaleTopology l E
+      (𝟙_ (DerivedCategoryModule (Shrink.{u + 1} (PadicAlgCl.integers l E)) (Spec (.of k))))) :
+    ∃ (P Q : DerivedCategoryDerivedCompleteIntegral (Spec (.of k)).smallEtaleTopology l E)
+      (e : P ≅ Q),
+      Arrow.mk ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).map e.hom) =
+        Arrow.mk (poincareAdjoint a γ K) ∧
+      IsIso ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map e.hom) ∧
+      IsIso ((derivedCompleteIntegralScalarExtension l E L).map e.hom) ∧
+      IsIso ((derivedCompleteRationalScalarExtension l E L).map
+        ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map e.hom)) := by
+  obtain ⟨ϖ, hϖ, hI⟩ :=
+    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
+  have := isIso_poincareAdjoint a γ hKd
+  let f := poincareAdjoint a γ K
+  have ht : DerivedCategory.derivedCompleteIntegral _ l E (Arrow.mk f).right :=
+    derivedComplete_derivedHom _ hϖ hI hΛ
+  have hs : DerivedCategory.derivedCompleteIntegral _ l E (Arrow.mk f).left := by
+    change _root_.DerivedCategory.derivedComplete _ (PadicAlgCl.maximalIdealShrink l E) _ at ht ⊢
+    rw [_root_.DerivedCategory.derivedComplete_eq_rightOrthogonal hϖ hI] at ht ⊢
+    exact ObjectProperty.prop_of_iso _ (asIso f).symm ht
+  let P : DerivedCategoryDerivedCompleteIntegral (Spec (.of k)).smallEtaleTopology l E := ⟨_, hs⟩
+  let Q : DerivedCategoryDerivedCompleteIntegral (Spec (.of k)).smallEtaleTopology l E := ⟨_, ht⟩
+  let e : P ≅ Q := (ObjectProperty.fullyFaithfulι _).preimageIso (asIso f)
+  refine ⟨P, Q, e, ?_, inferInstance, inferInstance, inferInstance⟩
+  exact congrArg Arrow.mk
+    ((ObjectProperty.fullyFaithfulι (DerivedCategory.derivedCompleteIntegral _ l E)).map_preimage
+      (X := P) (Y := Q) f)
+
+end Integral
 
 end Etale
 
