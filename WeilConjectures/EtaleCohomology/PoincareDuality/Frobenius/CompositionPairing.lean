@@ -258,3 +258,49 @@ theorem nondegenerate_comp_singleFunctor_of_isField (hR : IsField R) [Finite R]
     exact ⟨Φ v, by rw [key, Ne, hT]; exact hv⟩
 
 end DerivedCategory
+
+namespace AlgebraicGeometry.Etale
+
+open Scheme
+
+variable {Λ : Type (u + 1)} [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
+
+variable (Λ k) in
+/-- Over a separably closed field `k`, the derived global sections of the unit `Λ_s` of the point
+category are `Λ[0]`. -/
+noncomputable def rightDerivedGlobalSectionsUnitIso :
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj (𝟙_ _) ≅
+      (DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of Λ Λ) :=
+  (rightDerivedGlobalSections _ _).mapIso (unitIsoSingleFunctorConstantSheaf Λ _) ≪≫
+    (rightDerivedGlobalSectionsIsoMapDerivedCategoryInv _ _).app _ ≪≫
+      ((constantSheaf (Spec (.of k)).smallEtaleTopology
+        (ModuleCat.{u + 1} Λ)).inv.mapDerivedCategorySingleFunctor 0).app _ ≪≫
+        (DerivedCategory.singleFunctor _ 0).mapIso
+          ((constantSheaf (Spec (.of k)).smallEtaleTopology
+            (ModuleCat.{u + 1} Λ)).asEquivalence.unitIso.app _).symm
+
+/-- **The composition pairing with the unit is nondegenerate at the point.** Let `k` be a
+separably closed field, `Λ` a finite field and `E` an object of the point category
+`D(Spec k_ét, Λ)` with `H^0(RΓ(Spec k, E))` finite-dimensional. Then `Hom(Λ_s, E)` is finite and
+the composition pairing `Hom(Λ_s, E) × Hom(E, Λ_s) ⟶ End(Λ_s)` is nondegenerate on both sides.
+This follows from the case of `D(Λ)`
+(`DerivedCategory.nondegenerate_comp_singleFunctor_of_isField`) through the equivalence
+`RΓ(Spec k, -)` (blueprint `lem-sf-point`). -/
+theorem nondegenerate_comp_unit_of_isSepClosed (hΛ : IsField Λ) [Finite Λ]
+    (E : DerivedCategoryModule Λ (Spec (.of k)))
+    (hE : Module.Finite Λ ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) 0).obj
+      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj E))) :
+    Finite (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ E) ∧
+      (∀ x : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ E, x ≠ 0 →
+        ∃ f : E ⟶ 𝟙_ _, x ≫ f ≠ 0) ∧
+      (∀ f : E ⟶ 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))), f ≠ 0 →
+        ∃ x : 𝟙_ _ ⟶ E, x ≫ f ≠ 0) := by
+  let F := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
+  obtain ⟨h₀, h₁, h₂⟩ := DerivedCategory.nondegenerate_comp_singleFunctor_of_isField hΛ _ hE
+  exact ⟨F.finite_hom_of_fullyFaithful (rightDerivedGlobalSectionsUnitIso Λ k) (Iso.refl _),
+    F.exists_comp_ne_zero_of_fullyFaithful (rightDerivedGlobalSectionsUnitIso Λ k)
+      (Iso.refl _) h₁,
+    F.exists_comp_ne_zero_of_fullyFaithful' (rightDerivedGlobalSectionsUnitIso Λ k)
+      (Iso.refl _) h₂⟩
+
+end AlgebraicGeometry.Etale
