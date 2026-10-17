@@ -15,9 +15,142 @@
   "lem-coef-derived-space-module-coyoneda",
   "lem-coef-pinched-rigidification-resolution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any face $F$ containing $i\\leq j$, right-pinched mapping simplices from $u\\in K_i$ to $v\\in K_j$ in $K_F$ lie in $K_{ij}$: their image in $H$ has initial vertices all $i$ and final vertex $j$, so every simplex of that image uses only $i,j$. Thus $\\operatorname{Map}^R_{K_{ij}}(u,v)\\to\\operatorname{Map}^R_{K_F}(u,v)$ is an isomorphism, including $i=j$ with $K_{ii}=K_i$. The natural $p$ and $\\theta$ equivalences of [lem-coef-pinched-rigidification-resolution] identify the actual edge inclusion on rigidification mapping sets with this isomorphism. Two-out-of-three makes it a weak equivalence. These are enriched composition-compatible comparisons because they are induced by inclusions. In particular all inclusions from a vertex fibre or edge into a triangle are homotopically full on their own vertices. No retraction is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument, using Appendix A.3 background; full edge and vertex comparisons inside a quasicategorical face. The three directed bar/attachment inputs are separately stated nodes, not asserted to be numbered theorems of HTT."
+   }
+  },
+  {
+   "text": "All labels of a rigidification path are nondecreasing: in each generating simplex the arrows go from an earlier to a later vertex, and composing cannot reverse this. Mapping sets in decreasing label direction are therefore empty. Put $U=K_{012}\\cup K_{123}$ and $W=K_{02}\\cup K_{23}$. Degreewise, $K_{012}\\cap K_{123}=K_{12}$, $K_{02}\\cap K_{23}=K_2$, and $U\\cap K_{023}=W$; the three triangles cover $K$. These are equalities of inverse images of faces in $H$, so each displayed union is a simplicial-set pushout. The left adjoint $\\mathfrak C$ of [lem-coef-coherent-nerve-comparison] preserves these pushouts, makes every piece cofibrant and every inclusion a cofibration. These strict pushouts compute homotopy pushouts: take a cofibrant replacement of each span as supplied by [lem-coef-simplicial-derived-pushout-mapping], with cofibrant objects and cofibration legs, and compare it to the original cofibrant span using clause (b) of [lem-coef-model-cofibrant-colimit-comparison]. Thus the three gluings below have their actual inclusion cocones.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-model-cofibrant-colimit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument, using Appendix A.3 background; decompose the three-face union into directed pushouts. The three directed bar/attachment inputs are separately stated nodes, not asserted to be numbered theorems of HTT."
+   }
+  },
+  {
+   "text": "We will change an indexing category along identity-on-objects local weak equivalences. The Quillen equivalence $v_!\\dashv v^*$ of [lem-coef-simplicial-projective-model-calculus], applied to Kan-model simplicial sets and to the opposite indexing categories, justifies this for left and right modules. Indeed the quotient defining coends gives $(v_!X)\\otimes_B Y=X\\otimes_A v^*Y$: both sides impose exactly the same action relations. Apply this identity to cofibrant replacements and the derived unit/counit equivalences. It identifies the derived coends after changing the base and restricting the modules, compatibly with every action map. The objectwise invariance and Fubini assertions of [lem-coef-derived-space-module-coyoneda] allow the endpoint mapping modules to be replaced by the actual edge modules from step 1. This calculation retains any outer module variables; it changes indexing, without choosing a strict inverse functor to any face inclusion.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "def-coef-enriched-coend",
+    "lem-coef-derived-space-module-coyoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument, using Appendix A.3 background; change of indexing for the bar calculations. The three directed bar/attachment inputs are separately stated nodes, not asserted to be numbered theorems of HTT."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-directed-enriched-amalgamation] to $\\mathfrak C[K_{012}]\\leftarrow\\mathfrak C[K_{12}]\\to\\mathfrak C[K_{123}]$, with blocks $L=K_0$, $O=K_1\\amalg K_2$, $R=K_3$. Step 1 verifies both homotopically full overlap hypotheses and step 2 verifies absence of backward arrows. Thus all mapping sets of either triangle map by weak equivalences into $\\mathfrak C[U]$, and\n$$\\mathfrak C[U](x,z)\\simeq X\\otimes_B^{\\mathbb L}Y,$$\nwhere $B=\\mathfrak C[K_{12}]$, $X=\\mathfrak C[K_{012}](x,-)|_B$ and $Y=\\mathfrak C[K_{123}](-,z)|_B$. In particular the endpoint actions are the actual triangle compositions.",
+   "uses": [
+    "lem-coef-directed-enriched-amalgamation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument, using Appendix A.3 background; first gluing of 012 and 123 along 12. The three directed bar/attachment inputs are separately stated nodes, not asserted to be numbered theorems of HTT."
+   }
+  },
+  {
+   "text": "The category $B$ has two blocks $K_1,K_2$ and no backward arrows. Apply [lem-coef-triangular-bar-excision] to these $X,Y$. After the base and module comparisons of steps 1 and 3, its two outside terms are\n$$P=M_{01}(x,-)\\otimes_{A_1}^{\\mathbb L}M_{13}(-,z),\\qquad Q=M_{02}(x,-)\\otimes_{A_2}^{\\mathbb L}M_{23}(-,z),$$\nand its mixed term is $R$ from the statement. Therefore $\\mathfrak C[U](x,z)\\simeq P\\amalg_R^h Q$. The arrow $R\\to P$ acts on $Y$ and is composition in $K_{123}$; $R\\to Q$ acts on $X$ and is composition in $K_{012}$. The excision theorem specifies these maps as well as the comparison, so this identifies the cocone and not just its objects.",
+   "uses": [
+    "lem-coef-triangular-bar-excision",
+    "lem-coef-derived-space-module-coyoneda",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument, using Appendix A.3 background; two-block bar excision for 12. The three directed bar/attachment inputs are separately stated nodes, not asserted to be numbered theorems of HTT."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-directed-enriched-amalgamation] again to $\\mathfrak C[K_{02}]\\leftarrow A_2\\to\\mathfrak C[K_{23}]$. Its three blocks are $K_0,K_2,K_3$; step 1 verifies homotopically full vertex overlaps. This gives $\\mathfrak C[W](x,z)\\simeq Q$ after step 3, and weak equivalences from the two edge mapping sets on all other pairs. Under the map $W\\hookrightarrow U$, this comparison is the map from $Q$ in step 5: both are the derived composition of the same inclusions of 02 and 23. Under $W\\hookrightarrow K_{023}$ it is composition in 023 followed by the full-edge comparison identifying that face's extreme mapping module with $D=M_{03}$. The naturality and augmentation compatibility in the amalgamation and coend theorems give these identifications in the homotopy theory of modules.",
+   "uses": [
+    "lem-coef-directed-enriched-amalgamation",
+    "lem-coef-derived-space-module-coyoneda",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument, using Appendix A.3 background; compute the attachment intersection 02 union 23 and both maps. The three directed bar/attachment inputs are separately stated nodes, not asserted to be numbered theorems of HTT."
+   }
+  },
+  {
+   "text": "Now set $T=\\mathfrak C[W]$, $V=\\mathfrak C[K_{023}]$, $B'=\\mathfrak C[U]$, and use $I=\\{0<1<2<3\\}$, $S=\\{0,2,3\\}$ in [lem-coef-extreme-bimodule-attachment]. Step 6 and the full-edge comparisons of step 1 show $T\\to V$ is a weak equivalence on every mapping set except possibly $K_0\\times K_3$. The map $T\\to B'$ is a weak equivalence on both endpoint blocks, by steps 4 and 6 and their shared vertex-fibre comparisons. Decreasing-label mapping sets are empty by step 2, and the object functions are exactly the prescribed inclusions. The homotopy pushout is $\\mathfrak C[K]$, with its actual face inclusions, by step 2. Consequently\n$$\\mathfrak C[K](x,z)\\simeq (P\\amalg_R^h Q)\\amalg_Q^h D.$$\nThe same attachment theorem makes $\\mathfrak C[U]\\to\\mathfrak C[K]$ a weak equivalence on every other mapping set.",
+   "uses": [
+    "lem-coef-extreme-bimodule-attachment",
+    "lem-coef-directed-enriched-amalgamation",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument, using Appendix A.3 background; attach the remaining face 023 only at the extreme mapping block. The three directed bar/attachment inputs are separately stated nodes, not asserted to be numbered theorems of HTT."
+   }
+  },
+  {
+   "text": "Pasting the two pushouts gives $(P\\amalg_R^h Q)\\amalg_Q^h D\\simeq P\\amalg_R^h D$. To see the map, a cocone to any space $Z$ consists of maps from $P,Q,D$, a homotopy on $R$, and a homotopy equating the map from $Q$ to the restriction of the one from $D$. Eliminating the $Q$ map and this specified homotopy leaves exactly maps $P,D\\to Z$ agreeing coherently on $R$ through $R\\to Q\\to D$. This is the pushout universal property, including its higher data. By steps 5 and 6 this composite acts first in 012 and then in 023. The map from $D$ is the actual 03 inclusion, since throughout its comparison is inverse to the actual edge-to-023 mapping equivalence and the final cocone uses 023 inclusion.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument, using Appendix A.3 background; pushout pasting and identification of the actual extreme-edge map. The three directed bar/attachment inputs are separately stated nodes, not asserted to be numbered theorems of HTT."
+   }
+  },
+  {
+   "text": "For a pair other than $(0,3)$, some triangle of $U$ contains its labels: 012 contains all pairs without 3, and 123 contains all pairs without 0. Its actual map into $\\mathfrak C[U]$ is a weak equivalence by step 4, and into $\\mathfrak C[K]$ by step 7. The edge-to-triangle comparison of step 1 therefore makes the actual $K_{ij}\\to K$ comparison a weak equivalence. For any face $F$ containing the pair, step 1 and the factorization $K_{ij}\\to K_F\\to K$ give the result by two-out-of-three, also for $i=j$. Every decomposition is by inverse images of the fixed labelled faces; every bar, composition pairing, coend comparison and gluing comparison above is natural in such maps. The full construction is therefore natural for all simplicial maps over $H$, without any choice of cocartesian edges or enlargement.",
+   "uses": [
+    "lem-coef-directed-enriched-amalgamation",
+    "lem-coef-extreme-bimodule-attachment",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument, using Appendix A.3 background; all remaining actual face maps and naturality. The three directed bar/attachment inputs are separately stated nodes, not asserted to be numbered theorems of HTT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-enriched-coend",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-derived-space-module-coyoneda",
+  "lem-coef-directed-enriched-amalgamation",
+  "lem-coef-extreme-bimodule-attachment",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-simplicial-derived-pushout-mapping",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-triangular-bar-excision"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-formulated directed bar gluing argument for the inherited operadic branch. HTT Appendix A.3 is background only; archival source WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +186,52 @@
    "results": "{\"t\": \"2026-10-17T06:55:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial set covered by three quasicategorical faces of the three horn, coherent rigidification has the 0 to 3 hom space equal to the homotopy pushout of paths through 1 and direct arrows along paths through 1 and 2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₁.ι₀_desc\", \"SSet.horn₃₁.desc\", \"SSet.horn₃₁.ι₂_desc\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₂.desc\", \"SSet.horn₃₂.ι₃_desc\", \"SSet.horn₃₂.ι₀_desc\", \"SSet.horn₃₂.ι₁_desc\"], \"digest\": \"e0097435be450b4b\"}",
    "date": "2026-10-17",
    "verdict": "no match: HornColimits.lean:338-425 constructs simplicial maps out of horns, not mapping spaces of a categorical localization. Loogle gives ordinary simplicial pushouts, and LeanSearch gives ordinary GlueData. Focused AlgebraicTopology grep gives zero hits. No derived mapping-bimodule gluing formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy pushout of mapping spaces from a simplicial category pushout",
+   "results": "{\"t\": \"2026-10-17T07:50:52Z\", \"tool\": \"leanfinder\", \"query\": \"homotopy pushout of mapping spaces from a simplicial category pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.cechConerve_map\", \"CategoryTheory.Arrow.mapCechConerve_app\", \"CategoryTheory.Arrow.cechConerve_obj\", \"CategoryTheory.Arrow.mapCechConerve\", \"HomotopicalAlgebra.Precylinder.trans_I\", \"CategoryTheory.Arrow.augmentedCechConerve_hom_app\", \"CategoryTheory.SmallObject.πFunctorObj\", \"HomotopicalAlgebra.Precylinder.trans\"], \"digest\": \"bd0dc20fc89dc06e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; these are ordinary coends, enriched Hom definitions, Cech conerves, Dold-Kan constructions or ordinary colimits, not the stated derived enriched gluing theorem. Read Mathlib/CategoryTheory/Limits/Shapes/End.lean:45-79, AlgebraicTopology/SimplicialCategory/Basic.lean:49-72, AlgebraicTopology/SimplicialNerve.lean:28-32 and 193, and AlgebraicTopology/SimplicialSet/HornColimits.lean:338-424. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pushoutObjIso, SSet.horn₃₂.isPushout",
+   "results": "{\"t\": \"2026-10-17T07:50:53Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.pushoutObjIso, SSet.horn₃₂.isPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.horn₃₂.isPushout'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'SSet.horn₃₂.isPushout'"
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|horn₃₂|coherent",
+   "results": "{\"t\": \"2026-10-17T07:50:53Z\", \"tool\": \"grep\", \"query\": \"pushout|horn₃₂|coherent\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\"], \"digest\": \"177fa60b14d367c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; these are ordinary coends, enriched Hom definitions, Cech conerves, Dold-Kan constructions or ordinary colimits, not the stated derived enriched gluing theorem. Read Mathlib/CategoryTheory/Limits/Shapes/End.lean:45-79, AlgebraicTopology/SimplicialCategory/Basic.lean:49-72, AlgebraicTopology/SimplicialNerve.lean:28-32 and 193, and AlgebraicTopology/SimplicialSet/HornColimits.lean:338-424. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "homotopy pushout formula for mapping spaces of a simplicial category assembled from three faces of a 3-horn",
+   "results": "{\"t\": \"2026-10-17T07:56:23Z\", \"tool\": \"leansearch\", \"query\": \"homotopy pushout formula for mapping spaces of a simplicial category assembled from three faces of a 3-horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₁.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₂.desc.multicofork_π_zero\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₂.desc.multicofork_π_three\"], \"digest\": \"5c40a4ab7707e7f4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; these are ordinary coends, enriched Hom definitions, Cech conerves, Dold-Kan constructions or ordinary colimits, not the stated derived enriched gluing theorem. Read Mathlib/CategoryTheory/Limits/Shapes/End.lean:45-79, AlgebraicTopology/SimplicialCategory/Basic.lean:49-72, AlgebraicTopology/SimplicialNerve.lean:28-32 and 193, and AlgebraicTopology/SimplicialSet/HornColimits.lean:338-424. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pushoutObjIso",
+   "results": "{\"t\": \"2026-10-17T07:56:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.pushoutObjIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.Limits.inl_comp_pushoutObjIso_hom\", \"CategoryTheory.Limits.inr_comp_pushoutObjIso_hom\", \"CategoryTheory.Limits.inl_comp_pushoutObjIso_inv\", \"CategoryTheory.Limits.inr_comp_pushoutObjIso_inv\", \"CategoryTheory.Limits.inl_comp_pushoutObjIso_hom_assoc\", \"CategoryTheory.Limits.inr_comp_pushoutObjIso_hom_assoc\", \"CategoryTheory.Limits.inl_comp_pushoutObjIso_inv_assoc\"], \"digest\": \"aebef6b853e8a02a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; these are ordinary coends, enriched Hom definitions, Cech conerves, Dold-Kan constructions or ordinary colimits, not the stated derived enriched gluing theorem. Read Mathlib/CategoryTheory/Limits/Shapes/End.lean:45-79, AlgebraicTopology/SimplicialCategory/Basic.lean:49-72, AlgebraicTopology/SimplicialNerve.lean:28-32 and 193, and AlgebraicTopology/SimplicialSet/HornColimits.lean:338-424. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "horn|pushout|mapping",
+   "results": "{\"t\": \"2026-10-17T07:56:24Z\", \"tool\": \"grep\", \"query\": \"horn|pushout|mapping\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\"], \"digest\": \"bf6bb6dad0deface\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types; these are ordinary coends, enriched Hom definitions, Cech conerves, Dold-Kan constructions or ordinary colimits, not the stated derived enriched gluing theorem. Read Mathlib/CategoryTheory/Limits/Shapes/End.lean:45-79, AlgebraicTopology/SimplicialCategory/Basic.lean:49-72, AlgebraicTopology/SimplicialNerve.lean:28-32 and 193, and AlgebraicTopology/SimplicialSet/HornColimits.lean:338-424. No exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocartesian-three-horn-face-conservation",
@@ -86,5 +261,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-directed-three-face-mapping-pushout",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Nine steps prove full-edge mapping comparison, decompose the actual three-face union into two pushouts, calculate the common two-block bar, attach the remaining face only at the extreme block, and identify all actual maps and naturality. Three general statement-only enriched inputs isolate one directed amalgamation, triangular bar excision and extreme-bimodule attachment. Project source, DAG, whole blueprint and actual logged Mathlib searches found no attachment or match. No strict triangle retraction or cocartesian lift is used.",
+  "blueprint": "Supporting the inherited operadic extension branch of prop-coef-integral-exceptional-adjoint, paragraph 2 (coherent middle adjunction): directed gluing of the faces 012, 123, 023 in the face comparison required by HA 3.1.2.4; steps 1-9 support the inherited coherent middle-adjunction branch by a calculation on the original three faces.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic definitions of small simplicial sets, faces, right-pinched mapping spaces and weak homotopy equivalences needed to state and prove the directed calculation; no replacement of the coefficient unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-b598294e1",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-b598294e1 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the three new nodes and every cited statement in full. Small-case check: for K=Λ³₂, C[Λ³₂](0,3) is three edges of a square, contractible, matching P=R=D=pt. Hypotheses verified at each use. Step 1: pinched simplices from K_i to K_j lie over Δ^{ij}; theta is natural, and two-out-of-three gives the edge-to-face equivalence. Step 2: U∩K023=W, and the strict pushouts are homotopy pushouts by cofibrancy plus clause (b) of the cofibrant colimit comparison. Step 4: amalgamation over K12 is homotopically full by step 1 and has no backward arrows by step 2. Step 5: excision gives outside terms P, Q and middle term R, with the action directions matching the statement. Step 6: amalgamation over A2 gives Q. Step 7: all attachment hypotheses hold for T=C[W], V=C[K023], B'=C[U], S={0,2,3}. Step 8: pushout pasting. Step 9: every non-(0,3) pair lies in 012 or 123. All three new nodes are true and statement-only, with complete B1-B9 metadata and logged searches. Amalgamation: words cannot return to L; O empty gives a coproduct. Excision: checked on T=[1], where the coend is exactly the stated pushout. Extreme attachment: an extreme arrow occurs once, with its prefix and suffix inside the endpoint blocks, and the endpoint-equivalence hypothesis is necessary. No new node restates a clause of the item. Duplicate check against about a dozen pushout, bar, collage and join nodes found none. The parent's steps 4-5 use exactly the item's clauses. The blueprint from.place (prop-coef-integral-exceptional-adjoint, main-20261015) is inherited and labelled as such; the item is not a target, no SGA source is used, and the tool use for def-cbc-enhanced-diagrams-cones (a definition from another unit) is accepted. No fixes were written."
  }
 }

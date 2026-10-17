@@ -72,14 +72,12 @@
    }
   },
   {
-   "text": "We also need compact-root descent for a tree with fewer than $\\tau$ cells; we prove it here rather than cite a node depending on the present item. Write its root $V$ as a small $\\tau$-filtered colimit of $\\tau$-presentable $V_i$, and use the filtered-poset reindexing lemma to make the index a small $\\tau$-filtered poset $I$. Enumerate the cells as in Step 2 with length $\\mu<\\tau$. Inductively choose increasing indices $i_\\alpha$ for $\\alpha\\le\\mu$ and a tree on the processed cells over $V_{i_\\alpha}$ whose pushout to $V$ is the original processed tree. When the root index increases, push out the whole processed tree, preserving its squares by their universal properties. At zero and at a limit choose an upper bound of the fewer than $\\tau$ indices used earlier; push out the compatible earlier trees to that root and take their union. At a successor cell $t$ with predecessor set $B$, the existing compact-root predecessor object $N_B$ satisfies\n$$Y_B\\cong N_B\\amalg_{V_{i_\\alpha}}V\\cong\\operatorname{colim}_{j\\ge i_\\alpha}(N_B\\amalg_{V_{i_\\alpha}}V_j).$$\nThe latter identification is the colimit universal property; the tail $j\\ge i_\\alpha$ is $\\tau$-filtered and cofinal, since every index has an upper bound with $i_\\alpha$. Presentability of $P_t$ factors its attaching map through one of these stages. Take that stage as $i_{\\alpha+1}$ and attach the same $P_t\\to Q_t$. At the final index $i_\\mu$ this gives the entire descended tree. Its root $M=V_{i_\\mu}$ and total object $N$ are $\\tau$-presentable: by induction each predecessor colimit and each pushout is a colimit of fewer than $\\tau$ morphisms of presentable objects, and the total tree diagram also has fewer than $\\tau$ morphisms. Use the small-colimit presentability lemma at each occurrence. For these colimits in the undercategory, adjoin its presentable root $M$ and the structural maps to the diagram and compute the augmented colimit in $\\mathcal A$; this includes the empty-predecessor case. The bound on morphisms follows from $|T|<\\tau$ and regularity, with finite diagrams for pushouts. The original total map is the pushout of $h:M\\to N$, and Step 2 puts $h$ in the weakly saturated closure of the cells. This construction does not suppose that $V$ is presentable.",
+   "text": "For compact-root descent of a tree with fewer than $\\tau$ cells, write its arbitrary root $V$ as a small $\\tau$-filtered colimit of $\\tau$-presentable $V_i$. The filtered-poset reindexing lemma makes the index a small $\\tau$-filtered poset $I$. Choose $i\\in I$ (the empty subset has an upper bound), and take the empty descended tree over $V_i$. Apply partial cellular root descent extension with $E=\\varnothing$. Its hypotheses hold because all cell sources are $\\tau$-presentable. It gives $j\\ge i$ and a tree with root $M=V_j$ on the same poset and with the same cells, whose specified objectwise pushout to $V$ is the original tree. The small-tree presentability lemma gives a $\\tau$-presentable total object $N$, since $M$ and both endpoints of every cell are presentable and there are fewer than $\\tau$ cells. Put $h:M\\to N$. Maps out of $N\\amalg_M V$ are exactly cocones under $V$ on the base-changed tree, so its total arrow is the pushout of $h$. Step 2 puts $h$ in the weakly saturated closure of the cells. No presentability of $V$ is used.",
    "uses": [
     "lem-coef-cardinal-filtered-poset-reindex",
-    "lem-weil-pbc-well-ordering-theorem",
-    "lem-weil-pbc-transfinite-recursion",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-coef-ordinary-small-colimit-presentable"
+    "lem-coef-partial-cellular-root-descent-extension",
+    "lem-coef-small-tree-presentable-vertices",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
@@ -165,7 +163,8 @@
   "lem-weil-pbc-transfinite-recursion",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
   "lem-coef-cardinal-filtered-poset-reindex",
-  "lem-coef-ordinary-small-colimit-presentable",
+  "lem-coef-partial-cellular-root-descent-extension",
+  "lem-coef-small-tree-presentable-vertices",
   "lem-coef-presentable-cellular-factorization",
   "lem-coef-lifting-class-closure",
   "lem-coef-transfinite-left-lifting",
@@ -250,7 +249,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-intersection-generators",
@@ -263,17 +262,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-weak-saturation-tree-presentation",
   "worker": "stage1",
-  "summary": "Preserved the statement, including the canonical pushout leg. Proved relative trees, transition saturation, good thinning, and compact-root descent in explicit steps. Used existing cellular small-object and presentability tools; created only compatible-idempotent enlargement and compact pushout retract descent. Avoided the backwards definition-dependency cycle through the existing small-tree descent node. HTT is read online but not archived, so proof_origin is agent.",
+  "summary": "Repair of the human return about the 2249-character Step 4: kept the statement, Lean record, route and other nine steps unchanged. Extracted the compatible partial-root descent extension and small-tree vertex/restricted-colimit presentability as two independent statement-only lemmas using the existing CellularTree definition. Step 4 now applies those lemmas and assembles their conclusions. No cyclic citation of small-cellular-tree-descent; two new nodes, zero Mathlib leaves. Prior Q15 report retained as history and superseded for Step 4 by Review by NW.",
   "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction before the first derived-limit comparison: the present steps discharge the good-tree input to accessible-intersection generators below the marked-point model; no unit-level route is replaced.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q15-62a3102f3",
-  "group": "Q15",
+  "reviewer": "NT-cc-NW-20a49cb47",
+  "group": "NW",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-62a3102f3 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all nine cited statements, the unit and chapter records, and the three duplicate candidates (small-cellular-tree-descent, good-subset-enlargement, cellular-tree-presentable-approximations). The source, HTT A.1.5, is not in literature/ and I could not open it (no downloads). The report lists it as WANTED and proof_origin is agent. So I checked each step directly as mathematics. I compared the route with HTT A.1.5 only from memory: 6/7 transitions and thinning, 9/10 auxiliaries, 11 compact-root descent, 12/13 the theorem. Steps 1-10 hold. Step 1: under downward closure every cross relation lies in F, so the union square is a pushout; the relative tree's intersection is {s<t}. Step 3: thinning keeps its comparison invariant because S minus t is downward-closed in both orders. Step 4: compact-root descent pushes out along V to V_i and uses a cofinal tail; the root-augmented diagrams have fewer than tau morphisms. It proves small-cellular-tree-descent inline, because citing that node would close a cycle. Step 5: lifting gives sf=j and ps=1. Step 7: the coequalizer splitting gives qj=1 and the image-map calculations hold. Step 8: the three equations of the A.1.5.9 node are exactly what amalgamation needs. Step 9: the retract lemma gives k in wsat({h}), which lies in C, so k is in K. Step 10: pj and qs are inverse isomorphisms under X. New nodes: both are self-contained statement-only nodes, true by my own proof sketches (uncountable tau allows countably many enlargements), and tested on small cases (B empty, B=T, u=id, empty set to a point in Set). Neither is a duplicate or a restated clause of the item. Each has the ancestor prop-coef-integral-exceptional-adjoint with the via list headed by the item, same_as [], and three kinds of Mathlib search. The dependency closure has no cycle and no missing id. Every cited statement is in unit sk-prop-sf-biduality-general or is a Mathlib leaf, so no tool_uses are needed and none are accepted. The statement is unchanged and nothing was weakened. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-20a49cb47 (reviewer sub-agent of L); spot-checked: PASS with no file changes; review.md has the full checks. This is a repair delivery: compared read-only with the side-project copy, only Step 4 of the item changed (plus proof_deps, split_report and status). The statement, stmt_deps, lean record, source and blueprint fields are identical, the other nine steps are byte-identical, and proof_deps is exactly the union of the step uses. Step 4 is now a short application, which answers the return's objection to hidden lemmas. It writes the root as a tau-filtered colimit of tau-presentable objects (the item's own hypothesis), reindexes it to a small tau-filtered poset (cardinal-filtered-poset-reindex), applies the extension lemma with E empty, gets a presentable total N from small-tree-presentable-vertices, and recovers the original total arrow as a pushout of h, which Step 2 puts in the weak saturation. Its only use, in Step 9, is a K-tree with fewer than tau cells, so every hypothesis holds. New node partial-cellular-root-descent-extension: true; I proved it by the HTT A.1.5.11 induction, using that base change along the root commutes with colimits, a tau-filtered cofinal tail, and presentability of P_t for successor factorizations (fewer than tau indices at limits). It needs only cell sources presentable. Tested on T=E=empty, E=T, and a Set example (V=N, a cell {a,b}->* hitting 5 and 7) that needs j>=7, consistent with the stated j>=i. It cites def-coef-good-cellular-tree, whose only statement dependency is the colimit definition, so the cycle through small-cellular-tree-descent is avoided. New node small-tree-presentable-vertices: true by well-founded induction plus ordinary-small-colimit-presentable (Mathlib Presentable/Limits.lean:185-195) on the diagram with the root adjoined (at most |T|^2+|T|+1 < tau morphisms). Its hypotheses are needed: T empty with a nonpresentable root is a counterexample. Neither node is a duplicate, a Mathlib leaf or a clause of the item. Both are statement-only, self-contained, single-escaped TeX, with correct blueprint ancestor/via and leanfinder, loogle and grep searches (LeanSearch recorded as unavailable). HTT is not in literature/ (WANTED); I checked against A.1.5.11/12 from knowledge, and no SGA source is used. No tool_uses are declared or needed, and no target or coefficient category is involved."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.WeakSaturationTreePresentation",

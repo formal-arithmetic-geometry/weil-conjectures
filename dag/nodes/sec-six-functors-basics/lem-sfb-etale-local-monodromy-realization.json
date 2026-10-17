@@ -103,17 +103,11 @@
    }
   },
   {
-   "text": "Obtaining connected qcqs topologically Noetherian charts. For each of the finitely many given objects use [lem-weil-pbc-lisse-lattice-etale-local] to obtain an etale covering with integral lisse lattices. Iterating these coverings for the finitely many objects gives a common covering in the small etale site [def-weil-pbc-etale-site]; existing lattices restrict to later stages. On an etale slice the continuous-function coefficient rings are literally the coefficient rings of that slice, by [def-weil-pbc-lisse-lattice-coefficients], so restricting preserves the finite free local models and the rationalization isomorphisms. Refine each member by affine neighbourhoods mapping into affine opens $\\operatorname{Spec}R$ of $S$. Since an etale map is locally of finite presentation [def-weil-etale-morphism, def-sbc-locally-finite-presentation], these can be chosen $\\operatorname{Spec}B$ with $B$ a finitely presented, in particular finitely generated, $R$-algebra. The open $\\operatorname{Spec}R$ has Noetherian underlying space, so [lem-sfb-finite-type-noetherian-spectrum] gives the same property for $\\operatorname{Spec}B$. By [lem-sc-noetherian-finite-irreducible-components] it has finitely many irreducible components. Form the finite graph joining two components when they meet. The union in each graph component is connected (a chain of intersecting connected irreducible sets), closed (a finite union of closed sets), and open (its complementary graph components also have closed union). These unions partition the chart and are precisely its connected components. Each is a connected open subscheme with Noetherian underlying space, hence qcqs: every open subset is quasi-compact. Indeed, finite unions from any open covering have a maximal member by the ascending chain condition; adjoining any remaining covering open shows this member covers the subset. This applies to the whole scheme and every intersection of two affine opens. They still form an etale covering of $S$. Discard empty members. Choose a point in each nonempty member and an algebraic closure of its residue field by [def-weil-algebraic-closure]; this gives the required geometric point [def-weil-geometric-point]. This step uses no ring-theoretic Noetherianity or separation of $S$.",
+   "text": "Common integral-lattice cover. For each of the finitely many objects apply [lem-weil-pbc-lisse-lattice-etale-local]. Successively refine these coverings in the small etale site [def-weil-pbc-etale-site], retaining previously obtained lattices by restriction. On every etale slice the coefficient rings are the continuous-function coefficient rings of that slice [def-weil-pbc-lisse-lattice-coefficients]; restriction therefore preserves the finite free local models and their rationalization isomorphisms. This gives one etale covering on which all the objects admit integral lisse lattices. For an empty list of objects start with the identity covering of $S$.",
    "uses": [
     "lem-weil-pbc-lisse-lattice-etale-local",
     "def-weil-pbc-etale-site",
-    "def-weil-pbc-lisse-lattice-coefficients",
-    "def-weil-etale-morphism",
-    "def-sbc-locally-finite-presentation",
-    "lem-sfb-finite-type-noetherian-spectrum",
-    "lem-sc-noetherian-finite-irreducible-components",
-    "def-weil-algebraic-closure",
-    "def-weil-geometric-point"
+    "def-weil-pbc-lisse-lattice-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -122,7 +116,58 @@
    }
   },
   {
-   "text": "Realizing the whole finite diagram. On a member $T_i$ of step 6 let $M_{a,i}$ be the integral lattice of each pulled-back object. The equivalence of step 1 writes it as $K_{T_i}(B_{a,i})$. Tensoring $B_{a,i}$ with $E$ gives $V_{a,i}$ with continuous action: its action matrix has continuous entries on the invariant lattice, hence on the same finite dimensional vector space. The normalization of step 3 identifies $J_{T_i}(V_{a,i})$ with $M_{a,i}[1/\\ell]$ and with $u_i^{-1}L_a$. Write $\\iota_{a,i}:J_{T_i}(V_{a,i})\\xrightarrow{\\sim}u_i^{-1}L_a$ for these isomorphisms. For an arrow $b:a\\to c$, full faithfulness in step 3 gives a unique equivariant $E$-linear map $h_{b,i}$ satisfying $J_{T_i}(h_{b,i})=\\iota_{c,i}^{-1}\\circ u_i^{-1}f_b\\circ\\iota_{a,i}$. For two composable arrows the middle factors $\\iota_{c,i}\\circ\\iota_{c,i}^{-1}$ cancel, so applying $J_{T_i}$ to their composite gives precisely the conjugate of the composite sheaf arrow. The identity arrow gives the identity map by the same formula. Faithfulness then reflects every stipulated equality of paths in the diagram. It is unnecessary to arrange integral preservation of all of the chosen lattices by all arrows: the Hom localization has already proved the assertion for rational maps. If there are no objects choose the same connected refinement of $S$ without invoking lattice covers; if $S$ is empty choose the empty covering. Thus the construction covers empty diagrams, rank zero, and the empty base.",
+   "text": "Affine charts with Noetherian underlying spaces. Every map in the preceding cover is etale and hence locally of finite presentation [def-weil-etale-morphism]. The pointwise definition [def-sbc-locally-finite-presentation] supplies a covering of its source by affine neighbourhoods $\\operatorname{Spec}B$ mapping into affine opens $\\operatorname{Spec}R$ of $S$, with $B$ finitely presented over $R$. Such $B$ is finitely generated over $R$, so [lem-sfb-finite-type-noetherian-spectrum] makes $\\operatorname{Spec}B$ topologically Noetherian. Indeed the affine open of $S$ is Noetherian: an ascending chain of its opens is an ascending chain of opens of $S$. Refining by these affine opens is still a covering in [def-weil-pbc-etale-site], and all the lattices restrict along it.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-finite-type-noetherian-spectrum",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), connected refinement in Corollary 6.8.5; Stacks Topology Tag 0052 (lemma-Noetherian); finite type spectrum input explicitly separated"
+   }
+  },
+  {
+   "text": "Connected refinement. Apply [lem-sfb-noetherian-connected-components-open] to each affine chart $X=\\operatorname{Spec}B$ just obtained. Its finitely many nonempty connected components are open, and their complementary finite unions are open, so each component is also closed. Regard each component $C$ as an open subscheme and restrict the lattices to it; the components cover $X$, hence give a further etale covering of $S$ [def-pc-scheme, def-weil-pbc-etale-site]. Each $C$ is topologically Noetherian: an ascending chain of opens of the open subspace $C$ is an ascending chain of opens of $X$, and therefore stabilizes.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open",
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 04MF and 04ME, connected open components; Tag 0052, Noetherian subspaces."
+   }
+  },
+  {
+   "text": "Quasi-compactness and quasi-separatedness of these components. By [lem-sfb-noetherian-space-compact-subsets], every subset of the Noetherian affine chart $X$ is quasi-compact with its subspace topology. In particular the component $C$ itself is quasi-compact. For the diagonal $\\Delta_C:C\\to C\\times_{\\operatorname{Spec}\\mathbf Z}C$, the inverse image of any quasi-compact open is a subset of $X$, hence quasi-compact by the same statement. Thus the diagonal is quasi-compact, which is precisely quasi-separatedness [def-weil-quasi-separated-morphism]. No separation or ring-theoretic Noetherianity hypothesis is needed.",
+   "uses": [
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 04ZA (lemma-Noetherian-quasi-compact); definition of quasi-separatedness applied to the diagonal."
+   }
+  },
+  {
+   "text": "Geometric points and empty base. The connected pieces are nonempty. Choose a point in each and an algebraic closure of its residue field [def-weil-algebraic-closure]; by [def-weil-geometric-point] this gives a geometric point of that piece. If $S$ is empty, take the empty covering and no geometric points. Together the preceding refinements give the connected qcqs topologically Noetherian pointed charts required for the final diagram construction.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), connected refinement in Corollary 6.8.5; Stacks Topology Tag 0052 (lemma-Noetherian); finite type spectrum input explicitly separated"
+   }
+  },
+  {
+   "text": "Realizing the whole finite diagram. On a member $T_i$ of steps 6–10 let $M_{a,i}$ be the integral lattice of each pulled-back object. The equivalence of step 1 writes it as $K_{T_i}(B_{a,i})$. Tensoring $B_{a,i}$ with $E$ gives $V_{a,i}$ with continuous action: its action matrix has continuous entries on the invariant lattice, hence on the same finite dimensional vector space. The normalization of step 3 identifies $J_{T_i}(V_{a,i})$ with $M_{a,i}[1/\\ell]$ and with $u_i^{-1}L_a$. Write $\\iota_{a,i}:J_{T_i}(V_{a,i})\\xrightarrow{\\sim}u_i^{-1}L_a$ for these isomorphisms. For an arrow $b:a\\to c$, full faithfulness in step 3 gives a unique equivariant $E$-linear map $h_{b,i}$ satisfying $J_{T_i}(h_{b,i})=\\iota_{c,i}^{-1}\\circ u_i^{-1}f_b\\circ\\iota_{a,i}$. For two composable arrows the middle factors $\\iota_{c,i}\\circ\\iota_{c,i}^{-1}$ cancel, so applying $J_{T_i}$ to their composite gives precisely the conjugate of the composite sheaf arrow. The identity arrow gives the identity map by the same formula. Faithfulness then reflects every stipulated equality of paths in the diagram. It is unnecessary to arrange integral preservation of all of the chosen lattices by all arrows: the Hom localization has already proved the assertion for rational maps. If there are no objects choose the same connected refinement of $S$ without invoking lattice covers; if $S$ is empty choose the empty covering. Thus the construction covers empty diagrams, rank zero, and the empty base.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -156,7 +201,10 @@
   "def-weil-etale-morphism",
   "def-sbc-locally-finite-presentation",
   "lem-sfb-finite-type-noetherian-spectrum",
-  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-noetherian-connected-components-open",
+  "def-pc-scheme",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "def-weil-quasi-separated-morphism",
   "def-weil-algebraic-closure",
   "def-weil-geometric-point"
  ],
@@ -287,7 +335,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-coefficient-heart-closure",
@@ -300,7 +348,7 @@
   "date": "2026-10-17",
   "item": "lem-sfb-etale-local-monodromy-realization",
   "worker": "stage1",
-  "summary": "Seven proof steps separate integral reduction effectivity, Hom localization on a qcqs chart, lattice-independent functorial realization, compatible lattices in exact sequences, exact inverse limits in the pro-etale sheaf category, connected topologically Noetherian etale refinements, and simultaneous realization of every arrow. Two strictly smaller statement-only inputs are created; the assigned statement is unchanged. No attachment was found, no Lean was written or compiled, and no SGA route is used.",
+  "summary": "Q38 repair of the human return: replace original step 6 (2266 characters) by five short steps for common lattice covers, finite-presentation affine charts, connected refinement, qcqs, and geometric points. The connected-component argument is isolated in a new statement-only node attached to two closed project declarations; compactness reuses an existing Mathlib leaf. Original steps 1–5 are unchanged and the last assembly step only updates its chart-step reference. Statement and Lean record are unchanged.",
   "blueprint": "det-lem-coefficient-heart-closure proof paragraph (2), the integral-monodromy comparison preceding representation kernels and cokernels, following the finite coefficient portion of sk-lem-coefficient-heart.",
   "tool_uses": [
    {
@@ -348,6 +396,10 @@
     "why": "Generic input in step(s) 5: Recognizing the classical part. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
    },
    {
+    "node": "def-weil-pbc-site-comparison-morphism",
+    "why": "Generic input in step(s) 5: the module inverse image along nu is a finite-limit-preserving left adjoint on modules over a finite discrete ring, giving exactness into the ambient pro-etale module category. This implements the unit's integral-lattice route; the coefficient-heart unit has no statement providing this input."
+   },
+   {
     "node": "det-pe-products-exact",
     "why": "Generic input in step(s) 5: Products of pro-étale module sheaves are exact. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
    },
@@ -373,7 +425,7 @@
    },
    {
     "node": "def-weil-pbc-etale-site",
-    "why": "Generic input in step(s) 6: Small etale site. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+    "why": "Generic input in step(s) 6, 7, 8: Small etale site (coverings, fibre products, refinement). This implements the unit's integral-lattice route; the coefficient-heart unit has no statement providing this input."
    },
    {
     "node": "def-weil-pbc-lisse-lattice-coefficients",
@@ -381,23 +433,31 @@
    },
    {
     "node": "def-weil-etale-morphism",
-    "why": "Generic input in step(s) 6: Etale morphism of schemes. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+    "why": "Generic input in step(s) 7: Etale morphism of schemes (locally of finite presentation). This implements the unit's integral-lattice route; the coefficient-heart unit has no statement providing this input."
    },
    {
     "node": "def-sbc-locally-finite-presentation",
-    "why": "Generic input in step(s) 6: Morphisms locally of finite presentation. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+    "why": "Generic input in step(s) 7: Morphisms locally of finite presentation (affine charts Spec B over Spec R). This implements the unit's integral-lattice route; the coefficient-heart unit has no statement providing this input."
    },
    {
-    "node": "lem-sc-noetherian-finite-irreducible-components",
-    "why": "Generic input in step(s) 6: Noetherian spaces have finitely many irreducible components. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+    "node": "def-pc-scheme",
+    "why": "Generic input in step(s) 8: components of an affine chart as open subschemes. Definition, not route; connected-chart refinement before integral monodromy (BS 6.8.5 'we may assume that X is connected')."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic input in step(s) 9: every subset of a topologically Noetherian scheme is quasi-compact (Mathlib leaf TopologicalSpace.NoetherianSpace.isCompact); qcqs of the connected charts."
+   },
+   {
+    "node": "def-weil-quasi-separated-morphism",
+    "why": "Generic input in step(s) 9: definition of quasi-separatedness via the diagonal. Definition, not route."
    },
    {
     "node": "def-weil-algebraic-closure",
-    "why": "Generic input in step(s) 6: Algebraic closure of a field. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+    "why": "Generic input in step(s) 10: Algebraic closure of a field. This implements the unit's integral-lattice route; the coefficient-heart unit has no statement providing this input."
    },
    {
     "node": "def-weil-geometric-point",
-    "why": "Generic input in step(s) 6: Geometric point of a scheme. This implements the unit’s integral-lattice route; the coefficient-heart unit has no statement providing this input."
+    "why": "Generic input in step(s) 10: Geometric point of a scheme. This implements the unit's integral-lattice route; the coefficient-heart unit has no statement providing this input."
    }
   ]
  },
@@ -425,15 +485,19 @@
   "def-sbc-locally-finite-presentation",
   "lem-sc-noetherian-finite-irreducible-components",
   "def-weil-algebraic-closure",
-  "def-weil-geometric-point"
+  "def-weil-geometric-point",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pc-scheme",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "def-weil-quasi-separated-morphism"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q17-cade84960",
-  "group": "Q17",
+  "reviewer": "NT-cc-Q38-efb62f1ce",
+  "group": "Q38",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-cade84960 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, all 26 proof dependencies and 11 statement dependencies, the parent det-lem-coefficient-heart-closure and the unit sk-lem-coefficient-heart, and Bhatt–Scholze 6.8.1, 6.8.2, 6.8.3, 6.8.4(1)-(6) and 6.8.5 with their proofs (local PDF, pp. 58-60). Item statement: unchanged and matches BS 6.8.4(1),(4),(6) plus the monodromy step in the proof of 6.8.5. It adds no ell-invertibility, ring-Noetherian or separation hypothesis, and it gives the parent exactly what its step 2 uses. Step 1: Galois clause (1) only, finite local systems are classical, adic limits, and basis lifting for freeness. Step 2: checked the hypotheses of det-pe-bounded-continuity-sections (qcqs T, filtered N, degree 0, q=0); this is the BS 6.8.4(4) argument. Step 3: stable lattice for compact Pi; clearing denominators and lattice independence are written out. Step 4: B∩V' is finitely generated by ACC before freeness is applied; the A-linear splitting gives exact reductions (tested on a split two-dimensional case and on V'=V). Step 5: the product-exactness, Milnor and lift-defect-correction argument is correct, and localization is an exact filtered colimit. Step 6: the finite-presentation chart over affine Spec R, the Noetherian-spectrum lemma, finitely many irreducible components, clopen connected pieces and qcqs are all checked. Step 7: correctly elementary. New node lem-sfb-integral-lisse-reduction-equivalence: this is BS 6.8.4(1) ('left to the reader') with the 6.8.2 identities. It is true and strictly smaller than the item. I read every DAG node citing 6.8.4 and none is a duplicate. New node lem-sfb-finite-type-noetherian-spectrum: the Ohm–Pendleton theorem; it is true and weaker in hypothesis than Mathlib's Noetherian-ring instance. Stacks (algebra.tex, example-noetherian-topology-on-spec) explicitly does not prove it, so the WANTED source is legitimate. No duplicate turned up in a regex sweep of every node statement or a grep for Ohm/Pendleton. Searches cover all three kinds, there is no cycle, and no SGA source is used. I accept the declared tool_uses: they are generic black boxes and replace no unit step. FIX (one citation): step 5 took exactness of nu^* into the ambient module category from sk-thm-pe-classical-sheaves, whose statement gives exactness only onto the classical subcategory. I added def-weil-pbc-site-comparison-morphism (nu^* is a finite-limit-preserving left adjoint on modules over a finite discrete ring) to step 5's text, its uses and proof_deps. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-etale-local-monodromy-realization.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-efb62f1ce (reviewer sub-agent of L); spot-checked: Read in full: the item (11 steps; steps 1-5 and the statement are unchanged from the 2026-10-16 review and were re-read against Bhatt–Scholze 6.8.4(1),(4),(6)), the new node, and the statements of all 30 proof deps and 12 stmt deps. All exist and are unmerged; proof_deps equals the union of uses; no cycle. Steps 6-10 make Bhatt–Scholze Cor. 6.8.5 ('after passage to an étale cover … we may assume X connected; fix a geometric base point', p.60) precise. Step 6: the étale-local lattice lemma holds for any scheme; covers are refined by étale fibre products; slice coefficients are the identity on C(|V|,E). Step 7: étale implies lfp, giving Spec B of finite type over Spec R; Spec R is Noetherian as an open subspace, so the finite-type-spectrum node applies. Step 8: the new node gives finitely many clopen components that cover X and are each Noetherian. Step 9 (elementary): compactness of every subset gives qc, and the diagonal preimage is a subset of X, so qs holds without separation. Step 10: a point plus an algebraic closure is a geometric point; the empty base gets the empty cover. Step 11: conjugation plus full faithfulness. New node lem-sfb-noetherian-connected-components-open is true (finitely many irreducible components (0052), each in one connected component; components are closed with finite closed complements). Tested on the empty space, a point, the Sierpiński space, a finite discrete space, two crossing lines and Spec k×k. Sources checked: Stacks topology.tex 04MF (l.1366), 04ME (l.820), 0052. It is not a restatement or a duplicate: rg over all of dag/nodes and the main-20261015 blueprint. It is attached exactly to the sorry-free slopmaster2 TopologicalSpace.NoetherianSpace.finite_connectedComponents and isOpen_connectedComponent (NoetherianSpace.lean 49-62; sorry map s=false, ts=false). Fixes: (1) added lean_candidates for that attachment to the new node; (2) corrected the stale step numbers and the mislabelled def-weil-pbc-site-comparison-morphism reason (it is used in step 5) in the item's split_report.tool_uses. No step, statement or dependency changed. Accepted tool_uses: lem-weil-pbc-lisse-lattice-etale-local (step 6) and the previously accepted step 1-5 inputs. For the maintainer: the top-level tool_uses still lists lem-sc-noetherian-finite-irreducible-components, which the proof no longer cites. No SGA source is used and no target is weakened.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.EtaleLocalMonodromyRealization",

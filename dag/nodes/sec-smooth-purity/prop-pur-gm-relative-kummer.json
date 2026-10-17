@@ -181,65 +181,108 @@
    }
   },
   {
-   "text": "Finally pass to the small pro-etale site used by the statement. Both projections $p$ and $\\pi$ are affine, hence quasi-compact and quasi-separated, and remain so after every base change. Their inputs are finite-torsion sheaves in degree zero. [prop-weil-pbc-comparison-direct-image] therefore applies on $D^+$, and [lem-weil-pbc-comparison-direct-image-canonical-mate] specifies the invertible comparison $b_a:\\nu_B^*Ra_{\\mathrm{et},*}\\xrightarrow{\\sim}Ra_{\\mathrm{proet},*}\\nu_{C_B}^*$ as the counit mate of the pullback comparison $a_a$. [lem-sf-comparison-pullback-exact](1)–(3) identifies the finite constant rings and gives exact module pullback commuting with cohomology sheaves. [thm-weil-pbc-site-comparison] supplies full faithfulness on $D^+$, and [lem-weil-pbc-comparison-global-cohomology] identifies global cohomology by the actual comparison unit, so it carries the etale Kummer class and its coefficient extension to the class in the question. This class was defined by the etale Kummer boundary in [def-pur-affine-line-datum].\nFor completeness, the units are preserved by the specified $b_a$: the transpose of $b_{a,a^{-1}L}\\circ\\nu_B^*\\eta_a(L)$ is, after the natural pullback identifications, $\\nu_{C_B}^*(\\varepsilon_a\\circ a^{-1}\\eta_a)=\\mathrm{id}$ by the counit normalization in the canonical-mate lemma and the triangle identity. It is therefore the pro-etale unit. The comparison-global-cohomology map and exact comparison on cohomology sheaves identify the edge section of a class with the edge section of its comparison image: on the resolution model, the same class maps first to the cohomology presheaf and then to its sheafification, and exact $\\nu^*$ commutes with kernels, images, and these maps. Hence the degree-one map sending $1$ to the Kummer edge section is the comparison of the map in step 9. Finally [lem-weil-pbc-transport-identifies-exchange] gives the explicit equality $T\\circ\\nu_{B'}^*(\\operatorname{Ex}_{\\mathrm{et}})=\\operatorname{Ex}_{\\mathrm{proet}}\\circ S$, with $S,T$ the specified invertible pullback/direct-image comparisons. Its hypotheses require only that $a$ and $a'$ be qcqs, which holds here even for a geometric point. Thus the base-change isomorphisms of step 12 are the stated pro-etale exchange maps. This proves all the asserted maps and clauses on the pro-etale site.",
+   "text": "Pass to the small pro-etale site. For $a=p$ or $\\pi$, the morphism $a:C_B\\to B$ is affine, hence qcqs, and remains so after every base change, including a geometric point. The finite coefficient sheaves in degree zero are in $D^+$. Apply [prop-weil-pbc-comparison-direct-image] and use [lem-weil-pbc-comparison-direct-image-canonical-mate] to choose its specified invertible counit mate $b_a$. By [lem-sf-comparison-pullback-exact](1)–(3), comparison identifies constant coefficients, is exact, and commutes with cohomology sheaves. Thus the vanishing calculations of step 9 hold on the pro-etale site as well. [thm-weil-pbc-site-comparison] supplies the bounded-below fully faithful comparison.",
    "uses": [
     "prop-weil-pbc-comparison-direct-image",
-    "thm-weil-pbc-site-comparison",
-    "lem-sf-comparison-pullback-exact",
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-sf-comparison-pullback-exact",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+    "place": "Proof, opening paragraph: qcqs direct-image comparison and cohomology sheaves"
+   }
+  },
+  {
+   "text": "The named comparison preserves the units by [lem-pur-mate-unit-compatibility]. In its notation take $L_1=a_{\\mathrm{et}}^*$, $R_1=Ra_{\\mathrm{et},*}$, $L_2=a_{\\mathrm{proet}}^*$, $R_2=Ra_{\\mathrm{proet},*}$, $G=\\nu_B^*$, $H=\\nu_{C_B}^*$, and $\\alpha$ the inverse of the specified pullback comparison. Its right mate is precisely $b_a$ by [lem-weil-pbc-comparison-direct-image-canonical-mate]. The leaf's identity says that $b_{a,a^*L}\\circ\\nu_B^*\\eta_a^e(L)=Ra_{\\mathrm{proet},*}(\\alpha_L)\\circ\\eta_a^p(\\nu_B^*L)$. Identifying coefficients through $\\alpha_L$ makes this the pro-etale unit. Hence step 9 gives the stated affine-line acyclicity units and the punctured-line degree-zero unit, with their actual maps.",
+   "uses": [
+    "lem-pur-mate-unit-compatibility",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+    "place": "Proof, opening paragraph: transport the units, using the Mathlib mate-unit identity"
+   }
+  },
+  {
+   "text": "Write $T=\\mathbf G_{m,B}$ and $F=A(1)^{\\mathrm{et}}_T$. By [lem-weil-pbc-comparison-global-cohomology], $c^1_{T,F}$ is $R\\Gamma(T_{\\mathrm{et}},\\eta_F)$ followed by the final-object comparison of [lem-weil-pbc-derived-sections-pushforward]. Unwind it on an injective module resolution $F\\to I^\\bullet$ and an injective resolution $\\nu_T^*I^\\bullet\\to J^\\bullet$ of $\\nu_T^*F$ (exactness of $\\nu_T^*$, [lem-sf-comparison-pullback-exact](2)): $\\nu_{T,*}J^\\bullet$ computes $R\\nu_{T,*}\\nu_T^*F$, the composite $I^\\bullet\\to\\nu_{T,*}\\nu_T^*I^\\bullet\\to\\nu_{T,*}J^\\bullet$ lifts the unit, and evaluation at the final object gives $\\Gamma(T_{\\mathrm{et}},I^\\bullet)\\to\\Gamma(T_{\\mathrm{proet}},\\nu_T^*I^\\bullet)\\to\\Gamma(T_{\\mathrm{proet}},J^\\bullet)$: pull back the cocycle, then compare with the resolution. This is the recipe of [lem-weil-pbc-site-cohomology-pullback] for $\\nu_T$ at the final object, formed with module resolutions, i.e. the canonical global-cohomology pullback; [lem-pe-left-module-derived-evaluation-forget] says that forgetting scalars carries it to the abelian canonical pullback, which is the isomorphism of [lem-cbc-abelian-etale-proetale-cohomology-comparison] used in [def-pur-affine-line-datum] to define $\\kappa(t)$ as the image of $\\kappa_{\\mathrm{et}}(t)$, under the datum's identification of $\\nu_T^{-1}A(1)^{\\mathrm{et}}_T$ with $A(1)_T$. Hence $c^1_{T,F}(\\kappa_{\\mathrm{et}}(t))=\\kappa(t)$. Apply [lem-pur-site-comparison-edge-section] with $u=\\pi$, $F$ and $q=1$. Its equality identifies the pulled-back edge section of $\\kappa_{\\mathrm{et}}(t)$ under $\\mathcal H^1(b_\\pi)$ with the edge section of $\\kappa(t)$. Consequently the image of the isomorphism $A_B\\to R^1\\pi_{\\mathrm{et},*}A(1)$ in step 9 is exactly the asserted map $1\\mapsto\\kappa(t)$ on the pro-etale site. Exact comparison preserves its invertibility. This settles the specified generator, as well as the cohomology groups on geometric fibres.",
+   "uses": [
     "lem-weil-pbc-comparison-global-cohomology",
+    "lem-weil-pbc-derived-sections-pushforward",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
     "def-pur-affine-line-datum",
+    "lem-pur-site-comparison-edge-section",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+    "place": "Proof, opening paragraph: transport the Kummer class (the datum's canonical comparison) and its edge section"
+   }
+  },
+  {
+   "text": "For each square in step 12, [lem-weil-pbc-transport-identifies-exchange] gives $T\\circ\\nu_{B'}^*(\\operatorname{Ex}_{\\mathrm{et}})=\\operatorname{Ex}_{\\mathrm{proet}}\\circ S$, with the specified invertible pullback/direct-image comparisons $S,T$. Its qcqs assumptions concern $a$ and $a'$, already checked in step 13; they hold even when $B'=\\operatorname{Spec}\\Omega$ is not finite type over $k$. Since step 12 proves that the etale exchange is invertible, its image under comparison is invertible, and conjugating by $S,T$ proves that the specified pro-etale exchange is invertible. Thus the base-change isomorphisms of step 12 are the stated pro-etale exchange maps. Together with the compared classes of step 15, this completes the transport of all clauses to the statement's site convention.",
+   "uses": [
     "lem-weil-pbc-transport-identifies-exchange"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
-    "place": "Proof, opening paragraph: transport the calculation and its actual morphisms to the pro-etale site"
+    "place": "Proof, opening paragraph and Step 3: transport the actual exchange, including geometric-point base change"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-conventions",
   "def-pur-affine-line-datum",
-  "lem-pur-finite-kummer-level",
-  "lem-sc-primitive-root",
-  "lem-sbc-higher-direct-image-forget-comparison",
-  "lem-weil-pbc-etale-module-injective-forget-acyclic",
-  "src-right-derived-functor-plus-acyclic-unit",
-  "lem-sc-acyclic-comparison-natural",
-  "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-pur-conventions",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-underived-exchange",
   "lem-amb-kummer-any-base",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-horseshoe-delta-functor",
-  "lem-sc-kummer-exact",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-sc-h1-gm-pic",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-kun-bc-map-on-cohomology",
+  "lem-pe-left-module-derived-evaluation-forget",
   "lem-pur-affine-punctured-line-algebra",
-  "lem-weil-pbc-constant-sheaf-sections-connected",
-  "thm-sc-affine-cohomology",
+  "lem-pur-finite-kummer-level",
   "lem-pur-kummer-coefficient-base-change",
-  "prop-weil-pbc-strict-henselization-stalk-formula",
-  "sbc-lem-higher-direct-image-presheaf",
-  "sbc-thm-smooth-base-change",
-  "sbc-lem-strict-henselian-constant-cohomology",
-  "sbc-def-base-change-map",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-pur-mate-unit-compatibility",
+  "lem-pur-site-comparison-edge-section",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sc-acyclic-comparison-natural",
+  "lem-sc-h1-gm-pic",
+  "lem-sc-kummer-exact",
+  "lem-sc-primitive-root",
+  "lem-sf-comparison-pullback-exact",
   "lem-weil-derived-direct-image-composition",
   "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-kun-bc-map-on-cohomology",
-  "def-weil-pbc-underived-exchange",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "prop-weil-pbc-comparison-direct-image",
-  "thm-weil-pbc-site-comparison",
-  "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-comparison-global-cohomology",
-  "lem-weil-pbc-transport-identifies-exchange"
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-derived-sections-pushforward",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-etale-module-injective-forget-acyclic",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "sbc-def-base-change-map",
+  "sbc-lem-higher-direct-image-presheaf",
+  "sbc-lem-strict-henselian-constant-cohomology",
+  "sbc-thm-smooth-base-change",
+  "src-right-derived-functor-plus-acyclic-unit",
+  "thm-sc-affine-cohomology",
+  "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -284,7 +327,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -326,11 +369,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "prop-pur-gm-relative-kummer",
   "worker": "stage1",
-  "summary": "Expanded the strict-local smooth-base-change proof into 13 checked steps, retained the prescribed geometric reduction and explicit Kummer calculation, reused existing nodes throughout, checked maps on cocycles and by adjunction, removed the mis-hypothesized geometric computation as a proof input, and explicitly proved geometric-point base change beyond the finite-type quantifier. No new nodes. Second reading repaired the module/abelian exchange citation, the termwise class calculation, and normalization of the pro-etale units and exchange using existing explicit interfaces.",
-  "blueprint": "Opening paragraph -> steps 1–2 and 13; Step 1 and unit Reduction -> steps 6–9; Step 2 and unit Degrees 0 and 1/Clause (c)/flat Coefficients alternative -> steps 3–9; Step 3 -> steps 10–12.",
+  "summary": "Q122 repair of the human return: preserved the statement, Lean record and steps 1–12 verbatim; replaced the 2332-character step 13 with four short steps. Extracted the general mate-unit identity as a Mathlib leaf and the site-comparison edge-section compatibility as a statement-only node. Existing canonical direct-image, global-cohomology, exact-comparison and exchange-transport interfaces retain the route. Maintainer reader FIX (2026-10-17): step 15 now unwinds the unit-induced global comparison and identifies it with the canonical comparison that defines the pro-etale kappa(t) in def-pur-affine-line-datum.",
+  "blueprint": "Existing steps 1–12 retain all previous unit realizations. The opening paragraph transport is now steps 13–16: qcqs objects/vanishing; actual units; Kummer edge section; actual exchange. New nodes serve precisely the two inline arguments in returned step 13.",
   "tool_uses": [
    {
     "node": "src-right-derived-functor-plus-acyclic-unit",
@@ -378,19 +421,31 @@
    },
    {
     "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "The named invertible etale/pro-etale comparison is the counit mate, needed for units in step 13."
+    "why": "The invertible comparison is the specified counit mate, needed for units in steps 13–14."
    },
    {
     "node": "lem-weil-pbc-comparison-global-cohomology",
-    "why": "Canonical global-cohomology comparison identifies the actual Kummer class in step 13."
+    "why": "Canonical global-cohomology comparison identifies the actual Kummer class in step 15; generic transport tool."
    },
    {
     "node": "lem-weil-pbc-transport-identifies-exchange",
-    "why": "Canonical equality of the etale and pro-etale exchange maps in step 13; not a replacement of the unit proof route."
+    "why": "Canonical equality of etale and pro-etale exchange maps in step 16; the unit route remains unchanged."
    },
    {
     "node": "lem-weil-pbc-etale-restriction-injectives",
     "why": "Etale restriction preserves the injective resolutions used for the local cocycle calculation in step 11; a generic resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-sections-pushforward",
+    "why": "Final-object comparison R Gamma(T_et, R nu_* J) = R Gamma(T_proet, J), the second factor of the unit-induced global comparison unwound in step 15; generic site-comparison interface."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Forgetting scalars commutes with canonical global-cohomology pullback along nu_T; identifies the module unit-induced comparison with the abelian comparison defining kappa(t) in the datum. Step 15."
+   },
+   {
+    "node": "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "why": "The comparison by which def-pur-affine-line-datum defines the pro-etale kappa(t); step 15 identifies c^1 with it. Generic comparison interface, no unit node gives it."
    }
   ]
  },
@@ -409,15 +464,18 @@
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-comparison-global-cohomology",
   "lem-weil-pbc-transport-identifies-exchange",
-  "lem-weil-pbc-etale-restriction-injectives"
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-derived-sections-pushforward",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-N9-b1fdf1891",
-  "group": "N9",
+  "reviewer": "NT-cc-Q122-d61ac79b8",
+  "group": "Q122",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-b1fdf1891 (reviewer sub-agent of L); spot-checked: Read the full delivery and all cited statements; review.md records checks of all thirteen steps. Verified Kummer generators, strict-local smooth-base-change hypotheses, canonical module/abelian and étale/pro-étale exchange comparisons, edge cases, and absence of dependency cycles or new duplicates. Accepted all fifteen declared tool uses. No corrections required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-d61ac79b8 (reviewer sub-agent of L); spot-checked: Read the item, all 16 steps and both new nodes in full, plus every statement cited in steps 13–16, the unit sk-prop-a1-kummer, and the main-20261015 and master blueprint proofs. Steps 1–12 are unchanged from the reviewed version; I rechecked their citations but did not reopen their accepted mathematics. lem-pur-mate-unit-compatibility is an exact Mathlib leaf: CategoryTheory.unit_mateEquiv, Mates.lean:136–138, with TwoSquare G L1 L2 H = L2G→HL1 (TwoSquare.lean:50). No existing node matches unit_mateEquiv. Step 14's direction is right: canonical-mate defines b_u as the transpose of A_U(ε)∘a_u^{-1}, which is the mate of α=a_u^{-1}. lem-pur-site-comparison-edge-section is true and generic: it follows from the counit-mate normalization plus naturality of the edge map under the exact comparison. It is well defined (H^q(τ≥q K)=Γ(H^q K)), holds in the edge cases q=0, u=id, F=0 and U empty, does not restate a clause of the item, and duplicates no existing node. Stacks 099W and 072W are cited at the right labels. Steps 13 and 16 check out: a and a′ are affine, hence qcqs, also for Spec Ω; inputs are in D+; and transport-identifies-exchange gives T∘A(E)=Ex^R∘S. Coefficients are ordinary constant-ring module sheaves throughout, and no SGA source is cited. One fault, repaired (error C4): step 15 claimed lem-weil-pbc-comparison-global-cohomology carries κ_et(t) to the datum's pro-étale κ(t). But def-pur-affine-line-datum defines κ(t) through the abelian canonical pullback of lem-cbc-abelian-etale-proetale-cohomology-comparison, and no cited node identified the two maps. The rewritten step 15 unwinds RΓ(unit) followed by the final-object comparison (lem-weil-pbc-derived-sections-pushforward) into the recipe of lem-weil-pbc-site-cohomology-pullback, then uses lem-pe-left-module-derived-evaluation-forget to pass from module to abelian coefficients. Updated proof_deps and declared these three new tool uses, which I accept along with the 15 existing ones. I checked by DFS that the added citations create no cycle. Statement, Lean record and all other steps are unchanged. No drop_nodes.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PurityRelativeKummer",
