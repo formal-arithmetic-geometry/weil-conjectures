@@ -2,7 +2,7 @@
  "id": "lem-trf-residue-factor-root-selection",
  "kind": "statement",
  "title": "A root over a residue prime avoids the localization polynomial",
- "statement": "Let $k$ be a field [def-weil-field], let $f,g\\in k[t]$ [def-weil-polynomial-ring] with $f$ monic (leading coefficient $1$), and let $L$ be a field extension of $k$ [def-pc-field-extension]. Suppose that for a finite indexed family $(\\alpha_i)_{i\\in I}$ of elements of $L$ the coefficient image of $f$ in $L[t]$ equals $\\prod_{i\\in I}(t-\\alpha_i)$; the empty family is allowed. Let $f_1\\in k[t]$ be irreducible, meaning nonzero, not a unit, and with a unit factor in every factorization in $k[t]$. If $f_1\\mid f$ and $f_1\\nmid g$, then there is an index $i\\in I$ such that $f_1(\\alpha_i)=0$ and $g(\\alpha_i)\\ne0$, where evaluation uses the given map $k\\to L$.",
+ "statement": "Let $k$ be a field [def-weil-field], let $f,g\\in k[t]$ [def-weil-polynomial-ring] with $f$ monic (leading coefficient $1$), and let $L$ be a field extension of $k$ [def-pc-field-extension]. Suppose that for a finite indexed family $(\\alpha_i)_{i\\in I}$ of elements of $L$ the coefficient image of $f$ in $L[t]$ equals $\\prod_{i\\in I}(t-\\alpha_i)$; the empty family is allowed. Let $f_1\\in k[t]$ be irreducible, meaning nonzero, not a unit, and with a unit factor in every factorization in $k[t]$. If $f_1\\mid f$ and $f_1\\nmid g$, then there is an index $i\\in I$ such that $f_1(\\alpha_i)=0$ and $g(\\alpha_i)\\ne0$, where evaluation [def-weil-polynomial-root] uses the given map $k\\to L$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof: final residue-field paragraph, selection of i with f_1(alpha-bar_i)=0 and g-bar(alpha-bar_i) nonzero."
@@ -10,11 +10,81 @@
  "stmt_deps": [
   "def-weil-field",
   "def-weil-polynomial-ring",
-  "def-pc-field-extension"
+  "def-pc-field-extension",
+  "def-weil-polynomial-root"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\iota:k\\to L$ for the injective field map of [def-pc-field-extension]. The irreducible $f_1$ is nonzero and is not a unit. It is therefore nonconstant: a nonzero constant $c$ has the constant inverse $c^{-1}$. In particular it has a nonzero coefficient of positive degree. Its image in $L[t]$ is still nonconstant, since $\\iota$ is injective and coefficientwise extension sends this nonzero coefficient to a nonzero coefficient. Also $f\\ne0$, since its leading coefficient is $1\\ne0$. These are direct coefficient statements in [def-weil-polynomial-ring].",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof, final residue-field paragraph; expanded details of the root selection."
+   }
+  },
+  {
+   "text": "By [lem-pur-polynomial-field-pid], $k[t]$ is a principal ideal domain. The subset $J=\\{Af_1+Bg:A,B\\in k[t]\\}$ is an ideal: sums and multiplication by an arbitrary polynomial preserve the displayed form. Write $J=(d)$. Since $f_1,g\\in J$, $d$ divides both $f_1$ and $g$. Choose $e$ with $f_1=de$. Irreducibility says that $d$ or $e$ is a unit. If $e$ is a unit, then $d=f_1e^{-1}$, so $d\\mid g$ implies $f_1\\mid g$, contrary to hypothesis. Thus $d$ is a unit, $1\\in J$, and there exist $A,B\\in k[t]$ with $Af_1+Bg=1$. This proves the needed identity over the original base field, without assuming $f_1$ irreducible over $L$.",
+   "uses": [
+    "lem-pur-polynomial-field-pid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof, final residue-field paragraph; expanded details of the root selection."
+   }
+  },
+  {
+   "text": "For $P\\in k[t]$ write $P_L=\\iota_*P\\in L[t]$. The statement of [lem-weil-coefficientwise-extension-injective] gives an injective ring homomorphism $\\iota_*:k[t]\\to L[t]$. Choose $H\\in k[t]$ with $f=f_1H$. Consequently $f_L=(f_1)_LH_L$ and $f_L\\ne0$. The hypothesis already writes $f_L=\\prod_{i\\in I}(t-\\alpha_i)$, so it splits over $L$ in the explicit finite-factorization sense of [lem-trf-divisor-of-split-polynomial]. Apply that node with $F=L$, $P=f_L$, $Q=(f_1)_L$ to obtain $d\\in L$ and a finite family $(\\beta_j)_{j\\in J_1}$ with $(f_1)_L=d\\prod_{j\\in J_1}(t-\\beta_j)$.",
+   "uses": [
+    "lem-weil-coefficientwise-extension-injective",
+    "lem-trf-divisor-of-split-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof, final residue-field paragraph; expanded details of the root selection."
+   }
+  },
+  {
+   "text": "The nonconstant polynomial $(f_1)_L$ cannot have the empty factor list $J_1$, since an empty product gives the constant $d$. Choose $j\\in J_1$ and put $\\beta=\\beta_j$. Evaluating its displayed factorization gives $f_1(\\beta)=0$. By the evaluation ring homomorphism in [def-weil-polynomial-root] and $f=f_1H$, we have $f(\\beta)=0$. Evaluating the GIVEN factorization of $f_L$ therefore gives $0=\\prod_{i\\in I}(\\beta-\\alpha_i)$. A finite product in a field is zero only if one factor is zero (induction on the number of factors, using the absence of zero divisors). Thus there is $i\\in I$ with $\\beta=\\alpha_i$, and $f_1(\\alpha_i)=0$. This argument also treats the empty $I$: its product is $1$, so under the hypotheses it would give $0=1$ and is impossible.",
+   "uses": [
+    "def-weil-polynomial-root"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof, final residue-field paragraph; expanded details of the root selection."
+   }
+  },
+  {
+   "text": "Finally evaluate the base-field identity $Af_1+Bg=1$ of Step 2 at this $\\alpha_i\\in L$, using the given $k\\to L$ and [def-weil-polynomial-root]. Since evaluation is a ring homomorphism and $f_1(\\alpha_i)=0$, the identity becomes $B(\\alpha_i)g(\\alpha_i)=1$. If $g(\\alpha_i)=0$, its left side is $0$, contradicting $1\\ne0$ in $L$. Therefore $g(\\alpha_i)\\ne0$, giving both required clauses for the same index.",
+   "uses": [
+    "def-weil-polynomial-root"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof, final residue-field paragraph; expanded details of the root selection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-polynomial-ring",
+  "lem-pur-polynomial-field-pid",
+  "lem-weil-coefficientwise-extension-injective",
+  "lem-trf-divisor-of-split-polynomial",
+  "def-weil-polynomial-root"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, final residue-field paragraph (“Some details omitted”): expanded using the PID Bézout argument and the generic divisor-splitting Mathlib leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +134,45 @@
    "results": "{\"t\": \"2026-10-17T21:38:10Z\", \"tool\": \"grep\", \"query\": \"exists_eval_eq_zero|of_dvd|eval.*ne_zero\", \"sub\": \"Algebra/Polynomial\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"Mathlib/Algebra/Polynomial/Derivative.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\"], \"digest\": \"246180ac743467fa\"}",
    "date": "2026-10-18",
    "verdict": "no match: Splits.of_dvd (Splits.lean:476) and Splits.exists_eval_eq_zero (274) supply splitting and existence separately; selecting an entry of the given factor list and proving avoidance over the original base field additionally require evaluation of the product and irreducible-root divisibility. The combined statement is not a one-line specialization. Minpoly.Field.lean:80,136 addresses only divisibility/vanishing after a root is given."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible divisor of a polynomial split into a given finite product of linear factors over a field extension has a root in that factor list where every polynomial not divisible by it is nonzero",
+   "results": "{\"t\": \"2026-10-17T21:56:47Z\", \"tool\": \"leanfinder\", \"query\": \"An irreducible divisor of a polynomial split into a given finite product of linear factors over a field extension has a root in that factor list where every polynomial not divisible by it is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.fact_irreducible_factor\", \"Polynomial.Splits.dvd_iff_roots_le_roots\", \"Polynomial.Splits.splits\", \"Polynomial.Splits.dvd_of_roots_le_roots\", \"Polynomial.factor\", \"AdjoinRoot.mul_div_root_cancel\", \"Polynomial.exists_monic_irreducible_factor\", \"Polynomial.factor_dvd_of_degree_ne_zero\"], \"digest\": \"38860932a60f78ba\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item: hits include factor selection, adjoining a root, Splits.of_dvd, root-multiset divisibility and degree-one irreducibles; none gives both selection from the prescribed factor list and avoidance of a second base-field polynomial. The divisor-splitting sub-result is isolated as a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Splits, Irreducible",
+   "results": "{\"t\": \"2026-10-17T21:56:53Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Splits, Irreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Polynomial.Splits.natDegree_le_one_of_irreducible\", \"Polynomial.Splits.degree_le_one_of_irreducible\", \"Polynomial.Splits.natDegree_eq_one_of_irreducible\", \"Polynomial.Splits.degree_eq_one_of_irreducible\", \"Polynomial.Irreducible.natDegree_dvd_finrank\", \"IsAlgClosure.of_splits\", \"Polynomial.Gal.galAction_isPretransitive\"], \"digest\": \"b2cde24771862b29\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item: hits include factor selection, adjoining a root, Splits.of_dvd, root-multiset divisibility and degree-one irreducibles; none gives both selection from the prescribed factor list and avoidance of a second base-field polynomial. The divisor-splitting sub-result is isolated as a Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "Splits.*of_dvd|exists_eval_eq_zero|eval_eq_zero_iff_dvd|dvd_iff.*eval",
+   "results": "{\"t\": \"2026-10-17T21:57:02Z\", \"tool\": \"grep\", \"query\": \"Splits.*of_dvd|exists_eval_eq_zero|eval_eq_zero_iff_dvd|dvd_iff.*eval\", \"sub\": \"Algebra/Polynomial\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/RingDivision.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/Algebra/Polynomial/AlgebraMap.lean\", \"Mathlib/Algebra/Polynomial/AlgebraMap.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\"], \"digest\": \"687cd78677762e4e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item: hits include factor selection, adjoining a root, Splits.of_dvd, root-multiset divisibility and degree-one irreducibles; none gives both selection from the prescribed factor list and avoidance of a second base-field polynomial. The divisor-splitting sub-result is isolated as a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An irreducible factor of a completely split polynomial over a field extension has a common zero with the polynomial but not with a polynomial it does not divide",
+   "results": "{\"t\": \"2026-10-17T21:57:11Z\", \"tool\": \"leansearch\", \"query\": \"An irreducible factor of a completely split polynomial over a field extension has a common zero with the polynomial but not with a polynomial it does not divide\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.factor\", \"Polynomial.fact_irreducible_factor\", \"Polynomial.irreducible_factor\", \"Polynomial.factor_dvd_of_natDegree_ne_zero\", \"Polynomial.SplittingField\", \"Polynomial.degree_eq_one_of_irreducible_of_splits\", \"Polynomial.Splits.splits\", \"Polynomial.instInhabitedSplittingField\"], \"digest\": \"f5c763a1573b58ce\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item: hits include factor selection, adjoining a root, Splits.of_dvd, root-multiset divisibility and degree-one irreducibles; none gives both selection from the prescribed factor list and avoidance of a second base-field polynomial. The divisor-splitting sub-result is isolated as a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a field extension, choose a root from a specified linear factorization of f that kills an irreducible divisor h of f and does not kill g when h does not divide g",
+   "results": "{\"t\": \"2026-10-17T21:59:07Z\", \"tool\": \"leanfinder\", \"query\": \"In a field extension, choose a root from a specified linear factorization of f that kills an irreducible divisor h of f and does not kill g when h does not divide g\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.removeFactor\", \"Polynomial.factor\", \"AdjoinRoot.mul_div_root_cancel\", \"Polynomial.X_sub_C_mul_removeFactor\", \"Polynomial.generalizedEisenstein\", \"Irreducible.exists_dvd_monic_irreducible_of_isIntegral\", \"Polynomial.exists_dvd_map_of_isAlgebraic\", \"Polynomial.factor_dvd_of_not_isUnit\"], \"digest\": \"a319fd07f7cb5d1d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the full item: hits include factor selection, adjoining a root, Splits.of_dvd, root-multiset divisibility and degree-one irreducibles; none gives both selection from the prescribed factor list and avoidance of a second base-field polynomial. The divisor-splitting sub-result is isolated as a Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-standard-etale-finite-free-prime-lifts",
@@ -100,5 +205,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-residue-factor-root-selection",
+  "worker": "stage1",
+  "summary": "Expanded the omitted residue-field root selection of Stacks 00UF in five steps: nonconstancy, a base-field Bézout identity from the existing PID leaf, divisor splitting over L via one new Mathlib leaf, selection from the prescribed list, and evaluation of Bézout for avoidance. No hypothesis or conclusion changed; added the existing evaluation definition reference. Searches and citation quotes are recorded.",
+  "blueprint": "Realizes the residue-field factor/root selection used by lem-trf-standard-etale-finite-free-prime-lifts, in the inherited chain descending from lem-trf-local-term-locality; the precise local source is the last paragraph of Tag 00UF, as recorded in blueprint.from.place. It expands the omitted selection argument rather than changing the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-daa5f3c2d",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-daa5f3c2d (reviewer sub-agent of L); spot-checked: Read the full delivery, cited nodes, unit/chapter route, and Stacks sources. The five-step proof correctly establishes the base-field Bézout identity, extends coefficients to L, applies the valid Mathlib divisor-splitting leaf, selects a prescribed root, and proves g is nonzero at that same root. Hypotheses and edge cases check out; no duplicate, circularity, route-pivot machinery, forbidden SGA citation, or long hidden lemma was found. Review written to review.md."
  }
 }

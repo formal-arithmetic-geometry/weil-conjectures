@@ -18,10 +18,67 @@
   "date": "2026-10-18",
   "group": "Q86"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Use the standard-resolution convention of [lem-trf-cotangent-resolution-coherence]. Let $Q_\\bullet$ be the constant simplicial $A$-algebra on $P=A[x_e\\mid e\\in E]$, augmented to $P$ by the identity. Each term is a polynomial $A$-algebra and its augmentation is surjective. All faces are identities, so on the alternating-face complex the differential from degree $-n$ to degree $-n+1$ is $\\sum_{i=0}^n(-1)^i\\mathrm{id}$: it is $0$ for odd $n$ and the identity for positive even $n$. Consequently $s(Q_\\bullet)\\to P[0]$ has identity on $H^0$ and zero negative cohomology (each negative degree belongs to a two-term identity pair). This verifies, directly, every condition for a polynomial resolution in the cited node, without assuming any finiteness of $E$.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QI (remark-resolution), constant polynomial resolution used in Tags 08QG (lemma-pi-lower-shriek-polynomial-algebra) and 08QH (lemma-cotangent-complex-polynomial-algebra)."
+   }
+  },
+  {
+   "text": "Apply the comparison for polynomial resolutions in [lem-trf-cotangent-resolution-coherence] to $Q_\\bullet\\to P$. Put $M=\\Omega^1_{P/A}$. The resulting differential complex is the alternating-face complex of the constant simplicial $P$-module $M$, since $\\Omega^1_{Q_n/A}\\otimes_{Q_n}P=M$ and all structure maps are identities. Its augmentation $a:s(M)\\to M[0]$ is the identity in degree zero. More explicitly, let $j:M[0]\\to s(M)$ be the identity in degree zero and let $h^{-n}:s(M)^{-n}\\to s(M)^{-n-1}$ be the identity for odd $n\\geq1$ and zero for even $n\\geq0$. The differential formula in Step 1 gives $dh+hd=1-ja$, and $aj=1$. Thus $a$ is a homotopy equivalence. The degreewise evaluation maps from the standard resolution to the constant resolution send $\\mathrm dq\\otimes p$ to $p\\,\\mathrm d(\\epsilon(q))$; composed with $a$ they are exactly the augmentation to universal differentials. The natural comparison for this morphism of polynomial resolutions therefore identifies the canonical augmentation $L_{P/A}\\to M[0]$ with this isomorphism. This proves the first clause with its specified map.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QI (remark-resolution), 08QL (section-functoriality), 08QH (lemma-cotangent-complex-polynomial-algebra); constant-complex contraction written out."
+   }
+  },
+  {
+   "text": "The arbitrary-variable basis theorem [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] identifies $M$ with $\\bigoplus_{e\\in E}P\\,\\mathrm dx_e$, and gives $\\mathrm dg=\\sum_e(\\partial g/\\partial x_e)\\,\\mathrm dx_e$ with finite support. In particular the degree-zero object just obtained has precisely this differential basis. For a localization $C=T^{-1}P$, the same node gives the base-changed basis $(1\\otimes\\mathrm dx_e)_{e\\in E}$ in $C\\otimes_PM$. No finite-rank assertion is made when $E$ is infinite.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "algebra.tex Tag 00RX (lemma-differentials-polynomial-ring), arbitrary-variable version of its universal-derivation proof."
+   }
+  },
+  {
+   "text": "Let $T\\subseteq P$ be any multiplicative subset and put $C=T^{-1}P$. The ring-localization clause of [lem-trf-affine-cotangent-comparison], applied with the bottom multiplicative subset $\\{1\\}\\subseteq A$, gives the canonical quasi-isomorphism $L_{P/A}\\otimes_PC\\to L_{C/A}$. Localization is exact by [lem-weil-pbc-localization-module-exact], so it preserves the augmentation quasi-isomorphism of Step 2: apply exactness to kernels and images of the differentials to identify localized cohomology with cohomology of the localized complex. Here tensor with $C$ is localization: the mutually inverse maps are $m\\otimes(p/t)\\mapsto pm/t$ and $m/t\\mapsto m\\otimes(1/t)$; the fraction equivalence and tensor balancing verify these formulas. Hence $L_{C/A}\\simeq(T^{-1}M)[0]$. Finally [lem-weil-pbc-kahler-differentials-localization] identifies $T^{-1}M$ with $\\Omega^1_{C/A}$ by $\\mathrm dp/t\\mapsto t^{-1}\\mathrm d(p/1)$. Both augmentations commute with this map, since on a differential generator both composites send $\\mathrm dq\\otimes(p/t)$ to $(p/t)\\,\\mathrm d(\\epsilon(q)/1)$. Thus the localized description uses the canonical augmentation, and the basis of Step 3 becomes $(\\mathrm d(x_e/1))_{e\\in E}$. This proves the localization clause for arbitrary $T$.",
+   "uses": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "cotangent.tex Tag 08SF (lemma-localize); algebra.tex Tags 00CS (proposition-localization-exact), 00DK (lemma-tensor-localization), 00RT (lemma-differentials-localize), part (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QI, 08QG/08QH and 08SF: constant polynomial resolution, with the elementary alternating-face contraction and localization formulas made explicit; algebra.tex Tags 00RX, 00CS, 00DK and 00RT."
+ },
  "mathlib_match": null,
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
@@ -38,7 +95,7 @@
    "query": "cotangentComplex, KaehlerDifferential, Polynomial",
    "results": "0 hits; top=[]; note=loogle: unknown identifier 'cotangentComplex'",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "unavailable"
   },
   {
    "tool": "leanfinder",
@@ -88,6 +145,62 @@
    "results": "8 hits; top=['instFreeMvPolynomialKaehlerDifferential', 'Algebra.Generators.instFreeCotangentSpaceToExtension', 'Algebra.Generators.H1Cotangent.δAux_X', 'Algebra.SubmersivePresentation.free_cotangent', 'KaehlerDifferential.mvPolynomialEquiv', 'Algebra.Generators.cotangentSpaceBasis_apply', 'KaehlerDifferential.polynomialEquiv', 'Algebra.IsStandardSmooth.free_kaehlerDifferential']; note=; digest=1edd39fa9d2ef8a6. Read full output in lem-trf-smooth-cotangent-identification.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cotangent complex of polynomial algebra is Kähler differentials in degree zero",
+   "results": "{\"t\": \"2026-10-17T21:55:45Z\", \"tool\": \"leanfinder\", \"query\": \"cotangent complex of polynomial algebra is Kähler differentials in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.cotangentComplex_mk\", \"KaehlerDifferential.polynomialEquiv\", \"Algebra.Extension.toKaehler\", \"Algebra.H1Cotangent\", \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"KaehlerDifferential.D_apply\", \"KaehlerDifferential.quotientCotangentIdeal\", \"Algebra.Extension.H1Cotangent\"], \"digest\": \"3f5a75e87d54e891\"}; Read returned signatures and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53–65, 335–344 and Kaehler/Polynomial.lean:28–101. The cotangentComplex hits are presentation linear maps or their H1, not the full derived cotangent complex; the polynomialEquiv/basis hits identify only the ordinary differential module.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "cotangentComplex, KaehlerDifferential, Polynomial",
+   "results": "{\"t\": \"2026-10-17T21:55:45Z\", \"tool\": \"loogle\", \"query\": \"cotangentComplex, KaehlerDifferential, Polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'cotangentComplex'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53–65, 335–344 and Kaehler/Polynomial.lean:28–101. The cotangentComplex hits are presentation linear maps or their H1, not the full derived cotangent complex; the polynomialEquiv/basis hits identify only the ordinary differential module.",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex|KaehlerDifferential|Polynomial",
+   "results": "{\"t\": \"2026-10-17T21:55:45Z\", \"tool\": \"grep\", \"query\": \"cotangentComplex|KaehlerDifferential|Polynomial\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\", \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\", \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\"], \"digest\": \"bc2d92dfed0aa7b6\"}; Read returned signatures and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53–65, 335–344 and Kaehler/Polynomial.lean:28–101. The cotangentComplex hits are presentation linear maps or their H1, not the full derived cotangent complex; the polynomialEquiv/basis hits identify only the ordinary differential module.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cotangent complex of polynomial algebra is Kähler differentials in degree zero",
+   "results": "{\"t\": \"2026-10-17T21:55:46Z\", \"tool\": \"leansearch\", \"query\": \"cotangent complex of polynomial algebra is Kähler differentials in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.H1Cotangent\", \"KaehlerDifferential.D_apply\", \"KaehlerDifferential.polynomialEquiv\", \"KaehlerDifferential.polynomialEquiv_D\", \"Algebra.Extension.cotangentComplex_mk\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"instR\", \"Algebra.Presentation.differentials.comm₁₂\"], \"digest\": \"b8de0b4380bf8062\"}; Read returned signatures and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53–65, 335–344 and Kaehler/Polynomial.lean:28–101. The cotangentComplex hits are presentation linear maps or their H1, not the full derived cotangent complex; the polynomialEquiv/basis hits identify only the ordinary differential module.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cotangent complex of a polynomial ring has no higher homology and is module of differentials in degree zero",
+   "results": "{\"t\": \"2026-10-17T21:58:23Z\", \"tool\": \"leanfinder\", \"query\": \"cotangent complex of a polynomial ring has no higher homology and is module of differentials in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"Algebra.H1Cotangent\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.Extension.cotangentComplex_mk\", \"Algebra.Extension.H1Cotangent\", \"Algebra.SubmersivePresentation.cotangentEquiv\", \"Algebra.Generators.instFreeCotangentSpaceToExtension\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff\"], \"digest\": \"7c7fb409206e5c1d\"}; Read returned signatures and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53–65, 335–344 and Kaehler/Polynomial.lean:28–101. The cotangentComplex hits are presentation linear maps or their H1, not the full derived cotangent complex; the polynomialEquiv/basis hits identify only the ordinary differential module.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived cotangent complex polynomial algebra arbitrary variables free differential module",
+   "results": "{\"t\": \"2026-10-17T21:58:24Z\", \"tool\": \"leansearch\", \"query\": \"derived cotangent complex polynomial algebra arbitrary variables free differential module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.exists_presentation_of_free_cotangent\", \"instFreeMvPolynomialKaehlerDifferential\", \"Algebra.mvPolynomial\", \"KaehlerDifferential.mvPolynomialEquiv\", \"Algebra.Presentation.differentials.comm₁₂\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"KaehlerDifferential.polynomial_D_apply\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\"], \"digest\": \"784950b73f787f85\"}; Read returned signatures and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53–65, 335–344 and Kaehler/Polynomial.lean:28–101. The cotangentComplex hits are presentation linear maps or their H1, not the full derived cotangent complex; the polynomialEquiv/basis hits identify only the ordinary differential module.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\"",
+   "results": "{\"t\": \"2026-10-17T21:58:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"cotangentComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.Extension.cotangentComplex\", \"KaehlerDifferential.cotangentComplexBaseChange\", \"Algebra.Extension.exact_hCotangentι_cotangentComplex\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"Algebra.Extension.cotangentComplex_mk\", \"Algebra.Extension.Cotangent.mk_C_mem_ker_cotangentComplex\", \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\"], \"digest\": \"c450dbfdfcd77a73\"}; Read returned signatures and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53–65, 335–344 and Kaehler/Polynomial.lean:28–101. The cotangentComplex hits are presentation linear maps or their H1, not the full derived cotangent complex; the polynomialEquiv/basis hits identify only the ordinary differential module.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex|polynomialEquiv",
+   "results": "{\"t\": \"2026-10-17T21:58:24Z\", \"tool\": \"grep\", \"query\": \"cotangentComplex|polynomialEquiv\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\"], \"digest\": \"4659c1864ba83335\"}; Read returned signatures and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53–65, 335–344 and Kaehler/Polynomial.lean:28–101. The cotangentComplex hits are presentation linear maps or their H1, not the full derived cotangent complex; the polynomialEquiv/basis hits identify only the ordinary differential module.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
@@ -110,5 +223,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-cotangent-identification",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its hypotheses. Proved the polynomial case by the constant polynomial resolution and an explicit contraction, identified the specified augmentation by evaluation, and proved the arbitrary-localization clause with existing cotangent-localization, exact-localization and differential-localization nodes. Reused the arbitrary-variable differential-basis Mathlib leaf; created no nodes. No exact project Lean attachment or whole-statement Mathlib match found.",
+  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestry and the existing sk-i-curve-zero binding. Supplies exactly the polynomial/localized-polynomial input used in lem-trf-lci-cotangent-presentation Steps 2, 3 and 10 on the historical semistable-modification support branch; expands Stacks 08QH/08SF below the unit without changing its route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N0-2f53a180c",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-2f53a180c (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited sources; all four steps, canonical augmentation, arbitrary localization, edge cases, and route restrictions check out. Corrected two failed Loogle-query verdicts from “no match” to “unavailable”; no mathematical changes. Full review in review.md and corrected JSON under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }

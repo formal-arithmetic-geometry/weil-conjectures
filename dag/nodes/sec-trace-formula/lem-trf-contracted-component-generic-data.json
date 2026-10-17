@@ -22,9 +22,93 @@
   "lem-weil-pbc-reduced-induced-closed-subscheme",
   "def-sc-zariski-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-contracted-component-no-extra-generic] to $Z=Y$, $W=X$ and $h=f_X$. The family hypotheses follow from [def-trf-multipointed-curve] and the assumed nodal geometric fibres; no modification hypothesis is needed. It proves properness of every contracted reduced component in every geometric fibre, and gives a nonempty affine $U\\subseteq T$, a finite etale surjective integral affine $S\\to U$, component families $H_i\\subseteq Y_S$, and a fixed contracted sublist $J$. Each geometric fibre of $H_i$ is exactly one reduced irreducible component, and the generic fibre $H_{i,\\xi}$ is proper when $i\\in J$. Pull back the marked source to $S$ using [lem-trf-semistable-marked-base-change]. The marking remains a closed immersion with etale fibres in the smooth locus. The families $H_i/S$ are at this point only flat and finitely presented; no assertion that $Y_S/S$ is proper is made.",
+   "uses": [
+    "lem-trf-contracted-component-no-extra-generic",
+    "def-trf-multipointed-curve",
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion for generic constancy of the weighted contracted-component data, with distinct marked/ambient-singular incidences. The properness-of-closure step uses Stacks Tag 081F."
+   }
+  },
+  {
+   "text": "For every $i\\in J$, prove properness of $H_i$ after shrinking $S$, rather than assuming ambient properness. Write $S=\\operatorname{Spec}B$, with $B$ a Noetherian domain. The schemes $H_i$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; finite presentation also makes them quasi-compact. The principal opens $S_b=\\operatorname{Spec}B[1/b]$, for $0\\ne b\\in B$, have affine transitions and limit $\\operatorname{Spec}\\operatorname{Frac}B$ by [lem-weil-pbc-limit-affine-transition]: the directed colimit of the rings $B[1/b]$ is $\\operatorname{Frac}B$. Apply [lem-weil-pbc-eventually-proper] to $H_i\\to S$ in this system, with $X_0=H_i$ and $Y_0=S_0=S$. All three schemes are qcqs, the morphism is locally of finite type, and its limit is the proper generic fibre from Step 1. Thus $H_i\\times_S S_{b_i}\\to S_{b_i}$ is proper for some nonzero $b_i$. The product of the finitely many $b_i$ is nonzero. Restriction to its principal open makes all contracted component families proper simultaneously, by [lem-weil-pbc-proper-base-change]. If $J$ is empty take this open to be $S$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-eventually-proper",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion for generic constancy of the weighted contracted-component data, with distinct marked/ambient-singular incidences. The properness-of-closure step uses Stacks Tag 081F."
+   }
+  },
+  {
+   "text": "For $i\\in J$, apply [lem-trf-contracted-component-generic-spread] with ambient marked family $(Y_S,E_S)$ and supplied component family $H_i$ over the open from Step 2. Its properness input is exactly $H_i/S$, now proved; its flatness, finite presentation and geometric-component condition are supplied by Step 1. On a further nonempty open, this fixes $p_i=\\dim H^1(H_{i,\\bar s},\\mathcal O)$, the self-node count $a_i$, and the number $b_i$ of DISTINCT marking/ambient-singular incidence points. Apply this successively to the finite list, using proper base change to retain properness on later restrictions. This gives a nonempty open $V\\subseteq S$ where every triple is fixed. There are no numerical conditions to impose if $J$ is empty. The same spread lemma also proves the finiteness clause of the item at an arbitrary geometric fibre, even outside $U$: apply it over the one-point integral base $\\operatorname{Spec}\\Omega$ with $H=R$ and ambient pair $(Y_\\Omega,E_\\Omega)$. Step 1 gives properness of $R$; over a field it is flat and finitely presented, and it is a reduced irreducible component by construction. The only nonempty open of this base is the whole base. Finiteness of the component list follows from the enumeration statement applied to $\\operatorname{Spec}\\Omega$.",
+   "uses": [
+    "lem-trf-contracted-component-generic-spread",
+    "lem-weil-pbc-proper-base-change",
+    "lem-trf-contracted-component-no-extra-generic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion for generic constancy of the weighted contracted-component data, with distinct marked/ambient-singular incidences. The properness-of-closure step uses Stacks Tag 081F."
+   }
+  },
+  {
+   "text": "Return to the original base by setting $T^\\circ=U\\setminus\\pi(S\\setminus V)$. The complement $S\\setminus V$ has its reduced closed-subscheme structure. Its composite map to $U$ is finite: over an affine open it is the quotient of the finite algebra defining $S$. Hence its image is closed by [lem-weil-pbc-finite-proper] and [lem-weil-pbc-proper-closed-image]. Because $S$ is integral and finite dominant over integral $U$, its generic fibre is the spectrum of the single field $\\kappa(\\eta_S)$, a finite field extension of $\\operatorname{Frac}B$; its unique point maps to the generic point of $U$. That point belongs to $V$, so this closed image misses the generic point of $U$. Thus $T^\\circ$ is a nonempty open of $T$, and $S\\times_U T^\\circ\\subseteq V$ still surjects onto $T^\\circ$.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion for generic constancy of the weighted contracted-component data, with distinct marked/ambient-singular incidences. The properness-of-closure step uses Stacks Tag 081F."
+   }
+  },
+  {
+   "text": "For $t\\in T^\\circ$ and an algebraic closure $\\Omega$ of $\\kappa(t)$, choose a point of the nonempty finite etale fibre $S_t$ and embed its finite separable residue extension into $\\Omega$. This gives a geometric lift $\\bar s:\\operatorname{Spec}\\Omega\\to V$. The geometric fibre $Y_{\\bar s}$ and its marking and map are the original $Y_\\Omega,E_\\Omega,(f_X)_\\Omega$, by the fibre-product identities. Step 1 therefore identifies its contracted components, each exactly once, with the $H_{i,\\bar s}$ for $i\\in J$. Step 3 assigns these components the fixed triples $(p_i,a_i,b_i)$. Consequently the multiset is the fixed multiset indexed by $J$, independent of $t$, the lift and $\\Omega$. When $J$ is empty it is the empty multiset. This argument descends the multiset, not individually labelled geometric components.",
+   "uses": [
+    "lem-trf-contracted-component-no-extra-generic",
+    "lem-trf-contracted-component-generic-spread"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion for generic constancy of the weighted contracted-component data, with distinct marked/ambient-singular incidences. The properness-of-closure step uses Stacks Tag 081F."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-multipointed-curve",
+  "lem-trf-contracted-component-generic-spread",
+  "lem-trf-contracted-component-no-extra-generic",
+  "lem-trf-semistable-marked-base-change",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemma 5.1(ii), printed p. 34; agent expansion for generic constancy of the weighted contracted-component data, with distinct marked/ambient-singular incidences. The properness-of-closure step uses Stacks Tag 081F."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,7 +154,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-constructibility",
@@ -82,7 +166,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical stable-modification approximation input below lem-trf-local-term-locality, via the stability-locus auxiliary: Temkin Lemma 5.1(ii), second paragraph, the weighted incidence data of contracted components. This supplies only a generic open with fixed numerical data; the item performs the Noetherian induction and the exceptional-component test itself.",
+   "place": "Historical stable-modification approximation input below lem-trf-local-term-locality, via the stability-locus auxiliary: Temkin Lemma 5.1(ii), weighted incidence data paragraph; generic enumeration on a finite etale cover, properness of contracted component closures by Stacks 081F, numerical spread and descent of the open.",
    "via": [
     "lem-trf-stable-modification-constructibility",
     "lem-trf-stable-modification-stability-locus"
@@ -90,5 +174,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-contracted-component-generic-data",
+  "worker": "stage1",
+  "summary": "Repair of E1: generic component families are first enumerated on an integral finite etale cover; Stacks 081F, applied to each contracted component closure in the principal-open inverse system, proves properness of that closure after shrinking. The numerical spread lemma then takes this proper closure as input in a possibly nonproper ambient curve. A finite closed-image argument descends the resulting open and multiset to T. Restored the current main statement verbatim: the previous repair had added an eta-modification assumption which is neither needed for this generic-data lemma nor preserved on the closed strata used by its parent. Both retained new nodes are statement-only, with no ambient properness or generic-isomorphism assumption.",
+  "blueprint": "Historical stable-modification approximation input below lem-trf-local-term-locality, through the stability-locus/constructibility nodes: Temkin Lemma 5.1(ii), weighted contracted-component data paragraph. The steps carry proper component closures, single-component numerical spread and descent of the generic open.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks Noetherianness of the finite-presentation component closure before applying the generic properness limit theorem."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Supplies the quasi-separated hypothesis for the possibly nonseparated component closure in Stacks 081F."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Identifies the principal-open inverse limit with Spec Frac(B)."
+   },
+   {
+    "node": "lem-weil-pbc-eventually-proper",
+    "why": "Generic properness of each contracted component descends to a principal open; this is the missing proper-closure argument."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Preserves the component closure properness on subsequent restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Finite maps are proper, used to descend an open along the finite cover."
+   },
+   {
+    "node": "lem-weil-pbc-proper-closed-image",
+    "why": "The finite-cover image of the discarded closed complement is closed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-closed-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q35-5126fc7c6",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-5126fc7c6 (reviewer sub-agent of L); spot-checked: Step 4 incorrectly identifies the generic fibre of an integral finite dominant finite étale cover S→Spec B with Spec Frac(B); it is Spec κ(η_S), a finite field extension. I supplied the corrected whole DAG JSON under fixes/dag/nodes/sec-trace-formula/lem-trf-contracted-component-generic-data.json. All other hypotheses, sources, routes, edge cases, and new nodes checked.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -2,7 +2,7 @@
  "id": "lem-trf-ordered-group-prime-ideal-convex-correspondence",
  "kind": "statement",
  "title": "Prime positive-cone ideals and convex subgroups",
- "statement": "Let $\\Gamma$ be a totally ordered abelian group [def-trf-totally-ordered-abelian-group]. An ideal is an upward-closed subset $I\\subseteq\\Gamma_{\\ge0}$, and it is prime when $0\\notin I$ and $\\gamma+\\delta\\in I$ for nonnegative $\\gamma,\\delta$ implies $\\gamma\\in I$ or $\\delta\\in I$. Then prime ideals of this positive cone, ordered by inclusion, are canonically order anti-isomorphic to convex subgroups of $\\Gamma$, ordered by inclusion: a convex subgroup $H$ corresponds to $I_H=\\{\\gamma\\in\\Gamma_{\\ge0}:\\gamma\\notin H\\}$, and a prime ideal $I$ corresponds to $H_I=\\{\\gamma\\in\\Gamma:|\\gamma|\\notin I\\}$, where $|\\gamma|$ is the larger of $\\gamma$ and $-\\gamma$.",
+ "statement": "Let $\\Gamma$ be a totally ordered abelian group [def-trf-totally-ordered-abelian-group]. An ideal is an upward-closed subset $I\\subseteq\\Gamma_{\\ge0}$, and it is prime when $0\\notin I$ and $\\gamma+\\delta\\in I$ for nonnegative $\\gamma,\\delta$ implies $\\gamma\\in I$ or $\\delta\\in I$. Then prime ideals of this positive cone, ordered by inclusion, are canonically order anti-isomorphic to convex subgroups of $\\Gamma$, ordered by inclusion (a subgroup $H$ is convex when $h_1,h_2\\in H$ and $h_1\\le x\\le h_2$ imply $x\\in H$): a convex subgroup $H$ corresponds to $I_H=\\{\\gamma\\in\\Gamma_{\\ge0}:\\gamma\\notin H\\}$, and a prime ideal $I$ corresponds to $H_I=\\{\\gamma\\in\\Gamma:|\\gamma|\\notin I\\}$, where $|\\gamma|$ is the larger of $\\gamma$ and $-\\gamma$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00IE, algebra-definition-value-group, for the ordered value-group/positive-cone conventions; the prime-positive-cone-ideal/convex-subgroup correspondence is proved here from the displayed formulas."
@@ -10,12 +10,90 @@
  "stmt_deps": [
   "def-trf-totally-ordered-abelian-group"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Order calculations used below. By [def-trf-totally-ordered-abelian-group], translating $a\\le b$ by $-a-b$ gives $-b\\le-a$. Totality gives $|x|=x$ if $x\\ge0$, and $|x|=-x$ if $x\\le0$; hence $|x|\\ge0$, $|0|=0$, $|-x|=|x|$, and $-|x|\\le x\\le|x|$. Adding the two upper bounds for $x,y$ gives $x+y\\le|x|+|y|$, while adding the bounds for $-x,-y$ gives $-(x+y)\\le|x|+|y|$. Whichever of $x+y$ and $-(x+y)$ is larger therefore satisfies $|x+y|\\le|x|+|y|$.",
+   "uses": [
+    "def-trf-totally-ordered-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE, definition-value-group, and the preceding definition of a totally ordered abelian group; elementary argument from the displayed formulas, not a quoted Stacks correspondence theorem."
+   }
+  },
+  {
+   "text": "Let $H$ be convex and put $I_H=\\{a\\ge0:a\\notin H\\}$. Since $0\\in H$, $0\\notin I_H$. If $a\\in I_H$ and $b\\ge a$, membership $b\\in H$ would give $a\\in H$ by $0\\le a\\le b$ and convexity, a contradiction; thus $I_H$ is upward closed. If $a,b\\ge0$ and both lie outside $I_H$, they lie in $H$, so $a+b\\in H$ and $a+b\\notin I_H$. Taking the contrapositive proves primality. The order comparisons here use [def-trf-totally-ordered-abelian-group].",
+   "uses": [
+    "def-trf-totally-ordered-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE, definition-value-group, and the preceding definition of a totally ordered abelian group; elementary argument from the displayed formulas, not a quoted Stacks correspondence theorem."
+   }
+  },
+  {
+   "text": "Let $I$ be prime and set $S=\\Gamma_{\\ge0}\\setminus I$. Then $0\\in S$. If $s\\in S$ and $0\\le t\\le s$, then $t\\in I$ would force $s\\in I$ by upward closure, so $t\\in S$. If $s,t\\in S$, then $s+t\\ge0$ by translation invariance [def-trf-totally-ordered-abelian-group]; if $s+t\\in I$, primality would force $s\\in I$ or $t\\in I$. Hence $S$ is downward closed in $\\Gamma_{\\ge0}$ and closed under addition.",
+   "uses": [
+    "def-trf-totally-ordered-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE, definition-value-group, and the preceding definition of a totally ordered abelian group; elementary argument from the displayed formulas, not a quoted Stacks correspondence theorem."
+   }
+  },
+  {
+   "text": "Put $H_I=\\{x:|x|\\in S\\}$, which is exactly the set in the statement. By Steps 1 and 3, $0\\in H_I$, and $x\\in H_I$ implies $-x\\in H_I$. If $x,y\\in H_I$, Step 3 gives $|x|+|y|\\in S$; Step 1 and downward closure then give $|x+y|\\in S$. Thus $x+y\\in H_I$, so $H_I$ is a subgroup. These are precisely the subgroup axioms inside the abelian group of [def-trf-totally-ordered-abelian-group].",
+   "uses": [
+    "def-trf-totally-ordered-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE, definition-value-group, and the preceding definition of a totally ordered abelian group; elementary argument from the displayed formulas, not a quoted Stacks correspondence theorem."
+   }
+  },
+  {
+   "text": "To check convexity, let $a,b\\in H_I$ and $a\\le x\\le b$. If $x\\ge0$, then $|x|=x$ and $0\\le x\\le b\\le|b|$; since $|b|\\in S$, downward closure gives $|x|\\in S$. If $x\\le0$, reversing $a\\le x$ gives $0\\le-x\\le-a\\le|a|$; since $|a|\\in S$ and $|x|=-x$, again $|x|\\in S$. Totality [def-trf-totally-ordered-abelian-group] supplies one of these two cases, so $x\\in H_I$.",
+   "uses": [
+    "def-trf-totally-ordered-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE, definition-value-group, and the preceding definition of a totally ordered abelian group; elementary argument from the displayed formulas, not a quoted Stacks correspondence theorem."
+   }
+  },
+  {
+   "text": "For a subgroup $H$ and any $x$, $|x|\\in H$ if and only if $x\\in H$: by totality $|x|$ is either $x$ or $-x$, and a subgroup is closed under negation [def-trf-totally-ordered-abelian-group]. Thus $x\\in H_{I_H}$ if and only if $|x|\\notin I_H$, if and only if $|x|\\in H$, if and only if $x\\in H$. For $a\\ge0$, $|a|=a$, so $a\\in I_{H_I}$ if and only if $a\\notin H_I$, if and only if $a\\in I$. These pointwise equalities prove that the two constructions are inverse.",
+   "uses": [
+    "def-trf-totally-ordered-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE, definition-value-group, and the preceding definition of a totally ordered abelian group; elementary argument from the displayed formulas, not a quoted Stacks correspondence theorem."
+   }
+  },
+  {
+   "text": "If $H\\subseteq K$ and $a\\in I_K$, then $a\\ge0$ and $a\\notin K$, so $a\\notin H$ and $a\\in I_H$. Hence $I_K\\subseteq I_H$. If $I\\subseteq J$ and $x\\in H_J$, then $|x|\\notin J$ implies $|x|\\notin I$, so $H_J\\subseteq H_I$. Together with the two inverse identities in Step 6, these two inclusion reversals give the asserted canonical order anti-isomorphism; all maps are the displayed formulas, without choices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE, definition-value-group, and the preceding definition of a totally ordered abelian group; elementary argument from the displayed formulas, not a quoted Stacks correspondence theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-totally-ordered-abelian-group"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00IE, algebra-definition-value-group, supplies the ordered value-group/positive-cone conventions; the prime-ideal/convex-subgroup translation is proved by the displayed formulas."
+  "place": "Tag 00IE, definition-value-group, and the preceding definition of a totally ordered abelian group; elementary argument from the displayed formulas, not a quoted Stacks correspondence theorem."
  },
  "mathlib_searches": [
   {
@@ -30,7 +108,7 @@
    "query": "convex subgroup ordered abelian group prime ideal",
    "results": "0 hits; service reported unknown identifier convex.",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "unavailable: query identifier convex not recognized; not evidence of absence"
   },
   {
    "tool": "grep",
@@ -45,10 +123,66 @@
    "results": "8 hits including AddGroupCone.nonneg and Order.Ideal.IsPrime; none states the correspondence.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "convex.*[Ss]ubgroup|[Ss]ubgroup.*convex|prime.*[Cc]one|[Cc]one.*prime",
+   "results": "{\"t\": \"2026-10-17T21:57:30Z\", \"tool\": \"grep\", \"query\": \"convex.*[Ss]ubgroup|[Ss]ubgroup.*convex|prime.*[Cc]one|[Cc]one.*prime\", \"sub\": \"Algebra/Order\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "prime ideals of an ordered abelian group positive cone correspond to convex subgroups",
+   "results": "{\"t\": \"2026-10-17T21:57:30Z\", \"tool\": \"leansearch\", \"query\": \"prime ideals of an ordered abelian group positive cone correspond to convex subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroupCone.nonneg\", \"PointedCone.toConvexCone_positive\", \"Order.Ideal.IsPrime\", \"RingPreordering.instIsPrimeSupport\", \"ConvexCone.strictlyPositive\", \"Order.Ideal.PrimePair.I\", \"AddGroupCone.nonneg.isMaxCone\", \"ConvexCone.salient_positive\"], \"digest\": \"c742465439eb8328\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubgroup, Convex",
+   "results": "{\"t\": \"2026-10-17T21:57:30Z\", \"tool\": \"loogle\", \"query\": \"AddSubgroup, Convex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MeasureTheory.exists_ne_zero_mem_lattice_of_measure_mul_two_pow_lt_measure\", \"MeasureTheory.exists_ne_zero_mem_lattice_of_measure_mul_two_pow_le_measure\"], \"digest\": \"03ab0cf8981e6b48\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "prime ideals in the nonnegative cone of a totally ordered abelian group correspond to convex subgroups",
+   "results": "{\"t\": \"2026-10-17T21:57:32Z\", \"tool\": \"leanfinder\", \"query\": \"prime ideals in the nonnegative cone of a totally ordered abelian group correspond to convex subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulArchimedeanClass.closedBallSubgroup\", \"MulArchimedeanClass.subgroup\", \"FiniteArchimedeanClass.toAddSubgroup_ball\", \"FiniteArchimedeanClass.addSubgroup\", \"ArchimedeanClass.addSubgroup\", \"ArchimedeanClass.toAddSubgroup_ball\", \"FiniteArchimedeanClass.toAddSubgroup_closedBall\", \"RingPreordering.IsOrdering.toIsPrime\"], \"digest\": \"f8d6b9ab1ac073cc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "prime.*[Ii]deal|[Ii]deal.*prime|OrdConnected",
+   "results": "{\"t\": \"2026-10-17T21:57:48Z\", \"tool\": \"grep\", \"query\": \"prime.*[Ii]deal|[Ii]deal.*prime|OrdConnected\", \"sub\": \"Algebra/Order/Archimedean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubgroup, OrdConnected",
+   "results": "{\"t\": \"2026-10-17T21:57:48Z\", \"tool\": \"loogle\", \"query\": \"AddSubgroup, OrdConnected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'OrdConnected'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: query identifier not recognized; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Convex subgroups of a linearly ordered commutative group are in order reversing bijection with prime monoid ideals of the positive cone",
+   "results": "{\"t\": \"2026-10-17T21:57:53Z\", \"tool\": \"leanfinder\", \"query\": \"Convex subgroups of a linearly ordered commutative group are in order reversing bijection with prime monoid ideals of the positive cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearOrderedCommGroup.closure_equiv_closure\", \"MulArchimedeanClass.subgroup\", \"FiniteMulArchimedeanClass.subgroup\", \"ValuationSubring.primeSpectrumOrderEquiv_apply_coe_carrier\", \"MulArchimedeanClass.ballSubgroup\", \"ValuationSubring.primeSpectrumOrderEquiv\", \"LinearOrderedAddCommGroup.closure_equiv_closure\", \"FiniteArchimedeanClass.toAddSubgroup_ball\"], \"digest\": \"ac6646136b4492c1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ConvexSubgroup|ConvexAddSubgroup|OrdConnected.*[Ss]ubgroup|[Ss]ubgroup.*OrdConnected|primeSpectrumOrderEquiv|prime.*[Mm]onoid.*[Ii]deal",
+   "results": "{\"t\": \"2026-10-17T21:58:18Z\", \"tool\": \"grep\", \"query\": \"ConvexSubgroup|ConvexAddSubgroup|OrdConnected.*[Ss]ubgroup|[Ss]ubgroup.*OrdConnected|primeSpectrumOrderEquiv|prime.*[Mm]onoid.*[Ii]deal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\"], \"digest\": \"68121adb77d94a0f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-prime-convex-correspondence",
@@ -77,5 +211,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ordered-group-prime-ideal-convex-correspondence",
+  "worker": "stage1",
+  "summary": "Wrote seven elementary steps deriving the positive-cone prime-ideal/convex-subgroup correspondence from translation-invariant total order and the group axioms. Verified the order inequalities, upward closure and primality, the complement submonoid, subgroup and convexity, both inverse formulas, and inclusion reversal. No new nodes are required. Expanded the definition of convex subgroup inline without changing the assertion; clarified that Tag 00IE supplies conventions rather than the correspondence. Repeated the item Mathlib searches through msearch.py with two semantic phrasings and read the nearby candidates; no exact or one-line match was found.",
+  "blueprint": "Realizes the inherited Temkin §2.1 prime-positive-cone/convex-subgroup sentence through the ancestor lem-trf-local-term-locality: Steps 1–5 verify the two constructions, Step 6 proves the inverse identities, and Step 7 proves inclusion reversal. This is the ordered-group subargument of lem-trf-valuation-prime-convex-correspondence, not a replacement of a unit-level step."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q103-3bc07def5",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q103-3bc07def5 (reviewer sub-agent of L); spot-checked: Read the full item and report, cited statements, Stacks conventions, and unit/chapter route. All seven elementary steps are valid; zero-group, integer, rational, and lexicographic cases check out. No new nodes, circular dependencies, or hidden comparison theorem. Supplied corrected JSON for two metadata faults: B5 literal Stacks label and B7 malformed Loogle query verdict. Details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

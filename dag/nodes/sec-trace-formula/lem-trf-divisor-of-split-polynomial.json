@@ -1,0 +1,88 @@
+{
+ "id": "lem-trf-divisor-of-split-polynomial",
+ "kind": "statement",
+ "title": "Every divisor of a nonzero split polynomial splits over the same field",
+ "statement": "Let $F$ be a field [def-weil-field] and let $P,Q\\in F[t]$ [def-weil-polynomial-ring]. Say that a polynomial $H\\in F[t]$ splits over $F$ if $H=c\\prod_{j\\in J}(t-b_j)$ for a scalar $c\\in F$ and a finite indexed family $(b_j)_{j\\in J}$ in $F$; the empty product is $1$. Suppose $P\\ne0$, $P$ splits over $F$, and $Q\\mid P$ (that is, $P=QA$ for some $A\\in F[t]$). Then $Q$ splits over $F$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09HN, label lemma-normal-goes-up, proof: the polynomial inference “Then Q divides P in the polynomial ring E[x] ... Hence, if P splits completely over K, then so does Q.” This node isolates that generic polynomial inference, not the normal-extension statement. Splitting is the finite-factorization convention of section-normal (Tag 09HL), extended to constant polynomials by allowing the empty product. Verified in Mathlib/Algebra/Polynomial/Splits.lean:36,269–272,476–478."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "theorem Splits.of_dvd|theorem splits_iff_exists_multiset|theorem Splits.eq_prod_roots",
+   "results": "{\"t\": \"2026-10-17T21:58:22Z\", \"tool\": \"grep\", \"query\": \"theorem Splits.of_dvd|theorem splits_iff_exists_multiset|theorem Splits.eq_prod_roots\", \"sub\": \"Algebra/Polynomial\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\"], \"digest\": \"8cc673034df23c3c\"}",
+   "date": "2026-10-18",
+   "verdict": "match: Polynomial.Splits.of_dvd, Mathlib/Algebra/Polynomial/Splits.lean:476–478; the explicit finite-factorization meaning is Polynomial.splits_iff_exists_multiset at 269–272 (source read)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A divisor of a nonzero split polynomial splits into linear factors over the same field",
+   "results": "{\"t\": \"2026-10-17T21:58:23Z\", \"tool\": \"leansearch\", \"query\": \"A divisor of a nonzero split polynomial splits into linear factors over the same field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Splits.of_dvd\", \"Polynomial.Splits.splits_of_dvd\", \"Polynomial.splits_of_splits_of_dvd\", \"IsAlgClosed.splits\", \"Polynomial.Splits.splits\", \"IsAlgClosed.factors\", \"Polynomial.splits_of_splits_gcd_right\", \"Polynomial.SplittingFieldAux.splits\"], \"digest\": \"37a2607ff5b18c33\"}",
+   "date": "2026-10-18",
+   "verdict": "match: Polynomial.Splits.of_dvd, Mathlib/Algebra/Polynomial/Splits.lean:476–478; the explicit finite-factorization meaning is Polynomial.splits_iff_exists_multiset at 269–272 (source read)."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Splits, _ ∣ _",
+   "results": "{\"t\": \"2026-10-17T21:58:23Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Splits, _ ∣ _\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Polynomial.Splits.of_dvd\", \"Polynomial.Splits.dvd_of_roots_le_roots\", \"Polynomial.Splits.dvd_iff_roots_le_roots\", \"Polynomial.Irreducible.natDegree_dvd_finrank\", \"Polynomial.Gal.restrictDvd_def\", \"Polynomial.pow_smul_sum_map_aroots_aeval_mem_range_algebraMap\"], \"digest\": \"302109121b79c66f\"}",
+   "date": "2026-10-18",
+   "verdict": "match: Polynomial.Splits.of_dvd, Mathlib/Algebra/Polynomial/Splits.lean:476–478; the explicit finite-factorization meaning is Polynomial.splits_iff_exists_multiset at 269–272 (source read)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every divisor of a nonzero polynomial that factors into linear factors over a field also factors into linear factors over that same field",
+   "results": "{\"t\": \"2026-10-17T21:58:24Z\", \"tool\": \"leanfinder\", \"query\": \"Every divisor of a nonzero polynomial that factors into linear factors over a field also factors into linear factors over that same field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Splits.splits_of_dvd\", \"Polynomial.Splits.of_dvd\", \"Polynomial.splits_of_splits_of_dvd\", \"Polynomial.factor_dvd_of_degree_ne_zero\", \"Polynomial.factor_dvd_of_natDegree_ne_zero\", \"Polynomial.splits_iff_splits\", \"Polynomial.splits_iff\", \"Polynomial.factor_dvd_of_not_isUnit\"], \"digest\": \"2a2741bb79349419\"}",
+   "date": "2026-10-18",
+   "verdict": "match: Polynomial.Splits.of_dvd, Mathlib/Algebra/Polynomial/Splits.lean:476–478; the explicit finite-factorization meaning is Polynomial.splits_iff_exists_multiset at 269–272 (source read)."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.Splits.of_dvd",
+  "file": "Mathlib/Algebra/Polynomial/Splits.lean",
+  "line": 476,
+  "how": "specializes in one line: apply Polynomial.Splits.of_dvd (lines 476–478) with R = F, g = P, f = Q. The field supplies the required CommRing and IsDomain instances. The finite-factorization predicate written in the statement is exactly Polynomial.Splits: its definition is at line 36, and splits_iff_exists_multiset (269–272) gives the displayed product with c = leadingCoeff; conversely products of constants and X - C b split by Splits.C (39), Splits.X_sub_C (242), Splits.mul (59) and Splits.prod (148). Finite indexed families and multisets differ only by forgetting their order, and empty families are allowed. These passages were read."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-residue-factor-root-selection",
+  "date": "2026-10-18",
+  "group": "NM"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, final residue-field paragraph: 'It follows we may pick i such that f_1(alpha-bar_i) = 0'; polynomial divisor-splitting input to the omitted root-selection details in the descendant lem-trf-standard-etale-finite-free-prime-lifts.",
+   "via": [
+    "lem-trf-residue-factor-root-selection",
+    "lem-trf-standard-etale-finite-free-prime-lifts",
+    "lem-trf-etale-finite-free-open-refinement",
+    "lem-trf-fppf-local-finite-free-refinement",
+    "lem-trf-fppf-integral-surjective-refinement",
+    "lem-trf-fppf-finite-surjective-refinement",
+    "lem-trf-ph-affine-standard-sieve-basis",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

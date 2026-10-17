@@ -25,9 +25,123 @@
   "def-weil-polynomial-ring",
   "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First treat the relative smooth locus. At a marked $x$, shrink into that locus and apply [lem-pur-smooth-pair-local-coordinates] to the closed immersion $D\\hookrightarrow X$ over $S$. Since the relative dimensions are $0$ and $1$, its integers are $a=0,b=1$. The resulting etale map to $\\mathbf A^1_S$ has $D\\cap U$ exactly the inverse image of $0$ and restricts to an etale marking map. At a smooth unmarked point remove the closed subset $D$ and apply [sbc-thm-etale-local-normal-form]; the relative dimension is $1$, so its affine space is $\\mathbf A^1$. Its empty marking maps etale to the zero section. Restrict both charts to affine neighbourhoods of $x$ and $s$.",
+   "uses": [
+    "lem-pur-smooth-pair-local-coordinates",
+    "sbc-thm-etale-local-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Smooth and marked cases; more-morphisms.tex, lemma-etale-local-structure (adapted coordinates), and morphisms.tex, local normal form of a smooth morphism."
+   }
+  },
+  {
+   "text": "Now let $x$ be nonsmooth. Remove $D$ and take an affine open around $x$. Apply [lem-trf-nodal-family-etale-local-model] to get a pointed etale nodal chart $Y\\to X$ over an etale base neighbourhood $T\\to S$. Refine $T$ to an affine neighbourhood of the image of the chosen point of $Y$. The valuation ring is normal: if $z\\notin V$, then $z^{-1}\\in\\mathfrak m_V$, and a monic integral equation for $z$, divided by its top power, would put $1$ in $\\mathfrak m_V$. Apply [lem-weil-pbc-gabber-finite-etale-section] with its ambient affine normal integral scheme equal to $S$ and its closed subscheme equal to $S$ itself. The chosen component of $T$ is an open subscheme $S_0$ of $S$. Restricting to it replaces the base by a Zariski open, not the source chart by an open. Thus we have etale maps $p:Y\\to X$ and $Y\\to\\operatorname{Spec}A[u_0,v_0]/(u_0v_0-c)$ for $c\\in A$, and a chosen point over $x$ at $u_0=v_0=0$. The chosen point maps to $u_0=v_0=0$: the standard model is smooth off that locus by its Jacobian, and smoothness at a point is preserved and reflected by an etale source neighbourhood. For reflection restrict its smooth open to its open image and use [lem-sbc-smooth-flat-surjective-source-descent]. Here and below, etale composition and base change are the scheme-source case of [lem-trf-space-chartwise-etale-permanence]; [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] and [lem-weil-pbc-smooth-ring-map-base-change-composition] supply preservation of smoothness. The openness used is [lem-weil-pbc-flat-lfp-open].",
+   "uses": [
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-weil-pbc-gabber-finite-etale-section",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-exc-etale-jacobian-presentation",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Initial etale neighbourhood from lemma-etale-local-structure-nodal-family; etale-cohomology.tex, lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field removes the base neighbourhood."
+   }
+  },
+  {
+   "text": "Here $A$ is again a valuation subring of $K$ of finite height. Its generic fibre is the original smooth generic curve. Therefore $c\\ne0$: if $c=0$, the generic node $u_0=v_0=0$ is a generalization of the chosen standard-model node. The open image of the etale map $Y\\to\\operatorname{Spec}A[u_0,v_0]/(u_0v_0)$ would contain it, producing a nonsmooth generic point of $Y$, contrary to smoothness of $X_K$ and etaleness of $p_K$. In particular $u_0$ and $v_0$ are nonzerodivisors on $Y$, since their product is the nonzero base element $c$ and $Y$ is flat over $A$. They are invertible on $Y_K$. Apply [lem-trf-ordered-nodal-branch-overlap] to this chart. Replace $X,Y$ by its affine opens $U,Y_0$; $p_0:Y_0\\to U$ is a surjective etale affine morphism and the two pullbacks of each coordinate generate equal ideals at all fibre-generic points of $W=Y_0\\times_UY_0$. Openness follows from [lem-weil-pbc-flat-lfp-open]; the etale permanence and smooth-composition statements cited here justify restriction to the generic fibre.",
+   "uses": [
+    "lem-trf-ordered-nodal-branch-overlap",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Nonzero thickness and branch ordering on the existing chart; the source gives no Zariski replacement of the source neighbourhood."
+   }
+  },
+  {
+   "text": "The scheme $W$ is affine, flat and finitely presented over $A$; it is etale over $Y_0$. For a geometric fibre, compose its etale maps to the standard nodal model. That model is reduced: when the parameter is nonzero it is a Laurent polynomial ring; when it is zero the ideal $(uv)=(u)\\cap(v)$ is radical. Hence [etale-proposition-etale-reduced] makes the geometric fibre of $W$ reduced. Etale composition and base change here use [lem-trf-space-chartwise-etale-permanence]. Apply [lem-trf-vertical-principal-ideal-fibre-detection] on $W$ to the two pullbacks of $u_0$, and then to the two pullbacks of $v_0$. Its generic-unit hypothesis holds because $u_0v_0=c\\ne0$ on the generic fibre; its fibre-generic equalities are exactly those of Step 3. We obtain equality of the two pulled-back ideal sheaves $(u_0)$ on every overlap, and likewise for $(v_0)$. These are equalities as submodules of $\\mathcal O_W$, not chosen isomorphisms of abstract line modules, so their canonical identifications automatically satisfy the triple-overlap cocycle.",
+   "uses": [
+    "lem-trf-vertical-principal-ideal-fibre-detection",
+    "etale-proposition-etale-reduced",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Upgrade fibre-generic comparisons to equality of the vertical principal ideals; agent reconstruction using the separately stated finite-height detection lemma."
+   }
+  },
+  {
+   "text": "Use [lem-pc-fpqc-descent] for the affine faithfully flat quasi-compact cover $p_0:Y_0\\to U$. Apply its equivalence to the two ideal modules and their inclusions into $\\mathcal O_{Y_0}$, with the canonical descent data of Step 4. Full faithfulness descends the inclusions; their kernels vanish because they vanish after a faithfully flat pullback. It gives invertible ideal sheaves $I,J\\subset\\mathcal O_U$ whose pullbacks are $(u_0),(v_0)$. The product equality $(u_0)(v_0)=(c)$ descends too, hence $IJ=(c)$. Zariski locally around $x$ choose generators $u,v$ of $I,J$. Their product generates $(c)$, so $uv=\\varepsilon c$ for a unit $\\varepsilon$. Replacing $v$ by $\\varepsilon^{-1}v$ gives $uv=c$, hence an actual morphism $h:U\\to\\operatorname{Spec}A[u,v]/(uv-c)$. On $Y_0$ one has $p_0^*u=\\alpha u_0$, $p_0^*v=\\alpha^{-1}v_0$ for a unit $\\alpha$: cancel the nonzerodivisor $c$ to see that the two rescaling units are inverse.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Effective descent of quasi-coherent modules and rank-one local freeness; descent.tex, effective fpqc descent. Construction of the Zariski-local generators written out."
+   }
+  },
+  {
+   "text": "Check etaleness of $h p_0$ at every point of $Y_0$ above $x$. There both $u_0,v_0$ vanish. Introduce an invertible variable $t$ on $E=Y_0\\times\\mathbf G_m$ and map $E$ to the nodal model by $(u,v)=(tu_0,t^{-1}v_0)$. The map $E\\to(\\operatorname{Spec}A[u,v]/(uv-c))\\times\\mathbf G_m$ is etale: after the invertible change $(u,v,t)\\mapsto(t^{-1}u,tv,t)$ it is the base change of the original chart. The graph $t=\\alpha$ is $Y_0$ and its composite to the nodal model is $h p_0$. In a square Jacobian presentation for this etale map, eliminate its chart variables and add the equation $F=t-\\alpha$. Differentiation over the nodal model gives $du_0=-u_0\\,dt/t$ and $dv_0=v_0\\,dt/t$. Thus $d\\alpha/dt=0$ at these points, and $\\partial F/\\partial t=1$. The enlarged square Jacobian is invertible. By [lem-exc-etale-jacobian-presentation], the graph is etale over the nodal model near each such point. This is a direct Jacobian calculation, with no assertion that a fibrewise tangent isomorphism alone proves etaleness of a relative morphism.",
+   "uses": [
+    "lem-exc-etale-jacobian-presentation",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Square-Jacobian calculation for inverse unit rescaling of nodal coordinates; algebraic etale presentation criterion."
+   }
+  },
+  {
+   "text": "Shrink $Y_0$ to the open where $h p_0$ is etale. Step 6 shows that this open contains every point over $x$, and its image under $p_0$ is an open neighbourhood $U'$ of $x$. The restricted map to $U'$ is a surjective etale cover. Apply [lem-trf-etale-descent-through-source-cover] to conclude that $h|_{U'}$ is etale. Choose an affine Zariski neighbourhood of $x$ in $U'$. The marking is empty because the original nodal neighbourhood was disjoint from $D$; its map to the empty standard marking is etale. Together with Step 1 this proves every chart and the extra assertions at marked, nonsmooth and smooth unmarked points.",
+   "uses": [
+    "lem-trf-etale-descent-through-source-cover",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "descent.tex, lemma-etale-etale-local-source: descend the checked etaleness through the source cover, then choose an affine open."
+   }
+  }
+ ],
+ "proof_deps": [
+  "etale-proposition-etale-reduced",
+  "lem-exc-etale-jacobian-presentation",
+  "lem-pc-fpqc-descent",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-trf-ordered-nodal-branch-overlap",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-vertical-principal-ideal-fibre-detection",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-gabber-finite-etale-section",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "sbc-thm-etale-local-normal-form"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Initial etale charts follow lemma-etale-local-structure-nodal-family. Zariski descent is an agent reconstruction using separately stated overlap ordering and vertical-ideal detection. Temkin Section 4.3, printed p.27, motivates the conclusion over a field only; it is not claimed as the relative theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +170,38 @@
    "results": "{\"t\": \"2026-10-17T21:21:53Z\", \"tool\": \"grep\", \"query\": \"strict.*semistable|nodal|split.*curve\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\"], \"digest\": \"510ee1a516848153\"}. Read the returned signatures. Standard etale-pair and standard smooth-coordinate declarations do not address nodal morphisms. The grep hit Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean:322 is HasSplitMultiplicativeReduction for a Weierstrass curve, not a Zariski chart theorem for arbitrary relative nodal curves.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semistable curve over a valuation ring with separably closed fraction field and smooth fibre components admits standard Zariski local nodal coordinates",
+   "results": "{\"t\": \"2026-10-17T21:44:10Z\", \"tool\": \"leanfinder\", \"query\": \"A semistable curve over a valuation ring with separably closed fraction field and smooth fibre components admits standard Zariski local nodal coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"290f3f72e3114104\"}; Read returned smooth-chart and Weierstrass reduction signatures: none states the relative Zariski strict-chart assertion for arbitrary nodal families.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth components of nodal fibres imply Zariski etale charts uv equals a over a valuation ring",
+   "results": "{\"t\": \"2026-10-17T21:44:09Z\", \"tool\": \"leansearch\", \"query\": \"Smooth components of nodal fibres imply Zariski etale charts uv equals a over a valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq.K\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.FormallyEtale.instFormallySmooth\"], \"digest\": \"c8ebe3b8150e77a1\"}; Read returned smooth-chart and Weierstrass reduction signatures: none states the relative Zariski strict-chart assertion for arbitrary nodal families.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"semistable\"",
+   "results": "{\"t\": \"2026-10-17T21:44:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"semistable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned smooth-chart and Weierstrass reduction signatures: none states the relative Zariski strict-chart assertion for arbitrary nodal families.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|nodal|strict.*chart",
+   "results": "{\"t\": \"2026-10-17T21:44:08Z\", \"tool\": \"grep\", \"query\": \"semistable|nodal|strict.*chart\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned smooth-chart and Weierstrass reduction signatures: none states the relative Zariski strict-chart assertion for arbitrary nodal families.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-marked-strictification",
@@ -89,5 +231,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-smooth-branches-strict-chart",
+  "worker": "stage1",
+  "summary": "Statement retained. Split the relative Zariski chart argument into initial etale chart, removal of the etale base neighbourhood by the existing normal sepclosed-function-field theorem, generic branch comparison, vertical-ideal detection, fpqc descent of rank-one ideals, local generators, an explicit unit-rescaling Jacobian calculation, and source-etale descent. Smooth marking uses the existing adapted smooth-pair coordinates. No claim that 0CBY or Temkin proves the relative Zariski assertion.",
+  "blueprint": "Historical nearby-cycle semistable-alteration branch of lem-trf-local-term-locality, Proof (1)--(2): after semistable gluing, the strict-cofinality strengthening of Temkin Remark 4.5.2. This auxiliary result only strictifies an already semistable pair. Auxiliary local input: §4.3, definition of strict semistable pairs and the smooth-component observation, printed p. 27; Remark 4.5.2, printed p. 33. Agent-reconstructed relative all-fibres smooth-branch criterion over the finite-height separably closed valuation base; Stacks Tag 0CBY, curves.tex, lemma-etale-local-structure-nodal-family supplies only etale neighbourhoods, not this Zariski conclusion. Local archival PDF WANTED. This auxiliary strict-chart argument realizes the historical strictification subbranch; it does not replace the current contracting-correspondence proof of the ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-smooth-pair-local-coordinates",
+    "why": "Adapted coordinates for a smooth relative curve and its smooth zero-dimensional closed marking; a generic geometry tool. No node of the item unit states this generic tool."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Zariski affine coordinates at a smooth unmarked point; no unit-specific replacement. No node of the item unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-gabber-finite-etale-section",
+    "why": "Split affine etale neighbourhoods over the normal separably closed-function-field base; a general etale-topology tool. No node of the item unit states this generic tool."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Effective descent of ideal inclusions and invertible modules for the affine etale cover. No node of the item unit states this generic tool."
+   },
+   {
+    "node": "lem-exc-etale-jacobian-presentation",
+    "why": "Square-Jacobian criterion for the explicit rescaling graph calculation. No node of the item unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "The etale maps in question are flat and locally finitely presented, so their images of opens are open. This generic tool is not an alternative route to the unit theorem."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Reflection of smoothness from an etale source neighbourhood, after restricting to its open image. This generic tool is not an alternative route to the unit theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Etale maps are smooth of relative dimension zero, used in the geometric and generic-fibre checks. This generic tool is not an alternative route to the unit theorem."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "why": "Preservation of smoothness by base change and by composition on affine charts. This generic tool is not an alternative route to the unit theorem."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Only its scheme-source case is used: representable etale composition and arbitrary base change. No algebraic-space construction enters the argument. This generic tool is not an alternative route to the unit theorem."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "An etale scheme over a reduced standard geometric fibre is reduced. This generic tool is not an alternative route to the unit theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-smooth-pair-local-coordinates",
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-gabber-finite-etale-section",
+  "lem-pc-fpqc-descent",
+  "lem-exc-etale-jacobian-presentation",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-trf-space-chartwise-etale-permanence",
+  "etale-proposition-etale-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q82-9c42b1c28",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-9c42b1c28 (reviewer sub-agent of L); spot-checked: Read the mathematics in full and checked all seven steps, three new nodes, cited sources, edge cases, duplicate candidates and route constraints. Repaired missing lean_audit records in all three new nodes; corrected JSON files are under fixes/dag/nodes/sec-trace-formula/. Detailed checks and accepted tool uses are in review.md.; 3 file(s) fixed by the reviewer"
  }
 }

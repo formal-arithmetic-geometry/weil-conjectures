@@ -14,9 +14,134 @@
   "def-pc-fibre-product",
   "def-galois-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $I$ be the set of finite intermediate fields of $L/K$, ordered by inclusion, with $K$ as its least element. Use the finite-subextension filtered-colimit presentation of [lem-kun-algebraic-separable-smooth]: the stages are the finite separable subextensions inside $L$. Thus $I$ is nonempty and directed and the inclusions give $L=\\varinjlim_{E\\in I}E$. The indexing collection is a set, being a subset of the power set of the underlying set of $L$; no large category is involved.",
+   "uses": [
+    "lem-kun-algebraic-separable-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-algebraic-separable-smooth.md",
+    "place": "Statement and proof: finite separable subextensions and their filtered union"
+   }
+  },
+  {
+   "text": "For $E\\in I$, [lem-pod-separated-finite-type-base-change] makes $X_E$ separated and of finite type over $E$; [lem-weil-pbc-qcqs-over-affine] then makes $X_E$ quasi-compact and quasi-separated. The same assertions hold for $X_L$. For $E\\subseteq E'$, the map $\\operatorname{Spec}E'\\to\\operatorname{Spec}E$ is affine: the target spectrum of a field has only the empty open and the whole space, and their inverse images are affine. Its base change $X_{E'}\\to X_E$ is affine by [lem-weil-pbc-affine-morphism-permanence].",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T4 (lemma-base-change-finite-type), 01SD (lemma-base-change-affine); schemes.tex Tag 01KU (lemma-separated-permanence) and Tag 01K4"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-small-colimit-limit], the inclusions $E\\to L$ exhibit $\\operatorname{Spec}L=\\varprojlim_E\\operatorname{Spec}E$. We check directly that $X_L$ with its canonical projections is the limit of the $X_E$. A compatible family $T\\to X_E$ has one common component $T\\to X_0$ (use the least stage $E=K$) and a compatible family $T\\to\\operatorname{Spec}E$, hence a unique component $T\\to\\operatorname{Spec}L$. The two components agree over $\\operatorname{Spec}K$. The universal property of [def-pc-fibre-product] gives exactly one $T\\to X_L$ inducing the family. This proves the required limiting-cone assertion, including its specified projections.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit; Tag 01YZ, lemma-scheme-over-limit: verification by the fibre-product universal property"
+   }
+  },
+  {
+   "text": "Every finite etale cover $R\\to Y$ used here, with $Y=X_E$ or $X_L$, is locally of finite presentation by [def-weil-etale-morphism]. Since it is also finite, [lem-trf-finite-morphism-finite-presentation] makes it of finite presentation. In particular the spreading-out theorem applies both to the cover $P\\to X_L$ in (1) and to the two covers $P_E,Q_E\\to X_E$ in (2) and (3).",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-finite-morphism-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GI, definition-etale; Tag 01S7, lemma-affine-separated; Tag 01TP, definition-finite-presentation"
+   }
+  },
+  {
+   "text": "Apply the object clause of [thm-pd-spreading-out] to $P\\to X_L$ and the system of steps 1--3. It gives $E_0\\in I$, a finite-presentation morphism $p_0:R_0\\to X_{E_0}$ and an isomorphism $R_0\\times_{X_{E_0}}X_L\\cong P$ over $X_L$. The source $R_0$ is quasi-compact and quasi-separated by part (2) of [lem-weil-pbc-qcqs-morphism-permanence], since $p_0$ is quasi-compact and quasi-separated and $X_{E_0}$ is qcqs. These are the absolute qcqs hypotheses required by the property-descent lemmas, not an assertion that $R_0$ is already finite or etale.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1), followed by Situation 081D, situation-descent-property"
+   }
+  },
+  {
+   "text": "Restrict the directed system to $E\\supseteq E_0$, still with limit $X_L$: the universal-property argument of step 3 works on this tail because every element of $L$ is in a finite subextension containing $E_0$. Apply [lem-weil-pbc-descend-finite] with base system $S_E=X_E$, source $R_0$, target $X_{E_0}$ and morphism $p_0$. Its limit morphism is isomorphic to the finite morphism $P\\to X_L$. The stage morphism is locally of finite type, since it is locally of finite presentation (a finitely presented algebra has finitely many generators). Hence some $E_1\\supseteq E_0$ makes $p_1:R_1=R_0\\times_{X_{E_0}}X_{E_1}\\to X_{E_1}$ finite. Its finite presentation persists by part (3) of [lem-weil-pbc-qcqs-morphism-permanence], and its source is qcqs by part (2).",
+   "uses": [
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZO, lemma-descend-finite-finite-presentation, in Situation 081D; morphisms.tex Tag 01TS, lemma-base-change-finite-presentation"
+   }
+  },
+  {
+   "text": "On the tail $E\\supseteq E_1$, apply [lem-weil-pbc-descend-etale] to $p_1$: the stage base, source and target are qcqs, the stage morphism is locally of finite presentation, and its limit morphism is $P\\to X_L$, which is etale. It gives $E_2\\supseteq E_1$ for which $p_2:R_2=R_1\\times_{X_{E_1}}X_{E_2}\\to X_{E_2}$ is etale. It remains finite by [lem-weil-pbc-finite-morphism-permanence] (a), applied to $p_1$. Consequently $P_{E_2}=R_2$ is a finite etale cover. The successive fibre-product universal properties identify its pullback to $X_L$ with $R_0\\times_{X_{E_0}}X_L$, and the isomorphism of step 5 identifies this with $P$. This proves (1).",
+   "uses": [
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RP, lemma-descend-etale, in Situation 081D; morphisms.tex Tag 01WL, lemma-base-change-finite"
+   }
+  },
+  {
+   "text": "For (2), apply the morphism clause of [thm-pd-spreading-out] at the specified index $E$, with $V_E=P_E$, $W_E=Q_E$ and $\\psi=f$. These two schemes are of finite presentation over $X_E$ by step 4. We obtain $E'\\supseteq E$ in $I$ and an $X_{E'}$-morphism between their pullbacks whose pullback to $X_L$ is $f$. The associativity identifications here are the unique ones preserving both fibre-product projections, so the domain and codomain are exactly the two covers specified in (2).",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (2)"
+   }
+  },
+  {
+   "text": "For (3), the covers $P_E,Q_E$ again have finite presentation by step 4. Apply the equality clause of [thm-pd-spreading-out] to the two given $X_E$-morphisms $f_E,h_E$ and their assumed equal pullbacks to $X_L$. It gives an index $E'\\supseteq E$ at which their pullbacks agree. Since indices are precisely finite intermediate fields of $L/K$, this is exactly the assertion of (3).",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-algebraic-separable-smooth",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "lem-trf-finite-morphism-finite-presentation",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BTV, lemma-limit, first assertion and its proof via Limits Tags 01ZM, 01ZO and 07RP; field-system specialization made explicit"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +191,45 @@
    "results": "8 hits: Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.iff_isSeparable, AlgebraicGeometry.finite_appTop_of_universallyClosed. No exact match or one-line specialization for finite etale covers of non-affine schemes, together with descent of all morphisms and eventual equality. AffineTransitionLimit supplies factorization/equality of maps, not descent of finite etale objects; fpqc property descent assumes an existing model. The algebra hits concern etaleness or affine algebra presentations, not the stated cover-category result.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers and their morphisms over an algebraic field extension descend to finite intermediate fields",
+   "results": "8 hits: finGaloisGroupMap, galLiftEquiv_apply, galLift_comp, IntermediateField.Lifts, IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset, IntermediateField.Lifts.IsExtendible, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg. Read the inverse-limit map/equality candidates in AffineTransitionLimit, and the etale algebra candidates: they do not provide descent of finite etale covers over arbitrary non-affine X_E. No exact match or one-line specialization for the complete item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation schemes over an inverse limit with affine transition maps descend to a stage with morphisms and eventual equality",
+   "results": "8 hits: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_map_preimage_eq_map_preimage. Read the inverse-limit map/equality candidates in AffineTransitionLimit, and the etale algebra candidates: they do not provide descent of finite etale covers over arbitrary non-affine X_E. No exact match or one-line specialization for the complete item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"FinitePresentation\"",
+   "results": "12 hits: AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.locallyOfFinitePresentation_comp, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme. Read the inverse-limit map/equality candidates in AffineTransitionLimit, and the etale algebra candidates: they do not provide descent of finite etale covers over arbitrary non-affine X_E. No exact match or one-line specialization for the complete item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isPullback_of_finitePresentation|finite.*etale.*descen|descend.*finite",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean. Read the inverse-limit map/equality candidates in AffineTransitionLimit, and the etale algebra candidates: they do not provide descent of finite etale covers over arbitrary non-affine X_E. No exact match or one-line specialization for the complete item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers of inverse limits of schemes descend with all morphisms to some finite stage",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.smallEtaleTopology. Read the inverse-limit map/equality candidates in AffineTransitionLimit, and the etale algebra candidates: they do not provide descent of finite etale covers over arbitrary non-affine X_E. No exact match or one-line specialization for the complete item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-finite-etale-weil-transport",
@@ -88,5 +248,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-finite-etale-field-limit-descent",
+  "worker": "stage1",
+  "summary": "Retained all three clauses. Established the small directed field system and the specified scheme limit, then expanded Stacks 0BTV into finite-presentation object descent, sequential finiteness and etaleness detection, and separate morphism and equality applications. Every tool is an existing node; no new node is needed. Checked all cited statements against their uses and the absolute qcqs hypotheses.",
+  "blueprint": "Realizes the penultimate paragraph of main-20261015 lem-wf-finite-constant-h1-pi1.proof.md (descent transport associated with s), through the finite-stage descent requirement recorded by parent lem-wf-finite-etale-weil-transport. This item supplies covers, morphisms, and equality at a common finite-field stage, without changing the rank-one unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-algebraic-separable-smooth",
+    "why": "Supplies the finite-subextension filtered-colimit presentation needed for the constant-field descent system. This is a general geometric tool; the rank-one unit has no alternative statement of it."
+   },
+   {
+    "node": "lem-trf-finite-morphism-finite-presentation",
+    "why": "Supplies finite plus locally finite presentation implies finite presentation, so covers meet the spreading-out hypotheses. This is a general geometric tool; the rank-one unit has no alternative statement of it."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite",
+    "why": "Detects finiteness of the chosen finitely presented model at a later stage, exactly as cited by Stacks 0BTV. This is a general geometric tool; the rank-one unit has no alternative statement of it."
+   },
+   {
+    "node": "lem-weil-pbc-descend-etale",
+    "why": "Detects etaleness of the same model at a later stage, exactly as cited by Stacks 0BTV. This is a general geometric tool; the rank-one unit has no alternative statement of it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-algebraic-separable-smooth",
+  "lem-trf-finite-morphism-finite-presentation",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q109-9ec33c685",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q109-9ec33c685 (reviewer sub-agent of L); spot-checked: Read the complete item, route, cited DAG statements, Stacks sources, and report. All three descent clauses and hypotheses check out; edge cases, affine transitions, qcqs conditions, base-change identifications, searches, and route restrictions pass. No new nodes, duplicates, hidden long steps, forbidden SGA, or route-pivot machinery found."
  }
 }

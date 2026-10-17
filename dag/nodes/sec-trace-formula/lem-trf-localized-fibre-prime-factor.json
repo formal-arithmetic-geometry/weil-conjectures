@@ -12,9 +12,114 @@
   "def-weil-ring-localization-away",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=\\kappa(\\mathfrak q)=B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}$, and write $\\tau:B\\to L$ for the residue map [def-weil-pbc-localization-at-prime]. Its kernel is exactly $\\mathfrak q$: membership in $\\mathfrak q$ plainly gives zero; conversely, if $b/1$ is in $\\mathfrak qB_{\\mathfrak q}$, write a finite sum of its ideal generators over a common denominator $s\\notin\\mathfrak q$. The fraction-equality rule gives $ub s\\in\\mathfrak q$ for another $u\\notin\\mathfrak q$, and primality gives $b\\in\\mathfrak q$. Thus the composite $R\\to B\\xrightarrow{\\tau}L$ has kernel $\\mathfrak p$, and every $s\\in R\\setminus\\mathfrak p$ has nonzero image in $L$. In particular $L$ and $k$ are nonzero fields.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, proof, residue-field paragraph beginning Let overline f denote the image of f; the prime/factor identification expanded."
+   }
+  },
+  {
+   "text": "Using the fractions of [def-weil-pbc-localization-at-prime], define $\\iota:k\\to L$ by $\\iota(\\overline{r/s})=\\tau(r)/\\tau(s)$ for $s\\notin\\mathfrak p$, where $r,s$ on the right denote their images in $B$. Fraction equality and reduction modulo $\\mathfrak p$ preserve this formula because the composite $R\\to L$ kills exactly $\\mathfrak p$; its kernel on $k$ is zero since $\\tau(r)=0$ precisely when $r\\in\\mathfrak p$. Let $x=\\tau([t]/1)$, and define $\\theta:k[t]\\to L$ by $\\theta(\\sum_i a_it^i)=\\sum_i\\iota(a_i)x^i$, using the coefficient operations of [def-weil-polynomial-ring]. Then $\\theta\\rho(P)=\\tau([P]/1)$ for every $P\\in R[t]$. Consequently $Q=\\ker\\theta$ is a proper prime ideal (a product evaluates to zero in the field $L$ only if a factor does), $f_k\\in Q$, and $g_k\\notin Q$, since $[g]/1$ is a unit in $B$ [def-weil-ring-localization-away]. The polynomial $f_k$ is nonzero: its leading coefficient is the image of $1$, hence still $1$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-polynomial-ring",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, proof, residue-field paragraph beginning Let overline f denote the image of f; the prime/factor identification expanded."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-polynomial-field-pid] to the field $k$. It gives an integral domain $k[t]$ and a polynomial $d$ with $Q=(d)$. Since $f_k\\in Q$ is nonzero, $d\\ne0$; since $Q$ is proper, $d$ is not a unit.",
+   "uses": [
+    "lem-pur-polynomial-field-pid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, proof, residue-field paragraph beginning Let overline f denote the image of f; the prime/factor identification expanded."
+   }
+  },
+  {
+   "text": "Let $c\\in k^\\times$ be the leading coefficient of $d$ and put $h=c^{-1}d$. From the coefficient definition [def-weil-polynomial-ring], $h$ is monic and $(h)=(d)=Q$. It is nonzero and not a unit. If $h=uv$, primality of $Q$ puts one of $u,v$ in $(h)$. If $u=ha$, cancellation of the nonzero $h$ in $h=hav$ gives $av=1$, so $v$ is a unit; the other case is symmetric. Thus $h$ is irreducible. The relations $f_k\\in(h)$ and $g_k\\notin(h)$ are precisely $h\\mid f_k$ and $h\\nmid g_k$.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, proof, residue-field paragraph beginning Let overline f denote the image of f; the prime/factor identification expanded."
+   }
+  },
+  {
+   "text": "For $P\\in R[t]$ and $m\\ge0$, [def-weil-ring-localization-away] gives $\\tau([P]/g_A^m)=\\theta(\\rho(P))/\\theta(g_k)^m$. Its denominator is nonzero, so Step 1 and $\\ker\\theta=(h)$ give\n$$[P]/g_A^m\\in\\mathfrak q\\quad\\Longleftrightarrow\\quad\\theta(\\rho(P))=0\\quad\\Longleftrightarrow\\quad h\\mid\\rho(P).$$\nThis proves the explicit membership clause, for every representative and every denominator exponent, including $m=0$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, proof, residue-field paragraph beginning Let overline f denote the image of f; the prime/factor identification expanded."
+   }
+  },
+  {
+   "text": "Since $\\theta(f_k)=0$ and $\\theta(g_k)\\ne0$, evaluation gives a map $e:F\\to L$ with $e([U]/[g_k]^m)=\\theta(U)/\\theta(g_k)^m$; the quotient relation and the fraction-equality rule [def-weil-ring-localization-away] make this well-defined. Its kernel is $I=((h)/(f_k))F$. Indeed the image of $h$ maps to zero, so $I\\subseteq\\ker e$; conversely $e([U]/[g_k]^m)=0$ implies $U\\in Q=(h)$, say $U=hV$, and the fraction is the image of $h$ times $[V]/[g_k]^m$. The formulas give $ej=\\tau$ on every $[P]/g_A^m$. Hence $j^{-1}(I)=\\ker\\tau=\\mathfrak q$, proving the asserted equality of ideals.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, proof, residue-field paragraph beginning Let overline f denote the image of f; the prime/factor identification expanded."
+   }
+  },
+  {
+   "text": "For uniqueness, let $h'$ be any monic irreducible polynomial satisfying $h'\\mid f_k$, $h'\\nmid g_k$ and $j^{-1}(I')=\\mathfrak q$, where $I'=((h')/(f_k))F$. Every common divisor of $h'$ and $g_k$ is a unit: a nonunit divisor of the irreducible $h'$ is associated to $h'$ and would force $h'\\mid g_k$. Thus [def-weil-coprime-polynomials] gives that $h'$ and $g_k$ are coprime. Repeated application of [lem-weil-coprime-divides-product] gives $h'\\mid g_k^NU$ if and only if $h'\\mid U$, for every $N\\ge0$. Now $[U]/1\\in I'$ if and only if $h'\\mid U$. The reverse implication is immediate. For the forward implication, $I'$ is the principal ideal generated by the class of $h'$, so write $[U]/1=[h'V]/[g_k]^m$. Fraction equality [def-weil-ring-localization-away] yields $g_k^N(g_k^mU-h'V)\\in(f_k)$ for some $N$. Since $h'\\mid f_k$, we get $h'\\mid g_k^{N+m}U$ and cancel these factors by the preceding divisibility implication. In particular, for every $P\\in R[t]$,\n$$h'\\mid\\rho(P)\\quad\\Longleftrightarrow\\quad[P]/1\\in\\mathfrak q\\quad\\Longleftrightarrow\\quad h\\mid\\rho(P),$$\nwhere the middle equivalence uses the assumed contraction and Step 5.",
+   "uses": [
+    "def-weil-coprime-polynomials",
+    "lem-weil-coprime-divides-product",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, proof, residue-field paragraph beginning Let overline f denote the image of f; the prime/factor identification expanded."
+   }
+  },
+  {
+   "text": "Every $U\\in k[t]$ has a common coefficient denominator: write its finitely many coefficients as $\\overline{r_i/s_i}$ with $s_i\\notin\\mathfrak p$, take $s=\\prod_i s_i\\notin\\mathfrak p$, and put $P=\\sum_i(r_i\\prod_{j\\ne i}s_j)t^i\\in R[t]$. Then $\\rho(P)=\\overline{s}\\,U$; for $U=0$ use $s=1,P=0$. This uses exactly the fraction model of [def-weil-pbc-localization-at-prime] and finite coefficient description [def-weil-polynomial-ring]. The scalar $\\overline{s}$ is a nonzero constant, hence a unit in $k[t]$. Applying Step 7 to $P$ therefore shows $h'\\mid U$ if and only if $h\\mid U$ for every $U$. In particular $h\\mid h'$ and $h'\\mid h$. Write $h'=ha$ and $h=h'b$; cancellation in the domain gives $ab=1$. The coefficient formula shows that degrees of nonzero polynomial products add (the top coefficient is the product of the two nonzero top coefficients); hence $a,b$ are constants. Comparing the leading coefficients of the two monic polynomials gives $a=1$. Thus $h'=h$, as required.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, proof, residue-field paragraph beginning Let overline f denote the image of f; the prime/factor identification expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-coprime-polynomials",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-pur-polynomial-field-pid",
+  "lem-weil-coprime-divides-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00UF, lemma-standard-etale-finite-flat-Zariski, proof, residue-field paragraph beginning Let overline f denote the image of f; the prime/factor identification expanded. Explicit residue evaluation, PID argument, localization ideal computation and denominator-based uniqueness supply the omitted details."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +162,59 @@
    "results": "{\"t\": \"2026-10-17T21:38:07Z\", \"tool\": \"grep\", \"query\": \"irreducible|comap|over\", \"sub\": \"NumberTheory/NumberField/Ideal\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Asymptotics.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Asymptotics.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Asymptotics.lean\"], \"digest\": \"43aa9a0bdab1a468\"}",
    "date": "2026-10-18",
    "verdict": "no match: NumberField Kummer-Dedekind requires a number field, an integer prime and conductor/exponent conditions; OverPrime.mem_normalizedFactors_of_isPrime requires Dedekind-domain finite torsion-free algebra data and only identifies an ideal factor. Neither is the stated arbitrary-ring residue-fibre classification, and the Loogle hits concern etale factor lifting or irreducibility descent, not this correspondence."
+  },
+  {
+   "tool": "grep",
+   "query": "monic_generator|generator.*irreducible|irreducible.*generator|exists.*monic.*span",
+   "results": "{\"t\": \"2026-10-17T21:57:43Z\", \"tool\": \"grep\", \"query\": \"monic_generator|generator.*irreducible|irreducible.*generator|exists.*monic.*span\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/Ideal/MonicSpan.lean\", \"Mathlib/RingTheory/Ideal/MonicSpan.lean\", \"Mathlib/RingTheory/Ideal/MonicSpan.lean\", \"Mathlib/RingTheory/Ideal/Maximal.lean\"], \"digest\": \"4ce7c51aac3632a7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: the NumberField Kummer-Dedekind statements require number-field/integer-prime and exponent assumptions; the Dedekind OverPrime result factors an extended ideal under Dedekind/finite/torsion-free hypotheses. The fibre-spectrum equivalence is generic infrastructure but does not classify polynomial factors or provide the explicit fraction test. Universal coprime factorization lifts factorizations etale-locally and does not state this correspondence. Partial polynomial ideal results are reused through the existing PID leaf, not claimed as a match for the whole item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonzero prime ideal in a polynomial ring over a field has a unique monic irreducible generator",
+   "results": "{\"t\": \"2026-10-17T21:57:44Z\", \"tool\": \"leansearch\", \"query\": \"Every nonzero prime ideal in a polynomial ring over a field has a unique monic irreducible generator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.exists_monic_irreducible_factor\", \"Ideal.isPrime_map_C_of_isPrime\", \"Polynomial.monic_annIdealGenerator\", \"Ideal.uniqueFactorizationMonoid\", \"Polynomial.prime_of_degree_eq_one\", \"Polynomial.Monic.irreducible_of_irreducible_map_of_isPrime_nilradical\", \"Polynomial.Monic.prime_of_degree_eq_one\", \"Ideal.IsPrime.exists_mem_prime_of_ne_bot\"], \"digest\": \"38639477e933e98c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: the NumberField Kummer-Dedekind statements require number-field/integer-prime and exponent assumptions; the Dedekind OverPrime result factors an extended ideal under Dedekind/finite/torsion-free hypotheses. The fibre-spectrum equivalence is generic infrastructure but does not classify polynomial factors or provide the explicit fraction test. Universal coprime factorization lifts factorizations etale-locally and does not state this correspondence. Partial polynomial ideal results are reused through the existing PID leaf, not claimed as a match for the whole item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsPrime, Polynomial.Monic",
+   "results": "{\"t\": \"2026-10-17T21:57:44Z\", \"tool\": \"loogle\", \"query\": \"Ideal.IsPrime, Polynomial.Monic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Polynomial.Monic.irreducible_of_irreducible_map_of_isPrime_nilradical\"], \"digest\": \"9e4f55398739892e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: the NumberField Kummer-Dedekind statements require number-field/integer-prime and exponent assumptions; the Dedekind OverPrime result factors an extended ideal under Dedekind/finite/torsion-free hypotheses. The fibre-spectrum equivalence is generic infrastructure but does not classify polynomial factors or provide the explicit fraction test. Universal coprime factorization lifts factorizations etale-locally and does not state this correspondence. Partial polynomial ideal results are reused through the existing PID leaf, not claimed as a match for the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonzero prime ideal in a polynomial ring over a field is generated by a unique monic irreducible polynomial",
+   "results": "{\"t\": \"2026-10-17T21:57:45Z\", \"tool\": \"leanfinder\", \"query\": \"Every nonzero prime ideal in a polynomial ring over a field is generated by a unique monic irreducible polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.idealX\", \"AdjoinRoot.span_maximal_of_irreducible\", \"Polynomial.exists_monic_irreducible_factor\", \"Irreducible.exists_dvd_monic_irreducible_of_isIntegral\", \"Ideal.factors_span_eq\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply_eq_span\", \"Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map\", \"Polynomial.generalizedEisenstein\"], \"digest\": \"4757f490e8f3c963\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: the NumberField Kummer-Dedekind statements require number-field/integer-prime and exponent assumptions; the Dedekind OverPrime result factors an extended ideal under Dedekind/finite/torsion-free hypotheses. The fibre-spectrum equivalence is generic infrastructure but does not classify polynomial factors or provide the explicit fraction test. Universal coprime factorization lifts factorizations etale-locally and does not state this correspondence. Partial polynomial ideal results are reused through the existing PID leaf, not claimed as a match for the whole item."
+  },
+  {
+   "tool": "grep",
+   "query": "preimageEquivFiber|primesOverSpanEquivMonicFactorsMod|mem_normalizedFactors_of_isPrime",
+   "results": "{\"t\": \"2026-10-17T21:59:01Z\", \"tool\": \"grep\", \"query\": \"preimageEquivFiber|primesOverSpanEquivMonicFactorsMod|mem_normalizedFactors_of_isPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\"], \"digest\": \"dc1f9363ab56d79f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: the NumberField Kummer-Dedekind statements require number-field/integer-prime and exponent assumptions; the Dedekind OverPrime result factors an extended ideal under Dedekind/finite/torsion-free hypotheses. The fibre-spectrum equivalence is generic infrastructure but does not classify polynomial factors or provide the explicit fraction test. Universal coprime factorization lifts factorizations etale-locally and does not state this correspondence. Partial polynomial ideal results are reused through the existing PID leaf, not claimed as a match for the whole item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Primes in a localization of R[X]/(f) over p correspond to monic irreducible factors of f over kappa(p) not dividing g",
+   "results": "{\"t\": \"2026-10-17T21:59:01Z\", \"tool\": \"leansearch\", \"query\": \"Primes in a localization of R[X]/(f) over p correspond to monic irreducible factors of f over kappa(p) not dividing g\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod\", \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply'\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod.congr_simp\", \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"AlgebraicGeometry.StructureSheaf.Localizations\", \"NumberField.Ideal.liesOver_primesOverSpanEquivMonicFactorsMod_symm\", \"Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map\"], \"digest\": \"acd930245a7d911e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: the NumberField Kummer-Dedekind statements require number-field/integer-prime and exponent assumptions; the Dedekind OverPrime result factors an extended ideal under Dedekind/finite/torsion-free hypotheses. The fibre-spectrum equivalence is generic infrastructure but does not classify polynomial factors or provide the explicit fraction test. Universal coprime factorization lifts factorizations etale-locally and does not state this correspondence. Partial polynomial ideal results are reused through the existing PID leaf, not claimed as a match for the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prime ideal of a localized monic polynomial quotient over a commutative ring is classified by an irreducible factor over the residue field of its contraction, with fraction membership equivalent to divisibility",
+   "results": "{\"t\": \"2026-10-17T21:59:02Z\", \"tool\": \"leanfinder\", \"query\": \"A prime ideal of a localized monic polynomial quotient over a commutative ring is classified by an irreducible factor over the residue field of its contraction, with fraction membership equivalent to divisibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective\", \"Polynomial.exists_image_comap_of_monic\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply\", \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"NumberField.Ideal.liesOver_primesOverSpanEquivMonicFactorsMod_symm\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply_eq_span\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\"], \"digest\": \"de90b5d3b0979dab\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: the NumberField Kummer-Dedekind statements require number-field/integer-prime and exponent assumptions; the Dedekind OverPrime result factors an extended ideal under Dedekind/finite/torsion-free hypotheses. The fibre-spectrum equivalence is generic infrastructure but does not classify polynomial factors or provide the explicit fraction test. Universal coprime factorization lifts factorizations etale-locally and does not state this correspondence. Partial polynomial ideal results are reused through the existing PID leaf, not claimed as a match for the whole item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-standard-etale-finite-free-prime-lifts",
@@ -93,5 +247,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-localized-fibre-prime-factor",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three statement dependencies. Expanded the residue-fibre assertion in the proof of Stacks 00UF into eight steps using residue evaluation, the existing polynomial-field PID leaf, normalization and cancellation, fraction membership, the exact extended ideal kernel and denominator-based uniqueness. Reused existing coprimality and localization leaves; no new nodes. Checked non-Noetherian rings, nilpotents, repeated factors, empty fibres and non-surjective coefficient maps.",
+  "blueprint": "The inherited refinement chain below lem-trf-local-term-locality (unit sk-i-curve-zero, proof step 2, specialization/etale descent inputs) reaches Tag 00UF. Steps 1-6 expand its sentence identifying q with an irreducible factor f_1 avoiding g; Steps 7-8 supply uniqueness and contraction-level denominator details.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q119-823bc13aa",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q119-823bc13aa (reviewer sub-agent of L); spot-checked: Reviewed the item, all eight proof steps, cited nodes, unit/chapter route, and Stacks Tag 00UF. The algebra, base-change morphism, coefficient category, uniqueness, hypotheses, edge cases, searches, and route constraints check out; no repairs or dropped nodes are needed."
  }
 }
