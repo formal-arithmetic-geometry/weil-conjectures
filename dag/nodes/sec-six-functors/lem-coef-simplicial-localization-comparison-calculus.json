@@ -11,9 +11,143 @@
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-simplicial-interval-lifting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First construct the required Dwyer--Kan model structure without coherent nerves. In the notation of [lem-coef-simplicial-interval-lifting], $I$-injective functors are exactly functors surjective on objects and trivial Kan fibrations on every mapping set: test $\\varnothing\\to\\{0\\}$ and the maps $U(\\partial\\Delta^n)\\to U(\\Delta^n)$. These are exactly the Dwyer--Kan equivalences that are $J$-injective. For the reverse inclusion, essential surjectivity followed by the equivalence-lifting property of $J$-injectives gives actual surjectivity on objects, and local weak equivalences that are Kan fibrations are trivial fibrations. For the forward inclusion, lift the target object by object-surjectivity and the desired vertex by the local trivial fibration; full faithfulness on $\\pi_0$ makes that lift invertible. The two small-object weak factorization systems exist by the same node. Every $J$-cofibration is an $I$-cofibration and a weak equivalence by the retract description and [lem-coef-simplicial-interval-cell-stability]. If an $I$-cofibration is a weak equivalence, factor it as a $J$-cofibration followed by a $J$-injective map; two-out-of-three makes the latter $I$-injective, so the lifting/retract argument makes the original map $J$-cofibrant. This proves both lifting axioms. Completeness, cocompleteness and local presentability are supplied by the interval-lifting node; the generating sets give combinatoriality. Fibrant objects have Kan mapping sets, and the stated description of fibrations follows from the explicit $J$-injective test.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem A.3.2.24 and simplicial-set case Example A.3.2.18; Bergner generating-family recognition, using the two existing interval nodes"
+   }
+  },
+  {
+   "text": "Use the homotopy mapping property of [lem-coef-simplicial-inversion-universal-property]. If every $w$ is already invertible in $\\pi_0C$, every homotopy class $C\\to T$ inverts $W$. Thus $1_C:C\\to C$ satisfies precisely the same homotopy mapping property as $C\\to L_WC$. Uniqueness gives an isomorphism under $C$ in the model homotopy category, hence $C\\to L_WC$ is a Dwyer--Kan equivalence. Here and below the elementary model Whitehead argument can be used to detect this: after cofibrant-fibrant replacement, an isomorphism has representatives inverse up to model homotopy. The endpoints of a cylinder are weak equivalences by two-out-of-three with its weak-equivalence projection. If one endpoint composite of a homotopy is a weak equivalence, two-out-of-three makes the homotopy map and its other endpoint composite weak equivalences. Apply this to both composites of the inverse representatives. For Dwyer--Kan equivalences, two-out-of-six follows from two-out-of-six for equivalences of ordinary categories and weak homotopy equivalences of mapping spaces, transporting endpoints along the component-category equivalences. This yields the asserted weak equivalence of the original map.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1 and Proposition A.3.5.5, with the localization-at-equivalences argument of Lemma A.3.6.17"
+   }
+  },
+  {
+   "text": "Construct a simplicially enriched cofibrant replacement $Q\\xrightarrow{q}1_{\\mathcal M}$ by applying [lem-coef-enriched-functorial-factorizations] to $\\varnothing\\to X$ with the generating cofibrations of $\\mathcal M$. Its tensor hypothesis holds: for every simplicial set $K$ and cofibration $i$, $K\\otimes i$ is the pushout product of $\\varnothing\\to K$ and $i$, hence a cofibration by the simplicial model axiom of [lem-coef-simplicial-projective-model-calculus]. For fibrant $X$, the trivial fibration $q_X:QX\\to X$ makes $QX$ fibrant as well as cofibrant. Naturality and two-out-of-three imply that $Q$ preserves weak equivalences. Also every weak equivalence $f:X\\to Y$ between bifibrant objects is invertible in $\\pi_0\\mathcal M^{cf}$. Explicitly factor it as a trivial cofibration $i:X\\to Z$ followed by a trivial fibration $p:Z\\to Y$; $Z$ is bifibrant. Lifting gives $r:Z\\to X$ with $ri=1$ and $s:Y\\to Z$ with $ps=1$. SM7 gives trivial fibrations $i^*:\\operatorname{Map}(Z,Z)\\to\\operatorname{Map}(X,Z)$ and $p_*:\\operatorname{Map}(Z,Z)\\to\\operatorname{Map}(Z,Y)$. Their fibers connect $ir$ to $1_Z$ and $sp$ to $1_Z$, respectively. Therefore $rs$ is an inverse to $f=pi$ in the category of components.",
+   "uses": [
+    "lem-coef-enriched-functorial-factorizations",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.6.17, enriched cofibrant replacement and the bifibrant weak-equivalence assertion; enriched factorization hypothesis checked explicitly"
+   }
+  },
+  {
+   "text": "We record the interval argument used with $q$. Let $A$ be a simplicial category with a set $V$ of vertex arrows, and let an enriched transformation $\\eta:F_0\\to F_1$ between functors $A\\to B$ have components in a chosen set $W$ of arrows of $B$; suppose both functors take $V$ into $W$. It is a functor $A\\times[1]\\to B$ carrying both $(v,1_0),(v,1_1)$ and all $(1_a,0\\to1)$ into $W$. Localize at their union. Successively applying [lem-coef-simplicial-inversion-product-parameter], first to $V$ and then, after swapping factors, to the walking arrow, identifies the resulting object in $h\\mathrm{sCat}$ with $(L_VA)\\times\\mathbb J$. Successive inversion equals inversion of the union, because their restriction maps have the same images and are injective by [lem-coef-simplicial-inversion-universal-property]. For the second application the marked set consists of $(1_d,0\\to1)$ for every object $d$ of the chosen representative of $L_VA$, whereas $U$ supplies these only for $d=q(a)$; the images still agree because $\\pi_0q$ is essentially surjective. Indeed, let $E\\subseteq L_VA$ be the full simplicial subcategory on objects isomorphic in $\\pi_0$ to some $q(a)$, with inclusion $j$. Then $q=jq'$, and $q'$ inverts $V$ because $\\pi_0j$ is fully faithful and so reflects isomorphisms. The universal property gives $\\varphi:L_VA\\to E$ in $h\\mathrm{sCat}$ with $\\varphi q=q'$, so $(j\\varphi)q=q$ and injectivity of $q^*$ gives $j\\varphi=1$; applying $\\pi_0$ up to natural isomorphism, every object of $L_VA$ is isomorphic in $\\pi_0$ to an object of $E$, hence to some $q(a)$. For an isomorphism $e:d\\to q(a)$ in $\\pi_0L_VA$ one has $(1_{q(a)},0\\to1)(e,1_0)=(e,1_1)(1_d,0\\to1)$ with $(e,1_0),(e,1_1)$ invertible, so a class inverts $(1_d,0\\to1)$ exactly when it inverts $(1_{q(a)},0\\to1)$. The localization of $[1]$ at its arrow is $\\mathbb J$: the defining derived pushout has an identity leg. Projection $(L_VA)\\times\\mathbb J\\to L_VA$ is a Dwyer--Kan equivalence directly: its maps on mapping sets are isomorphisms and each object is isomorphic to one in either endpoint image. Its two endpoint inclusions are therefore its same inverse in $h\\mathrm{sCat}$. Composing with the localized transformation shows $[L F_0]=[L F_1]$. This proves the required homotopy, rather than assuming that an ordinary natural transformation supplies an enriched homotopy after localization.",
+   "uses": [
+    "lem-coef-simplicial-inversion-product-parameter",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Lemma A.3.6.17, interval localization; Lemma A.3.5.14"
+   }
+  },
+  {
+   "text": "Put $G=W\\cap\\mathcal M^{cf}$. Inclusion $i:\\mathcal M^{cf}\\to\\mathcal M^f$ and the restriction of $Q$ induce $\\bar i:L_G\\mathcal M^{cf}\\to L_W\\mathcal M^f$ and $\\bar Q$ in the opposite direction. Apply step 4 to $q:iQ\\to1_{\\mathcal M^f}$ and to its restriction $Qi\\to1_{\\mathcal M^{cf}}$. All components and all images of marked arrows are weak equivalences by step 3. It follows that $\\bar i\\bar Q=1$ and $\\bar Q\\bar i=1$ in $h\\mathrm{sCat}$. Choose cofibrant--fibrant replacements of the source and target of $\\bar i$; the inverse equality supplies representatives in both directions whose composites are cylinder-homotopic to the identities. The cylinder projections are weak equivalences, so two-out-of-three makes both composites and then the representatives themselves Dwyer--Kan equivalences; hence $\\bar i$ is a Dwyer--Kan equivalence. By step 3 all arrows of $G$ are already invertible in $\\pi_0\\mathcal M^{cf}$, so step 2 gives $\\mathcal M^{cf}\\xrightarrow{\\sim}L_G\\mathcal M^{cf}$. Its composite with $\\bar i$ is exactly the canonical comparison in the item, proving that comparison is a Dwyer--Kan equivalence.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-simplicial-inversion-product-parameter"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.6.17, applied to the entire model category after universe enlargement; no chunk or coherent-nerve theorem is needed"
+   }
+  },
+  {
+   "text": "For an enriched functor $T:\\mathcal M\\to\\mathcal N$ preserving fibrant objects and their weak equivalences, the functor of relative simplicial categories $(\\mathcal M^f,W_{\\mathcal M})\\to(\\mathcal N^f,W_{\\mathcal N})$ induces a map on the chosen functorial derived pushouts. If $T$ also preserves bifibrant objects, its restriction gives the other side of the comparison square. Both composites are induced from the same enriched functor $\\mathcal M^{cf}\\to\\mathcal N^f$ followed by localization, so the square commutes, using functorial choices (and in the derived category independently of those choices). No compatibility of $T$ with $Q$ was used: $Q$ proved invertibility of the comparison, while the comparison itself was inclusion followed by localization.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Functoriality of Notation A.3.5.1 and Lemma A.3.6.17"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-combinatorial-injective-diagram-model] to the combinatorial model structure of step 1 and the small ordinary diagram $H$. Choose $H\\xrightarrow{\\sim}RH$ injectively fibrant and put $L=\\lim_J RH$. The given cone induces $a:C\\to L$. A cone is homotopy limiting exactly when its comparison to $L$ is a Dwyer--Kan equivalence. This includes the comparison $a\\beta:B\\to L$, which is a Dwyer--Kan equivalence by the hypothesis on $\\alpha\\beta$. We will compute the mapping sets of $L$ directly, rather than appeal to coherent nerves.",
+   "uses": [
+    "lem-coef-combinatorial-injective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.2.27 and Corollary A.3.2.28, first reduction to an injectively fibrant diagram"
+   }
+  },
+  {
+   "text": "Fix two strictly compatible systems of objects $x_j,y_j$ in $RH$. The mapping diagram $M(j)=RH(j)(x_j,y_j)$ is injectively fibrant as a diagram of simplicial sets. Indeed, for any objectwise trivial cofibration $T\\to T'$ of such diagrams, form the two-object simplicial-category diagrams $U(T)\\to U(T')$, keeping the two labelled objects and identity maps in every degree. Objectwise this is a trivial cofibration for the model structure of step 1: it is locally a weak equivalence and identity on objects, and has the left lifting property against the object-surjective local trivial fibrations by the simplicial-set lifting property. Thus it is an injective trivial cofibration. The prescribed map $T\\to M$ and the prescribed endpoint systems define $U(T)\\to RH$; injective fibrancy lifts it to $U(T')\\to RH$. Because the object maps in $U(T)\\to U(T')$ are identities, the lift retains the endpoint systems, giving the desired lift $T'\\to M$. Consequently $M$ is injectively fibrant. Strict limits of enriched categories compute mapping sets at compatible objects as strict limits, by the defining equalities for objects, arrows and composition. Hence\n$$L(x,y)=\\lim_j RH(j)(x_j,y_j)\\simeq\\operatorname{holim}_j RH(j)(x_j,y_j).$$",
+   "uses": [
+    "lem-coef-combinatorial-injective-diagram-model",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.2.27, walking-arrow lifting proof, printed p.869"
+   }
+  },
+  {
+   "text": "For the endpoints coming from $c,d\\in C$, each map $H(j)(\\alpha_jc,\\alpha_jd)\\to RH(j)(\\alpha_jc,\\alpha_jd)$ is a weak homotopy equivalence, because $H(j)\\to RH(j)$ is a Dwyer--Kan equivalence. Therefore replacing this diagram by the latter does not change its derived limit. By step 8, the displayed condition on the mapping cones of $\\alpha$ is equivalent to $a:C\\to L$ being a weak homotopy equivalence on every mapping set. If $a$ is a Dwyer--Kan equivalence this holds, proving necessity and also the mapping-set description for any homotopy-limiting cone, without the auxiliary $\\beta$. Conversely, if it holds then $\\pi_0a$ is fully faithful. For any object $l$ of $L$, essential surjectivity of $\\pi_0(a\\beta)$ gives $b\\in B$ with $a\\beta b\\cong l$ in $\\pi_0L$; thus $a$ is also essentially surjective. It is a Dwyer--Kan equivalence, so $\\alpha$ is homotopy limiting by step 7.",
+   "uses": [
+    "lem-coef-combinatorial-injective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.2.28, using Proposition A.3.2.27; fully faithful plus essential-surjectivity argument"
+   }
+  },
+  {
+   "text": "For the final tower assertion, give $\\mathbb N^{\\mathrm{op}}$ its inverse Reedy structure with degree $n$. All latching categories are empty. The matching object is terminal at $0$ and is $X_{n-1}$ at $n>0$, since the category of nonidentity arrows from $n$ has initial object $n\\to n-1$. Thus a tower of Kan complexes whose successive maps are Kan fibrations is Reedy fibrant by [lem-coef-reedy-model-structure]. The constant diagram functor preserves cofibrations and trivial cofibrations: with empty latching categories the Reedy cofibration test is exactly the ground cofibration test in each degree. Its right adjoint $\\lim$ is right Quillen; evaluating its right derived functor at this already fibrant tower gives precisely its strict limit. This proves the stated weak equivalence to the homotopy limit. It agrees with the homotopy limit defined through an injectively fibrant replacement in [lem-coef-combinatorial-injective-diagram-model]: the Reedy and injective structures on towers have the same weak equivalences and $\\lim$ is right Quillen for both, so both compute the total right derived functor of $\\lim$, which depends only on the weak equivalences; concretely, an injectively fibrant replacement of the Reedy fibrant tower is an objectwise weak equivalence between Reedy fibrant towers, which the right Quillen functor $\\lim$ carries to a weak equivalence. Its limit is Kan since the right Quillen functor carries fibrant objects to fibrant objects. The argument also works for empty mapping complexes and requires no surjectivity on vertices.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-combinatorial-injective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Inverse Reedy model calculation for the Kan tower; compare HTT Lemma 5.3.4.11 only for this space-valued assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-inversion-universal-property",
+  "lem-coef-enriched-functorial-factorizations",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-simplicial-inversion-product-parameter",
+  "lem-coef-combinatorial-injective-diagram-model",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT A.3.2.27-A.3.2.28 and A.3.6.17, with A.3.5.5 and A.3.5.14; source read online, archival copy WANTED; inverse Reedy calculation supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +190,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {X Y : HomotopicalAlgebra.CofibrantObject C} [HomotopicalAlgebra.IsFibrant Y.obj],\\n  Equivalence fun x1 x2 => HomotopicalAlgebra.CofibrantObject.homRel C x1 x2\", \"doc\": \"For cofibrant objects $X$ and $Y$ in a model category $\\\\mathcal{C}$, if $Y$ is fibrant, then the right homotopy relation on morphisms $X \\\\to Y$ forms an equivalence relation. This means the binary rel\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.ι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C] →\\n      [inst_2 : CategoryTheory.Limits.HasInitial C] →\\n        [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n          [inst_4 : CategoryTheory.Limits.HasTerminal C] \", \"doc\": \"The inclusion functor from the full subcategory of bifibrant objects in a category $\\\\mathcal{C}$ (objects where the unique morphism from the initial object is a cofibration and to the terminal object \"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasTerminal C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] {X Y : C}\\n  [inst_4 : HomotopicalAlgebra.IsFibrant X] [inst_5 : HomotopicalAlg\", \"doc\": \"Given a category with weak equivalences $\\\\mathcal{C}$, and fibrant objects $X,Y \\\\in \\\\mathcal{C}$, a morphism $f : X \\\\to Y$ is a weak equivalence in the full subcategory of fibrant objects if and only \"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] [inst_5 : HomotopicalAlgebra.Categ\", \"doc\": \"For bifibrant objects $X$ and $Y$ in a category with weak equivalences $\\\\mathcal{C}$, a morphism $f : X \\\\to Y$ is a weak equivalence in the full subcategory of bifibrant objects if and only if it is a\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.BifibrantO\", \"doc\": \"For any bifibrant object $X$ in a category $\\\\mathcal{C}$ with cofibrations and fibrations, the image of $X$ under the inclusion functor from the bifibrant objects subcategory to $\\\\mathcal{C}$ is a fib\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.ι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n      [inst_2 : CategoryTheory.Limits.HasTerminal C] → CategoryTheory.Functor (HomotopicalAlgebra.FibrantObject C) C\", \"doc\": \"The inclusion functor from the full subcategory of fibrant objects in a category with cofibrations to the original category, mapping each fibrant object and morphism between them to themselves.\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] {X Y Z : C} [inst_5 : HomotopicalA\", \"doc\": \"For bifibrant objects $X$, $Y$, and $Z$ in a category with cofibrations and fibrations, and morphisms $f : X \\\\to Y$ and $g : Y \\\\to Z$ in the original category, the composition of $\\\\text{homMk}(f)$ and\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.FibrantObject C),\\n  HomotopicalAlgebra.IsFibrant (HomotopicalAlgebra.FibrantObject.ι.obj X)\", \"doc\": \"Every object in the full subcategory of fibrant objects in a category with cofibrations is fibrant, meaning the unique morphism from the object to the terminal object is a fibration.\"}\n",
    "date": "2026-10-17",
    "verdict": "No match: the returned declarations define full subcategories, their inclusions and weak-equivalence predicates or ordinary homotopy relations; none compares enriched localization mapping spaces or homotopy limits in simplicial categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bifibrant subcategory of combinatorial simplicial model category maps equivalently to enriched localization of fibrant objects at weak equivalences and homotopy limits have pointwise mapping spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category becomes an equivalence after localization with respect to weak equivalences. This mean\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.ι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C] →\\n      [inst_2 : CategoryTheory.Limits.HasInitial C] →\\n        [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n          [inst_4 : CategoryTheory.Limits.HasTerminal C] \", \"doc\": \"The inclusion functor from the full subcategory of bifibrant objects in a category $\\\\mathcal{C}$ (objects where the unique morphism from the initial object is a cofibration and to the terminal object \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.homRel C).FactorsThroughLocalization\\n    (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\", \"doc\": \"For any morphisms $f,g$ between cofibrant objects in a model category $\\\\mathcal{C}$, if $f$ and $g$ are right homotopic, then they become equal in the localization category $\\\\mathcal{C}[W^{-1}]$ with \"}\n  {\"name\": \"SSet.QCat.catEnrichedOrdinaryCategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.EnrichedOrdinaryCategory CategoryTheory.Cat SSet.QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with an ordinary category structure enriched over the category of small categories (Cat). This structure is obtained by transporting the enrichment \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {X Y : HomotopicalAlgebra.CofibrantObject C} [HomotopicalAlgebra.IsFibrant Y.obj],\\n  Equivalence fun x1 x2 => HomotopicalAlgebra.CofibrantObject.homRel C x1 x2\", \"doc\": \"For cofibrant objects $X$ and $Y$ in a model category $\\\\mathcal{C}$, if $Y$ is fibrant, then the right homotopy relation on morphisms $X \\\\to Y$ forms an equivalence relation. This means the binary rel\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      {D : Type u_2} →\\n        [inst_2 : CategoryTheory.Category.{v_2, u_2} D] →\\n          (L : CategoryTheory.Functor C D) →\\n            [L.IsLocalization (HomotopicalAlgebra.weakE\", \"doc\": \"The functor from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to the localization $\\\\mathcal{D}$ (obtained by inverting weak equivalences in $\\\\mathcal{C}$), constructed \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      CategoryTheory.LocalizerMorphism (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\\n        (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category $\\\\mathcal{C}$ to its homotopy category of cofibrant objects induces a morphism of localizers between the weak e\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: all returned signatures read; ordinary category localization, ordinary pushout universal properties and cofibrant homotopy-category localizations do not state the enriched simplicial localization assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial enriched localization at weak equivalences identifies derived mapping spaces on cofibrant fibrant objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.homRel C).FactorsThroughLocalization\\n    (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\", \"doc\": \"For any morphisms $f,g$ between cofibrant objects in a model category $\\\\mathcal{C}$, if $f$ and $g$ are right homotopic, then they become equal in the localization category $\\\\mathcal{C}[W^{-1}]$ with \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category becomes an equivalence after localization with respect to weak equivalences. This mean\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      CategoryTheory.LocalizerMorphism (HomotopicalAlgebra.weakEquivalences C)\\n        (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject.HoCat C))\", \"doc\": \"The morphism of localizers between the weak equivalences of a model category $\\\\mathcal{C}$ and the weak equivalences of its homotopy category of cofibrant objects, constructed via the resolution funct\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      CategoryTheory.LocalizerMorphism (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\\n        (HomotopicalAlgebra.weakEquivalences C)\", \"doc\": \"The morphism of localizers between the weak equivalences in the full subcategory of cofibrant objects and the weak equivalences in the ambient model category, induced by the inclusion functor. This mo\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [L.IsLocalization (HomotopicalAlgebra.weakEquivalences C)],\\n  (HomotopicalAlgebra.Cofibrant\", \"doc\": \"Given a category $\\\\mathcal{C}$ with weak equivalences and a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to weak equivalences, the composition of the inclusion functor $\\\\iota : \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      {D : Type u_2} →\\n        [inst_2 : CategoryTheory.Category.{v_2, u_2} D] →\\n          (L : CategoryTheory.Functor C D) →\\n            [inst_3 : L.IsLocalization (HomotopicalAlge\", \"doc\": \"The natural isomorphism between the composition of the canonical functor from the homotopy category of cofibrant objects to the localization category $\\\\mathcal{D}$ and the localization functor, and th\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      CategoryTheory.LocalizerMorphism (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\\n        (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category $\\\\mathcal{C}$ to its homotopy category of cofibrant objects induces a morphism of localizers between the weak e\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: all returned signatures read; ordinary category localization, ordinary pushout universal properties and cofibrant homotopy-category localizations do not state the enriched simplicial localization assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bergner homotopy limit mapping spaces fibrant objects localization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.fibrantObjects\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \": ObjectProperty C\", \"doc\": \"The property of an object $X$ in a category with cofibrations where the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.IsFibrant\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.IsCofibrant\", \"type\": \"(X : C) : Prop\", \"doc\": \"An object $X$ in a category with cofibrations is fibrant if the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \": Type u\", \"doc\": \"The full subcategory of a category with cofibrations consisting of objects $X$ for which the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \"(X : FibrantObject C) : IsFibrant (FibrantObject.ι.obj X)\", \"doc\": \"Every object in the full subcategory of fibrant objects in a category with cofibrations is fibrant, meaning the unique morphism from the object to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": HoCat C ⥤ D\", \"doc\": \"The functor from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to the localization $\\\\mathcal{D}$ (obtained by inverting weak equivalences in $\\\\mathcal{C}$), constructed \"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.mk\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \"(X : C) [IsFibrant X] : FibrantObject C\", \"doc\": \"Given an object $X$ in a category with cofibrations that is fibrant (i.e., the unique morphism from $X$ to the terminal object is a fibration), this constructor provides the corresponding object in th\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjFibrantObjects\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \"(X : FibrantObject C) : IsFibrant X.1\", \"doc\": \"Every object in the full subcategory of fibrant objects in a category with cofibrations is fibrant by definition, since the subcategory consists precisely of objects for which the unique morphism to t\"}\n  {\"name\": \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderProductsOfShape J\", \"doc\": \"A category equipped with cofibrations, fibrations, and weak equivalences, together with a weak factorization system and stability of fibrations under products, satisfies the axioms of a model category\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: all returned signatures read; ordinary category localization, ordinary pushout universal properties and cofibrant homotopy-category localizations do not state the enriched simplicial localization assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"WeakEquivalence\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: all returned signatures read; ordinary category localization, ordinary pushout universal properties and cofibrant homotopy-category localizations do not state the enriched simplicial localization assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|Dwyer|homotopyLimit|simplicial.*localization",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: all returned signatures read; ordinary category localization, ordinary pushout universal properties and cofibrant homotopy-category localizations do not state the enriched simplicial localization assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-unstraightening-homotopy-descent",
@@ -89,5 +258,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-localization-comparison-calculus",
+  "worker": "stage1",
+  "summary": "Ten-step foundational split retaining the statement. Reconstructed the Dwyer--Kan model from the existing interval lifting/acyclicity nodes, made enriched cofibrant replacement and its interval-localization homotopies explicit, and proved the homotopy-limit criterion by walking-arrow lifting against an injectively fibrant diagram. Added three statement-only tool lemmas, all searched by two semantic phrasings plus LeanSearch, Loogle and grep; no Mathlib matches. Used inverse Reedy directly to avoid cyclic coherent-nerve and Kan-tower dependencies. No Lean writing or compilation.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient-adjunction and inverse-limit comparison, via the inherited chain ending in unstraightening descent. This is the independent enriched foundation required before coherent-nerve comparison, following HTT A.3.2 and A.3.5-A.3.6.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-be91398ad",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-be91398ad (reviewer sub-agent of L); spot-checked: I read in full the item, its ten steps, the three new nodes and the statements of all six cited nodes. All are in unit sk-prop-sf-biduality-general, so there are no route issues and no tool_uses. There is no cycle: none of the nine proof_deps reaches the item. I rg-searched the DAG for duplicates. Every candidate either reaches the item (coherent-diagrams, bergner-left-proper, cofibrant-simplicial-inversion, dk-cofibrant-localization, interval-localization, enhanced-localization-universal) or states something different, and no blueprint node matches, so same_as [] is right. HTT is not in literature/ and the review service blocks network, so I could not open the cited pages (A.2.8.2, A.3.2.24-28, A.3.5.5, A.3.5.14, A.3.6.17); their page numbers are unchecked by me. I checked each statement and step mathematically instead. Step 1: the Kan recognition argument holds (I-inj = W∩J-inj both ways, J-cell in W, retract argument). Step 2: the Ho-iso-to-DK argument holds, including two-out-of-six. Step 3: the K⊗i pushout-product check and the SM7 fibre argument for rs inverting f hold. Steps 5-9 hold: the U(T)->U(T') lift, strict compatible endpoints, the fibrant replacement of mapping diagrams, essential surjectivity via β, and J empty. All three new nodes are true and self-contained, are not clauses of the item, and I tested them on small cases (W empty, C=[1] giving 𝕁, the square localized at its horizontal arrows, empty A, C, D). Two repairs, in the corrected item JSON under fixes/: (1) Step 4: the second product-parameter application marks (0->1,1_d) for every object d of L_VA, but U supplies only d=q(a), and no cited statement says π0q is essentially surjective. I added the derivation from the universal-property node (full subcategory E on the essential image, q=jq', jφ=1) and the conjugation identity. (2) Step 10: I tied the Reedy-derived limit to the item's injective homotopy limit (injective fibrations are Reedy fibrations, then Ken Brown) and added lem-coef-combinatorial-injective-diagram-model to that step's uses, which was already in proof_deps. The statement and all other fields are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
