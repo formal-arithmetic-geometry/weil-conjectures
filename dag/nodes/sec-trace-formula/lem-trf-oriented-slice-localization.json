@@ -7,11 +7,112 @@
   "def-pc-scheme",
   "def-weil-pbc-etale-site",
   "lem-trf-oriented-product-universal",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with small sites in [def-weil-size-convention]. Write $\\mathcal C$ for the triple site of [lem-trf-oriented-product-universal] and $\\mathcal C_Z$ for the triple site for $U\\to V\\leftarrow W$. An object of $\\mathcal C/Z$ is a triple $(A\\to B\\leftarrow D)$ with maps $a:A\\to U$, $b:B\\to V$, $d:D\\to W$ such that the two squares commute. By [lem-weil-pbc-etale-site-localization-open], applied separately to $U\\to X$, $V\\to S$, $W\\to Y$, these are precisely objects $A\\in U_{\\mathrm{Et}}$, $B\\in V_{\\mathrm{Et}}$, $D\\in W_{\\mathrm{Et}}$ with arrows $A\\to B\\leftarrow D$ over the two arrows of $Z$. The same commuting diagrams define their morphisms. Forgetting or adjoining the composites to $X,S,Y$ gives mutually inverse equivalences of these categories; their unit and counit are the identity on the underlying schemes and arrows. No arrow $U\\to V$ or $W\\to V$ is being assumed etale.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-trf-oriented-product-universal",
+    "lem-weil-pbc-etale-site-localization-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.10(b), site realization of diagram (1.a); small etale localization: Stacks sites.tex Section 00XZ and the cited etale-site equivalence"
+   }
+  },
+  {
+   "text": "Identify the topologies under step 1. For types (a) and (b) of [lem-trf-oriented-product-universal], the unchanged middle and opposite components stay unchanged over $Z$, and the covering of $A$, respectively $D$, is the same jointly surjective etale family on either side. For type (c), a middle arrow $B'\\to B$ and a factorization $A\\to B'$ give the singleton arrow $(A\\to B'\\leftarrow D\\times_B B')\\to(A\\to B\\leftarrow D)$; the map $B'\\to V$ is the composite through $B$, and the map of its last component to $W$ is the composite through $D$. This is exactly type (c) on the relative triple site, in both directions. In the localized topology [def-pur-localized-ringed-site] all the arrows into an object over $Z$ acquire their maps to $Z$ by composition. Lifting the generating families therefore commutes with pullback and composition: the targets already map to $Z$ and their sources have the unique induced maps. Close the generators under isomorphisms, pullback and composition and apply [lem-weil-pbc-pretopology-sheaf-condition]. The resulting covering sieves agree, so step 1 is an equivalence of sites.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-pretopology-sheaf-condition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.1(a)-(c) and 1.10(b); generated-topology criterion: Stacks Tag 00ZC (lemma-site-gives-topology)"
+   }
+  },
+  {
+   "text": "By [lem-trf-oriented-product-universal] applied to $U\\to V$ and $W\\to V$, put $Q=U_{\\mathrm{Et}}\\overleftarrow\\times_{V_{\\mathrm{Et}}}W_{\\mathrm{Et}}=\\operatorname{Sh}(\\mathcal C_Z)$. The small etale sites have finite limits [def-weil-pbc-etale-site]; their base-change site functors preserve them and coverings, as in the original triple construction. Reindexing a presheaf through the equivalence of step 1, and its inverse, preserves the sheaf matching and gluing conditions because of step 2. It gives inverse equivalences $\\operatorname{Sh}(\\mathcal C/Z)\\simeq Q$, with componentwise unit and counit. Apply [lem-weil-pbc-localized-sheaves-over-representable] to the small site $\\mathcal C$ and the object $Z$. Its equivalence $E_Z:\\operatorname{Sh}(\\mathcal C/Z)\\simeq P/H_Z$, composed with the preceding equivalence, gives the asserted equivalence of topoi. This uses the sheafified representable $H_Z$, without assuming that $h_Z$ is a sheaf.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-localized-sheaves-over-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.10(b), equivalence (1.b); Stacks Tag 00Y1 (lemma-essential-image-j-shriek)"
+   }
+  },
+  {
+   "text": "Identify the projection under $E_Z$. The inverse image of the slice projection is $\\pi^{-1}F=(F\\times H_Z\\to H_Z)$. The explicit quasi-inverse $R_Z$ in [lem-weil-pbc-localized-sheaves-over-representable] evaluates this object at $(T\\xrightarrow{a}Z)$ as the fibre of $F(T)\\times H_Z(T)\\to H_Z(T)$ over $\\eta_T(a)$. The maps $s\\mapsto(s,\\eta_T(a))$ and $(s,\\eta_T(a))\\mapsto s$ are inverse bijections, natural under restrictions and in $F$. Thus $R_Z\\pi^{-1}F(T,a)=F(T)$. This is exactly $j_Z^{-1}F$, restriction along $\\mathcal C/Z\\to\\mathcal C$ in [def-pur-localized-ringed-site]. Hence the constructed equivalence intertwines $\\pi$ with the site-localization morphism $j_Z$, including its inverse image, rather than just giving an abstract equivalence of categories.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.10(b), localization map (1.c); Stacks Tag 00Y1 (fibre quasi-inverse) and Definition 00Y0"
+   }
+  },
+  {
+   "text": "It remains to identify $j_Z$ with the morphism induced by the three scheme maps. Define $b:\\mathcal C\\to\\mathcal C/Z$ by $T\\mapsto(T\\times Z\\to Z)$, with componentwise pullback. For $T=(A\\to B\\leftarrow D)$, its image in $\\mathcal C_Z$ is $(A\\times_X U\\to B\\times_S V\\leftarrow D\\times_Y W)$. The maps to the middle component use both commutative squares of $Z$. The final triple maps to $Z$ as its identity, and componentwise pullbacks are preserved, so $b$ preserves finite limits. Each type-(a), (b), or (c) generating family maps to its pullback along $T\\times Z\\to T$, hence covers; this persists under compositions. By [lem-weil-pbc-left-exact-site-inverse-image-tensor], $b$ defines a geometric morphism $t:Q\\to P$ with direct image $(t_*G)(T)=G(T\\times Z\\to Z)$. All these sites are small in the universes fixed in step 1.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.9 and 1.10(b), site model for the functoriality map; Stacks Tag 00X6 (proposition-get-morphism)"
+   }
+  },
+  {
+   "text": "The functor $b$ is the componentwise base-change functor for $U\\to X$, $V\\to S$, $W\\to Y$. More explicitly it sends $k_1(A)=(A\\to S\\leftarrow Y)$ to $k'_1(A\\times_X U)=(A\\times_X U\\to V\\leftarrow W)$, and $k_2(D)=(X\\to S\\leftarrow D)$ to $k'_2(D\\times_Y W)$. For a middle object $B\\in S_{\\mathrm{Et}}$, the middle triple $(X\\times_S B\\to B\\leftarrow Y\\times_S B)$ is sent to the middle triple over $B\\times_S V$; here $U\\times_V(B\\times_S V)=U\\times_S B$, and similarly for $W$. Its two structural arrows to $k_1(X\\times_S B)$ and $k_2(Y\\times_S B)$ are carried to those same structural arrows over $V$. Apply the explicit inverse-image formula of [lem-trf-oriented-product-universal] with the identity lift of $P$ (and likewise of $Q$). For this middle triple its last map to the fibre-product base is the identity, so the first structural arrow becomes an isomorphism and the second, after this identification, is the mate of the canonical $2$-morphism. This recovers the mate from the cited statement, not from its proof. Thus the projection functors and their $2$-morphism commute with $b$. The composition isomorphisms in [lem-weil-pbc-left-exact-site-inverse-image-tensor] identify the corresponding geometric morphisms. By the uniqueness clause of the oriented-product universal property, $t$ is precisely the morphism induced by the three scheme maps and their commutativity.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.3, Theorem 1.4, 1.9 and 1.10(b); explicit check of the projections and the mate of tau"
+   }
+  },
+  {
+   "text": "Finally $t_*$ is right adjoint to the restriction $j_Z^{-1}$. This can be checked without any density assertion: given $\\alpha:j_Z^{-1}F\\to G$, define $F(T)\\to G(T\\times Z\\to Z)$ by restricting a section to $T\\times Z$ and then applying $\\alpha$ at that object. Conversely, from $\\beta:F\\to t_*G$ and an object $(T,a)$ over $Z$, apply $\\beta_T$ and restrict along the arrow $(\\mathrm{id}_T,a):(T,a)\\to(T\\times Z,\\mathrm{pr}_Z)$. Naturality and $\\mathrm{pr}_T(\\mathrm{id}_T,a)=\\mathrm{id}_T$ show that these operations are inverse; they are natural in both sheaves. Restriction is $j_Z^{-1}$ by [def-pur-localized-ringed-site], so this adjunction identifies $t$ with $j_Z$. Combining with step 4 shows that the equivalence of step 3 is over $P$ and identifies the slice projection with the specified localization morphism, as required.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.10(b), map (1.c); elementary restriction/right-adjoint calculation on the localized site"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "lem-trf-oriented-product-universal",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-pretopology-sheaf-condition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé XI 1.10(b), expanding the assertion that (1.b) is an equivalence by its triple-site presentation; auxiliary localization equivalence is Stacks 00Y1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -40,10 +141,52 @@
    "results": "8 generic hits: AlgebraicGeometry.Scheme.AffineZariskiSite; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.OpenCover.affineRefinement; no exact oriented-product result.",
    "date": "2026-10-17",
    "verdict": "no match: only generic affine-site and sheaf results."
+  },
+  {
+   "tool": "grep",
+   "query": "oriented|sheaf.*[Oo]ver|[Oo]ver.*sheaf",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits supply ordinary slice-site, presheaf or etale-site infrastructure, not the oriented-product localization equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing an oriented product of topoi at a triple gives the oriented product of the localized topoi",
+   "results": "8 hits: CategoryTheory.Functor.IsLocalization.prod, CategoryTheory.Localization.Construction.prodIsLocalization, CategoryTheory.CatCenter.localization_mul, CategoryTheory.Localization.lift₃, CategoryTheory.Functor.IsLocalization.pi, CategoryTheory.Localization.preservesFiniteProducts, CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prodLift, CategoryTheory.Localization.instLifting₃Lift₃",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits supply ordinary slice-site, presheaf or etale-site infrastructure, not the oriented-product localization equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Over\"",
+   "results": "12 hits: CategoryTheory.OverPresheafAux.unitBackward, CategoryTheory.OverPresheafAux.unitForward, CategoryTheory.OverPresheafAux.unitAuxAuxAux, CategoryTheory.OverPresheafAux.unitAuxAux, CategoryTheory.OverPresheafAux.YonedaCollection, CategoryTheory.OverPresheafAux.yonedaCollectionPresheaf, CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst, CategoryTheory.OverPresheafAux.YonedaCollection.map₂",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits supply ordinary slice-site, presheaf or etale-site infrastructure, not the oriented-product localization equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The slice topos of a left oriented product of etale topoi at the sheafified representable triple U to V from W is the left oriented product of the etale topoi of U V and W",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forget, CategoryTheory.instIsContinuousOverLeftDiscretePUnitIteratedSliceBackwardOver, CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.instIsContinuousOverLeftDiscretePUnitIteratedSliceForwardOver, CategoryTheory.instIsCocontinuousOverLeftDiscretePUnitIteratedSliceBackwardOver, CategoryTheory.instIsCocontinuousOverLeftDiscretePUnitIteratedSliceForwardOver, AlgebraicGeometry.instCartesianMonoidalCategoryOverScheme, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits supply ordinary slice-site, presheaf or etale-site infrastructure, not the oriented-product localization equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "oriented|overPullback|overEquiv",
+   "results": "5 hits: 18, 60, 94, 95, 105",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits supply ordinary slice-site, presheaf or etale-site infrastructure, not the oriented-product localization equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves on the category of triples over a fixed triple with oriented topology are equivalent to the slice category over its associated representable sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.over, CategoryTheory.typeEquiv, CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.sheafOver, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map, TopCat.Sheaf.pullbackIso, CategoryTheory.Presheaf.isSheaf_yoneda', CategoryTheory.Presieve.isSheafFor_over_map_op_comp_ofArrows_iff",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits supply ordinary slice-site, presheaf or etale-site infrastructure, not the oriented-product localization equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-affine-slice-site",
@@ -79,5 +222,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-slice-localization",
+  "worker": "stage1",
+  "summary": "Identified the localized triple site with the relative triple site, checked all three cover generators, applied the existing arbitrary-site slice-sheaf equivalence, and checked the projection by explicit restriction and componentwise base change. No new nodes, no statement change, no assumption of subcanonicity or affineness.",
+  "blueprint": "Expands the oriented slice/localization used in the normal-cone specialization route beneath main-20261015 lem-trf-local-term-locality.proof.md paragraphs (1) and (2), through the recorded ancestor chain; follows ILO XI 1.10(b).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic equivalence of the small etale site sliced at an etale object with its own small etale site; used componentwise, not as a replacement for the trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-localized-sheaves-over-representable",
+    "why": "Generic arbitrary-site slice-sheaf equivalence, valid without subcanonicity; the trace-formula unit has no such general site theorem."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic finite-limit and cover-preserving site functor construction of a geometric morphism and its composition isomorphisms; used for componentwise base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-4f915e320",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-4f915e320 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's seven steps, every cited node's statement in full, ILO Travaux de Gabber XI 1.9–1.10(b) on printed pp. 175–176 (diagram 1.a, the equivalence m in (1.b), the localization arrow (1.c)), and the blueprint proof of lem-trf-local-term-locality in main-20261015. There are no new nodes. The statement matches the source and is not weakened. The source only asserts that m is an equivalence; the split proves it. Step 1 is correct: an object over Z is the same as an arrow A→U×_V B, and the componentwise etale-site localization applies because U, V, W are etale over X, S, Y. Step 2 is correct: in both sites the last component of a type-(c) cover is D×_B B'. Its terse claim that lifting commutes with pullback holds because the generating covers are stable under pullback up to isomorphism (pullbacks are componentwise), so every cover is a composite of generators whose intermediate objects already lie over Z. Step 3 is correct: Stacks 00Y1 is used without assuming subcanonicity, which matters because the triple site is not subcanonical. Steps 4 to 7 are correct: the fibre over eta(a) is F(T); the functor T↦T×Z preserves finite limits and covers; the canonical 2-morphism is recovered from the cited inverse-image formula, not from that node's proof; and I checked both round trips of the adjunction through the projection and diagonal identities, so t is j_Z. Small cases checked: the final triple, an empty component, a type-(c) map with B'=B, and h_Z not a sheaf. I found no duplicate in the DAG; the parent lem-trf-oriented-affine-slice-site is strictly larger. There is no cycle and the unit route is unchanged. I accept the three tool_uses, which the worker recorded itself: etale-site-localization-open (already proved in slopmaster2), and localized-sheaves-over-representable and left-exact-site-inverse-image-tensor, generic site lemmas that the trace-formula unit lacks. The left-exact one is already a recorded tool of lem-trf-oriented-product-universal in the same unit. No changes made."
  }
 }
