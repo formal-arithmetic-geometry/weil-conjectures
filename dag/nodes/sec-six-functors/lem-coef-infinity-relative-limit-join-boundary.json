@@ -14,41 +14,162 @@
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $f=c|_K$ and $X=E_{/f}$, $Y=D_{/qf}$ in the degreewise model of [lem-coef-infinity-slice-right-fibration]; both are quasicategories. Write $q_f:X\\to Y$ for postcomposition. Here is its inner-horn lifting argument. Given a horn $\\Lambda_i^n\\to X$ over $\\Delta^n\\to Y$ with $0<i<n$, restrict to the apex blocks and use the inner fibration $q$ to choose $v:\\Delta^n\\to E$ extending the apex horn over its prescribed base. Glue $v$ to the given $\\Lambda_i^n\\star K\\to E$ along $\\Lambda_i^n$. The inclusion $(\\Lambda_i^n\\star K)\\amalg_{\\Lambda_i^n}\\Delta^n\\hookrightarrow\\Delta^n\\star K$ is inner anodyne by [lem-coef-infinity-anodyne-cocones], with right-anodyne horn $\\Lambda_i^n\\hookrightarrow\\Delta^n$ and monomorphism $\\varnothing\\hookrightarrow K$. Lift it against $q$ to obtain the desired simplex of $X$. Inner-horn lifting extends to their weakly saturated closure because lifts are preserved by pushouts, successive extensions and retracts. Thus $q_f$ is an inner fibration.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-anodyne-cocones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, applied to an inner horn and the empty-to-K inclusion; Proposition 4.3.6.1 (018F) for the slices."
+   }
+  },
+  {
+   "text": "Let $x=c(*)$ and write $\\mu:\\Delta_Kx\\to f$ for its coherent cone. For an arbitrary vertex $z$ of $X$, write $y=z(*)$ and $\\lambda:\\Delta_Ky\\to f$ for its cone. Apply [lem-coef-join-slice-cocone-comparison] to $K^{\\mathrm{op}}\\to E^{\\mathrm{op}}$ and then take opposites. Order reversal sends $K^{\\mathrm{op}}\\star\\Delta^n$ to $(\\Delta^n)^{\\mathrm{op}}\\star K$; hence the resulting comparison is an equivalence from $X$ to the coherent cone category $(\\Delta_K\\downarrow f)$, sending $z,c$ to $\\lambda,\\mu$. The opposite and mapping-space identifications are those of [lem-coef-infinity-relative-cone-equivalence](4). Apply [lem-cbc-enhanced-functor-cone-calculus] to this equivalence and the cone-category mapping formula to obtain\n$$\\operatorname{Map}_X(z,c)\\simeq\\operatorname{hofib}_{\\lambda}\\bigl(\\operatorname{Map}_E(y,x)\\xrightarrow{a\\mapsto\\mu\\Delta_K(a)}\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(\\Delta_Ky,f)\\bigr).$$\nApply exactly these constructions with $D,qf,q\\lambda,q\\mu$ to obtain the formula for $\\operatorname{Map}_Y(qz,qc)$. The comparison sends a simplex to the coherent cone given by precomposition with the fat-to-sharp join map; that precomposition commutes with postcomposition by $q$. The cone mapping formula is natural in both cones and the ambient functor. Consequently the map between the displayed homotopy fibers is precisely the map on mapping spaces induced by $q_f$, under these natural equivalences.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/04J5",
+    "place": "Example 4.6.6.8 and Proposition 7.1.6.13 (02XB), proof: the sharp slice/fixed-diagram comparison. The explicit coherent cone mapping formula is supplied by the cited DAG node."
+   }
+  },
+  {
+   "text": "By the limit clause of [lem-coef-infinity-relative-cone-constant-test], the hypothesis that $c$ is a $q$-limit makes the square with rows\n$$A=\\operatorname{Map}_E(y,x)\\longrightarrow B=\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(\\Delta_Ky,f),\\qquad C=\\operatorname{Map}_D(qy,qx)\\longrightarrow H=\\operatorname{Map}_{\\operatorname{Fun}(K,D)}(\\Delta_K(qy),qf)$$\na homotopy pullback, with horizontal maps induced by $\\mu,q\\mu$ and vertical maps induced by $q$. In particular $A\\simeq B\\times_H^h C$. Pull back this comparison homotopically along the vertex $\\lambda:\\Delta^0\\to B$. Homotopy-pullback invariance and pasting, [lem-coef-kan-homotopy-pullback-invariance] and [lem-coef-infinity-homotopy-pullback-pasting], give\n$$\\operatorname{hofib}_{\\lambda}(A\\to B)\\simeq\\{\\lambda\\}\\times_B^h(B\\times_H^h C)\\simeq\\{q\\lambda\\}\\times_H^h C=\\operatorname{hofib}_{q\\lambda}(C\\to H).$$\nAll pullbacks here use path spaces and the commutation homotopy of the constant-test square, including its higher simplices. Step 2 identifies this fiber comparison with $\\operatorname{Map}_X(z,c)\\to\\operatorname{Map}_Y(qz,qc)$. As $z$ was arbitrary, $c$ is $q_f$-final.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Proposition 7.1.6.19, constant-source characterization of relative limits, followed by the homotopy-fiber calculation. The cited DAG constant-test node gives the apex mapping-space version."
+   }
+  },
+  {
+   "text": "Apply the final-object clause of [lem-coef-infinity-relative-initial-boundary] to $q_f:X\\to Y$, which is an inner fibration by step 1, and its $q_f$-final vertex $c$ from step 3. For every $d>0$, every $b:\\partial\\Delta^d\\to X$ with $b(d)=c$ and every $a':\\Delta^d\\to Y$ restricting to $q_fb$ admit a filler $w:\\Delta^d\\to X$ with $w|_{\\partial\\Delta^d}=b$ and $q_fw=a'$. The same cited criterion proves that this boundary-filling assertion is equivalent to the mapping-space relative-finality assertion, explaining the equivalence in the item.",
+   "uses": [
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Corollary 7.1.5.17, conditions (1) and (3), in the opposite final-object orientation."
+   }
+  },
+  {
+   "text": "To translate the preceding lifting problem, for each simplex $s:\\Delta^n\\to\\partial\\Delta^d$ define $b(s)=u\\circ(s\\star\\operatorname{id}_K)$. Its restriction on $K$ is $f$ because $K\\subseteq\\{d\\}\\star K$ and $u|_{\\{d\\}\\star K}=c$. On a simplicial operator $\\alpha$ this formula gives $b(s\\alpha)=b(s)\\circ(\\Delta(\\alpha)\\star\\operatorname{id}_K)$, so it defines the required simplicial map $b$ into $X$. The identical formula for $a$ gives $a':\\Delta^d\\to Y$, with $q_fb=a'|_{\\partial\\Delta^d}$ and $b(d)=c$. Conversely compatible maps on the joined simplices glue to a map on the join: by the degreewise join formula, every mixed simplex has one initial simplex of the first factor and one final simplex of $K$, and their faces restrict these blocks. Uncurrying $w$ therefore gives $\\widetilde u:\\Delta^d\\star K\\to E$. On each boundary simplex it agrees with $u$, and on every simplex its composite with $q$ is $a$, proving both exact equations. Currying reverses this construction. For $K=\\varnothing$, the join degree formula gives $L\\star\\varnothing=L$ and $X=E,Y=D$, so these formulas reduce to the same boundary problem with no extra data. For $d=1$ the final vertex is still present in the boundary; dimension zero is neither used nor asserted.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018F",
+    "place": "The degreewise sharp-slice construction and join operators; exact currying and uncurrying, with the final vertex retained."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://kerodon.net/tag/02X1",
+  "place": "Proposition 7.1.6.19 and Definition 7.1.6.1 (02KG), followed by the final-object dual of Corollary 7.1.5.17 (02WS). The explicit bridge uses existing sharp-to-coherent cone comparison, constant-source testing and homotopy-pullback pasting."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "A relative limit cone in an infinity category fills join boundaries whose final vertex is that limit cone",
-   "results": "{\"t\": \"2026-10-17T00:54:24Z\", \"tool\": \"leansearch\", \"query\": \"A relative limit cone in an infinity category fills join boundaries whose final vertex is that limit cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.noConfusionType\", \"CategoryTheory.Limits.LimitCone.cone\", \"CategoryTheory.Limits.IsLimit.ctorIdx\", \"CategoryTheory.Limits.getLimitCone\", \"CategoryTheory.Limits.IsLimit.mk\", \"CategoryTheory.Limits.limit.cone\", \"CategoryTheory.Cat.HasLimits.limitConeIsLimit\", \"CategoryTheory.Limits.limit.isLimit\"], \"digest\": \"e27ef1cf790d05a2\"}",
+   "query": "A fixed relative limit diagram in an inner fibration fills every sharp join boundary with that final cone",
+   "results": "CategoryTheory.Limits.IsLimit.ctorIdx; CategoryTheory.Limits.LimitCone.cone; CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone; CategoryTheory.Limits.LimitCone.ctorIdx; CategoryTheory.Limits.IsColimit.ctorIdx; CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom; CategoryTheory.Limits.LimitPresentation.limit; CategoryTheory.Limits.LimitPresentation.isLimit",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern ordinary category limit cones and their terminal objects; none states the sharp join-slice relative-limit criterion for quasicategories or its exact join-boundary lifting. Source grep finds only ordinary cone-point terminology."
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inner fibration induced on fixed sharp join slices and relative limit boundary filling",
+   "results": "SSet.modelCategoryQuillen.J; SSet.modelCategoryQuillen.I; HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual; SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; SSet.modelCategoryQuillen.instCategoryWithFibrations; SSet.Quasicategory.hornFilling; SSet.IsStrictSegal; SSet.StrictSegal.isPointwiseRightKanExtension",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*join.*slice|fixed.*diagram.*slice|inner.*fibration.*join",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative limit cone in an infinity category fills join boundaries whose final vertex is that limit cone",
+   "results": "CategoryTheory.Limits.IsLimit.noConfusionType; CategoryTheory.Limits.LimitCone.cone; CategoryTheory.Limits.IsLimit.ctorIdx; CategoryTheory.Limits.getLimitCone; CategoryTheory.Limits.IsLimit.mk; CategoryTheory.Limits.limit.cone; CategoryTheory.Cat.HasLimits.limitConeIsLimit; CategoryTheory.Limits.limit.isLimit",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "Relative terminal objects in the sharp join cone category characterize relative limits",
-   "results": "{\"t\": \"2026-10-17T00:54:25Z\", \"tool\": \"leanfinder\", \"query\": \"Relative terminal objects in the sharp join cone category characterize relative limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.ofPreservesConeTerminal\", \"CategoryTheory.Limits.IsLimit.ofReflectsConeTerminal\", \"CategoryTheory.WithTerminal.isLimitEquiv\", \"CategoryTheory.Limits.hasLimit_iff_hasTerminal_cone\", \"CategoryTheory.Limits.hasTerminalChangeDiagram\", \"CategoryTheory.Limits.Cone.isLimitEquivIsTerminal\", \"CategoryTheory.WithTerminal.isLimitEquiv_apply_lift_left\", \"CategoryTheory.Limits.isLimitMapConeEmptyConeEquiv\"], \"digest\": \"a09fa51ffdb81f1c\"}",
+   "results": "CategoryTheory.Limits.IsLimit.ofPreservesConeTerminal; CategoryTheory.Limits.IsLimit.ofReflectsConeTerminal; CategoryTheory.WithTerminal.isLimitEquiv; CategoryTheory.Limits.hasLimit_iff_hasTerminal_cone; CategoryTheory.Limits.hasTerminalChangeDiagram; CategoryTheory.Limits.Cone.isLimitEquivIsTerminal; CategoryTheory.WithTerminal.isLimitEquiv_apply_lift_left; CategoryTheory.Limits.isLimitMapConeEmptyConeEquiv",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern ordinary category limit cones and their terminal objects; none states the sharp join-slice relative-limit criterion for quasicategories or its exact join-boundary lifting. Source grep finds only ordinary cone-point terminology."
+   "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "relative.*limit.*cone|cone.*join.*boundary|join.*slice.*limit",
-   "results": "{\"t\": \"2026-10-17T00:54:23Z\", \"tool\": \"grep\", \"query\": \"relative.*limit.*cone|cone.*join.*boundary|join.*slice.*limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean\"], \"digest\": \"68956b1aa33bf96b\"}",
+   "results": "none",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern ordinary category limit cones and their terminal objects; none states the sharp join-slice relative-limit criterion for quasicategories or its exact join-boundary lifting. Source grep finds only ordinary cone-point terminology."
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "\"SSet\", \"Cone\"",
-   "results": "{\"t\": \"2026-10-17T01:54:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.coconeN\", \"SSet.isColimitCoconeN\", \"SSet.coconeN'\", \"SSet.isColimitCoconeN'\", \"SSet.coconeN'_pt\", \"SSet.coconeN'_ι_app\"], \"digest\": \"51cefb7a58e7bd35\"}",
+   "results": "SSet.coconeN; SSet.isColimitCoconeN; SSet.coconeN'; SSet.isColimitCoconeN'; SSet.coconeN'_pt; SSet.coconeN'_ι_app",
    "date": "2026-10-17",
-   "verdict": "no match: strict simplicial/ordinary categorical cone declarations do not state relative-limit join-boundary lifting for an inner fibration of quasicategories."
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "InnerFibration|innerFibration|rightAnodyne|RightAnodyne",
+   "results": "{\"t\": \"2026-10-17T03:15:08Z\", \"tool\": \"grep\", \"query\": \"InnerFibration|innerFibration|rightAnodyne|RightAnodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"68f9223828c07882\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned simplicial-set foundations and horn-lifting definitions do not state fixed-diagram sharp-slice relative-limit boundary lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial set slice comparison of sharp joins with functor category fibers",
+   "results": "{\"t\": \"2026-10-17T03:15:09Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial set slice comparison of sharp joins with functor category fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.sk\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.nerve\", \"SSet.ι₁_comp\"], \"digest\": \"db11f58982379808\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned simplicial-set foundations and horn-lifting definitions do not state fixed-diagram sharp-slice relative-limit boundary lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial set join with a fixed diagram preserves the inner horn lifting property",
+   "results": "{\"t\": \"2026-10-17T03:16:07Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial set join with a fixed diagram preserves the inner horn lifting property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory.hornFilling\", \"SSet.horn₃₁.ι₀_desc\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling'\"], \"digest\": \"7cc9606ee5b1f712\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned simplicial-set foundations and horn-lifting definitions do not state fixed-diagram sharp-slice relative-limit boundary lifting."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-correspondence-kan-filling",
@@ -74,5 +195,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-limit-join-boundary",
+  "worker": "stage1",
+  "summary": "Five steps with no new nodes: prove inner-horn lifting on the fixed sharp slices by two lifts; identify their mapping spaces using the existing sharp/coherent cone comparison; apply the constant-cone relative-limit test and explicit homotopy-fiber pasting; apply the relative-final boundary criterion; uncurry simplex by simplex with both exact equations. The original statement is retained.",
+  "blueprint": "The five steps supply the fixed-diagram join-boundary prerequisite in the rectification/operadic Kan-extension chain serving prop-coef-integral-exceptional-adjoint, proof paragraph 2, the derived mapping-complex adjunction before R lim. They make the relative-limit cone lift exact in its boundary and base; the paragraph itself contains no separate join-boundary lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 2 takes from its statement that functor equivalences induce equivalences on mapping spaces and the coherent cone-category mapping-space formula (homotopy fiber of a -> mu Delta_K(a)); no node of sk-prop-sf-biduality-general states this general comma formula, and it is already an accepted tool use of this unit (e.g. lem-coef-infinity-relative-cone-constant-test)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-0d2b81411",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-0d2b81411 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, every cited node's statement, the citer lem-coef-operadic-correspondence-kan-filling (type-(c), d>0) and Kerodon 02WS (Cor 7.1.5.17), 018J (Prop 4.3.6.4) and 02X1 (Prop 7.1.6.19). The delivery has no new nodes; the second reader's removal of the helper is justified because it is just the two lifts written out in step 1. The statement is the dual of Kerodon Def 7.1.6.1 combined with 02WS(3); it is true and matches the citer's use. Small cases checked: K empty, d=1, q=id, D a point, E empty; d=0 is rightly excluded. Step 1: the apex inner-horn lift, then the pushout-join with right-anodyne Λ_i^n→Δ^n and ∅→K; the join orientation is correct. Step 2: J(f^op)^op≅E_{/f}, the cocone category's opposite is the cone category, and the mapping formula orientation matches cone-calculus. Step 3: dual constant test, then path-pullback invariance and pasting give hofib_λ(A→B)≃hofib_{qλ}(C→H). Step 4: final clause of relative-initial-boundary, with the inner fibration from step 1. Step 5: exact currying; for d>0, ∂Δ^d⋆K is the union of the face⋆K, so both exact equations hold. No duplicate found (checked the relative-cone-initial-corner, operadic-colimit-active-join-boundary, relative-limit-initial-components and parameter-cone-extension nodes, among others). No cycle and no SGA citation. One off-route citation, lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), is accepted as a generic tool use; the same unit already records it on the constant-test node. FIX: the item is resubmitted verbatim with split_report.tool_uses declaring that node; nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }

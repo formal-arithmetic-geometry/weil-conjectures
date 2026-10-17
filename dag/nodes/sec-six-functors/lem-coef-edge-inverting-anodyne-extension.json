@@ -10,9 +10,76 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every small simplicial set $P$, put $G(P,E)=\\operatorname{Fun}(P,E)^\\simeq$, the core. By [lem-coef-infinity-pointwise-equivalences], applied to the quasicategory $E$ and the shape $P$, an edge of $\\operatorname{Fun}(P,E)$ is an equivalence exactly when each component at a vertex of $P$ is an equivalence edge of $E$. (No quasicategory property of $\\operatorname{Fun}(P,E)$ or $H(K,E)$ is needed here; the core is the simplicial subset of [def-cbc-enhanced-diagrams-cones].) The degreewise functor-category definition in [def-cbc-enhanced-diagrams-cones] gives the interchange bijection between maps $P\\to\\operatorname{Fun}(K,E)$ and maps $K\\to\\operatorname{Fun}(P,E)$, both represented by a map $P\\times K\\to E$. The first factors through $H(K,E)$ precisely when every edge of $K$ maps to an equivalence at every vertex of $P$: by the definition of full subcategory it suffices and is necessary to test its vertices. By the cited componentwise criterion this is precisely the condition that every edge of $K$ maps to an equivalence in $\\operatorname{Fun}(P,E)$. The core definition then says exactly that the transposed map factors through $G(P,E)$. We obtain a natural bijection $\\operatorname{Hom}(P,H(K,E))\\cong\\operatorname{Hom}(K,G(P,E))$. This imposes no equivalence condition on the parameter edges of $P$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Section 3.5.7, equation (3.5.7.2), and Corollary 3.5.12: interchange and the componentwise equivalence criterion."
+   }
+  },
+  {
+   "text": "Fix $m\\geq0$ and put $b_m:P=\\partial\\Delta^m\\hookrightarrow Q=\\Delta^m$, where the boundary is the union of the proper faces and $\\partial\\Delta^0=\\varnothing$. This is degreewise injective. The particular-case assertion of [lem-coef-infinity-isofibration-exponentiation] makes restriction $r_m:\\operatorname{Fun}(Q,E)\\to\\operatorname{Fun}(P,E)$ an isofibration between quasicategories, for every quasicategory $E$. Apply [lem-coef-infinity-core-kan-fibration] to this isofibration. It gives a Kan fibration $q_m=r_m^\\simeq:G(Q,E)\\to G(P,E)$, that is, a map with the right lifting property against every horn, including both outer horns. This applies also when $m=0$, since the exponentiation assertion allows the empty subcomplex.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.5.11 with terminal target and Corollary 3.5.12; exponentiation restriction and passage to cores."
+   }
+  },
+  {
+   "text": "Consider any boundary lifting square with top $a:P\\to H(K',E)$ and bottom $b:Q\\to H(K,E)$, so that restriction along $i$ gives $r_i a=b|_P$, where $r_i:H(K',E)\\to H(K,E)$ is the restriction map. Step 1 transposes it to a square with top $\\widetilde b:K\\to G(Q,E)$, left map $i:K\\hookrightarrow K'$, bottom $\\widetilde a:K'\\to G(P,E)$ and right map $q_m$. The original square commutes if and only if $q_m\\widetilde b=\\widetilde a i$: both equations assert equality of the same map $K\\times P\\to E$. A diagonal $K'\\to G(Q,E)$ transposes back to a map $Q\\to H(K',E)$. Its two triangle equalities state exactly that it restricts to $a$ on $P$ and to $b$ on $K$. Thus the correspondence is a bijection on fillers and preserves the boundary data strictly, by the degreewise formulas of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 3.5.13, displayed correspondence of lifting problems with terminal target; the two transpose equations are expanded here."
+   }
+  },
+  {
+   "text": "For the fixed Kan fibration $q_m$ of Step 2, let $L_m$ be the class of maps having the left lifting property against $q_m$. By the definition in [lem-coef-infinity-core-kan-fibration], every horn inclusion is in $L_m$. Here is the elementary closure argument: isomorphisms lift by taking their inverses; a square for a pushout restricts to one for the attached map, whose filler glues with the given map on the old summand by the pushout universal property. For a small continuous transfinite composition, start with the prescribed map on its source, choose an extension at each successor using that stage's lifting property and the fixed bottom map restricted to that stage, and use the compatible colimit map at each limit. Every triangle equality holds at each stage and hence on the colimit. For a retract in the arrow category, precompose the top of the square by the domain retraction and the bottom by the codomain retraction, lift for the larger arrow, and precompose the resulting diagonal by the codomain section. The retract equations give both required triangle equalities. Consequently $L_m$ contains the closure of the horns under exactly the operations defining Kan anodyne in the item. Thus $i$ lifts against $q_m$ for every $m\\geq0$, and Step 3 yields every required boundary filler for $H(K',E)\\to H(K,E)$.",
+   "uses": [
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 3.5.13, conclusion from Theorem 3.5.11; the weak-saturation lifting argument is written out explicitly."
+   }
+  },
+  {
+   "text": "A simplicial map $u:E\\to F$ between quasicategories preserves equivalences by sending the inverse-triangle witnesses of [def-cbc-enhanced-diagrams-cones] to the corresponding witnesses in $F$. For any parameter map $v:P'\\to P$, precomposition and postcomposition send the underlying map $h:P\\times K\\to E$ to the single composite $u\\circ h\\circ(v\\times\\mathrm{id}_K)$. This is the same composite whichever order the operations and the transposition take. Hence the restriction maps, the correspondence of lifting problems, and the sets of their fillers have the claimed compatibility with parameter restriction and postcomposition. Finally $m=0$ in Step 4 gives strict extension on objects, and all higher $m$ give arbitrary prescribed parameter-boundary data. The right lifting property against these boundaries is precisely the stated trivial Kan fibration convention.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Section 3.5.7 and Corollary 3.5.13: naturality of the exponential interchange and strict-lifting conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-core-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, displayed derived coefficient-adjunction calculation: coherent localization infrastructure. Agent-expanded proof of Cisinski Section 3.5.7 and Corollaries 3.5.12–3.5.13 using existing exponentiation and core-fibration inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +115,66 @@
    "results": "{\"t\": \"2026-10-17T00:41:16Z\", \"tool\": \"leanfinder\", \"query\": \"Parameterized extension of diagrams whose edges are equivalences along horn cell anodyne inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn₃₁.desc\", \"SSet.Quasicategory.hornFilling'\", \"SSet.horn₃₂.desc\", \"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₂.desc.multicofork\"], \"digest\": \"49aa44ac50ea2ad7\"}",
    "date": "2026-10-17",
    "verdict": "no match: CategoryWithFibrations.lean defines the horn lifting class; Quasicategory.hornFilling and KanComplex.hornFilling are filling axioms, not parameter-boundary trivial fibrations for edge-inverting diagram categories. IsInvertedBy and KanExtension.Basic are ordinary-category APIs. No exact edge-inverting exponential result was found."
+  },
+  {
+   "tool": "grep",
+   "query": "edge.*invert|invert.*edge|Kan.*anodyne",
+   "results": "{\"t\": \"2026-10-17T01:54:53Z\", \"tool\": \"grep\", \"query\": \"edge.*invert|invert.*edge|Kan.*anodyne\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this query"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.KanAnodyne, CategoryTheory.Functor, equivalence edges",
+   "results": "{\"t\": \"2026-10-17T01:54:54Z\", \"tool\": \"loogle\", \"query\": \"SSet.KanAnodyne, CategoryTheory.Functor, equivalence edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.KanAnodyne'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reported the unknown identifier SSet.KanAnodyne; this query gives no evidence of absence. The second Loogle query uses the returned names and completed with no hit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "edge inverting coherent diagrams extend along Kan anodyne inclusion",
+   "results": "{\"t\": \"2026-10-17T01:54:54Z\", \"tool\": \"leansearch\", \"query\": \"edge inverting coherent diagrams extend along Kan anodyne inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.mkNatIso_inv\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.Limits.Cocones.extendId_inv_hom\", \"CategoryTheory.TwoSquare.lanBaseChange\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.Limits.Cocones.instIsIsoCoconeExtend\", \"CategoryTheory.Limits.Cocones.extendComp\"], \"digest\": \"dc8273553b9af0ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: returned ordinary Kan/horn-filling or ordinary-category extension statements do not assert the edge-inverting quasicategory restriction with arbitrary parameter-boundary data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of edge-inverting functor categories along Kan anodyne maps is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-17T01:54:55Z\", \"tool\": \"leanfinder\", \"query\": \"restriction of edge-inverting functor categories along Kan anodyne maps is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.Nerve.isStrictSegal\"], \"digest\": \"7c45b445de4424e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: returned ordinary Kan/horn-filling or ordinary-category extension statements do not assert the edge-inverting quasicategory restriction with arbitrary parameter-boundary data."
+  },
+  {
+   "tool": "grep",
+   "query": "horn.*Functor|Functor.*horn|KanComplex",
+   "results": "{\"t\": \"2026-10-17T02:00:52Z\", \"tool\": \"grep\", \"query\": \"horn.*Functor|Functor.*horn|KanComplex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\"], \"digest\": \"ac3370433db12754\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: inspected Quasicategory/Basic.lean and SimplicialSet/KanComplex.lean; their horn fillers concern unmarked simplicial sets and do not supply the marked, edge-inverting exponential restriction with arbitrary parameter boundaries."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.modelCategoryQuillen.J, SSet.KanComplex, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-17T02:00:52Z\", \"tool\": \"loogle\", \"query\": \"SSet.modelCategoryQuillen.J, SSet.KanComplex, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "all horn inclusions are closed under strict edge-inverting diagram extension with parameters",
+   "results": "{\"t\": \"2026-10-17T02:00:52Z\", \"tool\": \"leansearch\", \"query\": \"all horn inclusions are closed under strict edge-inverting diagram extension with parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.horn.hom_ext\", \"SSet.horn.edge\", \"SSet.horn.faceι\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\"], \"digest\": \"0110855aa3d78a5f\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: returned ordinary Kan/horn-filling or ordinary-category extension statements do not assert the edge-inverting quasicategory restriction with arbitrary parameter-boundary data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "edge-inverting diagrams extend strictly with arbitrary parameter boundary along every horn inclusion",
+   "results": "{\"t\": \"2026-10-17T02:00:53Z\", \"tool\": \"leanfinder\", \"query\": \"edge-inverting diagrams extend strictly with arbitrary parameter boundary along every horn inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.KanComplex.hornFilling\", \"SSet.horn₃₁.exists_desc\", \"SSet.quasicategory_of_filler\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn.edge\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"931ac9e2a786c712\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: returned ordinary Kan/horn-filling or ordinary-category extension statements do not assert the edge-inverting quasicategory restriction with arbitrary parameter-boundary data."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-trivial-fibration-fraction-model",
@@ -78,5 +201,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-edge-inverting-anodyne-extension",
+  "worker": "stage1",
+  "summary": "Repaired the marked-route cycle found by the first dry run. The final five-step proof follows the direct Cisinski transpose: componentwise equivalences identify the edge-inverting exponential with maps into a functor-category core; exponentiation plus passage to cores gives a Kan fibration; weak saturation gives the strict boundary lifts. The original statement, provenance and searches are retained. No new nodes. Maintainer reader (2026-10-17): Step 1 now cites the in-unit componentwise criterion lem-coef-infinity-pointwise-equivalences instead of the off-unit tool lem-cbc-enhanced-functor-cone-calculus; the tool use is withdrawn.",
+  "blueprint": "Realizes the coherent-localization infrastructure used below the ancestor prop-coef-integral-exceptional-adjoint proof, Paragraph 2, via precisely its cited Cisinski Corollary 3.5.13 with terminal target. This is a change of foundational proof below the unit, not of the unit statement or route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-85d6a34d3",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-85d6a34d3 (reviewer sub-agent of L); spot-checked: I read the whole item, all five steps and every cited node statement. Against Cisinski CatLR (fetched online and read with pdftotext), the item is Corollary 3.5.13 with Y=Delta^0. Cisinski's h(B,X) in §3.5.7, from (3.5.7.1)-(3.5.7.2), equals the item's full edge-inverting subcategory H. Theorem 3.5.11 and Corollary 3.5.12 give the core Kan fibration and the objectwise criterion. The anodyne class (all horns, weakly saturated) and the boundary-lifting convention match, so the statement is faithful and not weakened. Step 1's interchange, the orientation of Step 3's square and its strict triangle identities, Step 4's lifting closure (pushouts, transfinite compositions, retracts via r_A, r_B, s_B) and Step 5's naturality are all correct. Step 2 correctly combines the exponentiation particular case (including A empty for m=0) with the core-fibration node, and both use the same isofibration definition. Edge cases P, K, E empty, m=0 and the outer horn Lambda^1_0 all hold. The citer lem-coef-trivial-fibration-fraction-model uses the statement correctly. There are no new nodes, no duplicate in the DAG (rg for anodyne, edge-inverting, 3.5.13), and no cycle: none of the four dependency closures contains the item. No SGA source is cited. One repair (C7/C8): Step 1 used the off-unit tool lem-cbc-enhanced-functor-cone-calculus for the componentwise criterion, which the in-unit node lem-coef-infinity-pointwise-equivalences states exactly. The quasicategory-closure clause it was also cited for is not needed in Step 1. I re-pointed Step 1, recomputed proof_deps and set split_report.tool_uses=[]; the corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-edge-inverting-anodyne-extension.json. No tool_uses accepted.; 1 file(s) fixed by the reviewer"
  }
 }
