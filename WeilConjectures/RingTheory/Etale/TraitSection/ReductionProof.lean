@@ -101,8 +101,9 @@ theorem etale_localization_integralClosure_of_baseChange (ε : B →ₐ[R₀] R�
     (IsScalarTower.toAlgHom B Bk L)
   let : Algebra Bk₁ L₁ := ι.toRingHom.toAlgebra
   have : IsScalarTower B₁ Bk₁ L₁ := .of_algebraMap_eq fun x ↦ (ι.commutes x).symm
-  have : Module.Finite Bk₁ L₁ := sorry
-  have : Algebra.Etale Bk₁ L₁ := sorry
+  let eL := Algebra.TraitSection.coverEquiv (B := B) (B₁ := B₁) (Bk := Bk) (L := L)
+  have : Module.Finite Bk₁ L₁ := Module.Finite.equiv eL.toLinearEquiv
+  have : Algebra.Etale Bk₁ L₁ := Algebra.Etale.of_equiv eL
   have : SMulCommClass G B L := ⟨fun g b x ↦ by
     rw [IsScalarTower.algebraMap_smul (A := Bk) b x |>.symm, smul_comm g]
     exact (IsScalarTower.algebraMap_smul (A := Bk) b (g • x))⟩
@@ -118,7 +119,9 @@ theorem etale_localization_integralClosure_of_baseChange (ε : B →ₐ[R₀] R�
     rw [Algebra.smul_def, Algebra.smul_def, smul_mul', hfixι]⟩
   have hfix₁ (x : L₁) (hx : ∀ g : G, g • x = x) : x ∈ Set.range (algebraMap Bk₁ L₁) :=
     Algebra.TraitSection.mem_range_of_forall_smul_eq (Bk := Bk) G hfix x hx
-  have hrank₁ (p) : Module.rankAtStalk (R := Bk₁) L₁ p = Nat.card G := sorry
+  have hrank₁ (p) : Module.rankAtStalk (R := Bk₁) L₁ p = Nat.card G := by
+    rw [← Module.rankAtStalk_eq_of_equiv eL.toLinearEquiv, Module.rankAtStalk_baseChange]
+    exact hrank _
   have hG₁ : IsUnit (Nat.card G : A₁) := by simpa using hG.map (algebraMap R₀ A₁)
   -- the section
   let ε₁ : B₁ →ₐ[A₁] A₁ :=
