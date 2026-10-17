@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
-public import WeilConjectures.WeilSheaf.UpperStarLowerStar
+public import WeilConjectures.WeilSheaf.Localization
 
 /-!
 # Verdier duality and the open–closed decomposition
@@ -18,15 +18,19 @@ statements of the duality theory of Weil complexes collected in
 the local boundary duality (`lem-a1-local-boundary-duality`):
 
 1. `𝔻_X Rf_* G ≅ Rf₀! 𝔻 G` (Verdier exchange and biduality);
-2. `Rf^! 𝔻_Y K ≅ 𝔻_X f^* K` (`Rf^! = 𝔻 f^* 𝔻` and biduality);
-3. `Ri^! Rj₀! G ≅ (i^* Rj_* G)[-1]` (open–closed triangle, `j^* Rj_* = 𝟭`, and clause (4) of
-   the localization theorem);
+2. `Ri^! 𝔻_X K ≅ 𝔻_Z i^* K` (`Ri^! = 𝔻 i^* 𝔻` and biduality);
+3. `Ri^! Rj₀! G ≅ (i^* Rj_* G)[-1]` (open–closed triangle, `j^* Rj_* = 𝟭`, and the localization
+   theorem: `Ri^! Rj_* = 0` and `Ri^! Ri_* = 𝟭`);
 4. `𝔻_Z (i^* Rj_* G) ≅ (i^* Rj_* 𝔻_U G)[-1]`.
+
+Here `Ri^!` is the right adjoint `AlgebraicGeometry.WeilComplex.closedUpperShriek` of `Ri_*`
+constructed in `WeilConjectures.WeilSheaf.Localization`, whose adjunction and localization
+properties are proved there. The clause `Ri^! ≅ 𝔻_Z i^* 𝔻_X` of the Verdier duality theorem
+(`thm-coef-qbar-verdier`) is stated here with `sorry`
+(`AlgebraicGeometry.WeilComplex.nonempty_closedUpperShriek_obj_iso`).
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.upperStarDerivedLowerStarIso`: `j^* Rj_* G ≅ G` for an open
-  immersion `j`.
 - `AlgebraicGeometry.WeilComplex.nonempty_verdierDual_upperStar_derivedLowerStar_iso`: step 4.
 -/
 
@@ -41,53 +45,6 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 namespace WeilComplex
-
-section UpperShriek
-
-variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
-  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-
-/-- The exceptional inverse image commutes with the shifts, as the right adjoint of the direct
-image with compact support. -/
-noncomputable instance : (upperShriek (k₀ := k₀) (l := l) f).CommShift ℤ :=
-  (derivedLowerShriekUpperShriekAdjunction f).rightAdjointCommShift ℤ
-
-/-- The exceptional inverse image is a triangulated functor, as the right adjoint of the
-triangulated direct image with compact support. -/
-instance : (upperShriek (k₀ := k₀) (l := l) f).IsTriangulated :=
-  have := (derivedLowerShriekUpperShriekAdjunction (k₀ := k₀) (l := l) f).commShift_of_leftAdjoint
-    ℤ
-  (derivedLowerShriekUpperShriekAdjunction f).isTriangulated_rightAdjoint
-
-end UpperShriek
-
-section OpenRestriction
-
-variable {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-  [X.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
-  [j.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-
-/-- **The restriction of the derived direct image to the open**: for an open immersion
-`j : U ↪ X`, `j^* Rj_* G ≅ G`. The pullback `j^*` is exact, so that
-`j^* ∘ Rj_* ≅ R(j^* ∘ j_*)`, and `j^* ∘ j_* ≅ 𝟭` on pro-étale Weil sheaves. -/
-noncomputable def upperStarDerivedLowerStarIso (G : WeilComplex k₀ l U) :
-    (upperStar j).obj ((derivedLowerStar j).obj G) ≅ G :=
-  ObjectProperty.isoMk _
-    ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso
-        (ProEtaleWeilSheaf.lowerStar k₀ l j) (ProEtaleWeilSheaf.upperStar k₀ l j)).symm.app
-        G.obj ≪≫
-      (Functor.rightDerivedFunctorNatIso
-        (ProEtaleWeilSheaf.lowerStarCompUpperStarIso j)).app G.obj ≪≫
-      (Functor.rightDerivedFunctorIsoMapDerivedCategory (𝟭 _)).app G.obj ≪≫
-      (Functor.mapDerivedCategoryIdIso _).app G.obj)
-
-end OpenRestriction
 
 section Exchange
 
@@ -116,18 +73,6 @@ theorem nonempty_verdierDual_derivedLowerStar_iso (G : WeilComplex k₀ l X) :
     e ≪≫ (derivedLowerStar f).mapIso (bX.app G).symm
   exact ⟨(verdierDual k₀ l Y).mapIso e'.op ≪≫ (bY.app _).symm⟩
 
-variable [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-
-/-- **Step 2: the exceptional inverse image of a dual** (blueprint:
-`lem-a1-local-boundary-duality`, step 2): `Rf^! 𝔻_Y K ≅ 𝔻_X f^* K`, from `Rf^! = 𝔻_X f^* 𝔻_Y`
-and biduality on `Y`. -/
-theorem nonempty_upperShriek_verdierDual_iso (K : WeilComplex k₀ l Y) :
-    Nonempty ((upperShriek f).obj ((verdierDual k₀ l Y).obj (op K)) ≅
-      (verdierDual k₀ l X).obj (op ((upperStar f).obj K))) := by
-  obtain ⟨e⟩ := nonempty_upperShriek_obj_iso f ((verdierDual k₀ l Y).obj (op K))
-  obtain ⟨bY⟩ := nonempty_iso_verdierDual_rightOp_comp_verdierDual k₀ l Y
-  exact ⟨e ≪≫ (verdierDual k₀ l X).mapIso ((upperStar f).mapIso (bY.app K)).op⟩
-
 end Exchange
 
 section Localization
@@ -142,41 +87,77 @@ variable {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
 
+/-- The exceptional inverse image `Ri^!` along a closed immersion commutes with the shifts, as
+the right adjoint of the direct image `Ri_*`. -/
+noncomputable instance (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
+    (closedUpperShriek (k₀ := k₀) (l := l) i j hij).CommShift ℤ :=
+  (closedUpperShriekAdjunction i j hij).rightAdjointCommShift ℤ
+
+/-- The exceptional inverse image `Ri^!` along a closed immersion is a triangulated functor, as
+the right adjoint of the triangulated direct image `Ri_*`. -/
+instance (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
+    (closedUpperShriek (k₀ := k₀) (l := l) i j hij).IsTriangulated :=
+  have := (closedUpperShriekAdjunction (k₀ := k₀) (l := l) i j hij).commShift_of_leftAdjoint ℤ
+  (closedUpperShriekAdjunction i j hij).isTriangulated_rightAdjoint
+
+omit [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))] in
 /-- **Step 3: the exceptional restriction of an extension by zero** (blueprint:
 `lem-a1-local-boundary-duality`, step 3): for complementary immersions `j` and `i`,
 `Ri^! Rj₀! G ≅ (i^* Rj_* G)[-1]`. Apply the triangulated functor `Ri^!` to the open–closed
 triangle `Rj₀! j^* Rj_* G ⟶ Rj_* G ⟶ Ri_* i^* Rj_* G ⟶` of `Rj_* G`: the middle term becomes
-`Ri^! Rj_* G = 0`, so the third arrow becomes an isomorphism, and the closed unit
-`Q ≅ Ri^! Ri₀! Q` with `Ri₀! ≅ Ri_*` identifies the third term with `i^* Rj_* G`. -/
-theorem nonempty_upperShriek_derivedLowerShriek_iso
+`Ri^! Rj_* G = 0` (`AlgebraicGeometry.WeilComplex.isZero_closedUpperShriek_obj`), so the third
+arrow becomes an isomorphism, and the closed unit `Q ≅ Ri^! Ri_* Q` identifies the third term
+with `i^* Rj_* G`; the first is `Ri^! Rj₀! G` since `j^* Rj_* G ≅ G`. -/
+theorem nonempty_closedUpperShriek_derivedLowerShriek_iso
     (hij : IsCompl (Set.range j.base) (Set.range i.base)) (G : WeilComplex k₀ l U) :
-    Nonempty ((upperShriek i).obj ((derivedLowerShriek k₀ l j).obj G) ≅
+    Nonempty ((closedUpperShriek i j hij.symm).obj ((derivedLowerShriek k₀ l j).obj G) ≅
       ((upperStar i).obj ((derivedLowerStar j).obj G))⟦(-1 : ℤ)⟧) := by
   obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
     exists_distTriang_openClosed j i hij ((derivedLowerStar j).obj G)
-  have hT' := (upperShriek i).map_distinguished T hT
-  have h₂ : IsZero ((upperShriek i).obj T.obj₂) :=
-    (isZero_upperShriek_obj_derivedLowerStar_obj j i hij G).of_iso ((upperShriek i).mapIso e₂)
+  let S := closedUpperShriek (k₀ := k₀) (l := l) i j hij.symm
+  have hT' := S.map_distinguished T hT
+  have h₂ : IsZero (S.obj T.obj₂) :=
+    (isZero_closedUpperShriek_obj i j hij.symm G).of_iso (S.mapIso e₂)
   have := (Triangle.isZero₂_iff_isIso₃ _ hT').1 h₂
-  let E : (upperShriek i).obj T.obj₃ ≅ ((upperShriek i).obj T.obj₁)⟦(1 : ℤ)⟧ :=
-    asIso ((upperShriek i).mapTriangle.obj T).mor₃
+  let E : S.obj T.obj₃ ≅ (S.obj T.obj₁)⟦(1 : ℤ)⟧ := asIso (S.mapTriangle.obj T).mor₃
   let Q := (upperStar i).obj ((derivedLowerStar j).obj G)
-  have := isIso_derivedLowerShriekUpperShriekAdjunction_unit_app (k₀ := k₀) (l := l) i Q
-  let v : Q ≅ (upperShriek i).obj ((derivedLowerShriek k₀ l i).obj Q) :=
-    asIso ((derivedLowerShriekUpperShriekAdjunction i).unit.app Q)
-  let e₃' : T.obj₃ ≅ (derivedLowerShriek k₀ l i).obj Q :=
-    e₃ ≪≫ (derivedLowerShriekObjIsoDerivedLowerStar i Q).symm
+  let v : Q ≅ S.obj ((derivedLowerStar i).obj Q) :=
+    asIso ((closedUpperShriekAdjunction i j hij.symm).unit.app Q)
   let e₁' : T.obj₁ ≅ (derivedLowerShriek k₀ l j).obj G :=
-    e₁ ≪≫ (derivedLowerShriek k₀ l j).mapIso (upperStarDerivedLowerStarIso j G)
-  let F₁ : ((upperShriek i).obj ((derivedLowerShriek k₀ l j).obj G))⟦(1 : ℤ)⟧ ≅ Q :=
-    (shiftFunctor _ (1 : ℤ)).mapIso ((upperShriek i).mapIso e₁'.symm) ≪≫ E.symm ≪≫
-      (upperShriek i).mapIso e₃' ≪≫ v.symm
+    e₁ ≪≫ (derivedLowerShriek k₀ l j).mapIso
+      (asIso ((upperStarDerivedLowerStarAdjunction j).counit.app G))
+  let F₁ : (S.obj ((derivedLowerShriek k₀ l j).obj G))⟦(1 : ℤ)⟧ ≅ Q :=
+    (shiftFunctor _ (1 : ℤ)).mapIso (S.mapIso e₁'.symm) ≪≫ E.symm ≪≫ S.mapIso e₃ ≪≫ v.symm
   exact ⟨(shiftFunctorCompIsoId _ (1 : ℤ) (-1) (by norm_num)).symm.app _ ≪≫
     (shiftFunctor _ (-1 : ℤ)).mapIso F₁⟩
 
+variable [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+
+/-- **The exceptional inverse image as a conjugate of the pullback, along a closed immersion**
+(blueprint: `thm-coef-qbar-verdier`, "`Rf^! = D_X f^* D_Y`", for a closed immersion `f = i`):
+`Ri^! L ≅ 𝔻_Z i^* 𝔻_X L`. Here `Ri^!` is the right adjoint
+`AlgebraicGeometry.WeilComplex.closedUpperShriek` of `Ri_*`, which is also the right adjoint of
+`Ri₀! ≅ Ri_*`, so this is the clause of `thm-coef-qbar-verdier` for `f = i`. -/
+theorem nonempty_closedUpperShriek_obj_iso
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (L : WeilComplex k₀ l X) :
+    Nonempty ((closedUpperShriek i j hij).obj L ≅
+      (verdierDual k₀ l Z).obj (op ((upperStar i).obj ((verdierDual k₀ l X).obj (op L))))) :=
+  sorry
+
+/-- **Step 2: the exceptional inverse image of a dual** (blueprint:
+`lem-a1-local-boundary-duality`, step 2): for a closed immersion `i` with open complement `j`,
+`Ri^! 𝔻_X K ≅ 𝔻_Z i^* K`, from `Ri^! = 𝔻_Z i^* 𝔻_X` and biduality on `X`. -/
+theorem nonempty_closedUpperShriek_verdierDual_iso
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (K : WeilComplex k₀ l X) :
+    Nonempty ((closedUpperShriek i j hij).obj ((verdierDual k₀ l X).obj (op K)) ≅
+      (verdierDual k₀ l Z).obj (op ((upperStar i).obj K))) := by
+  obtain ⟨e⟩ := nonempty_closedUpperShriek_obj_iso j i hij ((verdierDual k₀ l X).obj (op K))
+  obtain ⟨bX⟩ := nonempty_iso_verdierDual_rightOp_comp_verdierDual k₀ l X
+  exact ⟨e ≪≫ (verdierDual k₀ l Z).mapIso ((upperStar i).mapIso (bX.app K)).op⟩
+
 variable [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))] [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
 
 /-- **Step 4: the dual of the boundary complex** (blueprint: `lem-a1-local-boundary-duality`,
 step 4): for complementary immersions `j` and `i` and a Weil complex `G` on `U`,
@@ -186,11 +167,12 @@ theorem nonempty_verdierDual_upperStar_derivedLowerStar_iso
     Nonempty ((verdierDual k₀ l Z).obj (op ((upperStar i).obj ((derivedLowerStar j).obj G))) ≅
       ((upperStar i).obj ((derivedLowerStar j).obj ((verdierDual k₀ l U).obj (op G))))⟦(-1 : ℤ)⟧)
     := by
-  obtain ⟨e₂⟩ := nonempty_upperShriek_verdierDual_iso i ((derivedLowerStar j).obj G)
+  obtain ⟨e₂⟩ := nonempty_closedUpperShriek_verdierDual_iso j i hij.symm
+    ((derivedLowerStar j).obj G)
   obtain ⟨e₁⟩ := nonempty_verdierDual_derivedLowerStar_iso j G
-  obtain ⟨e₃⟩ := nonempty_upperShriek_derivedLowerShriek_iso j i hij
+  obtain ⟨e₃⟩ := nonempty_closedUpperShriek_derivedLowerShriek_iso j i hij
     ((verdierDual k₀ l U).obj (op G))
-  exact ⟨e₂.symm ≪≫ (upperShriek i).mapIso e₁ ≪≫ e₃⟩
+  exact ⟨e₂.symm ≪≫ (closedUpperShriek i j hij.symm).mapIso e₁ ≪≫ e₃⟩
 
 end Localization
 

@@ -84,6 +84,10 @@ universe u
 
 open CategoryTheory Polynomial Pretriangulated Opposite TopologicalSpace
 
+/- Through `WeilConjectures.WeilSheaf.Localization`, `Spec k₀` is also an object over itself via
+`specOverSpec`; prefer the identity structure `CategoryTheory.instOverClass`. -/
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ExchangeMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCounit
@@ -43,15 +44,18 @@ Frobenius pullback of the counit `φ̄^* φ̄_* M ⟶ M` is the counit at `Fr_X^
 Frobenius exchange isomorphisms of `φ̄^*` and `φ̄_*`
 (`AlgebraicGeometry.ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso` and
 `AlgebraicGeometry.ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso`). This is the
-statement that the adjunction counit carries a Weil structure.
+statement that the adjunction counit carries a Weil structure; it follows from the exchange
+isomorphism of `φ̄_*` being the mate of the inverse of that of `φ̄^*`
+(`AlgebraicGeometry.ProEtale.mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv`).
 (blueprint: `lem-fix-weil-operations`, the adjunction counits) -/
 theorem ProEtale.adicUpperStarLowerStarAdjunction_counit_frobenius :
     IsoAlgebra.CounitCompatible
       (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ (comp_over φ (Spec (CommRingCat.of k₀))))
       (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ (comp_over φ (Spec (CommRingCat.of k₀))))
       (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ
-        (comp_over φ (Spec (CommRingCat.of k₀))))).counit := by
-  sorry
+        (comp_over φ (Spec (CommRingCat.of k₀))))).counit :=
+  IsoAlgebra.counitCompatible_of_mateEquiv _ _ _
+    (mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv l φ _)
 
 variable (k₀ l) in
 /-- The counit `φ^* φ_* ⟶ 𝟭` of pro-étale Weil sheaves: the counit of `φ̄^* ⊣ φ̄_*`, which is
