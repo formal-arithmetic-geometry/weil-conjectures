@@ -14,6 +14,7 @@ import WeilConjectures.WeilSheaf.LowerShriek
 import WeilConjectures.WeilSheaf.CohomologyNonneg
 import WeilConjectures.AlgebraicGeometry.DenseCompactification
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
 
 /-!
 # Compactly supported cohomology of the constant Weil sheaf
@@ -34,6 +35,10 @@ universe u
 open CategoryTheory Limits Endofunctor
 
 open scoped AlgebraicGeometry.ProEtale
+
+-- `Spec k₀` over itself: prefer the identity structure over `AlgebraicGeometry.specOverSpec`,
+-- which is imported through the étale cohomological dimension bound.
+attribute [local instance 1100] CategoryTheory.instOverClass
 
 namespace AlgebraicGeometry
 
@@ -204,6 +209,26 @@ theorem subsingleton_compactlySupportedCohomology_of_iso {F G : WeilSheaf k₀ l
     @ModuleCat.isZero_of_subsingleton _ _ _ hG
   exact ModuleCat.subsingleton_of_isZero ((WeilCoefficients.toModuleCat l).map_isZero
     (hz.of_iso (eF ≪≫ Φ.mapIso e ≪≫ eG.symm)))
+
+end WeilSheaf
+
+namespace WeilSheaf
+
+/-- A Weil sheaf whose underlying `ℓ`-adic sheaf is the constant sheaf `ℚ̄_ℓ` has no cohomology
+above twice the dimension of the geometric fiber. -/
+theorem subsingleton_cohomology_of_carrier_iso_unit {Y : Scheme.{u}}
+    [Y.Over (Spec (CommRingCat.of k₀))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l Y)
+    (eF : F.obj.carrier ≅ ProEtale.AdicSheaf.unit l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (d : ℕ)
+    (hd : topologicalKrullDim (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (d : WithBot ℕ∞))
+    (r : ℕ) (hr : 2 * d < r) : Subsingleton (F.cohomology r).carrier :=
+  subsingleton_cohomology_of_isZero_rightDerived F r
+    ((ProEtale.isZero_rightDerived_Γ_adicConstantSheaf_of_two_mul_lt
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure d hd r hr).of_iso
+        (((Sheaf.Γ _ (WeilCoefficients.{u} l)).rightDerived r).mapIso
+          ((ProEtale.AdicSheaf.forget _).mapIso eF)))
 
 end WeilSheaf
 
