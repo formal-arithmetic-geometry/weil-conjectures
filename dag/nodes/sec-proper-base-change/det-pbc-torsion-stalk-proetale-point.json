@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pbc-torsion-stalk-proetale-point",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sections at a pro-étale geometric point",
@@ -12,42 +12,249 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.md",
   "place": "node det-pbc-torsion-stalk-proetale-point, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-torsion-etale-sheaf"
+ ],
  "proof": [
   {
-   "text": "*(1)* A weakly étale $\\Omega$-algebra is ind-étale, hence a filtered colimit\nof finite products of copies of $\\Omega$; so every affine object of\n$P_{\\mathrm{proét}}$ is $\\operatorname{Spec}C(S,\\Omega)$ for a profinite set\n$S$ ($C(S,\\Omega)$ the locally constant functions). Since $P$ is\nquasi-compact, every pro-étale covering of $P$ is refined by a covering with a\nsingle affine member $\\operatorname{Spec}C(S,\\Omega)\\to P$ (a finite disjoint\nunion of affine members), with $S\\neq\\emptyset$, and such a map has a\nsection (choose a point of $S$). Hence an epimorphism of sheaves\n$M\\to N$ is surjective on sections over $P$: a section of $N$ over $P$ lifts\nafter such a covering, and pulling back along the section gives a lift over\n$P$. So $\\Gamma(P,-)$ is exact, and $R\\Gamma(P,-)$ is computed termwise on\nbounded below complexes.",
-   "uses": [],
-   "elementary": null
+   "text": "The ring $\\Omega$ is w-contractible in the ring sense of [sk-def-pe-wlocal]. Indeed $\\operatorname{Spec}\\Omega$ is a singleton, so its closed-point set is closed, every point has a unique closed specialization, and its component space is extremally disconnected (its only opens are the empty set and the singleton). Its only local ring is $\\Omega$. The pair $(\\Omega,0)$ is henselian by [def-weil-pbc-henselian-terminology]: for every finite $\\Omega$-algebra $B$, the map $B\\to B/0B$ is the identity, so its idempotents lift uniquely. Its residue field is the separably closed field $\\Omega$. Thus it is w-strictly local as well. This checks the hypotheses needed to evaluate at the affine weakly contractible terminal object $P$; it requires no assertion that all weakly etale algebras are ind-etale.",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(1), verification of the weakly contractible point"
+   }
   },
   {
-   "text": "*(2)* Every étale $\\Omega$-scheme is a disjoint union of copies of $P$, so\n$\\Gamma(P_{\\Et},-)$ is an equivalence from sheaves on $P_{\\Et}$ to sets (and\nto $\\Lambda$-modules for module sheaves), with exact inverse\n$N\\mapsto\\underline N$. The pullback $\\nu_P^*\\underline N$ is the\npro-étale sheaf associated with the presheaf\n$\\operatorname{Spec}C(S,\\Omega)\\mapsto\\varinjlim N$ over étale maps, that is\n$S\\mapsto C(S,N)$ (locally constant functions), whose value on $P$ is $N$. As\n$\\nu_P^*$ and $\\Gamma(P_{\\mathrm{proét}},-)$ are both exact, the\nidentification extends termwise to complexes.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [det-pe-wc-sections-exact] with $X=U=P$ and the constant sheaf of rings with value $\\Lambda$. It says exactly that sections of module sheaves at this affine w-contractible object are exact. Apply [det-pe-wc-sections-derived] to the same object and ring: for any representing complex $M^\\bullet$, its canonical comparison $M^\\bullet(P)\\to R\\Gamma(P_{\\mathrm{proét}},M)$ is an isomorphism. In particular the assertion holds for bounded-below $M$. This proves (1), with the natural termwise-to-derived comparison rather than an arbitrary choice of isomorphism.",
+   "uses": [
+    "det-pe-wc-sections-exact",
+    "det-pe-wc-sections-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(1), exact sections and their derived comparison"
+   }
   },
   {
-   "text": "*(3)* The geometric stalk $(Rf_*K_{\\mathrm{ét}})_{\\bar y}$ is by definition\n$\\Gamma(P_{\\Et},\\bar y^{-1}Rf_*K_{\\mathrm{ét}})$. By the comparison\nisomorphisms $\\bar y^*\\nu_Y^*\\simeq\\nu_P^*\\bar y^{-1}$ and\n$\\nu_Y^*Rf_*K_{\\mathrm{ét}}\\simeq Rf_*\\nu_X^*K_{\\mathrm{ét}}=Rf_*K$\n([prop-weil-pbc-comparison-direct-image], $f$ being qcqs), and by (2), it is\n$\\Gamma(P_{\\mathrm{proét}},\\bar y^*Rf_*K)$. By proper base change for the\nsquare with $g=\\bar y$, transported to the pro-étale site as in\n[lem-weil-pbc-transport-identifies-exchange], $\\bar y^*Rf_*K\\simeq\nRa_*i^*K$. Applying the exact functor $\\Gamma(P_{\\mathrm{proét}},-)$ of (1)\nand composing derived global sections,\n$\\Gamma(P_{\\mathrm{proét}},Ra_*i^*K)=R\\Gamma(P_{\\mathrm{proét}},Ra_*i^*K)\n=R\\Gamma(X_{\\bar y,\\mathrm{proét}},i^*K)$. The agreement with the étale\nfibre isomorphism (for finite $\\Lambda$ this is\n[cor-weil-pbc-geometric-fiber-finite]) holds because every identification\nused is induced by the comparison morphisms $\\nu$, which are compatible with\nunits and counits.",
+   "text": "By clause (1) of [lem-weil-pbc-geometric-point-pullback-stalk], $\\Gamma(P_{\\Et},-)$ is an exact equivalence of module sheaves with $\\Lambda$-modules, for this arbitrary ring $\\Lambda$. Apply [lem-weil-pbc-comparison-sections] to the affine scheme $P$ and its basis object $P$, presented by the constant one-object etale system $P$. It gives the natural module isomorphism $(\\nu_P^*F)(P)=F(P)$ for every etale module sheaf $F$. The comparison inverse image is exact on underlying abelian sheaves by [lem-weil-pbc-site-pullback-abelian-exact]; this also gives module exactness because kernels and cokernels have the underlying abelian kernels and cokernels by [def-weil-sheaf-of-modules-category]. Exact functors act termwise on derived categories and preserve bounded-below objects by [lem-weil-pbc-exact-functor-bounded-below]. Consequently the sheaf isomorphisms just obtained form an isomorphism of section complexes for any representative of $L$, descend through quasi-isomorphisms, and identify $\\Gamma(P_{\\mathrm{proét}},\\nu_P^*L)$ with $L(P)$. This proves (2).",
+   "uses": [
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-pbc-comparison-sections",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(2), exact equivalence and comparison on the terminal affine"
+   }
+  },
+  {
+   "text": "In (3) put $g=\\bar y$, $f'=a$, and $g'=i$. The map $a$ is proper by [lem-weil-pbc-proper-base-change]. Both $f$ and $a$ are qcqs: by [def-weil-proper-morphism] and [def-weil-finite-type-morphism] they are quasi-compact; their diagonals are closed immersions, whose inverse images of affine opens are affine spectra of quotient rings by [def-weil-closed-immersion], hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. This is quasi-separatedness by [def-weil-quasi-separated-morphism]. In the following formulas write $A_T=\\nu_T^*$, $l_u=u_{\\Et}^{-1}$, $r_u=Ru_{\\Et,*}$, $p_u=u_{\\mathrm{proét}}^*$, and $s_u=Ru_{\\mathrm{proét},*}$. The pullback comparison [lem-weil-pbc-comparison-pullback] gives $\\alpha_u:A_Ul_u\\xrightarrow{\\sim}p_uA_V$ for every $u:U\\to V$. Use throughout the fixed derived comparisons of [def-weil-pbc-fixed-derived-comparisons], whose direct-image comparison is the derived underived restriction mate, not a separately chosen isomorphism. The arbitrary-ring statement [stage3-proetale-comparison-counit] supplies its counit identity and explicitly treats this fixed direct-image comparison as an isomorphism. For the qcqs maps just verified, [prop-weil-pbc-comparison-direct-image] gives $\\beta_u:A_Vr_u\\xrightarrow{\\sim}s_uA_U$ for $u=f,a$. Thus\n$$S_L=p_g(\\beta_{f,L})\\circ\\alpha_{g,r_fL}:A_Pl_gr_fL\\xrightarrow{\\sim}p_gs_fA_XL.$$\nClause (2) of [lem-weil-pbc-geometric-point-pullback-stalk] is natural in the abelian sheaf; applying this naturality to every scalar endomorphism makes the identification $\\Lambda$-linear. Applied degreewise and then to complexes using its exact functors, it identifies the usual geometric stalk with $\\Gamma(P_{\\Et},l_gr_fK_{\\mathrm{ét}})$. Step 3 and $\\Gamma(P_{\\mathrm{proét}},S_{K_{\\mathrm{ét}}})$ give the first isomorphism in (3). No finiteness assumption on $\\Lambda$ was used.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-quasi-separated-morphism",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-fixed-derived-comparisons",
+    "stage3-proetale-comparison-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(3), first comparison isomorphism and the qcqs hypotheses"
+   }
+  },
+  {
+   "text": "The bounded-below comparison [sk-prop-sf-comparison] supplies the derived unit hypothesis in [det-pe-classical-derived-equivalence]. Therefore $K=A_XK_{\\mathrm{ét}}$ belongs to $D^+_{\\mathrm{class}}$. Its cohomology is torsion: exactness gives $H^q(K)=A_XH^q(K_{\\mathrm{ét}})$ by [lem-weil-pbc-exact-functor-bounded-below]. To check torsion directly, put $F=H^q(K_{\\mathrm{ét}})$ and form its kernel subsheaves $F[n]$ as module sheaves. By [lem-weil-pbc-module-sheaves-colimits-forgetful], their kernels and filtered colimit have the corresponding underlying abelian sheaves. Thus the torsion hypothesis says $F\\cong\\varinjlim_{n\\geq1}F[n]$, indexed by the positive integers ordered by divisibility, using [def-weil-pbc-torsion-etale-sheaf]. The fixed-coefficient inverse-image adjunction in [def-weil-pbc-site-comparison-morphism] is obtained from the set adjunction by restricting to maps commuting with addition and scalar actions; naturality of its unit and counit ensures that adjuncts are linear. It is therefore an adjunction for this arbitrary $\\Lambda$, so the inverse image preserves this colimit (maps from its image correspond to compatible maps from the stages). Forgetting again with [lem-weil-pbc-module-sheaves-colimits-forgetful], its exactness from Step 3 identifies $A_XF[n]$ with $(A_XF)[n]$. Thus their colimit is $A_XF$. Apply [sk-thm-properbasechange] to the cartesian square with $g=\\bar y$: the specified pro-etale exchange $E^p_K:p_gs_fK\\to s_ap_iK$ is an isomorphism. Applying the exact sections functor from Step 2 gives an isomorphism to $\\Gamma(P_{\\mathrm{proét}},Ra_*i^*K)$.",
+   "uses": [
+    "sk-prop-sf-comparison",
+    "det-pe-classical-derived-equivalence",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-site-comparison-morphism",
+    "sk-thm-properbasechange",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(3), classical torsion hypothesis and proper exchange"
+   }
+  },
+  {
+   "text": "For completeness the composition with derived global sections over the point has a direct resolution calculation. The inverse image $i^*$ is exact by [def-weil-pbc-proetale-operations], hence preserves the cohomological lower bound by [lem-weil-pbc-exact-functor-bounded-below]. Start with a complex $C$ representing $i^*K$ and a bound $n$ below which its cohomology vanishes. Replace it by the good truncation with zero terms below $n$, term $\\operatorname{coker}(d^{n-1})$ in degree $n$, and terms $C^r$ above $n$ with induced differentials: the projection from $C$ induces the identity on cohomology in degrees at least $n$, and both sides have zero cohomology below $n$. This is a bounded-below representative. Apply [lem-sc-bounded-below-injective-resolution] to obtain its bounded-below K-injective resolution $J$. The resolution formula of [def-weil-pbc-proetale-operations] can use $J$: by [lem-weil-pbc-kinjective-hom-derived], the isomorphism between $J$ and the fixed K-injective resolution is represented by a homotopy equivalence; the additive functor $a_*$ preserves its homotopy inverse. Therefore $Ra_*i^*K$ is represented by $a_*J$. Sections on $P$ are exact by Step 2, so their derived value on this representative is the ordinary complex $\\Gamma(P,a_*J)$. The section formula in [def-weil-pbc-proetale-operations] gives the equality of complexes $\\Gamma(P,a_*J)=\\Gamma(X_{\\bar y},J)$, which computes $R\\Gamma(X_{\\bar y,\\mathrm{proét}},i^*K)$. The equality commutes with morphisms of resolutions since it is equality of evaluations and restriction maps in every degree. Therefore it is the canonical derived-sections composition comparison, and proves the second isomorphism in (3).",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(3), composition of sections, expanded on a single resolution"
+   }
+  },
+  {
+   "text": "We verify the maps, using arbitrary commutative coefficients, rather than applying the finite-ring transport statement. For $L=K_{\\mathrm{ét}}$ put\n$$T_L=s_a(\\alpha_{i,L})\\circ\\beta_{a,l_iL}:A_Pr_al_iL\\xrightarrow{\\sim}s_ap_iA_XL.$$\nLet $E^e_L:l_gr_fL\\to r_al_iL$ be the etale unit--square--counit exchange of [sk-def-exchange]. The fixed $\\beta$'s selected in Step 4 already satisfy the counit identity of [stage3-proetale-comparison-counit], which states this identity for arbitrary commutative $\\Lambda$. The pullback square identity is [stage3-proetale-comparison-square]. These identities imply\n$$E^p_{A_XL}\\circ S_L=T_L\\circ A_P(E^e_L).$$\nHere is the adjunction calculation: transpose both sides under $p_a\\dashv s_a$, using the bijection of [def-weil-pbc-adjunction-mate]. For the right side, naturality of $\\varepsilon_a^p$ first moves $s_a(\\alpha_i)$ past the counit. The counit identity for $\\beta_a$ and naturality of $\\alpha_a$ then give\n$$\\alpha_{i,L}\\circ A_{X_{\\bar y}}(\\varepsilon^e_{a,l_iL}\\circ l_a(E^e_L))\\circ\\alpha_{a,l_gr_fL}^{-1}\n=\\alpha_{i,L}\\circ A_{X_{\\bar y}}(l_i(\\varepsilon^e_{f,L})\\circ\\theta^e_{r_fL})\\circ\\alpha_{a,l_gr_fL}^{-1}.$$\nFor the left side, the exchange-mate definition gives $p_i(\\varepsilon_f^p)\\circ\\theta^p\\circ p_a(S_L)$. Move $p_ap_g(\\beta_f)$ through $\\theta^p$ by naturality; use the square identity for the $\\alpha$'s to replace $\\theta^p\\circ p_a(\\alpha_g)$; finally use the counit identity $\\varepsilon_f^p\\circ p_f(\\beta_f)\\circ\\alpha_f=A_X(\\varepsilon_f^e)$. Explicitly the square identity reads\n$$\\theta^p_{A_Yr_fL}\\circ p_a(\\alpha_{g,r_fL})=p_i(\\alpha_{f,r_fL})\\circ\\alpha_{i,l_fr_fL}\\circ A_{X_{\\bar y}}(\\theta^e_{r_fL})\\circ\\alpha_{a,l_gr_fL}^{-1}.$$\nSubstitute this after moving $\\beta_f$ through the square. The counit and comparison factors of the transpose become $p_i(\\varepsilon_f^p\\circ p_f(\\beta_{f,L})\\circ\\alpha_{f,r_fL})=p_iA_X(\\varepsilon^e_{f,L})$. Naturality of $\\alpha_i$ then gives $\\alpha_{i,L}\\circ A_{X_{\\bar y}}(l_i(\\varepsilon^e_{f,L})\\circ\\theta^e_{r_fL})\\circ\\alpha_{a,l_gr_fL}^{-1}$, the displayed right-hand transpose. Injectivity of transposition proves the claimed equality. This supplies the compatibility missing from the imported phrase about units and counits.",
+   "uses": [
+    "sk-def-exchange",
+    "stage3-proetale-comparison-counit",
+    "stage3-proetale-comparison-square",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(3), last sentence: explicit counit and square calculation"
+   }
+  },
+  {
+   "text": "Apply $\\Gamma(P_{\\mathrm{proét}},-)$ to the equality of Step 7. Under Step 3, the left source is the usual etale stalk; under Step 6, the right target is fibre cohomology. The map $\\Gamma(P,T_L)$ is the usual comparison on fibre cohomology followed by the inverse-image identification $A_{X_{\\bar y}}l_iL\\simeq p_iA_XL$: indeed $T_L$ is the direct-image comparison for $a$ followed by that identification. Here is the resolution-level verification using [def-weil-pbc-fixed-derived-comparisons]. Represent $l_iL$ by a bounded-below injective complex $I$ on the etale fibre, using the good truncation of Step 6 and [lem-sc-bounded-below-injective-resolution]. Choose a bounded-below injective resolution $A_{X_{\\bar y}}I\\to J$ on the pro-etale fibre by the same lemma. The specified derived restriction mate $\\beta_{a,l_iL}$ is represented by the termwise underived mate $A_Pa_*I\\to a_*A_{X_{\\bar y}}I$ followed by $a_*A_{X_{\\bar y}}I\\to a_*J$. Under Step 3 and the direct-image evaluation formulas, its section map is\n$$\\Gamma(X_{\\bar y,\\Et},I)\\longrightarrow\\Gamma(X_{\\bar y,\\mathrm{proét}},A_{X_{\\bar y}}I)\\longrightarrow\\Gamma(X_{\\bar y,\\mathrm{proét}},J).$$\nFor each degree, the first arrow sends a section to its inverse-image section: the underived mate is adjoint to inverse image of the etale counit, and at the terminal object this counit evaluates a section of $a_*I^r$ as that section of $I^r$. The second arrow is induced by the chosen resolution. This is precisely the canonical derived cohomology comparison of [sk-prop-sf-comparison]. Independence of the resolutions follows from [lem-weil-pbc-kinjective-hom-derived]: comparison homotopy equivalences remain homotopy equivalences after additive direct image and evaluation. Composing with $s_a(\\alpha_i)$ gives the asserted identification of $\\Gamma(P,T_L)$. For the section composition on the etale side, use this same $I$; [def-weil-pbc-direct-image] computes $r_al_iL$ by $a_*I$, and the exact etale point sections of Step 3 give $\\Gamma(P,a_*I)=\\Gamma(X_{\\bar y},I)$. Thus $\\Gamma(P_{\\Et},E^e_L)$ is exactly the etale fibre morphism. Step 7 says the composite of the two isomorphisms in (3) is this morphism followed by the canonical fibre comparison and the inverse-image identification. Since that comparison and the composite are isomorphisms, the etale fibre morphism is also an isomorphism. This proves the final compatibility for arbitrary $\\Lambda$, including infinite rings, without using the finite-coefficient fibre corollary.",
    "uses": [
     "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-transport-identifies-exchange",
-    "cor-weil-pbc-geometric-fiber-finite"
+    "sk-prop-sf-comparison",
+    "lem-sc-bounded-below-injective-resolution",
+    "def-weil-pbc-direct-image",
+    "stage3-proetale-comparison-counit",
+    "def-weil-pbc-fixed-derived-comparisons",
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(3), agreement with the canonical etale fibre map and cohomology comparison"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-henselian-terminology",
+  "det-pe-wc-sections-exact",
+  "det-pe-wc-sections-derived",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-comparison-sections",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-comparison-pullback",
   "prop-weil-pbc-comparison-direct-image",
-  "lem-weil-pbc-transport-identifies-exchange",
-  "cor-weil-pbc-geometric-fiber-finite",
-  "thm-weil-pbc-site-comparison"
+  "def-weil-pbc-fixed-derived-comparisons",
+  "stage3-proetale-comparison-counit",
+  "sk-prop-sf-comparison",
+  "det-pe-classical-derived-equivalence",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-thm-properbasechange",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-bounded-below-injective-resolution",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "sk-def-exchange",
+  "stage3-proetale-comparison-square",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+  "place": "Clauses (1)-(3), expanded using the existing weakly contractible-section and comparison nodes; arbitrary-coefficient mate calculation written out in Steps 7-8"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|weakly[Cc]ontractible",
+   "results": "; 10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states all three clauses; the hits concern sites, evaluation, or ordinary scheme stalks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of module sheaves on the pro-etale site of an algebraically closed field and proper base change geometric stalk formula",
+   "results": "; 8 hits: SheafOfModules.sectionsFunctor_obj, SheafOfModules.sections, AlgebraicGeometry.termΓ(_,_), CategoryTheory.Sheaf.Γ, ModuleCat.Tilde.toOpen_germ_apply, SheafOfModules.sectionsFunctor, CategoryTheory.HasGlobalSectionsFunctor, AlgebraicGeometry.Scheme.Γ_def",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states all three clauses; the hits concern sites, evaluation, or ordinary scheme stalks"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, Functor.Exact",
+   "results": "loogle: unknown identifier 'Functor.Exact'; 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states all three clauses; the hits concern sites, evaluation, or ordinary scheme stalks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections on the pro-etale site of an algebraically closed field are exact and the derived proper pushforward geometric stalk equals fibre cohomology",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states all three clauses; the hits concern sites, evaluation, or ordinary scheme stalks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric point has exact sections on proetale module sheaves and etale pullback gives the same derived sections",
+   "results": "; 8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.formallyEtale, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale.forget, StandardEtalePair.instFormallyEtaleRing, Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states all three clauses; the hits concern sites, evaluation, or ordinary scheme stalks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafSections\"",
+   "results": "; 5 hits: CategoryTheory.sheafSections, CategoryTheory.sheafSectionsNatIsoEvaluation, CategoryTheory.sheafSectionsNatIsoEvaluation_hom_app, CategoryTheory.sheafSectionsNatIsoEvaluation_inv_app, CategoryTheory.Sheaf.ΓNatIsoSheafSections",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states all three clauses; the hits concern sites, evaluation, or ordinary scheme stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "Proetale.*(baseChange|stalk)|sheafSections.*preserves",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match: no result for the broader section-functor or geometric-stalk query"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafSections\", \"PreservesEpimorphisms\"",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match: no result for the broader section-functor or geometric-stalk query"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -79,5 +286,89 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-pbc-torsion-stalk-proetale-point",
+  "worker": "stage1",
+  "summary": "No new nodes. Kept all three clauses verbatim; supplied statement dependencies; replaced the uncited point calculation by existing w-contractible evaluation results; checked proper qcqs and classical torsion hypotheses; computed composition on a single injective representative; expanded the arbitrary-coefficient exchange-mate calculation instead of invoking finite-ring transport and fibre nodes. Second reader fixed the named comparison at its first use, justified module-to-abelian torsion colimits, and made bounded representatives and the resolution-level comparison explicit.",
+  "blueprint": "Proof (1) realized by Steps 1-2, (2) by Step 3, and (3) by Steps 4-8; all retain the unit route: geometric-point proper exchange, exact point sections, classical identification with the etale stalk.",
+  "tool_uses": [
+   {
+    "node": "sk-def-pe-wlocal",
+    "why": "Ring notion used to recognize the singleton field spectrum; the unit does not define w-contractible rings."
+   },
+   {
+    "node": "def-weil-pbc-henselian-terminology",
+    "why": "Definition of strict henselianity needed for the field check."
+   },
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "Generic exact evaluation theorem at a w-contractible affine; supplies the point exactness input."
+   },
+   {
+    "node": "det-pe-wc-sections-derived",
+    "why": "Generic termwise computation for exact sections at a w-contractible affine."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Exact etale point equivalence and its natural identification with ordinary stalks."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic exactness of the abelian inverse image, also for arbitrary coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic passage of exact functors and their cohomology comparisons to D+."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Affine spectra of quotient rings are quasi-compact, checking proper implies qcqs."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "The arbitrary-ring bounded-below cohomology comparison; the similarly named older node assumes finite coefficients."
+   },
+   {
+    "node": "det-pe-classical-derived-equivalence",
+    "why": "Ensures the given etale-origin complex meets the classicality hypothesis of the unit proper base change theorem."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic ringed-site resolution used for the direct computation of derived sections."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic module-sheaf forgetful exactness and colimit theorem, needed to check torsion of underlying abelian cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic K-injective comparison theorem, needed to replace fixed resolutions and identify canonical derived-section maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-henselian-terminology",
+  "det-pe-wc-sections-exact",
+  "det-pe-wc-sections-derived",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "sk-prop-sf-comparison",
+  "det-pe-classical-derived-equivalence",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-d9ccdf003",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-d9ccdf003 (reviewer sub-agent of L); spot-checked: I read the item, the blueprint main-20261015 statement and proof, the unit record and all 32 cited statements in full. The item statement is byte-identical to the blueprint: arbitrary commutative Lambda, nothing weakened. There are 0 new nodes, no cycle, and proof_deps equals the union of the step uses. Step 1: Spec of the algebraically closed field is w-contractible under sk-def-pe-wlocal; (Omega,0) is henselian because B->B/0B is the identity. Step 2: det-pe-wc-sections-exact and det-pe-wc-sections-derived apply with X=U=P. Step 3: clause (1) of lem-weil-pbc-geometric-point-pullback-stalk covers every ring; lem-weil-pbc-comparison-sections applies with the one-object presentation; abelian exactness lifts to modules. Step 4: proper gives qcqs through the closed-immersion diagonal, and the directions of alpha and beta are correct. Beta is the fixed construction of def-weil-pbc-fixed-derived-comparisons, the same map stage3-proetale-comparison-counit treats for arbitrary Lambda (its proof step 4). That node's stmt_dep points loosely at the finite-ring canonical-mate node; this is outside the delivery and harmless. Step 5: classicality comes from sk-prop-sf-comparison plus det-pe-classical-derived-equivalence (1). Torsion holds because nu* is an exact left adjoint and the forgetful functor preserves kernels and colimits; no common exponent is needed. Step 6: the good truncation, K-injective resolution and (a_*J)(P)=J(X_ybar) are correct. Step 7: I redid the transpose calculation under p_a -| s_a with the counit identity and the square identity at M=r_fL, and it is correct. Step 8: on a bounded-below injective, the resolution-level fixed derived base change gives the canonical sf comparison, so the etale fibre map is the stated map and an isomorphism without the finite-ring corollary. Edge cases checked: Lambda=0, Z, Q; K=0; empty fibre; f=id. The rg search found no duplicates. I accept four off-route tool_uses: det-pe-wc-sections-exact, det-pe-wc-sections-derived, sk-prop-sf-comparison and det-pe-classical-derived-equivalence. The unit step genuinely needs each of these facts and no node of the unit's route states them. No SGA is used. No fixes."
  }
 }

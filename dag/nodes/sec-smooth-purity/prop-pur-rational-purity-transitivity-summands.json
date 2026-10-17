@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-pur-rational-purity-transitivity-summands",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Transitivity and summand preservation of rational purity",
@@ -13,35 +13,184 @@
   "place": "node prop-pur-rational-purity-transitivity-summands, order 2025"
  },
  "stmt_deps": [
+  "thm-pur-rational-and-qbar-purity",
   "thm-weil-pbc-idempotent-complete-triangulation",
   "prop-weil-pbc-descent-functors"
  ],
  "proof": [
   {
-   "text": "Two lattices of the same $E$-object are related by inverting a\ndenominator, and the two purity isomorphisms differ by the\ncorresponding unit ([prop-weil-pbc-rational-transport]); a finite\nextension $E'\\supset E$ is flat, and the transport is the tensor with\n$E'$, giving the transitivity. The independence from the finite stage\nand from the particular presentation is the independence of the descent\nfunctors of [prop-weil-pbc-descent-functors] and the idempotent\ncompleteness of [thm-weil-pbc-idempotent-complete-triangulation]\n(the purity isomorphism is natural in the object by [prop-pur-smooth-purity-naturality-cover], hence commutes with\nthe descent from a finite stage and with the extension of the\ncoefficient field).",
+   "text": "Work with the purity isomorphisms of [thm-pur-rational-and-qbar-purity], in its stated setting: $f:X\\to Y$ is smooth separated of pure relative dimension $d\\geq0$ between separated finite-type schemes over the fixed algebraic closure $k$ of a finite field of characteristic $p$, and $\\ell\\ne p$. Both schemes are noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over $\\operatorname{Spec}k$ (a field has just the ideals $0,k$), and finite-dimensional by [lem-kun-dimension-finite-type]; $\\ell$ is a unit in every local ring. The integral category underlying [def-weil-pbc-rational-category] agrees, with the same completed coefficient sheaf and reductions, with the derived-complete category by [lem-weil-pbc-integral-stratified-perfect-characterization]. Every such lattice has a uniform finite-level Tor interval by [lem-coef-integral-residue-tor], so the hypotheses of [lem-pur-adic-purity-scalar-naturality] hold for all these lattices. Use its simultaneous integral family $\\gamma^I_E:H^I_E\\Rightarrow G^I_E$, with $H^I_E=Lf_E^*(-)(d)[2d]$ and $G^I_E=Rf_E^!$, and its exact linear comparison maps $a^I_{F/E},b^I_{F/E}$. The rational maps under discussion are the rationalizations of this compatible integral construction, as in [thm-pur-rational-and-qbar-purity]; we do not choose independent lifts separately for individual objects or coefficient fields.",
+   "uses": [
+    "thm-pur-rational-and-qbar-purity",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "def-weil-pbc-rational-category",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-coef-integral-residue-tor",
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md",
+    "place": "Proof, lattice clause: verify the actual coefficient categories and select a compatible integral family before localizing"
+   }
+  },
+  {
+   "text": "Let $Q_E$ denote scalar localization at $\\varpi_E$. Apply [prop-weil-pbc-rational-transport] to the supplied exact linear functors $H^I_E,G^I_E$ and the natural transformation $\\gamma^I_E$ from Step 1. Write their extensions as $H_E,G_E$ and $\\gamma_{E,K}=Q_E(\\gamma^I_{E,K})$. The inverse is $Q_E((\\gamma^I_{E,K})^{-1})$, since functors preserve the two inverse equations. By [def-weil-pbc-rational-category], every rational morphism can be written $u/\\varpi_E^r$ with $u$ integral. Multiply the integral naturality equation $G^I_E(u)\\gamma^I_{E,K}=\\gamma^I_{E,L}H^I_E(u)$ by $\\varpi_E^{-r}$ to obtain\n$$G_E(u/\\varpi_E^r)\\gamma_{E,K}=\\gamma_{E,L}H_E(u/\\varpi_E^r).$$\nFor an isomorphism $v:K\\to L$ between two lattice presentations this is $\\gamma_{E,L}=G_E(v)\\gamma_{E,K}H_E(v)^{-1}$. This is independence under change of presentation, not multiplication of the purity map by an unspecified unit. In particular rational idempotents, even ones not represented by integral idempotents, satisfy the same naturality equation.",
    "uses": [
     "prop-weil-pbc-rational-transport",
-    "prop-weil-pbc-descent-functors",
-    "thm-weil-pbc-idempotent-complete-triangulation",
-    "prop-pur-smooth-purity-naturality-cover"
+    "def-weil-pbc-rational-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md",
+    "place": "Proof, first sentence: replace the informal denominator/unit assertion by localized naturality"
+   }
+  },
+  {
+   "text": "For $E\\subset F$ use $T^W_{F/E}$ of [prop-weil-pbc-scalar-extension], where $W=X,Y$. Its integral functor is precisely ordinary derived tensor by the completed coefficient sheaf, the presentation used in [lem-pur-adic-purity-scalar-naturality]; thus no identification of completed tensor with tensor by a discrete constant field is being made. On integral objects put $a_{F/E,K}=Q_F(a^I_{F/E,K})$ and $b_{F/E,K}=Q_F(b^I_{F/E,K})$. Here coefficient change has target an $\\mathcal O_F$-linear category, whereas its source is $\\mathcal O_E$-linear: first apply $Q_F$, and use the scalar-extension functor of [prop-weil-pbc-scalar-extension] on the localized source. For a morphism $u/\\varpi_E^r$, divide the integral naturality equation for either comparison by the image of $\\varpi_E^r$ in $F$; it is a nonzero field element and hence invertible. This proves naturality on every localized morphism without applying a same-coefficient transport assertion directly to different coefficient rings. Rationalizing the integral coefficient square gives the square below. Denote the resulting maps by\n$$a_{F/E}:T^X_{F/E}H_E\\xrightarrow{\\sim}H_FT^Y_{F/E},\\qquad b_{F/E}:T^X_{F/E}G_E\\xrightarrow{\\sim}G_FT^Y_{F/E}.$$\nThey satisfy, including on localized morphisms by Step 2,\n$$b_{F/E,K}T^X_{F/E}(\\gamma_{E,K})=\\gamma_{F,T^Y_{F/E}K}a_{F/E,K}.$$\nThe integral unit, associator and shift equations remain equations after localization. To display transitivity, abbreviate $T_{L/F}$ by $T_2$, $T_{F/E}$ by $T_1$, and let $A^W:T^W_2T^W_1\\to T^W_{L/E}$ be the tensor associator for $E\\subset F\\subset L$. The composite $b$ comparison is $B=b_{L/F,T^Y_1K}T^X_2(b_{F/E,K})$, and the composite $a$ comparison is $D=a_{L/F,T^Y_1K}T^X_2(a_{F/E,K})$. Substitution of the two coefficient squares gives\n$$B\\,T^X_2T^X_1(\\gamma_{E,K})=\\gamma_{L,T^Y_2T^Y_1K}\\,D.$$\nTheir composition laws say $b_{L/E,K}A^X_{G_EK}=G_L(A^Y_K)B$ and $a_{L/E,K}A^X_{H_EK}=H_L(A^Y_K)D$. Naturality of $A^X$ and $\\gamma_L$ therefore turns the preceding equality into\n$$b_{L/E,K}T^X_{L/E}(\\gamma_{E,K})A^X_{H_EK}=\\gamma_{L,T^Y_{L/E}K}a_{L/E,K}A^X_{H_EK}.$$\nCancel $A^X_{H_EK}$. This is exactly the direct $E\\subset L$ coefficient square. For the identity extension both comparisons are identities. Hence successive extension and direct extension agree, with the specified associators; flatness alone would not prove this equality.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md",
+    "place": "Proof, finite-extension sentence: coefficient square, identity extension and explicit two-extension calculation"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-descent-functors] to $H_E,G_E$ with the exact scalar comparisons of Step 3. Their unit, associator and shift hypotheses were verified there. The purity components satisfy its natural-transformation compatibility, and so do their inverses, since the coefficient square rearranges to\n$$T^X_{F/E}(\\gamma_{E,K}^{-1})b_{F/E,K}^{-1}=a_{F/E,K}^{-1}\\gamma_{F,T^Y_{F/E}K}^{-1}.$$\nFor completeness, an object of [def-weil-pbc-qbar-category] is $(E,K)$ and a morphism from $(E,K)$ to $(F,L)$ is represented over a common finite field $M$ by $u:T^Y_{M/E}K\\to T^Y_{M/F}L$. Put $U=T^Y_{M/E}K$, $V=T^Y_{M/F}L$, and abbreviate the comparison components at $K,L$ by $a_E,a_F,b_E,b_F$. The two descended functor images are represented by $a_F^{-1}H_M(u)a_E$ and $b_F^{-1}G_M(u)b_E$, by the cited descent statement. Their naturality square is the explicit equality\n$$\\begin{aligned}\n(b_F^{-1}G_M(u)b_E)T^X_{M/E}(\\gamma_{E,K})\n&=b_F^{-1}G_M(u)\\gamma_{M,U}a_E\\\\\n&=b_F^{-1}\\gamma_{M,V}H_M(u)a_E\\\\\n&=T^X_{M/F}(\\gamma_{F,L})(a_F^{-1}H_M(u)a_E).\n\\end{aligned}$$\nThe first and last equalities are Step 3, the middle is Step 2. The cited descent statement asserts that compatible transformations and their equations descend: this includes invariance under enlargement of $M$ and under equality of common-stage representatives, whose associator equations are those checked in Step 3. The descended inverse equations are represented by the finite-stage inverse equations. This proves presentation independence and an invertible natural purity transformation at the algebraically closed coefficient stage.",
+   "uses": [
+    "prop-weil-pbc-descent-functors",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md",
+    "place": "Proof, independence from finite stage and presentation: use the actual common-stage descent formula"
+   }
+  },
+  {
+   "text": "At either field stage, write $H,G,\\gamma$ for the two functors and the natural isomorphism of Steps 2 and 4. For an idempotent $e:K\\to K$, naturality gives $G(e)\\gamma_K=\\gamma_KH(e)$, and multiplying by $\\gamma_K^{-1}$ gives $H(e)\\gamma_K^{-1}=\\gamma_K^{-1}G(e)$. In the Karoubi envelope of [def-weil-karoubi-envelope] set\n$$c_e=G(e)\\gamma_KH(e),\\qquad d_e=H(e)\\gamma_K^{-1}G(e).$$\nThese are morphisms $(HK,H(e))\\to(GK,G(e))$ and back, since multiplying either by its source and target idempotents does not change it. The two naturality equations and $e^2=e$ give\n$$d_ec_e=H(e)\\gamma_K^{-1}G(e)\\gamma_KH(e)=H(e),\\qquad c_ed_e=G(e)\\gamma_KH(e)\\gamma_K^{-1}G(e)=G(e).$$\nThese are exactly the two identity morphisms in that envelope. Thus purity restricts to the idempotent summand. The summands are actual objects of the coefficient categories: [thm-weil-pbc-finite-stage-karoubian] supplies a splitting in the raw finite-field rational category, with the noetherian, finite-dimensional, invertibility hypotheses verified in Step 1; [thm-weil-pbc-idempotent-complete-triangulation] supplies idempotent completeness and the exact equivalence with the envelope for the algebraically closed category. No Karoubi completion is silently inserted in either coefficient-category definition.",
+   "uses": [
+    "def-weil-karoubi-envelope",
+    "thm-weil-pbc-finite-stage-karoubian",
+    "thm-weil-pbc-idempotent-complete-triangulation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md",
+    "place": "Proof, idempotent-completeness clause: write the restricted map and both inverse equations"
+   }
+  },
+  {
+   "text": "To identify the restriction with purity on an actual summand, let $i:J\\to K$, $r:K\\to J$ satisfy $ri=1_J$, $ir=e$. Then $G(r)\\gamma_KH(i)=\\gamma_JH(ri)=\\gamma_J$, by naturality; its inverse is $H(r)\\gamma_K^{-1}G(i)$. For another splitting $i':J'\\to K$, $r':K\\to J'$, the maps $r'i:J\\to J'$ and $ri':J'\\to J$ are inverse, since $ei=i$, $ei'=i'$, and naturality for $r'i$ identifies the two restricted purity maps. Finally each coefficient-extension functor of [prop-weil-pbc-scalar-extension] carries $ri=1$ and $ir=e$ to the corresponding splitting equations. Write $T_X=T^X_{F/E}$, $T_Y=T^Y_{F/E}$, and $s_E=G_E(r)\\gamma_{E,K}H_E(i)=\\gamma_{E,J}$. Multiply the coefficient square at $K$ on the left by $G_F(T_Yr)$ and on the right by $T_X(H_Ei)$. Naturality of $b$ at $r$ and of $a$ at $i$ rewrites its two sides as\n$$b_{F/E,J}T_X(s_E)=G_F(T_Yr)\\gamma_{F,T_YK}H_F(T_Yi)a_{F/E,J}=\\gamma_{F,T_YJ}a_{F/E,J}.$$\nThe last equality uses $T_Y(r)T_Y(i)=1$ and naturality of $\\gamma_F$ at $T_Yi$. Thus the restricted map satisfies exactly the coefficient square at $J$; Step 3's associator equations identify its successive and direct extensions. For common-stage descent, let $\\overline H,\\overline G,\\overline\\gamma$ be the functors and transformation of Step 4. The classes of any splitting maps satisfy $[r][i]=1$ and $[i][r]=[e]$, because composition is computed at a common finite stage. Naturality from Step 4 gives\n$$\\overline G([r])\\overline\\gamma_K\\overline H([i])=\\overline\\gamma_J\\overline H([r][i])=\\overline\\gamma_J,$$\nwith inverse $\\overline H([r])\\overline\\gamma_K^{-1}\\overline G([i])$. If the splitting is only specified in the common-stage category, its existence is Step 5; the same displayed calculation uses its actual morphism classes. Step 4's representative independence makes this restriction independent of the chosen common stage. Therefore taking the summand commutes with finite extension, successive extension and common-stage descent, independently of a chosen splitting.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md",
+    "place": "Proof, summand preservation and presentation independence: restriction to a splitting and compatibility with coefficient passage"
+   }
   }
  ],
  "proof_deps": [
+  "thm-pur-rational-and-qbar-purity",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-coef-integral-residue-tor",
+  "lem-pur-adic-purity-scalar-naturality",
   "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension",
   "prop-weil-pbc-descent-functors",
-  "thm-weil-pbc-idempotent-complete-triangulation",
-  "prop-pur-smooth-purity-naturality-cover"
+  "def-weil-pbc-qbar-category",
+  "def-weil-karoubi-envelope",
+  "thm-weil-pbc-finite-stage-karoubian",
+  "thm-weil-pbc-idempotent-complete-triangulation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-transitivity-summands.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md",
+  "place": "Full proof: explicit localization, coefficient coherence and retract calculations replacing the imported sketch"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity|tate.*twist|extraordinary.*pullback",
+   "results": "{\"t\": \"2026-10-17T02:27:36Z\", \"tool\": \"grep\", \"query\": \"purity|tate.*twist|extraordinary.*pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no source hits for the recorded purity and coefficient patterns"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational etale smooth purity is natural under extension of coefficient fields and preserves direct summands",
+   "results": "{\"t\": \"2026-10-17T02:27:37Z\", \"tool\": \"leansearch\", \"query\": \"Rational etale smooth purity is natural under extension of coefficient fields and preserves direct summands\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Smooth.baseChange\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.instFormallySmooth\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"Algebra.FormallyEtale.of_unramified_and_smooth\"], \"digest\": \"0a25c316bd076784\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the eight hits concern etale or smooth ring/scheme base change, not purity transformations or coefficient-field coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity isomorphisms of rational l-adic constructible sheaves commute with successive coefficient field extensions and restrict to idempotent summands",
+   "results": "{\"t\": \"2026-10-17T02:27:37Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth purity isomorphisms of rational l-adic constructible sheaves commute with successive coefficient field extensions and restrict to idempotent summands\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso\", \"InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"CondensedMod.IsSolid.isIso_solidification_map\", \"CategoryTheory.Idempotents.DoldKan.hη\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self\"], \"digest\": \"a2b0ab1fe8030b96\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern light condensed modules, Dold-Kan or ordinary module-sheaf pullback coherence; none states rational l-adic purity or its coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Idempotents.Karoubi",
+   "results": "{\"t\": \"2026-10-17T02:27:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso, CategoryTheory.Idempotents.Karoubi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: this query was rejected with unknown identifier CategoryTheory.NatIso; it supplies no absence evidence"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*purity|purity.*scalar|purity.*summand",
+   "results": "{\"t\": \"2026-10-17T02:27:46Z\", \"tool\": \"grep\", \"query\": \"rational.*purity|purity.*scalar|purity.*summand\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no source hits for the recorded purity and coefficient patterns"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "{\"t\": \"2026-10-17T02:27:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"purity\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Compiler.LCNF.Purity\", \"Lean.Compiler.LCNF.tacticPurity_tac\", \"Lean.Compiler.LCNF.Purity.impure\", \"Lean.Compiler.LCNF.Purity.pure\", \"Lean.Compiler.LCNF.instDecidableEqPurity\", \"Lean.Compiler.LCNF.instHashablePurity\", \"Lean.Compiler.LCNF.instInhabitedPurity\", \"Lean.Compiler.LCNF.instToStringPurity\"], \"digest\": \"667f3aa43a499f0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern Lean compiler LCNF purity, not cohomological purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between Tate twisted pullback and exceptional inverse image is compatible with scalar extension of l-adic coefficient fields",
+   "results": "{\"t\": \"2026-10-17T02:27:48Z\", \"tool\": \"leanfinder\", \"query\": \"A natural isomorphism between Tate twisted pullback and exceptional inverse image is compatible with scalar extension of l-adic coefficient fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"8ae3a61fc14e9420\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern light condensed modules, Dold-Kan or ordinary module-sheaf pullback coherence; none states rational l-adic purity or its coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between additive functors induces an isomorphism on retracts and on the idempotent completion of a category",
+   "results": "{\"t\": \"2026-10-17T02:40:17Z\", \"tool\": \"leanfinder\", \"query\": \"A natural isomorphism between additive functors induces an isomorphism on retracts and on the idempotent completion of a category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.KaroubiUniversal₁.counitIso\", \"CategoryTheory.Idempotents.functorExtension₁CompWhiskeringLeftToKaroubiIso\", \"CategoryTheory.Idempotents.KaroubiKaroubi.unitIso\", \"CategoryTheory.Idempotents.KaroubiKaroubi.counitIso\", \"CategoryTheory.Idempotents.functorExtension₁CompWhiskeringLeftToKaroubiIso_hom_app_app_f\", \"CategoryTheory.Idempotents.functorExtension₂CompWhiskeringLeftToKaroubiIso\", \"CategoryTheory.Idempotents.DoldKan.isoΓ₀\", \"CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.counitIso\"], \"digest\": \"4c2e5d2d336d3c7c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: generic Karoubi functor-extension results do not state coefficient-field compatibility of smooth purity; retract algebra is written directly in Steps 5-6"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Karoubi\", \"mapIso\"",
+   "results": "{\"t\": \"2026-10-17T02:40:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Karoubi\\\", \\\"mapIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the name-fragment query returned zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.*[Kk]aroubi|[Kk]aroubi.*[Nn]atTrans|mapIso.*[Kk]aroubi",
+   "results": "{\"t\": \"2026-10-17T02:40:34Z\", \"tool\": \"grep\", \"query\": \"NatTrans.*[Kk]aroubi|[Kk]aroubi.*[Nn]atTrans|mapIso.*[Kk]aroubi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LeftResolution/Reduced.lean\", \"Mathlib/AlgebraicTopology/DoldKan/PInfty.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Normalized.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Normalized.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\"], \"digest\": \"228be398b4735a88\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: generic Karoubi functor-extension results do not state coefficient-field compatibility of smooth purity; retract algebra is written directly in Steps 5-6"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -81,5 +230,69 @@
   }
  ],
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-pur-rational-purity-transitivity-summands",
+  "worker": "stage1",
+  "summary": "Replaced the single imported paragraph by six explicit steps. Retained the statement verbatim and restored its statement dependency on the rational purity construction after verifying its current closure no longer uses this item. Used the existing compatible integral purity family rather than asserting coefficient compatibility from naturality in the object. Wrote localized naturality, the coefficient square and its associator calculation, common-stage naturality, and explicit summand inverse equations. No new nodes. Current blueprint relocates this unchanged node to sk-lem-sp-field-extension; preserved the maintainer-owned historical unit binding and report that metadata difference.",
+  "blueprint": "Current main-20261015 proof: lattice sentence is Steps 1-2; finite-extension sentence is Step 3; independence from finite stage is Step 4; idempotent-completeness clause is Steps 5-6. Historical sk-thm-purity-transport unit Step 3 is realized throughout.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic scalar-localization extension of exact linear functors and transformations; needed for unit Step 3 and contains no purity assertion."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic completed-coefficient tensor functors and associators, used to type and compare successive field extensions."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Generic common-stage descent of compatible functors, transformations and equations; the unit does not construct this colimit operation."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the two integral lattice categories with the same completed coefficient sheaf and reductions before applying the purity compatibility lemma."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Supplies a uniform finite-level Tor interval for every integral constructible lattice, discharging the compatibility lemma domain."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic noetherianity of finite-type schemes over a field, needed for the coefficient category domains."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimension fact for finite-type schemes over a field, needed for the coefficient category domains."
+   },
+   {
+    "node": "thm-weil-pbc-finite-stage-karoubian",
+    "why": "Generic existence of splittings in each raw rational category; the summand argument itself is written in the item."
+   },
+   {
+    "node": "thm-weil-pbc-idempotent-complete-triangulation",
+    "why": "Generic idempotent completeness and equivalence with the Karoubi envelope at the algebraically closed coefficient stage."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-descent-functors",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "thm-weil-pbc-finite-stage-karoubian",
+  "thm-weil-pbc-idempotent-complete-triangulation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-64d709dfd",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-64d709dfd (reviewer sub-agent of L); spot-checked: I read the item, the 14 cited node statements, the proof of thm-pur-rational-and-qbar-purity, the unit sk-thm-purity-transport, and the master and main-20261015 blueprint texts, which are identical; the statement is verbatim and not weakened. The delivery adds no new nodes and makes no fixes. Step 1: the hypotheses of lem-pur-adic-purity-scalar-naturality are discharged by the finite-type-over-noetherian lemma (Mathlib leaf), lem-kun-dimension-finite-type, ℓ≠p, the integral characterization lemma, and the residue-Tor lemma (D^b_c = D^b_ctf). The purity maps are the lemma's simultaneous family, which is the choice the theorem makes; adic lifts are not unique, so a fixed family is needed. Step 2: localized naturality via u/ϖ^r and the conjugation formula check out; this correctly replaces the blueprint's 'differ by a unit', which fails already for v=2·id. Step 3: I recomputed B·T2T1(γ_E)=γ_L·D and the associator calculation through the lemma's composition laws and naturality of A^X and γ_L; it is correct (the direct square is already a clause of the lemma, so this part is redundant but harmless). Step 4: the β-conjugation formula from prop-weil-pbc-descent-functors and the three-line common-stage naturality are correct, as is the inverse square. Steps 5-6 are correctly marked elementary: the Karoubi products d_e c_e=H(e) and c_e d_e=G(e), independence of the splitting via (ri')(r'i)=1, and the restricted coefficient square via naturality of b at r, a at i and γ_F at T_Y i. Splittings come from thm-weil-pbc-finite-stage-karoubian and thm-weil-pbc-idempotent-complete-triangulation. The full dependency closure (13,360 nodes) does not contain the item, so restoring the statement edge to the theorem creates no cycle. No SGA is cited. All nine declared tool_uses are generic coefficient-category tools and I accept them. Edge cases checked: E=F=L, f=id with d=0, K=0, e=0 and e=1, non-integral rational idempotents, ramified F/E. For maintenance: the current blueprint places this node in sk-lem-sp-field-extension, while the maintainer-owned unit is still sk-thm-purity-transport; the worker reported this and correctly left it unchanged."
+ }
 }

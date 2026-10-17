@@ -1,127 +1,376 @@
 {
-  "id": "lem-trf-local-term-locality",
-  "blueprint": {
-    "is": "lem-trf-local-term-locality",
-    "from": null,
-    "same_as": null
+ "id": "lem-trf-local-term-locality",
+ "blueprint": {
+  "is": "lem-trf-local-term-locality",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Locality and zero-stalk vanishing of the local term",
+ "statement": "Let $c=(c_1,c_2):C\\to X\\times X$ be an admissible correspondence with\n$\\operatorname{Fix}(c)=F$, coefficient $K\\in D^b_{ctf}(X,A)$ and\n$u:c_2^*K\\to c_1^!K$ ([def-trf-correspondence]), and let $y\\in F(k)$ be a\ngeometric fixed point which is an open-and-closed component of $F$. Say\nthat $c$ is *contracting at $y$* if $c_1^{-1}(y)$ is the reduced point $y$,\n$c_2(y)=y$, and the ideal sheaves on $C$ satisfy\n\n$$\nc_2^{\\cdot}(\\mathcal I_y)^n\\subset\\mathcal I_{y,C}^{\\,n+1}\\qquad\\text{for some }n\\geq1,\n$$\n\nwhere $\\mathcal I_{y,C}=c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C$ is the ideal of\nthe reduced point $y\\subset C$. The stabilizing\ninclusion $c_2^{\\cdot}(\\mathcal I_y)\\subset\\mathcal I_{y,C}$ follows from\n$c_2(y)=y$, and the condition holds with $n=1$ whenever the map induced by\n$c_2$ on the cotangent space at $y$ is zero.\n\n1. (Contracting local terms.) If $c$ is contracting at $y$, then the\nrestriction $\\operatorname{Tr}_c(u)|_y$, and hence the local term\n$\\operatorname{LT}_y(u)$ of [def-trf-local-term], depend only on the stalk\n$K_{\\bar y}$ and on the stalk map $u_{\\bar y}:K_{\\bar y}\\to K_{\\bar y}$\ninduced by restriction of the correspondence to $Z=\\{y\\}$: explicitly, take the exceptional adjoint $\\widehat u:Rc_{1!}c_2^*K\\to K$, pull it back along $Z\\hookrightarrow X$, and use compact-support base change and $c_1^{-1}(Z)=y$ to obtain $u_{\\bar y}:K_{\\bar y}\\to K_{\\bar y}$. Thus this is the induced point-correspondence map, not an identification of the ordinary stalk of $c_1^!K$ with $K_{\\bar y}$:\n$\\operatorname{LT}_y(u)=\\operatorname{tr}_A(u_{\\bar y}\\mid K_{\\bar y})$.\nNo invertibility of $u$ is required.\n1. (Zero-stalk vanishing.) If $c$ is contracting at $y$ and $K_{\\bar y}=0$,\nthen $\\operatorname{Tr}_c(u)|_y=0$ and $\\operatorname{LT}_y(u)=0$, for\nevery coefficient morphism $u$.\n1. (Smooth-curve form.) In the smooth-curve setting of\n[d-curve-pieces] — $X_0$ smooth of pure dimension one, $m\\ge1$,\n$x\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar x$ — let\n$v:L\\Phi^{m*}K\\to K$ be either the scheme-Frobenius map\n$u_m=\\varphi^{[m]}\\circ\\kappa^{(m)}_K$ of [def-trf-iterated-weil-map]\n(the map written $\\varphi_m$ in [d-curve-pieces]) or an arbitrary,\nnot necessarily invertible, Frobenius coefficient morphism\n$L\\Phi^{m*}K\\to K$ (in the sense of\n[def-trf-frobenius-coefficient-morphism] for $\\Phi^m$, the\n$q^m$-power Frobenius of $X_0\\times_{k_0}\\mathbf F_{q^m}$; for\ninstance the iterate $\\psi_m$ of a Frobenius coefficient morphism\n$\\psi$), and consider the graph correspondence of\n$(\\Phi^m,v)$ of [def-trf-graph-correspondence], assumed admissible\nas throughout so that its trace class is defined. If $K_{\\bar x}=0$,\nthen the local term $\\operatorname{LT}_{\\bar x}(v)$ at the fixed\npoint $\\bar x$ is zero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.md",
+  "place": "node lem-trf-local-term-locality, order 2342"
+ },
+ "stmt_deps": [
+  "def-trf-correspondence",
+  "def-trf-local-term",
+  "d-curve-pieces",
+  "def-trf-iterated-weil-map",
+  "def-trf-frobenius-coefficient-morphism",
+  "def-trf-graph-correspondence",
+  "def-trf-categorical-trace",
+  "def-trf-trace-class",
+  "def-trf-fixed-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof": [
+  {
+   "text": "Localize the support around the point component. Put $Z=\\{y\\}\\subset X$. Since $X$ is separated, $\\Delta_X$ is a closed immersion, so $F=\\operatorname{Fix}(c)$ is closed in $C$ ([def-trf-fixed-scheme]); $F\\setminus\\{y\\}$ is closed in $F$ because $\\{y\\}$ is open in $F$. Hence $W=C\\setminus(F\\setminus\\{y\\})$ is an open subscheme of $C$ containing $y$, and $F\\cap W=\\{y\\}$ is open and closed in $F$. By the open-restriction lemma [lem-trf-trace-class-open-restriction], $\\operatorname{Fix}(c|_W)=\\{y\\}$ and $\\operatorname{Tr}_{c|_W}(u|_W)=\\operatorname{Tr}_c(u)|_y$, the restricted section of [def-trf-local-term]; so the restricted trace class and the local term at $y$ are unchanged when $(c,u)$ is replaced by $(c|_W,u|_W)$. The point map is unchanged as well: the exceptional adjoint of $u|_W$ is $\\widehat u$ precomposed with $Rc_{1!}$ of the counit $j_{W!}j_W^*c_2^*K\\to c_2^*K$, which is an isomorphism over $c_1^{-1}(Z)=y\\subset W$, so pulling back to $Z$ and applying compact-support base change gives the same $u_{\\bar y}$. The contraction hypotheses restrict to $W$: $(c_1|_W)^{-1}(y)=c_1^{-1}(y)\\cap W=y$, $c_2(y)=y$, and the ideal inclusion is an inclusion of ideal sheaves, which restricts to the open $W$. Thus it suffices to work with $F=y$. Since $c_2(y)=y$, the image of $c_2^{\\cdot}I_Z$ in $\\mathcal O_y$ is zero, and $J=c_1^{\\cdot}I_Z\\mathcal O_C$ is the ideal of the reduced point $y$, giving the stabilizing inclusion $c_2^{\\cdot}I_Z\\subseteq J$.",
+   "uses": [
+    "def-trf-fixed-scheme",
+    "lem-trf-trace-class-open-restriction",
+    "def-trf-local-term"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3, first paragraph of proof; §1.2.2(b) and open restriction §1.1.9"
+   }
   },
-  "kind": "statement",
-  "title": "Locality and zero-stalk vanishing of the local term",
-  "statement": "Let $c=(c_1,c_2):C\\to X\\times X$ be an admissible correspondence with\n$\\operatorname{Fix}(c)=F$, coefficient $K\\in D^b_{ctf}(X,A)$ and\n$u:c_2^*K\\to c_1^!K$ ([def-trf-correspondence]), and let $y\\in F(k)$ be a\ngeometric fixed point which is an open-and-closed component of $F$. Say\nthat $c$ is *contracting at $y$* if $c_1^{-1}(y)$ is the reduced point $y$,\n$c_2(y)=y$, and the ideal sheaves on $C$ satisfy\n\n$$\nc_2^{\\cdot}(\\mathcal I_y)^n\\subset\\mathcal I_{y,C}^{\\,n+1}\\qquad\\text{for some }n\\geq1,\n$$\n\nwhere $\\mathcal I_{y,C}=c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C$ is the ideal of\nthe reduced point $y\\subset C$. This is Varshavsky's \"$c$ stabilizes\n$Z=\\{y\\}$ and is contracting near $Z$\"\n([Def. 2.1.1](https://arxiv.org/abs/math/0505564)), with the two legs\ninterchanged to match the convention $u:c_2^*K\\to c_1^!K$; the stabilizing\ninclusion $c_2^{\\cdot}(\\mathcal I_y)\\subset\\mathcal I_{y,C}$ follows from\n$c_2(y)=y$, and the condition holds with $n=1$ whenever the map induced by\n$c_2$ on the cotangent space at $y$ is zero.\n\n1. (Contracting local terms.) If $c$ is contracting at $y$, then the\nrestriction $\\operatorname{Tr}_c(u)|_y$, and hence the local term\n$\\operatorname{LT}_y(u)$ of [def-trf-local-term], depend only on the stalk\n$K_{\\bar y}$ and on the stalk map $u_{\\bar y}:K_{\\bar y}\\to K_{\\bar y}$\ninduced by $u$ (via $c_2(y)=y=c_1(y)$):\n$\\operatorname{LT}_y(u)=\\operatorname{tr}_A(u_{\\bar y}\\mid K_{\\bar y})$.\nNo invertibility of $u$ is required.\n1. (Zero-stalk vanishing.) If $c$ is contracting at $y$ and $K_{\\bar y}=0$,\nthen $\\operatorname{Tr}_c(u)|_y=0$ and $\\operatorname{LT}_y(u)=0$, for\nevery coefficient morphism $u$.\n1. (Smooth-curve form.) In the smooth-curve setting of\n[d-curve-pieces] — $X_0$ smooth of pure dimension one, $m\\ge1$,\n$x\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar x$ — let\n$v:L\\Phi^{m*}K\\to K$ be either the scheme-Frobenius map\n$u_m=\\varphi^{[m]}\\circ\\kappa^{(m)}_K$ of [def-trf-iterated-weil-map]\n(the map written $\\varphi_m$ in [d-curve-pieces]) or an arbitrary,\nnot necessarily invertible, Frobenius coefficient morphism\n$L\\Phi^{m*}K\\to K$ (in the sense of\n[def-trf-frobenius-coefficient-morphism] for $\\Phi^m$, the\n$q^m$-power Frobenius of $X_0\\times_{k_0}\\mathbf F_{q^m}$; for\ninstance the iterate $\\psi_m$ of a Frobenius coefficient morphism\n$\\psi$), and consider the graph correspondence of\n$(\\Phi^m,v)$ of [def-trf-graph-correspondence], assumed admissible\nas throughout so that its trace class is defined. If $K_{\\bar x}=0$,\nthen the local term $\\operatorname{LT}_{\\bar x}(v)$ at the fixed\npoint $\\bar x$ is zero.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.md",
-    "place": "node lem-trf-local-term-locality, order 2342"
+  {
+   "text": "Form the Rees deformations $\\widetilde X_Z$ and $\\widetilde C_y$ and the lifted correspondence $\\widetilde c$, using the functorial-geometry lemma. Because stabilization $c_2^{\\cdot}I_Z\\mathcal O_C\\subseteq J$ gives $c_1^{-1}Z\\subseteq c_2^{-1}Z$ scheme-theoretically (the larger ideal cuts out the smaller subscheme), the ideal of $c^{-1}(Z\\times Z)=c_1^{-1}Z\\cap c_2^{-1}Z$ is $c_1^{\\cdot}I_Z\\mathcal O_C+c_2^{\\cdot}I_Z\\mathcal O_C=J$, so $c^{-1}(Z\\times Z)=c_1^{-1}Z=y$ scheme-theoretically. Contraction and the special-fibre criterion imply that $b_2=(\\widetilde c_2)_0$ has image supported on the zero section $Z\\subset N_{Z/X}$. The inverse-image assertion for $c_1$ gives $b_1^{-1}Z=y$. At a fixed point $b_1=b_2$, so every special-fibre fixed point lies in $b_1^{-1}Z=y$; the zero section $y$ is itself fixed. The lemma also supplies the closed immersion $\\widetilde F_{d^{-1}Z}\\hookrightarrow\\operatorname{Fix}(\\widetilde c)$. Here $F=y$ and $d^{-1}Z=F$, whose deformation is $y_D$ (its defining ideal is zero). This immersion is an isomorphism on the generic fibre, and its special fibre has the full underlying fixed-point set just calculated; therefore it induces an isomorphism on reductions. The constant-family specialization assertion now makes $\\operatorname{sp}_{\\operatorname{Fix}(\\widetilde c)}$ invertible on Borel--Moore sections. The special-fibre normal cones and all their leg, product, diagonal and structure morphisms are separated of finite type over $k$. Nagata compactification [thm-nagata-compactification] applies since their separated finite-type targets are quasi-compact and quasi-separated; a finite dimension bound for the compactifications is [lem-kun-dimension-finite-type] (take bound zero for an empty compactification). For these maps the constructible-origin theorem supplies bounded-below etale-origin witnesses; the relative adjunction of [thm-sf-ambient-adjoint-class], restricted to the finite-Tor constructible objects, and preservation by [thm-sf-preservation-class] give the exceptional datum. The finite-stage composition, compact-support preservation and exchanges of [prop-functor-package] therefore apply. Thus the special-fibre trace class used in Step 3 is defined on the same finite coefficient category.",
+   "uses": [
+    "lem-trf-dnc-functorial-geometry",
+    "lem-trf-specialization-zero-section",
+    "prop-functor-package",
+    "thm-sf-ambient-adjoint-class",
+    "thm-sf-preservation-class",
+    "lem-sf-proetale-constructible-origin",
+    "thm-nagata-compactification",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3(b), final two paragraphs; Lemma 1.4.3(b),(d) and Corollary 1.4.5"
+   }
   },
-  "stmt_deps": [
-    "def-trf-correspondence",
-    "def-trf-local-term",
-    "d-curve-pieces",
-    "def-trf-iterated-weil-map",
-    "def-trf-frobenius-coefficient-morphism",
-    "def-trf-graph-correspondence"
-  ],
-  "proof": [
-    {
-      "text": "*The stalk of the trace-class source.* By [def-trf-trace-class-source]\nthe source is $\\mathcal H_c(K)=R\\mathcal Hom_A(c_2^*K,c_1^!K)$. Its stalk\nat $y$ is **not** $R\\mathcal Hom_A(K_{\\bar y},K_{\\bar y})$: restriction to\na point commutes with $i^!$ on internal Hom, but not with $i^*$. For\n$X=\\mathbf A^1$, $j:\\mathbf G_m\\hookrightarrow X$, $K=j_!A$ and the graph\nof a Frobenius (so that $c_2^*K\\simeq K$ and $c_1^!K=K$), internal-Hom\nadjunction gives $R\\mathcal Hom_A(j_!A,j_!A)\\simeq Rj_*A$, whose\ndegree-zero stalk at $0$ is $A$ (the punctured strictly henselian curve is\nconnected), although $K_0=0$. Hence (1) and (2) cannot be read off from\nthe stalk: the trace map of [lem-trf-trace-map-from-external-duality] is\nlocal on $F$, but its source at $y$ sees more than $(K_{\\bar y},u_{\\bar y})$.\nA nonzero source can still map to zero, and for contracting correspondences\nit does; this is the content of (1) and (2).",
-      "uses": [
-        "def-trf-trace-class-source",
-        "lem-trf-trace-map-from-external-duality"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(1) and (2).* These are the contracting-correspondence theorem of\nVarshavsky, [Thm. 2.1.3](https://arxiv.org/abs/math/0505564), translated\ninto the present conventions. In Varshavsky's convention a $c$-morphism is\n$c_1^*\\mathcal F\\to c_2^!\\mathcal F$; interchanging the legs, his\nhypothesis \"$c$ stabilizes $Z$ and is contracting near $Z$\" for\n$Z=\\{y\\}$ reads\n$c_2^{\\cdot}(\\mathcal I_y)\\subset c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C$ and\n$c_2^{\\cdot}(\\mathcal I_y)^n\\subset(c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C)^{n+1}$,\nwhich is the hypothesis above. His conclusion, for the open-and-closed\ncomponent $\\beta=\\{y\\}$ of $F$, which meets $Z$, is\n$\\operatorname{Tr}_c(u)|_y=\\operatorname{Tr}_{c|_Z}(u|_Z)|_y$ and\n$\\operatorname{LT}_y(u)=\\operatorname{LT}_y(u|_Z)$, where\n$c|_Z:c_1^{-1}(Z)_{\\mathrm{red}}\\to Z\\times Z$ is the correspondence\ninduced on $Z$ and $u|_Z$ the restricted coefficient morphism (his 1.5.6).\nSince $c_1^{-1}(y)=y$ is reduced, $c|_Z$ is the identity correspondence of\nthe point $y\\cong\\Spec k$, with coefficient $K_{\\bar y}$ and morphism the\nstalk map $u_{\\bar y}$; its local term is\n$\\operatorname{tr}_A(u_{\\bar y}\\mid K_{\\bar y})$ by\n[lem-trf-local-term-point]. This proves (1), and (2) is the case\n$K_{\\bar y}=0$, where $\\operatorname{tr}_A(0\\mid0)=0$. Varshavsky's theorem\nis proved by specialization to the normal cone of $Z$ (his §§1.3–1.4 and\n2.1); it holds for every $c$-morphism and for the finite coefficient rings\n$A=A_{E,n}$ (his §1.1), and nothing is inverted. Its proof reduces, via\nthe additivity of trace classes along the open–closed decomposition\n$X=Z\\sqcup U$ and proper pushforward from $Z$, precisely to the vanishing\n(2) for $j_!j^*K$, which is then shown by the normal-cone argument; the\nblueprint quotes this argument and does not reprove it.",
-      "uses": [
-        "lem-trf-local-term-point"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(3).* The graph correspondence of $(\\Phi^m,v)$ has\n$C=X$, $c_1=\\operatorname{id}_X$, $c_2=\\Phi^m$ and fixed scheme\n$\\operatorname{Fix}(\\Phi^m)$ by [def-trf-graph-correspondence]. By\n[thm-trf-frobenius-fixed-points] this fixed scheme is the disjoint\nunion of copies of $\\Spec k$, one for each point of\n$X_0(\\mathbf F_{q^m})$; in particular it is finite over $k$, hence\nproper with finitely many open-and-closed components, so the local\nterms of [def-trf-local-term] are defined, and the geometric point\n$\\bar x$ over $x$ is one of these components, an isolated reduced fixed\npoint. The graph is contracting at $\\bar x$: $c_1^{-1}(\\bar x)=\\bar x$,\n$\\Phi^m(\\bar x)=\\bar x$, and if $t_i$ are affine coordinates with\n$a_i=t_i(x)\\in\\mathbf F_{q^m}$, then\n$\\Phi^{m\\cdot}(t_i-a_i)=t_i^{q^m}-a_i=(t_i-a_i)^{q^m}$, so\n$\\Phi^{m\\cdot}(\\mathcal I_{\\bar x})\\mathcal O_X\\subset\\mathcal I_{\\bar x}^{\\,q^m}\\subset\\mathcal I_{\\bar x}^{\\,2}$\nas $q^m\\geq2$; this holds for every separated finite-type $X_0$, not only\nfor curves. Its stalk map is\n$v_{\\bar x}:K_{\\bar x}=(L\\Phi^{m*}K)_{\\bar x}\\to K_{\\bar x}$, using\n$\\Phi^m(\\bar x)=\\bar x$. Applying (2) with $y=\\bar x$ and $u=v$ gives\n$\\operatorname{LT}_{\\bar x}(v)=0$ when $K_{\\bar x}=0$; since (1) and\n(2) use no invertibility of $u$, this holds both for the\nscheme-Frobenius map $u_m$ and for an arbitrary Frobenius coefficient\nmorphism.",
-      "uses": [
-        "def-trf-graph-correspondence",
-        "thm-trf-frobenius-fixed-points",
-        "def-trf-local-term"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-trf-trace-class-source",
-    "lem-trf-trace-map-from-external-duality",
+  {
+   "text": "First prove zero-stalk vanishing directly. Suppose $K|_Z=0$. Write $M=\\operatorname{sp}_{\\widetilde X_Z}K$. The zero-section theorem gives $z^*M=K|_Z=0$. On the reduction of the source normal cone, $b_2$ factors through the reduced point $Z$ because its image is supported there: on an affine chart every pulled-back element of the ideal of $Z$ lies in every prime and hence in the nilradical, which vanishes on the reduction. Thus the pullback of $b_2^*M$ to that reduction is zero, and the reduction equivalence implies $b_2^*M=0$. Consequently $\\operatorname{sp}_{\\widetilde c}u$ is the zero map from a zero object. The trace construction is a composition of additive maps on sections, so its trace class is zero. Trace-specialization compatibility and the invertibility from Step 2 imply $\\operatorname{Tr}_c(u)|_y=0$. On the point component, the point-local-term identification sends this zero section to $0\\in A$. This proves clause (2) without any invertibility of $u$.",
+   "uses": [
+    "lem-trf-specialization-zero-section",
+    "i-topology",
+    "def-trf-trace-class",
+    "lem-trf-trace-specialization",
+    "lem-trf-local-term-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3(b), normal-cone vanishing paragraph; Propositions 1.3.5 and 1.4.2"
+   }
+  },
+  {
+   "text": "For arbitrary $K$, use $i:Z=y\\hookrightarrow X$ and $j:U=X\\setminus Z\\hookrightarrow X$. Stabilization implies the invariant inclusion required by the filtered-lift lemma. Apply that lemma to lift the exceptional adjoint of $u$ to the canonical two-step localization filtration, whose graded objects are $K_Z=Ri_*i^*K$ and $K_U=j_!j^*K$. Its graded coefficient morphisms are precisely $u^Z=[i]_!(u|_Z)$ and $u^U=[j]_!(u|_U)$. Applying filtered trace additivity gives $\\operatorname{Tr}_c(u)=\\operatorname{Tr}_c(u^Z)+\\operatorname{Tr}_c(u^U)$. This uses a filtered lift, not merely a morphism of triangles. Apply [lem-cbc-proetale-extension-zero-base-change] to the Cartesian square formed by $i:Z\\hookrightarrow X$ and $j:U\\hookrightarrow X$. Its upper-left corner is empty, so its extension-by-zero side is the zero complex and it gives $i^*j_!j^*K=0$. Thus $K_U|_Z=0$; Step 3 applied to $K_U$ gives $\\operatorname{Tr}_c(u^U)|_y=0$. Hence $\\operatorname{Tr}_c(u)|_y=\\operatorname{Tr}_c(u^Z)|_y$.",
+   "uses": [
+    "lem-trf-invariant-localization-filtered-lift",
+    "lem-trf-filtered-trace-additivity",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3(b), open--closed reduction; §5.3.3 and Lemma 5.3.2"
+   }
+  },
+  {
+   "text": "The restricted correspondence on $Z$ has source $c_1^{-1}Z=y$, both legs the identity of the point, coefficient $P=i^*K=K_{\\bar y}$, and map $u_{\\bar y}$ defined by restriction of the exceptional adjoint and compact-support base change. The point inclusions into $X$ and $C$ are closed immersions, hence proper by [lem-weil-pbc-closed-immersion-proper]. Its map to $c$ is the proper diagram $(i,y\\hookrightarrow C)$. The coefficient pushforward recipe gives $u^Z$ on $Ri_*P$, exactly the graded morphism of Step 4. Proper trace compatibility says $\\operatorname{Tr}_c(u^Z)=h_*\\operatorname{Tr}_{\\mathrm{id}_y}(u_{\\bar y})$. Since both fixed schemes are $y$, $h$ is the identity, and this pushforward is the identity. Thus the original restricted trace is the trace class of the identity point correspondence.",
+   "uses": [
+    "def-trf-coefficient-pushforward",
+    "thm-trf-trace-proper-compatibility",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3(b), closed-piece paragraph, using Proposition 1.2.5 and §1.5.6"
+   }
+  },
+  {
+   "text": "By [fix-lem-finite-tor-perfect], $P=K_{\\bar y}$ is perfect: the hypothesis $K\\in D^b_{ctf}$ is precisely its finite coefficient hypothesis. For the identity point correspondence, the diagonal-pairing identity gives $\\operatorname{Tr}_{\\mathrm{id}_y}(u_{\\bar y})=\\langle u_{\\bar y},1_P\\rangle_{\\mathrm{LV}}$. The pairing normalization at the point identifies this with $\\operatorname{tr}_A(u_{\\bar y}\\mid P)$. Finally the point-local-term identification says integration on $y=\\operatorname{Spec}k$ is this same scalar. Combined with Step 5 this proves clause (1), including dependence of the restricted trace class on $(P,u_{\\bar y})$. The trace of a map on the zero complex is zero, either from its defining composite through $0$ or Step 3. Neither filtered lifting, specialization, nor point normalization required an inverse of the coefficient map.",
+   "uses": [
+    "lem-trf-trace-class-diagonal-pairing",
+    "prop-trf-pairing-point-normalization",
     "lem-trf-local-term-point",
+    "def-trf-categorical-trace",
+    "fix-lem-finite-tor-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.2.3 and the conclusion of Theorem 2.1.3(b)"
+   }
+  },
+  {
+   "text": "In clause (3), the graph definition gives $C=X$, $c_1=1_X$ and $c_2=\\Phi^m$. The fixed-point theorem identifies $F$ with the finite disjoint union of reduced copies of $\\operatorname{Spec}k$ indexed by $X_0(\\mathbf F_{q^m})$. Hence $\\bar x$ is a reduced open-and-closed point component and its local term is defined; no properness of $X$ is needed.",
+   "uses": [
     "def-trf-graph-correspondence",
     "thm-trf-frobenius-fixed-points",
     "def-trf-local-term"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.md",
-    "place": "## Proof"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+    "place": "Blueprint clause (3), first half"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2342,
-  "blueprint_uses": [
-    "d-curve-pieces",
-    "def-trf-correspondence",
-    "def-trf-frobenius-coefficient-morphism",
-    "def-trf-graph-correspondence",
-    "def-trf-iterated-weil-map",
-    "def-trf-local-term",
-    "def-trf-trace-class-source",
-    "lem-trf-local-term-point",
-    "lem-trf-trace-map-from-external-duality",
-    "thm-trf-frobenius-fixed-points"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-i-curve-zero",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $c=(c_1,c_2):C\\to X\\times X$ be an admissible correspondence with\n$\\operatorname{Fix}(c)=F$, coefficient $K\\in D^b_{ctf}(X,A)$ and\n$u:c_2^*K\\to c_1^!K$ ([def-trf-correspondence]), and let $y\\in F(k)$ be a\ngeometric fixed point which is an open-and-closed component of $F$. Say\nthat $c$ is *contracting at $y$* if $c_1^{-1}(y)$ is the reduced point $y$,\n$c_2(y)=y$, and the ideal sheaves on $C$ satisfy\n\n$$\nc_2^{\\cdot}(\\mathcal I_y)^n\\subset\\mathcal I_{y,C}^{\\,n+1}\\qquad\\text{for some }n\\geq1,\n$$\n\nwhere $\\mathcal I_{y,C}=c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C$ is the ideal of\nthe reduced point $y\\subset C$. The stabilizing\ninclusion $c_2^{\\cdot}(\\mathcal I_y)\\subset\\mathcal I_{y,C}$ follows from\n$c_2(y)=y$, and the condition holds with $n=1$ whenever the map induced by\n$c_2$ on the cotangent space at $y$ is zero.\n\n1. (Contracting local terms.) If $c$ is contracting at $y$, then the\nrestriction $\\operatorname{Tr}_c(u)|_y$, and hence the local term\n$\\operatorname{LT}_y(u)$ of [def-trf-local-term], depend only on the stalk\n$K_{\\bar y}$ and on the stalk map $u_{\\bar y}:K_{\\bar y}\\to K_{\\bar y}$\ninduced by $u$ (via $c_2(y)=y=c_1(y)$):\n$\\operatorname{LT}_y(u)=\\operatorname{tr}_A(u_{\\bar y}\\mid K_{\\bar y})$.\nNo invertibility of $u$ is required.\n1. (Zero-stalk vanishing.) If $c$ is contracting at $y$ and $K_{\\bar y}=0$,\nthen $\\operatorname{Tr}_c(u)|_y=0$ and $\\operatorname{LT}_y(u)=0$, for\nevery coefficient morphism $u$.\n1. (Smooth-curve form.) In the smooth-curve setting of\n[d-curve-pieces] — $X_0$ smooth of pure dimension one, $m\\ge1$,\n$x\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar x$ — let\n$v:L\\Phi^{m*}K\\to K$ be either the scheme-Frobenius map\n$u_m=\\varphi^{[m]}\\circ\\kappa^{(m)}_K$ of [def-trf-iterated-weil-map]\n(the map written $\\varphi_m$ in [d-curve-pieces]) or an arbitrary,\nnot necessarily invertible, Frobenius coefficient morphism\n$L\\Phi^{m*}K\\to K$ (in the sense of\n[def-trf-frobenius-coefficient-morphism] for $\\Phi^m$, the\n$q^m$-power Frobenius of $X_0\\times_{k_0}\\mathbf F_{q^m}$; for\ninstance the iterate $\\psi_m$ of a Frobenius coefficient morphism\n$\\psi$), and consider the graph correspondence of\n$(\\Phi^m,v)$ of [def-trf-graph-correspondence], assumed admissible\nas throughout so that its trace class is defined. If $K_{\\bar x}=0$,\nthen the local term $\\operatorname{LT}_{\\bar x}(v)$ at the fixed\npoint $\\bar x$ is zero.",
-    "proof": [
-      {
-        "text": "*The stalk of the trace-class source.* By [def-trf-trace-class-source]\nthe source is $\\mathcal H_c(K)=R\\mathcal Hom_A(c_2^*K,c_1^!K)$. Its stalk\nat $y$ is **not** $R\\mathcal Hom_A(K_{\\bar y},K_{\\bar y})$: restriction to\na point commutes with $i^!$ on internal Hom, but not with $i^*$. For\n$X=\\mathbf A^1$, $j:\\mathbf G_m\\hookrightarrow X$, $K=j_!A$ and the graph\nof a Frobenius (so that $c_2^*K\\simeq K$ and $c_1^!K=K$), internal-Hom\nadjunction gives $R\\mathcal Hom_A(j_!A,j_!A)\\simeq Rj_*A$, whose\ndegree-zero stalk at $0$ is $A$ (the punctured strictly henselian curve is\nconnected), although $K_0=0$. Hence (1) and (2) cannot be read off from\nthe stalk: the trace map of [lem-trf-trace-map-from-external-duality] is\nlocal on $F$, but its source at $y$ sees more than $(K_{\\bar y},u_{\\bar y})$.\nA nonzero source can still map to zero, and for contracting correspondences\nit does; this is the content of (1) and (2).",
-        "uses": [
-          "def-trf-trace-class-source",
-          "lem-trf-trace-map-from-external-duality"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*(1) and (2).* These are the contracting-correspondence theorem of\nVarshavsky, [Thm. 2.1.3](https://arxiv.org/abs/math/0505564), translated\ninto the present conventions. In Varshavsky's convention a $c$-morphism is\n$c_1^*\\mathcal F\\to c_2^!\\mathcal F$; interchanging the legs, his\nhypothesis \"$c$ stabilizes $Z$ and is contracting near $Z$\" for\n$Z=\\{y\\}$ reads\n$c_2^{\\cdot}(\\mathcal I_y)\\subset c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C$ and\n$c_2^{\\cdot}(\\mathcal I_y)^n\\subset(c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C)^{n+1}$,\nwhich is the hypothesis above. His conclusion, for the open-and-closed\ncomponent $\\beta=\\{y\\}$ of $F$, which meets $Z$, is\n$\\operatorname{Tr}_c(u)|_y=\\operatorname{Tr}_{c|_Z}(u|_Z)|_y$ and\n$\\operatorname{LT}_y(u)=\\operatorname{LT}_y(u|_Z)$, where\n$c|_Z:c_1^{-1}(Z)_{\\mathrm{red}}\\to Z\\times Z$ is the correspondence\ninduced on $Z$ and $u|_Z$ the restricted coefficient morphism (his 1.5.6).\nSince $c_1^{-1}(y)=y$ is reduced, $c|_Z$ is the identity correspondence of\nthe point $y\\cong\\Spec k$, with coefficient $K_{\\bar y}$ and morphism the\nstalk map $u_{\\bar y}$; its local term is\n$\\operatorname{tr}_A(u_{\\bar y}\\mid K_{\\bar y})$ by\n[lem-trf-local-term-point]. This proves (1), and (2) is the case\n$K_{\\bar y}=0$, where $\\operatorname{tr}_A(0\\mid0)=0$. Varshavsky's theorem\nis proved by specialization to the normal cone of $Z$ (his §§1.3–1.4 and\n2.1); it holds for every $c$-morphism and for the finite coefficient rings\n$A=A_{E,n}$ (his §1.1), and nothing is inverted. Its proof reduces, via\nthe additivity of trace classes along the open–closed decomposition\n$X=Z\\sqcup U$ and proper pushforward from $Z$, precisely to the vanishing\n(2) for $j_!j^*K$, which is then shown by the normal-cone argument; the\nblueprint quotes this argument and does not reprove it.",
-        "uses": [
-          "lem-trf-local-term-point"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*(3).* The graph correspondence of $(\\Phi^m,v)$ has\n$C=X$, $c_1=\\operatorname{id}_X$, $c_2=\\Phi^m$ and fixed scheme\n$\\operatorname{Fix}(\\Phi^m)$ by [def-trf-graph-correspondence]. By\n[thm-trf-frobenius-fixed-points] this fixed scheme is the disjoint\nunion of copies of $\\Spec k$, one for each point of\n$X_0(\\mathbf F_{q^m})$; in particular it is finite over $k$, hence\nproper with finitely many open-and-closed components, so the local\nterms of [def-trf-local-term] are defined, and the geometric point\n$\\bar x$ over $x$ is one of these components, an isolated reduced fixed\npoint. The graph is contracting at $\\bar x$: $c_1^{-1}(\\bar x)=\\bar x$,\n$\\Phi^m(\\bar x)=\\bar x$, and if $t_i$ are affine coordinates with\n$a_i=t_i(x)\\in\\mathbf F_{q^m}$, then\n$\\Phi^{m\\cdot}(t_i-a_i)=t_i^{q^m}-a_i=(t_i-a_i)^{q^m}$, so\n$\\Phi^{m\\cdot}(\\mathcal I_{\\bar x})\\mathcal O_X\\subset\\mathcal I_{\\bar x}^{\\,q^m}\\subset\\mathcal I_{\\bar x}^{\\,2}$\nas $q^m\\geq2$; this holds for every separated finite-type $X_0$, not only\nfor curves. Its stalk map is\n$v_{\\bar x}:K_{\\bar x}=(L\\Phi^{m*}K)_{\\bar x}\\to K_{\\bar x}$, using\n$\\Phi^m(\\bar x)=\\bar x$. Applying (2) with $y=\\bar x$ and $u=v$ gives\n$\\operatorname{LT}_{\\bar x}(v)=0$ when $K_{\\bar x}=0$; since (1) and\n(2) use no invertibility of $u$, this holds both for the\nscheme-Frobenius map $u_m$ and for an arbitrary Frobenius coefficient\nmorphism.",
-        "uses": [
-          "def-trf-graph-correspondence",
-          "thm-trf-frobenius-fixed-points",
-          "def-trf-local-term"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Set $Q=q^m\\geq2$. Choose an affine neighbourhood of $x$ in $X_0\\times_{k_0}\\mathbf F_Q$, generated by functions $t_1,\\ldots,t_r$ over $\\mathbf F_Q$, and put $a_i=t_i(x)\\in\\mathbf F_Q$. After base change to $k$, the ideal of $\\bar x$ is generated by $t_i-a_i$. The scheme Frobenius is the base change of $Q$-power Frobenius on this model, so $(\\Phi^m)^*(t_i-a_i)=t_i^Q-a_i=(t_i-a_i)^Q$. Thus $(\\Phi^m)^{\\cdot}I_{\\bar x}\\mathcal O_X\\subseteq I_{\\bar x}^{Q}\\subseteq I_{\\bar x}^2$. With $c_1=1_X$, its inverse image of $\\bar x$ is the reduced point itself, and $c_2(\\bar x)=\\bar x$. This is contraction with $n=1$. Apply clause (2), proved in Step 3, to the given coefficient map $v$ and the zero stalk. It gives $\\operatorname{LT}_{\\bar x}(v)=0$ for both choices of $v$, proving clause (3).",
+   "uses": [
+    "def-trf-scheme-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+    "place": "Blueprint clause (3), coordinate calculation"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-trf-fixed-scheme",
+  "lem-trf-trace-class-open-restriction",
+  "def-trf-local-term",
+  "lem-trf-dnc-functorial-geometry",
+  "lem-trf-specialization-zero-section",
+  "prop-functor-package",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "lem-sf-proetale-constructible-origin",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "i-topology",
+  "def-trf-trace-class",
+  "lem-trf-trace-specialization",
+  "lem-trf-local-term-point",
+  "lem-trf-invariant-localization-filtered-lift",
+  "lem-trf-filtered-trace-additivity",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-trf-coefficient-pushforward",
+  "thm-trf-trace-proper-compatibility",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-trf-trace-class-diagonal-pairing",
+  "prop-trf-pairing-point-normalization",
+  "def-trf-categorical-trace",
+  "fix-lem-finite-tor-perfect",
+  "def-trf-graph-correspondence",
+  "thm-trf-frobenius-fixed-points",
+  "def-trf-scheme-frobenius"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Proof of Theorem 2.1.3(b), §§1.3--1.4 and §5.3.3; Frobenius application follows the current blueprint coordinate calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A contracting cohomological correspondence has local term equal to the trace on the stalk at an isolated fixed point.",
+   "results": "8 hits: ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, trace_quotient_eq_trace_localization_quotient, Module.isLocallyConstant_rankAtStalk, LinearMap.trace_eq_contract, LinearMap.trace_eq_contract_apply, Module.isLocallyConstant_rankAtStalk_freeLocus, LinearMap.trace_eq_contract_of_basis, LinearMap.trace_eq_contract'",
+   "date": "2026-10-17",
+   "verdict": "no match: there are no cohomological local terms or contraction theorem among the hits; ordinary linear-map contraction formulas and stalk germs are different assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localTerm\"",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: there are no cohomological local terms or contraction theorem among the hits; ordinary linear-map contraction formulas and stalk germs are different assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "localTerm|local_term|contracting.*correspondence|Verdier",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: there are no cohomological local terms or contraction theorem among the hits; ordinary linear-map contraction formulas and stalk germs are different assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local terms of contracting correspondences vanish when the coefficient stalk vanishes.",
+   "results": "8 hits: AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', smoothSheafCommRing.isUnit_stalk_iff, IsLocalFrameOn.coeff_apply_zero_at, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo', ModuleCat.Tilde.smul_stalk_no_nonzero_divisor, AlgebraicGeometry.StructureSheaf.instIsLocalHomCarrierStalkCommRingCatPresheafStructureSheafOfAtPrimeAsIdealRingHomHomStalkToFiberRingHom, AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap",
+   "date": "2026-10-17",
+   "verdict": "no match: there are no cohomological local terms or contraction theorem among the hits; ordinary linear-map contraction formulas and stalk germs are different assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier contraction theorem at a point compares the local trace class with the naive stalk trace.",
+   "results": "8 hits: LinearMap.trace_eq_contract, LinearMap.trace_eq_contract_apply, LinearMap.trace_eq_contract', LinearMap.trace_eq_contract_of_basis, LinearMap.trace_eq_contract_of_basis', trace_quotient_eq_trace_localization_quotient, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, Algebra.traceMatrix_localizationLocalization",
+   "date": "2026-10-17",
+   "verdict": "no match: there are no cohomological local terms or contraction theorem among the hits; ordinary linear-map contraction formulas and stalk germs are different assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2342,
+ "blueprint_uses": [
+  "d-curve-pieces",
+  "def-trf-correspondence",
+  "def-trf-frobenius-coefficient-morphism",
+  "def-trf-graph-correspondence",
+  "def-trf-iterated-weil-map",
+  "def-trf-local-term",
+  "def-trf-trace-class-source",
+  "lem-trf-local-term-point",
+  "lem-trf-trace-map-from-external-duality",
+  "thm-trf-frobenius-fixed-points"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $c=(c_1,c_2):C\\to X\\times X$ be an admissible correspondence with\n$\\operatorname{Fix}(c)=F$, coefficient $K\\in D^b_{ctf}(X,A)$ and\n$u:c_2^*K\\to c_1^!K$ ([def-trf-correspondence]), and let $y\\in F(k)$ be a\ngeometric fixed point which is an open-and-closed component of $F$. Say\nthat $c$ is *contracting at $y$* if $c_1^{-1}(y)$ is the reduced point $y$,\n$c_2(y)=y$, and the ideal sheaves on $C$ satisfy\n\n$$\nc_2^{\\cdot}(\\mathcal I_y)^n\\subset\\mathcal I_{y,C}^{\\,n+1}\\qquad\\text{for some }n\\geq1,\n$$\n\nwhere $\\mathcal I_{y,C}=c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C$ is the ideal of\nthe reduced point $y\\subset C$. The stabilizing\ninclusion $c_2^{\\cdot}(\\mathcal I_y)\\subset\\mathcal I_{y,C}$ follows from\n$c_2(y)=y$, and the condition holds with $n=1$ whenever the map induced by\n$c_2$ on the cotangent space at $y$ is zero.\n\n1. (Contracting local terms.) If $c$ is contracting at $y$, then the\nrestriction $\\operatorname{Tr}_c(u)|_y$, and hence the local term\n$\\operatorname{LT}_y(u)$ of [def-trf-local-term], depend only on the stalk\n$K_{\\bar y}$ and on the stalk map $u_{\\bar y}:K_{\\bar y}\\to K_{\\bar y}$\ninduced by $u$ (via $c_2(y)=y=c_1(y)$):\n$\\operatorname{LT}_y(u)=\\operatorname{tr}_A(u_{\\bar y}\\mid K_{\\bar y})$.\nNo invertibility of $u$ is required.\n1. (Zero-stalk vanishing.) If $c$ is contracting at $y$ and $K_{\\bar y}=0$,\nthen $\\operatorname{Tr}_c(u)|_y=0$ and $\\operatorname{LT}_y(u)=0$, for\nevery coefficient morphism $u$.\n1. (Smooth-curve form.) In the smooth-curve setting of\n[d-curve-pieces] — $X_0$ smooth of pure dimension one, $m\\ge1$,\n$x\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar x$ — let\n$v:L\\Phi^{m*}K\\to K$ be either the scheme-Frobenius map\n$u_m=\\varphi^{[m]}\\circ\\kappa^{(m)}_K$ of [def-trf-iterated-weil-map]\n(the map written $\\varphi_m$ in [d-curve-pieces]) or an arbitrary,\nnot necessarily invertible, Frobenius coefficient morphism\n$L\\Phi^{m*}K\\to K$ (in the sense of\n[def-trf-frobenius-coefficient-morphism] for $\\Phi^m$, the\n$q^m$-power Frobenius of $X_0\\times_{k_0}\\mathbf F_{q^m}$; for\ninstance the iterate $\\psi_m$ of a Frobenius coefficient morphism\n$\\psi$), and consider the graph correspondence of\n$(\\Phi^m,v)$ of [def-trf-graph-correspondence], assumed admissible\nas throughout so that its trace class is defined. If $K_{\\bar x}=0$,\nthen the local term $\\operatorname{LT}_{\\bar x}(v)$ at the fixed\npoint $\\bar x$ is zero.",
+  "proof": [
+   {
+    "text": "*The stalk of the trace-class source.* By [def-trf-trace-class-source]\nthe source is $\\mathcal H_c(K)=R\\mathcal Hom_A(c_2^*K,c_1^!K)$. Its stalk\nat $y$ is **not** $R\\mathcal Hom_A(K_{\\bar y},K_{\\bar y})$: restriction to\na point commutes with $i^!$ on internal Hom, but not with $i^*$. For\n$X=\\mathbf A^1$, $j:\\mathbf G_m\\hookrightarrow X$, $K=j_!A$ and the graph\nof a Frobenius (so that $c_2^*K\\simeq K$ and $c_1^!K=K$), internal-Hom\nadjunction gives $R\\mathcal Hom_A(j_!A,j_!A)\\simeq Rj_*A$, whose\ndegree-zero stalk at $0$ is $A$ (the punctured strictly henselian curve is\nconnected), although $K_0=0$. Hence (1) and (2) cannot be read off from\nthe stalk: the trace map of [lem-trf-trace-map-from-external-duality] is\nlocal on $F$, but its source at $y$ sees more than $(K_{\\bar y},u_{\\bar y})$.\nA nonzero source can still map to zero, and for contracting correspondences\nit does; this is the content of (1) and (2).",
+    "uses": [
+     "def-trf-trace-class-source",
+     "lem-trf-trace-map-from-external-duality"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(1) and (2).* These are the contracting-correspondence theorem of\nVarshavsky, [Thm. 2.1.3](https://arxiv.org/abs/math/0505564), translated\ninto the present conventions. In Varshavsky's convention a $c$-morphism is\n$c_1^*\\mathcal F\\to c_2^!\\mathcal F$; interchanging the legs, his\nhypothesis \"$c$ stabilizes $Z$ and is contracting near $Z$\" for\n$Z=\\{y\\}$ reads\n$c_2^{\\cdot}(\\mathcal I_y)\\subset c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C$ and\n$c_2^{\\cdot}(\\mathcal I_y)^n\\subset(c_1^{\\cdot}(\\mathcal I_y)\\mathcal O_C)^{n+1}$,\nwhich is the hypothesis above. His conclusion, for the open-and-closed\ncomponent $\\beta=\\{y\\}$ of $F$, which meets $Z$, is\n$\\operatorname{Tr}_c(u)|_y=\\operatorname{Tr}_{c|_Z}(u|_Z)|_y$ and\n$\\operatorname{LT}_y(u)=\\operatorname{LT}_y(u|_Z)$, where\n$c|_Z:c_1^{-1}(Z)_{\\mathrm{red}}\\to Z\\times Z$ is the correspondence\ninduced on $Z$ and $u|_Z$ the restricted coefficient morphism (his 1.5.6).\nSince $c_1^{-1}(y)=y$ is reduced, $c|_Z$ is the identity correspondence of\nthe point $y\\cong\\Spec k$, with coefficient $K_{\\bar y}$ and morphism the\nstalk map $u_{\\bar y}$; its local term is\n$\\operatorname{tr}_A(u_{\\bar y}\\mid K_{\\bar y})$ by\n[lem-trf-local-term-point]. This proves (1), and (2) is the case\n$K_{\\bar y}=0$, where $\\operatorname{tr}_A(0\\mid0)=0$. Varshavsky's theorem\nis proved by specialization to the normal cone of $Z$ (his §§1.3–1.4 and\n2.1); it holds for every $c$-morphism and for the finite coefficient rings\n$A=A_{E,n}$ (his §1.1), and nothing is inverted. Its proof reduces, via\nthe additivity of trace classes along the open–closed decomposition\n$X=Z\\sqcup U$ and proper pushforward from $Z$, precisely to the vanishing\n(2) for $j_!j^*K$, which is then shown by the normal-cone argument; the\nblueprint quotes this argument and does not reprove it.",
+    "uses": [
+     "lem-trf-local-term-point"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(3).* The graph correspondence of $(\\Phi^m,v)$ has\n$C=X$, $c_1=\\operatorname{id}_X$, $c_2=\\Phi^m$ and fixed scheme\n$\\operatorname{Fix}(\\Phi^m)$ by [def-trf-graph-correspondence]. By\n[thm-trf-frobenius-fixed-points] this fixed scheme is the disjoint\nunion of copies of $\\Spec k$, one for each point of\n$X_0(\\mathbf F_{q^m})$; in particular it is finite over $k$, hence\nproper with finitely many open-and-closed components, so the local\nterms of [def-trf-local-term] are defined, and the geometric point\n$\\bar x$ over $x$ is one of these components, an isolated reduced fixed\npoint. The graph is contracting at $\\bar x$: $c_1^{-1}(\\bar x)=\\bar x$,\n$\\Phi^m(\\bar x)=\\bar x$, and if $t_i$ are affine coordinates with\n$a_i=t_i(x)\\in\\mathbf F_{q^m}$, then\n$\\Phi^{m\\cdot}(t_i-a_i)=t_i^{q^m}-a_i=(t_i-a_i)^{q^m}$, so\n$\\Phi^{m\\cdot}(\\mathcal I_{\\bar x})\\mathcal O_X\\subset\\mathcal I_{\\bar x}^{\\,q^m}\\subset\\mathcal I_{\\bar x}^{\\,2}$\nas $q^m\\geq2$; this holds for every separated finite-type $X_0$, not only\nfor curves. Its stalk map is\n$v_{\\bar x}:K_{\\bar x}=(L\\Phi^{m*}K)_{\\bar x}\\to K_{\\bar x}$, using\n$\\Phi^m(\\bar x)=\\bar x$. Applying (2) with $y=\\bar x$ and $u=v$ gives\n$\\operatorname{LT}_{\\bar x}(v)=0$ when $K_{\\bar x}=0$; since (1) and\n(2) use no invertibility of $u$, this holds both for the\nscheme-Frobenius map $u_m$ and for an arbitrary Frobenius coefficient\nmorphism.",
+    "uses": [
+     "def-trf-graph-correspondence",
+     "thm-trf-frobenius-fixed-points",
+     "def-trf-local-term"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-local-term-locality",
+  "worker": "stage1",
+  "summary": "Checked Varshavsky §§1.3--1.5, Theorem 2.1.3 and §§5.2--5.3; expanded the normal-cone vanishing proof and filtered localization proof, reused proper trace compatibility and point normalization, and proved Frobenius contraction by its coordinate ideal calculation. Clarified the induced point map rather than identifying an exceptional stalk with an ordinary stalk. Six statement/definition-only inputs, each searched; no general contraction theorem restating a clause was introduced.",
+  "blueprint": "Current main-20261015 item proof: replaces the explanatory first paragraph by the actual open restriction argument (Step 1); realizes paragraph (1) and (2) through normal-cone geometry and vanishing (Steps 2--3), filtered localization and proper pushforward (Steps 4--5), and point normalization (Step 6); realizes paragraph (3) in Steps 7--8. Unit sk-i-curve-zero step 1 is Steps 7--8 and step 2 is Steps 1--6.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-trace-class-diagonal-pairing",
+    "why": "Generic construction or normalization used in the stated step; the unit itself provides no substitute for this trace/pairing tool."
+   },
+   {
+    "node": "i-topology",
+    "why": "Reduction equivalence detects zero pullback and identifies constant fixed deformations."
+   },
+   {
+    "node": "lem-trf-local-term-point",
+    "why": "Generic construction or normalization used in the stated step; the unit itself provides no substitute for this trace/pairing tool."
+   },
+   {
+    "node": "def-trf-coefficient-pushforward",
+    "why": "Generic construction or normalization used in the stated step; the unit itself provides no substitute for this trace/pairing tool."
+   },
+   {
+    "node": "thm-trf-trace-proper-compatibility",
+    "why": "The generic proper-pushforward trace theorem identifies the closed piece with the point trace."
+   },
+   {
+    "node": "prop-trf-pairing-point-normalization",
+    "why": "The generic point pairing computes the induced point-correspondence trace."
+   },
+   {
+    "node": "def-trf-categorical-trace",
+    "why": "Generic construction or normalization used in the stated step; the unit itself provides no substitute for this trace/pairing tool."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "The direct complex-level pro-etale base-change formula gives zero restriction of the open piece via the empty Cartesian fibre."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Finite-stage compact-support preservation, composition and exchanges verify the domain and functor identities of the special-fibre correspondence."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Relative adjunction on etale-origin inputs supplies the special-fibre exceptional adjunction."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Finite-Tor constructible preservation of exceptional inverse image verifies the special-fibre trace domain."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Constructible-origin equivalence specifies the coefficient transport and the adjunction domain."
+   },
+   {
+    "node": "fix-lem-finite-tor-perfect",
+    "why": "The generic geometric stalk perfectness theorem supplies the hypothesis of point pairing normalization."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic compactification existence supplies the chosen compactifications required by the relative-adjunction theorem for the special-fibre maps."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic dimension finiteness supplies the finite compactification dimension bound in the relative-adjunction input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic properness of closed immersions verifies the two proper point inclusions in the pushforward diagram."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-trace-class-diagonal-pairing",
+  "i-topology",
+  "lem-trf-local-term-point",
+  "def-trf-coefficient-pushforward",
+  "thm-trf-trace-proper-compatibility",
+  "prop-trf-pairing-point-normalization",
+  "def-trf-categorical-trace",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "prop-functor-package",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "lem-sf-proetale-constructible-origin",
+  "fix-lem-finite-tor-perfect",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-3a1a75555",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-3a1a75555 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 6 new nodes, every cited node statement, the blueprint main-20261015 item, proof and unit sk-i-curve-zero, and Varshavsky math/0505564 at 1.1.4-1.1.9, 1.2.2-1.2.5, 1.3.1-1.3.5, 1.4.1-1.4.5, 1.5.1, 1.5.6-1.5.10, 2.1.1-2.1.3 with its proof, and 5.1-5.3.3. The leg swap (his ordinary c1 is our c2) is applied correctly, and the invariance direction c2(c1^-1 Z) in Z is correct. The clause (1) clarification is needed and weakens nothing: for c: pt -> A^1xA^1 at (0,0), which is contracting, (c1^!K)_y = K_0(-1)[-2], and the new wording is exactly Varshavsky's u|_Z of 1.5.6. Steps 2-8 follow the proof of Thm 2.1.3(b), and the hypotheses are checked: Lemma 1.4.3(b),(d), Cor 1.4.5, Prop 1.4.2, Prop 1.3.5, Lemma 5.3.2, the 5.3.3 Hom bijection, the proper pushforward along (i, y->C), point normalization, and the Frobenius contraction (t-a)^Q. All 6 new nodes match their cited places, are statement-only and are not duplicates. Not citing lem-trf-trace-triangle-compatibility is justified: its proof_deps cite this item, though only in an explanatory remark. When that node is split it should drop the remark and use the two new filtered nodes. Two repairs. (1) C1/E5: Step 1 derived Tr_{c|W}(u|W) = Tr_c(u)|_y from a hand-waved restriction of the supported-pairing recipe. I added the statement-only node lem-trf-trace-class-open-restriction (Varshavsky 1.1.9, 1.2.2, proof of Thm 2.1.3) and rewrote Step 1 to cite it. It now also explains why the point map and the contraction hypotheses are unchanged on W. def-trf-supported-pairing and fix-lem-exchanges are dropped from proof_deps and tool_uses. (2) E3: Step 2 had the inclusion backwards (it said c2^-1 Z in c1^-1 Z). It is corrected to c1^-1 Z in c2^-1 Z; the conclusion c^-1(ZxZ) = y was unaffected. review_split.py on the fixed tree reports PASS. Accepted tool uses: i-topology, thm-trf-trace-proper-compatibility, fix-lem-finite-tor-perfect, and the declared domain and point-trace tools. No SGA source is used.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
