@@ -305,5 +305,46 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-a1625ac89 (reviewer sub-agent of L); spot-checked: Verified all eight steps and the new theorem against HTT 3.1.1.11, 3.2.1.9, Kerodon and Stacks. Repaired one incorrect ordered-join definition citation in the whole item JSON under fixes/. No mathematical gap or duplicate found; review.md records source checks, edge cases and accepted tool uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianCommaNormalization",
+  "declaration": "SSet.Enhanced.cartesian_comma_normalization",
+  "declarations": [
+   "SSet.Enhanced.normalizationComma",
+   "SSet.Enhanced.normalizationCommaIndex",
+   "SSet.Enhanced.normalizationCommaLeg",
+   "SSet.Enhanced.normalizedTwistedObject",
+   "SSet.Enhanced.normalizationTwistedComponentComm",
+   "SSet.Enhanced.normalizationSourceFixedSquareComm",
+   "SSet.Enhanced.normalizationTwistedComponent",
+   "SSet.Enhanced.normalizationComponent",
+   "SSet.Enhanced.normalizationTriangleOrdinalsId",
+   "SSet.Enhanced.normalizationTriangleOrdinalsComp",
+   "SSet.Enhanced.normalizationTriangleOrdinals",
+   "SSet.Enhanced.normalizationTriangles",
+   "SSet.Enhanced.normalizationFaceIndexBound",
+   "SSet.Enhanced.normalizationEdgeIndexBound",
+   "SSet.Enhanced.normalizationFactorizationBoundary",
+   "SSet.Enhanced.normalizationFactorizationStable",
+   "SSet.Enhanced.normalizationFactorizationSubcomplex",
+   "SSet.Enhanced.normalizationFactorizationSpace",
+   "SSet.Enhanced.cartesian_comma_normalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianCommaNormalization.lean",
+  "statement": "theorem cartesian_comma_normalization {A : Type u} [SmallCategory A] {R : SSet.{max u v}} [Quasicategory R] (p : R ⟶ terminalTwistedBase.{u, v} A) (hp : ∃ hB : Quasicategory (terminalTwistedBase.{u, v} A), @cartesianFibration R (terminalTwistedBase.{u, v} A) p inferInstance hB) (k : terminalTwistedIndex.{u, v} A ⟶ R) (hk : k ≫ p = terminalTwistedProjection A) (hcart : ∀ (a b d : A) (x : a ⟶ b) (y : a ⟶ d) (g : d ⟶ b) (h : y ≫ g = x), IsCartesianEdge p (SSet.yonedaEquiv.symm (k.app _ (ULift.up (ComposableArrows.mk₁ (⟨𝟙 a, g, normalizationSourceFixedSquareComm h⟩ : TerminalTwistedSquare (⟨a, b, x⟩) (⟨a, d, y⟩))))))) (c : A) (r : R _⦋0⦌) (hr : p.app _ r = terminalTwistedBaseVertex c) : ∃ (H : normalizationComma k r ⟶ normalizationComma k r) (η : normalizationComma k r ⊗ Δ[1] ⟶ normalizationComma k r), SSet.ι₀ ≫ η = H ∧ SSet.ι₁ ≫ η = 𝟙 _ ∧ (∀ (z : normalizationComma k r _⦋0⦌) (x : TerminalTwistedArrow A) (w : x.target ⟶ c), (normalizationCommaIndex k r).app _ z = ULift.up (ComposableArrows.mk₀ x) → p.app _ (normalizationCommaLeg k r z) = ULift.up (ComposableArrows.mk₁ w.op) → (normalizationCommaIndex k r).app _ (H.app _ z) = ULift.up (ComposableArrows.mk₀ (normalizedTwistedObject x w)) ∧ p.app _ (normalizationCommaLeg k r (H.app _ z)) = ULift.up (ComposableArrows.mk₁ (𝟙 (op c))) ∧ (normalizationCommaIndex k r).app _ (normalizationComponent η z) = ULift.up (ComposableArrows.mk₁ (normalizationTwistedComponent x w)) ∧ KanComplex (normalizationFactorizationSpace p (normalizationCommaLeg k r z) (k.app _ (ULift.up (ComposableArrows.mk₁ (normalizationTwistedComponent x w))))) ∧ IsContractible (normalizationFactorizationSpace p (normalizationCommaLeg k r z) (k.app _ (ULift.up (ComposableArrows.mk₁ (normalizationTwistedComponent x w)))))) ∧ (∀ (z : normalizationComma k r _⦋1⦌) (x y : TerminalTwistedArrow A) (f : x ⟶ y) (w : x.target ⟶ c) (w' : y.target ⟶ c), (normalizationCommaIndex k r).app _ z = ULift.up (ComposableArrows.mk₁ f) → p.app _ (normalizationCommaLeg k r ((normalizationComma k r).δ 1 z)) = ULift.up (ComposableArrows.mk₁ w.op) → p.app _ (normalizationCommaLeg k r ((normalizationComma k r).δ 0 z)) = ULift.up (ComposableArrows.mk₁ w'.op) → w' = f.targetMap ≫ w ∧ ∃ g : normalizedTwistedObject x w ⟶ normalizedTwistedObject y w', g.sourceMap = f.sourceMap ∧ g.targetMap = 𝟙 c ∧ (normalizationCommaIndex k r).app _ (H.app _ z) = ULift.up (ComposableArrows.mk₁ g))",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the existing TerminalTwistedArrow/index/base/projection definitions, without assuming terminal objects. The join comma, its projections and leg evaluation, endpoint objects/components, and the degreewise relative triangle space are helpers of this node. The cylinder map states coherence on every simplex; the fixed-boundary triangle space retains all higher factorization data. Only the theorem proof is postponed. The parent module already contains the index definitions; its future proof-only import of this theorem must be omitted to avoid an import cycle, as permitted by stages/2-statements.md section 3 rule 7. Independent maintainer review extracted all local well-definedness proofs into named sorry obligations with proof docstrings; all construction data and the mathematical statement are unchanged.",
+  "fixed_by": "NT-stage2-Codex-302744e1d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-302744e1d",
+  "group": "Q28",
+  "result": "fix",
+  "note": "Review written to review.md. Complete fixes extract inline well-definedness proofs into named sorry obligations, update the exact Lean record, and replace the placeholder second reading. No mathematical or universe mismatch found; replacement compiles cleanly and passes text/record checks."
  }
 }
