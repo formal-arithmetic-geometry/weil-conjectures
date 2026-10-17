@@ -54,7 +54,7 @@ private theorem compact_lower_bound (Y : Scheme.{u}) [CompactSpace Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (E : schemeDerivedCategory Y)
     (hlocal : ∀ y : Y, ∃ U : Y.Opens, y ∈ U ∧ ∃ a : ℤ, ∀ n : ℤ, n < a →
-      IsZero ((SheafOfModules.overFunctor (moduleRings Y.toRingedSpace) U).obj
+      IsZero ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) U).obj
         ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj E))) :
     ∃ a : ℤ, E.IsGE a := by
@@ -114,7 +114,7 @@ private theorem perfect_lower_bound (Y : Scheme.{u}) [CompactSpace Y]
   intro y
   obtain ⟨U, hy, K, ⟨⟨a, b, hzero⟩, hfree⟩, ⟨e⟩⟩ := hp y
   refine ⟨U, hy, a, ?_⟩
-  let L := SheafOfModules.overFunctor (moduleRings Y.toRingedSpace) U
+  let L := SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) U
   have hKa : K.IsGE a := by
     rw [CochainComplex.isGE_iff]
     intro n hn

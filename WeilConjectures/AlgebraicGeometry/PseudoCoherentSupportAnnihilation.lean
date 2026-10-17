@@ -143,7 +143,7 @@ theorem exists_perfect_annihilator
       ext x
       simp
     have hQzero (n : ℤ) : IsZero
-        ((SheafOfModules.overFunctor (moduleRings Y.toRingedSpace)
+        ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace)
           ⟨((V : Set Y)ᶜ)ᶜ, hclosed.isOpen_compl⟩).obj
           ((DerivedCategory.homologyFunctor _ n).obj Q.obj)) :=
       by

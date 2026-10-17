@@ -78,7 +78,7 @@ private theorem coherent_of_iso {X : Scheme.{u}}
     RingedSpace.IsCoherent X.toRingedSpace G := by
   refine ⟨finiteType_of_iso.{u, u, u} e hF.1, ?_⟩
   intro U n f
-  let eU := (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapIso e
+  let eU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapIso e
   let g := f ≫ eU.inv
   have hk := hF.2 U n g
   exact finiteType_of_iso.{u, u, u}
