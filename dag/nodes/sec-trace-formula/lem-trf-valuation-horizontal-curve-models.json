@@ -220,5 +220,36 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-53cf0cdd9 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the parent lem-trf-valuation-stable-reduction, the unit sk-i-curve-zero, every cited statement, and Temkin arXiv:0707.3953v3: Lemma 3.5.1 (p.20), the §4 conventions, Remark 4.1 (pp.24-25) and the opening of §4.2 (p.26). Temkin was read from an extracted copy in /tmp because the PDF is still WANTED in literature/. I also read Stacks 0539 and the Mathlib sources. The statement is unchanged, correct and matches the source. I tested it on A^1_V with the zero section, on D empty, and on A^1_V minus the closed point of the origin, where the closure is Spec K: flat and finitely presented but not finite over V. I repaired three faults in the files under fixes/. (1) B8, search verdict: lem-trf-valuation-torsionfree-flat is a Mathlib leaf, Module.Flat.flat_iff_torsion_eq_bot_of_isBezout (Flat/TorsionFree.lean:93, @[stacks 0539]) through the instance [ValuationRing R] : IsBezout R (ValuationRing.lean:379). It is now status mathlib with that match. (2) C1/E5: Step 2 used, without any node, that a proper birational map to a smooth, hence normal, curve is an isomorphism, and it did not show that the generic points of Y lie in the dense open. It also applied 081N to no ambient finitely presented morphism. The step now proves the Noetherian-space and generic-point argument, cites lem-weil-pbc-smooth-over-normal-ring-normal, lem-sc-closed-irreducible-dimension-trdeg and lem-trf-proper-birational-normal-curve-iso (same unit, every hypothesis checked), and applies lem-trf-flat-finite-type-dense-presentation through an embedding in A^n_T. (3) C4/E3: Steps 3 and 6 applied lem-sc-valuation-fp-torsionfree-free to a closure algebra that is only finitely presented as an algebra. Step 6's 'finite freeness on affine charts' is false (the closure K above is not finite free over V). Both citations are removed. Steps 1, 4 and 5 are correct. I accept two tool_uses, lem-weil-pbc-smooth-over-normal-ring-normal and lem-sc-closed-irreducible-dimension-trdeg; the second has a precedent in lem-trf-dejong-relative-marked-semistable. There is no cycle, no SGA source, and no target is weakened.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c39e7aa63",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Reviewed statement, dependencies, source, definitions, route-pivot compliance, edge cases, docstrings, and exact Lean signature. scompile.py passed in sandbox and library positions with no errors or warnings; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationHorizontalCurveModels",
+  "declaration": "AlgebraicGeometry.horizontal_curve_models",
+  "statement": "theorem horizontal_curve_models (B : HorizontalValuationBase.{u}) (P : MultipointedCurve B.T) (hSmooth : Smooth (pullback.snd P.x B.genericMap)) (hEtale : Etale (pullback.snd P.d B.genericMap)) : ∃ hX : IsReduced P.X, Finite (irreducibleComponents P.X) ∧ (∀ {Y : Scheme.{u}} (q : Y ⟶ P.X), IsReduced Y → SchemeModification q → IsIso (horizontalGenericCurveMap P B.genericMap q) ∧ ∃ (hy : RelativeCurve (q ≫ P.x)) (E : Scheme.{u}) (e : E ⟶ Y) (he : FlatClosure (q ≫ P.x) B.genericMap (horizontalGenericMarkingι P B.genericMap q) e) (r : E ⟶ P.D) (hr : r ≫ P.d = e ≫ q ≫ P.x) (hi : r ≫ P.i = e ≫ q), (∀ (F : Scheme.{u}) (f : F ⟶ Y), IsClosedImmersion f → Flat (f ≫ q ≫ P.x) → f.ker.comap (pullback.fst (q ≫ P.x) B.genericMap) = (horizontalGenericMarkingι P B.genericMap q).ker → ∃ h : F ≅ E, h.hom ≫ e = f) ∧ (horizontalClosurePairMap P B.genericMap q e hy he r hr hi).IsEtaModification B.genericMap ∧ ClosureRestrictionStable (q ≫ P.x) (horizontalGenericMarkingι P B.genericMap q ≫ pullback.fst (q ≫ P.x) B.genericMap) e) ∧ (∀ {Y : Scheme.{u}} (q : Y ⟶ P.X) (hY : IsIntegral Y), RelativeCurve (q ≫ P.x) → @IsBirationalQuasiModification Y P.X hY hX q → IsOpenImmersion (horizontalGenericCurveMap P B.genericMap q) → ∃ (E : Scheme.{u}) (e : E ⟶ Y), FlatClosure (q ≫ P.x) B.genericMap (horizontalGenericMarkingι P B.genericMap q) e ∧ ClosureRestrictionStable (q ≫ P.x) (horizontalGenericMarkingι P B.genericMap q ≫ pullback.fst (q ≫ P.x) B.genericMap) e)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/ValuationHorizontalCurveModels.lean",
+  "declarations": [
+   "AlgebraicGeometry.HorizontalValuationBase",
+   "AlgebraicGeometry.HorizontalValuationBase.T",
+   "AlgebraicGeometry.HorizontalValuationBase.genericMap",
+   "AlgebraicGeometry.RelativeCurve",
+   "AlgebraicGeometry.horizontalGenericCurveMap",
+   "AlgebraicGeometry.horizontalGenericMarkingι",
+   "AlgebraicGeometry.FlatClosure",
+   "AlgebraicGeometry.ClosureRestrictionStable",
+   "AlgebraicGeometry.horizontalClosurePair",
+   "AlgebraicGeometry.horizontalClosurePairMap",
+   "AlgebraicGeometry.horizontal_curve_models"
+  ]
  }
 }

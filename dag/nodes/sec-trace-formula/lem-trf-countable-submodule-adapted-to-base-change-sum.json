@@ -153,5 +153,23 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q75-9cb48751d (reviewer sub-agent of L); spot-checked: Tags 05A7 and 05A8, hypotheses, induction, tensor maps, coordinate sums, edge cases, DAG duplicates, and route constraints were checked in full. The new prerequisite omitted its required def-weil-pbc-module-tensor-product dependency and cited the unrelated projective-countable-decomposition node; corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-lift-countably-generated-submodule.json. Full review: review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d9258ceb3",
+  "group": "N6",
+  "result": "fix",
+  "note": "Review recorded in review.md. Lean matches Tag 05A8 and compiled cleanly. Complete replacement report in fixes repairs the H11 second-reading placeholder; no Lean or JSON changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.CountableSubmoduleAdaptedToBaseChangeSum",
+  "declaration": "Submodule.exists_countable_submodule_adapted_to_baseChange_directSum",
+  "file": "lean/Sheaf/LinearAlgebra/CountableSubmoduleAdaptedToBaseChangeSum.lean",
+  "statement": "theorem exists_countable_submodule_adapted_to_baseChange_directSum {A : Type u} [CommRing A] {B : Type v} [CommRing B] [Algebra A B] {L : Type w} [AddCommGroup L] [Module A L] {I : Type x} {Q : I → Type y} [∀ i, AddCommGroup (Q i)] [∀ i, Module B (Q i)] (θ : B ⊗[A] L ≃ₗ[B] ⨁ i : I, Q i) (hQ : ∀ i, ∃ s : Set (Q i), s.Countable ∧ Submodule.span B s = ⊤) (C : Submodule A L) (hC : ∃ s : Set L, s.Countable ∧ Submodule.span A s = C) : ∃ P : Submodule A L, (∃ s : Set L, s.Countable ∧ Submodule.span A s = P) ∧ C ≤ P ∧ ∃ J : Set I, LinearMap.range (θ.toLinearMap.comp (P.subtype.baseChange B)) = ⨆ j : J, LinearMap.range (DirectSum.lof B I Q j.val)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
