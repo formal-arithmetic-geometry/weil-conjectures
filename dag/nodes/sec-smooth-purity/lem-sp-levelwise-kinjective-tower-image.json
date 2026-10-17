@@ -2,7 +2,7 @@
  "id": "lem-sp-levelwise-kinjective-tower-image",
  "kind": "statement",
  "title": "Levelwise K-injective towers compute additive functors applied levelwise",
- "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in the universe of [def-weil-size-convention], with sheaves of commutative rings $R,S$. Put $\\mathcal A=\\operatorname{Mod}(R)$ and $\\mathcal B=\\operatorname{Mod}(S)$ [def-weil-sheaf-of-modules-category]. Let $G:\\mathcal A\\to\\mathcal B$ be an additive functor [def-weil-pbc-additive-functor]. Write $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal A)$ and similarly for $\\mathcal B$, with levelwise exactness, and let $G^{\\operatorname{Tow}}$ apply $G$ levelwise. Use unbounded derived categories [def-weil-abstract-derived-category]. Let $RG^{\\operatorname{Tow}}$ be the total right derived functor obtained by resolving a strict tower complex by a K-injective tower complex and applying $G^{\\operatorname{Tow}}$ termwise. Here a tower complex $Q$ is K-injective when every chain map from an acyclic tower complex to $Q$ is null-homotopic; for ordinary module complexes use [def-pur-kinjective-complex]. If $X$ is a strict tower complex whose every evaluation $X_n$ is K-injective, then for every K-injective tower resolution $q:X\\to Q$, every evaluation $Q_n$ is K-injective and\n$$G^{\\operatorname{Tow}}(q):G^{\\operatorname{Tow}}X\\longrightarrow G^{\\operatorname{Tow}}Q$$\nis a levelwise quasi-isomorphism. Consequently the canonical comparison $G^{\\operatorname{Tow}}X\\to RG^{\\operatorname{Tow}}X$ is an isomorphism in $D(\\operatorname{Tow}(\\mathcal B))$, natural on the category of such $X$ and compatible with their strict transitions. In particular, if $X$ has the same K-injective complex $J$ at every level and a chain endomorphism $s:J\\to J$ as each transition, its derived image is represented by the actual tower with terms $GJ$ and transitions $G(s)$.",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in the universe of [def-weil-size-convention], with sheaves of commutative rings $R,S$. Put $\\mathcal A=\\operatorname{Mod}(R)$ and $\\mathcal B=\\operatorname{Mod}(S)$ [def-weil-sheaf-of-modules-category]. Let $G:\\mathcal A\\to\\mathcal B$ be an additive functor [def-weil-pbc-additive-functor]. Write $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal A)$ and similarly for $\\mathcal B$, with levelwise exactness, and let $G^{\\operatorname{Tow}}$ apply $G$ levelwise. Use unbounded derived categories [def-weil-abstract-derived-category]. Let $RG^{\\operatorname{Tow}}$ be the total right derived functor [def-sfb-right-derived-functor] obtained by resolving a strict tower complex by a K-injective tower complex and applying $G^{\\operatorname{Tow}}$ termwise. Here a tower complex $Q$ is K-injective when every chain map from an acyclic tower complex to $Q$ is null-homotopic; for ordinary module complexes use [def-pur-kinjective-complex]. If $X$ is a strict tower complex whose every evaluation $X_n$ is K-injective, then for every K-injective tower resolution $q:X\\to Q$, every evaluation $Q_n$ is K-injective and\n$$G^{\\operatorname{Tow}}(q):G^{\\operatorname{Tow}}X\\longrightarrow G^{\\operatorname{Tow}}Q$$\nis a levelwise quasi-isomorphism. Consequently the canonical comparison $G^{\\operatorname{Tow}}X\\to RG^{\\operatorname{Tow}}X$ is an isomorphism in $D(\\operatorname{Tow}(\\mathcal B))$, natural on the category of such $X$ and compatible with their strict transitions. In particular, if $X$ has the same K-injective complex $J$ at every level and a chain endomorphism $s:J\\to J$ as each transition, its derived image is represented by the actual tower with terms $GJ$ and transitions $G(s)$.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0941, lemma-derived-limit-is-ok, proof: evaluation has an exact left adjoint and sends K-injective tower complexes to K-injective complexes; combined with derived.tex Tag 070I, lemma-K-injective, homotopy comparison."
@@ -12,11 +12,94 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-pur-kinjective-complex",
-  "def-weil-pbc-additive-functor"
+  "def-weil-pbc-additive-functor",
+  "def-sfb-right-derived-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a K-injective tower resolution $q:X\\to Q$. Evaluation is exact by [lem-weil-tower-category-levelwise-abelian], so it computes cohomology levelwise: $H^r(q)_n=H^r(q_n)$. Thus each $q_n:X_n\\to Q_n$ is a quasi-isomorphism. Apply [lem-weil-tower-evaluation-kinjective] to the K-injective tower complex $Q$ to conclude that every $Q_n$ is K-injective. Its indexing by positive integers agrees with the cited opposite natural-number poset after the order isomorphism $n\\mapsto n-1$. No injectivity of the individual terms of $Q$, or surjectivity of its transitions, is required.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof paragraph beginning \"Note that the functor\"; exact evaluation and the exact-left-adjoint argument"
+   }
+  },
+  {
+   "text": "Both $X_n$ (by hypothesis) and $Q_n$ (by step 1) are K-injective. The final assertion of [lem-weil-pbc-kinjective-hom-derived] applied to $q_n$ gives a chain homotopy inverse $v_n:Q_n\\to X_n$, with $v_nq_n\\simeq1_{X_n}$ and $q_nv_n\\simeq1_{Q_n}$. These inverses are chosen separately at each level; no compatibility between the $v_n$ is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; Tag 070Y, lemma-K-injective-defined; Tag 070K, lemma-enough-K-injectives-implies"
+   }
+  },
+  {
+   "text": "By additivity [def-weil-pbc-additive-functor], $G(0)=0$ and $G(a-b)=G(a)-G(b)$. Applying $G$ to a chain homotopy equation $f-g=dh+hd$ gives $G(f)-G(g)=G(d)G(h)+G(h)G(d)$ degree by degree. Apply this to the two homotopies in step 2. Then $G(v_n)$ is a chain homotopy inverse of $G(q_n)$. Homotopic maps induce equal maps on $H^r=\\ker d^r/\\operatorname{im}d^{r-1}$ [def-weil-abstract-derived-category]: on the kernel the difference $dh+hd$ lands in the image of $d$. Hence $H^r(G(q_n))$ has inverse $H^r(G(v_n))$, proving that $G^{\\operatorname{Tow}}(q)$ is a levelwise quasi-isomorphism.",
+   "uses": [
+    "def-weil-pbc-additive-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; Tag 070Y, lemma-K-injective-defined; Tag 070K, lemma-enough-K-injectives-implies"
+   }
+  },
+  {
+   "text": "Put $T=G^{\\operatorname{Tow}}$. The morphism $Tq:TX\\to TQ$ is a strict tower map because $G$ preserves composition. Cohomology in $\\operatorname{Tow}(\\mathcal B)$ is computed levelwise by [lem-weil-tower-category-levelwise-abelian]. Every component of $H^r(Tq)$ is invertible by step 3, and these inverses form a tower map: multiply the commuting transition square by the component inverses. Therefore $Tq$ is a quasi-isomorphism of tower complexes. Its class $L_{\\mathcal B}(Tq)$ is invertible in the derived category by [def-weil-abstract-derived-category], where $L_{\\mathcal A}$ and $L_{\\mathcal B}$ denote the localization functors for the two tower categories.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; Tag 070Y, lemma-K-injective-defined; Tag 070K, lemma-enough-K-injectives-implies"
+   }
+  },
+  {
+   "text": "Use the total right derived functor $RT=RG^{\\operatorname{Tow}}$ stipulated in the statement, with its unit $\\eta$ as in [def-sfb-right-derived-functor]. Since $Q$ is K-injective as a tower, the cited computation property says that $\\eta_Q$ is invertible. Also $RT(L_{\\mathcal A}q)$ is invertible, since $q$ is a quasi-isomorphism [def-weil-abstract-derived-category]. Set $c_q=\\eta_Q^{-1}\\circ RT(L_{\\mathcal A}q):RT(L_{\\mathcal A}X)\\xrightarrow{\\sim}L_{\\mathcal B}(TQ)$. Naturality of the unit gives $c_q\\circ\\eta_X=L_{\\mathcal B}(Tq)$. The right side is invertible by step 4, so $\\eta_X$ is invertible. This identifies the asserted canonical comparison with the actual strict tower map $Tq$ under the resolution-computation isomorphism. The existence of the K-injective-resolution construction is part of the given $RT$, not an additional boundedness or exactness assumption on $G$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; Tag 070Y, lemma-K-injective-defined; Tag 070K, lemma-enough-K-injectives-implies"
+   }
+  },
+  {
+   "text": "For a strict chain map $a:X\\to Y$ between levelwise K-injective tower complexes, naturality of the same unit [def-sfb-right-derived-functor] reads $RT(L_{\\mathcal A}a)\\circ\\eta_X=\\eta_Y\\circ L_{\\mathcal B}(Ta)$. Thus the isomorphisms of step 5 give a natural comparison on precisely the category in the statement, independent of choices of $q$. Write $t^X_n:X_{n+1}\\to X_n$ and $t^Q_n:Q_{n+1}\\to Q_n$. The strict tower equation $q_n t^X_n=t^Q_n q_{n+1}$ becomes $G(q_n)G(t^X_n)=G(t^Q_n)G(q_{n+1})$. This proves compatibility before localization with every transition; no coherent choices of the separate homotopy inverses from step 2 are necessary. In particular, when $X_n=J$ and $t^X_n=s$, its image $TX$ has terms $GJ$ and transitions $G(s)$ by definition. Step 5 identifies this actual tower with its derived image.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; Tag 070Y, lemma-K-injective-defined; Tag 070K, lemma-enough-K-injectives-implies"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-additive-functor",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, evaluation paragraph; combined with derived.tex Tags 070I/070Y/070K. Explicit additive homotopy and strict-transition calculations by Q131."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +149,52 @@
    "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
    "date": "2026-10-17",
    "verdict": "no match: rightDerived hits concern individual objects and natural-number derived functors; CochainComplex.IsKInjective and quasiIso_iff give only K-injective complexes and homotopy equivalences. Evaluation of a K-injective strict tower and its transition-compatible comparison require additional arguments, so this is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of inverse systems with K-injective evaluations computes the unbounded right derived functor of an additive functor applied levelwise, naturally with its strict transitions",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.leftDerived, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-17",
+   "verdict": "no match: individual-object rightDerived and injective resolution hits do not state the unbounded tower assertion; K-injective comparison is only a constituent. Localization mapHomologicalComplex requires preservation of homology, absent for general additive G. No exact or one-line match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, CategoryTheory.evaluation",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: individual-object rightDerived and injective resolution hits do not state the unbounded tower assertion; K-injective comparison is only a constituent. Localization mapHomologicalComplex requires preservation of homology, absent for general additive G. No exact or one-line match."
+  },
+  {
+   "tool": "grep",
+   "query": "(IsKInjective|isKInjective|K.injective).*(evaluation|tower|diagram)|(evaluation|tower).*(IsKInjective|K.injective)",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: individual-object rightDerived and injective resolution hits do not state the unbounded tower assertion; K-injective comparison is only a constituent. Localization mapHomologicalComplex requires preservation of homology, absent for general additive G. No exact or one-line match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tower of K-injective complexes computes an additive functor derived on the category of inverse systems with its actual transition maps",
+   "results": "8 hits: CochainComplex.IsKInjective, CategoryTheory.injectiveResolutions, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.isKProjective_of_op, CochainComplex.IsKInjective.mk, CochainComplex.isKInjective_of_injective, CochainComplex.IsKInjective.recOn",
+   "date": "2026-10-17",
+   "verdict": "no match: individual-object rightDerived and injective resolution hits do not state the unbounded tower assertion; K-injective comparison is only a constituent. Localization mapHomologicalComplex requires preservation of homology, absent for general additive G. No exact or one-line match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on diagrams sends a quasi-isomorphism from a pointwise homotopically injective complex to an injective replacement to a quasi-isomorphism",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.quasiIso, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+   "date": "2026-10-17",
+   "verdict": "no match: individual-object rightDerived and injective resolution hits do not state the unbounded tower assertion; K-injective comparison is only a constituent. Localization mapHomologicalComplex requires preservation of homology, absent for general additive G. No exact or one-line match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso|PreservesHomology|quasiIso_iff",
+   "results": "25 hits: Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: individual-object rightDerived and injective resolution hits do not state the unbounded tower assertion; K-injective comparison is only a constituent. Localization mapHomologicalComplex requires preservation of homology, absent for general additive G. No exact or one-line match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-completed-pullback-adjunction",
@@ -88,5 +213,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-levelwise-kinjective-tower-image",
+  "worker": "stage1",
+  "summary": "Six-step proof reusing evaluation preservation, levelwise abelian structure, and K-injective homotopy comparison. Wrote the additive homotopy equation, global localization, canonical derived-unit formula and strict transition square. No new nodes and no mathematical statement correction; added the existing derived-functor definition citation.",
+  "blueprint": "Realizes fix-lem-exchanges proof Steps 2 (naturality) and 3 (identity and pasting) at the integral adjunction-mate stage, through the strict-tower computation required in lem-sp-completed-pullback-adjunction. The ancestor and intervening node are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-tower-evaluation-kinjective",
+    "why": "Generic evaluation-preserves-K-injectives theorem; no geometric route is replaced."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic total-derived unit and its K-injective computation specify the comparison already used in the item; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-tower-evaluation-kinjective",
+  "def-sfb-right-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-6ccd7319a",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-6ccd7319a (reviewer sub-agent of L); spot-checked: I read all six steps of the item in full: the statement, the six-step proof and the statements of every cited node. I also read the parent's Step 4 (it uses the constant-tower clause with G=u_* and transitions given by multiplication by a_i, which matches), the unit sk-prop-sf-cbc and the ancestor fix-lem-exchanges in main-20261015. Sources read at the cited places: Stacks 0941 (the 'exact left adjoint' paragraph) and 070I/070Y/070K; they match. The delivery has one commit and no new nodes. It cites no SGA source, and the item is not a target node. The statement is true and not weakened. It correctly separates 'K-injective at every level' from 'K-injective as a tower', and G need not be left exact. The existence of RG^Tow is part of the statement's wording, and it holds anyway because Tow(Mod R) is Grothendieck abelian. Step checks: (1) evaluation is exact, so each q_n is a quasi-isomorphism. Every Q_n is K-injective by lem-weil-tower-evaluation-kinjective. That node defines K-injective through an acyclic Hom complex, while the item uses null-homotopy; the two agree by a shift argument, so no repair is needed. (2) The last sentence of the hom-derived leaf gives levelwise homotopy inverses; no compatibility between them is claimed. (3) Additivity carries the homotopy equations over, so each G(q_n) is a quasi-isomorphism. (4) The inverses form a tower map, so L(Tq) is invertible. (5) From RT(Lq)η_X = η_Q L(Tq), with η_Q invertible as stated in def-sfb-right-derived-functor, η_X is invertible; I checked this algebra. (6) Naturality and the transition square push forward correctly. Small cases tested: G=0, G=id, G=-⊗Z/2 (not left exact) on the constant injective tower Q/Z, X=0, s=0. Tool uses accepted: lem-weil-tower-evaluation-kinjective (generic, Lean closed) and def-sfb-right-derived-functor (a definition). The other two cited statements are Mathlib leaves, and the graph has no cycle. A search with rg over the whole DAG found no duplicate. Closest candidates: ringed-tower-pushforward-limit-comparison, exact-product-functor-strict-limit, coefficient-system-derived-comparison. No fixes."
  }
 }

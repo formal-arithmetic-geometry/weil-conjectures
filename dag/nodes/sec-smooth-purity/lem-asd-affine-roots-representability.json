@@ -1,0 +1,95 @@
+{
+ "id": "lem-asd-affine-roots-representability",
+ "kind": "statement",
+ "title": "Affine root scheme represents roots on all test schemes",
+ "statement": "Let $R$ be a commutative ring, $n\\geq1$, $V=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and $P=\\operatorname{Spec}(R[t]/(t^n-1))$, using polynomial rings [def-weil-polynomial-ring] and quotient algebras [def-weil-pbc-algebra-hom-quotient]. Write $x\\in\\Gamma(P,\\mathcal O_P)$ for the class of $t$; it is a unit with inverse $x^{n-1}$. For every $V$-scheme $U$ [def-pc-scheme], pullback of $x$ gives a bijection\n$$\\operatorname{Mor}_V(U,P)\\xrightarrow{\\sim}\\{z\\in\\Gamma(U,\\mathcal O_U)^\\times:z^n=1\\},\\qquad a\\longmapsto a^\\sharp(x),$$\nnatural in all morphisms of $V$-schemes $U$. In particular this identifies the representable sheaf $h_P$, $h_P(W)=\\operatorname{Mor}_V(W,P)$ [lem-weil-pbc-small-etale-representable-presheaf-sheaf], on the small etale site [def-weil-pbc-etale-site] with the underlying sheaf of sets of the roots sheaf [def-asd-etale-roots-of-unity]. For every morphism of schemes $v:V'\\to V$ and $P'=V'\\times_VP$ [def-pc-fibre-product], with projection $p:P'\\to P$, the same formula $a\\mapsto a^\\sharp(p^\\sharp x)$ is a bijection from $\\operatorname{Mor}_{V'}(U,P')$ to these roots for every $V'$-scheme $U$, natural in $U$. Under these bijections base-changing $a:U\\to P$ sends its root to the pullback of that root along $V'\\times_VU\\to U$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 040M, example-roots-of-unity (including its base-change paragraph); etale-cohomology.tex Tag 03PK, section-kummer"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-asd-etale-roots-of-unity",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring R and a positive integer n, Spec R[X]/(X^n-1) represents the functor of nth roots of unity on schemes over R, naturally after any base change",
+   "results": "8 hits: rootsOfUnityEquivNthRoots_apply, rootsOfUnityEquivNthRoots_symm_apply, modularCyclotomicCharacter'.spec', Polynomial.map_mem_nthRootsFinset_one, AlgebraicGeometry.AffineSpace, modularCyclotomicCharacter.spec, rootsOfUnityEquivNthRoots, Polynomial.map_mem_nthRootsFinset",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic roots of unity, affine spaces and structure sheaves do not supply the roots functor representation on all schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of nth roots of unity on the small etale site is represented by Spec R[t]/(t^n-1) over an affine scheme Spec R, and this identification is natural under base change",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, modularCyclotomicCharacter.spec, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace.homOverEquiv, modularCyclotomicCharacter'.spec', AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply, AlgebraicGeometry.AffineSpace",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic roots of unity, affine spaces and structure sheaves do not supply the roots functor representation on all schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of nth roots of unity on the small etale site is represented by Spec R[t]/(t^n-1) over an affine scheme Spec R, and this identification is natural under base change",
+   "results": "8 hits: rootsOfUnityEquivNthRoots_apply, AlgebraicGeometry.Spec_sheaf, mem_rootsOfUnity_iff_mem_nthRoots, modularCyclotomicCharacter.toFun_spec, AlgebraicGeometry.Scheme.ΓSpecIso, Polynomial.map_mem_nthRootsFinset_one, AlgebraicGeometry.Spec.sheafedSpaceObj_presheaf, IsPrimitiveRoot.card_nthRoots_one",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic roots of unity, affine spaces and structure sheaves do not supply the roots functor representation on all schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "rootsOfUnity, map_rootsOfUnity, Scheme.Spec",
+   "results": "0 hits: ; loogle: unknown identifier 'Scheme.Spec'",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"map\"",
+   "results": "7 hits: map_rootsOfUnity, map_rootsOfUnity_eq_pow_self, IsPrimitiveRoot.map_rootsOfUnity, Ideal.rootsOfUnityMapQuot, Ideal.rootsOfUnityMapQuot_injective, Ideal.rootsOfUnityMapQuot_apply, Ideal.rootsOfUnityMapQuot_inj",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic roots of unity, affine spaces and structure sheaves do not supply the roots functor representation on all schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|map_rootsOfUnity|Spec.*T.*n",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic roots of unity, affine spaces and structure sheaves do not supply the roots functor representation on all schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|roots.of.unity|muSheaf",
+   "results": "0 hits: ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic roots of unity, affine spaces and structure sheaves do not supply the roots functor representation on all schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-etale-finite-twist-pullback",
+  "date": "2026-10-17",
+  "group": "Q126"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Proof paragraph 2: the ordinary inverse-image and twist base-change isomorphism; affine root-scheme representation used in the finite coefficient twist comparison",
+   "via": [
+    "lem-asd-etale-finite-twist-pullback"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
