@@ -196,5 +196,39 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-9a7afc55f (reviewer sub-agent of L); spot-checked: Read the item, all five steps, every cited statement, the parent's step 4, and Rezk §5.7, §6, (6.3) and Prop. 6.4 with its (2)⇒(4) proof on printed pp. 14-15 (fetched and checked with pdftotext). The statement is unchanged and matches Rezk 6.4(4), made explicit as a specified natural, pointed zigzag. Its hofib is exactly the path model of def-cbc-enhanced-diagrams-cones, which is P(r,b) of the Kan pullback lemmas. Step 1: Reedy fibrancy gives M_1W = A^2, so (d1,d0) is a Kan fibration; component restriction gives that p_W is a Kan fibration and W_eq is Kan; the components lemma gives fibre = E_W simplexwise. Step 2: the corner-map leaf on the inclusion of the boundary of Δ^1 gives q_A a fibration, and the empty inclusion gives K_A Kan; path replacement for id_A gives c_A a weak equivalence; I checked that p_W s0 and q_A c_A both equal Δ_A. Step 3: pullback-path comparison with the left leg a Kan fibration gives the two outer constant-path arrows. Step 4: homotopy-pullback invariance with (s0,id,id) and (c_A,id,id) gives the inner arrows, in the stated directions. Step 5: naturality and the x=y basepoints are elementary identities, and f_1 preserves W_eq because the induced functor preserves isomorphisms. Edge cases checked: A empty, x and y in different components (empty fibres), constant discrete W, and NC. No new nodes. No cycle: the parent lem-coef-complete-segal-dk-levelwise is not reachable from the item's dependencies. No duplicate among the related Segal/hofib nodes. Route: everything is in unit sk-prop-sf-biduality-general apart from a definition and a Mathlib leaf; no tool_uses needed; no SGA. Searches are complete (three kinds) and proof_deps equals the union of the steps' uses. Only cosmetic point: step 4 says 'latter source cospan' where it means A→B←Δ^0; the formula given removes any ambiguity, so no fix."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompleteSegalPathFiberComparison",
+  "declaration": "CategoryTheory.SegalSpace.PathComparison.complete_segal_path_fiber_comparison",
+  "declarations": [
+   "CategoryTheory.SegalSpace.PathComparison.equivalenceEndpoints",
+   "CategoryTheory.SegalSpace.PathComparison.pathEndpoints",
+   "CategoryTheory.SegalSpace.PathComparison.diagonal",
+   "CategoryTheory.SegalSpace.PathComparison.equivalenceFiber",
+   "CategoryTheory.SegalSpace.PathComparison.pathFiber",
+   "CategoryTheory.SegalSpace.PathComparison.IsConstantComparison",
+   "CategoryTheory.SegalSpace.PathComparison.IsInducedFiberMap",
+   "CategoryTheory.SegalSpace.PathComparison.Zigzag",
+   "CategoryTheory.SegalSpace.PathComparison.Zigzag.IsWeak",
+   "CategoryTheory.SegalSpace.PathComparison.ZigzagMap",
+   "CategoryTheory.SegalSpace.PathComparison.IsConstantPoint",
+   "CategoryTheory.SegalSpace.PathComparison.Zigzag.IsPointed",
+   "CategoryTheory.SegalSpace.PathComparison.complete_segal_path_fiber_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CompleteSegalPathFiberComparison.lean",
+  "statement": "theorem complete_segal_path_fiber_comparison : (∀ (W : Space.{u}), IsComplete W → ∀ x y : (row W ⦋0⦌) _⦋0⦌, ∃ z : Zigzag W x y, z.IsWeak) ∧ (∀ (W V : Space.{u}), IsComplete W → IsComplete V → ∀ (f : W ⟶ V) (x y : (row W ⦋0⦌) _⦋0⦌) (z : Zigzag W x y) (t : Zigzag V (f.app (op ⦋0⦌, op ⦋0⦌) x) (f.app (op ⦋0⦌, op ⦋0⦌) y)), Nonempty (ZigzagMap f x y z t)) ∧ (∀ (W : Space.{u}), IsComplete W → ∀ (x : (row W ⦋0⦌) _⦋0⦌) (z : Zigzag W x x), z.IsPointed x)",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The five objects use the recorded completeness predicate, equivalence-arrow subcomplex, endpoint map and path-model homotopy fibers. The four arrows and all five naturality maps are pinned down by their coordinates in every degree. Diagonal points are explicitly specified and preserved. Helpers package this node only; no dependency or independent notion is restated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b500fdd14",
+  "group": "Q123",
+  "result": "fix",
+  "note": "Mathematics and Lean statement match; fresh scompile.py checks passed. Repaired H11’s placeholder second reading with a complete report override in fixes/. Full findings are in review.md. No repository or branch head changed."
  }
 }
