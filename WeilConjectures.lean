@@ -3487,6 +3487,7 @@ public import WeilConjectures.Mathlib.RingTheory.Idempotents
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
+public import WeilConjectures.Mathlib.RingTheory.Invariant.Reynolds
 public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.Kaehler.Basic
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
@@ -3667,11 +3668,14 @@ public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.AdjoinRoot
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
+public import WeilConjectures.RingTheory.DiscreteValuationRing.EtaleRootsOfUnity
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.Etale.Abhyankar
 public import WeilConjectures.RingTheory.Etale.Coordinates
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal.Basic
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal.LiftQuotient
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Global
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Lift
 public import WeilConjectures.RingTheory.Etale.DepthTwo.LiftComplete
@@ -3682,8 +3686,12 @@ public import WeilConjectures.RingTheory.Etale.DepthTwo.RegularQuotient
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Splitting
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
+public import WeilConjectures.RingTheory.Etale.DescentAtPrime
 public import WeilConjectures.RingTheory.Etale.IntegralClosureSpreading
 public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
+public import WeilConjectures.RingTheory.Etale.InvariantsDescent
+public import WeilConjectures.RingTheory.Etale.InvariantsDescentAux
+public import WeilConjectures.RingTheory.Etale.KummerDescent
 public import WeilConjectures.RingTheory.Etale.TraitSection
 public import WeilConjectures.RingTheory.Etale.TraitSection.Rigidity
 public import WeilConjectures.RingTheory.EtaleAlgebraLift
@@ -3748,8 +3756,11 @@ public import WeilConjectures.RingTheory.ImprovePresentationSmoothConormalFree
 public import WeilConjectures.RingTheory.IndSmoothFinitePresentationFactorization
 public import WeilConjectures.RingTheory.IndStandardSmooth
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
+public import WeilConjectures.RingTheory.IntegralClosure.EtaleBaseChange
+public import WeilConjectures.RingTheory.IntegralClosure.NoetherianApproximation
 public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial
 public import WeilConjectures.RingTheory.IntegrallyClosed.DepthTwo
+public import WeilConjectures.RingTheory.Invariant.Kummer
 public import WeilConjectures.RingTheory.JacobianPresentationLift
 public import WeilConjectures.RingTheory.Kaehler.LocalizationPolynomial
 public import WeilConjectures.RingTheory.Kaehler.Trace
@@ -4671,6 +4682,7 @@ public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarExact
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
+public import WeilConjectures.ZZAudit
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.BettiSymmetry
