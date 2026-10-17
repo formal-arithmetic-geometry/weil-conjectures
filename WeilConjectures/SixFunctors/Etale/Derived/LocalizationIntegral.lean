@@ -444,7 +444,8 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar (f : X ⟶ Y) (hf : f
     exact ⟨(DerivedCategory.boundedConstructible _ Y).prop_of_iso e
         (boundedConstructible_rightDerivedLowerStar _ aX aY f hf N hN' hNY hbc),
       (DerivedCategory.torAmplitudeIn _ Y _ _).prop_of_iso e
-        (torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN' hNY hbc hta)⟩
+        (torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing _ aX aY f hf d hd a b N hN' hNY
+          hbc hta)⟩
   refine ⟨⟨derivedComplete_rightDerivedLowerStar_obj hϖ hI f hc, a₀, b₀ + 2 * (d : ℤ),
     fun n ↦ key n a₀ b₀ (h₀ n).1 (h₀ n).2⟩, fun a b hab n ↦ (key n a b (h₀ n).1 (hab n)).2⟩
 
