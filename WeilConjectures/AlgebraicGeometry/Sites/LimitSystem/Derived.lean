@@ -92,15 +92,16 @@ lemma unitSheafSingleIso_comp {X Y Z : Scheme.{u}} (u : X ⟶ Y) (v : Y ⟶ Z) :
       ((upperStar AddCommGrpCat.{u + 1} u).mapDerivedCategorySingleFunctor 0).hom.app
         ((upperStar AddCommGrpCat.{u + 1} v).obj (unitSheaf Z)))]
   simp only [Category.assoc]
-  rw [h₂, reassoc_of% h₁]
-  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+  rw [h₂, h₁]
   erw [Iso.inv_hom_id_app_assoc]
-  have hn := ((upperStar AddCommGrpCat.{u + 1} u).mapDerivedCategorySingleFunctor 0).inv.naturality
+  rw [← Functor.map_comp_assoc (((upperStar AddCommGrpCat.{u + 1} u).mapDerivedCategory)),
+    Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+  have hn := ((upperStar AddCommGrpCat.{u + 1} u).mapDerivedCategorySingleFunctor 0).hom.naturality
     ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} v).inv.app
       (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
   simp only [Functor.comp_obj, Functor.comp_map] at hn
-  rw [← Functor.map_comp_assoc, ← Functor.map_comp, ← Functor.map_comp_assoc, ← reassoc_of% hn,
-    Iso.inv_hom_id_app, Category.comp_id, ← Functor.map_comp, ← Functor.map_comp]
+  erw [reassoc_of% hn, Iso.inv_hom_id_app_assoc]
+  rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
   simpa using hc
 
@@ -184,13 +185,14 @@ lemma overRestrict_comp {T T' T'' : Over S} (g : T' ⟶ T) (g' : T'' ⟶ T')
   have hcoc := Functor.mapDerivedCategoryCompIsoOfIso_cocycle
     (upperStarComp AddCommGrpCat.{u + 1} g.left T.hom T'.hom (Over.w g).symm)
     (upperStarComp AddCommGrpCat.{u + 1} g'.left T'.hom T''.hom (Over.w g').symm)
-    (upperStarComp AddCommGrpCat.{u + 1} g'.left g.left (g' ≫ g).left (Over.comp_left _ _ _))
+    (upperStarComp AddCommGrpCat.{u + 1} g'.left g.left (g' ≫ g).left (Over.comp_left _ _ _ g' g))
     (upperStarComp AddCommGrpCat.{u + 1} (g' ≫ g).left T.hom T''.hom (Over.w (g' ≫ g)).symm)
     (fun X ↦ upperStarComp_hom_app_comp g'.left g.left T.hom (g' ≫ g).left T'.hom T''.hom
-      (Over.comp_left _ _ _) (Over.w g).symm (Over.w g').symm X) K
+      (Over.comp_left _ _ _ g' g) (Over.w g).symm (Over.w g').symm X) K
   have hunit := unitSheafSingleIso_comp g'.left g.left
   let ρ := Functor.mapDerivedCategoryNatIso
-    (upperStarComp AddCommGrpCat.{u + 1} g'.left g.left (g' ≫ g).left (Over.comp_left _ _ _)) ≪≫
+    (upperStarComp AddCommGrpCat.{u + 1} g'.left g.left (g' ≫ g).left
+      (Over.comp_left _ _ _ g' g)) ≪≫
       Functor.mapDerivedCategoryCompIso (upperStar AddCommGrpCat.{u + 1} g.left)
         (upperStar AddCommGrpCat.{u + 1} g'.left)
   have hx := ShiftedHom.map_naturality_2 x ρ.symm
@@ -206,17 +208,109 @@ end Restriction
 `AlgebraicGeometry.Etale.cohomologyMap` on sheaf cohomology. -/
 lemma hyperHPullback_homEquiv {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) (e : Sheaf.H F n) :
-    Abelian.Ext.homEquiv (cohomologyMap f F n e) =
-      (hyperHPullback f ((DerivedCategory.singleFunctor _ 0).obj F) n
-        (Abelian.Ext.homEquiv e)).comp (ShiftedHom.mk₀ 0 rfl
+    (cohomologyMap f F n e).hom =
+      (hyperHPullback f ((DerivedCategory.singleFunctor _ 0).obj F) n e.hom).comp
+        (ShiftedHom.mk₀ 0 rfl
           (((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategorySingleFunctor 0).hom.app F))
-          (zero_add _) := by
-  rw [cohomologyMap_apply]
-  change (Abelian.Ext.comp _ _ _).hom = _
-  rw [Abelian.Ext.comp_hom, Abelian.Ext.mk₀_hom, Abelian.Ext.mapExactFunctor_hom]
+        (zero_add _) := by
+  rw [cohomologyMap_apply, Abelian.Ext.comp_hom, Abelian.Ext.mk₀_hom,
+    Abelian.Ext.mapExactFunctor_hom]
   simp only [hyperHPullback, AddMonoidHom.coe_mk, ZeroHom.coe_mk, unitSheafSingleIso,
-    Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom]
-  simp only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀, Category.assoc, Functor.map_comp]
+    Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom,
+    ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀, Category.assoc]
+
+private lemma shiftedHom_comp_mk₀_comp_mk₀ {C : Type*} [Category C] [HasShift C ℤ]
+    {X Y Z W : C} {n m₀ m₀' : ℤ} (hm₀ : m₀ = 0) (hm₀' : m₀' = 0) (x : ShiftedHom X Y n)
+    (f : Y ⟶ Z) (g : Z ⟶ W) (h : m₀ + n = n) (h' : m₀' + n = n) :
+    (x.comp (ShiftedHom.mk₀ m₀ hm₀ f) h).comp (ShiftedHom.mk₀ m₀' hm₀' g) h' =
+      x.comp (ShiftedHom.mk₀ 0 rfl (f ≫ g)) (zero_add n) := by
+  subst hm₀ hm₀'
+  simp [ShiftedHom.comp_mk₀]
+
+/-- A morphism `f : X ⟶ Y` composed with the pullback map. -/
+private lemma hyperHPullback_comp_mk₀ {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {K L : DerivedCategory (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})} (φ : K ⟶ L)
+    {n : ℤ} (x : hyperH K n) :
+    hyperHPullback f L n (x.comp (ShiftedHom.mk₀ 0 rfl φ) (zero_add n)) =
+      (hyperHPullback f K n x).comp
+        (ShiftedHom.mk₀ 0 rfl (((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory).map φ))
+        (zero_add n) := by
+  simp only [hyperHPullback, AddMonoidHom.coe_mk, ZeroHom.coe_mk, ShiftedHom.map_comp,
+    ShiftedHom.map_mk₀]
+  rw [ShiftedHom.comp_assoc _ _ _ (add_zero n) (zero_add n) (by omega)]
+
+variable {A B F : Type*} [Category A] [Category B] [Category F] [Abelian A] [Abelian B]
+  [Abelian F] [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory F] in
+/-- The isomorphism `Functor.mapDerivedCategoryCompIsoOfIso` on single objects. -/
+private lemma mapDerivedCategoryCompIsoOfIso_hom_app_single {G₁ : A ⥤ B} {G₂ : B ⥤ F}
+    {G : A ⥤ F} [G₁.Additive] [G₂.Additive] [G.Additive] [PreservesFiniteLimits G₁]
+    [PreservesFiniteColimits G₁] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : G ≅ G₁ ⋙ G₂) (X : A) :
+    (G₂.mapDerivedCategorySingleFunctor 0).inv.app (G₁.obj X) ≫
+        G₂.mapDerivedCategory.map ((G₁.mapDerivedCategorySingleFunctor 0).inv.app X) ≫
+        (Functor.mapDerivedCategoryCompIsoOfIso e).hom.app
+          ((DerivedCategory.singleFunctor A 0).obj X) =
+      (DerivedCategory.singleFunctor F 0).map (e.inv.app X) ≫
+        (G.mapDerivedCategorySingleFunctor 0).inv.app X := by
+  have h₁ := Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor e X
+  have h₂ := Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor G₁ G₂ X
+  simp only [Functor.mapDerivedCategoryCompIsoOfIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app]
+  rw [← cancel_epi ((G₁ ⋙ G₂).mapDerivedCategorySingleFunctor 0).hom.app X, ← h₂]
+  simp only [Category.assoc]
+  rw [← Functor.map_comp_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
+    Iso.hom_inv_id_app_assoc]
+  rw [← cancel_mono ((G.mapDerivedCategorySingleFunctor 0).hom.app X), Category.assoc,
+    Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryNatIso e).hom.app
+    ((DerivedCategory.singleFunctor A 0).obj X)), Iso.hom_inv_id_app_assoc, reassoc_of% h₁,
+    ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id, Category.comp_id]
+
+section SheafH
+
+variable {S : Scheme.{u}} (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})
+
+/-- The identification of `Hⁿ(T, F|_T)` with the hypercohomology `Hⁿ(T, (F[0])|_T)`. -/
+noncomputable def sheafHToHyperH (T : Over S) (n : ℕ) :
+    Sheaf.H ((upperStar AddCommGrpCat.{u + 1} T.hom).obj F) n →
+      hyperH ((overPullback T).obj ((DerivedCategory.singleFunctor _ 0).obj F)) n :=
+  fun e ↦ e.hom.comp (ShiftedHom.mk₀ 0 rfl
+    (((upperStar AddCommGrpCat.{u + 1} T.hom).mapDerivedCategorySingleFunctor 0).inv.app F))
+    (zero_add _)
+
+lemma sheafHToHyperH_zero (T : Over S) (n : ℕ) : sheafHToHyperH F T n 0 = 0 := by
+  simp [sheafHToHyperH, Abelian.Ext.zero_hom, ShiftedHom.zero_comp]
+
+lemma sheafHToHyperH_bijective (T : Over S) (n : ℕ) :
+    Function.Bijective (sheafHToHyperH F T n) := by
+  let e := ((upperStar AddCommGrpCat.{u + 1} T.hom).mapDerivedCategorySingleFunctor 0).app F
+  refine ⟨fun x y hxy ↦ ?_, fun x ↦ ?_⟩
+  · have := congrArg (fun z ↦ z.comp (ShiftedHom.mk₀ 0 rfl e.hom) (zero_add _)) hxy
+    simp only [sheafHToHyperH, shiftedHom_comp_mk₀_comp_mk₀] at this
+    erw [Iso.inv_hom_id_app] at this
+    simp only [ShiftedHom.comp_mk₀_id] at this
+    exact Abelian.Ext.homEquiv.injective this
+  · refine ⟨Abelian.Ext.homEquiv.symm (x.comp (ShiftedHom.mk₀ 0 rfl e.hom) (zero_add _)), ?_⟩
+    simp only [sheafHToHyperH]
+    erw [Equiv.apply_symm_apply]
+    rw [shiftedHom_comp_mk₀_comp_mk₀]
+    erw [Iso.hom_inv_id_app]
+    exact ShiftedHom.comp_mk₀_id _ _ _
+
+lemma overRestrict_sheafHToHyperH {T T' : Over S} (g : T' ⟶ T) (n : ℕ)
+    (e : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} T.hom).obj F) n) :
+    overRestrict g _ n (sheafHToHyperH F T n e) =
+      sheafHToHyperH F T' n (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} g.left T.hom
+        T'.hom (Over.w g).symm).inv.app F) n (cohomologyMap g.left _ n e)) := by
+  have h := hyperHPullback_homEquiv g.left ((upperStar AddCommGrpCat.{u + 1} T.hom).obj F) n e
+  have hs := mapDerivedCategoryCompIsoOfIso_hom_app_single
+    (upperStarComp AddCommGrpCat.{u + 1} g.left T.hom T'.hom (Over.w g).symm) F
+  simp only [sheafHToHyperH, overRestrict, AddMonoidHom.coe_mk, ZeroHom.coe_mk,
+    hyperHPullback_comp_mk₀, Sheaf.H.map, Abelian.Ext.comp_hom, Abelian.Ext.mk₀_hom]
   sorry
+
+end SheafH
 
 end AlgebraicGeometry.Etale

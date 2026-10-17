@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-!
 # The cocycle condition for composition isomorphisms of functors induced on derived categories
@@ -41,6 +42,11 @@ functors. -/
 noncomputable def mapDerivedCategoryCompIsoOfIso (e : F ≅ A ⋙ B) :
     A.mapDerivedCategory ⋙ B.mapDerivedCategory ≅ F.mapDerivedCategory :=
   (mapDerivedCategoryCompIso A B).symm ≪≫ (mapDerivedCategoryNatIso e).symm
+
+omit [HasDerivedCategory E'] in
+instance (e : F ≅ A ⋙ B) : NatTrans.CommShift (mapDerivedCategoryCompIsoOfIso e).hom ℤ := by
+  dsimp only [mapDerivedCategoryCompIsoOfIso, Iso.trans_hom, Iso.symm_hom]
+  infer_instance
 
 omit [HasDerivedCategory E'] in
 private lemma mapDerivedCategoryCompIso_hom_app_factors' (K : CochainComplex C ℤ) :
@@ -141,14 +147,15 @@ lemma mapDerivedCategoryCompIsoOfIso_cocycle (e₁ : F₁ ≅ A ⋙ B) (e₂ : F
   simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [reassoc_of% hc]
   erw [reassoc_of% hρ]
-  rw [← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp]
+  simp only [← DerivedCategory.Q.map_comp]
   congr 2
   ext n
   have := h (L.X n)
   simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
     Functor.mapHomologicalComplex_map_f]
-  rw [← cancel_epi (e₄.hom.app (L.X n)), Iso.hom_inv_id_app, reassoc_of% this,
-    ← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
+  rw [← cancel_epi (e₄.hom.app (L.X n)), Iso.hom_inv_id_app]
+  erw [reassoc_of% this]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
     Iso.hom_inv_id_app]
 
 end CategoryTheory.Functor

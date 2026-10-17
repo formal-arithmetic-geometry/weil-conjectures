@@ -92,15 +92,12 @@ lemma isHyperHContinuousAt_of_subsingleton
 
 /-- Continuity is transported along invertible morphisms `β : K ⟶ L[m]`. -/
 lemma IsHyperHContinuousAt.of_shiftedHom
-    {K L : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})} {m n n' : ℤ}
-    (β : ShiftedHom K L m) (γ : ShiftedHom L K (-m))
-    (hβγ : β.comp γ (neg_add_cancel m) = ShiftedHom.mk₀ 0 rfl (𝟙 K))
-    (hγβ : γ.comp β (add_neg_cancel m) = ShiftedHom.mk₀ 0 rfl (𝟙 L)) (h : m + n = n')
+    {K L : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})} {m m' n n' : ℤ}
+    (β : ShiftedHom K L m) (γ : ShiftedHom L K m') (hm : m' + m = 0) (hm' : m + m' = 0)
+    (hβγ : β.comp γ hm = ShiftedHom.mk₀ 0 rfl (𝟙 K))
+    (hγβ : γ.comp β hm' = ShiftedHom.mk₀ 0 rfl (𝟙 L)) (h : m + n = n')
     (hK : IsHyperHContinuousAt D c K n) : IsHyperHContinuousAt D c L n' := by
-  have h' : -m + n' = n := by omega
-  have hβγ' (T : Over S) (x : hyperH ((overPullback T).obj K) n) :
-      overPostcomp T γ h' (overPostcomp T β h x) = x := by
-    rw [overPostcomp_overPostcomp, hβγ, overPostcomp_mk₀_id]
+  have h' : m' + n' = n := by omega
   have hγβ' (T : Over S) (x : hyperH ((overPullback T).obj L) n') :
       overPostcomp T β h (overPostcomp T γ h' x) = x := by
     rw [overPostcomp_overPostcomp, hγβ, overPostcomp_mk₀_id]
@@ -115,9 +112,9 @@ lemma IsHyperHContinuousAt.of_shiftedHom
 lemma IsHyperHContinuousAt.of_iso
     {K L : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})} (e : K ≅ L)
     {n : ℤ} (hK : IsHyperHContinuousAt D c K n) : IsHyperHContinuousAt D c L n :=
-  hK.of_shiftedHom (m := 0) (ShiftedHom.mk₀ 0 rfl e.hom) (ShiftedHom.mk₀ (-0) (neg_zero) e.inv)
-    (by rw [ShiftedHom.mk₀_comp_mk₀, e.hom_inv_id]) (by rw [ShiftedHom.mk₀_comp_mk₀, e.inv_hom_id])
-    (zero_add n)
+  hK.of_shiftedHom (ShiftedHom.mk₀ 0 rfl e.hom) (ShiftedHom.mk₀ 0 rfl e.inv) (add_zero 0)
+    (add_zero 0) (by rw [ShiftedHom.mk₀_comp_mk₀, e.hom_inv_id])
+    (by rw [ShiftedHom.mk₀_comp_mk₀, e.inv_hom_id]) (zero_add n)
 
 /-- **The five lemma for continuity.** -/
 lemma isHyperHContinuousAt_five
@@ -168,5 +165,221 @@ lemma isHyperHContinuousAt_five
     rw [D.map_comp, D.map_comp, ← overRestrict_comp, ← overRestrict_comp, ← hb,
       overRestrict_overPostcomp, overRestrict_overPostcomp, hr]
     exact (ex₁ _).apply_apply_eq_zero _
+
+section Triangle
+
+variable (T : Over S)
+  {Tr : Triangle (DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}))}
+  (hTr : Tr ∈ distTriang _)
+
+/-- The functor `Hom(ℤ_T, -)` on the derived category of `T`. -/
+private noncomputable abbrev coyo :=
+  preadditiveCoyoneda.obj (Opposite.op ((DerivedCategory.singleFunctor
+    (Sheaf T.left.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj (unitSheaf T.left)))
+
+private lemma overPostcomp_mk₀_eq {K L : DerivedCategory (Sheaf S.smallEtaleTopology
+    AddCommGrpCat.{u + 1})} (f : K ⟶ L) (n : ℤ) :
+    ⇑(overPostcomp T (ShiftedHom.mk₀ 0 rfl f) (zero_add n)) =
+      fun x ↦ ((coyo T).shift n).map ((overPullback T).map f) x := by
+  ext x
+  simp only [overPostcomp, AddMonoidHom.coe_mk, ZeroHom.coe_mk, ShiftedHom.map_mk₀,
+    ShiftedHom.comp_mk₀]
+  rfl
+
+private lemma overPostcomp_mor₃_eq {n₀ n₁ : ℤ} (h : 1 + n₀ = n₁) :
+    ⇑(overPostcomp T (Tr.mor₃ : ShiftedHom Tr.obj₃ Tr.obj₁ (1 : ℤ)) h) =
+      fun x ↦ (coyo T).homologySequenceδ ((overPullback T).mapTriangle.obj Tr) n₀ n₁
+        (by omega) x := by
+  ext x
+  rw [preadditiveCoyoneda_homologySequenceδ_apply]
+  rfl
+
+include hTr
+
+lemma exact_overPostcomp_mor₁_mor₂ (n : ℤ) :
+    Function.Exact (overPostcomp T (ShiftedHom.mk₀ 0 rfl Tr.mor₁) (zero_add n))
+      (overPostcomp T (ShiftedHom.mk₀ 0 rfl Tr.mor₂) (zero_add n)) := by
+  have := (coyo T).homologySequence_exact₂ _ ((overPullback T).map_distinguished Tr hTr) n
+  rw [ShortComplex.ab_exact_iff_function_exact] at this
+  rw [overPostcomp_mk₀_eq, overPostcomp_mk₀_eq]
+  exact this
+
+lemma exact_overPostcomp_mor₂_mor₃ {n₀ n₁ : ℤ} (h : 1 + n₀ = n₁) :
+    Function.Exact (overPostcomp T (ShiftedHom.mk₀ 0 rfl Tr.mor₂) (zero_add n₀))
+      (overPostcomp T (Tr.mor₃ : ShiftedHom Tr.obj₃ Tr.obj₁ (1 : ℤ)) h) := by
+  have := (coyo T).homologySequence_exact₃ _ ((overPullback T).map_distinguished Tr hTr) n₀ n₁
+    (by omega)
+  rw [ShortComplex.ab_exact_iff_function_exact] at this
+  rw [overPostcomp_mk₀_eq, overPostcomp_mor₃_eq]
+  exact this
+
+lemma exact_overPostcomp_mor₃_mor₁ {n₀ n₁ : ℤ} (h : 1 + n₀ = n₁) :
+    Function.Exact (overPostcomp T (Tr.mor₃ : ShiftedHom Tr.obj₃ Tr.obj₁ (1 : ℤ)) h)
+      (overPostcomp T (ShiftedHom.mk₀ 0 rfl Tr.mor₁) (zero_add n₁)) := by
+  have := (coyo T).homologySequence_exact₁ _ ((overPullback T).map_distinguished Tr hTr) n₀ n₁
+    (by omega)
+  rw [ShortComplex.ab_exact_iff_function_exact] at this
+  rw [overPostcomp_mk₀_eq, overPostcomp_mor₃_eq]
+  exact this
+
+omit T
+
+/-- Continuity along the middle term of a distinguished triangle. -/
+lemma isHyperHContinuousAt_obj₂ (n : ℤ)
+    (h₃ : IsHyperHContinuousAt D c Tr.obj₃ (n - 1)) (h₁ : IsHyperHContinuousAt D c Tr.obj₁ n)
+    (h₃' : IsHyperHContinuousAt D c Tr.obj₃ n) (h₁' : IsHyperHContinuousAt D c Tr.obj₁ (n + 1)) :
+    IsHyperHContinuousAt D c Tr.obj₂ n :=
+  isHyperHContinuousAt_five (Tr.mor₃ : ShiftedHom Tr.obj₃ Tr.obj₁ (1 : ℤ))
+    (ShiftedHom.mk₀ 0 rfl Tr.mor₁) (ShiftedHom.mk₀ 0 rfl Tr.mor₂)
+    (Tr.mor₃ : ShiftedHom Tr.obj₃ Tr.obj₁ (1 : ℤ)) (by omega) (zero_add n) (zero_add n)
+    (add_comm 1 n) (fun T ↦ exact_overPostcomp_mor₃_mor₁ T hTr _)
+    (fun T ↦ exact_overPostcomp_mor₁_mor₂ T hTr n) (fun T ↦ exact_overPostcomp_mor₂_mor₃ T hTr _)
+    h₃ h₁ h₃' h₁'
+
+end Triangle
+
+section Bounded
+
+lemma subsingleton_hyperH_of_isGE (T : Over S)
+    (K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) (n : ℤ)
+    [K.IsGE (n + 1)] : Subsingleton (hyperH ((overPullback T).obj K) n) := by
+  have : ((overPullback T).obj K).IsGE (n + 1) :=
+    Functor.isGE_mapDerivedCategory_obj _ K (n + 1)
+  have : DerivedCategory.TStructure.t.IsGE (((overPullback T).obj K)⟦n⟧) 1 :=
+    DerivedCategory.TStructure.t.isGE_shift _ (n + 1) n 1 (by omega)
+  refine ⟨fun x y ↦ ?_⟩
+  rw [DerivedCategory.TStructure.t.zero (X := (DerivedCategory.singleFunctor _ 0).obj _)
+    (show _ ⟶ _ from x) 0 1, DerivedCategory.TStructure.t.zero
+    (X := (DerivedCategory.singleFunctor _ 0).obj _) (show _ ⟶ _ from y) 0 1]
+
+/-- Continuity is stable under shifts. -/
+lemma IsHyperHContinuousAt.shift
+    {K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})} (m : ℤ) {n : ℤ}
+    (hK : IsHyperHContinuousAt D c K (n + m)) : IsHyperHContinuousAt D c (K⟦m⟧) n := by
+  refine hK.of_shiftedHom (m := -m) (m' := m)
+    ((shiftFunctorCompIsoId _ m (-m) (add_neg_cancel m)).inv.app K : K ⟶ K⟦m⟧⟦-m⟧)
+    (𝟙 (K⟦m⟧) : K⟦m⟧ ⟶ K⟦m⟧) (add_neg_cancel m) (neg_add_cancel m) ?_ ?_ (by omega)
+  · simp [ShiftedHom.comp, ShiftedHom.mk₀, shiftFunctorCompIsoId, shiftFunctorZero']
+  · simp only [ShiftedHom.comp, ShiftedHom.mk₀, Functor.map_id, Category.id_comp]
+    rw [shift_shiftFunctorCompIsoId_inv_app]
+    simp [shiftFunctorCompIsoId, shiftFunctorZero']
+
+variable (D c) in
+/-- Hypothesis: continuity for single sheaves in degree `0`. -/
+def SingleContinuity : Prop :=
+  ∀ (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℤ),
+    IsHyperHContinuousAt D c ((DerivedCategory.singleFunctor _ 0).obj F) n
+
+lemma isHyperHContinuousAt_singleFunctor (hs : SingleContinuity D c)
+    (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (a n : ℤ) :
+    IsHyperHContinuousAt D c ((DerivedCategory.singleFunctor _ a).obj F) n :=
+  ((hs F (n + -a)).shift (-a)).of_iso
+    (((DerivedCategory.singleFunctors _).shiftIso (-a) a 0 (by omega)).app F)
+
+lemma isHyperHContinuousAt_of_isGE_of_isLE_self (hs : SingleContinuity D c) (a : ℤ)
+    (K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) [K.IsGE a]
+    [K.IsLE a] (n : ℤ) : IsHyperHContinuousAt D c K n := by
+  obtain ⟨Y, ⟨e⟩⟩ := K.exists_iso_singleFunctor_obj_of_isGE_of_isLE a
+  exact (isHyperHContinuousAt_singleFunctor hs Y a n).of_iso e.symm
+
+lemma isHyperHContinuousAt_of_isGE_of_isLE (hs : SingleContinuity D c) (d : ℕ) :
+    ∀ (a : ℤ) (K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      [K.IsGE a] [K.IsLE (a + d)] (n : ℤ), IsHyperHContinuousAt D c K n := by
+  induction d with
+  | zero =>
+    intro a K _ hK n
+    have : K.IsLE a := by simpa using hK
+    exact isHyperHContinuousAt_of_isGE_of_isLE_self hs a K n
+  | succ d ih =>
+    intro a K _ hK n
+    let t := DerivedCategory.TStructure.t (C := Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})
+    have hTr := t.triangleLEGE_distinguished (a + d) (a + d + 1) rfl K
+    have : K.IsLE (a + d + 1) := by
+      have h := hK
+      rwa [Nat.cast_add, Nat.cast_one, ← add_assoc] at h
+    have : ((t.truncLE (a + d)).obj K).IsLE (a + (d : ℕ)) := by
+      change t.IsLE _ _; infer_instance
+    have : ((t.truncLE (a + d)).obj K).IsGE a := by
+      change t.IsGE _ _; infer_instance
+    have : ((t.truncGE (a + d + 1)).obj K).IsGE (a + d + 1) := by
+      change t.IsGE _ _; infer_instance
+    have : ((t.truncGE (a + d + 1)).obj K).IsLE (a + d + 1) := by
+      change t.IsLE _ _; infer_instance
+    have h₁ (m : ℤ) := ih a ((t.truncLE (a + d)).obj K) m
+    have h₃ (m : ℤ) := isHyperHContinuousAt_of_isGE_of_isLE_self hs (a + d + 1)
+      ((t.truncGE (a + d + 1)).obj K) m
+    exact isHyperHContinuousAt_obj₂ hTr n (h₃ _) (h₁ n) (h₃ n) (h₁ _)
+
+/-- Continuity for bounded below complexes, given continuity for single sheaves. -/
+lemma isHyperHContinuousAt_of_isGE (hs : SingleContinuity D c) (a : ℤ)
+    (K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) [K.IsGE a]
+    (n : ℤ) : IsHyperHContinuousAt D c K n := by
+  let t := DerivedCategory.TStructure.t (C := Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})
+  have hTr := t.triangleLEGE_distinguished (n + 1) (n + 2) (by ring) K
+  have : ((t.truncLE (n + 1)).obj K).IsGE a := by
+    change t.IsGE _ _; infer_instance
+  have : ((t.truncLE (n + 1)).obj K).IsLE (a + ((n + 1 - a).toNat : ℕ)) := by
+    have : ((t.truncLE (n + 1)).obj K).IsLE (n + 1) := by change t.IsLE _ _; infer_instance
+    exact t.isLE_of_le _ (n + 1) _ (by omega)
+  have : ((t.truncGE (n + 2)).obj K).IsGE (n - 1 + 1) := by
+    change t.IsGE _ _; exact t.isGE_of_ge _ _ (n + 2) (by omega)
+  have : ((t.truncGE (n + 2)).obj K).IsGE (n + 1) := by
+    change t.IsGE _ _; exact t.isGE_of_ge _ _ (n + 2) (by omega)
+  have h₁ (m : ℤ) := isHyperHContinuousAt_of_isGE_of_isLE hs _ a ((t.truncLE (n + 1)).obj K) m
+  exact isHyperHContinuousAt_obj₂ hTr n
+    (isHyperHContinuousAt_of_subsingleton fun T ↦ subsingleton_hyperH_of_isGE T _ (n - 1))
+    (h₁ n) (isHyperHContinuousAt_of_subsingleton fun T ↦ subsingleton_hyperH_of_isGE T _ n)
+    (h₁ _)
+
+end Bounded
+
+section Single
+
+variable [∀ i, CompactSpace (D.obj i).left] [∀ i, QuasiSeparatedSpace (D.obj i).left]
+  [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]
+
+/-- Continuity for single sheaves: this is
+`AlgebraicGeometry.Etale.cohomologyMap_isColimit_of_isLimit`. -/
+lemma singleContinuity_of_isLimit (hc : IsLimit ((Over.forget S).mapCone c)) :
+    SingleContinuity D c := by
+  intro F n
+  rcases lt_or_ge n 0 with hn | hn
+  · refine isHyperHContinuousAt_of_subsingleton fun T ↦ ?_
+    have : ((DerivedCategory.singleFunctor _ 0).obj F).IsGE (n + 1) :=
+      DerivedCategory.TStructure.t.isGE_of_ge _ (n + 1) 0 (by omega)
+    exact subsingleton_hyperH_of_isGE T _ n
+  · obtain ⟨q, rfl⟩ := Int.eq_ofNat_of_zero_le hn
+    obtain ⟨hs, hi⟩ := cohomologyMap_isColimit_of_isLimit F D c hc q
+    refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
+    · obtain ⟨e, rfl⟩ := (sheafHToHyperH_bijective F c.pt q).2 x
+      obtain ⟨i, y, hy⟩ := hs e
+      refine ⟨i, sheafHToHyperH F (D.obj i) q y, ?_⟩
+      rw [overRestrict_sheafHToHyperH, hy, ← Sheaf.H.map_comp_apply, Iso.hom_inv_id_app,
+        Sheaf.H.map_id_apply]
+    · obtain ⟨e, rfl⟩ := (sheafHToHyperH_bijective F (D.obj i) q).2 y
+      rw [overRestrict_sheafHToHyperH, ← sheafHToHyperH_zero F c.pt q] at hy
+      have h0 := (sheafHToHyperH_bijective F c.pt q).1 hy
+      obtain ⟨j, g, hg⟩ := hi i e (eq_zero_of_sheafH_map_eq_zero _ h0)
+      refine ⟨j, g, ?_⟩
+      rw [overRestrict_sheafHToHyperH, hg, map_zero, sheafHToHyperH_zero]
+
+end Single
+
+/-- Blueprint `lem-weil-pbc-derived-cohomology-continuity`: Continuity for bounded-below étale
+complexes.
+
+Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
+transition maps, with limit `X = c.pt`, and let `K` be a bounded below complex of abelian étale
+sheaves on `S`. Then the hypercohomology `Hⁿ(X, K|_X) = Hom(ℤ_X, K|_X[n])` is the colimit of the
+`Hⁿ(Dᵢ, K|_{Dᵢ})` along the restriction maps `AlgebraicGeometry.Etale.overRestrict`: every class
+on `X` comes from some `Dᵢ`, and a class on `Dᵢ` which vanishes on `X` already vanishes on some
+`Dⱼ`, `j ⟶ i`. -/
+theorem isHyperHContinuousAt_of_isLimit {S : Scheme.{u}} {I : Type u} [SmallCategory I]
+    [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]
+    [∀ i, QuasiSeparatedSpace (D.obj i).left] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]
+    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c))
+    (K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) (a : ℤ) [K.IsGE a]
+    (n : ℤ) : IsHyperHContinuousAt D c K n :=
+  isHyperHContinuousAt_of_isGE (singleContinuity_of_isLimit hc) a K n
 
 end AlgebraicGeometry.Etale
