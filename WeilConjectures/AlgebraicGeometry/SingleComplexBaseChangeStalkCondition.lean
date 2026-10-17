@@ -280,7 +280,7 @@ private theorem counit_isIso_of_isKFlat
     IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback g')
+      (derivedPullback_spec g')
   have h : E = Scheme.Modules.tensorPullback g' :=
     CategoryTheory.Functor.ext hE (fun M N a => hEmap a)
   subst E

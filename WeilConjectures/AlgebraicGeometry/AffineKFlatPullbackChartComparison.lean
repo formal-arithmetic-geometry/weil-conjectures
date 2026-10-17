@@ -152,7 +152,7 @@ theorem affine_kFlat_pullback_chart_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     rfl
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hFmap, hFadd, ε, hL, htri, hflat⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   have hEq : F = E := CategoryTheory.Functor.ext hF (fun _ _ a ↦ hFmap a)
   subst F
   have : IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj C)) := hflat C hC
