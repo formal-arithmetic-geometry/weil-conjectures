@@ -25,177 +25,45 @@
  ],
  "proof": [
   {
-   "text": "Prove that finite direct image preserves locally torsion abelian sheaves from its finite product formula on geometric stalks: a finite tuple of finite-order elements has finite order. Use the finite edge-map bijection to transfer cohomological bounds. For any finite-type K-algebra A, treat the subsingleton case separately; otherwise use finite injective Noether normalization and its exact Krull-dimension calculation to transfer a polynomial-space bound to Spec A. Identify an affine X with Spec Gamma(X,top) and equip its sections with the K-algebra structure induced by its structural morphism.",
+   "text": "Work with bounded-exponent sheaves using the existing source reduction. Additivity preserves the positive annihilator under finite direct image; the finite edge-map bijection transfers a cohomological bound. Finite injective Noether normalization reduces affine finite-type schemes to polynomial spaces with the number of variables bounded by their dimension. Treat a zero coordinate ring as an empty spectrum.",
    "uses": [
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-sc-torsion-bounded-exponent-vanishing",
+    "lem-weil-pbc-finite-pushforward-cohomology",
     "lem-zl-noether-normalization-field",
     "lem-zl-noether-normalization-dimension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
+   "elementary": false
   },
   {
-   "text": "Establish dimension-zero polynomial space by its isomorphism to Spec K, and dimension-one polynomial space by the affine curve theorem. Run strong dimension induction simultaneously over all algebraically closed fields. At every stage, pass from these polynomial bounds through Noether normalization to all affine finite-type schemes, and then descend from an algebraic closure using the existing ground-field comparison and the field-base-change dimension inequality. Thus the induction hypotheses are available over every field with every field cohomological bound.",
+   "text": "Strongly induct simultaneously over all fields and all available field cohomological bounds. Descend from algebraic closure by the source ground-field theorem and the already proved field-base-change dimension inequality. Polynomial spaces of dimension zero are isomorphic to the field spectrum; dimension one uses the proved source affine-curve bound. For dimension n+2 apply the polynomial induction-step theorem with the simultaneous smaller-dimensional induction hypotheses.",
    "uses": [
-    "lem-sc-arbitrary-curve-cd",
-    "lem-sf-separably-closed-torsion-cd",
     "lem-sc-cd-ground-field",
-    "lem-weil-pbc-dimension-preserved-field-extension"
+    "lem-sc-affine-polynomial-induction-step"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
+   "elementary": false
   },
   {
-   "text": "For an arbitrary K-domain A with trdeg_K A<=m, express A as the filtered colimit of its finitely generated K-subalgebras using the existing small subalgebra diagram. Each such domain S has dimension equal to its transcendence degree: obtain this from Noether normalization and Algebra.trdeg_eq_of_ringKrullDim_eq. Injectivity S->A bounds its transcendence degree by m. The induction bound for these finite-type spectra, followed by the affine-limit theorem, gives cd_tor(Spec A)<=m+c.",
+   "text": "Finite type supplies a finite natural upper bound on topologicalKrullDim X. Hence unbotD 0 is not infinity, and ENat.natCast_toNat together with WithBot.le_coe_unbotD makes its toNat a natural upper bound on dimension. Apply the simultaneous induction with this bound and compare Sheaf.H to the derived-category cohomology in the unchanged target signature. This argument does not need the Nonempty hypothesis. For an empty scheme geometric points detect every sheaf as zero and all its cohomology, including degree zero, vanishes.",
    "uses": [
-    "lem-zl-noether-normalization-field",
-    "lem-zl-noether-normalization-dimension",
-    "def-kun-transcendence-degree",
-    "lem-sc-cd-affine-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
-  },
-  {
-   "text": "For a local F-domain R and nonzero h in its maximal ideal, factor every nonzero P in F[T] as T^e Q with Q(0) nonzero. Its residue shows Q(h) is a unit, so P(h) is a unit in R[1/h]. Explicit evaluation therefore constructs the F(T)-algebra structure on R[1/h]. Its injection into Frac R and the transcendence-degree tower formula lower the bound by one. Apply the previous domain argument over RatFunc F, whose field bound is one, using the all-fields lower-dimensional induction hypothesis. Finally apply the existing smooth strict-local field model to obtain the required punctured strict-local bound hCartier with degree d-a.",
-   "uses": [
-    "def-kun-transcendence-degree",
-    "lem-sc-one-variable-field-cd",
-    "lem-sc-smooth-strict-local-field-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
-  },
-  {
-   "text": "Prove that R^q pi_*F=0 for q>2 for every torsion abelian sheaf on every projective line. First use the projective-line geometric-stalk comparison for module sheaves and the separably closed curve bound. Compare homology of the bounded-below derived direct image on a single sheaf with ordinary rightDerived. Geometric stalks detect zero, giving the module-sheaf bound. Regard an abelian sheaf as a sheaf of ULift Z-modules using the existing forgetful equivalence. Exact coefficient forgetting preserves injectives; the two classical derived-composite isomorphisms transfer the bound to abelian sheaves. This replaces the cyclic appeal to the later general proper base-change/fibre theorem.",
-   "uses": [
-    "lemma-weil-pbc-p1-exchange-geometric-stalk",
-    "lem-weil-pbc-p1-field-dimension-one",
-    "lem-sc-arbitrary-curve-cd",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
-  },
-  {
-   "text": "Prove R^q g_*i_*F=0 in positive degree for a closed section i:Z->Y of g:Y->Z. The finite closed direct image i_* is exact and preserves injectives. The exact-inner-functor comparison identifies R^q(g_*i_*) with R^q g_*(i_*F), while the direct-image composition isomorphism identifies g_*i_* with the identity. Apply the existing proved exact-functor higher-derived-vanishing theorem to the identity functor. For an open immersion, exact restriction and the invertible adjunction counit give j^*R^qj_*M=0 for q>0. The closed-support equivalence puts these objects in the essential image of i_*. Combining with closed-section acyclicity proves all mixed-degree terms R^pg_*R^qj_*M vanish for p,q positive.",
-   "uses": [
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-direct-image-preserves-injectives",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "lemma-openclosed-stalk-upperstar",
-    "lem-sc-exact-functor-higher-derived-vanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
-  },
-  {
-   "text": "Put the strict-henselization stalk formula into the classical rightDerived/Ext-H spelling used by the induction. Compare derived global sections of a sheaf in degree zero to the classical right derived global sections and then to Sheaf.H. Compare the single-sheaf bounded-below derived direct image to ordinary rightDerived. The existing canonical strict-local comparison then shows that zero cohomology of the strict-local pullback forces a zero geometric stalk. Prove Leray diagonal vanishing after exact inverse image by composing the target direct image with that inverse image and comparing ordinary right derived functors through exact composition.",
-   "uses": [
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "def-weil-pbc-etale-cohomology",
-    "thm-sp-grothendieck"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
-  },
-  {
-   "text": "Identify the last-coordinate projection with a relative affine line using coordinate rotation, finSuccEquiv, uniqueAlgEquiv, Spec and AffineSpace.SpecIso; verify the structure map on coordinate rings. Apply lem-sc-affine-line-projection-stalk-bound with the three preceding sheaf-theoretic comparisons and the proved punctured strict-local bound. This is the sole new remaining obligation: compactification of the affine-line projection, support on infinity, its spectral-sequence calculation, and the generic degree-two case. Its conclusion gives stalk vanishing in degree q>=2 whenever d<q+trdeg_K kappa(y). For q>d it vanishes at every geometric point, hence the entire higher direct image is zero. Prove Leray diagonal vanishing after exact inverse image by composing the target direct image with that inverse image and comparing ordinary right derived functors through exact composition.",
-   "uses": [
-    "lem-sc-affine-line-projection-stalk-bound",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "thm-sp-grothendieck"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
-  },
-  {
-   "text": "For a torsion sheaf N on an affine finite-type base with zero geometric pullbacks above residue transcendence degree a, use the existing locally-covering supportedIn theorem. The complements of opens of closed dimension at most a form a filtered poset: prove the dimension bound for a union of two closed sets using specialization heights. Their kernel subsheaves give a mono locally-surjective colimit cocone. Each kernel is the direct image from the closed complement, by the closed-support equivalence. Pulling back transfers torsion, the induction hypothesis bounds cohomology on that affine closed subscheme, and the finite edge-map comparison transfers this to the kernel. Filtered-colimit commutation then gives H^p(B,N)=0 for p>a.",
-   "uses": [
-    "lem-sc-support-dimension-union",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lemma-openclosed-stalk-upperstar",
-    "lem-weil-pbc-cohomology-filtered-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
-  },
-  {
-   "text": "Apply the diagonal-vanishing theorem for the Grothendieck spectral sequence of the affine-line direct image and sections on B. For q=0,1 the base polynomial-space bound suffices; for q>=2 use the preceding support-cohomology result with a=d-q, and use zero higher direct image when q>d. Additivity preserves the uniform annihilator through right derived functors. The existing bounded-torsion reduction passes from positive-integer-annihilated sheaves to all locally torsion sheaves. Finish with finite normalization and the ground-field descent at this induction stage. Empty-site sections are zero, so the empty clause of the blueprint statement also has zero cohomology in degree zero.",
-   "uses": [
-    "thm-sp-grothendieck",
-    "lem-weil-pbc-direct-image-preserves-injectives",
-    "lemma-weil-pbc-torsion-filtered-union",
-    "lem-weil-pbc-cohomology-filtered-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Original proof steps 1-12, realized by the source module and the named geometric-stalk reduction"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-sc-torsion-bounded-exponent-vanishing",
+  "lem-weil-pbc-finite-pushforward-cohomology",
   "lem-zl-noether-normalization-field",
   "lem-zl-noether-normalization-dimension",
-  "lem-sc-arbitrary-curve-cd",
-  "lem-sf-separably-closed-torsion-cd",
   "lem-sc-cd-ground-field",
-  "lem-weil-pbc-dimension-preserved-field-extension",
-  "def-kun-transcendence-degree",
-  "lem-sc-cd-affine-limit",
-  "lem-sc-one-variable-field-cd",
-  "lem-sc-smooth-strict-local-field-model",
-  "lemma-weil-pbc-p1-exchange-geometric-stalk",
-  "lem-weil-pbc-p1-field-dimension-one",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-direct-image-preserves-injectives",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lemma-openclosed-stalk-upperstar",
-  "lem-sc-exact-functor-higher-derived-vanishing",
-  "prop-weil-pbc-strict-henselization-stalk-formula",
-  "def-weil-pbc-etale-cohomology",
-  "thm-sp-grothendieck",
-  "lem-sc-affine-line-projection-stalk-bound",
-  "lem-sc-support-dimension-union",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lemma-weil-pbc-torsion-filtered-union"
+  "lem-sc-affine-polynomial-induction-step",
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P1",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-  "place": "Proof steps 1-12; Lean realization in WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension, with one split geometric-stalk obligation"
+  "group": "B2",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.proof.md",
+  "place": "Finite normalization, simultaneous all-fields induction, polynomial projection/support Leray argument, empty clause"
  },
  "mathlib_searches": [
   {
@@ -372,7 +240,6 @@
   "lem-sf-separably-closed-torsion-cd",
   "lemma-weil-pbc-finite-direct-image-exact",
   "lem-weil-pbc-direct-image-preserves-injectives",
-  "lemma-weil-pbc-finite-stalk-formula",
   "lem-weil-pbc-finite-type-domain-dimension-trdeg",
   "prop-weil-pbc-strict-henselization-stalk-formula",
   "lemma-nagata-projective-space-base-change-proper",
@@ -414,12 +281,12 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261015T233749-L-3369427",
+  "landing": "20261017T060105-L-4148093",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

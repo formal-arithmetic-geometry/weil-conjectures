@@ -1,0 +1,202 @@
+{
+ "id": "lem-sc-affine-infinity-boundary-support",
+ "kind": "statement",
+ "title": "Weighted vanishing at the infinity boundary",
+ "statement": "For a polynomial base B=A^(n+1)_K and any identification of A^(n+2)_K with the relative affine line over B, let j be its standard open chart in P1_B. Under the all-fields smaller-dimensional bounds, a sheaf M killed by a positive integer has zero stalk of R^q j_*M at the infinity point above s if q>2 and n+2<q+trdeg_K kappa(s). Use torsion cohomological dimension as in [def-sc-etale-torsion-cd], the strict localization as in [def-weil-pbc-strict-henselization-limit] when it occurs, and Krull dimension as in [def-kun-dimension]. The following verbatim Lean statement specifies all universes, hypotheses, scalar structures, sheaves and degrees:\n\ntheorem isZero_stalk_infinityBoundary_of_lowerDimension\n    (K : Type u) [Field K] [IsAlgClosed K] (n : ℕ)\n    (hIH : ∀ (L : Type u) [Field L] (m c : ℕ), m < n + 2 →\n      (Spec (.of L)).HasTorsionCohomologicalDimensionLE c →\n      ∀ (X : Scheme.{u}) [IsAffine X] (a : X ⟶ Spec (.of L))\n        [LocallyOfFiniteType a] [QuasiCompact a],\n        topologicalKrullDim X ≤ (m : WithBot ℕ∞) →\n          X.HasTorsionCohomologicalDimensionLE (m + c))\n    (e : Spec (.of (MvPolynomial (Fin (n + 2)) K)) ≅\n      AffineSpace PUnit.{u + 1} (Spec (.of (MvPolynomial (Fin (n + 1)) K))))\n    (M : Sheaf (Spec (.of (MvPolynomial (Fin (n + 2)) K))).smallEtaleTopology\n      AddCommGrpCat.{u + 1}) (N : ℕ) (hN : 0 < N) (hM : N • 𝟙 M = 0)\n    (q : ℕ) (_hq : 2 < q) :\n    let B := Spec (.of (MvPolynomial (Fin (n + 1)) K))\n    let b := Spec.map (CommRingCat.ofHom (algebraMap K (MvPolynomial (Fin (n + 1)) K)))\n    let j := e.hom ≫ ProjectiveLine.affineChart B\n    ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ B),\n      ((n + 2 : ℕ) : Cardinal.{u}) < (q : Cardinal.{u}) +\n          residueFieldTrdeg b (s (IsLocalRing.closedPoint Ω)) →\n        IsZero ((pointSmallEtale (s ≫ ProjectiveLine.infinity B)).sheafFiber.obj\n          (((Etale.lowerStar AddCommGrpCat.{u + 1} j).rightDerived q).obj M))",
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-dimension"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.proof.md",
+  "place": "Infinity principal open and strict-local calculation"
+ },
+ "proof": [
+  {
+   "text": "Reuse the private polynomial residue-degree and infinity residue-field helpers from AffineLineInfinityStrictLocalModel, projectiveLine_polynomial_geometry from AffineLineProjectionStalkBound, and Etale.strictHenselizationComparison_over and Etale.nonempty_addEquiv_strictLocalization from FieldHigherDirectImageStalk via import all; do not duplicate their statements or proofs. The infinity point has residue transcendence degree a at most n+1; its residue field is canonically that of the base point. In its strict-local ring the opposite chart gives a nonzero coordinate h in the maximal ideal. Transport local structure and evaluation across the small-colimit comparison; ind-etale flatness makes h regular and nonzero, and the chart intersection identifies the complement as Spec R[1/h].",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the smooth strict-local field model to Y=P1_B, which is smooth and integral of dimension n+2. It provides a separably closed coefficient field F with bijective residue reduction and fraction transcendence degree n+2-a. Apply the punctured coefficient-field induction theorem to get cohomological dimension at most n+2-a.",
+   "uses": [
+    "lem-sc-smooth-strict-local-field-model",
+    "lem-sc-punctured-coefficient-field-cohomological-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cardinal inequality implies q>n+2-a. Pullback of M remains killed by N and torsion. The classical spelling of the strict-henselization stalk comparison identifies its degree-q cohomology with the desired stalk, which is zero.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-strict-local-field-model",
+  "lem-sc-punctured-coefficient-field-cohomological-dimension",
+  "prop-weil-pbc-strict-henselization-stalk-formula"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B2",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.proof.md",
+  "place": "Infinity principal open and strict-local calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torsion.*cohomolog|cohomologicalDimension",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologicalDimension\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale torsion cohomological dimension of affine finite type schemes over a field is bounded by their Krull dimension plus the field cohomological dimension",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.IsStandardSmoothOfRelativeDimension.out, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, IsLocalRing.finrank_cotangentSpace_eq_zero, Algebra.formallyEtale_iff, Algebra.FormallyEtale.subsingleton_h1Cotangent",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of a torsion etale sheaf supported in closed subsets of bounded dimension",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Algebra.smoothLocus_eq_compl_support_inter, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine space etale torsion cohomology induction by polynomial projection",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.AffineSpace.map_toSpecMvPoly, AlgebraicGeometry.AffineSpace.map_Spec_map, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AffineMap.proj_apply, AffineSubspace",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"stalk\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*cohomolog|cohomolog.*support",
+   "results": "4 hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*local.*cohomolog|cohomolog.*punctured|projective.*higher.*direct",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of bounded torsion abelian etale sheaves on a relative projective line vanish above degree two",
+   "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, Rep.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, isZero_Ext_succ_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectiveLine\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomolog.*[Ll]ocalization|[Ll]ocalization.*cohomolog",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RatFunc\", \"trdeg\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "torsion etale cohomological dimension of a punctured local domain containing a separably closed field is bounded by fraction field transcendence degree",
+   "results": "8 hits: Algebra.IsAlgebraic.lift_rank_of_isFractionRing, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.IsEtaleAt, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.exists_etale_of_isEtaleAt, Algebra.IsAlgebraic.rank_of_isFractionRing",
+   "date": "2026-10-17",
+   "verdict": "No exact matching Mathlib theorem. Use the existing geometric, cohomological and homological-algebra source APIs named in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine",
+  "date": "2026-10-17",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-affine-torsion-cd",
+   "place": "Infinity principal open and strict-local calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.AffineInfinityBoundarySupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/AffineInfinityBoundarySupport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_stalk_infinityBoundary_of_lowerDimension",
+  "statement": "theorem isZero_stalk_infinityBoundary_of_lowerDimension\n    (K : Type u) [Field K] [IsAlgClosed K] (n : ℕ)\n    (hIH : ∀ (L : Type u) [Field L] (m c : ℕ), m < n + 2 →\n      (Spec (.of L)).HasTorsionCohomologicalDimensionLE c →\n      ∀ (X : Scheme.{u}) [IsAffine X] (a : X ⟶ Spec (.of L))\n        [LocallyOfFiniteType a] [QuasiCompact a],\n        topologicalKrullDim X ≤ (m : WithBot ℕ∞) →\n          X.HasTorsionCohomologicalDimensionLE (m + c))\n    (e : Spec (.of (MvPolynomial (Fin (n + 2)) K)) ≅\n      AffineSpace PUnit.{u + 1} (Spec (.of (MvPolynomial (Fin (n + 1)) K))))\n    (M : Sheaf (Spec (.of (MvPolynomial (Fin (n + 2)) K))).smallEtaleTopology\n      AddCommGrpCat.{u + 1}) (N : ℕ) (hN : 0 < N) (hM : N • 𝟙 M = 0)\n    (q : ℕ) (_hq : 2 < q) :\n    let B := Spec (.of (MvPolynomial (Fin (n + 1)) K))\n    let b := Spec.map (CommRingCat.ofHom (algebraMap K (MvPolynomial (Fin (n + 1)) K)))\n    let j := e.hom ≫ ProjectiveLine.affineChart B\n    ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ B),\n      ((n + 2 : ℕ) : Cardinal.{u}) < (q : Cardinal.{u}) +\n          residueFieldTrdeg b (s (IsLocalRing.closedPoint Ω)) →\n        IsZero ((pointSmallEtale (s ≫ ProjectiveLine.infinity B)).sheafFiber.obj\n          (((Etale.lowerStar AddCommGrpCat.{u + 1} j).rightDerived q).obj M))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261017T060105-L-4148093",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261017T060105-L-4148093",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,30 +8,16 @@ public import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
-import Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound
-import Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit
-import Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModel
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import Sheaf.AlgebraicGeometry.SupportDimensionUnion
-import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
-import Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.FieldTheory.OneVariableFieldCohomologicalDimension
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
+
 import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.Sites.AffinePolynomialInductionStep
+import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
+import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
-import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.Finite.Stalk
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
 
 /-!
 # The affine torsion cohomological dimension bound
@@ -48,173 +34,182 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- An affine finite-type scheme over a field of torsion cohomological dimension at most `c`
-has torsion cohomological dimension at most its dimension plus `c` when nonempty.
-For an empty scheme all nonnegative cohomology groups vanish, including degree zero.
-Finite-type schemes over a field have finite Krull dimension, so `unbotD 0` followed by
-`toNat` recovers the dimension in the nonempty clause.
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md,
-statement and proof (blueprint: thm-sc-affine-torsion-cd).
+private theorem subsingleton_etaleCohomology_iff_H
+    {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
+    Subsingleton ((Etale.cohomology AddCommGrpCat.{u + 1} X q).obj
+      ((DerivedCategory.singleFunctor _ 0).obj F)) ↔
+      Subsingleton (Sheaf.H F q) := open Limits in by
+  obtain ⟨e⟩ := nonempty_sheafH_extDerivedIso X q
+  constructor
+  · intro h
+    have : Subsingleton ((DerivedCategory.singleFunctor _ 0 ⋙
+        Etale.cohomology AddCommGrpCat.{u + 1} X q).obj F) := h
+    exact (e.app F).addCommGroupIsoToAddEquiv.injective.subsingleton
+  · intro h
+    have : Subsingleton ((Sheaf.functorH X.smallEtaleTopology q).obj F) := h
+    exact (e.app F).addCommGroupIsoToAddEquiv.symm.injective.subsingleton
 
-Proof (the node's twelve steps):
+private theorem subsingleton_H_empty (X : Scheme.{u}) [IsEmpty X]
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
+    Subsingleton (Sheaf.H F q) := open Limits in by
+  have hF : IsZero F := open Limits in by
+    apply (IsZero.iff_id_eq_zero F).2
+    apply (jointlyReflectIsomorphisms_ulift_pointSmallEtale X
+      AddCommGrpCat.{u + 1}).jointlyFaithful.map_injective
+    rintro ⟨_, ⟨x⟩⟩
+    exact isEmptyElim x
+  exact Sheaf.subsingleton_H_of_isZero hF q
 
-1. Throughout, torsion means that every local section is locally killed by some positive integer;
-no single integer need annihilate the sheaf. The cohomology is ordinary derived-section cohomology
-on the small etale site, and a field bound is the corresponding bound on its affine spectrum. We
-prove, by strong induction on the nonnegative integer $d$, the asserted bound for every nonempty
-affine finite-type scheme of dimension at most $d$, simultaneously over all fields and all
-available field bounds $c$. The empty scheme has zero section functor and hence zero cohomology.
-Finite dimension follows from Noether normalization and its dimension assertion. Algebraic
-extension of the ground field preserves the dimension of each affine coordinate ring. Thus after
-establishing the bound $d$ over algebraically closed fields in dimension $d$, the ground-field
-comparison gives $d+c$ over every field; this descent is made at each induction stage, before
-advancing to $d+1$. An algebraically closed field is separably closed and has torsion bound zero.
-Inputs: def-sc-etale-torsion-cd, lem-zl-noether-normalization-field,
-lem-zl-noether-normalization-dimension, lem-weil-pbc-dimension-preserved-field-extension,
-lem-sc-cd-ground-field, lem-sf-separably-closed-torsion-cd.
+private theorem torsionCd_of_finite
+    {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    (f : X ⟶ Y) [IsFinite f] {d : ℕ}
+    (hY : Y.HasTorsionCohomologicalDimensionLE d) :
+    X.HasTorsionCohomologicalDimensionLE d := open Limits in by
+  intro F hF q hq
+  apply Etale.subsingleton_H_of_isTorsion hF q
+  intro G N hN hG
+  let P := Etale.lowerStar AddCommGrpCat.{u + 1} f
+  have hP : (P.obj G).IsTorsion := open Limits in by
+    apply isTorsion_of_nsmul_id_eq_zero hN
+    calc
+      N • 𝟙 (P.obj G) = P.map (N • 𝟙 G) := open Limits in by rw [Functor.map_nsmul, P.map_id]
+      _ = P.map 0 := congrArg P.map hG
+      _ = 0 := P.map_zero _ _
+  have := hY (P.obj G) hP q hq
+  exact (Etale.bijective_edgeMap_of_isFinite f G q).surjective.subsingleton
 
-2. We will repeatedly use the following consequence for a finite morphism $u:T\to S$. Apply $u_*$
-to an injective resolution of an abelian sheaf $A$. Exactness makes this a resolution of $u_*A$,
-and preservation of injectives makes it an injective resolution. Since
-$\Gamma(S,u_*I)=\Gamma(T,I)$ termwise, $H^r(T,A)=H^r(S,u_*A)$ for every $r$. The finite-stalk
-product formula shows that $u_*A$ is torsion when $A$ is torsion, and is killed by $n$ when $A$ is
-killed by $n$: a finite tuple of torsion elements has a common annihilator. Inputs:
-lemma-weil-pbc-finite-direct-image-exact, lem-weil-pbc-direct-image-preserves-injectives,
-lemma-weil-pbc-finite-stalk-formula, def-weil-pbc-etale-cohomology.
+private theorem torsionCd_affine_of_polynomial
+    (K : Type u) [Field K]
+    (d : ℕ) (hpoly : ∀ n : ℕ, n ≤ d →
+      (Spec (.of (MvPolynomial (Fin n) K))).HasTorsionCohomologicalDimensionLE n)
+    (X : Scheme.{u}) [IsAffine X] (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a]
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
+    X.HasTorsionCohomologicalDimensionLE d := open Limits in by
+  let A := Γ(X, ⊤)
+  let b : Spec (.of A) ⟶ Spec (.of K) := (asIso X.toSpecΓ).inv ≫ a
+  obtain ⟨φ, hφ⟩ := Spec.map_surjective b
+  let : Algebra K A := φ.hom.toAlgebra
+  have hb : LocallyOfFiniteType b := inferInstance
+  have : Algebra.FiniteType K A := open Limits in by
+    apply RingHom.finiteType_algebraMap.1
+    exact HasRingHomProperty.Spec_iff.mp (hφ ▸ hb)
+  rcases subsingleton_or_nontrivial A with hA | hA
+  · have : IsEmpty (Spec (.of A)) := open Limits in by
+      change IsEmpty (PrimeSpectrum A)
+      infer_instance
+    have hzero : (Spec (.of A)).HasTorsionCohomologicalDimensionLE d :=
+      fun F _ q _ ↦ subsingleton_H_empty _ F q
+    exact hzero.of_isUniversalHomeomorphism (asIso X.toSpecΓ).inv
+  · obtain ⟨n, g, hg, hfin⟩ := exists_finite_inj_algHom_of_fg K A
+    let f := Spec.map (CommRingCat.ofHom g.toRingHom)
+    have hf : IsFinite f := open Limits in by
+      apply (IsFinite.SpecMap_iff _).mpr
+      exact hfin
+    have hdim : (n : WithBot ℕ∞) ≤ d := open Limits in by
+      rw [← ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial g hg hfin,
+        ← PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
+      exact (IsHomeomorph.topologicalKrullDim_eq _
+        X.toSpecΓ.homeomorph.isHomeomorph).ge.trans hd
+    have hn : n ≤ d := open Limits in by exact_mod_cast hdim
+    exact ((torsionCd_of_finite f (hpoly n hn)).mono hn).of_isUniversalHomeomorphism
+      (asIso X.toSpecΓ).inv
 
-3. For $d=0$, Noether normalization makes the structure morphism to $\operatorname{Spec}K$ finite,
-so the preceding finite comparison proves the bound $c$. For $d=1$ over an algebraically closed
-field the arbitrary-curve bound gives bound one, since the scheme is affine and therefore
-separated; the descent in step 1 proves the bound over all fields. Now fix $d>1$ and suppose all
-smaller dimensions have been proved over every field. If $\dim X<d$, the induction hypothesis
-already gives the required bound; hence assume $\dim X=d$. Work first over algebraically closed
-$K$. Noether normalization supplies a finite morphism $X\to\mathbf A_K^d$. The finite comparison
-reduces the problem to an arbitrary torsion sheaf $M$ on $\mathbf A_K^d$. Initially suppose $nM=0$
-for one positive integer $n$. Inputs: lem-zl-noether-normalization-field,
-lem-zl-noether-normalization-dimension, lem-sc-arbitrary-curve-cd, lem-sc-cd-ground-field.
+private theorem torsionCd_affine_field_of_closed_polynomial
+    (d : ℕ) (hpoly : ∀ (L : Type u) [Field L] [IsAlgClosed L] (n : ℕ), n ≤ d →
+      (Spec (.of (MvPolynomial (Fin n) L))).HasTorsionCohomologicalDimensionLE n)
+    (K : Type u) [Field K] (X : Scheme.{u}) [IsAffine X]
+    (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
+    (c : ℕ) (hK : (Spec (.of K)).HasTorsionCohomologicalDimensionLE c)
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
+    X.HasTorsionCohomologicalDimensionLE (d + c) := open Limits in by
+  let L := AlgebraicClosure K
+  let t := Spec.map (CommRingCat.ofHom (algebraMap K L))
+  let Y := pullback a t
+  have : IsAffine Y := isAffine_of_isAffineHom (pullback.fst a t)
+  have hY : Y.HasTorsionCohomologicalDimensionLE d :=
+    torsionCd_affine_of_polynomial L d (hpoly L) Y (pullback.snd a t)
+      ((topologicalKrullDim_pullback_le_of_field a t).trans hd)
+  simpa only [Nat.add_comm c d] using
+    hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure L a hK hY
 
-4. Let $Y$ be smooth integral and finite type of dimension $d$ over $K$, let $D$ be an effective
-Cartier divisor (its ideal is locally generated by a nonzerodivisor,
-[def-nagata-effective-cartier-ideal]), and write $j:Y\setminus D\to Y$. At $y\in D$ put
-$a=\operatorname{trdeg}_K\kappa(y)$, $R=\mathcal O^{\rm sh}_{Y,\bar y}$, and choose the field
-$F\subset R$ supplied by the smooth strict-local field-model lemma. A local equation $h$ of $D$ is
-nonzero in the domain $R$ and belongs to its maximal ideal. For $P(T)\ne0$ in $F[T]$, write
-$P(T)=T^m(b+TQ(T))$ with $b\in F^\times$. Then $b+hQ(h)$ has nonzero residue, hence is a unit of
-$R$. Thus $P(h)$ is invertible in $R[1/h]$, and evaluation embeds $F(T)$ in $R[1/h]$. In
-particular $h$ is transcendental over $F$. If $z_1,\ldots,z_s$ are independent over $F(h)$, a
-purported nonzero relation $Q(h,z_1,\ldots,z_s)=0$ with $Q\in F[T,Z_1,\ldots,Z_s]$ can be written
-$\sum_{\alpha}Q_{\alpha}(h)z^{\alpha}=0$. At least one $Q_{\alpha}$ is a nonzero polynomial, so
-transcendence of $h$ makes its coefficient $Q_{\alpha}(h)$ nonzero. This is a nonzero polynomial
-relation over $F(h)$, a contradiction. Thus $h,z_1,\ldots,z_s$ are independent over $F$.
-Consequently $s+1\le d-a$. For every finitely generated $F(h)$-subalgebra $A\subset R[1/h]$, its
-fraction field is a subfield of $\operatorname{Frac}(R)$, so the finite-type domain dimension
-formula gives $\dim A\le d-a-1<d$. Inputs: lem-sc-smooth-strict-local-field-model,
-lem-weil-pbc-finite-type-domain-dimension-trdeg, def-kun-transcendence-degree,
-def-nagata-effective-cartier-ideal.
+private theorem torsionCd_polynomial_zero (K : Type u) [Field K] [IsAlgClosed K] :
+    (Spec (.of (MvPolynomial (Fin 0) K))).HasTorsionCohomologicalDimensionLE 0 := open Limits in by
+  let e := MvPolynomial.isEmptyAlgEquiv K (Fin 0)
+  exact (hasTorsionCohomologicalDimensionLE_zero_of_isSepClosed K).of_isUniversalHomeomorphism
+    (Spec.map (CommRingCat.ofHom e.toRingHom))
 
-5. The finitely generated $F(h)$-subalgebras of $R[1/h]$ form a small filtered poset (the algebra
-generated by two of them dominates both), and their union is $R[1/h]$. Taking spectra gives an
-affine inverse-limit presentation with affine transition maps. The bound on $F(h)$ is one by the
-one-variable field lemma. The induction hypothesis, applicable over every field and in dimensions
-at most $d-a-1$, gives bound $d-a$ for each model. The affine-limit lemma therefore gives
-$\operatorname{cd}_{\rm tor}(\operatorname{Spec}R[1/h])\le d-a$. The strict-henselization stalk
-formula, applied to $j$, which is quasi-compact and quasi-separated: locally on the target, an
-affine open where the Cartier ideal has generator $h$ has preimage the principal affine open
-$D(h)$, and an open immersion is separated, gives $(R^qj_*M)_{\bar y}=0$ whenever $q>d-a$. Inputs:
-lem-sc-one-variable-field-cd, lem-sc-cd-affine-limit,
-prop-weil-pbc-strict-henselization-stalk-formula.
+private theorem torsionCd_polynomial_one (K : Type u) [Field K] [IsAlgClosed K] :
+    (Spec (.of (MvPolynomial (Fin 1) K))).HasTorsionCohomologicalDimensionLE 1 := open Limits in by
+  let a := Spec.map (CommRingCat.ofHom (algebraMap K (MvPolynomial (Fin 1) K)))
+  have : LocallyOfFiniteType a := open Limits in by
+    apply HasRingHomProperty.Spec_iff.mpr
+    exact RingHom.finiteType_algebraMap.2 inferInstance
+  have : IsCurve a :=
+    { krullDim_le_one := open Limits in by
+        change topologicalKrullDim (PrimeSpectrum (MvPolynomial (Fin 1) K)) ≤ 1
+        rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
+          MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_isField
+            (Field.toIsField K)]
+        simp }
+  exact (IsCurve.hasTorsionCohomologicalDimensionLE a).2 inferInstance
 
-6. Put $B=\mathbf A_K^{d-1}$, $Y=\mathbf P^1_K\times B$, $D=\{\infty\}\times B$, and let
-$j:\mathbf A_K^d\to Y$, $i:D\to Y$, $g:Y\to B$, and $f=gj$. These are the usual two polynomial
-charts of the projective line; in the chart at infinity $D$ has equation the last coordinate. Both
-polynomial charts of $Y$, and $B$ itself, are smooth over $K$ by [sbc-lem-affine-space-smooth];
-smoothness is local on the source. The chart coordinate rings are domains and their nonempty
-overlap is dense in each, so $Y$ is integral. In particular $Y$ has dimension $d$, and $\dim
-B=d-1$ (apply the finite-type domain dimension formula to the polynomial coordinate charts, whose
-variables are a transcendence basis). The projection $g$ is proper by properness of projective
-space. Etale restriction preserves injective resolutions, so restriction of $R^qj_*M$ to the open
-$\mathbf A^d$ is $R^q\mathrm{id}_*M=0$ for $q>0$. For any abelian etale sheaf $A$ supported on
-$D$, the unit $A\to i_*i^{-1}A$ is an isomorphism: off $D$ both stalks are zero, and on $D$ the
-finite-stalk formula and inverse-image stalk formula identify its stalk with the identity of
-$A_{\bar y}$. Geometric stalks detect isomorphisms. Apply this to write $R^qj_*M=i_*N_q$ for
-$q>0$. Inputs: lem-weil-pbc-finite-type-domain-dimension-trdeg,
-lemma-nagata-projective-space-base-change-proper, lem-weil-pbc-etale-restriction-injectives,
-lemma-weil-pbc-finite-stalk-formula, lemma-openclosed-stalk-upperstar,
-lemma-weil-pbc-geometric-stalk-conservative, def-weil-pbc-inverse-image,
-sbc-lem-affine-space-smooth.
+private theorem torsionCd_all_fields_of_polynomial_step
+    (hstep : ∀ (K : Type u) [Field K] [IsAlgClosed K] (n : ℕ),
+      (∀ (L : Type u) [Field L] (m c : ℕ), m < n + 2 →
+        (Spec (.of L)).HasTorsionCohomologicalDimensionLE c →
+        ∀ (X : Scheme.{u}) [IsAffine X] (a : X ⟶ Spec (.of L))
+          [LocallyOfFiniteType a] [QuasiCompact a],
+          topologicalKrullDim X ≤ (m : WithBot ℕ∞) →
+            X.HasTorsionCohomologicalDimensionLE (m + c)) →
+      ∀ (M : Sheaf (Spec (.of (MvPolynomial (Fin (n + 2)) K))).smallEtaleTopology
+          AddCommGrpCat.{u + 1}) (N : ℕ), 0 < N → N • 𝟙 M = 0 →
+        ∀ q : ℕ, n + 2 < q → Subsingleton (Sheaf.H M q))
+    (d : ℕ) :
+    ∀ (K : Type u) [Field K] (c : ℕ),
+      (Spec (.of K)).HasTorsionCohomologicalDimensionLE c →
+      ∀ (X : Scheme.{u}) [IsAffine X] (a : X ⟶ Spec (.of K))
+        [LocallyOfFiniteType a] [QuasiCompact a],
+        topologicalKrullDim X ≤ (d : WithBot ℕ∞) →
+          X.HasTorsionCohomologicalDimensionLE (d + c) := open Limits in by
+  induction d using Nat.strong_induction_on with
+  | h d ih =>
+    intro K _ c hK X _ a _ _ hd
+    apply torsionCd_affine_field_of_closed_polynomial d ?_ K X a c hK hd
+    intro L _ _ m hm
+    rcases m with _ | m
+    · exact torsionCd_polynomial_zero L
+    rcases m with _ | n
+    · exact torsionCd_polynomial_one L
+    · intro F hF q hq
+      apply Etale.subsingleton_H_of_isTorsion hF q
+      intro M N hN hM
+      apply hstep L n (fun K _ m c hmd hK X _ a _ _ hd ↦
+        ih m (lt_of_lt_of_le hmd hm) K c hK X a hd) M N hN hM q hq
 
-7. For $N$ on $D$, an injective resolution $N\to I^\bullet$ stays an injective resolution under
-the exact functor $i_*$, which preserves injectives. Thus $R^pg_*(i_*N)$ is computed by
-$g_*i_*I^\bullet=(gi)_*I^\bullet$. Since $gi:D\to B$ is an isomorphism, this complex has no
-positive cohomology. Hence $R^pg_*R^qj_*M=0$ for $p>0,q>0$. All the sheaves here are killed by
-$n$: multiplication by $n$ on each derived functor value is the derived functor of
-$n\mathrm{id}_M=0$, by additivity. Inputs: lemma-weil-pbc-finite-direct-image-exact,
-lem-weil-pbc-direct-image-preserves-injectives.
+/-- An affine finite-type scheme over a field of torsion cohomological dimension at most c
+has torsion cohomological dimension at most its Krull dimension plus c. On an empty scheme,
+all torsion cohomology groups, including degree zero, are zero.
 
-8. View $j_*M$ as a sheaf of $\Lambda=\mathbf Z/n$-modules. Apply the first, derived, assertion of
-finite-coefficient proper base change to $g$ and $(j_*M)[0]$; it applies to every object of $D^+$,
-with no finiteness or constructibility condition on the stalks. Forgetting coefficients commutes
-with derived direct image, including the structure morphism of each fibre. Its geometric fibres
-are projective lines over algebraically closed fields. The projective-line dimension bound and the
-arbitrary-curve lemma give zero fibre cohomology for $p>2$. The base-change isomorphism and
-geometric stalk conservativity imply $R^pg_*j_*M=0$ for $p>2$. Inputs:
-cor-weil-pbc-geometric-fiber-finite, lem-weil-pbc-exchange-forget-coefficients,
-lem-weil-pbc-p1-field-dimension-one, lem-sc-arbitrary-curve-cd,
-lemma-weil-pbc-geometric-stalk-conservative.
+Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/
+thm-sc-affine-torsion-cd.md and thm-sc-affine-torsion-cd.proof.md.
+(blueprint: thm-sc-affine-torsion-cd)
 
-9. Direct images preserve injectives, so the Grothendieck spectral sequence applies to $j_*$
-followed by $g_*$. On its $E_2$ page the only possibly nonzero positions are the column $p=0$ and
-the row $q=0$ with $p\le2$. In total degree $r>2$, the term $(0,r)$ survives and is the only
-graded piece of the abutment: for $2\le\ell\le r$ the outgoing differential $d_{\ell}$ targets
-$(\ell,r-\ell+1)$, where both coordinates are positive; for $\ell=r+1$ it targets the zero term
-$(r+1,0)$; later targets have negative second coordinate. Incoming differentials would start in a
-negative first coordinate. Thus $R^rf_*M\cong g_*R^rj_*M$ for $r>2$. Write
-$v=gi:D\xrightarrow{\sim}B$. The boundary identification of step 6 gives
-$g_*R^rj_*M=g_*i_*N_r=v_*N_r$. At a geometric point $\bar z$ of $B$, the finite-stalk formula for
-the isomorphism $v$ identifies $(v_*N_r)_{\bar z}$ with $(N_r)_{v^{-1}\bar z}$. The inverse-image
-stalk formula identifies this with $(R^rj_*M)_{i v^{-1}\bar z}$. For $z\in B$ with
-$a=\operatorname{trdeg}_K\kappa(z)>d-r$, the local calculation at the corresponding point of $D$
-gives a zero stalk. Hence $R^rf_*M$ has zero stalks at those points. Inputs: thm-sp-grothendieck,
-lem-weil-pbc-direct-image-preserves-injectives, lemma-weil-pbc-finite-stalk-formula,
-lemma-openclosed-stalk-upperstar.
-
-10. For $r=2$, let $\eta$ be the generic point of $B$. The field-model lemma applied to $B$, where
-$a=\dim B=d-1$, says that its strict henselization is a regular local domain of dimension zero,
-with residue field $\kappa(\eta)^{\rm sep}$. A zero-dimensional regular local ring has maximal
-ideal generated by zero elements, and so is that residue field. The strict-henselization stalk
-formula for the affine projection $f$ therefore identifies the generic stalk of $R^2f_*M$ with
-$H^2(\mathbf A^1_{\kappa(\eta)^{\rm sep}},M|)$. By the dimension-one case, already established
-over every field, and torsion cohomological dimension zero of a separably closed field, this is
-zero. In the polynomial scheme $B$, the only point of residue transcendence degree $>d-2$ is its
-generic point: a nonzero prime gives a nonzero polynomial relation between the $d-1$ coordinate
-residues. Thus the same support bound holds for $r=2$. Inputs:
-lem-sc-smooth-strict-local-field-model, prop-weil-pbc-strict-henselization-stalk-formula,
-lem-sf-separably-closed-torsion-cd, def-weil-regular-scheme, def-kun-transcendence-degree.
-
-11. Let $N$ be a torsion sheaf on $B$ with zero stalks above transcendence degree $a\ge0$. The
-support-dimension-union lemma writes $N=\varinjlim_ZN_Z$ over closed $Z\subset B$ of dimension at
-most $a$. Equip $Z$ with its reduced closed subscheme structure. By the stalk argument in step 6,
-$N_Z=i_*i^{-1}N_Z$; by the finite comparison in step 2, $H^p(B,N_Z)=H^p(Z,i^{-1}N_Z)$. The scheme
-$Z$ is affine of finite type of dimension at most $a$. When $a<d$, induction over $K$ gives zero
-for $p>a$. Cohomology commutes with this filtered colimit on the qcqs scheme $B$, hence
-$H^p(B,N)=0$ for $p>a$. Apply this with $N=R^qf_*M$ and $a=d-q$ for $q\ge2$ and $a\ge0$. If $a<0$,
-steps 5 and 9 show every stalk vanishes, hence $N=0$. For $q=0,1$, induction on $B$ gives
-$H^p(B,R^qf_*M)=0$ for $p>d-1$. Inputs: lem-sc-support-dimension-union,
-lemma-weil-pbc-finite-stalk-formula, lemma-openclosed-stalk-upperstar,
-lemma-weil-pbc-geometric-stalk-conservative, lemma-weil-pbc-finite-direct-image-exact,
-lem-weil-pbc-direct-image-preserves-injectives, lem-weil-pbc-cohomology-filtered-colimit.
-
-12. Apply the Grothendieck spectral sequence to $f_*$ and $\Gamma(B,-)$; direct images preserve
-injectives, so the acyclicity hypothesis is satisfied. Its terms $H^p(B,R^qf_*M)$ vanish for
-$p+q>d$: for $q=0,1$ use $p\le d-1$, and for $q\ge2$ use $p\le d-q$. A first-quadrant convergent
-spectral sequence gives a finite filtration in each total degree, so the zero graded pieces force
-$H^r(\mathbf A^d,M)=0$ for $r>d$. Finally an arbitrary locally torsion $M$, without a uniform
-annihilator, is the filtered union of its subsheaves $M[n]$; each has just been treated, and
-cohomology commutes with this union. The finite comparison handles the original $X$, and the
-descent of step 1 completes the induction over all fields with bound $d+c$. Inputs:
-thm-sp-grothendieck, lem-weil-pbc-direct-image-preserves-injectives,
-lemma-weil-pbc-torsion-filtered-union, lem-weil-pbc-cohomology-filtered-colimit.
--/
+Proof: Compare the stated derived-category cohomology with Sheaf.H. Strongly induct on a
+natural upper bound for dimension, simultaneously over every field with every available
+field cohomological bound. Descend the bound from an algebraic closure using ground-field
+comparison and the field-base-change dimension inequality. Over the algebraic closure,
+Noether normalization supplies a finite map from each affine spectrum to polynomial space,
+with the number of variables bounded by the source dimension. Bounded-exponent reduction
+allows finite direct image to preserve the chosen annihilator, hence torsion. The finite
+edge-map bijection transfers the polynomial-space vanishing back to the affine scheme.
+Dimension-zero polynomial space is Spec of the field. Dimension one is an affine curve.
+For dimension n+2 apply the polynomial induction-step theorem to the simultaneous smaller
+bounds. That theorem supplies the support and Leray calculation for the polynomial
+projection, including the punctured coefficient-field calculation at infinity.
+An affine finite-type scheme has finite Krull dimension. For a nonempty scheme its dimension
+is nonnegative, so the natural-number conversion in this statement is that finite dimension;
+apply the simultaneous bound with it. For an empty scheme geometric points detect the zero
+sheaf, hence every cohomology group is zero without any positive-degree restriction. -/
 theorem hasTorsionEtaleCohomologicalDimensionLE_of_isAffine
     (K : Type u) [Field K] (c : ℕ)
     (hK : HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) c)
@@ -225,8 +220,29 @@ theorem hasTorsionEtaleCohomologicalDimensionLE_of_isAffine
     (IsEmpty X → ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}),
       F.IsTorsion → ∀ q : ℕ,
         Subsingleton ((AlgebraicGeometry.Etale.cohomology AddCommGrpCat.{u + 1} X q).obj
-          ((DerivedCategory.singleFunctor _ 0).obj F))) := by
-  sorry
+          ((DerivedCategory.singleFunctor _ 0).obj F))) := open Limits in by
+  constructor
+  · intro _
+    obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (X ↘ Spec (.of K))
+    have hfinite : (topologicalKrullDim X).unbotD 0 ≠ ⊤ := open Limits in by
+      apply ne_top_of_le_ne_top (show (d : ℕ∞) ≠ ⊤ by simp)
+      exact (WithBot.unbotD_le_iff (by simp)).2 hd
+    have hdim : topologicalKrullDim X ≤
+        ((((topologicalKrullDim X).unbotD 0).toNat : ℕ) : WithBot ℕ∞) := open Limits in by
+      change topologicalKrullDim X ≤
+        ((((topologicalKrullDim X).unbotD 0).toNat : ℕ∞) : WithBot ℕ∞)
+      rw [ENat.natCast_toNat hfinite]
+      exact WithBot.le_coe_unbotD _ _
+    have hK' : (Spec (.of K)).HasTorsionCohomologicalDimensionLE c :=
+      fun F hF q hq ↦ (subsingleton_etaleCohomology_iff_H F q).mp (hK F hF q hq)
+    have hX := torsionCd_all_fields_of_polynomial_step
+      subsingleton_H_polynomial_of_lowerDimension
+      ((topologicalKrullDim X).unbotD 0).toNat K c hK' X (X ↘ Spec (.of K)) hdim
+    intro F hF q hq
+    exact (subsingleton_etaleCohomology_iff_H F q).mpr (hX F hF q hq)
+  · intro h F _ q
+    let := h
+    exact (subsingleton_etaleCohomology_iff_H F q).mpr (subsingleton_H_empty X F q)
 
 end AlgebraicGeometry.Scheme
 
