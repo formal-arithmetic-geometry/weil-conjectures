@@ -1,10 +1,84 @@
 {
  "kind": "statement",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the ordinary unbounded category $D(X_{\\mathrm{proet}},A)$, with the operations of [def-weil-pbc-proetale-operations]. The coefficient ring $A=A_{E,n}$ is finite and commutative by clause 4 of [def-weil-l-adic-coefficient-extension]. Write $C_{a,b}=c_{g^a,g^b}:P_{a+b}\\xrightarrow{\\sim}P_aP_b$ for $a,b\\geq1$. These are the natural isomorphisms of [lem-weil-pbc-proetale-derived-pullback-composition]. The canonical constant coefficient identification on a composite is the composite identification by [lem-trf-constant-coefficient-composition], so the comparison applies with exactly the coefficient maps of the item. We write composition of endofunctors in ordinary functional order. The canonical functor associator has identity components: both parenthesizations act by $F(G(H(M)))$ on objects and $F(G(H(u)))$ on morphisms. Thus all reassociations below are interpreted by those specified associators.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-constant-coefficient-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Iterated Frobenius transport: expansion of the pullback-composition coherence needed for its m-th-iterate assertion"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-pullback-coherence] to $j=g^a$, $h=g^b$, $k=g^c$, all endomorphisms of $X$, with its finite commutative coefficient ring equal to $A$. Its normalized comparisons are exactly the $C$ of step 1. For all positive $a,b,c$ it gives the natural-transformation identity\n$$P_a(C_{b,c})\\circ C_{a,b+c}=(C_{a,b}P_c)\\circ C_{a+b,c}:P_{a+b+c}\\longrightarrow P_aP_bP_c.$$\nHere $(C_{a,b}P_c)_M=C_{a,b,P_cM}$ and $P_a(C_{b,c})_M=P_a(C_{b,c,M})$. No change of coefficient category or choice of comparison is made.",
+   "uses": [
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; three-morphism associativity as stated in lem-trf-derived-pullback-coherence"
+   }
+  },
+  {
+   "text": "Define natural isomorphisms by induction on positive $r$:\n$$d_1=\\mathrm{id}_T,\\qquad d_{r+1}=T(d_r)\\circ C_{1,r}:P_{r+1}\\longrightarrow T\\circ T^r.$$\nThe base is well typed because $P_1=T$. Each successor is natural and invertible: functors preserve inverses, and composites of natural isomorphisms are natural isomorphisms. This is the comparison from repeatedly taking the first summand to be $1$. These assertions follow directly by composing the naturality squares and the inverse identities for the comparisons of [lem-weil-pbc-proetale-derived-pullback-composition].",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Iterated Frobenius transport: expansion of the pullback-composition coherence needed for its m-th-iterate assertion"
+   }
+  },
+  {
+   "text": "For every $a,b\\geq1$, prove by induction on $a$ the equality\n$$d_{a+b}=T^a(d_b)\\circ(d_aP_b)\\circ C_{a,b}. \\tag{*}$$\nAt $a=1$, $d_1P_b$ is the identity, so this is the recursion of step 3. For $a\\geq2$, the recursion and the induction hypothesis at $(a-1,b)$ give\n$$d_{a+b}=T^a(d_b)\\circ(T(d_{a-1})P_b)\\circ T(C_{a-1,b})\\circ C_{1,a-1+b}.$$\nUse step 2 with $(1,a-1,b)$, valid because $a-1\\geq1$, to replace its last two factors by $(C_{1,a-1}P_b)\\circ C_{a,b}$. The middle factors then equal $d_aP_b$ by the recursion at $a-1$. This proves $(*)$ for every positive $a,b$. The calculation is an equality of natural transformations, so it also holds after evaluation on every complex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Iterated Frobenius transport: expansion of the pullback-composition coherence needed for its m-th-iterate assertion"
+   }
+  },
+  {
+   "text": "Any complete sequence of binary splittings of the positive integer $r$ has a finite ordered binary tree: a vertex of weight $a+b$ applies $C_{a,b}$, and its two children refine $a$ and $b$. Induct on $r$ to compare its map with $d_r$. A tree of weight $1$ has no splitting and gives $d_1$. At a root $(a,b)$, both weights are smaller than $r$, so the subtree maps are $d_a,d_b$. The resulting composite is the right side of $(*)$, hence $d_r$. Refining the second subtree before the first gives the same map, since naturality of $d_a$ at $d_{b,M}$ reads\n$$T^a(d_{b,M})\\circ d_{a,P_bM}=d_{a,T^bM}\\circ P_a(d_{b,M}).$$\nSplittings at distinct deeper vertices commute by this same naturality equation inside their common functor context. A splitting into $j$ positive summands is a binary refinement with $j$ leaves; the just-proved induction applies to any parenthesization. The associators in step 1 have identity components, so inserting their reassociations does not change these component maps. This proves the stated independence of both order and reassociation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Iterated Frobenius transport: expansion of the pullback-composition coherence needed for its m-th-iterate assertion"
+   }
+  },
+  {
+   "text": "Finally the recursion gives\n$$d_{r+1,M}^{-1}=C_{1,r,M}^{-1}\\circ T(d_{r,M}^{-1}).$$\nPostcompose $T(d_{r,M})$ and use functoriality and the inverse law to obtain\n$$d_{r+1,M}^{-1}\\circ T(d_{r,M})=C_{1,r,M}^{-1}=b_{r,M}.$$\nAt $r=1$ this says $d_{2,M}^{-1}=C_{1,1,M}^{-1}$, consistently with $d_1=\\mathrm{id}_T$. The argument applies to every object $M$ of the unbounded derived category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Iterated Frobenius transport: expansion of the pullback-composition coherence needed for its m-th-iterate assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-constant-coefficient-composition",
+  "lem-trf-derived-pullback-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "Iterated Frobenius transport: expansion of the pullback-composition coherence needed for its m-th-iterate assertion"
+ },
  "chapter": "sec-trace-formula",
  "unit": "sk-d-weil",
  "created": {
@@ -54,6 +128,55 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp, PresheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, SheafOfModules.pullback_assoc",
    "date": "2026-10-17",
    "verdict": "no match: sheaf/presheaf module pullbacks and scheme structure-sheaf pullbacks are underived; none gives coherence of the specified derived pro-etale comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent iterated derived inverse image along powers of a scheme automorphism, independent of splitting and parenthesization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, iterateFrobeniusEquiv_symm_add, AlgebraicGeometry.AffineSpace.reindex_over_assoc, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map, AlgebraicGeometry.AffineSpace.reindex_comp_assoc, iterateFrobeniusEquiv_symm_add_apply, AlgebraicGeometry.AffineSpace.reindex_comp, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom_assoc; ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern scheme Frobenius, categorical pullback limits, or underived module pullbacks; none states the specified repeated derived pro-etale pullback comparison identity"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_assoc|pseudofunctor_associativity|leftDerivedFunctorCompIso",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern scheme Frobenius, categorical pullback limits, or underived module pullbacks; none states the specified repeated derived pro-etale pullback comparison identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"assoc\"",
+   "results": "12 hits: CategoryTheory.Limits.WidePullback.π_arrow_assoc, CategoryTheory.Limits.WidePullbackCone.condition_assoc, CategoryTheory.Limits.WidePullback.lift_base_assoc, CategoryTheory.Limits.WidePullback.lift_π_assoc, CategoryTheory.Limits.WidePullbackCone.IsLimit.lift_base_assoc, CategoryTheory.Limits.WidePullbackCone.IsLimit.lift_π_assoc, CategoryTheory.Limits.PullbackCone.condition_assoc, CategoryTheory.Limits.PullbackCone.IsLimit.lift_fst_assoc; ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern scheme Frobenius, categorical pullback limits, or underived module pullbacks; none states the specified repeated derived pro-etale pullback comparison identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison between pullback along an iterate and iterated derived pullback is coherent",
+   "results": "8 hits: CategoryTheory.Limits.pullbackComparison, CategoryTheory.Functor.IsFibered.pullbackPullbackIso, CategoryTheory.Limits.pullbackAssoc, CategoryTheory.Limits.pullbackPullbackRightIsPullback, CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp; ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern scheme Frobenius, categorical pullback limits, or underived module pullbacks; none states the specified repeated derived pro-etale pullback comparison identity"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorCompIso|mapDerivedCategoryComp.*assoc",
+   "results": "0 hits: ; subdirectory Mathlib/CategoryTheory; ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern scheme Frobenius, categorical pullback limits, or underived module pullbacks; none states the specified repeated derived pro-etale pullback comparison identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback_assoc",
+   "results": "1 hits: SheafOfModules.pullback_assoc; ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern scheme Frobenius, categorical pullback limits, or underived module pullbacks; none states the specified repeated derived pro-etale pullback comparison identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity coherence of canonical composition isomorphisms for derived pullback functors on sheaves of modules on pro-etale sites",
+   "results": "8 hits: SheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, PresheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv; ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern scheme Frobenius, categorical pullback limits, or underived module pullbacks; none states the specified repeated derived pro-etale pullback comparison identity"
   }
  ],
  "blueprint": {
@@ -64,5 +187,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-frobenius-pullback-comparison-coherence",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the coherence claim into the normalized triple comparison, a recursive comparison, a positive-integer induction for binary splits, the ordered splitting-tree argument, and the explicit inverse cancellation. Reused the existing finite-coefficient derived coherence and constant-coefficient composition lemmas; no new nodes. Checked the unbounded coefficient category, positive-index bases, naturality interchanges and empty scheme.",
+  "blueprint": "Realizes the associativity of pullback comparisons underlying the m-th-iterate assertion in lem-trf-frobenius-operator-compact-description; this is the comparison used in step 3 of its reviewed split.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic construction and normalization of the ordinary derived module pullback comparison for the coefficient isomorphisms; sk-d-weil uses these comparisons without constructing them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-9b9bdd611",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-9b9bdd611 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item's statement, stmt_deps, source and blueprint are byte-identical to the unsplit live copy, so the statement is unchanged. The coefficient category is the ordinary unbounded D(X_proet,A) with constant A=A_{E,n}. This is the same category as def-weil-pbc-proetale-operations and lem-weil-pbc-proetale-derived-pullback-composition. That lemma normalizes its comparisons on K-flat complexes with flat terms, as Stacks Tag 0D6D (sites-cohomology.tex 3658-3680) does. No other coefficient category is substituted. Step 1: lem-trf-constant-coefficient-composition supplies the composite-identification hypothesis of the composition lemma. Clause 4 of def-weil-l-adic-coefficient-extension makes A finite, and A is commutative. Step 2: I matched lem-trf-derived-pullback-coherence index by index with j=g^a, h=g^b, k=g^c, i.e. c_{h,k}=C_{b,c}, c_{j,kh}=C_{a,b+c}, c_{j,h}=C_{a,b}, c_{hj,k}=C_{a+b,c}, using the direction convention c_{f,g}:L(gf)^*->Lf^*Lg^*. Steps 3-6: I re-derived the recursion, the a-induction for d_{a+b}=T^a(d_b)(d_aP_b)C_{a,b} using the cocycle at (1,a-1,b), the tree-independence argument with the naturality interchange, and the inverse identity d_{r+1}^{-1}T(d_r)=C_{1,r}^{-1}=b_r. All maps are well typed. Small cases r=2, 3 and 4 and the empty scheme check out. There are no new nodes and no duplicates: lem-trf-derived-pullback-coherence is an input, not a duplicate, and lem-trf-iterated-weil-cocycle concerns phi^[m]. There is no cycle, proof_deps equals the union of uses, and no SGA source is used. The parent cites this item for c_m of def-trf-frobenius-operators, and the item makes that c_m well defined. Accepted tool use: lem-weil-pbc-proetale-derived-pullback-composition, a generic construction of the comparison isomorphism. No fixes."
  }
 }

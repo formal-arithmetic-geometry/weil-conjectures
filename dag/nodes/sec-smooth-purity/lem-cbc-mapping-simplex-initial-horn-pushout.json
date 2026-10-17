@@ -12,9 +12,89 @@
   "lem-coef-cartesian-mapping-simplex-presentation",
   "lem-coef-marked-point-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a monotone $\\theta:[s]\\to[r]$, the mapping-simplex operator gives\n$$\\theta^*c_r(a,\\alpha)=(\\alpha\\theta,t_{\\alpha(r),\\alpha\\theta(s)}\\theta^*t_{n,\\alpha(r)}a)=(\\alpha\\theta,t_{n,\\alpha\\theta(s)}\\theta^*a)=c_s(\\theta^*a,\\alpha\\theta).$$\nThe middle equality uses only that the transition maps are simplicial and $t_{j,i}t_{n,j}=t_{n,i}$. Thus $c$ is simplicial. A marked product edge has $a=s_0b$ and $\\alpha\\in T_n$; its image has second coordinate $s_0t_{n,\\alpha(1)}b$ and the same base edge, so is marked. Degenerate edges of $M$ have constant base and degenerate second coordinate, hence are included in its prescribed marking. Since $c$ preserves the base coordinate, its restriction $c_K$ lands in $M_K$ and is marked, and the displayed square commutes.",
+   "uses": [
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2, printed p. 179, mapping-simplex operators; proof of Corollary 3.2.2.12, printed p. 186, reduction for i<n. The coordinate verification and selected-marking check here are agent-written expansions."
+   }
+  },
+  {
+   "text": "By the stated definition of a horn, $\\alpha:[r]\\to[n]$ belongs to $K_r$ if and only if its image omits a vertex in $\\{1,\\ldots,n\\}$. Consequently $\\alpha\\notin K_r$ forces $n$ into its image and, by monotonicity, $\\alpha(r)=n$. Over every such $\\alpha$, an $r$-simplex of $M$ is therefore $(\\alpha,a)$ with $a\\in(A_n)_r$, and $c_r(a,\\alpha)=(\\alpha,a)$ because $t_{n,n}=\\mathrm{id}$. Thus $c$ is bijective on simplices outside the horn restriction. Its inverse image of $M_K$ is exactly $A_n\\times K$, since it preserves the base. No injectivity of $c_K$ is asserted or needed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2, printed p. 179, mapping-simplex operators; proof of Corollary 3.2.2.12, printed p. 186, reduction for i<n. The coordinate verification and selected-marking check here are agent-written expansions."
+   }
+  },
+  {
+   "text": "Fix a marked simplicial set $Z$ and compatible marked maps $u:M_K\\to Z$ and $v:A_n^\\flat\\times D^T\\to Z$, so $u c_K=v|_{A_n\\times K}$. Define functions $h_r:M_r\\to Z_r$ by $h_r(\\alpha,a)=u_r(\\alpha,a)$ when $\\alpha\\in K_r$, and by $h_r(\\alpha,a)=v_r(a,\\alpha)$ when $\\alpha\\notin K_r$. In the second case $a\\in(A_n)_r$ by Step 2, so this is defined. These functions restrict to $u$. For any $(b,\\alpha)\\in(A_n)_r\\times(\\Delta^n)_r$, if $\\alpha\\in K_r$, compatibility gives $h_rc_r(b,\\alpha)=u_rc_{K,r}(b,\\alpha)=v_r(b,\\alpha)$; otherwise $c_r(b,\\alpha)=(\\alpha,b)$ and the same equality follows from the definition. Hence $h c=v$ degree by degree, even when several cylinder simplices have the same image over $K$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cartesian-mapping-simplex-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2, printed p. 179, mapping-simplex operators; proof of Corollary 3.2.2.12, printed p. 186, reduction for i<n. The coordinate verification and selected-marking check here are agent-written expansions."
+   }
+  },
+  {
+   "text": "The functions $h_r$ commute with every simplicial operator. Indeed, for $x\\in(M_K)_r$, also $\\theta^*x\\in(M_K)_s$, and $h_s(\\theta^*x)=u_s(\\theta^*x)=\\theta^*u_r(x)=\\theta^*h_r(x)$. Every remaining $x\\in M_r$ has the form $c_r(b,\\alpha)$ by Step 2. Using Step 1 and the degreewise identity $h c=v$ from Step 3 gives\n$$h_s(\\theta^*x)=h_sc_s(\\theta^*b,\\alpha\\theta)=v_s(\\theta^*b,\\alpha\\theta)=\\theta^*v_r(b,\\alpha)=\\theta^*h_r(x).$$\nThis includes operators whose image enters the horn. Thus $h$ is a simplicial map extending both given maps.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cartesian-mapping-simplex-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2, printed p. 179, mapping-simplex operators; proof of Corollary 3.2.2.12, printed p. 186, reduction for i<n. The coordinate verification and selected-marking check here are agent-written expansions."
+   }
+  },
+  {
+   "text": "If a marked edge $e=(\\alpha,a)$ of $M$ lies in $M_K$, its image under $h$ is marked since $u$ is marked and the marking on $M_K$ is induced. Otherwise Step 2 gives $\\alpha(1)=n$, and $a$ is degenerate by the marking prescribed in the statement. Since $\\alpha\\in T_n$, the edge $(a,\\alpha)$ is marked in $A_n^\\flat\\times D^T$, and $h(e)=v(a,\\alpha)$ is marked. Hence $h$ is a marked map. Any other extension equals $u$ on $M_K$ and equals $v$ on every image of $c$; these cover all simplices by Step 2, so it equals $h$ in every degree. This proves exactly the marked pushout universal property.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2, printed p. 179, mapping-simplex operators; proof of Corollary 3.2.2.12, printed p. 186, reduction for i<n. The coordinate verification and selected-marking check here are agent-written expansions."
+   }
+  },
+  {
+   "text": "For $n=1$, the horn criterion of Step 2 says that every simplex of $K$ is constant at $0$. Thus $K=\\{0\\}$, its mapping-simplex restriction has simplices precisely those of $A_0$, and its induced marking is exactly the degenerate edges: $M_K=A_0^\\flat$. The construction above therefore gives the asserted marked mapping-cylinder pushout also in this case. All constructions are formulas on existing simplices; none selects a vertex in a term of the chain. In particular if $A_n$ is empty there are no simplices outside $M_K$, so the same extension formula still works, and arbitrary empty terms require no additional assumption.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2, printed p. 179, mapping-simplex operators; proof of Corollary 3.2.2.12, printed p. 186, reduction for i<n. The coordinate verification and selected-marking check here are agent-written expansions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-marked-point-cartesian-model",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 3.2.2, printed p. 179, mapping-simplex operators; proof of Corollary 3.2.2.12, printed p. 186, reduction for i<n. The coordinate verification and selected-marking check here are agent-written expansions. HTT is not archived under literature/; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +130,45 @@
    "results": "{\"t\": \"2026-10-17T08:38:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"IsPushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.relativeCellComplexOfMono.isPushout\", \"SSet.relativeCellComplexOfMono.isPushout_aux\", \"SSet.Subcomplex.unionProd.isPushout\", \"SSet.Subcomplex.Pairing.RankFunction.isPushout\"], \"digest\": \"7da0744f492c8120\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary simplex horns, generic subcomplex unions, or model-category cylinders; none gives the chain-dependent marked mapping-simplex pushout."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingSimplex|mapping_simplex|initialHorn|initial_horn",
+   "results": "{\"t\": \"2026-10-17T10:13:39Z\", \"tool\": \"grep\", \"query\": \"mappingSimplex|mapping_simplex|initialHorn|initial_horn\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give unmarked subcomplex-union pushouts, ordinary low-dimensional horns, horn generators or abstract cylinders, not the chain-dependent selected-marking mapping-simplex pushout. SubcomplexColimits.lean:86 requires a square of four inclusions, while c_K here need not be injective."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"IsPushout\"",
+   "results": "{\"t\": \"2026-10-17T10:13:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"IsPushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.relativeCellComplexOfMono.isPushout\", \"SSet.relativeCellComplexOfMono.isPushout_aux\", \"SSet.Subcomplex.unionProd.isPushout\", \"SSet.Subcomplex.Pairing.RankFunction.isPushout\"], \"digest\": \"7da0744f492c8120\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give unmarked subcomplex-union pushouts, ordinary low-dimensional horns, horn generators or abstract cylinders, not the chain-dependent selected-marking mapping-simplex pushout. SubcomplexColimits.lean:86 requires a square of four inclusions, while c_K here need not be injective."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cylinder of a diagram of simplicial sets is glued to its horn restriction along the product of the last fibre with the horn",
+   "results": "{\"t\": \"2026-10-17T10:13:40Z\", \"tool\": \"leansearch\", \"query\": \"The mapping cylinder of a diagram of simplicial sets is glued to its horn restriction along the product of the last fibre with the horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₂.isPushout\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.Precylinder.ctorIdx\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.horn.ι_ι_assoc\", \"HomotopicalAlgebra.Cylinder.noConfusionType\", \"SSet.horn.multicoequalizerDiagram\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData_i₁\"], \"digest\": \"abac6dd69b781bd7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give unmarked subcomplex-union pushouts, ordinary low-dimensional horns, horn generators or abstract cylinders, not the chain-dependent selected-marking mapping-simplex pushout. SubcomplexColimits.lean:86 requires a square of four inclusions, while c_K here need not be injective."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The marked mapping simplex of a chain is a pushout of its initial horn restriction and its last term times the simplex",
+   "results": "{\"t\": \"2026-10-17T10:13:45Z\", \"tool\": \"leanfinder\", \"query\": \"The marked mapping simplex of a chain is a pushout of its initial horn restriction and its last term times the simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₂₂.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn.isColimit\", \"SSet.horn.ι\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"f29757f490d558f0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give unmarked subcomplex-union pushouts, ordinary low-dimensional horns, horn generators or abstract cylinders, not the chain-dependent selected-marking mapping-simplex pushout. SubcomplexColimits.lean:86 requires a square of four inclusions, while c_K here need not be injective."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial set is the pushout of a subcomplex and a cylinder that is bijective on the complementary simplices",
+   "results": "{\"t\": \"2026-10-17T10:14:34Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial set is the pushout of a subcomplex and a cylinder that is bijective on the complementary simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.Subcomplex.BicartSq\", \"SSet.Subcomplex.Pairing\", \"SSet.Subcomplex.Pairing.IsProper\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.Subcomplex.PairingCore\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"3374c93711011c58\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give unmarked subcomplex-union pushouts, ordinary low-dimensional horns, horn generators or abstract cylinders, not the chain-dependent selected-marking mapping-simplex pushout. SubcomplexColimits.lean:86 requires a square of four inclusions, while c_K here need not be injective."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-enhanced-relative-exponential",
@@ -74,5 +189,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-mapping-simplex-initial-horn-pushout",
+  "worker": "stage1",
+  "summary": "Q53: proved the marked initial-horn pushout by an explicit degreewise extension, checked all simplicial operators and marked-edge representatives, and included n=1 and empty terms. All six steps are elementary coordinate or set-membership checks from the three cited definition statements. No new nodes, statement changes, attachment or full Mathlib match. Read HTT Section 3.2.2 and its Corollary 3.2.2.12 online; proof is agent-written because HTT is not archived. Searches of the DAG, whole blueprint, source and Mathlib found no exact prior result.",
+  "blueprint": "Historical blueprint ancestor thm-cbc-finite-level-proetale, opening compactification choice, via lem-cbc-grothendieck-hypersheaf-sections, lem-cbc-grothendieck-presheaf-coherent-straightening and lem-cbc-enhanced-relative-exponential. This item supplies the initial-horn last-cylinder gluing used in step 4 of the latter; this auxiliary combinatorial statement is not itself stated in the main-20261015 blueprint paragraph. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-cartesian-mapping-simplex-presentation",
+    "why": "Only the explicit mapping-simplex data and operators in its statement are used, not its existence or equivalence theorems; these data are not supplied by a node of the compact-support base-change unit."
+   },
+   {
+    "node": "lem-coef-marked-point-cartesian-model",
+    "why": "Only the definitions of marked simplicial sets, marked maps, minimal markings and marked products are used; no model-structure or equivalence assertion is invoked."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-marked-point-cartesian-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-0c08f1359",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-0c08f1359 (reviewer sub-agent of L); spot-checked: I read the item, its three cited statements (def-cbc-enhanced-diagrams-cones horn and products, lem-coef-cartesian-mapping-simplex-presentation coordinates and operators, lem-coef-marked-point-cartesian-model markings and products) and the parent lem-cbc-enhanced-relative-exponential steps 3-6. The parent puts the same restricted marking (alpha in T_n, a degenerate) on M and uses exactly this pushout, including n=1. The statement is true, not weakened, and does not restate a parent clause. Step 1: c is simplicial because the transitions compose, and it is marked. The prescribed marking on M contains the degenerate edges. Step 2: a simplex outside the initial horn hits {1..n}, so alpha(r)=n and c is a bijection there. Step 3: the piecewise h is well-typed and hc=v holds even when c_K is not injective. Step 4: naturality holds, including faces that enter the horn, with no circularity. Step 5: every marked edge outside M_K comes from a marked cylinder edge, and uniqueness follows from coverage, so this is the marked universal property, not an unmarked one. Step 6: n=1 gives M_K=A_0^flat, and empty A_n needs no choice. I tested n=1 (mapping cylinder with (Delta^1)^sharp), n=2 (faces of (012,a); no marked edges outside K) and a non-injective transition. There are no new nodes. lem-coef-mapping-simplex-last-fiber-pushout glues along the last face and is unmarked, the prism-extension and cone-fiber nodes state other results, and the Mathlib SSet pushout candidates are not one-line matches. I accept both tool_uses: the two sk-prop-sf-biduality-general nodes are used only for definitions. HTT is not under literature/; the report lists it as WANTED and proof_origin=agent, and I did not consult it because the proof is a self-contained coordinate verification. There is no SGA citation. No fixes."
  }
 }

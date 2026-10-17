@@ -34,16 +34,17 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathbf Z/N$. Work throughout on ordinary small etale sites. Both coefficient rings to which the projection theorem is applied are finite commutative rings: $R=\\mathbf Z/N$ is finite and $A$ is finite by hypothesis. Its $r^*$ is exactly the termwise inverse image $r^{-1}$ used here. In all steps below, the ordered projection map is the symmetry-conjugate of the adjoint-of-counit map, exactly as specified in [lem-amb-proper-coproducts-projection]; thus the inverse in the stated counit uses this specified map. The projections $q:P\\to S$ and $p_a:P\\times_SP\\to P$ are projective-line projections, hence proper by [lemma-nagata-projective-space-base-change-proper]. They have finite type and Noetherian sources, so the arbitrary-complex projection formula of [lem-amb-proper-coproducts-projection] applies. The standard opens of $\\operatorname{Proj}\\mathbf Z[x_0,x_1]$ are supplied by [def-nagata-affine-proj]. Their degree-zero rings are $\\mathbf Z[x_1/x_0]$ and $\\mathbf Z[x_0/x_1]$: every degree-zero monomial fraction is a power of the indicated ratio, and those powers are independent. Pull back this cover through the base-change definition of $P$. By [lem-weil-pbc-fibre-product-affine-spectra], tensoring these rings with $B$ gives $B[t]$ and $B[s]$. Explicitly over each affine Noetherian open of $S$, the two charts are $\\operatorname{Spec}B[t]$ and $\\operatorname{Spec}B[s]$; their product charts are $\\operatorname{Spec}B[t,u]$. [pqf-lem-locnoeth-lft] makes these finite-type sources locally Noetherian; the finite charts over the finite affine cover of the Noetherian base make them quasi-compact, hence Noetherian. The diagonal is closed because $q$ is separated (part of properness); [lem-weil-pbc-closed-immersion-proper](a) makes it proper and of finite type. Every exchange needed below is invertible on the entire derived category by [lem-kun-proper-base-change-torsion-ring], with $R$ or $A$: both are killed by $N$. The twist-line lemma [lem-asd-finite-etale-twist-line] makes $R_T(1)=\\mu_{N,T}$ locally free of rank one over $R_T$, and makes $A_T(1)$ locally free of rank one over $A_T$. In particular the twists are flat. Pullback preserves their equations and their scalar-extension description. None of this uses an adic twist.",
+   "text": "Put $R=\\mathbf Z/N$. The general standard-chart statement [lem-weil-pbc-projective-space-standard-charts](a),(c), specialized to the two coordinates, supplies the covering charts $\\operatorname{Spec}B[t]$ and $\\operatorname{Spec}B[s]$ over every affine open $\\operatorname{Spec}B\\subseteq S$, with $t=x_1/x_0$, $s=x_0/x_1$. Their product charts are $\\operatorname{Spec}B[t,u]$ by [lem-weil-pbc-fibre-product-affine-spectra]: $B[t]\\otimes_B B[u]\\cong B[t,u]$ by multiplication of monomials. The same chart statement applies to either $p_a$ over base $P$. The maps $q,p_a$ are proper by [lemma-nagata-projective-space-base-change-proper], hence finite type and quasi-compact; [pqf-lem-locnoeth-lft] makes their sources locally Noetherian, and quasi-compactness gives Noetherian sources. Properness makes $q$ separated, so its diagonal is closed and therefore proper of finite type by [lem-weil-pbc-closed-immersion-proper]. Thus [lem-amb-proper-coproducts-projection] applies to $q,p_a,\\Delta$ with either finite ring $R$ or $A$, on the entire derived categories. Use throughout its specified ordered, symmetry-conjugated projection map. All proper exchanges are isomorphisms by [lem-kun-proper-base-change-torsion-ring]. The twists are flat rank-one sheaves by [lem-asd-finite-etale-twist-line], with canonical pullbacks by [lem-asd-etale-finite-twist-pullback].",
    "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-fibre-product-affine-spectra",
     "lemma-nagata-projective-space-base-change-proper",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-closed-immersion-proper",
     "lem-amb-proper-coproducts-projection",
     "lem-kun-proper-base-change-torsion-ring",
     "lem-asd-finite-etale-twist-line",
-    "pqf-lem-locnoeth-lft",
-    "def-nagata-affine-proj",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-closed-immersion-proper"
+    "lem-asd-etale-finite-twist-pullback"
    ],
    "elementary": false,
    "source": {
@@ -74,16 +75,10 @@
    }
   },
   {
-   "text": "Apply derived scalar extension $A\\otimes_R^L-$ to $b_{q,R}$. To identify its target use the projection formula of [lem-amb-proper-coproducts-projection] with its finite coefficient ring specialized to $R=\\mathbf Z/N$, with $K=A_S$ regarded as an $R$-module complex and $L=\\mu_{N,P}[2]$. It gives $A_S\\otimes_R^LRq_*\\mu_{N,P}[2]\\cong Rq_*(A_P\\otimes_R^L\\mu_{N,P})[2]$. The twist-line lemma makes $\\mu_N$ flat, so $A_P\\otimes_R^L\\mu_{N,P}=A_P(1)$, even if $A$ is not $R$-flat. For precision construct the comparison inside $D(S_{\\mathrm{et}},A)$ as follows, rather than trying to lift a morphism of $R$-complexes. Write $e_T^* = A_T\\otimes_{R_T}^L-$ for the derived module pullback of the identity topos with ring map $R_T\\to A_T$. The pullback tensor theorem [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies these functors. Define the comparison $e_S^*Rq_{*,R}L\\to Rq_{*,A}e_P^*L$ to be the adjunct of\n$$q_A^{-1}e_S^*Rq_{*,R}L\\cong e_P^*q_R^{-1}Rq_{*,R}L\\xrightarrow{e_P^*(\\varepsilon_{q,R,L})}e_P^*L.$$\nThe canonical derived adjunctions and the projection-mate normalization are those of [lem-weil-pbc-ringed-projection-mate-exact]. Restriction of scalars is exact because kernels and cokernels are the same underlying sheaves. Its total derived functor is therefore termwise restriction by [lem-weil-pbc-exact-functor-derived-functor], and it reflects isomorphisms by the cohomology criterion [lem-weil-pbc-unbounded-derived-iso-cohomology]. The two factorizations $(P,A)\\to(P,R)\\to(S,R)$ and $(P,A)\\to(S,A)\\to(S,R)$ have the same structural ring map; [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies their derived direct images. Under this identification, the restriction of the displayed comparison is the $R$-projection map with $K=A_S$: both are adjunct to the same evaluation tensored with $A_P$. Here the ordered version is obtained by the two canonical tensor symmetries specified in the projection theorem; their naturality conjugates the usual counit-first mate into precisely this coefficient-first map. This can also be read as the tensor/exchange equality [lem-weil-pbc-ringed-exchange-tensor-coherence] for the commuting coefficient-change square of ringed topoi; that lemma explicitly does not require a Cartesian square of underlying topoi. Thus it is legitimate to test this $A$-linear comparison over $R$. On the source, scalar extension gives $A_S(1)[2]\\oplus A_S$; naturality of the projection mate identifies its components with the shifted twisted unit and the scalar-extended Kummer class that defines $h$ in the item. Derived tensor preserves isomorphisms, hence the resulting map is exactly $b_q$ and is invertible.",
+   "text": "Apply $e_S^*=A_S\\otimes_R^L-$ to $b_{q,R}$. Use [lem-asd-proper-finite-coefficient-extension] at $f=q$, $R=\\mathbf Z/N\\to A$, and $L=\\mu_{N,P}[2]$. Its $A$-linear isomorphism identifies the resulting target with $Rq_{*,A}e_P^*(\\mu_{N,P}[2])$. By [lem-asd-finite-etale-twist-line], $\\mu_N$ is $R$-flat, so this is $Rq_{*,A}A_P(1)[2]$, even for nonflat $A$. The source is $A_S(1)[2]\\oplus A_S$. The second component is $h$ by its scalar-extension definition. For the first component, transpose under $q_A^{-1}\\dashv Rq_{*,A}$: the normalization of the comparison gives scalar extension of $\\varepsilon_R q_R^{-1}(\\text{unit}_R)=1$, so the component is the shifted twisted $A$-unit. Thus the resulting arrow is exactly $b_q$. Derived scalar extension preserves the isomorphism $b_{q,R}$, and the comparison is an isomorphism; hence $b_q$ is an isomorphism.",
    "uses": [
-    "lem-amb-proper-coproducts-projection",
-    "lem-asd-finite-etale-twist-line",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-asd-finite-etale-twist-line"
    ],
    "elementary": false,
    "source": {
@@ -180,14 +175,15 @@
  ],
  "proof_deps": [
   "def-kun-unbounded-exchange",
-  "def-nagata-affine-proj",
   "def-pc-divisor-line-bundle",
   "def-sc-pic0",
   "lem-amb-kummer-any-base",
   "lem-amb-proper-coproducts-projection",
+  "lem-asd-etale-finite-twist-pullback",
   "lem-asd-finite-etale-twist-line",
   "lem-asd-ordinary-supported-kummer",
   "lem-asd-projective-line-genus-zero",
+  "lem-asd-proper-finite-coefficient-extension",
   "lem-kun-proper-base-change-torsion-ring",
   "lem-kun-tensor-unit",
   "lem-sc-pic-proper-decomposition",
@@ -195,10 +191,9 @@
   "lem-sc-primitive-root",
   "lem-sc-second-kummer-divisors",
   "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-projective-space-standard-charts",
   "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
@@ -307,7 +302,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-asd-smooth-tensor",
   "by": "worker",
@@ -316,11 +311,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-asd-ordinary-finite-p1-adjunction",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged; supplied the ordinary finite-ring decomposition by geometric fibres and nonflat derived scalar extension, constructed the diagonal-kernel unit, verified both triangles with the canonical tensor/exchange maps, and checked base-change normalization. Added only genus-zero geometry and a genuinely ordinary-etale supported Kummer map. The adic blueprint interfaces were not silently specialized. Repair of landing return L: revalidated the now explicit finite-coefficient ordinary-etale projection theorem, stated its specializations to R and A and its symmetry-conjugated counit convention in the proof, and refreshed all six projection citations against the current DAG.",
-  "blueprint": "thm-asd-smooth-tensor proof second and third paragraphs: projective-line adjunction underlying the affine-space model and the normalized line counits",
+  "summary": "Repair of the human return: restored the full repository proof route and preserved the exact statement and Lean record. Former step 1 now cites the existing, more general lem-weil-pbc-projective-space-standard-charts for its hidden chart argument; the remaining proper/Noetherian hypotheses follow explicitly from the retained properness and locally-Noetherian citations. Former step 3 cites the new statement-only lem-asd-proper-finite-coefficient-extension for its hidden unbounded A-linear comparison. Steps 2 and 4–9 are verbatim unchanged; no non-elementary step exceeds 2000 characters.",
+  "blueprint": "thm-asd-smooth-tensor proof paragraphs 2–3 in its imported ordinary-etale route: projective-line decomposition, scalar extension, diagonal-kernel unit, triangle identities, and base-change normalization; the detailed route is thm-amb-p1-adjunction and its decomposition/trace nodes.",
   "tool_uses": [
    {
     "node": "lem-kun-proper-base-change-torsion-ring",
@@ -343,24 +338,16 @@
     "why": "Second Kummer cohomology of a curve is used as a generic tool in step(s) 2; the compact-support unit has no statement supplying this fact and the diagonal-kernel route is retained."
    },
    {
-    "node": "lem-weil-pbc-exact-functor-derived-functor",
-    "why": "The functor induced by an exact functor is its own right and left derived functor is used as a generic tool in step(s) 3; the compact-support unit has no statement supplying this fact and the diagonal-kernel route is retained."
-   },
-   {
     "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "why": "Projection-formula coherence for a square of ringed topoi is used as a generic tool in step(s) 3,4,7,8,9; the compact-support unit has no statement supplying this fact and the diagonal-kernel route is retained."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Exactness data for the ringed-topos projection mate is used as a generic tool in step(s) 3; the compact-support unit has no statement supplying this fact and the diagonal-kernel route is retained."
+    "why": "Projection-formula coherence for a square of ringed topoi is used as a generic tool in step(s) 4,7,8,9; the compact-support unit has no statement supplying this fact and the diagonal-kernel route is retained."
    },
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Canonical composition comparison for unbounded ringed-topos direct images is used as a generic tool in step(s) 3,5,6,7; the compact-support unit has no statement supplying this fact and the diagonal-kernel route is retained."
+    "why": "Canonical composition comparison for unbounded ringed-topos direct images is used as a generic tool in step(s) 5,6,7; the compact-support unit has no statement supplying this fact and the diagonal-kernel route is retained."
    },
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Derived tensor comparison for arbitrary ringed topoi is used as a generic tool in step(s) 3,6,8; the compact-support unit has no statement supplying this fact and the diagonal-kernel route is retained."
+    "why": "Derived tensor comparison for arbitrary ringed topoi is used as a generic tool in step(s) 6,8; the compact-support unit has no statement supplying this fact and the diagonal-kernel route is retained."
    },
    {
     "node": "thm-sc-proper-cohomology",
@@ -373,6 +360,10 @@
    {
     "node": "lem-weil-pbc-closed-immersion-proper",
     "why": "Properness and finite type of the closed diagonal are needed for the arbitrary-complex projection formula in steps 1 and 6. This is a generic tool; it does not replace the diagonal-kernel route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Existing general base-change projective-space cover and affine chart identification (a),(c) supplies the hidden argument of returned step 1; it is a generic geometric interface, retaining the diagonal-kernel route."
    }
   ]
  },
@@ -389,15 +380,16 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "thm-sc-proper-cohomology",
   "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-closed-immersion-proper"
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-projective-space-standard-charts"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NO-9e78480be",
-  "group": "NO",
+  "reviewer": "NT-cc-N1-fc65aa591",
+  "group": "N1",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-9e78480be (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Checked all nine steps, both new nodes, cited statements and source passages, coefficient typing, canonical exchange/projection maps, triangle identities, duplicates and edge cases. Accepted all thirteen declared tool_uses. No repairs required; creator/date fields are filled at merge."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-fc65aa591 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, Stacks 0GL6/0B56/0D6E and the blueprint text of thm-amb-p1-decomposition in main-20261015 and master. Versus the base node, only proof, proof_deps, status and split_report change; the statement and Lean record are unchanged and steps 2 and 4-9 are verbatim. All steps are under 2000 characters (largest 1877). Both points of the human return are answered. Step 1 now cites the existing lem-weil-pbc-projective-space-standard-charts (a),(c) for the charts of P({0,1};S); properness, Noetherian sources and the closed diagonal are checked against the hypotheses of lem-amb-proper-coproducts-projection. Step 3 applies the new lem-asd-proper-finite-coefficient-extension with f=q, R=Z/N->A and L=mu_N[2]. Under the adjunction, the unit component goes to e_P^*(1)=1 and the Kummer component to the scalar-extended class that defines h, so the composite is exactly b_q, with mu_N flat over R and no flatness of A needed. The new node is true: restricted to R, beta_L is the coefficient-first projection map with K=A_Y, which is invertible by the proper torsion projection formula, and restriction of scalars is conservative. I tested R=A, A=0, f=id, empty schemes and the nonflat case Z/4->Z/2. This matches Stacks 0GL6 (proper case) and the blueprint sentence 'tensor over Z/n with A and use lem-amb-proper-coproducts-projection'. The new node is statement-only, cites no SGA, does not restate the parent, has all three search kinds and correct blueprint.from/via. It is not a duplicate of lem-pur-etale-scalar-mate-projection (bounded below, no isomorphism), lem-coef-finite-direct-image, lem-sp-direct-image-change-ring-transpose, det-sp-reduction-direct-image or lem-sfb-proper-direct-image-coefficient-restriction. I accept the step-1 tool uses (standard charts, fibre-product leaf, closed-immersion leaf). FIX: in split_report.tool_uses I removed two duplicate entries (twist-pullback, standard-charts), the stale step-3 declarations exact-functor-derived-functor and ringed-projection-mate-exact, and the same-unit twist-pullback entry, and corrected the step numbers in the 'why' lines. The top-level tool_uses still names the two nodes step 3 no longer uses; the maintainer may drop them at merge.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
