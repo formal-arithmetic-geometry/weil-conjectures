@@ -239,6 +239,7 @@ public import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
 public import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModel
 public import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModelAux
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHomComparison
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftComparison
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftLeft
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftRight
