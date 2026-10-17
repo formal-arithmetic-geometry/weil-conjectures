@@ -3556,6 +3556,7 @@ public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Kapla
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Basic
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Field
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Finite
+public import WeilConjectures.Mathlib.RingTheory.Unramified.LocalRing
 public import WeilConjectures.Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
@@ -3672,6 +3673,10 @@ public import WeilConjectures.RingTheory.DiscreteValuationRing.EtaleRootsOfUnity
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.Etale.Abhyankar
+public import WeilConjectures.RingTheory.Etale.Abhyankar.Basic
+public import WeilConjectures.RingTheory.Etale.Abhyankar.Galois
+public import WeilConjectures.RingTheory.Etale.Abhyankar.Product
+public import WeilConjectures.RingTheory.Etale.Abhyankar.Tame
 public import WeilConjectures.RingTheory.Etale.Coordinates
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal.Basic
