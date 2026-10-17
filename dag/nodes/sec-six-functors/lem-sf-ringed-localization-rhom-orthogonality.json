@@ -250,5 +250,32 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-7fc5bcc1a (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, all six steps, every cited node's statement, and the sources (Stacks 0996(2) with its proof, 0997 (1)=>(2), 0932 in sites-modules.tex l.4031, 08BJ in derived.tex l.9857). The statement matches 0996(2) and 0997 (1)=>(2) hypothesis by hypothesis: a commutative sheaf of rings on a site small in the module universe, the isomorphism in D(O) with the right side restricted from D(O_f), and no change of coefficient category. Step 1: restriction U is exact and detects acyclicity, since kernels and sheafified cokernels are unchanged. Step 2: I checked the adjunction U -| Hom_O(O_f,-) and its inverse formulas, including O- and O_f-linearity; it uses commutativity, which holds. Step 3: 08BJ is applied with u=H right adjoint to the exact v=U, the correct direction, and the degree-0 Hom complex gives RHom_O(O_f,K). Step 4: the differential sign identity and O-linearity of the slice-wise map hold. Step 5: naturality goes through 070I (a Mathlib leaf). Step 6: H(I) is acyclic, hence zero in D(O_f), so the right side vanishes. Small cases checked: f=1, f nilpotent, K=0 or L=0, the empty site, and Z with p (Hom and Ext^1 of Q into Z_p vanish). The delivery has no new nodes, and no existing node duplicates it; nearest candidates are rhom-calculus, local-hom-tower-criterion, module-localization-tower-vanishing and sc-sheaf-coinduction-adjunction (schemes only). I accept the declared tool_uses: lem-weil-pbc-right-adjoint-preserves-kinjective is a generic 08BJ tool, and prop-pur-kinjective-resolutions-exist is already on the route through sk-def-sf-operations. There is no cycle and no SGA citation. FIX: the statement cited only def-weil-pbc-ringed-site-section-localization, a module telescope for f in O(U) with no ring structure or ring map O->O_f, which Mod(O_f) and restriction of scalars need. I added the reviewed def-weil-pbc-ringed-section-localization (global section, sheafified algebra map) to the statement and stmt_deps and named the canonical ring map. The content is not weakened. The corrected item is under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RingedLocalizationRHomOrthogonality",
+  "declaration": "CategoryTheory.ringedLocalizationRHomOrthogonality",
+  "file": "lean/Sheaf/SixFunctors/RingedLocalizationRHomOrthogonality.lean",
+  "statement": "theorem ringedLocalizationRHomOrthogonality (R : Sheaf J CommRingCat.{u}) (s : (R.obj ⋙ forget CommRingCat).sections) [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R s)))] : ∃ (H : DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R s)))), Nonempty (ringedLocalizationDerivedRestriction R s ⊣ H) ∧ Nonempty (let T := ringedLocalizationDerivedRestriction R s let DR := DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) let DS := DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R s))) let HR := derivedInternalHomOfUniverses J R let HS := derivedInternalHomOfUniverses J (ringedLocalizationRing R s) let I := ringedLocalizationDerivedInner R s ⋙ H let LHS := T.op.prod (𝟭 DR) ⋙ HR let RHS := (𝟭 DSᵒᵖ).prod I ⋙ HS ⋙ T LHS ≅ RHS) ∧ ∀ (L : DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R s)))) (K : DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))), IsZero ((ringedLocalizationDerivedInner R s ⋙ H).obj K) → IsZero ((derivedInternalHomOfUniverses J R).obj (op ((ringedLocalizationDerivedRestriction R s).obj L), K))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.ringedLocalizationCoinductionSection",
+   "CategoryTheory.ringedLocalizationRestrictionFiniteLimits",
+   "CategoryTheory.ringedLocalizationRestrictionFiniteColimits",
+   "CategoryTheory.ringedLocalizationDerivedRestriction",
+   "CategoryTheory.ringedLocalizationDerivedUnit",
+   "CategoryTheory.ringedLocalizationDerivedInner",
+   "CategoryTheory.ringedLocalizationRHomOrthogonality"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-48a098b38",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, declarations, docstrings, edge cases, report sections, and compiler evidence all checked; no findings."
  }
 }

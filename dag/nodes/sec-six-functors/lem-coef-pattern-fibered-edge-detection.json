@@ -260,5 +260,30 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-f3b249aef (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and the statements of the 16 nodes they cite, against HA Lemma B.2.4 (a)-(j), Def B.2.1, Ex B.2.2, Lemma B.2.3 and Prop B.1.14 (pp.1481-1485, read from the cached extraction /tmp/q08edge/ha.txt; HA is not in literature/, so the WANTED line stands). The item statement is unchanged: (1)<=>(3) over all edges, degenerate edges and edges outside S included; nothing is weakened. Repaired Step 3 is HA (a). The local-global node applies because clause (ii) gives global lifts over S. The interval node applies to f_e (inner-fibration projections between quasicategories, strictly over Delta^1, categorical equivalence by (2)). The components node gives the full union of components; the selected components are a preimage, so the restricted map is bijective on pi0 with unchanged homotopy groups. Repaired Step 5 is HA (c),(d),(f): isofibrations over Delta^0/Delta^1, base change at s0(c), the vertical markings identified with E^{v~}, the section-core node, and the spine lift (marked edges {k}xe' with k in Sp[n], pushout-product, RLP for all boundaries including m=0). All four new nodes are true; I tested each on small cases. Local-global: comparison of initial lifts plus a composition triangle; for a=id_c, E_c x Delta^1. Interval: mapping criterion with empty or contractible base mapping spaces. Components: square and triangle composition through initiality. Section-core: fibres over poset nerves keep the inverse witnesses; the core definition of def-cbc-enhanced-diagrams-cones matches. All are statement-only and self-contained, with correct blueprint.from/via and real searches (LeanSearch recorded unavailable). None restates the item, and rg over dag/nodes found no duplicate (closest hits read and ruled out). Step uses equal proof_deps; no cycle over 632 reachable nodes; no SGA. Accepted tool use: lem-cbc-spine-inner-anodyne. Fix: Step 5's sentence 'Condition (2) gives E_B->F_B' now says the map is a categorical equivalence; the corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PatternFiberedEdgeDetection",
+  "declaration": "SSet.Enhanced.pattern_fibered_edge_detection",
+  "declarations": [
+   "SSet.Enhanced.patternOver",
+   "SSet.Enhanced.patternOverHom",
+   "SSet.Enhanced.patternMapSharp",
+   "SSet.Enhanced.pattern_fibered_edge_detection"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PatternFiberedEdgeDetection.lean",
+  "statement": "theorem pattern_fibered_edge_detection (P : CategoricalPattern.{u}) (X Y : CategoricalPattern.Object P) (hX : IsCategoricalPatternFibered P X) (hY : IsCategoricalPatternFibered P Y) (f : CategoricalPattern.Hom X Y) : (∀ (Z : CategoricalPattern.Object P), IsCategoricalPatternFibered P Z → SSet.Enhanced.IsWeakHomotopyEquivalence (SSet.Marked.Over.mapSharpPre (patternOverHom f) (patternOver P Z))) ↔ (∀ (e : (Δ[1] : SSet.{u}) ⟶ P.carrier), Quasicategory (pullback X.map e) ∧ Quasicategory (pullback Y.map e) ∧ SSet.Enhanced.IsCategoricalEquivalence (pullback.map X.map e Y.map e f.map (𝟙 _) (𝟙 _) (by simpa using f.over.symm) (by simp)))",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-f5fac4bf8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f5fac4bf8",
+  "group": "Q123",
+  "result": "fix",
+  "note": "H8: theorem docstring omitted the node’s nine proof steps and dependency citations. Complete replacement is in fixes/ and compiles via scompile.py; no substantive mismatch found."
  }
 }

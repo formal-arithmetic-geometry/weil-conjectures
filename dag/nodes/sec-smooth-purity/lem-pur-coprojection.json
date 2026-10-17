@@ -264,5 +264,29 @@
   "group": "Q104",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-465887955 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full, against the main-20261015 blueprint item and proof and the unit sk-lem-coprojection. The only change is step 3. It replaces an inline preservation argument and its four citations with a citation of the existing prop-finite-compact-support-constructibility. That proposition's hypotheses hold with K_0=k=F̄_q, f=i separated of finite type, A=A_{E,n}, ell invertible, E/Q_ell finite and n>=1. Its first clause is exactly the D^b_c-to-D^b_c exact triangulated restriction that the step uses (Stacks 0GL0, more-etale.tex theorem-constructible-shriek, checked). The adjunction comes from thm-sf-ambient-adjoint-class(2), whose statement itself covers bounded constructible inputs of étale origin; the compactification and its dimension come from Nagata and lem-kun-dimension-finite-type (d=0 if Z is empty). fix-prop-projection-formula applies to (A in D^b_c(Z), M in D^b_ctf(W)). The five Hom bijections match the unit's display. The Yoneda step (step 4) and the unique-right-adjoint step (step 5) are unchanged and correct. Edge cases checked: i=id, Z empty, K=0, L=Λ, Λ[r] and Λ(m)[2m]. There are no new nodes, no cycle and no SGA; proof_deps equals the union of the steps' uses, and there is no duplicate in the DAG. Batch-5 check: the closure of prop-finite-compact-support-constructibility reaches lem-pod-lisse-module-sheaves-as-module-objects. That node is a generic fact (lisse sheaves are module objects of FLC), not Poincaré duality or a step of its proof. Neither assumption leaf nor sk-thm-trace-transport is in the closure. The proposition is relative finiteness of compact support, whose corollary is finiteness of H^i_c, so it lies genuinely outside the assumptions. The old step 3 already reached the same chain via sbc-thm-finiteness-finite-type. Accepted tool use: prop-finite-compact-support-constructibility. At merge the top-level tool_uses should add it and drop the four nodes the item no longer cites. The source.document still names master; that metadata is maintainer-owned and not a fault of this delivery. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityCoprojection",
+  "declaration": "AlgebraicGeometry.ProEtale.purity_coprojection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.purityCoprojectionConstructible",
+   "AlgebraicGeometry.ProEtale.purityCoprojectionProperty",
+   "AlgebraicGeometry.ProEtale.purity_coprojection"
+  ],
+  "file": "lean/Sheaf/Paper/PurityCoprojection.lean",
+  "statement": "theorem purity_coprojection (P : WeilConjectures.PurityFiniteSetting.{u}) {Z W : Scheme.{u}} [Z.Over (Spec (.of P.field.k))] [W.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] [IsSeparated (Z ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (W ↘ Spec (.of P.field.k))] [QuasiCompact (W ↘ Spec (.of P.field.k))] [IsSeparated (W ↘ Spec (.of P.field.k))] (i : Z ⟶ W) [i.IsOver (Spec (.of P.field.k))] [IsClosedImmersion i] (K L : DerivedCategory (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} P.Coefficient))) (_hK : purityCoprojectionConstructible P W K) (_hL : WeilConjectures.finiteTorConstructibleProEtaleModule P.coefficients.l P.extension P.level P.level_pos W L) (_hInv : ∃ d : TensorInvertibleData (fun B C ↦ B ⊗ C) (𝟙_ _) L, WeilConjectures.finiteTorConstructibleProEtaleModule P.coefficients.l P.extension P.level P.level_pos W d.inverse) : purityCoprojectionProperty P i (W ↘ Spec (.of P.field.k)) K L",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical co-projection is specified by the projection/counit equation for its inverse. The existing upstream rightDerivedUpperShriek is exactly the recorded sfFiniteExceptionalFixed comparison composite. Uses the intrinsic bounded-constructibility predicate through its canonical realization and the finite-Tor module predicate for both L and its chosen inverse. Matching finite-coefficient upstream owners supply the actual projection and relative counit. The proper-map instance supplies the default compactification; target compactness follows from the finite-type structure map. No unrestricted ambient exceptional adjunction or extra boundedness hypothesis is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-54243005d",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Wrote review.md. Independently checked the snapshot, all statement dependencies, source proof, exact operations, canonical counit equation, universes, edge cases, docstrings, and report sections. Snapshot per-file compilation reproduced successfully; no delivery errors found. Branch head unchanged."
  }
 }
