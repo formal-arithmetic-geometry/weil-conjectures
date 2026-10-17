@@ -171,12 +171,12 @@ noncomputable def Sheaf.pairShortComplexFunctor : (Arrow C)ᵒᵖ ⥤ ShortCompl
   obj p := Sheaf.pairShortComplex J A p.unop
   map φ := Sheaf.pairShortComplexMap J A φ.unop
   map_id p := by
-    refine ShortComplex.hom_ext _ _ ?_ (by simp <;> rfl) (by simp <;> rfl)
-    rw [← cancel_mono (Sheaf.pairSupportι J A p.unop)]
-    simp [Sheaf.pairSupportι]
-    exact id_comp _
+    refine ShortComplex.hom_ext _ _ ?_ (by simp; rfl) (by simp; rfl)
+    simp only [unop_id, pairShortComplexMap_τ₁, Arrow.id_right, op_id, Functor.map_id,
+      Arrow.id_left, kernel.map_id, ShortComplex.id_τ₁]
+    rfl
   map_comp φ ψ := by
-    refine ShortComplex.hom_ext _ _ ?_ (by simp <;> rfl) (by simp <;> rfl)
+    refine ShortComplex.hom_ext _ _ ?_ (by simp) (by simp)
     rw [← cancel_mono (Sheaf.pairSupportι J A _)]
     simp [Sheaf.pairSupportι]
 
@@ -256,7 +256,7 @@ noncomputable def sigmaYonedaToObj (P : Cᵒᵖ ⥤ A) (U : C) :
   app W := Sigma.desc fun g ↦ P.map g.op
   naturality W W' f := by
     refine Sigma.hom_ext _ _ fun g ↦ ?_
-    simp only [sigmaYoneda_obj, sigmaYoneda_map, colimit.ι_desc_assoc, Discrete.functor_obj_eq_as,
+    simp only [sigmaYoneda_map, colimit.ι_desc_assoc, Discrete.functor_obj_eq_as,
       Cofan.mk_pt, Cofan.mk_ι_app, colimit.ι_desc, op_comp, Quiver.Hom.op_unop, Functor.map_comp]
 
 /-- The morphism of presheaves `(W ↦ ⊕_{Hom(W, U)} a) ⟶ a` to the constant presheaf. -/
@@ -275,7 +275,7 @@ instance mono_sigmaYonedaMap {U V : C} (p : U ⟶ V) [Mono p] (a : A) :
       else 0, Sigma.hom_ext _ _ fun g ↦ ?_⟩
     have hh : ∃ g' : W.unop ⟶ U, g' ≫ p = g ≫ p := ⟨g, rfl⟩
     have hg : hh.choose = g := (cancel_mono p).1 hh.choose_spec
-    simp only [sigmaYoneda_obj, sigmaYonedaMap_app, colimit.ι_desc_assoc, Discrete.functor_obj_eq_as,
+    simp only [sigmaYonedaMap_app, colimit.ι_desc_assoc, Discrete.functor_obj_eq_as,
       Cofan.mk_pt, Cofan.mk_ι_app, colimit.ι_desc, dif_pos hh, hg]
     exact (comp_id _).symm
   exact NatTrans.mono_of_mono_app _

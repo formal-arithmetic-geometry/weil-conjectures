@@ -76,13 +76,13 @@ instance Scheme.ProEt.subsingleton_hom_mk {X U : Scheme.{u}} (j : U ⟶ X) [IsOp
 every `Hom(W, U)` is a subsingleton. -/
 instance mono_prod_fst_of_subsingleton {𝒞 : Type*} [Category 𝒞] (V U : 𝒞) [HasBinaryProduct V U]
     [∀ W, Subsingleton (W ⟶ U)] : Mono (prod.fst : V ⨯ U ⟶ V) :=
-  ⟨fun f g h ↦ prod.hom_ext h (Subsingleton.elim _ _)⟩
+  ⟨fun _ _ h ↦ prod.hom_ext h (Subsingleton.elim _ _)⟩
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 namespace Etale
 
-variable [HasSmallSiteSheafify A] {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
+variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 /-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
 
@@ -101,9 +101,9 @@ noncomputable def sectionsWithSupportδ :
     Plus.ι ⋙ ((sheafSections X.smallEtaleTopology A).obj
         (op (Scheme.Etale.mk i.openComplement.ι))).rightDerivedFunctor ⟶
       Plus.ι ⋙ rightDerivedSectionsWithSupport A i ⋙ shiftFunctor _ (1 : ℤ) :=
-  by
-  dsimp only [rightDerivedSectionsWithSupport, sectionsWithSupport]
-  exact ShortComplex.rightDerivedδ (Sheaf.shortExactOnInjectives_ΓSupportShortComplex _ A _)
+  ShortComplex.rightDerivedδ (S := Sheaf.ΓSupportShortComplex X.smallEtaleTopology A
+    (op (Scheme.Etale.mk i.openComplement.ι)))
+    (Sheaf.shortExactOnInjectives_ΓSupportShortComplex _ A _)
 
 lemma sectionsWithSupportTriangle_obj (K : Plus (Sheaf X.smallEtaleTopology A)) :
     (sectionsWithSupportTriangle A i).obj K = Triangle.mk
@@ -153,7 +153,8 @@ morphism from `sectionsWithSupportTriangle` to the triangle
 noncomputable def sectionsWithSupportTriangleToPair (V : X.Etale) :
     sectionsWithSupportTriangle A i ⟶ Sheaf.pairRightDerivedTriangle X.smallEtaleTopology A
       (Arrow.mk (prod.fst : V ⨯ Scheme.Etale.mk i.openComplement.ι ⟶ V)) :=
-  Sheaf.ΓSupportRightDerivedTriangleToPair _ _ _ (Arrow.mk (prod.fst : V ⨯ Scheme.Etale.mk i.openComplement.ι ⟶ V))
+  Sheaf.ΓSupportRightDerivedTriangleToPair _ _ _
+    (Arrow.mk (prod.fst : V ⨯ Scheme.Etale.mk i.openComplement.ι ⟶ V))
     (prod.snd : V ⨯ Scheme.Etale.mk i.openComplement.ι ⟶ _)
 
 end Etale
@@ -178,9 +179,9 @@ noncomputable def sectionsWithSupportδ :
     Plus.ι ⋙ ((sheafSections (Scheme.ProEt.topology X) A).obj
         (op (Scheme.ProEt.mk i.openComplement.ι))).rightDerivedFunctor ⟶
       Plus.ι ⋙ rightDerivedSectionsWithSupport A i ⋙ shiftFunctor _ (1 : ℤ) :=
-  by
-  dsimp only [rightDerivedSectionsWithSupport, globalSectionsWithSupport]
-  exact ShortComplex.rightDerivedδ (Sheaf.shortExactOnInjectives_ΓSupportShortComplex _ A _)
+  ShortComplex.rightDerivedδ (S := Sheaf.ΓSupportShortComplex (Scheme.ProEt.topology X) A
+    (op (Scheme.ProEt.mk i.openComplement.ι)))
+    (Sheaf.shortExactOnInjectives_ΓSupportShortComplex _ A _)
 
 lemma sectionsWithSupportTriangle_obj (K : Plus (Sheaf (Scheme.ProEt.topology X) A)) :
     (sectionsWithSupportTriangle A i).obj K = Triangle.mk
@@ -228,7 +229,8 @@ natural in `K`. -/
 noncomputable def sectionsWithSupportTriangleToPair (V : X.ProEt) :
     sectionsWithSupportTriangle A i ⟶ Sheaf.pairRightDerivedTriangle (Scheme.ProEt.topology X) A
       (Arrow.mk (prod.fst : V ⨯ Scheme.ProEt.mk i.openComplement.ι ⟶ V)) :=
-  Sheaf.ΓSupportRightDerivedTriangleToPair _ _ _ (Arrow.mk (prod.fst : V ⨯ Scheme.ProEt.mk i.openComplement.ι ⟶ V))
+  Sheaf.ΓSupportRightDerivedTriangleToPair _ _ _
+    (Arrow.mk (prod.fst : V ⨯ Scheme.ProEt.mk i.openComplement.ι ⟶ V))
     (prod.snd : V ⨯ Scheme.ProEt.mk i.openComplement.ι ⟶ _)
 
 end ProEtale

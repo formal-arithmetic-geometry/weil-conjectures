@@ -34,6 +34,10 @@ restriction, and taking cohomology gives the long exact sequence
 
 Here `RΓ(U, -)` is the right derived functor of the sections over the étale `X`-scheme `U`.
 
+The version with a connecting map natural in `K` and functorial in the pair, on both the étale
+and the pro-étale site, is `AlgebraicGeometry.Etale.sectionsWithSupportTriangle`
+(`WeilConjectures.SixFunctors.Etale.SupportCohomologyTriangle`).
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isSplitEpi_ΓRes_openComplement_of_injective`

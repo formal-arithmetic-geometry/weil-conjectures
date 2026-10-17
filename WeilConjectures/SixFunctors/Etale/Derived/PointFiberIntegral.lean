@@ -256,6 +256,279 @@ lemma nonempty_iso_derivedCompletionDiagram_obj
 
 end Reduction
 
+/-! ### The integral stage over a geometric point -/
+
+section IntegralPoint
+
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file. -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
+variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ} {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
+  (hI : I = Ideal.span {ϖ}) {k : Type u} [Field k] [IsSepClosed k]
+
+/-- A finitely generated module killed by an ideal `J` with `Λ ⧸ J` finite is finite. -/
+lemma _root_.Module.Finite.finite_of_smul_eq_zero {M : Type*} [AddCommGroup M] [Module Λ M]
+    [Module.Finite Λ M] {J : Ideal Λ} [Finite (Λ ⧸ J)] (hJ : ∀ a ∈ J, ∀ x : M, a • x = 0) :
+    Finite M := by
+  obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := Λ) (M := M)
+  let φ : (s → Λ ⧸ J) → M := fun c ↦ ∑ i, (c i).out • (i : M)
+  refine Finite.of_surjective φ fun y ↦ ?_
+  have hy : y ∈ Submodule.span Λ (s : Set M) := hs ▸ Submodule.mem_top
+  obtain ⟨c, hc⟩ := (Finsupp.mem_span_iff_linearCombination Λ _ _).1 hy
+  refine ⟨fun i ↦ Ideal.Quotient.mk J (c i), ?_⟩
+  rw [← hc, Finsupp.linearCombination_apply, Finsupp.sum_fintype _ _ (by simp)]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  have : (Ideal.Quotient.mk J (c i)).out - c i ∈ J := by
+    rw [← Ideal.Quotient.eq, Ideal.Quotient.mk_out]
+  rw [← sub_eq_zero, ← sub_smul, hJ _ this]
+
+include hI in
+/-- `ϖⁿ` kills the morphisms into the reduction `K ⊗ᴸ Λ/Iⁿ`, hence so does `Iⁿ`. -/
+lemma smul_eq_zero_of_mem_pow {X : Scheme.{u}} {n : ℕ}
+    {L K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : ϖ ^ n • 𝟙 K = 0) {a : Λ} (ha : a ∈ I ^ n) (f : L ⟶ K) : a • f = 0 := by
+  rw [hI, Ideal.span_singleton_pow, Ideal.mem_span_singleton'] at ha
+  obtain ⟨b, rfl⟩ := ha
+  rw [mul_smul, ← Category.comp_id f, ← Linear.comp_smul, hK, Limits.comp_zero, smul_zero]
+
+variable (Λ k) in
+/-- The constant sheaf `Λ` on `Spec k` placed in degree `j`. -/
+noncomputable abbrev unitSingle (j : ℤ) :
+    DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+  (DerivedCategory.singleFunctor _ j).obj (unitSheaf Λ k)
+
+/-- An étale sheaf on `Spec k` with no nonzero global section is zero. -/
+lemma isZero_of_subsingleton_pointSections
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (h : Subsingleton ((pointSections Λ k).obj F)) : IsZero F := by
+  have : (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).functor.Additive :=
+    additive_constantSheaf Λ _
+  exact (Functor.map_isZero (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).functor
+    (ModuleCat.isZero_of_subsingleton ((pointSections Λ k).obj F))).of_iso
+    ((constantSheafEquivalenceOfIsSepClosed Λ (k := k)).counitIso.app F).symm
+
+/-- Morphisms `Λ[-j] ⟶ R` vanish when the `j`-th cohomology sheaf of `R` does. -/
+lemma subsingleton_hom_unitSingle
+    {R : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))} {j : ℤ}
+    (hR : IsZero ((DerivedCategory.homologyFunctor _ j).obj R)) :
+    Subsingleton (unitSingle Λ k j ⟶ R) :=
+  (homSingleLinearEquiv R j).toEquiv.subsingleton_congr.2
+    (ModuleCat.subsingleton_of_isZero ((pointSections Λ k).map_isZero hR))
+
+variable [IsNoetherianRing Λ] [Finite (Λ ⧸ I)]
+
+include hI in
+/-- Let `R` be a bounded constructible object of `D((Spec k)_ét, Λ)` killed by `ϖⁿ`. The
+morphisms `Λ[-j] ⟶ R` form a finite group. -/
+lemma finite_hom_unitSingle {n : ℕ}
+    {R : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hR : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) R)
+    (hn : ϖ ^ n • 𝟙 R = 0) (j : ℤ) : Finite (unitSingle Λ k j ⟶ R) := by
+  have := (isConstructibleSheaf_iff_moduleFinite_pointSections _).1 (hR.2 j)
+  have : Module.Finite Λ (unitSingle Λ k j ⟶ R) :=
+    Module.Finite.equiv (homSingleLinearEquiv R j).symm
+  have : Finite (Λ ⧸ I ^ n) := Ideal.finite_quotient_pow (IsNoetherian.noetherian I) n
+  exact Module.Finite.finite_of_smul_eq_zero (J := I ^ n)
+    fun a ha f ↦ smul_eq_zero_of_mem_pow hI hn ha f
+
+include hϖ hI in
+/-- The terms `Kₙ = K ⊗ᴸ Λ/Iⁿ` of the tower of reductions of an object `K` of the integral stage:
+the morphism groups `Hom(Λ[-j], Kₙ)` are finite, and vanish outside the common Tor amplitude
+interval `[a, b]` of the reductions. -/
+lemma finite_hom_unitSingle_derivedCompletionDiagram
+    {K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {a b : ℤ} (hab : ∀ n : ℕ,
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k))
+          ((reductionModIdeal Λ (Spec (.of k)) (I ^ (n + 1))).obj K) ∧
+        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (Spec (.of k)) a b
+          ((reductionModIdeal Λ (Spec (.of k)) (I ^ (n + 1))).obj K)) (n : ℕ) (j : ℤ) :
+    Finite (unitSingle Λ k j ⟶ (_root_.DerivedCategory.derivedCompletionDiagram
+      (Spec (.of k)).smallEtaleTopology I K).obj (op n)) ∧
+    (j < a ∨ b < j → Subsingleton (unitSingle Λ k j ⟶
+      (_root_.DerivedCategory.derivedCompletionDiagram
+        (Spec (.of k)).smallEtaleTopology I K).obj (op n))) := by
+  have hϖI : ϖ ∈ I := hI ▸ Ideal.mem_span_singleton_self ϖ
+  cases n with
+  | zero =>
+    obtain ⟨h, hT⟩ := _root_.DerivedCategory.exists_distTriang_derivedCompletionCone hϖ hI K 0
+    have : IsIso (ϖ ^ 0 • 𝟙 K) := by rw [pow_zero, one_smul]; infer_instance
+    have hz := (Triangle.isZero₃_iff_isIso₁ _ hT).2 this
+    have : Subsingleton (unitSingle Λ k j ⟶ (_root_.DerivedCategory.derivedCompletionDiagram
+        (Spec (.of k)).smallEtaleTopology I K).obj (op 0)) :=
+      ⟨fun f g ↦ hz.eq_of_tgt f g⟩
+    exact ⟨Finite.of_subsingleton, fun _ ↦ this⟩
+  | succ n =>
+    obtain ⟨e⟩ := nonempty_iso_derivedCompletionDiagram_obj hϖ hI K (n + 1)
+    obtain ⟨hbc, hta⟩ := hab n
+    have hn : ϖ ^ (n + 1) • 𝟙 ((reductionModIdeal Λ (Spec (.of k)) (I ^ (n + 1))).obj K) = 0 :=
+      smul_id_reductionModIdeal (Ideal.pow_mem_pow hϖI _) K
+    have hfin := finite_hom_unitSingle hI hbc hn j
+    refine ⟨Finite.of_equiv _ ((Iso.refl _).homCongr e.symm), fun hj ↦ ?_⟩
+    obtain ⟨h₁, h₂⟩ := _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta
+    have hz : IsZero ((_root_.DerivedCategory.homologyFunctor _ j).obj
+        ((reductionModIdeal Λ (Spec (.of k)) (I ^ (n + 1))).obj K)) := by
+      rcases hj with hj | hj
+      · exact _root_.DerivedCategory.isZero_of_isGE _ a j hj
+      · exact _root_.DerivedCategory.isZero_of_isLE _ b j hj
+    have := subsingleton_hom_unitSingle hz
+    exact ((Iso.refl _).homCongr e.symm).subsingleton_congr.1 this
+
+/-- For a derived complete `K` whose reductions have finite morphism groups out of `Λ[-j]`, the
+Milnor map `Hom(Λ[-j], K) ⟶ limₙ Hom(Λ[-j], Kₙ)` is bijective. -/
+lemma bijective_milnorMap_unitSingle
+    {K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hc : _root_.DerivedCategory.derivedComplete (Spec (.of k)).smallEtaleTopology I K) (j : ℤ)
+    (hF : ∀ n : ℕ, Finite (unitSingle Λ k (j - 1) ⟶
+      (_root_.DerivedCategory.derivedCompletionDiagram
+        (Spec (.of k)).smallEtaleTopology I K).obj (op n))) :
+    Function.Bijective (milnorMap (_root_.DerivedCategory.derivedCompletionCone
+      (Spec (.of k)).smallEtaleTopology I K) (unitSingle Λ k j)) := by
+  have (n : ℕ) : Finite ((unitSingle Λ k j)⟦(1 : ℤ)⟧ ⟶
+      (_root_.DerivedCategory.derivedCompletionDiagram
+        (Spec (.of k)).smallEtaleTopology I K).obj (op n)) :=
+    have := hF n
+    Finite.of_equiv _ ((((_root_.DerivedCategory.singleFunctors _).shiftIso 1 (j - 1) j
+      (by lia)).app (unitSheaf Λ k)).homCongr (Iso.refl _)).symm
+  exact IsHomotopyLimit.bijective_milnorMap hc _
+
+include hϖ hI in
+/-- For a derived complete `K` whose Milnor maps are injective, `Hom(Λ[-j], K)` is
+`ϖ`-adically separated: an element divisible by every `ϖⁿ` maps to zero in every
+`Hom(Λ[-j], Kₙ)`, which is killed by `ϖⁿ`. -/
+lemma isHausdorff_hom_unitSingle
+    {K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))} {j : ℤ}
+    (hM : Function.Injective (milnorMap (_root_.DerivedCategory.derivedCompletionCone
+      (Spec (.of k)).smallEtaleTopology I K) (unitSingle Λ k j))) :
+    IsHausdorff I (unitSingle Λ k j ⟶ K) := by
+  have hϖI : ϖ ∈ I := hI ▸ Ideal.mem_span_singleton_self ϖ
+  refine ⟨fun x hx ↦ hM <| Subtype.ext <| funext fun n ↦ ?_⟩
+  have hxn := hx n
+  rw [SModEq.zero, hI, Ideal.span_singleton_pow, Submodule.ideal_span_singleton_smul,
+    Submodule.mem_smul_pointwise_iff_exists] at hxn
+  obtain ⟨y, -, rfl⟩ := hxn
+  change (ϖ ^ n • y) ≫ _ = (0 : unitSingle Λ k j ⟶ K) ≫ _
+  rw [Limits.zero_comp, Linear.smul_comp, ← Category.comp_id (Cone.π _ |>.app _),
+    ← Category.assoc, ← Linear.comp_smul,
+    _root_.DerivedCategory.smul_id_derivedCompletionDiagram_obj _ hϖI K n, Limits.comp_zero]
+
+include hϖ hI in
+/-- The kernel of the reduction `Hom(Λ[-j], K) ⟶ Hom(Λ[-j], K ⊗ᴸ Λ/I)` is `ϖ Hom(Λ[-j], K)`. -/
+lemma exists_eq_smul_of_comp_derivedCompletionCone_eq_zero
+    {K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))} {j : ℤ}
+    (y : unitSingle Λ k j ⟶ K)
+    (hy : y ≫ (_root_.DerivedCategory.derivedCompletionCone
+      (Spec (.of k)).smallEtaleTopology I K).π.app (op 1) = 0) :
+    ∃ z, y = ϖ • z := by
+  obtain ⟨h₁, hT₁⟩ := _root_.DerivedCategory.exists_distTriang_derivedCompletionCone hϖ hI K 1
+  obtain ⟨z, hz⟩ := Triangle.coyoneda_exact₂ _ hT₁ y hy
+  refine ⟨z, ?_⟩
+  rw [hz]
+  change z ≫ (ϖ ^ 1 • 𝟙 K) = _
+  rw [pow_one, Linear.comp_smul]
+  erw [Category.comp_id]
+
+include hϖ hI in
+/-- Over a separably closed field `k`, an object of the integral stage `Dᵇc(Spec k, Λ)` is
+bounded constructible. Writing `K = R lim Kₙ` for its reductions `Kₙ = K ⊗ᴸ Λ/Iⁿ`, the Milnor
+sequence identifies `Hom(Λ[-j], K)` with the inverse limit of the finite groups
+`Hom(Λ[-j], Kₙ)`, which vanish outside the common Tor amplitude interval of the `Kₙ`; and
+`Hom(Λ[-j], K)` is `ϖ`-adically separated with `Hom(Λ[-j], K)/ϖ` embedded in `Hom(Λ[-j], K₁)`,
+hence finitely generated. -/
+theorem boundedConstructible_of_boundedConstructibleIntegral [IsPrecomplete I Λ]
+    {K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) K) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) K := by
+  obtain ⟨hc, a, b, hab⟩ := hK
+  have hF := finite_hom_unitSingle_derivedCompletionDiagram hϖ hI hab
+  have hM (j : ℤ) := bijective_milnorMap_unitSingle hc j fun n ↦ (hF n (j - 1)).1
+  have hzero (j : ℤ) (hj : j < a ∨ b < j) :
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ j).obj K) := by
+    refine isZero_of_subsingleton_pointSections _
+      ((homSingleLinearEquiv K j).toEquiv.subsingleton_congr.1 ⟨fun f g ↦ (hM j).1 ?_⟩)
+    refine Subtype.ext (funext fun n ↦ ?_)
+    have := (hF n j).2 hj
+    exact Subsingleton.elim _ _
+  refine ⟨⟨⟨a, (_root_.DerivedCategory.isGE_iff K a).2 fun j hj ↦ hzero j (Or.inl hj)⟩,
+    ⟨b, (_root_.DerivedCategory.isLE_iff K b).2 fun j hj ↦ hzero j (Or.inr hj)⟩⟩, fun j ↦ ?_⟩
+  rw [isConstructibleSheaf_iff_moduleFinite_pointSections]
+  suffices Module.Finite Λ (unitSingle Λ k j ⟶ K) from
+    Module.Finite.equiv (homSingleLinearEquiv K j)
+  have := isHausdorff_hom_unitSingle hϖ hI (hM j).1
+  have := (hF 1 j).1
+  exact Module.finite_of_isHausdorff_of_ker_le hI
+    (Preadditive.rightComp _ ((_root_.DerivedCategory.derivedCompletionCone
+      (Spec (.of k)).smallEtaleTopology I K).π.app (op 1)))
+    fun y hy ↦ exists_eq_smul_of_comp_derivedCompletionCone_eq_zero hϖ hI y hy
+
+/-! ### Bounded constructible complexes lie in the integral stage -/
+
+/-- A constant sheaf on a finitely generated module is constructible on `Spec k`. -/
+lemma isConstructibleSheaf_constantSheaf (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
+    IsConstructibleSheaf
+      ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
+  rw [isConstructibleSheaf_iff_moduleFinite_pointSections]
+  exact Module.Finite.equiv
+    ((constantSheafEquivalenceOfIsSepClosed Λ (k := k)).unitIso.app M).toLinearEquiv
+
+variable [IsAdicComplete I Λ]
+
+include hϖ hI in
+/-- The constant sheaf `Λ` on `Spec k`, placed in degree `0`, is derived complete: it is the
+homotopy limit of the constant sheaves `Λ/Iⁿ`, as `Λ` is for `Λ`-modules
+(`DerivedCategory.isHomotopyLimit_mapCone_Q_of_epi`), and those are killed by `ϖⁿ`. -/
+lemma derivedComplete_unitSingle :
+    _root_.DerivedCategory.derivedComplete (Spec (.of k)).smallEtaleTopology I
+      (unitSingle Λ k 0) := by
+  have hϖI : ϖ ∈ I := hI ▸ Ideal.mem_span_singleton_self ϖ
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hI]
+  intro Y f hY
+  -- the homotopy limit `Λ = R lim Λ/Iⁿ` for modules
+  let T : ℕᵒᵖ ⥤ CochainComplex (ModuleCat.{u + 1} Λ) ℤ :=
+    Ideal.quotPowFunctor I ⋙ HomologicalComplex.single _ (ComplexShape.up ℤ) 0
+  let c := (HomologicalComplex.single _ (ComplexShape.up ℤ) 0).mapCone (Ideal.quotPowCone I)
+  have hc : IsLimit c := isLimitOfPreserves _ (Ideal.isLimitQuotPowCone I)
+  have hT (n : ℕ) (i : ℤ) : Epi ((T.map (homOfLE n.le_succ).op).f i) := by
+    by_cases hi : i = 0
+    · subst hi
+      change Epi (((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).map
+        ((Ideal.quotPowFunctor I).map (homOfLE n.le_succ).op)).f 0)
+      rw [HomologicalComplex.single_map_f_self]
+      have : Epi ((Ideal.quotPowFunctor I).map (homOfLE n.le_succ).op) := by
+        rw [ModuleCat.epi_iff_surjective]
+        exact Submodule.factor_surjective _
+      infer_instance
+    · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).epi _
+  have hQ := DerivedCategory.isHomotopyLimit_mapCone_Q_of_epi hT hc
+  -- transported to sheaves on `Spec k`
+  have : (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).IsEquivalence :=
+    (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).isEquivalence_functor
+  have : (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).Additive :=
+    additive_constantSheaf Λ _
+  let G := (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapDerivedCategory
+  have hG := hQ.map G
+  let eG (M : ModuleCat.{u + 1} Λ) : G.obj (DerivedCategory.Q.obj
+      ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj M)) ≅
+      (_root_.DerivedCategory.singleFunctor _ 0).obj
+        ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) :=
+    G.mapIso ((DerivedCategory.singleFunctorIsoCompQ _ 0).app M).symm ≪≫
+      ((constantSheaf _ _).mapDerivedCategorySingleFunctor 0).app M
+  have hkill (Z : _root_.DerivedCategory
+      (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (hZ : _root_.DerivedCategory.smulInvertible _ ϖ Z) (n : ℕ)
+      (g : Z ⟶ (T ⋙ DerivedCategory.Q ⋙ G).obj (op n)) : g = 0 := by
+    rw [← cancel_mono (eG _).hom, Limits.zero_comp]
+    exact hZ.hom_eq_zero
+      (_root_.DerivedCategory.smul_id_quotPowFunctor_obj _ hϖI n) _
+  have h0 := hG.hom_ext_zero (hkill Y hY) (hkill _ (ObjectProperty.le_shift _ 1 Y hY))
+    (f ≫ (eG _).inv)
+  rwa [← cancel_mono (eG _).inv, Limits.zero_comp]
+
+end IntegralPoint
+
 end Etale
 
 end AlgebraicGeometry
