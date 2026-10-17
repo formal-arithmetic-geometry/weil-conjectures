@@ -27,85 +27,180 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First pass to k-spaces without imposing any hypothesis on $A,B$. For a topological space $T$, let $kT$ be its underlying set with the final topology for all continuous maps from compact Hausdorff spaces into $T$, using the k-space convention of [lem-coef-realization-finite-limits]. Every such test map is still continuous into $kT$, and $kT\\to T$ is continuous. Thus the maps from any compact Hausdorff $C$ into $T$ and into $kT$ are exactly the same. The same test maps define $k(kT)$, so $kT$ is a k-space. More generally a continuous map from a k-space $Z$ into $T$ is continuous into $kT$: compose with every compact Hausdorff test into $Z$ and use the final topology of $Z$. In particular $w$ induces a continuous $w':kA\\to kB$. Cubes, their boundaries, and their products with $[0,1]$ are compact Hausdorff; therefore kification changes neither the based maps nor their based homotopies, nor paths or their homotopies. Hence $w'$ has exactly the component bijection and based-group isomorphisms assumed for $w$. The given $\\alpha,\\beta,h$ also lift, with the same underlying functions, to $kA,kB$.",
+   "uses": [
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.4.21 and Proposition 2.4.22; elementary final-topology argument, also used in the proof of Theorem 2.4.23"
+   }
+  },
+  {
+   "text": "Put $I=[0,1]$. We will use ordinary products with $I$. If $Z$ is a k-space, then $Z\\times I$ with its ordinary topology is a k-space. Here is the continuity check, using [lem-coef-compact-open-currying]. Single-point tests first ensure that every slice being transposed is continuous. For any function $F:Z\\times I\\to T$, continuity of every $F\\circ(c\\times\\mathrm{id}_I)$, for compact Hausdorff tests $c:C\\to Z$, implies continuity of every $F^\\sharp\\circ c:C\\to\\operatorname{Cont}(I,T)$ by currying. The final topology of $Z$ makes $F^\\sharp$ continuous, and evaluation then makes $F$ continuous. Each $C\\times I$ is compact Hausdorff, so these compact tests suffice to give the k-space condition. Consequently no k-product replaces the ordinary interval product anywhere below.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 2.4.22, with the locally compact exponential law from the opening of section 2.4; the interval-product consequence is proved here"
+   }
+  },
+  {
+   "text": "Construct the ordinary topological subspace\n$$E_0=\\{(a,\\gamma)\\in kA\\times\\operatorname{Cont}(I,kB):\\gamma(0)=w'(a)\\},\\qquad E=kE_0,$$\nwhere the function space has the compact-open topology of [lem-coef-compact-open-currying]. Write $q:E\\to kA$ for the first projection and $p:E\\to kB$ for $(a,\\gamma)\\mapsto\\gamma(1)$. Evaluation is continuous by that node, so these maps are continuous. Define $i:kA\\to E$ by $i(a)=(a,\\operatorname{const}_{w'(a)})$. The constant-path coordinate is continuous by currying $(a,t)\\mapsto w'(a)$; hence $i$ is continuous into $E_0$, and into $E$ by the k-space test from step 1. We have $qi=\\mathrm{id}_{kA}$ and $pi=w'$.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Section 2.4 exponential law and Proposition 2.4.22; explicit topological mapping-path construction, in place of the simplicial construction in Kerodon 0140"
+   }
+  },
+  {
+   "text": "The map $i$ is a homotopy equivalence with inverse $q$. The nonconstant homotopy is\n$$R:E\\times I\\to E,\\qquad R((a,\\gamma),u)=(a,t\\mapsto\\gamma(ut)).$$\nEvaluation and currying [lem-coef-compact-open-currying] make $R$ continuous into $E_0$. Step 2 says $E\\times I$ is a k-space, so step 1 makes it continuous into $E=kE_0$. Its endpoints are $R(-,0)=iq$ and $R(-,1)=\\mathrm{id}_E$; $qi=\\mathrm{id}_{kA}$ has the constant homotopy. Apply [lem-coef-homotopy-equivalence-weak] with $f=i$, $g=q$, the constant homotopy on $kA$, and $R$ on $E$. It follows that $i$ induces the required bijection on path components and all based-group isomorphisms. This invocation allows moving basepoints and empty spaces.",
+   "uses": [
+    "lem-coef-compact-open-currying",
+    "lem-coef-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Section 2.4; explicit mapping-path deformation. Weak-equivalence consequence uses the separate cited homotopy-equivalence theorem"
+   }
+  },
+  {
+   "text": "Verify directly that $p$ is a Serre fibration, in the sense of [lem-coef-topological-serre-model]. Suppose $z\\mapsto(a_z,\\gamma_z)$ is a continuous map $D^m\\to E$ and $b:D^m\\times I\\to kB$ is continuous with $b(z,0)=\\gamma_z(1)$. For $z\\in D^m$ and $u,t\\in I$, set\n$$\\eta_{z,u}(t)=\\begin{cases}\\gamma_z((1+u)t)&(1+u)t\\leq1,\\\\ b(z,(1+u)t-1)&(1+u)t\\geq1.\\end{cases}$$\nOn the first closed piece, $0\\leq(1+u)t\\leq1$; on the second, $0\\leq(1+u)t-1\\leq u\\leq1$. Thus both arguments lie in the specified interval domains. The two formulas agree where $(1+u)t=1$, since $\\gamma_z(1)=b(z,0)$. They are continuous on two closed subsets covering $D^m\\times I\\times I$, by evaluation and the assumed continuity of $b$. Their union is continuous: preimages of any closed set are unions of the two closed preimages, proving the finite closed-pasting assertion directly. Curry in $t$ using [lem-coef-compact-open-currying]. Since $D^m\\times I$ is compact Hausdorff, step 1 upgrades the resulting map $(z,u)\\mapsto(a_z,\\eta_{z,u})$ from $E_0$ to $E$. At $u=0$ it is the specified map into $E$ (the second formula only occurs at $t=1$); its final evaluation is $b(z,u)$ and its initial evaluation is $w'(a_z)$. This is the required lift for every $m\\geq0$, with no division by $u$ at zero.",
+   "uses": [
+    "lem-coef-compact-open-currying",
+    "lem-coef-topological-serre-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Section 2.4, definition of Serre fibration preceding Theorem 2.4.19 and Theorem 2.4.23; explicit path-concatenation lift supplied here"
+   }
+  },
+  {
+   "text": "Use [lem-coef-topological-serre-model] in $\\mathcal K$. By steps 1 and 4, $w'$ and $i$ are weak equivalences, and $pi=w'$. Two-out-of-three gives that $p$ is a weak equivalence. Step 5 gives that it is also a Serre fibration, so $p\\in F\\cap W$. Every sphere-boundary inclusion $j:S^{n-1}\\hookrightarrow D^n$, including $\\varnothing\\hookrightarrow D^0$, is one of the generating cofibrations stated in that node and therefore belongs to $C={}^{\\pitchfork}(F\\cap W)$. Thus every commutative square with $j$ on the left and $p$ on the right admits a continuous diagonal filler in $\\mathcal K$.",
+   "uses": [
+    "lem-coef-topological-serre-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 2.4.23, its generating cofibrations and trivial-fibration lifting property; also Theorem 2.4.19"
+   }
+  },
+  {
+   "text": "The lifted boundary data define\n$$c:S^{n-1}\\to E,\\qquad c(s)=(\\alpha(s),t\\mapsto h(s,t)).$$\nThe map $c$ is continuous into $E_0$ by [lem-coef-compact-open-currying] and the initial-endpoint condition; it is continuous into $E$ because its domain is compact Hausdorff. Its final evaluation is $pc(s)=h(s,1)=\\beta(s)$. Therefore $c$ and $\\beta:D^n\\to kB$ form the square to which step 6 applies. Obtain $L:D^n\\to E$ with $L|_{S^{n-1}}=c$ and $pL=\\beta$. For $n=0$ the same argument uses the unique empty boundary map and the generating cofibration $\\varnothing\\to D^0$; it does not assume a boundary point exists.",
+   "uses": [
+    "lem-coef-compact-open-currying",
+    "lem-coef-topological-serre-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 2.4.23 lifting property, applied to the prescribed boundary homotopy of Kerodon 0140"
+   }
+  },
+  {
+   "text": "Write $L(x)=(\\widetilde\\alpha(x),\\gamma_x)$ and set $\\widetilde h(x,t)=\\gamma_x(t)$. The first coordinate and the map $D^n\\to\\operatorname{Cont}(I,kB)$ are continuous. Evaluation [lem-coef-compact-open-currying] makes $\\widetilde h:D^n\\times I\\to kB$ continuous with its ordinary product topology. Compose with the continuous identities $kA\\to A$, $kB\\to B$. The equality $L|_{S^{n-1}}=c$ gives $\\widetilde\\alpha(s)=\\alpha(s)$ and $\\widetilde h(s,t)=h(s,t)$ pointwise. Membership in $E_0$ gives $\\widetilde h(x,0)=w(\\widetilde\\alpha(x))$, and $pL=\\beta$ gives $\\widetilde h(x,1)=\\beta(x)$. These are all the required equalities, with no replacement of the prescribed boundary homotopy by a homotopic one.",
+   "uses": [
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Explicit projection and endpoint calculation after the disk lift; section 2.4 exponential law"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-compact-open-currying",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-topological-serre-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Explicit topological mapping-path argument using the existing k-space Serre model (Theorem 2.4.23), instead of the singular path fibration in Kerodon 0140. Sources read online but not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A weak homotopy equivalence has the homotopy extension lifting property for a disk relative to its boundary sphere",
+   "query": "A weak homotopy equivalence has the homotopy lifting extension property for a disk relative to its boundary with a prescribed boundary homotopy",
    "sub": "",
-   "results": "[leanfinder] OK 8 hit(s): HomotopicalAlgebra.LeftHomotopyRel, HomotopicalAlgebra.RightHomotopyRel, HomotopicalAlgebra.LeftHomotopyClass.whitehead, HomotopicalAlgebra.RightHomotopyClass.whitehead, ContinuousMap.HomotopyEquiv, HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension, HomotopicalAlgebra.PathObject.RightHomotopy.rightHomotopyRel, Homotopy.extendEquiv.",
+   "results": "{\"t\": \"2026-10-16T23:43:12Z\", \"tool\": \"leanfinder\", \"query\": \"A weak homotopy equivalence has the homotopy lifting extension property for a disk relative to its boundary with a prescribed boundary homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCoveringMap.liftHomotopy\", \"HomotopicalAlgebra.LeftHomotopyRel\", \"IsCoveringMap.liftHomotopyRel\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"IsCoveringMap.liftHomotopy_lifts\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"IsCoveringMap.liftHomotopy_apply\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\"], \"digest\": \"6689b63447c7a23a\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+   "verdict": "no match: read Topology/Homotopy/Lifting.lean:299-336 (covering-map hypothesis required), Topology/Category/TopCat/Sphere.lean:58-64 (inclusion definition only), ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166 (abstract model-category homotopies). Generic lifting and path-object results require a model structure with the stated topological weak equivalences, its disk cofibrations, and continuity comparisons; none is an exact theorem or a one-line specialization for arbitrary A,B."
   },
   {
    "tool": "loogle",
-   "query": "ContinuousMap.Homotopy, Metric.closedBall",
+   "query": "ContinuousMap.Homotopy, TopCat.diskBoundaryInclusion",
    "sub": "",
-   "results": "[loogle] OK 0 hit(s)",
+   "results": "{\"t\": \"2026-10-16T23:43:34Z\", \"tool\": \"loogle\", \"query\": \"ContinuousMap.Homotopy, TopCat.diskBoundaryInclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+   "verdict": "no match: read Topology/Homotopy/Lifting.lean:299-336 (covering-map hypothesis required), Topology/Category/TopCat/Sphere.lean:58-64 (inclusion definition only), ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166 (abstract model-category homotopies). Generic lifting and path-object results require a model structure with the stated topological weak equivalences, its disk cofibrations, and continuity comparisons; none is an exact theorem or a one-line specialization for arbitrary A,B."
   },
   {
    "tool": "grep",
-   "query": "homotopy.*extension|extension.*homotopy|WeakHomotopy|HasLiftingProperty",
+   "query": "homotopy.*extension|diskBoundaryInclusion|weakHomotopy",
    "sub": "Topology",
-   "results": "[grep] OK 0 hit(s)",
+   "results": "{\"t\": \"2026-10-16T23:43:33Z\", \"tool\": \"grep\", \"query\": \"homotopy.*extension|diskBoundaryInclusion|weakHomotopy\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/CWComplex/Abstract/Basic.lean\", \"Mathlib/Topology/CWComplex/Abstract/Basic.lean\", \"Mathlib/Topology/Category/TopCat/Sphere.lean\", \"Mathlib/Topology/Category/TopCat/Sphere.lean\", \"Mathlib/Topology/Category/TopCat/Sphere.lean\"], \"digest\": \"4a21c43654754d3e\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+   "verdict": "no match: read Topology/Homotopy/Lifting.lean:299-336 (covering-map hypothesis required), Topology/Category/TopCat/Sphere.lean:58-64 (inclusion definition only), ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166 (abstract model-category homotopies). Generic lifting and path-object results require a model structure with the stated topological weak equivalences, its disk cofibrations, and continuity comparisons; none is an exact theorem or a one-line specialization for arbitrary A,B."
   },
   {
    "tool": "leansearch",
-   "query": "Extend a map from the boundary sphere into A and its specified homotopy in B across a disk along a weak homotopy equivalence A to B",
+   "query": "A weak homotopy equivalence of arbitrary topological spaces has the relative homotopy lifting property for a disk and sphere",
    "sub": "",
-   "results": "[leansearch] OK 8 hit(s): ContinuousMap.Homotopy.extend_apply_coe, ContinuousMap.Homotopy.extend_apply_of_mem_I, Homotopy.ofExtend.congr_simp, ContinuousMap.Homotopy.pathExtend_evalAt, TopCat.diskBoundaryInclusion, SSet.RelativeMorphism.Homotopy.h, ContinuousMap.Homotopy.extend, ContinuousMap.Homotopy.extend_one.",
+   "results": "{\"t\": \"2026-10-16T23:43:34Z\", \"tool\": \"leansearch\", \"query\": \"A weak homotopy equivalence of arbitrary topological spaces has the relative homotopy lifting property for a disk and sphere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCoveringMap.liftHomotopyRel\", \"ContinuousMap.HomotopyEquiv\", \"HomotopicalAlgebra.ModelCategory.cm4a\", \"IsCoveringMap.liftHomotopy_lifts\", \"CategoryTheory.MorphismProperty.hasLiftingProperty_of_wfs\", \"IsCoveringMap.liftHomotopy\", \"HomotopicalAlgebra.instWeakEquivalenceCompOfIsStableUnderCompositionWeakEquivalences\", \"HomotopicalAlgebra.mem_weakEquivalences\"], \"digest\": \"85f6a3e9c1ef71be\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+   "verdict": "no match: read Topology/Homotopy/Lifting.lean:299-336 (covering-map hypothesis required), Topology/Category/TopCat/Sphere.lean:58-64 (inclusion definition only), ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166 (abstract model-category homotopies). Generic lifting and path-object results require a model structure with the stated topological weak equivalences, its disk cofibrations, and continuity comparisons; none is an exact theorem or a one-line specialization for arbitrary A,B."
   },
   {
    "tool": "leanfinder",
-   "query": "The mapping path projection of a topological weak equivalence lifts every inclusion of a sphere into a closed disk",
+   "query": "A weak equivalence replaced by its topological mapping path fibration lifts boundary inclusions of disks",
    "sub": "",
-   "results": "[leanfinder] OK 8 hit(s): TopCat.RelativeCWComplex.basicCell, TopCat.ballInclusion, TopCat.diskBoundaryInclusion, TopCat.diskBoundary, ContinuousMap.HomotopyEquiv.NonemptyDiffeomorphSphere, IsLocalHomeomorph.existsUnique_continuousMap_lifts, IsCoveringMap.exists_path_lifts, IsCoveringMap.liftPath.",
+   "results": "{\"t\": \"2026-10-16T23:43:35Z\", \"tool\": \"leanfinder\", \"query\": \"A weak equivalence replaced by its topological mapping path fibration lifts boundary inclusions of disks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.weakEquivalence_\\u03b9\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP\\u2080\", \"TopCat.RelativeCWComplex.basicCell\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP\\u2081\", \"HomotopicalAlgebra.PathObject.IsVeryGood.cofibration_\\u03b9\", \"HomotopicalAlgebra.PathObject.trans_\\u03b9\", \"HomotopicalAlgebra.PathObject.exists_very_good\", \"HomotopicalAlgebra.PathObject.RightHomotopy.exists_good_pathObject\"], \"digest\": \"fdc43dd73b038b89\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+   "verdict": "no match: read Topology/Homotopy/Lifting.lean:299-336 (covering-map hypothesis required), Topology/Category/TopCat/Sphere.lean:58-64 (inclusion definition only), ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166 (abstract model-category homotopies). Generic lifting and path-object results require a model structure with the stated topological weak equivalences, its disk cofibrations, and continuity comparisons; none is an exact theorem or a one-line specialization for arbitrary A,B."
   },
   {
    "tool": "grep",
-   "query": "HELP|homotopyExtension|relative.*[Dd]isk|[Dd]isk.*[Ll]ift|weakHomotopy",
-   "sub": "AlgebraicTopology",
-   "results": "[grep] OK 25 hit(s), all irrelevant occurrences of Help/helper/helps in comments in CechNerve.lean, SimplexCategory, FundamentalGroupoid, SimplicialSet/AnodyneExtensions/PairingCore.lean, SimplicialSet/StrictSegal.lean.",
+   "query": "theorem liftHomotopyRel|def liftHomotopy|homotopy_extension|class ModelCategory|cm4a|cm4b",
+   "sub": "Topology/Homotopy",
+   "results": "{\"t\": \"2026-10-16T23:44:05Z\", \"tool\": \"grep\", \"query\": \"theorem liftHomotopyRel|def liftHomotopy|homotopy_extension|class ModelCategory|cm4a|cm4b\", \"sub\": \"Topology/Homotopy\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/Homotopy/Lifting.lean\", \"Mathlib/Topology/Homotopy/Lifting.lean\"], \"digest\": \"3acd89a4479b3925\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+   "verdict": "no match: read Topology/Homotopy/Lifting.lean:299-336 (covering-map hypothesis required), Topology/Category/TopCat/Sphere.lean:58-64 (inclusion definition only), ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166 (abstract model-category homotopies). Generic lifting and path-object results require a model structure with the stated topological weak equivalences, its disk cofibrations, and continuity comparisons; none is an exact theorem or a one-line specialization for arbitrary A,B."
   },
   {
    "tool": "grep",
-   "query": "diskBoundaryInclusion|HasLiftingProperty|homotopyExtension",
-   "sub": "Topology/CWComplex",
-   "results": "[grep] OK 2 hit(s): Mathlib/Topology/CWComplex/Abstract/Basic.lean:61 (docstring) and :63 (TopCat.RelativeCWComplex.basicCell).",
+   "query": "WeakHomotopyEquivalence|weakHomotopyEquivalence|homotopy_extension|diskBoundaryInclusion",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T00:11:01Z\", \"tool\": \"grep\", \"query\": \"WeakHomotopyEquivalence|weakHomotopyEquivalence|homotopy_extension|diskBoundaryInclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/Topology/Category/TopCat/Sphere.lean\", \"Mathlib/Topology/Category/TopCat/Sphere.lean\", \"Mathlib/Topology/Category/TopCat/Sphere.lean\", \"Mathlib/Topology/CWComplex/Abstract/Basic.lean\", \"Mathlib/Topology/CWComplex/Abstract/Basic.lean\"], \"digest\": \"030bc991abc34932\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+   "verdict": "no match: independently read the returned covering-space lift definitions at Topology/Homotopy/Lifting.lean:299-336, which require IsCoveringMap; GenLoop.homotopyTo at Topology/Homotopy/HomotopyGroup.lean:129-136 is a homotopy-group construction, not a disk lift. Read the abstract path-object extension at AlgebraicTopology/ModelCategory/RightHomotopy.lean:183-191, which requires a model structure, a good path object and a cofibration; Topology/Category/TopCat/Sphere.lean:58 defines the disk-boundary inclusion only. None states this arbitrary-space relative extension theorem or specializes to it in one line."
   },
   {
-   "tool": "grep",
-   "query": "existsUnique_continuousMap_lifts|exists_path_lifts|diskBoundaryInclusion",
-   "sub": "Topology",
-   "results": "[grep] OK 10 hit(s): Mathlib/Topology/Category/TopCat/Sphere.lean:58,74,76; Mathlib/Topology/Homotopy/Lifting.lean:18,24,171,218,259; Mathlib/Topology/CWComplex/Abstract/Basic.lean:61,63.",
+   "tool": "leanfinder",
+   "query": "A continuous map inducing isomorphisms of homotopy groups admits a disk lift up to a homotopy fixed on the boundary",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T00:11:03Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous map inducing isomorphisms of homotopy groups admits a disk lift up to a homotopy fixed on the boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCoveringMap.liftHomotopy\", \"IsCoveringMap.liftHomotopyRel\", \"ContinuousMap.Homotopy.uliftMap\", \"GenLoop.homotopyTo\", \"IsCoveringMap.liftHomotopy_zero\", \"IsCoveringMap.liftHomotopy_lifts\", \"IsCoveringMap.liftHomotopy_apply\", \"IsCoveringMap.exists_path_lifts\"], \"digest\": \"694694ec352710d1\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
-  },
-  {
-   "tool": "grep",
-   "query": "postcomp_bijective_of_weakEquivalence|homotopy_extension|theorem whitehead",
-   "sub": "AlgebraicTopology/ModelCategory",
-   "results": "[grep] OK 2 hit(s): Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:183; Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean:153.",
-   "date": "2026-10-17",
-   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+   "verdict": "no match: independently read the returned covering-space lift definitions at Topology/Homotopy/Lifting.lean:299-336, which require IsCoveringMap; GenLoop.homotopyTo at Topology/Homotopy/HomotopyGroup.lean:129-136 is a homotopy-group construction, not a disk lift. Read the abstract path-object extension at AlgebraicTopology/ModelCategory/RightHomotopy.lean:183-191, which requires a model structure, a good path object and a cofibration; Topology/Category/TopCat/Sphere.lean:58 defines the disk-boundary inclusion only. None states this arbitrary-space relative extension theorem or specializes to it in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-cw-source-homotopy-lift",
@@ -125,5 +220,44 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-weak-equivalence-relative-disk-extension",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Replaced the earlier singular-complex split, which introduced a duplicate mapping-path lemma, by an explicit topological mapping-path proof using existing generic topology nodes. Proved kification invariance on all compact test domains, ordinary interval-product continuity, the mapping-path deformation and Serre lifting formulas, and the four endpoint/restriction identities. No new nodes and no added hypotheses. Existing simplicial path/fibration nodes are downstream of this item and cannot be cited without a cycle.",
+  "blueprint": "Supports the opening sentence, \"Choose a compactification\", in thm-cbc-finite-level-proetale.proof.md of the main-20261015 blueprint, through the recorded coherent-refinement/groupoid-localization ancestry. This item is the single-cell extension underlying the CW-source lift; its topological mapping-path proof operates below the unit level and preserves that role.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-realization-finite-limits",
+    "why": "Only the definition of k-spaces and their kified limits is used. The compact-test and interval-product consequences are proved explicitly in the steps."
+   },
+   {
+    "node": "lem-coef-compact-open-currying",
+    "why": "Compact-open currying and evaluation justify all ordinary interval homotopies and the mapping-path lift; no compact-support-unit node supplies this generic topology tool."
+   },
+   {
+    "node": "lem-coef-homotopy-equivalence-weak",
+    "why": "The explicit deformation retract induces all based-group isomorphisms even with moving basepoints, a generic topological tool outside this unit."
+   },
+   {
+    "node": "lem-coef-topological-serre-model",
+    "why": "The existing k-space Serre model supplies two-out-of-three and disk-boundary lifting for the explicitly constructed Serre weak equivalence; it is independent of this item and no compact-support-unit node supplies it without a cycle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-realization-finite-limits",
+  "lem-coef-compact-open-currying",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-coef-topological-serre-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-f060ec9c7",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-f060ec9c7 (reviewer sub-agent of L); spot-checked: Read the item, the report and the statements of all five cited nodes in full, plus the parent lem-cbc-cw-source-homotopy-lift and its induction step that uses this item. The delivery is one commit with two files (item and report), no new nodes and no unit-record changes. The statement is unchanged. It matches the single-cell problem in the proof of Kerodon Tag 0140 (Lemma 3.6.3.11), which I read online: a boundary map plus a prescribed boundary homotopy, extended over a simplex, here moved to the disk/sphere pair via the homeomorphism in lem-coef-realization-finite-limits. The weak-equivalence hypothesis is the all-basepoints form of Tag 013T. The statement is true; it is the classical homotopy extension and lifting property for the disk and its boundary sphere. I tested n=0, n=1, empty A or B and non-Hausdorff spaces and found no counterexample. I checked every step. Step 1: kification keeps all compact Hausdorff test maps, so path components, homotopy groups and the weak equivalence are unchanged. Step 2: currying over the locally compact interval shows the ordinary product with the interval is a k-space (Sierpinski-indicator form). Step 3: the mapping-path space E, q, p and i are continuous, with qi=id and pi=w'. Step 4: the deformation R has endpoints iq and id, and lem-coef-homotopy-equivalence-weak applies exactly with f=i, g=q and H constant. Step 5: the piecewise path agrees where the pieces meet, stays in the interval, equals the old path at u=0 and ends at b(z,u), so p is a Serre fibration in the model node's sense. Step 6: two-out-of-three gives p in F∩W. Each sphere-to-disk inclusion is a generating cofibration and so lies in C; this uses the standard meaning of 'generating', which the node does not spell out. Steps 7–8: the square and the evaluation identities check pointwise. proof_deps equals the union of the step uses. By transitive closure on the snapshot, none of the five cited nodes reaches the item, so there is no cycle. No duplicate in the DAG and no SGA source. Accepted tool_uses: lem-coef-realization-finite-limits, lem-coef-compact-open-currying (a Mathlib leaf), lem-coef-homotopy-equivalence-weak and lem-coef-topological-serre-model. All four are generic topology tools from unit sk-prop-sf-biduality-general, and the unit route is not replaced. No changes made; review.md has the full record."
+ }
 }

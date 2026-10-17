@@ -3,46 +3,272 @@
  "blueprint": {
   "is": "lem-trf-correspondence-class",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The class of a correspondence",
- "statement": "In the setting of [def-trf-correspondence-between-pairs], let\n$c=(c_1,c_2):C\\to Z=Y\\times_sX$ be the support of a correspondence from\n$(X,K)$ to $(Y,L)$, and assume that $c$ and the projection\n$p_1:Z\\to Y$ are exceptionally admissible at $A$\n([def-trf-admissibility]). Then tensor–Hom adjunction, the projection\nformula and exceptional adjunction give a canonical isomorphism\n\n$$\n\\operatorname{Hom}_{D(Z,A)}\\bigl(Rc_!A_C,\nR\\mathcal Hom_A(Lp_2^*K,Rp_1^!L)\\bigr)\n\\xrightarrow{\\ \\sim\\ }\n\\operatorname{Hom}_{D(C,A)}\\bigl(Lc_2^*K,Rc_1^!L\\bigr),\n$$\n\nnatural in $K$ and $L$. For a correspondence\n$u:Lc_2^*K\\to Rc_1^!L$, its *class* $[u]$ is the inverse image of $u$\nunder this isomorphism; it is a class supported on $c$ with values in\n$R\\mathcal Hom_A(Lp_2^*K,Rp_1^!L)$ in the sense of\n[def-trf-supported-class], i.e. $[u]\\in\nH^0_C\\bigl(Z,R\\mathcal Hom_A(Lp_2^*K,Rp_1^!L)\\bigr)$.",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], where $q=p^a$, $k_0=\\mathbf F_q$ and $k$ is its fixed algebraic closure. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ contained in the fixed algebraic closure $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$ and a uniformizer $\\varpi_E$, and an integer $n\\geq1$; put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$. Let $X,Y,C$ be separated finite-type $k$-schemes. For such a scheme $T$, write $D(T,A)$ for the derived category of sheaves of $A$-modules on its small pro-etale site [def-weil-pbc-proetale-modules], and $D^b_{ctf}(T,A)$ for its full bounded constructible finite-Tor subcategory [def-weil-finite-tor-amplitude]. Let $K\\in D^b_{ctf}(X,A)$ and $L\\in D^b_{ctf}(Y,A)$. Write $Z=Y\\times_sX$ with projections $p_1:Z\\to Y$ and $p_2:Z\\to X$, and let $c:C\\to Z$ be a $k$-morphism. Put $c_1=p_1c$ and $c_2=p_2c$, so that $c=(c_1,c_2)$ is the support morphism for a correspondence from $(X,K)$ to $(Y,L)$ [def-trf-correspondence-between-pairs]. Use the derived pullback, tensor and internal Hom of [def-weil-derived-pullback-tensor-hom]. Assume that $c$ and $p_1$ are exceptionally admissible at $A$ [def-trf-admissibility], with their specified constructible exceptional adjoints and composition isomorphisms.\n\nThen tensor–Hom adjunction, the projection\nformula and exceptional adjunction give a canonical isomorphism\n\n$$\n\\operatorname{Hom}_{D(Z,A)}\\bigl(Rc_!A_C,\nR\\mathcal Hom_A(Lp_2^*K,Rp_1^!L)\\bigr)\n\\xrightarrow{\\ \\sim\\ }\n\\operatorname{Hom}_{D(C,A)}\\bigl(Lc_2^*K,Rc_1^!L\\bigr),\n$$\n\nnatural in $K$ and $L$. For a correspondence\n$u:Lc_2^*K\\to Rc_1^!L$, its *class* $[u]$ is the inverse image of $u$\nunder this isomorphism; it is a class supported on $c$ with values in\n$R\\mathcal Hom_A(Lp_2^*K,Rp_1^!L)$ in the sense of\n[def-trf-supported-class], i.e. $[u]\\in\nH^0_C\\bigl(Z,R\\mathcal Hom_A(Lp_2^*K,Rp_1^!L)\\bigr)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/lem-trf-correspondence-class.md",
   "place": "node lem-trf-correspondence-class, order 2278"
  },
  "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-finite-tor-amplitude",
   "def-trf-correspondence-between-pairs",
   "def-trf-admissibility",
-  "def-trf-supported-class"
+  "def-trf-supported-class",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
-   "text": "Put $M=Lp_2^*K$ and $N=Rp_1^!L$; both lie in the bounded constructible\nfinite-Tor category on $Z$, the first by the pullback clause of\n[def-weil-derived-pullback-tensor-hom], the second because $p_1$ is\nexceptionally admissible. Then\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_Z\\bigl(Rc_!A_C,R\\mathcal Hom_A(M,N)\\bigr)\n&\\cong\\operatorname{Hom}_Z\\bigl(Rc_!A_C\\otimes_A^{\\mathrm L}M,N\\bigr)\\\\\n&\\cong\\operatorname{Hom}_Z\\bigl(Rc_!(A_C\\otimes_A^{\\mathrm L}Lc^*M),N\\bigr)\n=\\operatorname{Hom}_Z\\bigl(Rc_!Lc^*M,N\\bigr)\\\\\n&\\cong\\operatorname{Hom}_C\\bigl(Lc^*M,Rc^!N\\bigr)\\\\\n&\\cong\\operatorname{Hom}_C\\bigl(Lc_2^*K,Rc_1^!L\\bigr).\n\\end{aligned}\n$$\n\nThe first arrow is the tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom]. The second is the\ncompact-support projection formula of [prop-functor-package] (clause\nfive) for $c$, applied with the constant sheaf $A_C$ in the first\nvariable and the finite-Tor complex $M$ in the second, and\n$A_C\\otimes_A^{\\mathrm L}(-)$ is the identity. The third is the\nexceptional adjunction $Rc_!\\dashv Rc^!$ of [def-trf-admissibility]\nfor the admissible $c$. The last uses the pullback composition\n$Lc^*Lp_2^*\\cong L(p_2c)^*=Lc_2^*$ of\n[def-weil-derived-pullback-tensor-hom] and the composition isomorphism\n$Rc^!Rp_1^!\\cong R(p_1c)^!=Rc_1^!$ of the exceptional inverse image\nsupplied with the admissibility datum of [def-trf-admissibility]. Every\narrow is a bijection natural in $K$ and $L$, so the composite is the\nasserted isomorphism and $[u]$ is well defined. The final assertion is\nthe definition of $H^0_C$ in [def-trf-supported-class] with $i=c$,\n$T=C$ and $P=R\\mathcal Hom_A(M,N)$.",
+   "text": "Write $M=Lp_2^*K$, $N=Rp_1^!L$, $B=Rc_!A_C$ and $E_M=Lc^*M$. The given $K,L$ belong to $D^b_{ctf}$. By [lem-sf-pullback-tor-amplitude], applied to the projection $p_2$ and then to $c$, $M$ and $E_M$ belong to $D^b_{ctf}$. The projection $p_2$ is the base change along $X\\to s$ of the separated finite-type structure map $Y\\to s$ of [def-trf-correspondence-between-pairs], hence is separated of finite type by [lem-pod-separated-finite-type-base-change]. The admissibility hypothesis on $c$ includes that $c$ is separated of finite type. By the specified constructible adjoints in [def-trf-admissibility], $N$ is in $D^b_{ctf}(Z,A)$ and $Rc^!N$ is in $D^b_{ctf}(C,A)$. The constant sheaf $A_C$ in degree zero is constructible: use the one-piece stratification, with constant finite stalk $A$, in [def-weil-finite-torsion-constructibility]. It has Tor amplitude $[0,0]$ in [def-weil-finite-tor-amplitude], since tensoring with the free rank-one module $A_C$ gives the original sheaf. Thus $B$ is also in $D^b_{ctf}$ by the functor $Rc_!$ in the admissibility datum. All exceptional adjunctions below are on these full constructible subcategories; no unbounded pro-etale exceptional adjoint is required.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "prop-functor-package",
+    "def-trf-correspondence-between-pairs",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sf-pullback-tor-amplitude",
     "def-trf-admissibility",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/lem-trf-correspondence-class.md",
+    "place": "## Proof, first sentence (domains)"
+   }
+  },
+  {
+   "text": "Use the tensor-internal-Hom adjunction of [sk-def-sf-operations], clause (i), and the tensor braiding of the geometric package [sk-d-six]. They give a bijection\n$$T_{M,N}:\\operatorname{Hom}_Z(B,R\\mathcal Hom_A(M,N))\\xrightarrow{\\sim}\\operatorname{Hom}_Z(B\\otimes_A^{\\mathrm L}M,N).$$\nExplicitly $T_{M,N}(\\phi)=\\operatorname{uncurry}(\\phi)\\circ\\beta_{B,M}$, where $\\operatorname{uncurry}(\\phi):M\\otimes^{\\mathrm L}B\\to N$ is inverse to the adjunction bijection, and $\\beta_{B,M}:B\\otimes^{\\mathrm L}M\\to M\\otimes^{\\mathrm L}B$. The inverse sends $h$ to $\\operatorname{curry}(h\\circ\\beta_{B,M}^{-1})$. This uses the ringed-site tensor-Hom adjunction at $(Z_{\\mathrm{proet}},A_Z)$; the Stacks references in the source field identify the normalization of the cited adjunction, rather than an additional uncited input.",
+   "uses": [
+    "sk-def-sf-operations",
+    "sk-d-six"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J8 (equation-internal-hom), Tag 08J9 (lemma-internal-hom); blueprint proof, first bijection"
+   }
+  },
+  {
+   "text": "Apply [fix-prop-projection-formula] with $f=c$, first argument $A_C\\in D^b_c(C,A)$ and second argument $M\\in D^b_{ctf}(Z,A)$. It gives $\\operatorname{PF}_M:B\\otimes^{\\mathrm L}M\\xrightarrow{\\sim}Rc_!(A_C\\otimes^{\\mathrm L}E_M)$, natural in $M$. The unitor $\\lambda_{E_M}:A_C\\otimes^{\\mathrm L}E_M\\xrightarrow{\\sim}E_M$ has inverse $e\\mapsto1\\otimes e$: the two composites are the identity by the balancing relation $a\\otimes e=1\\otimes ae$. These are chain maps because $A_C$ is in degree zero. They compute the derived unitor using [def-weil-derived-tensor], since the rank-one constant module is K-flat (its tensor functor is the identity, hence preserves acyclic complexes). Set\n$$J_M=\\operatorname{PF}_M^{-1}\\circ Rc_!(\\lambda_{E_M}^{-1}):Rc_!E_M\\xrightarrow{\\sim}B\\otimes^{\\mathrm L}M.$$\nPrecomposing by $J_M$ is a bijection from $\\operatorname{Hom}_Z(B\\otimes^{\\mathrm L}M,N)$ to $\\operatorname{Hom}_Z(Rc_!E_M,N)$; its inverse precomposes by $J_M^{-1}$.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/lem-trf-correspondence-class.md",
+    "place": "## Proof, second bijection and tensor-unit identity"
+   }
+  },
+  {
+   "text": "Let $\\operatorname{adj}_c:\\operatorname{Hom}_Z(Rc_!E_M,N)\\xrightarrow{\\sim}\\operatorname{Hom}_C(E_M,Rc^!N)$ be the specified adjunction in [def-trf-admissibility]. If $\\eta$ and $\\varepsilon$ denote its unit and counit, its maps are $h\\mapsto Rc^!(h)\\circ\\eta_{E_M}$ and $v\\mapsto\\varepsilon_N\\circ Rc_!(v)$; the triangle identities make them inverse. Consequently\n$$\\Psi_{M,N}(\\phi)=\\operatorname{adj}_c\\bigl(T_{M,N}(\\phi)\\circ J_M\\bigr)$$\nis a bijection $\\operatorname{Hom}_Z(B,R\\mathcal Hom_A(M,N))\\simeq\\operatorname{Hom}_C(E_M,Rc^!N)$. Its inverse is the three inverse bijections of steps 2--4 in reverse order.",
+   "uses": [
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/lem-trf-correspondence-class.md",
+    "place": "## Proof, exceptional-adjunction bijection"
+   }
+  },
+  {
+   "text": "The coefficient identifications for constant sheaves in [prop-weil-pbc-proetale-constant-ring-map] preserve every constant section $a\\in A$. Their composite does the same, so under the canonical inverse-image composition comparison it is the coefficient identification for the composite: uniqueness of the constant-sheaf identification preserving constants proves compatibility. Apply [lem-weil-pbc-proetale-derived-pullback-composition] to $h=c$, $k=p_2$ and these identified constant ring sheaves, and use $p_2c=c_2$ in [def-trf-correspondence-between-pairs]. This gives the natural isomorphism $a_K:Lc_2^*K\\xrightarrow{\\sim}Lc^*Lp_2^*K=E_M$. The composition isomorphisms specified with the exceptional-admissibility datum [def-trf-admissibility], for $c$ and $p_1$, give $b_L:Rc^!Rp_1^!L\\xrightarrow{\\sim}Rc_1^!L$, using $p_1c=c_1$. Thus the required bijection is\n$$\\Phi_{K,L}(\\phi)=b_L\\circ\\Psi_{Lp_2^*K,Rp_1^!L}(\\phi)\\circ a_K.$$\nIts inverse first sends $u$ to $b_L^{-1}\\circ u\\circ a_K^{-1}$ and then applies $\\Psi^{-1}$. This proves bijectivity with exactly the stated endpoints.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-trf-correspondence-between-pairs",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition); blueprint proof, last bijection and specified exceptional composition"
+   }
+  },
+  {
+   "text": "Here is the naturality check before the endpoint identifications. For $m:M\\to M'$, $n:N\\to N'$ and $\\phi:B\\to R\\mathcal Hom_A(M',N)$, write $H(m,n)$ for the internal-Hom map $R\\mathcal Hom(M',N)\\to R\\mathcal Hom(M,N')$. The adjunction with parameter in [sk-def-sf-operations] and the natural braiding in [sk-d-six] give, by uncurry followed by braiding,\n$$T_{M,N'}(H(m,n)\\circ\\phi)=n\\circ T_{M',N}(\\phi)\\circ(1_B\\otimes m).$$\nNaturality of the projection formula [fix-prop-projection-formula] and of the unit maps $e\\mapsto1\\otimes e$ used in step 3 gives\n$$(1_B\\otimes m)\\circ J_M=J_{M'}\\circ Rc_!Lc^*(m).$$\nSubstitute this equality in the preceding formula and apply naturality of the adjunction [def-trf-admissibility] (equivalently insert $Rc^!(h)\\eta$ from step 4 and use naturality of $\\eta$). The result is\n$$\\Psi_{M,N'}(H(m,n)\\circ\\phi)=Rc^!(n)\\circ\\Psi_{M',N}(\\phi)\\circ Lc^*(m).$$\nThis checks both variables, including arbitrary derived morphisms, because the cited adjunctions and projection formula are natural transformations on the derived categories.",
+   "uses": [
+    "sk-def-sf-operations",
+    "sk-d-six",
+    "fix-prop-projection-formula",
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/lem-trf-correspondence-class.md",
+    "place": "## Proof, sentence asserting naturality of every arrow (expanded on morphisms)"
+   }
+  },
+  {
+   "text": "For $f:K\\to K'$, $g:L\\to L'$ and $\\phi:B\\to R\\mathcal Hom_A(Lp_2^*K',Rp_1^!L)$, put $m=Lp_2^*(f)$ and $n=Rp_1^!(g)$ in step 6. The natural composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition] says\n$$Lc^*(m)\\circ a_K=a_{K'}\\circ Lc_2^*(f).$$\nNaturality of the exceptional composition isomorphism included in [def-trf-admissibility] says\n$$b_{L'}\\circ Rc^!(n)=Rc_1^!(g)\\circ b_L.$$\nMultiplying the equality of step 6 on the left by $b_{L'}$ and on the right by $a_K$, and substituting these two equations, proves\n$$\\Phi_{K,L'}\\bigl(R\\mathcal Hom(Lp_2^*f,Rp_1^!g)\\circ\\phi\\bigr)=Rc_1^!(g)\\circ\\Phi_{K',L}(\\phi)\\circ Lc_2^*(f).$$\nTaking $f$ or $g$ to be the identity gives respectively naturality in $L$ and contravariant naturality in $K$.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/lem-trf-correspondence-class.md",
+    "place": "## Proof, naturality in K and L after composition identifications"
+   }
+  },
+  {
+   "text": "For the given coefficient morphism $u:Lc_2^*K\\to Rc_1^!L$, define $[u]=\\Phi_{K,L}^{-1}(u)$. By construction $\\Phi_{K,L}([u])=u$, and uniqueness follows from injectivity. By [def-trf-supported-class] with $i=c$, $T=C$ and $P=R\\mathcal Hom_A(Lp_2^*K,Rp_1^!L)$, its source set is exactly $H^0_C(Z,P)=\\operatorname{Hom}_{D(Z,A)}(Rc_!A_C,P)$. Thus this inverse image is the asserted supported class. The definition requires a specified separated finite-type map $c$, not an immersion; the given admissibility of $c$ supplies that domain.",
+   "uses": [
     "def-trf-supported-class"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/lem-trf-correspondence-class.md",
+    "place": "## Proof, final sentence (definition of supported class)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "prop-functor-package",
+  "def-trf-correspondence-between-pairs",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sf-pullback-tor-amplitude",
   "def-trf-admissibility",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "sk-def-sf-operations",
+  "sk-d-six",
+  "fix-prop-projection-formula",
+  "def-weil-derived-tensor",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-trf-supported-class"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/lem-trf-correspondence-class.md",
-  "place": "## Proof"
+  "place": "## Proof, tensor-Hom / projection formula / exceptional adjunction chain; explicit naturality in both variables supplied here"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "correspondenceClass|supportedClassHomEquiv|exceptionalHomEquiv",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: generic underived module, monoidal closed or exponentiable-morphism results do not state the supported derived correspondence bijection with its geometric operations and both-variable naturality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor Hom adjunction and projection formula identify supported cohomological correspondence classes with coefficient morphisms naturally in both complexes",
+   "results": "ModuleCat.monoidalClosedHomEquiv; CategoryTheory.Types.tensorProductAdjunction; CategoryTheory.FunctorToTypes.adj; HomologicalComplex.tensorHom; Rep.homEquiv; lTensorHomEquivHomLTensor; TensorProduct.lTensorHomToHomLTensor; TensorProduct.lTensorHomToHomLTensor_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: generic underived module, monoidal closed or exponentiable-morphism results do not state the supported derived correspondence bijection with its geometric operations and both-variable naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.MonoidalClosed.ofEquiv_curry_def; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def",
+   "date": "2026-10-16",
+   "verdict": "no match: generic underived module, monoidal closed or exponentiable-morphism results do not state the supported derived correspondence bijection with its geometric operations and both-variable naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological correspondence class is the natural bijection Hom(c shriek constant sheaf, internal Hom(p2 pullback K, p1 exceptional pullback L)) with Hom(c2 pullback K, c1 exceptional pullback L)",
+   "results": "SheafOfModules.pullbackIso; SheafOfModules.PullbackConstruction.adjunction; TopCat.Sheaf.pullbackIso; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
+   "date": "2026-10-16",
+   "verdict": "no match: generic underived module, monoidal closed or exponentiable-morphism results do not state the supported derived correspondence bijection with its geometric operations and both-variable naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|upperShriek|lowerShriek",
+   "results": "No hits; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: generic underived module, monoidal closed or exponentiable-morphism results do not state the supported derived correspondence bijection with its geometric operations and both-variable naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for a left adjoint functor between closed symmetric monoidal categories gives Hom(F unit, internal Hom(M,N)) equivalent to Hom(pullback M, exceptional right adjoint N), natural in M and N",
+   "results": "CategoryTheory.ExponentiableMorphism.coev_def; CategoryTheory.ExponentiableMorphism.ev_def; CategoryTheory.ExponentiableMorphism.homEquiv_apply_eq; CategoryTheory.ExponentiableMorphism.coev; CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj; CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.ev; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: generic underived module, monoidal closed or exponentiable-morphism results do not state the supported derived correspondence bijection with its geometric operations and both-variable naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: generic underived module, monoidal closed or exponentiable-morphism results do not state the supported derived correspondence bijection with its geometric operations and both-variable naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHomAdjunction₂_adj|def monoidalClosedHomEquiv|def tensorProductAdjunction|def pullbackIso",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean; Mathlib/CategoryTheory/Limits/Shapes/Opposites/Pullbacks.lean; Mathlib/CategoryTheory/Limits/Shapes/Opposites/Pullbacks.lean; Mathlib/CategoryTheory/Limits/Types/Pullbacks.lean; Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: generic underived module, monoidal closed or exponentiable-morphism results do not state the supported derived correspondence bijection with its geometric operations and both-variable naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction isomorphism between maps from the monoidal unit direct image to internal hom and maps from inverse image to exceptional inverse image in a closed monoidal category",
+   "results": "8 hits: CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.exp.adjunction, CategoryTheory.coev_expComparison, CategoryTheory.ihom.adjunction, CategoryTheory.Closed.adj, CategoryTheory.expComparison, CategoryTheory.ihom.ihom_adjunction_unit, CategoryTheory.bijection. Generic closed-monoidal/cartesian adjunctions; none supplies compact-support projection formula or the exceptional geometric functors.",
+   "date": "2026-10-17",
+   "verdict": "no match for the geometric correspondence-class theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedClass|exceptionalHom|correspondence.*[Cc]lass|[Pp]rojection[Ff]ormula",
+   "results": "One unrelated comment in Mathlib/RingTheory/HahnSeries/Lex.lean:297 about archimedean classes; no geometric class-bijection declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedClass|exceptionalHomEquiv|correspondenceClassEquiv",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary sheaf pullback/pushforward adjunctions, exponentiable morphisms, or generic pullback and Ext identities; none states the compact-support/exceptional derived correspondence bijection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary sheaf pullback/pushforward adjunctions, exponentiable morphisms, or generic pullback and Ext identities; none states the compact-support/exceptional derived correspondence bijection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A correspondence from pullback K to exceptional pullback L determines a canonical supported class in derived internal Hom naturally in K and L",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj; CategoryTheory.Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct; CategoryTheory.Classifier.SubobjectRepresentableBy.homEquiv_eq; CategoryTheory.Limits.FormalCoproduct.homPullbackEquiv; CategoryTheory.Abelian.Ext.hom'; CategoryTheory.Limits.FormalCoproduct.homPullbackEquiv_symm_apply_φ; CategoryTheory.IsPullback.lift",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary sheaf pullback/pushforward adjunctions, exponentiable morphisms, or generic pullback and Ext identities; none states the compact-support/exceptional derived correspondence bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support pushforward of the constant sheaf and derived internal Hom represent cohomological correspondences by the projection formula and exceptional adjunction",
+   "results": "SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction; TopCat.Sheaf.pullbackPushforwardAdjunction; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary sheaf pullback/pushforward adjunctions, exponentiable morphisms, or generic pullback and Ext identities; none states the compact-support/exceptional derived correspondence bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a ringed topos, morphisms from compact support pushforward of the unit to a derived internal Hom correspond via left projection formula to morphisms from pullback to a right adjoint",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf unit/pullback adjunctions and generic parametrized tensor-Hom adjunctions do not state the derived compact-support/exceptional correspondence comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedClassHomEquiv|shriek.*[Aa]djunction|correspondenceClassEquiv",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf unit/pullback adjunctions and generic parametrized tensor-Hom adjunctions do not state the derived compact-support/exceptional correspondence comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHomAdjunction\"",
+   "results": "CategoryTheory.MonoidalClosed.internalHomAdjunction₂; CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf unit/pullback adjunctions and generic parametrized tensor-Hom adjunctions do not state the derived compact-support/exceptional correspondence comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -68,5 +294,39 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-corr"
+ "unit": "sk-d-corr",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-correspondence-class",
+  "worker": "stage1",
+  "summary": "Split the existing adjunction argument into eight checked steps, with an explicit inverse and full two-variable naturality. Replaced the unsupported attribution of preservation, tensor-Hom adjunction and pullback composition to the operation definition by exact existing nodes. No new nodes, no changes to the mathematical hypotheses or conclusion; expanded the inherited contextual opening into explicit objects and hypotheses after the dry-run B2 rejection, no renewed attachment claim. Second reading: added the existing base-change Mathlib leaf for the geometric hypothesis on p2, and explicitly typed phi in both naturality checks; no new nodes or statement correction. Continuation review rechecked all 22 current citation quotes, the full source adjunction argument, functor domains and naturality equations, and repeated all four Mathlib search tools with authentic records; no further mathematical correction was needed.",
+  "blueprint": "Realizes the entire Proof of lem-trf-correspondence-class: domains (1), tensor-Hom (2), projection formula/unit (3), exceptional adjunction (4), composition endpoints (5), naturality assertion (6-7), supported-class definition (8). The main-20261015 statement and sk-d-corr unit retain precisely this route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Finite-coefficient derived pullback preserves bounded constructibility and finite Tor amplitude; the correspondence unit supplies no preservation theorem."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "The natural compact-support projection formula at the exact finite coefficient domain is the projection-formula step of the unit, not a replacement of its route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Canonical natural composition for identified ring sheaves on pro-etale sites supplies the ordinary-pullback endpoint comparison; the correspondence unit supplies no separate construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "fix-prop-projection-formula",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-5a44e85dd",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-5a44e85dd (reviewer sub-agent of L); spot-checked: I read the full item and all eight steps against the full current statements of every cited node, plus the main-20261015 and master blueprint text (same statement in both, no blueprint_update). The delivery creates no new nodes. The explicit context matches the conventions of def-trf-correspondence-between-pairs and def-trf-coefficient-conventions: no hypothesis is added or dropped, and the coefficient category stays D(T_proet,A) with A finite and discrete. Step 1 checks the domains: p2 is separated of finite type by base change (lem-pod-separated-finite-type-base-change), so lem-sf-pullback-tor-amplitude applies; A_C is constructible with Tor amplitude [0,0]. In step 2 the tensor-Hom adjunction (sk-def-sf-operations (i)) plus the braiding gives the right slot order, which I checked against Stacks 08J8/08J9 (tags confirmed in tags/tags). The braiding is cited from sk-d-six, which only names it as existing structure; I accept this as a notion citation. Step 3 applies fix-prop-projection-formula with f=c, first argument A_C, second argument M; the direction of J and the K-flat unitor are correct. Step 4 uses the specified adjunction of def-trf-admissibility on D^b_ctf. In step 5, a_K comes from c_{h,k} with h=c, k=p2, and the coefficient compatibility follows from constant sections. b_L is the inverse of R(p1 c)^! ≅ Rc^! Rp1^!, and both directions are correct. I recomputed the naturality equations of steps 6 and 7: contravariant in K, covariant in L. Step 8 is exactly def-trf-supported-class with i=c, which need not be an immersion. The route follows unit sk-d-corr. I accept the three declared tool_uses (lem-sf-pullback-tor-amplitude, fix-prop-projection-formula, lem-weil-pbc-proetale-derived-pullback-composition). A grep found no duplicate node and no SGA citation. Edge cases checked: C empty, K=0 or L=0, the point case, and n>1. No fixes were made."
+ }
 }

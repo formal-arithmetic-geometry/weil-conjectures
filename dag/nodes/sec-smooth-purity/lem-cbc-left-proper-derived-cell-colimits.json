@@ -30,9 +30,118 @@
   "lem-coef-combinatorial-localization-presentability",
   "lem-coef-model-colimit-localization-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a small ordinary category $I$ and write $\\mathcal A=\\mathcal M^I$ with the projective model structure of [lem-coef-model-colimit-localization-comparison], and $F=\\operatorname{colim}_I$. Its weak equivalences and fibrations are objectwise. By the universal property [def-weil-pbc-category-colimit], $F$ is left adjoint to the constant-diagram functor, so a lifting square for $Ff$ against a (trivial) fibration is the same as a square for $f$ against its constant diagram. Consequently $F$ preserves cofibrations and trivial cofibrations. It also preserves ordinary pushouts: a map out of either the colimit of a pointwise pushout or the pushout of the colimits is exactly a compatible pair of cocones agreeing on the common diagram.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Proof of Theorem 4.7, printed p. 44; agent expansion of its homotopy-colimit inputs"
+   }
+  },
+  {
+   "text": "Every projective cofibration is objectwise a cofibration. Indeed evaluation at $i$ has right adjoint $R_i(Y)(j)=\\prod_{a:j\\to i}Y$, with transition maps reindexing factors. This adjunction follows by taking the component indexed by $1_i$ in one direction and composing with diagram structure maps in the other. Products of trivial fibrations have the right lifting property against every cofibration: solve the square separately in each factor. Hence $R_i$ sends trivial fibrations to objectwise trivial fibrations. The adjoint lifting square for a projective cofibration $f$ shows that $f_i$ has the left lifting property against every trivial fibration, and is a cofibration. Pushouts in $\\mathcal A$ are pointwise by their cocone universal property; left properness of $\\mathcal M$ now implies left properness of $\\mathcal A$. In both categories the closure of cofibrations under composition and pushout is [lem-coef-lifting-class-closure].",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Proof of Theorem 4.7, printed p. 44; agent expansion of its homotopy-colimit inputs"
+   }
+  },
+  {
+   "text": "Here is the relative factorization calculation needed to allow a noncofibrant base. Suppose $K\\to U$ and $K\\to V$ are cofibrations in $\\mathcal A$ and $w:U\\to V$ is a weak equivalence under $K$. Form $U\\amalg_K V$ and factor its map $(w,1):U\\amalg_K V\\to V$ as a cofibration $j$ followed by a trivial fibration $p:T\\to V$. Both coprojections into the pushout are cofibrations by [lem-coef-lifting-class-closure], so their composites $i:U\\to T$ and $s:V\\to T$ with $j$ are cofibrations. The identities $pi=w$ and $ps=1_V$ make $i$ and $s$ weak equivalences by two-out-of-three. Step 1 makes $F(i)$ and $F(s)$ weak equivalences. From $F(p)F(s)=1$ and then $F(w)=F(p)F(i)$, two-out-of-three gives that $F(w)$ is a weak equivalence. This calculation assumes only cofibrancy relative to $K$, not cofibrancy of $K,U,V$.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 1.1.12, printed pp. 6-7, relative split-factorization argument expanded directly in the projective model"
+   }
+  },
+  {
+   "text": "Suppose $K\\to D$ is a projective cofibration, $K'$ is projectively cofibrant, $v:K'\\to K$ is an objectwise weak equivalence, and $F(v)$ is a weak equivalence. Factor $K'\\to K\\to D$ as a projective cofibration $K'\\to E$ followed by an objectwise trivial fibration $e:E\\to D$. Put $T=E\\amalg_{K'}K$. By Step 2, $E\\to T$ is an objectwise weak equivalence, so the induced $t:T\\to D$ is one by $e=t\\circ(E\\to T)$ and two-out-of-three. Both $K\\to T$ and $K\\to D$ are projective cofibrations, so Step 3 gives that $F(t)$ is a weak equivalence. On the other hand $F(E)\\to F(T)=F(E)\\amalg_{F(K')}F(K)$ is the pushout of the weak equivalence $F(v)$ along the cofibration $F(K')\\to F(E)$; left properness of $\\mathcal M$ makes it a weak equivalence. Thus $F(e):F(E)\\to F(D)$ is a weak equivalence. The diagram $E$ is projectively cofibrant, since $K'$ is, so $e$ is a projectively cofibrant replacement of $D$. For any other projectively cofibrant replacement $q:QD\\to D$, lift $q$ against the objectwise trivial fibration $e:E\\to D$, using cofibrancy of $QD$. The resulting $l:QD\\to E$ satisfies $el=q$ and is a weak equivalence by two-out-of-three. Applying Step 3 with initial base shows that $F(l)$ is a weak equivalence. Therefore $F(q)=F(e)F(l)$, the canonical comparison $F(QD)\\to F(D)$, is a weak equivalence as well. This last comparison only requires that $q$ be a weak equivalence with projectively cofibrant source.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Proof of Theorem 4.7, printed p. 44; agent expansion of its homotopy-colimit inputs"
+   }
+  },
+  {
+   "text": "For (a), let $I$ be the three-object span category and $D=(B\\leftarrow A\\to X)$. Let $K=(A\\xleftarrow{1}A\\to X)$ with map to $D$ equal to the identity at $A,X$ and to the given cofibration $A\\to B$ at $B$. This is a projective cofibration: in a square against an objectwise trivial fibration, the lifts at $A,X$ are already prescribed by the map from $K$, and the lift at $B$ is obtained from the single lifting square with left side $A\\to B$. Choose a cofibrant replacement $QA\\xrightarrow{\\sim}A$ and factor $QA\\to A\\to X$ as a cofibration $QA\\to\\widetilde X$ followed by a trivial fibration $\\widetilde X\\xrightarrow{\\sim}X$. Set $K'=(QA\\xleftarrow{1}QA\\to\\widetilde X)$. It is projectively cofibrant: first lift $QA$ against the objectwise trivial fibration at the middle vertex, set the lift at the repeated $QA$ using the structure map, and extend the lift to $\\widetilde X$ along $QA\\to\\widetilde X$. The componentwise maps give an objectwise weak equivalence $K'\\to K$. Their colimits are $\\widetilde X\\to X$, a weak equivalence: a cocone on either span is uniquely determined by its component at its right vertex because the other arrow is the identity. All hypotheses of Step 4 hold. Therefore the canonical comparison $\\operatorname{hocolim}_I D\\to B\\amalg_A X$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Proof of Theorem 4.7, printed p. 44; agent expansion of its homotopy-colimit inputs"
+   }
+  },
+  {
+   "text": "For (b), regard the small ordinal $\\theta$ as a category and let $D_\\alpha=X_\\alpha$. Put $K=\\operatorname{const}X_0$ with the cocone maps to $D$. We verify that $K\\to D$ is a projective cofibration by giving its lifting property against an arbitrary objectwise trivial fibration $p:U\\to V$. In such a square, the map $K\\to U$ prescribes the lift at $0$. Given compatible lifts $h_\\gamma:X_\\gamma\\to U_\\gamma$ through stage $\\alpha$, compose $h_\\alpha$ with $U_\\alpha\\to U_{\\alpha+1}$ and lift against $p_{\\alpha+1}$ using the cofibration $X_\\alpha\\to X_{\\alpha+1}$. The resulting $h_{\\alpha+1}$ has the required restrictions to every earlier stage by composition. At a nonzero limit $\\beta<\\theta$, the maps $X_\\gamma\\xrightarrow{h_\\gamma}U_\\gamma\\to U_\\beta$ for $\\gamma<\\beta$ form a cocone. Continuity of $D$ and [def-weil-pbc-category-colimit] give a unique $h_\\beta:X_\\beta\\to U_\\beta$. Its equation with $p_\\beta$ and its equation on $X_0$ follow by checking all colimit coprojections. Thus transfinite recursion yields a natural lift on all of $\\theta$. This proves projective cofibrancy relative to $K$ directly and makes no assertion about preservation of weak equivalences by arbitrary limit-stage colimits.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Proof of Theorem 4.7, printed p. 44; agent expansion of its homotopy-colimit inputs"
+   }
+  },
+  {
+   "text": "Choose a cofibrant replacement $QX_0\\xrightarrow{\\sim}X_0$ and put $K'=\\operatorname{const}QX_0$. This diagram is projectively cofibrant: in a lifting square against an objectwise trivial fibration, choose its component at $0$ using cofibrancy of $QX_0$ and then define each other component by the unique structure arrow $0\\to\\alpha$. The natural map $K'\\to K$ is objectwise a weak equivalence. Its colimit is the same weak equivalence $QX_0\\to X_0$, since a cocone on a constant diagram indexed by an ordinal with initial object $0$ is a single map: compatibility along $0\\to\\alpha$ forces every component to equal the component at $0$. The nonzero hypothesis supplies that vertex. Applying Step 4 with Step 6 proves that $\\operatorname{hocolim}_{\\alpha<\\theta}X_\\alpha\\to\\operatorname{colim}_{\\alpha<\\theta}X_\\alpha$ is a weak equivalence. The construction works for all small ordinal cofinalities and only uses the stated continuity.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Proof of Theorem 4.7, printed p. 44; agent expansion of its homotopy-colimit inputs"
+   }
+  },
+  {
+   "text": "For either the span of Step 5 or the ordinal diagram of Step 7, [lem-coef-model-colimit-localization-comparison] says that the localized ordinary cocone of a projectively cofibrant replacement is a colimit cocone. Write $r:QD\\to D$ for the replacement, $\\iota_i^Q:QD_i\\to F(QD)$ and $\\iota_i:D_i\\to F(D)$ for the colimit maps, and $c=F(r)$. For every $i$, the defining colimit equation is $c\\iota_i^Q=\\iota_i r_i$, and these equations are compatible with every arrow of $I$ because $r$ is a natural transformation. Applying $q$ gives an equivalence between these entire cocones: each $q(r_i)$ and the apex map $q(c)$ are equivalences by the comparisons just proved. Thus the original localized cocone, including its specified legs, is colimiting. By [lem-coef-infinity-yoneda-presheaf-limits], mapping this cocone into $qZ$ gives the limit of $\\operatorname{Map}_{\\mathcal M_\\infty}(qD_i,qZ)$ over $I^{\\mathrm{op}}$, including its actual restriction maps. By [lem-coef-cosimplicial-frame-mapping], these localization mapping spaces are exactly $\\operatorname{Map}^h(D_i,Z)$ and the corresponding mapping space from the colimit is $\\operatorname{Map}^h(\\operatorname{colim}_I D,Z)$, naturally in the homotopy theory of the inputs; the original objects may first be replaced by cofibrant objects as that node permits. When $I$ is the span, its opposite limit is the homotopy pullback displayed in (a). When $I=\\theta$, it is the homotopy limit over the opposite ordinal displayed in (b). The given fibrancy of $Z$ suffices for the function-complex representatives. No simplicial enrichment or cofibrancy of any original object has been introduced.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Proof of Theorem 4.7, printed p. 44; agent expansion of its homotopy-colimit inputs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-model-colimit-localization-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+  "place": "Theorem 4.7 proof, printed pp. 43-44; agent expansion using relative projective cofibrancy and the split-factorization calculation of Hovey Lemma 1.1.12. Neither PDF is archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,10 +191,45 @@
    "results": "{\"t\": \"2026-10-16T22:51:48Z\", \"tool\": \"grep\", \"query\": \"homotopy.*colimit|homotopy.*pushout|IsLeftProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\"], \"digest\": \"6c65635d1779c527\"}",
    "date": "2026-10-17",
    "verdict": "no match: second-reader semantic results concern weak saturation, lifting, and ordinary relative cell complexes; no derived-colimit comparison. Loogle returned zero hits; grep returned two LeftHomotopy.lean declarations about composing cylinder homotopies, not homotopy colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a left proper model category ordinary pushouts along a cofibration and continuous transfinite cofibration sequences are homotopy colimits even with noncofibrant starting object",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm1b\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  CategoryTheory.Limits.HasFiniteColimits C\", \"doc\": \"Any category equipped with a model category structure (consisting of weak equivalences, fibrations, and cofibrations satisfying the model category axioms) necessarily has all finite colimits.\"}\n  {\"name\": \"HomotopicalAlgebra.Cylinder.instIsGoodTrans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {A : C}\\n  [inst_2 : HomotopicalAlgebra.IsCofibrant A] (P P' : HomotopicalAlgebra.Cylinder A) [P.IsGood] [inst_4 : P'.IsGood],\\n  (P.trans P').IsGood\", \"doc\": \"If $ A $ is a cofibrant object in a model category and $ P $, $ P' $ are good cylinder objects on $ A $, then their transitive composition via pushout is also a good cylinder object on $ A $. This ens\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ equipped with a (cofibration, trivial fibration) factorization system, pushouts, and cofibrations stable under composition and cobase change, if every trivial cofibra\"}\n  {\"name\": \"HomotopicalAlgebra.Cylinder.trans_I\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {A : C}\\n  [inst_2 : HomotopicalAlgebra.IsCofibrant A] (P P' : HomotopicalAlgebra.Cylinder A) [inst_3 : P'.IsGood],\\n  (P.trans P').I = CategoryTheory.Limits.pushout P.i₁ P'.i₀\", \"doc\": \"For a cofibrant object $ A $ in a model category and two cylinder objects $ P $ and $ P' $ on $ A $ (with $ P' $ being good), the cylinder object of their transitive composition is given by the pushou\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w'} →\\n      [inst_1 : LinearOrder J] →\\n        [inst_2 : OrderBot J] →\\n          [inst_3 : SuccOrder J] →\\n            [inst_4 : WellFoundedLT J] →\\n              {X Y : C} →\\n                {f : X ⟶ Y} →\\n                  {α :\", \"doc\": \"Given a relative cell complex in a category $\\\\mathcal{C}$ parameterized by a morphism $X \\\\to Y$, with a well-ordered index set $J$ equipped with a linear order, successor structure, least element, and\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] {X Y Z : C} (f : X ⟶ Y) (g : X ⟶ Z)\\n  [inst_3 : CategoryTheory.Limits.HasPushout f g] [(HomotopicalAlgebra.trivialCofibrati\", \"doc\": \"In a category with cofibrations and weak equivalences, if the trivial cofibrations are stable under cobase change and a morphism $ f $ is both a cofibration and a weak equivalence, then the right incl\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w'} →\\n      [inst_1 : LinearOrder J] →\\n        [inst_2 : OrderBot J] →\\n          [inst_3 : SuccOrder J] →\\n            [inst_4 : WellFoundedLT J] →\\n              {α : J → Type t} →\\n                {A B : (j : J) → α j → C} →\\n \", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered index set $J$ with a least element and successor structure, families of objects $A_j(i)$ and $B_j(i)$ in $\\\\mathcal{C}$ indexed by $j \\\\in J$ and $i \\\\in \\\\a\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] {X Y Z : C} (f : X ⟶ Y) (g : X ⟶ Z)\\n  [inst_3 : CategoryTheory.Limits.HasPushout f g] [(HomotopicalAlgebra.trivialCofibrati\", \"doc\": \"If trivial cofibrations are stable under cobase change and a morphism $ g $ is both a cofibration and a weak equivalence, then the inclusion morphism $ Y \\to \\text{pushout}(f, g) $ is a weak equivalence\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary cell attachments, closure of trivial cofibrations, cylinder composition, lifting, or ordinary transfinite compositions; none asserts a derived-colimit comparison. Read AttachCells.lean:40-79 and JoyalTrick.lean:40-55; inspected returned types. The second semantic phrasing also gives no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopicalAlgebra\", \"pushout\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"HomotopicalAlgebra.AttachCells.pushouts_coproducts\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.AttachCells\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {α : Type t} {A B : α → C} {g : (a : α) → A a ⟶ B a} {X₁ X₂ : C} {f : X₁ ⟶ X₂} (c : HomotopicalAlgebra.AttachCells g f) : (CategoryTheory.MorphismProperty.coproducts.{w, v, u} (CategoryTheory.MorphismProperty.ofHoms g)).pushouts f\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.AttachCells.isPushout\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.AttachCells\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {α : Type t} {A B : α → C} {g : (a : α) → A a ⟶ B a} {X₁ X₂ : C} {f : X₁ ⟶ X₂} (self : HomotopicalAlgebra.AttachCells g f) : CategoryTheory.IsPushout self.g₁ self.m f self.g₂\", \"doc\": \"\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary cell attachments, closure of trivial cofibrations, cylinder composition, lifting, or ordinary transfinite compositions; none asserts a derived-colimit comparison. Read AttachCells.lean:40-79 and JoyalTrick.lean:40-55; inspected returned types. The second semantic phrasing also gives no match."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy[Cc]olimit|homotopy[Pp]ushout|[Ll]eft[Pp]roper|[Cc]ontinuous.*[Cc]ofibration",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary cell attachments, closure of trivial cofibrations, cylinder composition, lifting, or ordinary transfinite compositions; none asserts a derived-colimit comparison. Read AttachCells.lean:40-79 and JoyalTrick.lean:40-55; inspected returned types. The second semantic phrasing also gives no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous transfinite composition of cofibrations in a left proper model category computes its homotopy colimit without a cofibrant starting object",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.transfiniteCompositions\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.TransfiniteComposition\", \"type\": \": MorphismProperty C\", \"doc\": \"The property of a morphism in a category being a transfinite composition, defined as the supremum over all well-ordered types $ J $ (equipped with linear order, successor structure, least element, and\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.Basic\", \"type\": \"{α : Type*} {A B : α → C} (g : (i : α) → (A i ⟶ B i)) (c : RelativeCellComplex.{w} (fun (_ : J) ↦ g) f) :\\n  (coproducts.{w} (ofHoms g)).pushouts.TransfiniteCompositionOfShape J f\", \"doc\": \"Given a relative cell complex in a category $\\\\mathcal{C}$ parameterized by a morphism $X \\\\to Y$, with a well-ordered index set $J$ equipped with a linear order, successor structure, least element, and\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.toTransfiniteCompositionOfShape\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w'} →\\n      [inst_1 : LinearOrder J] →\\n        [inst_2 : OrderBot J] →\\n          [inst_3 : SuccOrder J] →\\n            [inst_4 : WellFoundedLT J] →\\n              {α : J → Type t} →\\n                {A B : (j : J) → α j → C} →\\n \", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered set $J$ with a least element and successor structure, and a relative cell complex parameterized by a morphism $X \\\\to Y$ in $\\\\mathcal{C}$, this function c\"}\n  {\"name\": \"CategoryTheory.TransfiniteCompositionOfShape.isColimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Preorder.TransfiniteCompositionOfShape\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : Type w} →\\n      [inst_1 : LinearOrder J] →\\n        [inst_2 : OrderBot J] →\\n          {X Y : C} →\\n            {f : X ⟶ Y} →\\n              [inst_3 : SuccOrder J] →\\n                [inst_4 : WellFoundedLT J] →\\n                  (self\", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered set $J$ (with linear order, bottom element, successor structure, and well-founded $<$), and a morphism $f : X \\\\to Y$ in $\\\\mathcal{C}$, this asserts that \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderTransfiniteCompositionOfShape.of_isStableUnderColimitsOfShape.mem\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.TransfiniteComposition\", \"type\": \"[W.RespectsIso] : W f\", \"doc\": \"If a morphism property $ W $ in a category $ \\\\mathcal{C} $ respects isomorphisms and is stable under colimits of shape $ J $, then $ W $ is also stable under transfinite compositions of shape $ J $. T\"}\n  {\"name\": \"CategoryTheory.TransfiniteCompositionOfShape.iic\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Preorder.TransfiniteCompositionOfShape\", \"type\": \"(j : J) : TransfiniteCompositionOfShape (Set.Iic j) (c.F.map (homOfLE bot_le : ⊥ ⟶ j))\", \"doc\": \"For each element $ j $ in a well-ordered set $ J $, this constructs a transfinite composition of morphisms in a category $ \\\\mathcal{C} $, indexed by the initial segment $ \\\\{x \\\\in J \\\\mid x \\\\leq j\\\\} $. \"}\n  {\"name\": \"CategoryTheory.TransfiniteCompositionOfShape.ici\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Preorder.TransfiniteCompositionOfShape\", \"type\": \"(j : J) : TransfiniteCompositionOfShape (Set.Ici j) (c.incl.app j)\", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered set $J$ with a bottom element and successor structure, and an element $j \\\\in J$, this constructs the transfinite composition of morphisms in $\\\\mathcal{C}\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape_toTransfiniteCompositionOfShape\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w'} [inst_1 : LinearOrder J] [inst_2 : OrderBot J]\\n  [inst_3 : SuccOrder J] [inst_4 : WellFoundedLT J] {X Y : C} {f : X ⟶ Y} {α : Type u_1} {A B : α → C}\\n  (g : (i : α) → A i ⟶ B i) (c : HomotopicalAlgebra.RelativeCellComplex (fun x \", \"doc\": \"Given a category $\\\\mathcal{C}$, a well-ordered set $J$ with linear order, least element, successor structure, and well-founded $<$, and a relative cell complex parameterized by a morphism $X \\\\to Y$ in\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary cell attachments, closure of trivial cofibrations, cylinder composition, lifting, or ordinary transfinite compositions; none asserts a derived-colimit comparison. Read AttachCells.lean:40-79 and JoyalTrick.lean:40-55; inspected returned types. The second semantic phrasing also gives no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left properness implies that an ordinary pushout of a cofibration is a homotopy pushout and derived function complexes take continuous cofibration chains to homotopy limits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] {X Y Z : C} (f : X ⟶ Y) (g : X ⟶ Z)\\n  [inst_3 : CategoryTheory.Limits.HasPushout f g] [(HomotopicalAlgebra.trivialCofibrati\", \"doc\": \"If trivial cofibrations are stable under cobase change and a morphism $ g $ is both a cofibration and a weak equivalence, then the inclusion morphism $ Y \\to \\text{pushout}(f, g) $ is a weak equivalence\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] {X Y Z : C} (f : X ⟶ Y) (g : X ⟶ Z)\\n  [inst_3 : CategoryTheory.Limits.HasPushout f g] [(HomotopicalAlgebra.trivialCofibrati\", \"doc\": \"In a category with cofibrations and weak equivalences, if the trivial cofibrations are stable under cobase change and a morphism $ f $ is both a cofibration and a weak equivalence, then the right incl\"}\n  {\"name\": \"HomotopicalAlgebra.instCofibrationInlOfIsStableUnderCobaseChangeCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  {X Y Z : C} (f : X ⟶ Y) (g : X ⟶ Z) [inst_2 : CategoryTheory.Limits.HasPushout f g]\\n  [(HomotopicalAlgebra.cofibrations C).IsStableUnderCobaseChange] [hg : HomotopicalAlgebra.Cofibrati\", \"doc\": \"In a category with cofibrations where cofibrations are stable under cobase change, the left inclusion morphism into the pushout of a cofibration is itself a cofibration.\"}\n  {\"name\": \"HomotopicalAlgebra.instCofibrationInrOfIsStableUnderCobaseChangeCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  {X Y Z : C} (f : X ⟶ Y) (g : X ⟶ Z) [inst_2 : CategoryTheory.Limits.HasPushout f g]\\n  [(HomotopicalAlgebra.cofibrations C).IsStableUnderCobaseChange] [hf : HomotopicalAlgebra.Cofibrati\", \"doc\": \"If the class of cofibrations in a category is stable under cobase change, then for any cofibration $ f $ and morphism $ g $, the right inclusion morphism in the pushout of $ f $ and $ g $ is also a co\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ equipped with a (cofibration, trivial fibration) factorization system, pushouts, and cofibrations stable under composition and cobase change, if every trivial cofibra\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm1b\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  CategoryTheory.Limits.HasFiniteColimits C\", \"doc\": \"Any category equipped with a model category structure (consisting of weak equivalences, fibrations, and cofibrations satisfying the model category axioms) necessarily has all finite colimits.\"}\n  {\"name\": \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [(HomotopicalAlgebra.cofibrations C).IsWeakFactorizationSystem (Ho\", \"doc\": \"In a category with cofibrations, the class of cofibrations is stable under cobase change. That is, if a morphism is a cofibration, then any pushout of this morphism is also a cofibration.\"}\n  {\"name\": \"HomotopicalAlgebra.Precylinder.LeftHomotopy.trans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X : C} →\\n      {P : HomotopicalAlgebra.Precylinder X} →\\n        {Y : C} →\\n          {f₀ f₁ f₂ : X ⟶ Y} →\\n            P.LeftHomotopy f₀ f₁ →\\n              {P' : HomotopicalAlgebra.Precylinder X} →\\n                P'.LeftHomotopy f₁ f₂ \", \"doc\": \"Given two consecutive left homotopies $ h: f_0 \\\\to f_1 $ and $ h': f_1 \\\\to f_2 $ between morphisms $ X \\\\to Y $ in a category equipped with precylinder structures $ P $ and $ P' $, and assuming the pus\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary cell attachments, closure of trivial cofibrations, cylinder composition, lifting, or ordinary transfinite compositions; none asserts a derived-colimit comparison. Read AttachCells.lean:40-79 and JoyalTrick.lean:40-55; inspected returned types. The second semantic phrasing also gives no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-general-bousfield-localization",
@@ -93,5 +237,39 @@
   "group": "Q13"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-left-proper-derived-cell-colimits",
+  "worker": "stage1",
+  "summary": "Statement retained. Proved the two cell-colimit comparisons by an explicit relative-base replacement argument in the existing projective model. Constructed the relative split factorization, gave the span and transfinite compatible-lift arguments in full, and applied existing coherent colimit and mapping-space theorems. Resumed review checked the sources, every cited statement and every replacement arrow, and marked the multistep relative Brown argument non-elementary. No new nodes or Mathlib leaves. Second reading made the component equations identifying the localized colimit cocones explicit and checked all eight steps independently.",
+  "blueprint": "The unchanged ancestry serves the opening “Choose a compactification c=(j,p)” of thm-cbc-finite-level-proetale in current main-20261015. Steps 1-4 give the model-category infrastructure implicit in Barwick Theorem 4.7; step 5 proves the pushout input, steps 6-7 the arbitrary-small-cofinality continuous-chain input, and step 8 derives both mapping-space formulas. This is an agent-added foundation, not a claim that the blueprint contains this model-category proof.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-model-colimit-localization-comparison",
+    "why": "Generic projective diagram model and coherent colimit comparison; no node of the compact-support unit states this general infrastructure."
+   },
+   {
+    "node": "lem-coef-cosimplicial-frame-mapping",
+    "why": "Generic identification of model function complexes with localization mapping spaces, without simplicial enrichment; used only to interpret the two comparisons."
+   },
+   {
+    "node": "lem-coef-infinity-yoneda-presheaf-limits",
+    "why": "Generic criterion that mapping out of a colimit is the opposite-indexed limit of mapping spaces, including cocones; it does not replace any geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-infinity-yoneda-presheaf-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-c23bb5209",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-c23bb5209 (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit containing the item and its report, with 0 new nodes and no unit change. The statement is true and not weakened. Its only citer, lem-cbc-general-bousfield-localization step 3, needs (a) for an arbitrary second leg and (b) for every small cofinality with a noncofibrant X_0, and the statement gives both. Barwick and Hovey are not archived in literature/, so proof_origin is correctly by:agent and the report has WANTED lines. Because of that, I checked each step from first principles against the full statements of the cited nodes. Step 1: colim is left adjoint to const, so it preserves cofibrations, trivial cofibrations and pushouts. Step 2: evaluation at i has the right adjoint given by products over Hom(j,i), so projective cofibrations are objectwise and M^I is left proper. Step 3: the relative Ken Brown argument is correct: (w,1) is well defined because w is under K, pi=w and ps=1 make i and s trivial cofibrations, and F(p)F(s)=1 makes F(p) weak. Step 4: t is well defined and restricts to K->D. K->T is a pushout of K'->E. The two left-properness uses are along cofibrations, one in M^I and one in M. The arbitrary-replacement lift is valid. Step 5: I checked naturality of K->D and K'->K, the three-vertex lifts, and that the colimits are X~ and X. Step 6: the transfinite lift uses only continuity of X; I checked the successor square, the restriction to X_0 and the limit stage through coprojections. Step 7: the constant diagram on QX_0 is projectively cofibrant, using the initial vertex 0. Step 8: the map of cocones is objectwise weak, then the Yoneda colimit criterion and the frame identification of Map^h apply. Small cases checked: identity A->B, initial A, theta=omega, theta=omega+omega, a constant chain; theta=0 is correctly excluded. Duplicate search with rg over dag/nodes for 'left proper' together with pushout, transfinite or homotopy colimit found no equivalent node; lem-coef-sifted-good-diagram-calculus needs cofibrant objects. I accept three tool_uses: lem-coef-model-colimit-localization-comparison, lem-coef-cosimplicial-frame-mapping and lem-coef-infinity-yoneda-presheaf-limits, all generic tools that replace no step of the unit. No fixes were made."
+ }
 }

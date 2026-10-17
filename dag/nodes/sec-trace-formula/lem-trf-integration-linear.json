@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-integration-linear",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Linearity of the integration",
@@ -14,41 +14,132 @@
  },
  "stmt_deps": [
   "def-trf-integration",
+  "def-trf-coefficient-conventions",
+  "def-trf-admissibility",
+  "def-trf-dualizing-complex",
   "def-weil-finite-field-fiber",
   "def-weil-scheme-morphism-properties"
  ],
  "proof": [
   {
-   "text": "The integration is the composite\n$A\\xrightarrow{\\eta^*}R\\Gamma(\\beta,A_\\beta) \\xrightarrow{R\\Gamma(\\tau)}R\\Gamma(\\beta,\\omega_{\\beta,A}) \\xrightarrow{\\varepsilon_{a_\\beta}}A$ of\n[def-trf-integration]. The first arrow is built from the unit of\nthe adjunction $La_\\beta^*\\dashv Ra_{\\beta*}$ of\n[def-weil-derived-direct-image] and the identification\n$Ra_{\\beta*}\\cong Ra_{\\beta!}$ of\n[def-compact-support-direct-image-detailed]: it does not depend on\n$\\tau$. The last arrow is $R\\Gamma(s,-)$ applied to the counit of\nthe adjunction $Ra_{\\beta!}\\dashv Ra_\\beta^!$ of\n[def-trf-admissibility] at $\\omega_{\\beta,A}=Ra_\\beta^!A_s$ of\n[def-trf-dualizing-complex], and $R\\Gamma(s,-)$ is an\n$A$-linear functor, so this arrow is $A$-linear; it also does not\ndepend on $\\tau$. The middle arrow is $R\\Gamma(\\beta,-)$ applied\nto $\\tau$, and $A$-linearity of the compact-support cohomology of\n[def-trf-coefficient-conventions] gives\n$R\\Gamma(\\beta,\\tau+a\\tau')=R\\Gamma(\\beta,\\tau)+aR\\Gamma(\\beta,\\tau')$;\nthe exceptional inverse image enters only through\n$\\omega_{\\beta,A}=Ra_\\beta^!A_s$, by the dualizing-complex\nconstruction of [def-weil-exceptional-inverse-image]. Composing\nthe three $A$-linear arrows gives the displayed identity.",
+   "text": "Write $F=R\\Gamma_c(\\beta,-)$. By [def-trf-integration], properness identifies the cohomology functor in the defining composite with $F=R\\Gamma(s,Ra_{\\beta!}-)$. Here $R\\Gamma(s,-)$ on $D^b_c(s,A)$ is $\\operatorname{Fib}_s$: by [def-weil-finite-coefficient-point], evaluation at the geometric point of $s$ is the exact sections functor $\\Gamma(s,-)$ applied termwise, so $R\\Gamma(s,Ra_{\\beta!}-)=\\operatorname{Fib}_s(Ra_{\\beta!}-)=R\\Gamma_c(\\beta,-)$. There are fixed arrows $u:A\\to F(A_\\beta)$ and $v:F(\\omega_{\\beta,A})\\to A$, independent of $\\tau$, and the integration is the scalar represented by $v\\circ F(\\tau)\\circ u$. Here $u$ is the image of the ordinary pullback/direct-image unit followed by the proper comparison; $v$ is the image of the exceptional-adjunction counit $Ra_{\\beta!}Ra_\\beta^!A_s\\to A_s$, evaluated at $A_s$. Thus all variable dependence occurs in $F(\\tau)$.",
    "uses": [
     "def-trf-integration",
-    "def-weil-derived-direct-image",
-    "def-compact-support-direct-image-detailed",
-    "def-trf-admissibility",
-    "def-trf-dualizing-complex",
-    "def-trf-coefficient-conventions",
-    "def-weil-exceptional-inverse-image"
+    "def-weil-finite-coefficient-point"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-linear.proof.md",
+    "place": "Opening composite and the sentences describing the first and last arrows"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cohomology-linear] with $Y=\\beta$, $K=A_\\beta$, $L=\\omega_{\\beta,A}$, $f=\\tau$, and $g=\\tau'$. These are objects and parallel morphisms of the finite-coefficient constructible category in the integration definition; its finite-Tor setting is a full subcategory of this category by [def-weil-finite-tor-amplitude]. The lemma gives $F(\\tau+a\\tau')=F(\\tau)+aF(\\tau')$. It is precisely the compact-support functor of Step 1, so no identification with compact-support cohomology on a nonproper scheme is being used.",
+   "uses": [
+    "lem-trf-cohomology-linear",
+    "def-trf-integration",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-linear.proof.md",
+    "place": "Middle-arrow sentence and its displayed equality"
+   }
+  },
+  {
+   "text": "The category of $A$-modules is $A$-linear: morphism addition and scalar multiplication are pointwise, and composition distributes over both. By [lem-weil-linear-abelian-derived-category], its derived category $D(A)$ is $A$-linear. The bilinear composition identities in [def-weil-linear-category], applied to the fixed arrows of Step 1 and the equality in Step 2, give\n$$\nv\\circ F(\\tau+a\\tau')\\circ u\n=v\\circ F(\\tau)\\circ u+a\\bigl(v\\circ F(\\tau')\\circ u\\bigr).\n$$\nRead these endomorphisms of $A$ as scalars by the integration definition (the map to $A$ sends a degree-zero $A$-endomorphism to its value on $1$); this identification preserves addition and scalar multiplication since evaluation at $1$ does. The displayed formula is therefore $\\int_\\beta(\\tau+a\\tau')=\\int_\\beta(\\tau)+a\\int_\\beta(\\tau')$.",
+   "uses": [
+    "lem-weil-linear-abelian-derived-category",
+    "def-weil-linear-category",
+    "def-trf-integration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-linear.proof.md",
+    "place": "Final composition sentence, with the bilinear calculation written out"
+   }
   }
  ],
  "proof_deps": [
   "def-trf-integration",
-  "def-weil-derived-direct-image",
-  "def-compact-support-direct-image-detailed",
-  "def-trf-admissibility",
-  "def-trf-dualizing-complex",
-  "def-trf-coefficient-conventions",
-  "def-weil-exceptional-inverse-image"
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-linear-category",
+  "lem-trf-cohomology-linear",
+  "lem-weil-linear-abelian-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-linear.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-linear.proof.md",
+  "place": "Entire proof, expanding the final composition calculation and isolating the missing cohomology-linearity assertion"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived compact support cohomology functors on finite coefficient sheaf derived categories preserve addition and scalar multiplication",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, continuousCohomology, instAbelianLightCondMod, ContinuousCohomology.homogeneousCochains, CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-17",
+   "verdict": "no match: generic linear categories, exact induced functors and linear maps do not state linearity of this finite-coefficient compact-support cohomology construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor of a linear functor on categories of sheaves of modules is linear",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinear, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearSingleFunctor, SheafOfModules.instAbelian, instAbelianCondensedMod, instAbelianLightCondMod",
+   "date": "2026-10-17",
+   "verdict": "no match: generic linear categories, exact induced functors and linear maps do not state linearity of this finite-coefficient compact-support cohomology construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Functor.Additive",
+   "results": "12 hits: CategoryTheory.Functor.intLinear, CategoryTheory.Functor.natLinear, CategoryTheory.Functor.ratLinear, CategoryTheory.Functor.mapLinearMap, CategoryTheory.Functor.coe_mapLinearMap, CategoryTheory.Functor.mapLinearMap_apply, CategoryTheory.Free.liftUnique, CategoryTheory.Free.ext",
+   "date": "2026-10-17",
+   "verdict": "no match: generic linear categories, exact induced functors and linear maps do not state linearity of this finite-coefficient compact-support cohomology construction"
+  },
+  {
+   "tool": "grep",
+   "query": "linear|Linear|map_smul [Algebra/Homology/DerivedCategory]",
+   "results": "23 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic linear categories, exact induced functors and linear maps do not state linearity of this finite-coefficient compact-support cohomology construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global sections and compact support cohomology functors are linear over the coefficient ring",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinear, DerivedCategory.instLinearShiftFunctorInt, AlgebraicGeometry.Scheme.Γ, DerivedCategory.instLinearSingleFunctor, HomotopyCategory.instLinearIntUpSingleFunctor, CochainComplex.instLinearIntFunctorSingleFunctors, CategoryTheory.ShortComplex.cyclesFunctor_linear",
+   "date": "2026-10-17",
+   "verdict": "no match: generic linear categories, exact induced functors and linear maps do not state linearity of this finite-coefficient compact-support cohomology construction"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support|compactly.supported|RΓ|RGamma [AlgebraicGeometry/Sites]",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: generic linear categories, exact induced functors and linear maps do not state linearity of this finite-coefficient compact-support cohomology construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A-linear integration map from derived global sections and an adjunction counit",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.unitHomEquiv_comp_apply, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules",
+   "date": "2026-10-17",
+   "verdict": "no match: module-sheaf units, adjunctions and generic linearity do not state this integration map or its scalar identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fixed unit and counit composed with a linear derived global sections map define a linear integration map",
+   "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, SheafOfModules.pushforwardSections, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.unitHomEquiv, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.unitHomEquiv_comp_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: module-sheaf units, adjunctions and generic linearity do not state this integration map or its scalar identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the integration map defined by unit, derived global sections, and counit is linear over the coefficient ring",
+   "results": "8 hits: CoalgHomClass.toSemilinearMapClass, CoalgHom.coe_linearMap_mk, Coalgebra.counitCoalgHom_toLinearMap, Coalgebra.counitCoalgHom, CoalgebraStruct.counit, SheafOfModules.unitHomEquiv, LinearMap.isIntegral, CochainComplex.instLinearIntFunctorSingleFunctors",
+   "date": "2026-10-16",
+   "verdict": "no match: module-sheaf units, adjunctions and generic linearity do not state this integration map or its scalar identity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -82,5 +173,29 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-integral"
+ "unit": "sk-d-integral",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-integration-linear",
+  "worker": "stage1",
+  "summary": "Retained the imported statement verbatim. Rebuilt the earlier attempt as three steps: the exact fixed-arrow composite from def-trf-integration, the finite compact-support cohomology linearity assertion isolated in one statement-only node, and an explicit bilinear expansion in the A-linear coefficient derived category. Replaced unsupported adjunction and composition citations; ran fresh real Mathlib searches and found no matching project declaration.",
+  "blueprint": "Steps 1, 2 and 3 realize respectively the opening composite and fixed unit/counit sentences, the compact-support-linearity sentence, and the closing composition sentence in the current main-20261015 blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "def-weil-linear-category",
+    "why": "Defines precisely the bilinearity of composition used in the elementary final expansion; no node of sk-d-integral defines a linear category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-linear-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-b98fab193",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-b98fab193 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-trf-cohomology-linear, every cited statement (def-trf-integration with its main-20261015 update, def-trf-coefficient-conventions, def-trf-admissibility, def-trf-dualizing-complex, def-weil-ordinary-compact-cohomology, def-weil-finite-coefficient-point, def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude, def-compact-support-direct-image-detailed, def-weil-linear-functor, def-weil-linear-category, lem-weil-linear-abelian-derived-category), the main-20261015 statement and proof of lem-trf-integration-linear, and the sk-d-integral unit text. The item statement matches the source verbatim and is not weakened. Step 1: def-trf-integration gives the composite unit, then RΓ(s,Ra_!τ), then the counit at A_s; the two end arrows do not depend on τ. Step 2: the new lemma applies to the same ring A, with A_β constructible and ω in D^b_ctf, a full subcategory of D^b_c. Step 3: bilinear composition in the A-linear category D(A), then evaluation at 1; this is elementary. The new node is true (Ra_! = Rp̄_* j_! with j_! exact and Rp̄_* derived from an A-linear functor; the compactification comparisons are natural; Fib_s is exact). Tested on Y empty, Y=s, zero objects and maps, a=0 and 1, n=1 and n>1. It is not a restated clause of the item (it has no integration, ω or counit), and an rg search of the DAG found no duplicate. Searches are recorded for all three kinds. No SGA is used. The tool_uses entry for def-weil-linear-category (a definition) is accepted. One repair, C1: Step 1 equated RΓ_c(β,-)=Fib_s(Ra_!-) with RΓ(s,Ra_!-) without a citation; I added def-weil-finite-coefficient-point (Fib_s is the exact sections functor Γ(s,-)) to the step's text, its uses and proof_deps. The fixed file is fixes/dag/nodes/sec-trace-formula/lem-trf-integration-linear.json; review.md has the details.; 1 file(s) fixed by the reviewer"
+ }
 }

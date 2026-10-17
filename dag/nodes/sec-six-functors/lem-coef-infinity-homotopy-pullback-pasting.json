@@ -30,9 +30,98 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-cocartesian-mapping-criterion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Name the horizontal maps $a:A\\to C$, $d:C\\to D$, $h:A'\\to C'$, $k:C'\\to D'$, and the vertical maps $v:A\\to A'$, $c:C\\to C'$, $g:D\\to D'$. Orient the specified square homotopies as $\\alpha:ca\\Rightarrow hv$ and $\\eta:gd\\Rightarrow kc$. Strict squares use the constant homotopies. We use the path model $P(U\\to W\\leftarrow V)$ from the statement, which is Kan by [lem-coef-kan-pullback-path-comparison]. Here are the fibration facts needed below, derived from [lem-coef-sset-anodyne-pushout-product] and [lem-coef-kan-quillen-right-proper]. For a Kan complex $W$, endpoint-pair evaluation $W^I\\to W\\times W$, $I=\\Delta^1$, is a Kan fibration: a horn problem transposes to extension from $(I\\times\\Lambda_i^n)\\cup(\\partial I\\times\\Delta^n)$, an anodyne pushout-product. Evaluation at either one endpoint is a trivial fibration: a boundary problem transposes to $(I\\times\\partial\\Delta^n)\\cup(\\{e\\}\\times\\Delta^n)$, the pushout-product of the anodyne one-dimensional horn $\\{e\\}\\hookrightarrow I$ with a boundary monomorphism. The cited boundary-lifting characterization includes $n=0$. Pullbacks and composites of Kan fibrations are Kan fibrations, by projecting, filling, and pairing a lifting problem. These arguments also apply when some spaces are empty. Horn inclusions are anodyne directly from their defining right lifting property for Kan fibrations and the definition of anodyne in [lem-coef-sset-anodyne-pushout-product]. Products of Kan complexes are Kan by coordinatewise horn filling. Transposition between maps into $W^I$ and maps out of a product with $I$ follows directly from the degreewise internal-Fun definition in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110: path-model implementation of the fibrant replacements; endpoint lifting is Kerodon 00TM and 00UT."
+   }
+  },
+  {
+   "text": "Define the mapping-path replacement of $c$ and the right-square path pullback by\n$$E=C\\times_{c,C',\\operatorname{ev}_0}(C')^I,\\qquad p:E\\to C',\\quad (x,\\lambda)\\mapsto\\lambda(1),$$\n$$Q_0=D\\times_{g,D',\\operatorname{ev}_0}(D')^I\\times_{\\operatorname{ev}_1,D',k}C',\\qquad q:Q_0\\to C'.$$\nAn element of $E$ retains its free endpoint $b=\\lambda(1)$. Step 1 makes $p$ and $q$ Kan fibrations: the maps $E\\to C\\times C\\prime$ and $Q_0\\to D\\times C\\prime$ are the pullbacks of endpoint-pair evaluation along $(x,b)\\mapsto(c(x),b)$ and $(z,b)\\mapsto(g(z),k(b))$, respectively. Compose with the projections to $C\\prime$, which are Kan fibrations because $C$ and $D$ are Kan. Both total spaces are therefore Kan. The projection $E\\to C$ is a pullback of single-endpoint evaluation and has all boundary lifts, so it is a weak equivalence by [lem-coef-kan-quillen-right-proper]. Its constant-path section $j:C\\to E$ is consequently a weak equivalence by two-out-of-three, and is a degreewise monomorphism because projection recovers $x$. The right-square comparison is\n$$r:C\\to Q_0,\\qquad x\\mapsto(d(x),\\eta_x,c(x)).$$\nIt is a weak equivalence by the assumed homotopy-pullback property of that specified square.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110: replace the right square; explicit mapping-path replacement retains its specified commutation homotopy."
+   }
+  },
+  {
+   "text": "Construct a strict map $F:E\\to Q_0$ over $C'$. For $(x,\\lambda)\\in E$, prescribe in $D'$ the two consecutive edges $\\eta_x:gd(x)\\to kc(x)$ and $k\\lambda:kc(x)\\to k(b)$. This is a simplicial map $E\\times\\Lambda_1^2\\to D'$. On $j(C)\\times\\Delta^2$, prescribe the degenerate triangle $s_1\\eta$: its edges $01,12,02$ are $\\eta$, the constant edge, and $\\eta$. The prescriptions agree on the intersection. The inclusion\n$$(E\\times\\Lambda_1^2)\\cup_{C\\times\\Lambda_1^2}(C\\times\\Delta^2)\\hookrightarrow E\\times\\Delta^2$$\nis anodyne by [lem-coef-sset-anodyne-pushout-product], applied to the monomorphism $j$ and the horn inclusion. Since $D'$ is Kan it has an extension $T$. Restrict $T$ to edge $02$ and put $F(x,\\lambda)=(d(x),T_{02}(x,\\lambda),b)$. This is a simplicial map, satisfies $qF=p$ exactly, and satisfies $Fj=r$ exactly by the prescribed degenerate triangles. Since $j$ and $r$ are weak equivalences, two-out-of-three in [lem-coef-kan-quillen-right-proper] proves that $F$ is a weak equivalence. The choice of $T$ is a filler of an explicitly specified lifting problem, not a presumed canonical operation concatenating interval paths.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110: replace the right square by an equivalent fibration over C′; triangle filling spells out composition of the specified homotopies."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-pullback-fibration-invariance] to the cospans $E\\xrightarrow{p}C'\\xleftarrow{h}A'$ and $Q_0\\xrightarrow{q}C'\\xleftarrow{h}A'$. Their comparison maps are $F,1_{C'},1_{A'}$, all weak equivalences, and $qF=p$ is the strict equation from Step 3. Both fibration hypotheses were proved in Step 2. It follows that\n$$F_h:E\\times_{C'}A'\\longrightarrow Q_0\\times_{C'}A'$$\nis a weak equivalence. Degreewise, its source is exactly $P(C\\xrightarrow{c}C'\\xleftarrow{h}A')$; its target is exactly $P(D\\xrightarrow{g}D'\\xleftarrow{kh}A')$. Indeed a target simplex is $(z,\\gamma,b,t)$ with $b=h(t)$ and endpoints $\\gamma(0)=g(z)$, $\\gamma(1)=k(b)$; delete $b$ and recover it as $h(t)$ for the inverse. These formulas commute with every simplicial operator.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110 proof final sentence: the same base change computes the left and outer tests; fibration invariance makes the replacement valid."
+   }
+  },
+  {
+   "text": "The left-square comparison is $l:A\\to E\\times_{C'}A'$, $z\\mapsto(a(z),\\alpha_z,v(z))$. Under the identification in Step 4, $F_hl$ sends $z$ to $(da(z),T_{02}(a(z),\\alpha_z),v(z))$. The triangle $T(a(z),\\alpha_z)$ has edges $01=\\eta_{a(z)}$ and $12=k\\alpha_z$. Thus its edge $02$ represents exactly the concatenated outer commutation homotopy $gda\\Rightarrow khv$. With this representative the outer comparison is $F_hl$. Since $F_h$ is a weak equivalence, the model-structure two-out-of-three axiom of [lem-coef-kan-quillen-right-proper] says that $l$ is a weak equivalence if and only if the outer comparison is. By the path-pullback definition these are precisely the left and outer homotopy-pullback properties. Taking both adjacent squares to be homotopy pullbacks proves the pasting assertion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110: both tests reduce to the same comparison; coordinate computation also treats the homotopy-commuting case."
+   }
+  },
+  {
+   "text": "The result is independent of the triangle representative of concatenation. Given two maps $T_0,T_1:A\\times\\Delta^2\\to D'$ extending the same consecutive edges $\\eta a$ and $k\\alpha$, prescribe them at the endpoints of a new interval $J=\\Delta^1$, and prescribe the common horn map constantly along $J$. The inclusion of this prescribed domain into $A\\times\\Delta^2\\times J$ is the pushout-product of the monomorphism $A\\times\\partial J\\hookrightarrow A\\times J$ with the anodyne horn inclusion $\\Lambda_1^2\\hookrightarrow\\Delta^2$, after interchanging factors. By [lem-coef-sset-anodyne-pushout-product] it is anodyne; the Kan property of $D'$ supplies an extension. Its $02$ edge gives a simplicial homotopy, fixed at its two endpoints, between the two outer path coordinates. Together with the constant $D$ and $A'$ coordinates this gives a map $H:A\\to M^J$, where $M=P(D\\to D'\\leftarrow A')$ is Kan by [lem-coef-kan-pullback-path-comparison], with $\\operatorname{ev}_0 H=o_0$ and $\\operatorname{ev}_1 H=o_1$, the two outer comparisons. Step 1 proves that both endpoint evaluations $M^J\\to M$ are trivial fibrations and hence weak equivalences. Two-out-of-three in [lem-coef-kan-quillen-right-proper] gives $o_0$ is a weak equivalence if and only if $H$ is, if and only if $o_1$ is. Thus every triangle filler representing the concatenated homotopy gives the same test. Strict squares use constant $\\alpha$ and $\\eta$; then $l$ lands in $j(C)$, on which Step 3 prescribes the degenerate triangle, so the outer homotopy is constant as required. No independently chosen outer homotopy is substituted for the concatenation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110 specified-homotopy extension: relative triangle filling and homotopy invariance make concatenation well-defined for the comparison test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-pullback-fibration-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0110",
+  "place": "Proposition 3.4.1.11, transitivity; explicit mapping-path fibration replacement and relative triangle construction supply the specified-homotopy version. Online source, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +186,82 @@
    "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Poincare.lean\", \"line\": \"64\", \"text\": \"  -- The overall plan of the proof is to pullback the 1-form to the unit square along the homotopy,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"327\", \"text\": \"  refine (IsPullback.paste_horiz_iff (.flip <| .of_hasPullback _ _) (map_over f)).mp ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"167\", \"text\": \"      have := (IsPullback.paste_horiz_iff (.of_hasPullback f g.coborderRange.ι)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"79\", \"text\": \"    (h' : P'.RightHomotopy f₁ f₂) [HasPullback P.p₁ P'.p₀] :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"162\", \"text\": \"    (h' : P'.RightHomotopy f₁ f₂) [HasPullback P.p₁ P'.p₀] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"line\": \"199\", \"text\": \"    (isPullback f B').paste_horiz_iff] using\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean\", \"line\": \"110\", \"text\": \"  apply leftSquareIsPullback _ rfl (pullbackIsPullback f₃ f₄)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean\", \"line\": \"26\", \"text\": \"* `leftSquareIsPullback` shows that the left square is a pullback if the other two are.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean\", \"line\": \"121\", \"text\": \"def leftSquareIsPullback (H : IsLimit t₂) (H' : IsLimit (t₂.pasteHoriz t₁ hi₂)) : IsLimit t₁ := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean\", \"line\": \"141\", \"text\": \"  toFun H' := leftSquareIsPullback t₁ _ H H'\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean\", \"line\": \"228\", \"text\": \"    (leftSquareIsPullback _ hi₂ (PullbackCone.flipIsLimit H₁) (PullbackCone.flipIsLimit H₂))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"217\", \"text\": \"  of_isLimit (leftSquareIsPullback (PullbackCone.mk h₁₁ _ p) rfl t.isLimit s.isLimit)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"243\", \"text\": \"theorem paste_horiz_iff {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃}\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"620\", \"text\": \"theorem paste_horiz_iff {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃}\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"138\", \"text\": \"  PreOneHypercover.Homotopy.isLimitMultiforkEquiv E.fromSaturateOfHasPullbacks\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"139\", \"text\": \"    E.toSaturateOfHasPullbacks E.fromSaturateToSaturateHomotopy\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"line\": \"28\", \"text\": \"  category of `1`-hypercovers up to homotopy is cofiltered if `C` has pullbacks.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"line\": \"307\", \"text\": \"/-- If `C` has pullbacks, the category of `1`-hypercovers up to homotopy is cofiltered. -/\"}",
    "date": "2026-10-17",
    "verdict": "no match: source hits concern ordinary pullback pasting and composition of path-object homotopies; read IsPullback/Basic.lean:215-248 and ModelCategory/RightHomotopy.lean:42-88. None states the spaces assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pasting and cancellation for homotopy pullback squares of spaces or Kan complexes",
+   "results": "OK 8 hits: CategoryTheory.Limits.pasteVertIsPullback, HomotopicalAlgebra.PathObject.RightHomotopy.trans, HomotopicalAlgebra.PathObject.trans_P, CategoryTheory.Limits.pasteHorizIsPullback, CategoryTheory.IsPullback.paste_horiz_iff, CategoryTheory.Limits.pullbackPullbackLeftIsPullback, CategoryTheory.Limits.pasteVertIsPullbackEquiv, HomotopicalAlgebra.PathObject.trans_ι",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pasting homotopy pullback squares Kan complexes",
+   "results": "OK 8 hits: HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h, HomotopicalAlgebra.PrepathObject.RightHomotopy.trans, SSet.RelativeMorphism.Homotopy.rel_assoc, HomotopicalAlgebra.Precylinder.LeftHomotopy.trans_h, SSet.RelativeMorphism.Homotopy.h₁_assoc, HomotopicalAlgebra.Precylinder.LeftHomotopy.trans, SSet.RelativeMorphism.Homotopy.h₀_assoc, HomotopicalAlgebra.PathObject.RightHomotopy.trans",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*pullback|pullback.*homotopy|paste_horiz_iff",
+   "results": "OK 7 hits: Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean, Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pasting homotopy pullback squares Kan complexes",
+   "results": "OK 8 hits: CategoryTheory.Limits.pasteHorizIsPullback, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd_assoc, CategoryTheory.IsPullback.paste_horiz, CategoryTheory.IsPullback.paste_vert, CategoryTheory.Limits.leftSquareIsPullback, CategoryTheory.IsPullback.of_bot, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_fst_assoc, CategoryTheory.Limits.pullbackLeftPullbackSndIso",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "path space homotopy pullback transitivity specified homotopy",
+   "results": "OK 8 hits: Path.Homotopy.hcomp, Path.Homotopy.transAssoc, HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h, HomotopicalAlgebra.PrepathObject.RightHomotopy.trans, Path.Homotopic.hcomp, HomotopicalAlgebra.PrepathObject.trans_P, HomotopicalAlgebra.PrepathObject.trans_ι, Path.Homotopy.trans_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "leansearch",
+   "query": "path space homotopy pullback transitivity specified homotopy",
+   "results": "OK 8 hits: HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h, HomotopicalAlgebra.PathObject.RightHomotopy.trans, HomotopicalAlgebra.PrepathObject.RightHomotopy.trans, ContinuousMap.HomotopyWith.trans, ContinuousMap.HomotopyEquiv.trans, Path.Homotopy.trans, Path.Homotopic.trans, Path.Homotopy.trans_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*[Pp]ullback|[Pp]ullback.*homotopy|[Pp]aste.*[Pp]ullback",
+   "subdirectory": "AlgebraicTopology",
+   "results": "OK 2 hits: Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: both hits are the RightHomotopy.trans path-object composition already read at Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88, not a homotopy-pullback pasting result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy cartesian squares pasting lemma for fibrant simplicial sets",
+   "results": "OK 8 hits: HomotopicalAlgebra.FibrantObject.homMk_homMk, HomotopicalAlgebra.PathObject.trans_ι, HomotopicalAlgebra.PathObject.trans_P, HomotopicalAlgebra.BifibrantObject.homMk_homMk, HomotopicalAlgebra.FibrantObject.homMk_homMk_assoc, HomotopicalAlgebra.PathObject.instIsGoodTrans, HomotopicalAlgebra.PathObject.trans, HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. PathObject.trans (Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:276-286) constructs a path object by gluing; RightHomotopy.trans (RightHomotopy.lean:160-164) composes homotopies. Neither asserts homotopy-pullback cancellation. The grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?[Cc]artesian|[Hh]omotopy[Pp]ullback|homotopy.?pullback",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader grep returned no hits for homotopy-cartesian and homotopy-pullback terminology."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.PathObject.trans",
+   "results": "OK 7 hits: HomotopicalAlgebra.PathObject.trans, HomotopicalAlgebra.PathObject.instIsGoodTrans, HomotopicalAlgebra.PathObject.trans_P, HomotopicalAlgebra.PathObject.trans_ι, HomotopicalAlgebra.PathObject.trans_p₀, HomotopicalAlgebra.PathObject.trans_p₁, HomotopicalAlgebra.PathObject.RightHomotopy.trans",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. PathObject.trans (Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:276-286) constructs a path object by gluing; RightHomotopy.trans (RightHomotopy.lean:160-164) composes homotopies. Neither asserts homotopy-pullback cancellation. The grep returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cocartesian-composition-initiality",
@@ -108,5 +269,21 @@
   "group": "Q28"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-homotopy-pullback-pasting",
+  "worker": "stage1",
+  "blueprint": "The steps supply the generic homotopy-pullback pasting calculation used in Step 1 of lem-coef-infinity-cocartesian-composition-initiality, through the inherited chain to prop-coef-integral-exceptional-adjoint paragraph 2 (finite mapping-complex adjunction before R lim).",
+  "summary": "Restored the absent split from the saved draft and verified six steps: endpoint fibrations, mapping-path replacements, a strict comparison built by relative triangle lifting, its base change, cancellation by two-out-of-three, and independence of the concatenation representative. The latter now uses endpoint trivial fibrations rather than topological realization. No new nodes or statement changes. Second reading made the two endpoint-pair base changes explicit and corrected the weak-equivalence wording; the six-step argument and statement are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-ec0741a31",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-ec0741a31 (reviewer sub-agent of L); spot-checked: Read the item, all six steps and the full statements of all six cited nodes. Checked the source online at Kerodon Prop 3.4.1.11 (Tag 0110, Transitivity): commutative simplicial sets, right square a homotopy pullback, then left square ⇔ outer rectangle. The item states exactly this restricted to Kan complexes with the path model. The specified-homotopy clause goes beyond Kerodon; the delivery says so and proves it itself, so proof_origin=agent and the archive WANTED are right. No SGA is cited. Step 1: the endpoint-pair and single-endpoint lifting problems transpose to anodyne pushout-products (mono ∂I→I or ∂Δⁿ→Δⁿ against an anodyne horn), and the boundary characterization includes n=0. Step 2: E→C×C' and Q0→D×C' are pullbacks of (ev0,ev1) along c×id and g×k; C and D Kan make p and q fibrations; E→C is a trivial fibration, so j is a weak equivalence; r is a weak equivalence by hypothesis with the given η. Step 3: the horn data (η_x, kλ) agrees with the degenerate triangle (0,1,1) on j(C); the domain is the pushout-product of j with Λ²₁; F has the right endpoints, qF=p and Fj=r hold, and F is a weak equivalence by 2-of-3. Step 4: the fibration-invariance hypotheses hold exactly (α=F, β=id, γ=id, p and q fibrations); the identifications with P(c,h) and P(g,kh) are degreewise. Step 5: F_h∘l equals the outer comparison with the triangle-filler concatenation, and 2-of-3 gives left ⇔ outer. Step 6: the relative J-horn extension has fixed endpoints, M^J→M are trivial fibrations, so the result does not depend on the filler; in the strict case the outer path is constant. Edge cases: empty spaces, point spaces, discrete spaces, and pt→{0,1}→pt showing the right-square hypothesis is needed. proof_deps equal the union of uses, there is no cycle (140-node closure), and the route stays in unit sk-prop-sf-biduality-general apart from the definition def-cbc. No tool uses. No new nodes. rg duplicate search: lem-coef-sharp-pullback-calculus, lem-coef-kan-homotopy-pullback-invariance and lem-coef-rezk-diagonal-sharp do not state this; lem-coef-relative-right-kan-universal-restriction does a similar cancellation inline but is a consumer. No changes."
+ }
 }
