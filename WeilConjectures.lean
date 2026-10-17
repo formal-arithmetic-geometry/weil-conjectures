@@ -1780,6 +1780,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionLimit
+public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionScratch
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.TypePointFunctions
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitComparison

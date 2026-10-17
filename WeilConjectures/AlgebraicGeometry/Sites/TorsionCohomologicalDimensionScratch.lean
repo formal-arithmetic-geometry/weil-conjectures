@@ -22,8 +22,9 @@ namespace AlgebraicGeometry.Scheme
 open _root_.AlgebraicGeometry.Etale
 
 /-- `cd_tor` descends along finite morphisms from a quasi-compact quasi-separated source: for
-`f : X ⟶ Y` finite, `Hᵠ(X, G) = Hᵠ(Y, f_* G)` (`AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite`)
-and `f_*` preserves sheaves killed by an integer. -/
+`f : X ⟶ Y` finite, `Hᵠ(X, G) = Hᵠ(Y, f_* G)`
+(`AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite`) and `f_*` preserves
+sheaves killed by an integer. -/
 lemma HasTorsionCohomologicalDimensionLE.of_isFinite {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
     [CompactSpace X] [QuasiSeparatedSpace X] {c : ℕ} (h : Y.HasTorsionCohomologicalDimensionLE c) :
     X.HasTorsionCohomologicalDimensionLE c := fun G hG q hq ↦
@@ -121,8 +122,9 @@ lemma isZero_rightDerived_lowerStar_of_forall_isAffine {T Y : Scheme.{u}} (g : T
       ((((MorphismProperty.Over.pullback @Etale ⊤ g).obj W).hom)^*[AddCommGrpCat.{u + 1}].obj G)
         q)) :
     IsZero ((((g)_*[AddCommGrpCat.{u + 1}]).rightDerived q).obj G) := by
-  refine IsZero.of_iso ?_ ((((g)_*[AddCommGrpCat.{u + 1}]).homologyRightDerivedFunctorPlusObjSingleFunctorIso
-    G q).symm ≪≫ (higherDirectImageSheafifiedPresheaf g G q).symm)
+  refine IsZero.of_iso ?_
+    ((((g)_*[AddCommGrpCat.{u + 1}]).homologyRightDerivedFunctorPlusObjSingleFunctorIso G q).symm ≪≫
+      (higherDirectImageSheafifiedPresheaf g G q).symm)
   refine isZero_presheafToSheaf_of_isAffine _ fun W hW ↦ ?_
   exact AddCommGrpCat.isZero_iff_subsingleton.1
     (isZero_rightDerived_sectionsFunctorAt_of_subsingleton_H _ G q (h W hW))
