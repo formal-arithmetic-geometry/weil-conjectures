@@ -11,7 +11,9 @@
   "def-pur-conventions",
   "def-pur-support-cohomology",
   "def-weil-closed-immersion",
-  "def-sbc-affine-space"
+  "def-sbc-affine-space",
+  "def-asd-finite-etale-tate-sheaf",
+  "lem-weil-pbc-comparison-pullback"
  ],
  "proof": [
   {
@@ -128,5 +130,56 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-449cb0030 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-pur-affine-line-ordinary-invariance, the full statements of every cited node, the parent lem-pur-frame-independence (steps 5-6, its only citer), the main-20261015 shear paragraph, the sk-prop-a1-kummer unit (statement and steps) in both the master and main-20261015 copies, and Stacks Tag 09XP (etale-cohomology.tex, section-cohomology-support, line 13966). The item is true for an arbitrary k-scheme X and closed C. The parent needs that generality, because its etale neighbourhood U has no finiteness hypothesis. Step 1: thm-pur-with-support-exactness gives the localization sequence for any scheme on both sites, functorial in the pair; p is a morphism of pairs because p^{-1}(U)=A^1_U. lem-pur-supported-cup-functoriality gives pullback for any morphism, compatible with open restriction, connecting maps and the site comparison. The child applies to X and to U. Step 2 is a correct written-out five-lemma chase, which I redid. Step 3: s^{-1}(C_1)=C scheme-theoretically and s^*p^*=id, so s^*=(p^*)^{-1}. The child is true for arbitrary X. The unit's own reduction step (stalk at the strict henselization, qcqs p, smooth base change along A^1_k -> Spec k) never uses finite type. The pro-etale case follows by evaluating on w-contractible objects, which are again arbitrary k-schemes. It is not a duplicate: lem-pur-a1-direct-image and prop-pur-gm-relative-kummer(1) assume a separated finite-type base, and a whole-DAG scan plus the blueprint search found nothing else. It does not restate a clause of the item, since it is the support-free input. It satisfies B1-B9: statement only, three kinds of search, correct created and blueprint fields, no SGA. All proof dependencies are in unit sk-prop-a1-kummer, so no tool_uses are needed. Only finite coefficients A_{E,n} are used, and no target is touched. Minor, not a fault: the etale-site twist A(r) is a DAG-wide convention already used by lem-pur-supported-cup-functoriality. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37a37341f",
+  "group": "Q105",
+  "result": "fix",
+  "note": "H3 conclusion strengthened: delivered theorem asserted IsIso of affineSupportComparison on (X,C) and (A1_X,C1); the node only asks that the two sites' p^* isomorphisms be compatible with the canonical comparison (the commuting square, kept), and its proof steps do not prove comparison invertibility. fixes/SupportedAffineLineHomotopy.lean removes those two conjuncts and the matching docstring sentence; fixes/<item>.report.md appends a Maintainer fix section. All other clauses match the node: arbitrary k-scheme X, closed immersion i, C1 = pullback.snd i p with a complement-equality helper, all q,r in Z, IsIso of the etale and pro-etale projection pullbacks, the comparison square, both inverse identities for every section on both sites, zero and one sections equal. Twist: finiteEtaleTateSheaf on Spec k with ringChar annihilator (canonical, covers every n>=1 and every r), pulled back by a^* then comparisonUpperStar (etale-origin). Canonical maps come from ExistsUnique kernel factorizations (determined, not hollow) and rightDerivedFunctorPlusBaseChange. Module-valued etale H is the recorded generic supportedSectionsFunctor specialized, so not a second definition. Universes u/u+1 as published, no unbound variables, no line over 100 characters, edge cases checked. nt_compile.py: delivered and fixed modules both rc 0 with no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedAffineLineHomotopy",
+  "declaration": "WeilConjectures.PurityFiniteSetting.supportedAffineLineHomotopy",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineSupportKernel",
+   "AlgebraicGeometry.Etale.affineSupportInclusion",
+   "AlgebraicGeometry.Etale.affineGlobalSectionMap",
+   "AlgebraicGeometry.Etale.affineSupportUnit_existsUnique",
+   "AlgebraicGeometry.Etale.affineSupportUnit",
+   "AlgebraicGeometry.Etale.affineSupportDerivedMap",
+   "AlgebraicGeometry.ProEtale.affineSupportInclusion",
+   "AlgebraicGeometry.ProEtale.affineGlobalSectionMap",
+   "AlgebraicGeometry.ProEtale.affineSupportUnit_existsUnique",
+   "AlgebraicGeometry.ProEtale.affineSupportUnit",
+   "AlgebraicGeometry.ProEtale.affineSupportDerivedMap",
+   "AlgebraicGeometry.ProEtale.affineSupportSiteUnit_existsUnique",
+   "AlgebraicGeometry.ProEtale.affineSupportSiteUnit",
+   "AlgebraicGeometry.ProEtale.affineSupportSiteDerivedMap",
+   "WeilConjectures.PurityFiniteSetting.affineSupportBaseTwist",
+   "WeilConjectures.PurityFiniteSetting.affineSupportEtaleTwist",
+   "WeilConjectures.PurityFiniteSetting.affineSupportProEtaleTwist",
+   "WeilConjectures.PurityFiniteSetting.affineSupportEtaleH",
+   "WeilConjectures.PurityFiniteSetting.affineSupportProEtaleH",
+   "WeilConjectures.PurityFiniteSetting.affineSupportEtalePullback",
+   "WeilConjectures.PurityFiniteSetting.affineSupportProEtalePullback",
+   "WeilConjectures.PurityFiniteSetting.affineSupportComparison",
+   "WeilConjectures.PurityFiniteSetting.affineSupportProjectionComplement",
+   "WeilConjectures.PurityFiniteSetting.affineSupportSectionComplement",
+   "WeilConjectures.PurityFiniteSetting.affineSupportBaseChangeEtale",
+   "WeilConjectures.PurityFiniteSetting.affineSupportSectionEtale",
+   "WeilConjectures.PurityFiniteSetting.affineSupportBaseChangeProEtale",
+   "WeilConjectures.PurityFiniteSetting.affineSupportSectionProEtale",
+   "WeilConjectures.PurityFiniteSetting.supportedAffineLineHomotopy"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedAffineLineHomotopy.lean",
+  "statement": "theorem supportedAffineLineHomotopy (P : PurityFiniteSetting.{u}) {C X : Scheme.{u}} [X.Over (Spec (.of P.field.k))] (i : C ⟶ X) [IsClosedImmersion i] (q r : ℤ) : IsIso (P.affineSupportBaseChangeEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) q r) ∧ IsIso (P.affineSupportBaseChangeProEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) q r) ∧ (P.affineSupportBaseChangeEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) q r ≫ P.affineSupportComparison (pullback.snd i (AffineSpace (ULift.{u} (Fin 1)) X ↘ X)) ((AffineSpace (ULift.{u} (Fin 1)) X ↘ X) ≫ (X ↘ Spec (.of P.field.k))) q r = P.affineSupportComparison i (X ↘ Spec (.of P.field.k)) q r ≫ P.affineSupportBaseChangeProEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) q r) ∧ (∀ (s : X ⟶ AffineSpace (ULift.{u} (Fin 1)) X) (hs : s ≫ (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) = 𝟙 X), (P.affineSupportBaseChangeEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) q r ≫ P.affineSupportSectionEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) s hs q r = 𝟙 _) ∧ (P.affineSupportSectionEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) s hs q r ≫ P.affineSupportBaseChangeEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) q r = 𝟙 _) ∧ (P.affineSupportBaseChangeProEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) q r ≫ P.affineSupportSectionProEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) s hs q r = 𝟙 _) ∧ (P.affineSupportSectionProEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) s hs q r ≫ P.affineSupportBaseChangeProEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) q r = 𝟙 _)) ∧ (P.affineSupportSectionEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) X) (AffineSpace.zeroSection_comp_over _ _) q r = P.affineSupportSectionEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) (AffineSpace.oneSection (ULift.{u} (Fin 1)) X) (AffineSpace.oneSection_comp_over _ _) q r) ∧ (P.affineSupportSectionProEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) X) (AffineSpace.zeroSection_comp_over _ _) q r = P.affineSupportSectionProEtale i (X ↘ Spec (.of P.field.k)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) (AffineSpace.oneSection (ULift.{u} (Fin 1)) X) (AffineSpace.oneSection_comp_over _ _) q r)",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical support maps are the unique maps fixed by the adjunction units and kernel inclusions, derived by rightDerivedFunctorPlusBaseChange. Coefficients use the existing signed finite Tate sheaf with the ring characteristic as annihilator, pulled from Spec k without choosing a trivialization. The generic recorded support kernel is specialized to modules; pro-etale cohomology uses the recorded supportHypercohomology. The statement retains arbitrary schemes, all integer twists and degrees, every section, and both sites.",
+  "fixed_by": "NT-stage2-cc-37a37341f"
  }
 }

@@ -198,5 +198,32 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-58c6ebd1c (reviewer sub-agent of L); spot-checked: I read the whole item, all nine cited node statements, the parent lem-coef-operadic-colimit-finite-amalgamation (its only citer, applying it with B=J_1, K=J_2, r=q_act and a constant target W), the unit and chapter records, and the blueprint ancestor's proof. The statement is true and not weakened: the constant-target mapping space is the limit over B^op of the pointwise mapping spaces, and limits commute with pullbacks. I tested it on B=Δ^0, B=∅, K=∅, both empty, r=id, X and Y terminal, and B=Δ^1. Step 1 checks: projective-model gives the simplicial Kan structure and SM7; model-coherent-diagrams gives monomorphism cofibrations and its final clause on fibrant cospans; kan-fibration-fiber-criterion with f=id_Z gives the path object, which is the path pullback of def-coef-infinity-relative-cone. Step 2 checks: right-fibration classification plus pullback of the target-fixed arrow fibration gives Map_P(1,F)≃Fun_{/B}(B,E); I checked the n-simplices against U_{Fun(B,D)}(H,Δ_B t), and the pinch comparison applies because Fun(B,D) is a quasicategory. Step 3: the coherent square in Fun(B^op,S) comes from functoriality and first-variable transport along α̂, plus the isomorphism Fun(B,Fun(K,X))≅Fun(B×K,X). Step 4: objectwise limit detection for a small simplicial shape and preservation of limits by the covariant representable, both stated clauses of yoneda-presheaf-limits. Step 5 is elementary. No extra hypotheses and no cycle. The duplicate candidates (relative-cocone-parameters, coherent-diagram-coyoneda, coherent-pullback-comparison, terminal-pullback-criterion) all state something different. I accept the two declared tool_uses, lem-cbc-kan-fibration-fiber-criterion and lem-cbc-enhanced-functor-cone-calculus: generic, used as black boxes, off the route. HTT is not archived; the proof is by:agent from node statements, WANTED is recorded, and no SGA is used. One fix (B4): the second reading's TeX normalization had turned the array row separators \\\\ in both displayed squares into control-spaces, so each array was one row with five &. I restored them in fixes/dag/nodes/sec-six-functors/lem-coef-pointwise-constant-target-square-assembly.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f68944cf",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement matches the node and source clause by clause: X,Y quasicategories, arbitrary r, B,K any SSet.{u}, a, f, α as a directed SSet.Homotopy f (fst≫a), w; pointwise roof squares imply the global one; B-empty gives four contractible corners; K-empty gives two contractible right corners and both left-column iffs. The cylinder roof ((L⊗Δ1)⊔_{ι₁}H with the restriction/postcomposition square and the recorded IsHomotopyPullbackSquare) correctly models composition with α and its canonical homotopy: H→M is right anodyne hence cofinal, so end restriction is an equivalence, natural in r. Edge cases and universes checked; no hollow definitions; exactly one sorry; docstrings have source and blueprint; lean.statement verbatim and declarations list exact; only the node's lean field changed; report has Worker report and Second reading by Q06 sections. nt_compile.py --json on the snapshot file against the side overlay: rc=0, 2.2 s, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PointwiseConstantTargetSquareAssembly",
+  "declaration": "SSet.Enhanced.pointwise_constant_target_square_assembly",
+  "declarations": [
+   "SSet.Enhanced.constantTargetCylinder",
+   "SSet.Enhanced.constantTargetCylinderBase",
+   "SSet.Enhanced.constantTargetCylinderDiagram",
+   "SSet.Enhanced.ConstantTargetRestrictionSquare",
+   "SSet.Enhanced.constantTargetCylinderVertex",
+   "SSet.Enhanced.pointwise_constant_target_square_assembly"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PointwiseConstantTargetSquareAssembly.lean",
+  "statement": "theorem pointwise_constant_target_square_assembly {X Y B K : SSet.{u}} [Quasicategory X] [Quasicategory Y] (r : X ⟶ Y) (a : B ⟶ X) (f : B ⊗ K ⟶ X) (α : SSet.Homotopy f (fst B K ≫ a)) (w : X _⦋0⦌) : ((∀ b : B _⦋0⦌, ConstantTargetRestrictionSquare r (constantTargetCylinderBase (stdSimplex.isTerminalObj₀.from K)) (constantTargetCylinderVertex b ≫ constantTargetCylinderDiagram (fst B K) a f α) w) → ConstantTargetRestrictionSquare r (constantTargetCylinderBase (fst B K)) (constantTargetCylinderDiagram (fst B K) a f α) w) ∧ (IsEmpty (B _⦋0⦌) → IsContractible (mappingSpace ((ihom B).obj X) (diagramVertex a) ((constantDiagrams B X).app _ w)) ∧ IsContractible (mappingSpace ((ihom (B ⊗ K)).obj X) (diagramVertex f) ((constantDiagrams (B ⊗ K) X).app _ w)) ∧ IsContractible (mappingSpace ((ihom B).obj Y) (diagramVertex (a ≫ r)) ((constantDiagrams B Y).app _ (r.app _ w))) ∧ IsContractible (mappingSpace ((ihom (B ⊗ K)).obj Y) (diagramVertex (f ≫ r)) ((constantDiagrams (B ⊗ K) Y).app _ (r.app _ w)))) ∧ (IsEmpty (K _⦋0⦌) → IsContractible (mappingSpace ((ihom (B ⊗ K)).obj X) (diagramVertex f) ((constantDiagrams (B ⊗ K) X).app _ w)) ∧ IsContractible (mappingSpace ((ihom (B ⊗ K)).obj Y) (diagramVertex (f ≫ r)) ((constantDiagrams (B ⊗ K) Y).app _ (r.app _ w))) ∧ ((∀ b : B _⦋0⦌, ConstantTargetRestrictionSquare r (constantTargetCylinderBase (stdSimplex.isTerminalObj₀.from K)) (constantTargetCylinderVertex b ≫ constantTargetCylinderDiagram (fst B K) a f α) w) ↔ ∀ b : B _⦋0⦌, IsWeakHomotopyEquivalence (mappingSpaceMap r (a.app _ b) w)) ∧ (ConstantTargetRestrictionSquare r (constantTargetCylinderBase (fst B K)) (constantTargetCylinderDiagram (fst B K) a f α) w ↔ IsWeakHomotopyEquivalence (mappingSpaceMap ((ihom B).map r) (diagramVertex a) ((constantDiagrams B X).app _ w))))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical composition square is represented by its functorial cylinder roof. Restricting the left corners along the terminal-end inclusion identifies them with exactly the displayed Map(a,w) corners; the zero-end restriction represents composition with the supplied transformation, including the canonical commutation homotopy. No composition maps or homotopies are chosen. The theorem also states both empty-shape clauses explicitly."
  }
 }
