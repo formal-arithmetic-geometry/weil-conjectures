@@ -149,7 +149,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
     (Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricFiber) (r : ℕ)
   (hθ : θ.hom ≫ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
     ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
-  (hψ : ψ.hom ≫ (Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
+  (hψ : ψ.hom ≫
+      (Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
     ((Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫
       ψ.hom)
   (hsq : θ.hom ≫ Scheme.Hom.geometricFiberMap (X' ↘ Spec (CommRingCat.of k₀'))
@@ -169,6 +170,7 @@ lemma cohomology_eq (F : WeilSheaf k₀ l Y) (i : ℤ) :
         (toComplex.obj F))).globalSections :=
   rfl
 
+omit [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] in
 lemma globalSections_frobenius_apply (F : WeilSheaf k₀ l Y) (x : F.globalSections.carrier) :
     F.globalSections.frobenius x = WeilCoefficients.linearEquivOfIso
       (((globalSectionsLowerStarIso _
@@ -176,6 +178,7 @@ lemma globalSections_frobenius_apply (F : WeilSheaf k₀ l Y) (x : F.globalSecti
         (Sheaf.Γ _ _).mapIso ((AdicSheaf.forget _).mapIso F.obj.str)) x :=
   rfl
 
+omit [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] in
 lemma globalSections_frobeniusEnd (F : WeilSheaf k₀ l Y) :
     F.globalSections.frobeniusEnd = (WeilCoefficients.linearEquivOfIso
       (((globalSectionsLowerStarIso _
@@ -246,10 +249,12 @@ theorem exists_linearEquiv_cohomology_adicConstant_of_iso (i : ℤ) :
   rw [globalSections_frobenius_apply, globalSections_frobeniusEnd]
   refine ProEtale.linearEquivOfIso_apply_linearEquivOfIso _ _ E r ?_ x
   change globalSectionsStr _ ((AdicSheaf.forget _).map N'.str.hom) ≫ E.hom =
-    E.hom ≫ @HPow.hPow (End _) ℕ _ _ (globalSectionsStr _ ((AdicSheaf.forget _).map N.str.hom)) r
+    E.hom ≫
+      @HPow.hPow (End _) ℕ _ _ (globalSectionsStr _ ((AdicSheaf.forget _).map N.str.hom)) r
   rw [← globalSectionsStr_frobeniusPowIso N r]
-  have hf : ((Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv)_*[
-      WeilCoefficients.{u} l].map ((AdicSheaf.forget _).map J.hom.hom.f) ≫
+  have hf :
+      ((Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv)_*[
+        WeilCoefficients.{u} l].map ((AdicSheaf.forget _).map J.hom.hom.f) ≫
         (AdicSheaf.forget _).map (Tp.obj N).str.hom =
       (AdicSheaf.forget _).map N'.str.hom ≫ (AdicSheaf.forget _).map J.hom.hom.f := by
     have := congrArg (AdicSheaf.forget _).map J.hom.hom.h
