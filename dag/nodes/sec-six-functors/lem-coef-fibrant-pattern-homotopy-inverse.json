@@ -219,5 +219,23 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-007e598bf (reviewer sub-agent of L); spot-checked: I read the item (5 steps, no new nodes) and every cited statement in full: def-coef-categorical-pattern-fibrancy, lem-coef-categorical-pattern-model-calculus, lem-coef-marked-point-cartesian-model, lem-coef-kan-quillen-right-proper, lem-coef-model-cylinder-whitehead and lem-cbc-simplicial-homotopy-equivalence-weak. I also read the Whitehead leaf's Mathlib match in Homotopy.lean (whitehead and leftHomotopy).\n\nStep 1: {0}⊂Δ^1 is the horn Λ^1_0, so it is a Kan trivial cofibration. Its pushout product with ∅→(Δ^0)^♯, using the tensor X×K^♯, is exactly e_0.\n\nStep 2: the pattern pushout-product clause applied to ∅→A and e_0 gives i_0 as a trivial cofibration. Two-out-of-three then makes p a weak equivalence. (i_0,i_1) is injective on simplices, so it is a cofibration. This meets the good-cylinder definition clause by clause. Every object is cofibrant, and fibrant is the same as P-fibered.\n\nStep 3: the endpoint orders match the item (H|0=gf, H|1=id; J|0=fg, J|1=id).\n\nStep 4: I checked Φ by hand. It is simplicial, it preserves markings and is over B, it is natural in θ, and its endpoints are ab=(gf)^* and the identity. The same holds for J.\n\nStep 5: the tool lemma applies with u=f^*, v=g^*, either endpoint order allowed. The model-calculus testing clause then gives both equivalences.\n\nThe statement is unchanged and matches its only citer, lem-coef-finite-pattern-universe-comparison. There is no cycle and no duplicate in the DAG. Edge cases (∅ objects, empty pattern family and empty K_a, no basepoints) are fine. I accept the declared tool_use of lem-cbc-simplicial-homotopy-equivalence-weak: its unit sk-prop-sf-cbc is outside the item's route, it is a generic black box applied after the homotopies are built, and it replaces no unit step. HA B.2.4 is not archived, so the source match is from my own knowledge of that lemma. The proof stands on the cited statements, and proof_origin=agent with WANTED is correct. No SGA is used and no fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-912a1acaa",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Statement, dependencies, source match, edge cases, docstrings, report sections, and Lean signature verified; sandbox and library scompile passed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FibrantPatternHomotopyInverse",
+  "declaration": "SSet.Enhanced.CategoricalPattern.fibrant_pattern_homotopy_inverse",
+  "file": "lean/Sheaf/CategoryTheory/FibrantPatternHomotopyInverse.lean",
+  "statement": "theorem fibrant_pattern_homotopy_inverse {P : CategoricalPattern.{u}} {F G : Object P} (f : F ⟶ G) (hF : IsCategoricalPatternFibered P F) (hG : IsCategoricalPatternFibered P G) : (weak f ↔ ∃ (g : G ⟶ F) (H : (tensor (SSet.Marked.sharp (Δ[1] : SSet.{u}))).obj F ⟶ F) (J : (tensor (SSet.Marked.sharp (Δ[1] : SSet.{u}))).obj G ⟶ G), SSet.ι₀ ≫ H.map = (f ≫ g).map ∧ SSet.ι₁ ≫ H.map = 𝟙 F.underlying.underlying ∧ SSet.ι₀ ≫ J.map = (g ≫ f).map ∧ SSet.ι₁ ≫ J.map = 𝟙 G.underlying.underlying) ∧ ((∃ (g : G ⟶ F) (H : (tensor (SSet.Marked.sharp (Δ[1] : SSet.{u}))).obj F ⟶ F) (J : (tensor (SSet.Marked.sharp (Δ[1] : SSet.{u}))).obj G ⟶ G), SSet.ι₀ ≫ H.map = (f ≫ g).map ∧ SSet.ι₁ ≫ H.map = 𝟙 F.underlying.underlying ∧ SSet.ι₀ ≫ J.map = (g ≫ f).map ∧ SSet.ι₁ ≫ J.map = 𝟙 G.underlying.underlying) ↔ ∀ Z : Object P, IsCategoricalPatternFibered P Z → IsWeakHomotopyEquivalence (mapSharpPre f Z))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

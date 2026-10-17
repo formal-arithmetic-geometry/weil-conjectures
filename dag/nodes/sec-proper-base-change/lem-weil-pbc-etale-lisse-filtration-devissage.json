@@ -276,5 +276,23 @@
   "group": "Q152",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-1eb572bbe (reviewer sub-agent of L); spot-checked: Read the item, the report and all 7 cited statements in full. Statement: S is strictly full, contains 0 and is closed under kernels, cokernels and extensions, which is exactly Homology Tag 0754 (weak Serre). It is true; tested r=0, r=1, zero quotients, S=B, S={0} and Phi=0. Sources checked: more-etale.tex Tag 0GKY (lemma-loc-constant-shriek-rel-dim-1), last paragraph of the proof (finite filtration by constant sheaves reduces to the constant case), and derived.tex Tag 06UQ, line 5936, including the bounded versions. Step 1: the hypotheses of lem-sbc-cohomology-in-weak-serre-subcategory match the item's word for word with ambient B. Its D+ intersection clause and def-weil-triangulated-subcategory give zero and middle-vertex closure; strict fullness removes the 'up to isomorphism'. Step 2: the base case Phi(0)=0 follows from additivity and is elementary. Step 3: the Mathlib leaf lem-sf-derived-ses-triangle (singleTriangle_distinguished) gives the triangle; the degree-0 complexes lie in D+ with the inherited structure; def-weil-triangulated-category matches the exact-functor hypothesis, shift isomorphism included. Step 4: the induction is set up correctly (P(i) stated first, base case, step), with no hidden lemma. proof_deps equals the union of the step uses. No new nodes. No duplicate found in a scripted DAG search for filtration plus Serre/triangulated/extension; the only citer is the parent, step 5; no cycle. Accepted tool_use: lem-sbc-cohomology-in-weak-serre-subcategory, a generic Stacks 06UQ result from unit sk-rem-rest used as a black box that replaces no unit step. No SGA source; no base-change morphism or coefficient category is involved. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b2b4d7875",
+  "group": "NK",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, module, report, edge cases, universes, and docstrings; scompile.py local/server compilation passed cleanly. Review written to review.md; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleLisseFiltrationDevissage",
+  "file": "lean/Sheaf/Paper/EtaleLisseFiltrationDevissage.lean",
+  "declaration": "CategoryTheory.cohomology_mem_of_filtration",
+  "statement": "theorem cohomology_mem_of_filtration {A : Type u} {B : Type u'} [Category.{v, u} A] [Category.{v', u'} B] [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B] (Φ : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [Φ.CommShift ℤ] [Φ.IsTriangulated] [Φ.Additive] (S : ObjectProperty B) [S.ContainsZero] [S.IsClosedUnderIsomorphisms] [S.IsClosedUnderKernels] [S.IsClosedUnderCokernels] [S.IsClosedUnderExtensions] (X : A) (r : ℕ) (F : Fin (r + 1) → Subobject X) (h₀ : F 0 = ⊥) (hᵣ : F (Fin.last r) = ⊤) (hF : ∀ i : Fin r, F i.castSucc ≤ F i.succ) (hQ : ∀ (i : Fin r) (q : ℤ), S ((DerivedCategory.Plus.homologyFunctor B q).obj (Φ.obj ((DerivedCategory.Plus.singleFunctor A 0).obj (cokernel (Subobject.ofLE (F i.castSucc) (F i.succ) (hF i))))))) : ∀ q : ℤ, S ((DerivedCategory.Plus.homologyFunctor B q).obj (Φ.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X)))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

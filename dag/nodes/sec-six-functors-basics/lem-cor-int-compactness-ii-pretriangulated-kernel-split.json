@@ -265,5 +265,23 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-4eb965359 (reviewer sub-agent of L); spot-checked: I read the item and the new leaf in full, and every cited statement. The item statement is unchanged and true: Stacks derived.tex lemma-when-split (05QU, l.730), (1)=>(3), carried through an additive functor. It is exactly what the parent det-cor-int-compactness-ii-extension-zero Step 2 needs, where only the one existing kernel is known. Step 1: a kernel arrow is mono, from uniqueness in the stated kernel definition. Step 2: TR1 gives the cone (k,p,h); TR2 twice gives (h,-k[1],-p[1]); clause (i) of lem-weil-pbc-hom-into-triangle-exact gives k[1]h=0, and r0[1] then gives h=0. lem-pc-derived-zero-third-split then gives e with ek=i_K and p=p_Z e. I recomputed rk=1, pk=0, ps=1 and kr+sp=e^-1(i_Kp_K+i_Zp_Z)e=1. Step 3: d=gp; g is mono through the given kernel and ps=1, pk=0, so the leaf gives t with tg=1 and td=p. Step 4: F(d)F(k)=0, F(p)a=F(t)F(d)a=0, a=F(k)F(r)a, and uniqueness follows from F(r)F(k)=1, for arbitrary T in a merely preadditive D. New node lem-sfb-pretriangulated-monomorphisms-split: an exact Mathlib leaf. I read Pretriangulated.lean:466-471, the SplitMonoCategory C instance, and EpiMono.lean:50-54,168-172. Its statement is self-contained, B9 refs are right and the searches are raw records. rg for SplitMonoCategory/isSplitMono_of_mono and mono+triangulated found no duplicate, and the leaf does not restate a clause of the item. Every dependency is a Mathlib leaf, so there are no route or tool_uses issues and no cycle. There is no target, base-change morphism or coefficient comparison, and no SGA. Edge cases d=0, d mono, d=1 and the zero functor all check out. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9123ad2c5",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Statement, dependencies, source, declarations, edge cases, report headings, and per-file compilation verified; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PretriangulatedKernelSplit",
+  "declaration": "CategoryTheory.Functor.preservesKernel_of_pretriangulated",
+  "file": "lean/Sheaf/CategoryTheory/PretriangulatedKernelSplit.lean",
+  "statement": "theorem preservesKernel_of_pretriangulated {C : Type u₁} [Category.{v₁} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] {D : Type u₂} [Category.{v₂} D] [Preadditive D] (F : C ⥤ D) [F.Additive] {X Y K : C} (d : X ⟶ Y) (k : K ⟶ X) (hk : k ≫ d = 0) (hK : IsLimit (KernelFork.ofι k hk)) : Nonempty (IsLimit (KernelFork.ofι (f := F.map d) (F.map k) (by rw [← F.map_comp, hk, F.map_zero])))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
