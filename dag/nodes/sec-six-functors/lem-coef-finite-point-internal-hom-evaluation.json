@@ -1,0 +1,75 @@
+{
+ "id": "lem-coef-finite-point-internal-hom-evaluation",
+ "kind": "statement",
+ "title": "Finite point internal-Hom evaluation comparison",
+ "statement": "Fix the finite-field datum with $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $s=\\operatorname{Spec}k$. For every $C\\in D^b_{ctf}(s,A_n)$ on the small pro-etale site [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude], put $c=\\operatorname{Fib}_s(C)$ [def-weil-finite-coefficient-point] and $\\omega_{s,n}=Ra_s^!(A_n)_s$ [def-weil-exceptional-inverse-image]. The canonical evaluation-transpose map, formed using the point-fibre tensor and unit comparisons [lem-sf-point-fibre-derived-tensor] and the derived sheaf internal Hom [def-weil-derived-pullback-tensor-hom, def-pur-derived-internal-hom],\n$$\n\\kappa_C:\\operatorname{Fib}_s\\bigl(R\\mathcal Hom_{A_n}(C,\\omega_{s,n})\\bigr)\\longrightarrow R\\operatorname{Hom}_{A_n}(c,A_n),\n$$\nis an isomorphism, natural in $C$. The normalization $\\omega_{s,n}\\cong(A_n)_s$ is the following one: for $a_s=\\operatorname{id}_s$ with the identity compactification the etale compact support is the identity and its right adjoint is $a_s^\\times=\\operatorname{id}$, so $\\omega_{s,n}=\\nu_s^*R\\nu_{s,*}(A_n)_s$ for the comparison morphism $\\nu_s:s_{\\mathrm{proet}}\\to s_{\\mathrm{et}}$ [def-weil-pbc-site-comparison-morphism], and the normalization is the counit $\\nu_s^*R\\nu_{s,*}(A_n)_s\\to(A_n)_s$, which is an isomorphism because $(A_n)_s=\\nu_s^*(A_n)_s$ and the unit $\\operatorname{id}\\to R\\nu_{s,*}\\nu_s^*$ is an isomorphism on bounded-below etale complexes [thm-weil-pbc-site-comparison]. The map $\\kappa_C$ is characterized by evaluation: after identifying $\\omega_{s,n}\\cong(A_n)_s$, the coefficient evaluation composed with $\\kappa_C\\otimes 1_c$ is the point-fibre of the sheaf evaluation.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Opening paragraph: at the identity point, the dualizing object is the coefficient unit and the displayed identification of D_s is the coefficient-module dual, computed by the derived internal Hom definition."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-coefficient-point",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-derived-internal-hom",
+  "lem-sf-point-fibre-derived-tensor",
+  "def-weil-pbc-site-comparison-morphism",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient point internal Hom evaluation transpose derived module dual",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FGModuleCat.FGModuleCatEvaluation\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (V : FGModuleCat K) →\\n      CategoryTheory.MonoidalCategoryStruct.tensorObj (FGModuleCat.FGModuleCatDual K V) V ⟶\\n        CategoryTheory.MonoidalCategoryStruct.tensorUnit (FGModuleCat K)\", \"doc\": \"The morphism from the tensor product of the dual module $ \\\\text{Hom}_K(V, K) $ and the module $ V $ to the identity endofunctor on the category of finitely generated $ K $-modules, constructed via the\"}\n  {\"name\": \"ModuleCat.ihom_ev_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M N : ModuleCat R),\\n  (CategoryTheory.ihom.ev M).app N =\\n    ModuleCat.ofHom\\n      ((TensorProduct.uncurry (RingHom.id R) ↑M ↑((CategoryTheory.ihom M).obj N) ↑N)\\n        (LinearMap.lcomp R ↑N ↑ModuleCat.homLinearEquiv ∘ₗ LinearMap.id.flip))\", \"doc\": \"For modules $ M $ and $ N $ over a commutative ring $ R $, the evaluation morphism $ \\\\mathrm{ev}_M: [M, N] \\\\otimes M \\\\to N $ corresponds to the composition of uncurrying the bilinear map $ [M, N] \\\\tim\"}\n  {\"name\": \"coevaluation\", \"module\": \"Mathlib/LinearAlgebra/Coevaluation\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (V : Type v) →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module K V] → [FiniteDimensional K V] → K →ₗ[K] TensorProduct K V (Module.Dual K V)\", \"doc\": \"Let $K$ be a field and $V$ be a finite-dimensional vector space over $K$. The coevaluation map is the $K$-linear map from $K$ to the tensor product of $V$ and its dual space $V^*$, which is defined by\"}\n  {\"name\": \"FGModuleCat.FGModuleCatEvaluation_apply'\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"∀ (K : Type u) [inst : Field K] (V : FGModuleCat K) (f : ↑(FGModuleCat.FGModuleCatDual K V)) (x : ↑V),\\n  (ModuleCat.Hom.hom (FGModuleCat.FGModuleCatEvaluation K V).hom) (f ⊗ₜ[K] x) = f.toFun x\", \"doc\": \"The evaluation morphism maps the tensor product of the dual module $\\\\text{Hom}_K(V, K)$ and the module $V$ to the field $K$ by evaluating functionals on vectors, i.e., for $f \\\\in \\\\text{Hom}_K(V, K)$ a\"}\n  {\"name\": \"FGModuleCat.FGModuleCatEvaluation_apply\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"∀ (K : Type u) [inst : Field K] (V : FGModuleCat K) (f : ↑(FGModuleCat.FGModuleCatDual K V)) (x : ↑V),\\n  (CategoryTheory.ConcreteCategory.hom (FGModuleCat.FGModuleCatEvaluation K V).hom) (f ⊗ₜ[K] x) = f.toFun x\", \"doc\": \"For a finitely generated module $ V $ over a field $ K $, the evaluation morphism $ \\\\varepsilon: V^\\\\ast \\\\otimes_K V \\\\to K $ satisfies $ \\\\varepsilon(f \\\\otimes x) = f(x) $ for all $ f \\\\in V^\\\\ast $ and $\"}\n  {\"name\": \"FGModuleCat.FGModuleCatCoevaluation\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (V : FGModuleCat K) →\\n      CategoryTheory.MonoidalCategoryStruct.tensorUnit (FGModuleCat K) ⟶\\n        CategoryTheory.MonoidalCategoryStruct.tensorObj V (FGModuleCat.FGModuleCatDual K V)\", \"doc\": \"The coevaluation morphism from the identity object (the base field $ K $) to the tensor product of a finitely generated $ K $-module $ V $ with its dual module $ V^* $, which is part of the monoidal s\"}\n  {\"name\": \"ModuleCat.ihom_coev_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M N : ModuleCat R),\\n  (CategoryTheory.ihom.coev M).app N =\\n    ModuleCat.ofHom₂\\n      (TensorProduct.mk R ↑(Opposite.unop (Opposite.op M)) ↑((CategoryTheory.Functor.id (ModuleCat R)).obj N)).flip\", \"doc\": \"For any modules $ M $ and $ N $ over a commutative ring $ R $, the coevaluation map applied to $ N $ is equal to the flipped bilinear map from $ M \\\\times N $ to their tensor product $ M \\\\otimes_R N $,\"}\n  {\"name\": \"transpose_dualTensorHom\", \"module\": \"Mathlib/LinearAlgebra/Contraction\", \"type\": \"∀ {R : Type u_2} {M : Type u_3} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  (f : Module.Dual R M) (m : M),\\n  Module.Dual.transpose ((dualTensorHom R M M) (f ⊗ₜ[R] m)) =\\n    (dualTensorHom R (Module.Dual R M) (Module.Dual R M)) ((Module.Dual.eval R M) m ⊗ₜ[R] f)\", \"doc\": \"For any element $ f $ in the dual module $ \\\\text{Dual}(R, M) $ and any element $ m \\\\in M $, the transpose of the linear map corresponding to the tensor product $ f \\\\otimes m $ is equal to the linear m\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only generic module evaluation and duality declarations; no finite-coefficient sheaf point comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction tensor hom evaluation",
+   "results": "[loogle] OK 0 hit(s) | loogle: Unknown identifier `tensor`",
+   "date": "2026-10-17",
+   "verdict": "no match: loogle returned 0 hits and reported unknown identifier `tensor`"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|ihom|tensorHom",
+   "results": "msearch.py grep over Mathlib/CategoryTheory returned 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: grep returned 0 hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom at a finite coefficient point equals derived Hom of fibre modules and preserves evaluation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"smoothSheaf.evalHom\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \"(x : TopCat.of M) : (smoothSheaf IM I M N).presheaf.stalk x ⟶ N\", \"doc\": \"The morphism that evaluates germs of smooth sections of the sheaf $\\\\mathcal{F}$ at a point $x \\\\in M$, mapping each equivalence class of smooth functions defined on neighborhoods of $x$ to their common\"}\n  {\"name\": \"PresheafOfModules.evaluation_preservesFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits\", \"type\": \"(X : Cᵒᵖ) : PreservesFiniteLimits (evaluation.{v} R X)\", \"doc\": \"For any object $ X $ in the opposite category $ \\\\mathcal{C}^{\\\\text{op}} $, the evaluation functor at $ X $, which maps presheaves of modules over a presheaf of rings $ R $ to their module over $ R(X) \"}\n  {\"name\": \"LightCondensed.ihomPoints_apply\", \"module\": \"Mathlib.Condensed.Light.InternallyProjective\", \"type\": \"(A B : LightCondMod.{u} R) (S : LightProfinite) (x : (A ⟶[LightCondMod R] B).val.obj ⟨S⟩) :\\n  ihomPoints R A B S x =\\n    (MonoidalClosed.uncurry\\n      (((freeForgetAdjunction R).homEquiv _ _).symm ((coherentTopology LightProfinite.{u}).yonedaEquiv.symm x)))\", \"doc\": \"For any commutative ring $ R $, light condensed $ R $-modules $ A $ and $ B $, and a light profinite space $ S $, the points of the internal hom-object $ [A, B] $ at $ S $ are given by uncurrying the \"}\n  {\"name\": \"LightCondensed.ihom_map_val_app\", \"module\": \"Mathlib.Condensed.Light.InternallyProjective\", \"type\": \"(A B P : LightCondMod.{u} R) (S : LightProfinite) (e : A ⟶ B) (x : (P ⟶[LightCondMod R] A).val.obj ⟨S⟩) :\\n  (((ihom P).map e).val.app ⟨S⟩) x = (ihomPoints R P B S).symm (ihomPoints R P A S x ≫ e)\", \"doc\": \"For any light condensed $ R $-modules $ A $, $ B $, $ P $, a light profinite space $ S $, a morphism $ e: A \\to B $, and an element $ x $ in the hom-set $ [P, A](S) $, the application of the internal h\"}\n  {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib.Condensed.Light.InternallyProjective\", \"type\": \"(A B : LightCondMod.{u} R) (S : LightProfinite) :\\n  (A ⟶[LightCondMod R] B).val.obj ⟨S⟩ ≃ ((A ⊗ ((free R).obj S.toCondensed)) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}\n  {\"name\": \"CategoryTheory.ihom.ev\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \": ihom A ⋙ tensorLeft A ⟶ 𝟭 C\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the evaluation morphism is the counit of the adjunction between the internal hom functor $[A, -]$ and the left tensoring functor $- \\\\ot\"}\n  {\"name\": \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \"(X : Cᵒᵖ) : PreservesFiniteLimits (evaluation.{v} R X)\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$, the evaluation functor at $X$ from the category of sheaves of modules over a sheaf of rings $R$ to the category of modules over $\"}\n  {\"name\": \"HomologicalComplex.instPreservesFiniteLimitsEvalOfHasFiniteLimits\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \"[HasFiniteLimits C] (n : ι) : PreservesFiniteLimits (eval C c n)\", \"doc\": \"If a category $ C $ has finite limits, then the evaluation functor at any index $ n $ for homological complexes in $ C $ with shape $ c $ preserves finite limits. This means that for any finite diagra\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only generic sheaf/condensed evaluation and internal-Hom declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-mapping-adjunction",
+  "date": "2026-10-17",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second paragraph: the finite-level derived mapping-complex adjunction is transported through the point identification; this node states the evaluation-defined point internal-Hom comparison used in that transport.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

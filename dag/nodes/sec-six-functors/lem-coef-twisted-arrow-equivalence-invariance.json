@@ -3,11 +3,136 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every simplicial functor F, the defining join formula for Tw is preserved by postcomposition. The functoriality clause of [lem-coef-twisted-arrow-left-fibration] therefore gives Tw(j) over j^op x j, and its two projection squares commute strictly. The induced map into the displayed fiber product is consequently a map over E^op x E. The left-fibration assertion and the slice-collapse comparisons are inherited from that same node.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03JQ",
+    "place": "Subsection 8.1.1 and Construction 8.1.1.1; functoriality and the two block-collapse comparisons"
+   }
+  },
+  {
+   "text": "Choose a simplicial quasi-inverse $k:\\mathcal C\\to\\mathcal E$ and coherent natural equivalences $kj\\simeq\\mathrm{id}_{\\mathcal E}$ and $jk\\simeq\\mathrm{id}_{\\mathcal C}$ from [def-cbc-enhanced-diagrams-cones]. For either $D=\\mathcal E$ or $D=\\mathcal C$, write $q=kj$ or $q=jk$, respectively. The quasicategory $A=\\operatorname{Fun}(D,D)$ exists by [lem-cbc-enhanced-functor-cone-calculus]. The chosen equivalence edge and its inverse triangles make $q$ and $\\mathrm{id}_D$ isomorphic in $hA$. Apply [lem-coef-quasicategory-invertible-interval] to $A$: for $J=N(\\mathcal J)$, where $\\mathcal J$ has two objects and exactly one morphism between each ordered pair, it gives a map $J\\to A$ with endpoints $q,\\mathrm{id}_D$. Transposing gives $H:D\\times J\\to D$ with these exact endpoint restrictions. Only the endpoints are prescribed; no claim that its restriction to the chosen edge of $J$ is the originally chosen transformation is required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-quasicategory-invertible-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Section 3.5, core and invertible-interval extension; use the exact J-extension statement of lem-coef-quasicategory-invertible-interval"
+   }
+  },
+  {
+   "text": "Define $\\delta:J\\to\\operatorname{Tw}(J)$ explicitly. An $n$-simplex of $J$ is a sequence $(t_0,\\ldots,t_n)$ of objects of $\\mathcal J$. On the ordered join $[n]^{\\mathrm{op}}\\star[n]$, send both vertices $\\bar i$ and $i$ to $t_i$. There is a unique functor with this vertex assignment, since every ordered pair of objects of $\\mathcal J$ has exactly one arrow. Its nerve is $\\delta_n(t)$. Precomposing with $\\theta^{\\mathrm{op}}\\star\\theta$ assigns $t_{\\theta(i)}$ to both vertices indexed by $i$, so these maps form a simplicial map. At $\\varepsilon=0,1$, $\\delta$ gives the identity-arrow vertex at $\\varepsilon$. This construction uses the reverse-direction arrows in $\\mathcal J$ on the first block.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-quasicategory-invertible-interval",
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03JG",
+    "place": "Construction 8.1.1.1; elementary degreewise construction for the nerve of the two-object indiscrete groupoid"
+   }
+  },
+  {
+   "text": "First $\\operatorname{Tw}(D)$ is a quasicategory: $D^{\\mathrm{op}}\\times D$ fills inner horns coordinatewise (opposite reverses the horn index), and then the left-fibration lifting property of $\\lambda_D$ lifts each such filler. For each $H:D\\times J\\to D$ of Step 2, define $B:\\operatorname{Tw}(D)\\times J\\to\\operatorname{Tw}(D)$ in degree $n$ by $(a,t)\\mapsto H\\circ(a,\\delta_n(t))$, where $a:N([n]^{\\mathrm{op}}\\star[n])\\to D$. The simplicial identities follow from those of $\\delta$ and postcomposition. At the endpoints it is exactly $\\operatorname{Tw}(q)$ and $\\mathrm{id}_{\\operatorname{Tw}(D)}$. Thus $B$ transposes to a map $J\\to\\operatorname{Fun}(\\operatorname{Tw}(D),\\operatorname{Tw}(D))$. The edge $0\\to1$ of $J$ has inverse $1\\to0$ with its two inverse triangles; their images give an equivalence edge in this functor quasicategory. The functor quasicategory assertion is supplied by [lem-cbc-enhanced-functor-cone-calculus]. Apply this construction for both choices of $D,q$ in Step 2. Since postcomposition gives $\\operatorname{Tw}(kj)=\\operatorname{Tw}(k)\\operatorname{Tw}(j)$ and $\\operatorname{Tw}(jk)=\\operatorname{Tw}(j)\\operatorname{Tw}(k)$ strictly, $\\operatorname{Tw}(k)$ and these two coherent natural equivalences witness that $\\operatorname{Tw}(j)$ is a functor equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03JG",
+    "place": "Construction 8.1.1.1; J-parameter formula using Steps 2-3, replacing the invalid Delta^1-parameter argument"
+   }
+  },
+  {
+   "text": "For any quasicategory $D$ and vertex $y$, put $P_{D,y}=\\operatorname{Tw}(D)\\times_D\\{y\\}$, with its first-block projection to $D^{\\mathrm{op}}$. It is a left fibration: lift a horn against $\\lambda_D$ over the pair consisting of the prescribed simplex in $D^{\\mathrm{op}}$ and the constant simplex at $y$. Hence $P_{D,y}^{\\mathrm{op}}\\to D$ is a right fibration, since ordered reversal sends $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$. Its total space is a quasicategory by first filling the projected inner horn in $D$ and then lifting. The slice node says $D_{/y}\\to D$ is also a right fibration of quasicategories. The target-fixed clause of [lem-coef-twisted-arrow-left-fibration] gives an equivalence $v_{D,y}:(D_{/y})^{\\mathrm{op}}\\to P_{D,y}$ over $D^{\\mathrm{op}}$. Taking opposites gives an equivalence $v_{D,y}^{\\mathrm{op}}:D_{/y}\\to P_{D,y}^{\\mathrm{op}}$ over $D$: reverse the quasi-inverse and inverse triangles, which reverses the orientation of each natural equivalence and still provides inverse data. All objects remain small in the fixed containing universe.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03K0",
+    "place": "Proposition 8.1.2.10 and opposite-category dual, with the exact right-pinched slice fiber convention"
+   }
+  },
+  {
+   "text": "Write $T_D(x,y)$ for the strict fiber of $\\lambda_D$ at $(x,y)$. Apply [lem-coef-infinity-right-fibration-fibers] to the two right fibrations and the equivalence $v_{D,y}^{\\mathrm{op}}$ from Step 5, over the identical base $D$. The slice fiber at $x$ is exactly $\\operatorname{Map}_D(x,y)$ by [lem-coef-infinity-slice-right-fibration], whereas the other fiber is $T_D(x,y)^{\\mathrm{op}}$ degree by degree. Thus the actual collapse map induces a homotopy equivalence of Kan complexes\n$$a_{D,x,y}:\\operatorname{Map}_D(x,y)\\longrightarrow T_D(x,y)^{\\mathrm{op}}.$$\nBy the functoriality clause of the twisted-arrow node, these maps commute strictly with every simplicial functor and the induced maps on the specified vertex fibers. The natural right-pinch homotopy equivalence of [lem-coef-infinity-pinch-comparison] also gives the natural zigzag $T_D(x,y)^{\\mathrm{op}}\\leftarrow\\operatorname{Map}_D(x,y)\\to U_D(x,y)$ to the arrow mapping space. In degree zero both comparison maps send an edge to that same edge; in particular they preserve the identity-arrow vertices. This uses the target-fixed slice, so no identification of a left-pinched mapping complex with a right-pinched one is being assumed.",
+   "uses": [
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HK",
+    "place": "Corollary 4.5.3.31, right-fibration fiber invariance; right-pinch comparison 01L5"
+   }
+  },
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], the equivalence $j$ induces a weak equivalence $m:\\operatorname{Map}_{\\mathcal E}(x,y)\\to\\operatorname{Map}_{\\mathcal C}(jx,jy)$; this is a theorem about functor equivalences, not part of their definition. Let $t:T_{\\mathcal E}(x,y)\\to T_{\\mathcal C}(jx,jy)$ be the fiber map of Step 1. Strict naturality in Step 6 gives $t^{\\mathrm{op}}a_{\\mathcal E,x,y}=a_{\\mathcal C,jx,jy}m$. Each $a$ is a weak equivalence by [lem-cbc-simplicial-homotopy-equivalence-weak], applied to the inverse and homotopies from Step 6. Since $t^{\\mathrm{op}}a_{\\mathcal E,x,y}=a_{\\mathcal C,jx,jy}m$ is a composite of weak equivalences and $a_{\\mathcal E,x,y}$ is one, two-out-of-three for the weak homotopy equivalences of the Kan--Quillen model structure of [lem-coef-kan-quillen-right-proper] (the same realization-based notion, at every basepoint) proves that $t^{\\mathrm{op}}$ is a weak equivalence. The homeomorphism $|K^{\\mathrm{op}}|\\cong|K|$ reverses barycentric coordinates on each simplex; the realization relation for $\\theta$ becomes that for $i\\mapsto n-\\theta(m-i)$, so it is well defined, involutive and natural in $K$. Consequently $t$ is a weak equivalence too. This same natural square, or its zigzag to the arrow mapping spaces from Step 6, identifies the map with the stated mapping-space map induced by $j$, including the identity vertices.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Natural right-pinch comparisons and functor-equivalence mapping-space theorem; elementary opposite-realization coordinate reversal"
+   }
+  },
+  {
+   "text": "Put $B=\\mathcal E^{\\mathrm{op}}\\times\\mathcal E$ and $Q=B\\times_{\\mathcal C^{\\mathrm{op}}\\times\\mathcal C}\\operatorname{Tw}(\\mathcal C)$. The projection $Q\\to B$ is a left fibration by pulling each horn problem back to $\\lambda_{\\mathcal C}$; $\\lambda_{\\mathcal E}$ is a left fibration by the twisted-arrow node. The comparison $w:\\operatorname{Tw}(\\mathcal E)\\to Q$ of Step 1 is over the exact base $B$. At $(x,y)$ its fiber map is precisely $t$ from Step 7, since the fiber of $Q$ is $T_{\\mathcal C}(jx,jy)$ by the degreewise pullback definition. The left-fibration criterion in the final paragraph of [lem-coef-simplicial-right-fibration-presentation] therefore gives a simplicial inverse to $w$ up to simplicial homotopies over $B$. This is the required equivalence of left fibrations. Its fiber identification is the one established in Steps 6-7; together with Step 4, this proves every clause.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03JQ",
+    "place": "Proposition 8.1.1.11; fiberwise criterion for equivalences of left fibrations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-quasicategory-invertible-interval",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-twisted-arrow-left-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/03JG",
+  "place": "Construction 8.1.1.1, 03JQ and 03K0; explicit J-parameter proof of equivalence invariance using the invertible-interval node; target-fixed slice and 01HK fiber theorem. Repair of the invalid Delta^1-cylinder argument."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "title": "Twisted-arrow invariance under equivalence",
  "statement": "Use quasicategories, mapping spaces and equivalences of [def-cbc-enhanced-diagrams-cones], and the twisted-arrow left fibrations $\\lambda_{\\mathcal D}:\\operatorname{Tw}(\\mathcal D)\\to\\mathcal D^{\\mathrm{op}}\\times\\mathcal D$ of [lem-coef-twisted-arrow-left-fibration]. Let $j:\\mathcal E\\to\\mathcal C$ be an equivalence of small quasicategories in a fixed sufficiently large universe. Postcomposition with $j$ defines $\\operatorname{Tw}(j)$, commuting with the two projections. This is an equivalence of quasicategories. Moreover its comparison map $\\operatorname{Tw}(\\mathcal E)\\to(\\mathcal E^{\\mathrm{op}}\\times\\mathcal E)\\times_{\\mathcal C^{\\mathrm{op}}\\times\\mathcal C}\\operatorname{Tw}(\\mathcal C)$ is an equivalence of left fibrations over $\\mathcal E^{\\mathrm{op}}\\times\\mathcal E$. On each vertex fiber $(x,y)$ it agrees, under the natural slice and mapping-space comparisons, with the weak equivalence $\\operatorname{Map}_{\\mathcal E}(x,y)\\to\\operatorname{Map}_{\\mathcal C}(jx,jy)$ induced by $j$.",
  "source": {
@@ -16,8 +141,7 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-twisted-arrow-left-fibration",
-  "lem-coef-coherent-nerve-comparison"
+  "lem-coef-twisted-arrow-left-fibration"
  ],
  "mathlib_searches": [
   {
@@ -79,5 +203,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-twisted-arrow-equivalence-invariance",
+  "worker": "stage1",
+  "summary": "Repaired all returned points without changing the statement or creating nodes: replaced the false Delta^1-cylinder construction by extension over the walking isomorphism J and an explicit J to Tw(J); cited the mapping-space theorem for full faithfulness; used target-fixed slices and the fiber-invariance theorem to obtain exact right-pinched fiber comparisons; removed the unused coherent-nerve statement dependency.",
+  "blueprint": "Realizes the enriched Hom recognition paragraph of prop-coef-integral-exceptional-adjoint: functorial twisted arrows, invariance under an equivalence, and the mapping-space fiber identification.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 2, 4 and 7 use functor quasicategories and the theorem that functor equivalences induce mapping-space equivalences; this is a generic coherent-category tool absent as a duplicate in the unit."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Step 7 converts the explicit simplicial homotopy equivalences on Kan fibers to realized weak homotopy equivalences; it is a generic simplicial homotopy tool, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-e51e11d7e",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-e51e11d7e (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, the full statements of the ten cited nodes, parent lem-coef-space-transport-classification step 11, the unit sk-prop-sf-biduality-general and the main-20261015 ancestor proof. The repair of the earlier return holds. Step 3: δ:J→Tw(J) is simplicial; I checked the vertex assignment t_i to both ī and i under θ^op⋆θ, and the indiscrete groupoid supplies the backward arrow that broke the old Δ^1 cylinder. Step 4: B(a,t)=H∘(a,δ_n t) is well typed and simplicial, its endpoints are Tw(q) and id, and the J-edge with its inverse triangles maps to an equivalence edge; Tw(D) is a quasicategory by an inner fill in D^op×D followed by a λ_D lift. Step 5: P_{D,y}→D^op is a left fibration, and its opposite is a right fibration over D (horn index i becomes n−i). Step 6: the fibre theorem applies over the identical base D; the slice fibre is exactly the right-pinched Map_D(x,y) and the other fibre is T_D(x,y)^op. Step 7: full faithfulness comes from the stated cone-calculus theorem, and the opposite-realization argument checks against the def node. Step 8: the left-fibration fibrewise criterion of lem-coef-simplicial-right-fibration-presentation is used exactly as stated. Small cases checked: identity, Δ^0→J, empty categories, and discrete categories with empty fibres. The statement is unchanged and not weakened. No duplicate in the DAG (grep for Tw plus equivalence) and no cycle. Fix (C1): step 7 deduced that t^op is a weak equivalence by 'cancelling' on homotopy groups, which needs two-out-of-three (basepoint change) and cited nothing for it. I added lem-coef-kan-quillen-right-proper (same unit; its model structure has exactly these weak homotopy equivalences) to step 7's text and uses and to proof_deps; this was the only change. Both declared tool_uses, lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-homotopy-equivalence-weak, are generic and accepted, with precedent in this unit. Kerodon and Cisinski are not in literature/; they are recorded as WANTED and proof_origin is by agent. The blueprint ancestry is historical: the current ancestor proof no longer has the enriched-Hom paragraph. This was not changed by the delivery.; 1 file(s) fixed by the reviewer"
  }
 }

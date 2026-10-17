@@ -12,9 +12,151 @@
   "def-coef-infinity-fibrations",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The viewing operations are identity operations on the underlying simplicial data. A \\mathcal U-small quasicategory, its simplicial maps, and a \\mathcal U-small cocartesian fibration q:X→S are the same sets and maps when regarded in \\mathcal U'. The horn lifting condition defining a cocartesian edge is therefore unchanged, and the degreewise product and pullback conventions make every lifting square the same square. Thus I_S is well-defined and preserves exactly cocartesian edges and edge-preserving maps; J is the identity on vertices, edges, and simplices.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.3.2.3, universe enlargement, with the horn definition of cocartesian edges"
+   }
+  },
+  {
+   "text": "Model Cat_∞ as the coherent nerve of the simplicial category of naturally marked quasicategories. For \\mathcal U-small A and B, the inclusion into the \\mathcal U'-model is a full simplicial inclusion: its n-simplices are the same maps A×Δ^n→B. The marked-point model identifies the mapping Kan complex in this model with the core Fun(A,B)^~, so the induced map is the identity on the mapping space, not merely a bijection on components. Define J to be the coherent nerve of this inclusion of bifibrant simplicial categories. Hence J is fully faithful, including empty and terminal A or B.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.3.2.3 and the mapping-space construction preceding Theorem 3.2.0.1"
+   }
+  },
+  {
+   "text": "For each $\\mathcal W\\in\\{\\mathcal U,\\mathcal U'\\}$ choose the functorial locally Kan replacement $u_{\\mathcal W}:\\mathfrak C[S]\\to I_{\\mathcal W}=R\\mathfrak C[S]$ of [lem-coef-coherent-nerve-comparison]; since $\\mathfrak C[S]$ is $\\mathcal U$-small we take the same $\\mathcal U$-small $I_{\\mathcal U}=I_{\\mathcal U'}$ and $u_{\\mathcal U}=u_{\\mathcal U'}$ (a Dwyer--Kan equivalence in either universe, Step 5). Opposite realization, reversing the ordered vertices of each simplex, identifies $\\mathfrak C[S^{\\mathrm{op}}]$ with $\\mathfrak C[S]^{\\mathrm{op}}$, so $u_{\\mathcal W}^{\\mathrm{op}}$ gives $\\phi_{\\mathcal W}:\\mathfrak C[S^{\\mathrm{op}}]\\to I_{\\mathcal W}^{\\mathrm{op}}$. For a cocartesian $q:X\\to S$ first pass to the cartesian fibration $q^{\\mathrm{op}}:X^{\\mathrm{op}}\\to S^{\\mathrm{op}}$, marked by its cartesian edges. Apply [lem-coef-marked-cone-straightening-quillen] with base $S^{\\mathrm{op}}$, $C=I_{\\mathcal W}$ and $\\phi=\\phi_{\\mathcal W}:\\mathfrak C[S^{\\mathrm{op}}]\\to C^{\\mathrm{op}}$: the cone pushout is the well-typed $D^{\\mathcal W}_q=I_{\\mathcal W}^{\\mathrm{op}}\\amalg_{\\mathfrak C[X^{\\mathrm{op}}]}\\mathfrak C[X^{\\mathrm{op}}\\star\\Delta^0]$ along $\\mathfrak C[X^{\\mathrm{op}}]\\to\\mathfrak C[S^{\\mathrm{op}}]\\to I_{\\mathcal W}^{\\mathrm{op}}$, and $\\operatorname{St}^+_{\\phi_{\\mathcal W}}$ lands in $I_{\\mathcal W}$-diagrams of marked simplicial sets. Take its derived left functor by [lem-coef-model-infinity-derived-adjunction] (every object of the relative model [lem-coef-marked-relative-cartesian-model] is cofibrant, so no cofibrant replacement occurs), then a projectively fibrant replacement, rectify the bifibrant enriched diagram to a coherent $S$-diagram in $\\operatorname{Cat}_{\\infty,\\mathcal W}$ by [lem-coef-simplicial-model-coherent-diagrams] along $u_{\\mathcal W}$, and finally postcompose with the opposite involution of $\\operatorname{Cat}_{\\infty,\\mathcal W}$. This is exactly the composite by which [lem-coef-cocartesian-straightening] produces its equivalence (its steps 3 and 4), and $\\operatorname{St}^{\\mathcal W}_S$ below means this composite; it is not the ill-typed pushout with $\\mathfrak C[S]^{\\mathrm{op}}$ amalgamated directly over $\\mathfrak C[X]$.",
+   "uses": [
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 3.2.0.1 and the marked-cone construction of §3.2.1, with opposite cocartesian construction"
+   }
+  },
+  {
+   "text": "The relative Cartesian model for S^op is universe-compatible on the objects used here. Its cofibrations, marked mapping spaces, and fibrant/cartesian-edge tests are defined by the same finite horn and marking conditions on the underlying \\mathcal U-small simplicial sets, so inclusion into \\mathcal U' preserves and reflects them. The relative-model statement gives the required pullback and mapping-space description, and its opposite clause gives the corresponding cocartesian model. Thus the first and last model-category legs in the composite of Step 3 commute with inclusion.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-marked-point-cartesian-model",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.3.2.3 together with the relative Cartesian model construction"
+   }
+  },
+  {
+   "text": "The replacement and rectification legs are also compatible. Coherent realization and its locally Kan replacement use the same object set and the same mapping simplicial sets on $\\mathcal U$-small input [lem-coef-coherent-nerve-comparison], and $u$ remains a Dwyer--Kan equivalence in $\\mathcal U'$ by the first assertion of [lem-coef-coherent-diagram-universe-naturality]. The absolute marked model has weak-equivalence and fibrant-object tests unchanged on enlarging the universe and its functorial replacements can be formed in the input universe [lem-coef-marked-point-cartesian-model]; the projective diagram model has objectwise weak equivalences and fibrations [lem-coef-simplicial-model-coherent-diagrams], so a $\\mathcal U$-projectively fibrant replacement of $\\operatorname{St}^+_{\\phi}(X^{\\mathrm{op}})$ stays a projectively fibrant replacement in $\\mathcal U'$. To compare rectifications, apply [lem-coef-coherent-diagram-universe-naturality] to the trivial pattern $P=(\\Delta^0,\\{\\mathrm{id}\\},\\varnothing)$ of [def-coef-categorical-pattern-fibrancy] (no cone shapes, so the finiteness hypothesis is vacuous; the only $2$-simplex is scaled). Conditions (iii)-(iv) are vacuous and (i) says $X$ is a quasicategory; by (ii) the marked edges are exactly the edges cocartesian over $\\Delta^0$, i.e. those with the $\\Lambda^n_0$-extension property for every $n\\geq2$, which are exactly the equivalences by [lem-cbc-equivalence-outer-horn-filling]. So the $P$-fibered objects are the $C^\\natural$. The model structure of [lem-coef-categorical-pattern-model-calculus] on $\\mathsf M_P=\\mathrm{sSet}^+_{/\\Delta^0}$ has the monomorphisms as cofibrations, $\\operatorname{Map}^\\sharp_{\\Delta^0}=\\operatorname{Map}^\\sharp$, and weak equivalences tested against the $C^\\natural$; these are the cofibrations and weak equivalences of the absolute marked model, so $\\mathsf M_{P,\\mathcal W}$ is that model in universe $\\mathcal W$ and $\\mathcal C_{\\mathcal W}=\\operatorname{Cat}_{\\infty,\\mathcal W}$, $j=J$ (Step 2). The universe-naturality statement then says that the same strict diagram included into the larger category corresponds to $J\\circ p$, naturally on the whole functor infinity categories, and that objectwise weak equivalences and fibrant replacements are respected. Therefore the projective fibrant replacement and the rectification equivalence of Step 3 are taken compatibly for $\\mathcal U$ and $\\mathcal U'$, and the rectification leg intertwines the inclusion with $\\operatorname{Fun}(S,J)$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-coherent-diagram-universe-naturality",
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.3.2.3 and the universe comparison for coherent enriched diagrams"
+   }
+  },
+  {
+   "text": "The cone leg itself is literal under universe enlargement. Every object, mapping simplicial set, pushout relation, cone marking g^*ẽ, and projective structure map in D^WW_q is formed from \\mathcal U-small sets and finite simplices, so its image in \\mathcal U' is the same simplicial category and the same marking. The marked-cone theorem gives natural base-substitution isomorphisms and says that they agree with iterated substitution and identity substitution. Hence the cone comparison commutes with all base-change maps before localization.",
+   "uses": [
+    "lem-coef-marked-cone-straightening-quillen",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Construction preceding Definition 3.2.1.2 and Proposition 3.2.1.14, with Remark 3.3.2.3"
+   }
+  },
+  {
+   "text": "Opposite realization commutes with the inclusion as well: reversing the finite ordered vertices of each simplex is an operation on the same underlying simplicial sets in both universes, so taking opposites carries the $\\mathcal U$-data ($X^{\\mathrm{op}}$, $\\mathfrak C[S^{\\mathrm{op}}]\\cong\\mathfrak C[S]^{\\mathrm{op}}$, $\\phi_{\\mathcal U}$) literally to the $\\mathcal U'$-data, and the relative model's opposite clause [lem-coef-marked-relative-cartesian-model] identifies the cocartesian fibrations over $S$ with the fibrant objects over $S^{\\mathrm{op}}$ identically in both universes. For the final leg, [lem-coef-cat-infinity-opposite-involution] gives the coherent functor $\\mathrm{op}:\\operatorname{Cat}_\\infty\\to\\operatorname{Cat}_\\infty$ in each universe and states that it is compatible with the inclusion of the smaller universe, i.e. $\\mathrm{op}_{\\mathcal U'}\\circ J\\simeq J\\circ\\mathrm{op}_{\\mathcal U}$ as coherent functors; postcomposition gives $\\operatorname{Fun}(S,\\mathrm{op}_{\\mathcal U'})\\circ\\operatorname{Fun}(S,J)\\simeq\\operatorname{Fun}(S,J)\\circ\\operatorname{Fun}(S,\\mathrm{op}_{\\mathcal U})$. (The involution is not a simplicial functor of the marked model itself, since $\\operatorname{Fun}(A^{\\mathrm{op}},B^{\\mathrm{op}})^\\simeq=(\\operatorname{Fun}(A,B)^\\simeq)^{\\mathrm{op}}$; its universe compatibility is taken from that node, not from naturality of the coherent nerve.)",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-cat-infinity-opposite-involution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.3.2.3 and opposite involution in the cocartesian construction"
+   }
+  },
+  {
+   "text": "For a base map a:T→S, the fixed-universe naturality is obtained only from the cone base-substitution isomorphisms and restriction of projective diagrams: St^+_φ a_!≅St^+_{φ𝔠[a]} and a^*Un^+_φ≅Un^+_{φ𝔠[a]}. Their compatibility with composites and identities, followed by the same rectification and opposite functors, gives the pullback naturality of St^{\\mathcal W}. The universe comparison in Steps 4–6 is a comparison of the same constructions under inclusion, not a pullback assertion; no pullback naturality is invoked for changing \\mathcal U to \\mathcal U'.",
+   "uses": [
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-coherent-diagram-universe-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 3.2.0.1 and Proposition 3.2.1.14, base-change naturality"
+   }
+  },
+  {
+   "text": "All comparisons of Steps 4-6 are identities on the degreewise cone mapping sets and on the strict enriched diagram maps: the inclusions of the relative model over $S^{\\mathrm{op}}$ and of the projective $I$-diagram model commute strictly with $\\operatorname{St}^+_{\\phi}$, $\\operatorname{Un}^+_{\\phi}$ and with the chosen replacements. The derived functors and their unit and counit are those of [lem-coef-model-infinity-derived-adjunction], induced by the ordinary unit and counit with the replacement weak equivalences inverted as coherent natural transformations, so they are carried to each other by the inclusions. The rectification leg is intertwined with $\\operatorname{Fun}(S,J)$ on the whole functor infinity categories, including coherent transformations, by [lem-coef-coherent-diagram-universe-naturality] (Step 5), and the opposite leg by Step 7. Composing these coherent commutations of the legs of Step 3 gives the coherent natural equivalence $\\operatorname{St}^{\\mathcal U'}_S\\circ I_S\\simeq\\operatorname{Fun}(S,J)\\circ\\operatorname{St}^{\\mathcal U}_S$ of functors on $\\operatorname{coCart}_{\\mathcal U}(S)$, where $\\operatorname{St}^{\\mathcal W}_S$ are the equivalences of [lem-coef-cocartesian-straightening] as constructed in Step 3. Empty bases and empty fibers use the same empty simplicial sets, pushouts and horn conditions, so the argument adds no nonemptiness hypothesis.",
+   "uses": [
+    "lem-coef-coherent-diagram-universe-naturality",
+    "lem-coef-model-infinity-derived-adjunction",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 3.2.0.1 and Remark 3.3.2.3, coherent universe comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-categorical-pattern-fibrancy",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-coef-cat-infinity-opposite-involution",
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-coherent-diagram-universe-naturality",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-marked-cone-straightening-quillen",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-simplicial-model-coherent-diagrams"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Theorem 3.2.0.1, §3.2.1 and Remark 3.3.2.3; derived cone/rectification/opposite construction and universe comparison written out from the degreewise construction. HTT archival copy WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +202,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-cocartesian-model",
@@ -88,5 +230,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-straightening-universe-change",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by making the derived straightening composite explicit, correcting the cocartesian cone to apply the marked-cone construction to q^op over S^op, and adding separate universe-compatibility arguments for the relative model, coherent/projective replacements, cone leg, and opposite involution. Step 2 now identifies Cat_infinity mapping spaces with cores Fun(A,B)^~ via the marked-point model and defines J as the coherent nerve of the inclusion. Fixed-universe base-change naturality is kept separate from universe enlargement.",
+  "blueprint": "Realizes the universe-comparison paragraph inherited through lem-coef-small-cocartesian-model: Remark 3.3.2.3 is implemented by the explicit derived cone/rectification/opposite composite, degreewise mapping-space identities, and coherent universe comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic Joyal outer-horn characterization of equivalence edges (unit sk-prop-sf-cbc), used in Step 5 only to identify edges cocartesian over Delta^0 with equivalences, so that the trivial categorical pattern is the absolute marked model; no node of sk-prop-sf-biduality-general states it, and other nodes of this unit already use it as a tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-70dfe8cd0",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-70dfe8cd0 (reviewer sub-agent of L); spot-checked: I read the whole item, every cited statement, the parent's construction (lem-coef-cocartesian-straightening steps 3-5), the citer lem-coef-small-cocartesian-model, the unit and the chapter. The statement is true and unchanged; I checked it with S empty, empty fibres, S=Delta^0, and empty or terminal A,B. Steps 1, 2, 4, 6 and 8 are correct. I repaired four faults in the corrected item file: (1) Step 3 had a typing slip. It wrote u_W: C[S^op]->I_W, but for the cone theorem with base S^op, C=I_W and phi: C[S^op]->C^op, u_W must be the replacement of C[S]. This matches the parent: I=RC[S], phi=u^op. The same U-small I is now used in both universes, and St^W_S is stated to be the parent's construction. (2) Step 5 applied lem-coef-coherent-diagram-universe-naturality, which is stated only for pattern model categories. I added the trivial pattern (Delta^0,{id},empty) with citations to def-coef-categorical-pattern-fibrancy, lem-coef-categorical-pattern-model-calculus and lem-cbc-equivalence-outer-horn-filling (edges cocartesian over a point are exactly the equivalences), so that M_{P,W} is the absolute marked model and j=J. (3) Step 7 justified compatibility of op with J by naturality of the coherent nerve. That is wrong, because op is not a simplicial functor of the marked model (Fun(A^op,B^op)^~=(Fun(A,B)^~)^op). It now cites lem-coef-cat-infinity-opposite-involution, which states the compatibility with the universe inclusion. (4) Step 9 credited the cone theorem with the contractible choice of the derived unit and counit. It now cites lem-coef-model-infinity-derived-adjunction for the coherent derived unit and counit. proof_deps is recomputed; there are no cycles. Accepted tool use: lem-cbc-equivalence-outer-horn-filling (unit sk-prop-sf-cbc, used as a generic Joyal lemma, with precedent in this unit). There are no new nodes and no duplicates. HTT is not archived; I checked 3.2.0.1, 3.2.1, Remark 3.3.2.3 and 4.2.4.4 against my own knowledge of the text. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }

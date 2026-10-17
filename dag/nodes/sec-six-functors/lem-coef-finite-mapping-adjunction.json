@@ -1,11 +1,124 @@
 {
  "id": "lem-coef-finite-mapping-adjunction",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The chosen compactification makes the structure morphism $a$ a compactifiable morphism between Noetherian schemes: $s=\\operatorname{Spec}k$ is Noetherian and a finite-type scheme over it is Noetherian. The constant finite coefficient object $A_{n,X}$ is in $D^b_{ctf}$ on both the etale and the pro-etale site, so [thm-fix-general-biduality], which is stated on either site, applies to it there. Its image under the duality anti-equivalence is $R\\mathcal Hom_{A_n}(A_{n,X},\\omega)\\simeq\\omega$ for the dualizing object of that site; hence $\\omega_{X,\\mathrm{et}}=a^\\times A_n$ lies in $D^b_{ctf}(X_{\\mathrm{et}},A_n)$ and $\\omega_{X,n}=Ra_n^!A_n$ lies in $D^b_{ctf}(X_{\\mathrm{proet}},A_n)$. Together with the given finite-Tor hypotheses on $M$, this supplies the coefficient-domain hypotheses needed below.",
+   "uses": [
+    "thm-fix-general-biduality",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph: finite-level adjunction on derived mapping complexes via prop-asd-internal-adjunction and finite site comparisons."
+   }
+  },
+  {
+   "text": "By [lem-sf-proetale-constructible-origin], choose a bounded constructible etale complex $M_{\\mathrm{et}}$ and an isomorphism $\\nu_X^*M_{\\mathrm{et}}\\cong M$. Since $M$ is finite-Tor and has this etale origin, clause (ii) of [lem-sf-comparison-tor-amplitude] verifies that $M_{\\mathrm{et}}$ has finite Tor amplitude on the etale site. Thus $M_{\\mathrm{et}}\\in D^b_{ctf}(X_{\\mathrm{et}},A_n)$. Apply [lem-weil-finite-duality-site-comparison] with first input $M_{\\mathrm{et}}$ and second input $\\omega_{X,\\mathrm{et}}=a^\\times A_n$. It identifies the pullback of the etale internal Hom with $R\\mathcal Hom_{A_n}(M,\\omega_{X,n})$, identifies $\\nu_X^*\\omega_{X,\\mathrm{et}}$ with $\\omega_{X,n}$, and preserves the evaluation pairing.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-weil-finite-duality-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph: finite-level adjunction on derived mapping complexes via prop-asd-internal-adjunction and finite site comparisons."
+   }
+  },
+  {
+   "text": "The finite-Tor direct-image stability statement [det-thm-sf-ctf-stability-direct-images], clause (3), puts $F_nM=Ra_{!,n}M$ in $D^b_{ctf}(s,A_n)$ on the pro-etale site. The compact-support comparison [lem-sf-class-compact-support-comparison] gives a witness $F_nM\\simeq\\nu_s^*(Ra^{\\mathrm{Et}}_!M_{\\mathrm{et}})$. The etale object $Ra^{\\mathrm{Et}}_!M_{\\mathrm{et}}$ is bounded below. It is bounded constructible: by [lem-sf-proetale-constructible-origin] (ii) the bounded constructible object $F_nM$ is $\\nu_s^*G$ for some $G\\in D^b_c(s_{\\mathrm{et}},A_n)$, and since $\\nu_s^*$ is fully faithful on bounded-below derived categories [thm-weil-pbc-site-comparison], the isomorphism $\\nu_s^*G\\cong\\nu_s^*(Ra^{\\mathrm{Et}}_!M_{\\mathrm{et}})$ comes from an isomorphism $G\\cong Ra^{\\mathrm{Et}}_!M_{\\mathrm{et}}$. Applying clause (ii) of [lem-sf-comparison-tor-amplitude] to this witness also verifies the finite-Tor hypothesis for the etale compact-support object, so $Ra^{\\mathrm{Et}}_!M_{\\mathrm{et}}\\in D^b_{ctf}(s_{\\mathrm{et}},A_n)$, as needed for the site comparison at $s$ in Step 4. Therefore the point node [lem-coef-finite-point-internal-hom-evaluation] applies to $C=F_nM$, and with $\\operatorname{Fib}_s(F_nM)=C_n(M)$ it supplies the evaluation-defined point comparison to $R\\operatorname{Hom}_{A_n}(C_n(M),A_n)$.",
+   "uses": [
+    "det-thm-sf-ctf-stability-direct-images",
+    "lem-sf-class-compact-support-comparison",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-coef-finite-point-internal-hom-evaluation",
+    "lem-sf-proetale-constructible-origin",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph: finite-level adjunction on derived mapping complexes via prop-asd-internal-adjunction and finite site comparisons."
+   }
+  },
+  {
+   "text": "Apply [prop-asd-internal-adjunction] to the compactifiable etale map $a$, the complex $M_{\\mathrm{et}}$, and $K=A_{n,s}$. It gives\n$$Ra_*R\\mathcal Hom_{A_n}(M_{\\mathrm{et}},\\omega_{X,\\mathrm{et}})\\xrightarrow{\\sim}R\\mathcal Hom_{A_n}(Ra^{\\mathrm{Et}}_!M_{\\mathrm{et}},A_{n,s}).$$\nTaking derived global sections is legitimate on these bounded-below objects. The global comparison [lem-weil-pbc-comparison-global-cohomology] transports both sides to pro-etale global sections. On the left, [lem-weil-finite-duality-site-comparison] and the compact-support comparison identify the transported object with $\\mathbf R\\operatorname{Hom}_{X,A_n}(M,\\omega_{X,n})$. On the right, the same site comparison at $s$, the witness from [lem-sf-class-compact-support-comparison], and the point comparison from Step 3 identify it with $R\\operatorname{Hom}_{A_n}(C_n(M),A_n)$. This yields the required isomorphism in $D(A_n)$.",
+   "uses": [
+    "prop-asd-internal-adjunction",
+    "lem-weil-pbc-comparison-global-cohomology",
+    "lem-weil-finite-duality-site-comparison",
+    "lem-sf-class-compact-support-comparison",
+    "lem-coef-finite-point-internal-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph: finite-level adjunction on derived mapping complexes via prop-asd-internal-adjunction and finite site comparisons."
+   }
+  },
+  {
+   "text": "The map just obtained is the stated $\\gamma_{n,M}$. By [lem-asd-internal-adjunction-evaluation], the transpose of the ordinary etale adjunction is the composite of the compact-support projection, evaluation, and exceptional counit $Ra^{\\mathrm{Et}}_!\\omega_{X,\\mathrm{et}}\\to A_{n,s}$. The projection comparison [lem-pur-projection-comparison-etale-origin] identifies this projection with the pro-etale projection after the fixed compactification. The bounded site-adjunction transpose statement [lem-pur-bounded-site-adjunction-transpose] and the exceptional-transport statement [lem-sf-etale-proetale-exceptional-transport] identify the transported counit with $F_n\\omega_{X,n}\\to(A_n)_s$. Finally, the evaluation compatibilities in [lem-weil-finite-duality-site-comparison] and [lem-coef-finite-point-internal-hom-evaluation], together with [lem-sf-class-compact-support-comparison], transport the whole composite. Hence the map is exactly the counit-defined transpose in the statement, rather than an unspecified isomorphism.",
+   "uses": [
+    "lem-asd-internal-adjunction-evaluation",
+    "lem-pur-projection-comparison-etale-origin",
+    "lem-pur-bounded-site-adjunction-transpose",
+    "lem-sf-etale-proetale-exceptional-transport",
+    "lem-weil-finite-duality-site-comparison",
+    "lem-coef-finite-point-internal-hom-evaluation",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph: finite-level adjunction on derived mapping complexes via prop-asd-internal-adjunction and finite site comparisons."
+   }
+  },
+  {
+   "text": "Each comparison used above is natural in the etale-origin witness and in $M$: this is stated for the internal-Hom and dualizing comparisons, compact supports, projection comparison, adjunction transpose, exceptional transport, and the evaluation-defined point map. Their composite is therefore canonical and natural in $M$, and it agrees with the ordinary etale internal exceptional adjunction followed by global sections and the evaluation-defined finite point identification.",
+   "uses": [
+    "lem-weil-finite-duality-site-comparison",
+    "lem-sf-class-compact-support-comparison",
+    "lem-coef-finite-point-internal-hom-evaluation",
+    "lem-asd-internal-adjunction-evaluation",
+    "lem-pur-projection-comparison-etale-origin",
+    "lem-pur-bounded-site-adjunction-transpose",
+    "lem-sf-etale-proetale-exceptional-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Second paragraph: finite-level adjunction on derived mapping complexes via prop-asd-internal-adjunction and finite site comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "det-thm-sf-ctf-stability-direct-images",
+  "lem-asd-internal-adjunction-evaluation",
+  "lem-coef-finite-point-internal-hom-evaluation",
+  "lem-pur-bounded-site-adjunction-transpose",
+  "lem-pur-projection-comparison-etale-origin",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-etale-proetale-exceptional-transport",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "prop-asd-internal-adjunction",
+  "thm-fix-general-biduality",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second paragraph: finite-level adjunction on derived mapping complexes via prop-asd-internal-adjunction and finite site comparisons."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-coef-integral-dualizing",
@@ -15,7 +128,7 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "title": "Finite-level mapping-complex duality",
- "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $a:X\\to s=\\operatorname{Spec}k$ be separated and of finite type [def-weil-scheme-morphism-properties]. Use ordinary module sheaves on the small pro-etale sites, with completed coefficient sheaf $R_W=\\lim_n(A_n)_W$ for $W=X,s$ [def-weil-completed-integral-coefficients]. Write $F_n=Ra_{!,n}$ for compact support using one fixed compactification $a=pj$ [def-weil-integral-rational-qbar-compact-support], $G_n=Ra_n^!$ for the finite constructible comparison-class exceptional functor [def-weil-exceptional-inverse-image], and $\\omega_n=G_n(A_n)_s$. For $n\\ge1$ let $M\\in D^b_c(X_{\\mathrm{proet}},A_n)$ be constructible [def-weil-finite-torsion-constructibility] with finite Tor amplitude [def-weil-finite-tor-amplitude], and put $C_n(M)=\\Gamma(s,F_nM)$ [def-weil-finite-coefficient-point]. Global derived mapping complexes mean derived global sections of derived sheaf Hom [def-pur-derived-internal-hom]. There is a canonical natural isomorphism in $D(A_n)$\n$$\\gamma_{n,M}:\\mathbf R\\operatorname{Hom}_{X,A_n}(M,\\omega_n)\\xrightarrow{\\sim}\\mathbf R\\operatorname{Hom}_{A_n}(C_n(M),A_n).$$\nIt is the transpose of compact-support projection followed by evaluation and the exceptional counit $F_n\\omega_n\\to(A_n)_s$. Under the finite site comparison [lem-weil-finite-duality-site-comparison], it agrees with the ordinary etale internal exceptional adjunction [prop-asd-internal-adjunction] followed by global sections and the finite coefficient-point identification [lem-weil-point-fibre-equivalence].",
+ "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $a:X\\to s=\\operatorname{Spec}k$ be separated and of finite type [def-weil-scheme-morphism-properties]. Use ordinary module sheaves on the small pro-etale sites, with completed coefficient sheaf $R_W=\\lim_n(A_n)_W$ for $W=X,s$ [def-weil-completed-integral-coefficients]. Write $F_n=Ra_{!,n}$ for compact support using one fixed compactification $a=pj$ [def-weil-integral-rational-qbar-compact-support], and put $\\omega_{X,n}=Ra_n^!A_n$ for the finite constructible comparison-class exceptional inverse image [def-weil-exceptional-inverse-image]. For $n\\ge1$ let $M\\in D^b_c(X_{\\mathrm{proet}},A_n)$ be constructible [def-weil-finite-torsion-constructibility] with finite Tor amplitude [def-weil-finite-tor-amplitude], and put $C_n(M)=\\Gamma(s,F_nM)$ [def-weil-finite-coefficient-point]. Global derived mapping complexes mean derived global sections of derived sheaf Hom [def-pur-derived-internal-hom]. There is a canonical natural isomorphism in $D(A_n)$\n$$\\gamma_{n,M}:\\mathbf R\\operatorname{Hom}_{X,A_n}(M,\\omega_{X,n})\\xrightarrow{\\sim}\\mathbf R\\operatorname{Hom}_{A_n}(C_n(M),A_n).$$\nIt is the transpose of compact-support projection followed by evaluation and the exceptional counit $F_n\\omega_{X,n}\\to(A_n)_s$. Under the finite site comparison [lem-weil-finite-duality-site-comparison], it agrees with the ordinary etale internal exceptional adjunction [prop-asd-internal-adjunction] followed by global sections and the evaluation-defined finite point internal-Hom identification [lem-coef-finite-point-internal-hom-evaluation].",
  "stmt_deps": [
   "def-weil-finite-field-fiber",
   "def-weil-l-adic-coefficient-extension",
@@ -29,7 +142,7 @@
   "def-pur-derived-internal-hom",
   "lem-weil-finite-duality-site-comparison",
   "prop-asd-internal-adjunction",
-  "lem-weil-point-fibre-equivalence"
+  "lem-coef-finite-point-internal-hom-evaluation"
  ],
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
@@ -104,10 +217,94 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-dualizing",
-   "place": "Proof paragraph 2: At finite level the adjunction on derived mapping complexes follows by applying derived global sections to prop-asd-internal-adjunction on the etale site and transporting it by the finite site comparisons (old step 7).",
+   "place": "Second paragraph, sentence beginning “At finite level the adjunction on derived mapping complexes follows...”",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-finite-mapping-adjunction",
+  "worker": "stage1",
+  "summary": "Repaired the finite-level mapping-adjunction split in response to the return: restricted the point internal-Hom node to D^b_ctf, introduced R and varpi with matched dependencies, checked the etale finite-Tor hypothesis using site comparison, cited global cohomology comparison, and added the projection, bounded adjunction-transpose, and exceptional-transport interfaces for the counit-defined characterization. The item now uses the focused point evaluation node and its point-dualizing normalization.",
+  "blueprint": "Realizes the second paragraph of the main-20261015 prop-coef-integral-dualizing proof: finite-level derived mapping-complex adjunction, transported through finite etale/pro-etale comparisons, global cohomology comparison, and the evaluation-defined finite point internal-Hom comparison.",
+  "tool_uses": [
+   {
+    "node": "def-weil-finite-torsion-constructibility",
+    "why": "The item uses the finite-stage constructible category and its hypotheses for M and the dualizing object."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "The item uses the finite-Tor domain and interval condition for M and omega."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "The etale witness for M is an input from the comparison unit route."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "The etale-origin object and its compact-support image must be checked to have finite Tor amplitude."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "The route needs the fixed-compactification comparison of pro-etale and etale compact support."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "The point evaluation-transpose node uses the finite-Tor fibre tensor comparison."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-global-cohomology",
+    "why": "The ordinary etale adjunction is transported to pro-etale global sections."
+   },
+   {
+    "node": "lem-pur-projection-comparison-etale-origin",
+    "why": "The counit-defined map requires compatibility of the etale and pro-etale projection maps."
+   },
+   {
+    "node": "lem-pur-bounded-site-adjunction-transpose",
+    "why": "The counit transpose must be transported through the bounded etale-origin adjunction."
+   },
+   {
+    "node": "lem-sf-etale-proetale-exceptional-transport",
+    "why": "The transported exceptional counit is the map used in the item characterization."
+   },
+   {
+    "node": "prop-asd-internal-adjunction",
+    "why": "The source route explicitly takes the ordinary etale internal exceptional adjunction as its starting map."
+   },
+   {
+    "node": "lem-asd-internal-adjunction-evaluation",
+    "why": "The source route needs the explicit projection/evaluation/counit formula for the transpose."
+   },
+   {
+    "node": "det-thm-sf-ctf-stability-direct-images",
+    "why": "Step 3 takes clause (3), that compact-support direct image preserves bounded constructible finite-Tor complexes, to put F_nM in D^b_ctf(s,A_n); no node of the item's unit or its cited units states this preservation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "lem-pur-projection-comparison-etale-origin",
+  "lem-pur-bounded-site-adjunction-transpose",
+  "lem-sf-etale-proetale-exceptional-transport",
+  "prop-asd-internal-adjunction",
+  "lem-asd-internal-adjunction-evaluation",
+  "det-thm-sf-ctf-stability-direct-images"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-440cc83ab",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-440cc83ab (reviewer sub-agent of L); spot-checked: I read the whole delivery against the source, main-20261015 sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md, second paragraph (identical to the master copy). The item realizes the sentence 'At finite level the adjunction ... prop-asd-internal-adjunction ... finite site comparisons', and gamma is defined by the counit. Coefficient category: constant-A_n pro-etale sheaves, with omega_{X,n}=nu^* a^x Rnu_* A and F_n defined from one fixed compactification, matching the source. No hypothesis is added beyond what the parent uses. Small cases check out: X=s, X=empty, M=0, and X=A^1 (A(1)[2] on both sides). All six steps check against the statements of the cited nodes; no step uses another node's proof. There is no cycle. Note that lem-pod-point-dualizing-complex reaches this item through prop-coef-integral-exceptional-adjoint, so it must not be cited. The new node lem-coef-finite-point-internal-hom-evaluation is true: at a point every complex is constant, A_n is self-injective, and I tested C=0, A_s and A_s/varpi. It is not a duplicate: lem-sf-point(2) and lem-pod-point-dualizing-complex give only an unspecified isomorphism, with no evaluation characterization or naturality. Accepted tool_uses: prop-asd-internal-adjunction, lem-asd-internal-adjunction-evaluation, lem-pur-projection-comparison-etale-origin, lem-pur-bounded-site-adjunction-transpose, and det-thm-sf-ctf-stability-direct-images. I made three repairs. (1) det-thm-sf-ctf-stability-direct-images was used off-route in Step 3 without a declaration; I declared it in tool_uses. (2) Step 4 applies the site comparison at s, which needs Ra^Et_! M_et in D^b_c, and this was never shown. Step 3 now proves it from lem-sf-proetale-constructible-origin(ii) and the full faithfulness given by thm-weil-pbc-site-comparison. I also clarified Step 1 so that biduality is applied on both sites. (3) The new node pointed vaguely at 'the point-dualizing normalization' without a citation, and the obvious citation would create a cycle. The normalization is now stated explicitly: a_s^x=id and the counit nu^*Rnu_*A_s->A_s, citing def-weil-pbc-site-comparison-morphism and thm-weil-pbc-site-comparison. The report misnames the stability node ('thm-sf-ctf-stability clause (iv)'); this affects the report only. Corrected files are in fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
  }
 }

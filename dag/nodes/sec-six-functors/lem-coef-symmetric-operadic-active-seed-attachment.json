@@ -14,9 +14,94 @@
   "lem-coef-symmetric-family-active-slice-calculus",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $E=M^\\otimes_{\\mathrm{act}}$ and let $E_0\\subseteq E$ be the full subcategory on the objects of $M_0$; an active edge between coordinate-zero objects lies over $0\\to0$, so $E_0=M_0\\times_ME$. If a composite pointed map $g\\circ f$ is active then $f^{-1}(*)\\subseteq(gf)^{-1}(*)=\\{*\\}$, so $f$ is active. Active pointed maps are closed under composition and left cancellation, so the active edges in a cone over the active simplex $\\tau$ form a simplicial subset; the join-slice definition therefore identifies $E_0\\times_EE_{/\\tau}$ with $X_a$, and $E_0\\times_EE_{/b}$ with $J_b$. Apply [lem-coef-initial-poset-slice-restriction] to $T=[r]$, its least element $0$, the diagram $\\tau$, and $E_0$. Its restriction map is $R$ and it supplies all boundary lifts, including dimension zero, hence $R$ is a trivial Kan fibration by [def-weil-pbc-trivial-kan-fibration]. The lifting-against-monomorphisms consequence [lem-weil-pbc-trivial-kan-lifts-monomorphisms], together with the Joyal weak-factorization system in [lem-coef-joyal-model-structure], identifies this trivial fibration with a Joyal trivial fibration; thus $R$ is a categorical equivalence.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-initial-poset-slice-restriction",
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336–337; active subslice and first-vertex restriction."
+   }
+  },
+  {
+   "text": "Unwinding the degreewise join formula in [def-coef-infinity-relative-cone], with the slice convention of [lem-coef-infinity-slice-right-fibration], shows that $R\\star\\operatorname{id}_{\\Delta^0}$ restricts an active cone to the first vertex of $\\tau$. On pure and mixed simplices the resulting evaluation map is exactly the pullback of the canonical cone $J_b\\star\\Delta^0\\to M$; the equality is degreewise and hence is an equality of simplicial maps.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336–337; first-vertex cone identification."
+   }
+  },
+  {
+   "text": "Let $c_R=c\\circ(R\\star\\operatorname{id}_{\\Delta^0})$; by the hypothesis on $a$ and Step 2, $c_R=a|_{X_a\\star\\{0\\}}$. By Step 1, $R:X_a\\to J_b$ is a categorical equivalence between quasicategories ($J_b$ and $X_a$ are full subcategories of the join slices of [lem-coef-infinity-slice-right-fibration]). The equivalence-invariance clause of [lem-coef-operadic-colimit-finite-amalgamation], applied to the one-element family $I=\\{*\\}$ with $J_*=J_b$ and $c_*=c$, says that being operadically $q$-colimiting in the sense of [def-coef-symmetric-operadic-family] is preserved by precomposition with an equivalence of indexing quasicategories, with the source diagram and apex carried along. Hence $c_R$ is an operadically $q$-colimiting active cocone with source $X_a$ and apex $c(*)$. No relative $q$-colimit condition against arbitrary diagrams is used.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-operadic-colimit-finite-amalgamation",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336–337; transport of the operadic colimit diagram along the trivial fibration to the first-vertex slice."
+   }
+  },
+  {
+   "text": "Every simplex of $X_a\\star\\Delta^r$ maps under evaluation into $M^\\otimes_{\\mathrm{act}}$: edges of $\\tau$ and cross edges are active by hypothesis and definition of $X_a$, and edges inside $X_a$ are active by the cancellation in Step 1. Since $g$ and $q$ commute with the projections to $N(\\mathrm{Fin}_*)$ and the active subcategories consist of the simplices whose edges are active, $a_a=a|_{X_a\\star\\partial\\Delta^r}$ lands in $E^\\otimes_{\\mathrm{act}}$ and $b_a=g\\circ\\mathrm{ev}|_{X_a\\star\\Delta^r}$ lands in $O^\\otimes_{\\mathrm{act}}$, with $qa_a=b_a|_{X_a\\star\\partial\\Delta^r}$. The last apex $a(r)$ lies over $g(\\tau(r))$, hence over $\\langle1\\rangle$, and $a_a|_{X_a\\star\\{0\\}}=c_R$ is operadically $q$-colimiting by Step 3. A map of symmetric infinity-operads preserves inert edges. Apply [lem-coef-operadic-colimit-active-join-boundary] with $K=X_a$, this $r>0$, $a_a$ and $b_a$: it gives $h_a:X_a\\star\\Delta^r\\to E^\\otimes_{\\mathrm{act}}\\subseteq E^\\otimes$ with $h_a|_{X_a\\star\\partial\\Delta^r}=a_a$ and $qh_a=b_a$ exactly. The case $X_a=\\varnothing$ is included in that statement.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-operadic-colimit-active-join-boundary",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336–337, via Proposition 3.1.1.7: local join filler over the active first-vertex slice."
+   }
+  },
+  {
+   "text": "Put $u=a|_X$. The boundary map is a map on $X\\star\\partial\\Delta^r$ in the join coslice over $u$, and $h_a$ is the prescribed simplex after restriction along the full inclusion $i:X_a\\hookrightarrow X$. Apply [lem-coef-cofinal-relative-join-slice-restriction] to $i$, its left adjoint given by the inert-active factorization of [lem-coef-symmetric-family-active-slice-calculus] (whose $X_{\\mathrm{act}}$ is $X_a$), the inner fibration $q:E^\\otimes\\to O^\\otimes$, and the base map $g$ composed with evaluation. Its restriction map is a trivial Kan fibration, so it lifts the prescribed boundary of $\\Delta^r$ and the prescribed base simplex simultaneously. The lift is $h:X\\star\\Delta^r\\to E^\\otimes$ with $qh=g$ composed with evaluation, $h|_{X\\star\\partial\\Delta^r}=a$ exactly, and $h|_{X_a\\star\\Delta^r}=h_a$.",
+   "uses": [
+    "lem-coef-cofinal-relative-join-slice-restriction",
+    "lem-coef-symmetric-family-active-slice-calculus",
+    "lem-coef-infinity-slice-right-fibration",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.336–337; final relative coslice lifting."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-relative-cone",
+  "def-coef-symmetric-operadic-family",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-cofinal-relative-join-slice-restriction",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-initial-poset-slice-restriction",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-operadic-colimit-active-join-boundary",
+  "lem-coef-operadic-colimit-finite-amalgamation",
+  "lem-coef-symmetric-family-active-slice-calculus",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Proof of Theorem 3.1.2.3, step (1), printed pp.335-337; active first-vertex restriction, relative join filler, and coslice lifting. Online source inspected; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,7 +154,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-left-horn-filling",
@@ -81,7 +166,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit, through the inherited coherent free-module criterion; Proof of Theorem 3.1.2.3, step (1), printed pp.335-337: positive-dimensional active-simplex case, the first-vertex slice comparison, active localization and its local join filler. This is the local comparison and extension hidden in returned parent step 5.",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: the symmetric operadic zeroth-horn argument, HA Theorem 3.1.2.3(B), proof step (1), printed pp.335-337; active first-vertex slice comparison and local join filler.",
    "via": [
     "lem-coef-symmetric-operadic-left-horn-filling",
     "lem-coef-symmetric-operadic-extension-boundaries",
@@ -96,5 +181,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-operadic-active-seed-attachment",
+  "worker": "stage1",
+  "summary": "Repaired the returned gap by replacing the invalid claim that an operadic q-colimit is a relative q-colimit. The first-vertex comparison now includes active left cancellation and uses the Joyal model-structure route for the trivial Kan fibration. The operadic cone is restricted along R, and only the Z-empty color test at the arity-one final vertex is used; the color relative fiber is transported through the mapping-space and coslice comparisons, then the relative coslice left-fibration and final-apex join-boundary theorem produce the local filler. The final cofinal relative-coslice lift remains unchanged in purpose, with the boundary of Delta^r stated correctly. Maintainer-reader FIX (2026-10-18): old Step 4 applied lem-coef-relative-final-apex-join-boundary to q on active subcategories, which needs the color a(r) to be q-final in E_act; that is false in general (symmetric monoidal C over Comm: Map(X1⊗...⊗Xk,W) need not be contractible). Steps 3–4 now transport the operadic colimit along R by the equivalence invariance of lem-coef-operadic-colimit-finite-amalgamation and apply the existing lem-coef-operadic-colimit-active-join-boundary (HA Prop. 3.1.1.7) with K=X_a. The delivery's new colorwise coslice node restated steps 2–4 of that existing node and is dropped.",
+  "blueprint": "Realizes the active first-vertex restriction (HA Thm 3.1.2.3 proof step (1), pp.336–337), the local join filler by HA Prop. 3.1.1.7 through lem-coef-operadic-colimit-active-join-boundary, and the extension from the active slice to the whole slice by cofinality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-489e84570",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-489e84570 (reviewer sub-agent of L); spot-checked: I read the item, its five steps, the new node, every cited statement, the parent's step 5, the duplicate candidates and the unit. HA Thm 3.1.2.3 step (1), Def 3.1.1.2, Rem 3.1.1.5 and Prop 3.1.1.7 are not archived and the network is blocked, so I checked those places from knowledge of the text; the report records WANTED. The item statement is true and unchanged; edge cases M_0 empty and r=1 checked. Step 1 is correct: in Fin_*, gf active implies f active, so the full subcategory X_a equals E_0 x_E E_{/tau} with E=M_act, and initial-poset-slice-restriction plus the Joyal WFS gives the trivial fibration and equivalence R. I made E_0 explicit as the full subcategory of M_act. Step 2 is elementary and correct. Old Step 4 is a false inference (E1/E3): it applied relative-final-apex-join-boundary to q on E_act->O_act with K=X_a, which needs the color a(r) to be q-final. Step 3 only makes it final for the relative coslice map rho. Counterexample: C^tensor over Comm, where Map(X1 tensor ... tensor Xk, W) is not contractible for Set and W={0,1}. Repair: Step 3 now transports the operadic colimit along R by the equivalence-invariance clause of lem-coef-operadic-colimit-finite-amalgamation, as the parent's step 3 does. Step 4 now applies the existing reviewed same-unit node lem-coef-operadic-colimit-active-join-boundary (HA Prop 3.1.1.7) with K=X_a; I checked that a and b land in the active subcategories, that a(r) lies over <1>, and that r>0. Step 5 (cofinal restriction, left adjoint from active-slice-calculus) is correct; only its reference was repointed. The new node is true but restates steps 2-4 of active-join-boundary (C5), has an unused quantified W, and lists proof lemmas in stmt_deps; nothing cites it after the repair, so I dropped it. proof_deps were recomputed. All deps are now on the unit's route, so there are no tool_uses; no cycles found. Corrected item: fixes/dag/nodes/sec-six-functors/lem-coef-symmetric-operadic-active-seed-attachment.json.; 1 file(s) fixed by the reviewer"
  }
 }

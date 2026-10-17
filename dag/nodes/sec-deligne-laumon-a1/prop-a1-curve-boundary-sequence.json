@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-a1-curve-boundary-sequence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Boundary localization triangle for a curve",
@@ -18,30 +18,217 @@
  ],
  "proof": [
   {
-   "text": "The boundary triangle $j_!\\mathcal F\\to j_*\\mathcal F\\to i_*i^*j_*\\mathcal F\\to$ (whose boundary term is supported on the finite closed subscheme $Z$) is the open–closed recollement triangle of [def-weil-open-closed-recollement] of the framework chapter, which exists for Qlb-Weil complexes by [prop-sf-open-closed-triangle-all-stages], applied to $K=j_*\\mathcal F$, with the extension-by-zero and derived-direct-image conventions of that definition. The last term\n$R\\Gamma_c(Z,i^*j_*\\mathcal F)$ is concentrated in degree zero by the\nfinite-boundary computation [lem-a1-finite-boundary-cohomology]\n(applicable since $i^*j_*\\mathcal F$ is constructible by [lem-fin-boundary-sheaf]),\nso the long exact cohomology sequence of the triangle gives the\ndisplayed degree-one segment and the stated injections.",
+   "text": "Use the finite-field, separated finite-type smooth-curve and lisse coefficient conventions of [def-wf-middle-extension]. The base field is Noetherian (its only ideals are zero and itself), so [lem-weil-pbc-finite-type-over-noetherian] makes $C_0$ Noetherian. Density of $U_0$ implies that its closed complement contains no generic point of an irreducible component: an open dense subset meets each component and hence contains its generic point. If two distinct points of $Z_0$ formed a strict specialization chain, adjoining a generic point of a component containing the first would give a length-two chain in the one-dimensional $C_0$. Thus $\\dim Z_0\\leq0$. Apply [lem-pc-zero-dimensional-closed-subscheme-finite] to $Z_0\\hookrightarrow C_0$ to conclude that $Z_0$ is finite over $k_0$. This also covers the empty complement.",
    "uses": [
-    "def-weil-open-closed-recollement",
-    "prop-sf-open-closed-triangle-all-stages",
-    "lem-a1-finite-boundary-cohomology",
-    "lem-fin-boundary-sheaf"
+    "def-wf-middle-extension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-zero-dimensional-closed-subscheme-finite"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH (lemma-algebraic-scheme-dim-0), algebraic case; dimension-chain argument written here"
+   }
+  },
+  {
+   "text": "Put $A=j_*\\mathcal F$, always the ordinary sheaf direct image of [def-wf-middle-extension], placed in degree zero. Apply [lem-a1-adic-middle-extension-constructible] to $j_0$ and $\\mathcal F$. The hypotheses are exactly the dense open immersion of separated finite-type smooth curves, the lisse adic $\\Qlb$-Weil coefficient convention, and the reduced closed complement of the statement. It gives $A\\in\\Sh_c(C,\\Qlb)$ with its natural Weil structure. Thus $A$ is a permitted constructible input to recollement. This step does not identify the full derived direct image with an ordinary sheaf.",
+   "uses": [
+    "def-wf-middle-extension",
+    "lem-a1-adic-middle-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+    "place": "Proof, localization and finite-boundary argument"
+   }
+  },
+  {
+   "text": "The restriction $j^*A$ is canonically $\\mathcal F$. For an object $V$ of the site of $U$, regarded as an object over $C$, the ordinary direct-image formula of [def-wf-middle-extension] gives $(j_*\\mathcal F)(V)=\\mathcal F(V\\times_C U)=\\mathcal F(V)$, because $V$ already factors through the open subscheme $U$. These equalities commute with restrictions and coefficient actions and are natural in $\\mathcal F$, giving the sheaf isomorphism with its Weil structure.",
+   "uses": [
+    "def-wf-middle-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+    "place": "Proof, localization and finite-boundary argument"
+   }
+  },
+  {
+   "text": "Set $B=i^*A$. The boundary clause of [lem-a1-adic-middle-extension-constructible] makes $B$ a constructible $\\Qlb$-Weil sheaf in degree zero. Apply [prop-sf-open-closed-triangle-all-stages] at $\\Lambda=\\Qlb$ to the constructible Weil complex $K=A$ on $C$. The schemes and complementary immersions are geometric base changes from $k_0$, so its equivariance clause applies. Using $j^*A=\\mathcal F$ from step 3 gives\n$$j_!\\mathcal F\\longrightarrow A\\longrightarrow i_*B\\longrightarrow j_!\\mathcal F[1].$$\nThe theorem identifies $i_*=Ri_*$ in this triangle and makes all three arrows Weil-equivariant. The middle vertex remains the ordinary sheaf $A$.",
+   "uses": [
+    "lem-a1-adic-middle-extension-constructible",
+    "prop-sf-open-closed-triangle-all-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+    "place": "Proof, localization and finite-boundary argument"
+   }
+  },
+  {
+   "text": "Let $a_C:C\\to\\operatorname{Spec}k$ be the structure morphism. Clause (3) of [prop-functor-package], applied to $f=a_C$ and $K=A$, gives the distinguished triangle\n$$R(a_Cj)_!\\mathcal F\\longrightarrow R(a_C)_!A\\longrightarrow R(a_Ci)_!B\\longrightarrow .$$\nIts hypotheses hold: the curves are separated and finite type, and $i,j$ are complementary immersions. Apply the point fibre functor, which carries distinguished triangles to distinguished triangles by [lem-weil-point-fibre-equivalence]. The definition [def-weil-ordinary-compact-cohomology] identifies the result with\n$$R\\Gamma_c(U,\\mathcal F)\\longrightarrow R\\Gamma_c(C,j_*\\mathcal F)\\longrightarrow R\\Gamma_c(Z,i^*j_*\\mathcal F)\\longrightarrow .$$",
+   "uses": [
+    "prop-functor-package",
+    "lem-weil-point-fibre-equivalence",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+    "place": "Proof, localization and finite-boundary argument"
+   }
+  },
+  {
+   "text": "Step 1 gives the finite structure morphism $Z_0\\to\\operatorname{Spec}k_0$, and step 4 gives a $\\Qlb$-Weil sheaf $B$ on $Z_0$. Therefore [lem-a1-finite-boundary-cohomology] applies, without a purity or weight hypothesis, and yields $H_c^r(Z,B)=0$ for every integer $r\\ne0$. In particular $H_c^{-1}(Z,B)=H_c^1(Z,B)=0$.",
+   "uses": [
+    "lem-a1-finite-boundary-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+    "place": "Proof, localization and finite-boundary argument"
+   }
+  },
+  {
+   "text": "By [def-weil-point-fd-qlbar-category] the distinguished triangle of step 5 in $D^b_{\\mathrm{fd}}(\\Qlb)$ is isomorphic to the image under the stage functor $J_L$ of a distinguished triangle of $D(L)$ with vertices in $D^b_{\\mathrm{fd}}(L)$, for some finite extension $L/\\Ql$ inside $\\Qlb$, and cohomology satisfies $H^i(T_{L'/L}X)\\cong H^i(X)\\otimes_LL'$ along the scalar-extension functors. Apply clause (5) of [lem-weil-heart-short-exact-triangles] to the standard t-structure of [def-sbc-standard-tstructure-derived-category] on $D(L)$, whose $H^i$ are the usual cohomology $L$-vector spaces, and extend scalars from $L$ to $\\Qlb$, which is exact. The long exact sequence of compact-support cohomology so obtained contains\n$$H_c^{-1}(Z,B)\\longrightarrow H_c^0(U,\\mathcal F)\\longrightarrow H_c^0(C,A)$$\nand\n$$H_c^0(Z,B)\\xrightarrow{\\delta}H_c^1(U,\\mathcal F)\\xrightarrow{g}H_c^1(C,A)\\longrightarrow H_c^1(Z,B).$$\nNo Frobenius compatibility of these maps is asserted or used: the statement concerns the coefficient complexes of [def-weil-ordinary-compact-cohomology], computed on the underlying complexes.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category",
+    "lem-weil-heart-short-exact-triangles",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Example 1.3.2(i), Theorem 1.3.6: standard t-structure and cohomological functor"
+   }
+  },
+  {
+   "text": "Substitute the two vanishings from step 6 in the exact sequences of step 7. Exactness with zero preceding term makes the kernel of $H_c^0(U,\\mathcal F)\\to H_c^0(C,A)$ zero, proving injectivity. Exactness at $H_c^1(U,\\mathcal F)$ says $\\operatorname{im}\\delta=\\ker g$, and exactness at $H_c^1(C,A)$ with zero following term says $\\operatorname{im}g=H_c^1(C,A)$. This is the displayed degree-one exact segment ending in zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+    "place": "Proof, localization and finite-boundary argument"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-open-closed-recollement",
+  "def-wf-middle-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-a1-adic-middle-extension-constructible",
   "prop-sf-open-closed-triangle-all-stages",
+  "prop-functor-package",
+  "lem-weil-point-fibre-equivalence",
+  "def-weil-ordinary-compact-cohomology",
   "lem-a1-finite-boundary-cohomology",
-  "lem-fin-boundary-sheaf"
+  "def-weil-point-fd-qlbar-category",
+  "lem-weil-heart-short-exact-triangles",
+  "def-sbc-standard-tstructure-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+  "place": "Entire proof, expanded with boundary geometry, all-stage constructibility, compact-support composition, point fibre exactness and the two explicit cohomology segments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactlySupportedCohomology|openClosed|localizationTriangle",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization long exact sequence for compactly supported etale cohomology of a curve and its finite closed boundary",
+   "results": "8 hits: Algebra.Etale.of_isLocalizationAway, RingHom.Etale.ofLocalizationSpanTarget, Algebra.exists_etale_of_isEtaleAt, Algebra.IsStandardEtale.of_isLocalizationAway, Algebra.FormallyEtale.of_isLocalization, Algebra.Etale.of_isLocalization_Away, AlgebraicGeometry.Γ_restrict_isLocalization, Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, compactlySupportedCohomology",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier; corrected by the later qualified Sheaf/ShortExact query; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of curves the compactly supported cohomology of the ordinary direct image sits in a localization triangle with finite boundary cohomology",
+   "results": "8 hits: CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.triangleOfSESIso, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|lowerShriek|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.ShortComplex.ShortExact",
+   "results": "12 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.Sheaf.H.longSequence, CategoryTheory.Sheaf.H.longSequence_exact, CategoryTheory.Sheaf.H.longSequenceHom_id, CategoryTheory.Sheaf.H.longSequenceHom, CategoryTheory.Sheaf.H.δ, CategoryTheory.Sheaf.H.longSequenceHom_comp, CategoryTheory.Sheaf.H.longSequence_exact₁'",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaves extension by zero and closed restriction give the compact support boundary exact sequence",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, Profinite.NobelingProof.succ_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, HomologicalComplex.IsSupportedOutside.exactAt, Algebra.etaleLocus_eq_compl_support, HomologicalComplex.exactAt_of_isSupported, HomologicalComplex.IsSupported.exactAt",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  },
+  {
+   "tool": "grep",
+   "query": "middleExtension|directImage.*[Cc]onstructible|[Cc]onstructible.*directImage",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary direct image of lisse l-adic sheaf on a smooth curve is constructible and agrees with zeroth derived direct image",
+   "results": "8 hits: TopCat.Sheaf.pushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, AlgebraicGeometry.Scheme.Modules.instFullPushforward, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Cover.instIsLocallyDirectedI₀CompFunctorOfLocallyDirectedForget, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor, CategoryTheory.Functor.rightDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a lisse adic sheaf on a dense open of a smooth curve the ordinary direct image is constructible and is the degree zero cohomology of the derived direct image",
+   "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|Constructible|ellAdic|EllAdic",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement",
+   "directory": "AlgebraicGeometry/Sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underived middle extension of an l-adic local system on a curve belongs to the constructible heart of the rationalized derived category",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsLE, DerivedCategory.IsGE, DerivedCategory.TStructure.t, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category, ordinary sheaf cohomology and commutative algebra results do not give this compact-support Weil curve localization statement"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -99,5 +286,49 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-a1-curve-boundary-sequence",
+  "worker": "stage1",
+  "summary": "Statement preserved. Eight proof steps separate ordinary j_* from Rj_*, establish finite-boundary geometry, pass recollement through compact-support composition and point fibre, and display both cohomology segments. One new statement-only prerequisite records constructibility of the ordinary adic middle extension and boundary sheaf; the discrete finite-etale constructibility citation alone does not provide this. No Mathlib match for either geometric assertion.",
+  "blueprint": "Current blueprint proof first sentence: steps 1-5 (ordinary middle extension, recollement and compact cohomology). Finite-boundary sentence: step 6. Final long-exact-sequence sentence: steps 7-8. This realizes the localization tool used in unit sk-i-dl-a1-local, preserving its local-duality and ramification route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherianity used for the specialization-chain dimension argument; no local-duality route is replaced."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic zero-dimensional algebraic scheme finiteness establishes the hypothesis of the finite-boundary computation."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Only clause (3), compact-support composition and its localization triangle, passes recollement to the point."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Generic exact point fibre equivalence turns the compact-support triangle into coefficient complexes."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Only clause (5), the general long exact sequence of t-structure cohomology, is applied to coefficient complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "prop-functor-package",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-e2fc72f77",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-e2fc72f77 (reviewer sub-agent of L); spot-checked: Read in full: the docs, the unit sk-i-dl-a1-local, the blueprint item in both snapshots (statement unchanged, same as the blueprint), every cited statement, Stacks 06LH and BBD 1.3.6. Steps 1-6 and 8 are correct. Step 1: a dense open in a Noetherian curve contains all generic points, so dim Z0<=0 and 06LH makes Z0 finite. Steps 2/4: recollement is applied to the ordinary j_*F in D^b_c through the new lemma, which correctly replaces lem-fin-boundary-sheaf (that one is about finite rings on the etale site). Step 5: clause (3) of prop-functor-package with Fib_s and def-weil-ordinary-compact-cohomology. Step 6: lem-a1-finite-boundary-cohomology gives vanishing in degrees -1 and 1. The new lemma is true (small cases: j=id, constant sheaf, Kummer sheaf, wild inertia), strictly smaller than the item, and has no duplicate in the DAG (checked against lem-fin-boundary-sheaf, thm-fin-open-degree-zero, prop-sf-localization-all-stages, lem-a1-lisse-middle-extension, lem-wf-boundary-stalk-invariants). Batch-5 check: def-wf-middle-extension is accepted. It is a general definition already in the item's own stmt_deps, and the poincare-duality nodes it reaches are adic-sheaf definitions and tower facts, not proof steps of duality. prop-weil-operations is removed. It is a sec-poincare-duality node tied to Weil-equivariant duality and pairing equivariance, and it was used only for Frobenius equivariance, which the item's statement does not assert (RGamma_c is computed on For(K)). Fixes (fixes/dag/nodes/sec-deligne-laumon-a1/): (1) step 5 no longer cites prop-weil-operations; (2) step 7 had an imprecise citation (C4): prop-constructible-truncations was replaced by def-weil-point-fd-qlbar-category (triangles come from a finite stage L; H^i commutes with scalar extension), the unsupported Frobenius-equivariance sentence was removed, and proof_deps and tool_uses were updated; (3) the new lemma now spells out its induced Weil structure and has lean_audit none. Accepted tool_uses: lem-weil-pbc-finite-type-over-noetherian, lem-pc-zero-dimensional-closed-subscheme-finite, prop-functor-package clause 3, lem-weil-point-fibre-equivalence, lem-weil-heart-short-exact-triangles clause 5. For the maintainer: the citers thm-a1-affine-curve-upper and lem-a1-middle-extension-endpoints read Frobenius equivariance into this item, which its statement never asserted.; 2 file(s) fixed by the reviewer"
  }
 }

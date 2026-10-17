@@ -1,10 +1,83 @@
 {
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $S=X,Z$ write $T_S(r)=\\Lambda_S(r)[2r]$ and $F_S(r)(K)=K(r)[2r]$, for $r\\in\\mathbf Z$. By [det-def-sp-tate-twist-locally-free], the finite-coefficient twists are invertible locally constant rank-one sheaves and opposite twists are inverse functors. The tensor-power and dual definitions in [sk-def-sp-tate-twist] give $T_S(r)\\otimes^L T_S(s)\\cong T_S(r+s)$: on a cover trivializing the line with generator $e$, send $e^{\\otimes r}\\otimes e^{\\otimes s}$ to $e^{\\otimes(r+s)}$, interpreting negative powers by the dual basis. Replacing $e$ by $ue$ multiplies both sides by $u^{r+s}$, so these maps and their inverses agree on overlaps. The cohomological shifts add as $2r+2s=2(r+s)$. Thus $T_S(0)=\\Lambda_S$ and $F_S(-r)$ is inverse to $F_S(r)$. These lines are flat, and tensoring by them is locally the identity, so it preserves bounded constructibility and finite Tor amplitude; shifts preserve these properties too. In particular every $T_S(r)$ is in $D^b_{ctf}(S,\\Lambda)$.",
+   "uses": [
+    "det-def-sp-tate-twist-locally-free",
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 2: the co-projection removes the twist; explicit signed-twist calculation, substep 1"
+   }
+  },
+  {
+   "text": "Apply [det-prop-sfb-cartesian-coefficients-twists] to $i$ and finite coefficients: $i^{-1}\\Lambda_X(r)\\cong\\Lambda_Z(r)$ with its coefficient-module structure, for every integer $r$. This is also the derived pullback identification, since the coefficient rings are identified and the twist is locally free of rank one. Including the cohomological shift gives $Li^*T_X(r)\\cong T_Z(r)$. The hypotheses hold: $i$ is a morphism of schemes on which $\\ell$ is invertible, and $\\Lambda=A_{E,n}$ is a finite admissible coefficient ring.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 2: the co-projection removes the twist; explicit signed-twist calculation, substep 2"
+   }
+  },
+  {
+   "text": "Let $\\alpha$ be the first three arrows of the displayed composite. Apply the functor $F_Z(-m)$ to $\\Pi_Z^{-1}$, to $b$, and to $Ri^!\\Pi_X$. Its source is $F_Z(-m)T_Z(m)\\cong\\Lambda_Z$ by Step 1, and its target is $F_Z(-m)(Ri^!T_X(N))$. Each arrow is invertible: a functor sends a specified inverse to an inverse, and $Ri^!$ is the functor supplied in the hypotheses. Consequently $\\alpha:\\Lambda_Z\\xrightarrow{\\sim}F_Z(-m)(Ri^!T_X(N))$ is precisely the initial segment stipulated in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 2: the co-projection removes the twist; explicit signed-twist calculation, substep 3"
+   }
+  },
+  {
+   "text": "Use [lem-pur-coprojection] with $K=T_X(N)$ and $L=T_X(-m)$. Its hypotheses are satisfied by Step 1, since $K$ is bounded constructible and $L$ is tensor-invertible of finite Tor amplitude, and $i$ is the given closed immersion between separated finite-type $k$-schemes. Using Step 2, the inverse of its specified co-projection is an isomorphism $F_Z(-m)(Ri^!T_X(N))\\xrightarrow{\\sim}Ri^!(T_X(N)\\otimes^L T_X(-m))$. Follow it by $Ri^!$ of the tensor-additivity isomorphism of Step 1. Since $N=m+c$ implies $N-m=c$ in $\\mathbf Z$, the result is $\\beta:F_Z(-m)(Ri^!T_X(N))\\xrightarrow{\\sim}Ri^!T_X(c)$. This is exactly the last arrow specified in the statement. Hence $\\Phi=\\beta\\circ\\alpha$ is an isomorphism, with inverse $\\alpha^{-1}\\circ\\beta^{-1}$.",
+   "uses": [
+    "lem-pur-coprojection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 2: the co-projection removes the twist; explicit signed-twist calculation, substep 4"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-coprojection] once more, now with $K=\\Lambda_X$ and $L=T_X(c)$, which satisfy its hypotheses by Step 1. After Step 2 it gives $C:Ri^!T_X(c)\\xrightarrow{\\sim}(Ri^!\\Lambda_X)\\otimes^L T_Z(c)$. Tensor the inverse of $C\\circ\\Phi:\\Lambda_Z\\xrightarrow{\\sim}(Ri^!\\Lambda_X)\\otimes^L T_Z(c)$ with $T_Z(-c)$. Associativity and $T_Z(c)\\otimes^L T_Z(-c)\\cong\\Lambda_Z$ from Step 1 identify its source with $Ri^!\\Lambda_X$ and its target with $T_Z(-c)$. This gives the claimed isomorphism $Ri^!\\Lambda_X\\cong\\Lambda_Z(-c)[-2c]$.",
+   "uses": [
+    "lem-pur-coprojection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 2: the co-projection removes the twist; explicit signed-twist calculation, substep 5"
+   }
+  },
+  {
+   "text": "For every integer $q$, the cohomology functor sends the isomorphism $\\Phi$ of Step 4 to an isomorphism $\\mathcal H^q(\\Lambda_Z)\\cong\\mathcal H^q(Ri^!T_X(c))$. The complex $\\Lambda_Z$ has its only term in degree zero, so these groups of sheaves are zero for $q\\ne0$, and for $q=0$ the resulting sheaf is isomorphic to $\\Lambda_Z$. This is precisely the asserted degree-zero-sheaf conclusion (an object isomorphic in the derived category to that sheaf).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Step 2: the co-projection removes the twist; explicit signed-twist calculation, substep 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sp-tate-twist-locally-free",
+  "sk-def-sp-tate-twist",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-pur-coprojection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+  "place": "Step 2; explicit construction of the specified composite and its inverse"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-regular",
@@ -23,7 +96,8 @@
  "stmt_deps": [
   "sk-def-purity-conv",
   "def-weil-exceptional-inverse-image",
-  "lem-pur-coprojection"
+  "lem-pur-coprojection",
+  "sk-def-sp-tate-twist"
  ],
  "mathlib_searches": [
   {
@@ -53,6 +127,48 @@
    "results": "{\"t\": \"2026-10-17T15:28:52Z\", \"tool\": \"leansearch\", \"query\": \"Cancel invertible Tate twists and cohomological shifts in the projection formula for exceptional inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TwistShiftData.shiftFunctorZero_inv_app\", \"CategoryTheory.shift_shiftFunctorCompIsoId_neg_add_cancel_inv_app\", \"CochainComplex.shiftFunctorAdd'_inv_app_f\", \"CategoryTheory.shift_shiftFunctorCompIsoId_add_neg_cancel_inv_app\", \"CategoryTheory.TwistShiftData.shiftFunctorAdd'_inv_app\", \"CategoryTheory.Equivalence.commShiftInverse\", \"CochainComplex.ShiftSequence.shiftIso_inv_app\", \"CategoryTheory.Functor.mapCochainComplexShiftIso_inv_app_f\"], \"digest\": \"ca914aa48ce4b14b\"}",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|tate|coprojection|UpperShriek",
+   "results": "{\"t\": \"2026-10-17T15:52:02Z\", \"tool\": \"grep\", \"query\": \"Tate|tate|coprojection|UpperShriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/JacobiSum/Basic.lean\", \"Mathlib/NumberTheory/JacobiSum/Basic.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\"], \"digest\": \"bb72ae758eb191b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic tensor identities and shift data do not state the exceptional-inverse-image Tate composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible tensor twist commutes with exceptional inverse image and can be cancelled in a derived category",
+   "results": "{\"t\": \"2026-10-17T15:52:02Z\", \"tool\": \"leansearch\", \"query\": \"An invertible tensor twist commutes with exceptional inverse image and can be cancelled in a derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.tensorIso_inv\", \"Module.Invertible.rightCancelEquiv_comp_rTensor_comp_symm\", \"CategoryTheory.MonoidalCategory.inv_tensor\", \"dualTensorHomEquivOfBasis_symm_cancel_left\", \"Module.Invertible.instTensorProduct_2\", \"Module.Invertible.leftCancelEquiv\", \"Module.Invertible.rTensorInv\", \"Representation.repOfTprodIso_inv_apply\"], \"digest\": \"a82bb734fd9b4955\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic tensor identities and shift data do not state the exceptional-inverse-image Tate composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.TwistShiftData",
+   "results": "{\"t\": \"2026-10-17T15:52:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.TwistShiftData\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.TwistShiftData\", \"CategoryTheory.TwistShiftData.Category\", \"CategoryTheory.TwistShiftData.instCategoryCategory\", \"CategoryTheory.TwistShiftData.hasShift\", \"CategoryTheory.TwistShiftData.shiftMkCore\", \"CategoryTheory.TwistShiftData.z\", \"CategoryTheory.TwistShiftData.commShift\", \"CategoryTheory.TwistShiftData.shiftIso\"], \"digest\": \"19e082c64816e397\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic tensor identities and shift data do not state the exceptional-inverse-image Tate composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancel Tate twists in an exceptional inverse image with specified isomorphisms of dualizing objects",
+   "results": "{\"t\": \"2026-10-17T15:52:03Z\", \"tool\": \"leanfinder\", \"query\": \"Cancel Tate twists in an exceptional inverse image with specified isomorphisms of dualizing objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_inv_hom₁\", \"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_inv_hom₂\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Functor.homologySequenceδ_comp\", \"CategoryTheory.Functor.comp_homologySequenceδ\"], \"digest\": \"71d8f62cd40024e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic tensor identities and shift data do not state the exceptional-inverse-image Tate composite"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateObject|UpperShriek|coprojection|dualizingComplex",
+   "results": "{\"t\": \"2026-10-17T15:52:17Z\", \"tool\": \"grep\", \"query\": \"TateTwist|tateObject|UpperShriek|coprojection|dualizingComplex\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/GradedObject.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Distributive/Cartesian.lean\", \"Mathlib/CategoryTheory/Distributive/Cartesian.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\"], \"digest\": \"5d085a64cfb2e0a3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic tensor identities and shift data do not state the exceptional-inverse-image Tate composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor invertible object inverse equivalence cancellation of isomorphisms",
+   "results": "{\"t\": \"2026-10-17T15:52:18Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor invertible object inverse equivalence cancellation of isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.tensor_inv_hom_id'\", \"CategoryTheory.MonoidalCategory.tensor_inv_hom_id\", \"CategoryTheory.MonoidalCategory.hom_inv_id_tensor\", \"CategoryTheory.MonoidalCategory.inv_tensor\", \"CategoryTheory.MonoidalCategory.inv_hom_id_tensor\", \"CategoryTheory.MonoidalCategory.inv_hom_id_tensor'\", \"CategoryTheory.MonoidalCategory.tensor_inv_hom_id'_assoc\", \"CategoryTheory.MonoidalCategory.hom_inv_id_tensor'\"], \"digest\": \"3a54a515b4ef4378\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic tensor identities and shift data do not state the exceptional-inverse-image Tate composite"
   }
  ],
  "blueprint": {
@@ -63,5 +179,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-twist-cancellation",
+  "worker": "stage1",
+  "summary": "Preserved the supplied-data statement and expanded the co-projection cancellation into six steps. Reused existing finite Tate-line invertibility and pullback statements, wrote out signed tensor additivity and the exact inverse co-projection, and derived the untwisted and degree-zero conclusions. No new nodes, no normalization or regularity assumption, and no SGA route.",
+  "blueprint": "Realizes the twist-removal calculation in sk-thm-regular.proof.md Step 2, conditional on the orientation inputs supplied by Step 1; it does not claim the frame-class comparison of Step 4."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-8bf578a37",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-8bf578a37 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited statement, unit sk-thm-regular, and blueprint main-20261015 sk-thm-regular.proof.md Step 2 plus pur9-rg-def-phi. The statement's composite has the same four arrows, order and direction as pur9-rg-def-phi, with the orientation data taken as inputs. Its conclusions, Ri^!Λ_X≅Λ_Z(-c)[-2c] and a degree-zero target ≅Λ_Z, are Step 2's. Nothing is weakened, and the coefficient category D^b_c(-,A_{E,n}) on the pro-étale site matches sk-def-purity-conv, def-weil-exceptional-inverse-image and lem-pur-coprojection. Step 1: clause 3 of det-def-sp-tate-twist-locally-free applies because ℓ∈(ϖ). Signed additivity holds by local generator contraction, checked independent of the generator. The twists lie in D^b_ctf because constructibility is pro-étale local and the lines are flat of rank one. Step 2: the hypotheses of det-prop-sfb-cartesian-coefficients-twists hold, and Li^* is termwise i^{-1} by def-weil-derived-pullback-tensor-hom. Step 4: lem-pur-coprojection applies with K=T_X(N)∈D^b_c and L=T_X(-m), invertible in D^b_ctf with inverse T_X(m). Its inverse followed by additivity is exactly the stated last arrow, so the actual composite is invertible. Step 5: lem-pur-coprojection with K=Λ_X and L=T_X(c); signs checked with N=3, m=1, c=2. Steps 3 and 6 are elementary. Edge cases checked: c=0, m=0, i=id (forces N=m), empty Z, and a point in A^1. Rescaling b by a unit rescales Φ, so claiming only invertibility is correct. All citations are within the unit's route (sk-prop-an, sk-lem-coprojection, plus one definition), so no tool_uses are needed. There is no cycle and no SGA. No new nodes. Existing lem-pur-immersion-twist states the twist-passage ingredient, not the item, so there is no duplicate. No fixes."
  }
 }
