@@ -14,7 +14,8 @@ Let `G` be a finite affine gluing presentation of a scheme `S`
 (`AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation`) and `l` a valid stage
 (`AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation.Stage`) with coefficient subrings
 `Aₐ ⊆ Γ(S, Uₐ)`. We glue the charts `Spec Aₐ` along the opens `⋃_r D(f a b r) ⊆ Spec Aₐ` to a
-scheme `S_l` of finite type over `ℤ` (`AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation.Stage.scheme`).
+scheme `S_l` of finite type over `ℤ`
+(`AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation.Stage.scheme`).
 
 The overlap map `⋃_r D(f a b r) ⟶ Spec A_b` is characterised by being compatible with the chart
 maps `Uₐ ⊓ U_b ⟶ Spec Aₐ` and `Uₐ ⊓ U_b ⟶ Spec A_b` induced by the inclusions `Aₐ ⊆ Γ(S, Uₐ)`
@@ -49,8 +50,8 @@ abbrev ring (a : G.ι) : CommRingCat.{u} := CommRingCat.of (l.A a)
 def fElem (a b : G.ι) (r : G.κ a b) : l.A a := ⟨G.f a b r, l.f_mem a b r⟩
 
 /-- The overlap `⋃_r D(f a b r) ⊆ Spec Aₐ` of the chart `a` with the chart `b`. -/
-def overlap (a b : G.ι) : (Spec (l.ring a)).Opens :=
-  ⨆ r, PrimeSpectrum.basicOpen (l.fElem a b r)
+noncomputable def overlap (a b : G.ι) : (Spec (l.ring a)).Opens :=
+  ⨆ r, chartBasicOpen (l.A a) (l.fElem a b r)
 
 lemma inf_eq_iSup_basicOpen (a b : G.ι) :
     (G.U a : S.Opens) ⊓ G.U b = ⨆ r, S.basicOpen ((l.fElem a b r : l.A a) : Γ(S, G.U a)) :=
@@ -81,9 +82,10 @@ lemma overlap_hom_ext (a b : G.ι) {R : CommRingCat.{u}} (f g : (l.overlap a b).
 /-- The overlap of a chart with itself is everything. -/
 lemma overlap_self (a : G.ι) : l.overlap a a = ⊤ := by
   obtain ⟨c, hc, hsum⟩ := l.unit_self a
-  refine PrimeSpectrum.iSup_basicOpen_eq_top_iff.mpr ?_
+  refine iSup_specBasicOpen_eq_top_iff.mpr ?_
   rw [Ideal.eq_top_iff_one]
-  have : (1 : l.A a) = ∑ r, ⟨c r, hc r⟩ * l.fElem a a r := Subtype.ext (by simpa using hsum.symm)
+  have : (1 : l.A a) = ∑ r, ⟨c r, hc r⟩ * l.fElem a a r :=
+    Subtype.ext (by simpa [fElem] using hsum.symm)
   rw [this]
   exact Ideal.sum_mem _ fun r _ ↦ Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨r, rfl⟩)
 
@@ -157,9 +159,9 @@ def fElemMul (a b c : G.ι) (p : G.κ a b × G.κ a c) : l.A a :=
   l.fElem a b p.1 * l.fElem a c p.2
 
 lemma overlap_inf_overlap (a b c : G.ι) :
-    l.overlap a b ⊓ l.overlap a c = ⨆ p, PrimeSpectrum.basicOpen (l.fElemMul a b c p) := by
+    l.overlap a b ⊓ l.overlap a c = ⨆ p, chartBasicOpen (l.A a) (l.fElemMul a b c p) := by
   rw [overlap, overlap, iSup_inf_iSup]
-  simp_rw [fElemMul, PrimeSpectrum.basicOpen_mul]
+  exact iSup_congr fun p ↦ (specBasicOpen_mul _ _).symm
 
 lemma inf_inf_eq_iSup_basicOpen (a b c : G.ι) :
     ((G.U a : S.Opens) ⊓ G.U b) ⊓ ((G.U a : S.Opens) ⊓ G.U c) =
@@ -170,7 +172,7 @@ lemma inf_inf_eq_iSup_basicOpen (a b c : G.ι) :
 lemma range_subringChart_subset_inf (a b c : G.ι) :
     Set.range (subringChart (l.A a) (inf_le_left.trans inf_le_left :
       ((G.U a : S.Opens) ⊓ G.U b) ⊓ ((G.U a : S.Opens) ⊓ G.U c) ≤ G.U a)) ⊆
-      l.overlap a b ⊓ l.overlap a c := by
+      ((l.overlap a b ⊓ l.overlap a c : (Spec (l.ring a)).Opens) : Set (Spec (l.ring a))) := by
   rw [l.overlap_inf_overlap]
   exact range_subringChart_subset _ _ _ (l.inf_inf_eq_iSup_basicOpen a b c).le
 
@@ -225,7 +227,7 @@ lemma trans_mem (a b c : G.ι) (x : l.overlap a b) (hx : x.1 ∈ l.overlap a c) 
     rw [← trans_ι, Scheme.Hom.comp_apply]
     rfl
   set x' : (l.overlap a b ⊓ l.overlap a c).toScheme := ⟨x.1, x.2, hx⟩
-  have h2 : (Spec (l.ring a)).homOfLE inf_le_left x' = x := Subtype.ext rfl
+  have h2 : (Spec (l.ring a)).homOfLE inf_le_left x' = x := Scheme.homOfLE_apply' _ _ _
   rw [h1, ← h2, ← Scheme.Hom.comp_apply]
   exact hrange ⟨x', rfl⟩
 
@@ -242,7 +244,7 @@ lemma cocycle (a b c : G.ι) (H) :
     rw [← cancel_mono (l.overlap b c).ι, Category.assoc, IsOpenImmersion.lift_fac, trans_ι,
       chartLiftInf_toChart, Category.assoc, chartLiftOverlap_ι, homOfLE_subringChart]
   refine l.overlap_inf_hom_ext a b c _ _ ?_
-  rw [reassoc_of% hlift, trans_ι, chartLiftOverlap_toChart_assoc, homOfLE_subringChart,
+  rw [reassoc_of% hlift, trans_ι, chartLiftOverlap_toChart, homOfLE_subringChart,
     trans_ι, chartLiftInf_homOfLE_right_assoc, chartLiftOverlap_toChart, homOfLE_subringChart]
 
 /-- The gluing datum of a stage: the charts `Spec Aₐ`, glued along the overlaps
@@ -293,8 +295,11 @@ lemma opens_ext {O₁ O₂ : l.scheme.Opens} (h : ∀ a, l.ι a ⁻¹ᵁ O₁ = 
   obtain ⟨a, y, rfl⟩ := l.glueData.ι_jointly_surjective x
   exact SetLike.ext_iff.mp (h a) y
 
-instance compactSpace_scheme : CompactSpace l.scheme :=
-  inferInstanceAs (CompactSpace l.glueData.glued)
+instance compactSpace_scheme : CompactSpace l.scheme := by
+  have : Finite l.glueData.J := inferInstanceAs (Finite G.ι)
+  have (a : l.glueData.J) : CompactSpace (l.glueData.U a) :=
+    inferInstanceAs (CompactSpace (Spec (l.ring a)))
+  exact inferInstanceAs (CompactSpace l.glueData.glued)
 
 instance locallyOfFiniteType_scheme :
     LocallyOfFiniteType (specULiftZIsTerminal.from l.scheme) := by
@@ -365,7 +370,7 @@ lemma transition_preimage_opensRange_ι (a : G.ι) :
 /-- Part of blueprint `lemma-nagata-glue-noetherian-stage`: the transition morphisms are
 affine. -/
 instance isAffineHom_transition : IsAffineHom (transition hll) := by
-  refine isAffineHom_of_forall_exists_isAffineOpen fun x ↦ ?_
+  refine isAffineHom_of_forall_exists_isAffineOpen _ fun x ↦ ?_
   have hx : x ∈ (⊤ : l.scheme.Opens) := trivial
   rw [← l.iSup_opensRange_ι] at hx
   obtain ⟨a, ha⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
@@ -376,7 +381,7 @@ instance isAffineHom_transition : IsAffineHom (transition hll) := by
 lemma transition_refl : transition (le_refl l) = 𝟙 _ :=
   l.hom_ext fun a ↦ by
     rw [ι_transition, Category.comp_id]
-    exact (Category.id_comp _).symm.trans (congrArg (· ≫ l.ι a) Spec.map_id.symm)
+    rw [show incl (le_refl l) a = 𝟙 _ from rfl, Spec.map_id, Category.id_comp]
 
 lemma transition_trans {l'' : G.Stage} (hll' : l' ≤ l'') :
     transition (hll.trans hll') = transition hll' ≫ transition hll :=
@@ -392,7 +397,7 @@ noncomputable def stageDiagram (G : S.FiniteAffineGluingPresentation) :
     (G.Stage)ᵒᵖ ⥤ Scheme.{u} where
   obj l := l.unop.scheme
   map f := Stage.transition (leOfHom f.unop)
-  map_id l := Stage.transition_refl
+  map_id _ := Stage.transition_refl
   map_comp f g := Stage.transition_trans (leOfHom g.unop) (leOfHom f.unop)
 
 @[simp]

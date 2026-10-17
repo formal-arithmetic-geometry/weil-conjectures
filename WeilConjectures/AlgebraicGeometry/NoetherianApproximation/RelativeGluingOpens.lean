@@ -35,17 +35,24 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-lemma Scheme.Hom.resLE_congr {X Y : Scheme.{u}} {f f' : X ⟶ Y} (h : f = f') (U : Y.Opens)
+lemma Scheme.Hom.resLE_eq_of_eq {X Y : Scheme.{u}} {f f' : X ⟶ Y} (h : f = f') (U : Y.Opens)
     (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) (e' : V ≤ f' ⁻¹ᵁ U) : f.resLE U V e = f'.resLE U V e' := by
   subst h
   rfl
+
+@[reassoc]
+lemma Scheme.homOfLE_comp_resLE {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) {V W : X.Opens}
+    (e : W ≤ V) (e' : V ≤ f ⁻¹ᵁ U) :
+    X.homOfLE e ≫ f.resLE U V e' = f.resLE U W (e.trans e') := by
+  rw [← cancel_mono U.ι]
+  simp [Scheme.homOfLE_ι_assoc]
 
 lemma Scheme.Hom.resLE_apply_val {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) (V : X.Opens)
     (e : V ≤ f ⁻¹ᵁ U) (x : V) : (f.resLE U V e x).1 = f x.1 := by
   rw [← Scheme.Opens.ι_apply, ← Scheme.Hom.comp_apply, Scheme.Hom.resLE_comp_ι,
     Scheme.Hom.comp_apply, Scheme.Opens.ι_apply]
 
-lemma Scheme.Opens.mem_ι_image_iff {X : Scheme.{u}} (V : X.Opens) (A : V.toScheme.Opens)
+lemma Scheme.Opens.mem_ι_image_iff_exists {X : Scheme.{u}} (V : X.Opens) (A : V.toScheme.Opens)
     (x : X) : x ∈ V.ι ''ᵁ A ↔ ∃ h : x ∈ V, (⟨x, h⟩ : V) ∈ A := by
   rw [← SetLike.mem_coe, Scheme.Hom.coe_image]
   constructor
@@ -53,9 +60,6 @@ lemma Scheme.Opens.mem_ι_image_iff {X : Scheme.{u}} (V : X.Opens) (A : V.toSche
     exact ⟨y.2, hy⟩
   · rintro ⟨h, hx⟩
     exact ⟨_, hx, rfl⟩
-
-lemma Scheme.Opens.ι_image_le {X : Scheme.{u}} (V : X.Opens) (A : V.toScheme.Opens) :
-    V.ι ''ᵁ A ≤ V := fun x hx ↦ ((V.mem_ι_image_iff A x).mp hx).1
 
 /-- An inclusion of preimages of opens of `V` under a restriction of `f` is an inclusion of
 preimages under `f` of their images in `Y`. -/
@@ -65,7 +69,7 @@ lemma Scheme.Hom.resLE_preimage_le_iff {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.O
       f ⁻¹ᵁ (V.ι ''ᵁ A₁) ≤ f ⁻¹ᵁ (V.ι ''ᵁ A₂) := by
   constructor
   · intro H x hx
-    obtain ⟨h, hA⟩ := (V.mem_ι_image_iff A₁ _).mp hx
+    obtain ⟨h, hA⟩ := (V.mem_ι_image_iff_exists A₁ _).mp hx
     have hxV : x ∈ f ⁻¹ᵁ V := h
     have key : f.resLE V (f ⁻¹ᵁ V) le_rfl ⟨x, hxV⟩ = ⟨f x, h⟩ :=
       Subtype.ext (f.resLE_apply_val V _ le_rfl _)
@@ -74,18 +78,20 @@ lemma Scheme.Hom.resLE_preimage_le_iff {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.O
       exact hA
     have h₂ := H h₁
     rw [Scheme.Hom.mem_preimage, key] at h₂
-    exact (V.mem_ι_image_iff A₂ _).mpr ⟨h, h₂⟩
+    exact (V.mem_ι_image_iff_exists A₂ _).mpr ⟨h, h₂⟩
   · intro H x hx
     rw [Scheme.Hom.mem_preimage] at hx ⊢
     have e : f.resLE V (f ⁻¹ᵁ V) le_rfl x = ⟨f x.1, x.2⟩ :=
       Subtype.ext (f.resLE_apply_val V _ le_rfl _)
     rw [e] at hx ⊢
-    obtain ⟨-, h⟩ := (V.mem_ι_image_iff A₂ _).mp (H ((V.mem_ι_image_iff A₁ _).mpr ⟨x.2, hx⟩))
+    obtain ⟨_, h⟩ := (V.mem_ι_image_iff_exists A₂ _).mp
+      (H ((V.mem_ι_image_iff_exists A₁ _).mpr ⟨x.2, hx⟩))
     exact h
 
 variable {I : Type u} [Category.{u} I] [IsCofiltered I] {F : I ⥤ Scheme.{u}} {c : Cone F}
   (hc : IsLimit c) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (F.map f)]
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (F.map f)] in
 /-- Restricting along the composite of two transition maps. -/
 lemma resLE_map_comp {l : I} (V : (F.obj l).Opens) {k j : I} (f : j ⟶ l) (g : k ⟶ j) :
     (F.map (g ≫ f)).resLE V (F.map (g ≫ f) ⁻¹ᵁ V) le_rfl =
@@ -93,7 +99,7 @@ lemma resLE_map_comp {l : I} (V : (F.obj l).Opens) {k j : I} (f : j ⟶ l) (g : 
         (by rw [Functor.map_comp, Scheme.Hom.comp_preimage]) ≫
         (F.map f).resLE V (F.map f ⁻¹ᵁ V) le_rfl := by
   rw [Scheme.Hom.resLE_comp_resLE]
-  exact Scheme.Hom.resLE_congr (F.map_comp g f) _ _ _ _
+  exact Scheme.Hom.resLE_eq_of_eq (F.map_comp g f) _ _ _ _
 
 include hc in
 /-- An inclusion of opens of a quasi-compact open `V ⊆ F_λ` which holds in the limit holds past
@@ -115,8 +121,20 @@ theorem exists_forall_resLE_preimage_le {l : I} (V : (F.obj l).Opens)
     Scheme.Hom.comp_preimage]
   exact Scheme.Hom.preimage_mono _ hf
 
-variable [∀ i, CompactSpace (F.obj i)] [∀ i, QuasiSeparatedSpace (F.obj i)]
+include hc in
+/-- An inclusion of preimages of opens of a stage, the first one quasi-compact, which holds in
+the limit holds past some stage. -/
+theorem exists_forall_map_preimage_le {l : I} {U V : (F.obj l).Opens}
+    (hU : IsCompact (U : Set (F.obj l))) (H : c.π.app l ⁻¹ᵁ U ≤ c.π.app l ⁻¹ᵁ V) :
+    ∃ k₀ : Over l, ∀ (k : Over l) (_ : k ⟶ k₀), F.map k.hom ⁻¹ᵁ U ≤ F.map k.hom ⁻¹ᵁ V := by
+  obtain ⟨j, f, hf⟩ := exists_map_preimage_le_map_preimage F c hc hU H
+  refine ⟨Over.mk f, fun k g ↦ ?_⟩
+  rw [← Over.w g, Functor.map_comp, Scheme.Hom.comp_preimage, Scheme.Hom.comp_preimage]
+  exact Scheme.Hom.preimage_mono _ hf
 
+variable [∀ i, QuasiSeparatedSpace (F.obj i)]
+
+omit [IsCofiltered I] [∀ i, QuasiSeparatedSpace (F.obj i)] in
 lemma compactSpace_opensDiagram_obj {l : I} {V : (F.obj l).Opens}
     (hV : IsCompact (V : Set (F.obj l))) (k : Over l) :
     CompactSpace ((opensDiagram F l V).obj k) :=
@@ -138,6 +156,7 @@ variable {S : Scheme.{u}} (t : F ⟶ (Functor.const I).obj S)
     rw [Scheme.Hom.resLE_comp_ι_assoc, t.naturality]
     simp
 
+omit [∀ i, QuasiSeparatedSpace (F.obj i)] in
 include hc in
 /-- Two morphisms out of a quasi-compact open `V ⊆ F_λ` over `S` to a scheme locally of finite
 type over `S` which agree in the limit agree past some stage. -/
@@ -154,19 +173,20 @@ theorem exists_forall_resLE_comp_eq {l : I} {V : (F.obj l).Opens}
   have hr (k : Over l) (g : k ⟶ Over.mk (𝟙 l)) :
       (opensDiagram F l V).map g ≫ r = (F.map k.hom).resLE V (F.map k.hom ⁻¹ᵁ V) le_rfl := by
     simp only [opensDiagram_map, r, Scheme.Hom.resLE_comp_resLE]
-    exact Scheme.Hom.resLE_congr (by rw [← F.map_comp, Over.w g]; rfl) _ _ _ _
+    exact Scheme.Hom.resLE_eq_of_eq (by rw [← F.map_comp, Over.w g]) _ _ _ _
   have hπ : (opensCone F c l V).π.app (Over.mk (𝟙 l)) ≫ r =
       (c.π.app l).resLE V (c.π.app l ⁻¹ᵁ V) le_rfl := by
     simp only [opensCone_π_app, r, Scheme.Hom.resLE_comp_resLE]
-    exact Scheme.Hom.resLE_congr (c.w _) _ _ _ _
+    exact Scheme.Hom.resLE_eq_of_eq (c.w _) _ _ _ _
   obtain ⟨k, g, hk⟩ := Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType
     (opensDiagram F l V) (opensDiagramStructure t l V) q (opensCone F c l V)
     (isLimitOpensCone F c hc l V) (i := Over.mk (𝟙 l)) (r ≫ a₁) (r ≫ a₂)
     (by simp [r, ha₁]) (by simp [r, ha₂])
     (by rw [reassoc_of% hπ, reassoc_of% hπ, H])
   refine ⟨k, fun k' g' ↦ ?_⟩
-  rw [← hr k' (g' ≫ g), Functor.map_comp, Category.assoc, Category.assoc, Category.assoc,
-    Category.assoc, reassoc_of% hk]
+  have e := congrArg ((opensDiagram F l V).map g' ≫ ·) hk
+  simp only [← Category.assoc, ← Functor.map_comp, hr k' (g' ≫ g)] at e
+  exact e
 
 include hc in
 /-- A morphism over `S` out of the preimage in the limit of a quasi-compact open `V ⊆ F_λ` to a
@@ -187,8 +207,8 @@ theorem exists_resLE_comp_eq_of_locallyOfFinitePresentation {l : I} {V : (F.obj 
       ext k
       simp only [NatTrans.comp_app, opensCone_π_app, opensDiagramStructure_app,
         Functor.const_obj_obj, Functor.const_map_app, Scheme.Hom.resLE_comp_ι_assoc, hφ]
-      rw [← c.w k.hom, Category.assoc, t.naturality]
-      simp)
+      have e : t.app k.left = F.map k.hom ≫ t.app l := by simp
+      rw [e, ← Category.assoc (c.π.app k.left), c.w])
   exact ⟨k, ψ, h₂, h₁⟩
 
 end AlgebraicGeometry
