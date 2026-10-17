@@ -5,11 +5,13 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
-public import WeilConjectures.WeilSheaf.CohomologyNonneg
-public import WeilConjectures.WeilSheaf.CohomologyProEtale
+public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
+import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
+import WeilConjectures.WeilSheaf.CohomologyNonneg
+import WeilConjectures.WeilSheaf.CohomologyProEtale
 
 /-!
 # The cohomological range of the constant Weil sheaf
@@ -32,11 +34,6 @@ For `Y` smooth of relative dimension `d`, the geometric fiber has dimension at m
 universe u
 
 open CategoryTheory
-
--- `Mathlib.AlgebraicGeometry.Group.Affine`, imported through the étale cohomological dimension
--- bound, makes `Spec k₀` over itself also an instance of `AlgebraicGeometry.specOverSpec`; Weil
--- sheaves on `Spec k₀` are stated with the identity structure `CategoryTheory.instOverClass`.
-attribute [instance 1100] CategoryTheory.instOverClass
 
 namespace AlgebraicGeometry
 
