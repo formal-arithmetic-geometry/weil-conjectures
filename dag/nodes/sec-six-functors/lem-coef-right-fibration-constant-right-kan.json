@@ -13,9 +13,75 @@
   "lem-coef-right-fibration-section-limit",
   "lem-coef-infinity-hom-bifunctor-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construction of $\\epsilon_X$. Let $p':E\\times_BE\\to E$ be the projection to the first factor, the pullback of $p$ along $p$. It is a right fibration in the sense of [def-coef-infinity-fibrations]: a lifting problem for $\\Lambda^n_i\\subseteq\\Delta^n$ ($n\\geq1$, $0<i\\leq n$) against $p'$ is solved by solving its second coordinate against $p$, the first coordinate being prescribed. Its fibre over $e\\in E_b$ is $\\{e\\}\\times E_b=E_b$. The diagonal $\\delta=(\\mathrm{id},\\mathrm{id}):E\\to E\\times_BE$ is a section of $p'$, that is, a vertex of $\\Gamma(p')$. By [lem-coef-right-fibration-section-limit], evaluation of sections is a cone $\\Gamma(p')\\to m_{p'}$; composing it with the vertex $\\delta:\\Delta^0\\to\\Gamma(p')$ gives a coherent transformation $\\tau':\\Delta_{E^{\\mathrm{op}}}\\Delta^0\\to m_{p'}$ whose component at $e$ is the point $\\delta(e)=e$ of the fibre $E_{p(e)}$. The naturality of transport under restriction of the base, in the same statement, identifies $m_{p'}$ coherently with $Q_p\\circ p^{\\mathrm{op}}$, compatibly with the fibre identifications above; so $\\tau'$ becomes a coherent transformation $\\tau:\\Delta_{E^{\\mathrm{op}}}\\Delta^0\\to Q_pp^{\\mathrm{op}}$ whose component at $e$ is the tautological point $e\\in Q_p(p(e))$. Now apply the coherent Hom bifunctor $H$ of $\\mathcal C=\\mathcal S_{\\mathcal U}$ from [lem-coef-infinity-hom-bifunctor-functoriality] (with $\\mathcal U\\in\\mathcal U'$; $\\mathcal S_{\\mathcal U}$ is $\\mathcal U'$-small with $\\mathcal U$-small mapping spaces) in its contravariant first variable, with second variable $X$. This gives a coherent transformation $H(\\tau,X):H(Q_pp(-),X)\\to H(\\Delta^0,X)$ of functors $E\\to\\mathcal S_{\\mathcal U}$. Its source is $R_Xp$ by the definition of $R_X$. Its target is the constant diagram at $H(\\Delta^0,X)=\\operatorname{Map}_{\\mathcal S_{\\mathcal U}}(\\Delta^0,X)$, which [lem-coef-space-constant-diagram-limit] for $K=\\Delta^0$ identifies with $X$ (a limit of a diagram on one vertex is its value), the identification being evaluation at the vertex. Call the resulting transformation $\\epsilon_X:R_Xp\\to\\Delta_EX$. The first-variable action of $H$ is precomposition, so the component of $\\epsilon_X$ at $e\\in E_b$ sends $x\\in\\operatorname{Map}(Q_p(b),X)$ to $x\\circ e=x(e)$. Since $H$ is a coherent functor of both variables, $\\epsilon_X$ is natural in $X$, with all simplicial parameters.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-right-fibration-section-limit",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-space-constant-diagram-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZL",
+    "place": "Kerodon Proposition 7.3.4.1 (02ZL), opposite form, as the target of the comparison; the evaluation transformation is the tautological section of the pulled-back right fibration composed with the Hom functor (agent-written)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-right-fibration-fiberwise-kan] to $p$ and $G=\\Delta_EX$. Each restricted diagram $G_b=\\Delta_{E_b}X$ has a limit by [lem-coef-space-constant-diagram-limit], applied to the Kan complex $E_b$ (also when $E_b=\\varnothing$). The node gives a coherent functor $\\operatorname{Ran}_pG:B\\to\\mathcal S_{\\mathcal U}$ and a counit $\\eta:(\\operatorname{Ran}_pG)p\\to G$ whose restriction to each $E_b$ is a limiting cone on $G_b$, and for every coherent $F:B\\to\\mathcal S_{\\mathcal U}$ an equivalence of spaces $\\Phi_F:\\operatorname{Map}(F,\\operatorname{Ran}_pG)\\to\\operatorname{Map}(Fp,\\Delta_EX)$, $\\phi\\mapsto\\eta\\circ(\\phi p)$, natural in $F$. Take $F=R_X$. Since $\\Phi_{R_X}$ is an equivalence of Kan complexes, its vertex $\\epsilon_X$ of Step 1 lies in the image up to an edge: choose a coherent transformation $\\alpha:R_X\\to\\operatorname{Ran}_pG$ and a $2$-simplex of $\\operatorname{Fun}(E,\\mathcal S_{\\mathcal U})$ with edges $\\alpha p$, $\\eta$ and $\\epsilon_X$, witnessing $\\eta\\circ(\\alpha p)\\simeq\\epsilon_X$.",
+   "uses": [
+    "lem-coef-right-fibration-fiberwise-kan",
+    "lem-coef-space-constant-diagram-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZL",
+    "place": "Kerodon Propositions 7.3.4.1 and 7.3.4.4 (02ZL) in opposite form, with Proposition 7.3.6.1 (0309) for the mapping-space property."
+   }
+  },
+  {
+   "text": "$\\alpha$ is an equivalence. Fix $b\\in B$. Since $p$ maps $E_b$ to the vertex $b$, the restrictions of $R_Xp$ and $\\alpha p$ to $E_b$ are the constant diagram at $R_X(b)=\\operatorname{Map}(E_b,X)$ and the constant transformation at $\\alpha_b$. By Step 1, $\\epsilon_X|_{E_b}$ is the cone $\\Delta_{E_b}\\operatorname{Map}(E_b,X)\\to\\Delta_{E_b}X$ given by evaluation at the points of $E_b$, which is the evaluation cone that [lem-coef-space-constant-diagram-limit] states is limiting. The restricted $2$-simplex of Step 2, completed by a degenerate $2$-simplex to a square, is a morphism from $\\epsilon_X|_{E_b}$ to $\\eta|_{E_b}$ in the coherent cone category $(\\Delta_{E_b}\\downarrow G_b)$ of [def-cbc-enhanced-diagrams-cones], with apex component $\\alpha_b$. Both cones are limiting, that is, terminal objects of that quasicategory. By [lem-cbc-enhanced-functor-cone-calculus] the full subcategory of terminal objects is a contractible Kan complex, so this morphism is an equivalence edge; the apex projection is a simplicial map and carries it with its inverse witnesses to an equivalence $\\alpha_b$ of $\\mathcal S_{\\mathcal U}$. This holds for every $b$, including $E_b=\\varnothing$, where both apices are terminal. By [lem-coef-infinity-pointwise-equivalences], $\\alpha$ is an equivalence edge of $\\operatorname{Fun}(B,\\mathcal S_{\\mathcal U})$.",
+   "uses": [
+    "lem-coef-space-constant-diagram-limit",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03F3",
+    "place": "Kerodon Remark 7.1.2.6 (03F3) and Example 7.1.2.9 (03F7): the evaluation cone exhibits Fun(K,X) as the limit of the constant diagram; uniqueness of limits (agent-written)."
+   }
+  },
+  {
+   "text": "For every coherent $F:B\\to\\mathcal S_{\\mathcal U}$, consider the displayed map $\\Psi_F:\\theta\\mapsto\\epsilon_X\\circ(\\theta p)$. Restriction along $p$ commutes strictly with composition of transformations, so the $2$-simplex of Step 2 and the composition homotopies of the coherent Hom bifunctors of $\\operatorname{Fun}(E,\\mathcal S_{\\mathcal U})$ and $\\operatorname{Fun}(B,\\mathcal S_{\\mathcal U})$ (formed in a containing universe, [lem-coef-infinity-hom-bifunctor-functoriality]) give a homotopy $\\Psi_F\\simeq\\Phi_F\\circ\\alpha_*$, where $\\alpha_*:\\operatorname{Map}(F,R_X)\\to\\operatorname{Map}(F,\\operatorname{Ran}_pG)$ is the second-variable action of the Hom bifunctor on $\\alpha$. As $\\alpha$ is an equivalence edge (Step 3) and a coherent functor carries an equivalence edge with its inverse witnesses to an equivalence, $\\alpha_*$ is a homotopy equivalence; $\\Phi_F$ is one by Step 2. Hence $\\Psi_F$, homotopic to their composite, is an equivalence of whole spaces. Its value at $\\theta$ has component at $e\\in E_b$ equal to $\\epsilon_{X,e}\\circ\\theta_b$, which by Step 1 is $x\\mapsto\\theta_b(x)(e)$. So $\\epsilon_X$ has the universal property of a counit exhibiting $R_X$ as the right Kan extension of $\\Delta_EX$ along $p$ (and it is the counit $\\eta$ transported along $\\alpha$). Naturality in $F$ is the first-variable naturality of the Hom bifunctors; naturality in $X$ follows from that of $\\epsilon_X$ (Step 1) and the second-variable naturality, with all simplicial parameters. If $E=\\varnothing$, every fibre is empty, $\\operatorname{Fun}(\\varnothing,\\mathcal S_{\\mathcal U})=\\Delta^0$ and each $R_X(b)$ is terminal; the argument above applies unchanged and both sides are contractible.",
+   "uses": [
+    "lem-coef-right-fibration-fiberwise-kan",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0309",
+    "place": "Kerodon Proposition 7.3.6.1 (0309), opposite form: the mapping-space universal property of the Kan extension, transported along the equivalence alpha."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-right-fibration-fiberwise-kan",
+  "lem-coef-right-fibration-section-limit",
+  "lem-coef-space-constant-diagram-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02ZL",
+  "place": "Opposite form of Kerodon Propositions 7.3.4.1 and 7.3.4.4 (02ZL) and 7.3.6.1 (0309), combined with Remark 7.1.2.6 (03F3) and Example 7.1.2.9 (03F7) for limits of constant diagrams of spaces; comparison and evaluation counit written by agent."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -82,7 +148,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-comma-corepresentable-colimit",
@@ -94,7 +160,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed derived coefficient adjunction and derived inverse-limit mapping-complex calculation, in main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md; foundational localization comparison via the representable comma-colimit calculation. The general fiberwise right Kan calculation of a constant space used to test the representable comma cocone.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint (the derived coefficient adjunction and inverse-limit mapping-complex calculation), reached through the foundational localization chain listed in via; this node serves step 3 of lem-coef-infinity-comma-corepresentable-colimit (cocones out of Fp identified with transformations into R_X). The blueprint text itself contains no right-fibration sentence.",
    "via": [
     "lem-coef-infinity-comma-corepresentable-colimit",
     "lem-coef-final-square-full-faithfulness",
@@ -116,5 +182,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-right-fibration-constant-right-kan",
+  "worker": "stage1",
+  "summary": "Split the right-fibration constant-space right Kan statement into the general fibrewise right Kan extension theorem and the constant Kan-complex limit/evaluation lemma. The item proof specializes the general theorem to the constant diagram, identifies fibre limits with mapping spaces using the evaluation cone, and transports the counit and all coherent naturality; empty fibres and containing universes are retained. Kerodon tags 02ZL and 0309 were read online; no archival copy is available.",
+  "blueprint": "No blueprint sentence states this; the steps realize the foundational right-Kan calculation used by lem-coef-infinity-comma-corepresentable-colimit step 3, under paragraph 2 of prop-coef-integral-exceptional-adjoint.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 3 takes from its statement only that terminal objects of a quasicategory form a contractible Kan complex, to compare two limiting cones; a generic quasicategory fact, already accepted as a tool use for the parent lem-coef-infinity-comma-corepresentable-colimit; no node of sk-prop-sf-biduality-general states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-0b6a22da1",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-0b6a22da1 (reviewer sub-agent of L); spot-checked: The item and both new nodes are true. I checked the variance against Kerodon read online: 02ZL Props 7.3.4.1/7.3.4.4 (left Kan extension along a cocartesian fibration, by fibre colimits) and 0309 Prop 7.3.6.1, used in opposite form for right fibrations. I also checked 03F3/03F7, where the power Fun(K,X) is the limit of a constant diagram. Test cases (identity fibration, B=pt, empty fibre, empty E, K=S^1) all behave as stated. No duplicates: I compared relative-right-kan-(universal-)restriction, pointwise-lan-mapping-property, grothendieck-limits-colimits, left-fibration-fiberwise-coinitiality and space-point-cocone-criterion. Neither new node restates the item. Faults repaired in fixes/: (E5) Step 2 asserted the coherent identification of Ran with R_X 'by naturality' and never built eps_X as a coherent transformation. I rewrote the proof in 4 steps: eps_X from the diagonal section of the pulled-back fibration via lem-coef-right-fibration-section-limit plus the Hom bifunctor; alpha from the node-1 universal property; alpha_b an equivalence because both cones are terminal (lem-cbc-enhanced-functor-cone-calculus); alpha an equivalence by lem-coef-infinity-pointwise-equivalences; then the mapping-space map is homotopic to Phi_F composed with alpha_*. (B4) Step 3 had TAB-corrupted \\to and \\theta. (B5) lem-coef-space-constant-diagram-limit cited 7.3.6.1; corrected to Kerodon 03F3/03F7, and its evaluation cone is now pinned to the simplicial evaluation map. Minor: fiberwise-kan now cites lem-coef-infinity-right-fibration-fibers for the Kan fibre. I filled the item's from.place and split_report.blueprint. Tool use declared and accepted: lem-cbc-enhanced-functor-cone-calculus (terminal objects form a contractible Kan complex), already accepted for the parent. Reachability check: no cycle. No nodes dropped. An archival copy of Kerodon is still WANTED.; 3 file(s) fixed by the reviewer"
  }
 }
