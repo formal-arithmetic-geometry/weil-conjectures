@@ -14,9 +14,40 @@
   "def-weil-pbc-free-module",
   "def-trf-k0-group"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use $K_0(S)$ in the current presentation [def-trf-k0-group]: its generators are isomorphism classes of finite projective quotients $S^m/N$, with the direct-sum relations $[Q']+[Q'']=[Q'\\oplus Q'']$. These are the classes and group in [lem-trf-k0-determinant-map], so no change of K-group is involved. The hypotheses on $L$ are exactly those of its rank-one clause. It therefore identifies $\\det([L])$ with the Picard class represented by $L$. The module $S$ is finite free of rank one, hence is finite projective and is free of rank one after every prime localization; the same statement identifies $\\det([S])$ with the identity Picard class represented by $S$.",
+   "uses": [
+    "def-trf-k0-group",
+    "lem-trf-k0-determinant-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0AFX (more-algebra-lemma-det), line 36463, specialized to rank one"
+   }
+  },
+  {
+   "text": "Write the Picard group multiplicatively. Apply the group homomorphism $\\det$ to the assumed equality $[L]=n[S]$ in this $K_0(S)$. Its homomorphism law gives $\\det([L])=\\det([S])^n=1^n=1$ for every integer $n$, including zero and negative integers. Since the Picard group in [lem-trf-k0-determinant-map] consists of isomorphism classes of modules and its identity class is represented by $S$, equality of the classes of $L$ and $S$ means exactly $L\\cong S$ as $S$-modules.",
+   "uses": [
+    "lem-trf-k0-determinant-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AFZ proof, lines 36796–36797, invoking Lemma 0AFX and Lemma 0B8I"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-k0-group",
+  "lem-trf-k0-determinant-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 0AFX (more-algebra-lemma-det), line 36463, and Tag 0AFZ proof, lines 36796–36797"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +79,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-local-pic-zero",
@@ -60,7 +91,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Tag 0AFZ proof: applying the determinant map to the K_0 equality makes the invertible module trivial",
+   "place": "Tag 0AFZ proof: applying the determinant map to the K_0 equality makes the rank-one projective module trivial",
    "via": [
     "lem-trf-regular-local-pic-zero",
     "lem-trf-trace-specialization",
@@ -72,5 +103,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-k0-class-trivial-invertible",
+  "worker": "stage1",
+  "summary": "Audited the rank-one projective statement against Stacks Lemma 0AFX and the final step of Tag 0AFZ. Added one statement-only node for the determinant homomorphism K_0(S) to the Picard group, then proved the item by applying this homomorphism to [L]=n[S] and using that the identity Picard class is represented by S. The hypotheses and conclusion are unchanged. Mathlib searches found only ordinary determinant and Picard declarations, not the K_0 determinant map. Repair of returned head a844d973ab: revalidated the revised explicit K_0 construction in def-trf-k0-group against Stacks 00JC and the direct-sum presentation immediately before 0AFX; step 1 now explicitly cites that presentation and verifies that the determinant lemma uses the same classes. Step 2 spells out the integer-power calculation in multiplicative Picard notation. Re-read all statement dependencies and retained the unchanged item statement.",
+  "blueprint": "Realizes the Tag 0AFZ sentence applying the determinant map to the K_0 equality and trivializing the rank-one module.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-a63055d0e",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-a63055d0e (reviewer sub-agent of L); spot-checked: I read all of the item and the one new node, and I checked both against the Stacks source (more-algebra.tex): the det construction at 36228-36255, 0AFX lemma-det at 36463-36475 with the K_0 recall at 36458-36461, 0B8I lemma-invertible at 36117-36181 including the Pic paragraph, and 0AFZ at 36779-36797. The item is the last sentence of 0AFZ. Its hypotheses (f.g. projective, every L_q free of rank one) are the same as 'finite locally free of rank 1' (= invertible, 0B8I). The statement is unchanged and is exactly what step 5 of lem-trf-regular-local-pic-zero uses. Step 1: the K_0 of def-trf-k0-group (set-sized projective quotients, direct-sum relations) is the group the new lemma uses. L and S both satisfy its rank-one clause, so det[L]=[L] and det[S]=1. Step 2: the homomorphism law gives det(n[S])=1 for every integer n, and equal Pic classes mean L≅S. It uses no kernel or cancellation claim. The new node lem-trf-k0-determinant-map is 0AFX specialized to rank one, as a homomorphism on all of K_0 for any commutative ring. It is true because det(M) is defined for every finite projective through the rank decomposition and lemma-det-ses handles the relations. It is statement-only, with Pic defined inline and every notion cited, and it is strictly more general than the item, so it restates no clause and creates no cycle. Small cases: zero ring, field, k×k, n≤0, Dedekind with a nontrivial class (consistent), and the counterexample S^2 when the rank-one hypothesis is dropped. I searched the DAG with rg for K_0, 0AFX, determinant, Pic/Picard, invertible module and exterior power. lem-trf-invertible-module-k0-class, def-sc-picard-group (curves), def-sc-invertible-module (schemes) and lem-pur-pid-invertible-module-trivial (PIDs) are not duplicates. The blueprint from/via chain is consistent and same_as=[] is right. The route stays inside sk-i-curve-zero, there are no tool_uses, no SGA, and no target is involved. Delivery-errors A-F are clean. No fixes."
  }
 }

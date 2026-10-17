@@ -21,11 +21,193 @@
   "def-weil-finite-type-morphism",
   "def-weil-flat-morphism",
   "def-weil-irreducible-components",
-  "def-weil-polynomial-ring"
+  "def-weil-polynomial-ring",
+  "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-valuation-horizontal-curve-models] with empty marking: $X$ is reduced with finitely many components. Take a finite affine cover $U=\\operatorname{Spec}A$ of $X$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], each $A$ is finitely presented over $V$. Each component is horizontal. Indeed $V$-flatness makes multiplication by every nonzero $v\\in V$ injective on $A$. If $v$ lay in a minimal prime $\\mathfrak p$, choose, for every other minimal prime $\\mathfrak q$, an element of $\\mathfrak q\\setminus\\mathfrak p$ and multiply them. The resulting $b\\notin\\mathfrak p$ satisfies $vb=0$, since $A$ is reduced, a contradiction. Thus the function field $L$ of each component contains $K$ and is the function field of a smooth generic curve. It has transcendence degree one by [lem-sc-closed-irreducible-dimension-trdeg]. There are finitely many affine components to consider. A centred valuation whose closed centre is in $U$ factors through $U$: the inverse image of $U$ contains the closed point of the local spectrum and therefore all its generalizations.",
+   "uses": [
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, affine reduction; opening paragraph of section 4.2. Componentwise reduction written explicitly; affine finite presentation is Stacks 01TQ and transcendence degree is 0B1C."
+   }
+  },
+  {
+   "text": "Fix one affine component with field $L$ and a centred valuation $W\\subset L$. Put $R=W\\cap K$. This is a valuation overring of $V$, and $R=V_{\\mathfrak p}$ for $\\mathfrak p=V\\cap\\mathfrak m_R$: every $s\\in V\\setminus\\mathfrak p$ is invertible in $R$, while for $r\\in R\\setminus V$, the element $r^{-1}\\in V$ is invertible in $R$, so belongs to $V\\setminus\\mathfrak p$. In particular $R$ has finite height. Localizing $\\operatorname{Spec}W\\to U$ by nonzero elements of $V$ gives a centre on $U_\\eta$. This localization is $KW$ as in [lem-trf-valued-curve-etale-parameter]; inverting $V\\setminus\\{0\\}$ or $R\\setminus\\{0\\}$ gives the same subring of $L$, since both yield all of $K$. The morphism lands in the component of the smooth generic curve with field $L$. Apply that parameter theorem to obtain $t\\in W$, $F=K(t)$ and $O=W\\cap F$ such that $O\\to W$ is etale and $L/F$ is finite. Thus $\\operatorname{Spec}O$ has its prescribed centre on $P=\\operatorname{Spec}V[t]$.",
+   "uses": [
+    "lem-trf-valued-curve-etale-parameter"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, parameter paragraph; Theorem 2.1.8 and Lemma 2.1.6. The localization description of valuation overrings is the first paragraph on printed p. 7."
+   }
+  },
+  {
+   "text": "Use [lem-trf-birational-riemann-zariski-neighbourhoods](iii) for $P$ and $O$: write $O=\\varinjlim A_j$, where $D_j=\\operatorname{Spec}A_j$ is an affine neighbourhood of the centre on an integral proper birational model $P_j\\to P$, with $A_j\\subset O\\subset F$ and $\\operatorname{Frac}A_j=F$. The index category is small and filtered on rings, as required in the subsequent descent statements. The morphism $P_j\\to P$ is a reduced modification: a finite set of algebra generators on affine charts gives a dense isomorphism open after clearing their denominators in $F$. By [lem-trf-valuation-horizontal-curve-models], $P_j$ is a $T$-curve and its generic fibre is $P_\\eta$. Consequently $(D_j)_\\eta$ is an open of the affine line, and $A_j$ is finitely presented over $V$ by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. Here $P$ itself is the affine-line strictly semistable model, with smooth generic fibre and empty marking.",
+   "uses": [
+    "lem-trf-birational-riemann-zariski-neighbourhoods",
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, limit over modifications of the rational curve; Lemma 3.2.2 and section 4.2. Finite-presentation version of its approximation argument."
+   }
+  },
+  {
+   "text": "Since $O\\to W$ is etale, [lem-weil-pbc-etale-algebra-filtered-colimit-descent] gives an etale $A_j$-algebra $B_j$ and an identification $O\\otimes_{A_j}B_j=W$. For each later index replace $B_j$ by its base change; these remain etale by [lem-weil-pbc-etale-scheme-base-change] and their filtered colimit is $W$. For every such index, $B_j\\otimes_{A_j}F=W\\otimes_OF=L$. To check the last equality, the left localization is a domain algebraic over the field $F$, and every nonzero algebraic element has its inverse in the same algebra by its minimal polynomial; its fraction field is $L$. Moreover $B_j$ is $A_j$-flat by [lem-weil-pbc-etale-algebra-flat]. Tensor the injection $A_j\\hookrightarrow F$ with $B_j$ to see that $B_j\\hookrightarrow L$. Thus $B_j$ is a domain. Its fraction field is exactly $L$, since its localization by the nonzero elements of $A_j$ already equals $L$. This also verifies that no unwanted generic factor has been introduced by descent.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, approximation paragraph; agent refinement using Stacks 00U2(9), (3), (6). Descending the etale valuation algebra directly makes the intermediate flattening unnecessary."
+   }
+  },
+  {
+   "text": "The given centre determines a $V$-algebra map $A\\to W$. Since $A$ is finitely presented over $V$, apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] to $W=\\varinjlim B_j$. After increasing $j$ this map factors through $A\\to B_j\\to W$. Under the inclusions into $L$ from Step 4 its generic map is the original component map $A\\to L$. In particular the kernel is precisely the prime defining that component of $U$.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, descent from the valuation local ring; Stacks 00QO (lemma-characterize-finite-presentation), (1) implies (3). Agent finite-presentation implementation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-strict-semistable-cofinality] to the modification $P_j\\to P$. It supplies an integral strictly semistable model $Z\\to P$ dominating $P_j$, with the same generic fibre. Integrality follows as well from the dense integral isomorphism open in a modification: schematic density kills any sections vanishing there, so every nonempty affine chart embeds into its function field. By [lem-trf-birational-riemann-zariski-neighbourhoods], $O$ has a unique lift to $Z$. Choose an affine neighbourhood $E=\\operatorname{Spec}C$ of its centre contained in the inverse image of $D_j$. The whole morphism $\\operatorname{Spec}O\\to Z$ factors through $E$, since its closed point does. We have $A_j\\subset C\\subset O$, $\\operatorname{Frac}C=F$, and $E_\\eta$ is an open of the affine line. Also $C$ is finitely presented over $V$ by [lem-weil-pbc-lfp-affine-opens-finite-presentation].",
+   "uses": [
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-birational-riemann-zariski-neighbourhoods",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, final paragraph: enlarge the rational-curve modification using Proposition 4.3.1, then restrict about the valuation centre."
+   }
+  },
+  {
+   "text": "Set $B=B_j\\otimes_{A_j}C$ and $Y=\\operatorname{Spec}B$. The map $Y\\to E$ is etale by [lem-weil-pbc-etale-scheme-base-change]. The maps $B_j\\to W$ and $C\\to O\\to W$ agree on $A_j$, so give $B\\to W$ and a factorization of the original centre through $Y$. Since $B$ is $C$-flat by [lem-weil-pbc-etale-algebra-flat], tensoring $C\\hookrightarrow F$ embeds $B$ into $B\\otimes_CF=L$. Hence $B$ is a domain with fraction field $L$. The ring $C$ is $V$-flat because $E$ is an open of the $T$-curve $Z$, by [lem-weil-pbc-flat-morphism-affine-criterion]. Flatness of $V\\to B$ follows from [lem-weil-pbc-flat-ring-map-comp]. The etale map $C\\to B$ is of finite presentation by [lem-weil-pbc-lfp-affine-opens-finite-presentation], as is $V\\to C$; their composite is of finite presentation by [lem-weil-pbc-finite-presentation-base-change-composition]. Thus $Y\\to T$ is flat and finitely presented, with a genuine valuation lift.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, etale model over the strictly semistable rational model; Stacks 02GO, 00U2(6), 00HC, 00F4(2)."
+   }
+  },
+  {
+   "text": "The integral finite-type $K$-scheme $Y_\\eta$ has field $L$, so [lem-sc-closed-irreducible-dimension-trdeg] gives $\\dim Y_\\eta=1$. For any prime $\\mathfrak p\\subset V$, apply [lem-trf-valuation-domain-fibre-dimensions] to the finite-type domain $B\\otimes_VV_{\\mathfrak p}$ over the valuation ring $V_{\\mathfrak p}$. Its generic fibre is $B\\otimes_VK$ and has dimension one. Every nonempty fibre over $\\mathfrak p$ is therefore equidimensional of dimension one; the same holds at the generic point by the preceding dimension computation. This proves the required pure relative dimension. Finally $Y_\\eta\\to E_\\eta$ is etale by [lem-weil-pbc-etale-scheme-base-change]; its source is smooth of relative dimension one over $K$ by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] and [lem-sbc-smooth-relative-dimension-permanence], since $E_\\eta$ is an open of the smooth affine line.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-trf-valuation-domain-fibre-dimensions",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, final etale locus; curve conditions made explicit using Stacks 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres) and 0B1C."
+   }
+  },
+  {
+   "text": "Restrict the strictly semistable charts of $Z$ to $E$. Compose these with $Y\\to E$; the composites are etale by [lem-weil-pbc-etale-composition-cancellation]. Thus $Y$ has exactly the affine-line or $uv-a$ charts in the stated definition of strict semistability, so is strictly semistable. The map $A\\to B$ from Steps 5 and 7 defines an affine morphism $Y\\to U$. It is of finite type: a finite set of $V$-algebra generators of $B$ also generates it as an $A$-algebra. Since $U$ is a quasi-compact open of the quasi-separated $X$, the composition $Y\\to U\\to X$ is separated and of finite type. It identifies its function field with the chosen component field $L$ and lifts $W$, as required for a birational quasi-modification.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, last sentence; strict semistability from composition of etale charts, Stacks 02GN."
+   }
+  },
+  {
+   "text": "For completeness verify the whole generic map is an open immersion. Its image is in the component $H$ of $U_\\eta$ with function field $L$; the components of a smooth curve are disjoint and open, since their local rings are normal by [lem-sc-smooth-normal], hence domains, and there are finitely many components. The morphism $Y_\\eta\\to H$ is affine, finite type and birational. Both source and target are integral one-dimensional finite-type $K$-schemes. The generic fibre is a single point. Over a closed point of $H$, a nonzero element of its prime ideal stays nonzero in the domain of $Y_\\eta$, so every prime in that fibre is nonzero and hence maximal. The fibre has dimension zero. By [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension] this is an everywhere quasi-finite morphism. The affine target $H$ is qcqs, so [thm-pqf-zmt-factorization] gives a quasi-compact open immersion $Y_\\eta\\hookrightarrow M$ with $M\\to H$ finite.",
+   "uses": [
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "thm-pqf-zmt-factorization",
+    "lem-sc-smooth-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, generic-open refinement requested by the item; Stacks 0397 (lemma-locally-quasi-finite-rel-dimension-0), 05K0 (lemma-quasi-finite-separated-pass-through-finite)."
+   }
+  },
+  {
+   "text": "Let $N$ be the scheme-theoretic image of $Y_\\eta\\hookrightarrow M$, using [lem-weil-pbc-scheme-image-qc-kernel]. On an affine of $M$ meeting $Y_\\eta$, its coordinate ring modulo the kernel embeds into the function field $L$, so is a domain; these affine images have the same generic point. Hence $N$ is integral, finite over $H$, and has function field $L$. Its intersection with the open $Y_\\eta$ is all of $Y_\\eta$ with its original structure, because the kernel ideal restricts to zero there. Thus $Y_\\eta\\to N$ is an open immersion. The target $H$ is normal by [lem-sc-smooth-normal]. Apply [lem-trf-finite-birational-normal-iso] to $N\\to H$: it is an isomorphism. Therefore $Y_\\eta\\to H\\hookrightarrow X_\\eta$ is an open immersion, proving the additional generic clause rather than merely birationality.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-sc-smooth-normal",
+    "lem-trf-finite-birational-normal-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Generic-open refinement of Proposition 4.3.3; Stacks 0AB1 (lemma-finite-birational-over-normal), with the schematic-image kernel description."
+   }
+  },
+  {
+   "text": "For each affine component $U_\\alpha=\\operatorname{Spec}(A/\\mathfrak p_\\alpha)$, Steps 2--11 construct a suitable $Y\\to U_\\alpha$ around each of its centred valuations. The factorization through $U_\\alpha$ is scheme-theoretic: $A\\to B\\hookrightarrow L$ has kernel $\\mathfrak p_\\alpha$. Apply [lem-trf-birational-riemann-zariski-neighbourhoods](ii): the valuations which lift to this $Y$ form an open subspace of $\\operatorname{Val}_L(U_\\alpha)$. These opens cover that space by construction, and clause (i) makes it quasi-compact. Choose finitely many such $Y$ for each affine component, and take their union as a finite list over the finite affine cover of $X$. Every centred valuation factors through an affine containing its closed centre and through its component, so lifts to one entry of the list. Each entry is integral, strictly semistable, and has the generic-open property from Step 11. If $X$ is empty, the empty list works. This proves all clauses without changing $T$ or its fraction field.",
+   "uses": [
+    "lem-trf-birational-riemann-zariski-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.3, opening compactness reduction; Proposition 3.2.1 and Corollary 3.2.7, applied to each affine irreducible component."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-smooth-normal",
+  "lem-trf-birational-riemann-zariski-neighbourhoods",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-trf-valuation-domain-fibre-dimensions",
+  "lem-trf-valuation-horizontal-curve-models",
+  "lem-trf-valuation-strict-semistable-cofinality",
+  "lem-trf-valued-curve-etale-parameter",
+  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "thm-pqf-zmt-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 4.3.3, pp. 29--30, following valued-field parameter / approximation / semistable cofinality / Riemann--Zariski compactness. Agent refinement: descend the etale valuation algebra and then the map from the finitely presented original affine algebra, instead of flattening that affine algebra first. Generic-open and disconnected-component clauses proved explicitly; paper read online, archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +243,38 @@
    "results": "[grep] OK 0 hit(s) No hits. Read the returned signatures: none gives the asserted theorem for these schemes and morphisms.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictly semistable quasi modifications of a curve over a finite height valuation ring with separably closed fraction field cover all centered valuations",
+   "results": "OK: 8 hits. WeierstrassCurve.valuation_Δ_aux, WeierstrassCurve.IsMinimal, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.IsGoodReduction, WeierstrassCurve.minimal, WeierstrassCurve.instIsMinimalMinimal, WeierstrassCurve.IsMinimal.val_Δ_maximal, WeierstrassCurve.IsGoodReduction.goodReduction.  Read the returned signatures; none states this result for these objects.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"semistable\"",
+   "results": "OK: 0 hits. .  Read the returned signatures; none states this result for these objects.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|uniformization|quasi.modification",
+   "results": "OK: 0 hits. .  Read the returned signatures; none states this result for these objects.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local uniformization of relative curves by etale nodal charts over a valuation ring",
+   "results": "OK: 8 hits. Valuation.IsUniformizer.not_isUnit, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale, ValuationRing.isLocalRing, Valuation.Uniformizer.ext, IsDiscreteValuationRing.toIsLocalRing, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.of_isLocalizationAway.  Read the returned signatures; none states this result for these objects.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-stable-reduction",
@@ -91,5 +301,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-strict-semistable-local-uniformization",
+  "worker": "stage1",
+  "summary": "Read Temkin Proposition 4.3.3 online, searched the source and complete DAG, and split into twelve steps with two statement-only inputs. Retained the statement. Made all componentwise, finite-height, finite-presentation, lifting, and generic-open checks explicit. Used direct etale-algebra descent to implement the approximation step and cited existing generic tools.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected The twelve steps expand the valued-field uniformization and semistable quasi-model input to stable reduction in the nearby-cycle branch; the historical ancestor and unit binding are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+    "why": "Descends an etale valuation algebra along the small filtered diagram of rational-model neighbourhood rings; the unit has no such general algebra approximation theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Identifies an etale map as smooth of relative dimension zero to check smoothness of the generic curve."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Composes the relative dimensions zero and one on the generic fibre; this is a generic smoothness tool."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Computes dimension one of a generic affine domain from its field of transcendence degree one."
+   },
+   {
+    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "why": "Recognizes quasi-finiteness of the generic birational map from its zero-dimensional fibres."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Supplies normality of each smooth generic component for the finite-birational argument."
+   },
+   {
+    "node": "thm-pqf-zmt-factorization",
+    "why": "Factors the quasi-finite generic map through a finite scheme; this is a generic birational tool, not a replacement for valuation uniformization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-sc-smooth-normal",
+  "thm-pqf-zmt-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-ac8e431d6",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-ac8e431d6 (reviewer sub-agent of L); spot-checked: Read the item, its 12 steps, both new nodes, every cited statement and the parent's use of the item; local Stacks 00QK (algebra.tex l.31380, including equidimensionality) read at the cited place. The Temkin PDF is not in literature/; reviewers have no network and no copy exists on this machine, so the Temkin page and proposition places (Prop 4.3.3, Thm 2.1.8, section 3.2) could not be checked. The item is marked agent-origin with a WANTED line, and the mathematics was checked independently. Item statement unchanged; def-weil-proper-morphism added to stmt_deps, which is harmless. Steps 1-12 are correct: the horizontality argument; R=W∩K=V_p of finite height; RZ(iii) colimit; etale descent with B_j inside L by flatness; finite-presentation factorization of A; cofinality applied to P_j→P with Z integral; B=B_j⊗C mapping to W, flat and finitely presented; 00QK fibre dimensions; etale strict-semistable charts; generic open immersion via 0397, ZMT 05K0, scheme image and 0AB1; finite selection by RZ (i)-(ii). Tested: trivial valuation with purely inseparable residue point (needs the smooth-centre hypothesis), W=L, Gauss valuation, empty X, non-separated X, disconnected X_eta. New nodes are true, statement-only, not restatements of the item and not duplicates of riemann-zariski-finite-refinement or common-cover. Fixes: (1) B3, lem-trf-valued-curve-etale-parameter stmt_deps lacked six cited definitions (separably-closed, field, smooth, integral-scheme, finite-type, Krull dimension); added. (2) Item step 10 text now cites [lem-sc-smooth-normal], which its uses already listed. Accepted tool_uses: etale-algebra-filtered-colimit-descent, etale-smooth-zero-dimensional-fibres, smooth-relative-dimension-permanence, closed-irreducible-dimension-trdeg, ring-quasifinite-zero-fibre-dimension, sc-smooth-normal, pqf-zmt-factorization.; 2 file(s) fixed by the reviewer"
  }
 }

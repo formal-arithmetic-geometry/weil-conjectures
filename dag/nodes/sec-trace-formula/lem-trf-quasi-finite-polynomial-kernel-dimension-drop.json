@@ -14,9 +14,92 @@
   "def-weil-affine-spectrum",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $T=0$, its spectrum is empty and has dimension $-\\infty<n$, as in [def-weil-pbc-krull-dimension-ring]. Hence assume $T\\ne0$. If $n=0$, the polynomial ring is $k$ and a nonzero element of the kernel is a unit: applying $\\varphi$ to its inverse times itself gives $1_T=0$, a contradiction. Thus it remains to treat $n\\ge1$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), final inference; empty and zero-variable cases made explicit"
+   }
+  },
+  {
+   "text": "Put $P=k[t_1,\\ldots,t_n]$. The field $k$ is Noetherian because its only ideals are $(0)$ and $k$, and has dimension zero because its sole prime ideal is $(0)$. Apply [lem-sf-noetherian-polynomial-dimension] to get $\\dim P=n$. Also $P$ is a domain directly from the polynomial multiplication [def-weil-pbc-mv-polynomial-ring]: order exponent vectors lexicographically; in a nonzero polynomial choose the largest exponent in its finite support. For two nonzero polynomials with largest exponents $a,b$, the largest exponent of their product is $a+b$, with coefficient the product of their nonzero leading coefficients. This coefficient is nonzero in the field. Thus $(0)$ is a prime ideal of $P$.",
+   "uses": [
+    "lem-sf-noetherian-polynomial-dimension",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra), polynomial-source dimension input, with the Noetherian polynomial dimension theorem; domain verification from multiplication"
+   }
+  },
+  {
+   "text": "Let $I=\\ker\\varphi$, choose $0\\ne h\\in I$, and put $R=P/I$. The formula $\\psi(p+I)=\\varphi(p)$ is well defined because $I$ is the kernel, and factors $\\varphi$ through $R$. Apply [lem-weil-pbc-quasi-finite-four-rings] to $P\\to T$, $P\\to R$, $R\\xrightarrow{\\psi}T$ and $T\\xrightarrow{1}T$. The square commutes. Its finite-sum hypothesis holds because each $t\\in T$ is the single product $t\\cdot1$, with the first factor in the image of $T\\xrightarrow{1}T$ and the second in the image of $R$. For each prime $\\mathfrak q$ of the bottom $T$, its inverse image in the top $T$ is the same $\\mathfrak q$, where the original map is quasi-finite by hypothesis. The cited statement therefore gives that $\\psi:R\\to T$ is finite type and quasi-finite at every prime of $T$.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-four-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PN (lemma-four-rings), specialized to the quotient of the polynomial source by its kernel"
+   }
+  },
+  {
+   "text": "Every strict prime chain $\\mathfrak r_0\\subsetneq\\cdots\\subsetneq\\mathfrak r_\\ell$ of $R$ pulls back to a strict prime chain $\\widetilde{\\mathfrak r}_0\\subsetneq\\cdots\\subsetneq\\widetilde{\\mathfrak r}_\\ell$ of $P$ containing $I$. Primality follows by testing products modulo $I$; strictness follows by lifting an element in each successive ideal difference along the surjection $P\\to R$. Each lifted ideal contains $h\\ne0$, so prepending the prime $(0)$ makes a chain of length $\\ell+1$ in $P$. By $\\dim P=n$ and the prime-chain definition [def-weil-pbc-krull-dimension-ring], $\\ell+1\\le n$. Thus every prime chain of $R$ has length at most $n-1$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), final strict dimension inference: explicit prime-chain argument for the nonzero kernel quotient"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q$ of $T$ and put $\\mathfrak r=\\psi^{-1}(\\mathfrak q)$. The localization/chain formula [lem-weil-pbc-localization-dimension-chains-below-prime] applied to $R,\\mathfrak r$, together with step 4, gives $\\dim R_{\\mathfrak r}\\le n-1$. Apply [lem-weil-pbc-dimension-inequality-quasi-finite] to $\\psi$ at $\\mathfrak q$: step 3 verified precisely its finite-type and quasi-finiteness hypotheses. It gives $\\dim T_{\\mathfrak q}\\le\\dim R_{\\mathfrak r}\\le n-1$.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-weil-pbc-dimension-inequality-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QF (lemma-dimension-inequality-quasi-finite), applied to the kernel quotient source"
+   }
+  },
+  {
+   "text": "For any strict prime chain of length $\\ell$ in $T$, let $\\mathfrak q$ be its last prime. By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\ell\\le\\dim T_{\\mathfrak q}\\le n-1$ by step 5. Taking the supremum of all chain lengths [def-weil-pbc-krull-dimension-ring] gives $\\dim T\\le n-1<n$. Finally [lem-weil-pbc-spec-topological-krull-dimension-ring] identifies this ring dimension with $\\dim\\operatorname{Spec}T$, the dimension in the conclusion.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), final strict inequality, and Tag 00QG concluding passage from local to global dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sf-noetherian-polynomial-dimension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-dimension-inequality-quasi-finite",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), final inference expanded using Tags 00PN and 00QF and elementary prime chains; Tag 00QG supplies the comparison pattern."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +135,45 @@
    "results": "{\"t\": \"2026-10-17T19:14:12Z\", \"tool\": \"leanfinder\", \"query\": \"If a quasi-finite morphism from an affine scheme to affine n space factors through a proper closed hypersurface, then its dimension is at most n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.locallyQuasiFinite_iff\"], \"digest\": \"7444f09af81570e1\"}; Read the returned hits: polynomial dimension identities, weak quasi-finiteness under quotients, one-variable power-basis bounds, and scheme chart characterizations do not give this strict dimension estimate.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi-finite map from a polynomial ring over a field with nonzero kernel has target dimension strictly less than the number of variables",
+   "results": "8 hits: Polynomial.not_quasiFiniteAt, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, Polynomial.not_ker_le_map_C_of_surjective_of_quasiFiniteAt, Algebra.IsStandardSmoothOfRelativeDimension.out, ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial, finrank_quotient_span_eq_natDegree_norm, trdeg_lt_aleph0, ax_grothendieck_zeroLocus; digest=971e51f2a1ca1f8e. Read the returned statements: the polynomial dimension and nonzerodivisor quotient bounds are ingredients, not this quasi-finite target bound; quasi-finite chart and one-variable kernel results do not state the item. The quotient and polynomial dimension source declarations were inspected.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFinite.*(ker|quotient)|ringKrullDim.*(lt|quotient)|MvPolynomial.ringKrullDim",
+   "results": "25 hits: Mathlib/RingTheory/OrderOfVanishing/Basic.lean, Mathlib/RingTheory/QuasiFinite/Weakly.lean, Mathlib/RingTheory/QuasiFinite/Weakly.lean, Mathlib/RingTheory/QuasiFinite/Weakly.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Regular.lean; digest=a87519ac50606af4. Read the returned statements: the polynomial dimension and nonzerodivisor quotient bounds are ingredients, not this quasi-finite target bound; quasi-finite chart and one-variable kernel results do not state the item. The quotient and polynomial dimension source declarations were inspected.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero relation in a quasi finite polynomial algebra implies dimension less than the number of variables",
+   "results": "8 hits: Algebra.PreSubmersivePresentation.card_relations_le_card_vars_of_isFinite, Algebra.QuasiFinite.recOn, MvPolynomial.ringKrullDim_of_isNoetherianRing, Algebra.QuasiFinite.casesOn, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, ringKrullDim_quotient_succ_le_of_nonZeroDivisor, RelSeries.nonempty_of_finiteDimensional, finrank_quotient_span_eq_natDegree; digest=afcb049096e3a2e0. Read the returned statements: the polynomial dimension and nonzerodivisor quotient bounds are ingredients, not this quasi-finite target bound; quasi-finite chart and one-variable kernel results do not state the item. The quotient and polynomial dimension source declarations were inspected.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFinite, ringKrullDim",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. Read the returned statements: the polynomial dimension and nonzerodivisor quotient bounds are ingredients, not this quasi-finite target bound; quasi-finite chart and one-variable kernel results do not state the item. The quotient and polynomial dimension source declarations were inspected.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally quasi finite affine scheme mapping into a proper closed subset of affine n space has Krull dimension at most n minus one",
+   "results": "8 hits: AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.locallyQuasiFinite_iff, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, Algebra.IsStandardSmoothOfRelativeDimension.out; digest=04e777e9a4e15592. Read the returned statements: the polynomial dimension and nonzerodivisor quotient bounds are ingredients, not this quasi-finite target bound; quasi-finite chart and one-variable kernel results do not state the item. The quotient and polynomial dimension source declarations were inspected.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-domain-fibre-dimensions",
@@ -85,5 +203,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-quasi-finite-polynomial-kernel-dimension-drop",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the final inference of 00QK into six steps: edge cases, polynomial dimension and domain, kernel quotient with 00PN, explicit strict prime-chain drop, 00QF on the quotient, and the global spectrum bound. Reused existing nodes only; no new nodes, Mathlib leaves, or attachments.",
+  "blueprint": "Retains the recorded ancestry from lem-trf-local-term-locality through the semistable-alteration/component-closure dimension argument. Realizes the final nonzero-residue-polynomial inference in 00QK used by step 7 of lem-trf-valuation-domain-fibre-dimensions. The current blueprint ancestor does not state this algebra lemma itself.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-four-rings",
+    "why": "Generic quotient/base-change tool 00PN preserving quasi-finiteness; no same-unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-inequality-quasi-finite",
+    "why": "Generic local dimension inequality 00QF needed for the field-algebra inference in 00QK; no same-unit substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-dimension-inequality-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-168d82919",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-168d82919 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited node's statement, the unit sk-i-curve-zero, the chapter sec-trace-formula, and the parent's step 7. I checked the Stacks sources at 00QK l.31380 (last sentence), 00QF l.31267, 00QG l.31291 and 00PN l.30293, and their tags against tags/tags. There are no new nodes and the statement is unchanged. The statement matches the 00QK inference. I tested it on k[x,y]/(xy), on k->0 with n=0, and on k[t]/(f), and the identity map is correctly excluded. The nearest existing node, 00QG, gives only the weak bound <=n, so the item is not a duplicate. Step 1: the T=0 and n=0 cases are correct. Step 2: the polynomial-dimension leaf with dim k=0, plus the lex leading-term domain argument, is correct. Step 3: 00PN applies to the square (P,T,P/I,T) with id; it commutes, t=t*1 gives surjectivity, and the prime pulls back to itself. Step 4: chains of P/I pull back to primes containing h!=0, and prepending (0) gives a uniform bound of n-1. Step 5: the localization chain lemma plus 00QF, whose hypotheses are only finite type and quasi-finite at q, gives dim T_q <= n-1. Step 6: chains ending at q, then ring dimension equals Spec dimension. proof_deps equals the union of uses. I accept the tool uses lem-weil-pbc-quasi-finite-four-rings (00PN) and lem-weil-pbc-dimension-inequality-quasi-finite (00QF): both are generic algebra lemmas from unit sk-thm-p1. Four kinds of Mathlib search are recorded with no match. No SGA source is cited. No fixes were needed."
  }
 }
