@@ -2,7 +2,7 @@
  "id": "def-trf-module-strict-transform",
  "kind": "definition",
  "title": "Strict transform of a quasi-coherent module",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $\\mathcal I\\subseteq\\mathcal O_S$ be a finite-type quasi-coherent ideal [pqf-def-coherent], and let $b:S^b=\\operatorname{Bl}_{\\mathcal I}(S)\\to S$ be its blowup [def-nagata-global-blowup]. Write $E=b^{-1}V(\\mathcal I)$ for the exceptional closed subscheme. Let $p:X\\times_SS^b\\to X$ and $q:X\\times_SS^b\\to S^b$ be the projections [def-pc-fibre-product]. For a quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent], its strict transform relative to this centre is the quotient $\\mathcal F^b=p^*\\mathcal F/\\mathcal K$, where $\\mathcal K$ is the subsheaf of local sections whose restriction to the complement of $q^{-1}E$ is zero. Here $p^*$ denotes pullback of module sheaves (extension of scalars from the inverse image of $\\mathcal O_X$ to $\\mathcal O_{X\\times_SS^b}$). The definition retains the centre $\\mathcal I$, not merely the morphism $b$.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $\\mathcal I\\subseteq\\mathcal O_S$ be a finite-type quasi-coherent ideal [pqf-def-coherent], and let $b:S^b=\\operatorname{Bl}_{\\mathcal I}(S)\\to S$ be its blowup [def-nagata-global-blowup]. Write $E=b^{-1}V(\\mathcal I)$ for the exceptional closed subscheme. Let $p:X\\times_SS^b\\to X$ and $q:X\\times_SS^b\\to S^b$ be the projections [def-pc-fibre-product]. For a quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent], its strict transform relative to this centre is the quotient $\\mathcal F^b=p^*\\mathcal F/\\mathcal K$, where $\\mathcal K$ is the subsheaf of local sections whose restriction to the complement of $q^{-1}E$ is zero. Here $p^*\\mathcal F=\\mathcal O_{X\\times_SS^b}\\otimes_{p^{-1}\\mathcal O_X}p^{-1}\\mathcal F$ is the pullback of module sheaves [def-pc-module-pullback]. The definition retains the centre $\\mathcal I$, not merely the morphism $b$.",
  "source": {
   "document": "literature/stacks-project/divisors.tex",
   "place": "Tag 080D (1), definition-strict-transform; notation in the paragraph preceding the definition."
@@ -11,7 +11,8 @@
   "def-pc-scheme",
   "pqf-def-coherent",
   "def-nagata-global-blowup",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
  ],
  "proof": [],
  "proof_deps": [],
@@ -54,7 +55,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flattening-by-admissible-blowup",
@@ -80,5 +81,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-trf-module-strict-transform",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against Stacks Tag 080D (1), verified that all notions in its statement are supplied by the four existing statement dependencies, and found no additional proof lemma or Mathlib leaf to create. The definition is split by its complete quotient construction; its dependence on the centre ideal is retained explicitly.",
+  "blueprint": "The item serves the module-version strict-transform construction used in the flattening and proper-transform argument in the ancestor lem-trf-local-term-locality proof; the source definition and notation are Stacks Tag 080D (1)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-6c925aca1",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-6c925aca1 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the definition item only, with no new nodes, against Stacks divisors.tex §Strict transform, Definition definition-strict-transform (Tag 080D (1)), the remark after it and the proof of lemma-strict-transform. The statement matches 080D (1). Stacks allows any closed subscheme as centre; the item restricts to a finite-type quasi-coherent ideal 𝓘. That narrows the definition without weakening anything, since every user (lem-trf-flattening-by-admissible-blowup, lem-trf-flattening-module-by-admissible-blowup, lem-trf-strict-transform-affine-pushforward, def-nagata-admissible-blowup) uses finite-type centres. 'Sections supported on pr⁻¹E' is the same as 'restriction to the complement is zero'. The source's quasi-coherence claim about the kernel is not asserted, so no claim is hidden in the definition. The item keeps the source's point that the strict transform depends on the centre. Small cases agree: unit ideal gives F^b = p^*F; S = Spec k[t] with 𝓘 = (t) and F = k[t] ⊕ k[t]/(t) gives k[t], matching Stacks' N/a-power-torsion; zero ideal gives the empty scheme. def-nagata-strict-transform is the scheme closure, not this module quotient, so it is no duplicate, and same_as [] is correct. I read the cited nodes def-pc-scheme, pqf-def-coherent, def-nagata-global-blowup (with its glue data and local model) and def-pc-fibre-product; each says what the item uses. FIX: the item gave the module pullback p^* inline instead of citing the existing node def-pc-module-pullback. I added that citation to the statement and stmt_deps in fixes/dag/nodes/sec-trace-formula/def-trf-module-strict-transform.json, with no other change and no cycle. A definition has no proof steps, no tool_uses and no SGA source. The 5 recorded Mathlib searches (leanfinder ×2, leansearch, grep, loogle) found no match and could not be re-run on this machine. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
