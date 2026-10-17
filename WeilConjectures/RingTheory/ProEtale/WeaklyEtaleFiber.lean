@@ -32,7 +32,7 @@ is von Neumann regular: every `c ∈ C` satisfies `c ≡ c² b` modulo `t` for s
 lemma exists_sub_mul_self_mul_mem_span (t : A) (ht : (Ideal.span {t}).IsMaximal) (c : C) :
     ∃ b : C, c - c * c * b ∈ Ideal.span {algebraMap A C t} := by
   let I := Ideal.span {t}
-  letI : Field (A ⧸ I) := Ideal.Quotient.field I
+  let : Field (A ⧸ I) := Ideal.Quotient.field I
   have : Ring.AbsolutelyFlat ((A ⧸ I) ⊗[A] C) :=
     Ring.AbsolutelyFlat.of_flat_lmul' (A ⧸ I) _ (Algebra.WeaklyEtale.flat_lmul' _ _)
   obtain ⟨y, hy⟩ := Ring.AbsolutelyFlat.exists_eq_mul_self_mul ((1 : A ⧸ I) ⊗ₜ[A] c)
@@ -81,7 +81,6 @@ lemma maximalIdeal_localization_eq_span (t : A) (ht : (Ideal.span {t}).IsMaximal
     dsimp only
     rw [IsLocalization.mk'_eq_mul_mk'_one, hc', mul_assoc]
     exact Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self _)
-
   · rw [Ideal.span_le, Set.singleton_subset_iff, IsScalarTower.algebraMap_apply A C,
       SetLike.mem_coe, IsLocalization.AtPrime.to_map_mem_maximal_iff _ 𝔮]
     exact h𝔮

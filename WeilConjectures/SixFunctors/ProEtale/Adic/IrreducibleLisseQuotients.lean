@@ -99,7 +99,7 @@ theorem IsAdicLisseSheaf.le_finrank_of_ne_zero (s : Spec (.of K) ⟶ Y) (n : ℕ
         Nat.add_le_add_right h₂ _
       _ = _ := by rw [add_comm]; exact hrk
 
-omit [IrreducibleSpace Y] in
+omit [IrreducibleSpace Y] [IsAlgClosed K] in
 /-- The stalk of a pullback `g^* M` at a geometric point `s` is the stalk of `M` at `s ≫ g`. -/
 theorem finrank_geometricStalkFunctor_upperStar {Z : Scheme.{u}} (g : Y ⟶ Z) (M : AdicSheaf l Z)
     (s : Spec (.of K) ⟶ Y) :

@@ -76,8 +76,9 @@ lemma geometricSMul_appTop_coord (a : AlgebraicClosure k₀) :
     (geometricSMul k₀ a).appTop
         ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.appTop
           (AffineSpace.coord _ PUnit.unit)) =
-      geometricConst k₀ a * (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.appTop
-        (AffineSpace.coord _ PUnit.unit) := by
+      geometricConst k₀ a *
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.appTop
+          (AffineSpace.coord _ PUnit.unit) := by
   rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, geometricSMul_comp_geometricFiberProj,
     AffineSpace.homOfVector_appTop_coord]
 

@@ -224,7 +224,6 @@ lemma irreducible_mk_iInf_span_pow (hm : maximalIdeal R = Ideal.span {t})
     have h2 : t * y - 1 ∈ maximalIdeal R := by
       have := Submodule.mem_iInf _ |>.1 (Ideal.Quotient.eq_zero_iff_mem.1 h1) 1
       rwa [pow_one, ← hm] at this
-
     have h3 : t * y ∈ maximalIdeal R :=
       hm ▸ Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self t)
     have : (1 : R) ∈ maximalIdeal R := by

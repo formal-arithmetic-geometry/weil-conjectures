@@ -84,10 +84,6 @@ universe u
 
 open CategoryTheory Polynomial Pretriangulated Opposite TopologicalSpace
 
-/- Through `WeilConjectures.WeilSheaf.Localization`, `Spec k₀` is also an object over itself via
-`specOverSpec`; prefer the identity structure `CategoryTheory.instOverClass`. -/
-attribute [local instance 1100] CategoryTheory.instOverClass
-
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
@@ -232,13 +228,14 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   have : IsSeparated (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   have : LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  -- the exceptional inverse images along the structure morphisms of `U` and `Z`
+  have := WeilComplex.isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l)
+    (U ↘ Spec (CommRingCat.of k₀))
+  have := WeilComplex.isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l)
+    (Z ↘ Spec (CommRingCat.of k₀))
   have hc : IsCompl (Set.range j.base) (Set.range i.base) := by
     rw [hij]
     exact isCompl_compl
-  -- the Verdier duals on `U`, `C` and `Z` (`thm-coef-qbar-verdier`)
-  have := WeilComplex.hasVerdierDual k₀ l U
-  have := WeilComplex.hasVerdierDual k₀ l C
-  have := WeilComplex.hasVerdierDual k₀ l Z
   obtain ⟨z, hz⟩ : s.1 ∈ Set.range i.base := by
     rw [hij]
     exact hsU
