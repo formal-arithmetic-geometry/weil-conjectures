@@ -2736,6 +2736,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.EtaleCohomology.PoincareDuality.AdicReconstruction
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Feeds
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CompositionPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.DualTateData
@@ -4653,9 +4654,11 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierPurity
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrivialization
 public import WeilConjectures.WeilSheaf.BaseChangeField.Coherence
+public import WeilConjectures.WeilSheaf.BaseChangeField.Cohomology
 public import WeilConjectures.WeilSheaf.BaseChangeField.Comparison
 public import WeilConjectures.WeilSheaf.BaseChangeField.Derived
 public import WeilConjectures.WeilSheaf.BaseChangeField.Geometric
+public import WeilConjectures.WeilSheaf.BaseChangeField.GlobalSections
 public import WeilConjectures.WeilSheaf.BaseChangeField.Transport
 public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.Category

@@ -33,6 +33,8 @@ universe u
 
 open CategoryTheory MonoidalCategory Opposite
 
+open scoped CategoryTheory.Functor
+
 namespace AlgebraicGeometry.Etale.TateOrientation
 
 variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ] [IsDomain Λ]

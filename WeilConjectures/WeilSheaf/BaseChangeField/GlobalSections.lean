@@ -228,6 +228,18 @@ lemma globalSectionsFrobenius_transport (K : ProEtaleWeilSheaf k₀ l Y) :
   rw [Iso.inv_hom_id_app]
   exact congrArg (_ ≫ ·) (Category.comp_id _)
 
+/-- For `α : K' ≅ θ_* K`, the Frobenius of `K'` corresponds under
+`Γ(Ȳ', K') ≅ Γ(Ȳ', θ_* K) ≅ Γ(Ȳ, K)` to the Frobenius of `K` through `φ_r`. -/
+lemma globalSectionsFrobenius_comp_of_iso_transport (K : ProEtaleWeilSheaf k₀ l Y)
+    {K' : ProEtaleWeilSheaf k₀' l Y'} (α : K' ≅ (transport θ r hθ).obj K) :
+    K'.globalSectionsFrobenius ≫ (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map α.hom.hom.f) ≫
+        (globalSectionsLowerStarIso _ θ.hom).hom.app K.carrier.X =
+      (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map α.hom.hom.f) ≫
+        (globalSectionsLowerStarIso _ θ.hom).hom.app K.carrier.X ≫
+        K.globalSectionsFrobeniusPow r := by
+  rw [globalSectionsFrobenius_naturality_assoc, ← globalSectionsFrobenius_transport θ r hθ K,
+    Iso.hom_inv_id_app_assoc]
+
 end Transport
 
 end ProEtaleWeilSheaf
