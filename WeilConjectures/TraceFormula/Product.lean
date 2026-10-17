@@ -55,6 +55,16 @@ lemma isPullback_prod_left (X Y : Over (Spec (.of k))) :
     IsPullback (prod.fst : X ⨯ Y ⟶ X).left (prod.snd : X ⨯ Y ⟶ Y).left X.hom Y.hom :=
   Over.isPullback_of_binaryFan_isLimit (BinaryFan.mk prod.fst prod.snd) (prodIsProd X Y)
 
+/-- The product `X ⨯ Y` is the fibre product of the structure morphisms over the base point:
+the square `p_Y ≫ a_Y = p_X ≫ a_X` is cartesian. -/
+lemma isPullback_prod_toPoint (X Y : Over (Spec (.of k))) :
+    IsPullback (prod.snd : X ⨯ Y ⟶ Y) prod.fst (toPoint Y) (toPoint X) := by
+  have h : IsPullback (prod.snd : X ⨯ Y ⟶ Y) prod.fst ((isTerminalPoint k).from Y)
+      ((isTerminalPoint k).from X) :=
+    (IsPullback.of_is_product (prodIsProd X Y) (isTerminalPoint k)).flip
+  rwa [toPoint_ext ((isTerminalPoint k).from Y) (toPoint Y),
+    toPoint_ext ((isTerminalPoint k).from X) (toPoint X)] at h
+
 variable {X Y : Over (Spec (.of k))}
 
 instance [LocallyOfFiniteType Y.hom] : LocallyOfFiniteType (prod.fst : X ⨯ Y ⟶ X).left :=

@@ -4609,6 +4609,7 @@ public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProperPushforward
