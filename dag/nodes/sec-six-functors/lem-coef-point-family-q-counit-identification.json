@@ -12,7 +12,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-rigidification-resolution",
   "lem-coef-infinity-pinch-comparison",
-  "lem-coef-space-point-cocone-criterion"
+  "lem-coef-space-point-cocone-criterion",
+  "lem-coef-infinity-mapping-composition"
  ],
  "proof": [
   {
@@ -328,5 +329,53 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-53e400169 (reviewer sub-agent of L); spot-checked: I read all nine steps in full and every cited statement: def-coef-infinity-category-of-spaces, def-cbc-enhanced-diagrams-cones, lem-coef-pinched-rigidification-resolution, lem-coef-infinity-pinch-comparison, lem-coef-infinity-mapping-composition, lem-coef-kan-coherent-nerve-quasicategory, lem-cbc-kan-functor-space-kan, lem-cbc-realization-weak-equivalence, lem-cbc-simplicial-homotopy-equivalence-weak, lem-cbc-enhanced-functor-cone-calculus and lem-coef-space-point-cocone-criterion. I also read blueprint paragraph 2 of prop-coef-integral-exceptional-adjoint and HTT 2.2.4 (Hom^R = Sing_Q Map; the counit composite). HTT is not archived, so it stays WANTED and the proof is marked agent-written. Against live, only split-owned fields changed; the statement is identical. Checks: (1) In step 2, C[J^n] has trivial endomorphisms and empty reverse homs, so R = Sing_Q Fun(X,Y), and E equals theta followed by the counit on each summand. (2) In step 3, q = max(B minus {n+1}) descends because unions with the initial face keep the max; it is cosimplicial for noninjective maps too; max(p,q) is simplicial into the nerve of a total order; the homotopies pass through the coend. (3) In steps 4 and 5, E V(alpha) = q_T holds summandwise, p_R V(alpha) = alpha p_T, the two-test inverse argument and horn compression work, the min(s,t) cylinder applies, and [E] = [alpha]^-1[p_R] has the right orientation. (4) In step 6 the prism layer split gives s(B u B') = s(B) and t = the layer-1 max of B'; on the 02 face s = t; theta Phi = b x b and ell Phi = b o comp. (5) In steps 7 and 8, ev_eta and the identity specializations hold, currying U_D = Fun(K,U) is degreewise, and Fun(K,-) preserves homotopy equivalences. Edge cases checked: n=0, empty X/Y/K, X=Y, X=*. There is no cycle: the item is absent from its 280-node closure. There are no new nodes. An rg duplicate search (Sing_Q, maximum map, evaluation counit) found no existing statement of the item; the point-cocone criterion has a similar construction only in its proof, not its statement. I accept the four declared generic sk-prop-sf-cbc tool uses. No SGA is cited and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PointFamilyQCounitIdentification",
+  "declaration": "CategoryTheory.Spaces.PointFamily.point_family_q_counit_identification",
+  "declarations": [
+   "CategoryTheory.Spaces.PointFamily.enrichedHom",
+   "CategoryTheory.Spaces.PointFamily.rightHom",
+   "CategoryTheory.Spaces.PointFamily.arrowHom",
+   "CategoryTheory.Spaces.PointFamily.arrowInclusion",
+   "CategoryTheory.Spaces.PointFamily.rigidHom",
+   "CategoryTheory.Spaces.PointFamily.lowerPath",
+   "CategoryTheory.Spaces.PointFamily.simplexFunctor",
+   "CategoryTheory.Spaces.PointFamily.simplexFunctor_vertex",
+   "CategoryTheory.Spaces.PointFamily.rigidGenerator",
+   "CategoryTheory.Spaces.PointFamily.CounitFormula",
+   "CategoryTheory.Spaces.PointFamily.pinchedSimplexFunctor",
+   "CategoryTheory.Spaces.PointFamily.pinchedSimplexFunctor_vertices",
+   "CategoryTheory.Spaces.PointFamily.qGenerator",
+   "CategoryTheory.Spaces.PointFamily.MaximumFormula",
+   "CategoryTheory.Spaces.PointFamily.evaluationCounit",
+   "CategoryTheory.Spaces.PointFamily.weakLocalization",
+   "CategoryTheory.Spaces.PointFamily.HasHomotopyInverse",
+   "CategoryTheory.Spaces.PointFamily.composition",
+   "CategoryTheory.Spaces.PointFamily.mapVertex",
+   "CategoryTheory.Spaces.PointFamily.CompositionFormula",
+   "CategoryTheory.Spaces.PointFamily.diagramRightHom",
+   "CategoryTheory.Spaces.PointFamily.diagramArrowHom",
+   "CategoryTheory.Spaces.PointFamily.diagramArrowInclusion",
+   "CategoryTheory.Spaces.PointFamily.CurryingFormula",
+   "CategoryTheory.Spaces.PointFamily.nerveMap",
+   "CategoryTheory.Spaces.PointFamily.ComparisonData",
+   "CategoryTheory.Spaces.PointFamily.point_family_q_counit_identification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PointFamilyQCounitIdentification.lean",
+  "statement": "theorem point_family_q_counit_identification (p : SSet.Pinched.resolution.{u + 1} ⟶ SSet.stdSimplex.{u + 1}) (hp : ∀ A : SSet.{u + 1}, SSet.Enhanced.IsWeakHomotopyEquivalence ((SSet.Pinched.projection p).app A)) : Nonempty (ComparisonData.{u, v} p)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical Q-singular identification and actual enriched counit are specified on all simplex-colimit generators. Q and its maximum formula, alpha and beta, triangle composition, point evaluation, ordinary-localization normalization, constant-diagram currying, point-family normalization, enriched naturality and containing-universe invariance are conclusions. Helpers retain the small/containing-universe distinction. The two named structural proof obligations concern only canonical endpoint transports in the same node. No dependency interface or natural-language statement was changed; the landed composition node is added to stmt_deps because its triangle fiber occurs in the signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb482a3c2",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read the item node (9 steps), all 6 statement dependencies' Lean declarations in the side clone, Mathlib SimplicialThickening, the full 470-line module, node record and report (both required sections real). Every data field of ComparisonData (q, counit, identification, pinch, alpha, beta, pointHom, liftHom, curry, diagramPinch, diagramBeta) is fixed uniquely by a formula field: MaximumFormula is not vacuous (Path morphisms are inclusions), CounitFormula covers all generators, pinch_formula equals right_pinch_comparison's j. Localization order [E]=[p_R]≫[alpha]^-1 is correct; triangle edge order (12,01) matches mapping_composition; point_family_formula is the recorded PointCoconeFamilyFormula. Hypothesis: any augmentation p with weak-equivalence projection, no extra assumption on X,Y,K. Edge cases checked: n=0, noninjective ordinals, X=Y, empty X/Y/K, X=*, universes with v free. The two sorried endpoint lemmas are true. Statement verbatim; only change is the lean record plus stmt_deps adding the landed lem-coef-infinity-mapping-composition (no cycle). nt_compile.py rc=0 with no errors; a /tmp control (#print axioms shows sorryAx, deliberate error reported) confirms the file is elaborated. Minor: identity_formula is strict (true, step 7); source PDF page offset is cosmetic."
  }
 }

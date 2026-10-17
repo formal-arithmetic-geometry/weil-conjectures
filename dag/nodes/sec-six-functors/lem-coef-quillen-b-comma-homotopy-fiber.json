@@ -27,7 +27,9 @@
   "place": "Corollary 4.6.12, printed p. 183 (PDF p. 198), applied to opposite categories; its overcategory form, followed by contraction of B/b to its terminal object, gives the comma homotopy-fiber comparison. Read online on 2026-10-17; archival copy WANTED. No Stacks tag states this theorem."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-simplicial-realization-cylinder"
  ],
  "proof": [
   {
@@ -340,5 +342,31 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-d77da677c (reviewer sub-agent of L); spot-checked: Read in full: the item (statement, 8 steps, searches, blueprint, split_report), the statements of all 9 cited nodes, the parent lem-coef-quillen-b-discrete-fibration-base-change (statement and its Step 4 use), the unit sk-prop-sf-biduality-general with its uses closure, and the ancestor prop-coef-integral-exceptional-adjoint. Statement: Quillen Theorem B for (U\\downarrow b) with postcomposition transitions and R=Sing|.|; true as written, not weakened, no hypothesis added. Cisinski Cor. 4.6.12 is not in literature/ and I could not read it at the cited place; I checked the statement mathematically against classical Quillen B (opposite of Quillen's b\\U form; Goerss-Jardine IV.5 bisimplicial proof). The proof is correctly marked agent-written, with the WANTED notice recorded. Tested E empty, B=[0] (comma = E), U=id (B/b contractible), point->BG (comma = discrete G, fiber ΩBG ≃ G), and U:E->[1]. All 8 steps are checked against the cited statements. Step 1: faces of Z_{m,n}. Step 2: rows Kan and discrete-base fibrations, unit gives rowwise weak equivalences, rowwise diagonal clause. Step 3: fiber map = R(postcomposition along b0->b_{a(0)}), homotopy-pullback squares over a discrete base, equifibered fiber clause with R as the functorial Kan replacement. Step 4: detection with v=id; k_b u_{RA}=a_b and h_b f_b=k_b R(u_A). Step 5: columns are N(Ue_n\\downarrow B) with an initial object; exchanged-direction clause. Step 6: prism cross arrows β_{0j}αU(e_i->e_n); homotopy direction qu->vr. Step 7: λ_s(t)=min(t/(1-s/2),1) fixes endpoints, then the cylinder-projection argument. Step 8: naturality, as the parent's Step 4 needs. On the immutable snapshot the closure has 158 nodes and no cycle: sharp-simplex-criterion and ex-infinity-finite-products now cite kan-quillen-model-right-proper-core. No new nodes; no duplicate found in the DAG (Thomason-Grothendieck and the ∞-cofinality nodes state different things). Two repairable faults, both fixed in fixes/dag/nodes/sec-six-functors/lem-coef-quillen-b-comma-homotopy-fiber.json. (1) Route/C8: lem-cbc-realization-singular-unit-weak (Steps 2, 4) and lem-cbc-simplicial-homotopy-equivalence-weak (Step 7) are statements of sk-prop-sf-cbc, outside the unit's route, and split_report.tool_uses was empty. I declared both, and I accept them as generic tools, as 27 sibling nodes including the parent already do. (2) split_report.summary claimed a current blocking cycle and pending maintenance; this is stale at this snapshot, so I rewrote it. No other field was changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.QuillenBCommaHomotopyFiber",
+  "declaration": "SSet.Enhanced.quillenB_comma_homotopyFiber",
+  "declarations": [
+   "SSet.Enhanced.quillenBCommaVertex",
+   "SSet.Enhanced.quillenBCommaFiber",
+   "SSet.Enhanced.IsQuillenBCommaComparison",
+   "SSet.Enhanced.quillenBCommaSquare",
+   "SSet.Enhanced.quillenB_comma_homotopyFiber"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/QuillenBCommaHomotopyFiber.lean",
+  "statement": "theorem quillenB_comma_homotopyFiber {E B : Type u} [SmallCategory E] [SmallCategory B] (U : E ⥤ B) (hU : ∀ (b₀ b₁ : B) (β : b₀ ⟶ b₁), IsWeakHomotopyEquivalence (nerveMap (CostructuredArrow.map (S := U) β))) : ∃ c : ∀ b : B, (SSet.toTop ⋙ TopCat.toSSet).obj (nerve (CostructuredArrow U b)) ⟶ quillenBCommaFiber U b, (∀ b : B, IsQuillenBCommaComparison U b (c b) ∧ IsWeakHomotopyEquivalence (c b)) ∧ ∀ (E' B' : Type u) [SmallCategory E'] [SmallCategory B'] (U' : E' ⥤ B'), (∀ (b₀ b₁ : B') (β : b₀ ⟶ b₁), IsWeakHomotopyEquivalence (nerveMap (CostructuredArrow.map (S := U') β))) → ∀ (F : E ⥤ E') (G : B ⥤ B') (comm : U ⋙ G = F ⋙ U') (b : B) (c' : (SSet.toTop ⋙ TopCat.toSSet).obj (nerve (CostructuredArrow U' (G.obj b))) ⟶ quillenBCommaFiber U' (G.obj b)), IsQuillenBCommaComparison U' (G.obj b) c' → ∃ t : quillenBCommaFiber U b ⟶ quillenBCommaFiber U' (G.obj b), t ≫ homotopyFiberProjection _ _ = homotopyFiberProjection _ _ ≫ (SSet.toTop ⋙ TopCat.toSSet).map (nerveMap F) ∧ t ≫ homotopyFiberPath _ _ = homotopyFiberPath _ _ ≫ (ihom Δ[1]).map ((SSet.toTop ⋙ TopCat.toSSet).map (nerveMap G)) ∧ (SSet.toTop ⋙ TopCat.toSSet).map (nerveMap (quillenBCommaSquare U U' F G comm b)) ≫ c' = c b ≫ t",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The comparison is specified by its forgetful coordinate and its full singular prism coordinate, using a predicate with real defining formulae. The theorem supplies these uniquely characterized maps and their strict-square naturality. No homotopy or map is selected from an uncharacterized existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24c6cf24f",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Read node, 3 stmt deps (homotopyFiber outgoing=true path model, homotopyFiberProjection/Path, realizationCylinderComparison with coordinate sum over theta=1), Mathlib CostructuredArrow.map/map2, toSSetObjEquiv, stdSimplexToTop, stdSimplexHomeomorphUnitInterval (coordinate 1). Hypothesis hU, R=Sing|.|, vertex and fiber are exact. IsQuillenBCommaComparison determines c uniquely (P by obj/map, H via cylinder homeomorphism, path on all singular simplices) and its interval orientation agrees with the cylinder and the fiber endpoints, so the predicate is satisfiable. Naturality via map2 sends (e,a) to (Fe,Ga), t is fixed by RNF/RNG, both functors carry the hypothesis. Single universe u is needed since RNU lives in one SSet. Edge cases fine. No hollow defs, only sorry, docstrings with source/blueprint and 8 proof steps, lean.statement verbatim, stmt_deps additions already landed proof deps. nt_compile.py --json: rc 0, 2.1 s, no errors or warnings. No findings."
  }
 }

@@ -223,5 +223,34 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-b3e20b805 (reviewer sub-agent of L); spot-checked: I read the item and the three new nodes in full, the statement of every cited node, and the HTT text (Definitions A.3.4.1 and A.3.4.9, Corollary A.3.4.14, Lemma A.3.4.15, Lemma A.3.5.14, Theorem A.3.5.15, Example A.3.6.8, Lemma A.3.6.14, Propositions A.3.6.15 and A.3.6.16, Lemma A.3.6.17, Corollary A.3.6.18). The item's statement is A.3.6.18 with Kan enrichment and C_a = 𝔆[S_a]^op; it is retained unchanged and no target is weakened. The item is not a target, so the base-change check does not apply. Steps checked: 1) 𝔆 preserves colimits; U(∂B)→U(B) lifts against local trivial fibrations with the two objects fixed; the boundary-collapse-test node then gives monomorphisms to cofibrations. 2) Reedy structure on the span with degrees c=0, a=1, b=2: latching at b is Y(a); the relative matching map of a constant diagram at a is the identity; colim is left Quillen; Brown factorization plus two-out-of-three is correct; Reedy fibrations are objectwise, so the projective-to-Reedy comparison holds; only A→B needs to be a cofibration. 3) Taking opposites preserves DK equivalences, trivial fibrations and cofibrations. 4–7) The P(a,b) spans and variance match the proof of A.3.6.16; hypotheses (i)–(iv) of A.3.6.15 are each verified; the κ-filtered passage matches the proof of A.3.6.18. 8) The empty case gives a terminal category. New nodes: (a) the evaluation/weak-exponential node is A.3.5.14 + A.3.4.14 + A.3.6.17, tested with I=∅ and U=∅; (b) the DK criterion node is A.3.6.15 for sCat, with B={(a,b): b≤a} and empty K_0 tested; (c) the common-chunk node is A.3.4.15 plus the proof of A.3.6.18; it is true taking all small common chunks, which form a μ-filtered family for every small μ. Confirmed the source typo in the proof of A.3.4.15 ('injective trivial cofibration' where a trivial fibration is meant); the node does not inherit it. Grep candidates that reach the item through their dependencies (small-chunks, diagram-equivalence-classes, enriched-diagram-homotopy-descent, rectification and others) cannot be cited without a cycle; the remaining candidates are not duplicates. The dependency closure is acyclic (217 nodes). All cited nodes are in the same unit, so tool_uses is empty. Form checks: proof_deps equals the union of uses, TeX has single backslashes, no SGA, blueprint fields and created.item are correct. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8581ecb55",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Read node, HTT A.3.6.18/2.2.3.11(*) place, all 3 stmt_dep declarations (SimplicialDiagramEnrichment, ProjectiveSimplicialModelStructure, fibrantPair/liftBundle, LocalizationSystem, IsDerivedLimit, BergnerModelData, rigidification) and the module. Hypotheses, index C[S]^op, projectively fibrant marked pairs, normalized restriction, family (incl. empty), one-monic pushout and sequence clauses, universes and gates all correct; delivered module compiles cleanly (nt_compile exit 0). One H3 fault fixed: the signature asserted descent only for an existential witness `∃ D : DiagramSystem T`; fixes/ProjectiveDiagramSimplicialDescent.lean restates it as `Nonempty (DiagramSystem T) ∧ ∃ R r, … ∧ ∀ D, (family ∧ pushout ∧ sequence)` (true since any two systems are canonically isomorphic, recorded in the docstring), compiling cleanly; fixes report appends a maintainer-fix section keeping both required sections."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProjectiveDiagramSimplicialDescent",
+  "declaration": "CategoryTheory.ProjectiveDiagramDescent.projective_diagram_simplicial_descent",
+  "declarations": [
+   "CategoryTheory.ProjectiveDiagramDescent.Index",
+   "CategoryTheory.ProjectiveDiagramDescent.diagramPair",
+   "CategoryTheory.ProjectiveDiagramDescent.DiagramSystem",
+   "CategoryTheory.ProjectiveDiagramDescent.markedFunctor",
+   "CategoryTheory.ProjectiveDiagramDescent.localizedFunctor",
+   "CategoryTheory.ProjectiveDiagramDescent.restrictionCone",
+   "CategoryTheory.ProjectiveDiagramDescent.IsDescentCone",
+   "CategoryTheory.ProjectiveDiagramDescent.projective_diagram_simplicial_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProjectiveDiagramSimplicialDescent.lean",
+  "statement": "theorem projective_diagram_simplicial_descent {C : Type w} [Category.{u} C] [ModelCategory C] [SimplicialCategory C] (T : SimplicialTensorCotensor C) (hC : CombinatorialModelCategory.{w, u, u} C) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 C) (B : BergnerModelData.{max u w}) (L : LocalizationSystem B) : Nonempty (DiagramSystem T) ∧ ∃ (R : SCat.{max u w} ⥤ SCat.{max u w}) (r : 𝟭 SCat.{max u w} ⟶ R), (∀ X : SCat.{max u w}, B.model.categoryWithWeakEquivalences.weakEquivalences (r.app X) ∧ IsBergnerFibrant B (R.obj X)) ∧ ∀ D : DiagramSystem T, (∀ (J : Type u) (S : J → SSet.{u}) (c : Cofan S), IsColimit c → IsDescentCone B (localizedFunctor D L) c ∧ ∃ (l : Cone ((Discrete.functor S).op ⋙ localizedFunctor D L ⋙ R)) (hl : IsLimit l), B.model.categoryWithWeakEquivalences.weakEquivalences (r.app ((localizedFunctor D L).obj (op c.pt)) ≫ hl.lift (R.mapCone (restrictionCone (localizedFunctor D L) c)))) ∧ (∀ (A V W : SSet.{u}) (f : A ⟶ V) (g : A ⟶ W), Mono f → ∀ c : PushoutCocone f g, IsColimit c → IsDescentCone B (localizedFunctor D L) c) ∧ (∀ F : ℕ ⥤ SSet.{u}, (∀ n : ℕ, Mono (F.map (homOfLE (Nat.le_succ n)))) → ∀ c : Cocone F, IsColimit c → IsDescentCone B (localizedFunctor D L) c)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-8581ecb55"
  }
 }
