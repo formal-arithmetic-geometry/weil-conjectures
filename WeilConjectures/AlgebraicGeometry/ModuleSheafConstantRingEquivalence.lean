@@ -151,7 +151,6 @@ private noncomputable instance (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}
     (moduleExtension Λ X).Full :=
   Functor.Full.of_comp_faithful_iso (moduleEmbeddingUnitIso Λ X).symm
 
--- Restriction of scalars retains the additive sheaf and supplies essential surjectivity.
 private noncomputable def moduleRestrictionObj
     (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
     (M : SheafOfModules.{u + 1} (constantRing Λ X)) :
