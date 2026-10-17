@@ -258,5 +258,23 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-248a179da (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full, together with the statement of every cited node; there are no new nodes and no files were changed. Source: Stacks 094H (sites-cohomology.tex 14356-14376). Its uniform cutoff tau_{>=i-1} is false: on the one-point site over a field k, K=k[2], L=k[-2], i=0 gives H^0 of the tensor equal to k, but tau_{>=-1}K=0. The item's corrected cutoffs a<=i-b_L and c<=i-b_K are correct and not weakened, and the only citer (lem-weil-pbc-locally-constant-tensor) uses exactly these. Step 1: the good-truncation windows follow from def-kun-truncations. Step 2: lem-pc-kflat-bounded-flat-replacement keeps the term bound N, lem-pc-bounded-above-flat-kflat-site gives K-flatness, and the descent node gives the Tot model; the hypotheses (same small site, same commutative R) hold. Step 3: the degree count is correct; the Tot terms vanish for n>a-1+b_L and for n>b_K+c-1, both at most i-1, so H^i and H^{i+1} of both tails are zero. Steps 4-5: the truncation triangle (Mathlib leaf, matches derived.tex 08J5), the 'exact in each variable' sentence of lem-weil-pbc-ringed-projection-mate-exact (its proof uses the descent node, so it is the same bifunctor) and the long exact sequence leaf give two isomorphisms, and bifunctoriality makes their composite H^i(q_K tensor q_L). proof_deps equals the union of uses, and the graph stays acyclic (the item is not in the 484-node dependency closure of its citations). Route: the descent and mate-exact nodes are in the same unit and both lem-sf nodes are Mathlib leaves. The two declared tool uses (lem-pc-kflat-bounded-flat-replacement, lem-pc-bounded-above-flat-kflat-site) are accepted as generic black boxes. Duplicate search: lem-kun-derived-tensor-t-est, lem-kun-integral-derived-tensor-bounded-torsion, lem-weil-pbc-ringed-tensor-cohomological-bounds, prop-weil-pbc-levelwise-truncations and lem-sf-tensor-ctf do not state this result. Small cases checked: the shifted counterexample, endpoint equality, empty windows, acyclic factors, and Z/2 tensor Z/2 over Z. No SGA source is cited. The missing lean_audit field on the item predates this delivery and was not touched."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1d2d7af5a",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Immutable delivery matches the node and source; scompile.py passes with no errors or warnings; no substantive or mechanical faults found."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedTensorTruncationWindow",
+  "declaration": "SheafOfModules.isIso_derivedTensor_truncationWindow",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedTensorTruncationWindow.lean",
+  "statement": "theorem isIso_derivedTensor_truncationWindow {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{max u v}) [HasDerivedCategory.{w, max u v, (max u v) + 1} (SheafOfModules.{max u v, v, u, max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))] (K L : DerivedCategory.{w, max u v, (max u v) + 1} (SheafOfModules.{max u v, v, u, max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))) (bK bL : ℤ) (hK : ∀ q : ℤ, bK < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) (hL : ∀ q : ℤ, bL < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj L)) (i a c : ℤ) (ha : a ≤ i - bL) (hc : c ≤ i - bK) : IsIso ((DerivedCategory.homologyFunctor _ i).map ((wfSiteDerivedTensor J R).map (CategoryTheory.Prod.mkHom ((DerivedCategory.TStructure.t.truncGEπ a).app K) ((DerivedCategory.TStructure.t.truncGEπ c).app L)))) ∧ (∀ q : ℤ, q < a ∨ bK < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((DerivedCategory.TStructure.t.truncGE a).obj K))) ∧ (∀ q : ℤ, q < c ∨ bL < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((DerivedCategory.TStructure.t.truncGE c).obj L)))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

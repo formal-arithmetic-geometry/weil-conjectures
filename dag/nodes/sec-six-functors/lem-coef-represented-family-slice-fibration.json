@@ -11,7 +11,10 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
   "lem-coef-infinity-slice-right-fibration",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-twisted-arrow-left-fibration",
+  "def-coef-left-module-operadic-encoding"
  ],
  "proof": [
   {
@@ -316,5 +319,51 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-74e84e265 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps, the statements of all 18 proof_deps, plus lem-coef-infinity-isofibration-exponentiation, def-coef-infinity-category-of-spaces, the parent lem-coef-coherent-diagram-coyoneda (only its step 3 uses the item), the unit and chapter records, and the ancestor prop-coef-integral-exceptional-adjoint paragraph 2 (same text in master and main-20261015). Shape: one commit with two files, no new nodes, statement kept as imported, proof_deps equal to the union of the step uses, all cited ids exist and none is merged. A traversal from the item reaches 402 nodes with no cycle back to the item or its parent. Variance of Map_C(Q(a,x),c) and Map_B(x,F(a)) checked. Edge cases checked: A empty, terminal, [1] and discrete, v=id, n=2 horn. Step 2's p-cartesian argument is exact: the outer horn is filled in B by lem-cbc-equivalence-outer-horn-filling on the degenerate 1_y edge, then lifted by q's right-horn property. Step 3: pointwise Yoneda applied to the inverse of tau gives the universal arrow eps, and lem-coef-parametric-universal-arrows (with no closure assumption on D_0) gives the coherent diagram equivalences. Step 4: the base-change hypotheses are met because right fibrations are isofibrations (shown by right-horn lifts; the step attributes this to the outer-horn lemma, a minor misattribution). Step 5: the strict pullback of mapping spaces is a homotopy pullback via the Kan mapping fibration; the needed strict commutation of composites is a routine detail. Step 7: transport is the slice-pullback clause of lem-coef-right-fibration-section-limit plus naturality of tau, in the right direction; the functor level is written as a sketch but is complete. Duplicate search: closest node is lem-coef-infinity-relative-slice-sections, which is a different statement (cocartesian over K, assumes local smallness, no represented family). Tool uses accepted: lem-cbc-enhanced-functor-cone-calculus, lem-cbc-equivalence-outer-horn-filling, lem-cbc-simplicial-composition-spine, as generic calculus matching unit precedent. The fourth entry, def-cbc-enhanced-diagrams-cones, is a definition and needs no declaration. Source: proof is agent-written, CatLR is WANTED, no SGA cited. No fixes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f4fde2f64",
+  "group": "Q101",
+  "result": "fix",
+  "note": "Reviewed the immutable statement, dependencies, sources, universes, coherence, and edge cases; no substantive defect found. scompile.py passed sandbox and library checks. Replaced the H11 placeholder second reading with a complete report in fixes/lem-coef-represented-family-slice-fibration.report.md. Full findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RepresentedFamilySliceFibration",
+  "declaration": "SSet.Enhanced.RepresentedFamily.represented_family_slice_fibration",
+  "declarations": [
+   "SSet.Enhanced.RepresentedFamily.index",
+   "SSet.Enhanced.RepresentedFamily.domain",
+   "SSet.Enhanced.RepresentedFamily.relative",
+   "SSet.Enhanced.RepresentedFamily.projection",
+   "SSet.Enhanced.RepresentedFamily.indexProjection",
+   "SSet.Enhanced.RepresentedFamily.homFamily",
+   "SSet.Enhanced.RepresentedFamily.left",
+   "SSet.Enhanced.RepresentedFamily.arguments",
+   "SSet.Enhanced.RepresentedFamily.right",
+   "SSet.Enhanced.RepresentedFamily.representedOpposite",
+   "SSet.Enhanced.RepresentedFamily.represented",
+   "SSet.Enhanced.RepresentedFamily.representedProjection",
+   "SSet.Enhanced.RepresentedFamily.PointCylinder",
+   "SSet.Enhanced.RepresentedFamily.representedTwist",
+   "SSet.Enhanced.RepresentedFamily.RelativeTwist",
+   "SSet.Enhanced.RepresentedFamily.Realizes",
+   "SSet.Enhanced.RepresentedFamily.SliceArrow",
+   "SSet.Enhanced.RepresentedFamily.object",
+   "SSet.Enhanced.RepresentedFamily.arrow",
+   "SSet.Enhanced.RepresentedFamily.relativeFiber",
+   "SSet.Enhanced.RepresentedFamily.fiberInclusion",
+   "SSet.Enhanced.RepresentedFamily.fiberSource",
+   "SSet.Enhanced.RepresentedFamily.Transpose",
+   "SSet.Enhanced.RepresentedFamily.Transport",
+   "SSet.Enhanced.RepresentedFamily.represented_family_slice_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RepresentedFamilySliceFibration.lean",
+  "statement": "theorem represented_family_slice_fibration (A : Type u) [SmallCategory A] (B C : SSet.{max u v}) [Quasicategory B] [Quasicategory C] (Q : domain (index.{u, v} A) B ⟶ C) (F : index.{u, v} A ⟶ B) (c : C _⦋0⦌) (τ : ((ihom (SSet.uliftFunctor.{max u v + 1, max u v}.obj (domain (index.{u, v} A) B).op)).obj CategoryTheory.Spaces.infinityCategory.{max u v}) _⦋1⦌) (h₀ : ((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 1 τ = diagramVertex (left Q c)) (h₁ : ((ihom _).obj CategoryTheory.Spaces.infinityCategory).δ 0 τ = diagramVertex (right F)) (hτ : IsEquivalenceEdge _ τ) : Quasicategory (relative Q c) ∧ InnerFibration (indexProjection Q c) ∧ (∀ (y : (relative Q c) _⦋0⦌) (b : (index.{u, v} A).op _⦋0⦌) (α : (index.{u, v} A).op _⦋1⦌), (index.{u, v} A).op.δ 1 α = b → (index.{u, v} A).op.δ 0 α = (indexProjection Q c).app _ y → ∃ z : (relative Q c) _⦋1⦌, (relative Q c).δ 0 z = y ∧ (indexProjection Q c).app _ z = α ∧ IsCartesianEdge (indexProjection Q c) (SSet.yonedaEquiv.symm z)) ∧ ∃ e : Transpose Q F c, Realizes Q F c τ e.total ∧ ∀ (a b : A) (f : a ⟶ b), Transport e f",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit pullback of the existing join slice, coherent Hom-pairing hypothesis, and normalized transpose into the opposite twisted-arrow pullback. The theorem includes cartesian lifts, equivalences of the actual strict fibres over B, and whole-family postcomposition cylinders. All helpers are constructions or predicates belonging to this represented-family statement; the only postponed proof is the main theorem. Added landed statement dependencies supply the existing coherent Hom pairing, twisted-arrow construction, and generic over-base equivalence predicate, avoiding duplicate definitions."
  }
 }
