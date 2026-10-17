@@ -12,9 +12,87 @@
   "pqf-def-locnoeth",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an affine open $V\\subseteq X$ and write $B=\\mathcal O_X(V)$. Since $X$ is locally Noetherian, $B$ is Noetherian by [pqf-lem-affine-open-locnoeth]. To prove that $B$ is universally catenary, use the definition in [def-exc-excellent-ring]: let $C$ be an arbitrary finite-type $B$-algebra. By [def-weil-affine-spectrum] the ring map $B\\to C$ gives $g:Y=\\operatorname{Spec}C\\to\\operatorname{Spec}B=V$. The morphism $g$ is locally of finite type in the sense of [def-weil-finite-type-morphism], whose condition quantifies over every affine open of the target: let $V'\\subseteq V$ be an affine open. For $b\\in B$ the standard open $D(b)\\subseteq V$ is $\\operatorname{Spec}B_b$, and $g^{-1}(D(b))$ is the standard open $D(b)=\\operatorname{Spec}C_b$ of $Y$, with $C_b=C\\otimes_BB_b$. The standard opens $D(b)$ contained in $V'$ cover $V'$, so their inverse images cover $g^{-1}(V')$. For such $b$, $D(b)=V'\\cap D(b)$ is also the standard open of $V'$ defined by the restriction $b|_{V'}$, so $B_b=\\mathcal O_X(V')_{b|_{V'}}$ is generated over $\\mathcal O_X(V')$ by $1/b$, and $C_b$ is generated over $B_b$ by the images of finitely many $B$-algebra generators of $C$; hence each $C_b$ is a finitely generated $\\mathcal O_X(V')$-algebra, as the definition requires. The inclusion $V\\hookrightarrow X$ is an open immersion, hence an immersion (the identity of $V$ being a closed immersion), so it is locally of finite type by [lem-weil-pbc-immersion-base-change-lft], part (2); no quasi-compactness is needed. Composing with $g$ gives a locally finite type morphism $h:Y\\to X$ by [lem-weil-pbc-proper-fp-permanence], part (e).",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-exc-excellent-ring",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02J9, proof of implication (4) implies (3), together with the definition of universally catenary recalled immediately before the lemma (lines 3111--3114)."
+   }
+  },
+  {
+   "text": "The inverse images $h^{-1}(U_i)$ cover $Y$. For each point of $Y$, choose an index $i$ whose image lies in $U_i$ and then, by the affine-open basis [lem-weil-pbc-affine-opens-basis], choose an affine open $W$ containing that point and contained in $h^{-1}(U_i)$. These $W$ form an affine open covering of $Y$, and each selected $W$ maps into the corresponding affine $U_i$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02J9, proof of implication (4) implies (1), lines 3153--3157: choose an affine open covering of the source whose members map into cover members."
+   }
+  },
+  {
+   "text": "For each such pair $W\\subseteq Y$ and $U_i\\subseteq X$, the locally finite type affine-pair criterion [lem-weil-pbc-lft-affine-pairs] says that the induced map $\\mathcal O_X(U_i)\\to\\mathcal O_Y(W)$ is of finite type. Because $\\mathcal O_X(U_i)$ is universally catenary by hypothesis, [def-exc-excellent-ring] then says that $\\mathcal O_Y(W)$ is catenary.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02J9, proof of implication (4) implies (1), lines 3155--3159: the affine coordinate map is finite type and the target ring is catenary by universal catenarity."
+   }
+  },
+  {
+   "text": "Apply the local catenarity criterion [lem-trf-catenary-affine-open-cover] to the scheme $Y$, the affine open cover of $Y$ from step 2 (whose rings are catenary by step 3), and the affine open $Y\\subseteq Y$ itself: the ring $\\mathcal O_Y(Y)=C$ [def-weil-affine-spectrum] is catenary.",
+   "uses": [
+    "lem-trf-catenary-affine-open-cover",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IX (lemma-catenary-local), implication (4) implies (3), used in the final sentence of the proof of Morphisms Tag 02J9."
+   }
+  },
+  {
+   "text": "The finite-type $B$-algebra $C$ was arbitrary, so every finite-type $B$-algebra is catenary. Together with Noetherianity of $B$ from step 1, this is exactly that $B$ is universally catenary by [def-exc-excellent-ring]. Since $V$ was arbitrary, the assertion holds for every affine open of $X$.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02J9, definition of universally catenary and implication (4) implies (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-open-locnoeth",
+  "def-exc-excellent-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-trf-catenary-affine-open-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02J9 (lemma-universally-catenary-local), implication (4) implies (3), via the affine-source argument in lines 3153--3160; local catenarity is Tag 02IX in properties.tex."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +128,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {𝒰 : X.OpenCover} [Finite 𝒰.I₀] [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [h : AlgebraicGeometry.IsLocallyArtinian X] [AlgebraicGeometry.IsAffine X],\\n  IsArtinianRing ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For any affine scheme $X$ that is locally Artinian, the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an Artinian ring.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.affineBasisCover.I₀ → CommRingCat\", \"doc\": \"For a scheme $X$ and an element $i$ in the zeroth component of its affine basis cover, this function constructs the commutative ring obtained by localizing the ring of the affine open subscheme corres\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: the results concern Noetherianity or generic locality frameworks, not equal lengths of saturated prime chains in finite type algebras. No catenary predicate or universal-catenarity theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal catenarity of affine coordinate rings on an affine open cover implies universal catenarity of every affine open of a locally Noetherian scheme",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; isLocallyNoetherian_iff_of_iSup_eq_top; isLocallyNoetherian_iff_of_affine_openCover; instIsLocallyNoetherianXScheme; IsLocallyNoetherian.component_noetherian; isNoetherian_iff_of_finite_iSup_eq_top; isNoetherian_iff_of_finite_affine_openCover; instIsLocallyNoetherianToScheme.",
+   "date": "2026-10-18",
+   "verdict": "no match: only Noetherianity/locality results, no catenarity or universal-catenarity theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Catenary, AlgebraicGeometry.Scheme, affine open cover",
+   "results": "[loogle] OK 0 hit(s) | loogle: <input>:1:43: expected end of input",
+   "date": "2026-10-18",
+   "verdict": "unavailable: invalid Loogle query syntax; no declaration result"
+  },
+  {
+   "tool": "grep",
+   "query": "catenary|universally.catenary (Mathlib/AlgebraicGeometry)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally Noetherian scheme with universally catenary rings on an affine open cover has universally catenary coordinate rings on every affine open",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; IsLocallyNoetherian.component_noetherian; Scheme.mk.noConfusion; isNoetherian_iff_of_finite_affine_openCover; isNoetherian_Spec; isNoetherian_iff_of_finite_iSup_eq_top; isLocallyNoetherian_iff_of_iSup_eq_top; IsNoetherian.toIsLocallyNoetherian.",
+   "date": "2026-10-18",
+   "verdict": "no match: only Noetherianity results"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-excellent-scheme-affine-cover",
@@ -74,5 +180,32 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-universally-catenary-affine-cover",
+  "worker": "stage1",
+  "summary": "Audited Tag 02J9 implication (4) implies (3). For an arbitrary affine V and finite-type algebra C over its coordinate ring, the induced affine morphism is covered by affine opens mapping into the given U_i; the affine-pair finite-type criterion and universal catenarity of the U_i make each chart ring catenary, and the new Tag 02IX locality node makes C catenary. The Noetherianity hypothesis needed by universal catenarity comes from the existing affine-open locally-Noetherian node. The statement and imported metadata are unchanged.",
+  "blueprint": "The item is an imported support lemma for the excellence-locality route: it realizes the universal-catenarity component in the sentence of the ancestor blueprint node lem-trf-local-term-locality concerning excellence being verified on affine normalization charts and passed to every affine open.",
+  "new_nodes": [
+   "lem-trf-catenary-affine-open-cover"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Step 3 uses the general affine-pair characterization of locally finite type to obtain finite-type coordinate maps; this is a cross-unit Stacks tool with no replacement in this item's local-catenarity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-1f147d49f",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-1f147d49f (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-catenary-affine-open-cover and the statement of every cited node in full. The item agrees with Stacks Morphisms Tag 02J9 (lemma-universally-catenary-local), (4)=>(3): the source proof covers Spec C by affines over the U_i, uses 01T2 for finite type coordinate maps, then Properties 02IX. The new node is exactly Properties Tag 02IX (lemma-catenary-local), (4)=>(3), for an arbitrary scheme. It is true without Noetherian hypotheses: the chain condition for p in q only depends on the local ring at q. Small cases pass: the empty scheme, a one-member cover, Spec k[x] covered by D(x) and D(x-1). The node's 'catenary' matches algebra.tex 00NI as spelled out in def-exc-excellent-ring. It is not a restatement of the parent, and a grep for catenar, 02IX and 02J9 finds no duplicate. Repaired in the item's proof (2 faults, plus 1 wording slip): (1) step 1 justified quasi-compactness of V into X by 'V is affine', which is invalid without quasi-separatedness; it is also not needed, so I replaced lem-weil-pbc-qc-open-immersion-finite-type with lem-weil-pbc-immersion-base-change-lft (2), which says an immersion is locally of finite type (a Mathlib leaf). (2) step 1 said 'the single affine chart satisfies the finite-type definition', but def-weil-finite-type-morphism quantifies over all affine opens of the target; I wrote out the standard-open argument (D(b) in V', Spec C_b finitely generated over O(V')). (3) step 4 now concludes that O_Y(Y)=C is catenary by applying the node with V=Y, and adds def-weil-affine-spectrum. proof_deps was recomputed. The declared tool_use lem-weil-pbc-lft-affine-pairs is a Mathlib leaf, so it is redundant but harmless and I accept it. No SGA source; not a target node, so there is no base change or coefficient category to check.; 1 file(s) fixed by the reviewer"
  }
 }
