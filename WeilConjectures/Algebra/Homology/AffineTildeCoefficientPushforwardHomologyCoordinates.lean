@@ -32,7 +32,7 @@ local instance (priority := 2000) coefficientCoordinatesCategory (Y : Scheme.{u}
 local instance (priority := 2000) coefficientCoordinatesPreadditive (Y : Scheme.{u}) :
     Preadditive Y.Modules := SheafOfModules.instPreadditive Y.ringCatSheaf
 local instance (priority := 2000) coefficientCoordinatesAbelian (Y : Scheme.{u}) :
-    Abelian Y.Modules := SheafOfModules.instAbelian Y.ringCatSheaf
+    Abelian Y.Modules := inferInstanceAs (Abelian (SheafOfModules.{u} Y.ringCatSheaf))
 
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
   affineTildePushforwardComparison
