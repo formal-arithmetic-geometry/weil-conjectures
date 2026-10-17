@@ -105,4 +105,35 @@ theorem IsAdicLisseSheaf.preservesMonomorphisms_tensorLeft {C : AdicSheaf l X}
     infer_instance
   exact (isZero_kernel_of_mono _).of_iso (PreservesKernel.iso (g i)^*ᵃ[l] _)
 
+/-- **The internal hom out of a lisse sheaf preserves vanishing after pullback**: if `k^* N = 0`
+then `k^* 𝓗om(B, N) = 0`, for `B` lisse and any morphism `k`. On the base change of a cover
+trivialising `B`, `𝓗om(B, N)` becomes a finite direct sum of copies of `N`. -/
+theorem IsAdicLisseSheaf.isZero_upperStar_ihom {T : Scheme.{u}} (k : T ⟶ X)
+    {B N : AdicSheaf l X} (hB : IsAdicLisseSheaf B) (hN : IsZero ((k)^*ᵃ[l].obj N)) :
+    IsZero ((k)^*ᵃ[l].obj ((AdicSheaf.ihom B).obj N)) := by
+  obtain ⟨R, hR, hRB⟩ := hB
+  obtain ⟨κ, V, g, rfl⟩ := R.exists_eq_ofArrows
+  have hc := Precoverage.mem_coverings_of_isPullback g hR k (fun t ↦ pullback.fst k (g t))
+    (fun t ↦ pullback.snd k (g t)) fun t ↦ IsPullback.of_hasPullback k (g t)
+  have (t : κ) : WeaklyEtale (pullback.fst k (g t)) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hc (.mk t)
+  refine AdicSheaf.isZero_of_isZero_upperStar (fun t ↦ pullback.fst k (g t)) hc fun t ↦ ?_
+  have := Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk t)
+  obtain ⟨n, ⟨e⟩⟩ := hRB (g t) (.mk t)
+  let p := pullback.fst k (g t)
+  let q := pullback.snd k (g t)
+  have hpq : p ≫ k = q ≫ g t := pullback.condition
+  let c (M : AdicSheaf l X) : (p)^*ᵃ[l].obj ((k)^*ᵃ[l].obj M) ≅ (q)^*ᵃ[l].obj ((g t)^*ᵃ[l].obj M) :=
+    (adicUpperStarComp l p k).symm.app _ ≪≫ (adicUpperStarCongr l hpq).app _ ≪≫
+      (adicUpperStarComp l q (g t)).app _
+  have hz : IsZero ((q)^*ᵃ[l].obj ((g t)^*ᵃ[l].obj N)) :=
+    ((p)^*ᵃ[l].map_isZero hN).of_iso (c N).symm
+  refine IsZero.of_iso ?_ (c _ ≪≫ (q)^*ᵃ[l].mapIso ((adicUpperStarIhomIso l (g t) B).app N ≪≫
+    (Mod.ihomMapIso e).symm.app _ ≪≫ Mod.ihomBiproductIso _ _ ≪≫
+    biproduct.mapIso fun _ ↦ Mod.ihomRegularIso.app _) ≪≫ (q)^*ᵃ[l].mapBiproduct _)
+  rw [IsZero.iff_id_eq_zero, ← biproduct.total]
+  exact Finset.sum_eq_zero fun j _ ↦ by
+    erw [hz.eq_of_tgt (biproduct.π (fun _ : Fin n ↦ (q)^*ᵃ[l].obj ((g t)^*ᵃ[l].obj N)) j) 0,
+      zero_comp]
+
 end AlgebraicGeometry.ProEtale
