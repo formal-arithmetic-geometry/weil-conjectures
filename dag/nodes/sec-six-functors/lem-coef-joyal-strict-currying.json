@@ -10,9 +10,62 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First reuse [lem-coef-marked-internal-hom] with $X^\\sharp,K^\\sharp,Q^\\sharp$, where sharp marks every edge. Since every edge of $Q^\\sharp$ is marked, every underlying simplicial map into it preserves markings, and $H(K^\\sharp,Q^\\sharp)_n=\\operatorname{Hom}_{\\mathsf{sSet}}(K\\times\\Delta^n,Q)$ with every edge of $H$ marked. Restriction operators agree with the stated Fun operators. Also $X^\\sharp\\times K^\\sharp=(X\\times K)^\\sharp$. Thus its evaluation adjunction already gives the claimed bijection on underlying simplicial maps, in the same universe and without fibrancy. We verify the specified formulas explicitly. For a simplicial map $f:X\\to\\operatorname{Fun}(K,Q)$, define $E(f):X\\times K\\to Q$ in degree $n$ by $E(f)_n(x,k)=f_n(x)(k,\\operatorname{id}_{[n]})$. If $\\alpha:[m]\\to[n]$, the defining operator on $\\operatorname{Fun}(K,Q)$ is precomposition by $\\operatorname{id}_K\\times\\Delta(\\alpha)$, so the naturality equation for $f$ gives $E(f)_m(X(\\alpha)x,K(\\alpha)k)=Q(\\alpha)E(f)_n(x,k)$. Hence these components assemble to a simplicial map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Section 3.1.3, opening paragraph, printed p.154: marked internal-Hom evaluation adjunction; all-sharp specialization and degreewise calculation supplied here. Proposition 1.2.7.3, proof on printed p.94, is the downstream homotopy-exponential application."
+   }
+  },
+  {
+   "text": "Conversely, for a simplicial map $g:X\\times K\\to Q$ and $x\\in X_n$, define $C(g)_n(x):K\\times\\Delta^n\\to Q$ on an $m$-simplex $(k,\\alpha:[m]\\to[n])$ by $g_m(X(\\alpha)(x),k)$. For $\\beta:[\\ell]\\to[m]$, simpliciality of $g$ gives $Q(\\beta)g_m(X(\\alpha)x,k)=g_\\ell(X(\\alpha\\circ\\beta)x,K(\\beta)k)$, proving that $C(g)_n(x)$ is simplicial. For $\\gamma:[r]\\to[n]$ and $\\alpha:[m]\\to[r]$, both $C(g)_r(X(\\gamma)x)_m(k,\\alpha)$ and $(\\operatorname{Fun}(K,Q)(\\gamma)C(g)_n(x))_m(k,\\alpha)$ equal $g_m(X(\\gamma\\circ\\alpha)x,k)$. Hence $C(g):X\\to\\operatorname{Fun}(K,Q)$ is simplicial and has the stated transpose formula.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.2.7.3, printed p.94, explicit simplicial currying and localization argument"
+   }
+  },
+  {
+   "text": "The composites are identities degreewise. For $g$, evaluating $C(g)_n(x)$ at $(k,\\operatorname{id}_{[n]})$ gives $g_n(x,k)$, so $E(C(g))=g$. For $f$, the value of $C(E(f))_n(x)$ at $(k,\\alpha:[m]\\to[n])$ is $f_m(X(\\alpha)x)(k,\\operatorname{id}_{[m]})$; the naturality of $f$ and the operator formula in the definition identify this with $f_n(x)(k,\\alpha)$. Thus $C(E(f))=f$ and the displayed correspondence is a bijection, without any fibrancy assumption.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.2.7.3, printed p.94, explicit simplicial currying and localization argument"
+   }
+  },
+  {
+   "text": "The bijection is natural in all three variables by the same pointwise formulas. Postcomposition by a simplicial map $Q\\to Q'$ commutes with both evaluation and transpose; precomposition by $X'\\to X$ commutes with the $x$-argument; and a map $K'\\to K$ is handled by precomposing each $K\\times\\Delta^n$-map and by replacing $k$ with its image. These equalities are strict, so the correspondence is covariant in $Q$, contravariant in $K$, and contravariant in $X$ (the naturality in $X$ in the statement).",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.2.7.3, printed p.94, explicit simplicial currying and localization argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-marked-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 1.2.7.3, printed p.94; explicit degreewise evaluation and transpose calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "created": {
@@ -91,5 +144,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-joyal-strict-currying",
+  "worker": "stage1",
+  "summary": "Expanded the imported strict simplicial currying statement into four direct degreewise steps: evaluation, transpose, the two inverse calculations, and naturality in all variables. No new node is needed because every argument is an explicit verification from the stated Fun construction and simplicial-map definitions. Maintainer repair: reuse the existing marked internal-Hom generalization by all-sharp specialization; correct simplex composition in Step 2 and the X-variance in Step 4. The statement and all its explicit formulas are unchanged.",
+  "blueprint": "Realizes the explicit currying/localization subargument in paragraph 2 of prop-coef-integral-exceptional-adjoint, with the degreewise evaluation and transpose formulas supplied directly here."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-616956e32",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-616956e32 (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Corrected reversed simplex composition and X-variance; cited the existing marked internal-Hom generalization. Checked HTT pp.39, 94, 154 and Scholze pp.13–15, empty/non-fibrant cases, 27 finite examples, and acyclicity. Statement unchanged. Corrected JSON is under fixes/; details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

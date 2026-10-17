@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "rem-pc-regular-normal",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Regular schemes are normal; the normal decomposition",
- "statement": "We use the following two facts of the Stacks Project:\n\n- *regular schemes are normal* (Properties of Schemes,\nLemma 28.9.4, Tag [0569](https://stacks.math.columbia.edu/tag/0569);\nsee also Lemma 28.9.2, Tag [02IT](https://stacks.math.columbia.edu/tag/02IT)),\nand\n- *Noetherian normal schemes decompose*: a Noetherian normal\nscheme is a finite disjoint union of normal integral schemes (Properties\nof Schemes, Lemma 28.7.6, Tag [033M](https://stacks.math.columbia.edu/tag/033M)).\n\nIn particular a regular, connected, Noetherian scheme is irreducible.\n(These are the scheme-level regularity-normal facts, in contrast with\n[rem-pc-regularity-sc] which works with smooth curves.)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Call $X$ normal if every local ring $\\mathcal O_{X,x}$ is a normal domain [def-weil-pbc-normal-ring], that is, an integral domain integrally closed in its field of fractions.\n\n(1) If $X$ is regular [def-weil-regular-scheme], then $X$ is normal.\n\n(2) If $X$ is Noetherian (locally Noetherian [pqf-def-locnoeth] and quasi-compact, meaning every open covering has a finite subcover) and normal, then $X$ is a finite disjoint union of normal integral schemes [def-pc-integral-scheme]. More precisely, its irreducible components [def-weil-irreducible-components] are pairwise disjoint open and closed subsets, and with their open subscheme structures they are normal and integral.\n\n(3) In particular, if $X$ is regular, Noetherian, nonempty and connected (its underlying space is not the union of two disjoint nonempty open subsets), then $X$ is irreducible. Nonemptiness is explicit because irreducibility includes nonemptiness, whereas connectedness alone here allows the empty space.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-av-jacobian/rem-pc-regular-normal.md",
   "place": "node rem-pc-regular-normal, order 465",
@@ -27,24 +27,177 @@
   ]
  },
  "stmt_deps": [
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "def-weil-irreducible-components"
  ],
  "proof": [
   {
-   "text": "Both facts are cited from the Stacks Project as above (Tags 0569 and 033M).\nFor the consequence, let $X$ be regular, connected and Noetherian. Then $X$ is\nnormal, so it is a finite disjoint union of integral schemes. These are open\nand closed in $X$, so connectedness leaves exactly one of them, and $X$ is\nintegral, in particular irreducible.",
-   "uses": [],
-   "elementary": null
+   "text": "Assume $X$ is regular. By [def-weil-regular-scheme], choose an affine open cover $U_i=\\operatorname{Spec}R_i$ with every $R_i$ a regular ring. By [lem-weil-pbc-regular-ring-normal], every $R_i$ is normal. For $x\\in U_i$, [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{X,x}$ with $(R_i)_{\\mathfrak p_x}$. By [def-weil-pbc-normal-ring], this localization is a normal domain. Every point is in some $U_i$, so $X$ is normal. This also covers the empty scheme, with the empty cover.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0569, label lemma-regular-normal; Tag 02IT, label lemma-characterize-regular (use the affine-cover definition)"
+   }
+  },
+  {
+   "text": "For (2), assume $X$ is Noetherian and normal. Each stalk is a domain, so its only nilpotent is zero: $a^n=0$ in a domain implies $a=0$ by repeated use of the absence of zero divisors. Thus $X$ is reduced by [def-pc-reduced-scheme], and that node also states that every ring of sections is reduced. Choose an affine open cover $U_i=\\operatorname{Spec}R_i$ with each $R_i$ Noetherian, using local Noetherianity as defined in [pqf-def-locnoeth]. Each $R_i$ is reduced by the preceding observation.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 033I, label definition-normal; Tag 033K, label lemma-normal-reduced; Tag 0357, label lemma-normal-locally-finite-nr-irreducibles, affine case"
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak p\\subset R_i$, [lem-weil-pbc-affine-open-spec-points] gives its corresponding point $x\\in U_i$. By [lem-weil-pbc-affine-open-stalk-localization], $(R_i)_{\\mathfrak p}\\cong\\mathcal O_{X,x}$, a normal domain. Hence $R_i$ is a normal ring by [def-weil-pbc-normal-ring]. Since $R_i$ is Noetherian, [lem-weil-pbc-noetherian-finitely-many-minimal-primes] gives finitely many minimal primes. Apply [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions] to the reduced ring $R_i$ from step 2: it is isomorphic to a finite product $\\prod_j A_{ij}$ of normal domains. All three required hypotheses, reducedness, finiteness of minimal primes, and normality, have now been verified.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, label lemma-normal-locally-finite-nr-irreducibles, affine case; Algebra Tag 030C, label lemma-characterize-reduced-ring-normal"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-affine-coproduct-spectrum], $U_i\\cong\\coprod_j\\operatorname{Spec}A_{ij}$, with each factor an open and closed subscheme; the disjoint-open description is [lem-weil-pbc-scheme-coproduct-family]. Each factor is integral by [lem-weil-pbc-spec-domain-stalks-function-field], since $A_{ij}$ is a domain. It is normal: its stalk at $\\mathfrak q$ is $(A_{ij})_{\\mathfrak q}$ by that same node, and is a normal domain by [lem-weil-pbc-localization-normal-domain]. In particular the factors are nonempty and irreducible by [def-pc-integral-scheme]. They are exactly the irreducible components of $U_i$: an irreducible subset cannot meet two disjoint clopen factors, and each irreducible factor is already maximal among irreducible subsets. The empty product presents the empty affine open and creates no component.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-localization-normal-domain",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, label lemma-normal-locally-finite-nr-irreducibles, affine case; Algebra Tag 030C"
+   }
+  },
+  {
+   "text": "Let $T$ be an irreducible component of $X$. For every $U_i$ meeting $T$, [lem-sc-components-open-injection] says that $T\\cap U_i$ is an irreducible component of $U_i$. Step 4 identifies it with a clopen normal integral factor of $U_i$; thus $T\\cap U_i$ is open in $X$. Their union is $T$, so $T$ is open, and it is closed by [def-weil-irreducible-components]. Distinct components $T,T'$ are disjoint: if $x\\in T\\cap T'$, take $U_i\\ni x$. Their intersections with $U_i$ are components of the disjoint decomposition in step 4 and meet at $x$, so they coincide. The injectivity assertion of [lem-sc-components-open-injection] then gives $T=T'$, a contradiction.",
+   "uses": [
+    "lem-sc-components-open-injection",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, label lemma-normal-locally-finite-nr-irreducibles, general case"
+   }
+  },
+  {
+   "text": "The components cover $X$ by [lem-sc-irreducible-components-cover], and there are finitely many by [lem-weil-pbc-noetherian-finitely-many-components], because $X$ is Noetherian. Equip each component $T$ with its open subscheme structure. Its stalks are those of $X$ at the same points, by the restriction description in [def-weil-open-immersion]; hence it is normal and reduced [def-pc-reduced-scheme]. It is nonempty and irreducible as a component, so it is integral by the equivalence in [def-pc-integral-scheme]. The canonical morphism from the scheme coproduct in [lem-weil-pbc-scheme-coproduct-family] to $X$ is an isomorphism: on each disjoint open component it is the identity of that open subscheme, and these local inverses agree on the empty intersections and glue by [lem-weil-pbc-scheme-morphism-gluing]. The two composites are the identity on each covering open, hence are identities by the uniqueness assertion of that node. This proves the finite disjoint-union assertion, also for $X=\\varnothing$, where the index set is empty.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "def-weil-open-immersion",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 033M, label lemma-normal-Noetherian, using Tag 0357, label lemma-normal-locally-finite-nr-irreducibles"
+   }
+  },
+  {
+   "text": "For (3), a regular $X$ is normal by step 1, and step 6 applies because $X$ is Noetherian. Nonemptiness ensures there is a component. If there were another, one component and the union of all the others would be disjoint nonempty open subsets covering $X$, contrary to connectedness. Thus there is exactly one component and it is all of $X$. It is irreducible by [def-weil-irreducible-components]. Without nonemptiness the decomposition can have zero components, so this last inference would fail.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 033M, label lemma-normal-Noetherian; blueprint rem-pc-regular-normal, final consequence with nonemptiness made explicit"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-normal-ring",
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-pc-integral-scheme",
+  "lem-sc-components-open-injection",
+  "def-weil-irreducible-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-def-av-jacobian/rem-pc-regular-normal.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0569 (lemma-regular-normal); Tag 033M (lemma-normal-Noetherian) via Tag 0357 (lemma-normal-locally-finite-nr-irreducibles) and Algebra Tag 030C (lemma-characterize-reduced-ring-normal)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNormal, AlgebraicGeometry.IsRegular",
+   "results": "0 hits: . loogle: unknown identifier 'AlgebraicGeometry.IsNormal'. Read the scheme Properties/Noetherian candidates: these give integrality, reducedness or finite components, not the full regular-normal/decomposition assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormal|isNormal|irreducibleComponents",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean. Read the scheme Properties/Noetherian candidates: these give integrality, reducedness or finite components, not the full regular-normal/decomposition assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular schemes are normal and Noetherian normal schemes are finite disjoint unions of integral normal schemes",
+   "results": "8 hits: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian. Read the scheme Properties/Noetherian candidates: these give integrality, reducedness or finite components, not the full regular-normal/decomposition assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Noetherian normal scheme is the disjoint union of its irreducible components",
+   "results": "8 hits: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents, AlgebraicGeometry.irreducibleSpace_of_isIntegral, TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, TopologicalSpace.NoetherianSpace.exists_finset_irreducible, AlgebraicGeometry.IsNoetherian.recOn. Read the scheme Properties/Noetherian candidates: these give integrality, reducedness or finite components, not the full regular-normal/decomposition assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with integrally closed domain stalks decomposes into open irreducible components when Noetherian",
+   "results": "8 hits: AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.IsIntegral.component_integral. Read the scheme Properties/Noetherian candidates: these give integrality, reducedness or finite components, not the full regular-normal/decomposition assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -74,5 +227,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "rem-pc-regular-normal",
+  "worker": "stage1",
+  "summary": "Expanded both scheme assertions by the Stacks affine normal-ring decomposition route, using existing DAG nodes only. Defined normal schemes inline and added the definition dependencies. STATEMENT-DISPUTED: the empty scheme is connected and regular Noetherian but not irreducible; the final clause now explicitly assumes nonemptiness. No target statement is changed. The sole existing citer already assumes nonempty fibres.",
+  "blueprint": "Steps 1 and 2–6 realize respectively the first and second bulleted facts of main-20261015 rem-pc-regular-normal. Step 7 realizes its final consequence, correcting the zero-component edge case. The Jacobian unit has no proof steps to replace; this is the stated scheme-geometric background.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic commutative-algebra input used by Stacks 0569; the Jacobian unit has no replacement for regular rings being normal."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Generic reduced normal-ring product decomposition used explicitly by Stacks 0357; the Jacobian unit has no algebraic product-decomposition lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-613b88bed",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-613b88bed (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, Stacks sources, and unit/chapter route. All seven steps hold; the disclosed nonemptiness correction handles the empty scheme, and the sole citer already assumes it. Both declared algebraic tool uses are accepted. No new nodes, cycles, or repairs. Detailed checks are in review.md."
  }
 }

@@ -23,9 +23,154 @@
   "lem-weil-integral-reduction-tower-well-defined",
   "lem-pur-isomorphism-inverse-image-tensor-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B_{n,W}=(A_{E,n})_W$ and $c_n=c^g_{A_{E,n}}$. By clauses (2) and (3) of [lem-weil-proetale-isomorphism-inverse-image], inverse image preserves the limit defining $R_Y$ and each $c_n$ is a ring isomorphism. Naturality there, applied to $A_{E,n+1}\\to A_{E,n}$, gives $\\rho_{n,X}c_{n+1}=c_n g^{-1}(\\rho_{n,Y})$. Thus the maps $c_n g^{-1}(\\pi_{n,Y})$ form a cone to the tower on $X$. The composite defining $c_{\\mathcal O_E}$ has these components, by the projection characterization of the canonical limit comparison. Consequently $\\pi_{n,X}c_{\\mathcal O_E}=c_n g^{-1}(\\pi_{n,Y})$. The limit of the $c_n$ is invertible: the $c_n^{-1}$ form the inverse cone and the two composites have identity projections. Together with the limit comparison this proves that the specified $c_{\\mathcal O_E}$ is an isomorphism.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits: module sheaves) and Tag 03CO (lemma-limits-colimits-abelian-sheaves: abelian sheaves). The ring-sheaf projection calculation is the universal-property argument written in this step, using the canonical limit comparison and ring-map naturality stated in lem-weil-proetale-isomorphism-inverse-image; neither tag is a theorem about limits of ring sheaves."
+   }
+  },
+  {
+   "text": "Apply the tensor isomorphism of [lem-pur-isomorphism-inverse-image-tensor-hom] in degree $i$ with $\\mathcal O=R_Y$, $\\mathcal F=P^i$, $\\mathcal G=B_{n,Y}$. Transport scalars by $c_{\\mathcal O_E}$ and $c_n$. The resulting map sends $g^{-1}x\\otimes a$ to $g^{-1}x\\otimes c_n(a)$. It respects the balanced relation: for $r\\in g^{-1}R_Y$, the images of $(r g^{-1}x)\\otimes a$ and $g^{-1}x\\otimes g^{-1}(\\pi_{n,Y})(r)a$ coincide since $\\pi_{n,X}(c_{\\mathcal O_E}(r))=c_n(g^{-1}(\\pi_{n,Y})(r))$ by Step 1. Its inverse uses $c_n^{-1}$ on the second factor and the inverse tensor comparison. These maps respect restrictions; the sheaf tensor product of [def-pur-sheaf-tensor-product] therefore gives mutually inverse module maps. This constructs precisely the stated $\\beta_n$ and its prescribed local formula.",
+   "uses": [
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); Tag 03EK (section-tensor-product), balancing and coefficient transport written explicitly"
+   }
+  },
+  {
+   "text": "The coefficient sheaf $B_{n,Y}$ is a complex concentrated in degree zero. Hence the total tensor convention of [def-pc-tensor-complex-sheaves] makes $d_{P_n}^i=d_P^i\\otimes1$. Naturality of the tensor comparison of [lem-pur-isomorphism-inverse-image-tensor-hom] with respect to $d_P^i$ gives $\\beta_n^{i+1}F(d_P^i\\otimes1)=(F(d_P^i)\\otimes1)\\beta_n^i$. Thus the termwise maps in Step 2 and their inverses are chain maps, giving an isomorphism of complexes. There is no interchange with an infinite totalization here, since only one coefficient degree is nonzero.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YL (section-flat), tensor total differential with one factor in degree zero"
+   }
+  },
+  {
+   "text": "The constant-sheaf ring isomorphism $c_n$ is unital. The local formula in Step 2 therefore sends $F(x\\otimes1)$ to $F(x)\\otimes1$, which proves $\\beta_n F(\\gamma_n)=\\gamma_n^X$. This is an equality of $R_X$-module chain maps: the action on the coefficient factor is through $\\pi_{n,X}$ by Step 1. The map $\\gamma_n$ is exactly the quotient arrow specified in [def-weil-integral-reduction-tower]. The equality is verified on the presheaf pure tensors defining [def-pur-sheaf-tensor-product], then passes to their sheafification; the section formula in clause (1) of [lem-weil-proetale-isomorphism-inverse-image] identifies the inverse-image sections used here.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product); the unit calculation for the quotient map"
+   }
+  },
+  {
+   "text": "For a local tensor $F(x\\otimes a)$ at level $n+1$, the two maps $\\beta_nF(\\tau_n)$ and $\\tau_n^X\\beta_{n+1}$ give, respectively, $F(x)\\otimes c_n(F(\\rho_{n,Y})(F(a)))$ and $F(x)\\otimes\\rho_{n,X}(c_{n+1}(F(a)))$. These agree by the coefficient-reduction naturality equation in Step 1, an instance of clause (3) of [lem-weil-proetale-isomorphism-inverse-image]. Since $\\tau_n$ is $1\\otimes\\rho_{n,Y}$ by [def-weil-integral-reduction-tower], the universal property of the sheafified tensor [def-pur-sheaf-tensor-product] proves $\\beta_nF(\\tau_n)=\\tau_n^X\\beta_{n+1}$. Both are maps of $R_X$-complexes after restricting level $n+1$ and level $n$ along their projections; no assertion of $B_{n+1,X}$-linearity with its original action on the level-$n$ source is needed.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-integral-reduction-tower",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product); explicit coefficient-reduction square"
+   }
+  },
+  {
+   "text": "Let $u:P\\to P'$ be a chain map and put $u_n=u\\otimes1$. Degreewise tensor naturality in [lem-pur-isomorphism-inverse-image-tensor-hom] gives $\\beta'_nF(u_n)=(F(u)\\otimes1)\\beta_n$; equivalently both send $F(x\\otimes a)$ to $F(u(x))\\otimes c_n(F(a))$. Step 3 shows these are chain maps. This proves the requested chain-map naturality, and also applies to the auxiliary K-flat flat-term complexes introduced below.",
+   "uses": [
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), functoriality in the first factor"
+   }
+  },
+  {
+   "text": "The underlying abelian-sheaf inverse image is exact by clause (2) of [lem-weil-proetale-isomorphism-inverse-image]. Transport of the scalar action by a ring isomorphism changes neither the underlying abelian sheaf nor its maps. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category], so this inverse image is exact also on $R_Y$-modules with target $R_X$-modules, and on $B_{n,Y}$-modules with target $B_{n,X}$-modules. Apply [lem-weil-pbc-exact-functor-derived-factorization] to these exact functors. Thus termwise $F$ sends quasi-isomorphisms to quasi-isomorphisms and induces the derived functors denoted $F$ below; in particular $F(q)$ and $F(q')$ really are quasi-isomorphisms. Additivity also sends a chain homotopy $h$ to $F(h)$, since it preserves the identity $u-v=dh+hd$.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); module exactness uses the underlying abelian-sheaf kernels and cokernels"
+   }
+  },
+  {
+   "text": "Apply the right-hand (MS2) assertion of [lem-pur-quasi-isos-saturated-triangulated] to $q:P\\to K$ and $q':P'\\to K$ in the homotopy category. It gives $t:V\\to P'$ a quasi-isomorphism and $v:V\\to P$ with $qv=q't$. Two-out-of-three in the same node makes $v$ a quasi-isomorphism. Choose a K-flat resolution $r:T\\to V$ with flat terms by [lem-pc-kflat-resolution]. Set $a=vr:T\\to P$, $b=tr:T\\to P'$, choosing chain representatives. Both are quasi-isomorphisms and $qa=q'b$ in the homotopy category. For the ringed-topos morphism with structure map $c_{\\mathcal O_E}$, [lem-weil-pbc-ringed-pullback-preserves-kflat] makes $g^*T=g^{-1}T\\otimes_{g^{-1}R_Y}R_X$ K-flat with flat terms. The normalized scalar-isomorphism comparison of [lem-weil-sheaf-scalar-extension-ring-iso] identifies this complex with $F(T)$, so $F(T)$ is K-flat. Its maps $F(a),F(b)$ are quasi-isomorphisms by Step 7. The hypotheses that $F(P),F(P')$ are K-flat are precisely the remaining K-flat hypotheses for the comparison on $X$.",
+   "uses": [
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution), Tag 0G7E (lemma-pullback-K-flat); derived.tex Tag 05RT; sites-modules.tex Tag 03CZ"
+   }
+  },
+  {
+   "text": "Put $T_n=T\\otimes_{R_Y}B_{n,Y}$, $a_n=a\\otimes1$, $b_n=b\\otimes1$. Clause (1) of [lem-pur-derived-change-of-rings] makes $a_n,b_n$ quasi-isomorphisms. To identify the canonical comparison, write $L=L\\pi_{n,Y}^*$ and let $\\varepsilon_Z:L(QZ)\\to Q(Z\\otimes B_{n,Y})$ be the natural comparison of [lem-pur-left-derived-from-kflat-class]. It is invertible for $Z=T,P,P'$ by the K-flat computations of the change-of-rings node. Naturality gives $[a_n]\\varepsilon_T=\\varepsilon_P L([a])$ and $[b_n]\\varepsilon_T=\\varepsilon_{P'}L([b])$. The computation at $q$ is $c_q=\\varepsilon_P L([q])^{-1}$ and that at $q'$ is $c_{q'}=\\varepsilon_{P'} L([q'])^{-1}$. Since $[q][a]=[q'][b]$, cancellation yields $c_{q'}c_q^{-1}=[b_n][a_n]^{-1}$. This is $\\theta_n$ as defined in [lem-weil-integral-reduction-tower-well-defined]. The same calculation on $X$, using Step 8 and the assumed K-flatness of $F(P),F(P')$, gives $\\theta_n^X=[F(b)\\otimes1][F(a)\\otimes1]^{-1}$. The invoked change-of-rings functor on the homotopy category is exact by the cited node, and its comparison $\\varepsilon$ is the one computing that derived functor; thus no comparison between unspecified choices is being assumed.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes), natural computation maps; sites-cohomology.tex Tags 06YT and 06YY"
+   }
+  },
+  {
+   "text": "Apply Step 6 to $a:T\\to P$ and $b:T\\to P'$ and write $a_n^X=F(a)\\otimes1$, $b_n^X=F(b)\\otimes1$. In the finite-coefficient derived category on $X$ it gives $\\beta_nF([a_n])=[a_n^X]\\beta_n^T$ and $\\beta'_nF([b_n])=[b_n^X]\\beta_n^T$. The arrows $[a_n]$ and $[a_n^X]$ are invertible by [lem-pur-derived-change-of-rings]; $F([a_n])$ is invertible because $F$ is a functor by Step 7. Using the comparison formulas of Step 9, the desired equation is the cancellation\n$$\\beta'_nF(\\theta_n)=\\beta'_nF([b_n])F([a_n])^{-1}=[b_n^X]\\beta_n^TF([a_n])^{-1}=[b_n^X][a_n^X]^{-1}\\beta_n=\\theta_n^X\\beta_n.$$\nThis proves compatibility with the canonical resolution comparisons, in the asserted $D(X_{\\mathrm{proet}},A_{E,n})$, and completes all clauses.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT/06YY: invertibility of K-flat change-of-rings maps; explicit inverse cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-reduction-tower",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-sheaf-scalar-extension-ring-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+  "place": "Agent assembly of tensor naturality, coefficient projection squares and common K-flat comparison roofs; source facts are the Stacks tags recorded on the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +220,59 @@
    "date": "2026-10-17",
    "results": "8 hits; TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ, TensorProduct.tensorQuotEquivQuotSMul_tmul_mk, TensorProduct.quotTensorEquivQuotSMul_mk_tmul; subdirectory . ",
    "verdict": "no match: ordinary-module quotient tensor equations, adic completion maps, and presheaf tensor naturality do not state the completed pro-etale inverse-image reduction tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image equivalence of sheaves commutes with tensor reduction modulo powers of an ideal and canonical K-flat resolution comparisons",
+   "date": "2026-10-17",
+   "results": "8 hits; SheafOfModules.ιFree_mapFree_inv, SheafOfModules.Presentation.map_π_eq, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.map_ιFree_mapFree_hom_assoc, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+   "verdict": "no match: the hits concern ordinary scalar extension, flat modules or sheaf pullback functors; none states the completed-coefficient reduction tower and its canonical resolution comparison square"
+  },
+  {
+   "tool": "grep",
+   "query": "reductionTower|reduction_tower|pullback.*tensor|tensor.*pullback",
+   "date": "2026-10-17",
+   "results": "0 hits; ; subdirectory Algebra/Category/ModuleCat",
+   "verdict": "no match: the hits concern ordinary scalar extension, flat modules or sheaf pullback functors; none states the completed-coefficient reduction tower and its canonical resolution comparison square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfModules, \"pullback\"",
+   "date": "2026-10-17",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.SheafOfModules'",
+   "verdict": "unavailable: Loogle rejected the unknown identifier CategoryTheory.SheafOfModules; this query is not evidence of absence. The subsequent successful SheafOfModules.pullback query is recorded separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inverse image equivalence of sheaves commutes with tensor reduction modulo powers of an ideal and canonical K-flat resolution comparisons",
+   "date": "2026-10-17",
+   "results": "8 hits; CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_obj, CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_obj, CategoryTheory.Equivalence.sheafCongr_inverse, CategoryTheory.Equivalence.sheafCongrPreregular_inverse_obj_val_map",
+   "verdict": "no match: the hits concern ordinary scalar extension, flat modules or sheaf pullback functors; none states the completed-coefficient reduction tower and its canonical resolution comparison square"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|monoidal|reduction|KFlat",
+   "date": "2026-10-17",
+   "results": "0 hits; ; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "verdict": "no match: the hits concern ordinary scalar extension, flat modules or sheaf pullback functors; none states the completed-coefficient reduction tower and its canonical resolution comparison square"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "date": "2026-10-17",
+   "results": "12 hits; SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso",
+   "verdict": "no match: the hits concern ordinary scalar extension, flat modules or sheaf pullback functors; none states the completed-coefficient reduction tower and its canonical resolution comparison square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar extension tensor products under a monoidal exact equivalence and independence of flat resolutions",
+   "date": "2026-10-17",
+   "results": "8 hits; ModuleCat.extendScalarsComp_hom_app_one_tmul, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, ModuleCat.extendScalars_id_comp_assoc, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact",
+   "verdict": "no match: the hits concern ordinary scalar extension, flat modules or sheaf pullback functors; none states the completed-coefficient reduction tower and its canonical resolution comparison square"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-isomorphism-derived-pullback",
@@ -98,5 +292,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-isomorphism-derived-pullback-reduction-tower",
+  "worker": "stage1",
+  "summary": "Proved the coefficient projection square, constructed the balanced tensor comparison, checked differentials, quotient maps, transitions and chain-map naturality, and proved canonical resolution compatibility using a common K-flat refinement and explicit derived comparison cancellation. Reused existing nodes throughout; no new nodes. Statement unchanged.",
+  "blueprint": "Realizes the completed coefficient-object paragraph of def-weil-ordinary-compact-cohomology via def-weil-constant-weil-structure and step 4 of lem-weil-isomorphism-derived-pullback: the inverse-image comparison of the full finite-reduction tower, including independence of the chosen flat resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of a K-flat refinement with flat terms, on the specified small ringed site."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat change-of-rings functor and quasi-isomorphism preservation identify the canonical finite reductions, independently of any arithmetic route."
+   },
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Tensor comparison for arbitrary coefficient sheaves supplies the termwise tensor isomorphism; this unit has no replacement for this general ringed-topos tool."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Natural computation maps of a left derived functor identify canonical resolution comparisons with the common-refinement roof."
+   },
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "The common-refinement assertion for quasi-isomorphisms supplies a roof between two resolutions, a generic localization tool."
+   },
+   {
+    "node": "lem-weil-integral-reduction-tower-well-defined",
+    "why": "The existing definition of the canonical comparisons specifies exactly which resolution comparison is meant."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "General ringed-topos pullback preserves K-flat complexes with flat terms; used only for the auxiliary refinement, with the completed structure isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q99-f39768fa1",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q99-f39768fa1 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited statements/sources; all ten steps check out, including canonical resolution comparisons and coefficient categories. Corrected two record faults: the 03CO/03DB source description and a failed Loogle query mislabeled as no match. Whole corrected JSON is under fixes/dag/nodes; detailed checks are in review.md. No mathematical statement changed.; 1 file(s) fixed by the reviewer"
  }
 }

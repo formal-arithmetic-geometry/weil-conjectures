@@ -15,9 +15,77 @@
   "def-pc-flat-sheaf-modules",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $n$, extension of scalars $E_n(M)=M\\otimes_R B_n$ is additive: on a map $f$ it sends $m\\otimes b$ to $f(m)\\otimes b$, so it respects sums. Apply the ringed-site change-of-rings quasi-isomorphism lemma to $R\\to B_n$ and the given map $a$ between K-flat complexes. It gives a quasi-isomorphism $a_n=a\\otimes_R B_n:T_n(P)\\to T_n(P')$. This remains a quasi-isomorphism after restricting scalars to $R$: kernels and cokernels in the two module-sheaf categories have the same underlying abelian sheaves, so their cohomology does too. No flatness of $B_n$ over $R$ is used. If $t_n,t'_n$ are the tower transitions, the identities $a_n t_n=t'_n a_{n+1}$ hold on $p\\otimes b$ by the tensor formula. Thus $(a_n)_n$ is a strict tower map. The units $\\gamma_n(p)=p\\otimes1$ satisfy $t_n\\gamma_{n+1}=\\gamma_n$ because the algebra transitions preserve $1$. Consequently $(1-s_P)(\\gamma_n)_n=0$, so the displayed $\\eta_P$ is a chain map. Finally $a_n\\gamma_n=\\gamma'_n a$ in each coordinate, giving the strict equality $L(a)\\eta_P=\\eta_{P'}a$.",
+   "uses": [
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-inverse-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side; Tag 06YY, lemma-derived-base-change (change-of-rings case); coordinate naturality of sheaf tensor"
+   }
+  },
+  {
+   "text": "Regard $X(P)=(T_n(P))_n$ as a complex in $\\operatorname{Tow}(\\mathcal A)$, with $\\mathcal A=\\operatorname{Mod}(R)$. Kernels and cokernels in this abelian tower category are levelwise, so its cohomology is levelwise. Step 1 therefore makes $X(a)$ a quasi-isomorphism of tower complexes, and its image in $D(\\operatorname{Tow}(\\mathcal A))$ is invertible. Apply the functor $\\mathsf C$ of the strict Roos comparison, whose hypotheses are exactly the small-site and exact-countable-product hypotheses of the item. This sends that isomorphism to an isomorphism in $D(\\mathcal A)$. With the cone convention of the derived-category definition, the signed interchange $(x,y)\\mapsto(-y,x)$ identifies our $L(P)$ with $\\operatorname{Cone}(1-s_P)[-1]$; indeed the shifted-cone differential sends $(-y,x)$ to $(dy-(1-s_P)x,dx)$, which is the signed interchange of $d_{L(P)}(x,y)$. This identification commutes with the product maps on both coordinates. Hence the isomorphism just obtained is $Q(L(a))$. Since every cohomology functor factors through $Q$, invertibility of $Q(L(a))$ implies that every $H^i(L(a))$ is invertible. Thus $L(a)$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-strict-roos-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, definition-derived-limit, strict exact-product model from lem-weil-strict-roos-comparison; homology.tex Tag 02MZ, lemma-inverse-systems-abelian"
+   }
+  },
+  {
+   "text": "Let $e:Q(P)\\xrightarrow{\\sim}Q(P')$ be the supplied derived isomorphism. Quasi-isomorphisms in $K(\\mathcal A)$ admit a right calculus of fractions. The right-fraction representation lemma gives a complex $Z$ and homotopy-category maps $t:Z\\to P$, $f:Z\\to P'$ with $t$ a quasi-isomorphism and $e=Q(f)Q(t)^{-1}$. Choose chain-map representatives for $t,f$. The equation $Q(f)=eQ(t)$ makes $Q(f)$ invertible; applying the cohomology functors shows that $f$ is a quasi-isomorphism. The ringed-site K-flat resolution theorem gives $q:W\\to Z$ a quasi-isomorphism with $W$ K-flat and termwise flat. Put $u=tq:W\\to P$ and $b=fq:W\\to P'$. Their cohomology maps are composites of isomorphisms, so both are quasi-isomorphisms between K-flat complexes with flat terms. Moreover $Q(b)Q(u)^{-1}=Q(f)Q(q)(Q(t)Q(q))^{-1}=e$. Steps 1 and 2 apply to both $u$ and $b$. This constructs comparisons from a common representative, without asserting that a direct map $P\\to P'$ exists.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation",
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; derived.tex Tag 05RT, lemma-acyclic; categories.tex Tag 04VI, lemma-morphisms-right-localization, singleton case"
+   }
+  },
+  {
+   "text": "Define $v=Q(L(b))Q(L(u))^{-1}$, which is an isomorphism by Step 2. Apply $Q$ to the two strict naturality equations from Step 1. The equation for $u$ gives $Q(L(u))^{-1}Q(\\eta_P)=Q(\\eta_W)Q(u)^{-1}$. Therefore\n$$vQ(\\eta_P)=Q(L(b))Q(\\eta_W)Q(u)^{-1}=Q(\\eta_{P'})Q(b)Q(u)^{-1}=Q(\\eta_{P'})e.$$\nSince $v$ and $e$ are invertible, this equation makes $Q(\\eta_P)$ invertible if and only if $Q(\\eta_{P'})$ is invertible. A chain map is a quasi-isomorphism if and only if its image under $Q$ is invertible: the forward direction is the localization property, and the reverse direction follows by applying every cohomology functor factoring through $Q$. This proves the final representative-invariance assertion.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category; cancellation using the strict naturality equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-kflat-resolution",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YT/06YY; strict Roos functoriality and the roof argument expanded using derived.tex Tag 05RT and categories.tex Tag 04VI"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,7 +138,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-def-pe-derived-completion",
@@ -87,5 +155,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pe-kflat-roos-representative-invariance",
+  "worker": "stage1",
+  "summary": "Checked the retained split against every cited statement and repaired the misuse of constant-coefficient sheaf results for arbitrary ring sheaves. Reused the precise ringed-site change-of-rings lemma, the strict Roos functor, the right-fraction representation, and the ringed-site K-flat resolution theorem. Four steps prove strict naturality and levelwise quasi-isomorphisms, invertibility of the Roos map, comparison through a common K-flat roof source, and the derived augmentation equation. No statement change and no new nodes.",
+  "blueprint": "The completeness display of sk-def-pe-derived-completion requires independence of the augmented reduction construction from a K-flat representative. Steps 1–2 construct the strict reduction-tower comparison and its Roos quasi-isomorphism; Steps 3–4 prove the extracted derived-isomorphism and augmentation criterion using a common K-flat roof source. The coefficient rings and completeness definition are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "Generic ringed-site scalar-extension preservation of K-flat quasi-isomorphisms; the unit has no such algebraic lemma."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic levelwise kernels and cokernels identify quasi-isomorphisms of strict tower complexes."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic strict-tower cone functor on derived categories under exact countable products; used with the item’s reduction tower."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "Generic calculus of fractions for the homotopy-category presentation of the derived category."
+   },
+   {
+    "node": "lem-pc-right-fraction-representation",
+    "why": "Generic roof representation for the given derived isomorphism; no direct map between its K-flat representatives is assumed."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site K-flat replacement, with flat terms, for the middle object of the roof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-strict-roos-comparison",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-1a68e04b8",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-1a68e04b8 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, unit/chapter route, and cited local Stacks sources. All four steps establish the strict Roos quasi-isomorphism and augmentation-compatible comparison for arbitrary derived isomorphisms. Edge cases and dependency closure check out; no new nodes, cycles, or duplicate statements found. Accepted six declared generic tool uses. Detailed checks are in review.md."
  }
 }

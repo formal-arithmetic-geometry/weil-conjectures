@@ -11,9 +11,97 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An $n$-simplex of $\\operatorname{Fun}(K,E)$ is a triple of maps $A_n:K\\times\\Delta^n\\to\\mathcal C$, $B_n:K\\times\\Delta^n\\to\\mathcal B$, and $w_n:K\\times\\Delta^n\\times\\Delta^1\\to\\mathcal D$, whose two restrictions are $FA_n$ and $GB_n$. An $n$-simplex of the comma construction for $F_*,G_*$ is exactly the same triple, after interchanging the factors $\\Delta^n,\\Delta^1$ in the last map. Interchanging them back is the inverse. Simplicial operators restrict the $\\Delta^n$ coordinate, so the bijections give a simplicial isomorphism. The first two coordinates are unchanged. Precomposing the $K$ coordinate with $K'\\to K$ commutes strictly with this interchange.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: parametric comma fiber comparison, using the existing general comma and space-pullback statements."
+   }
+  },
+  {
+   "text": "Write $\\mathcal C_K=\\operatorname{Fun}(K,\\mathcal C)$, and similarly $\\mathcal B_K,\\mathcal D_K$. These are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. Apply [lem-coef-infinity-comma-mapping-pullback] to $F_*:\\mathcal C_K\\to\\mathcal D_K$ and $G_*:\\mathcal B_K\\to\\mathcal D_K$; no fibration assumption on these functors is needed. Set $X=\\operatorname{Map}_{\\mathcal C_K}(A,A')$, $Y=\\operatorname{Map}_{\\mathcal B_K}(B,B')$, and $Z=\\operatorname{Map}_{\\mathcal D_K}(FA,GB')$. Put $f(h)=\\alpha'F(h)$ and $g(k)=G(k)\\alpha$. The cited theorem gives a natural equivalence, over $Y$, from $M=\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(a,a')$ to $P=X\\times_Z^hY$. The projection to $Y$ is the actual target projection on mapping spaces. All these mapping spaces and path pullbacks are Kan; in particular the statement concerns spaces, including possibly empty ones.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-comma-mapping-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: parametric comma fiber comparison, using the existing general comma and space-pullback statements."
+   }
+  },
+  {
+   "text": "Put $Y_0=\\operatorname{Map}_{\\mathcal B_K}(B,B)$ and $Z_0=\\operatorname{Map}_{\\mathcal D_K}(FA,GB)$. Postcomposition gives $t:Y\\to Y_0$, $t(k)=\\beta k$, and $s:Z\\to Z_0$, $s(z)=(G\\beta)z$. Both are homotopy equivalences: choose inverse-triangle witnesses for $\\beta$; their images under $G_*$ are inverse-triangle witnesses for $G\\beta$. By associativity and unitality of [lem-coef-infinity-mapping-composition], postcomposition by these inverse edges supplies homotopy inverses of $t$ and $s$. This argument uses inverses only to verify equivalence, not to define the comparison. Define $v:Y_0\\to Z_0$ by $v(l)=G(l)\\alpha$. The same associativity gives specified homotopies $sf\\simeq\\phi$ and $sg\\simeq vt$: explicitly, $(G\\beta)(\\alpha'F(h))\\simeq((G\\beta)\\alpha')F(h)$ and $(G\\beta)(G(k)\\alpha)\\simeq G(\\beta k)\\alpha$. For the compatibility with $G_*$, use [lem-coef-infinity-hom-bifunctor-functoriality]: the induced mapping-space maps form a coherent natural transformation preserving the canonical composition and identity classes. Its naturality gives the homotopy between $G(\\beta)G(k)$ and $G(\\beta k)$ simultaneously on the parameter space, including further homotopies. Thus the first map is exactly composition with the required $\\gamma=(G\\beta)\\alpha'$, rather than an independently chosen arrow.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: parametric comma fiber comparison, using the existing general comma and space-pullback statements."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-homotopy-commuting-pullback-invariance] to the cospans $(X\\xrightarrow f Z\\xleftarrow gY)$ and $(X\\xrightarrow\\phi Z_0\\xleftarrow vY_0)$ with vertex maps $1_X,s,t$ and the two homotopies just written. They are equivalences by Step 3, and all vertices are Kan by Step 2. We obtain an equivalence $P\\simeq P_0=X\\times_{Z_0}^hY_0$, whose second projection is $t\\operatorname{pr}_Y$. In the path model it sends $(h,k,\\lambda:f(h)\\simeq g(k))$ to $(h,t(k),\\lambda_0:\\phi(h)\\simeq v(t(k)))$, with $\\lambda_0$ the image $s\\lambda$ adjusted by those two endpoint homotopies. Composing with Step 2 gives an equivalence $M\\simeq P_0$ over $Y_0$, with the commutation homotopy retained, and the map from $M$ is precisely $q$. Apply the same invariance theorem to the cospans $(M\\xrightarrow qY_0\\xleftarrow{\\mathrm{id}_B}*)$ and $(P_0\\xrightarrow{\\operatorname{pr}_2}Y_0\\xleftarrow{\\mathrm{id}_B}*)$, with identity maps on the last two vertices. Hence $\\operatorname{hofib}_{\\mathrm{id}_B}(q)\\simeq\\operatorname{hofib}_{\\mathrm{id}_B}(\\operatorname{pr}_2)$.",
+   "uses": [
+    "lem-coef-kan-homotopy-commuting-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: parametric comma fiber comparison, using the existing general comma and space-pullback statements."
+   }
+  },
+  {
+   "text": "The square $P_0\\to X$ over $Y_0\\xrightarrow v Z_0$ is the defining homotopy-pullback square. Pull it back along the point $\\mathrm{id}_B:*\\to Y_0$. By [lem-coef-infinity-homotopy-pullback-pasting], the resulting outer rectangle is a homotopy pullback, and so\n$$\\operatorname{hofib}_{\\mathrm{id}_B}(\\operatorname{pr}_2)\\simeq X\\times_{Z_0}^h\\{v(\\mathrm{id}_B)\\}.$$\nUnitality in [lem-coef-infinity-mapping-composition] supplies the path $v(\\mathrm{id}_B)=G(\\mathrm{id}_B)\\alpha\\simeq\\alpha$; applying homotopy-commuting pullback invariance with identity vertex maps and this endpoint path identifies the last space with $\\operatorname{hofib}_{\\alpha}(\\phi)$. Explicitly a point of the left fiber consists of $(h,l,\\lambda_0:\\phi(h)\\simeq v(l),\\rho:l\\simeq\\mathrm{id}_B)$; the comparison retains $h$ and concatenates $\\lambda_0$, $v\\rho$, and the unitality path to obtain a path from $\\phi(h)$ to $\\alpha$. Pasting proves this is an equivalence of the full spaces, rather than just a bijection of their components.",
+   "uses": [
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: parametric comma fiber comparison, using the existing general comma and space-pullback statements."
+   }
+  },
+  {
+   "text": "The comparison is the one just described: a coherent comma square is postcomposed with the specified $G\\beta$, and its target path under $\\beta$ is then pasted to the identity. The comma mapping equivalence is natural in objects and cospan functors by [lem-coef-infinity-comma-mapping-pullback]; homotopy-commuting pullback invariance retains every parameter simplex and further homotopy; and pullback pasting uses exactly the concatenated commutation homotopy. Use [lem-coef-infinity-hom-bifunctor-functoriality] for the coherent naturality of the pre/postcomposition maps and their unit and composition homotopies as objects, functors and transformations vary. Apply it in a sufficiently large pair of universes to the functor quasicategories in Step 2. Together with the parameter compatibility of the two path-pullback statements, these coherent natural transformations give a natural comparison retaining the arrow $\\gamma$ from Step 3. For restriction, a simplicial map $r:K'\\to K$ acts by precomposing every displayed simplex with $r\\times1$. It carries $\\alpha,\\alpha',\\beta$ and their composition triangles to the restricted data; the same Hom-bifunctor theorem supplies compatibility of the mapping-space operations with this restriction functor, with its coherent homotopies. The interchange in Step 1 commutes strictly with this operation. Thus each diagram of comparisons commutes with restriction with its induced coherent homotopies, and all higher homotopies remain present. No pointwise universal-arrow condition, adjunction or fullness was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-comma-mapping-pullback",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof for paragraph 2: parametric comma fiber comparison, using the existing general comma and space-pullback statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-comma-mapping-pullback",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-kan-homotopy-commuting-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Agent proof for paragraph 2: parametric comma fiber comparison, using the existing general comma and space-pullback statements."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +130,45 @@
    "results": "{\"t\": \"2026-10-17T08:37:49Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy fiber of the target projection on mapping spaces in a comma quasicategory over an identity is the homotopy fiber of postcomposition on source mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.homMk\", \"HomotopicalAlgebra.FibrantObject.ι\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"HomotopicalAlgebra.instFibrationFstOfIsFibrant\", \"HomotopicalAlgebra.instFibrationSndOfIsFibrant\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\"], \"digest\": \"7c78a2a1b2ddc81c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read CategoryTheory/Comma/Basic.lean, especially Comma and CommaMorphism (lines 74-106), and the returned signatures. These give ordinary hom sets and strict commutative squares, not homotopy fibers of coherent transformations for arbitrary simplicial K. Generic fibrant-object/path-object results do not identify these comma mapping fibers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy fiber of mapping spaces in a comma quasicategory over a specified target equivalence is the fiber of postcomposition",
+   "results": "{\"t\": \"2026-10-17T12:34:47Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy fiber of mapping spaces in a comma quasicategory over a specified target equivalence is the fiber of postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.commaToGrothendieckPrecompFunctor_obj_fiber\", \"CategoryTheory.CostructuredArrow.commaToGrothendieckPrecompFunctor_map_fiber\", \"CategoryTheory.Grothendieck.map_map_fiber\", \"CategoryTheory.Grothendieck.Hom.fiber\", \"CategoryTheory.Grothendieck.pre_map_fiber\", \"HomotopicalAlgebra.fibrations_over_def\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.Hom.fiber\"], \"digest\": \"875b444315289c27\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary comma/Grothendieck coordinate formulas, model-category over-category structures, or homological-complex homotopy fibers; none states this coherent quasicategory mapping-fiber comparison for arbitrary simplicial parameters."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyFiber|homotopyPullback|commaToGrothendieckPrecompFunctor_obj_fiber",
+   "results": "{\"t\": \"2026-10-17T12:49:23Z\", \"tool\": \"grep\", \"query\": \"homotopyFiber|homotopyPullback|commaToGrothendieckPrecompFunctor_obj_fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Precylinder.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\"], \"digest\": \"d0b9a31a07fae162\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary comma/Grothendieck coordinate formulas, model-category over-category structures, or homological-complex homotopy fibers; none states this coherent quasicategory mapping-fiber comparison for arbitrary simplicial parameters."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy fiber of mapping spaces in a comma quasicategory over a specified equivalence in the target",
+   "results": "{\"t\": \"2026-10-17T12:49:24Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy fiber of mapping spaces in a comma quasicategory over a specified equivalence in the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.grothendieckPrecompFunctorToComma_obj_hom\", \"CategoryTheory.StructuredArrow.commaMapEquivalenceFunctor_obj_hom\", \"CategoryTheory.CostructuredArrow.commaToGrothendieckPrecompFunctor_map_fiber\", \"CategoryTheory.Comma.isEquivalence_post\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.LeftHomotopyClass.mk\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj_hom_ext\"], \"digest\": \"9ecf1391b4a2b563\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary comma/Grothendieck coordinate formulas, model-category over-category structures, or homological-complex homotopy fibers; none states this coherent quasicategory mapping-fiber comparison for arbitrary simplicial parameters."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comma\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-17T12:49:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comma\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.commaToGrothendieckPrecompFunctor_obj_fiber\", \"CategoryTheory.CostructuredArrow.commaToGrothendieckPrecompFunctor_map_fiber\", \"CommAlgCat.FiniteEtale.fiber\", \"CommAlgCat.instIsEquivalenceOppositeFiniteEtaleFintypeCatFiberOfIsSepClosed\", \"CommAlgCat.FiniteEtale.fiberIsoFiniteSpec\", \"CommAlgCat.FiniteEtale.fiber_obj_obj\", \"CommAlgCat.FiniteEtale.fiberIsoComp\", \"CommAlgCat.FiniteEtale.fiberIsoBaseChangeFiber\"], \"digest\": \"39c531aa901d3c2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary comma/Grothendieck coordinate formulas, model-category over-category structures, or homological-complex homotopy fibers; none states this coherent quasicategory mapping-fiber comparison for arbitrary simplicial parameters."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces in an infinity categorical comma category are homotopy pullbacks; fixing a target isomorphism identifies the fiber with the space of commutative triangles",
+   "results": "{\"t\": \"2026-10-17T12:49:34Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces in an infinity categorical comma category are homotopy pullbacks; fixing a target isomorphism identifies the fiber with the space of commutative triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.fibrations_over_def\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"HomotopicalAlgebra.trivialFibrations_over_eq\", \"HomotopicalAlgebra.fibrations_over_iff\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverFibrations\", \"HasFibers.mkPullback\", \"HasFibers.pullbackMap\"], \"digest\": \"fbfb9e8a5f9e7bb5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary comma/Grothendieck coordinate formulas, model-category over-category structures, or homological-complex homotopy fibers; none states this coherent quasicategory mapping-fiber comparison for arbitrary simplicial parameters."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-parametric-universal-arrows",
@@ -71,5 +194,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-parametric-comma-fiber-comparison",
+  "worker": "stage1",
+  "summary": "Q86: proved the strict exponential/comma interchange, applied the existing general comma mapping formula, and compared the path pullbacks via postcomposition with the specified target equivalence. Homotopy-pullback invariance and pasting give the fiber equivalence with its actual gamma, not merely a component calculation. No new nodes; statement and original provenance retained. Maintainer review: added the existing coherent Hom-bifunctor theorem in Steps 3 and 6 to justify functorial composition homotopies and coherent restriction compatibility, beyond homotopy-class composition alone.",
+  "blueprint": "Proof paragraph 2: first and last derived Hom / inverse-limit comparisons, via the diagram-comma fiber identification extracted from step 6 of lem-coef-parametric-universal-arrows.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic functor-quasicategory closure and Kan mapping spaces, in arbitrary containing universe; no coefficient-unit theorem supplies this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q86-86c70a90c",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-86c70a90c (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and routes. Repaired one coherent-naturality citation gap in Steps 3 and 6 using the existing Hom-bifunctor theorem. Statement unchanged; edge cases and 4,425 finite examples checked. Review and corrected JSON written. Accepted the declared functor-calculus tool use.; 1 file(s) fixed by the reviewer"
  }
 }

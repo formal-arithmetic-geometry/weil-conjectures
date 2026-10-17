@@ -12,9 +12,129 @@
   "lem-coef-infinity-isofibration-exponentiation",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Fun}(\\Delta^1,\\mathcal D)$ and $q=(\\mathrm{ev}_0,\\mathrm{ev}_1):\\mathcal A\\to\\mathcal D\\times\\mathcal D$. Restriction along $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ is an isofibration by [lem-coef-infinity-isofibration-exponentiation]; its target is degreewise $\\mathcal D\\times\\mathcal D$. The same node, using the empty subshape, gives that $\\mathcal A$ is a quasicategory. Products of quasicategories fill inner horns coordinatewise. Thus $E=(\\mathcal C\\times\\mathcal B)\\times_{\\mathcal D\\times\\mathcal D}\\mathcal A$ is a quasicategory: fill the projected inner horn in $\\mathcal C\\times\\mathcal B$, and lift the resulting simplex through the inner fibration $q$ with the prescribed horn in $\\mathcal A$. The paired filler satisfies both pullback equations. This also proves that $E\\to\\mathcal C\\times\\mathcal B$ is an inner fibration. Filling a projected horn in $\\mathcal C$ proves that $E\\to\\mathcal B$ is an inner fibration. No lifting property of $F$ or $G$ has been used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Restriction isofibration; the subsequent inner-horn pullback and product arguments are written out."
+   }
+  },
+  {
+   "text": "For a quasicategory $Q$ write $U_Q(x,y)$ for its constant-endpoint arrow space, as in [lem-coef-infinity-pinch-comparison]. Fix $e,e'$ as in the statement, and abbreviate\n$$T_U=U_{\\mathcal C}(c,c')\\times U_{\\mathcal B}(b,b'),\\quad S_U=U_{\\mathcal D}(Fc,Fc')\\times U_{\\mathcal D}(Gb,Gb'),\\quad W_U=U_{\\mathcal A}(a,a').$$\nThere is a strict degreewise identity $U_E(e,e')=T_U\\times_{S_U}W_U$: a simplex on either side consists of the same two endpoint strips in $\\mathcal C,\\mathcal B$ and the same square in $\\mathcal D$, with the same four boundary restrictions. All simplicial operators restrict these data. The unpinched-morphism clause of [lem-coef-infinity-isofibration-exponentiation] applied to $q$ says that $W_U\\to U_{\\mathcal D\\times\\mathcal D}((Fc,Gb),(Fc',Gb'))=S_U$ is a Kan fibration. All these $U$ spaces are Kan by [lem-coef-infinity-pinch-comparison], and products fill horns coordinatewise. Therefore [lem-coef-kan-pullback-path-comparison] gives the equivalence\n$$U_E(e,e')\\longrightarrow T_U\\times^h_{S_U}W_U$$\nby inserting the constant path; it retains both endpoint strips.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01P9",
+    "place": "Strict morphism-space pullbacks become homotopy pullbacks when the morphism-space map is a Kan fibration."
+   }
+  },
+  {
+   "text": "Write $M_Q(x,y)=\\operatorname{Map}_Q(x,y)$, and define $T,S,W$ by replacing $U$ by $M$ in $T_U,S_U,W_U$. The specified maps $j_Q:M_Q\\to U_Q$ of [lem-coef-infinity-pinch-comparison] commute with $F,G,q$ and endpoint evaluation. They are homotopy equivalences, and their pairwise products are homotopy equivalences by taking the products of inverse maps and inverse homotopies. Apply [lem-coef-kan-homotopy-commuting-pullback-invariance] with these maps and constant commutation homotopies. Together with Step 2 and $j_E$, this identifies, by a zigzag of equivalences preserving the projections,\n$$M_E(e,e')\\simeq T\\times^h_S W.$$\nUsing a zigzag avoids choosing inverses of the pinch maps functorially. The comparison is an equivalence of spaces over the endpoint space $T$.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Natural right-pinch comparison; apply homotopy-pullback invariance to its natural commuting diagram."
+   }
+  },
+  {
+   "text": "Set $X=M_{\\mathcal D}(Fc,Fc')$, $Y=M_{\\mathcal D}(Gb,Gb')$, and $Z=M_{\\mathcal D}(Fc,Gb')$, so $S=X\\times Y$. Choose representatives of the canonical composition classes of [lem-coef-infinity-mapping-composition], and let $P=X\\times_Z^hY$, with legs $x\\mapsto a'x$ and $y\\mapsto ya$. The arrow formula [lem-coef-infinity-arrow-morphism-square], with $u=a,v=a'$, supplies $W\\simeq P$, compatibly up to coherent homotopy with the actual joint endpoint map to $S$. Apply [lem-coef-kan-homotopy-commuting-pullback-invariance] to this equivalence and the identity maps on $T,S$. Consequently Step 3 gives\n$$M_E(e,e')\\simeq T\\times_S^hP.$$\nThe commutation homotopy required here is precisely the endpoint compatibility stated in the arrow formula, not an identification of arbitrary equivalences over $S$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06BZ",
+    "place": "Specialize the existing arrow-category formula and retain its endpoint compatibility; pull it back homotopically."
+   }
+  },
+  {
+   "text": "The projection $P\\to S$ is a Kan fibration. Indeed [lem-cbc-internal-hom-fibration-corner-map], for $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ and $Z\\to\\Delta^0$, makes $\\operatorname{Fun}(\\Delta^1,Z)\\to Z\\times Z$ a Kan fibration; $P\\to X\\times Y$ is its pullback along $(x,y)\\mapsto(a'x,ya)$. Pulling a horn-lifting square back gives a filler with its prescribed base simplex. Hence [lem-coef-kan-pullback-path-comparison] identifies $T\\times_S^hP$ with $T\\times_SP$. Write a simplex of the latter as $((h,k),(x,y,\\gamma))$. Its equations are exactly $x=F(h)$, $y=G(k)$, so deleting $x,y$ is a degreewise isomorphism\n$$T\\times_SP\\cong M_{\\mathcal C}(c,c')\\times^h_ZM_{\\mathcal B}(b,b'),$$\nwhose path is $\\gamma:a'F(h)\\simeq G(k)a$. Its inverse reinserts $F(h),G(k)$, and both maps commute with every simplicial operator. This proves the formula with the stated two legs and actual endpoint projections.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-fibration-corner-map",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06BZ",
+    "place": "Base change of the arrow Hom square; the final elimination of duplicate endpoint coordinates is explicit."
+   }
+  },
+  {
+   "text": "All strict identifications above are restrictions and coordinate projections. The pinch maps commute with simplicial functors; the arrow formula is natural in both arrows and in functors of quasicategories; the homotopy-commuting pullback comparison retains parameter simplices and further homotopies. Thus the equivalence is natural in the objects and in maps of cospans, as an equivalence of spaces with their endpoint maps. For composition, represent two composable morphisms of $E$ by the two coherent squares in $\\mathcal D$. Their composite is represented by the corresponding $\\Delta^2$-family in $\\mathcal A$: restricting to the two consecutive edges recovers the two squares, and restricting to the long edge pastes them. The same restrictions in $\\mathcal C,\\mathcal B$ give $h'h,k'k$. Its path coordinate is the concatenation of $a''F(h'h)\\simeq G(k')a'F(h)\\simeq G(k'k)a$, with the associativity homotopies. [lem-cbc-simplicial-composition-spine] states that these consecutive-edge restrictions are trivial Kan fibrations and that face and degeneracy maps give all the natural composition coherences. [lem-coef-infinity-mapping-composition] identifies this composition with the specified right-pinched composition class. Therefore the formula respects composition by pasting, including units and higher coherences; it is not merely a bijection of components.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Consecutive-edge/long-edge restrictions of coherent strings supply pasting and its higher compatibilities."
+   }
+  },
+  {
+   "text": "An edge $u:e\\to e'$ of $E$ whose projections $h:c\\to c'$ and $k:b\\to b'$ are equivalences is an equivalence. To check this without assuming equivalences in a pullback are detected automatically, fix $z=(d,t,\\alpha)\\in E$. In the formula proved above for $M_E(-,z)$, precomposition by $u$ induces precomposition by $h$ on $M_{\\mathcal C}(-,d)$, by $k$ on $M_{\\mathcal B}(-,t)$, and by $Fh$ on the common base $M_{\\mathcal D}(F(-),Gt)$. All three are equivalences: inverse edges and their inverse triangles induce inverse homotopies by [lem-cbc-simplicial-composition-spine], with the right-pinched convention fixed by [lem-coef-infinity-mapping-composition]. The square belonging to $u$ supplies the commutation homotopy for the second leg. Step 6 and [lem-coef-kan-homotopy-commuting-pullback-invariance] imply that $u^*:M_E(e',z)\\to M_E(e,z)$ is an equivalence. In the component category furnished by [lem-coef-infinity-mapping-composition], surjectivity for $z=e$ gives $v:e'\\to e$ with $vu=1_e$. Injectivity for $z=e'$ and $(uv)u=u=1_{e'}u$ give $uv=1_{e'}$. The same cited node identifies invertibility of the component of $u$ with inverse-triangle witnesses, so $u$ is an equivalence in the required sense.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-commuting-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Inverse-edge composition and component-category criterion, applied to the already established mapping formula."
+   }
+  },
+  {
+   "text": "For the joint projection, take an equivalence edge $(h,k):(c,b)\\to(c',b')$ and an object $e=(c,b,a)$ above its source. The pair $(Fh,Gk)$ is an equivalence in $\\mathcal D\\times\\mathcal D$: functors send inverse edges and their triangles to inverse witnesses, and products pair those witnesses. The isofibration $q$ from Step 1 lifts it to an equivalence edge $a\\to a'$ of $\\mathcal A$ with source $a$ and with these exact endpoints. Pair this edge with $h,k$ to obtain an edge $e\\to(c',b',a')$ in $E$. Step 7 says that it is an equivalence. Together with inner lifting from Step 1, this proves that $E\\to\\mathcal C\\times\\mathcal B$ is an isofibration. For the target projection and an equivalence $k:b\\to b'$, apply the same construction with $h=1_c$. This proves that $p$ is an isofibration as well. All horn constructions and mapping comparisons were in the input universe. If an input category or any mapping space is empty, the arguments apply to each existing horn or object and never choose one from an empty set; in particular empty comma categories are allowed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Lift endpoint equivalences through restriction; Step 7 verifies equivalence of the paired edge in the pullback."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-commuting-pullback-invariance",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundation underneath paragraph 2. Agent argument using the existing arrow mapping formula, the unpinched pullback identity, and natural pinch and path-pullback comparisons. Online Kerodon 01F3, 01P8, 01P9 and 06BZ read; archival sources WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +163,38 @@
    "results": "{\"t\": \"2026-10-17T08:37:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"comma\\\", \\\"mapping\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: semantic hits concern the QCat bicategory, homotopy categories of 2-truncated simplicial sets, or generic model-category fibrations. Read StrictBicategory.lean and ModelCategory/Instances.lean: none gives the coherent comma mapping-space formula. Loogle and the quasicategory source grep returned no matching declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces in a coherent comma quasicategory are homotopy pullbacks with composition legs and both endpoint projections are isofibrations",
+   "results": "{\"t\": \"2026-10-17T12:21:59Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces in a coherent comma quasicategory are homotopy pullbacks with composition legs and both endpoint projections are isofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac\", \"HomotopicalAlgebra.PathObject.instIsGoodTrans\", \"HomotopicalAlgebra.PathObject.trans_P\"], \"digest\": \"a04ed66175af17d7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictBicategory.lean:16-32,53-72 (bicategory OF quasicategories), Quasicategory/InnerFibration.lean:55-123 (inner horns only), CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:77-108 (ordinary categorical pullback using isomorphisms), and ModelCategory/PathObject.lean:14-36,53-72 (abstract model-category path objects). None gives arbitrary coherent comma mapping spaces and both isofibration conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"comma\"",
+   "results": "{\"t\": \"2026-10-17T12:23:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"comma\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictBicategory.lean:16-32,53-72 (bicategory OF quasicategories), Quasicategory/InnerFibration.lean:55-123 (inner horns only), CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:77-108 (ordinary categorical pullback using isomorphisms), and ModelCategory/PathObject.lean:14-36,53-72 (abstract model-category path objects). None gives arbitrary coherent comma mapping spaces and both isofibration conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "comma|oriented.*(pullback|fiber)|mapping.*pullback",
+   "results": "{\"t\": \"2026-10-17T12:24:14Z\", \"tool\": \"grep\", \"query\": \"comma|oriented.*(pullback|fiber)|mapping.*pullback\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictBicategory.lean:16-32,53-72 (bicategory OF quasicategories), Quasicategory/InnerFibration.lean:55-123 (inner horns only), CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:77-108 (ordinary categorical pullback using isomorphisms), and ModelCategory/PathObject.lean:14-36,53-72 (abstract model-category path objects). None gives arbitrary coherent comma mapping spaces and both isofibration conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom complexes of the lax pullback of two infinity category functors consist of two morphisms and a path comparing their composites",
+   "results": "{\"t\": \"2026-10-17T12:24:15Z\", \"tool\": \"leansearch\", \"query\": \"Hom complexes of the lax pullback of two infinity category functors consist of two morphisms and a path comparing their composites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CategoricalPullback.Hom\", \"CategoryTheory.Limits.CategoricalPullback.Hom.ctorIdx\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.Hom.mk.congr_simp\", \"CategoryTheory.Limits.FormalCoproduct.homPullbackEquiv_apply_coe\", \"CategoryTheory.Limits.CategoricalPullback.instCategory\", \"CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom\", \"CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom_pullHom\", \"CategoryTheory.Lax.LaxTrans.StrongCore.naturality_hom\"], \"digest\": \"de6cca95d4552419\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictBicategory.lean:16-32,53-72 (bicategory OF quasicategories), Quasicategory/InnerFibration.lean:55-123 (inner horns only), CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:77-108 (ordinary categorical pullback using isomorphisms), and ModelCategory/PathObject.lean:14-36,53-72 (abstract model-category path objects). None gives arbitrary coherent comma mapping spaces and both isofibration conclusions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-parametric-universal-arrows",
@@ -72,5 +220,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-comma-mapping-pullback",
+  "worker": "stage1",
+  "summary": "Eight steps prove the arbitrary coherent comma formula and both isofibrations using existing foundational nodes only. The key strict calculation is made on unpinched arrow spaces, whose endpoint map is a Kan fibration; natural pinch and homotopy-pullback comparisons then reduce the formula to the existing arrow-category square. Pasting is checked through coherent strings. Equivalence detection in E is proved from the mapping formula before using it to justify endpoint-equivalence lifts. No new nodes or statement changes.",
+  "blueprint": "Realizes the coherent mapping-space foundations underlying paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md, the displayed derived Hom / inverse-limit adjunction comparison, through the existing ancestor chain. The blueprint does not state this general foundational lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic coherent-string restriction and pasting theorem; the biduality unit does not supply the simplicial composition foundation."
+   },
+   {
+    "node": "lem-cbc-internal-hom-fibration-corner-map",
+    "why": "Generic Kan internal-hom corner theorem supplies the joint path-endpoint fibration; no biduality-unit statement supplies this foundational lifting fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-internal-hom-fibration-corner-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q69-14cbf2cc3",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q69-14cbf2cc3 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all eight proof steps, every cited node statement, recorded searches, and cited Kerodon/Mathlib source locations. The mapping-space formula, endpoint order, naturality, composition, equivalence detection, and both isofibration claims are mathematically consistent, including empty and ordinary-category cases. No duplicate or missing dependency was found; review.md records the checks."
  }
 }

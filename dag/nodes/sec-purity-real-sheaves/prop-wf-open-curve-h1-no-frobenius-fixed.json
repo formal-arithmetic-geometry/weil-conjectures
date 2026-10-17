@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-wf-open-curve-h1-no-frobenius-fixed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "No Frobenius-fixed compatible class on an open normal curve",
@@ -14,23 +14,54 @@
  },
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
-  "def-tw-frobenius-action"
+  "def-tw-frobenius-action",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof": [
   {
-   "text": "Choose the smooth projective geometrically connected compactification\n$j_0:U_0\\hookrightarrow C_0$ and finite reduced boundary $D_0$ from\n[lem-wf-curve-normal-smooth-compactification]. Let\n$z=(z_n)_n$ be fixed by $\\Phi_q$ in the inverse limit in (5.4).\nChoose $m$ as in [lem-wf-open-curve-residue-sequence] and put\n$Q=q^m$. The residues\n$r_n=\\operatorname{res}_n(z_n)$ form a compatible element\n$r=(r_n)_n$ of the inverse-limit boundary module and are fixed by\n$\\Phi_Q$. The last assertion of the residue lemma gives $r=0$, hence\n$r_n=0$ for every $n$.",
+   "text": "Apply [lem-wf-curve-normal-smooth-compactification] to the given normal, geometrically connected, separated finite-type curve $U_0/\\mathbf F_q$. It supplies a smooth projective geometrically connected curve $C_0$, a dense open immersion $j_0:U_0\\hookrightarrow C_0$, and a finite reduced boundary $D_0$. Write $C,U,D,j$ for their geometric base changes, put $A_n=\\mathbf Z/\\ell^n\\mathbf Z$ for $n\\geq1$, and fix an arbitrary compatible tuple $z=(z_n)_n$ with $\\Phi_qz=z$. In particular $\\Phi_qz_n=z_n$ for every $n$.",
    "uses": [
-    "lem-wf-curve-normal-smooth-compactification",
-    "lem-wf-open-curve-residue-sequence"
+    "lem-wf-curve-normal-smooth-compactification"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/prop-wf-open-curve-h1-no-frobenius-fixed.md",
+    "place": "Proof, first paragraph: choose the compactification"
+   }
   },
   {
-   "text": "Exactness of (5.1) gives a unique $x_n\\in H^1(C,A_n)$ with\n$j^*x_n=z_n$. Uniqueness shows that the $x_n$ are compatible under\nreduction. Injectivity of $j^*$ and Frobenius equivariance show that\n$\\Phi_Qx_n=x_n$. Thus $x=(x_n)_n$ is a fixed element of\n$\\varprojlim_nH^1(C,A_n)$. Put\n$C_{0,Q}:=C_0\\times_{\\mathbf F_q}\\mathbf F_Q$. Its geometric fiber is\nthe same $C$, and its geometric Frobenius is $\\Phi_q^m=\\Phi_Q$.\nApply [lem-wf-proper-curve-compatible-h1-no-fixed] to\n$C_{0,Q}/\\mathbf F_Q$; it gives $x=0$, and then\n$z_n=j^*x_n=0$ for every $n$.",
+   "text": "Use [lem-wf-open-curve-residue-sequence] for $(C_0,D_0)$; its coefficient condition holds since $\\ell\\nmid q$. Compatibility of its residue maps with coefficient reduction shows that $r_n=\\operatorname{res}_n(z_n)$ defines an element $r$ of $\\varprojlim_nH^0(D,A_n(-1))$. Frobenius equivariance gives $\\Phi_qr_n=\\operatorname{res}_n(\\Phi_qz_n)=r_n$. For the integer $m\\geq1$ and $Q=q^m$ supplied by that lemma, iterating this equality gives $\\Phi_Qr=r$. The lemma says that the fixed subgroup of this inverse-limit boundary module is zero, so $r=0$, and therefore $r_n=0$ for every $n$.",
+   "uses": [
+    "lem-wf-open-curve-residue-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/prop-wf-open-curve-h1-no-frobenius-fixed.md",
+    "place": "Proof, first paragraph: residues and the positive Frobenius power"
+   }
+  },
+  {
+   "text": "For every $n$, exactness of (5.1) in [lem-wf-open-curve-residue-sequence], together with $\\operatorname{res}_n(z_n)=0$, gives $x_n\\in H^1(C,A_n)$ with $j^*x_n=z_n$; the initial zero in (5.1) makes this lift unique. Denote coefficient reduction on either cohomology group by $\\rho_n$. The compatibility clause of the same lemma gives $j^*(\\rho_nx_{n+1})=\\rho_n(j^*x_{n+1})=\\rho_nz_{n+1}=z_n=j^*x_n$. Injectivity of $j^*$ implies $\\rho_nx_{n+1}=x_n$. Similarly, its Frobenius equivariance gives $j^*(\\Phi_qx_n)=\\Phi_q(j^*x_n)=\\Phi_qz_n=z_n=j^*x_n$, and injectivity implies $\\Phi_qx_n=x_n$. Thus $x=(x_n)_n$ is a compatible $\\Phi_q$-fixed tuple on $C$.",
+   "uses": [
+    "lem-wf-open-curve-residue-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/prop-wf-open-curve-h1-no-frobenius-fixed.md",
+    "place": "Proof, second paragraph: unique lifts, compatibility, and equivariance"
+   }
+  },
+  {
+   "text": "Apply [lem-wf-proper-curve-compatible-h1-no-fixed] to $C_0/\\mathbf F_q$, taking the prime power called $Q$ in that statement to be $q$ here. The curve is smooth, projective and geometrically connected by step 1, and $\\ell\\nmid q$ is the original hypothesis. Step 3 gives an element of exactly its fixed inverse-limit group, so $x=0$. Consequently $z_n=j^*x_n=0$ for all $n$, whence $z=0$ by coordinatewise equality of compatible tuples. Since $z$ was arbitrary, (5.4) follows.",
    "uses": [
     "lem-wf-proper-curve-compatible-h1-no-fixed"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/prop-wf-open-curve-h1-no-frobenius-fixed.md",
+    "place": "Proof, second paragraph: apply the proper-curve result and restrict"
+   }
   }
  ],
  "proof_deps": [
@@ -43,9 +74,60 @@
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/prop-wf-open-curve-h1-no-frobenius-fixed.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "((Frobenius|frobenius).*(fixed|invariant|cohomology))|((etale|étale).*(H1|H¹))",
+   "results": "5 hits: Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Locus.lean, Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "There are no Frobenius invariant compatible classes in H1 of a curve over the algebraic closure of a finite field with Z ell coefficients",
+   "results": "8 hits: FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic, WittVector.isocrystal_classification, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, WittVector.frobenius_frobeniusRotation, IsArithFrobAt.exists_of_isInvariant, FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"frobenius\"",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'; 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of first etale cohomology with Z mod ell power coefficients of a normal geometrically connected curve over a finite field has no nonzero geometric Frobenius fixed elements",
+   "results": "8 hits: IsArithFrobAt.exists_of_isInvariant, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, IsArithFrobAt.arithFrobAt, arithFrobAt, groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.Hilbert90.aux_ne_zero, Field.absoluteGaloisGroupAbelianization, IsArithFrobAt.mul_inv_mem_inertia",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricFrobenius|etaleCohomology|etale.*cohomology|cohomology.*etale",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"frobenius\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First l-adic cohomology of a smooth curve over a finite field has no invariant vectors for Frobenius",
+   "results": "8 hits: IsArithFrobAt.exists_of_isInvariant, WittVector.StandardOneDimIsocrystal, WittVector.instIsocrystalStandardOneDimIsocrystal, IsArithFrobAt.arithFrobAt, arithFrobAt, WittVector.isocrystal_classification, FunctionField.classNumber, groupCohomology.Hilbert90.aux_ne_zero",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -74,5 +156,20 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-wf-open-curve-h1-no-frobenius-fixed",
+  "worker": "stage1",
+  "summary": "Audited the compactification-residue-proper-curve argument against all three cited statements. Replaced the implicit use of residue exactness and equivariance in paragraph 2 by an explicit citation and coordinate calculations. Lifted tuples are already fixed by Phi_q, so the proper-curve theorem applies over F_q itself. Added the existing cohomology and constant-sheaf definition dependencies; no statement change or new nodes. Related slopmaster2 torsor theorem is not an exact closed attachment.",
+  "blueprint": "Realizes both paragraphs of the master node proof and the open-curve part of unit sk-p-real-rankone step 3; current main-20261015 item has the same statement. The finite residue and proper-curve route is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q78-dcf795f93",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-dcf795f93 (reviewer sub-agent of L); spot-checked: Read the complete item, report, chapter/unit route, cited node statements, and master/current blueprint sources. Verified all four proof steps, hypotheses, Frobenius and residue compatibility, base changes, finite constant coefficient category, edge cases, searches, and route compliance. No new nodes, duplicates, cycles, or mathematical gaps."
+ }
 }

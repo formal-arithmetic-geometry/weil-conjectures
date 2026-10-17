@@ -23,9 +23,69 @@
   "def-pc-flat-sheaf-modules",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For either site, the inverse images along the complementary immersions are the module pullbacks for a morphism of ringed topoi, with the constant coefficient identifications from the statement. On the étale site this is the exact module inverse-image construction, and on the pro-étale site it is the exact inverse-image construction for locally closed immersions. The ringed-topos flat-pullback theorem therefore sends a flat $A_X$-module sheaf to flat $A_U$- and $A_Z$-module sheaves. This proves the forward implication.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD (sites-modules-lemma-pullback-flat), applied to the inverse images in the étale and pro-étale settings"
+   }
+  },
+  {
+   "text": "For the converse, tensor an arbitrary short exact sequence $0\\to E_1\\xrightarrow{a}E_2\\xrightarrow{b}E_3\\to0$ with $H$, giving maps $a_H,b_H$ with $b_Ha_H=0$. The tensor-pullback comparison is natural in both variables, so either exact restriction functor identifies this complex with the restricted sequence tensored with the flat restriction of $H$. Both restricted complexes are short exact. Let $K=\\ker(a_H)$, $D=\\ker(b_H)/\\operatorname{im}(a_H)$, and $C=\\operatorname{coker}(b_H)$. Exact restriction preserves kernels, cokernels and images, so both restrictions of each of $K,D,C$ vanish. For any module sheaf $N$ with $j^*N=i^*N=0$, the cited localization sequence is $0\\to0\\to N\\to0\\to0$, hence $N=0$ (on the etale site the cited sequence explicitly includes constant-ring module sheaves). Thus $K=D=C=0$, proving exactness at all three tensor terms. Tensoring with $H$ preserves every short exact sequence, which is flatness by the definition in the statement.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-open-closed-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH (lemma-ses-associated-to-open), with etale-cohomology.tex Tag 095L and sites-modules.tex Tag 03ER"
+   }
+  },
+  {
+   "text": "On the pro-etale site the cited ringed open-closed statement gives $j^*j_!L\\cong L$, $i^*j_!L=0$, $i^*i_*M\\cong M$, and $j^*i_*M=0$. On the etale site the open unit isomorphism and closed counit isomorphism give the two nonzero restrictions, and the two cited disjoint-range vanishing statements give the zero restrictions. These canonical maps are module-linear: the inverse-image scalar action is the inverse image of the original action, and the unit/counit commute with it. Thus the underlying abelian-sheaf isomorphisms and zeros give the same identities for constant-$A$ module sheaves. The zero module sheaf is flat because tensoring with it is the zero exact functor. Applying the equivalence already proved to $j_!L$ and $i_*M$ now proves both flatness assertions.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lemma-openclosed-vanishing-lowerstar",
+    "lemma-openclosed-vanishing-lowershriek",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, vanishing and localization sequence; etale-cohomology.tex Tag 095L and Modules on Sites Tag 03DI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lemma-openclosed-vanishing-lowershriek",
+  "lemma-openclosed-vanishing-lowerstar",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
+  "place": "Proof clause (2): flatness of extensions along open and closed immersions; the item generalizes the same open-closed tensor argument to arbitrary ordinary module sheaves."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +121,24 @@
    "results": "8 hits: Module.flat_of_isLocalized_span, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.flat_appLE, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.flat_of_localized_maximal, AlgebraicGeometry.Flat.casesOn, Module.flat_of_isLocalized_maximal, AlgebraicGeometry.Flat.flat_of_affine_subset",
    "date": "2026-10-17",
    "verdict": "No match: hits concern flat morphisms of schemes or ordinary modules, not flat sheaves on the indicated sites or open/closed detection."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"flat\"",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-17",
+   "verdict": "No match: the listed results concern scheme/module flatness or unrelated closure notions, not ordinary etale or pro-etale module-sheaf flatness on a complementary pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a sheaf of modules is detected by inverse images to a complementary open subscheme and closed subscheme",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.flat_iff, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+   "date": "2026-10-17",
+   "verdict": "No match: the listed results concern scheme/module flatness or unrelated closure notions, not ordinary etale or pro-etale module-sheaf flatness on a complementary pair."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sf-flat-model-generation",
@@ -81,5 +155,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-open-closed-flatness",
+  "worker": "stage1",
+  "summary": "Audited the imported flatness criterion against the current Stacks open-closed sequence and the existing ringed-site tensor and flat-pullback nodes. No new nodes were needed: the forward implication is flatness preservation under inverse image, the converse tensors a short exact sequence and detects exactness on the complementary restrictions, and the two corollaries follow by the same criterion and the recollement restriction identities. On resumption corrected the stale tensor-node ID, removed the O-module category mismatch, added the existing etale vanishing statements, and replaced the incorrect middle-map kernel/cokernel argument by all three exactness defects.",
+  "blueprint": "Proof clause (2): the open-closed filtration sequence and the assertions that open and closed extensions of flat sheaves are flat.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "exact inverse image of ordinary module sheaves on the etale site is used to prove the forward implication and preserve short exact sequences."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "exact inverse image of ordinary module sheaves on the pro-etale site is used for both restrictions and tensor exactness."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "generic ringed-topos flat pullback is the input that flatness survives each restriction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "generic tensor-pullback comparison identifies restriction of a tensor with tensor of restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "the pro-etale open-closed localization sequence and its restriction identities detect exactness and compute extension/direct-image restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "the etale open-closed short exact sequence detects exactness after the two restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-unit-iso",
+    "why": "the etale extension-by-zero unit identifies the open restriction of j_!L with L."
+   },
+   {
+    "node": "prop-openclosed-lowerstar-fully-faithful",
+    "why": "the etale closed-immersion counit identifies the closed restriction of i_*M with M."
+   },
+   {
+    "node": "lemma-openclosed-vanishing-lowerstar",
+    "why": "The generic etale disjoint-range vanishing statement computes the zero restriction of an open or closed extension; it supplies a recollement identity, not an alternative flat-model route."
+   },
+   {
+    "node": "lemma-openclosed-vanishing-lowershriek",
+    "why": "The generic etale disjoint-range vanishing statement computes the zero restriction of an open or closed extension; it supplies a recollement identity, not an alternative flat-model route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lemma-openclosed-vanishing-lowerstar",
+  "lemma-openclosed-vanishing-lowershriek"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q119-e5e3b2f59",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q119-e5e3b2f59 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, source passages, and current blueprint route. All three proof steps support ordinary constant-ring module sheaves with the required pro-étale quasi-compactness hypothesis. Edge cases pass; no duplicates, cycles, or missing citations found. Accepted all ten declared tool uses. Detailed checks and inherited unit-metadata mismatch recorded in review.md; no repairs needed."
  }
 }

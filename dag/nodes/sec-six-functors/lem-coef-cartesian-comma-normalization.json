@@ -2,18 +2,132 @@
  "id": "lem-coef-cartesian-comma-normalization",
  "kind": "statement",
  "title": "Coherent endpoint normalization of a cartesian twisted comma",
- "statement": "Use quasicategories, ordinary nerves, coherent functors and transformations, functor simplicial sets and joins of [def-cbc-enhanced-diagrams-cones], and cartesian fibrations of [def-coef-infinity-fibrations]. Work in one containing universe. Let $A$ be an ordinary category. Let $K=N(T)$, where $T$ has objects $u:a\\to b$ in $A$ and arrows $(f,g):u\\to u'$ with $f:a\\to a'$, $g:b'\\to b$, $u=gu'f$. Let $\\pi:K\\to N(A)^{\\mathrm{op}}$ send $u:a\\to b$ to $b$. Let $p:R\\to N(A)^{\\mathrm{op}}$ be cartesian and let $k:K\\to R$ satisfy $pk=\\pi$. Assume $k$ sends every arrow $(1_a,g):gu'\\to u'$ to a $p$-cartesian edge. No terminal-object assumption is made.\n\nFor $r\\in R_c$, define $R_{r/}$ by $(R_{r/})_m=\\{\\Delta^0\\star\\Delta^m\\to R\\text{ with first vertex }r\\}$, projecting to its remaining face, and put $C_r=K\\times_R R_{r/}$. An object of $C_r$ is $(u:a\\to b,\\beta:r\\to k(u))$; its projected edge uniquely has the form $w^{\\mathrm{op}}:c\\to b$ for $w:b\\to c$. There are a functor $H:C_r\\to C_r$ and a transformation $\\eta:H\\to\\mathrm{id}_{C_r}$ with the following descriptions. $H$ sends this object to $(wu:a\\to c,h:r\\to k(wu))$, with $p(h)=1_c$. The component of $\\eta$ has twisted pair $(1_a,w):wu\\to u$ and a triangle $\\beta\\simeq k(1_a,w)h$. On a comma arrow whose twisted pair is $(f,g)$, the base triangle gives $w'=wg$, and the underlying twisted pair of its image under $H$ is $(f,1_c):wu\\to w'u'$. These objectwise factorizations and triangles can be chosen on all simplices so as to define $H$ and $\\eta$ coherently, including all faces and degeneracies. For each specified $\\beta$, the space of its factorizations together with the triangle is contractible. The entire construction allows $R$ to be larger than the universe in which $A$ is small.",
+ "statement": "Use quasicategories, ordinary nerves, coherent functors and transformations, functor simplicial sets of [def-cbc-enhanced-diagrams-cones], ordered joins of [lem-cbc-relative-coslice-left-fibration], and cartesian fibrations of [def-coef-infinity-fibrations]. Work in one containing universe. Let $A$ be an ordinary category. Let $K=N(T)$, where $T$ has objects $u:a\\to b$ in $A$ and arrows $(f,g):u\\to u'$ with $f:a\\to a'$, $g:b'\\to b$, $u=gu'f$. Let $\\pi:K\\to N(A)^{\\mathrm{op}}$ send $u:a\\to b$ to $b$. Let $p:R\\to N(A)^{\\mathrm{op}}$ be cartesian and let $k:K\\to R$ satisfy $pk=\\pi$. Assume $k$ sends every arrow $(1_a,g):gu'\\to u'$ to a $p$-cartesian edge. No terminal-object assumption is made.\n\nFor $r\\in R_c$, define $R_{r/}$ by $(R_{r/})_m=\\{\\Delta^0\\star\\Delta^m\\to R\\text{ with first vertex }r\\}$, projecting to its remaining face, and put $C_r=K\\times_R R_{r/}$. An object of $C_r$ is $(u:a\\to b,\\beta:r\\to k(u))$; its projected edge uniquely has the form $w^{\\mathrm{op}}:c\\to b$ for $w:b\\to c$. There are a functor $H:C_r\\to C_r$ and a transformation $\\eta:H\\to\\mathrm{id}_{C_r}$ with the following descriptions. $H$ sends this object to $(wu:a\\to c,h:r\\to k(wu))$, with $p(h)=1_c$. The component of $\\eta$ has twisted pair $(1_a,w):wu\\to u$ and a triangle $\\beta\\simeq k(1_a,w)h$. On a comma arrow whose twisted pair is $(f,g)$, the base triangle gives $w'=wg$, and the underlying twisted pair of its image under $H$ is $(f,1_c):wu\\to w'u'$. These objectwise factorizations and triangles can be chosen on all simplices so as to define $H$ and $\\eta$ coherently, including all faces and degeneracies. For each specified $\\beta$, the space of its factorizations together with the triangle is contractible. The entire construction allows $R$ to be larger than the universe in which $A$ is small.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
   "place": "Agent coherent endpoint-normalization lemma extracted from returned step 2; cartesian factorization of the full join comma, not only its homotopy category."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-cbc-relative-coslice-left-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=N(A)^{\\mathrm{op}}$ and $C=C_r$, and let $j:C\\to K$ be projection. The universal comma simplex gives a map $b:\\Delta^0\\star C\\to R$ with apex $r$ and boundary $kj$: on each simplex of $C$ this is precisely its defining join map, so the maps agree under every operator. The coslice projection $R_{r/}\\to R$ is a left fibration by the relative-coslice theorem, taking its index $\\Delta^0$ and empty subindex. Its pullback $C\\to K$ is a left fibration: a horn lifting square is just the corresponding square over $R$ with its fixed $K$-simplex. Nerves of ordinary categories fill inner horns by composing their successive arrows (associativity checks the faces), so $K$, and hence $C$, are quasicategories.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-relative-coslice-left-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of the endpoint-normalization subargument in the twisted comma resolution serving proof paragraph 2."
+   }
+  },
+  {
+   "text": "Define an ordinary category $D$ with objects $(u:a\\to b,w:b\\to c)$, and arrows $(f,g):(u,w)\\to(u',w')$ satisfying $u=gu'f$ and $w'=wg$. Its identities are $(1,1)$; the composite of $(f,g)$ and $(f',g')$ is $(f'f,gg')$, and $w''=w' g'=wgg'$. Thus all relations are preserved by composition. Applying $p$ to each defining simplex of $C$ gives a simplex of the ordinary coslice $c/B$ together with its $K$-simplex. Reading its arrows gives a simplicial map $t:C\\to N(D)$. This is exact in every degree: a simplex of an ordinary nerve is its string of arrows, so the base triangle for each comma edge imposes $w'=wg$, and its longer faces impose exactly the composite relations just written.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of the endpoint-normalization subargument in the twisted comma resolution serving proof paragraph 2."
+   }
+  },
+  {
+   "text": "There are functors $J,N:D\\to T$ with $J(u,w)=u$, $J(f,g)=(f,g)$ and $N(u,w)=wu$, $N(f,g)=(f,1_c)$. Indeed $wu=wgu'f=w'u'f$, so the last pair is an arrow of $T$; identities and composites follow from their displayed formulas. The arrows $e_{(u,w)}=(1_a,w):wu\\to u$ define a natural transformation $e:N\\to J$: along $(f,g)$ its two composites are $(f,wg)$ and $(f,w')$, equal by $w'=wg$. Taking nerves and precomposing $t$ gives $E:C\\times\\Delta^1\\to K$ from $n=Nt$ to $j=Jt$. Applying $k$ gives $q=kE$. Every vertical edge of $q$ is Cartesian by the hypothesis on $k$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of the endpoint-normalization subargument in the twisted comma resolution serving proof paragraph 2."
+   }
+  },
+  {
+   "text": "Give $C\\times\\Delta^1$ the marking consisting of degenerate edges and every vertical edge $\\{v\\}\\times\\Delta^1$, and give $C\\times\\{1\\}$ its induced marking. The selectively marked terminal-cylinder theorem, with $K=C$, $K'=\\varnothing$ and its vertex set $A=C_0$, says that $i:C\\times\\{1\\}\\hookrightarrow C\\times\\Delta^1$ is marked anodyne: every nondegenerate simplex of $C$ has final vertex in $C_0$. Thus $q$ takes every marked edge to a Cartesian edge; its degenerate images are Cartesian by the degenerate-edge assertion of the cocartesian composition theorem applied to $p^{\\mathrm{op}}$ (reversing horns interchanges the two predicates).",
+   "uses": [
+    "lem-coef-selectively-marked-terminal-cylinder",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.1.9, printed p.173, specialized to empty subcomplex and all vertices."
+   }
+  },
+  {
+   "text": "Construct a base cone $v:\\Delta^0\\star(C\\times\\Delta^1)\\to B$ with apex $c$ as follows. On $D\\times[1]$, the base of $kE$ is constant $c$ at time $0$ and sends $(u:a\\to b,w)$ to $b$ at time $1$. The cone leg at time $0$ is $1_c$; at time $1$ it is $w^{\\mathrm{op}}:c\\to b$. The relation $w'=wg$ proves naturality on time-$1$ arrows, and the vertical arrows are precisely $w^{\\mathrm{op}}$; all mixed squares commute by the same equality. This defines an ordinary functor on the category obtained by adjoining an initial vertex to $D\\times[1]$. Its nerve, precomposed with $\\Delta^0\\star(t\\times\\operatorname{id})$, is $v$. In particular $v|_{C\\times\\Delta^1}=pq$ and $v|_{\\Delta^0\\star(C\\times\\{1\\})}=pb$, since these maps to an ordinary nerve have the same edge strings.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of the endpoint-normalization subargument in the twisted comma resolution serving proof paragraph 2."
+   }
+  },
+  {
+   "text": "Apply the Cartesian marked-slice restriction theorem to $p:R\\to B$, the marked inclusion $i$ in step 4, and $q=kE$. The cone pair $(b,v)$ is a vertex of its target $R_{/q|_1}\\times_{B_{/pq|_1}}B_{/pq}$. Surjectivity on vertices of this trivial Kan fibration gives a cone $\\Phi:\\Delta^0\\star(C\\times\\Delta^1)\\to R$, extending $q$, restricting exactly to $b$ at time $1$, and with $p\\Phi=v$. The restriction to $b$ fixes the apex to be exactly $r$, even when $C$ is empty. This is one lift of the full cone; it chooses all simplex data together, rather than attempting independent vertex choices.",
+   "uses": [
+    "lem-coef-cartesian-marked-slice-restriction",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.11, printed p.151, applied to the marked terminal cylinder."
+   }
+  },
+  {
+   "text": "A map $\\Delta^0\\star X\\to R$ with fixed apex $r$ is the same as a simplicial map $X\\to R_{r/}$: restrict to $\\Delta^0\\star\\Delta^m$ for each simplex of $X$, and conversely glue these restrictions. Applying this to $\\Phi$ gives $\\lambda:C\\times\\Delta^1\\to R_{r/}$ with remaining face $q=kE$. Hence $(E,\\lambda)$ defines a simplicial map $\\widetilde\\eta:C\\times\\Delta^1\\to K\\times_RR_{r/}=C$. Its time-$1$ restriction is exactly the identity, because $E|_1=j$ and $\\Phi|_1=b$. Put $H=\\widetilde\\eta|_0$ and let $\\eta$ be this transformation. At $(u,w,\\beta)$ the time-$0$ edge is $h:r\\to k(wu)$ over $1_c$, while its vertical triangle is $\\beta\\simeq k(1_a,w)h$. On a comma arrow $(f,g)$ the time-$0$ pair is $(f,1_c)$, as required. Faces and degeneracies commute because $\\Phi$ and $E$ are simplicial maps, so this proves the full coherent assertion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of the endpoint-normalization subargument in the twisted comma resolution serving proof paragraph 2."
+   }
+  },
+  {
+   "text": "For a specified $\\beta:r\\to k(u)$ over $w^{\\mathrm{op}}$, repeat the slice-restriction theorem with $i:\\{1\\}\\hookrightarrow\\Delta^1$, the final edge marked, and $q=k(1_a,w):k(wu)\\to k(u)$. This $i$ is marked anodyne by the cylinder theorem with $K=\\Delta^0$. Take the fiber over the cone $\\beta$ and the base triangle with legs $1_c,w^{\\mathrm{op}}$. Its vertices are exactly pairs $(h,\\beta\\simeq qh)$, and its higher simplices are maps $\\Delta^m\\star\\Delta^1\\to R$ with their initial $\\Delta^m$ fixed at $r$ and the prescribed restrictions. This fiber $F\\to\\Delta^0$ is a trivial Kan fibration: each boundary lifting problem is the same problem for the original restriction map, over its constant target vertex. By the trivial-Kan lifting theorem it fills every horn, hence $F$ is Kan. The trivial-Kan homotopy-equivalence theorem makes $F\\to\\Delta^0$ a simplicial homotopy equivalence, and the simplicial-homotopy-to-weak-equivalence theorem gives weak contractibility. Finally take all constructions in a universe containing $R$ and $A$; neither the cylinder nor slice theorem bounds their size in the smaller universe of $A$. No terminal objects or terminal-object preservation have been used.",
+   "uses": [
+    "lem-coef-cartesian-marked-slice-restriction",
+    "lem-coef-selectively-marked-terminal-cylinder",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of the endpoint-normalization subargument in the twisted comma resolution serving proof paragraph 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-relative-coslice-left-fibration",
+  "def-coef-infinity-fibrations",
+  "lem-coef-selectively-marked-terminal-cylinder",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-cartesian-marked-slice-restriction",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Explicit ordinary endpoint normalization and a join-cone lift using HTT Proposition 3.1.1.11 and Lemma 3.2.1.9; HTT is read online but not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +163,80 @@
    "results": "{\"t\": \"2026-10-17T08:42:43Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian factorization induces a functor on join comma quasicategories with a natural transformation to the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.mkFunctor\", \"CategoryTheory.Comma.mapLeftId\", \"CategoryTheory.Comma.map\", \"CategoryTheory.Join.mkNatTrans\", \"CategoryTheory.Comma.full_map\", \"CategoryTheory.StructuredArrow.commaMapEquivalenceFunctor\", \"CategoryTheory.Comma.faithful_map\", \"CategoryTheory.Comma.isEquivalenceMap\"], \"digest\": \"bf17e3121f5f12a8\"}",
    "date": "2026-10-17",
    "verdict": "No match. HasFibers.fiber_factorization (HasFibers.lean:245) gives one ordinary arrow factorization, and Grothendieck.lean:38-81 constructs ordinary Cartesian lifts. Neither supplies a functor or transformation of arbitrary join comma quasicategories. The second phrasing removes the terminal hypothesis; still no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherently factor arrows in a join comma quasicategory through Cartesian edges to normalize their base endpoint",
+   "results": "{\"t\": \"2026-10-17T11:21:53Z\", \"tool\": \"leanfinder\", \"query\": \"Coherently factor arrows in a join comma quasicategory through Cartesian edges to normalize their base endpoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.edgeTransform_app\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Truncated.Quasicategory₂.fill31\", \"SSet.Truncated.liftOfStrictSegal.f₂\", \"SSet.Truncated.liftOfStrictSegal_app_1\"], \"digest\": \"40eeb104ba819831\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*comma|comma.*normaliz|marked.*anodyne|anodyne.*marked",
+   "results": "{\"t\": \"2026-10-17T11:23:08Z\", \"tool\": \"grep\", \"query\": \"cartesian.*comma|comma.*normaliz|marked.*anodyne|anodyne.*marked\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cartesian\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-17T11:23:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cartesian\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.OplaxMonoidal.η_of_cartesianMonoidalCategory\", \"CategoryTheory.Functor.OplaxMonoidal.δ_of_cartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.instIsIsoFunctorProdComparisonNatTransOfProdComparison\", \"CategoryTheory.Functor.Monoidal.ε_of_cartesianMonoidalCategory\", \"CategoryTheory.Functor.Monoidal.μ_of_cartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatIso\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatTrans\", \"CategoryTheory.CartesianMonoidalCategory.instIsIsoFunctorProdComparisonBifunctorNatTransOfProdComparison\"], \"digest\": \"c5f9969a2a48eec9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a join slice along a marked anodyne map is a trivial Kan fibration when all marked edges are Cartesian",
+   "results": "{\"t\": \"2026-10-17T11:23:26Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of a join slice along a marked anodyne map is a trivial Kan fibration when all marked edges are Cartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"HomotopicalAlgebra.trivialFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\"], \"digest\": \"d7bca61c624e301f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "marked.*anodyne|anodyne.*marked|slice.*[Cc]artesian",
+   "results": "{\"t\": \"2026-10-17T11:24:30Z\", \"tool\": \"grep\", \"query\": \"marked.*anodyne|anodyne.*marked|slice.*[Cc]artesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction map between relative join slices is a trivial Kan fibration for a marked anodyne inclusion and Cartesian marked diagram",
+   "results": "{\"t\": \"2026-10-17T11:24:31Z\", \"tool\": \"leansearch\", \"query\": \"The restriction map between relative join slices is a trivial Kan fibration for a marked anodyne inclusion and Cartesian marked diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"Profinite.IndexFunctor.π_app\", \"HomologicalComplex.restrictionMap\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_trivialFibrations\"], \"digest\": \"88f5a8c4467b4c81\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\"",
+   "results": "{\"t\": \"2026-10-17T11:24:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerFibrations\", \"SSet.instIsStableUnderBaseChangeInnerFibrations\", \"SSet.instIsStableUnderRetractsInnerFibrations\", \"SSet.instRespectsIsoInnerFibrations\", \"SSet.innerFibrations\", \"SSet.InnerFibration\", \"SSet.mem_innerFibrations\", \"SSet.quasicategory_of_innerFibration\"], \"digest\": \"41355fb03648d837\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent extension of cones backwards across a natural transformation of Cartesian edges, with fixed apex and prescribed base cone",
+   "results": "{\"t\": \"2026-10-17T11:24:35Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent extension of cones backwards across a natural transformation of Cartesian edges, with fixed apex and prescribed base cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.structuredArrowMapCone\", \"CategoryTheory.Limits.Cone.extend\", \"CategoryTheory.Limits.Cones.extend\", \"CategoryTheory.Limits.Cone.extensions\", \"CategoryTheory.Limits.Cone.toStructuredArrowCone\", \"CategoryTheory.LiftableCone.liftedCone\", \"CategoryTheory.Limits.Cones.extendComp\", \"CategoryTheory.Functor.RightExtension.coneAtFunctor\"], \"digest\": \"dc61eaed96973cda\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A marked anodyne inclusion and a diagram sending marked edges to Cartesian edges induce a trivial fibration on relative join overcategories",
+   "results": "{\"t\": \"2026-10-17T11:24:37Z\", \"tool\": \"leanfinder\", \"query\": \"A marked anodyne inclusion and a diagram sending marked edges to Cartesian edges induce a trivial fibration on relative join overcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.trivialFibrations_over_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"0d0798efac4e806e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative overcategory restriction for an inner fibration has boundary lifting whenever the indexing inclusion is marked anodyne and the marked diagram edges are Cartesian",
+   "results": "{\"t\": \"2026-10-17T11:25:48Z\", \"tool\": \"leanfinder\", \"query\": \"The relative overcategory restriction for an inner fibration has boundary lifting whenever the indexing inclusion is marked anodyne and the marked diagram edges are Cartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"HomotopicalAlgebra.fibrations_over_def\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverFibrations\"], \"digest\": \"50606f828c8e18d5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-74 (inner horns only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-54,71-100 (ordinary Kan fibrations, all horns), CategoryTheory/Join/Basic.lean:202-226 (ordinary categorical joins), and CategoryTheory/Limits/Cones.lean:202-205 (ordinary cones). The generic model-category pullback results do not prove a relative join-slice restriction is trivial. None supplies marked-anodyne indexing maps with Cartesian-edge hypotheses or full quasicategorical comma normalization. Both natural-language phrasings were read; no exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-terminal-twisted-resolution",
@@ -82,5 +266,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-comma-normalization",
+  "worker": "stage1",
+  "summary": "Kept the statement and historical ancestry unchanged. Constructed ordinary endpoint normalization on the base comma category, then extended the universal join cone using marked-anodyne slice restriction, preserving all simplices and the exact identity endpoint. Proved contractibility with the same slice theorem for one edge. One genuinely generic supporting statement (HTT 3.1.1.11) was absent from the DAG and Mathlib; created it unsplit, not a specialized restatement of the item. Maintainer review corrected the introductory definition citation for ordered joins: def-cbc-enhanced-diagrams-cones does not define them; lem-cbc-relative-coslice-left-fibration does. Added that statement dependency. No mathematical hypothesis or conclusion changed.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: the coherent derived inverse-limit mapping-complex adjunction; this item supplies the endpoint-normalization part of the descendant twisted comma contraction, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Generic join-coslice projection used only to verify C_r is a quasicategory; the historical unit has no join-slice foundations of its own."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "why": "Generic simplicial lifting fact proves the factorization fiber is Kan; not a replacement of a geometric or adjunction step."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic trivial-Kan contraction of the fixed factorization space; no unit-specific theorem gives this simplicial consequence."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic realization theorem converts the explicit simplicial contraction into the weak-contractibility convention of the definitions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q02-a1625ac89",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-a1625ac89 (reviewer sub-agent of L); spot-checked: Verified all eight steps and the new theorem against HTT 3.1.1.11, 3.2.1.9, Kerodon and Stacks. Repaired one incorrect ordered-join definition citation in the whole item JSON under fixes/. No mathematical gap or duplicate found; review.md records source checks, edge cases and accepted tool uses.; 1 file(s) fixed by the reviewer"
  }
 }

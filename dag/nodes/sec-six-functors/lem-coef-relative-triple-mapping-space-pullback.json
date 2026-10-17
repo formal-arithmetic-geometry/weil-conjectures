@@ -10,9 +10,62 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First justify the quasicategory in the statement. Apply [lem-coef-infinity-isofibration-exponentiation] to the inclusion of the last vertex $\\{1\\}\\hookrightarrow\\Delta^1$ and target $\\mathcal A$. It gives an isofibration $e=\\operatorname{ev}_1:\\operatorname{Fun}(\\Delta^1,\\mathcal A)\\to\\mathcal A$ between quasicategories, hence an inner fibration. For an inner horn $\\Lambda_i^k\\to\\mathcal T$, its $\\mathcal B$-coordinate extends to $b:\\Delta^k\\to\\mathcal B$ because $\\mathcal B$ is a quasicategory. The given arrow-coordinate horn lies over $u^*b|_{\\Lambda_i^k}$. The inner lifting property of $e$ extends it to $q:\\Delta^k\\to\\operatorname{Fun}(\\Delta^1,\\mathcal A)$ with $eq=u^*b$. The pair $(q,b)$ fills the original horn in the defining degreewise pullback. Thus $\\mathcal T$ is a quasicategory. This uses no lifting hypothesis on $u^*$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3 for evaluation at the last vertex; direct pullback horn lift using the definition of quasicategory."
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$, and write $I_n=\\Delta^{\\{0,\\ldots,n\\}}\\subseteq\\Delta^{n+1}$. By [def-cbc-enhanced-diagrams-cones], an $n$-simplex of $\\operatorname{Map}_{\\mathcal T}(H,K)$ is a map $\\sigma:\\Delta^{n+1}\\to\\mathcal T$ constant at $H$ on all of $I_n$ and with last vertex $K$. A map into the displayed degreewise pullback is exactly a pair $(q,b)$ with $q:\\Delta^{n+1}\\to\\operatorname{Fun}(\\Delta^1,\\mathcal A)$, $b:\\Delta^{n+1}\\to\\mathcal B$, and $\\operatorname{ev}_1q=u^*b$ as simplicial maps. The boundary conditions on $\\sigma$ say exactly that $q$ is constant at $\\eta$ on $I_n$ and has last vertex $\\eta'$, while $b$ is constant at $F$ on $I_n$ and has last vertex $F'$. Consequently $q\\in M_n$ and $b\\in R_n$, and the equality is precisely $(\\operatorname{ev}_1)_*(q)=u^*_*(b)$ in $V_n$. Conversely any such pair defines $\\sigma$ by the same coordinate formula; the two constructions are inverse.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KX",
+    "place": "Construction 4.6.5.1, expanded using the entire-initial-face right-pinched convention of def-cbc-enhanced-diagrams-cones and the defining degreewise pullback."
+   }
+  },
+  {
+   "text": "For $q\\in M_n$, let $a=(\\operatorname{ev}_0)_*(q)\\in S_n$. Send the pair $(q,b)$ of step 2 to $(q,(a,b))$. Its two images in $(S\\times V)_n$ agree: they are $(a,(\\operatorname{ev}_1)_*(q))$ and $(a,u^*_*(b))$. This gives a map to the strict pullback in the conclusion. Conversely an element $(q,(a,b))$ of that pullback satisfies $a=(\\operatorname{ev}_0)_*(q)$ and $(\\operatorname{ev}_1)_*(q)=u^*_*(b)$, so forgetting $a$ gives exactly the pair of step 2. These maps are inverse in every degree. The source map $r$ applied to $\\sigma$ is $\\operatorname{ev}_0q=a$, which is precisely the displayed projection to $S$. All assertions here are equality of coordinates in the degreewise products and pullbacks of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KX",
+    "place": "Agent coordinate reassociation of the degreewise pullback; no homotopy-pullback comparison is used."
+   }
+  },
+  {
+   "text": "For a monotone map $\\alpha:[m]\\to[n]$, extend it by the new last vertex to $\\alpha^+:[m+1]\\to[n+1]$. The right-pinched operator sends $(q,b)$ to $(q\\Delta(\\alpha^+),b\\Delta(\\alpha^+))$. Evaluation and postcomposition with $u^*$ commute with this restriction, so the formula of step 3 sends it to $(q\\Delta(\\alpha^+),((\\operatorname{ev}_0q)\\Delta(\\alpha^+),b\\Delta(\\alpha^+)))$, exactly the coordinatewise operator on the claimed pullback. The degreewise inverse commutes as well, proving a simplicial isomorphism. For a strictly commuting square with functors $f:\\mathcal A\\to\\mathcal A_1$, $g:\\mathcal B\\to\\mathcal B_1$ and $fu^*=u_1^*g$, the induced map sends $(q,b)$ to $(\\operatorname{Fun}(\\Delta^1,f)q,gb)$. Evaluation at either endpoint commutes with $f$, so step 3 commutes strictly with this map too. This proves the stated naturality, including the specified endpoints, using only the operator and internal-functor definitions in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KX",
+    "place": "Agent check of every operator and strictly commuting functor square, using the explicit simplicial operators in def-cbc-enhanced-diagrams-cones."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Auxiliary comma mapping-simplex calculation below proof paragraph 2; direct argument from def-cbc-enhanced-diagrams-cones and the existing exponentiation statement. Kerodon 01F3 and 01KX read online 2026-10-17; the formula is proved here, not attributed as a numbered assertion of HA."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,10 +122,73 @@
    "results": "{\"t\": \"2026-10-17T08:45:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Comma, CategoryTheory.StructuredArrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.StructuredArrow.proj_obj\", \"CategoryTheory.StructuredArrow.map_obj_right\", \"CategoryTheory.StructuredArrow.map_obj_left\", \"CategoryTheory.StructuredArrow.pre_obj_left\", \"CategoryTheory.StructuredArrow.pre_obj_right\", \"CategoryTheory.StructuredArrow.mapIso_functor_obj_right\", \"CategoryTheory.StructuredArrow.mapIso_inverse_obj_right\", \"CategoryTheory.StructuredArrow.mapIso_functor_obj_left\"], \"digest\": \"891083b95aa50430\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary categorical/model-category or truncated-quasicategory hits do not state the specified coherent Kan-space comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent comma quasicategory right pinched mapping space strict pullback",
+   "results": "{\"t\": \"2026-10-17T12:17:12Z\", \"tool\": \"leanfinder\", \"query\": \"coherent comma quasicategory right pinched mapping space strict pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.liftOfStrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.Truncated.liftOfStrictSegal.f₂\", \"SSet.QCat.bicategory\", \"SSet.StrictSegal.quasicategory'\", \"SSet.StrictSegal.quasicategory\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.Quasicategory.hornFilling\"], \"digest\": \"19bfb5517becb1d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/CategoryTheory/Comma/Basic.lean:71-103, AlgebraicTopology/Quasicategory/Basic.lean:39-54, StrictBicategory.lean:53-67 and SimplicialSet/NerveAdjunction.lean:181-192. Ordinary CommaMorphism, strict Segal reconstruction, horn filling and the QCat bicategory do not give the right-pinched mapping simplicial set of this strict comma pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Comma, CategoryTheory.StructuredArrow, Quasicategory",
+   "results": "{\"t\": \"2026-10-17T12:17:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Comma, CategoryTheory.StructuredArrow, Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Quasicategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unsuccessful query: loogle: unknown identifier 'Quasicategory'; no absence conclusion drawn from this query. Valid qualified-name queries and semantic searches were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "comma.*mappingSpace|mappingSpace.*pullback",
+   "results": "{\"t\": \"2026-10-17T12:17:13Z\", \"tool\": \"grep\", \"query\": \"comma.*mappingSpace|mappingSpace.*pullback\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/CategoryTheory/Comma/Basic.lean:71-103, AlgebraicTopology/Quasicategory/Basic.lean:39-54, StrictBicategory.lean:53-67 and SimplicialSet/NerveAdjunction.lean:181-192. Ordinary CommaMorphism, strict Segal reconstruction, horn filling and the QCat bicategory do not give the right-pinched mapping simplicial set of this strict comma pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces in a coherent comma quasicategory are a strict pullback of arrow mapping spaces and the restriction mapping space",
+   "results": "{\"t\": \"2026-10-17T12:17:14Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces in a coherent comma quasicategory are a strict pullback of arrow mapping spaces and the restriction mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OverPresheafAux.OverArrows.map₁\", \"CategoryTheory.MorphismProperty.Over.pullbackMapHomPullback\", \"CategoryTheory.OverPresheafAux.OverArrows.map₁_map₂\", \"CategoryTheory.ChosenPullbacksAlong.pullbackMap\", \"CategoryTheory.CostructuredArrow\", \"CategoryTheory.CommaMorphism\", \"CategoryTheory.Arrow.mapCechNerve\", \"CategoryTheory.Limits.PullbackCone.map\"], \"digest\": \"e9a3743c229e681c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/CategoryTheory/Comma/Basic.lean:71-103, AlgebraicTopology/Quasicategory/Basic.lean:39-54, StrictBicategory.lean:53-67 and SimplicialSet/NerveAdjunction.lean:181-192. Ordinary CommaMorphism, strict Segal reconstruction, horn filling and the QCat bicategory do not give the right-pinched mapping simplicial set of this strict comma pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mapping simplices of a simplicial pullback of coherent arrow categories",
+   "results": "{\"t\": \"2026-10-17T12:17:15Z\", \"tool\": \"leanfinder\", \"query\": \"mapping simplices of a simplicial pullback of coherent arrow categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.cechNerve_map\", \"CategoryTheory.Arrow.mapCechNerve_app\", \"CategoryTheory.SimplicialObject.cechNerve_map\", \"CategoryTheory.SimplicialObject.cechNerve\", \"CategoryTheory.Arrow.cechNerve\", \"CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_map\", \"CategoryTheory.SimplicialObject.augmentedCechNerve_map_left_app\", \"CategoryTheory.Arrow.mapCechNerve\"], \"digest\": \"4b2615b64283d57f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/CategoryTheory/Comma/Basic.lean:71-103, AlgebraicTopology/Quasicategory/Basic.lean:39-54, StrictBicategory.lean:53-67 and SimplicialSet/NerveAdjunction.lean:181-192. Ordinary CommaMorphism, strict Segal reconstruction, horn filling and the QCat bicategory do not give the right-pinched mapping simplicial set of this strict comma pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.QCat, Fun, ev_0, ev_1",
+   "results": "{\"t\": \"2026-10-17T12:17:16Z\", \"tool\": \"loogle\", \"query\": \"SSet.QCat, Fun, ev_0, ev_1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Fun'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unsuccessful query: loogle: unknown identifier 'Fun'; no absence conclusion drawn from this query. Valid qualified-name queries and semantic searches were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "Fun.*Delta.*ev_0|ev_1.*Fun",
+   "results": "{\"t\": \"2026-10-17T12:17:16Z\", \"tool\": \"grep\", \"query\": \"Fun.*Delta.*ev_0|ev_1.*Fun\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/CategoryTheory/Comma/Basic.lean:71-103, AlgebraicTopology/Quasicategory/Basic.lean:39-54, StrictBicategory.lean:53-67 and SimplicialSet/NerveAdjunction.lean:181-192. Ordinary CommaMorphism, strict Segal reconstruction, horn filling and the QCat bicategory do not give the right-pinched mapping simplicial set of this strict comma pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CommaMorphism",
+   "results": "{\"t\": \"2026-10-17T12:22:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.CommaMorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CommaMorphism\", \"CategoryTheory.CommaMorphism.inhabited\", \"CategoryTheory.CommaMorphism.left\", \"CategoryTheory.CommaMorphism.right\", \"CategoryTheory.CommaMorphism.ext\", \"CategoryTheory.CommaMorphism.ext_iff\", \"CategoryTheory.CommaMorphism.w\", \"CategoryTheory.CommaMorphism.mk\"], \"digest\": \"bd9f5bb207708fe1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/CategoryTheory/Comma/Basic.lean:71-103, AlgebraicTopology/Quasicategory/Basic.lean:39-54, StrictBicategory.lean:53-67 and SimplicialSet/NerveAdjunction.lean:181-192. Ordinary CommaMorphism, strict Segal reconstruction, horn filling and the QCat bicategory do not give the right-pinched mapping simplicial set of this strict comma pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-17T12:22:56Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\"], \"digest\": \"9c4099b45a4b423f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib/CategoryTheory/Comma/Basic.lean:71-103, AlgebraicTopology/Quasicategory/Basic.lean:39-54, StrictBicategory.lean:53-67 and SimplicialSet/NerveAdjunction.lean:181-192. Ordinary CommaMorphism, strict Segal reconstruction, horn filling and the QCat bicategory do not give the right-pinched mapping simplicial set of this strict comma pullback."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-relative-operadic-terminal-active-mapping",
@@ -97,5 +213,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-triple-mapping-space-pullback",
+  "worker": "stage1",
+  "summary": "Proved the unchanged strict pullback statement by a direct coordinate expansion of right-pinched mapping simplices, with a separate horn-lifting check that the triple pullback is a quasicategory. Checked the inverse formula, all operators, source projection and functor naturality. Reused the existing definition and same-unit exponentiation lemma; created no nodes. Recorded actual searches and distinguished invalid Loogle patterns from successful no-match searches.",
+  "blueprint": "Realizes the technical comma mapping-space calculation below paragraph 2 of prop-coef-integral-exceptional-adjoint, through the unchanged ancestry via lem-coef-relative-operadic-terminal-active-mapping. The unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-fb17819e1",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-fb17819e1 (reviewer sub-agent of L); spot-checked: Reviewed item, cited nodes, unit/chapter route, local Scholze notes, Kerodon 01F3/01KX, and HA Proposition 3.1.3.2 at printed p. 348. The four-step strict pullback proof is mathematically correct, hypotheses and endpoint naturality check, edge cases pass, no duplicate or new-node faults exist, searches are recorded, and no SGA or forbidden tooling was used. Review written to review.md."
  }
 }

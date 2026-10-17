@@ -1,196 +1,244 @@
 {
-  "id": "thm-pur-regular-immersion-purity",
-  "blueprint": {
-    "is": "thm-pur-regular-immersion-purity",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Purity for regular closed immersions",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $i:Z\\hookrightarrow X$ be a\nregular closed immersion of pure\ncodimension $c$, with $X$ smooth over the perfect field $k$ and\n$Z$ regular. Then $Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree\n$0$, with $\\mathcal H^0$ free of rank one, so that\n$H^0(Z,Ri^!\\Lambda_X(c)[2c])=H^{2c}_Z(X,\\Lambda(c))$. The\n*fundamental class*\n$[Z\\subset X]\\in H^{2c}_Z(X,\\Lambda(c))$ is the global class whose\nrestriction to every frame $(U,f)$ of [def-pur-frame-class] is\n$\\operatorname{cl}(f)$ (it exists and is unique by\n[lem-pur-frame-independence] and the sheaf property of\n$\\mathcal H^0$). There is a canonical isomorphism\n\n$$\n\\operatorname{cl}_i:\\Lambda_Z\\xrightarrow{\\ \\sim\\ }Ri^!\\Lambda_X(c)[2c],\n\\qquad 1\\longmapsto[Z\\subset X],\n$$\n\nequivalently (cancelling the invertible twist) a canonical\nisomorphism $Ri^!\\Lambda_X\\xrightarrow{\\sim}\\Lambda_Z(-c)[-2c]$,\nthe inverse of $\\operatorname{cl}_i(-c)[-2c]$. It is compatible with\netale base change and with exterior products.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-regular/thm-pur-regular-immersion-purity.md",
-    "place": "node thm-pur-regular-immersion-purity, order 2034"
-  },
-  "stmt_deps": [
+ "id": "thm-pur-regular-immersion-purity",
+ "blueprint": {
+  "is": "thm-pur-regular-immersion-purity",
+  "from": null,
+  "same_as": [
+   "sk-thm-regular"
+  ]
+ },
+ "kind": "statement",
+ "title": "Purity for regular closed immersions",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $i:Z\\hookrightarrow X$ be a\nregular closed immersion of pure\ncodimension $c$, with $X$ smooth over the perfect field $k$ and\n$Z$ regular. Then $Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree\n$0$, with $\\mathcal H^0$ free of rank one, so that\n$H^0(Z,Ri^!\\Lambda_X(c)[2c])=H^{2c}_Z(X,\\Lambda(c))$. The\n*fundamental class*\n$[Z\\subset X]\\in H^{2c}_Z(X,\\Lambda(c))$ is the global class whose\nrestriction to every frame $(U,f)$ of [def-pur-frame-class] is\n$\\operatorname{cl}(f)$ (it exists and is unique by\n[lem-pur-frame-independence] and the sheaf property of\n$\\mathcal H^0$). There is a canonical isomorphism\n\n$$\n\\operatorname{cl}_i:\\Lambda_Z\\xrightarrow{\\ \\sim\\ }Ri^!\\Lambda_X(c)[2c],\n\\qquad 1\\longmapsto[Z\\subset X],\n$$\n\nequivalently (cancelling the invertible twist) a canonical\nisomorphism $Ri^!\\Lambda_X\\xrightarrow{\\sim}\\Lambda_Z(-c)[-2c]$,\nthe inverse of $\\operatorname{cl}_i(-c)[-2c]$. It is compatible with\netale base change and with exterior products.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-regular/thm-pur-regular-immersion-purity.md",
+  "place": "node thm-pur-regular-immersion-purity, order 2034"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "sk-def-purity-conv",
+  "def-pur-frame-class",
+  "lem-pur-frame-independence"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing same-unit theorem [sk-thm-regular], not a new purity assertion. Its hypotheses are precisely a regular closed immersion of pure codimension $c$, smooth $X$ over the perfect ground field, and regular $Z$. The standing conventions agree: [def-pur-conventions] makes this the finite-coefficient part with $\\Lambda=A_{E,n}$ and constructible $Rf^!$ on separated finite-type $k$-schemes, exactly the setting specified in [sk-def-purity-conv]. There is no condition $e(E/\\mathbf Q_\\ell)\\mid n$. Regular immersion is understood in that convention, including the empty regular sequence at $c=0$. Apply clause (a) of [sk-thm-regular] to obtain concentration of $Ri^!\\Lambda_X(c)[2c]$ in degree zero, a free rank-one degree-zero cohomology sheaf, and the displayed identification $H^0(Z,Ri^!\\Lambda_X(c)[2c])=H_Z^{2c}(X,\\Lambda(c))$.",
+   "uses": [
+    "sk-thm-regular",
     "def-pur-conventions",
-    "def-pur-frame-class",
-    "lem-pur-frame-independence",
-    "def-pur-regular-immersion",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [
-    {
-      "text": "Cancellation of the Tate factor uses the invertibility and twist identifications of [def-coefficient-twists-detailed].\nStep 1: the $\\omega$-identification. Work on each open-and-closed\nconnected component of $X$; the resulting isomorphisms assemble\nover their disjoint union. By\n[lem-pur-regular-immersion-smooth-structure], $a_X$ and $a_Z$\nare smooth of dimensions $n$ and $m=n-c$, and\n$a_Z=a_X\\circ i$. The composition law for the exceptional inverse\nimage ([def-weil-exceptional-inverse-image]) gives\n\n$$\n\\omega_{Z/k}=Ra_Z^!\\Lambda_k\n\\;\\cong\\;Ri^!\\bigl(Ra_X^!\\Lambda_k\\bigr)\n=Ri^!\\omega_{X/k},\n$$\n\nand by the smooth purity of the structure morphisms\n([thm-pur-diagonal-dualizing-object] applied to $a_X$ and\n$a_Z$),\n\n$$\n\\omega_{X/k}\\;\\cong\\;\\Lambda_X(n)[2n],\n\\qquad\n\\omega_{Z/k}\\;\\cong\\;\\Lambda_Z(m)[2m].\n$$",
-      "uses": [
-        "def-coefficient-twists-detailed",
-        "lem-pur-regular-immersion-smooth-structure",
-        "def-weil-exceptional-inverse-image",
-        "thm-pur-diagonal-dualizing-object"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 2: the co-projection removes the twist. By\n[lem-pur-immersion-twist] (with $K=\\Lambda_X$ and $m=n$),\n\n$$\nRi^!\\Lambda_X(n)[2n]\n\\;\\cong\\;\\bigl(Ri^!\\Lambda_X\\bigr)\\otimes^L_{\\Lambda_Z}\\Lambda_Z(n)[2n].\n$$",
-      "uses": [
-        "lem-pur-immersion-twist"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Combined with Step 1 and the cancellation of the invertible\n$\\Lambda_Z(n)[2n]$ (in the monoid of invertible objects of\n[def-weil-derived-tensor]):\n\n$$\nRi^!\\Lambda_X\n\\;\\cong\\;\\Lambda_Z(m-n)[2m-2n]\n=\\Lambda_Z(-c)[-2c].\n$$",
-      "uses": [
-        "def-weil-derived-tensor"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 3: the class. Twisting the identification of Steps 1–2 by\n$(c)[2c]$ ([lem-pur-immersion-twist]) gives a canonical isomorphism\n$\\Phi:\\Lambda_Z\\xrightarrow{\\sim}Ri^!\\Lambda_X(c)[2c]$; in particular\n$Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree $0$ with $\\mathcal H^0$\nfree of rank one, and $H^0(Z,Ri^!\\Lambda_X(c)[2c])=H^{2c}_Z(X,\\Lambda(c))$\nsince $Ri_*Ri^!$ is the derived functor of sections with support in $Z$.\nIt carries the canonical generator of $\\Lambda_Z$ to a class\n$\\Phi(1)\\in H^{2c}_Z(X,\\Lambda(c))$; we show that $\\Phi(1)$ is the\nfundamental class $[Z\\subset X]$ glued from the frame classes of\n[def-pur-frame-class]. By\n[lem-pur-regular-immersion-linearization], etale-locally the pair\n$(X,Z)$ is the linear pair $(\\mathbf A^{c+m}_k,\\mathbf A^m_k)$; on\nthe model, the structure-morphism identifications of Step 1 are the\naffine-space purity comparisons of [cor-pur-affine-space-purity]\nfor the projections (the smooth purity map of a projection agrees with\nthe affine-space comparison by [lem-pur-projection-purity-agreement]),\nso $\\Phi$ for the linear immersion $i_0$ is the inverse of $Ri_0^!$ of\nthe affine-space comparison $\\gamma_{p,\\Lambda}$ for the projection\n$p$ with $p\\,i_0=\\operatorname{id}$, composed with\n$Ri_0^!Rp^!\\cong\\operatorname{id}$; by\n[cor-pur-affine-space-zero-section-purity] this is the zero-section\nisomorphism normalized by the product of the Kummer boundaries of the\ncoordinates, hence the composite identification carries $1$\nto the $c$-fold exterior product of the rank-one Kummer boundaries of\nthe coordinates, i.e. to the class\n$\\operatorname{cl}(f)=\\partial_1\\kappa(f_1)\\cup\\cdots\\cup\\partial_c\\kappa(f_c)$\nof the standard frame, by [lem-pur-kunneth-supported] and\n[lem-pur-frame-independence] (the frame class depends only on the\npair; the identification of Steps 1–2 is compatible with the\netale coordinate map $u:U\\to\\mathbf A^{c+m}_k$ and its restriction\n$u':V\\to\\mathbf A^m_k$ because $a_U=a_{\\mathbf A^{c+m}}\\circ u$ and\n$a_V=a_{\\mathbf A^m}\\circ u'$ with $u,u'$ etale, by the composition\ncompatibility [thm-pur-composition-coherence], while\n$Ri_V^!u^*=u'^*Ri_0^!$ for the linear immersion $i_0$; and\nKummer classes, boundaries and supported cup products commute with\n$u^*$, which carries the coordinates $x_j$ to the frame $f_j$). Hence\nthe two global classes agree: by Steps 1–2,\n$Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree $0$, so both are\nglobal sections of the single sheaf $\\mathcal H^0$, they agree on\nthe linear neighbourhoods, which cover $Z$, and sections of a sheaf\nagreeing on a cover agree. Since the identification of Steps 1–2 is\nan isomorphism, its value $\\Phi(1)=[Z\\subset X]$ at $1$ generates every\nstalk, and the identification is $\\operatorname{cl}_i$.",
-      "uses": [
-        "lem-pur-immersion-twist",
-        "def-pur-frame-class",
-        "lem-pur-regular-immersion-linearization",
-        "cor-pur-affine-space-purity",
-        "lem-pur-projection-purity-agreement",
-        "cor-pur-affine-space-zero-section-purity",
-        "lem-pur-kunneth-supported",
-        "lem-pur-frame-independence",
-        "thm-pur-composition-coherence"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Step 4: the compatibilities. The canonical identification is the\ncomposite of the smooth-purity identifications of the two structure\nmorphisms, the composition law for $(-)^!$, and the co-projection;\neach of these is compatible with etale base change and with the\nexterior-product (Künneth) structure by the corresponding\ncompatibilities of [thm-pur-diagonal-dualizing-object] and\n[lem-pur-kunneth-supported], and the class of Step 3 is\ncompatible with them by [lem-pur-frame-independence].",
-      "uses": [
-        "thm-pur-diagonal-dualizing-object",
-        "lem-pur-kunneth-supported",
-        "lem-pur-frame-independence"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-coefficient-twists-detailed",
-    "lem-pur-regular-immersion-smooth-structure",
-    "def-weil-exceptional-inverse-image",
-    "thm-pur-diagonal-dualizing-object",
-    "lem-pur-immersion-twist",
-    "def-weil-derived-tensor",
-    "def-pur-frame-class",
-    "lem-pur-regular-immersion-linearization",
-    "cor-pur-affine-space-purity",
-    "lem-pur-projection-purity-agreement",
-    "cor-pur-affine-space-zero-section-purity",
-    "lem-pur-kunneth-supported",
-    "lem-pur-frame-independence",
-    "thm-pur-composition-coherence"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-regular/thm-pur-regular-immersion-purity.md",
-    "place": "## Proof"
+    "sk-def-purity-conv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/thm-pur-regular-immersion-purity.md",
+    "place": "concentration and supported-cohomology identification; unit clause (a)"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2034,
-  "blueprint_uses": [
-    "cor-pur-affine-space-purity",
-    "cor-pur-affine-space-zero-section-purity",
-    "lem-pur-projection-purity-agreement",
-    "def-coefficient-twists-detailed",
-    "def-pur-conventions",
+  {
+   "text": "The frame class in [sk-thm-regular] is the ordered product $\\partial\\kappa(f_1)\\cup\\cdots\\cup\\partial\\kappa(f_c)$, which is exactly the class specified by [def-pur-frame-class]: each boundary belongs to the individual divisor $V(f_j)$, and the resulting support is their intersection $Z_U$. The coefficient maps agree as well: [sk-def-purity-conv] permits the Kummer exponent $N=n$ and identifies its root-class coefficient insertion with the projection-induced twist insertion used in [def-pur-frame-class]. For $c=0$ both products are the coefficient unit. Thus clause (b) of [sk-thm-regular] supplies precisely the required unique global class restricting to every frame class, rather than a class with an unspecified scalar normalization. This class generates every stalk of the degree-zero sheaf.",
+   "uses": [
+    "sk-thm-regular",
     "def-pur-frame-class",
-    "def-pur-regular-immersion",
-    "def-weil-derived-tensor",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties",
-    "lem-pur-frame-independence",
-    "lem-pur-immersion-twist",
-    "lem-pur-kunneth-supported",
-    "lem-pur-regular-immersion-linearization",
-    "lem-pur-regular-immersion-smooth-structure",
-    "thm-pur-composition-coherence",
-    "thm-pur-diagonal-dualizing-object"
-  ],
-  "uses_not_cited": [
-    "def-pur-regular-immersion",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "sk-def-purity-conv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/thm-pur-regular-immersion-purity.md",
+    "place": "fundamental class paragraph; unit clause (b)"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-regular",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of [def-pur-conventions],\nlet $i:Z\\hookrightarrow X$ be a\nregular closed immersion of pure\ncodimension $c$, with $X$ smooth over the perfect field $k$ and\n$Z$ regular. Then $Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree\n$0$, with $\\mathcal H^0$ free of rank one, so that\n$H^0(Z,Ri^!\\Lambda_X(c)[2c])=H^{2c}_Z(X,\\Lambda(c))$. The\n*fundamental class*\n$[Z\\subset X]\\in H^{2c}_Z(X,\\Lambda(c))$ is the global class whose\nrestriction to every frame $(U,f)$ of [def-pur-frame-class] is\n$\\operatorname{cl}(f)$ (it exists and is unique by\n[lem-pur-frame-independence] and the sheaf property of\n$\\mathcal H^0$). There is a canonical isomorphism\n\n$$\n\\operatorname{cl}_i:\\Lambda_Z\\xrightarrow{\\ \\sim\\ }Ri^!\\Lambda_X(c)[2c],\n\\qquad 1\\longmapsto[Z\\subset X],\n$$\n\nequivalently (cancelling the invertible twist) a canonical\nisomorphism $Ri^!\\Lambda_X\\xrightarrow{\\sim}\\Lambda_Z(-c)[-2c]$,\nthe inverse of $\\operatorname{cl}_i(-c)[-2c]$. It is compatible with\netale base change and with exterior products.",
-    "proof": [
-      {
-        "text": "Cancellation of the Tate factor uses the invertibility and twist identifications of [def-coefficient-twists-detailed].\nStep 1: the $\\omega$-identification. Work on each open-and-closed\nconnected component of $X$; the resulting isomorphisms assemble\nover their disjoint union. By\n[lem-pur-regular-immersion-smooth-structure], $a_X$ and $a_Z$\nare smooth of dimensions $n$ and $m=n-c$, and\n$a_Z=a_X\\circ i$. The composition law for the exceptional inverse\nimage ([def-weil-exceptional-inverse-image]) gives\n\n$$\n\\omega_{Z/k}=Ra_Z^!\\Lambda_k\n\\;\\cong\\;Ri^!\\bigl(Ra_X^!\\Lambda_k\\bigr)\n=Ri^!\\omega_{X/k},\n$$\n\nand by the smooth purity of the structure morphisms\n([thm-pur-diagonal-dualizing-object] applied to $a_X$ and\n$a_Z$),\n\n$$\n\\omega_{X/k}\\;\\cong\\;\\Lambda_X(n)[2n],\n\\qquad\n\\omega_{Z/k}\\;\\cong\\;\\Lambda_Z(m)[2m].\n$$",
-        "uses": [
-          "def-coefficient-twists-detailed",
-          "lem-pur-regular-immersion-smooth-structure",
-          "def-weil-exceptional-inverse-image",
-          "thm-pur-diagonal-dualizing-object"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 2: the co-projection removes the twist. By\n[lem-pur-immersion-twist] (with $K=\\Lambda_X$ and $m=n$),\n\n$$\nRi^!\\Lambda_X(n)[2n]\n\\;\\cong\\;\\bigl(Ri^!\\Lambda_X\\bigr)\\otimes^L_{\\Lambda_Z}\\Lambda_Z(n)[2n].\n$$",
-        "uses": [
-          "lem-pur-immersion-twist"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Combined with Step 1 and the cancellation of the invertible\n$\\Lambda_Z(n)[2n]$ (in the monoid of invertible objects of\n[def-weil-derived-tensor]):\n\n$$\nRi^!\\Lambda_X\n\\;\\cong\\;\\Lambda_Z(m-n)[2m-2n]\n=\\Lambda_Z(-c)[-2c].\n$$",
-        "uses": [
-          "def-weil-derived-tensor"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 3: the class. Twisting the identification of Steps 1–2 by\n$(c)[2c]$ ([lem-pur-immersion-twist]) gives a canonical isomorphism\n$\\Phi:\\Lambda_Z\\xrightarrow{\\sim}Ri^!\\Lambda_X(c)[2c]$; in particular\n$Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree $0$ with $\\mathcal H^0$\nfree of rank one, and $H^0(Z,Ri^!\\Lambda_X(c)[2c])=H^{2c}_Z(X,\\Lambda(c))$\nsince $Ri_*Ri^!$ is the derived functor of sections with support in $Z$.\nIt carries the canonical generator of $\\Lambda_Z$ to a class\n$\\Phi(1)\\in H^{2c}_Z(X,\\Lambda(c))$; we show that $\\Phi(1)$ is the\nfundamental class $[Z\\subset X]$ glued from the frame classes of\n[def-pur-frame-class]. By\n[lem-pur-regular-immersion-linearization], etale-locally the pair\n$(X,Z)$ is the linear pair $(\\mathbf A^{c+m}_k,\\mathbf A^m_k)$; on\nthe model, the structure-morphism identifications of Step 1 are the\naffine-space purity comparisons of [cor-pur-affine-space-purity]\nfor the projections (the smooth purity map of a projection agrees with\nthe affine-space comparison by [lem-pur-projection-purity-agreement]),\nso $\\Phi$ for the linear immersion $i_0$ is the inverse of $Ri_0^!$ of\nthe affine-space comparison $\\gamma_{p,\\Lambda}$ for the projection\n$p$ with $p\\,i_0=\\operatorname{id}$, composed with\n$Ri_0^!Rp^!\\cong\\operatorname{id}$; by\n[cor-pur-affine-space-zero-section-purity] this is the zero-section\nisomorphism normalized by the product of the Kummer boundaries of the\ncoordinates, hence the composite identification carries $1$\nto the $c$-fold exterior product of the rank-one Kummer boundaries of\nthe coordinates, i.e. to the class\n$\\operatorname{cl}(f)=\\partial_1\\kappa(f_1)\\cup\\cdots\\cup\\partial_c\\kappa(f_c)$\nof the standard frame, by [lem-pur-kunneth-supported] and\n[lem-pur-frame-independence] (the frame class depends only on the\npair; the identification of Steps 1–2 is compatible with the\netale coordinate map $u:U\\to\\mathbf A^{c+m}_k$ and its restriction\n$u':V\\to\\mathbf A^m_k$ because $a_U=a_{\\mathbf A^{c+m}}\\circ u$ and\n$a_V=a_{\\mathbf A^m}\\circ u'$ with $u,u'$ etale, by the composition\ncompatibility [thm-pur-composition-coherence], while\n$Ri_V^!u^*=u'^*Ri_0^!$ for the linear immersion $i_0$; and\nKummer classes, boundaries and supported cup products commute with\n$u^*$, which carries the coordinates $x_j$ to the frame $f_j$). Hence\nthe two global classes agree: by Steps 1–2,\n$Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree $0$, so both are\nglobal sections of the single sheaf $\\mathcal H^0$, they agree on\nthe linear neighbourhoods, which cover $Z$, and sections of a sheaf\nagreeing on a cover agree. Since the identification of Steps 1–2 is\nan isomorphism, its value $\\Phi(1)=[Z\\subset X]$ at $1$ generates every\nstalk, and the identification is $\\operatorname{cl}_i$.",
-        "uses": [
-          "lem-pur-immersion-twist",
-          "def-pur-frame-class",
-          "lem-pur-regular-immersion-linearization",
-          "cor-pur-affine-space-purity",
-          "lem-pur-projection-purity-agreement",
-          "cor-pur-affine-space-zero-section-purity",
-          "lem-pur-kunneth-supported",
-          "lem-pur-frame-independence",
-          "thm-pur-composition-coherence"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 4: the compatibilities. The canonical identification is the\ncomposite of the smooth-purity identifications of the two structure\nmorphisms, the composition law for $(-)^!$, and the co-projection;\neach of these is compatible with etale base change and with the\nexterior-product (Künneth) structure by the corresponding\ncompatibilities of [thm-pur-diagonal-dualizing-object] and\n[lem-pur-kunneth-supported], and the class of Step 3 is\ncompatible with them by [lem-pur-frame-independence].",
-        "uses": [
-          "thm-pur-diagonal-dualizing-object",
-          "lem-pur-kunneth-supported",
-          "lem-pur-frame-independence"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Clause (c) of [sk-thm-regular] gives the isomorphism $\\operatorname{cl}_i:\\Lambda_Z\\xrightarrow{\\sim}Ri^!\\Lambda_X(c)[2c]$ whose value at $1$ is the class from Step 2. That clause also states the twist-cancelled form with its direction fixed: the inverse of $\\operatorname{cl}_i(-c)[-2c]$ is $Ri^!\\Lambda_X\\xrightarrow{\\sim}\\Lambda_Z(-c)[-2c]$. These are exactly the two isomorphisms asserted in the item, with the same normalization.",
+   "uses": [
+    "sk-thm-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/thm-pur-regular-immersion-purity.md",
+    "place": "displayed purity isomorphism and equivalent twist-cancelled form; unit clause (c)"
+   }
+  },
+  {
+   "text": "Apply clause (d) of [sk-thm-regular]. It identifies the class after any etale base change with the restriction of the original class, and identifies the class of a product pair with the exterior product of the two classes. The clause explicitly includes that the product pair is again a regular pair of codimension $c_1+c_2$. Since its isomorphism in clause (c) is the one just used in Step 3, these are the required etale and exterior-product compatibilities of $\\operatorname{cl}_i$ and its inverse twisted form. No choice of another generator or comparison map is involved.",
+   "uses": [
+    "sk-thm-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/thm-pur-regular-immersion-purity.md",
+    "place": "last sentence, etale base change and exterior products; unit clause (d)"
+   }
   }
+ ],
+ "proof_deps": [
+  "sk-thm-regular",
+  "def-pur-conventions",
+  "sk-def-purity-conv",
+  "def-pur-frame-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/thm-pur-regular-immersion-purity.md",
+  "place": "Statement, as an immediate consequence of the same-unit theorem sk-thm-regular clauses (a)-(d) in the current blueprint"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity|fundamentalClass|dualizingComplex|upperShriek",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned results concern algebraic morphisms or algebraic Kummer theory, not cohomological purity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute cohomological purity for regular closed immersions and finite etale coefficients with the Kummer fundamental class",
+   "results": "AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion; AlgebraicGeometry.IsClosedImmersion.casesOn; AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono; AlgebraicGeometry.IsClosedImmersion.recOn; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.IsFinite.instOfIsClosedImmersion",
+   "date": "2026-10-17",
+   "verdict": "no match: returned results concern algebraic morphisms or algebraic Kummer theory, not cohomological purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Smooth",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned results concern algebraic morphisms or algebraic Kummer theory, not cohomological purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Purity for a regular closed immersion between regular schemes over a perfect field: exceptional inverse image of the constant finite etale coefficient sheaf is the codimension Tate twist shifted by twice the codimension, normalized by the Kummer fundamental class",
+   "results": "AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage; AlgebraicGeometry.liftCoborder_app; AlgebraicGeometry.Scheme.Hom.ι_toNormalization; AlgebraicGeometry.Scheme.Hom.toImage_app; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul; Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.Scheme.Hom.liftCoborder",
+   "date": "2026-10-17",
+   "verdict": "no match: returned results concern algebraic morphisms or algebraic Kummer theory, not cohomological purity"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|cohomolog.*support|TateTwist|regular.*immersion",
+   "results": "Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/FieldTheory/KummerExtension.lean; Mathlib/FieldTheory/KummerExtension.lean; Mathlib/FieldTheory/KummerExtension.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned results concern algebraic morphisms or algebraic Kummer theory, not cohomological purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular closed embedding of codimension c in a smooth scheme, the etale cohomology complex with support of the constant torsion sheaf is a locally free rank one sheaf in degree 2c with Tate twist minus c",
+   "results": "Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.etaleLocus_eq_compl_support; Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero; Algebra.smoothLocus_eq_compl_support_inter; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; Algebra.basicOpen_subset_etaleLocus_iff; Algebra.basicOpen_subset_etaleLocus_iff_etale",
+   "date": "2026-10-17",
+   "verdict": "no match: returned results concern algebraic morphisms or algebraic Kummer theory, not cohomological purity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2034,
+ "blueprint_uses": [
+  "cor-pur-affine-space-purity",
+  "cor-pur-affine-space-zero-section-purity",
+  "lem-pur-projection-purity-agreement",
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-pur-frame-class",
+  "def-pur-regular-immersion",
+  "def-weil-derived-tensor",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-frame-independence",
+  "lem-pur-immersion-twist",
+  "lem-pur-kunneth-supported",
+  "lem-pur-regular-immersion-linearization",
+  "lem-pur-regular-immersion-smooth-structure",
+  "thm-pur-composition-coherence",
+  "thm-pur-diagonal-dualizing-object"
+ ],
+ "uses_not_cited": [
+  "def-pur-regular-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-regular",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of [def-pur-conventions],\nlet $i:Z\\hookrightarrow X$ be a\nregular closed immersion of pure\ncodimension $c$, with $X$ smooth over the perfect field $k$ and\n$Z$ regular. Then $Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree\n$0$, with $\\mathcal H^0$ free of rank one, so that\n$H^0(Z,Ri^!\\Lambda_X(c)[2c])=H^{2c}_Z(X,\\Lambda(c))$. The\n*fundamental class*\n$[Z\\subset X]\\in H^{2c}_Z(X,\\Lambda(c))$ is the global class whose\nrestriction to every frame $(U,f)$ of [def-pur-frame-class] is\n$\\operatorname{cl}(f)$ (it exists and is unique by\n[lem-pur-frame-independence] and the sheaf property of\n$\\mathcal H^0$). There is a canonical isomorphism\n\n$$\n\\operatorname{cl}_i:\\Lambda_Z\\xrightarrow{\\ \\sim\\ }Ri^!\\Lambda_X(c)[2c],\n\\qquad 1\\longmapsto[Z\\subset X],\n$$\n\nequivalently (cancelling the invertible twist) a canonical\nisomorphism $Ri^!\\Lambda_X\\xrightarrow{\\sim}\\Lambda_Z(-c)[-2c]$,\nthe inverse of $\\operatorname{cl}_i(-c)[-2c]$. It is compatible with\netale base change and with exterior products.",
+  "proof": [
+   {
+    "text": "Cancellation of the Tate factor uses the invertibility and twist identifications of [def-coefficient-twists-detailed].\nStep 1: the $\\omega$-identification. Work on each open-and-closed\nconnected component of $X$; the resulting isomorphisms assemble\nover their disjoint union. By\n[lem-pur-regular-immersion-smooth-structure], $a_X$ and $a_Z$\nare smooth of dimensions $n$ and $m=n-c$, and\n$a_Z=a_X\\circ i$. The composition law for the exceptional inverse\nimage ([def-weil-exceptional-inverse-image]) gives\n\n$$\n\\omega_{Z/k}=Ra_Z^!\\Lambda_k\n\\;\\cong\\;Ri^!\\bigl(Ra_X^!\\Lambda_k\\bigr)\n=Ri^!\\omega_{X/k},\n$$\n\nand by the smooth purity of the structure morphisms\n([thm-pur-diagonal-dualizing-object] applied to $a_X$ and\n$a_Z$),\n\n$$\n\\omega_{X/k}\\;\\cong\\;\\Lambda_X(n)[2n],\n\\qquad\n\\omega_{Z/k}\\;\\cong\\;\\Lambda_Z(m)[2m].\n$$",
+    "uses": [
+     "def-coefficient-twists-detailed",
+     "lem-pur-regular-immersion-smooth-structure",
+     "def-weil-exceptional-inverse-image",
+     "thm-pur-diagonal-dualizing-object"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 2: the co-projection removes the twist. By\n[lem-pur-immersion-twist] (with $K=\\Lambda_X$ and $m=n$),\n\n$$\nRi^!\\Lambda_X(n)[2n]\n\\;\\cong\\;\\bigl(Ri^!\\Lambda_X\\bigr)\\otimes^L_{\\Lambda_Z}\\Lambda_Z(n)[2n].\n$$",
+    "uses": [
+     "lem-pur-immersion-twist"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Combined with Step 1 and the cancellation of the invertible\n$\\Lambda_Z(n)[2n]$ (in the monoid of invertible objects of\n[def-weil-derived-tensor]):\n\n$$\nRi^!\\Lambda_X\n\\;\\cong\\;\\Lambda_Z(m-n)[2m-2n]\n=\\Lambda_Z(-c)[-2c].\n$$",
+    "uses": [
+     "def-weil-derived-tensor"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 3: the class. Twisting the identification of Steps 1–2 by\n$(c)[2c]$ ([lem-pur-immersion-twist]) gives a canonical isomorphism\n$\\Phi:\\Lambda_Z\\xrightarrow{\\sim}Ri^!\\Lambda_X(c)[2c]$; in particular\n$Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree $0$ with $\\mathcal H^0$\nfree of rank one, and $H^0(Z,Ri^!\\Lambda_X(c)[2c])=H^{2c}_Z(X,\\Lambda(c))$\nsince $Ri_*Ri^!$ is the derived functor of sections with support in $Z$.\nIt carries the canonical generator of $\\Lambda_Z$ to a class\n$\\Phi(1)\\in H^{2c}_Z(X,\\Lambda(c))$; we show that $\\Phi(1)$ is the\nfundamental class $[Z\\subset X]$ glued from the frame classes of\n[def-pur-frame-class]. By\n[lem-pur-regular-immersion-linearization], etale-locally the pair\n$(X,Z)$ is the linear pair $(\\mathbf A^{c+m}_k,\\mathbf A^m_k)$; on\nthe model, the structure-morphism identifications of Step 1 are the\naffine-space purity comparisons of [cor-pur-affine-space-purity]\nfor the projections (the smooth purity map of a projection agrees with\nthe affine-space comparison by [lem-pur-projection-purity-agreement]),\nso $\\Phi$ for the linear immersion $i_0$ is the inverse of $Ri_0^!$ of\nthe affine-space comparison $\\gamma_{p,\\Lambda}$ for the projection\n$p$ with $p\\,i_0=\\operatorname{id}$, composed with\n$Ri_0^!Rp^!\\cong\\operatorname{id}$; by\n[cor-pur-affine-space-zero-section-purity] this is the zero-section\nisomorphism normalized by the product of the Kummer boundaries of the\ncoordinates, hence the composite identification carries $1$\nto the $c$-fold exterior product of the rank-one Kummer boundaries of\nthe coordinates, i.e. to the class\n$\\operatorname{cl}(f)=\\partial_1\\kappa(f_1)\\cup\\cdots\\cup\\partial_c\\kappa(f_c)$\nof the standard frame, by [lem-pur-kunneth-supported] and\n[lem-pur-frame-independence] (the frame class depends only on the\npair; the identification of Steps 1–2 is compatible with the\netale coordinate map $u:U\\to\\mathbf A^{c+m}_k$ and its restriction\n$u':V\\to\\mathbf A^m_k$ because $a_U=a_{\\mathbf A^{c+m}}\\circ u$ and\n$a_V=a_{\\mathbf A^m}\\circ u'$ with $u,u'$ etale, by the composition\ncompatibility [thm-pur-composition-coherence], while\n$Ri_V^!u^*=u'^*Ri_0^!$ for the linear immersion $i_0$; and\nKummer classes, boundaries and supported cup products commute with\n$u^*$, which carries the coordinates $x_j$ to the frame $f_j$). Hence\nthe two global classes agree: by Steps 1–2,\n$Ri^!\\Lambda_X(c)[2c]$ is concentrated in degree $0$, so both are\nglobal sections of the single sheaf $\\mathcal H^0$, they agree on\nthe linear neighbourhoods, which cover $Z$, and sections of a sheaf\nagreeing on a cover agree. Since the identification of Steps 1–2 is\nan isomorphism, its value $\\Phi(1)=[Z\\subset X]$ at $1$ generates every\nstalk, and the identification is $\\operatorname{cl}_i$.",
+    "uses": [
+     "lem-pur-immersion-twist",
+     "def-pur-frame-class",
+     "lem-pur-regular-immersion-linearization",
+     "cor-pur-affine-space-purity",
+     "lem-pur-projection-purity-agreement",
+     "cor-pur-affine-space-zero-section-purity",
+     "lem-pur-kunneth-supported",
+     "lem-pur-frame-independence",
+     "thm-pur-composition-coherence"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 4: the compatibilities. The canonical identification is the\ncomposite of the smooth-purity identifications of the two structure\nmorphisms, the composition law for $(-)^!$, and the co-projection;\neach of these is compatible with etale base change and with the\nexterior-product (Künneth) structure by the corresponding\ncompatibilities of [thm-pur-diagonal-dualizing-object] and\n[lem-pur-kunneth-supported], and the class of Step 3 is\ncompatible with them by [lem-pur-frame-independence].",
+    "uses": [
+     "thm-pur-diagonal-dualizing-object",
+     "lem-pur-kunneth-supported",
+     "lem-pur-frame-independence"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-pur-regular-immersion-purity",
+  "worker": "stage1",
+  "summary": "Reused the existing same-unit theorem sk-thm-regular clause by clause after comparing its entire statement, coefficient conventions and frame normalization. No new nodes; the duplicate blueprint relationship is recorded. Removed unused statement and proof dependencies, replacing the c>=1-only regular-immersion definition by the unit convention that includes c=0. Item statement text unchanged. Lean declarations are sorried and not attachments.",
+  "blueprint": "Current detailed theorem concentration, class, canonical isomorphism and final compatibilities are clauses (a)-(d) of the unit theorem. Its existing proof realizes the dualizing-object, twist cancellation, frame gluing, affine normalization and compatibility route; this duplicate does not introduce a second route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q99-d092ee331",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q99-d092ee331 (reviewer sub-agent of L); spot-checked: Read the item, report, unit/chapter route, cited DAG statements, and current/master blueprint sources. The item exactly duplicates sk-thm-regular; all hypotheses, coefficient conventions, Kummer normalization, twist-cancelled morphism direction, and étale/product compatibilities check out. Edge cases and Mathlib searches were reviewed; no new nodes, route violations, cycles, or repairable faults. Wrote review.md."
+ }
 }

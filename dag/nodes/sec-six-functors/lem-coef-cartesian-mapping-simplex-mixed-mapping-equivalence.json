@@ -4,11 +4,66 @@
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "HTT Proposition 3.2.2.10, proof, bottom horizontal arrow in the displayed mixed-mapping square (printed p. 184); Proposition 2.4.4.3 and the coherent-nerve comparison explain that assertion. No Stacks tag states this simplicial result."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check that the mapping-space criteria apply. The standard simplex $\\Delta^n$ is a quasicategory directly from its monotone-map description: an inner horn $\\Lambda_i^m\\to\\Delta^n$ specifies vertices $v_0,\\ldots,v_m$. Every consecutive edge lies in the horn, so $v_0\\leq\\cdots\\leq v_m$. This sequence defines a simplex of $\\Delta^n$, and its restrictions agree with the given horn, since a simplex of $\\Delta^n$ is determined by its ordered vertices. By the relative marked-anodyne calculus, a cartesian fibration over a quasicategory has quasicategorical total space. Thus $Y$ and $\\Delta^n$ are quasicategories, and $p$ is an inner fibration by the definition of cartesian fibration. Put $u=p(z)$, $v=p(a)$ and $w=p(b)$. The hypotheses and the image of the edge $e$ give $u\\leq v\\leq w$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Standard simplex definition, Section 1.1.2; cartesian fibrations over quasicategories, Section 2.4.2 and Remark 3.1.1.10. The inner-horn verification is written out here."
+   }
+  },
+  {
+   "text": "Compute the two base mapping spaces in the right-pinched convention. For vertices $i\\leq j$ of $\\Delta^n$, an $m$-simplex of $\\operatorname{Map}_{\\Delta^n}(i,j)$ is a monotone map $[m+1]\\to[n]$ taking $0,\\ldots,m$ to $i$ and $m+1$ to $j$. There is exactly one such map in every degree, and all operators preserve it. Therefore this mapping simplicial set is canonically $\\Delta^0$. Applying this to $(u,v)$ and $(u,w)$, both spaces $\\operatorname{Map}_{\\Delta^n}(u,v)$ and $\\operatorname{Map}_{\\Delta^n}(u,w)$ are points. Postcomposition with $p(e)$ is the unique map between them.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3 specialized to a standard simplex; explicit calculation from the right-pinched mapping-space definition."
+   }
+  },
+  {
+   "text": "Apply the Cartesian mapping-space criterion to the inner fibration $p:Y\\to\\Delta^n$, its Cartesian edge $e:a\\to b$, and the vertex $z$. It gives a homotopy pullback square with upper row $e\\circ-:\\operatorname{Map}_Y(z,a)\\to\\operatorname{Map}_Y(z,b)$ and lower row $\\operatorname{Map}_{\\Delta^n}(u,v)\\to\\operatorname{Map}_{\\Delta^n}(u,w)$. By step 2 the lower row is the identity of the point. Write $B=\\operatorname{Map}_Y(z,b)$. The path-space homotopy fiber product in the criterion is consequently $B\\times_{\\Delta^0}\\operatorname{Fun}(\\Delta^1,\\Delta^0)\\times_{\\Delta^0}\\Delta^0$, canonically $B$: all coordinates except the $B$ coordinate are unique. Under this identification the comparison from the upper left corner is exactly $e\\circ-$. Its weak homotopy equivalence is precisely the assertion that this square is a homotopy pullback. Hence postcomposition by $e$ is a weak homotopy equivalence on the right-pinched mapping spaces.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, printed p. 131, Cartesian mapping-square criterion; the reduction of its path-space pullback over points is written out."
+   }
+  },
+  {
+   "text": "Apply the postcomposition clause of the rigidification comparison with $S=Y$, $h=e$, and its source vertex $w=z$ (the letter $w$ in that comparison is independent of the base vertex named in step 1). Its hypotheses hold by step 1, and step 3 supplies the required weak equivalence on quasicategorical mapping spaces. Its conclusion is that the actual simplicial composition map $[e]\\circ-:\\mathfrak C[Y](z,a)\\to\\mathfrak C[Y](z,b)$ is a weak homotopy equivalence. This is the specified map in the statement, including its particular edge vertex; the cited comparison requires no Kan condition on the coherent realization mapping sets.",
+   "uses": [
+    "lem-coef-rigidification-postcomposition-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.4.1 and the composition comparison of Theorem 2.2.5.1, as isolated by lem-coef-rigidification-postcomposition-comparison; this supplies the bottom horizontal arrow in Proposition 3.2.2.10, printed p. 184."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "lem-coef-infinity-cartesian-mapping-criterion",
+  "lem-coef-rigidification-postcomposition-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Explicit expansion of the relative Cartesian foundation supporting proof paragraph 2, through step 12 of lem-coef-cartesian-base-equivalence-invariance. Online HTT Propositions 2.4.4.3, 2.2.4.1 and 3.2.2.10 were read; an archival copy in literature/ remains WANTED."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-base-equivalence-invariance",
@@ -102,6 +157,34 @@
    "results": "{\"t\": \"2026-10-17T09:22:22Z\", \"tool\": \"leansearch\", \"query\": \"In a Cartesian fibration over a standard simplex postcomposition with a Cartesian edge induces a weak equivalence on coherent realization mapping sets from vertices lying before its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.IsFibered.comp\", \"HasFibers.inducedMap\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"CategoryTheory.Functor.IsFibered.mk\", \"SimplexCategory.toTop\", \"CategoryTheory.Functor.IsCartesian.map.congr_simp\"], \"digest\": \"5e3ffa2c9f1f7237\"}",
    "date": "2026-10-17",
    "verdict": "no match: listed hits concern unmarked Kan fibrations, ordinary fibered categories, horns, or generic pushouts, not this marked or coherent Cartesian assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*realization|cartesian.*edge|cartesian.*mapping",
+   "results": "{\"t\": \"2026-10-17T12:49:06Z\", \"tool\": \"grep\", \"query\": \"coherent.*realization|cartesian.*edge|cartesian.*mapping\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Cartesian morphism over the nerve of a partially ordered set induces a homotopy equivalence on mapping spaces from any object over an earlier vertex",
+   "results": "{\"t\": \"2026-10-17T12:49:06Z\", \"tool\": \"leansearch\", \"query\": \"A Cartesian morphism over the nerve of a partially ordered set induces a homotopy equivalence on mapping spaces from any object over an earlier vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.Functor.IsCartesian.toIsHomLift\", \"CategoryTheory.SimplicialThickening.orderHom\", \"HasFibers.inducedMap\", \"CategoryTheory.Functor.IsCartesian.map\", \"CategoryTheory.nerve.homEquiv_apply\", \"CategoryTheory.Functor.IsCartesian.map.congr_simp\"], \"digest\": \"1449297e20b62ada\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary-category Cartesian lifts, ordinary nerves, quasicategory horn filling, or unmarked Kan fibrations, not postcomposition on coherent realization mapping sets along a Cartesian edge"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Cartesian\"",
+   "results": "{\"t\": \"2026-10-17T12:49:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Cartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by a Cartesian edge in a quasicategory over an ordered simplex is a weak equivalence on coherent realization mapping spaces from earlier vertices",
+   "results": "{\"t\": \"2026-10-17T12:49:17Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition by a Cartesian edge in a quasicategory over an ordered simplex is a weak equivalence on coherent realization mapping spaces from earlier vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"SSet.IsStrictSegal\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.quasicategory_of_filler\", \"SSet.Edge.CompStruct.map\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"20c53eda080472a6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary-category Cartesian lifts, ordinary nerves, quasicategory horn filling, or unmarked Kan fibrations, not postcomposition on coherent realization mapping sets along a Cartesian edge"
   }
  ],
  "blueprint": {
@@ -123,5 +206,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-mapping-simplex-mixed-mapping-equivalence",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing Cartesian mapping-square criterion and rigidification postcomposition comparison; computed the two right-pinched mapping spaces in the ordered base simplex degreewise. Checked inner-fibration and quasicategory hypotheses, empty mapping spaces, vertical and degenerate Cartesian edges, source compatibility, and lack of cycles. No new nodes or Mathlib leaves.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived mapping adjunction; relative Cartesian foundation in step 12 of lem-coef-cartesian-base-equivalence-invariance. Steps 1-3 justify its Cartesian mixed-mapping assertion, and step 4 identifies the actual coherent composition map. The main-20261015 ancestor is under sk-thm-sf-package and has the same statement, with no proof text; the inherited historical ancestry and unit metadata are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q23-f5de88adf",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-f5de88adf (reviewer sub-agent of L); spot-checked: Read all required project documents, the item, cited nodes, unit/chapter route, blueprint sources, and HTT at Propositions 2.4.4.3, 2.2.4.1, 3.2.2.10, and 3.2.2.11. Verified all four proof steps, mapping-space calculation, Cartesian orientation, coherent composition map, edge cases including empty spaces and n=1, dependency/search records, duplicate absence, route, and SGA restriction. Wrote review.md. No repairs needed."
  }
 }

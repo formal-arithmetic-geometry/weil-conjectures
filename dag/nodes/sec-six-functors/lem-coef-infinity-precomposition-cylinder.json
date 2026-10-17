@@ -10,9 +10,60 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Fun}(K,\\mathcal C)$. By [def-cbc-enhanced-diagrams-cones], an $n$-simplex of $D\\times\\Delta^1$ is a pair $(f,t)$ with $f:K\\times\\Delta^n\\to\\mathcal C$ simplicial and $t:[n]\\to[1]$ weakly increasing. Define a map $g_t:K\\times\\Delta^n\\to K\\times\\Delta^n$ in degree $r$ by\n$$g_t(k,a)=(\\eta_r(k,t\\circ a),a),\\qquad k\\in K_r,\\ a:[r]\\to[n].$$\nFor $\\beta:[s]\\to[r]$, simpliciality of $\\eta$ gives\n$$K(\\beta)\\eta_r(k,t a)=\\eta_s(K(\\beta)k,t a\\beta).$$\nThus applying the operator $\\beta$ before or after $g_t$ gives the same pair, so $g_t$ is simplicial. Set $H_{\\eta,n}(f,t)=f\\circ g_t$, an $n$-simplex of $D$. This uses only the degreewise product and functor definitions in the cited node.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0060",
+    "place": "Construction 1.5.3.1, internal functor simplicial set; explicit degreewise precomposition calculation. Online source read 2026-10-17; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $\\alpha:[m]\\to[n]$, write $A_\\alpha=\\mathrm{id}_K\\times\\Delta(\\alpha)$. The operator on the source of $H_\\eta$ sends $(f,t)$ to $(f A_\\alpha,t\\alpha)$, by [def-cbc-enhanced-diagrams-cones]. On a degree-$r$ pair $(k,a)$, with $a:[r]\\to[m]$, both $A_\\alpha g_{t\\alpha}$ and $g_t A_\\alpha$ give\n$$(\\eta_r(k,t\\alpha a),\\alpha a).$$\nConsequently $H_{\\eta,m}(f A_\\alpha,t\\alpha)=f A_\\alpha g_{t\\alpha}=f g_t A_\\alpha=H_{\\eta,n}(f,t)A_\\alpha$. This proves compatibility with every simplicial operator, including faces and degeneracies, so the degreewise functions define the required simplicial map $H_\\eta$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0060",
+    "place": "Construction 1.5.3.1, internal functor simplicial set; explicit degreewise precomposition calculation. Online source read 2026-10-17; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $t$ be the constant $n$-simplex at $0$ or $1$. The endpoint hypotheses on $\\eta$ give $g_t=u\\times\\mathrm{id}_{\\Delta^n}$ or $g_t=v\\times\\mathrm{id}_{\\Delta^n}$, respectively, by the formula of step 1. Hence the restrictions of $H_\\eta$ are precisely precomposition by $u$ and $v$ on all simplices of the functor simplicial set of [def-cbc-enhanced-diagrams-cones]. In particular, for a vertex $F:K\\to\\mathcal C$, its track is the edge represented by $F\\eta:K\\times\\Delta^1\\to\\mathcal C$: at a degree-$r$ pair $(k,a)$ it takes the value $F_r(\\eta_r(k,a))$. This identifies the construction with the displayed evaluation/composition formula.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0060",
+    "place": "Construction 1.5.3.1, internal functor simplicial set; explicit degreewise precomposition calculation. Online source read 2026-10-17; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For a simplicial map $q:\\mathcal C\\to\\mathcal C'$, postcomposition gives the simplicial map $q_*:D\\to\\operatorname{Fun}(K,\\mathcal C')$: it takes $f$ to $qf$ and commutes with every parameter restriction by associativity, using the functor operators of [def-cbc-enhanced-diagrams-cones]. For every $(f,t)$,\n$$q_*H^{\\mathcal C}_{\\eta,n}(f,t)=q(fg_t)=(qf)g_t=H^{\\mathcal C'}_{\\eta,n}(q_*f,t).$$\nThus $q_*H^{\\mathcal C}_\\eta=H^{\\mathcal C'}_\\eta(q_*\\times\\mathrm{id}_{\\Delta^1})$, which is the asserted target naturality. No horn filling, equivalence-edge criterion or fibrancy assertion enters this calculation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0060",
+    "place": "Construction 1.5.3.1, internal functor simplicial set; explicit degreewise precomposition calculation. Online source read 2026-10-17; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Auxiliary coherent-diagram calculus for the exceptional-adjoint construction; explicit degreewise argument using the functor definition, consistent with Kerodon 0060 (online; archival copy WANTED)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +127,73 @@
    "results": "{\"t\": \"2026-10-17T08:47:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.uliftFunctor\", \"SSet.Truncated.uliftFunctor\", \"SSet.opFunctor\", \"SSet.opEquivalence_functor\", \"SSet.opFunctorCompOpFunctorIso\", \"SSet.opFunctor_map\", \"SSet.opFunctorCompOpFunctorIso_hom_app_app_hom_apply\", \"SSet.opFunctorCompOpFunctorIso_inv_app_app_hom_apply\"], \"digest\": \"f01073969ad575c3\"}",
    "date": "2026-10-17",
    "verdict": "no match: logged hits concern ordinary categorical whiskering, model-category cylinders, strict Segal cores, truncated edge homotopies, or simplex products; none states the indicated internal-functor cylinder assertion or its core restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "precomp|ihom|internalHom|exp",
+   "results": "{\"t\": \"2026-10-17T11:55:33Z\", \"tool\": \"grep\", \"query\": \"precomp|ihom|internalHom|exp\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonempty.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\"], \"digest\": \"d227786532d062a1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial homotopy of maps of K induces a simplicial homotopy on the mapping simplicial set from K to C by precomposition",
+   "results": "{\"t\": \"2026-10-17T11:55:33Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial homotopy of maps of K induces a simplicial homotopy on the mapping simplicial set from K to C by precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.Homotopy.precomp\", \"ContinuousMap.Homotopy.compContinuousMap\", \"SSet.RelativeMorphism.Homotopy.precomp_h\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.precomp\", \"HomotopicalAlgebra.RightHomotopyClass.precomp\", \"HomotopicalAlgebra.PathObject.RightHomotopy.precomp\", \"SSet.RelativeMorphism.precomp_homotopyClass\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp\"], \"digest\": \"14cadbf40cdb4af1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, ihom",
+   "results": "{\"t\": \"2026-10-17T11:55:33Z\", \"tool\": \"loogle\", \"query\": \"SSet, ihom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ihom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: Loogle rejected the unqualified identifier ihom; other searches used instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simplicial homotopy eta from u to v on K, construct a simplicial homotopy between precomposition maps on the mapping simplicial set C power K",
+   "results": "{\"t\": \"2026-10-17T11:55:34Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial homotopy eta from u to v on K, construct a simplicial homotopy between precomposition maps on the mapping simplicial set C power K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.Homotopy.precomp_h\", \"SSet.RelativeMorphism.Homotopy.precomp\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.precomp\", \"SSet.RelativeMorphism.HomotopyClass.precomp\", \"SSet.RelativeMorphism.precomp_homotopyClass\", \"HomotopicalAlgebra.PathObject.RightHomotopy.precomp\", \"SSet.RelativeMorphism.Homotopy.postcomp\", \"HomotopicalAlgebra.LeftHomotopyRel.precomp\"], \"digest\": \"0788fc2e50bec465\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "expMap|precomp|map.*homotopy|homotopy.*map",
+   "results": "{\"t\": \"2026-10-17T11:56:15Z\", \"tool\": \"grep\", \"query\": \"expMap|precomp|map.*homotopy|homotopy.*map\", \"sub\": \"CategoryTheory/Closed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: wrong subdirectory; corrected search in CategoryTheory/Monoidal/Closed below"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory\", \"exp\"",
+   "results": "{\"t\": \"2026-10-17T11:56:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory\\\", \\\"exp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib.Tactic.CategoryTheory.Map.mapExpr\", \"Mathlib.Tactic.CategoryTheory.Map.mapExprHom\", \"CategoryTheory.OfNotation.explicitArgs?\", \"Mathlib.Tactic.CategoryTheory.ToApp.toAppExpr\", \"Mathlib.Tactic.CategoryTheory.ToApp.toCatExpr\", \"Mathlib.Tactic.CategoryTheory.ToApp.toNatTransExpr\", \"CategoryTheory.CartesianClosed.delabFunctorObjExp\", \"CategoryTheory.Functor.mapCochainComplexPlus\"], \"digest\": \"88bdd5bef1fbb297\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian closed category, a map K times I to K induces an action of I on the exponential C power K via evaluation and currying",
+   "results": "{\"t\": \"2026-10-17T11:56:17Z\", \"tool\": \"leanfinder\", \"query\": \"In a cartesian closed category, a map K times I to K induces an action of I on the exponential C power K via evaluation and currying\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianClosed.curry\", \"CategoryTheory.exp.ev\", \"CategoryTheory.CartesianClosed.uncurry\", \"CategoryTheory.internalizeHom\", \"CategoryTheory.CartesianClosed.uncurry_eq\", \"CategoryTheory.MonoidalClosed.curry\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.exp\"], \"digest\": \"94779a8027f05430\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic currying and evaluation are ingredients, not this parameterized simplicial cylinder with endpoint and naturality clauses; comparison to the concrete functor object also requires proof"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom|exp|Closed|curry",
+   "results": "{\"t\": \"2026-10-17T11:58:22Z\", \"tool\": \"grep\", \"query\": \"ihom|exp|Closed|curry\", \"sub\": \"AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"12\", \"27\"], \"digest\": \"05c61fd3cf274d34\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def curry|def uncurry|def pre|precomp|def exp|expMap",
+   "results": "{\"t\": \"2026-10-17T12:00:43Z\", \"tool\": \"grep\", \"query\": \"def curry|def uncurry|def pre|precomp|def exp|expMap\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"8ec675ae417fe04f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: curry, uncurry and pre are generic internal-Hom ingredients; none gives the whole asserted cylinder on the concretely defined functor simplicial set"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-equivalence-section-restriction",
@@ -108,5 +222,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-precomposition-cylinder",
+  "worker": "stage1",
+  "group": "Q67",
+  "summary": "Direct construction on all simplices, with operator, endpoint, vertex-track and target-naturality calculations. Only the existing concrete functor/product definition is used; no new nodes. Checked project Lean and logged semantic, Loogle and source searches. Statement unchanged; title aligned with its actual homotopy hypothesis.",
+  "blueprint": "Auxiliary coherent section-space input in paragraph 2 of prop-coef-integral-exceptional-adjoint, through lem-coef-infinity-equivalence-section-restriction: the whiskering cylinder needed for restriction composites. This supplies only the simplicial cylinder; the separate core-cylinder restriction node handles invertibility."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q67-7df571ae7",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-7df571ae7 (reviewer sub-agent of L); spot-checked: Read and checked the complete item, all four steps, cited definition, Kerodon 0060, unit/chapter route and master target sources. Coordinate proof and endpoint/naturality equations are valid; 200,784 finite operator checks passed. No new nodes, missing citations or circular dependencies. review.md records the checks and a nonblocking stale title/report discrepancy."
  }
 }

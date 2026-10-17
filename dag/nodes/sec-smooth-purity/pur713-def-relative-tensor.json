@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "pur713-def-relative-tensor",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-sfb-modobj-relative-tensor"
+  ]
  },
  "kind": "definition",
  "title": "Relative tensor product of module objects",
@@ -12,13 +14,41 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-relative-tensor.md",
   "place": "node pur713-def-relative-tensor, order 2478"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "pur713-def-ring-object",
+  "pur713-def-modules",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-modobj-relative-tensor"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorObj|TensorBimod|tensorProduct",
+   "results": "OK 25 hits; candidates: Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Discrete.lean, Mathlib/CategoryTheory/Monoidal/Discrete.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean. Read pinned Mathlib CategoryTheory/Monoidal/Bimod.lean:187–245, CategoryTheory/Monoidal/Mod.lean:1–90 and Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:1–130. Bimod.TensorBimod.X is the underlying bimodule coequalizer and tensorBimod supplies bimodule actions; passing from left internal modules over a commutative ring to compatible bimodules and identifying the induced actions still requires the existing general DAG construction. Presheaf tensors are not the sheaf/internal-module construction.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete sheaf internal-module definition; reuse def-sfb-modobj-relative-tensor",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative tensor product of internal module objects over a commutative ring object in sheaves of abelian groups defined by balanced coequalizer",
+   "results": "OK 8 hits; candidates: Bimod.TensorBimod.X, PresheafOfModules.Monoidal.tensorObj_obj, LinearMap.tensorEqLocusBil, PresheafOfModules.Monoidal.tensorObj, TensorProduct, PiTensorProduct, IsLocalization.moduleLid, ModuleCat.MonoidalCategory.tensorObj_def. Read pinned Mathlib CategoryTheory/Monoidal/Bimod.lean:187–245, CategoryTheory/Monoidal/Mod.lean:1–90 and Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:1–130. Bimod.TensorBimod.X is the underlying bimodule coequalizer and tensorBimod supplies bimodule actions; passing from left internal modules over a commutative ring to compatible bimodules and identifying the induced actions still requires the existing general DAG construction. Presheaf tensors are not the sheaf/internal-module construction.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete sheaf internal-module definition; reuse def-sfb-modobj-relative-tensor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative tensor product of internal module objects over a commutative monoid object as a coequalizer",
+   "results": "OK 8 hits; candidates: Bimod.TensorBimod.X, Bimod.tensorBimod, ModuleCat.MonoidalCategory.tensorObj_def, PresheafOfModules.Monoidal.tensorObj, ModuleCat.MonoidalCategory.tensorObj, Bimod.TensorBimod.actRight, ModuleCat.MonoidalCategory.tensorObj_carrier, FGModuleCat.tensorObj_obj. Read pinned Mathlib CategoryTheory/Monoidal/Bimod.lean:187–245, CategoryTheory/Monoidal/Mod.lean:1–90 and Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:1–130. Bimod.TensorBimod.X is the underlying bimodule coequalizer and tensorBimod supplies bimodule actions; passing from left internal modules over a commutative ring to compatible bimodules and identifying the induced actions still requires the existing general DAG construction. Presheaf tensors are not the sheaf/internal-module construction.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete sheaf internal-module definition; reuse def-sfb-modobj-relative-tensor"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -40,5 +70,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-relative-tensor",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against the current main-20261015 blueprint and found no project Lean attachment. The sheaf-specific relative tensor is the direct specialization of the existing general internal-module relative tensor definition def-sfb-modobj-relative-tensor, with the sheafified abelian tensor and module/ring-object notions supplied by existing nodes. No new nodes are needed; the item is marked split with those statement dependencies and the existing general definition recorded as a same-as form. Maintainer review restored the missing Mathlib search records using fresh LeanSearch, LeanFinder and correctly rooted Mathlib grep searches. The general definition acts through M, whereas this item acts through N: the two agree by the balancing relation q((r m) tensor n) = q(m tensor (r n)), with commutativity ensuring that the action on N descends.",
+  "blueprint": "Realizes the complete definition paragraph of pur713-def-relative-tensor (order 2478): the balancing coequalizer maps, the induced R-action through N, and its agreement with the action through M by commutativity. The general node def-sfb-modobj-relative-tensor supplies the same construction in a braided monoidal category, specialized here to Sh(X_Proet, Ab)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q48-88a2bb519",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-88a2bb519 (reviewer sub-agent of L); spot-checked: Read the complete item, report, four dependency statements and cited sources, and unit/chapter route. The balancing coequalizer and induced actions are correct, including zero and nonflat cases. Restored missing Mathlib search records using three successful searches. Clarified that the generic dependency acts through M, with balancing identifying the N-action. Corrected JSON is under fixes/dag/nodes; full checks are in review.md. No new nodes, target changes, SGA citations, or accepted tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }

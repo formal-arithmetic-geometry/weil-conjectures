@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-real-semisimplification",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reality survives semisimplification",
@@ -13,40 +13,137 @@
   "place": "node lem-wf-real-semisimplification, order 2601"
  },
  "stmt_deps": [
-  "def-wf-monodromy-data"
+  "def-wf-monodromy-data",
+  "def-mg-weil-semisimplification",
+  "def-wf-iota-real"
  ],
  "proof": [
   {
-   "text": "Let $V$ be the global Weil representation from the monodromy datum\nof [def-wf-monodromy-data] and choose a composition\nseries $0=V_0\\subsetneq\\cdots\\subsetneq V_t=V$ as in\n[def-mg-weil-composition-series]. Under the lisse\nsheaf–representation correspondence, the $V_i$ give Weil-stable lisse\nsubsheaves $\\mathcal F_i$, and the semisimplification is\n$\\bigoplus_i\\mathcal F_i/\\mathcal F_{i-1}$ by\n[def-mg-weil-semisimplification]. At a closed point $x$, the local\nFrobenius of [def-weil-punctual-weights] acts through $\\rho(F_x)$ by [p-real-operations], so it preserves this filtration.\nIn a basis adapted to it, its matrix is upper block triangular, with\ndiagonal blocks the local Frobenius matrices on the quotients\n$\\mathcal F_i/\\mathcal F_{i-1}$. Therefore, by [p-linear-filtration],\n\n$$\n\\det(1-tF_x\\mid\\mathcal F_{\\bar x})\n=\\prod_i\\det(1-tF_x\\mid\n(\\mathcal F_i/\\mathcal F_{i-1})_{\\bar x}),\n$$\n\nwhich is exactly the characteristic polynomial of the direct-sum\nsemisimplification. Thus all local characteristic polynomials, and hence\n$\\iota$-reality in the sense of [def-wf-iota-real], are unchanged.",
+   "text": "Let $\\mathcal F$ be the given $\\iota$-real lisse Weil sheaf, and let $(V,\\rho)$ be its finite-dimensional Weil representation in [def-wf-monodromy-data]. If $V=0$, its semisimplification is the empty direct sum, again zero; both local determinant factors are $1$, so the conclusion holds. Hence assume $V\\ne0$. By [lem-mg-composition-series-exists], choose a composition series $0=V_0\\subsetneq\\cdots\\subsetneq V_t=V$. By [def-mg-weil-composition-series], each $V_i$ is Weil-stable and its successive quotient $Q_i=V_i/V_{i-1}$ is simple.",
    "uses": [
     "def-wf-monodromy-data",
-    "def-mg-weil-composition-series",
-    "def-mg-weil-semisimplification",
-    "def-weil-punctual-weights",
+    "lem-mg-composition-series-exists",
+    "def-mg-weil-composition-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-wf-real-semisimplification.proof.md",
+    "place": "Proof, composition filtration and local determinant calculation"
+   }
+  },
+  {
+   "text": "The exact tensor equivalence [prop-wf-weil-sheaf-representation-equivalence] identifies subobjects, quotients and subquotients on the sheaf and representation sides. Thus the inclusions $V_i\\subset V$ correspond to lisse Weil subsheaves $\\mathcal F_i\\subset\\mathcal F$, and $Q_i$ corresponds to $\\mathcal F_i/\\mathcal F_{i-1}$. By [def-mg-weil-semisimplification], $S=V^{\\mathrm{ss}}=\\bigoplus_{i=1}^t Q_i$. The sheaf corresponding to $S$ is $\\mathcal F^{\\mathrm{ss}}=\\bigoplus_{i=1}^t\\mathcal F_i/\\mathcal F_{i-1}$: the finite direct sum is the biproduct, hence is preserved by the equivalence. In particular this is a lisse Weil sheaf.",
+   "uses": [
+    "prop-wf-weil-sheaf-representation-equivalence",
+    "def-mg-weil-semisimplification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-wf-real-semisimplification.proof.md",
+    "place": "Proof, composition filtration and local determinant calculation"
+   }
+  },
+  {
+   "text": "Fix an arbitrary closed point $x$ and a local geometric Frobenius element $g_x$ in the Weil group. By [p-real-operations], $P_x(\\mathcal F,T)=\\det(1-T\\rho(g_x)\\mid V)$. Every $V_i$ is stable under $\\rho(g_x)$, since it is Weil-stable by [def-mg-weil-composition-series]. The induced action on $V_i/V_{i-1}$ is exactly $Q_i(g_x)$ by the quotient representation. For the current statement of [p-linear-filtration], put $\\chi_h(U)=\\det(U-h)$. Iterating its invariant-subspace formula along the filtration gives $\\chi_{\\rho(g_x)}(U)=\\prod_i\\chi_{Q_i(g_x)}(U)$. In the Laurent polynomial ring, $\\det(1-Th)=T^{\\dim M}\\chi_h(T^{-1})$ for an endomorphism $h$ of $M$. Since $\\dim V=\\sum_i\\dim Q_i$, substitution $U=T^{-1}$ and multiplication by $T^{\\dim V}$ give an equality in $\\overline{\\mathbf Q}_\\ell[T]$ (which injects into its Laurent polynomial ring). Thus\n$$P_x(\\mathcal F,T)=\\prod_{i=1}^t\\det(1-TQ_i(g_x)\\mid Q_i).$$",
+   "uses": [
     "p-real-operations",
+    "def-mg-weil-composition-series",
+    "p-linear-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-wf-real-semisimplification.proof.md",
+    "place": "Proof, composition filtration and local determinant calculation"
+   }
+  },
+  {
+   "text": "The semisimplification $S=\\bigoplus_i Q_i$ of [def-mg-weil-semisimplification] has the componentwise Weil action of [def-real-weil-representation-operations]. Its partial sums $S_j=\\bigoplus_{i=1}^j Q_i$ form a finite invariant filtration; the map $S_j\\to Q_j$ selecting the last coordinate has kernel $S_{j-1}$ and intertwines the Weil actions, so its graded action is $Q_j(g_x)$. Iterate [p-linear-filtration] on $S_\\bullet$ and use the reciprocal-polynomial identity from Step 3; applying [p-real-operations] to the corresponding sheaf gives\n$$P_x(\\mathcal F^{\\mathrm{ss}},T)=\\det(1-TS(g_x)\\mid S)=\\prod_{i=1}^t\\det(1-TQ_i(g_x)\\mid Q_i)=P_x(\\mathcal F,T).$$\nThis works for every choice of composition series and every closed point $x$.",
+   "uses": [
+    "def-mg-weil-semisimplification",
+    "def-real-weil-representation-operations",
     "p-linear-filtration",
+    "p-real-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-wf-real-semisimplification.proof.md",
+    "place": "Proof, composition filtration and local determinant calculation"
+   }
+  },
+  {
+   "text": "By [def-wf-iota-real], $\\iota$-reality means that every coefficient of $\\iota(P_x(\\mathcal F,T))$ is real for every closed point $x$. The equality of local polynomials in the preceding step gives the same coefficient condition for $\\mathcal F^{\\mathrm{ss}}$ at each $x$. Hence $\\mathcal F^{\\mathrm{ss}}$ is $\\iota$-real, with exactly the same local characteristic polynomials as $\\mathcal F$.",
+   "uses": [
     "def-wf-iota-real"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-wf-real-semisimplification.proof.md",
+    "place": "Proof, composition filtration and local determinant calculation"
+   }
   }
  ],
  "proof_deps": [
   "def-wf-monodromy-data",
+  "lem-mg-composition-series-exists",
   "def-mg-weil-composition-series",
+  "prop-wf-weil-sheaf-representation-equivalence",
   "def-mg-weil-semisimplification",
-  "def-weil-punctual-weights",
   "p-real-operations",
   "p-linear-filtration",
+  "def-real-weil-representation-operations",
   "def-wf-iota-real"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-wf-real-semisimplification.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-wf-real-semisimplification.proof.md",
+  "place": "Proof, composition filtration and local determinant calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semisimplification|iota.?real|WeilSheaf",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimplification of a representation preserves characteristic polynomials of group elements",
+   "results": "LinearEquiv.charpoly_conj, MulSemiringAction.smul_coeff_charpoly, FDRep.char_iso, Module.End.IsSemisimple.aeval, MulSemiringAction.smul_charpoly, MulSemiringAction.charpoly_eq_prod_smul, MulSemiringAction.charpoly_eq, MulSemiringAction.eval_charpoly",
+   "date": "2026-10-17",
+   "verdict": "no match: conjugation invariance and characters of isomorphic representations do not assert the semisimplification/sheaf result"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, \"semisimplification\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The semisimplification of a lisse Weil sheaf has the same local Frobenius characteristic polynomials and preserves iota reality",
+   "results": "WittVector.isocrystal_classification, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.IsocrystalEquiv.mk.inj, WittVector.Isocrystal.frob, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.toLinearEquiv, WittVector.IsocrystalEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are Witt-vector isocrystals, not lisse Weil sheaves or semisimplifications"
+  },
+  {
+   "tool": "grep",
+   "query": "charpoly.*(restrict|mapQ|prod)|charpoly_conj",
+   "results": "Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean, Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean, Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: LinearMap.charpoly_prodMap (ToMatrix.lean:63) and LinearEquiv.charpoly_conj (ToMatrix.lean:76) read; these only give linear algebra ingredients, not the lisse Weil sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional representation and the direct sum of its composition factors have equal characteristic polynomials at every group element",
+   "results": "FDRep.character, FDRep.char_one, FDRep.char_iso, FDRep.simple_iff_char_is_norm_one, MulSemiringAction.smul_charpoly, FDRep.char_conj, FDRep.char_linHom, FDRep.char_orthonormal",
+   "date": "2026-10-17",
+   "verdict": "no match: representation characters and invariant polynomials, not equality of characteristic factors of composition factors"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -74,5 +171,20 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-r-real-linear"
+ "unit": "sk-r-real-linear",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-real-semisimplification",
+  "worker": "stage1",
+  "summary": "Kept the statement; expanded the imported paragraph into five steps. Added the missing composition-series existence and exact sheaf-representation equivalence citations, used the existing filtration determinant theorem twice, and treated the zero representation separately. All ingredients already exist in the DAG; no new nodes. Searched project Lean and Mathlib without an exact attachment or Mathlib match.",
+  "blueprint": "Current main-20261015 proof: first sentence is Step 1, sheaf correspondence and definition of semisimplification are Step 2, local Frobenius and filtration determinant are Step 3, direct-sum determinant is Step 4, and final reality assertion is Step 5."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q32-eda82c5f0",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-eda82c5f0 (reviewer sub-agent of L); spot-checked: Read all five steps, nine cited statements, source passages, and unit/chapter route. Made the current determinant lemma’s iteration and reciprocal-polynomial conversion explicit in corrected JSON. Statement unchanged; zero, rank-one, nonsplit-extension and conjugate-eigenvalue cases checked. No new nodes or off-route tools. Full findings in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

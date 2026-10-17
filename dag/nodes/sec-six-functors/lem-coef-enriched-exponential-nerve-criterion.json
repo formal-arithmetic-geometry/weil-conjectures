@@ -12,9 +12,150 @@
   "def-coef-coherent-nerve-infrastructure",
   "def-coef-coherent-adjunction-data"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For enriched arrows $f:U\\to U'$ and $g:V\\to V'$ define $f\\times g$ as the unique inverse image of $(f\\pi_U,g\\pi_V)$ under the assumed product isomorphism with source $U\\times V$. More precisely this is a map $\\mathcal A(U,U')\\times\\mathcal A(V,V')\\to\\mathcal A(U\\times V,U'\\times V')$ of simplicial sets, obtained using the two projections and composition. Composing with either target projection checks $(f'\\times g')(f\\times g)=(f'f)\\times(g'g)$ and $1\\times1=1$; injectivity of the product isomorphism proves these equalities on whole mapping simplicial sets. Thus these chosen products give an enriched bifunctor with enriched natural projections. In degree $n$ the pair $(f,g)$ has one common $\\Delta^n$ parameter; every repeated occurrence is obtained by its diagonal. Faces and degeneracies commute with the construction because projection, composition and the inverse of a simplicial isomorphism do.",
+   "uses": [
+    "def-coef-coherent-nerve-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Condition (2); explicit enriched product action."
+   }
+  },
+  {
+   "text": "Write $\\Theta_{T,X,Y}(a)=e_{X,Y}(a\\times1_X)$ and $\\lambda_{T,X,Y}=\\Theta_{T,X,Y}^{-1}$. For a pair of enriched arrows $u:X'\\to X$, $v:Y\\to Y'$, put\n$$E(u,v)=\\lambda_{E(X,Y),X',Y'}\\bigl(v e_{X,Y}(1_{E(X,Y)}\\times u)\\bigr).$$\nThis defines a simplicial map $\\mathcal A(X',X)\\times\\mathcal A(Y,Y')\\to\\mathcal A(E(X,Y),E(X',Y'))$: first form the indicated composite using the product map of step 1, then apply the inverse simplicial isomorphism. Its defining equation is\n$$e_{X',Y'}(E(u,v)\\times1_{X'})=v e_{X,Y}(1\\times u).$$\nAll these equations are equalities of simplicial maps; no choice of a transpose is made separately in individual degrees.",
+   "uses": [
+    "def-coef-coherent-nerve-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Condition (3); construction of the enriched exponential action."
+   }
+  },
+  {
+   "text": "If $u':X''\\to X'$ and $v':Y'\\to Y''$, the twofold application of the last equation, followed by the product composition identity, gives\n$$e_{X'',Y''}((E(u',v')E(u,v))\\times1_{X''})=v'v e_{X,Y}(1\\times uu').$$\nThe right side also untransposes $E(uu',v'v)$. Injectivity of $\\Theta_{E(X,Y),X'',Y''}$ gives $E(u',v')E(u,v)=E(uu',v'v)$. Untransposing $E(1,1)$ gives $e_{X,Y}$, which also untransposes $1_{E(X,Y)}$; hence $E(1,1)=1$. This proves the enriched functor axioms for $E:\\mathcal A^{\\mathrm{op}}\\times\\mathcal A\\to\\mathcal A$. The defining equation in step 2 is the naturality equation in $Y$ and the dinaturality equation in the exponential variable $X$ for evaluation.",
+   "uses": [
+    "def-coef-coherent-nerve-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Condition (3); functoriality checked by untransposing."
+   }
+  },
+  {
+   "text": "For arbitrary enriched arrows $t:T'\\to T$, $u:X'\\to X$, $v:Y\\to Y'$ and $a:T\\to E(X,Y)$, the equations already proved give\n$$\\Theta_{T',X',Y'}(E(u,v)a t)=v\\,\\Theta_{T,X,Y}(a)\\,(t\\times u).$$\nIndeed substitute the defining equation of $E(u,v)$ into the left side and use $(1_{E(X,Y)}\\times u)(a t\\times1_{X'})=(a\\times1_X)(t\\times u)$ as maps $T'\\times X'\\to E(X,Y)\\times X$. Equivalently both sides are $v e_{X,Y}(a t\\times u)$. This equality is on the product of all four mapping simplicial sets, so it proves enriched naturality in all three variables, including simultaneous parameters. Inverting $\\Theta$ gives the same naturality for $\\lambda$.",
+   "uses": [
+    "def-coef-coherent-nerve-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Condition (3); naturality, including the shared simplicial parameter."
+   }
+  },
+  {
+   "text": "Fix $X$ and write $L(T)=T\\times X$, $R(Y)=E(X,Y)$. Put $\\eta_T=\\lambda_{T,X,LT}(1_{LT})$ and $\\epsilon_Y=e_{X,Y}$. Step 4 gives enriched naturality of $\\eta$ and $\\epsilon$. The equation $\\epsilon_{LT}L(\\eta_T)=1_{LT}$ is exactly the defining equation of $\\eta_T$. To check the other triangle, apply the injective map $\\Theta_{RY,X,Y}$. Naturality gives\n$$\\Theta_{RY,X,Y}(R(\\epsilon_Y)\\eta_{RY})=\\epsilon_Y\\Theta_{RY,X,LRY}(\\eta_{RY})=\\epsilon_Y=\\Theta_{RY,X,Y}(1_{RY}).$$\nThus $R(\\epsilon_Y)\\eta_{RY}=1_{RY}$. These are strict enriched natural transformation identities, not identities only after taking components.",
+   "uses": [
+    "def-coef-coherent-nerve-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Condition (3); enriched unit, counit and both triangle identities."
+   }
+  },
+  {
+   "text": "The definition of the nerve gives $N_{\\mathrm{hc}}(B\\times C)=N_{\\mathrm{hc}}B\\times N_{\\mathrm{hc}}C$: a functor from each coherent simplex to the product is precisely a pair of functors. For the discrete enriched ordinal $[k]$, an enriched simplex into it is uniquely its nondecreasing sequence of object images, so $N_{\\mathrm{hc}}[k]=\\Delta^k$. Reversing vertex order and each mapping subset identifies $N_{\\mathrm{hc}}(B^{\\mathrm{op}})$ with $(N_{\\mathrm{hc}}B)^{\\mathrm{op}}$. For an enriched natural transformation $\\alpha:F\\Rightarrow G:B\\to C$, define $H:B\\times[1]\\to C$ using $F,G$ on the same-end mapping complexes and $H(b,0;b',1)(h)=\\alpha_{b'}F(h)=G(h)\\alpha_b$ on the cross complexes. The naturality equality checks mixed compositions; the other compositions are those of $F,G$. Thus $N_{\\mathrm{hc}}H$ is an actual map $N_{\\mathrm{hc}}B\\times\\Delta^1\\to N_{\\mathrm{hc}}C$, with component $\\alpha_b$. For composable $\\alpha,\\beta$, use $B\\times[2]$ with cross maps $\\alpha$, $\\beta$, $\\beta\\alpha$; the same equality checks composition and gives a $2$-simplex in the internal functor simplicial set. This construction commutes with whiskering by its formula. Apply it to step 5: the two strict triangle identities give $2$-simplices with long edges the degenerate identities. These supply the required coherent unit, counit and triangle witnesses for $N_{\\mathrm{hc}}L,N_{\\mathrm{hc}}R$.",
+   "uses": [
+    "def-coef-coherent-nerve-infrastructure",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Explicit nerve and enriched-interval construction; coherence of the adjunction maps."
+   }
+  },
+  {
+   "text": "Set $D=N_{\\mathrm{hc}}\\mathcal A$. The locally Kan hypothesis and the coherent-nerve comparison give that $D$ is a quasicategory, together with the composition-compatible mapping-space comparisons. They identify $\\operatorname{Map}_D(T,1)$ with the point and identify the map induced by the chosen projections\n$$\\operatorname{Map}_D(T,U\\times V)\\longrightarrow\\operatorname{Map}_D(T,U)\\times\\operatorname{Map}_D(T,V)$$\nwith the assumed enriched product isomorphism, up to the stated natural equivalences. Therefore $1$ is terminal by the definition of terminal object. For the discrete shape of two points, its internal functor simplicial set is $D\\times D$, directly from its definition, and its mapping spaces are the twofold products. The mapping-space limit criterion of the cited cone-calculus node now makes the chosen projection cone a product cone. The coherent product functor is the nerve of the enriched product functor of step 1.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Conditions (1)-(2); mapping-space recognition of the terminal object and binary product."
+   }
+  },
+  {
+   "text": "Apply the adjunction-mapping-equivalence node to the two coherent functors and the actual triangle simplices of step 6 (their functor categories are quasicategories by the cone-calculus node). It supplies mutually inverse equivalences of the full mapping-space bifunctors in $T,Y$. In the orientation of the question the equivalence is\n$$\\operatorname{Map}_D(T,RY)\\longrightarrow\\operatorname{Map}_D(LT,Y),\\qquad a\\longmapsto\\epsilon_Y L(a).$$\nIts inverse is $b\\mapsto R(b)\\eta_T$. The nerve comparison preserves actual edges and enriched composition with its coherent homotopies. Consequently the displayed forward map is the image of $a\\mapsto e_{X,Y}(a\\times1_X)$, and the inverse is its transpose. In particular its counit component is the specified evaluation edge, not an unspecified equivalent evaluation.",
+   "uses": [
+    "lem-coef-infinity-adjunction-mapping-equivalence",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Condition (3); full coherent mapping-space adjunction and its prescribed formula."
+   }
+  },
+  {
+   "text": "It remains to verify the universal-arrow clauses in the definition of coherent adjunction. The comma category $(L\\downarrow Y)$ is the pullback along $L$ of source evaluation from arrows with fixed target $Y$. This source evaluation is a right fibration by the cited arrow-target node; its pullback is again one, by restricting the same horn lifts. Its fiber over $T$ is the arrow mapping space $U_D(LT,Y)$, identified with the specified mapping space by the pinch-comparison node. The right-fibration morphism-space formula identifies maps from $(T,b)$ to $(RY,\\epsilon_Y)$ with the homotopy fiber at $b$ of $a\\mapsto\\epsilon_Y L(a)$. This map is the equivalence in step 8, so every such fiber is contractible by the homotopy-fiber criterion. Hence $(RY,\\epsilon_Y)$ is terminal in $(L\\downarrow Y)$. Apply the same argument in the opposite categories, with the roles of $L,R$ exchanged: the equivalence is then $b\\mapsto R(b)\\eta_T$, and it proves $(LT,\\eta_T)$ initial in $(T\\downarrow R)$. This proves precisely the two universal-arrow requirements, together with the coherent transformations and triangles already constructed.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "def-coef-coherent-adjunction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Universal-arrow meaning of the coherent adjunction; explicit comma mapping spaces."
+   }
+  },
+  {
+   "text": "The parameter $X$ also retains its higher naturality. The two assignments $P(T,X,Y)=\\mathcal A(T,E(X,Y))$ and $Q(T,X,Y)=\\mathcal A(T\\times X,Y)$ are enriched functors $\\mathcal A^{\\mathrm{op}}\\times\\mathcal A^{\\mathrm{op}}\\times\\mathcal A\\to\\mathbf{Kan}$: their actions are the pre/postcomposition maps constructed in steps 1-4. Their values are Kan by hypothesis. Step 4 says exactly that $\\Theta:P\\Rightarrow Q$ and $\\lambda:Q\\Rightarrow P$ are enriched natural transformations inverse on every mapping simplicial set. The enriched-nerve-transformation node, whose target is precisely $\\mathbf{Kan}$, turns these into coherent inverse transformations of the corresponding space-valued diagrams, natural under products, opposites and restriction. Apply [lem-coef-enriched-hom-twisted-arrow-comparison] to $\\mathcal A$. It identifies the nerve of its enriched Hom bifunctor with the intrinsic Hom diagram, including precomposition, postcomposition and all higher unit and composition homotopies. Restrict this identification along $(T,X,Y)\\mapsto(T,E(X,Y))$ and $(T,X,Y)\\mapsto(T\\times X,Y)$. These restrictions identify the entire diagrams $N_{\\mathrm{hc}}P,N_{\\mathrm{hc}}Q$ with the two intrinsic mapping-space diagrams; the value comparison is the one in step 7. Thus this is the mapping-space equivalence of step 8 with coherent naturality in $T,X,Y$. Explicitly, its naturality equation for every simultaneous simplicial family is the equality of step 4; the interval and $[2]$ constructions in step 6 apply to these transformations and their inverse composites as well. Faces and degeneracies are restrictions of these actual simplicial maps. No passage to ordinary homotopy categories is used.",
+   "uses": [
+    "lem-coef-enriched-nerve-transformation",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-enriched-hom-twisted-arrow-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03N7",
+    "place": "Construction 8.3.6.1 (03N6) and Proposition 8.3.6.2 (03N7): the nerve of enriched Hom is a Hom-functor. Restrict its coherent parameter diagram along the two enriched functors constructed in steps 1-4; combine with the enriched transposition identity of Kerodon 05UP condition (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-adjunction-data",
+  "def-coef-coherent-nerve-infrastructure",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-hom-twisted-arrow-comparison",
+  "lem-coef-enriched-nerve-transformation",
+  "lem-coef-infinity-adjunction-mapping-equivalence",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/05UP",
+  "place": "Explicit proof of conditions (1)-(3), with enriched transpose and interval constructions; existing DAG mapping-space and comma recognition results supply the non-elementary inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +191,66 @@
    "results": "{\"t\": \"2026-10-17T08:41:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"Closed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary cartesian closed categories or simplicial-set enrichment and closedness; none transfers enriched exponentials and their adjunction to a coherent nerve"
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*adjunction|adjunction.*nerve|nerve.*adjunction",
+   "results": "{\"t\": \"2026-10-17T11:33:39Z\", \"tool\": \"grep\", \"query\": \"enriched.*adjunction|adjunction.*nerve|nerve.*adjunction\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"0f0c55646a59ff4d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the simplicial nerve or an ordinary nerve/homotopy-category adjunction; none states enriched exponentials with the full coherent-nerve adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Enriched cartesian closed simplicial categories with Kan mapping spaces have cartesian closed homotopy coherent nerves",
+   "results": "{\"t\": \"2026-10-17T11:33:39Z\", \"tool\": \"leansearch\", \"query\": \"Enriched cartesian closed simplicial categories with Kan mapping spaces have cartesian closed homotopy coherent nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.CartesianClosed\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\"], \"digest\": \"793f4915b0eb481b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the simplicial nerve or an ordinary nerve/homotopy-category adjunction; none states enriched exponentials with the full coherent-nerve adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-17T11:33:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the simplicial nerve or an ordinary nerve/homotopy-category adjunction; none states enriched exponentials with the full coherent-nerve adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally Kan simplicial category enriched adjunction induces coherent adjunction of homotopy coherent nerves",
+   "results": "{\"t\": \"2026-10-17T11:33:40Z\", \"tool\": \"leanfinder\", \"query\": \"Locally Kan simplicial category enriched adjunction induces coherent adjunction of homotopy coherent nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"7a10a39661bf62de\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the simplicial nerve or an ordinary nerve/homotopy-category adjunction; none states enriched exponentials with the full coherent-nerve adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*adjunction|adjunction.*nerve|nerve.*adjunction",
+   "results": "{\"t\": \"2026-10-17T11:33:39Z\", \"tool\": \"grep\", \"query\": \"enriched.*adjunction|adjunction.*nerve|nerve.*adjunction\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"0f0c55646a59ff4d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the simplicial nerve or an ordinary nerve/homotopy-category adjunction; none states enriched exponentials with the full coherent-nerve adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Enriched cartesian closed simplicial categories with Kan mapping spaces have cartesian closed homotopy coherent nerves",
+   "results": "{\"t\": \"2026-10-17T11:33:39Z\", \"tool\": \"leansearch\", \"query\": \"Enriched cartesian closed simplicial categories with Kan mapping spaces have cartesian closed homotopy coherent nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.CartesianClosed\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\"], \"digest\": \"793f4915b0eb481b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the simplicial nerve or an ordinary nerve/homotopy-category adjunction; none states enriched exponentials with the full coherent-nerve adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-17T11:33:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the simplicial nerve or an ordinary nerve/homotopy-category adjunction; none states enriched exponentials with the full coherent-nerve adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally Kan simplicial category enriched adjunction induces coherent adjunction of homotopy coherent nerves",
+   "results": "{\"t\": \"2026-10-17T11:33:40Z\", \"tool\": \"leanfinder\", \"query\": \"Locally Kan simplicial category enriched adjunction induces coherent adjunction of homotopy coherent nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"7a10a39661bf62de\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the simplicial nerve or an ordinary nerve/homotopy-category adjunction; none states enriched exponentials with the full coherent-nerve adjunction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-spaces-slice-cartesian-closure",
@@ -81,5 +278,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-exponential-nerve-criterion",
+  "worker": "stage1",
+  "summary": "Constructed product and exponential enriched actions and all naturality equations explicitly; constructed enriched unit/counit, strict triangles and their coherent nerve witnesses; reused existing mapping-space, cone and right-fibration results for products and universal arrows. No new nodes or statement changes. Maintainer reader: step 10 explicitly cites the existing enriched-Hom/twisted-arrow comparison for identification of whole parameter diagrams, with the two restriction functors specified.",
+  "blueprint": "Inherited prop-coef-integral-exceptional-adjoint proof paragraph 2, mapping-complex adjunction before derived inverse limit: this supplies the enriched-exponential nerve input in the slice-cartesian-closure ancestry. The current blueprint ancestor uses the same mapping-complex adjunction route.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic coherent mapping-space/cone or homotopy-fiber tool used to interpret the enriched adjunction; the current unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent mapping-space/cone or homotopy-fiber tool used to interpret the enriched adjunction; the current unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic coherent mapping-space/cone or homotopy-fiber tool used to interpret the enriched adjunction; the current unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-cbc-right-fibration-morphism-space",
+    "why": "Generic coherent mapping-space/cone or homotopy-fiber tool used to interpret the enriched adjunction; the current unit supplies no replacement for this foundational statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-cbc-right-fibration-morphism-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-edc766d02",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-edc766d02 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and route. Repaired step 10 to cite the existing enriched-Hom comparison for whole coherent diagrams. Finite-set checks passed; corrected dependency closure is acyclic. Statement and target hypotheses unchanged. Review and corrected whole-node JSON written under review.md and fixes/.; 1 file(s) fixed by the reviewer"
  }
 }
