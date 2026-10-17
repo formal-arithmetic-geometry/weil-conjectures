@@ -126,7 +126,8 @@ lemma sheafTransition_pushforwardStage_proj (q : X ⟶ Y) :
     rw [Etale.upperStarComp_id_left]
     simp <;> rfl
   have h2 : (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (𝟙 Z) (𝟙 Z) (𝟙 Z) (by simp)).inv.app J =
-      (Etale.upperStarId (ModuleCat.{u + 1} Λ) Z).hom.app (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) := by
+      (Etale.upperStarId (ModuleCat.{u + 1} Λ) Z).hom.app
+        (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) := by
     rw [Etale.upperStarComp_id_left]
     simp <;> rfl
   have n := (Etale.upperStarId (ModuleCat.{u + 1} Λ) X).hom.naturality
@@ -141,7 +142,8 @@ lemma sheafTransition_pushforwardStage_proj (q : X ⟶ Y) :
     Category.assoc]
   rw [reassoc_of% n, Iso.inv_hom_id_app_assoc]
   erw [← Adjunction.homEquiv_counit]
-  rw [Equiv.eq_symm_apply, Adjunction.homEquiv_unit]
+  refine (Equiv.eq_symm_apply _).mpr ?_
+  erw [Adjunction.homEquiv_unit]
   simp only [Functor.map_comp]
   rw [reassoc_of% (Etale.unit_map_baseChangeMap_app (ModuleCat.{u + 1} Λ)
     (⟨by simp⟩ : CommSq (𝟙 Z) f₀ (f₀ ≫ q) q) (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J))]
@@ -164,14 +166,16 @@ lemma sheafTransition_pushforwardStage_proj (q : X ⟶ Y) :
       (Etale.lowerStarId (ModuleCat.{u + 1} Λ) Z).hom.app _ ≫
       (Etale.upperStarId (ModuleCat.{u + 1} Λ) Z).hom.app
         (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) = 𝟙 _ := by
-    rw [← k2, reassoc_of% k1, Iso.inv_hom_id_app]
-    rfl
+    rw [← k2, reassoc_of% k1]
+    exact Iso.inv_hom_id_app _ _
   have key' := congrArg ((f₀ ≫ q)_*[ModuleCat.{u + 1} Λ]).map key
   simp only [Functor.map_comp, CategoryTheory.Functor.map_id] at key'
   simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Category.comp_id, Category.assoc]
-  rw [← n4, reassoc_of% key', Category.id_comp]
-  simp [pushforwardStageIso]
+  rw [← n4]
+  erw [Category.id_comp]
+  rw [Category.assoc, reassoc_of% key']
+  rfl
 
 /-- The underived transition map of `(Z, Y, f₀ ≫ q, q, 𝟙) ⟶ (Z, Y', f₀ ≫ r, r, 𝟙)` for
 `r = q ≫ g` is the transition map `r^* r_* (f₀_* J) ⟶ q^* q_* (f₀_* J)`. -/
@@ -215,7 +219,8 @@ lemma pushforwardStageIso_descentTransition (q : X ⟶ Y) {Y' : Scheme.{u}} (g :
       (Etale.upperStarComp (ModuleCat.{u + 1} Λ) q g r hr).hom.app
           (((f₀ ≫ r)_*[ModuleCat.{u + 1} Λ]).obj (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J)) ≫
         ((q)^*[ModuleCat.{u + 1} Λ]).map
-          ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) (⟨by simp [hr]⟩ : CommSq (𝟙 Z) (f₀ ≫ q) (f₀ ≫ r) g)).app
+          ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ)
+              (⟨by simp [hr]⟩ : CommSq (𝟙 Z) (f₀ ≫ q) (f₀ ≫ r) g)).app
               (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) ≫
             ((f₀ ≫ q)_*[ModuleCat.{u + 1} Λ]).map
               ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) (𝟙 Z) (𝟙 Z) (𝟙 Z) (by simp)).inv.app J) ≫

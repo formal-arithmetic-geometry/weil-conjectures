@@ -84,6 +84,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isPullback_strictLocalization {S : 
   have hiso (k : I₀) := isPullback_pullback_evaluation ((Functor.const I₀).map f) w k
   have haffk (k : I₀) : IsAffine ((D₀ ⋙ CategoryTheory.Over.forget S).obj k) := (ι₀.obj k).2
   have hét (k : I₀) : Etale (w.app k) := (ι₀.obj k).obj.1.prop
+  have hqsS (k : I₀) : QuasiSeparatedSpace (((Functor.const I₀).obj S).obj k) :=
+    inferInstanceAs (QuasiSeparatedSpace S)
   have hsm (k : I₀) : Smooth (D'.obj k).hom :=
     MorphismProperty.of_isPullback (P := @Smooth) (hiso k).flip inferInstance
   have hqc (k : I₀) : QuasiCompact (D'.obj k).hom :=

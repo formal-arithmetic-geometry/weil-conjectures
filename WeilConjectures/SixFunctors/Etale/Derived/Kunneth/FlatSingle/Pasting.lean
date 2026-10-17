@@ -57,7 +57,7 @@ lemma tensorBaseChangeMap_eq {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : Y ⟶ 
           ((-⊗ᴸ-(Y)[A]).obj (L((h)^*[A]).obj M)).map (tensorBaseChangeCounitApp A h e f' g w F)) :=
   rfl
 
-omit [UpperStarPreservesFlat A] in
+omit [UpperStarPreservesFlat A] [HasSmallSiteSheafify A] in
 /-- The morphism `Lh^* Lf'^* Rg_* F ⟶ Le^* F` of the base change map for a pushforward tensored
 with a complex is the transpose of the derived base change map `Lf'^* Rg_* F ⟶ Rh_* Le^* F`. -/
 lemma tensorBaseChangeCounitApp_eq {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : Y ⟶ T)
@@ -94,9 +94,10 @@ lemma tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e 
     ← tensorBaseChangeCounitApp_eq A h e f' g w]
   dsimp only [derivedTensor_obj_map]
   rw [Category.assoc, whisker_exchange_assoc, leftUnitor_naturality,
-    ← leftDerivedUpperStarTensorComparison_leftUnitor_hom_assoc]
+    ← reassoc_of% (leftDerivedUpperStarTensorComparison_leftUnitor_hom A h _)]
   rfl
 
+set_option maxHeartbeats 1000000 in
 /-- **Pasting of base change maps**: for two commutative squares pasted horizontally,
 
 ```
@@ -122,7 +123,56 @@ lemma tensorBaseChangeMap_paste {X' S₁ S' T₁ T Y : Scheme.{u}} (h : Y ⟶ X'
       ((-⊗ᴸ-(X')[A]).obj M).map ((leftDerivedUpperStarComp A a b).hom.app (R((g)_*[A]).obj F) ≫
           L((a)^*[A]).map ((derivedBaseChangeMap A (CommSq.mk wR.symm)).app F)) ≫
         tensorBaseChangeMap A h e₁ a g₁ wL M (L((e₂)^*[A]).obj F) := by
-  sorry
+  apply ((derivedUpperStarLowerStarAdjunction A h).homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_naturality_right_symm, Adjunction.homEquiv_naturality_left_symm,
+    tensorBaseChangeMap_eq, tensorBaseChangeMap_eq, Equiv.symm_apply_apply]
+  erw [Equiv.symm_apply_apply]
+  have hn := ((leftDerivedUpperStarTensorComparison A h).app M).naturality
+    ((leftDerivedUpperStarComp A a b).hom.app (R((g)_*[A]).obj F) ≫
+      L((a)^*[A]).map ((derivedBaseChangeMap A (CommSq.mk wR.symm)).app F))
+  erw [reassoc_of% hn]
+  rw [Category.assoc]
+  congr 1
+  have hc : tensorBaseChangeCounitApp A h (e₁ ≫ e₂) (a ≫ b) g w F ≫
+      (leftDerivedUpperStarComp A e₁ e₂).hom.app F =
+      L((h)^*[A]).map ((leftDerivedUpperStarComp A a b).hom.app (R((g)_*[A]).obj F) ≫
+        L((a)^*[A]).map ((derivedBaseChangeMap A (CommSq.mk wR.symm)).app F)) ≫
+        tensorBaseChangeCounitApp A h e₁ a g₁ wL (L((e₂)^*[A]).obj F) := by
+    -- the counit level
+    have hBC := derivedUpperStar_map_derivedBaseChangeMap_app_counit A (CommSq.mk wR.symm) F
+    have hcoh : (leftDerivedUpperStarComp A h (a ≫ b)).inv.app (R((g)_*[A]).obj F) ≫
+        (leftDerivedUpperStarComp A (e₁ ≫ e₂) g (h ≫ a ≫ b) w).hom.app (R((g)_*[A]).obj F) ≫
+        (leftDerivedUpperStarComp A e₁ e₂).hom.app (L((g)^*[A]).obj (R((g)_*[A]).obj F)) =
+        L((h)^*[A]).map ((leftDerivedUpperStarComp A a b).hom.app (R((g)_*[A]).obj F)) ≫
+          (leftDerivedUpperStarComp A h a).inv.app _ ≫
+          (leftDerivedUpperStarComp A e₁ g₁ (h ≫ a) wL).hom.app _ ≫
+          L((e₁)^*[A]).map ((derivedSquareUpperStarIso A (CommSq.mk wR.symm)).hom.app
+            (R((g)_*[A]).obj F)) := by
+      rw [map_leftDerivedUpperStarComp_hom_app_leftDerivedUpperStarComp_inv_app_assoc A h a b
+        (h ≫ a) (a ≫ b) (h ≫ a ≫ b) rfl rfl (Category.assoc _ _ _).symm]
+      simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+        Functor.map_comp]
+      rw [leftDerivedUpperStarComp_hom_app_map_leftDerivedUpperStarComp_inv_app_assoc A e₁ g₁ b
+        (h ≫ a) (e₂ ≫ g) (h ≫ a ≫ b) wL wR.symm (Category.assoc _ _ _).symm,
+        Iso.hom_inv_id_app_assoc,
+        leftDerivedUpperStarComp_assoc'_app A e₁ e₂ g (e₁ ≫ e₂) (e₂ ≫ g) (h ≫ a ≫ b) rfl rfl w]
+    simp only [tensorBaseChangeCounitApp, Functor.map_comp, Category.assoc]
+    erw [(leftDerivedUpperStarComp A e₁ e₂).hom.naturality
+      ((derivedUpperStarLowerStarAdjunction A g).counit.app F)]
+    erw [reassoc_of% hcoh]
+    have n1 := (leftDerivedUpperStarComp A h a).inv.naturality
+      ((derivedBaseChangeMap A (CommSq.mk wR.symm)).app F)
+    have n2 := (leftDerivedUpperStarComp A e₁ g₁ (h ≫ a) wL).hom.naturality
+      ((derivedBaseChangeMap A (CommSq.mk wR.symm)).app F)
+    simp only [Functor.comp_map] at n1 n2 ⊢
+    dsimp only [Functor.comp_obj] at n1 n2 hBC
+    rw [reassoc_of% n1]
+    simp only [reassoc_of% n2]
+    have hBC' := congrArg (fun φ ↦ L((e₁)^*[A]).map φ) hBC
+    simp only [Functor.map_comp] at hBC'
+    simp only [hBC']
+  rw [← Functor.map_comp, hc, Functor.map_comp]
+  rfl
 
 end Etale
 
