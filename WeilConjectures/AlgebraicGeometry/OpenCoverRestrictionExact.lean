@@ -26,9 +26,9 @@ namespace AlgebraicGeometry
 private theorem isZero_over_of_open_cover
     (X : Scheme.{u}) (M : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (ι : Type v) (V : ι → X.Opens) (U : X.Opens) (hU : U = ⨆ i, V i)
-    (h : ∀ i, IsZero ((SheafOfModules.overFunctor
+    (h : ∀ i, IsZero ((SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) (V i)).obj M)) :
-    IsZero ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).obj M) := by
+    IsZero ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).obj M) := by
   apply (IsZero.iff_id_eq_zero _).mpr
   ext W x
   change x = 0
@@ -73,12 +73,12 @@ theorem exactAt_over_of_open_cover
     (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj K).ExactAt n := by
   let S := K.sc n
-  change (S.map (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U)).Exact
+  change (S.map (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U)).Exact
   apply (S.leftHomologyData.exact_map_iff
-    (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U)).mpr
+    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U)).mpr
   apply isZero_over_of_open_cover X S.leftHomologyData.H ι V U hU
   intro i
   exact (S.leftHomologyData.exact_map_iff
-    (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) (V i))).mp (h i)
+    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (V i))).mp (h i)
 
 end AlgebraicGeometry
