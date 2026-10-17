@@ -78,7 +78,40 @@ lemma continuous_pullbackPathHom (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y') :
 
 end Scheme.FiniteEtale
 
-namespace ProEtale.LisseMonodromy
+namespace ProEtale
+
+section Universal
+
+variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (Ω : Type u) [Field Ω] [IsLocallyNoetherian Y]
+  [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y]
+
+/-- The monodromy of lisse `ℓ`-adic sheaves on a connected regular Noetherian scheme given by its
+universal profinite étale covers (`AlgebraicGeometry.Scheme.universalCovers`), on which lisse
+sheaves are constant (`AlgebraicGeometry.ProEtale.exists_lisseMonodromy`). Being a definite
+choice, it is compatible with the monodromy of the same kind on any connected regular Noetherian
+scheme mapping to `Y` (`AlgebraicGeometry.ProEtale.isCompatible_universalLisseMonodromy`). -/
+noncomputable def universalLisseMonodromy : LisseMonodromy l Y Ω :=
+  (Scheme.universalCovers Y Ω).lisseMonodromy fun y G ↦
+    IsAdicLisseSheaf.exists_iso_upperStar_universalCover _ y G.property
+
+/-- The monodromy from universal covers is an equivalence at every base point
+(`cor-galois-lisse-representations`). -/
+theorem universalLisseMonodromy_isEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
+    (universalLisseMonodromy l Y Ω).IsEquivalenceAt t :=
+  (Scheme.universalCovers Y Ω).lisseMonodromy_isEquivalenceAt _ t
+
+variable {Y} in
+/-- The monodromies from universal covers are compatible with every morphism of connected regular
+Noetherian schemes. -/
+theorem isCompatible_universalLisseMonodromy {Y' : Scheme.{u}} [IsLocallyNoetherian Y']
+    [CompactSpace Y'] [IsRegular Y'] [ConnectedSpace Y'] (f : Y' ⟶ Y) :
+    LisseMonodromy.IsCompatible f (universalLisseMonodromy l Y Ω)
+      (universalLisseMonodromy l Y' Ω) :=
+  fun _ _ τ G ↦ (Scheme.universalCoversHom f).lisseMonodromy_mono_upperStar _ _ τ G
+
+end Universal
+
+namespace LisseMonodromy
 
 open Scheme.FiniteEtale
 
@@ -138,6 +171,8 @@ theorem exists_upperStar_iso_of_rep_eq_self {t : Spec (.of (AlgebraicClosure Ω)
   have := hM'.isIso_of_bijective g (by rw [hg]; exact ψ.bijective)
   exact ⟨G, ⟨asIso g⟩⟩
 
-end ProEtale.LisseMonodromy
+end LisseMonodromy
+
+end ProEtale
 
 end AlgebraicGeometry

@@ -4604,6 +4604,7 @@ public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.LFunction
 public import WeilConjectures.WeilSheaf.LisseAbelian
 public import WeilConjectures.WeilSheaf.LisseDuality
+public import WeilConjectures.WeilSheaf.LisseExtension
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.LocalFrobenius
