@@ -174,5 +174,23 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-341dd4f91 (reviewer sub-agent of L); spot-checked: Read the full mathematics against Stacks 0556, 038H, 038F, 00I7 and 0H7K. Corrected Step 3: the common field need not be separably closed; added existing definition citations. Statement unchanged; no new nodes, cycles, or long steps. Corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GeometricFibreComponentCountBaseChange",
+  "declaration": "AlgebraicGeometry.geometricFibreComponentCount_baseChange",
+  "file": "lean/Sheaf/TraceFormula/GeometricFibreComponentCountBaseChange.lean",
+  "statement": "theorem geometricFibreComponentCount_baseChange {X Y : Scheme.{max u v}} (f : X ⟶ Y) : (∀ (t : Y) (K L : Type v) [Field K] [Field L] [IsSepClosed K] [IsSepClosed L] (i : Y.residueField t ⟶ CommRingCat.of (ULift.{u} K)) (j : Y.residueField t ⟶ CommRingCat.of (ULift.{u} L)), ENat.card (irreducibleComponents ↥(pullback f (Spec.map i ≫ Y.fromSpecResidueField t))) = ENat.card (irreducibleComponents ↥(pullback f (Spec.map j ≫ Y.fromSpecResidueField t)))) ∧ (∀ (Y' : Scheme.{max u v}) (g : Y' ⟶ Y) (t' : Y') (K L : Type v) [Field K] [Field L] [IsSepClosed K] [IsSepClosed L] (i : Y.residueField (g t') ⟶ CommRingCat.of (ULift.{u} K)) (j : Y'.residueField t' ⟶ CommRingCat.of (ULift.{u} L)), ENat.card (irreducibleComponents ↥(pullback (pullback.snd f g) (Spec.map j ≫ Y'.fromSpecResidueField t'))) = ENat.card (irreducibleComponents ↥(pullback f (Spec.map i ≫ Y.fromSpecResidueField (g t')))))",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a2d9d43a5",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Reviewed node, source Tag 0556, all dependencies, Lean module, report, edge cases, docstrings, and universe transport; scompile.py compiled sandbox and library paths successfully with no errors."
  }
 }

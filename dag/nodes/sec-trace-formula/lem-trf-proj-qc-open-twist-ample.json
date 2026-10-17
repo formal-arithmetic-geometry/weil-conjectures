@@ -205,5 +205,28 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-8a784d593 (reviewer sub-agent of L); spot-checked: Two proof gaps repaired: Step 1 now handles U=∅ by choosing e=1, and Step 3 explicitly uses the child node’s affine-locus clause instead of inferring every U∩D₊(f) is affine. Corrected DAG JSON is under fixes/dag/nodes/sec-trace-formula/; no nodes dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ProjQcOpenTwistAmple",
+  "declaration": "AlgebraicGeometry.exists_common_degree_twist_ample",
+  "file": "lean/Sheaf/TraceFormula/ProjQcOpenTwistAmple.lean",
+  "statement": "theorem exists_common_degree_twist_ample {A σ : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] {U : Scheme.{u}} (j : U ⟶ Proj 𝒜) [IsOpenImmersion j] [CompactSpace U] : ∃ e : ℕ, 0 < e ∧ ∀ k : ℕ, 0 < k → ∃ hL : ((Proj.twist 𝒜 (Int.ofNat (e * k))).restrict j).IsInvertible, @Scheme.Modules.IsAmple U ((Proj.twist 𝒜 (Int.ofNat (e * k))).restrict j) hL ∧ ∃ μ : ((Proj.twist 𝒜 (Int.ofNat e)).restrict j).tensorPow k ⟶ (Proj.twist 𝒜 (Int.ofNat (e * k))).restrict j, IsIso μ ∧ ∀ (V : U.Opens) (s : Fin k → Γ((Proj.twist 𝒜 (Int.ofNat e)).restrict j, V)) (x : j ''ᵁ V), (((Proj.twist 𝒜 (Int.ofNat (e * k))).restrictAppIso j V).hom (Scheme.Modules.Hom.app μ V (Proj.twistTensorSection 𝒜 j e V k s))).val x = ∏ i : Fin k, ((((Proj.twist 𝒜 (Int.ofNat e)).restrictAppIso j V).hom (s i)).val x : Localization.AtPrime x.val.asHomogeneousIdeal.toIdeal)",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Proj.twistTensorSection",
+   "AlgebraicGeometry.exists_common_degree_twist_ample"
+  ],
+  "note": "Repair of H3 return at 5ca28b2b65bb: the tensor-power morphism is required to send every tuple of local twist sections on every open to its pointwise product in the homogeneous localization, and IsIso is asserted for that morphism. Pure tensors locally generate the sheaf tensor power, so the formula uniquely characterizes the canonical multiplication map; an arbitrary isomorphism does not satisfy this conclusion. Restriction uses the existing open-immersion restrict functor and its restrictAppIso."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2c27656a2",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, route-pivot compliance, and compiler evidence all checked successfully."
  }
 }

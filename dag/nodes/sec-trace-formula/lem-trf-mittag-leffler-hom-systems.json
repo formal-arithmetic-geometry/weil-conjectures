@@ -216,5 +216,23 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-0b45ab9c9 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and wrote review.md. Stacks 059M/059E support all six steps; 059K and 059C–059D support both new nodes with the stated hypotheses. Checked kernel directions, uniform index, edge cases, duplicates, and acyclic dependencies. No long steps, prohibited machinery, missing citations, or repairs found."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MittagLefflerHomSystems",
+  "declaration": "Module.hom_images_stabilize_of_isMittagLeffler",
+  "file": "lean/Sheaf/RingTheory/MittagLefflerHomSystems.lean",
+  "statement": "theorem hom_images_stabilize_of_isMittagLeffler (R : Type u) [CommRing R] {I : Type v} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{max u v w} R) [∀ i : I, Module.FinitePresentation R (F.obj i)] (c : Cocone F) (hc : IsColimit c) (hM : Module.IsMittagLeffler.{u, max u v w, max u v w, 0} R c.pt) (N : Type t) [AddCommGroup N] [Module R N] : ∀ i : I, ∃ (j : I) (hij : i ≤ j), ∀ (k : I) (hjk : j ≤ k), Set.range (fun a : F.obj k →ₗ[R] N ↦ a.comp (F.map (homOfLE (hij.trans hjk))).hom) = Set.range (fun a : F.obj j →ₗ[R] N ↦ a.comp (F.map (homOfLE hij)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e2eaefd7d",
+  "group": "Q123",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, docstrings, exact signature, edge cases, and route constraints pass; scompile.py reproduced both checks cleanly. Repaired H11 with the complete replacement report in fixes/lem-trf-mittag-leffler-hom-systems.report.md. Full findings are in review.md; repository heads were unchanged."
  }
 }

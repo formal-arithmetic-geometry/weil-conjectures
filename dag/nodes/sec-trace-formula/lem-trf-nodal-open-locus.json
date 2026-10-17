@@ -242,25 +242,25 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-2e28fc762",
-  "group": "Q141",
-  "result": "fix",
-  "note": "H8 documentation defect repaired in fixes/lean/Sheaf/TraceFormula/NodalOpenLocus.lean with complete proof-step docstring; replacement compiles via scompile.py."
+  "reviewer": "NT-stage2-Codex-18abc944d",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Full immutable delivery audit passed; no fixes required. Fresh scompile retry reached server compilation but server authentication failed."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.NodalOpenLocus",
   "declaration": "AlgebraicGeometry.nodalOpenLocus",
   "declarations": [
+   "AlgebraicGeometry.IsOrdinaryNode",
    "AlgebraicGeometry.IsSmoothOrOrdinaryNode",
    "AlgebraicGeometry.HasOnlySmoothOrNodalGeometricFibres",
    "AlgebraicGeometry.nodalOpenLocus"
   ],
   "file": "lean/Sheaf/TraceFormula/NodalOpenLocus.lean",
-  "statement": "theorem nodalOpenLocus (Y T : Scheme.{u}) (p : Y ⟶ T) [Flat p] [LocallyOfFinitePresentation p] (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ T), Nonempty (pullback (C := Scheme.{u}) p g) → (pullback (C := Scheme.{u}) p g).IsPureDimension 1) : ∃ U : Y.Opens, HasOnlySmoothOrNodalGeometricFibres (U.ι ≫ p) ∧ (∀ V : Y.Opens, HasOnlySmoothOrNodalGeometricFibres (V.ι ≫ p) → V ≤ U) ∧ (∀ (T' : Scheme.{u}) (g : T' ⟶ T), HasOnlySmoothOrNodalGeometricFibres ((pullback.fst p g ⁻¹ᵁ U).ι ≫ pullback.snd p g) ∧ (∀ V : (pullback p g).Opens, HasOnlySmoothOrNodalGeometricFibres (V.ι ≫ pullback.snd p g) → V ≤ pullback.fst p g ⁻¹ᵁ U)) ∧ (∀ (t : T), ∀ x : (pullback (C := Scheme.{u}) p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)), pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t) x ∈ U ↔ IsSmoothOrOrdinaryNode (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)) x) ∧ (∀ (t : T), ((∀ x : (pullback (C := Scheme.{u}) p (T.fromSpecResidueField t)), pullback.fst p (T.fromSpecResidueField t) x ∈ U) ↔ (∀ x : (pullback (C := Scheme.{u}) p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)), x ∉ (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)).smoothLocus → IsSmoothOrOrdinaryNode (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t)) x)))",
+  "statement": "theorem nodalOpenLocus (Y T : Scheme.{u}) (p : Y ⟶ T) [Flat p] [LocallyOfFinitePresentation p] (hgeom : ∀ (t : T) (Ω : Type u) [Field Ω] [Algebra (T.residueField t) Ω] [IsAlgClosure (T.residueField t) Ω], Nonempty (pullback (C := Scheme.{u}) p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t)) → (pullback p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t)).IsPureDimension 1) : ∃ U : Y.Opens, HasOnlySmoothOrNodalGeometricFibres (U.ι ≫ p) ∧ (∀ V : Y.Opens, HasOnlySmoothOrNodalGeometricFibres (V.ι ≫ p) → V ≤ U) ∧ (∀ (T' : Scheme.{u}) (g : T' ⟶ T), HasOnlySmoothOrNodalGeometricFibres ((pullback.fst p g ⁻¹ᵁ U).ι ≫ pullback.snd p g) ∧ (∀ V : (pullback p g).Opens, HasOnlySmoothOrNodalGeometricFibres (V.ι ≫ pullback.snd p g) → V ≤ pullback.fst p g ⁻¹ᵁ U)) ∧ (∀ (t : T) (Ω : Type u) [Field Ω] [Algebra (T.residueField t) Ω] [IsAlgClosure (T.residueField t) Ω], ∀ x : (pullback (C := Scheme.{u}) p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t)), pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t) x ∈ U ↔ IsSmoothOrOrdinaryNode (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t)) x) ∧ (∀ (t : T) (Ω : Type u) [Field Ω] [Algebra (T.residueField t) Ω] [IsAlgClosure (T.residueField t) Ω], ((∀ x : (pullback (C := Scheme.{u}) p (T.fromSpecResidueField t)), pullback.fst p (T.fromSpecResidueField t) x ∈ U) ↔ (∀ x : (pullback (C := Scheme.{u}) p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t)), x ∉ (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t)).smoothLocus → IsOrdinaryNode Ω (pullback p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t)) x)))",
   "branch": "newtargets-dag",
-  "by": "Q141",
-  "date": "2026-10-18",
-  "existing": false,
-  "fixed_by": "NT-stage2-Codex-2e28fc762"
+  "by": "Q119",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

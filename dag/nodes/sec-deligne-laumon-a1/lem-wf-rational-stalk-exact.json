@@ -225,5 +225,37 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q10-6ab32a075 (reviewer sub-agent of L); spot-checked: Read the full delivery and cited mathematics. Repaired Step 3’s unsupported passage to common coefficient stages using existing pullback/scalar and local-transport comparison lemmas. Statement unchanged; no new nodes. Corrected JSON and detailed source, hypothesis, edge-case, route, and dependency checks are recorded under fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalStalkExact",
+  "declaration": "WeilConjectures.wfRationalStalkExact",
+  "declarations": [
+   "WeilConjectures.wfPullbackObjectIso",
+   "WeilConjectures.wfPullbackComposition",
+   "WeilConjectures.wfPointFunctor",
+   "WeilConjectures.wfWeilIterate",
+   "WeilConjectures.wfPointTransport",
+   "WeilConjectures.wfPointTransportIterate",
+   "WeilConjectures.wfClosedFrobenius",
+   "WeilConjectures.wfHeartForget",
+   "WeilConjectures.wfSheafFibre",
+   "WeilConjectures.wfSheafClosedFrobenius",
+   "WeilConjectures.wfRationalStalkExact"
+  ],
+  "file": "lean/Sheaf/Paper/RationalStalkExact.lean",
+  "statement": "theorem wfRationalStalkExact [IsSeparated Y₀.hom] (F₁ F₂ F₃ : sfCommonStageWeilSheaf D l hl Y₀ Ω) (i : F₁ ⟶ F₂) (j : F₂ ⟶ F₃) (w : (wfHeartForget l Ω D hl Y₀).map i ≫ (wfHeartForget l Ω D hl Y₀).map j = 0) (hS : (ShortComplex.mk ((wfHeartForget l Ω D hl Y₀).map i) ((wfHeartForget l Ω D hl Y₀).map j) w).ShortExact) (y : {y : Y₀.left // y ∈ closedPoints Y₀.left}) (ι : Y₀.left.residueField y.val →+* D.k) (hι : ι.comp (Y₀.hom.residueFieldAlgebraMap y.val) = algebraMap D.k₀ D.k) : ∃ w' : (wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).map i ≫ (wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).map j = 0, (ShortComplex.mk ((wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).map i) ((wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).map j) w').ShortExact ∧ FiniteDimensional Ω ((wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).obj F₁) ∧ FiniteDimensional Ω ((wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).obj F₂) ∧ FiniteDimensional Ω ((wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).obj F₃) ∧ ((wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).map i ≫ wfSheafClosedFrobenius l Ω D hl Y₀ F₂ y ι hι = wfSheafClosedFrobenius l Ω D hl Y₀ F₁ y ι hι ≫ (wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).map i) ∧ ((wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).map j ≫ wfSheafClosedFrobenius l Ω D hl Y₀ F₃ y ι hι = wfSheafClosedFrobenius l Ω D hl Y₀ F₂ y ι hι ≫ (wfSheafFibre l Ω D hl Y₀ (localClosedPoint D Y₀ y ι hι)).map j)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical common-stage local operator built from the recorded localized integral composition comparison, finite-stage point transport, and actual closed-point return; no finite-stage Weil presentation or extra coefficient compatibility is assumed. Short exactness is stated in the underlying recorded constructible heart, with Weil-commuting arrows, and the conclusion uses coefficient H^0 in ModuleCat Ω."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b242cda3d",
+  "group": "NP",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source citation, Lean helpers/declaration, edge cases, route-pivot compliance, report sections, and scompile.py sandbox/library compiles. No substantive or mechanical findings; fixes directory remains empty."
  }
 }

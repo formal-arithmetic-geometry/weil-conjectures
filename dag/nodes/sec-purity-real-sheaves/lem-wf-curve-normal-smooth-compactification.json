@@ -26,7 +26,8 @@
   "def-weil-pbc-scheme-conventions",
   "def-pc-smooth-projective-curve",
   "def-pc-geometrically-irreducible",
-  "def-weil-pbc-scheme-reduction"
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pure-dimension"
  ],
  "proof": [
   {
@@ -221,20 +222,19 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-207245d56",
-  "group": "Q111",
-  "result": "fix",
-  "note": "Mathematics and exact signature verified. Complete replacements in fixes/ repair H8 proof documentation and H9 proof imports, and record compiler evidence. Original and corrected modules compile cleanly through scompile.py. Full findings are in review.md; snapshot and branch head unchanged."
+  "reviewer": "NT-stage2-Codex-b9fb8fd5f",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Full statement, dependencies, source proof, declarations, edge cases, docstrings, searches, and route-pivot status checked. No substantive findings; scompile.py was attempted but the remote session refused before diagnostics."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.Curve.NormalSmoothCompactification",
-  "declaration": "AlgebraicGeometry.exists_smooth_projective_compactification_of_normal_curve",
-  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NormalSmoothCompactification.lean",
-  "statement": "theorem exists_smooth_projective_compactification_of_normal_curve {k₀ : Type u} [Field k₀] [Finite k₀] {U₀ : Scheme.{u}} (p₀ : U₀ ⟶ Spec (.of k₀)) [IsSeparated p₀] [LocallyOfFiniteType p₀] [QuasiCompact p₀] [GeometricallyConnected p₀] (hnormal : ∀ x : U₀, IsDomain (U₀.presheaf.stalk x) ∧ IsIntegrallyClosed (U₀.presheaf.stalk x)) (hdim : topologicalKrullDim U₀ = 1) : Smooth p₀ ∧ ∃ (C₀ : Scheme.{u}) (q₀ : C₀ ⟶ Spec (.of k₀)) (j₀ : U₀ ⟶ C₀) (_ : IsOpenImmersion j₀), IsSmoothProjectiveCurve q₀ ∧ GeometricallyConnected q₀ ∧ DenseRange j₀.base ∧ j₀ ≫ q₀ = p₀ ∧ IsFinite (j₀.closedComplement ≫ q₀)",
+  "module": "Sheaf.AlgebraicGeometry.Curve.NormalSmoothProjectiveCompactification",
+  "declaration": "AlgebraicGeometry.exists_smooth_projectiveCompactification_normal",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NormalSmoothProjectiveCompactification.lean",
+  "statement": "theorem exists_smooth_projectiveCompactification_normal {K : Type u} [Field K] [Finite K] {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p] [GeometricallyConnected p] (hU : ∀ x : U, IsDomain (U.presheaf.stalk x) ∧ IsIntegrallyClosed (U.presheaf.stalk x)) (hdim : U.IsPureDimension 1) : Smooth p ∧ ∃ (C : Scheme.{u}) (pC : C ⟶ Spec (.of K)) (j : U ⟶ C) (_ : IsOpenImmersion j), j ≫ pC = p ∧ IsSmoothProjectiveCurve pC ∧ GeometricallyConnected pC ∧ DenseRange j.base ∧ IsFinite ((Scheme.IdealSheafData.vanishingIdeal ⟨(j.opensRange : Set C)ᶜ, j.opensRange.isOpen.isClosed_compl⟩).subschemeι ≫ pC)",
   "branch": "newtargets-dag",
-  "by": "Q111",
-  "date": "2026-10-18",
-  "existing": false,
-  "fixed_by": "NT-stage2-Codex-207245d56"
+  "by": "Q141",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
