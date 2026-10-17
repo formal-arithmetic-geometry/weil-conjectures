@@ -462,8 +462,10 @@ theorem boundedConstructibleIntegral_exceptionalAdjoint {X Y : Scheme.{u}}
           ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).obj N) := by
     have h := boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ
       rfl f n hab
-    exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso (asIso _) h.1,
-      (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso (asIso _) h.2⟩
+    have := hφ (n + 1)
+    let ι := asIso ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ (n + 1))).map φ)
+    exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso ι h.1,
+      (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso ι h.2⟩
   obtain ⟨a', b', hab'⟩ := hVY.1.2
   have hNc : DerivedCategory.boundedConstructibleIntegral (Ideal.span {ϖ}) X N :=
     ⟨hN, a', b', fun n ↦ hNred n (hab' n)⟩
