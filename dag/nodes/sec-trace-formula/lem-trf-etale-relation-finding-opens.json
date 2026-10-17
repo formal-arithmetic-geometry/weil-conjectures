@@ -2,7 +2,7 @@
  "id": "lem-trf-etale-relation-finding-opens",
  "kind": "statement",
  "title": "Restriction of a quotient by an fppf relation is an open subspace",
- "statement": "Let $S$ be a scheme [def-pc-scheme], let $U$ be a scheme over $S$, and let $(s,t):R\\to U\\times_SU$ [def-pc-fibre-product] be an equivalence relation whose two projections $s,t:R\\to U$ are surjective, flat, and locally of finite presentation. Let $g:U'\\to U$ be flat and locally of finite presentation, and let $R'$ be the restriction of $R$ to $U'$. On the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site], write $F=U/R$ and $F'=U'/R'$ for the sheafified quotient presheaves [def-weil-pbc-sheafification]. Then the natural map $F'\\to F$ is representable and an open immersion.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $U,R,U'$ be schemes over $S$, and let $j=(s,t):R\\to U\\times_SU$ [def-pc-fibre-product] be an equivalence relation: for every $S$-scheme $T$, $j$ identifies $R(T)$ with an equivalence relation on $U(T)$. Suppose $s,t:R\\to U$ are surjective, flat [def-weil-flat-morphism], and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $g:U'\\to U$ be flat and locally of finite presentation, and let $R'=U'\\times_{g,U,s}R\\times_{t,U,g}U'$ be the restricted relation. On the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site], let $F=U/R$ and $F'=U'/R'$ be the sheafifications [def-weil-pbc-sheafification] of $T\\mapsto U(T)/R(T)$ and $T\\mapsto U'(T)/R'(T)$. The canonical map $F'\\to F$ is representable and an open immersion [def-weil-open-immersion]: for every $S$-scheme $T$ and $a:h_T\\to F$, the pullback $h_T\\times_F F'$ is represented by an open subscheme of $T$.",
  "source": {
   "document": "literature/stacks-project/spaces.tex",
   "place": "Tag 02WU (finding-opens), using Tag 02VH for restriction of the relation and Tags 023Q/02W2 for fppf descent of opens"
@@ -10,12 +10,144 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
   "def-pc-fppf-site",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $T$, a pair $(u'_1,u'_2)$ belongs to $R'(T)$ exactly when $(g u'_1,g u'_2)$ belongs to $R(T)$, by the fibre-product definition [def-pc-fibre-product]. Pullback of an equivalence relation along a function is reflexive, symmetric and transitive, and $R'(T)\\to U'(T)^2$ is injective. Thus $R'$ is an equivalence relation, so both presheaf quotients in the statement are defined.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02V8 (lemma-restrict-relation), equivalence relation clause"
+   }
+  },
+  {
+   "text": "The map $F'\\to F$ is injective. Indeed, locally on an fppf covering any two sections $b,c\\in F'(V)$ lift to $u',v'\\in U'(V)$, using [lem-weil-pbc-site-sheafification-sections-local] for the quotient presheaf, choosing representatives of its quotient classes. If their images in $F$ agree, [lem-trf-etale-relation-kernel-pair] gives a unique $r:V\\to R$ with $s r=g u'$ and $t r=g v'$. Hence $(u',r,v')$ belongs to $R'(V)$, so $b=c$ locally and therefore globally by the sheaf condition. The kernel-pair node assumes only a monomorphic equivalence relation, not etaleness, and applies here.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-trf-etale-relation-kernel-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Z (lemma-quotient-pre-equivalence-relation-restrict), injectivity proof"
+   }
+  },
+  {
+   "text": "Put $E=U'\\times_{g,U,s}R$ and let $p:E\\to U$ be $t$ after projection to $R$. That projection is the base change of $g$, hence flat by [lem-weil-pbc-flat-morphism-base-change] and locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Composition with $t$ preserves these two properties by [lem-pc-flat-compose] and [lem-sbc-locally-finite-presentation-composition]. Thus $W=p(E)$ is open in $U$ by [lem-weil-pbc-flat-lfp-open]. The map $p$ factors through this open as a surjection $\\bar p:E\\to W$. This factor is still flat and locally of finite presentation: its stalk maps are those of $p$, and an affine presentation $B=A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ remains such a presentation over a smaller basic target open: $B_a=A_a[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. There is no assumption that $g$ is surjective onto $U$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), open saturated image and the two successive covers in the displayed diagram, packaged as their composite"
+   }
+  },
+  {
+   "text": "Fix $v:V\\to U$, and set $W_V=v^{-1}(W)$, with its open subscheme structure. The map $D=E\\times_W W_V\\to W_V$ is surjective by [lem-weil-pbc-surjective-base-change], flat by [lem-weil-pbc-flat-morphism-base-change], and locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). It is therefore a one-member fppf covering [def-pc-fppf-site]. On $D$, the maps to $U'$ and $R$ supplied by $E$ show that the section of $F$ induced by $v$ is the image of a section of $F'$. On $D\\times_{W_V}D$ these two sections of $F'$ agree, since their images in $F$ agree and step 2 proved injectivity. They glue uniquely, giving a morphism $h_{W_V}\\to h_V\\times_F F'$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), proof that the candidate open maps to the restricted quotient"
+   }
+  },
+  {
+   "text": "Conversely, let $z:Z\\to V$ and $b\\in F'(Z)$ have the same image in $F(Z)$ as $v z$. By [lem-weil-pbc-site-sheafification-sections-local], on an fppf cover $\\{Z_k\\to Z\\}$ the section $b$ is represented by $b_k:Z_k\\to U'$. Equality in $F$ and [lem-trf-etale-relation-kernel-pair] give $r_k:Z_k\\to R$ with $s r_k=g b_k$ and $t r_k=v z|_{Z_k}$. Thus $(b_k,r_k)$ gives a map $Z_k\\to E$, so $v z(Z_k)\\subset W$. Joint surjectivity of this covering implies $z(Z)\\subset W_V$. A morphism whose image lies in an open factors uniquely through the open subscheme, by restriction of its continuous map and structure-sheaf map [def-weil-open-immersion]. This produces the inverse to step 4: uniqueness follows from step 2, and both constructions commute with restriction. Hence $h_V\\times_F F'\\cong h_{W_V}$ over $h_V$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-trf-etale-relation-kernel-pair",
+    "def-pc-fppf-site",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), final paragraph: every test morphism admitting a lift factors through the candidate open"
+   }
+  },
+  {
+   "text": "For an arbitrary $a:h_T\\to F$, [lem-weil-pbc-site-sheafification-sections-local] applied to $U(-)/R(-)$ gives an fppf cover $\\{\\varphi_i:T_i\\to T\\}$ and representatives $a_i:T_i\\to U$. Put $W_i=a_i^{-1}(W)$. Steps 4 and 5 identify $h_{T_i}\\times_F F'$ with $h_{W_i}$. On $T_i\\times_TT_j$, the two pullback open subschemes therefore represent the same subfunctor of the representable functor of the overlap: both are its pullback of $F'\\to F$. Their unique isomorphism over the overlap identifies their open images, so the two pullback opens are equal.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), local representatives and compatible inverse-image opens"
+   }
+  },
+  {
+   "text": "Every fppf covering $\\{T_i\\to T\\}$ is fpqc. To check [def-weil-pbc-fpqc-covering], flatness is already part of [def-pc-fppf-site]. For each affine open $V\\subset T$, cover every $\\varphi_i^{-1}(V)$ by affine opens $V_{ij}$. Their images in $V$ are open by [lem-weil-pbc-flat-lfp-open] and jointly cover $V$. Since an affine scheme is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], finitely many of these images cover $V$. These are precisely the affine opens and finite-image-cover condition in the fpqc definition. This is the short argument of Stacks Tag 022C, written out rather than introduced as another node.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof"
+   }
+  },
+  {
+   "text": "By step 7, the cover of $T$ is fpqc. Apply [lem-weil-pbc-open-subscheme-fpqc-descent] to the equal-overlap opens of step 6 to obtain a unique open $W_T\\subset T$ with inverse images $W_i$. Representable functors are sheaves on the fppf site: by step 7 this follows from the existence and uniqueness of descent of morphisms in [lem-weil-pbc-fpqc-representable-descent], with arbitrary target scheme. The local identifications $h_{W_i}\\cong h_{T_i}\\times_F F'$ agree on overlaps because they are identifications of subfunctors of $h_{T_i}$, using step 2. They therefore glue, by the sheaf condition, to $h_{W_T}\\cong h_T\\times_F F'$. More explicitly, after any $Z\\to T$ pull back the covering; membership in $W_T$ and existence of a section of $F'$ above $a|_Z$ agree on that covering by steps 4 and 5, and the unique local sections glue. Thus this is a natural isomorphism on all test schemes. Since $a$ was arbitrary, the map $F'\\to F$ is represented after every scheme base change by the open immersion $W_T\\hookrightarrow T$ [def-weil-open-immersion], which proves both assertions.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), descent by Tag 03N0 and verification of the representing open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-fpqc-covering",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-trf-etale-relation-kernel-pair",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WU (lemma-finding-opens), with its two successive local covering morphisms packaged into E=U prime times_U R; Tag 045Z for injectivity and Tag 03N0 for descending compatible opens."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -128,10 +260,73 @@
    "results": "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict, AlgebraicGeometry.IsOpenImmersion.ofRestrict, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.isoRestrict, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented morphism restricts an equivalence relation quotient sheaf to a representable open subfunctor",
+   "results": "SheafOfModules.Presentation.map_relations_I; SheafOfModules.Presentation.mapRelations; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; SheafOfModules.Presentation.mapRelations_mapGenerators; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; SheafOfModules.Presentation.map; SheafOfModules.Presentation.map_generators_I; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-17",
+   "verdict": "no match to the item; generic morphism and sheaf results do not assert restricted quotient representability"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*sheaf|equivalence.*relation",
+   "results": "Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "date": "2026-10-17",
+   "verdict": "no match to the item; generic morphism and sheaf results do not assert restricted quotient representability"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient sheaves by flat locally finitely presented equivalence relations admit open immersions from restricted quotients",
+   "results": "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict; AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofRestrict; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso; AlgebraicGeometry.IsOpenImmersion.ofRestrict; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match to the item; generic morphism and sheaf results do not assert restricted quotient representability"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion",
+   "results": "AlgebraicGeometry.isOpenImmersion_isMultiplicative; AlgebraicGeometry.isOpenImmersion_isStableUnderComposition; AlgebraicGeometry.isOpenImmersion_respectsIso; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; AlgebraicGeometry.IsOpenImmersion; AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.Hom.opensRange; AlgebraicGeometry.IsOpenImmersion.mono",
+   "date": "2026-10-17",
+   "verdict": "no match to the item; generic morphism and sheaf results do not assert restricted quotient representability"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The saturation of the image of a flat locally finitely presented scheme morphism represents the restricted quotient subfunctor",
+   "results": "AlgebraicGeometry.Scheme.Hom.toImage_app; AlgebraicGeometry.Flat.instResLE; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Scheme.Hom.flat_appLE; AlgebraicGeometry.Flat.flat_of_affine_subset; AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap; AlgebraicGeometry.Scheme.IdealSheafData.range_subschemeι; AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away",
+   "date": "2026-10-17",
+   "verdict": "no match to the item; generic morphism and sheaf results do not assert restricted quotient representability"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation; AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange; AlgebraicGeometry.LocallyOfFinitePresentation; AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion; AlgebraicGeometry.LocallyOfFinitePresentation.SpecMap_iff; AlgebraicGeometry.locallyOfFinitePresentation_comp",
+   "date": "2026-10-17",
+   "verdict": "no match to the item; generic morphism and sheaf results do not assert restricted quotient representability"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyOfFinitePresentation.*[Bb]aseChange|[Bb]aseChange.*LocallyOfFinitePresentation|locallyOfFinitePresentation_pullback",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-17",
+   "verdict": "no match to the item; generic morphism and sheaf results do not assert restricted quotient representability"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally of finite presentation morphisms of schemes are stable under base change",
+   "results": "AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; FinitePresentation.of_isBaseChange; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; Algebra.FinitePresentation.baseChange; AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; RingHom.finitePresentation_isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match to the item; generic morphism and sheaf results do not assert restricted quotient representability"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A base change of a scheme morphism locally of finite presentation is locally of finite presentation",
+   "results": "AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme; AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite; RingHom.finitePresentation_isStableUnderBaseChange; AlgebraicGeometry.locallyOfFinitePresentation_comp",
+   "date": "2026-10-17",
+   "verdict": "no match to the item; generic morphism and sheaf results do not assert restricted quotient representability"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-relation-quotient",
@@ -160,5 +355,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-relation-finding-opens",
+  "worker": "stage1",
+  "summary": "Expanded Tag 02WU into restriction, quotient injectivity, the flat-lfp relation incidence map and its open image, both directions of the representing property over a local lift, compatible opens, the elementary fppf-to-fpqc argument, and descent to arbitrary test schemes. Reused all necessary existing nodes, including the broad permanence node for lfp base change; no new nodes. Clarified the original statement without changing its mathematical hypotheses or conclusion and corrected inaccurate supporting tags.",
+  "blueprint": "Supports the affine-summand open-embedding step of lem-trf-etale-relation-quotient, as recorded in blueprint.from.place. The nearest imported ancestor is lem-trf-local-term-locality through the preserved via chain; this is below-node scheme-quotient infrastructure, not a change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representatives of sections of set-valued associated sheaves; generic site tool, no node of this unit states the needed local representatives."
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Descend the compatible open subschemes of the arbitrary test scheme, exactly the Tag 03N0 tool used by Tag 02WU."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-open-subscheme-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q66-fe612aff4",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-fe612aff4 (reviewer sub-agent of L); spot-checked: Mathematics and all eight proof steps check against Tags 02WU, 02V8, 045Z, 03N0, 023Q, and 022C; edge cases and route locks pass. Repair the stale source metadata: source.place incorrectly names 02VH/02W2, contradicting the corrected citations. Corrected full DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-relation-finding-opens.json.; 1 file(s) fixed by the reviewer"
  }
 }
