@@ -354,7 +354,6 @@ theorem raw_naturality (K N : CochainComplex.Plus A)
       (∀ p q : ℤ, tE p q ≫ (singleIso F N p q).hom = (singleIso F K p q).hom ≫
         (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙
           DerivedCategory.homologyFunctor B p).map (homologyMap c q)) := by
-  -- Retain the original Grothendieck hypothesis on B in the public interface.
   refine ⟨dMap F c, eMap F c, ?_, ?_, ?_, ?_, ?_⟩
   · intro p q
     simpa only [dMap, alpha, bridgeMap, D, Functor.comp_map, Category.assoc] using
