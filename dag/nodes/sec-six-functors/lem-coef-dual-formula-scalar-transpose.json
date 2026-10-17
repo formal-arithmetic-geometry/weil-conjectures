@@ -23,9 +23,197 @@
   "lem-coef-integral-finite-extension",
   "lem-pur-integral-operations-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work simultaneously at $A=A_n$ and $B=B_n=A_{L,en}$. Write $T=-\\otimes_A^LB$, $F_C=Rf_{!,C}$, $G_C=Rf_C^!$, $Q_C=f_C^*D_{Y,C}M$ and $H_CM=D_{X,C}Q_C$ for $C=A,B$ (with $M$ replaced by $T_YM$ over $B$). The finite-free extension lemma gives these coefficient rings and the evaluation-defined finite comparisons. The finite exceptional and biduality theorems put $G_C,D_{W,C}$ in the finite-Tor constructible categories, and pullback preserves them. Tensor products occurring below are also in that domain: constructible cohomology is the finite-tensor theorem, while tensoring flat models supported in $[a,b]$ and $[c,d]$ gives a flat model supported in $[a+c,b+d]$. The structure morphisms $a_W:W\\to s=\\operatorname{Spec}k$ are separated finite type as well. Thus all absolute exceptional adjunctions used below are the constructible ones, including for an empty scheme. Choose a finite integer dimension bound for $X$ by [lem-kun-dimension-finite-type] (bound zero if $X$ is empty). Ordinary adjunction is clause (1) of [fix-prop-adjunctions], and [cor-sf-direct-image-ctf-proetale] ensures that its right adjoint preserves the finite-Tor subcategory, as required when using the absolute-trace exchange lemma. Bounded constructible inputs have etale-origin witnesses by [lem-sf-proetale-constructible-origin], so the stated domain of compact-support composition is met. The evaluation bijection $\\operatorname{Hom}(W,D_{T,C}N)\\cong\\operatorname{Hom}(W\\otimes N,\\omega_{T,C})$, $v\\mapsto\\operatorname{ev}_N\\circ(v\\otimes1)$, required by the absolute-trace exchange lemma and used for every currying below, is the internal tensor--Hom isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction] followed by $H^0$ and [lem-pur-rhom-global-sections]; the evaluation and double-dual maps are those of [lem-weil-duality-pairing].",
+   "uses": [
+    "lem-coef-finite-free-extension",
+    "lem-coef-finite-exceptional",
+    "thm-fix-general-biduality",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-sf-flat-model",
+    "lem-kun-dimension-finite-type",
+    "fix-prop-adjunctions",
+    "cor-sf-direct-image-ctf-proetale",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "lem-weil-duality-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: finite-level domains and coefficient indices"
+   }
+  },
+  {
+   "text": "Put $P_{W,C}=Ra_{W!,C}$ and let $\\operatorname{tr}_{W,C}:P_{W,C}\\omega_{W,C}\\to C_s$ be its counit. Write $\\gamma_C:P_{Y,C}F_C\\xrightarrow{\\sim}P_{X,C}$ for compact-support composition and $\\theta_C:F_CK\\otimes D_{Y,C}M\\xrightarrow{\\sim}F_C(K\\otimes f_C^*D_{Y,C}M)$ for projection. For $h:K\\to H_CM$, put $e_C(h)=\\operatorname{ev}_{Q_C}\\circ(h\\otimes1):K\\otimes Q_C\\to\\omega_{X,C}$. Define $y_C(h):F_CK\\otimes D_{Y,C}M\\to\\omega_{Y,C}$ by the absolute adjunction equation\n$$\\operatorname{tr}_{Y,C}\\circ P_{Y,C}y_C(h)=\\operatorname{tr}_{X,C}\\circ P_{X,C}e_C(h)\\circ\\gamma_{C,K\\otimes Q_C}\\circ P_{Y,C}\\theta_C.$$\nAll factors are specified: composition is [thm-sf-comp-composition], projection is [fix-prop-projection-formula], and the absolute adjunctions and dualizing objects are in [lem-coef-finite-exceptional]. This defines a unique $y_C(h)$, not a choice between isomorphic objects.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "fix-prop-projection-formula",
+    "lem-coef-finite-exceptional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: write the absolute trace transpose of evaluation"
+   }
+  },
+  {
+   "text": "Use the evaluation bijection in [lem-sf-absolute-trace-exchange] with $P_W=P_{W,C}$ and coefficient object $C_s$. Its displayed Hom action, followed by the evaluation-defined biduality of [thm-fix-general-biduality], gives the bijection\n$$\\Psi_C(h)=\\delta_M^{-1}\\circ\\operatorname{curry}(y_C(h)):\\ F_CK\\longrightarrow M.$$\nHere currying uses $\\operatorname{Hom}(F_CK\\otimes D_YM,\\omega_Y)=\\operatorname{Hom}(F_CK,D_YD_YM)$. To compare this with the finite formula identification, expand the source's four Hom arrows: transpose $h$ by tensor symmetry, use $f^*\\dashv Rf_*$, apply the exchange with exactly the trace pairing of the cited absolute-trace lemma, and transpose back by $\\delta_M$. The middle two arrows have the Hom action specified by that lemma; the two outside arrows exchange the tensor factors twice. Naturality of symmetry cancels these two exchanges. Their remaining evaluation transpose is precisely the equation defining $y_C(h)$ in Step 2. Thus, writing $\\kappa_C:G_C\\xrightarrow{\\sim}H_C$ for the canonical finite identification, its adjunction normalization is\n$$\\Psi_C(\\kappa_{C,M}\\circ z)=\\varepsilon_{C,M}\\circ F_C(z)\\qquad(z:K\\to G_CM).$$\nThe finite diagram-realization statement specifies this same tensor-Hom evaluation transpose, including its counit normalization, on coefficient systems.",
+   "uses": [
+    "lem-sf-absolute-trace-exchange",
+    "thm-fix-general-biduality",
+    "lem-coef-finite-exceptional",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: identify the specified finite formula via its Hom action"
+   }
+  },
+  {
+   "text": "For a structure morphism set $\\alpha_W:T_sP_{W,A}\\xrightarrow{\\sim}P_{W,B}T_W$ and $u_W:T_W\\omega_{W,A}\\xrightarrow{\\sim}\\omega_{W,B}$. The explicit normalization in [lem-coef-finite-free-extension] says\n$$\\operatorname{tr}_{W,B}\\circ P_{W,B}(u_W)\\circ\\alpha_{W,\\omega_{W,A}}=T_s(\\operatorname{tr}_{W,A}).\\tag{1}$$\nApply [lem-coef-finite-free-compact-composition] to $(g,f)=(a_Y,f)$, with $a_Yf=a_X$. It gives the precise composition square needed here:\n$$\\gamma_B\\circ P_{Y,B}(\\alpha_f)\\circ\\alpha_Y=\\alpha_X\\circ T_s(\\gamma_A).\\tag{2}$$\nThus the trace calculation uses compatibility of compact-support composition for finite-free scalar extension. The quotient-only statement [lem-sf-compact-coefficient-composition] would not justify this application; no such specialization is made.",
+   "uses": [
+    "lem-coef-finite-free-extension",
+    "lem-coef-finite-free-compact-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: absolute counit and compact-support composition squares"
+   }
+  },
+  {
+   "text": "Let $\\beta^W$ be the finite evaluation-defined duality maps and $c$ the tensor-reassociation pullback comparison. Put\n$$q_M=f_B^*(\\beta^Y_M)\\circ c_{D_{Y,A}M}:T_XQ_A\\xrightarrow{\\sim}Q_B,$$\n$$d^n_M=D_{X,B}(q_M^{-1})\\circ\\beta^X_{Q_A}:T_XH_AM\\xrightarrow{\\sim}H_BT_YM.$$\nThe inverse in the first formula of the question is exactly $q_M^{-1}=c^{-1}\\circ f_B^*((\\beta^Y_M)^{-1})$. Evaluation compatibility in [lem-coef-finite-free-extension] and naturality of evaluation in its first input give, for every $h:K\\to H_AM$,\n$$e_B(d^n_M\\circ T_Xh)\\circ(1\\otimes q_M)=u_X\\circ T_X(e_A(h)).\\tag{3}$$\nTensor comparisons are inserted on the right. Explicitly, evaluation after $D(q_M^{-1})$ precomposes its second argument by $q_M^{-1}$; substituting $q_M$ cancels it. Evaluation after $\\beta^X$ is $u_X$ times extended old evaluation. This proves (3) with the required contravariant orientation.",
+   "uses": [
+    "lem-coef-finite-free-extension",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: compare the uncurried dual-formula maps"
+   }
+  },
+  {
+   "text": "Abbreviate $y_A=y_A(h)$ and $y_B=y_B(d^n_MT_Xh)$. Let\n$$r=\\alpha_{f,K}^{-1}\\otimes(\\beta^Y_M)^{-1}:F_BT_XK\\otimes D_{Y,B}T_YM\\longrightarrow T_Y(F_AK\\otimes D_{Y,A}M)$$\nusing the scalar tensor isomorphism. The scalar-extension compatibility of projection in [fix-prop-projection-formula] is exactly\n$$\\theta_B\\circ(\\alpha_{f,K}\\otimes\\beta^Y_M)=F_B(1\\otimes q_M)\\circ\\alpha_{f,K\\otimes Q_A}\\circ T_Y\\theta_A.$$\nSubstitute this and (3) in the defining trace expression for $y_B$. Naturality of $\\alpha_f$, followed by (2) and then (1) for $X$, identifies the resulting transpose under $P_{Y,B}\\dashv G_{a_Y,B}$ with the scalar extension of the old trace expression. On the other hand (1) for $Y$ and naturality of $\\alpha_Y$ give the same transpose for $u_Y\\circ T_Yy_A\\circ r$. Written on the common source before applying $P_{Y,B}r$, both are\n$$T_s\\bigl(\\operatorname{tr}_{X,A}\\circ P_{X,A}e_A(h)\\circ\\gamma_A\\circ P_{Y,A}\\theta_A\\bigr).$$\nPrecomposition by the invertible $\\alpha_Y$ is harmless; injectivity of the absolute adjunction therefore proves\n$$y_B=u_Y\\circ T_Yy_A\\circ r.\\tag{4}$$",
+   "uses": [
+    "fix-prop-projection-formula",
+    "lem-coef-finite-exceptional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: compare both trace transposes and cancel the absolute adjunction"
+   }
+  },
+  {
+   "text": "For $g=\\Psi_A(h)$, Step 3 and the defining double-dual pairing say\n$$y_A(h)=\\operatorname{ev}_{M,A}\\circ\\sigma\\circ(g\\otimes1_{D_{Y,A}M}).$$\nIndeed uncurrying $\\delta_M\\circ g$ is evaluation with these factors reversed. Apply $T_Y$, then $u_Y$, and substitute (4). Evaluation preservation by $\\beta^Y_M$ turns this into\n$$y_B(d^n_MT_Xh)=\\operatorname{ev}_{T_YM,B}\\circ\\sigma\\circ((T_Yg\\circ\\alpha_{f,K}^{-1})\\otimes1).$$\nThere is no extra scalar or symmetry factor: the tensor reassociation acts on elementary tensors by multiplying the two coefficient scalars, and the two symmetries have the same Koszul sign. Currying and cancelling the isomorphism $\\delta_{T_YM}$ now yield\n$$\\Psi_B(d^n_M\\circ T_Xh)=T_Y(\\Psi_A(h))\\circ\\alpha_{f,K}^{-1}.\\tag{5}$$",
+   "uses": [
+    "lem-coef-finite-free-extension",
+    "thm-fix-general-biduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: finish the finite Hom-bijection square by evaluation"
+   }
+  },
+  {
+   "text": "Take $K=G_AM$ and $h=\\kappa_{A,M}$. Step 3 gives $\\Psi_A(h)=\\varepsilon_{A,M}$. Set\n$$b'_{n,M}=\\kappa_{B,T_YM}^{-1}\\circ d^n_M\\circ T_X(\\kappa_{A,M}).$$\nThe same normalization over $B$ and (5) give\n$$\\varepsilon_{B,T_YM}\\circ F_B(b'_{n,M})=T_Y(\\varepsilon_{A,M})\\circ\\alpha_{f,G_AM}^{-1}.\\tag{6}$$\nConsequently $b'_{n,M}$ is the finite exceptional transpose specified in [lem-coef-finite-scalar-mate-realization]: both have the right side of (6) as their transpose, and an adjunction bijection is injective. This is a calculation of the dual-formula comparison, not an inference that all isomorphisms between these functors coincide.",
+   "uses": [
+    "lem-coef-finite-scalar-mate-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: identify the finite comparison with the finite exceptional mate"
+   }
+  },
+  {
+   "text": "Perform Steps 2-8 on the simultaneous derived coefficient-system models. The finite adjunction-diagram realization supplies $\\mathcal F_f,\\mathcal E_f$, the duality formula and the actual mapping-system adjunction, also for $a_X,a_Y$. The semilinear-section theorem supplies simultaneous tensor, coefficient extension, ordinary adjunction and composition models, and says evaluation, composition and taking transposes preserve their coherence homotopies. Its first-input condition for internal Hom is satisfied: the reduction systems of $M$, its dual and $f^*D_YM$ are cartesian, by their normalized quotient comparisons in the finite exceptional diagram realization. The evaluation calculus makes the relevant equalities evaluation/transpose identities of system maps. Thus the proof of (3)-(6) applies to those constructions themselves: cancellation is cancellation of inverse system comparisons, trace adjunction is the specified system adjunction, and (2) is the coherent identity in [lem-coef-finite-free-compact-composition], not a purported consequence of levelwise equality. It follows that the coherent $b'_\\bullet$ defined by the dual-formula composite equals the coherent exceptional transpose $b_\\bullet$ of [lem-coef-finite-scalar-mate-realization]. We have not deduced equality of system maps from equality of their individual evaluations.",
+   "uses": [
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-finite-scalar-mate-realization",
+    "lem-coef-finite-free-compact-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: retain the equality as an identity of the specified coherent constructions"
+   }
+  },
+  {
+   "text": "Now use the integral objects of the question. Set $P=T_XG_RM$ and let $E_\\bullet$ be its finite scalar-extended exceptional system; let $N_\\bullet$ be the chosen $B_n$-exceptional system with total limit $G_ST_YM$. The coherent integral formula and adjunction are those of [prop-coef-integral-exceptional-adjoint]. The integral Verdier comparisons preserve evaluation and its transposes. The integral finite-extension maps $\\beta^W$ preserve evaluation and have the finite comparisons specified in [lem-coef-integral-finite-extension]; pullback uses the reassociation of [lem-pur-integral-operations-scalar-extension]. Denote the resulting source comparison by $a:\\mathcal R_X^SP\\to E_\\bullet$, and the reduction/limit counit at $N_\\bullet$ by $e_N$. On the simultaneous evaluation models of the calculus, substitution in the formula defining $b'_M$ gives the system identity\n$$e_N\\circ\\mathcal R_X^S(b'_M)=b'_\\bullet\\circ a.\\tag{7}$$\nThis is substitution in the specified evaluation/transpose constructions: the two contravariant inverses give $q^{-1}$, the outer evaluation gives $\\beta^X$, and the two formula comparisons give $\\kappa_B^{-1}$ and $T\\kappa_A$. It is not inferred by checking only the evaluations of (7).",
+   "uses": [
+    "prop-coef-integral-exceptional-adjoint",
+    "thm-coef-integral-verdier",
+    "lem-coef-integral-finite-extension",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: identify the prescribed integral maps with their coherent realizations"
+   }
+  },
+  {
+   "text": "Let $u_P:P\\to\\mathcal L_X^S\\mathcal R_X^SP$ be the reduction/limit adjunction unit. Under that adjunction the system map $b_\\bullet a$ corresponds to\n$$v=\\mathcal L_X^S(b_\\bullet a)\\circ u_P:P\\to\\mathcal L_X^SN_\\bullet=G_ST_YM.$$\nIts adjoint is exactly $b_\\bullet a$, by the unit/counit identity; equivalently $e_N\\mathcal R_X^S(v)=b_\\bullet a$. Step 9 and (7) therefore give $b'_M=v$ by injectivity of this adjunction bijection. This avoids assuming that finite reduction is faithful. The total-limit functor is [lem-weil-pbc-ringed-strict-tower-homotopy-limit], and the canonical completed-scalar comparison identifies the source map $\\mathcal L_X^S(a)u_P$ with the prescribed source completion map on the cofinal $en$ levels. Thus the total-limit transpose assertion of [lem-coef-finite-scalar-mate-realization] applies to $v$: its $F_S\\dashv G_S$ transpose is $T_Y\\varepsilon_{R,M}\\circ\\alpha_{G_RM}^{-1}$. Applying the inverse exceptional adjunction bijection to $b'_M=v$ proves the required equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-finite-scalar-mate-realization",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+    "place": "blueprint_update.proof paragraph 8, expanded: apply the total-limit functor to the coherent equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-free-extension",
+  "lem-coef-finite-exceptional",
+  "thm-fix-general-biduality",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-sf-flat-model",
+  "lem-kun-dimension-finite-type",
+  "fix-prop-adjunctions",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-comp-composition",
+  "fix-prop-projection-formula",
+  "lem-sf-absolute-trace-exchange",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-finite-free-compact-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-finite-scalar-mate-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "prop-coef-integral-exceptional-adjoint",
+  "thm-coef-integral-verdier",
+  "lem-coef-integral-finite-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-duality-pairing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
+  "place": "blueprint_update.proof paragraph 8: explicit finite absolute-trace calculation, coherent realization and integral total limit; finite formula Hom chain from lem-coef-finite-exceptional, Proof paragraphs 1-3"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -68,10 +256,87 @@
    "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality formula for exceptional inverse image commutes with finite free extension of coefficient rings and the exceptional adjunction counit",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, LightCondensed.ihomPoints_symm_comp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the integral pro-etale evaluation-defined dual-formula transpose; general scalar/rigid tensor identities do not identify these functors and maps"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|exceptional.*scalar|scalar.*exceptional",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the integral pro-etale evaluation-defined dual-formula transpose; general scalar/rigid tensor identities do not identify these functors and maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exceptional pullback duality formula under finite scalar extension preserves the compactly supported direct image adjunction counit",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.Counit.map, CategoryTheory.PullbackShift.adjunction_counit, ModuleCat.ExtendRestrictScalarsAdj.counit, CompHausLike.LocallyConstant.counit, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.ChosenPullbacksAlong.fst', CompHausLike.LocallyConstant.counitApp",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the integral pro-etale evaluation-defined dual-formula transpose; general scalar/rigid tensor identities do not identify these functors and maps"
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*formula|trace.*adjunction|adjunction.*trace",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the integral pro-etale evaluation-defined dual-formula transpose; general scalar/rigid tensor identities do not identify these functors and maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficients preserves the tensor Hom evaluation trace description of Verdier exceptional adjunction",
+   "results": "8 hits: CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.IsGrothendieckAbelian.tensorObj",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the integral pro-etale evaluation-defined dual-formula transpose; general scalar/rigid tensor identities do not identify these functors and maps"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*comp|comp.*scalar|coefficient.*comp",
+   "results": "4 hits: Mathlib/CategoryTheory/Linear/Basic.lean, Mathlib/CategoryTheory/Linear/Basic.lean, Mathlib/CategoryTheory/Action/Continuous.lean, Mathlib/CategoryTheory/Quotient/Linear.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the integral exceptional dual-formula transpose"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension by a finite free coefficient algebra commutes with compact support composition isomorphisms",
+   "results": "8 hits: PolynomialLaw.comp_toFun', AlgHom.extendScalars, CompactlySupportedContinuousMap.instIsScalarTower, CompactlySupportedContinuousMap.instSMulCommClass, ContDiffMapSupportedIn.coe_smul, Algebra.Generators.Hom.toExtensionHom_comp, CompactlySupportedContinuousMap.coe_smul, CompactlySupportedContinuousMap.instModuleOfContinuousConstSMul",
+   "date": "2026-10-17",
+   "verdict": "no match for the integral exceptional dual-formula transpose"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "results": "10 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_comp_id_right, CategoryTheory.Bicategory.mateEquiv_id_comp_right",
+   "date": "2026-10-17",
+   "verdict": "no match for the integral exceptional dual-formula transpose"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite free scalar extension comparison for compactly supported derived direct image commutes with composition of two scheme morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Hom.comp_appLE, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc, AlgebraicGeometry.Scheme.comp_appLE, AlgebraicGeometry.Scheme.comp_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match for the integral exceptional dual-formula transpose"
+  },
+  {
+   "tool": "grep",
+   "query": "compact[Ss]upport|lowerShriek|LowerShriek",
+   "results": "25 hits: Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the integral exceptional dual-formula transpose"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable separated finite type morphisms the compact support comparison under a finite free coefficient extension satisfies the pseudofunctor composition square",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match for the integral exceptional dual-formula transpose"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-rational-operations",
@@ -88,5 +353,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-dual-formula-scalar-transpose",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies. Wrote the finite absolute-trace Hom calculation and evaluation/counit comparison, then transported the coherent identity by the actual reduction/limit adjunction. Added one statement-only supporting node for finite-free compact-support composition coherence: existing quotient-coefficient composition and condensed-module scalar composition do not state this case. No Lean work.",
+  "blueprint": "Realizes lem-coef-rational-operations blueprint_update.proof paragraph 8, in particular the sentence Transposing it through the integral adjunction identifies it with the mate of that compact-support comparison. Steps 1-8 are the finite evaluation/counit calculation, Steps 9-11 its coherent integral realization.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Generic compact-support projection isomorphism and its stated scalar-extension compatibility supply the trace Hom calculation; this does not replace integral coefficient transport."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic finite compact-support composition along a_Y and f supplies the absolute trace comparison, not a different duality route."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Uses only the finite derived pullback and tensor reassociation definitions."
+   },
+   {
+    "node": "lem-coef-finite-free-extension",
+    "why": "Finite-free scalar maps, including their evaluation and absolute-counit normalizations; quotient reduction statements do not cover a ramified extension."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic flat models bound the finite tensor products occurring as absolute adjunction inputs."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimensionality supplies the domain bound for ordinary finite direct image."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Only unconditional ordinary adjunction clause (1), not the conditional exceptional-admissibility clause (2)."
+   },
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Generic finite coefficient preservation restricts the ordinary right adjoint to finite-Tor constructible objects."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Canonical reassociation comparison for integral completed pullback."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "The generic finite-coefficient etale-origin equivalence checks the bounded-below etale-origin domain of compact-support composition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-projection-formula",
+  "thm-sf-comp-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-finite-free-extension",
+  "lem-sf-flat-model",
+  "lem-kun-dimension-finite-type",
+  "fix-prop-adjunctions",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-fe90921c9",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-fe90921c9 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the full statement of every cited node, the parent's blueprint_update paragraph 8 (main-20261015 lem-coef-rational-operations.proof.md lines 80-92) and the whole proof of lem-coef-finite-exceptional. I checked Steps 2-8 by explicit calculation: the trace equation types; the Hom-action expansion of lem-sf-absolute-trace-exchange, which gives Psi(kappa z)=eps F z; (1) as the stated dualizing normalisation of lem-coef-finite-free-extension; (3) from evaluation compatibility; (4) by transposing both sides through alpha_Y, the projection scalar clause, (2), (3) and (1); (5) by evaluation preservation; (6), giving b'_n=b_n. Steps 9-11 transfer this through the system realizations and the R-L adjunction bijection, not through faithfulness of reduction. Edge cases E=L, empty X or Y, and M=0 hold. The statement is unchanged and not weakened. The new node lem-coef-finite-free-compact-composition is true, self-contained, statement-only and strictly smaller than the item; I tested it on f=id, g=id, K=0 and ramified e. Its nearest DAG candidate, lem-sp-et-proet-coefficient-compatibility, states only the levelwise square, with etale-transported composition maps and no coherent semilinear clause, so it is not a duplicate; it is the natural input when the new node is split. FIX (C1/E1): Step 3 applies the absolute-trace exchange lemma, and Steps 3 and 7 curry, without any cited statement giving the required evaluation bijection Hom(W,D N)=Hom(W(x)N,omega). I added lem-weil-pbc-ringed-internal-hom-exact-restriction, lem-pur-rhom-global-sections and lem-weil-duality-pairing to Step 1 and to proof_deps; all are on the route or in the unit, with no cycle. I accept the declared tool_uses: lem-coef-finite-free-extension, lem-sf-flat-model, cor-sf-direct-image-ctf-proetale, fix-prop-projection-formula, lem-pur-integral-operations-scalar-extension and lem-kun-dimension-finite-type (Lean-closed). Remark, not a fault: the S/pi^nS en-indexing is inherited from the existing lem-coef-finite-scalar-mate-realization.; 1 file(s) fixed by the reviewer"
  }
 }
