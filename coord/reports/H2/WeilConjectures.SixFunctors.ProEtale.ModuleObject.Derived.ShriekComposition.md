@@ -1,20 +1,20 @@
 ## What changed
 
-Retained the completed proofs of the two open/proper exchange-isomorphism theorems and
-repaired the return at head `d1c66b2f3`: removed the duplicate private `openUnitIsIso`
-proof. The bounded open-unit argument now uses the existing theorem from
-`Sheaf.Paper.CondensedOpenClosedRecollement`, accessed with a proof-only `import all`,
-as other library consumers already do. The recollement module is unchanged.
+Matched the public import named in the return to the current upstream multiline spelling.
+The second reader restored the current upstream module documentation describing the
+open–closed proof, replacing the stale list of sorried exchange inputs, and removed a
+redundant local properness instance already provided by the proof helper's binder.
+The retained proof closes both exchange-isomorphism holes by the open/closed argument:
+identify the mate, prove invertibility on the open, use proper base change and disjoint
+support on the closed complement, then apply joint reflection of isomorphisms.
 
-The exchange proof uses the adjunction mate on the open and proper base change with
-vanishing on the closed complement, then joint conservativity. Public statements and
-composition constructions retain their original interfaces. The proof-scope edit remains
-documented in `coord/changes/shriek-composition-proof-scope.md`.
+All existing public signatures, visibility, four public imports, and non-theorem
+construction bodies are preserved. The retained namespace opening is documented in
+`coord/changes/shriek-composition-proof-scope.md`. No dependency source is changed.
 
-Validation: the repaired module compiles cleanly with `lcompile.py` in 14.1 seconds.
-`tools/import_prune_check.py` accepts the repaired source. The declaration comparison
-reports zero statement changes, only the two completed original theorem bodies, and
-no changed construction body. The required delivery dry run is the final check.
+The retained proof compiled through `lcompile.py` on 2026-10-17 with exit code 0,
+no warnings, in 14.5 seconds. Final compilation and dry-run output are recorded in
+`scratchpad/repair-final-compile.log` and `scratchpad/repair-final-dry-run.log`.
 
 ## Proved and sorry left
 
@@ -23,81 +23,88 @@ Closed 2 original holes:
 - `AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`
 - `AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl`
 
-Added 0 holes; split off 0 statements. The assigned module contains 0 remaining `sorry`
-declarations. Existing imported obligations retain their declarations; none is restated.
-This repair removes a duplicate already-proved private helper and adds no proof obligation.
+Added 0 holes; split off 0 statements; 0 remaining `sorry` in the item module.
+These two closures are relative to the original returned item. At this second reading,
+the current shared source already contains the retained proofs: this repair claims
+0 additional hole closures against that current source.
+These are proofs relative to existing imported obligations, including proper base change.
+No independent completion of those dependencies is claimed.
 
 ## No longer needed
 
-Removed the delivered duplicate private `openUnitIsIso`, reusing the existing recollement
-helper instead. The baseline module had no direct `Sheaf.Paper.ProfinitePointPullback`
-import; the recollement proof import supplies the private helper used by this proof. All
-four original public imports remain required. No original DAG node or module is pruned from
-the targets' closure.
-
-The earlier draft imports of `Functor.ReflectsIso.Exact` and the directly imported
-derived exact-functor module remain absent.
+No original import, node, or target-reachable module is pruned. The added proof imports
+are used. The existing private `openUnitIsIso` comes from
+`import all Sheaf.Paper.CondensedOpenClosedRecollement`; its former local duplicate is
+absent. No new statement or node is introduced. No DAG node attaches directly to the
+assigned module; the composition unit route remains unchanged.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The return correctly identified a duplicate theorem. Its existing declaration is private,
-but `import all` makes it available for proof reuse; copying its proof was unnecessary.
-The repaired bounded open-unit helper now applies that existing declaration directly.
+The returned delivery was refused because the import parser recognized only single-line
+public imports and treated its wrapped import as removed. A single-line repair then failed
+the 100-character width check. During this repair the shared upstream file was itself
+updated to the wrapped spelling, so the delivered header now matches current upstream
+verbatim and no public-import delta is reported. This resolves the return without changing
+what Lean imports or reexports, any declaration signature, or any non-theorem body.
 
-No DAG node attaches to this module and its declarations have no blueprint IDs. The
-proof retains the open/proper exchange step of `sk-thm-sf-comp-composition`; no unit
-route is bypassed and no new statement or definition needs a node.
+Read-only comparisons against the current source are recorded in
+`scratchpad/repair-final-interface-check.log`. All existing interfaces and construction
+bodies match, and all delivered lines are at most 100 characters. No checker was changed.
 
-The retained sandbox includes local artifacts of unchanged source dependencies because
-the published compiled library and source checkout differ. Diagnostic source copies and
-local compilation artifacts stay under `scratchpad/` and `.lbuild`, outside the delivered
-`lean/` tree. The repair's validation refreshed incompatible local dependency artifacts from unchanged
-shared source. In particular, the bounded-constructible module compiles in 43.4 seconds
-after refreshing its constructible and derived tensor inputs; no timeout limit or source
-definition was changed.
+The temporary second-reading section written during this attempt was removed. The next
+independent reader supplies that section; the original independent reading is historical
+evidence in `scratchpad/returned-report.md`, not a fresh review of this repair. The worker
+dry run permits a missing second-reading section. No push was attempted.
 
-The long original public import remains wrapped across two lines to meet the 100-character
-limit. The statement-change parser misreports that wrapping as removal, although Lean and
-the import-pruning check preserve the same public import. The change record documents it.
-The current downstream check finds five consumers, including `TraceFormula.Basic`, all
-listed in the updated change record with unchanged interfaces and no adaptations.
-
-The previous second reading covered the returned version; it is saved in
-`scratchpad/returned-report.md`. A fresh second reading must check this repaired version.
 
 ## Second reading by H2
 
-1. **Interfaces and accidental changes: PASS.** I compared the delivered module with the
-repository version. The ten existing public declaration signatures and all existing
-construction bodies are unchanged; the two original theorem bodies are the only existing
-proof bodies replaced. The original four public imports are preserved (one is wrapped to
-respect the line limit), and the four added imports are proof-only. The namespace opening
-change is recorded in `coord/changes/shriek-composition-proof-scope.md`; no downstream
-module needs adaptation.
+1. **Interfaces: pass.** Read the complete delivered module and compared it with
+   the current repository source using `diff`. Also compared all ten existing public
+   declaration signatures, visibility, and all non-theorem construction bodies with the
+   retained original repository backup using the project's declaration parser. They are
+   unchanged; no declaration was removed or added publicly. The four public imports match
+   the current repository verbatim. No target or dependency source is edited. The retained
+   scope record is `coord/changes/shriek-composition-proof-scope.md`.
+2. **Proofs: pass relative to imported obligations.** Independently compiled the module
+   through `lcompile.py`: exit 0, no errors or warnings, 13.4 seconds. A scratch copy with
+   `#print axioms` for all ten private proof helpers, both exchange theorems, the exchange
+   definition, and all four composition definitions compiled in 13.9 seconds. Each lists
+   only `propext`, `Classical.choice`, `Quot.sound`, and inherited `sorryAx`. There is no
+   `sorry` in this module, no forbidden axiom/unsafe/opaque/extern/implemented_by declaration,
+   no hollow definition introduced, and no new selection of existential data. Existing
+   composition construction bodies are untouched. Logs: `scratchpad/second-reader-axioms.log`
+   and `scratchpad/second-reader-interface.log`.
+3. **Splits: pass (none).** No statement is split off and no node is added. Read the generic
+   mate lemma, imported open-unit proof, abelian closed-support API, and both proper-base-
+   change statements. The local disjoint-support lemma is stronger than the existing
+   complement-only private lemma and is needed on the pulled-back closed complement.
+   Checked the argument for an empty open, an empty complement, and a zero complex: the
+   zero-object and joint-conservativity steps continue to apply without a hidden
+   nonemptiness assumption. No restatement moves an original hole elsewhere.
+4. **Route and pruning: pass.** The exchange is identified with the actual adjunction mate;
+   full faithfulness proves its open restriction invertible. Both closed restrictions
+   vanish by disjointness and proper base change. Exact pullbacks jointly reflect
+   isomorphisms first on modules (kernels/cokernels), then on derived categories. Both
+   coefficient specializations apply the existing proper-base-change theorem. Searched
+   the existing recollement and étale composition APIs by support, joint reflection, and
+   exchange; they supply the reused pieces, not an existing theorem of this same condensed
+   bounded category. All added imports are private and used. Original imports and the
+   composition route remain, so `## No longer needed` is complete: no pruning is claimed.
+5. **DAG: pass / no attached node to update.** Scanned `dag/nodes` for a direct
+   `lean.module` attachment: none names the assigned module. Read the three records whose
+   text mentions composition modules and checked their unit records. They attach to other
+   modules; this delivery does not alter their statements, proofs, proof dependencies,
+   origins, or `realized` fields. No new node is required for a proved private helper.
 
-2. **Compilation and axioms: PASS.** `lcompile.py` compiles the module without errors or
-warnings. The file has no `sorry`, `axiom`, `unsafe`, `opaque`, `extern`, or
-`implemented_by`. The two target theorems and the unchanged constructions have only the
-permitted kernel axioms plus inherited `sorryAx` from imported obligations; the delivered
-proof introduces no new axiom or hollow definition.
+Second-reading changes: restored the stale module documentation to the current repository
+wording, clarified the report's original-versus-current closure accounting, and removed
+the redundant properness instance described below.
+The current shared Lean source already contains the substantive exchange proofs. The first
+dry run then rejected an identical item module, so removed the redundant local
+`have : IsProper p'.left := inferInstance` inside `exchangeIsIsoOfProperBC`: that instance
+is already a binder of the helper. This shortens the proof without changing its argument.
+No signature, construction body, import, DAG record, or checker was changed.
 
-3. **Statements and split holes: PASS.** No statement was changed, no new public theorem
-was split off, and no `sorry` was added. The two closed theorems retain their exact original
-signatures. The private helper arguments cover the empty-open and empty-complement cases
-through `IsZero` and do not assume nonemptiness. Searches of the imported module-object,
-recollement, and category-theory APIs found no existing public theorem that directly
-replaces the exchange argument.
-
-4. **Route and pruning: PASS.** The proof uses the mate description on the open, proper
-base change and disjoint-support vanishing on the closed complement, then derived
-open-closed joint conservativity. The composition and conjugation constructions remain
-unchanged, so the unit route `sk-thm-sf-comp-composition` is retained. Every added proof
-import is used; no original target-reachable node or module is pruned.
-
-5. **DAG agreement: PASS.** No DAG node has this module as its `lean.module`, and no new
-statement or split theorem requires a node. The unit record and its realized route are
-unchanged. The proof dependencies recorded by the existing module remain sufficient.
-
-I corrected the report's stale wording about a direct `ProfinitePointPullback` import; that
-import was not present in the repository baseline. No Lean source or declaration required
-repair in this second reading.
+The final proof cleanup compiled cleanly in 14.1 seconds; see
+`scratchpad/second-reader-final-compile.log`.

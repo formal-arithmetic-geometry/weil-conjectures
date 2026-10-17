@@ -7,8 +7,9 @@ The new private proofs use the kernel, cokernel and zero-object API from
 Preflight classifies an edit of an `open` command as an interface change, so this record
 makes the scope edit explicit. It changes name resolution inside this file only.
 All existing declaration signatures, visibility and non-proof construction bodies remain
-unchanged. The added imports are proof-only. The original long public import is wrapped
-across two lines without changing its module or visibility.
+unchanged. The added imports are proof-only. The long public import now matches the
+current upstream multiline spelling verbatim, resolving the returned import mismatch.
+No public import is added, removed, or privatized.
 
 ## Old
 
@@ -47,4 +48,4 @@ No dependency module or consumer changes.
 
 ## Status
 
-open
+landed 20261017T050319-L-3205414 2026-10-17 (merge of deliver/H2/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition)

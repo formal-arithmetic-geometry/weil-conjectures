@@ -419,7 +419,6 @@ private theorem exchangeIsIsoOfProperBC
       pullback.snd p'.left c.left ≫ C.hom
     rw [← Over.w p', pullback.condition_assoc, Over.w c])
   let q : P ⟶ C := Over.homMk (pullback.snd p'.left c.left)
-  have : IsProper p'.left := inferInstance
   have : LocallyOfFiniteType P.hom := by dsimp [P]; infer_instance
   have : QuasiCompact P.hom := by dsimp [P]; infer_instance
   have : IsSeparated P.hom := by dsimp [P]; infer_instance
