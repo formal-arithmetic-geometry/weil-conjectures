@@ -172,5 +172,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ColimitSubdiagramApproximation",
+  "declaration": "SSet.Enhanced.colimit_subdiagram_approximation",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSubdiagramApproximation.lean",
+  "statement": "theorem colimit_subdiagram_approximation (κ : Cardinal.{u}) (hκ : Cardinal.aleph0 < κ) (hκreg : Cardinal.IsRegular κ) (K : SSet.{u}) (C : SSet.{max u v}) [Quasicategory C] (hcolimits : ∀ (L : SSet.{u}) (F : SSet.uliftFunctor.{v}.obj L ⟶ C), ∃ q : (coconeCategory F) _⦋0⦌, IsColimiting F q) (p : SSet.uliftFunctor.{v}.obj K ⟶ C) (q : ∀ L : kappaSmallSubdiagrams κ K, (coconeCategory (SSet.uliftFunctor.{v}.map L.1.ι ≫ p)) _⦋0⦌) (hq : ∀ L : kappaSmallSubdiagrams κ K, IsColimiting (SSet.uliftFunctor.{v}.map L.1.ι ≫ p) (q L)) : Small.{u} (kappaSmallSubdiagrams κ K) ∧ SSet.Presentability.IsKappaFiltered κ (nerve (kappaSmallSubdiagrams κ K)) ∧ ∃ (c : SSet.uliftFunctor.{v}.obj (nerve (kappaSmallSubdiagrams κ K)) ⟶ C) (a : SSet.uliftFunctor.{v}.obj (directedCoverIncidence (fun L : kappaSmallSubdiagrams κ K ↦ L.1)).toSSet ⊗ Δ[1] ⟶ C), (∀ L : kappaSmallSubdiagrams κ K, c.app (op ⦋0⦌) (ULift.up (ComposableArrows.mk₀ L)) = (q L).1.1) ∧ SSet.ι₀ ≫ a = SSet.uliftFunctor.{v}.map (directedCoverToShape (fun L : kappaSmallSubdiagrams κ K ↦ L.1)) ≫ p ∧ SSet.ι₁ ≫ a = SSet.uliftFunctor.{v}.map (directedCoverToIndex (fun L : kappaSmallSubdiagrams κ K ↦ L.1)) ≫ c ∧ (∀ L : kappaSmallSubdiagrams κ K, (SSet.uliftFunctor.{v}.map (directedCoverFiber (fun L : kappaSmallSubdiagrams κ K ↦ L.1) L) ▷ Δ[1]) ≫ a = coconeHomotopy (SSet.uliftFunctor.{v}.map L.1.ι ≫ p) (q L)) ∧ ∀ (l : (coconeCategory p) _⦋0⦌), IsColimiting p l → ∃ ν : (coconeCategory c) _⦋0⦌, IsColimiting c ν ∧ ν.1.1 = l.1.1 ∧ ∃ t : SSet.uliftFunctor.{v}.obj (directedCoverIncidence (fun L : kappaSmallSubdiagrams κ K ↦ L.1)).toSSet ⊗ Δ[2] ⟶ C, (_ ◁ (stdSimplex.δ 2 : Δ[1] ⟶ Δ[2])) ≫ t = a ∧ (_ ◁ (stdSimplex.δ 0 : Δ[1] ⟶ Δ[2])) ≫ t = (SSet.uliftFunctor.{v}.map (directedCoverToIndex (fun L : kappaSmallSubdiagrams κ K ↦ L.1)) ▷ Δ[1]) ≫ coconeHomotopy c ν ∧ (_ ◁ (stdSimplex.δ 1 : Δ[1] ⟶ Δ[2])) ≫ t = (SSet.uliftFunctor.{v}.map (directedCoverToShape (fun L : kappaSmallSubdiagrams κ K ↦ L.1)) ▷ Δ[1]) ≫ coconeHomotopy p l",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.kappaSmallSubdiagrams",
+   "SSet.Enhanced.kappaSmallSubdiagramsPartialOrder",
+   "SSet.Enhanced.colimit_subdiagram_approximation"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2d30ad6b",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Delivery a2d30ad6 (3 files on f05971013c; node changed only in lean). Checked every node clause against SSet.Enhanced.colimit_subdiagram_approximation: kappa Cardinal.{u} with aleph0<kappa and IsRegular; K:SSet.{u}; C:SSet.{max u v} Quasicategory with hcolimits identical to lem-coef-directed-cover-colimit-assembly and equivalent to Presentability.HasSmallColimits; kappaSmallSubdiagrams a real subtype of K.Subcomplex via landed IsKappaSmall, PartialOrder.lift; Small and landed IsKappaFiltered clauses; assembled c,a with vertex, boundary and fiber equations via the landed directedCover* helpers; forall colimiting l after c,a fixed, exists colimiting nu with the same apex and a triangle t, matching the node's 'for any'. K empty, empty subset, kappa-small K, no kappa-bound on the index and independent universes all covered. Helpers non-hollow, only the theorem is sorry, docstrings carry source, blueprint id and the 4 proof steps. Lines <=100, lean.statement verbatim, real Worker report and Second reading by Q29. nt_compile.py --json clean (exit 0, no warnings); a control with sorry replaced by 'exact 0' fails at 125:8. Notes, not faults: the item asserts the result for every global cocone while the directed-cover Lean gives only one, so stage 3 needs a short transport step (the docstring describes it); the statement uses the directed-cover helpers while that node is only in proof_deps. No fixes."
  }
 }
