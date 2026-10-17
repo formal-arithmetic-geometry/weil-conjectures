@@ -29,9 +29,110 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a $\\mathcal U$-small Kan model of $B$. Let $\\operatorname{Kan}_{\\mathcal U}$ be the simplicial category of small Kan complexes, enriched by $\\underline{\\operatorname{Map}}(Z,Y)_n=\\operatorname{Hom}_{\\mathrm{sSet}}(Z\\times\\Delta^n,Y)$. For a Kan fibration $g:Y\\to B$ and any small simplicial set $Z$, the map $\\operatorname{Fun}(Z,Y)\\to\\operatorname{Fun}(Z,B)$ is a Kan fibration: transposing a horn-lifting problem gives a lifting problem for $g$ against $Z\\times\\Lambda_i^n\\to Z\\times\\Delta^n$. The latter is anodyne by the cited pushout-product theorem, applied to $\\varnothing\\to Z$ and the horn inclusion; the Kan model structure makes each horn inclusion a trivial cofibration. Taking $Y\\to\\Delta^0$ shows that the mapping complexes of $\\operatorname{Kan}_{\\mathcal U}$ are Kan. Define $\\mathcal K_B$ to be its full strict enriched slice on the Kan fibrations to $B$. If $g:Y\\to B$ is such an object, $Y$ is Kan, since horn lifting first in $B$ and then along $g$ fills every horn in $Y$. Thus these really are objects of the enriched slice, including $\\varnothing\\to B$. The strict slice mapping complexes are Kan as well: a horn in the fiber of $g\\circ-$ over a vertex $f$ is a horn upstairs over the constant simplex $f$, so the lifting property from this step fills it in that fiber. Thus $\\mathcal K_B$ is locally Kan.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05Q0",
+    "place": "Example 5.5.1.23, mapping-fibration hypothesis, expanded by pushout-product horn lifting."
+   }
+  },
+  {
+   "text": "Construct the slice comparison directly. The enriched source functor $P:\\mathcal K_B\\to\\operatorname{Kan}_{\\mathcal U}$ has a strict enriched natural transformation to the constant functor $B$: its component at $(A,a)$ is $a$, and naturality is exactly the defining equation $b\\circ u=a$ in each strict slice mapping complex. Explicitly this is the enriched functor $F:\\mathcal K_B\\times[1]\\to\\operatorname{Kan}_{\\mathcal U}$ sending $((A,a),0)$ to $A$ and $((A,a),1)$ to $B$. It sends a mapping simplex with time indices $0,0$ to its underlying map, with indices $1,1$ to $1_B$, and with indices $0,1$ to the constant simplex $a$; there are no mappings with indices $1,0$. The strict slice equation proves composition for indices $0,0,1$, and identity of $1_B$ proves it for $0,1,1$; the other cases are composition in $P$ or the constant functor. Since the coherent nerve preserves products by its displayed definition and agrees with the ordinary nerve on the discrete enriched category $[1]$, $N_{\\mathrm{hc}}F$ is a map $N_{\\mathrm{hc}}\\mathcal K_B\\times\\Delta^1\\to N_{\\mathrm{hc}}\\operatorname{Kan}_{\\mathcal U}$ whose target face is constant at $B$. Hence it defines $J$ into the fixed-target arrow model of the slice, with source exactly $N_{\\mathrm{hc}}P$. The simplicial-model nerve theorem identifies $N_{\\mathrm{hc}}\\operatorname{Kan}_{\\mathcal U}$ with $\\mathcal S$, and the slice/arrow equivalence identifies this slice model with the join slice. To prove full faithfulness, the coherent-nerve comparison gives\n$$\\operatorname{Map}_{N_{\\mathrm{hc}}\\mathcal K_B}((A,a),(C,c))\\simeq\\underline{\\operatorname{Map}}(A,C)\\times_{\\underline{\\operatorname{Map}}(A,B)}\\{a\\}.$$\nThe cone-calculus formula with shape $\\Delta^0$ gives\n$$\\operatorname{Map}_{\\mathcal S_{/B}}(a,c)\\simeq\\operatorname{hofib}_{a}\\bigl(\\operatorname{Map}_{\\mathcal S}(A,C)\\xrightarrow{c\\circ-}\\operatorname{Map}_{\\mathcal S}(A,B)\\bigr).$$\nThese are the same space: step 1 makes $c\\circ-$ a Kan fibration between Kan mapping complexes, so its strict fiber computes the homotopy fiber by the Kan model theorem; the enriched-to-coherent comparisons identify the maps and vertices, compatibly with composition. The map induced by $J$ is this identification, because its commuting triangles are precisely those specified by $F$. Thus $J$ is fully faithful, with the stated source compatibility. This $J$ is essentially surjective. Indeed any arrow $a:A\\to B$ of spaces is represented by an actual simplicial map of Kan complexes, by the mapping-complex comparison in that node. The Kan model factorization gives $A\\xrightarrow{e}A'\\xrightarrow{a'}B$, with $e$ a trivial cofibration and $a'$ a Kan fibration. The total space $A'$ is Kan by step 1, is $\\mathcal U$-small by factorization in the category of $\\mathcal U$-small simplicial sets, and $e$ becomes an equivalence in $\\mathcal S$. The strict triangle $a'e=a$ gives an edge $e$ over $B$. To check that its inverse also exists over the fixed base, use the cited slice/arrow equivalence and apply the cone-calculus mapping formula with shape $K=\\Delta^0$ and constant diagram $B$. For any $t:T\\to B$, it identifies maps from $t$ to $a$ and $a'$ with the homotopy fibers over $t$ of $\\operatorname{Map}(T,A)\\to\\operatorname{Map}(T,B)$ and $\\operatorname{Map}(T,A')\\to\\operatorname{Map}(T,B)$. Postcomposition with $e$ is an equivalence between the domains, commutes with these maps to $\\operatorname{Map}(T,B)$, and therefore induces an equivalence of their homotopy fibers: a coherent inverse to $e$ and its two inverse homotopies give the inverse on fibers, with the base homotopy included as part of the fiber data. Consequently $e_*:\\operatorname{Map}_{/B}(t,a)\\to\\operatorname{Map}_{/B}(t,a')$ is an equivalence for every $t$. Taking $t=a'$ gives an edge $r:a'\\to a$ over $B$ and a homotopy $er\\simeq1_{a'}$ there. Taking $t=a$ and using $e(re)\\simeq e$ gives $re\\simeq1_a$, since $e_*$ is an equivalence of mapping spaces. These two homotopies certify the required equivalence in the slice itself. Hence every object of $\\mathcal S_{/B}$ lies in the essential image. The full-essential-image theorem supplies a coherent quasi-inverse of $J$. It suffices to construct the requested evaluation and mapping equivalences in $\\mathcal K_B$ and carry them through this equivalence.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05Q0",
+    "place": "Example 5.5.1.23 and the slice dual of Proposition 5.5.1.22: construct the comparison from the strict enriched natural transformation, prove full faithfulness by the existing cone mapping-fiber formula and Kan-model homotopy pullback criterion, and prove essential surjectivity by fibration replacement."
+   }
+  },
+  {
+   "text": "Represent the two objects by Kan fibrations $f:X\\to B$ and $g:Y\\to B$. Construct a simplicial set $M$ over $B$ as follows: an $n$-simplex is a pair $(\\sigma,\\rho)$ consisting of $\\sigma:\\Delta^n\\to B$ and a simplicial map $\\rho:\\Delta^n\\times_B X\\to Y$ whose composite with $g$ is $\\sigma\\operatorname{pr}_{\\Delta^n}$. A simplicial operator $\\alpha:[m]\\to[n]$ sends this pair to $(\\sigma\\alpha,\\rho\\circ(\\alpha\\times_B1_X))$. Associativity of precomposition proves the simplicial identities. Projection sends $(\\sigma,\\rho)$ to $\\sigma$. Define evaluation $M\\times_B X\\to Y$ in degree $n$ by $((\\sigma,\\rho),x)\\mapsto\\rho_n(1_{[n]},x)$. It is simplicial by the same restriction formula. For every simplicial set $K\\to B$, a map $h:K\\to M$ gives a map $K\\times_B X\\to Y$ by this evaluation. Conversely a map $v:K\\times_B X\\to Y$ over $B$ assigns to each simplex $k:\\Delta^n\\to K$ the pair $(\\sigma_k,v\\circ(k\\times_B1_X))$. These assignments commute with restriction and are inverse, simplex by simplex. Consequently\n$$\\operatorname{Hom}_{/B}(K,M)\\cong\\operatorname{Hom}_{/B}(K\\times_B X,Y),$$\nwith the bijection induced by actual evaluation. This is an explicit construction, not a choice from a mere existence claim. Each set $M_n$ is $\\mathcal U$-small: it is a small union, indexed by $B_n$, of subsets of sets of simplicial maps between $\\mathcal U$-small simplicial sets. The countable collection of degrees remains in $\\mathcal U$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05UY",
+    "place": "Proposition 7.7.3.17, displayed construction of the relative simplicial exponential; degreewise currying and universe check written out."
+   }
+  },
+  {
+   "text": "The projection $M\\to B$ is a Kan fibration. Given a horn inclusion $i:A=\\Lambda_i^n\\hookrightarrow D=\\Delta^n$ and a square from $i$ to this projection, transpose by step 3. The desired lift becomes a lift from $i_X:A\\times_B X\\to D\\times_B X$ against $g:Y\\to B$. The projection $D\\times_B X\\to D$ is a Kan fibration, by pulling back horn lifts for $f$. The map $i_X$ is its pullback of the weak homotopy equivalence $i$. Right properness in the cited Kan model theorem makes $i_X$ a weak homotopy equivalence. It is also degreewise injective, so is a trivial cofibration, and the model lifting axiom gives the required lift against $g$. Transposing it back solves the original horn problem. Since $B$ is Kan, $M$ is Kan by lifting first in $B$ and then in $M$. Thus the small $M\\to B$ is an object of $\\mathcal K_B$. No fibers have been assumed inhabited.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UY",
+    "place": "Proposition 7.7.3.17, final horn/anodyne lifting argument using Proposition 3.4.0.2 (0109); right properness is the existing Kan-model node."
+   }
+  },
+  {
+   "text": "The enriched category $\\mathcal K_B$ has terminal object $1_B:B\\to B$ and products given by strict pullbacks. A product $T\\times_B X\\to B$ is again a Kan fibration, by pullback and successive horn lifting. For any $V\\to B$ the defining strict mapping complexes satisfy\n$$\\underline{\\operatorname{Map}}_{/B}(V,T\\times_B X)=\\underline{\\operatorname{Map}}_{/B}(V,T)\\times\\underline{\\operatorname{Map}}_{/B}(V,X),\\qquad \\underline{\\operatorname{Map}}_{/B}(V,1_B)=\\Delta^0,$$\nsince a map into the pullback is exactly its two projections over $B$, in every simplicial degree. The coherent-nerve mapping comparisons and the mapping-space limit criterion therefore exhibit these actual projection cones as products and the indicated object as terminal in $N_{\\mathrm{hc}}\\mathcal K_B$. These products have the required meaning on total spaces: for fibrations to the Kan base, the strict pullback computes the homotopy pullback by the Kan model theorem. The functor $J$ constructed in step 2 preserves their source projections, so $J$ carries them to the specified products in $\\mathcal S_{/B}$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Remark 7.7.3.9, finite enriched products, specialized to Kan fibrations; strict versus homotopy pullback checked explicitly."
+   }
+  },
+  {
+   "text": "Apply the bijection of step 3 to $K=T\\times\\Delta^n$ with its structure map obtained by projection to $T\\to B$. The identity $(T\\times\\Delta^n)\\times_B X=(T\\times_B X)\\times\\Delta^n$ gives an isomorphism of simplicial mapping complexes\n$$\\underline{\\operatorname{Map}}_{/B}(T,M)\\cong\\underline{\\operatorname{Map}}_{/B}(T\\times_B X,Y).$$\nBoth sides are Kan by step 1, and the map is evaluation followed by composition. The formula commutes with every operator on $\\Delta^n$, with precomposition in $T$, with postcomposition in $Y$, and with precomposition in $X$. For example a map $u:X'\\to X$ over $B$ sends $(\\sigma,\\rho)$ to $(\\sigma,\\rho\\circ(1\\times_Bu))$, and a map $v:Y\\to Y'$ sends it to $(\\sigma,v\\rho)$. Explicitly, for $n$-simplices $u:X'\\times\\Delta^n\\to X$ and $v:Y\\times\\Delta^n\\to Y'$ over $B$, curry the map\n$$(M(X,Y)\\times\\Delta^n)\\times_B X'\\longrightarrow Y',\\qquad(m,t,x')\\longmapsto v(\\operatorname{ev}(m,u(x',t)),t).$$\nThis gives the $n$-simplex $M(X,Y)\\times\\Delta^n\\to M(X',Y')$. Restriction along $\\alpha:[k]\\to[n]$ replaces every occurrence of $t$ by $\\alpha(t)$, so it is simplicial. For a composable pair $(u,v)$ and $(u',v')$, applying this formula twice gives\n$$v'(v(\\operatorname{ev}(m,u(u'(x'',t),t)),t),t),$$\nwhich is the formula for the enriched composites $u\\circ u'$ and $v'\\circ v$, with the common parameter duplicated by the diagonal of $\\Delta^n$. Identity parameters give the identity. Thus this is the enriched bifunctor $M(-,-)$. If $h:T'\\times\\Delta^n\\to T$ is a parameterized map over $B$, both the curried map precomposed with $h$ and its uncurried version send $(t',x,s)$ to $\\operatorname{ev}(k(h(t',s),s),x)$, for $k:T\\times\\Delta^n\\to M$; this checks enriched naturality in $T$ as well. The coherent-nerve mapping comparison respects enriched composition and its coherent homotopies, so this enriched isomorphism induces the asserted equivalence of full mapping spaces, coherently natural in all three variables. In particular the enriched functor $M(X,-)$ and evaluation yield, on coherent nerves, a coherent right adjoint to $-\\times_BX$ with precisely these mapping equivalences. This argument uses the actual evaluation of step 3, not an unspecified bijection on components.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UP",
+    "place": "Remark 7.7.3.9, enriched exponential condition (3), specialized via the explicit exponential of 05UY; coherence checked through the natural mapping-complex comparison."
+   }
+  },
+  {
+   "text": "Use the coherent quasi-inverse of $J$ from step 2 to choose representatives for arbitrary $T,X,Y$ in the coherent slice, and apply $J$ to $M$, its evaluation, and the mapping equivalences of step 6. The unit and counit equivalences of this quasi-inverse identify their inputs with the original objects; step 5 identifies the product appearing in evaluation with $T\\times_BX$. Composition of these coherent equivalences yields the claimed coherent mapping equivalences, naturally in $T,X,Y$. Its representing object has $\\mathcal U$-small total space by steps 3-4 and the source compatibility of $J$. If $B=\\varnothing$, all objects and this exponential are empty and the slice is terminal. If $X=\\varnothing$, the construction has exactly one $\\rho$ over each $\\sigma$, so $M=B$; if $Y=\\varnothing$, a simplex occurs precisely when its pullback of $X$ is empty. Thus the construction and argument include empty spaces and empty fibers without adding a hypothesis.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05UY",
+    "place": "Proposition 7.7.3.17, passage from the enriched Kan-fibration model to the coherent slice; empty cases and small total space made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-stage derived Hom adjunction in the inverse-limit comparison, through the retained ancestry. Reconstruction of online Kerodon 05UY with 05Q0 and 05UP; these sources are not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +175,80 @@
    "results": "{\"t\": \"2026-10-16T22:25:36Z\", \"tool\": \"grep\", \"query\": \"Kan.*[Ee]xponential|[Ee]xponential.*Kan|[Ss]lice.*[Cc]losed|[Cc]losed.*[Ss]lice\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: ExponentiableMorphism (Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:41-53) assumes an ordinary pullback right adjoint; it does not construct one for spaces. CategoryTheory.Cat.cartesianClosed (Mathlib/CategoryTheory/Category/Cat/CartesianClosed.lean:71-80) concerns ordinary categories and hom sets. Condensed/CartesianClosed gives ordinary condensed sets. AlgebraicTopology/Quasicategory/StrictBicategory.lean:28 is a future-work comment. The second semantic search returns Kan-fibration definitions and ordinary homotopy-category lemmas, not coherent slice exponentials. None states the node or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "KFib|[Ss]lice.*[Cc]losed|[Cc]losed.*[Ss]lice|[Ll]ocally[Cc]artesian",
+   "results": "{\"t\": \"2026-10-16T23:07:35Z\", \"tool\": \"grep\", \"query\": \"KFib|[Ss]lice.*[Cc]losed|[Cc]losed.*[Ss]lice|[Ll]ocally[Cc]artesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed (Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean) is an ordinary simplicial-set exponential, not a coherent space-slice exponential. ExponentiableMorphism (Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:41-52, read) assumes an ordinary slice right adjoint. SimplicialNerve.lean:28-33 still lists locally Kan nerves and the infinity category of anima as future work. The second semantic phrasing returned only Kan-fibration and ordinary enrichment definitions. None specializes to this coherent statement in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExponentiableMorphism, SSet.KanComplex",
+   "results": "{\"t\": \"2026-10-16T23:07:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ExponentiableMorphism, SSet.KanComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed (Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean) is an ordinary simplicial-set exponential, not a coherent space-slice exponential. ExponentiableMorphism (Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:41-52, read) assumes an ordinary slice right adjoint. SimplicialNerve.lean:28-33 still lists locally Kan nerves and the infinity category of anima as future work. The second semantic phrasing returned only Kan-fibration and ordinary enrichment definitions. None specializes to this coherent statement in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinity category of homotopy types is locally cartesian closed",
+   "results": "{\"t\": \"2026-10-16T23:07:36Z\", \"tool\": \"leansearch\", \"query\": \"The infinity category of homotopy types is locally cartesian closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianClosed\", \"CategoryTheory.Cat.closed\", \"CategoryTheory.Cat.cartesianClosed\", \"SSet.Truncated.instMonoidalClosed\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CategoryTheory.instMonoidalClosedType\", \"CategoryTheory.cartesianClosedFunctorToTypes\", \"SSet.instMonoidalClosed\"], \"digest\": \"43f3a8f0c2274fa9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed (Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean) is an ordinary simplicial-set exponential, not a coherent space-slice exponential. ExponentiableMorphism (Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:41-52, read) assumes an ordinary slice right adjoint. SimplicialNerve.lean:28-33 still lists locally Kan nerves and the infinity category of anima as future work. The second semantic phrasing returned only Kan-fibration and ordinary enrichment definitions. None specializes to this coherent statement in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Kan complex B the infinity category of small spaces over B is cartesian closed with coherent relative mapping spaces",
+   "results": "{\"t\": \"2026-10-16T23:07:37Z\", \"tool\": \"leanfinder\", \"query\": \"For a Kan complex B the infinity category of small spaces over B is cartesian closed with coherent relative mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"SSet.Truncated.instMonoidalClosed\", \"SSet.instCartesianMonoidalCategory\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\"], \"digest\": \"9b8a52ac40676e3d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed (Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean) is an ordinary simplicial-set exponential, not a coherent space-slice exponential. ExponentiableMorphism (Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:41-52, read) assumes an ordinary slice right adjoint. SimplicialNerve.lean:28-33 still lists locally Kan nerves and the infinity category of anima as future work. The second semantic phrasing returned only Kan-fibration and ordinary enrichment definitions. None specializes to this coherent statement in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "ExponentiableMorphism|[Ll]ocally[Cc]artesian|KanComplex",
+   "results": "{\"t\": \"2026-10-16T23:08:05Z\", \"tool\": \"grep\", \"query\": \"ExponentiableMorphism|[Ll]ocally[Cc]artesian|KanComplex\", \"sub\": \"CategoryTheory/LocallyCartesianClosed\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\"], \"digest\": \"bc918ad15026d119\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed (Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean) is an ordinary simplicial-set exponential, not a coherent space-slice exponential. ExponentiableMorphism (Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:41-52, read) assumes an ordinary slice right adjoint. SimplicialNerve.lean:28-33 still lists locally Kan nerves and the infinity category of anima as future work. The second semantic phrasing returned only Kan-fibration and ordinary enrichment definitions. None specializes to this coherent statement in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fiberwise function objects of Kan fibrations over a base Kan complex model homotopy coherent exponentials in the slice infinity category",
+   "results": "{\"t\": \"2026-10-16T23:08:06Z\", \"tool\": \"leanfinder\", \"query\": \"Fiberwise function objects of Kan fibrations over a base Kan complex model homotopy coherent exponentials in the slice infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"5237170cc6f24d37\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed (Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean) is an ordinary simplicial-set exponential, not a coherent space-slice exponential. ExponentiableMorphism (Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:41-52, read) assumes an ordinary slice right adjoint. SimplicialNerve.lean:28-33 still lists locally Kan nerves and the infinity category of anima as future work. The second semantic phrasing returned only Kan-fibration and ordinary enrichment definitions. None specializes to this coherent statement in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dependent products of fibrant simplicial sets over a base represent mapping spaces in the infinity categorical slice of homotopy types",
+   "results": "{\"t\": \"2026-10-16T23:34:37Z\", \"tool\": \"leanfinder\", \"query\": \"Dependent products of fibrant simplicial sets over a base represent mapping spaces in the infinity categorical slice of homotopy types\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"SSet.QCat\", \"SSet.hoFunctor\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.FibrantObject\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\"], \"digest\": \"ec8bd0a0bdea4ca0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-35,188-204; CategoryTheory.SimplicialNerve defines the nerve and its locally Kan theorem is still a project. NerveAdjunction.lean:374-408 states full faithfulness for ordinary category nerves, not enriched slices. The dependent-product hits give sHom, fibrant objects and the Kan model structure, not coherent slice exponentials. No listed declaration states this node or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison functor from enriched over category into over category of the homotopy coherent nerve is fully faithful for fibrant mapping fibers",
+   "results": "{\"t\": \"2026-10-16T23:34:13Z\", \"tool\": \"leanfinder\", \"query\": \"Comparison functor from enriched over category into over category of the homotopy coherent nerve is fully faithful for fibrant mapping fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.nerveFunctor.faithful\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.Truncated.sk.fullyFaithful\", \"CategoryTheory.nerve.instFaithfulCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\"], \"digest\": \"f9e9bd5de1f9d072\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the proposed comparison node: SimplicialNerve.lean:193 defines the coherent nerve; lines 28-35 list even its locally Kan theorem as future work. NerveAdjunction.lean:374-408 gives ordinary-category nerve full faithfulness. The comparison node was removed because step 2 constructs it directly using existing DAG statements, not because a Mathlib match was found."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|over.*[Ff]ully|[Ff]ully.*over|slice.*[Nn]erve",
+   "results": "{\"t\": \"2026-10-16T23:34:35Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|over.*[Ff]ully|[Ff]ully.*over|slice.*[Nn]erve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the proposed comparison node: SimplicialNerve.lean:193 defines the coherent nerve; lines 28-35 list even its locally Kan theorem as future work. NerveAdjunction.lean:374-408 gives ordinary-category nerve full faithfulness. The comparison node was removed because step 2 constructs it directly using existing DAG statements, not because a Mathlib match was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "results": "{\"t\": \"2026-10-16T23:34:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the proposed comparison node: SimplicialNerve.lean:193 defines the coherent nerve; lines 28-35 list even its locally Kan theorem as future work. NerveAdjunction.lean:374-408 gives ordinary-category nerve full faithfulness. The comparison node was removed because step 2 constructs it directly using existing DAG statements, not because a Mathlib match was found."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-universal-colimits",
@@ -85,5 +256,29 @@
   "group": "NC"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-spaces-slice-cartesian-closure",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps construct the slice comparison directly from an enriched natural transformation and identify its mapping fibers using existing nodes; construct the small relative exponential and prove its Kan lifting property by right properness; verify enriched products, evaluation and all simplex-parameter naturality; and pass through the coherent-slice equivalence. No new nodes or Mathlib leaves. The second reader removed the unnecessary general slice-comparison node, expanded the inverse-over-base check and parameterized bifunctor formulas, and retained actual independent Mathlib searches. Empty spaces and fibers checked.",
+  "blueprint": "Realizes the inherited foundational branch under current main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2, the finite derived Hom adjunction before R inverse-limit. The local space-slice argument follows Kerodon 05UY and replaces no step at unit or chapter level.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent-cone mapping-space formula with shape a point, used to prove full faithfulness of the explicit enriched-slice comparison and to check that fibration replacement has an inverse over the fixed base; not a replacement of any unit-level argument. Worker declaration only: final tool_uses approval remains with the maintainer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-53b2633c1",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-53b2633c1 (reviewer sub-agent of L); spot-checked: I read every step of the mathematics in full. The delivery is one commit with the report and the item only. It adds no new nodes (the second reader removed the first reader's comparison node) and leaves the item statement unchanged. The proof_deps are the union of the step uses, and there is no cycle. The statement and route agree with Kerodon 05UY (Prop 7.7.3.17), 05Q0 (Ex 5.5.1.23, which uses the dual of 01ZT plus Cor 3.1.3.2 and Prop 3.1.8.1) and 05UP (Rem 7.7.3.9), which I read online because Kerodon is not archived. Step 1: the pushout-product of empty->Z with a horn inclusion is Z x horn -> Z x simplex, so the cited anodyne Mathlib leaf applies; the strict-slice mapping complexes are fibers of a Kan fibration, so KFib(B) is locally Kan. Step 2: I checked the composition cases of the enriched functor to [1] for indices 001 and 011. Cone calculus with shape a point gives exactly the fixed-target arrow model as the cone category and the homotopy-fiber formula, and the coherent-nerve comparison gives the strict fiber. The claim that J induces this identification (the content of 01ZT) rests on the stated naturality of both comparisons; I accept it. Essential surjectivity uses the Kan factorization, and the inverse over B is built via e_* on homotopy fibers. Step 3: I checked the explicit construction of M, its evaluation and the currying bijection. Step 4: the pulled-back horn inclusion is a weak equivalence by right properness and a mono, so it lifts against g; this is exactly 05UY. Steps 5 and 6: the product and exponential conditions of 05UP hold as isomorphisms of simplicial sets, checked degreewise, including enriched bifunctoriality via the diagonal of the simplex. Step 7 is an elementary transport. Edge cases B, X or Y empty, B a point and S^1 monodromy all agree. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), a generic cone mapping-space formula used as a black box in step 2. There is no SGA citation and no target or unit/chapter change. My duplicate search over cartesian closure, relative exponential and 05UY hits found only the absolute-case and Cat-infinity nodes and the fixed-target relative-exponential nodes, none of which duplicates the item. Mathlib has no infinity category of spaces, so no leaf was missed. No fixes were made."
+ }
 }
