@@ -11,9 +11,31 @@
   "def-sc-finitely-presented-module",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "This is the same module-colimit theorem as [lem-trf-module-finitely-presented-directed-colimit]. Instantiate its module variable $M$ with $Q$. The canonical node's directed-system data includes the identity and composition equations for transition maps and the compatibility equation for the cocone maps (these are the defining equations of the directed system and cocone), so it supplies every explicitly displayed clause of the present formulation. Its finite-presentation convention is exactly [def-sc-finitely-presented-module], and its colimit is the colimit of [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-trf-module-finitely-presented-directed-colimit",
+    "def-sc-finitely-presented-module",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058G, theorem-lazard paragraph beginning 'First recall that any module M can be written as the colimit of a directed system of finitely presented modules'; repoint to the existing DAG node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-module-finitely-presented-directed-colimit",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058G, theorem-lazard paragraph beginning 'First recall that any module M can be written as the colimit of a directed system of finitely presented modules'; compatibility repoint to the existing DAG theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -73,7 +95,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-universal-injective-finite-test",
@@ -85,7 +107,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Supporting algebra beneath the local-term locality proof: the finite tensor-test reduction in the Tag 05DM completion argument (via Tag 058K) uses a directed presentation of an arbitrary test module by finitely presented modules, supplied by Tag 00HA.",
+   "place": "No corresponding module-colimit clause occurs in the current main-20261015 proof of lem-trf-local-term-locality; this node is retained only as a compatibility alias and is repointed to the existing Tag 058G module-colimit node.",
    "via": [
     "lem-trf-universal-injective-finite-test",
     "lem-trf-flat-completion-universally-injective",
@@ -115,5 +137,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-module-directed-colimit-fp",
+  "worker": "stage1",
+  "summary": "Repair of the returned duplicate: the explicit Tag 00HA construction was removed from this item and the statement is repointed to the already reviewed canonical node lem-trf-module-finitely-presented-directed-colimit, whose directed-system and cocone clauses imply the displayed identity, composition, and compatibility equations. No child nodes or Mathlib leaves are added; the maintainer should merge this compatibility alias into the canonical node at DAG level.",
+  "blueprint": "The current main-20261015 blueprint has no module-directed-colimit clause in lem-trf-local-term-locality. This repair therefore records the absence and treats the item as a compatibility alias to the existing Tag 058G node, rather than claiming the old-master Tag 00HA route as current provenance.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q85-8c3652960",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-8c3652960 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, canonical eight-step proof, unit/chapter route, and Stacks 00HA, 058G, 0518, 002F and 002V. The existing theorem supplies every clause; edge cases and dependency closure check out. No new nodes, long steps, cycles or forbidden machinery. The duplicate remains a valid citation alias; no consolidation is claimed. Full checks are recorded in review.md."
  }
 }

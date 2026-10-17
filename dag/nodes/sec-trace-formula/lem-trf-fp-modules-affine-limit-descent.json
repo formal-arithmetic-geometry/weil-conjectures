@@ -15,9 +15,131 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover $\\{U_a\\}$ of $S$. For every nonempty pairwise intersection and triple intersection choose finite affine charts $W_{ab,r}$ and $T_{abc,s}$; choose finite affine charts on each overlap $W_{ab,r}\\cap W_{ab,r'}$, and refine the triple charts so that each lies in the three relevant pair charts. Apply [lem-trf-affine-open-limit-descent] to this finite list and pass, by directedness, to one stage containing all the resulting stage opens. The restricted systems have affine transitions and the asserted limits by [lem-weil-pbc-limit-cone-affine-projections-opens].",
+   "uses": [
+    "lem-trf-affine-open-limit-descent",
+    "lem-weil-pbc-limit-cone-affine-projections-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof: reduce to the affine case and use Zariski gluing; Tags 01Z4 and 01YW for finite affine charts"
+   }
+  },
+  {
+   "text": "All chosen opens and their finite intersections are quasi-compact: the descended charts are affine, and intersections of finitely many affine opens are quasi-compact in the quasi-separated stages. For each chart, parent intersection, and incidence inclusion, first descend the relevant quasi-compact intersection by clause (1) of [pqf-lem-limit-qc-open-descends]. Its inverse image in $S$ agrees with the corresponding limit intersection. Apply clause (2) of that node to the two descended opens with equal inverse images; after enlargement their stage opens are equal, which gives the desired inclusion. Apply the same argument to the finite lists of parent charts, pair refinements and triple refinements, and take one common upper bound. Then the finite unions equal the corresponding stage intersections, and the finite union of the $U_a$ equals the whole stage. Thus every chart and refinement covers the actual stage open, and [lem-weil-pbc-limit-global-sections-colimit] gives the filtered-colimit description of every chart and refinement ring.",
+   "uses": [
+    "pqf-lem-limit-qc-open-descends",
+    "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof: finite affine charts and Zariski gluing"
+   }
+  },
+  {
+   "text": "On each affine limit chart $U_a$, $W_{ab,r}$ and $T_{abc,s}$, finite presentation implies quasi-coherence and the restriction has a finitely presented module of sections by [lem-weil-pbc-quasi-coherent-finite-type-affine]. The comparisons of [lem-weil-pbc-module-pullback-affine-sections-bijective] and the affine tilde/global-sections equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] identify restriction and tensor pullback with extension of scalars. Using the colimit rings of Steps 1--2, [lem-pc-fp-module-map-descent-affine] descends all local modules and every canonical comparison map to one common stage.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-module-pullback-affine-sections-bijective",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-limit-global-sections-colimit",
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof: affine case via Algebra, Lemma 05N7"
+   }
+  },
+  {
+   "text": "For every pair chart, the canonical comparison on the limit is an isomorphism. After the map descent in Step 3, descend its inverse as a second map between the same finitely presented stage modules using the map clause of [lem-pc-fp-module-map-descent-affine]. Enlarge once more so that both composites of the descended map and descended inverse equal the relevant identity: their pullbacks to $S$ are identities, and the equality clause of [lem-pc-fp-module-map-descent-affine] applies to this finite list. Hence every descended comparison $\\theta_{ab,r}$ is an isomorphism, with a specified descended inverse, before any gluing is performed.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof: affine case via Algebra, Lemma 05N7 and Zariski gluing"
+   }
+  },
+  {
+   "text": "On each affine refinement of $W_{ab,r}\\cap W_{ab,r'}$, the pullbacks of the two pair-chart comparisons agree because both are the canonical comparison for $F$. Apply the equality clause of [lem-pc-fp-module-map-descent-affine] to this finite family and pass to a common later stage. The comparisons therefore agree on every actual pair-chart overlap by Step 2; their descended inverses agree there as well, since composing either inverse with the common isomorphism gives the same identity. Thus the $\\theta_{ab,r}$ glue to one isomorphism on each full stage intersection $U_a\\cap U_b$.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof: Zariski gluing of the affine case"
+   }
+  },
+  {
+   "text": "On every refined triple chart $T_{abc,s}$, form the two composites of the three transition isomorphisms, using the canonical iterated-pullback identifications. Their pullbacks to $S$ agree with the third transition map by functoriality of the canonical comparison for $F$; the identity equations on repeated indices similarly pull back to identities. Apply the equality clause of [lem-pc-fp-module-map-descent-affine] to this finite list and enlarge once so that all cocycle and identity equations hold on the stage. Because the triple refinements cover each full triple intersection by Step 2, the glued transition isomorphisms satisfy the fpqc descent cocycle everywhere.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, clause (1) and first proof, Zariski gluing"
+   }
+  },
+  {
+   "text": "The stage opens $U_a$ are a finite jointly surjective cover by Step 2; as affine open immersions they form an fpqc covering. The isomorphisms from Steps 4--6 are defined on all pairwise intersections and satisfy the cocycle on all triple intersections. Therefore [lem-pc-fpqc-descent] glues them to a quasi-coherent module $F_i$; its finite-presentation preservation/reflection clause gives finite presentation. The local identifications pull back to $S$ and agree on every pair chart, so they glue to $p_i^*F_i\\cong F$. This proves clause (1).",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof: Zariski gluing of the affine case"
+   }
+  },
+  {
+   "text": "For clause (2), restrict $u:p_i^*F_i\\to p_i^*G_i$ to the finite cover $U_a$. The affine comparisons identify these restrictions with module maps, and the map clause of [lem-pc-fp-module-map-descent-affine] lifts every restriction to a common later stage. On each pair refinement, the two local lifts have equal pullback to $S$; its equality clause makes them equal after a further enlargement. The pair refinements cover each full intersection by Step 2, so the lifts glue by [lem-pc-fpqc-descent] to a global $u_j$ whose pullback is $u$.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, clause (2) and first proof, affine case plus Zariski gluing"
+   }
+  },
+  {
+   "text": "For clause (3), restrict $u_i$ and $v_i$ to the same finite cover. Their pulled-back affine module maps agree over $S$, so the equality clause of [lem-pc-fp-module-map-descent-affine] gives a later stage where they agree on every $U_a$ after one common upper bound. Since the $U_a$ cover that stage by Step 2, faithfulness in [lem-pc-fpqc-descent] implies $p_{ji}^*u_i=p_{ji}^*v_i$ globally.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, clause (3) and first proof, affine case plus Zariski gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-fpqc-descent",
+  "lem-trf-affine-open-limit-descent",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "lem-weil-pbc-module-pullback-affine-sections-bijective",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-limit-qc-open-descends"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof (affine Algebra 05N7 case followed by finite Zariski gluing); the finite affine-chart descent is Mathlib exists_isAffineOpen_preimage_eq."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +178,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-invertible-affine-limit-descent",
@@ -70,20 +192,39 @@
    "node": "lem-trf-local-term-locality",
    "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: in the proof of 0D2S used by lem-trf-proper-fibrewise-ample-projective, descend the chosen line bundle after the proper Noetherian approximation. Finite-presentation module and map descent used to descend the tensor-inverse witness of the chosen line bundle.",
    "via": [
-    "lem-trf-invertible-affine-limit-descent",
-    "lem-trf-ample-neighbourhood",
-    "lem-trf-proper-fibrewise-ample-projective",
-    "lem-trf-temkin-stable-modification",
-    "lem-trf-stable-modification-flat-curve-pair",
-    "lem-trf-dejong-relative-marked-semistable",
-    "lem-trf-relative-marked-nodal-reduction",
-    "lem-trf-plurinodal-alteration",
-    "lem-trf-nearby-cycle-verdier-duality",
-    "lem-trf-specialization-cohomological-comparison",
-    "lem-trf-trace-specialization"
+    "lem-trf-invertible-affine-limit-descent"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fp-modules-affine-limit-descent",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by decomposing chart descent, incidence stabilization, module/map descent, inverse-map descent, overlap compatibility, cocycle verification, and the three fpqc-gluing clauses. In particular, every pair-chart comparison now has a descended inverse and its two identity composites are forced at a later stage by the equality clause; long chart and map arguments are separated into substeps. Removed stale created.item provenance from the item.",
+  "blueprint": "The nine steps realize the imported finite-presentation module/map descent input used to descend the tensor-inverse witness: finite affine charts, eventual incidence equalities, local module and map descent, inverse and identity equations, overlap and cocycle compatibility, effective gluing, and the morphism/equality clauses.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fp-module-map-descent-affine",
+    "why": "Its three ring-level clauses are the affine case of Tag 01ZR and are used for local module objects, maps, and eventual equalities."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Its effective fpqc descent and full faithfulness glue the finite affine local data and detect global map equality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q90-3502b30e1",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q90-3502b30e1 (reviewer sub-agent of L); spot-checked: Step 2 incorrectly claimed that clause (2) of pqf-lem-limit-qc-open-descends directly yields inclusions; that clause only compares quasi-compact opens with equal inverse images. Corrected DAG JSON explicitly descends intersections via clause (1), compares them via clause (2), then stabilizes finite unions. Full review and fix are in review.md and fixes/dag/nodes/sec-trace-formula/lem-trf-fp-modules-affine-limit-descent.json.; 1 file(s) fixed by the reviewer"
  }
 }

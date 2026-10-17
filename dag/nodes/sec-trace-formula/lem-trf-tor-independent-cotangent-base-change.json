@@ -2,14 +2,17 @@
  "id": "lem-trf-tor-independent-cotangent-base-change",
  "kind": "statement",
  "title": "Polynomial resolutions remain resolutions under Tor-independent tensoring",
- "statement": "Let $A\\to B$ and $A\\to A'$ be homomorphisms of commutative rings, put $B'=B\\otimes_A A'$, and let $P_\\bullet\\to B$ be a polynomial resolution in the precise sense of [lem-trf-cotangent-resolution-coherence]. Thus $P_n$ is a polynomial $A$-algebra surjecting onto $B$, and the alternating-face complex $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism. If the canonical map $B\\otimes_A^{\\mathbf L}A'\\to B'[0]$ is a quasi-isomorphism [def-weil-abstract-derived-category], then $P_\\bullet\\otimes_A A'\\to B'$ is a polynomial resolution over $A'$, with its given tensor augmentation.",
+ "statement": "Let $A\\to B$ and $A\\to A'$ be homomorphisms of commutative rings, put $B'=B\\otimes_A A'$ [def-weil-module-base-change], and let $P_\\bullet\\to B$ be a polynomial resolution in the precise sense of [lem-trf-cotangent-resolution-coherence]. Thus $P_n$ is a polynomial $A$-algebra surjecting onto $B$, and the alternating-face complex $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism. If the canonical map $B\\otimes_A^{\\mathbf L}A'\\to B'[0]$ is a quasi-isomorphism [def-weil-abstract-derived-category], where derived scalar extension is [lem-pur-derived-change-of-rings] transported to ordinary modules by [lem-trf-one-point-derived-ring-identification], then $P_\\bullet\\otimes_A A'\\to B'$ is a polynomial resolution over $A'$, with its given tensor augmentation.",
  "source": {
   "document": "literature/stacks-project/cotangent.tex",
   "place": "Tag 08QP (lemma-flat-base-change), proof identifying s(P) tensor A′ with the complex computing B tensor-derived A′; the resolution convention is Tag 08QI (remark-resolution)."
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "lem-trf-cotangent-resolution-coherence"
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-module-base-change",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-one-point-derived-ring-identification"
  ],
  "created": {
   "by": "worker",
@@ -17,10 +20,104 @@
   "date": "2026-10-18",
   "group": "Q86"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Write $C=s(P_\\bullet)$ and $q:C\\to B[0]$ for the given augmentation. By [lem-trf-cotangent-resolution-coherence], $C^{-n}=P_n$, the differential is the alternating sum of faces, positive terms are zero, and $q$ is a quasi-isomorphism. Choose polynomial coordinates $P_n=A[X_i:i\\in I_n]$. The definition [def-weil-pbc-mv-polynomial-ring] gives unique finite coefficient expansions $\\sum_\\alpha a_\\alpha X^\\alpha$. The tensor universal property [def-weil-pbc-module-tensor-product] gives inverse maps $P_n\\otimes_A M\\leftrightarrows\\bigoplus_\\alpha M$: $p\\otimes m\\mapsto(a_\\alpha m)_\\alpha$ and $(m_\\alpha)_\\alpha\\mapsto\\sum_\\alpha X^\\alpha\\otimes m_\\alpha$. Their composites are identities by coefficient expansion and balancing. These maps commute with maps of $M$. Thus tensoring with $P_n$ preserves exact sequences coordinatewise: a family in the kernel has a preimage chosen in only its finitely many nonzero coordinates. Hence every term of $C$ is flat, for arbitrary sets $I_n$.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), the free-module resolution s(P); Tag 08QI (remark-resolution), associated-complex convention."
+   }
+  },
+  {
+   "text": "The complex $C$ is bounded above by degree zero and termwise flat. The ordinary-module theorem [lem-pc-module-bounded-flat-kflat] therefore makes $C$ K-flat. Since $q:C\\to B[0]$ is a quasi-isomorphism, it is a K-flat resolution in the sense of [def-pc-module-kflat-complex].",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP, computation using the free resolution; more-algebra.tex Tag 064K (lemma-derived-tor-quasi-isomorphism), bounded-above flat criterion."
+   }
+  },
+  {
+   "text": "Set $P'_\\bullet=P_\\bullet\\otimes_A A'$ and $\\epsilon'_n=\\epsilon_n\\otimes1$. The base change of the multiplication supplied by [def-weil-module-base-change] is $(p\\otimes a')(r\\otimes b')=pr\\otimes a'b'$. Hence tensoring algebra maps gives algebra maps, and its identity and composition formulas preserve all simplicial and augmentation identities. The switch $p\\otimes a'\\mapsto a'\\otimes p$ is well-defined by balancing, is its own inverse, and preserves this multiplication. Composing it with [lem-weil-pbc-polynomial-scalar-extension] yields an $A'$-algebra isomorphism $P'_n\\cong A'[X_i:i\\in I_n]$ sending $X^\\alpha\\otimes a'$ to $a'X^\\alpha$. Finally any $\\sum_j b_j\\otimes a'_j\\in B'$ lifts to $\\sum_j p_j\\otimes a'_j\\in P'_n$ by choosing $\\epsilon_n(p_j)=b_j$. Thus the tensor augmentation is degreewise surjective.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-polynomial-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP, base-changed polynomial algebras; Tag 08QI, polynomial and surjective conditions."
+   }
+  },
+  {
+   "text": "Degree $-n$ of both $C\\otimes_A A'$ and $s(P'_\\bullet)$ is $P_n\\otimes_A A'$. Additivity of scalar extension on maps [def-weil-module-base-change] identifies their differentials: both send $p\\otimes a'$ to $\\sum_i(-1)^i d_i(p)\\otimes a'$. Their augmentations both send $p\\otimes a'$ to $\\epsilon_0(p)\\otimes a'$ in degree zero and are zero in negative degrees. Thus the degreewise identities give a chain isomorphism preserving the actual augmentation $q\\otimes1$.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP, identity s(P) tensor A-prime = s(P tensor A-prime), including its augmentation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-one-point-derived-ring-identification] to the one-object site $\\mathcal T$. Its exact tensor evaluation equivalence carries $A,A'$, the complexes $C,B[0]$, the map $q$ and ordinary K-flatness to the corresponding sheaf data, and identifies their derived categories and ordinary scalar-extension functors. Consequently [lem-pur-derived-change-of-rings] supplies the universal total left derived scalar-extension pair $L:D(A)\\to D(A')$, $\\gamma:LQ_A\\to Q_{A'}T$, where $T(K)=K\\otimes_A A'$ termwise and $Q$ denotes localization. The natural-counit convention is that of [lem-pur-left-derived-from-kflat-class], transported by that equivalence. Here $L(B[0])=B\\otimes_A^{\\mathbf L}A'$ and $\\gamma_{B[0]}$ is precisely the canonical derived-to-ordinary comparison of the hypothesis.",
+   "uses": [
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP, derived tensor interpreted in ordinary ring modules; sites-modules.tex Tag 03CW and sites-cohomology.tex Tag 06YY (lemma-derived-base-change); derived.tex Tag 05S9 (definition-right-derived-functor-defined)."
+   }
+  },
+  {
+   "text": "The ordinary-module counit theorem [lem-pc-kflat-scalar-extension-counit] makes $\\gamma_C$ invertible. Naturality of $\\gamma$ as explicitly supplied by [lem-pur-left-derived-from-kflat-class], applied to the homotopy image of $q$, gives\n$$\\gamma_{B[0]}\\circ L(Q_Aq)=Q_{A'}(q\\otimes1)\\circ\\gamma_C.$$\nSince $q$ is a quasi-isomorphism, $Q_Aq$ and its image under $L$ are isomorphisms [def-weil-abstract-derived-category]. Thus $j=L(Q_Aq)\\circ\\gamma_C^{-1}:Q_{A'}(C\\otimes_A A')\\xrightarrow{\\sim}L(B[0])$ is the resolution computation isomorphism, and the displayed equation says exactly $\\gamma_{B[0]}\\circ j=Q_{A'}(q\\otimes1)$. By the hypothesis and this equation every cohomology map of $q\\otimes1$ is an isomorphism. Step 4 gives this quasi-isomorphism for the specified augmentation of $s(P'_\\bullet)$. Together with Step 3, this is precisely the polynomial-resolution criterion of [lem-trf-cotangent-resolution-coherence].",
+   "uses": [
+    "lem-pc-kflat-scalar-extension-counit",
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-abstract-derived-category",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP, final derived-to-ordinary comparison; naturality and computation in derived.tex Tags 05S9 and 06XN; ordinary module counit more-algebra.tex Tag 06Y6 (lemma-derived-base-change)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-trf-one-point-derived-ring-identification",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pc-kflat-scalar-extension-counit",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QP (lemma-flat-base-change), proof, expanded using Tag 08QI and the natural counit formula of derived.tex Tags 05S9/06XN. The one-object-site bridge is stated separately."
+ },
  "mathlib_match": null,
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
@@ -87,6 +184,41 @@
    "results": "8 hits; top=['Algebra.Presentation.tensorModelOfHasCoeffsInv', 'Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul', 'Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val', 'Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul', 'Algebra.Generators.baseChange_val', 'Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul', 'classifyingSpaceUniversalCover.compForgetAugmented.toModule', 'Algebra.PreSubmersivePresentation.baseChange']; note=; digest=776b77581d152604. Read full output in lem-trf-tor-independent-cotangent-base-change.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial polynomial algebra resolution remains a resolution after Tor independent scalar extension",
+   "results": "8 hits; top=['Algebra.Presentation.tensorModelOfHasCoeffsInv', 'Rep.barResolution', 'Algebra.FormallySmooth.projective_kaehlerDifferential', 'Rep.barResolution_complex', 'Rep.standardResolution', 'ModuleCat.projectiveResolution', 'Algebra.FormallySmooth.iff_injective_lTensor_residueField', 'CategoryTheory.Abelian.LeftResolution.chainComplexXIso']; note=; digest=70b1490edf9eea07. Read returned types and the relevant Mathlib source: Presentation/Core.lean:167, ModuleCat/LeftResolution.lean:43, Resolution.lean:430, GroupHomology/FiniteCyclic.lean:56, PolynomialAlgebra.lean:191, Polynomial/Module/TensorProduct.lean:30 and Monoidal/Tor.lean:44–64. These provide polynomial tensor identifications, module or representation resolutions and Tor definitions/projective vanishing, not this simplicial-algebra resolution statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"resolution\", \"tensor\"",
+   "results": "4 hits; top=['Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso', 'Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_inv_f_hom_apply', 'Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply', 'groupHomology.coinvariantsTensorResProjectiveResolutionIso']; note=; digest=5dc1d5c5d1cfa4c0. Read returned types and the relevant Mathlib source: Presentation/Core.lean:167, ModuleCat/LeftResolution.lean:43, Resolution.lean:430, GroupHomology/FiniteCyclic.lean:56, PolynomialAlgebra.lean:191, Polynomial/Module/TensorProduct.lean:30 and Monoidal/Tor.lean:44–64. These provide polynomial tensor identifications, module or representation resolutions and Tor definitions/projective vanishing, not this simplicial-algebra resolution statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*resolution|resolution.*baseChange|torIndependent [sub=RingTheory]",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read returned types and the relevant Mathlib source: Presentation/Core.lean:167, ModuleCat/LeftResolution.lean:43, Resolution.lean:430, GroupHomology/FiniteCyclic.lean:56, PolynomialAlgebra.lean:191, Polynomial/Module/TensorProduct.lean:30 and Monoidal/Tor.lean:44–64. These provide polynomial tensor identifications, module or representation resolutions and Tor definitions/projective vanishing, not this simplicial-algebra resolution statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a free polynomial simplicial resolution with a Tor independent algebra preserves its quasi-isomorphism augmentation",
+   "results": "8 hits; top=['lTensorHomEquivHomLTensor', \"polyEquivTensor'\", 'Module.Free.tensor', 'PolynomialModule.polynomialTensorProductLEquivPolynomialModule', 'instFinitePresentationTensorProduct', 'Algebra.TensorProduct.instFree', 'lTensorHomEquivHomLTensor.congr_simp', 'FreeAlgebra.toTensor']; note=; digest=b31cead8e752d456. Read returned types and the relevant Mathlib source: Presentation/Core.lean:167, ModuleCat/LeftResolution.lean:43, Resolution.lean:430, GroupHomology/FiniteCyclic.lean:56, PolynomialAlgebra.lean:191, Polynomial/Module/TensorProduct.lean:30 and Monoidal/Tor.lean:44–64. These provide polynomial tensor identifications, module or representation resolutions and Tor definitions/projective vanishing, not this simplicial-algebra resolution statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above free module resolution computes derived tensor and Tor vanishing makes the tensor augmentation a quasi-isomorphism",
+   "results": "8 hits; top=['CategoryTheory.isZero_Tor_succ_of_projective', \"CategoryTheory.isZero_Tor'_succ_of_projective\", 'Rep.isZero_Tor_succ_of_projective', 'CategoryTheory.Tor_obj', \"CategoryTheory.Tor'_obj_obj\", 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀', 'CategoryTheory.Tor', \"CategoryTheory.Tor'\"]; note=; digest=7647291e0e4e5ed2. Read returned types and the relevant Mathlib source: Presentation/Core.lean:167, ModuleCat/LeftResolution.lean:43, Resolution.lean:430, GroupHomology/FiniteCyclic.lean:56, PolynomialAlgebra.lean:191, Polynomial/Module/TensorProduct.lean:30 and Monoidal/Tor.lean:44–64. These provide polynomial tensor identifications, module or representation resolutions and Tor definitions/projective vanishing, not this simplicial-algebra resolution statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
@@ -109,5 +241,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-tor-independent-cotangent-base-change",
+  "worker": "stage1",
+  "summary": "Repaired all return points: cite the existing multivariable polynomial definition for unique monomial expansions and the polynomial scalar-extension leaf for the algebra isomorphism; add one statement-only terminal-site evaluation/derived-pair identification; cite the existing natural universal derived counit and ordinary K-flat counit theorem, and write its naturality equation to identify the exact tensor augmentation. No mathematical statement change, no extra flatness or finiteness hypotheses.",
+  "blueprint": "Retains the Stacks 08QP resolution argument below the inherited local-term/lci-cotangent ancestry: Steps 1-2 provide the free K-flat resolution, Steps 3-4 the base-changed simplicial polynomial algebra and its actual augmentation, and Steps 5-6 the site identification and explicit canonical-comparison equation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-above flat-module K-flat criterion needed for the 08QP resolution computation; no local-term unit lemma replaces this homological algebra tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic sheaf K-flat scalar-extension construction, transported by the new terminal-site bridge to ordinary modules, exactly as in 08QP."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic universal derived-pair natural counit, used for its stated naturality and convention, not for any unstated representative formula."
+   },
+   {
+    "node": "lem-pc-kflat-scalar-extension-counit",
+    "why": "Generic ordinary-module invertibility of the derived counit on a K-flat complex; no flatness of the ring homomorphism is required."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-65e5db2d1",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-65e5db2d1 (reviewer sub-agent of L); spot-checked: Read the item, new node, blueprint route, cited statements, and Stacks sources. All hypotheses and six proof steps check; edge cases, citations, graph, searches, and route-pivot constraints pass. Review written to review.md."
  }
 }

@@ -17,38 +17,112 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-irreducible-components",
   "def-sc-normalization",
-  "def-pc-euler-characteristic",
-  "lem-sc-normalization-properties",
+  "def-pc-euler-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "Properness includes finite type by [def-weil-proper-morphism]. Apply [lem-trf-normalization-singular-skyscraper] to $X=B$. Reducedness, algebraic closedness, and purity of dimension one are precisely its remaining hypotheses. Its componentwise normalization is the map $\\nu$ in the statement. It gives finiteness of $N$, a coherent exact sequence $0\\to\\mathcal O_B\\to\\nu_*\\mathcal O_{\\widetilde B}\\to Q\\to0$, and $Q\\cong\\bigoplus_{x\\in N}\\mathscr S_x(M_x)$. For each $x$, put $A=\\mathcal O_{B,x}$, $C=(\\nu_*\\mathcal O_{\\widetilde B})_x$ and $R=\\widehat A$. The same statement identifies $M_x=C/A$ with $\\widehat C/R$, where $\\widehat C$ is the integral closure of $R$ in its total fraction ring.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-trf-normalization-singular-skyscraper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), parts (1)--(4), (7), (9)"
+   }
+  },
+  {
+   "text": "Fix $x\\in N$ and choose the stated local-ring isomorphism $R\\cong k[[u,v]]/(uv)$. Evaluation on the axes embeds this ring in $P=k[[u]]\\times k[[v]]$: its kernel before quotienting consists exactly of the series all of whose terms are divisible by $uv$. Its image consists of the pairs with equal constant term, since such a pair $(f,g)$ is represented by $f(u)+g(v)-f(0)$. Put $s=(u,v)\\in R$. It is a non-zero-divisor. Every non-zero-divisor of $R$ has two nonzero components: if one component is zero, multiplication by a nonzero series on that axis annihilates it. Thus localization embeds $Q(R)$ in $k((u))\\times k((v))$. Conversely, for any pair of Laurent series $h$, choose $n$ so large that both components of $s^nh$ have zero constant term and no negative powers. Then $s^nh\\in R$, so $h=(s^nh)/s^n\\in Q(R)$. This proves the claimed total fraction ring directly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I, and Tag 0CBW (lemma-split-node); explicit split-node algebra"
+   }
+  },
+  {
+   "text": "Let $e=(1,0)\\in Q(R)$; explicitly $e=(u,0)/s$. The relation $e^2=e$ makes it integral over $R$, and every $(f,g)\\in P$ is an $R$-linear combination of $1,e$: take $a=(g(0),g)\\in R$ and $b=(f-g(0),f(0)-g(0))\\in R$, so $(f,g)=a+be$. Hence $P=R[e]$ is integral over $R$. Each factor $k[[u]]$ and $k[[v]]$ is integrally closed by [lem-weil-pbc-power-series-normal-domain], applied to the Noetherian normal domain $k$ (a field has only two ideals and is its own fraction field). If $(h_1,h_2)\\in Q(R)$ satisfies a monic equation over $R$, project that equation to each factor. The factorwise normality forces $h_1\\in k[[u]]$ and $h_2\\in k[[v]]$. Therefore $P$ is exactly the integral closure of $R$, so it is $\\widehat C$ from Step 1.",
+   "uses": [
+    "lem-weil-pbc-power-series-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I, and Tag 0CBW (lemma-split-node); explicit split-node algebra"
+   }
+  },
+  {
+   "text": "The map $P\\to k$, $(f,g)\\mapsto f(0)-g(0)$, is surjective and has kernel $R$ by Step 2. Multiplication by an element of $R$ acts on this difference by its common constant term. Thus $P/R$ is free of rank one over the residue field of $R$, and hence of $A$. That residue field is $k$ via the structural map by Step 1. Even if the chosen completed-ring isomorphism twists the scalar field, choosing a nonzero quotient vector gives an $A$-linear identification with this structural residue field. The $A$-linear comparison $M_x\\cong\\widehat C/R$ of Step 1 therefore identifies $M_x$ with $k$, killed by the maximal ideal of $A$. Consequently $\\mathscr S_x(M_x)$ is $i_{x,*}k$, where $i_x:\\operatorname{Spec}k\\hookrightarrow B$ is the closed point inclusion. Substituting these identifications in Step 1 gives $Q\\cong\\bigoplus_{x\\in N}i_{x,*}k$. The identifications can depend on the chosen ordering of the branches; the statement asserts an isomorphism, with no canonical branch ordering. Both a self-node and an intersection of distinct components give the same single quotient copy of $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I, and Tag 0CBW (lemma-split-node); explicit split-node algebra"
+   }
+  },
+  {
+   "text": "The quotient $Q$ is coherent by Step 1 and supported on the finite set of closed points $N$ by Step 4. Apply [lem-pc-chi-zero-dim-support] with the given proper scheme $B$: it gives $H^j(B,Q)=0$ for $j>0$ and $\\chi(B,Q)=\\dim_k\\Gamma(B,Q)$. By the description of the skyscraper sections in Step 1 and the finite direct sum of Step 4, $\\Gamma(B,Q)=\\bigoplus_{x\\in N}k$. Its standard coordinate vectors form a basis of size $|N|=e$, so $\\chi(B,Q)=e$. When $N$ is empty the quotient is zero and the same calculation gives zero.",
+   "uses": [
+    "lem-pc-chi-zero-dim-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), parts (1)--(4), (7), (9)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-trf-normalization-singular-skyscraper",
+  "lem-weil-pbc-power-series-normal-domain",
   "lem-pc-chi-zero-dim-support"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C1R (lemma-prepare-delta-invariant), with the explicit split-node normalization calculation of curves.tex Tag 0C4A, proof Case I, and Tag 0CBW."
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "normalization quotient at split nodes coherent sheaf direct sum residue fields",
+   "results": "{\"t\": \"2026-10-17T22:16:12Z\", \"tool\": \"leanfinder\", \"query\": \"normalization quotient at split nodes coherent sheaf direct sum residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\"], \"digest\": \"c96258f9f4fb2560\"}. Generic normalization, cotangent-space and power-series-preparation declarations do not state the nodal normalization sequence or its Euler characteristic.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
    "tool": "leansearch",
-   "query": "normalization exact sequence at ordinary node quotient residue field",
-   "results": "Returned residue-field and normalization declarations; no nodal quotient theorem.",
+   "query": "normalization exact sequence for reduced nodal curve quotient at singular points",
+   "results": "{\"t\": \"2026-10-17T22:16:12Z\", \"tool\": \"leansearch\", \"query\": \"normalization exact sequence for reduced nodal curve quotient at singular points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"1a46ac5aed597756\"}. Generic normalization, cotangent-space and power-series-preparation declarations do not state the nodal normalization sequence or its Euler characteristic.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "normalization quotient",
-   "results": "0 hits; unknown identifier normalization.",
+   "query": "AlgebraicGeometry normalization quotient",
+   "results": "{\"t\": \"2026-10-17T22:16:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry normalization quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `AlgebraicGeometry`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Generic normalization, cotangent-space and power-series-preparation declarations do not state the nodal normalization sequence or its Euler characteristic.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "delta-invariant|split-node|normalization.*quotient in Mathlib/AlgebraicGeometry",
-   "results": "0 hits.",
+   "query": "normalization.*quotient",
+   "results": "{\"t\": \"2026-10-17T22:16:13Z\", \"tool\": \"grep\", \"query\": \"normalization.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Generic normalization, cotangent-space and power-series-preparation declarations do not state the nodal normalization sequence or its Euler characteristic.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completed local ring k[[u,v]]/(uv) normalization quotient dimension one",
+   "results": "{\"t\": \"2026-10-17T22:16:14Z\", \"tool\": \"leanfinder\", \"query\": \"completed local ring k[[u,v]]/(uv) normalization quotient dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainDvr.ring_dimensionLEOne\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"Ring.DimensionLEOne.localization\"], \"digest\": \"596c497c1dcc93ad\"}. Generic normalization, cotangent-space and power-series-preparation declarations do not state the nodal normalization sequence or its Euler characteristic.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-curve-normalization-euler",
@@ -79,5 +153,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-normalization-quotient",
+  "worker": "stage1",
+  "summary": "Preserved the item statement. Added one generic finite-type curve normalization/skyscraper theorem from Stacks 0C1R, without properness or nodality hypotheses. Proved the complete-node normalization and residue-field quotient explicitly in the item, citing existing power-series normality. Applied the existing zero-dimensional Euler lemma. Removed proof-only lemmas from stmt_deps and dropped the redundant local-quotient child.",
+  "blueprint": "Realizes the numerical exceptional-fibre step in lem-trf-local-term-locality: the normalization exact sequence at split nodes and the one-dimensional node quotient used to compute the Euler defect.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-normal-domain",
+    "why": "Generic formal-power-series normality, applied to the field k to compute the integral closure of the completed node; no trace-unit route step is replaced."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Generic coherent Euler/cohomology theorem for the quotient supported on finitely many closed points; no trace-unit node supplies this cohomology calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-normal-domain",
+  "lem-pc-chi-zero-dim-support"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q84-6da2177e0",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q84-6da2177e0 (reviewer sub-agent of L); spot-checked: Read both nodes and all five steps in full; checked Stacks 0C1R, 0C3V, 0C4A, 0CBW, power-series normality and zero-dimensional cohomology. Local computations, hypotheses and edge cases hold; no duplicate or restated split found. Both tool uses accepted. No long non-elementary steps or fixes. Full findings recorded in review.md."
  }
 }
