@@ -63,7 +63,7 @@ local notation "M" =>
 /-- A strictly henselian neighbourhood of the boundary point `z` with closed point `x`, for the
 inertia group of the chosen point over `z` and the residue Frobenius lift at `z`. -/
 abbrev BoundaryNeighbourhoodAt (z : ↥((Set.range j.base)ᶜ)) (x : C.finitePoints) : Type (u + 1) :=
-  BoundaryNeighbourhood j
+  BoundaryNeighbourhood (K := K) j
     ((boundaryChart (p := C ↘ Spec (.of K)) j z).point.inertia Gal(Ω/C.functionField))
     (boundaryFrobeniusLift (p := C ↘ Spec (.of K)) j sU GU τ GC z) x
 
@@ -104,13 +104,13 @@ theorem exists_linearMap_stalk_directImage_fundamentalRep
     (hξ : ξ ≫ UniversalCover.proj B₀.t = genericGeomPoint (U ↘ Spec (.of K)) j)
     (F : WeilSheaf K l U) (hF : F.IsLisse) (z : ↥((Set.range j.base)ᶜ)) (x : C.finitePoints)
     (hx : x.1 = z.1) (N : BoundaryNeighbourhoodAt j sU GU τ GC z x) :
-    ∃ L : (((directImage j).obj F).stalk x).carrier →ₗ[PadicAlgCl l]
+    ∃ L : (((lowerStar j).obj F).stalk x).carrier →ₗ[PadicAlgCl l]
         LisseMonodromy.StalkSpace (BasePointData.ofLift j sU GU B₀ ξ hξ).t (F.toLisse hF),
       Function.Injective L ∧
       (∀ w, w ∈ LinearMap.range L ↔ ∀ g ∈ boundaryInertia (p := C ↘ Spec (.of K))
           (pU := U ↘ Spec (.of K)) j sU GU z,
         fundamentalRep M (BasePointData.ofLift j sU GU B₀ ξ hξ).weilMonodromyData F hF g w = w) ∧
-      ∀ v, L ((((directImage j).obj F).stalk x).frobenius v) =
+      ∀ v, L ((((lowerStar j).obj F).stalk x).frobenius v) =
         fundamentalRep M (BasePointData.ofLift j sU GU B₀ ξ hξ).weilMonodromyData F hF
           (boundaryResidueFrobenius j sU GU (comp_over j _) τ GC z) (L v) := by
   obtain ⟨x, hxf⟩ := x
@@ -124,12 +124,10 @@ theorem exists_linearMap_stalk_directImage_fundamentalRep
   letI := N.isSeparable
   letI := N.normal
   letI := N.weaklyEtale_k
-  set η := genericGeomPoint (U ↘ Spec (.of K)) j
-  set σF := boundaryFrobeniusLift (p := C ↘ Spec (.of K)) j sU GU τ GC z
   have hwF := mem_weilGroup_boundaryFrobeniusLift j sU GU (comp_over j _) τ GC z
-  have ha := specMap_comp_genericGeomPoint j sU GU σF _ hwF
+  have ha := specMap_comp_genericGeomPoint j sU GU _ _ hwF
   obtain ⟨Sp, hSp, hSpr, hSpf⟩ := WeilSheaf.exists_stalk_directImage_linearMap_invariants j F
-    N.h N.k N.e ⟨z.1, hxf⟩ N.t hF N.ht N.α N.hα N.hcα η N.specFieldMap_comp _ ha N.hεα
+    N.h N.k N.e ⟨z.1, hxf⟩ N.t hF N.ht N.α N.hα N.hcα (genericGeomPoint (U ↘ Spec (.of K)) j) N.specFieldMap_comp _ ha N.hεα
   set Ψ := genericStalkEquiv B₀ ξ hξ F hF
   -- the Galois groups `Gal(Ω / K')` and `I_z`
   have hfix (σ : Ω ≃ₐ[N.K'] Ω) (a : C.functionField) :
@@ -152,7 +150,7 @@ theorem exists_linearMap_stalk_directImage_fundamentalRep
       Ψ (fundamentalRep M (BasePointData.ofLift j sU GU B₀ ξ hξ).weilMonodromyData F hF
         ⟨_, genericGaloisMap_mem_weilGroup_of_mem_inertia j sU GU τ GC z hσ⟩ w) =
       ((WeilCoefficients.toModuleCat l).map ((resOver _ _
-          (show Spec.map (CommRingCat.ofHom (ofGal σ hσ).toRingHom) ≫ η = η by
+          (show Spec.map (CommRingCat.ofHom (ofGal σ hσ).toRingHom) ≫ (genericGeomPoint (U ↘ Spec (.of K)) j) = (genericGeomPoint (U ↘ Spec (.of K)) j) by
             rw [← N.specFieldMap_comp, ← Category.assoc,
               specMap_algEquiv_comp_specFieldMap])).app
             F.obj.carrier.X)).hom (Ψ w) := by
@@ -193,7 +191,7 @@ theorem exists_linearMap_stalk_directImage_fundamentalRep
       exact this
   · rw [LinearMap.comp_apply, LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.coe_coe,
       LinearEquiv.symm_apply_eq, hSpf]
-    have := genericStalkEquiv_fundamentalRep B₀ ξ hξ F hF σF _ hwF ha (Ψ.symm (Sp v))
+    have := genericStalkEquiv_fundamentalRep B₀ ξ hξ F hF _ _ hwF ha (Ψ.symm (Sp v))
     rw [LinearEquiv.apply_symm_apply] at this
     exact this.symm
 
@@ -250,6 +248,7 @@ theorem exists_equivalence_isLisse_stalk_directImage_boundaryStalk
   obtain ⟨e, h₁, -, -, -, hf⟩ := exists_equivalence_isLisse_of_lisseMonodromy W l M B
     (universalLisseMonodromy_isEquivalenceAt l _ K B.t)
   refine ⟨e, h₁, fun F z x hx ↦ ?_⟩
+  rw [show (directImage j : WeilSheaf K l U ⥤ WeilSheaf K l C) = lowerStar j from rfl]
   obtain ⟨f, hf⟩ := hf F
   obtain ⟨L, hL, hLr, hLf⟩ := exists_linearMap_stalk_directImage_fundamentalRep j sU GU τ GC
     B₀ ξ hξ F.obj F.property z x hx (hN z x hx).some
@@ -271,12 +270,14 @@ theorem exists_equivalence_isLisse_stalk_directImage_boundaryStalk
       obtain ⟨w, hw⟩ := (hLr (f v)).2 fun g hg ↦ by
         rw [← hf]
         exact congrArg f (h ⟨g, hg⟩)
-      exact ⟨w, by simp [L', hw]⟩
+      refine ⟨w, ?_⟩
+      change f.symm (L w) = v
+      rw [hw, LinearEquiv.symm_apply_apply]
   refine ⟨(LinearEquiv.ofInjective L' hL').trans (LinearEquiv.ofEq _ _ hr), fun v ↦ ?_⟩
   change L' _ = (e.functor.obj F).obj.ρ _ (L' v)
-  simp only [L', LinearMap.comp_apply, LinearEquiv.coe_coe, hLf]
+  change f.symm (L _) = (e.functor.obj F).obj.ρ _ (f.symm (L v))
   apply f.injective
   rw [hf, f.apply_symm_apply, f.apply_symm_apply]
-  rfl
+  exact hLf v
 
 end AlgebraicGeometry.WeilGroup

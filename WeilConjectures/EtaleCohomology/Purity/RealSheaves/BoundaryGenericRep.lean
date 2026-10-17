@@ -64,13 +64,18 @@ variable (B₀ : BasePointData (ofFundamentalGroup (U ↘ Spec (.of K)) sU GU))
 
 /-- The identification `F_t ≅ Γ(Spec Ω, η^* F)` of the Weil fundamental representation with the
 sections at the geometric generic point, by restriction along the lift `ξ`. -/
-noncomputable def genericStalkEquiv (F : WeilSheaf K l U) (hF : F.IsLisse) :
+noncomputable def genericStalkEquiv
+    (B₀ : BasePointData (ofFundamentalGroup (U ↘ Spec (.of K)) sU GU))
+    (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
+    (hξ : ξ ≫ UniversalCover.proj B₀.t = genericGeomPoint (U ↘ Spec (.of K)) j)
+    (F : WeilSheaf K l U) (hF : F.IsLisse) :
     LisseMonodromy.StalkSpace (BasePointData.ofLift j sU GU B₀ ξ hξ).t (F.toLisse hF)
       ≃ₗ[PadicAlgCl l]
       (WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ _).obj
         ((genericGeomPoint (U ↘ Spec (.of K)) j)^*[WeilCoefficients.{u} l].obj F.obj.carrier.X)) :=
   WeilCoefficients.linearEquivOfIso (liftStalkIso B₀.t ξ hξ (F.toLisse hF))
 
+include ξ hξ in
 /-- The identification `F_t ≅ Γ(Spec Ω, η^* F)` on elements. -/
 lemma genericStalkEquiv_apply (F : WeilSheaf K l U) (hF : F.IsLisse)
     (v : LisseMonodromy.StalkSpace (BasePointData.ofLift j sU GU B₀ ξ hξ).t (F.toLisse hF)) :

@@ -83,6 +83,82 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 set_option hygiene false in
 local notation "j̄" => Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀)))
 
+section StalkFrobenius
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X)
+
+/-- The Frobenius of the stalk at `s` relative to `𝔽_{qᵐ}`, on elements, is the transport of
+global sections along the iterated Weil structure. -/
+lemma stalkAt_frobenius_apply
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (v) :
+    (G.stalkAt s m hs).frobenius v = ((WeilCoefficients.toModuleCat l).map
+      (globalSectionsTransport _ hs.symm (G.frobeniusPowStr m))).hom v :=
+  LinearMap.congr_fun (frobeniusEnd_stalkAt G s m hs) v
+
+/-- The geometric stalk at a closed point is the stalk at the attached geometric point. (Stated
+through `congrArg`: the kernel checks the direct definitional unfolding slowly.) -/
+lemma stalk_frobenius_apply_eq (x : X.finitePoints) (v : (G.stalk x).carrier) :
+    (G.stalk x).frobenius v = (G.stalkAt _ _
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+        x)).frobenius v :=
+  congrArg (fun f : (G.stalk x).carrier ≃ₗ[PadicAlgCl l] (G.stalk x).carrier ↦ f v) rfl
+
+/-- The Frobenius of the geometric stalk at a closed point `x`, `m = deg x`, is the transport of
+global sections along `σᵐ ≫ x̄ = x̄ ≫ Frᵐ` and the iterated Weil structure. -/
+lemma stalk_frobenius_apply (x : X.finitePoints) (v) :
+    (G.stalk x).frobenius v = ((WeilCoefficients.toModuleCat l).map
+      (globalSectionsTransport _
+        (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+          (X ↘ Spec (CommRingCat.of k₀)) x).symm (G.frobeniusPowStr _))).hom v :=
+  (stalk_frobenius_apply_eq G x v).trans (stalkAt_frobenius_apply G _ _
+    (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+      (X ↘ Spec (CommRingCat.of k₀)) x) v)
+
+/-- A linear map `S` out of the global sections at the geometric point of a closed point `x`
+intertwining the transport along the iterated Weil structure with `Ψ` intertwines the Frobenius
+of the stalk with `Ψ`. (Stated for an arbitrary `G`: the kernel checks the identification of the
+stalk with the global sections slowly for explicit `G`.) -/
+lemma stalk_frobenius_intertwine {W : Type*} [AddCommGroup W] [Module (PadicAlgCl l) W]
+    (x : X.finitePoints)
+    (S : (WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ _).obj
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x)^*[_].obj
+        G.obj.carrier.X)) →ₗ[PadicAlgCl l] W) (Ψ : W →ₗ[PadicAlgCl l] W)
+    (hS : ∀ w, S (((WeilCoefficients.toModuleCat l).map
+        (globalSectionsTransport _
+          (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+            (X ↘ Spec (CommRingCat.of k₀)) x).symm (G.frobeniusPowStr _))).hom w) = Ψ (S w))
+    (v : (G.stalk x).carrier) :
+    (S : (G.stalk x).carrier →ₗ[PadicAlgCl l] W) ((G.stalk x).frobenius v) =
+      Ψ ((S : (G.stalk x).carrier →ₗ[PadicAlgCl l] W) v) :=
+  (congrArg S (stalk_frobenius_apply G x v)).trans (hS v)
+
+/-- A morphism `Φ` out of the global sections at the geometric point of a closed point `x`
+intertwining the transport along the iterated Weil structure with `Ψ` intertwines the Frobenius
+of the stalk with `Ψ`. -/
+lemma stalk_frobenius_intertwine_of_comp_eq {Q : WeilCoefficients.{u} l}
+    (x : X.finitePoints)
+    (Φ : (Sheaf.Γ _ _).obj
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x)^*[_].obj
+        G.obj.carrier.X) ⟶ Q) (Ψ : Q ⟶ Q)
+    (hΦ : globalSectionsTransport _
+          (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+            (X ↘ Spec (CommRingCat.of k₀)) x).symm (G.frobeniusPowStr _) ≫ Φ = Φ ≫ Ψ)
+    (v : (G.stalk x).carrier) :
+    (((WeilCoefficients.toModuleCat l).map Φ).hom : (G.stalk x).carrier →ₗ[PadicAlgCl l] _)
+        ((G.stalk x).frobenius v) =
+      ((WeilCoefficients.toModuleCat l).map Ψ).hom
+        ((((WeilCoefficients.toModuleCat l).map Φ).hom :
+          (G.stalk x).carrier →ₗ[PadicAlgCl l] _) v) := by
+  refine stalk_frobenius_intertwine G x _ _ (fun w ↦ ?_) v
+  have := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom w) hΦ
+  rw [Functor.map_comp, Functor.map_comp, ModuleCat.hom_comp, ModuleCat.hom_comp,
+    LinearMap.comp_apply, LinearMap.comp_apply] at this
+  exact this
+
+end StalkFrobenius
+
 section Generic
 
 variable {F} {A : Type u} [CommRing A]
@@ -229,7 +305,6 @@ variable [IsStrictlyHenselianLocalRing A] [Normal K' Ω] (x : X.finitePoints)
     ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x)).obj
       (Scheme.ProEt.mk h))
 
-set_option maxHeartbeats 1000000 in
 /-- **The boundary stalk of `j_* F` as Galois invariants, Frobenius-equivariantly.** Let
 `h : Spec A ⟶ C̄` be a weakly étale neighbourhood of the geometric point `x̄` of a closed point `x`
 through the closed point of the strictly henselian `Spec A`, whose punctured part
@@ -359,10 +434,6 @@ theorem exists_stalk_directImage_linearMap_invariants (hF : F.IsLisse)
       Nat.pos_of_ne_zero (Scheme.Hom.degreeOver_ne_zero _ x.2)
     have hs := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
       (X ↘ Spec (CommRingCat.of k₀)) x
-    have hfr : (((lowerStar j).obj F).stalk x).frobenius v =
-        ((WeilCoefficients.toModuleCat l).map (globalSectionsTransport _ hs.symm
-          (((lowerStar j).obj F).frobeniusPowStr _))).hom v :=
-      LinearMap.congr_fun (frobeniusEnd_stalkAt ((lowerStar j).obj F) _ _ hs) v
     have h₁ := globalSectionsTransport_comp_resOver hα hs.symm _ hc hcα P
       (((lowerStar j).obj F).frobeniusPowStr _)
     have h₂ : globalSectionsTransport _ hs.symm (((lowerStar j).obj F).frobeniusPowStr _) ≫
@@ -377,10 +448,7 @@ theorem exists_stalk_directImage_linearMap_invariants (hF : F.IsLisse)
         Φ ≫ globalSectionsTransport _ ha (F.frobeniusPowStr _) := by
       simp only [Φ]
       rw [reassoc_of% h₂, h₃, Category.assoc]
-    rw [hfr]
-    have := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) hm
-    rw [Functor.map_comp, Functor.map_comp] at this
-    exact this
+    exact stalk_frobenius_intertwine_of_comp_eq ((lowerStar j).obj F) x _ _ hm v
 
 end Specialization
 
