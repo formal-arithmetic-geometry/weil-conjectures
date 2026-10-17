@@ -68,6 +68,30 @@ needs an orientation and is
 duality and the derived Poincaré pairing need `X` smooth proper geometrically connected and
 are the two statements of `WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality`.
 
+## Expository remarks of the package
+
+The following remarks of the blueprint subsection `sk-thm-sf-package` are pointers or scope
+statements and carry no mathematical content beyond the results they cite:
+
+- `rem-sf-yoga` (the dictionary from the axioms of the six-functor datum to the classical duality
+  statements) and `rem-sf-axiom-verification` (each axiom is supplied by the corresponding result
+  of this directory): this is the assembly `sixOperationsPackage` itself.
+- `rem-sf-ctf-descent`, `rem-ptr-trf-admissibility-14`,
+  `rem-ptr-weil-exceptional-adjoint-admissibility-10` and
+  `rem-ptr-weil-exceptional-inverse-image-16`: the coefficient comparisons of the exceptional
+  adjoint are
+  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal`
+  (`lem-coef-finite-exceptional`) and
+  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`
+  (`prop-coef-integral-exceptional-adjoint`).
+- `rem-ptr-sf-datum-1b`, `rem-weil-biduality-boundary-status` and `open-sf-preservation-gaps`:
+  finite-stage biduality is `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`, its
+  Weil-equivariant form is `AlgebraicGeometry.Etale.WeilComplex.isIso_verdierDualDoubleDual`, and
+  the `ℚ̄_ℓ` stage is `AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality`
+  (`thm-coef-qbar-verdier`).
+- `rem-sf-finite-level-comparison-ingredient`: the reconstruction of normalized towers is
+  `AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`.
+
 -/
 
 @[expose] public section
