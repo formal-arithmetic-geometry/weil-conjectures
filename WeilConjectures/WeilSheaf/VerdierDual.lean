@@ -20,7 +20,9 @@ complexes; this is the constructible adjunction `Rf_! ⊣ Rf^!` of the six-funct
 (`thm-coef-qbar-verdier`), stated here as
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`. The exceptional inverse image
 `AlgebraicGeometry.WeilComplex.upperShriek f` is *defined* as that right adjoint, which is how
-the blueprint characterizes it (`def-weil-exceptional-inverse-image`). It gives the dualizing
+the blueprint characterizes it (`def-weil-exceptional-inverse-image`); so that no data is chosen
+from the unproved existence statement, it takes the existence of the right adjoint
+(`AlgebraicGeometry.WeilComplex.HasUpperShriek f`) as a hypothesis. It gives the dualizing
 complex `ω_X = Ra_X^! ℚ̄_ℓ` (`AlgebraicGeometry.WeilComplex.dualizingComplex`) and the Verdier
 dual `𝔻_X = RHom(-, ω_X)` (`AlgebraicGeometry.WeilComplex.verdierDual`), the derived internal
 hom of pro-étale Weil sheaves into `ω_X` (`AlgebraicGeometry.ProEtaleWeilSheaf.derivedHom`).
@@ -64,25 +66,32 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
+variable (k₀ l) in
+/-- The direct image with compact support `Rf₀!` of Weil complexes along `f` has a right adjoint,
+the exceptional inverse image `Rf^!` (`AlgebraicGeometry.WeilComplex.upperShriek`). That it
+always has one is `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`. -/
+abbrev HasUpperShriek : Prop :=
+  (derivedLowerShriek k₀ l f).IsLeftAdjoint
+
 /-- **The constructible exceptional adjunction** (blueprint: `thm-coef-qbar-verdier`, "the
 constructible adjunction `Rf_! ⊣ Rf^!`", and `def-weil-exceptional-inverse-image`): for a
 separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes of finite type, the direct image
 with compact support `Rf₀!` of Weil complexes has a right adjoint. -/
-theorem isLeftAdjoint_derivedLowerShriek : (derivedLowerShriek k₀ l f).IsLeftAdjoint :=
+theorem isLeftAdjoint_derivedLowerShriek : HasUpperShriek k₀ l f :=
   sorry
+
+variable [HasUpperShriek k₀ l f]
 
 /-- The exceptional inverse image `Rf^!` of Weil complexes along a separated morphism of finite
 type `f : X ⟶ Y` of `k₀`-schemes of finite type: the right adjoint of the direct image with
 compact support `Rf₀!` (blueprint: `def-weil-exceptional-inverse-image`, which characterizes
 `Rf^!` by the adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)` on constructible complexes). -/
 noncomputable def upperShriek : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X :=
-  have := isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l) f
   (derivedLowerShriek k₀ l f).rightAdjoint
 
 /-- The adjunction `Rf₀! ⊣ Rf^!`. -/
 noncomputable def derivedLowerShriekUpperShriekAdjunction :
     derivedLowerShriek k₀ l f ⊣ upperShriek (k₀ := k₀) (l := l) f :=
-  have := isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l) f
   Adjunction.ofIsLeftAdjoint _
 
 end UpperShriek
@@ -93,6 +102,7 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- The dualizing complex `ω_X = Ra_X^! ℚ̄_ℓ` of a separated `k₀`-scheme of finite type `X`: the
 exceptional inverse image of the constant Weil sheaf `ℚ̄_ℓ` on `Spec k₀` along the structure
@@ -152,10 +162,12 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The exceptional inverse image as a conjugate of the pullback** (blueprint:
 `thm-coef-qbar-verdier`, "`Rf^! = D_X f^* D_Y`"): `Rf^! L ≅ 𝔻_X f^* 𝔻_Y L`. -/
-theorem nonempty_upperShriek_obj_iso (L : WeilComplex k₀ l Y) :
+theorem nonempty_upperShriek_obj_iso [HasUpperShriek k₀ l f] (L : WeilComplex k₀ l Y) :
     Nonempty ((upperShriek f).obj L ≅
       (verdierDual k₀ l X).obj (op ((upperStar f).obj ((verdierDual k₀ l Y).obj (op L))))) :=
   sorry
@@ -175,6 +187,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The dualizing complex of a smooth scheme** (blueprint:
 `cor-pur-adic-and-rational-smooth-dualizing-complexes`, at the coefficient stage `ℚ̄_ℓ`): if `X`
@@ -215,6 +228,7 @@ variable {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l i]
 
 /-- **The exceptional restriction of a direct image from the open complement vanishes**
 (blueprint: `prop-sf-localization-all-stages`, clause (4), `Ri^! Rj_* G = 0`): for a closed

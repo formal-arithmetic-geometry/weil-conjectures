@@ -51,6 +51,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l f]
 
 /-- The exceptional inverse image commutes with the shifts, as the right adjoint of the direct
 image with compact support. -/
@@ -100,6 +101,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- **Step 1: the dual of a direct image** (blueprint: `lem-a1-local-boundary-duality`, step 1):
 `𝔻_Y Rf_* G ≅ Rf₀! 𝔻_X G`. The Verdier exchange applied to `M = 𝔻_X G` and biduality on `X`
@@ -121,7 +124,8 @@ variable [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 /-- **Step 2: the exceptional inverse image of a dual** (blueprint:
 `lem-a1-local-boundary-duality`, step 2): `Rf^! 𝔻_Y K ≅ 𝔻_X f^* K`, from `Rf^! = 𝔻_X f^* 𝔻_Y`
 and biduality on `Y`. -/
-theorem nonempty_upperShriek_verdierDual_iso (K : WeilComplex k₀ l Y) :
+theorem nonempty_upperShriek_verdierDual_iso [HasUpperShriek k₀ l f]
+    (K : WeilComplex k₀ l Y) :
     Nonempty ((upperShriek f).obj ((verdierDual k₀ l Y).obj (op K)) ≅
       (verdierDual k₀ l X).obj (op ((upperStar f).obj K))) := by
   obtain ⟨e⟩ := nonempty_upperShriek_obj_iso f ((verdierDual k₀ l Y).obj (op K))
@@ -149,7 +153,8 @@ triangle `Rj₀! j^* Rj_* G ⟶ Rj_* G ⟶ Ri_* i^* Rj_* G ⟶` of `Rj_* G`: the
 `Ri^! Rj_* G = 0`, so the third arrow becomes an isomorphism, and the closed unit
 `Q ≅ Ri^! Ri₀! Q` with `Ri₀! ≅ Ri_*` identifies the third term with `i^* Rj_* G`. -/
 theorem nonempty_upperShriek_derivedLowerShriek_iso
-    (hij : IsCompl (Set.range j.base) (Set.range i.base)) (G : WeilComplex k₀ l U) :
+    [HasUpperShriek k₀ l i] (hij : IsCompl (Set.range j.base) (Set.range i.base))
+    (G : WeilComplex k₀ l U) :
     Nonempty ((upperShriek i).obj ((derivedLowerShriek k₀ l j).obj G) ≅
       ((upperStar i).obj ((derivedLowerStar j).obj G))⟦(-1 : ℤ)⟧) := by
   obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
@@ -177,6 +182,8 @@ theorem nonempty_upperShriek_derivedLowerShriek_iso
 variable [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))] [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l (U ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l (Z ↘ Spec (CommRingCat.of k₀))]
 
 /-- **Step 4: the dual of the boundary complex** (blueprint: `lem-a1-local-boundary-duality`,
 step 4): for complementary immersions `j` and `i` and a Weil complex `G` on `U`,
@@ -186,6 +193,8 @@ theorem nonempty_verdierDual_upperStar_derivedLowerStar_iso
     Nonempty ((verdierDual k₀ l Z).obj (op ((upperStar i).obj ((derivedLowerStar j).obj G))) ≅
       ((upperStar i).obj ((derivedLowerStar j).obj ((verdierDual k₀ l U).obj (op G))))⟦(-1 : ℤ)⟧)
     := by
+  have := isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀))
+  have := isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l) i
   obtain ⟨e₂⟩ := nonempty_upperShriek_verdierDual_iso i ((derivedLowerStar j).obj G)
   obtain ⟨e₁⟩ := nonempty_verdierDual_derivedLowerStar_iso j G
   obtain ⟨e₃⟩ := nonempty_upperShriek_derivedLowerShriek_iso j i hij
@@ -213,6 +222,7 @@ noncomputable def tensorLisseToComplexIso (L : WeilSheaf k₀ l X) (hL : L.IsLis
 
 variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The Verdier dual of a lisse sheaf on a smooth scheme** (blueprint:
 `lem-a1-local-boundary-duality`, "`𝔻_U F ≅ F^∨(1)[2]`"): if `X` is smooth of pure dimension `d`

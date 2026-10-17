@@ -228,6 +228,11 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   have : IsSeparated (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   have : LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  -- the exceptional inverse images along the structure morphisms of `U` and `Z`
+  have := WeilComplex.isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l)
+    (U ↘ Spec (CommRingCat.of k₀))
+  have := WeilComplex.isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l)
+    (Z ↘ Spec (CommRingCat.of k₀))
   have hc : IsCompl (Set.range j.base) (Set.range i.base) := by
     rw [hij]
     exact isCompl_compl
