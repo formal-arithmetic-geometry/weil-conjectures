@@ -202,11 +202,12 @@ lemma absoluteFrobenius_app_apply (X : Scheme.{u}) (hX : X.IsOfCharacteristic p)
   rw [iterateFrobenius_app_apply, pow_one]
 
 /-- The absolute `q = p ^ a`-power Frobenius `Fr_X^{(q)} = F_X^a` of a scheme of characteristic
-`p`: the `a`-fold composite of the absolute Frobenius. -/
-noncomputable def qPowerFrobenius (X : Scheme.{u}) (hX : X.IsOfCharacteristic p) :
-    ℕ → (X ⟶ X)
-  | 0 => 𝟙 X
-  | a + 1 => X.qPowerFrobenius hX a ≫ X.absoluteFrobenius hp hX
+`p`: the `a`-fold composite of the absolute Frobenius, that is, the `p ^ a`-power Frobenius
+`AlgebraicGeometry.Scheme.iterateFrobenius` (see `AlgebraicGeometry.Scheme.iterateFrobenius_add`).
+-/
+noncomputable abbrev qPowerFrobenius (X : Scheme.{u}) (hX : X.IsOfCharacteristic p) (a : ℕ) :
+    X ⟶ X :=
+  X.iterateFrobenius hp hX a
 
 lemma iterateFrobenius_zero (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) :
     X.iterateFrobenius hp hX 0 = 𝟙 X :=
@@ -225,13 +226,8 @@ lemma iterateFrobenius_add (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) (m n : �
 
 /-- The `a`-fold composite of the absolute Frobenius is the `p ^ a`-power Frobenius. -/
 lemma qPowerFrobenius_eq_iterateFrobenius (X : Scheme.{u}) (hX : X.IsOfCharacteristic p)
-    (a : ℕ) : X.qPowerFrobenius hp hX a = X.iterateFrobenius hp hX a := by
-  induction a with
-  | zero => exact (iterateFrobenius_zero hp X hX).symm
-  | succ a ih =>
-    change X.qPowerFrobenius hp hX a ≫ X.absoluteFrobenius hp hX = _
-    rw [ih]
-    exact (iterateFrobenius_add hp X hX a 1).symm
+    (a : ℕ) : X.qPowerFrobenius hp hX a = X.iterateFrobenius hp hX a :=
+  rfl
 
 /-- The map of stalks of the `p ^ n`-power Frobenius at `x` is `y ↦ y ^ p ^ n`. -/
 lemma stalkMap_iterateFrobenius_apply (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ)

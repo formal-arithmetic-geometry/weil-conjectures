@@ -513,8 +513,9 @@ algebraically closed residue field, and whose normalization is finite: each bran
 
 The blueprint assumes `R` excellent; excellence is only used for the finiteness of the
 normalization (excellent rings are Nagata), which we take as hypothesis since excellence is not
-available in Mathlib. Strict henselianity is `HenselianLocalRing R` with algebraically closed
-residue field. -/
+available in Mathlib: the finiteness hypothesis `hfin` replaces the Nagata step. For the same
+reason the blueprint's clause that the branches are excellent is omitted. Strict henselianity
+is `HenselianLocalRing R` with algebraically closed residue field. -/
 theorem branches_and_punctured_spectrum [IsReduced R] [IsAlgClosed (ResidueField R)]
     (hfin : ∀ p : minimalPrimes R, Module.Finite (R ⧸ p.1) (branch R p)) :
     (∀ p : minimalPrimes R, IsDiscreteValuationRing (branch R p) ∧

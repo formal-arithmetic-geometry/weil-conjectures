@@ -337,10 +337,10 @@ theorem kummer_affineLine_multiplicativeGroup :
     (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
   obtain ⟨eG⟩ := nonempty_tateTwistObject_one_iso_constantComplex Λ
     (j ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
-  obtain ⟨hA0⟩ := nonempty_iso_cohomology_zero_affineLine Λ (k := k)
-  obtain ⟨hG0⟩ := nonempty_iso_cohomology_zero_multiplicativeGroup Λ j hj
+  have := connectedSpace_of_range_eq_compl_zeroSection j hj
   exact ⟨fun q hq ↦ (isZero_cohomology_affineLine Λ q hq).of_iso ((cohomology _ _ q).mapIso eA),
-    ⟨(cohomology _ _ 0).mapIso eA ≪≫ hA0⟩, ⟨(cohomology _ _ 0).mapIso eG ≪≫ hG0⟩,
+    ⟨(cohomology _ _ 0).mapIso eA ≪≫ cohomologyZeroConstantComplexIso Λ _⟩,
+    ⟨(cohomology _ _ 0).mapIso eG ≪≫ cohomologyZeroConstantComplexIso Λ _⟩,
     fun q hq0 hq1 ↦ (isZero_cohomology_multiplicativeGroup Λ j hj q hq0 hq1).of_iso
       ((cohomology _ _ q).mapIso eG), bijective_smul_kummerClassOf Λ j hj⟩
 

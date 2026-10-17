@@ -68,7 +68,10 @@ section `s` of `g : V ⟶ B`: the section invariant (`def-pur-section-invariant`
 `Bl_{s(B) × 0} (V ×_B 𝔸¹_B) ∖ (strict transform of V ×_B 0)`.
 
 In the purity conventions `g̃` is compactifiable
-(`AlgebraicGeometry.Scheme.Hom.hasCompactification_deformationSpaceProj`). -/
+(`AlgebraicGeometry.Scheme.Hom.hasCompactification_deformationSpaceProj`). This is the concrete
+counterpart of `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.familyObject`, which is
+the same section invariant for an abstract deformation datum; a concrete datum with this
+deformation space is not yet constructed. -/
 noncomputable def deformationFamilyObject (g : V ⟶ B) (s : B ⟶ V)
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] :
     _root_.DerivedCategory

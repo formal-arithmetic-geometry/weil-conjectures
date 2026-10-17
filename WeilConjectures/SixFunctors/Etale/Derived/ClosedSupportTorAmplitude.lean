@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.ConstantTensorProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 
 /-!
 # Finite Tor amplitude of the exceptional inverse image along a closed immersion
@@ -87,32 +88,6 @@ theorem torAmplitudeIn_rightDerivedLowerStar_of_isZero_higherDirectImage (j : U 
     @isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage Λ _ U T j c hc _ b h₂⟩
 
 omit [Finite Λ] in
-/-- In a distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁[1]` of `D(T_ét)`, if `X₂` has homology in
-`[a, b]` and `X₃` in `[a, b']` with `b ≤ b'`, then `X₁` has homology in `[a, b' + 1]`. -/
-lemma homologyConcentratedIn_obj₁_of_distTriang
-    (Tr : Triangle (_root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
-    (hTr : Tr ∈ distTriang _) {a b b' : ℤ} (hbb : b ≤ b')
-    (h₂ : _root_.DerivedCategory.homologyConcentratedIn a b Tr.obj₂)
-    (h₃ : _root_.DerivedCategory.homologyConcentratedIn a b' Tr.obj₃) :
-    _root_.DerivedCategory.homologyConcentratedIn a (b' + 1) Tr.obj₁ := by
-  have hT := inv_rot_of_distTriang _ hTr
-  have := h₃.1
-  have := h₃.2
-  have := h₂.1
-  have := h₂.2
-  have : (Tr.obj₃⟦(-1 : ℤ)⟧).IsGE (a + 1) :=
-    _root_.DerivedCategory.TStructure.t.isGE_shift _ a (-1) (a + 1)
-  have : (Tr.obj₃⟦(-1 : ℤ)⟧).IsLE (b' + 1) :=
-    _root_.DerivedCategory.TStructure.t.isLE_shift _ b' (-1) (b' + 1)
-  have h₁ : (Tr.invRotate.obj₁).IsGE a :=
-    _root_.DerivedCategory.TStructure.t.isGE_of_ge (Tr.obj₃⟦(-1 : ℤ)⟧) a (a + 1) (by lia)
-  have h₁' : (Tr.invRotate.obj₁).IsLE (b' + 1) := inferInstanceAs ((Tr.obj₃⟦(-1 : ℤ)⟧).IsLE _)
-  have h₃' : (Tr.invRotate.obj₃).IsLE (b' + 1) :=
-    _root_.DerivedCategory.TStructure.t.isLE_of_le Tr.obj₂ b (b' + 1) (by lia)
-  exact ⟨_root_.DerivedCategory.TStructure.t.isGE₂ _ hT a h₁ h₂.1,
-    _root_.DerivedCategory.TStructure.t.isLE₂ _ hT (b' + 1) h₁' h₃'⟩
-
-omit [Finite Λ] in
 /-- Tor amplitude is two out of three in the first term: if `X₂` has Tor amplitude in `[a, b]` and
 `X₃` in `[a, b']` with `b ≤ b'`, then `X₁` has Tor amplitude in `[a, b' + 1]`, tensoring the
 triangle with a sheaf being a triangulated functor. -/
@@ -122,7 +97,7 @@ lemma torAmplitudeIn_obj₁_of_distTriang
     (h₂ : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b Tr.obj₂)
     (h₃ : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b' Tr.obj₃) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) T a (b' + 1) Tr.obj₁ := fun F ↦
-  homologyConcentratedIn_obj₁_of_distTriang
+  homologyConcentratedIn_obj₁ (ModuleCat.{u + 1} Λ)
     (((-⊗ᴸ-(T)[ModuleCat.{u + 1} Λ]).flip.obj
       ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).mapTriangle.obj Tr)
     (Functor.map_distinguished _ _ hTr) hbb (h₂ F) (h₃ F)

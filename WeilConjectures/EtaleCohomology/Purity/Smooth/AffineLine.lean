@@ -112,9 +112,9 @@ theorem nonempty_iso_rightDerivedLowerStar_affineLine [IsAlgClosed k] [QuasiComp
     [HasInvertibleExponent Λ (Spec (.of k))] :
     Nonempty ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
         (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y)) ≅ constantComplex Λ Y) := by
-  obtain ⟨eA⟩ := nonempty_iso_cohomology_zero_affineLine Λ (k := k)
   obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerStar_affineLine_of_cohomology Λ aY
-    (isZero_cohomology_affineLine Λ (k := k)) eA (constructibleFiniteTor_constantComplex Λ Y)
+    (isZero_cohomology_affineLine Λ (k := k)) (cohomologyZeroConstantComplexIso Λ _)
+    (constructibleFiniteTor_constantComplex Λ Y)
   exact ⟨(R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).mapIso
     (leftDerivedUpperStarConstantComplexIso Λ _).symm ≪≫ e⟩
 
@@ -134,7 +134,7 @@ theorem isIso_unit_constantComplex_affineLine [IsAlgClosed k] [QuasiCompact aY]
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
       (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).unit.app (constantComplex Λ Y)) :=
   isIso_unit_affineLine_of_cohomology Λ aY (isZero_cohomology_affineLine Λ (k := k))
-    (nonempty_iso_cohomology_zero_affineLine Λ (k := k)).some
+    (cohomologyZeroConstantComplexIso Λ _)
     (constructibleFiniteTor_constantComplex Λ Y) (constantComplexIsoSingleFunctor Λ Y)
     (nonempty_sheafFiber_unit_iso Λ)
 
@@ -147,9 +147,9 @@ theorem isZero_homology_rightDerivedLowerStar_tateTwist_affineLine [IsAlgClosed 
         ((tateTwist Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj (constantComplex Λ _)))) := by
   obtain ⟨LT, -, hLT, ⟨eTY⟩⟩ := HasTateTwist.exists_isLocallyConstantSheaf_twistObject
     (Λ := Λ) Y 1
-  obtain ⟨eA⟩ := nonempty_iso_cohomology_zero_affineLine Λ (k := k)
   obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerStar_affineLine_of_cohomology Λ aY
-    (isZero_cohomology_affineLine Λ (k := k)) eA (boundedConstructibleFiniteTor_tateObject Λ Y 1)
+    (isZero_cohomology_affineLine Λ (k := k)) (cohomologyZeroConstantComplexIso Λ _)
+    (boundedConstructibleFiniteTor_tateObject Λ Y 1)
   exact ((homology_props_of_iso_singleFunctor Λ eTY hLT).1 m hm).of_iso
     ((_root_.DerivedCategory.homologyFunctor _ m).mapIso
       ((R((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).mapIso
@@ -175,12 +175,13 @@ theorem nonempty_iso_homology_zero_multiplicativeGroup [IsAlgClosed k] [QuasiCom
   let j₀ := (multiplicativeGroupModel k).ι
   have hj₀ := range_multiplicativeGroupModel_ι k
   have : HasInvertibleExponent Λ (multiplicativeGroupModel k) := .of_hom j₀
-  obtain ⟨eG₀⟩ := nonempty_iso_cohomology_zero_multiplicativeGroup Λ j₀ hj₀
+  have := connectedSpace_of_range_eq_compl_zeroSection j₀ hj₀
   obtain ⟨eG₁⟩ := nonempty_iso_cohomology_one_multiplicativeGroup Λ j₀ hj₀
   obtain ⟨LT, -, hLT, ⟨eTY⟩⟩ := HasTateTwist.exists_isLocallyConstantSheaf_twistObject
     (Λ := Λ) Y 1
   obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerStar_multiplicativeGroup_of_cohomology Λ aY j₀ hj₀
-    (isZero_cohomology_multiplicativeGroup Λ j₀ hj₀) eG₀ eG₁ j hj
+    (isZero_cohomology_multiplicativeGroup Λ j₀ hj₀) (cohomologyZeroConstantComplexIso Λ _) eG₁
+    j hj
     (boundedConstructibleFiniteTor_tateObject Λ Y 1)
   exact ⟨(_root_.DerivedCategory.homologyFunctor _ 0).mapIso
     ((R((j ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).mapIso
