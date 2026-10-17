@@ -220,7 +220,7 @@ def pairHom : diagramOfMonotone (pairLeft K A B) ⟶ diagramOfMonotone (pairRigh
 
 @[simp]
 lemma pairHom_app_apply (i : Finset (A ⊕ B)) (x : pairLeft K A B i) :
-    ((pairHom φ).app i x : B) = φ x :=
+    (((pairHom φ).app i).hom x : B) = φ x :=
   rfl
 
 lemma finiteType_pairLeft (i : Finset (A ⊕ B)) : Algebra.FiniteType K (pairLeft K A B i) :=
@@ -237,11 +237,11 @@ lemma finiteType_pairRight (i : Finset (A ⊕ B)) : Algebra.FiniteType K (pairRi
 
 lemma finiteType_pairHom (i : Finset (A ⊕ B)) : ((pairHom φ).app i).hom.FiniteType := by
   refine RingHom.FiniteType.of_comp_finiteType (f := algebraMap K (pairLeft K A B i)) ?_
-  have : ((pairHom φ).app i).hom.comp (algebraMap K (pairLeft K A B i)) =
-      algebraMap K (pairRight φ i) :=
+  have e : ((pairHom φ).app i).hom.comp (algebraMap K (pairLeft K A B i)) =
+      (algebraMap K (pairRight φ i) : K →+* (diagramOfMonotone (pairRight φ)).obj i) :=
     RingHom.ext fun x ↦ Subtype.ext (by simp)
-  rw [this, RingHom.finiteType_algebraMap]
-  exact finiteType_pairRight φ i
+  rw [e]
+  exact RingHom.finiteType_algebraMap.2 (finiteType_pairRight φ i)
 
 lemma exists_mem_pairLeft (x : A) : ∃ i, x ∈ pairLeft K A B i :=
   ⟨{Sum.inl x}, Algebra.subset_adjoin (by simp)⟩
@@ -418,7 +418,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : T
     rw [← Spec.map_comp, ← Spec.map_comp]
     congr 2
     ext x
-    simp [hφ]
+    erw [Subalgebra.pairHom_app_apply, hφ]
   have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (w.app i) :=
     HasRingHomProperty.Spec_iff.2
       (RingHom.finiteType_algebraMap.2 (Subalgebra.finiteType_pairLeft i.unop))
