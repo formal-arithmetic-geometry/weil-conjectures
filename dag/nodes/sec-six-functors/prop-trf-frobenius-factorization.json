@@ -188,5 +188,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-f30289052 (reviewer sub-agent of L); spot-checked: I read the delivered item, the full report, the current blueprint item and proof (main-20261015, identical to the master text) and the full statements of all 7 cited definition nodes: def-weil-finite-field-fiber, def-trf-scheme-frobenius (blueprint_update identical), def-weil-absolute-frobenius-scheme, def-weil-ring-frobenius, def-weil-pbc-module-tensor-product, def-weil-affine-spectrum and def-weil-locally-ringed-space-morphism. The scope repair binds X, q, Phi and g_sigma through def-trf-scheme-frobenius and keeps m>=1 and both equalities, so the statement is not weakened. sigma is the arithmetic map b->b^q, which is the correct sign; on Spec k_0 the claim is Fr^(q)=Spec(sigma). Fr^(q^m) is the p^(am) iterate of def-weil-absolute-frobenius-scheme, and X has characteristic p because it lies over k. Step 1: the charts U_0 x k are preserved, since pr1.Phi=Phi_0.pr1 with Phi_0 the identity on the space, and pr1.g_sigma=pr1; P is explicit in the definition and S=id(x)sigma; the induction on m has both cases. Step 2: both composites give u^(q^m)(x)b^(q^m) on pure tensors; H is a ring map by the iterate clause of def-weil-ring-frobenius; generation by pure tensors plus additivity extends this to all of B, nilpotents included. Step 3: Fr restricts to Spec(H) on U; contravariance gives Spec(P^m S^m)=g_sigma^m Phi^m, with the composition order checked; agreement on a self-mapping open cover gives equality of scheme morphisms; the maps are over k_0. All steps are elementary instances of the cited statements (C3/C4 ok). Small cases checked: empty X_0, Spec k_0, F_q[t] and F_q[e]/(e^2). There are no new nodes. An rg over the DAG found no duplicate; def-pur-scheme-geometric-frobenius uses the m=1 case consistently. The Mathlib searches cover all three kinds, and Mathlib/AlgebraicGeometry has no Frobenius hits. Every citation is a definition node, so the route is fine; no tool_uses; no SGA use. No fixes were made. Details are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0de9b08ed",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Read node (only lean changed), blueprint main-20261015 order 2416 statement+proof, module, report (Worker report + Second reading by Q159 present), and deps FiniteFieldDatum/geometricFiber, schemeFrobenius/schemeFrobeniusIterate/arithmeticGaloisFrobenius (followed into relativeFrobenius, galoisMap, geometricFrobenius = id×Spec(Frob_q^-1), so .inv = id×Spec(b↦b^q), correct sign), Scheme.iterateFrobenius (p^(a*m)=q^m power). Conjuncts Φ^m≫g_σ^m and g_σ^m≫Φ^m render both orders; LocallyOfFiniteType+QuasiCompact matches the convention; m≥1 via hm; equality of underlying morphisms is equivalent to equality over k₀ since all maps lie over k₀. Edge cases empty/nonreduced/nonseparated/Spec k₀/m=1/p=2/universes ok. No new defs; schemeGeometricFrobenius_factorization is not an exact match (purity setting, m=1). Statement field verbatim; docstrings with source and blueprint tag and 3-step proof; sorry only. nt_compile.py on the local side overlay: FrobeniusFactorization.lean 1.9 s, exit 0, no messages. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FrobeniusFactorization",
+  "declaration": "WeilConjectures.FiniteFieldDatum.absoluteFrobenius_factorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FrobeniusFactorization.lean",
+  "statement": "theorem absoluteFrobenius_factorization (D : WeilConjectures.FiniteFieldDatum.{u}) (X₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (m : ℕ) (hm : 1 ≤ m) : (D.geometricFiber X₀).left.iterateFrobenius D.prime (D.model_characteristic (pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ X₀.hom)) (D.a * m) = D.schemeFrobeniusIterate X₀ m ≫ (HPow.hPow (α := End (D.geometricFiber X₀).left) (D.arithmeticGaloisFrobenius X₀) m) ∧ (D.geometricFiber X₀).left.iterateFrobenius D.prime (D.model_characteristic (pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ X₀.hom)) (D.a * m) = (HPow.hPow (α := End (D.geometricFiber X₀).left) (D.arithmeticGaloisFrobenius X₀) m) ≫ D.schemeFrobeniusIterate X₀ m",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
