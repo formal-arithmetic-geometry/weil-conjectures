@@ -47,8 +47,12 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse {X Y : Scheme.{u
         WeilComplex.derivedLowerShriek k₀ l f) :=
   sorry
 
-/-- Blueprint `def-weil-open-closed-recollement` and
-`prop-weil-open-closed-recollement-adjunctions` (open–closed recollement), for Weil complexes.
+/-- The closed half of the open–closed recollement for Weil complexes, phrased with the general
+derived pushforward `AlgebraicGeometry.WeilComplex.derivedLowerStar` (whose definition uses the
+finiteness theorem). The same statement with the closed-immersion pushforward
+`AlgebraicGeometry.WeilComplex.derivedLowerStarOfIsClosedImmersion`, which does not use the
+finiteness theorem, is
+`AlgebraicGeometry.WeilComplex.exists_isIso_app_of_isZero_upperStar_of_isClosedImmersion`.
 Let `i : Z ⟶ X` be a closed immersion of `k₀`-schemes of finite type and `j : U ⟶ X` the
 complementary open immersion. There is a natural transformation `K ⟶ Ri_* i^* K` (the closed
 unit) which is an isomorphism at every `K` with `j^* K = 0`: in the recollement triangle

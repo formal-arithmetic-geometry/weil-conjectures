@@ -163,8 +163,10 @@ noncomputable def ProEtale.boundedConstructibleAdicRightDerivedLowerStarIsoClose
   Iso.refl _
 
 /-- The direct image `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion is fully
-faithful (blueprint `prop-sf-closed-unit-all-stages`;
-`AlgebraicGeometry.ProEtale.fullyFaithfulBoundedConstructibleAdicClosedLowerStar`). -/
+faithful, phrased with the direct image built from the finiteness theorem. The same statement
+for `AlgebraicGeometry.ProEtale.boundedConstructibleAdicClosedLowerStar`, which does not use the
+finiteness theorem, is
+`AlgebraicGeometry.ProEtale.fullyFaithfulBoundedConstructibleAdicClosedLowerStar`. -/
 noncomputable def ProEtale.fullyFaithfulBoundedConstructibleAdicRightDerivedLowerStar :
     (ProEtale.boundedConstructibleAdicRightDerivedLowerStar (l := l) s hk i).FullyFaithful :=
   have := LocallyOfFiniteType.isLocallyNoetherian s
@@ -312,9 +314,12 @@ theorem ProEtale.isZero_boundedConstructibleAdicClosedUpperShriek_obj
     (ProEtale.isZero_boundedConstructibleAdicUpperStar_obj_rightDerivedLowerStar_obj s hk i j hij)
     G
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (4) at the stage `ℚ̄_ℓ`: the unit
-`Q ⟶ Ri^! i_* Q` is an isomorphism, `i_*` being fully faithful on `Dᵇc(-, ℚ̄_ℓ)` (blueprint
-`prop-sf-closed-unit-all-stages`). -/
+/-- Clause (4) of the localization sequence at the stage `ℚ̄_ℓ`: the unit `Q ⟶ Ri^! i_* Q` is
+an isomorphism, `i_*` being fully faithful on `Dᵇc(-, ℚ̄_ℓ)`. This is phrased with the direct
+image built from the finiteness theorem; the same statement for any right adjoint of
+`AlgebraicGeometry.ProEtale.boundedConstructibleAdicClosedLowerStar`, which does not use the
+finiteness theorem, is
+`AlgebraicGeometry.ProEtale.isIso_unit_boundedConstructibleAdicClosedLowerStar`. -/
 instance ProEtale.isIso_boundedConstructibleAdicClosedUpperShriekAdjunction_unit :
     IsIso (ProEtale.boundedConstructibleAdicClosedUpperShriekAdjunction s hk i j hij).unit :=
   Adjunction.unit_isIso_of_L_fully_faithful _

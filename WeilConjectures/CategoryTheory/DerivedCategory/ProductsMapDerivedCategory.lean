@@ -44,18 +44,20 @@ lemma preservesLimitsOfShape_discrete_mapDerivedCategory :
     PreservesLimitsOfShape (Discrete β) F.mapDerivedCategory := by
   have (K : β → DerivedCategory C) : PreservesLimit (Discrete.functor K) F.mapDerivedCategory := by
     let L (b : β) := DerivedCategory.Q.objPreimage (K b)
-    refine preservesLimit_of_iso_diagram _ (Discrete.natIso fun b ↦
+    have : PreservesLimit (Discrete.functor fun b ↦ DerivedCategory.Q.obj (L b))
+        F.mapDerivedCategory := by
+      refine preservesLimit_of_preserves_limit_cone
+        (DerivedCategory.isLimitFanMkQObj (productIsProduct L)) ?_
+      refine (isLimitMapConeFanMkEquiv _ _ _).symm ?_
+      let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
+      have ht : IsLimit (Fan.mk (G.obj (∏ᶜ L)) fun b ↦ G.map (Pi.π L b)) :=
+        isLimitFanMkObjOfIsLimit G L _ (productIsProduct L)
+      exact Fan.IsLimit.ofIsos (DerivedCategory.isLimitFanMkQObj ht)
+        (fun b ↦ F.mapDerivedCategoryFactors.app (L b)) (F.mapDerivedCategoryFactors.app (∏ᶜ L))
+        (fun b ↦ (F.mapDerivedCategoryFactors.hom.naturality (Pi.π L b)).symm)
+    exact preservesLimit_of_iso_diagram _ (Discrete.natIso fun b ↦
       DerivedCategory.Q.objObjPreimageIso (K b.as) :
         Discrete.functor (fun b ↦ DerivedCategory.Q.obj (L b)) ≅ Discrete.functor K)
-    refine preservesLimit_of_preserves_limit_cone
-      (DerivedCategory.isLimitFanMkQObj (productIsProduct L)) ?_
-    refine (isLimitMapConeFanMkEquiv _ _ _).symm ?_
-    let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
-    have ht : IsLimit (Fan.mk (G.obj (∏ᶜ L)) fun b ↦ G.map (Pi.π L b)) :=
-      isLimitFanMkObjOfIsLimit G L _ (productIsProduct L)
-    exact Fan.IsLimit.ofIsos (DerivedCategory.isLimitFanMkQObj ht)
-      (fun b ↦ F.mapDerivedCategoryFactors.app (L b)) (F.mapDerivedCategoryFactors.app (∏ᶜ L))
-      (fun b ↦ (F.mapDerivedCategoryFactors.hom.naturality (Pi.π L b)).symm)
   exact preservesLimitsOfShape_of_discrete _
 
 end CategoryTheory.Functor

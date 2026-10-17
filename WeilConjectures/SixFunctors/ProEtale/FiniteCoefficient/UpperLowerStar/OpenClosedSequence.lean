@@ -212,6 +212,135 @@ noncomputable def upperStarLowerStarClosedBaseChangeIso
       (gZ)^*[ModuleCat.{u + 1} R].mapIso
         (asIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit.app G)))
 
+omit [IsClosedImmersion i] [QuasiCompact j] [IsClosedImmersion i'] [IsOpenImmersion j']
+  [QuasiCompact j'] in
+/-- The pullback along `g` of an extension by zero from `U` vanishes on the preimage `Z'` of the
+complement of `U`. -/
+lemma isZero_upperStar_upperStar_openImmersionLowerShriek
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (hi : i' ≫ g = gZ ≫ i)
+    (N : Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R)) :
+    IsZero ((i')^*[ModuleCat.{u + 1} R].obj
+      ((g)^*[ModuleCat.{u + 1} R].obj ((j)_!open[ModuleCat.{u + 1} R].obj N))) := by
+  have := isZero_upperStar_openImmersionLowerShriek (ModuleCat.{u + 1} R) j i
+    (Set.disjoint_iff_inter_eq_empty.1 hij.disjoint.symm) N
+  refine ((gZ)^*[ModuleCat.{u + 1} R].map_isZero this).of_iso ?_
+  exact ((upperStarComp _ i' g).app _).symm ≪≫
+    eqToIso (by rw [hi]) ≪≫ (upperStarComp _ gZ i).app _
+
+/-- Two short exact sequences with isomorphic middle terms are isomorphic if the first map of
+each composes to zero with the second map of the other. -/
+noncomputable def _root_.CategoryTheory.ShortComplex.isoOfShortExactOfIso {C : Type*}
+    [Category* C] [Abelian C] {S S' : ShortComplex C} (hS : S.ShortExact) (hS' : S'.ShortExact)
+    (e : S.X₂ ≅ S'.X₂) (h₁ : S.f ≫ e.hom ≫ S'.g = 0) (h₂ : S'.f ≫ e.inv ≫ S.g = 0) :
+    S ≅ S' :=
+  have := hS.mono_f
+  have := hS.epi_g
+  have := hS'.mono_f
+  have := hS'.epi_g
+  { hom :=
+      { τ₁ := hS'.exact.lift (S.f ≫ e.hom) (by rw [Category.assoc, h₁])
+        τ₂ := e.hom
+        τ₃ := hS.exact.desc (e.hom ≫ S'.g) (by rw [← Category.assoc] at h₁ ⊢; exact h₁)
+        comm₁₂ := hS'.exact.lift_f _ _
+        comm₂₃ := (hS.exact.g_desc _ _).symm }
+    inv :=
+      { τ₁ := hS.exact.lift (S'.f ≫ e.inv) (by rw [Category.assoc, h₂])
+        τ₂ := e.inv
+        τ₃ := hS'.exact.desc (e.inv ≫ S.g) (by rw [← Category.assoc] at h₂ ⊢; exact h₂)
+        comm₁₂ := hS.exact.lift_f _ _
+        comm₂₃ := (hS'.exact.g_desc _ _).symm }
+    hom_inv_id := by
+      ext
+      · rw [← cancel_mono S.f]
+        simp [ShortComplex.Exact.lift_f]
+      · simp
+      · rw [← cancel_epi S.g]
+        simp [reassoc_of% (hS.exact.g_desc _ _), ShortComplex.Exact.g_desc]
+    inv_hom_id := by
+      ext
+      · rw [← cancel_mono S'.f]
+        simp [ShortComplex.Exact.lift_f]
+      · simp
+      · rw [← cancel_epi S'.g]
+        simp [reassoc_of% (hS'.exact.g_desc _ _), ShortComplex.Exact.g_desc] }
+
+@[simp]
+lemma _root_.CategoryTheory.ShortComplex.isoOfShortExactOfIso_hom_τ₂ {C : Type*}
+    [Category* C] [Abelian C] {S S' : ShortComplex C} (hS : S.ShortExact) (hS' : S'.ShortExact)
+    (e : S.X₂ ≅ S'.X₂) (h₁ : S.f ≫ e.hom ≫ S'.g = 0) (h₂ : S'.f ≫ e.inv ≫ S.g = 0) :
+    (ShortComplex.isoOfShortExactOfIso hS hS' e h₁ h₂).hom.τ₂ = e.hom :=
+  rfl
+
+omit [IsClosedImmersion i] [QuasiCompact j] [IsClosedImmersion i'] [QuasiCompact j'] in
+/-- The pullback along `g` of the counit `j_! j^* M ⟶ M`, followed by the unit
+`g^* M ⟶ i'_* i'^* g^* M`, vanishes. -/
+lemma upperStar_map_counit_comp_unit_eq_zero
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (hi : i' ≫ g = gZ ≫ i)
+    (M : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) :
+    (g)^*[ModuleCat.{u + 1} R].map
+        ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} R) j).counit.app M) ≫
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i').unit.app
+        ((g)^*[ModuleCat.{u + 1} R].obj M) = 0 := by
+  have h := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i').unit.naturality
+    ((g)^*[ModuleCat.{u + 1} R].map
+      ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} R) j).counit.app M))
+  dsimp at h
+  rw [h, (isZero_upperStar_upperStar_openImmersionLowerShriek i j g i' gZ hij hi _).eq_of_src
+      ((i')^*[ModuleCat.{u + 1} R].map _) 0, Functor.map_zero, comp_zero]
+
+omit [IsClosedImmersion i] [QuasiCompact j] [IsClosedImmersion i'] [QuasiCompact j'] in
+/-- The counit `j'_! j'^* g^* M ⟶ g^* M`, followed by the pullback along `g` of the unit
+`M ⟶ i_* i^* M`, vanishes. -/
+lemma counit_comp_upperStar_map_unit_eq_zero
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (hj : j' ≫ g = gU ≫ j)
+    (M : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) :
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} R) j').counit.app
+        ((g)^*[ModuleCat.{u + 1} R].obj M) ≫
+      (g)^*[ModuleCat.{u + 1} R].map
+        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).unit.app M) = 0 := by
+  have h :=
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} R) j').counit.naturality
+    ((g)^*[ModuleCat.{u + 1} R].map
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).unit.app M))
+  dsimp at h
+  rw [← h, (isZero_upperStar_upperStar_lowerStar i j g j' gU hij hj _).eq_of_tgt
+      ((j')^*[ModuleCat.{u + 1} R].map _) 0, Functor.map_zero, zero_comp]
+
+/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (4) for the sequence: for a
+morphism `g : X' ⟶ X` and the base changes `i' : Z' ⟶ X'`, `gZ : Z' ⟶ Z`, `j' : U' ⟶ X'`,
+`gU : U' ⟶ U`, the pullback `g^*` carries the open–closed sequence
+`0 ⟶ j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ 0` of `M` to the open–closed sequence of `g^* M`: there is an
+isomorphism of short complexes which is the identity on the middle term `g^* M`
+(`AlgebraicGeometry.ProEtale.openClosedShortComplexBaseChangeIso_hom_τ₂`).
+
+Both are short exact (`g^*` is exact), so it suffices that the first map of each composes to zero
+with the second map of the other: `i'^* g^* j_! = 0` and `j'^* g^* i_* = 0` since `Z'` and `U'`
+lie over `Z` and `U`. -/
+noncomputable def openClosedShortComplexBaseChangeIso
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    (hij' : IsCompl (Set.range i'.base) (Set.range j'.base))
+    (hi : i' ≫ g = gZ ≫ i) (hj : j' ≫ g = gU ≫ j)
+    (M : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) :
+    (openClosedShortComplex R i j hij M).map (g)^*[ModuleCat.{u + 1} R] ≅
+      openClosedShortComplex R i' j' hij' ((g)^*[ModuleCat.{u + 1} R].obj M) :=
+  ShortComplex.isoOfShortExactOfIso
+    ((shortExact_openClosedShortComplex i j hij M).map_of_exact _)
+    (shortExact_openClosedShortComplex i' j' hij' _)
+    (Iso.refl ((g)^*[ModuleCat.{u + 1} R].obj M))
+    (by rw [Iso.refl_hom]; erw [Category.id_comp]
+        exact upperStar_map_counit_comp_unit_eq_zero i j g i' gZ hij hi M)
+    (by rw [Iso.refl_inv]; erw [Category.id_comp]
+        exact counit_comp_upperStar_map_unit_eq_zero i j g j' gU hij hj M)
+
+@[simp]
+lemma openClosedShortComplexBaseChangeIso_hom_τ₂
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    (hij' : IsCompl (Set.range i'.base) (Set.range j'.base))
+    (hi : i' ≫ g = gZ ≫ i) (hj : j' ≫ g = gU ≫ j)
+    (M : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) :
+    (openClosedShortComplexBaseChangeIso i j g i' j' gZ gU hij hij' hi hj M).hom.τ₂ = 𝟙 _ :=
+  rfl
+
 end BaseChange
 
 end ProEtale
