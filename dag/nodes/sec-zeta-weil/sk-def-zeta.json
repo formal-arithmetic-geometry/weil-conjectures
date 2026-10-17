@@ -233,5 +233,33 @@
    ],
    "open": []
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.ZetaSeries",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.degreeOver",
+  "declarations": [
+   "FiniteField.galoisExtension",
+   "AlgebraicGeometry.Scheme.Hom.fieldPoints",
+   "AlgebraicGeometry.Scheme.Hom.pointCount",
+   "AlgebraicGeometry.Scheme.Hom.zetaSeries",
+   "AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries",
+   "AlgebraicGeometry.Scheme.Hom.X_mul_derivative_zetaSeries",
+   "AlgebraicGeometry.Scheme.Hom.residueFieldAlgebraMap",
+   "AlgebraicGeometry.Scheme.Hom.degreeOver"
+  ],
+  "statement": "noncomputable def Hom.degreeOver (f : X.Hom (Spec (.of k))) (x : X) : ℕ",
+  "branch": "slopmaster2",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing interface for every defined notion: the primary declaration degreeOver implements the node’s closed-point degree and is defined directly in WeilConjectures.ZetaSeries. This module publicly exports Weil.Definitions, physically Comparator/Weil/Definitions.lean, which owns the recorded fieldPoints, pointCount and zetaSeries definitions. The eight declarations collectively supply the degree-n splitting-field model, commuting-triangle point sets, Nat.card with value 0 for infinite sets, formal exponential zeta series, constant coefficient and logarithmic derivative, and the residue-field algebra map and degree. For n ≥ 1, the unique-subfield dependency identifies the splitting-field model with {a | a^(q^n)=a} in the chosen algebraic closure. The checker requires the primary declaration to occur directly in the recorded module and accepts only Mathlib.*, WeilConjectures.* and Sheaf.* roots; degreeOver is a definition clause of this node, rather than a duplicate or a substitute zeta construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bc540f57",
+  "group": "N9",
+  "result": "pass",
+  "note": "Existing-record delivery: the node changes only in its added lean field (WeilConjectures.ZetaSeries, primary Hom.degreeOver, 8 declarations incl. galoisExtension/fieldPoints/pointCount/zetaSeries/constantCoeff/X_mul_derivative/residueFieldAlgebraMap/degreeOver). Checked every clause against the node: commuting-triangle point sets, Nat.card with 0 for infinite sets, exp.subst of the series with n=0 coefficient set to 0 and N_n/n for n>=1, constant term 1, multiplied log-derivative identity (Z a unit), residue degree via the induced map with finrank 0 in infinite dimension; splitting-field model equivalent to the unique-subfield model via nat_card_fieldPoints_congr. No extra hypotheses; one universe u for scheme, field and extension, no hidden restriction. Edge cases: empty scheme, Spec k, infinite point sets, infinite residue degree, n=0, p=2. nt_compile probe resolves all 8 declarations, axioms propext/choice/Quot.sound only, no sorry; check_record and check_existing report no failures (one normalization note about noncomputable; lean.statement is verbatim). Consistent with the landed same_as record def-weil-point-counts-zeta. Report has a real Worker report and Second reading by N9. No findings of substance."
  }
 }

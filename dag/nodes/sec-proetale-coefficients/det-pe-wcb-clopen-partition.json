@@ -223,5 +223,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.WContractibleClopenPartition",
+  "declaration": "AlgebraicGeometry.Scheme.proetale_wContractible_clopen_partition",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/WContractibleClopenPartition.lean",
+  "statement": "theorem proetale_wContractible_clopen_partition (X : Scheme.{u}) (D : Type u) [CommRing D] [IsWContractibleRing D] (f : Spec (.of D) ⟶ X) [WeaklyEtale f] (I : Type v) (V : I → X.ProEt) (a : ∀ i : I, V i ⟶ ProEt.mk f) (hcover : Presieve.ofArrows V a ∈ ProEt.precoverage X (ProEt.mk f)) : ∃ (m : ℕ) (W : Fin m → (Spec (.of D)).Opens), (∀ k : Fin m, IsClosed (W k : Set (Spec (.of D)))) ∧ (∀ k : Fin m, (W k : Set (Spec (.of D))).Nonempty) ∧ Pairwise (fun j k : Fin m ↦ Disjoint (W j) (W k)) ∧ iSup W = ⊤ ∧ ∃ (i : Fin m → I) (g : ∀ k : Fin m, (W k).toScheme ⟶ (V (i k)).left), ∀ k : Fin m, g k ≫ (a (i k)).left = (W k).ι",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe1b13ad1",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Read node, 5 stmt deps, Stacks 098F (proetale.tex:2781), the module and report (Worker report + Second reading by Q80 present). Lean matches clause by clause: X : Scheme.{u}; Spec (.of D) with [IsWContractibleRing D] (side WContractible.lean:40); object via WeaklyEtale f / ProEt.mk f; covering via the recorded Mathlib ProEt.precoverage (propQC WeaklyEtale), I : Type v with no finiteness or nonemptiness; clopen pieces as Opens + IsClosed, pairwise disjoint, iSup = top; U-morphisms via g k ≫ (a (i k)).left = (W k).ι. Nonempty-pieces clause is equivalent (node proof discards empties). Empty U gives m=0. No hollow defs, only sorry, docstrings and source place OK, no extra assumptions, universes bound. Statement field verbatim (scripted check). nt_compile.py --json on the snapshot file: rc 0, no errors or warnings, 2.5 s."
  }
 }
