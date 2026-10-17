@@ -238,6 +238,54 @@ lemma equiv₀_transitionH {i j : I} (f : i ⟶ j) (y : Sheaf.H (S.F i) 0) :
   change Sheaf.H.equiv₀ _ _ (Sheaf.H.map _ 0 (cohomologyMap _ _ 0 _)) = _
   rw [← Sheaf.H.equiv₀_naturality, equiv₀_cohomologyMap_zero, AddEquiv.apply_symm_apply]
 
+include hc in
+/-- **Continuity in degree zero**: `H⁰(X, L) = colimᵢ H⁰(Dᵢ, Fᵢ)`. -/
+theorem isContinuousAt_zero (S : SystemData D c) (hS : S.Laws) : S.IsContinuousAt 0 := by
+  have hterm (Z : Scheme.{u}) : IsTerminal
+      (MorphismProperty.Over.mk ⊤ (𝟙 Z) (MorphismProperty.id_mem _ _) : Z.Etale) :=
+    MorphismProperty.Over.mkIdTerminal _ _
+  -- the section of `Fⱼ` over the terminal object `Wf` of `Dⱼ` over `D_{i₀}` given by a class
+  let sec {i₀ j : I} (f : i₀ ⟶ j) (z : Sheaf.H (S.F j) 0) :
+      (S.F j).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map f.op)).obj
+        (MorphismProperty.Over.mk ⊤ (𝟙 _) (MorphismProperty.id_mem _ _)))) :=
+    (S.F j).obj.map (terminal.from _).op (Sheaf.H.equiv₀ _ terminalIsTerminal z)
+  have hsec_inj {i₀ j : I} (f : i₀ ⟶ j) : Function.Injective (sec f) := by
+    have hW : IsTerminal ((MorphismProperty.Over.pullback @Etale ⊤ (D.map f.op)).obj
+        (MorphismProperty.Over.mk ⊤ (𝟙 _) (MorphismProperty.id_mem _ _))) :=
+      IsTerminal.isTerminalObj (D.map f.op).Etale _ (hterm _)
+    intro z z' h
+    apply (Sheaf.H.equiv₀ _ terminalIsTerminal).injective
+    have h' := congrArg ((S.F j).obj.map (hW.from (⊤_ _)).op) h
+    simp only [sec, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp] at h'
+    rwa [terminal.hom_ext (hW.from (⊤_ _) ≫ terminal.from _) (𝟙 _), op_id,
+      CategoryTheory.Functor.map_id] at h'
+  refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
+  · obtain ⟨k⟩ := ‹Nonempty I›
+    let T₀ : (D.obj (op k)).Etale :=
+      MorphismProperty.Over.mk ⊤ (𝟙 _) (MorphismProperty.id_mem _ _)
+    have : CompactSpace T₀.left := inferInstanceAs (CompactSpace (D.obj (op k)))
+    have : QuasiSeparatedSpace T₀.left := inferInstanceAs (QuasiSeparatedSpace (D.obj (op k)))
+    have hW : IsTerminal ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op k))).obj T₀) :=
+      IsTerminal.isTerminalObj (c.π.app (op k)).Etale T₀ (hterm _)
+    obtain ⟨j, f, t, ht⟩ := S.exists_stageMap_app_eq hc T₀
+      (S.L.pt.obj.map (terminal.from _).op (Sheaf.H.equiv₀ _ terminalIsTerminal x))
+    have hWf : IsTerminal ((MorphismProperty.Over.pullback @Etale ⊤ (D.map f.op)).obj T₀) :=
+      IsTerminal.isTerminalObj (D.map f.op).Etale T₀ (hterm _)
+    refine ⟨j, (Sheaf.H.equiv₀ _ terminalIsTerminal).symm
+      ((S.F j).obj.map (hWf.from (⊤_ _)).op t), (Sheaf.H.equiv₀ _ terminalIsTerminal).injective ?_⟩
+    have hx : Sheaf.H.equiv₀ _ terminalIsTerminal x =
+        S.L.pt.obj.map (hW.from (⊤_ _)).op ((S.stageMap f).hom.app (op T₀) t) := by
+      rw [ht, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
+        terminal.hom_ext (hW.from (⊤_ _) ≫ terminal.from _) (𝟙 _), op_id,
+        CategoryTheory.Functor.map_id]
+      rfl
+    rw [equiv₀_toLimitH, AddEquiv.apply_symm_apply, hx]
+    simp only [stageMap, limitComparison, ObjectProperty.FullSubcategory.comp_hom,
+      NatTrans.comp_app, ConcreteCategory.comp_apply, lowerStar_map_hom_app,
+      lowerStarComp_hom_app_hom_app]
+    rfl
+  · sorry
+
 end Zero
 
 end AlgebraicGeometry.Etale.SystemData

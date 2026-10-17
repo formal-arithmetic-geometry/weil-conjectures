@@ -81,4 +81,75 @@ lemma mono_tensorLeft_map_of_iso_biproduct {M : Mod C A} {n : ℕ}
   rw [← NatIso.naturality_2 e' f]
   infer_instance
 
+section RegularLeft
+
+variable (M : Mod C A)
+
+/-- The action `A ⊗ M ⟶ M` as a morphism of `A`-modules, `A` acting on `A ⊗ M` through the
+first factor. -/
+def leftActHom : (tensorRight A M.X).obj (regular A) ⟶ M :=
+  homMk (M := (tensorRight A M.X).obj (regular A)) (N := M) (act (A := A) M.X) (by
+    change ((α_ A A M.X).inv ≫ μ[A] ▷ M.X) ≫ act (A := A) M.X =
+      A ◁ act (A := A) M.X ≫ act (A := A) M.X
+    rw [Category.assoc, mul_act, Iso.inv_hom_id_assoc])
+
+lemma tensorRightMap_act_comp_leftActHom :
+    (tensorRightMap A (act (A := A) M.X)).app (regular A) ≫ leftActHom M =
+      (tensorRightRightAct A M.X).app (regular A) ≫ leftActHom M := by
+  ext
+  change A ◁ act (A := A) M.X ≫ act (A := A) M.X =
+    ((α_ A A M.X).inv ≫ ((β_ A A).hom ≫ μ[A]) ▷ M.X) ≫ act (A := A) M.X
+  rw [IsCommMonObj.mul_comm, Category.assoc, mul_act, Iso.inv_hom_id_assoc]
+
+/-- The cofork `A ⊗ (A ⊗ M) ⇉ A ⊗ M ⟶ M` of the action. -/
+noncomputable abbrev leftActCofork :=
+  Cofork.ofπ (leftActHom M) (tensorRightMap_act_comp_leftActHom M)
+
+/-- The underlying cofork in `C` of the action is a (split) coequalizer, split by
+`m ↦ 1 ⊗ m` and `a ⊗ m ↦ 1 ⊗ a ⊗ m`. -/
+noncomputable def isColimitMapCoconeLeftActCofork :
+    IsColimit ((forget A).mapCocone (leftActCofork M)) := by
+  refine (isColimitMapCoconeCoforkEquiv _ _).symm ?_
+  let s : M.X ⟶ A ⊗ M.X := (λ_ M.X).inv ≫ η[A] ▷ M.X
+  let t : A ⊗ M.X ⟶ A ⊗ (A ⊗ M.X) := (λ_ (A ⊗ M.X)).inv ≫ η[A] ▷ (A ⊗ M.X)
+  have hs : s ≫ act (A := A) M.X = 𝟙 _ := by simp [s]
+  have ht₁ : t ≫ A ◁ act (A := A) M.X = act (A := A) M.X ≫ s := by
+    simp only [t, s, Category.assoc]
+    rw [← whisker_exchange, ← Category.assoc, ← leftUnitor_inv_naturality, Category.assoc]
+  have ht₂ : t ≫ (α_ A A M.X).inv ≫ ((β_ A A).hom ≫ μ[A]) ▷ M.X = 𝟙 _ := by
+    rw [IsCommMonObj.mul_comm]
+    simp only [t, leftUnitor_tensor_inv, Category.assoc, associator_inv_naturality_left_assoc,
+      Iso.hom_inv_id_assoc, ← comp_whiskerRight, MonObj.one_mul, Iso.inv_hom_id,
+      id_whiskerRight]
+  refine Cofork.IsColimit.mk _ (fun σ ↦ s ≫ σ.π) (fun σ ↦ ?_) (fun σ m hm ↦ ?_)
+  · change act (A := A) M.X ≫ s ≫ σ.π = σ.π
+    have hc := σ.condition
+    change A ◁ act (A := A) M.X ≫ σ.π =
+      ((α_ A A M.X).inv ≫ ((β_ A A).hom ≫ μ[A]) ▷ M.X) ≫ σ.π at hc
+    rw [← Category.assoc, ← ht₁, Category.assoc, hc, ← Category.assoc, ← Category.assoc,
+      Category.assoc t, ht₂, Category.id_comp]
+  · change m = s ≫ σ.π
+    rw [← hm]
+    change m = s ≫ act (A := A) M.X ≫ m
+    rw [← Category.assoc, hs, Category.id_comp]
+
+variable [HasColimitsOfShape WalkingParallelPair C]
+  [PreservesColimitsOfShape WalkingParallelPair (MonoidalCategory.tensorLeft A)]
+
+/-- The action cofork is a coequalizer in `A`-modules, forgetting to `C` reflecting colimits. -/
+noncomputable def isColimitLeftActCofork : IsColimit (leftActCofork M) :=
+  isColimitOfReflects (forget A) (isColimitMapCoconeLeftActCofork M)
+
+/-- The cocone on the diagram defining `A ⊗_A M` given by the action. -/
+noncomputable abbrev leftActCocone : Cocone ((tensorLeftDiagram A M).flip.obj (regular A)) :=
+  (Cocone.precompose (diagramIsoParallelPair _).hom).obj (leftActCofork M)
+
+/-- **Tensoring the regular module with `M` gives `M`**: `A ⊗_A M ≅ M` through the action. -/
+noncomputable def tensorLeftObjRegularIso : (tensorLeft M).obj (regular A) ≅ M :=
+  (colimit.isColimit ((tensorLeftDiagram A M).flip.obj (regular A))).coconePointUniqueUpToIso
+    ((IsColimit.precomposeHomEquiv _ (leftActCofork M)).symm (isColimitLeftActCofork M) :
+      IsColimit (leftActCocone M))
+
+end RegularLeft
+
 end CategoryTheory.Mod

@@ -276,8 +276,8 @@ lemma hasPushout_sigmaMap'_subtype {A : Type} [Finite A] (p : A → Prop) (N : C
       Category.assoc] at this
     simp [this]
 
-/-- In a pushout square whose right leg `g` is an isomorphism, the left leg is one too. -/
 omit [HasFiniteCoproducts C] in
+/-- In a pushout square whose right leg `g` is an isomorphism, the left leg is one too. -/
 lemma isIso_inl_of_isColimit {W X Y Z : C} {f : W ⟶ X} {g : W ⟶ Y} {inl : X ⟶ Z}
     {inr : Y ⟶ Z} {w : f ≫ inl = g ≫ inr} (h : IsColimit (PushoutCocone.mk inl inr w))
     [IsIso g] : IsIso inl := by

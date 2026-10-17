@@ -170,8 +170,8 @@ lemma exactAt_cechComplex_of_isStageFamily (hE : ∀ i, Injective (S.F i)) {V : 
   obtain ⟨k, V₀, _, _, e, U₀, hU₀, ⟨ι⟩⟩ := hU
   have : PreservesFiniteProducts (Over.map e.hom) :=
     inferInstanceAs (PreservesFiniteProducts (Over.mapIso e).functor)
-  have : PreservesFiniteLimits (Over.post (c.π.app (op k)).Etale) := inferInstance
-  have : PreservesFiniteProducts (Over.post (c.π.app (op k)).Etale) := inferInstance
+  have : PreservesFiniteLimits (Over.post (X := V₀) (c.π.app (op k)).Etale) := inferInstance
+  have : PreservesFiniteProducts (Over.post (X := V₀) (c.π.app (op k)).Etale) := inferInstance
   refine exactAt_cechComplex_of_preservesFiniteProducts
     (Over.post (c.π.app (op k)).Etale ⋙ Over.map e.hom) U₀ U ι
     ((lowerStar AddCommGrpCat.{u + 1} (c.π.app (op k))).obj S.L.pt).obj S.L.pt.obj (Iso.refl _)

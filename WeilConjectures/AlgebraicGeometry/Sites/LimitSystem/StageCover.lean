@@ -50,12 +50,11 @@ lemma Scheme.Etale.affineSieve_mem (V : X.Etale) :
     ((Scheme.ofArrows_mem_smallEtaleTopology_iff f).2 ?_)
   · rw [Sieve.generate_le_iff]
     rintro _ _ ⟨N⟩
-    exact ⟨N.1, N.2, by simp [f]⟩
+    exact ⟨N.1, N.2, (Scheme.Opens.range_ι _).subset⟩
   · refine Set.eq_univ_of_forall fun x ↦ ?_
-    have hx : x ∈ (⊤ : V.left.Opens) := trivial
-    rw [← V.left.iSup_affineOpens_eq_top, TopologicalSpace.Opens.mem_iSup] at hx
-    obtain ⟨N, hN⟩ := hx
-    exact Set.mem_iUnion.2 ⟨N, by simpa [f] using hN⟩
+    obtain ⟨_, ⟨N, hN, rfl⟩, hxN, -⟩ :=
+      V.left.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+    exact Set.mem_iUnion.2 ⟨⟨N, hN⟩, ⟨⟨x, hxN⟩, rfl⟩⟩
 
 end AffineSieve
 
@@ -76,8 +75,8 @@ lemma isStageObject_cechNerveObj {V : c.pt.Etale} {n : ℕ} {U : Fin n → Over 
   obtain ⟨k, V₀, _, _, e, U₀, hU₀, ⟨ι⟩⟩ := hU
   have : PreservesFiniteProducts (Over.map e.hom) :=
     inferInstanceAs (PreservesFiniteProducts (Over.mapIso e).functor)
-  have : PreservesFiniteLimits (Over.post (c.π.app (op k)).Etale) := inferInstance
-  have : PreservesFiniteProducts (Over.post (c.π.app (op k)).Etale) := inferInstance
+  have : PreservesFiniteLimits (Over.post (X := V₀) (c.π.app (op k)).Etale) := inferInstance
+  have : PreservesFiniteProducts (Over.post (X := V₀) (c.π.app (op k)).Etale) := inferInstance
   obtain ⟨h₁, h₂⟩ := Scheme.compactSpace_and_quasiSeparatedSpace_piObj
     (fun l ↦ U₀ (y l)) fun l ↦ by
       have := hU₀ (y l)
@@ -108,15 +107,19 @@ lemma exists_stageModel {k : I} {V₀ : (D.obj (op k)).Etale} [CompactSpace V₀
         ι.hom ≫ (c.π.app (op l)).Etale.map p ≫ (stageBaseChangeIso c hkl V₀).hom ≫ e.hom = g := by
   have := isAffineHom_π_app D c hc
   have : Etale V₀.hom := V₀.prop
+  have : CompactSpace ↥((𝟭 Scheme).obj V₀.left) := ‹CompactSpace V₀.left›
+  have : QuasiSeparatedSpace ↥((𝟭 Scheme).obj V₀.left) := ‹QuasiSeparatedSpace V₀.left›
+  have : QuasiSeparatedSpace ↥((Functor.fromPUnit (D.obj (op k))).obj V₀.right) :=
+    inferInstanceAs (QuasiSeparatedSpace (D.obj (op k)))
   have : QuasiCompact V₀.hom := quasiCompact_of_compactSpace _
-  have : QuasiSeparated V₀.hom := quasiSeparated_of_quasiSeparatedSpace _
+  have : QuasiSeparated V₀.hom := QuasiSeparated.of_quasiSeparatedSpace _
   let π₀ : Over.forget (op k) ⋙ D ⟶ (Functor.const (Over (op k))).obj (D.obj (op k)) :=
     { app m := D.map m.hom
       naturality _ _ f := by simp [← D.map_comp, Over.w f] }
   have hck := (Functor.Initial.isLimitWhiskerEquiv (Over.forget (op k)) c).symm hc
   let P := c.π.app (op k)
   have hP : ∀ m, P = (c.whisker (Over.forget (op k))).π.app m ≫ π₀.app m :=
-    fun m ↦ by rw [← c.w m.hom]; rfl
+    fun m ↦ by change c.π.app (op k) = _; rw [← c.w m.hom]; rfl
   let D' := baseChangeOverDiagram (Over.forget (op k) ⋙ D) π₀ V₀.hom
   let c' := baseChangeOverCone (Over.forget (op k) ⋙ D) π₀ (c.whisker (Over.forget (op k))) P hP
     V₀.hom
@@ -137,16 +140,16 @@ lemma exists_stageModel {k : I} {V₀ : (D.obj (op k)).Etale} [CompactSpace V₀
   have : Etale ((g ≫ e.inv).left ≫ ((c.π.app (op k)).Etale.obj V₀).hom) := by
     rw [hw]; exact U'.prop
   have : Etale (g ≫ e.inv).left := Etale.of_comp _ ((c.π.app (op k)).Etale.obj V₀).hom
-  let V' : c'.pt.Etale := MorphismProperty.Over.mk ⊤ (g ≫ e.inv).left this
-  have hVN : Set.range V'.hom ⊆ (e.hom.left ⁻¹ᵁ N : Set _) := by
-    rintro _ ⟨x, rfl⟩
+  let V' : ((c.π.app (op k)).Etale.obj V₀).left.Etale :=
+    MorphismProperty.Over.mk ⊤ (g ≫ e.inv).left this
+  have hVN (x : V'.left) : e.hom.left (V'.hom x) ∈ N := by
     refine hgN ⟨x, ?_⟩
     change g.left x = e.hom.left ((g ≫ e.inv).left x)
     rw [← Scheme.Hom.comp_apply, ← MorphismProperty.Comma.comp_left, Category.assoc,
       Iso.inv_hom_id, Category.comp_id]
   have : IsAffine V'.left := ‹IsAffine U'.left›
-  obtain ⟨iO, hiO⟩ := exists_hasStageModel D' πV c' hc' (pullback.fst V₀.hom P)
-    (fun m ↦ by simp [c', πV]) V' (hN.preimage e.hom.left) hVN (𝟙 V₀.left) (𝟙 V₀.left)
+  obtain ⟨iO, hiO⟩ := exists_hasStageModel (D := D') (π := πV) (c := c') hc' (pullback.fst V₀.hom P)
+    (fun m ↦ by simp [c', πV]) V' (hN.preimage e.hom.left) (by rintro _ ⟨x, rfl⟩; exact hVN x) (𝟙 V₀.left) (𝟙 V₀.left)
     ((g ≫ e.inv).left ≫ pullback.fst V₀.hom P) (by simp [V'])
     ((g ≫ e.inv).left ≫ pullback.fst V₀.hom P) (by simp [V'])
   refine ⟨iO.left.unop, fun l hkl hil ↦ ?_⟩
@@ -169,9 +172,15 @@ lemma exists_stageModel {k : I} {V₀ : (D.obj (op k)).Etale} [CompactSpace V₀
     Category.comp_id]
   apply MorphismProperty.Over.Hom.ext
   apply pullback.hom_ext
-  · simp [ι, p', Y', stageBaseChangeIso, Scheme.Hom.Etale, MorphismProperty.Over.pullback,
-      hpb.w_assoc, c']
-  · simp [ι, p', Y', stageBaseChangeIso, Scheme.Hom.Etale, MorphismProperty.Over.pullback, V']
+  · simp [ι, p', Y', stageBaseChangeIso, Scheme.Hom.Etale, MorphismProperty.Over.pullback]
+    erw [pullback.lift_fst_assoc]
+    rw [Category.assoc]
+    erw [IsPullback.isoPullback_hom_fst_assoc]
+    rw [hpb.w_assoc]
+    simp [c', V']
+  · simp [ι, p', Y', stageBaseChangeIso, Scheme.Hom.Etale, MorphismProperty.Over.pullback]
+    erw [pullback.lift_snd, IsPullback.isoPullback_hom_snd]
+    simp [V']
 
 include hc in
 /-- Every covering sieve of a stage object contains a stage family generating a covering sieve.
@@ -189,6 +198,7 @@ lemma exists_isStageFamily {V : c.pt.Etale} (hV : IsStageObject c V) {R : Sieve 
   choose N hN hgN using fun a ↦ (hgR a).2
   refine ⟨n, fun a ↦ Over.mk (g a), ?_, fun a ↦ (hgR a).1,
     (Scheme.ofArrows_mem_smallEtaleTopology_iff _).2 hcov⟩
+  classical
   choose i hi using fun a ↦
     have := hU' a
     exists_stageModel hc e (g a) (hN a) (hgN a)
@@ -198,7 +208,7 @@ lemma exists_isStageFamily {V : c.pt.Etale} (hV : IsStageObject c V) {R : Sieve 
     (hl _ (Finset.mem_insert_of_mem (Finset.mem_image_of_mem _ (Finset.mem_univ a))))
   obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace_pullback_left (D.map (homOfLE hkl).op) V₀
   exact ⟨l, (D.map (homOfLE hkl).op).Etale.obj V₀, ‹_›, ‹_›, stageBaseChangeIso c hkl V₀ ≪≫ e,
-    fun a ↦ Over.mk (p a), fun a ↦ hY a, ⟨fun a ↦ Over.isoMk (ι a) (by simpa using hι a)⟩⟩
+    fun a ↦ Over.mk (p a), fun a ↦ hY a, ⟨fun a ↦ Over.isoMk (ι a) (hι a)⟩⟩
 
 include hc in
 /-- **The colimit of a system of injective sheaves is acyclic.** Let `(Eᵢ)` be a system of

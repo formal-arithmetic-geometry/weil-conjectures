@@ -163,6 +163,7 @@ theorem affineSpaceSmoothDuality_of_affineLineSmoothDuality (hE : EtaleSmoothDua
     rw [Nat.cast_zero, mul_zero]
     have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 0); S) :=
       .of_hom (𝔸(ULift.{u} (Fin 0); S) ↘ S)
+    intro _
     exact satisfiesSmoothDuality_of_isIso hE (𝔸(ULift.{u} (Fin 0); S) ↘ S)
   | succ d ih =>
     intro _

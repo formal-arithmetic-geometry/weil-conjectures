@@ -52,6 +52,9 @@ noncomputable def adicSectionsWithSupport : AdicSheaf l X ⥤ AdicSheaf l Z :=
     (isZero_adicUpperStar_obj_adicLowerStar_obj i j hij.disjoint)
     (AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl i j hij)
 
+instance : (adicSectionsWithSupport l i j hij).Additive :=
+  SectionsWithSupport.additive_functor _ _ _ _
+
 /-- Blueprint `det-lem-formal-closed-support-adjunction` (1): `Γ_Z(M)` is `i^*` of the kernel of
 the unit `M ⟶ j_* j^* M`. -/
 lemma adicSectionsWithSupport_obj (M : AdicSheaf l X) :
@@ -76,6 +79,7 @@ noncomputable def kernelIsoAdicLowerStarAdicSectionsWithSupport (M : AdicSheaf l
       (i)_*ᵃ[l].obj ((adicSectionsWithSupport l i j hij).obj M) :=
   SectionsWithSupport.kernelIso _ _ _ _ M
 
+include i hij in
 /-- Blueprint `det-lem-formal-closed-support-adjunction` (3): for an injective sheaf `I`, the
 unit `I ⟶ j_* j^* I` is an epimorphism. -/
 lemma epi_adicUpperStarLowerStarAdjunction_unit_app_of_injective (I : AdicSheaf l X)
@@ -90,11 +94,12 @@ lemma epi_adicUpperStarLowerStarAdjunction_unit_app_of_injective (I : AdicSheaf 
 
 section Derived
 
+variable [PreservesFiniteColimits (i)_*ᵃ[l]]
+
 /-- Blueprint `det-lem-formal-closed-support-adjunction` (2): `RΓ_Z` is right adjoint to `i_*`
 on the unbounded derived categories. -/
 noncomputable def adicDerivedSectionsWithSupportAdjunction :
     ((i)_*ᵃ[l]).mapDerivedCategory ⊣ (adicSectionsWithSupport l i j hij).rightDerivedFunctor :=
-  have := preservesFiniteColimits_adicLowerStar_of_isCompl (l := l) i j hij
   SectionsWithSupport.derivedAdjunction _ _ _ _
 
 /-- Blueprint `det-lem-formal-closed-support-adjunction` (4): for `K` in `D(X_proét, ℚ̄_ℓ)`, the
@@ -104,7 +109,6 @@ counit `i_* RΓ_Z K ⟶ K` and the unit `K ⟶ Rj_* j^* K` extend to a distingui
 theorem existsUnique_distTriang_adicSectionsWithSupport (K : DerivedCategory (AdicSheaf l X)) :
     ∃! w, Recollement.triangle (adicDerivedUpperStarLowerStarAdjunction l j)
       (adicDerivedSectionsWithSupportAdjunction l i j hij) K w ∈ distTriang _ :=
-  have := preservesFiniteColimits_adicLowerStar_of_isCompl (l := l) i j hij
   SectionsWithSupport.existsUnique_distTriang _ _ _ _ K
 
 /-- Blueprint `det-lem-formal-closed-support-adjunction` (4):
@@ -118,7 +122,6 @@ theorem nonempty_iso_adicUpperStar_fib (K : DerivedCategory (AdicSheaf l X))
       distTriang _) :
     Nonempty (((i)^*ᵃ[l]).mapDerivedCategory.obj F ≅
       (adicSectionsWithSupport l i j hij).rightDerivedFunctor.obj K) :=
-  have := preservesFiniteColimits_adicLowerStar_of_isCompl (l := l) i j hij
   SectionsWithSupport.nonempty_iso_upperStar_fib _ _ _ _ K a δ hT
 
 end Derived

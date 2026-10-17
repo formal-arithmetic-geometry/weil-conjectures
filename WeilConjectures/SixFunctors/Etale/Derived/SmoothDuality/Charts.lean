@@ -216,6 +216,7 @@ theorem satisfiesSmoothDuality_of_hasInvertibleExponent {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f] :
     SatisfiesSmoothDuality Λ f (2 * d : ℤ) := by
   have : HasInvertibleExponent Λ X := .of_hom f
+  intro _
   refine satisfiesSmoothDuality_of_forall_exists_isOpenImmersion f _ fun x ↦ ?_
   obtain ⟨U, V, hU, hV, -, hxV, hVU, e, he, hfe⟩ := Smooth.exists_etale_to_affineSpace f d x
   have : HasInvertibleExponent Λ U.toScheme := .of_hom U.ι

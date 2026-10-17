@@ -151,6 +151,7 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : 
         rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f') :=
   nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ f d sq
 
+omit [HasTateTwist Λ] in
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-etale locality, without derived descent
 
 *Étale morphisms.* Every étale morphism `e : X ⟶ Y` admitting a compactification, with the
