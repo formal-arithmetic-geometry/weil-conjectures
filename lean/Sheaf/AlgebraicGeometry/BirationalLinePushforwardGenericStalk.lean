@@ -7,13 +7,14 @@ module
 
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import all WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import all Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward
+import all WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+import Mathlib.AlgebraicGeometry.FunctionField
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # The generic stalk of a birational line pushforward
 
@@ -52,7 +53,23 @@ private theorem stalk_free_of_restrict_iso {Z W : Scheme.{u}}
     (e : M.restrict j ≅ SheafOfModules.unit Z.ringCatSheaf) (z : Z) :
     Nonempty (((RingedSpace.moduleStalkFunctor W.toRingedSpace (j z)).obj M)
       ≃ₗ[W.presheaf.stalk (j z)] W.presheaf.stalk (j z)) := by
-  sorry
+  let T := RingedSpace.moduleStalkFunctor W.toRingedSpace (j z)
+  let ηM := (restrictAdjunction j).unit.app M
+  let O := SheafOfModules.unit W.ringCatSheaf
+  let ηO := (restrictAdjunction j).unit.app O
+  have hη (N : W.Modules) :
+      IsIso ((restrictFunctor j).map ((restrictAdjunction j).unit.app N)) := by
+    exact inferInstanceAs
+      (IsIso ((Functor.whiskerRight (restrictAdjunction j).unit (restrictFunctor j)).app N))
+  let := hη M
+  let := hη O
+  let aM := (LinearEquiv.ofBijective (T.map ηM).hom
+    (stalk_bijective_of_restrict_iso j ηM z)).toModuleIso
+  let aO := (LinearEquiv.ofBijective (T.map ηO).hom
+    (stalk_bijective_of_restrict_iso j ηO z)).toModuleIso
+  let d := T.mapIso ((pushforward j).mapIso (e ≪≫ (restrictUnitIso j).symm))
+  obtain ⟨eu, _⟩ := Scheme.unit_stalk_iso W (j z)
+  exact ⟨(aM ≪≫ d ≪≫ aO.symm ≪≫ eu).toLinearEquiv⟩
 
 set_option maxHeartbeats 800000 in
 -- Local module-stalk comparisons unfold several nested restriction functors.

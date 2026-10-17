@@ -1,0 +1,163 @@
+{
+ "id": "lem-pc-module-pushforward-open-restriction",
+ "kind": "statement",
+ "title": "Ordinary module direct image commutes with open restriction",
+ "statement": "Let $f:X\\to T$ be a morphism of schemes [def-pc-scheme], let $g:T\\prime\\to T$ and $g\\prime:X\\prime\\to X$ be open immersions, and let $f\\prime:X\\prime\\to T\\prime$ make the square cartesian. On categories of sheaves of structure-sheaf modules [def-weil-sheaf-of-modules-category], restriction along $g$ after ordinary direct image along $f$ is naturally isomorphic to ordinary direct image along $f\\prime$ after restriction along $g\\prime$ [def-pc-module-pullback]. No finiteness or quasi-coherence hypotheses are imposed.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/RestrictPushforward.lean",
+  "place": "pushforwardRestrictHom, isIso_pushforwardRestrictHom_app_app, and pushforwardRestrictIso, lines 56-96; the underived comparison used in Stacks Tag 02O5 property (a)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the restriction/direct-image adjunction unit on X and its counit on T, together with functoriality of direct image for the commutative square, to define pushforwardRestrictHom. These are natural transformations, hence their whiskerings and composite are natural in the module.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an open V of Tprime, the component is, up to the canonical restriction identifications, the restriction from f inverse-image g(V) to gprime(gprime inverse-image(f inverse-image g(V))). The cartesian square and the fact that gprime is an open immersion imply f inverse-image g(V) = gprime(fprime inverse-image V), so the two opens coincide. Every component is therefore invertible; the forgetful functor to presheaves reflects isomorphisms. Apply asIso to the natural transformation. This is precisely the existing, fully proved pushforwardRestrictIso, and applies also to empty opens.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/RestrictPushforward.lean",
+  "place": "The existing construction pushforwardRestrictIso and its component-isomorphism proof, lines 56-96; no new Lean declaration or proof is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso",
+   "results": {
+    "t": "2026-10-17T04:54:42Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "No exact Mathlib match; reuse the proved source-library pushforwardRestrictIso construction."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardRestrictIso|pushforward_restrict_square",
+   "results": {
+    "t": "2026-10-17T04:55:24Z",
+    "tool": "grep",
+    "query": "pushforwardRestrictIso|pushforward_restrict_square",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "No exact Mathlib match; reuse the proved source-library pushforwardRestrictIso construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct image of a sheaf of modules commutes with restriction to an open subscheme in a cartesian square",
+   "results": {
+    "t": "2026-10-17T04:55:24Z",
+    "tool": "leansearch",
+    "query": "Direct image of a sheaf of modules commutes with restriction to an open subscheme in a cartesian square",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map",
+     "AlgebraicGeometry.Scheme.Modules.restrict_obj",
+     "ModuleCat.Tilde.toOpen_res",
+     "AlgebraicGeometry.Scheme.Modules.restrict",
+     "AlgebraicGeometry.Scheme.Modules.restrict_map",
+     "AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.morphismRestrict_appLE"
+    ],
+    "digest": "1434542aa94db377"
+   },
+   "date": "2026-10-17",
+   "verdict": "No exact Mathlib match; reuse the proved source-library pushforwardRestrictIso construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BirationalLinePushforwardGenericStalk",
+  "date": "2026-10-17",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 02O5 proof, property (a): the restriction of pi_* L to the dense isomorphism open is invertible; the ordinary direct-image/open-restriction comparison used here.",
+   "via": [
+    "lem-pc-q2-birational-line-pushforward-generic-stalk",
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso",
+  "statement": "noncomputable def pushforwardRestrictIso (sq : IsPullback g' f' f g) :\n    pushforward f ⋙ restrictFunctor g ≅ restrictFunctor g' ⋙ pushforward f'",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261017T053258-L-3673279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261017T053258-L-3673279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

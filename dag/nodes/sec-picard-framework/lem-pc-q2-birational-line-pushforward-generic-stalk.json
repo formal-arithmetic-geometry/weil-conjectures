@@ -18,12 +18,12 @@
  ],
  "proof": [
   {
-   "text": "The generic point eta lies in the dense open U. Use the existing pushforward_restrict_square from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections, specialized to the canonical restriction pullback square, to identify the restriction of pi_* L with pushforward of restricted L. Transport invertibility along the inverse isomorphism and trivialize on a neighbourhood V of eta inside U. The restriction-adjunction units become isomorphisms on that neighbourhood. Factor the neighbourhood open immersion through its open image. The restriction-composition natural isomorphism transports the restricted isomorphism to that image. Apply the existing source-library bijective_stalk_of_isIso_restrict to obtain bijectivity at eta; no stalk-conjugation proof is repeated. Apply this to the trivialized module and to the structure module. Their stalk maps are linear over the ambient local ring, so composing one with the inverse of the other gives a linear equivalence. Reuse AlgebraicGeometry.Scheme.unit_stalk_iso from IdealModuleProductStalk to identify the structure-module stalk with the ring stalk. Both private comparisons are accessed by proof-only import all; neither is reproved.",
+   "text": "The generic point eta lies in the dense open U. Use the existing pushforwardRestrictIso from WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward, specialized to the canonical restriction pullback square, to identify the restriction of pi_* L with pushforward of restricted L. Transport invertibility along the inverse isomorphism and trivialize on a neighbourhood V of eta inside U. The restriction-adjunction units become isomorphisms on that neighbourhood. Factor the neighbourhood open immersion through its open image. The restriction-composition natural isomorphism transports the restricted isomorphism to that image. Apply the existing source-library bijective_stalk_of_isIso_restrict to obtain bijectivity at eta; no stalk-conjugation proof is repeated. Apply this to the trivialized module and to the structure module. Their stalk maps are linear over the ambient local ring, so composing one with the inverse of the other gives a linear equivalence. Reuse AlgebraicGeometry.Scheme.unit_stalk_iso from IdealModuleProductStalk to identify the structure-module stalk with the ring stalk. The unit-stalk comparison is accessed by proof-only import all; the stalk-bijectivity comparison is public in the existing Modules.Sheaf API. Neither is reproved.",
    "uses": [
     "def-sc-invertible-module",
     "def-pc-module-pullback",
     "def-sc-generic-point",
-    "lem-pc-sections-open-base-change",
+    "lem-pc-module-pushforward-open-restriction",
     "lem-weil-pbc-ideal-module-product-stalk",
     "lem-weil-pbc-module-restriction-iso-stalk-bijective"
    ],
@@ -32,7 +32,7 @@
   {
    "text": "Use the proved closedImmersion_pushforward_stalks comparison to obtain an additive equivalence from the stalk of i_* pi_* L at i(eta) to the stalk of pi_* L at eta, with its displayed stalkMap scalar rule. The generic local ring is a field by the Mathlib Scheme.functionField field instance for integral W. Its residue homomorphism is injective as a field homomorphism and surjective as a quotient map, hence is a ring equivalence.",
    "uses": [
-    "def-sc-function-field",
+    "def-pc-integral-scheme",
     "lem-weil-pbc-closed-pushforward-stalks"
    ],
    "elementary": false
@@ -50,11 +50,11 @@
   "def-sc-invertible-module",
   "def-pc-module-pullback",
   "def-sc-generic-point",
-  "def-sc-function-field",
+  "def-pc-integral-scheme",
   "lem-weil-pbc-closed-pushforward-stalks",
   "def-weil-closed-immersion",
   "def-weil-residue-field",
-  "lem-pc-sections-open-base-change",
+  "lem-pc-module-pushforward-open-restriction",
   "lem-weil-pbc-ideal-module-product-stalk",
   "lem-weil-pbc-module-restriction-iso-stalk-bijective"
  ],
@@ -62,7 +62,7 @@
   "by": "agent",
   "document": "Stacks Project, coherent.tex",
   "place": "Tag 02O5, proposition-proper-pushforward-coherent, Chow construction paragraphs",
-  "note": "Q2 repaired the returned duplicate comparisons by reusing the existing private unit_stalk_iso and the more general pushforward_restrict_square through proof-only import all. The direct PushforwardRankOnOpen import would close a cycle and is not used. Three local stalk helpers remain fully proved; no new theorem with sorry is introduced. The independent second reader also replaced the local stalk-conjugation proof by the source-library bijective_stalk_of_isIso_restrict applied on the open image."
+  "note": "F1 completed stalk_free_of_restrict_iso by applying bijective_stalk_of_isIso_restrict to the restriction-adjunction units for the module and the structure module; their restricted maps are invertible by fully faithful open pushforward. Compose the resulting linear stalk equivalences with the pushed-forward trivialization and the proved private unit_stalk_iso. The second reader replaced the unused Sections import by the existing underived pushforwardRestrictIso module, recorded that existing construction as lem-pc-module-pushforward-open-restriction, removed the unused curve function-field dependency, and made the Mathlib FunctionField import proof-only. All existing Lean signatures and the unit route are unchanged; all three local helpers and the public theorem are proved without sorry."
  },
  "mathlib_searches": [
   {
@@ -177,13 +177,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T054233-L-447956",
-  "kind": "proof",
+  "landing": "20261017T053258-L-3673279",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
