@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.WeilSheaf.Cohomology
-public import WeilConjectures.WeilSheaf.Finiteness
+public import WeilConjectures.WeilSheaf.LowerStar
 
 /-!
 # Cohomology of a Weil sheaf as pro-étale sheaf cohomology
@@ -154,6 +154,26 @@ theorem subsingleton_cohomology_of_isZero_rightDerived (F : WeilSheaf k₀ l Y) 
       ((WeilComplex.derivedLowerStar (Y ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F)))))
     ((WeilCoefficients.toModuleCat l).map_isZero
       (h.of_iso (cohomologyIsoRightDerivedGlobalSections F r)))
+
+instance : (globalSectionsFunctor (k₀ := k₀) (l := l)).PreservesZeroMorphisms := by
+  have h1 : (ObjectProperty.ι (WeilSheaf.objectProperty k₀ l (Spec (CommRingCat.of k₀)))).PreservesZeroMorphisms := inferInstance
+  have h2 : (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l (Spec (CommRingCat.of k₀)))).PreservesZeroMorphisms := inferInstance
+  have h3 : (ProEtale.AdicSheaf.forget (l := l) (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber).PreservesZeroMorphisms := inferInstance
+  have h4 : (Sheaf.Γ (Scheme.ProEt.topology (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber) (WeilCoefficients.{u} l)).PreservesZeroMorphisms := inferInstance
+  unfold globalSectionsFunctor
+  infer_instance
+
+/-- The cohomology `Hʳ(X ⊗ k̄, F)` of a Weil sheaf vanishes in negative degrees, the derived
+pushforward of a sheaf being concentrated in degrees `≥ 0`. -/
+lemma subsingleton_cohomology_of_lt_zero (F : WeilSheaf k₀ l Y) {r : ℤ} (hr : r < 0) :
+    Subsingleton (F.cohomology r).carrier :=
+  ModuleCat.subsingleton_of_isZero (M := (WeilCoefficients.toModuleCat l).obj
+    (globalSectionsFunctor.obj ((WeilComplex.homologySheaf r).obj
+      ((WeilComplex.derivedLowerStar (Y ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F)))))
+    ((WeilCoefficients.toModuleCat l).map_isZero (globalSectionsFunctor.map_isZero
+      (IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _
+        (_root_.DerivedCategory.isZero_of_isGE
+          (hX := Functor.isGE_rightDerivedFunctor_obj_singleFunctor _ F.obj) _ 0 r hr))))
 
 end WeilSheaf
 
