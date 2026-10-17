@@ -12,41 +12,171 @@
   "def-pur-sheaf-hom",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $c:R\\to S$ and $T(N)=N\\otimes_R S$. Use the sheaf tensor of [def-pur-sheaf-tensor-product]. The universal property in [lem-pc-sites-sheaf-tensor-bilinear-universal] says that maps out of a sheaf tensor are determined by their values on pure tensors. When a formula is initially given on presheaf tensors, [lem-pc-sites-module-sheafification-bilinear-extension] extends the bilinear pairing uniquely to the sheafifications. Repeated application gives the same test for iterated tensors. In the formulas below $m\\otimes s$ means the image of that pure section in the sheaf tensor, not an assertion that every section is globally a pure tensor. All constructions are made on every object and commute with restriction.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and scalar-extension formulas; Tag 04TT (section-internal-hom), evaluation; Tag 03EM (lemma-internal-hom)"
+   }
+  },
+  {
+   "text": "Set $M^{\\otimes_R0}=R$ and $(M\\otimes_R S)^{\\otimes_S0}=S$. For $r=0$ define $\\alpha_0:R\\otimes_R S\\to S$ by $a\\otimes s\\mapsto c(a)s$, with inverse $s\\mapsto1\\otimes s$. The balancing relation gives $a\\otimes s=1\\otimes c(a)s$, so the composites are identities. Thus this is the tensor unitor. For $r=1$ take $\\alpha_1$ to be the identity of $T(M)$. These formulas are linear and restriction compatible, and the sheafification universal property makes them maps of sheaves.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and scalar-extension formulas; Tag 04TT (section-internal-hom), evaluation; Tag 03EM (lemma-internal-hom)"
+   }
+  },
+  {
+   "text": "For $r\\geq1$ define $\\alpha_r:T(M^{\\otimes_R r})\\to T(M)^{\\otimes_S r}$ on iterated pure sections by\n$$ (m_1\\otimes\\cdots\\otimes m_r)\\otimes s\\longmapsto(m_1\\otimes s)\\otimes(m_2\\otimes1)\\otimes\\cdots\\otimes(m_r\\otimes1). $$\nDefine its reverse on iterated pure sections by\n$$ (m_1\\otimes s_1)\\otimes\\cdots\\otimes(m_r\\otimes s_r)\\longmapsto(m_1\\otimes\\cdots\\otimes m_r)\\otimes\\prod_{j=1}^r s_j. $$\nBoth formulas are additive in every argument; an $R$-scalar in any $m_j$ becomes its image under $c$ in the final $S$-factor. Moving an $S$-scalar between adjacent factors in the second formula leaves the product unchanged. Thus the universal properties cited in step 1, applied successively, give the displayed sheaf morphisms. The reverse followed by the forward moves each $s_j$ into the first factor by $S$-balancing, and the forward followed by the reverse multiplies $s$ by $1^{r-1}$. Both composites are identities on pure inputs and hence everywhere by uniqueness. This constructs every power comparison without assuming flatness.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and scalar-extension formulas; Tag 04TT (section-internal-hom), evaluation; Tag 03EM (lemma-internal-hom)"
+   }
+  },
+  {
+   "text": "Put $M^\\vee=\\mathcal Hom_R(M,R)$ using [def-pur-sheaf-hom]. Define $\\delta:T(M^\\vee)\\to\\mathcal Hom_S(T(M),S)$ by\n$$ \\delta(f\\otimes s)(m\\otimes t)=st\\,c(f(m)). $$\nHere a section $f$ over $U$ is an $R|_U$-linear map on the whole localized site, not just a map on $U$-sections. Use [lem-sfb-localized-site-tensor-restriction] to identify $T(M)|_U$ with $M|_U\\otimes_{R|_U}S|_U$, preserving the images of pure tensors. For each $V\\to U$ the formula is $R(V)$-balanced in $m,t$, so the module sheafification universal property extends it to $T(M)|_U\\to S|_U$. It is $S|_U$-linear. Additivity and balancing in $f,s$ then extend it to $T(M^\\vee)$ by the same universal property. These maps commute with restriction, so their values define sections of the internal Hom as required. This constructs the canonical evaluation comparison globally.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and scalar-extension formulas; Tag 04TT (section-internal-hom), evaluation; Tag 03EM (lemma-internal-hom); Tag 03EL (lemma-tensor-product-pullback), localized tensor restriction"
+   }
+  },
+  {
+   "text": "On an object of a trivializing cover choose a basis $e$ of $M$ and the functional $e^\\vee(ae)=a$. For every further restriction, $\\mathcal Hom_R(M,R)\\cong R$ by $f\\mapsto f(e)$ with inverse $a\\mapsto ae^\\vee$. Also $T(M)\\cong S$ by $(ae)\\otimes s\\mapsto c(a)s$ with inverse $s\\mapsto e\\otimes s$. These identities hold after sheafification because their composites are identities on presheaf pure tensors and maps to a sheaf extend uniquely. Under these coordinates $\\delta$ takes $e^\\vee\\otimes s$ to the functional $e\\otimes t\\mapsto st$, so it is the identity map on $S$ and has an inverse there. The pure-tensor-preserving isomorphism of [lem-sfb-localized-site-tensor-restriction] identifies $T(M)|_U$ and $T(M^\\vee)|_U$ with their tensors on $\\mathcal C/U$. Internal Hom restricts by relocalization in [def-pur-sheaf-hom] and [def-pur-localized-ringed-site]. Thus these coordinates compute the restrictions of the global source, target, and evaluation map, rather than different locally constructed objects.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and scalar-extension formulas; Tag 04TT (section-internal-hom), evaluation; Tag 03EM (lemma-internal-hom); Tag 03EL (lemma-tensor-product-pullback), localized tensor restriction"
+   }
+  },
+  {
+   "text": "The local inverses in step 5 agree on every common restriction: each is an inverse of the same globally defined $\\delta$, and a two-sided inverse is unique. They therefore glue. More explicitly, for a local section of the target, take its inverse images over a trivializing covering; uniqueness of inverse images makes this a matching family, and the sheaf axiom glues it uniquely to a source section. Linearity and compatibility with restrictions follow by uniqueness of gluing. This works with covering sieves and their pullbacks, so no terminal object, points, fiber products, or chosen basis globally are required. The composites are identities locally and therefore globally by separatedness. Thus $\\delta$ is an isomorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and scalar-extension formulas; Tag 04TT (section-internal-hom), evaluation; Tag 03EM (lemma-internal-hom)"
+   }
+  },
+  {
+   "text": "Naturality of $\\alpha_r$ follows on pure inputs by replacing every $m_j$ by $u(m_j)$ for a module map $u$; scalar products are unchanged. For duals naturality is contravariant: for $u:M\\to N$, $f\\in N^\\vee$ and scalars $s,t$, either route in the naturality square evaluated on $m\\otimes t$ is $st\\,c(f(u(m)))$. The uniqueness tests of step 1 and the definition of internal Hom prove equality of the sheaf morphisms. For the associator, both parenthesizations of a tensor of powers concatenate the same list $m_1,\\ldots,m_{a+b+d}$ and multiply the same scalar factors; associativity of multiplication makes the outputs equal. Appending a zero-fold power inserts $1$ and yields the unitor formula in step 2. This proves compatibility with tensor-power associators and both unitors, including every exponent equal to zero.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and scalar-extension formulas; Tag 04TT (section-internal-hom), evaluation; Tag 03EM (lemma-internal-hom)"
+   }
+  },
+  {
+   "text": "For $R\\xrightarrow{c}S\\xrightarrow{d}A$, use the canonical iterated-extension comparison\n$$ (N\\otimes_R S)\\otimes_S A\\longrightarrow N\\otimes_R A,\\qquad(n\\otimes s)\\otimes a\\longmapsto n\\otimes d(s)a. $$\nIts inverse is $n\\otimes a\\mapsto(n\\otimes1)\\otimes a$; balancing checks both composites on pure inputs, and the universal properties extend them. For powers the direct comparison and the two successive comparisons both send $((m_1\\otimes\\cdots\\otimes m_r)\\otimes s)\\otimes a$ to $(m_1\\otimes d(s)a)\\otimes(m_2\\otimes1)\\otimes\\cdots\\otimes(m_r\\otimes1)$. For the dual comparison evaluate on $m\\otimes b$: both routes applied to $(f\\otimes s)\\otimes a$ give $ab\\,d(s)\\,d(c(f(m)))$. The $r=0$ comparison is multiplication and satisfies the same identity. Equality on these inputs determines the maps, proving compatibility with iteration; for three successive ring maps the same expression uses the product of their images in the final ring, so it also satisfies the associativity coherence.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and scalar-extension formulas; Tag 04TT (section-internal-hom), evaluation; Tag 03EM (lemma-internal-hom)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit pure-tensor proof of the formulas in Stacks Tag 03EK (section-tensor-product); internal Hom evaluation from Tags 04TT/03EM. Realizes blueprint det-sp-scalar-extension-functor proof (3)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "extension of scalars commutes with tensor powers and dual of an invertible sheaf module",
-   "results": "8 hits; recorded top: Module.Invertible.rTensorEquiv; CommRing.Pic.mapAlgebra_apply; CommRing.Pic.mk_tensor; SheafOfModules.ιFree_mapFree_inv; Module.Invertible.linearEquiv; CommRing.Pic.mapAlgebra; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.extendScalarsId_inv_app_apply",
+   "query": "Tensor powers and internal dual of a locally free rank one module sheaf commute with extension of scalars along a map of ring sheaves",
+   "results": "ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; ModuleCat.monoidalClosedHomEquiv; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; Module.Dual.baseChange; ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
    "date": "2026-10-17",
-   "verdict": "no match: no sheaf-level statement with the required natural coherence"
-  },
-  {
-   "tool": "loogle",
-   "query": "Module.Invertible.linearEquivDual",
-   "results": "1 hits; recorded top: Module.Invertible.linearEquivDual",
-   "date": "2026-10-17",
-   "verdict": "no match: ordinary module duality does not state the sheaf scalar-extension comparison"
+   "verdict": "no match: hits concern ordinary modules, fixed-coefficient sheaves, restriction of scalars, or sheafification; no complete site-level power and internal-dual comparison with coherence"
   },
   {
    "tool": "grep",
-   "query": "distribBaseChange|Dual.baseChange|tensor power",
-   "results": "25 hits; recorded top: Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/LinearAlgebra/FreeProduct/Basic.lean; Mathlib/LinearAlgebra/FreeProduct/Basic.lean; Mathlib/LinearAlgebra/FreeProduct/Basic.lean; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean",
+   "query": "distribBaseChange|dual.*[Bb]ase[Cc]hange|tensorPow.*[Bb]ase",
+   "results": "Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: hits concern ordinary modules, fixed-coefficient sheaves, restriction of scalars, or sheafification; no complete site-level power and internal-dual comparison with coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, tensor",
+   "results": "loogle: unknown identifier 'tensor'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier tensor; corrected with SheafOfModules.restrictScalars"
   },
   {
    "tool": "leansearch",
-   "query": "tensor power of an invertible module after scalar extension is the tensor power of the extended module",
-   "results": "8 hits; recorded top: TensorProduct.AlgebraTensorModule.distribBaseChange; TensorPower; Module.Invertible.instTensorProduct_2; IsLocalization.moduleLid; ModuleCat.ExtendScalars.obj'; LinearEquiv.rTensor_pow; TensorProduct.isScalarTower_left; Algebra.TensorProduct.instFree",
+   "query": "Extension of scalars for sheaves of modules preserves tensor products and duals of line bundles naturally",
+   "results": "ModuleCat.extendScalars; ModuleCat.ExtendScalars.map'; ModuleCat.ExtendScalars.obj'; ModuleCat.ExtendRestrictScalarsAdj.homEquiv; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.ExtendScalars.map_tmul; ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.Sheafify.map_smul_eq",
    "date": "2026-10-17",
-   "verdict": "no match: only ordinary module algebra matches"
+   "verdict": "no match: hits concern ordinary modules, fixed-coefficient sheaves, restriction of scalars, or sheafification; no complete site-level power and internal-dual comparison with coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary modules, fixed-coefficient sheaves, restriction of scalars, or sheafification; no complete site-level power and internal-dual comparison with coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified change of rings is a strong symmetric monoidal functor and preserves the dual of a line module",
+   "results": "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; LightCondensed.instMonoidalLightCondSetLightCondModFree; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; PresheafOfModules.sheafificationAdjunction; LightCondensed.instSymmetricCategoryLightCondMod; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary modules, fixed-coefficient sheaves, restriction of scalars, or sheafification; no complete site-level power and internal-dual comparison with coherence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-scalar-extension-functor",
@@ -58,10 +188,44 @@
  "blueprint": {
   "from": {
    "node": "det-sp-scalar-extension-functor",
-   "place": "proof paragraph (3): tensor-power and dual comparison for a locally free rank-one module",
+   "place": "proof paragraph (3): associativity of ordinary scalar extension applied to positive Tate tensor powers and internal duals",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-invertible-tensor-scalar-extension",
+  "worker": "stage1",
+  "summary": "Constructed the power comparisons and their inverses on pure tensors, the dual comparison by evaluation, its inverse locally in a rank-one basis, and explicit naturality, associator, unitor and ring-tower identities. Reused universal-property nodes; no new nodes. No change to statement. On resumption explicitly cited the existing slice-tensor comparison in the local dual calculation and specified the zero-fold tensor convention.",
+  "blueprint": "det-sp-scalar-extension-functor proof paragraph (3), ordinary tensor associativity for positive powers and internal duals; iteration checked as in paragraph (4).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic universal property for the actual sheaf tensor/sheafification; supplies extension and uniqueness of the explicit pure-tensor formulas, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic universal property for the actual sheaf tensor/sheafification; supplies extension and uniqueness of the explicit pure-tensor formulas, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "The pure-tensor-preserving restriction comparison identifies the global scalar-extension sheaves with their tensors on each trivializing slice. This is a general site-theoretic tool, not a replacement of the scalar-extension unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-74ffe6848",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-74ffe6848 (reviewer sub-agent of L); spot-checked: I read the item statement, all 8 steps, and the full statements of the 8 cited nodes. Sources checked: Stacks 03EK section-tensor-product (Bilin universal property and the formula (F⊗G)⊗O2=(F⊗O2)⊗(G⊗O2)), 03EL, 04TT/03EM internal Hom, 04IX, and paragraph (3) of the main-20261015 blueprint proof of det-sp-scalar-extension-functor. The statement is unweakened and is a strictly smaller lemma than its parent: the parent's step 7 uses it for the positive powers, the unit, and the duals of the rank-one positive powers. The coefficient setting is general ring sheaves R→S with the underived tensor, which specializes to A_T→B_T in one line. Checks: the power maps and their inverses are balanced and both composites are identities (checked against Stacks at r=2); the evaluation map δ is well defined through the slice-tensor comparison of lem-sfb (its hypotheses hold) and is the identity in a local basis; gluing over covering sieves is correct; naturality (contravariant for duals), associator, unitor and the ring tower R→S→A were checked by composing the formulas. Edge cases r=0, r=1, M=R and zero S all hold, and no flatness is used. No cycle: the dependency closure of 127 nodes excludes the item and its parent. No duplicate in the DAG: the nearest candidates are lem-pod-lisse-tensor-and-scalar-extension and lem-pod-etale-stalk-tensor-scalar (étale stalks) and lem-pc-tensor-restrict-extend-module-natural (modules over rings). No new nodes. I accept the three declared tool uses: lem-pc-sites-sheaf-tensor-bilinear-universal, lem-pc-sites-module-sheafification-bilinear-extension and lem-sfb-localized-site-tensor-restriction. No changes made; details are in review.md."
  }
 }

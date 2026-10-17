@@ -10,9 +10,104 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First apply [lem-coef-kan-homotopy-pullback-invariance] to the strictly commuting map of spans with vertical maps $1_U,c,1_V$. It gives a weak equivalence $q:P(u,v)\\to Q_0=P(cu,cv)$ sending $\\gamma$ to $c\\gamma$. Put $X=U\\times V$, $I=\\Delta^1$, $B=W'\\times W'$, and $l_0=(cu,cv):X\\to B$, $l_1=(u'a,v'b):X\\to B$. The given homotopies define the simplicial map $G:X\\times I\\to B$, $G(x,y,t)=(H_u(x,t),H_v(y,t))$. Its endpoint restrictions are exactly $l_0,l_1$. It remains to construct an endpoint-adjustment weak equivalence $Q_0\\to Q_1=P(u'a,v'b)$ and then apply the same strict-span invariance with vertical maps $a,1_{W'},b$ to $Q_1\\to P(u',v')$. Both uses have Kan vertices and weak-equivalence vertical maps as required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/032B",
+    "place": "Proposition 3.4.0.9, strict-span comparisons before and after the endpoint-adjustment construction (agent expansion)."
+   }
+  },
+  {
+   "text": "Let $e:\\operatorname{Fun}(I,W')\\to B$ restrict to the two endpoints. A horn lifting problem for $e$ transposes to extension into $W'$ from $(\\partial I\\times\\Delta^n)\\cup(I\\times\\Lambda_k^n)$ inside $I\\times\\Delta^n$. This is the pushout-product of the monomorphism $\\partial I\\hookrightarrow I$ and a horn inclusion. The latter is anodyne by the defining lifting property of Kan fibrations; the cited pushout-product result therefore supplies the extension because $W'$ is Kan. Thus $e$ is a Kan fibration. Set $E=(X\\times I)\\times_{B,G,e}\\operatorname{Fun}(I,W')$ and let $p:E\\to X\\times I$ be projection. Any horn square for $p$ projects to one for $e$ and its filler pairs with the already prescribed base simplex, so $p$ is a Kan fibration. Its pullback along $j_i:X\\to X\\times I$, $j_i(z)=(z,i)$, is precisely $Q_i$ for $i=0,1$. Denote the inclusions by $J_i:Q_i\\to E$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TM",
+    "place": "Corollary 3.1.3.3, endpoint case; explicit product/exponential adjunction and pullback lifting calculation."
+   }
+  },
+  {
+   "text": "Each $j_i$ is a weak homotopy equivalence. Indeed its retraction is the projection to $X$. The monotone maps $\\min,\\max:[1]\\times[1]\\to[1]$ induce simplicial homotopies between the identity of $X\\times I$ and the appropriate constant-endpoint retraction composite. For every Kan target $Z$, a homotopy $L$ of maps induces a homotopy of precomposition maps by $(\\psi,t)\\mapsto\\psi L_t$, hence equal functions on edge components. Projection and $j_i$ therefore induce inverse bijections on these component sets, and [lem-cbc-realization-weak-equivalence] applies. Now apply [lem-coef-kan-pullback-fibration-invariance] to the cospans $E\\xrightarrow{p}X\\times I\\xleftarrow{j_i}X$ and $E\\xrightarrow{p}X\\times I\\xleftarrow{1}X\\times I$, with vertical maps $1_E,1_{X\\times I},j_i$. Their left legs are the Kan fibration $p$ in both rows. Their pullbacks are $Q_i$ and $E$, and the induced map is $J_i$. Consequently both $J_0$ and $J_1$ are weak equivalences. No Kan condition on $X\\times I$ or $E$ is used.",
+   "uses": [
+    "lem-cbc-realization-weak-equivalence",
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0109",
+    "place": "Proposition 3.4.0.2 applied to endpoint inclusions; explicit simplicial contractions and Kan-target testing show its weak-equivalence hypotheses."
+   }
+  },
+  {
+   "text": "Write $r:Q_0\\to X$ for projection. Since $\\{0\\}\\hookrightarrow I$ is a horn inclusion, its pushout-product with $\\varnothing\\hookrightarrow Q_0$ is anodyne by [lem-coef-sset-anodyne-pushout-product]. Lift against $p$ with upper map $J_0:Q_0\\times\\{0\\}\\to E$ and lower map $(z,t)\\mapsto(r(z),t)$ into $X\\times I$. This gives $L:Q_0\\times I\\to E$ with $L|_0=J_0$. At $t=1$ it factors, degree by degree, uniquely as $J_1\\tau$ for a simplicial map $\\tau:Q_0\\to Q_1$ over $X$. Thus $L$ is the required specified homotopy $J_0\\simeq J_1\\tau$. Its path coordinate is a map $Q_0\\times I_t\\times I_s\\to W'$ whose edges at $s=0,1$ are $H_u,H_v$ and whose edges at $t=0,1$ are the universal input path and the output path. The construction is on the entire simplicial set $Q_0$, not on its vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TM",
+    "place": "Agent endpoint-homotopy lifting argument from the same pushout-product lifting calculation as Corollary 3.1.3.3."
+   }
+  },
+  {
+   "text": "For each Kan target $Z$, the homotopy $L$ in step 4 identifies the precomposition functions of $J_0$ and $J_1\\tau$ on edge-component sets: postcompose $L$ with a simplex of $\\operatorname{Fun}(E,Z)$ and use the internal functor adjunction. Since $J_0$ is a weak equivalence, its testing function is bijective, so $J_1\\tau$ is a weak equivalence by [lem-cbc-realization-weak-equivalence]. The testing function of $J_1$ is also bijective by step 3. The equation $(J_1\\tau)^*=\\tau^*J_1^*$ then implies that $\\tau^*$ is bijective for every Kan $Z$, so $\\tau$ is a weak equivalence. Finally the strictly commuting span map with vertical maps $a,1_{W'},b$ gives a weak equivalence $s:Q_1\\to P(u',v')$ by [lem-coef-kan-homotopy-pullback-invariance]. The desired map is $s\\tau q$, which is a weak equivalence because its testing functions are composites of bijections.",
+   "uses": [
+    "lem-cbc-realization-weak-equivalence",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/032B",
+    "place": "Proposition 3.4.0.9 for the last strict comparison; the intervening cancellation is written using Kan-target testing."
+   }
+  },
+  {
+   "text": "Here is the path formula and its coherent meaning. Write $\\eta$ for the universal path on $Q_0$; after precomposition with $q$ it is $c\\gamma$. In the square of step 4 put $A=cu(x)$, $B_0=cv(y)$, $A'=u'a(x)$, $B'=v'b(y)$. The triangle with vertices $A,B_0,B'$ has edges $\\eta,H_v$ and a diagonal $d$. The triangle with vertices $A,A',B'$ has edges $H_u,\\tau(\\gamma)$ and that same diagonal. Thus these two triangles witness $H_u*\\tau(\\eta)=\\eta*H_v$, which is the formula $\\tau(\\eta)=H_u^{-1}*\\eta*H_v$ in coherent path notation. There is no reversal map of the directed simplex being used. Conversely, these two triangles can be chosen directly, first by filling $Q_0\\times\\Lambda_1^2\\hookrightarrow Q_0\\times\\Delta^2$, then by filling $Q_0\\times\\Lambda_0^2\\hookrightarrow Q_0\\times\\Delta^2$. Both inclusions are anodyne by the pushout-product result with $\\varnothing\\hookrightarrow Q_0$, and the second horn has its two edges with common source $A$. Gluing the triangles gives exactly a square lift as in step 4. This realizes the formula simultaneously on all parameter simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Subsection 4.6.8 motivates coherent composition; here the two explicit parameterized horn fillings prove the required path formula directly."
+   }
+  },
+  {
+   "text": "To check independence and higher compatibility, let $K\\hookrightarrow M$ be any monomorphism of parameter simplicial sets, and suppose square lifts of the fixed data are already prescribed over $K$. Extending them over $M$ is a lifting problem against $p$ with domain $(Q_0\\times I\\times K)\\cup(Q_0\\times\\{0\\}\\times M)$ inside $Q_0\\times I\\times M$; its base map is $(z,t,m)\\mapsto(r(z),t)$. The domain inclusion is, after permuting factors, the pushout-product of $Q_0\\times K\\hookrightarrow Q_0\\times M$ with $\\{0\\}\\hookrightarrow I$. It is anodyne by the cited result, so a lift exists. With $K=\\partial\\Delta^1$ and $M=\\Delta^1$, any two square choices are joined, and their endpoint restrictions give a homotopy $\\tau_0\\simeq\\tau_1$ over $X$. With $K=\\partial\\Delta^n$, all prescribed compatible higher comparison homotopies extend as well. For data varying over a parameter simplicial set $M$, let $Q_M$ be the total simplicial set of initial paths with their parameter, and let $Q_K\\hookrightarrow Q_M$ be its restriction to a parameter subcomplex $K$. The initial and previously chosen lifts define a map on $(Q_M\\times\\{0\\})\\cup(Q_K\\times I)$; its inclusion into $Q_M\\times I$ is the pushout-product of $Q_K\\hookrightarrow Q_M$ with $\\{0\\}\\hookrightarrow I$. Lift against the endpoint fibration $e$ using the actual varying endpoint homotopies as base map. This proves the relative family assertion without identifying different fibers of $Q_M$. The two horn-filling stages of step 6 have the same relative extension property, using their horn inclusions in place of $\\{0\\}\\hookrightarrow I$. Hence alternative coherent triangle choices and further homotopies are retained, not just equality of pointwise homotopy classes.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TM",
+    "place": "Agent relative-parameter pushout-product argument, including uniqueness up to homotopy and all higher prescribed boundary compatibilities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-coef-kan-pullback-fibration-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/032B",
+  "place": "Agent proof extending the strict comparison of 032B: lift the endpoint homotopy through the endpoint path fibration, use 0109 on its endpoint pullbacks, and prove relative choice coherence by pushout-products. Kerodon read online; archival copy WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +157,45 @@
    "results": "{\"t\": \"2026-10-17T08:31:30Z\", \"tool\": \"leanfinder\", \"query\": \"Changing both legs of a Kan space cospan by specified homotopies and replacing its objects by weak homotopy equivalent Kan spaces preserves its mapping path fiber product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PathObject.RightHomotopy.exists_good_pathObject\", \"HomotopicalAlgebra.RightHomotopyRel.exists_very_good_pathObject\", \"HomotopicalAlgebra.RightHomotopyRel.exists_good_pathObject\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopy\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy\", \"HomotopicalAlgebra.PathObject.trans_\\u03b9\"], \"digest\": \"90d5693bb546ca76\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected model-category path-object and right-homotopy hits; these do not state invariance of simplicial path pullbacks under specified homotopy-commuting maps of spans."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyPullback|homotopy_pullback|RightHomotopy.trans_h",
+   "results": "{\"t\": \"2026-10-17T12:07:16Z\", \"tool\": \"grep\", \"query\": \"homotopyPullback|homotopy_pullback|RightHomotopy.trans_h\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned abstract path-object, right-homotopy and pullback declarations; none states endpoint-adjustment comparison with its parameterized coherent choices."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Homotopy\", \"weakEquivalence\"",
+   "results": "{\"t\": \"2026-10-17T12:07:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Homotopy\\\", \\\"weakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned abstract path-object, right-homotopy and pullback declarations; none states endpoint-adjustment comparison with its parameterized coherent choices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy commuting weak equivalences of Kan complex spans induce weak equivalences between path space homotopy pullbacks",
+   "results": "{\"t\": \"2026-10-17T12:07:18Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy commuting weak equivalences of Kan complex spans induce weak equivalences between path space homotopy pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₀\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\", \"HomotopicalAlgebra.PathObject.RightHomotopy\"], \"digest\": \"7d8300c502471d0e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned abstract path-object, right-homotopy and pullback declarations; none states endpoint-adjustment comparison with its parameterized coherent choices."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing the endpoint maps of a simplicial mapping path pullback by homotopies gives a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T12:08:47Z\", \"tool\": \"leansearch\", \"query\": \"Changing the endpoint maps of a simplicial mapping path pullback by homotopies gives a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PathObject.noConfusionType\", \"HomotopicalAlgebra.PathObject.noConfusion\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\", \"Path.Homotopic.pathCast\", \"HomotopicalAlgebra.PathObject.toPrepathObject\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.weakEquivalence_iff\"], \"digest\": \"5c0adbbb74b8c2dc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned abstract path-object, right-homotopy and pullback declarations; none states endpoint-adjustment comparison with its parameterized coherent choices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport along a homotopy in the base of a Kan fibration induces a weak equivalence between the two pullbacks",
+   "results": "{\"t\": \"2026-10-17T12:08:49Z\", \"tool\": \"leanfinder\", \"query\": \"Transport along a homotopy in the base of a Kan fibration induces a weak equivalence between the two pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.RightHomotopyRel\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopyRel\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans\"], \"digest\": \"062b322e1e146a34\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned abstract path-object, right-homotopy and pullback declarations; none states endpoint-adjustment comparison with its parameterized coherent choices."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-terminal-pullback-criterion",
@@ -92,5 +222,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-homotopy-commuting-pullback-invariance",
+  "worker": "stage1",
+  "summary": "Split the homotopy-commuting comparison using existing strict-span invariance, strict pullback invariance, Kan-target testing and the anodyne pushout-product leaf. Wrote the endpoint lift, two-triangle path formula, choice independence and relative parameter extension explicitly. No new nodes; normalized doubled TeX escapes without changing the proposition.",
+  "blueprint": "Retains the ancestry in blueprint.from: paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient adjunction; realizes the homotopy-commuting parameterized path comparison used in step 3 of lem-coef-infinity-terminal-pullback-criterion.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Uniform simplicial-set, Kan-complex and internal-functor conventions; no change to the unit route."
+   },
+   {
+    "node": "lem-cbc-realization-weak-equivalence",
+    "why": "Generic weak-equivalence testing against Kan targets, used for explicit cylinder contractions and cancellation; the unit gives no replacement for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-realization-weak-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-2a18e9c02",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-2a18e9c02 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 7 steps and the tool_uses. I checked it against the actual statements of every cited node. lem-coef-kan-homotopy-pullback-invariance is the strict span lemma; step 1 uses it with (1_U,c,1_V), step 5 with (a,1_{W'},b); both triples commute strictly and all six objects are Kan. lem-coef-sset-anodyne-pushout-product is the Mathlib leaf: step 2 shows the endpoint fibration e is a Kan fibration through the pushout-product of dI->I with a horn; the steps 4, 6 and 7 lifts use pushout-products with Lambda^1_0 and with Lambda^2_1 and Lambda^2_0, and the horn indices and orientations are correct. lem-cbc-realization-weak-equivalence lets step 3 show j_i is a weak equivalence through the min/max cylinder contractions with no Kan condition on X x I, and lets step 5 cancel testing bijections: (J_1 tau)^* = tau^* J_1^*. lem-coef-kan-pullback-fibration-invariance gives J_i in step 3 from cospans E->X x I<-X and E->X x I<-X x I; the left legs are the Kan fibration p, and the pullbacks are Q_i and E. The two-triangle square gives tau(eta) = H_u^{-1}*eta*H_v with the correct direction u'a(x)->v'b(y). Step 7's relative pushout-products prove that the map does not depend on the choices up to homotopy and that parameters are kept. The statement is true and unchanged; only the TeX escapes were normalized. There is no coefficient category or base-change morphism here. Edge cases (empty U/V, W' a point, constant homotopies, discrete complexes) hold. The cited nodes' transitive closure does not contain the item, so there is no cycle. The citer lem-coef-infinity-terminal-pullback-criterion step 3 uses exactly this statement. No duplicates: I read cube-invariance (a more general unsplit node), homotopy-pullback-pasting, kan-pullback-path-comparison, mapping-path-square-rectification, spaces-homotopy-fiber-detection and pc-homotopy-square-cone-rectification. There are no new nodes. I accept both declared tool_uses: lem-cbc-realization-weak-equivalence (same as on the sibling strict lemma) and the definition node. The Kerodon sources are not archived; the proof is marked agent-written, a WANTED line is filed, and I verified the mathematics directly. No SGA is used. No fixes."
  }
 }

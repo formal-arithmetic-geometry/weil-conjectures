@@ -1,0 +1,92 @@
+{
+ "id": "lem-pur-finite-projection-action-laws",
+ "kind": "statement",
+ "title": "Tensor-action and open-counit identities for finite-level projection maps",
+ "statement": "Use the finite coefficient ring $A=A_{E,n}$, $n\\geq1$, and field $k$ of [def-pur-conventions]. All schemes are separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Work in their ambient small pro-etale derived categories with pullback and tensor [def-weil-derived-pullback-tensor-hom]; write $P_u=Lu^*$, $R_u=Ru_*$ and $\\otimes=\\otimes_A^L$, and use the canonical tensor associators and the pullback/tensor comparisons $\\mu_{u;N_1,N_2}:P_u(N_1\\otimes N_2)\\xrightarrow{\\sim}P_uN_1\\otimes P_uN_2$.\n\n1. *Proper maps.* Let $u:V\\to W$ be proper [def-weil-proper-morphism] and let $\\pi_{u;M,N}:R_uM\\otimes N\\to R_u(M\\otimes P_uN)$ be precisely the counit-defined projection map [def-exchange-projection]. For arbitrary $M\\in D(V_{\\mathrm{proet}},A)$ and $N_1,N_2\\in D(W_{\\mathrm{proet}},A)$, under the associators and $\\mu_u$,\n$$\\pi_{u;M,N_1\\otimes N_2}=\\pi_{u;M\\otimes P_uN_1,N_2}\\circ(\\pi_{u;M,N_1}\\otimes1_{N_2}).$$\n2. *Open immersions.* Let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion], with exact extension by zero $j_!\\dashv j^{-1}$, counit $\\varepsilon_j:j_!j^{-1}\\to1$, and canonical tensor isomorphism $\\delta_{j;M,N}:j_!M\\otimes N\\xrightarrow{\\sim}j_!(M\\otimes j^{-1}N)$ of [lem-cbc-extension-zero-projection-formula]. For arbitrary $M$ on $U$ and $N_1,N_2$ on $X$, under the associators and $\\mu_j$,\n$$\\delta_{j;M,N_1\\otimes N_2}=\\delta_{j;M\\otimes j^{-1}N_1,N_2}\\circ(\\delta_{j;M,N_1}\\otimes1_{N_2}).$$\nFor arbitrary $F,N$ on $X$, as maps $j_!j^{-1}F\\otimes N\\to F\\otimes N$,\n$$\\varepsilon_{j,F\\otimes N}\\circ j_!(\\mu_{j;F,N}^{-1})\\circ\\delta_{j;j^{-1}F,N}=\\varepsilon_{j,F}\\otimes1_N.$$\n3. *Compactifications.* For a separated finite-type morphism $f:X\\to Y$ with a chosen compactification $c=(j,p)$, the compactification projection map $\\operatorname{PF}^c_{f;M,N}:Rp_*j_!M\\otimes N\\to Rp_*j_!(M\\otimes Lf^*N)$ of [def-exchange-projection] satisfies the tensor-action identity of clause 1, with $Rp_*j_!$ in place of $R_u$ and $Lf^*$ in place of $P_u$.\n\nThese are identities of the actual maps, before imposing invertibility on any projection map. The same assertions hold on the ordinary etale derived categories [def-weil-pbc-derived-categories], using exact inverse image, ordinary derived tensor [def-kun-derived-tensor], the same counit-defined proper projection maps and open tensor isomorphisms, and the compactified compact-support functors $Rp_*j_!$ of [def-amb-etale-compact-support, lem-amb-unbounded-compact-support-comparisons].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Expanded Step 6, first paragraph: the two-base-factor tensor-action calculation and its open-extension version; Step 6 last paragraph: restriction of the projective-line counit by the open counit",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map (definition of the proper projection mate)"
+   },
+   {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I, lemma-j-shriek-and-tensor (open tensor map)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-amb-etale-compact-support",
+  "def-exchange-projection",
+  "def-kun-derived-tensor",
+  "def-pur-conventions",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proper-morphism",
+  "def-weil-scheme-morphism-properties",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-extension-zero-projection-formula"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Counit defined projection formula maps for derived direct image respect composition and successive extraction of two tensor factors",
+   "results": "[leanfinder] OK 8 hit(s); Pi.counit_comp_single; Prod.counit_comp_inl; Prod.counit_comp_inr; Profinite.NobelingProof.GoodProducts.square_commutes; TensorProduct.counit_tmul; TensorProduct.counit_def; Pi.counit_comp_dFinsuppCoeFnLinearMap; Coalgebra.sum_counit_tmul_map_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: Monoidal-adjunction and composite-counit formulas supply ingredients, not these derived projection action identities and the open/compactification identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection map of a composite right adjoint is the composite projection map and satisfies the tensor action associativity law",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.MonoidalClosed.compTranspose_eq; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: Monoidal-adjunction and composite-counit formulas supply ingredients, not these derived projection action identities and the open/compactification identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-17",
+   "verdict": "no match: Monoidal-adjunction and composite-counit formulas supply ingredients, not these derived projection action identities and the open/compactification identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|projection.*[Aa]ssociativ",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-17",
+   "verdict": "no match: Monoidal-adjunction and composite-counit formulas supply ingredients, not these derived projection action identities and the open/compactification identifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula morphism compatibility with composition and tensor associativity",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Limits.Pi.map_π_assoc; TensorProduct.AlgebraTensorModule.map_comp; CategoryTheory.Functor.Monoidal.tensorHom_app_fst_assoc; CategoryTheory.Limits.Pi.map'_comp_π_assoc; CategoryTheory.Over.tensorHom_left_fst_assoc; CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom_assoc; CategoryTheory.CartesianMonoidalCategory.tensorμ_snd_assoc; CategoryTheory.CartesianMonoidalCategory.tensorμ_fst",
+   "date": "2026-10-17",
+   "verdict": "no match: Monoidal-adjunction and composite-counit formulas supply ingredients, not these derived projection action identities and the open/compactification identifications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-projection-purity-agreement",
+  "date": "2026-10-17",
+  "group": "Q21"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Expanded Step 6, first paragraph: the two-base-factor tensor-action calculation and its open-extension version; Step 6 last paragraph: restriction of the projective-line counit by the open counit",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

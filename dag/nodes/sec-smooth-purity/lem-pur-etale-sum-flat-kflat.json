@@ -20,9 +20,65 @@
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "To prove flatness, let 0 \\to G' \\to G \\to G'' \\to 0 be a short exact sequence of A-module sheaves on X. The canonical projection isomorphisms of [lem-pur-etale-sheaf-projection-map] identify the tensor of this sequence with u_{\\Sigma!}(F\\otimes_Au^*(-)) term by term. The inverse-image functor u^*=u^{-1} is exact by [prop-weil-pbc-inverse-image-modules-exact], so the sequence after u^* is exact; tensoring it with F is exact by the definition of flatness [def-pc-flat-sheaf-modules]. Finally u_{\\Sigma!} is exact on sheaves of modules over the constant ring A by [lem-weil-pbc-etale-restriction-injectives] (u is etale). The definition of flatness tests G\\mapsto G\\otimes_A u_{\\Sigma!}F; the symmetry isomorphism G\\otimes_A u_{\\Sigma!}F\\cong u_{\\Sigma!}F\\otimes_A G, natural in G, and likewise u^*G\\otimes_AF\\cong F\\otimes_Au^*G, move between the two orders, and a sequence naturally isomorphic to an exact one is exact. Therefore tensoring with u_{\\Sigma!}F preserves this short exact sequence, and hence u_{\\Sigma!}F is flat.",
+   "uses": [
+    "lem-pur-etale-sheaf-projection-map",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-etale-restriction-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF, lemma-f-shriek-projection, pure-tensor construction and stalkwise isomorphism"
+   }
+  },
+  {
+   "text": "Let B be any acyclic complex of A-module sheaves on X. Exactness of u^*=u^{-1} implies that u^*B is acyclic: in each degree it preserves the kernels and images defining the cohomology sheaf, so the induced homology sheaves remain zero. By [lem-pur-etale-sum-tensor-totalization], the canonical totalization isomorphism gives\\n$$\\operatorname{Tot}((u_{\\Sigma!}P)\\otimes_A B)\\cong u_{\\Sigma!}\\operatorname{Tot}(P\\otimes_Au^*B).$$\\nThe definition [def-pc-kflat-complex] puts the acyclic complex in the first factor. For complexes K, L the signed symmetry x\\otimes y\\mapsto(-1)^{pq}y\\otimes x on K^p\\otimes_AL^q is an isomorphism of complexes \\operatorname{Tot}(K\\otimes_AL)\\cong\\operatorname{Tot}(L\\otimes_AK): with d(x\\otimes y)=dx\\otimes y+(-1)^px\\otimes dy both composites send x\\otimes y to (-1)^{pq}(dy\\otimes x+(-1)^qy\\otimes dx). Hence the K-flatness of P makes \\operatorname{Tot}(P\\otimes_Au^*B)\\cong\\operatorname{Tot}(u^*B\\otimes_AP) acyclic, and exactness of u_{\\Sigma!} on module sheaves [lem-weil-pbc-etale-restriction-injectives], applied degreewise, commutes with taking cohomology sheaves and so preserves that acyclicity. Thus \\operatorname{Tot}(B\\otimes_Au_{\\Sigma!}P)\\cong\\operatorname{Tot}((u_{\\Sigma!}P)\\otimes_AB) is acyclic for every acyclic B, which is exactly that u_{\\Sigma!}P is K-flat.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pur-etale-sum-tensor-totalization",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-etale-restriction-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF, lemma-f-shriek-projection, together with the definition of K-flatness; unbounded totalization is the agent expansion recorded in the item source"
+   }
+  },
+  {
+   "text": "The degreewise extension of P has term (u_{\\Sigma!}P)^n=u_{\\Sigma!}(P^n) by the definition of the degreewise sum extension. If every P^n is flat, applying the flat-sheaf argument of the first step to each P^n shows that every u_{\\Sigma!}(P^n) is flat. Combining this with the K-flatness proved in the second step gives the final assertion that u_{\\Sigma!}P is K-flat with flat terms.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-pur-etale-sheaf-projection-map",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-etale-restriction-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF, projection construction; degreewise extension and the definition of flat terms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-pur-etale-sheaf-projection-map",
+  "lem-pur-etale-sum-tensor-totalization",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKF (lemma-f-shriek-projection), with the item source explicitly recording the unbounded K-flat expansion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,7 +117,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-etale-support-map-compatibility",
@@ -73,12 +129,29 @@
  "blueprint": {
   "from": {
    "node": "lem-pur-co-smooth-etale-locality",
-   "place": "Proof Step 3: 'both are written from the adjunction counit'; expanded by lem-pur-etale-support-map-compatibility, original Step 5: sum extension preserves flatness and K-flatness, by exact inverse image and the tensor comparison",
+   "place": "Expanded proof sentence: sum extension preserves flatness and K-flatness, by exact inverse image and the tensor comparison.",
    "via": [
     "lem-pur-etale-support-map-compatibility"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-etale-sum-flat-kflat",
+  "worker": "stage1",
+  "group": "Q133",
+  "summary": "Audited the imported assertion against Stacks Tag 0GKF and the existing sheaf projection, exact inverse-image, exact sum-extension, and totalization nodes. No helper node is needed: the flatness and K-flatness arguments are direct applications of those statements, with the acyclic-complex kernel/image check written explicitly. The statement and dependencies are unchanged; the item is now split into three proof steps. Review by the Codex maintainer reader: exactness of u_{\\Sigma!} is cited from lem-weil-pbc-etale-restriction-injectives (unit sk-thm-iff, in the route) instead of lem-amb-etale-adjoint-locality, whose closure reaches sec-poincare-duality nodes; the two tensor-symmetry identifications are written out.",
+  "blueprint": "Realizes the ancestor blueprint route at lem-pur-co-smooth-etale-locality, specifically the expanded sentence that sum extension preserves flatness and K-flatness by exact inverse image and the tensor comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-68fe606c3",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-68fe606c3 (reviewer sub-agent of L); spot-checked: I read the item, all cited statements, unit sk-thm-sf-compatibility, the blueprint ancestor lem-pur-co-smooth-etale-locality and Stacks 0GKF (more-etale.tex:1808). The statement matches 0GKF as expanded in the item's source and is not weakened. I tested it on u=id, X⊔X→X, an open immersion, the stalk formula and empty/zero cases. Batch-5 check: the step uses only the clause 'u_! is exact' of lem-amb-etale-adjoint-locality, which is outside the trace formula and Poincaré duality. The flagged node lem-pod-separated-finite-type-base-change is a generic Mathlib leaf (separated finite type is stable under base change), reached only through the compact-support clause the item does not use. That citation's closure is 9615 nodes and includes four more sec-poincare-duality nodes, so I replaced it in all steps and in proof_deps with lem-weil-pbc-etale-restriction-injectives. That node states exactly 'v_! is exact on constant-ring module sheaves'; its unit sk-thm-iff is in the route (through sk-thm-purity-transport) and its 6-node closure has no trace-formula or duality nodes. I also added two missing symmetry arguments: in step 1, tensor symmetry, because def-pc-flat-sheaf-modules tests G⊗F; in step 2, the signed Tot symmetry with its chain check, because def-pc-kflat-complex puts the acyclic complex first. Steps 1–3 are otherwise correct. No new nodes, no tool_uses, no drops.; 1 file(s) fixed by the reviewer"
  }
 }

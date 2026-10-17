@@ -12,9 +12,119 @@
   "lem-coef-bisimplicial-reedy-division-calculus",
   "def-coef-segal-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard $X$ as a bisimplicial set with outer coordinate first. For every outer simplicial subset $A\\subseteq\\Delta^n$, division gives a Kan fibration $X_n=\\Delta^n\\backslash X\\to A\\backslash X$: apply the arbitrary-monomorphism criterion to $A\\hookrightarrow\\Delta^n$ and $X\\to *$. The identification is explicit: a map $\\Delta^n\\boxtimes\\Delta^q\\to X$ is determined by the image of the pair of identity simplices, an element of $(X_n)_q$. Taking $A=\\varnothing$ makes every $X_n$ Kan. For $A=\\partial\\Delta^n$, a map from the boundary is exactly a compatible family on proper faces; hence $A\\backslash X$ is the outer matching object and this is Reedy fibrancy in the strict convention. For $A=\\{0,\\ldots,n\\}$, the union of the vertices, restriction is the all-vertices Kan fibration $v_n:X_n\\to X_0^{n+1}$; in particular $v_1=(d_1,d_0)$.",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "def-coef-segal-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Rezk Sections 4.1 and 5.1–5.7; agent expansion of the strict/path comparison using Kerodon 0329 and 032B (not Stacks tags)"
+   }
+  },
+  {
+   "text": "Let $G_r\\subseteq\\Delta^r$ be the union of the consecutive edges, with $G_1=\\Delta^1$. Its edges meet only at consecutive common vertices; thus degreewise the division object $G_r\\backslash X$ is $S_r=X_1\\times_{X_0}\\cdots\\times_{X_0}X_1$, with matching $d_0$ then $d_1$. This identification sends restriction $X_r\\to G_r\\backslash X$ to the stated Segal map. The monomorphisms $\\varnothing\\hookrightarrow G_r$, $\\{r\\}\\hookrightarrow G_r$, and $G_r\\hookrightarrow\\Delta^r$ give, respectively, that $S_r$ is Kan, its final-target map $S_r\\to X_0$ is a Kan fibration, and $X_r\\to S_r$ is a Kan fibration. The same applies to $d_1:X_1\\to X_0$ using the first vertex inclusion.",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Rezk Sections 4.1 and 5.1–5.7; agent expansion of the strict/path comparison using Kerodon 0329 and 032B (not Stacks tags)"
+   }
+  },
+  {
+   "text": "Put $H_1=X_1$ and let $H_r$ be the explicit $r$-edge, $(r-1)$-path product of the homotopy-Segal definition. Its last-target map is $d_0$ on its last edge. Inductively $H_{r+1}=P(H_r\\to X_0,\\,d_1:X_1\\to X_0)$, literally by separating the last path and edge. Define $c_r:S_r\\to H_r$ by inserting all constant paths. We prove by induction that $H_r$ is Kan and $c_r$ is a weak equivalence over the last-target map. For $r=1$ both assertions follow from $H_1=S_1=X_1$. Given them for $r$, write $c_{r+1}$ as\n$$S_r\\times_{X_0}X_1\\longrightarrow P(S_r\\to X_0,d_1)\\longrightarrow P(H_r\\to X_0,d_1).$$\nThe first map is a weak equivalence by the strict/path comparison: its three objects are Kan and $d_1$ is a Kan fibration. The second is a weak equivalence by homotopy-pullback invariance applied to $c_r$, $\\mathrm{id}_{X_1}$ and $\\mathrm{id}_{X_0}$; the required squares commute since $c_r$ leaves the last edge unchanged. The path-comparison lemma also makes its target $H_{r+1}$ Kan. The composite inserts precisely all $r$ constant paths and leaves the last edge unchanged, completing the induction.",
+   "uses": [
+    "def-coef-homotopy-segal-space",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Rezk Sections 4.1 and 5.1–5.7; agent expansion of the strict/path comparison using Kerodon 0329 and 032B (not Stacks tags)"
+   }
+  },
+  {
+   "text": "By the homotopy-Segal hypothesis the consecutive-edge map $a_r:X_r\\to H_r$ is a weak equivalence for $r\\geq2$. In the displayed coordinates it is $c_r\\circ b_r$, where $b_r:X_r\\to S_r$ is strict edge restriction. Since $c_r$ is a weak equivalence, two-out-of-three in the Kan model structure makes $b_r$ a weak equivalence. Together with its Kan fibration property and the matching fibrations already proved, this gives the strict-product Segal condition and Reedy fibrancy required in the definition of a Segal space.",
+   "uses": [
+    "def-coef-homotopy-segal-space",
+    "lem-coef-kan-quillen-right-proper",
+    "def-coef-segal-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Rezk Sections 4.1 and 5.1–5.7; agent expansion of the strict/path comparison using Kerodon 0329 and 032B (not Stacks tags)"
+   }
+  },
+  {
+   "text": "For any list $\\mathbf x=(x_0,\\ldots,x_n)$ of vertices, put $F_n(\\mathbf x)=X_n\\times_{X_0^{n+1}}\\{\\mathbf x\\}$. The all-vertices map $v_n$ is a Kan fibration and both its domain and codomain are Kan. Finite products of Kan complexes are Kan by taking a filler in each coordinate; the one-point simplicial set is Kan as well. Apply the strict/path pullback lemma to $v_n$ and $\\{\\mathbf x\\}\\to X_0^{n+1}$. It gives the constant-path weak equivalence $F_n(\\mathbf x)\\to T_X(\\mathbf x)$, where $T_X$ is exactly the path homotopy fiber in the homotopy-Segal definition. For $n=1$ this is the asserted mapping-fiber comparison. These maps commute with restriction of a simplex and its vertex list: restriction sends a constant tuple path to the constant path at the restricted tuple, in every inner degree.",
+   "uses": [
+    "def-coef-homotopy-segal-space",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Rezk Sections 4.1 and 5.1–5.7; agent expansion of the strict/path comparison using Kerodon 0329 and 032B (not Stacks tags)"
+   }
+  },
+  {
+   "text": "The degree-two map $b_2:X_2\\to S_2$ is a Kan fibration and a weak equivalence, hence a trivial fibration in the Kan model structure. Its pullback over a fixed triple $(x,y,z)$ is\n$$F_2(x,y,z)\\longrightarrow M^{\\mathrm{str}}(x,y)\\times M^{\\mathrm{str}}(y,z),$$\nwhere $M^{\\mathrm{str}}(x,y)=F_1(x,y)$. It too is a trivial fibration: any lifting square against a boundary inclusion is a square upstairs, and its lift has the prescribed image in the triple of vertices. In particular, lifting against $\\partial\\Delta^0=\\varnothing\\hookrightarrow\\Delta^0$ shows that any two strict arrows $f:x\\to y$, $g:y\\to z$ admit a strict $2$-simplex $\\sigma$ with consecutive edges $(f,g)$. This uses no nonempty-fiber assumption; it is an assertion for each given pair of arrows.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "def-coef-segal-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Rezk Sections 4.1 and 5.1–5.7; agent expansion of the strict/path comparison using Kerodon 0329 and 032B (not Stacks tags)"
+   }
+  },
+  {
+   "text": "Write $j_{xy}:\\pi_0M^{\\mathrm{str}}(x,y)\\to\\pi_0M_X(x,y)$ for the bijection from the mapping-fiber weak equivalence. It sends $[f]$ to the class of $f$ with constant endpoint path. For strict arrows $f,g$, choose $\\sigma$ as in the previous step. The strict composition is $[d_1\\sigma]$. The constant-path image of $\\sigma$ in $T_X(x,y,z)$ restricts to the constant-path images of $f,g,d_1\\sigma$ under $d_2,d_0,d_1$, respectively. By the composition-graph clause of the homotopy-Segal definition, this proves\n$$j_{xz}([d_1\\sigma])=j_{yz}([g])\\circ j_{xy}([f]).$$\nEach $j$ is onto, so this verifies composition for every pair of morphisms in the path-model category. Both identities are represented by $s_0x$ with the constant endpoint path. Thus the identity on objects and the $j$ on arrows define a functor, bijective on every hom-set. Its inverse is obtained by the inverse bijections; the displayed identity proves that inverse respects composition and identities. This is an isomorphism of categories.",
+   "uses": [
+    "def-coef-homotopy-segal-space",
+    "def-coef-segal-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Rezk Sections 4.1 and 5.1–5.7; agent expansion of the strict/path comparison using Kerodon 0329 and 032B (not Stacks tags)"
+   }
+  },
+  {
+   "text": "For every edge $f$ of $X_1$, the category isomorphism takes its strict class to its class with constant endpoint paths and preserves and reflects invertibility. Thus the same vertices of $X_1$ represent isomorphisms in both categories. Taking their unions of components selects the identical components of the identical simplicial set $X_1$; hence the resulting simplicial subsets agree. Completeness has not been assumed or used.",
+   "uses": [
+    "def-coef-segal-space",
+    "def-coef-homotopy-segal-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Rezk Sections 4.1 and 5.1–5.7; agent expansion of the strict/path comparison using Kerodon 0329 and 032B (not Stacks tags)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-reedy-division-calculus",
+  "def-coef-segal-space",
+  "def-coef-homotopy-segal-space",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/math/9811037",
+  "place": "Rezk Sections 4.1 and 5.1–5.7; agent expansion of the strict/path comparison using Kerodon 0329 and 032B (not Stacks tags)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +160,52 @@
    "results": "{\"t\": \"2026-10-17T07:51:56Z\", \"tool\": \"leanfinder\", \"query\": \"In a Reedy fibrant bisimplicial set a weak Segal condition using path space fiber products agrees with the ordinary Segal condition and their homotopy categories are identical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.StrictSegal.isCoskeletal'\", \"SSet.StrictSegal.isCoskeletal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.IsStrictSegal\", \"SSet.Truncated.StrictSegal.ofIsStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\"], \"digest\": \"51a7828a64ceafdf\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned StrictSegal declarations concern bijective spine maps of a single simplicial set, not weak-equivalence Segal maps of a simplicial space. Generic model homotopy categories and formal coproduct pullbacks do not identify these strict and path-model mapping fibers or compositions."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy.*Segal|Segal.*Reedy|homotopy.*Segal|Segal.*homotopy",
+   "results": "{\"t\": \"2026-10-17T08:27:45Z\", \"tool\": \"grep\", \"query\": \"Reedy.*Segal|Segal.*Reedy|homotopy.*Segal|Segal.*homotopy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set bijections, generic homotopy relations and Kan fibration classes do not state this simplicial-space comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Reedy fibrant simplicial space strict pullbacks and homotopy pullbacks give equivalent mapping spaces and the same homotopy category",
+   "results": "{\"t\": \"2026-10-17T08:27:46Z\", \"tool\": \"leansearch\", \"query\": \"For a Reedy fibrant simplicial space strict pullbacks and homotopy pullbacks give equivalent mapping spaces and the same homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"SSet.instFinitePullback\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"CategoryTheory.Limits.FormalCoproduct.homPullbackEquiv\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"18bbc0e08b455cf0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set bijections, generic homotopy relations and Kan fibration classes do not state this simplicial-space comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Segal",
+   "results": "{\"t\": \"2026-10-17T08:27:46Z\", \"tool\": \"loogle\", \"query\": \"Segal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Segal'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reported unknown identifier; corrected by the subsequent quoted-name search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Reedy fibrant simplicial space the strict Segal products compute the homotopy Segal products and strict mapping fibers compute the homotopy category",
+   "results": "{\"t\": \"2026-10-17T08:27:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a Reedy fibrant simplicial space the strict Segal products compute the homotopy Segal products and strict mapping fibers compute the homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"SSet.StrictSegal.quasicategory\", \"SSet.StrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal.quasicategory'\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"f5aad5a3f1a2942f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set bijections, generic homotopy relations and Kan fibration classes do not state this simplicial-space comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\"",
+   "results": "{\"t\": \"2026-10-17T08:32:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"8db8b4b6847e2305\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set bijections, generic homotopy relations and Kan fibration classes do not state this simplicial-space comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fibrant bisimplicial set the ordinary Segal condition agrees with the Segal condition using path space pullbacks and their homotopy categories agree",
+   "results": "{\"t\": \"2026-10-17T08:32:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a fibrant bisimplicial set the ordinary Segal condition agrees with the Segal condition using path space pullbacks and their homotopy categories agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.quasicategory\", \"SSet.StrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"SSet.Truncated.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.quasicategory'\"], \"digest\": \"23ff0db969106dd8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set bijections, generic homotopy relations and Kan fibration classes do not state this simplicial-space comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-complete-segal-walking-isomorphism",
@@ -65,7 +217,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim: foundational Joyal–Tierney comparison used through lem-coef-enrichment-change-adjunction; Proposition 4.4 and Theorem 4.5; row quasicategories from Proposition 3.4. This is the horizontal regularity and weak-equivalence comparison, before the first-row Quillen equivalence of Theorem 4.11. Supporting fact: Lemma 4.2; comparison of the completeness convention with s_0:X_0 to X_eq from Rezk, https://arxiv.org/html/math/9811037, Theorem 6.2 and Proposition 6.4. No Stacks tag states this simplicial-homotopy result. Supporting comparison of the homotopy-product convention with the strict-product Segal space and strict mapping fibers required by Rezk Theorem 6.2.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: Rezk strict-product Segal and strict mapping-fiber comparison with the homotopy-product convention.",
    "via": [
     "lem-coef-complete-segal-walking-isomorphism",
     "lem-coef-segal-categorical-constancy",
@@ -80,5 +232,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-reedy-homotopy-segal-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the proof into eight steps: arbitrary-monomorphism division yields matching, spine and all-vertex fibrations; induction compares strict and explicit path Segal products via existing Kan comparison and invariance nodes; two-out-of-three gives the strict Segal condition; all-vertex fiber comparisons commute with face restriction; a trivial-fibration lift and the explicit composition graph identify identities and composition, hence equivalence components. No new nodes, no change of statement or hypotheses.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the Rezk/Joyal comparison between homotopy-product and strict-product Segal conventions and strict mapping fibers, before the completeness comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-09bd514bb",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-09bd514bb (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement in full (division calculus, def-coef-segal-space, def-coef-homotopy-segal-space, Kan path comparison, homotopy-pullback invariance, Kan model structure, segal-dk, and the hofib convention of def-cbc-enhanced-diagrams-cones). Step 1: X->* checked against the any-monomorphism division clause. Delta^n\\X is X_n with the outer coordinate first; A = empty set, the boundary and the vertex set give Kan X_n, strict Reedy matching fibrations and v_n, with v_1=(d_1,d_0). Step 2: the spine division object is S_r with d_0 matched to d_1, and the fibrations come from the stated monomorphisms. Step 3: the induction is stated explicitly. H_{r+1}=P(H_r->X_0, d_1) has the right path orientation. The first map uses path comparison (S_r, X_1, X_0 Kan; d_1 a fibration). The second uses invariance with (c_r, id, id); H_r Kan is the induction hypothesis, and H_{r+1} is Kan by the comparison node. Step 4: a_r = c_r b_r, then two-out-of-three. Step 5: P(v_n, x) is exactly T_X(x). Step 6: the fixed-triple fiber map is the pullback of the trivial fibration b_2, and lifting against the empty set into Delta^0 gives sigma. Step 7: the composition-graph clause plus the j bijections; identities are s_0 with constant paths. Step 8: the category isomorphism gives the same invertible components. proof_deps equals the union of step uses; there is no cycle; all cited nodes are in unit sk-prop-sf-biduality-general. There are no new nodes. I found no DAG duplicate, no blueprint same_as (no Segal/Reedy anywhere in main-20261015) and no Segal spaces in Mathlib (only StrictSegal). Rezk 4.1/5.1-5.7 has no archival copy (WANTED); proof_origin is agent, and the statement is consistent with Rezk's conventions. No SGA. Edge cases: empty space, discrete nerves, BG; a constant nondiscrete K is excluded by Reedy fibrancy. No fixes."
  }
 }

@@ -14,9 +14,84 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\underline A$ for the constant sheaf of rings on $T_{\\Proet}$. Since $A$ is a DVR and $\\varpi$ is a uniformizer, multiplication by $\\varpi^n$ is injective and the ordinary sequence $0\\to A\\xrightarrow{\\varpi^n}A\\to A/I^n\\to0$ is exact. The quotient is finite by the finite-quotient clause of [def-weil-l-adic-coefficient-extension]. Applying the exact constant-sheaf section property [lem-weil-pbc-constant-module-section-properties] gives the corresponding exact sequence of constant module sheaves. The completed-coefficient reduction lemma [lem-weil-pbc-completed-constant-sheaf-reduction] identifies the locally constant quotient sheaf with $(A/I^n)_T$, says that $A_T$ is flat over $\\underline A$, and identifies $A_T\\otimes_{\\underline A}(A/I^n)_T$ with $(A/I^n)_T$. Tensoring the constant exact sequence by this flat $\\underline A$-module therefore gives an exact sequence of $A_T$-modules $0\\to A_T\\xrightarrow{\\varpi^n}A_T\\to(A/I^n)_T\\to0$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J (lemma-constant-exact) and 093M (lemma-completion-flat), applied to the uniformizer-power quotient sequence"
+   }
+  },
+  {
+   "text": "Put $R=A_T$ and $S=(A/I^n)_T$. Let $F=[R\\xrightarrow{\\varpi^n}R]$ in degrees $-1,0$, with augmentation $e:F\\to S[0]$. Step 1 says exactly that $e$ is a quasi-isomorphism. Choose a K-flat representative $P$ of $M$ using [def-weil-pbc-adic-coefficient-datum]. The cone of $e$ is acyclic by [lem-pur-quasi-iso-cone-acyclic]. By the definition of K-flatness [def-pc-kflat-complex], $\\operatorname{Tot}(P\\otimes_R C(e))$ is acyclic: the signed swap $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$ for degrees $i,j$ converts the order in the definition, and commutes with the total differential of [def-pc-tensor-complex-sheaves]. The tensor-cone isomorphism [lem-pc-tensor-mapping-cone-iso] identifies this complex with the cone of $\\operatorname{Tot}(P\\otimes_R e)$; applying the same cone criterion shows that $\\operatorname{Tot}(P\\otimes_R F)\\to P\\otimes_R S$ is a quasi-isomorphism. By [lem-pur-derived-change-of-rings], the target with its $S$-action computes $M_n$, and its underlying $R$-complex computes $\\operatorname{Res}_nM_n$ [def-pc-sheaf-restrict-scalars]. This proves the comparison in the required completed coefficient category, without assuming that tensoring an arbitrary complex preserves quasi-isomorphisms.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN (definition-K-flat) and 06YU (definition-derived-tor); tensor-cone comparison and the quasi-isomorphism cone criterion, as in the cited DAG statements."
+   }
+  },
+  {
+   "text": "The complex $F$ is the mapping cone of $\\varpi^n:R[0]\\to R[0]$. Apply [lem-pc-tensor-mapping-cone-iso] to this map: under the unit identifications $P\\otimes_R R=P$, its tensor cone is $C(\\varpi^n\\operatorname{id}_P)$, compatibly with the inclusion of $P$. The concrete derived-category structure of [def-weil-abstract-derived-category] therefore gives the distinguished triangle $M\\xrightarrow{\\varpi^n\\operatorname{id}}M\\to\\operatorname{Res}_nM_n\\to M[1]$ after the comparison of Step 2. Naturality is also at the complex level: a chain map $h:P\\to P'$ commutes with multiplication by $\\varpi^n$, and the maps on $P\\otimes_R F$ and $P\\otimes_R S$ are $h\\otimes1$; the augmentation square commutes on each tensor $x\\otimes y$. The tensor-cone isomorphism is natural by its cited statement. If $h$ is a quasi-isomorphism between K-flat representatives, then $h\\otimes_R S$ is a quasi-isomorphism by clause (1) of [lem-pur-derived-change-of-rings]; the augmentation square and Step 2 imply the same for $h\\otimes_R F$. These squares therefore descend through localization, and clause (2) gives independence of resolutions. They thus give the asserted natural triangle for derived morphisms.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-weil-abstract-derived-category",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category), with cone triangles; sites-cohomology.tex Tag 06YU for the K-flat tensor construction."
+   }
+  },
+  {
+   "text": "Apply the long exact cohomology sequence [lem-sf-derived-homology-long-exact] to the triangle of Step 3, using the cohomology-sheaf functors of [def-weil-derived-cohomology-sheaves]. Restriction of scalars leaves the underlying sheaf and its kernels and quotients unchanged, so $\\mathcal H^q(\\operatorname{Res}_nM_n)$ is the restricted underlying sheaf of $\\mathcal H^q(M_n)$. If $q<a-1$, both $\\mathcal H^q(M)$ and $\\mathcal H^{q+1}(M)$ vanish by the assumed interval, and exactness forces $\\mathcal H^q(M_n)=0$. If $q>b$, the same argument uses vanishing in degrees $q$ and $q+1$. Hence every positive $n$ has $\\mathcal H^q(M_n)=0$ for $q\\notin[a-1,b]$, with one interval independent of $n$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-derived-cohomology-sheaves",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS (lemma-cohomology-homological), long exact sequence of a distinguished triangle"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J, 093M and 05RS/06YU, assembled into the completed-coefficient cone comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-cbc-finite-extension",
@@ -72,5 +147,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-finite-extension-reduction-cone-bound",
+  "worker": "stage1",
+  "summary": "Split the uniformizer reduction assertion into the completed-coefficient quotient resolution, its K-flat tensor comparison, the natural concrete cone triangle, and the long-exact-sequence amplitude bound. Existing tensor-cone and quasi-isomorphism criterion nodes justify the comparison. The completed sheaf A_T remains separate from constant coefficients.",
+  "blueprint": "Realizes the old split step 1 of thm-cbc-finite-extension: the integral constructible functors and finite-level amplitude condition via the uniformizer-cone comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Exactness of constant sheaves is a generic ringed-site tool used to form the uniformizer resolution; this unit has no such exactness statement."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "The generic completed-sheaf flatness and reduction theorem identifies the completed coefficient quotient; this unit does not supply that ringed-site comparison."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat computation and resolution independence are general ringed-site change-of-rings tools, not replacements of a compact-support base-change step."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "The generic cone criterion tests the augmentation and its K-flat tensor for being quasi-isomorphisms."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "The general tensor-cone isomorphism supplies the comparison and its naturality; it does not assert any uniformizer or amplitude result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-tensor-mapping-cone-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-88289c981",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-88289c981 (reviewer sub-agent of L); spot-checked: Read in full: the item, its parent thm-cbc-finite-extension (statement and 9 steps), unit sk-prop-sf-cbc, the master and main-20261015 blueprint text, and every cited statement. No new nodes; statement unchanged. The statement is true and sharp. M=(A/I)_T[0] gives H^{-1} and H^0 and so needs [a-1,b]. M=A_T, M=0 and a=b also fit. The cone of ϖ^n on R[0] is [R→R] in degrees -1,0. It stays in D(Mod(A_T)) with the completed A_T of def-weil-pbc-adic-coefficient-datum, whose hypotheses hold for O_E (Noetherian, finite and perfect quotients, torsion A/I). It is not identified with constant coefficients, and it matches the reduction interval that the parent passes to prop-weil-pbc-preservation-constructible. Step 1: Stacks 093J lemma-constant-exact (sites-modules.tex l.8198) and 093M lemma-completion-flat (l.8261), with flatness of A_T over Ā so derived and underived tensors agree. Step 2: K-flatness with a signed swap, the cone criterion and the tensor-cone iso show P⊗F→P⊗S is a quasi-isomorphism, and change of rings (2) plus the datum identify it with M_n and Res_n M_n. Step 3: the tensor-cone iso gives P⊗F≅C(ϖ^n id_P), so the triangle is distinguished by the concrete cone triangles of def-weil-abstract-derived-category; naturality goes through K-flat roofs and change of rings (1),(2). Step 4: Stacks 05RS long exact sequence (derived.tex l.3618) gives vanishing for q<a-1 and q>b. Tags 093J/093M/05RS/05RU/06YN/06YU match tags/tags. No cycle, proof_deps equals the union of uses, all ids exist. Duplicate search found only lem-pur-constant-two-term-resolution (constant Z_ℓ coefficients) and ring-level DVR amplitude nodes, none a duplicate. Accepted all five declared tool_uses (constant-module-section-properties, completed-constant-sheaf-reduction, derived-change-of-rings, quasi-iso-cone-acyclic, tensor-mapping-cone-iso), all generic black boxes. No SGA used. No fixes."
  }
 }

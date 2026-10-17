@@ -32,9 +32,106 @@
   "def-coef-categorical-pattern-fibrancy",
   "lem-coef-marked-operadic-model-structures"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The nerve of any ordinary category is a quasicategory: an inner horn specifies its consecutive arrows and their composites, and associativity supplies the unique compatible simplex. Apply this to $\\Delta^{\\mathrm{op}}$, $D_n$, and the ordinary left cone of $D_n$. There are $n$ edge objects and $n+1$ vertex objects in $D_n$, with only the endpoint arrows besides identities, so it is finite. Consecutive-subinterval inclusions compose to such inclusions and include identities. Thus every cone leg and every factorization edge maps to $I$. The countable family of these finite cones is small in the fixed universe. These data meet exactly the categorical-pattern definition.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.13 and 3.2.3; Example 3.2.4(3), expanded agent argument"
+   }
+  },
+  {
+   "text": "In either direction the common first two clauses are that $q$ is an inner fibration admitting cocartesian lifts of inert arrows, with exactly those edges marked. Pull back along $d_n$. Inner-horn lifting is preserved by pullback: compose the base simplex with $d_n$ and use the filler for $q$. A $q$-cocartesian inert lift likewise remains cocartesian in the pullback by its horn property. Since all edges of the cone map to inert arrows, this gives a cocartesian fibration $q_n:E_n\\to N(D_n)^{\\triangleleft}$. Its classifying functor $\\chi_n$ has value $X_{[n]}$ at the apex and $X_{[i]}$ at $\\alpha:[n]\\to[i]$, and all its arrows are the stated cocartesian transports, by straightening. For each $y\\in X_{[n]}$ these transports give a coherent cocartesian section with apex $y$: the unique arrows from the initial cone vertex give the natural transformation from its constant functor to the identity, and applying $\\chi_n$ and evaluating at $y$ gives this section under straightening. Conversely any cocartesian section has these transport values and compatibilities. Comparisons of such choices are equivalences by initiality of cocartesian lifts. A pullback-cocartesian edge over a cone edge is also $q$-cocartesian: it is locally cocartesian over that edge, and a global $q$-cocartesian lift already exists, so the local-global lemma applies.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-marked-operadic-model-structures",
+    "def-coef-infinity-fibrations",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-cocartesian-local-global"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.13 and 3.2.3; Example 3.2.4(3), expanded agent argument"
+   }
+  },
+  {
+   "text": "The cone of $\\chi_n$ is precisely the comparison cone from $X_{[n]}$ to the incidence diagram $\\alpha\\mapsto X_{[i]}$. Small limits in $\\mathrm{Cat}_\\infty$ exist. To check the relative-to-a-point limit condition in pattern clause (iii), use the dual constant-diagram test: its bottom row consists of terminal spaces. The new mapping-from-a-constant-diagram lemma identifies its top right corner with the limit of the component mapping spaces. The representable limit criterion then says that this is exactly the usual limiting cone in $\\mathrm{Cat}_\\infty$. By the universal property of a limit, the specified cone is limiting exactly when its canonical comparison $X_{[n]}\\to\\lim_{\\alpha\\in D_n}X_{[i]}$ is an equivalence. Thus pattern clause (iii) and the generalized fiber clause agree.",
+   "uses": [
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-constant-diagram-mapping-limit",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.13 and 3.2.3; Example 3.2.4(3), expanded agent argument"
+   }
+  },
+  {
+   "text": "Fix a cocartesian section with image $s:N(D_n)^{\\triangleleft}\\to X$, apex $y\\in X_{[n]}$, boundary $y_\\alpha$, and a testing object $x\\in X_{[m]}$. Apply the dual constant-diagram relative-limit test to $q$ and $s$. Apply the new mapping lemma to its upper and lower right corners, naturally with respect to $q$. The resulting square has upper row $$\\operatorname{Map}_X(x,y)\\longrightarrow\\lim_{\\alpha\\in D_n}\\operatorname{Map}_X(x,y_\\alpha)$$ and lower row $$\\operatorname{Map}_B([m],[n])\\longrightarrow\\lim_{\\alpha\\in D_n}\\operatorname{Map}_B([m],[i]).$$ The horizontal arrows postcompose with the cone legs, so the lower arrow sends $\\phi$ to $(\\alpha\\phi)_\\alpha$. Mapping spaces in this ordinary nerve are the discrete Hom sets: in a right-pinched simplex every initial edge is an identity, and its only datum is the last arrow. This also identifies all coherence maps in the lower diagram.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-constant-diagram-mapping-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.13 and 3.2.3; Example 3.2.4(3), expanded agent argument"
+   }
+  },
+  {
+   "text": "The square in Step 4 is a homotopy pullback exactly when its comparison becomes an equivalence on each homotopy fiber over $\\phi\\in\\operatorname{Map}_B([m],[n])$: apply the homotopy-fiber detection lemma to the map from the upper-left corner to the path pullback, both over the lower-left corner with the identity as base map; the homotopy fiber of the path pullback over $\\phi$ is the homotopy fiber of the right vertical map over $(\\alpha\\phi)_\\alpha$. The space $\\operatorname{Map}_B([m],[n])$ is discrete, so the comparison is a disjoint union of these fiber comparisons. Limits of spaces commute with homotopy pullbacks: maps into either iterated limit are exactly the same compatible cones, by the representable universal property. Its fiber comparison is therefore $$\\operatorname{Map}^{\\phi}_X(x,y)\\longrightarrow\\lim_{\\alpha\\in D_n}\\operatorname{Map}^{\\alpha\\phi}_X(x,y_\\alpha).$$ These homotopy fibers agree with the actual mapping-space fibers because the mapping map of an inner fibration is a Kan fibration. This is exactly the incidence mapping comparison in the generalized-operad statement. Step 2 supplies a cocartesian section for each $y$; all such sections give allowed coherent projection diagrams, and changing the lifts only changes them by the equivalences there. Hence requiring clause (iv) for every section is equivalent to requiring these incidence comparisons for every $x,y,\\phi$.",
+   "uses": [
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-inner-mapping-fiber",
+    "lem-coef-marked-operadic-model-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.13 and 3.2.3; Example 3.2.4(3), expanded agent argument"
+   }
+  },
+  {
+   "text": "Steps 2, 3 and 5 identify all four pattern conditions with the generalized-operad clauses and the required marking, proving both implications. No Kan condition on $X_{[0]}$ has entered. For $n=0$ the only inert map to arity zero or one is the identity of $[0]$, so $D_0$ is the identity category and both comparisons are identities. For $n=1$ the identity of $[1]$ is initial in $D_1$ and the endpoint data introduce no extra arity-one condition. For empty $X$, every $D_n$ is nonempty, its all-empty fiber diagram has empty limit, and there are no $x,y$ or sections to test. Thus the fiber comparison is an equivalence of empty categories and the remaining conditions are vacuous. Degenerate marked arrows are already included by the cocartesian identity clause.",
+   "uses": [
+    "lem-coef-marked-operadic-model-structures",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.13 and 3.2.3; Example 3.2.4(3), expanded agent argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-categorical-pattern-fibrancy",
+  "lem-coef-marked-operadic-model-structures",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-cocartesian-local-global",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-constant-diagram-mapping-limit",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Example 3.2.4(3); source not archived in literature/"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +139,45 @@
    "results": "Algebra/NonAssoc/PreLie/Basic.lean:39 and CategoryTheory/Distributive/Monoidal.lean:55 (bibliography mentions of operads only); SimplexCategory/Basic.lean:171 SimplexCategory.subinterval (inert maps of Delta)",
    "date": "2026-10-17",
    "verdict": "no match: Mathlib has inert subinterval maps of the simplex category but no marked simplicial sets, categorical patterns or infinity-operads. LeanSearch/Loogle/LeanFinder could not be run from the review machine (network blocked) and are not recorded."
+  },
+  {
+   "tool": "leansearch",
+   "query": "generalized nonsymmetric infinity operad as a categorical pattern fibered object",
+   "results": "{\"t\": \"2026-10-17T12:05:46Z\", \"tool\": \"leansearch\", \"query\": \"generalized nonsymmetric infinity operad as a categorical pattern fibered object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\", \"HasFibers.noConfusion\", \"HasFibers.canonical\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instHasFibersForget\", \"HasFibers.noConfusionType\", \"HasFibers.category\", \"CategoryTheory.Functor.IsFibered\", \"HasFibers\"], \"digest\": \"0c2f69fc6bf10b86\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category limits, strict Segal sets or basic simplicial-set structures; not the whole mapping-space comparison for coherent diagrams in arbitrary quasicategories. The ordinary limitCompCoyonedaIsoCone candidate was read in Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-90; its Hom is a set, not a quasicategory mapping space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A marked simplicial set over the inert simplex category is fibered for the incidence pattern exactly when it is a generalized nonsymmetric infinity operad",
+   "results": "{\"t\": \"2026-10-17T12:05:47Z\", \"tool\": \"leanfinder\", \"query\": \"A marked simplicial set over the inert simplex category is fibered for the incidence pattern exactly when it is a generalized nonsymmetric infinity operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.Augmented\", \"SSet.Quasicategory\", \"SSet.StrictSegalCore\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"d0e5719bdc1bbad6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category limits, strict Segal sets or basic simplicial-set structures; not the whole mapping-space comparison for coherent diagrams in arbitrary quasicategories. The ordinary limitCompCoyonedaIsoCone candidate was read in Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-90; its Hom is a set, not a quasicategory mapping space."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.InnerFibration, CategoryTheory.Functor.IsCocartesian, SimplexCategory.subinterval",
+   "results": "{\"t\": \"2026-10-17T12:05:48Z\", \"tool\": \"loogle\", \"query\": \"SSet.InnerFibration, CategoryTheory.Functor.IsCocartesian, SimplexCategory.subinterval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category limits, strict Segal sets or basic simplicial-set structures; not the whole mapping-space comparison for coherent diagrams in arbitrary quasicategories. The ordinary limitCompCoyonedaIsoCone candidate was read in Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-90; its Hom is a set, not a quasicategory mapping space."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|categorical pattern|pattern fibered|cocartesian",
+   "results": "{\"t\": \"2026-10-17T12:05:48Z\", \"tool\": \"grep\", \"query\": \"operad|categorical pattern|pattern fibered|cocartesian\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category limits, strict Segal sets or basic simplicial-set structures; not the whole mapping-space comparison for coherent diagrams in arbitrary quasicategories. The ordinary limitCompCoyonedaIsoCone candidate was read in Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-90; its Hom is a set, not a quasicategory mapping space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration over Delta opposite with inert cocartesian transport satisfies generalized Segal incidence axioms if and only if it is fibered for a categorical pattern",
+   "results": "{\"t\": \"2026-10-17T12:18:14Z\", \"tool\": \"leanfinder\", \"query\": \"An inner fibration over Delta opposite with inert cocartesian transport satisfies generalized Segal incidence axioms if and only if it is fibered for a categorical pattern\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal\", \"SSet.IsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegalCore\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.quasicategory\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"d9d2841ee85d3a06\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category limits, strict Segal sets or basic simplicial-set structures; not the whole mapping-space comparison for coherent diagrams in arbitrary quasicategories. The ordinary limitCompCoyonedaIsoCone candidate was read in Mathlib/CategoryTheory/Limits/Types/Yoneda.lean:80-90; its Hom is a set, not a quasicategory mapping space."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +194,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-generalized-operad-pattern-fibered",
+  "worker": "stage1",
+  "summary": "Resumed the interrupted three-step draft; the required first dry run found unsplit status and missing split_report. Retained the statement, source, blueprint ancestry, old search and edge-case checks. Expanded the argument into six steps with explicit cocartesian pullback/section, fiber-limit and relative mapping-limit calculations. Reused existing foundational nodes and added one statement-only constant-diagram mapping-space lemma after recorded searches. No statement correction or Lean attachment.",
+  "blueprint": "Historical master prop-coef-integral-exceptional-adjoint paragraph 2 (mapping-complex adjunction before R lim), through the recorded operadic foundation and generalized fibration replacement: the proof identifies the generalized incidence pattern required by that replacement, following Gepner-Haugseng Example 3.2.4(3)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-257435375",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-257435375 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-constant-diagram-mapping-limit, and the statement of every node they cite. The source, Gepner–Haugseng arXiv:1312.3178 Def 3.1.13, Def 3.2.3 and Ex 3.2.4(3), is not in literature/ and the network is unavailable here, so I checked it from my own knowledge of it; the WANTED lines are correct. Item statement: inert maps, D_n (n edge objects and n+1 vertex objects; D_0 is the identity category; id_[1] is initial in D_1) and the pattern data all match GH, with no Kan condition on the zero fibre, and (ii) is the marking clause. Nothing is weakened, and no parent clause is restated. Steps: 1 (nerve and pattern data) is elementary and correct. 2: pullback of inner and cocartesian lifts; sections built from the straightening equivalence (identity ↔ point functor); choices equivalent by composition-initiality; local-global applies because a global inert lift exists. 3: dual constant test with terminal bottom row, the new node, the Yoneda cone criterion and limits in Cat_∞ give (iii) ⇔ the fibre comparison. 4: right-pinched mapping spaces in a nerve are discrete Hom sets, and the lower map is φ ↦ (αφ)_α. 5: limits commute with fibres, and the inner-fibration mapping map is a Kan fibration. 6: edge cases n=0, n=1, empty X and degenerate edges. All proof dependencies are in sk-prop-sf-biduality-general apart from the definition def-cbc. There is no cycle (857 nodes in the closure), no tool_uses and no SGA. New node: it is the end/limit formula for transformations out of a constant diagram, true for arbitrary small K. I tested K empty, a point, Δ^1 and a groupoid. It is statement-only, all three kinds of search are logged, and its blueprint from/via are correct. It is not a duplicate: I read right-fibration-section-limit, discrete-weight-coherent-cocones, yoneda-presheaf-limits, enhanced-functor-cone-calculus, pointwise-lan-mapping-property, spatial-mapping-interchange and grothendieck-coherent-end, and none states it. FIX (C1): Step 5's opening criterion (homotopy pullback iff the homotopy-fibre maps are equivalences) uses lem-coef-spaces-homotopy-fiber-detection (same unit, split) without citing it. It is now cited, with how it applies, in the step's uses and in proof_deps, and an ambiguous 'this last space' is reworded. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-generalized-operad-pattern-fibered.json.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,112 @@
+{
+ "id": "lem-sfb-derived-composition-adjunction-normalization",
+ "kind": "statement",
+ "title": "Derived composition preserves the specified adjunction normalization",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C$ be Grothendieck abelian categories [def-sp-grothendieck-abelian], with ordinary unbounded derived categories [def-weil-abstract-derived-category]. Let $L_a:\\mathcal A\\to\\mathcal B$, $L_b:\\mathcal B\\to\\mathcal C$, and $L_c:\\mathcal A\\to\\mathcal C$ be exact additive functors, with specified additive right adjoints $R_a,R_b,R_c$. Fix a natural isomorphism $\\lambda:L_bL_a\\xrightarrow{\\sim}L_c$, and let $\\kappa:R_c\\xrightarrow{\\sim}R_aR_b$ be its conjugate [def-weil-pbc-adjunction-conjugate] under $L_c\\dashv R_c$ and the composite adjunction $L_bL_a\\dashv R_aR_b$ [def-weil-pbc-composite-adjunction]. For an additive functor $H$ write $C(H)$ for termwise application to complexes, and write $D(H)$ for its descent when $H$ is exact. A complex $I$ is K-injective if every chain map from an acyclic complex to $I$ is null-homotopic. Compute total right derived functors $\\mathbf R R_i$ on K-injective resolutions, and use the adjunctions $D(L_i)\\dashv\\mathbf R R_i$ induced by the specified underived adjunctions [sk-def-sfb-derived-categories].\n\nThere is a natural isomorphism $\\kappa^D:\\mathbf R R_c\\xrightarrow{\\sim}(\\mathbf R R_a)(\\mathbf R R_b)$ with the following normalization: at a K-injective $I$ of $\\mathcal C$, it is the class of $C(\\kappa)_I:C(R_c)I\\to C(R_a)C(R_b)I$ under the canonical resolution identifications (in particular $C(R_b)I$ is K-injective). This $\\kappa^D$ is precisely the conjugate of $D(\\lambda):D(L_b)D(L_a)\\xrightarrow{\\sim}D(L_c)$ under the derived adjunction for $c$ and the composite of the derived adjunctions for $a,b$. Thus after these comparisons the unit and counit are exactly the composite unit and counit, not arbitrary adjunction structures on isomorphic functors.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09T5, label lemma-derived-adjoint-functors; the composition comparison and adjoint-uniqueness construction in sites-cohomology.tex Tag 0D6E, label lemma-derived-pushforward-composition, specialized to exact left adjoints."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact left adjoints deriving right adjoints preserves conjugate composition isomorphisms on unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedη",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned underived or general derived-adjunction declarations do not state the normalization claimed here"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, Functor.rightDerived",
+   "results": "0 hits: . loogle: unknown identifier 'Functor.rightDerived'",
+   "date": "2026-10-17",
+   "verdict": "invalid query; no mathematical conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Aa]dj|[Aa]dj.*rightDerived|rightDerived.*[Cc]omp",
+   "results": "Scope CategoryTheory. 11 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned underived or general derived-adjunction declarations do not state the normalization claimed here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived adjunction composition unit counit compatibility K injective resolutions",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_unit, CategoryTheory.injectiveResolutions, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.counitAsIsoOfIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned underived or general derived-adjunction declarations do not state the normalization claimed here"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "3 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned underived or general derived-adjunction declarations do not state the normalization claimed here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived direct image composition is conjugate to exact inverse image composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp', CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp, TopCat.Sheaf.pushforwardForgetIso, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned underived or general derived-adjunction declarations do not state the normalization claimed here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-sf-comp-composition-base-change",
+  "date": "2026-10-17",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-comp-composition",
+ "lean_candidates": [
+  {
+   "name": "CategoryTheory.Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv",
+   "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate",
+   "lines": [
+    46,
+    199
+   ],
+   "how": "Existing project declaration, read in full; together these give the conjugate composition comparison and its exact-adjoint K-injective instance. The representative normalization is obtained by evaluating the defining composite derived-unit equation on a K-injective complex."
+  },
+  {
+   "name": "CategoryTheory.Functor.rightDerivedFunctorCompIso'",
+   "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp",
+   "lines": [
+    233,
+    236
+   ],
+   "how": "Existing project declaration, read in full; together these give the conjugate composition comparison and its exact-adjoint K-injective instance. The representative normalization is obtained by evaluating the defining composite derived-unit equation on a K-injective complex."
+  },
+  {
+   "name": "CategoryTheory.Adjunction.preservesKInjectiveComplexes",
+   "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp",
+   "lines": [
+    95,
+    114
+   ],
+   "how": "Existing project declaration, read in full; together these give the conjugate composition comparison and its exact-adjoint K-injective instance. The representative normalization is obtained by evaluating the defining composite derived-unit equation on a K-injective complex."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-composition-base-change",
+   "place": "Proof (3): 'The two composites $v^*Rp_*j_!K\\to Rp'_*Rh'_*j''_!u^*K$ ... are both obtained by applying $Rp'_*$ to maps $v_Z^*j_!K\\to Rh'_*j''_!u^*K$': pasting the proper base change of $p$ and $h$ into that of $ph$ requires the derived composition comparison to be the conjugate of the specified composite adjunction.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

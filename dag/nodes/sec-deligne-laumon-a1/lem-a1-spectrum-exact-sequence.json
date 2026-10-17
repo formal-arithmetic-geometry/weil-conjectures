@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-spectrum-exact-sequence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Spectrum of an exact Frobenius sequence",
@@ -17,12 +17,35 @@
  ],
  "proof": [
   {
-   "text": "Choose a basis of $V'$ and complete it to a basis of $V$; the Frobenius\nmatrix of $V$ is upper block triangular with diagonal blocks the\nFrobenius matrices of $V'$ and $V''$, in the sense of\n[def-weil-frobenius-module-weights]. Hence the characteristic\npolynomial satisfies $\\chi_V(T)=\\chi_{V'}(T)\\chi_{V''}(T)$ ([p-linear-filtration]), and taking\norders of vanishing at each root shows the algebraic multiplicities add.",
+   "text": "Write $K=\\Qlb$, let $i:V'\\to V$ and $p:V\\to V''$ be the exact-sequence maps, and denote their Frobenius operators by $F',F,F''$. These are finite-dimensional $K$-spaces with linear automorphisms and the fixed field isomorphism $\\iota$ of [def-weil-frobenius-module-weights]. Put $S=i(V')=\\ker p$. Equivariance gives $F(i(v'))=i(F'v')$, so $F(S)=S$. Choose bases $(e_a)$ of $V'$ and $(\\bar e_b)$ of $V''$ and choose lifts $e_b\\in V$ with $p(e_b)=\\bar e_b$. The vectors $(i(e_a),e_b)$ form a basis of $V$: applying $p$ to a relation first makes every coefficient of the $e_b$ zero, then injectivity of $i$ makes the others zero; given $v$, subtract the lifted expansion of $p(v)$, leaving an element of $\\ker p=i(V')$, proving spanning. Thus $\\dim V=\\dim V'+\\dim V''$. In this basis $F$ has block matrix $\\begin{pmatrix}A&B\\\\0&C\\end{pmatrix}$, where $A$ is the matrix of $F'$ and $C$ that of $F''$: the first assertion follows from $Fi=iF'$ and the quotient coordinates follow from $pF=F''p$. No $F$-stable complement has been assumed.",
    "uses": [
-    "def-weil-frobenius-module-weights",
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-spectrum-exact-sequence.proof.md",
+    "place": "Proof, first sentence: choose a basis of the subspace and lifts from the quotient"
+   }
+  },
+  {
+   "text": "Apply [p-linear-filtration] to the invariant filtration $0\\subseteq S\\subseteq V$. The maps $V'\\to S$, $v'\\mapsto i(v')$, and $V/S\\to V''$, $[v]\\mapsto p(v)$, are equivariant isomorphisms: bijectivity is respectively injectivity of $i$ and exactness plus surjectivity of $p$, and equivariance was checked in step 1. In the bases from step 1 their Frobenius matrices are literally $A$ and $C$. The cited determinant formula therefore gives $D_V(t)=D_{V'}(t)D_{V''}(t)$, where $D_W(t)=\\det(1-tF_W\\mid W)$. Set $\\chi_W(T)=\\det(T-F_W\\mid W)$. In the Laurent polynomial ring $K[T,T^{-1}]$ one has $\\chi_W(T)=T^{\\dim W}D_W(T^{-1})$ by factoring $T$ out of every row of the defining determinant. Substitute $t=T^{-1}$ into the determinant product and use the dimension equality from step 1 to get $\\chi_V(T)=\\chi_{V'}(T)\\chi_{V''}(T)$. All expressions in this last equality are polynomials; the inclusion of $K[T]$ into its Laurent polynomial ring is injective, since multiplying a polynomial by a power of $T$ shifts its coefficients. Hence the equality holds already in $K[T]$.",
+   "uses": [
     "p-linear-filtration"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-spectrum-exact-sequence.proof.md",
+    "place": "Proof, characteristic-polynomial identity; p-linear-filtration supplies the determinant product"
+   }
+  },
+  {
+   "text": "For each $\\alpha\\in K$, let $r,s$ be its algebraic multiplicities as a root of the monic characteristic polynomials $\\chi_{V'},\\chi_{V''}$. Write $\\chi_{V'}=(T-\\alpha)^r u$ and $\\chi_{V''}=(T-\\alpha)^s v$ with $u(\\alpha)\\ne0$ and $v(\\alpha)\\ne0$. Step 2 gives $\\chi_V=(T-\\alpha)^{r+s}uv$, and $(uv)(\\alpha)\\ne0$ because $K$ is a field. Thus the multiplicity on $V$ is exactly $r+s$. These characteristic polynomials are nonzero (their leading coefficient is $1$), so all multiplicities are finite. By the meaning of algebraic multiplicity, this proves equality of the eigenvalue multisets over $K$. The spectrum in the item is obtained by applying $\\iota$ to each member of this multiset. Mapping a concatenation of finite lists maps each list separately, and passing to multisets therefore preserves multiset union. Applying this to the equality just proved gives the claimed complex spectra with multiplicities. The zero space has characteristic polynomial $1$ and empty multiset, so the same argument includes zero outer terms and the zero sequence; no semisimplicity is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-spectrum-exact-sequence.proof.md",
+    "place": "Proof, final clause: orders of vanishing add and then apply the fixed embedding"
+   }
   }
  ],
  "proof_deps": [
@@ -31,12 +54,48 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-spectrum-exact-sequence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-spectrum-exact-sequence.proof.md",
+  "place": "Proof, all sentences, expanded into exact-sequence coordinates, determinant identity, and root multiplicities"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "spectrum of an endomorphism on a short exact sequence is the multiset union of spectra of subobject and quotient, counted with multiplicity",
+   "results": "{\"hits\": 8, \"top\": [\"Prod.spectrum_eq\", \"Module.End.HasEigenvalue.mem_spectrum\", \"Module.End.HasUnifEigenvalue.mem_spectrum\", \"Module.End.hasEigenvalue_iff_mem_spectrum\", \"Module.End.hasUnifEigenvalue_iff_mem_spectrum\", \"Module.End.HasUnifEigenvalue.of_mem_spectrum\", \"Module.length_eq_add_of_exact\", \"Pi.spectrum_eq\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: product-algebra spectra and eigenvalue membership are set-valued and do not state multiplicity additivity in an arbitrary exact sequence"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ, LinearMap.charpoly_mapQ_restrict_dvd, charpoly, roots, Multiset",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ'\", \"subdirectory\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: query rejected the unknown project-only identifier; not evidence of absence by itself"
+  },
+  {
+   "tool": "grep",
+   "query": "charpoly_eq_charpoly_restrict_mul_charpoly_mapQ|charpoly.*restrict|charpoly_fromBlocks|roots.*charpoly",
+   "results": "{\"hits\": 12, \"top\": [\"Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean\", \"Mathlib/LinearAlgebra/Charpoly/ToMatrix.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean\"], \"note\": \"\", \"subdirectory\": \"LinearAlgebra\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: block-matrix factorization and root determinant formulas are constituents, not the exact-sequence multiset assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a finite-dimensional vector space endomorphism preserving a subspace, the characteristic polynomial of the whole map is the product of the characteristic polynomials on subspace and quotient, and eigenvalue multisets add in a short exact sequence",
+   "results": "{\"hits\": 8, \"top\": [\"LinearMap.polyCharpoly\", \"LinearMap.charpoly\", \"LinearMap.charpoly_prodMap\", \"LinearMap.det_eq_det_mul_det\", \"LinearMap.charpoly_def\", \"Module.End.hasEigenvalue_iff_isRoot_charpoly\", \"LinearMap.polyCharpoly_monic\", \"LinearMap.polyCharpoly_map_eq_charpoly\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: charpoly_prodMap assumes an invariant direct sum; det_eq_det_mul_det gives determinants only, not this exact-sequence spectrum equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly_prodMap",
+   "results": "{\"hits\": 1, \"top\": [\"LinearMap.charpoly_prodMap\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: charpoly_prodMap is the split product case; an equivariant splitting is not assumed in this item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +118,34 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-l-dl-a1-endpoints"
+ "unit": "sk-l-dl-a1-endpoints",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-spectrum-exact-sequence",
+  "worker": "stage1",
+  "summary": "Expanded the unchanged spectrum statement into three complete steps, retaining the existing Frobenius-data and filtration nodes and creating no new nodes. Exactness and intertwining are checked in an adapted basis, the cited determinant product is explicitly converted to the monic characteristic-polynomial product, and a root-factorization calculation gives algebraic multiplicity additivity before mapping by iota. All actual Mathlib searches are recorded; no exact project attachment or Mathlib match was found.",
+  "blueprint": "Realizes all sentences of lem-a1-spectrum-exact-sequence.proof.md in main-20261015 (identical mathematical text to master): step 1 the adapted basis, step 2 the p-linear-filtration factorization, step 3 the orders of vanishing and spectrum image. This is not the key statement of sk-l-dl-a1-endpoints, so its realization fields are unchanged.",
+  "tool_uses": [
+   {
+    "node": "def-weil-frobenius-module-weights",
+    "why": "Only its finite Frobenius-module and fixed coefficient embedding data are unfolded; this is a definition tool, not a replacement of the endpoint unit route."
+   },
+   {
+    "node": "p-linear-filtration",
+    "why": "Supplies the determinant product for the invariant two-step filtration, the linear algebra tool explicitly cited by the blueprint and the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-frobenius-module-weights",
+  "p-linear-filtration"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-ee7e524a3",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-ee7e524a3 (reviewer sub-agent of L); spot-checked: I read the item, the full statements of def-weil-frobenius-module-weights and p-linear-filtration (including the latter's blueprint_update), the unit sk-l-dl-a1-endpoints, the chapter, and the blueprint source in main-20261015 and master. The statement and proof are the same in both copies, and the item's statement is unchanged. Step 1: the basis of i(V') plus lifts of a basis of V'' is checked for independence and spanning, the blocks A and C follow from Fi=iF' and pF=F''p, F(S)=S because F' is surjective, and no stable complement is assumed. Step 2: it uses the cited statement's actual det(1-Tf) form on the filtration 0⊆S⊆V and converts with chi_W(T)=T^{dim W}D_W(T^{-1}) and dim V=dim V'+dim V''. I checked this conversion; it is elementary and the same as the existing Mathlib leaf lem-weil-reverse-charpoly-eq-reverse, so citing that leaf would be optional. p-linear-filtration's unit sk-p-linear-filtration is cited by the item's unit, so the step is on-route. Step 3: root factorizations give multiplicity r+s exactly, and applying iota preserves multiset sums. Small cases tested: the zero sequence, zero outer terms, [[1,1],[0,2]], and a non-split Jordan block (multiplicity 2 with a 1-dimensional eigenspace). There are no new nodes, and rg over the DAG found no duplicate. The declared tool_uses are unnecessary (one is a definition, the other is on-route) and harmless; neither is accepted as a needed tool use. No SGA source is cited, no target is involved, and no fixes were made."
+ }
 }

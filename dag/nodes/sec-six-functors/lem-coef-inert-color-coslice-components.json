@@ -18,9 +18,77 @@
   "def-coef-infinity-fibrations",
   "def-coef-monoidal-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $B$ and $C$ are quasicategories. Use the nerve and horn conventions of [def-cbc-enhanced-diagrams-cones]. An inner horn in the nerve of an ordinary category fills by taking the chain of its consecutive edges and their composites: in dimension two the missing long edge is their composite; in dimension three the required equality of composites is associativity; in higher dimensions each specified face is forced by its consecutive edges. This applies to the inert subcategory, since the composite of $j\\mapsto a+j$ and $k\\mapsto b+k$ is $k\\mapsto a+b+k$, and identities are inert, by [def-coef-monoidal-infinity-category]. Given an inner horn in $C$, fill its image in $B$ by this chain, and use the inner-fibration lifting property of [def-coef-infinity-fibrations] to fill the original horn over that simplex. The same lifting with constant base simplices shows that $A=C\\times_B\\{[1]\\}$ is a quasicategory.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-monoidal-infinity-category",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Definitions 3.1.1 and 3.4.1; agent-written nerve and inner-horn calculation for the inert pullback."
+   }
+  },
+  {
+   "text": "The inert maps $[n]\\to[1]$ are precisely the $\\rho_i$, $1\\leq i\\leq n$: their opposites are $j\\mapsto a+j$ on $[1]$, and $0\\leq a$, $a+1\\leq n$ give $a=i-1$. In particular, the only inert endomorphism of $[1]$ has $a=0$ and is the identity. These are direct substitutions in [def-coef-monoidal-infinity-category]. A simplex of $C$ all of whose vertices belong to $A$ therefore maps to a chain in the base all of whose objects are $[1]$ and whose arrows are identities. Its base simplex is constant, so the entire simplex lies in the degreewise fiber $A$. Conversely every simplex of $A$ has those vertices. Thus $A$ is exactly the full subcategory on the objects above $[1]$, by [def-cbc-enhanced-diagrams-cones] and the fiber definition of [def-coef-infinity-fibrations].",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Definition 3.1.1 (inert maps), supporting unary-fiber calculation for Definition 3.4.1 and Proposition 3.4.5."
+   }
+  },
+  {
+   "text": "Unwind the degreewise pullback defining $J_x$, using [def-cbc-enhanced-diagrams-cones]. Its $r$-simplices are the maps $\\sigma:\\Delta^{r+1}\\to C$ with first vertex $x$ whose entire remaining face belongs to $A$. The base is therefore a chain $[n]\\xrightarrow{f}[1]\\xrightarrow{1}[1]\\xrightarrow{1}\\cdots\\xrightarrow{1}[1]$. By step 2, $f$ is a unique $\\rho_i$. This is exactly the constant $r$-simplex at the vertex $\\rho_i$ in $B_{[n]/}$, so $\\sigma$ belongs to the displayed $L(x,\\rho_i)$. Conversely an $r$-simplex of this $L$ has constant base on its entire remaining face, so that face lies in $A$ by the fiber definition of [def-coef-infinity-fibrations] and it belongs to $J_x$. These inverse assignments keep the same $\\sigma$. Every coslice operator restricts or repeats only the remaining vertices and fixes the first one; it leaves the chain's first base arrow $\\rho_i$ unchanged. Thus the degreewise bijections commute with every simplicial operator and give the asserted disjoint-union decomposition, not merely a partition of objects. Distinct $i$ cannot intersect because their base edges differ.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Supporting calculation for Proposition 3.4.5: agent-written degreewise identification of the unary-target coslice, retaining the full remaining face."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-cocartesian-composition-initiality] with $E=C$, $p=s$, $B=N(\\Delta^{\\mathrm{op}}_{\\mathrm{inert}})$, the given $x$, and $f=\\rho_i$. Its hypotheses require only an inner fibration between quasicategories, verified in step 1. Its displayed lift category is exactly the $L(x,\\rho_i)$ of this item: the fixed first vertex, the operators on the remaining vertices, and the constant base vertex all agree. The lemma states that this is a quasicategory and that every cocartesian lift of $\\rho_i$ with source $x$ is initial there. The chosen $\\alpha_i$ is such a lift by hypothesis; the assumed lift existence ensures these choices are possible. The lemma also states explicitly that morphisms retain the target map over the identity, its commuting triangle and all higher data. This proves initiality in the actual summands, with no discreteness assumption on $A$ or on its mapping spaces.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9, opposite-category dual, as stated by lem-coef-infinity-cocartesian-composition-initiality."
+   }
+  },
+  {
+   "text": "Both directions of the decomposition in step 3 leave the simplex $\\sigma$ unchanged. Consequently the target projection is on each summand the same restriction to its last $r+1$ vertices as the projection $J_x\\to A$. The canonical cone from $x$ is encoded by this very $(r+1)$-simplex with its first vertex fixed; restricting or repeating any of its remaining vertices gives the same cone simplex on either side. Hence the identification preserves the canonical cone in every degree, including its triangles and higher coherences. If $n=0$, the inequalities $0\\leq a$ and $a+1\\leq0$ of step 2 are impossible. A vertex of $J_x$ would give just such a base arrow $[0]\\to[1]$, so there are no vertices. Any positive-dimensional simplex has a vertex, hence there are no simplices in any degree. This agrees with the coproduct over the empty index set. All constructions are small because their simplices are subsets of those of the small $C$ in one higher degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Supporting calculation for Proposition 3.4.5: agent-written cone compatibility, smallness and nullary check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-infinity-cocartesian-composition-initiality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting calculation in returned step 3 of lem-coef-inert-operad-color-reconstruction, below proof paragraph 2 of prop-coef-integral-exceptional-adjoint. Elementary inert-arrow and whole-simplex coslice calculation; initiality uses the existing general lift lemma (HTT Remark 2.4.1.9 dual). GH Definition 3.4.1 and Proposition 3.4.5 supply context, not a verbatim statement of this more general lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +124,38 @@
    "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"21\", \"text\": \"`IsCocartesian p f φ` expresses that `φ` is a co-Cartesian morphism lying over `f : R ⟶ S` with\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"25\", \"text\": \"`IsStronglyCocartesian p f φ` expresses that `φ` is a strongly co-Cartesian morphism lying over `f`\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"30\", \"text\": \"The constructor of `IsStronglyCocartesian` has been named `universal_property'`, and is mainly\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"32\", \"text\": \"generally recommended to use the lemma `IsStronglyCocartesian.universal_property` instead. The\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"55\", \"text\": \"class IsCocartesian : Prop where\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"line\": \"16\", \"text\": \"This file has been adapted to `Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"18\", \"text\": \"  \\\"coslice\\\" or \\\"under\\\" category under the object `L` maps to.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"22\", \"text\": \"Comma, Slice, Coslice, Over, Under\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Basic.lean\", \"line\": \"46\", \"text\": \"comma, slice, coslice, over, under, arrow\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"line\": \"26\", \"text\": \"Once we have cocartesian-monoidal categories, replace `monoidalOfHasFiniteCoproducts` and\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"line\": \"27\", \"text\": \"`symmetricOfHasFiniteCoproducts` with `CocartesianMonoidalCategory.ofHasFiniteCoproducts`.\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary category products/cocartesian arrows or strict Segal simplicial sets; not the asserted relative-limit/coherent-quasicategory result."
+  },
+  {
+   "tool": "grep",
+   "query": "coslice|cocartesian|inert [AlgebraicTopology]",
+   "results": "{\"t\": \"2026-10-17T10:37:45Z\", \"tool\": \"grep\", \"query\": \"coslice|cocartesian|inert\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\"], \"digest\": \"287818c80578b7f5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits; ordinary-category cocartesian universal properties and simplex subinterval maps do not state a decomposition of coherent quasicategorical coslices or the initiality assertion. Read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-100, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean:171-180 and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocartesian lift of a fixed arrow is initial in the quasicategory of lifts with fixed source",
+   "results": "{\"t\": \"2026-10-17T10:37:45Z\", \"tool\": \"leansearch\", \"query\": \"A cocartesian lift of a fixed arrow is initial in the quasicategory of lifts with fixed source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Bicategory.instHasInitialLeftLiftOfHasLeftKanLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isStronglyCartesian_homCartesianLift\", \"CategoryTheory.HasLiftingPropertyFixedBot\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Bicategory.lanLiftLeftLift\", \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\"], \"digest\": \"0466041ef41fc634\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits; ordinary-category cocartesian universal properties and simplex subinterval maps do not state a decomposition of coherent quasicategorical coslices or the initiality assertion. Read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-100, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean:171-180 and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"coslice\"",
+   "results": "{\"t\": \"2026-10-17T10:37:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"coslice\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits; ordinary-category cocartesian universal properties and simplex subinterval maps do not state a decomposition of coherent quasicategorical coslices or the initiality assertion. Read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-100, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean:171-180 and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coslice of an object to the unary fiber of a cocartesian fibration over inert simplex maps splits into lift quasicategories with initial cocartesian projections",
+   "results": "{\"t\": \"2026-10-17T10:37:49Z\", \"tool\": \"leanfinder\", \"query\": \"The coslice of an object to the unary fiber of a cocartesian fibration over inert simplex maps splits into lift quasicategories with initial cocartesian projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\", \"CategoryTheory.Functor.IsCocartesian.fac\"], \"digest\": \"ad015adfd3e0e438\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits; ordinary-category cocartesian universal properties and simplex subinterval maps do not state a decomposition of coherent quasicategorical coslices or the initiality assertion. Read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-100, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean:171-180 and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-inert-operad-color-reconstruction",
@@ -86,5 +182,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-inert-color-coslice-components",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved base and total quasicategory conditions, fullness of the unary fiber and the degreewise coproduct by explicit nerve and inert-arrow calculations, then applied the existing general cocartesian-lift initiality lemma. Checked target and cone compatibility in every simplicial degree, smallness and arity zero. No new nodes.",
+  "blueprint": "Realizes the local color-coslice decomposition and initiality used in step 3 of lem-coef-inert-operad-color-reconstruction, supporting the finite-coefficient mapping-complex adjunction in paragraph 2 of the blueprint ancestor prop-coef-integral-exceptional-adjoint. The ancestor does not itself spell out this operadic foundation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-c8d327d11",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-c8d327d11 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 5 steps, the 9 Mathlib searches and the blueprint and source fields. I also read the full statements of its four dependencies (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, def-coef-monoidal-infinity-category, lem-coef-infinity-cocartesian-composition-initiality), the parent lem-coef-inert-operad-color-reconstruction and the main-20261015 ancestor proof. GH and HTT are WANTED; the item is elementary nerve combinatorics plus one existing lemma, so it was checked mathematically and proof_origin=agent is correct. Step 1: inner horns fill in a nerve (composite, associativity, then forced), inert maps compose and include identities, and the fibration lifts along s. This makes C and A quasicategories, which the initiality lemma requires. Step 2: an inert [n]->[1] has offset 0<=a<=n-1, so it is exactly one rho_i; the only inert endomorphism of [1] is the identity, so A is full. Step 3: the base of an r-simplex of J_x is the chain (rho_i,1,...,1). This is the constant r-simplex at rho_i in B_[n]/, and operators fixing the first vertex respect it, so J_x is a simplicial disjoint union. Step 4: the lemma's L(x,f)=E_x/ x_{B_p(x)/} {f} is literally the summand. Its hypotheses come from step 1, and alpha_i is a cocartesian lift, so alpha_i is initial. Step 5: the same simplex is used on both sides; for n=0 no inert [0]->[1] exists, so J_x is empty. I tested n=0,1,2, r=0, a product fibration BxD and empty C. Duplicate check by rg over dag/nodes: the symmetric Fin_* family lemma, relative-limit-initial-components and the incidence comparison are different statements. There are no new nodes. The item does not restate a clause of its parent (it is consumed by parent step 3), and there is no cycle. proof_deps equals the union of the step uses. All proof dependencies are in the unit or are the def-cbc definition, so no tool_uses are needed. No SGA is cited, and LeanSearch, Loogle/LeanFinder and grep searches are all recorded. It is not a target node, so the base-change and coefficient checks do not apply. No fixes."
  }
 }

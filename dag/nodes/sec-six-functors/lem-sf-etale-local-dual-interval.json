@@ -14,9 +14,76 @@
   "def-kun-derived-tensor",
   "def-kun-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Refine the given etale cover so that P and L on each member U are represented by E^\\bullet and A_U. Exact slice restriction is supplied by [lem-pur-site-restriction-module-adjunction-exact], and [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies the restriction of H with RHom(E^\\bullet,A_U[m]). For each i choose a splitting of E^i off A_U^r. Applying internal Hom makes Hom(E^i,-) a functorial retract of Hom(A_U^r,-), which is exact by [lem-sc-finite-free-internal-hom-exact]. Its value on a short exact sequence is a direct summand of the corresponding exact sequence, hence exact. Apply [lem-pc-bounded-exact-term-hom-quasi-iso] to the K-injective resolution A_U[m] -> I(A_U[m]) of [def-pur-derived-internal-hom]. The source E is bounded in [a,b], and its termwise internal Hom functors are exact as just checked. Thus the ordinary Hom complex maps quasi-isomorphically to the complex defining derived internal Hom. The shift compatibility in [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives the required representative Hom_A^\\bullet(E^\\bullet,A_U)[m].",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sc-finite-free-internal-hom-exact",
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08JC (lemma-RHom-triangulated), and 08JH (lemma-Rhom-strictly-perfect); bounded exact-term Hom comparison."
+   }
+  },
+  {
+   "text": "Before shifting, the Hom-complex definition gives in degree q the term Hom_A(E^{-q},A), with differential d^q(phi)=(-1)^{q+1} phi d_E^{-q-1}. If E^i is a retract of A^r, dualizing the two retraction maps makes Hom_A(E^i,A) a retract of A^r, hence finite projective. The cochain shift [m] changes the support from [-b,-a] to [-b-m,-a-m], and the same formula holds after the common trivialization of L.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, label lemma-dual-perfect-complex, strictly-perfect local calculation"
+   }
+  },
+  {
+   "text": "On every member U of the refined cover, the displayed complex has finite constant A-modules as terms, so its kernels and images, and therefore its cohomology, are finite locally constant A-modules. These local descriptions show that each cohomology sheaf of H is lisse on T. The one-piece partition {T} is finite and locally closed, so the definition [def-weil-pbc-constructible-complexes] gives bounded constructibility; the displayed support interval gives boundedness.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "ancestor Proof paragraph 3, local dual-model and constructibility argument"
+   }
+  },
+  {
+   "text": "Let M be any degree-zero A-module sheaf. On each U, the local dual complex is supported in [-b-m,-a-m]. Its terms are retracts of finite sums of A_U. Tensoring with a term is consequently a functorial retract of a finite direct sum of the identity, so it is exact; the terms are flat. Apply [lem-kun-flat-bounded-tor-amplitude] on the scheme U, with endpoints -b-m <= -a-m (since a <= b). This gives the required vanishing after derived tensor with M|_U. Exact restriction to the slice, from step 1, is its own derived pullback. Applied to this ringed-topos pullback, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies (H tensor^L M)|_U with (H|_U) tensor^L (M|_U), using the derived tensor of [def-kun-derived-tensor]. Exactness also makes restriction commute with cohomology. Each section of the cohomology sheaf outside the interval restricts to zero on the base-changed cover, hence is zero by the sheaf axiom. Therefore the vanishing holds on T for every M, which is precisely [def-kun-tor-amplitude].",
+   "uses": [
+    "lem-kun-flat-bounded-tor-amplitude",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-kun-derived-tensor",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G1 (lemma-tor-amplitude), implication (2) => (1); Tag 07A4 (lemma-pullback-tensor-product), restriction to the localized etale site."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-constructible-complexes",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ, specialized to constant finite-projective etale models"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-weil-etale-geometric-biduality",
@@ -72,5 +139,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-etale-local-dual-interval",
+  "worker": "stage1",
+  "summary": "Split the local dual interval into the bounded exact-source Hom comparison, the explicit reversed-degree and shift computation, the finite locally constant constructibility argument, and the local-to-global Tor-amplitude test. Reused existing nodes only. On resumed review, replaced two insufficient citations with the precise existing Hom-comparison and bounded-flat Tor-amplitude lemmas and cited the restriction comparisons explicitly.",
+  "blueprint": "Realizes the ancestor theorem thm-weil-etale-geometric-biduality, Proof paragraph 3: the local finite-projective dual calculation and its constructibility/Tor-interval conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact slice restriction supplies the cohomology restriction used by the local model and vanishing arguments."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic unbounded ringed-site internal Hom restriction and shift compatibility; the unit does not construct this comparison."
+   },
+   {
+    "node": "lem-sc-finite-free-internal-hom-exact",
+    "why": "Finite-free internal Hom exactness on any ringed site, used through a finite-projective retraction."
+   },
+   {
+    "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "why": "Generic bounded-source Hom comparison on a ringed site; its explicit hypotheses yield the ordinary model, without invoking the proof of a duality theorem."
+   },
+   {
+    "node": "lem-kun-flat-bounded-tor-amplitude",
+    "why": "General bounded-flat Tor-amplitude bound applied to the already constructed local dual model, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor pullback comparison, specialized to exact slice restriction for the local vanishing test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-d9f32c39a",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-d9f32c39a (reviewer sub-agent of L); spot-checked: Read the item, all 10 cited node statements, the unit sk-prop-sf-biduality-general, the citer thm-weil-etale-geometric-biduality step 2 (applies the item with m=2r) and Stacks sites-cohomology tags 08JH/08JJ/08JB/08JC/08G1/07A4 (labels verified in tags/tags). The statement and stmt_deps are byte-identical to the side-DAG base, so nothing is weakened. Coefficients are ordinary constant-A sheaves on T_et throughout. The degree-q term Hom(E^{-q},A) and the differential (-1)^{q+1} phi d_E^{-q-1} agree with 08JH and with the sign in def-pur-derived-internal-hom. Small cases checked: one-term E in degree a gives [-a-m,-a-m]; E=0; m=0; empty T; disconnected U (the differentials become constant after refinement, so the cohomology is finite locally constant). Step 1: the hypotheses of lem-pc-bounded-exact-term-hom-quasi-iso hold (bounded source; termwise Hom exact via a retract of lem-sc-finite-free-internal-hom-exact), and restriction and shift come from lem-weil-pbc-ringed-internal-hom-exact-restriction. Steps 2 and 3 are genuinely elementary: the one-stratum {T} is constructible, and the cohomology is lisse with finite stalks. Step 4: lem-kun-flat-bounded-tor-amplitude applies on U (flat retract terms, -b-m<=-a-m), the tensor-pullback lemma handles the exact restriction, and the sheaf axiom gives global vanishing. proof_deps equals the union of uses; there is no cycle and no SGA. Duplicate search found nothing: the closest candidate, sk-thm-sf-hom-ctf, is limited to finite-type k-schemes and does not cover the parent's use over S/F. I accept all six generic tool_uses. No new nodes and no fixes."
  }
 }
