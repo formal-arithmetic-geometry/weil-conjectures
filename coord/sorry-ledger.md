@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1327**, closure **57**, holes in definitions **36**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1317**, closure **48**, holes in definitions **36**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -13,10 +13,10 @@ Definitions with holes (def/instance/structure field):
 - `Sheaf.CategoryTheory.ExactFunctorCouple::CategoryTheory.BigradedExactCouple.mapped` (def, line 45)
 - `Sheaf.CategoryTheory.FilteredHomologyExactCouple::CategoryTheory.filteredHomologyEIso` (def, line 35)
 - `Sheaf.CategoryTheory.FilteredHomologyExactCouple::CategoryTheory.filteredHomologyExactCouple` (def, line 28)
-- `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization::AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars` (instance, line 153)
+- `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization::AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars` (instance, line 174)
 - `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal::CategoryTheory.Functor.mapModCoreMonoidal` (def, line 231)
 - `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal::CategoryTheory.Mod.comapCoreMonoidal` (def, line 347)
-- `WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory::AlgebraicGeometry.ProEtale.isTriangulated_boundedConstructible` (instance, line 176)
+- `WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory::AlgebraicGeometry.ProEtale.isTriangulated_boundedConstructible` (instance, line 181)
 - `WeilConjectures.PoincareDuality.ProjectionFormula::AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleExceptionalProjectionMorphism` (instance, line 301)
 - `WeilConjectures.PoincareDuality.ProjectionFormula::AlgebraicGeometry.ProEtale.CondensedRing.isIso_openImmersionProjectionComparison` (instance, line 148)
 - `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek::AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` (instance, line 177)
@@ -77,22 +77,22 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1118 | 20 |
-| WeilConjectures | 209 | 37 |
+| Sheaf | 1111 | 13 |
+| WeilConjectures | 206 | 35 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1679 | 811 | 868 | 734 | 18 |
-| 660345513 (Application of proof-dependency imports) | library | 1675 | 809 | 866 | 680 | 18 |
-| 660345513 (Application of proof-dependency imports) | closure | 1434 | 56 | 1378 | 604 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 1679 | 801 | 878 | 734 | 18 |
+| 660345513 (Application of proof-dependency imports) | library | 1675 | 799 | 876 | 680 | 18 |
+| 660345513 (Application of proof-dependency imports) | closure | 1434 | 47 | 1387 | 604 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3774 |
+| proved | 3780 |
 | decomposed | 52 |
-| moved | 4044 |
+| moved | 4046 |
 | pruned | 134 |
 | other | 618 |
 
@@ -101,20 +101,20 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
-| A2 | 123 | 121 | 89 | 32 | 63/123 (51.2%) |
+| A2 | 124 | 122 | 91 | 31 | 64/124 (51.6%) |
 | A3 | 132 | 127 | 84 | 43 | 58/132 (43.9%) |
-| A4 | 78 | 83 | 52 | 31 | 39/78 (50.0%) |
-| B2 | 134 | 140 | 88 | 52 | 55/134 (41.0%) |
+| A4 | 79 | 85 | 52 | 33 | 39/79 (49.4%) |
+| B2 | 135 | 141 | 88 | 53 | 55/135 (40.7%) |
 | B3 | 151 | 159 | 91 | 68 | 63/151 (41.7%) |
 | B4 | 72 | 75 | 47 | 28 | 32/72 (44.4%) |
 | C1 | 148 | 151 | 110 | 41 | 74/148 (50.0%) |
 | C2 | 128 | 123 | 86 | 37 | 59/128 (46.1%) |
-| C3 | 120 | 125 | 80 | 45 | 56/120 (46.7%) |
-| C4 | 63 | 64 | 35 | 29 | 23/63 (36.5%) |
+| C3 | 121 | 127 | 82 | 45 | 57/121 (47.1%) |
+| C4 | 65 | 66 | 35 | 31 | 23/65 (35.4%) |
 | D2 | 146 | 145 | 91 | 54 | 63/146 (43.2%) |
 | D3 | 117 | 135 | 72 | 63 | 52/117 (44.4%) |
-| D4 | 73 | 70 | 47 | 23 | 28/73 (38.4%) |
-| E1 | 162 | 191 | 107 | 84 | 82/162 (50.6%) |
+| D4 | 74 | 71 | 47 | 24 | 28/74 (37.8%) |
+| E1 | 163 | 196 | 107 | 89 | 82/163 (50.3%) |
 | E2 | 128 | 123 | 85 | 38 | 60/128 (46.9%) |
 | E3 | 120 | 135 | 95 | 40 | 59/120 (49.2%) |
 | E4 | 54 | 61 | 27 | 34 | 19/54 (35.2%) |
@@ -210,22 +210,22 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.SmoothPurity.Defs | 0 | 1 | G1 |
 | WeilConjectures.PoincareDuality.Verdier | 1 | 1 | D2 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek | 1 | 3 | C1 |
-| WeilConjectures.PoincareDuality.ProjectionFormula | 2 | 5 | — |
+| WeilConjectures.PoincareDuality.ProjectionFormula | 2 | 5 | A4 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 3 | B4 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition | 2 | 2 | H2 |
 | WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory | 3 | 1 | C4 |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs | 3 | 2 | C3 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic | 3 | 7 | C2 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal | 3 | 5 | A3 |
+| Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono | 4 | 1 | — |
+| Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeSection | 4 | 1 | — |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence | 4 | 3 | — |
 | Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal | 5 | 1 | XR291a8355654e3127 |
-| Sheaf.Paper.CondensedQbarPullbackCube | 5 | 5 | E1 |
-| Sheaf.Paper.StrictHenselizationPointEvaluationPointed | 5 | 1 | D4 |
 | WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal | 5 | 2 | D3 |
-| Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 3 | A4 |
+| Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 1 | E3 |
 | Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine | 8 | 1 | B2 |
 | Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence | 10 | 1 | XRaf46747ed5a82c85 |
 | Sheaf.Paper.IntegralResidueTensorRouteModel | 11 | 1 | A2 |
+| Sheaf.Paper.IntegralResiduePullFlatModel | 13 | 1 | D4 |
 
 Modules pruned since the imports baseline:
 
