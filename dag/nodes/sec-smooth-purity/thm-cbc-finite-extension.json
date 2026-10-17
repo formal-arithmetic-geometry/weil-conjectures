@@ -20,7 +20,9 @@
   "def-weil-pbc-completed-pullback",
   "def-weil-pbc-projection-compactification",
   "prop-weil-pbc-rational-transport",
-  "def-cbc-completed-exchange-map"
+  "def-cbc-completed-exchange-map",
+  "thm-cbc-complete-proetale",
+  "lemma-weil-pbc-completed-exchange-coherence"
  ],
  "proof": [
   {
@@ -283,5 +285,48 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-fe47c004c (reviewer sub-agent of L); spot-checked: Read the full item, new lemma, route, cited statements, sources, and report. Verified all six proof steps, coefficient category, completed exchange morphism, domain hypotheses, compactification base change, Mathlib searches, duplicate checks, and edge cases. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteExtensionCompactSupportBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.finiteExtension_compactSupportBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcDerivedOpenShriek_additive",
+   "AlgebraicGeometry.Scheme.completedPull_additive",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportSource_additive",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportTarget_additive",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportSource",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportTarget",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportSourceLift",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportTargetLift",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportSourceLift_additive",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportTargetLift_additive",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportSourceLift_linear",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportTargetLift_linear",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportSourceTransport",
+   "AlgebraicGeometry.Scheme.cbcCompactSupportTargetTransport",
+   "AlgebraicGeometry.Scheme.finiteExtensionCompactSupportExchangeComponent",
+   "AlgebraicGeometry.Scheme.finiteExtension_compactSupportBaseChange",
+   "AlgebraicGeometry.Scheme.CbcFiniteExtensionDomain",
+   "AlgebraicGeometry.Scheme.finiteExtension_cbcComplete",
+   "AlgebraicGeometry.Scheme.finiteExtensionRationalArrow",
+   "AlgebraicGeometry.Scheme.finiteExtension_compactSupportBaseChange_identity",
+   "AlgebraicGeometry.Scheme.finiteExtension_compactSupportBaseChange_horizontal",
+   "AlgebraicGeometry.Scheme.finiteExtension_compactSupportBaseChange_vertical"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteExtensionCompactSupportBaseChange.lean",
+  "statement": "theorem finiteExtension_compactSupportBaseChange (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (c : Compactification f) (c' : Compactification f') (gbar : c'.Z ⟶ c.Z) (properSquare : ChosenCartesianSquare gbar c'.g c.g g) (openSquare : OpenImmersionSquare g' c'.i c.i gbar) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y'] (_dimX : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)) (_dimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) (_dimX' : ∃ n : ℕ, topologicalKrullDim X' ≤ (n : WithBot ℕ∞)) (_dimY' : ∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞)) (_hlX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hlY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (_hlX' : ∀ x' : X', IsUnit (l : X'.presheaf.stalk x')) (_hlY' : ∀ y' : Y', IsUnit (l : Y'.presheaf.stalk y')) : ∃ (hSource : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), PbcIsBoundedConstructibleComplete Y' (pbcPadicCoefficientDatum l E) ((cbcCompactSupportSource g c (pbcPadicCoefficientDatum l E)).obj K.obj)), ∃ (hTarget : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), PbcIsBoundedConstructibleComplete Y' (pbcPadicCoefficientDatum l E) ((cbcCompactSupportTarget g' c' (pbcPadicCoefficientDatum l E)).obj K.obj)), ∃ η : cbcCompactSupportSourceTransport l E g c (pbcPadicCoefficientDatum l E) hSource ≅ cbcCompactSupportTargetTransport l E g' c' (pbcPadicCoefficientDatum l E) hTarget, ∀ (K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E)) (r : ℕ) (a : Fin r → Padic.coefficientExtensionIntegers l E) (ha : Ideal.span (Set.range a) = (pbcPadicCoefficientDatum l E).ideal) (hComplete : cbcCompleteProperty (pbcPadicCoefficientDatum l E) X r a ha K.obj), η.hom.app ⟨K⟩ = finiteExtensionCompactSupportExchangeComponent l E c c' gbar properSquare openSquare r a ha hSource hTarget K hComplete",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The full statement is distributed across finiteExtension_compactSupportBaseChange (the specified scalar-localized exchange, invertibility, rational naturality and lattice independence), and its _identity, _horizontal and _vertical coherence theorems. All coherence equations use the published unit-normalized completed pullback and proper/open compact-support composition maps. Helpers only restrict the existing functors and rationalize their actual arrows. No coefficient category or completion notion is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6436dd09f",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Node diff vs side: only lean + stmt_deps (two added deps thm-cbc-complete-proetale and lemma-weil-pbc-completed-exchange-coherence, both landed, upstream and used for cbcExchange/cbcTowerCompositionMap/completedPullId/completedPullComp); statement/proof unchanged. lean.statement verbatim in file; all 22 declarations present. Hypotheses match the node: prime l, finite E/Q_l via landed pbcPadicCoefficientDatum (E : Type (u+1) inherited, not a new restriction), compactification plus Cartesian proper/open squares, f separated + LocallyOfFiniteType + QuasiCompact, four noetherian/finite-dim/l-invertible schemes, nothing on g. Conclusion: exists natural iso between ScalarLocalization.transport functors with every component = pbcRationalization of completedCompactSupportExchange (tuple-independent because the exchange is unique for a tuple-free equation; finiteExtension_cbcComplete makes the completeness binder vacuous); naturality gives lattice independence. identity/horizontal/vertical mirror the landed completeCompactSupportProetale_* arrow for arrow, localized, with domain conditions on every corner. No hollow defs, only sorry proofs, docstrings carry source/blueprint, no pro-etale substitute. nt_compile.py --json against the local side overlay: module 6.2 s, exit 0, no errors or warnings. Report has real Worker report and Second reading by Q06 sections."
  }
 }
