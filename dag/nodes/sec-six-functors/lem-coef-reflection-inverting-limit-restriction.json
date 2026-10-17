@@ -264,5 +264,24 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-82d23b2de (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the full statements of all 7 cited nodes, the unit sk-prop-sf-biduality-general, the callers in parent lem-coef-generalized-cartesian-product-cones Steps 4 and 8, and paragraph 2 of the blueprint ancestor prop-coef-integral-exceptional-adjoint.proof.md (main-20261015). The item is an agent lemma, correctly marked by=agent; it is not a target node and cites no SGA. The statement is true: L is a left adjoint, hence initial, and Gamma ≃ Gamma iota L. The inversion hypothesis is needed, as the counterexample J=C={0<1}, A={1} shows. I tested a terminal-object J, a span J (where the hypothesis correctly fails), empty J and empty A. Step 1 matches the local-adjoint criterion exactly through fullness. Step 2's pi0 comparison is valid: Gamma eta_j and epsilon_a are equivalences. Step 3's filler is a valid pushout-product of Lambda^2_1 with the empty set inside J×P_A against C→Δ^0, and it lands in the strict cone pullback. In Steps 4 and 5 I checked both naturality squares (η: αλ≃(λι)L; ε: Γιε∘μLι≃μ) and the identity Γιε≃βι from the first triangle; the coherence is handled on universal families with inner-horn fillings. Step 6 transfers terminality correctly. There are no new nodes, and my rg search found no duplicate: the ordinary-category analogues and the nerve-only right-adjoint-reindexing node do not cover a coherent comma quasicategory. I accept the tool_uses of lem-cbc-enhanced-functor-cone-calculus, lem-cbc-simplicial-composition-spine and lem-cbc-invertible-prism-extension; they are generic sk-prop-sf-cbc tools already accepted on sibling nodes of this unit. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ReflectionInvertingLimitRestriction",
+  "declaration": "SSet.Enhanced.reflection_inverting_limit_restriction",
+  "file": "lean/Sheaf/CategoryTheory/ReflectionInvertingLimitRestriction.lean",
+  "statement": "theorem reflection_inverting_limit_restriction (J C : SSet.{u}) [Quasicategory J] [Quasicategory C] (P : J _⦋0⦌ → Prop) (Γ : J ⟶ C) (a : ∀ j : J _⦋0⦌, (fullSubcomplex J P).toSSet _⦋0⦌) (ua : ∀ j : J _⦋0⦌, (mappingSpace J j ((fullSubcomplex J P).ι.app _ (a j))) _⦋0⦌) (hΓ : ∀ j : J _⦋0⦌, IsEquivalenceEdge C (Γ.app _ (ua j).1)) (hpre : ∀ (j : J _⦋0⦌) (b : (fullSubcomplex J P).toSSet _⦋0⦌), IsWeakHomotopyEquivalence (lift (𝟙 (mappingSpace J ((fullSubcomplex J P).ι.app _ (a j)) ((fullSubcomplex J P).ι.app _ b))) (SSet.const (X := mappingSpace J ((fullSubcomplex J P).ι.app _ (a j)) ((fullSubcomplex J P).ι.app _ b)) (ua j)) ≫ (Classical.choose (Classical.choose_spec (mapping_composition J)).2) j ((fullSubcomplex J P).ι.app _ (a j)) ((fullSubcomplex J P).ι.app _ b))) (R : coneCategory Γ ⟶ coneCategory ((fullSubcomplex J P).ι ≫ Γ)) (hR : ∀ (n : SimplexCategoryᵒᵖ) (z : (coneCategory Γ).obj n), (R.app n z).1.1 = z.1.1 ∧ (R.app n z).1.2 = ((ihom Δ[1]).map ((MonoidalClosed.pre (fullSubcomplex J P).ι).app C)).app n z.1.2) : IsFunctorEquivalence R ∧ (∀ (cone : (coneCategory Γ) _⦋0⦌), IsLimiting Γ cone ↔ IsLimiting ((fullSubcomplex J P).ι ≫ Γ) (R.app _ cone)) ∧ ((∃ cone : (coneCategory Γ) _⦋0⦌, IsLimiting Γ cone) ↔ ∃ μ : (coneCategory ((fullSubcomplex J P).ι ≫ Γ)) _⦋0⦌, IsLimiting ((fullSubcomplex J P).ι ≫ Γ) μ)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-0c8d5527f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c8d5527f",
+  "group": "Q02",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: full subcomplex, reflection edges ua, hΓ (Γ(u_j) equivalence), hpre (precomposition with u_j via the canonical mapping_composition, same idiom as landed InfinityLocalAdjointCriterion), R pinned to the actual restriction in every degree; conclusions IsFunctorEquivalence R, limiting iff restriction limiting, limit exists iff on A. No extra assumptions; shared universe is forced by the dependency; empty J, empty A and identity-reflection cases are fine. Item node changed only in lean; dependency copies identical to the side clone; statement verbatim; no definitions, only sorry; no Mathlib or project duplicate. nt_compile --json clean (rc 0, no messages) for both the snapshot and the fixed module. One finding, H8: the theorem docstring lacked the node's six-step proof; fixes/ReflectionInvertingLimitRestriction.lean is the complete replacement, docstring only, signature unchanged."
  }
 }

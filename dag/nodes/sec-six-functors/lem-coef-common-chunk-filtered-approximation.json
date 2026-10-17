@@ -299,5 +299,36 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-ccb598aaa (reviewer sub-agent of L); spot-checked: I read the full item, all 14 steps, the new node and every cited node's statement. The source is HTT, read in a local PDF copy, at A.3.4.1, A.3.4.9, A.3.4.15 with its proof (pp. 890-891), A.3.6.18 with its proof (p. 905), A.2.8.2 with its proof (pp. 830-832) and A.2.8.3. The item statement is unchanged and matches HTT. The steps are correct. Steps 1-5: fixed-shape closure, using the sCat finite-limit sketch, filtered preservation of Dwyer--Kan equivalences, the replacement R_D=E^f(H->1), commutation of kappa-small limits with filtered colimits, and the injective-model criterion verbatim. Steps 6-10: the A.3.4.15 closure, where the tensor hypothesis follows from the SM7 Map-form applied to the cofibration from the empty set to K, and P is U'-small and mu-filtered. Steps 11-14: the localization is the pushout of a Reedy-cofibrant span (direct Reedy, so fibrations are objectwise); it commutes with mu-filtered colimits, and restriction is natural. I tested the empty K_0, the empty I_a, the unit index and the case cl(empty)=empty. There is no cycle: no dependency closure reaches the item, unmarked straightening or coherent-nerve comparison. The route stays in the same unit apart from three Mathlib leaves, so no tool_uses are needed. The new node lem-coef-scat-diagram-factorization-uniform-bound is self-contained, statement-only and true. For D={*} the small-object argument with countable generators commutes with universe inclusion; for general D the universe-invariant kappa is asserted in the proof of HTT A.3.6.18. It is not a clause restatement and has no duplicate. lem-coef-simplicial-small-chunks overlaps steps 6-8, but citing it would close a cycle through lem-coef-coherent-nerve-comparison, so not citing it is justified. Two form repairs on the new node are in fixes/: I added the missing lean_audit (state none, and no slopmaster2 declaration exists), and I replaced the boilerplate verdicts on the four 0-hit searches with 'no match: the search returned 0 hits'. The item itself is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CommonChunkFilteredApproximation",
+  "declaration": "CategoryTheory.CommonChunkApproximation.common_chunk_filtered_approximation",
+  "declarations": [
+   "CategoryTheory.CommonChunkApproximation.subpair",
+   "CategoryTheory.CommonChunkApproximation.inclusion",
+   "CategoryTheory.CommonChunkApproximation.diagramPair",
+   "CategoryTheory.CommonChunkApproximation.diagramInclusion",
+   "CategoryTheory.CommonChunkApproximation.HomotopyLimitClosure",
+   "CategoryTheory.CommonChunkApproximation.localizedAugmentation",
+   "CategoryTheory.CommonChunkApproximation.LocalizedDiagram",
+   "CategoryTheory.CommonChunkApproximation.RestrictionNaturality",
+   "CategoryTheory.CommonChunkApproximation.Approximation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CommonChunkFilteredApproximation.lean",
+  "statement": "theorem common_chunk_filtered_approximation (K : Type u) [PartialOrder K] : ∃ (κ : Cardinal.{u}) (_ : Fact κ.IsRegular), (∀ B : BergnerModelData.{u}, HomotopyLimitClosure.{u, u} K κ B) ∧ (∀ B : BergnerModelData.{max u w}, HomotopyLimitClosure.{u, w} K κ B) ∧ (∀ (B₀ : BergnerModelData.{u}) (B : BergnerModelData.{max u w}), Approximation.{u, w} κ B₀ B)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the existing SimplicialChunk and IsIChunk definitions through their source module Sheaf.CategoryTheory.SimplicialSmallChunks. The theorem node lem-coef-simplicial-small-chunks is not added to stmt_deps: this item defines the chunk and I-chunk notions inline in its own statement, stage 2 lets stmt_deps change only by new definition nodes, and that node's existence theorem is not used as an assumption. Only its definition interface realizes those inline notions (one definition per notion). On the delivery base the DAG has no path from lem-coef-simplicial-small-chunks to this item, so the import creates no cycle. Helpers fix actual full relative subcategories, the inclusion-induced colimit map, and actual restriction naturality. No independent new notion or postponed helper theorem.",
+  "fixed_by": "NT-stage2-cc-80105427d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80105427d",
+  "group": "Q07",
+  "result": "fix",
+  "note": "Read the node, both statement deps, SimplicialSmallChunks and the module; matched every clause: universes u/max u w, combinatorial+SM7+tensor hypotheses, Bergner-cofibrant I_a, SimplicialChunk/IsIChunk = inline chunk notions incl. n=0, one regular κ chosen first, μ-filtered U'-small poset ordered by inclusion with small carriers covering M, LocalizedDiagram fixed to full fibrant U-valued subpairs with the inclusion-induced DK comparison for every LocalizationSystem, RestrictionNaturality with actual precomposition, HomotopyLimitClosure with IsDerivedLimit in u and max u w. Poset indexing is equivalent via Mathlib IsCardinalFiltered.exists_cardinal_directed. Edge cases empty A/I_a/K/n=0 and μ=κ=ℵ0 covered. No hollow definitions, single sorry, docstrings and both report sections present, lean.statement verbatim. nt_compile clean, rc 0. Fix: lean.note and report claimed citing lem-coef-simplicial-small-chunks closes a cycle, but there is no path on 80105427dffe or the current DAG; supplied a corrected note in the lean-record JSON and the report with an appended correction. Lean unchanged."
  }
 }
