@@ -260,5 +260,37 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-2763de354 (reviewer sub-agent of L); spot-checked: Read the item in full: 5 steps, no new nodes. Also read unit sk-prop-scalar-six and its route closure, the statement of every cited node, and the source det-prop-scalar-six-direct-image.proof.md (main-20261015), finite-rings paragraph; the item makes precise that paragraph's step 'nu^* transports the etale comparison'. Statement checks: both sides of the equation have the same source and target; it is tested on f=id, a=id, B=0, J=0, Z/4->Z/2 with J=A[0], and J=Z/2 (excluded). beta is the comparison of sk-thm-pe-direct-image-comparison: arbitrary discrete Lambda, qcqs, D^+; its proof step 3 defines beta as the mate of the inverse-image square, and step 6 gives the counit equation used in Step 1. Coefficient category: ordinary uncompleted constant-ring module derived categories, correctly taken without finiteness (the finite-ring-only references were removed). The hypothesis T_X J in D^+ is not needed, since beta^B is never inverted; it is harmless and no target is weakened. Steps checked term by term: Step 2's (*) is coherence of compositors and the 2-iso for the nu/f/(id,A->B) cube via lem-sfb-ringed-derived-monoidal-comparisons; it is the thinnest step but acceptable (underived on flat K-flat representatives, no flatness or boundedness needed). Steps 3-5 compute the transposes U^flat and V^flat with naturality of c^p, delta and d_B and the transpose formula of def-weil-pbc-adjunction-mate; they agree, so U=V, then precompose with T(beta_A^{-1}). No cycle. No duplicate: lem-sp-direct-image-etale-mate-isomorphism, lem-sp-proper-open-coefficient-mate, lem-pur-finite-ring-site-tensor-transpose and lem-weil-pbc-comparison-direct-image-canonical-mate are all finite-ring or proper special settings. Accepted tool_uses: lem-weil-pbc-ringed-topoi-derived-tensor-pullback and lem-sfb-ringed-derived-monoidal-comparisons; sk-thm-pe-direct-image-comparison and lem-pur-derived-change-of-rings are on-route anyway. No SGA. FIX: added def-weil-pbc-constant-sheaf to the statement citation for the constant ring sheaves and to stmt_deps, because no cited node defined the pro-etale constant ring sheaf. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-etale-proetale-scalar-mate.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleProEtaleScalarMate",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleProEtale_scalar_mate",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarPullbackReverseProEtale",
+   "AlgebraicGeometry.ProEtale.scalarPullbackReverseEtale",
+   "AlgebraicGeometry.ProEtale.scalarPullbackReverse_isIso",
+   "AlgebraicGeometry.ProEtale.scalarPullbackProEtaleIso",
+   "AlgebraicGeometry.ProEtale.scalarPullbackEtaleIso",
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbientPullbackIso",
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbient",
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbient_isIso",
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbientIso",
+   "AlgebraicGeometry.ProEtale.etaleProEtale_scalar_mate"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleProEtaleScalarMate.lean",
+  "statement": "theorem etaleProEtale_scalar_mate {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (J : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (hJ : ∃ n : ℤ, J.IsGE n) (_hBJ : ∃ n : ℤ, ((pbcFixedScalarExtension X.smallEtaleTopology a).obj J).IsGE n) : (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f) (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f) (TwoSquare.mk _ _ _ _ (scalarPullbackProEtaleIso a f).hom)).natTrans.app ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj J) ≫ R(lowerStar (ModuleCat.{u + 1} B) f).map ((pbcComparisonReduction X a).hom.app J) = (pbcFixedScalarExtension (Scheme.ProEt.topology Y) a).map (directImageComparisonAmbientIso A f J hJ).inv ≫ (pbcComparisonReduction Y a).hom.app (R(Etale.lowerStar (ModuleCat.{u + 1} A) f).obj J) ≫ (comparisonUpperStar (ModuleCat.{u + 1} B) Y).mapDerivedCategory.map ((mateEquiv (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f) (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f) (TwoSquare.mk _ _ _ _ (scalarPullbackEtaleIso a f).hom)).natTrans.app J) ≫ (directImageComparisonAmbient B f).app ((pbcFixedScalarExtension X.smallEtaleTopology a).obj J)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Item-local helpers (brief: helpers in the owning node's module). delta = published pbcComparisonReduction (def-weil-pbc-witness-compatibility), fixed-ring presentation Sheaf _ (ModuleCat.{u+1} R) on both sites. beta = directImageComparisonAmbient, the mate of the exact inverse-image square on the ambient derived categories with nu^* = mapDerivedCategory; the recorded directImageComparison of sk-thm-pe-direct-image-comparison is stated on D+ (R+, ULift of a Type u ring) and cannot type the ambient composite; its invertibility on bounded-below inputs is the postponed directImageComparisonAmbient_isIso. The etale c (scalarPullbackEtaleIso) is the same canonical comparison as the published Etale.scalarPullbackIso / Etale.scalarMate (lem-pur-etale-scalar-mate-projection); that module clashes on import with ProEtale.Derived.RestrictScalars (duplicate AlgebraicGeometry.ProEtale.upperStarIsoLowerStarInv, checked with nt_compile.py 2026-10-18), so the item uses the mate form; identifying the two is a Lean-level stage-3 bridge, not a DAG prerequisite.",
+  "fixed_by": "NT-stage2-cc-fefeb1c0a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fefeb1c0a",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Read node, 13 stmt_dep records, parent det-prop-scalar-six-direct-image, module, report and the exact upstream declarations. Every clause matches: qcqs f, A,B:Type(u+1) CommRing, J in D+ with T_X J in D+, delta=pbcComparisonReduction (published canonical mate, direction checked), beta=mate of the exact inverse-image square inverted only under hJ, gamma^t=mateEquiv over the canonical scalar/pullback iso (inverse of the restriction-square mate, invertibility a postponed named theorem); composition order and endpoints equal the node's display. No hollow defs, 3 theorem sorries, docstrings carry source/blueprint and the proof steps, no line over 100 chars, statement verbatim, only the lean record added. nt_compile clean (23.4 s, 28.0 s). H4 finding: scalarPullbackEtaleIso and the etale mate duplicate published Etale.scalarPullbackIso/Etale.scalarMate (lem-pur-etale-scalar-mate-projection, used by the parent). Switching to them fails: PurEtaleScalarMateProjection clashes on import with ProEtale.Derived.RestrictScalars (duplicate upperStarIsoLowerStarInv; verified with import-pair tests), so the local helper is forced. Identifying the two forms is a stage-3 Lean step, not a DAG gap. Ambient beta helper accepted: the recorded directImageComparison is D+/ULift only. FIX is documentation only: docstring at scalarPullbackEtaleIso plus lean.note; fixed module compiles clean (29.6 s), statement byte-identical."
  }
 }

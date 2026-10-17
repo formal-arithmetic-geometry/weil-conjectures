@@ -193,10 +193,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-afbf94ba4",
-  "group": "Q20",
+  "reviewer": "NT-stage2-cc-417401b74",
+  "group": "NA",
   "result": "pass",
-  "note": "The Lean statement IsHProjective.comp (g ≫ h) under [IsHProjective g] [IsHProjective h], over {X Y S : Scheme.{u}}, matches the node and Stacks 01WE clause by clause with no extra hypotheses. It uses the canonical WeilConjectures IsHProjective class of def-kun-projective, which I read in the side clone. The node diff adds only the lean record, and lean.statement equals the file signature verbatim. Greps of the side clone, slopmaster2 and Mathlib find no existing composition theorem. Edge cases (n=0, m=0, empty coordinate type, empty schemes, arbitrary bases, single universe u) are covered. Docstrings give the source place and blueprint tag and follow the four proof steps. The only proof is sorry and there are no definitions. Proof imports match proof_deps. The report has both required sections. The per-file nt_compile.py --json compile of the snapshot file was clean in 1.7 s, and a failing control file confirmed that errors are reported. No fixes."
+  "note": "The delivery re-records the already-landed IsHProjective.comp: it adds one docstring sentence and changes lean.by/date from Q20 to NA (allowed field), plus a report with real Worker report and Second reading by NA sections. The signature matches the node and Stacks 01WE (morphisms.tex, lemma-H-projective-composition) clause by clause: arbitrary schemes in one universe u, two IsHProjective instance hypotheses, conclusion IsHProjective (g ≫ h) = h∘g, no extra assumptions. It uses the canonical IsHProjective class (Finite n : Type u, closed immersion into ℙ(n;S) over S), which matches def-kun-projective. Edge cases n=0, m=0, empty coordinate type, empty schemes and arbitrary bases are fine. No duplicate declaration exists. No definitions and sorry-only proof. Docstrings give the source place, blueprint tag and the four proof steps, and the named declarations exist (isPullback_map upstream, isClosedImmersion_segre, exists_isClosedImmersion_pi). lean.statement is verbatim. nt_compile.py --json is clean (4.2 s, exit 0), and a control with h ≫ g errors as expected. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition",
@@ -204,8 +204,8 @@
   "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/HProjectiveComposition.lean",
   "statement": "theorem IsHProjective.comp {X Y S : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ S) [IsHProjective g] [IsHProjective h] : IsHProjective (g ≫ h)",
   "branch": "newtargets-dag",
-  "by": "Q20",
-  "date": "2026-10-17",
+  "by": "NA",
+  "date": "2026-10-18",
   "existing": false
  }
 }

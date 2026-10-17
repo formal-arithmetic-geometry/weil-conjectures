@@ -29,7 +29,12 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category",
-  "lem-coef-complete-segal-quasicategory-comparison"
+  "lem-coef-complete-segal-quasicategory-comparison",
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-homotopy-segal-space",
+  "lem-coef-segal-inverse-evaluation",
+  "lem-coef-segal-equivalence-classifier",
+  "lem-cbc-grothendieck-presheaf-coherent-straightening"
  ],
  "proof": [
   {
@@ -198,5 +203,32 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-4024b51f2 (reviewer sub-agent of L); spot-checked: Read everything in full: AGENTS, stages/1-dag, brief-stage1, GOAL, dag-sync, delivery-errors A-F, packet and report, the item, the full statements of the cited nodes lem-coef-complete-segal-quasicategory-comparison, lem-coef-spaces-kappa-limit-filtered-colimit (HTT 5.3.3.3), def-cbc-enhanced-diagrams-cones and def-coef-presentable-infinity-category, the citer lem-coef-cat-infinity-filtered-finite-calculus step 2, and the unit sk-prop-sf-biduality-general. The delivery adds no new nodes and leaves the statement unchanged. Both cited nodes are in the same unit, so there are no tool_uses, and there is no SGA and no cycle. The statement is true. Its hypothesis that the colimit is Segal follows anyway from finite-limit exactness, is harmless, and the citer checks it. Small cases checked: empty diagram, N->N nerves, BN->BZ->BZ with invertibility appearing late, and a group mapping to the trivial group. Step 1: a simplicial map preserves invertibility, by the comparison node's conventions. Step 2: I recomputed the witness space V=T x_H U. The triangles over (x,y,x) and (y,x,y) have correctly ordered edges. The pullback over U is fibrewise, so V records homotopies with fixed endpoints in Map(x,x) and Map(y,y). Its image is exactly Y_eq, and V is a finite limit of Y0, Y1, Y2. Step 3: HTT 5.3.3.3 at aleph_0 gives colim V(X_i) = V(X). pi_0 commutes with colimits, so every component of X_eq is hit from some stage. Step 4: exactness for the cospan gives the diagonal equivalence A -> A x_B A. The fibre argument then shows A -> X_1 is a monomorphism, an inclusion of whole components. Step 5: A equals X_eq over X_1, by the canonical map. No duplicate of this statement exists in the DAG. The Rezk source is online-only and only gives conventions; the proof is marked as agent-written and the WANTED line is recorded. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SegalEquivalenceSubspaceFiltered",
+  "declaration": "SSet.SegalEquivalenceFiltered.segal_equivalence_subspace_filtered",
+  "declarations": [
+   "SSet.SegalEquivalenceFiltered.Presheaves",
+   "SSet.SegalEquivalenceFiltered.IsSegalObject",
+   "SSet.SegalEquivalenceFiltered.walkingIsoObject",
+   "SSet.SegalEquivalenceFiltered.degreeEvaluation",
+   "SSet.SegalEquivalenceFiltered.equivalenceSpaces",
+   "SSet.SegalEquivalenceFiltered.segal_equivalence_subspace_filtered"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SegalEquivalenceSubspaceFiltered.lean",
+  "statement": "theorem segal_equivalence_subspace_filtered (q : largeNerve.{u + 1, u, 0} SSet.{u} ⟶ CategoryTheory.Spaces.infinityCategory.{u}) (_hq : IsLocalization (fun _ _ f ↦ Enhanced.IsWeakHomotopyEquivalence f) q) (I : SSet.{u + 2}) [Quasicategory I] (_hsmall : Presentability.IsSmall.{u, u + 2} I) (_hfiltered : Presentability.IsKappaFiltered Cardinal.aleph0.{u} I) (F : I ⟶ SSet.uliftFunctor.{u + 2, u + 1}.obj Presheaves.{u}) (c : (Enhanced.coconeCategory F) _⦋0⦌) (_hstage : ∀ i : I _⦋0⦌, IsSegalObject q (F.app _ i).down) (_hapex : IsSegalObject q c.1.1.down) (_hpointwise : ∀ n : ℕ, Enhanced.IsColimiting (F ≫ SSet.uliftFunctor.{u + 2, u + 1}.map (degreeEvaluation n)) (CategoryTheory.Spaces.mappedCocone (SSet.uliftFunctor.{u + 2, u + 1}.map (degreeEvaluation n)) F c)) : Enhanced.IsColimiting (F ≫ equivalenceSpaces q) (CategoryTheory.Spaces.mappedCocone (equivalenceSpaces q) F c)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Universal-property statement of the canonical equivalence-edge comparison, using the existing walking-isomorphism classifier Map(dE,X) ≃ X_eq naturally over X_1. The existing presheafSSet is specialized by an abbreviation; IsSegalObject only expresses its equivalence-saturated existing homotopy-Segal predicate. The coherent equivalence-space functor is the recorded corepresented functor. The conclusion fixes the entire induced cocone, hence the canonical comparison. No completeness or ordinary-index restriction. The ambient u+2 lift permits the corepresented mapping-space functor without restricting small spaces or the u-small filtered quasicategory. All additional statement dependencies are already recorded declarations; no dependency is restated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11072761f",
+  "group": "NA",
+  "result": "pass",
+  "note": "Clause-by-clause match: X_eq is modelled canonically as Map(dE,-) via the landed classifier and inverse-evaluation nodes (Rezk Thm 6.2, no completeness needed); IsSegalObject is a saturated levelwise-Kan Segal representative with no Reedy fibrancy or completeness; filtered, small I with nonemptiness only from filteredness; pointwise colimit in every degree n plus Segal apex; conclusion is that the image cocone is colimiting, equivalent to colim (X_i)_eq -> X_eq being an equivalence. The u+1 target universe is equivalent because the inclusion of spaces preserves u-small colimits, and no universe equality is imposed. The localization map q exists in the recorded framework, so the statement is not vacuous. Node file changed only in lean and stmt_deps; the 5 added stmt_deps are landed and create no cycle; lean.statement is verbatim; no hollow definitions; sorry only in the theorem; docstrings and imports follow the brief. nt_compile --json of the snapshot module: rc 0, no errors or warnings (3.6 s). Minor, not blocking: no Main definitions list in the module docstring."
  }
 }

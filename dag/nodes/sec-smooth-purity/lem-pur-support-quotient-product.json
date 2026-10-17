@@ -27,7 +27,10 @@
   "def-kun-derived-tensor",
   "def-weil-derived-tensor",
   "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-support-quotient-flat",
+  "def-pur-supported-exterior-product",
+  "def-pur-proetale-supported-exterior-product"
  ],
  "proof": [
   {
@@ -368,5 +371,35 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-35c8a4cfa (reviewer sub-agent of L); spot-checked: I read the item in full (statement and all 8 steps), the statement of every cited node, the blueprint lem-pur-kunneth-supported (main-20261015) proof, and the siblings: quotient-flat, supported-product-quotient-model, etale-closed-constant-tensor and the parent support-site-comparison. The statement is true; I tested it on the point, Z=∅, full supports, A=0 and nonreduced supports. It is not a duplicate and does not restate a parent clause. Batch-5 check: lem-pod-etale-stalk-tensor-scalar is Stacks 008B/007K/03EL, the stalk of a sheaf tensor product. It was created for the lisse-sheaf/Galois dictionary and is not a step of Poincaré duality or the trace formula, and neither assumption states it. Its 65-node closure contains no sec-poincare-duality node besides itself, no sec-trace-formula node and no nt-assume leaf. In the item's whole 634-node closure it is the only node from either chapter. I kept the citation. Two repairs (C1/C4): (1) step 1 asserted that finite type over k gives Noetherian and hence quasi-compact complements, that P has finite type, and that S→P is a closed immersion, all without nodes. I now cite lem-sfb-finite-type-composition-base-change, lem-weil-pbc-closed-immersion-products, lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-noetherian-open-subscheme-noetherian and def-weil-finite-type-morphism. (2) Steps 4–5 applied the Λ-tensor stalk lemma to the tensor over A_P. I added lem-weil-pbc-constant-module-locally-constant with the balancing argument, the one the merged sibling lem-pur-etale-closed-constant-tensor uses. proof_deps is recomputed and two tool_uses are added. The other steps check out: the K-flat argument, zero detection via image plus conservativity, uniqueness via the epic generator map, pro-etale transport without pro-etale stalk conservativity, K-flat derived descent, and naturality. Not changed: the stmt_deps still lists two lemmas the statement text does not use (harmless), and the unit is sk-prop-a1-kummer while the ancestry runs through sk-prop-an (maintainer metadata, as the report notes).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportQuotientProduct",
+  "declaration": "AlgebraicGeometry.Scheme.supportQuotient_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportQuotientProduct.lean",
+  "statement": "theorem supportQuotient_product (A : Type u) [CommRing A] [Finite A] (k : Type u) [Field k] [IsAlgClosed k] {X Y Z W : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] : (∃! e : etaleSupportQuotientPullback A i (pullback.fst f g) ⊗ etaleSupportQuotientPullback A j (pullback.snd f g) ≅ etaleSupportQuotient A (Etale.supportedProductImmersion f g i j), etaleSupportQuotientProductGenerator A f g i j ≫ e.hom = etaleSupportQuotientMap A (Etale.supportedProductImmersion f g i j) ∧ IsIso (etaleSupportQuotientDerivedComparison (ULift.{u + 1, u} A) (pullback f g) (etaleSupportQuotientPullback A i (pullback.fst f g)) (etaleSupportQuotientPullback A j (pullback.snd f g))) ∧ etaleSupportQuotientProductNatural A (pullback f g) (etaleSupportQuotientProductGenerator A f g i j) (etaleSupportQuotientMap A (Etale.supportedProductImmersion f g i j)) e.hom) ∧ (∃! e : proEtaleSupportQuotientPullback A i (pullback.fst f g) ⊗ proEtaleSupportQuotientPullback A j (pullback.snd f g) ≅ proEtaleSupportQuotient A (Etale.supportedProductImmersion f g i j), proEtaleSupportQuotientProductGenerator A f g i j ≫ e.hom = proEtaleSupportQuotientMap A (Etale.supportedProductImmersion f g i j) ∧ IsIso (proEtaleSupportQuotientDerivedComparison (ULift.{u + 1, u} A) (pullback f g) (proEtaleSupportQuotientPullback A i (pullback.fst f g)) (proEtaleSupportQuotientPullback A j (pullback.snd f g))) ∧ proEtaleSupportQuotientProductNatural A (pullback f g) (proEtaleSupportQuotientProductGenerator A f g i j) (proEtaleSupportQuotientMap A (Etale.supportedProductImmersion f g i j)) e.hom)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleSupportQuotientPullback",
+   "AlgebraicGeometry.Scheme.etaleSupportQuotientProductGenerator",
+   "AlgebraicGeometry.Scheme.etaleSupportQuotientDerivedComparison",
+   "AlgebraicGeometry.Scheme.etaleSupportQuotientProductNatural",
+   "AlgebraicGeometry.Scheme.proEtaleSupportQuotientPullback",
+   "AlgebraicGeometry.Scheme.proEtaleSupportQuotientProductGenerator",
+   "AlgebraicGeometry.Scheme.proEtaleSupportQuotientDerivedComparison",
+   "AlgebraicGeometry.Scheme.proEtaleSupportQuotientProductNatural",
+   "AlgebraicGeometry.Scheme.supportQuotient_product"
+  ],
+  "note": "The quotient objects and quotient maps are the published lem-pur-support-quotient-flat declarations. The helper definitions construct their pullbacks, tensor generators, canonical derived map and generator-tested naturality squares with real data. The coefficient ring A is independent of the algebraically closed base field k."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d281f253",
+  "group": "NS",
+  "result": "pass",
+  "note": "Clause-by-clause match: finite CommRing A separate from the algebraically closed k; X, Y separated and finite type (IsSeparated + LocallyOfFiniteType + QuasiCompact); closed immersions i, j; P = pullback f g with fst/snd; S -> P is the recorded supportedProductImmersion. The quotients are the recorded cokernels from lem-pur-support-quotient-flat. The ∃! iso's generator equation (constant 1 -> 1⊗1 -> quotient classes) is exactly ā⊗b̄ ↦ ab̄, and uniqueness holds because the generator is epic (constantExteriorTensor is an iso, upperStar is a left adjoint, the tensor is right exact). The derived clause is IsIso of the lax-monoidal localization μ for the recorded derivedTensor on F[0], G[0], true by flatness/K-flatness. The generator-tested naturality predicate follows from the generator equation and epicness, so it is true and covers the squares from maps of pairs. Edge cases A=0, empty/full supports, empty schemes, non-reduced supports, any characteristic: ok. Universes are the same as the dependency, with no extra restriction. Node changed only in lean and stmt_deps; the three added stmt_deps are landed nodes with lean records and create no cycle. Statement verbatim, no duplicate declaration, no hollow defs, sorry only in the theorem, docstrings with source and blueprint tags, lines <= 100, Worker report and Second reading sections present. nt_compile.py --json on the snapshot module: rc=0, no errors or warnings, 13.2 s / 15.8 s. Observations only: the pro-étale upperStar/derivedTensor are the upstream functors also used by the landed pro-étale exterior-product node; the proof docstring condenses the node's 8 steps into 4."
  }
 }

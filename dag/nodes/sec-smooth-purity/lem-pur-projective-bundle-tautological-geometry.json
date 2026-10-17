@@ -21,7 +21,8 @@
   "def-weil-pbc-proj-twisting-sheaf",
   "def-pc-module-pullback",
   "def-pc-fibre-product",
-  "def-pc-divisor-line-bundle"
+  "def-pc-divisor-line-bundle",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -485,5 +486,48 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-e4263df80 (reviewer sub-agent of L); spot-checked: Read all 14 steps, all 30 cited dependency statements, sources and unit/chapter route. Verified positive twist, arbitrary non-flat base-change maps, Cartier transitions, reduced intersections and rank-one/empty-base cases. No cycles, duplicate new nodes or repairs needed. Accepted generic tool uses and concrete checks are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry",
+  "declaration": "AlgebraicGeometry.exists_projectiveBundleTautologicalGeometry",
+  "declarations": [
+   "AlgebraicGeometry.projectiveBundleTensorPullbackIso",
+   "AlgebraicGeometry.projectiveBundlePullbackId",
+   "AlgebraicGeometry.projectiveBundlePullbackComp",
+   "AlgebraicGeometry.projectiveBundlePullbackCongr",
+   "AlgebraicGeometry.projectiveBundlePullbackAdjunction",
+   "AlgebraicGeometry.projectiveBundlePullbackUnitIso",
+   "AlgebraicGeometry.projectiveBundlePullbackSection",
+   "AlgebraicGeometry.Scheme.symmetricDegree",
+   "AlgebraicGeometry.Scheme.ModuleFrame",
+   "AlgebraicGeometry.Scheme.SymmetricGradedAlgebraData",
+   "AlgebraicGeometry.tautologicalTransport",
+   "AlgebraicGeometry.TautologicalTwistData",
+   "AlgebraicGeometry.ProjectiveBundleRealization",
+   "AlgebraicGeometry.projectiveBundleFrameSection",
+   "AlgebraicGeometry.ProjectiveBundleFrameChart",
+   "AlgebraicGeometry.projectiveBundleThetaQuotientLaw",
+   "AlgebraicGeometry.ProjectiveBundleBaseChangeDatum",
+   "AlgebraicGeometry.ProjectiveBundleCoordinateGeometry",
+   "AlgebraicGeometry.projectiveBundleRank",
+   "AlgebraicGeometry.ProjectiveBundleTautologicalSystem",
+   "AlgebraicGeometry.ProjectiveBundleTautologicalGeometry",
+   "AlgebraicGeometry.exists_projectiveBundleTautologicalGeometry"
+  ],
+  "statement": "theorem exists_projectiveBundleTautologicalGeometry (B : Scheme.{u}) (n : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank (n + 1)] : Nonempty (ProjectiveBundleTautologicalGeometry B n F)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleTautologicalGeometry.lean",
+  "existing": false,
+  "note": "Repair of returned delivery: original mathematical statement and all dependency citations restored unchanged. Actual graded algebra equivalences, normalized twist/quotient and frame maps, tensor pullbacks, canonical base-change maps and theta with identity/composition equations, and coordinate subschemes replace the underspecified interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-013c09b89",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Re-delivery repairs every point of the prior RETURN. Node statement, proof and source unchanged, statement_change withdrawn; stmt_deps only gains the landed lem-pc-module-pullback-adjunction. lean.statement is verbatim and all 22 declarations exist. P/p are relProj/relProjHom of graded data pinned to Sym F on affines (algebra equivalences, degree spans, SymmetricAlgebraSheaf.restriction). L is the glued Proj.twist 1 fixed on degree-one generators and on overlaps; the quotient is fixed by quotient_generator. invertible and IsProper are stated with no extra hypotheses. Frame charts are over U with T_i -> e_i, local bases and transitions e_i=(T_i/T_j)e_j (coordRatio direction checked upstream). Base change uses upstream PullbackData with proved isPullback/relProjIsoPullback, generator-pinned coefficients, map_eq, and theta fixed by the quotient square; id/comp laws for maps and theta. Field clauses: zero locus of T_0 iso P^{n-1}_K, A^n_K iso D_+(T_0) with ratios, Cartier V(T_i) with dual iso O(1), iSup ideal point iso Spec K, reduced, in chart. rank_zero gives an actual iso and IsIso p. n=0, empty base and universes OK; no hollow defs (Classical.choose from a proved unit-pinned adjunction); only the main theorem is sorry; docstrings with 14 steps. nt_compile --json on the snapshot: clean, exit 0, 31.7 s/37.2 s. Minor non-blocking notes in review.md."
  }
 }
