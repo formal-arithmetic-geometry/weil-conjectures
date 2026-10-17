@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "def-trf-supported-pairing",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-d-pairing"
+  ]
  },
  "kind": "definition",
  "title": "The supported pairing recipe",
- "statement": "Fix the coefficient conventions of\n[def-trf-coefficient-conventions], $A=A_{E,n}$, $s=\\Spec k$. Let\n$X,Y$ be separated finite-type $k$-schemes whose structure morphisms\n$a_X,a_Y$ are exceptionally admissible\n([def-trf-admissibility]), with the dualizing data\n$\\omega_X,\\omega_Y$, $D_X,D_Y$ and evaluations of\n[def-trf-dualizing-complex], and let\n$K\\in D^b_{ctf}(X,A)$, $L\\in D^b_{ctf}(Y,A)$. Put\n\n$$\nZ:=Y\\times_sX,\\qquad p_1:Z\\to Y,\\quad p_2:Z\\to X,\n$$\n\nand let $\\tau:X\\times_sY\\xrightarrow{\\sim}Y\\times_sX$ exchange the\nfactors. External products are\n$M\\boxtimes_A^{\\mathrm L}N:=Lp_1^*M\\otimes_A^{\\mathrm L}Lp_2^*N$\n([def-weil-derived-pullback-tensor-hom]).\n\n*Opposite pairs.* Let $(C,c,u)$ be a correspondence from $(X,K)$ to\n$(Y,L)$ and $(D,d,v)$ an opposite correspondence, in the sense of\n[def-trf-correspondence-between-pairs] (which generalizes\n[def-trf-correspondence], the case $(Y,L)=(X,K)$); such a pair is an\n*opposite pair*. With $\\bar d=\\tau d:D\\to Z$ and\n$E=E(C,D)=C\\times_{c,Z,\\bar d}D$ as there, write $e_C:E\\to C$,\n$e_D:E\\to D$ for the projections and\n$e:=c\\,e_C=\\bar d\\,e_D:E\\to Z$ (all maps separated of finite type, and\nexceptionally admissible where an exceptional functor is applied; in\nparticular $c$, $\\bar d$, $e$ and $p_1$ are exceptionally admissible).\n\n*Step 1: the supported classes.* Let\n$[u]\\in H^0_C\\bigl(Z,\\RHom_A(Lp_2^*K,Rp_1^!L)\\bigr)$ be the class of\n$u$ given by [lem-trf-correspondence-class], a class supported on $c$\nin the sense of [def-trf-supported-class].\nThe Künneth–Verdier\nisomorphism of [thm-trf-kunneth-verdier] for the product $Y\\times_sX$,\nwith $M=L$ and $N=K$,\n$\\kappa_{L,K}:L\\boxtimes_A^{\\mathrm L}D_XK\\xrightarrow{\\sim}\n\\RHom_A(Lp_2^*K,Rp_1^!L)$, gives the class supported on $c$\n\n$$\n\\widetilde u:=\\kappa_{L,K}^{-1}\\circ[u]:\nRc_!A_C\\longrightarrow P:=L\\boxtimes_A^{\\mathrm L}D_XK .\n$$\n\nThe same construction applied to $(D,d,v)$ on $X\\times_sY$ gives\n$\\kappa_{K,L}^{-1}\\circ[v]:Rd_!A_D\\to K\\boxtimes_A^{\\mathrm L}D_YL$;\napplying the isomorphism $R\\tau_!=R\\tau_*$ (with\n$R\\tau_!Rd_!\\simeq R\\bar d_!$ by [prop-functor-package], item (3))\nand the symmetry of $\\otimes_A^{\\mathrm L}$, which identifies\n$R\\tau_*(K\\boxtimes_A^{\\mathrm L}D_YL)$ with\n$D_YL\\boxtimes_A^{\\mathrm L}K$ on $Z$, gives\n\n$$\n\\widetilde v:R\\bar d_!A_D\\longrightarrow Q:=D_YL\\boxtimes_A^{\\mathrm L}K .\n$$\n\n*Step 2: the support of the product.* The projection formula\n([prop-functor-package], item (5)), the base change\n$Lc^*R\\bar d_!\\simeq Re_{C!}Le_D^*$ in the Cartesian square defining\n$E$ ([prop-functor-package], item (4)), and the composition\n$Rc_!Re_{C!}\\simeq Re_!$ ([prop-functor-package], item (3)) give the\ncanonical isomorphism\n\n$$\n\\mu:Re_!A_E\\simeq Rc_!Re_{C!}Le_D^*A_D\n\\simeq Rc_!\\bigl(Lc^*R\\bar d_!A_D\\bigr)\n\\simeq Rc_!A_C\\otimes_A^{\\mathrm L}R\\bar d_!A_D .\n$$\n\n*Step 3: the pairing.* Using the symmetry of\n$\\otimes_A^{\\mathrm L}$ and the monoidality of $Lp_i^*$,\n$P\\otimes_A^{\\mathrm L}Q\\simeq\nLp_1^*(D_YL\\otimes_A^{\\mathrm L}L)\\otimes_A^{\\mathrm L}\nLp_2^*(D_XK\\otimes_A^{\\mathrm L}K)$; the two Verdier evaluations\n$\\operatorname{ev}_L$, $\\operatorname{ev}_K$ of\n[def-trf-dualizing-complex] map this to\n$\\omega_Y\\boxtimes_A^{\\mathrm L}\\omega_X$, and the exceptional\nKünneth isomorphism $\\alpha$ of [prop-trf-exceptional-kunneth] for\n$f_1=a_Y$, $f_2=a_X$, $L_1=L_2=A_s$ (note $a_Y\\times a_X=a_Z$ and\n$A_s\\boxtimes_A^{\\mathrm L}A_s=A_s$ on $s\\times_ss=s$) is the product\ncomparison $\\omega_Y\\boxtimes_A^{\\mathrm L}\\omega_X\\simeq\\omega_Z$.\nComposing,\n\n$$\n\\sigma_{u,v}:\nRe_!A_E\\xrightarrow{\\ \\mu\\ }\nRc_!A_C\\otimes_A^{\\mathrm L}R\\bar d_!A_D\n\\xrightarrow{\\widetilde u\\otimes\\widetilde v}\nP\\otimes_A^{\\mathrm L}Q\n\\xrightarrow{\\operatorname{ev}_L\\boxtimes\\operatorname{ev}_K}\n\\omega_Y\\boxtimes_A^{\\mathrm L}\\omega_X\n\\xrightarrow{\\ \\alpha\\ }\\omega_Z .\n$$\n\nThe *Borel–Moore section* (of [def-trf-integration])\n\n$$\n\\langle u,v\\rangle_{\\mathrm{LV}}:A_E\\longrightarrow\\omega_E\n$$\n\nis the exceptional adjoint of $\\sigma_{u,v}$: its image under\n$\\Hom_Z(Re_!A_E,\\omega_Z)\\cong\\Hom_E(A_E,Re^!\\omega_Z)$, followed by\nthe identification $Re^!\\omega_Z\\simeq\\omega_E$ of\n[thm-trf-dualizing-complex-composition].\n\n*The diagonal case.* For $(Y,L)=(X,K)$ take the opposite\ncorrespondence $D=X$, $d=\\Delta_X$, $v=1_K$ (both legs are\n$\\operatorname{id}_X$); then $\\bar d=\\Delta_X$ and\n$E=C\\times_{X\\times_sX,c,\\Delta_X}X=\\Fix(c)$ is the fixed scheme of\n[def-trf-fixed-scheme]. Abbreviate\n$\\LT_B(u,v)=\\LT_B(\\langle u,v\\rangle_{\\mathrm{LV}})$, the local term of\n[def-trf-local-term] (for $B$ a proper open-and-closed component). That\n$\\langle u,1_K\\rangle_{\\mathrm{LV}}$ is the trace class of\n[def-trf-trace-class] is [lem-trf-trace-class-diagonal-pairing].",
+ "statement": "Fix the coefficient conventions of\n[def-trf-coefficient-conventions], $A=A_{E,n}$, $s=\\Spec k$. Let\n$X,Y$ be separated finite-type $k$-schemes whose structure morphisms\n$a_X,a_Y$ are exceptionally admissible\n([def-trf-admissibility]), with the dualizing data\n$\\omega_X,\\omega_Y$, $D_X,D_Y$ and evaluations of\n[def-trf-dualizing-complex], and let\n$K\\in D^b_{ctf}(X,A)$, $L\\in D^b_{ctf}(Y,A)$. Put\n\n$$\nZ:=Y\\times_sX,\\qquad p_1:Z\\to Y,\\quad p_2:Z\\to X,\n$$\n\nand let $\\tau:X\\times_sY\\xrightarrow{\\sim}Y\\times_sX$ exchange the\nfactors. External products are\n$M\\boxtimes_A^{\\mathrm L}N:=Lp_1^*M\\otimes_A^{\\mathrm L}Lp_2^*N$\n([def-weil-derived-pullback-tensor-hom]).\n\n*Opposite pairs.* Let $(C,c,u)$ be a correspondence from $(X,K)$ to\n$(Y,L)$ and $(D,d,v)$ an opposite correspondence, in the sense of\n[def-trf-correspondence-between-pairs] (which generalizes\n[def-trf-correspondence], the case $(Y,L)=(X,K)$); such a pair is an\n*opposite pair*. With $\\bar d=\\tau d:D\\to Z$ and\n$E=E(C,D)=C\\times_{c,Z,\\bar d}D$ as there, write $e_C:E\\to C$,\n$e_D:E\\to D$ for the projections and\n$e:=c\\,e_C=\\bar d\\,e_D:E\\to Z$ (all maps separated of finite type, and\nexceptionally admissible where an exceptional functor is applied; in\nparticular $c$, $\\bar d$, $e$, both product projections, and the\nstructure morphisms $a_Z=a_Yp_1$ and $a_E=a_Ze$ are exceptionally\nadmissible, as provided by [def-trf-admissibility]).\n\n*Step 1: the supported classes.* Let\n$[u]\\in H^0_C\\bigl(Z,\\RHom_A(Lp_2^*K,Rp_1^!L)\\bigr)$ be the class of\n$u$ given by [lem-trf-correspondence-class], a class supported on $c$\nin the sense of [def-trf-supported-class].\nThe Künneth–Verdier\nisomorphism of [thm-trf-kunneth-verdier] for the product $Y\\times_sX$,\nwith $M=L$ and $N=K$,\n$\\kappa_{L,K}:L\\boxtimes_A^{\\mathrm L}D_XK\\xrightarrow{\\sim}\n\\RHom_A(Lp_2^*K,Rp_1^!L)$, gives the class supported on $c$\n\n$$\n\\widetilde u:=\\kappa_{L,K}^{-1}\\circ[u]:\nRc_!A_C\\longrightarrow P:=L\\boxtimes_A^{\\mathrm L}D_XK .\n$$\n\nFor the opposite correspondence, put $W=X\\times_sY$ and let\n$q_1:W\\to X$, $q_2:W\\to Y$ be its projections.\nApply [lem-trf-correspondence-class] with $(X,K)$ and $(Y,L)$\ninterchanged to obtain\n$[v]:Rd_!A_D\\to\\RHom_A(Lq_2^*L,Rq_1^!K)$.\nThen [thm-trf-kunneth-verdier] with $M=K$, $N=L$ gives\n$\\kappa_{K,L}^{-1}\\circ[v]:Rd_!A_D\\to K\\boxtimes_A^{\\mathrm L}D_YL$.\nApply $R\\tau_!$ to this morphism. Since $\\tau$ is an isomorphism,\n$R\\tau_!=R\\tau_*$ and $R\\tau_*\\simeq L(\\tau^{-1})^*$;\ncomposition in [prop-functor-package], item (3), identifies its\nsource with $R\\bar d_!A_D$. The identities\n$q_1\\tau^{-1}=p_2$ and $q_2\\tau^{-1}=p_1$, together with\n[lem-pur-derived-pullback-tensor-iso], identify its target with\n$Lp_2^*K\\otimes_A^{\\mathrm L}Lp_1^*D_YL$.\nCompose with the signed tensor symmetry to obtain\n\n$$\n\\widetilde v:R\\bar d_!A_D\\longrightarrow Q:=D_YL\\boxtimes_A^{\\mathrm L}K .\n$$\n\n*Step 2: the support of the product.* The projection formula\n([prop-functor-package], item (5)), the base change\n$Lc^*R\\bar d_!\\simeq Re_{C!}Le_D^*$ in the Cartesian square defining\n$E$ ([prop-functor-package], item (4)), and the composition\n$Rc_!Re_{C!}\\simeq Re_!$ ([prop-functor-package], item (3)) give the\ncanonical isomorphism below. Here $Le_D^*A_D\\simeq A_E$\nby constant-coefficient pullback, and the projection formula is used\nfor $f=c$, with its two inputs $A_C$ and $R\\bar d_!A_D$. The\nlatter belongs to $D^b_{ctf}(Z,A)$ by [def-trf-admissibility],\nsince $A_D$ is the finite free rank-one coefficient object. Insert\nthe tensor unit $A_C$ in $Rc_!(Lc^*R\\bar d_!A_D)$ and apply the\ninverse of item (5) to get the last arrow:\n\n$$\n\\mu:Re_!A_E\\simeq Rc_!Re_{C!}Le_D^*A_D\n\\simeq Rc_!\\bigl(Lc^*R\\bar d_!A_D\\bigr)\n\\simeq Rc_!A_C\\otimes_A^{\\mathrm L}R\\bar d_!A_D .\n$$\n\n*Step 3: the pairing.* Write $T_1=Lp_1^*L$,\n$T_2=Lp_2^*D_XK$, $T_3=Lp_1^*D_YL$ and\n$T_4=Lp_2^*K$. Reassociate the four factors of\n$P\\otimes_A^{\\mathrm L}Q$ in the order\n$(T_1,T_2,T_3,T_4)$. Move $T_3$ past\n$T_2$ and then past $T_1$, using the signed tensor symmetries,\nto obtain $(T_3,T_1,T_2,T_4)$.\nOn homogeneous factors of degrees $(a,b,c,d)$ this permutation has\nsign $(-1)^{c(a+b)}$. Apply the inverses of the pullback/tensor\ncomparisons of [lem-pur-derived-pullback-tensor-iso] separately\nfor $p_1$ and $p_2$. Thus\n$P\\otimes_A^{\\mathrm L}Q\\simeq\nLp_1^*(D_YL\\otimes_A^{\\mathrm L}L)\\otimes_A^{\\mathrm L}\nLp_2^*(D_XK\\otimes_A^{\\mathrm L}K)$; the two Verdier evaluations\n$\\operatorname{ev}_L$, $\\operatorname{ev}_K$ of\n[def-trf-dualizing-complex] map this to\n$\\omega_Y\\boxtimes_A^{\\mathrm L}\\omega_X$, and the exceptional\nKünneth isomorphism $\\alpha$ of [prop-trf-exceptional-kunneth] for\n$f_1=a_Y$, $f_2=a_X$, $L_1=L_2=A_s$ (note $a_Y\\times a_X=a_Z$ and\n$A_s\\boxtimes_A^{\\mathrm L}A_s=A_s$ on $s\\times_ss=s$) is the product\ncomparison $\\omega_Y\\boxtimes_A^{\\mathrm L}\\omega_X\\simeq\\omega_Z$.\nHere $\\alpha$ is the specified map of [def-sf-kv-maps] (ii): the\nexceptional adjoint of $\\mathrm{Ku}_!$ followed by the two counits\n$Ra_{Y!}\\omega_Y\\to A_s$ and $Ra_{X!}\\omega_X\\to A_s$; thus the\nproduct comparison is a specified morphism, not a choice of an\nisomorphism between its source and target.\nComposing,\n\n$$\n\\sigma_{u,v}:\nRe_!A_E\\xrightarrow{\\ \\mu\\ }\nRc_!A_C\\otimes_A^{\\mathrm L}R\\bar d_!A_D\n\\xrightarrow{\\widetilde u\\otimes\\widetilde v}\nP\\otimes_A^{\\mathrm L}Q\n\\xrightarrow{\\operatorname{ev}_L\\boxtimes\\operatorname{ev}_K}\n\\omega_Y\\boxtimes_A^{\\mathrm L}\\omega_X\n\\xrightarrow{\\ \\alpha\\ }\\omega_Z .\n$$\n\nThe *Borel–Moore section*\n\n$$\n\\langle u,v\\rangle_{\\mathrm{LV}}:A_E\\longrightarrow\\omega_E\n$$\n\nis the exceptional adjoint of $\\sigma_{u,v}$, using the adjunction\nof [def-trf-admissibility]: its image under\n$\\Hom_Z(Re_!A_E,\\omega_Z)\\cong\\Hom_E(A_E,Re^!\\omega_Z)$, followed by\nthe identification $Re^!\\omega_Z\\simeq\\omega_E$ of\n[thm-trf-dualizing-complex-composition].\n\n*The diagonal case.* For $(Y,L)=(X,K)$ take the opposite\ncorrespondence $D=X$, $d=\\Delta_X$, $v=1_K$ (both legs are\n$\\operatorname{id}_X$); then $\\bar d=\\Delta_X$ and\n$E=C\\times_{X\\times_sX,c,\\Delta_X}X=\\Fix(c)$ is the fixed scheme of\n[def-trf-fixed-scheme]. Abbreviate\n$\\LT_B(u,v)=\\LT_B(\\langle u,v\\rangle_{\\mathrm{LV}})$, the local term of\n[def-trf-local-term] (for $B$ a proper open-and-closed component),\nnamely $\\int_B j_B^*\\langle u,v\\rangle_{\\mathrm{LV}}$ using the\nintegration of [def-trf-integration].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-pairing/def-trf-supported-pairing.md",
   "place": "node def-trf-supported-pairing, order 2311"
@@ -27,14 +29,227 @@
   "def-trf-integration",
   "thm-trf-dualizing-complex-composition",
   "def-trf-fixed-scheme",
-  "def-trf-local-term"
+  "def-trf-local-term",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-sf-kv-maps"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supportedPairing|Lefschetz.Verdier|Borel.Moore|Verdier",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lefschetz Verdier pairing for opposite cohomological correspondences with intersecting supports",
+   "results": "8 hits: HomologicalComplex.instIsStrictlySupportedOppositeOpOp, HomologicalComplex.op, HomologicalComplex.unop, CategoryTheory.Limits.opProductIsoCoproduct, HomologicalComplex.isSupportedOutside_op_iff, HomologicalComplex.isStrictlySupported_op_iff, MulOpposite.inner_unop, LinearMap.dualPairing_nondegenerate",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "Verdier, Correspondence",
+   "results": "0 hits: ; loogle: unknown identifier 'Verdier'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'Verdier'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier supported pairing of opposite cohomological correspondences as a Borel Moore section",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.cm5b",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct the cohomological pairing by tensoring two supported classes, evaluating Verdier duals, and taking exceptional adjunction",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|upperShriek|lowerShriek|cohomological.Correspondence",
+   "results": "0 hits: ; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pairing of compactly supported cohomology classes with values in a dualizing complex",
+   "results": "8 hits: LinearMap.dualPairing_nondegenerate, topDualPairing_apply, LinearMap.IsPerfPair.dualEval, RootPairing.root'In_corootSpanMem_eq_pairingIn, Subspace.dualPairing_nondegenerate, Module.dualPairing_apply, Submodule.dualPairing_apply, FGModuleCat.exactPairing",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedPairing|dualizingExteriorProd|pairingOfSquare",
+   "results": "0 hits: ; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leansearch",
+   "query": "construct the Lefschetz Verdier supported pairing by tensoring supported classes and applying exceptional adjunction",
+   "results": "8 hits: CategoryTheory.tensorLeftAdjunction, CategoryTheory.exp.adjunction, CategoryTheory.ihom.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.Closed.adj, CategoryTheory.tensorRightAdjunction, DerivedCategory.TStructure.t, CategoryTheory.Adjunction.derived",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "supported pairing for opposite correspondences with exceptional adjunction, dualizing complexes, and intersection support",
+   "results": "8 hits: HomologicalComplex.isSupportedOutside_op_iff, HomologicalComplex.isSupported_op_iff, HomologicalComplex.isStrictlySupportedOutside_op_iff, HomologicalComplex.isStrictlySupported_op_iff, HomologicalComplex.instIsStrictlySupportedOppositeOpOp, ComplexShape.Embedding.AreComplementary.isSupportedOutside₁_iff, ComplexShape.Embedding.AreComplementary.isSupportedOutside₂_iff, ComplexShape.Embedding.AreComplementary.isStrictlySupportedOutside₁_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction, dualizing",
+   "results": "0 hits: ; loogle: unknown identifier 'dualizing'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'dualizing'"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier supported pairing definition from opposite correspondences",
+   "results": "8 hits: HomologicalComplex.isSupportedOutside_op_iff, HomologicalComplex.isSupported_op_iff, HomologicalComplex.isStrictlySupportedOutside_op_iff, HomologicalComplex.isStrictlySupported_op_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplex.instIsStrictlySupportedOppositeOpOp, DerivedCategory.TStructure.t, DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed CategoryTheory.Adjunction",
+   "results": "0 hits: ; loogle: Application type mismatch: The argument\n  CategoryTheory.Adjunction\nhas type\n  CategoryTheory.Functor ?m.1 ?m.3 → CategoryTheory.Functor ?m.3 ?m.1 → Type (max (max (max ?u.4 ?u.3) ?u.6) ?u.5)\nbut is e",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: Application type mismatch: The argument\n  CategoryTheory.Adjunction\nhas type\n  CategoryTheory.Functor ?m.1 ?m.3 → CategoryTheory.Functor ?m.3 ?m.1 → Type (max (max (max ?u.4 ?u.3) ?u.6) ?u.5)\nbut is e"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedPairing|Lefschetz.Verdier|Borel.Moore|dualizing",
+   "results": "0 hits: ; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lefschetz Verdier pairing from evaluation and exceptional adjunction on intersection of correspondences",
+   "results": "8 hits: LinearMap.dualPairing_nondegenerate, CategoryTheory.ExactPairing.evaluation', CategoryTheory.ExactPairing.evaluation, topDualPairing_apply, LinearMap.IsPerfPair.dualEval, LinearMap.toPerfPair_apply, Module.dualPairing_apply, LinearEquiv.instIsPerfPair",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of supported cohomology classes evaluated in dualizing complex and exceptional adjoint",
+   "results": "8 hits: CochainComplex.HomComplex.CohomologyClass.toHom, groupCohomologyIsoExt, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CochainComplex.HomComplex.CohomologyClass.homAddEquiv_apply, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|lowerShriek|cohomological.Correspondence",
+   "results": "0 hits: ; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedPairing|dualizingExteriorProd|Lefschetz.Verdier|Borel.Moore",
+   "results": "0 hits: ; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel Moore section obtained by tensoring supported classes and applying exceptional adjunction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.constantSheafΓAdj, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, CompHausLike.LocallyConstant.adjunction, ModuleCat.monoidalClosedHomEquiv, CategoryTheory.Closed.adj, stalkSkyscraperSheafAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier pairing of opposite cohomological correspondences on their intersection",
+   "results": "8 hits: DerivedCategory.IsLE, HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, HomologicalComplex.isSupportedOutside_op_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor supported cohomology classes, evaluate their Verdier duals, and take the exceptional adjoint on the fibre product of supports",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.instAddCommGroupH, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedLightCondMod",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not construct the geometric supported pairing or its exceptional adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Verdier|Borel.Moore|exceptionalAdjunction",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Data/Set/Defs.lean, Mathlib/Tactic/Translate/ToDual.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: Mayer–Vietoris sheaf constructions and categorical Verdier localization do not give the supported six-operations pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cup product of sheaf cohomological correspondences supported on a fiber product, followed by dual evaluation and exceptional adjunction",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue",
+   "date": "2026-10-17",
+   "verdict": "no match: Mayer–Vietoris sheaf constructions and categorical Verdier localization do not give the supported six-operations pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "borelMooreSections|supportedClassSwap|exceptionalHomEquiv",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib declaration has these geometric pairing identifiers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a pairing of morphisms from compact support pushforwards of constant sheaves using a Cartesian square, tensor product and duality evaluation",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, topCatToSheafCompHausLike_map_val_app, TopCat.toSheafCompHausLike_val_map, CategoryTheory.ExponentiableMorphism.coev_ev, TopCat.Sheaf.pullbackPushforwardAdjunction, LightCondensed.ihomPoints, CategoryTheory.ExponentiableMorphism.coev_def, TopCat.Presheaf.pushforwardPullbackAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract adjunction/monoidal and ordinary sheaf results do not construct this supported six-functor pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-17",
+   "verdict": "no match: abstract adjunction/monoidal and ordinary sheaf results do not construct this supported six-functor pairing"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -95,5 +310,20 @@
   "statement": "Fix the coefficient conventions of\n[def-trf-coefficient-conventions], $A=A_{E,n}$, $s=\\Spec k$. Let\n$X,Y$ be separated finite-type $k$-schemes whose structure morphisms\n$a_X,a_Y$ are exceptionally admissible\n([def-trf-admissibility]), with the dualizing data\n$\\omega_X,\\omega_Y$, $D_X,D_Y$ and evaluations of\n[def-trf-dualizing-complex], and let\n$K\\in D^b_{ctf}(X,A)$, $L\\in D^b_{ctf}(Y,A)$. Put\n\n$$\nZ:=Y\\times_sX,\\qquad p_1:Z\\to Y,\\quad p_2:Z\\to X,\n$$\n\nand let $\\tau:X\\times_sY\\xrightarrow{\\sim}Y\\times_sX$ exchange the\nfactors. External products are\n$M\\boxtimes_A^{\\mathrm L}N:=Lp_1^*M\\otimes_A^{\\mathrm L}Lp_2^*N$\n([def-weil-derived-pullback-tensor-hom]).\n\n*Opposite pairs.* Let $(C,c,u)$ be a correspondence from $(X,K)$ to\n$(Y,L)$ and $(D,d,v)$ an opposite correspondence, in the sense of\n[def-trf-correspondence-between-pairs] (which generalizes\n[def-trf-correspondence], the case $(Y,L)=(X,K)$); such a pair is an\n*opposite pair*. With $\\bar d=\\tau d:D\\to Z$ and\n$E=E(C,D)=C\\times_{c,Z,\\bar d}D$ as there, write $e_C:E\\to C$,\n$e_D:E\\to D$ for the projections and\n$e:=c\\,e_C=\\bar d\\,e_D:E\\to Z$ (all maps separated of finite type, and\nexceptionally admissible where an exceptional functor is applied; in\nparticular $c$, $\\bar d$, $e$ and $p_1$ are exceptionally admissible).\n\n*Step 1: the supported classes.* Let\n$[u]\\in H^0_C\\bigl(Z,\\RHom_A(Lp_2^*K,Rp_1^!L)\\bigr)$ be the class of\n$u$ given by [lem-trf-correspondence-class], a class supported on $c$\nin the sense of [def-trf-supported-class].\nThe Künneth–Verdier\nisomorphism of [thm-trf-kunneth-verdier] for the product $Y\\times_sX$,\nwith $M=L$ and $N=K$,\n$\\kappa_{L,K}:L\\boxtimes_A^{\\mathrm L}D_XK\\xrightarrow{\\sim}\n\\RHom_A(Lp_2^*K,Rp_1^!L)$, gives the class supported on $c$\n\n$$\n\\widetilde u:=\\kappa_{L,K}^{-1}\\circ[u]:\nRc_!A_C\\longrightarrow P:=L\\boxtimes_A^{\\mathrm L}D_XK .\n$$\n\nThe same construction applied to $(D,d,v)$ on $X\\times_sY$ gives\n$\\kappa_{K,L}^{-1}\\circ[v]:Rd_!A_D\\to K\\boxtimes_A^{\\mathrm L}D_YL$;\napplying the isomorphism $R\\tau_!=R\\tau_*$ (with\n$R\\tau_!Rd_!\\simeq R\\bar d_!$ by [prop-functor-package], item (3))\nand the symmetry of $\\otimes_A^{\\mathrm L}$, which identifies\n$R\\tau_*(K\\boxtimes_A^{\\mathrm L}D_YL)$ with\n$D_YL\\boxtimes_A^{\\mathrm L}K$ on $Z$, gives\n\n$$\n\\widetilde v:R\\bar d_!A_D\\longrightarrow Q:=D_YL\\boxtimes_A^{\\mathrm L}K .\n$$\n\n*Step 2: the support of the product.* The projection formula\n([prop-functor-package], item (5)), the base change\n$Lc^*R\\bar d_!\\simeq Re_{C!}Le_D^*$ in the Cartesian square defining\n$E$ ([prop-functor-package], item (4)), and the composition\n$Rc_!Re_{C!}\\simeq Re_!$ ([prop-functor-package], item (3)) give the\ncanonical isomorphism\n\n$$\n\\mu:Re_!A_E\\simeq Rc_!Re_{C!}Le_D^*A_D\n\\simeq Rc_!\\bigl(Lc^*R\\bar d_!A_D\\bigr)\n\\simeq Rc_!A_C\\otimes_A^{\\mathrm L}R\\bar d_!A_D .\n$$\n\n*Step 3: the pairing.* Using the symmetry of\n$\\otimes_A^{\\mathrm L}$ and the monoidality of $Lp_i^*$,\n$P\\otimes_A^{\\mathrm L}Q\\simeq\nLp_1^*(D_YL\\otimes_A^{\\mathrm L}L)\\otimes_A^{\\mathrm L}\nLp_2^*(D_XK\\otimes_A^{\\mathrm L}K)$; the two Verdier evaluations\n$\\operatorname{ev}_L$, $\\operatorname{ev}_K$ of\n[def-trf-dualizing-complex] map this to\n$\\omega_Y\\boxtimes_A^{\\mathrm L}\\omega_X$, and the exceptional\nKünneth isomorphism $\\alpha$ of [prop-trf-exceptional-kunneth] for\n$f_1=a_Y$, $f_2=a_X$, $L_1=L_2=A_s$ (note $a_Y\\times a_X=a_Z$ and\n$A_s\\boxtimes_A^{\\mathrm L}A_s=A_s$ on $s\\times_ss=s$) is the product\ncomparison $\\omega_Y\\boxtimes_A^{\\mathrm L}\\omega_X\\simeq\\omega_Z$.\nComposing,\n\n$$\n\\sigma_{u,v}:\nRe_!A_E\\xrightarrow{\\ \\mu\\ }\nRc_!A_C\\otimes_A^{\\mathrm L}R\\bar d_!A_D\n\\xrightarrow{\\widetilde u\\otimes\\widetilde v}\nP\\otimes_A^{\\mathrm L}Q\n\\xrightarrow{\\operatorname{ev}_L\\boxtimes\\operatorname{ev}_K}\n\\omega_Y\\boxtimes_A^{\\mathrm L}\\omega_X\n\\xrightarrow{\\ \\alpha\\ }\\omega_Z .\n$$\n\nThe *Borel–Moore section* (of [def-trf-integration])\n\n$$\n\\langle u,v\\rangle_{\\mathrm{LV}}:A_E\\longrightarrow\\omega_E\n$$\n\nis the exceptional adjoint of $\\sigma_{u,v}$: its image under\n$\\Hom_Z(Re_!A_E,\\omega_Z)\\cong\\Hom_E(A_E,Re^!\\omega_Z)$, followed by\nthe identification $Re^!\\omega_Z\\simeq\\omega_E$ of\n[thm-trf-dualizing-complex-composition].\n\n*The diagonal case.* For $(Y,L)=(X,K)$ take the opposite\ncorrespondence $D=X$, $d=\\Delta_X$, $v=1_K$ (both legs are\n$\\operatorname{id}_X$); then $\\bar d=\\Delta_X$ and\n$E=C\\times_{X\\times_sX,c,\\Delta_X}X=\\Fix(c)$ is the fixed scheme of\n[def-trf-fixed-scheme]. Abbreviate\n$\\LT_B(u,v)=\\LT_B(\\langle u,v\\rangle_{\\mathrm{LV}})$, the local term of\n[def-trf-local-term] (for $B$ a proper open-and-closed component).",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-supported-pairing",
+  "worker": "stage1",
+  "summary": "Audited the definition against the current main-20261015 blueprint, all fifteen original dependency statements, and the existing Lean pairing construction. Adopted blueprint_update.statement, removing its obsolete forward trace-class assertion. Named the existing pro-etale pullback/tensor comparison and the canonical exceptional Kunneth map definition, and made the already automatic admissibility of the product and intersection structure maps explicit. All ingredients already exist: no new nodes or Mathlib leaves. This is a definition, so proof and proof_deps remain empty; its construction is in the statement and all its ingredients are statement dependencies. Second reading expanded the opposite-class construction, the exact projection-formula inputs and their finite-Tor justification, and the signed tensor permutation. It also named the final adjunction and confined the integration citation to the proper component. Repair: rebased against the landed split of def-trf-local-term and re-read its unchanged statement, confirming the proper-B local-term use and no properness requirement on E. Fresh second reading independently revalidated all seventeen current dependency statements, particularly the landed local-term definition named in the return, and retained the construction unchanged; added independent Mathlib search records and the current second-reading report.",
+  "blueprint": "Realizes the entire current def-trf-supported-pairing construction: opposite pair, Step 1 supported classes via inverse Kunneth–Verdier, Step 2 the intersection-support isomorphism, Step 3 evaluation and the canonical product dualizing map, exceptional adjunction and the diagonal specialization. sk-d-pairing states the same recipe in shorthand; its display Q=K boxtimes D_Y L on Y times X has factors in the wrong order, whereas this node uses the correctly typed Q=D_Y L boxtimes K. The separate sk-d-pairing key node owns the unit-realization fields."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NI-86252ea8f",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-86252ea8f (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit with the item node def-trf-supported-pairing and its report; it creates no new nodes. Sources read: the current main-20261015 blueprint text for the node and for sk-d-pairing, diffed against master (the only change is the removed trace-class sentence, and the node correctly drops it); all 17 statement dependencies in full; and slopmaster2 Pairing.lean lines 240-420. Mechanical checks: every bracketed id is in stmt_deps and every dep is cited; all 17 exist and none is merged; there is no cycle; the searches cover all three kinds; same_as=[sk-d-pairing]; imported fields are kept; no SGA source is cited. Step 1: lem-trf-correspondence-class and thm-trf-kunneth-verdier (M,N)=(L,K) on Y×X and (K,L) on X×Y give exactly the stated types. The exchange along tau uses prop-functor-package (3) (tau proper, composition with d), Rtau_*=(tau^-1)^* for an isomorphism, q1 tau^-1=p2, q2 tau^-1=p1, pullback composition and monoidality from lem-pur-derived-pullback-tensor-iso, then the signed swap to D_Y L⊠K. Step 2: base change (4) with f=d-bar, g=c gives Lc^*Rd-bar_!=Re_C!Le_D^*; composition (3) gives Re_!; the projection formula (5) needs D^b_c × D^b_ctf, and Rd-bar_!A_D is in D^b_ctf by def-trf-admissibility, so mu is correctly oriented. Step 3: the permutation (T1,T2,T3,T4)->(T3,T1,T2,T4) has sign (-1)^{c(a+b)} and lands on the evaluation sources D_M⊗M; alpha is the specified def-sf-kv-maps (ii) map for (a_Y,a_X;A_s,A_s) with target omega_Z. The final adjunction is the constructible one, and thm-trf-dualizing-complex-composition applies with d=e; E need not be proper. Diagonal case: d-bar=Delta and E=Fix(c); the local term uses the current split def-trf-local-term (proper B only). Edge cases checked: the point, K or L zero, E empty, X≠Y types, odd shifts, n=1 and n>1, nonreduced Fix. The X≠Y check confirms the report's note that the unit Markdown's Q=K⊠D_Y L is ill-typed; the node correctly uses D_Y L⊠K. The Lean supportedPairing is not an exact attachment: it uses an abstract G with dualizingExteriorProd, and its localTerm requires all of E proper. No fixes were made and no tool_uses are needed."
  }
 }

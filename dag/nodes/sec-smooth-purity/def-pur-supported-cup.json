@@ -1,223 +1,364 @@
 {
-  "id": "def-pur-supported-cup",
-  "blueprint": {
-    "is": "def-pur-supported-cup",
-    "from": null,
-    "same_as": []
+ "id": "def-pur-supported-cup",
+ "blueprint": {
+  "is": "def-pur-supported-cup",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Cup product with closed supports",
+ "statement": "Fix the finite coefficient datum of [def-pur-conventions], with $n\\geq1$ and $\\Lambda=A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $X$ be a $k$-scheme. Work on the small pro-etale sites with constant coefficient ring sheaves $A_T$ and ambient module derived categories $D(T_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site]. Let $i:Z\\hookrightarrow X$ and $j:W\\hookrightarrow X$ be closed immersions [def-weil-closed-immersion], put $V=Z\\times_XW$ [def-pc-fibre-product], and write $h:V\\hookrightarrow X$ for the scheme-theoretic intersection. On affine charts its defining ideal is the sum of the two defining ideals, since $(R/I)\\otimes_R(R/J)=R/(I+J)$; in particular $h$ is closed. Direct images below are the underived pro-etale module direct images of [def-weil-proetale-module-direct-image], placed in degree zero.\n\nLet $F,G\\in D^+(X_{\\mathrm{proet}},A)$ and $a,b\\in\\mathbf Z$. Here $D^+$ means cohomology vanishes in all sufficiently negative degrees. For classes $\\alpha\\in H_Z^a(X,F)$ and $\\beta\\in H_W^b(X,G)$, use the pro-etale derived supported sections of [def-pur-support-cohomology]. The natural identification of [lem-pur-supported-hom] represents them by morphisms\n$$\n \\alpha:i_*A_Z\\longrightarrow F[a],\\qquad\n \\beta:j_*A_W\\longrightarrow G[b]\n$$\nin $D(X_{\\mathrm{proet}},A)$. The tensor product is [def-weil-derived-tensor], with the cochain shifts of [def-weil-abstract-derived-category]. For a possibly unbounded complex $K$, the notation for the output of this construction is\n$$\n H_V^r(X,K):=\\operatorname{Hom}_{D(X_{\\mathrm{proet}},A)}(h_*A_V,K[r]).\n$$\nWhen $K$ is bounded below, this agrees naturally with the pro-etale supported groups by [lem-pur-supported-hom]. This convention is needed because $F\\otimes_A^LG$ need not be bounded below; no finite-Tor hypothesis is imposed on the two inputs.\n\nHere is the specified coefficient isomorphism. On each object $T\\to X$ of $X_{\\mathrm{proet}}$, restrict a section of $A_Z$ on $Z_T=Z\\times_XT$ and a section of $A_W$ on $W_T=W\\times_XT$ to $V_T=V\\times_XT$, and multiply them. These base changes are closed by [lem-weil-pbc-closed-immersion-base-change]. Restrictions commute with this operation, and it is balanced over $A_X(T)$ with the direct-image module actions. The sheaf tensor product [def-pur-sheaf-tensor-product] therefore gives the particular map\n$$\n \\mu:i_*A_Z\\otimes_{A_X}j_*A_W\\longrightarrow h_*A_V.\n$$\n\nThe following elementary coefficient calculation verifies its invertibility and flatness entirely on these pro-etale sites. First, $A_T(S)$ is canonically the ring of Zariski-locally constant functions $|S|\\to A$, with pointwise operations. Indeed [lem-weil-pbc-scheme-coproduct-family] and [lem-galois-coproduct-copies-morphisms-clopen] identify these functions with morphisms over $T$ into $\\coprod_{a\\in A}T$. The latter presheaf is a sheaf for pro-etale coverings by [lem-weil-pbc-fpqc-representable-descent], since these coverings are fpqc by the site definition. Every such function is constant on its open fibres, a Zariski covering, so this sheaf is the sheafification of the constant presheaf: maps from the constant presheaf extend by gluing on those fibres, uniquely. Addition and multiplication agree with their constant-presheaf operations on that cover and hence globally. This also identifies all restriction and scalar maps with restrictions of functions; it does not assert conservativity of geometric stalks on arbitrary pro-etale sheaves.\n\nFor any closed immersion $c:D\\hookrightarrow X$ among $i,j,h$, let $J_D\\subset A_X$ be the kernel ideal sheaf of restriction $q_D:A_X\\to c_*A_D$. Thus $J_D(T)$ consists of locally constant functions on $|T|$ vanishing on $|D_T|$. The restriction $q_D$ is locally surjective: given a locally constant $s$ on the closed subset $|D_T|$, for each point $x\\in|D_T|$ choose an open neighbourhood $O_x\\subset|T|$ with $s$ constant on $O_x\\cap|D_T|$ and extend by that constant; add $T\\setminus D_T$ to this open covering and extend there by zero. Consequently\n$$\n c_*A_D=A_X/J_D.\n$$\nHere quotients are sheaf quotients: kernels are sectionwise and cokernels are sheafified sectionwise cokernels in [def-weil-sheaf-of-modules-category]. Local surjectivity detects epimorphisms by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] and the exact forgetful functor [lem-weil-pbc-module-sheaves-colimits-forgetful].\n\nFor every finite list $t_1,\\ldots,t_m\\in J_D(T)$ the union of the clopen sets $\\{t_l\\ne0\\}$ is clopen and disjoint from $D_T$. Its characteristic function $e$ belongs to $J_D(T)$, satisfies $e^2=e$, and $et_l=t_l$ for every $l$. For any module sheaf $M$ the mutually inverse tensor formulas\n$$\n M\\otimes_{A_X}(A_X/J_D)\\cong M/J_DM,\n \\qquad m\\otimes\\overline a\\longmapsto\\overline{am},\n \\qquad \\overline m\\longmapsto m\\otimes\\overline1\n$$\nfollow from the balanced tensor relations and local lifts of sections of the quotient; $J_DM$ is the sheaf submodule locally consisting of finite sums $\\sum t_lm_l$. They glue by the local description of sheafification [lem-weil-pbc-site-sheafification-sections-local], applicable to underlying modules by [lem-pc-sites-sheafification-underlying-sets]. If $M\\hookrightarrow N$ is a monomorphism and $m\\in M(T)$ maps to zero in $N/J_DN$, locally $m=\\sum t_ln_l$ in $N$. Choose $e$ as above; then $(1-e)m=0$ in $N$, hence in $M$, so $m=em\\in J_DM$. Thus $M/J_DM\\to N/J_DN$ is monic. Quotient tensor also preserves right exact sequences: for an epimorphism $N\\to P$ lift sections locally, and if the image of $n$ in $P$ is $\\sum t_lp_l$, lift the finite list $p_l$ locally to $n_l$; then $n-\\sum t_ln_l$ lies in the kernel. This proves exactness of tensor with $c_*A_D$, namely flatness in [def-pc-flat-sheaf-modules].\n\nMoreover $J_V=J_Z+J_W$ as sheaf ideals. One inclusion is restriction. For the other, a section $t\\in J_V(T)$ has clopen nonzero locus $C$ disjoint from $Z_T\\cap W_T$. The three opens $T\\setminus Z_T$, $T\\setminus W_T$, and $T\\setminus C$ cover $T$; there $t$ lies respectively in $J_Z$, in $J_W$, and is zero. Thus it lies locally in the sum. The balanced tensor relations consequently give\n$$\n (A_X/J_Z)\\otimes_{A_X}(A_X/J_W)\n \\cong A_X/(J_Z+J_W)=A_X/J_V,\n \\qquad \\overline a\\otimes\\overline b\\longmapsto\\overline{ab},\n$$\nwith inverse $\\overline c\\mapsto\\overline c\\otimes\\overline1$. These formulas show that this is exactly $\\mu$, not an unspecified isomorphism.\n\nA flat module placed in degree zero is K-flat [def-pc-kflat-complex]: exact tensor preserves the kernels and images computing cohomology, so it carries every acyclic complex to an acyclic complex. Therefore the degree-zero coefficient sheaves are their own K-flat resolutions. The K-flat tensor comparison of [lem-weil-pbc-site-derived-tensor-descent] yields the canonical isomorphism induced by the specified $\\mu$,\n$$\n \\theta:i_*A_Z\\otimes_A^Lj_*A_W\\xrightarrow{\\sim}h_*A_V.\n$$\nTensoring morphisms uses [lem-weil-derived-tensor-functorial]. Fix the shift comparison $\\sigma_{a,b}:F[a]\\otimes_A^LG[b]\\xrightarrow{\\sim}(F\\otimes_A^LG)[a+b]$ by the ordinary total-complex comparison on K-flat representatives $P,Q$: on a summand $P[a]^r\\otimes Q[b]^s$, it sends $x\\otimes y$ to $(-1)^{br}x\\otimes y$ in $(P\\otimes Q)[a+b]^{r+s}$. With the total differential $d_P\\otimes1+(-1)^r1\\otimes d_Q$ [def-pc-tensor-complex-sheaves], the first differential changes this sign by $(-1)^b$ and the second leaves it unchanged; these are exactly the shifted differential signs. Its inverse has the same signs, and it is natural in $P,Q$, so it descends to the indicated derived comparison by [lem-weil-pbc-site-derived-tensor-descent].\n\nThe supported cup product is, by definition, the following composite, read in $H_{Z\\cap W}^{a+b}(X,F\\otimes_A^LG)$, where $Z\\cap W$ means the closed support $V$:\n$$\n h_*A_V\\xrightarrow{\\theta^{-1}}\n i_*A_Z\\otimes_A^Lj_*A_W\n \\xrightarrow{\\alpha\\otimes_A^L\\beta}F[a]\\otimes_A^LG[b]\n \\xrightarrow{\\sigma_{a,b}}(F\\otimes_A^LG)[a+b].\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-supported-cup.md",
+  "place": "node def-pur-supported-cup, order 1941"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-proetale-module-direct-image",
+  "def-pur-support-cohomology",
+  "lem-pur-supported-hom",
+  "def-weil-derived-tensor",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-derived-tensor-functorial",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cupWithSupports|supported.*cohomology|i_*.*Lambda|derived.*tensor",
+   "results": "No hits; search directory Mathlib/SixFunctors/Etale",
+   "date": "2026-10-15",
+   "verdict": "invalid directory (Mathlib has no SixFunctors directory); superseded by valid CategoryTheory and Algebra searches"
   },
-  "kind": "definition",
-  "title": "Cup product with closed supports",
-  "statement": "Let $X$ be a scheme, let $\\Lambda$ be a commutative torsion ring, and work on the small etale sites, with constant coefficient sheaves $\\Lambda_T$ [def-weil-pbc-constant-sheaf] and module derived categories $D(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. Let $i:Z\\hookrightarrow X$ and $j:W\\hookrightarrow X$ be closed immersions [def-weil-closed-immersion], put $V=Z\\times_XW$ [def-pc-fibre-product], and write $h:V\\hookrightarrow X$ for their scheme-theoretic intersection. Thus $Z\\cap W$ in the support notation below means this closed support. Let $F,G\\in D^+(X_{\\Et},\\Lambda)$, let $a,b\\in\\mathbf Z$, and let $\\alpha\\in H_Z^a(X,F)$ and $\\beta\\in H_W^b(X,G)$, with the supported groups of [def-pur-support-cohomology]. Use [lem-pur-supported-hom] to regard these classes as morphisms $\\alpha:i_*\\Lambda_Z\\to F[a]$ and $\\beta:j_*\\Lambda_W\\to G[b]$.\n\nFor an arbitrary, possibly unbounded, $K\\in D(X_{\\Et},\\Lambda)$ the supported group in this construction means\n$$\n H_V^r(X,K):=\\operatorname{Hom}_{D(X_{\\Et},\\Lambda)}(h_*\\Lambda_V,K[r]).\n$$\nThis extends the bounded-below supported groups by [lem-pur-supported-hom]; the unbounded closed-support interpretation is also the derived-Hom description of [lem-amb-closed-support-hom]. Thus the output below remains meaningful when $F\\otimes^L_\\Lambda G$ is not bounded below.\n\nHere is the specified coefficient identification used in the definition. For an etale $U\\to X$, restrict a section of $\\Lambda_Z$ on $Z\\times_XU$ and a section of $\\Lambda_W$ on $W\\times_XU$ to $V\\times_XU$, and multiply them. The direct-image formula [def-weil-pbc-direct-image] and sheaf tensor universal property [def-pur-sheaf-tensor-product] give a map\n$$\n \\mu:i_*\\Lambda_Z\\otimes_{\\Lambda_X}j_*\\Lambda_W\\longrightarrow h_*\\Lambda_V.\n$$\nThis is an isomorphism: closed immersions are finite [lem-weil-pbc-closed-immersion-finite], so their stalks are $\\Lambda$ on the support and $0$ elsewhere by [lemma-weil-pbc-finite-stalk-formula] and [lem-weil-pbc-constant-sheaf-geometric-stalk]. The tensor over the constant ring $\\Lambda$ in [lem-pod-etale-stalk-tensor-scalar] agrees after sheafification with the tensor over $\\Lambda_X$: a section of $\\Lambda_X$ is locally represented by an element of the constant presheaf, so the $\\Lambda_X$-balancing relation is locally already a $\\Lambda$-balancing relation. The preceding stalk identifications respect scalar multiplication, since their maps commute with multiplication by every element of $\\Lambda$. Hence, by that tensor-stalk lemma, the stalk of $\\mu$ is multiplication $\\Lambda\\otimes_\\Lambda\\Lambda\\to\\Lambda$ on the intersection and the isomorphism between zero modules off it; [lemma-weil-pbc-geometric-stalk-conservative] proves the claim. These coefficient sheaves are flat in the sense of [def-pc-flat-sheaf-modules]: tensoring an exact sequence and taking stalks gives tensor with either $\\Lambda$ or $0$, which preserves exactness, and [prop-weil-pbc-geometric-stalks-exact] together with stalk conservativity detects that exactness. Their degree-zero complexes are K-flat by [lem-kun-kflat-criteria](1), so $\\mu$ induces the canonical isomorphism\n$$\n \\theta:i_*\\Lambda_Z\\otimes^L_\\Lambda j_*\\Lambda_W\\xrightarrow{\\sim}h_*\\Lambda_V.\n$$\nDerived tensor here is [def-kun-derived-tensor], and the shift identification $F[a]\\otimes^L_\\Lambda G[b]\\cong(F\\otimes^L_\\Lambda G)[a+b]$ is the canonical one supplied by its exactness in each variable [lem-kun-derived-tensor-triangulated].\n\nThe supported cup product $\\alpha\\smile\\beta$ is, by definition, the following composite, read in $H_{Z\\cap W}^{a+b}(X,F\\otimes^L_\\Lambda G)$:\n$$\n h_*\\Lambda_V\\xrightarrow{\\theta^{-1}}\n i_*\\Lambda_Z\\otimes^L_\\Lambda j_*\\Lambda_W\n \\xrightarrow{\\alpha\\otimes^L\\beta}\n F[a]\\otimes^L_\\Lambda G[b]\n \\xrightarrow{\\sim}(F\\otimes^L_\\Lambda G)[a+b].\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-supported-cup.md",
-    "place": "node def-pur-supported-cup, order 1941"
+  {
+   "tool": "leansearch",
+   "query": "definition of cup product on etale cohomology with supports using derived tensor product of coefficient sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
   },
-  "stmt_deps": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-derived-categories",
-    "def-weil-closed-immersion",
-    "def-pc-fibre-product",
-    "lem-pur-supported-hom",
-    "def-pur-support-cohomology",
-    "lem-amb-closed-support-hom",
-    "def-weil-pbc-direct-image",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-pc-flat-sheaf-modules",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-kun-kflat-criteria",
-    "def-kun-derived-tensor",
-    "lem-kun-derived-tensor-triangulated"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "cupWithSupports|supported.*cohomology|i_*.*Lambda|derived.*tensor",
-      "results": "No hits; search directory Mathlib/SixFunctors/Etale",
-      "date": "2026-10-15",
-      "verdict": "invalid directory (Mathlib has no SixFunctors directory); superseded by valid CategoryTheory and Algebra searches"
-    },
-    {
-      "tool": "leansearch",
-      "query": "definition of cup product on etale cohomology with supports using derived tensor product of coefficient sheaves",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "cupWithSupports, supported cohomology, derived tensor, closed immersion",
-      "results": "loogle: unknown identifier 'cupWithSupports'",
-      "date": "2026-10-15",
-      "verdict": "invalid query; no mathematical conclusion"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "cup product with closed supports in etale derived category; tensor of extension by zero coefficient sheaves",
-      "results": "Generic sheaf monoidal structures and ordinary Sheaf.H; no supported cup construction.",
-      "date": "2026-10-15",
-      "verdict": "no match for the supported cup definition"
-    },
-    {
-      "tool": "grep",
-      "query": "support|tensor|cohomology",
-      "results": "Ordinary Sheaf.H, Cech and Mayer-Vietoris files; no product with supports.; search directory Mathlib/CategoryTheory/Sites/SheafCohomology",
-      "date": "2026-10-15",
-      "verdict": "no match for the supported cup definition"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "intersection of supports and tensor product of extension by zero constant sheaves for closed immersions",
-      "results": "IdealSheafData support and zero-locus results; no sheaf-cohomology product.",
-      "date": "2026-10-15",
-      "verdict": "no match for the supported cup definition"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.H, tensorProd_isSheaf, DerivedCategory, IsClosedImmersion",
-      "results": "loogle: unknown identifier 'tensorProd_isSheaf'",
-      "date": "2026-10-15",
-      "verdict": "invalid query; no mathematical conclusion"
-    },
-    {
-      "tool": "leansearch",
-      "query": "cohomology with supports cup product closed subsets tensor derived sheaves",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Sheaf\", \"tensor\"",
-      "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
-      "date": "2026-10-15",
-      "verdict": "no match for the supported cup definition"
-    },
-    {
-      "tool": "grep",
-      "query": "cupWithSupports|supportedSections|sectionsWithSupport|cohomologyWithSupport|derivedTensor",
-      "results": "No hits; search directory Mathlib/CategoryTheory",
-      "date": "2026-10-15",
-      "verdict": "no match for the supported cup definition"
-    },
-    {
-      "tool": "grep",
-      "query": "localCohomology|cupProduct|cup_product",
-      "results": "Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean; search directory Mathlib/Algebra",
-      "date": "2026-10-15",
-      "verdict": "no match for the supported cup definition"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "derived sheaf cohomology multiplication with support in intersection of closed subsets",
-      "results": "CategoryTheory.PresheafOfGroups.Cochain₀.mul_apply, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, CategoryTheory.PresheafOfGroups.OneCochain.mul_ev, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, TopCat.Sheaf.objSupIsoProdEqLocus, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff",
-      "date": "2026-10-16",
-      "verdict": "no match for the supported cup definition; ordinary sheaf cohomology and section formulas do not specify the closed-support coefficient map"
-    },
-    {
-      "tool": "grep",
-      "query": "cup|support|tensor",
-      "results": "No hits; search directory Mathlib/CategoryTheory/Sites/SheafCohomology",
-      "date": "2026-10-16",
-      "verdict": "no match for the supported cup definition"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"cohomology\", \"tensor\"",
-      "results": "No hits",
-      "date": "2026-10-16",
-      "verdict": "no match for the supported cup definition"
-    },
-    {
-      "tool": "grep",
-      "query": "cohomology|Ext|support|tensor",
-      "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; search directory Mathlib/CategoryTheory/Sites/SheafCohomology",
-      "date": "2026-10-16",
-      "verdict": "no match for the supported cup definition; ordinary sheaf cohomology and section formulas do not specify the closed-support coefficient map"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1941,
-  "blueprint_uses": [
-    "def-pur-support-cohomology",
-    "def-weil-derived-tensor",
-    "def-weil-scheme-morphism-properties",
-    "lem-pur-supported-hom"
-  ],
-  "uses_not_cited": [
-    "def-pur-support-cohomology",
-    "def-weil-derived-tensor",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "cupWithSupports, supported cohomology, derived tensor, closed immersion",
+   "results": "loogle: unknown identifier 'cupWithSupports'",
+   "date": "2026-10-15",
+   "verdict": "invalid query; no mathematical conclusion"
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-a1-kummer",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "def-pur-supported-cup",
-    "worker": "stage1",
-    "summary": "Made all objects and the etale coefficient category explicit; replaced the mismatched pro-etale-only tensor definition with the existing etale derived-tensor node. Defined the coefficient map by restriction and multiplication, verified its isomorphism and flatness using existing finite-stalk, tensor-stalk and exactness statements, and displayed the shift map separately. Repaired the boundedness gap by specifying the unbounded supported-Hom target convention, agreeing with the existing bounded-below groups. No new nodes; all ingredients already exist. The report records STATEMENT-DISPUTED, the Tor counterexample and the explicit topology clarification. Searches are recorded exactly as run, with invalid queries and an invalid directory distinguished from genuine negative results.",
-    "blueprint": "The entire definition in the master blueprint def-pur-supported-cup.md: coefficient-sheaf identification, tensoring the two supported-Hom classes, adding the two shifts, and reading the composite as a supported class. The canonical coefficient isomorphism is now specified rather than selected from its stalkwise existence.",
-    "tool_uses": [
-      {
-        "node": "lem-amb-closed-support-hom",
-        "why": "Generic Closed support as a relative section complex used to define or verify the coefficient map or supported-Hom target; the affine-line unit has no corresponding general tool statement. This does not replace a step of its Kummer computation."
-      },
-      {
-        "node": "lem-pod-etale-stalk-tensor-scalar",
-        "why": "Generic Geometric stalks commute with tensor products and scalar extension on the etale site used to define or verify the coefficient map or supported-Hom target; the affine-line unit has no corresponding general tool statement. This does not replace a step of its Kummer computation."
-      },
-      {
-        "node": "lem-kun-kflat-criteria",
-        "why": "Generic K-flat criteria used to define or verify the coefficient map or supported-Hom target; the affine-line unit has no corresponding general tool statement. This does not replace a step of its Kummer computation."
-      }
-    ]
+  {
+   "tool": "leanfinder",
+   "query": "cup product with closed supports in etale derived category; tensor of extension by zero coefficient sheaves",
+   "results": "Generic sheaf monoidal structures and ordinary Sheaf.H; no supported cup construction.",
+   "date": "2026-10-15",
+   "verdict": "no match for the supported cup definition"
   },
-  "tool_uses": [
-    "lem-amb-closed-support-hom",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "lem-kun-kflat-criteria"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-N3-a1e672e09",
-    "group": "N3",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-a1e672e09 (reviewer sub-agent of L); spot-checked: Read the complete item, source, route, all 19 cited nodes, literature locations, report, and edge cases. The etale coefficient category, stalkwise coefficient isomorphism, flatness/K-flatness, shifts, and unbounded target convention are mathematically consistent; no duplicate, cycle, new node, or repair is required. Review written to review.md."
+  {
+   "tool": "grep",
+   "query": "support|tensor|cohomology",
+   "results": "Ordinary Sheaf.H, Cech and Mayer-Vietoris files; no product with supports.; search directory Mathlib/CategoryTheory/Sites/SheafCohomology",
+   "date": "2026-10-15",
+   "verdict": "no match for the supported cup definition"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $i:Z\\hookrightarrow X$ and $j:W\\hookrightarrow X$ be\nclosed immersions, and\nwrite $h:Z\\times_XW\\hookrightarrow X$. For classes\n$\\alpha\\in H_Z^a(X,F)$ and $\\beta\\in H_W^b(X,G)$ in\nsupported cohomology, represent\nthem by morphisms as in [lem-pur-supported-hom].\nTheir *supported cup product* is the morphism\n\n$$\nh_*\\Lambda_{Z\\times_XW}\n\\cong i_*\\Lambda_Z\\otimes^L_\\Lambda j_*\\Lambda_W\n\\xrightarrow{\\alpha\\otimes\\beta}(F\\otimes^L_\\Lambda G)[a+b],\n$$\n\nread as an element of $H_{Z\\cap W}^{a+b}(X,F\\otimes^L_\\Lambda G)$.\nThe first identification is the stalkwise identification of the\ncoefficient sheaves. Tensor and shifts are those\nof derived tensor.",
-    "proof": [
-      {
-        "text": "The first identification is well defined: each stalk of the coefficient\nsheaves is either $0$ or the free module $\\Lambda$, so these sheaves are flat\nand their tensor is the coefficient sheaf on the intersection.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "intersection of supports and tensor product of extension by zero constant sheaves for closed immersions",
+   "results": "IdealSheafData support and zero-locus results; no sheaf-cohomology product.",
+   "date": "2026-10-15",
+   "verdict": "no match for the supported cup definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, tensorProd_isSheaf, DerivedCategory, IsClosedImmersion",
+   "results": "loogle: unknown identifier 'tensorProd_isSheaf'",
+   "date": "2026-10-15",
+   "verdict": "invalid query; no mathematical conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology with supports cup product closed subsets tensor derived sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-15",
+   "verdict": "no match for the supported cup definition"
+  },
+  {
+   "tool": "grep",
+   "query": "cupWithSupports|supportedSections|sectionsWithSupport|cohomologyWithSupport|derivedTensor",
+   "results": "No hits; search directory Mathlib/CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "no match for the supported cup definition"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|cupProduct|cup_product",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean; search directory Mathlib/Algebra",
+   "date": "2026-10-15",
+   "verdict": "no match for the supported cup definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived sheaf cohomology multiplication with support in intersection of closed subsets",
+   "results": "CategoryTheory.PresheafOfGroups.Cochain₀.mul_apply, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, CategoryTheory.PresheafOfGroups.OneCochain.mul_ev, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, TopCat.Sheaf.objSupIsoProdEqLocus, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff",
+   "date": "2026-10-16",
+   "verdict": "no match for the supported cup definition; ordinary sheaf cohomology and section formulas do not specify the closed-support coefficient map"
+  },
+  {
+   "tool": "grep",
+   "query": "cup|support|tensor",
+   "results": "No hits; search directory Mathlib/CategoryTheory/Sites/SheafCohomology",
+   "date": "2026-10-16",
+   "verdict": "no match for the supported cup definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"tensor\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match for the supported cup definition"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology|Ext|support|tensor",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; search directory Mathlib/CategoryTheory/Sites/SheafCohomology",
+   "date": "2026-10-16",
+   "verdict": "no match for the supported cup definition; ordinary sheaf cohomology and section formulas do not specify the closed-support coefficient map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cup product on etale sheaf cohomology with closed supports using tensor product of closed direct image constant coefficient sheaves",
+   "results": "CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃",
+   "date": "2026-10-17",
+   "verdict": "no match for this closed-support derived cup definition; hits give ordinary cohomology, underived or Cartesian tensor, function/ideal supports, or different sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-17",
+   "verdict": "no match for this closed-support derived cup definition; hits give ordinary cohomology, underived or Cartesian tensor, function/ideal supports, or different sites"
+  },
+  {
+   "tool": "grep",
+   "query": "cupWithSupports|cohomologyWithSupport|supportedSections|sectionsWithSupport|derivedTensor",
+   "results": "No hits; search directory Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match for this closed-support derived cup definition; hits give ordinary cohomology, underived or Cartesian tensor, function/ideal supports, or different sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cup product cohomology with closed supports of sheaves via derived tensor and intersection of supports",
+   "results": "Function.support_mul', AlgebraicGeometry.Scheme.IdealSheafData.support_iSup, CategoryTheory.Sheaf.tensorProd_isSheaf, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters, AlgebraicGeometry.Scheme.IdealSheafData.support_sup, CategoryTheory.binaryProductExponentiable, AlgebraicGeometry.Scheme.IdealSheafData.support_sSup, HomologicalComplex.tensorObj",
+   "date": "2026-10-17",
+   "verdict": "no match for this closed-support derived cup definition; hits give ordinary cohomology, underived or Cartesian tensor, function/ideal supports, or different sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "intersection of closed supports tensor of direct image constant sheaves derived cohomology multiplication",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, CategoryTheory.Sheaf.H, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff",
+   "date": "2026-10-17",
+   "verdict": "no match for this closed-support derived cup definition; hits give ordinary cohomology, underived or Cartesian tensor, function/ideal supports, or different sites"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology|Ext|support|tensor",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; search directory Mathlib/CategoryTheory/Sites/SheafCohomology",
+   "date": "2026-10-17",
+   "verdict": "no match for this closed-support derived cup definition; hits give ordinary cohomology, underived or Cartesian tensor, function/ideal supports, or different sites"
+  },
+  {
+   "tool": "grep",
+   "query": "cupWithSupports|cohomologyWithSupport|supportedSections|sectionsWithSupport",
+   "results": "0 hits: none; directory Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary cohomology, nonabelian or group cochains, function or ideal supports, and monoidal categories on other sites do not define this closed-support derived cup composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cup product on sheaf cohomology supported on two closed subschemes with output supported on their intersection",
+   "results": "8 hits: Function.support_mul', TopCat.Presheaf.SheafConditionEqualizerProducts.piInters, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.RingedSpace.basicOpen_mul, AlgebraicGeometry.Scheme.IdealSheafData.support_sup, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary cohomology, nonabelian or group cochains, function or ideal supports, and monoidal categories on other sites do not define this closed-support derived cup composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "7 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary cohomology, nonabelian or group cochains, function or ideal supports, and monoidal categories on other sites do not define this closed-support derived cup composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cup product with closed supports in etale cohomology defined by derived tensor of morphisms from closed pushforward constant sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Sheaf.instAddCommGroupH, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, TopCat.Sheaf.objSupIsoProdEqLocus",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary cohomology, nonabelian or group cochains, function or ideal supports, and monoidal categories on other sites do not define this closed-support derived cup composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor of cohomology classes represented by maps out of closed direct images of constant coefficients defines product on intersecting supports",
+   "results": "8 hits: CategoryTheory.PresheafOfGroups.OneCochain.mul_ev, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans, CategoryTheory.PresheafOfGroups.OneCochain.instMul, groupCohomology.mapCocycles₂_comp_i_apply, groupCohomology.mapCocycles₁_comp_i_apply, groupCohomology.isoCocycles₁_hom_comp_i_apply, groupCohomology.isoCocycles₂_hom_comp_i_apply, groupCohomology.π_map_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary cohomology, nonabelian or group cochains, function or ideal supports, and monoidal categories on other sites do not define this closed-support derived cup composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro-etale cohomology cup product supported on intersection of closed subschemes with finite coefficients",
+   "results": "8 hits: Finsupp.supported_inter, AlgebraicGeometry.Scheme.IdealSheafData.support_sup, Finsupp.supported_iInter, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_inter, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.Scheme.IdealSheafData.support_iSup, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits give ordinary sheaf cohomology, cotangent maps, ideal/function supports, or light condensed monoidal structures; none defines the pro-etale finite-coefficient closed-support cup composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cup product with closed supports on pro-etale finite coefficient module sheaves using tensor of morphisms from closed pushforward constant sheaves",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, SheafOfModules.Presentation.map_π_eq, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.ihomPoints, SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits give ordinary sheaf cohomology, cotangent maps, ideal/function supports, or light condensed monoidal structures; none defines the pro-etale finite-coefficient closed-support cup composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived product of cohomology classes represented by maps from constant finite ring modules pushed forward along closed embeddings on the proetale site",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_map, CategoryTheory.Sheaf.cohomologyPresheaf, Algebra.Extension.H1Cotangent.map, Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits give ordinary sheaf cohomology, cotangent maps, ideal/function supports, or light condensed monoidal structures; none defines the pro-etale finite-coefficient closed-support cup composite"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1941,
+ "blueprint_uses": [
+  "def-pur-support-cohomology",
+  "def-weil-derived-tensor",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-supported-hom"
+ ],
+ "uses_not_cited": [
+  "def-pur-support-cohomology",
+  "def-weil-derived-tensor",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pur-supported-cup",
+  "worker": "stage1",
+  "summary": "Re-split after E4/C4: restored the finite coefficient datum A=A_{E,n} and pro-etale sites fixed by the current convention unit, citing lem-pur-supported-hom directly for both inputs. Reconstructed mu by restriction and multiplication on pro-etale test objects. Verified its exact coefficient quotient model, flatness by local idempotents, and intersection tensor using existing generic nodes and explicit elementary calculations. Removed every etale-only support, geometric-stalk, and K-flat criterion dependency, including the remark-only lem-amb-closed-support-hom. Retained the explicit unbounded Hom output and supplied a signed total-complex shift map. No new nodes or Mathlib leaves; existing search and report history preserved.",
+  "blueprint": "Current main-20261015 definition: supported-Hom input representation, intersection coefficient identification, tensor of morphisms, and sum of shifts. Companion proof: coefficient tensor is underived and flat. Its stalk shorthand is replaced by the explicit sheaf quotient/idempotent calculation on pro-etale test objects. Convention unit sk-def-purity-conv fixes Lambda=A=A_{E,n} and the pro-etale sites.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Fpqc descent makes the locally constant-function coefficient model a sheaf for the actual pro-etale coverings; the unit supplies no such general descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Existence of the constant scheme whose relative morphisms model locally constant coefficient functions; a generic scheme construction, not a substitute Kummer route."
+   },
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "Identifies the specific relative morphisms into the constant scheme with clopen decompositions, on arbitrary test schemes; no pro-etale stalk assertion is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Keeps each test-object support closed, permitting the explicit local extension argument; a generic geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Detects the displayed quotient epimorphisms and gives local lifts in the flatness argument on this site."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Transfers the general-site local epimorphism criterion to module sheaves via its exact forgetful functor."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Gives local representatives and local equality for the sheaf quotients and tensor relations; generic sheafification tool."
+   },
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Allows the stated set-level local sheafification criterion for module quotients by forgetting their abelian structure."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site K-flat comparison and two-variable localization justify the coefficient tensor and explicit shift comparison."
+   },
+   {
+    "node": "lem-weil-derived-tensor-functorial",
+    "why": "Supplies tensor on the pair of supported derived morphisms, in precisely the pro-etale category used here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-closed-support-hom",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-kun-kflat-criteria",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-derived-tensor-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-f981675f1",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-f981675f1 (reviewer sub-agent of L); spot-checked: I read the whole item, all 24 cited statements, the current main-20261015 def-pur-supported-cup.md (order 2285) with its .proof.md, lem-pur-supported-hom, sk-def-purity-conv/_section.md, the unit and chapter records, the three citers and Stacks 03YW/023Q/03O3/03P5/03ER/06YN/06YU/00WK. Coefficient category: the source conventions fix Lambda=A=A_{E,n} on pro-etale sites. The item works in D(X_proet,A) and cites lem-pur-supported-hom within its hypotheses (bounded below, any integer degree), which repairs the old etale typing mismatch with def-pur-frame-class. Checked arguments: (1) the constant sheaf is locally constant functions, via the coproduct morphism/clopen bijection and fpqc descent; Zariski covers are pro-etale coverings and G(empty)=pt. (2) c_*A_D=A_X/J_D by local extension. (3) Flatness: the clopen idempotent e satisfies e t_l=t_l, so (1-e)m=0 and m lies in JM; with right exactness this is def-pc-flat-sheaf-modules. (4) J_V=J_Z+J_W on the three-open cover; the quotient tensor map is exactly mu. (5) Degree-0 flat implies K-flat, so theta comes from the descent lemma. (6) The (-1)^{br} shift sign checks out in both differential terms. Edge cases: empty, disjoint, full, identical and nonreduced supports; n=1; shifts of either sign; Z/4 Tor unbounded, so the Hom output convention is needed. The k-scheme restriction is harmless because every citer works over k-schemes. No cycle (11887 nodes traversed), no missing or merged dependency, no duplicate in the DAG, no new nodes, no SGA. Accepted the ten generic tool_uses proposed in split_report. I accept the inline mu/flatness proof because the blueprint attaches that claim to the definition itself. Maintainer notes: the source field is maintainer-owned and still names master/1941, though the report says main-20261015/2285. The report misses a third citer, lem-pur-supported-cup-functoriality (unsplit), which still refers to an 'ordinary etale construction' this definition no longer gives. In cor-pur-affine-space-zero-section-purity, the phrase 'site comparison' is now redundant. No fixes written."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $i:Z\\hookrightarrow X$ and $j:W\\hookrightarrow X$ be\nclosed immersions, and\nwrite $h:Z\\times_XW\\hookrightarrow X$. For classes\n$\\alpha\\in H_Z^a(X,F)$ and $\\beta\\in H_W^b(X,G)$ in\nsupported cohomology, represent\nthem by morphisms as in [lem-pur-supported-hom].\nTheir *supported cup product* is the morphism\n\n$$\nh_*\\Lambda_{Z\\times_XW}\n\\cong i_*\\Lambda_Z\\otimes^L_\\Lambda j_*\\Lambda_W\n\\xrightarrow{\\alpha\\otimes\\beta}(F\\otimes^L_\\Lambda G)[a+b],\n$$\n\nread as an element of $H_{Z\\cap W}^{a+b}(X,F\\otimes^L_\\Lambda G)$.\nThe first identification is the stalkwise identification of the\ncoefficient sheaves. Tensor and shifts are those\nof derived tensor.",
+  "proof": [
+   {
+    "text": "The first identification is well defined: each stalk of the coefficient\nsheaves is either $0$ or the free module $\\Lambda$, so these sheaves are flat\nand their tensor is the coefficient sheaf on the intersection.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

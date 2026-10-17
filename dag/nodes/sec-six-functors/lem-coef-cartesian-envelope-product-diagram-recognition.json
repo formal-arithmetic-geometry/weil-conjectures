@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "The finite-tuple/cartesian-target construction in the classification proof: identify the product-diagram full subcategory of the relative exponential over N(Fin_*) with the canonical cartesian envelope.",
+   "place": "Second proof paragraph, the derived Hom / derived inverse-limit adjunction comparison: auxiliary coherent finite-product diagram machinery introduced through the recorded via chain. The product-diagram model and its separate abstract uniqueness comparison are not explicitly stated in this paragraph.",
    "via": [
     "lem-coef-lax-cartesian-classification",
     "lem-coef-cartesian-monoidal-straightening",
@@ -20,50 +20,280 @@
  },
  "kind": "statement",
  "title": "Recognition of the cartesian envelope inside the relative exponential",
- "statement": "Let $\\mathcal D$ be an infinity category with finite products. Let $v:N(\\Gamma^{\\times})\\to N(\\mathsf{Fin}_*)$ be the nerve of the cartesian fibration of pairs $(\\langle n\\rangle,S)$ with arrows over $\\alpha$ whenever $\\alpha^{-1}(T)\\subseteq S$, and let $Q\\to N(\\mathsf{Fin}_*)$ be the relative exponential of [lem-cbc-enhanced-relative-exponential] for $v$ and $\\mathcal D$, whose $\\langle n\\rangle$-fiber is $\\operatorname{Fun}(N(B_n),\\mathcal D)$, where $B_n$ is the reverse-inclusion poset of subsets of $\\{1,\\ldots,n\\}$. For each $n$, let $P_n$ be the full subcategory of diagrams $f:N(B_n)\\to\\mathcal D$ for which the restriction cone exhibits $f(S)$ as $\\prod_{i\\in S}f(\\{i\\})$, with $f(\\varnothing)$ terminal. Let $P\\subset Q$ be the full simplicial subcategory with fibers $P_n$. Then $P\\to N(\\mathsf{Fin}_*)$ is canonically equivalent over the base to the cartesian symmetric monoidal infinity category $\\mathcal D^{\\times}\\to N(\\mathsf{Fin}_*)$ of [lem-coef-cartesian-operadic-envelope]. Under this equivalence, the fiber over $\\langle n\\rangle$ is identified with $\\mathcal D^n$, mapping spaces over $\\alpha$ are the product of block mapping spaces, inert cocartesian arrows are exactly those with equivalences on the singleton components, and the equivalence preserves composition and all higher simplices; the space of such identifications with the specified product cones is contractible.",
+ "statement": "Let $\\mathcal D$ be an infinity category with finite products, including a terminal object for the empty product. Use the cocartesian and cartesian fibration conventions of [def-coef-infinity-fibrations] and symmetric monoidal infinity categories of [lem-coef-symmetric-monoidal-segal-classification]. Let $\\langle n\\rangle=\\{*,1,\\ldots,n\\}$ and let $\\mathsf{Fin}_*$ be finite pointed sets. Define $\\Gamma^\\times$ to have objects $(\\langle n\\rangle,S)$ with $S\\subseteq\\{1,\\ldots,n\\}$ and one arrow over a pointed map $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$ whenever $\\alpha^{-1}(T)\\subseteq S$. Let $v:N(\\Gamma^\\times)\\to N(\\mathsf{Fin}_*)$ be its cartesian projection. Let $q:Q\\to N(\\mathsf{Fin}_*)$ be the relative exponential of [lem-cbc-enhanced-relative-exponential] for $v$ and $\\mathcal D$, so that simplices over $\\sigma:\\Delta^k\\to N(\\mathsf{Fin}_*)$ are coherent diagrams $\\Delta^k\\times_{N(\\mathsf{Fin}_*)}N(\\Gamma^\\times)\\to\\mathcal D$. Write $B_n$ for the reverse-inclusion poset of subsets of $\\{1,\\ldots,n\\}$. Let $P\\subseteq Q$ be the full simplicial subcategory spanned by the fiber diagrams $f:N(B_n)\\to\\mathcal D$ such that every restriction cone $f(S)\\to f(\\{i\\})$, $i\\in S$, is a product cone, including $f(\\varnothing)$ terminal. Then the restriction $p:P\\to N(\\mathsf{Fin}_*)$ is a cocartesian fibration, with its cocartesian edges exactly the edges of $P$ that are $q$-cocartesian. Singleton restriction gives equivalences $e_n:P_n\\simeq\\mathcal D^n$, and these are the Segal equivalences induced by the inert projections; in particular $p$ is a symmetric monoidal infinity category. Cocartesian transport along $\\alpha$ is represented by $f\\mapsto(T\\mapsto f(\\alpha^{-1}T))$. For $f\\in P_n$, $g\\in P_m$, $c_i=f(\\{i\\})$ and $d_j=g(\\{j\\})$, restriction induces a natural equivalence\n$$\\operatorname{Map}^{\\alpha}_{P}(f,g)\\simeq\\prod_{j=1}^m\\operatorname{Map}_{\\mathcal D}\\left(\\prod_{\\alpha(i)=j}c_i,d_j\\right).$$\nComposition is substitution of the block maps with the projection-preserving regrouping of products, and indices sent to the basepoint are discarded. An edge is $p$-cocartesian exactly when all its block maps are equivalences; for inert $\\alpha$, each block is a singleton. Finally the full-subset section $s(\\langle n\\rangle)=(\\langle n\\rangle,\\{1,\\ldots,n\\})$ defines, by the relative-exponential evaluation, a coherent functor $\\pi:P\\to\\mathcal D$ with $\\pi(f)=f(\\{1,\\ldots,n\\})$. Its inert projections exhibit $\\pi(f)$ as the product of its singleton values, its restriction $P_1\\to\\mathcal D$ is an equivalence, and it sends cocartesian arrows over the active maps $\\langle n\\rangle\\to\\langle1\\rangle$ to equivalences. Here active means all non-basepoints map to $1$. Thus $(P,\\pi)$ is the specified product-diagram cartesian structure; all the transport, evaluation and composition formulas are restrictions of the simplicial operators of $Q$.",
  "source": {
   "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
   "place": "Construction 2.4.1.4 and Proposition 2.4.1.5(1)--(5), the product-diagram subcategory and its identification with the cartesian envelope."
  },
  "stmt_deps": [
-  "lem-cbc-enhanced-relative-exponential",
-  "lem-coef-cartesian-operadic-envelope"
+  "def-coef-infinity-fibrations",
+  "lem-coef-symmetric-monoidal-segal-classification",
+  "lem-cbc-enhanced-relative-exponential"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a universe containing $\\mathcal D$, enlarging the universes in [lem-coef-cocartesian-straightening] if necessary. The indexing categories $\\mathsf{Fin}_*$ and $\\Gamma^\\times$ are small. First, $v$ is a cartesian fibration in the sense of [def-coef-infinity-fibrations]. Since $\\Gamma^\\times$ has at most one arrow over each pointed map, $v$ is faithful, and the map of nerves of ordinary categories is an inner fibration. For $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$ and $(\\langle m\\rangle,T)$, the arrow $(\\langle n\\rangle,\\alpha^{-1}T)\\to(\\langle m\\rangle,T)$ over $\\alpha$ is cartesian: given $(\\langle k\\rangle,R)\\to(\\langle m\\rangle,T)$ over $\\alpha\\beta$, the inclusion $\\beta^{-1}(\\alpha^{-1}T)=(\\alpha\\beta)^{-1}T\\subseteq R$ gives the unique factorization over $\\beta$, which fills $\\Lambda^2_2$; for $\\Lambda^n_n$ with $n\\geq3$ the horn contains every edge and the missing face commutes because its image in $\\mathsf{Fin}_*$ commutes and $v$ is faithful. Apply [lem-cbc-enhanced-relative-exponential] to this cartesian fibration $v$. This gives the quasicategory $Q$, its cocartesian projection $q$, its stated fibers, and its simplicial operators. More explicitly, for $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$, put $a(T)=f(\\alpha^{-1}T)$. The edge from $f$ to $a$ is defined on the indexing category over $[1]$ by $f(S)$ at $(0,S)$ and $f(\\alpha^{-1}T)$ at $(1,T)$: an arrow $(0,S)\\to(1,T)$ has $\\alpha^{-1}T\\subseteq S$ and is sent to the corresponding restriction map of $f$. Cartesian indexing edges have $S=\\alpha^{-1}T$ and are sent to identities, so the exponential's edge criterion makes this edge cocartesian. For a chain of pointed maps use the same formula with the composite inverse image. Equality of iterated inverse images makes these formulas compatible with every face and degeneracy.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-coef-cocartesian-straightening",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+   }
+  },
+  {
+   "text": "Let $A_n\\subset B_n$ be the singleton subposet and $j_n$ its inclusion. The order on $B_n$ is reverse inclusion, so $(A_n)_{\\geq S}$ is the discrete set of $\\{i\\}$ with $i\\in S$. All its limits exist by finite products, even though $\\mathcal D$ is not assumed to have other finite limits. The right-extension and mapping-equivalence clauses of [lem-coef-infinity-finite-poset-kan-extension] give a functor $R_n:\\mathcal D^n\\to\\operatorname{Fun}(N(B_n),\\mathcal D)$ with $R_n(c)(S)\\simeq\\prod_{i\\in S}c_i$, counit $j_n^*R_n\\simeq\\mathrm{id}$, and unit $f\\to R_nj_n^*f$. The unit is an equivalence exactly when every restriction cone of $f$ is a product cone, by the pointwise limit formula and the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus]. Hence it restricts to an inverse equivalence for $e_n=j_n^*:P_n\\to\\mathcal D^n$. At $n=0$ this says that the category of terminal objects is contractible, not that a particular terminal object has been chosen strictly.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+   }
+  },
+  {
+   "text": "The transport $a(T)=f(\\alpha^{-1}T)$ from step 1 stays in $P_m$ whenever $f\\in P_n$. Indeed $\\alpha^{-1}T$ is the disjoint union of $\\alpha^{-1}\\{j\\}$ for $j\\in T$. For every test object $x$, the product-cone equivalences identify both $\\operatorname{Map}(x,a(T))$ and $\\prod_{j\\in T}\\operatorname{Map}(x,a(\\{j\\}))$ with $\\prod_{i\\in\\alpha^{-1}T}\\operatorname{Map}(x,f(\\{i\\}))$, and the map induced by the restriction cone is precisely this regrouping. This is the defining universal property of the product, including the empty product. For an inner horn in $P$ over a specified simplex of $N(\\mathsf{Fin}_*)$, the inner-fibration property of $q$ gives a filler in $Q$ over that simplex. Its vertices already belong to $P$, so fullness puts this filler in $P$. The explicit horn-cocartesian lifts of step 1 have endpoints in $P$. Applied to the inner fibration $q$, [lem-coef-infinity-cocartesian-mapping-criterion] makes their universal mapping squares homotopy pullbacks. The mapping spaces between vertices of a full subcategory are the ambient ones: every simplex in the right-pinched mapping space from $x$ to $y$ has only $x$ and $y$ as vertices, so for $x,y\\in P$ it belongs to $P$ by fullness. Thus $\\operatorname{Map}_P(x,y)=\\operatorname{Map}_Q(x,y)$ degree by degree, and these squares remain homotopy pullbacks when their test objects are restricted to $P$. Applied now to the restricted inner fibration, the converse of the same criterion makes these lifts horn-cocartesian in $P$. Thus $P\\to N(\\mathsf{Fin}_*)$ is a cocartesian fibration in the simplicial convention as well as the intrinsic convention of [lem-coef-cocartesian-straightening].",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+   }
+  },
+  {
+   "text": "Fix $f\\in P_n$, $g\\in P_m$, and $\\alpha$, and let $a=\\alpha_!f$ be the lift endpoint above. By [lem-coef-infinity-cocartesian-mapping-criterion] the specified horn-cocartesian lift satisfies the mapping square of [lem-coef-cocartesian-straightening]. Take its homotopy fiber over the identity of $\\langle m\\rangle$; the lower precomposition map sends this identity to $\\alpha$. It gives $\\operatorname{Map}^{\\alpha}_{P}(f,g)\\simeq\\operatorname{Map}_{P_m}(a,g)$. Since $g\\simeq R_mj_m^*g$, the right-adjunction mapping formula of [lem-coef-infinity-finite-poset-kan-extension] identifies the latter space with\n$$\\prod_{j=1}^m\\operatorname{Map}_{\\mathcal D}(f(\\alpha^{-1}\\{j\\}),g(\\{j\\}))\\simeq\\prod_{j=1}^m\\operatorname{Map}_{\\mathcal D}(\\prod_{\\alpha(i)=j}c_i,d_j),$$\nwhere $c_i=f(\\{i\\})$, $d_j=g(\\{j\\})$. Mapping-space invariance under the fiber equivalence is supplied by [lem-cbc-enhanced-functor-cone-calculus]. These are the actual maps given by restriction to the cartesian indexing edges, so the natural mapping equivalences compute block components rather than just abstractly equivalent spaces.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+   }
+  },
+  {
+   "text": "For composable $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$ and $\\beta:\\langle m\\rangle\\to\\langle\\ell\\rangle$, let the block maps be $u_j:\\prod_{\\alpha(i)=j}c_i\\to d_j$ and $v_k:\\prod_{\\beta(j)=k}d_j\\to e_k$. On the indexing category over $[2]$, restriction of the exponential diagram gives at a final singleton $\\{k\\}$ the composite from the inverse image under $\\beta\\alpha$, through the value at $\\beta^{-1}\\{k\\}$ in the middle diagram, to $e_k$. The right-Kan mapping formula of [lem-coef-infinity-finite-poset-kan-extension] identifies the middle transformation, including its restriction maps, with its singleton components $u_j$. Consequently the composite block is\n$$\\prod_{\\beta(\\alpha(i))=k}c_i\\simeq\\prod_{\\beta(j)=k}\\prod_{\\alpha(i)=j}c_i\\xrightarrow{\\prod_j u_j}\\prod_{\\beta(j)=k}d_j\\xrightarrow{v_k}e_k.$$\nThe regrouping is the comparison preserving every original factor projection. An index sent to $*$ by either map occurs in no non-basepoint output block. This computes composition inside $P$ itself. By [lem-cbc-enhanced-relative-exponential] the simplicial operators are pullback and restriction. Explicitly, over a chain $\\sigma=(\\alpha_1,\\ldots,\\alpha_r)$ a simplex is a diagram $H$ on pairs $(t,S)$, $0\\leq t\\leq r$, with a crossing arrow $(t,S)\\to(u,T)$ precisely when $(\\alpha_u\\cdots\\alpha_{t+1})^{-1}T\\subseteq S$. For a monotone map $\\theta:[s]\\to[r]$, the restricted diagram has value $H(\\theta(t),S)$ and sends its crossing arrow to the crossing arrow of $H$ with those endpoints; the base arrow is $\\alpha_{\\theta(u)}\\cdots\\alpha_{\\theta(t)+1}$. A face deleting a middle vertex therefore composes the corresponding base maps and uses the triangle already in $H$; a degeneracy repeats a vertex and inserts an identity. The equality $(\\gamma\\beta)^{-1}T=\\beta^{-1}(\\gamma^{-1}T)$ identifies the subsets in these restrictions. Applying the natural right-Kan mapping equivalence to these actual restrictions supplies the block formulas and their higher homotopies on every face and degeneracy. The coherent homotopies here are those already present in the given simplex of $P\\subseteq Q$ and the natural mapping equivalences, with no comparison to another total category.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+   }
+  },
+  {
+   "text": "An edge $f\\to g$ over $\\alpha$ corresponds by step 4 to a fiber edge $w:a\\to g$ after the specified cocartesian lift. The horn-to-mapping-square characterization of [lem-coef-infinity-cocartesian-mapping-criterion], with the square displayed in [lem-coef-cocartesian-straightening], says it is cocartesian exactly when precomposition by $w$ induces equivalences of mapping spaces to all fiber test objects; this is equivalent to $w$ being an equivalence. For necessity, the square for the original edge and that for the specified lift, restricted to the target fiber, make precomposition by $w$ an equivalence. Testing at $a$ gives $r:g\\to a$ with $rw\\simeq\\mathrm{id}_a$. Testing at $g$ and using injectivity on homotopy classes gives $wr\\simeq\\mathrm{id}_g$, since $(wr)w\\simeq w=\\mathrm{id}_g w$. Thus $w$ is an equivalence. Conversely an equivalence $w$ preserves the lift's universal mapping squares for every test object of $P$, so the original edge is cocartesian. Under $e_m$ and the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus], this holds exactly when all block components are equivalences. For inert $\\alpha$ each target singleton has exactly one preimage, so these block components are the stated singleton equivalences. For target $\\langle0\\rangle$ the test is vacuous; for a general empty block it requires an equivalence from the terminal product, as it should. Moreover the corresponding natural transformation $a\\to g$ is an equivalence if and only if all its components at subsets are equivalences, by [lem-cbc-enhanced-functor-cone-calculus]. Applied in $Q$, the edge criterion of [lem-cbc-enhanced-relative-exponential] is exactly this condition. Hence $p$- and $q$-cocartesian edges with endpoints in $P$ coincide.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-cbc-enhanced-relative-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+   }
+  },
+  {
+   "text": "For an inert projection $\\rho_i:\\langle n\\rangle\\to\\langle1\\rangle$, the transport diagram of step 1 has singleton value $f(\\{i\\})$. Thus the Segal maps are precisely the singleton-restriction equivalences of step 2, after the equivalence $P_1\\simeq\\mathcal D$. The symmetric monoidal criterion in [lem-coef-symmetric-monoidal-segal-classification] applies to the cocartesian fibration from step 3; at $n=0$ it uses $P_0\\simeq *$. For evaluation, apply the universal property of [lem-cbc-enhanced-relative-exponential] to the identity of $Q$ to obtain its evaluation diagram $Q\\times_{N(\\mathsf{Fin}_*)}N(\\Gamma^\\times)\\to\\mathcal D$. Pull it back along the full-subset section to obtain $\\pi:P\\to\\mathcal D$ on all simplices. The section exists since $\\alpha^{-1}\\{1,\\ldots,m\\}\\subseteq\\{1,\\ldots,n\\}$ for every pointed $\\alpha$. Under $\\pi$, the explicit cocartesian inert projection has map $f(\\{1,\\ldots,n\\})\\to f(\\{i\\})$; these maps form the product cone by the defining condition of $P$. The restriction of $\\pi$ to $P_1$ is $e_1$, hence is an equivalence. If $\\alpha:\\langle n\\rangle\\to\\langle1\\rangle$ is active, its inverse image of $\\{1\\}$ is the whole source subset, so $\\pi$ of the explicit lift is an identity. For every other cocartesian lift, the exponential edge criterion gives an equivalence on this same full-subset cartesian indexing edge; its image under $\\pi$ is therefore an equivalence. This includes $n=0$, when both relevant values are terminal. These are exactly the asserted properties of the specified cartesian structure, established entirely in $P$.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-cbc-enhanced-relative-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-coef-cocartesian-straightening",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-finite-poset-kan-extension",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-symmetric-monoidal-segal-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Agent-expanded proof of Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285, for the specified product-diagram model only. HA is read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "The full product-diagram subcategory of the relative exponential over N(Fin_*) is the cartesian symmetric monoidal infinity category of finite products",
-   "results": "{\"t\": \"2026-10-16T21:24:16Z\", \"tool\": \"leanfinder\", \"query\": \"The full product-diagram subcategory of the relative exponential over N(Fin_*) is the cartesian symmetric monoidal infinity category of finite products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.instCartesianMonoidalCategory\", \"CategoryTheory.monoidalOfHasFiniteProducts\", \"SSet.instMonoidalClosed\", \"CategoryTheory.Functor.EssImageSubcategory.tensor_obj\", \"CategoryTheory.Functor.EssImageSubcategory.lift_def\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"CategoryTheory.CartesianClosed.mk\", \"CategoryTheory.Dial.tensorUnitImpl\"], \"digest\": \"bddaa847a4bca8b0\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: these are ordinary-category CartesianMonoidalCategory or product-preservation declarations, not relative exponentials or infinity-operad envelopes."
+   "query": "Recognition of the cartesian symmetric monoidal infinity category as the product-diagram subcategory of a relative exponential over finite pointed sets",
+   "results": "{\"t\": \"2026-10-16T22:23:58Z\", \"tool\": \"leanfinder\", \"query\": \"Recognition of the cartesian symmetric monoidal infinity category as the product-diagram subcategory of a relative exponential over finite pointed sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instCartesianMonoidalCategory\", \"LightProfinite.instCartesianMonoidalCategory\", \"SSet.instMonoidalClosed\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.monoidalOfHasFiniteProducts\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.Functor.EssImageSubcategory.lift_def\"], \"digest\": \"5e426d1a66547cb9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary Cartesian monoidal/category declarations; no relative exponentials or infinity-operadic product-diagram recognition."
   },
   {
    "tool": "loogle",
    "query": "CartesianMonoidalCategory, LaxMonoidalFunctor, product diagram",
-   "results": "{\"t\": \"2026-10-16T21:24:17Z\", \"tool\": \"loogle\", \"query\": \"CartesianMonoidalCategory, LaxMonoidalFunctor, product diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CartesianMonoidalCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: the service rejected the unqualified identifier and returned no infinity-categorical relative-exponential result."
+   "results": "{\"t\": \"2026-10-16T22:23:58Z\", \"tool\": \"loogle\", \"query\": \"CartesianMonoidalCategory, LaxMonoidalFunctor, product diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CartesianMonoidalCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unqualified identifier rejected; not evidence of absence. A later qualified-name Loogle search succeeded and was read."
   },
   {
    "tool": "grep",
    "query": "product.diagram|relative.exponential|Fin_\\\\*|CartesianMonoidal",
-   "results": "{\"t\": \"2026-10-16T21:24:17Z\", \"tool\": \"grep\", \"query\": \"product.diagram|relative.exponential|Fin_\\\\\\\\*|CartesianMonoidal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/CommGrp_.lean\", \"Mathlib/CategoryTheory/Preadditive/CommGrp_.lean\", \"Mathlib/CategoryTheory/Preadditive/CommGrp_.lean\", \"Mathlib/CategoryTheory/MorphismProperty/TransfiniteComposition.lean\", \"Mathlib/CategoryTheory/MorphismProperty/TransfiniteComposition.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\"], \"digest\": \"7f25feb3c1c1020f\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: grep returns ordinary Cartesian monoidal category infrastructure and no relative exponential over finite pointed sets."
+   "results": "{\"t\": \"2026-10-16T22:23:58Z\", \"tool\": \"grep\", \"query\": \"product.diagram|relative.exponential|Fin_\\\\\\\\*|CartesianMonoidal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/ComposableArrows/Basic.lean\"], \"digest\": \"92132ab07672b274\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: grep returned ordinary Cartesian monoidal infrastructure, with no relative-exponential recognition theorem."
   },
   {
    "tool": "leansearch",
    "query": "Recognition of the cartesian symmetric monoidal infinity category as the product-diagram subcategory of a relative exponential over finite pointed sets",
-   "results": "{\"t\": \"2026-10-16T21:24:17Z\", \"tool\": \"leansearch\", \"query\": \"Recognition of the cartesian symmetric monoidal infinity category as the product-diagram subcategory of a relative exponential over finite pointed sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.symmetricOfHasFiniteProducts\", \"SSet.instFiniteTensorUnit\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.toSymmetricCategory\", \"CategoryTheory.Over.cartesianMonoidalCategory.congr_simp\", \"CategoryTheory.symmetricOfHasFiniteCoproducts\"], \"digest\": \"c275b25a3544d24f\"}",
-   "date": "2026-10-16",
+   "results": "{\"t\": \"2026-10-16T22:23:59Z\", \"tool\": \"leansearch\", \"query\": \"Recognition of the cartesian symmetric monoidal infinity category as the product-diagram subcategory of a relative exponential over finite pointed sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.symmetricOfHasFiniteProducts\", \"SSet.instFiniteTensorUnit\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.toSymmetricCategory\", \"CategoryTheory.Over.cartesianMonoidalCategory.congr_simp\", \"CategoryTheory.symmetricOfHasFiniteCoproducts\"], \"digest\": \"c275b25a3544d24f\"}",
+   "date": "2026-10-17",
    "verdict": "no match: results concern ordinary categories or simplicial sets, not the stated infinity-categorical recognition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian symmetric monoidal quasicategory is the full subcategory of subset diagrams that are right Kan extensions from singleton subsets",
+   "results": "Eight hits: SSet.instCartesianMonoidalCategory, SSet.Truncated.instCartesianMonoidalCategory, CategoryTheory.Nerve.quasicategory, SSet.instFiniteTensorUnit, SSet.instMonoidalClosed, SSet.Quasicategory, SSet.instFiniteObjOppositeSimplexCategoryTensorObj, SSet.Truncated.instMonoidalClosed.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary monoidal structures on simplicial sets and quasicategory definitions do not state relative-exponential recognition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.monoidalOfHasFiniteProducts",
+   "results": "OK 0 hits; unknown identifier 'CategoryTheory.monoidalOfHasFiniteProducts'.",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier; not evidence of absence. Corrected search separately recorded."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Ee]xponential|[Cc]artesian.?[Ee]nvelope|product.?diagram|def monoidalOfHasFiniteProducts",
+   "results": "Two hits: Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean:234, product diagram in C/B; Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean:17, binary product diagram. Subdirectory CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary product-diagram documentation, not the infinity-categorical recognition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian monoidal infinity category from finite product diagrams over the category of finite pointed sets",
+   "results": "Eight hits: CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts, .ofChosenFiniteProducts, CategoryTheory.CartesianMonoidalCategory, .instHasFiniteProducts, CategoryTheory.monoidalOfHasFiniteProducts, CategoryTheory.CartesianMonoidalCategory.mk, CategoryTheory.monoidalOfHasFiniteProducts.instMonoidal, CategoryTheory.Functor.Monoidal.instPreservesFiniteProducts.",
+   "date": "2026-10-17",
+   "verdict": "no match: all declarations assume an ordinary Category instance, and do not recognize the product-diagram quasicategory over N(Fin_*)."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts",
+   "results": "One hit: CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts in Mathlib.CategoryTheory.Monoidal.Cartesian.Basic, {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasFiniteProducts C] : CategoryTheory.CartesianMonoidalCategory C.",
+   "date": "2026-10-17",
+   "verdict": "no match: this is an ordinary-category structure, not a cocartesian quasicategory or a relative exponential."
+  },
+  {
+   "tool": "grep",
+   "query": "ofHasFiniteProducts|class CartesianMonoidalCategory",
+   "results": "Two hits in CategoryTheory/Monoidal/Cartesian/Basic.lean:99 class CartesianMonoidalCategory and :228 noncomputable abbrev ofHasFiniteProducts. Read ordinary Category hypothesis and product structure.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category products only, not the statement of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Ee]xponential|[Cc]artesian.?[Ee]nvelope|ofHasFiniteProducts",
+   "results": "{\"t\": \"2026-10-17T00:05:05Z\", \"tool\": \"grep\", \"query\": \"relative.?[Ee]xponential|[Cc]artesian.?[Ee]nvelope|ofHasFiniteProducts\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\"], \"digest\": \"b506224f25d6e96e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category CartesianMonoidalCategory constructions, not a product-diagram quasicategory or relative exponential over N(Fin_*)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cartesian monoidal infinity category is the product diagram subcategory of a relative exponential over finite pointed sets",
+   "results": "{\"t\": \"2026-10-17T00:05:06Z\", \"tool\": \"leansearch\", \"query\": \"A cartesian monoidal infinity category is the product diagram subcategory of a relative exponential over finite pointed sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.instHasFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts\", \"CategoryTheory.Functor.Monoidal.instPreservesFiniteProducts\", \"SSet.instFiniteTensorUnit\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryOver\"], \"digest\": \"ce32a680a0600046\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category CartesianMonoidalCategory constructions, not a product-diagram quasicategory or relative exponential over N(Fin_*)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cartesian symmetric monoidal quasicategory is the full subcategory of the relative exponential over finite pointed sets consisting of product diagrams",
+   "results": "{\"t\": \"2026-10-17T00:05:08Z\", \"tool\": \"leanfinder\", \"query\": \"The cartesian symmetric monoidal quasicategory is the full subcategory of the relative exponential over finite pointed sets consisting of product diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instCartesianMonoidalCategory\", \"LightProfinite.instCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.fullSubcategory\", \"SSet.instFiniteTensorUnit\", \"CategoryTheory.Dial.tensorUnitImpl\", \"SSet.instFiniteTensorObj\"], \"digest\": \"b1d0c5fd0ed19a45\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category CartesianMonoidalCategory constructions, not a product-diagram quasicategory or relative exponential over N(Fin_*)."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Ee]xponential|[Cc]artesian.?[Ee]nvelope|ofHasFiniteProducts",
+   "results": "{\"t\": \"2026-10-17T00:29:44Z\", \"tool\": \"grep\", \"query\": \"relative.?[Ee]xponential|[Cc]artesian.?[Ee]nvelope|ofHasFiniteProducts\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\"], \"digest\": \"b506224f25d6e96e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and their Kan extensions or monoidal structures, not the product-diagram relative exponential of a quasicategory over N(Fin_*)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product diagram full subcategory of a relative exponential over finite pointed sets is the cartesian symmetric monoidal quasicategory",
+   "results": "{\"t\": \"2026-10-17T00:29:46Z\", \"tool\": \"leanfinder\", \"query\": \"The product diagram full subcategory of a relative exponential over finite pointed sets is the cartesian symmetric monoidal quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.instCartesianMonoidalCategory\", \"CategoryTheory.preservesBinaryProducts_of_exponentialIdeal\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.instExponentialIdealSubterminalsSubterminalInclusion\", \"CategoryTheory.Limits.PreservesFiniteProducts.of_exponentialIdeal\", \"CategoryTheory.CartesianMonoidalCategory.fullSubcategory\", \"CategoryTheory.CartesianClosed\", \"SSet.prodStdSimplex.instFiniteTensorObjObjSimplexCategoryStdSimplexMk\"], \"digest\": \"c096996ecd05e6b7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and their Kan extensions or monoidal structures, not the product-diagram relative exponential of a quasicategory over N(Fin_*)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right Kan extension from singleton subsets describes finite product diagrams and the cartesian monoidal infinity category",
+   "results": "{\"t\": \"2026-10-17T00:29:44Z\", \"tool\": \"leansearch\", \"query\": \"Right Kan extension from singleton subsets describes finite product diagrams and the cartesian monoidal infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.IsRightKanExtension.mk\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.Functor.RightExtension\", \"CategoryTheory.Functor.HasRightKanExtension\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\"], \"digest\": \"140b3b847eea44d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and their Kan extensions or monoidal structures, not the product-diagram relative exponential of a quasicategory over N(Fin_*)."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts",
+   "results": "{\"t\": \"2026-10-17T00:29:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\"], \"digest\": \"b44e27b24b2c1440\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories and their Kan extensions or monoidal structures, not the product-diagram relative exponential of a quasicategory over N(Fin_*)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from power-set diagrams to singleton subsets is an equivalence for diagrams that exhibit finite products in a quasicategory",
+   "results": "{\"t\": \"2026-10-17T00:46:01Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from power-set diagrams to singleton subsets is an equivalence for diagrams that exhibit finite products in a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinset\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetEvaluationIso\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetObj\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.nerveEquiv\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinset_obj_obj\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinset_obj_map\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetObj_obj\"], \"digest\": \"db4ae1c81f977098\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Read ProductsFromFiniteCofiltered.liftToFinsetObj and liftToFinset at Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean:194,262: ordinary Category instances and Hom-set products. SSet.Quasicategory at AlgebraicTopology/Quasicategory/Basic.lean:38 supplies only inner-horn filling; CategoryTheory/FiberedCategory/Cocartesian.lean:55,72 supplies ordinary cocartesian arrows. None states the product-diagram relative-exponential recognition."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-17T00:45:59Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\"], \"digest\": \"9c4099b45a4b423f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Read ProductsFromFiniteCofiltered.liftToFinsetObj and liftToFinset at Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean:194,262: ordinary Category instances and Hom-set products. SSet.Quasicategory at AlgebraicTopology/Quasicategory/Basic.lean:38 supplies only inner-horn filling; CategoryTheory/FiberedCategory/Cocartesian.lean:55,72 supplies ordinary cocartesian arrows. None states the product-diagram relative-exponential recognition."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|coCartesian|relativeExponential|cartesianEnvelope|productDiagram",
+   "results": "{\"t\": \"2026-10-17T00:45:59Z\", \"tool\": \"grep\", \"query\": \"cocartesian|coCartesian|relativeExponential|cartesianEnvelope|productDiagram\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"91a483950b001010\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Read ProductsFromFiniteCofiltered.liftToFinsetObj and liftToFinset at Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean:194,262: ordinary Category instances and Hom-set products. SSet.Quasicategory at AlgebraicTopology/Quasicategory/Basic.lean:38 supplies only inner-horn filling; CategoryTheory/FiberedCategory/Cocartesian.lean:55,72 supplies ordinary cocartesian arrows. None states the product-diagram relative-exponential recognition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the full subcategory of finite subset diagrams exhibiting products, inverse image transport defines a cocartesian fibration over finite pointed sets with Segal fibers",
+   "results": "{\"t\": \"2026-10-17T01:49:14Z\", \"tool\": \"leanfinder\", \"query\": \"For the full subcategory of finite subset diagrams exhibiting products, inverse image transport defines a cocartesian fibration over finite pointed sets with Segal fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinset\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"LightProfinite.fintypeDiagram'\", \"Profinite.fintypeDiagram'\", \"CategoryTheory.Functor.IsStronglyCocartesian.comp\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetObj\", \"CategoryTheory.PreGaloisCategory.nonempty_fiber_pi_of_nonempty_of_finite\"], \"digest\": \"7c00f66ccdf6568a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, not the product-diagram quasicategory or its cocartesian fibration over N(Fin_*)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right Kan extensions from singleton subsets compute product diagrams in a quasicategory and their cocartesian block mapping spaces",
+   "results": "{\"t\": \"2026-10-17T01:49:14Z\", \"tool\": \"leansearch\", \"query\": \"Right Kan extensions from singleton subsets compute product diagrams in a quasicategory and their cocartesian block mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.ran\", \"CategoryTheory.Functor.IsRightKanExtension.mk\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.Functor.RightExtension\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\"], \"digest\": \"11eadd6e0dfcc259\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary categories, not the product-diagram quasicategory or its cocartesian fibration over N(Fin_*)."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-lax-cartesian-classification",
@@ -83,5 +313,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-envelope-product-diagram-recognition",
+  "worker": "stage1",
+  "summary": "Returned-delivery repair, alternative 2: restated the item solely as properties of the specified product-diagram model P (HA Proposition 2.4.1.5). Retained and sharpened the six accepted model calculations, removed the invalid straightened-functor comparison and multiplication of choice spaces, and proved the Segal and full-subset evaluation assertions directly. The abstract comparison is isolated in the new statement-only general cartesian-structure uniqueness node, never used here. The existing parent must be repaired separately as detailed in report.md; its abstract-target classification cannot be used to prove this item or the uniqueness input it would need.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2 (derived Hom / inverse-limit comparison), auxiliary coherent finite-product machinery through the retained via chain. No chapter or unit route is changed.",
+  "source_correction": {
+   "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+   "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+  },
+  "title_correction": "Properties of the product-diagram cartesian model",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-relative-exponential",
+    "why": "Constructs the explicit simplices, transport edges and evaluation of Q; this is a generic quasicategory tool, with no replacement of a unit proof step."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Supplies functor-category/full-subcategory quasicategories, pointwise equivalences and invariance of mapping spaces; these generic foundations are needed for singleton restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-d96c4c5bb",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-d96c4c5bb (reviewer sub-agent of L); spot-checked: I read the whole item (statement and steps 1-7), the new uniqueness node, every cited statement, the parent lem-coef-lax-cartesian-classification, the unit and chapter records, and the 01:10 UTC return. HA is not archived, so I checked against HA Notation 2.4.1.2, Construction 2.4.1.4, Prop 2.4.1.5, Def 2.4.0.1 and Cor 2.4.1.8-9 as I know them. The delivery follows the return's option 2: the item now states only the properties of the model P (P is a cocartesian fibration, P_n ~ D^n, block mapping spaces, composition, the cocartesian criterion, Segal maps, the evaluation functor pi). I found no gap in the steps. Small cases checked: n=0, n=1, the binary fold, maps to and from <0>, inert maps and permutations, and D = Set. The new node is true (HA Cor 2.4.1.9 restricted to equivalences, keeping the homotopy fiber over u). It is statement-only, not a duplicate, and not a clause of the item or the parent. Both proposed tool uses (relative exponential, functor-cone calculus) are accepted. Two fixes: (1) step 1 used that v is a cartesian fibration without checking it; I added the check (v is faithful; the factorization through (<n>, alpha^{-1}T) fills the 2-horn; higher horns follow from faithfulness), cited def-coef-infinity-fibrations and recomputed proof_deps. (2) Nothing cites the new uniqueness node yet, so it needs import_flags=['unreachable']; I added it. Maintainer actions needed: (a) the reviewed parent lem-coef-lax-cartesian-classification still takes P ~ D^x from this item in step 1 (and uses it in steps 2 and 5-7); after the merge that citation is a C4 fault, so reopen the parent. Non-circular order: classification for P, then comparison through the uniqueness node and the envelope statement, then remove the unreachable flag. (b) The item's maintainer-owned title and source.place still say 'identification with the cartesian envelope' (B5); install split_report.title_correction and source_correction.; 2 file(s) fixed by the reviewer"
  }
 }
