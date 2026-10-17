@@ -385,28 +385,27 @@
  },
  "lead_note": "2026-10-10 L (R-dec1853): E7 statement change (wording only, r=2 data unchanged): derived couple's g' typed as bidegree (+1,-1) and the page recursion stated through couples of type s, with exactness of iterates deferred to lem-sp-derived-couple-exact (not a stmt_dep: it depends on this def).",
  "lean": {
-  "module": "WeilConjectures.Algebra.Homology.ExactCouple.Basic",
-  "declaration": "CategoryTheory.ExactCouple",
+  "module": "WeilConjectures.CategoryTheory.ExactCouple",
+  "declaration": "CategoryTheory.BigradedExactCouple",
   "declarations": [
-   "CategoryTheory.ExactCouple",
-   "CategoryTheory.ExactCouple.derived",
-   "CategoryTheory.ExactCouple.derivedIter",
-   "CategoryTheory.ExactCouple.spectralSequence"
+   "CategoryTheory.BigradedExactCouple",
+   "CategoryTheory.BigradedExactCouple.derived",
+   "CategoryTheory.BigradedExactCouple.pageCouple"
   ],
-  "file": "lean/WeilConjectures/Algebra/Homology/ExactCouple/Basic.lean",
+  "statement": "structure BigradedExactCouple (C : Type u) [Category.{v} C] [Abelian C] (s : ℕ)",
   "branch": "slopmaster2",
+  "by": "Q126",
+  "date": "2026-10-17",
   "existing": true,
-  "date": "2026-10-13",
-  "by": "upstream-sync",
-  "note": "Canonical upstream exact-couple notion. SHEAF BigradedExactCouple now holds solely an upstream ExactCouple specialized to the page bidegrees; its shifted-map accessors and constructor are compatibility API, with no duplicate mathematical data fields."
+  "note": "The recorded general ExactCouple uses all-index maps and a different derived-page representation. The published halfPlaneConvergence and ConvergesTo declarations instead take the existing upstream BigradedExactCouple, with exactly the shifted maps and type-s recursion in this node. Bind that existing specialization; no new notion or source declaration is introduced."
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "R-exc0620",
-  "group": "E1",
-  "result": "fix",
-  "note": "C abelian, u v free; D,E : Z->Z->C; alpha(-1,+1), f(+2,-1), g(s,-s), type 0 = node; 3 zero composites, 3 ker=im as subobjects of one object; d=g.f (s+2,-s-1); D'=im alpha, E'=ker d/im d; alpha',f',g' unique via comm fields, g' (s+1,-s-1); C_2=C, C_{r+1}=C_r', d_r (r,1-r); no ExactCouple in Mathlib/source; FIX: unused LeftHomology import dropped, dInto_comp_d proof in words"
+  "reviewer": "NT-stage2-cc-c39d00802",
+  "group": "Q126",
+  "result": "pass",
+  "note": "All 13 statement clauses match the node at page R=r+2 (u=p-r, v=q+r, lambda/t/psi equations, strict and non-strict bounds); edge cases r=0, zero functor/couple, negative indices, p=0, n<a hold; four independent universes, no extra assumptions. Only lean fields change: the item is restated; def-sp-exact-couple is rebound to the published BigradedExactCouple (exact node notion, ~50 citers, accepted by the prior return); def-sp-filtration rebinding removed as the return asked. lean.statement matches the file verbatim and equals the live ExactFunctorCouple statement up to whitespace. Gates met: one sorry-only theorem, no definitions, source and blueprint docstrings with all four proof steps, no pro-etale content. nt_compile on the snapshot: rc=0, no errors or warnings, reproduced twice. The importer HypercohomologyFiltrations fails with the ExactCoupleShifted/BigradedExactCouple noConfusion clash identically without the delivery: pre-existing, not caused by this item."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

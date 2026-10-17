@@ -222,5 +222,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RelativeMarkedAnodyneReplacement",
+  "declaration": "SSet.Marked.Over.relative_marked_anodyne_replacement",
+  "declarations": [
+   "SSet.Marked.Over.anodyneGeneratorsOver",
+   "SSet.Marked.Over.relative_marked_anodyne_replacement"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RelativeMarkedAnodyneReplacement.lean",
+  "statement": "theorem relative_marked_anodyne_replacement (S : SSet.{u}) : (∃ (R : Over S ⥤ Over S) (η : 𝟭 (Over S) ⟶ R), ∀ X : Over S, markedAnodyne (η.app X).left ∧ IsNaturallyFibrant false (R.obj X) ∧ transfiniteCompositions.{u} (coproducts.{u} (anodyneGeneratorsOver S)).pushouts (η.app X)) ∧ (∀ {X Y : Over S} (i : X ⟶ Y), markedAnodyne i.left → cof i ∧ weak false i)",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5347b53df",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Read the item node, the 3 stmt_deps declarations (MarkedRelativeCartesianModel: Over/relativeFibration/IsNaturallyFibrant/cof/weak with the model's recorded cofibration/weak-equivalence fields; MarkedAnodyneLiftingCalculus: anodyneGenerators/markedSaturation/markedAnodyne; RelativeMarkedAnodyneCalculus clause 2), Enhanced.IsCartesianEdge (Lambda^n_n, n>=2) and Mathlib coproducts/transfiniteCompositions. Each clause matches: functorial R and eta over Over (sharp S); markedAnodyne (eta.app X).left; IsNaturallyFibrant false (an inner fibration with specified-target Cartesian lifts, marking iff Cartesian); a u-small cellular clause rendering the small-object/universe clause; markedAnodyne i.left -> cof i and weak false i, exactly the trivial cofibrations of M_S. No extra hypotheses; arbitrary base; universe u throughout. Edge cases: empty/point/non-quasicategory base, marking-only and dim-1 generators. Helper anodyneGeneratorsOver is a real preimage definition, listed in declarations, with docstrings. The only proof is sorry; the five-step proof plan is in the docstring; the statement is verbatim in the file. The node differs from the side clone only in its lean field; no statement_change or new nodes. The report has the Worker report and Second reading by Q128 sections. nt_compile --json with the side overlay: exit code 0, no errors or warnings (item 1.4 s). Only a cosmetic redaction artifact in the HTT numbers in report.md."
  }
 }

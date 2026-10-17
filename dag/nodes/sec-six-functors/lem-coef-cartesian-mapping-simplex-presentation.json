@@ -295,5 +295,41 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-1a22f9169 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the new node lem-coef-mapping-simplex-final-edge and the full statement of every cited node. HTT is not under literature/ (declared WANTED, proof marked by:agent). The item matches HTT 3.2.2.7(1) and 3.2.2.14 (mapping-simplex operators, degenerate-edge marking, fiberwise categorical equivalences, Cartesian equivalence in M_{Δ^n}); nothing is weakened. Steps checked: (1) the pushout decomposition sorted by last vertex is an exact bijection on simplices with matching markings, so elementary is justified. (2) The retract via i(k)=(χ(k),k) and H holds, with {1}^♯→(Δ^1)^♯ in ⟨I∪F⟩. (3)-(4) The trivial Kan fibration is a Joyal trivial fibration by the WFS, and the overlap map equals cyl∘(g'×T), so the gluing is valid. (5) T is a sieve and composite strings have nondecreasing base vertices, so C_±=C[M(A_{<n})], C[A_n]. (6) The opposite plus pinch dualization keeps the iff and all vertices. (7) a: S→N_hc(RC[S]) is categorical by the Quillen equivalence (S cofibrant, RC[S] fibrant); θ is used only through naturality, and composition only on the locally Kan RC[S]. (8) Map_{Δ^n}(k,n-1) and Map_{Δ^n}(k,n) are points for every k<n, and the square commutes strictly. (9) The mapping-fiber node is used only at w∈Y_i, as its hypothesis requires, and ut≃1, tu≃1 come from injectivity on π0. (10)-(11) The full-subcategory and core restriction and the currying converse are correct. Small cases tested: n=0; a constant chain of points (M=Δ^n); n=2 with k=0; n=1 with A_0=pt, A_1=Δ^1, where C(x,v) is contractible; empty fibers. The new node is HTT 3.2.2.9, statement-only and self-contained, true on the small cases, with searches of all three kinds; it is not a restatement of its parent. Whole-DAG rg found no duplicate: cone-fibers and the cbc mapping-simplex nodes state other results and cite the item. All cited statements are in the item's unit; tool_uses is empty and none is needed. FIX (B3): the item's statement used the absolute marked model and the notation Y_i^♮ without citing their definition. I added [lem-coef-marked-point-cartesian-model] to the statement and stmt_deps, with the gloss that Y_i^♮ marks the equivalences of Y_i (what step 11 proves). This closes no cycle; the corrected file is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianMappingSimplexPresentation",
+  "declaration": "SSet.Enhanced.cartesian_mapping_simplex_presentation",
+  "declarations": [
+   "SSet.Enhanced.SimplexChain",
+   "SSet.Enhanced.MappingSimplexDegree",
+   "SSet.Enhanced.mappingSimplexOperator",
+   "SSet.Enhanced.mappingSimplexOperator_laws",
+   "SSet.Enhanced.mappingSimplex",
+   "SSet.Enhanced.mappingSimplexProjection",
+   "SSet.Enhanced.mappingSimplexFiber_naturality",
+   "SSet.Enhanced.mappingSimplexFiberInclusion",
+   "SSet.Enhanced.mappingSimplex_degenerate_marked",
+   "SSet.Enhanced.markedMappingSimplex",
+   "SSet.Enhanced.mappingSimplexOver",
+   "SSet.Enhanced.mappingSimplexFiber_projection",
+   "SSet.Enhanced.mappingSimplexPresentationFiber",
+   "SSet.Enhanced.flatToNaturalMap",
+   "SSet.Enhanced.cartesian_mapping_simplex_presentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianMappingSimplexPresentation.lean",
+  "statement": "theorem cartesian_mapping_simplex_presentation (n : ℕ) : (∀ (A : SimplexChain.{u} n) (i : Fin (n + 1)), ∃ e : Marked.flat (A.obj (op i)) ≅ ((Marked.Over.pull (SSet.const (X := Δ[0]) (stdSimplex.obj₀Equiv.symm i : (Δ[n] : SSet.{u}) _⦋0⦌))).obj (mappingSimplexOver A)).left, e.hom.val ≫ pullback.snd (SSet.const (X := Δ[0]) (stdSimplex.obj₀Equiv.symm i)) (mappingSimplexProjection A) = mappingSimplexFiberInclusion A i) ∧ (∀ (Y : Marked.Over (Δ[n] : SSet.{u})), Marked.Over.IsNaturallyFibrant false Y → ∃ (A : SimplexChain.{u} n) (q : mappingSimplexOver A ⟶ Y), ∀ i : Fin (n + 1), CoherentNerve.IsCategoricalEquivalence (mappingSimplexPresentationFiber A q i)) ∧ (∀ (A : SimplexChain.{u} n) (Y : Marked.Over (Δ[n] : SSet.{u})) (_hY : Marked.Over.IsNaturallyFibrant false Y) (q : mappingSimplexOver A ⟶ Y), (∀ i : Fin (n + 1), CoherentNerve.IsCategoricalEquivalence (mappingSimplexPresentationFiber A q i)) → Marked.Over.weak false q) ∧ (∀ (A : SimplexChain.{u} n) (Y : Marked.Over (Δ[n] : SSet.{u})) (_hY : Marked.Over.IsNaturallyFibrant false Y) (q : mappingSimplexOver A ⟶ Y), (∀ i : Fin (n + 1), CoherentNerve.IsCategoricalEquivalence (mappingSimplexPresentationFiber A q i)) ↔ (∀ i : Fin (n + 1), Marked.weak (flatToNaturalMap (mappingSimplexPresentationFiber A q i))))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit dependent-pair mapping simplex, its marking and canonical projection/fibre maps. Construction well-definedness is isolated in named theorem statements with full proof plans; no data is chosen from a mere existence theorem. The main theorem states all clauses, with arbitrary small chain fibres and no fibrancy requirement on their mapping simplex."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b57ecc831",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: SimplexChain functor, Σ (α, a) simplices, operator restricts by θ then applies transition α(r)→αθ(s), marking exactly degenerate fiber coordinate, conjunct 1 gives flat A_i ≅ induced-marked pullback fiber tied to the canonical inclusion, conjunct 2 existence for every IsNaturallyFibrant false Y, conjunct 3 any q fiberwise categorical ⇒ Marked.Over.weak false q (no fibrancy of M^m(A)), conjunct 4 iff with Marked.weak of flat→natural fiber maps. Dependency interfaces (pullObject induced marking, natural = equivalence ∨ degenerate, IsCategoricalEquivalence = Joyal weak eq via CoherentNerveComparison and as used by the relative model) checked. n=0, empty fibers, single universe u ok. Four sorry'd construction laws true and docstringed; no hollow data; node unchanged except lean; lean.statement verbatim; no duplicate mapping simplex. nt_compile.py rc=0, no errors or warnings. Cosmetic only: module docstring omits 3.2.2.14; report numbers replaced by 'the project server'."
  }
 }

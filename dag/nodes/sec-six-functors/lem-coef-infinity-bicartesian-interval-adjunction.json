@@ -27,7 +27,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-infinity-mapping-composition"
+  "lem-coef-infinity-mapping-composition",
+  "def-coef-coherent-adjunction-data"
  ],
  "proof": [
   {
@@ -233,5 +234,32 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-0d22932ca (reviewer sub-agent of L); spot-checked: I read all seven proof steps, the three new nodes (reflection-assembly, transport-uniqueness, adjunction-mapping-equivalence) and the statements of all seven cited nodes in full. I checked the Kerodon sources online, since they are not archived in literature/. 02FN (Prop 6.2.5.4) is the route of steps 2-6: E0 coreflective, E1 reflective, the two adjunctions composed, the coreflection restricted. 02FD/02FE (Lemma 6.2.2.23, Prop 6.2.2.24) support reflection-assembly and 019X (Prop 5.2.2.17) supports transport-uniqueness. 02F1 (Prop 6.2.1.17) gives only an hKan isomorphism for each pair of objects; the bifunctor-naturality clause of adjunction-mapping-equivalence is true and standard, but whoever splits that node must source it. That clause is at the same precision as the already-reviewed local- and pointwise-adjoint-criterion nodes, and the item's unchanged statement needs it. Step checks: fibers are full because Delta^1 is a poset nerve. The op horn reversal and relative-cone-equivalence(4) turn the cartesian tests into cocartesian ones. In the right-pinched model the base mapping spaces Map(1,1) and Map(0,1) of Delta^1 are points and Map(1,0) is empty, so both cocartesian-criterion tests in steps 2 and 4 hold for every test object, including the empty cases. I rederived both composite-adjunction triangles in step 5 from naturality of v against a i0 and of a against v i1, and both conjugated triangles in step 6, checking the type of each of the three interchanges. Step 7 applies the adjunct node with exactly the eta and epsilon of step 6 and the item's formula. The item statement is unchanged and not weakened. Small cases: empty E, singleton fibers, Delta^1 x C, nerves of ordinary adjunctions, an empty full subcategory, an empty fiber. Cycles: computed over the whole snapshot DAG, no cited node reaches the item. Its existing near-duplicates (pointwise-cocartesian-transport, pointwise-adjoint-criterion, full-essential-image, space-transport-classification) all reach it, so they cannot replace the new nodes. No new node restates the item. Mathlib: no leaf; the recorded candidates are ordinary-category results. No SGA. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus (functor categories are quasicategories) and lem-cbc-simplicial-composition-spine (composition coherence in them), both from unit sk-prop-sf-cbc, which is off this unit's route. In-unit nodes already record the same two as tool uses. FIX: in reflection-assembly, added 'Let C be a quasicategory' and renamed the dual unit d:id_D->Bi to e, because it clashed with the object variable d in D in the same sentence. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-infinity-reflection-assembly.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityBicartesianIntervalAdjunction",
+  "declaration": "SSet.Enhanced.bicartesian_interval_adjunction",
+  "declarations": [
+   "SSet.Enhanced.intervalQuasicategory",
+   "SSet.Enhanced.intervalFiber",
+   "SSet.Enhanced.intervalFiberInclusion",
+   "SSet.Enhanced.intervalEndpoint",
+   "SSet.Enhanced.IntervalAdjunctEquivalences",
+   "SSet.Enhanced.bicartesian_interval_adjunction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityBicartesianIntervalAdjunction.lean",
+  "statement": "theorem bicartesian_interval_adjunction {E : SSet.{u}} [Quasicategory E] (p : E ⟶ Δ[1]) (hp : cartesianFibration p) (hq : cocartesianFibration p) (R : intervalFiber p 1 ⟶ intervalFiber p 0) (h : Δ[1] ⊗ intervalFiber p 1 ⟶ E) (h_over : h ≫ p = fst Δ[1] (intervalFiber p 1)) (h_zero : intervalEndpoint (intervalFiber p 1) 0 ≫ h = R ≫ intervalFiberInclusion p 0) (h_one : intervalEndpoint (intervalFiber p 1) 1 ≫ h = intervalFiberInclusion p 1) (h_cartesian : ∀ z : (intervalFiber p 1) _⦋0⦌, IsCartesianEdge p (lift (𝟙 Δ[1]) (SSet.const z) ≫ h)) : ∃ (L : intervalFiber p 0 ⟶ intervalFiber p 1) (k : Δ[1] ⊗ intervalFiber p 0 ⟶ E), k ≫ p = fst Δ[1] (intervalFiber p 0) ∧ intervalEndpoint (intervalFiber p 0) 0 ≫ k = intervalFiberInclusion p 0 ∧ intervalEndpoint (intervalFiber p 0) 1 ≫ k = L ≫ intervalFiberInclusion p 1 ∧ (∀ y : (intervalFiber p 0) _⦋0⦌, IsCocartesianEdge p (lift (𝟙 Δ[1]) (SSet.const y) ≫ k)) ∧ ∃ adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L R, IntervalAdjunctEquivalences adj",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses HomotopicalAlgebra.ModelInfinity.CoherentAdjunction through its existing independent definition-node binding def-coef-coherent-adjunction-data, not the downstream Quillen theorem lem-coef-model-infinity-derived-adjunction in the same module. The definition binding has no dependency path back to this item. Helpers expose actual interval fibers, inclusions and endpoint maps, the Mathlib nerve-transported interval instance, and the canonical mapping-composition adjunct formula. The theorem docstring reproduces all seven split proof steps and their cited nodes. No statement correction or dependency-module repair. Second reading adds the explicit enhanced-diagrams statement import and the two available proof imports EnhancedFunctorConeCalculus and SimplicialCompositionSpine; the signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50e9549eb",
+  "group": "Q28",
+  "result": "fix",
+  "note": "Statement matches the node and Kerodon 02FN/02FM/019N/01VN/02EK/02F1 clause by clause: strict fibers via fiber/pullback.snd; R and h over Δ¹ with endpoints R at 0 and inclusion at 1; IsCartesianEdge at every vertex; ∃ L,k with inclusion at 0, L at 1 and IsCocartesianEdge at every vertex; existing CoherentAdjunction L R (unit id→L≫R, counit R≫L→id, triangle 2-simplices Lη,εL / ηR,Rε with degenerate long edges, universal comma objects); IntervalAdjunctEquivalences uses the evaluated unit and the canonical MappingCompositionStatement composition class for v↦R(v)∘η_y as a weak homotopy equivalence. Interval quasicategory instance is a real transport of Mathlib's nerve instance, no extra hypothesis; one universe u; no Nonempty; empty and degenerate cases covered; lean.statement verbatim; docstrings and seven proof steps present; only the theorem is sorry; report has Worker report and Second reading by Q28. F1 (mechanical, fixed): §3(7) proof-dependency imports Sheaf.CategoryTheory.RelativeConeEquivalence (landed in the delivery's base) and Sheaf.CategoryTheory.InfinityCocartesianMappingCriterion (landed later) were missing; added as non-public imports, no cycle. F2 (cosmetic, fixed): garbled 'Kerodon Definition the project server' in the report corrected to 6.2.1.1 (02EK). nt_compile.py --json of the delivered and the fixed module: rc=0, no errors or warnings. Fixes: fixes/InfinityBicartesianIntervalAdjunction.lean and fixes/lem-coef-infinity-bicartesian-interval-adjunction.report.md."
  }
 }
