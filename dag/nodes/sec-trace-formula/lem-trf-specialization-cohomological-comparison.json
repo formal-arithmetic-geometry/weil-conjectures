@@ -2,7 +2,7 @@
  "id": "lem-trf-specialization-cohomological-comparison",
  "kind": "statement",
  "title": "Nearby-cycle specialization is a cohomological comparison",
- "statement": "Use the finite coefficient conventions of [def-trf-coefficient-conventions] and the nearby-cycle specialization datum of [def-trf-deformation-specialization]. Let $c:C\\to X\\times_kX$ be a correspondence of separated finite-type $k$-schemes and let $\\widetilde c:\\widetilde C\\to\\widetilde X\\times_D\\widetilde X$ be any separated finite-type lift over $D=\\operatorname{Spec}(k[t]_{(t)})$, with special fibre $b$. Put $F=\\operatorname{Fix}(c)$ and define the fixed-locus lift $\\widetilde F:=\\widetilde C\\times_{\\widetilde X\\times_D\\widetilde X,\\,\\widetilde c,\\,\\widetilde\\Delta}\\widetilde X$ using the diagonal $\\widetilde\\Delta$; its special fibre is the fixed scheme of $b$. Assume the specified exceptional operations are admissible and work on the bounded constructible finite-Tor etale representatives of [lem-sf-proetale-constructible-origin], using the transported pro-etale operation datum of [def-fix-six-functor-datum] for the project version. The lift induces a cohomological comparison from $c$ to $b$ in the sense of [def-trf-cohomological-comparison]. Its object functors are $f_Z=\\operatorname{sp}_{\\widetilde Z}$, including $f_F=\\operatorname{sp}_{\\widetilde F}$ for the fixed-locus object. Its tensor map is the lax tensor map of $i^*Rj_*$, its $\\alpha_g,\\beta_g$ and their mates are the ordinary and exceptional nearby-cycle comparisons, and $f_s=\\operatorname{id}$ with $\\iota=\\operatorname{id}_A$. In particular these functors preserve the stated finite-Tor constructible categories, and the evaluation-defined duality comparison $f_ZD_ZM\\to D_{Z_0}f_ZM$ is an isomorphism.\n\nMore precisely, there exists a proper morphism of lifts $\\widetilde c'\\to\\widetilde c$ that is the identity on the generic correspondence $c$, such that $\\widetilde c'$ extends to a correspondence proper over $D$ lifting a compactification of $c$. The comparison of the preceding paragraph is canonically the composite of the compactifiable specialization comparison $c\\to b'=\\widetilde c'_0$ and the compactifiable proper-direct-image comparison $b'\\to b$. No properness of the original lift or of $c$ is required. The maps on the special fibre and the functorial identifications in this composite are the actual nearby-cycle proper-base-change maps, not arbitrary choices of isomorphisms.",
+ "statement": "Use the finite coefficient conventions of [def-trf-coefficient-conventions] and the lifts and nearby-cycle specialization of [def-trf-deformation-specialization]. Let $c:C\\to X\\times_kX$ be a correspondence of separated finite-type $k$-schemes, and let $\\widetilde c:\\widetilde C\\to\\widetilde X\\times_D\\widetilde X$ be any separated finite-type lift over $D=\\operatorname{Spec}(k[t]_{(t)})$, with special fibre $b$. Set $F=\\operatorname{Fix}(c)$ and\n$$\\widetilde F=\\widetilde C\\times_{\\widetilde X\\times_D\\widetilde X,\\widetilde c,\\widetilde\\Delta}\\widetilde X.$$\nIts special fibre is $\\operatorname{Fix}(b)$. Work on bounded constructible finite-Tor etale representatives of [lem-sf-proetale-constructible-origin], with finite-Tor restriction [det-pe-finite-tor-comparison-noetherian], with the transported operation datum of [def-fix-six-functor-datum] and the specified admissible exceptional operations.\n\nThe lift gives a canonical cohomological pre-comparison in the terminology of [def-trf-cohomological-comparison]: $f_Z=\\operatorname{sp}_{\\widetilde Z}$ on every fixed-diagram object, including $f_F=\\operatorname{sp}_{\\widetilde F}$, with the lax tensor map of $i^*Rj_*$, the ordinary and exceptional nearby-cycle comparisons and their adjoint mates, and $f_s=\\operatorname{id}$, $\\iota=\\operatorname{id}_A$. It preserves the finite-Tor constructible domains and satisfies (I)--(V) of that definition, including invertibility of its evaluation-defined duality comparison. For each diagram arrow whose total lift $\\widetilde g$ is proper, its ordinary and exceptional direct-image mates are inverse isomorphisms. Properness of only $g$ and $g_0$ is not sufficient for this last assertion.\n\nThere exists a proper morphism of lifts $p:\\widetilde c'\\to\\widetilde c$, the identity on the generic correspondence $c$, such that $\\widetilde c':\\widetilde C'\\to\\widetilde X'\\times_D\\widetilde X'$ extends to a correspondence $\\widehat c:\\widehat C\\to\\widehat X\\times_D\\widehat X$ proper over $D$, lifting a compactification $c^*:C^*\\to X^*\\times_kX^*$ of $c$ with dense open embeddings $X\\hookrightarrow X^*$ and $C\\hookrightarrow C^*$. Put $b'=\\widetilde c'_0$. On each object the canonical proper-base-change map identifies\n$$\\operatorname{sp}_{\\widetilde Z}\\xrightarrow{\\sim}Rp_{Z,0*}\\operatorname{sp}_{\\widetilde Z'}.$$\nTogether these identify all tensor maps, ordinary and exceptional comparisons and their mates: the pre-comparison is the composite of specialization $c\\to b'$ and the compactifiable proper-direct-image comparison $b'\\to b$. The first factor extends to the fixed diagrams of $c^*$ and $\\widehat c_0$ with (I)--(V) and the proper-total-lift assertion above; on these proper extended diagrams every total arrow is proper.\n\nIf this refinement and proper extension can be chosen so that (a) every arrow of the uncompactified fixed diagram having both proper generic and proper special fibre also has proper total lift, and (b) the open embeddings $\\widetilde X'_0\\hookrightarrow\\widehat X_0$ and $\\widetilde C'_0\\hookrightarrow\\widehat C_0$ have dense image, then the first factor satisfies (VI) and (VII) as written in [def-trf-cohomological-comparison], is compactifiable in that definition's sense, and the composite is a cohomological comparison. The geometric refinement, the pre-comparison, and its displayed canonical factorization require no properness of the original lift or of $c$.",
  "source": {
   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
   "place": "§4.1.4(b), Lemma 4.1.5 and Corollary 4.1.6; §1.3.2"
@@ -12,11 +12,268 @@
   "def-trf-deformation-specialization",
   "def-trf-cohomological-comparison",
   "lem-sf-proetale-constructible-origin",
-  "def-fix-six-functor-datum"
+  "def-fix-six-functor-datum",
+  "def-trf-fixed-scheme",
+  "def-pc-fibre-product",
+  "def-trf-admissibility",
+  "det-pe-finite-tor-comparison-noetherian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The fibre-product universal property gives the fixed-locus lift and every lifted diagram arrow. Indeed a map to its base change to a fibre is a pair of maps to the corresponding fibres of $\\widetilde C$ and $\\widetilde X$ satisfying $\\widetilde c i=\\widetilde\\Delta d$, which is exactly the fixed-scheme relation there. Generic-fibre identification therefore gives $F$, and the special fibre gives $\\operatorname{Fix}(b)$. Products use the same universal-property argument. Structure maps lift to $D$ itself.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-fixed-scheme",
+    "def-trf-deformation-specialization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(b), lifts of all fixed-diagram objects"
+   }
+  },
+  {
+   "text": "After strict henselization write $f_ZM=i_Z^*Rj_{Z*}\\rho_{Z,\\bar\\eta}^*M_{\\bar\\eta}$. Pullback of a finite locally constant sheaf is finite locally constant, and inverse images of a finite constructible stratification are constructible; exact pullback and its tensor comparison preserve a given Tor interval. Thus the geometric generic input has the required domain. Apply [lem-trf-nearby-cycle-finiteness-exchange] to obtain bounded constructible finite-Tor output. Its adjunction exchanges, their mates, and [def-trf-deformation-specialization] give exactly $\\alpha_g,\\beta_g$ and the mates in the pre-comparison definition. At $s$ the lift is the constant trait. The constant-lift clause of [lem-trf-specialization-zero-section], applied to $T=s$, identifies $f_sM$ with $M$ naturally for every input complex, not just $A$. Its unit on $A$ is the identity under the normalization in [def-trf-deformation-specialization], giving the specified $\\iota$. Use the labelled entries of the current comparison definition; at the terminal point its structure arrow and identity are one entry. Both lift to the identity of $D$, whose ordinary exchange and exceptional mate are identities by their adjunction formulas. Thus the required equality at this shared entry holds.",
+   "uses": [
+    "def-trf-deformation-specialization",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "def-trf-cohomological-comparison",
+    "lem-trf-specialization-zero-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§1.3.1(e), 1.3.2(b), 4.1.4(b): domains and maps"
+   }
+  },
+  {
+   "text": "Let $J=Rj_*$ and let $\\epsilon:j^*J\\to\\operatorname{id}$ be its counit. The tensor map $JM\\otimes JN\\to J(M\\otimes N)$ is the unique transpose of $\\epsilon_M\\otimes\\epsilon_N$ under the strong tensor identification for $j^*$. The transposes of its two triple-tensor composites are both $\\epsilon_L\\otimes\\epsilon_M\\otimes\\epsilon_N$; the transpose of its symmetry square is the symmetry square of tensor itself. Pulling back by $i^*$ gives (I). On the point each map is the identity on $A$, proving (II). This argument uses the specified lax map, without asserting it is invertible.",
+   "uses": [
+    "def-trf-cohomological-comparison",
+    "def-trf-deformation-specialization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(b), verification of (I)--(II)"
+   }
+  },
+  {
+   "text": "The ordinary nearby comparison is the transpose of the pullback square followed by the $j^*\\dashv Rj_*$ counit. Pasting two such squares gives the transpose for the composite arrow: the inserted unit and counit cancel by the triangle identity. Identity squares give identity maps. For every composite listed by a fixed-diagram relation, this gives exactly $\\alpha_{hg}=(\\alpha_g h^*)\\circ(\\bar g^*\\alpha_h)$, including $p_i\\Delta=\\operatorname{id}_X$, $p_ic=c_i$ and $a_Vg=a_U$, proving (III); the composition and unit/counit compatibility are also included in [lem-trf-nearby-cycle-finiteness-exchange]. For (IV), transpose the two tensor-comparison composites along this same adjunction. Both are the tensor product of the two counits followed by the identical pullback-square identification. Uniqueness of transpose identifies them, and $i^*$ preserves the equation. Exceptional maps are the adjoint mates specified in the specialization datum, so no arbitrary exchange is substituted.",
+   "uses": [
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "def-trf-deformation-specialization",
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§1.3.2(b), 4.1.4(b), verification of (III)--(IV)"
+   }
+  },
+  {
+   "text": "For each object $Z$, the geometric-field-base-change part of [lem-trf-nearby-cycle-verdier-duality] identifies the generic pullback of $D_ZM$ with the relative Verdier dual of the generic pullback of $M$, preserving evaluation. Its nearby-cycle assertion then gives the isomorphism $f_ZD_ZM\\to D_{Z_0}f_ZM$. Its formula is the transpose of lax tensor followed by specialized evaluation and the exceptional structure-map comparison; this is literally $r_Z$ followed by postcomposition with $\\delta_Z$ in [def-trf-cohomological-comparison], hence proves (V) for the prescribed map. If $\\widetilde g$ is proper, apply the proper exchange of [lem-trf-nearby-cycle-finiteness-exchange]. The definition of $\\mathrm{BC}_!$ and its mate in [def-trf-deformation-specialization] and the stated unit/counit compatibility make these proper exchanges inverse maps, not merely two isomorphisms with the same endpoints.",
+   "uses": [
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "def-trf-deformation-specialization",
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§1.3.2(b)--(c), 4.1.4(b), duality and proper total lifts"
+   }
+  },
+  {
+   "text": "First compactify $X\\to\\operatorname{Spec}k$ by [thm-nagata-compactification], then replace its target by the schematic closure of $X$, using [sk-lem-nagata-sketch-closure]. Call the result $X^*$. Next compactify $C\\to X^*\\times_kX^*$ and replace that target by the schematic closure of $C$, calling it $C^*$. Each open is quasi-compact and the targets are quasi-separated; the cited closure theorem leaves the open unchanged and makes it schematically dense. Such an open is topologically dense: on an open disjoint from it, the injective map of structure sheaves has zero target, forcing that open to be empty. Closed-immersion properness and proper stability keep the first target proper over $k$ and the second proper over $X^*\\times_kX^*$, hence over $k$. These give a dense compactification $c^*$ of $c$, in this order without a later change of its target. All maps used in Nagata are separated finite type: finite type follows from [lemma-nagata-finite-type-to-separated-target]; the relative source diagonal is the pullback of the closed source diagonal along $C\\times_YC\\to C\\times_kC$. The targets are qcqs, as finite-type separated schemes over a field: a finite affine cover gives quasi-compactness, and the closed diagonal gives quasi-separatedness. The compactification definition supplies the quasi-compact open embeddings.",
+   "uses": [
+    "thm-nagata-compactification",
+    "lem-kun-proper-stability",
+    "lemma-nagata-finite-type-to-separated-target",
+    "def-nagata-compactification",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "sk-lem-nagata-sketch-closure",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.3(c), compactification of a correspondence"
+   }
+  },
+  {
+   "text": "For each of $(T,\\widetilde T,T^*)=(X,\\widetilde X,X^*)$ and $(C,\\widetilde C,C^*)$, apply [sk-lem-nagata-sketch-graph] over the base $S=T_D$, with $M=\\widetilde T$, $V=T_\\eta\\subset\\widetilde T$, and compactification $V\\subset Y=T_D$ over $S$ (the proper map is $\\operatorname{id}_{T_D}$). The map $\\widetilde T\\to T_D$ is separated finite type; finite type follows from [lemma-nagata-finite-type-to-separated-target] over $D$. The qcqs checks use finite affine covers: finite type over affine $D$ gives quasi-compactness, and separatedness gives quasi-separatedness by [lem-pc-separated-quasi-separated]. The generic opens are quasi-compact because they are finite type over the field $k(t)$, using the generic identifications. $S=T_D$ is qcqs: a finite affine cover of $T$ pulls back to one over affine $D$, and its separatedness over $D$ gives quasi-separatedness by the same cited lemma. We obtain a $T_\\eta$-admissible blow-up $B_T\\to T_D$, an open $T_\\eta\\subset T'\\subset B_T$ and a proper $\\psi_T:T'\\to\\widetilde T$ with $\\psi_T^{-1}(T_\\eta)=T_\\eta$, identity there. Moreover $\\psi_T$ is an $S$-morphism: $\\rho_T\\psi_T$ is the blow-up map $T'\\to T_D$. This is the over-$S$ clause (field psi_u) of the closed declaration AlgebraicGeometry.Compactification.nonempty_properExtension attached to [sk-lem-nagata-sketch-graph] (Stacks 0F3Z: $V'$ is the graph closure in $Y\\times_SM$, $\\psi$ its second projection). So the $D$-structures of $T'$ from $B_T$ and from $\\widetilde T$ agree, which the fibre products over $D$ in Steps 8--10 use.",
+   "uses": [
+    "sk-lem-nagata-sketch-graph",
+    "lemma-nagata-finite-type-to-separated-target",
+    "def-nagata-compactification",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.1.5, graph domination; Stacks 0F3Z (flat.tex, lemma-compactification-dominates)"
+   }
+  },
+  {
+   "text": "Extend this blow-up from $W=T_D\\subset T_D^*$ to $T_D^*$ using [lemma-nagata-extend-admissible-blowup] and its construction [def-nagata-extended-admissible-blowup], with protected open $U=T_\\eta^*$. Here $T_D^*$ is qcqs, and both opens are quasi-compact: finite affine covers of $T$ and $T^*$ base-change to finite affine covers over $D$ and $\\eta$, respectively. Since $U\\cap W=T_\\eta$, the center avoids the protected overlap. Denote the resulting scheme by $\\widehat T$. Its restriction over $W$ is $B_T$, so $T'$ is open in $\\widehat T$. The extended center is disjoint from the entire generic fibre; [thm-nagata-global-blowup-complement] gives $\\widehat T_\\eta=T_\\eta^*$. The blow-up is proper by [thm-nagata-global-blowup-proper], and proper stability makes $\\widehat T$ proper over $D$. Thus it lifts $T^*$, while $T'$ lifts $T$ and is proper over the original lift. This keeps the generic compactification defined over $k$, rather than modifying its generic boundary.",
+   "uses": [
+    "lemma-nagata-extend-admissible-blowup",
+    "def-nagata-extended-admissible-blowup",
+    "thm-nagata-global-blowup-complement",
+    "thm-nagata-global-blowup-proper",
+    "lem-kun-proper-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.1.5, extension of the special-fibre center; Stacks 080M (divisors.tex, lemma-extend-admissible-blowups)"
+   }
+  },
+  {
+   "text": "In the proper $D$-scheme $\\widehat C\\times_D\\widehat X\\times_D\\widehat X$ take the schematic closure $\\Gamma$ of the graph of $c_\\eta^*:C_\\eta^*\\to(X_\\eta^*)^2$. It is a quasi-compact immersion: the graph is closed in the generic-fibre product, since $X^*$ is separated, and that fibre is open. This immersion is quasi-compact: its closed graph inclusion is quasi-compact, and the generic-fibre open inclusion is quasi-compact since on each affine chart it is the principal open obtained by inverting $t$. The graph-closed assertion is the pullback of the closed diagonal, using [def-weil-proper-morphism] and [lem-weil-pbc-closed-immersion-base-change]. By [sk-lem-nagata-sketch-closure] it is open and schematically dense in $\\Gamma$. The latter is proper over $D$ by [lem-weil-pbc-closed-immersion-proper] and [lem-kun-proper-stability]. Its projection defines a correspondence on $\\widehat X$ lifting $c^*$; over the generic fibre its closure is just the already closed graph, so the generic correspondence is precisely $c^*$.",
+   "uses": [
+    "sk-lem-nagata-sketch-closure",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-kun-proper-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Corollary 4.1.6, simultaneous graph closure"
+   }
+  },
+  {
+   "text": "Put $\\widetilde X'=X'$ and $\\widetilde C'=\\Gamma\\cap(C'\\times_DX'\\times_DX')$. These are open parts of the proper lifted compactification, with generic correspondence $c$. Write $Q=C'\\times_{\\widetilde X\\times_D\\widetilde X}(X'\\times_DX')$, using $C'\\to\\widetilde C\\xrightarrow{\\widetilde c}\\widetilde X^2$. Inside $C'\\times_D(X')^2$, $Q$ is cut out by the two equalities $\\widetilde c_i p_C(z)=p_X(x_i)$ for $i=1,2$. Each equality is the inverse image of the closed diagonal of $\\widetilde X/D$; locally their two pulled-back ideal sheaves together cut out $Q$. Closed-immersion base change therefore makes $Q$ closed. The generic graph lies in $Q$, hence so does its schematic closure $\\widetilde C'$. Restriction of schematic closure to this open follows by restricting the kernel ideal sheaf defining the schematic image, since open restriction is exact. Thus $\\widetilde C'\\to Q$ is closed. As $X'\\to\\widetilde X$ and $C'\\to\\widetilde C$ are proper, proper stability gives $Q\\to\\widetilde C$ proper; composing with the closed immersion proves $\\widetilde C'\\to\\widetilde C$ proper. This is the required proper refinement and proves commutativity of its two legs scheme-theoretically.",
+   "uses": [
+    "sk-lem-nagata-sketch-closure",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-kun-proper-stability",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Corollary 4.1.6, properness of the open graph refinement"
+   }
+  },
+  {
+   "text": "The induced total fixed-locus map $p_F$ is proper. Indeed it factors through $\\widetilde C'\\times_{\\widetilde C}\\operatorname{Fix}(\\widetilde c)$; the first factor is the base change of the relative diagonal $\\widetilde X'\\to\\widetilde X'\\times_{\\widetilde X}\\widetilde X'$, hence closed, and the second is the base change of $p_C$. This factorization follows by spelling out the two fixed equalities in the fibre-product universal property. The relative diagonal is closed since $\\widetilde X'\\to\\widetilde X$ is separated. Apply closed-immersion base change, closed-immersion properness and proper stability. Products give the other proper total object maps, and base change to $0$ gives a proper diagram $b'\\to b$. No claim that the fixed-locus map is merely a base change of $p_C$ is needed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-fixed-scheme",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-kun-proper-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a)--(b), proper maps on all fixed-diagram objects"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nearby-cycle-finiteness-exchange] to each proper total map $p_Z$ just constructed. Its geometric generic map is the identity on $Z$, so its proper exchange is exactly $\\theta_Z:f_Z\\xrightarrow{\\sim}Rp_{Z,0*}f'_Z$. For an arrow $g$, the naturality and pasting compatibility in that lemma identify the ordinary comparison through $\\theta_U,\\theta_V$ with the ordinary comparison for $f'$ followed by proper-direct-image exchange. For tensors this can also be checked by transposing: both maps use the same two counits of the composite direct image and then the same $i^*$ tensor identification; the composite counit is the successive counit. Exceptional maps and all mates then agree by the asserted unit/counit compatibility and uniqueness of adjoints. Thus this is an equality of the prescribed comparison data under $\\theta$, not just an objectwise choice of isomorphisms. The proper factor is compactifiable by [lem-trf-proper-direct-image-comparison]. Under these identifications the composite tensor map is $e(t^f_Z)\\circ t^e_{\\bar Z}$, the ordinary map is $e(\\alpha^f_g)\\circ(\\alpha^e_{\\bar g}f_V)$, and the exceptional map is $(\\beta^e_{\\bar g}f_V)\\circ e(\\beta^f_g)$, precisely the composition formulas of the current definition.",
+   "uses": [
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-proper-direct-image-comparison",
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(b), decomposition via the actual proper-base-change maps"
+   }
+  },
+  {
+   "text": "Apply Steps 1--5 to $\\widehat c:\\Gamma\\to\\widehat X^2$ lifting $c^*$: they give (I)--(V) and proper-total-lift exchange. Every arrow of this total fixed diagram is proper by [lemma-nagata-proper-to-separated-target]; its fixed locus is closed in $\\Gamma$ by the diagonal argument of Step 9. Thus the extended data satisfy (I)--(VI). Let $u_Z:Z\\hookrightarrow Z^*$ and $u_{Z,0}:Z'_0\\hookrightarrow\\widehat Z_0$ be the induced opens. The inverse of the smooth/open nearby exchange gives the natural isomorphism $\\rho_Z:f'_Zu_Z^*\\xrightarrow{\\sim}u_{Z,0}^*\\widehat f_Z$ required by the current (VII). It includes products and fixed loci by Step 1, and is the identity at $s$. Pullback carries the defining tensor counits to their restrictions. The ordinary exchange is their pullback-square transpose, and the exceptional exchange is the specified compact-support-counit transpose. Under the canonical open restriction identifications of [def-trf-cohomological-comparison], restriction preserves both adjunction equations; uniqueness of transpose identifies all restricted maps, including $\\iota$. This proves extension as pre-comparisons without a density assertion on the special opens. Under condition (a) of the statement, proper-total-lift exchange gives (VI) on the open diagram. Under condition (b), the two special opens are dense, so $b'$ embeds into the proper correspondence $\\widehat c_0$ as a compactification in the current sense. The generic opens are dense by Step 6. Therefore these specific $\\rho_Z$ and the extended data give (VII). The first factor is then compactifiable; composing with the proper factor of Step 12 gives the asserted cohomological comparison.",
+   "uses": [
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-trf-cohomological-comparison",
+    "lem-trf-proper-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§4.1.2(b), 4.1.3(VII), 4.1.4(b); explicit restriction isomorphisms, with total-properness and special-fibre-density conditions"
+   }
+  },
+  {
+   "text": "Transport the resulting etale functors through the constructible-origin equivalence of [lem-sf-proetale-constructible-origin], restricting to finite-Tor objects by [det-pe-finite-tor-comparison-noetherian] (the schemes are qcqs and the finite ring $A$ is Noetherian since it has only finitely many ideals), using the stipulated transported datum [def-fix-six-functor-datum]. Finite-stage duality transport, including its evaluation map, is expressly [lem-weil-finite-duality-site-comparison]. Thus its evaluation-defined comparisons are those proved invertible above. Tensor, exchanges and their mates in the project are the transported maps, so their identities are preserved by functors and the equivalence reflects isomorphisms. This uses finite coefficients throughout, without claiming any assertion for arbitrary ambient pro-etale objects.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "def-fix-six-functor-datum",
+    "lem-weil-finite-duality-site-comparison",
+    "det-pe-finite-tor-comparison-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+    "place": "§4.1.4(b) on etale representatives; finite-stage site transport"
+   }
+  },
+  {
+   "text": "To check the properness distinction explicitly, take $X=C=s\\sqcup s$ with the identity correspondence and $\\widetilde X=\\widetilde C=D\\sqcup\\eta$, again with identity correspondence. These are valid lifts; their special fibre is $s$. The fibre structure arrows are proper: they are finite disjoint unions of identities of $s$, and after any base change their images of closed subsets are finite unions of closed subsets; their diagonals are closed and they are finite type. The specialized constant coefficient complex is $A$ on the one surviving point, by the constant-trait normalization, while the generic-only branch has empty special fibre and gives zero. In degree zero the structure-arrow mate is therefore the restriction of sections $A\\oplus A\\to A$, $(a,b)\\mapsto a$, using the sheaf axiom on the two disjoint opens. Since $A\\ne0$, this has nonzero kernel and cannot be an isomorphism. The total structure arrow is not proper: its open-and-closed $\\eta$-branch has image the nonclosed generic point in $D$. This proves the negative clause without an empty-special-fibre convention or any failure of admissibility.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-trf-deformation-specialization",
+    "lem-trf-nearby-cycle-verdier-duality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Correction of §4.1.4(b), explicit counterexample to fibrewise proper exchange"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-fixed-scheme",
+  "def-trf-deformation-specialization",
+  "lem-trf-nearby-cycle-finiteness-exchange",
+  "lem-trf-nearby-cycle-verdier-duality",
+  "def-trf-cohomological-comparison",
+  "lem-trf-specialization-zero-section",
+  "thm-nagata-compactification",
+  "lem-kun-proper-stability",
+  "lemma-nagata-finite-type-to-separated-target",
+  "def-nagata-compactification",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "sk-lem-nagata-sketch-closure",
+  "lem-weil-pbc-closed-immersion-proper",
+  "sk-lem-nagata-sketch-graph",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lemma-nagata-extend-admissible-blowup",
+  "def-nagata-extended-admissible-blowup",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-global-blowup-proper",
+  "lem-trf-proper-direct-image-comparison",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-sf-proetale-constructible-origin",
+  "def-fix-six-functor-datum",
+  "lem-weil-finite-duality-site-comparison",
+  "det-pe-finite-tor-comparison-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§4.1.4(b), Lemma 4.1.5 and Corollary 4.1.6, with corrected properness claim and Stacks 0F3Z/080M implementation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +309,73 @@
    "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.IsProper.of_valuativeCriterion; full returned signatures saved in lem-trf-specialization-cohomological-comparison.search-output.txt",
    "date": "2026-10-17",
    "verdict": "no match: affine transition limits, valuative criteria and homological cycles do not construct nearby cycles or their duality-compatible proper refinement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nearby cycle specialization on a lift of a correspondence factors through a proper refinement with compatible proper base change maps; invertibility requires properness of the total morphism.",
+   "results": "8 hits: AlgebraicGeometry.specializingMap_respectsIso, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap; complete returned signatures and descriptions in search-10.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological specialization, properness and ordinary sheaf adjunctions do not provide the corrected nearby-cycle correspondence comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"specializationFunctor\"",
+   "results": "0 hits: none; complete returned signatures and descriptions in search-11.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological specialization, properness and ordinary sheaf adjunctions do not provide the corrected nearby-cycle correspondence comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "specializationFunctor|nearbyCycles|compactifiable.*comparison",
+   "results": "0 hits: none; complete returned signatures and descriptions in search-12.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological specialization, properness and ordinary sheaf adjunctions do not provide the corrected nearby-cycle correspondence comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nearby cycles of a degeneration of a correspondence and compactifications.",
+   "results": "8 hits: AlgebraicGeometry.IsProper, AlgebraicGeometry.isCompact_iff_exists, AlgebraicGeometry.isClosedMap_iff_specializingMap, CategoryTheory.ShortComplex.toCycles_i, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.Scheme.Hom.isProperMap, CategoryTheory.ShortComplex.cyclesIsKernel; complete returned signatures and descriptions in search-13.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological specialization, properness and ordinary sheaf adjunctions do not provide the corrected nearby-cycle correspondence comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specialization of constructible sheaves defines a lax tensor comparison with exceptional adjoint mates and proper modification factorization.",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; complete returned signatures and descriptions in search-14.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological specialization, properness and ordinary sheaf adjunctions do not provide the corrected nearby-cycle correspondence comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nearby-cycle specialization of a correspondence factors through a proper refinement and extends to proper diagrams; compactifiability requires dense special-fibre open embeddings and proper exchange.",
+   "results": "8 hits: AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, TopCat.Presheaf.stalkSpecializes_comp_apply, TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply, AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkSpecializes_stalkMap; complete returned signatures in repair-search-0.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological specialization, constructible images, dominant maps, dense subsites and affine transition limits do not provide the nearby-cycle comparison or its dense compactification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specialization comparison of constructible sheaves admits dense compactifications when its proper lifted extension has dense special open fibres and every fibre-proper arrow has proper total lift.",
+   "results": "8 hits: AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsLocallyConstructible.isConstructible, AlgebraicGeometry.isClosedMap_iff_specializingMap, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Hom.denseRange, PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible, AlgebraicGeometry.IsDominant.denseRange; complete returned signatures in repair-search-1.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological specialization, constructible images, dominant maps, dense subsites and affine transition limits do not provide the nearby-cycle comparison or its dense compactification"
+  },
+  {
+   "tool": "grep",
+   "query": "nearbyCycles|nearby_cycles|compactifiable.*cohomological|cohomologicalComparison",
+   "results": "0 hits: ; complete returned signatures in repair-search-3.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological specialization, constructible images, dominant maps, dense subsites and affine transition limits do not provide the nearby-cycle comparison or its dense compactification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric nearby cycles give a duality compatible comparison on a correspondence diagram with dense proper compactifications.",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux, AlgebraicGeometry.ExistsHomHomCompEqCompAux.recOn, CategoryTheory.Functor.IsDenseSubsite.sheafEquivSheafificationCompatibility, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk, AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; complete returned signatures in repair-search-4.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological specialization, constructible images, dominant maps, dense subsites and affine transition limits do not provide the nearby-cycle comparison or its dense compactification"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-specialization",
@@ -74,5 +394,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-specialization-cohomological-comparison",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: fibrewise properness does not imply nearby-cycle proper exchange. Corrected to canonical pre-comparison, proper-total-lift exchange and unconditional proper refinement factorization, with the original cohomological-comparison conclusion explicitly conditional. Reused the finiteness/exchange node and Nagata graph-extension and blow-up-extension nodes; added only geometric nearby duality and general proper direct-image comparison. Returned-citation repair: revalidated against the current labelled-diagram, finite-Tor, composition and dense-compactification definition; supplied canonical restriction isomorphisms, made generic compactifications dense by schematic closure, and corrected the conditional compactifiability conclusion to require dense special opens as well as proper total lifts. Independent second reading: ordered the two dense Nagata compactifications and distinguished the closed graph inclusion from the principal generic-fibre open; independently rechecked all fifteen steps, both new inputs and current citations.",
+  "blueprint": "lem-trf-local-term-locality proof (1),(2), specialization-to-normal-cone route; realizes Varshavsky §4.1.4(b) by the geometric proof of Lemma 4.1.5 / Corollary 4.1.6; reports the false fibre-proper exchange in that route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-proper-stability",
+    "why": "Generic scheme-theoretic properness stability used on D-schemes; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic base change of closed immersions for graph and fixed-locus diagonal arguments."
+   },
+   {
+    "node": "lem-weil-finite-duality-site-comparison",
+    "why": "The exact evaluation-defined etale/pro-etale duality transport; constructible origin alone does not supply internal Hom comparison."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Restricts the bounded constructible-origin equivalence to the actual finite-Tor subcategories; this unit has no statement providing that restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-proper-stability",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-finite-duality-site-comparison",
+  "det-pe-finite-tor-comparison-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NX-3c0bf61f4",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-3c0bf61f4 (reviewer sub-agent of L); spot-checked: I read the item, all 15 steps, both new nodes, the full statement of every cited node, Varshavsky §§1.3.1-1.3.5 and 4.1.1-4.1.7, Stacks 0F3Z (flat.tex, with its proof), 080M, the blueprint lem-trf-local-term-locality proof, the unit sk-i-curve-zero and the chapter. The STATEMENT-DISPUTED claim holds. Def 4.1.3(VI) asks only that the fibre arrows be proper, but 1.3.2(c) needs the total lift to be proper. I recomputed the counterexample X=s⊔s with lift D⊔η (a valid lift because η is open in D): the structure mate is the projection A⊕A->A. Any proper refinement keeps the η-branch, so the asserted compactifiable factorization is false. The A^1_η/P^1_D example shows condition (b) is needed. The corrected conditional statement is true and the change is named in the report. This is not a target. Follow-up for the maintainer: lem-trf-trace-specialization step 1 cites the unconditional factors, so either that node or def-trf-cohomological-comparison(VI) must be repaired. Its real use of (VI) is only for Δ and i_F, whose total lifts are closed immersions. FIX in step 7: steps 8-10 form fibre products over D and so need ψ:T'->T̃ to lie over S=T_D. The prose of sk-lem-nagata-sketch-graph omits this. It is the psi_u field of the closed attached declaration Compactification.nonempty_properExtension and holds in Stacks' 0F3Z proof. The step now states it with that source. The node's prose should also gain the clause; I did not edit it. All other steps check out: dense Nagata closures, 080M with U=T*_η and W=T_D, closure Γ, Q-containment and properness, the p_F factorization through the relative diagonal, θ via total-proper exchange, ρ_Z from open exchange, and finite-Tor/evaluation transport. New node lem-trf-nearby-cycle-verdier-duality is true (Illusie Thm 4.2 is still WANTED). Its field-change clause partly overlaps lem-weil-geometric-generic-duality and lem-sf-etale-generic-exchange-algclosed, which its future splitter should cite. New node lem-trf-proper-direct-image-comparison is true (Varshavsky 4.1.4(a)); I checked (VII) via p*^{-1}(Y)=X, using that X is dense, open and closed. Neither new node is a duplicate or a restatement. I accept the declared tool_uses. Edge cases checked: zero complex, empty schemes, constant trait, identity proper map, two-point lift, A^1_η, n=1.; 1 file(s) fixed by the reviewer"
  }
 }
