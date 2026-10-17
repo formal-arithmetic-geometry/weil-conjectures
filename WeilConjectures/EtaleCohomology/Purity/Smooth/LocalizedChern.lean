@@ -79,7 +79,8 @@ attribute [local instance] HasInvertibleExponent.opens
 Thom class (`AlgebraicGeometry.VectorBundle.thomClass`). Its properties are
 `AlgebraicGeometry.VectorBundle.restrictSupportedClass_localizedTopChern` (in a chart, the cup
 product of the Kummer boundaries of the components; for `r = 1` the localized Kummer class of
-the divisor, (L1)) and `AlgebraicGeometry.VectorBundle.restrictSupportedClass_localizedTopChern_comp`
+the divisor, (L1)) and
+`AlgebraicGeometry.VectorBundle.restrictSupportedClass_localizedTopChern_comp`
 (base change, (L2)). -/
 noncomputable def localizedTopChern :
     haveI : HasInvertibleExponent Λ T := .of_hom E.zero
@@ -98,7 +99,8 @@ noncomputable def localizedTopChern :
 components `s₁, …, s_r`, the localized top Chern class restricts to the cup product with
 supports `∂κ(s₁) ∪ ⋯ ∪ ∂κ(s_r)` of the Kummer boundaries of the components. For `r = 1` this is
 the localized Kummer class of the Cartier divisor of `s`. The class does not depend on the chart
-by frame independence (`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`),
+by frame independence
+(`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`),
 which is how the blueprint glues it. -/
 theorem restrictSupportedClass_localizedTopChern (i : E.ι)
     (g' : (E.U i).toScheme.zeroLocusSubscheme (Set.range (E.sectionCoord s hs i)) ⟶

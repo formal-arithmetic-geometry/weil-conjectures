@@ -347,6 +347,7 @@ theorem _root_.AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_m
     exact (restrictSupportedClass_kummerBoundaryProduct_mulVec Λ aW v M hM g hg).symm
   exact key w hMf g₀ hg₀
 
+omit [HasKummerClass.IsNormalized Λ] in
 /-- The restriction of supports along the inclusion of a chart is invertible. -/
 lemma isIso_supportedRestriction_frame (i : E.ι) :
     IsIso (supportedRestriction (ModuleCat.{u + 1} Λ) (E.frame i).e E.zero _ (E.frame i).toZ
@@ -358,7 +359,8 @@ include aS in
 restricting to `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_d)` on every chart. By
 `AlgebraicGeometry.VectorBundle.exists_iso_singleFunctor_thomTarget` classes with supports in
 the zero section are sections of a sheaf, and the frame classes agree on overlaps, the
-transition maps being linear (`AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_mulVec`).
+transition maps being linear
+(`AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_mulVec`).
 -/
 theorem exists_thomClass :
     ∃ γ : constantComplex Λ V ⟶ (R(E.zero)_![ModuleCat.{u + 1} Λ]).obj

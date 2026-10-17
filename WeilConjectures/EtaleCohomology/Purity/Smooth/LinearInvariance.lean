@@ -164,6 +164,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct_permutation (aS : S ⟶ Spe
   restrictSupportedClass_kummerBoundaryProduct_linearMap Λ aS _
     (by rw [Matrix.det_permutation]; exact (Units.isUnit _).map (Int.castRingHom _)) g' hg'
 
+omit [HasKummerClass.IsNormalized Λ] in
 /-- Blueprint `prop-pur-affine-space-purity-compatibilities`: Symmetry and compatibilities of
 affine-space purity
 

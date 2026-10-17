@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 
 Let `Λ` be a commutative ring of positive characteristic `n` and `X` a scheme on which `n` is
 invertible. This file collects the statements of blueprint `det-def-sp-tate-twist-locally-free`
-for the étale Tate twists `Λ_X(m) = (μₙ ⊗ Λ)^{⊗ m}` of `WeilConjectures.EtaleCohomology.TateTwist.Basic`:
+for the étale Tate twists `Λ_X(m) = (μₙ ⊗ Λ)^{⊗ m}` of
+`WeilConjectures.EtaleCohomology.TateTwist.Basic`:
 
 1. on the étale cover `X' = X ×_{ℤ[1/n]} ℤ[1/n][ζ] ⟶ X` adjoining a primitive `n`-th root of
    unity `ζ`, the map `ℤ/n ⟶ μₙ`, `a ↦ ζ^a`, is an isomorphism

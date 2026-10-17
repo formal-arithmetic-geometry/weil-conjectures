@@ -31,7 +31,8 @@ locally constant sheaf of rank one; so everything comes down to `ω_π ≅ Λ_V(
 chart `π⁻¹ U ≅ 𝔸^d_U` this is affine-space purity (`cor-pur-affine-space-purity`). To glue the
 local isomorphisms they are normalized along the zero section:
 
-* the Thom isomorphism `Λ_S ≅ Rz^! (Λ_V(d)[2d])` (`AlgebraicGeometry.VectorBundle.isIso_thomClassMap`)
+* the Thom isomorphism `Λ_S ≅ Rz^! (Λ_V(d)[2d])`
+  (`AlgebraicGeometry.VectorBundle.isIso_thomClassMap`)
   and `Rz^! ω_π ≅ R(π ∘ z)^! Λ_S = Λ_S` give, through the co-projection formula for `z`, the
   section invariant `Lz^* ω_π ≅ Λ_S(d)[2d]`
   (`AlgebraicGeometry.VectorBundle.nonempty_iso_sectionInvariant`);
@@ -73,7 +74,8 @@ lemma Etale.nonempty_iso_of_derivedTensor_iso {Λ : Type (u + 1)} [CommRing Λ] 
     Nonempty (W ≅ T) :=
   ⟨(derivedTensorLeftUnitor _ X W).symm ≪≫
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso e₁.symm).app W ≪≫
-    derivedTensorAssociator _ X T N W ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj T).mapIso e₂ ≪≫
+    derivedTensorAssociator _ X T N W ≪≫
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj T).mapIso e₂ ≪≫
     derivedTensorRightUnitor _ X T⟩
 
 namespace VectorBundle
@@ -88,6 +90,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] [HasCompactification π]
   {k : Type u} [Field k] (aS : S ⟶ Spec (.of k)) [IsSeparated aS] [LocallyOfFiniteType aS]
 
+omit [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] in
 /-- `Rz^! ω_π ≅ R(π ∘ z)^! Λ_S = Λ_S`. -/
 lemma nonempty_iso_rightDerivedUpperShriek_dualizingComplex :
     Nonempty ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj
@@ -425,7 +428,8 @@ field, on which the exponent of the finite coefficient ring `Λ` is invertible. 
 `Λ_V(d)[2d] ⊗ Lπ^* K ≅ Rπ^! K`
 
 (`AlgebraicGeometry.VectorBundle.purityMap`): the transpose of the integration is an isomorphism,
-and so is the mate of the projection formula, by cohomological smoothness (`thm-asd-smooth-tensor`). -/
+and so is the mate of the projection formula, by cohomological smoothness
+(`thm-asd-smooth-tensor`). -/
 theorem isIso_purityMap
     (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (E.purityMap Λ aS K) := by

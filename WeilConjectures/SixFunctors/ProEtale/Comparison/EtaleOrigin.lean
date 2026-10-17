@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.SiteComparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CoverConservative
-public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
+
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
 /-!
@@ -135,8 +135,7 @@ end LowerStar
 section Cover
 
 variable {A} [Etale.HasCohomologyContinuity A] {X : Scheme.{u}} {S : Type} [Finite S]
-  {V : S → Scheme.{u}} (p : ∀ s, V s ⟶ X) [∀ s, WeaklyEtale (p s)] [∀ s, QuasiCompact (p s)]
-  [∀ s, QuasiSeparated (p s)]
+  {V : S → Scheme.{u}} (p : ∀ s, V s ⟶ X) [∀ s, QuasiCompact (p s)] [∀ s, QuasiSeparated (p s)]
 
 /-- The product `∏ₛ (p s)_* (p s)^* F` of the pushforwards of the pullbacks along a finite
 family. -/
@@ -159,12 +158,12 @@ lemma coverUnit_π (F : Sheaf (Scheme.ProEt.topology X) A) (s : S) :
 
 omit [Etale.HasCohomologyContinuity A] [∀ s, QuasiCompact (p s)]
   [∀ s, QuasiSeparated (p s)] in
-/-- The unit along a pro-étale covering family is a monomorphism. -/
-lemma mono_coverUnit (hp : Presieve.ofArrows V p ∈ Scheme.proetalePrecoverage X)
+/-- The unit along a family whose pullbacks jointly detect zero objects is a monomorphism. -/
+lemma mono_coverUnit
+    (hdet : ∀ H : Sheaf (Scheme.ProEt.topology X) A,
+      (∀ s, IsZero ((ProEtale.upperStar A (p s)).obj H)) → IsZero H)
     (F : Sheaf (Scheme.ProEt.topology X) A) : Mono (coverUnit p F) := by
-  refine Preadditive.mono_of_isZero_kernel' _ (kernelIsKernel _) ?_
-  rw [isZero_iff_forall_isZero_upperStar_obj A p hp]
-  intro s
+  refine Preadditive.mono_of_isZero_kernel' _ (kernelIsKernel _) (hdet _ fun s ↦ ?_)
   let P := ProEtale.upperStar A (p s)
   -- `P` of the unit is a split monomorphism, so `P` of its kernel vanishes
   have hsplit : P.map (coverUnit p F ≫ biproduct.π _ s) ≫
@@ -177,32 +176,14 @@ lemma mono_coverUnit (hp : Presieve.ofArrows V p ∈ Scheme.proetalePrecoverage 
     exact mono_of_mono _ (P.map (biproduct.π _ s))
   exact IsZero.of_iso (isZero_kernel_of_mono _) (PreservesKernel.iso P _)
 
-/-- The pullback of `∏ₜ (p t)_* (p t)^* F` along a member `p s` of the family is of étale origin
-when the pullbacks of `F` are: by weakly étale base change,
-`(p s)^* (p t)_* ≅ q_* q'^*` for the projections `q : V s ×_X V t ⟶ V s` and
-`q' : V s ×_X V t ⟶ V t`. -/
-lemma essImage_comparisonUpperStar_upperStar_coverProduct (F : Sheaf (Scheme.ProEt.topology X) A)
-    (hF : ∀ s, (comparisonUpperStar A (V s)).essImage ((ProEtale.upperStar A (p s)).obj F))
-    (s : S) :
-    (comparisonUpperStar A (V s)).essImage
-      ((ProEtale.upperStar A (p s)).obj (coverProduct p F)) := by
-  apply essImage_comparisonUpperStar_of_iso ((ProEtale.upperStar A (p s)).mapBiproduct _).symm
-  apply essImage_comparisonUpperStar_biproduct
-  intro t
-  have hsq := IsPullback.of_hasPullback (p s) (p t)
-  have : IsIso ((ProEtale.baseChangeMap A hsq.toCommSq).app
-      ((ProEtale.upperStar A (p t)).obj F)) := by
-    have := ProEtale.isIso_baseChangeMap_of_isPullback A hsq
-    infer_instance
-  exact essImage_comparisonUpperStar_of_iso
-    (asIso ((ProEtale.baseChangeMap A hsq.toCommSq).app _)).symm
-    (essImage_comparisonUpperStar_lowerStar _
-      (essImage_comparisonUpperStar_upperStar _ (hF t)))
-
-/-- **Being of étale origin is local for finite pro-étale covering families** by
-quasi-compact quasi-separated morphisms. -/
-theorem essImage_comparisonUpperStar_of_cover
-    (hp : Presieve.ofArrows V p ∈ Scheme.proetalePrecoverage X)
+/-- **Being of étale origin can be checked on a finite family of quasi-compact
+quasi-separated morphisms whose pullbacks jointly detect zero objects.** The sheaf `F` is the
+kernel of `∏ (p s)_* (p s)^* F ⟶ C ⟶ ∏ (p s)_* (p s)^* C`, `C` the cokernel of the unit, and the
+pullbacks of these products are of étale origin, the pushforwards and pullbacks preserving the
+sheaves of étale origin. -/
+theorem essImage_comparisonUpperStar_of_detect
+    (hdet : ∀ H : Sheaf (Scheme.ProEt.topology X) A,
+      (∀ s, IsZero ((ProEtale.upperStar A (p s)).obj H)) → IsZero H)
     (F : Sheaf (Scheme.ProEt.topology X) A)
     (hF : ∀ s, (comparisonUpperStar A (V s)).essImage ((ProEtale.upperStar A (p s)).obj F)) :
     (comparisonUpperStar A X).essImage F := by
@@ -217,9 +198,9 @@ theorem essImage_comparisonUpperStar_of_cover
     essImage_comparisonUpperStar_of_iso
       (PreservesCokernel.iso (ProEtale.upperStar A (p s)) (coverUnit p F)).symm
       (essImage_comparisonUpperStar_cokernel _ (hF s)
-        (essImage_comparisonUpperStar_upperStar_coverProduct p F hF s))
-  have := mono_coverUnit p hp F
-  have := mono_coverUnit p hp (cokernel (coverUnit p F))
+        (essImage_comparisonUpperStar_upperStar _ (hT F hF)))
+  have := mono_coverUnit p hdet F
+  have := mono_coverUnit p hdet (cokernel (coverUnit p F))
   -- `F` is the kernel of `∏ (p s)_* (p s)^* F ⟶ C ⟶ ∏ (p s)_* (p s)^* C`, `C` the cokernel
   have hker := isKernelCompMono
     (Abelian.monoIsKernelOfCokernel _ (colimit.isColimit (parallelPair (coverUnit p F) 0)))
@@ -227,6 +208,16 @@ theorem essImage_comparisonUpperStar_of_cover
   exact essImage_comparisonUpperStar_of_iso
     ((limit.isLimit _).conePointUniqueUpToIso hker)
     (essImage_comparisonUpperStar_kernel _ (hT F hF) (hT _ hC))
+
+/-- **Being of étale origin is local for finite pro-étale covering families** by
+quasi-compact quasi-separated morphisms. -/
+theorem essImage_comparisonUpperStar_of_cover [∀ s, WeaklyEtale (p s)]
+    (hp : Presieve.ofArrows V p ∈ Scheme.proetalePrecoverage X)
+    (F : Sheaf (Scheme.ProEt.topology X) A)
+    (hF : ∀ s, (comparisonUpperStar A (V s)).essImage ((ProEtale.upperStar A (p s)).obj F)) :
+    (comparisonUpperStar A X).essImage F :=
+  essImage_comparisonUpperStar_of_detect p
+    (fun H hH ↦ (isZero_iff_forall_isZero_upperStar_obj A p hp H).2 hH) F hF
 
 end Cover
 

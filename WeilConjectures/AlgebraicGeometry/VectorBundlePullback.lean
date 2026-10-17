@@ -40,6 +40,7 @@ namespace VectorBundle
 variable {V S V' S' : Scheme.{u}} {d : ℕ} {π : V ⟶ S} (E : VectorBundle d π) {g : S' ⟶ S}
   {g' : V' ⟶ V} {π' : V' ⟶ S'} (sq : IsPullback g' π' π g)
 
+include sq in
 lemma preimage_le_preimage_of_isPullback (U : S.Opens) :
     π' ⁻¹ᵁ g ⁻¹ᵁ U ≤ g' ⁻¹ᵁ π ⁻¹ᵁ U := by
   rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, sq.w]
@@ -152,7 +153,7 @@ noncomputable def ofIsPullback : VectorBundle d π' where
     · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, chartOfIsPullback_hom_appTop_coord,
         ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
         zeroOfIsPullback_resLE_resPullback, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
-        ← zeroRes_eq_zeroRestrict, coord_zeroRestrict, map_zero,
+        zeroRes_eq_zeroRestrict, coord_zeroRestrict, map_zero,
         AffineSpace.zeroSection_appTop_coord]
   linear i j := by
     obtain ⟨M, hM, hlin⟩ := E.linear i j
@@ -161,27 +162,32 @@ noncomputable def ofIsPullback : VectorBundle d π' where
     · have h := hM.map r.appTop.hom
       rw [RingHom.map_det] at h
       exact h
-    have key : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z) (x : Γ(Z, ⊤)),
-        (f ≫ h).appTop x = f.appTop (h.appTop x) := fun f h x ↦ by
-      rw [Scheme.Hom.comp_appTop]
-      rfl
-    have hL : ∀ k : E.ι, ∀ (hk : π' ⁻¹ᵁ g ⁻¹ᵁ (E.U i ⊓ E.U j) ≤ π' ⁻¹ᵁ g ⁻¹ᵁ E.U k)
-        (hk' : π ⁻¹ᵁ (E.U i ⊓ E.U j) ≤ π ⁻¹ᵁ E.U k),
-        V'.homOfLE hk ≫ resPullback sq (E.U k) =
-          resPullback sq (E.U i ⊓ E.U j) ≫ V.homOfLE hk' := fun k hk hk' ↦ by
-      rw [← cancel_mono (π ⁻¹ᵁ E.U k).ι, Category.assoc, resPullback_ι, Category.assoc,
-        Scheme.homOfLE_ι, Scheme.homOfLE_ι_assoc, resPullback_ι]
-    have hr : resPullback sq (E.U i ⊓ E.U j) ≫ π ∣_ (E.U i ⊓ E.U j) =
-        π' ∣_ (g ⁻¹ᵁ (E.U i ⊓ E.U j)) ≫ r :=
-      resPullback_morphismRestrict sq _
-    change (V'.homOfLE _ ≫ (E.chartOfIsPullback sq j).hom).appTop _ =
-      ∑ b, (π' ∣_ (g ⁻¹ᵁ (E.U i ⊓ E.U j))).appTop (r.appTop (M a b)) *
-        (V'.homOfLE _ ≫ (E.chartOfIsPullback sq i).hom).appTop _
-    simp only [key _ (E.chartOfIsPullback sq _).hom, chartOfIsPullback_hom_appTop_coord, coord]
-    rw [← key, ← key, hL j _ (π.preimage_mono inf_le_right), key, key, hlin a, map_sum]
+    have hL : ∀ (k : E.ι) (hk : π' ⁻¹ᵁ (g ⁻¹ᵁ E.U i ⊓ g ⁻¹ᵁ E.U j) ≤ π' ⁻¹ᵁ g ⁻¹ᵁ E.U k)
+        (hk' : π ⁻¹ᵁ (E.U i ⊓ E.U j) ≤ π ⁻¹ᵁ E.U k) (x : Γ((π ⁻¹ᵁ E.U k).toScheme, ⊤)),
+        (V'.homOfLE hk).appTop ((resPullback sq (E.U k)).appTop x) =
+          (resPullback sq (E.U i ⊓ E.U j)).appTop ((V.homOfLE hk').appTop x) := by
+      intro k hk hk' x
+      have h : V'.homOfLE hk ≫ resPullback sq (E.U k) =
+          resPullback sq (E.U i ⊓ E.U j) ≫ V.homOfLE hk' := by
+        rw [← cancel_mono (π ⁻¹ᵁ E.U k).ι, Category.assoc, resPullback_ι, Category.assoc,
+          Scheme.homOfLE_ι, Scheme.homOfLE_ι_assoc, resPullback_ι]
+        rfl
+      have := congrArg (fun φ ↦ φ.appTop x) h
+      simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply] at this
+      exact this
+    have hr : ∀ x, (resPullback sq (E.U i ⊓ E.U j)).appTop ((π ∣_ (E.U i ⊓ E.U j)).appTop x) =
+        (π' ∣_ (g ⁻¹ᵁ E.U i ⊓ g ⁻¹ᵁ E.U j)).appTop (r.appTop x) := fun x ↦ by
+      have := congrArg (fun φ ↦ φ.appTop x) (resPullback_morphismRestrict sq (E.U i ⊓ E.U j))
+      simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply] at this
+      exact this
+    have hlin' := hlin a
+    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply] at hlin'
+    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, Matrix.map_apply]
+    rw [chartOfIsPullback_hom_appTop_coord, coord, hL j _ (π.preimage_mono inf_le_right),
+      hlin', map_sum]
     refine Finset.sum_congr rfl fun b _ ↦ ?_
-    rw [map_mul, ← key, hr, key, ← key (V'.homOfLE _), ← key,
-      hL i _ (π.preimage_mono inf_le_left), key, key]
+    rw [map_mul, hr, chartOfIsPullback_hom_appTop_coord, coord,
+      hL i _ (π.preimage_mono inf_le_left)]
 
 @[simp]
 lemma ofIsPullback_U (i : E.ι) : (E.ofIsPullback sq).U i = g ⁻¹ᵁ E.U i := rfl

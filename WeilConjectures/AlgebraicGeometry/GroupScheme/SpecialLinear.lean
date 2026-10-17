@@ -32,7 +32,8 @@ determinant `1`.
 
 - `AlgebraicGeometry.GeneralLinearGroup.homMulEquiv_comp_det`: on points, `det` is the
   determinant of invertible matrices.
-- `AlgebraicGeometry.SpecialLinearGroup.range_homMulEquiv_comp_toGeneralLinear`: the `R`-points of `𝕊𝕃(n; k)`
+- `AlgebraicGeometry.SpecialLinearGroup.range_homMulEquiv_comp_toGeneralLinear`: the `R`-points of
+  `𝕊𝕃(n; k)`
   are the invertible matrices of determinant `1`.
 
 ## Blueprint
@@ -146,7 +147,7 @@ theorem range_homMulEquiv_comp_toGeneralLinear (R : Type u) [CommRing R] [Algebr
       GeneralLinearGroup.homMulEquiv n k R (φ ≫ toGeneralLinear n k)) =
         {g | Matrix.GeneralLinearGroup.det g = 1} := by
   ext g
-  rw [Set.mem_setOf_eq, ← mem_zeroLocus_specialLinearIdeal_iff (k := k)]
+  rw [Set.mem_ofPred_eq, ← mem_zeroLocus_specialLinearIdeal_iff (k := k)]
   exact Set.ext_iff.1
     (GeneralLinearGroup.range_homMulEquiv_comp (I := specialLinearIdeal n k) R) g
 
