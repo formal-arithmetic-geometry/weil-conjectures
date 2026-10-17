@@ -10,9 +10,76 @@
  "stmt_deps": [
   "def-sp-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The specified zero extensions are exact. In degree one, the kernel of the projection $T\\oplus K\\to K$ is the standard inclusion of $T$, and the inclusion and projection are respectively monic and epic by their retractions and sections. For degree $r\\geq2$, exactness at the first middle object follows from $\\operatorname{im}(1_V)=V=\\ker(0)$, and at the last from $\\operatorname{im}(0)=0=\\ker(1_U)$; at intervening zero objects both sides are zero. These calculations use the zero object and biproducts of the abelian category [def-sp-abelian].",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XT (definition-yoneda-extension) and Tag 06XP (section-ext), exact-sequence composition paragraph after lemma-ext-1; explicit elementary argument by Q03."
+   }
+  },
+  {
+   "text": "Check that splicing produces an exact extension. The short exact tail makes $i$ monic, $q$ epic, and $i$ a kernel of $q$; the prefix makes $d$ epic. Since $i$ is monic, a map $a$ into $X_0$ satisfies $ida=0$ exactly when $da=0$, so the kernel at $X_0$ is unchanged. Since $d$ is epic, a map $b$ out of $P$ satisfies $bid=0$ exactly when $bi=0$. Thus the cokernels of $id$ and $i$ agree, and so do their images (the kernels of their cokernels in an abelian category [def-sp-abelian]); this image is $\\ker q$. All other exactness conditions are unchanged from the prefix and tail. This also covers $m=1$, where the preceding arrow is $T\\to X_0$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XT (definition-yoneda-extension) and Tag 06XP (section-ext), exact-sequence composition paragraph after lemma-ext-1; explicit elementary argument by Q03."
+   }
+  },
+  {
+   "text": "Let $f:\\eta\\to\\eta'$ be a morphism of $m$-extensions fixing $T$ and $K$, with middle components $f_j:X_j\\to X'_j$. Keep these components and put the identity on $P$ and $F$. Every old square still commutes; the new joining square commutes because $d' f_0=d$ gives $i d'f_0=i d$, and the final square is $q1_P=1_Fq$. This is a morphism of the spliced extensions, fixing their endpoints. Apply this construction to each arrow, in its given direction, in a finite zigzag generating Yoneda equivalence. The resulting zigzag proves that splicing preserves the equivalence relation defined in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XT (definition-yoneda-extension) and Tag 06XP (section-ext), exact-sequence composition paragraph after lemma-ext-1; explicit elementary argument by Q03."
+   }
+  },
+  {
+   "text": "For $m=1$, splice the specified zero prefix. The resulting exact sequence is $0\\to T\\xrightarrow{\\iota_T}T\\oplus K\\xrightarrow{i\\pi_K}P\\xrightarrow{q}F\\to0$. Map it to the zero $2$-extension $0\\to T\\xrightarrow{1_T}T\\xrightarrow{0}F\\xrightarrow{1_F}F\\to0$, with identities on the endpoints, $\\pi_T:T\\oplus K\\to T$, and $q:P\\to F$. The three squares say $\\pi_T\\iota_T=1_T$, $q i\\pi_K=0\\pi_T=0$, and $1_Fq=q$. Thus this endpoint-fixing morphism witnesses the required equivalence. Only the biproduct identities from [def-sp-abelian] and $qi=0$ from the given short exact sequence are used.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XT (definition-yoneda-extension) and Tag 06XP (section-ext), exact-sequence composition paragraph after lemma-ext-1; explicit elementary argument by Q03."
+   }
+  },
+  {
+   "text": "For $m\\geq2$, the splice of the zero prefix has $m+1$ middle objects: $T$, then $m-2$ zero objects, then $K$, then $P$. The target zero $(m+1)$-extension has middle objects $T$, then $m-1$ zero objects, then $F$. Define a morphism from the splice to this target by the identity on the first $T$, the unique maps between zero objects, the zero map $K\\to0$, and $q:P\\to F$, fixing the endpoints $T,F$. At the first endpoint the square is the identity; at $K\\to P$ it is $qi=0$; at $P\\to F$ it is $1_Fq=q$; all other squares involve zero arrows and commute. When $m=2$ there are no zero objects before $K$ in the source, and the first interior square is still $0=0$. This gives the required endpoint-fixing comparison in every $m\\geq2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XT (definition-yoneda-extension) and Tag 06XP (section-ext), exact-sequence composition paragraph after lemma-ext-1; explicit elementary argument by Q03."
+   }
+  },
+  {
+   "text": "If $\\eta$ is equivalent to its specified zero $m$-extension, step 3 gives a zigzag between their splices. Step 4 (if $m=1$) or step 5 (if $m\\geq2$) appends one endpoint-fixing morphism from the splice of that zero prefix to the specified zero $(m+1)$-extension. Concatenating these zigzags proves the assertion. No projective or injective objects, derived Ext comparison, or additional hypotheses have been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XT (definition-yoneda-extension) and Tag 06XP (section-ext), exact-sequence composition paragraph after lemma-ext-1; explicit elementary argument by Q03."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit direct exact-sequence proof by Q03, using the definitions and splicing formula of Tags 06XT and 06XP, without the derived Ext comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +125,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-module-flat-cotorsion-foundation",
@@ -81,5 +148,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-yoneda-zero-splice",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved exactness and preservation of endpoint-fixing comparison maps directly, and wrote the zero-prefix comparison maps separately for m=1 and m>=2. Every step is a short calculation from the stated definitions and the abelian structure; no new nodes are needed. Read Stacks Tags 06XT and 06XP and the inherited parent step 8. Searched both project source checkouts and the whole imported blueprint, and read Mathlib derived Ext candidates; none states this concrete sequence comparison in one specialization.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction before the displayed inverse limit), through the recorded flat-cotorsion foundation ancestry: the final zero-splice inference in inherited foundation step 8. Current main-20261015 proof retains this derived coefficient adjunction paragraph in sk-thm-sf-package. This item is not the unit key node and its existing unit binding is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-18bb1797d",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-18bb1797d (reviewer sub-agent of L); spot-checked: I read the item in full: statement, all 6 steps, metadata and searches. I also read def-sp-abelian, the parent lem-coef-module-flat-cotorsion-foundation step 8, the sibling lem-coef-yoneda-pullback-splice, the unit record, and Stacks derived.tex at Tag 06XT (definition-yoneda-extension, line 8775) and Tag 06XP (section-ext, line 8625; the splice paragraph after lemma-ext-1, lines 8899-8934). The statement is unchanged and true. It is self-contained and uses Stacks' 'of B by A' convention. Equivalence is the generated relation, the one the parent and sibling use, so no span-equivalence comparison is silently assumed. The zero extensions check out at r=1, 2 and 3. Step 1: the biproduct identities give exactness of the zero extensions. Step 2: i monic gives ker(id)=ker d, and d epic gives coker(id)=coker i, so im(id)=ker q; this uses only def-sp-abelian. Step 3: the joining square is i d' f_0 = i d, and zigzags are kept. Step 4 (m=1): I checked every square, namely pi_T iota_T = 1, q i pi_K = 0, and 1_F q = q at the end. Step 5 (m>=2): the positions line up (T, then m-2 zeros, then K, then P against T, then m-1 zeros, then F), the square at K->P is qi=0, and the m=2 boundary holds. Step 6 concatenates the zigzags. Every elementary mark is justified. The parent applies the item with m=n-1>=1, and a split degree-1 sequence is endpoint-isomorphic to T+K, so the use is valid. There are no new nodes. I found no duplicate in a DAG-wide grep for Yoneda extension, splic, 06XT and 06XP; derived-ext-comparison and splicing-associative state different things. The item is not a Mathlib leaf, since Mathlib has only derived Ext (Ext.zero_comp and comp_zero, Basic.lean 287-296). Route: the only dependency is a definition, there are no tool_uses, there is no SGA citation, and it is not a target node, so the base-change check does not apply. Minor: the report lists citations.json and report.md as written, but neither is in the commit; this does not affect the DAG. No fixes."
  }
 }
