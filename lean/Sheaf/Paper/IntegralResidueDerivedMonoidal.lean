@@ -77,10 +77,28 @@ theorem residueDerivedOplax_isIso_η :
 strong monoidal comparison. All coherence laws are descended on flat resolutions. -/
 @[instance_reducible] noncomputable def residueDerivedMonoidal :
     F.leftDerivedFunctor.Monoidal := by
-  letI := residueDerivedOplax F
-  haveI := residueDerivedOplax_isIso_δ F
-  haveI := residueDerivedOplax_isIso_η F
-  exact (CoreMonoidal.ofOplaxMonoidal _).toMonoidal
+  let m : F.leftDerivedFunctor.Monoidal := by
+    letI := residueDerivedOplax F
+    haveI := residueDerivedOplax_isIso_δ F
+    haveI := residueDerivedOplax_isIso_η F
+    exact (CoreMonoidal.ofOplaxMonoidal _).toMonoidal
+  letI := m
+  exact m.copy (LaxMonoidal.ε _) (LaxMonoidal.μ _)
+    (OplaxMonoidal.η _) (fun X Y ↦ (F.leftDerivedTensorComparison.app X).app Y)
+    rfl rfl rfl rfl
+
+/-- The derived monoidal tensor field is its canonical comparison.
+Source: the flat-resolution construction of the derived monoidal structure.
+(blueprint: new-integral-residue-derived-monoidal)
+Proof. The oplax construction uses this comparison as its tensor field. -/
+theorem residueDerivedMonoidal_δ (K M : DerivedCategory C) :
+    letI := F.residueDerivedMonoidal
+    Functor.OplaxMonoidal.δ F.leftDerivedFunctor K M =
+      (F.leftDerivedTensorComparison.app K).app M := by
+  unfold residueDerivedMonoidal
+  rfl
+
+
 
 end CategoryTheory.Functor
 
@@ -112,5 +130,25 @@ from an ordinary pullback structure and preservation of flat modules. -/
   letI := hFlat
   unfold residueExchangeUpperStar
   exact (f)^*⟦integralCoeff ℓ E⟧.residueDerivedMonoidal
+
+attribute [local semireducible] residueExchangeUpperStar
+
+/-- The concrete derived pullback tensor field is the canonical derived comparison.
+Source: the flat-resolution construction of the derived monoidal structure.
+(blueprint: new-integral-residue-derived-monoidal)
+Proof. Open the typed pullback and monoidal wrappers and take the defining projection. -/
+theorem residueExchangePullMonoidal_δ {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal)
+    (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat)
+    (K M : residueExchangeDerived (integralCoeff ℓ E) Y) :
+    letI := m
+    letI := hFlat
+    letI := residueExchangePullMonoidal ℓ E f m hFlat
+    Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f) K M =
+      ((f)^*⟦integralCoeff ℓ E⟧.leftDerivedTensorComparison.app K).app M := by
+  unfold residueExchangePullMonoidal residueExchangeUpperStar
+  rfl
+
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing

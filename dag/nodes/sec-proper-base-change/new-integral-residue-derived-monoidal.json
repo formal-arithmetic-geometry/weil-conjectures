@@ -24,7 +24,7 @@
    "elementary": false
   },
   {
-   "text": "CoreMonoidal.ofOplaxMonoidal turns this oplax structure with invertible tensor and unit maps into a strong monoidal structure. Specialize the actual typed pull functor by unfolding its wrapper only at this API boundary.",
+   "text": "CoreMonoidal.ofOplaxMonoidal turns the oplax structure with invertible tensor and unit maps into a strong monoidal structure. Monoidal.copy retains the same four fields, with defining rfl equalities, and displays the tensor comparison explicitly. Specialize the typed pull functor by unfolding its wrapper and prove the tensor-field projection equations.",
    "uses": [],
    "elementary": false
   }
@@ -36,7 +36,7 @@
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+  "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors. A2 second reading: retain the original canonical monoidal data using Monoidal.copy, with all four field equalities proved by rfl, and display its tensor field explicitly to avoid expensive concrete reduction. Expose the generic and typed concrete tensor projection equations. No mathematical data or statement changes."
  },
  "mathlib_searches": [
   {
@@ -109,7 +109,9 @@
    "CategoryTheory.Functor.residueDerivedOplax_isIso_η",
    "CategoryTheory.Functor.residueDerivedMonoidal",
    "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeIntegralDerivedMonoidal",
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullMonoidal"
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullMonoidal",
+   "CategoryTheory.Functor.residueDerivedMonoidal_δ",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullMonoidal_δ"
   ]
  },
  "reviewed": {
@@ -123,14 +125,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "X-56663",
-  "group": "D3",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261016T101204-L-2230257",
+  "landing": "20261017T051253-L-3360851",
   "kind": "interface",
-  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {

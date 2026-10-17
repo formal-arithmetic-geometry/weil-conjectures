@@ -5,8 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralResidueTensorPresentation
+public import Sheaf.Paper.IntegralResidueTensorCounit
 public import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
 public import Sheaf.Paper.IntegralResidueDerivedMonoidal
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 
 /-! # A common homotopy-level model for the residue tensor square
 
@@ -15,6 +17,9 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
 -/
 
 @[expose] public section
+
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency false
 
 noncomputable section
 
@@ -32,9 +37,8 @@ variable {C : Type u₁} [Category.{v + 1} C] [Abelian C] [IsGrothendieckAbelian
   [Abelian.HasFunctorialFlatResolution D]
   (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
-local instance : BraidedCategory (DerivedCategory D) :=
-  DerivedMonoidal.braidedCategory (DerivedCategory.Qh (C := D))
-    (HomotopyCategory.quasiIso D (.up ℤ))
+local instance : BraidedCategory (DerivedCategory D) := DerivedCategory.braidedCategory D
+
 
 /-- The fixed coefficient concentrated in degree zero in the homotopy category.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
@@ -51,6 +55,40 @@ noncomputable def tensorModelCoefficientIso (B : C) :
       DerivedCategory.Qh.obj (tensorModelCoefficient B) :=
   (DerivedCategory.singleFunctorIsoCompQ C 0).app B ≪≫
     (DerivedCategory.quotientCompQhIso C).symm.app _
+
+/-- Counit normalization of the canonical tensor presentation.
+Source: Bhatt--Scholze, Lemma 6.5.9(3); uniqueness of left derived functors.
+(blueprint: new-integral-residue-tensor-model)
+Proof. Expand the fixed presentation, cancel its final braiding and the inverse
+single-object comparison, and apply the two left-derived counit identities. -/
+theorem derivedTensorPresentationIso_normalization (B : C)
+    (H : DerivedCategory C ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ H ⟶
+      (tensorLeft B).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [H.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C (.up ℤ))]
+    (P : HomotopyCategory C (.up ℤ)) :
+    letI := DerivedCategory.braidedCategory C
+    (derivedTensorPresentationIso B H ε).hom.app (DerivedCategory.Qh.obj P) ≫
+      (β_ ((DerivedCategory.singleFunctor C 0).obj B) (DerivedCategory.Qh.obj P)).inv ≫
+      ((tensorModelCoefficientIso B).hom ▷ DerivedCategory.Qh.obj P) ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Qh (tensorModelCoefficient B) P =
+    ε.app P ≫ DerivedCategory.Qh.map ((homotopyTensorSingleIso B).inv.app P) := by
+  let := DerivedCategory.braidedCategory C
+  unfold derivedTensorPresentationIso derivedTensorSingleIso
+  simp only [Iso.trans_hom, NatTrans.comp_app, BraidedCategory.tensorLeftIsoTensorRight,
+    Category.assoc, Iso.hom_inv_id_assoc]
+  dsimp only [Functor.mapIso_hom, Iso.symm_hom, curriedTensor_map_app]
+  change _ ≫ _ ≫ (tensorModelCoefficientIso B).inv ▷ _ ≫
+    (tensorModelCoefficientIso B).hom ▷ _ ≫ _ = _
+  rw [← comp_whiskerRight_assoc, Iso.inv_hom_id, id_whiskerRight, Category.id_comp]
+  change _ ≫ _ ≫ (DerivedCategory.tensorLeftQhObjCounit
+    (tensorModelCoefficient B)).app P = _
+  simp only [Functor.leftDerivedNatIso_hom]
+  rw [Functor.leftDerivedNatTrans_app]
+  simp only [Functor.isoWhiskerRight_hom, Iso.symm_hom, Functor.whiskerRight_app]
+  rw [Functor.leftDerivedNatTrans_app_assoc]
+  simp
+
 
 /-- Compare the derived target with the ordinary tensor after applying F.
 The final tensor factor is K-flat on the representatives used below.
@@ -114,6 +152,7 @@ local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- The residue coefficient as an ordinary integral module.
@@ -165,5 +204,33 @@ noncomputable def residueExchangeTensorModelMap :
     (by
       unfold residueExchangeReduction integralReduction residueExchangeRestriction
       exact Mod.tensorPresentationDerivedCounit (coefficientMap (integralReductionMap ℓ E) Y)) P
+
+attribute [local semireducible] residueExchangeUpperStar
+
+/-- Expose the ordinary model target without unfolding the coefficient constructions.
+Source: Bhatt--Scholze, Lemma 6.5.9(3); the explicit tensor model.
+(blueprint: new-integral-residue-tensor-model)
+Proof. This is the defining equation of the concrete target map. -/
+theorem residueExchangeTensorModelTarget_eq :
+    residueExchangeTensorModelTarget ℓ E f P =
+      Functor.tensorModelTarget (f)^*⟦integralCoeff ℓ E⟧
+        (residueExchangeOrdinaryCoefficient ℓ E Y) P := by
+  unfold residueExchangeTensorModelTarget residueExchangeUpperStar
+  rfl
+
+/-- Expose the ordinary model map with its fixed tensor counit.
+Source: Bhatt--Scholze, Lemma 6.5.9(3); the explicit tensor model.
+(blueprint: new-integral-residue-tensor-model)
+Proof. This is the defining equation of the concrete model map. -/
+theorem residueExchangeTensorModelMap_eq :
+    letI := residueExchangeOrdinaryPullMonoidal ℓ E f
+    residueExchangeTensorModelMap ℓ E f P =
+      Functor.tensorModelMap (f)^*⟦integralCoeff ℓ E⟧
+        (residueExchangeOrdinaryCoefficient ℓ E Y)
+        (residueExchangeReduction ℓ E Y ⋙ residueExchangeRestriction ℓ E Y)
+        (residueExchangeTensorCounit ℓ E Y) P := by
+  unfold residueExchangeTensorModelMap residueExchangeUpperStar residueExchangeTensorCounit
+  rfl
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing
