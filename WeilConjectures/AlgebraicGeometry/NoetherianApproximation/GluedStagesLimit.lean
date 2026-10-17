@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.GluedStages
 
 /-!
@@ -33,90 +34,6 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry
 
-section IsLimitOfOpensCone
-
-variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u}) {c : Cone D}
-
-/-- (Implementation) Compatibility of the local universal morphisms on overlaps, using only that
-the restrictions of `c` to the members of the cover are limit cones. -/
-lemma glueMorphisms_compat_of_isLimit {i₀ : I} {σ : Type*} {U : σ → (D.obj i₀).Opens}
-    (h : ∀ a, IsLimit (opensCone D c i₀ (U a))) (s : Cone D) (a b : σ) :
-    pullback.fst ((s.π.app i₀ ⁻¹ᵁ U a).ι) ((s.π.app i₀ ⁻¹ᵁ U b).ι) ≫
-        ((h a).lift (opensCone D s i₀ (U a)) ≫ (c.π.app i₀ ⁻¹ᵁ U a).ι) =
-      pullback.snd _ _ ≫ ((h b).lift (opensCone D s i₀ (U b)) ≫ (c.π.app i₀ ⁻¹ᵁ U b).ι) := by
-  have hq : pullback.fst ((s.π.app i₀ ⁻¹ᵁ U a).ι) ((s.π.app i₀ ⁻¹ᵁ U b).ι) ≫
-      (s.π.app i₀ ⁻¹ᵁ U a).ι = pullback.snd _ _ ≫ (s.π.app i₀ ⁻¹ᵁ U b).ι :=
-    pullback.condition
-  have hcomp (x : σ) (j : Over i₀) : (h x).lift (opensCone D s i₀ (U x)) ≫
-      (c.π.app i₀ ⁻¹ᵁ U x).ι ≫ c.π.app j.left = (s.π.app i₀ ⁻¹ᵁ U x).ι ≫ s.π.app j.left :=
-    lift_opensCone_ι_comp D (h x) s j
-  have hrange : Set.range (pullback.snd ((s.π.app i₀ ⁻¹ᵁ U a).ι) ((s.π.app i₀ ⁻¹ᵁ U b).ι) ≫
-      (h b).lift (opensCone D s i₀ (U b)) ≫ (c.π.app i₀ ⁻¹ᵁ U b).ι) ⊆
-      Set.range (c.π.app i₀ ⁻¹ᵁ U a).ι := by
-    rintro _ ⟨t, rfl⟩
-    rw [Scheme.Opens.range_ι]
-    change ((pullback.snd ((s.π.app i₀ ⁻¹ᵁ U a).ι) ((s.π.app i₀ ⁻¹ᵁ U b).ι) ≫
-      (h b).lift (opensCone D s i₀ (U b)) ≫ (c.π.app i₀ ⁻¹ᵁ U b).ι) ≫ c.π.app i₀) t ∈ U a
-    have := hcomp b (Over.mk (𝟙 i₀))
-    simp only [Over.mk_left] at this
-    rw [Category.assoc, Category.assoc, this, ← reassoc_of% hq, Scheme.Hom.comp_apply,
-      Scheme.Hom.comp_apply]
-    exact (pullback.fst ((s.π.app i₀ ⁻¹ᵁ U a).ι) ((s.π.app i₀ ⁻¹ᵁ U b).ι) t).2
-  rw [← IsOpenImmersion.lift_fac _ _ hrange, ← Category.assoc]
-  congr 1
-  refine (h a).hom_ext fun j ↦ ?_
-  rw [← cancel_mono (D.map j.hom ⁻¹ᵁ U a).ι]
-  simp only [Category.assoc, opensCone_π_ι]
-  rw [IsOpenImmersion.lift_fac_assoc, Category.assoc, Category.assoc, hcomp a j, hcomp b j,
-    reassoc_of% hq]
-
-/-- **Being a limit cone is local on a stage.** Let `c` be a cone over a cofiltered diagram of
-schemes `D`, and suppose some stage `D.obj i₀` has an open cover `{U a}` such that the restriction
-of `c` to every `U a` is a limit cone. Then `c` is a limit cone.
-
-Compared to `AlgebraicGeometry.isLimitOfIsLimitOpensCone`, no assumption on the intersections
-`U a ⊓ U b` is needed. -/
-noncomputable def isLimitOfIsLimitOpensCone' [IsCofiltered I] (i₀ : I) {σ : Type*}
-    (U : σ → (D.obj i₀).Opens) (hU : ⨆ a, U a = ⊤)
-    (h : ∀ a, IsLimit (opensCone D c i₀ (U a))) : IsLimit c where
-  lift s := (preimageCover D i₀ U hU s).glueMorphisms
-    (fun a ↦ (h a).lift (opensCone D s i₀ (U a)) ≫ (c.π.app i₀ ⁻¹ᵁ U a).ι)
-    (glueMorphisms_compat_of_isLimit D h s)
-  fac s j := by
-    obtain ⟨k, fkj, fki₀, -⟩ := IsCofilteredOrEmpty.cone_objs j i₀
-    rw [← c.w fkj, ← s.w fkj, ← Category.assoc]
-    congr 1
-    apply (preimageCover D i₀ U hU s).hom_ext
-    intro a
-    rw [← Category.assoc, Scheme.Cover.ι_glueMorphisms]
-    change ((h a).lift (opensCone D s i₀ (U a)) ≫ (c.π.app i₀ ⁻¹ᵁ U a).ι) ≫ c.π.app k =
-      (s.π.app i₀ ⁻¹ᵁ U a).ι ≫ s.π.app k
-    rw [Category.assoc]
-    exact lift_opensCone_ι_comp D (h a) s (Over.mk fki₀)
-  uniq s m hm := by
-    apply (preimageCover D i₀ U hU s).hom_ext
-    intro a
-    rw [Scheme.Cover.ι_glueMorphisms]
-    change (s.π.app i₀ ⁻¹ᵁ U a).ι ≫ m =
-      (h a).lift (opensCone D s i₀ (U a)) ≫ (c.π.app i₀ ⁻¹ᵁ U a).ι
-    have hrange : Set.range ((s.π.app i₀ ⁻¹ᵁ U a).ι ≫ m) ⊆
-        Set.range ((c.π.app i₀ ⁻¹ᵁ U a).ι) := by
-      rintro - ⟨t, rfl⟩
-      rw [Scheme.Opens.range_ι]
-      change (((s.π.app i₀ ⁻¹ᵁ U a).ι ≫ m) ≫ c.π.app i₀) t ∈ U a
-      rw [Category.assoc, hm i₀]
-      exact t.2
-    have hma : IsOpenImmersion.lift ((c.π.app i₀ ⁻¹ᵁ U a).ι)
-        ((s.π.app i₀ ⁻¹ᵁ U a).ι ≫ m) hrange = (h a).lift (opensCone D s i₀ (U a)) := by
-      apply (h a).hom_ext
-      intro j
-      rw [← cancel_mono (D.map j.hom ⁻¹ᵁ U a).ι]
-      simp only [opensCone_π_app, Category.assoc, Scheme.Hom.resLE_comp_ι]
-      rw [← Category.assoc, IsOpenImmersion.lift_fac, Category.assoc, hm j.left]
-      exact (lift_opensCone_ι_comp D (h a) s j).symm
-    rw [← hma, IsOpenImmersion.lift_fac]
-
-end IsLimitOfOpensCone
 
 namespace Scheme.FiniteAffineGluingPresentation
 
@@ -305,7 +222,7 @@ noncomputable def isLimitOpensConeChart (G : S.FiniteAffineGluingPresentation)
 /-- The stage cone is a limit cone. -/
 noncomputable def isLimitStageCone (G : S.FiniteAffineGluingPresentation) :
     IsLimit G.stageCone :=
-  isLimitOfIsLimitOpensCone' G.stageDiagram (op G.glueStage)
+  isLimitOfIsLimitOpensCone' G.stageDiagram _ (op G.glueStage)
     (fun a ↦ G.chartOpen (op G.glueStage) a) G.glueStage.iSup_opensRange_ι
     fun a ↦ G.isLimitOpensConeChart (op G.glueStage) a
 
