@@ -1,7 +1,7 @@
 {
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -12,7 +12,7 @@
  "id": "lem-trf-normalized-polynomial-residue-generation",
  "kind": "statement",
  "title": "Residue generation by normalized irreducible factors",
- "statement": "Let $K\\subseteq L=K(t)$ be a rational function field extension [def-pc-field-extension], let $O\\subseteq L$ be a valuation subring, and put $R=O\\cap K$. Assume that every element of $L^\\times$ can be multiplied by an element of $K^\\times$ to become a unit of $O$. Then $\\kappa(O)$ is generated as a field over $\\kappa(R)$ by the residues of elements $f(t)/\\pi\\in O^\\times$ where $f\\in K[t]$ is monic irreducible and $\\pi\\in K^\\times$ is chosen so that $f(t)/\\pi$ is a unit. Consequently, if $\\operatorname{trdeg}_{\\kappa(R)}\\kappa(O)=1$, at least one such normalized residue is transcendental over $\\kappa(R)$ [def-kun-transcendence-degree]. Here $K$ is a field [def-weil-field], $K[t]$ is the polynomial ring in one indeterminate [def-weil-polynomial-ring], and a valuation subring $B$ of a field $F$ is a subring with $x\\in B$ or $x^{-1}\\in B$ for every $x\\ne0$. Write $\\mathfrak m_B=B\\setminus B^\\times$ and $\\kappa(B)=B/\\mathfrak m_B$ for its maximal ideal and residue field.",
+ "statement": "Let $K\\subseteq L=K(t)$ be a rational function field extension [def-pc-field-extension, def-weil-rational-function-field], let $O\\subseteq L$ be a valuation subring, and put $R=O\\cap K$. Assume that every element of $L^\\times$ can be multiplied by an element of $K^\\times$ to become a unit of $O$. Then $\\kappa(O)$ is generated as a field over $\\kappa(R)$ by the residues of elements $f(t)/\\pi\\in O^\\times$ where $f\\in K[t]$ is monic irreducible and $\\pi\\in K^\\times$ is chosen so that $f(t)/\\pi$ is a unit. Consequently, if $\\operatorname{trdeg}_{\\kappa(R)}\\kappa(O)=1$, at least one such normalized residue is transcendental over $\\kappa(R)$ [def-kun-transcendence-degree]. Here $K$ is a field [def-weil-field], $K[t]$ is the polynomial ring in one indeterminate [def-weil-polynomial-ring], and a valuation subring $B$ of a field $F$ is a subring with $x\\in B$ or $x^{-1}\\in B$ for every $x\\ne0$. Write $\\mathfrak m_B=B\\setminus B^\\times$ and $\\kappa(B)=B/\\mathfrak m_B$ for its maximal ideal and residue field.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "Proposition 4.3.1, proof, p. 28, paragraph beginning “Note that $\\widetilde L$ is generated over $\\widetilde K$”; local archival PDF unavailable (WANTED)."
@@ -20,13 +20,81 @@
  "stmt_deps": [
   "def-pc-field-extension",
   "def-weil-field",
-  "def-weil-residue-field",
   "def-kun-transcendence-degree",
-  "def-weil-polynomial-ring"
+  "def-weil-polynomial-ring",
+  "def-weil-rational-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify the base residue field. If $c\\in K^\\times$, then $c\\in R^\\times$ if and only if both $c$ and $c^{-1}$ belong to $R=O\\cap K$, equivalently both belong to $O$, equivalently $c\\in O^\\times$. The valuation alternative for $O$ restricts to $K$, so $R$ is a valuation subring of $K$. Thus $\\mathfrak m_R=R\\cap\\mathfrak m_O$, and reduction $R\\to O/\\mathfrak m_O$ has kernel $\\mathfrak m_R$. It induces an injective field map $k:=\\kappa(R)\\hookrightarrow E:=\\kappa(O)$. Below all constants in $k$ are viewed through this map. These assertions follow directly from the valuation-subring and residue-field definitions in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, printed p. 28, second-stage residue-generation paragraph; expanded factorization and constant-unit argument."
+   }
+  },
+  {
+   "text": "The ring $K[t]$ is Noetherian by [lem-sc-p1-polynomial-noetherian] and is an integral domain by [lem-pur-polynomial-field-pid]. Apply [lem-trf-factorization-exists] to each nonzero nonunit polynomial. Consequently every nonzero polynomial $P$ has an expression $P=a\\prod_{i=1}^r f_i$ with $a\\in K^\\times$ and $f_i$ monic irreducible, allowing $r=0$. Here is the elementary normalization: from the coefficient multiplication rule in [def-weil-polynomial-ring], the top coefficient of a product of nonzero polynomials is the product of the two nonzero top coefficients; hence degrees add. In particular a unit of $K[t]$ is a nonzero constant. For an irreducible factor $h_i$, put $c_i=\\operatorname{lc}(h_i)\\ne0$ and $f_i=c_i^{-1}h_i$. This is monic and irreducible: a factorization $f_i=vw$ gives $h_i=(c_iv)w$, and multiplication by the constant unit $c_i$ preserves being a unit. Absorb the finitely many $c_i$ into $a$; for a unit polynomial take $a=P$ and the empty product.",
+   "uses": [
+    "lem-sc-p1-polynomial-noetherian",
+    "lem-pur-polynomial-field-pid",
+    "lem-trf-factorization-exists",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, printed p. 28, second-stage residue-generation paragraph; expanded factorization and constant-unit argument."
+   }
+  },
+  {
+   "text": "Let $S\\subset E$ be the residues of all the units $f(t)/\\pi$ specified in the statement, and let $H\\subseteq E$ be the smallest subfield containing $k$ and $S$ (the intersection of all such subfields). Take $u\\in O^\\times$. By [def-weil-rational-function-field], write $u=P(t)/Q(t)$ with nonzero $P,Q\\in K[t]$. Step 2 gives $P=a\\prod_i f_i$ and $Q=b\\prod_j g_j$ with $a,b\\in K^\\times$ and monic irreducibles $f_i,g_j$. None of $f_i(t),g_j(t)$ is zero, since $K[t]$ embeds in its fraction field. The normalization hypothesis gives $\\pi_i,\\rho_j\\in K^\\times$ such that $z_i=f_i(t)/\\pi_i$ and $w_j=g_j(t)/\\rho_j$ lie in $O^\\times$ (take the inverse of each multiplying constant). In $L$ one has\n$$u=c\\,\\prod_i z_i\\,\\prod_j w_j^{-1},\\qquad c=\\frac{a\\prod_i\\pi_i}{b\\prod_j\\rho_j}\\in K^\\times.$$\nSolving this identity for $c$ expresses it as a product of units of $O$. Thus $c\\in K\\cap O^\\times=R^\\times$ by Step 1. Reduction, which preserves products and inverses of units, gives $\\bar u=\\bar c\\prod_i\\bar z_i\\prod_j\\bar w_j^{-1}\\in H$. In particular the residual constant factor has not been dropped.",
+   "uses": [
+    "def-weil-rational-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, printed p. 28, second-stage residue-generation paragraph; expanded factorization and constant-unit argument."
+   }
+  },
+  {
+   "text": "Every nonzero element $x\\in E=O/\\mathfrak m_O$ is the residue of some $u\\in O\\setminus\\mathfrak m_O=O^\\times$, so Step 3 gives $x\\in H$. Also $0\\in H$. Hence $E=H$, proving the asserted field generation. The argument includes constant rational functions and empty products. It also works with any fixed choice of a normalizing scalar for each monic irreducible: if $f(t)/\\pi$ and $f(t)/\\pi^{\\prime}$ are both units, their ratio $\\pi^{\\prime}/\\pi$ belongs to $K\\cap O^\\times=R^\\times$, so their residues differ by a nonzero factor in $k$ and generate the same field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, printed p. 28, second-stage residue-generation paragraph; expanded factorization and constant-unit argument."
+   }
+  },
+  {
+   "text": "For the consequence, assume $\\operatorname{trdeg}_k E=1$ and suppose every element of $S$ were algebraic over $k$. By the statement of [def-weil-relative-algebraic-closure], the elements of $E$ algebraic over $k$ form a subfield $A$ containing $k$. It contains $S$, so $E=H\\subseteq A$ by the defining minimality of $H$. Every element of $E$ would therefore satisfy a nonzero polynomial over $k$. No nonempty subset of $E$ can then be algebraically independent: choose one element of such a subset and regard its nonzero annihilating polynomial as a polynomial in that one coordinate. The supremum of cardinalities of independent subsets is consequently $0$, by [def-kun-transcendence-degree], contradicting $\\operatorname{trdeg}_kE=1$. Thus some element of $S$, and hence some specified normalized irreducible residue, is transcendental.",
+   "uses": [
+    "def-weil-relative-algebraic-closure",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, printed p. 28, transcendental-residue selection following generation; algebraic-elements subfield from Stacks Tag 09GI, fields-lemma-algebraic-elements; the transcendence-degree contradiction is expanded here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-weil-polynomial-ring",
+  "def-weil-rational-function-field",
+  "def-weil-relative-algebraic-closure",
+  "lem-pur-polynomial-field-pid",
+  "lem-sc-p1-polynomial-noetherian",
+  "lem-trf-factorization-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Expansion of the residue-generation argument in Proposition 4.3.1, printed p. 28, read in the author-hosted primary PDF. The local archival copy is WANTED. Factorization and closure of algebraic elements use the existing DAG interfaces for Stacks Tags 034R, 00FN, 030A and 09GI."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,6 +130,41 @@
    "results": "{\"hits\": [\"Valued.ResidueField\", \"FunctionField.FqtInfty\", \"FunctionField.instInhabitedFqtInfty\", \"FunctionField.valuedFqtInfty.def\", \"FunctionField.valuedFqtInfty\", \"Polynomial.residueFieldMapCAlgEquiv\", \"FunctionField.inftyValuedFqt\", \"FunctionField\"], \"digest\": \"51cbf33c755ed28e\", \"note\": \"\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic declarations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, RatFunc",
+   "results": "{\"t\": \"2026-10-17T21:12:39Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring, RatFunc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.LaurentSeriesRingEquiv_mem_valuationSubring\", \"LaurentSeries.algebraMap_C_mem_adicCompletionIntegers\", \"LaurentSeries.mem_integers_of_powerSeries\", \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.powerSeriesRingEquiv_coe_apply\"], \"digest\": \"26ec22659e7e9178\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Laurent-series and completed X-adic valuation-subring results only"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*generat|generat.*residue",
+   "results": "{\"t\": \"2026-10-17T21:12:39Z\", \"tool\": \"grep\", \"query\": \"residue.*generat|generat.*residue\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Etale.lean\", \"Mathlib/RingTheory/LocalRing/Etale.lean\"], \"digest\": \"b3f49078086117b2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: finite etale local extensions with formally unramified hypotheses; not arbitrary valuation subrings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue field of a valuation subring of K(t) is generated over the base residue field by residues of normalized monic irreducible polynomials",
+   "results": "{\"t\": \"2026-10-17T21:12:40Z\", \"tool\": \"leanfinder\", \"query\": \"Residue field of a valuation subring of K(t) is generated over the base residue field by residues of normalized monic irreducible polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.residueFieldMapCAlgEquiv\", \"Valued.ResidueField\", \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"Polynomial.residueFieldMapCAlgEquiv_algebraMap\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"ArchimedeanClass.FiniteResidueField\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"instIsAlgebraicQuotientIdealResidueField\"], \"digest\": \"36a08c541e01d16f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: valuation/residue infrastructure or fixed X-adic and infinity valuations; no arbitrary-valuation residue-generation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A valuation on a rational function field with unchanged value group has residue field generated by normalized irreducible factors",
+   "results": "{\"t\": \"2026-10-17T21:13:04Z\", \"tool\": \"leanfinder\", \"query\": \"A valuation on a rational function field with unchanged value group has residue field generated by normalized irreducible factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField.valuedFqtInfty.def\", \"FunctionField.inftyValuation\", \"FunctionField.inftyValuedFqt\", \"Valued.ResidueField\", \"FunctionField.valuedFqtInfty\", \"RatFunc.instValuedWithZeroMultiplicativeInt\", \"RatFunc.v_def\", \"FunctionField.inftyValuation_apply\"], \"digest\": \"dd98fb505a5edc1e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: valuation/residue infrastructure or fixed X-adic and infinity valuations; no arbitrary-valuation residue-generation theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue field generation by normalized irreducible polynomials over a valued field",
+   "results": "{\"t\": \"2026-10-17T21:13:04Z\", \"tool\": \"leansearch\", \"query\": \"Residue field generation by normalized irreducible polynomials over a valued field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.ResidueField\", \"IsLocalRing.ResidueField\", \"IsLocalRing.instInhabitedResidueField\", \"AdjoinRoot.instField.congr_simp\", \"IsLocalRing.instCommRingResidueField\", \"Polynomial.mem_normalizedFactors_iff\", \"IntermediateField.adjoin_root_eq_top\", \"PowerSeries.residueFieldOfPowerSeries\"], \"digest\": \"0b856da611867fe8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic residue-field definitions, power-series residue field, and normalized polynomial factors; no residue-generation theorem"
   }
  ],
  "blueprint": {
@@ -85,5 +188,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normalized-polynomial-residue-generation",
+  "worker": "stage1",
+  "summary": "Proved both clauses by restriction of units, irreducible factorization, an explicit normalized product with its necessary constant unit, and the algebraic-elements subfield argument. Reused existing Mathlib leaves; no new nodes. Removed the unrelated scheme-residue-field dependency and added the existing rational-function-field definition; mathematical hypotheses and conclusions are unchanged. Primary Temkin PDF checked online; local archival copy WANTED.",
+  "blueprint": "Historical semistable-modification branch of lem-trf-local-term-locality, through lem-trf-rational-valuation-linear-residue step 1: supplies exactly factor-and-residue generation and selection of a transcendental normalized irreducible residue. Retains the inherited unit binding and ancestry; does not replace its route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q37-bf5a2e734",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-bf5a2e734 (reviewer sub-agent of L); spot-checked: Read the complete item, report, unit, chapter, all cited node statements, and Temkin Proposition 4.3.1 pp. 27–28. Verified each proof step, normalization and residue-field maps, hypotheses, edge cases, searches, DAG uniqueness, and route compliance. No new nodes or repairs are needed. Review written to review.md."
  }
 }

@@ -18,9 +18,190 @@
   "def-trf-topos-derived-base-change-map",
   "def-weil-pbc-derived-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $u_g:S'_{\\mathrm{Et}}\\to B_S$, a small covering is sent to the identical jointly surjective etale family, and fibre products along covering members are the same scheme fibre products [def-weil-pbc-etale-site]. Conversely, a big covering $\\{V_j\\to U\\}$ of $U\\to S'$ etale lifts to the small site: give $V_j$ its composite map to $S'$, etale by [lem-weil-pbc-etale-composition-cancellation](2). Thus $u_g$ is continuous and cocontinuous. Apply [lem-weil-pbc-continuous-cocontinuous-topos-adjunction]: it gives $i_g$ with inverse image the restriction $H\\mapsto(U\\mapsto H(U/S))$. Apply the same argument to $g'$. Lift these adjunctions to abelian group objects with [lem-weil-pbc-sheaf-algebraic-structures-objects] and [lem-weil-pbc-adjunction-lifts-group-ring-objects]. Exactness of abelian inverse images follows from [lem-pe-constant-left-module-inverse-image] with $\\Lambda=\\mathbf Z$: every abelian group has its unique integer-module structure.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies Tag 021F, lemma-put-in-T-etale; Sites Tag 00XR, lemma-when-shriek"
+   }
+  },
+  {
+   "text": "For any $a:V\\to W$, the forgetful functor $v_a:B_V\\to B_W$ is continuous and cocontinuous: it sends a covering to itself, preserves fibre products along coverings, and a covering of $U/W$ with $U/V$ lifts by composition with $U\\to V$. The same continuous-cocontinuous adjunction gives $a_b^{-1}H(U/V)=H(U/W)$. Its right adjoint has the formula $a_{b,*}F(U/W)=F(U\\times_WV/V)$. Indeed the compatible families in the right-adjoint formula of [lem-weil-pbc-continuous-cocontinuous-topos-adjunction] are determined by their member at $U\\times_WV\\to U$: every pair $(A/V,A\\to U/W)$ factors uniquely through this pair by the fibre-product universal property [def-pc-fibre-product]. Conversely that member gives the family by restriction. This works for morphisms and abelian sheaves via the lifted adjunction of step 1. The unit is restriction along $U\\times_WV\\to U$, and the counit at $A/V$ is restriction along the graph $A\\to A\\times_WV$.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies Tag 021H, lemma-morphism-big-etale (including its right-adjoint construction)"
+   }
+  },
+  {
+   "text": "For the small inclusion $V_{\\mathrm{Et}}\\hookrightarrow B_V$, apply [lem-trf-bigger-site-retraction]. Continuity and cocontinuity were checked in step 1 for $g=\\mathrm{id}_V$; it is fully faithful because both categories use all $V$-morphisms, preserves the fibre products of [def-weil-pbc-etale-site], and sends the final object $V/V$ to $V/V$. Thus it supplies $i_V$ and $\\pi_V$ with $i_V^{-1}=\\pi_{V,*}$ and $\\pi_V i_V\\cong\\mathrm{id}$. Restriction on abelian sheaves is exactly the exact functor of [lem-trf-big-small-etale-exact-retraction]. The section formulas give $i_g^{-1}=i_{S'}^{-1}g_b^{-1}$, hence $i_g=g_b i_{S'}$ with the canonical adjunction identification. Also, on every small etale $U/W$, both $\\pi_{W,*}a_{b,*}F$ and $a_{s,*}\\pi_{V,*}F$ are $F(U\\times_WV/V)$ by [def-weil-pbc-direct-image]. These natural direct-image identities give $\\pi_Wa_b\\cong a_s\\pi_V$ by [def-trf-geometric-morphism]. Therefore $\\pi_Si_g\\cong g_s$ and $\\pi_Ti_{g'}\\cong g'_s$.",
+   "uses": [
+    "lem-trf-bigger-site-retraction",
+    "def-weil-pbc-etale-site",
+    "lem-trf-big-small-etale-exact-retraction",
+    "def-weil-pbc-direct-image",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies Tags 021G and 021I, lemma-at-the-bottom-etale and lemma-morphism-big-small-etale"
+   }
+  },
+  {
+   "text": "The slice $B_W/(V\\to W)$ is the big site $B_V$: an object is a $W$-scheme $U$ with a $W$-map to $V$, equivalently a $V$-scheme, with exactly the same morphisms and coverings. Thus $a_b^{-1}$ is localized-site restriction. It is exact by [lem-weil-pbc-site-restriction-exact] and preserves injectives by [new-over-pullback-preserves-injectives]. For $i_V^{-1}=\\pi_{V,*}$, use the abelian adjunction $\\pi_V^{-1}\\dashv\\pi_{V,*}$ (step 1's lift for the retraction datum) and exactness of $\\pi_V^{-1}$ from [lem-pe-constant-left-module-inverse-image] with $\\mathbf Z$. The Mathlib leaf [lem-exc-rg-right-adjoint-preserves-injectives] then shows that $\\pi_{V,*}$ preserves injectives, because an exact functor preserves monomorphisms. Consequently $i_g^{-1}=\\pi_{S',*}g_b^{-1}$ and $i_{g'}^{-1}=\\pi_{T',*}g_b'^{-1}$ preserve injectives as well as being exact. This is the abelian-sheaf argument; no assertion about structure-sheaf-module injectives is used.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-exact",
+    "new-over-pullback-preserves-injectives",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-exc-rg-right-adjoint-preserves-injectives",
+    "lem-trf-bigger-site-retraction",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0758, lemma-compare-injectives (abelian case); Cohomology on Sites Tag 03F3, lemma-cohomology-of-open"
+   }
+  },
+  {
+   "text": "Let $F$ be an abelian sheaf on $B_T$. For $U\\to S'$ small etale, the two sheaves $i_g^{-1}f_{b,*}F$ and $f'_{s,*}i_{g'}^{-1}F$ both have sections $F(U\\times_{S'}T'/T)=F(U\\times_ST/T)$, with identical restrictions, by the cartesian fibre-product identity and the formulas of steps 1–2 and [def-weil-pbc-direct-image]. This gives a natural underived isomorphism $c^0_g$. For any $U/S'$ (without an etaleness restriction), the same calculation gives the natural isomorphism $\\ell^0_g:g_b^{-1}f_{b,*}\\cong f'_{b,*}g_b'^{-1}$. The equality of fibre products is the unique map commuting with both projections [def-pc-fibre-product], so these are the specified section comparisons.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies Tag 0DDA, lemma-morphism-big-small-cartesian-diagram-etale"
+   }
+  },
+  {
+   "text": "Choose a bounded-below complex $I$ of injective abelian sheaves representing $M$, using [lem-weil-pbc-site-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative]. By step 4 both $i_{g'}^{-1}I$ and $g_b'^{-1}I$ are bounded-below complexes of injectives. Apply [lem-weil-pbc-right-derived-plus-injective](2): the four derived direct images occurring in the comparisons are represented respectively by $f_{b,*}I$, $f'_{s,*}i_{g'}^{-1}I$, and $f'_{b,*}g_b'^{-1}I$. Exact restriction is applied termwise by [lem-weil-pbc-exact-functor-derived-factorization]. Hence the termwise isomorphisms $c^0_g(I)$ and $\\ell^0_g(I)$ of step 5 give $c_{g,M}$ and $\\ell_{g,M}$. For a derived morphism choose its homotopy-class representative between injective complexes by [lem-weil-pbc-kinjective-hom-derived]; the underived isomorphisms commute with that representative. Additive functors preserve homotopies, so this proves naturality and independence of representatives.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 075A, lemma-compare-higher-direct-image, proof of (3) and (5)"
+   }
+  },
+  {
+   "text": "Fix the mate normalization carefully. The mate of $c_g^0$ has inverse-image direction $\\sigma_g:f_s'^{-1}i_g^{-1}\\to i_{g'}^{-1}f_b^{-1}$. This need not be an isomorphism. It is the adjunct of $c^0_{g,f_b^{-1}H}\\circ i_g^{-1}(\\eta_{f_b,H})$ under $f_s'^{-1}\\dashv f'_{s,*}$ [def-weil-pbc-adjunction-mate]. The units and counits here are the actual sheaf adjunctions of steps 1–3. The localization comparison $\\ell_g^0$ is similarly the mate of the canonical big-site inverse-image square, which is an isomorphism: both composite restrictions send $H$ to $(U/T')\\mapsto H(U/S)$. Apply [lem-trf-bounded-below-derived-mate-model] with $L=f_b^{-1}$, $L'=f_s'^{-1}$, $G=i_g^{-1}$, $H=i_{g'}^{-1}$, and then with $L'=f_b'^{-1}$, $G=g_b^{-1}$, $H=g_b'^{-1}$. All four left/square functors are exact, and both source sheaf categories have enough injectives. On $I$ the source and target right-derived comparison units are invertible by step 6. Thus its equation identifies the derived mates precisely with $c^0_g(I)$ and $\\ell^0_g(I)$, so the isomorphisms of step 6 have the required canonical normalization.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-trf-bounded-below-derived-mate-model",
+    "lem-pe-constant-left-module-inverse-image",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 075A, lemma-compare-higher-direct-image; Tag 07A7, remark-base-change"
+   }
+  },
+  {
+   "text": "For the arrow clause, denote the inverse-image identification for $\\beta$ by $\\theta:f_b^{-1}\\pi_S^{-1}\\cong\\pi_T^{-1}f_s^{-1}$. It is the canonical composition identification of $\\pi_S f_b\\cong f_s\\pi_T$ in step 3. Paste $\\sigma_g\\pi_S^{-1}$ with $i_{g'}^{-1}\\theta$. Under $i_g^{-1}\\pi_S^{-1}\\cong g_s^{-1}$ and $i_{g'}^{-1}\\pi_T^{-1}\\cong g_s'^{-1}$ this is the canonical map $f_s'^{-1}g_s^{-1}\\cong g_s'^{-1}f_s^{-1}$. To check its normalization, transpose before deriving: $\\sigma_g$ was defined using $i_g^{-1}\\eta_{f_b}$ and the identity $c_g^0$ on the section $U\\times_ST$. The conjugate defining $\\theta$ uses the identity $\\pi_{S,*}f_{b,*}=f_{s,*}\\pi_{T,*}$ on that same section. The two adjunct constructions cancel the intervening unit/counit by $f_{b,*}\\varepsilon_{f_b}\\circ\\eta_{f_b}f_{b,*}=1$. What remains is the fibre-product map $(U\\times_SS')\\times_{S'}T'\\cong U\\times_ST'$, which defines the small-site composition comparison. Thus the pasted map is the specified small square, rather than an arbitrary isomorphism. The cancellation is the conjugate/pasting rule [lem-weil-pbc-mate-pasting](1),(3); exact termwise descent preserves this identity by [lem-weil-pbc-derived-exact-square-factorization].",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-derived-exact-square-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDJ, lemma-compare-higher-direct-image-proper, proof of (2); Topologies Tag 021I"
+   }
+  },
+  {
+   "text": "Now apply [lem-weil-pbc-mate-pasting](1) to the two derived squares just identified. The mate of their pasted inverse-image square is\n$$c_{g,\\pi_T^{-1}K}\\circ i_g^{-1}(\\beta_K).$$\nHere $\\beta_K$ is exactly the counit-transpose mate of [def-trf-topos-derived-base-change-map] with constant ring $\\mathbf Z$. By step 8 the pasted square is the canonical small inverse-image square. Therefore its mate is the small-site exchange of [def-weil-pbc-derived-exchange]: its transpose is $f_s'^{-1}g_s^{-1}Rf_{s,*}K\\to g_s'^{-1}f_s^{-1}Rf_{s,*}K\\xrightarrow{g_s'^{-1}\\varepsilon_{f_s,K}}g_s'^{-1}K$. This gives the asserted equality of arrows under the three stated comparisons, for every bounded-below $K$. No properness or torsion was used; these belong only to the parent comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-trf-topos-derived-base-change-map",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDJ, lemma-compare-higher-direct-image-proper, proof of (2)"
+   }
+  },
+  {
+   "text": "The family of restrictions detects zero abelian sheaves: if $i_g^{-1}A=0$ for every $g:S'\\to S$, evaluation at the final small object $S'/S'$ gives $A(S'/S)=0$; these are all big-site objects, so $A=0$. For a complex $N$, exactness gives $i_g^{-1}H^r(N)=H^r(i_g^{-1}N)$ by applying restriction to the kernel/image quotient defining cohomology [def-weil-abstract-derived-category]. Hence if all restrictions of $QN$ are zero, every cohomology sheaf of $N$ is zero, and $0\\to N$ is a quasi-isomorphism, so $QN=0$ in the derived localization. For an arbitrary derived morphism $z$, take a distinguished cone triangle. Exact restriction is triangulated by [lem-weil-pbc-exact-functor-derived-factorization]; if each $i_g^{-1}z$ is invertible its cone is zero by [lem-kun-distinguished-cone-zero]. The preceding zero-object argument makes the original cone zero, and that same cone criterion makes $z$ invertible. This proves joint conservativity on $D^+(\\mathrm{Ab}(B_S))$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDJ, lemma-compare-higher-direct-image-proper, proof of (2) (conservativity argument)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-geometric-morphism",
+  "def-trf-topos-derived-base-change-map",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-kun-distinguished-cone-zero",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-trf-big-small-etale-exact-retraction",
+  "lem-trf-bigger-site-retraction",
+  "lem-trf-bounded-below-derived-mate-model",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-weil-pbc-derived-exact-square-factorization",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "new-over-pullback-preserves-injectives",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "075A(3),(5), 0758, 0DDJ(2), with explicit site formulas from Topologies 021F, 021G, 021H, 021I and 0DDA; mate normalization checked using the closed generic project theorem and mate pasting."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,7 +269,7 @@
   "group": "N1"
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
@@ -108,5 +289,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-big-small-etale-localization-derived-pushforward",
+  "worker": "stage1",
+  "summary": "Split by explicit site and section formulas, then bounded-below injective representatives. Reused existing localization, injective, exactness and mate-calculus nodes. Added one generic derived-mate factorization node attached to a sorry-free project declaration. Distinguished the noninvertible restriction inverse-image transformation from the commuting big localization square; checked canonical exchange by mate pasting and joint conservativity by final-object sections and cones. Statement unchanged.",
+  "blueprint": "Normal-cone specialization first descent, via the ph/etale comparison: the restriction identity and arrow identification used in Stacks 0DDJ(2), using 075A(3), distinguished from the big-site localization 075A(5).",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "The small direct-image section formula is required to compare the two restrictions. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-etale-site",
+    "why": "The etale covering and fibre-product definitions check continuity and cocontinuity. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Etale composition lifts every covering of a small etale object. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "Generic site adjunction gives the actual restriction inverse image and its right adjoint. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "why": "Lift the set adjunction to abelian sheaves via abelian group objects. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "It supplies the abelian adjunction with the same units and counits. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic geometric exactness with integer coefficients gives abelian inverse-image exactness. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Big-site localization is exact restriction to a slice site. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "new-over-pullback-preserves-injectives",
+    "why": "Big-site localization preserves injective abelian sheaves. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Small etale inverse images are exact for the derived mate model. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Apply the site theorem to both big and small compatible presentations. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Represent every bounded-below derived complex by bounded-below injectives. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact restriction is termwise and triangulated. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Derived morphisms between injective representatives are unique homotopy classes. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exact-square-factorization",
+    "why": "Termwise exact descent preserves the underived inverse-image pasting identity. No statement of the trace-formula unit replaces this generic tool."
+   },
+   {
+    "node": "lem-kun-distinguished-cone-zero",
+    "why": "Generic triangulated cone criterion turns zero detection into joint conservativity. No statement of the trace-formula unit replaces this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-site-restriction-exact",
+  "new-over-pullback-preserves-injectives",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-derived-exact-square-factorization",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q70-3458244dc",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-3458244dc (reviewer sub-agent of L); spot-checked: Reviewed the item, new node, unit/chapter route, cited statements and sources, proof steps, hypotheses, coefficient categories, base-change normalization, edge cases, duplicates, searches, and route-pivot compliance. No mathematical or mechanical faults found; review.md records the checks."
  }
 }

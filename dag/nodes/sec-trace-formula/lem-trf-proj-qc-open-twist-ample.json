@@ -16,9 +16,70 @@
   "def-weil-pbc-ample-invertible-module",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If U is empty, take e=1; all assertions are vacuous. Otherwise, by the basis and finite-refinement clauses of [lem-weil-pbc-proj-standard-open-inclusion], and quasi-compactness, choose finitely many positive-degree homogeneous elements f_i with U\\subseteq\\bigcup_iD_+(f_i). Let e be a positive common multiple of their degrees; replacing each f_i by the corresponding power preserves its standard open. The finite-cover conclusion of [lem-trf-proj-common-degree-twist-invertible] then gives U\\subseteq W_e, the invertibility locus used in Step 3.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-trf-proj-common-degree-twist-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MW proof, first paragraph: finite standard-open cover and d=d_1...d_n; Tag 01M4 (basis and finite refinement)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-proj-common-degree-twist-invertible] to this finite homogeneous cover and common degree e. It gives that every O_U(ek) is invertible and that the canonical multiplication map O_U(e)^{\\otimes k} \\to O_U(ek) is an isomorphism for every k>=1.",
+   "uses": [
+    "lem-trf-proj-common-degree-twist-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MW proof after the finite cover, clauses (1)--(4)."
+   }
+  },
+  {
+   "text": "Because the chosen e makes U\\subseteq W_e, apply [lem-trf-proj-twist-section-basic-open] with d=e. For every positive-degree homogeneous f, replace f by a positive power so that its degree is a multiple of e; the resulting section of O_U(e r) has nonvanishing locus U\\cap D_+(f). The standard opens form a basis by [lem-weil-pbc-proj-standard-open-inclusion], and the affine-locus clause of [lem-trf-proj-twist-section-basic-open] says that among these nonvanishing loci the affine ones form an affine-open basis of U. Using the multiplication isomorphisms from Step 2, the section may be viewed as a section of O_U(e)^{\\otimes r}.",
+   "uses": [
+    "lem-trf-proj-twist-section-basic-open",
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-trf-proj-common-degree-twist-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MW clauses (5)--(7), using Tag 01MV and the standard-open basis."
+   }
+  },
+  {
+   "text": "Fix k\\geq1. Step 2 makes O_U(ek) invertible and identifies each positive tensor power O_U(ek)^{\\otimes r} with O_U(ekr). Given any basic open from Step 3, replace its defining homogeneous element by its k-th power; its degree is then a multiple of ek, and its nonvanishing locus is unchanged, while the corresponding section is a section of O_U(ekr). Thus the affine nonvanishing loci of positive powers of O_U(ek) form a basis at every point. Together with quasi-compactness of U, this is exactly the definition of an ample invertible module [def-weil-pbc-ample-invertible-module]. The multiplication isomorphisms required in the statement are those supplied by Step 2.",
+   "uses": [
+    "lem-trf-proj-common-degree-twist-invertible",
+    "lem-trf-proj-twist-section-basic-open",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Definition 01PS (definition-ample), together with Constructions Tag 01MW clauses (2),(3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-trf-proj-common-degree-twist-invertible",
+  "lem-trf-proj-twist-section-basic-open",
+  "lem-weil-pbc-proj-standard-open-inclusion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01MW (lemma-ample-on-proj), clauses (2),(3),(5)--(7), proof; Properties Tag 01Q2 (lemma-open-in-proj-ample)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,7 +146,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-scheme-ample-canonical-proj-criterion",
@@ -97,7 +158,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Section-algebra/Proj ampleness criterion in the polarized-descent input: Sufficiently divisible positive twists are ample on a quasi-compact Proj open.",
+   "place": "Section-algebra/Proj ampleness criterion in the polarized-descent input: choose a common positive degree on a quasi-compact Proj open, identify homogeneous twist sections with standard opens, and conclude ampleness.",
    "via": [
     "lem-trf-scheme-ample-canonical-proj-criterion",
     "lem-trf-algebraic-space-ample-local",
@@ -115,5 +176,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proj-qc-open-twist-ample",
+  "worker": "stage1",
+  "summary": "Repaired the false section-locus child by restricting to the Stacks invertibility locus W_d and homogeneous degrees nd. The target now explicitly derives ampleness for every O_U(ek) by taking k-th powers of defining sections, and records the finite-cover implication U subset W_e.",
+  "blueprint": "Realizes the ancestor's Section-algebra/Proj ampleness criterion through the finite homogeneous-cover construction, the W_d section-locus lemma, and the power-by-power ampleness check.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "The target route uses this off-unit topology lemma for the standard-open basis, finite refinement, and affineness; no node in the local Proj-ampleness route supplies those topological facts."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "The target concludes ampleness by applying this off-unit definition to each restricted twist; the local route has no duplicate definition node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q11-8a784d593",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-8a784d593 (reviewer sub-agent of L); spot-checked: Two proof gaps repaired: Step 1 now handles U=∅ by choosing e=1, and Step 3 explicitly uses the child node’s affine-locus clause instead of inferring every U∩D₊(f) is affine. Corrected DAG JSON is under fixes/dag/nodes/sec-trace-formula/; no nodes dropped.; 1 file(s) fixed by the reviewer"
  }
 }
