@@ -221,5 +221,23 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-887f35e85 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and the 4 new nodes in full, plus the cited statements (def-cbc-enhanced-diagrams-cones, def-coef-infinity-category-of-spaces, def-coef-infinity-presheaf-yoneda, lem-coef-infinity-hom-bifunctor-functoriality, lem-coef-twisted-arrow-left-fibration), the parent's uses (steps 3 and 5-8 of lem-coef-infinity-ordinary-pointwise-kan-extension), the unit record and the blueprint ancestor. Statement unchanged and correct: Yoneda gives (u_*Q)(j)=Map(u^*h_j,Q), the counit evaluates at 1_{u(a)}, and transitions are precomposition by u^*h_j->u^*h_{j'}. Steps 1-7 check, including variance: W on N(J)xN(A)^op; interchange with K=N(J)^op; parametric Yoneda with c=N(u):N(A)->N(J); D(a,b)=Map(P u a,Q b) on L^op x L; inverse tau=beta_a∘P(f). Step 6 really is elementary. Sources: Kerodon 03P7 (twisted-arrow end, source contravariant and target covariant, matching the Tw convention) and 03N7 (Hom-functor for a locally Kan simplicial category, applied to discrete C) were read online. Cisinski 6.3.10/5.7.3/5.8.13 are online-only, recorded WANTED and not reopened; I re-derived the needed facts independently, and proof_origin is agent. New-node statements tested on small cases: interchange on K=L=pt; end formula with empty C; Yoneda with C=pt and with L empty; nerve counit comparison with empty Hom sets. All four are true and statement-only, none restates the item, and the support graph is acyclic (the 296-node walk never reaches the item). Duplicate candidates were either cyclic (infinity-yoneda-evaluation, space-yoneda-density, enriched-hom-twisted-arrow-comparison, grothendieck-coherent-end) or different statements (pointwise fixed-object Yoneda, Kan extension along a right fibration). All cited statements are in the item's unit, so no tool_uses are needed. Not a target node, so the base-change and coefficient check does not apply. FIX (B3): in lem-coef-coherent-end-twisted-arrow-formula I replaced the gloss 'or equivalently the space of coherent sections of the left fibration classified by the displayed diagram', which uses straightening with no definition dependency (lem-coef-space-valued-straightening reaches the item), with the defining coherent-limit meaning from def-cbc-enhanced-diagrams-cones. Whole file at fixes/dag/nodes/sec-six-functors/lem-coef-coherent-end-twisted-arrow-formula.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpacePresheafRightKanMappingFormula",
+  "declaration": "SSet.Enhanced.PresheafRightKan.space_presheaf_right_kan_mapping_formula",
+  "file": "lean/Sheaf/CategoryTheory/SpacePresheafRightKanMappingFormula.lean",
+  "statement": "theorem space_presheaf_right_kan_mapping_formula {A J : Type u} [SmallCategory A] [SmallCategory J] (u : A ⥤ J) : ∃ (hA : Quasicategory (presheaves A)) (hJ : Quasicategory (presheaves J)), @Nonempty (@Formula A J _ _ u hA hJ)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c2907942",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Read the item node, both stmt_deps, the report, the snapshot module and the dependency interfaces it uses (EnhancedDiagramsCones, InfinityCategoryOfSpaces, InfinityPresheafYoneda, HomBifunctorData, PointwiseYoneda SpaceComparison/evaluate). Clause by clause: small categories and functor exact; P_A = infinityPresheaves (nerve A) = Fun(N(A)^op, S_u) in u+1; representables pinned exactly to discrete Hom with constant pre/postcomposition action; u^* is real precomposition; u_* = fromHom is the curried Hom bifunctor, so values are Map(u^*h_j,Q) and transitions are precomposition by u^*h_f; adjunction is an IsEquivalenceEdge in Fun(P_J^op x P_A, S) plus weak whole-space adjuncts tied to it; counit is adjunct(id) and its component is homotopic to Yoneda evaluation at 1_{u(a)}; the HEq types are propositionally equal, so the statement is satisfiable. Empty A/J/Hom/values covered; no extra hypotheses or universe restriction. Only the item's lean field changed; lean.statement verbatim; docstrings with source, blueprint and the 7 steps; no hollow def; lines <=100. nt_compile.py on the snapshot: rc 0, no errors or warnings. Non-blocking: the statement uses landed same-unit nodes def-coef-infinity-presheaf-yoneda, lem-coef-infinity-hom-bifunctor-functoriality and lem-coef-infinity-pointwise-yoneda-evaluation that are not in stmt_deps (acyclic, optional to add); minor worker-report misattributions."
  }
 }

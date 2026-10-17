@@ -2,7 +2,8 @@
  "kind": "statement",
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-space-point-cocone-criterion"
  ],
  "proof": [
   {
@@ -223,5 +224,36 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-d3d996f16 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes; details are in review.md. There are no new nodes, the statement is unchanged (empty K and naturality kept), and traversing the snapshot DAG shows none of the ten cited nodes reaches the item, so there is no cycle. Step 1: the Kan functor-space, coherent-nerve, cone-calculus and pinch-comparison nodes are applied within their hypotheses. Step 2: I checked that M_C(A,B)=Sing_Q E(A,B), that q^n=max(S minus {n+1}) descends and is cosimplicial, that max(p,q) gives the homotopies to p, that e_T|alpha|=q_T, and that the Whitehead inverse applies. Step 3: currying gives U_D=Fun(K,U_C). Step 4: I checked the three-layer functor at every split; its edges are b(f), b(g), b(gf), so by the theta/ell characterisation the coherent composition agrees with enriched composition up to homotopy. Step 5: the cone-criterion test map is homotopic to the currying isomorphism, so the evaluation cone is limiting. Step 6: naturality follows from strict evaluation identities; the step is terse but acceptable. Step 7: the cases K empty, Delta^0, and X empty or a point all check. lem-coef-right-fibration-section-limit is not a duplicate: it indexes over K^op and covers a different fibration. The two general comparison nodes the reader avoided (space-transport, coherent-nerve) both reach the item, so avoiding them was right. I accept the four sk-prop-sf-cbc tool_uses as generic black boxes. Kerodon 03F3/03F7 has no archival copy (marked WANTED); the statement agrees with those results as I know them."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpaceConstantDiagramLimit",
+  "declaration": "CategoryTheory.Spaces.ConstantLimit.space_constant_diagram_limit",
+  "declarations": [
+   "CategoryTheory.Spaces.ConstantLimit.power",
+   "CategoryTheory.Spaces.ConstantLimit.maximum_mono",
+   "CategoryTheory.Spaces.ConstantLimit.maximumProjection",
+   "CategoryTheory.Spaces.ConstantLimit.EvaluationSimplex",
+   "CategoryTheory.Spaces.ConstantLimit.finalMark",
+   "CategoryTheory.Spaces.ConstantLimit.transposedEvaluation",
+   "CategoryTheory.Spaces.ConstantLimit.coneCylinder",
+   "CategoryTheory.Spaces.ConstantLimit.EvaluationCone",
+   "CategoryTheory.Spaces.ConstantLimit.EvaluationNaturality",
+   "CategoryTheory.Spaces.ConstantLimit.space_constant_diagram_limit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpaceConstantDiagramLimit.lean",
+  "statement": "theorem space_constant_diagram_limit : (∀ A B : Kan.{u}, ∃ α : pointCoconeIndex ((ihom A.obj).obj B.obj) ⟶ SSet.Enhanced.mappingSpace infinityCategory.{u} (pointCoconeVertex A) (pointCoconeVertex B), SSet.Enhanced.IsWeakHomotopyEquivalence α ∧ ∀ (n : ℕ) (s : ((ihom A.obj).obj B.obj) _⦋n⦌), EvaluationSimplex A B (finalMark n) (SSet.stdSimplex.map (SimplexCategory.σ (Fin.last n)) ≫ SSet.yonedaEquiv.symm s) ((α.app _ (ULift.up s)).1)) ∧ (∀ K X : Kan.{u}, ∃ t : (SSet.Enhanced.coneCategory (pointCoconeDiagram K.obj X)) _⦋0⦌, t.1.1 = pointCoconeVertex (power K X) ∧ EvaluationCone K X (pointCoconeVertex X) t ∧ SSet.Enhanced.IsLimiting (pointCoconeDiagram K.obj X) t) ∧ EvaluationNaturality.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical cotensor is the actual internal Hom; the maximum-source-subset formula specifies the right-pinched comparison and the entire coherent evaluation cylinder. Reuses the already landed pointCoconeVertex, pointCoconeIndex, pointCoconeDiagram and pointCoconeMaximum from lem-coef-space-point-cocone-criterion (added statement dependency). No cone data is chosen from mere existence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5557b86a",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read the node, the three statement dependencies (InfinityCategoryOfSpaces, EnhancedDiagramsCones mappingSpace/coneCategory/IsLimiting, landed SpacePointCoconeCriterion), the module and the report (both sections present). Clauses match: K X : Kan.{u} with no extra hypothesis; the apex is the literal ihom power; the right-pinched comparison alpha is fixed on every simplex by the finalMark maximum formula (step-2 q^n; n=0 checked); the evaluation cone is fully specified by EvaluationSimplex, with composition law, simplicial naturality and cone direction checked; IsLimiting is terminal in the coherent cone category; K empty is included. The naturality clause is strict evaluation identities, acceptable because all data are strict formulas. The added stmt_dep on lem-coef-space-point-cocone-criterion is landed and acyclic (its 335-node closure does not reach the item). No hollow definitions; source and blueprint docstrings throughout; the main docstring carries the node's 7 steps; sorry only (maximum_mono helper follows the landed pattern); the recorded statement is verbatim the file's signature. nt_compile: rc=0 with no messages; a control run with a planted error showed real elaboration with axioms including sorryAx. Minor: the second-reading section is a self-reread; Kerodon archival copy WANTED."
  }
 }
