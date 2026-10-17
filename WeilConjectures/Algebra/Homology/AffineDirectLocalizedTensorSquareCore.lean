@@ -208,7 +208,7 @@ theorem affineDirectLocalizedTensorSquare_core
           (algebraMap A (A ⊗[R] R')) = κ.comp φg' :=
         by
           change (κ.comp (algebraMap (A ⊗[R] R') A')).comp _ = _
-          rw [RingHom.comp_assoc, hφg'] 
+          rw [RingHom.comp_assoc, hφg']
       let a := affineBaseChangeTildeModuleMap R A R' D M n (κ.comp φg') hφ i
         (C.homology i) (Iso.refl _)
       let ρ := (SingleComplexBaseChange.tensorMap f f' g g' sq p).comp

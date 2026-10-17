@@ -56,7 +56,7 @@ def abelianExtSectionsIso (X : Scheme.{u})
       ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p
 
 /-- Ext compared with sections of an abelian injective resolution of a module.
-Source: Stacks Project, Tag 06XR. 
+Source: Stacks Project, Tag 06XR.
 (blueprint: def-pc-abelian-counit-cocycle-comparisons)
 -/
 @[irreducible]

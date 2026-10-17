@@ -73,7 +73,7 @@ equal there. Move both sets of equations to a further common stage; ring
 maps, additive maps and scalar compatibility preserve them. These descended
 coefficients and vectors give the stated factorization. Empty row or column
 sets are allowed, with empty sums equal to zero. No tensor-colimit or finite
-presentation theorem, nor Noetherian or local hypothesis, is needed. 
+presentation theorem, nor Noetherian or local hypothesis, is needed.
 (blueprint: lem-weil-pbc-colimit-flat-relation-descent)
 -/
 theorem exists_stage_flat_relation_factorization_of_preserves
