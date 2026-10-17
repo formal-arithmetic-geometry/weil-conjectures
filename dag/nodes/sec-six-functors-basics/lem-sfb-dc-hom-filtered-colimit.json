@@ -16,7 +16,9 @@
   "lem-pur-derived-change-of-rings",
   "def-pur-derived-internal-hom",
   "def-weil-pbc-category-colimit",
-  "def-pc-cochain-complex-modules"
+  "def-pc-cochain-complex-modules",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-hom-representative-evaluation"
  ],
  "proof": [
   {
@@ -352,5 +354,51 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-b1ebe443d (reviewer sub-agent of L); spot-checked: I read the whole item, all 11 steps, the statement of every cited node, the unit, the blueprint parent's final paragraph, the DAG parent's step 10, Bhatt–Scholze 6.8.12–6.8.15 and Stacks 0A90. There are no new nodes and the statement is unchanged. The repaired argument holds. Steps 6–9 build strictly natural chain maps a_T and v_T from the functorial K-injective resolution and its natural augmentation. On each stage I checked lambda_J v = v_S lambda_C and lambda_J a = a_S, which give [v_S]gamma = [a_S] with no phantom-map inference. Step 10 identifies theta U(c) with gamma: the transpose of c is the scalar extension of evaluation, and the uncurrying of a_S gives the same chain map. I also checked the uncurrying sign against the Tot convention and the cone identification for Q⊗P → A⊗P. Edge cases (a single stage, d_i=0, constant R×R, any transition matrices, odd-degree f) cause no problem. No duplicate found in the DAG and no cycle. Every off-route statement is either a Mathlib leaf or one of the nine declared tool_uses; I accept all nine as generic tools. One fault fixed: step 1 cited Tag 05RU in sites-cohomology.tex, but 05RU is in derived.tex (definition-unbounded-derived-category). The corrected node is in fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1364b57e4",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Mathematics and Lean statements pass; scompile.py reproduced cleanly. Repaired H11 by supplying the complete report with a real independent second reading under fixes/. Full checks are recorded in review.md. No Lean, node, or branch changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedInternalHomFilteredColimit",
+  "declaration": "WeilConjectures.SfbHomFilteredColimit.derivedInternalHom_filteredColimit_comparison",
+  "declarations": [
+   "WeilConjectures.SfbHomFilteredColimit.Modules",
+   "WeilConjectures.SfbHomFilteredColimit.tensor",
+   "WeilConjectures.SfbHomFilteredColimit.tensorFixed",
+   "WeilConjectures.SfbHomFilteredColimit.homFixed",
+   "WeilConjectures.SfbHomFilteredColimit.tensorGenerator",
+   "WeilConjectures.SfbHomFilteredColimit.homValue",
+   "WeilConjectures.SfbHomFilteredColimit.resolutionUnit",
+   "WeilConjectures.SfbHomFilteredColimit.Normalized",
+   "WeilConjectures.SfbHomFilteredColimit.comparison_existsUnique",
+   "WeilConjectures.SfbHomFilteredColimit.comparison",
+   "WeilConjectures.SfbHomFilteredColimit.roofDenominator",
+   "WeilConjectures.SfbHomFilteredColimit.Continuous",
+   "WeilConjectures.SfbHomFilteredColimit.filteredColimit_comparison",
+   "WeilConjectures.SfbHomFilteredColimit.underlyingCoefficient",
+   "WeilConjectures.SfbHomFilteredColimit.ModuleDiagram",
+   "WeilConjectures.SfbHomFilteredColimit.extensionGenerator",
+   "WeilConjectures.SfbHomFilteredColimit.ScalarNormalized",
+   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_existsUnique",
+   "WeilConjectures.SfbHomFilteredColimit.scalarComparison",
+   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_quasiIso",
+   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_restriction",
+   "WeilConjectures.SfbHomFilteredColimit.scalarComparison_naturality",
+   "WeilConjectures.SfbHomFilteredColimit.comparison_diagram_naturality",
+   "WeilConjectures.SfbHomFilteredColimit.derivedComparison",
+   "WeilConjectures.SfbHomFilteredColimit.derivedInternalHom_filteredColimit_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedInternalHomFilteredColimit.lean",
+  "statement": "theorem derivedInternalHom_filteredColimit_comparison (R : Sheaf J CommRingCat.{max u v r}) {I : Type (max u v r)} [SmallCategory I] [IsFiltered I] [HasFilteredColimitsOfSize.{max u v r, max u v r} (Modules.{u, v, r} J R)] [AB5OfSize.{max u v r, max u v r} (Modules.{u, v, r} J R)] (S : I ⥤ Sheaf J CommRingCat.{max u v r}) (algebra : (Functor.const I).obj R ⟶ S) [HasColimit S] (φ : R ⟶ colimit S) (hφ : ∀ i : I, algebra.app i ≫ colimit.ι S i = φ) (T : ModuleDiagram.{u, v, r} J S algebra φ) (hfree : ∀ i : I, ∃ d : ℕ, Nonempty (T.modules.obj i ≅ limit (Discrete.functor (fun _ : Fin d ↦ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R))))) [HasDerivedCategory.{w} (Modules.{u, v, r} J (colimit S))] (E : Modules.{u, v, r} J R ⥤ Modules.{u, v, r} J (colimit S)) (h : ∀ M : Modules.{u, v, r} J R, E.obj M = SheafOfModules.changeOfRings φ M) (hmap : ∀ {M N : Modules.{u, v, r} J R} (f : M ⟶ N), E.map f = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫ eqToHom (h N).symm) [E.Additive] (P L : CochainComplex (Modules.{u, v, r} J R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P) (hcont : Continuous.{u, v, r} J R (I := I) P) (b : ℤ) (hL : ∀ n : ℤ, n < b → IsZero (L.X n)) : ∃ hd : QuasiIso ((homFixed.{u, v, r} J (colimit S) ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)).map ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map ((resolutionUnit.{u, v, r} J R).app L))), @IsIso _ _ _ _ (@derivedComparison.{u, v, r, w} C _ J _ _ R (colimit S) _ φ E h hmap _ P L hd)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Universal representative formulation: P is any K-flat representative of K, L any strictly bounded-below representative of the second derived input, and E the ordinary scalar-extension functor with its specified objects and maps. Exact finite-free-colimit scalar extension computes its derived functor on these representatives. The actual map in D(S) is derivedComparison, fixed by pure-tensor evaluation and the actual localization factorization. Auxiliary declarations give its strict termwise-colimit formula, scalar-adjunction normalization and naturality. No mathematical hypothesis or clause of the node is changed."
  }
 }

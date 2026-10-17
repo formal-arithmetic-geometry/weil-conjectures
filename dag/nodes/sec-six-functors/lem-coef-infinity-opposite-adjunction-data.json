@@ -163,5 +163,28 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-4af075399 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and the three cited statements in full: def-cbc-enhanced-diagrams-cones (Fun, the comma pullbacks, initial and terminal objects), def-coef-coherent-adjunction-data (orientations, triangle edges L eta, eps L and eta R, R eps, and the universal arrows) and lem-coef-infinity-op-mapping-reversal (X^op, Map_{C^op}(x,y) ~ Map_C(y,x), and its composition, identity and witness compatibility). I also read the citer's step 4 in lem-coef-infinity-pointwise-adjoint-criterion, which takes L -| F^op to F -| L^op; the statement gives exactly that. The statement is correct and not weakened. The new adjunction is R^op -| L^op with unit eps^op and counit eta^op. (a|R)^op = (R^op|a) holds because Fun(Delta^1,A)^op = Fun(Delta^1,A^op) with ev0 and ev1 swapped. Initial becomes terminal through the statement of the mapping-space reversal. The reversed right triangle has edges R^op eps^op then eta^op R^op, which is the new left triangle. I tested Delta^0, [1] with the identity adjunction, empty A, and nerves of ordinary categories (matching the classical op adjunction). Fault E3/E4: step 3 named the reversed edges 'eps^op R^op' and 'R^op eta^op', which are ill-typed under the definition's whiskering convention and in the wrong order. I rewrote it with the vertex order and the correct edges for both triangles. B4: step 1 had '$alpha' for '$\\alpha'; fixed. Only the proof text changed: no new nodes, no change to the statement or dependencies, no tool_uses. The route stays in the same unit plus one definition, and no SGA is cited. No duplicate found by rg over dag/nodes. The Kerodon sources 02EK and 003L are not archived (the report lists them as WANTED), and proof_origin is correctly 'agent'. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-infinity-opposite-adjunction-data.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-af4ac50de",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Independent review complete; scompile.py reproduced cleanly with no errors or warnings, and no fixes are required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityOppositeAdjunctionData",
+  "declaration": "SSet.Enhanced.infinity_opposite_adjunction_data",
+  "declarations": [
+   "SSet.Enhanced.OppositeAdjunctionTransport",
+   "SSet.Enhanced.infinity_opposite_adjunction_data"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityOppositeAdjunctionData.lean",
+  "statement": "theorem infinity_opposite_adjunction_data : Nonempty OppositeAdjunctionTransport.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The conclusion package fixes the canonical functor and comma isomorphisms on every simplex by literal reversal formulas. The published adjunction record retains triangle existence; every supplied triangle witness is transported explicitly, so no replacement definition or choice of an unrelated triangle is used. Double reversal is stated for all functor and comma simplices and for the entire adjunction record."
  }
 }
