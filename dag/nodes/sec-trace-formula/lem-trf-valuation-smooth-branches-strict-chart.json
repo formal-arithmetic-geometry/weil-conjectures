@@ -23,7 +23,10 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
   "def-weil-polynomial-ring",
-  "lem-weil-pbc-reduced-induced-closed-subscheme"
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification",
+  "def-trf-strict-semistable-curve"
  ],
  "proof": [
   {
@@ -305,5 +308,23 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-9c42b1c28 (reviewer sub-agent of L); spot-checked: Read the mathematics in full and checked all seven steps, three new nodes, cited sources, edge cases, duplicate candidates and route constraints. Repaired missing lean_audit records in all three new nodes; corrected JSON files are under fixes/dag/nodes/sec-trace-formula/. Detailed checks and accepted tool uses are in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationSmoothBranchesStrictChart",
+  "declaration": "AlgebraicGeometry.exists_valuation_smooth_branches_strict_chart",
+  "file": "lean/Sheaf/TraceFormula/ValuationSmoothBranchesStrictChart.lean",
+  "statement": "theorem exists_valuation_smooth_branches_strict_chart (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (P : MultipointedCurve (Spec (.of V))) (hsemistable : P.IsSemistable) (hgeneric : Smooth (pullback.snd P.x (Spec.map (CommRingCat.ofHom V.subtype)))) (hcomponents : ∀ (s : Spec (.of V)) (Z : TopologicalSpace.Closeds (P.x.fiber s)), (Z : Set (P.x.fiber s)) ∈ irreducibleComponents (P.x.fiber s) → Smooth ((Scheme.IdealSheafData.vanishingIdeal Z).subschemeι ≫ P.x.fiberToSpecResidueField s)) : ∀ x : P.X, ∃ (U : P.X.Opens) (B : (Spec (.of V)).Opens) (_ : IsAffineOpen U) (hB : IsAffineOpen B), x ∈ U ∧ P.x x ∈ B ∧ U ≤ P.x ⁻¹ᵁ B ∧ ((x ∈ P.x.smoothLocus ∧ ∃ (h : U.toScheme ⟶ Spec (.of (Polynomial Γ(Spec (.of V), B)))) (m : pullback (C := Scheme) P.i U.ι ⟶ Spec Γ(Spec (.of V), B)), Etale h ∧ Etale m ∧ h ≫ Spec.map (CommRingCat.ofHom Polynomial.C) ≫ hB.fromSpec = U.ι ≫ P.x ∧ m ≫ hB.fromSpec = pullback.fst P.i U.ι ≫ P.d ∧ m ≫ Spec.map (CommRingCat.ofHom (Polynomial.evalRingHom 0)) = pullback.snd P.i U.ι ≫ h ∧ (x ∈ Set.range P.i → IsPullback m (pullback.snd P.i U.ι) (Spec.map (CommRingCat.ofHom (Polynomial.evalRingHom 0))) h) ∧ (x ∉ Set.range P.i → IsEmpty (pullback (C := Scheme) P.i U.ι))) ∨ (x ∉ P.x.smoothLocus ∧ ∃ (c : Γ(Spec (.of V), B)) (h : U.toScheme ⟶ (StrictSemistableModel.nodal c).scheme), Etale h ∧ h ≫ (StrictSemistableModel.nodal c).baseMap ≫ hB.fromSpec = U.ι ≫ P.x ∧ IsEmpty (pullback (C := Scheme) P.i U.ι)))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6e9b67f97",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, route constraints, report sections, and per-file compilation checked successfully."
  }
 }

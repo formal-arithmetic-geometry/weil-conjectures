@@ -19,7 +19,8 @@
   "def-pur-support-cohomology",
   "def-coefficient-twists-detailed",
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-pur-etale-coordinate-support"
  ],
  "proof": [
   {
@@ -526,5 +527,50 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-8999d4b87 (reviewer sub-agent of L); spot-checked: I read the item, its statement and all 9 steps, the parent bottom-descent node, the unit record, the statements of all 27 cited nodes, the convention nodes, the main-20261015 blueprint proof of frame-independence, and Stacks 0EYM (etale-cohomology.tex l.7567). The delivery has no new nodes. The statement is true on the cases I tested (A^1 inside A^2 over k; a zero section over a DVR base; b=0; empty support; a nonreduced, reducible or infinite-dimensional base; r<0). The b=c argument is sound: it chooses a minimal base prime and the generic point of the fibre, uses nil-ideal reduction, then étale local dimension and the height of the polynomial ring, with no infinite cancellation. Base-change morphism and coefficients: the cor's Rz^! is ν^*z^×Rν_*, and z^× agrees with the ordinary étale right adjoint of z_* by uniqueness of adjoints. The orientation is read on the étale witness; full faithfulness of the D^+ site comparison reflects it to an étale isomorphism. Twists are read through lem-amb-cartier-kummer-map and lem-asd-etale-finite-twist-pullback, which I accept. No cycles: the transitive closure of every cited node (and of the two added ones) avoids the item and its parent. No SGA source is used. Fixes, both C1 in Step 4: (1) the stalk of the continuity colimit sheaf is the colimit of the stalks, used without a node; I cited lem-kun-stalks-commute-colimits. (2) The support triangle and Step 2 use A-module R^q j_*, while lem-kun-0eym concerns abelian R^q j_*; I cited det-pbc-conventions-module-cohomology, clause 3, which says the two agree. I updated proof_deps and declared both in split_report.tool_uses. Note for the maintainer: the DAG binds the item, its parent and lem-pur-frame-independence to sk-prop-a1-kummer, but the blueprint places frame-independence in sk-prop-an. The declared tool use of cor-pur-affine-space-zero-section-purity is therefore consistent with the blueprint ancestor's real unit. The binding is maintainer metadata, not a fault of this split.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeSupportCoordinateModel",
+  "declaration": "AlgebraicGeometry.RelativeSupportCoordinates.relative_support_coordinate_model",
+  "declarations": [
+   "AlgebraicGeometry.coordinateCoefficientCharacteristic_pos",
+   "AlgebraicGeometry.coordinateCoefficientCharacteristic_unit",
+   "AlgebraicGeometry.CoordinateTatePullbackData",
+   "AlgebraicGeometry.CoordinateTatePullbackData.IsNormalized",
+   "AlgebraicGeometry.coordinateTatePullback_existsUnique",
+   "AlgebraicGeometry.coordinateTatePullback",
+   "AlgebraicGeometry.IsNormalizedCoordinateTateProduct",
+   "AlgebraicGeometry.coordinateTateProduct_existsUnique",
+   "AlgebraicGeometry.coordinateTateProduct",
+   "AlgebraicGeometry.RelativeSupportCoordinates",
+   "AlgebraicGeometry.RelativeSupportCoordinates.normalSpace",
+   "AlgebraicGeometry.RelativeSupportCoordinates.origin",
+   "AlgebraicGeometry.RelativeSupportCoordinates.normalMap",
+   "AlgebraicGeometry.RelativeSupportCoordinates.normal_support",
+   "AlgebraicGeometry.RelativeSupportCoordinates.normalTwist",
+   "AlgebraicGeometry.RelativeSupportCoordinates.normalTwistComplex",
+   "AlgebraicGeometry.RelativeSupportCoordinates.rawComparison",
+   "AlgebraicGeometry.RelativeSupportCoordinates.twistPullback",
+   "AlgebraicGeometry.RelativeSupportCoordinates.chartTwist",
+   "AlgebraicGeometry.RelativeSupportCoordinates.chartTwistComplex",
+   "AlgebraicGeometry.RelativeSupportCoordinates.comparison",
+   "AlgebraicGeometry.RelativeSupportCoordinates.twistProduct",
+   "AlgebraicGeometry.RelativeSupportCoordinates.comparison_twist_identification",
+   "AlgebraicGeometry.RelativeSupportCoordinates.relative_support_coordinate_model"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeSupportCoordinateModel.lean",
+  "statement": "theorem relative_support_coordinate_model (P : WeilConjectures.PurityFiniteSetting.{u}) (C : RelativeSupportCoordinates P) : (∀ {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ C.T) (ht : Set.range t.base ⊆ Set.range (pullback.snd C.i C.e).base) (r : ℤ), IsIso (C.comparison t r)) ∧ (∀ c : ℕ, (∀ y : C.Y, ringKrullDim (C.X.presheaf.stalk (C.i.base y)) = ringKrullDim (C.Y.presheaf.stalk y) + (c : WithBot ℕ∞)) → Nonempty (pullback C.i C.e : Scheme.{u}) → C.b = c)",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The main theorem asserts invertibility of the canonical comparison and the dimension clause. Compatibility is stated by coordinateDerivedGlobalToStalk_restriction and comparison_twist_identification. The comparison target is literally the geometric stalk of derived support of the specified Tate sheaf; its inverse gives the displayed direction. All other declarations construct or normalize these same support and coordinate objects."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-671468638",
+  "group": "Q126",
+  "result": "fix",
+  "note": "Reviewed immutable files, statements, dependencies, sources, universes, edge cases, and route-pivot compliance. Both Lean modules passed scompile.py without diagnostics. Fixed H11 by supplying a complete report replacement with a real independent second reading. review.md written; branch unchanged."
  }
 }

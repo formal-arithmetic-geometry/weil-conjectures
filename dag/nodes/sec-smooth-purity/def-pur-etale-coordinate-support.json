@@ -1,0 +1,128 @@
+{
+ "id": "def-pur-etale-coordinate-support",
+ "kind": "definition",
+ "title": "Ordinary etale sheaf support and normalized supported germ maps",
+ "status": "split",
+ "statement": "Let $A$ be a commutative coefficient ring, let $X$ be a scheme [def-pc-scheme], and let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], with open complement $j$. On the ordinary small etale site [def-weil-pbc-etale-site], define the sheaf-support functor on sheaves of $A$-modules by $Q_i(F)=\\ker(F\\to j_*j^*F)$, with its canonical inclusion. Thus its value on an etale $W\\to X$ is $\\ker(F(W)\\to F(W\\setminus(Z\\times_X W)))$. For a geometric point $t$ of $X$ [def-weil-pbc-geometric-stalks], define the supported stalk $L_{i,t}=t^*Q_i$. Both $Q_i$ and $L_{i,t}$ are additive. The latter's right derived functor [def-weil-pbc-derived-categories] is canonically the geometric stalk of $RQ_i$; the support functor preserves injectives via the closed-support adjunction. Reuse global supported sections $\\Gamma_Z(X,-)$ of [def-pur-support-cohomology]. For $f:T\\to X$ and a closed immersion $i':Z'\\hookrightarrow T$ with underlying closed set $|Z'|=f^{-1}|Z|$, define the canonical natural map $\\Gamma_Z(X,F)\\to L_{i',t}(f^*F)$ as the unique factorization of the usual global-section germ map through the supported-kernel inclusion. Derive this specified map using exact inverse image. For a further etale map $e:V\\to T$ [def-weil-etale-morphism] and the inverse-image support, define the supported-stalk restriction by its unique factorization of the ordinary pullback-stalk identification. The derived global-to-stalk comparison commutes with this restriction and the canonical inverse-image composition isomorphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-derived-categories",
+  "def-pur-support-cohomology",
+  "def-weil-etale-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XP, section-cohomology-support; the sheaf-support kernel and the functoriality of restriction, used in steps 1, 5, 7 of lem-pur-relative-support-coordinate-model."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The subsheaf of sections supported on a closed subscheme of the ordinary etale site is the kernel of the adjunction unit to the open complement",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction_unit_app\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafData), Y.kerAdjunction.unit.app I = CategoryTheory.eqToHom ⋯\", \"doc\": \"For any scheme $Y$ and ideal sheaf data $\\\\mathcal{I}$ on $Y$, the unit of the adjunction between the right opposite of the subscheme functor and the kernel functor evaluates at $\\\\mathcal{I}$ to the ca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : U.toScheme ⟶ Spec Γ(X, U)\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, this morphism maps the scheme $U$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X, U))$ constructed from the global sect\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {U : TopCat} (X : AlgebraicGeometry.SheafedSpace C)\\n  {f : U ⟶ ↑X.toPresheafedSpace} (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f))\\n  (V : (TopologicalSpace.Opens ↑↑X.toPresheafedSpace)ᵒᵖ),\\n  (X.ofRestrict h).hom.c.app\", \"doc\": \"For a sheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U$ of $X$'s underlying space, and an open embedding $f: U \\\\to X$, the presheaf component of the morphism $X|_U \\\\to X$ is given by\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(Y : Scheme.{u}) : (subschemeFunctor Y).rightOp ⊣ Y.kerFunctor\", \"doc\": \"For any scheme $Y$, the right opposite of the subscheme functor (mapping ideal sheaves to closed subschemes) is left adjoint to the kernel functor (extracting ideal sheaves from structure morphisms in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (U : Y.Opens) :\\n  ((restrictAdjunction f).unit.app M).app U = M.presheaf.map (homOfLE (f.image_preimage_le U)).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : (TopologicalSpace.Opens ↥X)ᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Hom.toLRSHom (X.ofRestrict h)).c.app V =\\n \", \"doc\": \"For a scheme $X$, open subset $U$, open immersion $h: U \\\\to X$, and open set $V$ in $X$, the sheaf component of the morphism $X|_U \\\\to X$ at $V$ equals the map induced by the counit of the adjunction \"}\n  {\"name\": \"AlgebraicGeometry.toOpen_toSpecΓ_app\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \"{X : Scheme.{u}} (U) : StructureSheaf.toOpen _ _ ≫ X.toSpecΓ.app U = X.presheaf.map (homOfLE (by exact le_top)).op\", \"doc\": \"For any scheme $X$ and open subset $U$ of $\\\\operatorname{Spec}(\\\\Gamma(X))$, the composition of the structure sheaf morphism $R \\\\to \\\\mathcal{O}_X(f^{-1}(U))$ with the unit of the $\\\\Gamma$-$\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": IsIso (restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact ordinary-etale sheaf-support kernel or normalized supported-stalk comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No exact ordinary-etale sheaf-support kernel or normalized supported-stalk comparison found."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|supportedSheaf|supportSheaf|coordinateModel",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No exact ordinary-etale sheaf-support kernel or normalized supported-stalk comparison found."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "sections with support; coordinateSupportSheaf|RelativeSupportCoordinates|coordinateGlobalToStalk|coordinateCoefficientCharacteristic",
+   "results": "blueprint_refs.py search found def-pur-support-cohomology (global support only), formal closed-support nodes (pro-etale), and their constructible corollaries. Definition-node statement search found only def-pur-support-cohomology. Source/Sheaf searches found pro-etale Q and ordinary global supported sections, neither the ordinary-etale sheaf kernel nor its normalized supported germ maps. Exact declaration-name search over Mathlib, WeilConjectures, Sheaf and dag/lean_names_upstream.json returned no matches.",
+   "date": "2026-10-17",
+   "verdict": "New independent ordinary-etale sheaf-support notion; reuse the existing global supported-sections functor and geometric stalk."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-relative-support-coordinate-model",
+  "date": "2026-10-17",
+  "group": "Q126"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Proof, first two sentences: the sheaf-theoretic local comparison for relative bottom-degree descent, made precise by the normal-slice model.",
+   "via": [
+    "lem-pur-relative-support-coordinate-model",
+    "lem-pur-relative-support-bottom-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoordinateSupport",
+  "declaration": "AlgebraicGeometry.Etale.coordinateSupportSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Etale.coordinateSupportSheaf",
+   "AlgebraicGeometry.Etale.coordinateSupportInclusion",
+   "AlgebraicGeometry.Etale.coordinateSupportSheaf_additive",
+   "AlgebraicGeometry.Etale.coordinateSupportedStalk",
+   "AlgebraicGeometry.Etale.coordinateSupportedStalk_additive",
+   "AlgebraicGeometry.Etale.coordinateSupportSheaf_preservesInjectives",
+   "AlgebraicGeometry.Etale.coordinateSupportedStalkDerivationIso",
+   "AlgebraicGeometry.Etale.coordinateSupportedStalkInclusion",
+   "AlgebraicGeometry.Etale.coordinateGlobalSupport",
+   "AlgebraicGeometry.Etale.coordinateGlobalGerm",
+   "AlgebraicGeometry.Etale.coordinateGlobalToStalk_existsUnique",
+   "AlgebraicGeometry.Etale.coordinateGlobalToStalk",
+   "AlgebraicGeometry.Etale.coordinateDerivedGlobalToStalk",
+   "AlgebraicGeometry.Etale.coordinateStalkRestriction_existsUnique",
+   "AlgebraicGeometry.Etale.coordinateStalkRestriction",
+   "AlgebraicGeometry.Etale.coordinateDerivedStalkRestriction",
+   "AlgebraicGeometry.Etale.coordinateDerivedPullbackComp",
+   "AlgebraicGeometry.Etale.coordinateDerivedGlobalToStalk_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoordinateSupport.lean",
+  "statement": "def coordinateSupportSheaf (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-671468638",
+  "group": "Q126",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-671468638",
+  "group": "Q126",
+  "result": "fix",
+  "note": "Reviewed immutable files, statements, dependencies, sources, universes, edge cases, and route-pivot compliance. Both Lean modules passed scompile.py without diagnostics. Fixed H11 by supplying a complete report replacement with a real independent second reading. review.md written; branch unchanged."
+ }
+}

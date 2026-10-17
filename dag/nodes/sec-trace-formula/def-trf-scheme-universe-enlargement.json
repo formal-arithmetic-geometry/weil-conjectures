@@ -1,0 +1,180 @@
+{
+ "id": "def-trf-scheme-universe-enlargement",
+ "kind": "definition",
+ "title": "Canonical universe enlargement of a fixed scheme",
+ "status": "split",
+ "statement": "Let $u,v$ be universes and let $X$ be a scheme [def-pc-scheme] in universe $u$. Let $I_X$ be the category whose objects are pairs $(A,a)$ with $A$ a commutative ring in universe $u$ and $a:\\operatorname{Spec}A\\to X$ [def-weil-affine-spectrum], and whose arrows are the commuting triangles between those affine schemes. Define $D_X:I_X\\to\\mathit{Sch}_{\\max(u,v)}$ by $D_X(A,a)=\\operatorname{Spec}(\\operatorname{ULift}_v A)$ and on arrows by applying Spec to the ring homomorphism transported by ULift. This diagram has a colimit [def-weil-pbc-category-colimit], unique up to the canonical colimit isomorphism. The universe enlargement $X^{\\uparrow v}$ is this chosen colimit. For another scheme $Y$ in universe $u$ and a morphism $f:X\\to Y$, postcomposition of affine maps gives $I_X\\to I_Y$ and hence a canonical map $f^{\\uparrow v}:X^{\\uparrow v}\\to Y^{\\uparrow v}$, characterized by sending the leg indexed by $(A,a)$ to the leg indexed by $(A,f\\circ a)$. These maps respect composition. Thus the construction uses a fixed input scheme in universe $u$ and produces a scheme in $\\max(u,v)$ on which larger geometric fields can be tested; it is the usual scheme obtained by enlarging its affine coordinate rings along the ring equivalences $\\operatorname{ULift}_v A\\simeq A$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Section glueing-schemes (Tag 01JA), lemma-glue (Tag 01JB) and lemma-glue-schemes (Tag 01JC): transport the affine gluing construction along ULift.ringEquiv. Auxiliary universe transport for the geometric fibres in Temkin, Stable modification, proof of Theorem 1.1."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical universe enlargement of a scheme using the colimit of its affine schemes with lifted coordinate rings",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone",
+     "AlgebraicGeometry.AffineScheme.forgetToScheme",
+     "AlgebraicGeometry.Scheme.GlueData.gluedScheme",
+     "AlgebraicGeometry.Spec",
+     "AlgebraicGeometry.AffineScheme",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.cocone_pt",
+     "AlgebraicGeometry.AffineScheme.hasColimits",
+     "AlgebraicGeometry.instIsAffineTerminalScheme"
+    ]
+   },
+   "date": "2026-10-17",
+   "verdict": "No existing universe-enlargement declaration; affine-colimit and gluing are the construction inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme, ULift",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Scheme'",
+    "top": []
+   },
+   "date": "2026-10-17",
+   "verdict": "No existing universe-enlargement declaration; affine-colimit and gluing are the construction inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "universeLift|uliftFunctor|changeUniverse",
+   "results": {
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean"
+    ]
+   },
+   "date": "2026-10-17",
+   "verdict": "No existing universe-enlargement declaration; affine-colimit and gluing are the construction inputs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "enlarge the universe of a fixed scheme by lifting coordinate rings and gluing affine schemes",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineScheme",
+     "AlgebraicGeometry.AffineScheme.of",
+     "AlgebraicGeometry.Scheme.mk.noConfusion",
+     "AlgebraicGeometry.AffineScheme.mk",
+     "AlgebraicGeometry.Scheme.mk",
+     "AlgebraicGeometry.Scheme.Cover.ulift_I₀",
+     "AlgebraicGeometry.Scheme.Cover.ulift",
+     "AlgebraicGeometry.Scheme.Cover.ulift_X"
+    ]
+   },
+   "date": "2026-10-17",
+   "verdict": "No existing universe-enlargement declaration; affine-colimit and gluing are the construction inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"scheme.*universe|universe.*scheme|universe.*enlarge|enlarge.*universe\" WeilConjectures lean/Sheaf dag/nodes; blueprint_refs.py search \"universe enlargement\"",
+   "results": "No node or declaration for scheme universe enlargement. Existing comments use same-universe schemes; ULift for covers only changes the indexing type. The blueprint search found 0 nodes.",
+   "date": "2026-10-17",
+   "verdict": "new construction needed"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"def.*[Uu]lift|ulift.*RingHom|RingHom.*ulift\" Mathlib/Algebra; rg -n \"ulift\" Mathlib/AlgebraicGeometry",
+   "results": "RingHom.ulift exists in Mathlib/Algebra/Ring/ULift.lean:122 and is reused. No Scheme lift exists; cover ulift and pointSmallEtale ulift are different notions.",
+   "date": "2026-10-17",
+   "verdict": "reuse RingHom.ulift, construct only the missing scheme enlargement"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-no-isolated-contracted-fibre-component",
+  "date": "2026-10-17",
+  "group": "Q43"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Geometric fibres in the non-isolated contracted-component input; repair of fixed-scheme universe transport.",
+   "via": [
+    "lem-trf-no-isolated-contracted-fibre-component",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeUniverseEnlargement",
+  "declaration": "AlgebraicGeometry.schemeUniverseLift",
+  "declarations": [
+   "AlgebraicGeometry.schemeCoordinateRingLift",
+   "AlgebraicGeometry.schemeUniverseDiagram",
+   "AlgebraicGeometry.schemeUniverseDiagram_hasColimit",
+   "AlgebraicGeometry.schemeUniverseLift",
+   "AlgebraicGeometry.schemeUniverseLiftMap",
+   "AlgebraicGeometry.schemeUniverseLiftMap_comp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeUniverseEnlargement.lean",
+  "statement": "def schemeUniverseLift (X : Scheme.{u}) : Scheme.{max u v}",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "HasColimit is the postponed proof of the stated affine-colimit universal property, not unspecified data chosen from an existence theorem; the definition uses Mathlib colimit and colimit.desc. The only additional postponed property is the stated composition law, also with its complete proof docstring."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2b1049a0a",
+  "group": "Q43",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2b1049a0a",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source, Lean modules, helper construction, report sections, edge cases, route-pivot compliance, and per-file scompile evidence; no substantive or mechanical defects found."
+ }
+}

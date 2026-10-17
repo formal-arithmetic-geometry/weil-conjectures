@@ -21,7 +21,8 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-noetherian-ring",
   "def-weil-proper-morphism",
-  "def-weil-quasi-separated-morphism"
+  "def-weil-quasi-separated-morphism",
+  "def-trf-scheme-universe-enlargement"
  ],
  "proof": [
   {
@@ -410,5 +411,24 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-36a214a04 (reviewer sub-agent of L); spot-checked: Read all thirteen steps, every cited statement, relevant sources and route. DVR reduction, Stein factorization, generic flat base change and fibre-dimension contradiction are valid. No new nodes or repairs; nine tool uses accepted. review.md records edge cases and a separate pre-existing transitive missing-node reference."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NoIsolatedContractedFibreComponent",
+  "declaration": "AlgebraicGeometry.no_isolated_contracted_fibre_component",
+  "file": "lean/Sheaf/TraceFormula/NoIsolatedContractedFibreComponent.lean",
+  "statement": "theorem no_isolated_contracted_fibre_component {T X Y : Scheme.{u}} [IsIntegral T] [IsNoetherian T] (η : T) (hη : IsGenericPoint η (Set.univ : Set T)) (pX : X ⟶ T) (pY : Y ⟶ T) [Flat pX] [LocallyOfFinitePresentation pX] [QuasiCompact pX] [QuasiSeparated pX] [Flat pY] [LocallyOfFinitePresentation pY] [QuasiCompact pY] [QuasiSeparated pY] (hXdim : ∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ schemeUniverseLift.{u, v} T), (∀ Z : Set (↥(pullback (schemeUniverseLiftMap.{u, v} pX) s)), Z ∈ irreducibleComponents (↥(pullback (schemeUniverseLiftMap.{u, v} pX) s)) → topologicalKrullDim Z = (1 : WithBot ℕ∞))) (hYdim : ∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ schemeUniverseLift.{u, v} T), (∀ Z : Set (↥(pullback (schemeUniverseLiftMap.{u, v} pY) s)), Z ∈ irreducibleComponents (↥(pullback (schemeUniverseLiftMap.{u, v} pY) s)) → topologicalKrullDim Z = (1 : WithBot ℕ∞))) [Smooth (pX.fiberToSpecResidueField η)] (hYnode : ∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ schemeUniverseLift.{u, v} T) (x : ↥(pullback (schemeUniverseLiftMap.{u, v} pY) s)), (¬ ∃ U : (pullback (schemeUniverseLiftMap.{u, v} pY) s).Opens, x ∈ U ∧ Smooth (U.ι ≫ pullback.snd (schemeUniverseLiftMap.{u, v} pY) s)) → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (schemeUniverseLiftMap.{u, v} pY) s).presheaf.stalk x)) ((pullback (schemeUniverseLiftMap.{u, v} pY) s).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span ({(MvPowerSeries.X (0 : Fin 2) * MvPowerSeries.X (1 : Fin 2))} : Set (MvPowerSeries (Fin 2) Ω))))) (g : Y ⟶ X) (hg : g ≫ pX = pY) [IsProper g] [IsIso (pullback.map pY (T.fromSpecResidueField η) pX (T.fromSpecResidueField η) g (𝟙 _) (𝟙 T) (by simpa using hg.symm) (by simp))] (hdense : ∃ U : X.Opens, (∀ W : X.Opens, Function.Injective (U.ι.app W)) ∧ (∀ W : Y.Opens, Function.Injective ((g ⁻¹ᵁ U).ι.app W)) ∧ IsIso (pullback.snd g U.ι)) : (∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ schemeUniverseLift.{u, v} T) (x : ↥(pullback (schemeUniverseLiftMap.{u, v} pY) s)) (W : Scheme.{max u v}) (i : W ⟶ pullback (schemeUniverseLiftMap.{u, v} pY) s), IsOpenImmersion i → IsClosedImmersion i → Set.range i = connectedComponent x → _root_.IsConnected (Set.range i) → IsProper (i ≫ pullback.snd (schemeUniverseLiftMap.{u, v} pY) s) → ¬ (Set.range (i ≫ pullback.map (schemeUniverseLiftMap.{u, v} pY) s (schemeUniverseLiftMap.{u, v} pX) s (schemeUniverseLiftMap.{u, v} g) (𝟙 _) (𝟙 _) (by simp only [Category.comp_id] rw [← schemeUniverseLiftMap_comp, hg]) (by simp))).Subsingleton) ∧ (∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ schemeUniverseLift.{u, v} T) (C : Scheme.{max u v}) (i : C ⟶ pullback (schemeUniverseLiftMap.{u, v} pY) s), IsClosedImmersion i → Set.range i ∈ irreducibleComponents (↥(pullback (schemeUniverseLiftMap.{u, v} pY) s)) → (∀ D : Set (↥(pullback (schemeUniverseLiftMap.{u, v} pY) s)), D ∈ irreducibleComponents (↥(pullback (schemeUniverseLiftMap.{u, v} pY) s)) → D ≠ Set.range i → Disjoint D (Set.range i)) → IsProper (i ≫ pullback.snd (schemeUniverseLiftMap.{u, v} pY) s) → ¬ (Set.range (i ≫ pullback.map (schemeUniverseLiftMap.{u, v} pY) s (schemeUniverseLiftMap.{u, v} pX) s (schemeUniverseLiftMap.{u, v} g) (𝟙 _) (𝟙 _) (by simp only [Category.comp_id] rw [← schemeUniverseLiftMap_comp, hg]) (by simp))).Subsingleton)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Keeps T, X, Y in Scheme.{u}; geometric fields and component schemes may lie in max u v. Uses the explicit canonical affine-colimit universe enlargement in def-trf-scheme-universe-enlargement, rather than treating a fixed Scheme.{u} as a Scheme.{max u v}."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2b1049a0a",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source, Lean modules, helper construction, report sections, edge cases, route-pivot compliance, and per-file scompile evidence; no substantive or mechanical defects found."
  }
 }

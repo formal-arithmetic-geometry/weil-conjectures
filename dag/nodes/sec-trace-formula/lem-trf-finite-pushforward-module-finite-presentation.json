@@ -245,5 +245,23 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-759a69edc (reviewer sub-agent of L); spot-checked: Read the full item, new node, unit/chapter route, cited DAG statements, and Stacks Tags 057T, 05B4, 05B8, 0564, 01PC, and 00EA. All hypotheses, stalk scalar actions, edge cases, duplicates, searches, and route constraints check out; no repair is needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePushforwardModuleFinitePresentation",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finitePresentation_near_and_stalk_iff_pushforward_of_singleton_fibre",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePushforwardModuleFinitePresentation.lean",
+  "statement": "theorem finitePresentation_near_and_stalk_iff_pushforward_of_singleton_fibre {T U : Scheme.{u}} (p : T ⟶ U) [IsFinite p] [LocallyOfFinitePresentation p] (t : T) (_hfibre : p ⁻¹' ({p t} : Set U) = ({t} : Set T)) (M : T.Modules) [M.IsQuasicoherent] : ((∃ W : T.Opens, t ∈ W ∧ (M.over W).IsFinitePresentation) ↔ ∃ V : U.Opens, p t ∈ V ∧ (((pushforward p).obj M).over V).IsFinitePresentation) ∧ (Module.FinitePresentation (T.presheaf.stalk t) ((RingedSpace.moduleStalkFunctor T.toRingedSpace t).obj M) ↔ Module.FinitePresentation (U.presheaf.stalk (p t)) ((RingedSpace.moduleStalkFunctor U.toRingedSpace (p t)).obj ((pushforward p).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cd07c00bb",
+  "group": "Q102",
+  "result": "fix",
+  "note": "Statement and dependencies match the source; per-file compilation passed cleanly. Repaired the H11 second-reading placeholder with a complete replacement report under fixes/. Full checks and findings are recorded in review.md; snapshot and branch head unchanged."
  }
 }

@@ -253,7 +253,8 @@
   "lem-weil-pbc-etale-inverse-image-restriction",
   "def-weil-etale-morphism",
   "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-inverse-image-composition",
+  "def-sbc-derived-localization-comparison-data"
  ],
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
@@ -302,5 +303,28 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-b2ba06397 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, every cited statement, the parent sbc-lem-etale-locality, unit sk-def-bc, and Stacks 0EZR (etale-cohomology.tex l.16307-16370), 0D6G (sites-cohomology.tex l.4374) and 07A7. The statement keeps full generality: unbounded K in D(T_et) with Z coefficients, arbitrary f_U with fa=bf_U, every integer q, and no added qcqs, torsion or boundedness assumption. Its base-change arrow is exactly the one of sbc-def-base-change-map (including the blueprint_update) at Lambda=Z, which is the Stacks map f^{-1}Rg_*K->Rh_*e^{-1}K. Step 1 checked: the slice node applies to g localized at B (giving T_B) and to h localized at U (giving Y_U), and Y_U = U x_S T = U x_B T_B. Step 2 checked: it compares six length-3 paths from Y_U to S, which reduce to each other by associativity of the unit-normalized comparisons; its descent to D uses clause (2) of the localization universal property. Steps 4, 5 and 6 recomputed by hand: the restricted global arrow and the local arrow have the same transpose t_U o h_U^{-1}(C_L^D), so they are equal by the adjunction bijection, and step 7 passes to H^q for every q. One identification is implicit in step 3, the slice node's left comparison with the inverse-image comparison l; it is forced by unit/counit compatibility, so not a fault. The underived arrow-localization node and the bounded-below exchange nodes are not duplicates. The item is a strict sub-lemma cited by step 6 of its parent, not a restatement. The dependency closure has no cycle. Batch-5 check: lem-trf-adjoint-composition-coherence is a Mathlib leaf of pure category theory (CategoryTheory.Adjunction.leftAdjointCompIso_assoc, CompositionIso.lean:170-184, read). It has no proof deps, and it is the only sec-trace-formula or sec-poincare-duality node in the item's closure. Neither assumption leaf gives a coherence law for adjunctions, so it is genuinely outside both assumed statements and the flag is no reason to return. I accept the three declared tool uses (etale inverse image = restriction, inverse-image composition, ringed derived slice localization). The other off-unit citations are generic, closed in slopmaster2, or Mathlib leaves; under the 2026-10-16 rule they are recorded, not refused. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeArrowLocalization",
+  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeArrow_localization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.restrictedDerivedCohomologyArrow",
+   "AlgebraicGeometry.Etale.derivedBaseChangeArrow_localization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeArrowLocalization.lean",
+  "statement": "theorem derivedBaseChangeArrow_localization {X Y S T U B : Scheme.{u}} {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S} (sq : ChosenCartesianSquare h e f g) {a : U ⟶ X} [Etale a] {b : B ⟶ S} [Etale b] {fU : U ⟶ B} (fac : a ≫ f = fU ≫ b) : IsIso (derivedLeftComparison (g := g) a b fU fac) ∧ IsIso (derivedRightComparison sq a b fU fac) ∧ (∀ K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}), D((a)^*[AddCommGrpCat.{u + 1}]).map (abelianDerivedBaseChangeArrow sq K) ≫ (derivedRightComparison sq a b fU fac).app K = (derivedLeftComparison (g := g) a b fU fac).app K ≫ abelianDerivedBaseChangeArrow (localSquare sq a b fU fac) (D((pullback.snd b g)^*[AddCommGrpCat.{u + 1}]).obj K)) ∧ (∀ (K L : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) (φ : K ⟶ L), (R((g)_*[AddCommGrpCat.{u + 1}]) ⋙ D((f)^*[AddCommGrpCat.{u + 1}]) ⋙ D((a)^*[AddCommGrpCat.{u + 1}])).map φ ≫ D((a)^*[AddCommGrpCat.{u + 1}]).map (abelianDerivedBaseChangeArrow sq L) ≫ (derivedRightComparison sq a b fU fac).app L = (D((a)^*[AddCommGrpCat.{u + 1}]).map (abelianDerivedBaseChangeArrow sq K) ≫ (derivedRightComparison sq a b fU fac).app K) ≫ (D((pullback.snd b g)^*[AddCommGrpCat.{u + 1}]) ⋙ D((localArrow sq a b fU fac)^*[AddCommGrpCat.{u + 1}]) ⋙ R((pullback.fst a h)_*[AddCommGrpCat.{u + 1}])).map φ) ∧ ∀ (K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) (q : ℤ), restrictedDerivedCohomologyArrow a q (abelianDerivedBaseChangeArrow sq K) ≫ (DerivedCategory.homologyFunctor (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) q).map ((derivedRightComparison sq a b fU fac).app K) = (DerivedCategory.homologyFunctor (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) q).map ((derivedLeftComparison (g := g) a b fU fac).app K) ≫ (DerivedCategory.homologyFunctor (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) q).map (abelianDerivedBaseChangeArrow (localSquare sq a b fU fac) (D((pullback.snd b g)^*[AddCommGrpCat.{u + 1}]).obj K))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical comparisons are constructed, not quantified as arbitrary isomorphisms. The IsIso clauses record the isomorphism assertions in the node. The equality, explicit naturality equation, and transported exact-restriction/cohomology equality retain arbitrary unbounded K and every integer q."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-163cb1acc",
+  "group": "NP",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical derived constructions, docstrings, route-pivot compliance, edge cases, report sections, and both per-file scompile checks verified; no findings."
  }
 }

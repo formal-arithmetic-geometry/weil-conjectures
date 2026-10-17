@@ -2,7 +2,7 @@
  "id": "lem-trf-rational-valuation-linear-residue",
  "kind": "statement",
  "title": "A linear rational coordinate with transcendental residue",
- "statement": "Let $K$ be a separably closed field [def-kun-separably-closed] and let $K(t)$ be the fraction field of the polynomial ring $K[t]$ in one indeterminate [def-weil-polynomial-ring, def-pc-field-extension]. Let $O\\subseteq K(t)$ be a valuation subring, let $R=O\\cap K$, and assume $\\operatorname{trdeg}_{\\kappa(R)}\\kappa(O)=1$ [def-kun-transcendence-degree]. Then there exist $a\\in K$ and $\\pi\\in K^\\times$ such that $z=(t-a)/\\pi\\in O^\\times$ and the residue $\\bar z\\in\\kappa(O)$ is transcendental over $\\kappa(R)$ (no nonzero polynomial over $\\kappa(R)$ vanishes on it). If $t\\in O$ and the prime $\\mathfrak m_O\\cap R[t]$ is maximal and contracts to $\\mathfrak m_R$, these choices can be made with $a\\in R$ and $0\\ne\\pi\\in\\mathfrak m_R$. Here a valuation subring $B$ of a field $F$ [def-weil-field] means a subring with fraction field $F$ such that, for every $z\\in F^\\times$, $z\\in B$ or $z^{-1}\\in B$. Its maximal ideal is $\\mathfrak m_B=B\\setminus B^\\times$ and its residue field is $\\kappa(B)=B/\\mathfrak m_B$ [def-weil-residue-field].",
+ "statement": "Let $K$ be a separably closed field [def-kun-separably-closed] and let $F$ be the fraction field of the polynomial ring $K[t]$ in one indeterminate [def-weil-polynomial-ring, def-pc-field-extension], with $t$ explicitly the image of the polynomial indeterminate under the chosen fraction-field map. Let $O\\subseteq F$ be a valuation subring, let $R=O\\cap K$, and assume $\\operatorname{trdeg}_{\\kappa(R)}\\kappa(O)=1$ [def-kun-transcendence-degree]. Then there exist $a\\in K$ and $\\pi\\in K^\\times$ such that $z=(t-a)/\\pi\\in O^\\times$ and the residue $\\bar z\\in\\kappa(O)$ is transcendental over $\\kappa(R)$ (no nonzero polynomial over $\\kappa(R)$ vanishes on it). If $t\\in O$ and the prime $\\mathfrak m_O\\cap R[t]$ is maximal and contracts to $\\mathfrak m_R$, these choices can be made with $a\\in R$ and $0\\ne\\pi\\in\\mathfrak m_R$. Here a valuation subring $B$ of a field $F$ [def-weil-field] means a subring with fraction field $F$ such that, for every $z\\in F^\\times$, $z\\in B$ or $z^{-1}\\in B$. Its maximal ideal is $\\mathfrak m_B=B\\setminus B^\\times$ and its residue field is $\\kappa(B)=B/\\mathfrak m_B$ [def-weil-residue-field].",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "Proposition 4.3.1, proof, second stage on p. 28: factorization, separable perturbation, and existence of a normalized linear function with transcendental residue, including integrality at a closed centre. Primary PDF read online; local archival copy WANTED. No Stacks tag states this exact result.",
@@ -190,5 +190,46 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-27d9454c2 (reviewer sub-agent of L); spot-checked: Read the required guidance, packet/report, unit/chapter route, item, all new nodes, cited DAG statements, and Temkin Proposition 4.3.1 at the cited passage. Checked hypotheses, closed-centre algebra, normalization, separable perturbation, Mathlib leaf, duplicates, edge cases, route restrictions, and long-step rule. Review written to review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.SecTraceFormula.RationalValuationLinearResidue",
+  "declaration": "WeilConjectures.rationalValuationLinearResidue",
+  "declarations": [
+   "WeilConjectures.rationalValuationClosedCentre"
+  ],
+  "file": "lean/Sheaf/SecTraceFormula/RationalValuationLinearResidue.lean",
+  "statement": "theorem rationalValuationLinearResidue (K : Type u) (F : Type v) [Field K] [IsSepClosed K] [Field F] [Algebra K F] [Algebra (Polynomial K) F] [IsFractionRing (Polynomial K) F] [IsScalarTower K (Polynomial K) F] (t : F) (hX : t = algebraMap (Polynomial K) F Polynomial.X) (O : ValuationSubring F) (htr : @Algebra.trdeg (IsLocalRing.ResidueField ((O.comap (algebraMap K F)))) (IsLocalRing.ResidueField O) _ _ (RingHom.toAlgebra ((O.comapResidueFieldMap (algebraMap K F)))) = 1) : (∃ (a : K) (π : Kˣ) (z : Oˣ), (z : F) = (t - algebraMap K F a) / algebraMap K F (π : K) ∧ ∀ (p : Polynomial (IsLocalRing.ResidueField ((O.comap (algebraMap K F))))), p ≠ 0 → Polynomial.eval₂ ((O.comapResidueFieldMap (algebraMap K F))) (IsLocalRing.residue O z) p ≠ 0) ∧ (∀ (ht : t ∈ O), rationalValuationClosedCentre K F O t ht → ∃ (a : (O.comap (algebraMap K F))) (π : (O.comap (algebraMap K F))), π ≠ 0 ∧ π ∈ IsLocalRing.maximalIdeal ((O.comap (algebraMap K F))) ∧ ∃ (z : Oˣ), (z : F) = (t - algebraMap K F (a : K)) / algebraMap K F (π : K) ∧ ∀ (p : Polynomial (IsLocalRing.ResidueField ((O.comap (algebraMap K F))))), p ≠ 0 → Polynomial.eval₂ ((O.comapResidueFieldMap (algebraMap K F))) (IsLocalRing.residue O z) p ≠ 0)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Maintainer mechanical repair: reuse the landed canonical valuation-comap residue interface; no duplicate restriction, inclusion, locality or residue map. Independent field universes; six-step proof docstring and available proof-dependency imports.",
+  "fixed_by": "NT-stage2-Codex-ccf68d8fa"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ccf68d8fa",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Review written to review.md; complete replacements in fixes/. Reused canonical valuation/residue helpers, expanded proof documentation, and generalized field universes. Both immutable and fixed modules compiled successfully. Mathematical clauses and citer audit pass; branch unchanged.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "Q15 stage 2",
+  "old_statement": "Let $K$ be a separably closed field [def-kun-separably-closed] and let $K(t)$ be the fraction field of the polynomial ring $K[t]$ in one indeterminate [def-weil-polynomial-ring, def-pc-field-extension]. Let $O\\subseteq K(t)$ be a valuation subring, let $R=O\\cap K$, and assume $\\operatorname{trdeg}_{\\kappa(R)}\\kappa(O)=1$ [def-kun-transcendence-degree]. Then there exist $a\\in K$ and $\\pi\\in K^\\times$ such that $z=(t-a)/\\pi\\in O^\\times$ and the residue $\\bar z\\in\\kappa(O)$ is transcendental over $\\kappa(R)$ (no nonzero polynomial over $\\kappa(R)$ vanishes on it). If $t\\in O$ and the prime $\\mathfrak m_O\\cap R[t]$ is maximal and contracts to $\\mathfrak m_R$, these choices can be made with $a\\in R$ and $0\\ne\\pi\\in\\mathfrak m_R$. Here a valuation subring $B$ of a field $F$ [def-weil-field] means a subring with fraction field $F$ such that, for every $z\\in F^\\times$, $z\\in B$ or $z^{-1}\\in B$. Its maximal ideal is $\\mathfrak m_B=B\\setminus B^\\times$ and its residue field is $\\kappa(B)=B/\\mathfrak m_B$ [def-weil-residue-field].",
+  "source": {
+   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+   "place": "Proposition 4.3.1, proof, second stage on p. 28, normalized linear coordinate and closed-centre paragraph"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-single-valuation-semistable-extraction",
+    "holds": true,
+    "note": "The cited normalized-coordinate application supplies the explicit polynomial indeterminate identification."
+   }
+  ],
+  "what": "The Lean rendering quantified an arbitrary t : F rather than identifying it with the image of Polynomial.X, and the closed-centre conclusion omitted membership π ∈ 𝔪_R, weakening 0 ≠ π ∈ 𝔪_R."
  }
 }
