@@ -49,6 +49,7 @@ noncomputable def isColimitOfFiltered (t : Cocone K)
           exact sub_eq_zero.2 hxy)
         refine ⟨k, f, ?_⟩
         rw [map_sub] at hf
-        exact sub_eq_zero.1 hf))
+        have h := sub_eq_zero.1 hf
+        exact h))
 
 end ModuleCat
