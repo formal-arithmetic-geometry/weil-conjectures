@@ -242,6 +242,16 @@ def main_stage3(argv: list[str]) -> int:
     for r in res:
         print(f"{r['file']}: compile+probe: {r['status']}" + (f" ({len(r['sorry'])} declaration(s) with sorry)" if r["status"] == "ok" else ""))
     fails += s3.probe_fails(D, res)
+    # Keep the worker-side preflight in lockstep with the batch landing gate.
+    # The landing gate enforces current policy for adopted source modules (for
+    # example, their public API must remain verbatim), while the historical
+    # stage3_delivery checks only the delivery format. Running it here makes a
+    # worker see the same refusal before pushing a branch.
+    import stage3_gate as sg
+    verdict, gate_reasons = sg.gate(D, group, item)
+    if verdict == "REFUSE":
+        for reason in gate_reasons:
+            fails.append(("c", "stage3 gate: " + reason))
     why = s3.classify(D, group, item)
     print("review class: " + ("AUTO" if not why else "CODEX: " + "; ".join(why)))
     if not fails:
