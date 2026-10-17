@@ -12,7 +12,8 @@
   "def-weil-pbc-associated-graded-ring",
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-module-tensor-product"
+  "def-weil-pbc-module-tensor-product",
+  "lem-pur-regular-sequence-graded-polynomial"
  ],
  "proof": [
   {
@@ -267,5 +268,24 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-3fd73e14a (reviewer sub-agent of L); spot-checked: Read the whole item, all 8 cited node statements and the sources. The statement is exactly Stacks 0CEP(1) (more-algebra.tex 7991-8012, label lemma-relative-regular-immersion-algebra, tag mapping verified) after renaming (A,B,A') to (R,A,R'), with quasi-regularity taken as the 061P polynomial-graded isomorphism for M=A (algebra.tex 16860-16893). Only A/J is assumed R-flat; nothing is added or weakened. The 8 steps expand the 0CEP proof correctly. Step 1: G_m is isomorphic to C^{S_m}, so it is flat (finite-product leaf). Steps 2-3: an explicit induction (base Q_1=C) with the flat-extension diagram chase, which I re-checked using the statement of the flat-quotient tensor-injectivity leaf and the flatness definition. Steps 4-5: the image of J^m tensor R' is J'^m and the map is injective, without assuming A or R' flat; m=1 gives C tensor R' = C'. Step 6: right exactness gives G_m tensor R' = J'^m/J'^{m+1}, C'-linearly. Steps 7-8: the degree-m map sends e_alpha to [f'^alpha], and degreewise bijectivity gives the algebra isomorphism. proof_deps is the union of the steps' uses. All cited nodes are definitions or Mathlib leaves (sk-thm-p1), so no tool_uses entry is needed and none was accepted. Edge cases checked: b=0; R=Z, A=Z[t], R'=Z/4; A=Z[t]xF_2 with f=(t,1) (A not flat); f=1. The counterexample R=A=Z, f=2, R'=F_2 shows the flatness hypothesis is necessary. The DAG has no duplicate: 00HM's other clause is lem-weil-pbc-flat-ses-kernel-flat, and the neighbouring nodes state different results. The delivery creates no new nodes. Mathlib has only the TODO at RegularSequence.lean:21. No SGA is used and no target or coefficient category is involved. The sk-prop-a1-kummer versus sk-prop-an unit binding is maintainer-owned and inherited, so it is not a fault of this delivery. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b19d1a5d",
+  "group": "NC",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0CEP(1)/061P clause by clause. Independent universes u,v,w; Algebra R A, Algebra R R'; f : Fin b → A (b=0 ok); only Module.Flat R (A ⧸ span(range f)) assumed; hypothesis and conclusion are bijectivity of the landed canonical map Ideal.regularSequenceGradedPolynomialMap (aeval to degree-one classes, degree-preserving, no regularity hypothesis, so bijective = graded algebra iso) for f and for f j ⊗ₜ 1 in A ⊗[R] R'. No extra flatness, Noetherian, finite-presentation or Nontrivial assumptions; zero rings and f=1 allowed. associatedGraded is the single recorded def (Sheaf module re-exports the WeilConjectures one). stmt_deps adds only the landed node lem-pur-regular-sequence-graded-polynomial (permitted); no statement_change; lean.statement verbatim. Only proof is sorry, no definitions; docstrings carry source place, blueprint tag and all 8 steps. nt_compile.py on snapshot: rc=0, no errors or warnings (1.5 s); a variant with a deliberately false example confirmed errors surface. Minor: two unused imports; worker report and NC second reading come from the same reconstructing agent (disclosed), and this review supplies the independent reading."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiRegularFlatQuotientBaseChange",
+  "declaration": "Ideal.quasiRegular_flatQuotient_baseChange",
+  "file": "lean/Sheaf/RingTheory/QuasiRegularFlatQuotientBaseChange.lean",
+  "statement": "theorem quasiRegular_flatQuotient_baseChange {R : Type u} {A : Type v} {R' : Type w} [CommRing R] [CommRing A] [CommRing R'] [Algebra R A] [Algebra R R'] {b : ℕ} (f : Fin b → A) [Module.Flat R (A ⧸ Ideal.span (Set.range f))] (hf : Function.Bijective (regularSequenceGradedPolynomialMap f)) : Function.Bijective (regularSequenceGradedPolynomialMap (fun j ↦ f j ⊗ₜ[R] (1 : R')))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed canonical polynomial map, which accepts every finite sequence without a regularity hypothesis. Bijectivity of this fixed degree-preserving algebra homomorphism is the canonical graded-algebra isomorphism condition."
  }
 }

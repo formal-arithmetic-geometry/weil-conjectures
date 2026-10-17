@@ -11,7 +11,8 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-ind-kappa-presentability",
-  "def-cbc-enhanced-cartesian-fibration"
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-accessible-compact-slice-density"
  ],
  "proof": [
   {
@@ -249,5 +250,35 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-97dcec667 (reviewer sub-agent of L); spot-checked: FIX: the item and new node are mathematically correct and the DAG is acyclic. One B3 fault fixed: the item statement used Cat_∞ without citing a definition node; added [def-cbc-enhanced-cartesian-fibration] to the statement and stmt_deps (fixes/dag/nodes/sec-six-functors/lem-coef-compact-model-pr-duality.json), with no mathematical change. Graph and route: all 15 cited nodes exist and are unmerged. The item is not in the closure of its own dependencies (558 nodes); the draft cycle through lem-coef-presentable-cartesian-fibration is gone. Every cited statement is in unit sk-prop-sf-biduality-general apart from the definition def-cbc-enhanced-diagrams-cones, so no tool_uses are needed. The parent lem-coef-small-right-adjoint-diagram-compact-model uses clauses (1)-(3) in steps 2 and 4 exactly as stated. Statement against HTT: (1) is HTT 5.5.7.2, (2) is HTT 5.5.3.4 at rank λ, (3) is HTT 5.5.7.8/5.5.7.10. The λ-uncountable hypothesis takes the place of HTT's idempotent completeness (Remark 5.5.7.9, Cor. 4.4.5.16), so nothing is weakened. Steps: Step 1 has all hypotheses of stage factorization, size calculus and compact-small-colimits, including the empty colimit. Step 2 meets the ind-kappa-extension hypotheses, and its Yoneda detection uses no large limit. Step 3 is correct in both directions. Step 4 is HTT 5.2.2.5 written out, with variance and fibers over the same Map_S(t,v) checked. Step 5 is HTT 5.5.3.4's Yoneda argument, and natural equivalences stay in the subcategory. Step 6 uses countable < λ and the new lemma. Steps 7 and 8 restrict and extend correctly; θ is fully faithful by steps 2 and 7, essentially surjective by step 6, and its quasi-inverse comes from full-essential-image. New node lem-coef-infinity-retract-colimit: true by HTT 4.4.5.7, 4.4.5.12 and 4.4.5.14. The coherent idempotent lifts along the full embedding; Idem has one nondegenerate simplex per dimension, so it is countable, and its preserved colimit is x. It holds for identity and terminal cases and fails without the preservation hypothesis (free modules inside all modules). It is statement-only, self-contained and smaller than the item, not a clause restatement. DAG grep for idempotent, retract, HTT 4.4.5 and 5.2.2.5 found no duplicate (nearest: lem-countable-coproducts-idempotent-complete, the size calculus, stage factorization, accessible-ind-colimit-extension, compact-generated-filtered-hull, compact-pushout-retract-descent). Mathlib hits are ordinary-category only, so it is not a leaf. Not split-owned, for the maintainer: the item's source URL host is a typo, math.ias.harvard.edu instead of www.math.ias.edu. HTT is not archived locally (WANTED); I read it from my own knowledge of the cited sections.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1651d2c4c",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Read the node, all 5 stmt_deps and their modules, the reused helpers (SmallRightAdjointDiagramCompactModel compactRex/CompactIndModel/PreservesKappaFiltered, CoherentAdjunction, compactObjects, indKappa, Yoneda.base), the module and the report, against HTT 5.5.7.2, 5.5.2.9(1), 5.5.3.1-4 and 5.5.7.7-10. All clauses are rendered exactly: PrL/PrR objects presentable and κ-accessible, the PrL/PrR arrow conditions on all mapping simplices, (1) biconditional with correct adjunction orientation plus separate right-adjoint existence, (2) PrL.op→PrR functor equivalence that is the identity on objects with transported right adjoints on edges (the diagram corollary follows by postcomposition), (3) ind/compact quasi-inverses with indKappa models, filtered-extension normalization, compact-object models onto compactObjects, restrictions and the Yoneda identification. Uncountable regular κ; universe v free; empty shapes handled correctly. Node changed only in lean plus a landed stmt_dep (accessible-compact-slice-density; accepted by the STMT_DEPS MAY GAIN LANDED NODES rule; acyclic). lean.statement verbatim. No hollow defs; only sorry is the theorem; docstrings carry the source, blueprint id and 8 proof steps; lines ≤100; no name clashes. nt_compile.py with the local side overlay: clean, 4.7 s. Non-blocking: parent-helper reuse means the parent's stage-3 proof import would close an import cycle (left out per §3.7; helpers should move to a shared module at stage 3); CoherentAdjunction's owning node could be added to stmt_deps; PreservesKappaFiltered is inlined in PrRSubcomplex."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompactModelPrDuality",
+  "declaration": "SSet.Presentability.compact_model_pr_duality",
+  "declarations": [
+   "SSet.Presentability.PreservesKappaCompactObjects",
+   "SSet.Presentability.PrLSubcomplex",
+   "SSet.Presentability.PrL",
+   "SSet.Presentability.PrRSubcomplex",
+   "SSet.Presentability.PrR",
+   "SSet.Presentability.PrAdjointDuality",
+   "SSet.Presentability.compactRexDiagramArrow",
+   "SSet.Presentability.PrCompactModelDuality",
+   "SSet.Presentability.compact_model_pr_duality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CompactModelPrDuality.lean",
+  "statement": "theorem compact_model_pr_duality (κ : Cardinal.{u}) (hκ : κ.IsRegular) (hκu : Cardinal.aleph0 < κ) : (∀ (C D : SSet.{max (u + 1) v}) [Quasicategory C] [Quasicategory D], @IsPresentable.{u, v} C _ → @IsPresentable.{u, v} D _ → IsKappaAccessible C κ → IsKappaAccessible D κ → (∀ (L : C ⟶ D) (R : D ⟶ C), Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L R) → (PreservesKappaCompactObjects κ L ↔ PreservesKappaFiltered κ R)) ∧ (∀ L : C ⟶ D, PreservesColimitsIn L (fun I _ _ ↦ IsSmall.{u, max (u + 1) v} I) → ∃ R : D ⟶ C, Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L R))) ∧ Nonempty (PrAdjointDuality.{u, v} κ) ∧ Nonempty (PrCompactModelDuality.{u, v} κ)",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading repaired fixed-rank accessibility, independent adjoint existence, normalized adjoint reversal and compact/Ind quasi-inverses with Yoneda, extension and restriction comparisons. Existing compactRex and CompactIndModel helpers are reused, and compactObjects is imported from the landed density node. No natural statement correction."
  }
 }

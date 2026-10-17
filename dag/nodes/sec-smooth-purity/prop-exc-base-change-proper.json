@@ -348,5 +348,35 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-e12671fb2 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, current blueprint/unit route, report, and source locations. Verified hypotheses, arbitrary opens, unbounded pro-etale scope, canonical mate normalization, K-injective and finite-CD arguments, relative etale-origin clause, duplicates, Mathlib searches, and edge cases. Review written to review.md; no Lean/build/git/ssh/live project access used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac5fd87e0",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Delivery adds only ProperExceptionalOpenBaseChange.lean and the node's lean record (statement unchanged vs side clone). Clause-by-clause match: datum clause has the node's hypotheses (positive A_{E,n}, S-base data, IsProper f, any compactification c with datum D, any open g, Mathlib pullback with fst=g', snd=f'); Rf^x = D.rightAdjoint (ofIsProper f) with the adjunction transported along the published identity-open isomorphism; Gamma is the canonical open transpose of inverse derived sectionwise restriction (node Step 3 proves it equals the K-injective map); conclusion IsIso Gamma, exists H with Rf'_* -| H, and IsIso beta_K for all unbounded K, beta built from the node's two transposes in the node's order. Independent clause: FiniteFieldDatum, l != p, finite type over k, proper f, any open g, K in the recorded witnessed etale-origin category (all bounded-below origins), moved to fixed scalars by the published finiteCoefficientRealization equivalence, conclusion IsIso of the recorded sfFiniteExceptionalOpenComparison at ofIsProper f; no ambient datum. Edge cases (empty or non-qc opens, n+1=1, universes) covered. No duplicate: SfOpenExceptionalBaseChange is the citer's different statement. lean.statement is verbatim in the file; all 9 declarations present with source and blueprint docstrings; no hollow defs; theorems are sorry. nt_compile.py exit 0, no errors or warnings (warn.sorry=false), 5.6 s. No findings requiring correction."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperExceptionalOpenBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.sfProperExceptionalOpenBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfProperSupportNormalization",
+   "AlgebraicGeometry.Scheme.sfProperAmbientAdjunction",
+   "AlgebraicGeometry.Scheme.sfProperOpenPullbackRestriction",
+   "AlgebraicGeometry.Scheme.sfProperOpenDerivedRestriction",
+   "AlgebraicGeometry.Scheme.sfProperOpenDerivedComparison",
+   "AlgebraicGeometry.Scheme.sfProperExceptionalOpenComparison",
+   "AlgebraicGeometry.Scheme.sfProperExceptionalOpenBaseChange",
+   "AlgebraicGeometry.ProEtale.sfProperEtaleOriginFixedForgetful",
+   "AlgebraicGeometry.ProEtale.sfProperFiniteExceptionalOpenBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperExceptionalOpenBaseChange.lean",
+  "statement": "theorem sfProperExceptionalOpenBaseChange (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (S X Y : Scheme.{u}) [X.Over S] [Y.Over S] (_hS : ∀ x : S, IsUnit (l : S.presheaf.stalk x)) [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)] [LocallyOfFiniteType (Y ↘ S)] [QuasiCompact (Y ↘ S)] (f : X ⟶ Y) [f.IsOver S] [IsProper f] (c : Compactification f) (D : SfAmbientExceptionalRightAdjointDatum (Padic.coefficientExtensionRing l E (n + 1)) f c) {Y' : Scheme.{u}} (g : Y' ⟶ Y) [IsOpenImmersion g] : IsIso (sfProperOpenDerivedComparison (Padic.coefficientExtensionRing l E (n + 1)) (pullback.snd f g) (pullback.fst f g) g f (IsPullback.of_hasPullback f g).flip) ∧ ∃ H : proEtaleDerivedCategory Y' (Padic.coefficientExtensionRing l E (n + 1)) ⥤ proEtaleDerivedCategory (pullback f g) (Padic.coefficientExtensionRing l E (n + 1)), ∃ adj : proEtaleConstantDerivedDirectImage (pullback.snd f g) (Padic.coefficientExtensionRing l E (n + 1)) ⊣ H, ∀ K : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E (n + 1)), IsIso (sfProperExceptionalOpenComparison (Padic.coefficientExtensionRing l E (n + 1)) (pullback.snd f g) (pullback.fst f g) g f (IsPullback.of_hasPullback f g).flip D H adj K)",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Two independent statements: sfProperExceptionalOpenBaseChange is the optional ambient unbounded clause, and AlgebraicGeometry.ProEtale.sfProperFiniteExceptionalOpenBaseChange is the finite-field bounded-below etale-origin clause. The other declarations construct the proper normalization, canonical support and double-transpose maps, and the canonical coefficient realization of the recorded etale-origin category. No mathematical statement change. Second reading replaces file-local topology instances by explicit bottom-topology and discreteness arguments; the mathematical statement is unchanged."
  }
 }
