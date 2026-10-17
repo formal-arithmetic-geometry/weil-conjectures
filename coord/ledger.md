@@ -15747,3 +15747,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:10 L: merged deliver/E3/WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal (stage 3; reviewer PASS; after a return; landing 20261017T011040-L-3883286 (proof); batch 20261017T011037; modules 1; new nodes 0)
 - 01:10 L: merged deliver/K2/Sheaf.AlgebraicGeometry.CoherentStalkMapExtends (stage 3; reviewer PASS; after a return; landing 20261017T011041-L-3883422 (proof); batch 20261017T011037; modules 1; new nodes 0)
 - 01:10 L: merged deliver/M1/Sheaf.AlgebraicGeometry.TorsionLocalModelRestriction (stage 3; reviewer PASS; after a return; landing 20261017T011041-L-3883533 (proof); batch 20261017T011037; modules 1; new nodes 0)
+- 01:30 L: returned deliver/M1/Sheaf.Paper.FiniteDiscreteEncodedPresentation (reviewer RETURN: (the landing tools, head ff5220863) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
