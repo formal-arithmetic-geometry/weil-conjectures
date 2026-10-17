@@ -3440,6 +3440,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.De
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Ideal
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.RankIdempotent
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.LinearAlgebra.PiTensorProduct.Basic
@@ -4367,6 +4368,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Retract
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkIhomDual
