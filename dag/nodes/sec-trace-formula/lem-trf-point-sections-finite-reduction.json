@@ -355,5 +355,52 @@
   "from_unit": "sk-prop-trace-adic",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfd67ebcc",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read the node, all 8 statement dependencies and their records, the source place (prop-trf-adic Proof (1)) and both citers' uses, and the full module. Every hypothesis and clause matches: an arbitrary IsAlgClosed k with the recorded small pro-etale site (u+1,u); pointFiniteSections (the dependency's pointModuleSections at id_t plus restriction along the canonical constant-section map); IsUnit l; FiniteDimensional E over Q_l with coefficientExtensionRing; constantSheaf and the Ideal.Quotient.factor map; the recorded derivedChangeOfRingsIndependentCoefficients and exists_derivedTensor_second_factor_functor (one fixed witness each, counits kept); n>=j>=1; t-structure minus domain with preservation stated for both reductions; one natural iso family on the full bounded-above subcategory in D(A_j). Unit and successive compatibility are encoded by the canonical flat-model normalization (generator formula b(x)(c(x)x) -> bc.[x], plus the counit square), which determines e uniquely since P and Gamma(P) are K-flat and every N has such a model; accepted, non-blocking. Edge cases j=n, j=1, N=0, no lower bound, n=0 excluded by convention; k and E share universe u (inherited from pointFiniteSections, harmless). Gates: no hollow defs, only the theorem is sorry, docstrings with source/blueprint and 8 proof steps, lines <=100, lean.statement verbatim, 27 declarations present, only the item's lean field changed, report has Worker report and Second reading by NO. nt_compile.py: 19.9 s, exit 0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSectionsFiniteReduction",
+  "declaration": "WeilConjectures.point_sections_finite_reduction",
+  "declarations": [
+   "WeilConjectures.pointFiniteReductionRingSheaf",
+   "WeilConjectures.pointFiniteReductionRingMap",
+   "WeilConjectures.pointFiniteReductionModuleTensor",
+   "WeilConjectures.pointFiniteReductionSections",
+   "WeilConjectures.pointFiniteReductionModules",
+   "WeilConjectures.pointFiniteReductionSheaves",
+   "WeilConjectures.pointFiniteReductionSheafMap",
+   "WeilConjectures.pointFiniteReductionSheafExistence",
+   "WeilConjectures.pointFiniteReductionSheafExtension",
+   "WeilConjectures.pointFiniteReductionSheafTensor",
+   "WeilConjectures.pointFiniteReductionSheafCounit",
+   "WeilConjectures.pointFiniteReductionCoefficientComplex",
+   "WeilConjectures.pointFiniteReductionComplexTensor",
+   "WeilConjectures.pointFiniteReductionModuleCounit",
+   "WeilConjectures.pointFiniteReductionSheafComplexTensor",
+   "WeilConjectures.pointFiniteReductionSectionComplex",
+   "WeilConjectures.pointFiniteReductionTensorGenerator",
+   "WeilConjectures.pointFiniteReductionSectionGenerator",
+   "WeilConjectures.pointFiniteReductionSectionFactors",
+   "WeilConjectures.pointFiniteReductionBoundedAbove",
+   "WeilConjectures.pointFiniteReductionSiteSmall",
+   "WeilConjectures.pointFiniteReductionRingSheafify",
+   "WeilConjectures.pointFiniteReductionGroupSheafify",
+   "WeilConjectures.pointFiniteReductionLocalBijections",
+   "WeilConjectures.pointFiniteReductionSectionsLimits",
+   "WeilConjectures.pointFiniteReductionSectionsColimits",
+   "WeilConjectures.pointFiniteReductionSheafExtensionAdditive"
+  ],
+  "file": "lean/Sheaf/Paper/PointSectionsFiniteReduction.lean",
+  "statement": "theorem point_sections_finite_reduction (_hl : IsUnit (l : k)) : ∃ e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n), (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅ (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j, ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n), (∀ N : (pointFiniteReductionBoundedAbove k l E n).FullSubcategory, pointFiniteReductionBoundedAbove k l E j ((pointFiniteReductionSheafTensor k l E n j hjn).obj N.obj) ∧ ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((pointFiniteReductionModuleTensor l E n j hjn).obj ((pointFiniteReductionSections k l E n).obj N.obj)))) ∧ ∀ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ) (_hbound : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero (P.X q)) (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (R := pointFiniteReductionRingSheaf k l E n) (P.X q)), ∃ hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P), ∃ q : (pointFiniteReductionComplexTensor l E n j hjn).obj ((pointFiniteReductionSectionComplex k l E n).obj P) ≅ (pointFiniteReductionSectionComplex k l E j).obj ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P), (∀ (a : ℤ) (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j)) (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj (P.X a)), q.hom.f a (pointFiniteReductionTensorGenerator l E n j hjn ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x) = (b * c) • pointFiniteReductionSectionGenerator k l E n j hjn (P.X a) x) ∧ (pointFiniteReductionModuleTensor l E n j hjn).map (pointFiniteReductionSectionFactors k l E n P).hom ≫ (pointFiniteReductionModuleCounit l E n j hjn).app ((pointFiniteReductionSectionComplex k l E n).obj P) ≫ DerivedCategory.Q.map q.hom = (e n j hn hj hjn).hom.app ⟨DerivedCategory.Q.obj P, hP⟩ ≫ (pointFiniteReductionSections k l E j).map (pointFiniteReductionSheafCounit k l E n j hjn P) ≫ (pointFiniteReductionSectionFactors k l E j ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
