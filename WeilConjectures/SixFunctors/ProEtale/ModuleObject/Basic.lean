@@ -19,10 +19,6 @@ import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
-import WeilConjectures.CategoryTheory.SiteCoveringAxioms
-import WeilConjectures.CategoryTheory.SiteInverseImageTensor
-import WeilConjectures.RingTheory.IndEtaleStability
-import WeilConjectures.RingTheory.IndPrincipalZariski
 
 /-!
 
