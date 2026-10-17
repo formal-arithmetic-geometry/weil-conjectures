@@ -18,43 +18,128 @@
   "def-weil-irreducible-components",
   "def-sc-normalization",
   "def-sc-genus",
-  "def-pc-euler-characteristic"
+  "def-pc-euler-characteristic",
+  "lem-trf-nodal-normalization-quotient"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\nu:\\widetilde B=\\coprod_i\\widetilde B_i\\to B$ be the normalization map. The supporting normalization-quotient lemma [lem-trf-nodal-normalization-quotient] supplies a short exact sequence $0\\to\\mathcal O_B\\to\\nu_*\\mathcal O_{\\widetilde B}\\to Q\\to0$ of coherent modules and gives $\\chi(B,Q)=e$.",
+   "uses": [
+    "lem-trf-nodal-normalization-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R and curves.tex Tag 0CBW"
+   }
+  },
+  {
+   "text": "Apply Euler additivity [lem-pc-euler-additive] to Step 1. Since a finite morphism is affine [def-weil-finite-integral-morphism], the cohomology edge isomorphisms [lem-weil-pbc-affine-morphism-cohomology-edge] for $\\nu$ identify $H^j(B,\\nu_*\\mathcal O_{\\widetilde B})$ with $H^j(\\widetilde B,\\mathcal O_{\\widetilde B})$ in every degree, linearly over $k$. Taking alternating dimensions gives $\\chi(B)=\\chi(\\widetilde B)-e$. For the open-and-closed component inclusions $j_i:\\widetilde B_i\\to\\widetilde B$, the structure sheaf is $\\bigoplus_i j_{i,*}\\mathcal O_{\\widetilde B_i}$. Apply Euler additivity to its finite split direct-sum filtration and the same affine edge isomorphisms to the finite morphisms $j_i$. Thus $\\chi(B)=\\sum_i\\chi(\\widetilde B_i)-e$.",
+   "uses": [
+    "lem-pc-euler-additive",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-cohomology-edge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AA (lemma-euler-characteristic-additive); coherent.tex Tag 089W (lemma-relative-affine-cohomology); morphisms.tex Tag 01WH (definition-integral)."
+   }
+  },
+  {
+   "text": "Each $\\widetilde B_i$ is proper over $k$, hence of finite type, and is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its dimension is one. Therefore [lem-sc-noetherian-cohomology-above-dimension] gives $H^j(\\widetilde B_i,\\mathcal O)=0$ for every $j\\ge2$. For the smooth proper connected curve $\\widetilde B_i$, [lem-sc-global-functions] gives $H^0(\\widetilde B_i,\\mathcal O)=k$, and [def-sc-genus] gives $\\dim_kH^1(\\widetilde B_i,\\mathcal O)=g_i$. The Euler sum [def-pc-euler-characteristic] consequently has exactly the degree-zero and degree-one contributions: $\\chi(\\widetilde B_i)=1-g_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sc-global-functions",
+    "def-sc-genus",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY7 (definition-genus); varieties.tex Tag 0BUG (lemma-proper-geometrically-reduced-global-sections); cohomology.tex Tag 02UZ (proposition-vanishing-Noetherian); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Substituting the component values into Step 2 yields $\\chi(B)=\\sum_i(1-g_i)-e=v-e-\\sum_{i=1}^v g_i$, as claimed. The formula also counts a self-node once because the supporting quotient lemma has one local quotient copy of $k$ for each singular point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Arithmetic substitution after Tags 0C1R and 0BY7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-euler-characteristic",
+  "def-sc-genus",
+  "def-weil-finite-integral-morphism",
+  "lem-pc-euler-additive",
+  "lem-sc-global-functions",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-trf-nodal-normalization-quotient",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C1R, 0AYT, 0BY7 and 08AA, with the split-node computation Tag 0CBW"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Euler characteristic of a proper connected nodal curve equals components minus nodes minus genera via normalization",
+   "query": "Euler characteristic of a proper connected nodal curve equals number of components minus nodes minus genera via normalization",
    "results": "Returned unrelated Weierstrass and incidence-algebra declarations; no nodal-curve Euler formula.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Normalization exact sequence for a proper nodal curve computes Euler characteristic",
-   "results": "Returned normalization API declarations only; no exact-sequence Euler formula.",
+   "query": "proper nodal curve Euler characteristic normalization components nodes genera",
+   "results": "Returned normalization and Weierstrass declarations; no nodal Euler formula.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "normalizationCoprodIso",
-   "results": "0 hits; unknown identifier normalizationCoprodIso.",
+   "query": "EulerChar normalization nodal",
+   "results": "0 hits; unknown identifier EulerChar.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "normalization.*Euler|Euler.*normalization|nodal.*genus AlgebraicGeometry",
+   "query": "nodal|normalization|Euler in Mathlib/AlgebraicGeometry",
+   "results": "Normalization API and elliptic Euler-factor files only; no nodal Euler formula.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization quotient at a split node has dimension one over an algebraically closed field",
+   "results": "Returned generic quotient, residue-field and normalization declarations; no split-node quotient theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "normalization, IsNode, EulerChar",
+   "results": "0 hits; unknown identifier normalization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*Euler|nodal.*genus|delta.*invariant in Mathlib/AlgebraicGeometry",
    "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-contraction-euler-defect",
@@ -84,5 +169,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-curve-normalization-euler",
+  "worker": "stage1",
+  "summary": "Normalization exact sequence and split-node quotient, followed by coherent Euler additivity, the existing affine-morphism cohomology edge isomorphism, explicit vanishing above dimension one, and the component genus formula. The unnecessary finite-pushforward Euler node is dropped; the item statement is unchanged.",
+  "blueprint": "Realizes the numerical normalization step in the local-term-locality semistable-modification branch, specifically the normalization exact sequence and the sum of component Euler characteristics.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Generic coherent Euler additivity for the normalization exact sequence and finite split direct sums; this does not replace a trace-unit step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Existing general affine cohomology comparison, applied to the finite normalization and component inclusions; replaces the unnecessary finite-Euler wrapper."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian finiteness implication for proper curves over a field."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Zariski cohomological dimension bound, specialized to the one-dimensional normalized components."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Generic structure-sheaf global-functions calculation for proper smooth connected curves over an algebraically closed field."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-euler-additive",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-global-functions"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q49-97611c337",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-97611c337 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, sources, and unit route in full. Corrected JSON and review.md supplied: replaced the unnecessary finite-Euler wrapper with the existing affine cohomology comparison, added the missing higher-cohomology vanishing citation, and recorded generic tool uses. Original statement preserved; edge cases and route-pivot exclusions checked.; 1 file(s) fixed by the reviewer"
  }
 }

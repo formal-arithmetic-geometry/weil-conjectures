@@ -1,0 +1,72 @@
+{
+ "id": "lem-trf-integral-support-weighted-initial-degree",
+ "kind": "statement",
+ "title": "A negative support weight obstructs integrality over a monoid algebra",
+ "statement": "Let $k$ be a field, let $H$ be a finitely generated torsion-free abelian group, let $P\\subseteq H$ be a submonoid, and let $w:H\\to\\mathbf Z$ be a group homomorphism with $w(p)\\ge0$ for every $p\\in P$. Let $x=\\sum_{g\\in S}c_ge^g\\in k[H]$ be nonzero with finite support. If some $g\\in S$ has $w(g)<0$, then $x$ is not integral over $k[P]$. Here $k[P]$ and $k[H]$ use the additive monoid and group-algebra conventions of [def-trf-fine-fan-blowup].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.2.9 and the monomial-basis normalization argument, printed p.104; the least-weight argument is expanded here."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.2.9, printed p.104; the least-weight obstruction is supplied explicitly by the agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "minimum additive weight of finite support in a finitely generated torsion-free group algebra is additive under multiplication",
+   "results": "Returned AddMonoidAlgebra.le_inf_support_mul and AddMonoidAlgebra.le_infDegree_mul; these give only an inequality, not the equality/non-cancellation needed for the obstruction.",
+   "date": "2026-10-18",
+   "verdict": "generalization: inequality only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra infDegree_mul exact",
+   "results": "0 hits; loogle reported unknown identifier infDegree_mul.",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "infDegree.*mul|support.*degree.*mul|initial in Mathlib/Algebra/MonoidAlgebra",
+   "results": "Mathlib/Algebra/MonoidAlgebra/Degree.lean:637 gives le_infDegree_mul; no equality or integral-obstruction theorem.",
+   "date": "2026-10-18",
+   "verdict": "generalization: inequality only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "weighted initial form product nonzero in a torsion free group algebra",
+   "results": "Returned AddMonoidAlgebra.le_inf_support_mul, MvPolynomial weighted-homogeneous declarations, and non-torsion weight APIs; none states the required group-algebra integral obstruction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-integral-support-saturation",
+  "date": "2026-10-18",
+  "group": "Q64"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The affine monoid algebra normalization argument in ILO Expose VIII, Lemma 3.2.9: compare the least weight of the support in a monic equation.",
+   "via": [
+    "lem-trf-integral-support-saturation",
+    "lem-trf-affine-monoid-algebra-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

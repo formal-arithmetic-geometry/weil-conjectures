@@ -12,41 +12,135 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-henselization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=A_{\\mathfrak p}^h$ and $H=B_{\\mathfrak q}^h$. The local map $A_{\\mathfrak p}\\to B_{\\mathfrak q}$ and the henselian-local structure on $H$ give, by the universal property in [def-weil-pbc-henselization-at-prime], the canonical local map $h:R\\to H$ over $A\\to B$; its residue-field map is the canonical map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$. Set $C=R\\otimes_A B$ and let $\\epsilon:C\\to\\kappa(\\mathfrak q)$ be induced by the residue map of $R$ and $B\\to\\kappa(\\mathfrak q)$; write $\\mathfrak n=\\ker\\epsilon$ and $D=C_{\\mathfrak n}$. The contraction of $\\mathfrak n$ to $B$ is $\\mathfrak q$, and its contraction to $R$ is the maximal ideal of $R$.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WP, proof setup; Tag 04GN/04GQ, henselization universal property and functorial map"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-quasi-finite-four-rings] to the square with original map $A\\to B$, base change $A\\to R$, and $C=R\\otimes_A B$. The tensor map $B\\otimes_A R\\to C$ is the symmetry isomorphism, so the surjectivity hypothesis holds; the contraction of $\\mathfrak n$ to $B$ is $\\mathfrak q$. Since $A\\to B$ is quasi-finite at $\\mathfrak q$ (hence of finite type by [def-weil-pbc-ring-map-quasi-finite-at-prime]), the conclusion is that $R\\to C$ is quasi-finite at $\\mathfrak n$.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-four-rings",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WP proof, first paragraph, using Tag 00PN (four-rings lemma)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselian-finite-type-product-decomposition] to the finite-type map $R\\to C$. It decomposes $C\\cong A_1\\times\\cdots\\times A_s\\times C_0$, with each $A_i$ local and finite over $R$, while $C_0$ is not quasi-finite over $R$ at primes over the maximal ideal. The prime $\\mathfrak n$ cannot lie on $C_0$ by Step 2, so it lies on some $A_i$. The corresponding prime of $A_i$ is maximal: its quotient is a finite-dimensional domain over the residue field of $R$, hence a field. Therefore $D=C_{\\mathfrak n}\\cong A_i$ is finite and local over $R$. By [lem-weil-pbc-finite-local-henselian], $D$ is henselian.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "lem-weil-pbc-quasi-finite-four-rings",
+    "lem-weil-pbc-finite-local-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WP proof, second paragraph, using Tags 04GJ and 04GH"
+   }
+  },
+  {
+   "text": "Both $D$ and $H$ are ind-etale over $B$. For $H$ this is [lem-trf-henselization-prime-ind-etale] applied to $(B,\\mathfrak q)$. For $D$, [lem-trf-henselization-prime-ind-etale] gives $A\\to R$ ind-etale; [lem-weil-pbc-ind-etale-stability] gives ind-etaleness after base change to $C$ and after composition with the localization $C\\to D$. Explicitly, $C_{\\mathfrak n}=\\varinjlim_{f\\notin\\mathfrak n}C_f$; the principal-localization clause of [lem-weil-pbc-etale-algebra-finite-presentation-localization] makes each $C\\to C_f$ etale of finite presentation, so this is an ind-etale presentation as in [def-weil-pbc-ind-etale-algebra].",
+   "uses": [
+    "lem-trf-henselization-prime-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WP proof, third paragraph; Tag 04GN property (2); Tag 00U2 localization and Tag 097K ind-etale composition"
+   }
+  },
+  {
+   "text": "The map $C\\to H$ given by $r\\otimes b\\mapsto h(r) b$ sends $\\mathfrak n$ into the maximal ideal of $H$, hence factors uniquely through a local $B$-algebra map $D\\to H$. Conversely, since $H$ is ind-etale over $B$, the henselian-local target $D$ and the identity residue map $\\kappa(\\mathfrak q)\\to\\kappa(\\mathfrak q)$ give by [lem-weil-pbc-map-into-henselian-colimit] a unique local $B$-algebra map $H\\to D$. The same lemma applied in the other direction gives uniqueness of $D\\to H$; both composites induce the identity on the common residue field and are therefore identities by uniqueness. Thus $D\\cong H$ compatibly with $R\\to H$.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WP proof, final uniqueness paragraph; Tags 08HQ and 08HR"
+   }
+  },
+  {
+   "text": "Finally, every element of $B\\setminus\\mathfrak q$ maps outside $\\mathfrak n$, so the localization $C_{\\mathfrak n}$ already inverts the denominators used to form $B_{\\mathfrak q}$. Since $R=A_{\\mathfrak p}^h$ is an $A_{\\mathfrak p}$-algebra, $C$ identifies with $R\\otimes_{A_{\\mathfrak p}}B$, and the universal properties of localization give a canonical isomorphism $D\\cong (R\\otimes_{A_{\\mathfrak p}}B_{\\mathfrak q})_{\\mathfrak q}$, where the displayed prime is the one induced by $\\mathfrak q$. Transporting the finite local map $R\\to D$ across $D\\cong H$ proves both assertions of the item.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WP proof, localization identification and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-finite-local-henselian",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-quasi-finite-four-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05WP, Lemma quasi-finite-henselization, proof; expanded using Tags 00PN, 04GJ, 04GH, 08HR and 097K"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For a quasi-finite ring map at a prime, the ordinary henselization of the target is the localization of the tensor product with the ordinary henselization of the source and the map is finite",
-   "results": "Algebra.QuasiFiniteAt, Algebra.QuasiFiniteAt.baseChange, Algebra.QuasiFinite.finite_fiber; no ordinary henselization comparison theorem.",
+   "query": "For a quasi-finite ring map at a prime, ordinary henselization of the target is the localization of the tensor product with the ordinary henselization of the source and the map is finite",
+   "results": "Algebra.QuasiFiniteAt; Algebra.QuasiFiniteAt.baseChange; RingHom.QuasiFinite.holdsForLocalizationAway; Algebra.QuasiFinite.finite_fiber; Algebra.instFiniteResidueFieldOfQuasiFiniteAt; no ordinary henselization comparison theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "HenselianLocalRing, IsLocalization, Module.Finite",
-   "results": "0 hits",
+   "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "henselization.*quasi-finite|quasi-finite.*henselization [subdirectory Mathlib/RingTheory]",
-   "results": "0 hits",
+   "query": "henselization.*quasi-finite|quasi-finite.*henselization [subdirectory RingTheory]",
+   "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "ordinary henselization under a quasi-finite local ring map",
-   "results": "RingHom.QuasiFinite, HenselianLocalRing.TFAE, Algebra.QuasiFinite.recOn; no ordinary henselization comparison theorem.",
+   "results": "RingHom.QuasiFinite; HenselianLocalRing.TFAE; Algebra.QuasiFinite.recOn; no ordinary henselization comparison theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-henselization-quotient-at-prime",
@@ -58,7 +152,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Theorem 6.3, quotient reduction to a normal domain: apply compatibility of henselization with quotients to the localized presentation.",
+   "place": "Historical auxiliary henselization chain below lem-trf-local-term-locality: Tag 05WP comparison of ordinary henselizations for a quasi-finite map, followed by the finite-over-henselian localization argument.",
    "via": [
     "lem-trf-henselization-quotient-at-prime",
     "lem-trf-henselizations-common-normal-cover",
@@ -67,5 +161,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-henselization-quasi-finite-ring",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 05WP and its cited four-rings, finite-over-henselian, henselization-functoriality and henselian uniqueness arguments. The imported statement is unchanged. The proof has six steps: construct the canonical local map and tensor localization; transfer quasi-finiteness by the four-rings lemma; isolate the finite local henselian factor; show both comparison rings are ind-etale over B; use residue-compatible henselian uniqueness to identify them; and identify the requested localization explicitly. No new nodes were needed because all non-elementary inputs already exist in the DAG.",
+  "blueprint": "Realizes the historical auxiliary henselization comparison chain below lem-trf-local-term-locality, specifically the Tag 05WP comparison used in the quotient/local-normal-domain reduction route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-four-rings",
+    "why": "Generic base-change transfer of quasi-finiteness; the trace unit has no replacement for this commutative-algebra square."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "why": "Generic finite-factor decomposition over a henselian local ring; used to extract the factor at the chosen prime."
+   },
+   {
+    "node": "lem-weil-pbc-finite-local-henselian",
+    "why": "Generic finite-local-over-henselian result; used to make the extracted localization henselian."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic ind-etale base-change and composition stability; used to compare the tensor localization with the henselization."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic residue-compatible uniqueness of maps from ind-etale colimits into henselian local rings."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "why": "Generic principal-localization etale presentation used to show the tensor localization is ind-etale."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "lem-weil-pbc-finite-local-henselian",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-3940657d0",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-3940657d0 (reviewer sub-agent of L); spot-checked: The proof and six steps are mathematically sound, with hypotheses, cited statements, edge cases, route, and tool uses checked. Repair the item source citation: it says Tag 05WR, but the ordinary quasi-finite henselization theorem is Tag 05WP; 05WR is the strict-henselization theorem. Corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-henselization-quasi-finite-ring.json.; 1 file(s) fixed by the reviewer"
  }
 }
