@@ -29,6 +29,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Reduction
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ReductionExtendScalars
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRingsPresheaf
@@ -2109,6 +2110,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalKFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -3914,6 +3916,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDualProper
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+public import WeilConjectures.SixFunctors.Etale.Derived.FiniteCoefficientChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
@@ -4062,6 +4065,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.PullbackIntTensorFamily
 public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalars
