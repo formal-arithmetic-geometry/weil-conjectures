@@ -29,7 +29,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
   "def-coef-infinity-relative-join",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-isofibration-exponentiation"
  ],
  "proof": [
   {
@@ -269,5 +270,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiberwiseRelativeJoin",
+  "declaration": "SSet.Enhanced.exists_fiberwise_relative_join_lift",
+  "file": "lean/Sheaf/CategoryTheory/FiberwiseRelativeJoin.lean",
+  "statement": "theorem exists_fiberwise_relative_join_lift {K C D B : SSet.{u}} [Quasicategory K] [Quasicategory C] [Quasicategory D] [Quasicategory B] (u : K ⟶ C) (p : D ⟶ B) (hu : cocartesianFibration u) (hp : IsIsofibration p) (f : K ⟶ D) (g : relativeJoin u (𝟙 C) ⟶ B) (compat : f ≫ p = relativeJoinInl u (𝟙 C) ≫ g) (local_lifts : ∀ c : C _⦋0⦌, ∃ v : rightJoinCone (relativeJoinFiber u c) ⟶ D, rightJoinConeInclusion _ ≫ v = pullback.fst u (SSet.yonedaEquiv.symm c) ≫ f ∧ v ≫ p = relativeJoinFiberCone u c ≫ g ∧ IsRelativeColimitDiagram p v) : ∃ F : relativeJoin u (𝟙 C) ⟶ D, relativeJoinInl u (𝟙 C) ≫ F = f ∧ F ≫ p = g ∧ ∀ c : C _⦋0⦌, IsRelativeColimitDiagram p (relativeJoinFiberCone u c ≫ F)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the recorded relative join, strict vertex fiber, canonical fiber-cone map, cocartesian fibration and relative colimit predicates. Adds the landed isofibration-exponentiation node to stmt_deps for its existing source-fixed IsIsofibration definition. No new notions or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa355a5cd",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read every clause of the node (Kerodon 02ZW (2)=>(1), 02ZU, 02ZP) against SSet.Enhanced.exists_fiberwise_relative_join_lift: quasicategory instances, cocartesianFibration u, IsIsofibration p, J = relativeJoin u (𝟙 C), exact equality compat, per-vertex local lifts on relativeJoinFiber (strict pullback) with exact restriction, base equality via relativeJoinFiberCone and IsRelativeColimitDiagram, conclusion with old-factor and base equalities and the p-colimit property on every fiber cone. Exact, with no extra hypotheses and no universe restriction. Edge cases (empty C/K/fibers, one-vertex base, repeated vertices) are covered. Node diff is only lean plus the landed stmt_dep lem-coef-infinity-isofibration-exponentiation (owns IsIsofibration; no cycle). lean.statement is verbatim. No definitions; only sorry; source/blueprint docstrings carry the 5-step plan; the proof-only Skeleton import is non-public. nt_compile.py --json on the snapshot module: rc=0, no errors or warnings. No findings."
  }
 }
