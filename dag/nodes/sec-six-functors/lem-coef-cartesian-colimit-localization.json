@@ -31,76 +31,126 @@
   "lem-coef-cocartesian-straightening",
   "lem-coef-infinity-functor-pushout"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Mark $E$ by its $p$-Cartesian edges, writing $E^{\\mathrm{Cart}}$ for this marked object. In the absolute marked model choose functorially a trivial cofibration $q_p:E^{\\mathrm{Cart}}\\to L_p^{\\natural}$ with fibrant target. Thus $L_p$ is a small quasicategory, $q_p$ sends Cartesian edges to equivalences, and for every quasicategory $T$ the definition of marked weak equivalence gives\n$$\\operatorname{Map}^{\\sharp}(L_p^{\\natural},T^{\\natural})\\simeq\\operatorname{Map}^{\\sharp}(E^{\\mathrm{Cart}},T^{\\natural}).$$\nHere $\\operatorname{Map}^{\\flat}(E^{\\mathrm{Cart}},T^{\\natural})$ is exactly the full quasicategory $H_p(T)=\\operatorname{Fun}_{\\mathrm{Cart}(p)}(E,T)$: an $n$-simplex is a map $E\\times\\Delta^n\\to T$ whose restriction at every vertex of $\\Delta^n$ inverts the marked edges. By [lem-coef-marked-anodyne-lifting-calculus], which also fixes the notation $\\operatorname{Map}^{\\flat}$, $\\operatorname{Map}^{\\flat}(E^{\\mathrm{Cart}},T^{\\natural})$ is a quasicategory and $\\operatorname{Map}^{\\sharp}(E^{\\mathrm{Cart}},T^{\\natural})$ is exactly its core. The same node says that $T^{\\natural}$ has the right lifting property against every marked-anodyne map; by the criterion of [lem-coef-relative-marked-anodyne-calculus] over $S=\\Delta^0$, $T^{\\natural}$ is therefore the natural marking of the Cartesian fibration $T\\to\\Delta^0$, so the Cartesian edges of $T\\to\\Delta^0$ are exactly the equivalences of $T$. Consequently the preceding equivalence is induced by actual restriction along $q_p$, and reads $\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(L_p,T)\\simeq H_p(T)^{\\simeq}$. Replacement and these tests can be formed in any larger universe; no size bound on $T$ beyond belonging to that universe is used.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.3.4, meaning of the absolute marked object in Corollary 3.3.4.3; explicit replacement and mapping-test expansion using the existing marked-model statements"
+   }
+  },
+  {
+   "text": "The pullback of $T\\to *$ along $B\\to *$ is the Cartesian fibration $B\\times T\\to B$; since the Cartesian edges of $T\\to\\Delta^0$ are exactly the equivalences (step 1, from [lem-coef-marked-anodyne-lifting-calculus] and the lifting criterion over $\\Delta^0$), its natural marking is $B^{\\sharp}\\times T^{\\natural}$ by the pullback-marking clause. Dual straightening identifies it with the constant diagram $\\Delta T$ on $B^{\\mathrm{op}}$: straightening over a point has value its fiber $T$, and base change is precomposition. A map $E\\to B\\times T$ over $B$ has the form $(p,h)$, and is marking-preserving exactly when $h$ inverts every $p$-Cartesian edge. This is an identity on the entire sharp mapping complexes, including all parameter simplices. Both relative objects are fibrant and cofibrant. The relative marked model and the model-localization mapping-space comparison therefore identify this complex with their mapping space in the infinity category of Cartesian fibrations over $B$. Apply the dual straightening equivalence on that mapping space to obtain, naturally in $T$,\n$$H_p(T)^{\\simeq}\\simeq\\operatorname{Map}_{\\operatorname{Fun}(B^{\\mathrm{op}},\\mathrm{Cat}_\\infty)}(F,\\Delta T).$$\nOnly Cartesian-edge-preserving maps, which are the morphisms in the stated straightening equivalence, were used; no assertion about arbitrary maps out of a Grothendieck construction is needed.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 3.3.4.2, straightening and the constant-diagram adjunction; mapping spaces spelled out instead of only the homotopy-category comparison"
+   }
+  },
+  {
+   "text": "Apply the preceding straightening comparison to the marked map $(p,q_p):E\\to B\\times L_p$. It gives a coherent cocone $\\lambda_p:F\\to\\Delta L_p$, whose leg at $b$ is $q_p|_{E_b}$ under $E_b\\simeq F(b)$. For $f:L_p\\to T$, functoriality of straightening takes $(p,fq_p)$ to $(\\Delta f)\\lambda_p$. Thus the composite of the equivalences in steps 1 and 2 is precisely the map\n$$\\operatorname{Map}(L_p,T)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(B^{\\mathrm{op}},\\mathrm{Cat}_\\infty)}(F,\\Delta T),\\qquad f\\longmapsto(\\Delta f)\\lambda_p.$$\nIt is an equivalence for every $T$. The cocone mapping-space criterion now says that $(L_p,\\lambda_p)$ is a colimiting cocone. Compare it with the stated colimit $(C_F,\\iota_F)$: the contractible category of initial cocones gives an equivalence $k_p:L_p\\simeq C_F$ together with $k_p\\lambda_p\\simeq\\iota_F$, unique with these coherent data up to contractible choice. Define $\\ell_p=k_pq_p$. Its fiber restrictions are therefore the specified colimit legs, with their full coherent cocone, rather than separately chosen pointwise identifications.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-functor-pushout",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.4.3 and proof of Proposition 3.3.4.2; direct universal-cocone argument expanding the straightening/constant-diagram adjunction"
+   }
+  },
+  {
+   "text": "We strengthen the core comparison of step 1 to the required full functor-category comparison. Fix $T$ and let $A$ be any quasicategory. The marked-product formula and the pointwise criterion for equivalences give natural identifications\n$$\\operatorname{Map}^{\\sharp}(A^{\\natural}\\times L_p^{\\natural},T^{\\natural})=\\operatorname{Fun}(A,\\operatorname{Fun}(L_p,T))^{\\simeq},$$\n$$\\operatorname{Map}^{\\sharp}(A^{\\natural}\\times E^{\\mathrm{Cart}},T^{\\natural})=\\operatorname{Fun}(A,H_p(T))^{\\simeq}.$$\nFor the second identity the marking condition is equivalent to the vertexwise condition defining $H_p(T)$: for an equivalence $a\\to a'$ in $A$ and a Cartesian $e:x\\to y$ in $E$, the product arrow factors, with its product composition simplex, through $(a,x)\\to(a,y)\\to(a',y)$. The first factor is inverted by that vertexwise condition and the second by functoriality on equivalences in $A$. Conversely take the $A$-arrow to be an identity. The parameter sharp simplices on both sides encode pointwise equivalences of transformations, by the cited pointwise criterion, so these are identifications on all simplices. Products with any marked object preserve absolute marked weak equivalences. Hence $A^{\\natural}\\times q_p$ is a weak equivalence, and testing against $T^{\\natural}$ shows that restriction $j:\\operatorname{Fun}(L_p,T)\\to H_p(T)$ induces an equivalence on mapping spaces out of every $A$ in $\\mathrm{Cat}_\\infty$. Explicitly take $A=H_p(T)$ to obtain $g$ and $jg\\simeq1$; take $A=\\operatorname{Fun}(L_p,T)$ and injectivity on components to deduce $gj\\simeq1$. Thus $j$ is an equivalence of quasicategories. Compose it with restriction along $k_p^{-1}$ to obtain the stated equivalence induced by $\\ell_p$. All noninvertible transformations and their mapping spaces are retained in these whole functor categories; the argument does not infer this merely from an equivalence of cores.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.4.3 interpreted as localization; full-functor strengthening via the marked cartesian product assertion (Proposition 3.1.4.2), explicitly proved here"
+   }
+  },
+  {
+   "text": "Let $u:A\\to B$ and $r:E_u\\to E$ be as in the statement. The pullback-marking clause makes $r:E_u^{\\mathrm{Cart}}\\to E^{\\mathrm{Cart}}$ a marked map, and dual straightening classifies $E_u$ by $F\\circ u^{\\mathrm{op}}$. Functorial absolute fibrant replacement gives $h=L(r):L_{p_u}\\to L_p$ satisfying $h q_{p_u}=q_p r$. Pulling back the map $(p,q_p):E\\to B\\times L_p$ along $u$ gives exactly $(p_u,q_pr):E_u\\to A\\times L_p$. The coherent base-change naturality of straightening therefore identifies its cocone with $\\lambda_p\\circ u^{\\mathrm{op}}$. On the other hand the same map equals $(p_u,hq_{p_u})$, so functoriality of straightening identifies its cocone with $(\\Delta h)\\lambda_{p_u}$. This explicitly proves $h\\lambda_{p_u}\\simeq\\lambda_pu^{\\mathrm{op}}$ on the coherent diagram, including its higher simplices. The two maps $c_uk_{p_u}$ and $k_ph$ from $L_{p_u}$ to $C_F$ consequently induce the same restricted cocone $\\iota_Fu^{\\mathrm{op}}$. The colimiting mapping-space equivalence from step 3 has contractible homotopy fibers, and hence gives a coherent equivalence $c_uk_{p_u}\\simeq k_ph$ compatible with those cocones. Precompose with $q_{p_u}$ and use its displayed naturality equality to obtain\n$$c_u\\ell_{p_u}\\simeq k_phq_{p_u}=k_pq_pr=\\ell_pr.$$\nFunctorial replacement and base change commute with compositions and identities before passage to cocones; the contractible comparison fibers retain those compatibilities. This is the asserted natural equivalence. The only colimits used were in $\\mathrm{Cat}_\\infty$ and the marked model, never inside a fiber.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Naturality of the colimit comparison in Corollary 3.3.4.3 and the pullback comparison used in Gepner–Haugseng Lemma 5.3.15; explicit marked replacement and cocone calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-functor-pushout",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 3.3.4, especially Proposition 3.3.4.2 and Corollary 3.3.4.3. Direct mapping-space expansion of its straightening/constant-diagram adjunction, using existing marked-model DAG statements; full-functor and base-change arguments supplied explicitly by the second reader. HTT read from HTT.pdf/HTT.txt in the sandbox; Gepner–Haugseng 1312.3178v4 Lemma 5.3.15 read online."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "Grothendieck|IsLocalization",
-   "results": "{\"t\": \"2026-10-16T21:25:39Z\", \"tool\": \"grep\", \"query\": \"Grothendieck|IsLocalization\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\"], \"digest\": \"bbc5225032ec08d8\"}",
+   "tool": "leanfinder",
+   "query": "Grothendieck construction localization at strongly cartesian morphisms represents the colimit of a category valued functor",
+   "results": "{\"t\": \"2026-10-17T00:43:28Z\", \"tool\": \"leanfinder\", \"query\": \"Grothendieck construction localization at strongly cartesian morphisms represents the colimit of a category valued functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\", \"CategoryTheory.Limits.hasColimit_ι_comp\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\", \"CategoryTheory.Limits.fiberwiseColimit_obj\"], \"digest\": \"68757a3aacfea7c1\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
+   "verdict": "no match: hits have ordinary Category instances and ordinary Grothendieck constructions, not quasicategorical total categories or Cartesian-edge localizations; read Limits/Shapes/Grothendieck.lean:35-60 and Functor/KanExtension/Adjunction.lean:214-235."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCartesian|IsLocalization",
+   "results": "{\"t\": \"2026-10-17T00:43:28Z\", \"tool\": \"grep\", \"query\": \"IsCartesian|IsLocalization\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits in Mathlib/AlgebraicTopology/Quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimitIsoColimitGrothendieck\"",
+   "results": "{\"t\": \"2026-10-17T00:43:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"colimitIsoColimitGrothendieck\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom_assoc\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv_assoc\"], \"digest\": \"6ae23293f5a3aef6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the named declaration at Functor/KanExtension/Adjunction.lean:227 compares ordinary colimits after a pointwise left Kan extension. It does not state the infinity-categorical localization theorem."
   },
   {
    "tool": "leansearch",
-   "query": "Localize a Cartesian fibration at Cartesian edges to compute colimit of classifying infinity category diagram",
-   "results": "{\"t\": \"2026-10-16T21:25:40Z\", \"tool\": \"leansearch\", \"query\": \"Localize a Cartesian fibration at Cartesian edges to compute colimit of classifying infinity category diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.IsFibered.mk\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\"], \"digest\": \"aacb854980a2686b\"}",
+   "query": "A category valued functor on a quasicategory has colimit the total Cartesian fibration with its transport arrows inverted",
+   "results": "{\"t\": \"2026-10-17T00:46:08Z\", \"tool\": \"leansearch\", \"query\": \"A category valued functor on a quasicategory has colimit the total Cartesian fibration with its transport arrows inverted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitIsoFlipCompColim\", \"CategoryTheory.Limits.colimitFlipCompColimIsoColimitCompColim\", \"CategoryTheory.Limits.colimCompFlipIsoWhiskerColim\", \"CategoryTheory.Limits.colim\", \"CategoryTheory.Limits.colimitFlipIsoCompColim\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Limits.functorCategoryHasColimit\", \"CategoryTheory.Limits.colimIsoFlipCompWhiskerColim\"], \"digest\": \"5f63c3f16a1b3e96\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Grothendieck\", \"colimit\"",
-   "results": "{\"t\": \"2026-10-16T21:25:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimitsOfShape_grothendieck\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom_assoc\"], \"digest\": \"a279e0222c24a4b7\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The colimit of a diagram of infinity categories is the localization of its Cartesian Grothendieck construction at Cartesian morphisms",
-   "results": "{\"t\": \"2026-10-16T21:25:40Z\", \"tool\": \"leanfinder\", \"query\": \"The colimit of a diagram of infinity categories is the localization of its Cartesian Grothendieck construction at Cartesian morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimit_ι_comp\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\", \"CategoryTheory.Limits.hasColimitsOfShape_grothendieck\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.Limits.hasColimit_of_hasColimit_fiberwiseColimit_of_hasColimit\", \"CategoryTheory.Limits.fiberwiseColimit_obj\"], \"digest\": \"ce08006091f07e45\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Homotopy colimit of categories computed by inverting coCartesian transport arrows in their total infinity category",
-   "results": "{\"t\": \"2026-10-16T21:25:59Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy colimit of categories computed by inverting coCartesian transport arrows in their total infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\"], \"digest\": \"1a6bd576d6b4f899\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
-  },
-  {
-   "tool": "grep",
-   "query": "isColimitCoconeOfFiberwiseCocone|hasColimitsOfShape_grothendieck|fiberwiseColimit",
-   "results": "{\"t\": \"2026-10-16T21:25:59Z\", \"tool\": \"grep\", \"query\": \"isColimitCoconeOfFiberwiseCocone|hasColimitsOfShape_grothendieck|fiberwiseColimit\", \"sub\": \"CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"55\", \"95\", \"107\", \"108\", \"111\"], \"digest\": \"5ddb1124b85b91af\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The localization of the Grothendieck construction at transport morphisms computes the colimit of a functor valued in infinity categories",
-   "results": "{\"t\": \"2026-10-16T21:50:10Z\", \"tool\": \"leanfinder\", \"query\": \"The localization of the Grothendieck construction at transport morphisms computes the colimit of a functor valued in infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimit_ι_comp\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Limits.hasColimitsOfShape_grothendieck\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\"], \"digest\": \"cd3b375be52e6430\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: second-reader search. LeanFinder results are ordinary Grothendieck colimits; read Limits/Shapes/Grothendieck.lean:35-60, where C, H and fibers are ordinary categories. Loogle returns only sheafification as an ordinary localization. The grep over AlgebraicTopology/Quasicategory has zero hits. None states the Cartesian-edge localization theorem for infinity categories."
-  },
-  {
-   "tool": "grep",
-   "query": "localization|colimit",
-   "results": "{\"t\": \"2026-10-16T21:50:37Z\", \"tool\": \"grep\", \"query\": \"localization|colimit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: second-reader search. LeanFinder results are ordinary Grothendieck colimits; read Limits/Shapes/Grothendieck.lean:35-60, where C, H and fibers are ordinary categories. Loogle returns only sheafification as an ordinary localization. The grep over AlgebraicTopology/Quasicategory has zero hits. None states the Cartesian-edge localization theorem for infinity categories."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Grothendieck\", \"Localization\"",
-   "results": "{\"t\": \"2026-10-16T21:50:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\"], \"digest\": \"8ecc599d4e57ab3e\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: second-reader search. LeanFinder results are ordinary Grothendieck colimits; read Limits/Shapes/Grothendieck.lean:35-60, where C, H and fibers are ordinary categories. Loogle returns only sheafification as an ordinary localization. The grep over AlgebraicTopology/Quasicategory has zero hits. None states the Cartesian-edge localization theorem for infinity categories."
+   "verdict": "no match: returned ordinary functor-category pointwise colimits and Fubini/colim declarations, all using Category instances, with no Cartesian-fibration localization assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-localization-kan-cartesian-fibration",
@@ -120,5 +170,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-colimit-localization",
+  "worker": "stage1",
+  "summary": "Second reading replaces the uncited invocation of the item theorem by five steps from existing marked-model and straightening statements: absolute marked fibrant replacement; mapping-space comparison with the constant diagram; the actual colimit cocone and canonical map; full functor-category equivalence by marked-product tests; and functorial replacement plus coherent base change for the actual colimit comparison. No new nodes; statement unchanged.",
+  "blueprint": "Realizes the supporting Lemma 5.3.15 paragraph in prop-coef-integral-exceptional-adjoint: the classifying diagrams' colimits are Cartesian-edge localizations, with the pullback comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-e856adabf",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-e856adabf (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full, every cited node's statement, the only citer (lem-coef-localization-kan-cartesian-fibration, steps 3 and 6) and the unit record. HTT §3.3.4 and Gepner–Haugseng are not archived in literature/, so I checked against HTT 3.3.4.1–3.3.4.3 from memory. The proof is HTT's argument, Map(colim chi, C) = Map(chi, Delta C) = Map_/S(X^nat, (S x C)^nat) = Map^sharp(X^nat, C^nat), written with DAG nodes; proof_origin agent is correct. The statement is unchanged and true. Steps 2–5 check out: marked maps (p,h) into B x T are an identity of sharp complexes; straightening sends B x T to the constant diagram by base change; the cbc cocone criterion and contractible initial objects give k_p and ell_p with the colimit legs; marked-product tests prove the whole functor-category equivalence, and I checked the edge factorization through (a,x)->(a,y)->(a',y) and the Yoneda two-sided inverse; functorial replacement and base-change naturality give c_u ell_{p_u} = ell_p r. Small cases checked: B empty, B a point, B = Delta^1 (gives F(0), so the variance is right), constant F. One C4/C1 fault, fixed in fixes/: steps 1 and 2 used that the Cartesian edges of T -> Delta^0 are exactly the equivalences (Joyal), and that Map^sharp(-, T^nat) is the core of Map^flat, without citing a node. I added lem-coef-marked-anodyne-lifting-calculus (core statement; C^nat has the RLP against marked-anodyne maps) together with the relative RLP criterion over Delta^0, and regenerated uses and proof_deps. There are no new nodes and no cycles; I checked the closure of every proof_dep, including the added one. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc) as a black box for the generic cone and pointwise-equivalence calculus. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }

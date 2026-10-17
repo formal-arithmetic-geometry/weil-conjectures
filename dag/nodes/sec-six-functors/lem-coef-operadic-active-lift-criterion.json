@@ -30,9 +30,113 @@
   "lem-coef-operadic-algebra-presentability",
   "def-coef-operadic-weak-approximation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First let $g:M'\\to O$ be an inert-preserving categorical fibration and use the specified join-slice model of [def-coef-operadic-weak-approximation]: with $B=O_{/g(C)}$, it is the full subcategory $\\mathcal F_g(C,\\alpha)\\subseteq M'_{/C}\\times_B B_{\\alpha/}$ on inert first edges $\\gamma$. Its simplices retain the entire coherent triangle. In particular, the comparison edges $h$ are unrestricted; we do not replace this full subcategory by one retaining only inert comparison edges. If $\\alpha$ is active over $[n]\\to[k]$, write its opposite order map as $\\phi:[k]\\to[n]$, with $\\phi(0)=0$ and $\\phi(k)=n$. For a factorization $\\alpha\\simeq g(\\beta)\\gamma$ with $\\gamma$ inert, the base of $\\gamma$ is opposite to an interval inclusion $j:[m]\\hookrightarrow[n]$ and $\\phi=j\\psi$ for the opposite base map $\\psi$ of $\\beta$. The image of $j$ contains $0$ and $n$, so $j$ is the identity and $\\gamma$ is cocartesian over an identity, hence an equivalence. The latter follows also from the cocartesian mapping-square criterion: precomposition with $\\gamma$ is an equivalence on every mapping space, so it has an inverse with the two inverse triangles. Thus the objects of $\\mathcal F_g(C,\\alpha)$ are exactly $(\\beta,\\gamma)$ with $\\gamma:X\\simeq g(D)$ and $g(\\beta)\\gamma\\simeq\\alpha$. Inverting $\\gamma$ gives an equivalence $g(\\beta)\\simeq\\alpha$ in $O_{/g(C)}$, and inverting again is the inverse construction. On the join-slice model, a simplex consists of an entire family of these triangles, and inversion of an equivalence in the slice acts on the family and commutes coherently with its face and degeneracy restrictions. The equivalence-edge coslice based at $\\alpha$ models the homotopy fiber over $\\alpha$: it retains a comparison equivalence and all its coherent simplices. Thus these inverse operations identify $\\mathcal F_g(C,\\alpha)\\simeq\\mathcal L_g(C,\\alpha)$. No assertion that $\\beta$ was active was used in deriving $j=1$.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition A.6.1 and the active-arrow case in Proposition A.6.3 / Erratum Proposition E.0.2"
+   }
+  },
+  {
+   "text": "For an arbitrary $\\alpha:X\\to g(C)$ over $[n]\\to[k]$, let $\\phi:[k]\\to[n]$ be its opposite base map. Set $a=\\phi(0)$, $b=\\phi(k)$ and $r=b-a$. The map $\\phi$ factors as $[k]\\xrightarrow{\\phi-a}[r]\\xrightarrow{i\\mapsto a+i}[n]$, with the first map preserving endpoints and the second an interval inclusion. Choose the inert cocartesian lift $\\delta:X\\to X_0$ in $O$ over that inclusion, as provided by the operad axioms. By the cocartesian mapping-square criterion, the space of factorizations $\\alpha\\simeq\\alpha_0\\delta$ with $\\alpha_0:X_0\\to g(C)$ over the specified active base map is contractible. Fix such data. Inside $\\mathcal F_g(C,\\alpha)$ let $\\mathcal A_0$ be the full subcategory of objects for which the base interval of $\\gamma$ is precisely $[a,b]$. The same criterion in $O$ identifies each such $\\gamma$ with $u\\delta$ for a uniquely specified equivalence $u:X_0\\simeq g(D)$, up to a contractible space of coherent choices. The equivalence is forced because both $\\gamma$ and $\\delta$ are cocartesian over the same base arrow: precomposition by each identifies the same mapping-space fibers. Removing $\\delta$ therefore identifies $\\mathcal A_0$ with $\\mathcal F_g(C,\\alpha_0)$, and Step 1 identifies this with $\\mathcal L_g(C,\\alpha_0)$. These comparisons are on the coherent factorization data, including their mapping spaces, not on their isomorphism classes.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition A.6.3 / Erratum Proposition E.0.2: explicit minimal-interval factorization for an arbitrary arrow"
+   }
+  },
+  {
+   "text": "We compare $\\mathcal A_0$ with the full factorization category. For $A=(\\beta:D\\to C,\\gamma:X\\to g(D))$ suppose the interval of $\\gamma$ is $[t,t+m]$. The base equation $\\phi=j\\psi$ gives $t\\leq a\\leq b\\leq t+m$. Take in $M'$ the inert cocartesian restriction $q:D\\to D_0$ to the subinterval $[a-t,b-t]\\subseteq[m]$. The opposite base map of $\\beta$ factors through this inclusion, so the cocartesian mapping-space criterion gives $\\beta_0:D_0\\to C$ and a triangle $\\beta_0q\\simeq\\beta$, with contractible space of choices over that base factorization. Since $g$ preserves inert edges, $\\gamma_0=g(q)\\gamma$ is inert over $[a,b]$; the mapping-square criterion shows that composites of cocartesian arrows are cocartesian by pasting the two pullback squares. Thus $A_0=(\\beta_0,\\gamma_0)$ lies in $\\mathcal A_0$, and $q$ with its triangles defines $A\\to A_0$ in $\\mathcal F_g(C,\\alpha)$. For any $B\\in\\mathcal A_0$, a morphism $A\\to B$, with no inertness condition on its comparison edge $h$, has base map exactly that of $q$: its triangle with the two inert arrows forces this unique interval inclusion. Explicitly, if $j_A:[m]\\hookrightarrow[n]$ and $j_B:[r]\\hookrightarrow[n]$ have images $[t,t+m]$ and $[a,b]$, the opposite base map $\\eta:[r]\\to[m]$ of $h$ satisfies $j_A\\eta=j_B$. Since $j_A(i)=t+i$, necessarily $\\eta(i)=a-t+i$, exactly the base map of $q$. This conclusion uses only the coherent comparison triangle, whose image in the ordinary base is an equality, and does not assume $h$ inert. The criterion for $q$ then gives a natural equivalence\n$$\\operatorname{Map}_{\\mathcal A_0}(A_0,B)\\simeq\\operatorname{Map}_{\\mathcal F_g(C,\\alpha)}(A,B).$$\nIt retains the triangles with $\\beta$ and $\\gamma$ by taking the corresponding mapping-space fibers. By the pointwise left-adjoint criterion these universal arrows assemble to a coherent reflector $R:\\mathcal F_g(C,\\alpha)\\to\\mathcal A_0$ left adjoint to the full inclusion $i$. In particular there is a coherent unit $1\\to iR$ and $Ri\\simeq1$, with the whole higher compatibility data supplied by that criterion.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition A.6.3 / Erratum Proposition E.0.2: write out the inert-restriction reflection behind the all-arrows criterion"
+   }
+  },
+  {
+   "text": "The unit $1\\to iR$ is a simplicial map $\\mathcal F_g(C,\\alpha)\\times\\Delta^1\\to\\mathcal F_g(C,\\alpha)$. On realization its prism gives a homotopy between $1$ and $|i||R|$; the counit $Ri\\simeq1$ gives the other homotopy. This prism is obtained by triangulating each $|\\Delta^s|\\times[0,1]$ into its $s+1$ standard simplices and applying the displayed simplicial map; the restrictions agree on common faces. Hence $|i|$ and $|R|$ are homotopy inverses. Step 2 now shows that $\\mathcal F_g(C,\\alpha)$ is weakly contractible if $\\mathcal L_g(C,\\alpha_0)$ is. Consequently, if all active lifting categories are weakly contractible, all factorization categories for arbitrary arrows are weakly contractible, and the categorical-fibration clause of [def-coef-operadic-weak-approximation] makes $g$ a weak approximation. Conversely that clause applied to active arrows and Step 1 gives weak contractibility of all active lifting categories. This proves both directions for categorical fibrations. When $k=0$ one has $a=b$ and $r=0$; when $n=0$ every interval here is $[0,0]$, so both cases are included.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition A.6.3 / Erratum Proposition E.0.2: weak contractibility via the explicit reflection"
+   }
+  },
+  {
+   "text": "We next obtain a categorical-fibration representative for every $f$, rather than assuming existence from the definition's existential clause. Apply Joyal factorization to the underlying map $f:M\\to O$ to get $M\\xrightarrow{e}M'\\xrightarrow{g}O$ with $e$ a trivial cofibration and $g$ a fibration, and with the strict equality $f=g\\circ e$ of simplicial maps. Equip $M'$ with its composite projection through $g$ to $\\Delta^{\\mathrm{op}}$; this equality makes both factors maps over $\\Delta^{\\mathrm{op}}$. Since $O$ is a quasicategory, so is $M'$; the Joyal characterizations say that $e$ is an equivalence and $g$ is an inner fibration lifting equivalences. The composite $M'\\to O\\to\\Delta^{\\mathrm{op}}$ is an inner fibration. We check the remaining generalized-operad axioms instead of assuming that Joyal factorization preserves them automatically. The equivalence $e$ lies over $\\Delta^{\\mathrm{op}}$, whose only equivalences are identities. Choose a simplicial quasi-inverse $r$ with coherent inverse equivalences. After projection to the nerve of $\\Delta^{\\mathrm{op}}$, their components are identities; naturality therefore makes the two projection functors equal on every edge and hence on every simplex of this ordinary nerve. Thus $r$ and both inverse comparisons are over the base, and identify the fibers and the mapping spaces over each fixed base arrow of $M$ and $M'$. For an inert edge $u$ of $M$, full faithfulness identifies its cocartesian mapping squares with those for $e(u)$ at every object $e(Z)$. Any object of $M'$ is equivalent over its base identity to some $e(Z)$; pre- or postcomposition with that equivalence and its inverse preserves these squares. The cocartesian criterion therefore makes $e(u)$ inert in $M'$. For an arbitrary object $Z'$ of $M'$, choose an equivalence to $e(Z)$ and compose it with the image of an inert lift from $Z$; this gives all inert lifts from $Z'$. The Segal equivalences and the incidence mapping-space equivalences in the generalized-operad definition then follow from those of $M$ under the just-established fiber and mapping-space equivalences, choosing these inert projections. Its zero fiber is a space: every edge has an inverse transported through the fiber equivalence, so the zero fiber equals its Kan core. Finally let $w:Z'\\to W'$ be any inert edge of $M'$ over a base arrow $\\lambda$. Choose $t:Z'\\simeq e(Z)$ over the identity and an inert lift $u:Z\\to W$ of $\\lambda$ in $M$. The composite $v=e(u)t$ is cocartesian over $\\lambda$: in its mapping squares, precomposition by $t$ is an equivalence and the square for $e(u)$ is a homotopy pullback. Both $v$ and $w$ are therefore cocartesian lifts from $Z'$ of the same arrow. Their mapping-square equivalences give $s:e(W)\\simeq W'$ over the identity with $sv\\simeq w$: the two factorizations through these lifts give inverse maps, and their composites are identities by the contractible uniqueness in the same mapping-space fibers. Applying $g$ gives $g(w)\\simeq g(s)f(u)g(t)$. The outer edges are equivalences over identities and the middle edge is inert. Pasting their cocartesian mapping squares shows that $g(w)$ is cocartesian over $\\lambda$, hence inert. The same mapping-square argument applied to the inverse equivalence $r$ shows that it too preserves inert edges. Thus $M'$ is a small generalized operad with the stipulated space zero fiber, $e$ is an operadic equivalence and $g$ is an inert-preserving categorical fibration. All factorization data stay in the original universe.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition A.6.1, existence of the equivalence--categorical-fibration replacement used in Proposition E.0.2; explicit Joyal replacement and transfer of operadic axioms"
+   }
+  },
+  {
+   "text": "For any operadic equivalence $e:M\\to M'$ with the strict equality $f=g\\circ e$ over $\\Delta^{\\mathrm{op}}$, choose a quasi-inverse $r$ and coherent inverse transformations. On slices, $e$ sends $a:D\\to C$ to $e(a):e(D)\\to e(C)$. An inverse sends $b:D'\\to e(C)$ to the composite $r(D')\\xrightarrow{r(b)}re(C)\\simeq C$. The inverse transformations give the two inverse comparisons on these slices, including their coherent triangles. Apply the same operations to the equivalence from the image arrow to the chosen target edge $\\alpha$: its image under $e$ has the same image under $g$ because $f=ge$; in the inverse construction use $f r=g e r\\simeq g$ from the counit of $e,r$. This gives inverse functors on the homotopy-pullback lifting categories. Thus $\\mathcal L_f(C,\\alpha)\\simeq\\mathcal L_g(e(C),\\alpha')$, where $\\alpha'=\\alpha$ since $f(C)=g(e(C))$. To cover objects outside the chosen image, choose $t:e(C)\\simeq C'$ for each $C'\\in M'$ and send an active $\\alpha':X\\to g(C')$ to $g(t)^{-1}\\alpha'$. Postcomposition with $t,t^{-1}$ gives the corresponding inverse slice functors. Equivalences lie over identity base arrows, so this operation preserves activeness. Hence all active lifting categories for $f$ are weakly contractible if and only if all those for $g$ are. Each functor equivalence used here preserves weak contractibility: its coherent inverse transformations yield homotopies on geometric realizations by the prism construction of Step 4.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition A.6.1 / Proposition E.0.2: explicit inverse functors for equivalence transport and essential-surjectivity of the targets"
+   }
+  },
+  {
+   "text": "If $f$ is a weak approximation, its defining clause supplies an exact factorization $f=g\\circ e$ through an operadic equivalence and a categorical-fibration weak approximation $g$, all over $\\Delta^{\\mathrm{op}}$. Step 4 gives the active lifting condition for $g$, and Step 6 gives it for $f$. Conversely, if $f$ satisfies the active lifting condition, use the representative constructed in Step 5. Step 6 gives the condition for its categorical fibration $g$, and Step 4 makes $g$ a weak approximation. The strict equality $f=g\\circ e$ supplied by Step 5 is exactly the equality required by the current definition, so this representative is a witness for the general clause of [def-coef-operadic-weak-approximation]. Therefore $f$ is a weak approximation. This proves the asserted equivalence with no categorical-fibration hypothesis on $f$ and no positive-arity space hypothesis.",
+   "uses": [
+    "def-coef-operadic-weak-approximation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Erratum Proposition E.0.2, both implications for an arbitrary map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-operadic-weak-approximation",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Definition A.6.1, Proposition A.6.3 and Erratum Proposition E.0.2, read online. The source refers to the nonsymmetric analogue of the active-slice argument; the minimal-interval reflection and the equivalence reduction are expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,7 +196,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-localization-operation-criterion",
@@ -112,5 +216,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-active-lift-criterion",
+  "worker": "stage1",
+  "summary": "Repair of the refused landing: rebased the retained seven-step split onto the current unsplit node and reread all eight cited statements. Only def-coef-operadic-weak-approximation changed. Revalidated the argument on its explicit join-slice factorization model, kept arbitrary comparison edges, and made the strict equality f = g composed with e explicit in Joyal replacement and both directions of the general-map argument. Refreshed every citation against current statements. No statement change, new nodes, Mathlib leaves or Lean work. A fresh repair pass revalidated all current statement quotations and wrote the forced base-map formula for unrestricted comparison edges in Step 3. On the final retry, explicitly justified that the simplicial quasi-inverse and inverse comparisons in Step 5 lie over the rigid ordinary base, so the fiberwise operadic-axiom transfer follows from the cited equivalence statements. Second reading expanded the preservation of arbitrary inert edges: compare each edge with an image lift by a uniquely determined target equivalence and paste the cocartesian mapping squares; checked the inverse is operadic too.",
+  "blueprint": "The inherited nearest ancestor is prop-coef-integral-exceptional-adjoint, proof paragraph 2, finite coefficient mapping-complex adjunction before derived inverse limit, via the recorded operadic localization chain. Steps 1–4 realize the categorical-fibration active-slice argument underlying Proposition A.6.3, and Steps 5–7 realize the arbitrary-map reduction of Erratum Proposition E.0.2. No change of chapter/unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic facts that cores are Kan and equivalences are fully faithful, used only to check that Joyal replacement retains the generalized-operad axioms; the present unit has no separate core-Kan theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-21ac999b7",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-21ac999b7 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, all 8 proof-dependency statements, def-coef-complete-algebroid, the parent's citing steps and the unit record. I read Gepner–Haugseng v4 itself (PDF text): Def. A.6.1 (inert-γ factorization subcategory for an arbitrary α; the general clause is a factorization through an equivalence and a categorical fibration), Prop. A.6.3 (for fibrations only) and Erratum Prop. E.0.2 (O ordinary, M generalized, arbitrary morphism f, M_{/C}×_{O_{/f(C)}}{α} for active α). The item matches E.0.2 hypothesis by hypothesis and weakens nothing. Steps: (1) for active α the interval of γ must be the identity, so γ is an equivalence and F_g≃L_g via the equivalence part of the left fibration B_{α/}; (2) the minimal interval [a,b], with α≃α_0δ by cocartesianness, gives A_0≃F_g(C,α_0); (3) the restriction q to [a−t,b−t] and the forced base η(i)=a−t+i on unrestricted comparison edges, then the 'dually' clause of the pointwise-adjoint criterion, give a reflector; (4) the prism homotopy shows the adjunction is a homotopy equivalence (properly elementary), and the categorical-fibration case follows; (5) Joyal factorization gives strict f=g∘e in the same universe; r lies over Δ^op because the nerve is 2-coskeletal; the Segal/incidence axioms transfer; M'_[0] equals its Kan core; inert preservation is shown by w≃s·e(u)·t; (6) slices are equivalence-invariant over the same B=O_{/f(C)}; (7) both directions of the existential clause hold. Edge cases checked: f=id, k=0 (a=b, r=0), n=0, M=∅ (M' is then empty). proof_deps equals the union of step uses; no SGA. grep over dag/nodes found no duplicate (closest: weak-approximation-algebras, approximation-restriction, generalized-active-extension-criterion); the only citer is the parent, so there is no cycle. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc), used only for the core-Kan and fully-faithful facts. No new nodes, no fixes."
  }
 }

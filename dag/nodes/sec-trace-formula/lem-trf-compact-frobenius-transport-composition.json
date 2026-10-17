@@ -1,0 +1,141 @@
+{
+ "id": "lem-trf-compact-frobenius-transport-composition",
+ "kind": "statement",
+ "title": "Composition of compact-support transport along powers of geometric Frobenius",
+ "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], with $p$ prime, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$ and $k$ its fixed algebraic closure. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ contained in the fixed algebraic closure $\\overline{\\mathbf Q}_\\ell$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an integer $n\\geq1$, and put $A=\\mathcal O_E/\\varpi_E^n$. Let $X_0$ be separated of finite type over $k_0$, put $X=X_0\\times_{k_0}k$, and write $a_X:X\\to s=\\operatorname{Spec}k$. Use the finite-coefficient categories and the functor $H(M)=R\\Gamma_c(X,M)=\\operatorname{Fib}_s(Ra_{X!}M)$ of [def-trf-coefficient-conventions]. Let $\\gamma=(z\\mapsto z^q)^{-1}$, $g=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ and $h=\\operatorname{Spec}(\\gamma)$, as in [def-trf-scheme-frobenius]. Write $P_r=L(g^r)^*$ and $Q_r=L(h^r)^*$, with derived pullback as in [def-weil-derived-pullback-tensor-hom].\n\nFix one compactification $c_0=(X_0\\xrightarrow{j_0}\\overline X_0\\xrightarrow{p_0}\\operatorname{Spec}k_0)$ of $a_{X_0}$ in the sense of [def-weil-compactifications-refinements], and use its base change $c$ to represent $Ra_{X!}$ (with the specified comparison maps if the fixed functor uses another representative). Use this same $c_0$ for every power below.\n\nFor each integer $r\\geq1$ and $M\\in D^b_c(X,A)$ define the direct transport along $g^r$ by\n$$\n\\tau^{(r)}_{c,M}=\\operatorname{Fib}_s(e_r(M))\\circ\\iota^{(r)}_{Ra_{X!}M}:H(M)\\longrightarrow H(P_rM).\n$$\nHere $\\iota^{(r)}_N:\\operatorname{Fib}_s(N)\\to\\operatorname{Fib}_s(Q_rN)$ is the restriction--colimit-insertion--derived-pullback map of [def-weil-frobenius-point-transport] with $h$ replaced by $h^r$. The map $e_r:Q_rRa_{X!}\\to Ra_{X!}P_r$ is the compactification exchange of [def-weil-frobenius-square-exchange], formed with the fixed compactification $c_0$ over $k_0$ and with each induced geometric Frobenius automorphism replaced by its $r$-th power. Thus $\\tau^{(1)}_{c,M}=\\tau_{c,M}$ of [def-weil-frobenius-cohomology-transport]. For $m\\geq1$ let $c_{m,M}:P_1P_mM\\xrightarrow{\\sim}P_{m+1}M$ be the inverse of the canonical pullback-composition identification of [lem-weil-pbc-proetale-derived-pullback-composition] (for the constant coefficient ring sheaves A and the composable scheme maps g and g^m). Then for every $M\\in D^b_c(X,A)$ and every integer $m\\geq1$,\n$$\n\\tau^{(m+1)}_{c,M}=H(c_{m,M})\\circ\\tau^{(1)}_{c,P_mM}\\circ\\tau^{(m)}_{c,M}.\n$$\nNo Weil structure on $M$ is assumed.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.10), printed p. 151, action on (X,F); (1.1.11), p. 152, transport of structure; (1.1.14), p. 153, induced action on compact-support cohomology. The displayed derived finite-level coherence is the precise auxiliary statement required by the m-th-iterate clause of blueprint lem-trf-frobenius-operator-compact-description; the recipe for its maps is the existing DAG transport and exchange definitions."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-point-transport",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-frobenius-cohomology-transport",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compact support base change transport along composite automorphisms is the composite of the transports on derived cohomology",
+   "results": "8 hits: IsBaseChange.of_comp, HasCompactSupport.comp_homeomorph, LinearMap.baseChange_comp, LinearEquiv.baseChange_trans, HasCompactMulSupport.comp_homeomorph, IsBaseChange.linearMapRight, IsBaseChange.comp_iff, IsBaseChange.endHom_comp",
+   "date": "2026-10-17",
+   "verdict": "no match for this statement; any listed declarations are ingredients or concern different objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For compactly supported cohomology of a finite coefficient complex, the canonical transport along a power of geometric Frobenius is the composite of the transports along successive powers, under derived pullback composition",
+   "results": "8 hits: iterateFrobeniusEquiv_add, groupCohomology.mapShortComplexH1_comp, groupCohomology.cochainsMap_f_2_comp_cochainsIso₂_apply, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc, groupCohomology.map_H0Iso_hom_f, groupCohomology.map_H0Iso_hom_f_apply, groupCohomology.π_map_apply, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply",
+   "date": "2026-10-17",
+   "verdict": "no match for this statement; any listed declarations are ingredients or concern different objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"comp\"",
+   "results": "12 hits: CategoryTheory.Limits.WidePullback.eq_lift_of_comp_eq, CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst, CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd, CategoryTheory.Limits.pullbackComparison, CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst, CategoryTheory.Limits.pullbackSymmetry_inv_comp_snd, CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst_assoc, CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match for this statement; any listed declarations are ingredients or concern different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupported|lowerShriek|Frobenius|beck.?chevalley|pasting",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Comma/Over/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for this statement; any listed declarations are ingredients or concern different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomolog|compact.?support|lowerShriek",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for this statement; any listed declarations are ingredients or concern different objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successive change of variables under two powers of a Galois automorphism gives the same map on compact support cohomology as the composite automorphism, with no Weil structure",
+   "results": "8 hits: groupCohomology.exists_mul_galRestrict_of_norm_eq_one, finGaloisGroupMap.map_comp, groupCohomology.Hilbert90.aux, InfiniteGalois.mk_toAlgEquivAux, InfiniteGalois.toAlgEquivAux_eq_proj_of_mem, InfiniteGalois.toAlgEquivAux_eq_liftNormal, IsGaloisGroup.mulEquivCongr_apply_smul, InfiniteGalois.limitToAlgEquiv_apply",
+   "date": "2026-10-17",
+   "verdict": "no match for this statement; any listed declarations are ingredients or concern different objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-17",
+   "verdict": "no match for this statement; any listed declarations are ingredients or concern different objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of the induced pullback map on derived compactly supported sheaf cohomology under composition of automorphisms",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-17",
+   "verdict": "no match: read pullbackComp and pullback_assoc in Sheaf/PullbackContinuous.lean:167-200; these are underived sheaf pullback comparisons, without compact-support cohomology, point transport, or the specified exchange composite"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*comp|cohomology.*pullback|mateEquiv.*comp",
+   "results": "25 hits: Mathlib/MeasureTheory/Function/ContinuousMapDense.lean, Mathlib/MeasureTheory/Function/ContinuousMapDense.lean, Mathlib/MeasureTheory/Function/LocallyIntegrable.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: read pullbackComp and pullback_assoc in Sheaf/PullbackContinuous.lean:167-200; these are underived sheaf pullback comparisons, without compact-support cohomology, point transport, or the specified exchange composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback_assoc",
+   "results": "1 hits: SheafOfModules.pullback_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: read pullbackComp and pullback_assoc in Sheaf/PullbackContinuous.lean:167-200; these are underived sheaf pullback comparisons, without compact-support cohomology, point transport, or the specified exchange composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition law for the cohomological action induced by an automorphism of a ringed topos and the canonical inverse image functor comparison",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp, CategoryTheory.Functor.mapContActionComp_hom, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, ContAction.resComp, SheafOfModules.pushforwardNatTrans_comp",
+   "date": "2026-10-17",
+   "verdict": "no exact match or one-line specialization: read SheafOfModules.pullbackComp and pullback_assoc in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167-207 and CategoryTheory.mateEquiv_vcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean:170-183. These compare underived module pullbacks or abstract mates; none identifies the specified point-fiber transport followed by compactification exchange along a semilinear automorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-17",
+   "verdict": "no exact match or one-line specialization: read SheafOfModules.pullbackComp and pullback_assoc in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167-207 and CategoryTheory.mateEquiv_vcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean:170-183. These compare underived module pullbacks or abstract mates; none identifies the specified point-fiber transport followed by compactification exchange along a semilinear automorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_assoc|pullbackComp|mateEquiv_vcomp",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-17",
+   "verdict": "no exact match or one-line specialization: read SheafOfModules.pullbackComp and pullback_assoc in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167-207 and CategoryTheory.mateEquiv_vcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean:170-183. These compare underived module pullbacks or abstract mates; none identifies the specified point-fiber transport followed by compactification exchange along a semilinear automorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.mateEquiv_vcomp",
+  "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "how": "Read lines 160-183 (declaration line 170). It proves pasting for abstract mates only. The point-fiber restriction comparison, the extension-by-zero exchange, and their combination into the specified compact-support transport still require proofs, so this is not a one-line specialization."
+ },
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-operator-compact-description",
+  "date": "2026-10-17",
+  "group": "Q89"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "The words 'the m-th iterate' in the statement and the proof's transport along g_gamma^m: compatibility of the compact-support base-change arrow with successive powers, before composing with the iterated Weil map.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
