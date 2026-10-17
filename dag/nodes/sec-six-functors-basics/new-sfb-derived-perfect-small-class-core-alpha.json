@@ -1,0 +1,118 @@
+{
+ "id": "new-sfb-derived-perfect-small-class-core-alpha",
+ "kind": "statement",
+ "title": "Alpha-compact class core with representatives of P",
+ "statement": "For an essentially v-small class P in the derived category of a Grothendieck abelian category, there are an object property S and a regular cardinal alpha in universe v such that S is exactly the alpha-presentable objects, S is essentially v-small, replete and triangulated, is closed under coproducts indexed by types of cardinality less than alpha, every object of S is alpha-presentable, and every object of P is alpha-presentable.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Ambient well-generation and common cardinal bound: Neeman Theorem 0.2; Krause Localization theory Sections 6.2--6.3."
+ },
+ "proof": [
+  {
+   "text": "Choose a regular cardinal above the well-generation bound and above compactness ranks of representatives of P. Let S be the alpha-compact objects. Well-generation and localization give essential smallness, repleteness, triangulated closure, and closure under coproducts of fewer than alpha summands; alpha-presentability is the defining property, and the cardinal bound makes every member of P alpha-presentable.",
+   "uses": [
+    "lem-grothendieck-derived-has-coproducts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Ambient well-generation and common cardinal bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "alpha compact objects in a Grothendieck derived category are essentially small and closed under small coproducts",
+   "results": "No direct theorem; only generic presentability APIs were returned.",
+   "date": "2026-10-18",
+   "verdict": "No direct theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "alpha compact objects in a Grothendieck derived category are essentially small and closed under small coproducts",
+   "results": "No direct theorem; only generic presentability APIs.",
+   "date": "2026-10-18",
+   "verdict": "No direct theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCardinalPresentable DerivedCategory coproduct",
+   "results": "No direct hit.",
+   "date": "2026-10-18",
+   "verdict": "No direct theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "well.?generated|alpha.?compact|small.*coproduct",
+   "results": "Only generic presentability and triangulated APIs.",
+   "date": "2026-10-18",
+   "verdict": "No direct theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedPerfectSmallClassCore",
+  "date": "2026-10-18",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-derived-perfect-small-class",
+   "place": "Ambient well-generation and common cardinal bound.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedPerfectSmallClassCoreAlpha",
+  "file": "lean/Sheaf/CategoryTheory/DerivedPerfectSmallClassCoreAlpha.lean",
+  "declaration": "CategoryTheory.derived_exists_alphaCompactClass_core",
+  "statement": "theorem derived_exists_alphaCompactClass_core\n    {A : Type u} [Category.{v} A] [Abelian A]\n    [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A]\n    (P : ObjectProperty (DerivedCategory A))\n    [ObjectProperty.EssentiallySmall.{v} P] :\n    ∃ (S : ObjectProperty (DerivedCategory A)) (α : Cardinal.{v})\n      (_ : Fact α.IsRegular),\n      (∀ U, S U ↔ IsCardinalPresentable U α) ∧\n      ObjectProperty.EssentiallySmall.{v} S ∧ S.IsClosedUnderIsomorphisms ∧\n      S.IsTriangulated ∧\n      (∀ (I : Type v) (Y : I → DerivedCategory A),\n        HasCardinalLT I α → (∀ i, S (Y i)) → S (∐ Y)) ∧\n      (∀ U, S U → IsCardinalPresentable U α) ∧\n      (∀ U, P U → IsCardinalPresentable U α)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-18"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T184844-L-2155340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T184844-L-2155340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

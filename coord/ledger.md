@@ -15857,3 +15857,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:31 L: returned deliver/C3/WeilConjectures.PoincareDuality.ProjectionFormula (reviewer RETURN: (the landing tools, head 8a654f430) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 
 - 02:37 L: batch 20261017T183131 dependency take-out
+- 18:48 L: merged deliver/A2/Sheaf.CategoryTheory.DerivedPerfectSmallClassCore (stage 3; reviewer PASS; first push; landing 20261017T184844-L-2155340 (interface); batch 20261017T184840; modules 2; new nodes 1)
