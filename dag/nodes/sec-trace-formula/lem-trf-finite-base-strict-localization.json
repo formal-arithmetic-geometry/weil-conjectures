@@ -16,9 +16,96 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the strict-henselization functoriality theorem (1), S′=S_(s̄) is the spectrum of a strictly henselian local ring whose closed point maps to s and whose residue field is κ(s̄), the separable algebraic closure of κ(s) inside Ω (in general a proper subfield of Ω, e.g. when Ω is transcendental over κ(s) or κ(s) is imperfect); s̄ factors through the closed point of S′, giving its canonical lift. For each geometric point t̄:Spec Ω→T with h t̄=s̄, part (3) of the same theorem supplies the unique local map T_(t̄)→S_(s̄) over h, and parts (1)–(2) give κ(s̄)⊂κ(t̄)⊂Ω.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX and the functoriality paragraph following Tag 03PS"
+   }
+  },
+  {
+   "text": "Choose an affine open Spec A⊂S containing s, with p⊂A the prime of s. Since h is finite, h^{-1}(Spec A)=Spec B′ with A→B′ finite [def-weil-finite-integral-morphism], and S′→S factors through Spec A, so by the affine fibre-product lemma T×_S S′=Spec B′×_{Spec A}Spec R=Spec B with R=O^sh_{S,s̄} and B=B′⊗_A R; by finite permanence (a) B is finite over R. R is henselian local, so the finite-over-henselian decomposition theorem gives B≅B_1×⋯×B_r with each B_i henselian local, finite over R, with R→B_i local and finite residue extension. Since B/m_RB is finite over the field κ(s̄), the primes of B over m_R are maximal; each lies in exactly one factor, so they are the maximal ideals n_1,…,n_r of the factors and B_i=B_{n_i}. Let q_i⊂B′ be the contraction of n_i. Because A→B′ is finite it is of finite type and quasi-finite at q_i (finite-ring-map lemma), so the quasi-finite strict-henselization lemma applies to (A→B′, p, q_i) for any compatible map κ(q_i)→Ω: B′^sh_{q_i} is the localization of A_p^sh⊗_{A_p}B′_{q_i}=R⊗_{A_p}B′_{q_i} at the prime given by that map to Ω, A_p^sh→B′^sh_{q_i} is finite local, and the residue extension is finite purely inseparable. As B′⊗_A R=B′_p⊗_{A_p}R and n_i contracts to q_i, the localization B_{n_i} equals (R⊗_{A_p}B′_{q_i})_{n_i}; so B_i≅B′^sh_{q_i}, the coordinate ring of T_(t̄_i), once n_i is matched with the prime determined by t̄_i (Step 3). The identification comes from the commutative diagram of the lemma, so its spectrum is the map with components j_T and the functorial map to S′ of Step 1.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "lem-trf-strict-henselization-quasi-finite-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GH and 05WR; finite base change and finite-over-henselian factorization"
+   }
+  },
+  {
+   "text": "Matching of factors and components. T_s̄=Spec(B′⊗_AΩ) is finite over the algebraically closed field Ω, so it is a finite discrete space, each connected component is one point whose residue field is finite over Ω, hence equal to Ω; so each component has exactly one Ω-point over Ω, and its projection t̄_i is an S-morphism Spec Ω→T over s̄. Conversely every S-morphism Spec Ω→T over s̄ is a point of T_s̄ with residue field Ω (fibre-product universal property). Now B/m_RB=B′⊗_Aκ(s̄) and the residue field L_i of n_i is finite over the separably closed field κ(s̄); by the unique-embedding lemma L_i has exactly one embedding into Ω extending κ(s̄)⊂Ω, and composing B′→L_i→Ω gives an S-morphism t̄_i:Spec Ω→T over s̄ whose kernel on B′⊗_Aκ(s̄) is n_i. Conversely a t̄ over s̄ gives B′⊗_Aκ(s̄)→Ω (the separable closure κ(s̄) lies in Ω), whose kernel n is a prime over m_R, and t̄ is recovered from n by uniqueness of the embedding. So i↦n_i is a bijection π₀(T_s̄)→{primes of B over m_R}, and n_i is exactly the prime of R⊗_{A_p}B′_{q_i} determined by t̄_i in the quasi-finite lemma. If T_s̄ is empty, then B/m_RB=0, so B=0 by Nakayama (B finite over R) and both sides are empty. Hence the product map ∐_i T_(t̄_i)→T×_S S′ is an isomorphism over T and S′, and the finite-local and purely-inseparable residue assertions for each summand are those of the quasi-finite lemma; each summand's ring is strictly henselian by Step 1 applied to T.",
+   "uses": [
+    "lem-trf-strict-henselization-quasi-finite-ring",
+    "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+    "def-pc-fibre-product",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition Tag 03QP proof, using Algebra Tag 04GH; finite geometric fibre component decomposition"
+   }
+  },
+  {
+   "text": "Let W=Y×_ST, w̄:Spec Ξ→W with projections ȳ, t̄ and image ū∈S lying over u. Choose an affine open Spec A⊂S containing u and an affine open Spec C⊂Y over Spec A containing y; since h is finite, h^{-1}(Spec A)=Spec B with A→B finite. By the affine fibre-product lemma, W⊃Spec C×_{Spec A}Spec B=Spec(B⊗_AC), an open subscheme containing the image of w̄. Open immersions are ind-étale (each affine open is its own étale chart), so the ind-étale strict-local invariance lemma identifies W_(w̄), Y_(ȳ), T_(t̄), S_(ū) canonically, over W, Y, T, S, with the strict localizations of Spec(B⊗_AC), Spec C, Spec B, Spec A at the same geometric points, i.e. with the spectra of (B⊗_AC)_m^sh, C_r^sh, B_q^sh, A_p^sh formed by the pointed étale-neighbourhood construction; by uniqueness in functoriality (3) these identifications carry the functorial maps between the affine strict localizations to those between the strict localizations of S, Y, T, W. The tensor lemma for the finite map A→B and arbitrary A→C, with the point w̄ of Spec(B⊗_AC), gives B_q^sh⊗_{A_p^sh}C_r^sh≅(B⊗_AC)_m^sh induced by the structure maps; taking spectra and using the affine fibre-product lemma, Spec(B_q^sh⊗_{A_p^sh}C_r^sh)=T_(t̄)×_{S_(ū)}Y_(ȳ). Hence W_(w̄)≅Y_(ȳ)×_{S_(ū)}T_(t̄), with no hypothesis on Y→S beyond being a morphism of schemes.",
+   "uses": [
+    "lem-trf-strict-henselization-tensor-finite",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GIP, cases (1)/(4) (A→B finite), translated from affine rings to schemes via an affine open of W"
+   }
+  },
+  {
+   "text": "The tensor-product isomorphism is induced by the four canonical structure maps, so its composites with the projections and structural maps are the original functorial strict-localization maps. Uniqueness in the fibre-product universal property therefore gives commutation with W, Y_(ȳ) and T_(t̄), proving the stated compatibility.",
+   "uses": [
+    "lem-trf-strict-henselization-tensor-finite",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP, fibre-product universal property, together with Tag 0GIP compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-strict-henselization-quasi-finite-ring",
+  "lem-trf-strict-henselization-tensor-finite",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 05WR and 0GIP, with the finite-factor decomposition in etale-cohomology.tex Tag 03QP"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-cover-tube-comparison",
@@ -70,7 +157,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Normal-cone specialization input: the finite-cover component argument underlying the Orgogozo Lemma 2.6.1 tube decomposition, specifically the finite local factor and strict-localization identifications.",
+   "place": "Finite strict-localization decomposition and cartesian strict-localization square used as the supporting finite-cover input to the normal-cone specialization argument.",
    "via": [
     "lem-trf-finite-cover-tube-comparison",
     "lem-trf-nearby-finite-base-descent",
@@ -82,5 +169,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-base-strict-localization",
+  "worker": "stage1",
+  "summary": "Split the finite strict-localization statement into five proof steps. The finite factor argument uses the existing finite-over-henselian product theorem together with a new Tag 05WR ring lemma; the arbitrary cartesian square uses a new Tag 0GIP tensor-compatibility ring lemma. The empty fibre and arbitrary Y edge cases are explicit, and all structural-map compatibilities are obtained from fibre-product uniqueness.",
+  "blueprint": "Supporting finite-cover strict-local geometry used by the normal-cone specialization route of lem-trf-local-term-locality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-5e599f228",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-5e599f228 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the parent's uses, and Stacks 04GH, 05WR (statement and proof) and 0GIP (statement and case (1) proof) in algebra.tex. The item statement is unchanged and true; small cases checked: empty fibre, identity, a finite purely inseparable extension, a nonreduced fibre, and arbitrary Y via base change of clause 1. The two new nodes are faithful to 05WR and to 0GIP for finite B, are not duplicates (the existing nodes cover only the quotient, ind-etale or strict-base cases) and do not restate a clause of the item. Fixed: (E3) step 1 falsely said the residue field of S_(s̄) is Ω; it is the separable closure of κ(s) in Ω. (E5) step 4's 'translating back to spectra and gluing' is replaced by explicit affine opens, the open-immersion case of lem-trf-ind-etale-strict-local-invariance (same unit) and lem-weil-pbc-fibre-product-affine-spectra. Step 2 now writes out the affine chart and the factor-localization match, adding lem-weil-pbc-finite-ring-map-quasi-finite. Step 3 now writes out the factors/components/Ω-points bijection via lem-weil-pbc-sepclosed-finite-extension-unique-embedding, and the empty case by Nakayama. The item's stmt_deps had three proof-only ids and is restored to the seven the statement cites. (B3) the quasi-finite node now cites def-weil-pbc-ring-map-quasi-finite-at-prime with finite type, as Stacks 00PL presupposes. (B4) raw TeX in both new nodes is now in math mode. The item's 0GIP source is now 'cases (1) and (4)'. No cycles and no missing ids; route stays inside the sk-i-curve-zero closure; no tool_uses; no SGA.; 3 file(s) fixed by the reviewer"
  }
 }

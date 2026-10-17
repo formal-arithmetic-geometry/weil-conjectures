@@ -17,9 +17,137 @@
   "def-weil-proper-morphism",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=S\\setminus F$, represented by a subterminal sheaf of $S_{\\mathrm{Et}}$. By [lem-trf-oriented-closed-base-localization], $F_{\\mathrm{Et}}$ is its closed complement. A map $q:\\mathcal E\\to V_f$ is, by [lem-trf-oriented-product-universal], a triple $(a:\\mathcal E\\to X_{\\mathrm{Et}},b:\\mathcal E\\to S_{\\mathrm{Et}},t:b\\Rightarrow kf_Fa)$. It factors through the closed complement of $p_2^{-1}U$ precisely when $b^{-1}U$ is initial, hence precisely when $b=kb_F$ for a unique lift $b_F$ up to unique isomorphism. Since $k_*$ is fully faithful, the transformation $t:k_*b_{F,*}\\to k_*(f_Fa)_*$ lifts uniquely to $b_F\\Rightarrow f_Fa$: lift each component by full faithfulness; naturality is detected by faithfulness. These are exactly the triples classifying maps to $V_{f_F}$. The correspondence also identifies transformations and projections. Thus the induced $v$ identifies $V_{f_F}$ with the closed subtopos $E=p_2^{-1}(F_{\\mathrm{Et}})$. This argument uses no Noetherian or properness hypothesis and also applies to every base-changed factorization.",
+   "uses": [
+    "lem-trf-oriented-closed-base-localization",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 08LY–08M1 and the geometric factorization characterization; oriented-product universal property ILO XI §1.4."
+   }
+  },
+  {
+   "text": "The module clause of [lem-trf-oriented-closed-base-localization] now gives exactness, full faithfulness, the counit $v^*v_*\\simeq1$, and the supported-module essential image. To prove constructibility, take a constructible sheaf $G$ on $V_{f_F}$, with finite partitions $(X_\\alpha)$ of $X$ and $(F_\\beta)$ of $F$ as in [def-trf-oriented-constructible-sheaf]. The $F_\\beta$, viewed in $S$, together with $U$, are a finite constructible locally closed partition of $S$: composing a locally closed immersion with a closed immersion is locally closed, and these finitely many locally closed subsets and the open $U$ are constructible because $S$ is Noetherian, by [def-weil-constructible-subset]. On the rectangular oriented product for $(X_\\alpha,F_\\beta)$ the map to $V_f$ factors through $v$, so restriction of $v_*G$ is restriction of $G$ by the counit. The universal-property argument in Step 1 identifies this rectangle over $S$ with the one over $F$, including its projections. Its restriction is therefore locally constant finite. On rectangles with second stratum $U$ the restriction is zero by the essential-image clause, also locally constant finite. These partitions prove constructibility of $v_*G$.",
+   "uses": [
+    "lem-trf-oriented-closed-base-localization",
+    "def-trf-oriented-constructible-sheaf",
+    "lem-trf-oriented-product-universal",
+    "def-weil-constructible-subset",
+    "def-constructible-stratification",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 08M1, module form; direct finite-partition argument for constructibility."
+   }
+  },
+  {
+   "text": "At an oriented point $z=(x,b,c)$ of $V_f$ with $b\\notin F$, the strict-local structural map sends the closed point of $S_{(b)}$ to $b$ by [lem-weil-pbc-strict-henselization-functoriality](1). The inverse image of the open $U$ contains this closed point and is all of the local spectrum: a principal open containing its maximal ideal is defined by a unit. Hence $F\\times_SS_{(b)}=\\varnothing$. Because $f$ factors through $F$, the tube $M=X_{(x)}\\times_{S_{(f(x))}}S_{(b)}$ maps to that empty fibre product by [def-pc-fibre-product], so is empty. The point-cohomology formula [lem-trf-oriented-point-cohomology] gives zero for the stalk of $R\\Psi_fK$: sheaves of modules on the empty scheme and their sections complex are zero.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-pc-fibre-product",
+    "lem-trf-oriented-point-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI §2, strict-local tube formula; empty-tube argument."
+   }
+  },
+  {
+   "text": "If $b\\in F$, put $a=f_F(x)$. By [lem-trf-closed-immersion-strict-localization-cartesian], $F_{(a)}=F\\times_SS_{(ka)}$ and $F_{(b)}=F\\times_SS_{(kb)}$ with their actual structural maps, including nilpotents. The specialization $c:S_{(kb)}\\to S_{(ka)}$ restricts to $c_F:F_{(b)}\\to F_{(a)}$ by the fibre-product universal property [def-pc-fibre-product], and $z=vz_F$ for $z_F=(x,b,c_F)$. The local map $X_{(x)}\\to S_{(ka)}$ is the composite through $F_{(a)}$: both are local maps for $f=kf_F$ with the same residue map, hence equal by uniqueness in [lem-weil-pbc-strict-henselization-functoriality](3). Reassociating fibre products gives $t:N=X_{(x)}\\times_{F_{(a)}}F_{(b)}\\xrightarrow{\\sim}M=X_{(x)}\\times_{S_{(ka)}}S_{(kb)}$, the identity on $X_{(x)}$ and the structural map $F_{(b)}\\to S_{(kb)}$ on the second factor; its inverse fills in the unique $F_{(b)}$ coordinate using the $F$-coordinate from $X_{(x)}$. Now apply [lem-trf-finite-cover-tube-comparison] with $U=F$ and $g=k$: $f$ is proper, hence of finite type, and $\\Lambda$, $K$ satisfy its hypotheses. As $k$ is a monomorphism and $f=kf_F$, $(1_X,f_F):X\\to X\\times_SF$ is an isomorphism inverse to the first projection; under it $f_U=f_F$, the map $X_U\\to X$ is $1_X$, $K_U=K$, $v_k=v$, and $\\beta_k$ is the ordinary comparison $\\delta_K:v^*R\\Psi_fK\\to R\\Psi_{f_F}K$ of the square $(1_X,k)$. The tubes of that lemma at $z_F$ and $z$ are $N$ and $M$, and its natural map $N\\to M$, built from the functorial maps $X_{(x)}\\to X_{(x)}$ and $F_{(b)}\\to S_{(kb)}$, is $t$. Hence, under [lem-trf-oriented-point-cohomology], the stalk of $\\delta_K$ at $z_F$ is restriction along the isomorphism $t$, an isomorphism.",
+   "uses": [
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-trf-oriented-point-cohomology",
+    "lem-trf-finite-cover-tube-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI §2 tube formula and map (2.f); Cartesian strict-localization identification."
+   }
+  },
+  {
+   "text": "Let $\\alpha_K:R\\Psi_fK\\to v_*R\\Psi_{f_F}K$ be the transpose of the ordinary $\\delta_K$ under $v^*\\dashv v_*$, using the adjunction specified in [def-trf-oriented-nearby-cycles]. Since $v_*$ is exact, its derived functor is its termwise functor; the sheaf counit from [lem-trf-oriented-closed-base-localization] is still an isomorphism on complexes. At points outside $E$, both sides of $\\alpha_K$ vanish, by Step 3 and the supported-module clause. At points in $E$, its inverse image is $\\delta_K$ followed by the inverse counit, hence is an isomorphism by Step 4. The oriented points are jointly conservative on derived categories by [lem-trf-oriented-product-points-conservative]. Thus $\\alpha_K$ is an isomorphism. All constructions are natural in $K$, giving $R\\Psi_fK\\simeq v_*R\\Psi_{f_F}K$.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-closed-base-localization",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI §§1.4, 4.3; adjunction and conservative-point argument."
+   }
+  },
+  {
+   "text": "Fix any $g:S'\\to S$. Put $F'=F\\times_SS'$, $X'=X\\times_SS'$, $h:X'\\to X$, and $g_F:F'\\to F$; then $X'=X\\times_FF'$ and $f'=k'f'_F$ by [def-pc-fibre-product]. The immersion $k'$ is closed by [lem-weil-pbc-closed-immersion-base-change]. The universal construction [def-trf-oriented-nearby-cycles] gives $w:V_{f'}\\to V_f$ and $w_F:V_{f'_F}\\to V_{f_F}$. The square with horizontal arrows $v',v$ and vertical arrows $w_F,w$ commutes: both composites have the same two projections and the same structural $2$-morphism. By Step 1, $v'$ is the inverse image closed subtopos of $v$, since $(p'_2)^{-1}(S'\\setminus F')=w^*p_2^{-1}U$. Write $\\varepsilon_v$ for the counit. For a module sheaf $A$ on $V_{f_F}$ define the canonical base-change mate\n$$\\gamma_A:w^*v_*A\\xrightarrow{\\eta_{v'}}v'_*v'^*w^*v_*A\\simeq v'_*w_F^*v^*v_*A\\xrightarrow{v'_*w_F^*\\varepsilon_v}v'_*w_F^*A.$$\nThis is an isomorphism: $w^*v_*A$ vanishes on the open complement of $v'$; therefore its displayed unit is invertible by [lem-trf-oriented-closed-base-localization], and its counit factor is invertible too. For a complex this follows degreewise, since all these functors are exact. This proves $w^*v_*\\simeq v'_*w_F^*$ for arbitrary $S'$, without assuming it Noetherian.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-closed-base-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Closed-complement essential image (Tags 08LY–08M1); explicit unit–counit base-change calculation."
+   }
+  },
+  {
+   "text": "Put $A=R\\Psi_fK$, $B=R\\Psi_{f_F}K$, $A'=R\\Psi_{f'}h^*K$, and $B'=R\\Psi_{f'_F}h^*K$. Let $\\beta:w^*A\\to A'$ and $\\beta_F:w_F^*B\\to B'$ be the ordinary comparisons of [def-trf-oriented-nearby-cycles], and let $\\delta':v'^*A'\\to B'$ be the closed-base comparison. The two paths of scheme squares from $(X',F')$ to $(X,S)$ are $(1_{X'},k')$ then $(h,g)$, and $(h,g_F)$ then $(1_X,k)$; their composite is $(h,gk')=(h,kg_F)$. Their inverse-image squares paste respectively as\n$$\\psi_{f'_F}^*v'^*w^*\\simeq\\psi_{f'}^*w^*\\simeq h^*\\psi_f^*,\\qquad \\psi_{f'_F}^*w_F^*v^*\\simeq h^*\\psi_{f_F}^*v^*\\simeq h^*\\psi_f^*.$$\nBoth identifications come from the same composite morphism and agree by the universal projection identifications. Applying [lem-weil-pbc-mate-pasting](1) to these two pastings of the specified counit squares gives\n$$\\delta'\\circ v'^*\\beta=\\beta_F\\circ w_F^*\\delta_K.$$\nIndeed the transpose of each side under $\\psi_{f'_F}^*\\dashv R\\Psi_{f'_F}$ is exactly $h^*\\varepsilon_{f,K}:h^*\\psi_f^*R\\Psi_fK\\to h^*K$. This proves equality of the derived morphisms before evaluation at points.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI §1.4 and §4.3; explicit two pastings of the counit-defined ordinary comparisons."
+   }
+  },
+  {
+   "text": "The required base-change compatibility is the equality\n$$\\alpha'_{h^*K}\\circ\\beta=(v'_*\\beta_F)\\circ\\gamma_B\\circ w^*\\alpha_K:w^*A\\longrightarrow v'_*B'.$$\nTranspose it under $v'^*\\dashv v'_*$, using [def-trf-oriented-nearby-cycles]. The left transpose is $\\delta'\\circ v'^*\\beta$. For the right, substitute the formula for $\\gamma_B$ from Step 6. Naturality of the counit and the triangle identity cancel its inserted unit, giving $\\beta_F\\circ w_F^*(\\varepsilon_v\\circ v^*\\alpha_K)=\\beta_F\\circ w_F^*\\delta_K$. These are the equal maps of Step 7; equivalently this is adjunction-direction pasting in [lem-weil-pbc-mate-pasting](2). Equality of transposes proves the displayed compatibility square, with right edge $(v'_*\\beta_F)\\gamma_B$. As $\\gamma_B$ is the isomorphism of Step 6, this is precisely compatibility of the closed-base extension isomorphism with ordinary nearby-cycle comparisons for arbitrary base changes.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent mate-pasting calculation, with explicit right edge and equality of adjoint transposes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-pc-fibre-product",
+  "def-trf-oriented-constructible-sheaf",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-closed-immersion",
+  "def-weil-constructible-subset",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-trf-finite-cover-tube-comparison",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-trf-oriented-point-cohomology",
+  "lem-trf-oriented-product-points-conservative",
+  "lem-trf-oriented-product-universal",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Closed-complement universal-property proof from Stacks Tags 08LY–08M1 and 04CA; point calculation from ILO Exposé XI §2 and §4.3; explicit adjunction calculation for base-change compatibility. Orgogozo §§3.2,9.2 is unavailable locally."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -107,7 +235,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-psi-proper-surjective-constructibility",
@@ -119,7 +247,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The nearby-cycle constructibility input of the ancestor local-term-locality proof: Nearby cycles supported on a closed base. This supplies the source-reduction and semistable-curve argument before the cohomology-strata application.",
+   "place": "The nearby-cycle constructibility input of the ancestor local-term-locality proof: reduction of a proper map through its closed image, with nearby cycles identified with exact closed extension from the closed base and compatible under base change.",
    "via": [
     "lem-trf-psi-proper-surjective-constructibility",
     "lem-trf-psi-good-oriented-cohomology-strata",
@@ -130,5 +258,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-closed-base-extension",
+  "worker": "stage1",
+  "summary": "Replaced the clause-duplicate localization statement by a general closed-complement theorem for arbitrary Grothendieck topoi and modules, with no oriented-product or constructibility conclusion. The item now proves its own oriented-product identification and constructibility by universal triples and finite partitions. The pointwise closed-base comparison is taken from the existing lem-trf-finite-cover-tube-comparison with g=k (reviewer FIX; the new point-mate node was dropped as unneeded). Expanded base-change compatibility into the actual square of topoi, an explicit unit–counit isomorphism w^*v_*→v'_*w_F^*, two pasted counit squares, and equality of adjoint transposes. The item statement is unchanged.",
+  "blueprint": "Realizes the closed-image nearby-cycle reduction in ancestor lem-trf-local-term-locality: exact extension from a closed base and its compatibility with arbitrary base change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Steps 3–4 use the closed point and uniqueness of canonical local maps, as a generic strict-localization tool from sk-thm-p1; no node of this unit gives these clauses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-4b5f5efec",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-4b5f5efec (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the unit sk-i-curve-zero and the chapter record, and checked the sources: Stacks 08LY/08LZ/08M0/08M1 in sites.tex, 08M3 in sites-modules.tex, 04CA(1)(2) in etale-cohomology.tex, and ILO XI 2.7 (2.a)-(*). The statement is unchanged and not weakened. The coefficients are modules over the constant ring Λ on V_f, and the comparisons are the counit-transpose β maps of def-trf-oriented-nearby-cycles, for arbitrary g:S'->S. All eight steps are correct. Step 1 gets the identification from universal triples plus full faithfulness of k_* on 2-morphisms. Step 2 proves constructibility from the strata k(F_beta) and U, which are constructible because S is Noetherian; v_*G is zero on the U rectangles. Step 3: a point over U has an empty tube. Step 4: the strict-local Cartesian identities keep nilpotents, and the reassociation N->M is an isomorphism. Step 5: points are conservative, and a point over F factors through v by Step 1 with E=Set. Step 6: I checked by hand that gamma is an isomorphism from its unit and counit, with no Noetherian hypothesis on S'. Steps 7-8: I recomputed the mate transposes, and both reduce to h^*epsilon_f. New node lem-trf-oriented-closed-base-localization is true, matches 08LY/08M1/08M3/04CA(1), does not restate a clause of the item, and has no duplicate; the existing lem-trf-oriented-closed-base-restriction needs a Noetherian, finitely presented setting, but Step 6 needs arbitrary S'. FIX (C5/D1, unneeded new node): the existing reviewed node lem-trf-finite-cover-tube-comparison (same unit, no cycle) already states, in its first paragraph, the stalk of beta_g as restriction RΓ(M)->RΓ(N). With U=F and g=k, X×_S F is isomorphic to X, so beta_k = delta_K and its tubes are exactly N and M; its hypotheses (finite type, Λ finite with an invertible annihilator, D^b_c) hold. I rewrote Step 4 to cite it, updated uses, proof_deps and the split_report summary, and dropped the point-mate node. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-oriented-closed-base-extension.json. Tool use accepted: lem-weil-pbc-strict-henselization-functoriality for clauses (1) and (3); sk-thm-p1 is in fact reachable transitively. No SGA is cited. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
