@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-root-multiplicity-injective-map",
+ "kind": "statement",
+ "title": "Root multiplicity under an injective coefficient map",
+ "statement": "Let $K,L$ be fields [def-weil-field], let $f:K\\to L$ be an injective unital ring homomorphism, let $U$ be an indeterminate, and let $P\\in K[U]$ [def-weil-polynomial-ring]. Write $f_*P\\in L[U]$ for the polynomial obtained by applying $f$ to every coefficient [def-weil-coefficientwise-ring-hom-map]. For every $x\\in K$, root multiplicity [def-weil-root-multiplicity] satisfies $m_x(P)=m_{f(x)}(f_*P)$. The convention is $m_x(0)=0$, so the assertion includes $P=0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata.md",
+  "place": "## Proof: rational coefficients imply root-multiset stability, with multiplicities. Exact general tool: Mathlib/Algebra/Polynomial/Roots.lean, Polynomial.eq_rootMultiplicity_map, lines 905-912."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-root-multiplicity"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rootMultiplicity_map|map_rootMultiplicity",
+   "results": "Mathlib/Algebra/Polynomial/Roots.lean:899 le_rootMultiplicity_map; :905 eq_rootMultiplicity_map; :908 use of the inequality; :970 use in roots transport. Read lines 895-912, including the injectivity hypothesis and zero-polynomial case.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.rootMultiplicity, Polynomial.map",
+   "results": "Polynomial.eq_rootMultiplicity_map (exact), le_rootMultiplicity_map, count_map_roots_of_injective, count_map_roots; Mathlib/Algebra/Polynomial/Roots.lean:905-912 was read.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Root multiplicity is unchanged under an injective ring homomorphism applied to a polynomial and its root",
+   "results": "LeanFinder returns Polynomial.count_map_roots_of_injective, roots_map_of_injective_of_card_eq_natDegree, map_roots_le_of_injective, le_rootMultiplicity_map and related inequalities; LeanSearch returns roots_map_of_injective_of_card_eq_natDegree, isRoot_map_iff, filter_roots_map_range_eq_map_roots and rootMultiplicity. These lead to the exact equality found by Loogle and grep.",
+   "date": "2026-10-17",
+   "verdict": "match via Polynomial.eq_rootMultiplicity_map, located by Loogle and source grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Root multiplicity is unchanged under an injective ring homomorphism applied to a polynomial and its root",
+   "results": "LeanFinder returns Polynomial.count_map_roots_of_injective, roots_map_of_injective_of_card_eq_natDegree, map_roots_le_of_injective, le_rootMultiplicity_map and related inequalities; LeanSearch returns roots_map_of_injective_of_card_eq_natDegree, isRoot_map_iff, filter_roots_map_range_eq_map_roots and rootMultiplicity. These lead to the exact equality found by Loogle and grep.",
+   "date": "2026-10-17",
+   "verdict": "match via Polynomial.eq_rootMultiplicity_map, located by Loogle and source grep"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.eq_rootMultiplicity_map",
+  "file": "Mathlib/Algebra/Polynomial/Roots.lean",
+  "how": "specializes in one line: Polynomial.eq_rootMultiplicity_map (p := P) hf x at lines 905-906, with proof through line 912. The theorem allows arbitrary commutative rings; specialize them to the fields K,L. Polynomial.map f P is exactly f_*P. The theorem explicitly includes P=0 (line 907).",
+  "line": 905
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "prop-galois-weight-strata",
+  "date": "2026-10-17",
+  "group": "Q105"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-intfactors",
+ "blueprint": {
+  "from": {
+   "node": "prop-galois-weight-strata",
+   "place": "## Proof, first clause: 'The polynomials A^#, B^# ... have rational coefficients, so their root multisets are stable ...', with the final 'with multiplicities': the coefficient-map theorem needed to retain multiplicities.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

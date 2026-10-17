@@ -12,9 +12,79 @@
   "lem-coef-infinity-relative-cone-equivalence",
   "lem-coef-infinity-cocone-opposite-join-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C_F$ for the fixed-$F$ cocone pullback and $L_{F^o}$ for the fixed-$F^o$ cone pullback in the statement, using [def-cbc-enhanced-diagrams-cones]. Clause (4) of [lem-coef-infinity-relative-cone-equivalence] makes $\\mathcal E^{\\mathrm{op}}$ a quasicategory. Since both $K$ and $K^{\\mathrm{op}}$ are small, [lem-cbc-enhanced-functor-cone-calculus] applies to $(K,\\mathcal E)$ and $(K^{\\mathrm{op}},\\mathcal E^{\\mathrm{op}})$: $D,D',C_F,L_{F^o}$ are quasicategories. No completeness or cocompleteness assumption occurs in these assertions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2 and agent setup for coherent comma categories; the cited calculus supplies the quasicategory and Kan assertions."
+   }
+  },
+  {
+   "text": "Let $\\rho_n:\\Delta^n\\xrightarrow{\\cong}(\\Delta^n)^{\\mathrm{op}}$ denote the vertex-reversal isomorphism used in [lem-coef-infinity-cocone-opposite-join-functor]. By [def-cbc-enhanced-diagrams-cones], an $n$-simplex of $C_F$ is a pair $a:\\Delta^n\\to\\mathcal E$, $h:K\\times\\Delta^n\\times\\Delta^1\\to\\mathcal E$ with $h|_0=F\\operatorname{pr}_K$ and $h|_1=a\\operatorname{pr}_{\\Delta^n}$. Opposite preserves products degree by degree, directly from its definition in clause (4) of [lem-coef-infinity-relative-cone-equivalence]. Set $a^o=a^{\\mathrm{op}}\\rho_n$ and\n$$h^o=h^{\\mathrm{op}}(\\mathrm{id}_{K^{\\mathrm{op}}}\\times\\rho_n\\times\\rho_1):K^{\\mathrm{op}}\\times\\Delta^n\\times\\Delta^1\\longrightarrow\\mathcal E^{\\mathrm{op}}.$$\nThis is precisely the internal-functor reversal of the cited node, with the interval also reversed. Since $\\rho_1$ exchanges $0,1$, $h^o|_0=a^o\\operatorname{pr}_{\\Delta^n}$ and $h^o|_1=F^o\\operatorname{pr}_{K^{\\mathrm{op}}}$. Thus $(a^o,h^o)$ is an $n$-simplex of $L_{F^o}$, not merely an equivalence class of such simplices. In degree zero it is exactly the asserted transformation $\\lambda^o:\\Delta_{K^{\\mathrm{op}}}x\\to F^o$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-cocone-opposite-join-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2; explicit agent construction on the coherent comma pullbacks, using the internal-functor reversal already stated in the DAG."
+   }
+  },
+  {
+   "text": "For $\\alpha:[m]\\to[n]$, put $\\alpha^\\vee(i)=n-\\alpha(m-i)$ as in clause (4) of [lem-coef-infinity-relative-cone-equivalence]. Vertexwise,\n$$\\rho_n\\Delta(\\alpha)=(\\Delta(\\alpha^\\vee))^{\\mathrm{op}}\\rho_m,$$\nsince both send $i$ to $n-\\alpha(i)$. Substituting this equality in the formulas of step 2 shows that restricting a source simplex by the operator $\\alpha^\\vee$ and then reversing is the same as reversing and then restricting by $\\alpha$. These are exactly the operators of $C_F^{\\mathrm{op}}$ and $L_{F^o}$. Hence step 2 defines a simplicial map $\\Phi:C_F^{\\mathrm{op}}\\to L_{F^o}$. Repeating the construction reverses each parameter, interval and shape twice, recovering $a,h$ in every degree, so it defines the inverse. The apex coordinate is $a\\mapsto a^o$, proving commutation with apex evaluation. Restricting the displayed formula to either interval endpoint proves exchange of endpoint evaluations. Precomposition in $K$ and postcomposition in $\\mathcal E$ commute with the formula, proving its naturality. All these are equalities of the prescribed simplex data.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Construction 1.4.2.2; elementary operator, involution, endpoint and naturality checks on the explicit formula."
+   }
+  },
+  {
+   "text": "For any two vertices $\\lambda,\\mu$ of $C_F$, clause (4) of [lem-coef-infinity-relative-cone-equivalence], applied to the quasicategory $C_F$, gives the natural equivalence\n$$\\operatorname{Map}_{C_F}(\\lambda,\\mu)\\simeq\\operatorname{Map}_{C_F^{\\mathrm{op}}}(\\mu,\\lambda).$$\nApplying $\\Phi$ gives an isomorphism of the latter right-pinched mapping simplicial set with $\\operatorname{Map}_{L_{F^o}}(\\mu^o,\\lambda^o)$: postcomposition by a simplicial isomorphism and its inverse preserves exactly the constant-face and last-vertex conditions in [def-cbc-enhanced-diagrams-cones]. This construction is natural in $\\mu$, because the opposite mapping-space equivalence is natural and the second map is induced by the single simplicial map $\\Phi$. The two spaces are weakly contractible simultaneously: a weak equivalence induces bijections on components and isomorphisms on based homotopy groups, so either both or neither have one component and trivial homotopy groups. As $\\Phi$ is bijective on vertices, $\\mu^o$ ranges over every cone on $F^o$ when $\\mu$ ranges over every cocone on $F$. The definition of initial object in [def-cbc-enhanced-diagrams-cones] therefore identifies initiality of $\\lambda$ in $C_F$ with terminality of $\\lambda^o$ in $L_{F^o}$. Its definitions of colimiting and limiting give the asserted equivalence.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Agent mapping-space proof from clause (4) of the cited opposite-equivalence node and the stated definitions; compare Remark 7.1.6.2 in https://kerodon.net/tag/02KF for sharp-cone limit/colimit duality, not for an identification of comma categories."
+   }
+  },
+  {
+   "text": "If $K=\\varnothing$, then $K^{\\mathrm{op}}=\\varnothing$ and $D=D'=\\Delta^0$: in every degree there is exactly one map from the empty simplicial set. The pullbacks of [def-cbc-enhanced-diagrams-cones] thus give $C_F=\\mathcal E$ and $L_{F^o}=\\mathcal E^{\\mathrm{op}}$ canonically, and the preceding construction is their evident opposite identification. The universal-property assertion becomes the initial/terminal correspondence just proved. For a general $K$ the proof constructs an isomorphism between the two categories whether or not either contains a universal object; it never chooses an unrelated limit or colimit.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003N",
+    "place": "Agent check of the empty-shape case directly from the coherent comma definitions; compare Example 7.1.6.5 in https://kerodon.net/tag/02KF."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocone-opposite-join-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/003N",
+  "place": "Explicit opposite reversal of the coherent comma pullbacks, using the existing internal-functor reversal and opposite mapping-space equivalences; comparison with Remark 7.1.6.2 in https://kerodon.net/tag/02KF. The comma result is not attributed to the sharp-cone reference."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,14 +127,69 @@
    "results": "{\"t\": \"2026-10-17T09:26:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"coconeEquivalenceOpConeOp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coconeEquivalenceOpConeOp\"], \"digest\": \"fd23e882cdef0b1b\"}",
    "date": "2026-10-17",
    "verdict": "no match: CategoryTheory.Limits.coconeEquivalenceOpConeOp (CategoryTheory/Limits/Cones.lean:769) and IsColimit.op (CategoryTheory/Limits/HasLimits.lean:1054) assume ordinary categories and concern ordinary cones; they do not state the degreewise coherent comma-category or its mapping spaces for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "coconeEquivalenceOpConeOp|IsColimit.op|quasicategory",
+   "results": "{\"t\": \"2026-10-17T11:32:04Z\", \"tool\": \"grep\", \"query\": \"coconeEquivalenceOpConeOp|IsColimit.op|quasicategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Hypercover/One.lean\", \"Mathlib/CategoryTheory/Sites/Hypercover/One.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"Mathlib/CategoryTheory/Limits/Cones.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Opposites/Products.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Opposites/Products.lean\"], \"digest\": \"0cb8508fd6da8b86\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical cocones and limits do not give coherent comma quasicategories or their mapping spaces for arbitrary simplicial shapes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The opposite of the quasicategory of cocones on a fixed diagram is the quasicategory of cones on its opposite and colimits become limits",
+   "results": "{\"t\": \"2026-10-17T11:32:04Z\", \"tool\": \"leansearch\", \"query\": \"The opposite of the quasicategory of cocones on a fixed diagram is the quasicategory of cones on its opposite and colimits become limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isLimitOfUnop\", \"CategoryTheory.Limits.IsColimit.op\", \"CategoryTheory.Limits.coconeEquivalenceOpConeOp\", \"CategoryTheory.Limits.isColimitCoconeLeftOpOfCone\", \"CategoryTheory.Limits.Cofan.IsColimit.op\", \"CategoryTheory.Limits.isColimitOfOp\", \"CategoryTheory.Limits.isColimitCoconeOfConeLeftOp\", \"CategoryTheory.Limits.isLimitConeOfCoconeUnop\"], \"digest\": \"3310e9bbd4ad75ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical cocones and limits do not give coherent comma quasicategories or their mapping spaces for arbitrary simplicial shapes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coconeEquivalenceOpConeOp\"",
+   "results": "{\"t\": \"2026-10-17T11:32:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"coconeEquivalenceOpConeOp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coconeEquivalenceOpConeOp\"], \"digest\": \"fd23e882cdef0b1b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical cocones and limits do not give coherent comma quasicategories or their mapping spaces for arbitrary simplicial shapes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasicategory reversing simplices identifies the opposite of the coherent cocone category with the cone category of the opposite diagram",
+   "results": "{\"t\": \"2026-10-17T11:32:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory reversing simplices identifies the opposite of the coherent cocone category with the cone category of the opposite diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coconeEquivalenceOpConeOp\", \"CategoryTheory.Limits.coconeEquivalenceOpConeOp_functor_obj\", \"CategoryTheory.Limits.coconeEquivalenceOpConeOp_inverse_obj\", \"CategoryTheory.Limits.coconeEquivalenceOpConeOp_functor_map\", \"CategoryTheory.Limits.coconeEquivalenceOpConeOp_inverse_map_hom\", \"CategoryTheory.Limits.coconeEquivalenceOpConeOp_counitIso\", \"CategoryTheory.Limits.coneLeftOpOfCocone_π_app\", \"CategoryTheory.Limits.coneOfCoconeUnop_π\"], \"digest\": \"57c83c66f1731b19\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical cocones and limits do not give coherent comma quasicategories or their mapping spaces for arbitrary simplicial shapes."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategor|quasiCategor|QuasiCategor|rightPinched|pinched",
+   "results": "{\"t\": \"2026-10-17T11:32:46Z\", \"tool\": \"grep\", \"query\": \"quasicategor|quasiCategor|QuasiCategor|rightPinched|pinched\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\"], \"digest\": \"9d1214acb3d515f9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the quasicategory basic/nerve/strict-bicategory files do not state the coherent comma-category duality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial isomorphism between opposite coherent comma quasicategories exchanges initial and terminal objects and outgoing and incoming mapping spaces",
+   "results": "{\"t\": \"2026-10-17T11:32:51Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial isomorphism between opposite coherent comma quasicategories exchanges initial and terminal objects and outgoing and incoming mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.rightOpLeftOpIso\", \"SSet.opEquivalence_counitIso\", \"SSet.opFunctorCompOpFunctorIso_hom_app_app\", \"CategoryTheory.CosimplicialObject.Augmented.leftOpRightOpIso\", \"SSet.opEquivalence\", \"SSet.opEquivalence_unitIso\", \"SSet.opFunctorCompOpFunctorIso_inv_app_app\", \"SSet.opEquivalence_functor\"], \"digest\": \"0724cba0c1d8fd48\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.opEquivalence and SSet.opFunctorCompOpFunctorIso give the opposite involution only, not comma quasicategories, mapping-space duality or initial/terminal correspondence; read AlgebraicTopology/SimplicialSet/Op.lean:39-111."
+  },
+  {
+   "tool": "grep",
+   "query": "Cocone|cocone|IsColimit|IsLimit|opposite|\\.op\\b",
+   "results": "{\"t\": \"2026-10-17T11:33:13Z\", \"tool\": \"grep\", \"query\": \"Cocone|cocone|IsColimit|IsLimit|opposite|\\\\.op\\\\b\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no cocone, limit or opposite declaration in the quasicategory directory matches the query."
   }
  ],
  "split_report": {
   "date": "2026-10-17",
-  "item": "lem-coef-infinity-cocone-restriction-initial",
+  "item": "lem-coef-infinity-fixed-cocone-opposite-limit",
   "worker": "stage1",
-  "summary": "Extracted the fixed-boundary opposite-category identification and colimit-to-limit universal-property conversion from the parent proof.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, fixed-boundary mapping-space universal property."
+  "summary": "Kept the statement unchanged. Constructed the fixed-boundary isomorphism on every parameter simplex, checked its operators, involutive inverse, endpoint exchange and apex evaluation, and converted initiality to terminality with the existing natural opposite mapping-space equivalences. Checked the empty shape. No new nodes or Mathlib leaves.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint (main-20261015, sk-thm-sf-package): coherent realization of the mapping-space universal property in the derived coefficient adjunction. This is the local opposite-duality tool under the inherited biduality unit, not a replacement of a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent comma/functor quasicategory and Kan mapping-space closure for arbitrary small shapes; the biduality unit has no separate such foundations statement."
+   }
+  ]
  },
  "created": {
   "by": "worker",
@@ -73,7 +198,7 @@
   "group": "Q126"
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "blueprint": {
@@ -94,5 +219,16 @@
   },
   "same_as": [],
   "is": null
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q92-f602c1f4c",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-f602c1f4c (reviewer sub-agent of L); spot-checked: Read the item, every proof step, all cited node statements, unit/chapter route, Kerodon 003N and 02KF source locations, blueprint route, and Mathlib search records. The explicit degreewise opposite construction is correct, endpoint and apex behavior match the pullback definitions, mapping-space reversal gives initial/terminal duality, and empty and small test cases pass. No new nodes or duplicate claims were introduced; the sole off-unit calculus tool is explicitly justified. Review written to review.md."
  }
 }

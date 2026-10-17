@@ -24,79 +24,158 @@
  ],
  "proof": [
   {
-   "text": "(1) Work in the small pro-étale site in a universe containing its skeleton and the set of finite subextensions. Put $R=E_X$, and let $B$ be either $F_X$ or $\\QbarX$. The closed symmetric sheaf tensor of [sk-def-sfb-sheaf-tensor] is additive and preserves colimits. The ordinary extension/restriction adjunction of [sk-def-sfb-change-of-scalars] therefore applies; restriction is exact, and extension is right exact. The finite-limit preservation in [lem-sfb-subfield-flat] and [lem-sfb-qlbar-flat], respectively, makes extension exact as well. Thus both termwise functors preserve quasi-isomorphisms. Apply the localization defining the derived category in [def-weil-abstract-derived-category] to their unit and counit: naturality holds for images of complex maps and also for inverses of quasi-isomorphisms, and the two triangle identities remain identities after localization. This gives an adjunction on the derived categories without any K-flat-resolution hypothesis. Its bijection is\n$$\\alpha_B(f)=\\operatorname{Res}(f)\\circ\\eta_C^B,\\qquad \\eta_C^B:C\\longrightarrow\\operatorname{Res}(B\\otimes_R C),\\quad c\\longmapsto1\\otimes c.$$\nThe inverse is $g\\longmapsto\\epsilon\\circ(B\\otimes_R g)$, with $\\epsilon(b\\otimes n)=bn$. These formulas and the triangle identities prove clause (1); termwise restriction commutes with every shift.\n\nHere is how the functors of the statement are these termwise ones. In the statement $C_F=T_{E,F}C$ and $C_{\\Qlb}=T_{E,\\Qlb}C$ are the derived extensions of scalars of [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar], and $\\operatorname{Res}$ is termwise restriction. Both module-level extensions were just shown exact, so the exact-functor clause of [sk-def-sfb-derived-categories] gives natural isomorphisms $T_{E,F}\\cong D(F_X\\otimes_{E_X}-)$ and $T_{E,\\Qlb}\\cong D(\\QbarX\\otimes_{E_X}-)$ with the termwise functors, and likewise $T_{F,F'}$ and $T_{F,\\Qlb}$ for the intermediate stages. Transporting the adjunction above along these isomorphisms gives clause (1) for $T_{E,F}$ and $T_{E,\\Qlb}$; all computations below are made with the termwise functors. The extension map to $\\Qlb$ in clause (3) sends $f\\colon C_F\\to D_F[r]$ to $\\theta_{D[r]}\\circ T_{F,\\Qlb}(f)\\circ\\theta_C^{-1}$, where $\\theta\\colon T_{F,\\Qlb}T_{E,F}\\cong T_{E,\\Qlb}$ is the comparison of [def-sfb-derived-extend-comp-iso]; that definition takes $\\theta$ termwise from the isomorphism $\\operatorname{Ext}_{F_X\\to\\QbarX}\\operatorname{Ext}_{E_X\\to F_X}\\cong\\operatorname{Ext}_{E_X\\to\\QbarX}$ carrying the composite unit to the unit. The transitivity isomorphism displayed below, for $B=F_X$ and $B'=\\QbarX$, sends $1\\otimes(1\\otimes m)$ to $1\\otimes m$, so it carries the composite unit $m\\mapsto1\\otimes(1\\otimes m)$ to the unit $m\\mapsto1\\otimes m$. By the uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] (the case of one right adjoint and $\\delta=\\mathrm{id}$) it is that isomorphism. Hence the map $f\\mapsto f_{B'}$ used below is exactly the extension map of clause (3).\n\nHere is the transition calculation. For $B\\to B'$ arising from $F\\subseteq F'$ or $F\\subseteq\\Qlb$, the transitivity isomorphism is\n$$B'\\otimes_B(B\\otimes_R M)\\longrightarrow B'\\otimes_R M,\\quad b'\\otimes(b\\otimes m)\\longmapsto b'i(b)\\otimes m,$$\nwith inverse $b'\\otimes m\\longmapsto b'\\otimes(1\\otimes m)$. Both maps are balanced and inverse on the displayed generators, hence on the sheaf tensors and termwise on complexes. The coefficient transition $t_M:B\\otimes_R M\\to B'\\otimes_R M$ sends $b\\otimes m$ to $i(b)\\otimes m$. Thus $t_C\\eta_C^B=\\eta_C^{B'}$. Naturality of the $B\\to B'$ extension unit, first on complexes and then on their localization, gives $\\operatorname{Res}(f_{B'})t_C=t_{D[r]}\\operatorname{Res}(f)$. Consequently\n$$\\alpha_{B'}(f_{B'})=t_{D[r]}\\alpha_B(f).$$\nThis proves compatibility with all finite transition maps and with the maps to $\\Qlb$.",
+   "text": "Work on a small skeleton of $X_{\\mathrm{pro\\acute et}}$ in a universe containing the coefficient diagram, and put $R=E_X$. The ambient abelian sheaf tensor is closed symmetric monoidal and preserves colimits [sk-def-sfb-sheaf-tensor]. Thus [sk-def-sfb-change-of-scalars] gives $B\\otimes_R-\\dashv U_B$, for $B=F_X$ or $\\QbarX$, with exact restriction $U_B$. Extension is right exact by that same statement and preserves finite limits by [lem-sfb-subfield-flat] or [lem-sfb-qlbar-flat]; hence it is exact.",
    "uses": [
-    "lem-sfb-subfield-flat",
-    "lem-sfb-qlbar-flat",
-    "sk-def-sfb-change-of-scalars",
     "sk-def-sfb-sheaf-tensor",
-    "def-weil-abstract-derived-category",
-    "def-sfb-derived-extend-subfield",
-    "def-sfb-derived-extend-to-qlbar",
-    "def-sfb-derived-extend-comp-iso",
-    "sk-def-sfb-derived-categories",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-subfield-flat",
+    "lem-sfb-qlbar-flat"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
-    "place": "proof, paragraph (1)"
+    "place": "paragraph (1): exact module-level functors"
    }
   },
   {
-   "text": "(2) Let $I$ be the poset of finite subextensions $F\\subseteq\\Qlb$ containing $E$. It is a set, contains $E$, and is directed by finite composita [det-def-sfb-qlbar-condensed-subextensions]. Restricting the coefficient colimit of [sk-prop-sfb-qlbar-colimit-x] to $I$ does not change it: a cocone on $I$ extends to every finite subfield $H$ by $H_X\\to(EH)_X$ followed by its cocone leg. For $H\\subseteq H'$ the required compatibility follows in $(EH')_X$; if $H$ contains $E$, the extension is the original cocone. These two operations are inverse.\n\nWe use this colimit as one of $R$-modules, not just as rings. The module objects identify with ordinary module sheaves: by the sheafified sectionwise tensor in [sk-def-sfb-sheaf-tensor], an internal action is exactly a compatible sectionwise bilinear action. By [lem-weil-pbc-module-sheaves-colimits-forgetful], module colimits are sheafified sectionwise colimits. For this filtered diagram of $R$-algebras, the sectionwise module colimit has ring multiplication: move two representatives to a common finite stage and multiply there; independence and the ring laws follow at a common stage. Sheafification extends these operations and their equations, so this module colimit is also the ring colimit (a compatible ring cocone induces the module map, which preserves multiplication by its displayed formula). Its vertex is therefore $\\QbarX$ with its specified $R$-action.\n\nFor a fixed $R$-module $M$, the relative tensor of [def-sfb-modobj-relative-tensor] is a coequalizer built from the ambient sheaf tensor. That tensor preserves colimits by [sk-def-sfb-sheaf-tensor]. Taking the colimit of these coequalizers is the coequalizer of the colimits: maps out of either object are exactly compatible families of maps satisfying the same balancing equation. Hence\n$$\\varinjlim_{F\\in I}(F_X\\otimes_R M)\\cong(\\varinjlim_{F\\in I}F_X)\\otimes_R M\\cong\\QbarX\\otimes_R M.$$\nApply this degreewise to $M=D^n$. The maps are induced by $b\\otimes m\\mapsto i(b)\\otimes m$, and the differential is $b\\otimes m\\mapsto b\\otimes d(m)$, so the displayed isomorphisms commute with differentials. If $D^n=0$ for $n<a$, each tensor term is zero in those degrees, proving the common lower bound and clause (2).",
+   "text": "Apply [lem-weil-pbc-termwise-adjunction-homotopy](a) to this additive adjunction to get the adjunction on complexes. Both termwise functors preserve quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. Apply [lem-sfb-adjunction-localization] to the derived localization functors. This gives the derived adjunction with $\\alpha_B(f)=U_B(f)\\circ\\eta_C^B$, where $\\eta_M^B(m)=1\\otimes m$, and inverse $g\\mapsto\\epsilon\\circ(B\\otimes_R g)$, where $\\epsilon(b\\otimes n)=bn$. Restriction commutes with shifts by the exact-functor shift comparison.",
    "uses": [
-    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "paragraph (1): localization of the unit and counit"
+   }
+  },
+  {
+   "text": "The functors $T_{E,F}$ and $T_{E,\\Qlb}$ in [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar] are left-derived extensions. By the exact-functor clause of [sk-def-sfb-derived-categories], they identify naturally with the termwise extensions just used; the same holds for intermediate coefficient fields. Transporting the adjunction along these comparisons proves clause (1) for the functors in the statement, with $U_B(D_B[r])=(U_BD_B)[r]$.",
+   "uses": [
+    "def-sfb-derived-extend-subfield",
+    "def-sfb-derived-extend-to-qlbar",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "paragraph (1): identify the chosen derived extensions"
+   }
+  },
+  {
+   "text": "For $B\\to B'$ induced by $F\\subseteq F'$ or $F\\subseteq\\Qlb$, the balanced maps $b'\\otimes(b\\otimes m)\\mapsto b'i(b)\\otimes m$ and $b'\\otimes m\\mapsto b'\\otimes(1\\otimes m)$ are inverse, giving $B'\\otimes_B(B\\otimes_R M)\\cong B'\\otimes_R M$. They commute with differentials. They carry the composite unit $m\\mapsto1\\otimes(1\\otimes m)$ to $m\\mapsto1\\otimes m$. The equal-right-adjoint uniqueness of [lem-weil-pbc-conjugate-iso-unit-equation] identifies this map with the unit-compatible scalar comparison underlying [def-sfb-derived-extend-comp-iso]. Thus $f\\mapsto f_{B'}$ here is the actual extension map $\\theta_{D[r]}\\circ T_{F,B'}(f)\\circ\\theta_C^{-1}$ used in clause (3).",
+   "uses": [
+    "def-sfb-derived-extend-comp-iso",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "paragraph (1): tensor transitivity and the canonical comparison"
+   }
+  },
+  {
+   "text": "Put $t_M:B\\otimes_RM\\to B'\\otimes_RM$, $b\\otimes m\\mapsto i(b)\\otimes m$. Then $t_C\\circ\\eta_C^B=\\eta_C^{B'}$. Naturality of the $B\\to B'$ unit, on complexes and then after localization, gives $U_{B'}(f_{B'})\\circ t_C=t_{D[r]}\\circ U_B(f)$. Substituting into the Hom formula of step 2 yields $\\alpha_{B'}(f_{B'})=t_{D[r]}\\circ\\alpha_B(f)$. This proves naturality in the coefficient field and identifies all maps to $\\Qlb$ as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "paragraph (1): transition identity"
+   }
+  },
+  {
+   "text": "Let $I$ be the set of finite subfields $F\\subseteq\\Qlb$ containing $E$. It contains $E$ and is directed by finite composita [det-def-sfb-qlbar-condensed-subextensions]. The ring colimit [sk-prop-sfb-qlbar-colimit-x] remains $\\QbarX$ when restricted to $I$: extend a cocone on $I$ to every finite $H$ by $H_X\\to(EH)_X$ followed by its cocone map. For $H\\subseteq H'$ compatibility holds in $(EH')_X$, and restriction and extension of cocones are inverse. All legs are the specified inclusion-induced coefficient maps.",
+   "uses": [
     "det-def-sfb-qlbar-condensed-subextensions",
+    "sk-prop-sfb-qlbar-colimit-x"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "paragraph (2): the index and its coefficient colimit"
+   }
+  },
+  {
+   "text": "For use as $R$-modules, identify internal modules in tensor abelian sheaves with sectionwise module sheaves by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Its hypotheses hold on the chosen small site: abelian sheafification and its strong monoidal tensor comparison are supplied by [sk-def-sfb-sheaf-tensor]. Apply [lem-sfb-directed-ring-sheaf-module-colimit] with $A_F=F_X$, $A=\\QbarX$, and $s_F:R\\to F_X$ the inclusions. The ring cocone was established in step 6, and $q_Fs_F$ is the same inclusion $R\\to\\QbarX$. Its conclusion says that this very cocone is the colimit in $R$-modules. Transport through the equivalence preserves that universal property.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
     "sk-def-sfb-sheaf-tensor",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-directed-ring-sheaf-module-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "paragraph (2): ring-to-module colimit identification"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-independent-sheaf-tensor-colimits], tensoring sectionwise module sheaves with a fixed $M$ preserves this coefficient-sized colimit. Under the equivalence of step 7 this tensor is the internal relative tensor: its two parallel maps are precisely the balancing maps in [def-sfb-modobj-relative-tensor], so both represent balanced bilinear morphisms. Hence $\\varinjlim_{F\\in I}(F_X\\otimes_RM)\\cong\\QbarX\\otimes_RM$, with the canonical tensor cocone. For $M=D^n$, the differential is $b\\otimes m\\mapsto b\\otimes d(m)$, so these comparisons commute with differentials. If $D^n=0$ below $a$, then all the stage tensors are zero there. This proves clause (2).",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
     "def-sfb-modobj-relative-tensor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
-    "place": "proof, paragraph (2)"
+    "place": "paragraph (2): commute tensor and colimit degreewise"
    }
   },
   {
-   "text": "(3) The standing setting [sk-def-sfb-dc-setting] makes $X$ finite type over a field $k$. A field is Noetherian since its only ideals are $0$ and $k$, and $\\operatorname{Spec}k$ has one point and is quasi-compact. Therefore [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian, as required by [sk-lem-constructible-ext-continuity]. The same continuity statement explicitly includes every $C\\in\\Dbc(X,E)$, so its hypothesis on the source object holds.\n\nChoose a bounded complex $D^\\bullet$ representing $D$. For completeness, bounded cohomology suffices for this choice: take any representative $K$ and integers $a<b$ outside which its cohomology vanishes. First replace its degree-$b$ term by $\\ker d^b$ and set all higher terms to zero; the resulting complex maps to $K$ inducing the same cohomology. Then replace degree $a$ by $\\operatorname{coker}d^{a-1}$ and set lower terms to zero; the first truncated complex maps to this bounded complex, again inducing the same cohomology. Both maps are quasi-isomorphisms, giving the required representative. The boundedness used here is that of [sk-def-sfb-bounded-constructible].\n\nPut $K_F^\\bullet=F_X\\otimes_{E_X}D^\\bullet$, regarded by restriction as $E_X$-modules. By (2) these form a small filtered diagram with a common lower bound and termwise colimit $\\QbarX\\otimes_{E_X}D^\\bullet$. Exactness in (1) shows these complexes represent $\\operatorname{Res}D_F$ and $\\operatorname{Res}D_{\\Qlb}$. Apply [sk-lem-constructible-ext-continuity] with $\\Lambda=\\underline E$ and $q=r$ to obtain\n$$\\varinjlim_F\\Hom_{D(X,E)}(C,K_F^\\bullet[r])\\xrightarrow{\\sim}\\Hom_{D(X,E)}(C,(\\QbarX\\otimes_{E_X}D^\\bullet)[r]).$$\nThe transition identity $\\alpha_{B'}(f_{B'})=t_{D[r]}\\alpha_B(f)$ proved in (1) identifies its source diagram with the diagram of $\\Hom_{D(X,F)}(C_F,D_F[r])$. Taking $B'=\\QbarX$ in that same identity identifies every cocone leg with extension of scalars to $\\Qlb$. Thus this bijection is precisely the map of clause (3), for every integer $r$.",
+   "text": "The standing setting [sk-def-sfb-dc-setting] makes $X$ finite type over a field $k$. A field has only the ideals $0$ and $k$, and its spectrum is a single quasi-compact point; thus $\\operatorname{Spec}k$ is Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] to conclude that $X$ is Noetherian. By [sk-def-sfb-bounded-constructible], choose $a\\le b$ outside which $H^i(D)=0$. Apply [lem-sfb-bounded-representative] to the abelian category of $E_X$-module objects to choose $D^\\bullet$ representing $D$ and zero outside $[a,b]$.",
    "uses": [
     "sk-def-sfb-dc-setting",
     "lem-weil-pbc-finite-type-over-noetherian",
     "sk-def-sfb-bounded-constructible",
+    "lem-sfb-bounded-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "paragraph (3): Noetherian hypothesis and bounded representative"
+   }
+  },
+  {
+   "text": "Let $K_F^\\bullet=F_X\\otimes_{E_X}D^\\bullet$, restricted to $E_X$-modules. Steps 6–8 give a small filtered diagram with common lower bound $a$ and termwise colimit $\\QbarX\\otimes_{E_X}D^\\bullet$. Steps 1–3 identify these with $U_FD_F$ and $U_{\\Qlb}D_{\\Qlb}$. The theorem [sk-lem-constructible-ext-continuity] explicitly covers every $C\\in\\Dbc(X,E)$; its scheme hypothesis holds by step 9. Apply it with $\\Lambda=\\underline E$ and $q=r$. It makes $\\varinjlim_F\\Hom_{D(X,E)}(C,K_F^\\bullet[r])\\to\\Hom_{D(X,E)}(C,(\\QbarX\\otimes_{E_X}D^\\bullet)[r])$ bijective. The identity in step 5 identifies both the source diagram and every cocone leg with the specified coefficient-extension Hom diagram. Consequently this bijection is exactly the map in clause (3).",
+   "uses": [
     "sk-lem-constructible-ext-continuity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
-    "place": "proof, paragraph (3)"
+    "place": "paragraph (3): Ext continuity and its canonical map"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-subfield-flat",
-  "lem-sfb-qlbar-flat",
-  "sk-def-sfb-change-of-scalars",
-  "sk-def-sfb-sheaf-tensor",
-  "def-weil-abstract-derived-category",
+  "def-sfb-derived-extend-comp-iso",
   "def-sfb-derived-extend-subfield",
   "def-sfb-derived-extend-to-qlbar",
-  "def-sfb-derived-extend-comp-iso",
-  "sk-def-sfb-derived-categories",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "sk-prop-sfb-qlbar-colimit-x",
-  "det-def-sfb-qlbar-condensed-subextensions",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-sfb-modobj-relative-tensor",
-  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "lem-sfb-adjunction-localization",
+  "lem-sfb-bounded-representative",
+  "lem-sfb-directed-ring-sheaf-module-colimit",
+  "lem-sfb-qlbar-flat",
+  "lem-sfb-subfield-flat",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
   "sk-def-sfb-bounded-constructible",
-  "sk-lem-constructible-ext-continuity"
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-lem-constructible-ext-continuity",
+  "sk-prop-sfb-qlbar-colimit-x"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
-  "place": "Three numbered proof paragraphs, with explicit exact-adjunction localization, coefficient-colimit and canonical-map calculations supplied in the second reading."
+  "place": "The same three proof paragraphs, expanded with explicit adjunction normalization, directed coefficient colimit and the cited generic/Mathlib lemmas."
  },
  "mathlib_searches": [
   {
@@ -192,7 +271,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -213,30 +292,46 @@
   "date": "2026-10-17",
   "item": "det-lem-coefficient-finite-descent-hom",
   "worker": "stage1",
-  "summary": "Second reading repaired the three blueprint paragraphs without changing the statement or creating nodes. Expanded exact scalar adjunction by localization, explicit transitivity and naturality, cofinality of fields containing E, the ring-to-module colimit identification and tensor-colimit argument, bounded representative construction, and Noetherian hypotheses for Ext continuity. The canonical-map identification is now an explicit equation. Maintainer reader fix: bound $C_F$, $C_{\\Qlb}$ to the unit's derived extensions $T_{E,F}$, $T_{E,\\Qlb}$ and identified the clause-(3) map with the comparison of def-sfb-derived-extend-comp-iso; added step sources; reduced the declared tool uses to the two off-route statements.",
-  "blueprint": "The three proof paragraphs of sk-lem-coefficient-finite-descent-hom.md are realized by steps 1, 2 and 3 respectively.",
+  "summary": "Preserved the statement and three-paragraph route; reused the existing localized-adjunction Mathlib leaf, extracted the bounded-representative Mathlib leaf, and replaced hidden ring/module and tensor/colimit arguments by existing generic DAG lemmas. Ten short steps retain the explicit unit-compatible comparison and transition identity.",
+  "blueprint": "Paragraph (1) is realized by steps 1–5, paragraph (2) by steps 6–8, paragraph (3) by steps 9–10.",
   "tool_uses": [
    {
     "node": "lem-sfb-subfield-flat",
-    "why": "Finite-stage flatness of F_X over E_X, cited by the blueprint item itself; its unit sk-prop-sfb-cartesian-coefficients is not cited by the two-colimit unit and no node of the unit states it."
+    "why": "Finite-stage flat scalar extension is used on the blueprint route, whose two-colimit unit does not itself provide this generic coefficient tool."
    },
    {
-    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "why": "Generic module-sheaf colimits give the underlying module colimit required in the unit tensor-colimit sentence; the coefficient proposition states the colimit only as rings."
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic additive-adjunction lift to complexes, needed before derived localization; the unit contains no generic lift theorem."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor localization and shift comparison used in step 2; no unit-route result supplies it."
+   },
+   {
+    "node": "lem-sfb-directed-ring-sheaf-module-colimit",
+    "why": "Generic directed ring-sheaf colimit comparison, used in step 7 because the unit coefficient proposition states only a ring colimit."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Generic ringed-site tensor preservation of coefficient-sized colimits used in step 8; no route step is replaced."
    }
   ]
  },
  "tool_uses": [
   "lem-sfb-subfield-flat",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-directed-ring-sheaf-module-colimit",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-batch",
-  "group": "NZ",
+  "reviewer": "NT-Codex-Q33-7c5dc45b2",
+  "group": "Q33",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: Read in full: the main-20261015 item .md and .proof.md, the unit sk-thm-sfb-qlbar-two-colimit (statement and paragraph (2)), and the statement of every cited node. The item statement is verbatim and not weakened. The coefficient category is D(Mod_{Λ_X}) over pulled-back condensed E_X/F_X/QbarX throughout. Small cases checked: C=0, D=0, F=E, C=D=E_X with r=0, r<0. Step 1: the change-of-scalars hypotheses hold (braided, coequalizers, ⊗ preserves colimits, E_X commutative). Exactness comes from lem-sfb-subfield-flat and lem-sfb-qlbar-flat. The localized adjunction (Mathlib Adjunction.localization, Localization/Adjunction.lean 48-125) and the transition equation α_{B'}(f_{B'})=t α_B(f) are correct. Step 2: the cofinality of fields containing E, the ring-to-module colimit via lem-weil-pbc-module-sheaves-colimits-forgetful (2)(3) and the coequalizer/tensor-colimit argument are correct. Step 3: the Noetherian hypothesis comes from finite type over a field via lem-weil-pbc-finite-type-over-noetherian; continuity covers every bounded constructible C for Λ=E; the τ≤b, τ≥a bounded representative is correct; q=r. There are no new nodes, no duplicates (lem-sfb-constructible-cocone-hom-surj/inj are consumers), no SGA, and the graph is acyclic. Three repairs, in fixes/: (1) C_F and C_Qlb were not tied to the unit's derived-extension nodes T_{E,F} and T_{E,Qlb}, which the reviewed consumer det-lem-coefficient-finite-descent-objects uses. The clause-(3) map had never been identified with def-sfb-derived-extend-comp-iso. I added both T definitions to stmt_deps. Step 1 now identifies T with the termwise functor by the exact-functor clause of sk-def-sfb-derived-categories. It shows the termwise transitivity isomorphism is unit-compatible, so by lem-weil-pbc-conjugate-iso-unit-equation it is the comparison θ (C4/E6). (2) I added the missing step sources (.proof.md, paragraph k). (3) I reverted the unit realized/realized_by placeholder binding to the empty base, because this item is not the unit's key node. Accepted tool_uses: lem-sfb-subfield-flat, which was not declared and is cited by the blueprint item itself, and lem-weil-pbc-module-sheaves-colimits-forgetful. I removed the declared definition and in-route entries from split_report.tool_uses.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-7c5dc45b2 (reviewer sub-agent of L); spot-checked: Full mathematical review completed and written to review.md. The item matches the blueprint; all ten steps, cited nodes, coefficient maps, Mathlib leaf, source locations, hypotheses, edge cases, searches, and accepted tool uses were checked. No repairs required."
  },
  "lean_audit": {
   "master": {

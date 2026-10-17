@@ -13,9 +13,146 @@
   "def-sf-pf",
   "lem-sf-open-external-tensor-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P_h=Lh^*$, $S_h=Rh_!$, and $J_i=i_!$ for open $i$; for proper $h$, identify $S_h=Rh_*$. All products and tensors below are derived and over $\\Lambda$. The operations on the finite-Tor domains are supplied by [def-sf-datum]. Whenever applying the concrete finite-level composition or exchange theorem on pro-etale categories, use the etale-origin witness for bounded constructible inputs given by [lem-sf-proetale-constructible-origin]. The composition comparisons are the normalized ones of [thm-sf-comp-composition]. We insert these comparisons in equations involving $S_hS_e=S_{he}$; their associativity allows parentheses to be suppressed. No assertion about an arbitrary unbounded pro-etale complex is needed.",
+   "uses": [
+    "def-sf-datum",
+    "lem-sf-proetale-constructible-origin",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: finite-level domains and composition comparisons"
+   }
+  },
+  {
+   "text": "For any $h:V\\to W$, set $\\Theta_h(A,N)=S_h(\\sigma)\\operatorname{PF}_{h,N,A}\\sigma:A\\otimes S_hN\\to S_h(P_hA\\otimes N)$. Thus $\\Theta_g(F,L)=\\Psi_g(F,L)$, including both specified symmetries. The composition pentagon of [prop-sf-pf-coherence], conjugated by these symmetries, gives\n$$\\Theta_{he}(A,N)=S_h\\bigl(\\Theta_e(P_hA,N)\\bigr)\\Theta_h(A,S_eN).$$\nIndeed substitute the two-factor formula for $\\operatorname{PF}_{he}$, move each symmetry past the natural transformation in the other input, and cancel the adjacent $\\sigma^2=1$. This also gives naturality of $\\Theta$ in both inputs; no symmetry of the Kunneth map is being assumed.",
+   "uses": [
+    "prop-sf-pf-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Pentagon paragraph, with the signed tensor symmetry"
+   }
+  },
+  {
+   "text": "First remove the open factor of $f=aj$, keeping $g$ fixed. Put $U=\\bar X\\times_BY$, with $r:U\\to\\bar X$, $s:U\\to Y$, and $v=j\\times_B\\operatorname{id}_Y:T\\hookrightarrow U$, so $q=sv$. Let\n$$\\beta:P_rJ_jK\\longrightarrow J_vP_pK$$\nbe normalized open base change. The vertical-pasting identity of [fix-lem-exchanges] and the compactification definition [def-exchange-projection] give, under $S_q=S_sJ_v$,\n$$\\operatorname{Ex}_{aj,g}(K)=S_s(\\beta)\\operatorname{Ex}_{a,g}(J_jK).$$\nHere the first square is the base change of $a$ along $g$, and the second the base change of $j$ along $r$; their outer rectangle is the square for $(aj,g)$. The open exchange in this factorization is precisely $\\beta$, with identity restriction by [lem-sf-open-tensor-normalization].",
+   "uses": [
+    "fix-lem-exchanges",
+    "def-exchange-projection",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: expand the first compactification by vertical exchange pasting"
+   }
+  },
+  {
+   "text": "Set\n$$e_1=\\operatorname{PF}_{v,P_pK,P_sL}(\\beta\\otimes1):P_rJ_jK\\otimes P_sL\\longrightarrow J_v(P_pK\\otimes P_qL).$$\nThe composition pentagon for $q=sv$ expands $\\operatorname{PF}_q$ into $\\operatorname{PF}_s$ followed by $S_s\\operatorname{PF}_v$. Naturality of $\\operatorname{PF}_s$ moves $\\beta$ through its first input. Substitution of step 3 into the displayed definition of $\\lambda$ therefore gives\n$$\\lambda_{aj,g}(K,L)=S_gS_s(e_1)\\,\\lambda_{a,g}(J_jK,L),$$\nwhere the target is read using $S_gS_sJ_v=S_t$. This is an equality of the actual composites: the initial $\\Theta_g$ is unchanged, the middle two factors are those just expanded, and the final compositors agree by associativity. The map $e_1$ is the one-open external tensor comparison by [lem-sf-open-external-tensor-normalization], not a separately chosen isomorphism.",
+   "uses": [
+    "prop-sf-pf-coherence",
+    "thm-sf-comp-composition",
+    "lem-sf-open-external-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: first open-factor substitution in the specified composite"
+   }
+  },
+  {
+   "text": "Now remove the open factor of $g=bk$, with the first morphism $a$ proper. For this calculation let $M=J_jK$, $W=\\bar X\\times_B\\bar Y$, and denote its projections by $P:W\\to\\bar X$ and $Q:W\\to\\bar Y$. Keep $U=\\bar X\\times_BY$, with $w=\\operatorname{id}_{\\bar X}\\times_Bk:U\\hookrightarrow W$ and projections $r,s$. Write $H=P_PM$, $F=S_aM$. The square $(w,s,Q,k)$ is Cartesian. Put $E_H=\\operatorname{Ex}_{Q,k}(H):P_kS_QH\\to S_sP_wH$. Horizontal pasting in [fix-lem-exchanges] says\n$$\\operatorname{Ex}_{a,bk}(M)=E_H\\,P_k\\operatorname{Ex}_{a,b}(M).$$\nLet $\\Gamma_N:J_kS_sN\\to S_QJ_wN$ be the normalized proper/open map for this square. It is the $J_k\\dashv P_k$-adjunct of the inverse open-restriction comparison, as specified in [lem-sf-proper-open-tensor-compatibility]. It is also the composition comparison $\\alpha_{Q,w}^{-1}\\alpha_{k,s}$: take $j=\\operatorname{id}_U$, $q=s$, $i=k$, $b=w$, $p=Q$ in the compatible triangle of [lem-sf-composition-projection-mate]. In particular its restriction, followed by exchange and $P_wJ_w=1$, is the identity.",
+   "uses": [
+    "fix-lem-exchanges",
+    "lem-sf-proper-open-tensor-compatibility",
+    "lem-sf-composition-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: horizontal exchange pasting and the normalized proper/open compositor"
+   }
+  },
+  {
+   "text": "Put $N=P_wH\\otimes P_sL$ and define the one-open tensor map\n$$e_2:H\\otimes P_QJ_kL\\xrightarrow{1\\otimes\\beta}H\\otimes J_wP_sL\\xrightarrow{\\text{signed open tensor}}J_wN.$$\nThe precise open base-change and tensor maps of [lem-sf-open-tensor-normalization] restrict to the identity. The needed square is\n$$S_Q(e_2)\\operatorname{PF}_{Q,H,J_kL}=\\Gamma_N\\,J_k\\bigl(\\operatorname{PF}_{s,P_wH,L}(E_H\\otimes1)\\bigr)\\Theta_k(S_QH,L).$$\nTo verify it, precompose both sides with $\\Theta_k(S_QH,L)^{-1}$. Their common source is now $J_k(P_kS_QH\\otimes L)$. By $J_k\\dashv P_k$ and its normalized invertible unit, it suffices to compare their restrictions along $k$. Postcompose the restricted maps with $E_{J_wN}$ and $S_s(P_wJ_wN\\cong N)$; this is invertible by proper base change (A2) of [def-sf-datum]. The left side becomes $\\operatorname{PF}_{s,P_wH,L}(E_H\\otimes1)$ by the base-change square of [prop-sf-pf-coherence], naturality of exchange, and $P_we_2=1$. The right side becomes exactly the same map by the normalization of $\\Gamma_N$ in step 5 and $P_k\\Theta_k=1$ under the open-unit identifications. Thus the square commutes. This argument uses the open adjunction on the source; it does not claim that restriction detects arbitrary maps.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-proetale-extension-zero",
+    "def-sf-datum",
+    "prop-sf-pf-coherence",
+    "fix-lem-exchanges",
+    "lem-sf-proper-open-tensor-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph: open-unit test of the proper projection square"
+   }
+  },
+  {
+   "text": "Expand $\\Theta_{bk}(F,L)$ by step 2 as $S_b\\Theta_k(P_bF,L)\\Theta_b(F,J_kL)$. Insert the horizontal-pasting equation of step 5 in $\\lambda_{a,bk}$. Naturality of $\\Theta_k$ moves $P_k\\operatorname{Ex}_{a,b}(M)$ past $\\Theta_k$, leaving inside $S_b$ precisely\n$$\\Gamma_NJ_k\\bigl(\\operatorname{PF}_{s,P_wH,L}(E_H\\otimes1)\\bigr)\\Theta_k(S_QH,L),$$\npreceded by $\\operatorname{Ex}_{a,b}(M)\\otimes1$ and $\\Theta_b(F,J_kL)$. Step 6 replaces this displayed factor by $S_Q(e_2)\\operatorname{PF}_{Q,H,J_kL}$. The remaining composite is the defining $\\lambda_{a,b}(M,J_kL)$. Associativity of the composition comparisons identifies the factor $\\Gamma$ with the final $\\alpha$'s. Consequently\n$$\\lambda_{a,bk}(M,L)=S_bS_Q(e_2)\\,\\lambda_{a,b}(M,J_kL),$$\nwith targets identified using $S_bJ_kS_s=S_bS_QJ_w$. This calculation retains the signed symmetries through $\\Theta$, rather than replacing the Kunneth morphism by an unspecified isomorphism.",
+   "uses": [
+    "prop-sf-pf-coherence",
+    "fix-lem-exchanges",
+    "thm-sf-comp-composition",
+    "lem-sf-composition-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: second open-factor substitution in the specified composite"
+   }
+  },
+  {
+   "text": "Apply step 4 with $g=bk$, then step 7 with $M=J_jK$. On $W=\\bar T$, the resulting tensor comparison is\n$$J_w(e_1)\\,e_2:(J_jK)\\boxtimes(J_kL)\\longrightarrow J_wJ_vD\\cong J_uD.$$\nThis is exactly the factorization through $\\bar X\\times_BY$ of [lem-sf-open-external-tensor-normalization]; that statement identifies it with $e_{j,k}$, including the equality with the opposite factorization and its signed symmetry normalization. Composing the two equations and using the associative composition law, $S_bS_Q=Rc_*$ and $J_wJ_v=J_u$, proves\n$$\\lambda_{aj,bk}(K,L)=Rc_*(e_{j,k})\\lambda_{a,b}(J_jK,J_kL).$$\nThe source and target identifications are respectively those of the given compactifications of $f,g$ and their product, as required.",
+   "uses": [
+    "lem-sf-open-external-tensor-normalization",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: assemble the two substitutions and identify the normalized product-open map"
+   }
+  },
+  {
+   "text": "Finally take a refinement of either chosen compactification and apply the preceding equality to both choices. By [fix-lem-exchanges](4), exchange intertwines the refinement comparisons; by [prop-sf-pf-coherence], so does the projection map. Naturality of tensor symmetry and independence and associativity of the compositors in [thm-sf-comp-composition] then show that the left sides are the same specified $\\lambda_{f,g}$ under the source and target comparisons. Hence the right sides intertwine those comparisons as well, by the two proved equalities. Transitivity and independence of common refinement in [prop-compactification-coherence-detailed] extend this assertion to comparison via any common refinement. This proves the requested refinement compatibility without assuming separately that an arbitrary product comparison is multiplicative.",
+   "uses": [
+    "fix-lem-exchanges",
+    "prop-sf-pf-coherence",
+    "thm-sf-comp-composition",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: independence of compactification, now for the actual composite"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-sf-datum",
+  "fix-lem-exchanges",
+  "lem-cbc-proetale-extension-zero",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-open-external-tensor-normalization",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-proper-open-tensor-compatibility",
+  "prop-compactification-coherence-detailed",
+  "prop-sf-pf-coherence",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Expanded proof of the symmetry paragraph compactification reduction, using the explicit projection/base-change and open normalization statements; Stacks Tags 0GL1, 0F7B, 0F7C, 0F7D, 0F7J provide the underlying constructions."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +188,45 @@
    "results": "8 hits. CategoryTheory.ExponentiableMorphism.pushforwardComp; LightCondensed.ihomPoints_symm_comp; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; CategoryTheory.ExponentiableMorphism.comp_pushforward; CategoryTheory.ExponentiableMorphism.coev_ev Over-category pushforward composition and condensed internal projectivity do not state this compactification/exchange/projection identity.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|kunneth|Kunneth",
+   "results": "0 hits. . Directory Mathlib/CategoryTheory. No hit states the specified compactification/exchange/projection equality: these are ordinary scheme-module or over-category compositors, geometric properness, or compactly supported functions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of shriek Kunneth morphisms with open proper factorizations and compactification refinement",
+   "results": "8 hits. AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.IsProper.instCompScheme, CategoryTheory.Sheaf.instHasFunctorialFactorizationLocallySurjectiveLocallyInjective, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, AlgebraicGeometry.IsProper.stableUnderComposition, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp. No hit states the specified compactification/exchange/projection equality: these are ordinary scheme-module or over-category compositors, geometric properness, or compactly supported functions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"comp\"",
+   "results": "0 hits. . No hit states the specified compactification/exchange/projection equality: these are ordinary scheme-module or over-category compositors, geometric properness, or compactly supported functions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical compact support external product map defined by base change and projection formula equals the proper external product followed by extension by zero for product compactifications",
+   "results": "8 hits. CompactlySupportedContinuousMap.compLinearMap, HasCompactMulSupport.extend_one, HasCompactMulSupport.mulTSupport_extend_one, CompactlySupportedContinuousMap.compMulHom, HasCompactMulSupport.mulTSupport_extend_one_subset, HasCompactSupport.extend_zero, CompactlySupportedContinuousMap.compLeft, instMonoidalClosedCondensedSet. No hit states the specified compactification/exchange/projection equality: these are ordinary scheme-module or over-category compositors, geometric properness, or compactly supported functions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley pasting and projection formula coherence identify the tensor product exchange for shriek pushforward under an open immersion followed by a proper map",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc. No hit states the specified compactification/exchange/projection equality: these are ordinary scheme-module or over-category compositors, geometric properness, or compactly supported functions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-kunneth-coherence",
@@ -71,5 +243,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-product-compactification-identity",
+  "worker": "stage1",
+  "summary": "Expanded the product compactification identity into two typed open-factor substitutions, verifying the second by the open adjunction and the projection/base-change square. Reused all needed nodes; no new nodes. Preserved the statement, sources, previous searches and ancestry. Checked the actual exchange/projection composite and refinement compatibility.",
+  "blueprint": "Realizes the symmetry paragraph of lem-sf-kunneth-coherence: the reduction to proper f,g by independence of compactification, by proving its missing multiplicativity identity.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies finite etale-origin witnesses for the bounded constructible inputs when invoking the witnessed finite-level composition/exchange statements; this generic site-comparison tool does not replace any step of the relative-product route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Steps 3 and 6 use the generic derived open-adjunction unit, open base-change and tensor normalizations, including their identity restrictions. This ringed-site normalization tool does not replace any relative-product argument; it fixes the canonical maps used in the two open substitutions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-43547490c",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-43547490c (reviewer sub-agent of L); spot-checked: Read and checked all nine steps, cited statements, blueprint route, and Stacks sources. Mathematics and finite coefficient domains pass. Added the missing tool-use declaration for lem-sf-open-tensor-normalization; statements and proof unchanged. Corrected JSON is under fixes/dag/nodes/sec-six-functors/; full findings are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

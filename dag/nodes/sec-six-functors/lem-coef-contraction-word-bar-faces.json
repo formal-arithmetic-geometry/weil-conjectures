@@ -12,9 +12,50 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Fix a homogeneous pure tensor in the summand indexed by $(A_0,\\ldots,A_n)$ and write $d_j=|a_j|$. Deleting the separator numbered $i$ (the separator immediately after $a_i$) replaces the adjacent pair by $b_i=a_i a_{i+1}$ and produces the corresponding pure tensor in the $(n-1)$-summand; its degree is $|b_i|=d_i+d_{i+1}$ by graded composition. Thus the $i$-th term is exactly $(-1)^{S_i-i}$ times that output word, with no balanced relation involved. On each fixed multidegree the sign is constant and composition is bilinear, so the displayed formulas respect the tensor bilinearity relations and define homomorphisms. Taking the direct sum over multidegrees and object tuples defines the maps on all tensors. Removing the formal rank-one generators and multiplying by the same sign gives the inverse of $\\Phi_n$, since $(-1)^{2\\alpha_n}=1$. A word has degree $\\sum_jd_j-(n+1)$; deleting a degree-$-1$ separator raises this degree by one, including at $n=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, section 3.1: the differential of a word after adjoining generators with $d(\\varepsilon_A)=1_A$; agent-explicit identification of the $i$-th deleted separator."
+   }
+  },
+  {
+   "text": "Let $\\alpha_n=n+\\sum_{j=0}^{n+1}(n+1-j)d_j$ and let $\\alpha_{n-1}^{(i)}$ be the exponent for the output word with $a_i,a_{i+1}$ replaced by $b_i$. Comparing coefficients gives $\\alpha_n-\\alpha_{n-1}^{(i)}=1+\\sum_{j=0}^{i}d_j=1+S_i$: the indices before $i$ each lose one in their coefficient, the merged pair contributes $d_i$, and all later coefficients agree. Therefore the total coefficient after applying $\\Phi_n$, deleting the separator, and applying $\\Phi_{n-1}^{-1}$ is $(-1)^{\\alpha_n+S_i-i-\\alpha_{n-1}^{(i)}}=(-1)^{i+1}$, since exponents are taken modulo $2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld sections 3.1 and 3.6(i); explicit Koszul-sign calculation for the suspension identification."
+   }
+  },
+  {
+   "text": "The preceding calculation holds for every homogeneous pure tensor and every $0\\le i\\le n$. Such tensors generate each tensor summand, and direct-sum elements have finite support, so additivity gives the identity on $V_n[n+1]$. Summing over $i$ gives $\\Phi_{n-1}^{-1}D_{\\rm del}\\Phi_n=\\sum_{i=0}^{n}(-1)^{i+1}\\partial_i$ for every $n\\ge1$. For a dg functor $F$, the induced tensor map sends each factor $a_j$ to $F(a_j)$ and each separator to the separator at $F(A)$. It preserves degrees, hence all sign exponents, and $F(a_i a_{i+1})=F(a_i)F(a_{i+1})$. Thus it commutes with every deletion, every face, and $\\Phi_n$ on generators. These equalities extend additively even if distinct object tuples have the same image, proving the asserted naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld section 3.6(i): word differential and functoriality; summation over all contraction positions."
+   }
+  },
+  {
+   "text": "For $n=0$ there are two factors $a_0,a_1$ and one separator. Here $\\alpha_0=d_0$ and $S_0=d_0$, so the coefficient of the composite after $D_{\\rm del}\\Phi_0$ is $(-1)^{d_0+d_0}=1$. The resulting map is precisely composition $\\mathrm{ev}:V_0\\to\\mathcal C(X,Y)$, proving $D_{\\rm del}\\Phi_0=\\mathrm{ev}$. A dg functor preserves composition, so this endpoint equality is natural as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld section 3.6(i): augmentation/evaluation at bar degree zero; agent-explicit endpoint sign check."
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Drinfeld, DG quotients of DG categories, sections 3.1, 3.2 and 3.6(i); explicit all-length deletion/face and augmentation sign calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -43,10 +84,38 @@
    "results": "{\"t\": \"2026-10-17T08:32:01Z\", \"tool\": \"leansearch\", \"query\": \"Alternating faces in the two sided bar construction agree with contraction deletion in a differential graded category word complex after an explicit suspension sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj\", \"AlgebraicTopology.AlternatingFaceMapComplex.objD\", \"AlgebraicTopology.alternatingFaceMapComplex\", \"Rep.barComplex.d_single\", \"AlgebraicTopology.alternatingFaceMapComplex_obj_d\", \"AlgebraicTopology.AlternatingCofaceMapComplex.d_eq_unop_d\", \"AlgebraicTopology.AlternatingCofaceMapComplex.objD\"], \"digest\": \"44c218ff96cbcb9a\"}",
    "date": "2026-10-17",
    "verdict": "no match: read AlternatingFaceMapComplex.lean:63-70 and Monoidal/Center.lean:70-110. Alternating-face and Dold-Kan declarations define simplicial differentials, and Rep.barComplex concerns group resolutions. None identifies graded dg-word contraction deletion with suspended bar faces or proves the specified evaluation sign. The Drinfeld hits are the unrelated monoidal center."
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingFaceMapComplex|barComplex|suspension.*tensor",
+   "results": "25 hits including Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:20,53,128 and Mathlib/RepresentationTheory/Homological/Resolution.lean:171,336; generic alternating-face and group bar-complex code, not dg-word contraction.",
+   "date": "2026-10-17",
+   "verdict": "no match: read the listed declarations; they do not identify the stated dg-category word complex or its suspension sign."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlternatingFaceMapComplex, Rep.barComplex",
+   "results": "0 hits; service returned unknown identifier 'AlternatingFaceMapComplex'.",
+   "date": "2026-10-17",
+   "verdict": "no match (Loogle query did not resolve the names)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "graded dg category word contraction differential suspension sign alternating face maps",
+   "results": "8 generic hits headed by AlgebraicTopology.alternatingFaceMapComplex and its obj_d lemmas; no dg-word contraction declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic alternating-face results do not state the requested identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "graded tensor word complex contraction deletion Koszul sign bar differential",
+   "results": "8 hits including Rep.barComplex.d_single and ComplexShape.TensorSigns; no declaration for arbitrary dg-category words with the stated Phi sign.",
+   "date": "2026-10-17",
+   "verdict": "no match: candidates concern group resolutions or general tensor signs."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-quotient-hom-cone",
@@ -58,7 +127,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: mapping-complex coefficient adjunction before the derived inverse limit; contraction deletion and bar-face/evaluation signs in dg-quotient Hom calculation (returned item step 5).",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the contraction deletion and bar-face/evaluation sign calculation in the dg-quotient Hom word model.",
    "via": [
     "lem-coef-dg-quotient-hom-cone",
     "lem-coef-dg-module-projective-resolution",
@@ -69,5 +138,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-contraction-word-bar-faces",
+  "worker": "stage1",
+  "summary": "Expanded the imported dg-word sign claim into four elementary proof steps. For a homogeneous word, the deleted separator produces the adjacent composition; comparing the two suspension exponents gives the coefficient (-1)^{i+1}; additivity yields the alternating face sum and functoriality; the n=0 exponent check gives evaluation with sign +1. No auxiliary node is needed because every step is a direct calculation from the statement's definitions and dg-category axioms.",
+  "blueprint": "Realizes the contraction-deletion/bar-face calculation in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, including the degree-zero evaluation endpoint."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-b70ef0428",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-b70ef0428 (reviewer sub-agent of L); spot-checked: Read the item, all four proof steps, cited definitions, relevant DAG candidates, unit/chapter route, and Drinfeld §§3.1, 3.2, 3.6(i). Sign, degree, augmentation and naturality checks pass, including 92,750 finite arithmetic checks. No duplicate, circularity, missing non-elementary citation or target weakening found. No fixes or tool_uses needed. Full findings written to review.md."
  }
 }

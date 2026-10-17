@@ -15,9 +15,81 @@
   "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
   "lem-weil-pbc-etale-inverse-image-algebraic-structures"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The functor $b_f:Y_{\\mathrm{et}}\\to X_{\\mathrm{et}}$, $W\\mapsto X\\times_YW$, is defined on every object and sends an arrow $a$ to $\\mathrm{id}_X\\times_Ya$ by [lem-weil-pbc-etale-base-change-finite-limits]. In particular $P'=b_f(P)$ is etale over $X$. Both $h_P$ and $h_{P'}$ are sheaves by [lem-weil-pbc-small-etale-representable-presheaf-sheaf]. The maps $\\beta_W(a)=b_f(a)$ form a natural transformation: for $r:W_1\\to W$ and $a:W\\to P$, functoriality gives $\\beta_{W_1}(a\\circ r)=b_f(a)\\circ b_f(r)$, exactly the restriction of $\\beta_W(a)$ in $f_*h_{P'}$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (4), displayed adjunction/Yoneda proof; objects and representable sheaves in the displayed proof"
+   }
+  },
+  {
+   "text": "Set $A=f^{-1}h_P$ and $B=h_{P'}$. For every sheaf $H$ on $X_{\\mathrm{et}}$, let $\\operatorname{adj}_H:\\operatorname{Hom}(A,H)\\to\\operatorname{Hom}(h_P,f_*H)$ be the adjunction bijection of [lem-weil-pbc-etale-inverse-image-algebraic-structures], clause (1). Sheaf morphisms are exactly presheaf natural transformations by [def-weil-pbc-etale-sheaf-of-sets]. Thus [lem-galois-yoneda-hom-bijection], first on $Y_{\\mathrm{et}}$ at $P$ and then on $X_{\\mathrm{et}}$ at $P'$, gives bijections\n$$\\operatorname{Hom}(A,H)\\xrightarrow{\\operatorname{adj}_H}\\operatorname{Hom}(h_P,f_*H)\\xrightarrow{\\tau\\mapsto\\tau_P(\\mathrm{id}_P)}(f_*H)(P)=H(P')\\xrightarrow{\\mathrm{ev}_{P'}^{-1}}\\operatorname{Hom}(B,H).$$\nCall the composite $\\Phi_H$. Each arrow is natural in $H$: this is adjunction naturality, the presheaf-variable naturality in the cited Yoneda statement, and the defining equality for $f_*$. Hence $\\Phi$ is a natural family of bijections.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (4), displayed adjunction/Yoneda proof; the full displayed chain, using Categories Tag 001P, lemma-yoneda"
+   }
+  },
+  {
+   "text": "Take $c=\\operatorname{adj}_{B}^{-1}(\\beta)$. By Step 1 and functoriality,\n$$\\operatorname{adj}_{B}(c)_P(\\mathrm{id}_P)=\\beta_P(\\mathrm{id}_P)=b_f(\\mathrm{id}_P)=\\mathrm{id}_{P'}.$$\nYoneda evaluation sends $\\mathrm{id}_B$ to the same section $\\mathrm{id}_{P'}\\in B(P')$, so its injectivity [lem-galois-yoneda-hom-bijection] gives $\\Phi_B(c)=\\mathrm{id}_B$. Moreover the composite of the adjunction bijection [lem-weil-pbc-etale-inverse-image-algebraic-structures] with evaluation at $\\mathrm{id}_P$ is injective. Consequently $c$ is the unique morphism $A\\to B$ with the displayed adjunct value. This proves both normalization formulations for the specified map, rather than choosing an unrelated isomorphism.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (4), displayed adjunction/Yoneda proof; identity section under the displayed Yoneda evaluations"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] in the category of sheaves of sets on $X_{\\mathrm{et}}$ to Step 2. It gives an isomorphism $\\theta=\\Phi_A(\\mathrm{id}_A):B\\to A$ satisfying $\\Phi_H(u)=u\\circ\\theta$ for all $u:A\\to H$. At $H=B$ and $u=c$, Step 3 therefore says $c\\circ\\theta=\\mathrm{id}_B$. Composing this equality on the right with $\\theta^{-1}$ gives $c=\\theta^{-1}$, so the normalized comparison $c$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (4), displayed adjunction/Yoneda proof; conclusion from the natural Hom-bijection; Categories Tag 001P on the opposite category"
+   }
+  },
+  {
+   "text": "Let $t:P\\to Q$ be a morphism in $Y_{\\mathrm{et}}$, set $t_X=b_f(t):P'\\to Q'$, and write $h_t,h_{t_X}$ for postcomposition. For every $a:W\\to P$, functoriality in [lem-weil-pbc-etale-base-change-finite-limits] gives\n$$((f_*h_{t_X})\\circ\\beta^P)_W(a)=t_X\\circ b_f(a)=b_f(t\\circ a)=(\\beta^Q\\circ h_t)_W(a).$$\nThus $(f_*h_{t_X})\\circ\\beta^P=\\beta^Q\\circ h_t$. Under the adjunction of [lem-weil-pbc-etale-inverse-image-algebraic-structures], naturality in its target takes the left side to $h_{t_X}\\circ c_P$, and naturality in its source takes the right side to $c_Q\\circ f^{-1}(h_t)$. The adjunction bijection is injective, so these two morphisms agree. This is precisely naturality of the comparisons in $P$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (4), displayed adjunction/Yoneda proof; naturality in the representing etale object, expanding functoriality of base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q1, lemma-stalk-pullback (4), displayed adjunction/Yoneda proof; the canonical-map normalization and naturality are computed explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +146,52 @@
    "results": "0 hits: ; directory Mathlib/CategoryTheory/Sites",
    "date": "2026-10-17",
    "verdict": "no match: general module pullbacks, Yoneda and site infrastructure do not state the normalized small-etale representable comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*yoneda|yoneda.*sheafPullback|pullback.*representable|representable.*pullback",
+   "results": "0 hits: ; directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: site adjunctions, scheme representability or Yoneda infrastructure, not the normalized representable comparison; read Pullback.lean:55-88 and Yoneda.lean:724-760"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a representable sheaf on the small etale site is canonically represented by the base change, with adjoint sending each arrow to its base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: site adjunctions, scheme representability or Yoneda infrastructure, not the normalized representable comparison; read Pullback.lean:55-88 and Yoneda.lean:724-760"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of the representable sheaf of an etale scheme along a scheme morphism is represented by the fiber product, normalized under adjunction and Yoneda",
+   "results": "8 hits: TopCat.Sheaf.pullback, TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.relativelyRepresentable.pullback, CategoryTheory.GrothendieckTopology.overMapPullback, AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: site adjunctions, scheme representability or Yoneda infrastructure, not the normalized representable comparison; read Pullback.lean:55-88 and Yoneda.lean:724-760"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|yoneda",
+   "results": "1 hits: 236; directory Mathlib/CategoryTheory/Sites/Continuous.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: site adjunctions, scheme representability or Yoneda infrastructure, not the normalized representable comparison; read Pullback.lean:55-88 and Yoneda.lean:724-760"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous functor between sites the left adjoint of sheaf pushforward takes a sheafified representable to the sheafified representable of its image",
+   "results": "8 hits: CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, CategoryTheory.Functor.sheafAdjunctionContinuous, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Sheaf.adjunction, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "date": "2026-10-17",
+   "verdict": "no match: site adjunctions, scheme representability or Yoneda infrastructure, not the normalized representable comparison; read Pullback.lean:55-88 and Yoneda.lean:724-760"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|representable|yoneda",
+   "results": "5 hits: 18, 24, 55, 60, 65; directory Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: site adjunctions, scheme representability or Yoneda infrastructure, not the normalized representable comparison; read Pullback.lean:55-88 and Yoneda.lean:724-760"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-asd-etale-finite-twist-pullback",
@@ -96,5 +210,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-asd-etale-representable-pullback-normalization",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 03Q1(4) adjunction/Yoneda proof into five steps, computing the adjunct of the specified comparison on the identity and proving its naturality. Reused the general Yoneda evaluation and co-Yoneda isomorphism leaves already in the DAG; no new nodes, no statement changes, and no Lean attachment covering all clauses.",
+  "blueprint": "prop-asd-smooth-base-change, current blueprint proof paragraph 2: ordinary inverse-image and twist base-change isomorphisms in the projective-line model. This item supplies the normalized set-valued representable comparison needed for roots of unity in lem-asd-etale-finite-twist-pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Only clause (1), the sets adjunction and evaluation formula for direct image, is used as generic small-etale topos infrastructure; this does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-b4cf9ee2d",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-b4cf9ee2d (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, Stacks 03Q1(4), 04D3 and 001P, and the current blueprint route. All five steps correctly establish the specified adjunct’s normalization, invertibility and naturality in sheaves of sets. Edge cases and duplicate candidates checked; dependency closure has no cycles or missing nodes. Accepted the declared sets-adjunction tool use. No repairs needed; concrete checks recorded in review.md."
  }
 }

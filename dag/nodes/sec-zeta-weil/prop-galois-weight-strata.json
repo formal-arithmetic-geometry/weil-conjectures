@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-galois-weight-strata",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Galois stability of the weight strata",
@@ -18,32 +18,103 @@
   "def-weil-geometric-hypotheses",
   "def-weil-normalized-integral-fraction",
   "def-weil-point-counts-zeta",
-  "def-weil-smooth-proper-cohomological-family"
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-numbers",
+  "def-weil-polynomial-ring",
+  "def-weil-root-multiplicity"
  ],
  "proof": [
   {
-   "text": "The polynomials $A^\\#,B^\\#$ of\n[def-weil-ordinary-reciprocal-roots] have rational coefficients,\nso their root multisets are stable under\n$\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$, and by\n[lem-embedding-extension] the $q$-Weil condition of weight $i$\nof [def-weil-numbers] is Galois-stable. Hence, for each $i$,\nthe submultiset $R_i$ is stable under\n$\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$, with\nmultiplicities, which is the assertion.",
+   "text": "Fix $i$ with $0\\leq i\\leq2d$ and $\\gamma\\in\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$. Set $C=A$ if $i$ is odd and $C=B$ if $i$ is even. Write $C(T)=\\sum_{j=0}^r c_jT^j$, where $c_0=1$ and $c_r\\neq0$. By the polynomial-ring and coefficient-map definitions, $f(U):=C^\\#(U)=\\sum_{j=0}^r c_jU^{r-j}$ has rational (indeed integer) coefficients. It is monic, and $f(0)=c_r\\neq0$. Regard it in $\\overline{\\mathbf Q}[U]$. Applying $\\gamma$ to its coefficients leaves $f$ unchanged, since $\\gamma$ fixes $\\mathbf Q$. This also covers $r=0$, when $C=f=1$.",
    "uses": [
-    "def-weil-ordinary-reciprocal-roots",
-    "lem-embedding-extension",
-    "def-weil-numbers"
+    "def-weil-polynomial-ring",
+    "def-weil-coefficientwise-ring-hom-map"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata.md",
+    "place": "## Proof, first clause: rational coefficients of A^#, B^#"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-root-multiplicity-injective-map] with $K=L=\\overline{\\mathbf Q}$, $P=f$, and the injective ring homomorphism $\\gamma$. The coefficientwise image of $f$ is $f$ by Step 1, so for every $x\\in\\overline{\\mathbf Q}$ we obtain $m_x(f)=m_{\\gamma(x)}(f)$. By [def-weil-root-multiplicity], these are the multiplicities of $x$ and $\\gamma(x)$ in the root multiset of the nonzero polynomial $f$. In particular roots are carried to roots with exactly the same multiplicity, and $\\gamma^{-1}$ provides the inverse permutation.",
+   "uses": [
+    "lem-weil-root-multiplicity-injective-map",
+    "def-weil-root-multiplicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata.md",
+    "place": "## Proof, first clause and final phrase: root multisets are stable, with multiplicities"
+   }
+  },
+  {
+   "text": "Let $W_i(x)$ mean that $x\\neq0$ is a $q$-Weil number of weight $i$ as in [def-weil-numbers], and set $W_i(0)$ to false. The last assertion of [lem-embedding-extension] gives $W_i(x)\\Rightarrow W_i(\\gamma(x))$. It applies to the same finite-field datum and algebraic closure as here. Concretely, for each embedding $\\tau:\\mathbf Q(\\gamma(x))\\hookrightarrow\\mathbf C$, the restriction of $\\gamma$ maps $\\mathbf Q(x)$ isomorphically to $\\mathbf Q(\\gamma(x))$, so $\\tau\\circ\\gamma$ is an embedding and $|\\tau(\\gamma(x))|=q^{i/2}$. Apply the same stability assertion with $\\gamma^{-1}$ to obtain the converse. Thus $W_i(\\gamma(x))\\Longleftrightarrow W_i(x)$; for $x=0$ both predicates are false.",
+   "uses": [
+    "def-weil-numbers",
+    "lem-embedding-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata.md",
+    "place": "## Proof, second clause: the Weil condition is Galois-stable"
+   }
+  },
+  {
+   "text": "By the definition of the submultiset $R_i$, the number of copies of $x$ in $R_i$ is $m_x(f)$ when $W_i(x)$ holds, and is $0$ otherwise. Steps 2 and 3 therefore give the same number of copies for $x$ and $\\gamma(x)$. Since $\\gamma$ is a bijection, the number of copies of any $y$ in the image multiset $\\gamma(R_i)$ is the number of copies of $\\gamma^{-1}(y)$ in $R_i$, which equals the number of copies of $y$ in $R_i$. Hence $\\gamma(R_i)=R_i$ with multiplicities. This holds for either parity of $i$, every allowed $i$, and every $\\gamma$, proving the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata.md",
+    "place": "## Proof, final sentence: the weight submultiset is stable with multiplicities"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-ordinary-reciprocal-roots",
-  "lem-embedding-extension",
-  "def-weil-numbers"
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-ring-hom-map",
+  "lem-weil-root-multiplicity-injective-map",
+  "def-weil-root-multiplicity",
+  "def-weil-numbers",
+  "lem-embedding-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilNumber|weil.number|weight.strat",
+   "results": "0 hits in Mathlib/NumberTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.roots, AlgEquiv",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The roots of a polynomial over the rationals which are Weil numbers of a fixed weight form a Galois invariant multiset",
+   "results": "Galois actions on root sets, complex conjugation, Frobenius and roots of unity; none states preservation of a Weil-weight filtered multiset.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The roots of a rational polynomial of any fixed Weil weight are invariant under Galois automorphisms with multiplicity",
+   "results": "Polynomial.Gal.galActionAux, galAction, smul, mapRoots; Polynomial.smul_mem_rootSet_iff and smul_mem_rootSet concern distinct roots; Polynomial.roots defines the multiset. No Weil-weight predicate or full item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -84,5 +155,20 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-intfactors"
+ "unit": "sk-thm-intfactors",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-galois-weight-strata",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim after comparison with master and main-20261015. Expanded rational-coefficient invariance into coefficient calculation and the exact Mathlib root-multiplicity map theorem, then used the final Galois-stability clause of lem-embedding-extension and counted the filtered multiset. Added one Mathlib leaf for the hidden multiplicity tool. No new geometric, realization-comparison, or Galois-descent assertion is assumed.",
+  "blueprint": "The sole paragraph of this node and sk-thm-intfactors Step 1, point (i), are realized: Step 1 rational reciprocal coefficients, Step 2 full multiplicities, Step 3 intrinsic weight under embeddings, Step 4 invariant submultiset."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q105-e91b3c361",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q105-e91b3c361 (reviewer sub-agent of L); spot-checked: Mathematics passes: checked all four steps, cited statements and sources, exact Mathlib multiplicity theorem, duplicates, route, and edge cases. Added missing lean_audit records and null merged_into default in the corrected new-node JSON. Statements and proof unchanged; full findings in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
