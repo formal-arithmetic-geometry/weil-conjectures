@@ -179,4 +179,58 @@ noncomputable def adicConstantSheafCocone : Cocone (compactLatticeDiagram l S) w
   ι := { app Λ := compactLatticeToAdicConstantSheaf l S Λ.down
          naturality _ _ _ := rfl }
 
+instance (Λ : CompactLattice l) : Mono (compactLatticeToAdicConstantSheaf l S Λ) := by
+  have (V : (Scheme.ProEt S)ᵒᵖ) :
+      Mono (((sheafToPresheaf _ _).map (compactLatticeToAdicConstantSheaf l S Λ)).app V) := by
+    refine (AddCommGrpCat.mono_iff_injective _).2 fun x y h ↦ ?_
+    have h' := congrArg (fun z : ULift.{u + 1} (locallyFiniteFunctions l V.unop.left) ↦
+      (z.down : C(V.unop.left, PadicAlgCl l))) h
+    exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ Subtype.ext (DFunLike.congr_fun h' t))
+  have : Mono ((sheafToPresheaf _ _).map (compactLatticeToAdicConstantSheaf l S Λ)) :=
+    NatTrans.mono_of_mono_app _
+  exact (sheafToPresheaf _ _).mono_of_mono_map this
+
+/-- Every section of `ℚ̄_ℓ,S` comes locally from some `C(-, Λ)`: on an affine open `W` the
+section has compact image spanning a finite-dimensional subspace, which lies in a compact
+lattice. -/
+lemma epi_colimitDesc_adicConstantSheafCocone :
+    Epi (colimit.desc (compactLatticeDiagram l S) (adicConstantSheafCocone l S)) := by
+  rw [← Sheaf.isLocallySurjective_iff_epi']
+  refine ⟨fun {V} s ↦ ?_⟩
+  let s' : ULift.{u + 1} (locallyFiniteFunctions l V.left) := s
+  refine Scheme.ProEt.mem_topology_of_openImmersion _ (fun x : V.left ↦ V.left.affineCover.f x)
+    (fun x ↦ ?_) fun x ↦ ?_
+  · obtain ⟨i, y, rfl⟩ := V.left.affineCover.exists_eq x
+    exact ⟨i, y, rfl⟩
+  let g : C(V.left.affineCover.X x, PadicAlgCl l) :=
+    (s'.down : C(V.left, PadicAlgCl l)).comp (V.left.affineCover.f x).base.hom
+  have hg : g ∈ locallyFiniteFunctions l (V.left.affineCover.X x) :=
+    comp_mem_locallyFiniteFunctions s'.down.2 _
+  obtain ⟨Λ, hΛ⟩ := exists_compactLattice_of_isCompact (isCompact_range g.continuous)
+    (finiteDimensional_span_range_of_mem_locallyFiniteFunctions hg)
+  let t₀ : C(V.left.affineCover.X x, Λ.1) := ⟨fun w ↦ ⟨g w, hΛ ⟨w, rfl⟩⟩, g.continuous.subtype_mk _⟩
+  refine ⟨(colimit.ι (compactLatticeDiagram l S) ⟨Λ⟩).hom.app
+    (op (V.ofOpenImmersion (V.left.affineCover.f x))) (ULift.up t₀), ?_⟩
+  have h := congrArg (fun φ : continuousSheaf S Λ.1 ⟶ adicConstantSheafAb l S ↦
+    φ.hom.app (op (V.ofOpenImmersion (V.left.affineCover.f x))) (ULift.up t₀))
+    (colimit.ι_desc (adicConstantSheafCocone l S) ⟨Λ⟩)
+  refine h.trans ?_
+  rfl
+
+attribute [local instance] IsFiltered.isConnected in
+/-- **`ℚ̄_ℓ,S` is the filtered union of the `C(-, Λ)`.** The underlying abelian sheaf of the
+constant `ℓ`-adic sheaf is the colimit of the sheaves `C(-, Λ)` over the compact lattices `Λ`
+of `ℚ̄_ℓ`. -/
+noncomputable def isColimitAdicConstantSheafCocone : IsColimit (adicConstantSheafCocone l S) := by
+  have := epi_colimitDesc_adicConstantSheafCocone l S
+  have (Λ : ULift.{u + 1} (CompactLattice l)) : Mono ((adicConstantSheafCocone l S).ι.app Λ) :=
+    inferInstanceAs (Mono (compactLatticeToAdicConstantSheaf l S Λ.down))
+  have : Mono (adicConstantSheafCocone l S).ι := NatTrans.mono_of_mono_app _
+  have : Mono (colimit.desc (compactLatticeDiagram l S) (adicConstantSheafCocone l S)) :=
+    colim.map_mono' (adicConstantSheafCocone l S).ι (colimit.isColimit _)
+      (isColimitConstCocone _ _) _ (by simp)
+  have := isIso_of_mono_of_epi (colimit.desc (compactLatticeDiagram l S) (adicConstantSheafCocone l S))
+  have : IsIso ((colimit.isColimit _).desc (adicConstantSheafCocone l S)) := this
+  exact IsColimit.ofPointIso (colimit.isColimit _)
+
 end AlgebraicGeometry.ProEtale
