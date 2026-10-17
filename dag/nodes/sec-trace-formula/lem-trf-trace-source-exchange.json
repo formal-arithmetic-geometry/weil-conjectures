@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-trace-source-exchange",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exchange of the trace-class sources: the kernel of the coefficient pushforward",
@@ -18,69 +18,302 @@
  ],
  "proof": [
   {
-   "text": "Throughout, $p_1,p_2$ and $p'_1,p'_2$ are the projections of\n$X\\times_sX$ and $Y\\times_sY$, so that $p'_iq=fp_i$; put\n$H_X=R\\mathcal Hom(p_2^*K,p_1^!K)$ and $H_Y=R\\mathcal Hom(p'^*_2K',p'^!_1K')$,\nand let $\\kappa_X=\\kappa_{K,K}:P_X\\xrightarrow{\\sim}H_X$,\n$\\kappa_Y=\\kappa_{K',K'}:P_Y\\xrightarrow{\\sim}H_Y$ be the Künneth–Verdier\nisomorphisms of [thm-trf-kunneth-verdier].",
-   "uses": [
-    "thm-trf-kunneth-verdier"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 0: kernel class versus class.* For a correspondence $v$ on\n$(X,K)$ supported on $c$, let $[v]:Rc_!A_C\\to H_X$ be its class of\n[lem-trf-correspondence-class]. The external duality of\n[thm-trf-verdier-duality] is the exchange\n$\\mathcal H_c(K)\\cong Rc^!H_X$ of [lem-trf-exceptional-internal-hom-exchange]\nfollowed by $Rc^!\\kappa_X^{-1}$, and that exchange is built from the\ntensor–Hom adjunction, the projection formula and $Rc_!\\dashv Rc^!$ in\nthe same order as the bijection of [lem-trf-correspondence-class]. Hence\nthe exceptional adjoint of $A_C\\to\\mathcal H_c(K)\\cong Rc^!H_X$ is $[v]$,\nand $[v]_P=\\kappa_X^{-1}[v]$. Likewise $[w]_P=\\kappa_Y^{-1}[w]$ on $D$.",
-   "uses": [
-    "lem-trf-correspondence-class",
-    "thm-trf-verdier-duality",
-    "lem-trf-exceptional-internal-hom-exchange"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 1: the transport map.* Let $\\delta_1:Rq_*p_1^!\\to p'^!_1Rf_*$ be the\nexceptional adjoint of\n$Rp'_{1!}Rq_!p_1^!\\cong Rf_!Rp_{1!}p_1^!\\xrightarrow{Rf_!\\varepsilon}Rf_!$\n(the recipe of $\\delta$ in [def-trf-coefficient-pushforward] for the square\n$p'_1q=fp_1$). Let $\\Phi:Rq_*H_X\\to H_Y$ be the tensor–Hom adjoint of\n\n$$\n\\begin{aligned}\nRq_*H_X\\otimes p'^*_2K'\n&\\xrightarrow{\\ \\mathrm{PF}\\ }Rq_*\\bigl(H_X\\otimes p_2^*f^*Rf_*K\\bigr)\n\\xrightarrow{\\ \\varepsilon_f\\ }Rq_*\\bigl(H_X\\otimes p_2^*K\\bigr)\\\\\n&\\xrightarrow{\\ \\mathrm{ev}\\ }Rq_*p_1^!K\n\\xrightarrow{\\ \\delta_1\\ }p'^!_1K',\n\\end{aligned}\n$$\n\nwith $\\mathrm{PF}$ the projection map of [fix-prop-projection-formula] for\nthe proper $q$ and $q^*p'^*_2=p_2^*f^*$. The lemma follows from the two\nidentities\n\n$$\n\\text{(a)}\\quad \\kappa_Y\\circ\\rho_f=\\Phi\\circ Rq_*\\kappa_X,\n\\qquad\n\\text{(b)}\\quad [\\delta\\circ Rg_*v\\circ\\gamma]\n=\\Phi\\circ Rq_*[v]\\circ\\Xi\\circ Rb_!\\eta_g ,\n$$\n\nsince with $v=u$, Step 0 turns (b) into\n$[\\,[f,g]_!u\\,]_P=\\kappa_Y^{-1}\\Phi\\,Rq_*(\\kappa_X[u]_P)\\,\\Xi\\,Rb_!\\eta_g$,\nand (a) turns this into the assertion.",
+   "text": "Work at the finite coefficient stage $A=A_{E,n}$ already fixed by the two statement dependencies. Put $Z_X=X\\times_sX$, $Z_Y=Y\\times_sY$, $q=f\\times f$, and use their projections $p_i,p'_i$. Thus $p'_iq=fp_i$ and $bg=qc$. Retain $Rc_!$ and $Rb_!$ throughout. Proper coincidence is used only for $f,g,q$. Write $K'=Rf_*K$, $V=D_XK$, $V'=Rf_*V$, $P_X=K\\boxtimes V$, and $P_Y=K'\\boxtimes D_YK'$. The finite-stage stability theorem puts $K',V',p_2^*K,p_1^!K$ and all the displayed tensor and internal-Hom objects in $D^b_{ctf}$; the same applies on $Y$. The exceptional adjoints needed for $p_i,p'_i,c,b,a_X,a_Y$ are available by exceptional admissibility for separated finite-type morphisms. Set $H_X=R\\mathcal Hom(p_2^*K,p_1^!K)$ and $H_Y=R\\mathcal Hom(p'^*_2K',p'^!_1K')$. The specified Künneth–Verdier maps are isomorphisms $\\kappa_X:P_X\\xrightarrow{\\sim}H_X$ and $\\kappa_Y:P_Y\\xrightarrow{\\sim}H_Y$. For exceptional compositions we use the constructible adjunctions of [def-trf-admissibility], the composite Hom bijection of [def-weil-pbc-composite-adjunction], and its transport under [def-weil-pbc-adjunction-conjugate]. In this normalization the counit of a composite is the outer counit after the direct image of the inner counit. This is a substitution in the composite-adjunction formula, not an application of the stronger ambient admissibility condition in clause (2) of [fix-prop-adjunctions]. By [lem-sf-proetale-constructible-origin] (ii), each bounded constructible finite-stage input just listed is of etale origin. Thus the compact-support composition comparisons used below are the specified comparisons of the two statement definitions on their etale-origin domains, as collected in clause (3) of [prop-functor-package]. In particular the comparisons defining $\\Xi$ and $\\Xi_1$ are available on these inputs without an additional hypothesis on $K$.",
    "uses": [
     "def-trf-coefficient-pushforward",
-    "fix-prop-projection-formula"
+    "def-trf-kernel-pushforward-maps",
+    "prop-functor-package",
+    "thm-sf-ctf-stability",
+    "def-trf-admissibility",
+    "thm-trf-kunneth-verdier",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-sf-proetale-constructible-origin"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Opening paragraph; domains for Steps 0–3"
+   }
   },
   {
-   "text": "*Step 2: proof of (b).* A map $Rb_!A_D\\to H_Y$ is determined by its\nimage under the bijection of [lem-trf-correspondence-class], and further\nby the adjoint of that image along $Rb_{1!}\\dashv b_1^!$, a map\n$Rb_{1!}b_2^*K'\\to K'$ (using $Rb_{1!}=Rp'_{1!}Rb_!$ and\n$b^!p'^!_1=b_1^!$). For the left side of (b), the definition of $\\delta$\ngives the adjoint\n\n$$\nRb_{1!}b_2^*K'\\xrightarrow{Rb_{1!}\\gamma}Rb_{1!}Rg_*c_2^*K\n\\xrightarrow{\\Xi_1}Rf_!Rc_{1!}c_2^*K\n\\xrightarrow{Rf_!v^\\flat}Rf_!K=K',\n$$\n\nwhere $v^\\flat=\\varepsilon_{c_1}\\circ Rc_{1!}v$ is the adjoint of $v$. For the right\nside, unwind the bijection: tensor with $p'^*_2K'$, apply the projection\nformula for $b$, then $\\Phi$, then the counit of $p'_1$. By the definition\nof $\\delta_1$, the counit of $p'_1$ after $Rp'_{1!}\\delta_1$ is\n$Rf_!$ of the counit of $p_1$; by the naturality of $\\mathrm{PF}$ and its\ncompatibility with the composition law ([fix-prop-projection-formula],\n[fix-prop-coherence]), the projection formulas for $b$, $q$ and $c$\ncombine into the projection formula for $bg=qc$, and the class $[v]$ is\nturned back into $v^\\flat$. The right side thus becomes\n\n$$\nRb_{1!}b_2^*K'\\xrightarrow{\\eta_g}Rb_{1!}Rg_*g^*b_2^*K'\n=Rb_{1!}Rg_*c_2^*f^*K'\n\\xrightarrow{\\varepsilon_f}Rb_{1!}Rg_*c_2^*K\n\\xrightarrow{\\Xi_1}Rf_!Rc_{1!}c_2^*K\\xrightarrow{Rf_!v^\\flat}K' .\n$$\n\nIts first two arrows are $Rb_{1!}\\gamma$ by the definition of $\\gamma$,\nso the two adjoints coincide, proving (b).",
+   "text": "For any correspondence $v:c_2^*K\\to c_1^!K$, the correspondence-class bijection sends $[v]:Rc_!A_C\\to H_X$ to $v$. Its inverse is obtained by taking the tensor–Hom mate $A_C\\to\\mathcal H_c(K)$, using the canonical exceptional internal-Hom exchange to obtain a map $A_C\\to c^!H_X$, and applying $Rc_!\\dashv c^!$. The external-duality comparison is this exchange followed by $c^!\\kappa_X^{-1}$, compatibly with evaluation and the same exceptional adjunction. Naturality of this Hom bijection therefore gives $[v]_P=\\kappa_X^{-1}\\circ[v]$. For $w:b_2^*K'\\to b_1^!K'$, its tensor–Hom mate $A_D\\to\\mathcal H_b(K')$ corresponds under exceptional Hom exchange to a map $A_D\\to b^!H_Y$ whose exceptional adjunct is $[w]$. Composing this mate with $b^!\\kappa_Y^{-1}$ has exceptional adjunct $\\kappa_Y^{-1}\\circ[w]$, by naturality in the target of the exceptional Hom bijection; this is the defining mate of $[w]_P$. Thus $[w]_P=\\kappa_Y^{-1}\\circ[w]$. In particular no comparison with a differently normalized duality isomorphism is being assumed.",
    "uses": [
     "lem-trf-correspondence-class",
-    "fix-prop-projection-formula",
-    "fix-prop-coherence"
+    "def-trf-kernel-pushforward-maps",
+    "thm-trf-verdier-duality",
+    "lem-trf-exceptional-internal-hom-exchange",
+    "fix-prop-adjunctions",
+    "def-trf-admissibility"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 0: kernel class versus class"
+   }
   },
   {
-   "text": "*Step 3: proof of (a).* Both sides are maps $Rq_*P_X\\to H_Y$; compare\ntheir adjoints $Rp'_{1!}(Rq_*P_X\\otimes p'^*_2K')\\to K'$ as in Step 2. By\n[def-sf-kv-maps] (iv), $\\kappa_X$ is $\\beta$ followed by the exceptional\nKünneth $\\alpha_{\\operatorname{id},a_X}$, whose exceptional adjoint is the\ncounit $\\varepsilon_{a_X}$ of $Ra_{X!}\\dashv Ra_X^!$ after $\\mathrm{Ku}_!$\n([def-sf-kv-maps] (ii)). Hence the adjoint of $\\kappa_X$ evaluates the\nfactor $D_XK$ of $P_X$ against the $p_2^*K$-variable and then applies\n$\\varepsilon_{a_X}$ to $\\omega_X$ in the second factor; similarly for\n$\\kappa_Y$. On the left side, $\\rho_f$ first undoes $\\Pi_f$, and the\ndefining evaluation of $\\chi_f$ turns the evaluation of $D_YK'$ against\n$K'$ into $\\tau_f\\circ Rf_*\\mathrm{ev}_K\\circ\\mu_f$; since\n$\\varepsilon_{a_Y}\\circ Ra_{Y!}\\tau_f=\\varepsilon_{a_X}$ (the counit of\n$a_X=a_Yf$ is the pasted counit, [fix-prop-adjunctions], item 3), and\n$\\mu_f$ and $\\Pi_f$ are adjoint to $\\varepsilon_f\\otimes\\varepsilon_f$\n(the projection maps and the exchange $\\operatorname{Ex}_*$ entering\n$\\mathrm{Ku}_!$ are adjoint to counits, [def-exchange-projection],\n[fix-prop-projection-formula]), the left side becomes: apply\n$\\varepsilon_f:f^*K'\\to K$ to the $p_2^*K'$-variable, evaluate $D_XK$\nagainst it, and apply $\\varepsilon_{a_X}$. On the right side, $\\Phi$ applies\nthe same $\\varepsilon_f$ and then the adjoint of $\\kappa_X$, followed by\n$\\delta_1$ and the counit of $p'_1$, which together are $Rf_!$ of the\ncounit of $p_1$; this is the same composite. Hence (a) holds, and with it\nthe lemma.",
+   "text": "Let $\\delta_1:Rq_*p_1^!K\\to p'^!_1K'$ be the exceptional transpose of\n$$Rp'_{1!}Rq_*p_1^!K\\simeq Rf_!Rp_{1!}p_1^!K\\xrightarrow{Rf_!\\varepsilon_{p_1}}K'.$$\nDefine $\\Phi:Rq_*H_X\\to H_Y$ by its tensor–Hom transpose\n$$Rq_*H_X\\otimes p'^*_2K'\\xrightarrow{\\mathrm{PF}_q}Rq_*(H_X\\otimes p_2^*f^*K')\\xrightarrow{Rq_*(1\\otimes p_2^*\\varepsilon_f)}Rq_*(H_X\\otimes p_2^*K)\\xrightarrow{Rq_*\\mathrm{ev}}Rq_*p_1^!K\\xrightarrow{\\delta_1}p'^!_1K'.$$\nAll identifications here are composition comparisons. In particular $\\delta_1$ is defined by a counit for the commuting square $p'_1q=fp_1$, with no base-change assertion for a leg square.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "prop-functor-package",
+    "fix-prop-projection-formula",
+    "def-trf-coefficient-pushforward",
+    "def-sfb-derived-tensor-hom-adjunction-sheaves",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 1: definition of the transport map"
+   }
+  },
+  {
+   "text": "For $t:Rb_!A_D\\to H_Y$, denote by $B_b(t):Rb_{1!}b_2^*K'\\to K'$ its image under the correspondence-class bijection followed by $Rb_{1!}\\dashv b_1^!$. Explicitly, first identify the source with $Rp'_{1!}Rb_!b^*p'^*_2K'$, apply $\\mathrm{PF}_b^{-1}$, then $Rp'_{1!}(t\\otimes1)$, evaluation, and $\\varepsilon_{p'_1}$. The composition and exceptional-adjunction comparisons give $b^!p'^!_1=b_1^!$, so $B_b$ is a bijection. Set $v^\\flat=\\varepsilon_{c_1}\\circ Rc_{1!}v$. For $w=\\delta\\circ Rg_*v\\circ\\gamma$, naturality of the exceptional counit and the defining transpose of $\\delta$ give\n$$B_b([w])=Rf_!(v^\\flat)\\circ\\Xi_1\\circ Rb_{1!}\\gamma.$$\nThis follows by replacing $\\varepsilon_{b_1}\\circ Rb_{1!}\\delta$ by its defining composite $Rf_!\\varepsilon_{c_1}\\circ\\Xi_1$ and moving $Rg_*v$ through the natural isomorphism $\\Xi_1$.",
+   "uses": [
+    "lem-trf-correspondence-class",
+    "fix-prop-adjunctions",
+    "fix-prop-projection-formula",
+    "prop-functor-package",
+    "def-trf-coefficient-pushforward",
+    "def-trf-admissibility",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 2: the left-hand adjoint in (b)"
+   }
+  },
+  {
+   "text": "Put $L=b_2^*K'$. The projection formula for the proper $g$ obeys\n$$\\mathrm{PF}_{g,A_C,L}\\circ(\\eta_{g,A_D}\\otimes1_L)=\\eta_{g,L}:L\\longrightarrow Rg_*g^*L,$$\nwith the unit-object identifications understood. Indeed the ordinary transpose of the left side is $\\varepsilon_{g,A_C}\\circ g^*\\eta_{g,A_D}\\otimes1_{g^*L}=1_{g^*L}$ by the triangle identity; the transpose of the right side is also $1_{g^*L}$. Apply the explicit formula for $B_b$ to $\\Phi\\circ Rq_*[v]\\circ\\Xi\\circ Rb_!\\eta_g$. Projection-formula compatibility with composition, for $bg=qc$, replaces the formulas for $b,q,c$ by the one for this composite. The displayed unit calculation turns the initial factor into $\\eta_{g,L}$. The defining transpose of $\\delta_1$ replaces its subsequent counit by $Rf_!\\varepsilon_{p_1}$, and the definition of $[v]$ turns its evaluation into $v^\\flat$. The resulting composite is exactly\n$$Rb_{1!}L\\xrightarrow{Rb_{1!}\\eta_{g,L}}Rb_{1!}Rg_*g^*L=Rb_{1!}Rg_*c_2^*f^*K'\\xrightarrow{Rb_{1!}Rg_*c_2^*\\varepsilon_f}Rb_{1!}Rg_*c_2^*K\\xrightarrow{\\Xi_1}Rf_!Rc_{1!}c_2^*K\\xrightarrow{Rf_!v^\\flat}K'.$$\nThe first two arrows are $Rb_{1!}\\gamma$ by definition. The bijectivity of $B_b$ and the preceding step prove\n$$[\\delta\\circ Rg_*v\\circ\\gamma]=\\Phi\\circ Rq_*[v]\\circ\\Xi\\circ Rb_!\\eta_g.\\tag{b}$$",
+   "uses": [
+    "def-exchange-projection",
+    "fix-prop-adjunctions",
+    "fix-prop-projection-formula",
+    "fix-prop-coherence",
+    "lem-trf-correspondence-class",
+    "def-trf-coefficient-pushforward",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 2: the right-hand adjoint in (b), including the unit/projection calculation"
+   }
+  },
+  {
+   "text": "Record explicitly the normalization of the proper product comparison. For objects $M,N$ on $X$, let $\\Theta_{M,N}=\\mathrm{Ku}_!(f,f;M,N)^{-1}:Rf_*M\\boxtimes Rf_*N\\to Rq_*(M\\boxtimes N)$. Its ordinary $q^*\\dashv Rq_*$ transpose is\n$$q^*(Rf_*M\\boxtimes Rf_*N)=p_1^*f^*Rf_*M\\otimes p_2^*f^*Rf_*N\\xrightarrow{p_1^*\\varepsilon_{f,M}\\otimes p_2^*\\varepsilon_{f,N}}p_1^*M\\otimes p_2^*N.$$\nTo see this from the specified map, expand the inverse relative-product comparison into its two projection maps and the exchange map for the Cartesian product square. Transposing the exchange gives the pulled-back counit, and transposing each proper projection map gives $\\varepsilon\\otimes1$, by their defining formulas. Naturality moves the two counits to their respective factors; the intervening unit/counit pairs cancel by the two triangle identities. This leaves exactly the displayed tensor of counits. In particular $\\Pi_f=\\Theta_{K,V}$. Compatibility of these product comparisons with symmetry, iterated products, base change and projection formula is supplied by the relative-product coherence lemma; it will be used below with the actual geometric operations, which satisfy the stated six-functor identities. More explicitly, the projection compatibility used below is obtained from clause (ii) with a third entry $\\operatorname{id}_B$ carrying the coefficient object $L$ on $B$: the two bracketings agree, and clause (iv), $\\kappa_{f,\\operatorname{id}}(K,L)=\\operatorname{PF}_{f,K,L}^{-1}$, identifies their identity-factor product maps with the inverse projection formulas. This gives the commuting product/projection diagram used in steps 8–9.",
+   "uses": [
+    "def-sf-kv-maps",
+    "thm-sf-kunneth-relative",
+    "def-exchange-projection",
+    "fix-prop-adjunctions",
+    "fix-prop-projection-formula",
+    "lem-sf-kunneth-coherence",
+    "prop-functor-package",
+    "fix-prop-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3: normalization of the product comparison entering (a)"
+   }
+  },
+  {
+   "text": "Let $e_X:V\\otimes K\\to\\omega_X$ be evaluation and $t_X:Ra_{X!}\\omega_X\\to A_s$ the structural exceptional counit. Write $J_X(W):Rp_{1!}(K\\boxtimes W)\\xrightarrow{\\sim}K\\otimes a_X^*Ra_{X!}W$ for $\\mathrm{Ku}_!(\\operatorname{id}_X,a_X)$. The tensor–Hom and exceptional transpose of $\\kappa_X$ is the map\n$$C_X:Rp_{1!}(P_X\\otimes p_2^*K)=Rp_{1!}(K\\boxtimes(V\\otimes K))\\xrightarrow{J_X(V\\otimes K)}K\\otimes a_X^*Ra_{X!}(V\\otimes K)\\xrightarrow{1\\otimes a_X^*Ra_{X!}e_X}K\\otimes a_X^*Ra_{X!}\\omega_X\\xrightarrow{1\\otimes a_X^*t_X}K.$$\nThis is a direct substitution in the definition: $\\beta$ transposes the two evaluations, and $\\alpha_{\\operatorname{id},a_X}$ transposes the product comparison followed by the exceptional counit. Explicitly, putting $e_Y:D_YK'\\otimes K'\\to\\omega_Y$, $t_Y:Ra_{Y!}\\omega_Y\\to A_s$, and $J_Y(U)=\\mathrm{Ku}_!(\\operatorname{id}_Y,a_Y;K',U)$, the transpose on $Y$ is\n$$C_Y=(1_{K'}\\otimes a_Y^*t_Y)\\circ(1_{K'}\\otimes a_Y^*Ra_{Y!}e_Y)\\circ J_Y(D_YK'\\otimes K').$$\nIndeed the tensor transpose of $\\beta$ is $1_{K'}\\boxtimes e_Y$, while the exceptional transpose of $\\alpha_{\\operatorname{id}_Y,a_Y}$ is $(1_{K'}\\boxtimes t_Y)\\circ\\mathrm{Ku}_!$; naturality of $\\mathrm{Ku}_!$ composes these into the displayed formula. All regroupings use the specified tensor symmetry, including its Koszul signs.",
    "uses": [
     "def-sf-kv-maps",
     "fix-prop-adjunctions",
-    "def-exchange-projection",
-    "fix-prop-projection-formula"
+    "lem-sf-kunneth-coherence",
+    "def-sfb-derived-tensor-hom-adjunction-sheaves",
+    "def-trf-dualizing-complex",
+    "def-trf-admissibility"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3: the evaluation transpose of the specified Künneth–Verdier map"
+   }
+  },
+  {
+   "text": "We compare $\\kappa_Y\\rho_f$ and $\\Phi Rq_*\\kappa_X$ after tensor–Hom and exceptional adjunction, with common source $T=Rp'_{1!}(Rq_*P_X\\otimes p'^*_2K')$. Put $W=V\\otimes f^*K'$. Define $Q:T\\to K'\\otimes a_Y^*Ra_{X!}W$ by this specified sequence: apply $\\mathrm{PF}_q$ under $Rp'_{1!}$; use $p'_1q=fp_1$ to obtain $Rf_!Rp_{1!}(K\\boxtimes W)$; apply $Rf_!J_X(W)$; then apply $\\mathrm{PF}_f^{-1}$ to $Rf_!(K\\otimes f^*a_Y^*Ra_{X!}W)$. Here $a_X=a_Yf$. Define $d:Ra_{X!}W\\to A_s$ by\n$$Ra_{X!}(V\\otimes f^*K')\\xrightarrow{Ra_{X!}(1\\otimes\\varepsilon_f)}Ra_{X!}(V\\otimes K)\\xrightarrow{Ra_{X!}e_X}Ra_{X!}\\omega_X\\xrightarrow{t_X}A_s.$$\nBy the definition of $\\Phi$, naturality of the projection formulas, and the formula for $C_X$, the transpose of $\\Phi Rq_*\\kappa_X$ is $(1_{K'}\\otimes a_Y^*d)\\circ Q$: the final $\\delta_1$ and $\\varepsilon_{p'_1}$ are precisely $Rf_!\\varepsilon_{p_1}$, as established by its defining transpose.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "fix-prop-projection-formula",
+    "prop-functor-package",
+    "def-sf-kv-maps",
+    "lem-sf-kunneth-coherence",
+    "def-sfb-derived-tensor-hom-adjunction-sheaves",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3: an explicit common transpose for the right side of (a)"
+   }
+  },
+  {
+   "text": "The transpose of $\\kappa_Y\\rho_f$ is the same composite. To check this without presupposing naturality of Künneth–Verdier under pushforward, substitute $\\rho_f=(1\\boxtimes\\chi_f)\\Pi_f^{-1}$ and the displayed formula for $C_Y$. Before evaluation this gives the map\n$$T\\longrightarrow K'\\otimes a_Y^*Ra_{Y!}(V'\\otimes K')$$\nobtained by $\\Pi_f^{-1}$ and $J_Y(V'\\otimes K')$. Apply $1\\otimes a_Y^*Ra_{Y!}\\mathrm{PF}_{f,V,K'}$ and $Ra_{Y!}Rf_!=Ra_{X!}$. Here is the product/projection comparison with its intermediate maps specified. Put $U=Y\\times_sX$, $r=f\\times\\operatorname{id}_X:Z_X\\to U$, $h=\\operatorname{id}_Y\\times f:U\\to Z_Y$, and $\\pi=\\operatorname{id}_Y\\times a_X:U\\to Y$. Thus $q=hr$, $p'_1h=\\pi$, and $\\pi r=fp_1$. Let\n$$E_r(W)=\\mathrm{Ku}_!(f,\\operatorname{id}_X;K,W):Rr_!(K\\boxtimes W)\\to K'\\boxtimes W,$$\n$$J_{Y,X}(W)=\\mathrm{Ku}_!(\\operatorname{id}_Y,a_X;K',W):R\\pi_!(K'\\boxtimes W)\\to K'\\otimes a_Y^*Ra_{X!}W.$$\nAfter applying $Rp'_{1!}\\mathrm{PF}_q$ to $T$, both routes pass through\n$$R\\pi_!Rr_!(K\\boxtimes W)\\xrightarrow{R\\pi_!E_r(W)}R\\pi_!(K'\\boxtimes W)\\xrightarrow{J_{Y,X}(W)}K'\\otimes a_Y^*Ra_{X!}W.$$\nFor the route starting with $\\Pi_f^{-1}$, expand the product map along $q=hr$. The first factor is $E_r(V)$. On the second factor, moving the tensor variable $K'$ through $Rh_!$ is exactly $\\mathrm{PF}_{f,V,K'}$ pulled back to the second coordinate; the product/projection identity of step 6 replaces these two factors by $E_r(W)$. Naturality of $\\mathrm{Ku}_!$ moves this projection map through $J_Y$, and compact-support composition $Ra_{Y!}Rf_!=Ra_{X!}$ gives the displayed intermediate route. These rewritings use projection coherence and exchange pasting for the product squares, and clauses (ii)–(iv) of relative-product coherence, with the third identity factor carrying $p'^*_2K'$ over $Z_Y$.\nFor the route defining $Q$, expand $J_X(W)$ and $J_{Y,X}(W)$ by the prescribed product maps. In the Cartesian square with top $r$, bottom $f$, and vertical projections $p_1$ and $\\pi$, exchange/projection coherence gives, after $R\\pi_!Rr_!=Rf_!Rp_{1!}$,\n$$J_{Y,X}(W)\\circ R\\pi_!E_r(W)=\\mathrm{PF}_{f,K,a_Y^*Ra_{X!}W}^{-1}\\circ Rf_!J_X(W).$$\nIn this expansion the exchange is the proper first-coordinate exchange and the two projection maps move the single factor $a_Y^*Ra_{X!}W$; their composition and exchange coherence is [fix-prop-coherence], with the identity-factor normalization (iv) of [lem-sf-kunneth-coherence]. Thus this intermediate route is precisely $Q$, as defined in step 8. No evaluation or dual-pushforward compatibility has been used in this comparison. Next the definition of $\\chi_f$ gives, on $V'\\otimes K'$, the equality\n$$\\mathrm{ev}_{K'}\\circ(\\chi_f\\otimes1)=\\tau_f\\circ Rf_*e_X\\circ\\mu_{f,V,K}.$$\nMoreover\n$$\\mu_{f,V,K}=Rf_*(1_V\\otimes\\varepsilon_f)\\circ\\mathrm{PF}_{f,V,K'}.$$\nIndeed the ordinary transpose of each side is $\\varepsilon_{f,V}\\otimes\\varepsilon_{f,K}$: for the right side this follows from the defining transpose $\\varepsilon_{f,V}\\otimes1$ of $\\mathrm{PF}$ and naturality; the left side is defined by that transpose. Finally the composite-adjunction counit formula, transported along the conjugate composition comparison specified by constructible admissibility, for $a_X=a_Yf$ gives $t_Y\\circ Ra_{Y!}\\tau_f=t_X$. Here $\\tau_f$ is formed with the canonical isomorphism $Rf^!\\omega_Y\\cong\\omega_X$ of [thm-trf-dualizing-complex-composition] (with $d=f$ and $X$ there replaced by $Y$), which is the component at $A_s$ of the composition comparison $Rf^!Ra_Y^!\\cong R(a_Yf)^!$ specified as a conjugate in [def-trf-admissibility]; under it the pasted counit $t_Y\\circ Ra_{Y!}\\varepsilon_f$ on $Rf^!Ra_Y^!A_s$ is $t_X$. These three equalities turn the remaining evaluation after $Q$ into exactly $1_{K'}\\otimes a_Y^*d$. Thus both transposes coincide, and bijectivity of the two adjunctions proves\n$$\\kappa_Y\\circ\\rho_f=\\Phi\\circ Rq_*\\kappa_X.\\tag{a}$$",
+   "uses": [
+    "def-trf-kernel-pushforward-maps",
+    "def-sf-kv-maps",
+    "def-exchange-projection",
+    "fix-prop-adjunctions",
+    "fix-prop-projection-formula",
+    "prop-functor-package",
+    "lem-sf-kunneth-coherence",
+    "fix-prop-coherence",
+    "def-sfb-derived-tensor-hom-adjunction-sheaves",
+    "def-trf-admissibility",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "thm-trf-dualizing-complex-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3: equality of the left transpose with the common composite"
+   }
+  },
+  {
+   "text": "Take $v=u$ in (b) and use the coefficient-pushforward definition. Step 2 gives $[u]=\\kappa_X[u]_P$ and $[[f,g]_!u]_P=\\kappa_Y^{-1}[[f,g]_!u]$. Substitution followed by (a) gives\n$$[[f,g]_!u]_P=\\kappa_Y^{-1}\\Phi\\,Rq_*\\kappa_X\\,Rq_*[u]_P\\,\\Xi\\,Rb_!\\eta_g=\\rho_f\\,Rq_*[u]_P\\,\\Xi\\,Rb_!\\eta_g.$$\nThe domain is $Rb_!A_D$ and the codomain is $P_Y$, as asserted. The proof used only the two commuting leg relations; the Cartesian squares in the relative-product construction are product squares, not leg squares.",
+   "uses": [
+    "def-trf-coefficient-pushforward",
+    "def-trf-kernel-pushforward-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 1: concluding substitution of (a) and (b)"
+   }
   }
  ],
  "proof_deps": [
+  "def-trf-coefficient-pushforward",
+  "def-trf-kernel-pushforward-maps",
+  "prop-functor-package",
+  "thm-sf-ctf-stability",
+  "def-trf-admissibility",
   "thm-trf-kunneth-verdier",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
   "lem-trf-correspondence-class",
   "thm-trf-verdier-duality",
   "lem-trf-exceptional-internal-hom-exchange",
-  "def-trf-coefficient-pushforward",
+  "fix-prop-adjunctions",
   "fix-prop-projection-formula",
+  "def-sfb-derived-tensor-hom-adjunction-sheaves",
+  "def-exchange-projection",
   "fix-prop-coherence",
   "def-sf-kv-maps",
-  "fix-prop-adjunctions",
-  "def-exchange-projection"
+  "thm-sf-kunneth-relative",
+  "lem-sf-kunneth-coherence",
+  "def-trf-dualizing-complex",
+  "lem-sf-proetale-constructible-origin",
+  "thm-trf-dualizing-complex-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+  "place": "Steps 0–3, expanded into explicit adjunction and evaluation calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kunneth|verdier|cohomologicalCorrespondence",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/Algebra/Homology/SpectralObject/Differentials.lean; Mathlib/Algebra/Homology/SpectralObject/Page.lean; Mathlib/Algebra/Homology/SpectralObject/Basic.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state this proper cohomological-correspondence kernel identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of cohomological correspondences agrees with pushforward of their Verdier kernel classes",
+   "results": "TopCat.Sheaf.pushforward; SheafOfModules.pushforward_map_val; TopCat.Sheaf.pushforward_obj_val; AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; TopCat.Presheaf.toPushforwardOfIso; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state this proper cohomological-correspondence kernel identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal; CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Adjunction.instIsMonoidal_1; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state this proper cohomological-correspondence kernel identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel class of a cohomological correspondence commutes with proper pushforward via the evaluation-defined Verdier dual pushforward and the Kunneth isomorphism",
+   "results": "SheafOfModules.pushforwardNatIso; SheafOfModules.pushforwardNatIso_hom; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.pushforwardNatIso_inv; SheafOfModules.pushforwardComp_hom_app_val_app; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso; CategoryTheory.Functor.sheafPushforwardContinuousComp'; SheafOfModules.pushforwardComp",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state this proper cohomological-correspondence kernel identity"
+  },
+  {
+   "tool": "grep",
+   "query": "kunnethVerdier|kernelClass|cohomological.?correspondence|exceptionalPullback",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state this proper cohomological-correspondence kernel identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a closed monoidal category the transpose of a composite equals evaluation followed by the counit of an adjunction",
+   "results": "CategoryTheory.MonoidalClosed.curry'_comp; CategoryTheory.exp.ev; CategoryTheory.ihom.ev; CategoryTheory.Functor.closedCounit; CategoryTheory.MonoidalClosed.comp_eq; CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev; CategoryTheory.MonoidalClosed.curry_id_eq_coev; CategoryTheory.MonoidalClosed.compTranspose",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state this proper cohomological-correspondence kernel identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing; CategoryTheory.ObjectProperty.IsVerdierRightLocalizing; CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing; CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing; CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff; CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff; CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite; CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state this proper cohomological-correspondence kernel identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of evaluation and tensor Hom adjunction under a proper direct image in a six functor formalism",
+   "results": "CategoryTheory.ExponentiableMorphism.ev_naturality; CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; LightCondensed.ihomPoints_symm_comp; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.ev_coev_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state this proper cohomological-correspondence kernel identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of a cohomological correspondence preserves its kernel class under Kunneth Verdier duality",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp; CategoryTheory.Functor.mem_homologicalKernel_trW_iff; CategoryTheory.Functor.mem_homologicalKernel_W_iff; SheafOfModules.pushforwardNatIso; CategoryTheory.Functor.sheafPushforwardContinuousComp'; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; SheafOfModules.pushforwardComp_hom_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward or homological kernels, not correspondence kernel classes or Verdier evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the external tensor product of proper direct images with projection formula and evaluation in a six operations formalism",
+   "results": "LightCondensed.ihomPoints_symm_comp; CategoryTheory.ExponentiableMorphism.ev_naturality; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; CategoryTheory.ExponentiableMorphism.coev_ev; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern categorical external products, exponentiable morphisms or condensed modules; none states the proper correspondence kernel-class identity"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProduct.*(push|map)|pushforward.*tensor|projectionFormula|projection_formula",
+   "results": "Mathlib/CategoryTheory/Limits/Sifted.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean; Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern categorical external products, exponentiable morphisms or condensed modules; none states the proper correspondence kernel-class identity"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|VerdierDual|cohomologicalCorrespondence|kernelClass",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the evaluation pairing under direct image expressed using the counit of a monoidal adjunction",
+   "results": "CategoryTheory.ihom.ev_naturality; CategoryTheory.ihom.ev_naturality_assoc; CategoryTheory.ihom.coev_naturality; CategoryTheory.ihom.coev_naturality_assoc; CategoryTheory.leftAdjointMate_comp_evaluation; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.rightAdjointMate_comp_evaluation; CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are formal closed-monoidal evaluation identities, not the geometric proper correspondence kernel-class identity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -112,5 +345,21 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-p-proper"
+ "unit": "sk-p-proper",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-trace-source-exchange",
+  "worker": "stage1",
+  "summary": "Preserved the statement and coefficient domain; expanded the two source adjunction calculations, the ordinary-unit/projection identity, the normalization of the proper product map, and the common evaluation transpose. Reused existing stability and relative-product coherence nodes; no new nodes. Checked all cited statements and recorded real Mathlib searches. On resumption, replaced the stronger conditional exceptional-adjunction citation by constructible admissibility and the existing composite/conjugate adjunction definitions, and used the package composition clause on the exact constructible domain. Independent second reading made the b-specialization and the Y evaluation transpose explicit, and specified the mixed product factorization used to identify the common map Q; no new nodes or statement changes. Current second reading explicitly discharges the etale-origin domains of the specified composition maps using the existing constructible-origin equivalence; no extra hypothesis or new node.",
+  "blueprint": "Realizes sk-p-proper step 3, first kernel calculation; the node proof Steps 0–3 are realized by proof steps 1–10, with (b) in 4–5, the evaluation normalization and (a) in 6–9, and the final substitution in 10.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-54f98f2c3",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-54f98f2c3 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement, all ten steps, both statement dependencies and all 21 proof dependencies, plus the main-20261015 source statement and proof (Steps 0–3), the sk-p-proper unit and the citer thm-trf-trace-proper-compatibility. The statement is the source's word for word and is not weakened. It keeps proper f,g, no Cartesian leg square, no properness over s, coefficients A_{E,n} in D^b_ctf, and constructible exceptional admissibility. kappa_X has type K⊠D_XK → RHom(p_2^*K, p_1^!K), with p_X=p_1 (def-sf-kv-maps (iv)). Xi: Rb_!Rg_* ≅ Rq_*Rc_! and rho_f = (1⊠chi_f)Pi_f^{-1} have the stated types. I recomputed the transposes in step 7 (C_X), step 8 (equal to (1⊗a_Y^*d)Q, via naturality of J_X and PF_f) and step 9 (chi_f evaluation; mu_f = Rf_*(1⊗eps)∘PF, both sides transposing to eps⊗eps). I checked step 5's unit/projection identity and the B_b unwinding against the construction of lem-trf-correspondence-class. Small case: two points X={1,2} mapped to a point with c=(1,2). Both sides give the matrix unit E_12 in the order K⊠DK. The identity, zero and empty cases also agree. There are no new nodes and no duplicates (rg for rho_f, [u]_P and kernel class finds only the definition, lem-trf-trace-map-exchange and the citer). Every unit is in the route of sk-p-proper except one Lean-closed definition, no tool_uses are needed and no SGA is cited. FIX: step 9 used t_Y∘Ra_{Y!}tau_f = t_X with only 'dualizing composition identifications understood'. That equation depends on the iso Rf^!omega_Y ≅ omega_X of thm-trf-dualizing-complex-composition, which tau_f is built from and which the step did not cite. I added it to step 9's uses and to proof_deps; it is in unit sk-d-six, which is in the route, and creates no cycle. I also stated explicitly that this iso is the conjugate composition comparison of def-trf-admissibility at A_s. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-trace-source-exchange.json. Residual note for the maintainer, not a fault of this delivery: thm-trf-verdier-duality and thm-trf-dualizing-complex-composition call their isomorphisms only 'natural' or 'canonical', and the exact map appears only in their proofs.; 1 file(s) fixed by the reviewer"
+ }
 }
