@@ -1,0 +1,114 @@
+{
+ "id": "def-coef-nonsymmetric-monoid-axiom",
+ "kind": "definition",
+ "title": "Nonsymmetric monoid axiom with arbitrary auxiliary objects",
+ "status": "split",
+ "statement": "Let $\\mathcal M$ be a cocomplete model category, with model-category and fixed universe $\\mathcal U$ conventions as in [lem-coef-model-infinity-derived-adjunction] and colimits as in [def-weil-pbc-category-colimit]. Give $\\mathcal M$ a monoidal structure [def-sfb-monoidal-category], not assumed symmetric. Write $0$ for its initial object. Let $G$ consist of all finite nonempty left-associated pushout products $a_1\\mathbin\\square\\cdots\\mathbin\\square a_n$, where every factor is a trivial cofibration or the initial map $0\\to X$ of an arbitrary object, and at least one factor is a trivial cofibration. Here the pushout product of $a:A\\to B$ and $b:C\\to D$ is $(B\\odot C)\\amalg_{A\\odot C}(A\\odot D)\\to B\\odot D$. The nonsymmetric monoid axiom means that the smallest class containing $G$ and closed under pushouts, $\\mathcal U$-small continuous transfinite compositions and arrow retracts consists of weak equivalences. Equivalently, there is such a closed class $K$ with $G\\subseteq K\\subseteq W$. Continuous means that at each nonzero limit ordinal the stage is the colimit of preceding stages; an arrow retract is a retract in the arrow category.",
+ "stmt_deps": [
+  "lem-coef-model-infinity-derived-adjunction",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-monoidal-category"
+ ],
+ "source": {
+  "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+  "place": "Definition 9.1, printed p. 1591; weak-equivalence retract closure gives the equivalent retract-closed formulation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "nonsymmetric monoid axiom weak equivalences closure pushouts transfinite compositions retracts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.mk'\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"[CategoryWithFibrations C] [CategoryWithCofibrations C] [CategoryWithWeakEquivalences C] [HasFiniteLimits C]\\n  [HasFiniteColimits C] [(weakEquivalences C).HasTwoOutOfThreeProperty]\\n  [IsWeakFactorizationSystem (cofibrations C) (trivialFibrations C)]\\n  [IsWeakFactorizationSystem (trivialCofibrations \", \"doc\": \"A structure on a category $\\\\mathcal{C}$ defining it as a model category, consisting of three classes of morphisms (fibrations, cofibrations, and weak equivalences) satisfying the axioms: (1) $\\\\mathcal\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm3a\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.weakEquivalences C).IsStableUnderRetracts\", \"doc\": \"In a model category $ \\\\mathcal{C} $, the class of weak equivalences is stable under retracts. That is, if a morphism $ f $ is a weak equivalence and $ g $ is a retract of $ f $, then $ g $ is also a w\"}\n  {\"name\": \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"module\": \"Mathlib.AlgebraicTopology.RelativeCellComplex.Basic\", \"type\": \"{α : Type*} {A B : α → C} (g : (i : α) → (A i ⟶ B i)) (c : RelativeCellComplex.{w} (fun (_ : J) ↦ g) f) :\\n  (coproducts.{w} (ofHoms g)).pushouts.TransfiniteCompositionOfShape J f\", \"doc\": \"Given a relative cell complex in a category $\\\\mathcal{C}$ parameterized by a morphism $X \\\\to Y$, with a well-ordered index set $J$ equipped with a linear order, successor structure, least element, and\"}\n  {\"name\": \"HomotopicalAlgebra.instIsStableUnderRetractsOppositeWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Opposite\", \"type\": \"[(weakEquivalences C).IsStableUnderRetracts] : (weakEquivalences Cᵒᵖ).IsStableUnderRetracts\", \"doc\": \"For any model category $\\\\mathcal{C}$, its opposite category $\\\\mathcal{C}^{\\\\text{op}}$ has a canonical model category structure where the classes of weak equivalences, fibrations, and cofibrations in $\"}\n  {\"name\": \"HomotopicalAlgebra.instIsMultiplicativeWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \"[IsWeakFactorizationSystem (trivialCofibrations C) (fibrations C)] [(weakEquivalences C).IsStableUnderRetracts]\\n  [(weakEquivalences C).IsStableUnderComposition] : (weakEquivalences C).IsMultiplicative\", \"doc\": \"In a category equipped with a weak factorization system consisting of trivial cofibrations and fibrations, if the weak equivalences are stable under retracts and composition, then they are closed unde\"}\n  {\"name\": \"HomotopicalAlgebra.CategoryWithWeakEquivalences.casesOn\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {motive : HomotopicalAlgebra.CategoryWithWeakEquivalences C → Sort u_1} →\\n      (t : HomotopicalAlgebra.CategoryWithWeakEquivalences C) →\\n        ((weakEquivalences : CategoryTheory.MorphismProperty C) → motive { weakEquivalences := we\", \"doc\": \"A category equipped with a specified class of morphisms called cofibrations, forming a structure in universe $\\\\max(u, v)$ where cofibrations satisfy axioms analogous to those in a model category, exte\"}\n  {\"name\": \"HomotopicalAlgebra.CategoryWithWeakEquivalences.ctorIdx\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"{C : Type u} → {inst : CategoryTheory.Category.{v, u} C} → HomotopicalAlgebra.CategoryWithWeakEquivalences C → ℕ\", \"doc\": \"A category equipped with a subcategory of cofibrations, forming a structure in homotopical algebra.\"}\n  {\"name\": \"HomotopicalAlgebra.CategoryWithWeakEquivalences.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    {P : Sort u_1} →\\n      {weakEquivalences weakEquivalences' : CategoryTheory.MorphismProperty C} →\\n        { weakEquivalences := weakEquivalences } = { weakEquivalences := weakEquivalences' } →\\n          (weakEquivalences ≍ weakEquivale\", \"doc\": \"A category equipped with a specified class of morphisms called cofibrations, forming a structure in universe $\\\\max(u, v)$ where cofibrations satisfy axioms analogous to those in a model category, exte\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact definition of the nonsymmetric monoid axiom. Returned ordinary monoids, model-category lemmas or closure operations only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonsymmetric monoid axiom iterated pushout products with arbitrary objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Monoid.PushoutI\", \"module\": \"Mathlib/GroupTheory/PushoutI\", \"type\": \"{ι : Type u_1} →\\n  {G : ι → Type u_2} →\\n    {H : Type u_3} →\\n      [inst : (i : ι) → Monoid (G i)] → [inst_1 : Monoid H] → ((i : ι) → H →* G i) → Type (max (max u_1 u_2) u_3)\", \"doc\": \"Given a family of monoids $\\\\{G_i\\\\}$ indexed by $I$, a monoid $H$, and homomorphisms $\\\\varphi_i : H \\\\to G_i$ for each $i$, the pushout is constructed as the quotient of the coproduct $\\\\left(\\\\coprod_{i \"}\n  {\"name\": \"Monoid.PushoutI.mul\", \"module\": \"Mathlib/GroupTheory/PushoutI\", \"type\": \"{ι : Type u_1} →\\n  {G : ι → Type u_2} →\\n    {H : Type u_3} →\\n      [inst : (i : ι) → Monoid (G i)] → [inst_1 : Monoid H] → {φ : (i : ι) → H →* G i} → Mul (Monoid.PushoutI φ)\", \"doc\": \"Given a family of monoids $\\\\{G_i\\\\}$ indexed by $I$, a monoid $H$, and homomorphisms $\\\\varphi_i : H \\\\to G_i$ for each $i$, the pushout monoid $\\\\mathrm{PushoutI}(\\\\varphi)$ is equipped with a well-define\"}\n  {\"name\": \"Monoid.PushoutI.of\", \"module\": \"Mathlib/GroupTheory/PushoutI\", \"type\": \"{ι : Type u_1} →\\n  {G : ι → Type u_2} →\\n    {H : Type u_3} →\\n      [inst : (i : ι) → Monoid (G i)] →\\n        [inst_1 : Monoid H] → {φ : (i : ι) → H →* G i} → (i : ι) → G i →* Monoid.PushoutI φ\", \"doc\": \"For each index $i$ and monoid $G_i$ in a family indexed by $\\\\iota$, this defines the canonical monoid homomorphism from $G_i$ to the pushout $\\\\coprod_{i \\\\in \\\\iota} G_i * H / \\\\sim$. The homomorphism is\"}\n  {\"name\": \"Monoid.PushoutI.monoid\", \"module\": \"Mathlib/GroupTheory/PushoutI\", \"type\": \"{ι : Type u_1} →\\n  {G : ι → Type u_2} →\\n    {H : Type u_3} →\\n      [inst : (i : ι) → Monoid (G i)] → [inst_1 : Monoid H] → {φ : (i : ι) → H →* G i} → Monoid (Monoid.PushoutI φ)\", \"doc\": \"Given a family of monoids $\\\\{G_i\\\\}$ indexed by $I$, a monoid $H$, and homomorphisms $\\\\varphi_i : H \\\\to G_i$ for each $i$, the pushout $\\\\left(\\\\coprod_{i \\\\in I} G_i\\\\right) * H / \\\\sim$ (constructed as th\"}\n  {\"name\": \"Monoid.PushoutI.induction_on\", \"module\": \"Mathlib/GroupTheory/PushoutI\", \"type\": \"∀ {ι : Type u_1} {G : ι → Type u_2} {H : Type u_3} [inst : (i : ι) → Monoid (G i)] [inst_1 : Monoid H]\\n  {φ : (i : ι) → H →* G i} {motive : Monoid.PushoutI φ → Prop} (x : Monoid.PushoutI φ),\\n  (∀ (i : ι) (g : G i), motive ((Monoid.PushoutI.of i) g)) →\\n    (∀ (h : H), motive ((Monoid.PushoutI.base φ)\", \"doc\": \"To prove a property holds for all elements of the pushout monoid $\\\\mathrm{PushoutI}(\\\\varphi)$, it suffices to verify: (1) the property holds for all elements in the image of each canonical embedding $\"}\n  {\"name\": \"Monoid.PushoutI.ofCoprodI\", \"module\": \"Mathlib/GroupTheory/PushoutI\", \"type\": \"{ι : Type u_1} →\\n  {G : ι → Type u_2} →\\n    {H : Type u_3} →\\n      [inst : (i : ι) → Monoid (G i)] →\\n        [inst_1 : Monoid H] → {φ : (i : ι) → H →* G i} → Monoid.CoprodI G →* Monoid.PushoutI φ\", \"doc\": \"The canonical monoid homomorphism from the free product $\\\\coprod_{i \\\\in I} G_i$ to the pushout $\\\\left(\\\\coprod_{i \\\\in I} G_i\\\\right) * H / \\\\sim$, constructed by lifting the family of canonical embedding\"}\n  {\"name\": \"Monoid.PushoutI.NormalWord.prod\", \"module\": \"Mathlib/GroupTheory/PushoutI\", \"type\": \"{ι : Type u_1} →\\n  {G : ι → Type u_2} →\\n    {H : Type u_3} →\\n      [inst : (i : ι) → Group (G i)] →\\n        [inst_1 : Group H] →\\n          {φ : (i : ι) → H →* G i} →\\n            {d : Monoid.PushoutI.NormalWord.Transversal φ} → Monoid.PushoutI.NormalWord d → Monoid.PushoutI φ\", \"doc\": \"The function maps a normal word $w$ in the pushout construction to its product in the pushout monoid $\\\\mathrm{PushoutI}(\\\\varphi)$. This is computed as the product of the base homomorphism applied to t\"}\n  {\"name\": \"Monoid.PushoutI.NormalWord.prod_cons\", \"module\": \"Mathlib/GroupTheory/PushoutI\", \"type\": \"∀ {ι : Type u_1} {G : ι → Type u_2} {H : Type u_3} [inst : (i : ι) → Group (G i)] [inst_1 : Group H]\\n  {φ : (i : ι) → H →* G i} {d : Monoid.PushoutI.NormalWord.Transversal φ} {i : ι} (g : G i)\\n  (w : Monoid.PushoutI.NormalWord d) (hmw : w.fstIdx ≠ some i) (hgr : g ∉ (φ i).range),\\n  (Monoid.PushoutI.\", \"doc\": \"Given an index $i$, a family of groups $G_i$, a group $H$, and monoid homomorphisms $\\\\varphi_i: H \\\\to G_i$, if $g \\\\in G_i$ is not in the image of $\\\\varphi_i$ and $w$ is a normal word whose first index\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact definition of the nonsymmetric monoid axiom. Returned ordinary monoids, model-category lemmas or closure operations only."
+  },
+  {
+   "tool": "grep",
+   "query": "monoid.?axiom|NonsymmetricMonoid|nonsymmetricMonoid",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"line\": \"58\", \"text\": \"the tensor product, and satisfies the monoid axioms since it is a skeleton.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"line\": \"77\", \"text\": \"multiplication is given by the tensor product, and satisfies the monoid axioms since it is a\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"line\": \"320\", \"text\": \"and the monoid axioms for the tensor product follow from the monoid axioms for the tensor factors\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact definition of the nonsymmetric monoid axiom. Returned ordinary monoids, model-category lemmas or closure operations only."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"NonsymmetricMonoid|nonsymmetricMonoid|monoid.?axiom\" WeilConjectures lean/Sheaf; rg -l -i \"nonsymmetric monoid axiom|non.symmetric monoid axiom\" dag/nodes; blueprint_refs.py search \"monoid axiom\"",
+   "results": "No Lean matches in the read-only source or side-library. DAG: lem-coef-associative-algebra-diagram-cell-filtration, lem-coef-associative-algebra-sifted-localization, lem-coef-fixed-object-dg-free-model and this item mention the axiom, but none is its definition node. Blueprint search: 0 blueprint nodes match monoid axiom.",
+   "date": "2026-10-17",
+   "verdict": "No existing definition node or Lean definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-associative-algebra-model-transfer",
+  "date": "2026-10-17",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, main-20261015 proof: the finite-level mapping-complex adjunction in the middle R lim comparison. Generic associative-algebra transfer used after verifying the matrix tensor hypotheses for fixed-object dg graphs.",
+   "via": [
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-fixed-object-dg-free-model",
+    "lem-coef-fixed-object-enriched-rectification",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NonsymmetricMonoidAxiom",
+  "declaration": "HomotopicalAlgebra.NonsymmetricMonoidAxiom",
+  "declarations": [
+   "HomotopicalAlgebra.nonsymmetricMonoidGenerators",
+   "HomotopicalAlgebra.NonsymmetricMonoidAxiom"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NonsymmetricMonoidAxiom.lean",
+  "statement": "def NonsymmetricMonoidAxiom (M : Type u) [Category.{v} M] [ModelCategory M] [MonoidalCategory M] [HasColimits M] : Prop",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c69ef7871",
+  "group": "NB",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c69ef7871",
+  "group": "NB",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, edge cases and verbatim signatures checked; both Lean files compile cleanly through scompile.py. Complete report replacement fixes H11 by supplying the missing independent second reading. No Lean or node changes needed; details in review.md."
+ }
+}

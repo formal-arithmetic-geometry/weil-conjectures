@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-cartesian-mapping-simplex-presentation",
-  "lem-coef-marked-point-cartesian-model"
+  "lem-coef-marked-point-cartesian-model",
+  "def-coef-infinity-marked-coanodyne",
+  "lem-coef-marked-anodyne-lifting-calculus"
  ],
  "proof": [
   {
@@ -218,5 +220,30 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-0c08f1359 (reviewer sub-agent of L); spot-checked: I read the item, its three cited statements (def-cbc-enhanced-diagrams-cones horn and products, lem-coef-cartesian-mapping-simplex-presentation coordinates and operators, lem-coef-marked-point-cartesian-model markings and products) and the parent lem-cbc-enhanced-relative-exponential steps 3-6. The parent puts the same restricted marking (alpha in T_n, a degenerate) on M and uses exactly this pushout, including n=1. The statement is true, not weakened, and does not restate a parent clause. Step 1: c is simplicial because the transitions compose, and it is marked. The prescribed marking on M contains the degenerate edges. Step 2: a simplex outside the initial horn hits {1..n}, so alpha(r)=n and c is a bijection there. Step 3: the piecewise h is well-typed and hc=v holds even when c_K is not injective. Step 4: naturality holds, including faces that enter the horn, with no circularity. Step 5: every marked edge outside M_K comes from a marked cylinder edge, and uniqueness follows from coverage, so this is the marked universal property, not an unmarked one. Step 6: n=1 gives M_K=A_0^flat, and empty A_n needs no choice. I tested n=1 (mapping cylinder with (Delta^1)^sharp), n=2 (faces of (012,a); no marked edges outside K) and a non-injective transition. There are no new nodes. lem-coef-mapping-simplex-last-fiber-pushout glues along the last face and is unmarked, the prism-extension and cone-fiber nodes state other results, and the Mathlib SSet pushout candidates are not one-line matches. I accept both tool_uses: the two sk-prop-sf-biduality-general nodes are used only for definitions. HTT is not under literature/; the report lists it as WANTED and proof_origin=agent, and I did not consult it because the proof is a self-contained coordinate verification. There is no SGA citation. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fe27d982a",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, marked pushout formulation, and compiler evidence all checked successfully."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MappingSimplexInitialHornPushout",
+  "declaration": "SSet.Enhanced.mapping_simplex_initial_horn_pushout",
+  "declarations": [
+   "SSet.Enhanced.initialEdgeMappingSimplex",
+   "SSet.Enhanced.initialHornMappingSimplexSubcomplex",
+   "SSet.Enhanced.initialHornMappingSimplex",
+   "SSet.Enhanced.mapping_simplex_initial_horn_pushout"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MappingSimplexInitialHornPushout.lean",
+  "statement": "theorem mapping_simplex_initial_horn_pushout {n : ℕ} (A : SimplexChain.{u} (n + 1)) : ∃ c : Marked.product (Marked.flat (A.obj (op (Fin.last (n + 1))))) (Marked.initialMarkedSimplex n) ⟶ initialEdgeMappingSimplex A, (∀ (r : SimplexCategoryᵒᵖ) (a : (A.obj (op (Fin.last (n + 1)))).obj r) (α : (Δ[n + 1] : SSet.{u}).obj r), c.val.app r (a, α) = ⟨stdSimplex.asOrderHom α, (A.map (homOfLE (Fin.le_last (stdSimplex.asOrderHom α (Fin.last r.unop.len)))).op).app r a⟩) ∧ ∃ cK : Marked.product (Marked.flat (A.obj (op (Fin.last (n + 1))))) (Marked.inducedMarking (Marked.initialMarkedSimplex n) (horn (n + 1) (0 : Fin (n + 2))).ι) ⟶ initialHornMappingSimplex A, IsPushout cK (Marked.productMap (𝟙 (Marked.flat (A.obj (op (Fin.last (n + 1)))))) (Marked.initialMarkedHorn n)) (Marked.inducedMarkingMap (initialEdgeMappingSimplex A) (initialHornMappingSimplexSubcomplex A).ι) c",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existing chain and mapping simplex are reused. The three helper definitions give its selected marking and concrete inverse-image horn restriction. The theorem specifies the canonical cylinder map by its coordinates in every degree and asserts that its horn restriction gives a strict marked pushout, without fibrancy, nonemptiness or injectivity assumptions. Positive dimensions are parametrized as n + 1."
  }
 }

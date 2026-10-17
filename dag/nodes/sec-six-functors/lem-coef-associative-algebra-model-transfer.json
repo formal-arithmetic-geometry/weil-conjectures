@@ -34,7 +34,9 @@
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-combinatorial-localization-presentability",
   "def-sfb-monoidal-category",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-coef-associative-word-filtration",
+  "def-coef-nonsymmetric-monoid-axiom"
  ],
  "proof": [
   {
@@ -256,5 +258,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c69ef7871",
+  "group": "NB",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, edge cases and verbatim signatures checked; both Lean files compile cleanly through scompile.py. Complete report replacement fixes H11 by supplying the missing independent second reading. No Lean or node changes needed; details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AssociativeAlgebraModelTransfer",
+  "declaration": "HomotopicalAlgebra.associativeAlgebraModelTransfer",
+  "declarations": [
+   "HomotopicalAlgebra.AssociativeAlgebraTransfer",
+   "HomotopicalAlgebra.associativeAlgebraModelTransfer"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AssociativeAlgebraModelTransfer.lean",
+  "statement": "theorem associativeAlgebraModelTransfer {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MonoidalCategory M] (_hM : CombinatorialModelCategory.{u, v, v} M) (_leftAdj : ∀ X : M, ((tensoringLeft M).obj X).IsLeftAdjoint) (_rightAdj : ∀ X : M, ((tensoringRight M).obj X).IsLeftAdjoint) (_unit : IsCofibrant (𝟙_ M)) (_pushoutProduct : ∀ (f g : Arrow M), Cofibration f.hom → Cofibration g.hom → Cofibration ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom ∧ (WeakEquivalence f.hom ∨ WeakEquivalence g.hom → WeakEquivalence ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom)) (_monoidAxiom : NonsymmetricMonoidAxiom M) : ∃ W : AssociativeWordFiltration.Construction M, Nonempty (AssociativeAlgebraTransfer W)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

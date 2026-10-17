@@ -258,5 +258,30 @@
   "group": "Q125",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e5e2c5e7f (reviewer sub-agent of L); spot-checked: I read the delivery in full; review.md has the details. Neither source is in literature/, so I fetched both read-only and checked them at the cited places. Item: the statement is unchanged and matches Barwick Def. 4.2.2-4.2.3 and Lemma 4.6 (printed p. 43). That lemma assumes only a combinatorial M and a small H; left properness enters only at Theorem 4.7. Barwick's proof shows closure under filtered colimits and only asserts accessibility; the delivery proves it constructively. Steps: in step 2, the left factor from I is a cofibration by lifting-class-closure and transfinite-left-lifting, the right factor is a trivial fibration, and functoriality gives q_Y Qf = f q_X. In step 3, the H-injective middle object is fibrant and local, and a_X is a local equivalence by clause 2 because its source QX is cofibrant. Step 4 composes accessible functors. In step 5, Yoneda on pi_0 in hM_inf (the ordinary localization) gives gu=1 and ug=1, and the detection lemma gives u in W_0. In step 6, the arrow inverse image of the accessible class W_0 under the accessible R is W_S. proof_deps equals the union of the uses. New node lem-cbc-framed-localizing-cofibrations: true for H = horns plus J (Hirschhorn Def. 4.2.1-4.2.2). Clause 1 follows from Lemma 3.3.11, which holds in any model category; Prop. 4.2.4 sits under a left-proper heading, but its proof does not use it. Clause 2 follows from Prop. 17.8.14(1), Prop. 17.8.11, Cor. 17.8.12(1), Props. 17.8.13 and 17.8.7, and the tower argument in Thm. 17.8.18. The cofibrant-source restriction is needed and kept, and a retract under U is obtained by factoring the map itself. Small cases (S empty, terminal M, S={0->1}, the n=0 horn) are consistent. The node is statement-only, self-contained TeX with three kinds of logged searches and correct created/blueprint fields. It neither restates a clause of the item nor duplicates general-bousfield-localization, simplicial-bousfield-model-structure, cofibration-local-mapping-test, left-proper-derived-cell-colimits, bousfield-local-fibrations or cosimplicial-frame-mapping. I accept the six declared tool_uses (generic sk-prop-sf-biduality-general infrastructure, the same family accepted for the parent). No SGA is cited, no target, unit or chapter is touched, and I wrote no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-45a5719e7",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Statement, mapping-space direction, hypotheses, universes, dependencies, docstrings, edge cases, and source checked; per-file scompile passed cleanly."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HomotopyLocalEquivalencesAccessible",
+  "declaration": "CategoryTheory.homotopy_local_equivalences_accessible",
+  "declarations": [
+   "CategoryTheory.derivedPrecompositionIsEquivalence",
+   "CategoryTheory.IsHomotopyLocalObject",
+   "CategoryTheory.homotopyLocalEquivalences",
+   "CategoryTheory.homotopy_local_equivalences_accessible"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HomotopyLocalEquivalencesAccessible.lean",
+  "statement": "theorem homotopy_local_equivalences_accessible {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] (_hM : CombinatorialModelCategory.{u, v, v} M) {K : SSet.{max u v t}} (q : FiniteReedy.largeNerve.{u, v, t} M ⟶ K) (_hq : FiniteReedy.IsLocalization (weakEquivalences M) q) {I : Type v} (S : I → Arrow M) : (homotopyLocalEquivalences q S).IsClosedUnderIsomorphisms ∧ ∃ (κ : Cardinal.{v}) (_ : Fact κ.IsRegular), (∀ (J : Type v) (_ : SmallCategory J) (_ : IsCardinalFiltered J κ) (D : J ⥤ Arrow M), (∀ j, homotopyLocalEquivalences q S (D.obj j)) → ∀ (c : Cocone D), Nonempty (IsColimit c) → homotopyLocalEquivalences q S c.pt) ∧ ∃ (A : Type v) (G : A → Arrow M), (∀ a, homotopyLocalEquivalences q S (G a)) ∧ ∀ (f : Arrow M), homotopyLocalEquivalences q S f → ∃ (J : Type v) (_ : SmallCategory J) (_ : IsCardinalFiltered J κ) (D : J ⥤ Arrow M) (c : Cocone D), (∀ j, ∃ a, Nonempty (D.obj j ≅ G a)) ∧ Nonempty (IsColimit c) ∧ Nonempty (c.pt ≅ f)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The three helper predicates render the notions introduced in this node. Derived precomposition uses the canonical source-evaluation leg from maps in Fun([1],K) from q(f) to id(qZ); its target-evaluation leg is canonically an equivalence to Map(qY,qZ). This is the evaluation span of FrameMappingRelation, without a simplicial enrichment hypothesis or a chosen replacement map. The conclusion spells out precisely repleteness, ambient filtered-colimit closure and small generation, as in the recorded accessibility prerequisites."
  }
 }
