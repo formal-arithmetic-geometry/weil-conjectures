@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaSeries
 
@@ -47,21 +48,6 @@ open PowerSeries
 universe u v w
 
 namespace PowerSeries
-
-/-- The logarithmic derivative of a finite product is the sum of the logarithmic
-derivatives. -/
-theorem X_mul_derivative_prod {K : Type*} [Field K] {ι : Type*}
-    {f a : ι → K⟦X⟧} (s : Finset ι) (h : ∀ i ∈ s, X * derivative K (f i) = a i * f i) :
-    X * derivative K (∏ i ∈ s, f i) = (∑ i ∈ s, a i) * ∏ i ∈ s, f i := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => simp
-  | insert b s hb ih =>
-    have h4 := h b (Finset.mem_insert_self b s)
-    have ihs := ih fun i hi ↦ h i (Finset.mem_insert_of_mem hi)
-    rw [Finset.prod_insert hb, Finset.sum_insert hb, Derivation.leibniz, smul_eq_mul,
-      smul_eq_mul]
-    linear_combination f b * ihs + (∏ i ∈ s, f i) * h4
 
 /-- The logarithmic derivative of the counting series `exp (∑_{n ≥ 1} a n tⁿ / n)` is the
 generating series `∑_{n ≥ 1} a n tⁿ`. -/
