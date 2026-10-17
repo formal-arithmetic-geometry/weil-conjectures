@@ -233,5 +233,34 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q114-95369c168 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all cited DAG statements, unit/chapter route, and Stacks Tags 01NK/01N8. Six steps are mathematically sound, dependencies and tool uses are valid, edge cases checked, no duplicate or route violation found, and no new nodes were delivered. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-db53ed94d",
+  "group": "Q72",
+  "result": "pass",
+  "note": "All dependencies, declarations, hypotheses, conclusions, edge cases, docstrings, route constraints, and report sections checked; recorded compilation passed, while reruns found the compiler server unavailable."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjInvertibleMapTwistIso",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_proj_invertible_map_twist_iso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.projSectionMapDomain",
+   "AlgebraicGeometry.Scheme.Modules.projRestrictSection",
+   "AlgebraicGeometry.Scheme.Modules.projTensorPullbackSection",
+   "AlgebraicGeometry.Scheme.Modules.projHomogeneousTwistSection",
+   "AlgebraicGeometry.Scheme.Modules.projRestrictedPowerMul",
+   "AlgebraicGeometry.Scheme.Modules.ProjTwistComparisonPreservesSections",
+   "AlgebraicGeometry.Scheme.Modules.ProjTwistComparisonMultiplicative",
+   "AlgebraicGeometry.Scheme.Modules.exists_proj_invertible_map_twist_iso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjInvertibleMapTwistIso.lean",
+  "statement": "theorem exists_proj_invertible_map_twist_iso (ψ : A →+* InvertibleSectionRing L) (hψ : ∀ (n : ℕ) (a : A), a ∈ 𝒜 n → ψ a ∈ sectionRingGrade L n) (d : ℕ) (hd : 0 < d) (V : T.Opens) (hV : V ≤ projSectionMapDomain 𝒜 L ψ) (hgen : V ≤ ⨆ a : 𝒜 d, generatingLocus ((ψ a) d)) : ∃ (r : V.toScheme ⟶ Proj 𝒜) (θ : ∀ n : ℕ, (tensorPullback r).obj (Proj.twist 𝒜 (n : ℤ)) ⟶ (L.tensorPow n).restrict V.ι), (∀ (e : ℕ) (_he : 0 < e) (a : 𝒜 e), V.ι ''ᵁ (r ⁻¹ᵁ Proj.basicOpen 𝒜 a.val) = V ⊓ generatingLocus ((ψ a) e)) ∧ (∀ n : ℕ, ProjTwistComparisonPreservesSections 𝒜 L ψ V r n (θ n)) ∧ ProjTwistComparisonMultiplicative 𝒜 L V r θ ∧ IsIso (θ d) ∧ (∀ τ : (tensorPullback r).obj (Proj.twist 𝒜 (d : ℤ)) ⟶ (L.tensorPow d).restrict V.ι, ProjTwistComparisonPreservesSections 𝒜 L ψ V r d τ → τ = θ d)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical morphism and its comparison on V are specified together by the characterizing properties of Stacks 01NK (basic-open inverse images, homogeneous sections, and graded multiplication). The degree-d component is an isomorphism and is unique among all maps with the prescribed degree-d section images. Auxiliary definitions give explicit canonical section maps and equations, without choosing any map from existence."
  }
 }
