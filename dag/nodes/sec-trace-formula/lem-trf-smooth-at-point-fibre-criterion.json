@@ -15,9 +15,108 @@
   "def-pc-scheme-fibre",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Suppose $f$ is smooth on an open neighbourhood $U$ of $x$. Apply [sbc-lem-smooth-criterion] to $f|_U:U\\to S$: its fibre $U_s\\to\\operatorname{Spec}\\kappa(s)$ is smooth. By [lem-weil-pbc-open-fibre-product], $U_s$ identifies with the open subscheme of $X_s$ lying above $U$, compatibly with the morphism to $\\operatorname{Spec}\\kappa(s)$. This open contains the point corresponding to $x$ by [def-pc-scheme-fibre]. It is therefore the required smooth neighbourhood in the fibre.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9, lemma-smooth-at-point, (1) implies (2); Tag 01VB, lemma-base-change-smooth"
+   }
+  },
+  {
+   "text": "Conversely suppose $X_s\\to\\operatorname{Spec}\\kappa(s)$ is smooth at $x$. By [def-sbc-locally-finite-presentation] choose affine neighbourhoods $W=\\operatorname{Spec}A\\subset X$ of $x$ and $V=\\operatorname{Spec}R\\subset S$ of $s$, with $f(W)\\subset V$ and $A$ finitely presented over $R$. Write $\\varphi:R\\to A$ for the induced map and $\\mathfrak q\\subset A$ for $x$. By [lem-weil-pbc-affine-opens-induced-ring-map-spec-square], $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ represents $s$. By [lem-weil-pbc-affine-open-stalk-localization] and [lem-weil-pbc-spec-map-stalk-localization], the local map $R_{\\mathfrak p}\\to A_{\\mathfrak q}$ is the given stalk map under ring isomorphisms. It is flat by hypothesis; no flatness away from $x$ is asserted.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9, lemma-smooth-at-point, affine reduction for (2) implies (1); Algebra Tag 00TF hypotheses (1) and (2)"
+   }
+  },
+  {
+   "text": "Put $k=\\kappa(\\mathfrak p)$ and $F=A\\otimes_R k$. By [lem-weil-pbc-affine-open-stalk-localization] and [lem-weil-pbc-spec-residue-field-identification], $k\\cong\\kappa(s)$ compatibly with the maps to $S$. By [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-open-fibre-product], $\\operatorname{Spec}F$ is the open subscheme of $X_s$ above $W$, over $k$. The point over $x$ is $\\mathfrak Q=\\ker(F\\to\\kappa(\\mathfrak q))$, $a\\otimes\\lambda\\mapsto\\bar a\\bar\\lambda$: its contraction is $\\mathfrak q$, so [def-pc-scheme-fibre] identifies it with the unique point over $x$. Let $N\\subset X_s$ be a smooth neighbourhood of this point. There is $h\\in F\\setminus\\mathfrak Q$ with $D(h)\\subset N\\cap\\operatorname{Spec}F$: the complement of this open in $\\operatorname{Spec}F$ is $V(I)$ for an ideal $I$, and $\\mathfrak Q\\notin V(I)$ gives $h\\in I\\setminus\\mathfrak Q$. By [lem-weil-pbc-principal-localization-open-immersion], $D(h)=\\operatorname{Spec}F_h$. Its inclusion into $N$ is an open immersion, so [lem-pc-open-immersion-smooth-composition] makes $\\operatorname{Spec}F_h\\to\\operatorname{Spec}k$ smooth. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $k\\to F_h$ is a smooth ring map. Thus $k\\to F$ is smooth at $\\mathfrak Q$ by [def-weil-pbc-singular-ideal].",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9, lemma-smooth-at-point, identification of the smooth fibre in (2); Schemes Tags 01JQ and 01JR; Algebra Definition 00TB; More on Morphisms Tag 02H6"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-smooth-fibre-smooth-at-prime] to $\\varphi:R\\to A$, $\\mathfrak p$, and $\\mathfrak q$. Its finite-presentation condition holds with the element $1\\notin\\mathfrak q$ because $A$ is finitely presented over $R$ (step 2). Its local-flatness condition is step 2, and its smooth-fibre condition is step 3, with precisely the kernel prime $\\mathfrak Q$ specified in its statement. It follows that $R\\to A$ is smooth at $\\mathfrak q$. Unpacking [def-weil-pbc-singular-ideal], choose $g\\in A\\setminus\\mathfrak q$ such that $R\\to A_g$ is a smooth ring map.",
+   "uses": [
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9, lemma-smooth-at-point, (2) implies (1) by Algebra Tag 00TF, lemma-flat-fibre-smooth"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}A_g$ is the open neighbourhood $W_g=D(g)$ of $x$ in $W$. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $W_g\\to V$ is smooth. Its composite $W_g\\to S$ is locally of finite presentation: each affine finite-presentation neighbourhood over the open $V$ is also such a neighbourhood over $S$, by [def-sbc-locally-finite-presentation]. To check formal smoothness, take a first order thickening $T\\subset T'$ of affine $S$-schemes and a map $T\\to W_g$ over $S$. By [def-sbc-first-order-thickening], $T$ and $T'$ have the same underlying points. The structure map $T'\\to S$ therefore lands in $V$ since its restriction to $T$ does, and factors uniquely through $V$ by [def-weil-open-immersion]. The square is now over $V$; formal smoothness of $W_g\\to V$ gives a lift $T'\\to W_g$ by [def-sbc-formally-smooth], which is also a lift over $S$. Thus $W_g\\to S$ is smooth by [def-sbc-smooth-morphisms]. Since $x\\in W_g$, this is the required smooth neighbourhood of $x$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-sbc-locally-finite-presentation",
+    "def-sbc-first-order-thickening",
+    "def-weil-open-immersion",
+    "def-sbc-formally-smooth",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9, lemma-smooth-at-point, conclusion of (2) implies (1); More on Morphisms Tags 02H0 and 02H6; Schemes Tag 01HI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "def-sbc-first-order-thickening",
+  "def-weil-open-immersion",
+  "def-sbc-formally-smooth",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V9, lemma-smooth-at-point, equivalence (1) and (2), using Algebra Tag 00TF"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +145,52 @@
    "results": "2 hits in Mathlib/AlgebraicGeometry/Group/Smooth.lean and Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; these are global smoothness APIs and do not state the pointwise criterion.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "of_formallySmooth_fiber|smooth.*fiber|fiber.*smooth",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; read SmoothFiber.lean (global-flat criterion) and Smooth/Fiber.lean:194ff (global flat algebra and smooth whole fibre), neither is the pointwise scheme iff.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "of_formallySmooth_fiber|flat_fiber|smooth_fiber",
+   "results": "5 hits: Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean; read SmoothFiber.lean (global-flat criterion) and Smooth/Fiber.lean:194ff (global flat algebra and smooth whole fibre), neither is the pointwise scheme iff.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented morphism of schemes flat at x is smooth near x if and only if its fibre is smooth at x",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmooth_iff, RingHom.smooth_def, AlgebraicGeometry.isSmoothOfRelativeDimension_iff; none states the pointwise scheme criterion with only local flatness.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt, RingHom.Flat",
+   "results": "0 hits: ; none states the pointwise scheme criterion with only local flatness.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented ring algebra flat at a prime and a smooth residue field fibre the algebra is smooth at that prime",
+   "results": "8 hits: Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.instSmoothOfIsStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, RingHom.Smooth.holdsForLocalizationAway, RingHom.IsStandardSmooth.smooth, Algebra.smooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; local algebra candidates do not state the pointwise scheme iff.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented morphism of schemes flat at x is smooth near x if and only if its fibre is smooth at x",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth; none states the pointwise scheme criterion with only local flatness.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-generic-fibre-points-smooth",
@@ -78,5 +219,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-at-point-fibre-criterion",
+  "worker": "stage1",
+  "summary": "Kept the exact pointwise-flat statement of Stacks 01V9. Split both directions using the existing global smooth-fibre criterion only for the forward direction, explicit affine/stalk/fibre identifications, the existing ring-level 00TF for the converse, and the open-target lifting argument. No new nodes; checked project attachments and recorded fresh Mathlib searches.",
+  "blueprint": "Preserves the inherited lem-trf-local-term-locality ancestry and its semistable-alteration/nearby-cycle branch: this supplies the 01V9 input of lem-trf-generic-fibre-points-smooth after 056V, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "why": "The affine ring-level Stacks 00TF criterion is a generic commutative-algebra tool; sk-i-curve-zero has no such algebra criterion, and the semistable/nearby-cycle route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Stacks 02H6 compares smooth affine schemes and smooth ring maps; it is a generic translation tool absent from sk-i-curve-zero, not a replacement of its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-b517b12f2",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-b517b12f2 (reviewer sub-agent of L); spot-checked: I read Stacks 01V9 (lemma-smooth-at-point), statement and full proof, with Algebra 00TF (lemma-flat-fibre-smooth) and Definition 00TB. The item is 01V9 (1)<=>(2) with local flatness moved into the hypotheses: equivalent to the source, nothing added or weakened, and its only citer (lem-trf-generic-fibre-points-smooth) uses it in that form. Step 1 (forward): sbc-lem-smooth-criterion is applied to f|_U; that node is closed in slopmaster2, so it is a closed tool. The open-fibre-product lemma identifies U_s with p^{-1}(U) in X_s, and the fibre definition puts the point over x in it. Step 2: the lfp chart plus the spec-square and stalk-localization nodes make the stalk map R_p->A_q, flat only at q. Step 3: kappa(s)=kappa(p) via the residue-field identification; Spec(A tensor_R k) is an open of X_s via 01JR/01I4; Q=ker(F->kappa(q)) contracts to q. The D(h) Zariski argument is correct and elementary; open immersion into smooth N, then 02H6, gives k->F_h smooth, so k->F is smooth at Q. Step 4: the 00TF node applies with g=1, step-2 flatness and step-3 fibre smoothness; it uses the fibre A tensor_R kappa(p), not A/pA. Step 5: D(g) is an open neighbourhood of x and smooth over V; the step proves that composing with the open V in S keeps smoothness (lfp, plus thickenings have the same points so T'->S factors through V), which is correct since the cited composition lemma has the other order. Edge cases: non-flat Spec k->Spec k[t] is excluded by the hypothesis; F_p(t^{1/p})/F_p(t) and the node of uv=0 are false on both sides; empty X is vacuous. No new nodes. rg for 01V9/lemma-smooth-at-point finds only the differential criterion, global criteria and the Fitting locus, none a duplicate. Mathlib IsSmoothAt.of_formallySmooth_fiber needs the whole fibre smooth and Smooth.of_smooth_fiberToSpecResidueField is global, so neither is a leaf. Accepted tool_uses: lem-weil-pbc-flat-smooth-fibre-smooth-at-prime (00TF) and lem-weil-pbc-smooth-ring-map-iff-smooth-affine (02H6), both generic. No SGA. No changes made."
  }
 }
