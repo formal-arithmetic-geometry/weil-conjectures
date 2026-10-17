@@ -120,4 +120,21 @@ instance : (boundedFiniteCohomology R).IsTriangulated where
 
 end Triangulated
 
+/-- A finitely generated module placed in degree `0` lies in `Dᵇ_fg`. -/
+lemma boundedFiniteCohomology_singleFunctor {R : Type (u + 1)} [CommRing R]
+    (M : ModuleCat.{u + 1} R) [Module.Finite R M] :
+    boundedFiniteCohomology R ((singleFunctor (ModuleCat.{u + 1} R) 0).obj M) := by
+  refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩
+  by_cases hn : n = 0
+  · subst hn
+    exact Module.Finite.equiv (M := M)
+      ((singleFunctorCompHomologyFunctorIso (ModuleCat.{u + 1} R) 0).app M).symm.toLinearEquiv
+  · have : Subsingleton ((homologyFunctor (ModuleCat.{u + 1} R) n).obj
+        ((singleFunctor (ModuleCat.{u + 1} R) 0).obj M)) := by
+      rw [← ModuleCat.isZero_iff_subsingleton]
+      rcases lt_or_gt_of_ne hn with h | h
+      · exact isZero_of_isGE _ 0 n h
+      · exact isZero_of_isLE _ 0 n h
+    infer_instance
+
 end DerivedCategory
