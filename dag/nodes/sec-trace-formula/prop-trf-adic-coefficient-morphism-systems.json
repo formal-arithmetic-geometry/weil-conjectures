@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-trf-adic-coefficient-morphism-systems",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Adic realization for systems of Frobenius coefficient morphisms",
@@ -31,85 +31,214 @@
  ],
  "proof": [
   {
-   "text": "*(1).* Each $K_n$ lies in $D^b_{ctf}(X,A_n)$, so $P_n$ and $P_{\\bar y,n}$ are\nperfect by [prop-trf-compact-support-perfectness]. The finite-level\ncoefficient change of [thm-trf-finite-coefficient-map] for\n$\\rho:A_{n+1}\\to A_n$ and $f=a_X:X\\to\\Spec k$ (its compact-support\nisomorphism is the coefficient comparison of\n[lem-fix-compact-support-coefficient-change]), followed by $R\\Gamma_c(X,\\nu_n)$,\ngives $P_{n+1}\\otimes^L A_n\\cong R\\Gamma_c(X,K_{n+1}\\otimes^LA_n)\\cong P_n$;\nfor the stalks, its pullback isomorphism for $\\bar y$ ($L\\bar y^*$ is a\npullback, hence monoidal, [def-weil-derived-pullback-tensor-hom]) gives\n$P_{\\bar y,n+1}\\otimes^LA_n\\cong(K_{n+1}\\otimes^LA_n)_{\\bar y}\\cong P_{\\bar y,n}$.",
+   "text": "Levelwise perfectness and normalization, clause (1). Apply [prop-trf-compact-support-perfectness] to each $K_n$: both $P_n$ and $P_{\\bar y,n}$ have bounded finite cohomology. We establish perfectness below rather than identifying finite cohomology with perfectness over $A_n$. For compact support use [lem-fix-compact-support-coefficient-change] with $f=a_X$, $A=A_{n+1}$, $B=A_n$, then apply $R\\Gamma_c(X,\\nu_n)$. Since $R\\Gamma_c=\\operatorname{Fib}_s\\circ Ra_{X!}$ with $\\operatorname{Fib}_s=\\Gamma(s,-)$ [def-weil-finite-coefficient-point] and $Ra_{X!}K_{n+1}$ is bounded, [lem-trf-point-sections-finite-reduction] for $t=s$ moves the reduction through $\\operatorname{Fib}_s$. This gives $P_{n+1}\\otimes^L_{A_{n+1}}A_n\\simeq P_n$, naturally and compatibly with successive reductions. For an arbitrary geometric point use [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] on its ringed-topos pullback: apply its tensor comparison to $K_{n+1}$ and the constant $A_n$-module, whose pullback is again the constant $A_n$-module, then compose with $(\\nu_n)_{\\bar y}$. The K-flat change-of-rings construction [lem-pur-derived-change-of-rings] identifies the resulting object $L\\bar y^*K_{n+1}\\otimes^L_{A_{n+1}}A_n$ of $D(\\bar y_{\\mathrm{proet}},A_n)$, and [lem-trf-point-sections-finite-reduction] for $t=\\bar y$, applied to the bounded $L\\bar y^*K_{n+1}$, identifies its sections with $P_{\\bar y,n+1}\\otimes^L_{A_{n+1}}A_n$ in $D(A_n)$. Thus $P_{\\bar y,n+1}\\otimes^L_{A_{n+1}}A_n\\simeq P_{\\bar y,n}$. This argument does not require the geometric point to be a finite-type morphism.",
    "uses": [
     "prop-trf-compact-support-perfectness",
-    "thm-trf-finite-coefficient-map",
     "lem-fix-compact-support-coefficient-change",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-change-of-rings",
+    "lem-trf-point-sections-finite-reduction",
+    "def-weil-finite-coefficient-point"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (1); stalk tensor comparison on arbitrary ringed topoi"
+   }
   },
   {
-   "text": "*(2).* We prove the assertion for an arbitrary tower $(Q_n)$ of objects\n$Q_n\\in D^b_{\\mathrm{fin}}(A_n)$ with isomorphisms\n$\\theta_n:Q_{n+1}\\otimes^L_{A_{n+1}}A_n\\xrightarrow{\\sim}Q_n$, the transition\nmaps being $Q_{n+1}\\to Q_{n+1}\\otimes^LA_n\\xrightarrow{\\theta_n}Q_n$; by (1)\nthis applies to $(P_n)$ and to $(P_{\\bar y,n})$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Minimal models.* By [def-trf-categorical-trace] each $Q_n$ is a bounded\ncomplex $M$ of finite projective, hence free, modules over the local ring\n$A_n$. If some differential satisfies $d^i\\otimes k_E\\neq0$, pick\n$e\\in M^i$ with $f=d^ie\\notin\\varpi M^{i+1}$; by Nakayama $f$ is part of a\nbasis, $M^{i+1}=A_nf\\oplus D'$ with $D'$ free, and $A_ne\\cong A_n$\n(as $ae=0$ forces $af=0$). Put\n$C=(d^i)^{-1}(D')$. Writing $d^ix=af+d'$ one has $x-ae\\in C$, so\n$M^i=A_ne\\oplus C$; if $d^ix=0$ then $af\\in D'$, so $a=0$ and\n$\\ker d^i\\subset C$; in particular $d^{i-1}(M^{i-1})\\subset C$, and $C$, a\ndirect summand of a free module over a local ring, is free. Since $d^{i+1}f=0$, the complex $M$ is the direct sum of\nthe contractible complex $A_ne\\xrightarrow{\\sim}A_nf$ and of the complex\n$\\cdots\\to M^{i-1}\\to C\\to D'\\to M^{i+2}\\to\\cdots$ of finite free modules.\nDiscarding the contractible summand lowers the total rank, so after finitely\nmany steps $Q_n$ is represented by a *minimal* complex, i.e. one with\n$d\\otimes k_E=0$. A quasi-isomorphism $\\alpha:M\\to M'$ between minimal\ncomplexes is an isomorphism of complexes: $\\alpha\\otimes k_E$ is a\nquasi-isomorphism between complexes with zero differential, hence bijective\nin each degree, and by Nakayama each $\\alpha^i$ is a surjection between free\nmodules of the same finite rank, hence bijective. Morphisms in $D(A_n)$\nbetween bounded complexes of projectives are homotopy classes of chain maps.",
+   "text": "Integral realization, first part of clause (2). Write $O=\\mathcal O_E$ and $t=\\varpi$. By [lem-weil-l-adic-extension-integers-dvr], $O$ is local; by clause (2) of [lem-pod-adic-limit-finite-modules], applied to the finite $O$-module $O$, $O\\simeq\\varprojlim_n O/t^n$. For either tower $Q_n=P_n$ or $Q_n=P_{\\bar y,n}$, step 1 supplies exactly the normalization hypothesis of [lem-weil-pbc-rlim-perfect-complete], and $Q_1$ is perfect for the following elementary reason. The DVR statement identifies $A_1=O/(t)$ as a field. Represent $Q_1$ by a complex $C$ of $A_1$-vector spaces; choose complements $Z^i=B^i\\oplus H^i$ and $C^i=Z^i\\oplus L^i$, where $Z^i=\\ker d^i$ and $B^i=\\operatorname{im}d^{i-1}$. The restriction $d^i:L^i\\xrightarrow{\\sim}B^{i+1}$ makes the $L^i\\to B^{i+1}$ summands contractible, leaving the zero-differential complex $(H^i)_i$. Its terms are finite-dimensional and vanish outside a finite interval by step 1; choosing bases makes it bounded finite free. Apply that theorem with $A=O$, $I=(t)$. It gives a perfect realization $Q=R\\varprojlim Q_n$ and canonical isomorphisms $\\pi_n:Q\\otimes_O^L A_n\\simeq Q_n$ compatible with the projections and transitions. Choose a bounded finite-projective representative of $Q$ using [def-pc-perfect-ring-complex]. Every one of its terms is finite free: apply [lem-weil-pbc-finite-projective-prime-local-free] at the maximal ideal of $O$; the supplied $f$ is a unit, so localization changes neither the ring nor the module. Denote the resulting bounded finite-free complex by $M$. Its quotients $M_n=M/t^nM$ compute $Q\\otimes_O^L A_n$ by [lem-pc-kflat-closure] and [lem-pur-derived-change-of-rings], so via $\\pi_n$ they represent the given tower and its projection maps. In particular all $Q_n$ are perfect, completing the levelwise perfectness assertion without any ambiguity in the notation $D^b_{\\mathrm{fin}}$.",
    "uses": [
-    "def-trf-categorical-trace"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pod-adic-limit-finite-modules",
+    "lem-weil-pbc-rlim-perfect-complete",
+    "def-pc-perfect-ring-complex",
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "lem-pc-kflat-closure",
+    "lem-pur-derived-change-of-rings"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09AW, lemma-Rlim-perfect-gives-complete; blueprint proof (2)"
+   }
   },
   {
-   "text": "*Strictification.* Choose a minimal model $\\chi_1:M_1\\xrightarrow{\\sim}Q_1$.\nGiven a minimal $\\chi_n:M_n\\xrightarrow{\\sim}Q_n$, choose a minimal model\n$\\chi':M'\\xrightarrow{\\sim}Q_{n+1}$. The isomorphism\n$\\chi_n^{-1}\\circ\\theta_n\\circ(\\chi'\\otimes A_n):M'\\otimes A_n\\to M_n$ in\n$D(A_n)$ is represented by a chain map $\\alpha$ between minimal complexes,\nhence by an isomorphism of complexes; so $M'^i$ and $M_n^i$ have the same\nrank $r_i$. In bases, each $\\alpha^i\\in\\mathrm{GL}_{r_i}(A_n)$; lift it to\n$\\beta^i\\in\\mathrm{GL}_{r_i}(A_{n+1})$ (a lift of an invertible matrix over\na local ring is invertible) and let $M_{n+1}$ be $M'$ with the differential\ntransported by $\\beta$. Then $\\beta:M'\\to M_{n+1}$ is an isomorphism of\ncomplexes, $M_{n+1}\\otimes A_n=M_n$ as complexes because $\\alpha$ is a chain\nmap, and $\\chi_{n+1}=\\chi'\\circ\\beta^{-1}$ satisfies\n$\\theta_n\\circ(\\chi_{n+1}\\otimes A_n)=\\chi_n$. Under the $\\chi_n$ the\ntransition maps become the reduction maps $\\rho_n:M_{n+1}\\to M_n$, which are\nsurjective in each degree.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Limit.* Put $M=\\varprojlim_nM_n$ degreewise: a bounded complex with\n$M^i\\cong\\mathcal O_E^{r_i}$ and $M/\\varpi^n=M_n$. The sequence\n$0\\to M\\to\\prod_nM_n\\xrightarrow{1-\\rho}\\prod_nM_n\\to0$ is exact in each\ndegree (given $(y_n)$, choose $x_1$ and inductively $x_{n+1}$ lifting\n$x_n-y_n$), so it gives a distinguished triangle; products in the derived\ncategory are computed termwise ([def-weil-pbc-derived-inverse-limit]), so this\nis the Roos triangle of the tower, and $R\\varprojlim_nQ_n\\cong M$ compatibly\nwith the maps to $\\prod_nQ_n$. Thus $\\mathrm{pr}_n$ is $\\chi_n$ composed with\nthe projection $M\\to M_n$, and its adjoint\n$\\pi_n:M\\otimes^L_{\\mathcal O_E}A_n=M/\\varpi^n\\to M_n\\xrightarrow{\\chi_n}Q_n$\nis an isomorphism.",
+   "text": "Lifting chain representatives, clause (2). Transport a compatible family $f_n$ through $\\pi_n$ to endomorphisms of $M_n$ in $D(A_n)$. By [lem-pc-ring-derived-map-representative], these are chain maps modulo chain homotopy. Choose a representative $g_1$. Inductively, choose any representative $g'_{n+1}$ of $f_{n+1}$. Compatibility implies that its reduction $r(g'_{n+1})$ is homotopic to $g_n$, so $r(g'_{n+1})-g_n=dh_n+h_nd$ for maps $h_n^i:M_n^i\\to M_n^{i-1}$. In fixed finite bases, lift every entry of $h_n$ along the surjection $A_{n+1}\\to A_n$, obtaining $h'_{n+1}$. Set $g_{n+1}=g'_{n+1}-(dh'_{n+1}+h'_{n+1}d)$. Since $d^2=0$, this is a chain map homotopic to $g'_{n+1}$, still representing $f_{n+1}$, and its reduction is exactly $g_n$. This proves the induction with strictly compatible representatives; it assumes neither invertibility nor a strict tower morphism as input.",
    "uses": [
-    "def-weil-pbc-derived-inverse-limit"
+    "lem-pc-ring-derived-map-representative"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (2), Lifts; Stacks Tag 064B, lemma-morphisms-from-projective-complex"
+   }
   },
   {
-   "text": "*Lifts.* Transport a compatible family along the $\\chi_n$. Then\n$f_n=[g_n]\\in H^0\\operatorname{Hom}^\\bullet(M_n,M_n)$ with\n$[\\rho(g_{n+1})]=[g_n]$, and\n$\\operatorname{Hom}^\\bullet(M,M)=\\varprojlim_n\\operatorname{Hom}^\\bullet(M_n,M_n)$\nwith surjective transitions (matrices over $\\mathcal O_E$ modulo $\\varpi^n$).\nChoose representatives inductively: if $\\rho(g'_{n+1})=g_n+dh_n$, lift $h_n$\nto $h'_{n+1}$ and replace $g'_{n+1}$ by $g_{n+1}=g'_{n+1}-dh'_{n+1}$, a\ncocycle in the same class with $\\rho(g_{n+1})=g_n$. Then $V=(g_n)_n$ is a\nchain endomorphism of $M$ with $V\\otimes A_n=g_n$, i.e. a lift. Finally, if\n$\\mathrm{pr}_n\\circ V=f_n\\circ\\mathrm{pr}_n$, then $\\pi_n\\circ(V\\otimes A_n)$\nand $f_n\\circ\\pi_n$ are both adjoint to this map under the adjunction between\n$-\\otimes^L_{\\mathcal O_E}A_n$ and restriction of scalars, so they are equal.",
-   "uses": [],
-   "elementary": null
+   "text": "Pass the matrices of the $g_n$ to the limit. Each $M^i$ is finite free and only finitely many terms are nonzero. Clause (2) of [lem-pod-adic-limit-finite-modules] identifies $\\operatorname{Hom}_O(M^i,M^i)$ with the inverse limit of its quotient Hom modules. Hence the compatible matrices define maps $g^i:M^i\\to M^i$. The equations $dg_n=g_nd$ hold modulo every $t^n$; separatedness of the finite free modules, supplied by the same clause, gives $dg=gd$. Thus $g$ is a chain endomorphism of $M$ whose reduction is $g_n$ for every $n$. Conjugating its class by $M\\simeq Q$ produces a lift of $f_\\bullet$. Apply this construction separately to the compact-support tower and to each stalk tower.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (2), Lifts, inverse limit of the corrected chain maps"
+   }
   },
   {
-   "text": "*(3).* The iterates are compatible: by induction on $m$, using the recursion\nof [def-trf-frobenius-coefficient-morphism], the monoidality isomorphisms\n$\\mu$ and their compatibility with the composition isomorphisms of pullback\n([def-weil-derived-pullback-tensor-hom]), $\\psi_{n+1,m}\\otimes A_n$\ncorresponds to $\\psi_{n,m}$. The comparison $\\kappa^{(m)}$ is natural and\ncompatible with the coefficient reductions, as shown in the proof of item (2)\nof [prop-trf-rational-frobenius-integral-model]; hence\n$v_n=\\psi_{n,m}\\circ(\\kappa^{(m)}_{K_n})^{-1}:Lg_\\gamma^{m*}K_n\\to K_n$\nsatisfy $v_{n+1}\\otimes A_n=v_n$ under $\\nu_n$. By the general clause of\n[prop-trf-graph-frobenius-operator], which allows non-invertible $v$,\n$$\nF_{c,m}(\\psi_n)=T_{c_m}(v_n\\circ\\kappa^{(m)}_{K_n})\n=R\\Gamma_c(X,v_n)\\circ g_{\\gamma,c}^{m,*}.\n$$\nThe coefficient comparison of [lem-fix-compact-support-coefficient-change]\nis natural in the complex and compatible with pullback, hence with the\nbase-change isomorphisms $g_{\\gamma,c}^{m,*}$; so $F_{c,m}(\\psi_{n+1})\\otimes A_n$\ncorresponds to $F_{c,m}(\\psi_n)$ under the isomorphism of (1). For the stalks,\n$\\iota_{K_n}$ is built from composition isomorphisms of pullback for\n$\\Phi^m\\circ\\bar y=\\bar y$, and $L\\bar y^*$ is monoidal; hence\n$\\psi_{n+1,m,\\bar y}\\otimes A_n$ corresponds to $\\psi_{n,m,\\bar y}$.",
+   "text": "Projection criterion, last part of clause (2). Let $V$ satisfy $\\mathrm{pr}_nV=f_n\\mathrm{pr}_n$. Represent $V$ on $M$ by a chain map $v$, using [lem-pc-ring-derived-map-representative], and represent the transported $f_n$ by a chain map $a_n$ on $M_n$. The projection is represented by the quotient $q_n:M\\to M_n$ by step 2. Apply the injectivity assertion of that same cited bijection, now over $O$ with source $M$ and target the restricted complex $M_n$: there is an $O$-linear chain homotopy between $q_nv$ and $a_nq_n$. Since $t^nM_n=0$, each component of this homotopy factors uniquely through $M/t^nM=M_n$. The factored homotopy proves $v\\bmod t^n\\simeq a_n$ as $A_n$-linear chain maps. Consequently $\\pi_n(V\\otimes_O^L A_n)=f_n\\pi_n$. This also proves the assertion for any endomorphism furnished by a morphism of towers; uniqueness of the lift is not claimed.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (2), final projection/adjunction assertion, proved on the free model"
+   }
+  },
+  {
+   "text": "Compatibility of iterates in clause (3). Let $r_n=-\\otimes^L_{A_{n+1}}A_n$. The given equation is compatibility for $m=1$. For the induction step use $\\psi_m=\\psi\\circ L\\Phi^*(\\psi_{m-1})\\circ c$, the recursion of [def-trf-frobenius-coefficient-morphism], where $c$ is the pullback composition isomorphism of [lem-weil-pbc-proetale-derived-pullback-composition]. Finite reduction commutes with pullback by [lem-fix-operation-reduction]; its composition coherence is [fix-prop-coherence]. Apply $r_n$ to the recursive composite and insert $\\nu_n$ and the pullback reduction comparisons. Naturality moves $\\nu_n$ past the pulled-back factor, the induction hypothesis replaces $r_n(\\psi_{n+1,m-1})$ by $\\psi_{n,m-1}$, and the given compatibility replaces $r_n(\\psi_{n+1})$ by $\\psi_n$. Composition coherence identifies the remaining comparison with that for $\\Phi^m$. More explicitly, write $\\mu_{n,m}:r_nL\\Phi^{m*}\\xrightarrow{\\sim}L\\Phi^{m*}r_n$ for the reduction comparison. The induction gives the typed equation $\\nu_n\\circ r_n(\\psi_{n+1,m})=\\psi_{n,m}\\circ L\\Phi^{m*}(\\nu_n)\\circ\\mu_{n,m}$: after inserting the recursive expressions on both sides, naturality and composition coherence reduce it to the given equation at $m=1$ composed with $L\\Phi^*$ of the equation at $m-1$. This is the asserted compatibility for every positive $m$.",
    "uses": [
     "def-trf-frobenius-coefficient-morphism",
-    "def-weil-derived-pullback-tensor-hom",
-    "prop-trf-rational-frobenius-integral-model",
-    "prop-trf-graph-frobenius-operator",
-    "lem-fix-compact-support-coefficient-change"
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-fix-operation-reduction",
+    "fix-prop-coherence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (3), induction on the iterate"
+   }
   },
   {
-   "text": "*(4).* Represent $P_{\\mathcal O}$ by $M$ as in (2) and $V$ by a chain map.\nBy [lem-trf-chain-supertrace], over $\\mathcal O_E$ and over $A_n$,\n$\\operatorname{tr}_{\\mathcal O_E}(V\\mid M)=\\sum_i(-1)^i\\operatorname{Tr}(V^i\\mid M^i)$,\nwhose reduction modulo $\\varpi^n$ is\n$\\sum_i(-1)^i\\operatorname{Tr}(V^i\\bmod\\varpi^n\\mid M_n)=\\operatorname{tr}_{A_n}(V\\otimes A_n\\mid M_n)$\n(equivalently, item (3) of [prop-trf-trace-formal-laws]). Since $\\pi_n$\nconjugates $V\\otimes A_n$ into $f_n$, conjugacy invariance\n([prop-trf-trace-formal-laws], item (1)) gives\n$\\operatorname{tr}_{A_n}(V\\otimes A_n)=\\operatorname{tr}_{A_n}(f_n\\mid P_n)$.\nAs $\\mathcal O_E$ is $\\varpi$-adically complete and separated,\n$\\mathcal O_E\\to\\varprojlim_nA_n$ is an isomorphism, which gives the displayed\nformula and its independence of the lift. The last sentence combines this\nwith (2) and (3).",
+   "text": "Global and stalk operators, clause (3). Put $h=\\Phi^m$ and write $b_{h,n}:P_n\\to R\\Gamma_c(X,Lh^*K_n)$ for the unit/proper-comparison arrow of [prop-trf-graph-operator]. Explicitly, $b_{h,n}$ is $R\\Gamma_c(K_n)\\xrightarrow{R\\Gamma_c(\\eta_h)}R\\Gamma_c(Rh_*Lh^*K_n)\\simeq R\\Gamma_c(Rh_!Lh^*K_n)\\simeq R\\Gamma_c(Lh^*K_n)$. This applies because the graph of each iterate is defined with proper ordinary leg in [def-trf-frobenius-coefficient-morphism]. Its formula gives $F_{c,m}(\\psi_n)=R\\Gamma_c(X,\\psi_{n,m})\\circ b_{h,n}$ without using a Weil isomorphism or $\\kappa$. The finite comparison [lem-fix-operation-reduction] preserves units and counits, and [fix-prop-coherence] preserves composition and exchange comparisons; together with [lem-fix-compact-support-coefficient-change] this identifies the reduction of $b_{h,n+1}$ with $b_{h,n}$: rewrite the proper $Rh_*$ as $Rh_!$ before applying the finite coefficient comparison, use unit compatibility for the first arrow, and compact-support composition coherence for the last. No finite-reduction theorem for a general nonproper $Rh_*$ is used. Naturality identifies the reduction of $R\\Gamma_c(X,\\psi_{n+1,m})$ with $R\\Gamma_c(X,\\psi_{n,m})$ by step 6, proving the global assertion. For $y\\in X_0(\\mathbf F_{q^m})$, use the Stalk normalization paragraph of [prop-trf-rational-frobenius-integral-model]: for every finite-level object $M$, $\\iota_M:M_{\\bar y}\\simeq(L\\Phi^{m*}M)_{\\bar y}$ is the natural pullback identification for $\\Phi^m\\bar y=\\bar y$, and the stalk operator is $(\\psi_m)_{\\bar y}\\circ\\iota_M$. The composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition] is termwise pullback, and the tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the point-section reduction isomorphism of [lem-trf-point-sections-finite-reduction] are natural; the latter, for $t=s$, also carries the reduction of $R\\Gamma_c(X,-)$ of a morphism to $R\\Gamma_c(X,-)$ of its reduction in the global assertion. Reducing this pullback identification therefore gives $\\iota_{K_n}$; reducing its composite with the coefficient map gives $(\\psi_{n,m})_{\\bar y}\\circ\\iota_{K_n}$ by step 6. This proves the stalk assertion without imposing the lattice hypothesis of the numbered conclusions of the rational-integral proposition.",
    "uses": [
-    "lem-trf-chain-supertrace",
-    "prop-trf-trace-formal-laws"
+    "prop-trf-graph-operator",
+    "def-trf-frobenius-coefficient-morphism",
+    "lem-fix-operation-reduction",
+    "fix-prop-coherence",
+    "lem-fix-compact-support-coefficient-change",
+    "prop-trf-rational-frobenius-integral-model",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-trf-point-sections-finite-reduction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (3), graph operator and fixed-stalk composite"
+   }
+  },
+  {
+   "text": "Traces, clause (4). Represent an arbitrary lift $V$ by a chain endomorphism $v$ on the bounded finite-free model $M$, using [lem-pc-ring-derived-map-representative]. The formula of [lem-trf-chain-supertrace], valid over every commutative ring, gives $\\operatorname{tr}_O(V)=\\sum_i(-1)^i\\operatorname{Tr}(v^i)$. Reducing a matrix reduces its diagonal sum, so modulo $t^n$ this is $\\sum_i(-1)^i\\operatorname{Tr}(v^i\\bmod t^n)$, the categorical trace of $V\\otimes_O^LA_n$ on $M_n$, by the same formula. Since $V$ is a lift, $\\pi_n$ conjugates this endomorphism to $f_n$; conjugacy invariance, clause (1) of [prop-trf-trace-formal-laws] at the finite coefficient ring $A_n$, gives the required residue $\\operatorname{tr}_{A_n}(f_n\\mid Q_n)$. Clause (2) of [lem-pod-adic-limit-finite-modules] for $O$ identifies $O$ with $\\varprojlim A_n$, so these residues determine the integral trace uniquely, independently of the lift. Steps 3–4 supply lifts of the families in step 7, hence their global and stalk traces are well defined.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "lem-trf-chain-supertrace",
+    "prop-trf-trace-formal-laws",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+    "place": "Proof (4), supertrace and uniqueness from all residues"
+   }
+  },
+  {
+   "text": "The reduction-tower identifications in the statement. Let $K_n=K_{\\mathcal O}\\otimes^L_{\\mathcal O_E}A_n$ with its canonical $\\nu_n$. By [def-weil-integral-rational-qbar-compact-support] for $f=a_X$, $Ra_{X!}K_{\\mathcal O}=R\\varprojlim_n\\operatorname{Res}_nRa_{X!,n}K_n$, the derived limit of [def-weil-derived-limit] with its Roos triangle, and $R\\Gamma_c(X,K_{\\mathcal O})=\\operatorname{Fib}_s(Ra_{X!}K_{\\mathcal O})=\\Gamma(s,Ra_{X!}K_{\\mathcal O})$ by [def-weil-finite-coefficient-point]. The functor $\\Gamma(s,-)$ is exact on complexes [lem-weil-point-proetale-sections-exact], so it carries distinguished triangles to distinguished triangles, and it carries the termwise product of [def-weil-pbc-derived-inverse-limit] to the termwise product, since sections of a product sheaf are the product of the sections. Hence it carries that Roos triangle to a Roos triangle of the tower $(P_n)$ regarded in $D(\\mathcal O_E)$; its transition maps are $\\Gamma(s,-)$ of $Ra_{X!}$ applied to the reductions $K_{n+1}\\to K_n$, which are adjoint to $\\nu_n$ and thus equal the transition maps of the statement. So $R\\Gamma_c(X,K_{\\mathcal O})$ is a derived limit $P_{\\mathcal O}$. For the stalk, [def-weil-pbc-completed-pullback] with $g=\\bar y$ defines $L\\bar y^*_{\\mathrm{comp}}K_{\\mathcal O}$ as the derived limit of the tower whose $n$-th term is $L\\bar y_n^*K_n$, with the reduction transitions; applying $\\Gamma(\\bar y,-)$ in the same way gives a derived limit of $(P_{\\bar y,n})$. Only exactness and preservation of products of the sections functor are used, so this step is elementary.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-pbc-derived-inverse-limit",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.md",
+    "place": "statement, the sentence 'If $K_\\bullet$ is the reduction tower ... then $P_{\\mathcal O}=R\\Gamma_c(X,K_{\\mathcal O})$ by [def-weil-integral-rational-qbar-compact-support] and $P_{\\bar y,\\mathcal O}=L\\bar y^*_{\\mathrm{comp}}K_{\\mathcal O}$'"
+   }
   }
  ],
  "proof_deps": [
-  "prop-trf-compact-support-perfectness",
-  "thm-trf-finite-coefficient-map",
-  "lem-fix-compact-support-coefficient-change",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-trf-categorical-trace",
-  "def-weil-pbc-derived-inverse-limit",
+  "def-pc-perfect-ring-complex",
   "def-trf-frobenius-coefficient-morphism",
-  "prop-trf-rational-frobenius-integral-model",
-  "prop-trf-graph-frobenius-operator",
+  "def-weil-derived-limit",
+  "def-weil-finite-coefficient-point",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-derived-inverse-limit",
+  "fix-prop-coherence",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-fix-operation-reduction",
+  "lem-pc-kflat-closure",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-pur-derived-change-of-rings",
   "lem-trf-chain-supertrace",
+  "lem-trf-point-sections-finite-reduction",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "lem-weil-point-proetale-sections-exact",
+  "prop-trf-compact-support-perfectness",
+  "prop-trf-graph-operator",
+  "prop-trf-rational-frobenius-integral-model",
   "prop-trf-trace-formal-laws"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+  "place": "Proof (1)–(4), using the unit's Stacks Tag 09AW realization route and explicit chain homotopy corrections"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adic realization of normalized perfect cohomology systems with noninvertible Frobenius operators and reduction of categorical traces",
+   "results": "BDeRhamPlus, PreTilt, WittVector.Isocrystal and adic module lifts; none is a sheaf cohomology tower realization/trace theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, LinearMap.trace",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*cohomology|adic.*supertrace|normalized.*tower",
+   "results": "3 hits, Mathlib/FieldTheory/NormalizedTrace.lean:27,29,166, about field-extension normalized traces, not the proposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace of an endomorphism on the perfect inverse limit of finite coefficient cohomology complexes reduces to its trace at every finite level",
+   "results": "LinearMap.trace, Matrix.trace_toLin_eq and ordinary matrix trace formulas; no perfect inverse-limit realization theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized tower of perfect complexes over O_E modulo powers of a uniformizer has a bounded finite free inverse limit and compatible endomorphisms lift",
+   "results": "IsAdicComplete.lift, AdicCompletion and related module-completion facts; no normalized perfect complex tower theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limits of perfect complexes over a complete local ring and lifting compatible homotopy classes of chain endomorphisms",
+   "results": "8 hits: homotopy localization equality, projective-resolution lift homotopies, and derived-category fractions; none states the normalized coefficient-tower realization, compatible endomorphism lifting and trace theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -156,5 +285,90 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-prop-trace-adic"
+ "unit": "sk-prop-trace-adic",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-adic-coefficient-morphism-systems",
+  "worker": "stage1",
+  "group": "Q78",
+  "summary": "Re-audited and replaced the incomplete sandbox attempt. Reused the existing Stacks 09AW perfect-limit node, finite-projective local freeness, and projective-complex derived Hom bijection; wrote the homotopy corrections and projection criterion explicitly. Removed four unsubmitted duplicate/unnecessary algebra nodes. Proved coefficient compatibility directly from the scheme-Frobenius graph formula, avoiding a citation to another node's proof. No statement change or new node. Second reading resolves the finite-cohomology/perfectness ambiguity by explicitly splitting the residue-field complex; expands the iterate equation and proper graph comparison; refreshes the chain-supertrace citation. Maintainer reader (Q78): added the missing point-section finite-reduction lemma lem-trf-point-sections-finite-reduction to steps 1 and 7, a step 9 for the reduction-tower identifications of the statement, and tool-use declarations for the two sk-p-trace nodes of step 8.",
+  "blueprint": "Step 1 realizes (1); steps 2–5 realize (2), with the perfect-limit theorem explicitly named by unit sk-prop-trace-adic step (ii); steps 6–7 realize (3); step 8 realizes (4). The constructive lifting calculation follows the original Lifts paragraph. Step 9 realizes the statement's reduction-tower sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The valuation ring is local, needed to specialize finite-projective local freeness; this is a coefficient-ring tool."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Clause (2) supplies completeness, separatedness, and the Hom inverse-limit bijection for finite O_E-modules, used for the chain matrices and trace residues."
+   },
+   {
+    "node": "lem-weil-pbc-rlim-perfect-complete",
+    "why": "The exact Stacks 09AW algebraic perfect-tower theorem is explicitly the route named in unit step (ii); it gives realization and canonical reductions at a point."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "Generic local algebra converts the finite-projective terms of the perfect realization into finite free terms; at the local maximal ideal its localization is trivial."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Bounded free models are K-flat, allowing ordinary quotient complexes to compute derived scalar extension."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived change of coefficient rings identifies the K-flat quotient model and the stalk coefficient comparison in the correct coefficient category."
+   },
+   {
+    "node": "lem-pc-ring-derived-map-representative",
+    "why": "Stacks 064B identifies derived maps from bounded projective complexes with chain maps modulo homotopy, needed for the explicit lifting and projection arguments."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic monoidality for arbitrary ringed-topos pullback supplies the stalk comparison without a finite-type hypothesis on the geometric point."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "The termwise pullback composition isomorphism is the comparison in the iterate recursion and fixed-stalk normalization."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic finite-coefficient comparisons preserve the units and counits entering the graph operator; the trace unit has no separate coefficient-unit lemma."
+   },
+   {
+    "node": "fix-prop-coherence",
+    "why": "Generic composition and exchange coherence ensures that the reduction comparisons preserve the iterate and proper graph comparisons."
+   },
+   {
+    "node": "lem-trf-chain-supertrace",
+    "why": "Step 8 takes its chain supertrace formula over an arbitrary commutative ring (O_E and A_n); unit sk-p-trace, which the adic unit does not cite, is the only place this trace computation is stated; the blueprint proof (4) cites it."
+   },
+   {
+    "node": "prop-trf-trace-formal-laws",
+    "why": "Step 8 takes conjugacy invariance (clause 1) of the categorical trace at A_n, as the blueprint proof (4) does; it is stated only in unit sk-p-trace."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-pc-kflat-closure",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-ring-derived-map-representative",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-fix-operation-reduction",
+  "fix-prop-coherence",
+  "lem-trf-chain-supertrace",
+  "prop-trf-trace-formal-laws"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-f3ed10041",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-f3ed10041 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is identical to the main-20261015 and master statements, so no target is weakened. All eight steps check out against the cited node statements. The coefficient category is consistently pro-étale with constant (A_n)_X. The compact-support comparison is lem-fix-compact-support-coefficient-change, and the stalk part uses the ringed-topos tensor pullback (Stacks 07A4), not the finite-type pullback clause. Step 2 meets every hypothesis of Stacks 09AW, the free model comes from local freeness at the maximal ideal, and the homotopy corrections and projection criterion via 064B are correct. The iterate recursion and the graph-operator route follow unit step (ii). The trace step uses the chain supertrace over any ring plus completeness of O_E. Edge cases checked: n=1 over the residue field, odd-degree sign, zero models, and zero, identity and non-invertible coefficient maps. I fixed three faults. (1) C1/E5: steps 1 and 7 move reduction through Fib_s=Γ(s,-) and through sections at a geometric point without any stated lemma, and no existing node covers it (lem-pod-point-sections-derived-reduction is the integral case; lem-sf-point-fibre-derived-tensor needs ctf factors). I added the statement-only node lem-trf-point-sections-finite-reduction and cited it in steps 1 and 7. (2) lem-trf-chain-supertrace and prop-trf-trace-formal-laws belong to unit sk-p-trace, which the adic unit does not cite, and were not declared as tool uses; I declared both (the blueprint proof (4) cites them). (3) The statement's sentence identifying the reduction tower's limits (P_O=RΓ_c(X,K_O) and the completed stalk) was not proved; I added an elementary step 9 using exactness and product preservation of Γ. I accept all 13 tool uses. There is no cycle and no SGA source. The corrected item and the new node are in fixes/dag/nodes/sec-trace-formula/; the details are in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
