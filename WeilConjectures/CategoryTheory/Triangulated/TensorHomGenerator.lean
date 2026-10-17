@@ -261,7 +261,8 @@ section Shift
 
 variable [∀ n : ℤ, (shiftFunctor C n).Linear F] [∀ n : ℤ, (shiftFunctor D n).Linear F']
 
-omit [Φ.IsTriangulated] [Module.Flat F F'] in
+omit [HasZeroObject C] [Pretriangulated C] [HasZeroObject D] [Pretriangulated D]
+  [Φ.IsTriangulated] [Module.Flat F F'] in
 lemma TensorBijective.shift {X Y : C} (h : Φ.TensorBijective hΦ X Y) (n : ℤ) :
     Φ.TensorBijective hΦ (X⟦n⟧) (Y⟦n⟧) := by
   let s : (X ⟶ Y) ≃ₗ[F] (X⟦n⟧ ⟶ Y⟦n⟧) :=
@@ -300,13 +301,16 @@ variable (Φ hΦ) in
 def TensorBijectiveShifts (X Y : C) : Prop :=
   ∀ a b : ℤ, Φ.TensorBijective hΦ (X⟦a⟧) (Y⟦b⟧)
 
-omit [Φ.IsTriangulated] [Module.Flat F F'] in
+omit [HasZeroObject C] [Pretriangulated C] [HasZeroObject D] [Pretriangulated D]
+  [Φ.IsTriangulated] [Module.Flat F F'] in
 lemma tensorBijectiveShifts_of_forall {X Y : C}
     (h : ∀ n : ℤ, Φ.TensorBijective hΦ X (Y⟦n⟧)) : Φ.TensorBijectiveShifts hΦ X Y :=
   fun a b ↦ ((h (b - a)).shift a).of_iso (Iso.refl _)
     ((shiftFunctorAdd' C (b - a) a b (by lia)).app Y).symm
 
-omit [Φ.IsTriangulated] [Module.Flat F F'] [∀ n : ℤ, (shiftFunctor C n).Linear F]
+omit [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+  [HasZeroObject D] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+  [Φ.CommShift ℤ] [Φ.IsTriangulated] [Module.Flat F F'] [∀ n : ℤ, (shiftFunctor C n).Linear F]
   [∀ n : ℤ, (shiftFunctor D n).Linear F'] in
 lemma TensorBijectiveShifts.tensorBijective {X Y : C} (h : Φ.TensorBijectiveShifts hΦ X Y) :
     Φ.TensorBijective hΦ X Y :=
@@ -360,6 +364,7 @@ instance isTriangulated_tensorBijectiveShiftsLeft (Y : C) :
     · exact ((h₃ (a - 1) b).of_iso
         ((shiftFunctorAdd' C a (-1) (a - 1) (by lia)).app _) (Iso.refl _)).1
 
+omit [∀ n : ℤ, (shiftFunctor C n).Linear F] [∀ n : ℤ, (shiftFunctor D n).Linear F'] in
 /-- If the objects satisfying `S` lie in every triangulated subcategory, closed under
 isomorphisms, containing `G`, and `Φ` induces bijections `F' ⊗ Hom(G⟦a⟧, G⟦b⟧) ≃ Hom(Φ G⟦a⟧,
 Φ G⟦b⟧)`, then `F' ⊗ Hom(X, Y) ≃ Hom(Φ X, Φ Y)` for all `X`, `Y` satisfying `S`. -/

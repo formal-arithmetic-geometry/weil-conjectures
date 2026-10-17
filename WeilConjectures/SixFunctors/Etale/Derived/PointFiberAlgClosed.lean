@@ -191,12 +191,12 @@ lemma integersStageMap_nonZeroDivisors_le :
 
 lemma flat_integersStageMap : (integersStageMap.{u} h).Flat := by
   rw [integersStageMap_eq]
-  letI := stageAlgebra h
-  haveI := stageTower h
+  let := stageAlgebra h
+  have := stageTower h
   obtain ⟨n, b, -, -⟩ := PadicAlgCl.exists_basis_frobeniusForm_integersShrinkMap.{0, u} l E.1 F.1
-  letI := (PadicAlgCl.integersShrinkMap.{0, u} l E.1 F.1).toAlgebra
+  let := (PadicAlgCl.integersShrinkMap.{0, u} l E.1 F.1).toAlgebra
   have : Module.Free _ _ := Module.Free.of_basis b
-  show Module.Flat _ _
+  change Module.Flat _ _
   exact Module.Flat.of_free
 
 /-- Restriction of scalars `D(X_ét, 𝒪_F) ⥤ D(X_ét, 𝒪_E)`. -/
@@ -212,8 +212,8 @@ lemma exists_isDerivedBaseChange_integersStageMap {X : Scheme.{u}}
       (η : K ⟶ (stageRestrictScalars h X).obj K'), IsDerivedBaseChange η := by
   unfold stageRestrictScalars
   rw [integersStageMap_eq]
-  letI := stageAlgebra h
-  haveI := stageTower h
+  let := stageAlgebra h
+  have := stageTower h
   exact exists_isDerivedBaseChange_integersShrinkMap K
 
 /-- The derived base change `K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_F` on `D(s_ét, 𝒪_E)`, left adjoint to restriction

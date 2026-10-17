@@ -123,6 +123,7 @@ instance : (lift M A Φ hΦ).IsTriangulated := by
   have := Localization.essSurj_mapArrow (Q M C) (W M C)
   exact Functor.isTriangulated_of_precomp_iso (liftFac M A Φ hΦ)
 
+omit [∀ n : ℤ, (shiftFunctor C n).Linear R] [IsTriangulated C] in
 lemma lift_map_Q_map {X Y : C} (f : X ⟶ Y) :
     (lift M A Φ hΦ).map ((Q M C).map f) =
       (liftFac M A Φ hΦ).hom.app X ≫ Φ.map f ≫ (liftFac M A Φ hΦ).inv.app Y := by
