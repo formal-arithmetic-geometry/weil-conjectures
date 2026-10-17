@@ -160,7 +160,8 @@ lemma frobeniusPullback_tensor_hom_ext {P M : ProEtaleWeilSheaf k₀ l X}
     erw [Mod.id_hom', Category.comp_id]
     rw [Category.assoc]
     erw [h₁]
-    simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+    simp only [IsIso.hom_inv_id_assoc]
+    rfl
   rw [← T.hom_inv_id_assoc f, ← T.hom_inv_id_assoc g]
   congr 1
   refine Mod.tensorLeft_obj_hom_ext ?_
@@ -177,8 +178,8 @@ lemma map_counit_comp_str (M N : ProEtaleWeilSheaf k₀ l X) :
   refine frobeniusPullback_tensor_hom_ext (P := ProEtaleWeilSheaf.ihom k₀ l X M N) ?_
   have h := tensorπ_str (ProEtaleWeilSheaf.ihom k₀ l X M N) M
   have he := ihom_evaluation_str M N
-  rw [Mod.comp_hom', Mod.comp_hom', ← Category.assoc ((Fr).map _), ← Category.assoc (μ Fr _ _),
-    ← h, Category.assoc]
+  simp only [Mod.comp_hom']
+  rw [← reassoc_of% h]
   erw [adicLowerStar_map_hom]
   rw [← (Fr).map_comp_assoc]
   change _ = _ ≫ Mod.evaluation _ _
