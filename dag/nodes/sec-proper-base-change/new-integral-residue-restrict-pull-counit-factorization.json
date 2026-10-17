@@ -1,0 +1,106 @@
+{
+ "id": "new-integral-residue-restrict-pull-counit-factorization",
+ "kind": "statement",
+ "title": "Exact restriction/pullback factorization through localization counits",
+ "statement": "For a prime ℓ, normed field E over ℚ_ℓ and scheme map f:X→Y, let N be any homotopy complex of residue coefficient modules on Y, with the functors of [new-integral-residue-pull-square-data]. The exact restriction/pullback isomorphism at Qh N followed by restriction of the residue pullback counit and the restriction localization factor equals integral derived pullback of the Y restriction factor followed by the integral pullback counit and Qh of the inverse ordinary restriction/pullback isomorphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; derived mate comparison after the flatness clause"
+ },
+ "stmt_deps": [
+  "new-integral-residue-pull-square-data"
+ ],
+ "proof": [
+  {
+   "text": "For each exact composite, expand its derived-composition isomorphism. The factorization equations of mapDerivedCategoryCompIso and mapDerivedCategoryNatIso identify its Qh factor with Qh of the ordinary square. Transport the two exact functors to their left derived functors using leftDerivedFunctorIsoMapDerivedCategory_hom_fac; naturality and cancellation of the iso components give the stated formula. Specialize to integral and residue pullback and coefficient restriction, with comapUpperStarIso as the ordinary square.",
+   "uses": [
+    "new-integral-residue-pull-square-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-pull-square-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; derived mate comparison after the flatness clause",
+  "note": "Existing complete Lean calculation hoisted from IntegralResidueScalarCounitModel; no new mathematical obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension restriction adjunction counit commutes with pullback mate",
+   "results": "8 generic scalar counit and derived adjunction hits including CategoryTheory.Adjunction.derivedε; no specialized residue identity.",
+   "date": "2026-10-17",
+   "verdict": "Use existing generic formulas; reuse the proved specialized calculations in the project."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension restriction derived adjunction mate localization counit",
+   "results": "8 generic scalar and localization adjunction hits including CategoryTheory.Adjunction.localization_counit_app.",
+   "date": "2026-10-17",
+   "verdict": "No replacement for the explicit residue square; reuse and hoist existing project calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|mapDerivedCategoryCompIso_fach; blueprint search derived mate",
+   "results": "Generic derived-unit identities in Mathlib.CategoryTheory.Functor.Derived.Adjunction, project AdjunctionUnit and MapDerivedCategoryMate; zero blueprint nodes matching derived mate. Existing exact specialized proofs found in IntegralResidueScalarCounitModel.",
+   "date": "2026-10-17",
+   "verdict": "Hoist those calculations rather than prove duplicate statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized",
+  "group": "A2",
+  "date": "2026-10-17"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Derived mate/counit factorization in Remark 6.8.15; the existing created.item ancestor chain is broken",
+   "via": [
+    "new-integral-residue-pull-flat-model-comparison-mate-normalized",
+    "new-integral-residue-pull-flat-model-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized",
+  "file": "lean/Sheaf/Paper/IntegralResiduePullFlatModelMateNormalized.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.restrict_pull_fac",
+  "statement": "theorem restrict_pull_fac {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (N : HomotopyCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n        (condensedRingObj (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) Y))\n      (.up ℤ)) :\n    (residueExchangeRestrictPullIso ℓ E f).hom.app (DerivedCategory.Qh.obj N) ≫\n      (residueExchangeRestriction ℓ E X).map\n        ((residueExchangeUpperStarCounit\n          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).app N) ≫\n      (Mod.comap (coefficientMap (integralReductionMap ℓ E) X)).mapDerivedCategoryFactorsh.hom.app\n        ((((f)^*⟦Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)⟧).mapHomotopyCategory\n          (.up ℤ)).obj N) =\n      (residueExchangeUpperStar (integralCoeff ℓ E) f).map\n        ((Mod.comap\n          (coefficientMap (integralReductionMap ℓ E) Y)).mapDerivedCategoryFactorsh.hom.app N) ≫\n        (residueExchangeUpperStarCounit (integralCoeff ℓ E) f).app\n          (((Mod.comap (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory\n            (.up ℤ)).obj N) ≫\n        DerivedCategory.Qh.map\n          ((NatTrans.mapHomotopyCategory\n            (comapUpperStarIso (integralReductionMap ℓ E) f).inv (.up ℤ)).app N)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T121123-L-399885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T121123-L-399885",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

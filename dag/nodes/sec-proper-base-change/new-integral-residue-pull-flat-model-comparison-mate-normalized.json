@@ -13,23 +13,23 @@
  },
  "proof": [
   {
-   "text": "Expand the derived reduction and pullback counits. Transpose the resulting equality under the extension/restriction adjunction, use the restriction/pullback square and the ordinary scalar unit identity, then cancel the residue pullback counit.",
+   "text": "Use the shared scalar mate/counit identity at H. Postcompose with the inverse residue pullback counit supplied by hC; associativity and hom_inv_id cancel that counit.",
    "uses": [
-    "new-integral-residue-pull-square-data",
-    "new-integral-residue-pull-ordinary-unit"
+    "new-integral-residue-scalar-mate-counit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "new-integral-residue-pull-square-data",
-  "new-integral-residue-pull-ordinary-unit"
+  "new-integral-residue-scalar-mate-counit"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "A2",
+  "date": "2026-10-17",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Remark 6.8.15; normalized mate calculation",
-  "note": "Strictly smaller normalized equation used to prove the flat-model comparison; the final target follows by composing with the residue upper-star counit."
+  "place": "Remark 6.8.15; derived mate comparison after the flatness clause",
+  "note": "Reuse the complete scalar_mate_counit calculation moved from IntegralResidueScalarCounitModel into this upstream module, and cancel the invertible residue pullback counit supplied by hC. The original helper copies are removed from ScalarCounitModel, which imports the two shared entry points."
  },
  "mathlib_searches": [
   {
@@ -108,7 +108,7 @@
   "reviewer": "COMPILER",
   "group": "A2",
   "result": "pass",
-  "landing": "20261017T064700-L-725521",
+  "landing": "20261017T121123-L-399885",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
