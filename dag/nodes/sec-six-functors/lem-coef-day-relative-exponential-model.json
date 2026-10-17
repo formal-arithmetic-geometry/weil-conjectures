@@ -14,9 +14,197 @@
   "lem-coef-cartesian-operadic-envelope",
   "def-coef-monoidal-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the opposite dual of [lem-coef-infinity-arrow-source-fibers] in $\\operatorname{Cat}_{\\mathcal U}$: pullback-stability of right fibrations makes target evaluation $p$ cartesian, its fibre is the full intrinsic slice on right fibrations and its cartesian edges are pullback squares. The required finite limits in categories are supplied by [lem-coef-cat-infinity-filtered-finite-calculus]. Now [lem-coef-strict-intrinsic-right-fibration-slices] compares that fibre, naturally under all coherent base changes, with strict right fibrations over $D$. Only after this comparison apply [lem-coef-space-transport-classification], obtaining $P(D)$ and restriction $h^*$. A square over $h:D\\to D'$ factors through the cartesian lift $h^*G\\to G$, so its space is $\\operatorname{Map}_{P(D)}(F,h^*G)$. By [lem-coef-infinity-space-valued-pointwise-lan] this is $\\operatorname{Map}_{P(D')}(h_!F,G)$. The unit therefore defines a cocartesian lift. Substituting $k^*H$ for $G$ checks the mapping-space universal criterion over every subsequent arrow $k$, as required by [lem-coef-cocartesian-straightening]. Composite units give $(kh)_!\\simeq k_!h_!$, with contractible choices of adjoint comparison. All categories of categories are formed after enlarging the containing universe.",
+   "uses": [
+    "lem-coef-infinity-arrow-source-fibers",
+    "lem-coef-cat-infinity-filtered-finite-calculus",
+    "lem-coef-strict-intrinsic-right-fibration-slices",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.2, including the strict/intrinsic comparison in its final proof paragraph."
+   }
+  },
+  {
+   "text": "Follow Lemma 6.9 with $E\\to A$ and $F\\to B$. Their product is the fibre product over $A\\times B$ of $E\\times B$ and $A\\times F$, the two projection pullbacks. Its horn lifts exist coordinatewise. For any strict right fibration $Z\\to A\\times B$, the defining simplices give\n$$\\operatorname{Fun}_{/A\\times B}(Z,E\\times F)=\\operatorname{Fun}_{/A\\times B}(Z,E\\times B)\\times\\operatorname{Fun}_{/A\\times B}(Z,A\\times F).$$\nThus it is their categorical product in the strict fibre. By [lem-coef-strict-intrinsic-right-fibration-slices] it is also that product in the intrinsic fibre. The equivalence of [lem-coef-space-transport-classification] preserves its universal property: transport the two projections and test against an arbitrary object using its equivalence on mapping spaces. The pointwise-limit clause of [lem-coef-infinity-yoneda-presheaf-limits] identifies the result as $(a,b)\\mapsto E(a)\\times F(b)$. Iterate for finite families. For the empty family the strict mapping complex into $*\\to *$ is a point and its classifying presheaf is terminal. Products in the arrow category are objectwise by the same pointwise theorem; products of categories exist by [lem-coef-cocartesian-straightening]. Therefore these product arrows are finite products in the full subcategory $\\operatorname{RFib}$ and $p$ preserves them. The projection constructions give the same comparisons on transformations and simplex parameters.",
+   "uses": [
+    "lem-coef-strict-intrinsic-right-fibration-slices",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Lemma 6.9 and Remark 6.6; common-base product and its pointwise universal property written out."
+   }
+  },
+  {
+   "text": "Let $q:X_D\\to K$ be the cocartesian unstraightening of $k\\mapsto D(k)^{\\mathrm{op}}$. Dualize [lem-coef-relative-functor-cocartesian-classifier]. Apply that node to the cartesian fibration $X_D^{\\mathrm{op}}\\to K^{\\mathrm{op}}$ and target $\\mathcal S^{\\mathrm{op}}$. It gives a cocartesian fibration $V\\to K^{\\mathrm{op}}$ with fibre $\\operatorname{Fun}(D(k),\\mathcal S^{\\mathrm{op}})$; hence $V^{\\mathrm{op}}\\to K$ is cartesian with fibre $\\operatorname{Fun}(D(k),\\mathcal S^{\\mathrm{op}})^{\\mathrm{op}}\\simeq P(D(k))$ and restriction transport along $D(a)^{\\mathrm{op}}$. For a simplicial set $A\\to K$, apply the same node with $T=A^{\\mathrm{op}}$ and take opposite functor categories. The identities $(A\\times_K X_D)^{\\mathrm{op}}=A^{\\mathrm{op}}\\times_{K^{\\mathrm{op}}}X_D^{\\mathrm{op}}$ and $\\operatorname{Fun}(B^{\\mathrm{op}},T^{\\mathrm{op}})^{\\mathrm{op}}\\simeq\\operatorname{Fun}(B,T)$ give\n$$\\operatorname{Fun}_{/K}(A,V^{\\mathrm{op}})\\simeq\\operatorname{Fun}(A\\times_K X_D,\\mathcal S).$$\nOpposites reverse simplex operators in both factors; evaluation regains its original direction. The natural strict/intrinsic comparison of [lem-coef-strict-intrinsic-right-fibration-slices], followed by the pullback clause of [lem-coef-space-transport-classification] as in step 1, identifies the cartesian classifier of $K\\times_D\\operatorname{RFib}$ with this same presheaf diagram. Cartesian straightening, the opposite-category dual of [lem-coef-cocartesian-straightening], identifies the two fibrations over $K$. Take $A=K$ to get the asserted category of all sections. Such a section includes the specified coherent identification with $D$, so it is exactly the stated infinity-categorical fibre. No edge-preservation condition is imposed; transformations and higher simplices are retained. Enlarge the universes containing $K$ and $\\mathcal S$ before this application.",
+   "uses": [
+    "lem-coef-relative-functor-cocartesian-classifier",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-space-transport-classification",
+    "lem-coef-strict-intrinsic-right-fibration-slices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proof of Proposition 6.18, using GHN Proposition 7.3 for the section/classification equivalence."
+   }
+  },
+  {
+   "text": "The evaluation clause of [lem-coef-relative-functor-cocartesian-classifier], dualized as in step 3, sends a section to its fibre presheaf evaluated at $d$. By [lem-coef-space-transport-classification] this is the fibre of the corresponding right fibration. Base restriction follows from the base-change and parameter naturality of the relative classifier. For a coherent transformation $\\tau:D\\to D'$, [lem-coef-cocartesian-straightening] gives the functor $u:X_D\\to X_{D'}$ with components $\\tau_k^{\\mathrm{op}}$, preserving cocartesian edges. On the functor side use precomposition with $u$. On the section side pull the right fibration at $k$ back along $\\tau_k$. Their evaluations at $(k,d)$ are both $F'_k(\\tau_k d)$. More precisely, precompose the relative classifier's evaluation map with $A\\times_K u$ for each parameter $A\\to K$; its universal property identifies this with those fibrewise pullback maps. This argument applies to every simplex parameter and commutes with its operators, so it proves naturality on whole functor categories rather than just on objects.",
+   "uses": [
+    "lem-coef-relative-functor-cocartesian-classifier",
+    "lem-coef-space-transport-classification",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proof of Proposition 6.18 and the naturality clause following GHN Proposition 7.3."
+   }
+  },
+  {
+   "text": "For a finite family $h_i:D_i\\to D'_i$, [lem-coef-presheaf-external-product-kan] identifies the product of the unit maps $F_i\\to h_i^*(h_i)_!F_i$ with the Kan unit for $\\prod_i h_i$ and the external product. By steps 1--2 this says exactly that products preserve $p$-cocartesian edges. Step 2 also gives finite products and their preservation by $p$. Thus all three hypotheses of [lem-coef-cartesian-envelope-cocartesian-criterion] hold, and $p^\\times$ is a cocartesian fibration. Its block lift starts with the product right fibration on $\\prod_{i\\in I_j}D_i$ and transports it along $b_j$. By step 1 the resulting presheaf is $(b_j)_!(\\boxtimes_{i\\in I_j}F_i)$. The criterion supplies these lifts and their composition compatibility for all blocks; the envelope mapping formula of [lem-coef-cartesian-operadic-envelope] identifies their fibres as $\\prod_iP(D_i)$. Pull back along the ordered-block functor. Its successive inverse-image blocks concatenate the same intervals, so the prescribed formula respects composition and discarded coordinates. Empty blocks start with the terminal right fibration and the presheaf $*$.",
+   "uses": [
+    "lem-coef-presheaf-external-product-kan",
+    "lem-coef-cartesian-envelope-cocartesian-criterion",
+    "lem-coef-cartesian-operadic-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Corollaries 6.8 and 6.10 and Remark 6.11; both general inputs are now separate cited nodes."
+   }
+  },
+  {
+   "text": "The coherent normal form of [lem-coef-monoidal-block-projection-coherence] and [def-coef-monoidal-infinity-category] gives a functor $M_C:S\\to\\operatorname{Cat}_{\\mathcal U}$ with $M_C([r])=C^r$, whose inert arrows are coordinate projections and whose block arrows are the tensor functors. Apply [lem-coef-generalized-cartesian-product-cones] with $\\mathcal M=S$ over itself and $B=\\operatorname{Cat}_{\\mathcal U}$. Here the zero fibre of the identity map is the one-point Kan complex; each relative mapping space over a fixed base map is a singleton, so its vertex-and-edge incidence maps are equivalences between singleton spaces. Its inert product-cone condition is precisely $C^r=\\prod_{i=1}^rC$, including $C^0=*$; finite products of $\\operatorname{Cat}_{\\mathcal U}$ are supplied by [lem-coef-cocartesian-straightening]. Thus the theorem provides the coherent inert-preserving algebra $\\underline C:S\\to\\operatorname{Cat}_{\\mathcal U}^{\\times}$. Pull back the cocartesian fibration of step 5 along it. The result $Q_C$ has fibre $P(C)^r$ by space-valued classification, and each operation is the indicated external product followed by left Kan extension along the opposite tensor functor. These are the Day operations, including the nullary one. Their output coordinates satisfy the Segal and relative-limit clauses: by the cartesian-envelope mapping formula, maps over any base arrow are products over the output blocks, with the empty output product terminal. For an inert arrow each retained block is a singleton and its base block map is $\\mathrm{id}_C$; the universal-lift criterion of step 5 then says its presheaf component must be an equivalence. The envelope's inert criterion says exactly the same. This proves both monoidality and the asserted inert test.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-generalized-cartesian-product-cones",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Definition 6.14, Remark 6.15 and Proposition 6.12; product-cone coherence supplied by the generalized product-cone correspondence."
+   }
+  },
+  {
+   "text": "By the total-product clause of [lem-coef-generalized-cartesian-product-cones], finite products in $\\operatorname{RFib}$ from step 2 give a coherent functor $\\Pi:\\operatorname{RFib}^{\\times}\\to\\operatorname{RFib}$. The same construction in $\\operatorname{Cat}_{\\mathcal U}$ commutes with $p$, since $p$ preserves these products. Restrict this commuting square along $Q_C\\to\\operatorname{RFib}^{\\times}$. It is a coherent section of the right-fibration classifier over the diagram $D_Q:Q_C\\to\\operatorname{Cat}_{\\mathcal U}$ obtained by composing $Q_C\\to S$ with $M_C=\\Pi\\underline C$. At an object $(F_1,\\ldots,F_r)$ it is the product right fibration over $D_Q=C^r$. On a block arrow its base map $C^r\\to C^s$ has $j$th component $t_{I_j}$ precomposed with the projection $C^r\\to C^{I_j}$; its total map is the product of the corresponding block maps of right fibrations precomposed with those same projections. This specifies discarded inputs and empty blocks as well. All simplices come from the total-product functor, whose coherence is part of the cited statement, so this is a section on the whole category $Q_C$.",
+   "uses": [
+    "lem-coef-generalized-cartesian-product-cones",
+    "lem-coef-space-transport-classification",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proof of Proposition 6.18 and Lemma 6.9; total-product section written using the coherent product-cone correspondence."
+   }
+  },
+  {
+   "text": "The opposite diagram $D_Q^{\\mathrm{op}}$ is the composite $Q_C\\to S\\xrightarrow{M_C^{\\mathrm{op}}}\\operatorname{Cat}_\\infty$, where $M_C^{\\mathrm{op}}([r])=(C^r)^{\\mathrm{op}}$. Define $C^{\\mathrm{op},\\otimes}\\to S$ to be the cocartesian unstraightening of $M_C^{\\mathrm{op}}$, as in Chu--Haugseng Notation 6.17; this is the fibrewise opposite monoidal category, not the opposite of its total category over $S$. By the coherent base-change clause and contractible classification choices of [lem-coef-cocartesian-straightening], the unstraightening of $D_Q^{\\mathrm{op}}$ is therefore coherently equivalent over $Q_C$ to $Q_C\\times_S C^{\\mathrm{op},\\otimes}$. On a block arrow $\\alpha:[r]\\to[s]$, the second factor has a morphism from $(c_i)$ to $(d_j)$ represented in $C$ by maps $d_j\\to t_{I_j}(c_i)$ for each output $j$. The projection-pullback normal form of [lem-coef-monoidal-block-projection-coherence] identifies all block substitutions with the corresponding opposites of $M_C$'s substitutions. Hence the comparison is the base-change equivalence of entire classifying diagrams, including every higher simplex; equality of fibres alone is not used.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Notation 6.17 and proof of Proposition 6.18; coherent fibrewise-opposite identification."
+   }
+  },
+  {
+   "text": "Apply the section equivalence of steps 3--4 to the diagram $D_Q$ and the section of step 7: its domain on the functor side is the cocartesian unstraightening of $D_Q^{\\mathrm{op}}$, identified in step 8. This gives the evaluation $Q_C\\times_S C^{\\mathrm{op},\\otimes}\\to\\mathcal S$. Its value is $\\prod_iF_i(c_i)$ by the product right-fibration fibres of step 2, with terminal value for $r=0$. Explicitly, over a block arrow a right-fibration morphism gives $\\prod_{i\\in I_j}F_i(c_i)\\to G_j(t_{I_j}(c_i))$; compose with the presheaf map for $d_j\\to t_{I_j}(c_i)$ from step 8, and multiply over $j$. Project away discarded input factors before these maps. The relative classifier's universal evaluation with simplex parameters supplies exactly these composites and their higher compatibilities. Its base-change naturality proves the corresponding restriction naturality of evaluation.",
+   "uses": [
+    "lem-coef-relative-functor-cocartesian-classifier",
+    "lem-coef-space-transport-classification",
+    "lem-coef-generalized-cartesian-product-cones",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proof of Proposition 6.18 and Notation 6.17; evaluation and section naturality."
+   }
+  },
+  {
+   "text": "Let $f:C\\to C'$ be strong monoidal. It preserves cocartesian edges by definition, so [lem-coef-cocartesian-straightening] sends it to a coherent transformation $M_C\\to M_{C'}$. The normal form of [lem-coef-monoidal-block-projection-coherence] identifies its components with $f^r$ and its block comparisons with the specified tensor equivalences. The product-cone correspondence of [lem-coef-generalized-cartesian-product-cones] lifts this to $\\underline C\\to\\underline C'$. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to $p^\\times$ and the universal section $Q_C\\to\\operatorname{RFib}^\\times$, with parameter $K=Q_C$. First enlarge to a universe containing $Q_C$, both envelopes and their diagrams; the parameter is small there and the presheaf values stay in $\\mathcal S_{\\mathcal U}$. Choose an inner-fibration representative as allowed by [lem-coef-cocartesian-straightening]. This yields a coherent functor $L:Q_C\\to Q_{C'}$ over $S$, coordinatewise $f_!$ on $P(C)^r$. For a block $I$, [lem-coef-presheaf-external-product-kan] identifies $\\boxtimes_i f_!F_i$ with $(f^I)_!(\\boxtimes_iF_i)$. The strong-monoidal square $ft_C\\simeq t_{C'}f^I$ then identifies the two composite Kan extensions: they are left adjoint to the same restriction functor by [lem-coef-infinity-space-valued-pointwise-lan], and the comparison carries composite units to one another. Thus $L$ preserves every cocartesian block edge, including empty blocks, by the criterion of step 5, and is strong monoidal.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-generalized-cartesian-product-cones",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-presheaf-external-product-kan",
+    "lem-coef-infinity-space-valued-pointwise-lan"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Strong-monoidal base naturality of the Day pullback; pointwise transport with the enlarged parameter universe."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-space-valued-pointwise-lan], the underlying functor $f_!:P(C)\\to P(C')$ has right adjoint $f^*$. Step 6 proves that $Q_C$ and $Q_{C'}$ are monoidal infinity categories, and step 10 proves that $L$ is strong monoidal. Hence [lem-coef-monoidal-relative-adjoint-inert] applies: it gives a coherent relative right adjoint $R:Q_{C'}\\to Q_C$, with fibre $(f^*)^r$ and unit and counit over $S$, and proves that $R$ preserves inert edges. Its degree-zero fibre is the identity functor on the terminal category. Consequently $R$ is the asserted lax monoidal presheaf restriction. The inert-preservation theorem is used explicitly here, including its higher-coherence conclusion.",
+   "uses": [
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "lem-coef-monoidal-relative-adjoint-inert"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra Corollary 7.3.2.7, product-of-adjoints and inert-preservation clauses."
+   }
+  },
+  {
+   "text": "For an active $r$-ary operation, the mate formula in [lem-coef-monoidal-relative-adjoint-inert] is equivalently the Kan-adjoint transpose of\n$$\\boxtimes_i f^*F_i\\simeq(f^r)^*\\boxtimes_iF_i\\longrightarrow(f^r)^*(t_{C'}^{\\mathrm{op}})^*(t_{C'}^{\\mathrm{op}})_!(\\boxtimes_iF_i),$$\nwhere the arrow is the Kan unit of [lem-coef-infinity-space-valued-pointwise-lan]. The strong-monoidal square identifies the middle restriction with $(t_C^{\\mathrm{op}})^*f^*$. Its transpose is therefore $\\star_i f^*F_i\\to f^*(\\star_iF_i)$; at arity zero it is the Day-unit comparison. The relative adjoint theorem supplies substitution and unit coherence. Finally compare evaluation after $R$ with evaluation after $C^{\\mathrm{op},\\otimes}\\to C'^{\\mathrm{op},\\otimes}$. Both values at $((F_i),(c_i))$ are $\\prod_iF_i(f(c_i))$. On each block the evaluation map of step 9 agrees with this Kan-unit transpose by the defining adjunction equivalence, including discarded projections. The universal parameter evaluation from steps 3--4, supplied by [lem-coef-relative-functor-cocartesian-classifier], promotes these identified mates to the same coherent evaluation functor: the mate equivalences are natural on entire mapping spaces and the relative adjunction retains every simplex. This proves the claimed strong-monoidal naturality of evaluation, as well as its base restriction naturality.",
+   "uses": [
+    "lem-coef-monoidal-relative-adjoint-inert",
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "lem-coef-relative-functor-cocartesian-classifier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.18, evaluation naturality, and Higher Algebra 7.3.2.7; Kan-unit mate written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cartesian-envelope-cocartesian-criterion",
+  "lem-coef-cartesian-operadic-envelope",
+  "lem-coef-cat-infinity-filtered-finite-calculus",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-generalized-cartesian-product-cones",
+  "lem-coef-infinity-arrow-source-fibers",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-space-valued-pointwise-lan",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-monoidal-block-projection-coherence",
+  "lem-coef-monoidal-relative-adjoint-inert",
+  "lem-coef-presheaf-external-product-kan",
+  "lem-coef-relative-functor-cocartesian-classifier",
+  "lem-coef-space-transport-classification",
+  "lem-coef-strict-intrinsic-right-fibration-slices"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/2006.08269",
+  "place": "Expanded proof following Notation 6.1, Proposition 6.2, Lemma 6.9, Corollary 6.10, Proposition 6.12, Definition 6.14, Remark 6.15 and Proposition 6.18; online source read, archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -139,10 +327,73 @@
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:58-89, CategoryTheory/Grothendieck.lean:45-90, AlgebraicTopology/Quasicategory/InnerFibration.lean:61-74, and AlgebraicTopology/Quasicategory/StrictBicategory.lean:54-98. The hits are ordinary categorical Day convolution or Grothendieck constructions, model-category right homotopies, inner fibrations, or a bicategory of quasicategories; none states the right-fibration classifier, its coherent section equivalence, or its monoidal Day pullback.",
    "subdirectory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent right fibration classifier and relative Day convolution exponential model",
+   "results": "CategoryTheory.MonoidalCategory.DayConvolutionInternalHom; CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy; ordinary categorical Day convolution only, no infinity right-fibration classifier or relative exponential.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.DayConvolution, CategoryTheory.Functor",
+   "results": "CategoryTheory.MonoidalCategory.DayConvolution, convolution, leftKanExtension and related ordinary-category declarations in Mathlib.CategoryTheory.Monoidal.DayConvolution.lean.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Category/MonoidalCategory Day convolution, not the coherent infinity-operadic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "RFib|relativeExponential|DayConvolution [subdirectory Mathlib/CategoryTheory]",
+   "results": "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean and related DayConvolution files; no RFib or relative-exponential declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right fibration classifier sections relative Day convolution coherent evaluation",
+   "results": "CategoryTheory.MonoidalCategory.DayConvolution, DayConvolution.mk, DayConvolution.corepresentableBy and ordinary categorical declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match: no right-fibration classifier or coherent relative exponential"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cartesian fibration of functors out of the fibres of a coCartesian fibration is its relative exponential into a category",
+   "results": "{\"t\": \"2026-10-17T05:33:58Z\", \"tool\": \"leanfinder\", \"query\": \"The Cartesian fibration of functors out of the fibres of a coCartesian fibration is its relative exponential into a category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift\", \"HasFibers.pullbackMap.isCartesian\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"HasFibers.canonical\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\"], \"digest\": \"3726f73563a5886b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected FiberedCategory/Fibered.lean:49-108 and Monoidal/Functor.lean:940-950,1122-1129. These declarations use ordinary Category and MonoidalCategory instances, not quasicategories or coherent relative functor categories. The two proposed new nodes are removed: the relative classifier is the opposite dual of the existing DAG node, and the inert argument is a coordinatewise counit calculation from the existing relative adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "Phi.*Functor|relative.*exponential|[Cc]o[Cc]artesian.*[Cc]artesian|[Oo]plax.*colimit",
+   "results": "{\"t\": \"2026-10-17T05:34:08Z\", \"tool\": \"grep\", \"query\": \"Phi.*Functor|relative.*exponential|[Cc]o[Cc]artesian.*[Cc]artesian|[Oo]plax.*colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Control/ULiftable.lean\", \"Mathlib/RingTheory/QuotSMulTop.lean\", \"Mathlib/Algebra/Algebra/Unitization.lean\", \"Mathlib/Algebra/Category/Grp/Ulift.lean\", \"Mathlib/Algebra/Category/Grp/Ulift.lean\", \"Mathlib/Algebra/Category/Grp/Ulift.lean\", \"Mathlib/Combinatorics/Quiver/Prefunctor.lean\", \"Mathlib/Algebra/Category/Grp/AB.lean\"], \"digest\": \"595c2abf2dcd6029\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected FiberedCategory/Fibered.lean:49-108 and Monoidal/Functor.lean:940-950,1122-1129. These declarations use ordinary Category and MonoidalCategory instances, not quasicategories or coherent relative functor categories. The two proposed new nodes are removed: the relative classifier is the opposite dual of the existing DAG node, and the inert argument is a coordinatewise counit calculation from the existing relative adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*exponential|[Oo]plax.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-17T05:34:28Z\", \"tool\": \"grep\", \"query\": \"relative.*exponential|[Oo]plax.*[Cc]olimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected FiberedCategory/Fibered.lean:49-108 and Monoidal/Functor.lean:940-950,1122-1129. These declarations use ordinary Category and MonoidalCategory instances, not quasicategories or coherent relative functor categories. The two proposed new nodes are removed: the relative classifier is the opposite dual of the existing DAG node, and the inert argument is a coordinatewise counit calculation from the existing relative adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-17T05:34:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.instIsMonoidalId\", \"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"CategoryTheory.Adjunction.isMonoidal_comp\"], \"digest\": \"c883095e29ee7cc3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected FiberedCategory/Fibered.lean:49-108 and Monoidal/Functor.lean:940-950,1122-1129. These declarations use ordinary Category and MonoidalCategory instances, not quasicategories or coherent relative functor categories. The two proposed new nodes are removed: the relative classifier is the opposite dual of the existing DAG node, and the inert argument is a coordinatewise counit calculation from the existing relative adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint to a strong monoidal functor is lax monoidal by taking the adjoint of the counit tensor maps",
+   "results": "{\"t\": \"2026-10-17T05:34:29Z\", \"tool\": \"leanfinder\", \"query\": \"A right adjoint to a strong monoidal functor is lax monoidal by taking the adjoint of the counit tensor maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.mapMon\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit\"], \"digest\": \"7904d625ed67df5c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected FiberedCategory/Fibered.lean:49-108 and Monoidal/Functor.lean:940-950,1122-1129. These declarations use ordinary Category and MonoidalCategory instances, not quasicategories or coherent relative functor categories. The two proposed new nodes are removed: the relative classifier is the opposite dual of the existing DAG node, and the inert argument is a coordinatewise counit calculation from the existing relative adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-day-convolution",
@@ -168,5 +419,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-day-relative-exponential-model",
+  "worker": "stage1",
+  "summary": "Repair of all four maintainer return points: strict/intrinsic slice comparison is a new, strictly smaller technical lemma; product proof now follows CH 6.9 using intrinsic slice comparison and cited pointwise limits; external-product Kan compatibility and the cartesian-envelope fibration criterion are separate unsplit nodes; HA inert preservation is a separate monoidal relative-adjoint node. Steps 10-12 explicitly cite straightening and enlarge the parameter universe for Q_C. Item statement unchanged. Four new statement-only nodes, zero Mathlib leaves.",
+  "blueprint": "Supporting right-fibration Day model for prop-coef-integral-exceptional-adjoint, finite-coefficient adjunction paragraph: steps 1-5 give the classifier and ordered-block transports; 6-9 give the coherent monoidal pullback, total-product section, fibrewise opposite and evaluation; 10-12 give coherent strong-monoidal transport and lax restriction. These categorical foundations are agent formulations supporting that paragraph, not assertions explicitly written in the blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-d1d80a968",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-d1d80a968 (reviewer sub-agent of L); spot-checked: I read the item statement, all 12 steps, the 4 new nodes and every cited node statement in full. Chu-Haugseng (arXiv:2006.08269) is not in literature/; I fetched it read-only and read its section 6 from Notation 6.1 to the proof of Prop 6.18 (6.2 with the GHN A.32/Hinich paragraph, 6.6, 6.7(ii), 6.8, 6.9, 6.10 proof, 6.11, 6.14, 6.15, 6.17, 6.18 via GHN 7.3). I did not open GHN Appendix A, Hinich 2.1.4 or HA 7.3.2.6-7: I checked those results through CH's account of them and my own knowledge of them. The item statement is unchanged (as the packet records) and true; small cases K empty/point/Delta^1, D empty, C terminal, arity 0 and f=id all check out. Step 3: I re-derived the opposite dualization of relative-functor-cocartesian-classifier myself; V^op -> K is cartesian with fibre P(D(k)) and restriction transport, and Fun_K(A,V^op) = Fun(A x_K X_D, S). The other steps' hypotheses also hold: finite limits in Cat for the arrow-source dual, pullback stability from the new slice node, the CH 6.8 hypotheses in step 5, product-cones applied with M=S, the inert singleton-block test, the fibrewise opposite with correctly directed block maps, the strong-monoidal block edges via the Kan node, and the arity-0 lax unit not being an equivalence. The 4 new nodes are true, statement-only, sourced and searched, and not duplicates (checked against simplicial-right-fibration-presentation, space-transport, unstraightening-external-products, marked-cone-external-product, cartesian-operadic-envelope, generalized-product-cones, cocartesian-relative-right-adjoint, sfb-monoidal-adjunction-mates and others). None restates an item clause. strict-intrinsic slices = GHN A.32 variant + Hinich; ext-product Kan = CH 6.10 comma calculation; envelope criterion = CH 6.8 + 6.7(ii), and I proved its added 'iff' clause independently; monoidal-adjoint-inert = HA 7.3.2.7 in the nonsymmetric setting. The route stays inside unit sk-prop-sf-biduality-general; the only off-unit citation is a definition. proof_deps equals the union of the step uses, and there is no cycle. No target node is involved and no SGA source is used. No fixes, no tool_uses. Only nit: in step 3 the letter T is reused for both the parameter and the target."
  }
 }

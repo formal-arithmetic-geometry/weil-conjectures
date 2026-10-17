@@ -12,9 +12,127 @@
   "def-coef-infinity-category-of-spaces",
   "def-coef-infinity-presheaf-yoneda"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S_0=N(C)$, $B=\\mathfrak C[S_0]$ and $D_{c,x}=\\operatorname{Hom}_C(c,x)_{\\mathrm{disc}}$. On the rigidification of a simplex $\\sigma:[n]\\to C$, send every element of every degree of $N(P_{i,j})$ to the single arrow $\\sigma(i\\to j)$. Union of subsets corresponds to composition because $\\sigma(i\\to k)=\\sigma(j\\to k)\\circ\\sigma(i\\to j)$. Image of subsets under an ordinal map gives the same arrow, including repeated vertices, which give identities. These enriched functors therefore agree on the simplex diagram and induce $\\epsilon:B\\to C_{\\mathrm{disc}}$ by the defining colimit. They fix objects and identities. Every ordinary functor $C\\to C'$ preserves these formulas, so $\\epsilon$ is natural in $C$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5; direct calculation with the simplex-colimit definition"
+   }
+  },
+  {
+   "text": "The ordinary nerve is a quasicategory: a two-dimensional inner horn is filled by inserting the composite of its two arrows; in higher dimensions the consecutive arrows specify the desired string, and its faces are the prescribed faces because their composites agree by associativity. For $M=\\operatorname{Map}^{R}_{N(C)}(c,x)$, an $n$-simplex is a string $c\\xrightarrow{1}c\\xrightarrow{1}\\cdots\\xrightarrow{1}c\\xrightarrow{f}x$. The requirement that the entire initial face be constant forces all initial arrows to be identities. Thus specifying it is exactly specifying $f:c\\to x$. Every simplicial operator keeps $f$, so $M=D_{c,x}$ as simplicial sets, not just on components. This identification uses the right-pinched convention of the cited definition.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.2 (ordinary nerve) and Section 2.2.4 (right mapping space); direct calculation"
+   }
+  },
+  {
+   "text": "Apply the pinched resolution to $S_0=N(C)$, which is a quasicategory by step 2. It supplies weak homotopy equivalences $p_M:|M|_Q\\to M$ and $\\theta:|M|_Q\\to B(c,x)$. Under $M=D_{c,x}$ the equality $\\epsilon_{c,x}\\theta=p_M$ holds. Indeed, the copy of $Q^n$ indexed by $f\\in M_n$ maps under $\\theta$ by rigidification of the pinched string with final arrow $f$. Every subset-path in this string has composite $f$, so its image under $\\epsilon$ is the constant simplex $f$. The restriction of $p_M$ is also constant $f$, since it factors through the corresponding constant simplex $\\Delta^n\\to M$. Equality on these copies descends through the coend relations. Apply the cited Kan-target testing criterion for weak equivalences: for every Kan $Z$, $p_M^*=\\theta^*\\epsilon_{c,x}^*$ on $\\pi_0^{\\mathrm e}\\operatorname{Fun}(-,Z)$. Both $p_M^*$ and $\\theta^*$ are bijections, so $\\epsilon_{c,x}^*$ is a bijection. The converse implication of that criterion proves that $\\epsilon_{c,x}$ is a weak homotopy equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-cbc-realization-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.4, opening counit calculation and Proposition 2.2.4.1; specialize the Q-resolution to an ordinary nerve"
+   }
+  },
+  {
+   "text": "The realization of $D_{c,x}$ is the discrete topological set $\\operatorname{Hom}_C(c,x)$: each constant-simplex component realizes to a point. Its singular complex is again $D_{c,x}$, because each topological simplex is connected and any continuous map from it to a discrete set is constant. Let $\\tau_{c,x}=\\operatorname{Sing}|\\epsilon_{c,x}|$, with this identification of its target. The characteristic-simplex units satisfy $\\tau_{c,x}u_{B(c,x)}=\\epsilon_{c,x}$, since $u_{D_{c,x}}$ is the identity under that identification. The unit theorem applies to the possibly non-Kan, possibly empty simplicial set $B(c,x)$. For each Kan target the testing criterion gives $\\epsilon_{c,x}^*=u_{B(c,x)}^*\\tau_{c,x}^*$. The first two maps are bijections, so $\\tau_{c,x}^*$ is a bijection and the same criterion proves that $\\tau_{c,x}$ is a weak homotopy equivalence. The source is Kan by the singular horn-extension argument in the space-category definition; the discrete target is Kan, since a compatible horn in a constant simplicial set has a unique constant filler.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-cbc-realization-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0142",
+    "place": "Milnor Theorem 3.6.4.1; naturality of the characteristic-simplex unit"
+   }
+  },
+  {
+   "text": "Write $B^{\\mathrm{top}}(c,x)=\\operatorname{Sing}|B(c,x)|$. The maps $\\tau$ preserve enriched composition and identity: the product comparison used in the definition is natural for $\\epsilon$, and $\\epsilon$ preserves composition and identity. Thus for composable enriched parameters $a:c'\\to c$, $v:c\\to x$, $b:x\\to x'$, one has $\\tau_{c',x'}(u(b)\\circ v\\circ u(a))=\\epsilon(b)\\circ\\tau_{c,x}(v)\\circ\\epsilon(a)$ in every simplicial degree. Apply this equation to the reflected subset paths in the first variable and the ordinary subset paths in the second variable of the defined pairing $H_C$. It says precisely that $\\tau$ commutes with each enriched action. The target action is ordinary precomposition and postcomposition: on an ordinary string its subset-path composite is the ordinary arrow, independently of the subset. Hence the target pairing is the strict discrete Hom bifunctor on $N(C)^{\\mathrm{op}}\\times N(C)$.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-coef-infinity-presheaf-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3, printed pp. 319-320; direct verification of enriched naturality for the specified Hom pairing"
+   }
+  },
+  {
+   "text": "For completeness, the preceding enriched naturality gives an actual coherent transformation, as follows. For an $n$-simplex $s$ of $K=N(C)^{\\mathrm{op}}\\times N(C)$ and a monotone sequence $e_0\\leq\\cdots\\leq e_n$ in $\\{0,1\\}$, take at vertex $i$ the value of $H_C(s_i)$ if $e_i=0$, and the discrete Hom value $G(s_i)$ if $e_i=1$. On each endpoint-containing subset-path use the action of $H_C$ when both endpoints have label zero, the action of $G$ when both have label one, and $\\tau_j\\circ H_C(\\text{path})$ for a zero-to-one path ending at $j$. The last expression equals $G(\\text{path})\\circ\\tau_i$ by step 5. Union composition is respected: for three labels only $000,001,011,111$ can occur, and in the two mixed cases the required equality is exactly this naturality equation. Identities are respected. Restricting along an ordinal map restricts the labels and the paths, giving the same formula. These enriched simplices therefore define a simplicial map $K\\times\\Delta^1\\to\\mathcal S_{\\mathcal V}$ with endpoints $H_C,G$ and components $\\tau_{c,x}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "def-coef-infinity-presheaf-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5 and Section 5.1.3; explicit mixed-simplex construction of the natural-transformation edge"
+   }
+  },
+  {
+   "text": "Each component $f:P\\to Q$ of this transformation is an equivalence edge in $\\mathcal S_{\\mathcal V}$. Here $P,Q$ are the Kan complexes of step 4 and $f$ is a weak homotopy equivalence. The cited Kan mapping-homotopy invariance gives bijections $\\pi_0\\operatorname{Fun}(Q,Z)\\to\\pi_0\\operatorname{Fun}(P,Z)$ for $Z=P,Q$, with both functor spaces Kan. Surjectivity for $Z=P$ gives $g:Q\\to P$ with $gf\\simeq1_P$. Injectivity for $Z=Q$, applied to $fg$ and $1_Q$ after precomposition by $f$, gives $fg\\simeq1_Q$. In a Kan complex a finite edge path composes to an edge and edges reverse by horn fillings, so the displayed relations are simplicial homotopies in either required orientation. Each homotopy is the $\\Delta^1=N(P_{0,2})$ parameter of a coherent-nerve $2$-simplex with consecutive edges $f,g$ (respectively $g,f$) and long edge the appropriate identity. These are precisely the two inverse witnesses in the definition of an equivalence edge. The target $\\mathcal S_{\\mathcal V}=N_{\\mathrm{hc}}(\\mathbf{Kan}_{\\mathcal V})$ is a quasicategory by the cited coherent-nerve theorem, since its morphism simplicial sets $\\operatorname{Fun}(S,T)$ are Kan. Now apply pointwise equivalence detection to the edge of step 6 with the small simplicial set $K$ and this quasicategory $\\mathcal S_{\\mathcal V}$. It follows that $\\tau:H_C\\to G$ is a coherent natural equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-kan-coherent-nerve-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4; Kan homotopy-inverse argument using the mapping-homotopy invariance of Kerodon 03PJ"
+   }
+  },
+  {
+   "text": "At $(c,c)$ the singular vertex of $1_c\\in B(c,c)_0$ is carried to $1_c\\in C(c,c)$. The enriched unit equations are preserved strictly by $\\epsilon$ and by the realization/singular construction; their degenerate coherent simplices are therefore carried to the degenerate unit simplices of discrete Hom. This supplies the asserted unit homotopy, including its parameters. The formulas in steps 1 and 5 commute with an ordinary functor because it preserves composites, and steps 5-6 commute with restriction in either variable because restriction just precomposes the same simplicial maps. Inclusion of the value space category into a containing universe reuses these same Kan complexes, maps, enriched simplices and inverse witnesses. Thus it preserves the comparison and its equivalence. If $\\operatorname{Hom}_C(c,x)$ is empty, $M$ is empty, and step 3 still applies; the existence of $\\epsilon:B(c,x)\\to\\varnothing$ forces $B(c,x)=\\varnothing$, so step 4 is the empty-to-empty equivalence. If $C$ is empty, $K$ is empty and the transformation and its equivalence are vacuous. No nonemptiness, connectedness, finiteness or enlargement of the value universe is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "def-coef-infinity-presheaf-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 1.1.5 and 5.1.3; direct identity, restriction, size and empty-case checks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-pinched-rigidification-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent specialization of the existing Q-resolution (HTT Section 2.2.4) to an ordinary nerve, followed by the explicit two-variable Hom-pairing comparison of Section 5.1.3. Source read online 2026-10-17; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +189,45 @@
    "results": "{\"t\": \"2026-10-17T05:31:52Z\", \"tool\": \"grep\", \"query\": \"rigidification|Boardman|homotopy.coherent\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"260b133ff7f49fa1\"}",
    "date": "2026-10-17",
    "verdict": "Second reader: no match. Read Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:29-32, SimplicialNerve.lean:14-35, and SimplicialSet/Nerve.lean:168. The ordinary nerve is a quasicategory and its edges are ordinary arrows, but none of these declarations compares the rigidification augmentation and its coherent Hom family with discrete Hom."
+  },
+  {
+   "tool": "grep",
+   "query": "rigidification|homotopy.coherent|coherentNerve",
+   "results": "{\"t\": \"2026-10-17T05:51:34Z\", \"tool\": \"grep\", \"query\": \"rigidification|homotopy.coherent|coherentNerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"260b133ff7f49fa1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:168-173 (ordinary edges only), SimplicialSet/NerveAdjunction.lean:409-415 (ordinary homotopy-category adjunction), Quasicategory/Nerve.lean:29-32 (ordinary nerve is a quasicategory), and SimplicialNerve.lean:14-35 (rigidification/space-category comparison is not supplied). None states the enriched augmentation weak equivalence or the jointly coherent discrete Hom comparison. Two semantic phrasings checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy coherent nerve rigidification comparison with discrete ordinary Hom bifunctor",
+   "results": "{\"t\": \"2026-10-17T05:51:34Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy coherent nerve rigidification comparison with discrete ordinary Hom bifunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"e9fbb366ec65e9cd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:168-173 (ordinary edges only), SimplicialSet/NerveAdjunction.lean:409-415 (ordinary homotopy-category adjunction), Quasicategory/Nerve.lean:29-32 (ordinary nerve is a quasicategory), and SimplicialNerve.lean:14-35 (rigidification/space-category comparison is not supplied). None states the enriched augmentation weak equivalence or the jointly coherent discrete Hom comparison. Two semantic phrasings checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.nerve.homEquiv",
+   "results": "{\"t\": \"2026-10-17T05:51:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.nerve.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.homEquiv_id\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\", \"CategoryTheory.nerve.homEquiv_symm_apply\", \"CategoryTheory.nerve.homEquiv_apply\", \"CategoryTheory.nerve.homEquiv_comp\", \"CategoryTheory.nerve.homEquiv_edgeMk\", \"CategoryTheory.nerve.homEquiv_edgeMk_map_nerveMap\"], \"digest\": \"63778ad61e0674ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:168-173 (ordinary edges only), SimplicialSet/NerveAdjunction.lean:409-415 (ordinary homotopy-category adjunction), Quasicategory/Nerve.lean:29-32 (ordinary nerve is a quasicategory), and SimplicialNerve.lean:14-35 (rigidification/space-category comparison is not supplied). None states the enriched augmentation weak equivalence or the jointly coherent discrete Hom comparison. Two semantic phrasings checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The rigidification of an ordinary category nerve has mapping simplicial sets weakly equivalent to discrete Hom sets by the composition augmentation",
+   "results": "{\"t\": \"2026-10-17T05:51:35Z\", \"tool\": \"leanfinder\", \"query\": \"The rigidification of an ordinary category nerve has mapping simplicial sets weakly equivalent to discrete Hom sets by the composition augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"SSet.OneTruncation₂.ofNerve₂\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\"], \"digest\": \"6b291ea0d9688c7f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:168-173 (ordinary edges only), SimplicialSet/NerveAdjunction.lean:409-415 (ordinary homotopy-category adjunction), Quasicategory/Nerve.lean:29-32 (ordinary nerve is a quasicategory), and SimplicialNerve.lean:14-35 (rigidification/space-category comparison is not supplied). None states the enriched augmentation weak equivalence or the jointly coherent discrete Hom comparison. Two semantic phrasings checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping complexes of the homotopy coherent realization of an ordinary nerve compare with the discrete hom bifunctor naturally in both variables",
+   "results": "{\"t\": \"2026-10-17T05:52:07Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping complexes of the homotopy coherent realization of an ordinary nerve compare with the discrete hom bifunctor naturally in both variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"CategoryTheory.nerve.functorOfNerveMap_map\", \"CategoryTheory.nerveMap\", \"CategoryTheory.nerve.functorOfNerveMap\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\", \"CategoryTheory.nerve_map\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\", \"CategoryTheory.SimplicialThickening.functor_map\"], \"digest\": \"43a2590891785497\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:168-173 (ordinary edges only), SimplicialSet/NerveAdjunction.lean:409-415 (ordinary homotopy-category adjunction), Quasicategory/Nerve.lean:29-32 (ordinary nerve is a quasicategory), and SimplicialNerve.lean:14-35 (rigidification/space-category comparison is not supplied). None states the enriched augmentation weak equivalence or the jointly coherent discrete Hom comparison. Two semantic phrasings checked."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-presheaf-right-kan-mapping-formula",
@@ -105,5 +258,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ordinary-nerve-discrete-hom-comparison",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Identified the right-pinched mapping simplicial set of an ordinary nerve with discrete Hom; checked the augmentation composed with the existing Q-comparison equals p, then used unit naturality and its weak-equivalence theorem. Constructed the actual two-variable transformation on mixed simplices, verified identity homotopies and used existing pointwise detection. All cited statements read; empty Hom/category cases checked.",
+  "blueprint": "Serves the derived coefficient adjunction mapping calculation in paragraph 2 of prop-coef-integral-exceptional-adjoint (main-20261015 proof): the ordinary discrete Hom weights used in the ancestor chain are identified with the concrete coherent Hom pairing, including identity evaluation. It is a generic foundations sublemma below that calculation; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-weak-equivalence",
+    "why": "Generic equivalence between realization-based and Kan-target-testing weak equivalences permits cancellation of p=epsilon theta and epsilon=tau u without any unmentioned basepoint-surjectivity assumption."
+   },
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "Generic realization/singular unit theorem for arbitrary simplicial sets, including the non-Kan enriched Hom; this unit has no alternative statement of it."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Generic Kan-target mapping-homotopy invariance turns the component weak equivalences into inverse-triangle witnesses in the concrete coherent space category; this unit has no alternative statement of it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-weak-equivalence",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-00c13b6ca",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-00c13b6ca (reviewer sub-agent of L); spot-checked: Read the item, its 8 steps and every cited statement in full, plus the unit sk-prop-sf-biduality-general, the chapter sec-six-functors and the only citer (lem-coef-space-presheaf-right-kan-mapping-formula, step 3). Kerodon 03N6/03N7 and HTT 2.2.4 are not under literature/, so the WANTED lines and proof_origin=agent are correct; I checked the mathematics against the cited DAG statements and against the known HTT 2.2.4.1 / Dugger–Spivak equivalence C[N C] -> C. The statement is true and not weakened; small cases checked: BG, [1], parallel arrows, empty Hom, empty C. Step 1: epsilon respects union and images, so it descends to the simplex colimit. Step 2: a constant initial face in N(C) forces identity arrows, so Map^R(c,x)=D_{c,x} as simplicial sets, matching the J^n convention. Step 3: epsilon*theta=p_M holds on each Q^n copy, since both are constant at f; cancellation via (i)<=>(ii) of lem-cbc-realization-weak-equivalence is done in the right order. Step 4: tau*u_B=epsilon by unit naturality; the unit theorem has no Kan or nonemptiness hypothesis; both source and target are Kan. Step 5: tau respects enriched composition (rho is natural, epsilon is enriched). Step 6: for triples 001 and 011, the first needs only that H_C is enriched and the second needs step 5. Step 7: the inverse homotopies and the N(P_{0,2}) orientation are correct. Fault fixed: the pointwise-detection lemma requires its target to be a quasicategory, and step 7 cited nothing for S_V being one (C1/E1). I added the existing same-unit, reviewed lem-coef-kan-coherent-nerve-quasicategory to step 7's uses and proof_deps, with one sentence; a dependency-closure check shows no cycle. Step 8: identities, restriction, universe and empty cases are correct. No duplicates; I read the nearest candidates (rigidification-identity-action, point-family-q-counit, discrete-weight-coherent-cocones, coherent-nerve-comparison, enriched-hom-twisted-arrow). I accept the three sk-prop-sf-cbc tool_uses (realization-weak-equivalence, realization-singular-unit-weak, kan-mapping-homotopy-invariance) as generic tools. No SGA, no new nodes. The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

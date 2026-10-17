@@ -11,9 +11,106 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathfrak C[X]$ and $B=\\mathfrak C[Y]$. By [lem-coef-coherent-realization-bead-normal-form], $\\mathfrak C[i]$ is injective on objects and every mapping simplicial set, and its degreewise image consists of the words all of whose bead simplices lie in $X$. Identify $A$ with this image. Write $G_q$ for the graph of beads of $B$ in degree $q$, and $G^X_q$ for its subgraph coming from $X$. The degree-$q$ category of $B$ is the free category on $G_q$, and that of $A$ is free on $G^X_q$. These are strict descriptions of the given simplicial categories, not equivalences or replacements.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Lemma 5.1.9 and Proposition 5.1.12, printed pp.29–30; existing bead normal form applied to i"
+   }
+  },
+  {
+   "text": "Let $D_0=A$. Form $D_1$ inside $B$ by retaining all arrows of $A$ and adjoining only the identity arrows at the vertices in $Y_0\\setminus i(X_0)$. There are no other arrows involving these new objects. This is a simplicial subcategory because all operators preserve identities and $A$. A functor from $D_1$ to any small simplicial category $E$ is exactly a functor $A\\to E$ and an independently chosen object of $E$ for each missing vertex. Thus $D_0\\to D_1$ is the pushout of the coproduct, indexed by those vertices, of $\\varnothing\\to\\mathbf1$. The object set from this point on is $Y_0$.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definition 5.1.4(ii), printed p.27; explicit object-cell pushout"
+   }
+  },
+  {
+   "text": "For each $r\\geq0$, let $H_r$ be the set of beads $(\\sigma,T_\\bullet)$ of $B$ in degree $r$ such that $\\sigma$ does not lie in $X$ and the flag is strict. By [lem-coef-coherent-realization-bead-normal-form] these are exactly the missing nondegenerate atomic $r$-simplices. Every bead in degree $q$ has a unique expression $\\alpha^*b$ with $b$ having a strict flag and $\\alpha:[q]\\twoheadrightarrow[r]$ monotone: delete consecutive repetitions of its flag to obtain $b$, and let $\\alpha$ record the consecutive blocks. The simplex $\\sigma$ is unchanged. This also proves uniqueness, including uniqueness of $\\alpha$. A bead coming from $X$ has its strict core in $X$, and a missing bead has its strict core missing. This uses the explicit flag and degeneracy clauses of the cited node, rather than an additional simplicial decomposition theorem.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Example 5.1.7 and Proposition 5.1.12, printed pp.28–30; repetition deletion in the stated bead flags"
+   }
+  },
+  {
+   "text": "Inductively, suppose $D_{r+1}$ is the degreewise free subcategory on $G^X_q$ together with all beads $\\alpha^*b$ whose strict core $b$ belongs to $H_s$ for $s<r$. This holds for $r=0$ by Step 2. Define $D_{r+2}$ degreewise by adjoining to those generating graphs the beads $\\alpha^*b$ for $b\\in H_r$ and every monotone surjection $\\alpha:[q]\\twoheadrightarrow[r]$. The free-word description of $B$ makes each such category a subcategory, with no identifications of words. It is closed under simplicial operators: a degeneracy of a new generator repeats flag entries. For a face injection $\\delta:[q-1]\\hookrightarrow[q]$, $\\alpha\\delta$ is either surjective or omits exactly one value $k$. In the latter case it factors as $\\delta^k\\gamma$ with $\\gamma:[q-1]\\twoheadrightarrow[r-1]$, so $\\delta^*\\alpha^*b=\\gamma^*d_kb$; in the former case it is a degeneracy of $b$. Each face of $b$ has degree $r-1$ and hence factors into beads whose strict cores have dimension at most $r-1$; all of these already lie in $D_{r+1}$. At $r=0$ there are no faces of $b$. Operators preserve composition, so this verifies closure for every word. Thus $D_{r+2}$ is a simplicial subcategory of $B$, and the stated invariant holds for the next value of $r$.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Expansion of the equivalence following Definition 5.1.4, printed p.27, using the bead flags of Proposition 5.1.12"
+   }
+  },
+  {
+   "text": "For $b\\in H_r$ with endpoints $x_b,y_b$, its faces lie in $D_{r+1}(x_b,y_b)$ by Step 4. More explicitly, $\\partial\\Delta^r$ is the subset of the standard simplex whose degree-$q$ monotone maps $\\beta:[q]\\to[r]$ are not surjective. The characteristic map of $b$ sends such a map to $\\beta^*b$. It lies in $D_{r+1}$: factor $\\beta$ through its proper ordered image, so $\\beta^*b$ is a degeneracy of a proper face of $b$. This defines $\\partial\\Delta^r\\to D_{r+1}(x_b,y_b)$, since the operators are restrictions of those in $B$. Consequently we have a square from the coproduct of $U(\\partial\\Delta^r)\\to U(\\Delta^r)$ indexed by $H_r$ to $D_{r+1}\\to D_{r+2}$. Each copy sends $0,1$ to $x_b,y_b$, even when these objects coincide. For $r=0$ the boundary is empty; no arrow data are prescribed by its upper map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definition 5.1.4(ii), printed p.27; characteristic maps and their explicit boundaries"
+   }
+  },
+  {
+   "text": "To prove this square is a pushout, fix any small simplicial category $E$. Compatible functors out of its upper and lower left corners amount to a simplicial functor $F:D_{r+1}\\to E$ and a simplex $v_b\\in E(Fx_b,Fy_b)_r$ for each $b\\in H_r$, with $\\beta^*v_b=F(\\beta^*b)$ for every non-surjective $\\beta$. In degree $q$, extend $F$ by sending the new generating bead $\\alpha^*b$ to $\\alpha^*v_b$, and a word to the composite of the images of its factors. The distinctness of the new generators and the free-word description in Steps 3–4 prove that this gives a unique ordinary functor in each degree. For an operator $\\theta:[p]\\to[q]$, the operator on a new generator is $(\\alpha\\theta)^*b$. If $\\alpha\\theta$ is surjective its assigned image is $(\\alpha\\theta)^*v_b$ by the defining rule. If it is not surjective, that simplex lies in the old subcategory and its image is the same expression by the boundary agreement. On old arrows compatibility holds because $F$ is simplicial, and on words it holds because composition is simplicial. Hence the degreewise extensions form a unique simplicial functor $D_{r+2}\\to E$. This is precisely the required mapping-out universal property. In particular it does not use a fixed-object pushout formula or assume distinct endpoints.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definition 5.1.4(ii) and the equivalence following it, printed p.27; explicit mapping-out proof of each mapping-simplex attachment"
+   }
+  },
+  {
+   "text": "Every bead in degree $q$ either belongs to $X$ or has a strict core in some $H_s$ with $s\\leq q$, by Step 3. It therefore lies in $D_{q+2}$. Every morphism is a finite word of such beads, so every degree-$q$ morphism of $B$ lies in that same stage. Objects already lie in $D_1$. Thus the union of the $D_j$ is exactly $B$. To check the categorical colimit, a compatible family of simplicial functors $D_j\\to E$ defines its value on an object or simplex using any stage containing it. Inclusions and compatibility make this independent of the stage; any finite composable family of arrows and its composite lie in a common stage, and every operator is checked in a stage, so this is a unique simplicial functor $B\\to E$. This proves $\\operatorname{colim}_{j<\\omega}D_j\\cong B$. For $b\\in H_r$ its top simplex is a single bead with strict-core dimension $r$; the old graph has no such generator, and uniqueness of words prevents it from being an old composite. Thus the image of each top mapping-cell simplex is outside $D_{r+1}$.",
+   "uses": [
+    "lem-coef-coherent-realization-bead-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definition 5.1.4(ii), printed p.27; exhaustion and novelty from the bead normal form"
+   }
+  },
+  {
+   "text": "The missing vertex set and each $H_r$ are small: they are subsets of the vertices and of one degree of the mapping simplicial sets of the small category $B$. Each stage is a simplicial subcategory of $B$ and is therefore small in the same universe. Steps 2 and 6 provide the required small coproducts, with only countably many stages indexed by the nonnegative dimensions. If $i$ is bijective on vertices, the missing vertex set is empty, so choose $D_1=D_0$. The first transition is the identity, the pushout of an empty coproduct, and all later stages have the same object set with identity object maps. There are then no object cells. None of the construction uses horn fillers, weak equivalences or finite-dimensionality.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definition 5.1.4(ii) and §1.1 size conventions; fixed-object case as in the proof of Theorem 5.2.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-realization-bead-normal-form",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+  "place": "§5.1, Definition 5.1.4 and its reader-left equivalence, Lemma 5.1.9 and Proposition 5.1.12. Online source read; the relative cellular construction and each universal-property verification are written out by the worker. Archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +146,52 @@
    "results": "{\"t\": \"2026-10-17T05:28:20Z\", \"tool\": \"leanfinder\", \"query\": \"An inclusion of simplicial computads admits a sequential cellular presentation by two object simplicial categories with hom the boundary of a simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.IsStrictSegal\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\", \"SSet.horn.isColimit\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\"], \"digest\": \"9f802fbbb04e6024\"}",
    "date": "2026-10-17",
    "verdict": "no match: semantic hits are boundary/horn generators and cofibrations of simplicial sets, not a cellular presentation in simplicial categories. Loogle and grep find only SimplicialThickening. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-137,153-204: the subset-poset simplicial categories and nerve are defined, but no coherent-realization inclusion or computad cell theorem is stated. RelativeCellComplex/Basic.lean:44-55 defines general cell complexes without proving this map has one. The second semantic phrasing also yields no match."
+  },
+  {
+   "tool": "grep",
+   "query": "computad|atomic.*arrow|coherentRealization|SimplicialThickening",
+   "results": "{\"t\": \"2026-10-17T05:57:48Z\", \"tool\": \"grep\", \"query\": \"computad|atomic.*arrow|coherentRealization|SimplicialThickening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"0e82fb4db9393861\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits; they concern simplicial-set monomorphisms, horns, ordinary nerves or the subset-poset thickening of a linear order. SimplicialNerve.lean:54–204 defines the model on simplices and its nerve, but no relative cell presentation for arbitrary coherent realizations. RelativeCellComplex/Basic.lean:44–55 only defines a general cell complex. The second natural-language phrasing also gives no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy coherent realization of a monomorphism is a cellular inclusion of simplicial categories",
+   "results": "{\"t\": \"2026-10-17T05:57:49Z\", \"tool\": \"leansearch\", \"query\": \"The homotopy coherent realization of a monomorphism is a cellular inclusion of simplicial categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.cofibration_iff\", \"SSet.Subcomplex.instMonoι\", \"SSet.Subcomplex.instIsIsoToRangeOfMono\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\"], \"digest\": \"5d9c04ba9618ac52\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits; they concern simplicial-set monomorphisms, horns, ordinary nerves or the subset-poset thickening of a linear order. SimplicialNerve.lean:54–204 defines the model on simplices and its nerve, but no relative cell presentation for arbitrary coherent realizations. RelativeCellComplex/Basic.lean:44–55 only defines a general cell complex. The second natural-language phrasing also gives no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\"",
+   "results": "{\"t\": \"2026-10-17T05:57:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"CategoryTheory.SimplicialThickening.Path\", \"CategoryTheory.SimplicialThickening.as\", \"CategoryTheory.SimplicialThickening.instCategory\", \"CategoryTheory.SimplicialThickening.instCategoryStruct\", \"CategoryTheory.SimplicialThickening.mk\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"CategoryTheory.SimplicialThickening.instCategoryPath\"], \"digest\": \"6b81c4012784104f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits; they concern simplicial-set monomorphisms, horns, ordinary nerves or the subset-poset thickening of a linear order. SimplicialNerve.lean:54–204 defines the model on simplices and its nerve, but no relative cell presentation for arbitrary coherent realizations. RelativeCellComplex/Basic.lean:44–55 only defines a general cell complex. The second natural-language phrasing also gives no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inclusion of simplicial sets induces a relative computad map of homotopy coherent realizations obtained by attaching free mapping simplices",
+   "results": "{\"t\": \"2026-10-17T05:57:49Z\", \"tool\": \"leanfinder\", \"query\": \"An inclusion of simplicial sets induces a relative computad map of homotopy coherent realizations obtained by attaching free mapping simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.ofSimplex₀\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.RelativeMorphism.map\", \"SSet.RelativeMorphism.map_coe\", \"SSet.RelativeMorphism.Homotopy.h\", \"SSet.RelativeMorphism\", \"SSet.RelativeMorphism.HomotopyClass\", \"SSet.RelativeMorphism.ofSimplex₀_map\"], \"digest\": \"65fbd41d1bf3e010\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits; they concern simplicial-set monomorphisms, horns, ordinary nerves or the subset-poset thickening of a linear order. SimplicialNerve.lean:54–204 defines the model on simplices and its nerve, but no relative cell presentation for arbitrary coherent realizations. RelativeCellComplex/Basic.lean:44–55 only defines a general cell complex. The second natural-language phrasing also gives no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial computad subcategory is a sequential composite of pushouts adjoining objects and nondegenerate atomic arrows by their simplicial boundaries",
+   "results": "{\"t\": \"2026-10-17T05:58:26Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial computad subcategory is a sequential composite of pushouts adjoining objects and nondegenerate atomic arrows by their simplicial boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory\", \"SSet.Augmented\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"SSet.StrictSegal\", \"CategoryTheory.nerve\"], \"digest\": \"4f99025a3551f2d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits; they concern simplicial-set monomorphisms, horns, ordinary nerves or the subset-poset thickening of a linear order. SimplicialNerve.lean:54–204 defines the model on simplices and its nerve, but no relative cell presentation for arbitrary coherent realizations. RelativeCellComplex/Basic.lean:44–55 only defines a general cell complex. The second natural-language phrasing also gives no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidification sends a simplicial set inclusion to a relative cell complex of enriched categories freely generated by boundary simplex inclusions",
+   "results": "{\"t\": \"2026-10-17T06:06:41Z\", \"tool\": \"leanfinder\", \"query\": \"Rigidification sends a simplicial set inclusion to a relative cell complex of enriched categories freely generated by boundary simplex inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"CategoryTheory.SimplicialThickening.functor\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\"], \"digest\": \"8b6fb4ee39149401\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SimplicialThickening.functor and SimplicialNerve (SimplicialNerve.lean:153–204) give the simplex model and nerve, not this relative cellular presentation; RelativeCellComplex.Cells.ι (RelativeCellComplex/Basic.lean:59–69) presupposes a cell complex. Boundary/horn classes concern simplicial sets, not enriched-category attachments."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-join-cone-weight-cofibrancy",
@@ -78,5 +217,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coherent-realization-relative-cells",
+  "worker": "stage1",
+  "summary": "Reused the existing bead-normal-form node. Constructed D_1 by adjoining isolated missing vertices, and D_{r+2} by freely adjoining the degeneracies of missing strict r-beads. Verified closure, each boundary map, the pushout universal property, countable exhaustion, novelty of top cells, smallness, and the fixed-vertex variant. No new nodes and no statement changes.",
+  "blueprint": "The existing ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient-adjunction mapping complexes), requires the supporting coherent-diagram foundations. This item realizes the free relative coherent-realization cell presentation used in the join-cone weight cofibrancy branch. Steps 1–3 identify its relative generators, Steps 4–6 construct the cells, and Steps 7–8 verify exhaustion and the fixed-object clause."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-52fc4564d",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-52fc4564d (reviewer sub-agent of L); spot-checked: I read the whole delivery against Riehl–Verity. The authors' URL returned 403, so I used the arXiv 1808.09834 copy. Source places check out: Def. 5.1.1, Ex. 5.1.3 (2[X] = U), Def. 5.1.4(ii) and its reader-left equivalence (p.27), Ex. 5.1.7, Lemma 5.1.9 (p.29) and Prop. 5.1.12 (atomic arrows have n>r and a strict bead shape, p.30). The statement, stmt_deps, blueprint and unit are unchanged against the side DAG; only the proof fields were added. All eight steps are correct from the cited statements: the bead normal form (injectivity and image clauses, free words, degeneracies repeat flags) and def-cbc (monotone-map simplices, universes). Step 2 is a coproduct pushout. Step 3 gives a unique strict core. Step 4 sets up the induction properly, and faces of a strict r-bead are words of degree r-1 beads with cores of dimension at most r-1, even when a face of sigma is degenerate. Step 6 proves the pushout by mapping out, with the surjective and non-surjective operator cases both checked and equal endpoints allowed. Step 7 proves the union is the colimit and that top cells are new. Step 8 covers smallness and the vertex-bijective case. Small cases tested: boundary of Delta^2 inside Delta^2 gives one U(boundary Delta^1)->U(Delta^1) cell, matching the source's Ex. 5.1.10; a single edge or loop gives one r=0 cell; X=Y, empty X and infinite dimension all behave. There are no new nodes. The duplicate candidates (fixed-vertex cofibrations, rigidification boundary cube, degreewise colimits, simplicial-interval-lifting) do not state the item. The parent join-cone-weight-cofibrancy needs exactly the clauses provided. There are no off-unit statements and no SGA source, so no tool_uses are needed. No base-change morphism or coefficient category is involved. No fixes."
  }
 }

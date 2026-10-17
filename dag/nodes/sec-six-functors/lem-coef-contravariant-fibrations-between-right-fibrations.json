@@ -12,9 +12,111 @@
   "def-coef-infinity-fibrations",
   "lem-coef-simplicial-right-fibration-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Two model structures on the same category $\\mathrm{sSet}_{/S}$ occur: $M$, the contravariant model structure of [lem-coef-simplicial-right-fibration-presentation] named in the statement (weak equivalences by the mapping tests $\\operatorname{Fun}_{/S}(-,Z)$), and $M'$, the cone-defined model structure of [lem-coef-contravariant-slice-model]. Both statements give the monomorphisms (degreewise injections) as cofibrations, and both say that the fibrant objects are exactly the right fibrations $X\\to S$. Hence [lem-coef-model-structure-determined-by-fibrant-objects] gives that $M$ and $M'$ have the same weak equivalences, fibrations and trivial cofibrations. It therefore suffices to prove the assertion for $M'$. In Steps 2, 3, 6 and 7 below, model fibration, trivial cofibration, factorization and weak equivalence refer to $M'$, as stated in [lem-coef-contravariant-slice-model]; Step 5 uses [lem-coef-simplicial-right-fibration-presentation] only for its separate statements about $\\mathsf{RFib}(Y)$ and Kan mapping complexes.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-contravariant-slice-model",
+    "lem-coef-model-structure-determined-by-fibrant-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.3.14, printed pp. 86–87; the homotopy-extension argument also used in Corollary 2.2.3.12."
+   }
+  },
+  {
+   "text": "First prove the forward implication, also for later use with another domain. If $v:V\\to Y$ is a contravariant model fibration over $S$, give any lifting square from a right horn $\\Lambda_i^n\\hookrightarrow\\Delta^n$, $0<i\\leq n$, to $v$ the structure map to $S$ obtained by composing its bottom map with $r$. The horn inclusion is right anodyne by [def-coef-infinity-right-anodyne], hence a trivial cofibration over $S$ by [lem-coef-contravariant-slice-model]. The defining lifting property of a model fibration supplies the required filler. Thus $v$ lifts every right horn, which is exactly the right-fibration condition of [def-coef-infinity-fibrations]. In particular this proves the forward implication for $u$.",
+   "uses": [
+    "def-coef-infinity-right-anodyne",
+    "lem-coef-contravariant-slice-model",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.3.14, printed pp. 86–87; the homotopy-extension argument also used in Corollary 2.2.3.12."
+   }
+  },
+  {
+   "text": "For the converse assume that $u:X\\to Y$ is a right fibration. In the model structure of [lem-coef-contravariant-slice-model], factor $u$ as $X\\xrightarrow{i}X'\\xrightarrow{q}Y$ with $i$ a trivial cofibration and $q$ a fibration, all over $S$. Step 2 makes $q$ a right fibration. The composite $rq$ is a right fibration: in a horn problem first lift the projected upper horn through $r$, and then lift that resulting simplex through $q$, using [def-coef-infinity-fibrations]. Consequently $X,X',Y$ are right fibrations over $S$. The slice-model statement gives Kan complexes $X_s,X'_s,Y_s$ for every vertex $s$ of $S$, and, since $i$ is a model weak equivalence, it gives a weak homotopy equivalence $i_s:X_s\\to X'_s$ for each such $s$.",
+   "uses": [
+    "lem-coef-contravariant-slice-model",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.3.14, printed pp. 86–87; the homotopy-extension argument also used in Corollary 2.2.3.12."
+   }
+  },
+  {
+   "text": "Fix $s\\in S_0$. The restrictions $u_s:X_s\\to Y_s$ and $q_s:X'_s\\to Y_s$ are right fibrations: a right-horn square in either pullback is a square for $u$ or $q$, whose filler lies in the pullback because its composite to $S$ is the prescribed constant simplex at $s$. Since $Y_s$ is Kan, [lem-cbc-right-fibration-space-fiber] makes both restrictions Kan fibrations. Apply [lem-coef-kan-fibration-arbitrary-base-fibers] to the map $i_s$ between these two Kan fibrations over the common base $Y_s$. It is a weak homotopy equivalence by Step 3, so every strict fiber map is a weak homotopy equivalence. For a vertex $y\\in Y_s$, these strict fibers are exactly $X_y=X\\times_Y\\{y\\}$ and $X'_y=X'\\times_Y\\{y\\}$: specifying $u(x)=y$ already specifies $p(x)=r(y)=s$, degree by degree. Every vertex $y\\in Y$ has such an $s=r(y)$, so $i_y:X_y\\to X'_y$ is weak for every $y$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-coef-kan-fibration-arbitrary-base-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.3.14, printed pp. 86–87; the homotopy-extension argument also used in Corollary 2.2.3.12."
+   }
+  },
+  {
+   "text": "Regard $i$ as a map over $Y$ between the right fibrations $u$ and $q$. Step 4 and the fiberwise equivalence criterion of [lem-coef-simplicial-right-fibration-presentation], applied with base $Y$, give a simplicial homotopy inverse $g:X'\\to X$ over $Y$ and a simplicial homotopy between $gi$ and $1_X$ over $Y$. We may take its orientation to be $h:X\\times\\Delta^1\\to X$ with $h_0=1_X$ and $h_1=gi$. Indeed that same cited statement makes $\\operatorname{Fun}_{/Y}(X,X)$ Kan. If the available edge is oriented $gi\\to1_X$, fill the $2$-horn with vertices $(gi,1_X,gi)$, edge $01$ that edge and edge $02$ the identity at $gi$; the missing edge $12$ has the required reversed orientation. Thus $ug=q$ and $uh=u\\operatorname{pr}_X$ hold strictly.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.3.14, printed pp. 86–87; the homotopy-extension argument also used in Corollary 2.2.3.12."
+   }
+  },
+  {
+   "text": "To check the fibration lifting condition over $S$, let $j:A\\hookrightarrow B$ be any trivial cofibration of that slice and let $a:A\\to X$, $b:B\\to Y$ satisfy $ua=bj$. Since $q$ is a model fibration, [lem-coef-contravariant-slice-model] gives $e:B\\to X'$ with $ej=ia$ and $qe=b$. Put $e'=ge$. Then $ue'=b$ and $e'j=gia$. On $A\\times\\Delta^1$ use $h(a\\times1)$, and on $B\\times\\{1\\}$ use $e'$. They agree on $A\\times\\{1\\}$ because $h_1a=gia=e'j$. Their common composite to $Y$ is the restriction of $b\\operatorname{pr}_B:B\\times\\Delta^1\\to Y$. These formulas give a well-defined upper map from $(A\\times\\Delta^1)\\cup_{A\\times\\{1\\}}(B\\times\\{1\\})$ to $X$.",
+   "uses": [
+    "lem-coef-contravariant-slice-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.3.14, printed pp. 86–87; the homotopy-extension argument also used in Corollary 2.2.3.12."
+   }
+  },
+  {
+   "text": "The inclusion of that union into $B\\times\\Delta^1$ is right anodyne. Specifically $\\{1\\}\\hookrightarrow\\Delta^1$ is the right horn $\\Lambda_1^1\\hookrightarrow\\Delta^1$, hence is right anodyne by [def-coef-infinity-right-anodyne], and $j$ is a monomorphism by [lem-coef-contravariant-slice-model]. Apply the pushout-product statement [lem-coef-infinity-right-anodyne-product] to this horn and $j$, interchanging the two factors of the degreewise products. By [lem-coef-right-anodyne-lifting-characterization], the right fibration $u$ lifts against this right anodyne map. Let $H:B\\times\\Delta^1\\to X$ be a filler for the data of Step 6. Its endpoint $H_0$ satisfies $H_0j=a$ and $uH_0=b$, so solves the original lifting problem. This works for every trivial cofibration in the slice. The fibration characterization in [lem-coef-contravariant-slice-model] proves that $u$ is a contravariant model fibration. All uses of Kan hypotheses concerned the strict vertex fibers, not $S$ or $Y$.",
+   "uses": [
+    "def-coef-infinity-right-anodyne",
+    "lem-coef-contravariant-slice-model",
+    "lem-coef-infinity-right-anodyne-product",
+    "lem-coef-right-anodyne-lifting-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.3.14, printed pp. 86–87; the homotopy-extension argument also used in Corollary 2.2.3.12."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-right-anodyne",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-contravariant-slice-model",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-kan-fibration-arbitrary-base-fibers",
+  "lem-coef-model-structure-determined-by-fibrant-objects",
+  "lem-coef-right-anodyne-lifting-characterization",
+  "lem-coef-simplicial-right-fibration-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proof of HTT Corollary 2.2.3.14, pp. 86–87, using existing DAG statements for its auxiliary facts; online source read but not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +152,45 @@
    "results": "{\"t\": \"2026-10-17T05:22:26Z\", \"tool\": \"leanfinder\", \"query\": \"Given right fibrations X and Y over a base S an over base map X to Y is a contravariant model fibration exactly when it lifts the positive right horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.fibrations_over_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"83794b706282f811\"}",
    "date": "2026-10-17",
    "verdict": "no match: read SimplicialSet/CategoryWithFibrations.lean:34-100. SSet.modelCategoryQuillen.fibration_iff uses all horns in the Kan model, not the right horns or the contravariant model. ModelCategory/Over gives inherited fibrations only and no comparison to right fibrations. The second semantic search has the same mismatch."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between right fibrations over an arbitrary simplicial set is a contravariant model fibration if and only if it lifts every positive horn",
+   "results": "{\"t\": \"2026-10-17T05:56:07Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between right fibrations over an arbitrary simplicial set is a contravariant model fibration if and only if it lifts every positive horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"b7b49359d5de3386\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:34–100: J and fibration_iff test all horns in the Kan model. Read ModelCategory/Over.lean:14–24,65–78: inherited slice fibrations, with no contravariant model or right-horn comparison. General model-category/opposite-category hits do not state the claimed specialized equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Contravariant model fibrations between right fibrations of simplicial sets are right fibrations",
+   "results": "{\"t\": \"2026-10-17T05:56:15Z\", \"tool\": \"leansearch\", \"query\": \"Contravariant model fibrations between right fibrations of simplicial sets are right fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.cofibrations_op\", \"HomotopicalAlgebra.fibrations_op\", \"HomotopicalAlgebra.cofibration_op_iff\", \"HomotopicalAlgebra.instFibrationUnopOfCofibrationOpposite\", \"HomotopicalAlgebra.fibration_unop_iff\", \"HomotopicalAlgebra.fibration_op_iff\", \"HomotopicalAlgebra.instFibrationOppositeOpOfCofibration\", \"HomotopicalAlgebra.trivialFibrations_op\"], \"digest\": \"e596c199a66d426f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:34–100: J and fibration_iff test all horns in the Kan model. Read ModelCategory/Over.lean:14–24,65–78: inherited slice fibrations, with no contravariant model or right-horn comparison. General model-category/opposite-category hits do not state the claimed specialized equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RightFibration\"",
+   "results": "{\"t\": \"2026-10-17T05:56:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"RightFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:34–100: J and fibration_iff test all horns in the Kan model. Read ModelCategory/Over.lean:14–24,65–78: inherited slice fibrations, with no contravariant model or right-horn comparison. General model-category/opposite-category hits do not state the claimed specialized equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "contravariant.*model|right[Ff]ibration|right_fibration",
+   "results": "{\"t\": \"2026-10-17T05:56:15Z\", \"tool\": \"grep\", \"query\": \"contravariant.*model|right[Ff]ibration|right_fibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:34–100: J and fibration_iff test all horns in the Kan model. Read ModelCategory/Over.lean:14–24,65–78: inherited slice fibrations, with no contravariant model or right-horn comparison. General model-category/opposite-category hits do not state the claimed specialized equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fibration in the contravariant model structure on simplicial sets over S is characterized by lifting right horns when the source and target are right fibrations",
+   "results": "{\"t\": \"2026-10-17T05:56:29Z\", \"tool\": \"leanfinder\", \"query\": \"A fibration in the contravariant model structure on simplicial sets over S is characterized by lifting right horns when the source and target are right fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.fibration_iff\"], \"digest\": \"d5aaa8aae9d6f9d9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:34–100: J and fibration_iff test all horns in the Kan model. Read ModelCategory/Over.lean:14–24,65–78: inherited slice fibrations, with no contravariant model or right-horn comparison. General model-category/opposite-category hits do not state the claimed specialized equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-relative-cone-presheaf-fibers",
@@ -82,5 +219,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-contravariant-fibrations-between-right-fibrations",
+  "worker": "stage1",
+  "summary": "Kept the exact arbitrary-base statement. Expanded the horn-test, factorization, change from S-fibers to Y-fibers, homotopy inverse over Y and endpoint correction. Reused existing nodes for every non-elementary input; created no nodes. Checked the source online, attachment absence, Mathlib searches and dependency acyclicity.",
+  "blueprint": "Realizes the supporting contravariant-model comparison in GHN Proposition 9.7, within the recorded ancestor place: the presentable Cartesian-fibration construction in proof paragraph 2 of prop-coef-integral-exceptional-adjoint. The six steps expand HTT Corollary 2.2.3.14 used there.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic horn-lifting theorem: a right fibration over a Kan complex is a Kan fibration. Applied only to u_s and q_s; no replacement of the unit route, and no node of this unit supplies that general horn comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-right-fibration-space-fiber"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-7d5867f6c",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-7d5867f6c (reviewer sub-agent of L); spot-checked: Read the whole item, the full statement of every cited node and the proof of lem-coef-simplicial-right-fibration-presentation. HTT 2.2.3.14 is not in literature/ (recorded WANTED, proof_origin agent), so each step was checked independently against the cited DAG statements. One fault (C3/C4). The statement names the contravariant model structure of lem-coef-simplicial-right-fibration-presentation, whose weak equivalences are defined by Fun_{/S} mapping tests. The factorization, the right-anodyne trivial cofibrations and the fibration criterion used in the proof all come from the cone-defined structure of lem-coef-contravariant-slice-model. Only the presentation node's proof identifies the two, and a step may use a node's statement only. Fixed by a new first step: both structures have monomorphisms as cofibrations and right fibrations as fibrant objects, so the existing same-unit node lem-coef-model-structure-determined-by-fibrant-objects gives the same fibrations, weak equivalences and trivial cofibrations. Later step references were renumbered and proof_deps updated; a DFS confirms no cycle. Verified the remaining steps. Horn squares over S lift via the right-anodyne trivial cofibrations. Factor u=qi; rq is a right fibration by two horn lifts. u_s and q_s are Kan fibrations over the Kan complex Y_s via lem-cbc-right-fibration-space-fiber. lem-coef-kan-fibration-arbitrary-base-fibers gives weak fibers over each y, with X_s×_{Y_s}{y}=X×_Y{y}. The RFib(Y) criterion gives g and h over Y, and the Λ^2_0 orientation fix is correct. The endpoint gluing equations hold (ue'=b, h_1a=gia=e'j). {1}⊂Δ^1 is Λ^1_1; the pushout product with the mono j is right anodyne and u lifts against it; H_0 solves the original square. Edge cases: empty S, empty fibers, Y a point, n=1. No Kan or quasicategory hypothesis on S or Y is used. No new nodes and no duplicate (grep). Tool use lem-cbc-right-fibration-space-fiber accepted (generic black box, already used in this unit by lem-coef-contravariant-slice-model). The report claims created was changed to Q42, but the file keeps created.item=lem-coef-relative-cone-presheaf-fibers/NP, which is correct, so nothing was changed there. Fixed file: fixes/dag/nodes/sec-six-functors/lem-coef-contravariant-fibrations-between-right-fibrations.json (proof and proof_deps only).; 1 file(s) fixed by the reviewer"
  }
 }
