@@ -55,7 +55,8 @@ noncomputable def varyingBaseSystem : LimitStageSystem cS.pt W I where
 /-- The fixed-base system over `Sⱼ`, pulled back to `S`, with coefficients from `W`: the stages
 `(Tₖ, Sⱼ, Tₖ ⟶ Tⱼ ⟶ Sⱼ, πⱼ, Tₖ ⟶ Tⱼ ⟶ W)` for `k ⟶ j`. -/
 noncomputable abbrev varyingBaseFixedSystem (j : I) : LimitStageSystem cS.pt W (Over j) :=
-  (fixedBaseSystem (g.app j) (cS.π.app j) (Over.post (X := j) T) (cT.overPost j)).mapW (w.app j)
+  (fixedBaseSystem (k := g.app j) (p := cS.π.app j) (D := Over.post (X := j) T)
+    (c := cT.overPost j)).mapW (w.app j)
 
 include hg₀ in
 lemma isStalkColimit_varyingBaseFixedSystem [IsCofiltered I] (hS : IsLimit cS)
@@ -84,7 +85,7 @@ lemma isStalkColimit_varyingBaseFixedSystem [IsCofiltered I] (hS : IsLimit cS)
     (Functor.Initial.isLimitWhiskerEquiv (Over.forget j) cT).symm hT
   exact LimitStageSystem.isStalkColimit_mapW (w.app j) _ (LimitStageSystem.isStalkColimit_of_iso _
     ((((w.app j)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app G)
-    (isStalkColimit_fixedBaseSystem Λ (g.app j) _ q _ _ (cS.π.app j) hc))
+    (isStalkColimit_fixedBaseSystem Λ (k := g.app j) (q := q) (p := cS.π.app j) (hc := hc)))
 
 /-- The `[*]`-system `(T, Sⱼ, g₀ ≫ πⱼ, πⱼ, 𝟙 ≫ w₀)`. -/
 noncomputable abbrev varyingBaseStarSystem : LimitStageSystem cS.pt W I :=

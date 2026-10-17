@@ -101,7 +101,7 @@ lemma transition_comapB {α β : LimitStage B W} (φ : Hom α β)
     ((Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩).app (D+((β.w)^*[ModuleCat.{u + 1} Λ]).obj K) ≫
       R+((α.g)_*[ModuleCat.{u + 1} Λ]).map
         ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) φ.t β.w α.w φ.ww.symm).inv.app K))
-  simp only [Functor.comp_map] at n
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at n
   simp only [transition_app, comapBIso, Iso.symm_hom, Iso.app_inv, Functor.map_comp,
     Category.assoc]
   rw [n, reassoc_of% hA']
@@ -142,8 +142,8 @@ lemma isStalkColimit_comapB [IsCofiltered I] (𝒮 : LimitStageSystem B W I)
     have n := (((b)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).hom.naturality
       ((LimitStage.transition Λ φ).app K)
     simp only [Functor.comp_map] at n
-    simp only [e, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, reassoc_of% n,
-      ← Functor.map_comp, LimitStage.transition_comapB]
+    simp only [e, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
+    rw [reassoc_of% n, ← Functor.map_comp, LimitStage.transition_comapB, Functor.map_comp]
   have he' {α β : LimitStage B W} (φ : LimitStage.Hom α β) :
       (e β).inv ≫ ((b)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.homologyFunctor _ q).map
         ((LimitStage.transition Λ φ).app K)) =
@@ -179,18 +179,9 @@ lemma isIso_homology_upperStar_map_iff {X Y : Scheme.{u}} (π : X ⟶ Y) (q : �
     {L L' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (f : L ⟶ L') :
     IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map (D+((π)^*[ModuleCat.{u + 1} Λ]).map f)) ↔
-      IsIso (((π)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.homologyFunctor _ q).map f)) := by
-  have n := (((π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).hom.naturality f
-  simp only [Functor.comp_map] at n
-  constructor
-  · intro _
-    haveI : IsIso (((π)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.homologyFunctor _ q).map f) ≫
-        (((π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).hom.app L') := by
-      rw [n]; infer_instance
-    exact IsIso.of_isIso_comp_right _
-      ((((π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).hom.app L')
-  · intro _
-    exact IsIso.of_isIso_fac_left n.symm
+      IsIso (((π)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.homologyFunctor _ q).map f)) :=
+  (NatIso.isIso_map_iff (((π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q)
+    f).symm
 
 /-- The transition map of a morphism of stages is an isomorphism in degree `q` as soon as the
 derived base-change map of its square is. -/
@@ -223,8 +214,7 @@ lemma isIso_homology_baseChange_of_isIso {S T W' : Scheme.{u}} {g : T ⟶ S} {w 
     ((DerivedCategory.Plus.homologyFunctor _ q).map
       ((Etale.baseChange (ModuleCat.{u + 1} Λ) ⟨φ.wg⟩).app
         (D+((β.w)^*[ModuleCat.{u + 1} Λ]).obj K)))
-  simp only [Functor.id_map] at n
-  exact IsIso.of_isIso_fac_left n
+  exact (NatIso.isIso_map_iff (Etale.upperStarId (ModuleCat.{u + 1} Λ) S) _).1 h3
 
 end LimitStage
 
@@ -239,21 +229,41 @@ lemma isIso_baseChangeHomologyMap_iff_upperStar {X S T Y : Scheme.{u}} {p : X �
         ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
           (D+((w)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))) := by
   let ι := (((w)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app G
-  have n := congrArg (DerivedCategory.Plus.homologyFunctor _ q).map
-    ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).naturality ι.hom)
-  simp only [Functor.map_comp, Functor.comp_map] at n
+  have n : (DerivedCategory.Plus.homologyFunctor _ q).map (D+((p)^*[ModuleCat.{u + 1} Λ]).map
+        (R+((g)_*[ModuleCat.{u + 1} Λ]).map ι.hom)) ≫
+      (DerivedCategory.Plus.homologyFunctor _ q).map
+        ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj (((w)^*[ModuleCat.{u + 1} Λ]).obj G))) =
+      (DerivedCategory.Plus.homologyFunctor _ q).map
+        ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+          (D+((w)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj G))) ≫
+      (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+        (D+((e)^*[ModuleCat.{u + 1} Λ]).map ι.hom)) := by
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    exact congrArg _ ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).naturality ι.hom)
   change IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
       ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         ((DerivedCategory.Plus.singleFunctor _ 0).obj (((w)^*[ModuleCat.{u + 1} Λ]).obj G)))) ↔ _
   constructor
   · intro _
-    have h1 := n.symm
-    rw [← IsIso.eq_comp_inv] at h1
-    rw [h1]
-    infer_instance
+    have : IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
+        ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+          (D+((w)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj G))) ≫
+      (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+        (D+((e)^*[ModuleCat.{u + 1} Λ]).map ι.hom))) := by
+      rw [← n]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ ((DerivedCategory.Plus.homologyFunctor _ q).map
+      (R+((h)_*[ModuleCat.{u + 1} Λ]).map (D+((e)^*[ModuleCat.{u + 1} Λ]).map ι.hom)))
   · intro _
-    rw [← IsIso.eq_inv_comp] at n
-    rw [n]
-    infer_instance
+    have : IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map (D+((p)^*[ModuleCat.{u + 1} Λ]).map
+        (R+((g)_*[ModuleCat.{u + 1} Λ]).map ι.hom)) ≫
+      (DerivedCategory.Plus.homologyFunctor _ q).map
+        ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj (((w)^*[ModuleCat.{u + 1} Λ]).obj G)))) := by
+      rw [n]
+      infer_instance
+    exact IsIso.of_isIso_comp_left ((DerivedCategory.Plus.homologyFunctor _ q).map
+      (D+((p)^*[ModuleCat.{u + 1} Λ]).map (R+((g)_*[ModuleCat.{u + 1} Λ]).map ι.hom))) _
 
 end AlgebraicGeometry.Etale

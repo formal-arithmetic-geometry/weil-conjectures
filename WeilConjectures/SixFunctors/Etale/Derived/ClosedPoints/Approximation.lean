@@ -165,7 +165,8 @@ noncomputable def isColimitSupportedSectionsCocone {K : Type u} [Field K] {X : S
   have : IsFiltered (AsSmall.{u + 1} (FiniteClosedPoints X)) :=
     IsFiltered.of_equivalence AsSmall.equiv
   have : HasColimitsOfShape (AsSmall.{u + 1} (FiniteClosedPoints X))
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := HasColimitsOfSize.has_colimits_of_shape _
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    HasColimitsOfSize.has_colimits_of_shape _
   have : HasColimit D := HasColimitsOfShape.has_colimit D
   let t := colimit.desc D (supportedSectionsCocone F)
   let α : D ⟶ (Functor.const _).obj F := (supportedSectionsCocone F).ι
@@ -173,13 +174,15 @@ noncomputable def isColimitSupportedSectionsCocone {K : Type u} [Field K] {X : S
     inferInstanceAs (Mono (supportedSectionsι F _))
   have : Mono α := NatTrans.mono_of_mono_app α
   have ht : Mono t :=
-    colim.map_mono' α (colimit.isColimit D) (isColimitConstCocone _ F) t (fun S ↦ by simp [t, α])
+    colim.map_mono' α (colimit.isColimit D) (isColimitConstCocone _ F) t
+      (fun S ↦ by simp [t, α])
   have : Epi t := by
     refine (Sheaf.isLocallySurjective_iff_epi' (ModuleCat.{u + 1} Λ) t).1 ⟨fun {W} s ↦ ?_⟩
     rw [mem_smallEtaleTopology_iff]
     intro w
     obtain ⟨V, g, hw, S, hSf, hSc, z, hz⟩ := exists_supportedSectionsι_app_eq_map F p hF s w
-    refine ⟨V, g, ⟨(colimit.ι D (AsSmall.up.obj (⟨S, hSf, hSc⟩ : FiniteClosedPoints X))).hom.app (op V) z, ?_⟩, hw⟩
+    let S' : FiniteClosedPoints X := ⟨S, hSf, hSc⟩
+    refine ⟨V, g, ⟨(colimit.ι D (AsSmall.up.obj S')).hom.app (op V) z, ?_⟩, hw⟩
     rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
       ← ObjectProperty.FullSubcategory.comp_hom, colimit.ι_desc]
     exact hz

@@ -95,7 +95,8 @@ theorem isGloballyGenerated_of_epi_sigmaDesc {X : Scheme.{u}} {ι : Type w}
   refine ⟨fun {T} g h e ↦ ?_⟩
   refine (cancel_epi (Sigma.desc ψ)).1 (Sigma.hom_ext _ _ fun i ↦ ?_)
   have : Epi (globalSectionsEvaluation Λ X (G i)) := hG i
-  rw [Sigma.ι_desc_assoc, Sigma.ι_desc_assoc, ← cancel_epi (globalSectionsEvaluation Λ X (G i)),
+  rw [Sigma.ι_desc_assoc, Sigma.ι_desc_assoc,
+    ← cancel_epi (globalSectionsEvaluation Λ X (G i)),
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i),
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i), e]
 
@@ -204,20 +205,23 @@ lemma epi_upperStar_map_globalSectionsEvaluation {X : Scheme.{u}} {k : Type u} [
 /-- **Sheaves supported on finitely many closed points split.** Let `U` be an open subset of a
 scheme `X` whose complement is a finite set of closed points, and `G` an étale sheaf of
 `Λ`-modules on `X` whose restriction to `U` vanishes. Writing `iₓ : Spec κ(x) ⟶ X` for the
-points `x ∉ U`, the units assemble to an isomorphism `G ≅ ⨁ₓ iₓ_* iₓ^* G`, as can be checked
-after restricting to `U` and to every point `x` (compare
+points `x ∉ U`, the units assemble to an isomorphism `G ≅ ⨁ₓ iₓ_* iₓ^* G`, as can be
+checked after restricting to `U` and to every point `x` (compare
 `AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar`). -/
 theorem isIso_biproductLift_unit_of_isZero_upperStar {X : Scheme.{u}} (U : X.Opens)
-    [Finite {x : X // x ∉ U}] [HasFiniteBiproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))]
+    [Finite {x : X // x ∉ U}]
+    [HasFiniteBiproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))]
     (hcl : ∀ x ∉ U, IsClosed ({x} : Set X))
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hG : IsZero ((U.ι)^*[ModuleCat.{u + 1} Λ].obj G)) :
     IsIso (biproduct.lift fun x : {x : X // x ∉ U} ↦
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (X.fromSpecResidueField x.1)).unit.app G) := by
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (X.fromSpecResidueField x.1)).unit.app G) := by
   let ι := {x : X // x ∉ U}
   have (x : ι) : IsClosedImmersion (X.fromSpecResidueField x.1) :=
     isClosed_singleton_iff_isClosedImmersion.1 (hcl x.1 x.2)
-  let adj (x : ι) := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (X.fromSpecResidueField x.1)
+  let adj (x : ι) :=
+    upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (X.fromSpecResidueField x.1)
   let G' (x : ι) : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
     (X.fromSpecResidueField x.1)_*[ModuleCat.{u + 1} Λ].obj
       ((X.fromSpecResidueField x.1)^*[ModuleCat.{u + 1} Λ].obj G)
@@ -232,7 +236,6 @@ theorem isIso_biproductLift_unit_of_isZero_upperStar {X : Scheme.{u}} (U : X.Ope
     · exact ⟨none, ⟨y, hy⟩, rfl⟩
     · exact ⟨some ⟨y, hy⟩, IsLocalRing.closedPoint _, X.fromSpecResidueField_apply _ _⟩
   have := Fintype.ofFinite ι
-  change IsIso φ
   refine isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ) a ha φ
     fun o ↦ ?_
   rcases o with _ | x
@@ -283,8 +286,9 @@ closed residue fields, and `G` an étale sheaf of `Λ`-modules on `X` whose rest
 vanishes. Then `G` is globally generated.
 
 Writing `iₓ : Spec κ(x) ⟶ X` for the points `x ∉ U`, the units assemble to an isomorphism
-`G ≅ ⨁ₓ iₓ_* iₓ^* G` (as in `AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar`), so
-each unit `G ⟶ iₓ_* iₓ^* G` is a split epimorphism, in particular surjective on global sections.
+`G ≅ ⨁ₓ iₓ_* iₓ^* G`
+(`AlgebraicGeometry.Etale.isIso_biproductLift_unit_of_isZero_upperStar`), so each unit
+`G ⟶ iₓ_* iₓ^* G` is a split epimorphism, in particular surjective on global sections.
 The cokernel of the evaluation morphism then vanishes after pullback to `U` (where `G`
 vanishes) and to every `Spec κ(x)`
 (`AlgebraicGeometry.Etale.epi_upperStar_map_globalSectionsEvaluation`), hence vanishes. -/
@@ -300,7 +304,8 @@ theorem isGloballyGenerated_of_isZero_upperStar {X : Scheme.{u}} (U : X.Opens)
     HasFiniteBiproducts.of_hasFiniteProducts
   have (x : ι) : IsClosedImmersion (X.fromSpecResidueField x.1) :=
     isClosed_singleton_iff_isClosedImmersion.1 (hcl x.1 x.2)
-  let adj (x : ι) := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (X.fromSpecResidueField x.1)
+  let adj (x : ι) :=
+    upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (X.fromSpecResidueField x.1)
   let G' (x : ι) : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
     (X.fromSpecResidueField x.1)_*[ModuleCat.{u + 1} Λ].obj
       ((X.fromSpecResidueField x.1)^*[ModuleCat.{u + 1} Λ].obj G)

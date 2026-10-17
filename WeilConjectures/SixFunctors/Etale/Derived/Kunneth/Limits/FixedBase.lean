@@ -51,8 +51,9 @@ lemma overLowerStarTransition_id (g : T ⟶ S) {T₁ : Scheme.{u}} (π : T₁ �
     rw [Etale.baseChange_eq_derivedBaseChangeMapPlus, Etale.derivedBaseChangeMapPlus_id]
     simp
   rw [Etale.overLowerStarTransition, Etale.lowerStarPlusTransition_eq_baseChange Λ (𝟙 T₁)
-    (π ≫ g) (π ≫ g) (by simp) ⟨by simp⟩, hbc, Category.assoc, Iso.inv_hom_id_app_assoc,
-    ← Functor.map_comp, Etale.upperStarCompDerivedPlus_id_left_inv_app,
+    (π ≫ g) (π ≫ g) (by simp) ⟨by simp⟩, hbc]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  rw [← Functor.map_comp, Etale.upperStarCompDerivedPlus_id_left_inv_app,
     CategoryTheory.Functor.map_id]
 
 /-- The transition map `AlgebraicGeometry.Etale.higherDirectImageOverMap` along an identity is
@@ -61,7 +62,7 @@ lemma higherDirectImageOverMap_id (g : T ⟶ S)
     (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : Over T) :
     Etale.higherDirectImageOverMap Λ g G q (𝟙 U) = 𝟙 _ := by
   have h := Etale.homologyFunctor_map_overLowerStarTransition Λ g G q (𝟙 U)
-  rw [overLowerStarTransition_id Λ g U.hom (𝟙 U).left rfl, CategoryTheory.Functor.map_id,
+  rw [overLowerStarTransition_id Λ g U.hom _ (Over.id_left U), CategoryTheory.Functor.map_id,
     Category.id_comp] at h
   rw [← cancel_epi ((DerivedCategory.Plus.homologyFunctor _ q).map
     (R+((U.hom ≫ g)_*[ModuleCat.{u + 1} Λ]).map
@@ -163,7 +164,7 @@ theorem isStalkColimit_fixedBaseSystem [IsCofiltered I]
     [∀ i, QuasiCompact ((D.obj i).hom ≫ k)] [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]
     (hc : IsLimit ((Over.forget W).mapCone c)) [QuasiCompact (c.pt.hom ≫ k)]
     [QuasiSeparated (c.pt.hom ≫ k)] :
-    (fixedBaseSystem k p D c).IsStalkColimit Λ
+    (fixedBaseSystem (k := k) (p := p) (D := D) (c := c)).IsStalkColimit Λ
       ((DerivedCategory.Plus.singleFunctor _ 0).obj G) q := by
   have hcol := isColimitOfPreserves ((p)^*[ModuleCat.{u + 1} Λ])
     (isColimitFixedBaseCocone Λ k G q D c hc)

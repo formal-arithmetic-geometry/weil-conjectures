@@ -60,7 +60,8 @@ restriction are those of `K` at the points of `U`. -/
 theorem mem_essImage_lowerStar_iff_isZero_sheafFiber {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (K : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (i)_*[ModuleCat.{u + 1} Λ].essImage K ↔
-      ∀ x ∉ Set.range i.base, IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj K) := by
+      ∀ x ∉ Set.range i.base,
+        IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj K) := by
   let U : X.Opens := ⟨(Set.range i.base)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
   have hU : Set.range U.ι.base = (Set.range i.base)ᶜ := Scheme.Opens.range_ι U
   -- the stalk of `K` at a point of `U` is a stalk of `U^* K`
@@ -76,7 +77,7 @@ theorem mem_essImage_lowerStar_iff_isZero_sheafFiber {X Z : Scheme.{u}} (i : Z �
   · rintro ⟨G, ⟨e⟩⟩ x hx
     refine (hfib _ x hx ?_).of_iso ((pointSmallEtale _).sheafFiber.mapIso e).symm
     exact isZero_upperStar_lowerStar_of_disjoint_range _ U.ι i
-      (by rw [hU]; exact disjoint_compl_left) G
+      (hU ▸ disjoint_compl_left) G
   · intro h
     refine mem_essImage_lowerStar_of_isZero_upperStar (j := U.ι) i (by rw [hU, compl_compl]) ?_
     refine isZero_of_forall_isZero_sheafFiber _ fun y ↦ ?_

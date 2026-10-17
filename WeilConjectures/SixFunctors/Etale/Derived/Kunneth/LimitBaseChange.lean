@@ -356,6 +356,79 @@ lemma Scheme.IsTorsionSheafOfInvertibleOrder.upperStar {S S' T T' : Scheme.{u}} 
       rw [← ModuleCat.comp_apply, ψ.hom_inv_id, ModuleCat.id_apply]
     rw [← h2, h1, map_zero]
 
+/-- Smooth base change along a limit of smooth schemes, for a system given as a functor
+`X : I ⥤ Scheme` with a cone of morphisms `p : X ⟶ S` (blueprint `lem-kun-0f09`, see
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth`). The base `S` is
+arbitrary: the statement is local on `S` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale_cover`)
+and holds over affine opens by
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs`. -/
+theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' {S T : Scheme.{u}} (g : T ⟶ S)
+    [QuasiCompact g] [QuasiSeparated g] {I : Type u} [Category.{u} I] [IsCofiltered I]
+    (X : I ⥤ Scheme.{u}) (p : X ⟶ (Functor.const I).obj S) [∀ i, Smooth (p.app i)]
+    [∀ i, QuasiCompact (p.app i)] [∀ i, QuasiSeparated (p.app i)]
+    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f)] {cX : Cone X} (hX : IsLimit cX)
+    (p₀ : cX.pt ⟶ S) (hp₀ : ∀ i, cX.π.app i ≫ p.app i = p₀) {Y : Scheme.{u}} {e : Y ⟶ T}
+    {h : Y ⟶ cX.pt} (sq : IsPullback e h g p₀) (q : ℤ)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
+    IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
+  -- the cover of `S` by its affine opens and its pullbacks
+  let a (V : S.affineOpens) := pullback.fst p₀ V.1.ι
+  let f (V : S.affineOpens) := pullback.snd p₀ V.1.ι
+  let b (V : S.affineOpens) := V.1.ι
+  let c' (V : S.affineOpens) := pullback.fst g V.1.ι
+  let g' (V : S.affineOpens) := pullback.snd g V.1.ι
+  let e' (V : S.affineOpens) := pullback.fst (g' V) (f V)
+  let h' (V : S.affineOpens) := pullback.snd (g' V) (f V)
+  refine Etale.isIso_baseChangeHomologyMap_of_etale_cover Λ a (fun x ↦ ?_) f b
+    (fun V ↦ pullback.condition.symm) c' g' (fun V ↦ IsPullback.of_hasPullback g V.1.ι) e' h'
+    (fun V ↦ IsPullback.of_hasPullback (g' V) (f V)) sq q F (fun V ↦ ?_)
+  · obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ := S.isBasis_affineOpens.exists_subset_of_mem_open
+      (Set.mem_univ (p₀.base x)) isOpen_univ
+    obtain ⟨y, hy, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := p₀) (g := V.ι) x
+      ⟨p₀.base x, hxV⟩ rfl
+    exact ⟨⟨V, hV⟩, y, hy⟩
+  · -- the restricted system over the affine open `V`
+    have : QuasiCompact (g' V) :=
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback g V.1.ι).flip inferInstance
+    have : QuasiSeparated (g' V) :=
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback g V.1.ι).flip inferInstance
+    let Xr := Etale.smoothLimitPullbackFunctor V.1.ι X p
+    let pr : Xr ⟶ (Functor.const I).obj V.1 :=
+      { app i := pullback.fst V.1.ι (p.app i)
+        naturality i j φ := by simp [Xr] }
+    let sr : Xr ⟶ X :=
+      { app i := pullback.snd V.1.ι (p.app i)
+        naturality i j φ := by simp [Xr] }
+    have : ∀ i, Smooth (pr.app i) := fun i ↦
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i)) inferInstance
+    have : ∀ i, QuasiCompact (pr.app i) := fun i ↦
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i)) inferInstance
+    have : ∀ i, QuasiSeparated (pr.app i) := fun i ↦
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i)) inferInstance
+    have : ∀ {i j : I} (φ : i ⟶ j), IsAffineHom (Xr.map φ) := fun φ ↦
+      (inferInstance : IsAffineHom ((Etale.smoothLimitPullbackFunctor V.1.ι X p).map φ))
+    let cr : Cone Xr :=
+      { pt := pullback p₀ V.1.ι
+        π :=
+          { app i := pullback.lift (f V) (a V ≫ cX.π.app i)
+              (by rw [Category.assoc, hp₀, ← pullback.condition])
+            naturality i j φ := pullback.hom_ext (by simp [Xr, f])
+              (by simp [Xr, a, cX.w φ]) } }
+    have hcr : IsLimit cr := isLimitOfIsPullbackOfIsConnected (I := I) sr cr cX
+      { hom := a V
+        w i := by simp [cr, sr] }
+      (fun i ↦ by
+        refine IsPullback.of_right ?_ (by simp [cr, sr])
+          (IsPullback.of_hasPullback V.1.ι (p.app i))
+        simp only [cr, pr, pullback.lift_fst, hp₀]
+        exact (IsPullback.of_hasPullback p₀ V.1.ι).flip)
+      hX
+    have : Scheme.IsTorsionSheafOfInvertibleOrder V.1 (((c' V)^*[ModuleCat.{u + 1} Λ]).obj F) :=
+      Scheme.IsTorsionSheafOfInvertibleOrder.upperStar Λ V.1.ι (c' V) F
+    exact Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs Λ (g' V) Xr pr hcr (f V)
+      (fun i ↦ by simp [cr, pr]) (IsPullback.of_hasPullback (g' V) (f V)) q _
+
 /-- Blueprint `lem-kun-0f09`: Smooth base change for limits of smooth schemes.
 
 Let `S' = lim Sᵢ` be a cofiltered limit of schemes `Sᵢ` which are smooth, quasi-compact and
@@ -383,77 +456,16 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth {S T : Scheme.{u}} (
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
-  let X := D ⋙ Over.forget S
-  let p : X ⟶ (Functor.const I).obj S :=
+  let p : D ⋙ Over.forget S ⟶ (Functor.const I).obj S :=
     { app i := (D.obj i).hom
-      naturality i j f := by simp [X] }
-  have hp (V : S.affineOpens) : ∀ i, QuasiCompact (p.app i) := fun i ↦
-    (inferInstance : QuasiCompact (D.obj i).hom)
-  -- the cover of `S` by its affine opens and its pullbacks
-  let a (V : S.affineOpens) := pullback.fst c.pt.hom V.1.ι
-  let f (V : S.affineOpens) := pullback.snd c.pt.hom V.1.ι
-  let b (V : S.affineOpens) := V.1.ι
-  let c' (V : S.affineOpens) := pullback.fst g V.1.ι
-  let g' (V : S.affineOpens) := pullback.snd g V.1.ι
-  let e' (V : S.affineOpens) := pullback.fst (g' V) (f V)
-  let h' (V : S.affineOpens) := pullback.snd (g' V) (f V)
-  refine Etale.isIso_baseChangeHomologyMap_of_etale_cover Λ a (fun x ↦ ?_) f b
-    (fun V ↦ pullback.condition.symm) c' g' (fun V ↦ IsPullback.of_hasPullback g V.1.ι) e' h'
-    (fun V ↦ IsPullback.of_hasPullback (g' V) (f V)) sq q F (fun V ↦ ?_)
-  · obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ := S.isBasis_affineOpens.exists_subset_of_mem_open
-      (Set.mem_univ (c.pt.hom.base x)) isOpen_univ
-    obtain ⟨y, hy, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := c.pt.hom) (g := V.ι) x
-      ⟨c.pt.hom.base x, hxV⟩ rfl
-    exact ⟨⟨V, hV⟩, y, hy⟩
-  · -- the restricted system over the affine open `V`
-    have : QuasiCompact (g' V) :=
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback g V.1.ι).flip inferInstance
-    have : QuasiSeparated (g' V) :=
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback g V.1.ι).flip inferInstance
-    have : ∀ i, QuasiSeparated (p.app i) := fun i ↦
-      (inferInstance : QuasiSeparated (D.obj i).hom)
-    have : ∀ {i j : I} (φ : i ⟶ j), IsAffineHom (X.map φ) := fun φ ↦
-      (inferInstance : IsAffineHom (D.map φ).left)
-    have := hp V
-    let Xr := Etale.smoothLimitPullbackFunctor V.1.ι X p
-    let pr : Xr ⟶ (Functor.const I).obj V.1 :=
-      { app i := pullback.fst V.1.ι (p.app i)
-        naturality i j φ := by simp [Xr] }
-    let sr : Xr ⟶ X :=
-      { app i := pullback.snd V.1.ι (p.app i)
-        naturality i j φ := by simp [Xr] }
-    have : ∀ i, Smooth (pr.app i) := fun i ↦
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i))
-        (inferInstance : Smooth (D.obj i).hom)
-    have : ∀ i, QuasiCompact (pr.app i) := fun i ↦
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i))
-        (inferInstance : QuasiCompact (D.obj i).hom)
-    have : ∀ i, QuasiSeparated (pr.app i) := fun i ↦
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i))
-        (inferInstance : QuasiSeparated (D.obj i).hom)
-    have : ∀ {i j : I} (φ : i ⟶ j), IsAffineHom (Xr.map φ) := fun φ ↦
-      (inferInstance : IsAffineHom ((Etale.smoothLimitPullbackFunctor V.1.ι X p).map φ))
-    have hpi (i : I) : (c.π.app i).left ≫ p.app i = c.pt.hom := Over.w (c.π.app i)
-    let cr : Cone Xr :=
-      { pt := pullback c.pt.hom V.1.ι
-        π :=
-          { app i := pullback.lift (f V) (a V ≫ (c.π.app i).left)
-              (by rw [Category.assoc, hpi, ← pullback.condition])
-            naturality i j φ := pullback.hom_ext (by simp [Xr, f])
-              (by simp [Xr, a, X, ← Over.comp_left, c.w φ]) } }
-    have hcr : IsLimit cr := isLimitOfIsPullbackOfIsConnected (I := I) sr cr
-      ((Over.forget S).mapCone c)
-      { hom := a V
-        w i := by simp [cr, sr] }
-      (fun i ↦ by
-        refine IsPullback.of_right ?_ (by simp [cr, sr])
-          (IsPullback.of_hasPullback V.1.ι (p.app i))
-        simp only [cr, pr, pullback.lift_fst, hpi]
-        exact (IsPullback.of_hasPullback c.pt.hom V.1.ι).flip)
-      hc
-    have : Scheme.IsTorsionSheafOfInvertibleOrder V.1 (((c' V)^*[ModuleCat.{u + 1} Λ]).obj F) :=
-      Scheme.IsTorsionSheafOfInvertibleOrder.upperStar Λ V.1.ι (c' V) F
-    exact Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs Λ (g' V) Xr pr hcr (f V)
-      (fun i ↦ by simp [cr, pr]) (IsPullback.of_hasPullback (g' V) (f V)) q _
+      naturality i j f := by simp }
+  have : ∀ i, Smooth (p.app i) := fun i ↦ (inferInstance : Smooth (D.obj i).hom)
+  have : ∀ i, QuasiCompact (p.app i) := fun i ↦ (inferInstance : QuasiCompact (D.obj i).hom)
+  have : ∀ i, QuasiSeparated (p.app i) := fun i ↦
+    (inferInstance : QuasiSeparated (D.obj i).hom)
+  have : ∀ {i j : I} (f : i ⟶ j), IsAffineHom ((D ⋙ Over.forget S).map f) := fun f ↦
+    (inferInstance : IsAffineHom (D.map f).left)
+  exact Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' Λ g (D ⋙ Over.forget S) p hc
+    c.pt.hom (fun i ↦ Over.w (c.π.app i)) sq q F
 
 end AlgebraicGeometry

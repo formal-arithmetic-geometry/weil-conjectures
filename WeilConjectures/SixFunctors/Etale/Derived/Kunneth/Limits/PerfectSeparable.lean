@@ -31,7 +31,7 @@ theorem Algebra.isSeparableExtension_of_perfectField (k : Type u) (K : Type v) [
   intro F hF
   have : Algebra.EssFiniteType k F := IntermediateField.essFiniteType_iff.mpr hF
   obtain ⟨s, hs, hsep⟩ :=
-    IntermediateField.exists_isTranscendenceBasis_and_isSeparable_of_perfectField k F
+    exists_isTranscendenceBasis_and_isSeparable_of_perfectField k F
   exact ⟨(s : Set F), hs, hsep⟩
 
 section PerfectClosure

@@ -99,7 +99,8 @@ theorem isZero_homology_rightDerivedFunctor_obj_of_isLE (k : ℕ) :
     have h₁' : T.obj₁.IsGE (a - 1 + 1 - k) := t.isGE_of_ge _ _ (a + 1 - (k + 1 : ℕ))
       (by push_cast; omega)
     have h₁'' : T.obj₁.IsLE (a - 1) := inferInstance
-    have hac₁ (q : ℤ) : F.IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj T.obj₁) := by
+    have hac₁ (q : ℤ) :
+        F.IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj T.obj₁) := by
       rcases lt_or_ge q a with hq | hq
       · have : IsIso ((DerivedCategory.homologyFunctor C q).map T.mor₁) :=
           DerivedCategory.isIso_homologyFunctor_map_truncLTι_app L a q hq
@@ -129,7 +130,8 @@ variable [PreservesFiniteLimits F]
 `K ∈ D^{≥ m}(C)` whose homology objects are `F`-acyclic, `H^n(RF(K)) ≅ F(H^n K)` for all
 `n`. -/
 theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic (K : DerivedCategory C)
-    (m : ℤ) [K.IsGE m] (hK : ∀ q, F.IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj K))
+    (m : ℤ) [K.IsGE m]
+    (hK : ∀ q, F.IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj K))
     (n : ℤ) :
     Nonempty ((DerivedCategory.homologyFunctor D n).obj (F.rightDerivedFunctor.obj K) ≅
       F.obj ((DerivedCategory.homologyFunctor C n).obj K)) := by
@@ -159,7 +161,8 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic (K : DerivedCat
   let T' := (t.triangleLTGE n).obj L
   have hT' : T' ∈ distTriang _ := t.triangleLTGE_distinguished n L
   have hRT' := R.map_distinguished T' hT'
-  have hac₁ (q : ℤ) : F.IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj T'.obj₁) := by
+  have hac₁ (q : ℤ) :
+      F.IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj T'.obj₁) := by
     rcases lt_or_ge q n with hq | hq
     · have : IsIso ((DerivedCategory.homologyFunctor C q).map T'.mor₁) :=
         DerivedCategory.isIso_homologyFunctor_map_truncLTι_app L n q hq

@@ -125,9 +125,9 @@ noncomputable def upperStarCompSectionsIsoSheafFiber {T : Scheme.{u}}
     eqToIso (by rw [Category.id_comp])
 
 /-- Blueprint `lem-kun-stalks-of-cohomology`: **stalks of cohomology sheaves.** For
-`Q ∈ D(T_ét, Λ)` and a geometric point `s : Spec Ω ⟶ T`, the stalk of `ℋ^q(Q)` at `s` is the
-module of global sections of `ℋ^q(Ls^* Q)`, that is, `ℋ^q(Q)_s ≅ ℋ^q(Q_s)`: the stalk is the
-inverse image (`lem-kun-stalk-as-pullback`), and the exact functor `s^*` commutes with
+`Q ∈ D(T_ét, Λ)` and a geometric point `s : Spec Ω ⟶ T`, the stalk of `ℋ^q(Q)` at `s` is
+the module of global sections of `ℋ^q(Ls^* Q)`, that is, `ℋ^q(Q)_s ≅ ℋ^q(Q_s)`: the stalk is
+the inverse image (`lem-kun-stalk-as-pullback`), and the exact functor `s^*` commutes with
 `ℋ^q` (`AlgebraicGeometry.Etale.leftDerivedUpperStarHomologyFunctorIso`). -/
 noncomputable def sheafFiberHomologyIso {T : Scheme.{u}} (s : Spec (.of Ω) ⟶ T)
     (Q : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (q : ℤ) :
@@ -183,7 +183,8 @@ theorem exists_comp_eq_sepClosureBaseChange {Ω : Type u} [Field Ω] [IsSepClose
     (s : Spec (.of Ω) ⟶ X) : ∃ t, t ≫ sepClosureBaseChange p = s := by
   let := (Spec.preimage (s ≫ p)).hom.toAlgebra
   let ψ : SeparableClosure K →ₐ[K] Ω := IsSepClosed.lift
-  refine ⟨pullback.lift s (Spec.map (CommRingCat.ofHom ψ.toRingHom)) ?_, pullback.lift_fst _ _ _⟩
+  refine ⟨pullback.lift s (Spec.map (CommRingCat.ofHom ψ.toRingHom)) ?_,
+    pullback.lift_fst _ _ _⟩
   rw [← Spec.map_comp, ← Spec.map_preimage (s ≫ p)]
   congr 1
   ext x

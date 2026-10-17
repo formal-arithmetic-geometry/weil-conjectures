@@ -137,7 +137,8 @@ theorem exists_finite_forall_mem_sectionVanishingLocus {K : Type u} [Field K]
   have : IsNoetherian W.left := {}
   let Z : Set W.left := (sectionVanishingLocus F z)ᶜ
   have hZ : IsClosed Z := (isOpen_sectionVanishingLocus z).isClosed_compl
-  obtain ⟨T, hTf, hTc, hTi, hZT⟩ := TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible hZ
+  obtain ⟨T, hTf, hTc, hTi, hZT⟩ :=
+    TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible hZ
   have : Finite T := hTf.to_subtype
   let η (t : T) : W.left := (hTi t.1 t.2).genericPoint
   have hη (t : T) : closure {η t} = t.1 := by
@@ -154,7 +155,8 @@ theorem exists_finite_forall_mem_sectionVanishingLocus {K : Type u} [Field K]
       rw [hZT] at this
       exact this
     have hclosed : IsClosed ({W.hom (η ⟨t, ht⟩)} : Set X) := hcl _ (hηZ _)
-    have h1 : W.hom w ∈ W.hom '' closure {η ⟨t, ht⟩} := ⟨w, by rw [hη ⟨t, ht⟩]; exact hwt, rfl⟩
+    have h1 : W.hom w ∈ W.hom '' closure {η ⟨t, ht⟩} :=
+      ⟨w, (hη ⟨t, ht⟩).symm ▸ hwt, rfl⟩
     have h2 := image_closure_subset_closure_image W.hom.continuous h1
     rw [Set.image_singleton, hclosed.closure_eq] at h2
     exact hw ⟨⟨t, ht⟩, h2.symm⟩
@@ -324,17 +326,20 @@ theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [Local
     refine isGloballyGenerated_of_isZero_upperStar Λ (U S) ?_ (fun x hx ↦ ?_) (fun x hx ↦ ?_)
       _ (isZero_upperStar_supportedSections F (U S))
     · simpa [U, ← SetLike.mem_coe, coe_openComplOfFinite] using S.2.1
-    · simpa [U, ← SetLike.mem_coe, coe_openComplOfFinite] using S.2.2 (by simpa [U, ← SetLike.mem_coe, coe_openComplOfFinite] using hx)
+    · have hx' : x ∈ S.1 := by simpa [U, ← SetLike.mem_coe, coe_openComplOfFinite] using hx
+      exact S.2.2 hx'
     · have hx' : x ∈ S.1 := by simpa [U, ← SetLike.mem_coe, coe_openComplOfFinite] using hx
       exact (p.residueField_of_isClosed_of_isSepClosed x (S.2.2 hx')).2.2
   let ψ (S : ι) : G S ⟶ F := supportedSectionsι F (U S)
   have : Epi (Sigma.desc ψ) := by
-    refine (Sheaf.isLocallySurjective_iff_epi' (ModuleCat.{u + 1} Λ) (Sigma.desc ψ)).1 ⟨fun {W} s ↦ ?_⟩
+    refine (Sheaf.isLocallySurjective_iff_epi' (ModuleCat.{u + 1} Λ) (Sigma.desc ψ)).1
+      ⟨fun {W} s ↦ ?_⟩
     rw [mem_smallEtaleTopology_iff]
     intro w
     obtain ⟨V, g, hw, S, hSf, hSc, z, hz⟩ := exists_supportedSectionsι_app_eq_map F p hF s w
     refine ⟨V, g, ⟨(Sigma.ι G ⟨S, hSf, hSc⟩).hom.app (op V) z, ?_⟩, hw⟩
-    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← ObjectProperty.FullSubcategory.comp_hom, Sigma.ι_desc]
+    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+      ← ObjectProperty.FullSubcategory.comp_hom, Sigma.ι_desc]
     exact hz
   exact isGloballyGenerated_of_epi_sigmaDesc Λ ψ hG
 

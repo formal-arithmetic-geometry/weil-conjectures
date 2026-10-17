@@ -46,7 +46,7 @@ lemma of_iso {A A' : I → ModuleCat R} {B B' : ModuleCat R} {σ : ∀ i, A i �
     obtain ⟨j, f, hf⟩ := h'.2 i _ h0
     refine ⟨j, f, ?_⟩
     apply (ConcreteCategory.injective_of_mono_of_preservesPullback (e j).hom)
-    rw [← ModuleCat.comp_apply, ← hτ, ModuleCat.comp_apply, hf, map_zero, map_zero]
+    rw [← ModuleCat.comp_apply, ← hτ, ModuleCat.comp_apply, hf, map_zero]
 
 end ModuleCat.IsElementwiseColimit
 
@@ -76,7 +76,8 @@ lemma transition_apply_inv (q : ℤ) (x : B)
     (y : (stalkHomology Λ q x).obj ((functor Λ α).obj K)) :
     ((stalkHomology Λ q x).map ((transition Λ φ).app K)).hom
         (((stalkHomology Λ q x).map ((transition Λ ψ).app K)).hom y) = y := by
-  rw [transition_apply_comp Λ q x K φ ψ _ h, transition_id]
+  rw [transition_apply_comp Λ q x K φ ψ _ h, transition_id, NatTrans.id_app,
+    CategoryTheory.Functor.map_id]
   rfl
 
 section MapW
@@ -175,11 +176,11 @@ lemma isStalkColimit_mapW (𝒮 : LimitStageSystem B W' I)
     (fun i ↦ (stalkHomology Λ q x).mapIso (LimitStage.mapWIso Λ v (𝒮.obj i) K))
     ((stalkHomology Λ q x).mapIso (LimitStage.mapWIso Λ v 𝒮.pt K))
     (fun i ↦ by
-      simp only [Functor.mapIso_hom, ← Functor.map_comp, mapW_obj, mapW_pt, mapW_π]
-      rw [LimitStage.transition_mapW])
+      simp only [Functor.mapIso_hom, ← Functor.map_comp]
+      exact congrArg (stalkHomology Λ q x).map (LimitStage.transition_mapW Λ v (𝒮.π i) K).symm)
     (fun f ↦ by
-      simp only [Functor.mapIso_hom, ← Functor.map_comp, mapW_obj, mapW_map]
-      rw [LimitStage.transition_mapW])
+      simp only [Functor.mapIso_hom, ← Functor.map_comp]
+      exact congrArg (stalkHomology Λ q x).map (LimitStage.transition_mapW Λ v (𝒮.map f) K).symm)
     (h x)
 
 end LimitStageSystem

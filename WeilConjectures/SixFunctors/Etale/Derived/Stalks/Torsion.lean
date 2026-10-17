@@ -50,8 +50,9 @@ lemma isUnit_natCast_Γ_spec_iff {K : Type u} [Field K] (n : ℕ) :
 /-- Blueprint `def-kun-torsion-invertible`: **orders invertible in a field.** For a field `K`,
 a sheaf `F` of `Λ`-modules on the small étale site of a scheme `T` has orders invertible in
 `K` (`IsTorsionSheafOfInvertibleOrder (Spec K) F`) if and only if every element of every
-geometric stalk of `F` is killed by an integer `n ≥ 1` with `n · 1_K ≠ 0`. A complex has torsion
-cohomology with orders invertible in `K` if all its cohomology sheaves have this property. -/
+geometric stalk of `F` is killed by an integer `n ≥ 1` with `n · 1_K ≠ 0`. A complex has
+torsion cohomology with orders invertible in `K` if all its cohomology sheaves have this
+property. -/
 theorem isTorsionSheafOfInvertibleOrder_spec_iff {K : Type u} [Field K] {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsTorsionSheafOfInvertibleOrder (Spec (.of K)) F ↔

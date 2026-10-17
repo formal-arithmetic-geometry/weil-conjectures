@@ -87,13 +87,16 @@ that `z` does not vanish near the image point in `V`, so its germ at a lift of `
 theorem isZero_sheafFiber_iff_of_apply_eq {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     {Ω₁ Ω₂ : Type u} [Field Ω₁] [IsSepClosed Ω₁] [Field Ω₂] [IsSepClosed Ω₂]
-    (s₁ : Spec (.of Ω₁) ⟶ X) (s₂ : Spec (.of Ω₂) ⟶ X) (h : s₁ default = s₂ default) :
+    (s₁ : Spec (.of Ω₁) ⟶ X) (s₂ : Spec (.of Ω₂) ⟶ X)
+    (h : s₁ default = s₂ default) :
     IsZero ((pointSmallEtale s₁).sheafFiber.obj F) ↔
       IsZero ((pointSmallEtale s₂).sheafFiber.obj F) := by
-  suffices H : ∀ {Ω₁ Ω₂ : Type u} [Field Ω₁] [IsSepClosed Ω₁] [Field Ω₂] [IsSepClosed Ω₂]
-      (s₁ : Spec (.of Ω₁) ⟶ X) (s₂ : Spec (.of Ω₂) ⟶ X), s₁ default = s₂ default →
+  suffices H : ∀ {Ω₁ Ω₂ : Type u} [Field Ω₁] [IsSepClosed Ω₁] [Field Ω₂]
+      [IsSepClosed Ω₂] (s₁ : Spec (.of Ω₁) ⟶ X) (s₂ : Spec (.of Ω₂) ⟶ X),
+      s₁ default = s₂ default →
         IsZero ((pointSmallEtale s₁).sheafFiber.obj F) →
-          IsZero ((pointSmallEtale s₂).sheafFiber.obj F) from ⟨H s₁ s₂ h, H s₂ s₁ h.symm⟩
+          IsZero ((pointSmallEtale s₂).sheafFiber.obj F) from
+    ⟨H s₁ s₂ h, H s₂ s₁ h.symm⟩
   intro Ω₁ Ω₂ _ _ _ _ s₁ s₂ h h₁
   suffices hp : ∀ p : ↥((pointSmallEtale s₂).sheafFiber.obj F), p = 0 by
     have : Subsingleton ↥((pointSmallEtale s₂).sheafFiber.obj F) :=

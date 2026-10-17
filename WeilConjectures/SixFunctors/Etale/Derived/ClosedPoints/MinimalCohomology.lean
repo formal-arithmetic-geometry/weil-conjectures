@@ -25,7 +25,8 @@ and K-injective resolutions. If `E ∈ D(C)` has no homology in degrees `< i`, t
 - `CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_isGE`: the
   statement above.
 - `AlgebraicGeometry.Etale.nonempty_homology_rightDerivedGlobalSections_obj_iso_of_isGE`
-  (`lem-kun-minimal-cohomology`): `H^i(X_ét, E) ≅ H^0(X_ét, ℋ^i(E))` for `E ∈ D^{≥ i}(X_ét)`.
+  (`lem-kun-minimal-cohomology`): `H^i(X_ét, E) ≅ H^0(X_ét, ℋ^i(E))` for
+  `E ∈ D^{≥ i}(X_ét)`.
 -/
 
 @[expose] public section
@@ -71,12 +72,14 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_isGE (E : DerivedCatego
   have hRT := R.map_distinguished T hT
   have h₃ : (R.obj T.obj₃).IsGE (i + 1) := F.isGE_rightDerivedFunctor_obj _ _
   have hmono : Mono ((DerivedCategory.homologyFunctor D i).map (R.map T.mor₁)) :=
-    ((DerivedCategory.homologyFunctor D 0).homologySequence_mono_shift_map_mor₁_iff _ hRT (i - 1) i
-      (by lia)).2 (IsZero.eq_of_src (DerivedCategory.isZero_of_isGE (R.obj T.obj₃) (i + 1) _ (by lia)) _ _)
+    ((DerivedCategory.homologyFunctor D 0).homologySequence_mono_shift_map_mor₁_iff _ hRT
+      (i - 1) i (by lia)).2
+        (IsZero.eq_of_src (DerivedCategory.isZero_of_isGE (R.obj T.obj₃) (i + 1) _ (by lia)) _ _)
   have hepi : Epi ((DerivedCategory.homologyFunctor D i).map (R.map T.mor₁)) :=
     ((DerivedCategory.homologyFunctor D 0).homologySequence_epi_shift_map_mor₁_iff _ hRT i).2
       (IsZero.eq_of_tgt (DerivedCategory.isZero_of_isGE (R.obj T.obj₃) (i + 1) _ (by lia)) _ _)
-  have : IsIso ((DerivedCategory.homologyFunctor D i).map (R.map T.mor₁)) := isIso_of_mono_of_epi _
+  have : IsIso ((DerivedCategory.homologyFunctor D i).map (R.map T.mor₁)) :=
+    isIso_of_mono_of_epi _
   have : T.obj₁.IsGE i := (inferInstance : ((t.truncLT (i + 1)).obj E).IsGE i)
   have : T.obj₁.IsLE i := t.isLE_of_le _ (i + 1 - 1) i (by lia)
   obtain ⟨A, ⟨e⟩⟩ := T.obj₁.exists_iso_singleFunctor_obj_of_isGE_of_isLE i
@@ -84,7 +87,8 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_isGE (E : DerivedCatego
     DerivedCategory.isIso_homologyFunctor_map_truncLTι_app E (i + 1) i (by lia)
   let eA : A ≅ (DerivedCategory.homologyFunctor C i).obj E :=
     ((DerivedCategory.singleFunctorCompHomologyFunctorIso C i).app A).symm ≪≫
-      (DerivedCategory.homologyFunctor C i).mapIso e.symm ≪≫ asIso ((DerivedCategory.homologyFunctor C i).map T.mor₁)
+      (DerivedCategory.homologyFunctor C i).mapIso e.symm ≪≫
+        asIso ((DerivedCategory.homologyFunctor C i).map T.mor₁)
   exact ⟨(asIso ((DerivedCategory.homologyFunctor D i).map (R.map T.mor₁))).symm ≪≫
     (DerivedCategory.homologyFunctor D i).mapIso (R.mapIso e) ≪≫
       F.homologyRightDerivedFunctorObjSingleFunctorIsoSelf A i ≪≫ F.mapIso eA⟩
@@ -108,7 +112,7 @@ theorem nonempty_homology_rightDerivedGlobalSections_obj_iso_of_isGE (X : Scheme
         ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E) ≅
       (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         ((_root_.DerivedCategory.homologyFunctor _ i).obj E)) :=
-  (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).nonempty_homology_rightDerivedFunctor_obj_iso_of_isGE
-    E i
+  (Sheaf.Γ X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)).nonempty_homology_rightDerivedFunctor_obj_iso_of_isGE E i
 
 end AlgebraicGeometry.Etale

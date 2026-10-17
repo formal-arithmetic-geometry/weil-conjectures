@@ -45,16 +45,18 @@ stalks of all cohomology sheaves `ℋ^q(Q)` at the geometric points over non-clo
 vanish. Then `Q = 0` if and only if `H^i(X_ét, Q) = 0` for all `i`.
 
 By induction `Q ∈ D^{≥ m + k}` for all `k`: if `Q ∈ D^{≥ n}`, then
-`H^n(X_ét, Q) ≅ Γ(X, ℋ^n(Q))` (`lem-kun-minimal-cohomology`), so `ℋ^n(Q)` has no nonzero global
-sections, and being globally generated (`lem-kun-0f1f-gen`) it vanishes. -/
+`H^n(X_ét, Q) ≅ Γ(X, ℋ^n(Q))` (`lem-kun-minimal-cohomology`), so `ℋ^n(Q)` has no nonzero
+global sections, and being globally generated (`lem-kun-0f1f-gen`) it vanishes. -/
 theorem isZero_iff_forall_isZero_homology_rightDerivedGlobalSections_of_isGE {K : Type u}
     [Field K] [IsSepClosed K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m : ℤ)
     [Q.IsGE m]
-    (hQ : ∀ q : ℤ, ∀ x ∉ closedPoints X, IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj
-      ((_root_.DerivedCategory.homologyFunctor _ q).obj Q))) :
-    IsZero Q ↔ ∀ i : ℤ, IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) i).obj
-      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj Q)) := by
+    (hQ : ∀ q : ℤ, ∀ x ∉ closedPoints X,
+      IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj Q))) :
+    IsZero Q ↔ ∀ i : ℤ,
+      IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) i).obj
+        ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj Q)) := by
   refine ⟨fun h i ↦ (_root_.DerivedCategory.homologyFunctor _ i).map_isZero
     ((rightDerivedGlobalSections _ X).map_isZero h), fun h ↦ ?_⟩
   have key (k : ℕ) : Q.IsGE (m + k) := by
