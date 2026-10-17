@@ -23,9 +23,75 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $N=\\operatorname{Sing}(Y/S)$ be the first-Fitting singular subscheme. By [lem-trf-nodal-family-fitting-singular], its support is precisely the nonsmooth locus, is closed, and $N\\to S$ is unramified. Apply the same node to each fibre $Y_s$: its singular subscheme is $N_s$ and is unramified over $\\kappa(s)$. By [lem-weil-pbc-unramified-over-field-discrete], $N_s$ is discrete. It is quasi-compact, since it is closed in the finite-type $\\kappa(s)$-scheme $Y_s$, so has finitely many points. There are finitely many $s\\in S$, hence $|N|$ is finite. The same argument applies to every intermediate semistable $S$-curve below. For such a curve $X$, let $d(X)$ be the number of points of its nonsmooth locus at which at least one reduced component of the fibre through that point is not smooth over its residue field. This is a finite nonnegative integer.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-weil-pbc-unramified-over-field-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 4.5.2: agent reconstruction for the already semistable input; finiteness from Stacks 0C59, 0C5B and 02G7."
+   }
+  },
+  {
+   "text": "Suppose $d(X)>0$ for the current semistable model $X$, and choose one point $z$ counted by $d(X)$. Apply [lem-trf-valuation-symmetric-nodal-blowup] to $X$ and $z$. It supplies $C=\\overline{\\{z\\}}$, a global nonzero $\\pi$ whose base vanishing set is the closure of $z|_S$, a neighbourhood $W$ of all of $C$, and the specified ideal $I$: it is $\\operatorname{Fit}_1(\\Omega^1_{X/S})+(\\pi)$ on $W$ and the unit ideal off $C$. On every etale nodal chart its pullback is $(u,v,\\pi)$, with $\\pi^2$ dividing the chart's nonzero thickness. The node supplies the three blowup algebras, properness and semistability of $q:X^+\\to X$, and smoothness of every fibre component at every point mapping into $C$. The centre is disjoint from the marking, since $C$ lies in the closed nonsmooth locus; the marking is therefore unchanged.",
+   "uses": [
+    "lem-trf-valuation-symmetric-nodal-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 4.5.2; agent reconstruction by the symmetric nodal blowup along the whole closure of a chosen node, using the chart calculations of §4.3."
+   }
+  },
+  {
+   "text": "The local operation of Step 2 strictly decreases $d$. Indeed, over $C$ there are no points counted by $d(X^+)$, by the fibre-component assertion of [lem-trf-valuation-symmetric-nodal-blowup]. Off $C$, $q$ is an isomorphism, so it introduces no new bad fibre points there and the old counted points outside $C$ are in bijection with the new ones. Fibre components correspond locally under this isomorphism; their smoothness at a point is unchanged. At least the chosen $z$ is removed from the count. Thus $d(X^+)\\le d(X)-1$. Induction on the initial finite integer $d(Y)$ terminates in a semistable marked pair $(Z,F)$ with $d(Z)=0$. Throughout the induction the marking is isomorphic to $E$, the generic map is the identity, and the curve maps are proper; [lem-weil-pbc-proper-fp-permanence] gives properness of the finite composite $b:Z\\to Y$.",
+   "uses": [
+    "lem-trf-valuation-symmetric-nodal-blowup",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 4.5.2: finite decreasing-defect induction. The local fibre-component assertion is a separate cited input, not strictness inferred from a single closed fibre."
+   }
+  },
+  {
+   "text": "Every reduced irreducible component of every fibre of $Z$ is smooth: at a smooth point of the fibre this is automatic, and at a node it follows from $d(Z)=0$. Apply [lem-trf-valuation-smooth-branches-strict-chart] to $(Z,F)$, with its smooth generic curve and unchanged etale marking in the smooth locus. This gives, at every point of $Z$, precisely a Zariski open strict pair chart over an open of $S$. Hence $(Z,F)$ is strictly semistable. The hypothesis here concerns all fibres; smooth components in only the most special fibre would not suffice for this inference over a higher-rank valuation ring.",
+   "uses": [
+    "lem-trf-valuation-smooth-branches-strict-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 4.5.2 and the strict-pair definition in §4.3: application of the separately stated all-fibres relative chart criterion."
+   }
+  },
+  {
+   "text": "The map of markings $F\\to E$ is an isomorphism, hence proper; $b$ is proper by Step 3. Both maps are the identity on the generic pair. The generic fibre is schematically dense in each flat scheme over the domain $V$: on an affine, flatness gives torsion-freeness, so the map from its coordinate ring to its localization over $K$ is injective. Consequently the open on which $b$ is an isomorphism (it contains the generic fibre) is schematically dense in source and target. The same holds for the marking, which is flat and unchanged. Therefore $(Z,F)\\to(Y,E)$ is an $\\eta$-modification of pairs with the prescribed generic identity. This argument includes $d(Y)=0$, the empty marking and the empty curve.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 4.5.2, final verification of the definition of eta-modification; affine torsion-freeness argument written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-valuation-smooth-branches-strict-chart",
+  "lem-trf-valuation-symmetric-nodal-blowup",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-unramified-over-field-discrete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Remark 4.5.2, printed p. 33, with symmetric nodal blowups reconstructed from §4.3. Finite decreasing-defect induction on bad fibre nodes; the operation acts on the whole closure of each chosen node, and the chart criterion requires smooth components in every fibre. The earlier stable-overlap and unspecified pushout argument is replaced, not attributed to the source."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +123,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-common-strict-semistable-refinement",
@@ -86,5 +152,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-marked-strictification",
+  "worker": "stage1",
+  "summary": "Repair removes the invalid overlap-properness inference, stable-uniqueness gluing and the undefined unlanded pushout node. The replacement constructs specified symmetric blowups along whole node closures and inducts on the finite number of nonsmooth fibre-component points. A separate chart criterion is used only after every fibre component is smooth. All local data and chart rings are explicit; the item statement is unchanged.",
+  "blueprint": "Historical nearby-cycle semistable-alteration branch of lem-trf-local-term-locality, Proof (1)--(2): after semistable gluing, the strict-cofinality strengthening of Temkin Remark 4.5.2. This auxiliary result only strictifies an already semistable pair. The historical auxiliary strictification assertion is realized by steps 1--5; below-unit proof changed to explicit nodal blowups, without changing the unit or target.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-over-field-discrete",
+    "why": "A generic topological fact about unramified morphisms over fields; used solely to show the singular fibres are finite. No statement of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Composition of proper blowups; generic scheme-morphism permanence, not a substitute for any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-over-field-discrete",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q95-97c508c0c",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q95-97c508c0c (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, including all five steps, both unsplit auxiliary nodes, edge cases, and route constraints. I supplied a metadata-only repair correcting stale created.item/group values in the item JSON; apply fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-marked-strictification.json.; 1 file(s) fixed by the reviewer"
  }
 }

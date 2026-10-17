@@ -15,48 +15,125 @@
   "def-weil-pbc-annihilator-associated-primes",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-trf-universal-injective-finite-test], it is enough to prove injectivity after tensoring $u$ with each finite $R$-module $Q$; since $R$ is Noetherian, finite modules are finitely presented. Fix such a $Q$.",
+   "uses": [
+    "lem-trf-universal-injective-finite-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DM, proof: first paragraph, reduction to a finite R-module Q using Tag 058K"
+   }
+  },
+  {
+   "text": "There is a canonical map $Q\\otimes_R P^\\wedge\\to (Q\\otimes_RP)^\\wedge$ induced componentwise by the quotient maps. The composite $Q\\otimes_RP\\to Q\\otimes_RP^\\wedge\\to(Q\\otimes_RP)^\\wedge$ is the canonical map to the completion of $M:=Q\\otimes_RP$. Therefore injectivity of $M\\to M^\\wedge$ implies injectivity of $Q\\otimes_Ru$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DM, proof: first paragraph, canonical map to the completion"
+   }
+  },
+  {
+   "text": "The module $M=Q\\otimes_RP$ is finite over $S$ because $Q$ is finite over $R$ and $P$ is finite over $S$. Let $K=\\ker(M\\to M^\\wedge)$. By the definition of the inverse-limit completion, $K=\\bigcap_{n\\ge1}(IS)^nM$. To prove $K=0$, use [lem-weil-pbc-module-injects-localizations-associated-primes]: it suffices to show $K_{\\mathfrak q}=0$ for every $\\mathfrak q\\in\\operatorname{Ass}_S(M)$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DM, proof: kernel and associated-prime localization paragraph"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q\\in\\operatorname{Ass}_S(M)$ and put $\\mathfrak p=\\mathfrak q\\cap R$. By [lem-trf-associated-primes-fibre-bound], $\\mathfrak q$ is associated to $P\\otimes_R\\kappa(\\mathfrak p)$, so the hypothesis gives $IS+\\mathfrak q\\ne S$. By [lem-weil-pbc-minimal-prime-over-proper-ideal], choose a prime $\\mathfrak q\\prime\\supset IS+\\mathfrak q$.",
+   "uses": [
+    "lem-trf-associated-primes-fibre-bound",
+    "lem-weil-pbc-minimal-prime-over-proper-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DM, proof: associated-prime hypothesis and choice of a prime over IS+q"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-krull-intersection-localization] to the Noetherian ring $S$, ideal $IS$, finite $S$-module $M$, and prime $\\mathfrak q\\prime\\supseteq IS$. Its intersection $N=\\bigcap_{n\\ge0}(IS)^nM$ equals $K$ from Step 3, since the term for $n=0$ is $M$. The cited statement gives $f\\in S\\setminus\\mathfrak q\\prime$ with $K_f=0$. Since $\\mathfrak q\\subseteq\\mathfrak q\\prime$, also $f\\notin\\mathfrak q$. Thus for any $k\\in K$ there is an integer $r\\ge0$ with $f^rk=0$, and $k/1=0$ in $K_{\\mathfrak q}$ by [def-weil-pbc-module-localization]. Every fraction in $K_{\\mathfrak q}$ is therefore zero.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-localization",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DM, proof: K_q′ is contained in the intersection of powers and Krull intersection"
+   }
+  },
+  {
+   "text": "For every $k\\in K\\subseteq M$ and every $\\mathfrak q\\in\\operatorname{Ass}_S(M)$, Step 5 shows that $k/1=0$ in $M_{\\mathfrak q}$. Apply [lem-weil-pbc-module-injects-localizations-associated-primes] to $M$ over the Noetherian ring $S$: it gives $k=0$, hence $K=0$. Step 2 then makes $Q\\otimes_Ru$ injective for every finite $Q$, and Step 1 upgrades this to universal injectivity of $u$.",
+   "uses": [
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DM, proof: final conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-associated-primes-fibre-bound",
+  "lem-trf-universal-injective-finite-test",
+  "lem-weil-pbc-krull-intersection-localization",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05DM, lemma-universally-injective-to-completion-flat, full proof; fibre associated-prime input is Tag 05C2 with Tag 05E0 and finite-test criterion is Tag 058K"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "finite module flat over Noetherian base completion map universally injective associated primes meet closed fibre",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N},\\n  Function.Injective ⇑f → Function.Injective ⇑(AdicCompletion.map I f\", \"doc\": \"If $ f : M \\\\to N $ is an injective $ R $-linear map between $ R $-modules, then the induced map between the $ I $-adic completions of $ M $ and $ N $ is also injective, where $ R $ is a commutative ri\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] {f : M →ₗ[R] N} [Module.Finite R M]\\n  [Module.Finite R N],\\n  Function.Injective ⇑f → Function.Injective ⇑(\", \"doc\": \"Given an injective linear map $ f : M \\\\to N $, the induced linear map $ \\\\widehat{R}_I \\\\otimes_R M \\\\to \\\\widehat{R}_I \\\\otimes_R N $ (where $ \\\\widehat{R}_I $ denotes the $ I $-adic completion of $ R $) i\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_comap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"If the induced map on prime spectra given by taking preimages under the canonical algebra homomorphism $ A \\\\to B $ is surjective, then $ B $ is a faithfully flat $ A $-module.\"}",
+   "query": "universal injectivity of a module map into its I-adic completion from flatness and associated primes of fibres",
+   "results": "AdicCompletion.map_injective, AdicCompletion.of_injective, AdicCompletion.of_injective_iff, AdicCompletion.flat_of_isNoetherian; none gives the fibre-associated-prime criterion",
    "date": "2026-10-18",
-   "verdict": "no match: of_injective assumes Hausdorffness and gives ordinary injectivity; map_injective preserves an existing injection between finite base modules. Neither gives universal injectivity from relative associated primes."
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "AdicCompletion.of, Function.Injective",
-   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AdicCompletion.of_injective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [IsHausdorff I M] : Function.Injective ⇑(AdicCompletion.of I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.of_injective_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} {M : Type u_4} [AddCommGroup M] [Module R M] : Function.Injective ⇑(AdicCompletion.of I M) ↔ IsHausdorff I M\", \"doc\": \"\"}",
+   "query": "AdicCompletion.of_injective, Module.Flat, AssociatedPrime",
+   "results": "0 hits; unknown identifier AssociatedPrime",
    "date": "2026-10-18",
-   "verdict": "no match: of_injective assumes Hausdorffness and gives ordinary injectivity; map_injective preserves an existing injection between finite base modules. Neither gives universal injectivity from relative associated primes."
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "universally.*[Ii]nject|[Ii]nject.*[Cc]ompletion|[Cc]ompletion.*[Ii]nject",
-   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"335\", \"text\": \"    [UniversallyInjective f] : LocallyQuasiFinite f := .of_injective f.injective\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"13\", \"text\": \"# Universally injective morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"15\", \"text\": \"A morphism of schemes `f : X ⟶ Y` is universally injective if `X ×[Y] Y' ⟶ Y'` is injective\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"17\", \"text\": \"(`AlgebraicGeometry.UniversallyInjective.iff_diagonal`).\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"19\", \"text\": \"We show that being universally injective is local at the target, and is stable under\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"22\", \"text\": \"We also prove that universally injective is equivalent to being injective with\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"23\", \"text\": \"- universally injective\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"24\", \"text\": \"  (`AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"83\", \"text\": \"/-- Universally injective satisfies fpqc descent. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"85\", \"text\": \"instance descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact :\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Completion.lean\", \"line\": \"310\", \"text\": \"/-- Automatic coercion from `α` to its completion. Not always injective. -/\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Completion.lean\", \"line\": \"359\", \"text\": \"theorem coe_injective [T0Space α] : Function.Injective ((↑) : α → Completion α) :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"27\", \"text\": \"  with a linear map `AdicCompletion.lift` from `M`. This map is injective iff `M` is Hausdorff\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"line\": \"20\", \"text\": \"- `AdicCompletion.map_injective`: Adic completion preserves injectivity\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"line\": \"91\", \"text\": \"/-- Adic completion preserves injectivity of finite modules over a Noetherian ring. -/\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Uniqueness.lean\", \"line\": \"217\", \"text\": \"  exact UniformSpace.Completion.coe_injective F this\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Group/HomCompletion.lean\", \"line\": \"90\", \"text\": \"  map_zero' := toAddMonoidHom_injective AddMonoidHom.completion_zero\"}",
+   "query": "AdicCompletion.*Injective|associatedPrimes.*TensorProduct|universally.*completion (Mathlib/RingTheory)",
+   "results": "2 hits: AdicCompletion.Basic comment and AdicCompletion.Exactness map_injective; no universal result",
    "date": "2026-10-18",
-   "verdict": "no match: of_injective assumes Hausdorffness and gives ordinary injectivity; map_injective preserves an existing injection between finite base modules. Neither gives universal injectivity from relative associated primes."
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "I adic completion of flat finite module pure injective when relative associated primes specialize to V I",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AdicCompletion.of_injective_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": Function.Injective (of I M) ↔ IsHausdorff I M\", \"doc\": \"The canonical linear map from an $ R $-module $ M $ to its $ I $-adic completion is injective if and only if the Hausdorff condition holds for $ M $ with respect to the ideal $ I $, i.e., the intersec\"}\n  {\"name\": \"AdicCompletion.of_inj\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"[IsHausdorff I M] {a b : M} : of I M a = of I M b ↔ a = b\", \"doc\": \"If the Hausdorff condition holds for the ideal $ I $ and module $ M $, then the canonical $ R $-linear map from $ M $ to its $ I $-adic completion is injective, i.e., $ \\\\mathrm{of}(a) = \\\\mathrm{of}(b)\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"AdicCompletion.of_injective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"[IsHausdorff I M] : Function.Injective (of I M)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $ satisfying the Hausdorff condition (i.e., $ \\\\bigcap_{n=1}^\\\\infty I^n M = 0 $), the canonical $ R $-linear map from $ M $ to it\"}",
+   "query": "I-adic completion map is universally injective for a finite flat module when every associated prime of every fibre meets the ideal",
+   "results": "AdicCompletion.map_injective, AdicCompletion.module, AdicCompletion.of_injective_iff, AdicCompletion.of_injective, AdicCompletion.map_surjective; no exact theorem",
    "date": "2026-10-18",
-   "verdict": "no match: of_injective assumes Hausdorffness and gives ordinary injectivity; map_injective preserves an existing injection between finite base modules. Neither gives universal injectivity from relative associated primes."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "pure embedding into adic completion tensor injective finite module associated primes ideal",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] {f : M →ₗ[R] N} [Module.Finite R M]\\n  [Module.Finite R N],\\n  Function.Injective ⇑f → Function.Injective ⇑(\", \"doc\": \"Given an injective linear map $ f : M \\\\to N $, the induced linear map $ \\\\widehat{R}_I \\\\otimes_R M \\\\to \\\\widehat{R}_I \\\\otimes_R N $ (where $ \\\\widehat{R}_I $ denotes the $ I $-adic completion of $ R $) i\"}\n  {\"name\": \"AdicCompletion.map_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N},\\n  Function.Injective ⇑f → Function.Injective ⇑(AdicCompletion.map I f\", \"doc\": \"If $ f : M \\\\to N $ is an injective $ R $-linear map between $ R $-modules, then the induced map between the $ I $-adic completions of $ M $ and $ N $ is also injective, where $ R $ is a commutative ri\"}\n  {\"name\": \"AdicCompletion.of_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsHausdorff I M], Function.Injective ⇑(AdicCompletion.of I M)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $ satisfying the Hausdorff condition (i.e., $ \\\\bigcap_{n=1}^\\\\infty I^n M = 0 $), the canonical $ R $-linear map from $ M $ to it\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (ι : Type u_4) [Finite ι],\\n  Function.Bijective ⇑(AdicCompletion.ofTensorProduct I (ι → R))\", \"doc\": \"Given a finite index type $\\\\iota$ and a commutative ring $R$ with ideal $I$, the canonical linear map from the tensor product of the $I$-adic completion of $R$ with the product module $\\\\iota \\\\to R$ to\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}",
-   "date": "2026-10-18",
-   "verdict": "no match: of_injective assumes Hausdorffness and gives ordinary injectivity; map_injective preserves an existing injection between finite base modules. Neither gives universal injectivity from relative associated primes."
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-flat-pure-complete-projective",
@@ -68,7 +145,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). First sentence: 'the map N → N^ is universally injective'.",
+   "place": "Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective), first sentence of the cited Tag 05DM argument: the map into the I-adic completion is universally injective.",
    "via": [
     "lem-trf-local-flat-pure-complete-projective",
     "lem-trf-local-noetherian-fibres-projective",
@@ -87,5 +164,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-completion-universally-injective",
+  "worker": "stage1",
+  "summary": "Read the full Stacks proof of Tag 05DM in flat.tex and checked the item hypotheses and completion map. Added two statement-only inputs: the fibre associated-prime containment (Tags 05C2 and 05E0) and the finite/finitely-presented tensor-test criterion (Tag 058K). The proof reduces to finite tensor tests, identifies the kernel with the intersection of powers, kills its localizations at associated primes using the fibre hypothesis, a prime-over-proper-ideal lemma, and the existing Krull-intersection localization node, then concludes from the existing associated-prime localization injection. No statement was changed.",
+  "blueprint": "The six steps realize Tag 05DM in full: Steps 1–2 are its reduction to finite tensor tests and the completion comparison; Step 3 is the kernel/associated-prime reduction; Step 4 is the fibre-assassin hypothesis and prime choice; Step 5 is the Krull-intersection localization; Step 6 is the final universal-injectivity conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-krull-intersection-localization",
+    "why": "Generic Noetherian-module intersection theorem, used only for its stated localization vanishing; no statement of the curve-local-term unit supplies this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Generic detection of zero elements at associated primes, used only for its statement; no statement of the curve-local-term unit supplies this algebraic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-krull-intersection-localization",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q72-5ed1337c6",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-5ed1337c6 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked Stacks 05DM, 05C2, 05E0, 058K and cited statements. Corrected the Krull-node application, clarified detection at Ass(M), added missing definition citations, and recorded accepted algebra tool uses. Whole corrected JSON files are in fixes/; concrete source, edge-case, duplicate and route checks are in review.md.; 3 file(s) fixed by the reviewer"
  }
 }
