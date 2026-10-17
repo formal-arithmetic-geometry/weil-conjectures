@@ -10,9 +10,88 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathsf S(N(C))^{\\mathrm{op}}$. The first-vertex rule in the statement is functorial: if $\\tau\\alpha=\\sigma$ and $\\sigma\\beta=\\rho$, the two assigned arrows compose to $\\tau(0\\to\\alpha(0))$ followed by $\\tau(\\alpha(0)\\to\\alpha\\beta(0))$, hence to $\\tau(0\\to\\alpha\\beta(0))$; identities give identity arrows. All these categories are small, since their objects and arrows form countable unions of sets of finite strings in $C$. Their nerves are quasicategories directly from the nerve definition in [def-cbc-enhanced-diagrams-cones]: a $2$-dimensional inner horn specifies two composable arrows, whose composite supplies its missing side; a $3$-dimensional inner horn fills by associativity; in higher dimensions all triangles are already specified, so the chain of consecutive arrows supplies the unique compatible filler. For an ordinary functor $F:B\\to B'$, consider an inner-horn lifting square for $N(F)$. Fill the top horn by the unique chain in $B$ just described. Its image under $F$ and the specified bottom simplex in $N(B')$ restrict to the same inner horn; uniqueness of the ordinary-nerve filler makes these two simplices equal. This is the required lift, proving directly that $N(F)$ is an inner fibration. If $C=\\varnothing$, then $A=\\varnothing$ and $N(v_C)$ is the unique isomorphism between empty simplicial sets. Restriction is then the identity, proving that case. Otherwise fix $c\\in C$ for the next steps.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15(2), printed p. 255; agent expansion of the contractible-comma argument for an arbitrary small ordinary category C; Theorem 4.1.3.1 and Proposition 4.1.1.7 for the final restriction assertion."
+   }
+  },
+  {
+   "text": "Define the ordinary comma category $D_c=(c\\downarrow v_C)$ explicitly. Its objects are pairs $(\\tau,a)$ with $\\tau:[m]\\to C$ and $a:c\\to\\tau(0)$. An arrow $(\\tau,a)\\to(\\sigma,b)$ is a monotone map $\\alpha:[n]\\to[m]$ satisfying $\\tau\\alpha=\\sigma$ and $b=\\tau(0\\to\\alpha(0))a$. Identity and composition follow from the equality in step 1. This category is also the opposite of $\\mathsf S(N(c/C))$: the pair defines the chain $a:c\\to\\tau(0),\\ \\tau(0\\to1)a:c\\to\\tau(1),\\ldots$ in $c/C$, and every chain in $c/C$ is uniquely of this form. Its simplex-category arrow condition is exactly the displayed formula for $b$, with the opposite orientation. This explicitly identifies the comma category used in the source, including chains of length zero and degenerate chains.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15(2), printed p. 255; agent expansion of the contractible-comma argument for an arbitrary small ordinary category C; Theorem 4.1.3.1 and Proposition 4.1.1.7 for the final restriction assertion."
+   }
+  },
+  {
+   "text": "Let $e_c$ be the object of $D_c$ consisting of the zero-simplex $c$ and $\\mathrm{id}_c$. Define $H_c:D_c\\to D_c$ by prepending $c$: it sends $(\\tau,a)$ to the chain $(c\\xrightarrow{a}\\tau(0)\\to\\cdots\\to\\tau(m))$ equipped with $\\mathrm{id}_c$ into its first vertex. On an arrow represented by $\\alpha:[n]\\to[m]$, use $\\alpha^+:[n+1]\\to[m+1]$, where $\\alpha^+(0)=0$ and $\\alpha^+(i+1)=\\alpha(i)+1$. The comma equality $b=\\tau(0\\to\\alpha(0))a$ is precisely what makes the two extended chains agree after restriction by $\\alpha^+$. The identities $(\\alpha\\beta)^+=\\alpha^+\\beta^+$ and $(\\mathrm{id})^+=\\mathrm{id}$ prove functoriality. The tail inclusion $j_m:[m]\\to[m+1]$, $j_m(i)=i+1$, gives $H_c(\\tau,a)\\to(\\tau,a)$ in $D_c$; the inclusion $k_m:[0]\\to[m+1]$, $k_m(0)=0$, gives $H_c(\\tau,a)\\to e_c$. Their comma equalities are respectively $a=a\\mathrm{id}_c$ and $\\mathrm{id}_c=\\mathrm{id}_c\\mathrm{id}_c$. The ordinal identities $\\alpha^+j_n=j_m\\alpha$ and $\\alpha^+k_n=k_m$ verify naturality. Thus there are natural transformations $\\mathrm{id}_{D_c}\\leftarrow H_c\\to\\mathrm{const}_{e_c}$. These are actual transformations; their components need not be isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15(2), printed p. 255; agent expansion of the contractible-comma argument for an arbitrary small ordinary category C; Theorem 4.1.3.1 and Proposition 4.1.1.7 for the final restriction assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-nerve-natural-homotopy-equivalence] to the projection $P:D_c\\to\\mathbf 1$ and the section $Q:\\mathbf 1\\to D_c$ at $e_c$. The zigzag in step 3 connects $QP=\\mathrm{const}_{e_c}$ to $\\mathrm{id}_{D_c}$, and $PQ=\\mathrm{id}_{\\mathbf 1}$. Consequently $NP:N(D_c)\\to\\Delta^0$ is a weak homotopy equivalence, so $N(D_c)$ is weakly contractible. This also gives contractibility in the edge-inversion formulation of the comma criterion: apply [lem-cbc-simplicial-groupoid-localization] to $NP$ and the Kan complex $\\Delta^0$. For every target quasicategory it identifies functors from the point with precisely the functors from $N(D_c)$ which invert all edges, including their whole mapping spaces. Thus the point is the space obtained by inverting all arrows of this comma category.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15(2), printed p. 255; agent expansion of the contractible-comma argument for an arbitrary small ordinary category C; Theorem 4.1.3.1 and Proposition 4.1.1.7 for the final restriction assertion."
+   }
+  },
+  {
+   "text": "The strict simplicial pullback $N(A)\\times_{N(C)}N(c/C)$ is exactly $N(D_c)$: in each degree, a chain in $A$ and a chain in $c/C$ over the same chain in $C$ give its comma arrows and all their commuting triangles, and restriction of chains agrees on both sides. Moreover $N(c/C)$ is the coherent join undercategory $N(C)_{c/}$: its $r$-simplices are exactly strings $c\\to d_0\\to\\cdots\\to d_r$, the same as maps $\\Delta^0\\star\\Delta^r\\to N(C)$ fixing $c$. To identify the strict pullback with the categorical pullback in [lem-coef-infinity-cofinal-comma-criterion], verify the isofibration hypothesis of [lem-coef-infinity-isofibration-pullback-limit]. Its projection $q:N(c/C)\\to N(C)$ is an inner fibration by the chain-filler calculation in step 1. An equivalence edge in an ordinary nerve is exactly an isomorphism, since its two inverse triangles are the two ordinary inverse equations. Given $a:c\\to d$ and an isomorphism $h:d\\to d'$, the arrow $h:(d,a)\\to(d',ha)$ is an isomorphism in $c/C$ lifting $h$ with the prescribed source; its inverse is $h^{-1}$. Thus $q$ is an isofibration in the precise sense of [lem-coef-infinity-isofibration-exponentiation]. Both its source and target and $N(A)$ are small quasicategories. The pullback-limit theorem now says that this strict pullback computes $N(A)\\times^h_{N(C)}N(C)_{c/}$. By step 4 it is weakly contractible for every $c$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-infinity-cofinal-comma-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15(2), printed p. 255; agent expansion of the contractible-comma argument for an arbitrary small ordinary category C; Theorem 4.1.3.1 and Proposition 4.1.1.7 for the final restriction assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-cofinal-comma-criterion] with $I=N(A)$, $J=N(C)$, $u=N(v_C)$ and $H=p$. Steps 1 and 5 establish its small-quasicategory and contractible-comma hypotheses; enlarge the containing universe to include $\\mathcal E$ and its diagram categories, as the statement permits. That theorem asserts that restriction itself, for every $p$ and the specified vertex $T$, is the equivalence between the two displayed cocone mapping spaces. Its conclusion uses the same right-pinched convention, so no choice of an inverse or replacement of the restriction map is needed. Finally [lem-cbc-enhanced-functor-cone-calculus] says that both functor simplicial sets are quasicategories and their mapping spaces are Kan complexes. This proves the asserted equivalence of Kan complexes for every $\\mathcal E,p,T$. The cited comma theorem expressly requires no colimits in $\\mathcal E$, so none have been introduced.",
+   "uses": [
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15(2), printed p. 255; agent expansion of the contractible-comma argument for an arbitrary small ordinary category C; Theorem 4.1.3.1 and Proposition 4.1.1.7 for the final restriction assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-nerve-natural-homotopy-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Historical derived-coefficient adjunction foundation, via the poset-nerve cofinal replacement; explicit contraction expanding HTT Variant 4.2.3.15(2), followed by the existing general comma theorem. HTT is read online, not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +120,87 @@
    "results": "Six hits: initial/final vertices of 2-simplices in HomotopyCat.lean, a graph dart and a convex standard-simplex formula. No first-vertex cofinality theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "first.?[Vv]ertex|simplex.*[Cc]ofinal|[Cc]ofinal.*simplex|categoryOfSimplices",
+   "results": "{\"t\": \"2026-10-17T03:42:53Z\", \"tool\": \"grep\", \"query\": \"first.?[Vv]ertex|simplex.*[Cc]ofinal|[Cc]ofinal.*simplex|categoryOfSimplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/SimpleGraph/Dart.lean\", \"Mathlib/Analysis/Convex/StdSimplex.lean\"], \"digest\": \"eae5628b8099a63f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the two first-vertex hits concern graph darts and convex simplices; the Quasicategory hits concern Quillen generating inner horn cofibrations only, read InnerFibration.lean:54-59."
+  },
+  {
+   "tool": "leansearch",
+   "query": "opposite category of simplices first vertex cofinal functor cocone spaces",
+   "results": "{\"t\": \"2026-10-17T03:42:54Z\", \"tool\": \"leansearch\", \"query\": \"opposite category of simplices first vertex cofinal functor cocone spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.op\", \"CategoryTheory.SimplicialObject\", \"CategoryTheory.Limits.isLimitConeLeftOpOfCocone\", \"SSet.opFunctor\", \"CategoryTheory.Functor.initial_op_of_final\", \"SimplicialObject.Splitting.cofan'\", \"CategoryTheory.Limits.isColimitOfOp\", \"SimplicialObject.opFunctor\"], \"digest\": \"61d58387742c34fd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cocones/opposites or nerve definitions and their simplex formulas, not the asserted restriction equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Final, CategoryTheory.nerve",
+   "results": "{\"t\": \"2026-10-17T03:42:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Final, CategoryTheory.nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First vertex functor from the opposite category of simplices of the nerve of a category is homotopy cofinal and preserves cocone mapping spaces",
+   "results": "{\"t\": \"2026-10-17T03:42:55Z\", \"tool\": \"leanfinder\", \"query\": \"First vertex functor from the opposite category of simplices of the nerve of a category is homotopy cofinal and preserves cocone mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve.functorOfNerveMap_obj\", \"CategoryTheory.nerve_map\", \"CategoryTheory.nerve.functorOfNerveMap\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\"], \"digest\": \"783f8d2b3474b684\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary final/initial functors or nerve definitions and adjunctions, not first-vertex homotopy cofinality with coherent cocone mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|final|[Qq]uillen [AlgebraicTopology/Quasicategory]",
+   "results": "{\"t\": \"2026-10-17T03:43:10Z\", \"tool\": \"grep\", \"query\": \"cofinal|final|[Qq]uillen\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"6c7512fffd7aa14a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the two first-vertex hits concern graph darts and convex simplices; the Quasicategory hits concern Quillen generating inner horn cofibrations only, read InnerFibration.lean:54-59."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quillen theorem A first vertex functor opposite simplex category weakly contractible comma nerves",
+   "results": "{\"t\": \"2026-10-17T03:43:10Z\", \"tool\": \"leansearch\", \"query\": \"Quillen theorem A first vertex functor opposite simplex category weakly contractible comma nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve\", \"CategoryTheory.nerveMap_app\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerveMap_app_mk₁\", \"instCategorySimplexCategoryGenRel\", \"CategoryTheory.nerve_obj\", \"CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"aa7822f054b18e5f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cocones/opposites or nerve definitions and their simplex formulas, not the asserted restriction equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Final",
+   "results": "{\"t\": \"2026-10-17T03:43:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Final\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final\", \"CategoryTheory.Functor.final_fromPUnit_of_isTerminal\", \"CategoryTheory.Functor.Final.lift\", \"CategoryTheory.Functor.final_of_isRightAdjoint\", \"CategoryTheory.IsFiltered.of_final\", \"CategoryTheory.IsFilteredOrEmpty.of_final\", \"CategoryTheory.Functor.Final.instNonemptyStructuredArrow\", \"CategoryTheory.Functor.final_of_adjunction\"], \"digest\": \"be99f7e530d38669\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib/CategoryTheory/Limits/Final.lean:92-97 defines ordinary finality by connected comma categories, not weakly contractible nerves or equivalence of coherent mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy finality of the functor taking the initial object of a chain in a small category; contract the comma category by prepending an initial vertex",
+   "results": "{\"t\": \"2026-10-17T03:43:11Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy finality of the functor taking the initial object of a chain in a small category; contract the comma category by prepending an initial vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.initial_fromInitialModel\", \"CategoryTheory.final_fromFinalModel\", \"SimplexCategory.Truncated.initial_inclusion\", \"CategoryTheory.Limits.WalkingParallelPair.inclusionWalkingReflexivePair_final\", \"SimplexCategory.Truncated.initial_incl\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.final_functor\", \"CategoryTheory.Limits.IsCofiltered.sequentialFunctor_initial\", \"CategoryTheory.Functor.initial_const_initial\"], \"digest\": \"7d51d68c39f3ad9f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary final/initial functors or nerve definitions and adjunctions, not first-vertex homotopy cofinality with coherent cocone mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*(final|cofinal)|((final|cofinal).*(nerve|simplex))|((nerve|simplex).*(final|cofinal))",
+   "results": "{\"t\": \"2026-10-17T03:54:02Z\", \"tool\": \"grep\", \"query\": \"homotopy.*(final|cofinal)|((final|cofinal).*(nerve|simplex))|((nerve|simplex).*(final|cofinal))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/CategoryTheory/Category/Cat/Colimit.lean\"], \"digest\": \"e393ebddc9f5fedb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; nerve adjunction and vertex evaluation hits do not assert homotopy cofinality or equivalence of coherent cocone spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.nerve, CategoryTheory.StructuredArrow",
+   "results": "{\"t\": \"2026-10-17T03:54:03Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.nerve, CategoryTheory.StructuredArrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; nerve adjunction and vertex evaluation hits do not assert homotopy cofinality or equivalence of coherent cocone spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of the opposite category of all chains in a small category maps homotopy finally to that category by evaluation at the initial vertex; restriction induces a weak equivalence on spaces of natural transformations to constant diagrams",
+   "results": "{\"t\": \"2026-10-17T03:54:03Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of the opposite category of all chains in a small category maps homotopy finally to that category by evaluation at the initial vertex; restriction induces a weak equivalence on spaces of natural transformations to constant diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\"], \"digest\": \"054222c9fd2d6acc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; nerve adjunction and vertex evaluation hits do not assert homotopy cofinality or equivalence of coherent cocone spaces."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-poset-nerve-cofinal-replacement",
@@ -75,5 +231,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplex-first-vertex-cocone-equivalence",
+  "worker": "stage1",
+  "summary": "Retained the authoritative statement and all provenance. Checked first-vertex functoriality, constructed and contracted every ordinary comma category by an explicit prepend functor, justified the categorical-pullback model via the existing isofibration theorem, and applied the existing full cocone mapping-space comma criterion. No new nodes and no statement changes. Repeated and logged item Mathlib searches in two phrasings; ordinary Final is not the required infinity-categorical theorem.",
+  "blueprint": "Preserves the historical ancestry through prop-coef-integral-exceptional-adjoint, derived coefficient adjunction foundation, and lem-coef-infinity-poset-nerve-cofinal-replacement: its HTT Variant 4.2.3.15(2) first-vertex step is realized by steps 1-5; its universal cocone mapping-space clause by step 6. This auxiliary node is not the unit statement and no unit bindings change.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Generic conversion of weakly contractible comma nerve into its all-edge localization; does not replace a unit proof route."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic Kan-mapping-space and internal functor-category closure for the final two spaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-45615fa8b",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-45615fa8b (reviewer sub-agent of L); spot-checked: I read the whole item. Statement: it matches HTT Variant 4.2.3.15(2) (p.255; φ2 is the first-vertex map from N(I2)^op, with comma I2^op×_{I1}(I1)_{C/}), Theorem 4.1.3.1 (p.236; cofinality iff the comma C×_D D_{D/} is weakly contractible) and Proposition 4.1.1.7 (p.226; the comparison holds over every apex). I read these from a local HTT PDF. Generalizing from I1 to an arbitrary small C adds no hypothesis, and the orientation τ→σ ↦ τ(0→α0) is correct. Steps 1-3 (elementary): I checked that v_C is a functor, that nerves are quasicategories and nerve functors are inner fibrations, and the empty-C case (both mapping spaces are Δ^0). I recomputed the prepend contraction H_c on D_c=(c↓v_C) by hand: Hτ∘α⁺=Hσ including the edge 0→1 (τ(0→α0)a=b), the comma equalities, (αβ)⁺=α⁺β⁺, the maps j_m and k_m into the comma, and the naturality identities α⁺j_n=j_mα and α⁺k_n=k_m. No component needs to be invertible. Step 4: lem-coef-nerve-natural-homotopy-equivalence allows either orientation and non-invertible components, and the two definition nodes define weak homotopy equivalence the same way (through realization). lem-cbc-simplicial-groupoid-localization with S=Δ^0 then gives the criterion's 'all arrows inverted' form. Step 5: the strict pullback is N(D_c) and N(c/C)=N(C)_{c/}. q is an inner fibration that lifts isomorphisms at a given source, so lem-coef-infinity-isofibration-pullback-limit makes the strict pullback the Cat_∞ pullback the criterion requires. Step 6: lem-coef-infinity-cofinal-comma-criterion's displayed map is exactly the item's (restriction, same T, no colimits), and lem-cbc-enhanced-functor-cone-calculus gives the Kan clause. Small cases checked: empty C; C=[1] with c=0 and c=1 and a non-invertible a; degenerate α:[1]→[0]; a one-object category with automorphisms. Following dependencies (488 nodes) gives no cycle; the only citer, poset-nerve-cofinal-replacement, uses it with C=I1. No new nodes; the last-vertex node is a different statement. Mathlib: there are 15 searches of all kinds, and Final.lean:96 is only ordinary finality, so this is not a leaf. Route: the two sk-prop-sf-cbc tool uses (groupoid localization, enhanced-functor-cone-calculus) are generic black boxes and I accept them. No SGA is cited, no target is involved, and unit and chapter are untouched. No fixes."
  }
 }

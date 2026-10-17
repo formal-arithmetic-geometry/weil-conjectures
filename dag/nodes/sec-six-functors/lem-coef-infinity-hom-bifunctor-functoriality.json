@@ -12,8 +12,144 @@
   "def-coef-infinity-category-of-spaces",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "First record functoriality of the canonical composition class, directly from its definition. For any simplicial functor F:E→E', postcomposition defines maps F_M on right-pinched mapping spaces, F_U on arrow mapping spaces, and F_V on the fixed-vertex triangle spaces of [lem-coef-infinity-mapping-composition]. They satisfy F_U j_E=j_E' F_M, θ_E' F_V=(F_U×F_U)θ_E, and ℓ_E' F_V=F_U ℓ_E, as equalities of simplicial maps, because restriction commutes with postcomposition. In the homotopy category of spaces θ and j are invertible, by [lem-coef-infinity-mapping-composition] and [lem-coef-infinity-pinch-comparison]. Substitute these three equalities in [j]c=[ℓ][θ]^{-1}([j]×[j]) and cancel [j_E']; the result is F_M c_E=c_E'(F_M×F_M). Degenerate edges are preserved strictly, proving preservation of identity classes. This argument applies to every functor used below and retains the entire mapping spaces.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§1.2.2 and §2.2.4; agent expansion using the canonical triangle-space definition of composition (Kerodon subsection 01PF)."
+   }
+  },
+  {
+   "text": "Work first with values in S_{U'}, in an ambient universe containing U'. For E=C,D put A_E=𝔠[E] and B_E(a,b)=Sing|A_E(a,b)|. Use the explicit pairing of [def-coef-infinity-presheaf-yoneda], at value universe U', to define B_E:E^op×E→S_{U'}. At an n-simplex (s,t), its i-th object is B_E(s(n-i),t(i)). An endpoint-containing subset path from i to j supplies s(n-j)→s(n-i) by reflected subsets and t(i)→t(j) by the original subsets; the action is h↦t(path) h s(reflected path), after the enriched singular-realization unit. Union of subsets encodes composition and singleton paths encode units. Reflection commutes with the ordinal operators, so this specifies the higher simplices as well as edges. The construction is defined because A_E and all its hom sets are U'-small; [def-coef-infinity-category-of-spaces] specifies the product-preserving enrichment and its Kan values. [lem-coef-kan-coherent-nerve-quasicategory] makes the value category a quasicategory. No smallness of the object set in U is assumed.",
+   "uses": [
+    "def-coef-infinity-presheaf-yoneda",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-kan-coherent-nerve-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§5.1.3 opening construction, printed pp.319–320; §1.2.16 for the value universe."
+   }
+  },
+  {
+   "text": "Fix a vertex a of E and let η_a be the enriched identity point in B_E(a,a). The row B_E(a,-) is exactly the covariant functor specified in [def-coef-infinity-category-of-spaces]. Apply [lem-coef-rigidification-identity-action]: its identity-action point map e_{E,a,b}:M_E(a,b)→B_E(a,b) is a weak homotopy equivalence and satisfies [e][p_M]=[u][θ], where p_M:|M|_Q→M, θ:|M|_Q→A_E(a,b), and u:A_E(a,b)→Sing|A_E(a,b)|. These are precisely the maps of [lem-coef-pinched-rigidification-resolution]; both p and θ are natural in E,a,b. We use this specified e, rather than an arbitrary equivalence between the values. On the degenerate identity arrow e gives η_a: this follows by applying the constant right-pinch family to the identity point, or by Q^0=Δ^0 and the degree-zero assertion of that resolution. By [lem-coef-space-point-cocone-criterion], the identity-action construction and its point map retain every simplicial parameter.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-rigidification-identity-action",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-space-point-cocone-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.4 opening paragraph and Proposition 2.2.4.1; §5.1.3; identity-action specialization in the cited existing node."
+   }
+  },
+  {
+   "text": "Check the actions under e. Write ev(v,z) for the action of B_E(a,-) on a family of arrows v:b→d and a family z of points of B_E(a,b). For the fixed-vertex triangle space V_E(a,b,d), the universal map Δ^2×V_E(a,b,d)→E, composed with B_E(a,-) and evaluated at η_a, supplies a homotopy between ev(v,e_{a,b}(u)) and e_{a,d}(w), where u,v,w are its three edge families. The natural point-family equivalence in [lem-coef-space-point-cocone-criterion] turns this coherent family into a homotopy of maps on V, including its higher parameters. The equivalences θ and j of Step 1 identify this equality with e_{a,d}c_E(v,u)=ev(v,e_{a,b}(u)). In particular the second-variable action is canonical postcomposition. For an edge r:a'→a, the pairing in Step 2 gives a coherent transformation q=B_E(r,-) between the two rows. Its component at a sends η_a to the enriched point r: precomposing the identity by r is r. The identity-action description gives e_{a',a}(r)=r as the same point. Apply q to the whole right-pinch family M_E(a,b)×Δ^1→E. Naturality of this actual transformation, then the point-family equivalence, gives q_b e_{a,b}(g)=ev_{B_E(a',-)}(g,q_aη_a)=ev(g,e_{a',a}(r))=e_{a',b}c_E(g,r), the last equality being the two-family calculation just made with a' in place of a. This is the precomposition formula on spaces, not just on components. The Δ^2 calculation also gives the composition homotopies; degenerate paths give the unit homotopies. All these families are restrictions of the pairing of Step 2, so their higher compatibilities are its already specified simplices.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-rigidification-identity-action",
+    "lem-coef-space-point-cocone-criterion",
+    "def-coef-infinity-presheaf-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§5.1.3 enriched Hom construction; agent expansion of its two actions using the identity-action comparison and the canonical triangle-space composition."
+   }
+  },
+  {
+   "text": "Let T:C→D. On the simplex colimits of [lem-coef-pinched-rigidification-resolution], postcomposition by T gives an enriched functor f:A_C→A_D: a simplex σ contributes to the summand Tσ, so f preserves identities and composition. Its maps on enriched homs give β_{a,b}=Sing|f_{a,b}|:B_C(a,b)→B_D(Ta,Tb). For composable enriched morphisms u,h,v, the equality f(vhu)=f(v)f(h)f(u) proves enriched naturality, in all simplicial degrees. More explicitly, form an enriched functor from (A_C^op×A_C)×[1] to Kan: at level 0 use B_C, at level 1 use B_D(f-,f-), and on a mixed arrow use β after the level-0 action, equivalently the level-1 action after β. The displayed equality proves that mixed composites agree; the cases wholly in level 0 or level 1 are their enriched functor laws. Precompose on each simplex of C^op×C×Δ^1 by the reflected-subset maps in the first factor, the subset maps in the second, and its monotone level map to [1]. Restriction along any ordinal map commutes with all three. The resulting map C^op×C×Δ^1→S_{U'} is an actual edge β:B_C→B_D(T^op×T) in the internal functor simplicial set of [def-cbc-enhanced-diagrams-cones]. This constructs higher naturality explicitly.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "def-coef-infinity-presheaf-yoneda",
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§5.1.3 opening construction, naturality of the enriched Hom pairing; agent-written mixed-level formula."
+   }
+  },
+  {
+   "text": "Let M=M_C(a,b) and M'=M_D(Ta,Tb). Naturality in [lem-coef-pinched-rigidification-resolution] gives fθ_C=θ_D|T_M|_Q and p_{M'}|T_M|_Q=T_M p_M. Naturality of the enriched unit gives βu_C=u_D f. Substituting these three equalities into the identity-action equations of Step 3 yields [β][e_C][p_M]=[e_D][T_M][p_M]. Cancel the invertible [p_M] to obtain [β_{a,b}][e_{C,a,b}]=[e_{D,Ta,Tb}][T_M]. Thus the component of the coherent edge constructed in Step 5 is exactly the map induced by T on the right-pinched mapping space, in the homotopy category of spaces. Here T_M sends an n-simplex σ:Δ^{n+1}→C to Tσ, so it is the map required in the statement.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-rigidification-identity-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.4, naturality of Proposition 2.2.4.1; explicit cancellation in the Q-resolution zigzag."
+   }
+  },
+  {
+   "text": "We next realize each e of Step 3 as an equivalence edge in S_{U'}. Both its source and target are Kan. In the Kan model structure [lem-coef-kan-quillen-right-proper] they are cofibrant and fibrant. The cylinder X×Δ^1 has monomorphic endpoint coproduct; its projection to X is a weak equivalence: its section at 0 and the homotopy (x,t,s)↦(x,min(t,s)) exhibit a simplicial homotopy inverse, so [lem-cbc-simplicial-homotopy-equivalence-weak] applies. Thus this is a good cylinder. Apply [lem-coef-model-cylinder-whitehead] with these cylinders to e to obtain an inverse simplicial map and the two simplicial inverse homotopies. In the subset-poset coherent nerve of Kan, each of these homotopies gives a 2-simplex: the 02 mapping object of 𝔠[Δ^2] is the nerve Δ^1 of {0,2}⊂{0,1,2}, and the 01 and 12 objects are points. Its 1-simplex runs from the value on {0,2} (the long edge, here the identity) to the value on {0,1,2} (the composite gf, resp. fg). The Whitehead homotopies run from gf to the identity, so apply Whitehead with the endpoints of the cylinder interchanged (i_0 the inclusion at 1, i_1 at 0, still a good cylinder), which gives homotopies from the identity to gf and fg, as required. They give the two inverse triangles required for an equivalence edge. Choose its inverse direction e^{-1}:B_E(a,b)→M_E(a,b). The construction also works when both Kan complexes are empty.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-model-cylinder-whitehead",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§1.2.16 and the coherent nerve of Kan; model-category Whitehead theorem specialized to the ordinary simplicial cylinder."
+   }
+  },
+  {
+   "text": "For E=C,D set K_E=E^op×E and let K_{E,0}⊂K_E be the simplicial subset consisting of vertices and their degeneracies. Each value M_E(a,b) belongs to U by hypothesis. Step 7 provides an equivalence B_E(a,b)→M_E(a,b) at every vertex. These form an equivalence in Fun(K_{E,0},S_{U'}): choose the inverse and inverse triangles separately on each discrete component. By [lem-coef-infinity-isofibration-exponentiation], restriction Fun(K_E,S_{U'})→Fun(K_{E,0},S_{U'}) lifts this equivalence with prescribed source B_E. Its lift is a coherent equivalence ε_E:B_E→G_E with G_E(a,b)=M_E(a,b). Every vertex of G_E is therefore a U-small Kan complex. The inclusion S_U⊂S_{U'} is the full simplicial subset on these objects: in each degree an enriched functor 𝔠[Δ^n]→Kan_{U'} with U-small vertex values has exactly the same mapping objects as in Kan_U, by the internal-function-complex definition. Consequently every simplex of G_E factors through S_U. Define H_E to be this factorization. This uses local U-smallness only, not U-smallness of E or of the rigidification hom sets.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§1.2.16.4 size distinction; Kerodon 01F3 (Corollary 4.4.5.3), restriction isofibration applied to the vertex subset; agent-written factorization argument."
+   }
+  },
+  {
+   "text": "In Fun(K_C,S_{U'}), compose ε_C^{-1}, β, and ε_D restricted along T^op×T, obtaining an edge α:G_C→G_D(T^op×T). The category is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]; ε_C is an equivalence by its lifting construction, so its inverse edge and the compositional 2-simplices exist. This means an actual map K_C×Δ^1→S_{U'}, with the indicated endpoints. Every vertex of this map is a U-small value of G_C or G_D. Fullness, checked in Step 8, factors the entire map through S_U. It is the desired coherent transformation T_*. Put k_{E,a,b}=[ε_{E,a,b}][e_{E,a,b}]. These identify M_E(a,b) with H_E(a,b); our chosen vertex lifts make k the identity class, but that normalization is unnecessary. Step 6 gives the component formula [T_*]k_C=k_D[T_M]. The naturality simplex of ε_E for any edge (r,s) gives H_E(r,s)k_{a,b}=[ε_{a',b'}]B_E(r,s)[e_{a,b}]=k_{a',b'}[e_{a',b'}]^{-1}B_E(r,s)[e_{a,b}]. Step 4 identifies the right side with k_{a',b'} applied to postcomposition by s and precomposition by r. For composable edges the same insertion at the intermediate vertex cancels the inverse pair, and the 2-simplices of ε_E give the required composition homotopy; degeneracies give the unit homotopy. For an n-simplex σ:Δ^n→K_E the comparison is the restriction ε_E(σ×id):Δ^n×Δ^1→S_{U'}. The prism is the union of the n+1 simplices with ordered vertices (0,0),…,(i,0),(i,1),…,(n,1), for 0≤i≤n. Restrictions to shared faces coincide because they come from this one map. For n=2 these faces compare the two action composites and the long-edge action; for arbitrary n they supply their higher compatibilities. Thus no separate coherence choice is being inferred from an equality of components. Finally Step 1 proves preservation of canonical composition and identities for T_M. These formulas establish every asserted action and component while the maps on K_C×Δ^1 and K_E×Δ^1 retain all higher naturality.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§5.1.3 construction, with agent-written universe descent and conjugation formulas; agrees with Kerodon 046J and 03PD."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-cylinder-whitehead",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-rigidification-identity-action",
+  "lem-coef-space-point-cocone-criterion"
+ ],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,10 +227,45 @@
    "results": "{\"t\": \"2026-10-17T01:50:04Z\", \"tool\": \"leanfinder\", \"query\": \"Space valued Hom functors of infinity categories obtained by straightening the twisted arrow left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerveFunctor_obj\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.SimplicialCategory.sHom\"], \"digest\": \"83122db04bdd7b7b\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Functor/Hom.lean:24-31, AlgebraicTopology/SimplicialCategory/Basic.lean:43-70, SimplicialNerve.lean:24-34,193-210. Ordinary hom pairings and Hom functors of an already enriched ordinary category do not construct the coherent Hom comparison for arbitrary quasicategories. Internal-Hom quasicategory instances only provide closure of functor objects; coherent space category and straightening are not supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "essentiallySurjective|essSurj|homotopyEquiv",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T03:48:44Z\", \"tool\": \"grep\", \"query\": \"essentiallySurjective|essSurj|homotopyEquiv\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "No exact match: read SimplicialNerve.lean:193–208, Functor/Hom.lean:24–31 and SimplicialCategory/Basic.lean:43–70. Hits concern ordinary or already enriched categories and the definition of their nerve, not the complete Hom comparison for arbitrary quasicategories with local size descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T03:48:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "verdict": "No exact match: read SimplicialNerve.lean:193–208, Functor/Hom.lean:24–31 and SimplicialCategory/Basic.lean:43–70. Hits concern ordinary or already enriched categories and the definition of their nerve, not the complete Hom comparison for arbitrary quasicategories with local size descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent diagrams in Kan complexes can be replaced by equivalent small Kan complexes without changing the diagram",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T03:48:47Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent diagrams in Kan complexes can be replaced by equivalent small Kan complexes without changing the diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.QCat\", \"SSet.cosk\", \"SSet.KanComplex\", \"SSet.KanComplex.hornFilling\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory₂\"], \"digest\": \"8d44e10edb93fb93\"}",
+   "verdict": "No exact match: read SimplicialNerve.lean:193–208, Functor/Hom.lean:24–31 and SimplicialCategory/Basic.lean:43–70. Hits concern ordinary or already enriched categories and the definition of their nerve, not the complete Hom comparison for arbitrary quasicategories with local size descent."
+  },
+  {
+   "tool": "grep",
+   "query": "def sHomFunctor|def eHomFunctor|def hom|def yonedaPairing",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T03:50:26Z\", \"tool\": \"grep\", \"query\": \"def sHomFunctor|def eHomFunctor|def hom|def yonedaPairing\", \"sub\": \"AlgebraicTopology/SimplicialCategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\"], \"digest\": \"58004f69e0293317\"}",
+   "verdict": "No exact match: read SimplicialNerve.lean:193–208, Functor/Hom.lean:24–31 and SimplicialCategory/Basic.lean:43–70. Hits concern ordinary or already enriched categories and the definition of their nerve, not the complete Hom comparison for arbitrary quasicategories with local size descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched Hom functor natural transformation induced by a simplicial enriched functor",
+   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-17T03:50:29Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched Hom functor natural transformation induced by a simplicial enriched functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom_map\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHomπ\", \"CategoryTheory.EnrichedFunctor.map\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor_apply_map\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedOrdinaryCategory\", \"CategoryTheory.Enriched.FunctorCategory.diagram_obj_obj\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_apply_app\"], \"digest\": \"d51045dfe14f20c8\"}",
+   "verdict": "No exact match: read SimplicialNerve.lean:193–208, Functor/Hom.lean:24–31 and SimplicialCategory/Basic.lean:43–70. Hits concern ordinary or already enriched categories and the definition of their nerve, not the complete Hom comparison for arbitrary quasicategories with local size descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-adjunction-mapping-equivalence",
@@ -130,5 +301,40 @@
   "archive": "coord/maintenance/Q60-straightening-1792207711/lem-coef-infinity-hom-bifunctor-functoriality.json",
   "original_sha256": "1250eb82c396a20bb15dd1ab6cee797edd935c36ad350f22f5a5e6cf9d93a0f6"
  },
- "lead_note": "2026-10-17 Q60-straightening-1792207711: circular proof invalidated; statement and Lean interface retained. This is a resplit task, not a completed split. The split uses space-valued-straightening in steps 2 and 3, as well as twisted-arrow-graph-cofinality and kan-relative-nerve-left-fibration, which also depend on it. In the supported Q60 candidate the reverse path is straightening -> coherent-nerve-comparison -> rigidification-equivalence-detection -> infinity-full-essential-image -> infinity-local-adjoint-criterion -> infinity-bicartesian-interval-adjunction -> infinity-adjunction-mapping-equivalence -> this node. Rebuild this foundational split without that classification closure, or repair the foundational caller with independent tools."
+ "lead_note": "2026-10-17 Q60-straightening-1792207711: circular proof invalidated; statement and Lean interface retained. This is a resplit task, not a completed split. The split uses space-valued-straightening in steps 2 and 3, as well as twisted-arrow-graph-cofinality and kan-relative-nerve-left-fibration, which also depend on it. In the supported Q60 candidate the reverse path is straightening -> coherent-nerve-comparison -> rigidification-equivalence-detection -> infinity-full-essential-image -> infinity-local-adjoint-criterion -> infinity-bicartesian-interval-adjunction -> infinity-adjunction-mapping-equivalence -> this node. Rebuild this foundational split without that classification closure, or repair the foundational caller with independent tools.",
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "§5.1.3 opening construction and §2.2.4; explicit identity-action and universe-lifting argument. Checked against Kerodon 03N2, 046J, 03PD and 01F3. Avoids the classification closure named in split_invalidated."
+ },
+ "split_report": {
+  "by": "Q130",
+  "date": "2026-10-17",
+  "new_nodes": [],
+  "mathlib_leaves": [],
+  "summary": "Nine-step explicit rigidification Hom construction, identity-action comparison, enriched functor comparison and vertexwise universe descent; no straightening or coherent-nerve Quillen-equivalence dependency.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: derived coefficient adjunction and its coherent mapping-space comparison. Steps 2–6 give the Hom construction and functor comparison; Steps 7–9 enforce the locally small universe and coherent transport; Step 1 checks canonical composition.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 9 takes from its statement only that Fun(K,S_{U'}) is a quasicategory and that a transformation with invertible vertex components is an equivalence (generic quasicategory calculus); unit sk-prop-sf-biduality-general has no node stating it."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Step 7 takes from its statement only that a simplicial homotopy equivalence is a weak homotopy equivalence, for the cylinder projection X×Δ^1→X; generic simplicial homotopy fact, no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-9ae498658",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-9ae498658 (reviewer sub-agent of L); spot-checked: I read the full 9-step re-split of lem-coef-infinity-hom-bifunctor-functoriality against the complete statements of all 14 cited nodes and the blueprint ancestor prop-coef-integral-exceptional-adjoint (main-20261015, proof paragraph 2). The delivery has no new nodes, and the statement and stmt_deps are unchanged. Circularity: I computed the transitive dependency closure of the cited nodes (269 nodes). Nothing leads back to the item, and the invalidated chain (straightening, coherent-nerve-comparison, full-essential-image, local-adjoint) is absent, so the split_invalidated cycle is resolved. Checks: Step 1 cancels [j] using the naturality of j/θ/ℓ. In Step 3, the row B(a,-) is literally h_a, because the constant simplex factors through C[Δ^0]. In Step 4, the postcomposition 2-cell runs over V, and precomposition sends η_a to r, with variance checked on N([1]). Step 5's mixed enriched functor reduces to f(vhu)=f(v)f(h)f(u). In Step 6, β e p = u f θ = u θ' |T|_Q = e' T p, and p cancels. Step 8 lifts along the isofibration K_0⊂K and uses fullness of S_U⊂S_{U'}, which needs only local smallness. In Step 9, [α]k=k'[T_M], and the prism decomposition is correct. Edge cases checked: empty E, Δ^0, N([1]), a noncommutative monoid, empty mapping spaces. Two repairs are in the fix file. (1) In Step 7 the Whitehead homotopies point the wrong way for a 2-simplex of N_hc(Kan), which needs a 1-simplex from the long edge id to gf. The fix applies Whitehead with the cylinder ends interchanged. (2) The two off-unit tool uses were not declared, so I added split_report.tool_uses: lem-cbc-enhanced-functor-cone-calculus (Step 9: Fun is a quasicategory, and a transformation with invertible components is an equivalence) and lem-cbc-simplicial-homotopy-equivalence-weak (Step 7: the cylinder projection is a weak equivalence). Both are generic and already accepted many times in this chapter. The Kerodon/HTT sources are online only, recorded as WANTED, and the proof is marked agent-written.; 1 file(s) fixed by the reviewer"
+ }
 }

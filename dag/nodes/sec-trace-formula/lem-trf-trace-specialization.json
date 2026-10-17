@@ -2,7 +2,7 @@
  "id": "lem-trf-trace-specialization",
  "kind": "statement",
  "title": "Verdier trace classes commute with specialization",
- "statement": "Use the finite coefficient and specialization conventions of [def-trf-coefficient-conventions] and [def-trf-deformation-specialization]. Let $c:C\\to X\\times_kX$ be a correspondence between separated finite-type $k$-schemes, and let $\\widetilde c:\\widetilde C\\to\\widetilde X\\times_D\\widetilde X$ lift it, with special fibre $b=\\widetilde c_0$. Let $K\\in D^b_{ctf}(X,A)$, and assume that $\\operatorname{sp}_{\\widetilde X}K\\in D^b_{ctf}(\\widetilde X_0,A)$ and that all correspondences and dualizing complexes used are admissible. Then for every $u:c_2^*K\\to c_1^!K$,\n$$\\operatorname{sp}_{\\operatorname{Fix}(\\widetilde c)}\\bigl(\\operatorname{Tr}_c(u)\\bigr)=\\operatorname{Tr}_{b}\\bigl(\\operatorname{sp}_{\\widetilde c}u\\bigr).$$\nHere $\\operatorname{Tr}$ is the Verdier trace class of [def-trf-trace-class], the fixed schemes are those of [def-trf-fixed-scheme], and the specialization on Borel--Moore sections is that of [def-trf-deformation-specialization]. No properness of $c$, $\\widetilde c$, $X$ or their fixed schemes is assumed, and no invertibility of $u$ is assumed.",
+ "statement": "Use the finite coefficient and specialization conventions of [def-trf-coefficient-conventions] and [def-trf-deformation-specialization]. Let $c:C\\to X\\times_kX$ be a correspondence between separated finite-type $k$-schemes, and let $\\widetilde c:\\widetilde C\\to\\widetilde X\\times_D\\widetilde X$ lift it, with special fibre $b=\\widetilde c_0$. Let $F=\\operatorname{Fix}(c)$ and define its fixed-locus lift by\n$$\\widetilde F:=\\widetilde C\\times_{\\widetilde X\\times_D\\widetilde X,\\,\\widetilde c,\\,\\widetilde\\Delta}\\widetilde X,$$\nwhere $\\widetilde\\Delta$ is the diagonal of $\\widetilde X$; its special fibre is $\\operatorname{Fix}(b)$. Let $K\\in D^b_{ctf}(X,A)$, and assume that $\\operatorname{sp}_{\\widetilde X}K\\in D^b_{ctf}(\\widetilde X_0,A)$ and that all correspondences and dualizing complexes used are admissible. Then for every $u:c_2^*K\\to c_1^!K$,\n$$\\operatorname{sp}_{\\widetilde F}\\bigl(\\operatorname{Tr}_c(u)\\bigr)=\\operatorname{Tr}_{b}\\bigl(\\operatorname{sp}_{\\widetilde c}u\\bigr).$$\nHere $\\operatorname{Tr}$ is the Verdier trace class of [def-trf-trace-class], the fixed schemes are those of [def-trf-fixed-scheme], and the specialization on Borel--Moore sections is that of [def-trf-deformation-specialization]. No properness of $c$, $\\widetilde c$, $X$ or their fixed schemes is assumed, and no invertibility of $u$ is assumed.",
  "source": {
   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
   "place": "Proposition 1.3.5, diagram (1.7), with the two legs interchanged; proof §4.3.4"
@@ -14,9 +14,126 @@
   "def-trf-trace-class",
   "def-trf-fixed-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the specialization functors and canonical comparison maps supplied by [lem-trf-specialization-cohomological-comparison], on the fixed diagrams of $c$ and $b$. The nearby-cycle construction in [def-trf-deformation-specialization] is made on etale representatives, available by [lem-sf-proetale-constructible-origin](ii); the finite-coefficient exceptional operation is the etale adjoint transported with its counit, as specified in [def-fix-six-functor-datum]. We use exactly this transported operation datum, not an unrelated ambient exceptional adjoint. Write $F=\\operatorname{Fix}(c)$, $\\bar F=\\operatorname{Fix}(b)$, and $\\bar X=\\widetilde X_0$, using [def-trf-fixed-scheme]. The Cartesian description shows that $\\operatorname{Fix}(\\widetilde c)_0=\\bar F$: a map from any test scheme to either side is precisely a map to $\\widetilde C_0$ and one to $\\widetilde X_0$ with equal images in $\\widetilde X_0\\times\\widetilde X_0$. The generic version similarly gives $F$, so the fixed lift used by the comparison is exactly the one in the assertion. Use specifically the two compactifiable factors supplied by [lem-trf-specialization-cohomological-comparison]: specialization to the proper-refined special fibre, followed by proper direct image to the original special fibre. For the specialization factor the external-product map $\\Pi$ is an isomorphism by [lem-trf-specialization-external-product], applied after strict henselization as in the specialization definition. For the proper-direct-image factor it is the inverse of the $!$-Kunneth isomorphism of [def-sf-kv-maps](i), using $Rf_!=Rf_*$ for the proper morphism: the inverse and $\\Pi$ have the same $g^*\\dashv Rg_*$ transpose, the two projection comparisons followed by tensor and the two ordinary counits, by the defining base-change/projection-formula construction of $\\mathrm{Ku}_!$. Thus they are equal by the adjunction bijection. We prove the diagram for either of these actual compactifiable factors in Steps 2--6; we do not need a cancellation for an arbitrary abstract pre-comparison. For two consecutive comparisons the induced map on coefficient morphisms is obtained by substituting the two whiskered $\\alpha$ and $\\beta$ maps, and the section map is obtained by substituting the two $j$ and $\\delta$ maps. These are the definitions of the composite datum; hence composition of the two commuting diagrams gives the diagram for their composite. Induction on the finite number of factors, with the identity diagram as base case, therefore reduces the proof to the compactifiable case. All intermediate bounded finite-Tor domains are included in the specialization-comparison statement, rather than inferred just from the single hypothesis on $\\operatorname{sp}K$.",
+   "uses": [
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-specialization-external-product",
+    "def-sf-kv-maps",
+    "def-trf-deformation-specialization",
+    "def-trf-fixed-scheme",
+    "def-trf-cohomological-comparison",
+    "lem-sf-proetale-constructible-origin",
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(b), §4.3.3 and §4.3.4"
+   }
+  },
+  {
+   "text": "Fix either actual compactifiable factor of Step 1, $(f,t,\\alpha,\\beta,\\iota)$, from $c$ to a correspondence denoted $\\bar c$, and use its maps of [def-trf-cohomological-comparison]. Put $K'=f_XK$, $P=K\\boxtimes D_XK$, $Q=f_XK\\boxtimes f_XD_XK$ and $\\bar P=K'\\boxtimes D_{\\bar X}K'$. Let $J=1\\boxtimes d_X:Q\\xrightarrow{\\sim}\\bar P$; it is an isomorphism by axiom (V), and the external comparison $\\Pi:Q\\to f_{X\\times X}P$ is an isomorphism by Step 1. Denote by $e_K:P\\to R\\Delta_*\\omega_X$ the evaluation kernel in [lem-trf-trace-map-from-external-duality]. We claim\n$$\\bar e_{K'}\\circ J=R\\bar\\Delta_*(\\delta_X)\\circ\\alpha_{\\Delta,*}\\circ f_{X\\times X}(e_K)\\circ\\Pi.$$\nTake ordinary $\\bar\\Delta^*\\dashv R\\bar\\Delta_*$ adjoints. The right side becomes $\\delta_X f_X(\\operatorname{ev}_K\\circ\\mathrm{sym})\\alpha_\\Delta\\bar\\Delta^*\\Pi$. Clause (c) of [lem-trf-cohomological-evaluation-calculus] replaces the last two factors by $t_X$. The transpose defining $d_X$ changes $\\delta_X f_X(\\operatorname{ev}_K)t_X$ into $\\operatorname{ev}_{K'}(d_X\\otimes1)$. Axiom (I), naturality of signed symmetry and the symmetry in the evaluation kernel put this into exactly $\\operatorname{ev}_{K'}\\mathrm{sym}(1\\otimes d_X)$, the adjoint of the left side. The adjunction bijection is injective, proving the claim. This compares both the map and its sign.",
+   "uses": [
+    "def-trf-cohomological-comparison",
+    "lem-trf-trace-map-from-external-duality",
+    "lem-trf-cohomological-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.4.2, diagram (4.13), with the factors and legs interchanged"
+   }
+  },
+  {
+   "text": "We next compare the external-duality maps, keeping the project factor order. Write $V=R\\mathcal Hom(p_2^*K,p_1^!K)$ and $\\bar V=R\\mathcal Hom(\\bar p_2^*K',\\bar p_1^!K')$. The evaluation-compatible external-duality isomorphism of [thm-trf-verdier-duality] is the inverse of the map $\\kappa:P\\to V$ defined in clause (iv) of [def-sf-kv-maps]; equivalently its tensor--Hom transpose first evaluates $D_XK\\otimes K$ on the second factor and then applies $p_2^*\\omega_X\\otimes p_1^*K\\to p_1^!K$. For this latter arrow use the exceptional tensor map $T_{p_1}$ after $\\chi\\otimes1$, where $\\chi:p_2^*\\omega_X\\to p_1^!A_X$ is the exchange of [lem-trf-cohomological-evaluation-calculus](d). The definition of exceptional Kunneth in [def-sf-kv-maps](ii),(iv) gives this same map: both are the projection-formula and counit transpose for $p_1=\\operatorname{id}_X\\times a_X$.\n\nLet $\\theta_Z=R\\mathcal Hom(\\alpha_{p_2},\\beta_{p_1})\\circ r_{X\\times X}:f_{X\\times X}V\\to\\bar V$. We claim $\\theta_Z f_{X\\times X}(\\kappa)\\Pi=\\bar\\kappa J$. Tensor--Hom transposition reduces the claim to equality of maps $\\bar p_2^*K'\\otimes Q\\to\\bar p_1^!K'$. Expand $\\Pi$ and $\\kappa$. Axiom (IV) of [def-trf-cohomological-comparison] for $p_2$ moves the two ordinary comparisons through the second-factor evaluation; the evaluation transpose defining $d_X$ then replaces its output by $\\delta_X$. Clause (d) of [lem-trf-cohomological-evaluation-calculus] moves this $\\delta_X$ across $\\chi$, producing $p_1^!j_X$. Apply clause (a) for $p_1$ to move the tensor comparison across $T_{p_1}$. Clause (c), $t_X(1\\otimes j_X)=1$, removes the inserted unit. What remains evaluates $D_{\\bar X}K'\\otimes K'$ and applies the barred exceptional tensor map, namely the transpose of $\\bar\\kappa J$. Naturality, associativity and signed symmetry are those in axioms (I),(IV); every permutation is the same on both sides. Transpose back. Put $L=R\\bar\\Delta_*(\\delta_X)\\alpha_{\\Delta,*}$ and $\\tau=e_K\\kappa^{-1}$. Steps 2 and 3 give $\\bar\\tau\\theta_Z f_{X\\times X}(\\kappa)\\Pi=Lf_{X\\times X}(e_K)\\Pi=Lf_{X\\times X}(\\tau)f_{X\\times X}(\\kappa)\\Pi$. Both $f_{X\\times X}(\\kappa)$ and $\\Pi$ are isomorphisms, the latter by Step 1. Cancel their composite to obtain $\\bar\\tau\\theta_Z=Lf_{X\\times X}(\\tau)$, the full product trace square needed in Step 4. This cancellation is justified only for the two actual factors chosen above.",
+   "uses": [
+    "def-trf-cohomological-comparison",
+    "thm-trf-verdier-duality",
+    "def-sf-kv-maps",
+    "lem-trf-cohomological-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.4.1--§4.4.3, diagrams (4.12)--(4.15), with the legs interchanged"
+   }
+  },
+  {
+   "text": "Pass from the identity correspondence to $c$. The external-duality trace construction [lem-trf-trace-map-from-external-duality] factors as the inverse of the exceptional Hom exchange, the exceptional pullback of $\\kappa^{-1}$ and $e_K$, and fixed-square exchange. Use $H_c:c^!R\\mathcal Hom(p_2^*K,p_1^!K)\\to R\\mathcal Hom(c_2^*K,c_1^!K)$, the evaluation-defined map of [lem-trf-cohomological-evaluation-calculus](b); its isomorphism property is [lem-trf-exceptional-internal-hom-exchange], in the inverse direction there. The ordinary comparisons of the two legs factor through $c,p_i$ by axiom (III) of [def-trf-cohomological-comparison]; the exceptional comparisons factor through those maps by [lem-trf-cohomological-exchange-calculus](a). Clause (b) of the evaluation calculus, with $g=c$, $M=p_2^*K$, $N=p_1^!K$, is precisely the square that compares $f_C H_c$ with $H_{\\bar c}$ through $\\beta_c$, $r_{X\\times X}$ and the leg comparisons. The remaining lower square commutes by naturality of $H_{\\bar c}$ in $M,N$. Paste this square with the diagram proved in Steps 2--3. This gives the comparison through $c^!e_K$; the only remaining arrow is the fixed-square exchange to the dualizing complex on the fixed locus.",
+   "uses": [
+    "def-trf-cohomological-comparison",
+    "lem-trf-trace-map-from-external-duality",
+    "lem-trf-cohomological-evaluation-calculus",
+    "lem-trf-cohomological-exchange-calculus",
+    "lem-trf-exceptional-internal-hom-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.4.4--§4.4.5, diagrams (4.16)--(4.17)"
+   }
+  },
+  {
+   "text": "Both fixed squares are Cartesian by [def-trf-fixed-scheme]. Since $X,\\bar X$ are separated, their diagonals are closed immersions by [def-weil-proper-morphism]. Their base changes $i_F,i_{\\bar F}$ are closed immersions by [lem-pc-closed-subscheme-base-change-ideal-image], hence these four maps are proper by [lem-weil-pbc-closed-immersion-proper]. No claim of properness is made for $c,d$ or a structure map. The exchange $B_c:c^!R\\Delta_*\\omega_X\\xrightarrow{\\sim}Ri_{F*}d^!\\omega_X$ is exactly [thm-trf-fixed-point-base-change](2), normalized as the right-adjoint compact-support mate, and the dualizing identification $d^!\\omega_X=\\omega_F$ is [thm-trf-dualizing-complex-composition]. Apply [lem-trf-cohomological-exchange-calculus](c) with $h=\\Delta$, $v=c$, $h'=i_F$, $v'=d$. It compares the inverse of $B_c$ with the inverse of $B_{\\bar c}$ via $\\beta_c$, $\\alpha_{\\Delta,*}$, $\\alpha_{i_F,*}$ and $\\beta_d$. Since both exchanges are isomorphisms, invert these two arrows in this commuting square. Naturality moves $\\delta_X$ through the exchange, and clause (b) identifies $d_{\\bar c}^!\\delta_X\\circ\\beta_d$ with $\\delta_F$. Pasting with Step 4 therefore gives the full sheaf-level trace square\n$$\\varphi_{\\bar c,K'}\\circ\\theta_C=Ri_{\\bar F*}(\\delta_F)\\circ\\alpha_{i_F,*}\\circ f_C(\\varphi_{c,K}),\\qquad\\theta_C=R\\mathcal Hom(\\alpha_{c_2},\\beta_{c_1})\\circ r_C,$$\nwhere $\\varphi$ is exactly the composite in [lem-trf-trace-map-from-external-duality]. This proves the sheaf-level assertion rather than taking a trace-compatibility theorem as an input.",
+   "uses": [
+    "def-trf-fixed-scheme",
+    "def-weil-proper-morphism",
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "lem-weil-pbc-closed-immersion-proper",
+    "thm-trf-fixed-point-base-change",
+    "thm-trf-dualizing-complex-composition",
+    "lem-trf-cohomological-exchange-calculus",
+    "lem-trf-trace-map-from-external-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.4.6, diagram (4.18)"
+   }
+  },
+  {
+   "text": "Apply the preceding sheaf square to the section $\\widetilde u:A_C\\to\\mathcal H_c(K)$ representing $u$, as in [def-trf-trace-class]. For a morphism $q:M\\to N$, the tensor--Hom transpose of $r_Zh_Z(q)$ is $f_Z(q)\\circ t_Z(1\\otimes j_Z)$; this is $f_Z(q)$ by [lem-trf-cohomological-evaluation-calculus](c). Thus $r_Zh_Z(q)$ is the section representing $f_Z(q)$. Composing with the two leg comparisons shows that $\\theta_Ch_C(\\widetilde u)$ represents $\\beta_{c_1}f_C(u)\\alpha_{c_2}$. Its exceptional adjoint is $f_X(\\widehat u)\\circ\\beta_{c_1,!}\\circ R\\bar c_{1!}(\\alpha_{c_2})$: substitute the definition of the mate $\\beta_{c_1,!}$ from [def-trf-cohomological-comparison], move $f_C(u)$ through the unit by naturality, and cancel the exceptional unit--counit pair. For specialization this is the coefficient morphism prescribed in [def-trf-deformation-specialization].\n\nFor the output sections, ordinary adjunction gives $h_C$ followed by $\\alpha_{i_F,*}$ equal to $h_F$. Indeed axiom (III) yields $\\alpha_{i_F}(A_C)\\circ i_{\\bar F}^*j_C=j_F$, since $a_F=a_Ci_F$. Transposing the two candidates for a section of $Ri_{\\bar F*}f_F\\omega_F$ now gives this same composite followed by $f_F$ of the adjoint section; the ordinary counit and unit cancel. Postcomposition with $\\delta_F$ consequently sends a section $q:A_F\\to\\omega_F$ to $\\delta_F f_F(q)j_F$. By [def-trf-trace-class] these are the two section maps induced by the sheaf square. In the specialization comparison, the maps $j_F$ and $\\delta_F$ are respectively the nearby-cycle constant unit and exceptional dualizing comparison, so $q\\mapsto\\delta_F f_F(q)j_F$ is exactly the Borel--Moore specialization of [def-trf-deformation-specialization]. Steps 1--5 and this section computation prove the stated equality for the original lift. All formulas are linear in the arbitrary $u$; no inversion of $u$ occurs.",
+   "uses": [
+    "def-trf-trace-class",
+    "lem-trf-cohomological-evaluation-calculus",
+    "def-trf-cohomological-comparison",
+    "def-trf-deformation-specialization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Proof of Corollary 4.3.2, diagrams (4.10)--(4.11), and §4.3.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-specialization-cohomological-comparison",
+  "lem-trf-specialization-external-product",
+  "def-sf-kv-maps",
+  "def-trf-deformation-specialization",
+  "def-trf-fixed-scheme",
+  "def-trf-cohomological-comparison",
+  "lem-sf-proetale-constructible-origin",
+  "def-fix-six-functor-datum",
+  "lem-trf-trace-map-from-external-duality",
+  "lem-trf-cohomological-evaluation-calculus",
+  "thm-trf-verdier-duality",
+  "lem-trf-cohomological-exchange-calculus",
+  "lem-trf-exceptional-internal-hom-exchange",
+  "def-weil-proper-morphism",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-weil-pbc-closed-immersion-proper",
+  "thm-trf-fixed-point-base-change",
+  "thm-trf-dualizing-complex-composition",
+  "def-trf-trace-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§4.3.4, expanding the proof of Theorem 4.3.1 (§4.4) and Corollary 4.3.2 rather than citing their conclusions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -28,9 +145,9 @@
   {
    "tool": "loogle",
    "query": "\"traceClass\"",
-   "results": "2 hits: Lean.registerTraceClass, Aesop.TraceOption.traceClass",
+   "results": "2 hits: Lean.registerTraceClass, Aesop.TraceOption.traceClass; full returned signatures saved in lem-trf-trace-specialization.search-output.txt",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern homology sequences, specialization of topological stalks, or Lean diagnostic trace classes, not Verdier trace-class specialization"
+   "verdict": "no match: topological stalk specialization, linear traces and diagnostic trace classes do not state Verdier trace specialization"
   },
   {
    "tool": "grep",
@@ -45,10 +162,31 @@
    "results": "8 hits: TopCat.Presheaf.germ_stalkSpecializes, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_assoc, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkSpecializes_stalkMap, AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_apply, Specialization.ofEquiv_toEquiv, Specialization.toEquiv",
    "date": "2026-10-17",
    "verdict": "no match: hits concern homology sequences, specialization of topological stalks, or Lean diagnostic trace classes, not Verdier trace-class specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specialization by nearby cycles preserves the Lefschetz Verdier trace class of a cohomological correspondence without properness assumptions.",
+   "results": "8 hits: TopCat.Presheaf.stalkSpecializes_stalkPushforward, TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc, TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply, TopCat.Presheaf.stalkSpecializes_stalkFunctor_map, TopCat.Presheaf.stalkSpecializes_comp, TopCat.Presheaf.stalkSpecializes_stalkFunctor_map_assoc, TopCat.Presheaf.stalkSpecializes_comp_apply, AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap; full returned signatures saved in lem-trf-trace-specialization.search-output.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological stalk specialization, linear traces and diagnostic trace classes do not state Verdier trace specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier.*trace|trace.*specialization|nearbyCycles",
+   "results": "0 hits: none; full returned signatures saved in lem-trf-trace-specialization.search-output.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological stalk specialization, linear traces and diagnostic trace classes do not state Verdier trace specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace map of a correspondence commutes with nearby cycle specialization.",
+   "results": "8 hits: LinearMap.trace_comp_comm, Algebra.intTrace.congr_simp, LinearMap.trace_mul_cycle, LinearMap.trace_comp_cycle, LinearMap.trace_baseChange, Algebra.trace_comp_trace, Algebra.trace_eq_of_equiv_equiv, LinearMap.trace_comp_cycle'; full returned signatures saved in lem-trf-trace-specialization.search-output.txt",
+   "date": "2026-10-17",
+   "verdict": "no match: topological stalk specialization, linear traces and diagnostic trace classes do not state Verdier trace specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-term-locality",
@@ -65,5 +203,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-trace-specialization",
+  "worker": "stage1",
+  "summary": "Read Varshavsky Proposition 1.3.5 and §§4.1--4.4. Expanded product evaluation, external Hom, exceptional pullback, fixed-square exchange and passage to sections. Five unsplit inputs record the comparison datum, nearby-cycle realization, nearby-cycle external-product Kunneth and two structural comparison calculi; none states trace compatibility. The original statement and its no-properness and arbitrary-coefficient-map clauses are retained.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, main-20261015 proof paragraph (1) and (2), normal-cone specialization in Varshavsky Theorem 2.1.3. This split realizes its Proposition 1.3.5 input: Steps 1 and 6 identify specialization; Steps 2--5 expand the structural trace comparison. Unit sk-i-curve-zero, step 2, remains the normal-cone contraction route.",
+  "tool_uses": [
+   {
+    "node": "def-sf-kv-maps",
+    "why": "The generic definitions (ii),(iv) specify the exceptional Kunneth map and its evaluation transpose, needed to compare the exact maps in Step 3."
+   },
+   {
+    "node": "def-trf-fixed-scheme",
+    "why": "A generic normalized geometric operation tool required by the displayed comparison; the contraction unit gives no substitute for it."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "The bounded equivalence supplies an etale representative for the project coefficient complex in Step 1."
+   },
+   {
+    "node": "def-fix-six-functor-datum",
+    "why": "The operation datum specifies the exceptional etale adjoint transported with its counit, fixing the project-version normalization in Step 1."
+   },
+   {
+    "node": "lem-trf-trace-map-from-external-duality",
+    "why": "The explicit normalized external-duality composite defines the trace morphism being compared; the contraction unit gives no replacement trace construction."
+   },
+   {
+    "node": "thm-trf-verdier-duality",
+    "why": "The generic evaluation-compatible external-duality isomorphism identifies the product kernel and the internal-Hom source in Step 3."
+   },
+   {
+    "node": "lem-trf-exceptional-internal-hom-exchange",
+    "why": "The generic exceptional Hom exchange identifies the pullback of the product Hom source in Step 4; it is not a contraction-specific theorem."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Separatedness means that the diagonal is a closed immersion, the proper-map hypothesis used in Step 5."
+   },
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Closed immersions are preserved by base change, so the fixed inclusions are closed in Step 5."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Closed immersions are proper, verifying the four proper arrows in the support square of Step 5."
+   },
+   {
+    "node": "thm-trf-fixed-point-base-change",
+    "why": "The generic right-adjoint fixed-square exchange identifies the support arrow in Step 5; the contraction unit supplies no such operation identity."
+   },
+   {
+    "node": "thm-trf-dualizing-complex-composition",
+    "why": "The generic composition theorem identifies d^!omega_X with omega_F in the support calculation of Step 5."
+   },
+   {
+    "node": "def-trf-trace-class",
+    "why": "A generic normalized geometric operation tool required by the displayed comparison; the contraction unit gives no substitute for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sf-kv-maps",
+  "def-trf-fixed-scheme",
+  "lem-sf-proetale-constructible-origin",
+  "def-fix-six-functor-datum",
+  "lem-trf-trace-map-from-external-duality",
+  "thm-trf-verdier-duality",
+  "lem-trf-exceptional-internal-hom-exchange",
+  "def-weil-proper-morphism",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-weil-pbc-closed-immersion-proper",
+  "thm-trf-fixed-point-base-change",
+  "thm-trf-dualizing-complex-composition",
+  "def-trf-trace-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-0c9e4a7e6",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-0c9e4a7e6 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Varshavsky arXiv math/0505564 (local PDF): §§1.3.1–1.3.5 with (1.7), 4.1.1–4.1.7, Lemmas 4.2.1–4.2.4, Thm 4.3.1, Cor 4.3.2, Remark 4.3.3, §4.3.4 and §§4.4.1–4.4.6. I read Lu–Zheng from the publisher HTML (no local PDF). §3 there works over a henselian valuation ring with mΛ=0, m invertible; Prop 3.1 is the Künneth formula for Ψ for X, Y of finite type; Construction 3.2 gives the four base-change maps. I also read every cited node statement and the proof of thm-trf-verdier-duality. Item: faithful to Prop 1.3.5 with the legs swapped, no properness, any u. The only change is that Fix(c̃) is written out as F̃, and its special fibre is Fix(b). Not weakened. Varshavsky's (4.12) has f(DF⊠F) in the middle, so it gives (4.8) only after precomposing with f(κ)Π. The split proves Π invertible for the two actual factors: nearby-cycle Künneth for the specialization factor, and Ku_!^{-1} from def-sf-kv-maps(i) for the proper factor. It then cancels f(κ)Π, which correctly fills a gap left implicit in the source proof. Steps 2–6: I re-derived the Δ̄^* adjoint (Lemma 4.2.4(e), then the d_X transpose). I checked clause (d) against 4.2.4(f) with the indices swapped. I checked (a) and (b) against 4.2.2(a),(b) with g=c, and the β-composition against 4.2.1(a). I checked exchange (c) against (c2) with h=Δ, v=c, h'=i_F, v'=d, with properness coming only from the closed diagonals and fixed inclusions. I checked the section maps against 4.2.4(a),(c),(d) and the mate cancellation. Composition of the factors follows from naturality, as in Remark 4.3.3. The five new nodes are statement-only and match Def 4.1.3/Notation 4.2.3, 4.1.4(b)/4.1.6, Lu–Zheng Prop 3.1 specialized to the strictly henselized DVR, and Lemmas 4.2.1, 4.2.2, 4.2.4. None restates a clause of the item, none duplicates an existing node (grep and blueprint search, including thm-trf-trace-proper-compatibility and lem-trf-ordinary-kunneth), and there is no cycle. Edge cases checked: empty Fix, K=0, u=0, constant lift, non-proper 𝔸^n. I accept the declared tool_uses: all are generic six-functor, trace-construction or scheme facts. No fixes. Minor notes: two coherence identifications (Ku_!^{-1}=Π and T_{p1}(χ⊗1)=α_{id,a_X}) are argued only briefly, and the new nodes have no lean_audit field."
  }
 }

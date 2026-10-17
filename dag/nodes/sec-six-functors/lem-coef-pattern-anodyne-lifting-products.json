@@ -12,9 +12,148 @@
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $q:(X,M)\\to(C,S)$ have RLP against $J_{\\mathfrak P}$. The (C1) problems are exactly inner horns, so $q$ is inner and $X$ is a quasicategory since $C$ is. For a marked edge $e$, its image lies in $S$ because $q$ is a marked map. For every initial-horn problem with first edge $e$, (C0) applies and fills it; hence $e$ is globally $q$-cocartesian by the horn definition. The (B0) problems supply such a marked lift with any given source over every edge of $S$. This establishes the inner-fibration condition and one direction of the marking condition; it does not merely identify them with the definition.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.6, forward (1),(2),(4); fully scaled case."
+   }
+  },
+  {
+   "text": "First let $e$ be an equivalence in a fiber $X_c$, which is a quasicategory by inner-horn base change. The finite inverse-tetrahedron lemma extends $e$ on the central edge to $Q\\to X_c$. Viewed in $X$ this lies over the constant map at $c$, whose edges all belong to $S$. Lifting (A1) marks all its edges, in particular $e$. Now let $e:x\\to y$ be any $q$-cocartesian edge over $f\\in S$. Choose a marked cocartesian lift $e':x\\to y'$ over $f$ using Step 1. The comparison between the two initial objects of $L(x,f)$ supplies a triangle with edges $e',e'',e$, where $e'':y'\\to y$ is an equivalence in the target fiber. Thus $e''$ is marked by the preceding argument. Its base triangle has edges $f,1,f$ in $S$, so (A0) marks $e$. This proves exactly that the marked edges are the globally cocartesian edges over $S$.",
+   "uses": [
+    "lem-coef-finite-inverse-tetrahedron",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.6, forward (3)."
+   }
+  },
+  {
+   "text": "Fix a cone $p_\\alpha$. Pulling back $q$ along it is inner. All edges in the cone map into $S$, so Step 1 supplies cocartesian lifts of every edge, still cocartesian after pullback by the lifting definition. Thus $q_\\alpha$ is a cocartesian fibration. A marked edge stays cocartesian after pullback by the horn definition. Conversely, let $a:x\\to y$ be cocartesian in the pullback over a cone edge $g$. Choose a marked global cocartesian lift $b:x\\to y'$ over $p_\\alpha(g)$ and regard it as a lift of $g$ in the pullback. The comparison lemma applied to these two initial lifts gives a triangle $(b,d,a)$ with $d:y'\\to y$ an equivalence in the target fiber. Its image in $X$ is marked by the fiber-equivalence part of Step 2; the base triangle has edges $p_\\alpha(g),1,p_\\alpha(g)$ in $S$, so (A0) marks $a$. Thus the pullback-cocartesian edges are exactly the pulled-back marked edges, and its cocartesian sections are exactly the marked maps from $(K_\\alpha^{\\triangleleft})^\\sharp$. The (B1) problems now say that every cocartesian section on $K_\\alpha$ extends exactly to the cone. For each full cocartesian section $s$ with restriction $f$ on $K_\\alpha$, form the fixed-diagram join slices $X_{/f}\\to C_{/qf}$ of the join-slice recognition lemma. This is an inner fibration of quasicategories. Its positive-dimensional boundary problems with final vertex $s$ unpack exactly to (C2), including the specified final-vertex cone and exact base map. The relative-final boundary criterion therefore makes $s$ relatively final in this join slice; the join-slice recognition lemma makes $s$ a $q$-limit diagram. This uses fixed-diagram join slices, rather than identifying them with the internal functor category of cones. The cocartesian-cone section test applies (small $K_\\alpha$, quasicategory base, cocartesian pullback) and turns these exact extensions into the assertion that the classifying cone is a limit. These are the two remaining fibered conditions.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-cocartesian-cone-limit-section-test",
+    "lem-coef-relative-limit-join-slice-recognition",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.0.26 and B.1.6, forward (5 prime),(6)."
+   }
+  },
+  {
+   "text": "Conversely assume $(X,M)$ is fibered. It lifts (C1) by innerness, (B0) by the existence of cocartesian lifts over $S$, and (C0) because each marked edge is globally cocartesian, exactly the initial-horn lifting definition. For (A0), the two consecutive edges are cocartesian, so their long edge is cocartesian by the composition lemma; its base lies in $S$, so it is marked. For (A1), a given map $Q\\to X$ sends every edge to an equivalence by the finite inverse-tetrahedron lemma. The relative outer-horn lemma makes every equivalence edge globally $q$-cocartesian; as all base edges are in $S$, all are marked, giving the extension. For (B1), a prescribed sharp section on $K_\\alpha$ is cocartesian because marked edges are globally cocartesian and remain so after pullback. The classifying cone is a limit, so the section test makes restriction an equivalence and an isofibration; essential surjectivity followed by lifting an equivalence to the prescribed section gives an extension with exactly that restriction. To see that the extended cocartesian section is marked, take any one of its edges $a:x\\to y$ over a cone edge $g$ and choose a global cocartesian lift $b:x\\to y'$ of $p_\\alpha(g)$. It is marked by condition (ii), and remains cocartesian after pullback. Initiality of both pullback lifts gives a triangle $(b,d,a)$ with $d:y'\\to y$ an equivalence in the target fiber. Its image in $X$ is an equivalence, hence globally $q$-cocartesian by the relative outer-horn lemma. The composition lemma applied to the image triangle makes $a$ globally $q$-cocartesian; its base lies in $S$, so condition (ii) marks it. For (C2), the given sharp final cone is a cocartesian section; the fibered relative-limit condition and join-boundary test give exactly the required extension. No marking beyond that final cone is demanded by (C2). This proves RLP against all seven generator types in both directions.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-finite-inverse-tetrahedron",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "lem-coef-cocartesian-cone-limit-section-test",
+    "lem-coef-infinity-relative-limit-join-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.6, reverse, all seven cases."
+   }
+  },
+  {
+   "text": "RLP against generators extends to their weakly saturated closure: for a pushout use its universal property; for a small transfinite chain choose compatible lifts successively and at a limit take their union; for an arrow retract compose the lift with the retract maps. Conversely the closure contains the generators. Every generator is degreewise injective, including the marking-only maps (A0),(A1), whose underlying map is the identity. Pushouts, transfinite unions and retracts preserve degreewise injectivity, so every pattern-anodyne map is degreewise injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.1 and B.1.6, passage from generators to weak saturation."
+   }
+  },
+  {
+   "text": "Specialize the recognition just proved to the cone-free point pattern. The cocartesian horn test over a point is precisely the initial-outer-horn test for an edge to be an equivalence. Thus its marked edges are exactly the equivalence edges. Every quasicategory with those edges marked satisfies the fibered definition: the degenerate edge supplies each required lift over the sole edge of the point, and the cone conditions are vacuous. Conversely a fibered marked object is inner over the point, hence a quasicategory, with exactly these markings. Therefore its fibered objects are precisely $D^\\natural$.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.0.21 and point specialization of B.1.6."
+   }
+  },
+  {
+   "text": "The generator-product lemma uses exactly the point-pattern family A0,A1,B0,C0,C1, with no cones. Its clauses (a),(b) give the required product inclusions when the anodyne factor is a generator. For fixed other factor, the pushout-product functor preserves pushouts, small transfinite compositions and retracts: Cartesian product with a fixed marked simplicial set preserves colimits degreewise (on markings it distributes intersection with a fixed set over unions), and the displayed pushout formula then has the same property on arrows. Applying this separately in either variable extends the generator clauses to both weakly saturated closures. This proves both product assertions.",
+   "uses": [
+    "lem-coef-pattern-generator-product-cells",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.8 and B.1.9, all fourteen cases followed by weak saturation."
+   }
+  },
+  {
+   "text": "Write $F_i:\\operatorname{Map}^\\sharp_C(A',Z)\\to\\operatorname{Map}^\\sharp_C(A,Z)$ for restriction. A lifting square against the horn $\\Lambda_k^n\\subseteq\\Delta^n$, $0\\leq k<n$, is by the explicit mapping definition and the product adjunction exactly an extension into $Z$ against $i\\square((\\Lambda_k^n)^\\sharp\\to(\\Delta^n)^\\sharp)$. Clause (c) of the generator-product lemma places the sharp horn in the point-pattern anodyne class (including $n=1,k=0$). Step 7 makes the product pattern-anodyne, and Steps 4-5 give the extension. Thus $F_i$ is a left fibration. In particular take $i:\\varnothing\\to A$. Its target is the point, so $\\operatorname{Map}^\\sharp_C(A,Z)\\to *$ is a left fibration. Reverse each simplex order, sending horn index $k$ to $n-k$: this turns a left fibration into a right fibration, preserves the point and all Kan horns, and is involutive. The right-fibration-over-a-space lemma applied to this opposite map shows its domain is Kan. Reversing again shows the requested sharp mapping set is Kan. This proves it for every $A$, without identifying the point-pattern anodyne class with Cartesian marked-anodyne maps.",
+   "uses": [
+    "lem-coef-pattern-generator-product-cells",
+    "lem-coef-marked-point-cartesian-model",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.13 and B.1.14; opposite of HTT 2.1.3.3."
+   }
+  },
+  {
+   "text": "For a general injective $i$, the target of $F_i$ is Kan by Step 8. Apply the same order reversal and the right-fibration-over-a-space lemma to the left fibration $F_i$: it lifts all horns, so $F_i$ is a Kan fibration. If $i$ is pattern-anodyne, any boundary lifting problem for $F_i$ adjoints to the product of $i$ with $(\\partial\\Delta^n)^\\sharp\\to(\\Delta^n)^\\sharp$, a degreewise injective marked map. Step 7 makes this product pattern-anodyne, hence it extends into $Z$. This holds also for $n=0$, giving surjectivity on vertices. The boundary characterization of trivial fibrations then makes $F_i$ a trivial Kan fibration.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.14, B.1.9 and B.2.2; boundary characterization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-categorical-pattern-fibrancy",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-cocartesian-cone-limit-section-test",
+  "lem-coef-finite-inverse-tetrahedron",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-relative-limit-join-boundary",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-pattern-generator-product-cells",
+  "lem-coef-relative-limit-join-slice-recognition"
+ ],
+ "proof_origin": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "B.1.6, B.0.26, B.1.9, B.1.13, B.1.14 and B.2.2; fully scaled specialization.",
+  "by": "agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +206,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-categorical-pattern-model-calculus",
@@ -94,5 +233,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-pattern-anodyne-lifting-products",
+  "worker": "stage1",
+  "summary": "Repair of E2/E3/C1/D3/C8: retain the correct item statement; use the actual cocartesian point-pattern generators, sharp LEFT horns, and left fibrations. Spell out all seven recognition cases using four smaller helper statements, together with the existing forward join-boundary and relative-final boundary criteria. Declare the three off-unit horn/fibration tools.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the derived inverse limit; auxiliary construction of the marked operadic models used by lem-coef-marked-operadic-model-structures. Higher Algebra, Definition B.1.1, Proposition B.1.6, Proposition B.1.9 specialized to a second pattern trivial on a point, and Proposition B.1.14, printed pp.1470-1482. For triviality of restriction along a P-anodyne map, use the proof of B.1.14 together with B.1.9, as in Example B.2.2. The point-pattern identification is Example B.0.21 and the definition of cocartesian edges over a point.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Makes equivalence edges cocartesian for arbitrary inner fibrations; no same-unit relative outer-horn tool states this."
+   },
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Identifies the absolute cocartesian horn test with equivalences in the point-pattern case."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Via explicit order reversal, a left fibration over a Kan complex is Kan; this is a generic simplicial tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-right-fibration-space-fiber"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-47650a423",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-47650a423 (reviewer sub-agent of L); spot-checked: I read all of the item, the four new nodes, every cited statement and the unit record. As the source I read HA Appendix B from a local HA.pdf: B.0.26, B.1.1, B.1.6 with B.1.7 and its proof, B.1.8, B.1.9/B.1.10, B.1.11–B.1.13, B.1.14 and B.2.2. Item statement: the seven generator types match B.1.1. Full scaling makes the conditions on scaled 2-simplices vacuous. The recognition clause is B.1.6, and since the DAG's fibrancy definition uses global cocartesian edges, C0 over every simplex gives them directly. In the product clause P x P0 = P, which I checked against B.1.8: the cones are p_alpha x {s'} and P0 adds none. B.1.14's printed 'P0-anodyne' typo is correctly read as P-anodyne, as its proof and B.2.2 require. Nothing in the statement is weakened, and I tested the edge cases: empty K, n=0 and marking-only generators. Steps 1-4 follow the B.1.6 proof case by case. In Step 2 the triangle orientation and the s1(f) base are correct, and A1 is applied over the constant map. In Step 3, C2 is exactly the boundary problem for X_{/f} -> C_{/qf} with final vertex s, and the order of use is not circular: the cones are shown to be q-limits before the section test needs that. Step 4 handles the B1 marking through a fiber equivalence plus composition. Step 5 is genuinely elementary. Steps 7-9 follow the B.1.14 proof, using reversal plus the right-fibration tool. proof_deps equals the union of the step uses, and there is no cycle. New nodes: (1) product-cells: (a),(b) are the generator cases of B.1.9 and (c) is B.1.13, with n=2, i=0 handled through B.1.11. It is generator-level and strictly smaller than the item. (2) finite-inverse-tetrahedron: Q has vertices A=[0]=[2] and B=[1]=[3], and the central edge has both inverses. It is true and not stated elsewhere: grep finds Δ^{1,3} only in this item, the helper and two citers of the item. (3) cone-limit-section-test: HA B.0.26 / HTT 3.3.3.1. I checked fullness via relative right Kan extension, the isofibration claim and empty K. It is not lem-cbc-cocartesian-sections-limit. (4) join-slice-recognition: the converse of the forward join-boundary node. The corner lemma needs an isofibration, and this q need not be one. q_f is inner by HTT 2.1.2.1. All four have the B1-B7 form, created.item set to this item, correct from/via, and three kinds of search. The three off-route lem-cbc nodes are accepted as tool_uses: the outer-horn lift, the outer-horn equivalence criterion, and the right-fibration-over-Kan fact. These are not target nodes, so no base-change or coefficient question arises. No SGA is used. No fixes."
  }
 }
