@@ -160,7 +160,8 @@ theorem exists_diagonal_fiber [IsDomain (Localization.AtPrime (fiberPrime q P hP
   have hcomap : fiberPrime q P hP = ΔD.comap (algebraMap F D) := by
     ext y
     rw [Ideal.mem_comap, fiberPrime, RingHom.mem_ker, RingHom.mem_ker, ← hχF]
-    exact (by rw [mul_one] : χF y * 1 = χF y) ▸ (hχ y 1).symm ▸ Iff.rfl
+    rw [Algebra.TensorProduct.algebraMap_apply, Algebra.algebraMap_self, RingHom.id_apply, hχ,
+      mul_one]
   -- the map `B ⊗ B → D`
   let f₁ : B →ₐ[R₀] D := ((Algebra.TensorProduct.includeLeft : F →ₐ[κq] D).restrictScalars R₀).comp
     (Algebra.TensorProduct.includeRight : B →ₐ[R₀] F)
