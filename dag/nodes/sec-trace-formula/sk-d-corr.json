@@ -3,25 +3,198 @@
  "blueprint": {
   "is": "sk-d-corr",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Correspondences and supported classes",
- "statement": "Let $X,Y$ be schemes over $s$, with\n$K\\in D(X,A)$ and $L\\in D(Y,A)$.\nA correspondence from $(X,K)$ to $(Y,L)$ consists of a scheme $C$ over $s$,\ntwo $s$-morphisms $c_1:C\\to Y$ and $c_2:C\\to X$, i.e.\n$c=(c_1,c_2):C\\to Y\\times X$, such that $c_1$ is compactifiable and\n$Rc_{1!}$ has a right adjoint $c_1^!$, and a coefficient map\n$u:c_2^*K\\to c_1^!L$, using the geometric operations.\nThe ordinary-pullback leg is $c_2$. For an opposite correspondence\n$d=(d_1,d_2):D\\to X\\times Y$, $v:d_2^*L\\to d_1^!K$, put\n\n$$\nZ=Y\\times X,\\quad \\bar d=\\tau d,\\quad E(C,D)=C\\times_ZD.\n$$\n\nHere $\\tau$ exchanges factors. For an endocorrespondence,\n$F=\\Fix(c)=C\\times_{X\\times X,\\,c,\\,\\Delta_X}X$, the equalizer of $c_1$ and $c_2$.\nFor $i:T\\to Z$, a class supported on $i$ means an element of\n$H_T^0(Z,P)=\\operatorname{Hom}(Ri_!A_T,P)$.\nTensor–Hom adjunction, the projection formula, and exceptional adjunction\nidentify such classes with coefficient maps; the supported class $[u]$ is the\ninverse image of $u$ under\n\n$$\n\\operatorname{Hom}\\bigl(Rc_!A_C,\\RHom_A(p_2^*K,p_1^!L)\\bigr)\n\\simeq\\operatorname{Hom}(c_2^*K,c_1^!L),\n$$\n\nso it carries the same information as $u$ and is not separate data.\nAll supports and structure maps remain specified data.",
+ "statement": "Use the base $s$, finite-level coefficient ring $A$ and derived categories of\n[sk-d-setup], with the given geometric operations of [sk-d-six].\nLet $X,Y$ be schemes over $s$, with\n$K\\in D(X,A)$ and $L\\in D(Y,A)$.\nA correspondence from $(X,K)$ to $(Y,L)$ consists of a scheme $C$ over $s$,\ntwo $s$-morphisms $c_1:C\\to Y$ and $c_2:C\\to X$, i.e.\n$c=(c_1,c_2):C\\to Y\\times X$, such that $c_1$ is compactifiable and\n$Rc_{1!}$ has a supplied right adjoint $c_1^!$ on coefficient categories\ncontaining the displayed objects, and a coefficient map\n$u:c_2^*K\\to c_1^!L$, using the geometric operations.\nThe ordinary-pullback leg is $c_2$. For an opposite correspondence\n$d=(d_1,d_2):D\\to X\\times Y$, $v:d_2^*L\\to d_1^!K$, put\n\n$$\nZ=Y\\times X,\\quad \\bar d=\\tau d,\\quad E(C,D)=C\\times_ZD.\n$$\n\nHere $\\tau$ exchanges factors, and $p_1:Z\\to Y$, $p_2:Z\\to X$ are the projections;\nthus $p_1c=c_1$ and $p_2c=c_2$. For an endocorrespondence,\n$F=\\Fix(c)=C\\times_{X\\times X,\\,c,\\,\\Delta_X}X$, the equalizer of $c_1$ and $c_2$.\nFor a compactifiable $i:T\\to Z$ for which the given operations define\n$Ri_!A_T$, and $P\\in D(Z,A)$,\na class supported on $i$ means an element of\n$H_T^0(Z,P)=\\operatorname{Hom}(Ri_!A_T,P)$.\nFor the following identification, assume in addition that\n$K\\in D^b_{ctf}(X,A)$ and $L\\in D^b_{ctf}(Y,A)$, that the support map\n$c:C\\to Z$ and the projection $p_1:Z\\to Y$ are compactifiable, and that\nthe given functors $Rc_!$, $Rp_{1!}$ and $Rc_{1!}$ have the exceptional\nadjunctions $Rc_!\\dashv c^!$, $Rp_{1!}\\dashv p_1^!$ and\n$Rc_{1!}\\dashv c_1^!$ on the full subcategories $D^b_{ctf}$,\nwith the last adjoint agreeing at $L$ with the one used in $u$.\nUse the projection formula and composition isomorphism of [sk-d-six]\non these subcategories, with all displayed operations supplied there.\nThe Hom sets in the display are computed in the ordinary ambient categories.\nTensor–Hom adjunction, the projection\nformula, and exceptional adjunction then identify such classes with coefficient maps; the supported class $[u]$ is the\ninverse image of $u$ under\n\n$$\n\\operatorname{Hom}\\bigl(Rc_!A_C,\\RHom_A(p_2^*K,p_1^!L)\\bigr)\n\\simeq\\operatorname{Hom}(c_2^*K,c_1^!L),\n$$\n\nso it carries the same information as $u$ and is not separate data.\nAll supports and structure maps remain specified data.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
   "place": "node sk-d-corr, order 2619"
  },
  "stmt_deps": [
   "sk-d-setup",
-  "sk-d-six"
+  "sk-d-six",
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product",
+  "def-nagata-compactifiable",
+  "def-sfb-derived-tensor-hom-adjunction-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Use $D(X,A)$ and $D(Y,A)$ from [sk-d-setup] and the given operations of [sk-d-six]. A scheme over $s$ and its $s$-morphisms mean the data of [def-weil-scheme-over-base]. Choose $C$, $a_C$, $c_1$, $c_2$ with $a_Yc_1=a_C=a_Xc_2$, a compactification of $c_1$ in the sense of [def-nagata-compactifiable], the stated right adjoint on categories containing the displayed objects, and a morphism $u:c_2^*K\\to c_1^!L$. This is a definition by a tuple of data, with no existence assertion for such tuples. In particular its ordinary-pullback leg is $c_2$.",
+   "uses": [
+    "sk-d-setup",
+    "sk-d-six",
+    "def-weil-scheme-over-base",
+    "def-nagata-compactifiable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
+    "place": "first paragraph: correspondence data"
+   }
+  },
+  {
+   "text": "By the universal property in [def-pc-fibre-product], the two equations over $s$ give the unique map $c=(c_1,c_2):C\\to Z=Y\\times_sX$. For an opposite tuple $d$, the pair $(d_2,d_1)$ gives $\\bar d:D\\to Z$; the factor exchange is the unique map exchanging the two projections, whose square is the identity by uniqueness. Choose the fibre product $E=C\\times_{Z,c,\\bar d}D$, its two projections $e_C,e_D$, and its structure map $a_Ce_C$. The other expression $a_De_D$ equals this one because $ce_C=\\bar d e_D$ and the structure maps of $c$ and $\\bar d$ agree over $s$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
+    "place": "opposite pair and displayed Z, factor exchange and E(C,D)"
+   }
+  },
+  {
+   "text": "The diagonal $\\Delta_X:X\\to X\\times_sX$ is the unique map with both projections equal to $\\operatorname{id}_X$, by [def-pc-fibre-product]. For an endocorrespondence define $F=C\\times_{X\\times_sX,c,\\Delta_X}X$ by [def-pc-fibre-product], with projections $i_F:F\\to C$ and $d_F:F\\to X$. Its defining equation says $c_1i_F=d_F=c_2i_F$. Conversely a test map $t:T\\to C$ with $c_1t=c_2t$ has the unique lift to $F$ associated to $(t,c_1t)$. Thus $i_F$ is the equalizer, without a separatedness assumption on $X$. Retain both projections and $a_Ci_F$ as specified maps.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
+    "place": "fixed scheme: diagonal pullback and equalizer"
+   }
+  },
+  {
+   "text": "For a specified compactifiable $i:T\\to Z$ for which the given operations define $Ri_!A_T$, define $H_T^0(Z,P)=\\operatorname{Hom}_{D(Z,A)}(Ri_!A_T,P)$ for $P\\in D(Z,A)$, where $A_T$ is the constant coefficient unit. The coefficient category is [sk-d-setup] and compactifiability means [def-nagata-compactifiable]. The definition is made only where the functor from [sk-d-six] is supplied; compactifiability alone is not used to assert a new ambient functor or right adjoint. A class is just a morphism of this Hom set. Neither an immersion condition on $i$ nor a right adjoint to $Ri_!$ is needed; the data retain $i$, not just its image.",
+   "uses": [
+    "sk-d-setup",
+    "sk-d-six",
+    "def-nagata-compactifiable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
+    "place": "supported classes: domain of Ri_! and definition"
+   }
+  },
+  {
+   "text": "For the final clause impose its additional finite-Tor constructibility and functor-domain hypotheses. Set $M=p_2^*K$ and $N=p_1^!L$. By the pullback stability in [sk-d-setup], $M\\in D^b_{ctf}(Z,A)$; the stipulated right adjoint $p_1^!$ is a functor between these full subcategories, so $N\\in D^b_{ctf}(Z,A)$. The constant unit $A_C$ also lies there: it is the locally constant free rank-one $A$-module in degree zero, with Tor amplitude $[0,0]$. The tensor–Hom adjunction [def-sfb-derived-tensor-hom-adjunction-sheaves], with coefficient category $\\mathcal A=\\operatorname{Mod}(A)$, gives $\\operatorname{Hom}(Rc_!A_C,\\RHom_A(M,N))\\simeq\\operatorname{Hom}(M\\otimes_A^{\\mathrm L}Rc_!A_C,N)$ in the ambient category. Explicitly a class $\\alpha$ is sent to evaluation after $1_M\\otimes\\alpha$. Precomposition with the braiding of [sk-d-six] identifies the latter Hom set with $\\operatorname{Hom}(Rc_!A_C\\otimes_A^{\\mathrm L}M,N)$. No assertion that $\\RHom_A(M,N)$ belongs to the restricted subcategory is needed for this ambient tensor–Hom calculation.",
+   "uses": [
+    "def-sfb-derived-tensor-hom-adjunction-sheaves",
+    "sk-d-six",
+    "sk-d-setup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
+    "place": "final Hom identification: tensor–Hom and braiding"
+   }
+  },
+  {
+   "text": "The projection formula of [sk-d-six] applies at $(A_C,M)$: both objects are in its stated $D^b_{ctf}$ domains by step 5. It gives $Rc_!A_C\\otimes_A^{\\mathrm L}M\\simeq Rc_!(A_C\\otimes_A^{\\mathrm L}c^*M)$. The tensor object on the right is in the restricted domain because its left-unitor isomorphism identifies it with $c^*M$, and [sk-d-setup] makes that domain closed under isomorphisms. The left unitor $A_C\\otimes_A^{\\mathrm L}c^*M\\simeq c^*M$, followed by $Rc_!$, therefore gives an isomorphism to $Rc_!c^*M$. Precomposing with its inverse gives $\\operatorname{Hom}(Rc_!A_C\\otimes_A^{\\mathrm L}M,N)\\simeq\\operatorname{Hom}(Rc_!c^*M,N)$. Pullback and compactifiable direct-image stability in [sk-d-setup] place $c^*M$ and $Rc_!c^*M$ in $D^b_{ctf}$. Together with $N\\in D^b_{ctf}$ this allows the exceptional adjunction $Rc_!\\dashv c^!$ of [sk-d-six] on those full subcategories to give $\\operatorname{Hom}(c^*M,c^!N)$. Fullness identifies these Hom sets with the displayed ambient Hom sets; no unbounded exceptional adjunction is asserted.",
+   "uses": [
+    "sk-d-six",
+    "sk-d-setup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
+    "place": "final Hom identification: projection formula, unitor and exceptional adjunction"
+   }
+  },
+  {
+   "text": "For the fixed finite coefficient ring $A$, [prop-weil-pbc-proetale-constant-ring-map] gives the canonical ring-sheaf identifications for each map. The identification for a composite agrees with the composite identification: after taking adjuncts, both maps from the constant coefficient sheaf send each constant section $a$ to the constant section $a$, so they agree by the uniqueness in its sheafification universal property. Apply [lem-weil-pbc-proetale-derived-pullback-composition] to $h=c$, $k=p_2$, and the constant coefficient sheaves $A_X,A_Z,A_C$ with their canonical inverse-image identifications. Since $p_2c=c_2$, it gives $c^*p_2^*K\\simeq c_2^*K$. For the other argument, on the stipulated full $D^b_{ctf}$ subcategories [sk-d-six] supplies $Rp_{1!}Rc_!\\simeq R(p_1c)_!=Rc_{1!}$. All three left functors and their right adjoints are functors of these same full subcategories by the added conditions; this does not identify a restricted adjunction with an unrestricted one. Write $\\theta:Rp_{1!}Rc_!\\xrightarrow{\\sim}Rc_{1!}$ for this comparison. For $B\\in D^b_{ctf}(C,A)$ and $H\\in D^b_{ctf}(Y,A)$, precomposition by $\\theta_B$ gives $\\operatorname{Hom}(Rc_{1!}B,H)\\simeq\\operatorname{Hom}(Rp_{1!}Rc_!B,H)$. Its inverse followed by the given $Rc_{1!}\\dashv c_1^!$ Hom bijection gives the adjunction $Rp_{1!}Rc_!\\dashv c_1^!$. Applying [lem-cat-right-adjoint-composition] to this adjunction and the two given adjunctions gives $c_1^!\\simeq c^!p_1^!$; take its inverse at $L$ to get $b:c^!N\\xrightarrow{\\sim}c_1^!L$. If $a:c^*M\\xrightarrow{\\sim}c_2^*K$ is the ordinary comparison above, the final Hom bijection sends $f:c^*M\\to c^!N$ to $b\\circ f\\circ a^{-1}$, with inverse $g\\mapsto b^{-1}\\circ g\\circ a$.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "sk-d-six",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
+    "place": "final Hom identification: ordinary and exceptional composition"
+   }
+  },
+  {
+   "text": "Compose the bijections of steps 5–7, and define $[u]$ to be the inverse image of $u$ under their composite. Each arrow has an inverse, so the composite sends $[u]$ back to $u$ and every supported class is recovered from its coefficient morphism. This explains why $[u]$ is determined data. None of these definitions discards a support scheme, a projection, or a structure map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
+    "place": "final sentence: inverse-image class and specified support data"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-d-setup",
+  "sk-d-six",
+  "def-weil-scheme-over-base",
+  "def-nagata-compactifiable",
+  "def-pc-fibre-product",
+  "def-sfb-derived-tensor-hom-adjunction-sheaves",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-cat-right-adjoint-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/_section.md",
+  "place": "full definition; explicit expansion of final adjunction calculation with operation-domain correction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Correspondence|SupportedClass|correspondenceClass",
+   "results": "25 hits; top: Mathlib/SetTheory/Ordinal/Enum.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/SetTheory/Cardinal/Defs.lean, Mathlib/Geometry/Convex/Cone/Basic.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Smooth/Kaehler.lean, Mathlib/RingTheory/Smooth/Kaehler.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Correspondence\"",
+   "results": "4 hits; top: Setoid.correspondence, AddCon.correspondence, Con.correspondence, RingCon.correspondence",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological correspondence supported class scheme exceptional pullback",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.Scheme.canonicallyOverPullback, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.IsProper.instSndScheme",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"curryHomEquiv\"",
+   "results": "3 hits; top: CategoryTheory.MonoidalClosed.curryHomEquiv', CategoryTheory.MonoidalClosed.curryHomEquiv'_apply, CategoryTheory.MonoidalClosed.curryHomEquiv'_symm_apply",
+   "date": "2026-10-16",
+   "verdict": "general categorical currying only; not the geometric correspondence definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological correspondence between schemes with coefficient map from derived pullback to exceptional inverse image and supported cohomology class",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classes Hom of compact support direct image of unit into internal Hom correspond by projection formula and exceptional adjunction to coefficient morphisms",
+   "results": "8 hits; top: LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihom_map_val_app, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev_def",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme cohomological correspondence exceptional pullback compact support internal Hom adjunction",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; independent second-reader search"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalCorrespondence|supportedClass|exceptionalPullback",
+   "results": "0 hits; top: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; independent second-reader search"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -65,5 +238,35 @@
     "AlgebraicGeometry.ProEtale.Correspondence"
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-corr",
+  "worker": "stage1",
+  "summary": "Removed the four uncommitted child definitions: these only repackaged clauses of this definition. Split using existing coefficient, operation, scheme-over-base, fibre-product, compactifiability, tensor-Hom, pullback-composition and right-adjoint-composition nodes. STATEMENT-DISPUTED: arbitrary i need not admit Ri_!, and compactifiability of c1 does not supply p1! in the final formula. Corrected only the domains of supported classes and the final identification, keeping the general correspondence data. Wrote the entire Hom-bijection chain and its inverse-image definition. This retry also corrects the final calculation to the D^b_ctf domains of the now-reviewed sk-d-six: K and L must be bounded constructible of finite Tor-amplitude and all three exceptional adjunctions must be on the same full subcategories. Generic correspondence data remain conditional on the stated functors being supplied. Independent second reading writes out the diagonal map, checks the unitor object against the full-subcategory domain, and expands the transported adjunction and the final Hom map with its inverse.",
+  "blueprint": "Current main-20261015 sk-d-corr first paragraph, opposite-pair display, fixed equalizer, supported-class definition, and final Hom display; the unit record is older master text and the current snapshot governs.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Canonical composition of ordinary derived pullback, applied only to the maps c and p2 with constant A coefficients. The correspondence unit does not supply this generic functoriality statement."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Supplies the constant coefficient ring-sheaf identifications needed for the general derived-pullback-composition lemma on the same pro-etale sites."
+   }
+  ],
+  "route_issue": "Earlier attempts failed the unit reachability check. The current reviewed sk-d-six now has a genuine statement dependency on thm-sf-ctf-stability, whose exceptional-adjoint construction reaches thm-sf-comp-composition. This supplies the required unit reach without an inapplicable direct citation in this item. The final Hom calculation uses only the composition field on the stipulated D^b_ctf domain; the categorical mate is taken on that same domain."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-0ceb194a5",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-0ceb194a5 (reviewer sub-agent of L); spot-checked: I read the whole delivery against main-20261015 sk-d-corr (diffed against the master snapshot), every cited node statement and the slopmaster2 Correspondence.lean reference (SupportedClass 105-111, structure 113-152, fix/toProd 162-209, classEquiv 755-785). The domain corrections are needed and correctly recorded under Source error: supported classes only for compactifiable i with Ri_!A_T supplied, and K,L in D^b_ctf, c and p_1 compactifiable and the exceptional adjunctions on D^b_ctf for the final Hom identification. The reason is that sk-d-six gives the projection formula, composition and the exceptional adjunction only on D^b_ctf, and Lean classEquiv needs ctf K and L. I checked the counterexample: X a countable disjoint union of points over s makes p_1 non-compactifiable, because opens of a proper k-scheme are quasi-compact. The item is not a target and nothing is weakened. Step 2: I verified a_C e_C = a_D e_D through a_Z. Step 3: the equalizer lift is (t, c_1 t) and is unique, with no separatedness; this matches Lean fix = equalizer. Step 5: the tensor-Hom direction M⊗- ⊣ RHom(M,-) is correct, with 𝒜 = Mod(A); M, N and A_C lie in D^b_ctf by sk-d-setup stability, the stipulated adjoint and Tor amplitude [0,0]. Step 6: the projection formula is applied at (A_C, M), then the unitor and Rc_! ⊣ c^! on full subcategories. Step 7: sk-d-six's f^* is the module derived pullback of def-weil-pbc-proetale-operations (via sk-def-sf-operations (i) and def-weil-derived-pullback-tensor-hom), so the pullback-composition lemma applies to the same functor. θ, the transported adjunction and Adjunction.comp/rightAdjointUniq give c_1^! ≅ c^! p_1^!, using the agreement at L. Small cases: X=Y=C=s gives Hom(A,RHom(K,L)) ≅ Hom(K,L); an empty support and zero coefficients give zero. There are no new nodes. def-trf-correspondence-between-pairs, lem-trf-correspondence-class and def-trf-supported-class (and the def-trf-correspondence/def-trf-fixed-scheme candidates) are narrower geometric/admissible master-version nodes, not duplicates, so same_as=[] stands. There is no cycle. The unit's sk-thm-sf-comp-composition is reached via sk-d-six -> thm-sf-ctf-stability -> thm-pur-general-admissibility. No SGA is cited. I accept the declared tool uses lem-weil-pbc-proetale-derived-pullback-composition and prop-weil-pbc-proetale-constant-ring-map as generic pullback functoriality and constant-ring identifications. No fixes were written."
  }
 }
