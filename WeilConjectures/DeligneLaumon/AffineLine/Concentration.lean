@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.WeilSheaf.OpenClosedTriangle
 
 /-!
 # Concentration of the zero-extension transform
@@ -41,19 +42,6 @@ section ToComplex
 
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))]
-
-/-- The pullback of a Weil sheaf placed in degree zero is the pullback of the sheaf, placed in
-degree zero: the pullback of pro-étale Weil sheaves is exact. -/
-noncomputable def WeilSheaf.toComplexCompUpperStarIso (φ : X ⟶ Y)
-    [φ.IsOver (Spec (CommRingCat.of k₀))] :
-    WeilSheaf.toComplex ⋙ WeilComplex.upperStar (k₀ := k₀) (l := l) φ ≅
-      WeilSheaf.upperStar φ ⋙ WeilSheaf.toComplex :=
-  NatIso.ofComponents
-    (fun F ↦ ObjectProperty.isoMk _
-      (((ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategorySingleFunctor 0).app F.obj))
-    fun f ↦ ObjectProperty.hom_ext _
-      (((ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategorySingleFunctor 0).hom.naturality
-        f.hom)
 
 variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
