@@ -223,5 +223,24 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-612b8f1d2 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and all six steps, every cited node's statement, the parent prop-pur-a1-invariance (whose Step 3 uses the item with U=Y_n, r=1), the unit sk-prop-a1-inv, and the main-20261015 blueprint statement and proof (Step 1, clopen reduction). Stacks checks against the tags file and the .tex: 005C (topology.tex:1662), 00E8, 01T0/01T2/01T3, 01KK, 01KU (schemes.tex:4289; Step 5 copies its proof of (1)), 01QR/01QS, 01S6, 01S7 (morphisms.tex:1721). Step 1: affine preimages are U∩V, closed in a qc V, hence qc; this is the only use of the closedness hypothesis. Step 2: a qc open immersion is of finite type, then composition. Step 3: the pullback of Δ_Y along j×j is U because j is a monomorphism, then closed-immersion base change. Step 4: the polynomial chart gives affine and lft; permanence (3) gives qc and separated. Step 5: I checked that the diagonal factorization square is cartesian; then base change plus composition of closed immersions. Step 6: composition; the empty U and r=0 cases are covered. The statement is true on Spec k ⊔ Spec k, U=Y, U=∅, r=0/1/arbitrary and nonreduced Y, with no weakening against the parent. Every cited node is a Mathlib leaf or slopmaster2-closed, so no tool_uses are needed; no SGA source is used. There are no new nodes. A DAG-wide search found no duplicate of the combined statement. One repair (C1): Step 3 attributed 'open immersion is a monomorphism' to def-weil-open-immersion, which does not state it. I now cite the existing Mathlib leaf lem-weil-pbc-open-immersion-monomorphism (IsOpenImmersion.mono) in the step text, its uses and proof_deps. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-clopen-affine-line-finite-type.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-16544dc67",
+  "group": "Q136",
+  "result": "fix",
+  "note": "Reviewed the immutable delivery, all statement dependencies, sources, and exact declarations. Mathematics and signature are correct. Complete fixes add the missing proof-dependency import, expand the proof docstring, and correct the report’s compile command. Original and fixed modules compile cleanly through scompile.py. Findings and evidence are recorded in review.md; no repository or branch was changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PurityClopenAffineLineFiniteType",
+  "declaration": "AlgebraicGeometry.clopen_affine_space_separated_finite_type",
+  "file": "lean/Sheaf/AlgebraicGeometry/PurityClopenAffineLineFiniteType.lean",
+  "statement": "theorem clopen_affine_space_separated_finite_type {k : Type u} [Field k] {Y U : Scheme.{u}} (f : Y ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (j : U ⟶ Y) [IsOpenImmersion j] (hU : IsClosed (Set.range j.base)) : (IsSeparated (j ≫ f) ∧ LocallyOfFiniteType (j ≫ f) ∧ QuasiCompact (j ≫ f)) ∧ ∀ r : ℕ, IsSeparated ((AffineSpace (ULift.{u} (Fin r)) U ↘ U) ≫ j ≫ f) ∧ LocallyOfFiniteType ((AffineSpace (ULift.{u} (Fin r)) U ↘ U) ≫ j ≫ f) ∧ QuasiCompact ((AffineSpace (ULift.{u} (Fin r)) U ↘ U) ≫ j ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-16544dc67"
  }
 }
