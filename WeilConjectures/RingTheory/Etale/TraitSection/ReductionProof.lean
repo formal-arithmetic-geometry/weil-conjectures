@@ -21,6 +21,14 @@ descent along the flat local map `B_P → (B₁)_{P₁}`
 
 This is part of the trait case of blueprint `sbc-thm-spreading-finite-etale-galois`
 ([Stacks 0EYJ]).
+
+TODO (remaining gaps, marked `sorry` in the proof):
+* `L₁` is finite étale over `B_K₁` of rank `|G|`. Use the isomorphism
+  `B_K₁ ⊗[B_K] L ≅ L₁` (`IsLocalization.algebraLid`, `Algebra.TensorProduct.cancelBaseChange`) and
+  `Module.rankAtStalk_baseChange`.
+* Descent: `(B₁)_{P₁} ⊗[B₁] T₁ ≅ (B₁)_{P₁} ⊗[B_P] (B_P ⊗[B] T₀)` (via `hint` and
+  `TensorProduct.toIntegralClosure_bijective_of_isLocalization`), then
+  `Algebra.etale_and_finite_of_isLocalHom` along `B_P → (B₁)_{P₁}`.
 -/
 
 @[expose] public section

@@ -56,14 +56,10 @@ include Bk in
 /-- **Étaleness of the normalization at a section over a trait**, local form: the base change of
 the integral closure of `B` in `L` to the local ring `B_P`, `P = ε⁻¹(q)`, is finite étale.
 
-TODO (gap): reduce to `Algebra.etale_localization_integralClosure_of_isPrimitiveRoot` by the base
-change to the discrete valuation ring `A₁` of `IsDiscreteValuationRing.exists_etale_isPrimitiveRoot`
-over `(R₀)_q` (a DVR by `IsLocalization.AtPrime.isDiscreteValuationRing_of_height_eq_one`):
-`B₁ = A₁ ⊗ B`, `Bk₁ = A₁ ⊗ Bk` (`IsLocalization.tensorProduct_tensorProduct` and
-`IsLocalization.of_le_of_exists_dvd`), `L₁ = Bk₁ ⊗[Bk] L` with the `G`-action on the second factor
-(fixed points by `AlgHom.mem_range_algebraMap_of_forall_baseChange_eq`), and points `φⱼ ⊗ K₁`.
-The closure commutes with the base change (`TensorProduct.toIntegralClosure_bijective_of_tower`),
-and finite étaleness descends along `B_P → (B₁)_{P₁}` (`Algebra.etale_and_finite_of_isLocalHom`). -/
+TODO (gap, the `sorry` below): the integral closure of `B` in `L` commutes with the base change
+`B → B ⊗[R₀] A₁` (a localization followed by the étale `A → A₁`;
+`TensorProduct.toIntegralClosure_bijective_of_tower`). The other steps are in
+`Algebra.etale_localization_integralClosure_of_baseChange`. -/
 theorem etale_localization_integralClosure_of_height_eq_one (ε : B →ₐ[R₀] R₀) (q : Ideal R₀)
     [q.IsPrime] (hq : q.height = 1) (G : Type*) [Group G] [Finite G]
     [MulSemiringAction G L] [SMulCommClass G Bk L]
