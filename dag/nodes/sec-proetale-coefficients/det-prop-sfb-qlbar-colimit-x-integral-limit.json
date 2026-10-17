@@ -16,7 +16,8 @@
   "sk-def-sfb-pullback-from-point",
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-pulled-back-coefficients",
-  "def-weil-l-adic-coefficient-extension"
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof": [
   {
@@ -35,9 +36,10 @@
    }
   },
   {
-   "text": "Let $c$ send $t$ in the constant presheaf to the constant section of $H_T$. To verify that $(H_T,c)$ is its sheafification, let $G$ be any sheaf and $a$ any natural map from the constant presheaf to $G$. For $f:U\\to Y_T$, glue $a_{U_t}(t)\\in G(U_t)$ over the covering of Step 1. They agree on overlaps: on equal labels they are the same section, and on unequal labels the overlap is empty, where a sheaf has one section because the empty family covers the empty object. The glued section is natural in $U$, since pulling back the labelled pieces gives the labelled pieces for the restricted $f$. This gives $H_T\\to G$ extending $a$. Every such extension has these restrictions on every $U_t$, so uniqueness follows from the sheaf condition. By [def-weil-pbc-sheafification], $H_T\\cong T_X$. For $T=\\varnothing$ sections exist only on $U=\\varnothing$, and the same empty-cover argument applies. The identification sends a map of finite sets to the map of coproducts carrying its labelled summands identically to the corresponding summands.",
+   "text": "Let $c$ send $t$ in the constant presheaf to the constant section of $H_T$. To verify that $(H_T,c)$ is its sheafification, let $G$ be any sheaf and $a$ any natural map from the constant presheaf to $G$. For $f:U\\to Y_T$, glue $a_{U_t}(t)\\in G(U_t)$ over the covering of Step 1. They agree on overlaps: on equal labels they are the same section, and on unequal labels the overlap is empty, where a sheaf has one section because the empty family covers the empty object. The glued section is natural in $U$, since pulling back the labelled pieces gives the labelled pieces for the restricted $f$. This gives $H_T\\to G$ extending $a$. Every such extension has these restrictions on every $U_t$, so uniqueness follows from the sheaf condition. By [def-weil-pbc-sheafification], $H_T\\cong T_X$, the constant sheaf of [def-weil-pbc-constant-sheaf]. For $T=\\varnothing$ sections exist only on $U=\\varnothing$, and the same empty-cover argument applies. The identification sends a map of finite sets to the map of coproducts carrying its labelled summands identically to the corresponding summands.",
    "uses": [
     "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-proetale-covering"
    ],
    "elementary": true,
@@ -47,13 +49,11 @@
    }
   },
   {
-   "text": "Write $A_n=\\cO_E/\\pi_E^n$ and $S=\\cO_E$. We first justify the displayed profinite presentation. The extended absolute value is nonarchimedean by [lem-weil-l-adic-extension-absolute-value]. By [lem-weil-l-adic-extension-integers-dvr], $r=|\\pi_E|_E$ satisfies $0<r<1$, and its unit-times-uniformizer factorization shows $x\\in\\pi_E^n\\cO_E$ exactly when $|x|_E\\le r^n$. The rings $A_n$ are finite and their transition maps are surjective by [lem-weil-valued-dvr-finite-quotients]. Given compatible residues $(b_n)$, choose lifts $a_n\\in\\cO_E$. For $m\\ge n$ the difference $a_m-a_n$ belongs to $\\pi_E^n\\cO_E$, so $|a_m-a_n|_E\\le r^n$; the sequence is Cauchy and converges to $a\\in E$ by [lem-weil-l-adic-extension-complete]. It lies in $\\cO_E$: for sufficiently large $n$, $|a-a_n|_E\\le1$, hence $|a|_E\\le\\max(|a-a_n|_E,|a_n|_E)\\le1$. Fixing $n$ and passing to the limit in $|a_m-a_n|_E\\le r^n$ gives $a-a_n\\in\\pi_E^n\\cO_E$, so $a$ maps to every $b_n$. Uniqueness follows because an element in all $\\pi_E^n\\cO_E$ has absolute value at most every $r^n$ and hence is zero. These reduction maps are ring maps. Their fibres are cosets of the balls $\\pi_E^n\\cO_E$, which are open (the absolute values are the discrete powers of $r$); these balls form a neighbourhood basis of zero. Thus this bijection is a topological ring isomorphism $S\\cong\\varprojlim_n A_n$ with its finite discrete levels, verifying the presentation used in the statement. For compactness, [lem-weil-pbc-tychonoff-product-quasi-compact] makes $\\prod_n A_n$ quasi-compact. The compatibility equations define a closed subset: failure of any one equation is an open cylinder. A cover of this closed subset extends to a cover of the product by adjoining its open complement, so it has a finite subcover. The product is Hausdorff because distinct tuples differ in one finite discrete coordinate, and its cylinders are clopen; the same holds for the inverse limit. Thus $S$ is compact Hausdorff and totally disconnected, as required for a profinite test object. This sequence is cofinal among the finite continuous quotients of $S$: the fibres of any such quotient are finitely many clopen sets. For each point choose a cylinder neighbourhood contained in its fibre; compactness gives finitely many such cylinders. Choose a level $n$ at least as large as their levels. Equality at level $n$ then forces equality under the quotient map, so the quotient factors uniquely through the surjection $S\\to A_n$. Consequently [def-sfb-profinite-test-objects] gives $X[S]=\\varprojlim_nY_{A_n}$ with the reduction transitions. For every site object $U$, the universal property of this scheme limit gives $\\operatorname{Hom}_X(U,X[S])\\cong\\varprojlim_n\\operatorname{Hom}_X(U,Y_{A_n})$. Substitute Step 2. The index category $\\mathbf N_{\\ge1}^{op}$ is small, so [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] identifies the right side with $(\\varprojlim_n(A_n)_X)(U)$. Subcanonicity [det-pe-topos-functoriality-site] makes the left side a sheaf. This proves clause (1), naturally in all reduction projections.",
+   "text": "Write $A_n=\\cO_E/\\pi_E^n$, $q_n\\colon\\cO_E\\to A_n$ for the reductions, and $S=\\cO_E$. The topology of $S$ in the statement is that of the extending absolute value $|\\cdot|_E$, which is the unique absolute value on $E$ extending $|\\cdot|_\\ell$ by [lem-weil-l-adic-extension-absolute-value]. By [lem-sfb-integers-profinite-tower] (1) and (2), $q$ is an isomorphism of topological rings $S\\cong\\varprojlim_nA_n$ with finite discrete levels, and $S$ is profinite, so $S$ is an object of the profinite test category and the displayed presentation of the statement holds. By [lem-sfb-integers-profinite-tower] (3), every finite continuous quotient of $S$ factors uniquely through some $q_n$, and then through every $q_m$, $m\\ge n$; the $q_n$ are surjective by [lem-weil-valued-dvr-finite-quotients]. Hence the quotients $q_n$ form a cofinal subsystem of the cofiltered system of finite quotients of $S$, and the limit over the finite quotients in [def-sfb-profinite-test-objects] is the limit over this subsystem: $X[S]=\\varprojlim_nY_{A_n}$, with the reduction transitions. For every site object $U$, the universal property of this scheme limit gives $\\operatorname{Hom}_X(U,X[S])\\cong\\varprojlim_n\\operatorname{Hom}_X(U,Y_{A_n})$. Substitute Step 2, which is natural in the finite set, so in the transition maps. The index category $\\mathbf N_{\\ge1}^{op}$ is small, so [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] identifies the right side with $(\\varprojlim_n(A_n)_X)(U)$. Subcanonicity [det-pe-topos-functoriality-site] makes the left side a sheaf. This proves clause (1), naturally in all reduction projections; the underlying set sheaf of the constant ring sheaf $(A_n)_X$ is the constant set sheaf by Step 6.",
    "uses": [
     "lem-weil-l-adic-extension-absolute-value",
-    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-integers-profinite-tower",
     "lem-weil-valued-dvr-finite-quotients",
-    "lem-weil-l-adic-extension-complete",
-    "lem-weil-pbc-tychonoff-product-quasi-compact",
     "def-sfb-profinite-test-objects",
     "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
     "det-pe-topos-functoriality-site"
@@ -61,7 +61,7 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md",
-    "place": "Step 2: limits of representables; Sites Tag 00W2, lemma-limit-sheaf; compactness: Topology Tag 08ZU (theorem-tychonov)"
+    "place": "Step 2: limits of representables; Sites Tag 00W2, lemma-limit-sheaf; the presentation of O_E is the new node lem-sfb-integers-profinite-tower"
    }
   },
   {
@@ -100,10 +100,11 @@
    }
   },
   {
-   "text": "For each reduction $q_n:S\\to A_n$, the naturality in Step 4 identifies its pulled-back map with the represented map $X[q_n]:X[S]\\to Y_{A_n}$. Under Step 2, the ring operations on $Y_{A_n}$ are the finite-label operations: for $U\\to Y_{A_n}$ and $U\\to Y_{A_n}$, refine their two labelled clopen partitions by intersections, and on the part labelled $(a,b)$ addition has label $a+b$, multiplication has label $ab$, and negation has label $-a$; $0,1$ are the corresponding constant labels. The ring sheaf just described is the constant ring sheaf, not only a sheaf with the correct set sections: any map from the constant ring presheaf into a ring sheaf extends uniquely by the gluing of Step 2, and the same intersection refinement shows that this extension preserves addition, multiplication, negation and the constants. Thus it has the ring-sheafification universal property of [def-weil-pbc-sheafification]. The maps $q_n$ preserve all these operations. Step 5 therefore gives a cone of ring sheaves from $\\cO_{E,X}$ to $(A_n)_X$ whose underlying set cone is the limit cone of Step 3. Its underlying set isomorphism respects all operations: composing either candidate operation with every projection gives the same finite-level operation, and the limit projections jointly distinguish sections. More explicitly, in the sectionwise limit $B(U)=\\{(b_n):b_n\\in(A_n)_X(U),\\ b_{n+1}\\bmod\\pi_E^n=b_n\\}$ define every ring operation coordinatewise. The ring identities hold coordinatewise; restrictions are ring maps; and a map into $B$ is a ring map exactly when all its projections are, by the last clause of [lem-weil-pbc-sheaf-algebraic-structures-objects]. Thus this set-limit sheaf is also the limit in ring sheaves and the cone map from $\\cO_{E,X}$ is a ring isomorphism. This proves clause (3), with the canonical reduction projections specifying the isomorphism.",
+   "text": "For each reduction $q_n:S\\to A_n$, the naturality in Step 4 identifies its pulled-back map with the represented map $X[q_n]:X[S]\\to Y_{A_n}$. Under Step 2, the ring operations on $Y_{A_n}$ are the finite-label operations: for $U\\to Y_{A_n}$ and $U\\to Y_{A_n}$, refine their two labelled clopen partitions by intersections, and on the part labelled $(a,b)$ addition has label $a+b$, multiplication has label $ab$, and negation has label $-a$; $0,1$ are the corresponding constant labels. The ring sheaf just described is the constant ring sheaf of [def-weil-pbc-constant-sheaf], not only a sheaf with the correct set sections: any map from the constant ring presheaf into a ring sheaf extends uniquely by the gluing of Step 2, and the same intersection refinement shows that this extension preserves addition, multiplication, negation and the constants. Thus it has the ring-sheafification universal property of [def-weil-pbc-sheafification]. The maps $q_n$ preserve all these operations. Step 5 therefore gives a cone of ring sheaves from $\\cO_{E,X}$ to $(A_n)_X$ whose underlying set cone is the limit cone of Step 3. Its underlying set isomorphism respects all operations: composing either candidate operation with every projection gives the same finite-level operation, and the limit projections jointly distinguish sections. More explicitly, in the sectionwise limit $B(U)=\\{(b_n):b_n\\in(A_n)_X(U),\\ b_{n+1}\\bmod\\pi_E^n=b_n\\}$ define every ring operation coordinatewise. The ring identities hold coordinatewise; restrictions are ring maps; and a map into $B$ is a ring map exactly when all its projections are, by the last clause of [lem-weil-pbc-sheaf-algebraic-structures-objects]. Thus this set-limit sheaf is also the limit in ring sheaves and the cone map from $\\cO_{E,X}$ is a ring isomorphism. This proves clause (3), with the canonical reduction projections specifying the isomorphism.",
    "uses": [
     "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "def-weil-pbc-sheafification"
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf"
    ],
    "elementary": true,
    "source": {
@@ -119,11 +120,10 @@
   "def-weil-pbc-proetale-covering",
   "sk-def-pe-site",
   "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
   "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integers-profinite-tower",
   "lem-weil-valued-dvr-finite-quotients",
-  "lem-weil-l-adic-extension-complete",
-  "lem-weil-pbc-tychonoff-product-quasi-compact",
   "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
   "def-weil-size-convention",
   "sk-def-sfb-pullback-from-point",
@@ -184,10 +184,38 @@
    "results": "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean (subdirectory AlgebraicGeometry/Sites)",
    "date": "2026-10-16",
    "verdict": "no whole-item match; only generic site, profinite or p-adic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of p-adic integers on a pro-etale site is inverse limit of constant finite quotient sheaves",
+   "results": "BDeRhamPlus; BDeRham; Condensed.lanSheafProfinite; Condensed.profiniteFree; LightCondAb.ofSheafLightProfinite; Condensed.profiniteSolid; LightCondMod.ofSheafLightProfinite; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; generic condensed/profinite declarations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory Sheaf inverse limit constant sheaf representable",
+   "results": "no hits (loogle: Unknown identifier `CategoryTheory`)",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query parser rejected CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf|proetale|representable|inverse.*limit [subdirectory CategoryTheory]",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean; Mathlib/CategoryTheory/RepresentedBy.lean; Mathlib/CategoryTheory/ShrinkYoneda.lean; no pro-etale integral-limit theorem",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pro etale sheaf of p adic integers is inverse limit of constant finite quotient sheaves",
+   "results": "PadicInt; ProfiniteGrp.isIso_toLimit; ProfiniteGrp.isoLimittoFiniteQuotientFunctor; Profinite.lim; Profinite.asLimit; Profinite.isoAsLimitConeLift; PadicInt.lift; Profinite.asLimitConeIso",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; generic profinite inverse-limit declarations only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -211,7 +239,7 @@
   "date": "2026-10-16",
   "item": "det-prop-sfb-qlbar-colimit-x-integral-limit",
   "worker": "stage1",
-  "summary": "Replaced the earlier new node with the explicit adjunction/Yoneda calculation using existing general nodes. Proved finite constant representability by the sheafification universal property, checked cofinality of the specified quotient tower, cited sectionwise set limits, and justified the set/abelian/ring inverse-image compatibility and every ring operation. Statement unchanged; no new nodes. The local-field presentation is justified by an explicit Cauchy-lift argument using existing local-field nodes. Second reading supplies the nonarchimedean estimate and Tychonoff citations and verifies compactness of the compatible-residue subspace explicitly.",
+  "summary": "Replaced the earlier new node with the explicit adjunction/Yoneda calculation using existing general nodes. Proved finite constant representability by the sheafification universal property, checked cofinality of the specified quotient tower, cited sectionwise set limits, and justified the set/abelian/ring inverse-image compatibility and every ring operation. Statement unchanged; the worker created no new nodes. The local-field presentation is justified by an explicit Cauchy-lift argument using existing local-field nodes. Second reading supplies the nonarchimedean estimate and Tychonoff citations and verifies compactness of the compatible-residue subspace explicitly. Maintainer review (2026-10-17): the local-field presentation and cofinality argument formerly inlined in Step 3 is now the statement-only node lem-sfb-integers-profinite-tower, which Step 3 cites; the constant-sheaf definition def-weil-pbc-constant-sheaf is cited in the statement dependencies and Steps 2 and 6.",
   "blueprint": "Steps 1–2 realize blueprint Step 1; Step 3 realizes Step 2; Steps 4–5 realize Step 3; Step 6 realizes Step 4.",
   "tool_uses": [
    {
@@ -237,10 +265,6 @@
    {
     "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
     "why": "Generic finite-product adjunction lift, giving underlying-set compatibility absent from the coefficient definition."
-   },
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Generic finite-extension local-field structure (uniformizer factorization and finite residue field) used to verify the coefficient presentation, with no coefficient-sheaf conclusion assumed."
    }
   ]
  },
@@ -254,12 +278,12 @@
   "lem-weil-l-adic-extension-integers-dvr"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NJ-8f28be5e7",
-  "group": "NJ",
+  "reviewer": "NT-cc-Q96-005adce76",
+  "group": "Q96",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-8f28be5e7 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited statement, report, and blueprint route. Checked Stacks sources, coefficient-category compatibility, canonical reduction maps, edge cases, duplicates, and dependency cycles. No repairs needed; all seven declared tool uses accepted. Detailed checks recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-005adce76 (reviewer sub-agent of L); spot-checked: I read the delivery in full and the mathematics is correct. The delivery only sets the item to split and adds search records; the six-step proof is the one the NJ lead accepted on 2026-10-16, which I re-read completely. The statement is word-for-word the main-20261015 blueprint node, with no weakening and no SGA source. Each step checks against the statements it cites: the clopen-decomposition lemma, subcanonicity and covering base change (Step 1); gluing over labelled pieces, including the empty-set case (Step 2); left-exact inverse image, adjunction and Yoneda, matching Stacks 04D3 (Step 4); the adjunction lift with uniqueness of adjoints against the right adjoint in sk-def-sfb-pullback-from-point (4) (Step 5); and the ring limit computed coordinatewise (Step 6). I checked the Stacks labels 03YW, 00WH, 00W2, 08ZU, 00WX, 00X6, 04D3, 001P and 00YV, plus the cases X empty, n=1 and E=Q_ell. There is no dependency cycle. Long-step check: Step 3 (3055 characters) hid a lemma that needs no sheaves: O_E is isomorphic, as a topological ring, to the limit of O_E/pi^n; O_E is profinite; and the reductions are cofinal among its finite quotients. No DAG or blueprint node states this (rg search). FIX: I added the statement-only node lem-sfb-integers-profinite-tower (unit sk-prop-sfb-qlbar-colimit-x, created.item set to this item, blueprint.from this item's clause 1 and blueprint proof Step 2, unsplit; Mathlib has only partial ingredients in NumberTheory/LocalField/Basic.lean:102 and :176, and LeanSearch was recorded as unavailable). Step 3 now cites it and is 1714 characters. The local-field lemmas Step 3 no longer uses left its uses, and the declared tool use of lem-weil-l-adic-extension-integers-dvr was dropped. A second fix, a missing citation: def-weil-pbc-constant-sheaf is added to stmt_deps and to Steps 2 and 6. Statement unchanged. I accept the six remaining declared tool uses as generic black boxes. Details are in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean_audit": {
   "master": {

@@ -77,16 +77,54 @@
    }
   },
   {
-   "text": "Put $H(P)=E\\otimes^L LP$ and $\\beta_P=(\\varepsilon_E\\otimes1)\\circ\\mu_{RE,P}:LF(P)\\to H(P)$. Define $\\alpha_P=R(\\beta_P)\\circ\\eta_{F(P)}$ by [lem-pc-derived-adjoint-functors]. The canonical adjunction is compatible with the canonical shifts: simultaneous shifting reindexes the quasi-isomorphism systems defining the derived functors in that node; termwise $f^*\\dashv f_*$ sends a shifted map to the shift of its adjunct (its degree-$r$ component is the adjunct of the original degree-$r+n$ component). This equality survives passage to the essentially constant pro/ind values that define $L$ and $R$. For $R$ the shift comparison is the resolution comparison because $I[n]$ remains K-injective by [lem-weil-pbc-kinjective-shift]; for $L$ it is termwise pullback on the shifted K-flat model. Thus these are the compatible comparisons characterized uniquely in [lem-weil-pbc-adjunction-shift-compatibility-unique]. Write $l_X:L(X[1])\\to LX[1]$, $r_Y:R(Y[1])\\to RY[1]$, $t_P:F(P[1])\\to F(P)[1]$, and $h_P:H(P[1])\\to H(P)[1]$. Step 2 gives\n$$h_P\\beta_{P[1]}=\\beta_P[1]l_{F(P)}L(t_P).$$\nNaturality of $r$ and the compatible-unit identity give the explicit calculation\n$$\\begin{aligned}\ns_G\\alpha_{P[1]}&=r_{H(P)}R(h_P)R(\\beta_{P[1]})\\eta_{F(P[1])}\\\\\n&=R(\\beta_P)[1]r_{LF(P)}R(l_{F(P)})R(L(t_P))\\eta_{F(P[1])}\\\\\n&=R(\\beta_P)[1]\\eta_{F(P)}[1]t_P=\\alpha_P[1]s_F.\n\\end{aligned}$$\nHere the penultimate equality uses naturality of $\\eta$ at $t_P$ followed by compatibility with the unit. The integer-shift version uses the signs and coherent comparisons for $n$ from step 2 and the same unit identity for $[n]$. Naturality in $P$ follows by naturality of $\\mu$ and $\\eta$. For $e:E\\to E'$, naturality of $\\varepsilon$ and $\\mu$ gives $(e\\otimes1)\\beta_{E,P}=\\beta_{E',P}L(Re\\otimes1)$; applying the adjunction gives $R(e\\otimes1)\\alpha_{E,P}=\\alpha_{E',P}(Re\\otimes1)$. For a triangle $P_1\\to P_2\\to P_3\\xrightarrow{w}P_1[1]$, naturality gives the first two squares, and its third square is explicitly\n$$s_{G,P_1}G(w)\\alpha_{P_3}=s_{G,P_1}\\alpha_{P_1[1]}F(w)=\\alpha_{P_1}[1]s_{F,P_1}F(w).$$\nBoth image triangles are distinguished by step 3. At $P=R_Y$ the unit calculation of step 2 reduces $\\beta$ to $\\varepsilon_E$; hence $\\alpha=R(\\varepsilon_E)\\eta_{RE}=1_{RE}$ by the adjunction triangle identity.",
+   "text": "Define $H(P)=E\\otimes^L LP$, $\\beta_P=(\\varepsilon_E\\otimes1)\\circ\\mu_{RE,P}:LF(P)\\to H(P)$ and its adjunction mate $\\alpha_P=R(\\beta_P)\\circ\\eta_{F(P)}$, the map adjoint to $\\beta_P$; unit, counit and the formula for the adjunct are those of [lem-weil-pbc-adjunction-of-natural-bijection] applied to the bijection of Step 1. Give $L,R$ the canonical shift comparisons $\\varphi^L,\\varphi^R$ of [lem-weil-pbc-derived-adjunction-shift]; $F$ carries $s_F=\\sigma_{RE,-}$, the second-factor shift map of Step 2, $H$ carries $\\sigma_{E,L-}\\circ(1\\otimes\\varphi^L)$, and $G=RH$ carries $s_G=\\varphi^R_{H(-)}\\circ R(s_H)$, all composites as in [lem-weil-pbc-commshift-nattrans-comp-whisker]. By [lem-weil-pbc-derived-adjunction-shift] the pair $(\\varphi^L,\\varphi^R)$ is compatible with the unit in the sense of [lem-weil-pbc-adjunction-shift-compatibility-unique], i.e. $\\eta:1\\to RL$ commutes with the shift for the composite comparison of $RL$; by part (iii) of [lem-weil-pbc-commshift-nattrans-comp-whisker] so does $\\eta_F:F\\to RLF$. By Step 2, $\\mu_{RE,-}:L(RE\\otimes^L-)\\to LRE\\otimes^L L(-)$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] commutes with the composite shifts, and $\\varepsilon_E\\otimes1$ commutes with $\\sigma$ because the sign maps $(-1)^{np}$ commute with chain maps in the first factor (Step 2), also after whiskering by $L$ (part (iii)); so $\\beta$ commutes with shifts by part (i). Then $R\\beta:RLF\\to RH$ commutes with the composite shifts by part (ii), and $\\alpha=R\\beta\\circ\\eta_F$ does by part (i): $s_G\\alpha_{P[1]}=\\alpha_P[1]s_F$. The same argument with $[n]$ in place of $[1]$ gives the equation for every $n\\in\\mathbf Z$, compatibly with $[a][b]\\cong[a+b]$ since all comparisons used are coherent.",
    "uses": [
-    "lem-pc-derived-adjoint-functors",
-    "lem-weil-pbc-kinjective-shift",
-    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map), Tag 07A6 (lemma-adjoint); shift calculation expanded using derived.tex Tag 0A8D (lemma-adjoint-is-exact)"
+    "place": "Tag 0B56 (equation-projection-formula-map): the projection map is adjoint to Lf^*(Rf_*E\\otimes^L K)=Lf^*Rf_*E\\otimes^L Lf^*K\\to E\\otimes^L Lf^*K; derived.tex Tag 0A8D (lemma-adjoint-is-exact) for the shift/adjunction calculus; mate calculation expanded by the reviewer"
+   }
+  },
+  {
+   "text": "Naturality in $P$: for $u:P\\to P'$, $\\beta$ is natural in $P$ because $\\mu_{RE,-}$ is natural [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and $\\varepsilon_E\\otimes1$ is natural in the second factor; with naturality of $\\eta$ [lem-weil-pbc-adjunction-of-natural-bijection], $G(u)\\alpha_P=R(H(u)\\beta_P)\\eta_{F(P)}=R(\\beta_{P'}LF(u))\\eta_{F(P)}=R(\\beta_{P'})\\eta_{F(P')}F(u)=\\alpha_{P'}F(u)$. Naturality in $E$: for $e:E\\to E'$, naturality of $\\mu$ in its first variable and of the counit, $\\varepsilon_{E'}\\circ LR(e)=e\\circ\\varepsilon_E$, give $\\beta^{E'}_P\\circ L(R(e)\\otimes1)=(e\\otimes1)\\circ\\beta^{E}_P$; applying $R$ and naturality of $\\eta$ as before gives $\\alpha^{E'}_P\\circ(R(e)\\otimes1)=R(e\\otimes1)\\circ\\alpha^{E}_P$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map): the projection map is adjoint to Lf^*(Rf_*E\\otimes^L K)=Lf^*Rf_*E\\otimes^L Lf^*K\\to E\\otimes^L Lf^*K; derived.tex Tag 0A8D (lemma-adjoint-is-exact) for the shift/adjunction calculus; mate calculation expanded by the reviewer"
+   }
+  },
+  {
+   "text": "Let $P_1\\xrightarrow{u}P_2\\xrightarrow{v}P_3\\xrightarrow{w}P_1[1]$ be distinguished in $D(R_Y)$ [def-weil-abstract-derived-category]. By Step 3 the image triangles $F(P_1)\\to F(P_2)\\to F(P_3)\\xrightarrow{s_F F(w)}F(P_1)[1]$ and $G(P_1)\\to G(P_2)\\to G(P_3)\\xrightarrow{s_G G(w)}G(P_1)[1]$ are distinguished. The triple $(\\alpha_{P_1},\\alpha_{P_2},\\alpha_{P_3})$ is a morphism of triangles in the sense of [def-weil-pbc-triangles-with-shift]: the first two squares are naturality in $P$ (Step 5) at $u$ and $v$, and the connecting square holds because $\\alpha_{P_1}[1]\\,s_F\\,F(w)=s_G\\,\\alpha_{P_1[1]}\\,F(w)=s_G\\,G(w)\\,\\alpha_{P_3}$ by Step 4 and naturality at $w$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map): the projection map is adjoint to Lf^*(Rf_*E\\otimes^L K)=Lf^*Rf_*E\\otimes^L Lf^*K\\to E\\otimes^L Lf^*K; derived.tex Tag 0A8D (lemma-adjoint-is-exact) for the shift/adjunction calculus; mate calculation expanded by the reviewer"
+   }
+  },
+  {
+   "text": "Write $\\rho$ for the right tensor-unit isomorphisms $M\\otimes^L R_Y\\cong M$, $N\\otimes^L R_X\\cong N$ and $\\lambda:L(R_Y)\\cong R_X$ (Step 2). Step 2 shows $\\rho_{LM}(1\\otimes\\lambda)\\mu_{M,R_Y}=L(\\rho_M)$ for the comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Hence, by naturality of $\\rho$, $\\rho_E(1\\otimes\\lambda)\\beta_{R_Y}=\\rho_E(\\varepsilon_E\\otimes1)(1\\otimes\\lambda)\\mu_{RE,R_Y}=\\varepsilon_E\\,\\rho_{LRE}(1\\otimes\\lambda)\\mu_{RE,R_Y}=\\varepsilon_E\\,L(\\rho_{RE})$, i.e. $\\beta_{R_Y}=\\varepsilon_E$ under the identifications. Then $R(\\rho_E(1\\otimes\\lambda))\\,\\alpha_{R_Y}=R(\\varepsilon_E)\\,RL(\\rho_{RE})\\,\\eta_{RE\\otimes R_Y}=R(\\varepsilon_E)\\,\\eta_{RE}\\,\\rho_{RE}=\\rho_{RE}$ by naturality of $\\eta$ and the triangle identity $R(\\varepsilon_E)\\eta_{RE}=1_{RE}$ of [lem-weil-pbc-adjunction-of-natural-bijection]. So $\\alpha_{R_Y}=1_{RE}$ under the identifications $L(R_Y)=R_X$ and $RE\\otimes^L R_Y=RE$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map): the projection map is adjoint to Lf^*(Rf_*E\\otimes^L K)=Lf^*Rf_*E\\otimes^L Lf^*K\\to E\\otimes^L Lf^*K; derived.tex Tag 0A8D (lemma-adjoint-is-exact) for the shift/adjunction calculus; mate calculation expanded by the reviewer"
    }
   }
  ],
@@ -94,11 +132,14 @@
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
   "def-weil-abstract-derived-category",
+  "def-weil-pbc-triangles-with-shift",
   "lem-pc-derived-adjoint-functors",
   "lem-pc-kflat-resolution",
   "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
   "lem-weil-pbc-adjunction-shift-compatibility-unique",
-  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-derived-adjunction-shift",
   "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
@@ -170,7 +211,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lemma-weil-pbc-perfect-projection-formula",
   "by": "worker",
@@ -179,11 +220,11 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-ringed-projection-mate-exact",
   "worker": "stage1",
-  "summary": "Second reader repaired missing generic ringed-topos citations and expanded signed tensor, cone, mate shift and connecting-square calculations. Statement retained; no new nodes.",
-  "blueprint": "Detailed-form proof: finite-projective/K-flat tensor construction, closure under shifts and cones, and the compatible projection mate.",
+  "summary": "Re-split the former 2293-character final step. One genuine new lemma, canonical derived-adjunction shift compatibility (lem-weil-pbc-derived-adjunction-shift), carries the reindexing of K-flat/K-injective resolutions; the mate shift equation, naturality in E and P, the triangle morphism and the tensor-unit normalization are written out in Steps 4-7 from that lemma, the Mathlib CommShift calculus (lem-weil-pbc-commshift-nattrans-comp-whisker), the adjunction leaf and Step 2. The item statement and Steps 1-3 are unchanged. (Maintainer reader 2026-10-17: three proposed children that restated the item's own clauses with its other clauses as hypotheses were folded into Steps 4-7 and dropped.)",
+  "blueprint": "Detailed-form proof: finite-projective/K-flat tensor construction (Steps 1-2), closure under shifts and cones (Steps 3, 4, 6), naturality (Step 5) and the normalization 'For P=A the map is the canonical tensor identity' (Step 7); the compatible-mate paragraph is realized by Steps 4-7 and lem-weil-pbc-derived-adjunction-shift.",
   "tool_uses": [
    {
     "node": "lem-pc-kflat-resolution",
@@ -210,12 +251,12 @@
   "lem-pc-right-derived-functor-triangulated"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NE-c19ff72c8",
-  "group": "NE",
+  "reviewer": "NT-cc-Q19-cc248dce9",
+  "group": "Q19",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-c19ff72c8 (reviewer sub-agent of L); spot-checked: Read the full item, report, packet, DAG rules, unit/chapter route, all cited node statements and sources, including Stacks 06YU, 06YY, 07A4, 07A6, 0B56, 0944, derived 0A8D, supporting 06YN/06YS/06YT/0G7D, sites-modules 03D7/03EL, homology 012Z, and the cited right-derived-functor source. Verified coefficient categories, counit-adjoint direction, base-change tensor map, K-flat/K-injective constructions, all shift signs, cone and connecting-square calculations, naturality, unit identity, route/tool uses, and edge cases. No new nodes or repairs. Wrote review.md under the required review directory."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-cc248dce9 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement and the sources: Stacks sites-cohomology 07A6 lemma-adjoint, 0B56 equation-projection-formula-map (the projection map is the adjoint of (eps_E⊗1)mu), 07A4 and 06YU, derived.tex 0A8D, and the main-20261015 blueprint ancestor lemma-weil-pbc-perfect-projection-formula. The coefficients are module sheaves over commutative rings on small sites in unbounded D, and the mu/counit directions agree with 0B56. The item statement and Steps 1-3 are unchanged; I rechecked the Koszul sign of the second-factor shift and both entries of the cone comparison, including the connecting map -p. Kept: lem-weil-pbc-derived-adjunction-shift is true (shifted K-flat/K-injective resolutions; f^* and f_* are additive), is not a clause of the item, and has no duplicate. lem-weil-pbc-derived-adjunction-commshift is only the étale D^+ special case, and lem-pc-pinned-derived-adjunction-shifts is scheme-specific. Faults (D1 and the C1 exception), three in all, fixed by folding: mate-shift, mate-naturality and mate-unit each restate an item clause (shift, naturality/triangle, alpha_{R_Y}=1), take the item's other clauses or the sibling node as hypotheses, and need only a few lines. I rewrote Steps 4-7. Step 4 proves the shift equation via the CommShift Mathlib leaf (comp, whiskers) and unit compatibility from the kept node. Steps 5-7 are elementary: naturality in E and P, the triangle morphism by definition plus the shift square at w, and the unit case by unitor naturality plus the triangle identity from the adjunction-of-natural-bijection leaf. proof_deps and split_report are updated; tool_uses for the four generic nodes are accepted.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

@@ -1,0 +1,72 @@
+{
+ "id": "lem-sfb-integers-profinite-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+   "place": "Statement clause 1, \"the profinite set $\\cO_E=\\varprojlim_n\\cO_E/\\pi_E^n$\", and proof Step 2, \"The transition maps ... so the inverse limit $X[\\cO_E]$ exists\" (the presentation of $\\cO_E$ by its finite quotients used to compute $X[\\cO_E]$).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "$\\cO_E$ is the profinite limit of its finite quotients $\\cO_E/\\pi_E^n$",
+ "statement": "Let $\\ell$ be a prime and $E/\\mathbf Q_\\ell$ a finite extension, with its extending absolute value $|\\cdot|_E$, ring of integers $\\cO_E=\\{x\\in E:|x|_E\\le1\\}$, uniformizer $\\pi_E$, finite quotient rings $A_n=\\cO_E/\\pi_E^n\\cO_E$ $(n\\ge1)$ and transition homomorphisms $A_{n+1}\\to A_n$ [def-weil-l-adic-coefficient-extension]. Let $q_n\\colon\\cO_E\\to A_n$ be the reduction maps. Give $\\cO_E$ the topology of $|\\cdot|_E$, each $A_n$ the discrete topology, and $\\varprojlim_nA_n=\\{(b_n)\\in\\prod_{n\\ge1}A_n: b_{n+1}\\mapsto b_n\\text{ for all }n\\}$ the subspace topology of the product topology, with coordinatewise ring operations. Then:\n\n1. The map $q=(q_n)_n\\colon\\cO_E\\to\\varprojlim_nA_n$ is an isomorphism of rings and a homeomorphism.\n2. $\\cO_E$ is a profinite space: compact, Hausdorff and totally disconnected.\n3. For every finite set $Q$ with the discrete topology and every continuous surjection $g\\colon\\cO_E\\to Q$ there is an $n\\ge1$ such that $g$ factors as $g=h\\circ q_n$ for a map $h\\colon A_n\\to Q$; such an $h$ is unique, and $g$ then factors uniquely through $q_m$ for every $m\\ge n$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology Tag 08ZU (theorem-tychonov) for compactness of the limit; Tag 0ET8 and Tag 08ZY (profinite spaces as limits of finite discrete spaces); for the local field input see literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md, clause 1"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n 'CompactSpace|IsAdicComplete' Mathlib/NumberTheory/LocalField/Basic.lean Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+   "results": "Mathlib/NumberTheory/LocalField/Basic.lean:102 instance CompactSpace 𝒪[K]; :176 instance IsAdicComplete 𝓂[K] 𝒪[K]; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean:329 compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField (for valued fields / IsNonarchimedeanLocalField K, not stated for E/Q_ell with |.|_E)",
+   "date": "2026-10-17",
+   "verdict": "no match; partial ingredients (compactness, adic completeness) only, no homeomorphism with the limit and no cofinality clause"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ln 'IsAdicComplete' Mathlib; Mathlib/RingTheory/AdicCompletion/Topology.lean",
+   "results": "AdicCompletion/{Basic,Completeness,Noetherian,LocalRing,Algebra,Topology}.lean, PadicIntegers.lean; IsAdic.isAdicComplete_iff (Topology.lean:76) relates adic completeness to CompleteSpace and T2Space for an adic topology",
+   "date": "2026-10-17",
+   "verdict": "no match; generic adic-completion results, not the profinite presentation with cofinality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ring of integers of a local field is homeomorphic to the inverse limit of its quotients by powers of a uniformizer",
+   "results": "not run: LeanSearch is not reachable from the review service on the project server",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "NumberTheory/LocalField/Basic.lean: CompactSpace 𝒪[K] (line 102), IsAdicComplete 𝓂[K] 𝒪[K] (line 176) for an IsNonarchimedeanLocalField; would need the comparison of E/Q_ell with that structure, the homeomorphism to the limit and clause 3.",
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "date": "2026-10-17",
+  "group": "Q96"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-qlbar-colimit-x",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
