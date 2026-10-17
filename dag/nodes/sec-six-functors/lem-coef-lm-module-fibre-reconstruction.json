@@ -194,5 +194,23 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-7886945f5 (reviewer sub-agent of L); spot-checked: I read the item in full, all six steps, def-coef-left-module-operadic-encoding (morphism and module-tail conditions, ordered substitution, Cut convention), parent lem-coef-lm-prism-approximation steps 8-13, the sibling algebra lemma, the unit and the chapter. Steps 1, 4 and 6 cite the definition for exactly what its statement gives: concatenation of ordered fibres, one module input placed last, and a morphism being its pointed map plus fibre orders. Steps 2, 3 and 5 are genuine elementary list and position counts. alpha(0)=0 is used (B_alpha then discards nothing), and alpha(n)=s is correctly not needed because the module tail absorbs the later outputs. The bound lambda(s)<=r comes from the nonempty module fibre. The arrow B_beta matches the parent's LCut map exactly. My own exhaustive enumeration (/tmp/rv-lmmod/chk.py) covered every LM arrow X_0(r)->X_0(s) with r,s<=3, every order, every monotone alpha with alpha(0)=0, every monotone delta and n<=2. It found 1340 solutions, the same count as the worker, and all conclusions hold, including s=0, n=0, r=0, empty fibres and alpha(n)<s. The delivery adds no new nodes. The item is not a duplicate: lem-coef-cut-chain-forest-compatibility covers only pure-algebra Cut maps, the sibling has an algebra target and needs alpha(n)=s, and the parent's step 10 cites this lemma rather than restating it. There are no off-unit uses and no tool_uses, and no SGA source is used. Base change and coefficient category do not apply to this combinatorial lemma. Higher Algebra is not in literature/ and remains WANTED, with proof_origin agent. T/K/D^eta in the statement are unused but harmless and were there before this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LMModuleFibreReconstruction",
+  "declaration": "SSet.Enhanced.lm_module_fibre_reconstruction",
+  "file": "lean/Sheaf/CategoryTheory/LMModuleFibreReconstruction.lean",
+  "statement": "theorem lm_module_fibre_reconstruction {r s n : ℕ} (alpha : ⦋n⦌ ⟶ ⦋s⦌) (delta : ⦋n⦌ ⟶ ⦋r⦌) (hzero : alpha.toOrderHom 0 = 0) (h : lmPrismObject r 0 ⟶ lmPrismObject s 0) (hcomp : h ≫ lmPrismArrow alpha 0 0 le_rfl = lmPrismArrow delta 0 0 le_rfl) : ∃ lambda : ⦋s⦌ ⟶ ⦋r⦌, (∀ j : Fin (s + 1), (lambda.toOrderHom j).val = (delta.toOrderHom 0).val + (((List.finRange s).take j.val).map (fun k : Fin s ↦ (h.hom k.castSucc).length)).sum) ∧ (∀ j : Fin s, h.hom j.castSucc = (List.finRange (r + 1)).filter (fun i ↦ (lambda.toOrderHom j.castSucc).val < i.val + 1 ∧ i.val + 1 ≤ (lambda.toOrderHom j.succ).val)) ∧ h.hom (Fin.last s) = (List.finRange (r + 1)).filter (fun i ↦ (lambda.toOrderHom (Fin.last s)).val < i.val + 1) ∧ h.hom (Fin.last s) ≠ [] ∧ (h.hom (Fin.last s)).getLast? = some (Fin.last r) ∧ alpha ≫ lambda = delta ∧ (∀ i : Fin (r + 1), (∀ j : Fin (s + 1), i ∉ h.hom j) ↔ i.val + 1 ≤ (delta.toOrderHom 0).val) ∧ h = lmPrismArrow lambda 0 0 le_rfl",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-01d6fe154",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Independent audit completed; statement, dependency, LM fibre indexing, edge cases, docstrings, report sections, and scompile.py per-file compilation all pass. Review: review.md."
  }
 }
