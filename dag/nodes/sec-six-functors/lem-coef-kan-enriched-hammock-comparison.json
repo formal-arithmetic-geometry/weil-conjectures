@@ -33,9 +33,146 @@
   "lem-coef-coherent-nerve-comparison",
   "def-coef-simplicial-hammock-pair"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The formulas for $a,b,j$ define simplicial functors. Indeed applying an operator to a one-arrow diagram gives the one-arrow diagram of that operator; deleting or repeating rows of a repeated-arrow diagram gives the repeated-arrow diagram with the new number of rows. Constant simplices commute with all operators. Applying inclusion or taking constants commutes with composing adjacent columns and deleting identity columns. Concatenating two one-arrow diagrams and reducing composes their arrows; the identity arrow reduces to the empty path. These observations, using [def-coef-simplicial-hammock-pair], prove all functor and operator identities, including the case of identity arrows. On a degree-$r$ arrow of $\\mathcal K_0^{\\mathrm{disc}}$, both $ahi$ and $jbv$ are the same constant arrow repeated in the same $r+1$ rows, with identity vertical maps; their reductions are identical. Thus the asserted square commutes strictly.",
+   "uses": [
+    "def-coef-simplicial-hammock-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  },
+  {
+   "text": "For every simplicial set $X$ and $k\\geq0$, projection $\\pi_X:X\\times\\Delta^k\\to X$ is a weak homotopy equivalence. The section at vertex $0$ is a right inverse. The monotone map $[k]\\times[1]\\to[k]$ sending $(u,0)$ to $0$ and $(u,1)$ to $u$ induces a simplicial homotopy between the section followed by projection and the identity of $X\\times\\Delta^k$, fixing the $X$ coordinate. [lem-coef-simplicial-realization-cylinder] realizes this as a continuous homotopy, and [lem-coef-homotopy-equivalence-weak] proves the assertion, without nonemptiness or Kan assumptions. If $w:X\\to Y$ is weak, the equality $\\pi_Y(w\\times1)=w\\pi_X$ and two-out-of-three in [lem-coef-kan-quillen-right-proper] show that $w\\times1_{\\Delta^k}$ is weak as well.",
+   "uses": [
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-equivalence-weak",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  },
+  {
+   "text": "Fix $k$. Write $C_k=(\\mathcal S_*)_k$ for the ordinary category with maps $f:X\\times\\Delta^k\\to Y$ and composition $(g\\star f)(x,t)=g(f(x,t),t)$. Its marked arrows are just constant simplices of $W$. Define $c_k:\\mathcal S_0\\to C_k$ by constants, and $T_k:C_k\\to\\mathcal S_0$ by\n$$T_kX=X\\times\\Delta^k,\\qquad (T_kf)(x,t)=(f(x,t),t).$$\nThe displayed composition formula proves that $T_k$ is a functor, including identities. By Step 2 it preserves marked arrows; so does $c_k$. There is an ordinary natural transformation $\\pi:T_kc_k\\to1_{\\mathcal S_0}$ consisting of projections, all in $W$. There is also a natural transformation $e:1_{C_k}\\to c_kT_k$ whose component is the $k$-arrow $e_X(x,t)=(x,t)$. Naturality is the equality $(f(x,t),t)=(f(x,t),t)$. The constant $k$-arrow $c_k(\\pi_X)$ is marked and satisfies $c_k(\\pi_X)\\star e_X=1_X$. We do not assert that $e_X$ itself is a constant marked arrow.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-hammock-infinity-localization] to the two ordinary relative categories of Step 3. The relative functors $c_k,T_k$ induce functors between their coherent localizations. The transformation $\\pi$ becomes a natural equivalence. Each $e_X$ also becomes an equivalence: $q(c_k\\pi_X)$ is invertible and its composite with $q(e_X)$ is the identity, so the class of $q(e_X)$ in the homotopy category is its inverse; [lem-coef-localization-homotopy-category] detects equivalence edges by these classes. By the component criterion of [lem-cbc-enhanced-functor-cone-calculus], $q(e)$ is a natural equivalence. The full faithfulness on coherent functor categories in the localization universal property descends both transformations, and reflects their being equivalences. Thus the two induced composites are equivalent to the identity, proving that the induced $c_k$ is a functor equivalence. By the mapping-space clause of [lem-cbc-enhanced-functor-cone-calculus], the actual hammock map\n$$H(\\mathcal S_0,W)(X,Y)\\longrightarrow H(C_k,W^{\\mathrm{disc}}_k)(X,Y)$$\nis a weak homotopy equivalence for every $X,Y$: the natural coherent-nerve comparisons of [lem-coef-coherent-nerve-comparison] identify its Kan replacements with the induced mapping-space maps. No assertion that $C_k$ is a model category is used.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-localization-homotopy-category",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  },
+  {
+   "text": "For fixed $X,Y$, the source of the comparison in Step 4 is constant in $k$ and the target forms the bisimplicial set $H((\\mathcal S_*)_k,W^{\\mathrm{disc}}_k)(X,Y)_r$. The maps $c_k$ commute with all operators in $k$ because constant simplices do; no naturality in $k$ of the auxiliary $T_k$ is needed. Step 4 gives weak equivalences in the $r$ direction for each $k$. [lem-coef-bisimplicial-diagonal-equivalence] therefore gives a weak equivalence on diagonals. Its degree-$n$ formula is exactly $a$: replace every ordinary arrow in a width-$n$ hammock by its constant $n$-simplex. By [def-coef-simplicial-hammock-pair] these are its source and target mapping sets. As $a$ fixes all objects, local weak equivalence also gives an equivalence of component categories; hence $a$ is a Dwyer--Kan equivalence.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "def-coef-simplicial-hammock-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  },
+  {
+   "text": "Let $P=\\operatorname{Ex}^{\\infty}$ with unit $\\eta$ as in [lem-coef-ex-infinity-finite-products]. Its product comparisons give it a simplicial enrichment: on a parameterized map $f:X\\times\\Delta^k\\to Y$ use\n$$PX\\times\\Delta^k\\xrightarrow{1\\times\\eta_{\\Delta^k}}PX\\times P\\Delta^k\\xrightarrow{\\cong}P(X\\times\\Delta^k)\\xrightarrow{Pf}PY.$$\nThis formula commutes with every simplicial operator by naturality of $\\eta$. For $g\\star f$, the product projections give the formula $Pg(Pf(x,\\eta(t)),\\eta(t))$; it is the composite of the displayed maps for $f,g$, since $P$ carries the diagonal of the parameter to its diagonal and $\\eta$ commutes with the two projections. Identity maps give projection onto $PX$. Thus this is a simplicial functor $P:\\mathcal S_*\\to\\mathcal K_*$. Naturality of $\\eta$ applied to $f$, together with its compatibility with products, says that $\\eta_Y f=P(f)(\\eta_X\\times1)$ as parameterized maps. This is enriched naturality, not merely naturality on vertices. The same node says $PX$ is Kan and $\\eta_X$ is weak. If $w$ is weak then $Pw$ is weak by $Pw\\eta_X=\\eta_Yw$ and two-out-of-three in [lem-coef-kan-quillen-right-proper]. In particular $P$ maps every constant marked arrow to a constant marked arrow, and restricts to $\\mathcal K_*$ as well.",
+   "uses": [
+    "lem-coef-ex-infinity-finite-products",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  },
+  {
+   "text": "In degree $k$ let $J_k:(\\mathcal K_*)_k\\to(\\mathcal S_*)_k$ be inclusion and use $P_k$ of Step 6 in the other direction. They preserve the constant marked subcategories. The enriched natural unit restricts to ordinary natural transformations $1\\to J_kP_k$ and $1\\to P_kJ_k$ with components the constant $k$-simplices of $\\eta_X$, which are marked weak arrows. Write $q_S,q_K$ for the two localization functors. By [lem-coef-hammock-infinity-localization], $J_k$ and $P_k$ induce functors $\\bar J_k,\\bar P_k$ between the coherent localizations. Composing the two unit transformations with $q_S,q_K$ gives transformations $q_S\\to\\bar J_k\\bar P_kq_S$ and $q_K\\to\\bar P_k\\bar J_kq_K$. Their components are equivalences since localization inverts every marked arrow. The component criterion of [lem-cbc-enhanced-functor-cone-calculus] makes both transformations equivalences. The full faithful restriction on functor categories in the localization universal property lifts them to natural equivalences $1\\simeq\\bar J_k\\bar P_k$ and $1\\simeq\\bar P_k\\bar J_k$. Thus $\\bar J_k$ and $\\bar P_k$ are inverse functor equivalences. Its natural mapping comparisons and [lem-coef-coherent-nerve-comparison] show that $H(J_k)$ induces a weak equivalence on every mapping simplicial set between Kan endpoints. Applying [lem-coef-bisimplicial-diagonal-equivalence] over $k$ yields local weak equivalences for the specified $j$. Every object $X$ of $H_{\\mathcal S}$ is isomorphic in its component category to $PX$, an object in the image of $j$: the forward one-arrow hammock of $\\eta_X$ and the backward one-arrow hammock are inverse there, the cancellation relations being the two-row hammocks with vertical arrow $\\eta_X$ (all ordinary arrows embedded as constants). This uses only the defining row operations of [def-coef-simplicial-hammock-pair]. Thus $j$ is essentially surjective as well, and is a Dwyer--Kan equivalence.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "def-coef-simplicial-hammock-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  },
+  {
+   "text": "Every weak equivalence $w:A\\to B$ of Kan complexes is invertible in $\\pi_0\\mathcal K_*$. Indeed [lem-cbc-kan-mapping-homotopy-invariance], with target $A$, gives a bijection on components for $w^*:\\operatorname{Fun}(B,A)\\to\\operatorname{Fun}(A,A)$. Choose a vertex $g:B\\to A$ mapping to the identity component, so $gw$ lies in that component. With target $B$, injectivity on components for $w^*$ implies $wg$ is in the identity component: its precomposition with $w$ has component $wgw=w$, the same as that of $1_B$. Composition respects components because enriched composition is a simplicial map. This supplies both inverse equations in the component category of [lem-coef-coherent-nerve-comparison], including empty complexes; no Whitehead theorem or unproved composition compatibility is inferred.",
+   "uses": [
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  },
+  {
+   "text": "Let $I\\subseteq\\mathcal K_*$ have only the identity simplex at each diagonal mapping set and empty off-diagonal mapping sets, and let $V=W_{\\mathcal K}^{\\mathrm{disc}}$. These are wide simplicial subcategories and $I\\subseteq V$. In a hammock marked by $I$, every vertical arrow is an identity, so every row is the same; every leftward column is an identity and disappears in reduction; adjacent rightward columns compose. Thus every reduced hammock is uniquely the repeated single arrow, or the empty path for an identity. In degree $n$ this identifies $H((\\mathcal K_*)_n,I_n)(A,B)_n$ with $\\mathcal K_*(A,B)_n$. The formulas respect both operators, concatenation and identities, giving an isomorphism $\\mathcal K_*\\cong\\operatorname{diag}H(\\mathcal K_*,I)$ by [def-coef-simplicial-hammock-pair]. The ordinary localization of $\\pi_0\\mathcal K_*$ at identity images is itself. Step 8 says that every vertex of $V$ is already invertible there. Apply [lem-coef-hammock-pi-zero-closure] with $A=\\mathcal K_*,U=I,V=W_{\\mathcal K}^{\\mathrm{disc}}$. It gives local weak equivalences to $H_{\\mathcal K}$. Under the displayed isomorphism its functor is precisely $b$, the repeated one-arrow map, so $b$ is locally a weak equivalence. It fixes objects, and therefore is a Dwyer--Kan equivalence.",
+   "uses": [
+    "def-coef-simplicial-hammock-pair",
+    "lem-coef-hammock-pi-zero-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  },
+  {
+   "text": "Steps 5, 7 and 9 prove the three equivalence assertions for the actual functors whose operator, composition and identity equations were verified in Step 1. The strict square was also proved there on every degree-$r$ arrow, including identity arrows; equality on objects and all simplices is equality of simplicial functors. All constructions stay among the original $\\mathcal U$-small simplicial sets, and all hammock and coherent diagram categories are small in the enlarged ambient universes stipulated in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+    "place": "Proposition 4.8, pp.432-433; agent-written specialization and explicit functorial argument, using the existing localization interfaces rather than assuming that pairwise mapping-space identifications preserve composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-simplicial-hammock-pair",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-localization-homotopy-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-coef-hammock-pi-zero-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-3.pdf",
+  "place": "Explicit proof specializing the intent of Proposition 4.8; degree-category and enriched Kan-replacement constructions are written out, using the cited DAG interfaces and the independent closure lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +215,80 @@
    "results": "{\"t\": \"2026-10-16T21:52:42Z\", \"tool\": \"leanfinder\", \"query\": \"The enriched category of Kan simplicial sets is connected by canonical Dwyer Kan equivalences through diagonal hammock categories to the ordinary hammock localization of simplicial sets at weak homotopy equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.QCat\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.QCat.bicategory\", \"SSet.hoFunctor\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.HomotopyCategory\"], \"digest\": \"b5d85440e30dcf83\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary localization/homotopy categories, the simplicial enrichment of simplicial objects, or quasicategories. Read SimplicialCategory/SimplicialObject.lean:12-45, ModelCategory/CofibrantObjectHomotopy.lean:12-100 and CategoryTheory/Localization/LocalizerMorphism.lean:12-100. These do not construct the diagonal enriched hammock comparison or prove its three canonical functors are Dwyer--Kan equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical simplicial functors relating Kan complexes and the ordinary and enriched hammock localizations of simplicial sets are Dwyer Kan equivalences",
+   "results": "{\"t\": \"2026-10-16T23:03:02Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical simplicial functors relating Kan complexes and the ordinary and enriched hammock localizations of simplicial sets are Dwyer Kan equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.nerve₂Adj\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"ed623cc7ffa7e97f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category localization, homotopy-category or enrichment infrastructure only; no diagonal hammock closure/comparison theorem. Read Mathlib/CategoryTheory/Localization/Predicate.lean:15-100, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-100, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-80."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialCategory",
+   "results": "{\"t\": \"2026-10-16T23:03:03Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"440242e2b0f2ccb5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category localization, homotopy-category or enrichment infrastructure only; no diagonal hammock closure/comparison theorem. Read Mathlib/CategoryTheory/Localization/Predicate.lean:15-100, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-100, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-80."
+  },
+  {
+   "tool": "grep",
+   "query": "Dwyer|[Hh]ammock|[Dd]iagonal.*[Ll]ocalization",
+   "results": "{\"t\": \"2026-10-16T23:03:03Z\", \"tool\": \"grep\", \"query\": \"Dwyer|[Hh]ammock|[Dd]iagonal.*[Ll]ocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category localization, homotopy-category or enrichment infrastructure only; no diagonal hammock closure/comparison theorem. Read Mathlib/CategoryTheory/Localization/Predicate.lean:15-100, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-100, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-80."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The simplicial category of fibrant simplicial sets compares by enriched functors to hammock localization at weak homotopy equivalences",
+   "results": "{\"t\": \"2026-10-16T23:03:03Z\", \"tool\": \"leansearch\", \"query\": \"The simplicial category of fibrant simplicial sets compares by enriched functors to hammock localization at weak homotopy equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"0e9035a0cf067742\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category localization, homotopy-category or enrichment infrastructure only; no diagonal hammock closure/comparison theorem. Read Mathlib/CategoryTheory/Localization/Predicate.lean:15-100, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-100, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-80."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The standard enrichment of Kan complexes is Dwyer Kan equivalent to the simplicial localization of simplicial sets",
+   "results": "{\"t\": \"2026-10-16T23:03:04Z\", \"tool\": \"leanfinder\", \"query\": \"The standard enrichment of Kan complexes is Dwyer Kan equivalent to the simplicial localization of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"f45cac9eadc9e228\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category localization, homotopy-category or enrichment infrastructure only; no diagonal hammock closure/comparison theorem. Read Mathlib/CategoryTheory/Localization/Predicate.lean:15-100, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-100, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-80."
+  },
+  {
+   "tool": "grep",
+   "query": "Dwyer|[Hh]ammock|[Ee]nriched.*[Ll]ocalization",
+   "results": "{\"t\": \"2026-10-17T00:34:06Z\", \"tool\": \"grep\", \"query\": \"Dwyer|[Hh]ammock|[Ee]nriched.*[Ll]ocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the exact query."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialCategory",
+   "results": "{\"t\": \"2026-10-17T00:34:07Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"b4aa0974aa465809\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary category localization/homotopy categories or enrichment infrastructure. Read Mathlib/CategoryTheory/Localization/Predicate.lean:12-130, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-100, AlgebraicTopology/SimplicialCategory/Basic.lean:12-79 and SimplicialCategory/SimplicialObject.lean:12-45. They do not state invariance of full diagonal hammock mapping spaces or the specified enriched Kan comparison functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare the ordinary hammock localization of simplicial sets at weak equivalences to the simplicial category of Kan complexes by enriched composition preserving equivalences",
+   "results": "{\"t\": \"2026-10-17T00:34:07Z\", \"tool\": \"leansearch\", \"query\": \"Compare the ordinary hammock localization of simplicial sets at weak equivalences to the simplicial category of Kan complexes by enriched composition preserving equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.CatEnrichedOrdinary.homEquiv_comp\", \"CategoryTheory.Localization.homEquiv_comp\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"CategoryTheory.Localization.uniq\", \"CategoryTheory.Functor.IsLocalization.instCompOfIsEquivalence\", \"CategoryTheory.Localization.homEquiv\"], \"digest\": \"ba9a727f9dfc9505\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary category localization/homotopy categories or enrichment infrastructure. Read Mathlib/CategoryTheory/Localization/Predicate.lean:12-130, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-100, AlgebraicTopology/SimplicialCategory/Basic.lean:12-79 and SimplicialCategory/SimplicialObject.lean:12-45. They do not state invariance of full diagonal hammock mapping spaces or the specified enriched Kan comparison functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical enriched functors from Kan complexes to diagonal hammock localization and from ordinary hammock localization of simplicial sets to the enriched localization are Dwyer Kan equivalences",
+   "results": "{\"t\": \"2026-10-17T00:34:16Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical enriched functors from Kan complexes to diagonal hammock localization and from ordinary hammock localization of simplicial sets to the enriched localization are Dwyer Kan equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Localization.Construction.whiskeringLeftEquivalence\", \"CategoryTheory.Localization.isEquivalence\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.Localization.instIsEquivalenceFunctorFunctorsInvertingWhiskeringLeftFunctor\", \"CategoryTheory.Localization.qCompEquivalenceFromModelFunctorIso\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\"], \"digest\": \"5200b0de0c4693e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary category localization/homotopy categories or enrichment infrastructure. Read Mathlib/CategoryTheory/Localization/Predicate.lean:12-130, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-100, AlgebraicTopology/SimplicialCategory/Basic.lean:12-79 and SimplicialCategory/SimplicialObject.lean:12-45. They do not state invariance of full diagonal hammock mapping spaces or the specified enriched Kan comparison functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of fibrant Kan simplicial sets into all simplicial sets induces an equivalence on the diagonal enriched reduced hammock categories with constant weak equivalence markings",
+   "results": "{\"t\": \"2026-10-17T00:34:16Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of fibrant Kan simplicial sets into all simplicial sets induces an equivalence on the diagonal enriched reduced hammock categories with constant weak equivalence markings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.hoFunctor.unitHomEquiv\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"SSet.Truncated.nerve₂Adj\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"SSet.hoFunctor.terminalIso\"], \"digest\": \"fc29465cba689c0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary category localization/homotopy categories or enrichment infrastructure. Read Mathlib/CategoryTheory/Localization/Predicate.lean:12-130, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-100, AlgebraicTopology/SimplicialCategory/Basic.lean:12-79 and SimplicialCategory/SimplicialObject.lean:12-45. They do not state invariance of full diagonal hammock mapping spaces or the specified enriched Kan comparison functors."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-join-translation-resolution",
@@ -89,5 +296,34 @@
   "group": "Q52"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-enriched-hammock-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement and specified functors. Proved their strict square directly; compared ordinary and enriched hammocks degreewise using the explicit parameter-graph functor T_k and coherent localization; constructed enriched Ex-infinity replacement to prove the Kan inclusion comparison; reduced the Kan one-arrow comparison to pi-zero closure using an explicit inverse calculation. Added one general statement-only closure lemma; no Mathlib matches or project attachments. Second reading expanded both localized unit transformations and checked their descent explicitly.",
+  "blueprint": "Realizes the derived coefficient-adjunction paragraph of prop-coef-integral-exceptional-adjoint through the enriched bridge singled out in Step 9 of lem-coef-join-translation-resolution; no change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise equivalence and mapping-space invariance for coherent functor categories; this unit has no substitute."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Generic precomposition equivalence of Kan mapping spaces, used only to exhibit a two-sided inverse in pi-zero; this unit does not supply it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NM-17e990f78",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-17e990f78 (reviewer sub-agent of L); spot-checked: PASS. I read the item, the new node and all 13 cited statements in full. No repairs were needed and fixes/ is empty. One limit: network access is blocked here, so I could not reopen the Dwyer–Kan PDFs. They are not in literature/, and the report lists them as WANTED. Source places were checked from memory of DK Function complexes 4.8, Simplicial localizations 6.4/6.5 and Calculating 2.5. The mathematics was checked directly. The item statement and stmt_deps are identical to the live and side copies, and the live item is still unsplit. The item is not a target node, so the master base-change check does not apply. Step 1: the functors a, b and j and the strict square ahi=jbv follow directly from the hammock definition (constants commute with operators; identities reduce to the empty path). Step 2: the monotone homotopy [k]x[1]->[k], realized through the cylinder homeomorphism, plus the homotopy-equivalence lemma (no basepoint or nonemptiness needed), shows the projection is weak. Two-out-of-three then gives w x 1 weak. Step 3: I recomputed the formulas. T_k is a functor, e is natural, c_k(pi_X) after e_X is the identity, and the inverse is correctly only one-sided. Step 4: the one-sided inverse plus the homotopy-category criterion make q(e_X) an equivalence. Then the component criterion and full faithfulness of restriction show c_k induces an equivalence, and natural hammock representation gives the mapping weak equivalence. Step 5: the rowwise-to-diagonal lemma, and the diagonal map is exactly a. Step 6: I recomputed the enriched Ex-infinity composition, operators, unit and enriched naturality of the unit from the stated product comparisons. Step 7: degreewise unit transformations give inverse localized equivalences, so j is a local weak equivalence. For essential surjectivity I checked the two cancelling 2-row hammocks with vertical arrows (1, eta, 1). Step 8: the two-sided inverse in the component category, using bijectivity with target A and injectivity with target B, both Kan. Step 9: under the identity marking a reduced hammock is a single repeated arrow, so K_* is isomorphic to diag H(K_*,I). Step 8 proves the closure hypothesis before it is applied, and the resulting map is b. Step 10 only assembles earlier steps. New node lem-coef-hammock-pi-zero-closure: it is a true simplicial DK closure lemma (U contained in V contained in the closure of U). Small cases U=V, ordinary isomorphisms, a noninvertible arrow (excluded by the hypothesis) and empty sets all behave correctly. It is general and does not restate a clause of the item. It is not a duplicate of the pair-homotopy-invariance, components, inverted-arrow, cofibrant-inversion, groupoid-completion or simplicial-model-nerve nodes; the hypotheses or conclusions differ. Its fields and blueprint data are correct, and its searches cover all three kinds. The graph is acyclic, proof_deps equals the union of step uses, and no SGA is used. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-mapping-homotopy-invariance. Both are generic tools, and the parent lem-coef-join-translation-resolution already carries both as accepted tool_uses."
+ }
 }

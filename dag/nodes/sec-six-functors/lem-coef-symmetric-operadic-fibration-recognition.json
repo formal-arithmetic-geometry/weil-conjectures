@@ -14,9 +14,125 @@
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-categorical-pattern-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $C=N(\\mathsf{Fin}_*)$ and let $K_n$ be the discrete simplicial set on $\\{1,\\ldots,n\\}$. Its left cone has just the projection edges from its cone vertex, apart from degeneracies. Each $\\rho_i$ is inert, so all edges of the specified cones map into the base marking, including their degenerate edges. There is a small set of cones, one for each natural number, and $K_0=\\varnothing$. Thus these data satisfy the categorical-pattern definition. The hypotheses on $p$ give its inner fibration, inert lifts and exactly the prescribed marking. The total space $P$ is a quasicategory: fill an inner horn first in $C$, and then lift that simplex through $p$.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10; apply the fully scaled pattern convention of def-coef-categorical-pattern-fibrancy"
+   }
+  },
+  {
+   "text": "Pull back $p$ along $K_n^{\\triangleleft}\\to C$. Inner lifting is inherited by degreewise pullback. The chosen inert lifts supply lifts of every nondegenerate edge of this cone, and a cocartesian horn filler upstairs remains a filler in the pullback because its base simplex is specified. Hence this pullback is a cocartesian fibration. Straightening identifies its classifying diagram with the fibers $P_{\\langle n\\rangle}$, $P_{\\langle1\\rangle}$ and the projection transports. Finite products in $\\mathrm{Cat}_\\infty$ are categorical products, and the assumed color comparison $P_{\\langle n\\rangle}\\to\\prod_iP_{\\langle1\\rangle}$ is precisely the comparison for this discrete limit. It is an equivalence, so the classifying diagram is limiting: for $K_n$ discrete, the join-cone mapping formula expresses the mapping space from any test cone $t$ with vertex $a$ to this cone as $H\\times^h_V M$ with $M=\\operatorname{Map}(a,P_{\\langle n\\rangle})$, $V=\\prod_i\\operatorname{Map}(a,P_{\\langle1\\rangle})$ and $H$ the boundary mapping space; the product property makes $M\\to V$ an equivalence, so the restriction to $H$ is an equivalence, which is the relative-limit square for the map to a point. For $n=0$ this is exactly the assumed terminality of $P_{\\langle0\\rangle}$. Moreover every cocartesian edge of this pullback over a cone leg is globally $p$-cocartesian: compare it with a globally $p$-cocartesian lift of the same leg and same source. Both restrict to cocartesian lifts and hence are initial objects of the pullback lift category by the cocartesian initiality lemma. Their comparison is therefore an equivalence $h$ in the target fiber, with a triangle expressing the first edge as $h$ after the global lift. The mapping criterion makes $h$ globally $p$-cocartesian: precomposition by $h$ and by its inverse are homotopy inverses by associativity, the inverse triangles and the unit law in the mapping-composition lemma, and the base of $h$ is an identity. Cocartesian composition then makes the original edge globally $p$-cocartesian. Thus arbitrary cocartesian sections, not only the initially chosen lifts, have inert legs in $P$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10 and Remark 2.1.1.14; fully scaled pattern condition (iii)"
+   }
+  },
+  {
+   "text": "Take any cocartesian section of that pullback, with inert legs $e_i:y\\to y_i$. For any test cone $t=(a\\to a_i)$ in $P$, put $M=\\operatorname{Map}_P(a,y)$, $V=\\prod_i\\operatorname{Map}_P(a,y_i)$ and $H=\\prod_i\\operatorname{Map}_P(a_i,y_i)$; write $M_C,V_C,H_C$ for their counterparts after applying $p$. The operad mapping axiom identifies the homotopy fiber of $M\\to M_C$ over each pointed map $v$ with the fiber of $V\\times^h_{V_C}M_C\\to M_C$ over $v$. Here the homotopy fiber of $V\\times^h_{V_C}M_C\\to M_C$ over $v$ is the homotopy fiber of $V\\to V_C$ over the image of $v$, by pasting with the homotopy-fiber square of $\\{v\\}\\to M_C$, and the homotopy fiber of a product of maps over a tuple is the product of the homotopy fibers (path spaces and degreewise pullbacks commute with products). The comparison $M\\to V\\times^h_{V_C}M_C$ lies over the identity of $M_C$ and induces these equivalences on all homotopy fibers over vertices of $M_C$, so the homotopy-fiber detection lemma gives $M\\simeq V\\times^h_{V_C}M_C$ over $V$ and $M_C$. By the cited join-cone mapping formula, with its naturality for boundary restriction, and the pasting lemma for homotopy pullbacks (used for both displayed reassociations, the square $H\\to V\\to V_C$ versus $H\\to H_C\\to V_C$ commuting through $p$), the mapping space from $t$ to this section is\n$$H\\times^h_V M\\simeq H\\times^h_{V_C}M_C\\simeq H\\times^h_{H_C}(H_C\\times^h_{V_C}M_C).$$\nHere $H\\to V$ sends a tuple $h_i:a_i\\to y_i$ to its composites with the legs of $t$, and $M\\to V$ composes with $e_i$. The last expression is exactly the homotopy pullback of the boundary mapping space and the base cone mapping space in the definition of a $p$-limit diagram. This proves condition (iv) for every section. For $n=0$, $H,V,H_C,V_C$ are points, and the same displayed equation reduces to $M\\simeq M_C$, as supplied by the empty-output axiom. All these are spaces retaining the triangle homotopies. No separate relative-product theorem is needed.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2); explicit homotopy-pullback calculation from the statements of lem-coef-infinity-join-cone-calculus and lem-coef-space-contractible-fiber-equivalence, in the relative-limit convention of def-coef-infinity-relative-cone."
+   }
+  },
+  {
+   "text": "Steps 1-3 give conditions (i)-(iv) of pattern-fiberedness for $P^{\\mathrm{in}}$. The categorical-pattern model calculus identifies fibered objects with fibrant objects, proving the first assertion for exactly $\\mathsf M_{\\mathfrak P_{\\mathrm{sym}}}$, rather than identifying its cone list with a different presentation of preoperads.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem B.0.20, applied directly to the stated color-projection pattern"
+   }
+  },
+  {
+   "text": "Form the induced pattern $p^*\\mathfrak P_{\\mathrm{sym}}$ on $P$ described in the induced-pattern fibration test. Its marked base edges are exactly the inert edges of $P$, and its specified cones are exactly all inert lifts $x\\to x_i$ of the color-projection cones. The categorical fibration $r$ is inner; since $P$ is a quasicategory, $E$ is one by filling a base inner horn and then lifting. Its inert lifts and the marking $E^{\\mathrm{in}/P}$ give conditions (i)-(ii) of induced-pattern fiberedness. For any specified cone $x\\to x_i$, the pullback of $r$ is cocartesian: all its nondegenerate edges are the indicated inert legs, for which lifts exist, and each chosen global lift is cocartesian in the pullback: project an outer-horn lifting problem to $E$, fill it using global cocartesianness over its prescribed simplex in $P$, and pair that filler with the prescribed simplex of the cone. Inner lifting is inherited by the same degreewise pullback construction. Its classifying diagram is the fiber diagram $E_x\\to E_{x_i}$ by straightening. The assumed equivalence $E_x\\simeq\\prod_iE_{x_i}$ proves condition (iii), with terminal fiber when $n=0$: as in step 2, the join-cone mapping formula for discrete $K_n$ turns this product equivalence into the relative-limit square over a point. For a cocartesian leg $l:b\\to b_i$ of this pullback, choose a global $r$-cocartesian lift $g:b\\to c_i$ of the same base leg. Both are cocartesian in the pullback and hence initial in its lift category by the cited initiality theorem. Their comparison gives a triangle $l=h g$ with $h:c_i\\to b_i$ an equivalence in $E_{x_i}$. Precomposition by $h$ and by its inverse are homotopy inverses by the mapping-composition associativity and unit laws and the inverse triangles. Since $r(h)$ is an identity, the mapping criterion makes $h$ globally $r$-cocartesian; the composition theorem then makes $l$ globally $r$-cocartesian. Consequently every section tested in step 6 meets the stated hypothesis on the chosen cocartesian projections.",
+   "uses": [
+    "lem-coef-pattern-induced-fibration-test",
+    "def-coef-infinity-fibrations",
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark B.0.27; Definition 2.3.3.28 relative product conditions, applied to the identity approximation"
+   }
+  },
+  {
+   "text": "For any cocartesian section of the last pullback, write its vertex as $b\\in E_x$ and its legs as $b\\to b_i\\in E_{x_i}$. For any test cone $t=(a\\to a_i)$ in $E$, put $M=\\operatorname{Map}_E(a,b)$, $V=\\prod_i\\operatorname{Map}_E(a,b_i)$, and $H=\\prod_i\\operatorname{Map}_E(a_i,b_i)$; write $M_P,V_P,H_P$ for their counterparts after applying $r$. The assumed relative output axiom for every edge $u:r(a)\\to x$ identifies the fibers over $u$. As in step 3, the homotopy fiber of $V\\times^h_{V_P}M_P\\to M_P$ over $u$ is, by pasting, the homotopy fiber of $V\\to V_P$ over the image of $u$, namely $\\prod_i\\operatorname{Map}^{u_i}_E(a,b_i)$. The comparison $M\\to V\\times^h_{V_P}M_P$ lies over the identity of $M_P$ and is an equivalence on every such homotopy fiber, so the homotopy-fiber detection lemma gives $M\\simeq V\\times^h_{V_P}M_P$ over $V$ and $M_P$. The join-cone mapping formula and the pasting lemma for homotopy pullbacks now give\n$$\\operatorname{Map}_{\\operatorname{Fun}(K_n^{\\triangleleft},E)}(t,s)\\simeq H\\times^h_V M\\simeq H\\times^h_{V_P}M_P\\simeq H\\times^h_{H_P}(H_P\\times^h_{V_P}M_P).$$\nThe maps $H\\to V$ and $M\\to V$ compose with the legs of $t$ and $s$, respectively. The last expression is exactly the homotopy pullback required in the defining relative-limit square, with boundary mapping space $H$ and base cone mapping space $H_P\\times^h_{V_P}M_P$. Thus $s$ is an $r$-limit diagram, proving condition (iv). For $n=0$ the four product spaces are points and the calculation reduces to $M\\simeq M_P$, which is the empty-product mapping hypothesis. The mapping fibers here are over edges of $P$; no identification with fibers over $C$ is made.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.3.3.28(3); explicit homotopy-pullback calculation from the statements of lem-coef-infinity-join-cone-calculus and lem-coef-space-contractible-fiber-equivalence, in the relative-limit convention of def-coef-infinity-relative-cone."
+   }
+  },
+  {
+   "text": "Thus $r:E^{\\mathrm{in}/P}\\to P^{\\mathrm{in}}$ is fibered for the induced pattern. Every equivalence in $C=N(\\mathsf{Fin}_*)$ comes from a pointed bijection, and each such bijection is inert; all triangles are scaled. The target is pattern-fibered by step 4, so all hypotheses of the induced-pattern fibration test hold. It follows that $r$ is a fibration in $\\mathsf M$. Only the displayed inert lifts, fiber products and relative mapping products entered the argument; it requires neither active cocartesian lifts nor any completeness or presentability of the fibers.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-pattern-induced-fibration-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition B.2.7, (c) implies (a), for the specified symmetric pattern"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-categorical-pattern-fibrancy",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-join-cone-calculus",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-pattern-induced-fibration-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Direct verification of fully scaled color-projection pattern conditions; Remark B.0.27 and Proposition B.2.7. Relative mapping-space bridge is calculated in steps 3 and 6 from the existing join-cone formula; see second-reading report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,7 +192,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-approximation-restriction",
@@ -102,5 +218,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-operadic-fibration-recognition",
+  "worker": "stage1",
+  "summary": "Verified the exact color-projection pattern including arity zero in seven steps. Relative product cones follow by an explicit homotopy-pullback calculation from existing join-cone calculus. One new general input: the induced-pattern fibration criterion. No operadic clause is outsourced and no Lean attachment was found.",
+  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint proof paragraph 2 finite derived mapping-complex comparison, through the inherited operadic approximation and marked-section foundation; no change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-db566f532",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-db566f532 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-pattern-induced-fibration-test, all cited statements and HA (2017) from a local copy (/tmp/ha_dl/HA.pdf, not archived under literature/): Def 2.1.1.10, Prop 2.1.4.6 and its proof, Def 2.3.3.28, Rem B.0.27 (p.1469), Prop B.2.7 (pp.1488-90). The item statement is correct and was not changed. It uses the DAG's own all-colour discrete-cone pattern, includes n=0, and makes no claim that this pattern equals HA's binary one. All seven steps are mathematically right. Steps 1-4 check that P^in is pattern-fibered: local-to-global cocartesian legs via initiality, mapping criterion and composition; then relative Segal via the join-cone formula. Steps 5-7 apply B.2.7 (c)=>(a): equivalences in Fin_* are pointed bijections, hence inert, and all triangles are scaled. The new node is a faithful fully-scaled B.2.7 (a)<=>(c) with the induced pattern of B.0.27, both hypotheses kept. It is not a restatement of the item and not a duplicate: searched the DAG for induced pattern, B.0.27/B.2.7 and the pattern/operadic nodes. It is retained. The removed finite-relative-product node is absent and cited nowhere. Route: all citations are in unit sk-prop-sf-biduality-general; no tool_uses, no SGA, no target or coefficient category touched. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-symmetric-operadic-fibration-recognition.json: (B4) in step 5 three JSON '\\to' escapes had decoded to TAB+'o'; restored. (C1/C2) steps 3 and 6 used a fibre-of-fibre argument and 'associativity of homotopy pullbacks' with no node and were marked elementary. They now cite the existing same-unit nodes lem-coef-spaces-homotopy-fiber-detection and lem-coef-infinity-homotopy-pullback-pasting, the arguments are written out, and both steps are marked elementary=false. Steps 2 and 5 now cite lem-coef-infinity-join-cone-calculus for 'product equivalence implies limit diagram over a point'. proof_deps recomputed. Checked that no cycle is introduced.; 1 file(s) fixed by the reviewer"
  }
 }

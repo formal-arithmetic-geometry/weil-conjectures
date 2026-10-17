@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "fix-prop-coherence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coherence of the proved comparisons",
@@ -27,52 +27,202 @@
  ],
  "proof": [
   {
-   "text": "The identity and pasting equations are [fix-lem-exchanges].\nThe projection diamonds and associativity are\n[fix-prop-projection-formula]; taking adjoint mates gives the\ncorresponding equations for [fix-cor-verdier-exchange].\nThe maps used here are tensor reassociation, evaluation, and adjunction\nunits and counits, whose coefficient comparisons are proved in\n[lem-fix-operation-reduction]. The general Hom comparisons\n[thm-coef-finite-hom], [lem-coef-integral-hom-reduction], [lem-coef-integral-finite-extension]\nare defined by the same evaluation maps. The exceptional comparisons\n[lem-coef-finite-exceptional], [prop-coef-integral-exceptional-adjoint], [lem-coef-rational-operations]\npreserve units and counits, so their mates satisfy the same equations.\nTheir Weil structures are [lem-fix-weil-operations], with\ngeneral duality equivariance given by [cor-coef-verdier-weil-equivariance]. The geometric orientation is supplied\nseparately by [thm-pur-finite-reduction-of-purity] and\n[prop-pur-weil-equivariance-compatibilities]; composing it with\nevaluation gives the pairing comparison [thm-pod-finite-reduction].\nThus coherence is inherited from the individual maps on the stated\ndomains, without an additional preservation or biduality assertion.",
+   "text": "Work with the coefficient and scheme datum of\n[def-fix-six-functor-datum]. All equations are restricted to the domains of\ntheir cited comparisons: finite compact support has etale-origin witnesses;\nintegral operations are completed with compatible witnessed reductions;\nrational operations use raw localization, and algebraically closed coefficients\nuse a common finite coefficient field. Retain the lattice and interval conditions\nof [fix-lem-exchanges]. Its clauses (1), (2), and (4) supply naturality,\nidentity squares, horizontal and vertical pasting, and refinement compatibility.\nIn the canonical composition coordinates these are\n$$\\operatorname{Ex}_{gh}=(\\operatorname{Ex}_h Lg'^*)\\circ\n(Lh^*\\operatorname{Ex}_g),\\qquad\n\\operatorname{Ex}_{fe}=(P(f')\\operatorname{Ex}_e)\\circ\n(\\operatorname{Ex}_fP(e)),\\quad P=R(-)_*,R(-)_!.$$\nNo ordinary exchange is assumed invertible. The finite compact-support\ncomposition is unital and associative by [thm-sf-comp-composition].\n\nHere is the additional argument for higher-coefficient compact-support\ncomposition. Use the simultaneous coefficient-system operations of\n[lem-sf-integral-compactification-system-realization], and write $S_p,J_j$\nfor proper direct image and open extension. The geometric compatible towers\nand common refining towers of [lem-cbc-compactifiable-compatible-tower]\nlet the composition maps for $f,g$ and for triples be computed on common\ncompactifications. The map for $g=q i$, $f=pj$ is the adjacent interchange\n$J_iS_p\\to S_rJ_k$, followed by the proper- and open-composition\nidentifications in the resulting compactification. For three factors the\ninitial expression is $S_sJ_aS_qJ_iS_pJ_j$. The two compositions are the\ntwo orders of moving each $S$ left past an adjacent $J$. Moves at disjoint\npositions commute by naturality. Moving past two successive proper factors,\nor two successive open factors, is precisely the vertical, respectively\nhorizontal, proper/open pasting equation in\n[lem-cbc-strict-tower-proper-open-calculus]. That statement asserts these\nequations and independence of parenthesization as actual strict-tower\ntransformations, including for the intermediate refinement squares. Their\ncoefficient-system versions are asserted before restriction or evaluation\nby [lem-sf-integral-compactification-system-realization], which specifies\nthe intrinsic open-adjunction construction and its pasting identities. The\nremaining proper and open compositors are conjugates of the canonical\npullback compositors. Those compose associatively: before localization both\nroutes identify the same iterated inverse image and send an iterated tensor\nof coefficients to their product. Conjugation preserves this identity by\n[lem-weil-pbc-mate-pasting]. Thus the two system transformations agree; the\nidentity-square clauses in the same calculus give both unit laws. Common\nrefinement comparisons intertwine them by its refinement and pasting clauses.\nApplying the natural realization isomorphisms $c_V$ and $R\\lim$ proves the\nintegral unit and associativity equations for the specified compact-support\ncomposition maps, including nested functors. Uniform constructible finite-Tor\ndomains for the intermediate expressions are the ones supplied by\n[thm-sf-ctf-stability], so the realization node applies. If a scheme in\nthe compact-support diagram is not separated over $k$, check these bounds\non finite affine covers and their inverse images: a separated finite-type\nmap over an affine has separated source, so the cited theorem applies\nthere. Constructibility and Tor/cohomology bounds are local; take the\nminimum lower and maximum upper endpoint over the finite covers. Raw rationalization\nand common finite-stage scalar transport preserve this equality of maps by\n[lem-fix-operation-reduction]. This proves the higher composition laws;\nthey are not attributed to the phrase “forms constructed in the proof” in\n[fix-lem-exchanges].",
    "uses": [
+    "def-fix-six-functor-datum",
     "fix-lem-exchanges",
+    "thm-sf-comp-composition",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-mate-pasting",
+    "thm-sf-ctf-stability",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "opening sentence: identity and pasting equations"
+   }
+  },
+  {
+   "text": "For $K\\in D^b_c(X,\\Lambda)$ and\n$L\\in D^b_{ctf}(Y,\\Lambda)$, [fix-prop-projection-formula] gives the\ncanonical projection isomorphism, naturality, associativity pentagon,\ncompactification compatibility, proper coincidence and coefficient\ncompatibility. For the identity choose the identity compactification in\n[def-exchange-projection]. Its adjunction is the identity adjunction, so\nthe counit-defined projection is the identity under the canonical tensor\nand functor identifications.\n\nChoose a compactification $f=pj$ and its base change $f'=p'j'$, with\n$h:\\overline X'\\to\\overline X$ and $M=j_!K$. First work at finite\ncoefficients. The formulas of [def-exchange-projection] express projection\nand exchange as the open and proper factors. For the open factor use\n[lem-sf-open-tensor-normalization]: it states $j'^*j'_!\\cong1$, the\nfull-faithfulness of $j'_!$, and the specific restriction normalizations\nof both $\\beta$ and $\\gamma$, identifying the finite maps with those of\n[lem-cbc-proetale-extension-zero-base-change] and\n[lem-cbc-extension-zero-projection-formula]. Both routes therefore have\nsource and target in the image of $j'_!$ and restrict to the identity of\n$Lg'^*K\\otimes^L Lf'^*Lg^*L$; the open adjunction gives equality.\nFor the proper factor, transpose the two maps\n$$Lg^*(Rp_*M\\otimes^L L)\\longrightarrow\nRp'_*(Lh^*M\\otimes^L Lp'^*Lg^*L)$$\nunder $Lp'^*\\dashv Rp'_*$. Both transposes are\n$$Lp'^*Lg^*(Rp_*M\\otimes^L L)\\cong\nLh^*Lp^*Rp_*M\\otimes^L Lp'^*Lg^*L\n\\xrightarrow{Lh^*\\varepsilon_{p,M}\\otimes1}\nLh^*M\\otimes^L Lp'^*Lg^*L.$$\nFor exchange first this is the defining exchange transpose; for projection\nfirst, naturality moves the counit past exchange and its adjacent unit\ncancels by the triangle identity. The compatibility of the tensor map\n$\\mu$ with the square comparison $\\theta$ in these identifications is\nexactly the canonical ringed-topos equation of\n[lem-weil-pbc-ringed-exchange-tensor-coherence], not an extra property\ninferred from the definition of the symbols. Combining the two factors gives\n$$\\operatorname{Ex}_{!,K\\otimes^L Lf^*L}\\circ Lg^*\\operatorname{PF}_{f,K,L}\n=\\operatorname{PF}_{f',Lg'^*K,Lg^*L}\\circ(\\operatorname{Ex}_{!,K}\\otimes1)$$\nafter the canonical tensor/pullback identifications. Refinement compatibility\nfrom [fix-lem-exchanges] and [fix-prop-projection-formula] removes the\ncompactification choice.\n\nAt integral coefficients do this calculation in the derived category of\nstrict semilinear coefficient systems, before total inverse limit.\n[lem-sf-integral-compactification-system-realization] supplies the actual\nsystem adjunctions, canonical tensor/square comparisons and open maps,\nand identifies the realization of each of the four words in the diamond\nand each generator map with its integral counterpart. The ringed-system\nversion of [lem-sf-open-tensor-normalization] proves equality for the open\nfactor by the same restriction argument, and\n[lem-weil-pbc-ringed-exchange-tensor-coherence] proves equality for the\nproper factor on the ringed diagram topoi. Hence the composites are equal\nas system maps. Apply $R\\lim$ and the natural $c_V$ comparisons to this\nequality. This gives exactly the integral diamond for completed pullback\nand tensor; no faithfulness of derived evaluation or finite reduction is\nused. The inputs and all intermediate expressions meet the uniform\nconstructible finite-Tor conditions by [thm-sf-ctf-stability], using\nfinite affine covers as in step 1 when necessary. In particular its integral\nconclusion $D^b_c=D^b_{ctf}$ applies locally to $K$; this imposes no\nextra finite-Tor assumption on the integral $K$. For rational\nobjects take their integral presentations and apply the localization\nfunctor; for algebraically closed coefficients represent the finite\ndiagram at a common finite field and apply its transition functor. These\nfunctors take equal composites to equal composites; the operation and\ngenerator comparisons are the rational/common-stage comparisons of\n[lem-fix-operation-reduction]. Thus the same diamond holds at both field\nstages on the stated domains.",
+   "uses": [
     "fix-prop-projection-formula",
-    "fix-cor-verdier-exchange",
+    "def-exchange-projection",
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "fix-lem-exchanges",
+    "lem-sf-integral-compactification-system-realization",
+    "thm-sf-ctf-stability",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "projection diamonds and associativity; tensor reassociation and units/counits"
+   }
+  },
+  {
+   "text": "The elementary operation comparisons preserve tensor associativity, evaluation, units and counits by the last sentence of [lem-fix-operation-reduction]. For general finite-quotient internal Hom, take $K,M\\in D^b_{ctf}(X,A_{E,n})$ and $n\\ge m\\ge1$. [thm-coef-finite-hom] supplies the isomorphism to $R\\mathcal Hom_{A_{E,m}}(K_m,M_m)$, defined as the unique transpose of the reduced evaluation, and states its quotient-composition equation. This requires both variables to have finite Tor amplitude; it does not follow just from the site-perfect elementary case. For integral reduction, [lem-coef-integral-hom-reduction] supplies the same evaluation-transpose description and isomorphism, even for arbitrary ambient variables. To check successive reductions in any overlap where the finite comparison applies, transpose the direct and successive comparisons: both are the reduction of $K\\otimes^L R\\mathcal Hom(K,M)\\to M$ under the canonical tensor identifications. The bijectivity of tensor–Hom transposition makes the comparisons equal. For finite coefficient-field extension [lem-coef-integral-finite-extension] gives evaluation preservation, identity-extension and extension-composition compatibility, including tensor associators. The same transpose argument for identity coefficient change gives the identity map. Thus the extended Hom comparisons agree with the elementary ones on their overlap and preserve every equation built from evaluations and tensor reassociations. Rational and common-stage passage use the comparison functors in [lem-fix-operation-reduction]; this does not introduce a reduction functor from rational coefficients to a finite quotient.",
+   "uses": [
     "lem-fix-operation-reduction",
     "thm-coef-finite-hom",
     "lem-coef-integral-hom-reduction",
-    "lem-coef-integral-finite-extension",
+    "lem-coef-integral-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "general Hom comparisons defined by evaluation"
+   }
+  },
+  {
+   "text": "For the finite constructible finite-Tor exceptional functors, use [lem-coef-finite-exceptional], including its quotient cocycle and its two explicit unit/counit equations. For the integral exceptional functor, use the right adjunction and the unit/counit reduction identifications of [prop-coef-integral-exceptional-adjoint]. For rational coefficients and finite scalar extension, use the right adjunction and evaluation/unit/counit compatibility of [lem-coef-rational-operations]. These statements concern the constructible adjoints; an unrestricted ambient pro-étale exceptional adjoint is not used. The reason the same coherence passes to exceptional comparisons is the explicit transpose formula. For an adjunction $F\\dashv G$ with unit $\\eta$ and counit $\\epsilon$, the transpose of $a:FU\\to V$ is $G(a)\\eta_U$, and the inverse sends $b:U\\to GV$ to $\\epsilon_VF(b)$. A coefficient comparison intertwining $\\eta,\\epsilon$ and the functors therefore intertwines these two formulas. Applying it to two equal maps gives equal transposes; applying it to an identity gives the corresponding identity. For composable adjunctions $F_f\\dashv G_f$ and $F_g\\dashv G_g$, substitution into these formulas gives the pasted unit $(G_f\\eta_gF_f)\\eta_f$ and counit $\\epsilon_g(F_g\\epsilon_fG_g)$. Naturality and the two triangle identities show that transposing successively with $f$ and $g$ is transposing once with this composite adjunction. The compact-support unit and associativity laws at all four coefficient stages were proved in step 1 from the finite composition theorem, actual strict-tower interchange identities and coherent realization. Substituting these equal left-functor composites in the displayed Hom bijections gives equal right-adjoint identifications; their identity and associativity equations follow by bijectivity of transposition. This calculation proves the compatibility claimed here without treating a mate of an arbitrary square isomorphism as automatically invertible.",
+   "uses": [
     "lem-coef-finite-exceptional",
     "prop-coef-integral-exceptional-adjoint",
-    "lem-coef-rational-operations",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "exceptional comparisons preserve units and counits, hence mate equations"
+   }
+  },
+  {
+   "text": "On the domain where [fix-cor-verdier-exchange] supplies the proved Verdier comparison, it supplies its naturality and coefficient/shift compatibility; retain its stated exceptional hypotheses. Its composition coherence is a formal calculation, not an additional clause taken from that statement. Write $F_f=Rf_!$, $P_f=Lf^*$ and $H_X=R\\mathcal Hom_X$. For this comparison of maps, use the already established preservation in [thm-sf-ctf-stability] to keep the representing internal-Hom and direct-image objects, as well as the test objects $T$, in the common constructible finite-Tor categories at the stated coefficient stages. Thus the projection isomorphisms in the following chain are applied only with finite-Tor test objects; the identity of the representing object is an allowed test. This invokes a separate preservation theorem and proves no new preservation assertion here. The canonical comparison is obtained by transposing the chain\n$$\\operatorname{Hom}(T,H_Y(F_fM,N))\\cong\\operatorname{Hom}(F_fM\\otimes T,N)\\xrightarrow{\\operatorname{PF}_f^{-1}}\\operatorname{Hom}(F_f(M\\otimes P_fT),N)\\cong\\operatorname{Hom}(M\\otimes P_fT,f^!N)\\cong\\operatorname{Hom}(T,Rf_*H_X(M,f^!N)),$$\nthen setting $N=\\omega_Y$ and using $f^!\\omega_Y\\cong\\omega_X$, the right-adjoint composition identification from the preceding step. The first and last bijections, and the resulting isomorphism, are the tensor–Hom adjunction of [fix-lem-tensor-adjunction] on its exceptionally admissible domain. Tensor–Hom adjunction is the evaluation transposition used in [thm-coef-finite-hom] and [lem-coef-integral-hom-reduction]; the operation comparisons preserve it. For $gf$, substituting the projection associativity equation from [fix-prop-projection-formula] replaces its projection arrow by the two projection arrows for $g$ and $f$. Substituting the pasted counit $\\epsilon_g\\circ F_g\\epsilon_fG_g$ of [fix-prop-adjunctions], clause (3), replaces its exceptional transposition by the two exceptional transpositions. Pullback and ordinary direct-image composition identifications are the ones used in [fix-lem-exchanges]. Hence, on each input map in the displayed Hom set, the chain for $gf$ is exactly the chain first for $g$ and then for $f$. Evaluating at the identity of the representing object proves that the corresponding object maps agree. In particular, after the canonical composition identifications,\n$$\\varepsilon_{gf,M}=Rg_*(\\varepsilon_{f,M})\\circ\\varepsilon_{g,Rf_!M}.$$\nThe identity case is the same chain with identity functors. Coefficient comparison of this chain agrees term by term by the evaluation compatibilities in the preceding Hom step and the exceptional unit/counit compatibilities in the preceding exceptional step. No Verdier-duality exchange with arbitrary pullback, and no new biduality or preservation theorem, is asserted.",
+   "uses": [
+    "fix-cor-verdier-exchange",
+    "fix-prop-projection-formula",
+    "fix-lem-exchanges",
+    "fix-lem-tensor-adjunction",
+    "fix-prop-adjunctions",
+    "thm-coef-finite-hom",
+    "lem-coef-integral-hom-reduction",
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "taking adjoint mates; unit proof clause (6), composition of Verdier exchange"
+   }
+  },
+  {
+   "text": "For a smooth separated morphism of pure relative dimension $d$ and a finite-Tor input at $A_{E,n}$, [thm-pur-finite-reduction-of-purity] gives the commutative reduction square for $Lf^*K(d)[2d]\\to Rf^!K$, and states the corresponding affine-orientation, smooth-trace, composition and base-change compatibilities. For the site-perfect constructible input and admissible smooth structure morphism of [thm-pod-finite-reduction], that statement gives reduction of the derived Poincare pairing and the displayed square for its adjoint isomorphism. These are separate geometric inputs; evaluation compatibility alone does not prove compatibility of the orientation. Once their squares are composed with the preserved evaluation from [lem-fix-operation-reduction], the resulting pairing squares commute: if $b'u=vb$ and $c'v=wc$, then $(c'b')u=c'(vb)=(wc)b=w(cb)$. This verifies the assembly while keeping the site-perfect hypothesis and the hypotheses on the smooth structure morphism of the pairing theorem.",
+   "uses": [
+    "thm-pur-finite-reduction-of-purity",
+    "thm-pod-finite-reduction",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "geometric orientation supplied separately; pairing comparison"
+   }
+  },
+  {
+   "text": "At $E$ and $\\overline{\\mathbf Q}_\\ell$, suppose $f$ is the geometric fiber of a separated finite-type morphism $f_0:X_0\\to Y_0$ over the finite base field, and work with the Weil structures on the stated constructible domains. [lem-fix-weil-operations] makes the algebraic evaluation, adjunction data, composition, exchange and projection maps equivariant. [cor-coef-verdier-weil-equivariance] supplies the general Verdier-duality, exceptional-adjunction and finite scalar-extension equivariance, without requiring a Frobenius-stable integral lattice. Equivariance is preserved under composition: from $\\varphi_B F(a)=a\\varphi_A$ and $\\varphi_C F(b)=b\\varphi_B$, one obtains $\\varphi_C F(ba)=b\\varphi_BF(a)=ba\\varphi_A$. For geometric purity, use the actual orientation and trace equivariance squares of [thm-pur-weil-equivariance-of-purity-and-trace], and their scheme-Frobenius versions from [prop-pur-weil-equivariance-scheme-frobenius]; the additional finite-reduction, scalar-extension, composition and base-change compatibility of those squares is exactly [prop-pur-weil-equivariance-compatibilities]. Their composition with equivariant evaluation gives equivariance of the orientation-induced pairing on its stated domain. Thus every proved comparison in the assertion has the claimed Weil compatibility, and the extra geometric assertion has its own cited input.",
+   "uses": [
     "lem-fix-weil-operations",
     "cor-coef-verdier-weil-equivariance",
-    "thm-pur-finite-reduction-of-purity",
-    "prop-pur-weil-equivariance-compatibilities",
-    "thm-pod-finite-reduction"
+    "thm-pur-weil-equivariance-of-purity-and-trace",
+    "prop-pur-weil-equivariance-scheme-frobenius",
+    "prop-pur-weil-equivariance-compatibilities"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Weil structures, general duality equivariance, and purity compatibilities"
+   }
   }
  ],
  "proof_deps": [
-  "fix-lem-exchanges",
-  "fix-prop-projection-formula",
-  "fix-cor-verdier-exchange",
-  "lem-fix-operation-reduction",
-  "thm-coef-finite-hom",
-  "lem-coef-integral-hom-reduction",
-  "lem-coef-integral-finite-extension",
-  "lem-coef-finite-exceptional",
-  "prop-coef-integral-exceptional-adjoint",
-  "lem-coef-rational-operations",
-  "lem-fix-weil-operations",
   "cor-coef-verdier-weil-equivariance",
-  "thm-pur-finite-reduction-of-purity",
+  "def-exchange-projection",
+  "def-fix-six-functor-datum",
+  "fix-cor-verdier-exchange",
+  "fix-lem-exchanges",
+  "fix-lem-tensor-adjunction",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-finite-exceptional",
+  "lem-coef-integral-finite-extension",
+  "lem-coef-integral-hom-reduction",
+  "lem-coef-rational-operations",
+  "lem-fix-operation-reduction",
+  "lem-fix-weil-operations",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "prop-coef-integral-exceptional-adjoint",
   "prop-pur-weil-equivariance-compatibilities",
-  "thm-pod-finite-reduction"
+  "prop-pur-weil-equivariance-scheme-frobenius",
+  "thm-coef-finite-hom",
+  "thm-pod-finite-reduction",
+  "thm-pur-finite-reduction-of-purity",
+  "thm-pur-weil-equivariance-of-purity-and-trace",
+  "thm-sf-comp-composition",
+  "thm-sf-ctf-stability"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Proof, expanded with the projection/base-change transpose and unit clause (6) composition calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of six functor exchange projection formula and coefficient comparison isomorphisms on constructible etale sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. Hits concern general adjunction/monoidal or underived sheaf operations, not the complete geometric assertion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε. Hits concern general adjunction/monoidal or underived sheaf operations, not the complete geometric assertion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "six.?functor|[Cc]oefficient.*[Cc]oherence",
+   "results": "0 hits: . No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Six functor formalism coherence for etale sheaves and change of coefficients",
+   "results": "8 hits: SheafOfModules.pushforwardSections_coe, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardNatIso, CategoryTheory.Functor.sheafPushforwardCocontinuous.congr_simp, CategoryTheory.sheafToPresheaf_η, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, SheafOfModules.sheafificationCompPullback, SheafOfModules.pushforwardCongr. Hits concern general adjunction/monoidal or underived sheaf operations, not the complete geometric assertion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of change of coefficients with derived internal Hom exceptional inverse image and smooth purity on constructible sheaves",
+   "results": "8 hits: LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. Hits concern general adjunction/monoidal or underived sheaf operations, not the complete geometric assertion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|[Vv]erdier|[Ee]xceptional",
+   "results": "0 hits: . No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -112,5 +262,94 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-package"
+ "unit": "sk-thm-sf-package",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "fix-prop-coherence",
+  "worker": "stage1",
+  "summary": "Repaired all four return points. Added two statement-only construction lemmas: normalized derived ringed-site open maps, and simultaneous strict-system/integral realization of compactification expressions and their generator maps. Step 1 now proves the higher coefficient composition laws by actual tower interchange identities; step 2 computes the diamond before R lim and identifies its integral maps, retaining the finite transpose calculation. Step 4 uses the laws proved in step 1. The duplicate audit distinguishes the existing axiomatic prop-sf-pf-coherence. Statement unchanged.",
+  "blueprint": "Steps 1–2 expand the current proof’s identity, pasting and projection sentences; the two new construction interfaces make precise its use of the coefficient comparisons for actual maps. Steps 3–4 realize its Hom and exceptional sentences, step 5 the unit clause (6) Verdier composition calculation, and steps 6–7 its purity/pairing and Weil sentences. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "Canonical open-factor exchange for the explicit projection/base-change calculation; the package unit does not state this elementary site tool."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Canonical open-factor projection for the same calculation, used as a generic open-immersion tool."
+   },
+   {
+    "node": "thm-coef-finite-hom",
+    "why": "Evaluation-defined Hom comparison and its quotient cocycle, exactly the general Hom tool named by the blueprint item."
+   },
+   {
+    "node": "lem-coef-integral-hom-reduction",
+    "why": "Evaluation-defined integral reduction comparison, exactly the integral Hom tool named by the blueprint item."
+   },
+   {
+    "node": "lem-coef-integral-finite-extension",
+    "why": "Evaluation and extension cocycles for finite coefficient-field extensions, as named by the blueprint item."
+   },
+   {
+    "node": "lem-coef-finite-exceptional",
+    "why": "Finite exceptional comparison preserving units/counits, as named by the blueprint item."
+   },
+   {
+    "node": "prop-coef-integral-exceptional-adjoint",
+    "why": "Integral constructible exceptional adjunction and its reduction compatibility, as named by the blueprint item."
+   },
+   {
+    "node": "lem-coef-rational-operations",
+    "why": "Rational exceptional adjunction and evaluation/unit/counit compatibility, as named by the blueprint item."
+   },
+   {
+    "node": "fix-cor-verdier-exchange",
+    "why": "Proved Verdier exchange on its stated domain; the present item proves its formal composition coherence."
+   },
+   {
+    "node": "fix-lem-tensor-adjunction",
+    "why": "The tensor–Hom adjunction isomorphism used to transpose the Verdier composition chain; this is a generic adjunction tool, while the present item proves coherence of the resulting comparison."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "The composite ordinary and exceptional adjunction unit/counit formulas used in the mate calculation; this generic formal tool does not replace the unit's Verdier route."
+   },
+   {
+    "node": "lem-cbc-compactifiable-compatible-tower",
+    "why": "Compatible compactification towers and common refinements for the explicit composition calculation."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Actual pre-evaluation interchange identities, including arbitrary commutative refinement squares; the assembly unit has no system construction lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Canonical proper-factor tensor/square coherence on ringed diagram topoi; generic ringed-site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-extension-zero-projection-formula",
+  "thm-coef-finite-hom",
+  "lem-coef-integral-hom-reduction",
+  "lem-coef-integral-finite-extension",
+  "lem-coef-finite-exceptional",
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-coef-rational-operations",
+  "fix-cor-verdier-exchange",
+  "fix-lem-tensor-adjunction",
+  "fix-prop-adjunctions",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-1a6037622",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-1a6037622 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, the full statements of all 31 cited nodes, the current main-20261015 blueprint source (statement word-for-word the same as master and not weakened), the unit sk-thm-sf-package (step 5 follows its clause (6)), and Stacks 0E8I (sites-modules l.4051), 0GL1 (sites-cohomology l.4578) and 0941 (l.5067). Every proof dep is on the unit's route, so the declared tool_uses are accurate and harmless. No SGA is cited and there is no cycle. Steps 1-7 check out against the cited statements. Step 1: the three-factor interchange reduces to the V/H gamma-pasting of lem-cbc-strict-tower-proper-open-calculus, lifted to systems before R lim. Step 2: the open factor uses full faithfulness and the restriction normalizations; the proper factor uses lem-weil-pbc-ringed-exchange-tensor-coherence; no faithfulness of evaluation is used. Steps 3-4: bijective transposes on finite-Tor and constructible domains. Step 5: a well-typed tensor-Hom chain giving eps_gf = Rg_*(eps_f) o eps_g,Rf_!M, with exceptional admissibility kept. Steps 6-7: square composition, with site-perfect, smooth and geometric-fiber hypotheses kept. The new nodes are true and statement-only, neither is a duplicate, and neither restates the item. Edge cases tested: empty and full opens, identity squares and words, zero objects. I made three repairs in fixes/. (1) The realization lemma described Gamma_Q: J_iS_r -> S_pJ_k as an adjunct under J_k -| P_k, which is ill-typed. I replaced it with the J_i -| P_i adjunct of lambda_Q^{-1}, where lambda_Q: P_iS_pJ_k ~ S_r is built via V x_Z W, the clopen s=(k,r) and S_qS_s ~ S_r, as in lem-sp-proper-open-tower-comparison; I also added def-pc-fibre-product to stmt_deps. (2) Three stmt_deps of the realization lemma were not cited in its text (B3): def-weil-pbc-proetale-site, def-weil-scheme-morphism-properties, def-weil-compactifications-refinements. I added the citations. (3) Step 5 listed fix-lem-tensor-adjunction and fix-prop-adjunctions in uses but never cited them in its text (C1). I added the citations. No nodes dropped.; 2 file(s) fixed by the reviewer"
+ }
 }

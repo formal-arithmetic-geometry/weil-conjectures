@@ -1,0 +1,65 @@
+{
+ "id": "lem-pod-integral-pullback-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-local-frobenius-trace",
+   "place": "statement, second sentence of the first paragraph: 'Iterating the Weil isomorphism $r$ times and using the resulting return to $\\bar y$ defines ... the local operator $F_y$' (the canonical identifications $L(g_Y^{n})^*Lg_Y^*\\cong L(g_Y^{n+1})^*$ and $L(g_s^n)^*L\\bar x^*\\cong L\\bar x^*L(g_Y^n)^*$ at the integral level underlying the rational coefficients $E$)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composition isomorphism for integral derived pullbacks",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $h:Z\\to W$ and $k:W\\to V$ be morphisms of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. For $T\\in\\{Z,W,V\\}$ let $D^b_c(T,\\mathcal O_E)$ be the derived-complete integral constructible category [def-weil-derived-complete-integral-detailed], a full subcategory of the derived category of modules over the completed coefficient sheaf $\\widehat{\\mathcal O}_{E,T}=\\varprojlim_n(A_{E,n})_T$ on $T_{\\mathrm{proet}}$ [def-weil-completed-integral-coefficients]. For a morphism $f\\in\\{h,k,k\\circ h\\}$ let $Lf^*$ be the integral derived pullback of [def-pur-integral-derived-operations], $Lf^*K=R\\varprojlim_n\\operatorname{Res}_nf^*(P_n)$ for a K-flat resolution $P\\to K$ with flat terms and $P_n=P\\otimes_{\\widehat{\\mathcal O}_{E}}(A_{E,n})$; by [lem-pur-integral-operations-preserve-constructible] (1) it maps $D^b_c$ to $D^b_c$, and for every $n$ it comes with the reduction isomorphism $\\rho_{f,K,n}:(Lf^*K)\\otimes^L_{\\mathcal O_E}A_{E,n}\\xrightarrow{\\sim}f^{-1}(K\\otimes^L_{\\mathcal O_E}A_{E,n})$, whose target represents the finite-level derived pullback $L(f_n)^*(K\\otimes^L_{\\mathcal O_E}A_{E,n})$ [def-weil-derived-pullback-tensor-hom].\n\nThen there is an isomorphism\n$$\n c^{\\mathcal O_E}_{h,k}(K):L(k\\circ h)^*K\\xrightarrow{\\ \\sim\\ }Lh^*Lk^*K\n \\quad\\text{in }D^b_c(Z,\\mathcal O_E),\n$$\nnatural in $K\\in D^b_c(V,\\mathcal O_E)$, such that for every $n\\geq1$ its reduction $c^{\\mathcal O_E}_{h,k}(K)\\otimes^L_{\\mathcal O_E}A_{E,n}$, transported along $\\rho_{k\\circ h,K,n}$ on the source and along $L(h_n)^*(\\rho_{k,K,n})\\circ\\rho_{h,Lk^*K,n}$ on the target, is the finite-coefficient composition isomorphism $c_{h,k}$ of [lem-weil-pbc-proetale-derived-pullback-composition], for the constant coefficient sheaves $(A_{E,n})_V,(A_{E,n})_W,(A_{E,n})_Z$, at $K\\otimes^L_{\\mathcal O_E}A_{E,n}$. For a third morphism $j:Y\\to Z$ of schemes on which $\\ell$ is invertible these isomorphisms satisfy the associativity identity\n$$\n Lj^*\\bigl(c^{\\mathcal O_E}_{h,k}(K)\\bigr)\\circ c^{\\mathcal O_E}_{j,k\\circ h}(K)\n =c^{\\mathcal O_E}_{j,h}(Lk^*K)\\circ c^{\\mathcal O_E}_{h\\circ j,k}(K):\n L(k\\circ h\\circ j)^*K\\longrightarrow Lj^*Lh^*Lk^*K.\n$$",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Lemma 099N (proetale, lemma-pushforward-Noetherian-case), parts (2) and (5): completed pullback is the left adjoint of Rf_* on derived complete objects and equals R lim Lf^*(M tensor Lambda/I^n); composition then from Lemma 0D6D (sites-cohomology, lemma-derived-pullback-composition) at each finite level. The integral pullback of def-pur-integral-derived-operations is this R lim, as that node itself remarks."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-preserve-constructible",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'derivedCompletion\\|DerivedComplete\\|proetale\\|ProEtale' ~/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib; read AlgebraicGeometry/Sites/ElladicCohomology.lean declarations",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean, AlgebraicGeometry/Sites/ElladicCohomology.lean (Scheme.ellAdicSheaf, Scheme.EllAdicCohomology, isZero_ellAdicSheaf_of_isEmpty); no derived completion, no derived pullback of pro-etale module complexes, no composition comparison",
+   "date": "2026-10-17",
+   "verdict": "no match (grep only; LeanSearch and LeanFinder are not reachable from the review service, the queue worker re-searches)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer-reader",
+  "item": "def-weil-local-frobenius-trace",
+  "date": "2026-10-17",
+  "group": "Q75"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "import_flags": []
+}

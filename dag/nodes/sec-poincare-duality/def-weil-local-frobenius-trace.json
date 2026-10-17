@@ -3,29 +3,91 @@
  "blueprint": {
   "is": "def-weil-local-frobenius-trace",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Local Frobenius and local alternating trace",
- "statement": "Fix the finite-field datum $p,a,q,k_0,k$, a prime $\\ell\\neq p$. Write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and choose\na finite extension $E/\\Ql$ contained in $\\Qlb$. Let $Y_0$ be a finite-type\n$k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and choose $K\\in D^b_{c,\\mathrm\nW}(Y,E)$, a Weil complex. For a closed point $y\\in|Y_0|$, with $|Y_0|$ and\n$\\kappa(y)$ the closed-point and residue-field notation, let $y$ have degree\n$r=[\\kappa(y):\\Fq]$. Choose an embedding $\\kappa(y)\\hookrightarrow k$ and the\nassociated geometric point $\\bar y\\to Y$. Iterating the Weil isomorphism $r$\ntimes and using the resulting return to $\\bar y$ defines, for every\n$j\\in\\mathbf Z$, the local operator $F_y$ associated with the global\ngeometric-Frobenius action on the stalk of the cohomology sheaf $\\mathcal\nH^j(\\operatorname{For}K)_{\\bar y}$.\n\nMore generally, for every $n\\in\\mathbf Z_{\\geq1}$ and $x\\in Y_0(\\mathbf\nF_{q^n})$ in the finite-field point set, choose an associated geometric point\n$\\bar x\\to Y$; the $n$-fold iterate at $\\bar x$ defines $F_x^{(n)}$. Put\n\n$$\n  K_{\\bar x}:=\n  L\\bar x^*\\operatorname{For}(K),\\qquad\n  \\Tr(F_x^{(n)}\\mid K_{\\bar x})=\n \\sum_{j\\in\\mathbf Z}(-1)^j\n \\Tr\\bigl(F_x^{(n)}\\mid\n \\mathcal H^j(\\operatorname{For}K)_{\\bar x}\\bigr).\n$$\n\nHere $L\\bar x^*$ is the derived pullback.",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\neq p$, $\\Ql=\\mathbf Q_\\ell$, an algebraic closure $\\Qlb$ of $\\Ql$, and a finite extension $E/\\Ql$ contained in $\\Qlb$ [def-weil-l-adic-coefficient-extension]. Let $Y_0$ be a finite-type $k_0$-scheme [def-weil-finite-type-morphism], put $Y=Y_0\\times_{k_0}k$, and choose a Weil complex $K=(M,\\theta)\\in D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex], so that $M=\\operatorname{For}K$ and $\\theta:L g_Y^*M\\xrightarrow{\\sim}M$, where $g_Y=\\operatorname{id}_{Y_0}\\times\\operatorname{Spec}(\\gamma)$ and $\\gamma=\\operatorname{Frob}_q$ is geometric Frobenius [def-weil-frobenius-detailed]. Derived pullbacks are those of [def-weil-derived-pullback-tensor-hom].\n\nPut $s=\\operatorname{Spec}k$ and $g_s=\\operatorname{Spec}(\\gamma)$. For a geometric point $\\bar x:s\\to Y$ [def-weil-geometric-point], write\n$$\n K_{\\bar x}:=L\\bar x^*M,\\qquad\n C_{\\bar x}:=\\operatorname{Fib}_s(K_{\\bar x})\\in D^b_{\\mathrm{fd}}(E),\n$$\nwhere $\\operatorname{Fib}_s$ is the rational point-fiber functor [def-weil-finite-coefficient-point]. The cohomology-sheaf stalk notation $\\mathcal H^j(M)_{\\bar x}$ [def-weil-derived-cohomology-sheaves] is interpreted at these coefficients as $\\mathrm H^j(C_{\\bar x})$ [def-weil-coefficient-cohomology-modules]; in particular it is a finite-dimensional $E$-vector space, zero for all but finitely many $j$.\n\nFor $n\\geq1$ and $x\\in Y_0(\\mathbf F_{q^n})$ [def-weil-finite-field-fiber], use the inclusion $\\mathbf F_{q^n}\\subset k$ to obtain $\\bar x:s\\to Y$. Define $\\theta^{[1]}=\\theta$ and\n$$\n \\theta^{[n+1]}=\\theta^{[n]}\\circ L(g_Y^n)^*(\\theta):\n L(g_Y^{n+1})^*M\\xrightarrow{\\sim}M.\n$$\nHere and below use the canonical pullback-composition comparisons: at finite coefficient level they are those of [lem-weil-pbc-proetale-derived-pullback-composition], at integral level the comparisons of [lem-pod-integral-pullback-composition] for the integral pullbacks of [def-weil-derived-pullback-tensor-hom], and at rational level their scalar localization as in [def-weil-derived-pullback-tensor-hom]. The geometric-point return means\n$$\n g_Y^n\\circ\\bar x=\\bar x\\circ g_s^n,\n$$\nnot the equality $g_Y^n\\circ\\bar x=\\bar x$ of scheme morphisms: $\\gamma^n$ fixes the subfield $\\mathbf F_{q^n}$ [lem-weil-unique-subfield-of-closure]. Let $N=L\\bar x^*M$ and form the map\n$$\n I^{[n]}_N:\\operatorname{Fib}_s(N)\\longrightarrow\n \\operatorname{Fib}_s(L(g_s^n)^*N)\n$$\nby composing the point transports $\\iota_N,\\iota_{Lg_s^*N},\\ldots,\\iota_{(Lg_s^*)^{n-1}N}$ of [def-weil-frobenius-point-transport] and the pullback-composition comparison. Define the local operator $F_x^{(n)}:C_{\\bar x}\\to C_{\\bar x}$ to be the composite\n$$\n C_{\\bar x}\\xrightarrow{I^{[n]}_N}\n \\operatorname{Fib}_s(L(g_s^n)^*L\\bar x^*M)\n \\xrightarrow{\\sim}\n \\operatorname{Fib}_s(L\\bar x^*L(g_Y^n)^*M)\n \\xrightarrow{\\operatorname{Fib}_s(L\\bar x^*\\theta^{[n]})}C_{\\bar x},\n$$\nwhere the middle isomorphism uses the displayed equality of scheme morphisms and the specified composition comparisons. Denote its induced operator on each $\\mathrm H^j(C_{\\bar x})$ by $F_x^{(n)}$ as well.\n\nFor a closed point $y\\in|Y_0|$ [def-weil-closed-points], let $r=[\\kappa(y):k_0]$, with residue field as in [def-weil-residue-field]; this is a finite positive degree by [lem-kun-closed-point-field](a). Choose a $k_0$-embedding $\\kappa(y)\\hookrightarrow k$ and the associated geometric point $\\bar y:s\\to Y$. Use the same construction with $n=r$ and the resulting return $g_Y^r\\bar y=\\bar y g_s^r$ to define $F_y$ on $\\mathcal H^j(M)_{\\bar y}$ for every $j\\in\\mathbf Z$.\n\nFinally define the local alternating trace by\n$$\n \\operatorname{Tr}(F_x^{(n)}\\mid K_{\\bar x})\n :=\\sum_{j\\in\\mathbf Z}(-1)^j\n \\operatorname{Tr}\\bigl(F_x^{(n)}\\mid\\mathcal H^j(M)_{\\bar x}\\bigr)\\in E.\n$$\nEach summand uses the ordinary linear trace [def-weil-endomorphism-trace], and the sum is finite by the bounded finite-dimensional point-complex convention above. The analogous closed-point trace uses $F_y$ and $\\bar y$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/def-weil-local-frobenius-trace.md",
   "place": "node def-weil-local-frobenius-trace, order 2428"
  },
  "stmt_deps": [
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-derived-pullback-tensor-hom",
   "def-weil-finite-field-fiber",
-  "def-weil-global-geometric-frobenius",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-geometric-point",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-coefficient-cohomology-modules",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pod-integral-pullback-composition",
+  "lem-weil-unique-subfield-of-closure",
+  "def-weil-frobenius-point-transport",
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-weil-endomorphism-trace",
+  "lem-kun-closed-point-field"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local geometric Frobenius automorphism on the stalk cohomology of a Weil complex and its alternating trace",
+   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.Isocrystal.frobenius; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.Isocrystal.frob; WittVector.exists_frobenius_solution_fractionRing_aux; WittVector.FractionRing.frobeniusRingHom; WittVector.IsocrystalHom.frob_equivariant; WittVector.FractionRing.frobenius",
+   "date": "2026-10-17",
+   "verdict": "no match: only unrelated Witt-vector Frobenius declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace",
+   "results": "LinearMap.trace; LinearMap.trace_id; LinearMap.trace_one; LinearMap.trace_lie; LinearMap.isNilpotent_trace_of_isNilpotent; LinearMap.trace_smulRight; LinearMap.trace_mul_comm; Matrix.trace_toLin_eq; LinearMap.trace_eq_matrix_trace; LinearMap.trace_conj; LinearMap.trace_mul_cycle; LinearMap.trace_mul_cycle'",
+   "date": "2026-10-17",
+   "verdict": "generalization: Mathlib supplies linear-algebraic trace, but no Weil local-Frobenius/stalk construction"
+  },
+  {
+   "tool": "grep",
+   "query": "localFrobenius|local_frobenius|WeilComplex|WeilSheaf",
+   "results": "0 hits in Mathlib source",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local Frobenius and the alternating trace of a Weil complex at a finite field point",
+   "results": "FiniteField.frobeniusAlgEquivOfAlgebraic; FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp; AlgHom.IsArithFrobAt.localize; FiniteField.frobeniusAlgEquiv; FiniteField.algebraMap_trace_eq_sum_pow; Algebra.normalizedTrace; FiniteField.trace_pow_card; Algebra.normalizedTrace_def",
+   "date": "2026-10-17",
+   "verdict": "no match: field-level Frobenius and trace results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace function of a bounded constructible sheaf complex with an isomorphism from its geometric Frobenius pullback",
+   "results": "CompHausLike.LocallyConstantModule.functor; WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.Isocrystal.frobenius; CompHausLike.LocallyConstantModule.functor_map_val; WittVector.Isocrystal.frob; FiniteField.algebraMap_trace_eq_sum_pow; WittVector.IsocrystalHom.frob_equivariant",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ff]robenius|[Ff]robenius.*stalk|alternating.*trace",
+   "results": "0 hits in Mathlib source",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category stalk of a constructible sheaf with semilinear Frobenius structure gives an endomorphism on cohomology",
+   "results": "smoothSheafCommRing.ι_forgetStalk_hom; smoothSheafCommRing.ι_forgetStalk_hom_apply; ModuleCat.Tilde.stalkIso_hom; ModuleCat.Tilde.stalkToFiberLinearMap_toStalk; WittVector.StandardOneDimIsocrystal.frobenius_apply; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; WittVector.Isocrystal.frob; ModuleCat.Tilde.stalkToFiberLinearMap",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf stalk maps and Witt-vector isocrystals; no constructible Weil-complex local operator"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -59,5 +121,20 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-weil-local-frobenius-trace",
+  "worker": "stage1",
+  "summary": "Expanded the imported definition into explicit data: the iterated Weil isomorphism, geometric-point reparametrization, point-fiber transport and cohomological trace. Reused the existing finite-level pullback-composition and point-transport interfaces; the integral composition comparison for the pullbacks of def-weil-derived-pullback-tensor-hom is the new statement-only node lem-pod-integral-pullback-composition (maintainer reader, 2026-10-17), replacing a citation of lem-sbc-completed-operations-linear-natural-exchange, whose completed pullback is a different construction, and added the missing ordinary-trace and point-complex definitions. Removed the global cohomology-Frobenius dependency, whose separatedness hypothesis the local construction does not need, and replaced the scheme-property bundle by the exact definitions used. The Lean stalk and trace definitions only cover algebraically closed coefficients and omit the derived-stalk clause, so there is no full attachment. One new node, created at the maintainer review.",
+  "blueprint": "The three clauses of the current blueprint definition are realized by the explicit closed-point local operator, finite-field-point iterate, and alternating cohomological trace. The word return is expanded as reparametrization of Spec(k), keeping the source geometric-Frobenius convention and every original hypothesis."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-e39b6910f",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-e39b6910f (reviewer sub-agent of L); spot-checked: Read the whole item, its 18 stmt_deps, the unit and chapter records, the current blueprint and Deligne Weil II (1.1.7)-(1.1.10). The current blueprint text matches master apart from the order number. The item keeps the hypotheses: finite-type Y_0, a Weil complex over E, n>=1. It adds no separatedness. Checked: theta^[n] types and recurrence for n=1,2. The return equation g_Y^n xbar = xbar g_s^n follows because gamma^n fixes F_{q^n} (lem-weil-unique-subfield-of-closure). The literal xbar-fixing reading fails at Spec k_0 with n=1, so the worker's STATEMENT-DISPUTED repair is right. Point-transport composite: each arrow has the stated type, and no invertibility or separated model is needed. Closed point: r>=1 by lem-kun-closed-point-field (a). Trace: zero complex 0; canonical rank one 1; shift by one -1; empty model vacuous. Weil-structure direction matches Deligne 1.1.10. No duplicate: def-trf-frobenius-operators is finite-level, separated and uses Phi. One repairable fault (E3/E6, coefficient identification): the item took its integral pullback-composition comparisons from lem-sbc-completed-operations-linear-natural-exchange. That lemma is about P_u of def-weil-pbc-completed-pullback, a different construction from the def-pur-integral-derived-operations pullbacks that def-weil-derived-pullback-tensor-hom applies to M, and def-pur states that their agreement is a separate comparison. No existing node supplies such a composition (searched by grep). Fix: new statement-only node lem-pod-integral-pullback-composition (source Stacks 099N (2),(5) and 0D6D) giving a natural iso L(kh)^* = Lh^*Lk^* on D^b_c(-,O_E), its reduction mod varpi^n equal to the finite c_{h,k}, and associativity. Its Mathlib search is grep only, recorded as such. In the item, replaced the lem-sbc dependency and citation and updated split_report.summary. Checked: all ids exist and are unmerged, citations match stmt_deps, no cycle. No tool_uses.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
