@@ -264,5 +264,28 @@
   "group": "Q143",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-ad9b209e2 (reviewer sub-agent of L); spot-checked: I read the delivery in full; review.md has the details. Shape: one commit with the item and the report. Statement, stmt_deps, blueprint, created and unit are byte-identical to the side and live DAGs, where the item is still unsplit. The seven original searches are kept unchanged, followed by six new ones. Sources: Stacks 040M (groupoids.tex l.417-453) and 03PK (etale-cohomology l.2819ff, using 03O3); 01I1, 03O3, 03PK and 040M match their labels in tags/tags. The item is 040M base-changed to Spec R. The source allows n=0, where the quotient is Z[x] and does not give units, so the item's n>=1 is necessary, not a weakening. Steps: step 1 (quotient and spectrum definitions) gives x^n=1 and the inverse x^{n-1}. Step 2 applies the affine-target Mathlib leaf to an arbitrary U and gets the R-algebra condition from composition on global sections. Steps 3-4 are evaluation and quotient descent, written out and elementary. Step 5 is naturality. Step 6 uses the representable-sheaf lemma for any T-scheme, which does not need P etale, so it holds in characteristic dividing n. Step 7 checks both directions of the fibre-product bijection for arbitrary V'. Step 8 checks the base-change morphism through the projection equation p∘(id×a)=a∘r, giving a'^#(p^#x)=r^#(a^#x). Small cases checked: n=1; Z with n=2 gives ±1; F_2[ε] with n=2 gives two roots; U empty; R=0. Duplicates: searched by tags, t^n-1 and represent+roots. def-sc-gm-ga, the pro-etale mu nodes and the sbc root-cover nodes are all different statements. There are no new nodes and no SGA. I accept both declared tool_uses, since one is a Mathlib leaf and the other is Lean-closed and generic. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d16376ce2",
+  "group": "NM",
+  "result": "pass",
+  "note": "Each node clause matches the Lean: P = Spec(AdjoinRoot(X^n-1)) over Spec R; x = ΓSpecIso.inv root, a unit with inverse x^(n-1); E: (U ⟶ P) ≃ n-th roots in Γ(U)ˣ for every U over Spec R, fixed by a ↦ a.left.appTop x, natural in all over-morphisms; e identifies the étale restriction of yoneda P (ULift to u+1) with the rootsOfUnitySheaf (= kernel (n•𝟙 gmSheaf)) presheaf, fixed by the kernel inclusion; for arbitrary v: V' → V, E' on Over.pullback v with value a^♯(pullback.fst^♯ x), naturality and base-change compatibility via pullback.fst U.hom v. Only Mathlib's factor order P ×_V V' differs, and it is documented. No extra hypotheses, all binders and the universe bound, n ≥ 1 needed (source allows n = 0, not a weakening). Edge cases R=0, U empty, n=1, char dividing n, V' empty/non-flat covered. Helpers have real data, docstrings carry source and blueprint tag, proof is sorry only, lean.statement verbatim, no duplicate found. Shape: one commit, three files, lean-only node change. Worker report is real; Second reading is the 2026-10-17 placeholder, accepted. Minor: report wrongly says proof_deps is empty (no effect). nt_compile.py --json rc=0, 7.2 s, no errors or warnings; a control with a false example gave rc=1."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineRootsRepresentability",
+  "declaration": "AlgebraicGeometry.affineRoots_representability",
+  "declarations": [
+   "AlgebraicGeometry.affineRootsOver",
+   "AlgebraicGeometry.affineRootsCoordinate",
+   "AlgebraicGeometry.affineRoots_representability"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRootsRepresentability.lean",
+  "statement": "theorem affineRoots_representability (R : Type u) [CommRing R] (n : ℕ) (hn : 1 ≤ n) : ∃ x : Γ((affineRootsOver R n).left, ⊤)ˣ, (x : Γ((affineRootsOver R n).left, ⊤)) = affineRootsCoordinate R n ∧ ((x⁻¹ : Γ((affineRootsOver R n).left, ⊤)ˣ) : Γ((affineRootsOver R n).left, ⊤)) = affineRootsCoordinate R n ^ (n - 1) ∧ ∃ E : ∀ U : Over (Spec (CommRingCat.of R)), (U ⟶ affineRootsOver R n) ≃ {z : Γ(U.left, ⊤)ˣ // z ^ n = 1}, (∀ (U : Over (Spec (CommRingCat.of R))) (a : U ⟶ affineRootsOver R n), ((E U a).val : Γ(U.left, ⊤)) = a.left.appTop (affineRootsCoordinate R n)) ∧ (∀ (U W : Over (Spec (CommRingCat.of R))) (f : U ⟶ W) (a : W ⟶ affineRootsOver R n), (E U (f ≫ a)).val = Units.map f.left.appTop.hom.toMonoidHom (E W a).val) ∧ (∃ e : ((Scheme.Etale.forget (Spec (CommRingCat.of R))).op ⋙ yoneda.obj (affineRootsOver R n) ⋙ uliftFunctor.{u + 1, u}) ≅ ((Spec (CommRingCat.of R)).rootsOfUnitySheaf n).obj ⋙ forget AddCommGrpCat.{u + 1}, ∀ (W : (Spec (CommRingCat.of R)).Etale) (a : (Scheme.Etale.forget _).obj W ⟶ affineRootsOver R n), Additive.toMul (((kernel.ι (n • 𝟙 (Spec (CommRingCat.of R)).gmSheaf)).hom.app (op W) (e.hom.app (op W) ⟨a⟩)).down) = (E ((Scheme.Etale.forget _).obj W) a).val) ∧ (∀ (V' : Scheme.{u}) (v : V' ⟶ Spec (CommRingCat.of R)), ∃ E' : ∀ U : Over V', (U ⟶ (Over.pullback v).obj (affineRootsOver R n)) ≃ {z : Γ(U.left, ⊤)ˣ // z ^ n = 1}, (∀ (U : Over V') (a : U ⟶ (Over.pullback v).obj (affineRootsOver R n)), ((E' U a).val : Γ(U.left, ⊤)) = a.left.appTop ((pullback.fst (affineRootsOver R n).hom v).appTop (affineRootsCoordinate R n))) ∧ (∀ (U W : Over V') (f : U ⟶ W) (a : W ⟶ (Over.pullback v).obj (affineRootsOver R n)), (E' U (f ≫ a)).val = Units.map f.left.appTop.hom.toMonoidHom (E' W a).val) ∧ (∀ (U : Over (Spec (CommRingCat.of R))) (a : U ⟶ affineRootsOver R n), (E' ((Over.pullback v).obj U) ((Over.pullback v).map a)).val = Units.map (pullback.fst U.hom v).appTop.hom.toMonoidHom (E U a).val))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

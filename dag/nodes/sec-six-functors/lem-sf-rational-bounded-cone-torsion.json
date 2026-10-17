@@ -241,5 +241,23 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-8b842d62a (reviewer sub-agent of L); spot-checked: I read the item, the parent step 13, the unit and blueprint main-20261015, Stacks 08J5 and 0149, and every cited statement in full. The statement is true and unchanged; its coefficient category is the completed pro-etale O_E-sheaf category with the full subcategory D^b_c. I tested N=0, u=v, C=0 and shifted intervals, and an l^2 extension example shows the factor (v-u+1) is genuinely needed. The induction in steps 2-4 is correct: K_{u-1} is acyclic, K_v->C is a quasi-isomorphism, the triangle is the generic successive truncation, r id_{S_q}=0 comes through the linear Q, and clause (i) of Hom-exactness is applied in the right direction. Step 6's tensor balancing and zero-object argument are correct. There are no new nodes and no duplicates (rg for power-torsion/identity wording; the nearest hit, lem-sf-rational-local-global-power-torsion, is the converse). I accept the tool use lem-weil-pbc-truncation-triangle: a generic abelian-category triangle (Stacks 08J5) that no node of the unit or of sk-def-sf-operations supplies. One repair: steps 5 and 6 now also cite lem-weil-integral-constructible-linear (in sk-def-sf-operations, so on route; no cycle). Without it, the O_E-module structure on End_{D^b_c}(C) that the rationalization uses was not tied to the action shown to vanish. The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92256bc93",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: completed pro-etale integral category as a full subcategory, H^d vanishing outside [a,b], the torsion hypothesis as H^d of the canonical constant-section scalar endomorphism (not the stronger id-annihilation), conclusion pi^(N*(b-a+2)) • id = 0 in the ambient derived category plus IsZero of the raw scalar-localization image. Edge cases N=0, a=b, negative degrees, C=0, empty X covered; the shared universe u comes from the recorded dependencies. No new definitions, one sorry, docstrings with source, blueprint tag and six proof steps; non-public imports are modules of stated proof deps (brief-stage2 l.104); lines within 100; lean.statement verbatim; only the item's lean field changed, dependency nodes unchanged. Report sections pass the tool check. nt_compile.py --json on the snapshot file: dependency overlay built, SfRationalBoundedConeTorsion 3.1 s, exit 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfRationalBoundedConeTorsion",
+  "declaration": "WeilConjectures.sfRationalBoundedConeTorsion",
+  "file": "lean/Sheaf/Paper/SfRationalBoundedConeTorsion.lean",
+  "statement": "theorem sfRationalBoundedConeTorsion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{u}) (_hInv : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (C : sfIntegralConstructibleCategory l E X) (a b : ℤ) (_hab : a ≤ b) (N : ℕ) (_hBounds : ∀ d : ℤ, d ∉ Set.Icc a b → IsZero ((DerivedCategory.homologyFunctor (scalarReductionSource l E X) d).obj C.obj)) (_hTorsion : ∀ d : ℤ, (DerivedCategory.homologyFunctor (scalarReductionSource l E X) d).map ((Padic.coefficientExtensionUniformizer l E) ^ N • 𝟙 C.obj) = 0) : (Padic.coefficientExtensionUniformizer l E) ^ (N * (b - a + 2).toNat) • 𝟙 C.obj = 0 ∧ IsZero ((sfRationalConstructibleLocalization l E X).obj C)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
