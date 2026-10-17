@@ -1,10 +1,78 @@
 {
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $m\\geq1$, multiplication by $t^m$ on $\\mathcal O$ is the $m$-fold composite of the monomorphism $t$, hence injective. So $H^{-1}(Q_m)=\\ker(t^m)=0$ and $H^0(Q_m)=\\operatorname{coker}(t^m)=B_m$, and the map $\\epsilon_m:Q_m\\to B_m[0]$ (zero in degree $-1$, the quotient map in degree $0$) is a chain map inducing the identity of $B_m$ on $H^0$; thus $\\epsilon_m$ is a quasi-isomorphism [def-weil-abstract-derived-category]. The transition $Q_{m+1}\\to Q_m$ ($t$ in degree $-1$, identity in degree $0$) is a chain map because $t^m\\cdot(t x)=t^{m+1}x$, and $\\epsilon_m\\circ(Q_{m+1}\\to Q_m)=(B_{m+1}\\to B_m)\\circ\\epsilon_{m+1}$ since both are the quotient map $\\mathcal O\\to B_m$ in degree $0$; so the $\\epsilon_m$ form a morphism of inverse systems [def-weil-inverse-system]. Likewise the degree-zero map $\\mathcal O[0]\\to Q_m$ is a chain map compatible with the transitions, and its composite with $\\epsilon_m$ is the quotient map $\\mathcal O\\to B_m$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul (the Koszul tower $K_n=K(\\mathcal O,f^n)$ for $r=1$); the regular-element kernel/cokernel calculation is elementary and written out here."
+   }
+  },
+  {
+   "text": "Choose the stated K-flat representative $P$ of $K$. Tensor each $\\epsilon_m$ of step 1 with $P$ and use the total tensor complexes of [def-pc-tensor-complex-sheaves]. The cone of $P\\otimes Q_m\\to P\\otimes B_m[0]$ is the tensor of $P$ with the cone of $\\epsilon_m$; it is acyclic by K-flatness, so the resulting map $a_m:V_m\\to U_m$ is a quasi-isomorphism. The transition formulas in the statement commute with these tensor maps, hence the $a_m$ form the strict tower morphism $a$.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, strict tower tensor model; K-flat tensor argument expanded for the principal two-term complex."
+   }
+  },
+  {
+   "text": "Because evaluation of strict towers is exact, the levelwise quasi-isomorphisms $a_m$ make $a$ a quasi-isomorphism in the derived category of $\\operatorname{Tow}(\\mathcal A)$, where $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$. The strict-tower homotopy-limit theorem [lem-weil-pbc-ringed-strict-tower-homotopy-limit] supplies the exact derived inverse-limit functor, so $R\\lim(a):C_t(K)\\to R\\lim U_\\bullet$ is an isomorphism and is compatible with the strict augmentations.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, functoriality of strict tower derived limits."
+   }
+  },
+  {
+   "text": "The given distinguished triangle for $K$ is a Roos triangle for the tower $(U_m)$ in $D(\\mathcal A)$ [def-weil-derived-limit]. Take the canonical Roos triangle $C_t(K)\\xrightarrow{p_V}\\prod_m^DV_m\\xrightarrow{1-s}\\prod_m^DV_m\\to C_t(K)[1]$ of the strict tower $V_\\bullet$ supplied by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Since $a$ is a strict tower morphism, $u=\\prod_m a_m:\\prod_m^DV_m\\to\\prod_m^DU_m$ satisfies $u\\circ(1-s)=(1-s)\\circ u$; each $a_m$ is an isomorphism in $D(\\mathcal A)$ by step 2, so $u$ is an isomorphism and $u^{-1}$ also commutes with $1-s$. Apply (TR3) of [def-weil-triangulated-category] to the rotated triangles with the pair $(u^{-1},u^{-1})$ on the two product terms: it gives $\\phi:K\\to C_t(K)$ with $p_V\\circ\\phi=u^{-1}\\circ c$ and compatible third maps, i.e. a morphism of Roos triangles $(\\phi,u^{-1},u^{-1})$. By [lemma-weil-pbc-r-lim-levelwise-isomorphism], applied to the levelwise isomorphisms $a_m^{-1}$, $\\phi$ is an isomorphism, so $(\\phi,u^{-1},u^{-1})$ is an isomorphism of the two Roos triangles. The $m$-th component of $u\\circ p_V\\circ\\phi=c$ reads $a_m\\circ\\mathrm{pr}_m\\circ p_V\\circ\\phi=$ the quotient map $K\\to U_m$, which is the projection equation of the statement.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lemma-weil-pbc-r-lim-levelwise-isomorphism",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos triangles and functorial maps; Stacks derived.tex Tag 0H9J for functoriality of derived limits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-inverse-system",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, together with the principal regular-element calculation from algebraization.tex Tag 0A0E"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-integral-operations-scalar-extension",
@@ -97,12 +165,36 @@
  "blueprint": {
   "from": {
    "node": "def-weil-derived-pullback-tensor-hom",
-   "place": "Integral/common-stage paragraph, 'define the operation by the compatible finite reductions': the hidden Koszul-versus-quotient-tower and Roos-triangle comparison in the returned Step 3 of lem-pur-integral-operations-scalar-extension.",
+   "place": "Integral/common-stage paragraph: the hidden Koszul-versus-quotient-tower and Roos-triangle comparison used in the returned Step 3 of lem-pur-integral-operations-scalar-extension.",
    "via": [
     "lem-pur-integral-operations-scalar-extension"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-derived-complete-koszul-reconstruction",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against the source and existing DAG. No finished declaration exists in slopmaster2. The proof is four steps: the elementary regular-element calculation that $[\\mathcal O\\xrightarrow{t^m}\\mathcal O]\\to B_m$ is a quasi-isomorphism of towers, K-flat tensor transport, exact strict-tower derived-limit functoriality, and the Roos-triangle comparison by (TR3). The generic levelwise-Roos-isomorphism lemma is used as a tool for the final triangle isomorphism. (Review fix: the delivered regular-element two-term node, a three-line fact re-proved in full in step 1, was folded into step 1 and dropped.)",
+  "blueprint": "Realizes the hidden Koszul-versus-quotient-tower comparison in the integral/common-stage paragraph of the ancestor blueprint node def-weil-derived-pullback-tensor-hom, with the principal regular-element calculation written out as elementary step 1.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-r-lim-levelwise-isomorphism",
+    "why": "The final step needs its generic statement that a morphism of Roos triangles with levelwise isomorphisms has an isomorphism on derived-limit objects; the present unit's route has no narrower replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-a8b025a3f",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-a8b025a3f (reviewer sub-agent of L); spot-checked: I read all of the mathematics. Both parts of the item are true for an arbitrary ringed site with a regular global section t. Part 1: t^m is injective, so Q_m->B_m[0] is a quasi-isomorphism. K-flatness keeps P tensor the acyclic cone acyclic, so a is a quasi-isomorphism levelwise and therefore an isomorphism in D(Tow) and after Rlim. Part 2: TR3 plus lemma-weil-pbc-r-lim-levelwise-isomorphism gives phi with a_m pr_m p_V phi = c_m. Edge cases checked: t a unit (forces K=0), O=0, m=1, P=O[0]; the regularity hypothesis is needed. Sources checked: algebraization.tex l.1091 lemma-derived-completion-koszul (0A0E, the r=1 case), sites-cohomology.tex l.5067 lemma-derived-limit-is-ok (0941), and tag 0H9J exists. Not a duplicate of lemma-weil-pbc-koszul-quotient-limit, lem-weil-pbc-ringed-koszul-completion-reflector or lem-weil-pbc-constant-completion-equivalence, which cover constant Noetherian coefficients or the reflector. No SGA is cited. Fix (C1 exception, D1/D4 in spirit): the new node lem-pur-regular-element-koszul-quotient is a three-line fact that step 1 re-proves in full before citing it. I folded it into step 1, now elementary, and dropped the node. I removed it from the item's stmt_deps (the statement text never cited it), and step 2 now cites step 1. Step 4 is rewritten to give the TR3 direction explicitly, citing def-weil-triangulated-category, with the lemma's hypotheses matched. proof_deps and split_report are updated; the statement is unchanged. The recorded tool use of lemma-weil-pbc-r-lim-levelwise-isomorphism is accepted; lem-weil-pbc-ringed-strict-tower-homotopy-limit (same pbc unit) is likewise a generic tool.; 1 file(s) fixed by the reviewer"
  }
 }
