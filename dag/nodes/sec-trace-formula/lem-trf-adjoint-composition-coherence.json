@@ -1,0 +1,73 @@
+{
+ "id": "lem-trf-adjoint-composition-coherence",
+ "kind": "statement",
+ "title": "Coherence of adjunction composition comparisons with isomorphic right composites",
+ "statement": "Let $\\mathcal C_0,\\mathcal C_1,\\mathcal C_2,\\mathcal C_3$ be categories. For each $0\\leq i<j\\leq3$ fix an adjunction $L_{ij}:\\mathcal C_i\\rightleftarrows\\mathcal C_j:R_{ji}$ with unit $\\eta_{ij}$. For each $i<j<k$ fix a natural isomorphism $d_{ijk}:R_{ki}\\xrightarrow{\\sim}R_{ji}R_{kj}$. Suppose that for every $N\\in\\mathcal C_3$,\n$$R_{10}(d_{123,N})\\circ d_{013,N}=d_{012,R_{32}N}\\circ d_{023,N}:R_{30}N\\longrightarrow R_{10}R_{21}R_{32}N,$$\nwith canonical functor associators understood. Let $a_{ijk}:L_{jk}L_{ij}\\xrightarrow{\\sim}L_{ik}$ be the unique unit-compatible comparison of [lem-weil-pbc-conjugate-iso-unit-equation] for the composite adjunction [def-weil-pbc-composite-adjunction]; explicitly,\n$$R_{ji}R_{kj}(a_{ijk,M})\\circ R_{ji}(\\eta_{jk,L_{ij}M})\\circ\\eta_{ij,M}=d_{ijk,L_{ik}M}\\circ\\eta_{ik,M}.$$\nThen for every $M\\in\\mathcal C_0$,\n$$a_{023,M}\\circ L_{23}(a_{012,M})=a_{013,M}\\circ a_{123,L_{01}M}:L_{23}L_{12}L_{01}M\\longrightarrow L_{03}M,$$\nafter the canonical functor associator. The $d_{ijk}$ need not be identity maps and the composite right adjoints need not be equal as functors.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints) supplies the adjoint correspondence; the precise associativity law is CategoryTheory.Adjunction.leftAdjointCompIso_assoc, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:170-184, with the comparison defined at lines 64-80."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso_assoc|leftAdjointCompIso_hom_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:100,116 uses of leftAdjointCompIso_hom_app; line 170 declares leftAdjointCompIso_assoc. Read lines 64-80 and 120-184.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "results": "One hit: CategoryTheory.Adjunction.leftAdjointCompIso_assoc, Mathlib.CategoryTheory.Adjunction.CompositionIso. Read its full type and proof at lines 170-184.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of composition isomorphisms of left adjoints conjugate to coherent composition isomorphisms of right adjoints",
+   "results": "Eight hits including CategoryTheory.Adjunction.leftAdjointCompIso_assoc, leftAdjointCompIso, leftAdjointCompIso_hom and its component formula. The associativity theorem is an exact match after taking the inverses of d as the right-adjoint isomorphisms.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For six adjunctions between four categories, coherent composition isomorphisms of right adjoints induce associative composition isomorphisms of left adjoints",
+   "results": "Eight hits, headed by CategoryTheory.Adjunction.leftAdjointCompIso_assoc and leftAdjointCompNatTrans_assoc; the remaining hits include the component formulas and conjugateEquiv_associator_hom. Read CompositionIso.lean:64-80,120-184: the theorem allows arbitrary coherent right-adjoint composition isomorphisms.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+  "file": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+  "line": 170,
+  "how": "exact: instantiate the six adjunctions as L_ij ⊣ R_ji and e_ijk=d_ijk.symm. The hypothesis is the inverse of the displayed d-coherence equation, evaluated at N; functor associators are the specified canonical ones. The induced leftAdjointCompIso is a_ijk: its unit characterization is unit_conjugateEquiv_symm (Mathlib/CategoryTheory/Adjunction/Mates.lean:311), using leftAdjointCompNatTrans and leftAdjointCompIso_hom (CompositionIso.lean:64,76). The conclusion at M of leftAdjointCompIso_assoc (CompositionIso.lean:170-184) is exactly the displayed a-equation."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-pullback-coherence",
+  "date": "2026-10-17",
+  "group": "ND"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-iterated-weil-cocycle",
+   "place": "Proof paragraph 1, final sentence: 'the associativity of composition and the naturality of the canonical pullback identifications'; the categorical coherence needed to regroup three pullbacks.",
+   "via": [
+    "lem-trf-derived-pullback-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

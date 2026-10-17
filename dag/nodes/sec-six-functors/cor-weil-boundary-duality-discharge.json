@@ -17,32 +17,33 @@
  ],
  "proof": [
   {
-   "text": "Work first on the small etale sites with the finite constant ring $A=A_{E,n}$, $n\\geq1$ and $\\ell\\ne\\operatorname{char}k$. By [lem-weil-pbc-finite-type-over-noetherian], $Y$ is Noetherian. Write a locally closed piece as a closed subscheme of an open $V\\subseteq Y$. The open is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so its inclusion is quasi-compact and hence finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. The closed inclusion is proper and finite type by [lem-weil-pbc-closed-immersion-proper]. Composing finite generating sets on affine charts proves finite type of the piece over $k$; its diagonal is the restriction of the closed diagonal of $Y/k$, hence it is separated. The Noetherian lemma applies again. By [thm-fix-general-biduality], $\\omega_T=Ra_T^!A$ is defined and $D_T$ preserves the required finite-Tor constructible domain, and $\\delta_L:L\\to D_TD_TL$ is an isomorphism. This proves preservation for every piece. Nagata [thm-nagata-compactification] supplies compactifications of the structure maps. For a closed $i:Z\\hookrightarrow T$, use its proper compactification with identity open part: [def-amb-etale-compact-support] gives $Ri_!=Ri_*$. Their etale ambient right adjoints exist by [thm-amb-etale-exceptional-adjoint]. In taking composition mates, use the bounded-below restrictions: [thm-sf-ambient-adjoint-class] gives the right adjoints on the bounded-below comparison class, and [def-weil-exceptional-inverse-image] specifies these as the transported etale adjoints. The equivalence with the etale bounded-below category follows from [thm-weil-pbc-site-comparison]; the left-adjoint identification is [lem-sf-class-compact-support-comparison]. Each compactification is finite type over $k$, so [lem-fin-finite-type-fibre-dimension-bound], applied over $\\operatorname{Spec}k$, supplies the finite dimension bound needed for that class theorem. Now apply the actual etale $D^+$ composition isomorphism of [lem-amb-etale-compact-comparisons] and [lem-cat-right-adjoint-composition], evaluated at $A$. Since $a_Z=a_Ti$, they give $Ri^!\\omega_T\\cong\\omega_Z$, with the pasted counits. All inputs to these restricted adjunctions are bounded below. No unbounded pro-etale adjunction or unbounded compact-support composition theorem is used.",
+   "text": "Work first on the small etale sites with $A=A_{E,n}$ and $\\ell\\ne\\operatorname{char}k$. By [lem-weil-pbc-finite-type-over-noetherian], $Y$ is Noetherian. Write a locally closed piece $W$ as a closed subscheme of an open $V\\subseteq Y$. The Noetherian-open lemma makes $V$ Noetherian and its inclusion quasi-compact, hence finite type by the quasi-compact-open lemma; the closed inclusion is proper and finite type by the closed-immersion lemma. Composing finite generating sets on affine charts proves $W/k$ finite type. Its diagonal is the restriction of the closed diagonal of $Y/k$, hence is closed; thus $W/k$ is separated. The finite-type-over-Noetherian lemma applies again to $W$.",
    "uses": [
-    "thm-fix-general-biduality",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "lem-weil-pbc-qc-open-immersion-finite-type",
-    "lem-weil-pbc-closed-immersion-proper",
-    "thm-nagata-compactification",
-    "def-amb-etale-compact-support",
-    "thm-amb-etale-exceptional-adjoint",
-    "thm-sf-ambient-adjoint-class",
-    "def-weil-exceptional-inverse-image",
-    "thm-weil-pbc-site-comparison",
-    "lem-sf-class-compact-support-comparison",
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "lem-amb-etale-compact-comparisons",
-    "lem-cat-right-adjoint-composition"
+    "lem-weil-pbc-closed-immersion-proper"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
-    "place": "First paragraph: preservation and the dualizing-object identification needed for alpha"
+    "place": "First paragraph: geometry of the pieces"
    }
   },
   {
-   "text": "Fix $L\\in D^b_{ctf}(T,A)$ and put $P=i^*D_TL$ and $U=Ri^!L$. The etale $i^*$ is the exact constant-coefficient inverse image by [prop-weil-pbc-inverse-image-modules-exact]; [prop-constructible-pullback] therefore makes $P$ bounded constructible. For its Tor bound, use [lem-sf-comparison-tor-amplitude] to send $D_TL$ to the finite-Tor pro-etale category, apply [lem-sf-pullback-tor-amplitude] there, and identify its result with $\\nu_Z^*P$ by [lem-weil-pbc-comparison-pullback]. The converse clause of [lem-sf-comparison-tor-amplitude] reflects that bound to the bounded etale complex $P$. Thus $P\\in D^b_{ctf}(Z,A)$ with no silent identification of the two sites. Apply [lem-weil-closed-costalk-duality] to $D_TL$. It gives an isomorphism $\\widetilde\\alpha_{D_TL}:Ri^!D_TD_TL\\to D_ZP$. Thus\n$$\\widetilde c_L=\\widetilde\\alpha_{D_TL}\\circ Ri^!\\delta_L:U\\xrightarrow{\\sim}D_ZP.$$\nConsequently $U$ is finite-Tor constructible, because $D_ZP$ is so by [thm-fix-general-biduality]. The same argument applied to any $K\\in D^b_{ctf}(T,A)$ shows $Ri^!K\\in D^b_{ctf}(Z,A)$, in particular for $K=D_TL$. This conclusion used costalk duality and biduality, without using the boundary exchange. Here the tildes distinguish a preservation witness from the evaluation-normalized comparison to be constructed in step 4; no normalization of the costalk lemma is inferred from its statement.",
+   "text": "On every piece, [thm-fix-general-biduality] gives preservation of $D^b_{ctf}$ by $D_W$ and invertibility of $\\delta$. Apply [lem-weil-boundary-dualizing-composition] to the structure maps and to $i:Z\\hookrightarrow T$: the etale adjoints restrict to $D^+$, and the counit-compatible composition gives $Ri^!\\omega_T\\cong\\omega_Z$. This also supplies their comparison-class pro-etale transport. No unbounded pro-etale adjunction is required.",
+   "uses": [
+    "thm-fix-general-biduality",
+    "lem-weil-boundary-dualizing-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "First paragraph: preservation and dualizing-object composition"
+   }
+  },
+  {
+   "text": "Fix $L\\in D^b_{ctf}(T,A)$ and put $P=i^*D_TL$ and $U=Ri^!L$. The etale $i^*$ is the exact constant-coefficient inverse image by [prop-weil-pbc-inverse-image-modules-exact]; [prop-constructible-pullback] therefore makes $P$ bounded constructible. For its Tor bound, use [lem-sf-comparison-tor-amplitude] to send $D_TL$ to the finite-Tor pro-etale category, apply [lem-sf-pullback-tor-amplitude] there, and identify its result with $\\nu_Z^*P$ by [lem-weil-pbc-comparison-pullback]. The converse clause of [lem-sf-comparison-tor-amplitude] reflects that bound to the bounded etale complex $P$. Thus $P\\in D^b_{ctf}(Z,A)$ with no silent identification of the two sites. Apply [lem-weil-closed-costalk-duality] to $D_TL$. It gives an isomorphism $\\widetilde\\alpha_{D_TL}:Ri^!D_TD_TL\\to D_ZP$. Thus\n$$\\widetilde c_L=\\widetilde\\alpha_{D_TL}\\circ Ri^!\\delta_L:U\\xrightarrow{\\sim}D_ZP.$$\nConsequently $U$ is finite-Tor constructible, because $D_ZP$ is so by [thm-fix-general-biduality]. The same argument applied to any $K\\in D^b_{ctf}(T,A)$ shows $Ri^!K\\in D^b_{ctf}(Z,A)$, in particular for $K=D_TL$. This conclusion used costalk duality and biduality, without using the boundary exchange. Here the tildes distinguish a preservation witness from the evaluation-normalized comparison to be constructed in step 6; no normalization of the costalk lemma is inferred from its statement.",
    "uses": [
     "lem-sf-pullback-tor-amplitude",
     "prop-weil-pbc-inverse-image-modules-exact",
@@ -75,22 +76,30 @@
    }
   },
   {
-   "text": "Write $\\mu_N:Ri_!Ri^!N\\to N$ for the exceptional counit. For finite-Tor constructible $M,N$ on $T$, define\n$$q_{M,N}:i^*M\\otimes^LRi^!N\\longrightarrow Ri^!(M\\otimes^LN)$$\nto be its exceptional-adjunction transpose of\n$$Ri_!(i^*M\\otimes^LRi^!N)\\xrightarrow{\\operatorname{PF}^{-1}} M\\otimes^LRi_!Ri^!N\\xrightarrow{1\\otimes\\mu_N}M\\otimes^LN.$$\nHere [lem-weil-finite-compact-projection-formula] applies: $M$ is finite-Tor constructible and $Ri^!N$ is bounded constructible by step 2; swapping factors gives the displayed order. The exceptional adjunction is [thm-amb-etale-exceptional-adjoint]. Naturality of the projection map and counit gives naturality of $q$ in $M,N$. Define\n$$r_K=Ri^!(\\mathrm{ev}_K\\circ\\sigma_{K,D_TK})\\circ q_{K,D_TK}\\circ\\sigma_{Ri^!D_TK,i^*K}:Ri^!D_TK\\otimes^Li^*K\\longrightarrow\\omega_Z.$$\nThis fixes the normalization of the comparison $\\alpha_K$ as the tensor--Hom transpose of $r_K$. To verify it independently of the proof of the costalk node, for $B\\in D^b_{ctf}(Z,A)$ the adjunctions of step 3 and the exceptional adjunction, followed by the projection isomorphism, give\n$$\\operatorname{Hom}_Z(B,Ri^!D_TK)\\cong\\operatorname{Hom}_T(Ri_!B\\otimes^LK,\\omega_T)\\cong\\operatorname{Hom}_T(Ri_!(B\\otimes^Li^*K),\\omega_T)\\cong\\operatorname{Hom}_Z(B,D_Zi^*K).$$\nThe first and last functors in $B$ are represented by objects of $D^b_{ctf}(Z,A)$ by steps 1--2; the intermediate Hom sets are taken in the ambient category on $T$. The Yoneda bijection [lem-galois-yoneda-fully-faithful], applied to that full category, turns this chain into an isomorphism. Evaluating the chain at $B=Ri^!D_TK$ and its identity gives exactly the displayed $r_K$, since the exceptional transpose of the identity is $\\mu_{D_TK}$. Thus the canonical evaluation-normalized comparison is an isomorphism, as required for the $\\alpha$ of [lem-weil-closed-costalk-duality]. This explicit calculation does not take an evaluation characterization from that node's proof. From this point onward let $\\alpha_K$ denote this constructed normalized isomorphism, and set $c_L=\\alpha_{D_TL}\\circ Ri^!\\delta_L$. Both factors are isomorphisms, so $c_L$ is an isomorphism. The preliminary $\\widetilde c_L$ served only to establish the domain in step 2.",
+   "text": "Write $\\mu_N:Ri_!Ri^!N\\to N$ for the exceptional counit. For $M,N\\in D^b_{ctf}(T,A)$ define $q_{M,N}:i^*M\\otimes_A^LRi^!N\\to Ri^!(M\\otimes_A^LN)$ as the transpose of\n$$Ri_!(i^*M\\otimes_A^LRi^!N)\\xrightarrow{\\mathrm{PF}^{-1}}M\\otimes_A^LRi_!Ri^!N\\xrightarrow{1\\otimes\\mu_N}M\\otimes_A^LN.$$\nThe projection formula applies since $M$ is finite-Tor and $Ri^!N$ is bounded constructible by step 3; tensor symmetry gives this order. The exceptional adjunction is the etale ambient one. Transposing the natural projection/counit composite makes $q$ natural in both variables.",
    "uses": [
     "lem-weil-finite-compact-projection-formula",
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-galois-yoneda-fully-faithful",
-    "lem-weil-closed-costalk-duality",
-    "lem-weil-duality-pairing"
+    "thm-amb-etale-exceptional-adjoint"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
-    "place": "Second paragraph: make the adjunction/evaluation normalization of the costalk comparison explicit"
+    "place": "Second paragraph: exceptional tensor comparison q"
    }
   },
   {
-   "text": "By [lem-weil-duality-pairing], $\\delta_L$ is the transpose of evaluation after tensor symmetry. The defining transpose equation is therefore\n$$\\mathrm{ev}_{D_TL}\\circ(\\delta_L\\otimes1_{D_TL})=\\mathrm{ev}_L\\circ\\sigma_{L,D_TL}.$$\nThis is an equality of maps $L\\otimes^LD_TL\\to\\omega_T$, with the same signed symmetry as in step 3. No invertibility is needed for this identity.",
+   "text": "Apply [lem-weil-boundary-alpha-normalization] using the tensor-Hom adjunction of step 4 and the preservation established in steps 2--3. Its explicit Hom chain proves that the transpose of\n$$r_K=Ri^!(\\mathrm{ev}_K\\circ\\sigma_{K,D_TK})\\circ q_{K,D_TK}\\circ\\sigma_{Ri^!D_TK,i^*K}$$\nis the isomorphism $\\alpha_K:Ri^!D_TK\\xrightarrow{\\sim}D_Zi^*K$. This fixes the evaluation normalization, rather than inferring it from the existence-only costalk statement. Put $c_L=\\alpha_{D_TL}\\circ Ri^!\\delta_L:U\\xrightarrow{\\sim}D_ZP$. Both factors are isomorphisms. The preliminary $\\widetilde c_L$ of step 3 served only to establish the finite-Tor domain.",
+   "uses": [
+    "lem-weil-boundary-alpha-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Second paragraph: normalized alpha and c"
+   }
+  },
+  {
+   "text": "By [lem-weil-duality-pairing], $\\delta_L$ is the transpose of evaluation after tensor symmetry. The defining transpose equation is therefore\n$$\\mathrm{ev}_{D_TL}\\circ(\\delta_L\\otimes1_{D_TL})=\\mathrm{ev}_L\\circ\\sigma_{L,D_TL}.$$\nThis is an equality of maps $L\\otimes^LD_TL\\to\\omega_T$, with the same signed symmetry as in step 4. No invertibility is needed for this identity.",
    "uses": [
     "lem-weil-duality-pairing"
    ],
@@ -101,7 +110,7 @@
    }
   },
   {
-   "text": "Let\n$$b_L=Ri^!\\mathrm{ev}_L\\circ q_{D_TL,L}:P\\otimes^LU\\longrightarrow\\omega_Z.$$\nThis is the pairing whose transpose defines $\\beta_L$ in [def-weil-boundary-duality-input]. Let $t(c_L)=\\mathrm{ev}_P\\circ(c_L\\otimes1_P)$ be the transpose of $c_L$. The formula for $r$ in step 4, naturality of $q$ in its second variable, naturality of tensor symmetry, and step 5 give the following equality of maps $U\\otimes^LP\\to\\omega_Z$:\n$$\\begin{aligned}\nt(c_L)&=r_{D_TL}\\circ(Ri^!\\delta_L\\otimes1_P)\\\\\n&=Ri^!\\bigl(\\mathrm{ev}_{D_TL}\\circ\\sigma_{D_TL,D_TD_TL}\\circ(1_{D_TL}\\otimes\\delta_L)\\bigr)\\circ q_{D_TL,L}\\circ\\sigma_{U,P}\\\\\n&=Ri^!\\bigl(\\mathrm{ev}_{D_TL}\\circ(\\delta_L\\otimes1_{D_TL})\\circ\\sigma_{D_TL,L}\\bigr)\\circ q_{D_TL,L}\\circ\\sigma_{U,P}\\\\\n&=Ri^!\\bigl(\\mathrm{ev}_L\\circ\\sigma_{L,D_TL}\\circ\\sigma_{D_TL,L}\\bigr)\\circ q_{D_TL,L}\\circ\\sigma_{U,P}\\\\\n&=b_L\\circ\\sigma_{U,P}.\n\\end{aligned}$$\nThe last line uses $\\sigma_{L,D_TL}\\sigma_{D_TL,L}=1$. Thus $c_L$ and $\\beta_L$ are the two currying maps of this same pairing, in opposite tensor orders.",
+   "text": "Let\n$$b_L=Ri^!\\mathrm{ev}_L\\circ q_{D_TL,L}:P\\otimes^LU\\longrightarrow\\omega_Z.$$\nThis is the pairing whose transpose defines $\\beta_L$ in [def-weil-boundary-duality-input]. Let $t(c_L)=\\mathrm{ev}_P\\circ(c_L\\otimes1_P)$ be the transpose of $c_L$. The formula for $r$ in step 6, naturality of $q$ in its second variable, naturality of tensor symmetry, and step 7 give the following equality of maps $U\\otimes^LP\\to\\omega_Z$:\n$$\\begin{aligned}\nt(c_L)&=r_{D_TL}\\circ(Ri^!\\delta_L\\otimes1_P)\\\\\n&=Ri^!\\bigl(\\mathrm{ev}_{D_TL}\\circ\\sigma_{D_TL,D_TD_TL}\\circ(1_{D_TL}\\otimes\\delta_L)\\bigr)\\circ q_{D_TL,L}\\circ\\sigma_{U,P}\\\\\n&=Ri^!\\bigl(\\mathrm{ev}_{D_TL}\\circ(\\delta_L\\otimes1_{D_TL})\\circ\\sigma_{D_TL,L}\\bigr)\\circ q_{D_TL,L}\\circ\\sigma_{U,P}\\\\\n&=Ri^!\\bigl(\\mathrm{ev}_L\\circ\\sigma_{L,D_TL}\\circ\\sigma_{D_TL,L}\\bigr)\\circ q_{D_TL,L}\\circ\\sigma_{U,P}\\\\\n&=b_L\\circ\\sigma_{U,P}.\n\\end{aligned}$$\nThe last line uses $\\sigma_{L,D_TL}\\sigma_{D_TL,L}=1$. Thus $c_L$ and $\\beta_L$ are the two currying maps of this same pairing, in opposite tensor orders.",
    "uses": [
     "def-weil-boundary-duality-input"
    ],
@@ -112,7 +121,7 @@
    }
   },
   {
-   "text": "Naturality of evaluation for $c_L:U\\to D_ZP$ gives\n$$\\mathrm{ev}_U\\circ(D_Zc_L\\otimes1_U)=\\mathrm{ev}_{D_ZP}\\circ(1_{D_ZD_ZP}\\otimes c_L).$$\nPrecomposing with $\\delta_P\\otimes1_U$ and using the transpose identity from step 5 on $Z$ shows that the transpose of $D_Z(c_L)\\circ\\delta_P$ is $b_L$. Uniqueness under the adjunction of step 3 therefore gives the specified-map identity\n$$\\beta_L=D_Z(c_L)\\circ\\delta_P.$$\nBoth factors are isomorphisms: $c_L$ is an isomorphism by step 4, a functor sends its inverse to an inverse, and $\\delta_P$ is an isomorphism by [thm-fix-general-biduality], since $P\\in D^b_{ctf}(Z,A)$. Hence the canonical evaluation-defined boundary map is an isomorphism.",
+   "text": "Naturality of evaluation for $c_L:U\\to D_ZP$ gives\n$$\\mathrm{ev}_U\\circ(D_Zc_L\\otimes1_U)=\\mathrm{ev}_{D_ZP}\\circ(1_{D_ZD_ZP}\\otimes c_L).$$\nPrecomposing with $\\delta_P\\otimes1_U$ and using the transpose identity from step 7 on $Z$ shows that the transpose of $D_Z(c_L)\\circ\\delta_P$ is $b_L$. Uniqueness under the adjunction of step 4 therefore gives the specified-map identity\n$$\\beta_L=D_Z(c_L)\\circ\\delta_P.$$\nBoth factors are isomorphisms: $c_L$ is an isomorphism by step 6, a functor sends its inverse to an inverse, and $\\delta_P$ is an isomorphism by [thm-fix-general-biduality], since $P\\in D^b_{ctf}(Z,A)$. Hence the canonical evaluation-defined boundary map is an isomorphism.",
    "uses": [
     "lem-weil-duality-pairing",
     "thm-fix-general-biduality"
@@ -124,7 +133,7 @@
    }
   },
   {
-   "text": "For the evaluation compatibility, fix $K\\in D^b_{ctf}(T,A)$. The transpose of $\\beta_{D_TK}\\circ i^*\\delta_K$ is\n$$Ri^!\\mathrm{ev}_{D_TK}\\circ q_{D_TD_TK,D_TK}\\circ(i^*\\delta_K\\otimes1_{Ri^!D_TK}).$$\nNaturality of $q$ and step 5 rewrite this as\n$$Ri^!(\\mathrm{ev}_K\\circ\\sigma_{K,D_TK})\\circ q_{K,D_TK}:i^*K\\otimes^LRi^!D_TK\\longrightarrow\\omega_Z.$$\nOn the other hand the transpose of $D_Z(\\alpha_K)\\circ\\delta_{i^*K}$ is $r_K\\circ\\sigma_{i^*K,Ri^!D_TK}$, by naturality of evaluation and the defining transpose of $\\delta_{i^*K}$. This is the very same displayed map, by the formula for $r_K$ in step 4. Uniqueness of transposition yields\n$$\\beta_{D_TK}\\circ i^*\\delta_K=D_Z(\\alpha_K)\\circ\\delta_{i^*K}.$$\nComposing with $(D_Z\\alpha_K)^{-1}$ gives exactly the double-dual compatibility required in [def-weil-boundary-duality-input]. The two cancellations of symmetry use its involutivity, so they include the Koszul signs.",
+   "text": "For the evaluation compatibility, fix $K\\in D^b_{ctf}(T,A)$. The transpose of $\\beta_{D_TK}\\circ i^*\\delta_K$ is\n$$Ri^!\\mathrm{ev}_{D_TK}\\circ q_{D_TD_TK,D_TK}\\circ(i^*\\delta_K\\otimes1_{Ri^!D_TK}).$$\nNaturality of $q$ and step 7 rewrite this as\n$$Ri^!(\\mathrm{ev}_K\\circ\\sigma_{K,D_TK})\\circ q_{K,D_TK}:i^*K\\otimes^LRi^!D_TK\\longrightarrow\\omega_Z.$$\nOn the other hand the transpose of $D_Z(\\alpha_K)\\circ\\delta_{i^*K}$ is $r_K\\circ\\sigma_{i^*K,Ri^!D_TK}$, by naturality of evaluation and the defining transpose of $\\delta_{i^*K}$. This is the very same displayed map, by the formula for $r_K$ in step 6. Uniqueness of transposition yields\n$$\\beta_{D_TK}\\circ i^*\\delta_K=D_Z(\\alpha_K)\\circ\\delta_{i^*K}.$$\nComposing with $(D_Z\\alpha_K)^{-1}$ gives exactly the double-dual compatibility required in [def-weil-boundary-duality-input]. The two cancellations of symmetry use its involutivity, so they include the Koszul signs.",
    "uses": [
     "lem-weil-duality-pairing",
     "def-weil-boundary-duality-input"
@@ -136,45 +145,71 @@
    }
   },
   {
-   "text": "Finally consider the small pro-etale realization of [def-weil-boundary-duality-input]. Fix its same global datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, $\\ell\\ne p$, finite extension $E/\\mathbf Q_\\ell$, valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $n\\geq1$, so $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. The pieces $T,Z$ are separated finite-type $k$-schemes by step 1. Put $C_W=\\nu_W^*$ and $F_e=Ri^{\\mathrm{et}}_!$, $F_p=Ri^{\\mathrm{proet}}_!$. By [lem-sf-proetale-constructible-origin] every bounded constructible input is $C_TK$ for an etale bounded constructible $K$, and [lem-sf-comparison-tor-amplitude] reflects and preserves finite Tor amplitude. Ordinary restriction agrees by [lem-weil-pbc-comparison-pullback]. Exceptional restriction is the specified functor $C_Zi^\\times R\\nu_{T,*}$ of [def-weil-exceptional-inverse-image], whose value on $C_TK$ is $C_Zi^\\times K$ by the unit isomorphism of [thm-weil-pbc-site-comparison]. Use the identity-open compactification of $i$ in [def-weil-pbc-projection-compactification], so $F_e=Ri_{\\mathrm{et},*}$ and $F_p=Ri_{\\mathrm{proet},*}$. Write $\\eta_B:F_pC_ZB\\xrightarrow{\\sim}C_TF_eB$ for the inverse of the named comparison $b_{i,B}$ in [lem-weil-pbc-comparison-direct-image-canonical-mate]. This specifies the proper-case compact-support comparison, including its normalization. On etale-origin objects the transported exceptional adjunction is the explicit chain\n$$\\operatorname{Hom}(F_pC_ZB,C_TN)\\xrightarrow{\\eta_B^{-1}}\\operatorname{Hom}(C_TF_eB,C_TN)\\cong\\operatorname{Hom}(F_eB,N)\\cong\\operatorname{Hom}(B,i^\\times N)\\cong\\operatorname{Hom}(C_ZB,C_Zi^\\times N).$$\nHere the first arrow means precomposition by $\\eta_B^{-1}$; the two full-faithfulness arrows are the unit identifications of the site-comparison theorem. This is the adjunction specified by the transported construction, within the domain of [thm-sf-ambient-adjoint-class]. Evaluating its inverse at $B=i^\\times N$ and the identity gives its counit explicitly:\n$$\\mu^p_{C_TN}=C_T(\\mu^e_N)\\circ\\eta_{i^\\times N}.$$\nFor the projection map, use [lem-weil-pbc-comparison-direct-image-canonical-mate] for the qcqs closed immersion $i$. Its displayed equation identifies the ordinary pullback/direct-image counits. The pullback-tensor isomorphism is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The projection transformation is the adjoint of the ordinary counit tensored with the second factor: after applying these two comparisons its transpose is $C_Z(\\varepsilon^e_B\\otimes1_{i^*M})$. This is also the transpose of the etale projection map after comparison, so uniqueness of adjunction identifies the two named projection transformations. Their inverses consequently agree; invertibility on our inputs is [lem-weil-finite-compact-projection-formula]. Substituting this equality and the displayed formula for $\\mu^p$ into the definition of $q$ in step 4 identifies $q^p_{C_TM,C_TN}$ with $C_Z(q^e_{M,N})$ under the named comparisons. To apply the revised statement of [lem-weil-finite-duality-site-comparison], first check its second-variable hypothesis. On either piece $W=T,Z$, the constant sheaf $A_W$ is constructible and has Tor interval $[0,0]$, since $A_W\\otimes_A^LN=N$ for a degree-zero module sheaf $N$. Moreover $R\\mathcal Hom_A(A_W,H)\\cong H$: on the K-injective representative of step 3 the Hom complex from the ring sheaf is that representative itself. Hence $\\omega_{W,\\mathrm{et}}\\cong D_WA_W$ is finite-Tor constructible, in particular bounded constructible, by [thm-fix-general-biduality]. Every first variable in the remaining duality comparisons is finite-Tor constructible: $L,K$ are inputs, their duals have this property by step 1, and $i^*K,P,U$ have it by step 2; further duals are again covered by step 1. Thus the lemma's canonical internal-Hom comparison applies with second variable $\\omega_{W,\\mathrm{et}}$. Write $w_W:C_W\\omega_{W,\\mathrm{et}}\\xrightarrow{\\sim}\\omega_{W,\\mathrm{proet}}$ for its specified dualizing comparison and $\\chi_{W,H}:C_WD_WH\\xrightarrow{\\sim}D_W^pC_WH$ for the induced duality comparison. The lemma states that, under the tensor identification,\n$$\\mathrm{ev}^{p}_{C_WH}\\circ(\\chi_{W,H}\\otimes1)=w_W\\circ C_W(\\mathrm{ev}^{e}_H),$$\nand that these comparisons identify the double-dual transposes. Its pro-etale exceptional functor is precisely the comparison-class transport already used here. These are comparisons of the named evaluation maps, not arbitrary object isomorphisms. Substitution in the displayed definitions of $r,b,c$ and their tensor-Hom transposes therefore identifies each with the comparison of its etale map. In particular the comparison of the equality in step 7 is $\\beta^p=C_Z(D_Z(c_L)\\delta_P)$, and that of step 8 is\n$$\\beta^p_{C_TD_TK}\\circ i_p^*C_T\\delta_K=D_Z^p(C_Z\\alpha_K)\\circ C_Z\\delta_{i^*K}.$$\nThus the evaluation-defined pro-etale map is invertible and satisfies the required compatibility. This proves both clauses of the input on the chosen finite-stage categories.",
+   "text": "For the pro-etale realization put $C_W=\\nu_W^*$. Every bounded constructible input has an etale-origin representative by [lem-sf-proetale-constructible-origin], and [lem-sf-comparison-tor-amplitude] preserves and reflects its finite Tor interval. The ordinary restriction is identified by [lem-weil-pbc-comparison-pullback]. The specified exceptional restriction is $C_Zi^\\times R\\nu_{T,*}$; the site-comparison unit identifies its value on $C_TN$ with $C_Zi^\\times N$. These are bounded-below inputs, so the comparison-class adjunction applies. For $i$, choose its identity-open compactification. Its finite-type source has a finite dimension bound by [lem-fin-finite-type-fibre-dimension-bound] over $\\operatorname{Spec}k$, checking the class-adjunction dimension hypothesis.",
    "uses": [
-    "def-weil-boundary-duality-input",
     "lem-sf-proetale-constructible-origin",
     "lem-sf-comparison-tor-amplitude",
     "lem-weil-pbc-comparison-pullback",
     "def-weil-exceptional-inverse-image",
     "thm-weil-pbc-site-comparison",
     "thm-sf-ambient-adjoint-class",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-finite-compact-projection-formula",
-    "lem-weil-finite-duality-site-comparison",
-    "def-weil-pbc-projection-compactification",
-    "thm-fix-general-biduality"
+    "lem-fin-finite-type-fibre-dimension-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
-    "place": "Finite-stage realization: transport the displayed evaluation and adjunction maps to the chosen pro-etale categories"
+    "place": "Second paragraph realized on pro-etale site: origin and exceptional restriction"
+   }
+  },
+  {
+   "text": "Use the identity-open compactification of $i$, so $F_e=Ri_{e,*}$ and $F_p=Ri_{p,*}$. Let $\\eta_B:F_pC_ZB\\xrightarrow{\\sim}C_TF_eB$ be the inverse of the named canonical direct-image mate. The hypotheses of [lem-weil-boundary-proetale-projection-comparison] use exactly this mate and the monoidal tensor-pullback comparison. It gives\n$$\\mu^p_{C_TN}=C_T(\\mu^e_N)\\eta_{i^\\times N},\\qquad \\eta_{B\\otimes i_e^*M}\\pi_p=C_T(\\pi_e)(\\eta_B\\otimes1).$$\nThus both exceptional counits and the named projection transformations, including their inverses on the finite-Tor inputs of step 3, agree under comparison.",
+   "uses": [
+    "lem-weil-boundary-proetale-projection-comparison",
+    "def-weil-pbc-projection-compactification",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Second paragraph realized on pro-etale site: counit and projection normalization"
+   }
+  },
+  {
+   "text": "Check the hypotheses of [lem-weil-finite-duality-site-comparison]. The constant sheaf $A_W$ is locally constant finite, hence constructible, and $A_W\\otimes_A^LN=N$ shows Tor interval $[0,0]$. On a K-injective representative $I$ of $H$, the internal Hom complex from $A_W$ is $I$ itself, so $R\\mathcal Hom_A(A_W,H)\\cong H$. Therefore $\\omega_{W,e}=D_WA_W$ is bounded finite-Tor constructible by biduality. Every first variable needed below is finite-Tor: the inputs and their duals by step 2, ordinary and exceptional restrictions by step 3, and further duals by step 2. The comparison lemma consequently applies with second variable $\\omega_{W,e}$. Denote its dualizing comparison by $w_W$ and its internal-Hom comparison by $\\chi_{W,H}:C_WD_WH\\cong D_W^pC_WH$. It identifies evaluation and its double-dual transpose.",
+   "uses": [
+    "lem-weil-finite-duality-site-comparison",
+    "thm-fix-general-biduality",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Second paragraph realized on pro-etale site: finite-duality comparison hypotheses"
+   }
+  },
+  {
+   "text": "The counit and projection identities of step 12 satisfy the hypotheses of [lem-weil-boundary-proetale-q-compatibility]. It identifies $q^p_{C_TM,C_TN}$ with $C_Zq^e_{M,N}$ and the transposes of all the evaluation/symmetry pairings used here. In conjunction with $w,\\chi$ from step 13, the explicit formula for $r$ in step 6 identifies $\\alpha^p$ with the comparison of $\\alpha^e$. The formula for $b$ in step 8 identifies the canonical $\\beta^p$ with the comparison of $\\beta^e$. Applying the comparison to the two sides of the equalities of steps 9--10, and using its identified double-dual transposes, proves invertibility of $\\beta^p$ and\n$$\\beta^p_{D_T^pC_TK}\\circ i_p^*\\delta^p_{C_TK}=D_Z^p(\\alpha^p_{C_TK})\\circ\\delta^p_{i_p^*C_TK}.$$\nTogether with preservation from step 2, these are precisely the two clauses of [def-weil-boundary-duality-input].",
+   "uses": [
+    "lem-weil-boundary-proetale-q-compatibility",
+    "lem-weil-finite-duality-site-comparison",
+    "def-weil-boundary-duality-input"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Second paragraph realized on pro-etale site: transport of the canonical maps and compatibility"
    }
   }
  ],
  "proof_deps": [
-  "thm-fix-general-biduality",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-qc-open-immersion-finite-type",
   "lem-weil-pbc-closed-immersion-proper",
-  "thm-nagata-compactification",
-  "def-amb-etale-compact-support",
-  "thm-amb-etale-exceptional-adjoint",
-  "thm-sf-ambient-adjoint-class",
-  "def-weil-exceptional-inverse-image",
-  "thm-weil-pbc-site-comparison",
-  "lem-sf-class-compact-support-comparison",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-amb-etale-compact-comparisons",
-  "lem-cat-right-adjoint-composition",
+  "thm-fix-general-biduality",
+  "lem-weil-boundary-dualizing-composition",
   "lem-sf-pullback-tor-amplitude",
   "prop-weil-pbc-inverse-image-modules-exact",
   "prop-constructible-pullback",
@@ -188,14 +223,21 @@
   "lem-sc-derived-hom-tensor-total",
   "lem-pur-rhom-global-sections",
   "lem-weil-finite-compact-projection-formula",
-  "lem-galois-yoneda-fully-faithful",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-weil-boundary-alpha-normalization",
   "lem-weil-duality-pairing",
   "def-weil-boundary-duality-input",
   "lem-sf-proetale-constructible-origin",
+  "def-weil-exceptional-inverse-image",
+  "thm-weil-pbc-site-comparison",
+  "thm-sf-ambient-adjoint-class",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-boundary-proetale-projection-comparison",
+  "def-weil-pbc-projection-compactification",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-finite-duality-site-comparison",
-  "def-weil-pbc-projection-compactification"
+  "lem-weil-boundary-proetale-q-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
@@ -268,7 +310,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -298,11 +340,11 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "cor-weil-boundary-duality-discharge",
   "worker": "stage1",
-  "summary": "Kept the statement. Reused existing costalk duality, biduality, pullback preservation and generic ringed-site/category tools. Expanded the canonical-map identification and evaluation compatibility into explicit transpose equations; justified every finite-Tor domain and the pro-etale realization. The tagged Lean theorem covers only existence of an isomorphism, not the whole canonical-map statement. No new nodes. Second reading: corrected the etale D+ composition interface, separated preliminary and normalized costalk isomorphisms, and proved site-comparison counit/projection normalizations explicitly. Returned-delivery repair: revalidated every cited statement against the current DAG; expanded step 9 to check the revised finite-duality comparison coefficient scope, both argument hypotheses, transported exceptional convention and evaluation normalization, and refreshed its stale quotation. No item-statement change or new nodes.",
-  "blueprint": "Steps 1--2 realize the first paragraph (preservation and alpha composed with Ri! delta); steps 3--8 realize the second paragraph with explicit q, r, b, beta=D(c)delta and the restricted-delta equation; step 9 makes the chosen finite-stage site realization precise.",
+  "summary": "Repair of the human long-step return: keep the statement and Lean record unchanged, and retain all unflagged proof steps (with renumbered references). Former step 1 now cites the bounded-below dualizing-composition lemma, former step 4 cites evaluation-normalized alpha, and former step 9 cites the proper projection/counit comparison and exceptional-q/pairing comparison. The remaining geometry, tensor-Hom calculation, coefficient hypothesis checks and beta/delta equations stay in the item. Four new nodes are statement-only; all fourteen proof steps have fewer than 2000 characters.",
+  "blueprint": "First paragraph: steps 1--3 establish preservation and the costalk domain. Second paragraph: steps 4--10 give the tensor-Hom adjunction, normalized alpha, canonical beta and delta compatibility. Steps 11--14 give the same named maps on the pro-etale realization.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-closed-immersion-proper",
@@ -319,10 +361,6 @@
    {
     "node": "thm-amb-etale-exceptional-adjoint",
     "why": "Ambient etale adjunction for a closed immersion (compactification with identity open part); not an ambient pro-etale adjunction."
-   },
-   {
-    "node": "lem-cat-right-adjoint-composition",
-    "why": "Generic adjunction-pasting with its counit normalization identifies Ri! omega_T with omega_Z."
    },
    {
     "node": "lem-pc-kflat-resolution",
@@ -347,10 +385,6 @@
    {
     "node": "lem-weil-finite-compact-projection-formula",
     "why": "Finite-stage projection map, used only for a closed immersion and constructible finite-Tor tensor factor, to normalize q and alpha."
-   },
-   {
-    "node": "lem-galois-yoneda-fully-faithful",
-    "why": "Generic fully faithful Yoneda embedding on the finite-Tor constructible category turns the written Hom chain into its unique comparison."
    },
    {
     "node": "lem-sf-proetale-constructible-origin",
@@ -385,20 +419,8 @@
     "why": "The open factor of a locally closed piece is finite type; generic geometric permanence."
    },
    {
-    "node": "thm-nagata-compactification",
-    "why": "Provides actual compactifications of the structure morphisms needed for their etale adjoints."
-   },
-   {
-    "node": "lem-sf-class-compact-support-comparison",
-    "why": "Identifies the two left adjoints on the bounded-below comparison class and fixes the comparison used in the explicit counit formula."
-   },
-   {
     "node": "lem-fin-finite-type-fibre-dimension-bound",
     "why": "Over Spec k bounds the dimension of the chosen finite-type compactification, checking the comparison-class adjunction hypothesis."
-   },
-   {
-    "node": "lem-amb-etale-compact-comparisons",
-    "why": "The etale D+ composition theorem, in the same coefficient category as the adjoints, replaces a citation of the pro-etale composition theorem."
    },
    {
     "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
@@ -434,11 +456,11 @@
   "lem-weil-pbc-comparison-direct-image-canonical-mate"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q24-cce734ae2",
-  "group": "Q24",
+  "reviewer": "NT-cc-Q67-2fd9cc6f0",
+  "group": "Q67",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-cce734ae2 (reviewer sub-agent of L); spot-checked: Read the full item, report, all 36 cited statements and source places, and unit/chapter route. Verified all nine steps, evaluation-normalized beta, double-dual compatibility, revised comparison hypotheses, edge cases, and absence of cycles or duplicates. Accepted all 25 declared tool uses. No repairs needed; concrete checks recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-2fd9cc6f0 (reviewer sub-agent of L); spot-checked: Read the whole delivery against the master and main-20261015 blueprint proofs; they agree. The item's statement is unchanged. Each of the 14 steps is under 2000 characters, and I checked every one against the statements it cites. Step 3: P = i^*D_TL is constructible by exactness and prop-constructible-pullback. Its Tor bound comes from comparison clauses (i) and (ii) of lem-sf-comparison-tor-amplitude. The costalk lemma is used for existence only, with the ambient closed adjoint from thm-amb-etale-exceptional-adjoint. Step 4 rests on Stacks 06YS, 0A96, 0A90 and 08JA. I recomputed the equations of steps 7-10: the transposes, the naturality of q, the symmetries and the dinaturality of evaluation. They give β_L = D_Z(c_L)δ_P and exactly the δ-compatibility the definition requires. Step 11 checks dim Z ≤ d for thm-sf-ambient-adjoint-class through 0A3V. Step 12 uses the inverse of the named canonical mate b_u. Step 13 checks the hypotheses of the finite-duality site comparison. The four new statements are true. In the alpha lemma, Yoneda in D^b_ctf(Z) applied to id_{GD_TK} gives the F-adjoint ev(μ⊗1)PF^{-1}, which equals the adjoint of r_K. In the dualizing lemma, the right adjoints preserve D^+ because compact support has finite amplitude, and the mate of the D^+ composition then gives i^×ω_T ≅ ω_Z and its unit transport. The projection and q comparisons are formal transports through the class adjunction, the counit-normalized b_u and the monoidal comparison 07A4. Edge cases Z = ∅, i = id and K = 0 hold. None of the four duplicates an existing node: I compared them with lem-sf-mate, fix-prop-adjunctions(3), pur9-def-upper-shriek-composition, lem-weil-closed-costalk-duality, lem-weil-pbc-ringed-projection-mate-exact, lem-sfb-etale-proetale-scalar-mate and lem-weil-finite-duality-site-comparison. None restates a clause of the item, and there is no cycle. Every statement the steps cite is in the unit route or among the 20 declared tool uses, all of which I accept. No SGA source is used. FIX (B3): I added two missing definition citations to two new nodes. lem-weil-boundary-alpha-normalization now cites def-amb-etale-compact-support and def-kun-projection-formula-map. lem-weil-boundary-proetale-q-compatibility now cites def-compact-support-direct-image-detailed and def-kun-projection-formula-map. Both appear inline and in stmt_deps; the corrected files are under fixes/dag/nodes/sec-six-functors/. Full checks are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
