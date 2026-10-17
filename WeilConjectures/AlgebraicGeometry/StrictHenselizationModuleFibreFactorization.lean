@@ -248,7 +248,7 @@ theorem strictHenselizationModuleFibre_factorization
     [IsLocalRing (strictHenselization s)]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ∃ (t : Spec (.of Ω) ⟶ strictLocalization s)
-      (ht : t ≫ strictLocalizationToBase s = s),
+      (_ : t ≫ strictLocalizationToBase s = s),
       t (IsLocalRing.closedPoint Ω) =
         IsLocalRing.closedPoint (strictHenselization s) ∧
       ∃ (i : X' ⟶ pullback f (strictLocalizationToBase s)),

@@ -174,7 +174,7 @@ theorem perfect_overlap_object_realization_core_data_family
       (Over.homMk (Spec.map (c.ι.app j))
         (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ V)).obj B ≅
       (schemeOpenRestriction _ _).mapDerivedCategory.obj E) :
-    Nonempty (Σ data : (k : I) → (hjk : j ≤ k) →
+    Nonempty (Σ _ : (k : I) → (hjk : j ≤ k) →
       perfectOverlapComparisonDataType R c hc i Z t j hij (fun _ _ ↦ ⟨j, le_rfl⟩)
         U V hcover hU hV A B hA hB E φU φV k hjk, Unit) := by
   classical
