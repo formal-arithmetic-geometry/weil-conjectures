@@ -49,17 +49,6 @@ theorem counit_comparison_component
     Functor.leftUnitor_hom_app, Functor.comp_obj, Functor.id_obj,
     Category.id_comp]
 
-/-- Conjugating a morphism by a natural isomorphism is its image under the
-other functor. Naturality moves the inverse component across the morphism,
-and the inverse/forward components then cancel. -/
-theorem natIso_inv_map_hom
-    {C D : Type*} [Category* C] [Category* D]
-    (L R : C ⥤ D) (ω : L ≅ R) {X Y : C} (t : X ⟶ Y) :
-    ω.inv.app X ≫ L.map t ≫ ω.hom.app Y = R.map t := by
-  have h := ω.inv.naturality t
-  rw [← Category.assoc, ← h, Category.assoc]
-  simp only [Iso.inv_hom_id_app, Category.comp_id]
-
 /-- The inverse associator followed by right whiskering has the mapped
 component of the original natural isomorphism. -/
 theorem associator_symm_whiskerRight_hom_app

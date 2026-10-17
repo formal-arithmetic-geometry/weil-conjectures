@@ -525,7 +525,7 @@ theorem openSiteOverlap_inv_map_hom (X : Scheme.{u}) {W U : X.Opens}
         (openSiteOverlapIso X i).hom.app N = LW.map (SU.map t) := by
   intro LU LW SP SU
   simpa only [Functor.comp_map] using
-    (natIso_inv_map_hom (LU ⋙ SP) (SU ⋙ LW) (openSiteOverlapIso X i) t)
+    (NatIso.naturality_1 (openSiteOverlapIso X i) t)
 
 
 
