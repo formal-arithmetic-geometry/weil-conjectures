@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectHomTransport
 
-
 public import WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 import all WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 
@@ -22,7 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-attribute [local irreducible] perfectHomComposition derivedPullback
+attribute [local irreducible] perfectHomComposition
 
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
