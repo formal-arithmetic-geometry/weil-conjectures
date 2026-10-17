@@ -4,19 +4,16 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1309**, closure **59**, holes in definitions **36**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1287**, closure **34**, holes in definitions **33**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
 - `Sheaf.AlgebraicGeometry.HypercohomologyFiltrations::CategoryTheory.hypercohomologyCouple` (def, line 270)
 - `Sheaf.AlgebraicGeometry.TruncationExchangeCouple::CategoryTheory.TruncationExchange.couple` (def, line 346)
-- `Sheaf.CategoryTheory.ExactFunctorCouple::CategoryTheory.BigradedExactCouple.mapped` (def, line 49)
+- `Sheaf.CategoryTheory.ExactFunctorCouple::CategoryTheory.BigradedExactCouple.mapped` (def, line 50)
 - `Sheaf.CategoryTheory.FilteredHomologyExactCouple::CategoryTheory.filteredHomologyEIso` (def, line 36)
 - `Sheaf.CategoryTheory.FilteredHomologyExactCouple::CategoryTheory.filteredHomologyExactCouple` (def, line 29)
-- `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization::AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars` (instance, line 174)
-- `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal::CategoryTheory.Functor.mapModCoreMonoidal` (def, line 231)
-- `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal::CategoryTheory.Mod.comapCoreMonoidal` (def, line 347)
-- `WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory::AlgebraicGeometry.ProEtale.isTriangulated_boundedConstructible` (instance, line 182)
+- `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization::AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars` (instance, line 175)
 - `WeilConjectures.PoincareDuality.ProjectionFormula::AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleExceptionalProjectionMorphism` (instance, line 301)
 - `WeilConjectures.PoincareDuality.ProjectionFormula::AlgebraicGeometry.ProEtale.CondensedRing.isIso_openImmersionProjectionComparison` (instance, line 148)
 - `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek::AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` (instance, line 177)
@@ -77,59 +74,59 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1105 | 26 |
-| WeilConjectures | 204 | 33 |
+| Sheaf | 1090 | 8 |
+| WeilConjectures | 197 | 26 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1679 | 794 | 885 | 735 | 18 |
-| 660345513 (Application of proof-dependency imports) | library | 1675 | 792 | 883 | 681 | 18 |
-| 660345513 (Application of proof-dependency imports) | closure | 1434 | 58 | 1376 | 604 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 1679 | 772 | 907 | 735 | 18 |
+| 660345513 (Application of proof-dependency imports) | library | 1675 | 770 | 905 | 681 | 18 |
+| 660345513 (Application of proof-dependency imports) | closure | 1434 | 33 | 1401 | 604 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3786 |
+| proved | 3800 |
 | decomposed | 52 |
-| moved | 4046 |
-| pruned | 134 |
-| other | 619 |
+| moved | 4050 |
+| pruned | 136 |
+| other | 621 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
-| A2 | 124 | 122 | 91 | 31 | 64/124 (51.6%) |
+| A2 | 126 | 124 | 92 | 32 | 65/126 (51.6%) |
 | A3 | 132 | 127 | 84 | 43 | 58/132 (43.9%) |
-| A4 | 79 | 85 | 52 | 33 | 39/79 (49.4%) |
-| B2 | 135 | 141 | 88 | 53 | 55/135 (40.7%) |
-| B3 | 152 | 159 | 91 | 68 | 63/152 (41.4%) |
-| B4 | 72 | 75 | 47 | 28 | 32/72 (44.4%) |
+| A4 | 80 | 86 | 52 | 34 | 39/80 (48.8%) |
+| B2 | 136 | 142 | 88 | 54 | 55/136 (40.4%) |
+| B3 | 154 | 162 | 91 | 71 | 63/154 (40.9%) |
+| B4 | 73 | 76 | 47 | 29 | 32/73 (43.8%) |
 | C1 | 148 | 151 | 110 | 41 | 74/148 (50.0%) |
 | C2 | 128 | 123 | 86 | 37 | 59/128 (46.1%) |
-| C3 | 121 | 127 | 82 | 45 | 57/121 (47.1%) |
+| C3 | 122 | 128 | 82 | 46 | 57/122 (46.7%) |
 | C4 | 65 | 66 | 35 | 31 | 23/65 (35.4%) |
 | D2 | 146 | 145 | 91 | 54 | 63/146 (43.2%) |
 | D3 | 117 | 135 | 72 | 63 | 52/117 (44.4%) |
-| D4 | 74 | 71 | 47 | 24 | 28/74 (37.8%) |
-| E1 | 163 | 196 | 107 | 89 | 82/163 (50.3%) |
+| D4 | 75 | 72 | 48 | 24 | 29/75 (38.7%) |
+| E1 | 164 | 197 | 107 | 90 | 82/164 (50.0%) |
 | E2 | 128 | 123 | 85 | 38 | 60/128 (46.9%) |
-| E3 | 120 | 135 | 95 | 40 | 59/120 (49.2%) |
-| E4 | 54 | 61 | 27 | 34 | 19/54 (35.2%) |
-| F1 | 151 | 156 | 108 | 48 | 72/151 (47.7%) |
-| F2 | 152 | 164 | 99 | 65 | 62/152 (40.8%) |
-| F3 | 103 | 103 | 63 | 40 | 43/103 (41.7%) |
-| F4 | 66 | 62 | 43 | 19 | 29/66 (43.9%) |
+| E3 | 121 | 136 | 95 | 41 | 59/121 (48.8%) |
+| E4 | 55 | 62 | 27 | 35 | 19/55 (34.5%) |
+| F1 | 152 | 157 | 108 | 49 | 72/152 (47.4%) |
+| F2 | 153 | 165 | 99 | 66 | 62/153 (40.5%) |
+| F3 | 104 | 104 | 63 | 41 | 43/104 (41.3%) |
+| F4 | 67 | 65 | 43 | 22 | 29/67 (43.3%) |
 | G1 | 142 | 142 | 114 | 28 | 76/142 (53.5%) |
-| G2 | 141 | 138 | 91 | 47 | 63/141 (44.7%) |
+| G2 | 142 | 139 | 91 | 48 | 63/142 (44.4%) |
 | G3 | 103 | 106 | 66 | 40 | 45/103 (43.7%) |
-| G4 | 59 | 50 | 31 | 19 | 20/59 (33.9%) |
-| H1 | 140 | 139 | 106 | 33 | 74/140 (52.9%) |
-| H2 | 114 | 111 | 92 | 19 | 66/114 (57.9%) |
-| H3 | 122 | 137 | 99 | 38 | 68/122 (55.7%) |
-| H4 | 60 | 59 | 42 | 17 | 31/60 (51.7%) |
+| G4 | 60 | 51 | 31 | 20 | 20/60 (33.3%) |
+| H1 | 141 | 140 | 107 | 33 | 75/141 (53.2%) |
+| H2 | 115 | 111 | 92 | 19 | 66/115 (57.4%) |
+| H3 | 123 | 138 | 100 | 38 | 69/123 (56.1%) |
+| H4 | 61 | 60 | 42 | 18 | 31/61 (50.8%) |
 | J1 | 126 | 134 | 75 | 59 | 53/126 (42.1%) |
 | J2 | 107 | 109 | 70 | 39 | 51/107 (47.7%) |
 | J3 | 121 | 127 | 77 | 50 | 54/121 (44.6%) |
@@ -208,24 +205,20 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.PoincareDuality.Poincare | 0 | 1 | G3 |
 | WeilConjectures.SmoothPurity.Defs | 0 | 1 | G1 |
-| WeilConjectures.PoincareDuality.Verdier | 1 | 1 | D2 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek | 1 | 3 | C1 |
-| WeilConjectures.PoincareDuality.ProjectionFormula | 2 | 5 | A4 |
+| WeilConjectures.PoincareDuality.ProjectionFormula | 2 | 5 | XRc39ef8e606392165 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 3 | B2 |
-| WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory | 3 | 1 | C4 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic | 3 | 7 | C2 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal | 3 | 5 | A3 |
-| Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono | 4 | 1 | C3 |
-| Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeSection | 4 | 1 | E4 |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence | 4 | 3 | — |
 | Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal | 5 | 1 | XR291a8355654e3127 |
-| WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal | 5 | 2 | D3 |
-| Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 1 | E3 |
-| Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine | 8 | 1 | B2 |
-| Sheaf.AlgebraicGeometry.SupportDimensionUnion | 9 | 1 | F2 |
-| Sheaf.AlgebraicGeometry.Sites.PolynomialGenericStrictLocalizationField | 10 | 1 | G2 |
-| Sheaf.EtaleCohomology.EtaleSectionZeroOpen | 10 | 1 | G4 |
 | Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence | 10 | 1 | XRaf46747ed5a82c85 |
+| Sheaf.Paper.IntegralResidueTensorRouteModel | 11 | 1 | XRccf6c7bd0b0fb2f2 |
+| Sheaf.Paper.IntegralResidueTensorPullCounitModel | 13 | 1 | B4 |
+| WeilConjectures.SixFunctors.Etale.Derived.UpperShriek | 14 | 1 | XRdbb7091a3d1839f4 |
+| Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison | 15 | 1 | XR35ddb455bbc41f35 |
+| Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized | 15 | 1 | A2 |
+| Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation | 30 | 1 | XRb396add65317f377 |
+| Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | XR3a255efb8dcd202c |
 
 Modules pruned since the imports baseline:
 
@@ -487,6 +480,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence`
 - `Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer`
 - `Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection`
+- `Sheaf.AlgebraicGeometry.GeometricStalkColimits`
 - `Sheaf.AlgebraicGeometry.GlobalGenerationNonvanishingCover`
 - `Sheaf.AlgebraicGeometry.GlobalHomPullbackAdjunction`
 - `Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact`
@@ -629,6 +623,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.TensorGeneratingSections`
 - `Sheaf.AlgebraicGeometry.TensorGloballyGenerated`
 - `Sheaf.AlgebraicGeometry.TensorSectionAffineOpen`
+- `Sheaf.AlgebraicGeometry.TorsionFilteredUnion`
 - `Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening`
 - `Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists`
 - `Sheaf.AlgebraicGeometry.UniversalThickeningAffineCase`
@@ -689,6 +684,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.ExistsDirectedReindexing`
 - `Sheaf.CategoryTheory.FilteredColimitCategories`
 - `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence`
+- `Sheaf.CategoryTheory.FilteredPageTwoModel`
 - `Sheaf.CategoryTheory.FiniteContinuousModule`
 - `Sheaf.CategoryTheory.FirstQuadrantRowCollapse`
 - `Sheaf.CategoryTheory.Galois.AbstractEquivalence`
@@ -704,6 +700,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveDegreewiseExistence`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.ObjectsSmall`
 - `Sheaf.CategoryTheory.GrothendieckSSDoubleComplexModel`
+- `Sheaf.CategoryTheory.GrothendieckSpectralSequence`
 - `Sheaf.CategoryTheory.HalfPlaneConvergence`
 - `Sheaf.CategoryTheory.HalfPlaneGradedCanonical`
 - `Sheaf.CategoryTheory.HomotopyHomExactOfInjective`
