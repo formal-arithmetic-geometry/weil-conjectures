@@ -438,5 +438,31 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-e40a14b3b (reviewer sub-agent of L); spot-checked: I read the item, its 16 steps and the full statements of all 14 cited nodes. Sources: HTT 3.1.1.6, 2.4.1.5, 2.4.6.5, 3.1.3.1/3.1.3.6 and 2.4.2.3. HTT is not archived, so this is checked from my own reading of these results; the WANTED line is recorded and proof_origin is 'agent'. The statement keeps HTT's hypotheses, with an arbitrary base S and quasicategories required only for the Joyal clause. Every step uses only what its cited node states. Checks: (1) the triangle rule (step 2) follows from the cocartesian composition clause by passing to the opposite; (2) in the local-to-global argument (steps 3-4), the comparison triangle lies over s0α = β(n-1,n-1,n), and the fibre equivalence g is obtained by pulling back to the vertex 0 of Δ^1; (3) family (iv) is treated over an arbitrary base K→S; (4) all fully marked positive horns were checked, including (2,1), (2,2) and (1,1), with cases n≥3 handled by pushouts; (5) the relative mapping object H, and its fully marked part, match Map^♭_S and Map^♯_S, and point recognition is applied to H; (6) the right-fibration-over-Kan-base hypotheses hold in step 12; (7) the inverse-triangle argument of steps 14-15 is correct. Edge cases tested: empty S, S a point, empty Z, empty U, a non-quasicategory base Λ^2_0, n=1 horns, n=0 boundary. Mechanical checks: proof_deps equals the union of the step uses, no cycle, no missing or merged citations. Not a duplicate: lem-coef-infinity-marked-cocartesian-lifting is the opposite variance over a quasicategory base only. No new nodes, not a Mathlib leaf, and the item does not restate a clause of its parent. I accept the four declared tool uses from unit sk-prop-sf-cbc (equivalence outer-horn filling, relative equivalence outer-horn lift, the core of a quasicategory is Kan, right fibration over a Kan base) as generic black-box tools. No fixes were made. The source.place still mentions an old sandbox PDF; the field is protected and this does not affect the mathematics."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RelativeMarkedAnodyneCalculus",
+  "declaration": "SSet.Marked.Over.relative_marked_anodyne_calculus",
+  "declarations": [
+   "SSet.Marked.cartesianNatural",
+   "SSet.Marked.cartesianNaturalOver",
+   "SSet.Marked.Over.mapSharpToFlat",
+   "SSet.Marked.Over.relative_marked_anodyne_calculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RelativeMarkedAnodyneCalculus.lean",
+  "statement": "theorem relative_marked_anodyne_calculus (S : SSet.{u}) : (∀ (Z : SSet.{u}) (q : Z ⟶ S), relativeFibration false q → IsNaturallyFibrant false (cartesianNaturalOver q)) ∧ (∀ V : Over S, markedAnodyne.rlp V.hom ↔ IsNaturallyFibrant false V) ∧ (∀ U Z : Over S, IsNaturallyFibrant false Z → Quasicategory (mapFlat U Z) ∧ KanComplex (mapSharp U Z) ∧ ∀ n : SimplexCategoryᵒᵖ, Function.Injective ((mapSharpToFlat U Z).app n) ∧ ∀ t : (mapFlat U Z).obj n, t ∈ (Enhanced.core (mapFlat U Z)).obj n ↔ ∃ s : (mapSharp U Z).obj n, (mapSharpToFlat U Z).app n s = t) ∧ (∀ {U V : Over S} (j : U ⟶ V) (Z : Over S), IsNaturallyFibrant false Z → Marked.cof j.left → SSet.modelCategoryQuillen.J.rlp (mapSharpPre j Z) ∧ (markedAnodyne j.left → SSet.modelCategoryQuillen.I.rlp (mapSharpPre j Z))) ∧ (∀ (T : SSet.{u}) (a : T ⟶ S) (Z : Over S), IsNaturallyFibrant false Z → IsNaturallyFibrant false (pullObject a Z) ∧ ∀ e : Δ[1] ⟶ pullback a Z.hom.val, Enhanced.IsCartesianEdge (pullback.fst a Z.hom.val) e ↔ Enhanced.IsCartesianEdge Z.hom.val (e ≫ pullback.snd a Z.hom.val)) ∧ (∀ Z : Over S, IsNaturallyFibrant false Z → Quasicategory S → Quasicategory Z.left.underlying ∧ ∀ (M : HomotopicalAlgebra.ModelCategory SSet.{u}), (∀ {A B : SSet.{u}} (i : A ⟶ B), M.categoryWithCofibrations.cofibrations i ↔ ∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) → (∀ {A B : SSet.{u}} (i : A ⟶ B), M.categoryWithWeakEquivalences.weakEquivalences i ↔ ∀ (C : SSet.{max u v}), Quasicategory C → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map i)).app C)).toFunctor).IsEquivalence) → M.categoryWithFibrations.fibrations Z.hom.val)",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses the existing slice, relative mapping objects, arbitrary-base horn predicate and marked pullback exported by MarkedRelativeCartesianModel; no relative marked model structure is assumed. The additional helpers construct the natural marking and canonical sharp-to-flat relative inclusion.",
+  "fixed_by": "NT-stage2-cc-8c9d4e15a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c9d4e15a",
+  "group": "Q122",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node, HTT 3.1.1.6/3.1.1.10/3.1.3.1/3.1.3.6/2.4.2.3/2.4.1.5/2.4.6.5 and the dependency declarations (relativeFibration, IsCartesianEdge, IsNaturallyFibrant, mapFlat/mapSharp/mapSharpPre, pullObject, Enhanced.core, markedAnodyne, exists_joyal_model_structure normalization verbatim incl. universes). All clauses match exactly: arbitrary base, natural marking with the degeneracy claim, two-way lifting criterion, flat quasicategory with sharp=core via the canonical injection, restriction J.rlp/I.rlp, base-change preservation and reflection, Joyal fibration over a quasicategory base. Edge cases OK; no hollow defs; one sorry; docstrings complete; no duplicates; only the lean field changed; downstream-module import accepted under the rule-7 cycle exception. Finding (H9/rule 7): the stated proof dependency lem-coef-homotopy-category-triangle-calculus (module Sheaf.AlgebraicTopology.HomotopyCategoryTriangleCalculus on the base) was not imported, and the report wrongly said it had no module. fixes/ has the complete module with the added import (signature unchanged) and the corrected report; nt_compile is clean for both the delivered and the fixed module."
  }
 }

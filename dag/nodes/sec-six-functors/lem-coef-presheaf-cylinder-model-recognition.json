@@ -335,5 +335,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PresheafCylinderModelRecognition",
+  "declaration": "CategoryTheory.Presheaf.cylinder_model_recognition",
+  "declarations": [
+   "CategoryTheory.Presheaf.intervalHomotopy",
+   "CategoryTheory.Presheaf.intervalWeakEquivalences",
+   "CategoryTheory.Presheaf.cylinder_model_recognition"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/PresheafCylinderModelRecognition.lean",
+  "statement": "theorem cylinder_model_recognition {A : Type u} [Category.{u} A] (I : Aᵒᵖ ⥤ Type u) (e₀ e₁ : ⊤_ (Aᵒᵖ ⥤ Type u) ⟶ I) (hδ : Mono (coprod.desc e₀ e₁)) (An G : MorphismProperty (Aᵒᵖ ⥤ Type u)) [MorphismProperty.IsSmall.{u} G] (hGMono : G ≤ MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u)) (hAnGen : G ≤ An) (hAnIso : MorphismProperty.isomorphisms (Aᵒᵖ ⥤ Type u) ≤ An) [An.IsStableUnderCobaseChange] [An.IsStableUnderTransfiniteComposition.{u}] [An.IsStableUnderRetracts] (hAnLeast : ∀ Q : MorphismProperty (Aᵒᵖ ⥤ Type u), G ≤ Q → MorphismProperty.isomorphisms (Aᵒᵖ ⥤ Type u) ≤ Q → Q.IsStableUnderCobaseChange → Q.IsStableUnderTransfiniteComposition.{u} → Q.IsStableUnderRetracts → An ≤ Q) (hEndpoint : ∀ {K L : Aᵒᵖ ⥤ Type u} (j : K ⟶ L), Mono j → An (Functor.PushoutObjObj.ofHasPushout Limits.prod.functor e₀ j).ι ∧ An (Functor.PushoutObjObj.ofHasPushout Limits.prod.functor e₁ j).ι) (hInterval : ∀ {K L : Aᵒᵖ ⥤ Type u} (i : K ⟶ L), An i → An (Functor.PushoutObjObj.ofHasPushout Limits.prod.functor (coprod.desc e₀ e₁) i).ι) : ∃ W : MorphismProperty (Aᵒᵖ ⥤ Type u), W = intervalWeakEquivalences e₀ e₁ An ∧ MorphismProperty.isomorphisms (Aᵒᵖ ⥤ Type u) ≤ W ∧ W.HasTwoOutOfThreeProperty ∧ W.IsStableUnderRetracts ∧ An ≤ MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W ∧ ∃ M : HomotopicalAlgebra.ModelCategory (Aᵒᵖ ⥤ Type u), M.categoryWithCofibrations.cofibrations = MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ∧ M.categoryWithWeakEquivalences.weakEquivalences = W ∧ M.categoryWithFibrations.fibrations = (MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W).rlp ∧ MorphismProperty.IsWeakFactorizationSystem (MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u)) ((MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W).rlp ⊓ W) ∧ MorphismProperty.IsWeakFactorizationSystem (MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W) (MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W).rlp ∧ MorphismProperty.HasFunctorialFactorization (MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u)) ((MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W).rlp ⊓ W) ∧ MorphismProperty.HasFunctorialFactorization (MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W) (MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W).rlp ∧ (∀ Z : Aᵒᵖ ⥤ Type u, M.categoryWithFibrations.fibrations (terminalIsTerminal.from Z) ↔ An.rlp (terminalIsTerminal.from Z)) ∧ (∃ G₁ : MorphismProperty (Aᵒᵖ ⥤ Type u), MorphismProperty.IsSmall.{u} G₁ ∧ G₁.rlp = ((MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W).rlp ⊓ W)) ∧ (∃ G₂ : MorphismProperty (Aᵒᵖ ⥤ Type u), MorphismProperty.IsSmall.{u} G₂ ∧ G₂.rlp = (MorphismProperty.monomorphisms (Aᵒᵖ ⥤ Type u) ⊓ W).rlp)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two helper predicates define the homotopy relation and weak-equivalence class explicitly specified in this node; Mathlib supplies the existing product pushout-product construction. All generator sets and transfinite indices use the input universe u."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49fede36e",
+  "group": "NN",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: δ monic; Mathlib pushout product matches i□j; An pinned down as exactly the closure of a small set of monos (hAnLeast); both pushout-product hypotheses present; homotopy is the generated equivalence relation; weak-equivalence test is a well-defined bijection; all model, factorization, fibrant-object, anodyne and small-generator conclusions present. Single universe u, no extra assumptions, no unbound variables. Real helper definitions, sorry only in the item theorem, source/blueprint docstrings with all 13 proof steps, statement field verbatim, only the lean field changed, report has both required sections. nt_compile.py on the local overlay compiled the item in 1.0 s with no diagnostics. No findings."
  }
 }
