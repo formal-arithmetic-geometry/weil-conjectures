@@ -31,9 +31,151 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the colimit calculus used throughout. For downward-closed $E,F\\subseteq T$, the square $Y_{E\\cap F}\\to Y_E$, $Y_F\\to Y_{E\\cup F}$ is a pushout: a map from its proposed apex is exactly a pair of cocones under $X$ on $E,F$ agreeing on their overlap. The assertion holds when any subset is empty, with $Y_\\varnothing=X$. A union of an increasing chain of downward-closed subsets has colimit the colimit of their $Y$-objects, by the same cocone test. For $E\\subseteq F$, define, for $t\\in F\\setminus E$, $Z_t=Y_{E\\cup\\{s\\in F:s\\le t\\}}$. Its predecessor colimit under $Y_E$ is $Y_{E\\cup\\{s:s<t\\}}$, since all $s<t$ lie in $F$. The union pushout square identifies its map to $Z_t$ as a pushout of the original cell $P_t\\to Q_t$. Its total colimit is $Y_F$. This constructs the required relative tree with inherited order and the same cells, and preserves goodness because its predecessor sets are subsets of the original ones.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.1.5.2 and Remarks A.1.5.3, A.1.5.5; reconstructed argument, online source not archived"
+   }
+  },
+  {
+   "text": "For an arbitrary $L$-tree, well-order its small indexing set and recursively select the first minimal element of the remaining poset. Each earlier set is downward-closed. This procedure exhausts the set at a small ordinal: otherwise its distinct selections would inject an ordinal of cardinality greater than the set into the set. Write $E_\\alpha$ for the selected initial sets, with unions at limits. The successor $Y_{E_\\alpha}\\to Y_{E_{\\alpha+1}}$ is the pushout of the cell at the selected element: first use its defining square and then the union pushout of Step 1. The chain is continuous by Step 1, so its map from $X$ to $Y_T$ belongs to the weakly saturated closure of $L$. Apply this argument to the relative tree of Step 1 to obtain the transition clause for all $E\\subseteq F$. An empty tree gives the identity, which is in that closure.",
+   "uses": [
+    "lem-weil-pbc-well-ordering-theorem",
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.1.5.6, with the minimal-element enumeration made explicit; reconstructed argument, online source not archived"
+   }
+  },
+  {
+   "text": "We will use the following thinning construction, proved here for any tree with $\\tau$-presentable cells. Process its elements in the minimal-element enumeration of Step 2. Maintain a weaker partial order $\\preceq$ (so $s\\preceq t$ implies $s\\le t$), a good tree on the processed elements, and comparison maps to the old objects inducing an isomorphism of colimits on every old downward-closed subset. At limits take unions of the constructed orders and diagrams; their comparison remains an isomorphism by the cocone criterion. At a new element $t$, its old predecessor subset $B$ has already been processed. In the new order, the downward-closed subsets $D\\subseteq B$ of size less than $\\tau$ form a small $\\tau$-filtered poset: the downward closure of fewer than $\\tau$ elements still has size less than $\\tau$, by regularity and the inductively small predecessor sets, and a union of fewer than $\\tau$ such subsets is an upper bound. Their $Y'_D$ have colimit $Y'_B$, since compatible cocones on all these subsets are exactly cocones on $B$. Filtered colimits under $X$ have the same underlying colimit in $\\mathcal A$: the nonempty filtered indexing category makes all its maps from $X$ agree. Presentability of $P_t$ and the elementwise filtered-colimit statement therefore factor $P_t\\to Y_B\\cong Y'_B$ through some $Y'_D$. Give $t$ precisely the elements of $D$ as strict predecessors and set $Y'_t=Y'_D\\amalg_{P_t}Q_t$. The resulting map $Y'_t\\to Y_t$ comes from the old square. If an old downward-closed subset contains $t$, its new colimit is its earlier new colimit pushed out along $P_t\\to Q_t$: this follows from the defining pushout and its cocone maps. Induction thus identifies it with the old colimit. All predecessor sets stay small, the new order is well-founded as a subrelation of the old order, and the final colimit under $X$ is unchanged. This proves thinning, including for the empty tree, without treating it as a black-box existence lemma.",
+   "uses": [
+    "lem-weil-pbc-well-ordering-theorem",
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.1.5.7, construction and comparison invariant; reconstructed argument, online source not archived"
+   }
+  },
+  {
+   "text": "We also need compact-root descent for a tree with fewer than $\\tau$ cells; we prove it here rather than cite a node depending on the present item. Write its root $V$ as a small $\\tau$-filtered colimit of $\\tau$-presentable $V_i$, and use the filtered-poset reindexing lemma to make the index a small $\\tau$-filtered poset $I$. Enumerate the cells as in Step 2 with length $\\mu<\\tau$. Inductively choose increasing indices $i_\\alpha$ for $\\alpha\\le\\mu$ and a tree on the processed cells over $V_{i_\\alpha}$ whose pushout to $V$ is the original processed tree. When the root index increases, push out the whole processed tree, preserving its squares by their universal properties. At zero and at a limit choose an upper bound of the fewer than $\\tau$ indices used earlier; push out the compatible earlier trees to that root and take their union. At a successor cell $t$ with predecessor set $B$, the existing compact-root predecessor object $N_B$ satisfies\n$$Y_B\\cong N_B\\amalg_{V_{i_\\alpha}}V\\cong\\operatorname{colim}_{j\\ge i_\\alpha}(N_B\\amalg_{V_{i_\\alpha}}V_j).$$\nThe latter identification is the colimit universal property; the tail $j\\ge i_\\alpha$ is $\\tau$-filtered and cofinal, since every index has an upper bound with $i_\\alpha$. Presentability of $P_t$ factors its attaching map through one of these stages. Take that stage as $i_{\\alpha+1}$ and attach the same $P_t\\to Q_t$. At the final index $i_\\mu$ this gives the entire descended tree. Its root $M=V_{i_\\mu}$ and total object $N$ are $\\tau$-presentable: by induction each predecessor colimit and each pushout is a colimit of fewer than $\\tau$ morphisms of presentable objects, and the total tree diagram also has fewer than $\\tau$ morphisms. Use the small-colimit presentability lemma at each occurrence. For these colimits in the undercategory, adjoin its presentable root $M$ and the structural maps to the diagram and compute the augmented colimit in $\\mathcal A$; this includes the empty-predecessor case. The bound on morphisms follows from $|T|<\\tau$ and regularity, with finite diagrams for pushouts. The original total map is the pushout of $h:M\\to N$, and Step 2 puts $h$ in the weakly saturated closure of the cells. This construction does not suppose that $V$ is presentable.",
+   "uses": [
+    "lem-coef-cardinal-filtered-poset-reindex",
+    "lem-weil-pbc-well-ordering-theorem",
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.1.5.11; explicit compact-root descent for use below; reconstructed argument, online source not archived"
+   }
+  },
+  {
+   "text": "Choose the small subset $I\\subseteq K$ whose weak saturation is $C$, and put $R=I^{\\square}$. The left lifting class ${}^{\\square}R$ contains $I$ and all isomorphisms (use the inverse for a filler). Its pushout and retract closure follow from the lifting-class lemma and its transfinite closure from the transfinite lifting lemma. Hence $C\\subseteq{}^{\\square}R$. Apply the cellular small-object factorization to $f:X\\to Y$, obtaining $X\\xrightarrow{j}V\\xrightarrow{p}Y$ with $p\\in R$ and $j$ a small continuous composite of pushouts of small coproducts of members of $I$. The square with sides $f,p$ and horizontal maps $j,1_Y$ has a lift $s:Y\\to V$ with $sf=j$ and $ps=1_Y$. Thus $Y$ is a retract of $V$ under $X$. To obtain an ordinary $I$-tree for $j$, well-order the cells of each coproduct and attach them one at a time; a cocone on these successive pushouts is precisely a map from the old object together with maps from all the target summands agreeing on their source summands, which is the original coproduct pushout. At limits the same cocone test identifies colimits. Lexicographically concatenating these small well-orders gives a small well-ordered $I$-tree with total $V$.",
+   "uses": [
+    "lem-coef-presentable-cellular-factorization",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting",
+    "lem-weil-pbc-well-ordering-theorem",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.1.2.8 and the beginning of the proof of Proposition A.1.5.12; reconstructed argument, online source not archived"
+   }
+  },
+  {
+   "text": "Thin the tree of Step 5 by Step 3. Its cells lie in $I\\subseteq K$, so their endpoints are $\\tau$-presentable. Denote the resulting good tree by $(Y_t)_{t\\in T}$ with root $X$, and identify $Y_T$ with $V$. The endomorphism $e_T=sp$ of $Y_T$ is idempotent under $X$ and its specified retract image is $Y$. We will resolve this idempotent along small blocks rather than claim that a retract of a good tree is automatically a good tree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.5.12, after applying Lemma A.1.5.7; reconstructed argument, online source not archived"
+   }
+  },
+  {
+   "text": "An idempotent $e:A\\to A$ splits using a coequalizer $q:A\\to Z$ of $e,1_A$: since $e$ equalizes them, there is a unique $j:Z\\to A$ with $jq=e$, and $qj=1_Z$ follows after precomposition with the epimorphism $q$. If $u:A\\to A'$ commutes with idempotents, its induced image map is $q'uj$, and these maps preserve identities and composition. Thus a compatible diagram of idempotents has an image diagram and is a retract of the original diagram. Colimits commute with these images: a map out of an image is a map $v$ out of the original object with $ve=v$, and the colimit universal property identifies such maps with compatible families having that equality. This also works under $X$ when the idempotents fix its structural maps, with image of $1_X$ equal to $X$. Further, compatible endomorphisms on $Y_E,Y_F$ agreeing on $Y_{E\\cap F}$ amalgamate uniquely to an endomorphism on $Y_{E\\cup F}$ by Step 1; if they are idempotents, the amalgamation is idempotent by uniqueness.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Image and amalgamation operations implicit in Proposition A.1.5.12, written from colimit universal properties; reconstructed argument, online source not archived"
+   }
+  },
+  {
+   "text": "Construct a continuous increasing exhaustion $B_\\alpha$ of $T$ and idempotents $e_\\alpha$ on $Y_{B_\\alpha}$ compatible with one another and with $e_T$. Set $B_0=\\varnothing$ and $e_0=1_X$. At a limit take the union and colimit idempotent, using Step 1. If $B_\\alpha\\ne T$, choose a minimal $t\\in T\\setminus B_\\alpha$ and apply the compatible-idempotent enlargement lemma to $B=B_\\alpha$ and $E_0=\\{t\\}$. It gives a downward-closed $D_\\alpha$ of size less than $\\tau$ with idempotents on $Y_{D_\\alpha}$ and $Y_{B_\\alpha\\cap D_\\alpha}$, compatible with $e_\\alpha$ and $e_T$. Set $B_{\\alpha+1}=B_\\alpha\\cup D_\\alpha$ and amalgamate its idempotent by Step 7. The three commutation equalities in that lemma give exactly the two restrictions required for the amalgamation and its compatibility with $e_T$. Each successor adds the selected new element; the recursion therefore terminates at a small ordinal $\\theta$ with $B_\\theta=T$, by the distinct-element bound of Step 2. Compatibility with $e_T$ then implies $e_\\theta=e_T$.",
+   "uses": [
+    "lem-coef-good-tree-idempotent-enlargement",
+    "lem-weil-pbc-well-ordering-theorem",
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.5.12, compatible small-block exhaustion using Lemma A.1.5.9; reconstructed argument, online source not archived"
+   }
+  },
+  {
+   "text": "Fix $\\alpha<\\theta$, write $B=B_\\alpha$, $D=D_\\alpha$, and $H=B\\cap D$. By Step 1 the relative map $Y_H\\to Y_D$ is a tree on $D\\setminus B$, with fewer than $\\tau$ cells, all in $K$. Step 4 supplies a pushout presentation by a map $h:M\\to N$ with presentable endpoints and $h\\in\\operatorname{wsat}(K)\\subseteq C$. The union square of Step 1 exhibits $Y_B\\to Y_{B\\cup D}$ as its further pushout, hence as a pushout of $h$. Splitting the compatible idempotents as in Step 7 gives an image arrow $Z_\\alpha\\to Z_{\\alpha+1}$ which is an arrow retract of this map. Apply compact pushout retract descent to $u=h$. It produces a map $k_\\alpha:M_\\alpha\\to N_\\alpha$ with presentable endpoints whose pushout is $Z_\\alpha\\to Z_{\\alpha+1}$ and with $k_\\alpha\\in\\operatorname{wsat}(\\{h\\})\\subseteq C$. Consequently $k_\\alpha\\in K$. Here $\\operatorname{wsat}(K)\\subseteq C$ and $\\operatorname{wsat}(\\{h\\})\\subseteq C$ follow directly from $K\\subseteq C$, $h\\in C$, and weak saturation of $C$; they do not require an assumption on the root or on the image objects.",
+   "uses": [
+    "lem-coef-compact-pushout-retract-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.5.12, successor maps; Lemmas A.1.5.10-11; reconstructed argument, online source not archived"
+   }
+  },
+  {
+   "text": "Choose $Z_\\alpha$ functorially as the images in Step 7. Their diagram starts at $Z_0=X$ and is continuous, because $Y_{B_\\alpha}$ and the idempotents are continuous at limits and Step 7 identifies the colimit of the images with the image of the colimit. Its final object $Z_\\theta$ is isomorphic to the given retract $Y$ under $X$: if $q:V\\to Z_\\theta$, $j:Z_\\theta\\to V$ split $sp$, the maps $qs:Y\\to Z_\\theta$ and $pj:Z_\\theta\\to Y$ are inverse, using $ps=1$, $jq=sp$ and $qj=1$. Each successor is a pushout of $k_\\alpha\\in K$ by Step 9. The well-ordered tree with cells indexed by $\\alpha<\\theta$, object $Z_{\\alpha+1}$ at $\\alpha$, and root $X$ has predecessor colimit $Z_\\alpha$ and total $Y$. Thin it by Step 3 to obtain a $\\tau$-good $K$-tree. When $\\theta=0$ take the empty tree. Steps 1-2 already prove both the relative-good-tree and weak-saturation transition clauses, completing every assertion.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.1.5.13 and conclusion of Proposition A.1.5.12; reconstructed argument, online source not archived"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-well-ordering-theorem",
+  "lem-weil-pbc-transfinite-recursion",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-coef-cardinal-filtered-poset-reindex",
+  "lem-coef-ordinary-small-colimit-presentable",
+  "lem-coef-presentable-cellular-factorization",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-transfinite-left-lifting",
+  "lem-coef-good-tree-idempotent-enlargement",
+  "lem-coef-compact-pushout-retract-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Reconstruction of HTT A.1.5.5-7 and A.1.5.11-13; auxiliary statements A.1.5.9-10; source read online but not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +211,45 @@
    "results": "{\"t\": \"2026-10-16T21:50:49Z\", \"tool\": \"grep\", \"query\": \"tree|good|retract\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"digest\": \"a18341b039382ece\"}",
    "date": "2026-10-17",
    "verdict": "no match: read RelativeCellComplex/Basic.lean:40-130 and SmallObject/IsCardinalForSmallObjectArgument.lean:477-505. These give linear cellular data or a retract of a cell complex, not the good-tree presentation without an extra retract, nor relative good trees. Loogle gives transfinite-closure interfaces only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Good well founded cellular tree presentation of a weakly saturated class generated by compact morphisms",
+   "results": "{\"t\": \"2026-10-16T23:01:52Z\", \"tool\": \"leanfinder\", \"query\": \"Good well founded cellular tree presentation of a weakly saturated class generated by compact morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.hj\", \"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.j\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.i\"], \"digest\": \"c4915ee9073099ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:40-125 supplies linear cellular data, not a good-poset thinning or elimination of retracts. SmallObject factorization is reused via an existing node; the full statement is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Thin a cellular transfinite composition to a good partially ordered diagram with small predecessor sets",
+   "results": "{\"t\": \"2026-10-16T23:01:53Z\", \"tool\": \"leanfinder\", \"query\": \"Thin a cellular transfinite composition to a good partially ordered diagram with small predecessor sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex.toTransfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape_toTransfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex\", \"CategoryTheory.MorphismProperty.TransfiniteCompositionOfShape.ici\", \"CategoryTheory.TransfiniteCompositionOfShape.ici\", \"CategoryTheory.MorphismProperty.TransfiniteCompositionOfShape.iic\"], \"digest\": \"deb443f72f685587\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:40-125 supplies linear cellular data, not a good-poset thinning or elimination of retracts. SmallObject factorization is reused via an existing node; the full statement is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.RelativeCellComplex",
+   "results": "{\"t\": \"2026-10-16T23:01:53Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.RelativeCellComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex.toTransfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.j\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.i\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.hj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\"], \"digest\": \"891c981f45c91f34\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:40-125 supplies linear cellular data, not a good-poset thinning or elimination of retracts. SmallObject factorization is reused via an existing node; the full statement is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "goodTree|good_tree|weakly saturated|RelativeCellComplex",
+   "results": "{\"t\": \"2026-10-16T23:01:54Z\", \"tool\": \"grep\", \"query\": \"goodTree|good_tree|weakly saturated|RelativeCellComplex\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"digest\": \"14bc3e594b02cbb5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:40-125 supplies linear cellular data, not a good-poset thinning or elimination of retracts. SmallObject factorization is reused via an existing node; the full statement is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms in weak saturation of compact arrows have good cellular tree presentations",
+   "results": "{\"t\": \"2026-10-16T23:01:54Z\", \"tool\": \"leansearch\", \"query\": \"Morphisms in weak saturation of compact arrows have good cellular tree presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.propArrow\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.recOn\", \"HomotopicalAlgebra.AttachCells.cell\", \"CategoryTheory.MorphismProperty.TransfiniteCompositionOfShape.ofMem\", \"CategoryTheory.MorphismProperty.transfiniteCompositions_le\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.mk\", \"CategoryTheory.Precoverage.Saturate.casesOn\"], \"digest\": \"7bbc78e2f0a53992\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex/Basic.lean:40-125 supplies linear cellular data, not a good-poset thinning or elimination of retracts. SmallObject factorization is reused via an existing node; the full statement is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-intersection-generators",
@@ -80,5 +257,21 @@
   "group": "Q119"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-weak-saturation-tree-presentation",
+  "worker": "stage1",
+  "summary": "Preserved the statement, including the canonical pushout leg. Proved relative trees, transition saturation, good thinning, and compact-root descent in explicit steps. Used existing cellular small-object and presentability tools; created only compatible-idempotent enlargement and compact pushout retract descent. Avoided the backwards definition-dependency cycle through the existing small-tree descent node. HTT is read online but not archived, so proof_origin is agent.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction before the first derived-limit comparison: the present steps discharge the good-tree input to accessible-intersection generators below the marked-point model; no unit-level route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-62a3102f3",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-62a3102f3 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all nine cited statements, the unit and chapter records, and the three duplicate candidates (small-cellular-tree-descent, good-subset-enlargement, cellular-tree-presentable-approximations). The source, HTT A.1.5, is not in literature/ and I could not open it (no downloads). The report lists it as WANTED and proof_origin is agent. So I checked each step directly as mathematics. I compared the route with HTT A.1.5 only from memory: 6/7 transitions and thinning, 9/10 auxiliaries, 11 compact-root descent, 12/13 the theorem. Steps 1-10 hold. Step 1: under downward closure every cross relation lies in F, so the union square is a pushout; the relative tree's intersection is {s<t}. Step 3: thinning keeps its comparison invariant because S minus t is downward-closed in both orders. Step 4: compact-root descent pushes out along V to V_i and uses a cofinal tail; the root-augmented diagrams have fewer than tau morphisms. It proves small-cellular-tree-descent inline, because citing that node would close a cycle. Step 5: lifting gives sf=j and ps=1. Step 7: the coequalizer splitting gives qj=1 and the image-map calculations hold. Step 8: the three equations of the A.1.5.9 node are exactly what amalgamation needs. Step 9: the retract lemma gives k in wsat({h}), which lies in C, so k is in K. Step 10: pj and qs are inverse isomorphisms under X. New nodes: both are self-contained statement-only nodes, true by my own proof sketches (uncountable tau allows countably many enlargements), and tested on small cases (B empty, B=T, u=id, empty set to a point in Set). Neither is a duplicate or a restated clause of the item. Each has the ancestor prop-coef-integral-exceptional-adjoint with the via list headed by the item, same_as [], and three kinds of Mathlib search. The dependency closure has no cycle and no missing id. Every cited statement is in unit sk-prop-sf-biduality-general or is a Mathlib leaf, so no tool_uses are needed and none are accepted. The statement is unchanged and nothing was weakened. No fixes."
+ }
 }

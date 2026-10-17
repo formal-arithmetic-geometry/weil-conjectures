@@ -29,9 +29,131 @@
   "lem-coef-operadic-algebra-presentability",
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All indices $\\phi:[m]\\to[n]$ in the displayed coproducts are order-preserving maps in $\\Delta$; their opposites are the projected arrows. In $P^\\otimes$, compose operations $(p_j)$ over $\\phi$ with $(q_k)$ over $\\psi:[\\ell]\\to[m]$ by substituting $p_{\\psi(k-1)+1},\\ldots,p_{\\psi(k)}$ into $q_k$. The resulting input block runs from $\\phi\\psi(k-1)+1$ through $\\phi\\psi(k)$, exactly the block for $\\phi\\psi$. Each zero-arity entry is the nullary operation carried by the morphism being composed; if its operation space is empty, no morphism requiring that entry exists. No additional nullary operation is chosen. Unary units give identities, and associativity is substitution associativity, with unused end blocks discarded by projections. In $D(C)$ the corresponding composite has $k$th component $g_k\\circ f_{\\psi(k)}$ and base map $\\phi\\psi$. The unit and associativity equations are those of $C$, coordinate by coordinate. Thus these formulas really define small simplicial categories and simplicial projection functors to the discrete simplicial category $\\Delta^{\\mathrm{op}}$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.6–3.1.7 and 4.2.2; composition and empty input blocks."
+   }
+  },
+  {
+   "text": "A finite product of Kan complexes is Kan by filling each coordinate of a horn; the empty product is a point. A coproduct of Kan complexes is Kan: every horn of positive dimension is nonempty and connected, so its map lands in one summand, where it can be filled. This includes empty mapping complexes, which have no horn maps. Consequently $P^\\otimes$ and $D(C)$ are locally Kan. The coherent-nerve comparison makes their nerves quasicategories, identifies their mapping spaces naturally with the displayed enriched mapping complexes, and identifies the nerve of the discrete base with its ordinary nerve $N(\\Delta^{\\mathrm{op}})$. Each projected nerve map is an inner fibration: fill an inner horn in its quasicategorical total space; its projected filler is the prescribed base simplex because an inner horn in an ordinary nerve has a unique filler. Indeed that filler is the chain of its successive arrows with all other arrows their composites; for a two-dimensional inner horn it is precisely composition. Thus the relative lifting requirement follows without an additional fibration assumption.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Lemma 3.1.8 and Proposition 4.2.3(1); local Kan condition and inner lifting over the ordinary nerve."
+   }
+  },
+  {
+   "text": "Let an inert arrow $[n]\\to[m]$ be opposite to $\\phi(j)=a+j$. For $c=(c_1,\\ldots,c_n)$ take $c'=(c_{a+1},\\ldots,c_{a+m})$ and the edge $e:c\\to c'$ whose $m$ unary operations are identities. For a test list $z$ of length $\\ell$ and $\\psi:[\\ell]\\to[m]$, composition with $e$ identifies the $\\psi$-summand of $P^\\otimes(c',z)$ with the $\\phi\\psi$-summand of $P^\\otimes(c,z)$: both are the product of operations on the blocks $c_{a+\\psi(k-1)+1},\\ldots,c_{a+\\psi(k)}$. Therefore the square of enriched mapping complexes over the discrete sets of base arrows is a strict pullback. It is a homotopy pullback as well: paths in a discrete simplicial set are constant, so its path-space pullback equals its ordinary pullback. The natural, composition-compatible mapping-space comparison identifies this square with the mapping-space square in the coherent nerve; homotopy pullback invariance preserves the property under these equivalences of Kan spaces. Apply the cocartesian mapping criterion to conclude that $e$ is cocartesian. When $m=0$, the lift itself has no operation components. For a test list $z=(z_1,\\ldots,z_\\ell)$, the unique map $\\psi:[\\ell]\\to[0]$ gives on both sides the product $\\prod_{k=1}^{\\ell}P(;z_k)$, since $\\phi\\psi$ is constant at $a$. This product can be empty and need not be a point; the identity between the two copies still gives the pullback. For $\\ell=0$ it is the empty product, a point. Thus the calculation also supplies the required lifts to $[0]$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Lemma 3.1.8, expanded nonsymmetric inert-lift argument; compare Proposition 4.2.3(1), mapping-square argument."
+   }
+  },
+  {
+   "text": "Let $U$ be the unary simplicial category of $P$. The strict enriched fiber of $P^\\otimes$ at $[n]$ is $U^n$: only $\\phi=\\mathrm{id}_{[n]}$ is retained, and every resulting operation is unary. For $n=0$ this fiber has one object and its identity mapping point. The coherent nerve commutes with these fibers and products directly from its definition: an enriched functor from $\\mathfrak C[\\Delta^r]$ into a fiber is exactly an enriched functor with constant projection, and one into $U^n$ is an $n$-tuple of functors into $U$. The inert edges constructed above therefore give the Segal identification $N_{\\mathrm{hc}}(P^\\otimes)_{[n]}=(N_{\\mathrm{hc}}U)^n$, and at $[1]$ give $N_{\\mathrm{hc}}U$. For a source list $c$, target list $d$ of length $m$, and base arrow opposite to $\\phi:[m]\\to[n]$, projection to each target coordinate identifies its mapping space over this arrow with $\\prod_{i=1}^m P(c_{\\phi(i-1)+1},\\ldots,c_{\\phi(i)};d_i)$. This is the required mapping-space Segal map, since the $i$th factor is the mapping space over the composite with the inert projection to $d_i$. The base mapping space is discrete, so this enriched summand represents its homotopy fiber. Along with the inner fibration and inert lifts already proved, these are all three operad conditions. No condition that nullary operation spaces be nonempty or contractible has been introduced.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.3 and 3.1.7, Lemma 3.1.8; operadic fiber and mapping-space Segal conditions."
+   }
+  },
+  {
+   "text": "For any $\\phi:[m]\\to[n]$ and $c=(c_0,\\ldots,c_n)$ in $D(C)$, put $\\phi_!c=(c_{\\phi(0)},\\ldots,c_{\\phi(m)})$ and let $e_\\phi:c\\to\\phi_!c$ have identity components. For a test string $z=(z_0,\\ldots,z_\\ell)$ and $\\psi:[\\ell]\\to[m]$, precomposition with $e_\\phi$ is the identity identification between $\\prod_{k=0}^\\ell C(c_{\\phi\\psi(k)},z_k)$ in the $\\psi$-summand out of $\\phi_!c$ and the same product in the $\\phi\\psi$-summand out of $c$. Explicitly, the pullback retains a pair consisting of $\\psi$ and a tuple in the $\\phi\\psi$-summand; its inverse sends that pair to the same tuple in the $\\psi$-summand. Distinct $\\psi$ with equal $\\phi\\psi$ remain distinct because the pair retains $\\psi$. Hence the mapping square is a strict pullback over discrete base mapping sets, and therefore a homotopy pullback by the constant-path calculation of step 3. Coherent-nerve mapping comparison and homotopy pullback invariance give the nerve mapping square; the cocartesian mapping criterion makes $e_\\phi$ cocartesian. Such an edge exists for every string and every outgoing base arrow, so this projection is a cocartesian fibration.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 4.2.2; Proposition 4.2.3(1), explicit mapping-square fibers."
+   }
+  },
+  {
+   "text": "The strict enriched fibre of $D(C)$ at $[n]$ is $C^{n+1}$, including $C$ at $[0]$, and the degreewise enriched-functor calculation of step 4 identifies its coherent nerve with $(N_{\\mathrm{hc}}C)^{n+1}$. Transport along $\\phi$ sends objects and all mapping simplices by $(c_j),(f_j)\\mapsto(c_{\\phi(i)}),(f_{\\phi(i)})$; the selected lifts satisfy $e_\\psi e_\\phi=e_{\\phi\\psi}$ and $e_{\\mathrm{id}}=\\mathrm{id}$. Let $i:\\{[0]\\}\\hookrightarrow\\Delta^{\\mathrm{op}}$ be the zeroth-simplex inclusion. The node [lem-coef-cocartesian-right-kan-extension-simplex-powers] supplies the right adjoint $i_*$ with $(i_*N_{\\mathrm{hc}}C)_{[n]}=(N_{\\mathrm{hc}}C)^{n+1}$, and its adjunction gives a canonical map $\\Theta_C:N_{\\mathrm{hc}}D(C)\\to i_*N_{\\mathrm{hc}}C=\\Delta^{\\mathrm{op}}_{N_{\\mathrm{hc}}C}$ over $N(\\Delta^{\\mathrm{op}})$, natural in $C$ and preserving cocartesian edges. Since the adjunction equivalence is restriction to the fibres over $[0]$, $(\\Theta_C)_{[0]}$ is the identity of $N_{\\mathrm{hc}}C$. Let $\\rho_j:[n]\\to[0]$ in $\\Delta^{\\mathrm{op}}$ be opposite to the vertex $j:[0]\\to[n]$. Because $\\Theta_C$ preserves cocartesian edges, it carries the selected lift $e_{\\rho_j}$ of step 5 to a cocartesian edge over $\\rho_j$; hence the $j$th coordinate of $(\\Theta_C)_{[n]}$, which by the right-Kan node is transport along $\\rho_j$ in $\\Delta^{\\mathrm{op}}_{N_{\\mathrm{hc}}C}$, is equivalent to $(\\Theta_C)_{[0]}$ composed with transport along $\\rho_j$ in $N_{\\mathrm{hc}}D(C)$, i.e. to the $j$th projection $(c_0,\\ldots,c_n)\\mapsto c_j$. Thus on the fibre at $[n]$, $\\Theta_C$ is equivalent to the map whose coordinates are the $n+1$ projections, i.e. to the identity of $(N_{\\mathrm{hc}}C)^{n+1}$, and is an equivalence (this is the commutative square with the Segal maps in the source proof of (iv)). Both $N_{\\mathrm{hc}}D(C)$ and $\\Delta^{\\mathrm{op}}_{N_{\\mathrm{hc}}C}$ are cocartesian fibrations over $N(\\Delta^{\\mathrm{op}})$, i.e. fibrant objects of the cocartesian model structure of [lem-coef-marked-relative-cartesian-model] with their cocartesian edges marked, and $\\Theta_C$ is a map between them; that node (opposite form) says such a map whose vertex-fibre maps are equivalences of quasicategories has a marked inverse over the base up to coherent natural equivalences over the base, so $\\Theta_C$ is a categorical equivalence of total quasicategories. Under [lem-coef-cocartesian-straightening], this proves that the classifying functor is the coherent diagram $[n]\\mapsto(N_{\\mathrm{hc}}C)^{n+1}$ with its projection and diagonal transports, including the higher coherences supplied by the adjunction.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cocartesian-right-kan-extension-simplex-powers",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 4.2.3(2)–(4), Remark 4.1.2, and the explicit i^*⊣i_* plus fibrewise criterion route in Proposition 4.2.3(3)–(4); the n-fold exponent in the source proof is corrected to n+1 by Definition 4.2.2."
+   }
+  },
+  {
+   "text": "Now suppose $\\pi_0C$ is a groupoid; this includes a locally Kan simplicial groupoid. The coherent-nerve comparison says $N_{\\mathrm{hc}}C$ is Kan. Every strict fiber identified in step 6 is consequently Kan. Any edge $h:c\\to d$ over $\\phi$ factors as $c\\xrightarrow{e_\\phi}\\phi_!c\\xrightarrow{v}d$, with $v$ over the identity and its components exactly the components of $h$. Substitution in $D(C)$ gives a two-simplex witnessing this factorization in its nerve. The edge $v$ is an equivalence: it lies in a Kan fiber, where outer two-horn fillers give its inverse and inverse triangles. It remains an equivalence in the total space. The relative outer-horn lifting theorem implies that an equivalence edge of an inner fibration is cocartesian, because it fills precisely the required initial horns. The cocartesian composition theorem, applied to the displayed two-simplex, now makes $h$ cocartesian. Thus every edge is cocartesian. All initial horns in dimensions at least two lift by their first edge's cocartesianness; dimension-one initial horns lift using the edges $e_\\phi$. Along with the inner horns this is exactly the left-fibration condition, including empty fibers.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 4.2.3 and Remark 4.1.2, groupoidal specialization; explicit horn argument for the left-fibration conclusion."
+   }
+  },
+  {
+   "text": "A simplicial multifunctor sends each operation in the first construction to its image, and a simplicial functor $C\\to C'$ sends every tuple and component morphism in the second construction to its image. Both commute strictly with substitution, composition, the projection to $\\Delta^{\\mathrm{op}}$, and the selected identity-component/string lifts. The map $\\Theta_C$ of step 6 is the adjoint map supplied by [lem-coef-cocartesian-right-kan-extension-simplex-powers]; its naturality in $C$ gives a commutative square with vertical maps $N_{\\mathrm{hc}}D(F)$ and $i_*N_{\\mathrm{hc}}F$. The square is strict on the zeroth fibre and on every coordinate mapping simplex, so it also records all face, degeneracy and composition coherences. The fibrewise criterion in [lem-coef-marked-relative-cartesian-model] (cocartesian form) applies to each horizontal comparison because these maps preserve cocartesian edges and are fibrewise equivalences by step 6; hence the natural comparison is an equivalence of total cocartesian fibrations, rather than merely an equality of isolated fibres. For the operator construction, the same argument applies to maps of multicategories and to inert cocartesian edges; for the string construction it applies to every base arrow. Thus straightening's functoriality identifies all asserted operator and string comparisons naturally.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cocartesian-right-kan-extension-simplex-powers",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.7 and 4.2.2; Proposition 4.2.3(3)–(4), with naturality through i^*⊣i_* and the fibrewise-equivalence criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cocartesian-right-kan-extension-simplex-powers",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-coef-infinity-cocartesian-composition-initiality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Explicit expansion of Lemma 3.1.8 and Proposition 4.2.3, with the groupoid horn argument. Source read online; not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +196,52 @@
    "results": "{\"t\": \"2026-10-16T20:26:02Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent nerve of an enriched multicategory defines a nonsymmetric quasicategorical operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.QCat\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.nerve\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"SSet.QCat.bicategory\"], \"digest\": \"ba03da98707fbf0f\"}",
    "date": "2026-10-17",
    "verdict": "no match: The ordinary nerve and strict Segal results do not give the enriched multicategory operator construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent nerve of a locally Kan simplicial multicategory is a nonsymmetric infinity operad and strings form a cocartesian fibration of powers",
+   "results": "8 hits: CategoryTheory.Nerve.quasicategory; CategoryTheory.nerve; CategoryTheory.Nerve.isStrictSegal; CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂; CategoryTheory.SimplicialNerve; CategoryTheory.Nerve.strictSegal; CategoryTheory.nerveFunctor; CategoryTheory.nerveFunctor_obj.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve results do not apply to the locally Kan enriched categories in this statement; SimplicialNerve is only a definition, not the operadic or cocartesian theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve",
+   "results": "1 hit: CategoryTheory.SimplicialNerve, Mathlib.AlgebraicTopology.SimplicialNerve. Source read at lines 186–210; the definition is at line 193.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve results do not apply to the locally Kan enriched categories in this statement; SimplicialNerve is only a definition, not the operadic or cocartesian theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "multicategor|[Oo]perad|[Ss]implicial[Nn]erve",
+   "results": "7 hits: Mathlib/AlgebraicTopology/SimplicialNerve.lean:24,28,29,50,193; Mathlib/Algebra/NonAssoc/PreLie/Basic.lean:39; Mathlib/CategoryTheory/Distributive/Monoidal.lean:55. The last two are bibliography mentions.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve results do not apply to the locally Kan enriched categories in this statement; SimplicialNerve is only a definition, not the operadic or cocartesian theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy coherent nerve of a simplicial category of operators is an infinity operad",
+   "results": "8 hits: CategoryTheory.SimplicialNerve; CategoryTheory.nerve; SSet.Truncated.nerve₂Adj; CategoryTheory.nerveFunctor; CategoryTheory.Nerve.quasicategory; CategoryTheory.nerveFunctorCompHoFunctorIso; CategoryTheory.nerve_map; CategoryTheory.nerve_obj.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve results do not apply to the locally Kan enriched categories in this statement; SimplicialNerve is only a definition, not the operadic or cocartesian theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck construction of a strict simplicial category valued diagram and homotopy coherent nerve cocartesian transport",
+   "results": "8 hits: ordinary nerve constructions, including SSet.Truncated.HomotopyCategory.homToNerveMk, CategoryTheory.nerve.functorOfNerveMap, CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂, CategoryTheory.nerveFunctor, CategoryTheory.nerveMap. No enriched cocartesian operator or string theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve results do not apply to the locally Kan enriched categories in this statement; SimplicialNerve is only a definition, not the operadic or cocartesian theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unstraightening of the diagram of finite powers of a quasicategory via an enriched Grothendieck construction",
+   "results": "{\"t\": \"2026-10-16T21:49:45Z\", \"tool\": \"leanfinder\", \"query\": \"Unstraightening of the diagram of finite powers of a quasicategory via an enriched Grothendieck construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\"], \"digest\": \"65f48e188bd4126c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently checked SimplicialNerve at Mathlib/AlgebraicTopology/SimplicialNerve.lean:193 and its TODO at lines 28–32; it defines the coherent nerve but does not supply even the locally Kan quasicategory theorem. Ordinary nerves and strict Segal declarations do not prove enriched string unstraightening."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-many-object-operad-accessibility",
@@ -97,5 +261,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-operator-nerve",
+  "worker": "stage1",
+  "summary": "Repaired the returned coherence gap by adding the i^*⊣i_* finite-power comparison and fibrewise-equivalence criterion nodes, then rewrote steps 6 and 8 through the Gepner–Haugseng Proposition 4.2.3(3)–(4) route. Steps 1–5 and 7 are retained. Maintainer reader (2026-10-17): the fibrewise-criterion node was dropped as a restatement of the cocartesian (opposite) clause of the existing lem-coef-marked-relative-cartesian-model, which steps 6 and 8 now cite; step 6 now derives the fibre description of the adjoint map from preservation of cocartesian edges; the right-Kan node's via, stmt_deps and statement wording were corrected.",
+  "blueprint": "Technical operator/string nerve input for paragraph 2 of prop-coef-integral-exceptional-adjoint (finite coefficient mapping-complex adjunction before R lim), through the existing ancestry. Steps 1–4 realize Gepner–Haugseng Definitions 3.1.6–3.1.7 and Lemma 3.1.8; steps 5–8 realize Definition 4.2.2, Proposition 4.2.3 and Remark 4.1.2.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "The relative equivalence-edge outer-horn theorem turns a fiber equivalence into a cocartesian edge in step 7. This is a generic quasicategorical lifting tool; no same-unit statement supplies that relative horn conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-74ce0789d",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-74ce0789d (reviewer sub-agent of L); spot-checked: I read everything in full: the item, both new nodes, every cited statement, the unit/chapter records, and Gepner–Haugseng from the arXiv PDF (Def. 3.1.6–3.1.7, Lem. 3.1.8, Def. 4.1.1, Rem. 4.1.2/4.1.4/4.1.5, Def. 4.2.2, Prop. 4.2.3(i)–(iv) with proof, pp. 36–38). The item statement is faithful and unchanged. The source's NC^{×n} in the proof of (iv) is a typo for n+1, as the worker reports. Steps 1–5 and 7 are correct; I checked n=0, m=0 with empty nullary spaces, non-injective φ and empty C. Steps 3/5 rely on the coherent-nerve comparison's 'preserve composition with coherent homotopies' clause to apply the strict-square invariance lemma; I accept that reading. I accept the tool use of lem-cbc-inner-fibration-equivalence-outer-horn-lift: an equivalence edge is cocartesian, and same-unit nodes already use it this way. Three repairable faults, fixed: (1) C5 duplicate: lem-coef-cocartesian-fibrewise-equivalence-criterion restates the cocartesian (opposite) clause of the existing same-unit node lem-coef-marked-relative-cartesian-model (fibrewise equivalences give a marked inverse over S, hence a categorical equivalence). I dropped it and repointed steps 6 and 8 and proof_deps; there is no cycle. (2) Step 6 claimed the fibre of the adjoint map Θ_C is the coordinate map, but no cited statement said so. The right-Kan node now states that the adjunction is restriction to the [0]-fibre and that transport along ρ_j is the j-th projection. Step 6 derives the fibre map from preservation of cocartesian edges, matching GH's Segal square. (3) The right-Kan node had a wrong blueprint.from.via (it named lem-coef-cocartesian-straightening) and the m/n reindexing mixed up. I fixed both, added def-coef-infinity-fibrations to stmt_deps, removed a split_report from the unsplit node, and added merged_into and lean_audit. The right-Kan node is true (right Kan extension along {[0]}→Δ^op gives C^{n+1}; GH Rem. 4.1.2/4.1.5) and has no duplicate in the DAG. No target was weakened and no SGA is used.; 2 file(s) fixed by the reviewer"
  }
 }
