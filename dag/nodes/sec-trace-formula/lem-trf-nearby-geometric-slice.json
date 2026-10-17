@@ -14,9 +14,122 @@
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=B_{(\\bar b)}$. In the universal property of $V_f$, take $a:(T_{\\bar b})_{\\mathrm{Et}}\\to T_{\\mathrm{Et}}$ to be the fibre map, and $b:(T_{\\bar b})_{\\mathrm{Et}}\\to\\mathbf{Set}\\xrightarrow{\\bar t}B_{\\mathrm{Et}}$ to be the constant geometric generic point. The chosen specialization gives $b\\Rightarrow fa$ by composing $\\bar t\\Rightarrow\\bar b$ with the structure morphism to $\\mathbf{Set}$. Thus the universal property gives $e_f$, with $p_1e_f=a$, $p_2e_f=b$ and the specified $2$-cell. In particular it uses the generic point as its second leg, rather than the special point.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "def-weil-geometric-point",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "sections 1.1--1.3, morphism preceding (1.3.5)"
+   }
+  },
+  {
+   "text": "Construct the sliced comparison $\\alpha_L:e_f^*R\\psi_{f,*}L\\to i^*Rj_*(L|_{T_{\\bar t}})$ by restriction on the triple site, as in (1.3.4). More explicitly, the inverse image of $(U\\to V\\leftarrow W)$ under $\\psi_f$ is $U\\times_VW$. Pointed compatible lifts to $\\bar b$ and $\\bar t$ restrict this object to the generic fibre over $A$. The restriction maps of a direct-image resolution therefore give the comparison on the inverse-image presheaf; their compatibility with refinement makes it a map after sheafification and derivation. Use the same restriction maps for all inputs, so $\\alpha$ is a natural transformation, before taking stalks. At a geometric $x$ of $T_{\\bar b}$ its map is the restriction from the triple-neighbourhood limit (the Milnor tube) to $T_{(x)}\\times_A\\bar t$. The oriented-point cohomology lemma identifies its source with that tube's derived sections. No base-change isomorphism for arbitrary squares is being assumed here.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-product-universal",
+    "lem-trf-oriented-point-cohomology",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "section 1.3, construction and equality in (1.3.4); section 1.4 for the comparison convention"
+   }
+  },
+  {
+   "text": "For a geometric point $x$ of $T_{\\bar b}$, let $x_A$ and $x_T$ be its images in $T_A$ and $T$. The strict-base closed-point localization lemma gives $(T_A)_{(x_A)}\\cong T_{(x_T)}$, compatibly with $A$. On the classical side, compute a stalk of $Rj_*$ on pointed affine etale neighbourhoods $U$ of $x_A$: in degree $n$ it is $\\varinjlim_U H^n(U\\times_A\\bar t,L)$. The higher-direct-image presheaf formula supplies this description for a sheaf, and the bounded-below truncation spectral sequence supplies it for $L$. The schemes $U\\times_A\\bar t$ are affine with affine transition maps, so derived etale continuity identifies this colimit with $H^n(T_{(x_T)}\\times_A\\bar t,L)$. Forgetting constant coefficients computes the same cohomology; the forgetful comparison extends from sheaves to $L$ by that spectral sequence. Hence the stalk of $\\alpha_L$ is exactly restriction from the Milnor tube to this geometric generic fibre.",
+   "uses": [
+    "lem-weil-pbc-strict-base-closed-point-localizations",
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-derived-etale-cohomology-limit",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-trf-oriented-point-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "section 1.3, (1.3.1)--(1.3.4); Stacks 072W and 0GIT"
+   }
+  },
+  {
+   "text": "Let $k^s$ be the separable algebraic closure of the generic residue field of $B$ in $\\kappa(\\bar t)$; the strict localization at that generic point is $\\operatorname{Spec}k^s$. The tube in the preceding step is the affine $k^s$-scheme $M=T_{(x_T)}\\times_A\\operatorname{Spec}k^s$. Put $\\bar k$ equal to the algebraic closure of $k^s$ inside $\\kappa(\\bar t)$. Then $\\bar k/k^s$ is purely inseparable, so its spectrum is integral, radicial and surjective and hence a universal homeomorphism. Topological invariance identifies cohomology of $M$ and $M_{\\bar k}$. Apply the field-extension higher-image exchange lemma to the affine scheme $M_{\\bar k}$ and the extension $\\kappa(\\bar t)/\\bar k$: every cohomology sheaf is killed by the given invertible integer. It gives the same cohomology after this extension, and the truncation spectral sequence gives the assertion for bounded $L$. Thus every cohomology stalk of $\\alpha_L$ is invertible, so derived-stalk conservativity proves $\\alpha_L$ is the asserted isomorphism. This also handles geometric points whose fields are not algebraic over their images.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "lem-pc-spec-pure-insep-integral-radicial-surjective",
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "lem-sc-field-extension-higher-direct-image-exchange",
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "section 1.3, (1.3.2)--(1.3.4); field enlargement justified by Stacks 0F1C and topological invariance"
+   }
+  },
+  {
+   "text": "For $h:T'\\to T$ over $B$, the universal property gives $v e_{f'}=e_f h_{\\bar b}$. The claimed square therefore has top map $h_{\\bar b}^*e_f^*R\\Psi_fL\\to e_{f'}^*R\\Psi_{f'}h^*L$, not a map obtained by pulling along $e_f$ alone. Its bottom map is $h_{\\bar b}^*i^*Rj_*L_{\\bar t}\\to i'^*Rj'_*h_{\\bar t}^*L_{\\bar t}$. Expand each ordinary comparison as its mate: first the unit for the primed direct image, then the inverse-image square, then pullback of the unprimed counit. In the triple-site models defining $\\alpha$, these are respectively insertion of the adjunction unit, pullback of a section along $h$, and evaluation of that section. Restriction to the geometric generic fibre commutes with all three operations: both composites send a section to its pullback along $h$ and then its restriction. Thus the square commutes already for the resolution comparisons and hence in the derived categories. The argument applies to arbitrary $h$, even if $f'$ is not finite type.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-product-universal",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "section 1.4, (1.4.1)--(1.4.3), together with the restriction construction (1.3.4)"
+   }
+  },
+  {
+   "text": "Use the derived tensor-pullback isomorphism for arbitrary ringed topoi, with constant coefficient rings, for $e_f$ and $\\psi_f$ as well as for $i$ and $j$. Resolve tensor inputs by K-flat complexes. The lax map for a direct image is the mate of the tensor of its two counits. In the restriction models of step 2, the counit evaluates a section, and the tensor of counits sends $a\\otimes b$ to the tensor of their evaluations. Restricting this tensor to the generic fibre gives $\\operatorname{res}(a)\\otimes\\operatorname{res}(b)$, exactly the result of restricting the two sections first and then taking the tensor of the $j$-counits. The tensor-pullback isomorphism identifies these targets. The bijection defining mates therefore gives the desired commutative tensor-comparison square. This is an equality of natural derived maps from the resolution construction, not an inference of equality from equality on cohomology stalks. The ordinary and lax tensor comparisons themselves need not be invertible.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "counit construction of the lax tensor map; Stacks 07A4, lemma-pullback-tensor-product; not a claim of section 1.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-geometric-point",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "lem-sc-field-extension-higher-direct-image-exchange",
+  "lem-trf-oriented-point-cohomology",
+  "lem-trf-oriented-product-universal",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+  "place": "Illusie sections 1.1--1.4, especially (1.3.1)--(1.3.4); field-enlargement details and mate/tensor verification expanded by the second reader using the cited DAG statements. The Illusie PDF is not in literature/ (WANTED: literature/illusie-around-thom-sebastiani.pdf, sections 1.1--1.4), so the proof is marked agent-written until it is obtained; the oriented-topos inputs are corroborated locally by ILO Travaux de Gabber, Expose XI, 1.4, 2.3 and 4.3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,28 +161,28 @@
   },
   {
    "tool": "leanfinder",
-   "query": "For a henselian trait the geometric slice of the vanishing topos recovers classical nearby cycles compatibly with base change and tensor maps",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, BDeRham. Read returned signatures in work/lem-trf-nearby-geometric-slice.search-output.txt; ",
+   "query": "Derived direct image evaluated at a geometric point of an oriented product is the cohomology of its Milnor tube",
+   "results": "8 hits: continuousCohomology, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.MultiInd.d, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, PresheafOfModules.Derivation.d_map, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, PresheafOfModules.Derivation.d_app",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern ordinary etale morphisms, sheaf pullbacks, scheme residue-field tensor products or homological cycles, not oriented nearby cycles"
+   "verdict": "no match: returned ordinary topological stalks, continuous group cohomology or unrelated presheaves; no oriented-product Milnor-tube comparison"
   },
   {
-   "tool": "leanfinder",
-   "query": "Geometric generic fibre restriction of the Deligne nearby cycle functor is the classical i inverse image R j direct image",
-   "results": "8 hits: AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.opensDiagram_map, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; signatures read independently by second reader.",
+   "tool": "leansearch",
+   "query": "Stalks of the derived direct image for an oriented product of etale topoi are computed by etale cohomology of strict-local fibre products",
+   "results": "8 hits: TopCat.Presheaf.stalk, TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkPullbackHom, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.LocallyRingedSpace.stalkMap_comp, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, TopCat.stalkToFiber_germ",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary sheaf or scheme pullbacks and homological tensor complexes do not construct oriented nearby cycles or state the requested comparison"
+   "verdict": "no match: returned ordinary topological stalks, continuous group cohomology or unrelated presheaves; no oriented-product Milnor-tube comparison"
   },
   {
-   "tool": "leanfinder",
-   "query": "Slice of oriented nearby cycles at a geometric generic specialization is i star R j star, compatibly with adjunction counits",
-   "results": "8 hits: StalkSkyscraperPresheafAdjunctionAuxs.counit_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, germ_skyscraperPresheafStalkOfSpecializes_hom_assoc, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.ofRestrict_app, germ_skyscraperPresheafStalkOfSpecializes_hom, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk. Signatures independently inspected in the current second reading.",
+   "tool": "grep",
+   "query": "MilnorTube|Milnor.?tube|orientedProduct|oriented.?product|vanishingTopos|nearbyCycles",
+   "results": "0 hits: ",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary etale schemes, scheme tensor pushouts and restriction/skyscraper counits do not state oriented nearby cycles or any of these comparison theorems"
+   "verdict": "no match: returned ordinary topological stalks, continuous group cohomology or unrelated presheaves; no oriented-product Milnor-tube comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-specialization-external-product",
@@ -81,7 +194,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof of (1) and (2), normal-cone specialization: the external-product comparison used by lem-trf-trace-specialization; passage from oriented nearby cycles to the geometric specialization and its specified maps",
+   "place": "Proof paragraph “(1) and (2)”: Varshavsky’s specialization-to-the-normal-cone construction in §§1.3–1.4, including passage from oriented nearby cycles to the geometric specialization and its maps",
    "via": [
     "lem-trf-specialization-external-product",
     "lem-trf-trace-specialization"
@@ -89,5 +202,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-nearby-geometric-slice",
+  "worker": "stage1",
+  "summary": "Second reading repaired the split: an oriented-point cohomology dependency isolates the genuine Milnor-tube calculation; the remaining steps construct and prove the slice comparison, including arbitrary geometric-field enlargement, correctly typed ordinary naturality and tensor compatibility for morphisms of topoi. One new unsplit node; no Mathlib leaves.",
+  "blueprint": "The parent proof paragraph “(1) and (2)” says Varshavsky’s normal-cone argument is proved by specialization to the normal cone in §§1.3–1.4; the four steps realize its oriented-nearby-cycle specialization, geometric slice, and functorial/tensor maps."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-867d9a62e",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-867d9a62e (reviewer sub-agent of L); spot-checked: I read the item in full (statement and 6 steps), the new node lem-trf-oriented-point-cohomology, the statements of all 18 cited nodes, unit sk-i-curve-zero and the parent blueprint paragraph '(1) and (2)'. The Illusie PDF is not in literature/ and there is no network, so I could not read (1.3.1)-(1.3.4). I checked the oriented-topos mathematics against the local ILO Travaux de Gabber XI instead: 1.4 (points), proof of 2.3 (fibre as a colimit over neighbourhoods (U->V<-W)) and 4.3 (Psi^{-1}(U->V<-W)=U x_V W); the classical side against Varshavsky 1.3.1. The statement is unchanged and not weakened. The coefficient category matches def-trf-oriented-nearby-cycles. Step 1: the 2-cell (fa)^{-1}->b^{-1} is the specialization F_bbar->F_tbar, in the right direction. Step 2: the restriction map is well defined, because a compatible t-bar point of V comes from a section A->V_A over strictly henselian A. Step 3: strict-base-closed-point-localizations applies (x lies on T_A x_A bbar); 072W, and 0GIT on affine U x_A tbar for D^+, give the target stalk. Step 4: k-bar/k^s is purely inseparable, hence a universal homeomorphism. 59.90.1 applies (M_kbar is affine, n is invertible), then truncation and stalk conservativity finish. Step 5: v e_f' = e_f h_bbar holds, and the mate expansion is valid for arbitrary h. Step 6: the ringed-topos tensor pullback covers e_f and psi_f. New node: I proved it from the sources for arbitrary schemes and arbitrary Lambda on D^+; U x_V W is open in U x_S W, so it is etale over Z. I tested it on f=g=id (K_y), on g=id with trivial c (K_x, matching ILO XI 4.4), and on empty schemes. It satisfies B1-B7 and is not a restatement of the item. rg over the DAG finds no duplicate. Every proof_dep is on the unit route, so no tool_uses are needed. The closure is acyclic, and no SGA is cited. Fixes: (1) in the new node, the specialization c must be a morphism of S-schemes between the strict localizations; this repeats a fix the redelivery dropped. I also added the ILO XI corroboration to its source. (2) The item's proof_origin.by changes from document to agent, because the Illusie PDF is not in literature/ (WANTED); the URL is kept.; 2 file(s) fixed by the reviewer"
  }
 }
