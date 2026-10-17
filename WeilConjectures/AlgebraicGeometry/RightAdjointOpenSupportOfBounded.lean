@@ -217,7 +217,7 @@ theorem rightAdjoint_open_support_of_bounded
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (f : X ⟶ Y) (V : Y.Opens) (hV : IsCompact (V : Set Y))
-    (U : X.Opens) (_hU : U = f ⁻¹ᵁ V)
+    (U : X.Opens)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
     [HasDerivedCategory.{w}
