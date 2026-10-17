@@ -14,7 +14,9 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-extension-by-zero-adjunction"
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-coef-etale-hom-thick-locus"
  ],
  "proof": [
   {
@@ -381,5 +383,46 @@
   "group": "Q110",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-199158d0a (reviewer sub-agent of L); spot-checked: Read all 12 steps, cited statements, source passages, route, and duplicate candidates. Mathematics and coefficient/counit normalizations pass. Corrected step 6’s Stacks 08FJ label to lemma-adjoint-lower-shriek-restrict. No new nodes, cycles, forbidden proof dependencies, or long non-elementary steps. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-01f55574b",
+  "group": "NV",
+  "result": "fix",
+  "note": "Mathematics and Lean pass; per-file compile reproduced cleanly. Fixed H11’s self-check report with a complete independent second reading in fixes/lem-coef-etale-open-tensor.report.md. Full findings are in review.md; no project clone changed."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleOpenTensor",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenTensorComparisons",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedRestriction",
+   "AlgebraicGeometry.Etale.derivedExtension",
+   "AlgebraicGeometry.Etale.canonicalGamma",
+   "AlgebraicGeometry.Etale.etaleFlat",
+   "AlgebraicGeometry.Etale.etaleKFlat",
+   "AlgebraicGeometry.Etale.openRestrictScalarsIso",
+   "AlgebraicGeometry.Etale.openScalarRestrictionZero",
+   "AlgebraicGeometry.Etale.openScalarExtensionZero",
+   "AlgebraicGeometry.Etale.openDerivedRestrictScalarsIso",
+   "AlgebraicGeometry.Etale.openScalarExtension",
+   "AlgebraicGeometry.Etale.openScalarRestrictionMap",
+   "AlgebraicGeometry.Etale.openScalarRestrictionMap_isIso",
+   "AlgebraicGeometry.Etale.openScalarRestriction",
+   "AlgebraicGeometry.Etale.canonicalGammaZero",
+   "AlgebraicGeometry.Etale.OpenScalarExtensionNormalization",
+   "AlgebraicGeometry.Etale.OpenScalarRestrictionNormalization",
+   "AlgebraicGeometry.Etale.openExactRestrictionTensor",
+   "AlgebraicGeometry.Etale.canonicalGammaExact",
+   "AlgebraicGeometry.Etale.EtaleOpenTensorComparisons",
+   "AlgebraicGeometry.Etale.etaleOpenTensorComparisons"
+  ],
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenTensor.lean",
+  "statement": "theorem etaleOpenTensorComparisons {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : EtaleOpenTensorComparisons φ j",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 114da1ab2089: canonical natural q is constructed by uniqueness of the fixed scalar/open adjunctions; r is the mate of actual restriction/scalar commutation; their explicit K-flat representative equations uniquely characterize them. Ordinary gamma is the adjunction transpose, and coherence fields are the full projection associativity, three-ring scalar-tower and mixed tensor/scalar squares. The recorded flat/K-flat predicates are used through the published constant-module realization. The two added landed dependencies own the realization and normalized strong scalar tensor comparison."
  }
 }
