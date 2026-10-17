@@ -1,8 +1,8 @@
 # WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal maintenance
 
-Status: cause confirmed; the required correction is in the protected stage-3 gate. The gate and
-Lean module were left unchanged because the maintenance task forbids editing review and landing
-tools. No mathematical repair was delivered or claimed.
+Status: cause confirmed; the required corrections are in protected stage-3 gate/report tooling.
+Those tools and the Lean module were left unchanged because this maintenance task forbids editing
+review and landing tools. No mathematical repair was delivered or claimed.
 
 ## Cause
 
@@ -21,6 +21,10 @@ attributes and a decreased sorry count. The retained delivery diagnostics show t
 The candidate also adds public helper declarations and a public import; those are separate valid
 interface refusals and must remain guarded.
 
+A second contract mismatch is present in the same dry run: preflight requires an author report to
+contain `## Second reading by A3`, while the worker brief reserves that section for the independent
+reader and tells the author not to write it. The retained dry-run findings record both failures.
+
 ## Required owner change
 
 The owner of `tools/stage3_gate.py` must reconcile the source-library freeze with queued proof
@@ -29,7 +33,9 @@ unchanged-signature, unchanged-header body replacement only when the baseline de
 contains the assigned `sorry` (ideally after confirming that its declaration type is a proposition),
 while continuing to reject data-valued construction edits, statements, attributes, public
 additions, public imports, and new or hidden sorry. Compile, import-cycle, and axiom checks must
-remain mandatory. This maintenance task forbids applying that landing-tool change here.
+remain mandatory. Separately, `deliver3.py`/preflight needs an explicit author-dry-run mode that
+defers the independent-reader section check; final reader delivery must still require that section.
+This maintenance task forbids applying either landing-tool change here.
 
 ## What changed
 
@@ -42,13 +48,14 @@ maintenance run.
 ## Validation
 
 The retained sandbox compile transcript reports exit code 0 in 48.5 seconds
-(`scratchpad/tenth-retry-compile.log`). A fresh dry-run invocation reached its local compile step
-but hit the existing 60-second timeout before preflight; it pushed nothing. No `lake build` was run
-and no process was killed.
+(`scratchpad/tenth-retry-compile.log`). The unchanged server source compiled with the mandated
+single-file tool in 39.4 seconds. A fresh dry-run invocation reached its local compile step but hit
+the existing 60-second timeout before preflight; it pushed nothing. No `lake build` was run and no
+process was killed.
 
 ## Next worker
 
-After the gate owner lands the narrow authorization, move the retained public helpers into allowed
+After the owner lands both narrow tooling fixes, move the retained public helpers into allowed
 `Sheaf` helper modules or replace them with existing declarations, use private imports where only
 proof bodies need them, restore unchanged bodies for already-proved definitions, and rerun the
 mandated one-file 60-second compile and dry run.
