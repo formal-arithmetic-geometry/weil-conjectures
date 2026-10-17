@@ -337,5 +337,23 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-6b37a7258 (reviewer sub-agent of L); spot-checked: I read all 11 steps and every cited statement in full. Statement correction (E7, named in the report): the removed clause 'every object of a coherent topos is a filtered colimit of coherent objects' is false. I checked the counterexample myself. In presheaves on finitely presented affine Q-schemes, Z = coeq(id, x↦x+1) on h_{A^1} is finitely presentable. Its kernel pair is covered by the graphs Γ_n but by no finite subfamily, so Z is not quasi-separated. If Z were such a colimit it would be a retract of a coherent object, hence coherent, which is impossible. The new clause (a quasi-separated G is a directed union of coherent images of finite coproducts of generators) is proved correctly. The only citer, lem-trf-oriented-constructible-subquotients Step 6, applies it only to G ⊆ F with F coherent, so it still holds; no other node cites the item. Step checks: coproducts and epi families via sheafification, local sections and the epi criterion; the image P^# is mono by exactness and least among subobjects; finite epi families from quasi-compact objects, including the empty case; products tested inside T = U_i×V_j, with U_i×_{A×B}V_j = R_A×_T R_B checked sectionwise; equalizers as A×_{B×B}B; coproducts via extensivity, the complement trick and strict 0; the colimit property by gluing with monic comparison maps. The Stacks tags 00W2/00WH/00WI/00WJ/00WK/00WM/00WN exist with the cited labels. Orgogozo §8.1 and 8.3.3 are not in literature/ and I could not read them; the WANTED line stands, and the proof is a self-contained agent proof (proof_origin.by = agent). No SGA is cited. There are no new nodes, and the rg duplicate search found none. proof_deps equals the union of the uses. I accept the four tool_uses (sections-local, epi-locally-surjective, limits-sectionwise, sheafification-exact) as generic set-sheaf tools. The node is not a target, so the base-change morphism and coefficient-category check does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CoherentObjectApproximation",
+  "declaration": "CategoryTheory.coherentObjectApproximation",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CoherentObjectApproximation.lean",
+  "statement": "theorem coherentObjectApproximation (E : Type u) [Category.{v} E] [HasCoproducts.{w} E] [HasFiniteLimits E] (hE : IsCoherentTopos.{w} E) : (∀ (n : ℕ) (X : Fin n → E), (∀ i, IsCoherentObject (X i)) → IsCoherentObject (∐ (fun i : ULift.{w} (Fin n) => X i.down))) ∧ (∀ (J : Type) [SmallCategory J] [FinCategory J], ObjectProperty.IsClosedUnderLimitsOfShape (fun X : E => IsCoherentObject X) J) ∧ (∀ (A B : E) (f : A ⟶ B), IsCoherentObject A → IsCoherentObject B → ∃ (I : E) (e : A ⟶ I) (m : I ⟶ B), Epi e ∧ Mono m ∧ e ≫ m = f ∧ IsCoherentObject I ∧ ∀ (D : E) (d : D ⟶ B), Mono d → (∃ q : A ⟶ D, q ≫ d = f) → ∃ q' : I ⟶ D, q' ≫ d = m) ∧ (∀ (G : E), IsQuasiSeparatedObject G → ∃ (I : Type w) (_ : PartialOrder I), Nonempty I ∧ IsDirected I (· ≤ ·) ∧ ∃ (F : I ⥤ E), (∀ i, IsCoherentObject (F.obj i)) ∧ (∀ (i j : I) (h : i ≤ j), Mono (F.map (homOfLE h))) ∧ ∃ (c : Cocone F), c.pt = G ∧ (∀ i, Mono (c.ι.app i)) ∧ Nonempty (IsColimit c)) ∧ (∀ (G F : E) (m : G ⟶ F), Mono m → IsCoherentObject F → ∃ (I : Type w) (_ : PartialOrder I), Nonempty I ∧ IsDirected I (· ≤ ·) ∧ ∃ (D : I ⥤ E), (∀ i, IsCoherentObject (D.obj i)) ∧ (∀ (i j : I) (h : i ≤ j), Mono (D.map (homOfLE h))) ∧ ∃ (c : Cocone D), c.pt = G ∧ (∀ i, Mono (c.ι.app i)) ∧ Nonempty (IsColimit c))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-eaaedcdf0",
+  "group": "NH",
+  "result": "pass",
+  "note": "Reviewed packet, dependencies, source, Lean statement, docstrings, edge cases, searches, route-pivot constraints, and report sections. scompile.py passed sandbox and library compilation; review.md written."
  }
 }

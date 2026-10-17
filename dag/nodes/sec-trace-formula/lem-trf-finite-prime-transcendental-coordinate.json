@@ -132,5 +132,23 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-c922fad21 (reviewer sub-agent of L); spot-checked: Step 2 cited def-weil-residue-field for the unstated affine identity κ(p)=Frac(B/p), a C4 citation gap. The corrected full DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-prime-transcendental-coordinate.json and spells out the localization quotient calculation. All other hypotheses, edge cases, source steps (Stacks Tag 0GTE/07K1), dependencies, route constraints, and duplicate checks passed; review.md records the full checks.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FinitePrimeTranscendentalCoordinate",
+  "declaration": "Ideal.exists_mem_transcendental_residueFields",
+  "file": "lean/Sheaf/RingTheory/FinitePrimeTranscendentalCoordinate.lean",
+  "statement": "theorem exists_mem_transcendental_residueFields {B : Type u} [CommRing B] (r : ℕ) (p : Fin r → PrimeSpectrum B) (hincomparable : ∀ i j : Fin r, i ≠ j → ¬ (p i).asIdeal ≤ (p j).asIdeal) (k : (i : Fin r) → Subfield (p i).asIdeal.ResidueField) (hnot_algebraic : ∀ i : Fin r, ¬ Algebra.IsAlgebraic (k i) (p i).asIdeal.ResidueField) (J : Ideal B) (hJ : ∀ i : Fin r, ¬ J ≤ (p i).asIdeal) : ∃ x ∈ J, ∀ i : Fin r, Transcendental (k i) (algebraMap B (p i).asIdeal.ResidueField x)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-97f807957",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/. Repaired H11 with a substantive independent second reading. Mathematics, dependencies, verbatim signature, edge cases, universes, and docstrings pass; scompile.py reproduced clean sandbox and library compiles. No branch or clone changes."
  }
 }

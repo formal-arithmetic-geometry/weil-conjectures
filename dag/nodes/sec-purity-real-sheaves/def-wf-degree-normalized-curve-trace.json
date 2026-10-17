@@ -1,0 +1,103 @@
+{
+ "id": "def-wf-degree-normalized-curve-trace",
+ "kind": "definition",
+ "title": "Canonical finite trace determined by degree-one point classes",
+ "status": "split",
+ "statement": "Let $k$ be an algebraically closed field and let $C/k$ be a smooth proper connected curve [def-sc-curves]. Let $\\ell$ be a prime distinct from $\\operatorname{char}k$ and let $n\\geq1$. For each closed point $P$, use the actual divisor line bundle $\\mathcal O_C(P)$ [def-sc-divisor]; its Picard class [def-sc-picard-group] may equivalently be constructed as the dual of the ideal sheaf of $P$. Define the canonical degree-normalized trace on ordinary cohomology [def-weil-pbc-etale-cohomology]\n$$\\operatorname{tr}_{C,n}:H^2(C,\\mu_{\\ell^n})\\longrightarrow \\mathbf Z/\\ell^n\\mathbf Z$$\nas the unique additive homomorphism taking every class $\\delta(\\mathcal O_C(P))$ to $1$, where $\\delta$ is the existing Kummer boundary [def-sc-kummer-sequence] under the canonical $\\operatorname{Pic}(C)\\simeq H^1(C,\\mathbf G_m)$ identification. Such a homomorphism exists and is unique. The normalization holds for every proof that $\\ell^n$ is a unit on $C$; the map is independent of that proof. Equivalently, this is degree modulo $\\ell^n$ on the Kummer quotient $\\operatorname{Pic}(C)/\\ell^n$.",
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-divisor",
+  "def-sc-picard-group",
+  "def-weil-pbc-etale-cohomology",
+  "def-sc-kummer-sequence"
+ ],
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Proposition 14.2, Proposition 14.5 and Remark 14.6: degree-normalized trace and its value on point classes."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical degree normalized trace from second etale cohomology of roots of unity on a smooth proper connected curve to ZMod, sending each Kummer point class to one",
+   "results": "Eight hits: Algebra.normalizedTrace and its identities, and modularCyclotomicCharacter.toFun. These are field traces/cyclotomic characters, not the ordinary curve trace.",
+   "date": "2026-10-17",
+   "verdict": "no exact existing notion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"kummer\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no exact existing notion"
+  },
+  {
+   "tool": "grep",
+   "query": "degreeNormalized.*Trace|curveTrace|trace.*kummer in Mathlib/AlgebraicGeometry, upstream WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search degree-normalized trace",
+   "results": "msearch Mathlib grep returned 0; upstream and lean/Sheaf name search returned no hits. Node text search found only the assigned statement; blueprint search returned 0. The existing rational finite-field trace-cup node has different coefficients and additional finite-field data.",
+   "date": "2026-10-17",
+   "verdict": "no exact existing notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-curve-trace-cup-naturality",
+  "date": "2026-10-17",
+  "group": "Q136"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-curve-h1-dual-tate-module",
+   "place": "The finite-level cup-trace pairing in the first paragraph, before equations (4.2)-(4.3).",
+   "via": [
+    "lem-wf-curve-trace-cup-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankone",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.DegreeNormalizedTrace",
+  "declaration": "AlgebraicGeometry.Scheme.degreeNormalizedCurveTrace",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.tracePointPic",
+   "AlgebraicGeometry.Scheme.existsUnique_degreeNormalizedCurveTrace",
+   "AlgebraicGeometry.Scheme.degreeNormalizedCurveTrace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DegreeNormalizedTrace.lean",
+  "statement": "def degreeNormalizedCurveTrace (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] (ell c : ℕ) [Fact ell.Prime] [CharP k c] (hell : ell ≠ c) (n : ℕ) (hn : 1 ≤ n) : Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) 2 →+ ZMod (ell ^ n)",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d70209aff",
+  "group": "Q136",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d70209aff",
+  "group": "Q136",
+  "result": "fix",
+  "note": "Mathematics and all three Lean modules accepted; scompile.py passed without errors or warnings. Repaired H11 with a complete independent-reading report in fixes/lem-wf-curve-trace-cup-naturality.report.md. Full checks and evidence are in review.md; branch head unchanged."
+ }
+}

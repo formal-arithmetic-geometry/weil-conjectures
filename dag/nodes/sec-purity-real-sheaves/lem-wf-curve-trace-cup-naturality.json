@@ -11,7 +11,9 @@
   "def-sc-curves",
   "def-sc-kummer-sequence",
   "def-weil-pbc-etale-cohomology",
-  "def-sc-divisor"
+  "def-sc-divisor",
+  "def-wf-finite-coefficient-cup",
+  "def-wf-degree-normalized-curve-trace"
  ],
  "proof": [
   {
@@ -266,5 +268,34 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-9d68c4166 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, Stacks 0FPJ/0H9A (sites-cohomology.tex l.8205 and l.8529) and Milne LEC §14 (Prop 14.5, Rem 14.6, Thm 14.7, Ex 14.8). The item statement is unchanged and true. I checked steps 1-9 against the statements they cite: the Kummer reduction ladder (power on mu and on the middle Gm, identity on the last Gm), the evaluation square (z^a)^d=(z^d)^{a mod l^m}, the pullback ladder through the units comparison c_f, and f^*O(P)=O(Q) through valuations. lem-sc-h1-gm-pic-pullback allows different base fields, so the semilinear isomorphism is covered. Batch-5 check: lem-sc-second-kummer-divisors (H^2(C,mu_n)=Pic/n) reaches only two sec-poincare-duality nodes, the general definition def-pod-ring-scalar-extension and the Mathlib leaf lem-pod-separated-finite-type-base-change. Neither is a step of Poincare duality or the trace formula, neither assumption gives H^2(C,mu_n)=Pic/n, and the node was already in the batch-5 closure without this delivery (via prop-duality-reciprocity <- def-weil-poincare-trace-cup <- def-weil-exceptional-inverse-image <- thm-asd-smooth-tensor <- lem-asd-ordinary-finite-p1-adjunction). The citation stays. New node lem-wf-etale-cup-functoriality is unsplit and statement-only. It is 0H9A plus coefficient naturality, I checked it at p=q=0, f=id, zero sheaves and an empty Y, it duplicates no existing node, and it does not restate the item. Two fixes, both in fixes/: (1) C4/E5 in Step 2: the delta-functor node gives naturality only for its own connecting maps. I added lem-sc-p1-right-derived-triangle-connecting, which identifies those with the triangle connecting maps used by def-weil-pbc-etale-cohomology, the pullback ladder and the Kummer coboundary, and declared it as a tool use. (2) B3 in the new node: the derived tensor had no definition node, so I added def-kun-derived-tensor (Lambda=Z). I accept all eight declared tool uses. There are no cycles, no SGA citation and no weakened target.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.TraceCupNaturality",
+  "declaration": "AlgebraicGeometry.curve_trace_cup_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.traceCupConstantReduction",
+   "AlgebraicGeometry.Scheme.traceCupRootsReduction_condition",
+   "AlgebraicGeometry.Scheme.traceCupRootsReduction",
+   "AlgebraicGeometry.Scheme.traceCupRootsPullback_condition",
+   "AlgebraicGeometry.Scheme.traceCupRootsPullback",
+   "AlgebraicGeometry.Scheme.traceCupConstantCohomologyPullback",
+   "AlgebraicGeometry.Scheme.traceCupRootsCohomologyPullback",
+   "AlgebraicGeometry.Scheme.curveTraceCupPairing",
+   "AlgebraicGeometry.curve_trace_cup_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/TraceCupNaturality.lean",
+  "statement": "theorem curve_trace_cup_naturality (k : Type u) [Field k] [IsAlgClosed k] (C D : Scheme.{u}) (fC : C ⟶ Spec (.of k)) [IsConnectedCurve fC] [Smooth fC] [IsProper fC] (fD : D ⟶ Spec (.of k)) [IsConnectedCurve fD] [Smooth fD] [IsProper fD] (ell c : ℕ) [Fact ell.Prime] [CharP k c] (hell : ell ≠ c) (f : D ≅ C) (σ : Spec (.of k) ≅ Spec (.of k)) (hσ : f.hom ≫ fC = fD ≫ σ.hom) : (∀ (n m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n) (i : Fin 3) (x : Sheaf.H (C.constantZMod (ell ^ n)) i) (y : Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) (2 - i)), curveTraceCupPairing k C fC ell c hell m hm i (Sheaf.H.map (traceCupConstantReduction C ell n m hmn) i x) (Sheaf.H.map (traceCupRootsReduction C ell n m hmn) (2 - i) y) = ZMod.castHom (pow_dvd_pow ell hmn) (ZMod (ell ^ m)) (curveTraceCupPairing k C fC ell c hell n (hm.trans hmn) i x y)) ∧ (∀ (n : ℕ) (hn : 1 ≤ n) (i : Fin 3) (x : Sheaf.H (C.constantZMod (ell ^ n)) i) (y : Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) (2 - i)), curveTraceCupPairing k D fD ell c hell n hn i (traceCupConstantCohomologyPullback f.hom (ell ^ n) i x) (traceCupRootsCohomologyPullback f.hom (ell ^ n) (2 - i) y) = curveTraceCupPairing k C fC ell c hell n hn i x y)",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d70209aff",
+  "group": "Q136",
+  "result": "fix",
+  "note": "Mathematics and all three Lean modules accepted; scompile.py passed without errors or warnings. Repaired H11 with a complete independent-reading report in fixes/lem-wf-curve-trace-cup-naturality.report.md. Full checks and evidence are in review.md; branch head unchanged."
  }
 }

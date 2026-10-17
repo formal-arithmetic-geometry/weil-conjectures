@@ -1,0 +1,113 @@
+{
+ "id": "def-wf-finite-coefficient-cup",
+ "kind": "definition",
+ "title": "Canonical constant/roots cup on ordinary finite-coefficient cohomology",
+ "status": "split",
+ "statement": "Let $X$ be a scheme with small etale site [def-weil-pbc-etale-site], and let $N\\in\\mathbf N$. Put $R=\\mathbf Z/N\\mathbf Z$, using its universe lift when necessary. In the category of sheaves of $R$-modules [def-weil-pbc-etale-sheaves], let $R_X$ be the constant rank-one module and let $U$ forget the module structure. This forgetful functor is additive and preserves finite limits, finite colimits and sheafification; it canonically identifies $U(R_X)$ with the existing constant sheaf $\\mathbf Z/N$. For an $R$-module sheaf $M$, let\n$$\\kappa^q_M:\\operatorname{Ext}^q_{R_X}(R_X,M)\\longrightarrow H^q(X,U(M))$$\nbe coefficient forgetting followed by precomposition with the constant integer unit $\\mathbf Z_X\\to R_X$, with ordinary cohomology [def-weil-pbc-etale-cohomology]. These comparisons are bijections; write their uniquely determined inverses as $\\kappa_M^{-1}$. The existing roots-of-unity sheaf $\\mu_N$ [def-sc-kummer-sequence], with its sectionwise exponent action [def-pur-kummer-module-coefficients], is itself an $R$-module sheaf (the module presheaf satisfies descent). For $p,q\\geq0$ and $p+q=r$, define the canonical cup\n$$H^p(X,\\mathbf Z/N)\\times H^q(X,\\mu_N)\\longrightarrow H^r(X,\\mu_N)$$\nby transport of the Yoneda action on module-sheaf Ext: lift both inputs through $\\kappa$, compose the unit self-extension followed by the module extension, and transport the result by $\\kappa_{\\mu_N}^r$. With the left-then-right shifted-composition convention, multiply this composite by $(-1)^{pq}$ to obtain the unsigned Cech front/back convention. This is the ordinary derived global-sections cup followed by the coefficient evaluation $(\\mathbf Z/N)\\otimes\\mu_N\\to\\mu_N$, $a\\otimes z\\mapsto z^a$.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-sc-kummer-sequence",
+  "def-pur-kummer-module-coefficients"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 0FPJ, section-cup-product; Milne LEC Section 22, p.135, unsigned Cech cup."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cup product in etale cohomology of constant ZMod and roots of unity computed by Yoneda Ext composition in sheaves of ZMod modules",
+   "results": "Returned generic Sheaf.H, cohomologyPresheaf, Abelian.Ext.bilinearComp, Ext.comp, add_comp and comp_add. Reuse these operations; none defines this finite constant/roots cup or its comparison.",
+   "date": "2026-10-17",
+   "verdict": "no exact existing notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical coefficient forgetful comparison Ext from constant ring sheaf to sheaf cohomology and Yoneda cup products",
+   "results": "Returned Sheaf.H, Ext.homLinearEquiv and InjectiveResolution.extEquivCohomologyClass, but no finite constant/roots cup or coefficient-forgetting comparison.",
+   "date": "2026-10-17",
+   "verdict": "no exact existing notion"
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|moduleCohomology|mapExactFunctor in Mathlib/CategoryTheory/Sites; finiteCoefficientCup|finiteCupComparison in Mathlib, WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search ordinary cup and Yoneda",
+   "results": "msearch grep in CategoryTheory/Sites returned 0. Direct searches found no finiteCoefficientCup or finiteCupComparison. Existing upstream derived tensor cups and side scalar cups concern other coefficient categories; existing kummerRootModulePresheaf is reused. Blueprint ordinary cup returned 0 and Yoneda returned four unrelated blueprint nodes.",
+   "date": "2026-10-17",
+   "verdict": "no exact existing notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-curve-trace-cup-naturality",
+  "date": "2026-10-17",
+  "group": "Q136"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-curve-h1-dual-tate-module",
+   "place": "The finite-level cup-trace pairing in the first paragraph, before equations (4.2)-(4.3).",
+   "via": [
+    "lem-wf-curve-trace-cup-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankone",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FiniteCoefficientCup",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficientCup",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteCupForget",
+   "AlgebraicGeometry.Scheme.finiteCupForget_additive",
+   "AlgebraicGeometry.Scheme.finiteCupForget_limits",
+   "AlgebraicGeometry.Scheme.finiteCupForget_colimits",
+   "AlgebraicGeometry.Scheme.finiteCupForget_sheafification",
+   "AlgebraicGeometry.Scheme.finiteCupUnit",
+   "AlgebraicGeometry.Scheme.finiteCupUnitIso",
+   "AlgebraicGeometry.Scheme.finiteCupComparison",
+   "AlgebraicGeometry.Scheme.finiteCupComparison_bijective",
+   "AlgebraicGeometry.Scheme.finiteCupComparisonEquiv",
+   "AlgebraicGeometry.Scheme.finiteCupRoots_isSheaf",
+   "AlgebraicGeometry.Scheme.finiteCupRoots",
+   "AlgebraicGeometry.Scheme.finiteCoefficientCup"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FiniteCoefficientCup.lean",
+  "statement": "def finiteCoefficientCup (X : Scheme.{u}) (N p q r : ℕ) (hpq : p + q = r) (x : Sheaf.H (X.constantZMod N) p) (y : Sheaf.H (X.rootsOfUnitySheaf N) q) : Sheaf.H (X.rootsOfUnitySheaf N) r",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d70209aff",
+  "group": "Q136",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d70209aff",
+  "group": "Q136",
+  "result": "fix",
+  "note": "Mathematics and all three Lean modules accepted; scompile.py passed without errors or warnings. Repaired H11 with a complete independent-reading report in fixes/lem-wf-curve-trace-cup-naturality.report.md. Full checks and evidence are in review.md; branch head unchanged."
+ }
+}
