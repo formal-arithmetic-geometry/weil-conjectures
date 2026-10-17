@@ -227,5 +227,23 @@
   "group": "Q158",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-8e708bacd (reviewer sub-agent of L); spot-checked: Read the item, both new leaves, d-real-series, unit sk-p-real-rankin (both steps), the chapter record, and the blueprint text in master and main-20261015. The statement and proof are identical in both snapshots; the item's statement is unchanged and not weakened. Step 1: a finite subset S from local finiteness gives 0<=a_{j,n}<=A_n by the coefficient expansion; elementary and correct. Step 2: Complex.hasSum_taylorSeries_on_eball (TaylorSeries.lean:87; CompleteSpace, DifferentiableOn on eball, z in eball, r in ENNReal) applied at c=0, z=t in [0,R); the terms are real, so the series is summable in R. Step 3: Summable.of_nonneg_of_le (ENNReal.lean:530) with u=a_{j,n}t^n, v=A_nt^n; R itself is then admissible in the sup of d-real-series, so R(f_j)>=R, including R=0 and R=infinity. Step 4: double-sum identity 1=sum_k p_k z^k s_{N-k}(z) for N>=d, checked. Step 5: subtracting P(z)s_N gives 1 <= finitely many tails of the convergent sum b_n|z|^n, which tend to 0; contradiction, checked. The steps realize unit step 1 (domination, radius definition) and unit step 2 (a zero cannot cancel the numerator 1); route kept, no tool_uses needed. Both leaves are exact or one-line Mathlib specializations, self-contained, not clauses of the item. A scan of all DAG statements and mathlib_match fields found no duplicates. Project Lean radius_tprod_le_radius and eval_ne_zero_of_lt_radius_inv do not state the item's holomorphic-Taylor hypothesis, so I agree nothing is attached. Small cases tested: (1-t)^{-1}(1-2t)^{-1} with R=1/2; the counterexample 1+t times (1+t)^{-1} shows the nonnegativity hypothesis is necessary. No SGA. Not a target node, so the base-change check does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PositiveProductRadius",
+  "declaration": "PowerSeries.radius_and_eval_ne_zero_of_tprod_taylor",
+  "file": "lean/Sheaf/Paper/PositiveProductRadius.lean",
+  "statement": "theorem radius_and_eval_ne_zero_of_tprod_taylor {J : Type u} (f : J → ℂ⟦X⟧) (hf : ∀ j : J, (f j).HasNonnegCoeffs) (h1 : ∀ j : J, constantCoeff (f j) = 1) (hfinite : ∀ n : ℕ, {j : J | ∃ k : ℕ, 0 < k ∧ k ≤ n ∧ coeff k (f j) ≠ 0}.Finite) (R : ℝ≥0∞) (h : ℂ → ℂ) (hhol : DifferentiableOn ℂ h (Metric.eball 0 R)) (htaylor : ∀ n : ℕ, coeff n (∏' j : J, f j) = iteratedDeriv n h 0 / (n.factorial : ℂ)) : (∀ j : J, R ≤ (f j).radius) ∧ (∀ (j : J) (P : Polynomial ℂ), P.coeff 0 = 1 → f j = (P : ℂ⟦X⟧)⁻¹ → ∀ z : ℂ, (‖z‖₊ : ℝ≥0∞) < R → P.eval z ≠ 0)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0f674e21c",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Statement and dependencies match the source; edge cases and docstrings checked; per-file scompile passed with server confirmation; no fixes needed."
  }
 }
