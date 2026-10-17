@@ -145,6 +145,118 @@ lemma lowerStarFactor_exchange_cube {Z Z' P P' : Scheme.{u}} (θ : Z ⟶ Z') (ψ
   all_goals simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
     MorphismProperty.Over.pullbackComp, e, e']
 
+/-- The factorisation isomorphism of the tautological factorisation is the composition
+isomorphism. -/
+lemma lowerStarFactor_rfl {X Y Z : Scheme.{u}} (b : Z ⟶ Y) (c : Y ⟶ X) :
+    lowerStarFactor A (rfl : b ≫ c = b ≫ c) = lowerStarComp A b c := by
+  rw [← lowerStarComp_trans_lowerStarCongr, lowerStarCongr_rfl, Iso.trans_refl]
+
+/-- A congruence followed by the inverse of a composition isomorphism is the inverse of a
+factorisation isomorphism. -/
+lemma lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_eq {X Y Z : Scheme.{u}} {x : Z ⟶ X}
+    {b : Z ⟶ Y} {c : Y ⟶ X} (h : x = b ≫ c) (G : Sheaf (Scheme.ProEt.topology Z) A) :
+    (lowerStarCongr A h).hom.app G ≫ (lowerStarComp A b c).inv.app G =
+      (lowerStarFactor A h.symm).inv.app G := by
+  subst h
+  rw [lowerStarFactor_rfl, lowerStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
+
 end Sheaf
+
+section Adic
+
+variable {l : ℕ} [Fact l.Prime]
+
+variable (l) in
+/-- The isomorphism `p_* ⋙ q_* ≅ (p ≫ q)_* = (p' ≫ q')_* ≅ p'_* ⋙ q'_*` of pushforwards of
+sheaves of `ℚ̄_ℓ,X`-modules along a commutative square `p ≫ q = p' ≫ q'`. For `q = b`,
+`p' = a` and `q' = p` it is the exchange isomorphism of `p_*` with the pushforwards along
+endomorphisms `a`, `b` with `p ≫ b = a ≫ p`. -/
+noncomputable def adicLowerStarSquareIso {Z Y Y' X : Scheme.{u}} {p : Z ⟶ Y} {q : Y ⟶ X}
+    {p' : Z ⟶ Y'} {q' : Y' ⟶ X} (h : p ≫ q = p' ≫ q') :
+    (p)_*ᵃ[l] ⋙ (q)_*ᵃ[l] ≅ (p')_*ᵃ[l] ⋙ (q')_*ᵃ[l] :=
+  adicLowerStarComp l p q ≪≫ adicLowerStarCongr l h ≪≫ (adicLowerStarComp l p' q').symm
+
+lemma adicLowerStarSquareIso_hom_app_hom {Z Y Y' X : Scheme.{u}} {p : Z ⟶ Y} {q : Y ⟶ X}
+    {p' : Z ⟶ Y'} {q' : Y' ⟶ X} (h : p ≫ q = p' ≫ q') (M : AdicSheaf l Z) :
+    ((adicLowerStarSquareIso l h).hom.app M).hom =
+      (lowerStarFactor _ h).hom.app M.X ≫
+        (lowerStarFactor _ (rfl : p' ≫ q' = p' ≫ q')).inv.app M.X := by
+  simp only [adicLowerStarSquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Mod.comp_hom', adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom,
+    adicLowerStarComp_inv_app_hom, lowerStarFactor_rfl, ← lowerStarComp_trans_lowerStarCongr,
+    Category.assoc]
+
+lemma adicLowerStarCongr_hom_app_comp_adicLowerStarComp_inv_app_hom {X Y Z : Scheme.{u}}
+    {x : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X} (h : x = b ≫ c) (M : AdicSheaf l Z) :
+    ((adicLowerStarCongr l h).hom.app M ≫ (adicLowerStarComp l b c).inv.app M).hom =
+      (lowerStarFactor _ h.symm).inv.app M.X := by
+  rw [Mod.comp_hom', adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom,
+    lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_eq]
+
+lemma adicLowerStarId_hom_app_hom (X : Scheme.{u}) (M : AdicSheaf l X) :
+    ((adicLowerStarId l X).hom.app M).hom = (lowerStarId _ X).hom.app M.X := by
+  simp only [adicLowerStarId, Iso.trans_hom, NatTrans.comp_app, Mod.comp_hom']
+  exact Category.comp_id _
+
+/-- Exchange isomorphisms are compatible with composition of the horizontal morphisms. -/
+lemma adicLowerStarSquareIso_comp {Z P : Scheme.{u}} (p : Z ⟶ P) (a₁ a₂ a₃ : Z ⟶ Z)
+    (b₁ b₂ b₃ : P ⟶ P) (ha : a₃ = a₂ ≫ a₁) (hb : b₃ = b₂ ≫ b₁)
+    (h₁ : p ≫ b₁ = a₁ ≫ p) (h₂ : p ≫ b₂ = a₂ ≫ p) (h₃ : p ≫ b₃ = a₃ ≫ p)
+    (M : AdicSheaf l Z) :
+    (adicLowerStarCongr l hb).hom.app ((p)_*ᵃ[l].obj M) ≫
+        (adicLowerStarComp l b₂ b₁).inv.app ((p)_*ᵃ[l].obj M) ≫
+        (b₁)_*ᵃ[l].map ((adicLowerStarSquareIso l h₂).hom.app M) ≫
+        (adicLowerStarSquareIso l h₁).hom.app ((a₂)_*ᵃ[l].obj M) =
+      (adicLowerStarSquareIso l h₃).hom.app M ≫
+        (p)_*ᵃ[l].map ((adicLowerStarCongr l ha).hom.app M ≫
+          (adicLowerStarComp l a₂ a₁).inv.app M) := by
+  apply Mod.hom_ext
+  have := lowerStarFactor_exchange_comp (WeilCoefficients.{u} l) p a₁ a₂ a₃ b₁ b₂ b₃ _ _ _
+    ha.symm hb.symm h₁ rfl h₂ rfl h₃ rfl M.X
+  simp only [Mod.comp_hom', adicLowerStar_map_hom, adicLowerStarCongr_hom_app_hom,
+    adicLowerStarComp_inv_app_hom, adicLowerStarSquareIso_hom_app_hom,
+    Category.assoc, reassoc_of% lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_eq,
+    lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_eq]
+  simp only [Functor.map_comp, Category.assoc] at this ⊢
+  exact this
+
+/-- The exchange isomorphism of identities is the identity. -/
+lemma adicLowerStarSquareIso_id {Z P : Scheme.{u}} (p : Z ⟶ P) (a : Z ⟶ Z) (b : P ⟶ P)
+    (ha : a = 𝟙 Z) (hb : b = 𝟙 P) (h : p ≫ b = a ≫ p) (M : AdicSheaf l Z) :
+    (adicLowerStarSquareIso l h).hom.app M ≫
+        (p)_*ᵃ[l].map ((adicLowerStarCongr l ha).hom.app M ≫ (adicLowerStarId l Z).hom.app M) =
+      (adicLowerStarCongr l hb).hom.app ((p)_*ᵃ[l].obj M) ≫
+        (adicLowerStarId l P).hom.app ((p)_*ᵃ[l].obj M) := by
+  subst ha hb
+  apply Mod.hom_ext
+  have := lowerStarFactor_exchange_id (WeilCoefficients.{u} l) p _ h rfl M.X
+  simp only [Mod.comp_hom', adicLowerStar_map_hom, adicLowerStarSquareIso_hom_app_hom,
+    adicLowerStarCongr_hom_app_hom, adicLowerStarId_hom_app_hom, lowerStarCongr_rfl,
+    Iso.refl_hom, NatTrans.id_app, Category.assoc] at this ⊢
+  exact this
+
+/-- Two exchange isomorphisms pasted along a commutative cube agree: for vertical morphisms
+`θ : Z ⟶ Z'`, `ψ : P ⟶ P'`, horizontal ones `a : Z ⟶ P`, `a' : Z' ⟶ P'` with
+`θ ≫ a' = a ≫ ψ`, and endomorphisms `F`, `F'`, `G`, `G'` of `Z`, `Z'`, `P`, `P'` commuting
+with them. -/
+lemma adicLowerStarSquareIso_cube {Z Z' P P' : Scheme.{u}} (θ : Z ⟶ Z') (ψ : P ⟶ P')
+    (a : Z ⟶ P) (a' : Z' ⟶ P') (F : Z ⟶ Z) (F' : Z' ⟶ Z') (G : P ⟶ P) (G' : P' ⟶ P')
+    (e : θ ≫ a' = a ≫ ψ) (hθ : θ ≫ F' = F ≫ θ) (hψ : ψ ≫ G' = G ≫ ψ) (hA : a ≫ G = F ≫ a)
+    (hB : a' ≫ G' = F' ≫ a') (M : AdicSheaf l Z) :
+    (G')_*ᵃ[l].map ((adicLowerStarSquareIso l e).hom.app M) ≫
+        (adicLowerStarSquareIso l hψ).hom.app ((a)_*ᵃ[l].obj M) ≫
+        (ψ)_*ᵃ[l].map ((adicLowerStarSquareIso l hA).hom.app M) =
+      (adicLowerStarSquareIso l hB).hom.app ((θ)_*ᵃ[l].obj M) ≫
+        (a')_*ᵃ[l].map ((adicLowerStarSquareIso l hθ).hom.app M) ≫
+        (adicLowerStarSquareIso l e).hom.app ((F)_*ᵃ[l].obj M) := by
+  apply Mod.hom_ext
+  have := lowerStarFactor_exchange_cube (WeilCoefficients.{u} l) θ ψ a a' F F' G G' _ e rfl
+    _ hθ rfl _ hψ rfl _ hA rfl _ hB rfl M.X
+  simp only [Mod.comp_hom', adicLowerStar_map_hom, adicLowerStarSquareIso_hom_app_hom,
+    Category.assoc] at this ⊢
+  simp only [Functor.map_comp, Category.assoc] at this ⊢
+  exact this
+
+end Adic
 
 end AlgebraicGeometry.ProEtale
