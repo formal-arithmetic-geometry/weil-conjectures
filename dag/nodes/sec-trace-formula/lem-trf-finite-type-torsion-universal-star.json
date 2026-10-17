@@ -195,5 +195,23 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-e2c675dbc (reviewer sub-agent of L); spot-checked: Neither source is in the local literature mirror (WANTED is correct), so I read both online. Zheng's Künneth appendix, Def. A.1 and the next sentence: a torsion Λ (equivalent to mΛ=0) and f locally of finite type give condition (*) universally; the item states this exactly, with the same Λ-module coefficient category on strict localizations. Illusie, Around Thom–Sebastiani, Cor. 1.15 (pp. 15–16), with the hypotheses of Thm 1.14 (Gabber/Orgogozo 3.1): no noetherian or invertibility hypothesis; the new node lem-trf-gabber-strict-local-torsion-bound states the same hypotheses and conclusion (Z/mZ-algebra, locally of finite type, fibre dimension ≤ N, any geometric point and any Λ-sheaf G, R^q f_(x)* G = 0 for q > 2N) and is statement-only. Step 1 uses the base-change and affine-pair Mathlib leaves with no hypothesis on Y'. Step 2 checks quasi-compactness of the affine chart through distinguished opens and applies the fibre-bound node, whose hypotheses (finite type, quasi-compact target) hold. Step 3: neighbourhoods in U form a full subcategory because U→X' is a monomorphism, refinement gives the hypothesis of colimit-initial (1), and clause (4) of functoriality (or uniqueness in (3)) gives equality of the induced maps. Step 4 checks the coefficient factorisation and applies the new node with N=d_U. Step 5 closes the quantifiers with N_U=2d_U and the empty cover. The new node is strictly smaller than the item (fixed morphism, global bound; it is the source's own named input). rg over the DAG and a blueprint grep found no duplicate. Small cases checked: identity with N=0, A^1 over an algebraically closed field, p-torsion Λ over Z, m=1, empty fibres. I accept both declared tool uses (fibre-dimension bound, strict-henselization functoriality) as generic black boxes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeTorsionUniversalStar",
+  "declaration": "AlgebraicGeometry.finiteTypeTorsion_universalStar",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeTorsionUniversalStar.lean",
+  "statement": "theorem finiteTypeTorsion_universalStar {X Y : Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ] (m : ℕ) (hm : 1 ≤ m) (hΛ : ∀ a : Λ, (m : Λ) * a = 0) (g : X ⟶ Y) [LocallyOfFiniteType g] : ∀ (Y' : Scheme.{u}) (b : Y' ⟶ Y), ∀ {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x' : Spec (.of Ω) ⟶ pullback g b), ∃ U : (pullback g b).Opens, x' (IsLocalRing.closedPoint Ω) ∈ U ∧ ∃ N : ℕ, ∀ (q : ℕ), N < q → ∀ (F : Sheaf (Scheme.strictHenselizationScheme x').smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf (Scheme.strictHenselizationScheme (x' ≫ pullback.snd g b)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)).obj ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) (Scheme.strictHenselizationMap (pullback.snd g b) x')).obj ((DerivedCategory.Plus.singleFunctor (Sheaf (Scheme.strictHenselizationScheme x').smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-227607ba8",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Statement, dependencies, source, docstrings, edge cases, canonical declarations, and per-file compilation checked; no findings."
  }
 }
