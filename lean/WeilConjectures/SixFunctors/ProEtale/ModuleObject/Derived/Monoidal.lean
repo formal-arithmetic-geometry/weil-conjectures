@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
+import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+
 /-!
 
 # The monoidal structure of the derived pullback on module objects over `Λ`
@@ -93,6 +95,68 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
+private lemma mapCochainComplexμIso_hom_f_eq_desc
+    {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+    [MonoidalCategory C] [MonoidalCategory D] [HasZeroObject C] [HasZeroObject D]
+    [MonoidalPreadditive C] [MonoidalPreadditive D]
+    [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
+    [∀ (X₁ X₂ : GradedObject ℤ D), X₁.HasTensor X₂]
+    [∀ X₁, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
+    [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
+    [∀ X₁, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).obj X₁)]
+    [∀ X₂, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).flip.obj X₂)]
+    [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+    [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+    (G : C ⥤ D) [G.Additive] [G.Monoidal]
+    [∀ j, PreservesColimitsOfShape
+      (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) G]
+    (K L : CochainComplex C ℤ) (n : ℤ) :
+    (G.mapCochainComplexμIso K L).hom.f n =
+      HomologicalComplex.mapBifunctorDesc (fun p q h ↦
+        Functor.LaxMonoidal.μ G (K.X p) (L.X q) ≫
+          G.map (HomologicalComplex.ιTensorObj K L p q n h)) := by
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  rw [HomologicalComplex.ι_mapBifunctorDesc]
+  exact Functor.ιTensorObj_mapCochainComplexμIso_hom_f G K L p q n h
+
+private lemma mapCochainComplexDesc_comm
+    {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+    [MonoidalCategory C] [MonoidalCategory D] [HasZeroObject C] [HasZeroObject D]
+    [MonoidalPreadditive C] [MonoidalPreadditive D]
+    [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
+    [∀ (X₁ X₂ : GradedObject ℤ D), X₁.HasTensor X₂]
+    [∀ X₁, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
+    [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
+    [∀ X₁, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).obj X₁)]
+    [∀ X₂, PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).flip.obj X₂)]
+    [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+    [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+    [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+    (G : C ⥤ D) [G.Additive] [G.Monoidal]
+    [∀ j, PreservesColimitsOfShape
+      (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) G]
+    (K L : CochainComplex C ℤ) (n n' : ℤ)
+    (h : (ComplexShape.up ℤ).Rel n n') :
+    HomologicalComplex.mapBifunctorDesc (fun p q hpq ↦
+        Functor.LaxMonoidal.μ G (K.X p) (L.X q) ≫
+          G.map (HomologicalComplex.ιTensorObj K L p q n hpq)) ≫
+      ((G.mapHomologicalComplex (.up ℤ)).obj (K ⊗ L)).d n n' =
+    ((G.mapHomologicalComplex (.up ℤ)).obj K ⊗
+        (G.mapHomologicalComplex (.up ℤ)).obj L).d n n' ≫
+      HomologicalComplex.mapBifunctorDesc (fun p q hpq ↦
+        Functor.LaxMonoidal.μ G (K.X p) (L.X q) ≫
+          G.map (HomologicalComplex.ιTensorObj K L p q n' hpq)) := by
+  simpa only [mapCochainComplexμIso_hom_f_eq_desc] using
+    (G.mapCochainComplexμIso K L).hom.comm' n n' h
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme Functor
@@ -153,8 +217,9 @@ lemma upperStarTensorComplexHom_comm
         (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj (A ⊗ B)).d n n' =
       (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj A ⊗
         ((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj B).d n n' ≫
-        upperStarTensorComplexHomX Λ f A B n' :=
-  sorry
+        upperStarTensorComplexHomX Λ f A B n' := by
+  simpa only [upperStarTensorComplexHomX] using
+    mapCochainComplexDesc_comm ((f)^*⟦Λ⟧) A B n n' (by assumption)
 
 /-- The comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` of complexes of module objects, induced
 degreewise by the tensorator of the strong monoidal pullback `f^*`. -/
