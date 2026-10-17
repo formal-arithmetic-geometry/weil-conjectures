@@ -72,8 +72,6 @@ lemma nonempty_iso_rightDerivedUpperShriek_tensor_tateObject [HasTateTwist.IsNor
 
 -- the kernel check unfolds the derived tensor product against the monoidal structure
 set_option maxHeartbeats 4000000 in
--- the kernel check of the composite isomorphism unfolds the derived tensor product
-set_option maxHeartbeats 4000000 in
 /-- Blueprint `prop-trf-exceptional-kunneth`: Exceptional Künneth; the `α` map, for smooth
 morphisms.
 
