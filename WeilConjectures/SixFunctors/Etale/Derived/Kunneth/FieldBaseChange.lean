@@ -8,6 +8,10 @@ module
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.BaseChangeUniversalHomeomorphism
+public import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 /-!
 # Base change towards spectra of fields
@@ -67,8 +71,20 @@ finite presentation and has geometrically reduced fibres (blueprint
 `lem-kun-0eys`, `AlgebraicGeometry.Etale.universalBaseChangeProperty_zero`) applies. -/
 theorem Etale.universalBaseChangeProperty_zero_of_field {K : Type u} [Field K]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] :
-    Etale.UniversalBaseChangeProperty Λ a 0 :=
-  sorry
+    Etale.UniversalBaseChangeProperty Λ a 0 := by
+  let Kp := perfectClosure K (AlgebraicClosure K)
+  let π : Spec (.of Kp) ⟶ Spec (.of K) := Spec.map (CommRingCat.ofHom (algebraMap K Kp))
+  have : IsUniversalHomeomorphism π :=
+    Algebra.IsUniversalHomeomorphism.isUniversalHomeomorphism
+  have hpb : IsPullback (pullback.fst a π) (pullback.snd a π) a π := IsPullback.of_hasPullback a π
+  refine Etale.UniversalBaseChangeProperty.of_isPullback_of_isUniversalHomeomorphism hpb ?_
+  obtain ⟨_, _, _, -⟩ :=
+    reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism (pullback a π)
+  refine Etale.UniversalBaseChangeProperty.of_comp_isUniversalHomeomorphism
+    (pullback a π).nilradical.subschemeι ?_
+  have : GeometricallyReduced ((pullback a π).nilradical.subschemeι ≫ pullback.snd a π) :=
+    GeometricallyReduced.of_perfectField _
+  exact Etale.universalBaseChangeProperty_zero Λ _
 
 /-- Blueprint `lem-kun-0f1i-normal`: the normal integral case.
 
@@ -113,7 +129,25 @@ degree `q ≥ 1` would produce, by
 theorem Etale.universalBaseChangeProperty_of_field {K : Type u} [Field K] {X : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] (n : ℕ)
     (hn : IsUnit (n : K)) (hΛ : (n : Λ) = 0) (q : ℤ) :
-    Etale.UniversalBaseChangeProperty Λ a q :=
-  sorry
+    Etale.UniversalBaseChangeProperty Λ a q := by
+  have hn' : IsUnit (n : Γ(Spec (.of K), ⊤)) := by
+    simpa using hn.map (Scheme.ΓSpecIso (.of K)).inv.hom
+  have key : ∀ m : ℕ, ∀ q' < (m : ℤ), Etale.UniversalBaseChangeProperty Λ a q' := by
+    intro m
+    induction m with
+    | zero => exact fun q' hq' ↦ Etale.universalBaseChangeProperty_of_neg Λ a hq'
+    | succ m ih =>
+      intro q' hq'
+      rcases lt_or_eq_of_le (show q' ≤ m by omega) with h | rfl
+      · exact ih q' h
+      · rcases Nat.eq_zero_or_pos m with rfl | hm
+        · exact Etale.universalBaseChangeProperty_zero_of_field Λ a
+        · by_contra hfail
+          obtain ⟨S', X', s, b, p', hpb, _, _, hnorm, _, L, _, _, i, Y, e, h, sq, d, hd, hne⟩ :=
+            Etale.exists_isPullback_not_isZero_higherDirectImage Λ a n hn' hΛ m (by omega) ih
+              hfail
+          exact hne (Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed Λ a n hn hΛ
+            s b p' hpb hnorm i e h sq d hd m (by omega))
+  exact key (q.toNat + 1) q (by omega)
 
 end AlgebraicGeometry
