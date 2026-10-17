@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import WeilConjectures.AlgebraicGeometry.SupportedAffineOverlapMap
 import WeilConjectures.AlgebraicGeometry.SupportedRelativeOpenGluing
+import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 
 /-! # Supported perfect gluing on the union with an affine open
 
@@ -205,13 +206,13 @@ theorem exists_supported_map_affine_union_gluing
       ∃ e : H.obj F ≅ J.obj R ⊞ (J.obj R)⟦(1 : ℤ)⟧,
         H.map α ≫ c.hom.app E.obj = e.hom ≫ biprod.fst ≫ J.map β
   intro c
-  obtain ⟨hDW, hOW, _, _⟩ := open_derived_localization_adjunction X W
+  obtain ⟨hDW, ⟨hOW⟩⟩ := open_derived_localization_data X W
   let := hDW
   let := hOW
-  obtain ⟨hDV, hOV, _, _⟩ := open_derived_localization_adjunction X V
+  obtain ⟨hDV, ⟨hOV⟩⟩ := open_derived_localization_data X V
   let := hDV
   let := hOV
-  obtain ⟨hDI, hOI, _, _⟩ := open_derived_localization_adjunction X (W ⊓ V)
+  obtain ⟨hDI, ⟨hOI⟩⟩ := open_derived_localization_data X (W ⊓ V)
   let := hDI
   let := hOI
   let JW := (schemeOpenRestriction X W).mapDerivedCategory
