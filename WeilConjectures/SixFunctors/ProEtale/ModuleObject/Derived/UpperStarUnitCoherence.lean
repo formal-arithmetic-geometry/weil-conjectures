@@ -210,8 +210,8 @@ lemma leftDerivedUpperStarComp_hom_app_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
 
 section BoundedConstructible
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
+variable (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 variable {X Y Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -246,7 +246,7 @@ private lemma leftDerivedUpperStarUnitIso_hom_comp_left (f : X ⟶ Y) (g : Y ⟶
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] in
+  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [Fact ℓ.Prime] in
 private lemma leftDerivedUpperStarComp_hom_app_unit_obj (f : X ⟶ Y) (g : Y ⟶ Z) :
     (leftDerivedUpperStarComp Λ f.left g.left).hom.app (𝟙_ Dᵇc(Z.left)⟦Λ⟧).obj =
       (leftDerivedUpperStarComp Λ f.left g.left).hom.app (𝟙_ _) :=
@@ -265,7 +265,7 @@ lemma boundedConstructibleUpperStarComp_hom_app_unit (f : X ⟶ Y) (g : Y ⟶ Z)
   ext1
   simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarComp_hom_app_hom,
     boundedConstructibleUpperStar_map_hom, boundedConstructibleUpperStar_εIso_inv_hom]
-  exact (congrArg (· ≫ _) (leftDerivedUpperStarComp_hom_app_unit_obj Λ f g)).trans
+  exact (congrArg (· ≫ _) (leftDerivedUpperStarComp_hom_app_unit_obj Λ ℓ f g)).trans
     ((leftDerivedUpperStarComp_hom_app_unit Λ f.left g.left).trans
       (leftDerivedUpperStarUnitIso_hom_comp_left Λ f g).symm)
 
@@ -273,7 +273,7 @@ variable (X) in
 /-- The identity isomorphism `R(𝟙 X)_* ≅ 𝟭` of the derived pushforward on bounded constructible
 complexes is, at the unit, the unit of `L(𝟙 X)^* ⊣ R(𝟙 X)_*` followed by the inverse of the unit
 comparison of `L(𝟙 X)^*`. -/
-lemma boundedConstructibleLowerStarId_inv_app_unit [IsFinitenessCoefficient ℓ Λ] :
+lemma boundedConstructibleLowerStarId_inv_app_unit :
     (boundedConstructibleLowerStarId Λ ℓ X).inv.app (𝟙_ _) =
       (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 X)).unit.app (𝟙_ _) ≫
         (boundedConstructibleLowerStar Λ ℓ (𝟙 X)).map

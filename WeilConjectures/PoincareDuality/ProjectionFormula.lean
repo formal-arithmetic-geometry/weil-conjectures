@@ -132,7 +132,7 @@ end OfCompactification
 
 section BoundedConstructible
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
+variable (ℓ : ℕ) [Fact ℓ.Prime] [IsEllAdicFinitenessCoefficient ℓ Λ] {k : Type u} [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 variable {X Y : Over (Spec (.of k))}
