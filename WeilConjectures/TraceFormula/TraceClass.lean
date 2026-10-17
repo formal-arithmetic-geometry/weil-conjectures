@@ -123,6 +123,94 @@ noncomputable def evaluationKernel (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
 
 end Evaluation
 
+/-! ### The class of a correspondence -/
+
+section CorrespondenceClass
+
+variable (ℓ) {C Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom] (c : C ⟶ Y ⨯ X)
+
+/-- **The class of a correspondence** (blueprint `lem-trf-correspondence-class`): for the support
+`c = (c₁, c₂) : C ⟶ Z = Y ⨯ X` of a correspondence from `(X, K)` to `(Y, L)`, with
+`c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`, the tensor–hom adjunction, the derived projection formula for
+`c` and the exceptional adjunction give a bijection
+```
+Hom(Rc_! ℚ̄_ℓ,C, RHom(Lp₂^* K, Rp₁^! L)) ≃ Hom(Lc₂^* K, Rc₁^! L),
+```
+natural in `K` and `L` (`correspondenceClassEquiv_naturality_left`,
+`correspondenceClassEquiv_naturality_right`). The *class* `[u]` of a coefficient map `u` is its
+inverse image, a class supported on `c`. -/
+noncomputable def correspondenceClassEquiv (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+        (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj K)).obj
+          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) ≃
+      ((boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).obj K ⟶
+        (boundedConstructibleUpperShriek _ ℓ (c ≫ prod.fst)).obj L) where
+  toFun g := (boundedConstructibleUpperStarComp _ ℓ c prod.snd).hom.app K ≫
+    Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c)
+      (boundedConstructibleExceptionalProjection _ ℓ c) _ _ g ≫
+    (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst).inv.app L
+  invFun f := (Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c)
+      (boundedConstructibleExceptionalProjection _ ℓ c) _ _).symm
+    ((boundedConstructibleUpperStarComp _ ℓ c prod.snd).inv.app K ≫ f ≫
+      (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst).hom.app L)
+  left_inv g := by
+    simp only [Category.assoc, Iso.inv_hom_id_app, Functor.comp_obj, Category.comp_id,
+      Iso.inv_hom_id_app_assoc, Equiv.symm_apply_apply]
+  right_inv f := by
+    simp only [Equiv.apply_symm_apply, Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj,
+      Category.comp_id, Iso.hom_inv_id_app_assoc]
+
+lemma correspondenceClassEquiv_apply (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (g : (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+        (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj K)).obj
+          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) :
+    correspondenceClassEquiv ℓ c K L g =
+      (boundedConstructibleUpperStarComp _ ℓ c prod.snd).hom.app K ≫
+        Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ c)
+          (boundedConstructibleExceptionalProjection _ ℓ c) _ _ g ≫
+        (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst).inv.app L :=
+  rfl
+
+/-- Naturality of the class bijection in `L` (blueprint `lem-trf-correspondence-class`). -/
+lemma correspondenceClassEquiv_naturality_right
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    {L L' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (b : L ⟶ L')
+    (g : (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+        (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj K)).obj
+          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) :
+    correspondenceClassEquiv ℓ c K L'
+        (g ≫ (ihom _).map ((boundedConstructibleUpperShriek _ ℓ prod.fst).map b)) =
+      correspondenceClassEquiv ℓ c K L g ≫
+        (boundedConstructibleUpperShriek _ ℓ (c ≫ prod.fst)).map b := by
+  exact Verdier.correspondenceClassEquiv_naturality_right_conj
+    (boundedConstructibleUpperShriekAdjunction _ ℓ c)
+    (boundedConstructibleExceptionalProjection _ ℓ c) _
+    (boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst)
+    ((boundedConstructibleUpperStarComp _ ℓ c prod.snd).hom.app K) b g
+
+/-- Naturality of the class bijection in `K` (blueprint `lem-trf-correspondence-class`). -/
+lemma correspondenceClassEquiv_naturality_left
+    {K K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (a : K' ⟶ K)
+    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (g : (boundedConstructibleLowerShriek _ ℓ c).obj (𝟙_ _) ⟶
+        (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).obj K)).obj
+          ((boundedConstructibleUpperShriek _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).obj L)) :
+    correspondenceClassEquiv ℓ c K' L
+        (g ≫ (pre ((boundedConstructibleUpperStar _ ℓ prod.snd).map a)).app _) =
+      (boundedConstructibleUpperStar _ ℓ (c ≫ prod.snd)).map a ≫
+        correspondenceClassEquiv ℓ c K L g := by
+  exact Verdier.correspondenceClassEquiv_naturality_left_conj
+    (boundedConstructibleUpperShriekAdjunction _ ℓ c)
+    (boundedConstructibleExceptionalProjection _ ℓ c) _
+    (boundedConstructibleUpperStarComp _ ℓ c prod.snd)
+    ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ c prod.fst).inv.app L) a g
+
+end CorrespondenceClass
+
 /-! ### The trace class -/
 
 namespace Correspondence

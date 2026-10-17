@@ -689,7 +689,8 @@ theorem trace_stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     trace ((unit ℓ Φ).stalkFrobenius m x hx) = 𝟙 _ := by
   rw [stalkFrobenius_unit]
   exact (trace_eq_of_iso
-    (X := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj (unit ℓ Φ).carrier)
+    (X := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
+      (unit ℓ Φ).carrier)
     (X' := 𝟙_ _)
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x)).symm
     (𝟙 _) (𝟙 _) (by simp)).trans trace_id_tensorUnit

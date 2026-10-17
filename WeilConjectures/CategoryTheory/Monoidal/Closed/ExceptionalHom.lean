@@ -193,6 +193,69 @@ theorem homMate_comp_exceptionalHomMap (M N : D) [IsIso ((pf.app (𝟙_ C)).app 
     IsIso.inv_hom_id_assoc, uncurry_homMate, Adjunction.homEquiv_counit, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_assoc, ← Adjunction.homEquiv_counit, Equiv.apply_symm_apply]
 
+/-- Naturality of `leftProjection` in the object `M`. -/
+@[reassoc]
+lemma leftProjection_naturality_left {M M' : D} (a : M' ⟶ M) (T : C) :
+    a ▷ P.obj T ≫ leftProjection pf M T = leftProjection pf M' T ≫ P.map (F.map a ▷ T) := by
+  have h := (pf.app T).naturality a
+  dsimp at h
+  simp only [leftProjection, Category.assoc]
+  rw [BraidedCategory.braiding_naturality_left_assoc, reassoc_of% h, ← P.map_comp,
+    ← P.map_comp, BraidedCategory.braiding_naturality_right]
+
+/-- The class bijection is natural in the target `N` (blueprint `lem-trf-correspondence-class`). -/
+lemma correspondenceClassEquiv_naturality_right (M : D) {N N' : D}
+    [IsIso ((pf.app (𝟙_ C)).app M)] (b : N ⟶ N') (g : P.obj (𝟙_ C) ⟶ (ihom M).obj N) :
+    correspondenceClassEquiv adj' pf M N' (g ≫ (ihom M).map b) =
+      correspondenceClassEquiv adj' pf M N g ≫ S.map b := by
+  rw [correspondenceClassEquiv_apply, correspondenceClassEquiv_apply, uncurry_natural_right,
+    ← Adjunction.homEquiv_naturality_right]
+  simp only [Category.assoc]
+
+/-- The class bijection is natural in the source `M` (blueprint `lem-trf-correspondence-class`):
+precomposing a class with `RHom(a, N)` corresponds to precomposing with `F a`. -/
+lemma correspondenceClassEquiv_naturality_left {M M' : D} (N : D)
+    [IsIso ((pf.app (𝟙_ C)).app M)] [IsIso ((pf.app (𝟙_ C)).app M')] (a : M' ⟶ M)
+    (g : P.obj (𝟙_ C) ⟶ (ihom M).obj N) :
+    correspondenceClassEquiv adj' pf M' N (g ≫ (pre a).app N) =
+      F.map a ≫ correspondenceClassEquiv adj' pf M N g := by
+  rw [correspondenceClassEquiv_apply, correspondenceClassEquiv_apply, uncurry_pre_app,
+    ← Adjunction.homEquiv_naturality_left]
+  congr 1
+  have h := leftProjection_naturality_left pf a (𝟙_ C)
+  rw [← cancel_epi (P.map (ρ_ (F.obj M')).hom)]
+  simp only [← P.map_comp_assoc, Iso.hom_inv_id, P.map_id, Category.id_comp]
+  have hρ : (ρ_ (F.obj M')).hom ≫ F.map a ≫ (ρ_ (F.obj M)).inv = F.map a ▷ 𝟙_ C := by
+    rw [MonoidalCategory.rightUnitor_inv_naturality, Iso.hom_inv_id_assoc]
+  rw [← cancel_epi (leftProjection pf M' (𝟙_ C)), IsIso.hom_inv_id_assoc, hρ, ← reassoc_of% h,
+    IsIso.hom_inv_id_assoc]
+
+/-- `correspondenceClassEquiv_naturality_right` conjugated by a morphism `A ⟶ F M` and a natural
+isomorphism `G ≅ H ⋙ S`, in the form used for the concrete six functors. -/
+lemma correspondenceClassEquiv_naturality_right_conj (M : D) [IsIso ((pf.app (𝟙_ C)).app M)]
+    {E' : Type*} [Category E'] {G : E' ⥤ C} {H : E' ⥤ D} (e : G ≅ H ⋙ S) {A : C}
+    (eA : A ⟶ F.obj M) {N N' : E'} (b : N ⟶ N') (g : P.obj (𝟙_ C) ⟶ (ihom M).obj (H.obj N)) :
+    eA ≫ correspondenceClassEquiv adj' pf M (H.obj N') (g ≫ (ihom M).map (H.map b)) ≫
+        e.inv.app N' =
+      (eA ≫ correspondenceClassEquiv adj' pf M (H.obj N) g ≫ e.inv.app N) ≫ G.map b := by
+  have h := e.inv.naturality b
+  rw [Functor.comp_map] at h
+  rw [correspondenceClassEquiv_naturality_right, Category.assoc, Category.assoc,
+    Category.assoc, h]
+
+/-- `correspondenceClassEquiv_naturality_left` conjugated by a natural isomorphism `G ≅ H ⋙ F`
+and a morphism `S N ⟶ B`, in the form used for the concrete six functors. -/
+lemma correspondenceClassEquiv_naturality_left_conj (N : D) {E' : Type*} [Category E']
+    {G : E' ⥤ C} {H : E' ⥤ D} (e : G ≅ H ⋙ F) {B : C} (eB : S.obj N ⟶ B) {M M' : E'}
+    [IsIso ((pf.app (𝟙_ C)).app (H.obj M))] [IsIso ((pf.app (𝟙_ C)).app (H.obj M'))]
+    (a : M' ⟶ M) (g : P.obj (𝟙_ C) ⟶ (ihom (H.obj M)).obj N) :
+    e.hom.app M' ≫ correspondenceClassEquiv adj' pf (H.obj M') N (g ≫ (pre (H.map a)).app N) ≫
+        eB =
+      G.map a ≫ e.hom.app M ≫ correspondenceClassEquiv adj' pf (H.obj M) N g ≫ eB := by
+  have h := e.hom.naturality a
+  rw [Functor.comp_map] at h
+  rw [correspondenceClassEquiv_naturality_left, Category.assoc, reassoc_of% h]
+
 end CorrespondenceClass
 
 end Verdier
