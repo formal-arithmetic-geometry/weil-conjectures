@@ -12,9 +12,113 @@
   "def-coef-infinity-category-of-spaces",
   "lem-coef-infinity-space-valued-pointwise-lan"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $v_i=h_i^{\\mathrm{op}}$, $L_i=(v_i)_!F_i$, with specified units $\\eta_i$. For $b=(b_i)\\in\\prod_iB_i^{\\mathrm{op}}$ let $J_i=(v_i\\downarrow b_i)$ in the explicit arrow-comma model of [lem-coef-infinity-space-valued-pointwise-lan]. The comma category for $v=\\prod_i v_i$ at $b$ is exactly $\\prod_iJ_i$: internal functors into a product, endpoint restrictions and the displayed comma pullbacks are coordinatewise in every simplicial degree. A simplex is precisely the tuple of its coordinate simplices, and the inverse collects the tuple. In particular this identifies the entire source diagrams and cocones, not merely their objects. Products of the small inputs remain small, and products of quasicategories satisfy inner-horn filling coordinatewise. The pointwise theorem now identifies the value of $v_!(\\boxtimes_iF_i)$ at $b$ with the colimit on $\\prod_iJ_i$ of $(a_i,\\alpha_i)\\mapsto\\prod_iF_i(a_i)$, and identifies $L_i(b_i)$ with $\\operatorname{colim}_{J_i}F_i$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-space-valued-pointwise-lan"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Corollary 6.10, product-comma proof; finite-family, unit and coherent-parameter details expanded by the agent."
+   }
+  },
+  {
+   "text": "For every small space $X$, the functor $X\\times-$ preserves all small colimits. Model the finite product of spaces by the degreewise product of Kan complexes. It is a simplicial functor on $\\mathbf{Kan}^I$, composition acting coordinatewise, so it gives a coherent functor $\\mathcal S^I\\to\\mathcal S$: a simplex of a coherent nerve into a product is the tuple of its coordinate simplices. For $I=\\varnothing$ it is the one-point space. For Kan $T$, each edge of $\\operatorname{Fun}(S,T)$ has vertex components that are equivalences, so by the componentwise detection of [lem-cbc-enhanced-functor-cone-calculus] $\\operatorname{Fun}(S,T)$ is its own core, a Kan complex. Hence [lem-coef-coherent-nerve-comparison] gives $\\operatorname{Map}_{\\mathcal S}(T,\\prod_iX_i)\\simeq\\operatorname{Fun}(T,\\prod_iX_i)=\\prod_i\\operatorname{Fun}(T,X_i)\\simeq\\prod_i\\operatorname{Map}_{\\mathcal S}(T,X_i)$ through the projections, so this is the finite product of $\\mathcal S$ with its projection cone. Put $R(Z)=\\operatorname{Fun}(X,Z)$ with evaluation $\\varepsilon_Z:X\\times R(Z)\\to Z$. Under the same comparison, $u\\mapsto\\varepsilon_Z\\circ(X\\times u)$ from $\\operatorname{Map}_{\\mathcal S}(Y,RZ)$ to $\\operatorname{Map}_{\\mathcal S}(X\\times Y,Z)$ is the exponential isomorphism $\\operatorname{Hom}(Y\\times\\Delta^n,\\operatorname{Fun}(X,Z))=\\operatorname{Hom}(X\\times Y\\times\\Delta^n,Z)$, hence an equivalence. Apply [lem-coef-parametric-universal-arrows] to $T=X\\times-$ with $\\mathcal D_0=\\mathcal S$. For small $J$ and $Y:J\\to\\mathcal S$ it gives $\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal S)}(Y,R\\Delta_JZ)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal S)}(X\\times Y,\\Delta_JZ)$, and $R\\Delta_JZ=\\Delta_JRZ$. Let $\\lambda:Y\\to\\Delta_Jc$ be colimiting, with legs $\\iota_j$. The composite $\\operatorname{Map}(X\\times c,Z)\\simeq\\operatorname{Map}(c,RZ)\\to\\operatorname{Map}(Y,\\Delta_JRZ)\\simeq\\operatorname{Map}(X\\times Y,\\Delta_JZ)$ is $w\\mapsto\\Delta_J(w)\\circ(X\\times\\lambda)$, by functoriality of $X\\times-$ and the formula's compatibility with evaluation at vertices. Its middle map is an equivalence by the cocone criterion of [lem-cbc-enhanced-functor-cone-calculus]. By the same criterion $X\\times\\lambda$, with legs $1_X\\times\\iota_j$, is colimiting:\\n$$\\operatorname{colim}_{j\\in J}(X\\times Y_j)\\simeq X\\times\\operatorname{colim}_{j\\in J}Y_j.$$\\nNo step uses nonemptiness, so $J$ or $X$ may be empty. [lem-coef-spaces-small-colimits-universe] supplies these colimits in the fixed value universe. Exchanging the coordinates gives the same for $-\\times X$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Corollary 6.10, product-comma proof; finite-family, unit and coherent-parameter details expanded by the agent."
+   }
+  },
+  {
+   "text": "For small coherent $U:J\\to\\mathcal S$ and $V:K\\to\\mathcal S$, apply [lem-coef-infinity-product-colimit-fubini] to $H(j,k)=U(j)\\times V(k)$. By step 2 the transformation $H\\to(U\\times\\operatorname{colim}_KV)\\operatorname{pr}_J$ with components $1_{U(j)}\\times\\iota_k$ is colimiting on every $\\{j\\}\\times K$, so it is an admissible $L$ there. Step 2 in the $J$ variable then gives\n$$\\operatorname{colim}_{J\\times K}(U\\boxtimes V)\\simeq\\operatorname{colim}_{j\\in J}\\bigl(U(j)\\times\\operatorname{colim}_KV\\bigr)\\simeq(\\operatorname{colim}_JU)\\times(\\operatorname{colim}_KV).$$\nThe Fubini clause about legs and the legs in step 2 show that this is exactly the comparison induced by the product cocone $(j,k)\\mapsto(\\iota_j,\\iota_k)$. All the shapes here are small and all their colimits exist by [lem-coef-spaces-small-colimits-universe].",
+   "uses": [
+    "lem-coef-infinity-product-colimit-fubini",
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Corollary 6.10, product-comma proof; finite-family, unit and coherent-parameter details expanded by the agent."
+   }
+  },
+  {
+   "text": "Induct on the cardinality of the finite family to obtain the analogous equivalence with legs $\\prod_i\\iota_i$. The induction claim is that for any such family of small diagrams $U_i:J_i\\to\\mathcal S$, the product of their colimit cocones is colimiting on $\\prod_iJ_i$. At cardinality zero this shape is the point and its diagram has value $*$; the identity cocone on a point represents cocones to any space $T$, since both its map space and the space of such cocones are $\\operatorname{Map}(*,T)$. At the induction step choose one factor and the complementary family, apply step 3 to their two diagrams, and then apply the induction hypothesis to the complementary family. Each composite leg is the product of the original legs. Finite product reassociation identifies these legs coordinate by coordinate. This proves the claim, with no assumption that any $J_i$ is nonempty or filtered.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Corollary 6.10, product-comma proof; finite-family, unit and coherent-parameter details expanded by the agent."
+   }
+  },
+  {
+   "text": "Put $G=\\boxtimes_iL_i$ and let $u:\\boxtimes_iF_i\\to Gv$ be the product of the $\\eta_i$. The universal mapping-space equivalence for $v_!$ in [lem-coef-infinity-space-valued-pointwise-lan] gives the comparison $c:v_!(\\boxtimes_iF_i)\\to G$ as the mate of $u$. At $b$, precomposing $c_b$ with the leg indexed by $(a_i,\\alpha_i)$ gives\n$$\\prod_iF_i(a_i)\\xrightarrow{\\prod_i\\eta_{i,a_i}}\\prod_iL_i(v_i a_i)\\xrightarrow{\\prod_iL_i(\\alpha_i)}\\prod_iL_i(b_i).$$\nThese are exactly the product of the canonical pointwise cocones specified in the Kan theorem. Step 4 shows that this cocone is colimiting, while step 1 supplies the colimiting source cocone. The cocone mapping-space criterion and uniqueness of initial objects from [lem-cbc-enhanced-functor-cone-calculus] therefore make $c_b$ an equivalence. That node's componentwise detection makes the coherent transformation $c$ an equivalence. Its defining mate equation $(cv)\\eta=u$ is precisely preservation of the specified units.",
+   "uses": [
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Corollary 6.10, product-comma proof; finite-family, unit and coherent-parameter details expanded by the agent."
+   }
+  },
+  {
+   "text": "The comparison is coherent in the input data, rather than a choice of unrelated pointwise equivalences. Presheaves: apply the dual, left-universal-arrow clause of [lem-coef-parametric-universal-arrows] to restriction $v^*$ and to each $v_i^*$, with $\\mathcal D_0$ the whole presheaf category. The universal arrows are the Kan units of [lem-coef-infinity-space-valued-pointwise-lan]. Enlarge the universe so that $K=\\prod_iP(A_i)$ is a parameter. Restriction and products are coordinatewise, so $v^*\\circ\\boxtimes=\\boxtimes\\circ\\prod_iv_i^*$ as simplicial maps. The $K$-formula then identifies maps $v_!\\circ\\boxtimes\\to\\boxtimes\\circ\\prod_i(v_i)_!$ in $\\operatorname{Fun}(K,P(\\prod_iB_i))$ with maps $\\boxtimes\\to\\boxtimes\\circ\\prod_iv_i^*(v_i)_!$. The product of the coherent units is such a map. Its preimage is a coherent transformation whose vertex components are the maps $c$ of step 5. It is therefore an equivalence by the componentwise detection of [lem-cbc-enhanced-functor-cone-calculus]. Compatibility with precomposition along $\\Delta^n\\to K$ restricts it to presheaves, their transformations and higher simplices. Functors: for transformations $\\sigma_i:h_i\\to h'_i$ the induced maps of Kan extensions are mates of restriction along $\\sigma$. Both composites $v_!(\\boxtimes_iF_i)\\to\\boxtimes_i(h'_i)_!F_i$ around the naturality square have the same image under the step-5 mapping-space equivalence for $v$: the product of the $\\sigma$-transformed units $F_i\\to h_i^*(h'_i)_!F_i$. Hence the square commutes. Its fillers form a homotopy fibre of an equivalence of Kan complexes, which is contractible by [lem-cbc-kan-fibration-fiber-criterion]. Now take a simplex of transformations. Each boundary configuration of compatibility homotopies, after composing into its last target, is a sphere in the source of such an equivalence, and its image sphere is filled. So it has a filler, unique up to contractible choice, by the same criterion. This is the asserted coherence in higher simplices. The parameter universe can be enlarged without changing the small comma shapes or the value universe.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Corollary 6.10, product-comma proof; finite-family, unit and coherent-parameter details expanded by the agent."
+   }
+  },
+  {
+   "text": "Regrouping products replaces $\\prod_i\\eta_i$ by the same tuple of units under the coordinate product identifications. Hence a regrouped comparison and $c$ have identical images in the Kan mapping-space equivalence of step 5. The homotopy fiber over that image is contractible, so the identification is coherent in every parameter by [lem-coef-parametric-universal-arrows]. For composition $A_i\\xrightarrow{h_i}B_i\\xrightarrow{k_i}C_i$, the composite of the two Kan mapping equivalences identifies $(k_i)_!(h_i)_!$ with $(k_i h_i)_!$: both are left universal arrows for the same restriction, with composite unit\n$$F_i\\xrightarrow{\\eta^{h_i}}h_i^*(h_i)_!F_i\\xrightarrow{h_i^*\\eta^{k_i}}h_i^*k_i^*(k_i)_!(h_i)_!F_i.$$\nBoth ways of combining the external-product comparisons transpose to the product of these displayed units. Contractibility of the fiber gives their compatibility, including all further associativity and higher coherences via the parameter version of the same formula. In the empty family $v$ is the identity of the point, and the unit and comparison are the identity of its terminal presheaf, so these compatibilities also include empty blocks.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Corollary 6.10, product-comma proof; finite-family, unit and coherent-parameter details expanded by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-product-colimit-fubini",
+  "lem-coef-infinity-space-valued-pointwise-lan",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/2006.08269",
+  "place": "Corollary 6.10, product-comma calculation; expanded finite-family induction and Kan-unit mapping-space argument. Online source read, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +155,61 @@
    "results": "{\"t\": \"2026-10-17T05:56:49Z\", \"tool\": \"leanfinder\", \"query\": \"Fubini formula for colimits of products of spaces over a product of comma infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitPointwiseProductToProductColimit\", \"CategoryTheory.Limits.colimitPointwiseProductToProductColimit_app\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim\", \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_ι_inv\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_hom\", \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π_assoc\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_ι_inv_assoc\"], \"digest\": \"6b3cbd5da5e2bc95\"}",
    "date": "2026-10-17",
    "verdict": "no match: ExternalProduct/KanExtension.lean:30-105 and Limits/Fubini.lean:638-669 use ordinary Category instances and ordinary colimits. They are analogous theorems for ordinary categories, not coherent functors to the infinity category of spaces; no one-line specialization gives this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent left Kan extension along a product of functors preserves the external product of presheaves of spaces",
+   "results": "{\"t\": \"2026-10-17T08:32:34Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent left Kan extension along a product of functors preserves the external product of presheaves of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitLeftφ\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitRightφ\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitRightUnit\"], \"digest\": \"65da1a677c03471a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read ExternalProduct/KanExtension.lean:30-105 and Limits/Fubini.lean:638-669. The hits are ordinary Category/Functor and ordinary colimits; they do not specialize in one line to coherent functors and the infinity category of spaces. SimplicialNerve.lean:24-32 explicitly lists the space-quasicategory construction among its projects."
+  },
+  {
+   "tool": "grep",
+   "query": "external.*product|prod.*[Kk]an|[Kk]an.*prod",
+   "results": "{\"t\": \"2026-10-17T08:37:28Z\", \"tool\": \"grep\", \"query\": \"external.*product|prod.*[Kk]an|[Kk]an.*prod\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\"], \"digest\": \"b0f4e6698f1059cc\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read ExternalProduct/KanExtension.lean:30-105 and Limits/Fubini.lean:638-669. The hits are ordinary Category/Functor and ordinary colimits; they do not specialize in one line to coherent functors and the infinity category of spaces. SimplicialNerve.lean:24-32 explicitly lists the space-quasicategory construction among its projects.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left Kan extension of an external product of coherent presheaves of spaces along a product functor",
+   "results": "{\"t\": \"2026-10-17T08:37:28Z\", \"tool\": \"leansearch\", \"query\": \"Left Kan extension of an external product of coherent presheaves of spaces along a product functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftKanExtension\", \"CategoryTheory.Functor.lan\", \"CategoryTheory.MonoidalCategory.DayConvolution.leftKanExtension\", \"CategoryTheory.Functor.LeftExtension\", \"CategoryTheory.Bicategory.lanIsKan\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.Functor.HasLeftKanExtension\", \"CategoryTheory.Functor.RightExtension.precomp\"], \"digest\": \"bc41d5ccc366e58b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read ExternalProduct/KanExtension.lean:30-105 and Limits/Fubini.lean:638-669. The hits are ordinary Category/Functor and ordinary colimits; they do not specialize in one line to coherent functors and the infinity category of spaces. SimplicialNerve.lean:24-32 explicitly lists the space-quasicategory construction among its projects."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft",
+   "results": "{\"t\": \"2026-10-17T08:37:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft\"], \"digest\": \"e637acd9e19ed607\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read ExternalProduct/KanExtension.lean:30-105 and Limits/Fubini.lean:638-669. The hits are ordinary Category/Functor and ordinary colimits; they do not specialize in one line to coherent functors and the infinity category of spaces. SimplicialNerve.lean:24-32 explicitly lists the space-quasicategory construction among its projects."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitIsoColimitCurryCompColim|colimitUncurryIsoColimitCompColim",
+   "results": "{\"t\": \"2026-10-17T08:37:40Z\", \"tool\": \"grep\", \"query\": \"colimitIsoColimitCurryCompColim|colimitUncurryIsoColimitCompColim\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\"], \"digest\": \"4eeedfc04d34368b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read ExternalProduct/KanExtension.lean:30-105 and Limits/Fubini.lean:638-669. The hits are ordinary Category/Functor and ordinary colimits; they do not specialize in one line to coherent functors and the infinity category of spaces. SimplicialNerve.lean:24-32 explicitly lists the space-quasicategory construction among its projects.",
+   "subdirectory": "CategoryTheory/Limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimitIsoColimitCurryCompColim",
+   "results": "{\"t\": \"2026-10-17T08:37:41Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitIsoColimitCurryCompColim\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_hom\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_ι_inv\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_hom_assoc\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_ι_inv_assoc\"], \"digest\": \"49996e87b428ef7e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read ExternalProduct/KanExtension.lean:30-105 and Limits/Fubini.lean:638-669. The hits are ordinary Category/Functor and ordinary colimits; they do not specialize in one line to coherent functors and the infinity category of spaces. SimplicialNerve.lean:24-32 explicitly lists the space-quasicategory construction among its projects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fubini formula for colimits of products of spaces over a product of comma infinity categories",
+   "results": "{\"t\": \"2026-10-17T08:37:52Z\", \"tool\": \"leanfinder\", \"query\": \"Fubini formula for colimits of products of spaces over a product of comma infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitPointwiseProductToProductColimit_app\", \"CategoryTheory.Limits.IsColimit.ofCoconeUncurry\", \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π_assoc\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_ι_inv\", \"CategoryTheory.Limits.colimitPointwiseProductToProductColimit\", \"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_hom\"], \"digest\": \"39d52e68c07a386b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read ExternalProduct/KanExtension.lean:30-105 and Limits/Fubini.lean:638-669. The hits are ordinary Category/Functor and ordinary colimits; they do not specialize in one line to coherent functors and the infinity category of spaces. SimplicialNerve.lean:24-32 explicitly lists the space-quasicategory construction among its projects."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-day-relative-exponential-model",
@@ -81,5 +236,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-presheaf-external-product-kan",
+  "worker": "stage1",
+  "summary": "Read Chu--Haugseng Corollary 6.10 online and the current ancestor/unit; kept the statement. Split the product-comma argument, explicitly retaining units, finite induction including empty categories, the coherent comparison and its parameter/composition compatibility. One general coherent Fubini node is statement-only; existing universal space colimits supply separate product preservation. Checked all cited statements and edge cases; no ordinary Mathlib theorem substituted for an infinity-categorical assertion. Maintainer reader repair (2026-10-17): step 2 now derives cocontinuity of X x - for the degreewise product of Kan complexes from the coherent-nerve comparison and the exponential law through parametric universal arrows, instead of the slice base change over a point; step 3 checks the Fubini hypothesis for the chosen L; step 6 spells out the coherence argument for transformations of the functors.",
+  "blueprint": "Realizes the foundational external-product Kan calculation in proof paragraph 2 of prop-coef-integral-exceptional-adjoint along the recorded Day/right-fibration ancestry. The ancestor paragraph is the finite coefficient mapping-complex adjunction before the inverse limit; steps 1-5 give the product-comma comparison, steps 6-7 its units and coherent finite-product/composition compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cocone mapping-space criterion, uniqueness of initial objects and componentwise detection of equivalences in functor quasicategories (steps 2, 4, 5, 6); the biduality unit states no such foundational interface. Accepted on the same terms as in lem-coef-infinity-space-valued-pointwise-lan."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic criterion that an equivalence of Kan complexes has contractible homotopy fibres, used in step 6 for the fillers of the coherence squares; no coefficient-unit node states it. Accepted on the same terms as in lem-coef-parametric-universal-arrows."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-81dd296d6",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-81dd296d6 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node and the full statements of every cited node, plus the unit, the ancestor and the parent. Chu–Haugseng 6.10 is not archived and I could not open it here, so I checked the mathematics directly; proof_origin agent with WANTED is correct. The item statement is true and kept verbatim. Tested cases: empty input category, a single empty factor, a point mapped into Δ¹, and the zero-factor family. Steps 1, 4, 5 and 7 are correct. I repaired three faults. (1) Step 2 (C4/E4): it applied lem-coef-space-universal-colimits over B=* as if the slice base change were the product functor used in ⊠. No node identifies S_{/*} with S. The step now models the product as the degreewise product of Kan complexes. It gets cocontinuity of X×− from lem-coef-coherent-nerve-comparison, the exponential law, the parametric universal-arrow formula and the cocone criterion. (2) Fubini node (B2/C4): 'the cocones assemble to L' was ambiguous. It now applies to any (L,τ) that is pointwise colimiting, and step 3 checks this hypothesis. (3) Step 6 (E5): naturality in transformations of the h_i 'including higher simplices' had been attributed to the parametric formula, which holds only for a fixed functor. The step now makes the parameter K=∏P(A_i) explicit for presheaves. For the functors it argues through mate squares whose fillers, including the higher boundary fillers, are unique up to contractible choice by lem-cbc-kan-fibration-fiber-criterion. The new node is true (tested with J or K empty, Δ⁰ and Δ¹) and statement-only. It is not a duplicate of lem-pc-colimit-fubini, the sifted-colimit nodes or the Grothendieck/end formulas, and the blueprint search for Fubini found nothing. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-fibration-fiber-criterion. The report wrongly said every tool was in the unit. After the fixes review_split passes on a copy, the graph is acyclic and no SGA source is used.; 2 file(s) fixed by the reviewer"
  }
 }
