@@ -2,7 +2,7 @@
  "id": "lem-trf-total-site-component-restriction",
  "kind": "statement",
  "title": "Exact conservative component restriction on a total simplicial site",
- "statement": "Let $\\mathcal C_\\bullet$ be a simplicial object [def-weil-pbc-simplicial-object] in small sites and morphisms of sites [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]: for $\\varphi:[m]\\to[n]$ a morphism of sites $f_\\varphi:\\mathcal C_n\\to\\mathcal C_m$; the identity and composition laws may hold through specified isomorphisms $f_{\\psi}^{-1}f_\\varphi^{-1}\\cong f_{\\varphi\\circ\\psi}^{-1}$, $f_{\\mathrm{id}}^{-1}\\cong\\mathrm{id}$ satisfying the cocycle identities (equalities in the strict case). Let $\\mathrm{Sh}(\\mathcal C_{total})$ be the category of systems $(F_n,F(\\varphi))$ of sheaves $F_n$ on $\\mathcal C_n$ and maps $F(\\varphi):f_\\varphi^{-1}F_m\\to F_n$ compatible with identities and composition through these isomorphisms (in the strict case the sheaves on the total site), and $\\mathrm{Ab}(\\mathcal C_{total})$ the analogous category of systems of abelian sheaves. For each $n$ let $r_n:\\mathrm{Ab}(\\mathcal C_{total})\\to\\mathrm{Ab}(\\mathcal C_n)$, $(F_k,F(\\varphi))\\mapsto F_n$. Then $r_n$ has an exact left adjoint $g_{n!}$, whose value on an abelian sheaf $G$ on $\\mathcal C_n$ has degree-$m$ component $\\bigoplus_{\\varphi:[n]\\to[m]}f_\\varphi^{-1}G$ with transition maps induced by the composition isomorphisms. Consequently each $r_n$ is exact, sends injective abelian sheaves [def-sp-injective-resolutions] to injective abelian sheaves and K-injective complexes to K-injective complexes, and the family $(r_n)_n$ is conservative.",
+ "statement": "Let $\\mathcal C_\\bullet$ be a simplicial object [def-weil-pbc-simplicial-object] in small sites and morphisms of sites [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]: for $\\varphi:[m]\\to[n]$ a morphism of sites $f_\\varphi:\\mathcal C_n\\to\\mathcal C_m$; the identity and composition laws may hold through specified isomorphisms $f_\\varphi^{-1}f_{\\psi}^{-1}\\cong f_{\\varphi\\circ\\psi}^{-1}$ for $\\psi:[l]\\to[m]$ (both sides functors $\\mathrm{Sh}(\\mathcal C_l)\\to\\mathrm{Sh}(\\mathcal C_n)$), $f_{\\mathrm{id}}^{-1}\\cong\\mathrm{id}$ satisfying the cocycle identities (equalities in the strict case). Let $\\mathrm{Sh}(\\mathcal C_{total})$ be the category of systems $(F_n,F(\\varphi))$ of sheaves $F_n$ on $\\mathcal C_n$ and maps $F(\\varphi):f_\\varphi^{-1}F_m\\to F_n$ compatible with identities and composition through these isomorphisms (in the strict case the sheaves on the total site), and $\\mathrm{Ab}(\\mathcal C_{total})$ the analogous category of systems of abelian sheaves. For each $n$ let $r_n:\\mathrm{Ab}(\\mathcal C_{total})\\to\\mathrm{Ab}(\\mathcal C_n)$, $(F_k,F(\\varphi))\\mapsto F_n$. Then $r_n$ has an exact left adjoint $g_{n!}$, whose value on an abelian sheaf $G$ on $\\mathcal C_n$ has degree-$m$ component $\\bigoplus_{\\varphi:[n]\\to[m]}f_\\varphi^{-1}G$ with transition maps induced by the composition isomorphisms. Consequently each $r_n$ is exact, sends injective abelian sheaves [def-sp-injective-resolutions] to injective abelian sheaves and K-injective complexes to K-injective complexes (a cochain complex $I$ is K-injective if every morphism of cochain complexes $M\\to I$ from a complex $M$ all of whose cohomology objects vanish is homotopic to zero), applying $r_n$ termwise, and the family $(r_n)_n$ is conservative.",
  "source": {
   "document": "literature/stacks-project/spaces-simplicial.tex",
   "place": "Tag 09WG, lemma-restriction-to-components-site (parts (1), (5)-(7) and the proof of (3)-(4)); Tag 09WH, lemma-restriction-injective-to-component-site; Tag 09WF, lemma-describe-sheaves-simplicial-site-site for the systems."
@@ -13,41 +13,108 @@
   "def-weil-pbc-simplicial-object",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the component description of sheaves on a simplicial site, a total sheaf is exactly a family $(F_m)_m$ of sheaves on $\\mathcal C_m$ with transition maps $f_\\varphi^{-1}F_m\\to F_n$ satisfying the identity and composition compatibilities (with the specified coherent isomorphisms). Thus the functor induced by the inclusion of the $n$-th component is the stated restriction $r_n(F)=F_n$, and a morphism of total sheaves is an isomorphism whenever all its component maps are isomorphisms.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WF, lemma-describe-sheaves-simplicial-site-site, and the system description immediately preceding it"
+   }
+  },
+  {
+   "text": "The inclusion of $\\mathcal C_n$ into the total site is continuous and cocontinuous: coverings and fibre products of objects lying in degree $n$ are exactly those in $\\mathcal C_n$. The induced topos morphism has inverse image $r_n$. For $G\\in\\mathrm{Ab}(\\mathcal C_n)$ define a system $g_{n!}G$ by $(g_{n!}G)_m=\\bigoplus_{\\varphi:[n]\\to[m]}f_\\varphi^{-1}G$; on a map $\\psi:[m]\\to[m_2]$, send the $\\varphi$-summand through the coherent composition isomorphism $f_\\psi^{-1}f_\\varphi^{-1}G\\cong f_{\\psi\\circ\\varphi}^{-1}G$. Given a map $g_{n!}G\\to F$, its components are adjoint to the composites $G\\to F_n$ and the transition maps of $F$; conversely a map $G\\to F_n$ gives these component maps. The two constructions are inverse by the component adjunctions and the coherence identities, so $g_{n!}\\dashv r_n$ and the displayed formula holds.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WG, lemma-restriction-to-components-site, cases A/B and proof of parts (1), (3), (5), (6)"
+   }
+  },
+  {
+   "text": "Each inverse-image functor $f_\\varphi^{-1}$ is exact because $f_\\varphi$ is a morphism of sites. Therefore each degree component of $g_{n!}$ is a direct sum of exact functors, hence exact; exactness of systems is checked componentwise under the description in Step 1. Consequently $g_{n!}$ is exact, and each $r_n$ is exact as asserted in the item. The same componentwise description shows conservativity: if every $r_n$ carries a morphism to an isomorphism, then every component map is an isomorphism, hence the original system morphism is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WG, proof of part (7) and the componentwise system description in Tag 09WF"
+   }
+  },
+  {
+   "text": "For an injective abelian sheaf $I$ on the total site, the adjunction $g_{n!}\\dashv r_n$ and exactness of $g_{n!}$ imply that $r_nI$ is injective: the exact functor $g_{n!}$ preserves monomorphisms, so the right adjoint sends injectives to injectives by [lem-exc-rg-right-adjoint-preserves-injectives] (equivalently, by Mathlib’s `CategoryTheory.Adjunction.map_injective`).",
+   "uses": [
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology Tag 015Z, lemma-adjoint-preserve-injectives, implication (a) => (c)"
+   }
+  },
+  {
+   "text": "The same adjunction on complexes has exact left adjoint $g_{n!}$, so the generic right-adjoint K-injective preservation theorem [lem-weil-pbc-right-adjoint-preserves-kinjective] applies with $u=r_n$ and $v=g_{n!}$. It shows that applying $r_n$ termwise to any K-injective complex on the total site is K-injective on $\\mathcal C_n$; in particular this includes the bounded-below K-injective complexes arising from injective resolutions. This completes all preservation and conservativity claims.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives, applied to the adjunction of Tag 09WG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 09WF, 09WG and 09WH; component system description, explicit component left adjoint, exactness, and injective/K-injective restriction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Exact component restriction and conservative family for sheaves on a total simplicial site",
-   "results": "CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; Condensed.hasExactLimitsOfShape; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp; CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf; CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map; CategoryTheory.Presieve.isSheafFor_iff_preservesProduct; CategoryTheory.Presieve.preservesProduct_of_isSheafFor. None constructs total simplicial-site component restriction.",
+   "query": "Exact conservative component restriction and left adjoint for sheaves on a total simplicial site",
+   "results": "CategoryTheory.Sheaf.adjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous; CategoryTheory.HasSheafify.isLeftExact; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; CategoryTheory.sheafToPresheaf_isRightAdjoint; CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val. None constructs the total simplicial-site component restriction.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "right adjoint preserves injective exact left adjoint",
-   "results": "0 hits; loogle reports Unknown identifier `right`.",
+   "query": "CategoryTheory.Adjunction.map_injective, CategoryTheory.Adjunction.preservesKInjectiveComplexes",
+   "results": "0 hits; loogle reports unknown identifier 'CategoryTheory.Adjunction.preservesKInjectiveComplexes'.",
    "date": "2026-10-18",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "simplicial.*component|preserve.*injective",
-   "results": "0 hits",
+   "query": "simplicial.*component|preservesKInjectiveComplexes",
+   "results": "0 hits in Mathlib/CategoryTheory.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Restriction to one component of a total simplicial site is exact and conservative",
-   "results": "CategoryTheory.Sheaf.ΓRes; CategoryTheory.ExactFunctor; SSet.Subcomplex.instMonoι; AlgebraicGeometry.PresheafedSpace.ofRestrict_mono; CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion_left; CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf; CategoryTheory.SimplicialObject.Truncated.cosk.full. None states the requested site result.",
+   "query": "Restriction to one component of a total simplicial site is exact, conservative, and sends injectives and K-injectives to injectives and K-injectives",
+   "results": "AlgebraicGeometry.PresheafedSpace.ofRestrict_mono; ComplexShape.Embedding.restrictionFunctor; HomologicalComplex.restriction.sc'Iso; CategoryTheory.SimplicialObject.Truncated.skAdj.coreflective; CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf; SSet.Truncated.skAdj.coreflective; CategoryTheory.SimplicialObject.Truncated.sk.fullyFaithful; CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion_left. None states the requested total-site result.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-total-site-derived-components",
@@ -72,5 +139,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-total-site-component-restriction",
+  "worker": "stage1",
+  "summary": "Expanded the imported total-site component statement into five proof steps following Stacks Tags 09WF, 09WG and 09WH. The steps identify total sheaves with compatible component systems, construct the explicit direct-sum left adjoint and its adjunction, prove exactness and conservativity componentwise, and apply the existing generic injective and K-injective preservation results. The statement and hypotheses are unchanged; no new nodes were needed.",
+  "blueprint": "Realizes the component restriction and injective-resolution input in the ancestor proof route (Normal-cone specialization, Orgogozo Lemma 3.1.1 first descent isomorphism, before the Stacks 0D97 derived composition calculation)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-451d890aa",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-451d890aa (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. Sources checked: Stacks spaces-simplicial.tex l.542-895 (Cases A and B, the system description before 09WF, 09WF, and the full proofs of 09WG and 09WH), Homology 015Z (a)=>(c) and Derived 08BJ, with tags matched to labels. I also read the statements of every cited node, the unit sk-i-curve-zero and the chapter sec-trace-formula. Step checks: Step 1 unfolds the system description. In Step 2 the direct-sum left adjoint has the right direction (f_psi^{-1}f_phi^{-1} ≅ f_{psi∘phi}^{-1} for phi:[n]->[m], psi:[m]->[m2]), and the adjunction is checked on the constant n=0 case (m+1 summands in degree m). Step 3 holds because f^{-1} is exact (def clause 3), so systems are exact componentwise and g_{n!} is exact. Step 4 is the Mathlib leaf map_injective, whose mono hypothesis comes from exactness. Step 5 applies lem-weil-pbc-right-adjoint-preserves-kinjective with u=r_n, v=g_{n!}; its unit sk-def-exchange is on the transitive route (199 units), so no tool_uses are needed. There is no duplicate (rg over 09WF/09WG/09WH and total-site restriction; lem-trf-simplicial-derived-image-spectral-sequence is a different, étale spectral-sequence statement), no cycle and no SGA citation. I repaired three faults in fixes/dag/nodes/sec-trace-formula/lem-trf-total-site-component-restriction.json. (1) The statement's composition isomorphism f_psi^{-1}f_phi^{-1} ≅ f_{phi∘psi}^{-1} did not type-check. Since f_{phi∘psi}=f_psi∘f_phi, I corrected it to f_phi^{-1}f_psi^{-1} ≅ f_{phi∘psi}^{-1} for psi:[l]->[m]; this changes notation only and neither weakens nor strengthens the statement. (2) B3: 'K-injective' was used without a definition, and the DAG's K-injective definitions are étale-only or for O-modules, which do not fit a category of systems. I added an inline definition (every chain map from an acyclic complex is null-homotopic), the same one the cited lemma uses. (3) blueprint.from.via listed the item itself first; it now starts with its creator, lem-trf-total-site-derived-components. One error is in the report only: its small case ('sole summand') is wrong, and the node's formula is correct.; 1 file(s) fixed by the reviewer"
  }
 }
