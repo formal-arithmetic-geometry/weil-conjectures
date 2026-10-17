@@ -11,9 +11,176 @@
   "lem-coef-simplicial-space-reedy-cartesian",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\Delta\\times\\Delta$ and $\\mathcal M=\\mathrm{sS}=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathrm{Set}_{\\mathcal U})$. By [lem-coef-presheaf-local-presentability], $\\mathcal M$ is locally presentable. The same holds for $\\mathcal M^{[1]}$, $\\mathcal M\\times\\mathcal M$, and $(\\mathcal M\\times\\mathcal M)^{[1]}$: they are set-valued presheaf categories on the small categories $D\\times[1]^{\\mathrm{op}}$, $D\\amalg D$, and $(D\\amalg D)\\times[1]^{\\mathrm{op}}$, respectively. The identification is just currying; its maps and colimits are componentwise. All generators and indexing sets below are small in this same universe.",
+   "uses": [
+    "lem-coef-presheaf-local-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.2.6, presentable ambient categories; presheaf instances as cited."
+   }
+  },
+  {
+   "text": "Write $a_n:\\partial F(n)\\hookrightarrow F(n)$, where $\\partial F(n)$ is the union of the images of proper injective faces in the outer representable, discrete in the inner direction; $\\partial F(0)=\\varnothing$. Let $b_m:\\partial\\Delta^m\\hookrightarrow\\Delta^m$ and $h_{m,k}:\\Lambda_k^m\\hookrightarrow\\Delta^m$. Define small sets $I_R=\\{a_n\\square cb_m\\}$ and $J_R=\\{a_n\\square ch_{m,k}\\}$, where $\\square$ is the cartesian pushout product of [lem-coef-simplicial-space-reedy-cartesian]. For any $p:U\\to V$, a square against $a_n\\square ct$ is exactly a square against $t$ for the matching map $U_n\\to V_n\\times_{M_nV}M_nU$: a map out of $F(n)$ specifies its degree-$n$ value, and restriction to $\\partial F(n)$ specifies the compatible values on all proper outer faces. This is [lem-galois-yoneda-hom-bijection] and the limit description of $M_n$ in [lem-coef-reedy-model-structure]. Thus the horn and boundary lifting characterizations in [lem-coef-kan-quillen-right-proper] give $J_R^{\\square}=\\mathrm{Fib}_R$ and $I_R^{\\square}=\\mathrm{Fib}_R\\cap W_R$, including the degree-zero cases.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Notation 3.32 and Lemma 3.33, printed p. 34; the matching-map lifting identification is expanded here."
+   }
+  },
+  {
+   "text": "Every object of $\\mathcal M$ is Reedy cofibrant, since its initial map is bidegreewise injective, and the cofibrations are the monomorphisms by [lem-coef-simplicial-space-reedy-cartesian]. Every $a_n$ and every $ct$ above is a Reedy cofibration. When $t$ is a horn inclusion, $ct$ is also a Reedy weak equivalence: its value at every outer degree is that trivial Kan cofibration, by [lem-coef-kan-quillen-right-proper] and the objectwise weak equivalences of [lem-coef-reedy-model-structure]. The pushout-product assertion of [lem-coef-simplicial-space-reedy-cartesian] consequently makes every member of $J_R$ a Reedy trivial cofibration. In particular, for every Reedy fibrant $Z$, $\\operatorname{Map}(j,Z)$ is a trivial Kan fibration for $j\\in J_R$.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Lemma 3.33 and its generating sets, with Rezk Section 2.5 for the cartesian structure."
+   }
+  },
+  {
+   "text": "For the fixed monomorphism $f:P\\to Q$ put $J_f=J_R\\cup\\{f\\square cb_m:m\\geq0\\}$. If $Z$ is Reedy fibrant, the simplicial mapping axiom of [lem-coef-simplicial-space-reedy-cartesian] makes $\\operatorname{Map}(f,Z)$ a Kan fibration. It is a weak equivalence exactly when it is a trivial fibration, equivalently has boundary lifting by [lem-coef-kan-quillen-right-proper]. The tensor--mapping adjunction identifies that boundary lifting with lifting $Z\\to1$ against all $f\\square cb_m$. Together with step 2, this proves $J_f^{\\square}(Z\\to1)$ if and only if $Z$ is $f$-local. Moreover, every $j\\in J_f$ is monic, and $\\operatorname{Map}(j,Z)$ is a trivial Kan fibration for every $f$-local $Z$: for an added generator, its boundary-$b_l$ lifting test is the lifting test of $\\operatorname{Map}(f,Z)$ against $b_m\\square b_l$, by associating the pushout products. The latter is a monomorphism (its domain is the union of the two boundary products), and a trivial Kan fibration lifts against every monomorphism, since these are precisely the Kan-model cofibrations; for $J_R$ it is step 3.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.7.3 proof, local fibrancy through boundary pushout products; specialized to the original Reedy mapping sets."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-small-object-factorization] to the small set $J_f$ in the locally presentable category $\\mathcal M$ and to each terminal arrow $X\\to1$. This gives, functorially, $X\\xrightarrow{\\eta_X}RX\\to1$, with $\\eta_X$ in the weakly saturated closure of $J_f$ and $RX\\to1$ in $J_f^{\\square}$. Hence $RX$ is $f$-local by step 4. The middle-object functor in that cited statement preserves small $\\kappa$-filtered colimits for some regular small $\\kappa$. The functor $X\\mapsto(X\\to1)$ preserves such colimits: a filtered category is nonempty and connected, so the colimit of its constant terminal diagram is terminal, and arrow colimits are componentwise. Therefore $R$ preserves those colimits. This construction uses only the original Reedy structure and small-object factorization.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.1.2.5, applied to the explicitly specified small set $J_f$."
+   }
+  },
+  {
+   "text": "For an $f$-local $Z$, let $T_Z$ consist of the restriction arrows $Z^{c\\Delta^m}\\to Z^{c\\partial\\Delta^m}$ in the cartesian closed category of [lem-coef-simplicial-space-reedy-cartesian], for $m\\geq0$. The tensor--mapping adjunction and the boundary criterion of [lem-coef-kan-quillen-right-proper] say that $\\operatorname{Map}(j,Z)$ is a trivial fibration if and only if $j\\in{}^{\\square}T_Z$. By step 4, $J_f\\subseteq{}^{\\square}T_Z$. This left lifting class contains every isomorphism $a$, since the filler of a square with top map $u$ is $ua^{-1}$. It is closed under pushouts and retracts by [lem-coef-lifting-class-closure], and under small continuous transfinite compositions by [lem-coef-transfinite-left-lifting]. Coproducts also preserve it, by choosing a filler independently on each summand. Thus it contains the weakly saturated closure of $J_f$. In particular $\\operatorname{Map}(\\eta_X,Z)$ is a trivial Kan fibration for every $X$ and every $f$-local $Z$.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.7.3 proof, local equivalence of the local replacement unit; closure is proved by diagonal lifting."
+   }
+  },
+  {
+   "text": "We need homotopy invariance only in the original Reedy structure. If $w:A\\to B$ is a Reedy weak equivalence, factor it as a trivial cofibration $i:A\\to E$ followed by a trivial fibration $p:E\\to B$, using [lem-coef-reedy-model-structure] and two-out-of-three. For fibrant $Z$, $\\operatorname{Map}(i,Z)$ is a trivial fibration by [lem-coef-simplicial-space-reedy-cartesian]. Since all objects are cofibrant, $p$ has a section $s:B\\to E$. Lift against $p$ with left map $E\\times c\\partial\\Delta^1\\hookrightarrow E\\times c\\Delta^1$, endpoint maps $sp,1_E$, and bottom map $p$ constant along the interval. This produces a simplicial homotopy $sp\\simeq1_E$. If $H$ is this homotopy, the formula $(g,t)\\mapsto g\\circ H(-,t)$, using the same simplex parameter in $g$ and $H$, is a homotopy on $\\operatorname{Map}(E,Z)$ from precomposition by $sp$ to the identity. Since $ps=1_B$, the other composite is the identity strictly. Thus $\\operatorname{Map}(p,Z)$ is a simplicial homotopy equivalence with inverse $\\operatorname{Map}(s,Z)$; [lem-cbc-simplicial-homotopy-equivalence-weak] makes it a weak homotopy equivalence. Composition proves the same for $\\operatorname{Map}(w,Z)$.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.7.3 proof, homotopy invariance of mapping spaces; the factorization, section, and cylinder lifting argument is supplied here."
+   }
+  },
+  {
+   "text": "For any arrow $u:X\\to Y$, naturality gives $Ru\\,\\eta_X=\\eta_Yu$. Applying $\\operatorname{Map}(-,Z)$ for each $f$-local $Z$, both unit maps are weak equivalences by step 6. Two-out-of-three in the Kan model structure [lem-coef-kan-quillen-right-proper] then gives: $u$ is an $f$-local equivalence if and only if $Ru$ is one. If $Ru$ is a Reedy weak equivalence, step 7 shows it is an $f$-local equivalence. Conversely suppose $v:A\\to B$ is an $f$-local equivalence with $A,B$ themselves $f$-local (apply this to $Ru$). The mapping sets into either object are Kan by [lem-coef-simplicial-space-reedy-cartesian]. The weak equivalences between these Kan mapping sets induce bijections on edge components: [lem-cbc-kan-whitehead-inverse] supplies simplicial homotopy inverses. Surjectivity of $\\pi_0\\operatorname{Map}(v,A)$ gives $s:B\\to A$ with $sv\\simeq1_A$. Injectivity of $\\pi_0\\operatorname{Map}(v,B)$ gives $vs\\simeq1_B$, since $(vs)v\\simeq v$. In a Kan mapping set, an edge zigzag can be replaced by one edge by filling $2$-horns. These are simplicial homotopies using the inner cylinder. Evaluating at every outer degree gives homotopy inverses of simplicial sets; [lem-cbc-simplicial-homotopy-equivalence-weak] makes each $v_n$ a weak equivalence. By [lem-coef-reedy-model-structure], $v$ is Reedy weakly equivalent. We have proved $u$ is $f$-locally equivalent exactly when $Ru\\in W_R$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-reedy-model-structure",
+    "lem-cbc-kan-whitehead-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.7.3 proof, detection after local replacement; the two mapping tests give the homotopy inverse explicitly."
+   }
+  },
+  {
+   "text": "Use [lem-coef-accessible-small-object-factorization] again, now for $J_R$, to factor every $v:A\\to B$ functorially as $A\\xrightarrow{i_v}E_v\\xrightarrow{p_v}B$. The right map is a Reedy fibration by step 2. The left map is a Reedy trivial cofibration: every $J_R$ generator is one by step 3, and the class of maps left orthogonal to all Reedy fibrations is closed under pushouts, retracts and transfinite compositions by [lem-coef-lifting-class-closure] and [lem-coef-transfinite-left-lifting], as well as coproducts by componentwise fillers. The Reedy weak factorization system in [lem-coef-reedy-model-structure] identifies this class with its trivial cofibrations. Thus two-out-of-three and step 2 show $v\\in W_R$ if and only if $p_v\\in I_R^{\\square}$. The arrow functor $v\\mapsto p_v$ preserves sufficiently filtered colimits, since its source $E_v$ does by the cited accessible small-object theorem and its target is the target of $v$. Let $T(u)=p_{Ru}$. Composing the two preserving functors gives one regular small bound (take the larger of their two bounds), so $T$ preserves sufficiently filtered colimits. Step 8 gives $T(u)\\in I_R^{\\square}$ exactly when $u$ is an $f$-local equivalence.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, factorization reducing weak equivalences to trivial fibrations; applied after the replacement in steps 5--8."
+   }
+  },
+  {
+   "text": "For each bidegree $(n,m)$ let $H_{n,m}=F(n)\\times c\\Delta^m$, the corresponding set-valued representable on $D$. Let $d_{n,m}:H_{n,m}\\amalg H_{n,m}\\to H_{n,m}$ be the fold. By [lem-galois-yoneda-hom-bijection], a square with left side $d_{n,m}$ and right side $u:X\\to Y$ is a pair $x,x'\\in X_{n,m}$ with $u(x)=u(x')$. A filler exists exactly when $x=x'$: its restrictions to the two summands must be the prescribed elements. Consequently $u$ is bidegreewise monic exactly when it has the right lifting property against every $d_{n,m}$. This tests injectivity, including empty sets, rather than requiring existence of any preimages.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, right-lifting encoding of conditions on arrows; fold test supplied explicitly."
+   }
+  },
+  {
+   "text": "Put $\\mathcal N=\\mathcal M\\times\\mathcal M$ and let $0$ be the empty simplicial space. In $\\mathcal N$ take the small set $S$ consisting of $(d_{n,m},1_0)$ for all bidegrees and $(1_0,i)$ for all $i\\in I_R$. Lifting in a product category is componentwise. The extra component has left map $1_0$ and has a unique filler, so $(u,T(u))\\in S^{\\square}$ holds exactly when $u$ is monic and $T(u)\\in I_R^{\\square}$. By steps 8--10 this is precisely $u\\in W_f^{\\mathrm{mono}}$. The functor $G:\\mathcal M^{[1]}\\to\\mathcal N^{[1]}$ defined by $G(u)=(u,T(u))$ preserves sufficiently filtered colimits by step 9 and componentwise colimits. Thus our desired subcategory is the full inverse image $G^{-1}(S^{\\square})$, not an unproved assertion that arbitrary accessible intersections remain accessible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, simultaneous small lifting conditions; product encoding supplied here."
+   }
+  },
+  {
+   "text": "The category $\\mathcal N$ is locally presentable by step 1. Apply [lem-coef-small-right-lifting-accessibility] to its small set $S$. It says exactly that the full subcategory on $S^{\\square}$ in $\\mathcal N^{[1]}$ is replete and accessible as an ambient subcategory. Both $\\mathcal M^{[1]}$ and $\\mathcal N^{[1]}$ are locally presentable by step 1, and $G$ preserves small $\\kappa$-filtered colimits for some regular small $\\kappa$ by step 11. Apply [lem-coef-accessible-full-inverse-image] to $G$ and $S^{\\square}$. Its conclusion for $G^{-1}(S^{\\square})=W_f^{\\mathrm{mono}}$ is exactly the asserted closure and small generation for some regular small $\\lambda$, together with repleteness. Both small-object sets, the resulting functors, and all cardinal choices were fixed using only $f$ and the universe, not an individual arrow. No localized model structure has entered any step.",
+   "uses": [
+    "lem-coef-small-right-lifting-accessibility",
+    "lem-coef-accessible-full-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries A.2.6.7 and A.2.6.8, only inverse image and small right-lifting classes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-accessible-full-inverse-image",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-presheaf-local-presentability",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-space-reedy-cartesian",
+  "lem-coef-small-right-lifting-accessibility",
+  "lem-coef-transfinite-left-lifting",
+  "lem-galois-yoneda-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Auxiliary descendant supporting the coherent coefficient adjunction; direct original-Reedy small-object proof, informed by HTT A.1.2.5, A.2.6.7--8, A.3.7.3 and Barwick 3.33, 4.5--6 read online, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +230,59 @@
    "results": "{\"t\": \"2026-10-17T04:57:54Z\", \"tool\": \"grep\", \"query\": \"local.*equival.*accessib|accessib.*local.*equival|isLocal.*isCardinalAccessible\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\"], \"digest\": \"995271100fce015d\"}",
    "date": "2026-10-17",
    "verdict": "no match: OrthogonalReflection.lean:95-103 treats strict Hom-set orthogonality and only preservation by the inclusion; it neither gives homotopy-local equivalence accessibility nor its monomorphism intersection."
+  },
+  {
+   "tool": "grep",
+   "query": "local.*equival.*accessib|accessib.*local.*equival|isCardinalAccessible",
+   "results": "{\"t\": \"2026-10-17T05:27:18Z\", \"tool\": \"grep\", \"query\": \"local.*equival.*accessib|accessib.*local.*equival|isCardinalAccessible\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\"], \"digest\": \"3be9b925cf56f94d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned cofibration/monomorphism declarations or generic cardinal-accessibility APIs; none states homotopy-local accessibility for bisimplicial monomorphisms. OrthogonalReflection.lean:95--103 concerns strict Hom-set orthogonality and preservation by the inclusion only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Accessibility of local equivalences in a combinatorial model category intersected with monomorphisms",
+   "results": "{\"t\": \"2026-10-17T05:27:18Z\", \"tool\": \"leansearch\", \"query\": \"Accessibility of local equivalences in a combinatorial model category intersected with monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.trivialCofibrations\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence\"], \"digest\": \"cbbb2139d085ef9b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned cofibration/monomorphism declarations or generic cardinal-accessibility APIs; none states homotopy-local accessibility for bisimplicial monomorphisms. OrthogonalReflection.lean:95--103 concerns strict Hom-set orthogonality and preservation by the inclusion only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.IsCardinalAccessible",
+   "results": "{\"t\": \"2026-10-17T05:27:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MorphismProperty.IsCardinalAccessible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.MorphismProperty.IsCardinalAccessible'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned cofibration/monomorphism declarations or generic cardinal-accessibility APIs; none states homotopy-local accessibility for bisimplicial monomorphisms. OrthogonalReflection.lean:95--103 concerns strict Hom-set orthogonality and preservation by the inclusion only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fixed map of simplicial spaces there is an accessible small object local fibrant replacement functor and monomorphic local equivalences form an accessible category",
+   "results": "{\"t\": \"2026-10-17T05:27:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a fixed map of simplicial spaces there is an accessible small object local fibrant replacement functor and monomorphic local equivalences form an accessible category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.Functor.IsAccessible\", \"HomotopicalAlgebra.ModelCategory.cm1b\"], \"digest\": \"a22ef67dec603b7e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned cofibration/monomorphism declarations or generic cardinal-accessibility APIs; none states homotopy-local accessibility for bisimplicial monomorphisms. OrthogonalReflection.lean:95--103 concerns strict Hom-set orthogonality and preservation by the inclusion only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monomorphisms which are homotopy local equivalences of bisimplicial sets form an accessible subcategory of the arrow category",
+   "results": "{\"t\": \"2026-10-17T05:27:20Z\", \"tool\": \"leanfinder\", \"query\": \"Monomorphisms which are homotopy local equivalences of bisimplicial sets form an accessible subcategory of the arrow category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\"], \"digest\": \"15c4a26250d8145d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned cofibration/monomorphism declarations or generic cardinal-accessibility APIs; none states homotopy-local accessibility for bisimplicial monomorphisms. OrthogonalReflection.lean:95--103 concerns strict Hom-set orthogonality and preservation by the inclusion only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak equivalences for localization at a set of maps in a simplicial model category form an accessible full subcategory of morphisms",
+   "results": "{\"t\": \"2026-10-17T05:37:11Z\", \"tool\": \"leanfinder\", \"query\": \"Weak equivalences for localization at a set of maps in a simplicial model category form an accessible full subcategory of morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.instWeakEquivalenceHomFullSubcategory\", \"HomotopicalAlgebra.instWeakEquivalenceMapFullSubcategoryι\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesFullSubcategory\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.instHasTwoOutOfThreePropertyFullSubcategoryWeakEquivalences\"], \"digest\": \"4e258e87ac0d795b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; the semantic results concern localization equivalences and inherited weak-equivalence structures, with no accessibility conclusion; the AlgebraicTopology grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "accessib.*(weakEquiv|localEquiv)|((weakEquiv|localEquiv).*accessib)",
+   "results": "{\"t\": \"2026-10-17T05:38:00Z\", \"tool\": \"grep\", \"query\": \"accessib.*(weakEquiv|localEquiv)|((weakEquiv|localEquiv).*accessib)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; the semantic results concern localization equivalences and inherited weak-equivalence structures, with no accessibility conclusion; the AlgebraicTopology grep returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-bousfield-smith-bounded-generation",
@@ -99,5 +315,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-local-equivalences-accessible",
+  "worker": "stage1",
+  "summary": "Proved the accessibility specialization directly from explicit Reedy lifting sets and accessible small-object factorizations. Encoded monicity by representable fold maps and combined both tests in a product category; reused existing generic accessibility nodes and created no new nodes. Avoided a cycle through the existing homotopy-local-equivalence theorem. Statement unchanged.",
+  "blueprint": "Retains the ancestor paragraph-2 coherent-adjunction provenance and the Rezk Proposition 9.1 bounded-subobject descendant place; supplies the accessibility input to lem-coef-bousfield-smith-bounded-generation. The ancestor blueprint has no explicit Reedy-accessibility argument.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "General presheaf Yoneda evaluation supplies the exact matching-map and representable fold lifting calculations; it does not replace any geometric route."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Realization of an explicitly constructed simplicial homotopy inverse is a weak homotopy equivalence; used on ordinary mapping sets and outer rows only."
+   },
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "A weak equivalence of Kan mapping sets has a simplicial homotopy inverse, giving exactly the surjectivity and injectivity on edge components used to construct an inverse to a local map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-yoneda-hom-bijection",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-9194c8be5",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-9194c8be5 (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement and all 12 steps, the full statements of all 12 cited nodes, the report, the Review by Q07 and the Second reading by Q07. There are no new nodes and no unit or chapter edits. The item is not a target, so the base-change and coefficient-category check does not apply, and no SGA source is cited. The source is Barwick 4.5–4.6 (all local equivalences), with the restriction to monomorphisms honestly marked as agent-formulated; Barwick and HTT are WANTED and proof_origin is agent. The proof argues directly in the original Reedy structure. (1) Steps 2–3: the matching-object squares give J_R^□=Fib_R and I_R^□=Fib_R∩W_R, including n=0, and the pushout-product clause makes J_R trivial cofibrations. (2) Step 4: the J_f generators test f-locality; the added generators work because f□c(b_m□b_l) is monic. (3) Steps 5–6: the small-object factorization gives an accessible local replacement R, and its unit maps are trivial mapping fibrations by closure under isomorphisms, pushouts, retracts, transfinite composites and coproducts. (4) Step 7: a Reedy weak equivalence is an f-local equivalence, via a section and a cylinder lift, using the homotopy-equivalence lemma, which needs no Kan hypothesis. (5) Step 8: the converse between f-local objects uses Kan mapping sets, Whitehead, π_0 surjectivity and injectivity, and evaluation in each outer degree. (6) Steps 9–11: the J_R factorization detects W_R by I_R-lifting, fold maps detect monomorphisms (vacuous on empty sets), and the product-category set S encodes both conditions exactly, since 1_0 has a unique filler. (7) Step 12: small-right-lifting-accessibility and accessible-full-inverse-image (which allows an arbitrary arrow functor) give exactly repleteness, λ-filtered closure and small generation. The closure of the cited nodes (171 nodes) does not contain the item, so there is no cycle. I confirmed that the three avoided nodes (cbc-homotopy-local-equivalences-accessible, coef-model-weak-equivalences-accessible, coef-simplicial-model-nerve-localization) all reach the item, so avoiding them is correct, and none of them duplicates it. The only citer, bousfield-smith step 1, uses exactly the item's conclusion. I accept the tool uses: the Yoneda node is a Mathlib leaf, and the two sk-prop-sf-cbc nodes (simplicial homotopy equivalence is weak; Kan Whitehead inverse) are generic black boxes with no in-unit equivalent. Edge cases checked: f an identity or ∅→∅, f=∅→1, empty X and Y, disconnected mapping sets, n=0 and m=0. No fixes."
  }
 }

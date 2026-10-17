@@ -11,9 +11,140 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-coherent-nerve-infrastructure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a containing universe for the simplicial category of small Kan complexes. Its mapping simplicial sets are Kan, and $\\mathcal S=N_{\\mathrm{hc}}(\\mathsf{Kan})$ is a quasicategory by [lem-coef-kan-coherent-nerve-quasicategory]. Apply [lem-coef-space-path-fibration-replacement] to $r:B\\to D$: $E_r=B\\times_{D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,D)\\to D$, evaluated at $1$, is a Kan fibration. Its pullback $P=E_r\\times_D C$ is Kan: a horn lifting problem in $P\\to C$ is a lifting problem for that fibration, and then a horn in $P$ is filled by first filling its image in the Kan complex $C$. The adjoint $\\widehat H:A\\to\\operatorname{Fun}(\\Delta^1,D)$, together with $f,g$, defines $q$ because its two evaluations are $rf,sg$. Constant $H$ gives exactly the strict comparison in the statement.",
+   "uses": [
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-coef-space-path-fibration-replacement",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0101",
+    "place": "Example 3.1.8.10 (0101), path fibration; the horn argument for its pullback is written here."
+   }
+  },
+  {
+   "text": "Fix a small Kan complex $X$ and abbreviate $T_Y=\\operatorname{Fun}(X,Y)$. The internal-Hom definition gives a degreewise currying isomorphism\n$$T_P\\cong T_B\\times_{T_D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,T_D)\\times_{\\operatorname{ev}_1,T_D}T_C=:P_T.$$\nIndeed, a map $X\\times\\Delta^n\\to P$ is precisely two maps to $B,C$ and a map $X\\times\\Delta^n\\times\\Delta^1\\to D$ with the prescribed endpoint restrictions; switching the last two factors gives the displayed formula. Restriction in $[n]$ commutes with this bijection, so it is simplicial. Under it, $T_q:T_A\\to P_T$ sends $a$ to $(fa,ga,H\\circ(a\\times\\mathrm{id}_{\\Delta^1}))$. All $T_Y$ occurring here are Kan by [lem-cbc-kan-functor-space-kan], including $T_P$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-kan-functor-space-kan"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Finite cospan specialization of the enriched testing in Theorems 6.1.4 and 6.2.7; the currying calculation is agent-written."
+   }
+  },
+  {
+   "text": "Put $R_Y=\\operatorname{Map}^R_{\\mathcal S}(X,Y)$, with the right-pinched convention of the statement. These spaces are Kan by [lem-cbc-enhanced-functor-cone-calculus]. The comparison [lem-coef-point-family-q-counit-identification] supplies homotopy equivalences $\\alpha_Y:T_Y\\to R_Y$, given in degree $n$ by precomposition with $q^n:Q^n\\to\\Delta^n$. Postcomposition by either fixed map $r$ or $s$ commutes strictly with this formula. Apply [lem-coef-kan-homotopy-pullback-invariance] to these three vertical weak equivalences, on $T_B\\to T_D\\leftarrow T_C$. It gives a weak equivalence\n$$v_X:P_T\\longrightarrow R_B\\times^h_{R_D}R_C=:P_R.$$\nThe hypotheses are the strict postcomposition identities just checked and the Kan conditions on $T_B,T_C,T_D,R_B,R_C,R_D$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-point-family-q-counit-identification",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06QR",
+    "place": "Example 4.6.7.7 and Remark 4.6.7.6 (enriched mapping comparison); Proposition 3.4.0.9 (032B), invariance of path pullbacks."
+   }
+  },
+  {
+   "text": "Let $c_X:R_A\\to P_R$ be the comparison of the specified coherent square. Use $U_Y=U_{\\mathcal S}(X,Y)$ and $j_Y:R_Y\\to U_Y$ from [lem-coef-infinity-pinch-comparison]. These are Kan spaces and homotopy equivalences. Fixed enriched postcomposition by $r,s$ commutes with $j$: in each simplex it changes the target row, whereas $j$ precomposes the domain by the pinch. Thus [lem-coef-kan-homotopy-pullback-invariance] gives a weak equivalence $w_X:P_R\\to P_U$, where $P_U=U_B\\times^h_{U_D}U_C$. The parameterized composition clause of [lem-coef-point-family-q-counit-identification], applied to $\\beta=j\\alpha$, gives\n$$w_Xc_X\\alpha_A\\simeq w_Xv_XT_q.$$\nThe projection coordinates are $\\beta_B(fa),\\beta_C(ga)$; the path coordinate is $\\beta_D(H\\circ(a\\times\\mathrm{id}))$, with its endpoint composition homotopies and the square's two triangle witnesses. Naturality in the additional simplex parameter of $a$ makes this a homotopy of entire maps into $P_U$, retaining the path coordinate. This asserts compatibility in the arrow model where the cited composition clause is stated, without assuming strict compatibility for $\\alpha$ alone. Homotopic maps have the same weak-equivalence status: their cylinder projection contracts by interval minimum, hence is a weak equivalence by [lem-cbc-simplicial-homotopy-equivalence-weak]; its endpoint sections are weak equivalences by the model two-out-of-three property of [lem-coef-kan-quillen-model-right-proper-core]. Apply two-out-of-three to the homotopy. Since $w_X,\\alpha_A,v_X$ are weak equivalences, $c_X$ is a weak equivalence exactly when $T_q$ is.",
+   "uses": [
+    "lem-coef-point-family-q-counit-identification",
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06QR",
+    "place": "Example 4.6.7.7, Remark 4.6.7.6; parameterized composition normalization as stated in lem-coef-point-family-q-counit-identification. Agent specialization retaining H and the triangle witnesses."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-terminal-pullback-criterion] in the quasicategory $\\mathcal S$. It asserts that this specified coherent square is limiting exactly when $c_X$ is a weak equivalence for every object $X$. Every object of $\\mathcal S$ is a small Kan complex. Steps 2--4 therefore turn its criterion into\n$$\\text{the square is cartesian}\\quad\\Longleftrightarrow\\quad \\operatorname{Fun}(X,q)\\text{ is a weak homotopy equivalence for every small Kan }X.$$\nNo assumption of connectedness or nonemptiness has entered this reduction.",
+   "uses": [
+    "lem-coef-infinity-terminal-pullback-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 6.6.9 and Remark 6.6.11, specialized through the existing mapping-space criterion; compare Riehl--Verity Theorem 6.2.7, proof on printed p.52."
+   }
+  },
+  {
+   "text": "Suppose $q$ is a weak homotopy equivalence. Both $A$ and $P$ are Kan by hypothesis and step 1, so [lem-cbc-kan-whitehead-inverse] supplies $u:P\\to A$ and simplicial homotopies $uq\\simeq\\mathrm{id}_A$, $qu\\simeq\\mathrm{id}_P$. Postcomposition gives an inverse $\\operatorname{Fun}(X,u)$ for $\\operatorname{Fun}(X,q)$ up to simplicial homotopy: a homotopy $J:Y\\times\\Delta^1\\to Y$ induces $(a,t)\\mapsto J(a(-),t)$ on $\\operatorname{Fun}(X,Y)\\times\\Delta^1$. By [lem-cbc-simplicial-homotopy-equivalence-weak] each $\\operatorname{Fun}(X,q)$ is a weak equivalence. Step 5 proves cartesianness. Conversely, if the square is cartesian, step 5 applies at $X=\\Delta^0$. Evaluation gives simplicial isomorphisms $\\operatorname{Fun}(\\Delta^0,A)=A$ and $\\operatorname{Fun}(\\Delta^0,P)=P$, and under these the tested map is exactly $q$. Hence $q$ is a weak equivalence. This proves both directions for the strict and the specified-homotopy cases.",
+   "uses": [
+    "lem-cbc-kan-whitehead-inverse",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13 (00UB), both directions; exponentiation of the actual inverse homotopies is written here."
+   }
+  },
+  {
+   "text": "An equivalence of whole coherent square diagrams restricts to an equivalence of their lower cospans and has an equivalence as its apex component; the compatibility of these restrictions is the map of cones supplied by the original coherent transformation. The invariance and naturality clauses of [lem-coef-infinity-terminal-pullback-criterion] therefore preserve and reflect its mapping-space test. It follows that cartesianness is invariant under an equivalence in $\\operatorname{Fun}(N([1]\\times[1]),\\mathcal S)$. Applying the same argument to its inverse gives reflection, not just preservation. This argument applies also to coherent squares not presented by strict simplicial maps.",
+   "uses": [
+    "lem-coef-infinity-terminal-pullback-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 6.6.9, cone criterion and its naturality, applied to an equivalence of coherent cones; agent spelling out of the invariance clause of the cited node."
+   }
+  },
+  {
+   "text": "For a weak homotopy equivalence $e:U\\to V$ of Kan complexes, [lem-cbc-kan-whitehead-inverse] provides $d$ and homotopies $de\\simeq\\mathrm{id}_U$, $ed\\simeq\\mathrm{id}_V$. Each is an edge in the appropriate function complex. By the subset-poset definition of the coherent nerve, a $2$-simplex is three edges together with a path from the diagonal edge to their composite. Thus these homotopies, oriented from the identity to the composite if necessary by filling a Kan $2$-horn with the original edge and a degenerate edge, give the two inverse triangles for $e$ in $\\mathcal S$. Hence $e$ is an equivalence edge. A strict natural transformation of strict square diagrams gives a coherent transformation after applying the ordinary-to-coherent nerve map (all strict commutation witnesses are constant). If it is objectwise a weak equivalence, its components are equivalences as just proved, so [lem-coef-infinity-pointwise-equivalences] makes the entire transformation an equivalence. Apply step 7 along the zigzag and steps 5--6 to each strict presentation. This gives precisely the claimed strict homotopy-cartesian test, also when an arbitrary coherent square is equivalent to the strict presentation.",
+   "uses": [
+    "lem-cbc-kan-whitehead-inverse",
+    "def-coef-coherent-nerve-infrastructure",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13; Theorem 4.4.4.4 (01DK); the inverse triangles are read directly from the subset-poset coherent nerve."
+   }
+  },
+  {
+   "text": "Throughout the construction the map into the path factor is the adjoint of the prescribed $H$; in the strict case it is the constant path at $rf=sg$. Step 4 uses the specified triangle witnesses when comparing this map with the coherent cone test. Step 7 transports the entire coherent square. Replacing these data by their vertex list or by the homotopy classes of the four boundary edges would discard exactly the path coordinate used in steps 2 and 4, so none of those replacements is made.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Theorem 6.2.7 proof, comparison induced by the actual cone; reminder of the fixed commutation data in the present specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-nerve-infrastructure",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-terminal-pullback-criterion",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-point-family-q-counit-identification",
+  "lem-coef-space-path-fibration-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+  "place": "Finite-cospan enriched mapping-space argument, guided by Theorems 6.1.4 and 6.2.7; comparison and cone tools already in the DAG. Supplementary sources: Cisinski Theorem 6.6.9 and Remark 6.6.11; Kerodon 06QR, 032B, 0101, 00UB, 01DK. Online reading, archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +201,59 @@
    "results": "{\"t\": \"2026-10-17T04:58:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyPullback|homotopyCartesian|coherent.*pullback|pullback.*coherent",
+   "results": "{\"t\": \"2026-10-17T05:26:49Z\", \"tool\": \"grep\", \"query\": \"homotopyPullback|homotopyCartesian|coherent.*pullback|pullback.*coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Light/Explicit.lean\", \"Mathlib/Condensed/Explicit.lean\", \"Mathlib/Condensed/Explicit.lean\", \"Mathlib/Topology/Category/CompHausLike/EffectiveEpi.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/ReflectsPrecoherent.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology.lean\"], \"digest\": \"12c4c6ec29c12924\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category nerves/pullbacks, finite strict simplicial pullbacks, path objects, or coherent site sheaves; none compares a coherent Kan-nerve cone with its path-pullback comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping space criterion for cartesian squares in the infinity category of spaces identifies them with path homotopy pullback squares of Kan complexes",
+   "results": "{\"t\": \"2026-10-17T05:26:49Z\", \"tool\": \"leansearch\", \"query\": \"The mapping space criterion for cartesian squares in the infinity category of spaces identifies them with path homotopy pullback squares of Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPullback.of_iso_pullback\", \"CategoryTheory.BicartesianSq.of_isPullback_isPushout\", \"CategoryTheory.BicartesianSq.toIsPullback\", \"CategoryTheory.Square.IsPullback.map_iff\", \"CategoryTheory.Square.IsPullback\", \"CategoryTheory.BicartesianSq\", \"CategoryTheory.Square.isPullback_iff_map_coyoneda_isPullback\", \"CategoryTheory.IsPushout\"], \"digest\": \"03008165f5b8111d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category nerves/pullbacks, finite strict simplicial pullbacks, path objects, or coherent site sheaves; none compares a coherent Kan-nerve cone with its path-pullback comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-17T05:26:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category nerves/pullbacks, finite strict simplicial pullbacks, path objects, or coherent site sheaves; none compares a coherent Kan-nerve cone with its path-pullback comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent square in the homotopy coherent nerve of Kan complexes is a limit cone precisely when its map to the path space pullback is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-17T05:26:50Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent square in the homotopy coherent nerve of Kan complexes is a limit cone precisely when its map to the path space pullback is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"HomotopicalAlgebra.PathObject.trans_P\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.Arrow.cechNerve_map\", \"CategoryTheory.Arrow.cechNerve_obj\", \"CategoryTheory.Arrow.mapCechNerve_app\"], \"digest\": \"e43fc51a41a4d8cf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category nerves/pullbacks, finite strict simplicial pullbacks, path objects, or coherent site sheaves; none compares a coherent Kan-nerve cone with its path-pullback comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable mapping spaces in the infinity category of Kan complexes carry a pullback cone to a homotopy pullback of function complexes",
+   "results": "{\"t\": \"2026-10-17T05:27:31Z\", \"tool\": \"leanfinder\", \"query\": \"Representable mapping spaces in the infinity category of Kan complexes carry a pullback cone to a homotopy pullback of function complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFinitePullback\", \"HomotopicalAlgebra.PathObject.trans_P\", \"CategoryTheory.PreOneHypercover.toPullback_cylinder\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.curriedInverse\", \"CategoryTheory.PreOneHypercover.cylinder_Y\", \"CategoryTheory.Arrow.cechNerve_map\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"CategoryTheory.PreOneHypercover.cylinderHomotopy\"], \"digest\": \"f819f9ea2c657a24\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category nerves/pullbacks, finite strict simplicial pullbacks, path objects, or coherent site sheaves; none compares a coherent Kan-nerve cone with its path-pullback comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?coherent|pseudo.?[Hh]omotopy|[Pp]inched|[Cc]artesian.*[Kk]an",
+   "results": "{\"t\": \"2026-10-17T05:37:28Z\", \"tool\": \"grep\", \"query\": \"homotopy.?coherent|pseudo.?[Hh]omotopy|[Pp]inched|[Cc]artesian.*[Kk]an\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"260b133ff7f49fa1\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: only Mathlib/AlgebraicTopology/SimplicialNerve.lean:14, documentation for the nerve definition; the file lists the locally Kan quasicategory theorem and category of anima as future projects, and has no limit recognition theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy commutative square in the infinity category of spaces is a pullback exactly when the induced map to the path pullback is a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T05:37:30Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy commutative square in the infinity category of spaces is a pullback exactly when the induced map to the path pullback is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PathObject\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\", \"HomotopicalAlgebra.PathObject.RightHomotopy\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\"], \"digest\": \"010355aa2f0fcddf\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: abstract PathObject and model-category base-change declarations; no result identifies a limiting coherent square with the specified path-pullback map. Read PathObject.lean:60-93 and its PathObject structure at line 140."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-geometric-descent",
@@ -85,7 +265,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient adjunction: independent simplicial-space foundation below the enriched completion chain; Path pullbacks recognize cartesian squares in the coherent nerve of Kan complexes.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the derived mapping-space adjunction before R inverse limit: space-level finite-limit recognition used below the enriched completion chain. In main-20261015 the same paragraph is in the separate prop-coef-integral-exceptional-adjoint.proof.md under sk-thm-sf-package; historical master has it inline. The inherited ancestry is unchanged.",
    "via": [
     "lem-coef-space-geometric-descent",
     "lem-coef-algebroid-completion",
@@ -98,5 +278,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-nerve-pullback-recognition",
+  "worker": "stage1",
+  "summary": "Preserved the full statement; replaced the empty proof by nine steps using existing Kan path-fibration, enriched-to-right-pinched mapping comparison, path-pullback invariance, coherent mapping-space limit criterion, Whitehead inverse and pointwise-equivalence nodes. No new nodes. Currying identifies the actual comparison with Fun(X,q), including its H coordinate and triangle witnesses. The converse is detected by X=point. Whole-diagram equivalence and strict zigzag clauses are proved separately. All citations read and quoted; all dependencies checked not to return to this item. Second reading makes the arrow-model comparison via j and path-pullback invariance explicit and corrects the current blueprint proof-file reference.",
+  "blueprint": "Historical prop-coef-integral-exceptional-adjoint proof paragraph 2, derived coefficient mapping-space adjunction: steps 1--6 provide the finite space-limit recognition below its enriched completion foundations, and steps 7--9 ensure coherent presentation independence. Current main-20261015 ancestor text was also read; it keeps the same adjunction statement. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-functor-space-kan",
+    "why": "Kan condition for exponentials used in testing the space pullback; generic simplicial-set tool, no coefficient argument is replaced."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Kan condition for the specified right-pinched mapping spaces; generic coherent-category tool below the enriched coefficient foundations."
+   },
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Actual simplicial inverse and inverse homotopies for a weak equivalence of Kan complexes, used in exponentiation and the coherent-nerve inverse triangles; a generic space tool."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Pass from the explicit exponentiated inverse homotopies to weak homotopy equivalences; generic space tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-c5be61fd5",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-c5be61fd5 (reviewer sub-agent of L); spot-checked: The verdict is PASS with no fixes. I read the item, the full statements of all 14 cited nodes, the unit sk-prop-sf-biduality-general, and the blueprint ancestor in master and in main-20261015 sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md; its paragraph 2 is the R lim Hom adjunction, so the corrected from.place is right. The statement is unchanged and true. I tested it on these cases: A or P empty; discrete complexes, where q must be a bijection; D = point, where P = B x C; and B = C = point with D = N(BC2). In the last case P is discrete C2, and different H give a bijective or a non-bijective q, which confirms the clause that H matters. Steps: (1) the quasicategory node and the Kan fibration E_r -> D give P Kan. (2) The currying of Fun(X,P) and the T_q formula check out, and elementary is a fair label. (3) Strict postcomposition commutes with alpha = t q^n, which gives the strict equalities the pullback-invariance node needs; all six spaces are Kan. (4) Postcomposition is strict on R and U and commutes with the pinch map j. The compatibility of beta = j alpha with composition is taken from the existing point-family node's statement, and the homotopy-invariance argument plus two-out-of-three are correct. (5) Uses the iff clause of the terminal-pullback criterion. (6) Whitehead inverse plus exponentiation, and the converse at X = point. (7) Invariance under whole-diagram equivalence. (8) The orientation in C[Delta^2](0,2) and the Kan 2-horn reversal are right, followed by the pointwise-equivalence node. (9) Bookkeeping. No cited dependency reaches the item (280 nodes traversed). No duplicate: lem-coef-simplicial-model-coherent-diagrams generalizes only the strict clause and already depends on this item, so citing it would make a cycle; the kan-pullback-path-comparison, homotopy-pullback-pasting, coherent-weight-limit and brown-localization nodes state different things. There are no new nodes. The Mathlib searches cover all three kinds with no match. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus, lem-cbc-kan-whitehead-inverse and lem-cbc-simplicial-homotopy-equivalence-weak, generic space tools with many accepted precedents among sibling coefficient nodes; lem-cbc-kan-functor-space-kan is a Mathlib leaf, so declaring it is harmless. No SGA source is cited, and no base-change morphism or coefficient category is involved."
  }
 }

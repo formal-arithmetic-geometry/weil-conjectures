@@ -11,9 +11,117 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-universally-localizing-simplicial-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every small map $g:T\\to B$, put $A_T=T\\times_B A$, let $p_T:A_T\\to T$ be the projection, and let $W_T$ consist of its edges $(e,a)$ with $e=s_0(t)$ for some vertex $t$ of $T$. We prove that $p_T$ is a localization at $W_T$. For any simplex $\\sigma:\\Delta^n\\to B$, universal localization supplies a collection $V_\\sigma$ at which $p_\\sigma:\\Delta^n\\times_B A\\to\\Delta^n$ is a localization. The set $V_\\sigma$ is chosen once for this simplex and works for every target quasicategory.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02M1",
+    "place": "Proposition 6.3.5.4, implications (2) to (3) and setup of (3) to (4)."
+   }
+  },
+  {
+   "text": "The simplicial set $\\Delta^n$ is the nerve of the linearly ordered category $[n]$: its simplices are monotone vertex lists. An inner horn specifies its consecutive edges and hence this list, whose faces agree with the horn; thus it fills uniquely. An edge $i\\leq j$ can have an inverse edge only if also $j\\leq i$, forcing $i=j$, so its equivalence edges are exactly its degenerate edges. Take $\\mathcal E=\\Delta^n$ and the identity functor in the defining universal property of $p_\\sigma$. Its restriction $p_\\sigma$ must invert $V_\\sigma$. Consequently $V_\\sigma\\subseteq W_{\\Delta^n}$. This includes $n=0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02M1",
+    "place": "Proposition 6.3.5.4, proof (3) to (4), first two sentences; explicit ordered-simplex horn and inverse-edge check."
+   }
+  },
+  {
+   "text": "Fix a quasicategory $\\mathcal E$ and write $\\mathcal L_V,\\mathcal L_W$ for the full diagram subcategories on $\\Delta^n\\times_B A$ inverting $V_\\sigma,W_{\\Delta^n}$ respectively. The preceding inclusion gives $\\mathcal L_W\\subseteq\\mathcal L_V$. Restriction $R:\\operatorname{Fun}(\\Delta^n,\\mathcal E)\\to\\mathcal L_V$ is an equivalence by the definition, and lands in $\\mathcal L_W$ because a simplicial map sends a degenerate edge to a degenerate edge, which has itself as inverse with degenerate triangles. Choose an inverse $H$ and a coherent equivalence $\\eta:\\mathrm{id}_{\\mathcal L_V}\\simeq RH$. For $G\\in\\mathcal L_V$, evaluation of $\\eta$ at $G$ is an equivalence edge $\\eta_G:G\\to RH(G)$ in the full diagram subcategory. For $w:x\\to y$ in $W_{\\Delta^n}$, the pointwise-equivalence theorem makes its components $\\eta_x,\\eta_y$ equivalences. The square $\\eta_G|_{w\\times\\Delta^1}$ has a diagonal $d$; its two triangles give $[\\eta_y][G(w)]=[d]=[RH(G)(w)][\\eta_x]$, hence $[\\eta_y][G(w)]=[RH(G)(w)][\\eta_x]$ in $h\\mathcal E$. The right side and $[\\eta_y]$ are invertible, so $[G(w)]$ is invertible. The mapping-composition theorem identifies this with $G(w)$ being an equivalence. Thus every vertex of $\\mathcal L_V$ lies in $\\mathcal L_W$, and the two full simplicial subsets are equal. This proves the claim for every standard simplex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02M1",
+    "place": "Proposition 6.3.5.4, proof (3) to (4), enlargement of the inverted collection; the two inclusions and inverse-square argument explicitly expand Corollary 6.3.1.23 (02LT)."
+   }
+  },
+  {
+   "text": "Call a simplicial set $T$ good if the claim of step 1 holds for every $g:T\\to B$. Every standard simplex is good by steps 1–3, and $\\varnothing$ is good because both functor simplicial sets out of $\\varnothing$ are the one-point simplicial set. For finite $T$, meaning finitely many nondegenerate simplices, induct on dimension and, in each fixed dimension $n\\geq0$, on the number of nondegenerate $n$-simplices. The boundary-cell presentation applied to $\\varnothing\\hookrightarrow T$ attaches exactly its nondegenerate simplices in increasing dimension; a finite coproduct of attachments can be performed one cell at a time, since both quotients identify exactly the prescribed boundary pairs. Choose the last $n$-cell. It gives a degreewise pushout $T=T^{\\prime}\\amalg_{\\partial\\Delta^n}\\Delta^n$, where $T^{\\prime}$ has fewer $n$-cells and $\\partial\\Delta^n$ has smaller dimension. For $n=0$, the boundary is empty. Thus $T^{\\prime}$ and $\\partial\\Delta^n$ are good by the induction hypothesis, and $\\Delta^n$ is good by the simplex case.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02M1",
+    "place": "Proposition 6.3.5.4, finite double induction and the cell-attachment pushout; the existing boundary-cell node supplies the simplicial attachment theorem."
+   }
+  },
+  {
+   "text": "Fix $g:T\\to B$ in this attachment. Pulling back the four corners along $A\\to B$ gives another degreewise pushout: in each degree, a pair $(t,a)$ is represented by a representative of $t$ in either summand paired with the same $a$; all representatives and identifications lie over the same element of $B$, so the equivalence relations on pairs are exactly the pulled-back identifications. The maps $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ and $A_{\\partial\\Delta^n}\\hookrightarrow A_{\\Delta^n}$ are degreewise injective. Every map of the spans preserves the collections $W$, since it preserves $s_0$. Moreover $W_T$ is the union of the two images of $W_{T^{\\prime}}$ and $W_{\\Delta^n}$: an edge $(s_0t,a)\\in W_T$ lifts by choosing a representative vertex $t_i$ of $t$ in either summand and using $(s_0t_i,a)$. The equality $g_i(s_0t_i)=f(a)$ follows from its image in $B$. Conversely every such lifted edge has degenerate $T$-coordinate. This argument does not assume that the attaching simplex is injective or that $T$ reflects degeneracy.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02M1",
+    "place": "Proposition 6.3.5.4, application of the localization-gluing proposition: explicit pullback pushouts, monomorphisms and union of the vertical edge collections."
+   }
+  },
+  {
+   "text": "Apply the localization pushout theorem with source span $A_{\\partial\\Delta^n}\\to A_{\\Delta^n},A_{T^{\\prime}}$, target span $\\partial\\Delta^n\\to\\Delta^n,T^{\\prime}$, and edge collections $W_{\\partial\\Delta^n},W_{\\Delta^n},W_{T^{\\prime}}$. The three vertical maps are localizations by the simplex case and the induction hypothesis. Step 5 verifies both injective legs, compatibility of edge collections, and the two pushouts. The theorem therefore makes $p_T$ a localization at the union of the two edge images, which is exactly $W_T$. This completes both inductions and proves goodness for all finite $T$.",
+   "uses": [
+    "lem-coef-localization-monomorphic-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02M1",
+    "place": "Proposition 6.3.5.4, proof (4) to (1), the concluding cell-gluing application of Proposition 6.3.5.3."
+   }
+  },
+  {
+   "text": "For any small $T$, let $I$ be the poset of its finite simplicial subsets, ordered by inclusion. It is small and nonempty (it contains $\\varnothing$); the union of two finite subsets is finite and is a common upper bound. Every simplex is contained in the subset it generates, which is finite: factoring a monotone operator as a surjection followed by an injection shows that every generated simplex is a degeneracy of one of the finitely many faces of the generator. Thus $T=\\varinjlim_{S\\in I}S$ degreewise. For a fixed $g:T\\to B$, also $A_T=\\varinjlim_{S\\in I}(S\\times_B A)$: any pair $(t,a)$ appears as soon as $t$ lies in $S$, and all maps are inclusions. Finally $W_T=\\bigcup_{S\\in I}\\operatorname{im}(W_S)$: for $(s_0t,a)$ choose $S$ containing the vertex $t$. These statements identify the actual diagram of maps and its specified edge collections, not only its underlying objects.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02M1",
+    "place": "Proposition 6.3.5.4, reduction to finite simplicial sets: explicit finite-subset index, degreewise filtered colimit and marked-edge union."
+   }
+  },
+  {
+   "text": "Each map $S\\times_B A\\to S$ in step 7 is a localization at $W_S$ by the finite case, and all transition maps preserve these collections. The filtered-colimit localization theorem applies to the small nonempty filtered index $I$, giving that $p_T:A_T\\to T$ is a localization at $W_T$. Now take $T=B$ and $g=\\mathrm{id}_B$. The degreewise isomorphism $A\\to B\\times_B A$, $a\\mapsto(f(a),a)$, identifies $p_T$ with $f$ and identifies $W_T$ with $W_f$. By the definition of localization, this is precisely the asserted equivalence of full coherent functor categories for every $\\mathcal E$ in a sufficiently large universe.",
+   "uses": [
+    "lem-coef-localization-filtered-colimit",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02M1",
+    "place": "Proposition 6.3.5.4, filtered-colimit reduction via Corollary 6.3.2.12 (05ZQ), then Corollary 6.3.5.5 (02M2), specializing to the identity base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-universally-localizing-simplicial-map",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-localization-filtered-colimit",
+  "lem-coef-localization-monomorphic-pushout"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02M1",
+  "place": "Proposition 6.3.5.4, proof (2) to (3) to (4) to (1), followed by Corollary 6.3.5.5. Read online; archive WANTED. The enlargement, pullback/marking bookkeeping and filtered-subset arguments are expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,10 +178,45 @@
    "results": "msearch 2026-10-17: 0 hits.",
    "date": "2026-10-17",
    "verdict": "no match: no Mathlib source declaration uses this coherent universal-localization notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal localization of simplicial sets is localization at the edges whose images are degenerate",
+   "results": "{\"t\": \"2026-10-17T05:24:40Z\", \"tool\": \"leanfinder\", \"query\": \"Universal localization of simplicial sets is localization at the edges whose images are degenerate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.sk\", \"SSet.modelCategoryQuillen.J\", \"SSet.hoFunctor\", \"SSet.QCat\", \"SSet.modelCategoryQuillen.I\", \"SSet.KanComplex\", \"SSet.Truncated.HomotopyCategory\", \"SSet.cosk\"], \"digest\": \"dfc6a9a4a9a9125c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are simplicial skeletons, Quillen horn generators, homotopy categories, and ordinary categorical localization. Read Quasicategory/Basic.lean:29-57, SimplicialSet/Degenerate.lean:375-385, and CategoryTheory/Localization/Predicate.lean:40-90. These do not supply a universal localization or the asserted full coherent functor equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-17T05:24:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are simplicial skeletons, Quillen horn generators, homotopy categories, and ordinary categorical localization. Read Quasicategory/Basic.lean:29-57, SimplicialSet/Degenerate.lean:375-385, and CategoryTheory/Localization/Predicate.lean:40-90. These do not supply a universal localization or the asserted full coherent functor equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "universally.?[Ll]ocaliz|[Ll]ocaliz.*degenerate|degenerate.*[Ll]ocaliz",
+   "results": "{\"t\": \"2026-10-17T05:24:38Z\", \"tool\": \"grep\", \"query\": \"universally.?[Ll]ocaliz|[Ll]ocaliz.*degenerate|degenerate.*[Ll]ocaliz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are simplicial skeletons, Quillen horn generators, homotopy categories, and ordinary categorical localization. Read Quasicategory/Basic.lean:29-57, SimplicialSet/Degenerate.lean:375-385, and CategoryTheory/Localization/Predicate.lean:40-90. These do not supply a universal localization or the asserted full coherent functor equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a universally localizing simplicial map is an equivalence onto diagrams inverting edges with degenerate image",
+   "results": "{\"t\": \"2026-10-17T05:24:38Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along a universally localizing simplicial map is an equivalence onto diagrams inverting edges with degenerate image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.degenerate_iff_of_isIso\", \"SSet.image_degenerate_le\", \"SSet.degenerate_app_apply\", \"SSet.degenerate_le_preimage\", \"SSet.Edge.map\", \"CategoryTheory.Localization.instIsEquivalenceLocalizationLift\", \"SSet.nonDegenerateEquivOfIso_symm_apply_coe\", \"SSet.degenerate_iff_of_mono\"], \"digest\": \"fc65c2e6a6804c7f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are simplicial skeletons, Quillen horn generators, homotopy categories, and ordinary categorical localization. Read Quasicategory/Basic.lean:29-57, SimplicialSet/Degenerate.lean:375-385, and CategoryTheory/Localization/Predicate.lean:40-90. These do not supply a universal localization or the asserted full coherent functor equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition by a base change stable localization of simplicial sets inverts precisely edges lying over vertices",
+   "results": "{\"t\": \"2026-10-17T05:25:27Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition by a base change stable localization of simplicial sets inverts precisely edges lying over vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_of_edge\", \"SSet.Edge.map\", \"SSet.Truncated.HomotopyCategory.morphismProperty_eq_top\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Truncated.HomotopyCategory.multiplicativeClosure_morphismPropertyHomMk\"], \"digest\": \"c6f7bef90716c0b4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are simplicial skeletons, Quillen horn generators, homotopy categories, and ordinary categorical localization. Read Quasicategory/Basic.lean:29-57, SimplicialSet/Degenerate.lean:375-385, and CategoryTheory/Localization/Predicate.lean:40-90. These do not supply a universal localization or the asserted full coherent functor equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-universal-localization-pushout",
@@ -106,5 +249,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-universal-localization-degenerate-edges",
+  "worker": "stage1",
+  "summary": "Expanded the canonical edge-collection argument in Kerodon 02M1/02M2: simplexwise witnesses are enlarged by an explicit inverse-square calculation; double cell induction and filtered finite-subset unions prove the arbitrary-shape result. Reused the existing boundary-cell, pointwise-equivalence and mapping-composition nodes. Two new statement-only nodes isolate generic localization gluing and filtered-colimit stability, not clauses of the item. No statement correction, attachment or Mathlib leaf was found.",
+  "blueprint": "Realizes the supporting canonical edge choice in Kerodon Proposition 6.3.5.14 recorded in blueprint.from.place, through the full proof of Corollary 6.3.5.5 and Proposition 6.3.5.4. The historical blueprint ancestry is retained; this is the auxiliary simplicial-resolution foundation below the finite coefficient adjunction, not a change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-25128cfd4",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-25128cfd4 (reviewer sub-agent of L); spot-checked: I read Kerodon 02M2, 02M1, 01N7 and 05ZQ on kerodon.net because Kerodon is not in literature/ (the report lists it as WANTED). I also read all five cited DAG statements in full. The item's statement is exactly Kerodon 02M2, with the definition's functor-category form of localization; no hypothesis was added or dropped and A and B are arbitrary. Steps 1-8 follow 02M1 (2)=>(3)=>(4)=>(1). Step 3 writes out the 02LT enlargement correctly: the eta_G naturality square in hE makes [G(w)] invertible, and mapping-composition turns that into an equivalence edge. Step 4 is the dimension and top-cell induction using the Mathlib cell leaf. Step 5's pullback-of-pushout and W_T-union bookkeeping is correct; I checked g_i(s_0 t_i)=f(a). Step 6 applies the new pushout node with the injective legs u_0=A_bdry->A_Delta and v_0=bdry->Delta^n. Steps 7-8 cover the finite-subset filtered colimit, which is nonempty because it contains the empty subset, then the identity base change. New node lem-coef-localization-monomorphic-pushout is true: it is 01N7 (1)=>(2) specialised to pushouts along monos, which are categorical by 01FJ. New node lem-coef-localization-filtered-colimit is true and is 05ZQ; non-injective transitions do no harm. Both are general and strictly smaller than the item, statement-only, with all three search kinds recorded. Duplicate search: the tags, plus the localization nodes of sec-six-functors I read. The parent lem-coef-universal-localization-pushout assumes universal localization and depends on the item, so citing it would be a cycle; the cartesian-pullback, Dwyer-Kan, model-colimit, homotopy-category and hammock nodes state other results. Every cited statement is in the item's unit or is a definition or Mathlib leaf, so no tool_uses are needed or accepted. No SGA source, no target node, and no change to any unit or chapter. Edge cases checked: A=B=empty, f=id, Delta^1->Delta^0, n=0, T empty. No fixes were needed."
  }
 }
