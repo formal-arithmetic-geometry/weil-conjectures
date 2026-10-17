@@ -14,9 +14,113 @@
   "def-coef-infinity-fibrations",
   "lem-coef-space-valued-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First construct the arrow fibration without using any of the assertions to be proved. Evaluation $\\mathrm{ev}_1:\\operatorname{Fun}(\\Delta^1,\\mathcal C)\\to\\mathcal C$ is an inner fibration: apply the restriction/isofibration clause of [lem-coef-infinity-parameter-cone-extension] to $\\{1\\}\\subseteq\\Delta^1$. The arrow mapping-space formula [lem-coef-infinity-arrow-morphism-square] shows that a square over $f:x\\to y$ is Cartesian for this projection exactly when its source object is the pullback of its target arrow along $f$: after fixing a map into $x$, the required mapping-space comparison is exactly $\\operatorname{Map}_{\\mathcal C}(t,u)\\simeq\\operatorname{Map}_{\\mathcal C}(t,v)\\times^h_{\\operatorname{Map}_{\\mathcal C}(t,y)}\\operatorname{Map}_{\\mathcal C}(t,x)$ for every $t$. This is the pullback universal property. The dual of [lem-coef-infinity-cocartesian-mapping-criterion] identifies this comparison with horn-Cartesianness. Finite limits provide such a lift with any prescribed target arrow; hence evaluation is a Cartesian fibration. Apply [lem-coef-cartesian-core-right-fibration]. Its Cartesian core consists precisely of pullback-square edges and has fiber $(\\mathcal C_{/x})^{\\simeq}$. Restrict to vertices in $S$: an inner or higher right horn already contains all vertices, whereas lifting a one-dimensional right horn adds the pullback of its prescribed target arrow. Pullback stability of $S$ supplies that missing vertex, and repleteness permits any equivalent pullback choice. The restriction is therefore a right fibration with the stated restricted-core fibers.",
+   "uses": [
+    "lem-coef-infinity-parameter-cone-extension",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-cartesian-core-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation 6.1.3.4; Lemma 6.1.1.1; Corollary 2.4.2.5"
+   }
+  },
+  {
+   "text": "Apply the opposite of [lem-coef-space-valued-straightening], in universe $\\mathcal U'$, to the right fibration just constructed. The fiber formula gives $\\rho_S(x)$, and the Cartesian-core transport formula of step 1 gives precisely pullback along $f:x\\to y$, including the higher compatibilities from straightening. Taking all arrows gives $\\rho$. For any diagram on $J^{\\triangleright}$, the inclusion of its apex is right anodyne: in [lem-coef-infinity-cone-mono-right-anodyne] take $A=\\varnothing$ and $B=J$. By [lem-coef-infinity-right-fibration-exponentiation], a lift of this diagram to the all-arrows right fibration with a prescribed apex arrow has a contractible space of choices. Each component square into the apex is a pullback by step 1, so its source at $j$ is $q(j)\\times_{q(\\infty)}u$. This proves existence and coherent uniqueness of the asserted pullback transformation, and identifies every cartesian transformation on the cone with this one for its own apex. This proves the introductory classification and cartesian-cone assertions rather than assuming them.",
+   "uses": [
+    "lem-coef-space-valued-straightening",
+    "lem-coef-infinity-cone-mono-right-anodyne",
+    "lem-coef-infinity-right-fibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation 6.1.3.4; Lemmas 6.1.3.2-6.1.3.3, coherent apex-pullback description"
+   }
+  },
+  {
+   "text": "For $J=K$ or $K^{\\triangleright}$ let $\\mathcal A_J$ be the full subcategory of $\\operatorname{Fun}(J,\\mathcal C)_{/q|_J}$ on cartesian transformations with all vertex components in $S$. Its core is the section space $\\Gamma_J(\\mathcal O^{(S)}_{\\mathcal C},q)$: a section is just a cartesian transformation, and a parameter edge in the section space is a pullback square over an identity, hence an equivalence of slice objects. Conversely a componentwise equivalence between such transformations gives these pullback squares; [lem-cbc-enhanced-functor-cone-calculus] identifies componentwise equivalences with equivalences in the functor category. This accounts for every parameter simplex, since the defining condition is imposed on every edge. By [lem-coef-right-fibration-cone-section-criterion], condition (a) is equivalent to restriction $\\mathcal A_{K^{\\triangleright}}^{\\simeq}\\to\\mathcal A_K^{\\simeq}$ being an equivalence of spaces.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-right-fibration-cone-section-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 6.1.3.5, space/core version of the categories in its proof; Corollary 3.3.3.3"
+   }
+  },
+  {
+   "text": "Let $\\mathcal B$ be the full subcategory of $\\operatorname{Fun}(K^{\\triangleright},\\mathcal C)_{/q}$ on transformations $\\alpha:p\\to q$ for which $p$ is colimiting and $\\alpha|_K$ belongs to $\\mathcal A_K$. Restriction $\\mathcal B\\to\\mathcal A_K$ is an equivalence. Here are its mapping-space and existence arguments. Write $D=p|_K$ and $D'=p'|_K$. The dual of [lem-coef-infinity-join-cone-calculus] identifies the space of maps between these cocones with\n$$\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(D,D')\\times^h_{\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(D,\\Delta_Kp'(\\infty))}\\operatorname{Map}_{\\mathcal C}(p(\\infty),p'(\\infty)).$$\nThe cocone mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] makes the last factor's map to the base an equivalence because $p$ is colimiting. Thus restriction on maps is an equivalence. Taking its homotopy fibers over maps to the fixed cocone $q$ gives the same assertion in the slice, including all commuting-triangle homotopies. For a given $D\\to q|_K$ in $\\mathcal A_K$, presentability supplies a colimit cocone $p$ on $D$. Its universal property extends the composite $D\\to q|_K\\to\\Delta_Kq(\\infty)$ to $p(\\infty)\\to q(\\infty)$ in a contractible space; the same displayed formula gives a coherent transformation $p\\to q$. This proves essential surjectivity. Apply [lem-coef-infinity-full-essential-image] to this fully faithful functor: its full essential image is all of $\\mathcal A_K$, so it has a coherent quasi-inverse. Consequently restriction induces an equivalence $\\mathcal B^{\\simeq}\\to\\mathcal A_K^{\\simeq}$, not merely surjectivity on objects.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 6.1.3.5, the restriction from colimit extensions; Proposition 4.3.2.15 replaced by its cocone mapping-space argument"
+   }
+  },
+  {
+   "text": "There is a full inclusion $\\mathcal A_{K^{\\triangleright}}\\subseteq\\mathcal B$. Indeed step 2 identifies an object on the left with pullback along its apex arrow $u\\to L$, where $L=q(\\infty)$. Apply the assumed universality of colimits to $D=q|_K$, its colimit $L$, and $L\\xrightarrow{1}L\\leftarrow u$. It makes the cocone $q(k)\\times_Lu\\to L\\times_Lu\\simeq u$ colimiting. The equivalence from step 2 then makes the original source cocone colimiting, as the cocone mapping-space criterion is invariant under equivalences. Its restriction already has the required cartesian squares and $S$-components. This proves the inclusion using precisely the universality hypothesis.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 6.1.3.5, inclusion of Cartesian cone extensions in colimit extensions; Lemma 6.1.3.3(1) implies (5)"
+   }
+  },
+  {
+   "text": "The restriction in step 3 factors as the core of the full inclusion in step 5 followed by the equivalence in step 4. Thus (a) holds exactly when that inclusion on cores is an equivalence. If (a) holds, every $\\alpha\\in\\mathcal B$ is equivalent over $q$ to an object of $\\mathcal A_{K^{\\triangleright}}$. Equivalences are componentwise by [lem-cbc-enhanced-functor-cone-calculus]. The pullback universal-property comparison remains an equivalence after such componentwise equivalences, and repleteness preserves membership of the apex in $S$. Hence $\\alpha$ itself is cartesian on the cone and its apex belongs to $S$, which is (b). Conversely (b) says exactly that every object of $\\mathcal B$ belongs to $\\mathcal A_{K^{\\triangleright}}$. Both are full subcategories of the same slice, so their inclusion is then an equality on objects and all simplices. Its core is therefore an equivalence, and steps 3-4 give (a). The full-subcategory argument supplies the higher uniqueness that an objectwise existence argument alone would miss.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 6.1.3.5, explicit (2) implies (3) and (3) implies (2) using cores"
+   }
+  },
+  {
+   "text": "For $K=\\varnothing$, $L$ is initial and $\\mathcal A_K^{\\simeq}$ is the one-point space. Universality applied to $L\\xrightarrow{1}L\\leftarrow u$ shows that the source $u$ of every arrow into $L$ is initial. Therefore the whole slice over $L$ has contractible core: every arrow is equivalent to $1_L$ and is terminal in the slice. The nonempty full subcategory of terminal objects is contractible by [lem-cbc-enhanced-functor-cone-calculus]. Repleteness implies that the restricted core is either empty (if $1_L\\notin S$) or this contractible core (if $1_L\\in S$). Thus (a) holds exactly when $1_L\\in S$. In (b) there are no squares to test and both source and target apexes are initial; every possible apex arrow is equivalent to $1_L$. Hence (b) has exactly the same condition. In particular pullback stability alone has not been mistaken for membership of $1_L$ in $S$. The point shape gives restriction an equivalence by step 2, as another check.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 6.1.3.5, empty-shape verification; Lemma 6.1.3.6, strict initial object"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cartesian-core-right-fibration",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-cone-mono-right-anodyne",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-parameter-cone-extension",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-coef-right-fibration-cone-section-criterion",
+  "lem-coef-space-valued-straightening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proof of Lemma 6.1.3.5(2) iff (3), with the general Cartesian-core and right-fibration section criteria as separate supporting nodes. Read the online PDF; not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -146,7 +250,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-colimit-descent-criterion",
@@ -172,5 +276,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-slice-cartesian-colimit-criterion",
+  "worker": "stage1",
+  "summary": "Second reading replaced circular use of the introductory assertions and the incorrect fixed-target citation. Constructed the arrow Cartesian fibration, its restricted core and coherent apex pullbacks; used section spaces and a fully faithful comparison of colimit extensions to prove both implications. Added two general statement-only supporting nodes. Statement unchanged.",
+  "blueprint": "Proof paragraph 2, coherent finite-coefficient mapping-complex adjunction before R lim; through the algebroid completion and space-geometric-descent branch, the slice-core right-fibration criterion HTT 6.1.3.5(2) iff (3) used in the descent argument of HTT 6.1.3.9. These are supporting infinity-category foundations, not an argument explicitly present in the current statement-only blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-c6a67d218",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-c6a67d218 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the statement of every cited node in full. HTT is not in literature/ (WANTED is kept), so I checked the mathematics directly against HTT 6.1.1.1, 2.4.2.5/2.4.1.5, 3.3.3.3 and 6.1.3.4-6.1.3.5. The item statement is unchanged. All seven steps are correct. Step 1: ev_1 is a Cartesian fibration whose Cartesian edges are the pullback squares (arrow mapping-space formula plus the dual cocartesian criterion), and the restriction to S is a right fibration (for n>=2 a right horn contains every vertex; for Lambda^1_1 pullback stability and repleteness give the new vertex). Step 2: cone-mono-right-anodyne with A empty gives exactly the apex inclusion, and exponentiation gives contractible apex-pullback lifts, so the introductory clauses are now proved, not assumed. Steps 3-6: the section criterion; B->A_K fully faithful (dual join-cone formula plus the colimit criterion) and essentially surjective (presentability); universality gives A_{K>} inside B; A_{K>} is replete inside B, so (a)<=>(b). Step 7 (K empty): both (a) and (b) reduce to 1_L in S, using strict initiality. New nodes: lem-coef-cartesian-core-right-fibration (true; tested on B=pt, p=id and ordinary fibrations; no duplicate) and lem-coef-right-fibration-cone-section-criterion (true; tested on K empty and K=pt; strictly more general than lem-coef-right-fibration-section-limit, which needs K to be a quasicategory). Neither restates an item clause. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, used as a generic cone/functor calculus black box, as in 168 nodes of this unit. One fix: the item's source.place still claimed a nonexistent 'sandbox HTT-second-reader.pdf'; replaced with the online-PDF/WANTED wording in fixes/dag/nodes/sec-six-functors/lem-coef-slice-cartesian-colimit-criterion.json.; 1 file(s) fixed by the reviewer"
  }
 }
