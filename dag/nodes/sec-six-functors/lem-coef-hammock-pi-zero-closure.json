@@ -407,5 +407,32 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-3153dadef (reviewer sub-agent of L); spot-checked: I read the full item (9 steps, statement unchanged, no new nodes) and all 13 cited statements. proof_deps equals the union of the step uses. By script, no cited node reaches the item, so there is no cycle; the only citer is lem-coef-kan-enriched-hammock-comparison, which uses the item with U = identity marking. The statement is the correct enriched Dwyer–Kan closure lemma: its hypothesis is about invertibility in Q = pi0A[(im U_0)^-1], not degreewise closure, and no Kan, cofibrancy or saturation hypothesis is added. Small cases I tested: empty object set, U=V, an ordinary category localized at its isomorphisms, the monoid N (hypothesis fails, as it must), the group Z/2, and a non-Kan A with U = identities. All nine steps check. Step 2: diagonal free resolution; degeneracies keep generators and complementary generators; the boundary-lifting proof that free maps are cofibrations covers n=0, then the fixed-object and Bergner cofibrations agree. Step 3: the dk span applied for each p, naturality in p and the rowwise diagonal lemma; the commutation under P reads correctly. Step 4: every hypothesis of cofibrant-simplicial-inversion holds, and the groupoid-localization node needs no Kan source. Step 5: the pullback against the fully faithful leg, and a^* matching R_{T,0}=F(T_0) to the vertices of T. Step 6: the pi0-of-diagonal argument, checked in both directions; the presentation equals Q. Step 7: inverse triangles with the correct orientation in the coherent 2-simplex. Steps 8–9: inverse functor via full faithfulness of q_U^* and q_V^*, then mapping spaces and two-out-of-three. No duplicate: lem-coef-hammock-infinity-localization covers ordinary categories only, and hammock-pair-homotopy-invariance is a change of pair, not of marking. I accept the two declared tool uses, lem-cbc-simplicial-groupoid-localization and lem-cbc-enhanced-functor-cone-calculus. Mathlib search records are genuine, and the Loogle parse error is recorded as a query error. Caveat: the Dwyer–Kan PDFs are not archived and network access is blocked here, so I checked the source places against the standard content of DK I sections 2, 6, 7, 9–10 and DK II 2.1–2.5 and 3.1, not the printed pages; the proof is correctly marked agent-written. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HammockPiZeroClosure",
+  "declaration": "CategoryTheory.HammockClosure.hammock_pi_zero_closure",
+  "declarations": [
+   "CategoryTheory.HammockClosure.componentRelation",
+   "CategoryTheory.HammockClosure.components",
+   "CategoryTheory.HammockClosure.toComponents",
+   "CategoryTheory.HammockClosure.marking",
+   "CategoryTheory.HammockClosure.toLocalization",
+   "CategoryTheory.HammockClosure.Inclusion",
+   "CategoryTheory.HammockClosure.hammock_pi_zero_closure"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HammockPiZeroClosure.lean",
+  "statement": "theorem hammock_pi_zero_closure (A : SCat.{u}) (U V : WideSimplicialSubcategory A) (hUV : ∀ x y : A, U.wide x y ≤ V.wide x y) (hV : ∀ (x y : SimplicialHammockDegree A (op ⦋0⦌)) (f : x ⟶ y), V.degree (op ⦋0⦌) f → IsIso ((toLocalization U).map f)) (HU : SimplicialHammockPair U) (HV : SimplicialHammockPair V) : ∃ F : Inclusion U V hUV HU HV, ∀ x y : A, SSet.Enhanced.IsWeakHomotopyEquivalence (F.map x y)",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2366f8625",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: A : SCat.{u}; U, V wide simplicial subcategories; hUV inclusion on every mapping subcomplex; pi0 A as the quotient of the degree-0 category by pi0.mk equality (exact even when A is not Kan); Q as Mathlib localization at the image of U's degree-0 vertices; hV says every V vertex is invertible in Q; conclusion is IsWeakHomotopyEquivalence on every mapping set. The canonical functor is stated as ∃ F : Inclusion, whose reduction field pins every simplex; this is equivalent to the canonical g because reduced forms are unique, and matches the landed SimplicialHammockComparison. Node differs from the clone only in its lean field; lean.statement is verbatim the signature; all 7 declarations exist. No hollow definitions; source/blueprint docstrings and the 9-step proof docstring are present; only the item theorem is sorry; no extra hypotheses and no universe restriction. Edge cases checked: empty object set, n=0, U=V, identity-only U, non-Kan A. Report has real Worker report and Second reading by Q122 sections. nt_compile.py --json compiles the module cleanly (rc=0, no warnings); a control run with an unknown identifier gave an error."
  }
 }

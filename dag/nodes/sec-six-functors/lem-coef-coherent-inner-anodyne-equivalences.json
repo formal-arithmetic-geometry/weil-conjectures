@@ -253,5 +253,23 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-b38592538 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the full statements of the six cited nodes. The statement is unchanged and true: it is HTT Lemma 2.2.5.2 plus the fact that Bergner trivial cofibrations are Dwyer-Kan equivalences. HTT is not in literature/, so I checked against HTT 2.2.5.2, Definition 1.1.5.1 and section 1.1.5 as I know them, not an archived copy; the WANTED entry and agent proof_origin are correct. Step 1: the colimit formula of pinched-cube-latching makes C a left adjoint via N_D, so marking it elementary is right. Step 2: flags compose by union, a flag factors at c exactly when c is in S_0, so degree r is free on flags with S_0={a,b}, and the step proves the colimit over the faces explicitly. Step 3: K is the union of all faces t_j=1 and the faces t_j=0 with j not equal to i, so the face t_i=0 is the missing one. I checked n=2 (K={1}) and n=3 (three sides of the square), the claim that every proper interval misses a vertex other than i, and the U(K)/U(Q) pushout. Step 4: K to Q is the pushout-product of the mono from the boundary of R into R with Lambda^1_1 into Delta^1, with the domain oriented exactly as in the Mathlib-leaf node; for n=2 the boundary of R is empty. Step 5 uses only the local Kan clause of J-inj, which the interval-lifting statement contains. Step 6 is the standard saturation argument, transferred back through C. Step 7 cites the J-cof-is-a-retract-of-J-cell clause and the J-cell-in-W and retract-closure clauses, all from the cited statements, not their proofs. Every cited node is in the item's unit (or is a definition or Mathlib leaf), so no tool_uses are needed. My cycle script finds no cycle. The stronger rigidification-equivalence-detection node depends on this item, and inner-anodyne-pushout-product states something else, so neither is a duplicate. There are no new nodes; proof_deps equals the union of the steps' uses; no SGA source is cited. This is not a target node, so the base-change check does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CoherentInnerAnodyneEquivalences",
+  "declaration": "SSet.coherent_inner_anodyne_equivalence",
+  "file": "lean/Sheaf/AlgebraicTopology/CoherentInnerAnodyneEquivalences.lean",
+  "statement": "theorem coherent_inner_anodyne_equivalence {A B : SSet.{u}} (u : A ⟶ B) (hu : innerAnodyneExtensions.{u} u) : Bergner.dwyerKanEquivalences.{u} (PinchedCube.rigidification.map u)",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2b0a2d4b",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read node, both stmt deps (PinchedCube.rigidification = Lan of SimplicialThickening subset-poset coherent simplices; Enhanced weak-equivalence convention), the delivered module, report (Worker report + Second reading by Q86 present) and HTT Lemma 2.2.5.2 source place. Hypothesis innerAnodyneExtensions.{u} u = Mathlib llp(rlp(inner horns)) = weak saturation of isos+inner horns by innerAnodyneExtensions_eq_retracts_transfiniteCompositions; conclusion Bergner.dwyerKanEquivalences unfolds to DwyerKanEquivalence = mapping-sSet weak homotopy equivalences + pi0 bijections + pi0 essential surjectivity, exactly the node's DK notion via the single existing project declaration. No extra hypotheses, single universe u, edge cases (isos, n=0/1, empty/infinite SSets) covered. No definitions, sorry only, source/blueprint docstrings with the 7 proof steps, lean.statement verbatim, node changed only in lean vs base. nt_compile --json on side overlay: rc 0, 1.3 s, no diagnostics. No findings."
  }
 }

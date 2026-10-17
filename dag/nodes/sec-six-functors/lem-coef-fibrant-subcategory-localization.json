@@ -31,7 +31,8 @@
   "place": "Definition 7.4.6, Definition 7.4.12(i)-(ii), Theorem 7.5.18 (first assertion), applied to an ordinary nerve; existence is Definition 7.1.2 and Proposition 7.1.3. Read online 2026-10-17, printed pp. 360-361, 365-366 and 380; localization definition and existence on pp. 323-324. No Stacks tag states this coherent-localization theorem. WANTED: an archived copy in literature/."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -243,5 +244,27 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-f966d75b8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the full statements of the 3 cited nodes (system-localization-universal, infinity-full-essential-image, def-cbc-enhanced-diagrams-cones). The item's hypotheses match Cisinski Defs 7.4.6/7.4.12 one by one: terminal object, W and P closed under composition, 2-of-3, pullbacks of P and P∩W between fibrant objects, nonfunctorial factorization with fibrant target. Nothing is added or dropped. The conclusion is the first assertion of Thm 7.5.18, in the full functor-category sense, which is what the citer brown-reedy-fibrant-replacement needs. Steps: (1) W is a system on the nerve and u q_f≃q i follows from the universal property; (2) essential surjectivity of a localization is a short elementary argument; (3) the comma-final child's hypotheses are exactly the item's, and the codomain is (q↓q x) in L(A), not the ordinary slice; (4) the square criterion applies, with T_a matching step 3 up to the equivalence θ_x; (5) factoring a→a^f→1 puts all of Y in u's essential image, and the cited node gives the quasi-inverse. New nodes: both are self-contained, statement only, and true. The square criterion follows from the Beck–Chevalley mate q_! i^*≃u^* r_!, which gives u^*u_!q_!≃q_! and makes the unit invertible on corepresentables. Counter-check: with A=B={0,1}, X=pt, Y=BZ/2, u is not fully faithful and T_a is not final, so the hypothesis does real work. Comma finality is Cisinski's intermediate result 7.5.16 and is strictly weaker than the item, so neither child restates a clause. Small cases tested: all objects fibrant, A=[1] with W=all arrows, W=isomorphisms, empty A. No duplicates among the Brown nodes (all assume every object fibrant), the infinity cofinality/Kan nodes, or def-sfb-left-derivability-structure. The 179-node closure has no cycle. All cited statements are in the item's own unit, so the requested tool_uses are unnecessary and not accepted. No SGA; not a target, so no base-change morphism or coefficient category is involved. No fixes. Residual: archive Cisinski's CatLR.pdf. I could not open it (network blocked), so the attribution to 7.5.16 rests on the earlier readings plus my own check that the statement is true."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FibrantSubcategoryLocalization",
+  "declaration": "HomotopicalAlgebra.fibrant_subcategory_localization",
+  "declarations": [
+   "HomotopicalAlgebra.fibrant_subcategory_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FibrantSubcategoryLocalization.lean",
+  "statement": "theorem fibrant_subcategory_localization (C : Type u) [Category.{v} C] (one : C) (W P : MorphismProperty C) (hone : IsTerminal one) (hWiso : ∀ {X Y : C} (f : X ⟶ Y), IsIso f → W f) (hPiso : ∀ {X Y : C} (f : X ⟶ Y), IsIso f → P f) (hWcomp : ∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), W f → W g → W (f ≫ g)) (hPcomp : ∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), P f → P g → P (f ≫ g)) (hWtwo : W.HasTwoOutOfThreeProperty) (hpullback : ∀ {X Y Y' : C} (p : X ⟶ Y) (v : Y' ⟶ Y), P p → P (hone.from X) → P (hone.from Y) → P (hone.from Y') → ∃ (X' : C) (a : X' ⟶ X) (b : X' ⟶ Y'), IsPullback a b p v ∧ P (hone.from X') ∧ P b ∧ (W p → W b)) (hfactor : ∀ {X Y : C} (f : X ⟶ Y), P (hone.from Y) → ∃ (X' : C) (w : X ⟶ X') (p : X' ⟶ Y), W w ∧ P p ∧ P (hone.from X') ∧ w ≫ p = f) : ∃ (Lf L : SSet.{max u v t}) (qf : SSet.uliftFunctor.{t}.obj (nerve (ObjectProperty.FullSubcategory (fun X : C ↦ P (hone.from X)))) ⟶ Lf) (q : SSet.uliftFunctor.{t}.obj (nerve C) ⟶ L) (e : Lf ⟶ L), FiniteReedy.IsLocalization (W.inverseImage (ObjectProperty.ι (fun X : C ↦ P (hone.from X)))) qf ∧ FiniteReedy.IsLocalization W q ∧ SSet.Enhanced.IsFunctorEquivalence e ∧ SSet.Enhanced.AreNaturallyEquivalent (qf ≫ e) (SSet.uliftFunctor.{t}.map (nerveMap (ObjectProperty.ι (fun X : C ↦ P (hone.from X)))) ≫ q)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed definition-node interface def-coef-coherent-localization-interface (FiniteReedy.IsLocalization), with the same independent object/morphism universes and whole coherent functor-category universal property. Only its definitions are used; no downstream finite-Reedy theorem or theorem dependency is introduced. Second reading removed duplicate helper predicates and added the recorded proof imports and the complete five-step proof docstring."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8f0cc8d1",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Statement matches the node and Cisinski Defs 7.4.6/7.4.12 and Thm 7.5.18 clause by clause: terminal object, isos and composition closure for W and P, 2-of-3, pullbacks of fibrations between fibrant objects (IsPullback a b p v with the correct orientation, fibrant, in P, in W when p is), nonfunctorial factorization with fibrant middle object. The conclusion uses the landed FiniteReedy.IsLocalization for both nerves, with W.inverseImage of the inclusion, IsFunctorEquivalence e and AreNaturallyEquivalent (qf≫e) (i≫q). No extra assumptions; independent universes u,v lifted to max u v t; edge cases checked. The stmt_deps addition is a landed node (allowed); the dependency node is unchanged. No definitions, sorry only, docstrings and five-step proof plan present, proof-dependency imports non-public, lines ≤100, lean.statement verbatim. nt_compile --json clean (exit 0, no diagnostics), reproduced twice. Report has the Worker report and Second reading by Q74 sections. No findings."
  }
 }
