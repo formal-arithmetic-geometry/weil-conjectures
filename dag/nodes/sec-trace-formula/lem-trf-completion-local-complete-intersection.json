@@ -19,9 +19,121 @@
   "def-weil-pbc-depth",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a surjection $P=k[x_1,\\ldots,x_n]\\to S$ from [def-weil-pbc-finite-type-algebra], with kernel $I$, and let $\\mathfrak q$ be the inverse image of $\\mathfrak p$. By [lem-weil-pbc-polynomial-ring-field-regular-ring], $R=P_{\\mathfrak q}$ is regular local and hence Noetherian. The map $R/IR\\to A$, $(u/v)\\bmod IR\\mapsto\\bar u/\\bar v$, is an isomorphism: both sides invert exactly the images of $P\\setminus\\mathfrak q$ in $P/I$, and their kernels are the fractions with numerator in $I$. Thus [lem-weil-pbc-surjective-image-noetherian] makes $A$ Noetherian. Put $C=\\widehat A$. By [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-local-completion-local-ring], $C$ is Noetherian local with maximal ideal $\\mathfrak n=\\mathfrak pAC$ and residue field $F$. By [lem-weil-pbc-adic-completion-mod-ideal], it is $\\mathfrak n$-adically complete.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "09Q6 (lemma-check-lci-agrees), proof of (1): polynomial-local presentation; Algebra 0316, 05GI and 05GG for the completion."
+   }
+  },
+  {
+   "text": "The structural maps make $C$ contain the field $k$: a unital map from a field into a nonzero local ring is injective. In particular $C$ and its residue field $F$ have the same characteristic. Apply [lem-weil-pbc-cohen-coefficient-ring-exists] to $C$. Its coefficient subring $\\Lambda$ has maximal ideal $p\\Lambda$, where $p$ is the characteristic of $F$. This ideal is zero: for $p=0$ by definition, and for $p>0$ because $pC=0$ and $\\Lambda\\subseteq C$. Hence $\\Lambda$ is a field, since each nonzero element lies outside its zero maximal ideal and is a unit. The coefficient-ring residue isomorphism therefore gives a ring map $\\alpha:F\\to C$ whose composite with $C\\to F$ is the identity. This choice need not respect the originally given embedding of $k$; the required conclusion is an isomorphism of rings.",
+   "uses": [
+    "lem-weil-pbc-cohen-coefficient-ring-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "032A (theorem-cohen-structure-theorem), part (1), and 0326 (definition-coefficient-ring), remark case (1): a coefficient ring in a complete local ring containing a field is a coefficient field."
+   }
+  },
+  {
+   "text": "Choose generators $y_1,\\ldots,y_r$ of $\\mathfrak n$, possible since $C$ is Noetherian [def-weil-pbc-noetherian-ring]. Set $Q=F[[z_1,\\ldots,z_r]]$. By [lem-weil-pbc-power-series-field-cohen-regular-complete], $Q$ is complete regular local with maximal ideal $\\mathfrak l=(z_1,\\ldots,z_r)$. Apply [lem-weil-pbc-power-series-universal-property-complete] to $C,\\mathfrak n,\\alpha,(y_i)$ to obtain $\\psi:Q\\to C$, $z_i\\mapsto y_i$. The extended ideal $\\mathfrak lC$ is exactly $\\mathfrak n$. The source is $\\mathfrak l$-adically complete, the target is $\\mathfrak n$-adically Hausdorff, and $Q\\to C/\\mathfrak n=F$ is surjective because constants map through the residue section $\\alpha$. Therefore [lem-weil-pbc-complete-source-surjective-mod-ideal] makes $\\psi$ surjective. Its kernel lies in $\\mathfrak l$: a series outside $\\mathfrak l$ is a unit, whose image cannot vanish in the nonzero ring $C$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-power-series-universal-property-complete",
+    "lem-weil-pbc-complete-source-surjective-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "032A (theorem-cohen-structure-theorem), final proof paragraph; 032C (remark-Noetherian-complete-local-ring-universally-catenary) and 0315 (lemma-completion-generalities)."
+   }
+  },
+  {
+   "text": "Assume (1). By the covering in [def-weil-pbc-complete-intersection-over-field], the prime of $S_g$ induced by $\\mathfrak p$ belongs to some $D(a)$ with $T=(S_g)_a$ a global complete intersection. This ring is nonzero because it has that prime. Unpack its presentation $T\\cong k[w_1,\\ldots,w_m]/(f_1,\\ldots,f_t)$ with $\\dim T=m-t$. Let $\\mathfrak q_T$ be the prime of the polynomial ring corresponding to our point and $R_T=k[w_1,\\ldots,w_m]_{\\mathfrak q_T}$. By [lem-weil-pbc-polynomial-ring-field-regular-ring], $R_T$ is regular local, and [lem-weil-pbc-global-complete-intersection-local-regular-sequence] says the images of the $f_i$ form a regular sequence there. The fractions identify $A\\cong R_T/(f_1,\\ldots,f_t)$: the elements inverted in passing from $S$ to $T$ were already outside $\\mathfrak p$. Apply [lem-trf-regular-quotient-completion-kernel-test] to this regular-local quotient and the regular-local surjection $\\psi:Q\\to C$ of step 3. It makes $\\ker\\psi$ generated by a regular sequence $h_1,\\ldots,h_c$ in $\\mathfrak l$. The quotient map induces the ring isomorphism $Q/(h_1,\\ldots,h_c)\\cong C$, proving (2).",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "lem-trf-regular-quotient-completion-kernel-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "09Q0 (lemma-quotient-regular-ring-by-regular-sequence) and 09Q1 (lemma-quotient-regular-ring), with 09PZ; Algebra 00SB proof for regularity of the equations in a global complete intersection."
+   }
+  },
+  {
+   "text": "Conversely assume (2). The ring $Q_0=F[[z_1,\\ldots,z_r]]$ in that condition is regular local by [lem-weil-pbc-power-series-field-cohen-regular-complete]. Composing its quotient map with the stated ring isomorphism gives a surjection $Q_0\\to C$ whose kernel is generated by the given regular sequence $(h_1,\\ldots,h_c)$. Apply [lem-trf-regular-quotient-completion-kernel-test] to $R=P_{\\mathfrak q}$ and $IR$ from step 1 and this surjection. It gives a regular sequence generating $IR$. By [lem-weil-pbc-lci-regular-sequence-global-complete-intersection], applied to the presentation $P/I\\cong S$ at $\\mathfrak p$, there is $g\\notin\\mathfrak p$ with $S_g$ a global complete intersection. It is a local complete intersection by [def-weil-pbc-complete-intersection-over-field], using the single open $D(1)$ as cover. This proves (1).",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-trf-regular-quotient-completion-kernel-test",
+    "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "09Q1 (lemma-quotient-regular-ring), (1) implies (2), and Algebra 00SC (lemma-lci), (5) implies (1); this is the local-to-neighbourhood passage of 00SG (lemma-lci-at-prime)."
+   }
+  },
+  {
+   "text": "Under these equivalent conditions use the regular-local quotient $A\\cong R_T/(f_1,\\ldots,f_t)$ from step 4. Its regular ambient ring has finite dimension $d$ by [lem-weil-pbc-noetherian-local-finite-krull-dimension]. By [def-weil-regular-scheme], choose $d$ generators of its maximal ideal; [lem-weil-pbc-regular-local-generators-regular-sequence] makes them a regular sequence, so [def-weil-pbc-depth] gives $\\operatorname{depth}R_T\\ge d$. Put $R_i=R_T/(f_1,\\ldots,f_i)$ for $0\\le i\\le t$. Inductively $R_i$ is Noetherian local and $\\operatorname{depth}R_i\\ge\\dim R_i$: the base is the preceding inequality; at index $i<t$, regularity of $(f_j)$ says $f_{i+1}$ is a nonzerodivisor on $R_i$, and its image lies in the maximal ideal. Thus [lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm] gives exactly the induction assertion for $R_{i+1}$. All quotients are nonzero because the equations lie in the maximal ideal. In particular $\\operatorname{depth}A\\ge\\dim A$. Apply [lem-weil-pbc-depth-le-support-dimension] to the nonzero finite $A$-module $A$ to obtain the reverse inequality: its support is all of $\\operatorname{Spec}A$, since $1/1=0$ in $A_{\\mathfrak r}$ would force an element outside $\\mathfrak r$ to equal zero. Therefore $\\operatorname{depth}A=\\dim A$. If $S$ itself is a local complete intersection, condition (1) holds at every maximal ideal with $g=1$, proving the last sentence.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+    "lem-weil-pbc-depth-le-support-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00SB (lemma-lci-CM), proof; 00NQ (lemma-regular-ring-CM), 02JN (lemma-reformulate-CM) and 00LK (lemma-bound-depth)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "lem-trf-regular-quotient-completion-kernel-test",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-surjective-image-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "09PZ/09Q1 regular-local kernel comparison, together with Algebra 032A/032C (equicharacteristic power-series presentation), 00SC/00SG (principal neighbourhood), and 00SB/02JN (depth equality)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +169,17 @@
    "results": "{\"t\": \"2026-10-17T18:33:54Z\", \"tool\": \"leanfinder\", \"query\": \"A local complete intersection over a field is Cohen Macaulay and complete intersection property can be checked after completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"Algebra.smoothLocus\", \"Algebra.IsEtaleAt\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"561ae86fb19866c7\"}",
    "date": "2026-10-18",
    "verdict": "no match: smooth/etale loci and flat completions do not characterize local complete intersections or their Cohen-Macaulay property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a field is locally a complete intersection near a closed point precisely when its completed local ring is a power series quotient by a regular sequence",
+   "results": "{\"t\": \"2026-10-17T18:59:17Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type algebra over a field is locally a complete intersection near a closed point precisely when its completed local ring is a power series quotient by a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"Algebra.IsEtaleAt\", \"Algebra.IsStandardSmooth\", \"Algebra.smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\"], \"digest\": \"40dabb18d387d0fb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits state regular-sequence definitions/localization, smoothness, or adic completion, not independence of regular kernels across completed regular-local presentations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-point-local-criterion",
@@ -86,5 +205,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-completion-local-complete-intersection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed an abstract residue-field power-series presentation by Cohen coefficients and complete-source surjectivity; compared regular kernels with the completed quotient by the new general regular-local kernel test; reused the existing global-equations and regular-kernel-to-principal-neighbourhood lemmas for the two directions; proved depth equality by induction through the existing one-nonzerodivisor Cohen-Macaulay quotient lemma and the depth upper bound. One new statement-only node; no new Mathlib leaves. All cited node statements read, all search calls logged.",
+  "blueprint": "Realizes the from.place of lem-trf-local-term-locality through the existing nodal-point chain: the passage from the nodal completed hypersurface to an affine LCI neighbourhood (Curves 0C4E final paragraph), and the LCI depth-one input for the converse. The coefficient-field construction realizes Algebra 032A; steps 4 and 5 realize 09Q1/00SC; step 6 realizes 00SB. Whole-blueprint searches for completion local complete intersection, complete intersection, Cohen and regular sequence found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Used as a generic commutative-algebra tool: The completion of a Noetherian ring is Noetherian. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+    "why": "Used as a generic commutative-algebra tool: Quotient of a Cohen–Macaulay local ring by a nonzerodivisor is Cohen–Macaulay. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "why": "Used as a generic commutative-algebra tool: Cohen structure theorem: a complete local ring has a coefficient ring. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-complete-source-surjective-mod-ideal",
+    "why": "Used as a generic commutative-algebra tool: Surjectivity modulo an ideal implies surjectivity from a precomplete ring. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Used as a generic commutative-algebra tool: The depth of a nonzero finite module over a Noetherian local ring is at most the dimension of its support. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "why": "Used as a generic commutative-algebra tool: The equations of a global complete intersection form a regular sequence at every prime. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+    "why": "Used as a generic commutative-algebra tool: If the ideal of a presentation is generated by a regular sequence at a prime, the algebra is a global complete intersection near that prime. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Used as a generic commutative-algebra tool: Power series over a field or a Cohen ring: complete regular local domain. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Used as a generic commutative-algebra tool: Universal property of a power series ring mapping into a complete ring. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Used as a generic commutative-algebra tool: A regular system of parameters is a regular sequence. It supplies the cited input in the completion/neighbourhood argument; no node of sk-i-curve-zero states this algebraic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-4a0705311",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-4a0705311 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 31 cited statements and dpa.tex lines 1670-1860 (09PZ with its proof, 09Q0, 09Q1; tags confirmed in tags/tags). New node lem-trf-regular-quotient-completion-kernel-test is true: it is exactly 09Q1 (1)<=>(2) for a regular local R combined with 09PZ (some vs every regular-local surjection onto a complete ring), and Q need not be complete, as in the 09PZ proof. Tested on I=0, Z_p[[x]]->F_p[[x]], k[u,v]_(u,v) with I=(u,v)^2, and the unit ideal (excluded). It is statement-only and self-contained; searches are logged; no duplicate in the DAG (rg for 09PZ/09Q0/09Q1/09Q6/ci-well-defined/quotient-regular-ring); it is strictly smaller than the item, not a restated clause. Item steps check: step 1 hypotheses hold (Noetherian local A, completion local with residue field F and n-adically complete). Step 2 gives a field coefficient ring via Lambda∩m=pLambda=0 in both characteristics; the ring section is correctly not required to be k-linear. Step 3: the universal-property and complete-source-surjectivity hypotheses hold and ker psi lies in l. Step 4: the global-CI cover with T nonzero and dim m-t feeds the regular-sequence node, then the kernel test (=>). Step 5: the kernel test (<=) gives exactly the hypothesis of the 00SC node at p, so g=1 cover. Step 6: the induction is properly set up and the CM-quotient hypotheses are checked at each index; the upper bound comes from Supp(A)=Spec A. Statement unchanged and true, including inseparable residue fields. The 10 declared tool_uses from sk-thm-p1 are generic commutative algebra the unit route does not replace: accepted. No SGA source. No target touched. No fixes."
  }
 }

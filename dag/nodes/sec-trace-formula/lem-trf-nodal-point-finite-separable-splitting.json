@@ -20,9 +20,126 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $f:C\\to\\operatorname{Spec}k$. It is flat by [lem-pc-flat-field]. Since a field is Noetherian (its only ideals are $0$ and the unit ideal), $\\operatorname{Spec}k$ is locally Noetherian, and [pqf-lem-lft-fp-locnoeth] makes $f$ locally of finite presentation. The geometric-fibre hypotheses of [lem-trf-nodal-family-fitting-singular] are precisely the hypotheses here: geometric points of $\\operatorname{Spec}k$ are algebraically closed extensions $\\Omega/k$. Apply that node. With $Z=\\operatorname{Sing}(f)$ [def-trf-first-fitting-singular-subscheme], it says $|Z|$ is the nonsmooth locus, $Z\\to\\operatorname{Spec}k$ is unramified, and these closed subschemes and their supports commute with arbitrary base change.",
+   "uses": [
+    "lem-pc-flat-field",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-trf-nodal-family-fitting-singular",
+    "def-trf-first-fitting-singular-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, first proof, residue-field paragraph; Tag 0C59 (lemma-nodal-family)"
+   }
+  },
+  {
+   "text": "The prescribed nonsmooth point $x$ belongs to $Z$. The morphism $Z\\to\\operatorname{Spec}k$ is locally of finite type: on a finite-type affine chart of $C$, its ring is the quotient of the chart ring by the first Fitting ideal. Apply [lem-trf-unramified-over-field-local-criterion] to $Z$. It gives that $x$ is closed in $Z$, $\\mathcal O_{Z,x}=\\kappa_Z(x)$, and $F=\\kappa_Z(x)$ is finite separable over $k$. A closed subscheme has the same residue field as the ambient scheme at each of its points: on an affine chart both residues are the fraction field of $A/\\mathfrak p$. Thus $F=\\kappa_C(x)$. Since $Z$ is closed in $C$, closedness in $Z$ implies closedness in $C$. This proves the first assertions, without assuming at the outset that $x$ is closed.",
+   "uses": [
+    "lem-trf-unramified-over-field-local-criterion",
+    "def-trf-first-fitting-singular-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, first proof, second paragraph; Morphisms Tag 02G7 (lemma-unramified-over-field)"
+   }
+  },
+  {
+   "text": "Let $D=C_F$ and let $z\\in D$ be induced by the residue-point map $\\operatorname{Spec}F\\to C$ and the identity of $\\operatorname{Spec}F$. On an affine chart this is the surjection $A\\otimes_kF\\to F$, $a\\otimes\\lambda\\mapsto a(x)\\lambda$, so $z$ is $F$-rational and lies over $x$. The residue-point map factors through $Z$, since its defining ideal is contained in the prime of $x$. Hence $z\\in Z_F$. Step 1, including its support assertion after base change, makes $z$ nonsmooth on $D$. Choose an algebraic closure $\\Omega/F$. The induced $\\Omega$-rational point $\\bar z$ belongs to $Z_\\Omega$ and is nonsmooth on $D_\\Omega=C_\\Omega$; the hypothesis therefore identifies its completed local ring with $\\Omega[[u,v]]/(uv)$. These constructions use only the fibre-product universal property and [lem-weil-pbc-fibre-product-affine-spectra].",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, residue-field paragraph; rationalization of the nodal fibre point"
+   }
+  },
+  {
+   "text": "Check the dimension needed for the rational-node normal-form lemma. The finitely many affine charts $\\operatorname{Spec}A_i$ of $C$ base change to charts of $D$ with rings $A_i\\otimes_kF$, finitely generated over $F$ by the images of the generators of $A_i$; thus $D$ is of finite type. Their base changes to $\\Omega$ are a cover of $D_\\Omega=C_\\Omega$. Apply the ring assertion of [lem-pc-dim-base-change] to each of the finite-type $F$-algebras $A_i\\otimes_kF$, and take suprema over the two covers by [lem-pc-dimension-affine-open-cover]. The identification with topological dimension is [lem-pc-scheme-dimension-local-rings]. It gives $\\dim D=\\dim C_\\Omega=1$: the latter scheme is nonempty because it has $\\bar z$, and all its irreducible components have dimension one by hypothesis. The affine identifications are [lem-weil-pbc-fibre-product-affine-spectra]. Finally $z$ is closed in $D$. Indeed on any affine open containing it the evaluation map to $F$ is onto, so its prime is maximal; if a point specializes from $z$, an affine neighbourhood of that point contains $z$, and maximality forces that specialization to equal $z$.",
+   "uses": [
+    "lem-pc-dim-base-change",
+    "lem-pc-dimension-affine-open-cover",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4D hypotheses; dimension under extension of the ground field, Algebra Tag 00P3"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-rational-node-quadratic-completion] over $F$ to $D,z$. Step 3 gives the geometric completed equation, and step 4 gives dimension one, local finite type, and closedness; $F\\to\\kappa(z)$ is an isomorphism by step 3. Obtain an $F$-algebra isomorphism $\\widehat{\\mathcal O}_{D,z}\\cong F[[u,v]]/(q)$, where $q=au^2+buv+cv^2$ and $\\Delta=b^2-4ac\\ne0$. The coefficients and the $F$-algebra structure are the ones supplied by this isomorphism; no noncanonical identification of the ground field with another residue subfield is made.",
+   "uses": [
+    "lem-trf-rational-node-quadratic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C4D (lemma-nodal) and 0C49 (lemma-nodal-algebraic), residue field equal to F"
+   }
+  },
+  {
+   "text": "Construct a field $K/F$ of degree at most two. If $a=0$, then $b\\ne0$, and take $K=F$. If $a\\ne0$, put $p(T)=aT^2+bT+c$. If $p$ has a root $r\\in F$, again take $K=F$. Otherwise $p$ is irreducible (a reducible quadratic has a linear factor), and take the field $K=F[T]/(p)$, with $r$ the class of $T$. The coefficient map embeds $F$, and division by $p$ gives the basis $1,r$, so $[K:F]=2$. This extension is separable: when $2\\ne0$, a common root of $p$ and $p'=2aT+b$ would force $\\Delta=0$ by $(2aT+b)^2-4ap=\\Delta$; in characteristic two, $p'=b\\ne0$. Every element is $s+tr$; for $t\\ne0$ it satisfies the quadratic $t^2p((T-s)/t)$, whose discriminant is $t^2\\Delta\\ne0$, and for $t=0$ it lies in $F$. Its minimal polynomial divides that separable polynomial, so it is separable. This proves separability from its definition [def-weil-pbc-separable-algebraic-extension], including characteristic two.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), explicit quadratic algebra, and the two cases in Tag 0CBY"
+   }
+  },
+  {
+   "text": "The quadratic splits into two independent linear forms over $K$. If $a=0$, set $U=v$, $V=bu+cv$; then $q=UV$ and the inverse substitution is $v=U$, $u=(V-cU)/b$. If $a\\ne0$, set $r_2=-b/a-r$. From $p(r)=0$ obtain $q=a(u-rv)(u-r_2v)$ and $\\Delta=a^2(r-r_2)^2$, so $r\\ne r_2$. Set $U=a(u-rv)$ and $V=u-r_2v$. Their inverse is $v=(U/a-V)/(r_2-r)$, $u=V+r_2v$. Substitution and its displayed inverse define inverse continuous $K$-algebra maps on the two-variable power series rings: in every fixed total degree only finitely many terms contribute, so these identities hold coefficientwise. They carry $q$ to $UV$ and hence identify $K[[u,v]]/(q)$ with $K[[U,V]]/(UV)$. This is the concrete split-form calculation behind Tag 0CBU; it requires no extraction of a square root or division by two.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBU (remark-trivial-quadratic-extension), condition (2), explicit linear change of coordinates"
+   }
+  },
+  {
+   "text": "Let $x'$ be the canonical $K$-rational lift of $z$ in $D_K=C_K$. Choose an affine neighbourhood $\\operatorname{Spec}S$ of $z$ in $D$; the evaluation map $S\\to F$ has a maximal kernel $\\mathfrak p$, and $S_{\\mathfrak p}=\\mathcal O_{D,z}$ with residue field $F$. Apply [lem-trf-separable-closed-point-formal-presentation] with ground field $F$, residue extension $F/F$, and extension field $K/F$. Its clause for every presentation applies with $n=2$, the single relation $q$, and the presentation of step 5; here the coefficient-field section is just the structural $F$-map. The kernel $\\mathfrak q$ of $S\\otimes_FK\\to K$ is exactly the point $x'$ by construction. The node gives $\\widehat{\\mathcal O}_{C_K,x'}\\cong K[[u,v]]/(q)$ as $K$-algebras. Compose with step 7 to obtain $K[[U,V]]/(UV)$. Its residue-field clause gives $K\\to\\kappa(x')$ an isomorphism, and $x'$ lies over $x$. Finally [lem-zl-separable-permanence] applied to $k\\subseteq F\\subseteq K$ proves $K/k$ separable. The products of a finite $k$-basis of $F$ with a basis of $K/F$ span $K$ over $k$, so $K/k$ is finite. Take $k'=K$, containing the chosen copy $\\kappa(x)=F$, with $[k':\\kappa(x)]\\le2$.",
+   "uses": [
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-zl-separable-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, residue-field paragraph, completed equation as in Tag 0CBW (lemma-split-node); Varieties Tag 0C54"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-first-fitting-singular-subscheme",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-flat-field",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-rational-node-quadratic-completion",
+  "lem-trf-separable-closed-point-formal-presentation",
+  "lem-trf-unramified-over-field-local-criterion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-zl-separable-permanence",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY, first proof, residue-field paragraph, expanded via Tags 0CBT, 0CBU, 0C4D, 0C49 and Varieties Tag 0C54."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +175,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {f}),\\n  H.algEquivQuotient a =\\n    (Ideal.quotientEquivAlgOfEq A ⋯) ((Ideal.quotient\", \"doc\": \"Let $A$ be a commutative ring that is $I$-adically complete for some ideal $I \\\\subseteq A$. Let $g \\\\in A⟦X⟧$ be a power series that has a Weierstrass factorization $g = \\\\hat{f} \\\\cdot h$, where $f \\\\in \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {f : Polynomial A} →\\n        {h : PowerSeries A} →\\n          {I : Ideal A} →\\n            g.IsWeierstrassFactorizationAt f h I →\\n              [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {f}) ≃ₐ[A] PowerSeries A ⧸ Ideal.sp\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"PowerSeries.weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        (g : PowerSeries A) → (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → Polynomial A\", \"doc\": \"Given a local ring $ A $ and a power series $ g $ over $ A $ whose image under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal) is non-zero, this function returns\"}\n  {\"name\": \"PowerSeries.weierstrassDiv\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      PowerSeries A → PowerSeries A → [IsPrecomplete (IsLocalRing.maximalIdeal A) A] → PowerSeries A\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, and power series $ f, g \\\\in A[[X]] $, the Weierstrass division of $ f $ by $ g $ is defined as follows: if the image of $ g $ \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (x : PowerSeries A ⧸ Ideal.span {g}),\\n  H.algEquivQuotient.symm x = (Ideal.Quotient.mk (Ideal.span {f})) (⋯.mod' ((\", \"doc\": \"The inverse of the algebra isomorphism between the polynomial quotient ring $ A[X]/(g) $ and the power series quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial. For any element $ x\"}\n  {\"name\": \"PowerSeries.weierstrassMod\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      PowerSeries A → PowerSeries A → [IsPrecomplete (IsLocalRing.maximalIdeal A) A] → Polynomial A\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $ and a power series $ g $ over $ A $, this function computes the Weierstrass modulus of $ g $ with respect to another power seri\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : Polynomial A} →\\n      {I : Ideal A} →\\n        g.IsDistinguishedAt I →\\n          [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {g}) ≃ₐ[A] PowerSeries A ⧸ Ideal.span {↑g}\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n",
    "date": "2026-10-18",
    "verdict": "No match: residue-field separability and generic field theory do not split the tangent cone or identify a completed nodal local ring; Lagrange nodal polynomials are unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "split.node|ordinary.double|0CBT|0CBU|0CBW",
+   "results": "{\"t\": \"2026-10-17T18:54:53Z\", \"tool\": \"grep\", \"query\": \"split.node|ordinary.double|0CBT|0CBU|0CBW\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No match for the item. Weierstrass point maps and residue-field results do not supply the singular local equation; quadratic-polynomial splitting covers only the elementary field calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordinary double point on a curve splits over a separable quadratic extension",
+   "results": "{\"t\": \"2026-10-17T18:54:53Z\", \"tool\": \"leansearch\", \"query\": \"An ordinary double point on a curve splits over a separable quadratic extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.splits_of_degree_eq_two\", \"Polynomial.Splits.of_degree_eq_two\", \"Polynomial.nodup_aroots_iff_of_splits\", \"Algebra.IsQuadraticExtension.isGalois\", \"Polynomial.splits_of_natDegree_eq_two\", \"Polynomial.nodup_roots_iff_of_splits\", \"Polynomial.Splits.of_natDegree_eq_two\", \"Algebra.IsQuadraticExtension.normal\"], \"digest\": \"2bbff9421a44f42e\"}",
+   "date": "2026-10-18",
+   "verdict": "No match for the item. Weierstrass point maps and residue-field results do not supply the singular local equation; quadratic-polynomial splitting covers only the elementary field calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\"",
+   "results": "{\"t\": \"2026-10-17T18:54:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lagrange.nodalWeight\", \"Lagrange.nodal\", \"Lagrange.nodal_monic\", \"Lagrange.natDegree_nodal\", \"Lagrange.degree_nodal\", \"Lagrange.nodal_empty\", \"Lagrange.nodal_ne_zero\", \"Lagrange.eval_nodal_at_node\"], \"digest\": \"6fe8341e0729cc44\"}",
+   "date": "2026-10-18",
+   "verdict": "No match for the item. Weierstrass point maps and residue-field results do not supply the singular local equation; quadratic-polynomial splitting covers only the elementary field calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nodal curve point becomes rational and split over a finite separable extension of degree at most two over its residue field",
+   "results": "{\"t\": \"2026-10-17T18:54:55Z\", \"tool\": \"leanfinder\", \"query\": \"A nodal curve point becomes rational and split over a finite separable extension of degree at most two over its residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.reduction\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsIntegral.integral\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"WeierstrassCurve.IsMinimal\"], \"digest\": \"34e4d6c08428df45\"}",
+   "date": "2026-10-18",
+   "verdict": "No match for the item. Weierstrass point maps and residue-field results do not supply the singular local equation; quadratic-polynomial splitting covers only the elementary field calculation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-family-etale-local-model",
@@ -87,5 +232,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-point-finite-separable-splitting",
+  "worker": "stage1",
+  "summary": "Closedness and finite separability follow from the existing unramified Fitting singular locus. Rationalize over the residue field, descend a quadratic completed equation, explicitly split its binary quadratic form over a separable extension of degree at most two, and extend the completed presentation. One new statement-only input; reuse the concurrently delivered separable-closed-point formal-presentation node for the completion comparison, no changed statement or Lean.",
+  "blueprint": "Historical nodal local-equation input in Stacks 0CBY (lemma-etale-local-structure-nodal-family), first proof, second paragraph: replace the nodal fibre point by a rational split node using its separable degree-two branch algebra. The current sk-i-curve-zero unit uses contracting correspondences instead; this is the retained historical auxiliary branch.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "The ring-level dimension equality checks the dimension-one hypothesis before using the nodal quadratic normal form; it does not replace a unit step."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Taking suprema over matching affine covers transports the dimension equality to the nodal fibre; no node of this unit supplies this general dimension tool."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Identifies the affine-cover dimension with topological Krull dimension, as needed by the normal-form lemma; it is only a general dimension comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-a255be686",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-a255be686 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-rational-node-quadratic-completion and every cited statement in full, against Stacks curves.tex 0C49 (and the nondegeneracy definition before it), 0C4D (statement and whole proof), 0CBT, 0CBU, definition-split-node, 0CBW, definition-nodal and the first proof of 0CBY. Steps 1-2: flatness and local finite presentation hold, the Fitting node's hypotheses are exactly the item's own geometric-fibre hypotheses, and the unramified-over-field criterion gives that x is closed with kappa(x)/k finite separable. Step 3: the F-rational lift z lies in Sing after base change to F, so it is nonsmooth, and the hypothesis applies at the induced point over an algebraic closure of F. Step 4: the dimension and closedness arguments are correct; the three dimension nodes are accepted as generic tool uses. Step 5: every hypothesis of the new node is met. Steps 6-7 are elementary and I checked them by hand: the identity (2aT+b)^2-4ap=Delta, the discriminant t^2*Delta for s+tr, Vieta r*r2=c/a, Delta=a^2(r-r2)^2, and both inverse substitutions; characteristic 2 is covered. Step 8 applies the every-presentation clause of lem-trf-separable-closed-point-formal-presentation with n=2, section = structure map, kernel (q) in (u,v); the point given by that clause is the K-rational point x' over x, and permanence gives K/k finite separable. The new node is the rational case of 0C4D (3)=>(2) plus 0C49 (3). Stacks' definition-nodal asks only for a ring isomorphism, matching the node. Tested on uv, u^2+v^2 over R and u^2+uv+v^2 over F2; the cusp and double line are excluded by the hypothesis. It is not a duplicate of the local-criterion, lci, Jacobian-quadratic, field-stalk or formal-presentation nodes, and not a restatement of an item clause. Form checks B1-B9 pass. The route is preserved and no SGA is used. No changes made."
  }
 }
