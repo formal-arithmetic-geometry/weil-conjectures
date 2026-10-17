@@ -294,5 +294,23 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-05ddf09e0 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 7 steps, every cited statement, both blueprint snapshots (the statement is unchanged) and the sk-prop-cohsm route. The mathematics is correct and complete. Step 2's transpose argument for the canonical theta checks out. So do Step 3's two inverse products, Step 4's Hom chain for an invertible P (it does not assume the base-changed map is smooth), Step 6's two transposes, and Step 7's pasted beta computation, which I redid arrow by arrow. The coefficient category and the beta/Ex_! base-change map match def-pur-co-smoothness. There are no new nodes and no duplicates, the graph has no cycle, and no SGA is cited. I fixed three small faults in fixes/dag/nodes/sec-smooth-purity/lem-pur-co-smooth-composition.json. (1) C1, Step 1: it asserted gf is separated of finite type with no support; it now names the Mathlib composition instances (Separated.lean:75, FiniteType.lean:68, QuasiCompact.lean:69). (2) Step 3: it needed omega_f and omega_g in D^b_ctf without saying why; it now cites the finite-Tor preservation in def-weil-exceptional-inverse-image. (3) C4, Step 5: its exchange formula came from def-exchange-projection, which assumes g separated, but clause (3) allows any v. It also credited thm-cbc-finite-level-proetale with a transport identification that the theorem does not state. Step 5 now cites def-cbc-exchange-map, lem-weil-pbc-transport-identifies-exchange and lem-cbc-proetale-extension-zero-comparison, all on the unit's route. I accept three tool uses: lem-sf-pullback-tor-amplitude and lem-sf-tensor-ctf (typing only) and fix-prop-projection-formula (generic projection formula, which def-pur-co-smoothness already relies on).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbfa472d9",
+  "group": "Q89",
+  "result": "pass",
+  "note": "cohomologicallySmooth_comp matches the node clause by clause: hf/hg use the recorded IsCohomologicallySmoothCompared with exactly its separated finite-type k-morphism domain and no extra hypotheses; conclusions are IsCohomologicallySmoothCompared P (f ≫ g) and Nonempty (comparedDualizing (f≫g) ≅ ProEtale.derivedTensor (comparedDualizing f) (L(ProEtale.upperStar f) (comparedDualizing g))), order ω_f ⊗ Lf^*ω_g, each with the predicate's own Nagata compactification. One universe u as in the dependency; empty/identity cases admitted, n≥1 and ℓ≠p as in the source. The étale IsCohomologicallySmooth.comp is for a different predicate, so no H4 duplicate. Node changes only lean, statement verbatim; sorry-only proof; source/blueprint docstrings with the 7 proof steps; lines ≤100; proof-dependency imports allowed; Worker report and Second reading by Q89 present. nt_compile.py: clean, 5.4 s, no diagnostics. Minor: docstring cites main-20261015 order 2337 vs the node's master order 1993; the statements are identical."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CohomologicalSmoothComposition",
+  "declaration": "AlgebraicGeometry.ProEtale.cohomologicallySmooth_comp",
+  "file": "lean/Sheaf/Paper/CohomologicalSmoothComposition.lean",
+  "statement": "theorem cohomologicallySmooth_comp (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [Z.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (hf : IsCohomologicallySmoothCompared P f) (hg : IsCohomologicallySmoothCompared P g) : IsCohomologicallySmoothCompared P (f ≫ g) ∧ Nonempty (@comparedDualizing P X Z (f ≫ g) (P.comparedCompactification (f ≫ g) (Z ↘ Spec (.of P.field.k))).hasCompactification ≅ ((derivedTensor (ModuleCat.{u + 1} P.Coefficient) X).obj (@comparedDualizing P X Y f (P.comparedCompactification f (Y ↘ Spec (.of P.field.k))).hasCompactification)).obj ((L((f)^*[ModuleCat.{u + 1} P.Coefficient])).obj (@comparedDualizing P Y Z g (P.comparedCompactification g (Z ↘ Spec (.of P.field.k))).hasCompactification)))",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
