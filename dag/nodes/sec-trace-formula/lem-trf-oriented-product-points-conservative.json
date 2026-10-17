@@ -2,7 +2,7 @@
  "id": "lem-trf-oriented-product-points-conservative",
  "kind": "statement",
  "title": "Geometric points of an oriented product form a conservative family",
- "statement": "Let $\\Lambda$ be a commutative ring and let $f:T\\to B$ be a morphism of schemes and let $V_f=T_{\\mathrm{Et}}\\overleftarrow\\times_{B_{\\mathrm{Et}}}B_{\\mathrm{Et}}$ be the oriented product of the small etale topoi, with its triple site and projections as in [def-trf-oriented-nearby-cycles] and [lem-trf-oriented-product-universal]. For every geometric point $x$ of $T$, every geometric point $y$ of $B$, and every specialization $c$, a $2$-morphism from $y$ to $f(x)$, let $z_{x,y,c}:\\mathbf{Set}\\to V_f$ be the corresponding point of the oriented product. The inverse-image functors $z_{x,y,c}^*$ are jointly conservative on sheaves of $\\Lambda$-modules and on their unbounded derived category: a morphism is an isomorphism if and only if all its pullbacks along these points are isomorphisms.",
+ "statement": "Let $\\Lambda$ be a commutative ring and let $f:T\\to B$ be a morphism of schemes. Let $V_f=T_{\\mathrm{Et}}\\overleftarrow\\times_{B_{\\mathrm{Et}}}B_{\\mathrm{Et}}$ be the oriented product of the small etale topoi, with its triple site and projections as in [def-trf-oriented-nearby-cycles] and [lem-trf-oriented-product-universal]. For every geometric point $x$ of $T$, every geometric point $y$ of $B$, and every specialization $c$, a $2$-morphism from $y$ to $f(x)$, let $z_{x,y,c}:\\mathbf{Set}\\to V_f$ be the corresponding point of the oriented product. The inverse-image functors $z_{x,y,c}^*$ are jointly conservative on sheaves of $\\Lambda$-modules and on their unbounded derived category: a morphism is an isomorphism if and only if all its pullbacks along these points are isomorphisms.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Exposé XI 1.8 (all points are triples), 2.5 and 2.7 (the oriented product site is coherent and pointwise testing is conservative); Stacks sites.tex Tag 00YQ (Proposition criterion-points)."
@@ -10,11 +10,117 @@
  "stmt_deps": [
   "def-trf-oriented-nearby-cycles",
   "lem-trf-oriented-product-universal",
-  "def-weil-geometric-point"
+  "def-weil-geometric-point",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $p:\\mathbf{Set}\\to V_f$ be any point. Its composites with the two projections are points of $T_{\\mathrm{Et}}$ and $B_{\\mathrm{Et}}$. By [lem-trf-etale-topos-points-geometric], choose geometric points $x,y$ and isomorphisms of these composites with their stalk points. Conjugating the structural $2$-morphism $p_2p\\Rightarrow fp_1p$ by these isomorphisms gives $c:y\\Rightarrow f(x)$. The uniqueness clause of [lem-trf-oriented-product-universal] identifies $p$ with $z_{x,y,c}$. Conversely each such triple gives a point by its existence clause. Thus every abstract point is isomorphic to one of the points in the statement, with precisely the indicated orientation of $c$. No nonemptiness is needed: if $T=\\varnothing$ the empty family covers the only object $\\varnothing$ of $T_{\\mathrm{Et}}$, so $T_{\\mathrm{Et}}$ is degenerate (initial object $=$ final object); $p_1^{-1}$ preserves both, so $V_f$ is degenerate, has no points, and every morphism of sheaves or complexes on it is an isomorphism, consistently with the empty family of triples.",
+   "uses": [
+    "lem-trf-etale-topos-points-geometric",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.8 and Theorem 1.4; Stacks etale-cohomology.tex Tag 04HU."
+   }
+  },
+  {
+   "text": "The affine triples cover the whole triple site. Given $(U\\to V\\leftarrow W)$, choose an affine etale covering $\\{V_i\\to V\\}$ using [lem-weil-pbc-affine-etale-essentially-small-cover]. In the first site the pullbacks $U_i=U\\times_{f^{-1}V}f^{-1}V_i$ cover $U$, since the site inverse image is continuous. Type (a) gives a covering by $(U_i\\to V\\leftarrow W)$. Over each member use the type-(c) covering $(U_i\\to V_i\\leftarrow W\\times_VV_i)$; its factorization hypothesis holds by the construction of $U_i$. Finally cover $U_i$ and $W\\times_VV_i$ by affine etale objects, again using the affine-cover node; types (a) and (b) give affine triples. Composing these coverings proves the assertion. No finiteness is claimed for this covering, and no affineness is claimed for an intersection over a nonseparated scheme.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "lem-trf-oriented-product-universal",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.1, types (a)–(c), and affine localization in 1.10(b)."
+   }
+  },
+  {
+   "text": "Let $a:F\\to G$ be a morphism of sheaves of sets such that $z_{x,y,c}^{-1}a$ is bijective for every triple. Fix an affine triple $Z$. By [lem-trf-oriented-affine-slice-site], the localization $V_f/H_Z$ is presented by a small site $\\mathcal D_Z$ with finite limits and finite covering refinements. Apply [lem-trf-finitary-site-enough-points] to that site; Tag 00YQ is used only for this enough-points criterion, after the affine-slice presentation has been established. For each point $q$ in its conservative family, the composite $j_Zq$ is a point of $V_f$, hence is one of step 1's triples up to isomorphism. Therefore $q^{-1}j_Z^{-1}a$ is bijective. The conservative family on the slice makes $j_Z^{-1}a$ invertible. Taking global sections, with the last clause of the affine-slice node, shows that $a(Z):F(Z)\\to G(Z)$ is bijective for every affine triple $Z$.",
+   "uses": [
+    "lem-trf-oriented-affine-slice-site",
+    "lem-trf-finitary-site-enough-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.10(b), and the coherent finite-cover site in the proof of Lemma 2.5 for affine slices; Stacks sites.tex Tag 00YQ only for the criterion."
+   }
+  },
+  {
+   "text": "We now pass from affine triples to every triple by the sheaf axiom [def-weil-pbc-sites-and-cohomology]. For injectivity of $a(Q)$, restrict two sections with equal images along an affine-triple cover of $Q$ from step 2. They agree on every member by step 3 and therefore agree on $Q$. For surjectivity, lift a section of $G(Q)$ uniquely on each affine cover member by step 3. On any overlap their images agree; the injectivity just proved applies to that overlap, even when it is not affine, so the lifts agree there. The sheaf axiom glues them to a section of $F(Q)$, whose image is the given section by separatedness for $G$. Hence $a(Q)$ is bijective for all $Q$, and its inverse functions form a natural inverse. The triple-point functors are therefore conservative on sheaves of sets.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sheaf equalizer condition in Definitions 00VM and 00VR; elementary gluing using the affine coverings of step 2."
+   }
+  },
+  {
+   "text": "For a morphism $a$ of sheaves of $\\Lambda$-modules, forget the module operations. The underlying sheaf is a sheaf of sets. The inverse image of a geometric morphism preserves finite limits [def-trf-geometric-morphism]; it therefore transports the addition and action operations and their equations on the underlying sheaf. For constant coefficients its module inverse image is this construction, as specified in [def-trf-oriented-nearby-cycles]. If all module stalk maps are invertible, step 4 gives an inverse on underlying sheaves. That inverse is $\\Lambda$-linear: writing $a(u)=v$, $a(u')=v'$ on an object $Q$ and taking $\\lambda\\in\\Lambda_{V_f}(Q)$, the identities $a(u+u')=v+v'$ and $a(\\lambda u)=\\lambda v$ and injectivity give preservation of addition and scalars by $a^{-1}$. Thus it is an inverse in the module-sheaf category [def-weil-sheaf-of-modules-category]. Conversely every point functor sends an inverse to an inverse.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "def-trf-oriented-nearby-cycles",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.8, with constant-coefficient inverse image as in the nearby-cycle definition; elementary transport of module operations."
+   }
+  },
+  {
+   "text": "For every triple point $z$, the constant-$\\Lambda$ module inverse image $z^*$ is exact and acts termwise on arbitrary complexes, by [def-trf-oriented-nearby-cycles]. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to obtain natural isomorphisms $H^n(z^*K)\\cong z^*H^n(K)$ for all integers $n$. These give the same natural isomorphisms on the unbounded derived categories: both functors on complexes invert quasi-isomorphisms, and the cohomology functors factor through the localization of [def-weil-abstract-derived-category]. Naturality on that localization follows from naturality on chain maps and on inverses of quasi-isomorphisms. There is no infinite-limit or truncation argument, so no boundedness or finite cohomological dimension is required.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; termwise derived inverse image and the localization defining D in derived.tex Definition 05RU."
+   }
+  },
+  {
+   "text": "Let $u:K\\to L$ be any morphism in $D(V_f,\\Lambda)$ whose pullbacks $z^*u$ are all isomorphisms. For each integer $n$, step 6 identifies $z^*H^n(u)$ with $H^n(z^*u)$, hence with an isomorphism, for every triple point $z$. Step 5 makes $H^n(u)$ an isomorphism of module sheaves. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] with the abelian category of module sheaves [def-weil-sheaf-of-modules-category] to conclude that $u$ is an isomorphism. Conversely, an isomorphism and its inverse are preserved by every $z^*$. This proves both directions on the unbounded derived category.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic, and the unrestricted Mathlib cohomology criterion represented by the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-etale-topos-points-geometric",
+  "lem-trf-finitary-site-enough-points",
+  "lem-trf-oriented-affine-slice-site",
+  "lem-trf-oriented-product-universal",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé XI 1.8, 1.10(b), and the finite-cover presentation in Lemma 2.5; Stacks Tags 00YQ and 04HU. Explicit sheaf gluing and unbounded derived extension supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +149,38 @@
    "results": "Generic finite-limit and sheafification declarations, including CategoryTheory.preservesFiniteLimits_presheafToSheaf and CategoryTheory.Precoverage.finite; no criterion matching the oriented-product point construction.",
    "date": "2026-10-17",
    "verdict": "no match: generic sheaf infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric points described by specialization triples form a conservative family on the left oriented product of etale topoi",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, AlgebraicGeometry.Scheme.isLocallyDirected_of_equifibered_of_injective, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.Cover.instIsLocallyDirectedI₀CompFunctorOfLocallyDirectedForget, AlgebraicGeometry.spread_out_of_isGermInjective",
+   "date": "2026-10-17",
+   "verdict": "no match: no oriented-product or vanishing-topos point-conservativity theorem; the topological stalk criterion has a different site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"oriented\"",
+   "results": "12 hits: Std.OrientedOrd, Std.OrientedCmp, Fin.instOrientedOrd, Std.instReflCmpOfOrientedCmp, Std.TransCmp.toOrientedCmp, Std.OrientedOrd.opposite, Array.instOrientedOrd, List.instOrientedOrd",
+   "date": "2026-10-17",
+   "verdict": "no match: no oriented-product or vanishing-topos point-conservativity theorem; the topological stalk criterion has a different site"
+  },
+  {
+   "tool": "grep",
+   "query": "oriented[Pp]roduct|oriented product|vanishing topos",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no oriented-product or vanishing-topos point-conservativity theorem; the topological stalk criterion has a different site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalks at specialization triples detect isomorphisms of module sheaves on the vanishing topos",
+   "results": "8 hits: TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, ModuleCat.Tilde.stalkIso, TopCat.Presheaf.stalkCongr.congr_simp, TopCat.Presheaf.stalkCongr_hom, TopCat.Presheaf.sheafifyStalkIso, germ_skyscraperPresheafStalkOfSpecializes_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: no oriented-product or vanishing-topos point-conservativity theorem; the topological stalk criterion has a different site"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-nearby-strict-local-description",
@@ -68,5 +202,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-oriented-product-points-conservative",
+  "worker": "stage1",
+  "summary": "Kept the statement for all $T$ (the maintainer reader removed a nonemptiness hypothesis added by the delivery: for $T=\\varnothing$ the topoi $T_{\\mathrm{Et}}$ and $V_f$ are degenerate, so the empty family is conservative). Identified points via the universal property and geometric realization of etale-topos points; proved conservativity locally on affine triple slices using the coherent finite-cover construction from XI 2.5 and applied Tag 00YQ only after that presentation, then glued and passed through exact stalks to every cohomological degree of arbitrary unbounded complexes. Corrected the inherited source attribution: XI 2.7 is a base-change proof, and XI 2.5 supplies the finite-cover construction only under the coherent affine-slice hypotheses.",
+  "blueprint": "Current main-20261015 lem-trf-local-term-locality.proof.md, paragraph (1) and (2): \"proved by specialization to the normal cone of Z (his §§1.3–1.4 and 2.1)\"; via the oriented nearby-cycle external-product comparison, its strict-local description uses pointwise conservativity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "why": "Generic cover-dense affine etale subcategory, used only to refine site triples; the trace unit provides no substitute for this site-size and affine-cover tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-etale-essentially-small-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-d4771fd18",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-d4771fd18 (reviewer sub-agent of L); spot-checked: The proof is correct, but one statement change was wrong and I removed it (E.7 misapplied, a weakening in the sense of H3/7b). The delivery added 'Assume T is nonempty' and filed STATEMENT-DISPUTED, claiming the étale topos of the empty scheme can be nontrivial. That is false: the empty family covers the only object of the empty scheme's étale site, so that topos is degenerate. The oriented product V_f is then degenerate too: every triple (∅→V←W) has the empty type-(a) cover, and p1^{-1} preserves both the initial and the final object. So D(V_f,Λ)=0 and the empty family is conservative. The original statement holds for T empty, and the added hypothesis broke the citer lem-trf-oriented-nearby-strict-local-description, which does not assume X nonempty. The fixed item file removes the hypothesis, adds a sentence on the degenerate case to step 1, updates split_report.summary, and corrects source.place: it now cites XI 1.8, 1.10(b), the proof of 2.5, Stacks 00YQ and 04HU instead of the base-change proof 2.7. Source checks: ILO XI 1.8 says every point is a triple (x,y,u) with u:gy→fx, which matches c:y⇒f(x) when g=id. XI 1.10(b) states that m from the localized oriented product to the oriented product of the localized topoi is an equivalence, which gives the affine-slice node. The proof of XI 2.5 builds the finite pretopology of types (a),(b),(c) under coherence hypotheses; these hold for affine U,V,W, since affine étale objects are qcqs and closed under fibre products, and maps between affine schemes are qcqs. Stacks 00YQ (finite limits plus finite refinements give enough points) matches the finitary node exactly. Stacks 04HU(2) (every point of a small étale topos comes from a geometric point) matches the point-realization node. Steps: step 1 uses uniqueness in the universal property; step 2 builds the affine refinement from types (a), (c), then (a)/(b); step 3 uses slice points composed with j_Z and Γ(j_Z^{-1}F)=F(Z); step 4 glues, using injectivity on non-affine overlaps; step 5 checks linearity; step 6 uses Mathlib homologyFunctorIso; step 7 uses DerivedCategory.isIso_iff on unbounded complexes. All are correct. The three new nodes are statement-only and self-contained, with four recorded searches each. None duplicates an existing node: I grepped for 00YQ, 04HU, enough points, slice/localization and point realization, and compared lem-trf-site-point-fibre and lem-trf-oriented-affine-neighbourhood-limit. None restates the item. The tool_use of the affine-étale cover Mathlib leaf is accepted. No SGA source is used and no target is weakened.; 1 file(s) fixed by the reviewer"
  }
 }
