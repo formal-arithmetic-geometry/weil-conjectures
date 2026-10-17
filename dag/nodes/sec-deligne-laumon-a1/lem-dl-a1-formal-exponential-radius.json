@@ -1,0 +1,96 @@
+{
+ "id": "lem-dl-a1-formal-exponential-radius",
+ "kind": "statement",
+ "title": "Formal exponential does not decrease the convergence radius",
+ "statement": "Let $U(T)=\\sum_{n\\ge1}u_nT^n\\in T\\mathbf C[[T]]$ be a complex formal power series with constant coefficient zero [def-weil-formal-power-series]. Form its formal exponential\n$$E(T)=\\exp(U(T))=\\sum_{r\\ge0}\\frac{U(T)^r}{r!}$$\nwith the coefficientwise finite convention of [def-weil-power-series-exponential]. Let $R(U),R(E)\\in[0,\\infty]$ be the absolute convergence radii of [d-real-series]. Then\n$$R(E)\\ge R(U).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+  "place": "Proof, last paragraph: \"The assumed energy bound makes the series in the exponential converge ... Its analytic exponential is holomorphic there and agrees with the rational germ.\" General scalar convergence input."
+ },
+ "stmt_deps": [
+  "def-weil-formal-power-series",
+  "def-weil-power-series-exponential",
+  "d-real-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "radius.*exp|exp.*radius|radius.*subst|subst.*radius",
+   "results": "25 hits: Mathlib/NumberTheory/ModularForms/QExpansion.lean; Mathlib/NumberTheory/ModularForms/QExpansion.lean; Mathlib/NumberTheory/ModularForms/QExpansion.lean; Mathlib/NumberTheory/ModularForms/QExpansion.lean; Mathlib/Geometry/Euclidean/Angle/Sphere.lean; Mathlib/Geometry/Euclidean/Angle/Sphere.lean; Mathlib/Geometry/Euclidean/Angle/Sphere.lean; Mathlib/Geometry/Euclidean/Angle/Sphere.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the radius of expSeries itself and composition bounds conditional on summability; it does not identify the scalar formal exponential of an arbitrary U or prove this radius inequality in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a complex formal power series U has constant coefficient zero then the convergence radius of exp U is at least the convergence radius of U",
+   "results": "8 hits: FormalMultilinearSeries.radius; le_radius_cauchyPowerSeries; NormedSpace.hasFPowerSeriesAt_exp_zero_of_radius_pos; FormalMultilinearSeries.radius_eq_top_of_eventually_eq_zero; HasFPowerSeriesOnBall.r_le; FormalMultilinearSeries.div_le_radius_compContinuousLinearMap; FormalMultilinearSeries.radius_smul_eq; FormalMultilinearSeries.le_radius_of_isBigO",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the radius of expSeries itself and composition bounds conditional on summability; it does not identify the scalar formal exponential of an arbitrary U or prove this radius inequality in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"radius\", \"exp\"",
+   "results": "9 hits: NormedSpace.expSeries_radius_eq_top; NormedSpace.expSeries_radius_pos; NormedSpace.hasFPowerSeriesAt_exp_zero_of_radius_pos; NormedSpace.hasFPowerSeriesOnBall_exp_of_radius_pos; hasDerivAt_exp_zero_of_radius_pos; hasStrictDerivAt_exp_zero_of_radius_pos; hasFDerivAt_exp_zero_of_radius_pos; hasStrictFDerivAt_exp_zero_of_radius_pos",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the radius of expSeries itself and composition bounds conditional on summability; it does not identify the scalar formal exponential of an arbitrary U or prove this radius inequality in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a complex formal power series U has constant coefficient zero then the convergence radius of exp U is at least the convergence radius of U",
+   "results": "8 hits: NormedSpace.expSeries_radius_pos; NormedSpace.hasFPowerSeriesOnBall_exp_of_radius_pos; NormedSpace.hasFPowerSeriesAt_exp_zero_of_radius_pos; NormedSpace.expSeries_radius_eq_top; NormedSpace.exp_hasFPowerSeriesOnBall; NormedSpace.expSeries_hasSum_exp_of_mem_ball; NormedSpace.expSeries_hasSum_exp_of_mem_ball'; NormedSpace.expSeries_div_hasSum_exp_of_mem_ball",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the radius of expSeries itself and composition bounds conditional on summability; it does not identify the scalar formal exponential of an arbitrary U or prove this radius inequality in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "(exp|subst).*(summable|radius)|(summable|radius).*(exp|subst)",
+   "results": "3 hits: Mathlib/RingTheory/PowerSeries/Substitution.lean; Mathlib/RingTheory/PowerSeries/Substitution.lean; Mathlib/RingTheory/PowerSeries/Substitution.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the radius of expSeries itself and composition bounds conditional on summability; it does not identify the scalar formal exponential of an arbitrary U or prove this radius inequality in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "FormalMultilinearSeries, \"comp\", \"radius\"",
+   "results": "8 hits: FormalMultilinearSeries.radius_le_radius_continuousLinearMap_comp; FormalMultilinearSeries.le_radius_compContinuousLinearMap; FormalMultilinearSeries.radius_compNeg; FormalMultilinearSeries.radius_compContinuousLinearMap_linearIsometryEquiv_eq; FormalMultilinearSeries.radius_compContinuousLinearMap_eq; FormalMultilinearSeries.div_le_radius_compContinuousLinearMap; FormalMultilinearSeries.radius_compContinuousLinearMap_le; FormalMultilinearSeries.le_comp_radius_of_summable",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the radius of expSeries itself and composition bounds conditional on summability; it does not identify the scalar formal exponential of an arbitrary U or prove this radius inequality in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The formal exponential of a complex scalar power series with zero constant term converges absolutely wherever the original power series converges absolutely",
+   "results": "8 hits: NormedSpace.hasFPowerSeriesAt_exp_zero_of_radius_pos; NormedSpace.hasFPowerSeriesOnBall_exp_of_radius_pos; NormedSpace.exp_hasFPowerSeriesOnBall; HasSum.exp; NormedSpace.expSeries_hasSum_exp_of_mem_ball; NormedSpace.exp_hasFPowerSeriesAt_zero; NormedSpace.expSeries_hasSum_exp_of_mem_ball'; NormedSpace.expSeries_summable_of_mem_ball",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib gives the radius of expSeries itself and composition bounds conditional on summability; it does not identify the scalar formal exponential of an arbitrary U or prove this radius inequality in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-l-dl-a1-energy",
+  "date": "2026-10-18",
+  "group": "Q79"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "blueprint": {
+  "from": {
+   "node": "sk-l-dl-a1-energy",
+   "place": "Proof, last paragraph: the exponential of the convergent trace series is holomorphic on the same disk; isolate the scalar formal-series convergence assertion.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

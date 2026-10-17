@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-l-dl-a1-energy",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Weight detection by trace energy",
@@ -13,39 +13,229 @@
   "place": "node sk-l-dl-a1-energy, order 3100"
  },
  "stmt_deps": [
-  "sk-d-dl-a1-setup"
+  "sk-d-dl-a1-setup",
+  "def-weil-geometric-hypotheses",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-local-frobenius-trace",
+  "def-weil-field-valued-points",
+  "def-weil-complex-absolute-value"
  ],
  "proof": [
   {
-   "text": "Let $T_v$ be the constant Weil line whose Frobenius has realization\n$q^v$, and set $N^c=N^\\vee\\otimes T_v$. The line $T_v$ has weight\n$2v$, while $N^c$ has weight $v$ and conjugate realized local spectra.\nThus $D=N\\otimes N^c$ has weight $2v$ and point traces\n$|\\iota t_{N,n}(x)|^2$. The trace formula and the determinant identity give\n\n$$\nE_N(T):=\\exp\\left(\\sum_{n\\ge1}S_n(V_0,N)\\frac{T^n}{n}\\right)\n=\\frac{\\iota\\det(1-T\\DLAFr_q\\mid H_c^1(V,D))}\n{\\iota\\det(1-T\\DLAFr_q\\mid H_c^2(V,D))}.\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "There is a closed point with a nonzero stalk. Some positive power of its\ninvertible Frobenius has nonzero trace; otherwise the determinant\nidentity would make its characteristic polynomial constant. Hence some\n$S_n$ is positive. All $S_n$ are nonnegative, so the exponential has\ninfinitely many nonzero coefficients: a positive coefficient in its\nexponent contributes positively in arbitrarily high powers.\nConsequently the rational function $E_N$ is not a polynomial and has\nat least one surviving finite pole.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "By [sk-l-dl-a1-endpoints], $H_c^2(V,D)$ is pure of weight $2v+2$,\nso every possible denominator pole has modulus $q^{-(v+1)}$.\nThe assumed energy bound makes the series in the exponential converge\nfor $|T|<q^{-B}$. Its analytic exponential is holomorphic there and\nagrees with the rational germ; therefore the surviving pole cannot lie\nin that disk. Thus $q^{-(v+1)}\\ge q^{-B}$, or $v\\le B-1$.\nThis argument uses no weight estimate for $H_c^1(V,D)$ and requires\nonly one surviving pole, rather than noncancellation of every factor.",
+   "text": "Write $V=V_0\\times_{k_0}k$. Work in the rational $\\overline{\\mathbf Q}_\\ell$-Weil category of the setup; a Weil automorphism is not required to preserve an integral lattice. Choose $b\\in\\overline{\\mathbf Q}_\\ell^\\times$ with $\\iota(b)=q^v$, possible since $\\iota$ is a field isomorphism and $q^v>0$. The constant Weil line $T_v=\\mathcal B_b$ is defined by $g\\mapsto b^{\\deg(g)}$. Use the lisse sheaf--representation tensor equivalence and the contragredient action to form the lisse sheaves $N^c=N^\\vee\\otimes T_v$ and $D=N\\otimes N^c$. The dual is lisse by [lem-tw-dual-stalk-frobenius], and tensoring finite-dimensional representations preserves lisseness under that equivalence.",
    "uses": [
-    "sk-l-dl-a1-endpoints"
+    "sk-d-dl-a1-setup",
+    "def-wf-constant-weil-twist",
+    "prop-wf-weil-sheaf-representation-equivalence",
+    "def-real-weil-representation-operations",
+    "lem-tw-dual-stalk-frobenius"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, first paragraph: construction of the conjugate twist"
+   }
+  },
+  {
+   "text": "At a closed point $x$ of degree $d$, write $a_1,\\ldots,a_r$ for the realized local eigenvalues of $N$. By purity $|a_i|^2=q^{dv}$ and $a_i\\ne0$. The contragredient and tensor spectra of [p-linear-spectra], the constant-line action, and the stalk/representation polynomial comparison give the local eigenvalues $q^{dv}/a_i=\\overline{a_i}$ on $N^c$ and $a_i\\overline{a_j}$ on $D$. Thus $T_v,N^c,D$ have weights $2v,v,2v$, respectively. If $y\\in V_0(\\mathbf F_{q^n})$ lies above $x$, with $n=dm$, [lem-zl-weil-constant-extension-frobenius] identifies its Frobenius with $F_x^m$ up to conjugacy. A triangular basis from [p-linear-triangular] gives eigenvalues $a_i^m$ and $\\overline{a_j}^m$, so the diagonal entries of the tensor matrix sum to\n$$\\iota\\operatorname{Tr}(F_y^{(n)}\\mid D_{\\bar y})=\\sum_{i,j}a_i^m\\overline{a_j}^m=\\left|\\sum_i a_i^m\\right|^2=|\\iota t_{N,n}(y)|^2.$$\nThe double sum, including the terms with $i\\ne j$, is essential. No semisimplicity of Frobenius is used.",
+   "uses": [
+    "sk-d-dl-a1-setup",
+    "p-linear-spectra",
+    "p-real-operations",
+    "def-wf-constant-weil-twist",
+    "lem-zl-weil-constant-extension-frobenius",
+    "p-linear-triangular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, first paragraph: local spectra, purity and squared traces"
+   }
+  },
+  {
+   "text": "Apply [sk-l-dl-a1-endpoints] with $C_0=U_0=V_0$, $j=\\operatorname{id}$ and $F=D$. Its hypotheses hold because $V_0$ is smooth, geometrically connected and affine and $D$ is lisse. It gives $H_c^0(V,D)=0$, no compact cohomology outside $0,1,2$, and purity of $H_c^2(V,D)$ of weight $2v+2$ (including the possibility that this group is zero). By [prop-cohomological-finiteness], computed at a finite coefficient stage $E\\subset\\overline{\\mathbf Q}_\\ell$ over which $D$ and its Weil structure are defined (the common-stage category of [def-weil-weil-sheaf-complex]), these groups are finite-dimensional with Frobenius automorphisms. Put $A(T)=\\iota\\det(1-TF_q\\mid H_c^1(V,D))$ and $B_2(T)=\\iota\\det(1-TF_q\\mid H_c^2(V,D))$. Both have constant coefficient $1$.",
+   "uses": [
+    "sk-l-dl-a1-endpoints",
+    "prop-cohomological-finiteness",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-reverse-characteristic-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, first and last paragraphs: endpoint vanishing and degree-two purity"
+   }
+  },
+  {
+   "text": "The sums over rational points are finite by [lem-weil-point-counts-finite]. Apply the assumed trace formula [nt-assume-trace-formula] to $D$, in degree zero, with model Frobenius the $q$-power relative Frobenius of $V$: $V_0$ is affine, hence separated of finite type; the fixed points of its $n$-th power are $V_0(\\mathbf F_{q^n})$, finite; $R\\Gamma_c(V,D)$ and the stalks are dualizable by step 3. Clause (4) of [prop-trf-trace-formal-laws] turns both categorical traces into alternating sums of ordinary traces; then apply $\\iota$. Step 2 identifies the left side with $S_n$, and step 3 reduces the right side to $-\\operatorname{Tr}(F_q^n\\mid H_c^1)+\\operatorname{Tr}(F_q^n\\mid H_c^2)$. With [lem-zl-euler-product-identity] for $H_c^1,H_c^2$, [lem-weil-power-series-exp-hom] and [lem-weil-exp-coefficientwise-map] for $\\iota$,\n$$U(T)=\\sum_{n\\ge1}\\frac{S_n}{n}T^n,\\qquad E(T)=\\exp U(T)=\\frac{A(T)}{B_2(T)}$$\nin $\\mathbf C[[T]]$.",
+   "uses": [
+    "lem-weil-point-counts-finite",
+    "nt-assume-trace-formula",
+    "prop-trf-trace-formal-laws",
+    "lem-zl-euler-product-identity",
+    "lem-weil-power-series-exp-hom",
+    "lem-weil-exp-coefficientwise-map",
+    "def-weil-power-series-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, first paragraph: trace formula and determinant identity"
+   }
+  },
+  {
+   "text": "There is a closed point $x$ of $V_0$: it is nonempty, quasi-compact and Kolmogorov [lem-sc-quasi-compact-kolmogorov-closed-point]. By [lem-kun-closed-point-field], its degree $d$ is finite and positive. The stalk of $N$ at any geometric point over $x$ is nonzero, since the fibre equivalence [cor-galois-lisse-representations] on the connected geometric curve reflects zero objects and $N\\ne0$. Let $F_x$ be its Frobenius automorphism. If $\\operatorname{Tr}(F_x^m)=0$ for every $m\\ge1$, [lem-zl-euler-product-identity], applied to the Frobenius module $(N_{\\bar x},F_x)$, gives $\\det(1-TF_x)^{-1}=\\exp(0)=1$. This is impossible: triangularize $F_x$ by [p-linear-triangular]; on a positive-dimensional space its nonzero diagonal eigenvalues give a determinant polynomial of positive degree. Hence some $\\operatorname{Tr}(F_x^m)$ is nonzero. The point $x$ lifts to $\\mathbf F_{q^{dm}}$, and [lem-zl-weil-constant-extension-frobenius] identifies its local operator with $F_x^m$. Thus $S_{dm}>0$.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-kun-closed-point-field",
+    "cor-galois-lisse-representations",
+    "lem-zl-euler-product-identity",
+    "p-linear-triangular",
+    "lem-zl-weil-constant-extension-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, second paragraph: a positive energy coefficient"
+   }
+  },
+  {
+   "text": "Every $S_n\\ge0$ by its definition as a finite sum of squared absolute values. Choose $k\\ge1$ with $S_k>0$ from step 5. The coefficient formula of [def-weil-power-series-exponential] expresses every coefficient of $E$ as a sum of nonnegative terms. For every $r\\ge1$, its term with $r$ indices all equal to $k$ gives\n$$[T^{rk}]E\\ \\ge\\ \\frac{(S_k/k)^r}{r!}>0.$$\nThus $E$ has infinitely many nonzero coefficients and cannot be a polynomial.",
+   "uses": [
+    "def-weil-power-series-exponential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, second paragraph: positivity prevents a polynomial exponential"
+   }
+  },
+  {
+   "text": "Reduce the nonzero rational function $A/B_2$ to $P/Q$ by cancelling its polynomial gcd, as in [def-weil-rational-function-field]. Since $A(0)=B_2(0)=1$, the common divisor has nonzero value at $0$, $Q(0)\\ne0$, and $QE=P$ as formal series. Step 6 forces $\\deg Q>0$, since a constant $Q$ would make $E=P/Q$ a polynomial. The fundamental theorem of algebra [lem-weil-complex-algebraically-closed] supplies a root $z$ of $Q$. Coprimality of $P,Q$ gives $P(z)\\ne0$: otherwise $T-z$ divides both. Thus $z$ is one surviving denominator root; no assertion that all denominator roots survive is needed.",
+   "uses": [
+    "def-weil-rational-function-field",
+    "lem-weil-complex-algebraically-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, second paragraph: one surviving finite pole"
+   }
+  },
+  {
+   "text": "Triangularize Frobenius on $H_c^2(V,D)$ using [p-linear-triangular], and apply [p-linear-filtration] to its invariant flag. If $\\lambda_j$ are its realized eigenvalues, then\n$$B_2(T)=\\prod_j(1-\\lambda_jT),\\qquad |\\lambda_j|=q^{v+1}$$\nby the purity from step 3 and the weight convention [sk-d-dl-a1-setup]. Since $Q$ divides $B_2$ up to a nonzero constant, the root $z$ of step 7 is $\\lambda_j^{-1}$ for some $j$. Hence $|z|=q^{-(v+1)}$. If $H_c^2=0$, then $B_2=1$ and step 7 is already impossible; the same argument excludes this case without assuming it away.",
+   "uses": [
+    "p-linear-triangular",
+    "p-linear-filtration",
+    "sk-d-dl-a1-setup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, last paragraph: denominator-root modulus"
+   }
+  },
+  {
+   "text": "Set $R=q^{-B}>0$. For $0\\le t<R$ and $n\\ge1$, the assumed bound gives\n$$0\\le \\frac{S_n}{n}t^n\\le C(q^Bt)^n.$$\nThe geometric ratio $q^Bt$ lies in $[0,1)$; its partial sums are bounded by $(1-q^Bt)^{-1}$. The comparison [lem-rp-nonnegative-summable-comparison] therefore gives absolute convergence of $U$ at every such $t$. In the radius convention [d-real-series], $R(U)\\ge q^{-B}$. Apply [lem-dl-a1-formal-exponential-radius] to $U$, whose constant coefficient is zero, to obtain $R(E)\\ge R(U)\\ge q^{-B}$.",
+   "uses": [
+    "lem-rp-nonnegative-summable-comparison",
+    "d-real-series",
+    "lem-dl-a1-formal-exponential-radius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, last paragraph: the assumed energy bound gives convergence on the disk"
+   }
+  },
+  {
+   "text": "Apply [lem-wf-rational-series-pole-radius] to $QE=P$ and the root $z$ constructed in step 7; it requires precisely $Q(0)\\ne0$, $Q(z)=0$ and $P(z)\\ne0$, all verified there. Steps 8 and 9 give\n$$q^{-B}\\le R(E)\\le |z|=q^{-(v+1)}.$$\nSince $q>1$, the real function $a\\mapsto q^a$ is strictly increasing, so $-B\\le-(v+1)$ and $v\\le B-1$. The argument imposes no weight bound on $H_c^1$.",
+   "uses": [
+    "lem-wf-rational-series-pole-radius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Proof, last paragraph: exclude the surviving pole from the convergence disk"
+   }
   }
  ],
  "proof_deps": [
+  "sk-d-dl-a1-setup",
+  "def-wf-constant-weil-twist",
+  "prop-wf-weil-sheaf-representation-equivalence",
+  "def-real-weil-representation-operations",
+  "lem-tw-dual-stalk-frobenius",
+  "p-linear-spectra",
+  "p-real-operations",
+  "lem-zl-weil-constant-extension-frobenius",
+  "p-linear-triangular",
   "sk-l-dl-a1-endpoints",
-  "sk-thm-trace-transport"
+  "prop-cohomological-finiteness",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-reverse-characteristic-polynomial",
+  "lem-weil-point-counts-finite",
+  "nt-assume-trace-formula",
+  "prop-trf-trace-formal-laws",
+  "lem-zl-euler-product-identity",
+  "lem-weil-power-series-exp-hom",
+  "lem-weil-exp-coefficientwise-map",
+  "def-weil-power-series-exponential",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-kun-closed-point-field",
+  "cor-galois-lisse-representations",
+  "def-weil-rational-function-field",
+  "lem-weil-complex-algebraically-closed",
+  "p-linear-filtration",
+  "lem-rp-nonnegative-summable-comparison",
+  "d-real-series",
+  "lem-dl-a1-formal-exponential-radius",
+  "lem-wf-rational-series-pole-radius"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+  "place": "Proof: same conjugate-tensor, determinant, positivity, and surviving-pole route; convergence made explicit via the scalar exponential-radius input."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "traceEnergy|l2Weight|WeilSheaf|PunctuallyPure",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern sieve weights, Lie weights, modular forms, or elliptic division polynomials; Mathlib has no WeilSheaf/traceEnergy purity theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero pure lisse Weil sheaf on a smooth affine curve has its weight bounded by the exponential growth of squared Frobenius traces",
+   "results": "8 hits: ModularFormClass.qExpansion_isBigO; Finsupp.le_weight_of_ne_zero; WeierstrassCurve.natDegree_Φ_le; LieModule.Weight.isNonZero_iff_ne_zero; LieModule.Weight.instFinite; ModularFormClass.exists_bound; LieModule.Weight.mk.sizeOf_spec; CuspFormClass.qExpansion_isBigO",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern sieve weights, Lie weights, modular forms, or elliptic division polynomials; Mathlib has no WeilSheaf/traceEnergy purity theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern sieve weights, Lie weights, modular forms, or elliptic division polynomials; Mathlib has no WeilSheaf/traceEnergy purity theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero pure lisse Weil sheaf on a smooth affine curve has its weight bounded by the exponential growth of squared Frobenius traces",
+   "results": "8 hits: BoundingSieve.weights; BoundingSieve.weights_nonneg; Mathlib.Meta.Positivity.evalBoundingSieveWeights; NumberField.hermiteTheorem.boundOfDiscBdd; NumberField.hermiteTheorem.rank_le_rankOfDiscrBdd; NumberField.hermiteTheorem.rankOfDiscrBdd; LieModule.eventually_genWeightSpace_smul_add_eq_bot; Polynomial.cardPowDegreeIsAdmissible",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern sieve weights, Lie weights, modular forms, or elliptic division polynomials; Mathlib has no WeilSheaf/traceEnergy purity theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect the purity weight of an l-adic local system on a curve from the growth of its squared trace sums",
+   "results": "8 hits: Height.totalWeight; BoundingSieve.weights; NumberField.Ideal.tendsto_norm_le_and_mk_eq_div_atTop; NumberField.Ideal.tendsto_norm_le_div_atTop; NumberField.Ideal.tendsto_norm_le_div_atTop₀; NumberField.hermiteTheorem.rankOfDiscrBdd; ClassGroup.cardM; NumberField.dedekindZeta_residue",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern sieve weights, Lie weights, modular forms, or elliptic division polynomials; Mathlib has no WeilSheaf/traceEnergy purity theorem."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -167,5 +357,74 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "sk-l-dl-a1-energy",
+  "worker": "stage1",
+  "summary": "Retained the statement, expanded the prescribed determinant/pole proof into ten steps with all cited statements checked and verbatim quotations. Reused the existing rational-series pole-radius obstruction and the two existing nodes for open Lean inputs. Added one statement-only scalar exponential-radius lemma after genuine searches; no Mathlib leaf was missed by identifying only the exponential series itself. Corrected the double-sum tensor trace calculation and distinguished closed-point Frobenius from its extension-field powers. Maintainer reader (Q79 review): batch-5 repair -- step 4 now cites the assumption leaf nt-assume-trace-formula instead of sk-thm-trace-transport, with prop-trf-trace-formal-laws (4) for the field supertrace and prop-cohomological-finiteness (step 3) for finiteness; prop-trace-determinant (whose clause 3 is proved through the trace formula) is replaced by the on-route log-det node lem-zl-euler-product-identity and lem-weil-power-series-exp-hom.",
+  "blueprint": "Unit step 1 is realized by item steps 1--7 (conjugate twist, rational exponential, nonzero energy and surviving pole); unit step 2 by item steps 3 and 8--10 (top-degree purity, pole modulus, convergence bound and inequality). No route replacement.",
+  "tool_uses": [
+   {
+    "node": "p-real-operations",
+    "why": "Identifies stalk Frobenius polynomials with the representation operators so dual and tensor spectra compute local eigenvalues; a generic interface, not an alternate purity argument."
+   },
+   {
+    "node": "lem-zl-weil-constant-extension-frobenius",
+    "why": "Identifies rational-point Frobenius over a constant extension with a power of closed-point Frobenius, without requiring an integral invariant lattice; generic local-operator compatibility."
+   },
+   {
+    "node": "lem-tw-dual-stalk-frobenius",
+    "why": "Supplies lisseness of the dual and the contragredient stalk operator; generic lisse linear-dual compatibility."
+   },
+   {
+    "node": "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "why": "Gives a closed point of the nonempty finite-type curve, a generic topological existence tool not supplied by an energy-specific node."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Makes the closed-point residue field finite over the base, allowing a rational-point contribution at a positive extension degree."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Its fibre equivalence on a connected curve reflects zero objects, so every geometric stalk of a nonzero lisse sheaf is nonzero."
+   },
+   {
+    "node": "lem-rp-nonnegative-summable-comparison",
+    "why": "Generic comparison of nonnegative numerical series proves convergence under the explicit geometric majorant; it does not replace any sheaf-theoretic step."
+   },
+   {
+    "node": "prop-cohomological-finiteness",
+    "why": "Finite-dimensionality of H_c^i(V,D), needed for the determinants A,B_2 and for the dualizability hypothesis of the assumed trace formula; batch-5 permitted finiteness input."
+   },
+   {
+    "node": "prop-trf-trace-formal-laws",
+    "why": "Clause (4) only: over a coefficient field the categorical trace is the alternating sum of traces on cohomology, which the assumed trace formula explicitly leaves out of its scope; a general trace law, not a step of the trace formula."
+   },
+   {
+    "node": "lem-weil-power-series-exp-hom",
+    "why": "exp(U+W)=exp(U)exp(W) and exp(-U)=exp(U)^{-1} combine the degree-1 and degree-2 log-det identities; generic formal-series algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "p-real-operations",
+  "lem-zl-weil-constant-extension-frobenius",
+  "lem-tw-dual-stalk-frobenius",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-kun-closed-point-field",
+  "cor-galois-lisse-representations",
+  "lem-rp-nonnegative-summable-comparison",
+  "prop-cohomological-finiteness",
+  "prop-trf-trace-formal-laws",
+  "lem-weil-power-series-exp-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-8aa7954ca",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-8aa7954ca (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 10 steps, the new node, every cited statement including blueprint_update, the main-20261015 statement and proof files, and the unit and chapter records. The statement is verbatim main-20261015 and not weakened. Its C>0 agrees with the unit's free C, because step 5 forces S_n>0. The mathematics is correct. The conjugate-tensor double sum is right, and the blueprint's single sum is wrong (identity Frobenius on rank 2 gives 2 against 4), as the worker reported. The positivity, gcd cancellation, surviving root of modulus q^{-(v+1)}, geometric majorant and pole-radius bound all check, and the bound is sharp for a constant rank-one line on A^1. The new lem-dl-a1-formal-exponential-radius is true by majorizing with exp of the absolute-value series. U=log(1-T) shows it must be an inequality. It is not a duplicate (rg over radius/exp hits), is statement-only and has all three search kinds. Batch-5 audit: every flagged citation is acceptable except prop-trace-determinant, because its closure reaches thm-trf-grothendieck-lefschetz-qbar via prop-every-iterate-trace and thm-weil-grothendieck-lefschetz-trace (its clause 3). The definitions, the representation equivalence, cor-galois-lisse-representations (the pi1 equivalence, not a Poincare duality step), p-linear-spectra, p-linear-triangular, p-real-operations, lem-tw-dual-stalk-frobenius and lem-zl-weil-constant-extension-frobenius reach no trace-formula or Poincare-duality theorem. The unflagged sk-thm-trace-transport in step 4 is the assumed trace formula itself. Repairs: (1) step 4 now cites nt-assume-trace-formula, with its hypotheses checked: separated finite type, finite fixed points V_0(F_{q^n}), and dualizability from prop-cohomological-finiteness, cited in step 3. The categorical-to-alternating trace identification that the leaf excludes is cited as prop-trf-trace-formal-laws(4). (2) In steps 4 and 5, prop-trace-determinant is replaced by the on-route log-det node lem-zl-euler-product-identity plus lem-weil-power-series-exp-hom and lem-weil-exp-coefficientwise-map. tool_uses are updated, there are no cycles, and proof_deps equals the union of uses. (3) The new node gains its lean_audit field. Remaining caveat, shared by all batch-5 consumers and as accepted for sk-thm-rationality: reading the leaf's condensed model-Frobenius formulation in the setup's Weil category. Corrected files are in fixes/dag/nodes/sec-deligne-laumon-a1/; details are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
