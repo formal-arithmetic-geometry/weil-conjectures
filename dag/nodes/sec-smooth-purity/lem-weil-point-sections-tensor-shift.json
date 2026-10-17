@@ -8,7 +8,7 @@
  "id": "lem-weil-point-sections-tensor-shift",
  "kind": "statement",
  "title": "Sections-tensor comparison commutes with shifts",
- "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, and finite extensions $E\\subseteq L$ of $\\Ql$ inside $\\Qlb$ with valuation rings $\\mathcal O_E\\subseteq\\mathcal O_L$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$ and $R_F=\\widehat{\\mathcal O}_{F,s}$ for $F=E,L$ [def-weil-completed-integral-coefficients]. Let $K\\in D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]. Apply exact sections over the final object of $s_{\\mathrm{proet}}$ termwise, with the canonical constant-value maps $\\mathcal O_F\\to\\Gamma(s,R_F)$ [lem-weil-point-proetale-sections-exact]. Let\n$$\n \\theta_K:\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L\\longrightarrow\\Gamma(s,K\\otimes^L_{R_E}R_L)\n$$\nbe the canonical sections-tensor comparison specified in [lem-weil-point-sections-scalar-extension], where tensor on the left is ordinary tensor of module complexes and on the right is ordinary derived change of sheaf rings. For every $m\\in\\mathbf Z$, $\\theta_{K[m]}=\\theta_K[m]$ under the standard termwise shift identifications for sections and scalar tensor; these identifications are compatible with zero and successive shifts.\n\nExplicitly, on a K-flat resolution $P\\to K$ with flat terms [lem-pc-kflat-resolution], the representing map in degree $r$ is\n$$\n \\Gamma(s,P^r)\\otimes_{\\mathcal O_E}\\mathcal O_L\\longrightarrow\\Gamma(s,P^r\\otimes_{R_E}R_L),\\qquad a\\otimes b\\longmapsto\\text{the sheaf tensor section }a\\otimes b_s,\n$$\nwhere $b_s\\in R_L(s)$ is the constant section defined by $b$ and the sheaf tensor is [def-pur-sheaf-tensor-product]. These maps form a natural map of complexes, commute with the standard integer shifts, and induce the displayed equality in $D(\\mathcal O_L)$ independently of the chosen resolution.",
+ "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, and finite extensions $E\\subseteq L$ of $\\Ql$ inside $\\Qlb$ with valuation rings $\\mathcal O_E\\subseteq\\mathcal O_L$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$ and $R_F=\\widehat{\\mathcal O}_{F,s}$ for $F=E,L$ [def-weil-completed-integral-coefficients]. Let $K\\in D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]. Apply exact sections over the final object of $s_{\\mathrm{proet}}$ termwise [lem-weil-point-proetale-sections-exact], with the canonical constant-value maps $\\mathcal O_F\\to\\Gamma(s,R_F)=\\varprojlim_n\\Gamma(s,(\\mathcal O_F/\\varpi_F^n)_s)$ [def-pur-sheaf-inverse-limit] sending $b$ to the compatible family of its constant sections. Let\n$$\n \\theta_K:\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L\\longrightarrow\\Gamma(s,K\\otimes^L_{R_E}R_L)\n$$\nbe the canonical sections-tensor comparison specified in [lem-weil-point-sections-scalar-extension], where tensor on the left is ordinary tensor of module complexes and on the right is ordinary derived change of sheaf rings [lem-pur-derived-change-of-rings] along the canonical map $R_E\\to R_L$ induced by $\\mathcal O_E\\subseteq\\mathcal O_L$ [lem-weil-finite-free-completed-scalar-comparison]. For every $m\\in\\mathbf Z$, $\\theta_{K[m]}=\\theta_K[m]$ under the standard termwise shift identifications for sections and scalar tensor; these identifications are compatible with zero and successive shifts.\n\nExplicitly, on a K-flat resolution $P\\to K$ with flat terms [lem-pc-kflat-resolution], the representing map in degree $r$ is\n$$\n \\Gamma(s,P^r)\\otimes_{\\mathcal O_E}\\mathcal O_L\\longrightarrow\\Gamma(s,P^r\\otimes_{R_E}R_L),\\qquad a\\otimes b\\longmapsto\\text{the sheaf tensor section }a\\otimes b_s,\n$$\nwhere $b_s\\in R_L(s)$ is the constant section defined by $b$ and the sheaf tensor is [def-pur-sheaf-tensor-product]. These maps form a natural map of complexes, commute with the standard integer shifts, and induce the displayed equality in $D(\\mathcal O_L)$ independently of the chosen resolution.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 03EK (section-tensor-product), sectionwise tensor presheaf and its sheafification. Integer-shift compatibility and descent for the particular sections-tensor comparison are the extracted agent argument for the final display of blueprint def-weil-finite-coefficient-point, not a separate assertion of Tag 03EK."
@@ -21,11 +21,65 @@
   "lem-weil-point-proetale-sections-exact",
   "lem-weil-point-sections-scalar-extension",
   "lem-pc-kflat-resolution",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-inverse-limit",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-flat resolution $P\\to K$ with flat terms using [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings], the ordinary complex $P\\otimes_{R_E}R_L$ represents $K\\otimes^L_{R_E}R_L$. The sections-tensor comparison in [lem-weil-point-sections-scalar-extension] is, on this representative, the degreewise balanced map $\\Gamma(s,P^r)\\otimes_{\\mathcal O_E}\\mathcal O_L\\to\\Gamma(s,P^r\\otimes_{R_E}R_L)$ sending $a\\otimes b$ to the sectionwise tensor $a\\otimes b_s$. The definition [def-pur-sheaf-tensor-product] makes this map well-defined after sheafification, and the same formula commutes with differentials, so it is a chain map.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-point-sections-scalar-extension",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), together with the explicit sectionwise tensor construction"
+   }
+  },
+  {
+   "text": "For an integer $m$, the degree-$r$ term of $P[m]$ is $P^{r+m}$, and its differential is the usual shifted differential with the common sign. The degree-$r$ component of the map constructed in Step 1 for $P[m]$ is therefore exactly the component for $P$ in degree $r+m$, followed by the standard termwise shift identification; the coefficient $b_s$ has degree zero, so no additional Koszul sign occurs. Both sides multiply the differential by the same shift sign, hence $\\theta_{P[m]}=\\theta_P[m]$ as chain maps. For $m=0$ this is the identity, and reindexing twice shows that the comparison for successive shifts is the composite of the comparisons for the two shifts. The exact-sections result [lem-weil-point-proetale-sections-exact] supplies the stated termwise section shift identification.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final display proof: the sections-tensor comparison is degreewise and shift-compatible"
+   }
+  },
+  {
+   "text": "The map of Step 1 is natural for chain maps because it is defined by the tensor formula on every degree. Sections preserve quasi-isomorphisms by [lem-weil-point-proetale-sections-exact], and $-\\otimes_{\\mathcal O_E}\\mathcal O_L$ preserves quasi-isomorphisms of module complexes because $\\mathcal O_L$ is a finitely generated torsion-free, hence finite free, module over the discrete valuation ring $\\mathcal O_E$; while [lem-pur-derived-change-of-rings] identifies the K-flat model with the derived change-of-rings functor and makes the comparison independent of the chosen K-flat resolution. Any two resolutions $P\\to K$, $P'\\to K$ of [lem-pc-kflat-resolution] are surjective in every degree, so the termwise fibre product $P\\times_KP'$ maps to $P$ and to $P'$ by quasi-isomorphisms (their kernels $\\ker(P'\\to K)$, $\\ker(P\\to K)$ are acyclic), and a K-flat resolution $Q\\to P\\times_KP'$ gives quasi-isomorphisms $Q\\to P$, $Q\\to P'$ over $K$. Thus, for a quasi-isomorphism between two such resolutions, the square formed by the two degreewise comparisons commutes and its horizontal maps become invertible in the derived category. Applying the square to a roof $K\\xleftarrow{q}H\\xrightarrow{f}J$ and inverting the maps induced by $q$ gives the natural derived comparison for $f q^{-1}$. The chain-level shift equality of Step 2 consequently descends to $\\theta_{K[m]}=\\theta_K[m]$ in $D(\\mathcal O_L)$, and the same argument applies to every integer $m$ and to successive shifts.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final display proof: descent of the degreewise comparison to the derived category and shift compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Final display proof: degreewise sections-tensor map, integer-shift compatibility, and descent to the derived comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-admissible",
  "blueprint": {
@@ -75,5 +129,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-point-sections-tensor-shift",
+  "worker": "stage1",
+  "summary": "Audited the imported sections-tensor shift statement against the final display of def-weil-finite-coefficient-point. No new nodes were needed: the proof uses the existing K-flat resolution, derived change-of-rings, exact point-sections, sheaf tensor, and scalar-extension comparison statements. Repaired the imported statement dependency typo by replacing the nonexistent lem-weil-point-sections-exact with lem-weil-point-proetale-sections-exact, and supplied three explicit proof steps for the degreewise map, shifted chain maps, and resolution-independent derived descent.",
+  "blueprint": "Realizes the final display proof: the sections-tensor comparison is defined degreewise on a K-flat model, commutes with integer shifts, and descends independently of the model.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Its statement pins down the canonical sections-tensor comparison and its derived naturality; this item proves the additional shift compatibility."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat resolution existence is used to represent the derived tensor on a complex."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived change-of-rings identification and resolution independence are used to descend the chain map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NX-154c673ef",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-154c673ef (reviewer sub-agent of L); spot-checked: I read all of it: the item, the statements of every cited node, the citer lem-weil-point-fibre-equivalence (step 12, which uses exactly the shift compatibility), Stacks 03EK (sites-modules.tex section-tensor-product), Bhatt-Scholze Lemma 6.8.2(1), and the blueprint def-weil-finite-coefficient-point in master and main-20261015 (identical apart from order; its final display has no written proof, so proof_origin by agent is right). The delivery has no new nodes. The statement is true: with P[m]^r=P^{r+m} and d=(-1)^m d, both sides are literally the m-shifts. I checked K=R_E[0], where Gamma(s,R_E)=O_E and theta is O_E(x)O_L->O_L, an isomorphism, and also m=0, K=0 and successive shifts. The item is not a duplicate and does not restate a parent clause: the scalar-extension node has no shift clause, and the sibling lem-weil-point-completed-scalar-shift is the chi half. The coefficient category (R_E-modules on s_proet, D^b_c(s,O_E)) and the base change (derived change of rings along R_E->R_L) are the same as in the scalar-extension node and in lem-weil-finite-free-completed-scalar-comparison. No SGA source is used. The dependency correction to lem-weil-point-proetale-sections-exact is correct. I accept the declared tool_uses lem-weil-point-sections-scalar-extension, lem-pc-kflat-resolution and lem-pur-derived-change-of-rings. I repaired two small faults. B3/C4 in the statement: the derived change of rings and the map R_E->R_L were not cited, and the constant-value maps were attached to the exact-sections node, which does not state them. I added def-pur-sheaf-inverse-limit, lem-pur-derived-change-of-rings and lem-weil-finite-free-completed-scalar-comparison to the statement and to stmt_deps. E5 in step 3: it tacitly used that O_L is finite free over O_E (so tensoring preserves quasi-isomorphisms) and that two surjective resolutions are both dominated by a K-flat resolution of their fibre product over K; both are now written in. The graph stays acyclic and proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -13,48 +13,151 @@
   "lem-coef-simplicial-right-fibration-presentation",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a simplex $\\sigma:\\Delta^r\\to K$. The explicit cone presentation of [lem-coef-simplicial-right-fibration-presentation] says that an $r$-simplex of $U_KF$ over $\\sigma$ is an enriched natural map $T_\\sigma\\to F$, equivalently a simplicial functor from the ordered cone $\\mathfrak C[\\Delta^r\\star\\Delta^0]$ to the collage obtained by adjoining a terminal cone vertex with mixed mapping object $F$. Restriction to the initial vertices gives the values $F(\\sigma(i))$. The fiber comparison and simplexwise formula of [lem-coef-unstraightening-simplex-pointwise] identify these restrictions with the stated natural equivalences $(U_KF)_k\\simeq F(k)$, functorially in $F$ and in the base simplex.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-unstraightening-simplex-pointwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.1, Proposition 2.2.1.1 and the cone formula; the explicit fiber calculation of §2.2.2"
+   }
+  },
+  {
+   "text": "In the subset-poset model of [lem-coef-pinched-cube-latching], the mapping simplicial set from $i$ to $j$ in $\\mathfrak C[\\Delta^r]$ (and in the cone $\\mathfrak C[\\Delta^r\\star\\Delta^0]=\\mathfrak C[\\Delta^{r+1}]$, with cone vertex $v=r+1$) is the nerve of the inclusion poset of subsets of $\\{i,\\ldots,j\\}$ containing both endpoints, and composition is union. For the cone functor $\\Phi$ of Step 1, a subset $I\\ni i,v$ is sent to a vertex $\\Phi(I)$ of $F(\\sigma(i))$, and a flag $I_0\\subset\\cdots\\subset I_q$ of such subsets to a $q$-simplex of $F(\\sigma(i))$. The vertex value at $i$ is $\\Phi(\\{i,v\\})$. Since a subset $I\\ni i,v$ with second element $j$ is the union $I=(I\\setminus\\{i\\})\\cup\\{i,j\\}$, functoriality of $\\Phi$ and the mixed composition of the collage give $\\Phi(I)=F(\\Phi\\{i,j\\})\\bigl(\\Phi(I\\setminus\\{i\\})\\bigr)$, where $\\Phi\\{i,j\\}$ is the image of $\\{i,j\\}$ in $\\mathfrak C[K](\\sigma(i),\\sigma(j))=A(\\sigma(j),\\sigma(i))$; more generally the restriction of $\\Phi$ to flags is the enriched action of $F$ on the image in $\\mathfrak C[K]$ of the corresponding flags of subsets of $\\{i,\\ldots,j\\}$. Thus these equations are exactly the enriched functor equations for $F$, the opposite on $A$ accounting for the contravariant direction.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §§1.1.5 and 2.2.1–2.2.3, explicit subset-poset and collage calculation"
+   }
+  },
+  {
+   "text": "For an edge $a:k\\to l$ of $K$, apply Steps 1 and 2 to the one-simplex $\\sigma=a$; the cone vertex is $v=2$. The generator $\\{0,1\\}$ goes to the vertex $a$ of $\\mathfrak C[K](k,l)=A(l,k)$; put $x_l=\\Phi(\\{1,2\\})\\in F(l)_0$ and $x_k=\\Phi(\\{0,2\\})\\in F(k)_0$, the values of the simplex at its two vertices. Since $\\{0,1,2\\}=\\{1,2\\}\\cup\\{0,1\\}$, the mixed composition equation gives $\\Phi(\\{0,1,2\\})=F(a)(x_l)$, where $F(a):F(l)\\to F(k)$ is the action of $a$ regarded as an arrow $l\\to k$ of $A$. The only nondegenerate edge of the mapping set from $0$ to $2$, namely $\\{0,2\\}\\subset\\{0,1,2\\}$, therefore gives an edge of the Kan complex $F(k)$ from $x_k$ to $F(a)(x_l)$. Conversely $x_k=F(a)(x_l)$ with the degenerate edge defines such a simplex. Since $Q^0=\\Delta^0$ in [lem-coef-pinched-cube-latching], the vertices of the fibres $(U_KF)_k\\cong\\operatorname{Sing}_Q F(k)$ are the vertices of $F(k)$, and the comparison $F(k)\\to\\operatorname{Sing}_QF(k)$ is the identity on vertices. Hence every lift of $a$ with target $x_l$ has source joined to $F(a)(x_l)$ by the displayed edge, and $F(a)(x_l)$ itself is the source of a lift: the lifted transport is $F(a)$ up to these specified homotopies. The same computation after product with $\\Delta^q$ (the enriched mapping complexes of [lem-coef-simplicial-right-fibration-presentation]), with $x_l$ replaced by a $q$-parameter family, gives the statement for the transport map of Kan complexes. The transpose $m_F:K^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal V}$ is defined from these same enriched maps under $\\mathfrak C[K^{\\mathrm{op}}]\\cong A$, so its edge $l\\to k$ of $K^{\\mathrm{op}}$ is the vertex $F(a)$ of $\\operatorname{Fun}(F(l),F(k))$.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-unstraightening-simplex-pointwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.1, simplex collage formula; space-valued straightening transport clause"
+   }
+  },
+  {
+   "text": "For a general $r$-simplex, a flag of nested endpoint-containing subsets is precisely a simplex of the subset-poset nerve in [lem-coef-pinched-cube-latching]. Faces and degeneracies restrict or repeat the flag, while the composite of two generators is represented by the union of their subsets. The union law is associative and unital, so the resulting homotopies identify each source value with the action on each target value and identify every iterated composite with the corresponding composite of $F$. The same restriction maps are the simplex operators in the cone formula of Step 1, so these homotopies commute with all faces and degeneracies and give the asserted coherent composition data.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §§1.1.5 and 2.2.3, subset-poset union composition and coherent nerve"
+   }
+  },
+  {
+   "text": "All constructions in Steps 1–4 are by restriction of cone functors, postcomposition with an enriched map $F\\to G$, and products with a simplicial parameter. The operator maps in the cone presentation are induced by restriction along the corresponding monotone map, and the enriched mapping complexes in [lem-coef-simplicial-right-fibration-presentation] are maps over $K$ after products with $\\Delta^q$. Consequently the edge comparison, every subset-generator homotopy, and every union-composition homotopy commute with faces, degeneracies, enriched maps, and additional simplicial parameters. This is exactly the asserted naturality.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.3, naturality of the cone construction and enriched mapping complexes"
+   }
+  },
+  {
+   "text": "Finally let $h:E\\to U_KF$ be a homotopy equivalence over $K$, that is, a map over $K$ with an inverse $g$ and homotopies $E\\times\\Delta^1\\to E$, $U_KF\\times\\Delta^1\\to U_KF$ over $K$, as in the right-fibration category $\\mathsf{RFib}(K)$ of [lem-coef-simplicial-right-fibration-presentation]. Since $F$ is objectwise Kan it is projectively fibrant; $U_K$ is right Quillen for a model structure whose fibrant objects are the right fibrations, so $U_KF\\to K$ is a right fibration, and its vertex fibres are Kan by [lem-coef-infinity-right-fibration-fibers] (also by $\\operatorname{Sing}_QF(k)$ in [lem-coef-unstraightening-simplex-pointwise]); the same node gives Kan fibres of $E$ when $E\\to K$ is a right fibration. Because $h$, $g$ and the homotopies lie over $K$, they restrict to the strict fibres over each vertex $k$ (a homotopy over $K$ maps $E_k\\times\\Delta^1$ into $E_k$), giving the induced fibre homotopy equivalences $h_k:E_k\\to(U_KF)_k$. Applying $h$ to a simplex lift in $E$ over $\\sigma$ gives a simplex of $U_KF$ over the same $\\sigma$, commuting with faces and degeneracies; its vertex values are the images under $h_k$, and Steps 2--4 compute its generator and composition homotopies. Applying $g$ and the two fibre homotopies in the same way identifies the subset-generator and union-composition comparisons for lifts in $E$ with those in $U_KF$, up to the induced fibre equivalences. This proves the final clause.",
+   "uses": [
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-unstraightening-simplex-pointwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §2.2.3, comparison of equivalent right-fibration representatives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-unstraightening-simplex-pointwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT §§1.1.5 and 2.2.1–2.2.3; explicit cone collage and subset-poset transport calculation. HTT is online only; no Stacks tag states this specialized comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "For an enriched Kan-valued presheaf, transport in its explicit cone-weight unstraightening agrees coherently with the enriched action on every simplex",
-   "results": "[{\"name\": \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_π_app\", \"module\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory\", \"type\": \"∀ (V : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} C] {J : Type u₃} [inst_3 : CategoryTheory.Category.{v₃, u₃} J]\\n  [inst_4 : CategoryTheory.EnrichedOrdinaryCategory V C] (F₁ F₂ : Categor\", \"doc\": \"For a monoidal category $\\\\mathcal{V}$, ordinary category $\\\\mathcal{C}$, small category $\\\\mathcal{J}$, and functors $F_1,F_2:\\\\mathcal{J}\\\\to\\\\mathcal{C}$, the projection of the enriched hom-functor cone \"}, {\"name\": \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom\", \"module\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory\", \"type\": \"(V : Type u₁) →\\n  [inst : CategoryTheory.Category.{v₁, u₁} V] →\\n    [inst_1 : CategoryTheory.MonoidalCategory V] →\\n      {C : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} C] →\\n          {J : Type u₃} →\\n            [inst_3 : CategoryTheory.Category.{v₃, u₃} J] →\\n              [inst_4\", \"doc\": \"The cone over the enriched hom-functor between functors $F_1$ and $F_2$ in the functor category enriched over a monoidal category $\\\\mathcal{V}$. The apex is the enriched hom-object $[F_1, F_2]_\\\\mathca\"}, {\"name\": \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject\", \"type\": \"{D : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} D] → CategoryTheory.EnrichedCategory SSet (CategoryTheory.SimplicialObject D)\", \"doc\": \"For any category $ \\\\mathcal{D} $, the category of simplicial objects in $ \\\\mathcal{D} $ is enriched over the category of simplicial sets. This means that the hom-objects between any two simplicial obj\"}, {\"name\": \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_pt\", \"module\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory\", \"type\": \"∀ (V : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} C] {J : Type u₃} [inst_3 : CategoryTheory.Category.{v₃, u₃} J]\\n  [inst_4 : CategoryTheory.EnrichedOrdinaryCategory V C] (F₁ F₂ : Categor\", \"doc\": \"Given a monoidal category $\\\\mathcal{V}$, an ordinary category $\\\\mathcal{C}$, and a small category $\\\\mathcal{J}$, for any pair of functors $F_1, F_2: \\\\mathcal{J} \\\\to \\\\mathcal{C}$, the apex of the cone \"}, {\"name\": \"CategoryTheory.SimplicialThickening.functor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"{J K : Type u} →\\n  [inst : LinearOrder J] →\\n    [inst_1 : LinearOrder K] →\\n      (J →o K) →\\n        CategoryTheory.EnrichedFunctor SSet (CategoryTheory.SimplicialThickening J)\\n          (CategoryTheory.SimplicialThickening K)\", \"doc\": \"Given an order-preserving map $ f : J \\to K $ between linearly ordered sets $ J $ and $ K $, this constructs an enriched functor from the simplicial thickening category of $ J $ to that of $ K $. The f\"}, {\"name\": \"CategoryTheory.SimplicialThickening.functor_id\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"∀ (J : Type u) [inst : LinearOrder J],\\n  CategoryTheory.SimplicialThickening.functor OrderHom.id =\\n    CategoryTheory.EnrichedFunctor.id SSet (CategoryTheory.SimplicialThickening J)\", \"doc\": \"For any linearly ordered set $ J $, the enriched functor induced by the identity order-preserving map on $ J $ is equal to the identity enriched functor on the simplicial thickening category of $ J $.\"}, {\"name\": \"CategoryTheory.SimplicialNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.SimplicialCategory C] → SSet\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a simplicial category structure (enriched over simplicial sets), the simplicial nerve is a simplicial set where each $n$-simplex corresponds to an enriched\"}, {\"name\": \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.lift\", \"module\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory\", \"type\": \"{V : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} V] →\\n    [inst_1 : CategoryTheory.MonoidalCategory V] →\\n      {C : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} C] →\\n          {J : Type u₃} →\\n            [inst_3 : CategoryTheory.Category.{v₃, u₃} J] →\\n              [inst_4\", \"doc\": \"The function constructs a morphism from the apex of a cone $ s $ to the enriched hom-object between functors $ F_1 $ and $ F_2 $, utilizing the universal property of the end (limit). This morphism fac\"}]",
+   "results": "CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_π_app, coneFunctorEnrichedHom_pt, coneFunctorEnrichedHom, isLimitConeFunctorEnrichedHom.fac, CategoryTheory.SimplicialObject.instEnrichedCategorySSet, isLimitConeFunctorEnrichedHom, isLimitConeFunctorEnrichedHom.lift, CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory; none gives the quasicategory/unstraightening comparison",
    "date": "2026-10-17",
-   "verdict": "no match: inspected returned types; ordinary categorical, model-structure or unrelated declarations do not state this explicit coherent comparison"
+   "verdict": "no match: unrelated ordinary enriched functor-category declarations only"
   },
   {
    "tool": "loogle",
    "query": "\"unstraightening\"",
-   "results": "[]",
+   "results": "no declarations",
    "date": "2026-10-17",
-   "verdict": "no match: inspected returned types; ordinary categorical, model-structure or unrelated declarations do not state this explicit coherent comparison"
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "unstraighten|straighten|coherent.*nerve",
-   "results": "[{\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"line\": \"21\", \"text\": \"The simplicial set `SSet.coherentIso` is defined as the nerve of `WalkingIso`, with\"}, {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"line\": \"143\", \"text\": \"abbrev coherentIso : SSet := nerve WalkingIso.{u}\"}, {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"14\", \"text\": \"This file defines the simplicial nerve (sometimes called homotopy coherent nerve) of a simplicial\"}]",
+   "query": "unstraighten|straighten|coherent.*nerve [Mathlib/]",
+   "results": "0 hits",
    "date": "2026-10-17",
-   "verdict": "no match: inspected returned types; ordinary categorical, model-structure or unrelated declarations do not state this explicit coherent comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Compute the edge lifts and higher coherences of a right fibration obtained by simplicial unstraightening",
-   "results": "[{\"name\": \"SSet.Truncated.liftOfStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X Y : SSet.Truncated 2} →\\n  (f₀ :\\n      X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n        Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ })) →\\n    (f₁ :\\n        X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ })\", \"doc\": \"A natural transformation between 2-truncated simplicial sets $ X $ and $ Y $, constructed by lifting maps between 0-simplices, 1-simplices, and 2-simplices that satisfy coherence conditions with face \"}, {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{i n : ℕ} →\\n  (SimplexCategory.mk i ⟶ SimplexCategory.mk n) →\\n    autoParam (i ≤ 2) SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂._auto_1 →\\n      CategoryTheory.StructuredArrow (Opposite.op (SimplexCategory.mk n)) (SimplexCategory.Truncated.inclusion 2).op\", \"doc\": \"For natural numbers $i,n$ with $i \\\\leq 2$, given a morphism $[i] \\\\to [n]$ in the simplex category $\\\\Delta$, this constructs a structured arrow in the comma category formed by the opposite of the inclu\"}, {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{X : SSet} →\\n  X.StrictSegal →\\n    {n : ℕ} →\\n      (s :\\n          CategoryTheory.Limits.Cone\\n            ((CategoryTheory.StructuredArrow.proj (Opposite.op (SimplexCategory.mk n))\\n                  (SimplexCategory.Truncated.inclusion 2).op).comp\\n              ((SimplexCategory.Truncated.inclusion 2\", \"doc\": \"Given a strict Segal space $ X $, a natural number $ n $, and a cone $ s $ over a diagram involving the truncated simplex category $ \\\\Delta_{\\\\leq 2} $, this function constructs an $ n $-simplex in $ X\"}, {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}, {\"name\": \"SSet.Truncated.liftOfStrictSegal.app\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X Y : SSet.Truncated 2} →\\n  (f₀ :\\n      X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n        Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ })) →\\n    (f₁ :\\n        X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ })\", \"doc\": \"For each object $ n $ in the opposite category of the 2-truncated simplex category $ \\\\Delta_{\\\\leq 2}^\\\\text{op} $, this function constructs a morphism $ X(n) \\\\to Y(n) $ by case analysis on $ n = 0, 1, \"}, {\"name\": \"SSet.StrictSegal.isRightKanExtension\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal),\\n  CategoryTheory.Functor.IsRightKanExtension X\\n    (CategoryTheory.CategoryStruct.id ((SimplexCategory.Truncated.inclusion 2).op.comp X))\", \"doc\": \"For a strict Segal space $ X $, the simplicial set $ X $ is the right Kan extension of the composition of the opposite of the inclusion functor $ \\\\Delta_{\\\\leq 2} \\\\to \\\\Delta $ with $ X $. This characte\"}, {\"name\": \"SSet.Truncated.liftOfStrictSegal.f₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X Y : SSet.Truncated 2} →\\n  (f₀ :\\n      X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n        Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ })) →\\n    (f₁ :\\n        X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ })\", \"doc\": \"The function $ f_2 $ constructs a 2-simplex in the target simplicial set $ Y $ by applying the inverse of the spine-path equivalence to a concatenated path formed from images of 1-simplices under $ f_\"}, {\"name\": \"SSet.Truncated.liftOfStrictSegal_app_1\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  (f₀ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n      Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ }))\\n  (f₁ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ }) →\\n      Y.o\", \"doc\": \"The component of the natural transformation between 2-truncated simplicial sets $ X $ and $ Y $, constructed via strict Segal conditions, evaluates to the map $ f_1 $ on 1-simplices. Specifically, whe\"}]",
-   "date": "2026-10-17",
-   "verdict": "no match: inspected returned types; ordinary categorical, model-structure or unrelated declarations do not state this explicit coherent comparison"
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Transport in cone weight unstraightening of an enriched Kan valued presheaf agrees with its enriched action on simplices",
-   "results": "8 hits; recorded top names: CategoryTheory.instEnrichedCategoryTransportEnrichment, CategoryTheory.TransportEnrichment, CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom, CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory, CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv, CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor_obj, CategoryTheory.Functor.isLimitConeOfIsRightKanExtension, CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom",
+   "results": "CategoryTheory.instEnrichedCategoryTransportEnrichment, CategoryTheory.TransportEnrichment, CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom, CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory, CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv, CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor_obj, CategoryTheory.Functor.isLimitConeOfIsRightKanExtension, CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary enriched functor categories, model-category interfaces or ordinary Kan extension results; none states the specified quasicategory/coherent-nerve comparison"
+   "verdict": "no match: no specified coherent unstraightening comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute edge lifts and higher coherences of a right fibration obtained by simplicial unstraightening",
+   "results": "SSet.Truncated.liftOfStrictSegal, liftOfStrictSegal.f₂, liftOfStrictSegal.app, StrictSegal.isPointwiseRightKanExtensionAt.lift, liftOfStrictSegal.hσ'₀, StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂, liftOfStrictSegal.hσ'₁, liftOfStrictSegal_app_1; none is unstraightening transport",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Truncated.liftOfStrictSegal, CategoryTheory.SimplicialNerve",
+   "results": "no declarations",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Fun.*simplicial|SimplicialNerve|StrictSegal Mathlib/AlgebraicTopology",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compute the edge lifts and higher coherences of a right fibration obtained by simplicial unstraightening",
+   "results": "CategoryTheory.Functor.liftOfIsRightKanExtension.congr_simp, SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration, SSet.modelCategoryQuillen.instCategoryWithFibrations, SSet.Truncated.liftOfStrictSegal.hδ'₁, CategoryTheory.Bicategory.RightLift.IsKan, SSet.modelCategoryQuillen.fibrations_eq, CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension, CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift; none states the item",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-right-fibration-section-limit",
@@ -84,5 +187,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-unstraightening-simplex-transport",
+  "worker": "stage1",
+  "summary": "Split the explicit simplex-transport comparison into six complete steps. The cone presentation supplies simplex maps and fibers; the independent subset-poset realization supplies generator homotopies and union composition; the enriched transpose identifies the edge map with F(a); naturality follows from restriction and enriched mapping complexes; and right-fibration fiber equivalences transport the calculation to a homotopy-equivalent representative. No new node was created because each non-elementary input is already stated by an existing node. The source is HTT §§1.1.5 and 2.2.1–2.2.3, read online; no exact Lean declaration or Mathlib theorem exists.",
+  "blueprint": "Realizes the returned Step 3 subset-generator transport calculation in the proof ancestry of prop-coef-integral-exceptional-adjoint, using the explicit cone formula and HTT §§2.2.1–2.2.3."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-a778b3c17",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-a778b3c17 (reviewer sub-agent of L); spot-checked: I read the item, its statement and all six steps, every cited node statement (simplicial-right-fibration-presentation, unstraightening-simplex-pointwise, pinched-cube-latching, infinity-right-fibration-fibers, def-coef-infinity-category-of-spaces), the citer lem-coef-right-fibration-section-limit, and the HTT §§1.1.5 and 2.2.1–2.2.3 constructions. All cited nodes are in unit sk-prop-sf-biduality-general, so there are no tool_uses. No new nodes. The DAG search (cone-weight, T_sigma, subset-generator, transport with U_K) found no duplicate; the nearest are fiber-comparison, cone-straightening-coherent-evaluation and homotopy-descent, and none states the explicit transport. This is not a target, so no base-change morphism or coefficient category is involved. The statement is true. Checked on the edge case: in C[Delta^2] the mapping set from 0 to v is N({0,2} in {0,1,2}); Phi{0,1,2} = F(a)(x_l) by union and collage composition; Phi{0,2} = x_k is joined to it by a specified edge. With Q^0 = Delta^0 the fibre vertices are F(k)_0. Also checked r=0, the identity edge, an empty fibre, and the transpose. One repaired fault (E5-type): Step 3 claimed the source value is exactly F(a) of the target value, but that holds only for the generator {0,1,2}, not the source vertex {0,2}; and Step 2's 'restrictions at the endpoints are the two fiber values' was wrong. I rewrote Steps 2 and 3 with the explicit computation, including that F(a)(x_l) is realized by a lift. In Step 6 I made the homotopy equivalence over K explicit and derived that U_K F is a right fibration (F objectwise Kan, so projectively fibrant; U_K is right Quillen; fibrant objects are right fibrations). The fixed file in fixes/ changes only proof text and step uses, all within the existing proof_deps.; 1 file(s) fixed by the reviewer"
  }
 }

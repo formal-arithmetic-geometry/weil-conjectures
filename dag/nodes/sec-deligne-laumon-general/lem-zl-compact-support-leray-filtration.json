@@ -16,9 +16,129 @@
   "def-weil-constructible-heart",
   "def-weil-integral-rational-qbar-compact-support"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the underlying common-stage triangulated categories, not in a purported triangulated category of Weil pairs. Their constructible hearts are abelian by [def-weil-constructible-heart]. By [prop-constructible-truncations], geometric Frobenius pullback $Lg^*$ commutes with truncation and cohomology, so it preserves the heart. By [lem-weil-isomorphism-derived-pullback] it is, on integral representatives, the termwise inverse image along the automorphism $g$, an exact functor of complexes with inverse the termwise inverse image along $g^{-1}$; rationalization and the common-stage prescription of [def-weil-derived-pullback-tensor-hom] keep this. Hence $Lg^*$ is an exact autoequivalence of the triangulated category commuting with shifts, and it restricts to an exact equivalence of each heart. The category of its fixed pairs is abelian as well: for an equivariant map take its kernel and cokernel in the underlying heart; applying the exact equivalence carries each to the kernel or cokernel of the pulled-back map, and their universal properties induce invertible Frobenius structures. The same universal properties give the induced maps. Thus kernels, cokernels and images are computed in the underlying heart, and exactness is detected there. These are precisely the constructible Weil sheaves of [def-weil-weil-sheaf-complex].",
+   "uses": [
+    "def-weil-constructible-heart",
+    "prop-constructible-truncations",
+    "def-weil-weil-sheaf-complex",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.proof.md",
+    "place": "First paragraph: spectral sequence of Weil sheaves; the abelian category used for all terms."
+   }
+  },
+  {
+   "text": "Put $K=Rh_!\\mathcal F$ and $T=Rg_!$ on the geometric fibers. Apply [lem-zl-field-shriek-lower-bound] to $h$ and $g$: $K$ is bounded constructible with $\\mathcal H^b(K)=0$ for $b<0$, and $T$ is triangulated, preserves bounded constructibility, and preserves every lower cohomological bound. The finite-type and quasi-separated hypotheses hold for $X_0$ as well: finite type follows by composing $h$ with $Z_0\\to\\operatorname{Spec}k_0$, and quasi-separatedness follows by composing the separated map $h$ with the quasi-separated structure map of $Z_0$. These properties pass to geometric fibers. By [lem-fix-weil-operations], $K$ and its subsequent compact-support images carry their natural Weil structures. All constructions below take place in the underlying common-stage categories with these structures retained. Here finite-type composition and base change are [lem-sfb-finite-type-composition-base-change], separated finite-type base change is [lem-pod-separated-finite-type-base-change], and quasi-separated source/base-change permanence is [lem-weil-pbc-qcqs-morphism-permanence](2),(3); a separated morphism is quasi-separated because its diagonal is a closed immersion and hence quasi-compact.",
+   "uses": [
+    "lem-zl-field-shriek-lower-bound",
+    "lem-fix-weil-operations",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.proof.md",
+    "place": "First paragraph: K=Rh_!F is bounded constructible, and T=Rg_! is exact."
+   }
+  },
+  {
+   "text": "For every integer $b$, let $K_b=\\tau^{\\le b}K$. The truncation properties in [prop-constructible-truncations] and [lem-weil-heart-short-exact-triangles](1) identify the successive truncation triangle as $K_{b-1}\\to K_b\\to\\mathcal H^b(K)[-b]\\to K_{b-1}[1]$. Apply the triangulated functor $T$ from [lem-zl-field-shriek-lower-bound], then the cohomological functors of [lem-weil-heart-short-exact-triangles](5). Define $D^{a,b}=\\mathcal H^{a+b}(TK_b)$ and $E^{a,b}=\\mathcal H^{a+b}(T(\\mathcal H^b(K)[-b]))$. The inclusion maps, projection maps and boundary maps give respectively $\\alpha:D^{a,b}\\to D^{a-1,b+1}$, $g:D^{a,b}\\to E^{a,b}$ and $f:E^{a,b}\\to D^{a+2,b-1}$. The three consecutive portions of the long exact sequences give exactly the three image-kernel equalities of [def-sp-exact-couple]. This constructs a type-zero exact couple. Truncation and cohomology commute with Frobenius by [prop-constructible-truncations], so $K_b$, $\\mathcal H^b(K)[-b]$ (with the shifted structure) inherit Weil structures. Since $Lg^*$ is triangulated (step 1), it carries the truncation triangle of $K$ to a triangle with terms in the same truncation ranges; by the uniqueness in [lem-weil-heart-short-exact-triangles](1) it is the truncation triangle of $Lg^*K$, and the Weil structure of $K$ induces the unique isomorphism of triangles, so all three maps, including the boundary $\\mathcal H^b(K)[-b]\\to K_{b-1}[1]$, are maps of Weil complexes. Applying $T$ preserves this for the first two maps and for $T$ of the boundary by [lem-fix-weil-operations]; the shift comparison $T(K_{b-1}[1])\\simeq(TK_{b-1})[1]$ used to form the image triangle is a map of Weil complexes by [lem-zl-weil-shriek-shift-compatibility]. Hence $\\alpha$, $g$ and $f$ are equivariant. Exactness in the Weil heart follows from step 1.",
+   "uses": [
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-zl-field-shriek-lower-bound",
+    "def-sp-exact-couple",
+    "lem-fix-weil-operations",
+    "lem-zl-weil-shriek-shift-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.proof.md",
+    "place": "First paragraph: construct the Frobenius-equivariant truncation exact couple (E starts at page 2)."
+   }
+  },
+  {
+   "text": "The shift comparison in [lem-zl-field-shriek-lower-bound] gives $E_2^{a,b}=E^{a,b}\\simeq\\mathcal H^a(T\\mathcal H^b(K))=R^ag_!(R^bh_!\\mathcal F)$, an isomorphism of Weil sheaves by [lem-zl-weil-shriek-shift-compatibility]. If $b<0$ then $K_b=0$ and $\\mathcal H^b(K)=0$, so $D^{a,b}=E_2^{a,b}=0$. If $a<0$ then $T\\mathcal H^b(K)$ has zero cohomology in degree $a$, by preservation of the lower bound zero. Consequently $D^{a,b}=0$ for $b<0$ and $E_2^{a,b}=0$ outside the first quadrant. The derived-couple theorem [lem-sp-derived-couple-exact](4) now supplies every later page in the same abelian Weil heart, with $d_r$ of bidegree $(r,1-r)$ and $E_{r+1}=\\ker d_r/\\operatorname{im}d_r$.",
+   "uses": [
+    "lem-zl-field-shriek-lower-bound",
+    "lem-sp-derived-couple-exact",
+    "lem-zl-weil-shriek-shift-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.proof.md",
+    "place": "First paragraph: identify the E_2 page and verify the first-quadrant hypotheses."
+   }
+  },
+  {
+   "text": "Apply [thm-sp-half-plane-convergence] with lower bound zero to this exact couple. For each $n\\ge0$ it supplies a finite decreasing filtration of $A^n=D^{0,n}=\\mathcal H^n(T\\tau^{\\le n}K)$ whose graded pieces are $E_\\infty^{a,b}$, $a+b=n$, $0\\le a,b\\le n$; the filtration is top for $a\\le0$ and zero for $a\\ge n+1$, because its defining image then comes from $D^{a,n-a}=0$. Each diagonal entry has stabilized by $r=n+2$. To identify the actual abutment, the triangle $\\tau^{\\le n}K\\to K\\to\\tau^{\\ge n+1}K\\to$ and [lem-zl-field-shriek-lower-bound] show that $T\\tau^{\\ge n+1}K$ has no cohomology below $n+1$. The long exact sequence of [lem-weil-heart-short-exact-triangles](5) therefore makes $c_n:\\mathcal H^n(T\\tau^{\\le n}K)\\to\\mathcal H^n(TK)$ an isomorphism: the adjacent degree $n-1$ and $n$ cohomology groups of the third term are zero. Transport the filtration through this canonical Weil isomorphism.",
+   "uses": [
+    "thm-sp-half-plane-convergence",
+    "lem-zl-field-shriek-lower-bound",
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.proof.md",
+    "place": "First paragraph: convergence and the finite filtration of the actual abutment."
+   }
+  },
+  {
+   "text": "Use the initial-page cycle and boundary subobjects in [def-sp-convergence]: $E_r^{a,b}=Z_r^{a,b}/B_r^{a,b}$, with $Z_r^{a,b}\\hookrightarrow E_2^{a,b}$. These objects are formed by finitely many kernels, images and inverse images in the abelian Weil heart of step 1. At $r=n+2$, convergence in [thm-sp-half-plane-convergence] identifies this quotient with $E_\\infty^{a,b}$ for every $a+b=n$. Hence put $S^{a,b}=Z_{n+2}^{a,b}$. Its subobject inclusion into $E_2^{a,b}$ is a monomorphism of constructible Weil sheaves, and the quotient projection $S^{a,b}\\twoheadrightarrow E_\\infty^{a,b}$ is an epimorphism of them. This gives a single subobject of the initial page, rather than merely an iterated assertion about successive subquotients.",
+   "uses": [
+    "def-sp-convergence",
+    "thm-sp-half-plane-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.proof.md",
+    "place": "Second paragraph: limiting terms are quotients of subobjects of E_2."
+   }
+  },
+  {
+   "text": "The natural composition isomorphism of [lem-zl-field-shriek-composition-qcqs] applies to the geometric fibers of $h,g$ with the quasi-separated finite-type hypotheses checked in step 2. Its composition comparison is Frobenius-equivariant by the composition-comparison clause of [lem-fix-weil-operations]. It therefore identifies $\\mathcal H^n(TK)$ with $R^n(gh)_!\\mathcal F$ as Weil sheaves. Transport the decreasing filtration $F^a$ of step 5 through this isomorphism and set $m=n+1$, $G_j=F^{n+1-j}$ for $0\\le j\\le n+1$. Then $G_0=0$, $G_m=R^n(gh)_!\\mathcal F$, and $G_j/G_{j-1}\\simeq E_\\infty^{n+1-j,j-1}$. For $1\\le j\\le m$ take $a_j=n+1-j$, $b_j=j-1$ and $S_j=S^{a_j,b_j}$ from step 6. The inclusion and quotient projection there, followed by this graded-piece isomorphism, are exactly the required monomorphism and epimorphism. Both indices are nonnegative and sum to $n$. Every object and map was constructed in the Weil heart. No weight or mixedness condition entered the argument.",
+   "uses": [
+    "lem-zl-field-shriek-composition-qcqs",
+    "lem-fix-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.proof.md",
+    "place": "First sentence and second paragraph: composition identifies the abutment; reindex its filtration to the required increasing chain."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-heart",
+  "prop-constructible-truncations",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-zl-field-shriek-lower-bound",
+  "lem-fix-weil-operations",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-heart-short-exact-triangles",
+  "def-sp-exact-couple",
+  "lem-zl-weil-shriek-shift-compatibility",
+  "lem-sp-derived-couple-exact",
+  "thm-sp-half-plane-convergence",
+  "def-sp-convergence",
+  "lem-zl-field-shriek-composition-qcqs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-composition/lem-zl-composition-weight-bound.proof.md",
+  "place": "First paragraph and second paragraph through the abutment filtration; exact-couple realization using general half-plane convergence, with coefficient-domain gaps exposed as new nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +181,45 @@
    "results": "8 hits: DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyGE. Hits concern ordinary module pushforwards, Grothendieck abelian categories or derived-category t-structures; none supplies compact-support Weil Leray filtrations or weight estimates.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support Leray spectral sequence of Weil sheaves yields a finite filtration by subquotients of its second page",
+   "results": "8 hits: IsFiltration.casesOn, hasCompactSupport_iff_eventuallyEq, IsFiltration.F_lt_le_F, IsFiltration.rec, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, Ideal.Filtration.casesOn, HomologicalComplex.instIsStrictlySupportedTruncLE_1",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariant compact support Leray finite filtration by subquotients of the terms R a g shriek R b h shriek",
+   "results": "8 hits: localCohomology.diagram, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, Condensed.profiniteSolid, CompHausLike.LocallyConstantModule.functor, Condensed.finFree, localCohomology, CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible l-adic complex with Weil action has a compact support hypercohomology spectral sequence with finite abutment filtration",
+   "results": "8 hits: DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, CochainComplex.cm5b, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.isLE_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\"",
+   "results": "12 hits: ComplexShape.spectralSequenceNat, ComplexShape.spectralSequenceFin, ComplexShape.spectralSequenceNat_rel_iff, ComplexShape.spectralSequenceFin_rel_iff, CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore, CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore.deg, CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore.i₁, CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore.i₂",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|higherLowerShriek|exists_filtration",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-composition-weight-bound",
@@ -102,5 +257,69 @@
    "state": "sorry_here",
    "note": "Open candidate, not an exact attachment: the source declaration uses the concrete pro-etale AdicSheaf Weil category (WeilSheaf/Category.lean:131-175) and its compactification-derived lower shriek (WeilSheaf/LowerShriek.lean:150-176). This node uses the common-stage coefficient heart. An equivalence respecting higher compact-support images and Weil structures is required before identifying these formulations. The blueprint proof is the mathematical source of this statement; this candidate is not proof or comparison evidence."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-compact-support-leray-filtration",
+  "worker": "stage1",
+  "summary": "Built the Frobenius-equivariant truncation exact couple in the underlying common-stage triangulated categories and their fixed-pair hearts; checked quadrant, canonical abutment identification, stabilized initial-page subobjects and increasing filtration indices. Exposed the field-coefficient lower-bound and qcqs composition obligations; did not misapply ordinary-etale hypercohomology or impose separated structure morphisms. Statement unchanged. Maintainer reader (Q54 review): added the statement-only node lem-zl-weil-shriek-shift-compatibility for the Frobenius compatibility of the boundary maps and E_2 identification, and cited lem-weil-isomorphism-derived-pullback for exactness of Frobenius pullback on the heart.",
+  "blueprint": "lem-zl-composition-weight-bound.proof.md first paragraph (composition, truncation hypercohomology, finite abutment filtration) and second paragraph through the subquotient assertion, with no weight argument.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Canonical compact-support Weil structures and equivariant composition comparisons; no operation-equivariance statement belongs to this unit."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Standard bounded t-structure on the actual field coefficient categories and its automorphism compatibility."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic t-structure truncation and cohomological-functor theorem, used to produce the exact couple."
+   },
+   {
+    "node": "lem-sp-derived-couple-exact",
+    "why": "Generic abelian exact-couple iteration; implements the prescribed Leray route."
+   },
+   {
+    "node": "thm-sp-half-plane-convergence",
+    "why": "Generic exact-couple convergence for the first quadrant, not the ordinary-etale specialization."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Scheme-property permanence used only to check the hypotheses on geometric fibers; a generic tool, not a replacement of the Leray route."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Scheme-property permanence used only to check the hypotheses on geometric fibers; a generic tool, not a replacement of the Leray route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Scheme-property permanence used only to check the hypotheses on geometric fibers; a generic tool, not a replacement of the Leray route."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Frobenius pullback along an automorphism is termwise inverse image, hence an exact autoequivalence; a generic operation fact, not part of the Leray route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-weil-operations",
+  "prop-constructible-truncations",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-sp-derived-couple-exact",
+  "thm-sp-half-plane-convergence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-isomorphism-derived-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-491796799",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-491796799 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the blueprint ancestor and unit, and the sources: Stacks 0F7J and 0G2A(3) in more-etale.tex, and Bhatt–Scholze Def 6.7.6 and Lemma 6.7.7. The statement is unchanged and keeps the qs, nonseparated generality. The exact-couple bidegrees and exactness check out against def-sp-exact-couple. The quadrant vanishing, the half-plane convergence with lower bound 0, the abutment isomorphism c_n, stabilization at r=n+2 and the reindexing G_j=F^{n+1-j} are all correct. The departure from def-weil-pbc-hypercohomology-filtrations and lemma-weil-pbc-hypercohomology-convergence is justified: both are stated for Rf_* of abelian étale complexes. Both new nodes are true and are not duplicates. lem-zl-shriek-composition and prop-functor-package assume separated schemes, thm-sf-comp-composition is finite-level only, and the completed forms in fix-lem-exchanges appear only in its proof. Fixes: (1) E5: the boundary maps and the E_2 identification need the Weil structure of Rf_! to commute with shifts, and no node states this. I added the statement-only node lem-zl-weil-shriek-shift-compatibility, cited it in steps 3 and 4, and wrote out why the truncation triangle is equivariant. (2) C4: step 1 relied on prop-constructible-truncations for Lg^* being an equivalence, which that node does not state. Step 1 now cites lem-weil-isomorphism-derived-pullback and def-weil-derived-pullback-tensor-hom and is marked non-elementary. (3) Form: added merged_into and lean_audit to both delivered new nodes. Batch-5 check: lem-fix-weil-operations reaches lem-pod-integral-pullback-composition, which is general pullback-composition coherence. Neither nt-assume-poincare-duality nor nt-assume-trace-formula gives it, and the step is not part of either proof, so the citation is outside the assumed statements and is accepted. Accepted tool uses: lem-fix-weil-operations, prop-constructible-truncations, lem-weil-heart-short-exact-triangles, lem-sp-derived-couple-exact, thm-sp-half-plane-convergence, lem-weil-isomorphism-derived-pullback.; 4 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }

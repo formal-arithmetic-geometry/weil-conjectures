@@ -17,147 +17,179 @@
   "def-weil-open-immersion",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The schemes $U,X$ are separated and finite type over $k$. Since every ideal of the field $k$ is zero or the whole field, $\\operatorname{Spec}k$ is Noetherian; [lem-weil-pbc-finite-type-over-noetherian] makes $U,X$ Noetherian. They are qcqs by [lem-weil-pbc-qcqs-over-affine], and $j$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1). These are exactly the Noetherian and qcqs hypotheses used below.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/sk-prop-open-coefficients.proof.md",
+    "place": "Standing setting; hypotheses for the integral criterion, generators and bounded continuity"
+   }
+  },
+  {
+   "text": "The hypothesis $K\\in\\Dbc(U,\\Lambda)$ is already the finite-constant-local-model category defined in [sk-def-sfb-constructible], so [sk-lem-integral-models](4) applies directly to this $K$ (this is the needed input direction, rather than an implication from the weaker locally-finitely-presented predicate). It gives, for $\\Lambda=E$, a finite construction by cones and shifts from $C=(a_!L_0)[1/\\ell]$. For $\\Lambda=\\overline{\\mathbf Q}_\\ell$ the same clause gives such a construction from $\\overline{\\mathbf Q}_{\\ell,U}\\otimes^{\\mathbf L}_{\\mathcal O_{E',U}}a_!L_0$ for some finite $E'\\subset\\overline{\\mathbf Q}_\\ell$. For each generator put $L=a_!L_0$. The same cited clause gives $L\\in\\Dbc(U,\\mathcal O_{E'})$. The integral open-image theorem [det-thm-sf-pf-adic-open] therefore gives $M=Rj_*L\\in\\Dbc(X,\\mathcal O_{E'})$. Its hypotheses hold for this same $j$ and for every finite $E'$. This is the integral paragraph of the source, already stated as a strictly smaller existing lemma. No conversion of the input $K$ to general ring-object constructibility is used.",
+   "uses": [
+    "sk-lem-integral-models",
+    "sk-def-sfb-constructible",
+    "det-thm-sf-pf-adic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/sk-prop-open-coefficients.proof.md",
+    "place": "Integral coefficients paragraph and rational paragraph: integral images of the generators of sk-lem-integral-models(4)"
+   }
+  },
+  {
+   "text": "Fix one such integral generator and write $E$ for its finite coefficient field. The localization [det-prop-sfb-qlbar-colimit-x-invert-ell] identifies $E_T=\\mathcal O_{E,T}[1/\\ell]$ and makes this extension flat, for $T=U,X$. Thus $C=E_U\\otimes^{\\mathbf L}L$ is the sheafwise localization telescope $L\\xrightarrow{\\ell}L\\to\\cdots$; this follows by tensoring the localization cocone, since tensor is a left adjoint [sk-def-sfb-derived-tensor-hom, lem-weil-pbc-left-adjoint-preserves-colimits]. Choose a bounded-below representative of the bounded $L$ and use the same representative at every stage. The common lower bound and qcqs $j$ permit [lem-weil-pbc-condensed-qcqs-pushforward-continuity] at fixed $\\mathcal O_E$ coefficients. Its canonical cohomology comparisons give $E_X\\otimes^{\\mathbf L}M\\simeq Rj_*C$. For the coefficient action use [lem-weil-pbc-ring-sheaf-change-adjunction]: restriction commutes with derived direct image and reflects isomorphisms. Its coefficient square is supplied by [sk-prop-sfb-cartesian-coefficients] and [sk-def-sfb-coefficient-change]. The telescope comparison respects scalar multiplication at every stage, so this is an $E_X$-linear isomorphism.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-coefficient-change",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/sk-prop-open-coefficients.proof.md",
+    "place": "Rational paragraph, first sentence: invert ell by a uniformly bounded-below telescope and commute it with direct image"
+   }
+  },
+  {
+   "text": "The extension $E_T\\otimes^{\\mathbf L}_{\\mathcal O_{E,T}}N$ is bounded with finite constant local models whenever $N\\in\\Dbc(T,\\mathcal O_E)$, for $T=U,X$. Indeed flatness from [det-prop-sfb-qlbar-colimit-x-invert-ell] and [lem-sfb-extend-scalars-preserves-homology] identify its degree-$q$ cohomology with $E_T\\otimes H^q(N)$ and preserve the same vanishing interval. On any stratum and local-model cover of [sk-def-sfb-constructible], tensor the scalar finite presentation matrix with $E$. It is still a finite matrix with entries in the scalar ring $E$, so it is exactly a finite constant local model over $E_T$. Restrictions commute with coefficient extension by [det-prop-scalar-six-pullback](1). In particular both $C$ and the extension of $M$ in step 3 are in their finite-constant-model $\\Dbc$ categories. This proves the required image claim for every $E$-generator.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "lem-sfb-extend-scalars-preserves-homology",
+    "sk-def-sfb-constructible",
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/sk-prop-open-coefficients.proof.md",
+    "place": "Rational paragraph: the images of rationalized integral generators lie in Dbc(X,E)"
+   }
+  },
+  {
+   "text": "For each finite $F/E$, choose an $E$-basis of $F$. By [sk-prop-sfb-cartesian-coefficients](2), it gives $F_T\\simeq E_T^{\\oplus r}$, compatibly for $T=U,X$ by part (1). By [lem-sfb-subfield-flat], extension to $F$ is exact. After restriction to $E$, $F_T\\otimes C$ is consequently $C^{\\oplus r}$. The additive triangulated functor $Rj_*$ [lem-pc-right-derived-functor-triangulated] sends this to $(Rj_*C)^{\\oplus r}$. Thus $F_X\\otimes^{\\mathbf L}_{E_X}Rj_*C\\simeq Rj_*(F_U\\otimes^{\\mathbf L}_{E_U}C)$. This finite-sum map is $F$-linear: multiplication by any $b\\in F$ is its basis matrix over $E$, and the $E$-linear derived module direct image [sk-def-sfb-module-derived-pushpull] sends that matrix to the same matrix. A change of basis or inclusion $F\\hookrightarrow F'$ is also an $E$-linear matrix, so the comparisons commute with both. Exact scalar restriction and its derived direct-image comparison [lem-weil-pbc-ring-sheaf-change-adjunction] give the asserted comparisons in the coefficient categories. This is only the finite-sum calculation, not a use of a general direct-image constructibility theorem.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-subfield-flat",
+    "lem-pc-right-derived-functor-triangulated",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/sk-prop-open-coefficients.proof.md",
+    "place": "Rational paragraph, second sentence: the compatible finite-extension stages of extension to Qlbar"
+   }
+  },
+  {
+   "text": "By [sk-prop-sfb-qlbar-colimit-x], $\\overline{\\mathbf Q}_{\\ell,T}=\\varinjlim_{F\\supset E}F_T$. Use the small filtered poset of finite subextensions of the fixed algebraic closure. The tensor-colimit and tensor-transitivity assertions of [lem-weil-pbc-condensed-flat-coefficient-calculus] identify the scalar extension of $C$ with $\\varinjlim_{F\\supset E}(F_U\\otimes_{E_U}C)$ ; [det-prop-scalar-six-pullback](3) further identifies it with $\\overline{\\mathbf Q}_{\\ell,U}\\otimes^{\\mathbf L}_{\\mathcal O_{E,U}}L$. All finite stages have the same cohomological lower bound as $C$, by [lem-sfb-subfield-flat]. Choose bounded-below representatives using these exact tensor functors. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] in the fixed $E_U$-module category and use the compatible comparisons of step 5. It gives\n$$Rj_*(\\overline{\\mathbf Q}_{\\ell,U}\\otimes^{\\mathbf L}_{E_U}C)\\simeq\\overline{\\mathbf Q}_{\\ell,X}\\otimes^{\\mathbf L}_{E_X}Rj_*C.$$\nThe comparison is linear for each finite $F$ and hence for their sheaf colimit. As in step 3, [lem-weil-pbc-ring-sheaf-change-adjunction] transfers the fixed-coefficient calculation to the $\\overline{\\mathbf Q}_\\ell$ direct image and reflects the isomorphism.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-sfb-subfield-flat",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/sk-prop-open-coefficients.proof.md",
+    "place": "Rational paragraph, second and third sentences: bounded continuity over the finite subextensions"
+   }
+  },
+  {
+   "text": "In step 6, $Rj_*C$ has the finite constant local models proved in step 4. Extension from $E_X$ to $\\overline{\\mathbf Q}_{\\ell,X}$ is flat by [lem-sfb-qlbar-flat]. By [lem-sfb-extend-scalars-preserves-homology], it preserves cohomology and the same finite vanishing interval. On a stratum and local-model cover, its cohomology is presented by the same scalar finite matrix, now with entries mapped from $E$ to $\\overline{\\mathbf Q}_\\ell$. Restrictions commute with this extension by [det-prop-scalar-six-pullback](1). This is a finite constant local model as defined by [sk-def-sfb-constructible], so the output lies in $\\Dbc(X,\\overline{\\mathbf Q}_\\ell)$. Together with tensor transitivity in step 6, this proves the image claim for every algebraic-closure generator of step 2.",
+   "uses": [
+    "lem-sfb-qlbar-flat",
+    "lem-sfb-extend-scalars-preserves-homology",
+    "det-prop-scalar-six-pullback",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/sk-prop-open-coefficients.proof.md",
+    "place": "Rational paragraph: images of the algebraic-closure integral generators have bounded constructible cohomology"
+   }
+  },
+  {
+   "text": "Return to the finite construction of $K$ in step 2. The functor $Rj_*$ commutes with shifts and distinguished triangles by [lem-pc-right-derived-functor-triangulated]. The target finite-constant-model category contains zero, is invariant under isomorphism and shifts, and is closed under taking the third vertex of a triangle by [det-cor-coefficient-heart-ii-triangulated], applied on the Noetherian $X$. Induct on the finite list of shifts and cones constructing $K$. The generator case was proved in step 4 for $E$ and in step 7 for $\\overline{\\mathbf Q}_\\ell$; the shift and cone cases follow from the two cited statements. Therefore $Rj_*K\\in\\Dbc(X,\\Lambda)$ for either coefficient choice.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "det-cor-coefficient-heart-ii-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/sk-prop-open-coefficients.proof.md",
+    "place": "Rational paragraph, final two sentences: finite generation and triangulated closure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-cor-coefficient-heart-ii-triangulated",
+  "det-prop-scalar-six-pullback",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "det-thm-sf-pf-adic-open",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-extend-scalars-preserves-homology",
+  "lem-sfb-qlbar-flat",
+  "lem-sfb-subfield-flat",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-lem-integral-models",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/sk-prop-open-coefficients.proof.md",
+  "place": "Integral and rational paragraphs, expanded via existing integral open-image, integral generators, bounded continuity, explicit finite-sum coefficient comparisons and finite-constant-model matrices"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "proetale|ellAdicSheaf|[Cc]onstructible",
-   "results": {
-    "hits": 10,
-    "top": [
-     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
-     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
-     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
-     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
-     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
-     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
-     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
-     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean"
-    ],
-    "note": "",
-    "subdirectory": "AlgebraicGeometry/Sites"
-   },
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "constructible|[Ll]isse|[Dd]irectImage",
-   "results": {
-    "hits": 0,
-    "top": [],
-    "note": "",
-    "subdirectory": "AlgebraicGeometry/Sites"
-   },
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "Rj_|boundedConstructible|[Cc]onstructible.*[Ss]heaf",
-   "results": {
-    "hits": 25,
-    "top": [
-     "Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean",
-     "Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean",
-     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean",
-     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean",
-     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean",
-     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean",
-     "Mathlib/Algebra/Lie/Engel.lean",
-     "Mathlib/Algebra/Lie/Engel.lean"
-    ],
-    "note": "",
-    "subdirectory": ""
-   },
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived pushforward by an open immersion preserves bounded complexes stratified locally free over continuous l-adic field coefficient sheaves",
-   "results": {
-    "hits": 8,
-    "top": [
-     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
-     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion",
-     "AlgebraicGeometry.Scheme.Modules.instFullPushforward",
-     "AlgebraicGeometry.IsOpenImmersion",
-     "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom",
-     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso",
-     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor",
-     "AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward"
-    ],
-    "note": "",
-    "subdirectory": ""
-   },
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory, AlgebraicGeometry.Scheme",
-   "results": {
-    "hits": 0,
-    "top": [],
-    "note": "",
-    "subdirectory": ""
-   },
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.IsOpenImmersion, DerivedCategory",
-   "results": {
-    "hits": 0,
-    "top": [],
-    "note": "",
-    "subdirectory": ""
-   },
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
    "tool": "leanfinder",
-   "query": "A quasi compact open immersion of varieties preserves bounded constructible l-adic sheaves under derived direct image",
+   "query": "derived direct image along quasi compact open immersion preserves bounded constructible l-adic sheaves",
    "results": {
     "hits": 8,
     "top": [
      "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
-     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
-     "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
      "AlgebraicGeometry.Scheme.instQuasiCompactToImage",
+     "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
      "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
-     "AlgebraicGeometry.QuasiCompact.isCompact_preimage",
-     "AlgebraicGeometry.QuasiCompact.of_comp",
-     "Topology.IsConstructible.image_of_isOpenEmbedding"
+     "Topology.IsConstructible.image_of_isOpenEmbedding",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "AlgebraicGeometry.Scheme.Modules.pushforward",
+     "Topology.IsConstructible.preimage"
     ],
-    "note": "",
-    "subdirectory": ""
+    "note": ""
    },
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "Direct image of constructible pro-etale sheaves with rational l-adic coefficients has bounded constructible cohomology",
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, IsOpenImmersion, DerivedCategory",
    "results": {
-    "hits": 8,
-    "top": [
-     "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
-     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
-     "LightCondMod.ofSheafLightProfinite",
-     "Condensed.lanSheafProfinite",
-     "CondensedMod.ofSheafProfinite",
-     "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
-     "LightCondAb.ofSheafLightProfinite",
-     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit"
-    ],
-    "note": "",
-    "subdirectory": ""
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'IsOpenImmersion'"
    },
    "date": "2026-10-17",
    "verdict": "no match"
@@ -177,69 +209,187 @@
      "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
      "Mathlib/AlgebraicGeometry/Sites/Proetale.lean"
     ],
-    "note": "",
-    "subdirectory": "AlgebraicGeometry/Sites"
+    "note": ""
    },
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "quasi compact open immersion direct image bounded constructible continuous l-adic coefficients",
+   "query": "quasi compact open immersion derived direct image bounded constructible rational l-adic coefficients",
    "results": {
     "hits": 8,
     "top": [
      "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
-     "AlgebraicGeometry.QuasiCompact.mk",
-     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen",
      "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
-     "IsCompact.isConstructible",
      "AlgebraicGeometry.quasiCompact_iff_forall_affine",
-     "Topology.IsConstructible.image_of_isOpenEmbedding",
-     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen"
+     "AlgebraicGeometry.quasiCompact_iff",
+     "AlgebraicGeometry.QuasiCompact.mk",
+     "AlgebraicGeometry.QuasiCompact.isCompact_preimage"
     ],
-    "note": "",
-    "subdirectory": ""
-   },
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory, pushforward, IsOpenImmersion",
-   "results": {
-    "hits": 0,
-    "top": [],
-    "note": "loogle: unknown identifier 'pushforward'",
-    "subdirectory": ""
+    "note": ""
    },
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "derived direct image along a quasi compact open immersion preserves bounded constructible l-adic pro-etale complexes with finite constant local models",
+   "query": "pushforward constructible sheaves on pro-etale sites with coefficients in a finite extension of the l-adic rationals",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforward",
+     "SheafOfModules.pushforward",
+     "Condensed.lanSheafProfinite",
+     "SheafOfModules.pushforward_obj_val",
+     "SheafOfModules.pushforwardSections",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "Condensed.profiniteSolid",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, DerivedCategory",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|proetale|ellAdicSheaf",
+   "results": {
+    "hits": 10,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Rj_|boundedConstructible|Constructible",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean",
+     "Mathlib/ModelTheory/DirectLimit.lean",
+     "Mathlib/ModelTheory/DirectLimit.lean",
+     "Mathlib/Data/Finset/Card.lean",
+     "Mathlib/Data/Finset/Card.lean",
+     "Mathlib/Data/Finset/Card.lean",
+     "Mathlib/Data/Finset/Card.lean",
+     "Mathlib/Data/Finset/Dedup.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived direct image along a quasi compact open immersion preserves bounded constructible finite constant local models over a finite l-adic field",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Topology.IsConstructible.image_of_isOpenEmbedding",
+     "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+     "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.instQuasiCompactMorphismRestrict",
+     "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.QuasiCompact.recOn"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsOpenImmersion, bounded constructible",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'IsOpenImmersion'"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, IsOpenImmersion, DerivedCategory",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'IsOpenImmersion'"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-compact open immersion derived direct image preserves finite-constant-model bounded constructible complexes over E or Qbar",
    "results": {
     "hits": 8,
     "top": [
      "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
-     "AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.Scheme.instQuasiCompactToImage",
      "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
      "Topology.IsConstructible.image_of_isOpenEmbedding",
-     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
-     "AlgebraicGeometry.LocallyQuasiFinite",
-     "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected",
-     "CategoryTheory.Functor.sheafPushforwardCocontinuous"
+     "Topology.isConstructible_preimage_iff_of_isOpenEmbedding",
+     "Topology.IsConstructible.preimage_of_isOpenEmbedding",
+     "AlgebraicGeometry.Scheme.Hom.isConstructible_preimage"
     ],
-    "note": "",
-    "subdirectory": ""
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rf_* of bounded constructible pro-etale complexes with rational coefficients remains finite constant local model constructible",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image"
+    ],
+    "note": ""
    },
    "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-rational-closed-support-constructible",
@@ -250,13 +400,120 @@
  "unit": "sk-thm-restriction",
  "blueprint": {
   "from": {
-   "node": "det-thm-restriction-local",
-   "place": "Constructibility paragraph, closed-adjoint step: the open direct-image input needed before applying the localization triangle to recover supported sections",
-   "via": [
-    "lem-sfb-rational-closed-support-constructible"
-   ]
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "The rational coefficients paragraph of sk-prop-open-coefficients: after the integral-generator case, localization and finite-subextension continuity identify the rational direct image, and finite-constant-model triangulated closure finishes the open-immersion assertion.",
+   "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-rational-open-direct-image-constructible",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: rebind the proof route to sk-prop-open-coefficients and its lower-star blueprint ancestry, replace the restriction-theorem ancestry, and make the finite-constant-model input direction explicit. Clause (4) of sk-lem-integral-models is applied to the given finite-constant-model K itself; integral open direct image, localization, finite-extension continuity, scalar matrices, and triangulated closure prove both rational coefficient cases. No new nodes are needed.",
+  "blueprint": "The eight steps realize the sk-prop-open-coefficients proof: standing hypotheses and the integral-generator input in steps 1–2; localization and finite-constant-model transport in steps 3–4; finite-extension comparisons and filtered continuity in steps 5–6; algebraic-closure models and triangulated closure in steps 7–8. The source proposition is the direct-image open-coefficients route, with the existing lower-star lemma as its nearest blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Supply Noetherian U and X for integral generators and triangulated closure; this is a geometric hypothesis check, not an alternate finiteness route. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Supply qcqs schemes in the standing setting for bounded continuity. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Supply qcqs j from the standing qcqs schemes. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "det-thm-sf-pf-adic-open",
+    "why": "Use exactly the integral open-image case proved by the source integral paragraph, before rationalizing generators; no general rational direct-image theorem is used. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "why": "Identify the source localization telescope and its flatness. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Tensor preserves the localization colimit by its adjunction; a general categorical tool. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Use the coefficient-preserving version of the bounded continuity theorem explicitly named by the source for the localization and finite-subextension colimits. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Retain the coefficient actions when applying fixed-coefficient continuity; restriction reflects isomorphisms and commutes with direct image. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Supply the coefficient square and compatible finite-free bases at finite extension stages. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-sfb-extend-scalars-preserves-homology",
+    "why": "Compute cohomology after flat extension, retaining finite constant presentation matrices. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "det-prop-scalar-six-pullback",
+    "why": "Use only the formal coefficient-extension/restriction and tensor-transitivity comparisons, never its unit direct-image finiteness theorem. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-sfb-subfield-flat",
+    "why": "Keep one common lower bound at finite coefficient stages. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Use finite additivity for the finite-basis calculation and shifts and cones for the final finite induction. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Identify the precise finite-subextension-valued coefficient colimit used by the source. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "why": "Use tensor transitivity and the sheaf coefficient-colimit formula; no constructibility comparison from its general lfp categories is used. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "lem-sfb-qlbar-flat",
+    "why": "Preserve cohomology and finite amplitude upon extension to the finite-subextension-valued algebraic closure. The open-coefficients unit does not contain a separate statement giving this generic input."
+   },
+   {
+    "node": "sk-lem-integral-models",
+    "why": "Use clause (4) for the exact finite-constant-model input and integral lattice generators explicitly required by the open-coefficients rational paragraph. This is a declared interface on the intended unit route, not the rejected general direct-image shortcut."
+   },
+   {
+    "node": "det-cor-coefficient-heart-ii-triangulated",
+    "why": "Use the triangulated closure explicitly required by the final sentence of the open-coefficients proof, for the finite-constant-model category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "det-thm-sf-pf-adic-open",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-extend-scalars-preserves-homology",
+  "det-prop-scalar-six-pullback",
+  "lem-sfb-subfield-flat",
+  "lem-pc-right-derived-functor-triangulated",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-sfb-qlbar-flat",
+  "sk-lem-integral-models",
+  "det-cor-coefficient-heart-ii-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-91c1795cf",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-91c1795cf (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, all 30 cited statements, the sk-prop-open-coefficients proof (integral and rational paragraphs), the lem-sfb-dc-lower-star-preserves blueprint text and the earlier return in coord/returns/Q09.md. The statement is unchanged from base and not weakened. It is the rational half of sk-prop-open-coefficients in the finite-constant-model Dbc of sk-def-sfb-constructible, and every cited node uses that same convention. Not a duplicate: lem-sfb-dc-lower-star-preserves uses the general locally-finitely-presented predicate, det-thm-sf-pf-adic-open is integral only, and det-thm-sf-ctf-stability-direct-images would create a cycle. Small cases checked: U empty, U=X, K=0, Gm in A1, and a separate finite E' for Qlbar. All four return points are repaired: C7 route and blueprint.from, C8 tool_uses, E6 input direction, and no SGA citation; I scanned all 30 cited nodes for SGA. Step 2 applies sk-lem-integral-models clause (4) to the finite-model K. Step 3 inverts ell by the telescope and uses bounded continuity for qcqs j. Steps 5-6 do the finite-free comparison and the colimit over finite subextensions. Steps 4 and 7 use scalar matrices. Step 8 uses triangulated closure on Noetherian X. All hypotheses hold and there is no cycle. Batch-5 check: det-cor-coefficient-heart-ii-triangulated, det-thm-sf-pf-adic-open and sk-lem-integral-models reach sec-poincare-duality only through generic nodes. These are cor-galois-lisse-representations (the lisse-sheaf/pi1-representation equivalence), base change of separated finite type, and Deligne generic finiteness. They also reach sec-trace-formula only through lem-trf-* filtered derived-category generalities. These are tools and finiteness results, which are neither assumed statement nor a step of either proof, so they are outside the assumptions. No assume leaf is reached, and these are the source route's own units. I accept all 18 declared tool_uses. Maintainer note: the item's unit is still sk-thm-restriction, a maintainer-owned field. Rebind it to sk-prop-open-coefficients and consider adding the item to that unit's realized.statement. No fixes written."
  }
 }

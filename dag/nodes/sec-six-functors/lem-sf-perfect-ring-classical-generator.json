@@ -12,9 +12,119 @@
   "def-pc-perfect-ring-complex",
   "pur9-def-thick"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal P$ be the full subcategory of $D(A)$ consisting of perfect objects. If $C_1\\to C_2\\to C_3\\to C_1[1]$ is a distinguished triangle and $C_1,C_3$ are perfect, then $C_2$ is perfect by [lem-sf-perfect-ring-triangle-closure].",
+   "uses": [
+    "lem-sf-perfect-ring-triangle-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI, proof, paragraph beginning `It was shown in Lemmas` (using Tag 066R)"
+   }
+  },
+  {
+   "text": "The other two two-out-of-three cases follow by rotating the distinguished triangle and using closure under integer shifts (Step 3): if $C_2,C_3$ are perfect, the backward rotation $C_3[-1]\\to C_1\\to C_2\\to C_3$ is distinguished and has perfect first and third terms $C_3[-1],C_2$, so $C_1$ is perfect by [lem-sf-perfect-ring-triangle-closure]; if $C_1,C_2$ are perfect, the rotation $C_2\\to C_3\\to C_1[1]\\to C_2[1]$ has perfect first and third terms, so $C_3$ is perfect. The rotations in both directions are axiom (TR2) of [def-weil-triangulated-category]. Thus $\\mathcal P$ is triangulated.",
+   "uses": [
+    "lem-sf-perfect-ring-triangle-closure",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI, proof, paragraph beginning `It was shown in Lemmas`"
+   }
+  },
+  {
+   "text": "The zero complex is bounded with finitely generated projective terms, and an isomorphism of perfect objects remains perfect after composing its representing isomorphism. Shifting a bounded finite-projective complex reindexes its finite-projective terms, and a finite direct sum of two such complexes is again bounded with finitely generated projective terms. Hence $\\mathcal P$ is strictly full, contains zero, and is closed under shifts and finite direct sums.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI, proof, paragraph beginning `It was shown in Lemmas`"
+   }
+  },
+  {
+   "text": "If $K\\oplus L$ is perfect, [lem-sf-perfect-ring-summand] gives that both $K$ and $L$ are perfect. Therefore $\\mathcal P$ is closed under direct summands, so it is saturated.",
+   "uses": [
+    "lem-sf-perfect-ring-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI, proof, paragraph beginning `It was shown in Lemmas` (using Tag 066S)"
+   }
+  },
+  {
+   "text": "The unit $A[0]$ is represented by the one-term complex with the finitely generated free (hence projective) module $A$ in degree zero, so $A[0]\\in\\mathcal P$ by [def-pc-perfect-ring-complex].",
+   "uses": [
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI, proof, sentence `Of course R \\in D_{perf}(R)`"
+   }
+  },
+  {
+   "text": "Let $T$ be any strictly full, saturated, triangulated subcategory of $D(A)$ containing $A[0]$. We prove by induction on $b-a$ that every perfect object represented by a bounded complex $M^\\bullet$ of finitely generated projective modules with $M^i=0$ outside $[a,b]$ lies in $T$. First, $T$ is closed under finite direct sums: for $X,Z\\in T$ the triangle $X\\to X\\oplus Z\\to Z\\xrightarrow{0}X[1]$ is distinguished by [lem-sbc-biproduct-triangle-distinguished], so $X\\oplus Z\\in T$ by closure under cones. If $b=a$, then $M^a$ is a direct summand of a finite free module $A^n$, so the shifted module $M^a[-a]$ is a direct summand of $A^n[-a]\\cong(A[0][-a])^{\\oplus n}$ in $D(A)$ and lies in $T$ because $T$ contains $A[0]$, is closed under finite sums, shifts, and direct summands; this shifted module is isomorphic to $M^\\bullet$.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "pur9-def-thick",
+    "lem-sbc-biproduct-triangle-distinguished"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI, proof, induction base `By definition \\langle R \\rangle_1 contains any finite projective R-module`"
+   }
+  },
+  {
+   "text": "For $b>a$, use the stupid truncation: $M^b[-b]$ (the term $M^b$ in degree $b$) is a subcomplex of $M^\\bullet$ with quotient $\\sigma_{\\le b-1}M^\\bullet$, and $0\\to M^b[-b]\\to M^\\bullet\\to\\sigma_{\\le b-1}M^\\bullet\\to0$ is degreewise short exact, so by [lem-weil-pbc-complex-ses-triangle] there is a distinguished triangle $M^b[-b]\\to M^\\bullet\\to\\sigma_{\\le b-1}M^\\bullet\\to M^b[-b+1]$ in $D(A)$. The first term is a shift of a finite projective module and hence lies in $T$ by the base case, while the truncated complex is bounded with finite-projective terms in an interval of length $(b-1)-a$ and hence lies in $T$ by induction. Since $T$ is triangulated (closed under cones), the middle term $M^\\bullet$ lies in $T$. Every perfect object is isomorphic to such an $M^\\bullet$, so strict fullness gives that every perfect object lies in $T$.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "pur9-def-thick",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI, proof, paragraph beginning `Recall that \\langle R \\rangle`"
+   }
+  },
+  {
+   "text": "By [pur9-def-thick], the thick subcategory generated by $A[0]$ is the intersection of all thick subcategories containing it. Steps 1--4 show that the perfect subcategory is one such thick subcategory, while the induction shows that every such subcategory contains every perfect object. Therefore the intersection equals $\\mathcal P$, proving that the perfect objects are the smallest strictly full, saturated, triangulated subcategory containing $A[0]$.",
+   "uses": [
+    "pur9-def-thick"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI, proof, conclusion `This finishes the proof`"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sbc-biproduct-triangle-distinguished",
+  "lem-sf-perfect-ring-summand",
+  "lem-sf-perfect-ring-triangle-closure",
+  "lem-weil-pbc-complex-ses-triangle",
+  "pur9-def-thick"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0ATI, lemma-perfect-ring-classical-generator; induction on the length of a bounded finite-projective complex"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +156,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-perfect-over-derived-complete-ring",
@@ -58,7 +168,7 @@
  "blueprint": {
   "from": {
    "node": "thm-pod-point-perfectness",
-   "place": "Proof, Step 2, integral duals: finite-projective perfect complexes are generated from the ring by finite shifts, cones and retracts",
+   "place": "Proof, Step 2, integral duals: finite-projective perfect complexes are generated from the ring by finite shifts, cones and retracts.",
    "via": [
     "lem-sf-perfect-over-derived-complete-ring"
    ]
@@ -73,5 +183,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-perfect-ring-classical-generator",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 0ATI and its induction proof. The perfect subcategory is shown triangulated using the existing ring triangle-closure lemma and triangulated rotations, strictly full and closed under shifts and finite sums directly from the definition, and saturated using the new ring-level direct-summand statement from Tag 066S. The reverse inclusion is the source's induction on the length of a bounded finite-projective representative, using the stupid truncation triangle; the intersection characterization is the thick-subcategory definition.",
+  "blueprint": "Realizes thm-pod-point-perfectness, Proof Step 2, the sentence that finite-projective perfect complexes are generated from the ring by finite shifts, cones and retracts."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-20ec04c30",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-20ec04c30 (reviewer sub-agent of L); spot-checked: I read the whole item, all 8 steps, the new node lem-sf-perfect-ring-summand and every cited statement, against Stacks more-algebra.tex 0ATI (l.20287-20323), 066R/066S (l.18948-18971) and derived.tex (definition-triangulated-subcategory, lemma-triangulated-subcategory, definition-saturated, definition-generators). The item says the same as 0ATI for any commutative ring, and the 'equivalently thick' wording agrees with pur9-def-thick. Steps 1, 2 and 4 cite nodes that say what the steps take from them: the triangle-closure node and the TR2 rotations, which I checked in both directions, and 066S. Steps 3 and 5 are rightly marked elementary. The induction in steps 6-7 is set up properly, and step 8 is the intersection definition. I tested A=0, Z/2 over Z (perfect), Z/2 over Z/4 (not perfect), a nonfree projective summand, a two-term complex and the empty interval. The new node states 066S exactly, is statement-only and self-contained, and is not a duplicate: the only summand lemma in the DAG is the scheme-level lem-pc-perfect-summand (08CS, D(O_X)). slopmaster2 has no Lean for it. Step 1's off-unit node is on the route, because sk-thm-sf-package uses sk-prop-sf-biduality-general directly, so no tool_use is needed. Three repairable faults, fixed in fixes/: (C1) step 6 used closure of T under finite sums without the split triangle, so I cited the Mathlib leaf lem-sbc-biproduct-triangle-distinguished; (C1) step 7 used the stupid-truncation triangle with no node, so I cited the Mathlib leaf lem-weil-pbc-complex-ses-triangle (DerivedCategory.triangleOfSES_distinguished); (B9) the new node's blueprint.from.via was [item] and is now [item, lem-sf-perfect-over-derived-complete-ring]. I also wrote out the step 2 rotations explicitly and recomputed proof_deps. No statement was changed and no node dropped.; 2 file(s) fixed by the reviewer"
  }
 }
