@@ -11,7 +11,8 @@
   "def-pc-scheme",
   "def-trf-algebraic-space",
   "def-sc-invertible-module",
-  "def-weil-pbc-ample-invertible-module"
+  "def-weil-pbc-ample-invertible-module",
+  "def-trf-space-module-scheme-restriction"
  ],
  "proof": [
   {
@@ -232,5 +233,23 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-c3f7b6472 (reviewer sub-agent of L); spot-checked: Read the item, all seven new nodes and every cited node's statement, against Stacks 0D3C/0D35/0D36/0D31/0D2Z (spaces-divisors, spaces-descent), 01VH/01VI/01VJ(1)<=>(5)/0893 (morphisms), 03KG/03KM/03M9/03M4 (spaces-morphisms), 03LX/03E3 (spaces-properties), 02X2/041F. The item statement and stmt_deps are byte-identical to the side DAG, so no target is weakened. The proof follows 0D35/0D3C over an arbitrary test T with the whole etale family. Step 1 builds N by the existing invertible-descent node, so M is never pulled back along a non-etale map, and identifies N with M|_X for etale T by full faithfulness. Step 2: qc+separated by the criterion's forward direction and the space locality node. Step 3: section algebra (03M9+03LX) and the Proj map (0D2Z). Step 4: U=X and r is an open immersion by etale descent (03M4), so X is a scheme. Step 5: ampleness by 01VJ reverse, using qc+separated from step 2. Every hypothesis matches. New statements are true: tested on P^1 with O(1), O and O(-1), and on empty, empty-family and infinite-family cases. None is a duplicate (checked lem-sc-ample-proj-open, lem-pc-quasi-compact-local-on-target, lem-galois-fpqc-descend-open-immersion, pqf-lem-pushforward-qcoh, and the 03M4 tag collisions) or a restated clause. Accepted tool_uses: lemma-nagata-relative-proj-exists, lem-weil-pbc-etale-covering-base-change, lem-weil-pbc-invertible-pullback-tensor. FIX (B3): lem-trf-space-qc-separated-etale-local defined quasi-compact morphisms of spaces via the undefined 'underlying topological space' of an algebraic space. I replaced it with Stacks 03E3: there is a surjective etale map from a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme], which is equivalent by 03KG(3). I added that stmt_dep and the source tag. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-space-qc-separated-etale-local.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6506816c4",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Independent review complete; both delivered files compile with server confirmation and no substantive findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceAmpleLocal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.representable_and_ample_of_etale_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceAmpleLocal.lean",
+  "statement": "theorem representable_and_ample_of_etale_cover {S : Scheme.{u}} {F Y : AlgebraicSpace S} (f : F ⟶ Y) (M : F.Modules) (hM : F.IsLineModule M) (I : Type v) (Yᵢ : I → Y.EtaleSite) (Xᵢ : I → F.EtaleSite) (pᵢ : ∀ i : I, (Xᵢ i).obj.left ⟶ (Yᵢ i).obj.left) (hcover : ∀ (T : Over S) (a : yoneda.obj T ⟶ Y.obj.obj), Sieve.generate (fun (U : Over S) (k : U ⟶ T) ↦ ∃ (i : I) (b : U ⟶ (Yᵢ i).obj.left), yoneda.map k ≫ a = yoneda.map b ≫ (Yᵢ i).obj.hom) ∈ (Scheme.fppfTopology.over S) T) (hpb : ∀ i : I, IsPullback (Xᵢ i).obj.hom (yoneda.map (pᵢ i)) f.hom.hom (Yᵢ i).obj.hom) (hample : ∀ (i : I) (W : (Y.etaleForget.obj (Yᵢ i)).Opens), IsAffineOpen W → ∃ hL : ((Scheme.Modules.restrictFunctor (((pᵢ i).left ⁻¹ᵁ W).ι)).obj ((F.schemeRestriction (Xᵢ i)).obj M)).IsInvertible, @Scheme.Modules.IsAmple ((pᵢ i).left ⁻¹ᵁ W).toScheme ((Scheme.Modules.restrictFunctor (((pᵢ i).left ⁻¹ᵁ W).ι)).obj ((F.schemeRestriction (Xᵢ i)).obj M)) hL) : IsRepresentable f.hom.hom ∧ ∀ T : Y.EtaleSite, ∃ (X : F.EtaleSite) (p : X.obj.left ⟶ T.obj.left), IsPullback X.obj.hom (yoneda.map p) f.hom.hom T.obj.hom ∧ ∀ W : (Y.etaleForget.obj T).Opens, IsAffineOpen W → ∃ hL : ((Scheme.Modules.restrictFunctor ((p.left ⁻¹ᵁ W).ι)).obj ((F.schemeRestriction X).obj M)).IsInvertible, @Scheme.Modules.IsAmple (p.left ⁻¹ᵁ W).toScheme ((Scheme.Modules.restrictFunctor ((p.left ⁻¹ᵁ W).ι)).obj ((F.schemeRestriction X).obj M)) hL",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

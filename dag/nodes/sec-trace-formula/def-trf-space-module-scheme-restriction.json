@@ -1,0 +1,122 @@
+{
+ "id": "def-trf-space-module-scheme-restriction",
+ "kind": "definition",
+ "title": "Canonical ordinary module obtained by restricting an algebraic-space module to an etale scheme",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $F$ an algebraic space over $S$ [def-trf-algebraic-space], and $q:h_T\\to F$ an object of its small etale site. For any module sheaf $M$ on that site, define its ordinary $\\mathcal O_T$-module $q^*_{\\mathrm{Zar}}M$ by restriction to open subschemes: its sections on $U\\subseteq T$ are $M(h_U\\to h_T\\to F)$, with the given restriction maps and with scalars transported through the canonical isomorphism $\\mathcal O_T(U)\\simeq\\Gamma(U,\\mathcal O_U)$. More precisely the functor from Zariski opens of $T$ sends $U$ to the composite $h_U\\to h_T\\to F$; these composites are representable etale, and this inclusion is continuous for the Zariski and small-etale topologies. Restriction along this continuous functor and the canonical structure-ring comparison defines $q^*_{\\mathrm{Zar}}$ on modules and module maps. This is the restriction-to-opens interpretation of a line module on a scheme; no descent object or arbitrary comparison is chosen.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03ED (small etale site) and Tag 03G7 (structure sheaf); descent.tex Tag 03FH (remark-change-topologies-ringed-sites), and Tag 03DX (proposition-equivalence-quasi-coherent): the inverse comparison is restriction to Zariski opens."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict an algebraic space small etale module sheaf to Zariski opens of a scheme etale over the space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] (U) : Γ(M.restrict f, U) = Γ(M, f ''ᵁ U)\", \"doc\": \"For any open subset $U$ of $X$, the sections of the restricted module sheaf over $U$ are equal to the sections of the original module sheaf over the image $f(U)$ in $Y$, where $f : X \\to Y$ is an open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] : X.Modules\", \"doc\": \"Given a sheaf of modules $ M $ over a scheme $ Y $ and an open immersion $ f : X \\\\to Y $, this function returns the restricted sheaf of modules over $ X $ obtained by applying the restriction functor \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) (x : U) : U.toScheme.presheaf.stalk x ≅ X.presheaf.stalk x.1\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : Scheme.{u}\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : (f ⁻¹ᵁ U).toScheme ⟶ U\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and an open subset $U$ of $Y$, this defines the restriction of $f$ as a morphism from the open subscheme $X|_{f^{-1}(U)}$ to the open subscheme $Y|_U$.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.restrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}, P f → ∀ (U : Y.Opens), P (f ∣_ U)\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target and holds for a morphism $f : X \\to Y$, then for every open subset $U$ of $Y$, the restriction of $f$ to $U$ also satisfies $P$.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme restriction and small-etale topology hits are generic components, not variable-structure-ring module restriction from an algebraic space to an etale scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Zariski\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme restriction and small-etale topology hits are generic components, not variable-structure-ring module restriction from an algebraic space to an etale scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeRestriction|opensToEtale|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme restriction and small-etale topology hits are generic components, not variable-structure-ring module restriction from an algebraic space to an etale scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n schemeRestriction|schemeOpens|Zariski.*restriction|restriction.*Zariski /home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry /home/ubuntu/weil-src-slopmaster2/WeilConjectures/AlgebraicGeometry",
+   "results": "/home/ubuntu/weil-src-slopmaster2/WeilConjectures/AlgebraicGeometry/HenselianConnectedness.lean:28:hypothesis of the Zariski restriction criterion\n/home/ubuntu/weil-src-slopmaster2/WeilConjectures/AlgebraicGeometry/HenselianConnectedness.lean:36:  hypotheses of the Zariski restriction criterion for `(Y, Y₀)`.\n/home/ubuntu/weil-src-slopmaster2/WeilConjectures/AlgebraicGeometry/HenselianConnectedness.lean:116:hypotheses of the Zariski restriction criterion\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/FpqcLocalOnBaseCriterion.lean:57:7. Every affine restriction of `f` has `P`; the affine opens cover `S`, so Zariski\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0EtaleInjective.lean:15:/-! # Injectivity of étale restriction from Zariski restriction\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsOpenLift.lean:17:/-- A lift on one Zariski open transports to a lift of the normalized tensor restriction.\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0ZariskiConstructions.lean:17:/-! # Explicit Zariski restriction and section transport\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0ZariskiConstructions.lean:197:/-- The Zariski restriction of the etale pullback to Xprime.\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0ZariskiConstructions.lean:204:/-- The Zariski restriction of the iterated etale pullback to Zprime.\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/PerfectLocalModelsStageGluing.lean:31:private theorem isIso_schemeRestriction_of_isIso_localized\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/PerfectLocalModelsStageGluing.lean:111:      exact isIso_schemeRestriction_of_isIso_localized.{u, w} X P\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/PerfectLocalModelsStageGluing.lean:118:      exact isIso_schemeRestriction_of_isIso_localized.{u, w} X Q\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0EtaleCriterion.lean:110:/-- If Zariski restriction to a closed subscheme is bijective on sections for every\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0EtaleCriterion.lean:121:1. By `lem-weil-pbc-gabber-zariski-etale-restriction-injective`, Zariski restriction\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0EtaleCriterion.lean:148:8. The comparison injection of step 1 makes the Zariski restrictions of s'_alpha\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/CoherentFrobeniusComparison.lean:120:   Apply the module/abelian comparison on that scheme. By the Zariski open-restriction lemma,\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/CoherentFrobeniusComparison.lean:130:   restriction has exactly the Zariski sections and restrictions, by the definition of the\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/ZariskiClosedImmersionConnectedRestriction.lean:17:# Zariski restriction along a closed immersion with connected point closures\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/ZariskiClosedImmersionConnectedRestriction.lean:30:/-- Universe transport of the spectral restriction bijection to the Zariski inverse-image unit.\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0FiniteSection.lean:62:5. Apply hFinite to h and the Zariski restriction of h^*F. Its surjective unit\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0ZariskiRepresentativeEquation.lean:98:    (sheaf_restriction c r (gabberZariskiTargetSection i h F t)))\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/PhAffineStandardSieveBasis.lean:68:   Step 6 makes these restrictions ph covering, so Zariski transitivity proves the\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/GabberH0FiniteLift.lean:93:5. The injective Zariski-to-étale comparison for i' makes their Zariski restrictions\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/OverlapPairRefinementPersistence.lean:66:Source: Stacks Project, Tag 01ZR, first proof, successive Zariski restrictions;\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/EtaleH0FiniteConnectedCriterion.lean:41:subset gives bijective restriction on global sections of every Zariski sheaf of\n",
+   "date": "2026-10-17",
+   "verdict": "no match: GabberH0ZariskiConstructions restricts set-valued sheaves on scheme etale sites; the other hits concern unrelated scheme restrictions, not structure-module sheaves on algebraic spaces"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-ample-local",
+  "date": "2026-10-17",
+  "group": "Q75"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Interpret the polarization and its ampleness on each scheme test in the polarized-scheme descent input; canonical restriction to open subschemes is the inverse Zariski/etale comparison.",
+   "via": [
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSchemeRestriction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.schemeRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSchemeRestriction.lean",
+  "statement": "def schemeRestriction : F.Modules ⥤ ((F.etaleForget).obj T).Modules",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.schemeOpensOver",
+   "AlgebraicGeometry.AlgebraicSpace.schemeOpensArrow",
+   "AlgebraicGeometry.AlgebraicSpace.schemeOpensArrow_isEtale",
+   "AlgebraicGeometry.AlgebraicSpace.schemeOpens",
+   "AlgebraicGeometry.AlgebraicSpace.schemeOpens_isContinuous",
+   "AlgebraicGeometry.AlgebraicSpace.schemeOpensRingHom",
+   "AlgebraicGeometry.AlgebraicSpace.schemeRestriction"
+  ],
+  "note": "The functor is explicit precomposition along open subschemes, with the canonical regular-function ring comparison; no module or equivalence is chosen from an existence axiom. The named etale and continuity obligations are part of the definition node and have source/proof docstrings."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6506816c4",
+  "group": "Q75",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6506816c4",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Independent review complete; both delivered files compile with server confirmation and no substantive findings."
+ }
+}
