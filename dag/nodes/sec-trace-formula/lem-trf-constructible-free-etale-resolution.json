@@ -2,7 +2,7 @@
  "id": "lem-trf-constructible-free-etale-resolution",
  "kind": "statement",
  "title": "Finite etale generators and bounded-above constructible resolutions",
- "statement": "Let $X$ be a Noetherian scheme, meaning a quasi-compact scheme with an affine open cover by spectra of rings whose ideals satisfy the ascending chain condition, and let $A$ be a finite commutative ring. Work with sheaves of $A$-modules on its small etale site and their derived category [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-pbc-derived-categories]. Write $D^-_c(X,A)$ for complexes with constructible cohomology, vanishing in sufficiently large degrees [def-weil-pbc-constructible-complexes]. Every constructible sheaf $C$ is Noetherian (its subobjects satisfy the ascending chain condition), and every epimorphism $M\\to C$ admits a morphism $u_!A_U\\to M$ whose composite onto $C$ is an epimorphism, for a separated etale finite-type map $u:U\\to X$ (a finite disjoint union is allowed). Here $u_!$ is etale extension by zero [def-weil-pbc-etale-sum-extension]. Every $L\\in D^-_c(X,A)$ with $\\mathcal H^i(L)=0$ for $i>0$ has a representative $Q^\\bullet$ concentrated in degrees $\\leq0$ in which each term is a finite direct sum of such $u_!A_U$ and the kernels and cokernels of its differentials are constructible. In particular one can arrange $Q^0=u_!A_U$ and has the triangle\n$$Q^0\\longrightarrow L\\longrightarrow \\sigma^{\\leq-1}Q^\\bullet\\longrightarrow Q^0[1],$$\nwhere $\\sigma^{\\leq-1}$ is the brutal truncation, so its cohomology vanishes in positive and zero degrees. No finite projective resolution or finite Tor dimension of $C$ is asserted.",
+ "statement": "Let $X$ be a Noetherian scheme, meaning a quasi-compact scheme with an affine open cover by spectra of rings whose ideals satisfy the ascending chain condition, and let $A$ be a finite commutative ring. Work with sheaves of $A$-modules on its small etale site and their derived category [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-pbc-derived-categories]. Write $D^-_c(X,A)$ for complexes with constructible cohomology, vanishing in sufficiently large degrees [def-weil-pbc-constructible-complexes]. Every $L\\in D^-_c(X,A)$ with $\\mathcal H^i(L)=0$ for $i>0$ has a representative $Q^\\bullet$ concentrated in degrees $\\leq0$ in which each term is a finite direct sum of sheaves $u_!A_U$ for separated etale finite-type maps $u:U\\to X$ (a finite disjoint union is allowed), and the kernels and cokernels of its differentials are constructible. In particular one can arrange $Q^0=u_!A_U$. For the brutal truncation, the canonical short exact sequence is $0\\to Q^0[0]\\to Q^\\bullet\\to\\sigma^{\\leq-1}Q^\\bullet\\to0$, and hence there is a distinguished triangle\n$$Q^0\\longrightarrow L\\longrightarrow \\sigma^{\\leq-1}Q^\\bullet\\longrightarrow Q^0[1],$$\nwhere $\\sigma^{\\leq-1}$ has no terms, and therefore no cohomology, in degrees $\\geq0$. No finite projective resolution or finite Tor dimension of a constructible sheaf is asserted.",
  "source": {
   "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
   "place": "Proof of Theorem 5.1, finite etale generators and Kashiwara--Schapira Lemma 13.2.1(b), p. 42. Local PDF WANTED."
@@ -13,11 +13,85 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-etale-sum-extension",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a cochain complex concentrated in degrees $\\leq0$, the degree-zero term $Q^0[0]$ is a subcomplex and the quotient is the brutal truncation $\\sigma^{\\leq-1}Q^\\bullet$. Thus degreewise there is a short exact sequence $0\\to Q^0[0]\\to Q^\\bullet\\to\\sigma^{\\leq-1}Q^\\bullet\\to0$. Localizing at quasi-isomorphisms gives the displayed triangle with $Q^\\bullet$ replaced by its derived object $L$. The quotient has no terms in degrees $\\geq0$, hence no cohomology there; the orientation is checked by the two-term complex $[A\\xrightarrow{\\mathrm{id}}A]$ in degrees $-1,0$.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Proof of Theorem 5.1, p. 42; brutal-truncation triangle (corrected)"
+   }
+  },
+  {
+   "text": "Choose a bounded-above representative $K^\\bullet$ of $L$ and shift it so that $H^i(K)=0$ for $i>0$. Let $\\mathcal P$ be the class of finite direct sums of $u_!A_U$ for separated etale finite-type $u$. At each induction stage, the cohomology sheaves of the finite tail and of its mapping cone are constructible: the tail has only finitely many terms above the current degree, its term sheaves are constructible by [lem-weil-pbc-etale-free-sheaf-constructible], and [thm-constructible-serre] gives closure under kernels, cokernels, extensions. The finite-generator lifting statement [lem-trf-constructible-generator-epimorphism] can therefore be applied whenever the target is one of these constructible cone cohomology sheaves.",
+   "uses": [
+    "lem-trf-constructible-generator-epimorphism",
+    "thm-constructible-serre",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7 (derived-lemma-subcategory-left-resolution), induction setup and constructibility specialization"
+   }
+  },
+  {
+   "text": "Construct $Q^n$ and the comparison map in descending induction. Suppose the tail $Q_{>n}=\\sigma^{\\geq n+1}Q$ and its map to $K^\\bullet$ have been constructed, with the cone acyclic in degrees $>n$. Form the cycle pullback sheaf\n$$Z_n=\\ker(d_Q^{n+1})\\times_{K^{n+1}}K^n,$$\nwhere the map from $\\ker(d_Q^{n+1})$ to $K^{n+1}$ is the tail comparison. The standard cone calculation gives a canonical epimorphism $Z_n\\twoheadrightarrow H^n(\\operatorname{Cone}(Q_{>n}\\to K))$. The source $Z_n$ need not be constructible, but the target is constructible by Step 2. Apply [lem-trf-constructible-generator-epimorphism] to this epimorphism: it supplies $Q^n\\in\\mathcal P$ and an epimorphic composite $Q^n\\to Z_n\\to H^n(\\operatorname{Cone})$. The two projections of $Q^n\\to Z_n$ define $d_Q^n:Q^n\\to Q^{n+1}$ and $f^n:Q^n\\to K^n$; the pullback equation gives $d_Q^{n+1}d_Q^n=0$ and the chain-map identity.",
+   "uses": [
+    "lem-trf-constructible-generator-epimorphism",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction (derived.tex line 5302)"
+   }
+  },
+  {
+   "text": "The epimorphic composite onto $H^n(\\operatorname{Cone})$ kills that cone cohomology, so the induction invariant extends from degrees $>n$ to degree $n$. Descending through all $n$ makes the cone of $Q^\\bullet\\to K^\\bullet$ acyclic, hence the comparison is a quasi-isomorphism. Every term of $Q^\\bullet$ is a finite sum of $u_!A_U$, and each such summand is constructible by [lem-weil-pbc-etale-free-sheaf-constructible]; [thm-constructible-serre] then makes the kernel and cokernel of every differential constructible. Combining the finitely many degree-zero summands into one finite disjoint union gives the asserted $u:U\\to X$.",
+   "uses": [
+    "lem-trf-constructible-generator-epimorphism",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "thm-constructible-serre",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, completion of the downward fibre-product induction and quasi-isomorphism verification"
+   }
+  },
+  {
+   "text": "Undoing the initial shift gives a representative concentrated in degrees $\\leq0$ with the stated finite etale terms. The degree-zero subcomplex then gives the short exact sequence and distinguished triangle of Step 1. No finite projective resolution or finite Tor-dimension assertion is used.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/lu-zheng-duality-nearby-cycles-general-bases.pdf",
+    "place": "Proof of Theorem 5.1, p. 42"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "lem-trf-constructible-generator-epimorphism",
+  "lem-weil-pbc-etale-free-sheaf-constructible",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05T7, lemma-subcategory-left-resolution, specialized to finite etale generators; truncation triangle from Lu--Zheng Theorem 5.1 p. 42"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +127,66 @@
    "results": "{\"t\": \"2026-10-17T14:17:46Z\", \"tool\": \"leanfinder\", \"query\": \"Resolve a constructible etale complex by free representable module sheaves and truncate to approximate in any fixed cohomological range.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.I\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"CochainComplex.IsKProjective\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\"], \"digest\": \"3a8f0ce48d0b16f5\"}",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above constructible complex of etale modules on a Noetherian scheme has a resolution by finite sums of extension by zero constant modules",
+   "results": "8 hits including SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite and localGeneratorsDataOfIsFiniteType; no resolution theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "resolution, Sheaf",
+   "results": "0 hits; unknown identifier resolution",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*resolution|resolution.*constructible|etale.*generat",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolve a constructible etale complex bounded above by finite free etale generator sheaves",
+   "results": "8 hits including HomologicalComplex.isGrothendieckAbelian, AlgebraicGeometry.Scheme.etaleTopology and SheafOfModules.GeneratingSections; no constructible resolution theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*resolution|resolution.*extension.*zero|etale.*generator",
+   "results": "",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolve a bounded-above constructible etale complex by finite extension-by-zero free sheaves",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplex.instHasFiniteLimits, HomologicalComplex.instHasFiniteColimits, CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify, CochainComplex.cm5b.instIsStrictlyGEI, CategoryTheory.SheafOfTypes.finitary_extensive, CochainComplex.cm5b.I, SheafOfModules.freeCofan",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, quasiIso, Sheaf",
+   "results": "",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded-above constructible etale complex on a Noetherian scheme has a quasi-isomorphic resolution by finite sums of extension-by-zero constant sheaves, with constructible differential kernels and cokernels.",
+   "results": "CochainComplex.cm5b, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-cycle-verdier-duality",
@@ -68,7 +198,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), specialization to the normal cone: the nearby-cycle duality input used in Varshavsky §4.1.4(b), axiom (V); Proof of Theorem 5.1, finite etale generators and Kashiwara--Schapira Lemma 13.2.1(b), p. 42. Local PDF WANTED.",
+   "place": "Proof of Theorem 5.1, finite etale generators and Kashiwara--Schapira Lemma 13.2.1(b), p. 42; the bounded-above resolution and truncation triangle.",
    "via": [
     "lem-trf-nearby-cycle-verdier-duality",
     "lem-trf-specialization-cohomological-comparison",
@@ -77,5 +207,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-constructible-free-etale-resolution",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by removing the duplicated Noetherian and finite-generator clauses from the item, deleting the unused Noetherian node, correcting the brutal-truncation orientation, and replacing the invalid truncation-pair induction with the Tag 05T7 fibre-product induction. At degree n the generator lemma is now applied to the cycle pullback Ker(d_Q^{n+1}) ×_{K^{n+1}} K^n mapping epimorphically onto H^n of the cone.",
+  "blueprint": "Realizes the finite-etale-generator and bounded-above-resolution argument in the imported Theorem 5.1 proof; no matching blueprint node exists.",
+  "tool_uses": [
+   {
+    "node": "thm-constructible-serre",
+    "why": "The route needs closure of constructible sheaves under kernels, cokernels and extensions, which is generic sheaf infrastructure absent from this trace-formula unit."
+   },
+   {
+    "node": "def-weil-pbc-derived-categories",
+    "why": "The degreewise quasi-isomorphism and truncation triangle use the derived-category construction defined outside this unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-free-sheaf-constructible",
+    "why": "The final constructibility check needs the generic theorem that extension by zero of a finite constant sheaf along a qcqs etale map is constructible; the trace-formula unit does not provide this sheaf infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-constructible-serre",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-etale-free-sheaf-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-67003ef3e",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-67003ef3e (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-constructible-generator-epimorphism, every cited statement and the citer lem-trf-nearby-cycle-verdier-duality. Sources read in full: Stacks Tag 05T7 (derived.tex l.5302-5390) and Tag 095N (etale-cohomology.tex l.12412-12470). The item is correct. The brutal-truncation orientation Q^0[0] -> Q -> sigma^{<=-1}Q is right. Step 2's constructibility of cone cohomology follows from the cone long exact sequence with thm-constructible-serre and lem-weil-pbc-etale-free-sheaf-constructible; that node's qcqs hypotheses hold for Noetherian X and separated finite-type U. I checked Step 3's adapted 05T7 induction by computing the cone directly: Z^n(Cone) = ker d_Q^{n+1} x_{K^{n+1}} K^n up to sign, Z_n -> H^n(Cone) is an epimorphism, and adding Q^n kills H^n(Cone) without changing higher degrees. The full cone is acyclic degreewise. The adaptation is needed because 05T7's generating hypothesis fails for all sheaves. The new node is true by the proof of 095N applied to M -> C, and affine etale U over X is automatically separated and of finite type. It is strictly smaller than the item and not a duplicate: the -finite-epimorphism and affine-free-presentation nodes only cover p = id, lem-sf-etale-flat-constructible-lifting is about flat covers, and lem-sfb-subcategory-left-resolution needs generators for all objects. Fixed in fixes/: (B3) Noetherian was cited to def-weil-pbc-scheme-conventions, which doesn't define it; it now reads quasi-compact locally Noetherian [pqf-def-locnoeth], added to stmt_deps. (B5) source Tag 095M is the section tag; corrected to Lemma 095N with line and proof place. Accepted tool_uses: thm-constructible-serre and lem-weil-pbc-etale-free-sheaf-constructible, both generic sheaf infrastructure. Lu-Zheng p.42 remains WANTED. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
