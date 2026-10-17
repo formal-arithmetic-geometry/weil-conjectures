@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Algebra.Homology.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExact
 public import WeilConjectures.SixFunctors.Etale.SupportCohomology
 public import WeilConjectures.SixFunctors.OpenClosed.SupportedSections
 
@@ -47,55 +48,6 @@ universe u' u
 open CategoryTheory Category Limits Opposite Pretriangulated
 
 open scoped CategoryTheory.Functor
-
-namespace CategoryTheory.Functor
-
-variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-  [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
-
-/-- On a K-injective complex `I`, the natural transformation `RF ⟶ RG` induced by `τ : F ⟶ G` is
-`τ` applied termwise, through the identifications `RF(I) ≅ F(I)` and `RG(I) ≅ G(I)`. -/
-lemma rightDerivedFunctorNatTrans_app_Q_obj {F G : C ⥤ D} [F.Additive] [G.Additive]
-    (τ : F ⟶ G) (I : CochainComplex C ℤ) [I.IsKInjective] :
-    (rightDerivedFunctorNatTrans τ).app (DerivedCategory.Q.obj I) ≫
-        (G.rightDerivedFunctorObjQIso I).hom =
-      (F.rightDerivedFunctorObjQIso I).hom ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex τ _).app I) := by
-  have h₁ := (rightDerivedFunctorNatTrans τ).naturality
-    ((DerivedCategory.quotientCompQhIso C).inv.app I)
-  have h₂ : F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj I) ≫
-      (rightDerivedFunctorNatTrans τ).app
-        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj I)) =
-      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
-        ((NatTrans.mapHomologicalComplex τ _).app I)) ≫
-        G.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj I) :=
-    rightDerivedNatTrans_app F.rightDerivedFunctor G.rightDerivedFunctor
-      F.rightDerivedFunctorUnit G.rightDerivedFunctorUnit
-      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
-      (Functor.whiskerRight (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ))
-        DerivedCategory.Qh) ((HomotopyCategory.quotient _ _).obj I)
-  have h₃ := (DerivedCategory.quotientCompQhIso D).hom.naturality
-    ((NatTrans.mapHomologicalComplex τ _).app I)
-  dsimp at h₁ h₃
-  dsimp only [rightDerivedFunctorObjQIso, Iso.trans_hom, Iso.symm_hom, asIso_inv,
-    Functor.mapIso_hom, Iso.app_hom, Iso.app_inv]
-  rw [← reassoc_of% h₁]
-  simp only [assoc]
-  congr 1
-  rw [← cancel_epi (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj I)),
-    IsIso.hom_inv_id_assoc, reassoc_of% h₂, IsIso.hom_inv_id_assoc]
-  exact h₃
-
-end CategoryTheory.Functor
-
-namespace CategoryTheory
-
-/-- The sections of sheaves over an object of the site form an additive functor. -/
-instance Sheaf.additive_sheafSections_obj {C : Type*} [Category C] {J : GrothendieckTopology C}
-    {A : Type*} [Category A] [Preadditive A] (U : Cᵒᵖ) : ((sheafSections J A).obj U).Additive where
-  map_add := rfl
-
-end CategoryTheory
 
 namespace AlgebraicGeometry
 
