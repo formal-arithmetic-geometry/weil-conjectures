@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
 import all WeilConjectures.AlgebraicGeometry.AffineSectionCoverTwistGeneration
 import all Sheaf.AlgebraicGeometry.CoherentAffineMapSupportRadical
-import all Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # Affine local vanishing of ideal-power evaluation
 
@@ -26,6 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem powers_range {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [I.IsQuasicoherent]
@@ -33,7 +34,41 @@ private theorem powers_range {X : Scheme.{u}} {I : X.Modules}
     (LinearMap.range ((idealSheafPower ι n).2.val.app (op V.1)).hom :
       Ideal Γ(X, V.1)) =
       (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) ^ n := by
-  sorry
+  apply SetLike.coe_injective
+  induction n using Nat.twoStepInduction with
+  | zero =>
+    simp only [idealSheafPower, pow_zero, Ideal.one_eq_top]
+    change ((LinearMap.id : Γ(X, V.1) →ₗ[Γ(X, V.1)] Γ(X, V.1)).range :
+      Set Γ(X, V.1)) = (⊤ : Ideal Γ(X, V.1))
+    simp
+  | one =>
+    simp [idealSheafPower]
+  | more n _ ih =>
+    simp only [idealSheafPower]
+    change (↑(LinearMap.range
+      (((idealSheafPower ι (n + 1)).2.val.app (op V.1)).hom.comp
+        ((idealModuleProductι ι (idealSheafPower ι (n + 1)).1).val.app
+          (op V.1)).hom)) :
+      Set ((SheafOfModules.unit X.ringCatSheaf).val.obj (op V.1))) = _
+    rw [LinearMap.range_comp]
+    have : (idealSheafPower ι (n + 1)).1.IsQuasicoherent :=
+      Modules.powers_qc ι (n + 1)
+    have hmult := Modules.multiplication_range ι
+      (idealSheafPower ι (n + 1)).1 V
+    have hmult' : LinearMap.range
+        ((idealModuleProductι ι (idealSheafPower ι (n + 1)).1).val.app
+          (op V.1)).hom =
+        (LinearMap.range (ι.val.app (op V.1)).hom :
+          Ideal Γ(X, V.1)) • (⊤ : Submodule Γ(X, V.1)
+            Γ((idealSheafPower ι (n + 1)).1, V.1)) := by
+      exact SetLike.coe_injective hmult
+    have hi : (LinearMap.range
+        ((idealSheafPower ι (n + 1)).2.val.app (op V.1)).hom :
+          Ideal Γ(X, V.1)) =
+        (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) ^ (n + 1) := by
+      exact SetLike.coe_injective ih
+    rw [hmult', Submodule.map_smul'', Submodule.map_top, hi,
+      Ideal.smul_eq_mul, ← pow_succ']
 
 private theorem app_res {X : Scheme.{u}} {M N : X.Modules}
     (f : M ⟶ N) {U W : X.Opens} (i : W ⟶ U) (s : Γ(M, U)) :
@@ -201,10 +236,8 @@ private theorem affine_hom_zero {X : Scheme.{u}} {M N : X.Modules}
     rw [← app_res, map_zero]
     exact hb i.1 _
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/ -- Evaluation zero forces eventual vanishing on a single affine open. No compactness
+/-- Evaluation zero forces eventual vanishing on a single affine open. No compactness
 of the ambient scheme is required.
 
 Source: Stacks Project, Properties, Lemma 01PM, proof of injectivity, and Lemma 01PQ,
@@ -226,7 +259,7 @@ the power inclusions puts its section image in this multiple. Thus phi composed
 with r is zero on sections over V. Clear denominators on basic opens using
 quasi-coherence of P_m, then use sheaf separation on their covers of every
 subopen of V to obtain the zero restricted morphism. This also covers the zero
-ideal, the zero ring, the empty affine open, and n = 0. - /
+ideal, the zero ring, the empty affine open, and n = 0. -/
 theorem ideal_power_evaluation_affine_eventually_zero
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -282,8 +315,7 @@ theorem ideal_power_evaluation_affine_eventually_zero
       rw [map_smul]
       exact Submodule.mem_annihilator.mp (hk ha) _ (LinearMap.mem_range_self ψ t)
     exact hker hmem
-  have := Modules.powers_qc ι (n + k)
+  let _ := Modules.powers_qc ι (n + k)
   exact ⟨n + k, hnm, affine_hom_zero V _ hzero⟩
--/
 
 end AlgebraicGeometry.Scheme
