@@ -13,11 +13,82 @@
   "def-kun-topological-krull-dimension",
   "def-weil-finite-type-morphism",
   "def-sc-function-field",
-  "pqf-def-quasifinite"
+  "pqf-def-quasifinite",
+  "def-weil-scheme-over-base",
+  "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-scheme-sober] to each of the irreducible schemes $E$ and $C$ (integrality gives irreducibility by [def-pc-integral-scheme]), obtaining unique generic points $\\eta_E$ and $\\eta_C$. For either scheme $X$, every point $x\\ne\\eta_X$ is closed: otherwise choose $z\\in\\overline{\\{x\\}}\\setminus\\{x\\}$. Closures of singletons are irreducible. The uniqueness clause of sobriety makes $\\overline{\\{z\\}}\\subsetneq\\overline{\\{x\\}}$, since equality would make $z$ and $x$ generic points of the same irreducible closed subset. Also $\\overline{\\{x\\}}\\subsetneq X$, since equality would make $x=\\eta_X$. These two strict inclusions form a chain of length $2$, contradicting $\\dim X=1$ by [def-kun-topological-krull-dimension]. Finally $\\eta_X$ is not closed: otherwise $X=\\overline{\\{\\eta_X\\}}=\\{\\eta_X\\}$ would have dimension $0$. Thus the points of each curve are its generic point and its closed points.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-pc-integral-scheme",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS (lemma-scheme-sober), combined with Topology Tag 0055 (definition-Krull); the displayed length-two contradiction is the elementary dimension-one specialization argument."
+   }
+  },
+  {
+   "text": "The morphism $p$ sends $\\eta_E$ to $\\eta_C$. Indeed, continuity gives $p(E)=p(\\overline{\\{\\eta_E\\}})\\subseteq\\overline{\\{p(\\eta_E)\\}}$. Dominance says that $p(E)$ is dense in $C$, so $\\overline{\\{p(\\eta_E)\\}}=C$. The uniqueness of $\\eta_C$ from Step 1 gives the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6 (lemma-quasi-finite-in-codim-1), condition (1), specialized to a dominant map of integral curves; generic-point identification by continuity and density."
+   }
+  },
+  {
+   "text": "If $x$ is closed in $E$, then $p(x)$ is closed in $C$. Put $y=p(x)$. By part (a) of [lem-kun-closed-point-field], $\\kappa(x)$ is finite over $k$, since $E$ is of finite type over $k$. By [def-weil-residue-field], $p$ induces an injective field homomorphism $\\kappa(y)\\to\\kappa(x)$; it is a $k$-homomorphism because $p$ is a $k$-morphism. Hence $\\kappa(y)$ is a $k$-vector subspace of the finite-dimensional space $\\kappa(x)$ and is itself finite-dimensional over $k$. Apply the converse in part (a) of [lem-kun-closed-point-field] to the finite-type $k$-scheme $C$: $y$ is closed.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), part (1), and Morphisms Tags 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre) and 01TF (lemma-closed-point-fibre-locally-finite-type), applied to the structure morphisms; elementary subfield argument."
+   }
+  },
+  {
+   "text": "Fix $y\\in C$. If $y=\\eta_C$, Step 2 puts $\\eta_E$ in $p^{-1}(\\{y\\})$. No other point lies there: by Step 1 any other point is closed in $E$, hence has closed image by Step 3, whereas $\\eta_C$ is not closed. Thus this fibre set is the singleton $\\{\\eta_E\\}$. If $y\\ne\\eta_C$, then $y$ is closed by Step 1, so continuity makes $F=p^{-1}(\\{y\\})$ a closed subset of $E$. Step 2 excludes $\\eta_E$ from $F$; Step 1 therefore makes every point of $F$ closed in $E$. Apply [lem-kun-finite-closed-subscheme] with $X=E$ and this closed subset $F$: $E$ is of finite type over $k$, and all points of $F$ are closed, so $F$ is finite. This includes an empty fibre. Every fibre set of $p$ is consequently finite.",
+   "uses": [
+    "lem-kun-finite-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0BA8 (lemma-Noetherian-irreducible-components), the finite-components input to lem-kun-finite-closed-subscheme; finite type over a field is Noetherian by Morphisms Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "For every $y\\in C$, apply [pqf-lem-locqf-fibre-discrete] to $p$ and $y$. Its hypotheses are exactly the assumed local finite type of $p$ and the finiteness of $p^{-1}(\\{y\\})$ proved in Step 4. It concludes that $p$ is quasi-finite at each point over $y$. Taking $y=p(x)$ for each $x\\in E$ proves that $p$ is quasi-finite at every point of $E$, as required.",
+   "uses": [
+    "pqf-lem-locqf-fibre-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TH (lemma-quasi-finite-at-point-characterize), the finite-fibre specialization recorded by pqf-lem-locqf-fibre-discrete."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-sober",
+  "def-pc-integral-scheme",
+  "def-kun-topological-krull-dimension",
+  "lem-kun-closed-point-field",
+  "def-weil-residue-field",
+  "lem-kun-finite-closed-subscheme",
+  "pqf-lem-locqf-fibre-discrete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Direct topological proof of the integral-curve specialization of Tag 0AB6 (lemma-quasi-finite-in-codim-1); uses the already present closed-point and finite-fibre lemmas in place of the general local dimension-formula argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +124,38 @@
    "results": "25 hits, all in Morphisms/QuasiFinite.lean and ZariskisMainTheorem.lean: Scheme.Hom.QuasiFiniteAt (QuasiFinite.lean:339), quasiFiniteAt_iff_isOpen_singleton_asFiber (:395), Scheme.Hom.isOpen_quasiFiniteAt (ZariskisMainTheorem.lean:292), quasiFiniteLocus lemmas; also read LocallyQuasiFinite.of_finite_preimage_singleton (QuasiFinite.lean:303: locally of finite type with finite fibres gives LocallyQuasiFinite), which reduces the node to finiteness of the fibres of a dominant map of integral curves, not stated in Mathlib.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant locally finite type morphism between integral curves over a field is locally quasi finite",
+   "results": "8 hits: LocallyQuasiFinite, finite_appTop_of_universallyClosed, instLocallyQuasiFiniteOfIsFinite, instLocallyQuasiFiniteOfIsImmersion, instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, LocallyOfFiniteType, locallyQuasiFinite_iff, IsFinite.iff_isIntegralHom_and_locallyOfFiniteType. None proves quasi-finiteness of a dominant curve map.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "7 hits: QuasiFiniteAt.isClopen_singleton_asFiber, quasiFiniteAt_iff_isOpen_singleton_asFiber, isOpen_quasiFiniteAt, mem_quasiFiniteLocus, and three Zariski-main-theorem results. These characterize or use quasi-finiteness, rather than establish it for dominant curve maps.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFinite",
+   "results": "10 returned hits in ZariskisMainTheorem.lean and Morphisms/QuasiFinite.lean (the search caps each file at five). Read Morphisms/QuasiFinite.lean:303-304: LocallyQuasiFinite.of_finite_preimage_singleton reduces the item to finite fibres but does not prove their finiteness for curves.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonconstant morphism between integral algebraic curves has finite fibres",
+   "results": "8 hits: instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, IsFinite.finite_preimage_singleton, instLocallyQuasiFiniteOfIsFinite, IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, IsFinite, IsFinite.recOn, LocallyQuasiFinite, Scheme.Hom.discrete_fiber. None derives finite fibres from dominance of integral curves.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-birational-curve-finite",
@@ -82,5 +181,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-birational-curve-quasifinite",
+  "worker": "stage1",
+  "summary": "Proved the item directly using classification of points on an integral one-dimensional scheme, the existing closed-point residue-field criterion, the existing finiteness theorem for closed subsets consisting of closed points, and the existing finite-fibre quasi-finiteness theorem. No new nodes and no statement change. The generic-extension and separatedness hypotheses are retained, though the direct curve argument does not need them.",
+  "blueprint": "Realizes the existing ancestry place: Proof (1)--(2), projective preparation of the relative-curve alteration input, specifically the quasi-finiteness input for the proper birational map of integral curves. This is a node-level proof of the existing curve input and does not alter the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Supplies existence and uniqueness of generic points of the two integral curves; the unit has no generic-point existence theorem."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Part (a) identifies closed points with finite residue extensions for both finite-type k-schemes; used as a geometric tool, not as the Kunneth proof route."
+   },
+   {
+    "node": "lem-kun-finite-closed-subscheme",
+    "why": "Supplies finiteness of each closed fibre from its closedness and the fact all its points are closed; the unit has no Noetherian closed-subset finiteness theorem."
+   },
+   {
+    "node": "pqf-lem-locqf-fibre-discrete",
+    "why": "Supplies quasi-finiteness at each point of a finite fibre of a locally finite-type morphism; this is the last conversion from the curve geometry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-scheme-sober",
+  "lem-kun-closed-point-field",
+  "lem-kun-finite-closed-subscheme",
+  "pqf-lem-locqf-fibre-discrete"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-bf7038422",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-bf7038422 (reviewer sub-agent of L); spot-checked: I read the item, its five steps and the statement of every cited node in full. The statement is true: it is the integral-curve case of Stacks 0AB6 condition (1), checked in varieties.tex lines 3186-3265 and confirmed as tag 0AB6 in tags/tags. It is unchanged. The added separatedness and over-k notion dependencies are correct. The delivery has no new nodes, and proof_deps equals the union of the steps' uses. Step 1 uses lem-sc-scheme-sober uniqueness and the definition of Krull dimension: a non-generic, non-closed point would give a chain cl{z} ⊊ cl{x} ⊊ X of length 2, and a closed generic point would make dim 0. Step 2 is elementary and uses continuity plus density. Step 3 applies lem-kun-closed-point-field (a) in both directions, to E and C over the same k, with the k-embedding κ(y)→κ(x) from def-weil-residue-field. Step 4 shows the generic fibre is {η_E}, and each closed fibre is a closed subset whose points are all closed, so lem-kun-finite-closed-subscheme gives finiteness, including an empty fibre. Step 5 has exactly the hypotheses of pqf-lem-locqf-fibre-discrete, and its conclusion is pointwise quasi-finiteness in the pqf-def-quasifinite sense. I also checked from its blueprint proof that this cited lemma is true. Small cases tested: t↦t^n including the inseparable case, A^1∖{0}⊂A^1, normalization of a nodal cubic, a non-algebraically-closed k, and a constant map, which dominance excludes. Duplicate search over dag/nodes for 0AB6, quasi-finite or finite-fibre curve statements and dominant-titled nodes found none; lem-trf-closed-dominant-dimension is a different result. The item does not restate a clause of its parent lem-trf-proper-birational-curve-finite; it is that parent's step-1 input. The unit sk-i-curve-zero route is unchanged. I accept all four declared tool_uses (lem-sc-scheme-sober, lem-kun-closed-point-field, lem-kun-finite-closed-subscheme, pqf-lem-locqf-fibre-discrete) as black-box uses of their written statements. No SGA, no target touched, no fixes."
  }
 }

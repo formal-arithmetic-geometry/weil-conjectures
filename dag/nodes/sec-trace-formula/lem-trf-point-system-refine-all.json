@@ -11,9 +11,64 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $E$ be the set of pairs $(\\{W_k\\to W\\},f\\in u'(W))$ consisting of a finite covering and an element of the original functor $u'$. It is a set because the site has sets of objects, morphisms, and covering families, and each $u'(W)$ is a set-valued filtered colimit. We construct, for each initial segment of a well-ordering of $E$, a refinement system together with the invariant that the images of $s,s'$ are distinct and all pairs in that initial segment have the required lifting property. The empty initial segment is realized by the original system $(J,V_j,g_{jj'})$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof: define E and the class S of partial refinements"
+   }
+  },
+  {
+   "text": "At a successor stage for $e=(\\{W_k\\to W\\},f)$, apply [lem-trf-point-system-refine] to the current system and the still-distinct images of $s,s'$. It produces a refinement preserving distinctness and making the image of $f$ factor through one member $W_k$. At a limit stage, take the union of the previously constructed nested index systems, with the induced order, objects, and transition maps. The union is again a directed inverse system: two indices already occur together in one earlier system, which supplies an upper bound, and the transition maps agree because the systems form a chain of refinements.",
+   "uses": [
+    "lem-trf-point-system-refine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof: successor step by Lemma 00YO and union at limit stages"
+   }
+  },
+  {
+   "text": "The distinctness invariant survives a limit union. If the two classes became equal in the union colimit, [lem-weil-pbc-filtered-colimit-sets-elementwise] would give a common later index witnessing equality. That index and the two representatives occur in some member of the nested chain, where distinctness was maintained, a contradiction. Thus every stage of the recursion has a valid invariant and the transfinite recursion is defined for the whole well-order of $E$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof: chain-union condition (2) and directed-colimit equality criterion"
+   }
+  },
+  {
+   "text": "Take the union over all $e\\in E$. It is a refinement of the original system and its two images of $s,s'$ remain distinct by the preceding argument. For any pair $(\\{W_k\\to W\\},f)\\in E$, the stage at which that pair was processed supplied a representative through some $W_k$; passing to the final union preserves that factorization. Therefore every finite covering and every $f\\in u'(W)$ has the required lift in the final $u(W)$, proving the statement.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YP, proof: final union over the well-order E"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit",
+  "lem-trf-point-system-refine",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YP (Lemma lemma-refine-all-at-once)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +100,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finitary-site-enough-points",
@@ -57,7 +112,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The all-at-once refinement (Tag 00YP) applied countably often in step 1 of lem-trf-finitary-site-enough-points, realizing the finite-limit and finite-refinement criterion for enough points in the point-construction part of the local-term argument.",
+   "place": "The all-at-once refinement (Tag 00YP) applied in the point-construction part of the proof of lem-trf-finitary-site-enough-points; this supplies the refinement preserving two sections while lifting every finite-cover datum.",
    "via": [
     "lem-trf-finitary-site-enough-points",
     "lem-trf-oriented-product-points-conservative",
@@ -69,5 +124,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-point-system-refine-all",
+  "worker": "stage1",
+  "summary": "Split Tag 00YP by introducing the one-cover refinement lemma (Tag 00YO) and writing the well-ordered transfinite recursion over the set of all finite-covering/map pairs. Successor stages use the one-cover lemma, limit stages take nested unions, and the filtered-colimit equality criterion preserves distinctness; the final union handles every pair. The statement and hypotheses are unchanged.",
+  "blueprint": "The steps realize the all-at-once refinement sentence in the proof of lem-trf-finitary-site-enough-points in the lem-trf-local-term-locality ancestry.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-85835f2dc",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-85835f2dc (reviewer sub-agent of L); spot-checked: Read in full against Stacks sites.tex lines 9237-9430: the set-up and refinement definition, 00YO lemma-refine with its proof, 00YP lemma-refine-all-at-once with its proof, and 00YQ proposition-criterion-points. The item matches 00YP hypothesis by hypothesis, with f taken in the original u'(W). Step 1 builds E as a set using the set axioms of def-weil-pbc-sites-and-cohomology and sets up the recursion with an explicit invariant and base case. Step 2 applies the new 00YO node to the current system at successor stages (with f's image) and takes the union of the chain at limit stages; this indexing differs from Stacks but is equivalent and correct. Step 3 keeps s, s' distinct at limits by clause (2) of lem-weil-pbc-filtered-colimit-sets-elementwise. Step 4: each pair keeps its factorization in the final union because the maps u_alpha -> u_beta are natural. The parent lem-trf-finitary-site-enough-points uses the item correctly. The only non-definition dependency is a Mathlib leaf, so no tool_uses are needed or accepted. No SGA source. Not a target node. New node lem-trf-point-system-refine (00YO): checked against the 00YO proof (fibre products exist by site axiom (iii), sheaf injection into a finite product, finite products commute with filtered colimits) and tested on three cases: J={1} with a two-member cover; K empty, where the claim is vacuous because F(V_j) is a singleton; and f already factoring through some W_k. It is true, strictly smaller than the item, not a restated clause, and not a duplicate (rg for 00YO, 00YP, lemma-refine and refine-all-at-once finds only this delivery and its parent). Two faults repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-point-system-refine.json: (1) B2, the statement used 'directed inverse system' and 'refining' without defining them; it now defines both with the full Stacks refinement definition, including the order induced on J, and names the canonical maps; (2) stmt_deps listed a lemma the statement does not use; removed. The item is unchanged; its refinement parenthetical lacks the induced-order clause, but no citer needs it. Nothing dropped.; 1 file(s) fixed by the reviewer"
  }
 }

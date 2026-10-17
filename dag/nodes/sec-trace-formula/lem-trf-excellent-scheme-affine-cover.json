@@ -23,41 +23,131 @@
   "def-pc-scheme",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A_i=\\mathcal O_X(U_i)$. By [def-exc-excellent-ring], each excellent $A_i$ is Noetherian, a G-ring, J-2, and universally catenary. The given affine cover by Noetherian rings witnesses that $X$ is locally Noetherian by the definition [pqf-def-locnoeth]. Thus the locally Noetherian hypothesis needed below has been established from the actual hypotheses, without assuming quasi-compactness.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0HAB (lemma-locally-excellent), proof via the component predicates; Tag 07QT (more-algebra.tex, definition-excellent) and Tag 01OV (properties.tex, definition-noetherian)."
+   }
+  },
+  {
+   "text": "Fix an arbitrary affine open $V\\subseteq X$ and write $B=\\mathcal O_X(V)$. Apply [lem-trf-g-ring-affine-cover] to the original cover and the G-ring property of each $A_i$ from step 1. Its conclusion gives that $B$ is a G-ring. In particular $B$ is Noetherian, as included in the definition of a G-ring [def-weil-pbc-g-ring].",
+   "uses": [
+    "lem-trf-g-ring-affine-cover",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0HA5 (lemma-locally-G-scheme), (3) implies (2); the G-ring definition is More on Algebra Tag 07GH (definition-G-ring)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-j2-affine-cover] to the locally Noetherian scheme $X$ of step 1 and the same affine cover. Every $A_i$ is J-2 by step 1, so its conclusion says that $B$ is J-2. This is the open-regular-locus condition for all finite type $B$-algebras, not merely openness of the regular locus of $B$ itself.",
+   "uses": [
+    "lem-trf-j2-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4 (lemma-J), (4) implies (3), as used in the quasi-excellent case of Tag 0HAB (lemma-locally-excellent)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-universally-catenary-affine-cover] to the locally Noetherian scheme $X$ of step 1. The hypothesis holds on the same cover because every $A_i$ is universally catenary. The conclusion is that $B$ is universally catenary.",
+   "uses": [
+    "lem-trf-universally-catenary-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02J9 (lemma-universally-catenary-local), (4) implies (3), as used in the excellent case of Tag 0HAB (lemma-locally-excellent)."
+   }
+  },
+  {
+   "text": "The ring $B$ is Noetherian and a G-ring by step 2, J-2 by step 3, and universally catenary by step 4. The first three predicates say precisely that $B$ is quasi-excellent, and adding universal catenarity says precisely that $B$ is excellent, by [def-exc-excellent-ring]. As $V$ was arbitrary, this proves the first assertion.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0HAB (lemma-locally-excellent), proof using Tag 0HAA (lemma-characterize-excellent); ring definition is More on Algebra Tag 07QT (definition-excellent)."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq X$ be any open subscheme. For each $x\\in W$, [lem-weil-pbc-affine-opens-basis] supplies an affine open $V$ of $X$ with $x\\in V\\subseteq W$. Hence the collection of all affine opens $V\\subseteq W$ covers $W$. By step 5 each $\\mathcal O_X(V)$ is excellent, and the restricted structure sheaf of the open subscheme satisfies $\\mathcal O_W(V)=\\mathcal O_X(V)$ [def-pc-scheme]. These same opens are the required affine cover of $W$. If $W$ is empty, the empty collection is already a cover.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0HAB (lemma-locally-excellent), final assertion; Schemes Tag 01IT (schemes.tex, lemma-basis-affine-opens)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-g-ring",
+  "lem-trf-g-ring-affine-cover",
+  "lem-trf-j2-affine-cover",
+  "lem-trf-universally-catenary-affine-cover",
+  "lem-weil-pbc-affine-opens-basis",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0HAB (lemma-locally-excellent), proof: separate G-ring and J-2 locality and then universal catenarity, followed by its final assertion about opens."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "rg -n -i 'excellent' over Mathlib/ (live published Mathlib, /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib)",
-   "results": "1 hit: Mathlib/Algebra/Lie/InvariantForm.lean:32, prose ('short and excellent paper'); no definition of excellent rings or schemes",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'IsGRing|UniversallyCatenary|universallyCatenary|J2|IsJ2' over Mathlib/",
-   "results": "only local variable names J2 in Analysis/Analytic/IteratedFDeriv.lean and Topology/Sion.lean; no G-ring, J-2 or universally catenary notion",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "query": "excellent|IsGRing|IsJ2|UniversallyCatenary",
+   "results": "[grep] OK 1 hit(s)\n{\"top\": [\"Mathlib/Algebra/Lie/InvariantForm.lean\"], \"digest\": \"371d3433061e241b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no excellence theorem or excellent-ring predicate was found. Returned affine-cover frameworks require unproved locality hypotheses; Noetherianity alone is a strict part of excellence."
   },
   {
    "tool": "leansearch",
-   "query": "excellence of a scheme can be checked on an affine open cover",
-   "results": "not run: LeanSearch is not reachable from the maintainer review machine",
-   "date": "2026-10-18",
-   "verdict": "unavailable"
+   "query": "Excellence of rings can be checked on an affine open cover of a scheme",
+   "results": "[leansearch] OK 8 hit(s)\n{\"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.HasRingHomProperty.of_iSup_eq_top\", \"AlgebraicGeometry.HasRingHomProperty.of_source_openCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"AlgebraicGeometry.Scheme.openCover_affineOpenCover\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.HasRingHomProperty.iff_of_source_openCover\", \"AlgebraicGeometry.Scheme.AffineCover.X\"], \"digest\": \"187872566b614f1f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no excellence theorem or excellent-ring predicate was found. Returned affine-cover frameworks require unproved locality hypotheses; Noetherianity alone is a strict part of excellence."
   },
   {
    "tool": "loogle",
-   "query": "excellent ring affine open cover",
-   "results": "not run: Loogle is not reachable from the maintainer review machine",
-   "date": "2026-10-18",
-   "verdict": "unavailable"
+   "query": "\"Excellent\"",
+   "results": "[loogle] OK 0 hit(s)\n{\"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no excellence theorem or excellent-ring predicate was found. Returned affine-cover frameworks require unproved locality hypotheses; Noetherianity alone is a strict part of excellence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Excellence of the coordinate rings on an affine open cover implies excellence of the ring of sections on every affine open of a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n{\"top\": [\"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.Scheme.isAffine_affineOpenCover\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\"], \"digest\": \"7a1f3409eeeefb03\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no excellence theorem or excellent-ring predicate was found. Returned affine-cover frameworks require unproved locality hypotheses; Noetherianity alone is a strict part of excellence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian scheme whose affine charts have geometrically regular formal fibres, open regular loci in finite type algebras and universally catenary rings has these properties on all affine opens",
+   "results": "[leanfinder] OK 8 hit(s)\n{\"top\": [\"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\"], \"digest\": \"9d5560c5379afa58\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no excellence theorem or excellent-ring predicate was found. Returned affine-cover frameworks require unproved locality hypotheses; Noetherianity alone is a strict part of excellence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +164,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-excellent-scheme-affine-cover",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0HAB and separated its three independent component-locality inputs (0HA5, 07R4, 02J9) into statement-only nodes. Established local Noetherianity before using the latter two, recombined the excellent-ring definition, and used the existing affine-open basis leaf for restriction to opens. Searched the project, whole DAG and blueprint; all three new facts have genuine logged Mathlib searches and no match. No statement change.",
+  "blueprint": "Expose X, proof of Theorem 3.5, Step 5 (as recorded on lem-trf-projective-inseparable-spread-normalization): the spread Y' and the replacement of X must again be excellent schemes; excellence is verified on an affine cover of the finite normalization charts and passed to every affine open. The component-locality inputs justify the inherited affine-cover check of excellence used in the spread/normalization preparation. The current main-20261015 local-term node is the historical ancestor, not a new direct assertion about excellent rings.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-a07c839e6",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-a07c839e6 (reviewer sub-agent of L); spot-checked: Read the whole delivery and every source. The item's statement is unchanged and matches Stacks 0HAB (morphisms.tex lemma-locally-excellent), the (3)=>(2) direction plus its 'Moreover' clause. The six steps follow the source's own proof, which uses exactly three lemmas, and each of the three new statement-only nodes states one of them with the source's hypotheses kept. lem-trf-g-ring-affine-cover is 0HA5 (properties.tex lemma-locally-G-scheme), (3)=>(2), for any scheme; that is correct because Stacks derives local Noetherianity itself. lem-trf-j2-affine-cover is 07R4 (morphisms.tex lemma-J), (4)=>(3), with X locally Noetherian; the source's S/X typo is noted in its source place. lem-trf-universally-catenary-affine-cover is 02J9 (morphisms.tex lemma-universally-catenary-local), (4)=>(3), with X locally Noetherian. Step 1 gets local Noetherianity directly from the definitions def-exc-excellent-ring and pqf-def-locnoeth. Step 2 takes Noetherianity of B from the G-ring definition (def-weil-pbc-g-ring includes it). That matters because def-exc-excellent-ring defines universal catenarity only for Noetherian rings, so step 4 uses the predicate only where it is defined. Step 6 uses the existing Mathlib leaf lem-weil-pbc-affine-opens-basis and does not assume that intersections of affine opens are affine or that the cover is finite. Edge cases checked: empty X, empty cover and empty V give the zero ring, which satisfies all four ring conditions. None of the new nodes is a clause of the item (none mentions excellence), and none depends on the item, so there is no cycle. Duplicate search over the whole snapshot DAG (the tags, the TeX labels, and every node mentioning G-ring, J-2 or universal catenarity) found no other node stating locality on an affine cover. The logged Mathlib searches are real and found no match. The only off-unit citations are definitions and a Mathlib leaf, so no tool_uses are needed. No SGA source and no coefficient-category question is involved. No fixes were written; review.md has the full checks."
  }
 }

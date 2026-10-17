@@ -11,41 +11,87 @@
   "def-pc-field-extension",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the one-variable specialization of [lem-zl-geometric-irreducibility-transcendental] to the geometrically irreducible extension $L/M$ and the one-element family consisting of $x$. Since $x$ is transcendental over $L$, this family is algebraically independent over $L$, and the resulting extension is exactly $L(x)/M(x)$, which is geometrically irreducible.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-transcendental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 0G32, proof: “This follows from Lemma 0G31 because the fields L(x) and M(x) are purely transcendental extensions of L and M.”"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-geometric-irreducibility-transcendental"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0G32 (lemma-geometrically-irreducible-add-transcendental), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Adding a transcendental element to a geometrically irreducible field extension preserves geometric irreducibility",
-   "results": "No matching geometric-irreducibility theorem; only transcendence and algebraic-independence declarations.",
+   "results": "8 hits: Transcendental.extendScalars, MvPolynomial.irreducible_toPolynomialAdjoinImageCompl, IntermediateField.transcendental_adjoin_iff, Transcendental.of_tower_top, Transcendental.extendScalars_of_isIntegral, Transcendental.subalgebraAlgebraicClosure, IsStronglyTranscendental.of_transcendental, Transcendental.algebraicClosure",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "geometrically irreducible add transcendental",
-   "results": "0 hits; loogle reports unknown identifier geometrically.",
+   "results": "0 hits: ; note: loogle: Unknown identifier `geometrically`",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "geometrically irreducible add transcendental [Mathlib/FieldTheory]",
-   "results": "0 hits in Mathlib/FieldTheory.",
+   "results": "0 hits",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Adding a transcendental element to a geometrically irreducible field extension preserves geometric irreducibility",
-   "results": "No matching theorem; hits concern transcendence over scalar extensions.",
+   "results": "8 hits: Transcendental.extendScalars, Transcendental, AlgebraicIndepOn.insert, Transcendental.extendScalars_of_isIntegral, Transcendental.restrictScalars, AlgebraicIndependent.option_iff, AlgebraicIndepOn.insert_iff, Transcendental.algebraicClosure",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically irreducible field extension remains geometrically irreducible after adjoining one transcendental element",
+   "results": "8 hits: Transcendental.extendScalars, IntermediateField.transcendental_adjoin_iff, MvPolynomial.irreducible_toPolynomialAdjoinImageCompl, Algebra.FormallySmooth.adjoin_of_algebraicIndependent, Transcendental.of_tower_top, Transcendental.extendScalars_of_isIntegral, Algebra.FormallySmooth.of_algebraicIndependent, Transcendental.subalgebraAlgebraicClosure",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Transcendental field extension geometrically irreducible",
+   "results": "0 hits: ; note: loogle: Unknown identifier `field`",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.*irreducible.*transcend [Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometrically irreducible field extension remains geometrically irreducible after adjoining one transcendental element",
+   "results": "8 hits: Field.infinite_emb_of_transcendental, MvPolynomial.irreducible_toPolynomialAdjoinImageCompl, AlgebraicIndependent.option_iff, AlgebraicIndepOn.insert, Transcendental.extendScalars, Algebra.isGeometricallyReduced_iff, AlgebraicIndepOn.insert_iff, Transcendental.extendScalars_of_isIntegral",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-i-dl-general-real",
  "created": {
@@ -65,5 +111,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-geometric-irreducibility-add-transcendental",
+  "worker": "stage1",
+  "summary": "Audited the Tag 0G32 statement and proof. The proof is a direct one-variable specialization of the existing DAG node lem-zl-geometric-irreducibility-transcendental (Tag 0G31), with x transcendental over L providing the required one-element algebraically independent family. No new node is needed.",
+  "blueprint": "Realizes the field-theoretic dependency used in the current blueprint proof paragraph 3, where the Tag 0G4D/0G4F argument invokes geometric irreducibility after adjoining a transcendental variable.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-608fc147c",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-608fc147c (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks algebra.tex Tag 0G32 (l.11377-11389). It states the same thing, hypothesis by hypothesis: tower M⊆L⊆K, L/M geometrically irreducible, x∈K transcendental over L, conclusion L(x)/M(x) geometrically irreducible. The only step cites the forward clause of the existing same-unit node lem-zl-geometric-irreducibility-transcendental (Tag 0G31, l.11340-11374) with its K set to L, its k set to M and the one-element family {x}. That family is algebraically independent over L exactly because x is transcendental over L, and the output is literally L(x)/M(x). This matches the source's proof, which is a one-line reduction to 0G31. The cited node's r-variable form follows from 0G31 by induction, and the item needs only r=1. Stacks proves that direction completely (the 'details omitted' are in the converse). Edge cases: M=L gives a trivial conclusion. M=R, L=C shows the hypothesis is needed. If x is algebraic over L, M(x) need not lie in L(x), so the transcendence hypothesis is needed too. The parent lem-zl-bertini-field-extension uses the item with M=K_0, L=K_0(ξ1,θ1), x=ξ2, and that instance is valid. The delivery has no new nodes. The cited node is unsplit, so there is no cycle. The blueprint snapshots have no node stating 0G31 or 0G32, so same_as [] is correct. Searching dag/nodes found no duplicate. The step stays on the unit route, no tool_uses are needed and no SGA is cited. Proof_deps equals the union of uses, and proof_origin cites the document. Minor: the report calls the item 'imported', but it was created by NR for lem-zl-bertini-field-extension; this needs no change."
  }
 }
