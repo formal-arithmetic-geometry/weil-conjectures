@@ -8,7 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-public import WeilConjectures.Mathlib.Topology.KrullDimension.Open
+public import WeilConjectures.Topology.KrullDimension.Open
 
 /-!
 # A lisse locus for a constructible sheaf

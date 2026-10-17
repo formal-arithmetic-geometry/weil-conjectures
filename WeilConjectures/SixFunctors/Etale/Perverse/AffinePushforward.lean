@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyDevissage
+public import WeilConjectures.Algebra.Homology.DerivedCategory.HomologyDevissage
 public import WeilConjectures.SixFunctors.Etale.Perverse.StalkSupport
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 

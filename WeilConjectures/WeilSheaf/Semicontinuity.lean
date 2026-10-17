@@ -32,7 +32,11 @@ dimension one, separated, of finite type and geometrically connected), `j : U₀
 open immersion and `F` a lisse Weil sheaf on `U₀` with punctual weights at most `β`. Then the
 middle extension `j_*F` has punctual weights at most `β` at every closed point of `X₀`, including
 the finitely many points outside `U₀`.
-(blueprint: `lem-wf-boundary-semicontinuity`) -/
+(blueprint: `lem-wf-boundary-semicontinuity`)
+
+For an affine curve `X₀` and a quasi-compact `j` this is the proved
+`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`; the general case reduces to it by
+covering `X₀` with affine opens. -/
 theorem hasWeightsAtMost_directImage_of_curve {U X : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]

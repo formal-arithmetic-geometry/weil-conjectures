@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Properties
-public import WeilConjectures.Mathlib.RingTheory.KrullDimension.FiniteType
-public import WeilConjectures.Mathlib.Topology.KrullDimension.Open
+public import WeilConjectures.RingTheory.KrullDimension.FiniteType
+public import WeilConjectures.Topology.KrullDimension.Open
 
 /-!
 # Dimensions of closures of points along a morphism of finite type over a field
