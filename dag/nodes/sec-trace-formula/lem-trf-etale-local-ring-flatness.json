@@ -13,9 +13,74 @@
   "def-pc-module-stalk-functor",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O_{S,s}$, $A=\\mathcal O_{T,t}$, $P=T\\times_S T$ with projections $p_1,p_2$, and let $\\delta:T\\to P$ be the diagonal, so $p_i\\delta=\\operatorname{id}_T$ [def-pc-fibre-product]. Set $z=\\delta(t)$ and $C=\\mathcal O_{P,z}$. By [def-weil-etale-morphism] and [def-weil-unramified-morphism], $\\delta$ is an open immersion. By [def-weil-open-immersion], it identifies the structure sheaf with its restriction to an open neighbourhood; taking germs gives an isomorphism $d=\\delta_t^\\sharp:C\\to A$. Write $a_i=p_{i,z}^\\sharp:A\\to C$. Stalk-map composition [def-weil-locally-ringed-space-morphism] gives $d a_i=\\operatorname{id}_A$. Since $d$ is invertible, $a_1=a_2=d^{-1}$. Thus both projections have exactly the same scalar action at this diagonal point.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-open-immersion",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05B9, open-diagonal argument, with X=T and its map to T the identity; applied directly to stalks for Tag 05BA."
+   }
+  },
+  {
+   "text": "Suppose $M$ is flat over $R$ through $e_t^\\sharp$. Apply [lem-pc-pullback-stalk-relative-flat-extension] with both scheme morphisms equal to $e:T\\to S$, first-factor point $t$, second-factor point $t$, and fibre-product point $z=\\delta(t)$. Its hypothesis is precisely this $R$-flatness of the arbitrary $A$-module $M$; both projection images equal $t$ by Step 1. It yields flatness over the second copy of $A$ of $N=C\\otimes_{A,a_1}M$, with the $A$-action on $N$ through $a_2$. This input assumes neither quasi-coherence nor finiteness and applies to our given module itself.",
+   "uses": [
+    "lem-pc-pullback-stalk-relative-flat-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05B9, preservation of relative flatness under base change; its stalk-module form supplied by the existing relative-flat-extension node."
+   }
+  },
+  {
+   "text": "Define $\\phi:N\\to M$ by $\\phi(c\\otimes m)=d(c)m$ and $\\psi:M\\to N$ by $\\psi(m)=1\\otimes m$. Balancing for $\\phi$ follows from $d(a_1(b)c)m=b\\,d(c)m$ for $b\\in A$. Both maps are $A$-linear for the second-factor action: $d a_2=\\operatorname{id}_A$, and $a_2(b)\\otimes m=a_1(b)\\otimes m=1\\otimes bm$. We have $\\phi\\psi=\\operatorname{id}_M$, and $\\psi\\phi(c\\otimes m)=1\\otimes d(c)m=a_1(d(c))\\otimes m=c\\otimes m$, since $a_1d=\\operatorname{id}_C$. Hence $N\\cong M$ as $A$-modules. For any injective map of $A$-modules, tensoring this isomorphism and its inverse identifies the tensor maps for $N$ and $M$. The map for $N$ is injective by Step 2; therefore the map for $M$ is injective. This proves $A$-flatness using [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05B9, restriction to the diagonal open subscheme: explicit tensor and scalar identifications at z, giving the forward implication of Tag 05BA."
+   }
+  },
+  {
+   "text": "Conversely suppose $M$ is flat over $A$. The morphism $e$ is flat by [def-weil-etale-morphism]; hence $A$ is flat over $R$ via $e_t^\\sharp$ by [def-weil-flat-morphism]. Apply [lem-pc-module-flat-transitive] to $R\\to A$ and $M$. It gives flatness of $M$ over $R$ with exactly the scalar restriction in the item. Together with Steps 2-3 this proves the equivalence, for every module $M$ without a finiteness assumption.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05B9, first paragraph (etale implies flat and flatness is transitive); reverse implication of Tag 05BA."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-open-immersion",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-pc-pullback-stalk-relative-flat-extension",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-flat-morphism",
+  "lem-pc-module-flat-transitive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05BA, proved by applying the open-diagonal/base-change argument of Tag 05B9 directly to modules over stalks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-elementary-devissage-flatness",
@@ -81,5 +146,30 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-local-ring-flatness",
+  "worker": "stage1",
+  "group": "Q07",
+  "summary": "Statement unchanged. Used the stalk-module version of the source open-diagonal argument: existing relative-flat-extension gives a flat module on the product stalk, the two diagonal projection stalk maps are the inverse of the open-immersion stalk isomorphism, and explicit balanced tensor maps recover M. The converse is existing flatness transitivity. No new nodes or Mathlib leaves.",
+  "blueprint": "Supporting Tag 057U etale-neighbourhood flatness comparison in the Tag 05I7/05I6 ancestry of lem-trf-local-term-locality. The four steps realize precisely the required stalk comparison, by the diagonal/base-change proof of Tag 05B9 underlying Tag 05BA; the unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-pullback-stalk-relative-flat-extension",
+    "why": "Step 2 takes preservation of relative flatness of an arbitrary stalk module under scheme base change. This generic tensor/stalk tool supplies the base-change input of Stacks Tag 05B9, not a replacement of the unit route; no node of sk-i-curve-zero supplies this general module-flatness input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-pullback-stalk-relative-flat-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-50fc146c6",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-50fc146c6 (reviewer sub-agent of L); spot-checked: Read the full delivery and cited statements; checked Stacks 05BA/05B9, all four steps, scalar actions, edge cases, duplicates, route, and acyclic dependency closure. Accepted the relative-flat-extension generic tool use. No new nodes, long-step violations, or repairs. Detailed checks written to review.md."
  }
 }

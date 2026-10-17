@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-zl-relative-envelope-factor-reality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reality of relative factors for an envelope",
@@ -15,52 +15,263 @@
  "stmt_deps": [
   "lem-zl-relative-curve-punctual",
   "def-weil-pbc-qbar-category",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "def-wf-iota-real",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof": [
   {
-   "text": "Fix a closed point $y$ of the base. By [thm-cbc-qbar], the\nlocal polynomials of $R^ih_!\\mathcal E$ at $y$ are the polynomials\n$P_i$ of the compactly supported cohomology of the fiber\n$U_{\\bar y}$ (the local Frobenius eigenvalues of the stalk). The\ngroup in degree zero vanishes by (the affine-line form of) the\n$H_c^0$-vanishing of lisse sheaves on nonproper curves,\n[lem-a1-affine-hc0]; the roots of $P_1$ have modulus\nat most $q_y^{1/2}$ by [lem-zl-relative-curve-punctual] (weight\nzero, $i=1$), while every nonzero root of $P_2$ has modulus $q_y$\nby the top-factor purity [lem-zl-affine-curve-hc2-purity].",
+   "text": "Put $\\mathcal G_i=\\mathcal H^i(Rh_!\\mathcal E)$. These are constructible Weil sheaves: $h$ is separated of finite type and its source and target are separated of finite type over $k_0$, as required in [lem-zl-relative-curve-punctual]. At a finite coefficient field, [lem-sf-integral-compact-support-constructible] puts the compact-support image of an integral representative in the completed integral constructible category. The rationalization and common-stage formulas of [def-weil-integral-rational-qbar-compact-support] therefore put $Rh_!\\mathcal E$ in $D^b_c(Y,\\Qlb)$. The lift [prop-weil-operations] supplies its Weil structure, and [prop-constructible-truncations] supplies constructible cohomology with that structure. Thus the pointwise reality condition of [def-wf-iota-real] applies to each $\\mathcal G_i$; no lissity of a direct image is asserted.",
    "uses": [
-    "thm-cbc-qbar",
-    "lem-a1-affine-hc0",
     "lem-zl-relative-curve-punctual",
-    "lem-zl-affine-curve-hc2-purity"
+    "lem-sf-integral-compact-support-constructible",
+    "def-weil-integral-rational-qbar-compact-support",
+    "prop-weil-operations",
+    "prop-constructible-truncations",
+    "def-wf-iota-real"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "first paragraph: define the local factors, including their constructible domain"
+   }
   },
   {
-   "text": "The trace formula [cor-trf-point-counting] identifies the fiber\n$L$-function, i.e. the exponential of the point-count series of the\nfiber with coefficients $\\mathcal E$, with\n$P_1(T)/P_2(T)$ (the cohomological factorization over the finite\nfield $\\kappa(y)$, with $H_c^0=0$): exponentiating the alternating\ntrace sum degree by degree, the Euler-product identity\n[lem-zl-euler-product-identity] turns the exponential of the trace\nseries of $F$ on $H_c^i$ into $P_i(T)^{-1}$. Its Euler factors have real\ncoefficients by the $\\iota$-reality of $\\mathcal E$\n([def-wf-iota-real] applied to the restriction to the fiber), so\nthis quotient lies in $\\mathbf R(T)$. The radii are disjoint\n($|z|\\leq q_y^{1/2}$ for $P_1$, $|z|=q_y$ for the roots of\n$P_2$), and [lem-zl-root-radius-separation] therefore makes the\nfraction reduced with denominator $P_2$ in the reduced form; now\n[lem-zl-real-reduced-factors] gives\n$P_1,P_2\\in\\mathbf R[T]$. This holds for every $y$; degree zero is\ntrivial ($P_0=1$ by the vanishing), and all other degrees vanish or\nare captured by [lem-zl-affine-curve-range]. This proves the\nasserted $\\iota$-reality.",
+   "text": "Fix a closed point $y\\in Y_0$, write $m=[\\kappa(y):k_0]$, $Q=q^m$, and put $C_0=U_0\\times_{Y_0}\\operatorname{Spec}\\kappa(y)$, $C=C_0\\times_{\\kappa(y)}k$. Write $\\mathcal E_y$ for the restriction with Weil structure given by the $m$-fold iterate of that of $\\mathcal E$. The fibre hypotheses in [lem-zl-relative-curve-punctual] make $C_0$ a smooth affine curve of relative dimension one over $\\kappa(y)$, possibly empty; separatedness and finite type also follow from [lem-pod-separated-finite-type-base-change]. Restricting an etale trivialization gives a trivialization of the pullback, so $\\mathcal E_y$ is lisse by [def-pod-lisse-l-adic-sheaves]. By [lem-tw-punctual-rescaling] it is punctually pure of weight zero relative to $Q$.",
    "uses": [
-    "cor-trf-point-counting",
-    "lem-zl-euler-product-identity",
-    "def-wf-iota-real",
-    "lem-zl-root-radius-separation",
-    "lem-zl-real-reduced-factors",
+    "lem-zl-relative-curve-punctual",
+    "lem-pod-separated-finite-type-base-change",
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-tw-punctual-rescaling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "first paragraph: the fibre and normalization by its residue cardinality"
+   }
+  },
+  {
+   "text": "The fibre inclusion $C_0\\hookrightarrow U_0$ is a closed immersion (it is the inverse image of the closed point $y$). Clause 1 of [lem-zl-immersion-weil-local-behavior] identifies its closed-point stalks and their local operators when both schemes are viewed over $k_0$. For a closed $x\\in C_0$ of degree $r$ over $\\kappa(y)$, its degree over $k_0$ is $mr$. Over $\\kappa(y)$ the local operator of [def-weil-local-frobenius-trace] uses $(\\theta^{[m]})^{[r]}=\\theta^{[mr]}$ and point transport by $\\gamma^{mr}$, exactly the same formula as over $k_0$. Hence it is the same operator on the same stalk. Its characteristic polynomial is real by the hypothesis on $\\mathcal E$ and [def-wf-iota-real]. This proves that $\\mathcal E_y$ is real over $\\kappa(y)$.",
+   "uses": [
+    "lem-zl-immersion-weil-local-behavior",
+    "def-weil-local-frobenius-trace",
+    "def-wf-iota-real"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "second paragraph: justify reality of the restricted sheaf and its local factors"
+   }
+  },
+  {
+   "text": "Apply the compact-support base-change clause 4 of [prop-functor-package] to the geometric fibre square of $h$, on its $\\Qlb$ bounded constructible domain. Evaluation at $\\operatorname{Spec}k$ and degree-$i$ cohomology, as in [def-weil-ordinary-compact-cohomology], give an isomorphism\n$$b_{i,y}:(\\mathcal G_i)_{\\bar y}\\xrightarrow{\\sim}V_i:=H_c^i(C,\\mathcal E_y).$$\nThe base-change comparisons are equivariant by [prop-weil-operations]. In the local formula of [def-weil-local-frobenius-trace], $g_Y^m\\bar y=\\bar y g_s^m$; after this return, the same base-change comparison uses the restricted $m$-fold Weil map. Thus its equivariance says explicitly $b_{i,y}F_y=F_{C/\\kappa(y)}b_{i,y}$, where the right-hand operator is the compact-support transport followed by that restricted Weil map of [def-weil-global-geometric-frobenius]. Consequently the local characteristic factor of $\\mathcal G_i$ is\n$$P_i(T):=\\iota\\det(1-TF_{C/\\kappa(y)}\\mid V_i),\\qquad P_i(0)=1.$$",
+   "uses": [
+    "prop-functor-package",
+    "def-weil-ordinary-compact-cohomology",
+    "prop-weil-operations",
+    "def-weil-local-frobenius-trace",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "first paragraph: base change identifies the local factors with fibre factors"
+   }
+  },
+  {
+   "text": "Here are the finite-level hypotheses needed to apply the trace formula on $C_0$. By [def-wf-weil-category], the Weil sheaf has a finite coefficient-field representative $(E,(K_E,\\theta_E))$. We may enlarge $E$ so that $K_E$ is a sheaf in degree zero: clause 3 of [def-weil-constructible-standard-tstructure] represents the two heart conditions at finite stages, and the common-stage morphism convention in [def-wf-weil-category] represents the required isomorphisms at a common finite extension. Since truncations commute with finite scalar extension by [prop-constructible-truncations], their vanishing and hence the two heart conditions hold at a sufficiently large common stage. The rational category has integral representatives, and [lem-trf-curve-integral-lattice], applied to $K_E$ on the separated affine curve $C_0$ of dimension at most one, supplies a lattice $M$ whose every derived reduction $M_n$ lies in $D^b_{ctf}(C,A_{E,n})$ and has an explicit etale-origin witness. No integral or invertible-on-a-lattice Weil structure is being assumed.",
+   "uses": [
+    "def-wf-weil-category",
+    "def-weil-constructible-standard-tstructure",
+    "prop-constructible-truncations",
+    "lem-trf-curve-integral-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "second paragraph: discharge the coefficient hypotheses of the general trace formula"
+   }
+  },
+  {
+   "text": "Choose a compactification of $C_0\\to\\operatorname{Spec}\\kappa(y)$ over $\\kappa(y)$ by [thm-nagata-compactification]; the base is quasi-compact and quasi-separated, and the curve is separated of finite type. All graph correspondences of the Frobenius iterates and their fixed-point base changes on its geometric compactification have separated finite-type source and target over $k$. The last paragraph of [def-trf-admissibility] states that exceptional admissibility on these constructible domains is a theorem for every such morphism. More explicitly, [thm-sf-ambient-adjoint-class] supplies the relative adjunction and compactification comparisons on etale-origin inputs, and [thm-sf-preservation-class] supplies bounds uniform in the finite coefficient level, with separated targets as here. Together with the lattice witnesses in Step 5, these discharge exactly the finite-level hypotheses of [thm-trf-grothendieck-lefschetz-qbar], and therefore those of [thm-trf-l-function-euler-product].",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-trf-admissibility",
+    "thm-sf-ambient-adjoint-class",
+    "thm-sf-preservation-class",
+    "thm-trf-grothendieck-lefschetz-qbar",
+    "thm-trf-l-function-euler-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "second paragraph: discharge compactification admissibility for the trace formula"
+   }
+  },
+  {
+   "text": "To apply degree-zero vanishing without assuming connected fibres, use [lem-zl-affine-geometric-components-finite-extension] over $\\kappa(y)$: after a finite extension $\\mathbf F_{Q^e}$, the curve decomposes into finitely many smooth geometrically connected affine curves $C_{a,e}$. By [lem-zl-weil-constant-extension-frobenius] the restriction of $\\mathcal E_y$ to this extended base is lisse. Its restriction to each open and closed component is still lisse by the local definition [def-pod-lisse-l-adic-sheaves]. Thus [lem-a1-affine-hc0] gives $H_c^0(C_a,\\mathcal E_{a,e})=0$ for every component. Finite clopen decomposition [lem-pur-finite-clopen-derived-decomposition] and exceptional restriction [lem-pur-finite-clopen-exceptional-restriction], with the constructible adjunction of [prop-functor-package], give\n$$\\operatorname{Hom}(Ra_!\\mathcal E_y,L)\\cong\\prod_a\\operatorname{Hom}(R(a_a)_!\\mathcal E_{a,e},L),$$\nwhere $a:C\\to\\operatorname{Spec}k$ and $a_a:C_a\\to\\operatorname{Spec}k$. This is the universal property of the finite direct sum, so evaluation and degree-zero cohomology give $V_0=\\bigoplus_a H_c^0(C_a,\\mathcal E_{a,e})=0$. The underlying coefficient space is unchanged by the finite constant extension, as stated in [lem-zl-weil-constant-extension-frobenius]; only its Frobenius is replaced by an $e$-th power. The empty-family clause gives the same result for the empty fibre. Hence $P_0=1$.",
+   "uses": [
+    "lem-zl-affine-geometric-components-finite-extension",
+    "lem-zl-weil-constant-extension-frobenius",
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-a1-affine-hc0",
+    "lem-pur-finite-clopen-derived-decomposition",
+    "lem-pur-finite-clopen-exceptional-restriction",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "first paragraph: justify degree-zero vanishing also on disconnected and empty fibres"
+   }
+  },
+  {
+   "text": "Apply [lem-zl-relative-curve-punctual] with weight zero and $i=1$ to the given $h,\\mathcal E$. By the Frobenius-compatible identification of Step 4, every reciprocal root of $P_1$ has modulus at most $Q^{1/2}$. Step 2 supplies the hypotheses of [lem-zl-affine-curve-hc2-purity] over the finite field $\\kappa(y)$, so every reciprocal root of $P_2$ has modulus $Q$. These are reciprocal roots (Frobenius eigenvalues), not roots in the variable $T$, whose moduli are their inverses. Finally [lem-zl-affine-curve-range], applied to the constructible sheaf $\\mathcal E_y$ on the smooth affine curve $C_0$, gives $V_i=0$ for $i\\notin\\{0,1,2\\}$. Its statement explicitly includes disconnected and empty curves.",
+   "uses": [
+    "lem-zl-relative-curve-punctual",
+    "lem-zl-affine-curve-hc2-purity",
     "lem-zl-affine-curve-range"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "first paragraph and end of second paragraph: the reciprocal-root bounds and cohomological range"
+   }
+  },
+  {
+   "text": "Apply clauses 2--4 of [thm-trf-l-function-euler-product] over $\\kappa(y)$ to $\\mathcal E_y$, using Steps 5--6 to supply its finite-level hypotheses. It gives\n$$L_\\iota(C_0,\\mathcal E_y,T)=P_1(T)/P_2(T)\\quad\\text{in }\\mathbf C[[T]],$$\nsince $P_0=1$. The cohomological operator is the global geometric Frobenius used in Step 4, as specified in [prop-trf-rational-frobenius-integral-model]. The local Euler-product operators in that theorem agree up to conjugacy with the geometric-point operators of Step 3 by [lem-rp-local-frobenius-models-agree]; its required lattice with finite-Tor reductions was supplied in Step 5. Thus each local factor is real by Step 3. The Euler product is locally finite by clause 1 of [thm-trf-l-function-euler-product], so each coefficient uses finitely many factors and is real. Therefore the Taylor series of $P_1/P_2$ is in $\\mathbf R[[T]]$.",
+   "uses": [
+    "thm-trf-l-function-euler-product",
+    "prop-trf-rational-frobenius-integral-model",
+    "lem-rp-local-frobenius-models-agree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "second paragraph: coefficient trace formula and real Euler factors"
+   }
+  },
+  {
+   "text": "Write $A=P_1$, $B=P_2$, and put a bar over coefficientwise complex conjugates. Since $A/B$ has real Taylor coefficients and $B(0)=1$, it has the same Taylor series as $\\bar A/\\bar B$. Multiplying by $B\\bar B$ gives $A\\bar B=\\bar A B$ as polynomials. Thus both $A\\bar B$ and $B\\bar B$ have real coefficients, the latter is nonzero, and\n$$A/B=(A\\bar B)/(B\\bar B)\\in\\mathbf R(T).$$\nThis supplies rational-function reality from series reality without assuming that real Taylor coefficients alone are a definition of $\\mathbf R(T)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "second paragraph: justify the implication from real Euler coefficients to a real rational function"
+   }
+  },
+  {
+   "text": "Here $Q\\geq2$, so $Q^{1/2}<Q$. The reciprocal-root bounds of Step 8 and [lem-zl-root-radius-separation], with $R=Q^{1/2}$ and $S=Q$, say that all reciprocal roots of $P_2$ survive in the reduced denominator with their full multiplicities. Therefore $P_1$ and $P_2$ have no common root and are coprime. They both have constant coefficient one, and Step 10 gives $P_1/P_2\\in\\mathbf R(T)$. Apply [lem-zl-real-reduced-factors] to obtain $P_1,P_2\\in\\mathbf R[T]$. This argument also covers constant factors $P_1=1$ or $P_2=1$, since their reciprocal-root conditions are vacuous.",
+   "uses": [
+    "lem-zl-root-radius-separation",
+    "lem-zl-real-reduced-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "second paragraph: separated reciprocal radii and real normalized reduced factors"
+   }
+  },
+  {
+   "text": "Steps 7--8 give $P_i=1$ in every degree other than $1,2$, and Step 11 gives real coefficients in those two degrees. Step 4 identifies these with the local characteristic factors of $\\mathcal G_i$ at $y$. The point $y$ was arbitrary and Step 1 supplied constructibility and the Weil structure. By [def-wf-iota-real], every $R^ih_!\\mathcal E=\\mathcal G_i$ is therefore $\\iota$-real.",
+   "uses": [
+    "def-wf-iota-real"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+    "place": "second paragraph: pointwise reality of all relative factors"
+   }
   }
  ],
  "proof_deps": [
-  "thm-cbc-qbar",
-  "lem-a1-affine-hc0",
   "lem-zl-relative-curve-punctual",
-  "lem-zl-affine-curve-hc2-purity",
-  "cor-trf-point-counting",
-  "lem-zl-euler-product-identity",
+  "lem-sf-integral-compact-support-constructible",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-weil-operations",
+  "prop-constructible-truncations",
   "def-wf-iota-real",
+  "lem-pod-separated-finite-type-base-change",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-tw-punctual-rescaling",
+  "lem-zl-immersion-weil-local-behavior",
+  "def-weil-local-frobenius-trace",
+  "prop-functor-package",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "def-wf-weil-category",
+  "def-weil-constructible-standard-tstructure",
+  "lem-trf-curve-integral-lattice",
+  "thm-nagata-compactification",
+  "def-trf-admissibility",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "thm-trf-l-function-euler-product",
+  "lem-zl-affine-geometric-components-finite-extension",
+  "lem-zl-weil-constant-extension-frobenius",
+  "lem-a1-affine-hc0",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-pur-finite-clopen-exceptional-restriction",
+  "lem-zl-affine-curve-hc2-purity",
+  "lem-zl-affine-curve-range",
+  "prop-trf-rational-frobenius-integral-model",
+  "lem-rp-local-frobenius-models-agree",
   "lem-zl-root-radius-separation",
-  "lem-zl-real-reduced-factors",
-  "lem-zl-affine-curve-range"
+  "lem-zl-real-reduced-factors"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-envelope-factor-reality.proof.md",
+  "place": "both proof paragraphs, with coefficient domains, finite-stage hypotheses, fibre normalization, disconnected-fibre vanishing and rational descent made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "reality of relative factors for compactly supported cohomology of an affine curve Weil sheaf",
+   "results": "{\"t\": \"2026-10-17T22:00:23Z\", \"tool\": \"leanfinder\", \"query\": \"reality of relative factors for compactly supported cohomology of an affine curve Weil sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.dedekindZeta_residue\", \"groupCohomology.Hilbert90.aux\", \"groupCohomology.Hilbert90.aux_ne_zero\", \"NumberField.dedekindZeta_residue_pos\", \"NumberField.dedekindZeta_residue_ne_zero\", \"FunctionField.classNumber\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"NumberField.IsCMField.regOfFamily_realFunSystem\"], \"digest\": \"be8bbeb5531cdda2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state reality of Weil-sheaf compact-support direct-image factors; no WeilSheaf, higherLowerShriek or punctual-purity construction was found in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.map_conj_eq_self_of_isCoprime Polynomial.isCoprime_of_norm_inv_roots",
+   "results": "{\"t\": \"2026-10-17T22:00:24Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.map_conj_eq_self_of_isCoprime Polynomial.isCoprime_of_norm_inv_roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown constant `Polynomial.map_conj_eq_self_of_isCoprime`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state reality of Weil-sheaf compact-support direct-image factors; no WeilSheaf, higherLowerShriek or punctual-purity construction was found in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.?Lefschetz|higherLowerShriek|IsReal",
+   "results": "{\"t\": \"2026-10-17T22:00:24Z\", \"tool\": \"grep\", \"query\": \"Grothendieck.?Lefschetz|higherLowerShriek|IsReal\", \"sub\": \"AlgebraicGeometry/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state reality of Weil-sheaf compact-support direct-image factors; no WeilSheaf, higherLowerShriek or punctual-purity construction was found in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative compactly supported cohomology factors are real when the sheaf is real and pure",
+   "results": "{\"t\": \"2026-10-17T22:00:24Z\", \"tool\": \"leansearch\", \"query\": \"relative compactly supported cohomology factors are real when the sheaf is real and pure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactlySupportedContinuousMap.toReal\", \"Bornology.relativelyCompact_eq_inCompact\", \"CompactlySupportedContinuousMap.toRealLinearMap\", \"CompactlySupportedContinuousMap.coe_toRealLinearMap\", \"Bornology.relativelyCompact\", \"HasCompactSupport.rpow_const\", \"CompactlySupportedContinuousMap.toRealLinearMap_apply\", \"CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf\"], \"digest\": \"e9ca061c9cc9c1c7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state reality of Weil-sheaf compact-support direct-image factors; no WeilSheaf, higherLowerShriek or punctual-purity construction was found in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A real lisse sheaf pure of weight zero has real higher direct images with compact support along smooth relative affine curves",
+   "results": "{\"t\": \"2026-10-17T22:06:23Z\", \"tool\": \"leanfinder\", \"query\": \"A real lisse sheaf pure of weight zero has real higher direct images with compact support along smooth relative affine curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.Scheme.Modules.pushforward\"], \"digest\": \"4df1022639483ebc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state reality of Weil-sheaf compact-support direct-image factors; no WeilSheaf, higherLowerShriek or punctual-purity construction was found in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|compactlySupportedCohomology|higherLowerShriek|PunctuallyPure",
+   "results": "{\"t\": \"2026-10-17T22:06:23Z\", \"tool\": \"grep\", \"query\": \"WeilSheaf|compactlySupportedCohomology|higherLowerShriek|PunctuallyPure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state reality of Weil-sheaf compact-support direct-image factors; no WeilSheaf, higherLowerShriek or punctual-purity construction was found in Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -689,5 +900,169 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-relative-envelope-factor-reality",
+  "worker": "stage1",
+  "summary": "Kept the statement and the unit’s fibre L-function / separated-radii route. Repaired the constant-sheaf trace-formula citation, supplied the finite coefficient-stage and admissibility hypotheses, used existing Weil-equivariant base-change and local-Frobenius comparison statements, proved degree-zero vanishing for possibly disconnected fibres using the existing finite-clopen and component-descent nodes, and wrote the elementary real-series to real-rational-function descent. Corrected roots to reciprocal roots in the proof, without changing the statement. The read-only source declaration has sorry, contrary to the older audited line record, so no attachment is claimed. All prerequisites are existing DAG nodes; there are no new nodes.",
+  "blueprint": "Steps 1--4 realize the first paragraph’s local-factor setup and fibre restriction. Steps 5--6 discharge hypotheses implicit in the second paragraph’s trace-formula application. Step 7 realizes the degree-zero vanishing; Step 8 realizes the first paragraph’s degree-one and top-factor reciprocal-root bounds and the final range clause. Step 9 realizes the general coefficient Euler-product identity and reality of its coefficients, Step 10 supplies its rational-function descent, and Steps 11--12 realize the separated-radii, real-factor and pointwise-reality conclusion. All remain the second step of unit sk-p-dl-general-relative-line.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Uses only the stated generic The integral compact-support direct image of a constructible complex is constructible as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "def-weil-integral-rational-qbar-compact-support",
+    "why": "Uses only the stated generic Integral, rational, and algebraically closed compact-support functors as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "Uses its stated Weil structures and Frobenius equivariance of base change and cohomology; no unit-specific node states these generic comparisons."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Uses only the stated generic Construction of constructible truncations as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "def-wf-iota-real",
+    "why": "Uses only the stated generic $\\iota$-real and $\\iota$-realizable Weil sheaves as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Uses only the stated generic Separated finite-type morphisms are stable under base change as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "def-pod-lisse-l-adic-sheaves",
+    "why": "Uses only the stated generic Lisse O_E-, E- and Qlbar-sheaves and their fibres (Weil II (1.1.1)) as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "lem-zl-immersion-weil-local-behavior",
+    "why": "Only its closed-immersion stalk/Frobenius equality is used for fibre restriction; the unit has no general immersion comparison."
+   },
+   {
+    "node": "def-weil-local-frobenius-trace",
+    "why": "Uses the explicit iterate and geometric-point-return formula to normalize the fibre over its residue field; this is a definition tool."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Uses constructible compact-support base change and exceptional adjunction, the tools required by the fibre and finite-component arguments."
+   },
+   {
+    "node": "def-weil-ordinary-compact-cohomology",
+    "why": "Uses only the stated generic Ordinary and compactly supported cohomology as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "def-weil-global-geometric-frobenius",
+    "why": "Uses only the stated generic Global geometric Frobenius as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "def-wf-weil-category",
+    "why": "Uses only the stated generic The Weil category as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "def-weil-constructible-standard-tstructure",
+    "why": "Uses only the stated generic Standard pair of subcategories on the constructible categories as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "lem-trf-curve-integral-lattice",
+    "why": "Provides a finite-Tor lattice with explicit etale-origin reductions on a curve, solely to meet the trace formula’s coefficient hypotheses."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Uses only the stated generic Nagata compactification, [stacks-project] as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "def-trf-admissibility",
+    "why": "Uses only the stated generic Exceptional-adjoint admissibility datum as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Uses only the stated generic The exceptional adjoint on the bounded comparison class as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Uses only the stated generic The preservation clauses of exceptional-adjoint admissibility are theorems on the coefficient class as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "thm-trf-grothendieck-lefschetz-qbar",
+    "why": "Uses only the stated generic Grothendieck–Lefschetz formula over $\\Qlb$ as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "thm-trf-l-function-euler-product",
+    "why": "Uses only the stated generic Euler-product form of the trace formula as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "lem-a1-affine-hc0",
+    "why": "Uses only the stated generic Vanishing of $H_c^0$ on a nonproper curve as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "lem-pur-finite-clopen-derived-decomposition",
+    "why": "Uses its finite-clopen coefficient-category equivalence only, to assemble degree-zero vanishing on components; no purity theorem is used."
+   },
+   {
+    "node": "lem-pur-finite-clopen-exceptional-restriction",
+    "why": "Uses its all-coefficient exceptional restriction comparison only, with constructible adjunction to assemble compact cohomology on components."
+   },
+   {
+    "node": "lem-zl-affine-curve-range",
+    "why": "Uses only the stated generic Cohomological range of an affine curve as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "prop-trf-rational-frobenius-integral-model",
+    "why": "Uses only the stated generic Integral models of rational Frobenius operators as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "lem-rp-local-frobenius-models-agree",
+    "why": "Uses its equality of local determinant factors for the trace-formula and geometric-point conventions; no unit-specific node states this comparison."
+   },
+   {
+    "node": "def-weil-pbc-qbar-category",
+    "why": "Uses only the stated generic Qbar-l coefficient category as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   },
+   {
+    "node": "def-weil-punctual-weights",
+    "why": "Uses only the stated generic Punctual weights as a prerequisite of the compact-support fibre/trace-formula argument; the unit contains no replacement for this tool, and its L-function and separated-radii route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-integral-compact-support-constructible",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-weil-operations",
+  "prop-constructible-truncations",
+  "def-wf-iota-real",
+  "lem-pod-separated-finite-type-base-change",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-zl-immersion-weil-local-behavior",
+  "def-weil-local-frobenius-trace",
+  "prop-functor-package",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius",
+  "def-wf-weil-category",
+  "def-weil-constructible-standard-tstructure",
+  "lem-trf-curve-integral-lattice",
+  "thm-nagata-compactification",
+  "def-trf-admissibility",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "thm-trf-l-function-euler-product",
+  "lem-a1-affine-hc0",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-pur-finite-clopen-exceptional-restriction",
+  "lem-zl-affine-curve-range",
+  "prop-trf-rational-frobenius-integral-model",
+  "lem-rp-local-frobenius-models-agree",
+  "def-weil-pbc-qbar-category",
+  "def-weil-punctual-weights"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q75-a888132d4",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q75-a888132d4 (reviewer sub-agent of L); spot-checked: Reviewed and accepted. Wrote review.md with step-by-step source, hypothesis, coefficient/base-change, Frobenius, edge-case, route-pivot, and A–F checks. No repairs or new nodes were needed."
  }
 }

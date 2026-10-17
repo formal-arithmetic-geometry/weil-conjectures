@@ -15,9 +15,75 @@
   "def-pc-ring-pseudo-coherent-complex",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The source's $R$-perfect condition is exactly the two displayed assumptions on each $T=M,N$: Definition 0DHS says pseudo-coherent over $A$ and finite Tor dimension over $R$, and the latter means a single finite Tor interval valid for every $R$-module. No finite Tor dimension over $A$ or $B$ follows or is used. Taking $Q=R$ in the hypothesis shows that $T$ has bounded cohomology. Since $A$ is Noetherian, [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] gives finite generation of every $H^i(T)$ from pseudo-coherence. Thus $M,N\\in D^b_{\\mathrm{fg}}(A)$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0DHS and 066E. Expanded-hypothesis equivalence and bounded coherence."
+   }
+  },
+  {
+   "text": "Choose a finite polynomial presentation $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$, which exists by finite presentation. Set $C=R\\operatorname{Hom}_P(A,P)[n]$ with its coinduced $A$-action. Apply [lem-trf-algebraic-shriek-relative-perfect]: the map is flat and finite type and both rings are Noetherian, so $C\\in D^b_{\\mathrm{fg}}(A)$ and its scalar-action morphism $h:A\\to R\\operatorname{Hom}_A(C,C)$ is an isomorphism.",
+   "uses": [
+    "lem-trf-algebraic-shriek-relative-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW, parts (1)(a)--(c), polynomial relative dualizing complex."
+   }
+  },
+  {
+   "text": "For each $T=M,N$ apply [lem-trf-polynomial-diagonal-rhom-reduction] to the same presentation $P$. All its hypotheses are exactly Step 1 and the given flat finite presentation. Restrict the assumed isomorphism $R\\operatorname{Hom}_B(A,T\\otimes_{A,p_1}^{\\mathbf L}B)\\cong A$ along the actual coprojection $p_1:A\\to B$. Its target becomes $A$ with its usual action, since multiplication composed with $p_1$ is the identity. The reduction therefore gives an isomorphism $g_T:A\\xrightarrow{\\sim}R\\operatorname{Hom}_A(C,T)$ in $D(A)$. This uses restriction of scalars only; no underived restriction along $B\\to A$ or $p_2$ identification is asserted.",
+   "uses": [
+    "lem-trf-polynomial-diagonal-rhom-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Polynomial-diagonal tensor-Hom reduction, derived in report.md from Tags 068X, 07VI, 0A65 and 0A6A."
+   }
+  },
+  {
+   "text": "Use the tensor-Hom adjunction of [lem-pod-projective-hom-evaluation-model] with a bounded-above projective representative of $C$ (its pseudo-coherence supplies one by Step 2). Let $f_T:C=C\\otimes_A^{\\mathbf L}A\\to T$ be the adjunct of $g_T$. The scalar map $h$ is the adjunct of $\\mathrm{id}_C$. Naturality of adjunction gives $R\\operatorname{Hom}_A(C,f_T)\\circ h=g_T$: both sides are adjunct to $f_T$ under the same adjunction. Since $h$ and $g_T$ are isomorphisms, $R\\operatorname{Hom}_A(C,f_T)$ is an isomorphism.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A65, derived internal-Hom adjunction; adjunct of the identity is scalar action."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-semidualizing-rhom-conservative] to $C$ and $f_T:C\\to T$. Step 2 verifies bounded finite cohomology and the scalar-action isomorphism for $C$; Step 1 verifies bounded finite cohomology of $T$; Step 4 verifies that derived Hom sends $f_T$ to an isomorphism. Thus both $f_M:C\\to M$ and $f_N:C\\to N$ are isomorphisms. The composite $f_N\\circ f_M^{-1}:M\\to N$ proves the assertion. The choices of $g_T$ were arbitrary; no normalized comparison is concluded.",
+   "uses": [
+    "lem-trf-semidualizing-rhom-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent semidualizing detection corollary of Tags 0BFR and 0A7C."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-trf-polynomial-diagonal-rhom-reduction",
+  "lem-trf-semidualizing-rhom-conservative",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Repair of the affine uniqueness input of Tag 0E2D by polynomial diagonal reduction and semidualizing detection; detailed derivations in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-dualizing-pair-rigidity",
@@ -79,5 +145,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-algebraic-relative-dualizing-isomorphism",
+  "worker": "stage1",
+  "summary": "Repair C3/C4/E1: the chain-level evaluation argument is replaced by a natural derived polynomial-diagonal reduction and a general semidualizing detection lemma. Definition 0DHS is checked literally against the expanded hypotheses. Restriction is along p1, never multiplication; the invalid p2/evaluation route is removed. Target statement unchanged. The previous draft implication from R-Tor bounds to B-Tor bounds is explicitly rejected in report.md.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian cohomology criterion to pass from pseudo-coherence to finite cohomology; not a replacement for a geometric step of the unit."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic derived tensor-Hom adjunction, used to turn a generator isomorphism into a morphism C to T; no trace-formula node states this adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pod-projective-hom-evaluation-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q44-a085c7408",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-a085c7408 (reviewer sub-agent of L); spot-checked: Reviewed item and both new nodes against Tags 0E2D/0E2C, 0BZW, 068X, 07VI, 0A65, 0A6A, 0BFR, 0A7C, and all cited DAG statements. Checked hypotheses, p1 base-change orientation, ordinary derived coefficient categories, edge cases, duplicates, route lock, and long-step rule. No faults or repairs needed. Review written to review.md."
  }
 }

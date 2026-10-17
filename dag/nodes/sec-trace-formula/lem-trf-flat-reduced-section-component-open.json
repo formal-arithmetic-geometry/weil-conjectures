@@ -23,10 +23,69 @@
   "date": "2026-10-18",
   "group": "Q20"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "By Tag 055P, the relative section component locus is locally constructible for every locally finitely presented, quasi-compact and quasi-separated morphism with a section. The given flatness and geometrically reduced fibre hypotheses are additional hypotheses, so this applies to the set C in the statement.",
+   "uses": [
+    "lem-sbc-section-component-locally-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055P, lemma-connected-along-section-locally-constructible"
+   }
+  },
+  {
+   "text": "By Tag 055Q, the relative section component locus for a flat finitely presented morphism with geometrically reduced fibres is stable under generalization: if p specializes to q and q lies in the component through the section in its fibre, then p lies in the corresponding component. This is exactly the generalization-stability statement recorded in lem-trf-flat-reduced-section-component-generalization.",
+   "uses": [
+    "lem-trf-flat-reduced-section-component-generalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood"
+   }
+  },
+  {
+   "text": "Fix x in C. Choose an affine open U of P containing x by lem-weil-pbc-affine-opens-basis, and put E=C intersect U. The local constructibility from step 1 restricts to U: intersect each constructible neighbourhood V with U. A retrocompact open in V stays retrocompact in V intersect U, since any quasi-compact open W of V intersect U is also a quasi-compact open of V. Thus the finite Boolean expressions defining constructibility restrict, so E is locally constructible in U. The affine scheme U is quasi-compact and quasi-separated by lem-weil-pbc-affine-scheme-qcqs; lem-trf-locally-constructible-qcqs-global now makes E constructible in U. The generalization stability from step 2 restricts to U, since a specialization between points of U is a specialization in P. Under an affine identification U = Spec A, constructibility and this specialization relation are unchanged (homeomorphisms preserve opens, quasi-compactness and closure). Apply lem-trf-spectrum-constructible-generalization-open to conclude that E is open in U.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-trf-locally-constructible-qcqs-global",
+    "lem-trf-spectrum-constructible-generalization-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00I0(2), applied on affine charts to the locally constructible locus from Tag 055P and the generalization property from Tag 055Q"
+   }
+  },
+  {
+   "text": "For each x in C, step 3 supplies E=C intersect U containing x, open in U. Since U is open in P, E is open in P by the subspace topology. These sets E are contained in C and cover C. Their union is C, so C is open in P.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055R, final openness conclusion; open neighbourhoods and union of opens"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-section-component-locally-constructible",
+  "lem-trf-flat-reduced-section-component-generalization",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-trf-locally-constructible-qcqs-global",
+  "lem-trf-spectrum-constructible-generalization-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 055P, 055Q and 055R"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,7 +122,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Tag 057I proof, paragraph invoking lemma-connected-along-section-open after forming X_Z→Z",
+   "place": "Tag 057I proof, paragraph invoking lemma-connected-along-section-open after forming X_Z to Z; its Tag 055R input is expanded using 055P, 055Q and the affine criterion 00I0(2).",
    "via": [
     "lem-trf-finite-locally-free-multisection-connected-open",
     "lem-trf-geometrically-connected-fibre-open-spreading",
@@ -83,5 +142,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-reduced-section-component-open",
+  "worker": "stage1",
+  "summary": "Retained the returned 055P/055Q split and rebased its blueprint ancestry onto the current DAG. Repaired the missing final topological citation by including lem-trf-spectrum-constructible-generalization-open as a worker-supplied exact Mathlib leaf. Step 3 now explicitly cites affine neighbourhoods, affine qcqs and local-to-global constructibility, and proves restriction directly from the definition. The generalization input remains statement-only; no unrelated approximation node is delivered. The statement and all its hypotheses are unchanged.",
+  "blueprint": "Realizes the Tag 055R input invoked below Tag 057I in the local-term ancestry: local constructibility, generalization stability, the affine spectral openness criterion, and elementary open-cover gluing.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-section-component-locally-constructible",
+    "why": "This existing lemma from the smooth-base-change unit supplies the general Tag 055P local-constructibility input; no node in this trace-formula unit supplies that generic constructibility theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-section-component-locally-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q79-8235c60b5",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q79-8235c60b5 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet/report, item, new nodes, unit/chapter route, cited DAG statements, Stacks Tags 055P/055Q/055R/00I0, and exact Mathlib source. Hypotheses, component locus, affine restriction, generalization stability, constructibility, and openness checks all pass; edge cases and route-pivot exclusions checked. Review written to review.md. Accepted the recorded generic tool use of lem-sbc-section-component-locally-constructible."
  }
 }

@@ -11,9 +11,79 @@
   "def-weil-abstract-derived-category",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "View ordinary modules over $R$ as modules on the one-object ringed site of $R$. The K-injective-resolution existence theorem [prop-pur-kinjective-resolutions-exist] supplies functorial K-injective replacements. Apply the derived internal-Hom construction [def-pur-derived-internal-hom] to $B[0]$ and a representative $I$ of $K$: it gives the complex $\\operatorname{Hom}_R^\\bullet(B[0],I)$ and its derived object. The comparison theorem [lem-pur-rhom-well-defined] shows that changing either the representative or the K-injective replacement by a quasi-isomorphism induces a quasi-isomorphism of these Hom complexes. Therefore the displayed construction is independent of choices and is functorial on $D(R)$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 and 0A71; construction of RHom by a K-injective representative"
+   }
+  },
+  {
+   "text": "Right multiplication in $B$ defines the action $(b\\cdot h)(b')=h(b'b)$. Associativity and the unit law follow from multiplication in $B$, and the action commutes with the Hom differential because $B[0]$ has degree zero and the action is by precomposition with an $R$-linear map. Forgetting this action leaves exactly the complex $\\operatorname{Hom}_R^\\bullet(B[0],I)$, so the underlying $R$-object is canonically $R\\operatorname{Hom}_R(B[0],K)$ by [def-pur-derived-internal-hom].",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A71, proof: the restriction of RHom(B,K) is represented by Hom(B,I)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-algebraic-shriek-derived-hom-adjunction] with $P=R$ and $A=B$. For $X\\in D(B)$ and $K\\in D(R)$ it gives a natural internal-Hom isomorphism $$U R\\operatorname{Hom}_B(X,C_B(K))\\xrightarrow{\\sim}R\\operatorname{Hom}_R(UX,K),$$ induced by evaluation at $1$ with inverse $g\\mapsto(x\\mapsto[b\\mapsto g(bx)])$. On the one-object ringed site, [lem-pur-rhom-global-sections] identifies $H^0$ of each derived internal Hom with the corresponding Hom-set in the derived category. Taking $H^0$ therefore yields the natural bijection $\\operatorname{Hom}_{D(B)}(X,C_B(K))\\cong\\operatorname{Hom}_{D(R)}(UX,K)$, so $C_B$ is right adjoint to $U$.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 and 0A71, derived coinduction adjunction; one-object specialization"
+   }
+  },
+  {
+   "text": "Under the bijection in Step 3, the identity of $C_B(K)$ is sent to evaluation at $1$: the evaluation formula in [lem-trf-algebraic-shriek-derived-hom-adjunction] sends a Hom-complex map $f$ to $x\\mapsto f(x)(1)$, and setting $X=C_B(K)$ and $f=1$ gives $h\\mapsto h(1)$. Thus the adjunction counit $U C_B(K)\\to K$ is represented by evaluation at $1$.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 and 0A71, evaluation-at-one counit"
+   }
+  },
+  {
+   "text": "Restriction of scalars changes only the module action, so it is exact and the cohomology of $Uf$ is the underlying $R$-linear map of the cohomology of $f$. An underlying module map is an isomorphism exactly when the same map with its additional $B$-linearity is an isomorphism. Hence, if $Uf$ is an isomorphism, every $H^n(f)$ is an isomorphism; the criterion [lem-weil-pbc-unbounded-derived-iso-cohomology] then makes $f$ an isomorphism in $D(B)$. This proves that $U$ is conservative (the converse implication is immediate from functoriality).",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, criterion for isomorphisms in the unbounded derived category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-rhom-well-defined",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A70 and 0A71 (derived coinduction adjunction, K-injective model and evaluation counit), with Tag 05RT for conservativity"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,7 +127,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-perfect-algebra-coinduction-tensor",
@@ -88,5 +158,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-derived-coinduction-adjunction",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against dualizing.tex Tags 0A70 and 0A71 and split its proof into five steps. The first step constructs the choice-independent K-injective Hom model using the existing generic derived-Hom nodes; the second checks the B-action and underlying R-object; the third derives the adjunction from the existing ring-map derived-Hom adjunction and the one-object global-Hom identification; the fourth identifies the counit with evaluation at 1; and the fifth proves conservativity from exact restriction and the unbounded derived cohomology criterion. No new nodes were needed.",
+  "blueprint": "Realizes the ancestor proof clause for the coinduction adjunction and evaluation counit used in the perfect-algebra comparison; all five steps follow the imported construction and do not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Step 1 uses its functorial K-injective replacements; this generic resolution theorem is outside the item unit route."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Steps 1–2 use the defined derived internal-Hom/K-injective model; this generic construction is outside the item unit route."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Step 1 uses its quasi-isomorphism invariance for Hom complexes; this comparison lemma is outside the item unit route."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Step 3 uses its H^0 internal-Hom to derived Hom-set identification; this generic site lemma is outside the item unit route."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Step 5 uses its all-degree cohomology criterion for derived isomorphisms; this generic criterion is outside the item unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q67-6f88451ba",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-6f88451ba (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but the split report omitted required tool_uses for five off-unit generic lemmas. Added declarations in fixes/dag/nodes/sec-trace-formula/lem-trf-derived-coinduction-adjunction.json and documented all checks in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
