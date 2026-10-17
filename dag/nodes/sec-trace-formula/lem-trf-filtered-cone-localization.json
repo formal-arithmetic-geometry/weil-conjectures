@@ -12,7 +12,8 @@
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
   "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-trf-finite-filtered-localization"
  ],
  "proof": [
   {
@@ -186,5 +187,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-26a86e2b6 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node and every cited node's statement, plus Stacks derived.tex 05RX (l.4167), 05S1 (l.4292), 05S2 (l.4321), 05RG (l.1909), 014S (l.3320, which covers any additive category) and 014X (l.3431). I also read the main-20261015 proof of prop-trf-trace-additivity-open-closed, Step 3 (DF(A), l.100-111), and checked the Mathlib lines Triangulated.lean:29/191/208, Pretriangulated.lean:54/479/590/597, Shift.lean:144 and MappingCone.lean:275-290; all are correct. The item statement is unchanged and matches the filtered derived category in Stacks: Fil^f is additive but not abelian, filtrations are finite per object with no uniform bound, and W is the class of graded quasi-isomorphisms. Every step is correct. Step 2 bounds the cone (C(f)^n=0 for n<min(N_Y,N_X-1)) and gets closure under triangles from backward rotation, TR3 and the two-out-of-three iso lemma. Step 3 identifies gr^p of the cone with the ordinary cone of gr^p f in the abelian category A. Step 4 checks directly that graded-acyclic complexes form a replete triangulated subcategory. Step 5 takes both calculi of fractions plus shift and triangle compatibility (MS1-3, MS5, MS6, no saturation needed) from the Mathlib trW leaf. Step 6 applies the 05R6 leaf. Step 7: zero objects and biproducts of a full additive J stay zero objects and biproducts in C, so the inclusion sends cone triangles to cone triangles; the fixed interval [a,b] is preserved. The new node lem-trf-additive-homotopy-category-triangulated is a genuine Mathlib leaf for 014S, strictly smaller than the item and with the correct -p sign. It does not duplicate lem-pur-homotopy-category-triangulated (abelian only), the dg-category nodes, lem-kun-filtered-quasi-isomorphism-fractions or def-trf-finite-filtered-localization. Route: lem-pur-quasi-iso-cone-acyclic's unit sk-def-sf-operations is in the transitive uses of sk-i-global-additivity, and the other off-unit nodes are Mathlib leaves or definitions, so no tool_uses are needed and none were accepted. Edge cases a=b (ordinary D^+), the zero complex, identity maps and J={0} are all consistent. Fix (B9): the new node's blueprint.from.via listed only the item. It now also lists the item's own via, giving [lem-trf-filtered-cone-localization, lem-trf-filtered-localization-injective-model, lem-trf-filtered-derived-operation-lifts], and from.place now points to the actual Step 3 DF(A) sentence. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-additive-homotopy-category-triangulated.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredConeLocalization",
+  "declaration": "CategoryTheory.filteredConeLocalization",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredConeLocalization.lean",
+  "statement": "theorem filteredConeLocalization (B : Option (ℤ × ℤ)) (_hB : ∀ a b : ℤ, B = some (a, b) → a ≤ b) : IsTriangulated (FiniteFilteredHomotopyPlus A B false) ∧ (∀ T : Triangle (FiniteFilteredHomotopyPlus A B false), T ∈ distTriang (FiniteFilteredHomotopyPlus A B false) ↔ ∃ (X Y : CochainComplex.Plus (FiniteFilteredObjects A B false)) (f : X ⟶ Y), Nonempty ((HomotopyCategory.Plus.ι (FiniteFilteredObjects A B false)).mapTriangle.obj T ≅ CochainComplex.mappingCone.triangleh f.hom)) ∧ (∀ (J : ObjectProperty (FiniteFilteredObjects A B false)) [HasZeroObject J.FullSubcategory] [HasBinaryBiproducts J.FullSubcategory], IsTriangulated (HomotopyCategory.Plus J.FullSubcategory) ∧ J.ι.mapHomotopyCategoryPlus.IsTriangulated) ∧ (∀ (T : Triangle (FiniteFilteredHomotopyPlus A B false)), T ∈ distTriang (FiniteFilteredHomotopyPlus A B false) → (finiteFilteredQuasiIso A B T.mor₁ ↔ ∀ p n : ℤ, IsZero ((HomotopyCategory.homologyFunctor A (ComplexShape.up ℤ) n).obj (((filteredEvaluation A B false (some p)).mapHomotopyCategoryPlus.obj T.obj₃).obj)))) ∧ IsTriangulated (FiniteFilteredDerivedPlus A B) ∧ (finiteFilteredQh A B).IsTriangulated ∧ (∀ T : Triangle (FiniteFilteredDerivedPlus A B), T ∈ distTriang (FiniteFilteredDerivedPlus A B) ↔ ∃ S : Triangle (FiniteFilteredHomotopyPlus A B false), S ∈ distTriang (FiniteFilteredHomotopyPlus A B false) ∧ Nonempty (T ≅ (finiteFilteredQh A B).mapTriangle.obj S))",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c77ef5593",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Read node, all 6 stmt deps, Stacks derived.tex 05RX/05S1/05S2/014X, full FiniteFilteredLocalization module, delivered module/report/node. Node diff vs side: only lean record + added landed stmt_dep def-trf-finite-filtered-localization (acyclic); lean.statement verbatim. Clauses: abelian A with independent u,v; C via FiniteFilteredObjects A B false (none = per-object finite bounds, some(a,b) = fixed interval, _hB = a<=b); K+ = HomotopyCategory.Plus; W = graded quasi-isos for all p; K+ triangulated with distinguished triangles exactly those iso to mappingCone.triangleh of bounded-below maps; every full additive J (zero + binary biproducts) gives a triangulated K+(J) and an exact inclusion; W iff graded-acyclic third vertex of any distinguished triangle (equivalent to the cone clause); actual formal localization triangulated, Qh triangulated, distinguished triangles = iso to Q-images. Edge cases a=b, zero complex, J={0}, degree-varying bounds fine. No hollow defs, only sorry, docstrings with source and blueprint and all 7 proof steps, report sections present, commit touches 3 files. nt_compile rc=0 with no errors or warnings; probe: axioms standard+sorryAx, Pretriangulated/IsTriangulated/IsCompatibleWithShift instances synthesize. No findings."
  }
 }
