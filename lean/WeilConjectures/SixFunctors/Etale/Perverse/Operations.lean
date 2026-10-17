@@ -11,6 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
+import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
+import Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity
+import Sheaf.Paper.LisseAdicSheaves
+import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 
 /-!
 # The perverse classes under the operations

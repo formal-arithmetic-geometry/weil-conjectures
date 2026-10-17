@@ -13,6 +13,15 @@ public import WeilConjectures.DeligneLaumon.Reduction.RealCurve
 public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.AlgebraicGeometry.FundamentalGroup.OpenSubgroups
+import Sheaf.CategoryTheory.Galois.GaloisTransitive
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
+import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
+import WeilConjectures.DeligneLaumon.Reduction.Weights
+import WeilConjectures.RepresentationTheory.Clifford
+import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
+import WeilConjectures.WeilSheaf.Stalk
 
 /-!
 # Real Weil sheaves on an arbitrary base are mixed

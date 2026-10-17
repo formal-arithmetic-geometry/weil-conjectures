@@ -12,6 +12,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.StalkIso
+import WeilConjectures.FourierTransform.Defs
+import WeilConjectures.FourierTransform.Properties.Stalk
 
 /-!
 # The degree-one estimate for an irreducible factor

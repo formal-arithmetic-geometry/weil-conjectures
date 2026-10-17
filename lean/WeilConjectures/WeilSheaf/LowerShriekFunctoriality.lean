@@ -11,6 +11,13 @@ import WeilConjectures.WeilSheaf.Localization
 import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 import WeilConjectures.WeilSheaf.LowerStarId
 import WeilConjectures.WeilSheaf.UpperStarComp
+import Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange
+import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
+import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 
 /-!
 # Functoriality of the direct image with compact support of Weil complexes

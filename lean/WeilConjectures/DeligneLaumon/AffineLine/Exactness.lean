@@ -9,6 +9,11 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+import Sheaf.Paper.LisseAdicSheaves
+import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
+import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
+import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
+import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 
 /-!
 # Exactness of the ordinary direct image at a fixed pure weight

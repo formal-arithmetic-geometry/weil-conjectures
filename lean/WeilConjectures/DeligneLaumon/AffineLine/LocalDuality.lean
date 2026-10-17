@@ -7,6 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenFiniteComplement
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
+import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
+import WeilConjectures.SixFunctors.Etale.Perverse.Operations
+import WeilConjectures.WeilSheaf.Cohomology
+import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+import WeilConjectures.WeilSheaf.TateTwist
 
 /-!
 # Local boundary duality on a curve

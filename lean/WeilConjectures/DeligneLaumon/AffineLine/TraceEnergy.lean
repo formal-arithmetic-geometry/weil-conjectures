@@ -21,6 +21,14 @@ public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.Tensor
+import Sheaf.Paper.GaloisLisseRepresentations
+import WeilConjectures.DeligneLaumon.Reduction.Weights
+import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
+import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
+import WeilConjectures.PointCount
+import WeilConjectures.PointCountBound
+import WeilConjectures.WeilSheaf.Stalk
+import WeilConjectures.ZetaLinearAlgebra.DetTrace
 
 /-!
 # Detecting a weight from the growth of the squared trace sums

@@ -10,6 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+import Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion
+import Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion
+import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 
 /-!
 # Curves through prescribed points preserving a finite étale cover
