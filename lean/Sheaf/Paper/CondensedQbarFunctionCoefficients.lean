@@ -7,9 +7,9 @@ module
 
 public import Sheaf.Paper.CondensedQbarCoefficientConstruction
 
-import all Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
-import Sheaf.Paper.GeometricFieldProEtaleEvaluation
-import Sheaf.Paper.ProEtaleSheafificationWcontractibleSections
+import all Sheaf.Paper.ProEtaleSheafificationWcontractibleSections
+import Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation
+import WeilConjectures.CategoryTheory.Sites.MonObj
 import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
 import Sheaf.Paper.CondensedQbarScalarPullback
 import Sheaf.Paper.CondensedQbarFieldFiberExtension
@@ -181,104 +181,197 @@ theorem CondensedQbarFunctionCoefficients.fiber_compare_mk
           q.fiber (Scheme.ProEt.mk g) y) :=
   q.fiber_compare (Scheme.ProEt.mk f) (Scheme.ProEt.mk g) x y h
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
+/-- Bounded functions on a finite disjoint union are tuples of bounded functions.
+Glue the underlying continuous functions, and bound them by the finite compositum of
+all bounds on the summands. The supremum over an empty family is the base field.
+Source: RefactorInstruction, Section 4, coefficient realization;
+Stacks Project, Tag 0F4P, finite disjoint unions
+(blueprint: lem-weil-pbc-condensed-qbar-function-coefficients). -/
+private lemma bounded_coproduct_bijective (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
+    (I : Type u) [Finite I] (V : I → X.ProEt) (W : X.ProEt)
+    (ι : ∀ i, V i ⟶ W) (e : (∐ fun i ↦ (V i).left) ≅ W.left)
+    (hι : ∀ i, Sigma.ι (fun i ↦ (V i).left) i ≫ e.hom = (ι i).left)
+    (hsec : ∀ F : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)),
+      Function.Bijective (fun s : F.obj.obj (op W) ↦
+        fun i ↦ F.obj.map (ι i).op s)) :
+    Function.Bijective (fun s : (CondensedQbarScalarConstruction.boundedP ℓ X).obj (op W) ↦
+      fun i ↦ (CondensedQbarScalarConstruction.boundedP ℓ X).map (ι i).op s) := by
+  classical
+  let F := (sheafCompose (Scheme.ProEt.topology X) (forget RingCat.{u + 1})).obj
+    (continuousMapRingSheaf X (PadicAlgCl ℓ))
+  constructor
+  · intro a b hab
+    apply ULift.ext
+    apply Subtype.ext
+    have h : (ULift.up a.down.1 : F.obj.obj (op W)) = ULift.up b.down.1 := by
+      apply (hsec F).1
+      funext i
+      exact congrArg (fun t ↦ ULift.up t.down.1) (congrFun hab i)
+    exact congrArg ULift.down h
+  · intro a
+    obtain ⟨s, hs⟩ := (hsec F).2 (fun i ↦ ULift.up (a i).down.1)
+    choose E hE ha using fun i ↦ (a i).down.property
+    let _ (i : I) : FiniteDimensional ℚ_[ℓ] (E i) := hE i
+    have hb : s.down ∈ PadicAlgCl.finiteIntermediateFieldValued ℓ W.left := by
+      refine ⟨⨆ i, E i, inferInstance, ?_⟩
+      intro x
+      obtain ⟨z, rfl⟩ := (Scheme.homeoOfIso e).surjective x
+      obtain ⟨⟨i, y⟩, rfl⟩ := (sigmaMk (fun i ↦ (V i).left)).surjective z
+      rw [sigmaMk_mk]
+      have hxy : e.hom (Sigma.ι (fun i ↦ (V i).left) i y) = (ι i).left y :=
+        congrArg (fun f ↦ f y) (hι i)
+      change s.down (e.hom (Sigma.ι (fun i ↦ (V i).left) i y)) ∈ _
+      rw [hxy]
+      have hv : s.down ((ι i).left y) = (a i).down.1 y :=
+        congrArg (fun t ↦ t.down y) (congrFun hs i)
+      rw [hv]
+      exact (le_iSup E i) (ha i y)
+    refine ⟨ULift.up ⟨s.down, hb⟩, ?_⟩
+    funext i
+    apply ULift.ext
+    apply Subtype.ext
+    exact congrArg ULift.down (congrFun hs i)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The bounded-function presheaf has unchanged sections on a weakly contractible affine.
+Use finite-coproduct evaluation and the general unit-isomorphism implementation of the
+weakly contractible sheafification lemma. Its finite-product hypothesis follows from
+`bounded_coproduct_bijective`, without any component-quotient comparison.
+Source: Bhatt--Scholze, Section 4.2, Lemma 4.2.13(1), sheafification argument;
+RefactorInstruction, Section 4, coefficient realization
+(blueprint: lem-weil-pbc-condensed-qbar-function-coefficients). -/
 private lemma bounded_unit_isIso (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (U : X.ProEt) [IsAffine U.left] (wU : PointLanWeaklyContractible X U) :
     IsIso ((toSheafify (Scheme.ProEt.topology X)
       (CondensedQbarScalarConstruction.boundedP ℓ X)).app (op U)) := by
-  let F := profiniteToProEtOf X
-  let J := coherentTopology Profinite.{u}
-  let K := Scheme.ProEt.topology X
-  let Λ := Profinite.padicAlgClRingObj.{u} ℓ
-  let P := F.op.lan.obj Λ.obj
-  let η := F.op.lanUnit.app Λ.obj
-  let hp := Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension P η
-  have hu := (proEtale_sheafification_wcontractible_sections X).2.1 Λ P η hp U
-    inferInstance wU
-  let a := pointUpperStarLowerStarAdjunction.comp
-    (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
-  let b := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F
-    Ab.{u + 1} J K
-  let e := Adjunction.leftAdjointUniq a b
-  let c := CondensedQbarCoefficientRealization.globalCoefficientIso ℓ X
-  let c' := (e.app Λ).inv ≫ c.hom.hom
-  have hc' : IsIso c' := by dsimp [c']; infer_instance
-  have : IsIso ((toSheafify K P).app (op U)) := hu.1
-  let T := Profinite.of (ConnectedComponents U.left)
-  let q := canonicalComponentArrow X U
-  let k := η.app (op T) ≫ P.map q.op
-  have hk : IsIso k :=
-    (hp (op U)).isIso_ι_app_of_isTerminal
-      (CostructuredArrow.mk (S := F.op) q.op)
-      (canonicalComponentArrow_terminal X U)
-  let h := k ≫ (toSheafify K P).app (op U) ≫ c'.hom.app (op U)
-  have hh : IsIso h := by dsimp [h]; infer_instance
-  let β : Λ.obj.obj (op T) ≅
-      (CondensedQbarScalarConstruction.boundedP ℓ X).obj (op U) :=
-    ((ULift.ringEquiv.toAddEquiv.trans
-    (CondensedQbarScalarConstruction.boundedComponentsIso ℓ U.left).toAddEquiv).trans
-      ULift.ringEquiv.symm.toAddEquiv).toAddCommGrpIso
-  have heq : h = β.hom ≫
-      (toSheafify K (CondensedQbarScalarConstruction.boundedP ℓ X)).app (op U) := by
-    have hadj : b.homEquiv _ _ c' = a.homEquiv _ _ c.hom.hom := by
-      have hc : c.hom.hom = e.hom.app Λ ≫ c' := by
-        dsimp [c']
-        simp only [← Category.assoc, Iso.hom_inv_id_app]
-        exact (Category.id_comp _).symm
-      rw [hc, a.homEquiv_naturality_right,
-        Adjunction.homEquiv_leftAdjointUniq_hom_app]
-      rfl
-    have hleg : (η.app (op T) ≫
-        (toSheafify K P).app (op (F.obj T))) ≫ c'.hom.app (op (F.obj T)) =
-      (a.homEquiv _ _ c.hom.hom).hom.app (op T) := by
-      rw [Category.assoc, ← hadj]
-      rfl
-    have hq (x : U.left) : profiniteTestProjection X T (q.left x) =
-        ConnectedComponents.mk x := by
-      have h := congrFun (congrArg DFunLike.coe
-        ((pointComponentsEquiv X U T).apply_symm_apply (ContinuousMap.id _)))
-        (ConnectedComponents.mk x)
-      rw [pointComponentsEquiv_apply] at h
-      exact h
-    have hn := c'.hom.naturality q.op
-    change (sheafify K P).map q.op ≫ c'.hom.app (op U) = _ at hn
-    dsimp only [h, k]
-    rw [Category.assoc, ← Category.assoc (P.map q.op),
-      (toSheafify K P).naturality q.op, Category.assoc,
-      hn, ← Category.assoc, ← Category.assoc, hleg]
-    apply ConcreteCategory.hom_ext
-    intro a₀
-    cases a₀ with
-    | up a₀ =>
-      change (padicAlgClSheaf X ℓ).obj.map q.op
-        (((a.homEquiv _ _ c.hom.hom).hom.app (op T)) (ULift.up a₀)) = _
-      rw [CondensedQbarCoefficientRealization.globalCoefficientIso_test]
-      rw [← NatTrans.naturality_apply]
-      change ((toSheafify K (CondensedQbarScalarConstruction.boundedP ℓ X)).app (op U))
-        ((CondensedQbarScalarConstruction.boundedP ℓ X).map q.op
-          (ULift.up (CondensedQbarScalarConstruction.boundedComp ℓ
-            (profiniteTestProjection X T) a₀))) =
-        ((toSheafify K (CondensedQbarScalarConstruction.boundedP ℓ X)).app (op U))
-          (β.hom (ULift.up a₀))
-      apply congrArg
-      apply ULift.ext
-      apply Subtype.ext
+  apply unit_iso_of_refinement X Ab (CondensedQbarScalarConstruction.boundedP ℓ X)
+    U inferInstance wU
+  intro I _ V ha hw
+  have hqc (i : I) : CompactSpace (V i).left := by let _ := ha i; infer_instance
+  have hqs (i : I) : QuasiSeparatedSpace (V i).left := by let _ := ha i; infer_instance
+  obtain ⟨W, ι, e, hι, _, _, _, ⟨hr⟩, _, hsec, _, _⟩ :=
+    Scheme.ProEt.finite_coproduct_evaluation.{u, u, u + 1} X I V hqc hqs
+  let c : Cofan V := Cofan.mk W ι
+  have hc : IsColimit c := isColimitOfReflects (Scheme.ProEt.topology X).uliftYoneda
+    ((Cofan.isColimitMapCoconeEquiv _ V c).symm hr)
+  refine ⟨c, ⟨hc⟩, ?_⟩
+  let P := CondensedQbarScalarConstruction.boundedP ℓ X
+  let b := Equiv.ofBijective _ (bounded_coproduct_bijective ℓ X I V W ι e hι hsec)
+  have ht : IsLimit (Fan.mk ((forget Ab).obj (P.obj (op W)))
+      (fun i ↦ (forget Ab).map (P.map (ι i).op))) := by
+    refine Fan.IsLimit.mk _ (fun s ↦ ↾fun x ↦ b.symm (fun i ↦ s.proj i x)) ?_ ?_
+    · intro s i
       ext x
-      exact congrArg a₀.1 (hq x)
-  rw [heq] at hh
-  have : IsIso (β.hom ≫
-    (toSheafify K (CondensedQbarScalarConstruction.boundedP ℓ X)).app (op U)) := hh
-  exact IsIso.of_isIso_comp_left β.hom _
--/
-
+      exact congrFun (b.apply_symm_apply (fun i ↦ s.proj i x)) i
+    · intro s m hm
+      ext x
+      apply b.injective
+      change b (m x) = b (b.symm (fun i ↦ s.proj i x))
+      rw [b.apply_symm_apply]
+      funext i
+      exact ConcreteCategory.congr_hom (hm i) x
+  exact ⟨isLimitOfReflects (forget Ab)
+    ((Fan.isLimitMapConeEquiv (forget Ab) _ _).symm ht)⟩
 
 set_option backward.isDefEq.respectTransparency false in
+/-- The ring unit of monoidal sheafification is the sheafified presheaf unit.
+This follows from the monoidal unit isomorphism and naturality of the adjunction unit.
+Source: RefactorInstruction, Section 4, monoidal coefficient realization
+(blueprint: lem-weil-pbc-condensed-qbar-function-coefficients). -/
+private lemma sheafification_one (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
+    Functor.LaxMonoidal.ε (sheafToPresheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) ≫
+      (MonObj.one (X := padicAlgClSheaf Y ℓ)).hom =
+    MonObj.one (X := CondensedQbarScalarConstruction.boundedP ℓ Y) ≫
+      toSheafify (Scheme.ProEt.topology Y)
+        (CondensedQbarScalarConstruction.boundedP ℓ Y) := by
+  let J := Scheme.ProEt.topology Y
+  let L := presheafToSheaf J Ab.{u + 1}
+  let R := sheafToPresheaf J Ab.{u + 1}
+  let adj := sheafificationAdjunction J Ab.{u + 1}
+  have he : Functor.LaxMonoidal.ε R =
+      adj.homEquiv _ _ (Functor.OplaxMonoidal.η L) := rfl
+  change Functor.LaxMonoidal.ε R ≫ R.map
+    (Functor.LaxMonoidal.ε L ≫ L.map
+      (MonObj.one (X := CondensedQbarScalarConstruction.boundedP ℓ Y))) = _
+  rw [he, Adjunction.homEquiv_unit, Category.assoc, ← R.map_comp,
+    Functor.Monoidal.η_ε_assoc]
+  exact (adj.unit.naturality _).symm
+
+set_option backward.isDefEq.respectTransparency false in
+/-- A map out of the constant integer presheaf is determined by one at the final object.
+Naturality transports that value to every object, and integer linearity determines
+all other values.
+Source: RefactorInstruction, Section 4, regular-module scalar realization
+(blueprint: lem-weil-pbc-condensed-qbar-function-coefficients). -/
+private lemma unit_presheaf_hom_ext (Y : Scheme.{u}) (P : Y.ProEtᵒᵖ ⥤ Ab.{u + 1})
+    (f g : 𝟙_ (Y.ProEtᵒᵖ ⥤ Ab.{u + 1}) ⟶ P)
+    (h : f.app (op (Scheme.ProEt.mk (𝟙 Y))) (ULift.up 1) =
+      g.app (op (Scheme.ProEt.mk (𝟙 Y))) (ULift.up 1)) : f = g := by
+  apply NatTrans.ext
+  funext U
+  have h1 : f.app U (ULift.up 1) = g.app U (ULift.up 1) := by
+    let t : U.unop ⟶ Scheme.ProEt.mk (𝟙 Y) :=
+      MorphismProperty.Over.homMk U.unop.hom
+    have hf := ConcreteCategory.congr_hom (f.naturality t.op) (ULift.up 1)
+    have hg := ConcreteCategory.congr_hom (g.naturality t.op) (ULift.up 1)
+    exact hf.trans ((congrArg (P.map t.op) h).trans hg.symm)
+  apply ConcreteCategory.hom_ext
+  intro n
+  have hn : n = n.down • (ULift.up (1 : ℤ) : ULift.{u + 1} ℤ) := by
+    apply ULift.ext
+    simp
+  rw [hn, map_zsmul, map_zsmul, h1]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Every regular-module endomorphism of the bounded coefficient sheaf is a bounded scalar.
+Lift its value at the unit on the final object through the invertible sheafification
+unit. A regular-module map is determined by its composite with the ring unit. The
+monoidal adjunction and naturality reduce equality of those composites to the lifted
+value, since the source presheaf is the constant integer presheaf.
+Source: RefactorInstruction, Section 4, regular-module scalar realization
+(blueprint: lem-weil-pbc-condensed-qbar-function-coefficients). -/
 private lemma sheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     [IsAffine Y] (wY : PointLanWeaklyContractible Y (Scheme.ProEt.mk (𝟙 Y))) :
     Function.Surjective (CondensedQbarScalarConstruction.sheafScalar ℓ Y) := by
-  sorry
+  let J := Scheme.ProEt.topology Y
+  let P := CondensedQbarScalarConstruction.boundedP ℓ Y
+  let T := Scheme.ProEt.mk (𝟙 Y)
+  let η := toSheafify J P
+  have : IsAffine T.left := inferInstanceAs (IsAffine Y)
+  have : IsIso (η.app (op T)) := bounded_unit_isIso ℓ Y T wY
+  intro f
+  obtain ⟨a, ha⟩ := (ConcreteCategory.bijective_of_isIso (η.app (op T))).2
+    (f.hom.hom.app (op T) (η.app (op T) (ULift.up 1)))
+  refine ⟨a.down, ?_⟩
+  apply (Mod.bijective_one_comp_hom (Mod.regular (padicAlgClSheaf Y ℓ))).1
+  apply Sheaf.unit_hom_ext
+  change Functor.LaxMonoidal.ε (sheafToPresheaf J Ab.{u + 1}) ≫
+      ((MonObj.one (X := padicAlgClSheaf Y ℓ)).hom ≫
+        (CondensedQbarScalarConstruction.sheafScalar ℓ Y a.down).hom.hom) =
+    Functor.LaxMonoidal.ε (sheafToPresheaf J Ab.{u + 1}) ≫
+      ((MonObj.one (X := padicAlgClSheaf Y ℓ)).hom ≫ f.hom.hom)
+  rw [← Category.assoc, ← Category.assoc, sheafification_one]
+  apply unit_presheaf_hom_ext Y
+  change ((CondensedQbarScalarConstruction.sheafScalar ℓ Y a.down).hom.hom.app (op T))
+      (η.app (op T) (ULift.up 1)) =
+    f.hom.hom.app (op T) (η.app (op T) (ULift.up 1))
+  change (sheafifyMap J (CondensedQbarScalarConstruction.boundedMul ℓ Y a.down)).app
+    (op T) (η.app (op T) (ULift.up 1)) = _
+  have hs := ConcreteCategory.congr_hom
+    (congr_app (toSheafify_naturality J
+      (CondensedQbarScalarConstruction.boundedMul ℓ Y a.down)) (op T)) (ULift.up 1)
+  change η.app (op T) (ULift.up (1 *
+    CondensedQbarScalarConstruction.restrictBounded ℓ Y T a.down)) =
+    (sheafifyMap J (CondensedQbarScalarConstruction.boundedMul ℓ Y a.down)).app
+      (op T) (η.app (op T) (ULift.up 1)) at hs
+  rw [← hs, one_mul]
+  convert ha using 1
+  apply congrArg (η.app (op T))
+  apply ULift.ext
+  apply Subtype.ext
+  ext x
+  rfl
 
 private lemma condensedQbarScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime]
     (Y : Scheme.{u}) [IsAffine Y]
@@ -494,9 +587,6 @@ private lemma fibers_compare (ℓ : ℕ) [Fact ℓ.Prime] {X : Scheme.{u}}
 
 attribute [local semireducible] condensedQbarCanonicalFiberData
 
-
-
-
 /-- Bounded condensed coefficients admit scalar realization and compatible geometric
 fiber functors, independently of any module or presentation.
 
@@ -513,11 +603,13 @@ properties, use the normalization of the finite-extension realizations on profin
 test functions. Their uniqueness makes them compatible with localization along every
 small-site object U to X. The bounded-function presheaf unit and multiplication commute
 with restriction, giving scalar_restrict_mk after passage to the filtered colimit.
-On an affine weakly contractible U, the point-basis evaluation identifies coefficient
-sections with bounded functions on its profinite connected-component quotient.
-Continuous functions on U factor through that quotient, and the surjective quotient
-preserves the finite-subextension bound. A regular-module endomorphism is determined
-by the image of one, so this proves scalar_surjective.
+For the bounded-function presheaf, finite disjoint unions give products: glue the
+underlying continuous functions and use the finite compositum of their field bounds.
+The general weakly contractible sheafification argument then shows that its unit is
+invertible on affine weakly contractible objects. Lift an endomorphism's image of one
+through this unit at the final object. The regular module is free on the monoidal
+unit, and naturality transports the lifted value to every object, so the endomorphism
+is sheafified multiplication by that bounded function. This proves scalar_surjective.
 
 For fiber U x choose an algebraic closure of the residue field of x, pull modules to
 its spectrum, and evaluate at the terminal object. The coefficient comparison there
@@ -553,7 +645,6 @@ theorem condensedQbar_canonical_coefficient_properties
   · intro U x a
     exact fiber_scalar ℓ U.left x a
   · exact fibers_compare ℓ
-
 
 /-- Assemble the constructed scalar action, geometric fibers, regular coordinates,
 and their proved additive and finite-colimit properties with coefficient naturality.
