@@ -2,23 +2,84 @@
  "id": "lem-trf-reducedness-tensor-alg-equiv",
  "kind": "statement",
  "title": "Reducedness is invariant under changing the scalar algebra by an algebra equivalence",
- "statement": "Let $k$ be a field [def-weil-field], let $A$ be a commutative $k$-algebra [def-weil-pbc-module-tensor-product], let $L$ and $M$ be fields equipped with $k$-algebra structures, and let $e:L\\to M$ be a bijective $k$-algebra homomorphism. Then $A\\otimes_k L$ is reduced if and only if $A\\otimes_k M$ is reduced.",
+ "statement": "Let $k$ be a field [def-weil-field], let $A$ be a commutative $k$-algebra [def-weil-pbc-algebra-hom-quotient], let $L$ and $M$ be fields equipped with $k$-algebra structures, and let $e:L\\to M$ be a bijective $k$-algebra homomorphism. Then $A\\otimes_k L$ is reduced if and only if $A\\otimes_k M$ is reduced.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tensor-product transport along an algebra equivalence, Tags 00CX and 05G3"
  },
  "stmt_deps": [
   "def-weil-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Choose the inverse function $d:M\\to L$ of the bijection $e$. It is a $k$-algebra homomorphism in the sense of [def-weil-pbc-algebra-hom-quotient]: applying the injective map $e$ to $d(m+m')$ and $d(m)+d(m')$ gives $m+m'$ in both cases, and the same argument proves preservation of multiplication, zero and one. For $r\\in k$, both $d(\\iota_M(r))$ and $\\iota_L(r)$ map to $\\iota_M(r)$, so $d$ commutes with the structure maps. Thus $de=1_L$ and $ed=1_M$ as algebra maps.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX (lemma-tensor-product), 05G3 (section-base-change), and 00AR (section-rings-basic)"
+   }
+  },
+  {
+   "text": "Put $S=A\\otimes_kL$ and $T=A\\otimes_kM$. Clause (1) of [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives their commutative $k$-algebra structures, factor inclusions and multiplication $(a\\otimes b)(a'\\otimes b')=aa'\\otimes bb'$. In clause (2), take the target to be $T$ and the two maps to be $a\\mapsto a\\otimes1$ and $\\ell\\mapsto1\\otimes e(\\ell)$, the latter being the composite of $e$ and the right inclusion. This constructs a $k$-algebra map $F:S\\to T$ with $F(a\\otimes\\ell)=(a\\otimes1)(1\\otimes e(\\ell))=a\\otimes e(\\ell)$. Applying the same clause with target $S$ and maps $a\\mapsto a\\otimes1$, $m\\mapsto1\\otimes d(m)$ constructs a $k$-algebra map $G:T\\to S$ satisfying $G(a\\otimes m)=a\\otimes d(m)$. All maps agree on $k$ because $e$ and $d$ do.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes), proof: the universal property Hom(A tensor_R B,C)=Hom(A,C) x_Hom(R,C) Hom(B,C); algebra.tex Tags 00CX and 05G3"
+   }
+  },
+  {
+   "text": "For every pure tensor, $GF(a\\otimes\\ell)=a\\otimes d(e(\\ell))=a\\otimes\\ell$ and $FG(a\\otimes m)=a\\otimes e(d(m))=a\\otimes m$. These maps are $k$-linear, and pure tensors generate the tensor product as a $k$-module by [def-weil-pbc-module-tensor-product]. Hence the displayed identities extend to every element: $GF=1_S$ and $FG=1_T$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX (lemma-tensor-product), 05G3 (section-base-change), and 00AR (section-rings-basic)"
+   }
+  },
+  {
+   "text": "Assume $S$ is reduced, meaning that its only nilpotent element is zero (Stacks Tag 00B3). If $y\\in T$ satisfies $y^n=0$ for some $n\\ge1$, then $G(y)^n=G(y^n)=G(0)=0$. Preservation of powers follows by induction from preservation of multiplication and one. Reducedness of $S$ gives $G(y)=0$, and therefore $y=F(G(y))=F(0)=0$. Thus $T$ is reduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00AT (item-ring-element-nilpotent) and 00B3 (item-ring-reduced): elementary nilpotent argument"
+   }
+  },
+  {
+   "text": "Conversely assume $T$ is reduced. If $x\\in S$ satisfies $x^n=0$ for some $n\\ge1$, then $F(x)^n=F(x^n)=0$, so $F(x)=0$ and $x=G(F(x))=G(0)=0$. Hence $S$ is reduced. Together with the preceding step this proves $A\\otimes_kL$ reduced if and only if $A\\otimes_kM$ reduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00AT (item-ring-element-nilpotent) and 00B3 (item-ring-reduced): elementary converse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tensor transport from Tags 00CX and 05G3; expanded using the algebra tensor universal property in schemes.tex Tag 01I4 and the reduced-ring convention Tag 00B3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "An algebra equivalence between scalar fields induces equivalent reducedness of tensor products with a fixed algebra",
-   "results": "8 hits; Algebra.TensorProduct.congr is an exact tensor-equivalence ingredient; no combined reducedness theorem.",
+   "results": "8 hits, including Algebra.TensorProduct.congr and geometric-reducedness criteria; no single theorem states the item. TensorProduct.congr was read at Mathlib/RingTheory/TensorProduct/Maps.lean:619.",
    "date": "2026-10-18",
    "verdict": "no match; use Algebra.TensorProduct.congr and injectivity"
   },
@@ -40,13 +101,13 @@
   {
    "tool": "leansearch",
    "query": "An AlgEquiv of k-algebras gives an equivalence of reducedness for tensor products over k",
-   "results": "8 hits; Algebra.TensorProduct.congr and congr_apply/trans/refl, but no combined reducedness theorem.",
+   "results": "8 hits: Algebra.TensorProduct.congr_apply, congr_trans, congr_refl, congr, congr_toLinearEquiv; Algebra.isGeometricallyReduced_iff, AlgEquiv.isAlgebraic, and Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct. No single theorem states the item.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-reducedness-tensor-chosen-algebraic-closure",
@@ -78,5 +139,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-reducedness-tensor-alg-equiv",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Constructed the inverse algebra map, then the two tensor algebra maps using the existing pushout universal-property leaf, verified their composites on pure tensors using the existing tensor definition, and proved both reducedness implications by explicit nilpotent calculations. No new nodes. The initially proposed tensor-equivalence and reducedness-equivalence nodes were folded into these elementary steps before the final delivery revision.",
+  "blueprint": "Preserves the inherited ancestry from lem-trf-local-term-locality and realizes the descendant clause recorded in blueprint.from.place: replacing a chosen algebraic closure by the canonical one in the affine tensor criterion. This generic algebra step supplies the reducedness equivalence used by lem-trf-reducedness-tensor-chosen-algebraic-closure; it changes no unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q50-68bc8feb1",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-68bc8feb1 (reviewer sub-agent of L); spot-checked: Mathematics and proof steps check out. The statement incorrectly tags “commutative k-algebra” with the module-tensor definition, which does not define algebras. Corrected whole DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-reducedness-tensor-alg-equiv.json; review.md records all source, route, hypothesis, edge-case, and step checks.; 1 file(s) fixed by the reviewer"
  }
 }

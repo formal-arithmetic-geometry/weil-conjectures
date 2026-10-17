@@ -11,9 +11,39 @@
   "def-weil-abstract-derived-category",
   "lem-trf-cotangent-resolution-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-cotangent-flat-base-change] with C=B, A′=B, and C′=B. Writing f:A→B for the given homomorphism, the four maps in the square are A→C=f, A→A′=f, C→C′=id_B, and A′→C′=id_B. Thus the square commutes, and its canonical derived multiplication morphism is exactly the assumed isomorphism B⊗_A^{\\mathbf L}B→B[0]. The cited base-change statement gives an isomorphism L_{B/A}⊗_B^{\\mathbf L}B≃L_{B/B} in D(B). Derived extension of scalars along id_B is the identity (the ordinary functor -⊗_B B is naturally the exact identity functor), so L_{B/A}≃L_{B/B}.",
+   "uses": [
+    "lem-trf-cotangent-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R0 (lemma-derived-diagonal), using the flat-base-change comparison of Tag 08QQ"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-localization-cotangent-vanishing] with R=B and S={1}. This is a multiplicative subset, S^{-1}B is canonically B, and the node states that L_{S^{-1}B/B} is zero. Hence L_{B/B}=0. Transporting this zero object across the isomorphism from Step 1 proves that L_{B/A} is zero in D(B).",
+   "uses": [
+    "lem-trf-localization-cotangent-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R0 (lemma-derived-diagonal), using the identity localization case of Tags 08QZ and 08QH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cotangent-flat-base-change",
+  "lem-trf-localization-cotangent-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08R0 (lemma-derived-diagonal), with Tag 08QQ base change and the identity localization computation of Tags 08QZ and 08QH"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -35,10 +65,17 @@
    "results": "25 hits in Extension/Cotangent and Smooth/StandardSmoothCotangent; none states Tag 08R0",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The full cotangent complex of a commutative ring map A to B vanishes if the canonical derived multiplication B tensor over A B to B is a quasi-isomorphism",
+   "results": "8 hits: Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.Extension.cotangentComplex_injective_iff, Algebra.formallyEtale_iff, Algebra.Extension.H1Cotangent, Ideal.mapCotangent, Algebra.Extension.cotangentComplex, Algebra.SubmersivePresentation.cotangentComplex_injective, Algebra.Extension.Cotangent. Read Extension/Cotangent/Basic.lean:53–65 and 83–114. The cotangentComplex declarations are presentation-level linear maps and H1Cotangent is a single homology module; formal smoothness/formal etaleness hits do not assert vanishing of the full standard cotangent complex under the derived multiplication hypothesis. Search digest 07cb45db3622bad2.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-cotangent-vanishing",
@@ -50,7 +87,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Supporting ring/sheaf input: the derived diagonal criterion for vanishing of the cotangent complex (Stacks Tag 08R0).",
+   "place": "Supporting ring/sheaf input: the derived diagonal criterion for vanishing of the cotangent complex (Stacks Tag 08R0), using the base-change comparison and identity localization computation.",
    "via": [
     "lem-trf-etale-cotangent-vanishing",
     "lem-trf-lci-cotangent-presentation",
@@ -68,5 +105,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-derived-diagonal-cotangent-vanishing",
+  "worker": "stage1",
+  "summary": "Audited the imported Tag 08R0 statement and split its proof into two steps without creating new nodes. First, the existing derived cotangent flat-base-change node is specialized to the square A→B, B→B, identifying L_{B/A} with L_{B/B} under the assumed derived multiplication isomorphism. Second, the existing localization-vanishing node is specialized to the identity localization S={1}, giving L_{B/B}=0.",
+  "blueprint": "Realizes the blueprint ancestor lem-trf-local-term-locality place 'Supporting ring/sheaf input: the derived diagonal criterion for vanishing of the cotangent complex (Stacks Tag 08R0)' through its two proof ingredients, the base-change comparison and identity localization computation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q08-fd1d255b4",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-fd1d255b4 (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Corrected Step 1’s square-map wording and added a verified missing LeanSearch record. Stacks 08R0/08QQ support the canonical comparison in ordinary D(B); identity localization proves the final vanishing. Edge cases, dependency cycles, duplicates, and long-step checks pass. Review and whole corrected JSON are saved under review.md and fixes/.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,11 +12,121 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-localization",
+  "lem-weil-pbc-presentation-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $M=I/I^2$, $N=I_K/I_K^2$, and let $\\gamma:P\\to P_K$ be coefficient extension. Applying [lem-weil-pbc-presentation-base-change] to the identity presentation $P\\to P$ (no relations) and swapping the tensor factors gives a $P$-algebra isomorphism $P\\otimes_k K\\simeq P_K$ sending $p\\otimes\\lambda$ to $\\lambda\\gamma(p)$. Its inverse sends $x_i$ to $x_i\\otimes1$ and a coefficient $\\lambda$ to $1\\otimes\\lambda$; the two composites fix coefficients and variables, hence are identities by [def-weil-pbc-mv-polynomial-ring]. For the original quotient presentation, the identification $C_K=P_K/I_K$ in the statement is compatible with $C\\to C_K$ and $\\gamma$ on generators.",
+   "uses": [
+    "lem-weil-pbc-presentation-base-change",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SI (lemma-lci-field-change-local), first proof paragraph, polynomial presentations; Tag 05G3 base change."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-field-extension-base-change-faithfully-flat] to $k\\to K$ and $D=P$. It makes $P\\to P\\otimes_k K$ faithfully flat, and hence flat by [def-weil-pbc-faithfully-flat-ring-map]. Under the $P$-algebra isomorphism of step 1 this is $\\gamma:P\\to P_K$. Thus the flat hypothesis needed for conormal base change holds for this very coefficient-extension map.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SI, $I_K=K\\otimes_k I$; flat field extension and base change, Tags 00HB and 00HI."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ideal-cotangent-flat-base-change-ring] with $A=P$, $B=P_K$, and $J=I_K$, the map $\\phi:M\\otimes_P P_K\\to N$, $[f]\\otimes b\\mapsto b[\\gamma(f)]$, is an isomorphism. It is $P_K$-linear. Both modules are annihilated by $I_K$, so it is also $C_K$-linear: if $i\\in I$ then $m\\otimes\\gamma(i)b=(im)\\otimes b=0$. There is a canonical isomorphism $M\\otimes_C C_K\\to M\\otimes_P P_K$ sending $m\\otimes[b]$ to $m\\otimes b$. It is well defined because every element of $I_K$ is a sum of multiples of images of elements of $I$, which annihilate the latter tensor product as just checked. Its inverse is $m\\otimes b\\mapsto m\\otimes[b]$; balancing over $C=P/I$ follows by lifting a scalar to $P$. The two composites are the identity on pure tensors by [def-weil-pbc-module-tensor-product]. Compose to get $\\Theta:M\\otimes_C C_K\\simeq N$, with $\\Theta([f]\\otimes[b])=b[\\gamma(f)]$.",
+   "uses": [
+    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0473 (lemma-conormal-functorial-flat), affine proof; this supplies the conormal identity used in Tag 00SI and explicitly stated in Tag 00SJ."
+   }
+  },
+  {
+   "text": "Write $F=\\kappa(\\mathfrak q)$ and $L=\\kappa(\\mathfrak q_K)$. The composite $C\\to C_K\\to L$ kills $\\mathfrak q$ and takes $s\\notin\\mathfrak q$ to a nonzero element of $L$, since $\\mathfrak q$ is the contraction of $\\mathfrak q_K$. It therefore gives the map $C_{\\mathfrak q}\\to L$, $c/s\\mapsto\\bar c/\\bar s$, killing $\\mathfrak q C_{\\mathfrak q}$, and hence a unital field map $F\\to L$ by [def-weil-pbc-localization-at-prime]. This field map is injective: its kernel is an ideal in the field $F$ and cannot contain $1$. These are exactly the residue-field structures in the statement.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SI, corresponding primes and residue-field maps in the displayed identity; localization/residue fields as in Tags 00CO and 07BH."
+   }
+  },
+  {
+   "text": "The fraction and tensor relations [def-weil-pbc-module-localization, def-weil-pbc-module-tensor-product] give the canonical isomorphisms $M_{\\mathfrak q}\\otimes_{C_{\\mathfrak q}}F\\simeq M\\otimes_C F$ and $N_{\\mathfrak q_K}\\otimes_{(C_K)_{\\mathfrak q_K}}L\\simeq N\\otimes_{C_K}L$. In the first case the forward map is $(m/s)\\otimes a\\mapsto m\\otimes(a/\\bar s)$ and the inverse is $m\\otimes a\\mapsto(m/1)\\otimes a$; in the second case use the same formulas with $C_K,N,L$. Fractions have equal images because an annihilating denominator becomes invertible in the residue field. The tensor balancing relations hold by multiplication of the displayed scalars, and the composites are identities since $(m/s)\\otimes a=(m/1)\\otimes(a/\\bar s)$. Thus these identifications are proved directly for the modules at hand.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SI, displayed tensor fibre identity; explicit fractions as in module localization Tag 07JZ and tensor-localization Tag 00DK."
+   }
+  },
+  {
+   "text": "Tensor balancing also gives $ (M\\otimes_C F)\\otimes_F L\\simeq M\\otimes_C L$, $(m\\otimes a)\\otimes\\lambda\\mapsto m\\otimes a\\lambda$, with inverse $m\\otimes\\lambda\\mapsto(m\\otimes1)\\otimes\\lambda$. Likewise $(M\\otimes_C C_K)\\otimes_{C_K}L\\simeq M\\otimes_C L$ sends $(m\\otimes b)\\otimes\\lambda$ to $m\\otimes\\bar b\\lambda$ and has inverse $m\\otimes\\lambda\\mapsto(m\\otimes1)\\otimes\\lambda$. Each pair is inverse on pure tensors and respects the scalar relations [def-weil-pbc-module-tensor-product]. Tensoring $\\Theta$ from step 3 with $L$ has inverse obtained by tensoring $\\Theta^{-1}$. Compose these maps and the maps of step 5 to obtain the asserted $L$-linear isomorphism. On $([f]/1\\otimes1)\\otimes\\lambda$ it gives $([\\gamma(f)]/1)\\otimes\\lambda$, so it is precisely the canonical coefficient-extension map, with all denominators governed by step 5.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SI, displayed equalities in the conormal-fibre calculation; Tag 00SJ, conormal identity $I\\prime/(I\\prime)^2=(I/I^2)\\otimes_C C_K$."
+   }
+  },
+  {
+   "text": "The ring $P$ is Noetherian by [lem-weil-pbc-polynomial-ring-field-regular-ring], so $I=(f_1,\\ldots,f_r)$ for some finite family by [def-weil-pbc-noetherian-ring]. Their classes generate $M$ over $C$: write any $f\\in I$ as $\\sum p_i f_i$ and reduce each $p_i$ modulo $I$. Hence their localized classes generate $M_{\\mathfrak q}$, and their residue classes span $V=M_{\\mathfrak q}\\otimes_{C_{\\mathfrak q}}F$. In particular $V$ is finite dimensional.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SI, final comparison of finite generator numbers; Noetherian polynomial ring Tag 00OQ and definition Tag 00FM."
+   }
+  },
+  {
+   "text": "Select a basis $v_1,\\ldots,v_d$ of $V$ from the finite spanning family of step 7 by repeatedly discarding a vector in the span of the others. The vectors $v_i\\otimes1$ span $V\\otimes_F L$. They are independent: the coordinate functionals $\\ell_j:V\\to F$ extend by $v\\otimes\\lambda\\mapsto\\ell_j(v)\\lambda$ to $L$-linear maps [def-weil-pbc-module-tensor-product], and applying the $j$th map to $\\sum a_i(v_i\\otimes1)=0$ gives $a_j=0$. Thus extension of scalars preserves $d$, including $d=0$. Step 6 identifies $V\\otimes_F L$ with the right conormal fibre, proving the finite-dimension conclusion over the respective residue fields.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SI, equality of residue-field dimensions following the displayed isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
   "lem-weil-pbc-presentation-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SI (lemma-lci-field-change-local), displayed fibre identity, with the conormal quotient formulation explicitly in Tag 00SJ and flat conormal base change in morphisms.tex Tag 0473; fraction and tensor identifications written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +155,94 @@
    "results": "Ideal.instIsScalarTowerCotangent; KaehlerDifferential.cotangentComplexBaseChange; Algebra.kerTensorProductMapIdToAlgHomEquiv; KaehlerDifferential.cotangentComplexBaseChange_tmul; no exact localized ideal-conormal fibre theorem.",
    "date": "2026-10-18",
    "verdict": "no match: only general cotangent-complex or scalar-tower declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localized tensor module at a prime and residue field fibre base change",
+   "results": "{\"t\": \"2026-10-17T22:26:08Z\", \"tool\": \"leanfinder\", \"query\": \"localized tensor module at a prime and residue field fibre base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.rankAtStalk_baseChange\", \"Ideal.ResidueField.exists_smul_eq_tmul_one\", \"IsLocalization.moduleTensorEquiv\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalizedModule.rTensor\", \"Ideal.Fiber.exists_smul_eq_one_tmul\", \"IsLocalization.Away.tensorEquiv\", \"Ideal.Fiber\"], \"digest\": \"fb3d7c38e9fbb41d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, TensorProduct, AtPrime, ResidueField",
+   "results": "{\"t\": \"2026-10-17T22:26:09Z\", \"tool\": \"loogle\", \"query\": \"LocalizedModule, TensorProduct, AtPrime, ResidueField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AtPrime'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable: Loogle could not resolve AtPrime in this query; corrected query is recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "localized.*tensor.*prime|tensor.*AtPrime.*module",
+   "results": "{\"t\": \"2026-10-17T22:26:09Z\", \"tool\": \"grep\", \"query\": \"localized.*tensor.*prime|tensor.*AtPrime.*module\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "module localization at a prime commutes with scalar extension and residue field tensor fibre",
+   "results": "{\"t\": \"2026-10-17T22:26:10Z\", \"tool\": \"leansearch\", \"query\": \"module localization at a prime commutes with scalar extension and residue field tensor fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.tensor\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalizedModule.map_linearMap_of_isLocalization\", \"instIsScalarTowerAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"IsLocalization.Away.tensorEquiv\", \"instIsScalarTowerAtPrimeFractionRing\", \"Localization.AtPrime.instIsScalarTower\"], \"digest\": \"310ef39d8158bd65\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.tensorProduct_isLocalizedModule",
+   "results": "{\"t\": \"2026-10-17T22:26:25Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.tensorProduct_isLocalizedModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsLocalization.tensorProduct_isLocalizedModule\"], \"digest\": \"eb62773ea8840ec7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization\\.tensorProduct_isLocalizedModule|IsLocalization\\.moduleTensorEquiv",
+   "results": "{\"t\": \"2026-10-17T22:26:25Z\", \"tool\": \"grep\", \"query\": \"IsLocalization\\\\.tensorProduct_isLocalizedModule|IsLocalization\\\\.moduleTensorEquiv\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization at a prime of a tensor product module and residue field tensor product",
+   "results": "{\"t\": \"2026-10-17T22:26:27Z\", \"tool\": \"leanfinder\", \"query\": \"localization at a prime of a tensor product module and residue field tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ResidueField.exists_smul_eq_tmul_one\", \"IsLocalization.Away.tensorEquiv\", \"IsLocalization.Away.tensorRightEquiv\", \"IsLocalization.moduleTensorEquiv\", \"IsLocalization.Away.tensor\", \"IsLocalization.Away.tensorRight\", \"IsLocalizedModule.rTensor\", \"IsLocalization.tensorProduct_isLocalizedModule\"], \"digest\": \"071574cc9ab08097\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "localized base changed module at a prime is the base change of the localized module and then the residue field fibre",
+   "results": "{\"t\": \"2026-10-17T22:26:27Z\", \"tool\": \"leansearch\", \"query\": \"localized base changed module at a prime is the base change of the localized module and then the residue field fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.isBaseChange\", \"Ideal.Fiber\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"LocalizedModule.AtPrime\", \"IsLocalization.Away.tensorEquiv\", \"isLocalizedModule_iff_isBaseChange\", \"IsLocalizedModule.AtPrime\", \"ModuleCat.Tilde.Localizations\"], \"digest\": \"e5d6178bd4f96102\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "conormal fibre I modulo I squared localized at prime after extension of base field is residue field scalar extension",
+   "results": "{\"t\": \"2026-10-17T22:28:50Z\", \"tool\": \"leanfinder\", \"query\": \"conormal fibre I modulo I squared localized at prime after extension of base field is residue field scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Fiber\", \"Ideal.fiberIsoOfBijectiveResidueField\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"IsLocalRing.instIsScalarTowerResidueFieldCotangentSpace\", \"Polynomial.fiberEquivQuotient\", \"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"PrimeSpectrum.preimageEquivFiber_apply_asIdeal\", \"Ideal.ResidueField.exists_smul_eq_tmul_one\"], \"digest\": \"3049b7b031c10927\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.tensorCotangentEquiv",
+   "results": "{\"t\": \"2026-10-17T22:28:50Z\", \"tool\": \"loogle\", \"query\": \"Ideal.tensorCotangentEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Ideal.tensorCotangentEquiv\", \"Ideal.tensorCotangentEquiv_tmul\"], \"digest\": \"965a665a8f7304c7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorCotangentEquiv|tensorCotangentHom_injective_of_flat",
+   "results": "{\"t\": \"2026-10-17T22:28:50Z\", \"tool\": \"grep\", \"query\": \"tensorCotangentEquiv|tensorCotangentHom_injective_of_flat\", \"sub\": \"RingTheory/Ideal\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\"], \"digest\": \"06e9c5da9f55cfd0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "conormal fibre of ideal polynomial quotient under field extension and localized residue field base change",
+   "results": "{\"t\": \"2026-10-17T22:28:51Z\", \"tool\": \"leansearch\", \"query\": \"conormal fibre of ideal polynomial quotient under field extension and localized residue field base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Fiber\", \"Polynomial.fiberEquivQuotient\", \"PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal\", \"Polynomial.residueFieldMapCAlgEquiv.congr_simp\", \"Polynomial.residueFieldMapCAlgEquiv\", \"PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal\", \"Algebra.QuasiFinite.finite_fiber\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\"], \"digest\": \"3a4288bc811ecaf3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide component localization/tensor or conormal equivalences, not the displayed localized conormal fibre statement with its dimension conclusion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-lci-field-change-local",
@@ -71,5 +265,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-lci-conormal-fibre-field-change",
+  "worker": "stage1",
+  "summary": "Eight steps reuse the existing polynomial presentation, field-extension faithful-flatness and flat ideal-conormal base-change leaves. The localization, residue-field and tensor identifications are proved by explicit mutually inverse fraction/pure-tensor maps; finite generation and coordinate functionals prove dimension equality. No new node is necessary. The statement and historical blueprint ancestry are unchanged.",
+  "blueprint": "The historical Tag 00SI conormal-fibre input below lem-trf-local-term-locality: polynomial coefficient extension, conormal quotient base change, the residue-field fibre identity, and equality of finite dimensions."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q92-db7da3e1c",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-db7da3e1c (reviewer sub-agent of L); spot-checked: Read the complete mathematics and wrote review.md. All eight steps check against Stacks 00SI, 00SJ and 0473, including the canonical conormal map, residue-field embedding and finite dimensions. Edge cases, duplicate candidates and dependency closure checked; no repairs, cycles, forbidden machinery or new tool uses."
  }
 }

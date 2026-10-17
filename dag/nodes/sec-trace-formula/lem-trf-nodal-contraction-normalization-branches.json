@@ -23,9 +23,134 @@
   "def-weil-pure-dimension",
   "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Properness over $k$ includes finite type, so [lem-weil-pbc-finite-type-over-noetherian] makes $X,Y$ Noetherian (a field has only the ideals $0,k$). Put $A=\\overline{Y\\setminus B}_{\\mathrm{red}}$. Apply [lem-trf-complementary-pure-subcurve-components] to $B\\subset Y$: $B$ is a union of whole reduced components and $A$ is the union of all the others. Apply [lem-trf-nodal-subcurve-boundary] to the same inclusion, using the stipulated nodal neighbourhood. It gives $T=A\\cap B=\\coprod_{j=1}^r\\operatorname{Spec}k$, possibly empty at this stage; each point of $T$ is an ambient node and is smooth on both $A$ and $B$. In the completed node ring the two reduced subcurves are the two distinct axes: both are smooth and their union is the whole node, so neither can contain both minimal primes. Thus one branch is in $B$ and the other in $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-complementary-pure-subcurve-components",
+    "lem-trf-nodal-subcurve-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve); Noetherianity: morphisms.tex Tag 01T6."
+   }
+  },
+  {
+   "text": "The open $X\\setminus\\{x\\}$ contains every generic point of $X$, since all components have dimension one. The open $Y\\setminus B$ contains exactly the generic points of the components of $A$. An isomorphism of these opens identifies their generic points, and taking closures gives the asserted component bijection. A reduced component $A_i$ maps into its corresponding reduced component $X_i$: locally the ideal of $X_i$ pulls back to functions vanishing at every point of $A_i$, hence to zero because $A_i$ is reduced. The generic-point identification identifies their function fields. No component of $A$ is contracted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, Corollary B.2 proof, final normalization paragraph, p. 58; generic-point argument expanded."
+   }
+  },
+  {
+   "text": "The restriction $A_i\\to X_i$ is proper. Indeed $A_i\\to Y\\to X$ is proper by [lem-weil-pbc-proper-fp-permanence](a),(c); as it factors through the closed immersion $X_i\\hookrightarrow X$, its factor is the base change of this proper map along $X_i\\hookrightarrow X$. Its fibres away from $x$ have at most one point, and its fibre at $x$ is contained in the finite set $T$. By [thm-pqf-finite-iff-proper-finite-fibres] it is finite. Use [lem-sc-normalization-properties] on $A_i$ and $X_i$: their normalizations are finite, surjective, birational and proper, and are smooth since the algebraically closed field is perfect. By [lem-sc-smooth-normal] the normalized source is normal. The dominant composite $\\widetilde A_i\\to X_i$ therefore lifts to $p_i:\\widetilde A_i\\to\\widetilde X_i$ by [lem-sbc-normalization-dominant-lift].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "thm-pqf-finite-iff-proper-finite-fibres",
+    "lem-sc-normalization-properties",
+    "lem-sc-smooth-normal",
+    "lem-sbc-normalization-dominant-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q (lemma-normalization), universal property (4); Cohomology of Schemes, Tag 02OG (lemma-characterize-finite)."
+   }
+  },
+  {
+   "text": "The map $p_i$ is finite: over an affine $U=\\operatorname{Spec}R\\subset X_i$, write the two finite inverse images as $\\operatorname{Spec}C=\\widetilde X_i|_U$ and $\\operatorname{Spec}D=\\widetilde A_i|_U$. Here $D$ is finite over $R$ because both $\\widetilde A_i\\to A_i$ and $A_i\\to X_i$ are finite; explicitly products of finite module generators generate their composite. The same $R$-module generators of $D$ generate it as a $C$-module. Localizing at any element of $C$ proves finiteness over the principal affine opens of $\\operatorname{Spec}C$. The common function field in Step 2 makes $p_i$ birational. Its target is normal by smoothness and [lem-sc-smooth-normal], so [lem-trf-finite-birational-normal-iso] makes $p_i$ an isomorphism. Taking the disjoint union of the inverse isomorphisms and composing with $\\widetilde A_i\\to A_i\\hookrightarrow Y$ constructs $h:\\widetilde X\\to Y$ over $X$.",
+   "uses": [
+    "lem-sc-smooth-normal",
+    "lem-trf-finite-birational-normal-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1 (lemma-finite-birational-over-normal); affine finite-module calculation for the lifted map."
+   }
+  },
+  {
+   "text": "The points of $h(\\nu_X^{-1}(x))$ are exactly $A\\cap B$: $h$ is surjective onto $A$ component by component, and the underlying fibre of $f$ is $|B|$. At any $y\\in T$, $A$ is smooth by Step 1, hence normal by [lem-sc-smooth-normal] applied to a smooth open neighbourhood in $A$. The normalization is an isomorphism there by [lem-sc-normalization-properties](b). Thus exactly one point of the disjoint union $\\coprod_i\\widetilde A_i$ maps to $y$ (smoothness also prevents distinct components of $A$ meeting there). This proves bijectivity. At least one component $X_i$ passes through $x$; surjectivity of its normalization from [lem-sc-normalization-properties](a) supplies a point over $x$. Hence $T$ is nonempty. Together with Step 1 this proves every assertion except the final scheme-fibre clause.",
+   "uses": [
+    "lem-sc-smooth-normal",
+    "lem-sc-normalization-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, Corollary B.2 proof, final paragraph, p. 58; boundary smoothness supplied by Stacks 0E38."
+   }
+  },
+  {
+   "text": "Now suppose $x$ is ordinary. Write $R=\\mathcal O_{X,x}$, $\\mathfrak m=\\mathfrak m_{X,x}$, and $S$ for its integral closure in its total ring of fractions, namely the semilocal ring of $\\widetilde X$ above $x$. Here $R$ is reduced and essentially of finite type over $k$. Its dimension is one: prime chains in a local affine chart have length at most one, and a component generic point specializing to the closed nongeneric $x$ gives length one. By [lem-trf-curve-normalization-completion], $S$ is finite over $R$ and $S\\otimes_R\\widehat R$ is the integral closure of $\\widehat R$. In the given ordinary model, restriction to each axis identifies $\\widehat R$ with the ring of tuples $(a_1,\\ldots,a_n)\\in\\prod_i k[[t_i]]$ having equal constant coefficients. Its integral closure is $P=\\prod_i k[[t_i]]$: adjoining the coordinate idempotents (each satisfying $e_i^2=e_i$) gives $P$, and a tuple integral in $\\prod_i k((t_i))$ has no negative order in any coordinate. Indeed in a monic equation a negative-order leading power has strictly smaller order than every other term and cannot cancel. This also proves each $k[[t_i]]$ integrally closed directly. The total fraction ring is the displayed product of Laurent fields: invert the non-zero-divisor $(t_1,\\ldots,t_n)$ to separate axes and invert their parameters. Hence $\\mathfrak mP=\\prod_i(t_i)$ and $P/\\mathfrak mP=k^n$.",
+   "uses": [
+    "lem-trf-curve-normalization-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Equation (multicross) in Section multicross, before Tag 0C1V; varieties.tex Tag 0C3V (lemma-normalization-same-after-completion)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-local-completion-faithfully-flat], $R\\to\\widehat R$ is faithfully flat. Thus $S/\\mathfrak mS$ injects into $(S/\\mathfrak mS)\\otimes_R\\widehat R=P/\\mathfrak mP=k^n$, and is reduced. To spell out the injectivity used here, for any module element $z$, tensor the inclusion of its cyclic submodule with the flat algebra; if $z\\otimes1=0$ that entire tensor module vanishes, and faithfulness forces the cyclic submodule to vanish. Localizing $S/\\mathfrak mS$ at a point $q$ above $x$ gives a reduced finite-dimensional local $k$-algebra. Its only prime is its maximal ideal (a finite-dimensional domain quotient is a field), so that ideal, being the nilradical, is zero. Consequently $\\mathfrak mS_q$ is the maximal ideal of $S_q$. Under Steps 4 and 5, $S_q=\\mathcal O_{A,y}$ for the corresponding boundary point $y$. Therefore the image of $\\mathfrak m$ generates the maximal ideal of $\\mathcal O_{A,y}$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MC (lemma-completion-faithfully-flat); descent and localization argument written explicitly."
+   }
+  },
+  {
+   "text": "Fix such a boundary point $y$, put $H=\\mathcal O_{Y,y}$ and $J=\\mathfrak mH$, the ideal of the scheme-theoretic fibre. Its restriction to $\\mathcal O_{B,y}$ is zero: the composite $B\\to X$ factors through $x$, since the maximal ideal pulls back to functions vanishing at all points of the reduced $B$. In $\\widehat H=k[[u,v]]/(uv)$ label the axes so that $A$ is $v=0$ and $B$ is $u=0$. Completion preserves the defining quotient sequences by [lem-weil-pbc-completion-exact-finite-modules]; thus $J\\widehat H\\subseteq(u)$. Step 7 says its image on the $A$-axis generates that axis's maximal ideal. Choose a finite linear combination of generators of $J$ whose restriction is a generator there. Its completed image is $u a(u)$ with $a(0)\\ne0$, hence it generates $(u)$ in $\\widehat H$. It follows that $J\\widehat H=(u)$ and $\\widehat H/J\\widehat H=k[[v]]$, a domain (the lowest nonzero coefficients of a product multiply). Faithful flatness of $H\\to\\widehat H$ from [lem-weil-pbc-local-completion-faithfully-flat] embeds $H/J$ into this domain, by the cyclic-module argument of Step 7. Thus $H/J$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MB (lemma-completion-flat, exactness on finite modules) and 00MC; explicit node-axis calculation."
+   }
+  },
+  {
+   "text": "On $Y\\setminus A$ the whole reduced scheme is an open subscheme of $B$, since $A,B$ are the complementary unions of components. The pullback of $\\mathfrak m$ is zero there by reducedness, as in Step 8; hence $Z$ is reduced there. Its remaining points lie in $A\\cap B=T$, where Step 8 proves reducedness of every fibre local ring. There are no points of $Z$ outside $B$. Reducedness is the absence of nilpotents in local rings, so $Z$ is reduced everywhere. Its support is $|B|$, and the unique reduced induced closed subscheme on that support is $B$ by [lem-weil-pbc-reduced-induced-closed-subscheme]; therefore $Z=B$. This used neither genus equality nor any rationality, graph, or marking condition.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Ordinary-branch local calculation after Equation (multicross), together with the node-axis calculation above; final reduced-structure identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normalization-dominant-lift",
+  "lem-sc-normalization-properties",
+  "lem-sc-smooth-normal",
+  "lem-trf-complementary-pure-subcurve-components",
+  "lem-trf-curve-normalization-completion",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Expansion of Temkin Appendix B Corollary B.2 final paragraph (primary PDF read online, pp. 56--58; archival copy WANTED), using Stacks Tags 0E38, 035Q, 0AB1, 02OG, 0C3V, 00MB and 00MC. Ordinary-fibre axis calculation written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +186,45 @@
    "results": "{\"t\": \"2026-10-17T22:09:44Z\", \"tool\": \"leanfinder\", \"query\": \"Proper birational curve map identifies normalizations of noncontracted components and the preimages of a contracted point with boundary branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"cec380f50fdc51da\"}; The fibre range and preimmersion declarations identify only the underlying fibre set. Relative normalization and its coproduct equivalence do not give boundary branches or reducedness of a contraction fibre. Read Normalization.lean:127 and :505.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|contract.*curve|ordinary.*point|boundary.*branch",
+   "results": "{\"t\": \"2026-10-17T22:30:04Z\", \"tool\": \"grep\", \"query\": \"nodal|contract.*curve|ordinary.*point|boundary.*branch\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned relative-normalization declarations in Mathlib/AlgebraicGeometry/Normalization.lean:127--145 and 505--535. They construct relative normalization and its coproduct isomorphism, not contraction boundary branches or ordinary-point fibre reducedness. The second semantic search returned Weierstrass point ideals and Kummer-Dedekind factorization, which do not concern this curve contraction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization branches of a proper reduced curve under contraction of a nodal subcurve",
+   "results": "{\"t\": \"2026-10-17T22:30:04Z\", \"tool\": \"leansearch\", \"query\": \"Normalization branches of a proper reduced curve under contraction of a nodal subcurve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"d459b9641b00159d\"}; Read the returned relative-normalization declarations in Mathlib/AlgebraicGeometry/Normalization.lean:127--145 and 505--535. They construct relative normalization and its coproduct isomorphism, not contraction boundary branches or ordinary-point fibre reducedness. The second semantic search returned Weierstrass point ideals and Kummer-Dedekind factorization, which do not concern this curve contraction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-17T22:30:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}; Read the returned relative-normalization declarations in Mathlib/AlgebraicGeometry/Normalization.lean:127--145 and 505--535. They construct relative normalization and its coproduct isomorphism, not contraction boundary branches or ordinary-point fibre reducedness. The second semantic search returned Weierstrass point ideals and Kummer-Dedekind factorization, which do not concern this curve contraction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper contraction of a connected nodal subcurve identifies target normalization branches with boundary points and has reduced fibre over an ordinary multiple point",
+   "results": "{\"t\": \"2026-10-17T22:30:06Z\", \"tool\": \"leanfinder\", \"query\": \"A proper contraction of a connected nodal subcurve identifies target normalization branches with boundary points and has reduced fibre over an ordinary multiple point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"1bf101efbf1ad669\"}; Read the returned relative-normalization declarations in Mathlib/AlgebraicGeometry/Normalization.lean:127--145 and 505--535. They construct relative normalization and its coproduct isomorphism, not contraction boundary branches or ordinary-point fibre reducedness. The second semantic search returned Weierstrass point ideals and Kummer-Dedekind factorization, which do not concern this curve contraction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization separates the branches at a curve singularity and the maximal ideal of an ordinary multiple point generates the radical ideal in its normalization",
+   "results": "{\"t\": \"2026-10-17T22:30:34Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization separates the branches at a curve singularity and the maximal ideal of an ordinary multiple point generates the radical ideal in its normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"Algebra.IsUnramifiedAt\"], \"digest\": \"e7eeb33fe06ecc88\"}; Read the returned relative-normalization declarations in Mathlib/AlgebraicGeometry/Normalization.lean:127--145 and 505--535. They construct relative normalization and its coproduct isomorphism, not contraction boundary branches or ordinary-point fibre reducedness. The second semantic search returned Weierstrass point ideals and Kummer-Dedekind factorization, which do not concern this curve contraction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-curve-p1-tree-local-criterion",
@@ -84,5 +244,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-contraction-normalization-branches",
+  "worker": "stage1",
+  "summary": "Split with no new nodes. Proved the component correspondence and finite birational normalization identification using existing general tools, identified boundary points using smoothness on the complementary subcurve, and computed the full fibre ideal at each ordinary-target boundary node. The completion calculation and faithful-flat descent retain the scheme-theoretic fibre. Statement unchanged; no genus/tree/marking hypotheses added.",
+  "blueprint": "Realizes the historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality via lem-trf-valuation-exceptional-local-criterion and lem-trf-curve-p1-tree-local-criterion: Temkin Appendix B Corollary B.2 final normalization/boundary paragraph. The ordinary-fibre refinement already in the item is proved by the local axis calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherianity of finite-type schemes over a field, to apply the component and boundary statements; no trace-unit substitute."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic properness of closed restrictions and compositions in the finite noncontracted-component argument."
+   },
+   {
+    "node": "thm-pqf-finite-iff-proper-finite-fibres",
+    "why": "Generic proper finite-fibre criterion, applied only after finiteness of the boundary is proved."
+   },
+   {
+    "node": "lem-sc-normalization-properties",
+    "why": "Generic finiteness, smoothness, surjectivity and normal-locus identification of component normalizations."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Generic normality of smooth curves, needed for lifting and the smooth boundary identification."
+   },
+   {
+    "node": "lem-sbc-normalization-dominant-lift",
+    "why": "Generic universal property of normalization for a dominant map with normal integral source; constructs the comparison without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "lem-sc-normalization-properties",
+  "lem-sc-smooth-normal",
+  "lem-sbc-normalization-dominant-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q43-2a31496e1",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-2a31496e1 (reviewer sub-agent of L); spot-checked: The proof and hypotheses check out across all nine steps, cited DAG statements, Temkin/Stacks sources, edge cases, and search records. One source-location repair is required: Tag 02OG was mislabeled as coherent.tex; it belongs to Cohomology of Schemes. Corrected DAG JSON is under fixes/dag/nodes/sec-trace-formula/lem-trf-nodal-contraction-normalization-branches.json.; 1 file(s) fixed by the reviewer"
  }
 }

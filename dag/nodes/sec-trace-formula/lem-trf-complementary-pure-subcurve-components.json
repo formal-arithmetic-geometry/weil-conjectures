@@ -15,9 +15,92 @@
   "def-weil-closed-immersion",
   "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The irreducible components of the Noetherian scheme $X$ form a finite set by [lem-weil-pbc-noetherian-finitely-many-components]. If $X$ is empty, take $I=\\varnothing$; then $Y$ and $Z$ are empty and all assertions are vacuous. Assume henceforth that $X$ is nonempty. Every point of $X$ lies on an irreducible component by [lem-sc-irreducible-components-cover].",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 first paragraph, with the Noetherian component-finiteness input"
+   }
+  },
+  {
+   "text": "Let $C$ be an irreducible component of $Y$. It is a closed irreducible subset of $X$, and by [lem-sc-irreducible-components-cover] it is contained in an irreducible component $D$ of $X$. If $C\\subsetneq D$, then $U=D\\setminus C$ is a nonempty open subset of the irreducible space $D$. Apply [new-node-irreducible-open-complement-dimension] to $D$, with $d=1$ and this $U$. Since $D$ has dimension $1$, the result gives an integer $e<1$ with $\\dim C\\le e$, hence $\\dim C\\le0$. This contradicts the hypothesis that every irreducible component of $Y$ has dimension $1$. Therefore $C=D$ is an irreducible component of $X$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "new-node-irreducible-open-complement-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 first paragraph: a reduced equidimensional one-dimensional closed subscheme is a union of irreducible components"
+   }
+  },
+  {
+   "text": "Let $I$ be the subset of the finite component set of $X$ consisting of those components that occur as a component $C$ of $Y$ in Step 2. Every point of $Y$ lies on a component of $Y$ by [lem-sc-irreducible-components-cover] applied to the underlying space of $Y$, and Step 2 identifies that component with a member of $I$. Conversely every member of $I$ is contained in $Y$. Thus $|Y|$ is exactly the union of the components in $I$. Because $Y$ is reduced and is a closed subscheme with this support, uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies $Y$ with the reduced closed union of those components.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 first paragraph and the reduced-induced uniqueness statement"
+   }
+  },
+  {
+   "text": "Let $J$ be the complementary subset of the finite component set of $X$, and let $W=\\bigcup_{D\\in J}|D|$. This is closed. If $x\\in|X|\\setminus|Y|$, choose an irreducible component $D$ containing $x$ by [lem-sc-irreducible-components-cover]. It cannot lie in $I$, because every component in $I$ is contained in $Y$; hence $x\\in W$. Thus $|X|\\setminus|Y|\\subseteq W$ and its closure is contained in $W$. Conversely, for $D\\in J$, let $\\eta_D$ be its generic point from [lem-sc-scheme-sober]. If $\\eta_D\\in|Y|$, the closedness of $Y$ would imply $D=\\overline{\\{\\eta_D\\}}\\subseteq|Y|$, which is impossible: by Step 3, $|Y|=\\bigcup_{C\\in I}C$, so irreducibility of $D$ forces $D$ into one selected $C$ (repeatedly apply the two-closed-set definition to this finite union); maximality of components then gives $D=C\\in I$. Hence $\\eta_D\\in|X|\\setminus|Y|$, and $D=\\overline{\\{\\eta_D\\}}$ is contained in the closure of $|X|\\setminus|Y|$. Taking the finite union over $J$ gives $W=\\overline{|X|\\setminus|Y|}$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), first paragraph, with the finite-component closure argument written out; Tags 004W (lemma-irreducible) and 01IS (lemma-scheme-sober)."
+   }
+  },
+  {
+   "text": "By definition, $Z$ is the reduced induced closed subscheme on $W$. The irreducible components of the finite union $W=\\bigcup_{D\\in J}D$ are exactly the members of $J$: if $E$ is irreducible in $W$, the finite closed cover $E=\\bigcup_{D\\in J}(E\\cap D)$ forces $E\\subseteq D$ for one $D$, by repeated use of the two-closed-set definition. Each $D\\in J$ is itself irreducible and closed in $W$, and no one contains another by maximality in $X$. Thus the maximal irreducible subsets of $W$ are precisely these $D$. Therefore every irreducible component of $Z$ has dimension $1$, and $Z$ is the reduced closed union of all components of $X$ not in $I$. If $J=\\varnothing$, then $W$ and $Z$ are empty and this conclusion is vacuous.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), first paragraph, with the finite-component closure argument written out; Tags 004W (lemma-irreducible) and 01IS (lemma-scheme-sober)."
+   }
+  },
+  {
+   "text": "Put $V=|X|\\setminus|Z|=|X|\\setminus W$. Every $x\\in V$ lies on a component of $X$ by [lem-sc-irreducible-components-cover], and that component must be in $I$ because each component in $J$ lies in $W$. Thus $V\\subseteq|Y|$, so $\\overline V\\subseteq|Y|$ since $Y$ is closed. Conversely, for $D\\in I$, take its generic point $\\eta_D$ from [lem-sc-scheme-sober]. If $\\eta_D\\in W$, then $\\eta_D\\in C$ for some $C\\in J$; closedness of $C$ gives $D=\\overline{\\{\\eta_D\\}}\\subseteq C$, and maximality of components gives $D=C$, contradicting $I\\cap J=\\varnothing$. Hence $\\eta_D\\in V$ and $D\\subseteq\\overline V$. The union over $I$ gives $|Y|\\subseteq\\overline V$, proving $\\overline{|X|\\setminus|Z|}=|Y|$. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] now identifies the reduced induced closed subscheme on this support with $Y$. The argument includes $I=\\varnothing$ and $J=\\varnothing$, so both empty-complement cases are covered.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-scheme-sober",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), first paragraph, with the finite-component closure argument written out; Tags 004W (lemma-irreducible) and 01IS (lemma-scheme-sober)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "new-node-irreducible-open-complement-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Expands the component-union argument in Tag 0E38 (lemma-closed-subscheme-nodal-curve), first proof paragraph, using the existing general dimension-drop node; writes out the finite-component complementary-closure and double-complement arguments using Tags 004W, 01IS and 01J3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +143,59 @@
    "results": "{\"t\": \"2026-10-17T22:07:27Z\", \"tool\": \"grep\", \"query\": \"subcurve|pure.*dimension|equidimensional|complementary.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"2b027e3be165cb00\"}; Read the returned declarations and source: these give component topology, image support, normalization or open reducedness, not this whole statement.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a reduced Noetherian scheme pure of dimension one a reduced pure one dimensional closed subscheme is a union of irreducible components and its complementary closure is the union of the remaining components",
+   "results": "{\"t\": \"2026-10-17T22:28:17Z\", \"tool\": \"leanfinder\", \"query\": \"In a reduced Noetherian scheme pure of dimension one a reduced pure one dimensional closed subscheme is a union of irreducible components and its complementary closure is the union of the remaining components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.Scheme.zeroLocus_univ\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.Scheme.support_nilradical\", \"PrimeSpectrum.zeroLocus_minimalPrimes\"], \"digest\": \"dc7aa6accc178c70\"}; AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; Scheme.zeroLocus_univ; no exact theorem for the component-union/complement statement",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "irreducibleComponents, IsReduced, topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-17T22:28:17Z\", \"tool\": \"loogle\", \"query\": \"irreducibleComponents, IsReduced, topologicalKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; 0 hits; the service did not return a declaration for the combined pattern",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|reduced.*closed|topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-17T22:28:17Z\", \"tool\": \"grep\", \"query\": \"irreducibleComponents|reduced.*closed|topologicalKrullDim\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"da745111169811b5\"}; 25 hits, including Mathlib/AlgebraicGeometry/Noetherian.lean:364 finite_irreducibleComponents_of_isNoetherian and IdealSheaf/Basic.lean:563 reduced induced scheme structure; no exact theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced pure one dimensional closed subscheme of a reduced Noetherian one dimensional scheme is a union of irreducible components and the complementary closure is the remaining union",
+   "results": "{\"t\": \"2026-10-17T22:28:18Z\", \"tool\": \"leansearch\", \"query\": \"A reduced pure one dimensional closed subscheme of a reduced Noetherian one dimensional scheme is a union of irreducible components and the complementary closure is the remaining union\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"irreducibleComponents\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\"], \"digest\": \"5865270153d979d5\"}; irreducibleComponents; TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible; TopologicalSpace.NoetherianSpace.exists_finset_irreducible; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; no exact theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced one dimensional closed subscheme of a reduced curve is a union of components",
+   "results": "{\"t\": \"2026-10-17T22:28:20Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced one dimensional closed subscheme of a reduced curve is a union of components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\"], \"digest\": \"3ecc34d87bcb5978\"}; AlgebraicGeometry.IsReduced; AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced; no exact theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "finite_irreducibleComponents_of_isNoetherian",
+   "results": "{\"t\": \"2026-10-17T22:28:20Z\", \"tool\": \"loogle\", \"query\": \"finite_irreducibleComponents_of_isNoetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'finite_irreducibleComponents_of_isNoetherian'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; unknown identifier; no result",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_irreducibleComponents_of_isNoetherian",
+   "results": "{\"t\": \"2026-10-17T22:28:20Z\", \"tool\": \"grep\", \"query\": \"finite_irreducibleComponents_of_isNoetherian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"54dababe3e0cad16\"}; Mathlib/AlgebraicGeometry/Noetherian.lean:364 theorem finite_irreducibleComponents_of_isNoetherian",
+   "date": "2026-10-17",
+   "verdict": "match: this is only the finite-component input, not the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-subcurve-boundary",
@@ -94,5 +226,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-complementary-pure-subcurve-components",
+  "worker": "stage1",
+  "summary": "Audited the reduced pure one-dimensional component argument from Stacks Tag 0E38. No new child node was needed: the proof uses existing finite-component, component-cover, sobriety, and reduced-induced-subscheme statements, together with the existing general dimension-drop node for a proper closed subset of an irreducible space. The six steps identify the components of Y, compute the complementary closure, establish the dimensions and reduced structures of Z, and prove the double-complement identity, including empty cases.",
+  "blueprint": "Realizes the geometric input sentence under lem-trf-local-term-locality: the reduced pure one-dimensional hypotheses permit exchanging a subcurve with its complementary closure in the nodal neighbourhood.",
+  "tool_uses": [
+   {
+    "node": "new-node-irreducible-open-complement-dimension",
+    "why": "The proof needs the generic topological fact that a proper closed subset of an irreducible space of dimension at most one has dimension at most zero; no node in the trace-formula unit supplies this dimension-drop tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-node-irreducible-open-complement-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-b5dc2d960",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-b5dc2d960 (reviewer sub-agent of L); spot-checked: Read the item, report, route files, cited nodes, unit/chapter, and Stacks Tag 0E38. All six proof steps are mathematically valid with hypotheses checked, empty and small cases tested, citations matching statements, no duplicate/new-node issue, no route-lock violation, and no long hidden lemma. Review written to review.md."
  }
 }

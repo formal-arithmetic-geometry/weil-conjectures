@@ -9,11 +9,84 @@
  },
  "stmt_deps": [
   "lem-trf-cotangent-resolution-coherence",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-trf-cotangent-transitivity-triangle",
+  "lem-trf-smooth-cotangent-identification",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-regular-sequence-conormal-free"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-cotangent-transitivity-triangle] to the composable maps $\\mathbf Z\\to P\\to B=\\mathbf Z$. It gives the distinguished triangle $L_{P/\\mathbf Z}\\otimes_P^{\\mathbf L}B\\to L_{B/\\mathbf Z}\\to L_{B/P}\\to(L_{P/\\mathbf Z}\\otimes_P^{\\mathbf L}B)[1]$ in $D(B)$, with its canonical functoriality maps.",
+   "uses": [
+    "lem-trf-cotangent-transitivity-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QX (proposition-triangle), equation-triangle specialized to $\\mathbf Z\to P\to\\mathbf Z$."
+   }
+  },
+  {
+   "text": "By [lem-trf-smooth-cotangent-identification] with base ring $\\mathbf Z$ and the finite variable set $\\{1,\\ldots,n\\}$, the first term is canonically $\\Omega^1_{P/\\mathbf Z}\\otimes_P^{\\mathbf L}B$. The differential module is free over $P$ on $\\mathrm dx_1,\\ldots,\\mathrm dx_n$ by [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], hence is K-flat for this tensor calculation and its derived tensor with $B$ is the ordinary module $\\Omega^1_{P/\\mathbf Z}\\otimes_PB$, free on $1\\otimes\\mathrm dx_i$.",
+   "uses": [
+    "lem-trf-smooth-cotangent-identification",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QH (polynomial cotangent complex) and algebra.tex Tag 00RX (polynomial differential basis)."
+   }
+  },
+  {
+   "text": "The middle term $L_{B/\\mathbf Z}$ is zero: for the identity map $\\mathbf Z\\to\\mathbf Z$, use the constant simplicial polynomial resolution in the definition of [lem-trf-cotangent-resolution-coherence]. Its alternating-face complex is the constant module in degree zero with identity differentials in every positive even-to-odd pair, so the identity augmentation is a homotopy equivalence and the resulting cotangent complex is the zero object. This also covers $n=0$ without any separate convention.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08PN and 08QI, constant resolution calculation for the identity ring map."
+   }
+  },
+  {
+   "text": "Rotating the triangle from Steps 1--3 and using the zero middle term identifies $L_{B/P}$ canonically with $(\\Omega^1_{P/\\mathbf Z}\\otimes_PB)[1]$. The identification is the connecting morphism of that specified distinguished triangle, so it is canonical in the standard cotangent-complex construction.",
+   "uses": [
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-smooth-cotangent-identification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SI proof, displayed transitivity triangle after the polynomial and identity cotangent identifications."
+   }
+  },
+  {
+   "text": "The sequence $x_1,\\ldots,x_n$ is regular in $P=\\mathbf Z[x_1,\\ldots,x_n]$: successively quotienting by the preceding variables gives a polynomial ring over $\\mathbf Z$, in which the next variable is a non-zero-divisor. Therefore [lem-weil-pbc-regular-sequence-conormal-free] identifies $J/J^2$ with the free $B$-module on the classes $[x_i]$. The differential-basis statement in Step 2 identifies $\\Omega^1_{P/\\mathbf Z}\\otimes_PB$ with the free $B$-module on $1\\otimes\\mathrm dx_i$. Sending $1\\otimes\\mathrm dx_i$ to $[x_i]$ is thus a canonical $B$-linear isomorphism; shifting it by $[1]$ and composing with Step 4 gives the asserted canonical $L_{B/P}\\simeq(J/J^2)[1]$. If $n=0$, both free modules have empty basis and are zero.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-conormal-free",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SI proof, final identification with $I/I^2$; algebra.tex Tag 00LN for the conormal basis and Tag 00RX for the differential basis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-cotangent-transitivity-triangle",
+  "lem-trf-smooth-cotangent-identification",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-regular-sequence-conormal-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SI (lemma-special-case), proof via Tag 08QX transitivity, Tag 08QH polynomial cotangent identification, and the conormal basis of Tag 00LN."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-koszul-quotient-cotangent-vanishing",
@@ -75,5 +148,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-cotangent-polynomial-special-case",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Stacks Tag 08SI and found no Lean attachment or duplicate DAG node. The proof is split into the transitivity triangle, the polynomial cotangent identification and differential basis, the contractible identity-map cotangent complex, the resulting cone shift, and the conormal-basis identification for the regular sequence x_1,...,x_n. No new nodes were needed; all dependencies already exist and the n=0 edge case is explicit.",
+  "blueprint": "The steps realize the imported ancestor's supporting polynomial special-case cotangent-complex input, via the transitivity triangle and polynomial/surjection computations specified in Tag 08SI."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-f19b31a2a",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-f19b31a2a (reviewer sub-agent of L); spot-checked: Read the item, cited nodes, unit/chapter route, Stacks Tag 08SI source, blueprint, and delivery instructions in full. All hypotheses, citations, edge cases including n=0, regular-sequence and basis identifications check out; no route, SGA, duplication, or coefficient-category issue found. Detailed review written to review.md."
  }
 }

@@ -22,9 +22,177 @@
   "def-weil-pure-dimension",
   "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $X$ is proper over $k$, it is of finite type. The spectrum of a field is Noetherian (its only ideals are zero and the unit ideal), so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. Apply [lem-weil-pbc-reduced-algebraic-normalization-field-change] to the reduced finite-type scheme $X$: its irreducible components form a finite family and their componentwise normalization $\\nu$ is finite and surjective. The same node supplies a dense open normal locus $N\\subseteq X$ over which $\\nu$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Each $X_i$ is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme]. Its dimension is one by the pure-dimension hypothesis. It is proper over $k$ because it is a closed subscheme of the proper scheme $X$ [lem-weil-pbc-closed-immersion-proper], and therefore is of finite type. Apply [lem-sc-normalization-properties](a),(c): $\\widetilde X_i$ is proper, has dimension one, and is smooth since $k$ is perfect. Here perfectness follows directly from algebraic closedness: in positive characteristic every $a\\in k$ has a $p$-th root, and in characteristic zero all irreducible polynomials are separable. Apply [lem-weil-pbc-normalization-in-residue-field-extension] with the generic point of $X_i$ and the degree-one extension $k(X_i)/k(X_i)$; its normalization is exactly the integral-closure construction of [def-sc-normalization], and is integral, hence nonempty and connected. Thus every $\\widetilde X_i$ is a smooth proper connected curve.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sc-normalization-properties",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035L (lemma-normal-normalization), 01W5 (lemma-closed-immersion-proper); varieties.tex Tag 0BXR; normalization smoothness in dimension one as in lem-sc-normalization-properties(c)."
+   }
+  },
+  {
+   "text": "The map $\\mathcal O_X\\to\\nu_*\\mathcal O_{\\widetilde X}$ is injective. Indeed, on an affine open $U\\subseteq X$, if a section $s$ pulls back to zero, its restriction to each $U\\cap X_i$ is zero: normalization of an integral scheme embeds its affine coordinate ring into its function field, by the integral-closure construction [def-sc-normalization]. Every point of $U$ lies on a component, so $s$ vanishes in every residue field. In the notation of [lem-weil-pbc-reduced-induced-closed-subscheme](1), this says $s\\in\\mathcal I_X(U)=\\sqrt{(0)}$. This ideal is zero since $\\mathcal O_X(U)$ is reduced [def-pc-reduced-scheme]. Consequently $0\\to\\mathcal O_X\\to B\\to F\\to0$, with $B=\\nu_*\\mathcal O_{\\widetilde X}$, is exact by the definition of the quotient sheaf $F$.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), injectivity in the normalization sequence; schemes.tex Tags 01J3 (lemma-reduced-closed-subscheme), 01J1 (lemma-reduced)."
+   }
+  },
+  {
+   "text": "Since $X$ is locally Noetherian and $\\nu$ is finite, [lem-weil-pbc-finite-pushforward-coherent] applied to $\\mathcal O_{\\widetilde X}$ gives coherence of $B$. The cokernel clause of [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] gives coherence of $F$ in step 3. Its support $S=\\{y:F_y\\ne0\\}$ is closed by [lem-weil-pbc-finite-type-module-support-closed].",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01Y6 (lemma-finite-pushforward-coherent), 01Y0 (lemma-coherent-abelian-Noetherian); morphisms.tex Tag 056J (lemma-support-finite-type)."
+   }
+  },
+  {
+   "text": "On the dense normal open $N$ of step 1 the normalization is an isomorphism [lem-weil-pbc-reduced-algebraic-normalization-field-change], so $F|_N=0$. Every generic point of an irreducible component belongs to $N$. A closed subset of a one-dimensional Noetherian space avoiding all component generic points has dimension at most zero: a chain of two distinct irreducible closed subsets inside it would, after containment in a component, extend to a chain of length two in that component. Thus $\\dim S\\le0$. Apply [lem-sc-dim0-finite] to the closed subset $S$ of the finite-type $k$-scheme $X$: it is a finite set of closed points.",
+   "uses": [
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "lem-sc-dim0-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BXR (lemma-normalization-locally-algebraic), 0C1R (lemma-prepare-delta-invariant); finiteness of zero-dimensional closed subsets as in lem-sc-dim0-finite."
+   }
+  },
+  {
+   "text": "The germs map $\\Gamma(X,F)\\to\\bigoplus_{y\\in S}F_y$ is an isomorphism. It is injective because a section with zero germs at $S$ has zero germs everywhere. For surjectivity choose a representative $t$ of a germ at $y$ on an open neighbourhood $U_y$ avoiding $S\\setminus\\{y\\}$. On $U_y\\setminus\\{y\\}$ the sheaf is zero, so $t$ glues with zero on $X\\setminus\\{y\\}$ to a global section with just that germ. Summing these sections over the finite set $S$ realizes any tuple. These operations are $k$-linear. This is the elementary sheaf-gluing argument for part (2) of Stacks Tag 0AYT, and also works when $S$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), part (2); the germs and gluing argument is written out here."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-pc-chi-zero-dim-support] hold for $F$: it is coherent on the proper scheme $X$ and has zero-dimensional support. Hence its higher cohomology vanishes and $\\chi(X,F)=\\dim_k\\Gamma(X,F)$. This space is finite-dimensional by [lem-pc-euler-characteristic-well-defined]. The isomorphism in step 6 therefore also makes each $F_y$ finite-dimensional, and gives $\\chi(X,F)=\\sum_{y\\in S}\\dim_kF_y=\\sum_{y\\in X\\text{ closed}}\\delta_X(y)$; the last sum is finite since the other stalks are zero.",
+   "uses": [
+    "lem-pc-chi-zero-dim-support",
+    "lem-pc-euler-characteristic-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (lemma-chi-tensor-finite), parts (2)--(4); finiteness of coherent cohomology on a proper scheme."
+   }
+  },
+  {
+   "text": "For each $i$, the proper finite-type curve $\\widetilde X_i$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-sc-noetherian-cohomology-above-dimension] in dimension one to obtain $H^q(\\widetilde X_i,\\mathcal O)=0$ for $q>1$. The smooth proper connected curve has $H^0(\\widetilde X_i,\\mathcal O)=k$ by [lem-sc-global-functions]. Its first cohomology has dimension $g_i$ by [def-sc-genus]. Thus the Euler sum of [def-pc-euler-characteristic] gives $\\chi(\\widetilde X_i,\\mathcal O)=1-g_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sc-global-functions",
+    "def-sc-genus",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY7 (definition-genus); cohomology.tex Tag 02UZ (proposition-vanishing-Noetherian); varieties.tex Tag 0BUG (lemma-proper-geometrically-reduced-global-sections); morphisms.tex Tag 01T6."
+   }
+  },
+  {
+   "text": "Let $h_i:\\widetilde X_i\\to X$ be the composite through the closed immersion $X_i\\hookrightarrow X$. A closed immersion is finite directly from [def-weil-finite-integral-morphism]: the inverse image of $\\operatorname{Spec}A$ is $\\operatorname{Spec}(A/I)$, a cyclic $A$-module. Since $\\widetilde X_i\\to X_i$ is finite, stability under composition [lem-trf-finite-radicial-basechange] makes $h_i$ finite. Its pushforward $G_i=h_{i,*}\\mathcal O_{\\widetilde X_i}$ is coherent by [lem-weil-pbc-finite-pushforward-coherent]. Sections of a sheaf on a disjoint union are the product of the sections on its summands by the sheaf gluing axiom. Hence the definition of direct image gives $B=\\prod_iG_i=\\bigoplus_iG_i$, since there are finitely many summands.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WH (definition-integral), definition of finite morphism; finite composition; coherent.tex Tag 01Y6 (lemma-finite-pushforward-coherent)."
+   }
+  },
+  {
+   "text": "For each finite $h_i$, which is affine by [def-weil-finite-integral-morphism], [lem-weil-pbc-affine-morphism-cohomology-edge] identifies $H^q(X,G_i)$ with $H^q(\\widetilde X_i,\\mathcal O)$ for every $q$, compatibly with the $k$-action from the structure maps. Taking the alternating dimensions yields $\\chi(X,G_i)=1-g_i$ by step 8. Apply [lem-pc-euler-additive] successively to the split exact sequences of partial sums of the coherent modules $G_i$ (finite sums are coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]). Step 9 then gives $\\chi(X,B)=\\sum_i(1-g_i)=v-\\sum_i g_i$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-euler-additive",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 089W (lemma-relative-affine-cohomology); varieties.tex Tag 08AA (lemma-euler-characteristic-additive); coherent.tex Tag 01Y0."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-euler-additive] to the coherent short exact sequence of step 3. It gives $\\chi(X,\\mathcal O_X)=\\chi(X,B)-\\chi(X,F)=v-\\sum_i g_i-\\sum_y\\delta_X(y)$ by steps 7 and 10. Subtract this equality from $1$ and use the stated definition $p_a(X)=1-\\chi(X,\\mathcal O_X)$ to obtain the required formula. No step used connectedness or nodality of $X$.",
+   "uses": [
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AA (lemma-euler-characteristic-additive); Tag 0C1R normalization sequence and Tag 0AYT zero-dimensional contribution; arithmetic substitution."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-euler-characteristic",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-sc-genus",
+  "def-sc-normalization",
+  "def-weil-finite-integral-morphism",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-additive",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-dim0-finite",
+  "lem-sc-global-functions",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-normalization-properties",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C1R (lemma-prepare-delta-invariant), 0AYT (lemma-chi-tensor-finite), 08AA (lemma-euler-characteristic-additive), with coherent.tex Tag 089W; the normalization/Euler-characteristic argument of Temkin Appendix B, Lemma B.1 extended to disconnected curves."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +228,45 @@
    "results": "{\"t\": \"2026-10-17T22:09:45Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology normalization exact sequence and delta invariant Euler characteristic formula for a proper reduced algebraic curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"Algebra.Generators.H1Cotangent.δ_map\", \"Algebra.Generators.H1Cotangent.δ_eq\"], \"digest\": \"a1cb26df4acc31e6\"}; Read the returned normalization signatures and Normalization.lean: they construct relative normalization and its permanence, not structure-sheaf cohomology or the genus formula. The cotangent Jacobi-Zariski exact sequence is unrelated.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*genus|genus.*normalization|arithmeticGenus|deltaInvariant",
+   "results": "{\"t\": \"2026-10-17T22:29:51Z\", \"tool\": \"grep\", \"query\": \"normalization.*genus|genus.*normalization|arithmeticGenus|deltaInvariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read normalization API in Mathlib/AlgebraicGeometry/Normalization.lean: relative normalization and integrality/reducedness only. Other hits concern Weierstrass discriminants or incidence-algebra Euler characteristics; none gives coherent cohomology or this genus identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic normalization exact sequence reduced proper algebraic curve arithmetic genus",
+   "results": "{\"t\": \"2026-10-17T22:29:52Z\", \"tool\": \"leansearch\", \"query\": \"Euler characteristic normalization exact sequence reduced proper algebraic curve arithmetic genus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IncidenceAlgebra.eulerChar\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"IncidenceAlgebra.eulerChar_prod\", \"WeierstrassCurve.preΨ'_four\", \"Tactic.ReduceModChar.normIntNumeral\", \"WeierstrassCurve.isCharThreeJNeZeroNF_iff\"], \"digest\": \"fad37432fd2a8d48\"}; Read normalization API in Mathlib/AlgebraicGeometry/Normalization.lean: relative normalization and integrality/reducedness only. Other hits concern Weierstrass discriminants or incidence-algebra Euler characteristics; none gives coherent cohomology or this genus identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-17T22:29:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}; Read normalization API in Mathlib/AlgebraicGeometry/Normalization.lean: relative normalization and integrality/reducedness only. Other hits concern Weierstrass discriminants or incidence-algebra Euler characteristics; none gives coherent cohomology or this genus identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arithmetic genus of a reduced proper curve from the genera of its normalization components and delta invariants",
+   "results": "{\"t\": \"2026-10-17T22:29:53Z\", \"tool\": \"leanfinder\", \"query\": \"Arithmetic genus of a reduced proper curve from the genera of its normalization components and delta invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.valuation_Δ_aux\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsMinimal.val_Δ_maximal\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"68e89f7245d1dd69\"}; Read normalization API in Mathlib/AlgebraicGeometry/Normalization.lean: relative normalization and integrality/reducedness only. Other hits concern Weierstrass discriminants or incidence-algebra Euler characteristics; none gives coherent cohomology or this genus identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite birational normalization of a reduced proper scheme of dimension one, the structure sheaf Euler characteristic is the normalization Euler characteristic minus the dimension of the normalization quotient",
+   "results": "{\"t\": \"2026-10-17T22:30:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite birational normalization of a reduced proper scheme of dimension one, the structure sheaf Euler characteristic is the normalization Euler characteristic minus the dimension of the normalization quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\"], \"digest\": \"4ab2719ed4e9cf55\"}; Read normalization API in Mathlib/AlgebraicGeometry/Normalization.lean: relative normalization and integrality/reducedness only. Other hits concern Weierstrass discriminants or incidence-algebra Euler characteristics; none gives coherent cohomology or this genus identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-curve-p1-tree-local-criterion",
@@ -83,5 +286,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-reduced-curve-normalization-genus",
+  "worker": "stage1",
+  "summary": "Q72 checked Temkin Appendix B Lemma B.1 online and the local Stacks normalization/coherent-cohomology sources; retained the full disconnected, nonnodal statement; wrote an eleven-step normalization-sequence proof using existing DAG nodes only. Injectivity and finite-support germs are proved explicitly; no new nodes or Lean files.",
+  "blueprint": "Historical normalization/genus input under lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion and lem-trf-curve-p1-tree-local-criterion, proof step 5. This realizes the inherited Appendix B genus calculation, not a replacement for the current contracting-correspondence unit proof. Whole-blueprint searches found no equivalent genus formula."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q72-4b89708a6",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-4b89708a6 (reviewer sub-agent of L); spot-checked: The mathematics and all 11 proof steps pass source, hypothesis, edge-case, route, duplication, and long-step checks. Repair metadata: created.item/group incorrectly named Q29's different item, and worker-authored split_report.tool_uses must be removed for maintainer recording. Corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-reduced-curve-normalization-genus.json; review.md records sources, checks, and accepted tools.; 1 file(s) fixed by the reviewer"
  }
 }

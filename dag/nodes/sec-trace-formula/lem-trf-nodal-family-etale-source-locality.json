@@ -2,7 +2,7 @@
  "id": "lem-trf-nodal-family-etale-source-locality",
  "kind": "statement",
  "title": "Nodal curves are etale local on the source",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], and let $\\{h_i:U_i\\to X\\}_{i\\in I}$ be a jointly surjective family (every point of $X$ is the image of a point of some $U_i$) of etale morphisms [def-weil-etale-morphism]. Call a morphism nodal of relative dimension one if it is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], every nonempty geometric fibre [def-weil-geometric-fibre] is purely one-dimensional [def-kun-topological-krull-dimension], and every nonsmooth point [def-sbc-smooth-morphisms] of a geometric fibre over an algebraically closed field $\\Omega$ has completed local ring $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Then $f$ is nodal of relative dimension one if and only if every $f\\circ h_i$ is nodal of relative dimension one. There are no quasi-compactness, separatedness or Noetherian assumptions; the family may be empty when $X$ is empty.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], and let $\\{h_i:U_i\\to X\\}_{i\\in I}$ be a jointly surjective family (every point of $X$ is the image of a point of some $U_i$) of etale morphisms [def-weil-etale-morphism]. Call a morphism nodal of relative dimension one if it is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], every nonempty geometric fibre [def-weil-geometric-fibre] is purely one-dimensional [def-weil-pure-dimension], and every nonsmooth point [def-sbc-smooth-morphisms] of a geometric fibre over an algebraically closed field $\\Omega$ has completed local ring $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Then $f$ is nodal of relative dimension one if and only if every $f\\circ h_i$ is nodal of relative dimension one. There are no quasi-compactness, separatedness or Noetherian assumptions; the family may be empty when $X$ is empty.",
  "source": {
   "document": "literature/stacks-project/curves.tex",
   "place": "Tag 0C5D, lemma-nodal-family-etale-local-source, and preceding Tag 0C5C; lines 4778--4847"
@@ -13,14 +13,136 @@
   "def-weil-flat-morphism",
   "def-sbc-locally-finite-presentation",
   "def-weil-geometric-fibre",
-  "def-kun-topological-krull-dimension",
+  "def-weil-pure-dimension",
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Etale maps are flat by [def-weil-etale-morphism]. Apply [lem-trf-relative-flatness-source-cover] to the structure sheaf O_X: it is quasi-coherent because on each affine it is the sheaf associated to the free rank-one module, and h_i*O_X=O_U_i since B tensor_A A=B on stalks. Flatness of this sheaf over S is precisely flatness of the structure morphism. Therefore f is flat if and only if every f∘h_i is flat.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-relative-flatness-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D proof, flatness clause; Tag 036K"
+   }
+  },
+  {
+   "text": "Each h_i is flat and locally of finite presentation by [def-weil-etale-morphism]. The jointly surjective family thus satisfies [lem-trf-lfp-fppf-source-locality], so f is locally of finite presentation if and only if every f∘h_i is. In either direction of the desired implication we may henceforth use local finite presentation on both f and the composites.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-lfp-fppf-source-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D proof, local finite presentation clause; Tag 036N"
+   }
+  },
+  {
+   "text": "Fix an algebraically closed field Ω and a geometric point Spec Ω→S. Write C=X×_S Spec Ω and D_i=U_i×_S Spec Ω. Associativity of fibre products identifies D_i with U_i×_X C: both represent compatible pairs of maps to U_i and Spec Ω over S. By [lem-weil-pbc-etale-covering-base-change], the maps e_i:D_i→C are etale and jointly surjective. These are exactly the geometric fibres of the composites used in the statement.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D proof, reduction to a field"
+   }
+  },
+  {
+   "text": "The schemes C and D_i are locally of finite type over Ω. Indeed, choose finite-presentation affine charts for f and f∘h_i; after base change their rings are Ω tensor_R A, which are finitely presented by [lem-weil-pbc-finite-presentation-base-change-composition](1), and hence finitely generated simply by retaining the finitely many presentation generators. These affine charts cover the fibres by the definition of fibre product. Since Spec Ω is Noetherian (its ring is a field), [pqf-lem-locnoeth-lft] shows that C and D_i are locally Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D, fibre reduction; affine finite-presentation base change and Tag 01T6"
+   }
+  },
+  {
+   "text": "For y∈D_i with x=e_i(y), the map e_i is flat and locally of finite type by the definition of etale (a finite presentation in particular supplies finitely many generators). Apply [lem-sbc-flat-composite-fibre-dimension-at-point] to D_i→C→Spec Ω. Its relative fibre over x has dimension zero by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Thus dim_y(D_i)=0+dim_x(C)=dim_x(C), where the dimensions mean local topological dimension at the indicated points, not the Krull dimension of the local rings.",
+   "uses": [
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D proof, relative dimension clause; Tag 04NL"
+   }
+  },
+  {
+   "text": "Take the whole schemes as the open sets in the two local-dimension criteria. If C is pure of dimension one, [lem-sbc-equidimensional-open-local-dimension] gives dim_x(C)=1 at every x; step 5 gives dim_y(D_i)=1; [lem-sbc-constant-local-dimension-components] then gives pure dimension one for each D_i. Conversely, if all D_i are pure of dimension one, the first criterion gives dim_y(D_i)=1, and each x has some lift y by step 3. Step 5 gives dim_x(C)=1, and the second criterion gives purity of C. The finite type and local Noetherian hypotheses of the criteria were supplied in step 4. Empty fibres have no components, so the assertions remain valid.",
+   "uses": [
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D proof, relative dimension clause via Tag 04NL"
+   }
+  },
+  {
+   "text": "Assume f is nodal. Steps 1, 2 and 6 give all the structural properties of every composite. If y is a nonsmooth point of D_i, the pointwise assertion of [lem-trf-etale-source-smoothness], applied to D_i→C→Spec Ω, implies that x=e_i(y) is nonsmooth on C. The nodal hypothesis on f gives the completed local Ω-algebra Ω[[u,v]]/(uv) at x. By [lem-trf-nodal-point-etale-locality], the same completed local algebra occurs at y. Its hypotheses hold: C is locally finite type by step 4, pure of dimension one by hypothesis, and e_i is etale by step 3. This proves nodality of each composite.",
+   "uses": [
+    "lem-trf-etale-source-smoothness",
+    "lem-trf-nodal-point-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C5C and 0C5D, forward implication; Tag 0C57"
+   }
+  },
+  {
+   "text": "Conversely assume every composite is nodal. Steps 1, 2 and 6 give flatness, local finite presentation and pure dimension one for the geometric fibres of f. Let x be any nonsmooth point of C. Step 3 supplies i and y∈D_i above x. By the pointwise equivalence in [lem-trf-etale-source-smoothness], y is nonsmooth on D_i, so nodality of the composite supplies its completed local Ω-algebra Ω[[u,v]]/(uv). Apply [lem-trf-nodal-point-etale-locality] backwards: C is locally finite type by step 4 and pure of dimension one by step 6, and e_i is etale. The completed local algebra at x is therefore Ω[[u,v]]/(uv). This works for every Ω and x, proving the required nodal fibre condition.",
+   "uses": [
+    "lem-trf-etale-source-smoothness",
+    "lem-trf-nodal-point-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D reverse implication; Tags 036U and 0C57"
+   }
+  },
+  {
+   "text": "If X is empty, the existence of the maps U_i→X forces every U_i to be empty. The structure conditions are local on points and the fibre conditions quantify over points or components, so both sides hold vacuously. A jointly surjective empty family forces X empty. This includes the empty-family edge case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D, empty-source case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-trf-lfp-fppf-source-locality",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "pqf-lem-locnoeth-lft",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-nodal-point-etale-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C5D, lemma-nodal-family-etale-local-source; preceding 0C5C; 0C57 and Descent 036K, 036N, 036U, 04NL"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +171,38 @@
    "results": "{\"t\": \"2026-10-17T21:49:19Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|0C5D\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the hits: smooth morphism properties, flatness and finite-presentation locality, and Lagrange nodal polynomials; none states etale locality of nodal curve fibres. The AlgebraicGeometry grep has no hit. The two natural-language phrasings were both tried.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented morphisms with nodal one dimensional geometric fibres can be checked on an etale covering of the source",
+   "results": "{\"t\": \"2026-10-17T22:26:07Z\", \"tool\": \"leanfinder\", \"query\": \"Flat locally finitely presented morphisms with nodal one dimensional geometric fibres can be checked on an etale covering of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\"], \"digest\": \"37f7a5af03432448\"}. Repeated current item check: smoothness, etale APIs and interpolation polynomials only; no nodal-family locality theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Being an at worst nodal family of curves is etale local on the source",
+   "results": "{\"t\": \"2026-10-17T22:26:06Z\", \"tool\": \"leansearch\", \"query\": \"Being an at worst nodal family of curves is etale local on the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsLocalAtSource\", \"AlgebraicGeometry.IsZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.affineLocally\", \"AlgebraicGeometry.IsLocalIso.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.sourceLocalClosure\"], \"digest\": \"4924ccd7df673259\"}. Repeated current item check: smoothness, etale APIs and interpolation polynomials only; no nodal-family locality theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\"",
+   "results": "{\"t\": \"2026-10-17T22:25:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lagrange.nodalWeight\", \"Lagrange.nodal\", \"Lagrange.nodal_monic\", \"Lagrange.natDegree_nodal\", \"Lagrange.degree_nodal\", \"Lagrange.nodal_empty\", \"Lagrange.nodal_ne_zero\", \"Lagrange.eval_nodal_at_node\"], \"digest\": \"6fe8341e0729cc44\"}. Repeated current item check: smoothness, etale APIs and interpolation polynomials only; no nodal-family locality theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|0C5D",
+   "results": "{\"t\": \"2026-10-17T22:26:05Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|0C5D\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Repeated current item check: smoothness, etale APIs and interpolation polynomials only; no nodal-family locality theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-symmetric-nodal-blowup",
@@ -83,5 +233,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-family-etale-source-locality",
+  "worker": "stage1",
+  "summary": "Split the Stacks 0C5D proof using existing flatness, base-change and fibre-dimension statements. Created only generic fppf source locality of local finite presentation and etale invariance of the nodal completed local ring. The statement is unchanged mathematically; its purity reference now points to the exact definition.",
+  "blueprint": "Historical auxiliary branch of lem-trf-local-term-locality, via the original symmetric blowup ancestry; no new trace-formula route or SGA input. The current main-20261015 blueprint has no duplicate of either new generic lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "pqf-lem-locnoeth-lft",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q111-05bbd964e",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q111-05bbd964e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements and sources in full. Stacks 0C5D/036N/0C57 support the split; dimension, completion, empty-case and route checks pass. Repaired B3 missing definition citations for algebraically closed fields and closed points in the new point lemma. Corrected JSON is under fixes/; detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
