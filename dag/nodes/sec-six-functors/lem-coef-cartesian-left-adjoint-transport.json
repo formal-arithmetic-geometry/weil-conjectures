@@ -79,5 +79,24 @@
   },
   "same_as": [],
   "is": null
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-05f9a5c1f",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Source, dependencies, definitions, universes, edge cases, docstrings, report sections, statement verbatimness, and per-file compilation all checked successfully."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianLeftAdjointTransport",
+  "declaration": "SSet.Enhanced.cartesian_left_adjoint_transport",
+  "file": "lean/Sheaf/CategoryTheory/CartesianLeftAdjointTransport.lean",
+  "statement": "theorem cartesian_left_adjoint_transport {E B : SSet.{u}} [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (hp : cartesianFibration p) (R : ∀ α : B.obj (op ⦋1⦌), fiber p (B.δ 0 α) ⟶ fiber p (B.δ 1 α)) (τ : ∀ α : B.obj (op ⦋1⦌), ((ihom (fiber p (B.δ 0 α))).obj E) _⦋1⦌) (hτsrc : ∀ α : B.obj (op ⦋1⦌), ((ihom (fiber p (B.δ 0 α))).obj E).δ 1 (τ α) = diagramVertex (R α ≫ pullback.snd (SSet.const (X := Δ[0]) (B.δ 1 α)) p)) (hτtgt : ∀ α : B.obj (op ⦋1⦌), ((ihom (fiber p (B.δ 0 α))).obj E).δ 0 (τ α) = diagramVertex (pullback.snd (SSet.const (X := Δ[0]) (B.δ 0 α)) p)) (hτbase : ∀ α : B.obj (op ⦋1⦌), ((ihom (fiber p (B.δ 0 α))).map p).app _ (τ α) = (constantDiagrams (fiber p (B.δ 0 α)) B).app _ α) (hτcart : ∀ (α : B.obj (op ⦋1⦌)) (y : (fiber p (B.δ 0 α)) _⦋0⦌), IsCartesianEdge p (SSet.yonedaEquiv.symm ((evaluation (fiber p (B.δ 0 α)) E y).app _ (τ α)))) (hR : ∀ α : B.obj (op ⦋1⦌), ∃ L : fiber p (B.δ 1 α) ⟶ fiber p (B.δ 0 α), Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L (R α))) : cocartesianFibration p ∧ ∀ (α : B.obj (op ⦋1⦌)) (L : fiber p (B.δ 1 α) ⟶ fiber p (B.δ 0 α)) (adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L (R α)) (x : (fiber p (B.δ 1 α)).obj (op ⦋0⦌)), ∃ (e : E.obj (op ⦋1⦌)) (z : E.obj (op ⦋2⦌)), E.δ 1 e = (pullback.snd (SSet.const (X := Δ[0]) (B.δ 1 α)) p).app _ x ∧ E.δ 0 e = (pullback.snd (SSet.const (X := Δ[0]) (B.δ 0 α)) p).app _ (L.app _ x) ∧ p.app _ e = α ∧ IsCocartesianEdge p (SSet.yonedaEquiv.symm e) ∧ E.δ 2 z = (pullback.snd (SSet.const (X := Δ[0]) (B.δ 1 α)) p).app _ ((evaluation (fiber p (B.δ 1 α)) (fiber p (B.δ 1 α)) x).app _ adj.unitEdge) ∧ E.δ 0 z = (evaluation (fiber p (B.δ 0 α)) E (L.app _ x)).app _ (τ α) ∧ E.δ 1 z = e ∧ p.app _ z = B.σ 0 α",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Stage-2 dependency module for the split step-7 argument. The recorded node had no Lean declaration; this module states its general Cartesian-fibration transport criterion exactly, with supplied restriction maps and coherent left adjoints, and its cocartesian-lift conclusion."
  }
 }
