@@ -1,0 +1,118 @@
+{
+ "id": "def-trf-filtered-truncation-data",
+ "kind": "definition",
+ "title": "Data for universal finite filtered truncation triangles",
+ "statement": "For an abelian category A [def-sp-abelian] with a chosen bounded-below derived category [def-weil-abstract-derived-category], FilteredTruncationData(A) is the structure consisting of the localization $DF^+(A)$ of bounded-below cochain complexes with a uniformly finite filtration by subcomplexes at graded quasi-isomorphisms, with its cone-normalized triangulation, as set up in [lem-trf-filtered-derived-hom-calculus] [def-weil-triangulated-category], exact forgetful and graded functors to the ordinary bounded-below derived category, required to agree on representatives with the underlying complex and with the graded complexes $\\operatorname{gr}^pK=F^pK/F^{p+1}K$, exact subcomplex and quotient truncation functors with their canonical inclusion, quotient, and connecting transformations, the distinguished truncation triangles and their support and uniqueness properties, the two natural Hom-set bijections expressing the right and left adjunctions, and the pure-grade placement equivalence with the ordinary derived category. The truncation functors are required to agree on representatives with F^p and M/F^pM, using filtered-complex subquotients [def-sp-filtered-complex-subquotients], and the pure-grade comparison is required to identify t_{\\ge p}t_{<p+1} with gr^p by an isomorphism normalized on representatives by the canonical projection $F^pK\\to\\operatorname{gr}^pK$ and to allow acyclic rather than literally zero other graded pieces. The filtration operations use the decreasing filtration notion [def-sp-filtration].",
+ "stmt_deps": [
+  "lem-trf-filtered-derived-hom-calculus",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "source": {
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1.1(a)–(e), §5.1.2(a)–(c), pp.39–40; Stacks derived.tex Tags 05S1–05S6"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "rg",
+   "query": "FilteredTruncationData|filtered truncation triangle in lean/Sheaf and WeilConjectures",
+   "results": "No existing declaration; the only nearby framework is Sheaf.Algebra.Homology.FilteredDerivedHomCalculus, whose TruncationCalculus omits the Hom adjunction and pure-grade equivalence fields.",
+   "date": "2026-10-17",
+   "verdict": "new notion required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite filtered derived localization truncation triangle adjunction pure graded equivalence",
+   "results": "Hits concern ordinary t-structure truncations and generic localization triangles; no package for finite filtered truncations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure.triangleLTGE, FilteredTruncationData",
+   "results": "No match for finite filtered localization data.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*truncation|FilteredDerived|FilteredTruncation",
+   "results": "No matching generic declaration in Mathlib or the source checkout; existing Sheaf modules are specialized filtered-complex calculations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite filtered truncation data exact functors Hom adjunction pure grade",
+   "results": "No exact declaration; only generic exact-functor and ordinary truncation hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-trace-additivity-open-closed",
+   "place": "Step 3, universal finite-filtered truncation package",
+   "via": [
+    "lem-trf-filtered-truncation-triangle",
+    "lem-trf-filtered-functor-graded-comparison",
+    "lem-trf-filtered-derived-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredTruncationData",
+  "declaration": "CochainComplex.FiniteFiltered.FilteredTruncationData",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredTruncationData.lean",
+  "statement": "structure FilteredTruncationData",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CochainComplex.FiniteFiltered.FilteredTruncationData"
+  ]
+ },
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-filtered-truncation-triangle",
+  "date": "2026-10-17",
+  "group": "NI"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7ee74f9a",
+  "group": "NI",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7ee74f9a",
+  "group": "NI",
+  "result": "fix",
+  "note": "Read the item, its 6 stmt_deps, the new node def-trf-filtered-truncation-data, Varshavsky 5.1.1-5.1.2 (corrected adjoint directions), both modules, upstream FilteredDerivedHomCalculus/FiniteFilteredLocalization/FilteredComplexSubquotients and Mathlib DerivedCategory.Plus. F1 (H3): omega and gr p were arbitrary exact functors, so all support, uniqueness, Hom-bijection and pure-grade clauses quantified over unconstrained functors; fixed by adding omegaComparison (Q false ⋙ omega ⋙ Plus.ι ≅ forget false ⋙ DerivedCategory.Q) and grComparison (to graded false p), as in TruncationCalculus. F2 (H3, canonically): grade_truncation was an arbitrary iso; fixed by grade_normalization, which on representatives pins it to complexQuotientπ p (p+1). F3 (H12/H9): the new node cited def-trf-finite-filtered-localization, whose FiniteFilteredDerivedPlus is unused and is a different localization, and its import was unused; now cites lem-trf-filtered-derived-hom-calculus, which owns Derived false/Complex/forget/graded/high/low/TriangulatedLocalization; no cycle; import dropped. Everything else matches the node: uniform finite filtration, bounded below, cone-normalized triangulation, truncation comparisons and normalizations, distinguished triangle, ∃! iso fixing M, both Hom bijections, pure-grade equivalence with IsZero support; edge cases fine; HasDerivedCategory.{w} unrestricted; no hollow def; sorry only in the theorem; docstrings present; lean.statement verbatim. nt_compile --json: delivered pair clean; fixed module plus unchanged triangle module clean; control error reported. Fixes: FilteredTruncationData.lean, def-trf-filtered-truncation-data.json (statement and stmt_deps only), lem-trf-filtered-truncation-triangle.report.md (appended fix section)."
+ }
+}

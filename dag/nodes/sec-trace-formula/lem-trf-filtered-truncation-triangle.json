@@ -12,7 +12,8 @@
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
   "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-trf-filtered-truncation-data"
  ],
  "proof": [
   {
@@ -233,5 +234,26 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-6a50fbde9 (reviewer sub-agent of L); spot-checked: Read in full: the item; Varshavsky arXiv math/0505564 §5.1.1(a)-(e) and §5.1.2(a)-(c), pp.39-40; Stacks derived.tex Tags 05S0-05S4; every cited statement. The statement agrees with Varshavsky's uniform-bound setting. Confirmed the source error in §5.1.1(c): t_{>=r} is the right adjoint, not the left. Counterexample over F_2 with r=1, M=F_2 in grade 0, L=F_2 in grade 1: Hom(M,L)=F_2 but Hom(t_{>=1}M,L)=0. The item already states the correct directions. Checked the cone of F^rM->M grade by grade, the graded-piece formulas, both directions of the triangle-uniqueness comparison, and the pure-grade quasi-inverse. Edge cases checked: r outside the filtration support, a nonsplit two-step complex, unbounded cochain degrees. Repaired three faults: (F1, C4) lem-trf-filtered-cone-localization covers K^+ of finite filtered objects or a fixed interval, not the item's uniformly bounded category, so the triangulated structure was unsupported. The new Step 1 builds it via def-weil-triangulated-subcategory, the graded-acyclic subcategory, lem-trf-triangulated-subcategory-cone-system and lem-pur-localization-triangles-05r6. (F3) The step from complexes to the homotopy category was unjustified; added the filtered-cylinder argument and lem-weil-pbc-localization-universal-property. (F2, C1/E5) Step 3 used roofs with no fraction-calculus node, and its uniqueness was only 'the same refinement'. Rewritten as Step 4: orthogonality via lem-pc-right-fraction-representation and an explicit refinement along t_{>=r}Z->Z; both Hom bijections via lem-weil-pbc-triangle-morphism-extension (1)-(2) with the triangles L=L->0 and 0->R=R. Steps are renumbered to six; proof_deps is the exact union of the steps' uses, with the superfluous lem-trf-finite-filtered-graded-exactness dropped. No new nodes; no SGA. Tool use to record: lem-weil-pbc-triangle-morphism-extension (unit sk-thm-properbasechange, slopmaster2 Lean closed), an abstract pretriangulated lemma that no trace-unit node supplies. Overlap with lem-trf-filtered-derived-hom-calculus (which assumes enough injectives) is noted for the maintainer; the item is the general version, not a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7ee74f9a",
+  "group": "NI",
+  "result": "fix",
+  "note": "Read the item, its 6 stmt_deps, the new node def-trf-filtered-truncation-data, Varshavsky 5.1.1-5.1.2 (corrected adjoint directions), both modules, upstream FilteredDerivedHomCalculus/FiniteFilteredLocalization/FilteredComplexSubquotients and Mathlib DerivedCategory.Plus. F1 (H3): omega and gr p were arbitrary exact functors, so all support, uniqueness, Hom-bijection and pure-grade clauses quantified over unconstrained functors; fixed by adding omegaComparison (Q false ⋙ omega ⋙ Plus.ι ≅ forget false ⋙ DerivedCategory.Q) and grComparison (to graded false p), as in TruncationCalculus. F2 (H3, canonically): grade_truncation was an arbitrary iso; fixed by grade_normalization, which on representatives pins it to complexQuotientπ p (p+1). F3 (H12/H9): the new node cited def-trf-finite-filtered-localization, whose FiniteFilteredDerivedPlus is unused and is a different localization, and its import was unused; now cites lem-trf-filtered-derived-hom-calculus, which owns Derived false/Complex/forget/graded/high/low/TriangulatedLocalization; no cycle; import dropped. Everything else matches the node: uniform finite filtration, bounded below, cone-normalized triangulation, truncation comparisons and normalizations, distinguished triangle, ∃! iso fixing M, both Hom bijections, pure-grade equivalence with IsZero support; edge cases fine; HasDerivedCategory.{w} unrestricted; no hollow def; sorry only in the theorem; docstrings present; lean.statement verbatim. nt_compile --json: delivered pair clean; fixed module plus unchanged triangle module clean; control error reported. Fixes: FilteredTruncationData.lean, def-trf-filtered-truncation-data.json (statement and stmt_deps only), lem-trf-filtered-truncation-triangle.report.md (appended fix section)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredTruncationTriangle",
+  "declaration": "CochainComplex.FiniteFiltered.filteredTruncationTriangle",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredTruncationTriangle.lean",
+  "statement": "theorem filteredTruncationTriangle : Nonempty (FilteredTruncationData A)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CochainComplex.FiniteFiltered.filteredTruncationTriangle"
+  ]
  }
 }
