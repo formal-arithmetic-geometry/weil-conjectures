@@ -110,18 +110,14 @@
    }
   },
   {
-   "text": "We next justify composition on $\\mathfrak C[Y]$ without assuming it is locally Kan or that the pinched resolution preserves composition. For ANY quasicategory $S$, put $D_S=\\mathfrak C[S]$ and take the object-preserving locally Kan replacement $r:D_S\\to RD_S$ of [lem-coef-coherent-nerve-comparison]. Write $W=N_{hc}(RD_S)$ and let $a:S\\to W$ be the adjoint of $r$. Every simplicial set is Joyal-cofibrant, since cofibrations are monomorphisms. The map $r$ is a Bergner weak equivalence and $RD_S$ is fibrant: its mapping sets are Kan and the equivalence-lifting condition for its map to the terminal category is satisfied by identity arrows. The weak-equivalence criterion for the stated Quillen equivalence therefore makes $a$ a categorical equivalence. By rigidification detection $\\mathfrak C[a]$ is a Dwyer--Kan equivalence. Apply the natural squares of $\\theta_{S,x,y}$ and $p_K:|K|_Q\\to K$ from [lem-coef-pinched-rigidification-resolution] to $a$: their horizontal maps are weak equivalences, and $\\mathfrak C[a]$ is a local weak equivalence, so two-out-of-three makes every $\\operatorname{Map}_S(x,y)\\to\\operatorname{Map}_W(ax,ay)$ a weak equivalence. This uses only naturality of $\\theta$, not composition compatibility.\n\nThe same coherent-nerve node supplies equivalences $RD_S(x,y)\\simeq\\operatorname{Map}_W(ax,ay)$ that DO preserve enriched composition and send vertices to their corresponding edges. The vertex $r([h])$ corresponds exactly to $a(h)$ by the adjunction defining $a$. The triangle formula for composition is natural under $a$, since applying $a$ commutes with all three edge restrictions and with the pinch maps. Consequently, if postcomposition by an edge $h:y\\to z$ is a weak equivalence $\\operatorname{Map}_S(w,y)\\to\\operatorname{Map}_S(w,z)$, it is a weak equivalence on the corresponding mapping spaces of $W$ (all the maps induced by $a$ are equivalences), then on $RD_S(w,y)\\to RD_S(w,z)$ (the locally Kan comparison preserves composition), and finally on $D_S(w,y)\\to D_S(w,z)$ (the maps $r$ are local weak equivalences and commute STRICTLY with enriched composition). This is the required cited route through $R\\mathfrak C[S]$ and $N_{hc}$.\n\nOn components it also identifies $\\pi_0\\mathfrak C[S]$ with $hS$, fixing objects and edge classes and respecting composition: use $r$, the locally Kan comparison and the fully faithful map $a$, all identity on this object set. Thus an isomorphism class between vertices in $\\pi_0\\mathfrak C[S]$ is represented by an equivalence edge of $S$, by the inverse-triangle characterization in [lem-coef-infinity-mapping-composition].",
+   "text": "Use [lem-coef-rigidification-postcomposition-comparison] with $S=Y$: whenever postcomposition by $h$ is a weak equivalence on quasicategorical mapping spaces, strict postcomposition by $[h]$ is one on $\\mathfrak C[Y]$. Its component-category identification also gives $\\pi_0\\mathfrak C[Y_j]\\cong hY_j$, preserving objects and edge classes. This supplies both comparisons needed below without assuming rigidification locally Kan.",
    "uses": [
-    "lem-coef-coherent-nerve-comparison",
-    "lem-coef-joyal-model-structure",
-    "lem-coef-rigidification-equivalence-detection",
-    "lem-coef-pinched-rigidification-resolution",
-    "lem-coef-infinity-mapping-composition"
+    "lem-coef-rigidification-postcomposition-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "HTT Theorem 2.2.5.1 (Quillen-equivalence criterion), Proposition 2.2.4.1 (natural pinched comparison), and the locally Kan coherent-nerve comparison; explicit replacement argument for the composition used in 3.2.2.10"
+    "place": "HTT §3.2.2, composition comparison in Proposition 3.2.2.10"
    }
   },
   {
@@ -138,13 +134,13 @@
    }
   },
   {
-   "text": "We prove the marking-reflection assertion, using both directions of Step 6's criterion. First record its consequence for equivalences over an identity of the base. If $u$ is an equivalence in a fiber, postcomposition by $u$ on every mapping space has homotopy inverse given by an inverse edge, by associativity and the inverse triangles. Composing an edge $b$ before or after such fiber equivalences changes its Cartesian mapping square by equivalences of corners, with the same base corners. The path-space homotopy-pullback criterion is invariant under these changes by [lem-coef-kan-homotopy-pullback-invariance]; the coherent comparison homotopies enter the path coordinate by concatenation, and the inverse fiber equivalences give inverse comparisons up to the associativity and inverse-triangle homotopies. The iff direction therefore says that the new edge is Cartesian exactly when $b$ is. This establishes the closure and reflection under fiber equivalences used here; it is not an extra assertion of the mapping-fiber lemma.\n\nEvery $y\\in Y_j$ is equivalent within $Y_j$ to some $q(a)$, $a\\in(A_j)_0$. Indeed rigidification detection makes $\\mathfrak C[A_j]\\to\\mathfrak C[Y_j]$ essentially surjective on $\\pi_0$, and Step 7 identifies the latter category with $hY_j$. Given a Cartesian $d:x\\to y$ over $i\\to j$, let $c=q(t_{j,i}a)$ and choose a fiber equivalence $v:q(a)\\simeq y$. The marked edge $e_a:t_{j,i}a\\to a$ has Cartesian image, so choose a triangle composite $b= vq(e_a):c\\to y$; it is Cartesian by the preceding square argument. The cited mapping-fiber lemma is now used ONLY with test vertices in $Y_i$, where its hypothesis is satisfied. Applied to $d$ at $w=c$ it gives $u:c\\to x$ in $Y_i$ with $du\\simeq b$ over $i\\to j$; applied to $b$ at $w=x$ it gives $t:x\\to c$ with $bt\\simeq d$. Since the postcomposition maps are equivalences, their injectivity on components at $w=x$ and $w=c$ gives $ut\\simeq1_x$ and $tu\\simeq1_c$, respectively. Hence $u$ is a fiber equivalence. This explicitly supplies an equivalence of arrows $d\\simeq vq(e_a)u^{-1}$.\n\nFor any simplicial map $f:Y\\to Z$ over $\\Delta^n$, with $Z$ Cartesian, functors preserve equivalences and inverse-triangle equations. If $fq$ preserves marked edges, $f(q(e_a))$ is Cartesian. The square argument applied in $Z$ to the fiber equivalences $f(u),f(v)$ then recognizes $f(d)$ as Cartesian. The reverse implication holds because $q$ is marked. Thus $f$ preserves all Cartesian edges exactly when $fq$ preserves the marked edges. For a coherent equivalence of functors, its endpoint equivalences and naturality triangles give the same comparison of the image of each edge; the same square argument proves invariance of the preservation condition.",
+   "text": "Use [lem-coef-cartesian-marked-lift-generation] for invariance and reflection of Cartesian edges under equivalences in fibers and under coherent equivalence of relative functors. \n\nEvery $y\\in Y_j$ is equivalent within $Y_j$ to some $q(a)$, $a\\in(A_j)_0$. Indeed rigidification detection makes $\\mathfrak C[A_j]\\to\\mathfrak C[Y_j]$ essentially surjective on $\\pi_0$, and Step 7 identifies the latter category with $hY_j$. Given a Cartesian $d:x\\to y$ over $i\\to j$, let $c=q(t_{j,i}a)$ and choose a fiber equivalence $v:q(a)\\simeq y$. The marked edge $e_a:t_{j,i}a\\to a$ has Cartesian image, so choose a triangle composite $b= vq(e_a):c\\to y$; it is Cartesian by the cited Cartesian-invariance assertion. The cited mapping-fiber lemma is now used ONLY with test vertices in $Y_i$, where its hypothesis is satisfied. Applied to $d$ at $w=c$ it gives $u:c\\to x$ in $Y_i$ with $du\\simeq b$ over $i\\to j$; applied to $b$ at $w=x$ it gives $t:x\\to c$ with $bt\\simeq d$. Since the postcomposition maps are equivalences, their injectivity on components at $w=x$ and $w=c$ gives $ut\\simeq1_x$ and $tu\\simeq1_c$, respectively. Hence $u$ is a fiber equivalence. This explicitly supplies an equivalence of arrows $d\\simeq vq(e_a)u^{-1}$.",
    "uses": [
-    "lem-coef-infinity-mapping-composition",
+    "lem-coef-cartesian-marked-lift-generation",
     "lem-coef-infinity-cartesian-mapping-fiber",
     "lem-coef-rigidification-equivalence-detection",
-    "lem-coef-kan-quillen-right-proper",
-    "lem-coef-kan-homotopy-pullback-invariance"
+    "lem-coef-rigidification-postcomposition-comparison",
+    "lem-coef-infinity-mapping-composition"
    ],
    "elementary": false,
    "source": {
@@ -153,61 +149,70 @@
    }
   },
   {
-   "text": "Let $Z\\to\\Delta^n$ be any small Cartesian test fibration. Its total space is a quasicategory. Step 8 and [lem-coef-joyal-functor-equivalence-test] give an equivalence $q^*:\\operatorname{Fun}(Y,Z)\\to\\operatorname{Fun}(M(A),Z)$. The relative flat marked mapping objects are full subcategories of these two functor quasicategories. To see fullness, a simplex between vertex maps over $\\Delta^n$ projects on every vertex $(x,t)$ to the fixed base vertex of $x$; a map to $\\Delta^n=N([n])$ is uniquely determined by its vertices. Hence it is over the base in every parameter degree, and the flat marking asks only that each parameter-vertex map preserve the specified edges. The selected objects are invariant under functor equivalences: projected equivalence edges in $[n]$ are identities, and Cartesian preservation is invariant by Step 9. Moreover a functor $f:Y\\to Z$ lies in the selected full subcategory exactly when $fq$ does. For the base-map condition this follows from the fiberwise essential surjectivity in Step 9 and uniqueness of simplices in $N([n])$; for the marking condition it is precisely Step 9. Choose a coherent quasi-inverse R to the absolute restriction equivalence. If h is a selected object on the mapping-simplex side, then q^*R(h) is equivalent to h and hence is selected, so the reflection just proved makes R(h) selected on the Y side. Thus R restricts to the selected full subcategories. Their fullness also retains every simplex of the units and counits, so these restricted maps are coherent quasi-inverses. This proves that the restricted functor is a functor equivalence directly from its definition. Relative marked calculus identifies their cores with the sharp relative mapping complexes. Here is the core argument explicitly. A simplicial functor preserves equivalences by sending the two inverse triangles to inverse triangles, so each restricted quasi-inverse maps cores to cores. A coherent natural equivalence $H:F\\simeq G$ restricts to a simplicial homotopy on cores: for an edge $(a,0\\to1)$ of the core times $\\Delta^1$, the triangle in that product gives $[H(a,0\\to1)]=[H_{\\mathrm{target}(a)}][F(a)]$, a product of equivalences. Edges with constant parameter are also equivalences. Thus every simplex lands in the core by its defining edge condition. Apply this to both unit and counit. Their restrictions give two simplicial inverse homotopies. The realization-cylinder homeomorphism turns them into continuous inverse homotopies, and [lem-coef-homotopy-equivalence-weak] makes the map on cores a weak homotopy equivalence. We obtain\n$$\\operatorname{Map}^\\sharp_{\\Delta^n}(Y^\\natural,Z^\\natural)\\simeq\\operatorname{Map}^\\sharp_{\\Delta^n}(M^m(A),Z^\\natural).$$\nThis is the defining test for $q$ to be a Cartesian equivalence, and proves the criterion for every $q$ satisfying the hypothesis.",
+   "text": "For any simplicial map $f:Y\\to Z$ over $\\Delta^n$, with $Z$ Cartesian, functors preserve equivalences and inverse-triangle equations. If $fq$ preserves marked edges, $f(q(e_a))$ is Cartesian. The cited conjugation criterion applied in $Z$ to the fiber equivalences $f(u),f(v)$ then recognizes $f(d)$ as Cartesian. The reverse implication holds because $q$ is marked. Thus $f$ preserves all Cartesian edges exactly when $fq$ preserves the marked edges. For a coherent equivalence of functors, its endpoint equivalences and naturality triangles give the same comparison of the image of each edge; the same criterion proves invariance of the preservation condition.",
    "uses": [
-    "lem-coef-joyal-functor-equivalence-test",
-    "lem-coef-relative-marked-anodyne-calculus",
-    "lem-coef-marked-relative-cartesian-model",
-    "lem-coef-infinity-mapping-composition",
-    "lem-coef-simplicial-realization-cylinder",
-    "lem-coef-homotopy-equivalence-weak"
+    "lem-coef-cartesian-marked-lift-generation",
+    "lem-coef-infinity-mapping-composition"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 3.2.2.14, full-subcategory mapping test"
+    "place": "HTT Proposition 3.2.2.14, marking reflection expanded using 2.4.4.3 and the source-fiber formula 2.4.4.2; closure derived in this step"
    }
   },
   {
-   "text": "Finally, for any simplicial set $B$, quasicategory $E$ and map $b:B\\to E$, the absolute marked test of $B^\\flat\\to E^\\natural$ against a naturally marked quasicategory $C$ is exactly the restriction of cores $\\operatorname{Fun}(E,C)^\\simeq\\to\\operatorname{Fun}(B,C)^\\simeq$. Indeed all simplicial maps $E\\to C$ preserve equivalences by applying them to the two inverse triangles; the minimally marked domain imposes no edge condition, and the absolute flat mapping objects are therefore $\\operatorname{Fun}(E,C)$ and $\\operatorname{Fun}(B,C)$. The marked mapping calculus identifies their sharp versions with these cores. If $b$ is categorical, [lem-coef-joyal-functor-equivalence-test] gives coherent quasi-inverses on these functor quasicategories, and Step 10's explicit core-homotopy argument makes the displayed core restriction a weak homotopy equivalence. Conversely, assume this core restriction is weak for every quasicategory $C$. Fix $C$, put $D=\\operatorname{Fun}(E,C)$, $F=\\operatorname{Fun}(B,C)$, and let $p:D\\to F$ be restriction. For every small simplicial $H$, the test with the quasicategory $\\operatorname{Fun}(H,C)$ says that\n$$\\operatorname{Fun}(H,D)^\\simeq\\longrightarrow\\operatorname{Fun}(H,F)^\\simeq$$\nis a weak homotopy equivalence: interchange $H$ with $E$, respectively $B$, in the product defining an internal Hom. These isomorphisms commute with simplicial operators and restriction and hence preserve cores. Take $H=F$. Surjectivity on components gives $s:F\\to D$ and a coherent equivalence $ps\\simeq1_F$. Take $H=D$. Injectivity on components, applied to $psp\\simeq p$, gives $sp\\simeq1_D$. Here these cores are Kan by marked mapping calculus, so a path of vertices compresses to an equivalence edge by successive two-dimensional horn fillers; thus the component assertions give actual coherent natural equivalences. Therefore $p$ is a coherent functor equivalence. This works for every $C$ in a universe containing $B,E,C,D,F$, so [lem-coef-joyal-functor-equivalence-test] makes $b$ categorical. This proves the absolute marked equivalence iff categorical equivalence directly from the point-model test. Apply this with $B=A_i$, $E=Y_i$. Pullback and induced-marking compatibility of relative marked calculus identify the marking on $Y_i$ with the Cartesian edges of $Y_i\\to\\Delta^0$. Step 6's IFF criterion for this map says that an edge $h:y\\to z$ is Cartesian exactly when $h\\circ-:\\operatorname{Map}_{Y_i}(w,y)\\to\\operatorname{Map}_{Y_i}(w,z)$ is an equivalence for every $w$. If $h$ is invertible these maps have inverse postcomposition by $h^{-1}$. Conversely surjectivity on components at $w=z$ gives $g:z\\to y$ with $hg\\simeq1_z$; injectivity at $w=y$, applied to $hgh\\simeq h$, gives $gh\\simeq1_y$. The inverse-triangle characterization then makes $h$ an equivalence. Thus the induced marking is exactly the natural equivalence marking, with both implications justified. Thus this is the claimed equivalent fiber hypothesis. The formulas and both inductions included $n=0$; empty fibers impose no nonemptiness requirement in any lifting or equivalence test. In particular $Y_i=\\varnothing$ forces $A_i=\\varnothing$ whenever a fiber equivalence is given, and if all fibers are empty the sharp mapping complexes out of the empty total space are points, not empty spaces. No part of the argument asserts fibrancy of $M^m(A)$.",
+   "text": "Let $Z\\to\\Delta^n$ be a small Cartesian test fibration. Step 8 and [lem-coef-joyal-functor-equivalence-test] give a coherent equivalence $q^*:\\operatorname{Fun}(Y,Z)\\to\\operatorname{Fun}(M(A),Z)$. Select the vertex maps over $\\Delta^n$ which preserve the specified marked edges. The relative flat mapping objects are exactly the full subcategories on these vertices: a parameter simplex with these vertices projects every $(x,t)$ to the fixed base vertex of $x$, and a map to $N([n])$ is determined by vertices. These properties are invariant under coherent equivalence. Indeed projected equivalences in $[n]$ are identities; for marking preservation use the preceding marking-reflection argument and the conjugation node. A functor $f:Y\\to Z$ is selected if and only if $fq$ is selected. For markings this was just proved. For the base map, every $y\\in Y_i$ is fiber equivalent to some $q(a)$; its image has the same base vertex as $fq(a)$, and maps to $N([n])$ with the same vertices agree. Thus [lem-coef-quasicategory-full-subcategory-core-equivalence] applies to these selected full subcategories and gives a weak equivalence on cores. Relative marked calculus identifies those cores with $\\operatorname{Map}^\\sharp_{\\Delta^n}(Y^\\natural,Z^\\natural)$ and $\\operatorname{Map}^\\sharp_{\\Delta^n}(M^m(A),Z^\\natural)$. The defining Cartesian-equivalence test therefore holds for this arbitrary $Z$.",
    "uses": [
-    "lem-coef-marked-point-cartesian-model",
-    "lem-coef-marked-anodyne-lifting-calculus",
     "lem-coef-joyal-functor-equivalence-test",
-    "lem-coef-infinity-mapping-composition",
+    "lem-coef-cartesian-marked-lift-generation",
+    "lem-coef-quasicategory-full-subcategory-core-equivalence",
     "lem-coef-relative-marked-anodyne-calculus",
-    "lem-coef-simplicial-realization-cylinder",
-    "lem-coef-homotopy-equivalence-weak"
+    "lem-coef-marked-relative-cartesian-model"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Absolute marked mapping test, Proposition 3.2.2.14; n=0 and empty-fiber cases"
+    "place": "HTT Proposition 3.2.2.14, marked mapping test"
+   }
+  },
+  {
+   "text": "For $b:B\\to E$ with $E$ a quasicategory, maps $E^\\natural\\to C^\\natural$ are all simplicial maps: functors preserve equivalences by the inverse triangles. Maps out of $B^\\flat$ impose no condition. Absolute marked mapping calculus identifies the sharp tests with $\\operatorname{Fun}(E,C)^\\simeq\\to\\operatorname{Fun}(B,C)^\\simeq$. The core-test criterion [lem-coef-marked-flat-categorical-equivalence-test] therefore identifies absolute marked weak equivalence of $B^\\flat\\to E^\\natural$ with categorical equivalence of $b$. Apply this with $B=A_i$, $E=Y_i$. Pullback and induced-marking compatibility of relative marked calculus identify the marking on $Y_i$ with the Cartesian edges of $Y_i\\to\\Delta^0$. Step 6's IFF criterion for this map says that an edge $h:y\\to z$ is Cartesian exactly when $h\\circ-:\\operatorname{Map}_{Y_i}(w,y)\\to\\operatorname{Map}_{Y_i}(w,z)$ is an equivalence for every $w$. If $h$ is invertible these maps have inverse postcomposition by $h^{-1}$. Conversely surjectivity on components at $w=z$ gives $g:z\\to y$ with $hg\\simeq1_z$; injectivity at $w=y$, applied to $hgh\\simeq h$, gives $gh\\simeq1_y$. The inverse-triangle characterization then makes $h$ an equivalence. Thus the induced marking is exactly the natural equivalence marking, with both implications justified. Thus this is the claimed equivalent fiber hypothesis. The formulas and both inductions included $n=0$; empty fibers impose no nonemptiness requirement in any lifting or equivalence test. In particular $Y_i=\\varnothing$ forces $A_i=\\varnothing$ whenever a fiber equivalence is given, and if all fibers are empty the sharp mapping complexes out of the empty total space are points, not empty spaces. No part of the argument asserts fibrancy of $M^m(A)$.",
+   "uses": [
+    "lem-coef-marked-flat-categorical-equivalence-test",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §3.2.2, absolute marked mapping test"
    }
   }
  ],
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
+  "lem-coef-cartesian-marked-lift-generation",
   "lem-coef-coherent-nerve-comparison",
-  "lem-coef-homotopy-equivalence-weak",
   "lem-coef-infinity-cartesian-mapping-fiber",
   "lem-coef-infinity-cocartesian-mapping-criterion",
   "lem-coef-infinity-mapping-composition",
   "lem-coef-infinity-pinch-comparison",
   "lem-coef-joyal-functor-equivalence-test",
   "lem-coef-joyal-model-structure",
-  "lem-coef-kan-homotopy-pullback-invariance",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-mapping-simplex-final-edge",
   "lem-coef-marked-anodyne-lifting-calculus",
   "lem-coef-marked-endpoint-prism-generation",
+  "lem-coef-marked-flat-categorical-equivalence-test",
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-marked-relative-cartesian-model",
-  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-quasicategory-full-subcategory-core-equivalence",
   "lem-coef-relative-marked-anodyne-calculus",
   "lem-coef-rigidification-equivalence-detection",
-  "lem-coef-simplicial-realization-cylinder"
+  "lem-coef-rigidification-postcomposition-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -259,7 +264,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-straightening-quillen",
@@ -284,17 +289,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-cartesian-mapping-simplex-presentation",
   "worker": "stage1",
-  "summary": "Repair of all three maintainer return points. Added an explicit opposite/pinch derivation of the all-vertex Cartesian iff criterion from the existing cocartesian node, derived closure under fiber equivalences rather than taking it from the one-way source-fiber lemma, and supplied a composition-compatible route through object-preserving locally Kan replacement and its coherent nerve. The mixed mapping induction and marking reflection now use exactly these arguments. Retained the two statement-only technical nodes and the source route; no new mathematical statement correction and no additional nodes. Second reading removed the partially duplicate functor/core-test node, reused the existing Joyal functor-equivalence test, wrote the residual core inverse-homotopy and currying argument explicitly, and cited the existing homotopy-pullback invariance theorem.",
-  "blueprint": "The finite-coefficient mapping-complex adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint, below marked-cone straightening: steps 1–4 construct the presentation, step 5 starts the rigidification induction, steps 6–7 prove the exact general criterion and replacement comparison used in step 8, steps 9–10 prove marking reflection and Cartesian equivalence, and step 11 checks the equivalent fiber hypothesis and edge cases.",
+  "summary": "Repair of all four returned long steps, preserving the statement, Lean record and original proof route. The four extracted hidden arguments now cite existing statement-only nodes delivered by Q39: rigidification postcomposition comparison, Cartesian marked-lift generation, replete full-subcategory/core equivalence, and the absolute marked/Joyal equivalence test. Four overlapping sandbox candidates were removed after comparison with the current shared DAG; no new nodes are delivered.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint, finite-coefficient mapping-complex adjunction: unchanged steps 1–6 and 8 give the two original inductions; step 7 cites lem-coef-rigidification-postcomposition-comparison for its former replacement/composition argument; steps 9–10 cite lem-coef-cartesian-marked-lift-generation for Cartesian invariance; step 11 cites lem-coef-quasicategory-full-subcategory-core-equivalence for the replete-full-subcategory and core restriction; step 12 cites lem-coef-marked-flat-categorical-equivalence-test for the absolute marked test. All steps are shorter than 2000 characters.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q94-1a22f9169",
-  "group": "Q94",
+  "reviewer": "NT-cc-Q62-3a37d27b0",
+  "group": "Q62",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-1a22f9169 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the new node lem-coef-mapping-simplex-final-edge and the full statement of every cited node. HTT is not under literature/ (declared WANTED, proof marked by:agent). The item matches HTT 3.2.2.7(1) and 3.2.2.14 (mapping-simplex operators, degenerate-edge marking, fiberwise categorical equivalences, Cartesian equivalence in M_{Δ^n}); nothing is weakened. Steps checked: (1) the pushout decomposition sorted by last vertex is an exact bijection on simplices with matching markings, so elementary is justified. (2) The retract via i(k)=(χ(k),k) and H holds, with {1}^♯→(Δ^1)^♯ in ⟨I∪F⟩. (3)-(4) The trivial Kan fibration is a Joyal trivial fibration by the WFS, and the overlap map equals cyl∘(g'×T), so the gluing is valid. (5) T is a sieve and composite strings have nondecreasing base vertices, so C_±=C[M(A_{<n})], C[A_n]. (6) The opposite plus pinch dualization keeps the iff and all vertices. (7) a: S→N_hc(RC[S]) is categorical by the Quillen equivalence (S cofibrant, RC[S] fibrant); θ is used only through naturality, and composition only on the locally Kan RC[S]. (8) Map_{Δ^n}(k,n-1) and Map_{Δ^n}(k,n) are points for every k<n, and the square commutes strictly. (9) The mapping-fiber node is used only at w∈Y_i, as its hypothesis requires, and ut≃1, tu≃1 come from injectivity on π0. (10)-(11) The full-subcategory and core restriction and the currying converse are correct. Small cases tested: n=0; a constant chain of points (M=Δ^n); n=2 with k=0; n=1 with A_0=pt, A_1=Δ^1, where C(x,v) is contractible; empty fibers. The new node is HTT 3.2.2.9, statement-only and self-contained, true on the small cases, with searches of all three kinds; it is not a restatement of its parent. Whole-DAG rg found no duplicate: cone-fibers and the cbc mapping-simplex nodes state other results and cite the item. All cited statements are in the item's unit; tool_uses is empty and none is needed. FIX (B3): the item's statement used the absolute marked model and the notation Y_i^♮ without citing their definition. I added [lem-coef-marked-point-cartesian-model] to the statement and stmt_deps, with the gloss that Y_i^♮ marks the equivalences of Y_i (what step 11 proves). This closes no cycle; the corrected file is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-3a37d27b0 (reviewer sub-agent of L); spot-checked: PASS. I read the item in full: the unchanged statement and all 12 steps. I also read the full statement of all 21 cited nodes, including the four existing Q39 nodes now cited by steps 7 and 9–12 (rigidification-postcomposition-comparison, cartesian-marked-lift-generation, quasicategory-full-subcategory-core-equivalence, marked-flat-categorical-equivalence-test). Each says exactly what its step takes: strict postcomposition is a weak equivalence and hS≅π0 C[S]; clauses 2–4 give Cartesian invariance and preservation; the core equivalence holds for a replete preimage; and B^♭→E^♮ is weak iff b is categorical. Checks: no cycle (none of the cited nodes reaches the item); proof_deps equals the union of step uses; all cited nodes are in unit sk-prop-sf-biduality-general, so there is no route departure and tool_uses is empty; no SGA. The delivery has no new nodes, and the four sandbox duplicates are absent. No duplicate of the item: def-coef-mapping-simplex-functor and mapping-simplex-termwise-equivalence are only the unmarked construction. Hand checks: the step 2 retract maps are monotone and compose to the identity. Step 3: a trivial Kan fibration is a Joyal trivial fibration. Step 8: Map_{Δ^n}(k,n−1) and Map_{Δ^n}(k,n) are points for all k<n. Step 9: the mapping-fiber node is used only at w∈Y_i, and the two-sided inverse argument holds. Step 11: Map^♭_{Δ^n} is the full subcategory on selected vertices, the selection is invariant, and the preimage condition holds. Edge cases n=0, empty fibers and k<n−1 are covered. The statement is not weakened. HTT is not under literature/ (WANTED, proof by:agent), so the source was checked from the text of HTT §3.2.2 and the earlier reviewed record. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CartesianMappingSimplexPresentation",

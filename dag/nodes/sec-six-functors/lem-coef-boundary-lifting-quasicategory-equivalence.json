@@ -10,9 +10,66 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The stated boundary lifting condition is exactly that p is a trivial Kan fibration in [def-weil-pbc-trivial-kan-fibration], including the n=0 condition because the degree-zero boundary is empty. Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to the degreewise injection ∅→Y, with the unique map ∅→X and id_Y. This gives a simplicial map s:Y→X with p s=id_Y.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NM, label lemma-trivial-kan, applied to the degreewise injection of the empty simplicial set into Y; Definition 08NL, label definition-trivial-kan, for surjectivity from the n=0 boundary."
+   }
+  },
+  {
+   "text": "Let j:∂Δ[1]×X→Δ[1]×X be the endpoint inclusion. Define a on the two endpoint copies to be id_X at 0 and s p at 1, and define b=p∘pr_X. Since p s=id_Y, the two endpoint restrictions satisfy p a=b j. The map j is degreewise injective, so [lem-weil-pbc-trivial-kan-lifts-monomorphisms] gives H:Δ[1]×X→X with H|_0=id_X, H|_1=s p, and p H=p pr_X. Thus H is an interval transformation over p.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NS, label lemma-trivial-kan-homotopy, endpoint-cylinder lifting square, reconstructed with the stated lifting lemma"
+   }
+  },
+  {
+   "text": "For a vertex x of X, the track H_x:Δ[1]→X has endpoints x and s(p x), and p H_x is the degenerate edge at p x by p H=p pr_X. Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to ∂Δ[1]→Δ[1] with endpoint values s(p x),x and degenerate base edge; this supplies an edge inverse to H_x. Apply the same lifting statement to the two boundary inclusions ∂Δ[2]→Δ[2] whose boundaries are (H_x,H_x^{-1},id_x) and (H_x^{-1},H_x,id_{s(p x)}), with degenerate base 2-simplices. The resulting 2-simplices witness both inverse equations. By the definition of equivalence edge in [def-cbc-enhanced-diagrams-cones], every H_x is an equivalence.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NM boundary lifting, combined with the equivalence-edge definition in the enhanced simplicial conventions"
+   }
+  },
+  {
+   "text": "By the internal-functor construction in [def-cbc-enhanced-diagrams-cones], H represents an edge from id_X to s p in Fun(X,X). The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] says that this edge is an equivalence because every vertex component H_x is an equivalence. Hence η:=H is a coherent natural equivalence id_X≃s p. The identity p H=p pr_X says that pη is the degenerate transformation of p, while Step 1 gives p s=id_Y. These are exactly the asserted section and coherent inverse data, so p is a coherent functor equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient-adjunction calculation; coherent-localization infrastructure introduced in descendant lem-coef-trivial-fibration-fraction-model, proof step 2. The boundary-lifting equivalence is a technical expansion, not a lemma stated in the blueprint paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient-adjunction calculation; coherent-localization infrastructure introduced in descendant lem-coef-trivial-fibration-fraction-model, proof step 2. The boundary-lifting equivalence is a technical expansion, not a lemma stated in the blueprint paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,7 +129,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-trivial-fibration-fraction-model",
@@ -84,7 +141,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient-adjunction calculation, coherent localization infrastructure: the inherited fraction-model proof step 2, boundary-lifting map of functor quasicategories implies a coherent equivalence (section and contraction).",
+   "place": "Paragraph 2, derived coefficient-adjunction calculation; coherent-localization infrastructure introduced in descendant lem-coef-trivial-fibration-fraction-model, proof step 2. The boundary-lifting equivalence is a technical expansion, not a lemma stated in the blueprint paragraph.",
    "via": [
     "lem-coef-trivial-fibration-fraction-model",
     "lem-coef-brown-fibrant-localization-pullbacks",
@@ -99,5 +156,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-boundary-lifting-quasicategory-equivalence",
+  "worker": "stage1",
+  "summary": "Expanded the inherited statement-only boundary-lifting lemma into four proof steps. The boundary hypothesis is identified with the trivial Kan lifting property; explicit endpoint-cylinder lifting supplies a section and a homotopy over p; boundary lifts in dimensions one and two make each vertex track an equivalence; the componentwise functor-category criterion upgrades the track to a coherent natural equivalence. No new DAG nodes or Mathlib leaves were needed.",
+  "blueprint": "The split supplies the boundary-lifting/coherent-equivalence tool in step 2 of descendant lem-coef-trivial-fibration-fraction-model. Its nearest blueprint ancestor is paragraph 2 of prop-coef-integral-exceptional-adjoint, the derived coefficient-adjunction calculation. That paragraph does not itself state a boundary-lifting lemma; this is agent-written coherent-localization infrastructure for that calculation.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-trivial-kan-fibration",
+    "why": "The item’s explicit all-boundaries hypothesis is used through this generic definition to apply the lifting lemma."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "why": "Generic simplicial lifting against endpoint and 1- and 2-dimensional boundary injections supplies the section, homotopy and inverse triangles."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Its componentwise equivalence criterion upgrades the explicit interval transformation to a coherent natural equivalence in the functor quasicategory."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-f149f0f60",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-f149f0f60 (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, 4 steps, no new nodes. Read all four cited statements (def-weil-pbc-trivial-kan-fibration, lem-weil-pbc-trivial-kan-lifts-monomorphisms, def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus) and Stacks simplicial.tex 08NL l.5533, 08NM l.5550 and 08NS l.5642 with its proof square. Step 1: the n=0 boundary condition is p_0 surjective, so p is a trivial Kan fibration; lifting against the empty map into Y gives s with ps=id. Step 2: the 08NS square ∂Δ[1]×X→Δ[1]×X with top map (id, sp) and bottom map p·pr_X commutes because psp=p; it gives H with pH=p·pr_X. The 08NS node lacks this over-p identity, so rebuilding the square is needed. Step 3: the edge and the two ∂Δ[2] boundaries (H_x,g,id_x) and (g,H_x,id_spx) agree at their vertices and map to degenerate base simplices; the lifts are the inverse triangles of the equivalence-edge definition. Step 4: H is an edge of Fun(X,X)_1, and the componentwise criterion in the cone-calculus statement makes it an equivalence; pH is s_0(p). Edge cases checked: X=Y=∅; X=∅ with Y≠∅ ruled out by n=0; p=id; discrete nerves. No Kan or nonemptiness hypothesis is hidden. Dependency closure (129 nodes) is acyclic. No duplicate: the 08NS, Joyal, invertible-interval and anodyne-factorization nodes are different or weaker. Tool use lem-cbc-enhanced-functor-cone-calculus (generic pointwise criterion) is accepted; the sk-prop-h2 tool uses are Mathlib leaves. Agent proof origin with the main-20261015 blueprint ancestor, no SGA, not a target node. No fixes."
  }
 }

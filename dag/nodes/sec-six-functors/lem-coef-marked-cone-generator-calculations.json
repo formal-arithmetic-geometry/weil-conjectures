@@ -132,18 +132,63 @@
    }
   },
   {
-   "text": "For the fourth generator $K^\\flat\\to K^\\sharp$, the underlying cone diagram is unchanged. Write its markings at a vertex $v$ as $E_v\\subseteq E'_v$ on $X_v$. By the definition of $L$, every added marking is $g^*\\widetilde e$, for an edge $e:x\\to y$ of $K$ and $g\\in\\mathfrak C[K](v,x)_1$. We prove precisely that maps to a quasicategory preserving $E_v$ carry these edges to equivalences; no assertion about every edge being literally an elementary cone edge is needed. First, for any map $h:X_x\\to Z$ preserving $E_x$, fill the $\\Lambda^2_0$ horn in $K$ with edges $01=e$, $02=\\mathrm{id}_x$. This gives $e':y\\to x$ and the triangle $(e,e',\\mathrm{id}_x)$. Fill a second $\\Lambda^2_0$ horn with edges $01=e'$, $02=\\mathrm{id}_y$, giving $e'':x\\to y$ and the triangle $(e',e'',\\mathrm{id}_y)$. These are allowed horns because $K$ is Kan; we do not assume that $e''=e$. The coherent cone square of the first triangle has successive upper/right edges $\\widetilde e$ and $e^*\\widetilde e'$. Its other two sides are the degenerate cone edge for $\\mathrm{id}_x$ and an acting mapping edge on a cone vertex, so both are marked in $E_x$. The two triangle equations in $hZ$ show that $ba$ is invertible, where $a=[h(\\widetilde e)]$ and $b=[h(e^*\\widetilde e')]$. Pull back the cone square of the second triangle by the constant action of $e$. Its two other sides are still marked, and it gives invertible $cb$, where $c=[h(e^*(e')^*\\widetilde e'')]$. Put $q=ba$ and $r=cb$. Then $R=a q^{-1}$ satisfies $bR=1$, and $L=r^{-1}c$ satisfies $Lb=1$. The equality $L=L(bR)=(Lb)R=R$ makes $b$ invertible, and $a=b^{-1}q$ is invertible as well. The cited composition statement identifies these invertible classes with equivalence edges. For a constant mapping edge $g$ at a vertex of $\\mathfrak C[K](v,x)$, apply this argument to $h\\circ g^*$; precomposition preserves the original marking. For arbitrary $g$, the monotone map $\\min:[1]\\times[1]\\to[1]$ gives $G(s,t)=g(\\min(s,t))$. Acting on $\\widetilde e$ gives the square $(s,t)\\mapsto G(s,t)^*\\widetilde e(s)$ in $X_v$. Its bottom edge is the constant-$g(0)$ case and its top edge is $g^*\\widetilde e$. The sides act on cone vertices, so are in $E_v$. The two triangle equations therefore imply that the top edge is an equivalence whenever $h$ preserves $E_v$. Every added marking has this form, so step 6 proves objectwise marked weak equivalence. Step 3 supplies the projective cofibration; this proves the fourth generator case. If $K$ is empty the diagram category has no evaluations and the assertion is vacuous. The contraction uses $g$ itself, with no Kan hypothesis on $\\mathfrak C[K](v,x)$.",
+   "text": "For the fourth generator $K^\\flat\\to K^\\sharp$, the underlying cone diagram is unchanged. Write its markings at a vertex $w$ as $E_w\\subseteq E'_w$ on $X_w$. Every added marking is $g^*\\widetilde e$ for an edge $e:x\\to y$ of $K$ and $g\\in\\mathfrak C[K](w,x)_1$. For any such $e$, fill the $\\Lambda^2_0$ horn with $01=e$ and $02=\\mathrm{id}_x$, obtaining $e':y\\to x$ and a triangle $(e,e',\\mathrm{id}_x)$. Fill the $\\Lambda^2_0$ horn with $01=e'$ and $02=\\mathrm{id}_y$, obtaining $e'':x\\to y$ and a triangle $(e',e'',\\mathrm{id}_y)$. These fillings are exactly instances of the definition of Kan complex; $e''=e$ is not assumed.",
    "uses": [
-    "lem-coef-coherent-nerve-comparison",
     "lem-coef-marked-anodyne-lifting-calculus",
-    "lem-coef-marked-point-cartesian-model",
-    "lem-coef-simplicial-projective-model-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(4), printed pp.175-176; returned step 8 separated into horn witnesses, cone-square calculation, categorical inverse algebra, and parameter-edge comparison."
+   }
+  },
+  {
+   "text": "Fix $h:X_x\\to Z$ carrying $E_x$ to equivalences. Apply [lem-coef-cone-triangle-mapping-square] to the first triangle. Its consecutive edges at $(0,0)\\to(1,0)\\to(1,1)$ are $\\widetilde e$ and $e^*\\widetilde e'$; the other two sides are marked because the long input edge is $\\mathrm{id}_x$. The two triangles of the square and [lem-coef-infinity-mapping-composition] imply that $ba$ is invertible in $hZ$, where $a=[h(\\widetilde e)]$ and $b=[h(e^*\\widetilde e')]$. Apply the same square lemma to the second triangle and precompose by the constant vertex $e$. It preserves the minimal markings, so the other two sides remain marked. The two triangle equations now make $cb$ invertible, where $c=[h(e^*(e')^*\\widetilde e'')]$.",
+   "uses": [
+    "lem-coef-cone-triangle-mapping-square",
     "lem-coef-infinity-mapping-composition"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 3.2.1.11(4); inverse-triangle and min-contraction arguments written out."
+    "place": "Proposition 3.2.1.11(4), printed pp.175-176; returned step 8 separated into horn witnesses, cone-square calculation, categorical inverse algebra, and parameter-edge comparison."
+   }
+  },
+  {
+   "text": "Put $q=ba$ and $r=cb$ in the ordinary category $hZ$. Then $R=a q^{-1}$ is a right inverse of $b$ and $L=r^{-1}c$ is a left inverse. The identity $L=L(bR)=(Lb)R=R$ makes $b$ invertible, and $a=b^{-1}q$ is invertible. By [lem-coef-infinity-mapping-composition], $h(\\widetilde e)$ is an equivalence edge. This is only categorical inverse algebra on the two invertible composites already obtained.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(4), printed pp.175-176; returned step 8 separated into horn witnesses, cone-square calculation, categorical inverse algebra, and parameter-edge comparison."
+   }
+  },
+  {
+   "text": "Fix a vertex $w$, a test map $h:X_w\\to Z$ carrying $E_w$ to equivalences, and an edge $e:x\\to y$ of $K$. For each vertex $a\\in\\mathfrak C[K](w,x)_0$, precomposition $a^*:X_x\\to X_w$ preserves minimal markings by [lem-coef-cone-triangle-mapping-square]. The preceding argument applied to $h\\circ a^*$ makes $h(a^*\\widetilde e)$ an equivalence. The precomposition action is a marked map $\\mathfrak C[K](w,x)^\\sharp\\times(X_x,E_x)\\to(X_w,E_w)$: acting on a generator $g^*\\widetilde d$ gives the generator $(ga)^*\\widetilde d$ by associativity, and a degenerate edge of $X_x$ is marked after acting: every vertex of $X_x$ is $c^*\\widetilde t$ for a vertex $t$ of $K$ and a vertex $c\\in\\mathfrak C[K](x,t)_0$, since the only arrows into the cone vertex end with a cone arrow, and the coning edge of the degenerate edge of $t$ is the degenerate edge at $\\widetilde t$; so acting by an edge $b$ sends that degenerate edge to the generator $(cb)^*\\widetilde{s_0t}$, with $cb\\in\\mathfrak C[K](w,t)_1$. Apply [lem-coef-marked-action-edge-comparison] with this action and the edge $\\widetilde e$. It makes $h(g^*\\widetilde e)$ an equivalence for every acting edge $g$, without a Kan hypothesis on $\\mathfrak C[K](w,x)$.",
+   "uses": [
+    "lem-coef-cone-triangle-mapping-square",
+    "lem-coef-marked-action-edge-comparison",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(4), printed pp.175-176; returned step 8 separated into horn witnesses, cone-square calculation, categorical inverse algebra, and parameter-edge comparison."
+   }
+  },
+  {
+   "text": "Every added marking belongs to the set tested in the preceding step. Step 6 therefore makes each $(X_w,E_w)\\to(X_w,E'_w)$ a marked weak equivalence. Step 3 supplies a projective cofibration for this pure-marking map, and the projective model has objectwise weak equivalences by [lem-coef-simplicial-projective-model-calculus]. Thus the fourth generator maps to a projective trivial cofibration. If $K$ is empty there are no evaluations and this assertion is vacuous.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.11(4), printed pp.175-176; returned step 8 separated into horn witnesses, cone-square calculation, categorical inverse algebra, and parameter-edge comparison."
    }
   },
   {
@@ -161,8 +206,11 @@
   }
  ],
  "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
   "lem-coef-coherent-nerve-comparison",
+  "lem-coef-cone-triangle-mapping-square",
   "lem-coef-infinity-mapping-composition",
+  "lem-coef-marked-action-edge-comparison",
   "lem-coef-marked-anodyne-lifting-calculus",
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-pinched-cube-latching",
@@ -171,8 +219,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-  "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction; explicit calculations from HTT §§2.2.2 and 3.2.1, with source Lemma 3.2.1.9 isolated as a strictly smaller cylinder input. Second reading checked the official PDF."
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Original generator calculations retained from HTT Section 3.2.1; returned step 8 expanded through two explicitly stated comparison lemmas, with its categorical inverse algebra left in the parent proof."
  },
  "mathlib_searches": [
   {
@@ -233,7 +281,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-straightening-quillen",
@@ -258,17 +306,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-marked-cone-generator-calculations",
   "worker": "stage1",
-  "summary": "Reviewed and completed the earlier attempt: retained the free-at-initial-vertex cube attachments, selectively marked cylinder input, four separate marked-anodyne calculations, and terminal coend calculation. Replaced the unnecessary all-edges generation argument in the Kan case by a test of exactly the newly added markings, wrote two explicit outer-horn fillings with independently named inverse edges, completed new-node metadata, refreshed recorded searches, and rewrote the report to describe the actual nine-step split. The imported statement is unchanged. Independent second reading expanded the colimit maps-out argument and wrote both categorical inverse formulas in step 8; no statement or dependency changed.",
-  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed derived coefficient-adjunction: realizes the marked-cone generator input below the finite-coefficient coherent mapping-complex adjunction. Steps 1-3 construct and compute projective cells; steps 4-8 prove the four marked-anodyne cases; step 9 computes the terminal Q/max augmentation.",
+  "summary": "Q103 repair of the human return: statement, Lean record and old steps 1-7 and 9 are unchanged. Replaced old step 8 by five short steps: two outer-horn witnesses; two cited cone-square comparisons; explicit elementary inverse algebra; a cited vertex-to-edge marked-action comparison; and the original objectwise/projective conclusion. Two new statement-only nodes expose the formerly hidden comparisons. Reused retained logged Mathlib searches after reading the candidates and ran supplementary searches. No other route change.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed derived coefficient-adjunction: realizes the marked-cone generator input below the finite-coefficient coherent mapping-complex adjunction. Steps 1-3 construct and compute projective cells; steps 4-8 prove the four marked-anodyne cases; step 9 computes the terminal Q/max augmentation. Q103 repair: old step 8 is now steps 8-12; old step 9 is step 13. The two new nodes serve only the two square/comparison sentences in the Kan-generator argument.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q127-d2a94a489",
-  "group": "Q127",
+  "reviewer": "NT-cc-Q103-4701e27e6",
+  "group": "Q103",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-d2a94a489 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node and the seven proof dependencies, checked against HTT §3.2.1 (pp. 170-177: Def 3.2.1.2, Prop 3.2.1.4/3.2.1.7, Lemmas 3.2.1.8-3.2.1.10, Prop 3.2.1.11 cases 1-4, Prop 3.2.1.14). The item statement is unchanged and matches HTT. Steps 1-6, 8 and 9 hold: I checked the subset-cube evaluations, the marked-edge criterion (equal maxima), B = ∂K×Δ^1 ∪ K×{1} with the right set A, the final-vertex hypothesis, n=0 and n=1 edge cases, Lemma 3.2.1.10 (2)⇒(1), the ba/cb inverse algebra and the min-square, and Q^0, Q^1. The new node lem-coef-selectively-marked-terminal-cylinder is exactly HTT Lemma 3.2.1.9. It is true (tested on empty K, K'=K, a point, and the Δ^1 square via Λ^2_1 then a marked Λ^2_2) and duplicates no existing node; the endpoint-prism node marks all vertical edges, and nothing else states 3.2.1.8 or 3.2.1.9. Its source and the search records are correct. The route stays within sk-prop-sf-biduality-general; there are no tool_uses and no SGA. Repaired in fixes/: step 7 claimed the target marks every edge of the square, but the diagonal ad = ∅→{1,2} is not of the form g^*ẽ, so it is unmarked; the conclusion was unaffected and the text now gives the correct markings. Step 5's 'newly marked' wording was also corrected. Note: the report says the new node's Lean audits are 'none', but the node has no lean_audit key. That is a maintainer field for the merge to fill.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-4701e27e6 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the HTT PDF (local /tmp/htt copy), pp.172-176: Prop 3.2.1.7, Lemmas 3.2.1.8-3.2.1.10, and Prop 3.2.1.11 cases (1)-(4), including the last paragraph of (4) on p.176. The statement, Lean record and steps 1-7 are unchanged, and old step 9 is now step 13. The returned 2635-character step 8 is now steps 8-12, each under 2000 characters (the longest step overall is step 3 at 1941). Steps 8-12: the two Λ²₀ fillings are allowed by the Kan-complex definition in def-cbc-enhanced-diagrams-cones. For the step-9 square with k=id I checked the edges: the left edge k̃ is degenerate and the top edge ρ^*x̃ is a generator, so both are marked. The triangle relation from lem-coef-infinity-mapping-composition then gives ba invertible, and precomposing by the vertex e gives cb invertible. Step 10 is valid inverse algebra (bR=1 and Lb=1, so L=R). Step 11 applies node 2 to the action of 𝔠[K](w,x), and step 12 applies Lemma 3.2.1.10 together with the projective cofibration from step 3. All of this matches HTT p.175-176. New node lem-coef-cone-triangle-mapping-square: I checked it in 𝔠[Δ³](0,3), the cube on {1,2}. All four vertices and edges agree with the node, ρ_σ^*z̃ is the generator ρ_σ^*(s̃₀z), and the precomposition clause holds. It is true for degenerate σ, needs no Kan hypothesis, and duplicates no existing node. New node lem-coef-marked-action-edge-comparison: it follows from the square (g∘pr1, e∘pr2), whose sides (g,s₀e(i)) are marked in A^♯×Y, plus two-out-of-three in hZ. It is true in both directions with no Kan hypothesis. It is short but a clean general lemma, which is what the return asked for, so I kept it. Duplicate search over dag/nodes and the blueprint snapshots: none found. same_as=[] is correct, the route stays in unit sk-prop-sf-biduality-general (def-cbc is a definition), there is no SGA source, no target is weakened, and no tool_uses are needed. FIX (item proof only): steps 8, 11 and 12 called the evaluation vertex v, which clashes with the item's cone vertex v; renamed to w. Step 11 asserted without reason that a degenerate edge of X_x is marked after acting; I added the justification: every vertex of X_x is c^*t̃, and the coning edge of s₀t is degenerate at t̃, so acting by an edge b gives the generator (cb)^*s̃₀t. The new nodes lack lean_audit, which is a maintainer field.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.MarkedConeGeneratorCalculations",
