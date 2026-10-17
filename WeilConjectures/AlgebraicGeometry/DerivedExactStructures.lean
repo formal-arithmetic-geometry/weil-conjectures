@@ -42,7 +42,7 @@ theorem qc_triangulated (X : Scheme.{u})
 
 /-- Separate exact shifts for the pullback-tensor lift and the specified right adjoint.
 Source: Stacks Tags 06YJ and 06YH; Mathlib Triangulated.Adjunction.
-Proof: use the exact shift from exists_derivedPullback; transfer it to direct image
+Proof: use the exact shift from derivedPullback_spec; transfer it to direct image
 by its adjunction. TensorRight is exact for the canonical tensor shift. Lift exactness
 through the quasi-coherent inclusions and use the restricted adjunction for c.
 (blueprint: lem-sc-derived-separate-exact-structures). -/
@@ -72,7 +72,7 @@ theorem rightAdjointTensor_exactStructures
   let := qc_triangulated Y
   let := qc_triangulated Z
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, ⟨sL, hL⟩, _⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    derivedPullback_spec f
   let : (derivedPullback f).CommShift ℤ := sL
   let : (derivedPullback f).IsTriangulated := hL
   let := a.rightAdjointCommShift ℤ
@@ -114,7 +114,7 @@ theorem projection_exactStructures
       letI := sG
       F.IsTriangulated ∧ G.IsTriangulated := by
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, ⟨sL, hL⟩, _⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    derivedPullback_spec f
   let : (derivedPullback f).CommShift ℤ := sL
   let : (derivedPullback f).IsTriangulated := hL
   let := a.rightAdjointCommShift ℤ

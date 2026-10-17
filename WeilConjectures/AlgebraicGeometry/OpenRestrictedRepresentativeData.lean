@@ -21,7 +21,7 @@ pullback counit along any morphism. Source: Stacks Project, Tags 06YB and 0D5U.
 (blueprint: lem-pc-open-restricted-representative-data).
 
 Proof: open restriction preserves K-flatness by the stalk criterion. Transport
-the K-flat counit isomorphism from exists_derivedPullback to the specified counit
+the K-flat counit isomorphism from derivedPullback_spec to the specified counit
 by uniqueness of left derived functors. Uniqueness of left adjoints identifies
 tensor pullback along U.ι with literal restriction. Apply this isomorphism to
 complexes and localization. Compose with the inverse specified counit along U.ι,

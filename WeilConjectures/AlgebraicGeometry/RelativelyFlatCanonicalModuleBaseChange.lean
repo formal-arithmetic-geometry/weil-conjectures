@@ -105,7 +105,7 @@ theorem exists_isIso_canonicalModuleBaseChange_of_isFlatOver
           (schemeDerivedDirectImage f').map c) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hε, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback g')
+    derivedPullback_spec g'
   have h : E = Scheme.Modules.tensorPullback g' :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E
