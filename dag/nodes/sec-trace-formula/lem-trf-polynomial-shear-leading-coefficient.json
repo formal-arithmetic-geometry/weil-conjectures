@@ -10,9 +10,58 @@
  "stmt_deps": [
   "def-weil-pbc-mv-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the finite-monomial description in [def-weil-pbc-mv-polynomial-ring], write $g=\\sum_{\\nu\\in N}a_\\nu x^\\nu$, where $N\\subset\\mathbf N^n$ is its finite support and each $a_\\nu\\ne0$. Nonconstancy says that some $\\nu\\in N$ is nonzero: if only the zero vector occurred, $g$ would be constant. In particular $N$ is nonempty. Choose an integer $B\\ge2$ strictly larger than every coordinate of every vector of $N$ (the finite list of coordinates has a maximum). Set $e_i=B^{n-i}$ for $1\\le i<n$ and set $e_n=1$. All these weights are positive.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051N, lemma-helper-polynomial, proof: finite support; Tag 051M, lemma-helper, choice of dominant weights."
+   }
+  },
+  {
+   "text": "For $\\nu\\in N$ set $w(\\nu)=\\sum_{i=1}^n e_i\\nu_i$. Suppose $\\nu\\ne\\mu$ in $N$ and let $i$ be their first differing coordinate. Their difference at coordinate $i$ contributes absolute value at least $B^{n-i}$. The absolute value of the entire later-coordinate contribution is at most $$\\sum_{j=i+1}^n (B-1)B^{n-j}=B^{n-i}-1,$$ where the equality telescopes $(B-1)B^k=B^{k+1}-B^k$. Earlier coordinates agree. Thus later coordinates cannot cancel the first differing coordinate, and $w(\\nu)\\ne w(\\mu)$. This proves injectivity on $N$ by the elementary bounded-coordinate argument of Stacks Tag 051M; in particular the last weight is one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051M, lemma-helper, proof: first differing coordinate dominates all later coordinates; its inequalities evaluated for base-power weights."
+   }
+  },
+  {
+   "text": "Use the evaluation homomorphism of [def-weil-pbc-mv-polynomial-ring] sending $x_i$ to $x_i+x_n^{e_i}$ for $i<n$ and fixing $x_n$. The image of $x^\\nu$ is $\\prod_{i<n}(x_i+x_n^{e_i})^{\\nu_i}x_n^{\\nu_n}$. Expand by distributivity, treating the power with exponent $\\nu_i$ as a product of $\\nu_i$ copies. Picking the $x_n^{e_i}$ summand from every copy gives exactly one term $x_n^{w(\\nu)}$, with coefficient one. Every other choice picks $x_i$ from at least one copy and decreases the exponent of $x_n$ by the sum of the corresponding positive $e_i$. Consequently the image is $x_n^{w(\\nu)}+h_\\nu$, where every term of $h_\\nu$ has $x_n$-exponent strictly less than $w(\\nu)$. If $w(\\nu)=0$, there are no other terms. This calculation only uses coefficientwise addition and monomial multiplication, so remains valid over rings with zero divisors or in positive characteristic.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051N, lemma-helper-polynomial, proof: leading term of each substituted monomial."
+   }
+  },
+  {
+   "text": "Choose the unique $\\nu_*\\in N$ with maximal weight and set $d=w(\\nu_*)$ and $a=a_{\\nu_*}$. A nonzero support vector has a positive coordinate, so the positivity of the weights implies $d>0$. In the finite sum of the monomial expansions from Step 3, the top contribution of $\\nu_*$ is $a x_n^d$, whereas every other contribution has $x_n$-exponent less than $d$: the other support vectors have strictly smaller weights by Step 2, and each remainder has exponent less than its own weight. Hence the coefficient at $x_n^d$ is exactly $a\\ne0$, without cancellation. Group all remaining monomials by their $x_n$-exponent $j<d$ to define $b_j\\in R[x_1,\\ldots,x_{n-1}]$, using zero for missing exponents. This gives the required formula. For $n=1$ the chosen exponent list and the product over $i<n$ are empty, so the evaluation is the identity and the same argument is the ordinary leading-coefficient calculation.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051N, lemma-helper-polynomial, proof: unique maximal-weight support vector."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 051N (lemma-helper-polynomial) and 051M (lemma-helper), finite-support proof; dominant weights chosen as base powers and their separation proved by the telescoping geometric-sum bound."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -93,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-refined-noether-normalization-prime",
@@ -124,5 +173,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-polynomial-shear-leading-coefficient",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 051N into finite-support selection, explicit elementary base-power weight separation, a distributive monomial calculation, and coefficient grouping at the unique maximal weight. No new node is needed: every argument is written out using elementary integer inequalities and the existing polynomial-ring definition. The statement is unchanged and uses no domain or field hypothesis.",
+  "blueprint": "Realizes the historical affine polynomial-chart helper-polynomial sentence already recorded in blueprint.from.place, beneath the 051P refined-normalization step of the 057K--057L/057S route. The ancestry is retained; the immediate mathematical source is Stacks 051N and 051M. No unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q87-d437b1265",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q87-d437b1265 (reviewer sub-agent of L); spot-checked: Read the item, all four steps, sole cited definition, report, and unit/chapter route in full. Verified Stacks 051M–051N and checked bounded weights and sparse expansions over F₂ and Z/6Z. No missing hypotheses, mathematical gaps, duplicate new nodes, prohibited dependencies, or repairs. Detailed findings are in review.md."
  }
 }

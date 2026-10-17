@@ -23,9 +23,171 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write S=Spec A, where A is an integrally closed domain. Use [lemma-nagata-noetherian-inverse-system-affine]: the finitely generated Z-subalgebras A_i of A, ordered by inclusion, give S=lim S_i with S_i=Spec A_i and affine transition maps. The index set is nonempty (it contains the image of Z) and directed (adjoin the union of two finite generating sets). Every A_i is a domain because it is a subring of A. Thus every S_i is integral, and every projection S\\to S_i takes generic point to generic point. By [lem-weil-pbc-finite-type-over-noetherian] the stages are Noetherian; they are affine, hence qcqs. This is a Noetherian approximation as in [def-nagata-noetherian-inverse-system].",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-nagata-noetherian-inverse-system",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZA, affine-case proof: filtered union of finitely generated subrings"
+   }
+  },
+  {
+   "text": "Every curve and marking object of the given finite diagram is finitely presented over S. Apply clause (1) of [thm-pd-spreading-out] to descend the objects at a common stage. Use [lem-weil-pbc-finite-diagram-lift-of-models] for the finite quiver consisting of the structure maps, marking inclusions and modification maps, with the finitely many relations expressing compatibility of each pair map. It supplies a common later stage, all arrows and relations, and comparison isomorphisms identifying the entire pulled-back diagram with the original diagram.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-finite-diagram-lift-of-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM(1)--(3), finite collection of objects, arrows and equations"
+   }
+  },
+  {
+   "text": "Increase the stage so that every structural map is flat by [lem-weil-pbc-descend-flat-finite-presentation] and every marking map is a closed immersion by [lem-weil-pbc-descend-closed-immersion]. The finite-presentation models are qcqs by [lem-weil-pbc-qcqs-morphism-permanence]; their marking and pair arrows are locally of finite type by [lem-weil-pbc-proper-fp-permanence](f), since their composites to S_i are of finite presentation. Apply [lem-weil-pbc-eventually-proper] to the curve and marking arrows separately. Apply [lem-trf-pure-relative-dimension-finite-stage] to the structural maps with dimensions 1 and 0. After one common later stage all pairs are multipointed and all pair maps proper. [lem-weil-pbc-flat-morphism-base-change], [lem-weil-pbc-proper-fp-permanence] and [lem-trf-semistable-marked-base-change] preserve these properties under further base change.",
+   "uses": [
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-eventually-proper",
+    "lem-trf-pure-relative-dimension-finite-stage",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 04AI, 01ZP, 081F, 0EY2; finite-presentation hypotheses as in Situation 081D"
+   }
+  },
+  {
+   "text": "Put K_i=Frac(A_i) and K=Frac(A). Every fraction a/b in K belongs to K_i once A_i contains a and the nonzero b, so K is the directed union of the K_i, and Spec K=lim Spec K_i. Each generic pair map becomes an isomorphism over K. Apply the morphism and equality clauses of [thm-pd-spreading-out] to the inverse maps over this field limit and their two inverse equations. Since there are finitely many maps, all generic fibres are isomorphisms at a common later stage i. The generic base pair over K_i pulls back to the given smooth curve and etale marking over K. [lem-weil-pbc-field-extension-base-change-faithfully-flat] makes Spec K\\to Spec K_i an affine flat surjection, hence an fpqc covering by [def-weil-pbc-fpqc-covering]. Apply [lem-trf-smooth-fpqc-base-descent] and [lem-galois-fpqc-descend-etale] to give smoothness and etaleness of that generic pair.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-fpqc-covering",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM(2),(3) for the field system; descent Tags 02VL and 02VN"
+   }
+  },
+  {
+   "text": "Keep this stage i fixed. The principal localizations A_i[1/a] for nonzero a\\in A_i form a directed system with colimit K_i. Apply [thm-pd-spreading-out](2),(3) again to the generic inverse maps and their inverse equations in this system. The models are the restrictions of the already descended objects. A common nonzero a suffices for all maps and equations, yielding an open V_i=D(a) over which all curve and marking maps are isomorphisms. For any affine chart Spec B of any flat curve or marking, multiplication by a is injective by [lem-sc-flat-invertible-sections-torsion-free], applied to the structure module on that chart. If b maps to zero in B[1/a], some a^n kills b, so b=0. Thus restriction to the preimage of V_i is injective on every affine chart and hence as a sheaf. These opens are schematically dense on both sources and targets. Each proper pair map is therefore an eta_i-modification.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM(2),(3) for the principal-open system; explicit schematic-density argument"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-stable-modification-constructibility] to every pair map at this stage. Its base is integral Noetherian, all pairs multipointed, the maps proper, generic isomorphisms, and modifications by Step 5. It gives a constructible semistable set for every source and a constructible stable set for each selected arrow. Intersect these finitely many sets to get a constructible E\\subset S_i; finite intersections are constructible by [def-weil-constructible-subset]. Every point s of S maps into E: the fibre over s is obtained from the fibre over its image t by the field extension k(t)\\subseteq k(s), and the given fibres are semistable and, when selected, stable. The equivalences in [lem-trf-stable-modification-stability-field-descent] imply the same properties at t. By [lem-weil-pbc-limit-contained-in-constructible], a later stage S_h maps entirely into E. Thus [lem-trf-stable-modification-stability-field-descent] gives semistability of every source and stability of every selected arrow at S_h. Pull back V_i to V_h. It still contains the generic point and all maps are isomorphisms there; multipointedness, generic smoothness/etaleness, semistability and selected stability persist by [lem-trf-semistable-marked-base-change].",
+   "uses": [
+    "lem-trf-stable-modification-constructibility",
+    "def-weil-constructible-subset",
+    "lem-trf-stable-modification-stability-field-descent",
+    "lem-weil-pbc-limit-contained-in-constructible",
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 3.1.1(i),(ii), pp.14--15, and Lemma 5.1(ii), p.34; Stacks Tag 05F4"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-normal-finite-stage-universal] to the approximation of Step 1 and the stage h. It gives an integral normal S_0, finite over S_h, and a dominant S\\to S_0 compatible with the projection. By [def-weil-finite-integral-morphism], S_0 is affine and its ring is finite as an A_h-module. Module generators also generate it as an algebra, so S_0 is finite type over S_h and over Z by [lem-weil-pbc-proper-fp-permanence](e) and [def-weil-finite-type-morphism]. Both S\\to S_0 and S_0\\to S_h are dominant: the composite is the dominant projection and the first map is dominant; equivalently their affine ring maps are injective. They take generic point to generic point. Pull the whole diagram and V_h back to S_0, writing U_0 for that open. [lem-weil-pbc-proper-fp-permanence](b) preserves properness and closed immersions, while [lem-trf-semistable-marked-base-change] preserves all multipointed pairs, generic smoothness/etaleness, semistable sources and selected fibrewise stability. U_0 contains the generic point, hence is dense.",
+   "uses": [
+    "lem-sbc-normal-finite-stage-universal",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-finite-type-morphism",
+    "lem-trf-semistable-marked-base-change",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2, normal Noetherian approximation paragraph; explicit affine finite-type refinement"
+   }
+  },
+  {
+   "text": "All generic curves are smooth: the base generic curve is smooth by Steps 4 and 7, and every other generic curve is isomorphic to it. All generic markings are etale by the corresponding generic isomorphisms, hence smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. [sbc-lem-smooth-geometrically-reduced] gives reduced generic fibres for all these objects. Write S_0=Spec A_0 with A_0 a domain. On any affine chart W=Spec B of a curve or marking, a nilpotent b maps to zero in B\\otimes_{A_0}Frac(A_0), so some nonzero a\\in A_0 kills b. By [lem-sc-flat-invertible-sections-torsion-free] on the flat chart W with its structure module, multiplication by a is injective, so b=0. Thus all the total spaces are reduced; this also covers empty markings or curves.",
+   "uses": [
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T (lemma-smooth-geometrically-normal); the flat localization calculation is explicit"
+   }
+  },
+  {
+   "text": "The inverse image in S_0 of the principal open V_i=D(a) used in Step 5 is U_0. Its defining a remains nonzero because A_i\\to A_0 is injective. On every affine chart of any flat curve or marking over S_0 the torsion-free-sections statement [lem-sc-flat-invertible-sections-torsion-free] again makes restriction to B[1/a] injective, by the element argument of Step 5. Thus the preimages of U_0 in both source and target are schematically dense; the proper maps, already isomorphisms there and generically, are eta_0-modifications. The semistable sources and selected fibrewise stability are exactly semistability and stability of these modifications. By fibre-product associativity from [def-pc-fibre-product], pulling the whole diagram back along S\\to S_0 gives the original diagram. This proves all clauses, including a common dense open and reduced total spaces.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Explicit flat-localization argument and the definition of eta-modification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-nagata-noetherian-inverse-system",
+  "def-pc-integral-scheme",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-eventually-proper",
+  "lem-trf-pure-relative-dimension-finite-stage",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-trf-semistable-marked-base-change",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-galois-fpqc-descend-etale",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-trf-stable-modification-constructibility",
+  "def-weil-constructible-subset",
+  "lem-trf-stable-modification-stability-field-descent",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-sbc-normal-finite-stage-universal",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tags 01ZA, 01ZM, 04AI, 01ZP, 081F, 0EY2 and 05F4, combined with the online-read Temkin Remark 3.1.1 and Lemma 5.1 via existing DAG statements. The expanded normal-refinement, reducedness and common-open argument is agent-written; archival Temkin copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +219,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-uniqueness-normal",
@@ -84,5 +246,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-stable-curve-diagram-noetherian-model",
+  "worker": "stage1",
+  "summary": "Repaired the return using only existing DAG lemmas: choose the affine approximation by finitely generated subrings of the domain so every stage is integral; descend the finite diagram and proper multipointed structure; descend generic inverses and a common principal isomorphism open with 01ZM; apply existing integral-base constructibility, field descent and 05F4; pass to the finite normal refinement; prove reducedness and density by flat torsion-freeness. Both proposed helpers are omitted as unnecessary. The cited Temkin primary source was read online, with local archival copy WANTED and the expanded proof honestly marked agent-written. The current proof-dependency chain explicitly documents the supporting role within the fixed unit.",
+  "blueprint": "Supports unit Step 2 through the CURRENT proof edges: lem-trf-local-term-locality Step 5 -> lem-trf-trace-specialization Steps 1--2 -> lem-trf-specialization-cohomological-comparison Step 5 -> lem-trf-nearby-cycle-verdier-duality Step 5 -> lem-trf-plurinodal-alteration Steps 5,11 -> lem-trf-relative-marked-nodal-reduction Step 1 -> lem-trf-dejong-relative-marked-semistable Step 6 -> lem-trf-stable-modification-flat-curve-pair Step 1 -> lem-trf-temkin-stable-modification Step 5 -> lem-trf-stable-modification-uniqueness-normal Step 2. The item supplies the normal finite-type diagram used in that last step; it does not itself state local-term vanishing or replace the contracting/normal-cone unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-diagram-lift-of-models",
+    "why": "Generic finite diagram arrows and relations lift after object models are chosen tool in finite-presentation approximation; supplies that fact as a black box and replaces no unit step."
+   },
+   {
+    "node": "lem-weil-pbc-descend-flat-finite-presentation",
+    "why": "Generic flatness descends to a finite stage of a limit tool in finite-presentation approximation; supplies that fact as a black box and replaces no unit step."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Generic closed immersions descend to a finite stage of a limit tool in finite-presentation approximation; supplies that fact as a black box and replaces no unit step."
+   },
+   {
+    "node": "lem-weil-pbc-eventually-proper",
+    "why": "Generic properness descends to a finite stage of a limit tool in finite-presentation approximation; supplies that fact as a black box and replaces no unit step."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic being etale descends along fpqc coverings (stacks 02vn) tool in finite-presentation approximation; supplies that fact as a black box and replaces no unit step."
+   },
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "Generic nonzero base scalars act injectively on sections of an invertible module tool in finite-presentation approximation; supplies that fact as a black box and replaces no unit step."
+   },
+   {
+    "node": "lem-sbc-normal-finite-stage-universal",
+    "why": "Generic universal finite normal replacement of a single approximation stage tool in finite-presentation approximation; supplies that fact as a black box and replaces no unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic an etale morphism is smooth with zero-dimensional fibres tool in finite-presentation approximation; supplies that fact as a black box and replaces no unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-eventually-proper",
+  "lem-galois-fpqc-descend-etale",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-sbc-normal-finite-stage-universal",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q57-cc2fbcdc7",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-cc2fbcdc7 (reviewer sub-agent of L); spot-checked: Read the complete item, all proof dependencies, unit/chapter route, cited sources, packet, report, and delivery-error rules. Verified all nine proof steps, hypotheses, edge cases, exact base-change/coefficient context, route-pivot compliance, and absence of forbidden SGA or batch-5 dependencies. No new nodes or repairs are needed."
  }
 }
