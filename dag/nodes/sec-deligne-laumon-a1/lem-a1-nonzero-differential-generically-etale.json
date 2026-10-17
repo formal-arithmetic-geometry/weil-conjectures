@@ -14,9 +14,127 @@
   "def-weil-etale-morphism",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every nonempty affine open of either integral curve has dimension one. Indeed [def-sc-function-field] identifies their fraction fields with the same generic stalk, so [lem-weil-pbc-finite-type-domain-dimension-trdeg] gives the same dimension to all such affines; their supremum is the dimension one of the curve. Thus every nonempty open neighbourhood of a point has dimension one, and the structure maps to $\\operatorname{Spec}k$ are smooth of relative dimension one [def-sbc-smooth-morphisms]. Apply [lem-sc-smooth-omega-finite-locally-free] with $d=1$ to $X$ and $Y$. Both differential sheaves are locally free of rank one. The tensor formula in [def-pc-module-pullback] shows that $h^*\\Omega_{Y/k}$ is also locally free of rank one: pull back a local basis and its inverse coordinate map.",
+   "uses": [
+    "def-sc-function-field",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "def-sbc-smooth-morphisms",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C, lemma-generically-etale, proof of (1) iff (4)"
+   }
+  },
+  {
+   "text": "The morphism $h$ is locally of finite presentation. Around any source point choose affine charts $\\operatorname{Spec}A\\to\\operatorname{Spec}B$ with $A=k[x_1,\\ldots,x_n]/(F_1,\\ldots,F_r)$ finitely presented over $k$, using smoothness and [def-sbc-locally-finite-presentation]; the chart can be made small enough to map into the target affine by principal localization, which adjoins one variable and one relation. Choose $k$-algebra generators $b_1,\\ldots,b_m$ of $B$ and polynomial representatives $G_i(x)$ for their images in $A$. Then $$A\\cong B[x_1,\\ldots,x_n]/(F_1,\\ldots,F_r,b_1-G_1,\\ldots,b_m-G_m).$$ Evaluation gives the map to $A$; the reverse map sends each $x_j$ to its class. The finite relations of $A$ hold, and every element of $B$ is a polynomial in the $b_i$, so both composites fix all generators. This is a finite presentation for the original $B$-algebra map. In particular $h$ is locally of finite type [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C, verification of the finite-presentation hypothesis in 02G5 and 02GV"
+   }
+  },
+  {
+   "text": "On the affine charts of Step 2 apply [lem-weil-pbc-kahler-differentials-first-exact-sequence] to $k\\to B\\to A$. The first map sends $a\\otimes db$ to $a\\,d(h^\\sharp b)$. Restricted to $\\operatorname{Spec}A$, the pullback $h^*\\Omega_{Y/k}$ is the pullback along $\\operatorname{Spec}A\\to\\operatorname{Spec}B$ of the restriction of $\\Omega_{Y/k}$, because inverse image and tensor product in [def-pc-module-pullback] are computed locally; [lem-weil-pbc-tilde-pullback-base-change] identifies it with the sheaf associated with $A\\otimes_B\\Omega_{B/k}$, the pulled-back section $db$ going to $1\\otimes db$. So this first map is exactly $dh$ in the question. [lem-weil-pbc-kahler-differentials-localization] identifies the differential modules on principal restrictions, and [lem-weil-pbc-localization-module-exact] preserves the exact sequence on the stalk localizations. Consequently the affine sequences give the sheaf exact sequence $$h^*\\Omega_{Y/k}\\xrightarrow{dh}\\Omega_{X/k}\\longrightarrow\\Omega_{X/Y}\\longrightarrow0,$$ where the last sheaf has the affine meaning in [def-sc-relative-differential-sheaf]. Equivalently its stalk is the cokernel of the indicated differential map; this follows directly by localizing the affine sequence at each point.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-localization-module-exact",
+    "def-sc-relative-differential-sheaf",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C, lemma-generically-etale, proof of (1) iff (4)"
+   }
+  },
+  {
+   "text": "Assume $dh\\ne0$. Trivialize both rank-one sheaves on affine neighbourhoods. The map there is multiplication by a regular function $a$ in a domain. If its generic stalk were zero then $a$ would be zero in the fraction field, hence zero on each such affine, forcing $dh=0$. Thus on some nonempty affine chart $a\\ne0$. Its principal open $D(a)$ is nonempty (it contains the generic point) and multiplication by $a$ is invertible there. Denote this open by $V$. By Step 3, $\\Omega_{V/Y}=0$. Together with local finite type from Step 2, the affine differential characterization explicitly included in [def-weil-unramified-morphism] shows that $h|_V$ is unramified: the affine rings have zero relative differentials and are finitely generated over the target rings.",
+   "uses": [
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C, lemma-generically-etale, proof of (1) iff (4)"
+   }
+  },
+  {
+   "text": "The map $h|_V$ is nonconstant. Suppose its image were the single point $y$. Every point of $V$ is a specialization of its generic point, so $y$ is the image of that point as well. If $y$ is the generic point of $Y$, the local homomorphism at a point $v$ corresponding to a maximal ideal in any nonempty affine chart of $V$ would embed $k(Y)$ into $\\kappa(v)$. This is impossible: [lem-weil-pbc-finite-type-domain-dimension-trdeg] gives $\\operatorname{trdeg}_k k(Y)=1$ and dimension one for $\\mathcal O_{V,v}$, whereas [lem-weil-pbc-dimension-at-point-local-ring-trdeg] gives $\\operatorname{trdeg}_k\\kappa(v)=0$. If $y$ is not generic, it is closed: in a dimension-one integral scheme every nongeneric point is closed, since an intermediate specialization would give a prime chain of length two. On an affine neighbourhood $\\operatorname{Spec}B$ of $y$ with maximal ideal $\\mathfrak m$, take a nonempty affine $W=\\operatorname{Spec}A\\subset V$. Every prime of $A$ contains the image of $\\mathfrak m$; since $A$ is a domain this image is zero. Thus the original map factors through the field $K=B/\\mathfrak m=\\kappa(y)$. Derivations of $A$ over $B$ and over $K$ are identical because $B\\to K$ is surjective, so $\\Omega_{A/K}=\\Omega_{A/B}=0$. The $k$-generators of $A$ also generate it over $K$, hence $W\\to\\operatorname{Spec}K$ is unramified by [def-weil-unramified-morphism]. Apply [lem-weil-pbc-unramified-algebra-over-field-product]: $A$ is a finite product of fields and, as a domain, is a field. Its spectrum has dimension zero, contradicting Step 1. Both possible singleton images are excluded.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-unramified-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C, lemma-generically-etale, proof of (1) iff (4)"
+   }
+  },
+  {
+   "text": "By [lem-sc-smooth-normal], the smooth curve $Y$ is normal. The nonempty open $V$ is again an integral separated finite-type dimension-one curve. Apply [lem-a1-nonconstant-normal-curve-map-flat] to $h|_V$, using Step 5 to supply its nonconstant hypothesis: this restriction is flat. It is locally of finite presentation by Step 2 and unramified by Step 4. Therefore it is etale by the precise flat, unramified, locally-finite-presentation definition in [def-weil-etale-morphism]. This proves the forward implication.",
+   "uses": [
+    "lem-sc-smooth-normal",
+    "lem-a1-nonconstant-normal-curve-map-flat",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C, lemma-generically-etale, proof of (1) iff (4)"
+   }
+  },
+  {
+   "text": "Conversely, suppose $h|_V$ is etale on a nonempty open $V\\subset X$. It is unramified by [def-weil-etale-morphism], and its affine differential modules vanish by [def-weil-unramified-morphism]. Step 3 restricted to $V$ therefore makes $dh|_V$ surjective onto $\\Omega_{V/k}$. At any point of $V$ the latter stalk is a free module of rank one over a nonzero local ring, by Step 1. A zero map cannot surject onto it (its basis element $1$ is nonzero). Thus $dh|_V\\ne0$, and consequently $dh\\ne0$ on $X$. No finiteness of $h$, properness, perfectness of $k$, or rationality of a point was used.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C, lemma-generically-etale, proof of (1) iff (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-function-field",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "def-sbc-smooth-morphisms",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "def-pc-module-pullback",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-unramified-algebra-over-field-product",
+  "lem-sc-smooth-normal",
+  "lem-a1-nonconstant-normal-curve-map-flat",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1C, lemma-generically-etale, proof of (1) iff (4)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,7 +180,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-finite-map-curve",
@@ -79,5 +197,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-nonzero-differential-generically-etale",
+  "worker": "stage1",
+  "summary": "Kept the exact Stacks 0C1C (1) iff (4) statement. Expanded the rank-one, finite-presentation, differential-cokernel and nonconstant checks. Reused existing algebraic differential and dimension nodes. Added only the general normal-target curve flatness theorem 0CCK as a statement-only node.",
+  "blueprint": "All steps supply the differential-to-generic-etaleness implication in paragraph 3 of lem-a1-finite-map-curve; the reverse implication verifies the full criterion which that supporting node states.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Generic differential or dimension fact used exactly as stated to expand Stacks 0C1C; this unit has no replacement, and the nonzero-differential route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic differential or dimension fact used exactly as stated to expand Stacks 0C1C; this unit has no replacement, and the nonzero-differential route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-algebra-over-field-product",
+    "why": "Generic differential or dimension fact used exactly as stated to expand Stacks 0C1C; this unit has no replacement, and the nonzero-differential route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-unramified-algebra-over-field-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-cf36ce73d",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-cf36ce73d (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, every cited statement, Stacks curves.tex 0C1C (lemma-generically-etale, l.2347) and 0CCK (lemma-flat, l.86) with both tags checked in tags/tags, and the main-20261015 lem-a1-finite-map-curve proof, paragraph 3. The item's statement is unchanged and is exactly 0C1C (1)<=>(4) over an arbitrary field; it is not weakened. Steps 1, 2, 4, 5, 6 and 7 are correct. Step 2's presentation was checked by both composites. Step 5's two singleton cases were checked: in the generic case trdeg is 1 against 0; in the closed case the map factors through kappa(y), giving an unramified field product that contradicts dimension 1. One fault (C1, repaired): step 3 asserted that the chart map u is exactly dh, which needs h^*(M~) on Spec A = (A⊗_B M)~, and no node was cited. I added lem-weil-pbc-tilde-pullback-base-change (on the route, sk-thm-p1) and def-pc-module-pullback to step 3's text and uses, and added the tilde node to proof_deps. The corrected item is in fixes/dag/nodes/sec-deligne-laumon-a1/. New node lem-a1-nonconstant-normal-curve-map-flat is exactly 0CCK, statement-only, with correct blueprint fields and three kinds of search. It is not a duplicate: lem-pur-smooth-curve-map-completion needs an algebraically closed field and completions. It does not restate an item clause, and it is true on small cases: Frobenius is flat but not étale, a cusp target shows normality is needed, a constant map is not flat. Note: lem-sc-smooth-normal's stmt_dep def-sc-curves assumes an algebraically closed field. I accept its use over an arbitrary k because the node is closed by the arbitrary-field slopmaster2 isIntegrallyClosed_stalk_of_smooth (Regular.lean:208), and the parent already uses it over F_q. Every dependency is on the unit's transitive route, so the three declared tool_uses are unnecessary; I record none as accepted. No SGA, no coefficient category or base-change morphism involved.; 1 file(s) fixed by the reviewer"
  }
 }

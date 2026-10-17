@@ -13,55 +13,179 @@
   "def-weil-pbc-etale-cohomology",
   "def-sc-divisor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For either curve $T=C,D$ and every $r\\geq1$, write $\\delta_{T,r}:\\operatorname{Pic}(T)\\to H^2(T,\\mu_{\\ell^r})$ for the Kummer boundary. By [lem-sc-second-kummer-divisors] this map is surjective. By [lem-sc-divisor-class-curve], every line-bundle class is the class of $\\mathcal O_T(E)$ for a divisor $E$. Since [def-sc-divisor] makes the divisor group free on closed points and the divisor-class map is additive, the elements $\\delta_{T,r}(\\mathcal O_T(P))$ generate $H^2(T,\\mu_{\\ell^r})$ as an abelian group. Thus two additive maps out of this group agree if they agree on these point classes.",
+   "uses": [
+    "lem-sc-second-kummer-divisors",
+    "lem-sc-divisor-class-curve",
+    "def-sc-divisor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proposition 14.2 and the divisor/Picard description used in its proof"
+   }
+  },
+  {
+   "text": "On each of the two small etale sites, the category of abelian sheaves is Grothendieck by [lem-weil-pbc-abelian-etale-sheaves-grothendieck], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Global sections is additive and left exact: the sectionwise kernel of a sheaf morphism is a sheaf (compatible sections glue in the source and remain in the kernel), and its global sections are the kernel of the map on global sections. Consequently [lem-weil-pbc-right-derived-universal-delta-functor], applied to global sections and the cohomology of [def-weil-pbc-etale-cohomology], says that a morphism $(a,b,c)$ of short exact sequences commutes with connecting maps: $H^{q+1}(a)\\delta=\\delta'H^q(c)$. These $\\delta$-functor connecting maps are the ones used everywhere below: by [lem-sc-p1-right-derived-triangle-connecting], under the canonical identification $R^q\\Gamma(F)\\cong H^q(R\\Gamma(T_{\\Et},F[0]))$, which is the cohomology of [def-weil-pbc-etale-cohomology], they are the homology connecting maps of the distinguished triangle $A[0]\\to B[0]\\to C[0]\\to A[0][1]$ of the short exact sequence after applying $R\\Gamma$. These are the connecting maps of [lem-weil-pbc-pullback-cohomology-long-exact-ladder] and the Kummer coboundaries of [lem-sc-second-kummer-divisors] and of the item's trace normalization. We will use precisely this coefficient naturality, in addition to the change-of-site naturality below.",
+   "uses": [
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-weil-pbc-etale-cohomology",
+    "lem-sc-p1-right-derived-triangle-connecting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 01FT, cohomology-sheaves: right derived global sections are a universal delta-functor; derived.tex, Tag 015B and Tag 05TE"
+   }
+  },
+  {
+   "text": "Put $d=\\ell^{n-m}$. Both Kummer sequences are short exact by [lem-sc-kummer-exact], since $\\ell$ is invertible in $k$. There is a morphism from the level-$n$ sequence to the level-$m$ sequence whose three nonzero vertical maps, in order, are\n$$\\mu_{\\ell^n}\\xrightarrow{z\\mapsto z^d}\\mu_{\\ell^m},\\qquad \\mathbf G_m\\xrightarrow{u\\mapsto u^d}\\mathbf G_m,\\qquad \\mathbf G_m\\xrightarrow{\\mathrm{id}}\\mathbf G_m.$$\nThe first square commutes by inclusion, and the second because $(u^d)^{\\ell^m}=u^{\\ell^n}$. Connecting-map naturality of [lem-weil-pbc-right-derived-universal-delta-functor], as applied in Step 2, gives\n$$s_{n,m}\\delta_{C,n}(L)=\\delta_{C,m}(L)$$\nfor every $L\\in\\operatorname{Pic}(C)$, using the Kummer/Picard boundary of [lem-sc-second-kummer-divisors]. In particular there is no extra factor $d$ on the line-bundle input: that input belongs to the final, identity-mapped copy of $\\mathbf G_m$.",
+   "uses": [
+    "lem-sc-kummer-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-sc-second-kummer-divisors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proposition 14.2: Kummer description of H2; coefficient ladder written explicitly here, with Stacks 01FT for boundary naturality"
+   }
+  },
+  {
+   "text": "Let $\\rho:A_n\\to A_m$ be reduction. On a point generator from Step 1, Step 3 and the given degree normalization give\n$$\\operatorname{tr}_{C,m}(s_{n,m}\\delta_{C,n}(\\mathcal O_C(P)))=1=\\rho(\\operatorname{tr}_{C,n}(\\delta_{C,n}(\\mathcal O_C(P)))).$$\nBoth sides are additive, so generation proves $\\operatorname{tr}_{C,m}\\circ s_{n,m}=\\rho\\circ\\operatorname{tr}_{C,n}$ on all of $H^2(C,\\mu_{\\ell^n})$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proposition 14.5 and Remark 14.6: trace normalization on point classes"
+   }
+  },
+  {
+   "text": "The evaluation square for $A_n,\\mu_{\\ell^n},\\mu_{\\ell^n}$ and $A_m,\\mu_{\\ell^m},\\mu_{\\ell^m}$ commutes. Indeed for an integer representative $a$ and $z^{\\ell^n}=1$, $(z^a)^d=(z^d)^a=(z^d)^{a\\bmod\\ell^m}$, since $z^d$ has order dividing $\\ell^m$. Apply [lem-wf-etale-cup-functoriality] with $f=\\mathrm{id}_C$, coefficient maps $(\\rho,s_{n,m},s_{n,m})$ and these evaluations. For $p=i$, $q=2-i$ this gives\n$$s_{n,m}(x\\smile y)=r_{n,m}x\\smile s_{n,m}y.$$\nAll these sheaves are abelian sheaves, and evaluation is the indicated bilinear pairing over $\\mathbf Z$.",
+   "uses": [
+    "lem-wf-etale-cup-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0H9A, lemma-base-change-cup-product; Tag 0FPJ, section-cup-product"
+   }
+  },
+  {
+   "text": "For the scheme isomorphism $f:D\\to C$, pullback of units gives $c_f:f^{-1}\\mathbf G_{m,C}\\to\\mathbf G_{m,D}$, restricting to the canonical map on $\\mu_{\\ell^n}$. These maps give a morphism from the inverse image of the Kummer sequence on $C$ to the Kummer sequence on $D$: inclusion commutes, and $c_f(u^{\\ell^n})=c_f(u)^{\\ell^n}$. The sequences are short exact by [lem-sc-kummer-exact]. Apply [lem-weil-pbc-pullback-cohomology-long-exact-ladder] first to the inverse-image sequence and then coefficient naturality of [lem-weil-pbc-right-derived-universal-delta-functor] to this comparison morphism. The result is $f^*\\delta_{C,n}(L)=\\delta_{D,n}(f^*L)$, where [lem-sc-h1-gm-pic-pullback] identifies the induced map on $H^1(\\mathbf G_m)$ with pullback of invertible modules. These statements apply to arbitrary scheme morphisms between the curves; no $k$-linearity of $f$ is required.",
+   "uses": [
+    "lem-sc-kummer-exact",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-sc-h1-gm-pic-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 01FT, delta-functor naturality; etale-cohomology.tex Section 04I0, functoriality; Tag 040E for the Picard identification"
+   }
+  },
+  {
+   "text": "If $P$ is a closed point of $C$, the isomorphism $f$ has a unique closed inverse image $Q$. Its isomorphism of local rings preserves normalized valuations: for a nonzero regular element $h$ and $j\\geq0$, the condition $v_P(h)\\geq j$ is membership in the $j$th power of the maximal ideal. The local-ring isomorphism preserves these powers, hence valuations on regular elements and then on rational functions by taking quotients. Applying the valuation-bounded description of $\\mathcal O(E)$ in [def-sc-divisor] on corresponding opens therefore gives $f^*\\mathcal O_C(P)\\cong\\mathcal O_D(Q)$. Step 6 sends the Kummer point class at $P$ to the Kummer point class at $Q$. Both have trace $1$ by hypothesis. Additivity and the generation proved in Step 1 give $\\operatorname{tr}_{D,n}\\circ f^*=\\operatorname{tr}_{C,n}$. This argument uses the scheme isomorphism and point classes, so it also covers a nontrivial automorphism of the base field.",
+   "uses": [
+    "def-sc-divisor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Remark 14.6: point class and trace; divisor pullback under a scheme isomorphism checked directly from the valuation definition"
+   }
+  },
+  {
+   "text": "The canonical pullback identifications of the constant sheaf and roots-of-unity sheaf preserve evaluation: pullback of units respects $z\\mapsto z^a$ for every integer $a$, and pullback of a constant integer residue class is that same residue class. Apply [lem-wf-etale-cup-functoriality] with the three canonical coefficient maps along $f$. It gives\n$$f^*(x\\smile y)=f^*x\\smile f^*y.$$\nThe lemma is about small etale sites and arbitrary scheme morphisms; the coefficient square just checked therefore also applies to this semilinear scheme isomorphism.",
+   "uses": [
+    "lem-wf-etale-cup-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0H9A, lemma-base-change-cup-product; Tag 0FPJ, section-cup-product"
+   }
+  },
+  {
+   "text": "For $i=0,1,2$, the degrees $i$ and $2-i$ are nonnegative. Apply $\\operatorname{tr}_{C,m}$ to the cup equality of Step 5 and use Step 4 to obtain $P^i_{C,m}(r_{n,m}x,s_{n,m}y)=\\rho(P^i_{C,n}(x,y))$. Apply $\\operatorname{tr}_{D,n}$ to Step 8 and use Step 7 to obtain $P^i_{D,n}(f^*x,f^*y)=P^i_{C,n}(x,y)$. These are the two asserted equalities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorem 14.7, Example 14.8 and section 22: the trace-cup pairing; assembly of the preceding naturality identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-second-kummer-divisors",
+  "lem-sc-divisor-class-curve",
+  "def-sc-divisor",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-weil-pbc-etale-cohomology",
+  "lem-sc-p1-right-derived-triangle-connecting",
+  "lem-sc-kummer-exact",
+  "lem-wf-etale-cup-functoriality",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-sc-h1-gm-pic-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Propositions 14.2 and 14.5, Remark 14.6, Theorem 14.7 and Example 14.8; section 22, Cup-products, p.135. Explicit Kummer and trace-generation argument, with Stacks 0H9A/0FPJ for cup naturality and 01FT for connecting maps."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
    "query": "Poincare|Poincaré|etale.*trace|trace.*etale|cupProduct",
-   "results": "Read returned hits: Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean, Mathlib/Geometry/Manifold/PoincareConjecture.lean, Mathlib/Geometry/Manifold/PoincareConjecture.lean. These concern other objects, not the stated etale-cohomology comparison.",
+   "results": "Read returned hits: Mathlib/Algebra/Lie/Free.lean, Mathlib/Algebra/Lie/SerreConstruction.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean. The hits concern unrelated Poincare terminology, field traces, cotangent modules, roots of unity, or scheme morphisms; none states this ordinary etale trace-cup comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "\"trace\", \"cohomology\"",
-   "results": "No hits.",
+   "results": "No hits. The hits concern unrelated Poincare terminology, field traces, cotangent modules, roots of unity, or scheme morphisms; none states this ordinary etale trace-cup comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "Etale cup product and the degree normalized trace of a smooth proper curve commute with coefficient reduction and semilinear isomorphisms",
-   "results": "Read returned hits: Algebra.H1Cotangent.map, Algebra.Generators.H1Cotangent.δ_map, Algebra.normalizedTrace, Algebra.Generators.H1Cotangent.δ, Algebra.normalizedTrace_trans, Algebra.normalizedTrace_algebraMap, Algebra.Generators.H1Cotangent.δ_eq, Algebra.normalizedTrace_trans_apply. These concern other objects, not the stated etale-cohomology comparison.",
+   "results": "Read returned hits: Algebra.H1Cotangent.map, Algebra.Generators.H1Cotangent.δ_map, Algebra.normalizedTrace, Algebra.Generators.H1Cotangent.δ, Algebra.normalizedTrace_trans, Algebra.normalizedTrace_algebraMap, Algebra.Generators.H1Cotangent.δ_eq, Algebra.normalizedTrace_trans_apply. The hits concern unrelated Poincare terminology, field traces, cotangent modules, roots of unity, or scheme morphisms; none states this ordinary etale trace-cup comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "etale.*(trace|cup)|((trace|cup).*etale)|PoincareDuality",
-   "results": "No hits. Subdirectory: Mathlib/AlgebraicGeometry",
+   "results": "No hits. Subdirectory: Mathlib/AlgebraicGeometry. The hits concern unrelated Poincare terminology, field traces, cotangent modules, roots of unity, or scheme morphisms; none states this ordinary etale trace-cup comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Etale cohomology cup products and trace commute with reduction of roots of unity and semilinear isomorphisms of smooth proper curves",
-   "results": "Read returned hits: restrictRootsOfUnity_coe_apply, AlgebraicGeometry.IsEtale, MulEquiv.restrictRootsOfUnity_coe_apply, Algebra.FormallyEtale.of_unramified_and_smooth, RingHom.Etale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, MulEquiv.restrictRootsOfUnity, RingHom.Etale.respectsIso. These concern other objects, not the stated etale-cohomology comparison.",
+   "results": "Read returned hits: restrictRootsOfUnity_coe_apply, AlgebraicGeometry.IsEtale, MulEquiv.restrictRootsOfUnity_coe_apply, Algebra.FormallyEtale.of_unramified_and_smooth, RingHom.Etale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, MulEquiv.restrictRootsOfUnity, RingHom.Etale.respectsIso. The hits concern unrelated Poincare terminology, field traces, cotangent modules, roots of unity, or scheme morphisms; none states this ordinary etale trace-cup comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "Naturality of trace cup product pairings on etale cohomology of proper curves under maps of finite coefficients and automorphisms of the ground field",
-   "results": "Read returned hits: galRestrict'_comp, galLift_galRestrict', galRestrict'_galLift, Algebra.Extension.H1Cotangent.map_comp, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Algebra.Generators.H1Cotangent.δ_map, groupCohomology.Hilbert90.aux, Algebra.normalizedTrace_trans. These concern other objects, not the stated etale-cohomology comparison.",
+   "results": "Read returned hits: galRestrict'_comp, galLift_galRestrict', galRestrict'_galLift, Algebra.Extension.H1Cotangent.map_comp, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Algebra.Generators.H1Cotangent.δ_map, groupCohomology.Hilbert90.aux, Algebra.normalizedTrace_trans. The hits concern unrelated Poincare terminology, field traces, cotangent modules, roots of unity, or scheme morphisms; none states this ordinary etale trace-cup comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-curve-h1-dual-tate-module",
@@ -78,5 +202,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-curve-trace-cup-naturality",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Split both compatibilities into point generation through the existing divisor/Picard and Kummer statements, explicit coefficient and pullback Kummer ladders, trace comparison on point generators, cup naturality, and assembly. Created one general small-etale bilinear cup-naturality statement; no trace clause was moved to a new node. Read the cited statements, sources, current blueprint ancestor, Lean candidates and logged Mathlib hits.",
+  "blueprint": "The first paragraph of the current main-20261015 proof of lem-wf-curve-h1-dual-tate-module, before equations (4.2)-(4.3), requires reduction compatibility and semilinear/Galois equivariance of the finite-level cup-trace adjoints. Steps 1-5 give the former; Steps 6-8 give the latter; Step 9 assembles the pairing formulas.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-second-kummer-divisors",
+    "why": "Kummer H2 is Picard modulo the exponent, so point classes generate after the divisor-class theorem; the rank-one unit has no replacement for this ordinary curve-cohomology fact."
+   },
+   {
+    "node": "lem-sc-divisor-class-curve",
+    "why": "The divisor-class/Picard isomorphism supplies surjectivity from the free group on closed points, needed to determine trace on all H2 classes."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "why": "The ordinary small-etale abelian-sheaf category is Grothendieck; this verifies the enough-injectives hypothesis in the generic connecting-map argument."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Converts the cited small-etale Grothendieck assertion into the enough-injectives hypothesis for derived global sections."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Naturality for a morphism of short exact sequences gives the explicitly displayed coefficient Kummer ladder and the units-comparison ladder; no rank-one unit node supplies arbitrary coefficient boundary naturality."
+   },
+   {
+    "node": "lem-sc-kummer-exact",
+    "why": "Exactness of the two finite Kummer sequences is the input to their cohomological connecting maps."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Change-of-site pullback commutes with the Kummer connecting map before the units comparison; it applies to the semilinear scheme isomorphism as an arbitrary scheme morphism."
+   },
+   {
+    "node": "lem-sc-h1-gm-pic-pullback",
+    "why": "Identifies the H1(Gm) map in the Kummer pullback ladder with geometric pullback of line bundles, even between different algebraically closed base fields."
+   },
+   {
+    "node": "lem-sc-p1-right-derived-triangle-connecting",
+    "why": "Identifies the delta-functor connecting maps (whose coefficient naturality Step 2 uses) with the triangle connecting maps of the K-injective etale cohomology, the pullback ladder and the Kummer coboundary; no rank-one unit node states this identification. Added by the Q15 maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-second-kummer-divisors",
+  "lem-sc-divisor-class-curve",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sc-kummer-exact",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-sc-h1-gm-pic-pullback",
+  "lem-sc-p1-right-derived-triangle-connecting"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-9d68c4166",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-9d68c4166 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, Stacks 0FPJ/0H9A (sites-cohomology.tex l.8205 and l.8529) and Milne LEC §14 (Prop 14.5, Rem 14.6, Thm 14.7, Ex 14.8). The item statement is unchanged and true. I checked steps 1-9 against the statements they cite: the Kummer reduction ladder (power on mu and on the middle Gm, identity on the last Gm), the evaluation square (z^a)^d=(z^d)^{a mod l^m}, the pullback ladder through the units comparison c_f, and f^*O(P)=O(Q) through valuations. lem-sc-h1-gm-pic-pullback allows different base fields, so the semilinear isomorphism is covered. Batch-5 check: lem-sc-second-kummer-divisors (H^2(C,mu_n)=Pic/n) reaches only two sec-poincare-duality nodes, the general definition def-pod-ring-scalar-extension and the Mathlib leaf lem-pod-separated-finite-type-base-change. Neither is a step of Poincare duality or the trace formula, neither assumption gives H^2(C,mu_n)=Pic/n, and the node was already in the batch-5 closure without this delivery (via prop-duality-reciprocity <- def-weil-poincare-trace-cup <- def-weil-exceptional-inverse-image <- thm-asd-smooth-tensor <- lem-asd-ordinary-finite-p1-adjunction). The citation stays. New node lem-wf-etale-cup-functoriality is unsplit and statement-only. It is 0H9A plus coefficient naturality, I checked it at p=q=0, f=id, zero sheaves and an empty Y, it duplicates no existing node, and it does not restate the item. Two fixes, both in fixes/: (1) C4/E5 in Step 2: the delta-functor node gives naturality only for its own connecting maps. I added lem-sc-p1-right-derived-triangle-connecting, which identifies those with the triangle connecting maps used by def-weil-pbc-etale-cohomology, the pullback ladder and the Kummer coboundary, and declared it as a tool use. (2) B3 in the new node: the derived tensor had no definition node, so I added def-kun-derived-tensor (Lambda=Z). I accept all eight declared tool uses. There are no cycles, no SGA citation and no weakened target.; 2 file(s) fixed by the reviewer"
  }
 }

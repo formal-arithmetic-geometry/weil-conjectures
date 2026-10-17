@@ -13,9 +13,131 @@
   "lem-pur-derived-change-of-rings",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the small étale site, in a universe containing its objects and module sheaves; write $A,B$ also for the constant ring sheaves. By [lem-pur-derived-change-of-rings], $F=-\\otimes_A^L B$ exists on the ordinary unbounded derived categories. Give it the counit-compatible shift $\\sigma$ of [lem-sbc-derived-scalar-extension-counit-shift]; that result makes $(F,\\sigma)$ exact and identifies $\\sigma$ with the degreewise identity on termwise scalar extension of K-flat models. The identity geometric morphism with ring map $A\\to B$ satisfies the hypotheses of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Its tensor comparison, inverted, gives $\\mu_{U,V}:FU\\otimes_B^L FV\\xrightarrow{\\sim}F(U\\otimes_A^L V)$. On flat-term K-flat models its formula is $(x\\otimes b)\\otimes(y\\otimes c)\\mapsto(x\\otimes y)\\otimes bc$. Scalar coefficients have degree zero; this formula preserves both tensor degrees and every sign in the total differential. Hence it commutes with the tensor shift maps, including the simultaneous-shift cancellation used in Step 4. These statements concern derived scalar extension and require no flatness of $B$ over $A$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-sbc-derived-scalar-extension-counit-shift",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product); derived.tex Tags 05SU and 05SE for the counit-compatible exact shift"
+   }
+  },
+  {
+   "text": "For either coefficient sheaf $R=A,B$, the internal-Hom calculus [lem-weil-pbc-ringed-internal-hom-exact-restriction] and [lem-pur-rhom-global-sections] give natural bijections\n$$\\operatorname{Hom}(T,H_R(K,N))=H^0 H_R(T,H_R(K,N))=H^0 H_R(T\\otimes_R^L K,N)=\\operatorname{Hom}(T\\otimes_R^L K,N).$$\nHere $H^0$ means global hypercohomology. Their representative normalization is the chain currying of [lem-sc-derived-hom-tensor-total]: if $P$ represents $K$, $I$ is K-injective representing $N$, and $h:T\\to\\mathcal Hom^\\bullet(P,I)$ with $T,P$ flat-term K-flat, uncurrying is $t\\otimes p\\mapsto h(t)(p)$. The Hom into $I$ computes the specified derived Hom [def-pur-derived-internal-hom]. This fixes evaluation $e_{R,K,N}$ as the transpose of its identity. With $H=H_A(K,M)$, define $v_K=v_{K,M}$ by\n$$e_{B,FK,FM}(v_K\\otimes1)=F(e_{A,K,M})\\mu_{H,K}.$$\nThis is exactly the map in the item. The Hom calculus also says $H_R(-,N)$ is contravariantly exact, with its signed shift comparisons. Thus $\\Phi(K)=FH_A(K,M)$ and $\\Psi(K)=H_B(FK,FM)$ are additive contravariant exact functors, using the exact $F$ of Step 1.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "lem-sc-derived-hom-tensor-total",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JA (lemma-section-RHom-over-U), 08J9 (lemma-internal-hom), 08JC (lemma-RHom-triangulated); chain currying is lemma-compose"
+   }
+  },
+  {
+   "text": "Let $f:K'\\to K$. The two maps $v_{K'}F(H_A(f,1))$ and $H_B(Ff,1)v_K$ from $FH_A(K,M)$ to $H_B(FK',FM)$ have the same transpose: after $\\mu$, both are $F(e_{A,K,M}\\circ(1\\otimes f))$. This follows by inserting the defining evaluation identity from Step 2 and the naturality of $\\mu$. The bijection of Step 2 therefore makes these maps equal. Thus $v:\\Phi\\to\\Psi$ is natural on every derived morphism in $K$. The same argument for $g:M\\to M'$ gives transpose $F(g\\circ e_{A,K,M})$ on both sides and proves naturality in $M$ as well. This uses adjunction bijections in the full derived categories, not representatives of arbitrary derived arrows by chain maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 1 (specified evaluation transpose) and final paragraph (uniqueness of transpose) expanded"
+   }
+  },
+  {
+   "text": "Here is the evaluation shift sign, for $R=A$ or $B$. Choose a flat-term K-flat $P$ representing $K$ by [lem-pc-kflat-resolution], and a K-injective $I$ representing $N$ by [prop-pur-kinjective-resolutions-exist]. Put $D=\\mathcal Hom^\\bullet(P,I)$, representing $H_R(K,N)$ by [def-pur-derived-internal-hom]. Substitution in $d(f)=d_I f-(-1)^a f d_P$ [def-pur-hom-complex] shows that\n$$s_R:H_R(K[1],N)\\longrightarrow H_R(K,N)[-1]$$\nis represented by $f\\mapsto(-1)^a f$ in Hom degree $a$ (with source indices reindexed). The coefficients of the postcomposition and precomposition terms are respectively $(-1)^{a+1}$ and $-1$ on both sides of the chain-map equation. Define the natural cancellation $\\tau_{U,V}:U[-1]\\otimes^L V[1]\\to U\\otimes^L V$ by $u\\otimes v\\mapsto(-1)^a u\\otimes v$ when $u$ has degree $a$ in $U[-1]$. The total tensor differential [def-pc-tensor-complex-sheaves] verifies this chain isomorphism: both sides give coefficients $(-1)^a$ on $d_Uu\\otimes v$ and $-1$ on $u\\otimes d_Vv$. To check evaluation, resolve $D$ by a flat-term K-flat $T\\xrightarrow{h}D$. The model $T[-1]\\to\\mathcal Hom^\\bullet(P[1],I)$ is $s_R^{-1}h[-1]$. Its evaluation on $t\\otimes p$ has sign $(-1)^a$, exactly the sign from $\\tau$ followed by the original evaluation. Using the normalized currying of Step 2 gives\n$$e_{R,K[1],N}=e_{R,K,N}\\,\\tau_{H_R(K,N),K}(s_R\\otimes1).$$\nThis is an equality of maps in $D(R)$; the tensor models descend by [lem-weil-pbc-site-derived-tensor-descent].",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), Hom differential; Tags 08J9 and 08JC, explicit evaluation/shift calculation; Tag 06YL (flat resolutions)"
+   }
+  },
+  {
+   "text": "Write $s_A=s_{A,K,M}$, and give $\\Phi$ the shift comparison $\\chi_\\Phi:\\Phi(K[1])\\to\\Phi(K)[-1]$ obtained by $F(s_A)$ then $\\sigma$ for shift $-1$. Give $\\Psi$ the comparison $\\chi_\\Psi:\\Psi(K[1])\\to\\Psi(K)[-1]$ obtained by precomposition with $\\sigma_K^{-1}:FK[1]\\to F(K[1])$ and then $s_{B,FK,FM}$. We prove\n$$\\chi_\\Psi v_{K[1]}=v_K[-1]\\chi_\\Phi.$$\nPut $T=\\Phi(K[1])$, $H=H_A(K,M)$. Compose either proposed map $T\\to H_B(FK,FM)[-1]$ with $s_B^{-1}$ and transpose; injectivity of Step 2 reduces equality to maps $T\\otimes_B^L FK[1]\\to FM$. For the left side its transpose is\n$$F(e_{A,K[1],M})\\mu_{H_A(K[1],M),K[1]}(1\\otimes\\sigma_K^{-1}).$$\nFor the right side Step 4, naturality of $\\tau$, and the defining equation for $v_K$ give\n$$F(e_{A,K,M})\\mu_{H,K}\\tau_{FH,FK}(\\chi_\\Phi\\otimes1).$$\nThese expressions coincide: substitute Step 4's equality for $e_{A,K[1],M}$ into the first, and use the degree-preserving tensor/shift equality proved in Step 1. Thus the shift square commutes for this actual comparison. Iterating it gives positive shifts; applying its inverse at $K[-1]$ gives negative shifts, and induction gives all integers. The canonical iterated shift identifications therefore preserve this equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC, the evaluation-normalized shift square expanded by tensor–Hom transposition"
+   }
+  },
+  {
+   "text": "For a distinguished triangle $K_1\\xrightarrow u K_2\\xrightarrow v K_3\\xrightarrow w K_1[1]$, Step 2 gives the two reversed distinguished triangles. Naturality from Step 3 supplies their squares for $u$ and $v$. To see the last square explicitly, put $a=w[-1]:K_3[-1]\\to K_1$. Write $\\chi_{\\Phi,-1}$ and $\\chi_{\\Psi,-1}$ for the Step-5 comparisons on $K_3[-1]$. The last arrows are $d_\\Phi=\\epsilon\\chi_{\\Phi,-1}\\Phi(a)$ and $d_\\Psi=\\epsilon\\chi_{\\Psi,-1}\\Psi(a)$, where $\\epsilon$ is the common reversal sign fixed by the contravariant distinguished-triangle convention. Additivity, naturality for $a$, and the shift square give\n$$d_\\Psi v_{K_1}=\\epsilon\\chi_{\\Psi,-1}v_{K_3[-1]}\\Phi(a)=v_{K_3}[1]\\,\\epsilon\\chi_{\\Phi,-1}\\Phi(a)=v_{K_3}[1]d_\\Phi.$$\nThus all three squares, with their specified signs, commute. This is the required morphism of reversed distinguished triangles in the sense of [def-weil-triangulated-category]. Both exact functors here use the same Hom/shift convention; the equation retains its reversal sign rather than discarding it.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated); derived.tex Tag 0145, last square in a triangle morphism"
+   }
+  },
+  {
+   "text": "Fix $M$ and let $\\mathcal S_M=\\{K:v_K\\text{ is invertible}\\}$. Exact additive functors take zero to zero, so $v_0$ is invertible. If $f:K\\xrightarrow{\\sim}L$, naturality says $\\Psi(f)v_L=v_K\\Phi(f)$; both functorial images of $f$ are invertible, so membership in $\\mathcal S_M$ is invariant under isomorphisms. Step 5 conjugates $v_{K[n]}$ to $v_K[-n]$ by invertible shift comparisons. Hence $K\\in\\mathcal S_M$ if and only if $K[n]\\in\\mathcal S_M$, for all $n\\in\\mathbf Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 2, localization reduction: zero, isomorphism and shift closure expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-triangle-morphism-iso] to the morphism of distinguished triangles of Step 6. If two of $v_{K_3},v_{K_2},v_{K_1}$ are invertible, so is the third. Consequently any two vertices of a distinguished triangle in $\\mathcal S_M$ force the third into $\\mathcal S_M$. In particular the cone of every morphism between its objects lies in it. No finite-Tor, constructibility or boundedness condition has been used.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A, lemma-third-isomorphism-triangle"
+   }
+  },
+  {
+   "text": "Let $i:K\\to L$ and $r:L\\to K$ satisfy $ri=1_K$, and suppose $v_L$ is invertible. Define\n$$b_K=\\Phi(i)\\,v_L^{-1}\\Psi(r):\\Psi(K)\\to\\Phi(K).$$\nContravariant naturality gives $\\Psi(r)v_K=v_L\\Phi(r)$ and $v_K\\Phi(i)=\\Psi(i)v_L$. Thus\n$$b_Kv_K=\\Phi(i)\\Phi(r)=\\Phi(ri)=1,\\qquad v_Kb_K=\\Psi(i)\\Psi(r)=\\Psi(ri)=1.$$\nSo the locus is closed under retracts and hence under direct summands. Additivity and naturality for biproduct inclusions and projections identify $v_{K\\oplus L}$ with the diagonal matrix $(v_K,v_L)$, with inverse the corresponding diagonal inverses; hence it is also closed under finite sums. Together with Steps 7 and 8 these are exactly the stated thick-subcategory closure properties. Only existing retract maps are used, so no idempotent-completeness assumption is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof paragraph 2, localization reduction: explicit inverse on retracts and finite biproducts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-weil-triangulated-category",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-rhom-global-sections",
+  "lem-sbc-derived-scalar-extension-counit-shift",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof paragraph 2: expansion of the sentence “Exactness in the first argument now proves it for K”, using Stacks 06YY, 07A4, 08JA, 08J9, 08JC and 014A; signed shift/evaluation calculation supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +166,45 @@
    "results": "Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean; Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean. The seven returned lines are tensorHom substrings and combined-products helpers, not derived scalar Hom triangle compatibility.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rhom.*(shift|cone)|internalHom.*[Cc]ommShift|[Cc]hange.*[Hh]om.*triang",
+   "results": "13 hits: Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean; Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean. Read the returned kinds: abstract CommShift/derived exact-functor or underived sheaf/condensed results, not the evaluation-defined derived scalar Hom comparison and its thick locus.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison from derived scalar extension of internal Hom to internal Hom of derived scalar extensions commutes with shifts and triangles",
+   "results": "8 hits: CategoryTheory.Adjunction.IsTriangulated.commShift; CochainComplex.HomComplex.Cochain.rightShift_smul; CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism; CochainComplex.HomComplex.Cochain.rightUnshift_smul; CochainComplex.HomComplex.Cochain.shift_smul; HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CategoryTheory.Abelian.Ext.homLinearEquiv; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt. Read the returned kinds: abstract CommShift/derived exact-functor or underived sheaf/condensed results, not the evaluation-defined derived scalar Hom comparison and its thick locus.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"CommShift\"",
+   "results": "12 hits: CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.NatTrans.CommShiftCore; CategoryTheory.NatTrans.CommShiftCore.zero; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor. Read the returned kinds: abstract CommShift/derived exact-functor or underived sheaf/condensed results, not the evaluation-defined derived scalar Hom comparison and its thick locus.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules the derived extension of scalars internal Hom comparison defined by evaluation commutes with shifts and distinguished triangles, and its isomorphism locus is thick",
+   "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CategoryTheory.Sheaf.H; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; PresheafOfModules.homEquivOfIsLocallyBijective; PresheafOfModules.sheafificationAdjunction_homEquiv_apply; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; PresheafOfModules.homEquivOfIsLocallyBijective_apply; PresheafOfModules.sheafifyHomEquiv'. Read the returned kinds: abstract CommShift/derived exact-functor or underived sheaf/condensed results, not the evaluation-defined derived scalar Hom comparison and its thick locus.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal triangulated derived extension of scalars functor induces a suspension compatible natural comparison on derived internal Hom by transposing evaluation",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Functor.mapDerivedCategorySingleFunctor. Read the returned kinds: abstract CommShift/derived exact-functor or underived sheaf/condensed results, not the evaluation-defined derived scalar Hom comparison and its thick locus.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-coef-finite-hom",
@@ -64,5 +221,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-etale-hom-thick-locus",
+  "worker": "stage1",
+  "summary": "Retained the statement and ancestry. Proved canonical derived scalar/tensor compatibility, derived tensor–Hom transposition, naturality, the explicit Hom/tensor shift signs and the shift square for this comparison, then all triangle squares and thick closure including an explicit inverse on retracts. Reused existing nodes throughout; no new nodes. Added actual logged Mathlib searches and verbatim citations. No Lean writing or compilation.",
+  "blueprint": "Expands thm-coef-finite-hom proof paragraph 2, the localization reduction and the sentence “Exactness in the first argument now proves it for K”; this item makes precise the extracted returned step 3, including the evaluation-defined comparison and its connecting-map signs.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site derived tensor/Hom, resolution or shift-normalization tool for the evaluation-defined comparison; this unit has no competing construction of this foundational fact, and its localization route is unchanged."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site derived tensor/Hom, resolution or shift-normalization tool for the evaluation-defined comparison; this unit has no competing construction of this foundational fact, and its localization route is unchanged."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic ringed-site derived tensor/Hom, resolution or shift-normalization tool for the evaluation-defined comparison; this unit has no competing construction of this foundational fact, and its localization route is unchanged."
+   },
+   {
+    "node": "lem-sbc-derived-scalar-extension-counit-shift",
+    "why": "Generic ringed-site derived tensor/Hom, resolution or shift-normalization tool for the evaluation-defined comparison; this unit has no competing construction of this foundational fact, and its localization route is unchanged."
+   },
+   {
+    "node": "lem-sc-derived-hom-tensor-total",
+    "why": "Generic ringed-site derived tensor/Hom, resolution or shift-normalization tool for the evaluation-defined comparison; this unit has no competing construction of this foundational fact, and its localization route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site derived tensor/Hom, resolution or shift-normalization tool for the evaluation-defined comparison; this unit has no competing construction of this foundational fact, and its localization route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-site derived tensor/Hom, resolution or shift-normalization tool for the evaluation-defined comparison; this unit has no competing construction of this foundational fact, and its localization route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site derived tensor/Hom, resolution or shift-normalization tool for the evaluation-defined comparison; this unit has no competing construction of this foundational fact, and its localization route is unchanged."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site derived tensor/Hom, resolution or shift-normalization tool for the evaluation-defined comparison; this unit has no competing construction of this foundational fact, and its localization route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-rhom-global-sections",
+  "lem-sbc-derived-scalar-extension-counit-shift",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-c37fb119c",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-c37fb119c (reviewer sub-agent of L); spot-checked: I read the item, all 18 cited statements, parent thm-coef-finite-hom (step 3 uses this item), the unit and chapter, the blueprint thm-coef-finite-hom proof (master and main-20261015 match), and Stacks 0A90/0A8M (proof, sign rules) and 08JC. The statement is true, not weakened, and has no flatness or boundedness hypothesis. Test cases: zero objects, A=B, nonflat Z->Z/2 on a point. Step 2's unsigned currying matches Stacks 0A8M, and I checked by hand that it is a chain map. Step 4 signs, recomputed: f->(-1)^a f is a chain iso Hom(P[1],I)->Hom(P,I)[-1]; tau with sign (-1)^a is a chain map; e_{K[1]}=e_K tau(s x 1) holds because the total sign is (-1)^{2a}=1. Step 5's two transposes reduce to Step 1's model identity for mu, sigma and tau. Step 6 checks the connecting square with the common reversal sign. Steps 7-9 (shifts, 2-of-3 via 014A, explicit retract inverse) are correct. Step 1 takes the explicit model formula for mu from the Stacks 07A4 construction, which I accept as the meaning of 'canonical'. No new nodes. No duplicate: lem-sf-generating-class-determination assumes the shift compatibility this item proves, and the rational/restriction scalar-Hom nodes concern other functors. Accepted tool_uses: lem-pc-kflat-resolution, lem-sbc-derived-scalar-extension-counit-shift, lem-sc-derived-hom-tensor-total, lem-weil-pbc-ringed-internal-hom-exact-restriction, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-site-derived-tensor-descent. The three lem-pur/prop-pur declarations are on the route already (sk-def-sf-operations), so they are redundant but harmless. No fixes."
  }
 }
