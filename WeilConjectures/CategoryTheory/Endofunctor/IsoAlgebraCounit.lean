@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 
 /-!
@@ -31,6 +32,17 @@ variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
 `eL` and `eR` if `F (ε M)` is `ε (F M)` conjugated by `eR` and `R eL`. -/
 def CounitCompatible : Prop :=
   ∀ M : C, F.map (ε.app M) = eR.hom.app (L.obj M) ≫ R.map (eL.hom.app M) ≫ ε.app (F.obj M)
+
+/-- The counit of an adjunction `R ⊣ L` is compatible with the commutation isomorphisms as soon as
+`eL` is the mate of `eR⁻¹`. -/
+lemma counitCompatible_of_mateEquiv (adj : R ⊣ L)
+    (h : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eR.inv)).natTrans = eL.hom) :
+    CounitCompatible eL eR adj.counit := by
+  intro M
+  have hc := mateEquiv_counit adj adj (TwoSquare.mk _ _ _ _ eR.inv) M
+  rw [NatTrans.congr_app h] at hc
+  dsimp at hc
+  rw [hc, Iso.hom_inv_id_app_assoc]
 
 /-- The natural transformation `mapOfNatIso eL ⋙ mapOfNatIso eR ⟶ 𝟭` induced by a natural
 transformation `ε : L ⋙ R ⟶ 𝟭` compatible with the commutation isomorphisms. -/
