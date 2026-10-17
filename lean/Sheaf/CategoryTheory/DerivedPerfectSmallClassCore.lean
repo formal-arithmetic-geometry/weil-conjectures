@@ -3,7 +3,7 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 public import Mathlib.CategoryTheory.ObjectProperty.Small
-public import Mathlib.CategoryTheory.Presentable.Basic
+public import Sheaf.CategoryTheory.AlphaCompactObject
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.CategoryTheory.DerivedPerfectSmallClassCoreAlpha
 
@@ -34,11 +34,11 @@ theorem derived_exists_perfectSmallClass_core
       ObjectProperty.EssentiallySmall.{v} S ∧ S.IsClosedUnderIsomorphisms ∧
       S.IsTriangulated ∧ P ≤ S ∧ (∀ (I : Type v) (Y : I → DerivedCategory A),
         HasCardinalLT I α → (∀ i, S (Y i)) → S (∐ Y)) ∧
-      ∀ U, S U → IsCardinalPresentable U α := by
+      ∀ U, S U ↔ IsAlphaCompact U α := by
   obtain ⟨S, α, hα, hS, hSmall, hIso, hTri, hSum, hComp, hP⟩ :=
     derived_exists_alphaCompactClass_core P
   let _ : Fact α.IsRegular := hα
-  refine ⟨S, α, hα, hSmall, hIso, hTri, ?_, hSum, hComp⟩
+  refine ⟨S, α, hα, hSmall, hIso, hTri, ?_, hSum, hS⟩
   intro U hU
   exact (hS U).mpr (hP U hU)
 

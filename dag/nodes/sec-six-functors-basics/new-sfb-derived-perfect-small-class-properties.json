@@ -2,11 +2,11 @@
  "id": "new-sfb-derived-perfect-small-class-properties",
  "kind": "statement",
  "title": "Cardinal-smallness consequences for a perfect derived class",
- "statement": "If S in a Grothendieck derived category is essentially small, replete and triangulated, is closed under coproducts indexed by types of cardinality less than a regular cardinal alpha, and every object of S is alpha-presentable, then componentwise surjectivity on Hom from S survives every v-small coproduct and every map from an object of S to a coproduct of S-objects factors through a subcoproduct in S.",
+ "statement": "Let S be an essentially v-small replete triangulated class in D(A) [def-weil-abstract-derived-category] with coproducts [lem-grothendieck-derived-has-coproducts], closed under coproducts with fewer than regular alpha summands, and exactly the alpha-compact objects [def-sfb-alpha-compact-object]. Then S is perfect: componentwise surjectivity of Hom(U,f_i) for all U in S implies surjectivity of Hom(U,coproduct f_i). Every map from an object of S to a coproduct of objects of S factors through a subcoproduct which is still in S.",
  "stmt_deps": [
   "def-weil-abstract-derived-category",
   "lem-grothendieck-derived-has-coproducts",
-  "new-sfb-derived-perfect-small-class-core"
+  "def-sfb-alpha-compact-object"
  ],
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
@@ -14,36 +14,29 @@
  },
  "proof": [
   {
-   "text": "Factor a map from an alpha-presentable object through a finite subcoproduct of the target family, using the finite-support factorization lemma.",
+   "text": "Transport the canonical G4 factorization across the equality characterizing S; lift each component by the assumed surjectivity and assemble its coproduct. This is the proved G4-implies-perfect API.",
    "uses": [
-    "new-sfb-derived-perfect-small-class-factorization"
+    "lem-sfb-alpha-compact-object-api"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For a finite subcoproduct, lift each component through the given componentwise surjections and reassemble the lifts by the finite biproduct lemma; transport the lift along the subcoproduct inclusions.",
+   "text": "Apply alpha-smallness to obtain a support of size less than alpha. Closure of S under such coproducts puts the support coproduct in S; its inclusion gives the displayed factorization.",
    "uses": [
-    "new-sfb-derived-perfect-small-class-finite-lifting"
+    "lem-sfb-alpha-compact-object-api",
+    "lem-grothendieck-derived-has-coproducts"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the factorization lemma to a map into a coproduct of S-objects and use closure of S under subcoproducts.",
-   "uses": [
-    "new-sfb-derived-perfect-small-class-factorization"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-grothendieck-derived-has-coproducts",
-  "new-sfb-derived-perfect-small-class-factorization",
-  "new-sfb-derived-perfect-small-class-finite-lifting"
+  "lem-sfb-alpha-compact-object-api",
+  "lem-grothendieck-derived-has-coproducts"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
-  "place": "Formal cardinal-smallness consequences, reduced to finite-support and finite-biproduct lemmas."
+  "place": "Source-correct alpha-compactness, Krause (2001) G3/G4, Lemmas 4--5; Neeman Theorem 0.2."
  },
  "mathlib_searches": [
   {
@@ -107,7 +100,7 @@
   "module": "Sheaf.CategoryTheory.DerivedPerfectSmallClassProperties",
   "file": "lean/Sheaf/CategoryTheory/DerivedPerfectSmallClassProperties.lean",
   "declaration": "CategoryTheory.derived_perfectSmallClass_properties",
-  "statement": "theorem derived_perfectSmallClass_properties\n    {A : Type u} [Category.{v} A] [Abelian A]\n    [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A]\n    (S : ObjectProperty (DerivedCategory A)) (α : Cardinal.{v}) [Fact α.IsRegular]\n    [ObjectProperty.EssentiallySmall.{v} S]\n    [S.IsClosedUnderIsomorphisms] [S.IsTriangulated]\n    (hSsum : ∀ (I : Type v) (Y : I → DerivedCategory A), HasCardinalLT I α →\n      (∀ i, S (Y i)) → S (∐ Y))\n    (hcompact : ∀ U, S U → IsCardinalPresentable U α) :\n    (∀ (I : Type v) (X Y : I → DerivedCategory A) (f : ∀ i, X i ⟶ Y i),\n      (∀ i U, S U → Function.Surjective (fun g : U ⟶ X i ↦ g ≫ f i)) →\n      ∀ U, S U → Function.Surjective\n        (fun g : U ⟶ ∐ X ↦ g ≫ Limits.Sigma.map f)) ∧\n    (∀ (I : Type v) (Y : I → DerivedCategory A), (∀ i, S (Y i)) →\n      ∀ (U : DerivedCategory A), S U → ∀ f : U ⟶ ∐ Y,\n      ∃ (J : Type v) (a : J → I), S (∐ fun j ↦ Y (a j)) ∧\n        ∃ g : U ⟶ ∐ fun j ↦ Y (a j),\n          g ≫ Sigma.desc (fun j ↦ Sigma.ι Y (a j)) = f)",
+  "statement": "theorem derived_perfectSmallClass_properties {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] (S : ObjectProperty (DerivedCategory A)) (α : Cardinal.{v}) [Fact α.IsRegular] [ObjectProperty.EssentiallySmall.{v} S] [S.IsClosedUnderIsomorphisms] [S.IsTriangulated] (hSsum : ∀ (I : Type v) (Y : I → DerivedCategory A), HasCardinalLT I α → (∀ i, S (Y i)) → S (∐ Y)) (hcompact : ∀ U, S U ↔ IsAlphaCompact U α) : (∀ (I : Type v) (X Y : I → DerivedCategory A) (f : ∀ i, X i ⟶ Y i), (∀ i U, S U → Function.Surjective (fun g : U ⟶ X i ↦ g ≫ f i)) → ∀ U, S U → Function.Surjective (fun g : U ⟶ ∐ X ↦ g ≫ Limits.Sigma.map f)) ∧ (∀ (I : Type v) (Y : I → DerivedCategory A), (∀ i, S (Y i)) → ∀ (U : DerivedCategory A), S U → ∀ f : U ⟶ ∐ Y, ∃ (J : Type v) (a : J → I), S (∐ fun j ↦ Y (a j)) ∧ ∃ g : U ⟶ ∐ fun j ↦ Y (a j), g ≫ Sigma.desc (fun j ↦ Sigma.ι Y (a j)) = f)",
   "branch": "sheaf-dag",
   "by": "A2",
   "date": "2026-10-18"
@@ -125,11 +118,61 @@
  "reviewed_proof": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
+  "reviewer": "C-de4e2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261017T185548-L-2338215",
+  "landing": "20261017T210422-L-1009146",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Delivered statements of derived_exists_alphaCompactClass_core / _perfectSmallClass_core / _perfectSmallClass_properties and the new Krause IsAlphaCompact API against their nodes, change records and Krause 2001 G3/G4, Lemmas 4-5 / Neeman Thm 0.2; all 9 modules plus the unchanged importer DerivedPerfectSmallClass compiled; axioms: sorryAx only through the two new sorry statements"
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "A2 stage 2",
+  "old_statement": "If S in a Grothendieck derived category is essentially small, replete and triangulated, is closed under coproducts indexed by types of cardinality less than a regular cardinal alpha, and every object of S is alpha-presentable, then componentwise surjectivity on Hom from S survives every v-small coproduct and every map from an object of S to a coproduct of S-objects factors through a subcoproduct in S.",
+  "what": "The source defines alpha-compactness by alpha-smallness and coproduct factorization G4, not ordinary IsCardinalPresentable in the triangulated category. The old ordinary-presentable theorem is not established by this repair; replace that erroneous interface by the actual source notion, with all consumers adapted in the same delivery. This restores the source proof without weakening the unchanged final perfect-class theorem. The old proof additionally depended on a false finite-support theorem; use G4 for perfectness and true alpha-small support for the second clause.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+   "place": "Krause (2001) pages 121--125, alpha-small objects and maximal G4 class; Localization theory 6.3 and 6.10.2 distinguish this from presentability in the abelianization."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-derived-perfect-small-class",
+    "holds": true,
+    "note": "The downstream perfect-class conclusion is unchanged. The Core/Properties interfaces are adapted together to the actual maximal alpha-compact class; no target statement or target-used definition changes."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-abstract-derived-category",
+   "lem-grothendieck-derived-has-coproducts",
+   "new-sfb-derived-perfect-small-class-core"
+  ],
+  "old_proof": [
+   {
+    "text": "Factor a map from an alpha-presentable object through a finite subcoproduct of the target family, using the finite-support factorization lemma.",
+    "uses": [
+     "new-sfb-derived-perfect-small-class-factorization"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For a finite subcoproduct, lift each component through the given componentwise surjections and reassemble the lifts by the finite biproduct lemma; transport the lift along the subcoproduct inclusions.",
+    "uses": [
+     "new-sfb-derived-perfect-small-class-finite-lifting"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the factorization lemma to a map into a coproduct of S-objects and use closure of S under subcoproducts.",
+    "uses": [
+     "new-sfb-derived-perfect-small-class-factorization"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-grothendieck-derived-has-coproducts",
+   "new-sfb-derived-perfect-small-class-factorization",
+   "new-sfb-derived-perfect-small-class-finite-lifting"
+  ]
  }
 }

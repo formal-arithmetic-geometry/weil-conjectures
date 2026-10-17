@@ -1,0 +1,123 @@
+{
+ "id": "new-sfb-derived-alpha-compact-classes",
+ "kind": "statement",
+ "title": "Eventually small extension-closed derived alpha-compact classes",
+ "statement": "For a Grothendieck abelian category A [def-weil-abstract-derived-category] with derived coproducts [lem-grothendieck-derived-has-coproducts], there is a regular beta in universe v such that for every regular alpha at least beta, the canonical alpha-compact class [def-sfb-alpha-compact-object] in D(A) is essentially v-small and closed under extensions.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-grothendieck-derived-has-coproducts",
+  "def-sfb-alpha-compact-object"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Krause (2001), Lemma 5 and Theorem B; Localization theory 6.3; Neeman Theorem 0.2."
+ },
+ "proof": [
+  {
+   "text": "Choose the small perfect generating class G and its regular rank beta.",
+   "uses": [
+    "new-sfb-derived-perfect-well-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For regular alpha at least beta, monotonicity makes G alpha-small without changing its G4 or generation property. Apply the generic smallness and extension-closure theorem to the canonical class.",
+   "uses": [
+    "new-sfb-alpha-compact-class-small-closed",
+    "lem-sfb-alpha-compact-object-api"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-sfb-derived-perfect-well-generators",
+  "new-sfb-alpha-compact-class-small-closed",
+  "lem-sfb-alpha-compact-object-api"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Krause (2001), Lemma 5 and Theorem B; Localization theory 6.3; Neeman Theorem 0.2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For all sufficiently large regular cardinals alpha compact objects of a well generated derived category form an essentially small extension closed class",
+   "results": "Eight general derived-category or smallness results, none stating this theorem.",
+   "date": "2026-10-18",
+   "verdict": "No matching source definition or theorem; implement the support/factorization interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal class of alpha small objects with coproduct factorization is essentially small and closed under extensions in a Grothendieck derived category",
+   "results": "Eight ordinary presentability or derived-category results, none stating Krause alpha-compactness.",
+   "date": "2026-10-18",
+   "verdict": "No matching source definition or theorem; implement the support/factorization interface."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlphaSmall|IsAlphaCompact|IsCoproductFactorizationClass",
+   "results": "No matching alpha-small, alpha-compact or coproduct-factorization declarations in Mathlib; repository search finds only the incorrect ordinary-presentability core.",
+   "date": "2026-10-18",
+   "verdict": "No matching source definition or theorem; implement the support/factorization interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedPerfectSmallClassCoreAlpha",
+  "date": "2026-10-18",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Brown representability for the adic localizing hull: ambient well-generation and small perfect classes.",
+   "via": [
+    "new-sfb-derived-perfect-small-class-core-alpha",
+    "new-sfb-derived-perfect-small-class-core",
+    "lem-sfb-derived-perfect-small-class",
+    "lem-sfb-set-generated-derived-solution-set",
+    "lem-sfb-adic-localizing-cohomological-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckDerivedAlphaCompactClasses",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckDerivedAlphaCompactClasses.lean",
+  "declaration": "CategoryTheory.derived_alphaCompact_classes_eventually_small",
+  "statement": "theorem derived_alphaCompact_classes_eventually_small {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] : ∃ (β : Cardinal.{v}) (_ : Fact β.IsRegular), ∀ (α : Cardinal.{v}) [Fact α.IsRegular], β ≤ α → ObjectProperty.EssentiallySmall.{v} (alphaCompactObjects (DerivedCategory A) α) ∧ (alphaCompactObjects (DerivedCategory A) α).IsTriangulatedClosed₂",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "blueprint": "The localizing/Brown-representability step requires a small perfect class containing a prescribed small family; this is a supporting part of the ambient well-generation argument. The original created.item chain uses module names, so its mechanical ancestor is broken; from records the actual blueprint ancestor via the source proof chain."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "C-de4e2",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T210422-L-1009146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "C-de4e2",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T210422-L-1009146",
+  "kind": "interface",
+  "note": "independent cc review: Delivered statements of derived_exists_alphaCompactClass_core / _perfectSmallClass_core / _perfectSmallClass_properties and the new Krause IsAlphaCompact API against their nodes, change records and Krause 2001 G3/G4, Lemmas 4-5 / Neeman Thm 0.2; all 9 modules plus the unchanged importer DerivedPerfectSmallClass compiled; axioms: sorryAx only through the two new sorry statements"
+ }
+}

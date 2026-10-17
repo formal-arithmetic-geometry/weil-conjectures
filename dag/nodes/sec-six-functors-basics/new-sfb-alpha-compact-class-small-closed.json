@@ -1,0 +1,131 @@
+{
+ "id": "new-sfb-alpha-compact-class-small-closed",
+ "kind": "statement",
+ "title": "Smallness and extension closure of the maximal alpha-compact class",
+ "statement": "Let C be a locally v-small triangulated category [def-weil-triangulated-category] with v-small coproducts. Let G be essentially v-small and shift-closed, consist of alpha-small objects, satisfy G4 [def-sfb-alpha-compact-object], and generate C as a localizing class. For regular alpha, the maximal class alphaCompactObjects C alpha is essentially v-small and closed under middle vertices of distinguished triangles.",
+ "stmt_deps": [
+  "def-sfb-alpha-compact-object",
+  "def-weil-triangulated-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Krause (2001), Lemma 5 pages 124--125 and the maximal-class construction; Localization theory 6.2--6.3."
+ },
+ "proof": [
+  {
+   "text": "G4 gives perfectness, and generation with shifts gives detection of zero. Pick a small skeleton of the generators and form its alpha-localizing hull.",
+   "uses": [
+    "lem-sfb-alpha-compact-object-api"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Small representative sets for cones, retracts, shifts and bounded coproducts remain v-small. Iterate along a sufficiently long small regular ordinal to obtain a small skeleton of the hull. Regular support unions give alpha-smallness.",
+   "uses": [
+    "lem-sfb-alpha-compact-object-api",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The weak-kernel triangle argument propagates G4 through the hull. The objects receiving only maps from the maximal alpha-compact class which factor through the hull form a localizing class containing the generators. Generation and the identity map exhibit every alpha-compact object as a retract of a hull object. Thus the canonical class is this essentially small triangulated hull.",
+   "uses": [
+    "def-sfb-alpha-compact-object",
+    "lem-sfb-alpha-compact-object-api",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-alpha-compact-object-api",
+  "def-weil-triangulated-category",
+  "def-sfb-alpha-compact-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Krause (2001), Lemma 5 pages 124--125 and the maximal-class construction; Localization theory 6.2--6.3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For all sufficiently large regular cardinals alpha compact objects of a well generated derived category form an essentially small extension closed class",
+   "results": "Eight general derived-category or smallness results, none stating this theorem.",
+   "date": "2026-10-18",
+   "verdict": "No matching source definition or theorem; implement the support/factorization interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal class of alpha small objects with coproduct factorization is essentially small and closed under extensions in a Grothendieck derived category",
+   "results": "Eight ordinary presentability or derived-category results, none stating Krause alpha-compactness.",
+   "date": "2026-10-18",
+   "verdict": "No matching source definition or theorem; implement the support/factorization interface."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlphaSmall|IsAlphaCompact|IsCoproductFactorizationClass",
+   "results": "No matching alpha-small, alpha-compact or coproduct-factorization declarations in Mathlib; repository search finds only the incorrect ordinary-presentability core.",
+   "date": "2026-10-18",
+   "verdict": "No matching source definition or theorem; implement the support/factorization interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedPerfectSmallClassCoreAlpha",
+  "date": "2026-10-18",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Brown representability for the adic localizing hull: ambient well-generation and small perfect classes.",
+   "via": [
+    "new-sfb-derived-perfect-small-class-core-alpha",
+    "new-sfb-derived-perfect-small-class-core",
+    "lem-sfb-derived-perfect-small-class",
+    "lem-sfb-set-generated-derived-solution-set",
+    "lem-sfb-adic-localizing-cohomological-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlphaCompactClassSmallClosed",
+  "file": "lean/Sheaf/CategoryTheory/AlphaCompactClassSmallClosed.lean",
+  "declaration": "CategoryTheory.alphaCompactObjects_small_closed",
+  "statement": "theorem alphaCompactObjects_small_closed {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{v} C] (G : ObjectProperty C) [ObjectProperty.EssentiallySmall.{v} G] [G.IsStableUnderShift ℤ] (α : Cardinal.{v}) [Fact α.IsRegular] (hGsmall : ∀ X, G X → IsAlphaSmall X α) (hGfactor : G.IsCoproductFactorizationClass) (hGgen : ∀ (S : ObjectProperty C) [S.IsClosedUnderIsomorphisms] [S.IsTriangulated], (∀ (I : Type v) (Y : I → C), (∀ i, S (Y i)) → S (∐ Y)) → G ≤ S → ∀ X, S X) : ObjectProperty.EssentiallySmall.{v} (alphaCompactObjects C α) ∧ (alphaCompactObjects C α).IsTriangulatedClosed₂",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "blueprint": "The localizing/Brown-representability step requires a small perfect class containing a prescribed small family; this is a supporting part of the ambient well-generation argument. The original created.item chain uses module names, so its mechanical ancestor is broken; from records the actual blueprint ancestor via the source proof chain."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "C-de4e2",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T210422-L-1009146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "C-de4e2",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T210422-L-1009146",
+  "kind": "interface",
+  "note": "independent cc review: Delivered statements of derived_exists_alphaCompactClass_core / _perfectSmallClass_core / _perfectSmallClass_properties and the new Krause IsAlphaCompact API against their nodes, change records and Krause 2001 G3/G4, Lemmas 4-5 / Neeman Thm 0.2; all 9 modules plus the unchanged importer DerivedPerfectSmallClass compiled; axioms: sorryAx only through the two new sorry statements"
+ }
+}

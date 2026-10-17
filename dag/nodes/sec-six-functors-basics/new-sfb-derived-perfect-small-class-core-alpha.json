@@ -2,27 +2,41 @@
  "id": "new-sfb-derived-perfect-small-class-core-alpha",
  "kind": "statement",
  "title": "Alpha-compact class core with representatives of P",
- "statement": "For an essentially v-small class P in the derived category of a Grothendieck abelian category, there are an object property S and a regular cardinal alpha in universe v such that S is exactly the alpha-presentable objects, S is essentially v-small, replete and triangulated, is closed under coproducts indexed by types of cardinality less than alpha, every object of S is alpha-presentable, and every object of P is alpha-presentable.",
+ "statement": "For an essentially v-small class P in the derived category of a Grothendieck abelian category [def-weil-abstract-derived-category] with coproducts [lem-grothendieck-derived-has-coproducts], there are a regular alpha in universe v and a class S exactly equal to the alpha-compact objects [def-sfb-alpha-compact-object]. S is essentially v-small, replete, triangulated and closed under coproducts indexed by types of cardinality less than alpha. Every member of S and every member of P is alpha-compact.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
   "place": "Ambient well-generation and common cardinal bound: Neeman Theorem 0.2; Krause Localization theory Sections 6.2--6.3."
  },
  "proof": [
   {
-   "text": "Choose a regular cardinal above the well-generation bound and above compactness ranks of representatives of P. Let S be the alpha-compact objects. Well-generation and localization give essential smallness, repleteness, triangulated closure, and closure under coproducts of fewer than alpha summands; alpha-presentability is the defining property, and the cardinal bound makes every member of P alpha-presentable.",
+   "text": "Use eventual smallness of the canonical classes and ranks for every object. Choose a small representative set for P and a common regular bound above their ranks and the eventual bound.",
    "uses": [
+    "new-sfb-derived-alpha-compact-classes",
+    "new-sfb-derived-alpha-compact-ranks",
+    "lem-sfb-alpha-compact-object-api"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take S to be the canonical alpha-compact class. Use its proved repletion, zero, shift and bounded coproduct APIs together with the bounded-class extension theorem to give the triangulated instance. Transport each representative rank along its isomorphism to include P.",
+   "uses": [
+    "new-sfb-derived-alpha-compact-classes",
+    "lem-sfb-alpha-compact-object-api",
     "lem-grothendieck-derived-has-coproducts"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "new-sfb-derived-alpha-compact-classes",
+  "new-sfb-derived-alpha-compact-ranks",
+  "lem-sfb-alpha-compact-object-api",
   "lem-grothendieck-derived-has-coproducts"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
-  "place": "Ambient well-generation and common cardinal bound."
+  "place": "Source-correct alpha-compactness, Krause (2001) G3/G4, Lemmas 4--5; Neeman Theorem 0.2."
  },
  "mathlib_searches": [
   {
@@ -86,14 +100,15 @@
   "module": "Sheaf.CategoryTheory.DerivedPerfectSmallClassCoreAlpha",
   "file": "lean/Sheaf/CategoryTheory/DerivedPerfectSmallClassCoreAlpha.lean",
   "declaration": "CategoryTheory.derived_exists_alphaCompactClass_core",
-  "statement": "theorem derived_exists_alphaCompactClass_core\n    {A : Type u} [Category.{v} A] [Abelian A]\n    [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A]\n    (P : ObjectProperty (DerivedCategory A))\n    [ObjectProperty.EssentiallySmall.{v} P] :\n    ∃ (S : ObjectProperty (DerivedCategory A)) (α : Cardinal.{v})\n      (_ : Fact α.IsRegular),\n      (∀ U, S U ↔ IsCardinalPresentable U α) ∧\n      ObjectProperty.EssentiallySmall.{v} S ∧ S.IsClosedUnderIsomorphisms ∧\n      S.IsTriangulated ∧\n      (∀ (I : Type v) (Y : I → DerivedCategory A),\n        HasCardinalLT I α → (∀ i, S (Y i)) → S (∐ Y)) ∧\n      (∀ U, S U → IsCardinalPresentable U α) ∧\n      (∀ U, P U → IsCardinalPresentable U α)",
+  "statement": "theorem derived_exists_alphaCompactClass_core {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] (P : ObjectProperty (DerivedCategory A)) [ObjectProperty.EssentiallySmall.{v} P] : ∃ (S : ObjectProperty (DerivedCategory A)) (α : Cardinal.{v}) (_ : Fact α.IsRegular), (∀ U, S U ↔ IsAlphaCompact U α) ∧ ObjectProperty.EssentiallySmall.{v} S ∧ S.IsClosedUnderIsomorphisms ∧ S.IsTriangulated ∧ (∀ (I : Type v) (Y : I → DerivedCategory A), HasCardinalLT I α → (∀ i, S (Y i)) → S (∐ Y)) ∧ (∀ U, S U → IsAlphaCompact U α) ∧ (∀ U, P U → IsAlphaCompact U α)",
   "branch": "sheaf-dag",
   "by": "A2",
   "date": "2026-10-18"
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "lem-grothendieck-derived-has-coproducts"
+  "lem-grothendieck-derived-has-coproducts",
+  "def-sfb-alpha-compact-object"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -108,11 +123,44 @@
  "reviewed_proof": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "C-de4e2",
   "group": "A2",
   "result": "pass",
-  "landing": "20261017T184844-L-2155340",
+  "landing": "20261017T210422-L-1009146",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Delivered statements of derived_exists_alphaCompactClass_core / _perfectSmallClass_core / _perfectSmallClass_properties and the new Krause IsAlphaCompact API against their nodes, change records and Krause 2001 G3/G4, Lemmas 4-5 / Neeman Thm 0.2; all 9 modules plus the unchanged importer DerivedPerfectSmallClass compiled; axioms: sorryAx only through the two new sorry statements"
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "A2 stage 2",
+  "old_statement": "For an essentially v-small class P in the derived category of a Grothendieck abelian category, there are an object property S and a regular cardinal alpha in universe v such that S is exactly the alpha-presentable objects, S is essentially v-small, replete and triangulated, is closed under coproducts indexed by types of cardinality less than alpha, every object of S is alpha-presentable, and every object of P is alpha-presentable.",
+  "what": "The source defines alpha-compactness by alpha-smallness and coproduct factorization G4, not ordinary IsCardinalPresentable in the triangulated category. The old ordinary-presentable theorem is not established by this repair; replace that erroneous interface by the actual source notion, with all consumers adapted in the same delivery. This restores the source proof without weakening the unchanged final perfect-class theorem.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+   "place": "Krause (2001) pages 121--125, alpha-small objects and maximal G4 class; Localization theory 6.3 and 6.10.2 distinguish this from presentability in the abelianization."
+  },
+  "citers": [
+   {
+    "id": "new-sfb-derived-perfect-small-class-core",
+    "holds": true,
+    "note": "The downstream perfect-class conclusion is unchanged. The Core/Properties interfaces are adapted together to the actual maximal alpha-compact class; no target statement or target-used definition changes."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-abstract-derived-category",
+   "lem-grothendieck-derived-has-coproducts"
+  ],
+  "old_proof": [
+   {
+    "text": "Choose a regular cardinal above the well-generation bound and above compactness ranks of representatives of P. Let S be the alpha-compact objects. Well-generation and localization give essential smallness, repleteness, triangulated closure, and closure under coproducts of fewer than alpha summands; alpha-presentability is the defining property, and the cardinal bound makes every member of P alpha-presentable.",
+    "uses": [
+     "lem-grothendieck-derived-has-coproducts"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-grothendieck-derived-has-coproducts"
+  ]
  }
 }
