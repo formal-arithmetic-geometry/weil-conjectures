@@ -318,6 +318,10 @@ public import WeilConjectures.Statement
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.Topology.Stratification
+public import WeilConjectures.TraceFormula.CategoricalTrace
+public import WeilConjectures.TraceFormula.FrobeniusIterate
+public import WeilConjectures.TraceFormula.Statement
+public import WeilConjectures.TraceFormula.WeilTrace
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
