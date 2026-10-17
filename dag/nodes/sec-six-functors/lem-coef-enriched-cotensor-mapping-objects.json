@@ -12,9 +12,107 @@
   "lem-coef-enriched-category-tensor-calculus",
   "lem-coef-twisted-arrow-left-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $M=\\mathcal E^K(F,G)$. The enriched Hom bifunctor supplied by [lem-coef-collage-crossing-transformations], restricted along $F^{\\mathrm{op}}\\times G$ and the twisted-arrow projection, gives the coherent diagram $D(f:k\\to k')=\\mathcal E(Fk,Gk')$ in $\\mathcal V$. Its action is precisely enriched precomposition and postcomposition. By the degreewise construction of $\\operatorname{Tw}$ it is small when $K$ is small. The complete enriched-category calculus supplies all small limits in $\\mathcal V$, so put $L=\\lim_{\\operatorname{Tw}(K)}D$. For a testing object $v\\in\\mathcal V$, form $H_v(x,y)=\\operatorname{Map}_{\\mathcal V}(v,\\mathcal E(x,y))$ and its collage $C_v$. The endpoint categories $U\\mathcal E$ and the mixed mapping spaces are small in the fixed smaller universe; the containing universe is used for the category of all testing objects.",
+   "uses": [
+    "lem-coef-collage-crossing-transformations",
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Remark 9.5 supplies the internal Hom framework; agent construction of the test diagram using the cited collage assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-collage-crossing-transformations] with $S=K$, $P=F$ and $Q=G$. It identifies $\\operatorname{Map}_{\\mathcal V}(v,M)$ with $\\operatorname{Map}_{\\operatorname{Fun}(K,C_v)}(F_0,G_1)$. Apply the space-valued end formula to this latter functor category. The collage statement identifies each mixed mapping space and its two actions with $H_v$. Consequently\n$$\\operatorname{Map}_{\\mathcal V}(v,M)\\simeq\\lim_{f\\in\\operatorname{Tw}(K)}\\operatorname{Map}_{\\mathcal V}(v,D(f))\\simeq\\operatorname{Map}_{\\mathcal V}(v,L).$$\nThe last equivalence is preservation of limits by the covariant representable, as stated in [lem-coef-infinity-yoneda-presheaf-limits]. All comparisons are natural in $v,F,G,K$ and in the additional simplicial parameters: the collage and end statements give these compatibilities for their entire mapping spaces, and the representable limit comparison is natural in its diagram and testing object.",
+   "uses": [
+    "lem-coef-collage-crossing-transformations",
+    "lem-coef-space-bimodule-collage",
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03P7",
+    "place": "Example 8.3.4.22, applied to the mixed endpoint diagrams; agent passage from all testing spaces to V-valued mapping objects."
+   }
+  },
+  {
+   "text": "The fully faithful Yoneda functor of [lem-coef-infinity-yoneda-presheaf-limits], applied to $\\mathcal V$, turns the natural equivalence of representable presheaves in step 2 into an equivalence $c_{F,G}:M\\simeq L$ in $\\mathcal V$. Its projection at $f:k\\to k'$ sends a parameterized transformation $\\alpha$ to $G(f)\\alpha_k$, equivalently $\\alpha_{k'}F(f)$ with the naturality simplex. At $f=\\mathrm{id}_k$ this is component evaluation, since the collage equivalence sends a map to its crossing labels and the end equivalence projects to component evaluation. Applying the same Yoneda full faithfulness to parameter diagrams gives coherent naturality of $c$ in those diagrams, rather than merely naturality of its homotopy class.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-collage-crossing-transformations",
+    "lem-coef-coherent-end-twisted-arrow-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03P7",
+    "place": "Example 8.3.4.22 identity-arrow evaluation; agent Yoneda reconstruction of the tested equivalence."
+   }
+  },
+  {
+   "text": "The comparison retains enriched composition. For three diagrams $F,G,H$, let $p_f$ be the $f$-projection of $\\mathcal E^K(F,G)$ under $c$, and $q_f$ the corresponding projection of $\\mathcal E^K(G,H)$. The $f:k\\to k'$ projection of the composite is\n$$\\mathcal E^K(G,H)\\otimes\\mathcal E^K(F,G)\\xrightarrow{q_{\\mathrm{id}_{k'}}\\otimes p_f}\\mathcal E(Gk',Hk')\\otimes\\mathcal E(Fk,Gk')\\longrightarrow\\mathcal E(Fk,Hk').$$\nIndeed enriched evaluation, which is an enriched functor by [lem-coef-enriched-category-tensor-calculus], sends composition to composition at $k'$; precomposing by $F(f)$ gives this expression by the naturality simplex from step 3. The endpoint composition, unit and naturality simplices make these maps a cone, including their higher compatibilities. The universal property of the limit, tested by representables as in [lem-coef-infinity-yoneda-presheaf-limits], identifies that cone with the composite. Identities give the identity components by the same evaluation formula. This describes the actual composition under the comparison; it does not assume that tensoring preserves the limits.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Remark 9.5, internal enriched evaluation; agent calculation of the composition cone from the comparison already proved."
+   }
+  },
+  {
+   "text": "Now assume the coherent tensor action in the statement. For fixed $A$, its object assignment $T_A(x)=A\\odot x$ has enriched arrow action adjoint to\n$$\\mathcal E(x,y)\\odot(A\\odot x)\\simeq A\\odot(\\mathcal E(x,y)\\odot x)\\xrightarrow{A\\odot\\mathrm{ev}}A\\odot y.$$\nHere the equivalence uses tensor associativity and the symmetry in $\\mathcal V$; the adjunction is the stipulated tensor universal property with testing object $\\mathcal E(x,y)$. Evaluation and the assumed coherent unit and associativity identities show that an identity is sent to an identity and a composite to the composite of these maps, with the same identities on every higher parameter simplex. Thus postcomposition of $F$ with $T_A$ is a coherent diagram $T_AF$, with $(T_AF)(k)=A\\odot F(k)$ and arrow action $A\\odot F(f)$. The free-enrichment/cotensor identification of [lem-coef-enriched-category-tensor-calculus] makes it an object of $\\mathcal E^K$. The unit and associativity identifications of this action on diagrams are the given ones at each object and arrow.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Agent construction directly from the coherent tensor hypothesis and the free-enrichment/cotensor identification; not claimed as a theorem stated in Remark 9.5."
+   }
+  },
+  {
+   "text": "For any small diagram $D:J\\to\\mathcal V$, the canonical map $[A,\\lim_JD]\\to\\lim_J[A,D(-)]$ is an equivalence. To check this, test at $B\\in\\mathcal V$ and use closedness and the representable limit criterion:\n$$\\operatorname{Map}(B,[A,\\lim D])\\simeq\\operatorname{Map}(B\\otimes A,\\lim D)\\simeq\\lim_j\\operatorname{Map}(B\\otimes A,Dj)\\simeq\\lim_j\\operatorname{Map}(B,[A,Dj]).$$\nThe cited Yoneda limit criterion proves the claim, including its naturality and the empty diagram. Apply the already proved end formula to $T_AF,G$. The stipulated tensor equivalences $\\mathcal E(A\\odot Fk,Gk')\\simeq[A,\\mathcal E(Fk,Gk')]$ are coherent equivalences of the twisted-arrow diagrams by their naturality in both variables. Therefore\n$$\\mathcal E^K(T_AF,G)\\simeq\\lim_f[A,D(f)]\\simeq[A,\\lim_fD(f)]\\simeq[A,\\mathcal E^K(F,G)].$$\nThis is the required enriched tensor universal property. Only closedness was used to move $[A,-]$ through the limit; $A$ need not be dualizable.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03P7",
+    "place": "Agent tensor-Hom/limit calculation using the representable limit criterion; no further enriched-end theorem invoked."
+   }
+  },
+  {
+   "text": "The evaluation $A\\to\\mathcal E^K(F,T_AF)$ is the transpose of $\\mathrm{id}_{T_AF}$ under step 6. Projecting at $\\mathrm{id}_k$ gives the transpose of $\\mathrm{id}_{A\\odot Fk}$, namely the specified objectwise tensor evaluation $A\\to\\mathcal E(Fk,A\\odot Fk)$. Every equivalence in step 6 comes from the natural tensor adjunction or a universal cone, so these projections retain all parameter simplices and their faces and degeneracies; they also respect the unit and associativity comparisons of step 5. If $K$ is empty, $\\operatorname{Tw}(K)$ is empty, $L$ is terminal in $\\mathcal V$, and $[A,L]$ is terminal by step 6; the unique empty diagram consequently satisfies the same tensor property. For a simplicial shape use its freely generated infinity category throughout; the cotensor calculus explicitly supplies that interpretation. Thus the argument applies without imposing nonemptiness or truncating coherent simplices.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Agent evaluation and edge-case verification using the cotensor and simplicial-shape clauses of the cited calculus."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-collage-crossing-transformations",
+  "lem-coef-twisted-arrow-left-fibration",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-space-bimodule-collage",
+  "lem-coef-coherent-end-twisted-arrow-formula",
+  "lem-coef-infinity-yoneda-presheaf-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Supporting mapping-complex infrastructure for the integral exceptional adjunction; enriched cotensor end and tensor calculation derived here from existing generic foundations."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -57,10 +155,38 @@
    "results": "{\"t\": \"2026-10-17T13:10:45Z\", \"tool\": \"leanfinder\", \"query\": \"The internal enriched hom of coherent diagrams is the end of their pointwise mapping objects and admits pointwise tensor actions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.enrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.HasEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHom\\u03c0\", \"CategoryTheory.Enriched.FunctorCategory.HasFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom_obj\"], \"digest\": \"063c3bdba4775326\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Enriched/FunctorCategory.lean:45-107. HasEnrichedHom and enrichedHom are ordinary ends for an ordinary category J and ordinary enrichment; the construction does not give V-valued coherent twisted-arrow limits for enriched infinity categories or their pointwise tensor universal property. Monoidal.functorCategoryMonoidal is a pointwise monoidal product, not tensors in a V-enriched infinity category."
+  },
+  {
+   "tool": "grep",
+   "query": "enrichedHom|HasEnrichedHom|cotensor",
+   "results": "{\"t\": \"2026-10-17T16:08:13Z\", \"tool\": \"grep\", \"query\": \"enrichedHom|HasEnrichedHom|cotensor\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\"], \"digest\": \"307f70a8a874a70e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:40-107. These declarations concern ordinary categories and strict ordinary enrichment, not operadically enriched infinity categories or coherent twisted-arrow limits. The item is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The enriched hom of coherent diagrams is an end of pointwise hom objects, and tensor actions commute with the functor category",
+   "results": "{\"t\": \"2026-10-17T16:08:13Z\", \"tool\": \"leansearch\", \"query\": \"The enriched hom of coherent diagrams is an end of pointwise hom objects, and tensor actions commute with the functor category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.functorEnrichedCategory\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHom\", \"CategoryTheory.eHomFunctor\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.HasEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv.congr_simp\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedOrdinaryCategory\"], \"digest\": \"b185502bc07caf1f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:40-107. These declarations concern ordinary categories and strict ordinary enrichment, not operadically enriched infinity categories or coherent twisted-arrow limits. The item is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Enriched.FunctorCategory.enrichedHom",
+   "results": "{\"t\": \"2026-10-17T16:08:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Enriched.FunctorCategory.enrichedHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.enrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.enrichedId\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHomπ\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_pt\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.lift\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom_obj\", \"CategoryTheory.Enriched.FunctorCategory.enrichedComp\"], \"digest\": \"5df49fdcfbf79099\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:40-107. These declarations concern ordinary categories and strict ordinary enrichment, not operadically enriched infinity categories or coherent twisted-arrow limits. The item is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping objects of a cotensor of an enriched infinity category are twisted arrow limits, and tensors are computed pointwise",
+   "results": "{\"t\": \"2026-10-17T16:08:14Z\", \"tool\": \"leanfinder\", \"query\": \"The mapping objects of a cotensor of an enriched infinity category are twisted arrow limits, and tensors are computed pointwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.HasConicalProduct\", \"CategoryTheory.Enriched.HasConicalProducts\", \"CategoryTheory.Enriched.HasConicalLimits\", \"CategoryTheory.Enriched.HasConicalPullbacks\", \"CategoryTheory.Enriched.HasConicalPullback\", \"CategoryTheory.Enriched.HasConicalLimitsOfShape\", \"CategoryTheory.Enriched.HasConicalLimit\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom\"], \"digest\": \"67fa8a195cb929d3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:40-107. These declarations concern ordinary categories and strict ordinary enrichment, not operadically enriched infinity categories or coherent twisted-arrow limits. The item is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-simplicial-presentation",
@@ -83,5 +209,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-enriched-cotensor-mapping-objects",
+  "worker": "stage1",
+  "summary": "Derived the V-valued end by testing with arbitrary v and the existing collage crossing-transformation comparison, space-valued twisted-arrow formula and Yoneda/limit criterion. Constructed the pointwise tensor arrow action, calculated its universal property, composition and evaluation, and checked arbitrary parameters, empty K and simplicial shapes. No new nodes or statement changes.",
+  "blueprint": "Retains the inherited ancestry to prop-coef-integral-exceptional-adjoint, historical proof paragraph 2 mapping-complex adjunction. Supplies the generic cotensor calculation requested by lem-coef-enriched-simplicial-presentation, without changing the integral-adjunction route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NG-31349ba5c",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-31349ba5c (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all 7 steps. I also read the full statements of the 6 nodes it uses and the 3 it depends on, its parent lem-coef-enriched-simplicial-presentation (steps 8-9), and the unit record. Sources read online: Haugseng arXiv:2311.13362v1 Remark 9.5 only gives the closed structure and the internal Hom FUN^V, and the item's source field correctly marks the end and tensor formulas as agent-formulated. Kerodon 03P7 (Example 8.3.4.22) gives the space-valued twisted-arrow limit and matches lem-coef-coherent-end-twisted-arrow-formula. Delivery shape: one commit with no new nodes; the statement and blueprint ancestry are unchanged; proof_deps equals the union of the uses. Every cited node is unmerged and in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle (BFS over 1242 nodes) and no SGA citation. Step checks: step 1 uses the bifunctor clause of the collage node, and the smallness bookkeeping is right. Step 2's hypotheses hold for the collage node (S=K), the end node (C_v is small) and the bimodule clause (the mixed actions agree including higher compatibilities); the end node is not explicitly natural in C_v as v varies, but step 3's identity-arrow projections fix the map, so this is acceptable. Step 3 is Yoneda full faithfulness. In step 4 I checked the composition types by hand: projection = q_{id_k'}(beta) composed with p_f(alpha). In step 5 the transpose of E(x,y)⊙(A⊙x)≃A⊙(E(x,y)⊙x)→A⊙y is correct. Step 6 proves [A,-] preserves limits from closedness alone, with no dualizability of A. Step 7 handles evaluation and empty K. Small cases tested: K empty, a point, and Δ^1 (pullback E(F0,G0)×_{E(F0,G1)}E(F1,G1)); A the unit and A initial. All hold, and the statement is true and not weakened. lem-coef-flexible-weight-enriched-lift also states the end formula as one clause, but it cannot be cited (it would make a cycle through the parent) and it is not a duplicate of the whole item; noted. One problem I did not change, in the existing statement and size conventions rather than this delivery: a V-category with a small object space that is tensored over all of a presentable V is forced to be degenerate (Freyd's argument), so the tensored clause has content only if universes are re-chosen. This is worth a universe note in the coefficient foundation and touches the parent's step 9. No fixes."
  }
 }
