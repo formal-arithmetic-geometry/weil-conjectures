@@ -10,48 +10,103 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "squiggle|undulating|splice|splicing",
-   "results": "{\"t\": \"2026-10-17T16:02:25Z\", \"tool\": \"grep\", \"query\": \"squiggle|undulating|splice|splicing\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: FreeGroup.Red.Step.diamond_aux concerns inverse-pair reduction, Coxeter alternatingWord only two-letter lists, and DyckWord.nest is a different word construction. StrictSegal.spineEquiv and IsStrictSegal.segal assume the strict Segal condition; they do not establish this bijection for these ordinal strings. SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible evaluates ordinal degeneracy words, not alternating strings. Both semantic phrasings and the returned signatures were read; grep in AlgebraicTopology had no hits."
+   "text": "Apply [lem-coef-adjunction-block-run-collapse] with r=m+n and h=m. It proves that every left/right block run of c has odd length, that C_m=L collapses each right run to one m+1, and that D_m=U collapses each left run to one 0, with no cross-run cancellation. The surviving runs retain their strict alternating inequalities and their endpoint values, so R(L_*c) lies in W_m(p,q) and R(U_*c) lies in W_n(p,q).",
+   "uses": [
+    "lem-coef-adjunction-block-run-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Riehl--Verity, Proposition 3.2.2 proof, pp. 824--825; Definitions 3.1.2 and 3.1.8. Online paper read; archival copy WANTED."
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "Reduced alternating ordinal words satisfy the strict Segal spine bijection",
-   "results": "{\"t\": \"2026-10-17T16:02:25Z\", \"tool\": \"leansearch\", \"query\": \"Reduced alternating ordinal words satisfy the strict Segal spine bijection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal.segal\", \"SSet.Truncated.IsStrictSegal.spine_bijective\", \"SSet.Truncated.IsStrictSegal.segal\", \"SSet.IsStrictSegal.mk\", \"SSet.Truncated.IsStrictSegal.mk\", \"SSet.Truncated.IsStrictSegal.recOn\", \"SSet.StrictSegal.spineEquiv\", \"SSet.IsStrictSegal.casesOn\"], \"digest\": \"d562114cdbed2fc6\"}",
+   "text": "Let d(c) be the word of 0's and 1's obtained by recording the labels of the maximal runs in c. Apply [lem-coef-adjunction-block-run-collapse] to the same cut in c. The preceding run calculation gives R(v_*R(L_*c))=d(c)=R(t_*R(U_*c)): on a 0-run the first expression records the unchanged left-block letters and the second records the single surviving 0, while on a 1-run they record the single m+1 and the unchanged right-block letters, respectively. Since d(c) has alternating labels, it is already reduced. Thus every image pair satisfies R(v_*a)=R(t_*b), and the compatibility word is exactly d(c).",
+   "uses": [
+    "lem-coef-adjunction-block-run-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Riehl--Verity, Proposition 3.2.2 proof, pp. 824--825; Definitions 3.1.2 and 3.1.8. Online paper read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Conversely, take (a,b) in the displayed compatible set and write d=R(v_*a)=R(t_*b). Apply [lem-coef-adjunction-block-run-collapse] to a with h=m and to b with h=0; this gives the same parity argument for the binary words v_*a and t_*b. Their maximal constant runs all have odd length and reduce to one letter, so d indexes corresponding runs A_k of a and B_k of b with the same label d_k. A 0-run B_k is a singleton, because t(b_i)=0 means b_i=0 and b is strictly alternating; a 1-run A_k is a singleton for the analogous reason v(a_i)=1 means a_i=m+1. Define c by concatenating A_k when d_k=0 and the entrywise shifted run m+B_k when d_k=1, in increasing k. The shifted runs lie in the right block. Each chosen run has odd length, and consecutive labels alternate; within runs the inequalities are inherited, while at a 0-to-1 join every left value is at most m and every right value is at least m+1, and at a 1-to-0 join the reverse inequality holds. The odd run lengths preserve the required parity of the alternating inequalities. The first and last labels give p and q, so c belongs to W_{m+n}(p,q).",
+   "uses": [
+    "lem-coef-adjunction-block-run-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Riehl--Verity, Proposition 3.2.2 proof, pp. 824--825; Definitions 3.1.2 and 3.1.8. Online paper read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "By [lem-coef-adjunction-block-run-collapse], for the c just constructed, L maps every chosen 0-run A_k identically and maps every shifted 1-run m+B_k to the constant value m+1. Each latter run has odd length, so reduction leaves one m+1; by the singleton property of the 1-runs A_k, the resulting word is exactly a. Dually, U maps each shifted 1-run m+B_k to B_k and each 0-run A_k to a constant 0-run of odd length, whose reduction is the singleton 0-run B_k. Hence R(L_*c)=a and R(U_*c)=b, proving surjectivity onto the compatible pairs.",
+   "uses": [
+    "lem-coef-adjunction-block-run-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Riehl--Verity, Proposition 3.2.2 proof, pp. 824--825; Definitions 3.1.2 and 3.1.8. Online paper read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "If c' has the same two reduced restrictions a and b, [lem-coef-adjunction-block-run-collapse] recovers its separator word d from either restriction. For each d_k=0, the corresponding c'-run is visible unchanged in R(L_*c') and therefore equals A_k; for d_k=1, it is visible unchanged after shifting in R(U_*c') and therefore equals m+B_k. Thus every run of c' agrees with the construction, so c'=c. This proves injectivity and the bijection. The argument also covers singleton words and words with no internal letters: then d has one run (or the corresponding alternating sequence of endpoint runs), and the same odd-run reduction and interleaving formulas apply without any extra length assumption.",
+   "uses": [
+    "lem-coef-adjunction-block-run-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Riehl--Verity, Proposition 3.2.2 proof, pp. 824--825; Definitions 3.1.2 and 3.1.8. Online paper read; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-adjunction-block-run-collapse"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Proposition 3.2.2 and proof, pp. 824--825, with the explicit run-collapse and interleaving argument supplied here; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reduced alternating ordinal words admit a bijective two-block splicing from compatible reduced restrictions",
+   "results": "8 hits: FreeGroup.Red.to_append_iff; FreeAddGroup.Red.to_append_iff; FreeGroup.Red.Step.diamond_aux; FreeGroup.Red.append_append; FreeAddGroup.Red.Step.diamond_aux; FreeGroup.Red.append_append_left_iff; Monoid.PushoutI.Reduced.exists_normalWord_prod_eq; FreeGroup.IsReduced.append_overlap. None states this ordinal-string bijection.",
    "date": "2026-10-17",
-   "verdict": "no match: FreeGroup.Red.Step.diamond_aux concerns inverse-pair reduction, Coxeter alternatingWord only two-letter lists, and DyckWord.nest is a different word construction. StrictSegal.spineEquiv and IsStrictSegal.segal assume the strict Segal condition; they do not establish this bijection for these ordinal strings. SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible evaluates ordinal degeneracy words, not alternating strings. Both semantic phrasings and the returned signatures were read; grep in AlgebraicTopology had no hits."
+   "verdict": "no match: returned free-group reductions and pushout normal words are different constructions."
   },
   {
    "tool": "loogle",
-   "query": "List, SimplexCategory",
-   "results": "{\"t\": \"2026-10-17T16:02:25Z\", \"tool\": \"loogle\", \"query\": \"List, SimplexCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible\"], \"digest\": \"46645069c70c0f0f\"}",
+   "query": "List, Finset, alternating, SimplexCategory",
+   "results": "0 hits; loogle reported unknown identifier 'alternating'.",
    "date": "2026-10-17",
-   "verdict": "no match: FreeGroup.Red.Step.diamond_aux concerns inverse-pair reduction, Coxeter alternatingWord only two-letter lists, and DyckWord.nest is a different word construction. StrictSegal.spineEquiv and IsStrictSegal.segal assume the strict Segal condition; they do not establish this bijection for these ordinal strings. SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible evaluates ordinal degeneracy words, not alternating strings. Both semantic phrasings and the returned signatures were read; grep in AlgebraicTopology had no hits."
+   "verdict": "unavailable/no match: no relevant declaration returned."
   },
   {
-   "tool": "leanfinder",
-   "query": "Alternating strings on ordered levels with matching boundary crossing word can be uniquely spliced into a string on the combined levels",
-   "results": "{\"t\": \"2026-10-17T16:02:28Z\", \"tool\": \"leanfinder\", \"query\": \"Alternating strings on ordered levels with matching boundary crossing word can be uniquely spliced into a string on the combined levels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeGroup.Red.Step.diamond_aux\", \"CoxeterSystem.alternatingWord\", \"CoxeterSystem.alternatingWord_succ\", \"DyckWord.IsNested.nest\", \"CoxeterSystem.listTake_succ_alternatingWord\", \"DyckWord.nest\", \"DyckWord.nest_insidePart_add_outsidePart\", \"DyckWord.insidePart_add\"], \"digest\": \"e5e99eec06748510\"}",
+   "tool": "grep",
+   "query": "splice|splicing|alternatingWord|undulating [subdirectory AlgebraicTopology/]",
+   "results": "0 hits in Mathlib/AlgebraicTopology.",
    "date": "2026-10-17",
-   "verdict": "no match: FreeGroup.Red.Step.diamond_aux concerns inverse-pair reduction, Coxeter alternatingWord only two-letter lists, and DyckWord.nest is a different word construction. StrictSegal.spineEquiv and IsStrictSegal.segal assume the strict Segal condition; they do not establish this bijection for these ordinal strings. SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible evaluates ordinal degeneracy words, not alternating strings. Both semantic phrasings and the returned signatures were read; grep in AlgebraicTopology had no hits."
+   "verdict": "no match."
   },
   {
-   "tool": "leanfinder",
-   "query": "Splicing undulating squiggles along one common horizontal line gives a unique inverse to the strict Segal restriction map",
-   "results": "{\"t\": \"2026-10-17T16:02:39Z\", \"tool\": \"leanfinder\", \"query\": \"Splicing undulating squiggles along one common horizontal line gives a unique inverse to the strict Segal restriction map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal.segal\", \"SSet.StrictSegal.spineEquiv\", \"SSet.Truncated.StrictSegal.spineToSimplex_spine\", \"SSet.Truncated.IsStrictSegal.segal\", \"SSet.Truncated.StrictSegal.spine_spineToSimplex\", \"SSet.StrictSegal.spine_spineToSimplex\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"SSet.StrictSegal.spineToSimplex_spine\"], \"digest\": \"ede24eae6582f924\"}",
+   "tool": "leansearch",
+   "query": "A reduced alternating string on a concatenated ordinal is uniquely determined by its two reduced interval restrictions and their common boundary reduction",
+   "results": "8 hits: FreeGroup.Red.to_append_iff; FreeAddGroup.Red.to_append_iff; FreeAddGroup.Red.append_append; FreeGroup.isCyclicallyReduced_cons_append_iff; FreeGroup.Red.append_append; CoxeterSystem.alternatingWord_succ; FreeGroup.Red.Step.diamond_aux; FreeGroup.IsReduced.red_iff_eq. None states this ordinal-string bijection.",
    "date": "2026-10-17",
-   "verdict": "no match: FreeGroup.Red.Step.diamond_aux concerns inverse-pair reduction, Coxeter alternatingWord only two-letter lists, and DyckWord.nest is a different word construction. StrictSegal.spineEquiv and IsStrictSegal.segal assume the strict Segal condition; they do not establish this bijection for these ordinal strings. SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible evaluates ordinal degeneracy words, not alternating strings. Both semantic phrasings and the returned signatures were read; grep in AlgebraicTopology had no hits."
+   "verdict": "no match: returned generic word-reduction results are not the claimed splice."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-adjunction-squiggle-normal-form",
@@ -76,5 +131,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-adjunction-two-block-splicing",
+  "worker": "stage1",
+  "summary": "Repair the returned split with the verified run-collapse route. Added the statement-only auxiliary lemma lem-coef-adjunction-block-run-collapse for the odd-length block-run and interval-restriction calculation; it is strictly smaller than the bijection and is used by each proof step. The item then identifies compatibility with the common separator-run word, constructs the inverse by interleaving corresponding left runs and shifted right runs, and proves both restriction identities and uniqueness. The previous stack and run-join auxiliaries were removed as duplicate or elementary. The statement is unchanged.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: the finite enriched mapping-complex string presentation and Riehl--Verity Proposition 3.2.2 two-block splicing used by the walking-adjunction filtration."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-22421d289",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-22421d289 (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps and the new node lem-coef-adjunction-block-run-collapse in full, plus def-cbc-enhanced-diagrams-cones, the parent squiggle-normal-form (step 7 is the only use, step 3 defines the interval map) and unit sk-prop-sf-biduality-general. The item statement is byte-identical to the side-DAG copy, so it was not weakened. Riehl-Verity Prop. 3.2.2 is not in literature/ (WANTED recorded), so I checked the mathematics independently. L=min(j,m+1) and U=max(j-m,0) are the interval maps of the two block inclusions, and v and t are those of the last and first vertex, as the parent uses them. Exhaustive test: the run-collapse lemma holds for r<=4, every h and width<=9. The bijection was tested for (m,n) in {(1,1),(1,2),(2,1),(2,2),(1,3),(3,1)} and all four p,q: c of width<=12 always maps into the compatible set, the map is injective there, and every compatible pair of widths<=6 has a preimage. This includes singleton strings, strings with no interior letters, interior endpoint letters and the report's counterexample. Steps 1-5 use exactly what the new node states, applied with h=m and h=0 inside 0<=h<=r. The odd run lengths fix the alternation parity, the joins are strict, the endpoints are right and uniqueness follows by recovering the runs. The new node is statement-only and self-contained, records 4 searches, has no duplicate in the DAG and does not restate the item. Two repairs in fixes/dag/nodes/sec-six-functors/lem-coef-adjunction-block-run-collapse.json: (1) the R(D_h*x) clause 'leaving each 1-run unchanged' is false read literally for h>0; it now says each 1-run is replaced by its entries minus h, the meaning item steps 1 and 4 use. (2) blueprint.from.via omitted the creating item; lem-coef-adjunction-two-block-splicing is now first, per brief section 7.2. No tool_uses, no drop_nodes.; 1 file(s) fixed by the reviewer"
  }
 }
