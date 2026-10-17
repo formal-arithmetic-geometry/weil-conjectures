@@ -14,7 +14,8 @@
   "def-kun-rgamma-unbounded",
   "def-pc-fibre-product",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "lem-trf-module-derived-restriction-resolution"
  ],
  "proof": [
   {
@@ -261,5 +262,28 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-585601cf5 (reviewer sub-agent of L); spot-checked: Read the item, new lemma, cited statements and mathematical sources in full. Module-resolution proof and canonical mate square check out. Corrected two source references: Step 1 uses 03DA/03DB, not 01B1; Step 3 uses 01WL, not 02NB. Statements unchanged. Findings and route-check limitations are recorded in review.md; corrected whole JSON is under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.DerivedSectionsFinitePushforwardModules",
+  "declaration": "AlgebraicGeometry.Etale.derivedSectionsFinitePushforwardModules",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finitePushforwardDerivedMate",
+   "AlgebraicGeometry.Etale.finitePushforwardSectionsUnit",
+   "AlgebraicGeometry.Etale.derivedSectionsFinitePushforwardModules"
+  ],
+  "file": "lean/Sheaf/TraceFormula/DerivedSectionsFinitePushforwardModules.lean",
+  "statement": "theorem derivedSectionsFinitePushforwardModules (Λ : Type (u + 1)) [CommRing Λ] {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsFinite p] (M : CochainComplex (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (a : ℤ) [M.IsStrictlyGE a] : PreservesFiniteLimits (lowerStar (ModuleCat.{u + 1} Λ) p) ∧ PreservesFiniteColimits (lowerStar (ModuleCat.{u + 1} Λ) p) ∧ (lowerStar (ModuleCat.{u + 1} Λ) p).PreservesInjectiveObjects ∧ (∀ (L : CochainComplex (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (b : ℤ) [L.IsStrictlyGE b] [∀ n : ℤ, Injective (L.X n)] (i : M ⟶ L) [QuasiIso i], QuasiIso (((lowerStar (ModuleCat.{u + 1} Λ) p).mapHomologicalComplex (ComplexShape.up ℤ)).map i) ∧ CochainComplex.IsStrictlyGE (((lowerStar (ModuleCat.{u + 1} Λ) p).mapHomologicalComplex (ComplexShape.up ℤ)).obj L) b ∧ (∀ n : ℤ, Injective ((lowerStar (ModuleCat.{u + 1} Λ) p).obj (L.X n))) ∧ IsIso (finitePushforwardSectionsUnit Λ Z L) ∧ IsIso (finitePushforwardSectionsUnit Λ Y (((lowerStar (ModuleCat.{u + 1} Λ) p).mapHomologicalComplex (ComplexShape.up ℤ)).obj L)) ∧ finitePushforwardSectionsUnit Λ Y (((lowerStar (ModuleCat.{u + 1} Λ) p).mapHomologicalComplex (ComplexShape.up ℤ)).obj L) ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).map ((lowerStar (ModuleCat.{u + 1} Λ) p).mapDerivedCategoryFactors.inv.app L ≫ (lowerStar (ModuleCat.{u + 1} Λ) p).mapDerivedCategory.map (inv (DerivedCategory.Q.map i))) ≫ (mapDerivedCategoryLowerStarCompRightDerivedGlobalSectionsIso Λ p).hom.app (DerivedCategory.Q.obj M) ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Z).map (DerivedCategory.Q.map i) = DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) p) (ComplexShape.up ℤ)).hom.app L) ≫ finitePushforwardSectionsUnit Λ Z L) ∧ ∀ (Y' : Scheme.{u}) (h : Y' ⟶ Y), (mapDerivedCategoryLowerStarCompRightDerivedGlobalSectionsIso Λ p).hom.app (DerivedCategory.Q.obj M) ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Z).map ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (pullback.snd h p)).unit.app (DerivedCategory.Q.obj M)) ≫ (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) (pullback.snd h p)).hom.app _ = (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).map ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).unit.app ((lowerStar (ModuleCat.{u + 1} Λ) p).mapDerivedCategory.obj (DerivedCategory.Q.obj M))) ≫ (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) h).hom.app _ ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y').map ((finitePushforwardDerivedMate Λ (⟨pullback.condition.symm⟩ : CommSq (pullback.snd h p) (pullback.fst h p) p h)).app (DerivedCategory.Q.obj M)) ≫ (mapDerivedCategoryLowerStarCompRightDerivedGlobalSectionsIso Λ (pullback.fst h p)).hom.app _",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6db9c3bb7",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Clause-by-clause check of the item against node and Stacks 03QP/015M: arbitrary Λ (u+1 Λ-module convention), finite p, bounded-below M; exactness and injective preservation; λ is the published canonical finite Leray iso; normalization is universal over bounded-below injective resolutions with both section comparisons' invertibility as conclusions; arbitrary h with pullback.fst/snd, IsFinite p' inferred; β = mateEquiv of the canonical squareUpperStarIso, direction checked against Mathlib, only a Plus version exists upstream; the section-comparison helper equals rightDerivedFunctorObjQIso.inv by unfolding. The supplied prerequisite module matches its stage-1 node exactly (α orientation, w fixed by hw, no QuasiIso on a). Node copies match the side DAG; the item's stmt_deps gains the self-stated prerequisite, which stage2_delivery.py allows. lean.statement fields verbatim, no name clashes, no hollow definitions, only two sorrys, source/blueprint docstrings throughout. nt_compile.py --json on both modules: exit 0, no diagnostics (13.0 s / 9.1 s). Notes needing no change: NU's unreviewed delivery of the same prerequisite has an identical theorem; the Q48 second reading was by the same worker and says so."
  }
 }

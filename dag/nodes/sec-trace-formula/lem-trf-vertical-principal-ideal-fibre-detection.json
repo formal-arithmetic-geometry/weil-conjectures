@@ -215,5 +215,23 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-abb3b7a78 (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, required stage documents, delivery errors A–F, cited DAG statements, Stacks Tag 05IG and the Tag 05CB weak-association material. Verified all hypotheses and six proof steps, including tensor/localization identifications, reduced-fibre minimality, fibre-prime correspondence, and the localization contradiction. The new node is a strict Tag 05IG specialization, has no duplicate, records the required Mathlib searches, and uses no SGA or dropped route-pivot machinery. Small edge cases were checked; no repair is needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.VerticalPrincipalIdealFibreDetection",
+  "declaration": "Ideal.span_singleton_eq_of_fibre_generic_localizations",
+  "file": "lean/Sheaf/RingTheory/VerticalPrincipalIdealFibreDetection.lean",
+  "statement": "theorem span_singleton_eq_of_fibre_generic_localizations (K : Type u) [Field K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (B : Type v) [CommRing B] [Algebra V B] [Module.Flat V B] [Algebra.FinitePresentation V B] (hgeom : ∀ (p : PrimeSpectrum V) (L : Type (max u v)) [Field L] [Algebra p.asIdeal.ResidueField L], IsReduced (L ⊗[p.asIdeal.ResidueField] p.asIdeal.Fiber B)) (f g : B) (hf : IsUnit ((Algebra.TensorProduct.includeLeft : B →ₐ[V] B ⊗[V] K) f)) (hg : IsUnit ((Algebra.TensorProduct.includeLeft : B →ₐ[V] B ⊗[V] K) g)) (hlocal : ∀ (p : PrimeSpectrum V) (ξ : PrimeSpectrum (p.asIdeal.Fiber B)) (q : PrimeSpectrum B), q = ξ.comap (Algebra.TensorProduct.includeRight : B →ₐ[V] p.asIdeal.Fiber B) → closure ({ξ} : Set (PrimeSpectrum (p.asIdeal.Fiber B))) ∈ irreducibleComponents (PrimeSpectrum (p.asIdeal.Fiber B)) → Ideal.map (algebraMap B (Localization.AtPrime q.asIdeal)) (Ideal.span {f}) = Ideal.map (algebraMap B (Localization.AtPrime q.asIdeal)) (Ideal.span {g})) : Ideal.span {f} = Ideal.span {g}",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-488758c5c",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: ValuationSubring K with Finite (PrimeSpectrum V); B flat and finitely presented with no extra assumptions; geometric reducedness tested over all fields L in Type (max u v) (a weaker hypothesis, equivalent to the node because reducedness can be tested over a field bounded by the residue field); unit images under includeLeft into B⊗[V]K; closure{ξ} an irreducible component; q the comap of ξ along includeRight; localized principal ideals equal; conclusion span{f}=span{g}. lean.statement is verbatim and only the node's lean field changed. Stacks Tag 05IG gives the exact-annihilator prime the node's step 3 needs, so the statement is true. Edge cases checked: V a field, B=0, empty fibres, zero divisors. The proof is sorry only, no definitions, docstrings carry the source place, blueprint tag and six-step proof, and the dependency records are the Mathlib declarations (Ideal.Fiber, Ideal.ResidueField, Localization.AtPrime). nt_compile --json exit 0, no errors or unexpected warnings. Remarks: the Second reading by Q77 section is a self second pass and says so; Mathlib's Algebra.IsGeometricallyReduced is an equivalent algebraic-closure form, not a fault."
  }
 }

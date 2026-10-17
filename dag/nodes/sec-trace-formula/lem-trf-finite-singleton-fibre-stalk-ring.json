@@ -155,5 +155,23 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-00948e7f6 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, route and source passages in full. Stacks 05B8 and both exact Mathlib localization matches support the proof. Corrected three small citation/definition faults; preserved all hypotheses and conclusions. Wrote review.md and three corrected JSON files under fixes/dag/nodes/sec-trace-formula/.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FiniteSingletonFibreStalkRing",
+  "file": "lean/Sheaf/TraceFormula/FiniteSingletonFibreStalkRing.lean",
+  "declaration": "AlgebraicGeometry.finite_singleton_fibre_stalk_ring",
+  "statement": "theorem finite_singleton_fibre_stalk_ring {T U : Scheme.{u}} (p : T ⟶ U) [IsFinite p] (t : T) (h : p.base ⁻¹' ({p.base t} : Set U) = ({t} : Set T)) : RingHom.Finite (p.stalkMap t).hom ∧ (LocallyOfFinitePresentation p → ∃ (a b : ℕ) (f : Fin b → MvPolynomial (Fin a) (U.presheaf.stalk (p.base t))), Nonempty (@AlgEquiv (U.presheaf.stalk (p.base t)) (T.presheaf.stalk t) (MvPolynomial (Fin a) (U.presheaf.stalk (p.base t)) ⧸ Ideal.span (Set.range f)) _ _ _ (RingHom.toAlgebra (p.stalkMap t).hom) inferInstance))",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92308465d",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 05B8(2)(3) clause by clause: [IsFinite p], singleton fibre as p.base ⁻¹' {p.base t} = {t}, RingHom.Finite (p.stalkMap t).hom, and LocallyOfFinitePresentation p → explicit MvPolynomial (Fin a)/span(range f) AlgEquiv over RingHom.toAlgebra of the stalk map. lfp vs fp is equivalent for finite (affine) p. Single universe u, no unbound variables, edge cases a=0/b=0 and empty schemes fine. Only the lean record changed and lean.statement is verbatim. Dependency records used (IsFinite, LocallyOfFinitePresentation, Scheme.Hom.stalkMap); no duplicate in Mathlib, side, newtargets or slopmaster2. Docstrings have source, blueprint and both proof steps; proof is sorry; Mathlib-only imports. nt_compile rc=0 (4.1s/6.1s), no warnings. Second-reading section is the standard post-2026-10-17 placeholder, not a fault."
  }
 }

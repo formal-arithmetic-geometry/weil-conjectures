@@ -267,5 +267,30 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-4f2e7bd95 (reviewer sub-agent of L); spot-checked: Read the full delivery, cited DAG statements, unit/chapter route, and Stacks sources. The five-step module-valued derived restriction/Leray identity is correctly typed, hypotheses and coefficient categories are preserved, edge cases check out, and no route, citation, duplicate, or mathematical defect was found."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ModuleDerivedRestrictionResolution",
+  "declaration": "AlgebraicGeometry.Etale.moduleDerivedRestrictionResolution",
+  "statement": "theorem moduleDerivedRestrictionResolution {T T' : Scheme.{u}} (u : T' ⟶ T) (Λ : Type (u + 1)) [CommRing Λ] (I : moduleInjectiveComplexPlus T Λ) (J : moduleInjectiveComplexPlus T' Λ) (a : ((upperStar (ModuleCat.{u + 1} Λ) u).mapHomologicalComplex (ComplexShape.up ℤ)).obj (moduleInjectiveComplexUnderlying I) ⟶ moduleInjectiveComplexUnderlying J) (w : ((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (moduleInjectiveComplexUnderlying I) ⟶ ((Sheaf.Γ T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (moduleInjectiveComplexUnderlying J)) (hw : ∀ i : ℤ, w.f i = globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) u ((moduleInjectiveComplexUnderlying I).X i) ≫ (Sheaf.Γ T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map (a.f i)) : ((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctorObjQIso (moduleInjectiveComplexUnderlying I)).hom ≫ DerivedCategory.Q.map w ≫ ((Sheaf.Γ T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctorObjQIso (moduleInjectiveComplexUnderlying J)).inv = (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T).map ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) u).unit.app (DerivedCategory.Q.obj (moduleInjectiveComplexUnderlying I))) ≫ (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) u).hom.app ((upperStar (ModuleCat.{u + 1} Λ) u).mapDerivedCategory.obj (DerivedCategory.Q.obj (moduleInjectiveComplexUnderlying I))) ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T').map ((upperStar (ModuleCat.{u + 1} Λ) u).mapDerivedCategoryFactors.hom.app (moduleInjectiveComplexUnderlying I) ≫ DerivedCategory.Q.map a)",
+  "by": "Q48",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/ModuleDerivedRestrictionResolution.lean",
+  "branch": "newtargets-dag",
+  "note": "The recorded prerequisite had no Lean declaration. This delivery supplies its module-valued K-injective restriction/Leray resolution identity, exactly as stated, so the parent theorem's proof step 6 has a usable declaration.",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleInjectiveComplex",
+   "AlgebraicGeometry.Etale.moduleInjectiveComplexPlus",
+   "AlgebraicGeometry.Etale.moduleInjectiveComplexUnderlying",
+   "AlgebraicGeometry.Etale.moduleDerivedRestrictionResolution"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6db9c3bb7",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Clause-by-clause check of the item against node and Stacks 03QP/015M: arbitrary Λ (u+1 Λ-module convention), finite p, bounded-below M; exactness and injective preservation; λ is the published canonical finite Leray iso; normalization is universal over bounded-below injective resolutions with both section comparisons' invertibility as conclusions; arbitrary h with pullback.fst/snd, IsFinite p' inferred; β = mateEquiv of the canonical squareUpperStarIso, direction checked against Mathlib, only a Plus version exists upstream; the section-comparison helper equals rightDerivedFunctorObjQIso.inv by unfolding. The supplied prerequisite module matches its stage-1 node exactly (α orientation, w fixed by hw, no QuasiIso on a). Node copies match the side DAG; the item's stmt_deps gains the self-stated prerequisite, which stage2_delivery.py allows. lean.statement fields verbatim, no name clashes, no hollow definitions, only two sorrys, source/blueprint docstrings throughout. nt_compile.py --json on both modules: exit 0, no diagnostics (13.0 s / 9.1 s). Notes needing no change: NU's unreviewed delivery of the same prerequisite has an identical theorem; the Q48 second reading was by the same worker and says so."
  }
 }

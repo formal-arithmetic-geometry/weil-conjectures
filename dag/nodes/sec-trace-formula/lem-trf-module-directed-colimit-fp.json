@@ -153,5 +153,24 @@
   "group": "Q85",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-8c3652960 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, canonical eight-step proof, unit/chapter route, and Stacks 00HA, 058G, 0518, 002F and 002V. The existing theorem supplies every clause; edge cases and dependency closure check out. No new nodes, long steps, cycles or forbidden machinery. The duplicate remains a valid citation alias; no consolidation is claimed. Full checks are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ModuleDirectedColimitFP",
+  "declaration": "Module.exists_small_directed_colimit_finitePresentation",
+  "file": "lean/Sheaf/TraceFormula/ModuleDirectedColimitFP.lean",
+  "statement": "theorem exists_small_directed_colimit_finitePresentation (R : Type u) [CommRing R] (Q : Type v) [AddCommGroup Q] [Module R Q] : ∃ (I : Type (max u v)) (p : PartialOrder I) (n : Nonempty I) (d : IsDirected I (p.toLE.le)), ∃ (F : @Functor I (@Preorder.smallCategory I p.toPreorder) (ModuleCat.{v} R) inferInstance), (∀ i, Module.FinitePresentation R (F.obj i)) ∧ ∃ (c : Cocone F), c.pt = ModuleCat.of R Q ∧ Nonempty (IsColimit c)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-82d63c28f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82d63c28f",
+  "group": "NK",
+  "result": "fix",
+  "note": "F1 (H3): delivered `I : Type u` (ring universe) makes the statement false for Q : Type v with v > u: the colimit of finitely presented stages indexed by a Type u set has cardinality at most a lift of a Type u cardinal (counterexample R = ℤ, Q = Type →₀ ℤ). Stacks 00HA's index set and the sibling node's proof live in universe max u v; fixed to `I : Type (max u v)`. F2 (H8): theorem docstring lacked the node's proof; added it step by step with the 058G source place. Every other clause matches the node (nonempty directed partial order, functor laws, Module.FinitePresentation per stage, cocone with vertex ModuleCat.of R Q, IsColimit). No Mathlib or project duplicate; the sibling node has no lean record. Imports, line lengths, docstrings and record fields are fine; proof is sorry. Delivered and fixed files both compile clean with nt_compile.py --json; the record statement is re-read by refit_record."
  }
 }

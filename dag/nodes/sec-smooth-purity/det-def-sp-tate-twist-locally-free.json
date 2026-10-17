@@ -119,5 +119,40 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TateTwistLocallyFree",
+  "declaration": "AlgebraicGeometry.Scheme.tateTwist_locallyFree",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.tateFiniteCoefficient",
+   "AlgebraicGeometry.Scheme.tateFiniteScalar",
+   "AlgebraicGeometry.Scheme.tateFiniteLine",
+   "AlgebraicGeometry.Scheme.tateFiniteTensor",
+   "AlgebraicGeometry.Scheme.TateSignedLine",
+   "AlgebraicGeometry.Scheme.tateComplexTwist",
+   "AlgebraicGeometry.Scheme.tateTensorRight",
+   "AlgebraicGeometry.Scheme.TateInverseTwists",
+   "AlgebraicGeometry.Scheme.tateIntegralTwist",
+   "AlgebraicGeometry.Scheme.tateRationalTwist",
+   "AlgebraicGeometry.Scheme.tatePullbackInvertible",
+   "AlgebraicGeometry.Scheme.TateRationalSignedLine",
+   "AlgebraicGeometry.Scheme.TateQbarSignedLine",
+   "AlgebraicGeometry.Scheme.tateTwist_locallyFree"
+  ],
+  "file": "lean/Sheaf/Paper/TateTwistLocallyFree.lean",
+  "statement": "theorem tateTwist_locallyFree (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] [∀ x : X, Invertible (ℓ : X.residueField x)] (E : Type u) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (Ω : Type v) [Field Ω] [Algebra (Padic ℓ) Ω] [IsAlgClosure (Padic ℓ) Ω] (ι : E →ₐ[Padic ℓ] Ω) : ∃ (I : Type (u + 1)) (U : I → X.ProEt) (f : ∀ i : I, U i ⟶ ProEt.mk (𝟙 X)) (ζ : ∀ (n : ℕ) (i : I), (purTwistRootsModule X ℓ n).val.obj (op (U i))) (e : ∀ (n : ℕ) (i : I), (SheafOfModules.unit (purTwistRing X (purTwistFiniteRing X ℓ n))).over (U i) ≅ (purTwistRootsModule X ℓ n).over (U i)), Presieve.ofArrows U f ∈ (ProEt.precoverage X).coverings _ ∧ (∀ (n : ℕ) (i : I), (proEtaleRootsOfUnityTransition X (ℓ ^ (n + 1)) (ℓ ^ (n + 2)) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_dvd_pow ℓ (Nat.le_succ (n + 1)))).hom.app (op (U i)) (ζ (n + 1) i) = ζ n i) ∧ (∀ (n : ℕ) (i : I) (V : (Over (U i))ᵒᵖ) (a : ((purTwistRing X (purTwistFiniteRing X ℓ n)).over (U i)).obj.obj V), (e n i).hom.val.app V a = a • (purTwistRootsModule X ℓ n).val.map V.unop.hom.op (ζ n i)) ∧ (∀ (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ), (∀ a : A, (ℓ ^ (r + 1)) • a = 0) → ∃ a : ZMod (ℓ ^ (r + 1)) →+* A, (∀ (n : ℕ) (hrn : r ≤ n), ∃ k : tateFiniteLine X ℓ A n (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hrn)) (ZMod (ℓ ^ (r + 1))))) ⟶ tateFiniteLine X ℓ A r a, IsIso k ∧ ∀ (V : X.ProEt) (b : (tateFiniteCoefficient X A).obj.obj (op V)) (x : (proEtaleRootsOfUnitySheaf X (ℓ ^ (n + 1))).obj.obj (op V)), k.val.app (op V) (tateFiniteTensor X ℓ A n (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hrn)) (ZMod (ℓ ^ (r + 1))))) V b x) = tateFiniteTensor X ℓ A r a V b ((proEtaleRootsOfUnityTransition X (ℓ ^ (r + 1)) (ℓ ^ (n + 1)) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_dvd_pow ℓ (Nat.succ_le_succ hrn))).hom.app (op V) x)) ∧ (∃ hL : (tateFiniteLine X ℓ A r a).IsFiniteLocallyFreeOfRank 1, TateSignedLine X (tateFiniteCoefficient X A) (tateFiniteLine X ℓ A r a) U ∧ ∀ n : ℕ, TateInverseTwists (tateComplexTwist X (tateFiniteCoefficient X A) (tateFiniteLine X ℓ A r a) hL n) (tateComplexTwist X (tateFiniteCoefficient X A) (tateFiniteLine X ℓ A r a) hL (-(n : ℤ))))) ∧ TateSignedLine X (completedIntegralCommRingSheafUnrestricted ℓ E X) (purTwistIntegralModule X ℓ E) U ∧ ∀ (D : FiniteFieldDatum.{d}) (hD : ℓ ≠ D.p), TateRationalSignedLine D ℓ hD E X U ∧ TateQbarSignedLine D ℓ hD X Ω U ∧ ∀ n : ℕ, TateInverseTwists (tateIntegralTwist D ℓ hD E X n) (tateIntegralTwist D ℓ hD E X (-(n : ℤ))) ∧ TateInverseTwists (tateRationalTwist D ℓ hD E X n) (tateRationalTwist D ℓ hD E X (-(n : ℤ))) ∧ TateInverseTwists (intrinsicQbarComplexTwistFunctor D ℓ hD X Ω n) (intrinsicQbarComplexTwistFunctor D ℓ hD X Ω (-(n : ℤ)))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-9cb6a219f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cb6a219f",
+  "group": "NW",
+  "result": "fix",
+  "note": "Read the node, the blueprint source and proof, all three statement-dependency records and their Lean (roots sheaf and transition direction, constantSheaf, coefficientTwistLine, the intrinsic integral/rational/Qbar twists and tensors), and the delivered module and report. Only the lean field of the node changed and lean.statement is verbatim. Both clause-1 generator conditions, Kummer independence via the pure-tensor formula, signed lines on one cover with the d⊗(−d) inverse, and inverse twist equivalences for A, O_E, E and Qbar are correct. The D binder only indexes the dependency and is not vacuous. Edge cases r=n=0, d=0, the zero ring and the empty scheme are covered. No hollow defs, one sorry, docstrings complete, no name clashes, lines ≤100. nt_compile clean for the delivered and the fixed file. Finding H3 (quantifier order): A, CommRing, Finite, r and hA were bound before ∃ I U f ζ e, so the cover could depend on A, while the node and proof step 3 use one cover X̃ for every finite A. Fixed in fixes/TateTwistLocallyFree.lean by moving ∀ A … r, hA → ∃ a, … inside after the cover data, nothing else changed. fixes/det-def-sp-tate-twist-locally-free.report.md records the fix."
  }
 }

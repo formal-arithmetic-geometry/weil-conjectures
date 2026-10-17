@@ -321,5 +321,24 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-03f40d53f (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, complete proofs of Stacks Tags 05I5, 057T, and 057U, all cited statements, and edge cases. The item JSON incorrectly cites Tag 05I6; the proposition is Tag 05I5 (05I6 is the following scheme-flatness lemma). Corrected whole DAG JSON written under fixes/dag/nodes/sec-trace-formula/lem-trf-finite-type-flat-etale-neighborhood.json. Review written to review.md; no other mathematical or route defects found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeFlatEtaleNeighborhood",
+  "declaration": "AlgebraicGeometry.exists_finite_type_flat_etale_neighborhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeFlatEtaleNeighborhood.lean",
+  "statement": "theorem exists_finite_type_flat_etale_neighborhood {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] (F : X.Modules) (hF : Scheme.Modules.IsQuasiCoherentFiniteType F) (x : X) (hflat : moduleFlatAt f F x) : ∃ (S' : Scheme.{u}) (s' : S') (e : S' ⟶ S), Etale e ∧ e s' = f x ∧ IsIso (e.residueFieldMap s') ∧ ∃ (V : (CategoryTheory.Limits.pullback f (Scheme.fromSpecStalk S' s' ≫ e)).Opens) (x' : V), (CategoryTheory.Limits.pullback.fst f (Scheme.fromSpecStalk S' s' ≫ e)) (V.ι x') = x ∧ (V.ι ≫ CategoryTheory.Limits.pullback.snd f (Scheme.fromSpecStalk S' s' ≫ e)) x' = IsLocalRing.closedPoint (S'.presheaf.stalk s') ∧ SheafOfModules.IsFinitePresentation ((Scheme.Modules.restrictFunctor V.ι).obj ((Scheme.Modules.tensorPullback (CategoryTheory.Limits.pullback.fst f (Scheme.fromSpecStalk S' s' ≫ e))).obj F)) ∧ (∀ y : ↥(CategoryTheory.Limits.pullback f (Scheme.fromSpecStalk S' s' ≫ e)), (CategoryTheory.Limits.pullback.fst f (Scheme.fromSpecStalk S' s' ≫ e)) y = x → y = V.ι x') ∧ Scheme.Modules.IsFlatOver ((Scheme.Modules.restrictFunctor V.ι).obj ((Scheme.Modules.tensorPullback (CategoryTheory.Limits.pullback.fst f (Scheme.fromSpecStalk S' s' ≫ e))).obj F)) (V.ι ≫ CategoryTheory.Limits.pullback.snd f (Scheme.fromSpecStalk S' s' ≫ e))",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-b31decd18"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b31decd18",
+  "group": "Q95",
+  "result": "fix",
+  "note": "Statement checked clause by clause against node and Stacks flat.tex 05I5: LocallyOfFinitePresentation, IsQuasiCoherentFiniteType, pointwise stalk flatness via landed moduleFlatAt, Etale e with e s'=f x and IsIso residueFieldMap, V open in X x_S Spec O_{S',s'} containing the unique point over x, IsFinitePresentation and IsFlatOver of the restricted tensorPullback; no extra assumptions, single universe u, statement field verbatim, sorry-only, docstrings with 05I5/blueprint and 11 proof steps. nt_compile per file clean for both delivered (5.2 s) and fixed (5.9 s) files. Fixes: added missing plan import Sheaf.TraceFormula.ElementaryDevissageFinitePresentation (stated proof dep), switched tensorPullback import to the recorded module Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction, corrected the stale report (wrong path TraceFormula->AlgebraicGeometry, flatness spelled moduleFlatAt/IsFlatOver, pullback along fromSpecStalk S' s' >> e). Pre-existing: node top-level source.place cites 05I6, should be 05I5 (not a stage-2 field)."
  }
 }
