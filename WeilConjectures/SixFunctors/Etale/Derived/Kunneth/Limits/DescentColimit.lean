@@ -35,7 +35,7 @@ noncomputable def isColimitOfFiltered (t : Cocone K)
     (hinj : ∀ (j : J) (x : K.obj j), t.ι.app j x = 0 → ∃ (k : J) (f : j ⟶ k), K.map f x = 0) :
     IsColimit t :=
   have : PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
-    preservesFilteredColimitsOfSize_shrink.{u, u, u + 1, u + 1} _
+    preservesFilteredColimitsOfSize_shrink _
   have : ReflectsColimit K (forget (ModuleCat.{u + 1} Λ)) :=
     reflectsColimit_of_reflectsIsomorphisms _ _
   isColimitOfReflects (forget (ModuleCat.{u + 1} Λ))
@@ -43,8 +43,8 @@ noncomputable def isColimitOfFiltered (t : Cocone K)
       (fun y ↦ by
         obtain ⟨j, x, hx⟩ := hsurj y
         exact ⟨j, x, hx.symm⟩)
-      (fun j x y hxy ↦ by
-        obtain ⟨k, f, hf⟩ := hinj j ((x : K.obj j) - y) (by
+      (fun j (x y : K.obj j) hxy ↦ by
+        obtain ⟨k, f, hf⟩ := hinj j (x - y) (by
           rw [map_sub]
           exact sub_eq_zero.2 hxy)
         refine ⟨k, f, ?_⟩

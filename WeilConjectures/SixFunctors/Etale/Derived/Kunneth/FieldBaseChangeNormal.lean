@@ -250,12 +250,19 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Fiel
     · rw [Category.assoc, Category.assoc, h₁' i]
       simp [cX, cY]
     · rw [Category.assoc, Category.assoc, h₂' i]
-      simp [cX, cY, sq.w_assoc]
+      simp only [cX, cY, eD, pD, pullbackConstCone_π_app_snd,
+        pullbackConstCone_π_app_snd_assoc]
+      rw [← ht, sq.w_assoc]
   have hpD (i : I) : QuasiCompact (pD.app i) :=
     MorphismProperty.of_isPullback (P := @QuasiCompact) (hX i) ‹_›
   have hpD' (i : I) : LocallyOfFiniteType (pD.app i) :=
     MorphismProperty.of_isPullback (P := @LocallyOfFiniteType) (hX i) ‹_›
-  have (i : I) : IsLocallyNoetherian (S.obj i) := LocallyOfFiniteType.isLocallyNoetherian (w.app i)
+  have (i : I) : IsLocallyNoetherian (((Functor.const I).obj (Spec (.of K))).obj i) :=
+    inferInstanceAs (IsLocallyNoetherian (Spec (.of K)))
+  have (i : I) : CompactSpace (((Functor.const I).obj (Spec (.of K))).obj i) :=
+    inferInstanceAs (CompactSpace (Spec (.of K)))
+  have (i : I) : IsLocallyNoetherian (S.obj i) :=
+    LocallyOfFiniteType.isLocallyNoetherian (w.app i)
   have (i : I) : CompactSpace (S.obj i) := QuasiCompact.compactSpace_of_compactSpace (w.app i)
   have (i : I) : IsLocallyNoetherian (XD.obj i) :=
     LocallyOfFiniteType.isLocallyNoetherian (pD.app i ≫ w.app i)

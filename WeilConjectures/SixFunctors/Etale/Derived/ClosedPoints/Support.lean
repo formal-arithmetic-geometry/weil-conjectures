@@ -306,7 +306,7 @@ theorem isZero_of_isZero_sheafFiber_of_subsingleton (p : X ⟶ Spec (.of K)) [Lo
     (hF : ∀ x ∉ closedPoints X,
       IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F))
     (h : Subsingleton (F.obj.obj (op (etaleTerminal X)))) : IsZero F :=
-  isZero_of_isGloballyGenerated Λ (isGloballyGenerated_of_isZero_sheafFiber p F hF) h
+  isZero_of_isGloballyGenerated Λ (isGloballyGenerated_of_isZero_sheafFiber F p hF) h
 
 end GlobalGeneration
 

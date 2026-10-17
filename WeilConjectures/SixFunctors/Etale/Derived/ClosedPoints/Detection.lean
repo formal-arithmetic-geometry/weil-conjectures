@@ -65,7 +65,7 @@ theorem isZero_iff_forall_isZero_homology_rightDerivedGlobalSections_of_isGE {K 
       have hΓ : IsZero ((Sheaf.Γ _ _).obj ((_root_.DerivedCategory.homologyFunctor _ (m + k)).obj
           Q)) := (h _).of_iso e.symm
       have hH : IsZero ((_root_.DerivedCategory.homologyFunctor _ (m + k)).obj Q) := by
-        refine isZero_of_isZero_sheafFiber_of_subsingleton p _ (hQ _) ?_
+        refine isZero_of_isZero_sheafFiber_of_subsingleton _ p (hQ _) ?_
         exact ModuleCat.isZero_iff_subsingleton.1 (hΓ.of_iso
           ((Sheaf.ΓNatIsoSheafSections _ _ (isTerminalEtaleTerminal X)).app _).symm)
       refine (_root_.DerivedCategory.isGE_iff Q (m + ↑(k + 1))).2 fun q hq ↦ ?_

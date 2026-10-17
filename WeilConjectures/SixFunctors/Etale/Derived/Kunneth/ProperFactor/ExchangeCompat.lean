@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.KunnethMapAgrees
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 
 /-!
@@ -51,61 +51,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A]
 
 variable {S X Y U W V : Scheme.{u}}
-
-/-- `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison_comp`, written with the derived
-tensor product `AlgebraicGeometry.Etale.derivedTensor`. -/
-@[reassoc]
-lemma leftDerivedUpperStarTensorComparison_comp_derivedTensor {T S R : Scheme.{u}} (g₁ : T ⟶ S)
-    (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂)
-    (K M : DerivedCategory (Sheaf R.smallEtaleTopology A)) :
-    ((leftDerivedUpperStarTensorComparison A g₁₂).app K).app M ≫
-        ((-⊗ᴸ-(T)[A]).map ((leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom.app K)).app _ ≫
-        ((-⊗ᴸ-(T)[A]).obj _).map ((leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom.app M) =
-      (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom.app (((-⊗ᴸ-(R)[A]).obj K).obj M) ≫
-        L((g₁)^*[A]).map (((leftDerivedUpperStarTensorComparison A g₂).app K).app M) ≫
-        ((leftDerivedUpperStarTensorComparison A g₁).app _).app _ := by
-  have := leftDerivedUpperStarTensorComparison_comp A g₁ g₂ g₁₂ hg K M
-  rw [MonoidalCategory.tensorHom_def] at this
-  exact this
-
-omit [HasSmallSiteSheafify A] in
-/-- Naturality of the tensor comparison of `Lg^*` in the first variable. -/
-@[reassoc]
-lemma leftDerivedUpperStarTensorComparison_naturality_left {T R : Scheme.{u}} (g : T ⟶ R)
-    {K K' : DerivedCategory (Sheaf R.smallEtaleTopology A)} (φ : K ⟶ K')
-    (M : DerivedCategory (Sheaf R.smallEtaleTopology A)) :
-    L((g)^*[A]).map (((-⊗ᴸ-(R)[A]).map φ).app M) ≫
-        ((leftDerivedUpperStarTensorComparison A g).app K').app M =
-      ((leftDerivedUpperStarTensorComparison A g).app K).app M ≫
-        ((-⊗ᴸ-(T)[A]).map (L((g)^*[A]).map φ)).app _ :=
-  NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A g).naturality φ) M
-
-omit [HasSmallSiteSheafify A] in
-/-- Naturality of the tensor comparison of `Lg^*` in the second variable. -/
-@[reassoc]
-lemma leftDerivedUpperStarTensorComparison_naturality_right {T R : Scheme.{u}} (g : T ⟶ R)
-    (K : DerivedCategory (Sheaf R.smallEtaleTopology A))
-    {M M' : DerivedCategory (Sheaf R.smallEtaleTopology A)} (ψ : M ⟶ M') :
-    L((g)^*[A]).map (((-⊗ᴸ-(R)[A]).obj K).map ψ) ≫
-        ((leftDerivedUpperStarTensorComparison A g).app K).app M' =
-      ((leftDerivedUpperStarTensorComparison A g).app K).app M ≫
-        ((-⊗ᴸ-(T)[A]).obj _).map (L((g)^*[A]).map ψ) :=
-  ((leftDerivedUpperStarTensorComparison A g).app K).naturality ψ
-
-omit [HasSmallSiteSheafify A] in
-/-- `AlgebraicGeometry.Etale.map_rightDerivedLowerStarProjectionMap_comp_counit`, with the object
-of the counit written with the derived tensor product. -/
-@[reassoc]
-lemma map_rightDerivedLowerStarProjectionMap_comp_counit' {T R : Scheme.{u}} (g : T ⟶ R)
-    (M : DerivedCategory (Sheaf T.smallEtaleTopology A))
-    (L : DerivedCategory (Sheaf R.smallEtaleTopology A)) :
-    L((g)^*[A]).map (((rightDerivedLowerStarProjectionMap A g).app M).app L) ≫
-        (derivedUpperStarLowerStarAdjunction A g).counit.app
-          (((-⊗ᴸ-(T)[A]).obj M).obj (L((g)^*[A]).obj L)) =
-      ((leftDerivedUpperStarTensorComparison A g).app (R((g)_*[A]).obj M)).app L ≫
-        ((-⊗ᴸ-(T)[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app M)).app
-          (L((g)^*[A]).obj L) :=
-  map_rightDerivedLowerStarProjectionMap_comp_counit A g M L
 
 /-- The transpose of the Künneth map `κ_{E,K}` along `Lc^* ⊣ Rc_*`, written with the tensor
 comparison of `Lc^*`: it is
@@ -247,35 +192,81 @@ lemma kunnethMap_derivedBaseChangeMap (aX : X ⟶ S) (aY : Y ⟶ S) (aU : U ⟶ 
     simp only [Functor.map_comp, Category.assoc] at this ⊢
     exact this
 
+
+/-- The exchange map `β : Lq^* Rj_* F ⟶ Rh_* Lp^* F` of the square of
+`AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap` becomes an isomorphism after `Rc_*`
+as soon as the Künneth maps of `(X, Y)` at `(Rj_* F, Λ_Y)` and of `(U, Y)` at `(F, Λ_Y)` are
+isomorphisms: by `lem-kun-bc-kunneth-compat`, `Rc_*(β ⊗ᴸ Lr^* Λ_Y)` is then an isomorphism, the
+projection map of `h` being an isomorphism at the unit. -/
+theorem isIso_rightDerivedLowerStar_map_derivedBaseChangeMap_of_isIso_kunnethMap
+    (aX : X ⟶ S) (aY : Y ⟶ S) (aU : U ⟶ S)
+    (q : W ⟶ X) (r : W ⟶ Y) (c : W ⟶ S) (hq : q ≫ aX = c) (hr : r ≫ aY = c)
+    (j : U ⟶ X) (hj : j ≫ aX = aU) (p : V ⟶ U) (h : V ⟶ W) (sq : CommSq p h j q)
+    (r' : V ⟶ Y) (hr' : h ≫ r = r') (c' : V ⟶ S) (hc' : h ≫ c = c')
+    (hp : p ≫ aU = c') (hr'c : r' ≫ aY = c')
+    (F : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    (hX : IsIso (kunnethMap A q r aX aY c hq hr (R((j)_*[A]).obj F) (𝟙_ _)))
+    (hU : IsIso (kunnethMap A p r' aU aY c' hp hr'c F (𝟙_ _))) :
+    IsIso (R((c)_*[A]).map ((derivedBaseChangeMap A sq).app F)) := by
+  have e := kunnethMap_derivedBaseChangeMap A aX aY aU q r c hq hr j hj p h sq r' hr' c' hc' hp
+    hr'c F (𝟙_ _)
+  have h₁ := IsIso.of_isIso_fac_left e.symm
+  rw [isIso_comp_right_iff, isIso_comp_right_iff, Functor.map_comp] at h₁
+  have : IsIso (((rightDerivedLowerStarProjectionMap A h).app (L((p)^*[A]).obj F)).app
+      (L((r)^*[A]).obj (𝟙_ _))) :=
+    (NatTrans.isIso_app_iff_of_iso ((rightDerivedLowerStarProjectionMap A h).app _)
+      (leftDerivedUpperStarUnitIso A r)).2
+      (isIso_rightDerivedLowerStarProjectionMap_app_app_tensorUnit A h _)
+  rw [isIso_comp_right_iff] at h₁
+  have h₂ : IsIso (R((c)_*[A]).map
+      (((-⊗ᴸ-(W)[A]).map ((derivedBaseChangeMap A sq).app F)).app (𝟙_ _))) :=
+    (NatTrans.isIso_app_iff_of_iso
+      (Functor.whiskerRight ((-⊗ᴸ-(W)[A]).map ((derivedBaseChangeMap A sq).app F))
+        R((c)_*[A])) (leftDerivedUpperStarUnitIso A r)).1 h₁
+  have hρ : (derivedBaseChangeMap A sq).app F = (ρ_ _).inv ≫
+      ((-⊗ᴸ-(W)[A]).map ((derivedBaseChangeMap A sq).app F)).app (𝟙_ _) ≫ (ρ_ _).hom := by
+    simp [derivedTensor]
+  rw [hρ, Functor.map_comp, Functor.map_comp]
+  infer_instance
+
 end General
 
 section Point
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
-  [HasInvertibleExponent Λ (Spec (.of k))]
+variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
 
 /-- The projective case of the proof of blueprint `lem-kun-0f1h`.
 
-Let `k` be a separably closed field, `Λ` a finite ring whose exponent is invertible in `k`,
-`j : U ⟶ X` an open immersion of `k`-schemes of finite type, `Y` a `k`-scheme of finite type
-(e.g. projective), `W = X ×_k Y` with projections `q`, `r`, and `V = U ×_X W` with projections
-`p : V ⟶ U`, `h : V ⟶ W`. For every `E ∈ D(U_ét, Λ)` the exchange map
+Let `k` be a separably closed field, `Λ` a ring which is torsion as an additive group,
+`j : U ⟶ X` an open immersion of `k`-schemes, `X` of finite type over `k`, `Y` a proper (e.g.
+projective) `k`-scheme, `W = X ×_k Y` with projections `q`, `r`, and `V = U ×_X W` with
+projections `p : V ⟶ U`, `h : V ⟶ W`. For every `E ∈ D(U_ét, Λ)` the exchange map
 `β : Lq^* Rj_* E ⟶ Rh_* Lp^* E` (`AlgebraicGeometry.Etale.derivedBaseChangeMap`) induces an
 isomorphism `RΓ(W, Lq^* Rj_* E) ≅ RΓ(W, Rh_* Lp^* E)`.
 
-Following the blueprint, both sides are computed by the Künneth formula
-(`AlgebraicGeometry.Etale.isIso_kunnethMap_of_isSepClosed`) with the unit `Λ_Y` on `Y`, and the
-two Künneth maps are related by `AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap`
-(`lem-kun-bc-kunneth-compat`). -/
+Following the blueprint, both sides are computed by the Künneth formula with the proper factor
+`Y` (`AlgebraicGeometry.Etale.isIso_kunnethMap_of_isProper`, `lem-kun-kunneth-map-agrees`)
+with the unit `Λ_Y` on `Y`, and the two Künneth maps are related by
+`AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap` (`lem-kun-bc-kunneth-compat`). -/
 theorem isIso_rightDerivedGlobalSections_map_derivedBaseChangeMap_of_isProper
-    {X Y U W V : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (hΛ : IsAddTorsion Λ) {X Y U W V : Scheme.{u}} (aX : X ⟶ Spec (.of k))
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsProper aY]
     (q : W ⟶ X) (r : W ⟶ Y) (sqW : IsPullback q r aX aY)
     (j : U ⟶ X) [IsOpenImmersion j] (p : V ⟶ U) (h : V ⟶ W) (sq : IsPullback p h j q)
     (E : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).map
       ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app E)) := by
-  sorry
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  have sqV : IsPullback p (h ≫ r) (j ≫ aX) aY := (sq.flip.paste_horiz sqW.flip).flip
+  have hc' : h ≫ q ≫ aX = p ≫ j ≫ aX := by rw [← Category.assoc, ← sq.w, Category.assoc]
+  have := isIso_rightDerivedLowerStar_map_derivedBaseChangeMap_of_isIso_kunnethMap
+    (ModuleCat.{u + 1} Λ) aX aY (j ≫ aX) q r (q ≫ aX) rfl sqW.w.symm j rfl p h sq.toCommSq
+    (h ≫ r) rfl (p ≫ j ≫ aX) hc' rfl sqV.w.symm E
+    (isIso_kunnethMap_of_isProper Λ hΛ aX aY q r sqW _ _)
+    (isIso_kunnethMap_of_isProper Λ hΛ (j ≫ aX) aY p (h ≫ r) sqV _ _)
+  exact (NatIso.isIso_map_iff
+    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ (q ≫ aX)) _).1
+    (by rw [Functor.comp_map]; infer_instance)
 
 end Point
 
