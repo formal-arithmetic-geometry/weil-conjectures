@@ -27,8 +27,7 @@ noncomputable section
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
 
-attribute [local irreducible] picardTermwiseCounit
-  Modules.tensorPullbackCompositionIso
+attribute [local irreducible] picardTermwiseCounit Modules.tensorPullbackCompositionIso
   Modules.tensorPullback Modules.tensorPullbackObj
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Modules.Hom DerivedCategory
