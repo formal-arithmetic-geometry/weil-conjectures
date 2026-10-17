@@ -5,22 +5,22 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-!
-# The derived monoidal category of a braided category is braided
+# The hexagon identities for the derived braiding via K-flat objects
 
 Let `L : C ⥤ D` be a localization functor for `W` such that the tensor product of the monoidal
 category `C` induces a derived monoidal structure on `DerivedMonoidal L W`
 (`CategoryTheory.Functor.HasDerivedMonoidalCategory`). If `C` is braided, the braiding of `C`
-induces a natural isomorphism `X ⊗ᴸ Y ≅ Y ⊗ᴸ X`
-(`CategoryTheory.DerivedMonoidal.braiding`): by the universal property of the left derived
-functor `- ⊗ᴸ -`, it is the unique natural transformation whose composite with the comparison
-`L'X ⊗ᴸ L'Y ⟶ L'(X ⊗ Y)` is `L'(β_ X Y)` (`CategoryTheory.DerivedMonoidal.braiding_hom_μ`).
+induces the derived braiding `CategoryTheory.DerivedMonoidal.braiding`; on objects it is
+characterised by the commutativity of its square with the comparison `L'X ⊗ᴸ L'Y ⟶ L'(X ⊗ Y)`
+(`CategoryTheory.DerivedMonoidal.braiding_hom_μ`).
 
 When K-flat objects form a left derivability structure, the hexagon identities hold
-(`CategoryTheory.DerivedMonoidal.braidedCategory`): for K-flat objects the comparison maps
-are isomorphisms, which reduces the hexagons to those of `C`
+(`CategoryTheory.DerivedMonoidal.braidedCategoryOfKFlat`): for K-flat objects the comparison
+maps are isomorphisms, which reduces the hexagons to those of `C`
 (`CategoryTheory.DerivedMonoidal.hexagon_forward_of_kFlat`), and every object of
 `DerivedMonoidal L W` is isomorphic to the image of a K-flat object.
 -/
@@ -40,95 +40,10 @@ local notation "L'" => toDerivedMonoidal L W
 
 variable [L.HasDerivedMonoidalCategory W]
 
-/-- (Implementation) The map `L'Y ⊗ᴸ L'X ⟶ L'(Y ⊗ X) ⟶ L'(X ⊗ Y)` whose second map is
-`L'((β_ Y X).hom)`. -/
-noncomputable def braidingCounit :
-    (((whiskeringLeft₂ D).obj L').obj L').obj (bifunctor L W).flip ⟶
-      curriedTensor C ⋙ (whiskeringRight _ _ _).obj L' :=
-  (flipFunctor _ _ _).map (counit L W) ≫
-    whiskerRight ((flipFunctor _ _ _).map (BraidedCategory.curriedBraidingNatIso C).hom)
-      ((whiskeringRight C C _).obj L')
-
-/-- (Implementation) The map `L'Y ⊗ᴸ L'X ⟶ L'(Y ⊗ X) ⟶ L'(X ⊗ Y)` whose second map is
-`L'((β_ X Y).inv)`. -/
-noncomputable def braidingInvCounit :
-    (((whiskeringLeft₂ D).obj L').obj L').obj (bifunctor L W).flip ⟶
-      curriedTensor C ⋙ (whiskeringRight _ _ _).obj L' :=
-  (flipFunctor _ _ _).map (counit L W) ≫
-    whiskerRight (BraidedCategory.curriedBraidingNatIso C).inv ((whiskeringRight C C _).obj L')
-
-/-- (Implementation) The natural transformation `(X, Y) ↦ (Y ⊗ᴸ X ⟶ X ⊗ᴸ Y)` lifted from
-`braidingCounit`. -/
-noncomputable def braidingNatTrans : (bifunctor L W).flip ⟶ bifunctor L W :=
-  (bifunctor L W).leftDerived₂Lift (counit L W) W W _ (braidingCounit L W)
-
-/-- (Implementation) The natural transformation `(X, Y) ↦ (Y ⊗ᴸ X ⟶ X ⊗ᴸ Y)` lifted from
-`braidingInvCounit`. -/
-noncomputable def braidingInvNatTrans : (bifunctor L W).flip ⟶ bifunctor L W :=
-  (bifunctor L W).leftDerived₂Lift (counit L W) W W _ (braidingInvCounit L W)
-
-/-- The square
-```
-L'X ⊗ᴸ L'Y --β--> L'Y ⊗ᴸ L'X
-    |                  |
- L'(X ⊗ Y) --L'β--> L'(Y ⊗ X)
-```
-commutes, where the vertical maps are the counit. -/
-@[reassoc]
-lemma braidingNatTrans_fac (X Y : C) :
-    ((braidingNatTrans L W).app ((L').obj Y)).app ((L').obj X) ≫ ((counit L W).app Y).app X =
-      ((counit L W).app X).app Y ≫ (L').map (β_ X Y).hom :=
-  (bifunctor L W).leftDerived₂_fac_app_app (counit L W) W W _ (braidingCounit L W) Y X
-
-/-- The square
-```
-L'X ⊗ᴸ L'Y --β⁻¹--> L'Y ⊗ᴸ L'X
-    |                    |
- L'(X ⊗ Y) --L'β⁻¹--> L'(Y ⊗ X)
-```
-commutes, where the vertical maps are the counit. -/
-@[reassoc]
-lemma braidingInvNatTrans_fac (X Y : C) :
-    ((braidingInvNatTrans L W).app ((L').obj Y)).app ((L').obj X) ≫ ((counit L W).app Y).app X =
-      ((counit L W).app X).app Y ≫ (L').map (β_ Y X).inv :=
-  (bifunctor L W).leftDerived₂_fac_app_app (counit L W) W W _ (braidingInvCounit L W) Y X
-
-lemma braidingNatTrans_comp_braidingInvNatTrans :
-    (flipFunctor _ _ _).map (braidingNatTrans L W) ≫ braidingInvNatTrans L W =
-      𝟙 (bifunctor L W) := by
-  apply (bifunctor L W).leftDerived₂_ext (counit L W) W W
-  ext X Y
-  have h : ((braidingNatTrans L W).app ((L').obj Y)).app ((L').obj X) ≫
-      ((braidingInvNatTrans L W).app ((L').obj X)).app ((L').obj Y) ≫
-        ((counit L W).app X).app Y = 𝟙 _ ≫ ((counit L W).app X).app Y := by
-    dsimp
-    rw [braidingInvNatTrans_fac]
-    erw [← Category.assoc, braidingNatTrans_fac]
-    erw [Category.assoc, ← (L').map_comp, Iso.hom_inv_id, (L').map_id, Category.comp_id,
-      Category.id_comp]
-  exact (Category.assoc _ _ _).trans h
-
-lemma braidingInvNatTrans_comp_braidingNatTrans :
-    (flipFunctor _ _ _).map (braidingInvNatTrans L W) ≫ braidingNatTrans L W =
-      𝟙 (bifunctor L W) := by
-  apply (bifunctor L W).leftDerived₂_ext (counit L W) W W
-  ext X Y
-  have h : ((braidingInvNatTrans L W).app ((L').obj Y)).app ((L').obj X) ≫
-      ((braidingNatTrans L W).app ((L').obj X)).app ((L').obj Y) ≫
-        ((counit L W).app X).app Y = 𝟙 _ ≫ ((counit L W).app X).app Y := by
-    dsimp
-    rw [braidingNatTrans_fac]
-    erw [← Category.assoc, braidingInvNatTrans_fac]
-    erw [Category.assoc, ← (L').map_comp, Iso.inv_hom_id, (L').map_id, Category.comp_id,
-      Category.id_comp]
-  exact (Category.assoc _ _ _).trans h
-
-/-- The braiding of the derived monoidal category. -/
-noncomputable def braiding (X Y : DerivedMonoidal L W) : X ⊗ Y ≅ Y ⊗ X where
-  hom := ((braidingNatTrans L W).app Y).app X
-  inv := ((braidingInvNatTrans L W).app X).app Y
-  hom_inv_id := congr_app (congr_app (braidingNatTrans_comp_braidingInvNatTrans L W) X) Y
-  inv_hom_id := congr_app (congr_app (braidingInvNatTrans_comp_braidingNatTrans L W) Y) X
+/-- The derived braiding `X ⊗ᴸ Y ≅ Y ⊗ᴸ X` at a pair of objects: the component of
+`CategoryTheory.DerivedMonoidal.braiding`. -/
+noncomputable abbrev braidingApp (X Y : DerivedMonoidal L W) : X ⊗ Y ≅ Y ⊗ X :=
+  ((braiding L W).app X).app Y
 
 /-- The braiding is characterised by the commutativity of the square
 ```
@@ -139,20 +54,20 @@ L'X ⊗ᴸ L'Y --β--> L'Y ⊗ᴸ L'X
 where the vertical maps are the counit. -/
 @[reassoc]
 lemma braiding_hom_counit (X Y : C) :
-    (braiding L W ((L').obj X) ((L').obj Y)).hom ≫ ((counit L W).app Y).app X =
+    (braidingApp L W ((L').obj X) ((L').obj Y)).hom ≫ ((counit L W).app Y).app X =
       ((counit L W).app X).app Y ≫ (L').map (β_ X Y).hom :=
-  braidingNatTrans_fac L W X Y
+  flipLift_fac_app_app L W _ Y X
 
 @[reassoc]
 lemma braiding_naturality_left {X Y : DerivedMonoidal L W} (f : X ⟶ Y) (Z : DerivedMonoidal L W) :
-    f ▷ Z ≫ (braiding L W Y Z).hom = (braiding L W X Z).hom ≫ Z ◁ f :=
-  ((braidingNatTrans L W).app Z).naturality f
+    f ▷ Z ≫ (braidingApp L W Y Z).hom = (braidingApp L W X Z).hom ≫ Z ◁ f :=
+  NatTrans.congr_app ((braiding L W).hom.naturality f) Z
 
 @[reassoc]
 lemma braiding_naturality_right (X : DerivedMonoidal L W) {Y Z : DerivedMonoidal L W}
     (g : Y ⟶ Z) :
-    X ◁ g ≫ (braiding L W X Z).hom = (braiding L W X Y).hom ≫ g ▷ X :=
-  congr_app ((braidingNatTrans L W).naturality g) X
+    X ◁ g ≫ (braidingApp L W X Z).hom = (braidingApp L W X Y).hom ≫ g ▷ X :=
+  ((braiding L W).app X).hom.naturality g
 
 open Functor.LaxMonoidal in
 /-- The square
@@ -164,7 +79,7 @@ L'X ⊗ᴸ L'Y --β--> L'Y ⊗ᴸ L'X
 commutes, where the vertical maps are the lax monoidal structure `μ` of `L'`. -/
 @[reassoc]
 lemma braiding_hom_μ (X Y : C) :
-    (braiding L W ((L').obj X) ((L').obj Y)).hom ≫ μ (L') Y X =
+    (braidingApp L W ((L').obj X) ((L').obj Y)).hom ≫ μ (L') Y X =
       μ (L') X Y ≫ (L').map (β_ X Y).hom :=
   braiding_hom_counit L W X Y
 
@@ -175,14 +90,14 @@ variable {L W}
 variable (L W) in
 /-- (Implementation) The forward hexagon identity at `X`, `Y`, `Z`. -/
 abbrev HexagonForward (X Y Z : DerivedMonoidal L W) : Prop :=
-  (α_ X Y Z).hom ≫ (braiding L W X (Y ⊗ Z)).hom ≫ (α_ Y Z X).hom =
-    (braiding L W X Y).hom ▷ Z ≫ (α_ Y X Z).hom ≫ Y ◁ (braiding L W X Z).hom
+  (α_ X Y Z).hom ≫ (braidingApp L W X (Y ⊗ Z)).hom ≫ (α_ Y Z X).hom =
+    (braidingApp L W X Y).hom ▷ Z ≫ (α_ Y X Z).hom ≫ Y ◁ (braidingApp L W X Z).hom
 
 variable (L W) in
 /-- (Implementation) The reverse hexagon identity at `X`, `Y`, `Z`. -/
 abbrev HexagonReverse (X Y Z : DerivedMonoidal L W) : Prop :=
-  (α_ X Y Z).inv ≫ (braiding L W (X ⊗ Y) Z).hom ≫ (α_ Z X Y).inv =
-    X ◁ (braiding L W Y Z).hom ≫ (α_ X Z Y).inv ≫ (braiding L W X Z).hom ▷ Y
+  (α_ X Y Z).inv ≫ (braidingApp L W (X ⊗ Y) Z).hom ≫ (α_ Z X Y).inv =
+    X ◁ (braidingApp L W Y Z).hom ≫ (α_ X Z Y).inv ≫ (braidingApp L W X Z).hom ▷ Y
 
 lemma hexagon_forward_transfer₁ {X' X : DerivedMonoidal L W} (e : X' ≅ X)
     (Y Z : DerivedMonoidal L W) (h : HexagonForward L W X' Y Z) : HexagonForward L W X Y Z := by
@@ -255,11 +170,11 @@ open Functor.LaxMonoidal
 K-flat. -/
 lemma hexagon_forward_of_kFlat (X Y Z : C) (hY : W.kFlat Y) (hZ : W.kFlat Z) :
     (α_ ((L').obj X) ((L').obj Y) ((L').obj Z)).hom ≫
-      (braiding L W ((L').obj X) ((L').obj Y ⊗ (L').obj Z)).hom ≫
+      (braidingApp L W ((L').obj X) ((L').obj Y ⊗ (L').obj Z)).hom ≫
         (α_ ((L').obj Y) ((L').obj Z) ((L').obj X)).hom =
-    (braiding L W ((L').obj X) ((L').obj Y)).hom ▷ (L').obj Z ≫
+    (braidingApp L W ((L').obj X) ((L').obj Y)).hom ▷ (L').obj Z ≫
       (α_ ((L').obj Y) ((L').obj X) ((L').obj Z)).hom ≫
-        (L').obj Y ◁ (braiding L W ((L').obj X) ((L').obj Z)).hom := by
+        (L').obj Y ◁ (braidingApp L W ((L').obj X) ((L').obj Z)).hom := by
   have : IsIso (μ (L') Z X) := isIso_counit_app_app_of_kFlat_left L W Z X hZ
   have : IsIso (μ (L') Y (Z ⊗ X)) := isIso_counit_app_app_of_kFlat_left L W Y _ hY
   rw [← cancel_mono ((L').obj Y ◁ μ (L') Z X ≫ μ (L') Y (Z ⊗ X))]
@@ -276,11 +191,11 @@ lemma hexagon_forward_of_kFlat (X Y Z : C) (hY : W.kFlat Y) (hZ : W.kFlat Z) :
 K-flat. -/
 lemma hexagon_reverse_of_kFlat (X Y Z : C) (hY : W.kFlat Y) (hZ : W.kFlat Z) :
     (α_ ((L').obj X) ((L').obj Y) ((L').obj Z)).inv ≫
-      (braiding L W ((L').obj X ⊗ (L').obj Y) ((L').obj Z)).hom ≫
+      (braidingApp L W ((L').obj X ⊗ (L').obj Y) ((L').obj Z)).hom ≫
         (α_ ((L').obj Z) ((L').obj X) ((L').obj Y)).inv =
-    (L').obj X ◁ (braiding L W ((L').obj Y) ((L').obj Z)).hom ≫
+    (L').obj X ◁ (braidingApp L W ((L').obj Y) ((L').obj Z)).hom ≫
       (α_ ((L').obj X) ((L').obj Z) ((L').obj Y)).inv ≫
-        (braiding L W ((L').obj X) ((L').obj Z)).hom ▷ (L').obj Y := by
+        (braidingApp L W ((L').obj X) ((L').obj Z)).hom ▷ (L').obj Y := by
   have : IsIso (μ (L') Z X) := isIso_counit_app_app_of_kFlat_left L W Z X hZ
   have : IsIso (μ (L') (Z ⊗ X) Y) := isIso_counit_app_app_of_kFlat_right L W _ Y hY
   rw [← cancel_mono (μ (L') Z X ▷ (L').obj Y ≫ μ (L') (Z ⊗ X) Y)]
@@ -305,9 +220,13 @@ lemma exists_kFlat_iso (X : DerivedMonoidal L W) :
   exact ⟨R.X₁.obj, R.X₁.property,
     ⟨@asIso _ _ _ _ ((L').map R.w) hR ≪≫ (L').objObjPreimageIso X⟩⟩
 
-/-- The braided structure on the derived monoidal category, induced by a braiding of `C`. -/
-noncomputable instance braidedCategory : BraidedCategory (DerivedMonoidal L W) where
-  braiding := braiding L W
+/-- The braided structure on the derived monoidal category given by the derived braiding
+`CategoryTheory.DerivedMonoidal.braiding`, when K-flat objects form a left derivability
+structure. It has the same braiding as the instance
+`CategoryTheory.DerivedMonoidal.braidedCategory`; here the hexagon identities are proved, by
+reducing them to those of `C` on K-flat objects. -/
+noncomputable abbrev braidedCategoryOfKFlat : BraidedCategory (DerivedMonoidal L W) where
+  braiding := braidingApp L W
   braiding_naturality_left f Z := braiding_naturality_left L W f Z
   braiding_naturality_right X _ _ g := braiding_naturality_right L W X g
   hexagon_forward X Y Z := by

@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 If `C` is a braided monoidal preadditive category, the Koszul braiding of cochain complexes
 (`CochainComplex.Monoidal.braidedCategory`) descends to the homotopy category
 `HomotopyCategory C (ComplexShape.up ℤ)`: the braiding of `quotient K ⊗ quotient L` is the image
-of the braiding `K ⊗ L ≅ L ⊗ K` (`HomotopyCategory.braidedCategory`).
+of the braiding `K ⊗ L ≅ L ⊗ K` (`HomotopyCategory.koszulBraidedCategory`).
 -/
 
 @[expose] public section
@@ -56,8 +56,11 @@ lemma braiding_quotient (K L : CochainComplex C ℤ) :
     braiding ((quotient C _).obj K) ((quotient C _).obj L) = (quotient C _).mapIso (β_ K L) :=
   rfl
 
-/-- The braided monoidal structure on the homotopy category of cochain complexes. -/
-noncomputable instance braidedCategory : BraidedCategory (HomotopyCategory C (.up ℤ)) where
+/-- The braided monoidal structure on the homotopy category of cochain complexes induced by the
+Koszul braiding, with the hexagon identities proved. It is not an instance: the instance on
+the homotopy category is `HomotopyCategory.MonoidalCategory.braidedCategory`, whose hexagon
+identities are not proved yet. -/
+noncomputable abbrev koszulBraidedCategory : BraidedCategory (HomotopyCategory C (.up ℤ)) where
   braiding := braiding
   braiding_naturality_left {X Y} f Z := by
     obtain ⟨X, rfl⟩ := X.quotient_obj_surjective
