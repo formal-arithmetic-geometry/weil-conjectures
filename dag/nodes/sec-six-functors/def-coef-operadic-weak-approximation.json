@@ -30,7 +30,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-operadic-algebra-presentability",
   "def-coef-infinity-fibrations",
-  "lem-cbc-relative-coslice-left-fibration"
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-coef-twisted-arrow-left-fibration",
+  "lem-coef-infinity-isofibration-exponentiation"
  ],
  "proof": [],
  "proof_deps": [],
@@ -200,5 +202,34 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-1c3cc60d8 (reviewer sub-agent of L); spot-checked: I read the definition in full against the source, Gepner–Haugseng arXiv:1312.3178v4. The PDF was fetched and converted to text; it is not in literature/. Def. 3.1.19 says a fibration of generalized operads is an inert-preserving categorical fibration, and cocartesian fibration is a separate notion, so the repair that removes the cocartesian requirement is correct. The definition matches Def. A.6.1 clause by clause: M generalized, O ordinary; for every C and every arbitrary α, the full subcategory of M_{/C} ×_{O_{/f(C)}} (O_{/f(C)})_{α/} on pairs with γ inert is weakly contractible; inertness is imposed on γ only, not on the comparison edge h. The general-map clause is the factorization f = g∘e with e an equivalence and g a categorical fibration that is a weak approximation, and it is purely existential. The slice and coslice simplices and operators are correct, and the pullback is a quasicategory by lem-cbc-relative-coslice-left-fibration. Weak contractibility includes the component condition, so an empty category does not count. The inner-fibration plus equivalence-lifting form of categorical fibration is Joyal's characterization for quasicategories. All five stmt_deps are used and supply exactly what is taken from them. Small cases checked: f = id (the pair (α, id) is initial even for non-inert α), M empty, nullary and [0] objects. The citers (the active-lift criterion, E.0.2, and the algebra-invariance lemma, A.6.5) are consistent with the definition. No duplicate exists in the DAG or in the main-20261015 blueprint; lem-coef-operadic-approximation-restriction is the different symmetric notion. There are no new nodes and no proof steps, nothing cites SGA, and nothing was changed. One note, not a fault: the Kan M_[0] convention is inherited from lem-coef-operadic-algebra-presentability and is stricter than GH Def. 2.4.1."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicWeakApproximation",
+  "declaration": "SSet.Enhanced.Nonsymmetric.IsWeakApproximation",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.IsActiveBase",
+   "SSet.Enhanced.Nonsymmetric.IsActiveEdge",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.slice",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.factorizationSubcomplex",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.factorization",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.firstEdge",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.inertFactorizations",
+   "SSet.Enhanced.Nonsymmetric.IsFibrationWeakApproximation",
+   "SSet.Enhanced.Nonsymmetric.IsWeakApproximation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicWeakApproximation.lean",
+  "statement": "def IsWeakApproximation {M O : SSet.{max u v}} (q : M ⟶ monoidalSimplexBase.{max u v}) (p : O ⟶ monoidalSimplexBase.{max u v}) (f : M ⟶ O) : Prop",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4b8dfae19",
+  "group": "N5",
+  "result": "fix",
+  "note": "Mathematics and Lean match the node and source; immutable module compiles cleanly. Repaired H11 self-audit section with a complete independent-reading report under fixes/. Detailed checks are in review.md. Branch head unchanged."
  }
 }

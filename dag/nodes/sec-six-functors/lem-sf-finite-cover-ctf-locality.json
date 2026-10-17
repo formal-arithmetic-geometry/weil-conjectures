@@ -327,5 +327,23 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-a1b1ec5a3 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement, plus the ancestor lem-sf-tensor-hom, unit sk-thm-sf-tensor-hom (master and main-20261015), Stacks 095F, 095E and 07A4, and the coefficient definitions. Coefficient categories: def-weil-finite-torsion-constructibility and def-weil-finite-tor-amplitude are intrinsic (pro-etale, constant A_X, no etale origin) and match the item's conclusion exactly. Statement: true and unweakened; tested on empty X with r=0, one point, a disjoint cover, A=0 and the endpoints t=a,b. Step 1 (Noetherian implies qcqs, finite affine refinement), steps 2 and 5 (07A4 comparison applied to the localization, covering-family vanishing from clause 1 of lem-cbc-proetale-stalk-conservative), step 3 (actual factorizations from the gluing lemma's statement, reduced structure) and step 6 (tensor with the unit) are correct. There are no new nodes and no duplicates: the candidates lem-sf-affine-chart-factorization-gluing, lem-sf-kv-affine-locality and lem-weil-pbc-constructible-qcqs-affine-local are etale or about different objects. I repaired two faults. (1) C1/C5, step 2: pullback along an open immersion was used as localized restriction (for H^t(K_i) in steps 3-4) with no citation; I added the reviewed nodes lem-sfb-proetale-object-inverse-image-restriction and lem-weil-proetale-weakly-etale-localization. (2) C2/E5, step 4: it was marked elementary and said 'composition identifications' where it needs the localization square (h^*L)|_{Z_j} = h_{T_j}^*(L|_{T_j}); I cited the reviewed node lem-weil-pbc-localize-ringed-site-morphism, wrote out its application and set elementary to false. proof_deps is again the union of the uses, and two tool_uses were added; a DFS found no cycle. Remark: the statement's 'finite stalks' has no explicit geometric-stalk citation; this matches the parent definition and I left it unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteCoverCTFLocality",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoverCTFLocality",
+  "file": "lean/Sheaf/SixFunctors/FiniteCoverCTFLocality.lean",
+  "statement": "theorem finiteCoverCTFLocality (X : Scheme.{t}) (hX : TopologicalSpace.NoetherianSpace X) (A : Type t) [CommRing A] [Finite A] (r : ℕ) (U : Fin r → Scheme.{t}) (j : ∀ i : Fin r, U i ⟶ X) (hj : ∀ i : Fin r, IsOpenImmersion (j i)) (hcover : ∀ x : X, ∃ i : Fin r, ∃ y : U i, (j i).base y = x) (K : proEtaleDerivedCategory X A) (a b : ℤ) (hab : a ≤ b) (hlocal : ∀ i : Fin r, Set.Finite {t : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules (U i) (proEtaleConstantRing (U i) A)) t).obj ((proEtaleConstantRingDerivedPullback A (j i)).obj K))}) (hconstructible : ∀ (i : Fin r) (t : ℤ), IsConstructibleProEtaleModuleSheaf (U i) A ((DerivedCategory.homologyFunctor (proEtaleRingModules (U i) (proEtaleConstantRing (U i) A)) t).obj ((proEtaleConstantRingDerivedPullback A (j i)).obj K))) (htor : ∀ (i : Fin r) (F : proEtaleRingModules (U i) (proEtaleConstantRing (U i) A)) (t : ℤ), t < a ∨ b < t → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules (U i) (proEtaleConstantRing (U i) A)) t).obj (proEtaleDerivedTensor (U i) A ((proEtaleConstantRingDerivedPullback A (j i)).obj K) ((DerivedCategory.singleFunctor (proEtaleRingModules (U i) (proEtaleConstantRing (U i) A)) 0).obj F)))) : Set.Finite {t : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) t).obj K)} ∧ (∀ t : ℤ, IsConstructibleProEtaleModuleSheaf X A ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) t).obj K)) ∧ (∀ (F : proEtaleRingModules X (proEtaleConstantRing X A)) (t : ℤ), t < a ∨ b < t → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) t).obj (proEtaleDerivedTensor X A K ((DerivedCategory.singleFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) 0).obj F))))",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fca041dc9",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all hypotheses, conclusions, dependencies, sources, universes, reduced-stratum and empty-cover cases. Both immutable Lean modules compiled cleanly through scompile.py with server confirmation. No corrections required; branch head unchanged."
  }
 }
