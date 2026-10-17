@@ -3938,6 +3938,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve.Betti
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve.ConstantDevissage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve.FibreCohomology
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve.GenericReduction
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve.NoetherianInduction
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve.Sigma
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveLine.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
