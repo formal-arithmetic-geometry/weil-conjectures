@@ -12,9 +12,78 @@
   "def-weil-etale-morphism",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the forward implication, each etale morphism h_i is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Since f is smooth, the composite f∘h_i is smooth by [lem-trf-smooth-composition].",
+   "uses": [
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GK (morphisms-lemma-etale-smooth-unramified: an etale morphism is smooth) and Tag 01VA (morphisms-lemma-composition-smooth: composition of smooth morphisms is smooth)."
+   }
+  },
+  {
+   "text": "For the reverse implication, each h_i is flat and locally of finite presentation by [def-weil-etale-morphism]. Hence its image W_i=h_i(U_i) is open by [lem-weil-pbc-flat-lfp-open], and the W_i cover X by joint surjectivity. By [lem-weil-pbc-morphism-factors-through-open-subscheme], h_i factors uniquely through a map q_i:U_i→W_i; this factor is surjective because W_i is the image. Restricting a flat, locally finitely presented morphism to an open source and open target preserves those properties by the local definitions. The open restriction f|_{W_i} is the $f_{U,V}$ construction of [lem-weil-pbc-smooth-restrict-open-subschemes] with target open $V=S$. The composite of q_i with f|_{W_i} is f∘h_i, so the hypothesis makes it smooth. Applying [lem-sbc-smooth-flat-surjective-source-descent] to q_i shows that f|_{W_i} is smooth.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036U, with Tags 01UA and 05B5: open images of etale maps and descent of smoothness along flat surjective locally finitely presented covers."
+   }
+  },
+  {
+   "text": "The W_i form an open cover of X, and [lem-weil-pbc-smooth-local-on-source] says that smoothness is local on such a source cover. Since every restriction f|_{W_i} is smooth, f is smooth. This proves the global equivalence without separatedness, quasi-compactness, or Noetherian assumptions.",
+   "uses": [
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V6, smoothness local on an open cover of the source."
+   }
+  },
+  {
+   "text": "For the pointwise clause, suppose first that f is smooth on an open neighbourhood of h(u). The open restriction of f to that neighbourhood is the restriction described in [lem-weil-pbc-smooth-restrict-open-subschemes]. Restricting h to the inverse image of that neighbourhood gives an etale map, hence a smooth map by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], and [lem-trf-smooth-composition] gives smoothness of f∘h near u. Conversely, if f∘h is smooth on an open neighbourhood V of u, then h(V) is open by [lem-weil-pbc-flat-lfp-open] and contains h(u). The restriction h|_V factors through h(V) by [lem-weil-pbc-morphism-factors-through-open-subscheme]; it is surjective, flat, and locally of finite presentation. Its composite with f|_{h(V)} is smooth, so [lem-sbc-smooth-flat-surjective-source-descent] gives smoothness of f|_{h(V)}. Thus f is smooth at h(u).",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036U with Tag 01UA: restriction to smooth loci and openness of etale maps give the pointwise formulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 036U, lemma-smooth-smooth-local-source and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-symmetric-nodal-blowup",
@@ -65,7 +134,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Smoothness is etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route.",
+   "place": "Historical semistable auxiliary branch, Proof (1)--(2): “Smoothness is etale local on the source.”",
    "via": [
     "lem-trf-valuation-symmetric-nodal-blowup",
     "lem-trf-valuation-marked-strictification",
@@ -84,5 +153,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-source-smoothness",
+  "worker": "stage1",
+  "summary": "Repaired the split after review: removed the parent-clause etale-precomposition leaf, used the existing etale-implies-smooth node, added a generic Mathlib smooth-composition leaf, and cited the existing open-factorization and open-restriction infrastructure for the reverse and pointwise arguments.",
+  "blueprint": "Realizes the historical auxiliary sentence “Smoothness is etale local on the source” in the Proof (1)--(2) branch of lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic flat-surjective smoothness descent is applied to each open image of the etale source cover."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Supplies the geometric implication that every etale source map is smooth for the forward composition step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-e2cd4265d",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-e2cd4265d (reviewer sub-agent of L); spot-checked: I read the item, the new leaf and every cited node's statement in full. Sources checked: Stacks descent.tex 036U (l.6928) and its proof, 05B5 (l.4452), morphisms.tex 01VA (l.7104), and tags 01UA/01V6/02GK. Mathlib Smooth.lean:109 smooth_comp exists as recorded. The mathematics is correct. Forward direction: etale implies smooth, then composition. Reverse direction: open images W_i (01UA); the factor q_i:U_i->W_i is surjective, flat and lfp; flat-surjective-lfp descent (05B5, no quasi-compactness) gives f|W_i smooth; Zariski locality (01V6) glues. Pointwise clause: checked in both directions on neighbourhoods. Small cases tested: empty X, identity cover, k[x]/x^2, the node xy=0 with an etale neighbourhood, an open-immersion cover. lem-trf-smooth-composition is the general smooth composition, not a restatement of a parent clause (D1 resolved). No duplicate in the DAG: the open-immersion, constant-relative-dimension, ring-map and cohomological variants are all narrower or different. Accepting it as a Mathlib leaf matches existing leaves that rely on the same Mathlib Smooth / 02H6 identification. Tool uses accepted: lem-sbc-smooth-flat-surjective-source-descent and lem-weil-pbc-etale-smooth-zero-dimensional-fibres, as generic black boxes. No SGA source is cited and no target is touched. Repairs, written under fixes/dag/nodes/sec-trace-formula: (1) the item's blueprint.from.via listed the item itself; removed, since via is path[1:] in blueprint_refs.computed. (2) The leaf's source.document was a nonexistent lean/ path; replaced by Stacks morphisms.tex Tag 01VA lemma-composition-smooth (B5). (3) Citation repairs: step 4 used that the restriction of an etale map is etale, flat and lfp without citing the definition, so def-weil-etale-morphism is added to its uses; step 1's source place wrongly put 036U in morphisms.tex and now reads 02GK+01VA. Not repaired: the inherited from.place quote 'Smoothness is etale local on the source' is not found in the current blueprint; it predates this delivery and is noted in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
