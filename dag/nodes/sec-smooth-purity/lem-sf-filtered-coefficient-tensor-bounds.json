@@ -201,5 +201,31 @@
   "group": "Q136",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-cec85ef5b (reviewer sub-agent of L); spot-checked: The delivery is correct, with one citation repair. I read the item in full and compared it with the base copy in the side project: statement, stmt_deps and blueprint.from are unchanged, so no target or statement was weakened. I read every cited statement, the parent lem-weil-integral-scalar-extension-constructible (its step 5 applies the item with exactly the item's hypotheses), unit sk-def-sf-operations, the last paragraph of blueprint main-20261015 def-weil-rationalization-karoubi, and Stacks proetale.tex 09B5 (l.5343) and 09AL (l.5357). The coefficient category is Mod(B_Y) on the small pro-etale site throughout, which matches def-weil-proetale-constructible-sheaf and lem-weil-proetale-dbc-triangulated (same unit; Lambda finite commutative, Y arbitrary). Step checks: step 1 uses exact sheafification of constant presheaves and restriction of scalars along rho; step 2 uses the item's own termwise-flatness hypothesis, which is the definition in def-pc-flat-sheaf-modules, and B_Y-linearity on pure tensors; step 3 is a well-posed descending induction whose base is the zero sheaf, constructible with the single stratum Y, which is constructible because Y and the empty set are retrocompact; step 4 uses the same-degree exact segment from the homology leaf; step 5 uses the triangle leaf and the middle-vertex closure clause. Small cases tested: V=0, t=0, zero layers, r=s, Y empty, P unbounded, B=0, and a sanity case with Z/4 coefficients. No new nodes; checked duplicate candidates (lem-sf-complete-residue-cohomology-bounds, lem-fin-constructible-devissage, lem-sfb-finite-model-stratum-filtration, lem-sf-proetale-residue-tor-test, lem-sfb-adic-constructible-finite-reductions) and none duplicates or generalizes the item. No cycle, no SGA citations, no tool_uses needed. FIX (C1): step 5 identified the derived cohomology sheaves of Q(C) with H^n(C) without a citation. I added that sentence citing def-weil-derived-cohomology-sheaves and the clause H^n∘Q≅H^n of def-weil-abstract-derived-category, and added both to the step's uses and to proof_deps. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-sf-filtered-coefficient-tensor-bounds.json and the full review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-454625a48",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. Only the item's lean field changed; lean.statement is verbatim in the file. Recorded dependency declarations reused (constantSheaf via adicLisseConstantRing, IsFlatOnSite = exactness of siteSheafTensorRight, changeOfRings/siteSheafTensorRight, IsConstructibleProEtaleCoefficientModuleSheaf). C_U = (B_Y⊗_R P)⊗_{B_Y}U_Y is canonically isomorphic to P⊗_R U_Y, with real data. Filtration: Fin (t+1), Antitone, ⊤/⊥, actual quotients. Both conclusions use the same inclusive [r,s]. Sorry'd laws theorem is true and documented. B and V in Type (u+1) are forced by the recorded interface and harmless for finite objects; site universes not equated. Edge cases t=0, V=0, B=0, Y empty, r=s, unbounded P covered. Docstrings, line lengths and imports fine. nt_compile --json: exit 0 in 2.4 s, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FilteredCoefficientTensorBounds",
+  "declaration": "AlgebraicGeometry.Scheme.filteredCoefficientTensor_constructible_bounds",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.filteredCoefficientTensorFunctor",
+   "AlgebraicGeometry.Scheme.filteredCoefficientTensorDifferential",
+   "AlgebraicGeometry.Scheme.filteredCoefficientTensorComplex_laws",
+   "AlgebraicGeometry.Scheme.filteredCoefficientTensorComplex",
+   "AlgebraicGeometry.Scheme.filteredCoefficientTensor_constructible_bounds"
+  ],
+  "file": "lean/Sheaf/Paper/FilteredCoefficientTensorBounds.lean",
+  "statement": "theorem filteredCoefficientTensor_constructible_bounds [Finite B] (hP : ∀ q : ℤ, SheafOfModules.IsFlatOnSite (C := Y.ProEt) (J := ProEt.topology Y) (R := R) (P.X q : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))) (V : Type (u + 1)) [AddCommGroup V] [Module B V] [Finite V] (t : ℕ) (F : Fin (t + 1) → Submodule B V) (hF : Antitone F) (hF₀ : F 0 = ⊤) (hFt : F (Fin.last t) = ⊥) (r s : ℤ) (hrs : r ≤ s) (hW : ∀ (j : Fin t) (n : ℤ), IsConstructibleProEtaleCoefficientModuleSheaf Y B ((filteredCoefficientTensorComplex Y B R ρ P (ModuleCat.of B ((F j.castSucc) ⧸ (F j.succ).comap (F j.castSucc).subtype))).homology n) ∧ ((n < r ∨ s < n) → IsZero ((filteredCoefficientTensorComplex Y B R ρ P (ModuleCat.of B ((F j.castSucc) ⧸ (F j.succ).comap (F j.castSucc).subtype))).homology n))) : (∀ (j : Fin (t + 1)) (n : ℤ), IsConstructibleProEtaleCoefficientModuleSheaf Y B ((filteredCoefficientTensorComplex Y B R ρ P (ModuleCat.of B (F j))).homology n) ∧ ((n < r ∨ s < n) → IsZero ((filteredCoefficientTensorComplex Y B R ρ P (ModuleCat.of B (F j))).homology n))) ∧ (∀ n : ℤ, IsConstructibleProEtaleCoefficientModuleSheaf Y B ((filteredCoefficientTensorComplex Y B R ρ P (ModuleCat.of B V)).homology n) ∧ ((n < r ∨ s < n) → IsZero ((filteredCoefficientTensorComplex Y B R ρ P (ModuleCat.of B V)).homology n)))",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Termwise coefficient tensor is the canonical associative presentation (B_Y tensor_R P) tensor_B_Y U_Y; its balanced inverse formulas and differential are documented. The only auxiliary postponed theorem supplies the shape and square-zero proof fields of this real construction. The finite filtration uses actual submodule quotients and retains both interval endpoints."
  }
 }
