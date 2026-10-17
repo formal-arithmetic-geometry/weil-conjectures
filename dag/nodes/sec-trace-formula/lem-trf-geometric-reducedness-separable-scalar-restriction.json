@@ -12,9 +12,51 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume condition (2), and let $E/k$ be any extension field. Because $k_1/k$ is separable algebraic, it is separably generated in the sense of [def-weil-pbc-separable-field-extension]: the empty family is a transcendence basis and the extension is already separable algebraic. Applying [lem-weil-pbc-separably-generated-tensor-reduced] with $K=k_1$ and the reduced $k$-algebra $S=E$ gives that $k_1\\otimes_kE$ is reduced, hence so is $E\\otimes_k k_1$ via the swap isomorphism $x\\otimes y\\mapsto y\\otimes x$. Regard $E\\otimes_k k_1$ as a reduced $k_1$-algebra and apply [lem-trf-geometrically-reduced-base-change] to $A$; it gives reducedness of $(E\\otimes_k k_1)\\otimes_{k_1}A$. By [lem-weil-pbc-tensor-cancel-base-change] for $k\\to k_1$, the $k$-algebra $E$ and the $k_1$-algebra $A$, together with the swap isomorphisms, the map $(e\\otimes a_1)\\otimes a\\mapsto e\\otimes(a_1a)$ is a ring isomorphism $(E\\otimes_k k_1)\\otimes_{k_1}A\\cong E\\otimes_kA$ with inverse $e\\otimes a\\mapsto(e\\otimes1)\\otimes a$. Thus $E\\otimes_kA$ is reduced, proving condition (1).",
+   "uses": [
+    "def-weil-pbc-separable-field-extension",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-pbc-transcendence-basis",
+    "lem-weil-pbc-separably-generated-tensor-reduced",
+    "lem-trf-geometrically-reduced-base-change",
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y proof, first direction: apply 030U to $E\\otimes_k k_1$ and 034N, then identify the iterated tensor product"
+   }
+  },
+  {
+   "text": "Assume condition (1), and let $E/k_1$ be any extension field. Via $k\\subseteq k_1\\subseteq E$, $E$ is an extension field of $k$, so $D:=E\\otimes_kA$ is reduced by condition (1) (and the swap isomorphism). Let $R=k_1\\otimes_k k_1$ act on $D$ through the ring map $\\psi:R\\to D$, $\\lambda\\otimes\\lambda'\\mapsto\\lambda\\otimes\\lambda'$ (that is, $\\lambda\\cdot1_E\\otimes\\lambda'\\cdot1_A$), and let $R$ act on $k_1$ through the multiplication $\\mu(\\lambda\\otimes\\lambda')=\\lambda\\lambda'$. We identify $E\\otimes_{k_1}A\\cong D\\otimes_Rk_1$. Define $\\alpha:E\\otimes_{k_1}A\\to D\\otimes_Rk_1$ by $e\\otimes a\\mapsto(e\\otimes a)\\otimes1$; it is well defined because it is $k$-bilinear in $(e,a)$ and $k_1$-balanced: $(\\lambda e\\otimes a)\\otimes1=\\psi(\\lambda\\otimes1)(e\\otimes a)\\otimes1=(e\\otimes a)\\otimes\\mu(\\lambda\\otimes1)=(e\\otimes a)\\otimes\\lambda=(e\\otimes a)\\otimes\\mu(1\\otimes\\lambda)=(e\\otimes\\lambda a)\\otimes1$. Define $\\beta:D\\otimes_Rk_1\\to E\\otimes_{k_1}A$ by $(e\\otimes a)\\otimes c\\mapsto ce\\otimes a$; the map $D\\times k_1\\to E\\otimes_{k_1}A$, $(x,c)\\mapsto c\\cdot\\bar x$ with $\\bar x$ the image of $x$ under the quotient map $E\\otimes_kA\\to E\\otimes_{k_1}A$, is $R$-balanced since $\\overline{\\psi(\\lambda\\otimes\\lambda')x}=\\lambda\\lambda'\\bar x$ in $E\\otimes_{k_1}A$. Both maps are ring homomorphisms (they respect $1$ and products of pure tensors) and are mutually inverse on generators, using $(e\\otimes a)\\otimes c=(ce\\otimes a)\\otimes1$. By [lem-trf-separable-algebraic-diagonal-localization], $\\mu:R\\to k_1$ is a localization of $R$ at a multiplicative subset $S$. By [lem-weil-pbc-localization-base-change] applied to $\\psi:R\\to D$, the map $D\\to D\\otimes_Rk_1$ is a localization of $D$ at $T=\\psi(S)$. A localization of a reduced ring is reduced: if $(x/t)^n=x^n/t^n=0$, then $ux^n=0$ for some $u\\in T$, so $(ux)^n=u^{n-1}(ux^n)=0$, hence $ux=0$ as $D$ is reduced, and $x/t=ux/(ut)=0$. Therefore $D\\otimes_Rk_1\\cong E\\otimes_{k_1}A$ is reduced, proving condition (2).",
+   "uses": [
+    "lem-trf-separable-algebraic-diagonal-localization",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y proof, second direction: the tensor identity and localization by 0C2X"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "lem-trf-geometrically-reduced-base-change",
+  "lem-trf-separable-algebraic-diagonal-localization",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, with Tags 030U, 034N and 0C2X"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +92,33 @@
    "results": "Actual search: {\"t\": \"2026-10-17T18:14:28Z\", \"tool\": \"grep\", \"query\": \"geometrically.*reduced.*separable|separable.*geometrically.*reduced|0C2Y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, including its TODO about comparison with the all-field-extensions definition. Its declarations concern an algebraic-closure test, injections and algebraic scalar extensions; none states restriction of geometric reducedness along a separable algebraic field extension. Algebra.IsSeparable tower instances concern algebraic extensions only and do not give the assertion for an arbitrary algebra.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric reducedness over a field is invariant under restriction along a separable algebraic field extension",
+   "results": [
+    "Algebra.IsGeometricallyReduced.of_injective",
+    "Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+    "Algebra.isGeometricallyReduced_iff",
+    "Algebra.IsGeometricallyReduced",
+    "Algebra.isReduced_of_isGeometricallyReduced",
+    "Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+    "Algebra.IsGeometricallyReduced.of_forall_fg",
+    "Algebra.FormallyUnramified.isReduced_of_field"
+   ],
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.*reduced.*separable|separable.*geometrically.*reduced",
+   "results": [],
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometrically-integral-curve-factorization",
@@ -65,7 +130,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The ancestor proof invokes specialization to the normal cone. In its Orgogozo/de Jong geometric preparation branch, de Jong Lemma 5.2, proof, printed p. 613: after taking the Stein factorization, the extension R(Y) ⊂ R(X′) is separable. This node supplies geometric reducedness after passing from the rational-function base field to its finite separable constants.",
+   "place": "the ancestor proof invokes the separable-algebraic constants extension; this item supplies the geometric-reducedness passage used there",
    "via": [
     "lem-trf-geometrically-integral-curve-factorization",
     "lem-trf-de-jong-geometrically-irreducible-tower",
@@ -78,5 +143,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometric-reducedness-separable-scalar-restriction",
+  "worker": "stage1",
+  "summary": "Split Tag 0C2Y into its two directional arguments. The forward direction uses the existing separably-generated tensor-reduced theorem, the new 034N reduced-base-change node, and tensor cancellation. The reverse direction uses the tensor cancellation identity, the new 0C2X diagonal-localization node, base change of localization, and the elementary fact that localizations of reduced rings are reduced. No statement clause was moved into a child node.",
+  "blueprint": {
+   "ancestor": "lem-trf-local-term-locality",
+   "places": [
+    "the ancestor proof’s separable algebraic constants extension",
+    "Tag 0C2Y scalar-restriction argument"
+   ]
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separably-generated-tensor-reduced",
+    "why": "The source route needs the generic 030U reducedness theorem for a separable algebraic extension; this existing stronger node is the established DAG realization of that input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separably-generated-tensor-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-9f5f8d819",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-9f5f8d819 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks algebra.tex 10080-10285 (030U, 034N, 0C2X, 0C2Y and the definition of geometrically reduced) in full. Item 0C2Y: the statement matches Stacks with nothing added or dropped. Step 1: the empty transcendence basis makes k_1/k separably generated, so the 030U node (K=k_1, S=E) applies, then 034N over k_1 with R=E⊗k_1, then tensor-cancel with k→k_1; hypotheses checked. Step 2: the identity E⊗_{k_1}A≅(E⊗_kA)⊗_{k_1⊗k_1}k_1 cited the tensor-cancel node, which does not state it (C4). The localization-of-reduced argument said 'a power of s kills a power of x', which is imprecise. Both repaired in fixes: explicit balanced maps α,β with inverse check, ux^n=0 ⇒ (ux)^n=0 ⇒ ux=0, and tensor-cancel removed from step 2's uses. New node 034N: correct, tested on R=k, R=0, A=k, a finite product of fields and an inseparable non-example. Repaired B3: def-weil-field added to stmt_deps and reduced defined inline. Mathlib's IsGeometricallyReduced uses the algebraic closure (with a TODO on the equivalence), so the node is not a leaf. New node 0C2X: correct, tested on k_1=k, C/R and the inseparable counterexample; the 'usual kernel criterion' wording is spelled out. No duplicates: lem-weil-pbc-finite-separable-multiplication-etale covers finite extensions and étaleness only, lem-pur-finite-field-derived-tensor-summand covers finite fields only, there is no blueprint same_as, and neither new node restates a clause of the item. Accepted tool use: lem-weil-pbc-separably-generated-tensor-reduced (030U input). No SGA cited; not a target node.; 3 file(s) fixed by the reviewer"
  }
 }
