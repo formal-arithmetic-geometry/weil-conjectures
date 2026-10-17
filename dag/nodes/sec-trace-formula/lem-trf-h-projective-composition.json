@@ -189,5 +189,23 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-ed2ca7f57 (reviewer sub-agent of L); spot-checked: I read all four steps of the item, the five cited node statements (including the main-20261015 blueprint_update of lem-chow-segre and def-chow-segre), Stacks morphisms.tex 01WE (lines 10630-10655, full proof) and constructions.tex 01WD (Segre, line 2927). H-projective in def-kun-projective matches Stacks 01W8: a closed immersion into P({0..N};Y) over Y. Step 1 unfolds the definition (elementary). Step 2: the cartesian square with base P^m_S and map j makes q: P^n_Y -> Q the base change of j, so q is a closed immersion by 01QR, and pi_Q q = j pi_Y. Step 3: the cartesian square applied to pi_S gives Q = P^m_S x_S P^n_S, with the swap written out. k = q i is a closed immersion by 01QS, and I checked pr2 k = j g and that its structure morphism is h g. Step 4: lem-chow-segre's composite clause gives a closed immersion into P^{nm+n+m}_S over S, and def-kun-projective applies. proof_deps is the union of the uses. Edge cases: n=0 or m=0, empty schemes and arbitrary non-Noetherian bases need no extra hypothesis. There are no new nodes. A grep for duplicates (01WE, H-projective, composition of projective) finds no existing node with this statement; det-chow-projective-closed-immersions states something different. The parent relative-marked-nodal-reduction uses the item exactly as stated. I accept the declared tool_uses lemma-nagata-projective-space-base-change-pullback and lem-chow-segre as generic black-box tools. This is not a target node, so there is no base-change morphism or coefficient category to check, and no SGA is cited. I wrote no fixes; review.md has the details."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-afbf94ba4",
+  "group": "Q20",
+  "result": "pass",
+  "note": "The Lean statement IsHProjective.comp (g ≫ h) under [IsHProjective g] [IsHProjective h], over {X Y S : Scheme.{u}}, matches the node and Stacks 01WE clause by clause with no extra hypotheses. It uses the canonical WeilConjectures IsHProjective class of def-kun-projective, which I read in the side clone. The node diff adds only the lean record, and lean.statement equals the file signature verbatim. Greps of the side clone, slopmaster2 and Mathlib find no existing composition theorem. Edge cases (n=0, m=0, empty coordinate type, empty schemes, arbitrary bases, single universe u) are covered. Docstrings give the source place and blueprint tag and follow the four proof steps. The only proof is sorry and there are no definitions. Proof imports match proof_deps. The report has both required sections. The per-file nt_compile.py --json compile of the snapshot file was clean in 1.7 s, and a failing control file confirmed that errors are reported. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition",
+  "declaration": "AlgebraicGeometry.IsHProjective.comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/HProjectiveComposition.lean",
+  "statement": "theorem IsHProjective.comp {X Y S : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ S) [IsHProjective g] [IsHProjective h] : IsHProjective (g ≫ h)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
