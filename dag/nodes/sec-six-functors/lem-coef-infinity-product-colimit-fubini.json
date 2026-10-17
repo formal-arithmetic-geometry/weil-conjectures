@@ -10,9 +10,123 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in one universe containing all the displayed functor simplicial sets; enlarge it again for additional parameters when necessary. Put $D_T=\\operatorname{Fun}(T,\\mathcal C)$ for $T=J,K,J\\times K$. These are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. The exponential identity gives a simplicial isomorphism $D_{J\\times K}\\cong\\operatorname{Fun}(J,D_K)$: an $n$-simplex on either side is the same map $J\\times K\\times\\Delta^n\\to\\mathcal C$, with the factors rearranged. Its inverse rearranges them back, and every simplicial operator is precomposition in the last factor on both sides. Write $\\widehat H:J\\to D_K$ for the curried diagram. Under this identity $\\Delta_{J\\times K}x$ becomes $\\Delta_J(\\Delta_Kx)$; a map $H\\to L\\operatorname{pr}_J$ becomes $\\widehat H\\to\\Delta_K L$, where $\\Delta_K L$ means postcomposition of $L$ with $\\Delta_K:\\mathcal C\\to D_K$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping adjunction before inverse limit; agent-written foundational Fubini argument required by the external-product Kan-extension subargument. Online motivation: Chu--Haugseng, Corollary 6.10, p.16; universal-arrow criterion: Kerodon 02FV and 03NQ; composition: Kerodon 01PF. The parametric assertion is taken from the explicit existing DAG node, not attributed in full to those online local criteria."
+   }
+  },
+  {
+   "text": "For $T=J$ and then $T=K$, every $F\\in D_T$ has a colimiting cocone $u_F:F\\to\\Delta_T c_F$ by the hypotheses. The dual cone criterion of [lem-cbc-enhanced-functor-cone-calculus] says exactly that $v\\mapsto\\Delta_T(v)\\circ u_F$ is an equivalence $\\operatorname{Map}_{\\mathcal C}(c_F,x)\\simeq\\operatorname{Map}_{D_T}(F,\\Delta_Tx)$ for every $x$. Apply the left-hand dual of [lem-coef-parametric-universal-arrows] with $T$ there equal to the functor $\\Delta_T$, its source $\\mathcal C$, and its target full subcategory all of $D_T$. It supplies a coherent $Q_T:D_T\\to\\mathcal C$ and $\\eta_T:\\mathrm{id}_{D_T}\\to\\Delta_TQ_T$, whose components have this universal property and hence are colimiting. Its dual coherent-diagram clause gives, for every parameter simplicial set $P$, diagrams $B:P\\to D_T$, $A:P\\to\\mathcal C$, the equivalence\n$$\\Phi_{T,P}:\\operatorname{Map}_{\\operatorname{Fun}(P,\\mathcal C)}(Q_TB,A)\\xrightarrow{\\sim}\\operatorname{Map}_{\\operatorname{Fun}(P,D_T)}(B,\\Delta_TA),\\quad v\\longmapsto(\\Delta_Tv)\\circ(\\eta_TB).$$\nThis is the cited lemma's dual formula, with its stated evaluation and restriction compatibilities. Only the original $T$-shaped colimits were used: no $P$-shaped colimits or smallness of mapping spaces in $\\mathcal U$ is required.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping adjunction before inverse limit; agent-written foundational Fubini argument required by the external-product Kan-extension subargument. Online motivation: Chu--Haugseng, Corollary 6.10, p.16; universal-arrow criterion: Kerodon 02FV and 03NQ; composition: Kerodon 01PF. The parametric assertion is taken from the explicit existing DAG node, not attributed in full to those online local criteria."
+   }
+  },
+  {
+   "text": "Take $L_0=Q_K\\widehat H$ and let $\\tau_0$ be the uncurrying of $\\eta_K\\widehat H$. The restriction of $\\tau_0$ at $j$ is $\\eta_{K,\\widehat H(j)}$, so step 2 and the dual cone criterion make it colimiting. This proves the demanded existence of the coherent inner-colimit diagram and its cocone. Notice that an unrelated selection of objectwise apices was not asserted to be functorial: the universal-arrow assembly produced both the functor and the transformation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping adjunction before inverse limit; agent-written foundational Fubini argument required by the external-product Kan-extension subargument. Online motivation: Chu--Haugseng, Corollary 6.10, p.16; universal-arrow criterion: Kerodon 02FV and 03NQ; composition: Kerodon 01PF. The parametric assertion is taken from the explicit existing DAG node, not attributed in full to those online local criteria."
+   }
+  },
+  {
+   "text": "Now use any pair $(L,\\tau)$ allowed by the statement, and write $\\widehat\\tau:\\widehat H\\to\\Delta_K L$ for its currying. The equivalence $\\Phi_{K,J}$ with $A=L$, $B=\\widehat H$ supplies $a:L_0\\to L$ and a homotopy $(\\Delta_K a)\\circ\\eta_K\\widehat H\\simeq\\widehat\\tau$. Evaluation, explicitly compatible with $\\Phi_{K,J}$, makes $a_j$ a cocone-preserving morphism from the colimit cocone $\\eta_{K,\\widehat H(j)}$ to the colimit cocone $\\tau_j$. Both are initial objects in the same cocone quasicategory. Choose a reverse morphism using initiality; each of their composites is homotopic to the appropriate identity because each initial object's endomorphism space is contractible. Thus $a_j$ is an equivalence. The componentwise criterion in [lem-cbc-enhanced-functor-cone-calculus] makes $a$ an equivalence in $\\operatorname{Fun}(J,\\mathcal C)$. For every $G:J\\to\\mathcal C$, precomposition by $a$ is an equivalence of mapping spaces by the inverse-homotopy clause of [lem-cbc-simplicial-composition-spine]. Consequently\n$$\\beta_{\\tau,G}:\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal C)}(L,G)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(J,D_K)}(\\widehat H,\\Delta_K G),\\quad b\\longmapsto(\\Delta_Kb)\\circ\\widehat\\tau$$\nis an equivalence: associativity and the displayed homotopy identify it with $\\Phi_{K,J}\\circ(-\\circ a)$. This verifies universality for the prescribed $\\tau$, not merely for the chosen assembled $\\tau_0$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping adjunction before inverse limit; agent-written foundational Fubini argument required by the external-product Kan-extension subargument. Online motivation: Chu--Haugseng, Corollary 6.10, p.16; universal-arrow criterion: Kerodon 02FV and 03NQ; composition: Kerodon 01PF. The parametric assertion is taken from the explicit existing DAG node, not attributed in full to those online local criteria."
+   }
+  },
+  {
+   "text": "Let $\\lambda:L\\to\\Delta_J c$ be any colimiting outer cocone, and let $\\sigma:H\\to\\Delta_{J\\times K}c$ be the uncurrying of $(\\Delta_K\\lambda)\\circ\\widehat\\tau$. Such composition is provided in the functor quasicategory by [lem-cbc-simplicial-composition-spine]. For every $x\\in\\mathcal C$, there is a composite equivalence\n$$\\operatorname{Map}_{\\mathcal C}(c,x)\\xrightarrow{\\lambda}\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal C)}(L,\\Delta_Jx)\\xrightarrow{\\beta_{\\tau,\\Delta_Jx}}\\operatorname{Map}_{\\operatorname{Fun}(J,D_K)}(\\widehat H,\\Delta_J\\Delta_Kx)\\cong\\operatorname{Map}_{D_{J\\times K}}(H,\\Delta_{J\\times K}x).$$\nThe first map is an equivalence by the dual cone criterion for $\\lambda$; the second is step 4; the last is the simplicial isomorphism of step 1. The composite sends $v:c\\to x$ to $\\Delta_{J\\times K}(v)\\circ\\sigma$: before uncurrying it sends $v$ to $(\\Delta_K\\Delta_Jv)\\circ(\\Delta_K\\lambda)\\circ\\widehat\\tau$, and associativity gives the formula. The dual cone criterion therefore says that the specified composite cocone $\\sigma$ is colimiting. Its leg at $(j,k)$ is $\\lambda_j\\circ\\tau_{j,k}$, since evaluation preserves composition and the exponential identity is factor rearrangement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping adjunction before inverse limit; agent-written foundational Fubini argument required by the external-product Kan-extension subargument. Online motivation: Chu--Haugseng, Corollary 6.10, p.16; universal-arrow criterion: Kerodon 02FV and 03NQ; composition: Kerodon 01PF. The parametric assertion is taken from the explicit existing DAG node, not attributed in full to those online local criteria."
+   }
+  },
+  {
+   "text": "Apply step 5 to the assembled $L_0$ of step 3 and a $J$-colimit of it, which exists by hypothesis. This proves existence of all $J\\times K$-colimits under precisely the stated assumptions. If a product colimit with its cocone has already been chosen, it and this iterated cocone are initial objects of the same cocone category. A morphism between them and a reverse morphism exist by initiality; their composites are identities up to homotopy by contractibility of the endomorphism spaces. Projection to $\\mathcal C$ gives the asserted equivalence of apices with its cocone-preserving homotopy. Hence it identifies the specified legs, rather than just yielding an abstract equivalence of objects. The core on these initial cocones is contractible by [lem-cbc-enhanced-functor-cone-calculus], giving uniqueness of the cocone-compatible comparison through all higher homotopies. Interchange $J$ and $K$, using the degreewise transpose $J\\times K\\cong K\\times J$, and repeat steps 1--5. The hypotheses are symmetric, so the other iterated order is colimiting too, with its own composite legs; comparison through the product cocone identifies both orders.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping adjunction before inverse limit; agent-written foundational Fubini argument required by the external-product Kan-extension subargument. Online motivation: Chu--Haugseng, Corollary 6.10, p.16; universal-arrow criterion: Kerodon 02FV and 03NQ; composition: Kerodon 01PF. The parametric assertion is taken from the explicit existing DAG node, not attributed in full to those online local criteria."
+   }
+  },
+  {
+   "text": "To make naturality explicit, step 6 now permits step 2 with $T=J\\times K$, giving $Q_{J\\times K}$ and its universal cocone $\\eta_{J\\times K}$. Let $D=D_{J\\times K}$ and define $I:D\\to\\mathcal C$ by currying, postcomposition with $Q_K$, and $Q_J$. The transformations $\\eta_K$ and $\\eta_J$ give a coherent $s:\\mathrm{id}_D\\to\\Delta_{J\\times K}I$: its value at $H$ is the composite cocone of step 5. For precision, first whisker $\\eta_K$ by the curried diagrams to get the inner transformation, then whisker $\\eta_J$ by $Q_K\\widehat H$ and postcompose with $\\Delta_K$ to get the outer transformation, then compose in the corresponding functor quasicategory and uncurry. These operations form $s$ on the entire diagram quasicategory. Apply the dual parameter formula for $Q_{J\\times K}$ with parameter $P=D$, $B=\\mathrm{id}_D$ and $A=I$. The preimage of $s$ is a coherent transformation $e:Q_{J\\times K}\\to I$, together with a coherent homotopy $(\\Delta_{J\\times K}e)\\circ\\eta_{J\\times K}\\simeq s$. Each $e_H$ is a cocone-compatible comparison between initial cocones as in step 6 and is an equivalence. The componentwise criterion makes $e$ a natural equivalence of functors on $D$. It therefore includes noninvertible coherent transformations between diagrams and all higher simplices. The same construction after transposing factors gives the other-order natural equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping adjunction before inverse limit; agent-written foundational Fubini argument required by the external-product Kan-extension subargument. Online motivation: Chu--Haugseng, Corollary 6.10, p.16; universal-arrow criterion: Kerodon 02FV and 03NQ; composition: Kerodon 01PF. The parametric assertion is taken from the explicit existing DAG node, not attributed in full to those online local criteria."
+   }
+  },
+  {
+   "text": "All the compatibility claimed for additional simplicial parameters can now be read on these constructions. For a simplicial set $P$ and a parameterized diagram $h:P\\to D_{J\\times K}$, the comparison is $e h$ and its cocone homotopy is the one in step 7 whiskered by $h$. For $r:P'\\to P$, $(e h)r=e(hr)$ as a restriction of the same simplicial map; currying rearranges the factors in $P\\times J\\times K\\times\\Delta^n$, so it also commutes with $r$ and every face and degeneracy. The mapping-space formula of [lem-coef-parametric-universal-arrows] is explicitly compatible with these restrictions. Composites and their coherence are retained by [lem-cbc-simplicial-composition-spine]; its boundary lifting and the contractible universal-choice spaces supply the comparisons between choices. These statements do not assert that arbitrary $P$-indexed colimits exist: only diagram functors with parameter $P$ are used. Empty shapes are covered without any separate nonemptiness assumption. If $J=\\varnothing$, its colimit and the product colimit are initial objects. If $K=\\varnothing$, the assembled inner values are initial; step 4 remains valid, and step 5 computes the colimit of this coherent $J$-diagram as the initial object, even when $J$ is not contractible. The universal-arrow criterion is vacuous if the diagram domain is empty, and the mapping-space equivalences remain valid. In all cases the proof uses just the colimits required in the statement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping adjunction before inverse limit; agent-written foundational Fubini argument required by the external-product Kan-extension subargument. Online motivation: Chu--Haugseng, Corollary 6.10, p.16; universal-arrow criterion: Kerodon 02FV and 03NQ; composition: Kerodon 01PF. The parametric assertion is taken from the explicit existing DAG node, not attributed in full to those online local criteria."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-parametric-universal-arrows",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent mapping adjunction before inverse limit; agent-written foundational Fubini argument required by the external-product Kan-extension subargument. Online motivation: Chu--Haugseng, Corollary 6.10, p.16; universal-arrow criterion: Kerodon 02FV and 03NQ; composition: Kerodon 01PF. The parametric assertion is taken from the explicit existing DAG node, not attributed in full to those online local criteria."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +171,54 @@
    "date": "2026-10-17",
    "verdict": "No match: read Mathlib/CategoryTheory/Limits/Fubini.lean:450-536,638-669. The hits use ordinary Category and Functor instances, not arbitrary quasicategories and coherent functors or their mapping spaces. Read AlgebraicTopology/SimplicialNerve.lean:24-32: the space-quasicategory comparison is still listed as a project. No one-line specialization proves the coherent Fubini assertion.",
    "subdirectory": "AlgebraicTopology/SimplicialNerve.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "Fubini|colimitIsoColimitCurryCompColim|colimitUncurryIsoColimitCompColim",
+   "results": "{\"t\": \"2026-10-17T10:13:58Z\", \"tool\": \"grep\", \"query\": \"Fubini|colimitIsoColimitCurryCompColim|colimitUncurryIsoColimitCompColim\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Fubini.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\"], \"digest\": \"09606016dc8b0b6b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read Mathlib/CategoryTheory/Limits/Fubini.lean:450-536 and 638-669 and CategoryTheory/Limits/HasLimits.lean colimConstAdj. These results take ordinary Category and Functor instances and ordinary Hom sets, not arbitrary quasicategories or spaces of coherent cocones. The focused AlgebraicTopology/Quasicategory grep returned no colimit/adjoint/cocone/Fubini declarations. The nerve homotopy-category adjunction does not provide the required coherent comparison.",
+   "subdirectory": "CategoryTheory/Limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimitIsoColimitCurryCompColim",
+   "results": "{\"t\": \"2026-10-17T10:13:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitIsoColimitCurryCompColim\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_hom\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_ι_inv\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_hom_assoc\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim_ι_ι_inv_assoc\"], \"digest\": \"49996e87b428ef7e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read Mathlib/CategoryTheory/Limits/Fubini.lean:450-536 and 638-669 and CategoryTheory/Limits/HasLimits.lean colimConstAdj. These results take ordinary Category and Functor instances and ordinary Hom sets, not arbitrary quasicategories or spaces of coherent cocones. The focused AlgebraicTopology/Quasicategory grep returned no colimit/adjoint/cocone/Fubini declarations. The nerve homotopy-category adjunction does not provide the required coherent comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits indexed by products of infinity categories are iterated colimits natural in coherent diagrams",
+   "results": "{\"t\": \"2026-10-17T10:13:58Z\", \"tool\": \"leansearch\", \"query\": \"Colimits indexed by products of infinity categories are iterated colimits natural in coherent diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim\", \"CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit\", \"CategoryTheory.Limits.colimitIsoColimitCurryCompColim\", \"CategoryTheory.Limits.isColimitCoconeOfHasColimitCurryCompColim\", \"CategoryTheory.pi.coconeOfCoconeEvalIsColimit\", \"CategoryTheory.pi.hasColimit_of_hasColimit_comp_eval\", \"CategoryTheory.Limits.IsColimit.ofCoconeUncurry\", \"CategoryTheory.Limits.instHasColimitProd\"], \"digest\": \"d56360a91098dd9f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read Mathlib/CategoryTheory/Limits/Fubini.lean:450-536 and 638-669 and CategoryTheory/Limits/HasLimits.lean colimConstAdj. These results take ordinary Category and Functor instances and ordinary Hom sets, not arbitrary quasicategories or spaces of coherent cocones. The focused AlgebraicTopology/Quasicategory grep returned no colimit/adjoint/cocone/Fubini declarations. The nerve homotopy-category adjunction does not provide the required coherent comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fubini for coherent colimits in quasicategories with arbitrary simplicial parameters and composite colimit cocones",
+   "results": "{\"t\": \"2026-10-17T10:14:07Z\", \"tool\": \"leanfinder\", \"query\": \"Fubini for coherent colimits in quasicategories with arbitrary simplicial parameters and composite colimit cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.ofCoconeUncurry\", \"CategoryTheory.Limits.combinedIsColimit\", \"CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit\", \"CategoryTheory.Limits.coconeOfHasColimitCurryCompColim\", \"CategoryTheory.Limits.isColimitCoconeOfHasColimitCurryCompColim\", \"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim\", \"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim_ι_hom_assoc\", \"CategoryTheory.Limits.colimitUncurryIsoColimitCompColim_ι_ι_inv_assoc\"], \"digest\": \"4022cb03629ea76c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read Mathlib/CategoryTheory/Limits/Fubini.lean:450-536 and 638-669 and CategoryTheory/Limits/HasLimits.lean colimConstAdj. These results take ordinary Category and Functor instances and ordinary Hom sets, not arbitrary quasicategories or spaces of coherent cocones. The focused AlgebraicTopology/Quasicategory grep returned no colimit/adjoint/cocone/Fubini declarations. The nerve homotopy-category adjunction does not provide the required coherent comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|adjoint|cocone|fubini",
+   "results": "{\"t\": \"2026-10-17T10:15:39Z\", \"tool\": \"grep\", \"query\": \"colimit|adjoint|cocone|fubini\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read Mathlib/CategoryTheory/Limits/Fubini.lean:450-536 and 638-669 and CategoryTheory/Limits/HasLimits.lean colimConstAdj. These results take ordinary Category and Functor instances and ordinary Hom sets, not arbitrary quasicategories or spaces of coherent cocones. The focused AlgebraicTopology/Quasicategory grep returned no colimit/adjoint/cocone/Fubini declarations. The nerve homotopy-category adjunction does not provide the required coherent comparison.",
+   "subdirectory": "AlgebraicTopology/Quasicategory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint to the constant diagram functor in quasicategories induces parameterwise colimit functors and the Fubini comparison",
+   "results": "{\"t\": \"2026-10-17T10:15:42Z\", \"tool\": \"leanfinder\", \"query\": \"A left adjoint to the constant diagram functor in quasicategories induces parameterwise colimit functors and the Fubini comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Limits.colimConstAdj\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Limits.IsColimit.ofLeftAdjoint\", \"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\"], \"digest\": \"8c8ad9bb974ae9db\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read Mathlib/CategoryTheory/Limits/Fubini.lean:450-536 and 638-669 and CategoryTheory/Limits/HasLimits.lean colimConstAdj. These results take ordinary Category and Functor instances and ordinary Hom sets, not arbitrary quasicategories or spaces of coherent cocones. The focused AlgebraicTopology/Quasicategory grep returned no colimit/adjoint/cocone/Fubini declarations. The nerve homotopy-category adjunction does not provide the required coherent comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presheaf-external-product-kan",
@@ -88,5 +246,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-product-colimit-fubini",
+  "worker": "Q137 stage1",
+  "summary": "Preserved the statement. Proved coherent product-colimit Fubini using the existing parametric universal-arrow node and coherent cone calculus: assemble inner colimits, compare every prescribed inner cocone to the assembled one, compose the two mapping-space equivalences, identify cocone legs, and construct the natural comparison on the whole diagram quasicategory. No new nodes; no Lean attachment or Mathlib match. Explicitly retained arbitrary simplicial parameters and empty indexing shapes.",
+  "blueprint": "The item serves paragraph 2 of prop-coef-integral-exceptional-adjoint (coherent finite adjunction before inverse limit), through the already-recorded Day-convolution/presheaf external-product ancestry. Steps 1--5 realize the product-comma Fubini calculation of Chu--Haugseng Corollary 6.10, isolated as a coherent colimit tool; steps 6--8 retain its comparison cocones, units and parameter coherence. This does not replace the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General functor-quasicategory closure, dual mapping-space colimit criterion, componentwise equivalences and uniqueness of initial cocones; this foundational calculus is a black box in the Fubini subargument, not a replacement of the integral-duality route."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Composition and its inverse/associativity homotopies in coherent functor quasicategories; a generic foundational tool to compose universal cocones and preserve higher simplices."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-c14b1e699",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-c14b1e699 (reviewer sub-agent of L); spot-checked: I read the item in full: an unchanged statement, 8 proof steps and no new nodes. I also read the full statements of def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-parametric-universal-arrows and lem-cbc-simplicial-composition-spine, the parent's Fubini step, the unit and chapter records, and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. Step 2 instantiates the parametric node correctly: its dual clause with T=Delta_T and D_0=D_T, whose universal arrows are exactly the dual cone criterion, giving Phi with the correct variance. Step 4 handles an arbitrary prescribed (L,tau): it gets a from Phi_{K,J}, shows each a_j is an equivalence because both cocones are initial, then uses the componentwise criterion and inverse precomposition from composition-spine. Step 5 is a chain of mapping-space equivalences followed by the dual criterion, and the leg lambda_j o tau_{j,k} is correct. Step 6 uses only the J-colimit of L_0. Step 7 applies the dual formula with the large parameter P=D, which the node allows through universe enlargement. Step 8 handles parameters by literal restriction. Small cases tested: J=K=Delta^0; J=Delta^1 with K two points; K empty with J nonempty, where L_0 is the constant diagram at an initial object and step 5 shows its colimit is initial; J empty. I found no hypothesis used that is not in force, and no step relies on a cited node's proof. The DAG has no quasicategorical Fubini duplicate: lem-pc-colimit-fubini is ordinary-categorical. There is no cycle. I accept both declared tool_uses, cone-calculus and composition-spine, as generic sk-prop-sf-cbc foundations used as black boxes. The proof is agent-written with WANTED Chu-Haugseng and Kerodon sources, uses no SGA, and involves no target, coefficient category or base-change morphism. No fixes."
  }
 }

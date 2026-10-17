@@ -14,9 +14,110 @@
   "def-weil-open-immersion",
   "def-sbc-affine-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}k$, $f:Y\\to S$, and $j:U\\hookrightarrow Y$. For every affine open $V\\subseteq Y$, the inverse image $j^{-1}(V)$ is identified with $U\\cap V$, with its subspace topology, by [def-weil-open-immersion]. Because $U$ is closed in $Y$, $U\\cap V$ is closed in $V$. By [lem-weil-pbc-affine-scheme-qcqs], $V$ is quasi-compact; [lem-weil-pbc-closed-in-quasi-compact] therefore makes $j^{-1}(V)$ quasi-compact. This holds for every affine $V$, which is exactly quasi-compactness of $j$ in [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005C (lemma-closed-in-quasi-compact), applied on each affine open of Y; affine quasi-compactness: Algebra Tag 00E8 (lemma-quasi-compact)"
+   }
+  },
+  {
+   "text": "The open immersion $j$ is quasi-compact by Step 1, so [lem-weil-pbc-qc-open-immersion-finite-type] gives that $j$ is of finite type. The given $f$ is of finite type, hence [lem-sfb-finite-type-composition-base-change](1) applied to $j$ and $f$ shows that $f\\circ j:U\\to S$ is of finite type.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T0 (section-finite-type), 01T2 (lemma-locally-finite-type-characterize), 01T3 (lemma-composition-finite-type)"
+   }
+  },
+  {
+   "text": "The diagonal $\\Delta_{U/S}:U\\to U\\times_SU$ is the base change of $\\Delta_{Y/S}:Y\\to Y\\times_SY$ along $j\\times_Sj$. Indeed, a map into that pullback is a pair $u_1,u_2:T\\to U$ with a common image in $Y$; equality $ju_1=ju_2$ forces $u_1=u_2$, since the open immersion $j$ [def-weil-open-immersion] is a monomorphism by [lem-weil-pbc-open-immersion-monomorphism]. The pullback is therefore $U$, compatibly with both projections, by [def-pc-fibre-product]. The given separatedness of $f$ makes $\\Delta_{Y/S}$ a closed immersion by [def-weil-proper-morphism]. Apply [lem-weil-pbc-closed-immersion-base-change] to obtain a closed immersion $\\Delta_{U/S}$; the same definition gives separatedness of $U\\to S$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KK (definition-separated); diagonal base-change argument as in Tag 01KU (lemma-separated-permanence); closed-immersion base change: Morphisms Tag 01QR"
+   }
+  },
+  {
+   "text": "Fix $r\\in\\mathbf N$, put $X=\\mathbf A^r_U$, and write $p:X\\to U$. For every affine open $V=\\operatorname{Spec}R$ of $U$, [def-sbc-affine-space] identifies $p^{-1}(V)\\to V$ with $\\operatorname{Spec}(R[t_1,\\ldots,t_r])\\to\\operatorname{Spec}R$. Thus $p$ is affine by [pqf-def-affine-morphism]. The polynomial algebra is generated over $R$ by $t_1,\\ldots,t_r$: every polynomial is a finite sum of coefficient multiples of products of these variables. These single affine charts cover each inverse image, so [def-weil-finite-type-morphism] gives that $p$ is locally of finite type. By [lem-weil-pbc-affine-morphism-permanence](3), $p$ is quasi-compact and separated. Combining quasi-compactness with local finite type gives that $p$ is of finite type.",
+   "uses": [
+    "def-sbc-affine-space",
+    "pqf-def-affine-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S6 (definition-affine), 01S7 (lemma-affine-separated), 01T0 (section-finite-type); polynomial chart from def-sbc-affine-space"
+   }
+  },
+  {
+   "text": "For separatedness of the composite $X\\xrightarrow{p}U\\to S$, factor its diagonal as $X\\xrightarrow{\\Delta_{X/U}}X\\times_UX\\xrightarrow{q}X\\times_SX$. By [def-pc-fibre-product], the square with arrows $q$, $X\\times_UX\\to U$, $p\\times_Sp:X\\times_SX\\to U\\times_SU$, and $\\Delta_{U/S}$ is cartesian: its data are two maps to $X$ whose images in $U$ coincide. Step 3 and [lem-weil-pbc-closed-immersion-base-change] make $q$ a closed immersion. Step 4 and [def-weil-proper-morphism] make $\\Delta_{X/U}$ a closed immersion. Their composite is a closed immersion by [lem-weil-pbc-closed-immersion-products], so $X\\to S$ is separated by the definition.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KU (lemma-separated-permanence), proof of (1): factor the composite diagonal; closed immersions: Morphisms Tags 01QR and 01QS"
+   }
+  },
+  {
+   "text": "Both $p:X\\to U$ and $U\\to S$ are of finite type by Steps 4 and 2. Apply [lem-sfb-finite-type-composition-base-change](1) to conclude that $X\\to S$ is of finite type. Together with Step 5 this proves the second assertion for every $r$. When $U=\\varnothing$, all inverse-image affine covers in the preceding checks are empty and the conclusions hold vacuously. When $r=0$, [def-sbc-affine-space] identifies $p$ with $\\operatorname{id}_U$, recovering Steps 2 and 3. No nonemptiness or positive-rank hypothesis was used.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T3 (lemma-composition-finite-type); rank-zero identification from def-sbc-affine-space"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-sbc-affine-space",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-products"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01KU (lemma-separated-permanence), diagonal factorization; morphisms.tex Tags 01S7, 01T3; topology.tex Tag 005C, applied to the blueprint Step 1 auxiliary claim"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +153,45 @@
    "results": "8 hits: AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsSeparated.instResLE, AlgebraicGeometry.IsSeparated.instMorphismRestrict, AlgebraicGeometry.IsAffineOpen.isQuasiSeparated, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.IsSeparated.instCompScheme",
    "date": "2026-10-17",
    "verdict": "no match: restriction of separatedness and local finite type, affine separatedness, and quasi-compactness are separate generic results; no hit supplies both assertions for a clopen restriction and its relative affine space as one exact theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open and closed subscheme of a separated finite type scheme over a field and every relative affine space over it are separated and of finite type",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated, AlgebraicGeometry.Proj.isSeparated",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give generic restriction, affine separatedness, and local finite presentation facts, not the combined clopen finite-type and affine-space assertions; separate permanence arguments are required."
+  },
+  {
+   "tool": "grep",
+   "query": "isClopen|instResLE|locallyOfFiniteType_of_isOpenImmersion",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give generic restriction, affine separatedness, and local finite presentation facts, not the combined clopen finite-type and affine-space assertions; separate permanence arguments are required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clopen restriction of a separated finite type scheme over a field and affine space over it are separated and finite type",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.instMorphismRestrict, AlgebraicGeometry.IsSeparated.instResLE, AlgebraicGeometry.instQuasiSeparatedMorphismRestrict, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.instQuasiSeparatedResLE, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.instLocallyOfFiniteTypeResLE",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give generic restriction, affine separatedness, and local finite presentation facts, not the combined clopen finite-type and affine-space assertions; separate permanence arguments are required."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "10 hits: AlgebraicGeometry.ext_of_apply_eq, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType, AlgebraicGeometry.instIsOpenImmersionCompSchemeιQuasiFiniteLocusToNormalization, AlgebraicGeometry.Scheme.Hom.exists_isIso_morphismRestrict_toNormalization, AlgebraicGeometry.Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give generic restriction, affine separatedness, and local finite presentation facts, not the combined clopen finite-type and affine-space assertions; separate permanence arguments are required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open closed subscheme preserves finite type and separatedness and so does adjoining finitely many polynomial coordinates",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.instLocallyOfFiniteTypeResLE, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give generic restriction, affine separatedness, and local finite presentation facts, not the combined clopen finite-type and affine-space assertions; separate permanence arguments are required."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-pur-a1-invariance",
@@ -72,5 +208,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-clopen-affine-line-finite-type",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded clopen restriction and relative affine-space permanence into six short steps using existing DAG nodes only. Quasi-compactness is checked on affine inverse images; separatedness uses explicit cartesian diagonal squares. Polynomial finite generation is written out. No new nodes, Lean attachment, statement dispute or change to the unit route.",
+  "blueprint": "Realizes prop-pur-a1-invariance, Proof Step 1, the separated finite-type hypotheses on clopen shift pieces and their affine lines (retained split step 3); r=0 and the empty clopen are included."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-612b8f1d2",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-612b8f1d2 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and all six steps, every cited node's statement, the parent prop-pur-a1-invariance (whose Step 3 uses the item with U=Y_n, r=1), the unit sk-prop-a1-inv, and the main-20261015 blueprint statement and proof (Step 1, clopen reduction). Stacks checks against the tags file and the .tex: 005C (topology.tex:1662), 00E8, 01T0/01T2/01T3, 01KK, 01KU (schemes.tex:4289; Step 5 copies its proof of (1)), 01QR/01QS, 01S6, 01S7 (morphisms.tex:1721). Step 1: affine preimages are U∩V, closed in a qc V, hence qc; this is the only use of the closedness hypothesis. Step 2: a qc open immersion is of finite type, then composition. Step 3: the pullback of Δ_Y along j×j is U because j is a monomorphism, then closed-immersion base change. Step 4: the polynomial chart gives affine and lft; permanence (3) gives qc and separated. Step 5: I checked that the diagonal factorization square is cartesian; then base change plus composition of closed immersions. Step 6: composition; the empty U and r=0 cases are covered. The statement is true on Spec k ⊔ Spec k, U=Y, U=∅, r=0/1/arbitrary and nonreduced Y, with no weakening against the parent. Every cited node is a Mathlib leaf or slopmaster2-closed, so no tool_uses are needed; no SGA source is used. There are no new nodes. A DAG-wide search found no duplicate of the combined statement. One repair (C1): Step 3 attributed 'open immersion is a monomorphism' to def-weil-open-immersion, which does not state it. I now cite the existing Mathlib leaf lem-weil-pbc-open-immersion-monomorphism (IsOpenImmersion.mono) in the step text, its uses and proof_deps. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-clopen-affine-line-finite-type.json.; 1 file(s) fixed by the reviewer"
  }
 }

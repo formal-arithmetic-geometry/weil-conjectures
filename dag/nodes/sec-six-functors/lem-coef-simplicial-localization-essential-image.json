@@ -10,9 +10,65 @@
  "stmt_deps": [
   "lem-coef-simplicial-inversion-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-simplicial-arrow-attachment-localization]. Choose its factorization $[1]\\xrightarrow{i}K\\xrightarrow{r}\\mathbb J$ with $i$ a cofibration and $r$ a Dwyer--Kan equivalence, and form $\\Gamma=C\\amalg_{\\coprod_W[1]}\\coprod_W K$, with canonical map $j:C\\to\\Gamma$. The cited statement gives an isomorphism $e:\\Gamma\\cong L_WC$ in $h\\mathrm{sCat}$ under $C$, so $e\\circ j=q$ there. This assertion applies to arbitrary small $C$ and arbitrary labelled vertex arrows; it does not require $C$ to be cofibrant or fibrant.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Notation A.3.5.1 and Remark A.3.5.2 (printed pp.891--892), interval-attachment construction, with Proposition A.3.5.5 (printed p.893), its homotopy mapping characterization; agent object-set and endpoint argument. Online source read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-category-degreewise-colimits] to the small pushout diagram of Step 1. Its object-set clause identifies $\\operatorname{Ob}\\Gamma$ with $\\operatorname{Ob}C\\amalg_{\\coprod_W\\{0,1\\}}\\coprod_W\\operatorname{Ob}K$. This set pushout is the disjoint union modulo the endpoint identifications. Thus every object of $\\Gamma$ is represented either by $c\\in\\operatorname{Ob}C$ or by an object $x$ in a labelled copy of $K$. This calculation permits repeated endpoints and loops in $W$.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization",
+    "lem-coef-simplicial-category-degreewise-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Notation A.3.5.1 and Remark A.3.5.2 (printed pp.891--892), interval-attachment construction, with Proposition A.3.5.5 (printed p.893), its homotopy mapping characterization; agent object-set and endpoint argument. Online source read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For an object $x$ of an attached copy of $K$, use the factorization in [lem-coef-simplicial-arrow-attachment-localization] and the Dwyer--Kan definition in [lem-coef-simplicial-inversion-universal-property]. The functor $\\pi_0r:\\pi_0K\\to\\pi_0\\mathbb J$ is an equivalence, hence fully faithful. The unique arrows $r(x)\\to0$ and $0\\to r(x)$ in $\\pi_0\\mathbb J$ lift to arrows between $x$ and $i(0)$ in $\\pi_0K$. Faithfulness and the identity compositions in $\\mathbb J$ show that these lifts are inverse. Apply the functor from this copy of $K$ to $\\Gamma$: the resulting isomorphism identifies the image of $x$ with the image of $i(0)$, which the pushout relation identifies with $j(\\operatorname{source}w)$. Objects represented by $c\\in C$ are already $j(c)$. Therefore every object of $\\pi_0\\Gamma$ is isomorphic to some $j(c)$.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Notation A.3.5.1 and Remark A.3.5.2 (printed pp.891--892), interval-attachment construction, with Proposition A.3.5.5 (printed p.893), its homotopy mapping characterization; agent object-set and endpoint argument. Online source read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Use the induced path-component functors up to natural isomorphism from [lem-coef-simplicial-inversion-universal-property]. Dwyer--Kan replacements induce equivalences on path-component categories, so the isomorphism $e$ of Step 1 induces an equivalence $E:\\pi_0\\Gamma\\simeq\\pi_0L_WC$. Since that isomorphism is under $C$, there is a natural isomorphism $E\\circ\\pi_0j\\cong\\pi_0q$. For $y\\in\\operatorname{Ob}L_WC$, choose $x\\in\\operatorname{Ob}\\Gamma$ and an isomorphism $y\\cong E(x)$ by essential surjectivity of $E$. Step 3 supplies $c\\in C$ and $x\\cong j(c)$. Applying $E$ and composing with the displayed natural isomorphism gives $y\\cong E(x)\\cong E(j(c))\\cong q(c)$. This proves the assertion for the chosen representative of the derived localization as well as for the strict attachment model.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Notation A.3.5.1 and Remark A.3.5.2 (printed pp.891--892), interval-attachment construction, with Proposition A.3.5.5 (printed p.893), its homotopy mapping characterization; agent object-set and endpoint argument. Online source read; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-arrow-attachment-localization",
+  "lem-coef-simplicial-category-degreewise-colimits",
+  "lem-coef-simplicial-inversion-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Notation A.3.5.1, Remark A.3.5.2 and Proposition A.3.5.5; agent object-set/endpoint consequence of the interval-attachment construction (online source read; archival copy WANTED)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +104,45 @@
    "results": "0 hits; ",
    "date": "2026-10-17",
    "verdict": "no match: ordinary Localization.essSurj (Predicate.lean:201, read) assumes an ordinary categorical localization. Identifying pi_0 of a simplicial derived localization with such a localization is an additional theorem, not a one-line specialization. The truncated homotopy-category and cofibrant-object localization hits concern different functors."
+  },
+  {
+   "tool": "grep",
+   "query": "Dwyer.?Kan|Bergner|simplicial.*localiz",
+   "results": "0 hits; ; subdirectory: AlgebraicTopology",
+   "date": "2026-10-17",
+   "verdict": "no match: no enriched simplicial localization theorem occurs in these hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushout localization of a simplicial category does not add objects up to isomorphism in pi zero",
+   "results": "8 hits; CategoryTheory.IsPushout.isoIsPushout, HasDerivedCategory.standard, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, CategoryTheory.Limits.pushoutObjIso, HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization, HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, DerivedCategory.quotientCompQhIso",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits concern ordinary localizations or unrelated derived/homotopy-category functors, not localization of an arbitrary simplicial category by the Bergner derived pushout."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.essSurj, DwyerKan, simplicial localization",
+   "results": "0 hits; ; loogle: unknown identifier 'DwyerKan'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'DwyerKan'; this query supplies no absence evidence. The valid inherited Loogle query and the LeanFinder/LeanSearch searches supply the substantive searches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Essential surjectivity of the path-component functor from a simplicial derived localization",
+   "results": "8 hits; DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh, DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, instEssSurjLightDiagram'LightDiagramToLightFunctor, HomotopyCategory.instEssSurjHomologicalComplexQuotient, CategoryTheory.Localization.essSurj_mapComposableArrows, DerivedCategory.instEssSurjCochainComplexIntQ, HomotopicalAlgebra.CofibrantObject.toHoCat_obj_surjective, CategoryTheory.Localization.essSurj",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits concern ordinary localizations or unrelated derived/homotopy-category functors, not localization of an arbitrary simplicial category by the Bergner derived pushout."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem essSurj|instance essSurj",
+   "results": "1 hits; Mathlib/CategoryTheory/Localization/Predicate.lean; subdirectory: CategoryTheory/Localization",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Localization/Predicate.lean:178--207, especially essSurj at line 201. It assumes L.IsLocalization W for an ordinary category; identifying the simplicial derived localization on pi_0 is a further theorem, so this is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-localization-comparison-calculus",
@@ -82,5 +173,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-localization-essential-image",
+  "worker": "stage1",
+  "summary": "Split the essential-surjectivity assertion through the existing strict interval-attachment model. The pushout object-set calculation shows that only objects of C and attached copies of K occur; the Dwyer--Kan equivalence K→𝕁 makes every attached object isomorphic to an endpoint, and this property transfers along the derived-pushout representative and Dwyer--Kan replacements. No new nodes were needed.",
+  "blueprint": "Realizes HTT Proposition A.3.5.5 object/essential-image consequence cited in the ancestor proof, using the already imported interval-attachment localization model."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-edddee463",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-edddee463 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the full statements of its three cited nodes (arrow-attachment-localization, category-degreewise-colimits, inversion-universal-property, all in the same unit sk-prop-sf-biduality-general, none merged), the step-4 use by the parent comparison-calculus, and the unit and chapter records. The delivery has no new nodes and changes only the item and the report. A script over the whole snapshot found no cycle, and proof_deps equals the union of the step uses. Step 1: the strict pushout Gamma is isomorphic to L_WC in h sCat under C, with no fibrancy or cofibrancy needed. Step 2: the object-set bijection of the degreewise-colimits node gives Ob Gamma as a set pushout. Step 3: pi0 r is fully faithful and r(i(0))=0, so the arrows to and from 0 lift to mutually inverse arrows x and i(0), and the image of i(0) is j(source w). Step 4: the iso in h sCat under C gives an equivalence E with E∘pi0 j isomorphic to pi0 q, so essential surjectivity transfers. Each step uses only what the cited statements say. Small cases are fine: W empty, C empty, C=[1] with its arrow inverted, a one-object C with a marked loop, repeated labels. The statement is true and is exactly what the parent needs. The duplicate search found nothing equivalent (closest: cofibrant-simplicial-inversion, hammock-pi-zero-closure, localization-homotopy-category, dk-cofibrant-localization-comparison). The Mathlib candidate Localization.essSurj is correctly rejected. HTT A.3.5.1/A.3.5.2/A.3.5.5 is not in literature/: it is WANTED and the proof is marked by agent. No SGA is cited. No target is involved, there are no tool_uses, and no fixes were made."
  }
 }
