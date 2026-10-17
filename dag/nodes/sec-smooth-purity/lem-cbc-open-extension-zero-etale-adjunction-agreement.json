@@ -211,5 +211,28 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-3327c2a0f (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is one commit with the item node and the report, and creates no new nodes. Sources checked: Stacks 03DI (sites-modules-lemma-extension-by-zero), including the summandwise construction alpha -> alpha' in its proof; Stacks 03S3 and equation-j-p-shriek; the main-20261015 proof of cor-cbc-derived-extension-zero-base-change ('degreewise isomorphisms'); and the blueprint proof of lem-weil-pbc-etale-restriction-injectives. The cited statements give what each step takes from them. Step 1: the comparison iota/rho between the single-lift presheaf and the sum presheaf is correct, including a restriction from a V with no lift to a V' with a lift. Step 2: kappa and its inverse come from the universal property of sheafification only. Step 3: the presheaf Hom bijection is correct, and its naturality is exactly naturality on the morphisms of U_et. Step 4: the statement of lem-weil-pbc-etale-restriction-injectives only says an adjunction exists, so 'its adjunction' has to mean the canonical one. That canonical construction (Stacks 03DI proof, the node's blueprint proof) is exactly what Steps 3-4 write out. Both adjunctions use the same j^{-1} and the same identification j^{-1}G(V,s)=G(V). I accept this reading, and the step says openly that the cited statement does not contain the transpose formula. Step 5 proves the transposes are equal (T_op = T_et kappa) through the universal property, not by abstract uniqueness of adjoints. Step 6 gets both unit and counit identities with the right domains and composition order. Edge cases checked: j = id, U empty, X empty, Lambda = 0, F = 0. The coefficients are an arbitrary commutative Lambda. There is no SGA, no cycle and no duplicate: a grep of the nodes citing the extension-by-zero and restriction-injectives nodes found none stating this comparison. proof_deps equals the union of the step uses. No tool_uses, no changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4c664476",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read node, 10 stmt-dep records, Stacks 03DI/03S3 places, upstream OpenImmersion/Defs.lean and EtaleMap.lean in full, module, report. Delivery adds only the lean record and the new module; statement field verbatim. Hypotheses: Lambda Type(u+1) CommRing (project coefficient universe, same as etaleLowerShriekBaseChangeMap), IsOpenImmersion j, Etale via Mathlib instance; four conjuncts (IsIso kappa, transposes T_op = kappa.app F >> T_et, eta_et = eta_op >> j^*(kappa), eps_op = kappa_{j^*G} >> eps_et) match the node in direction and quantifiers. kappa = whiskerRight of identity on the shared lan with presheafToSheaf: both recorded extensions are definitionally sheafToPresheaf >> (Over.map top h).op.lan >> presheafToSheaf, so the single-summand inclusion is the identity in that model; canonical, not hollow, not leftAdjointUniq; rfl check confirms the two recorded adjunctions are defeq. Edge cases U/X empty, j=id, Lambda=0, F/G=0 not excluded. Docstrings carry source and blueprint; six-step plan; only sorry (print axioms). nt_compile.py --json: rc 0, 3.0 s, no errors/warnings. Report has Worker report and Second reading by Q68 (honest self-check). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Etale.OpenExtensionZeroEtaleAdjunctionAgreement",
+  "declaration": "AlgebraicGeometry.Etale.openImmersionToEtaleLowerShriek_adjunction_agreement",
+  "declarations": [
+   "AlgebraicGeometry.Etale.openImmersionToEtaleLowerShriek",
+   "AlgebraicGeometry.Etale.openImmersionToEtaleLowerShriek_adjunction_agreement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Etale/OpenExtensionZeroEtaleAdjunctionAgreement.lean",
+  "statement": "theorem openImmersionToEtaleLowerShriek_adjunction_agreement (Λ : Type (u + 1)) [CommRing Λ] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : IsIso (openImmersionToEtaleLowerShriek Λ j) ∧ (∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (α : F ⟶ (upperStar (ModuleCat.{u + 1} Λ) j).obj G), ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).homEquiv F G).symm α = (openImmersionToEtaleLowerShriek Λ j).app F ≫ ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j inferInstance).homEquiv F G).symm α) ∧ (∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)), (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j inferInstance).unit.app F = (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app F ≫ (upperStar (ModuleCat.{u + 1} Λ) j).map ((openImmersionToEtaleLowerShriek Λ j).app F)) ∧ (∀ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app G = (openImmersionToEtaleLowerShriek Λ j).app ((upperStar (ModuleCat.{u + 1} Λ) j).obj G) ≫ (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j inferInstance).counit.app G)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The specified comparison is the sheafification of the identity on the common presheaf left Kan extension used by BOTH recorded extensions; in its empty/singleton-lift descriptions this is exactly the single-summand inclusion. The theorem states invertibility, the transpose equality and both unit/counit identities for the recorded canonical adjunctions."
  }
 }
