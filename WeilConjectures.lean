@@ -636,6 +636,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.KummerTransition
 public import WeilConjectures.AlgebraicGeometry.Curve.LocalCommensurable
 public import WeilConjectures.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
 public import WeilConjectures.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus
+public import WeilConjectures.AlgebraicGeometry.Curve.OpenAffine
 public import WeilConjectures.AlgebraicGeometry.Curve.OpenLowerShriekConstantFiltrationSteps
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedInvertibleCases
