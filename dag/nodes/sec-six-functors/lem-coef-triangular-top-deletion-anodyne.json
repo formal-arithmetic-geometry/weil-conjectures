@@ -11,9 +11,121 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-marked-anodyne-lifting-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the nerve convention in [def-cbc-enhanced-diagrams-cones], nondegenerate simplices are strict chains of intervals. Define their support to be the union of their endpoint coordinates. Membership in $D_n$ is exactly proper support, since a chain belongs to $N(T_F)$ precisely when all endpoints belong to $F$. A full-support chain starts at $(0,n)$: if its initial left endpoint were positive, $0$ could never occur; if its initial right endpoint were less than $n$, $n$ could never occur. Between successive $(i,j),(k,l)$ one has $k-i\\leq1$ and $j-l\\leq1$: an integer strictly between $i$ and $k$ could occur neither as a left endpoint (the left endpoints skip it) nor as a right endpoint (all right endpoints before the jump are at least $k$, and afterwards at least the current left endpoint). The right-endpoint argument is symmetric. The final width is at most one, since an integer strictly between the final endpoints never occurred. Consequently the chain is a path starting at $(0,n)$, using steps $H:(i,j)\\mapsto(i,j-1)$, $V:(i,j)\\mapsto(i+1,j)$ or $D:(i,j)\\mapsto(i+1,j-1)$, and ending at width zero or one, without $(n,n)$. Conversely every such path has full support: the successive endpoints cover the integers from both ends inward, with no integer left strictly between the final endpoints.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent combinatorial auxiliary for the finite-simplex terminal comparison; support and exact path description."
+   }
+  },
+  {
+   "text": "Here is a total rule $P$ on full-support chains. Scan the path word from the beginning for the first occurrence of either a letter $D$ or two consecutive letters $HV$ (compare their starting positions). At a $D$ starting at $(i,j)$, insert $(i,j-1)$, replacing $D$ by $HV$. At an $HV$ starting at $(i,j)$, delete its middle vertex $(i,j-1)$, replacing $HV$ by $D$. If neither occurs, the word is $V^aH^b$. When its final width is one, append the vertex $(i,i)$ to its final vertex $(i,i+1)$, i.e. append $H$. When its final width is zero, delete the final $H$ and its target vertex. This last $H$ exists: otherwise the path would be all $V$ and end at the forbidden $(n,n)$. All insertions remain in $Q_n$: the inserted vertex at a $D$ has $i<j-1$, and the appended $(i,i)$ has $i<n$. All deletions retain full support by the path description. Thus there is no unspecified fallback branch or choice of an available face.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent combinatorial auxiliary for the finite-simplex terminal comparison; explicit horizontal-priority matching, including end cases."
+   }
+  },
+  {
+   "text": "The rule is an involution. Replacing the first $D$ by $HV$ creates no earlier $D$ or $HV$: the prefix is unchanged and its last letter followed by the new $H$ cannot form $HV$. Hence the new first feature is exactly the inserted $HV$; deletion reverses the insertion. Replacing a first $HV$ by $D$ similarly creates no earlier feature, and insertion reverses it. In the feature-free end cases, appending or deleting the final $H$ leaves a word $V^aH^b$, with no $D$ or $HV$, and switches final width one and zero. These end operations are inverse as well. Every full-support chain therefore belongs to exactly one pair $(\\sigma,\\tau)$, where $\\tau$ has one more vertex and $\\sigma$ is obtained by deleting the chosen vertex of $\\tau$. In particular the rule covers all missing simplices, rather than merely counting them. Call $\\tau$ the upper chain of the pair and $\\sigma$ its lower chain.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent combinatorial auxiliary for the finite-simplex terminal comparison; involutivity, uniqueness and coverage of the matching."
+   }
+  },
+  {
+   "text": "Order the pairs by the key $(\\dim\\tau,\\tau)$, increasing, where the second component is the lexicographic list of vertices and vertices are ordered lexicographically by $(i,j)$ with $i$ first. This is an explicit finite order. We check that every codimension-one face $f$ of $\\tau$, other than $\\sigma$, either has proper support or belongs to a strictly earlier pair. For a full-support interior deletion, the two merged steps must be $HV$ or $VH$: $HH$ skips a right endpoint, $VV$ skips a left endpoint, and any combination involving $D$ skips at least one endpoint. Deleting the first vertex loses $0$ or $n$. Deleting the last vertex can have full support only if $\\tau$ ends on a diagonal and its last step is $H$ or $V$; its final width then becomes one. If $f$ is itself an upper chain its pair has upper dimension $\\dim\\tau-1$, hence is earlier. It remains to check the cases where $f$ is lower, done next.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent combinatorial auxiliary for the finite-simplex terminal comparison; finite attachment order and classification of all full-support facets."
+   }
+  },
+  {
+   "text": "Suppose first that $\\tau$ has a selected first $HV$. Deleting the middle vertex of any later $HV$ preserves the selected feature, so the face is upper. Deleting the middle vertex of a $VH$ creates a $D$. If this $VH$ precedes the selected $HV$, or overlaps it in the last two letters of $HVH$, the face is lower: its partner replaces that $VH$ by $HV$. Otherwise the selected $HV$ survives and the face is upper. In each lower case the partner agrees with $\\tau$ until the changed corner, where its vertex $(i,j-1)$ replaces $(i+1,j)$, strictly decreasing the vertex list. For a full-support last-vertex deletion, the face is upper if the selected $HV$ survives. The only remaining case is that the word ends in the selected $HV$; deleting its final $V$ target leaves a feature-free word of final width one. Its partner appends $H$ instead, again replacing $(i+1,j)$ by $(i,j-1)$ and decreasing the list. Suppose instead that $\\tau$ has no $D$ or $HV$. It ends on a diagonal with word $V^aH^b$, $b>0$. Its last-vertex deletion is its partner $\\sigma$; every other full-support facet deletes the sole possible $VH$ corner and has partner obtained by changing $VH$ to $HV$, with the same strict lexicographic decrease. These exhaust the preceding facet classification. Thus in every case the pair containing $f\\ne\\sigma$ is earlier: its upper dimension drops, or is unchanged and its vertex list drops. This proves well-foundedness of the attachment dependencies, not merely a dimension change within each pair.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent combinatorial auxiliary for the finite-simplex terminal comparison; complete rank decrease for every other facet, hence acyclicity."
+   }
+  },
+  {
+   "text": "Start with $D_n$ and process the pairs in that order. Inductively all faces of $\\tau$ except $\\sigma$ are present by the preceding rank check. Neither $\\sigma$ nor $\\tau$ has already appeared: initially both have full support, and each earlier attachment adds just its own two paired nondegenerate simplices, by this same induction. Write $d=\\dim\\tau$ and let $r$ be the deleted vertex index. Every proper face of $\\sigma$ belongs to another codimension-one face of $\\tau$, so it is already present. Thus the underlying intersection of $\\Delta^d= N(\\tau)$ with the old stage is exactly $\\Lambda_r^d$, using the explicit horn definition in [def-cbc-enhanced-diagrams-cones]. This also handles $d=1$, where the horn is the other vertex. In every degree, adjoining $\\Delta^d$ along this intersection adds exactly $\\sigma,\\tau$ and their degeneracies; the nerve of a strict poset chain is an embedded standard simplex. Hence the stated induction is a filtration by simplicial subsets, with no requirement that a first insertion's other faces be available before its rank.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent combinatorial auxiliary for the finite-simplex terminal comparison; direct horn-intersection induction and underlying pushout."
+   }
+  },
+  {
+   "text": "The chosen vertex is never the initial $(0,n)$, so $1\\leq r\\leq d$. In an interior pair it is the middle vertex of $HV$, so $0<r<d$. In an end pair it is the appended $H$ target, so $r=d$ and the final edge has constant first coordinate. Use respectively generators (i) and (ii) of [lem-coef-marked-anodyne-lifting-calculus]. For $d\\geq3$ every edge of $\\Delta^d$ belongs to the horn. All markings beyond those in the generator are therefore already present on the old stage: pushing out the generator along the horn map preserves them and creates exactly the induced marked simplex. For the final generator the required final edge is marked by the constant-first calculation. For $d=1$ only the final case occurs: $n=1$, $\\tau=((0,1),(0,0))$, and generator (ii) adds its marked edge and missing source vertex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent combinatorial auxiliary for the finite-simplex terminal comparison; horn index, exclusion of index zero, and markings in dimensions one and at least three."
+   }
+  },
+  {
+   "text": "It remains to check the edge newly appearing when $d=2$. For an inner pair the word is $HV$, so the missing long edge has different first endpoints; it is unmarked, exactly as in generator (i). For a final pair the new edge is $[0,1]$, while $[1,2]$ is the marked final $H$ edge and $[0,2]$ belongs to the old horn. Apply generator (ii), adding the triangle and leaving $[0,1]$ unmarked. If the first coordinates of vertices $0,1$ differ, this is already the induced marking. If they agree, all three first coordinates agree, since $[1,2]$ is $H$. Therefore $[0,2]$ and $[1,2]$ are both marked. Push out [lem-coef-marked-triangle-cancellation] to mark $[0,1]$. Its class $W$ is the same marked-anodyne class: the four families and closure operations in its statement are exactly those in [lem-coef-marked-anodyne-lifting-calculus]. This is cancellation of the initial edge from the marked long and final edges, not generator (iii) for composition of consecutive marked edges. No nonconstant-first edge is marked by this operation.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-triangle-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent combinatorial auxiliary for the finite-simplex terminal comparison; dimension-two marking cases, using cancellation for the missing initial edge."
+   }
+  },
+  {
+   "text": "At each stage give the old subcomplex the marking induced from $Y_n$. The preceding cases construct the next such stage by a pushout of generator (i) or (ii), followed, only when required, by a triangle-cancellation pushout. The underlying pushout is the degreewise union proved above; its marking is the union of the input marked edges, since a map out of this union preserves markings precisely when its two restrictions do. The same observation applies to the marking-only pushout. There are finitely many pairs, since $Q_n$ is a finite poset and has finitely many strict chains. The matching covers every full-support chain, and proper-support chains were present initially; the last stage is consequently $Y_n$ with exactly its required marking. Closure under pushouts and finite compositions, as stated in [lem-coef-marked-anodyne-lifting-calculus], proves that $D_n\\hookrightarrow Y_n$ is marked anodyne. For $n=1$ this filtration is the single generator already identified; no dimension-zero attachment or extra hypothesis is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-triangle-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent combinatorial auxiliary for the finite-simplex terminal comparison; marked pushouts, exhaustion and global conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-triangle-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Agent combinatorial auxiliary; explicit H/V/D involutive matching, dimension-lexicographic attachment order, all horn intersections and induced markings."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +161,38 @@
    "results": "{\"t\": \"2026-10-17T11:24:04Z\", \"tool\": \"leanfinder\", \"query\": \"A marked inclusion from the union of proper interval-poset faces into the interval poset minus its last diagonal is marked anodyne, with horizontal edges marked\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.Pairing.IsInner.ne_last\", \"SSet.horn\", \"SSet.Subcomplex.Pairing.isUniquelyCodimOneFace\", \"SSet.horn_obj\", \"SSet.Subcomplex.Pairing.AncestralRel\", \"SSet.horn_eq_iSup\", \"SSet.stdSimplex.face\", \"SSet.Subcomplex.Pairing.II\"], \"digest\": \"3700827737646bce\"}",
    "date": "2026-10-17",
    "verdict": "No match. The hits concern ordinary unmarked Kan anodyne extensions, horns, nerves, or pairings, not this selectively marked interval-poset inclusion. Read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:61-94 and Horn.lean:30-66. The second semantic phrasing likewise gives no marked result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite interval-poset nerve inclusion after deleting the terminal diagonal vertex is marked anodyne with constant-first-coordinate edges marked",
+   "results": "SSet.modelCategoryQuillen.horn_ι_mem_J; SSet.horn.ι; CategoryTheory.nerve.strictSegal; SSet.horn; SSet.modelCategoryQuillen.J; SSet.modelCategoryQuillen.I; PartialOrder.mem_nerve_degenerate_of_eq; PartialOrder.mem_range_nerve_σ_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary horns, nerves and degeneracy criteria, not the selectively marked interval-poset inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.horn, SSet.innerAnodyneExtensions, marked anodyne",
+   "results": "0 hits; unknown identifier `marked` in the query",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked interval-poset declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "interval.*poset|marked.*anodyne|triangular.*nerve [Mathlib/AlgebraicTopology/SimplicialSet]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no source declaration for this marked interval-poset inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite interval poset nerve with the top diagonal deleted is obtained from its proper coordinate-face union by marked anodyne attachments",
+   "results": "CategoryTheory.nerve.representableBy; PartialOrder.mem_nerve_nonDegenerate_iff_injective; SSet.stdSimplex.isoNerve_inv_app_apply; PartialOrder.mem_nerve_nonDegenerate_iff_strictMono; SSet.horn_obj; SSet.horn.faceι_ι; PartialOrder.mem_nerve_degenerate_of_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: generic nerve and horn declarations do not state the marked interval-poset result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-terminal-comparison-coherence",
@@ -83,5 +223,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-triangular-top-deletion-anodyne",
+  "worker": "stage1",
+  "summary": "Repair of a5dd45de83: replaced the asserted shelling by an explicit total H/V/D matching, proved involutivity and coverage, and checked every other facet has smaller upper-dimension/lexicographic rank. Derived the horn index and constant-first final edge, proved the dimension-two cancellation case, and made the global pushout/composition conclusion non-elementary. Independently checked all chains through n=6 and every matching and attachment condition through n=10. No statement changes, new nodes or Mathlib leaves.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, agent combinatorial auxiliary for the finite-simplex terminal comparison; realizes the interval-poset marked-anodyne attachment used in the parent terminal-comparison lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q08-56472d82b",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-56472d82b (reviewer sub-agent of L); spot-checked: Reviewed all required instructions, sources, nodes, parent use, unit route, and delivery-error checks. Verified every proof step, edge cases n=1 and n=2, exhaustive matching/rank checks through n=8, citations, acyclicity, and the repaired shelling argument. Wrote review.md; no fixes or tool_uses accepted."
  }
 }

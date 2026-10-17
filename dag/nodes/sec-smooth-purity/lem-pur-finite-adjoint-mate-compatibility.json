@@ -13,14 +13,125 @@
   "lem-coef-finite-exceptional",
   "def-pur-co-smoothness",
   "def-exchange-projection",
-  "lem-weil-finite-compact-projection-formula",
   "def-weil-exceptional-inverse-image",
-  "lem-pur-smb-extraordinary",
-  "prop-asd-smooth-base-change"
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F_{h,R}=Rh_{!,R}$, $G_{h,R}=Rh_R^!$ for $R=A,B$. Let $q_{h,M}:Q_UF_{h,A}M\\xrightarrow{\\sim}F_{h,B}Q_TM$ and $b_{h,L}:Q_TG_{h,A}L\\xrightarrow{\\sim}G_{h,B}Q_UL$ for $h:T\\to U$. The finite-Tor clause of [lem-fix-operation-reduction] supplies the pullback and tensor comparisons. The unconditional finite constructible theorem [lem-coef-finite-exceptional] supplies $b$, with precisely the same $q$ as the compact-support coefficient comparison. In our indices its two normalization equations are\n$$G_{h,B}(q_{h,M})b_{h,F_{h,A}M}Q_T(\\eta_{A,M})=\\eta_{B,Q_TM},$$\n$$\\epsilon_{B,Q_UL}F_{h,B}(b_{h,L})q_{h,G_{h,A}L}=Q_U(\\epsilon_{A,L}).$$\nAll schemes and coefficient rings here satisfy that theorem's hypotheses: separated finite type over the fixed algebraic closure, $A=A_{E,n}$, $B=A_{E,m}$ and $n\\ge m\\ge1$. In particular we do not invoke the conditional exceptional-admissibility clause of the operation-reduction node. All subsequent calculations take place on its finite constructible finite-Tor domains.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "lem-coef-finite-exceptional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2, coefficient compatibility of the specified operation maps"
+   }
+  },
+  {
+   "text": "First prove the last clause, for the arbitrary $h$ in the statement. Put $a_B=Q_U(a)q_{h,M}^{-1}:F_{h,B}Q_TM\\to Q_UL$. Naturality of $b$ at $a:F_{h,A}M\\to L$ and then the unit identity of Step 1 give\n$$\\begin{aligned}\nb_{h,L}Q_T(G_{h,A}(a)\\eta_{A,M})\n&=G_{h,B}(Q_Ua)b_{h,F_{h,A}M}Q_T\\eta_{A,M}\\\\\n&=G_{h,B}(Q_Ua)G_{h,B}(q_{h,M}^{-1})\\eta_{B,Q_TM}\\\\\n&=G_{h,B}(a_B)\\eta_{B,Q_TM}.\n\\end{aligned}$$\nThis is the required equality of transposes. The formula $a^\\sharp=G(a)\\eta$ is the ordinary adjunction formula of [def-weil-pbc-adjunction-mate] (specialize the square to a morphism). Thus the assertion is an explicit three-line substitution into the cited unit identity, and will also be applied to the two particular counit composites below.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2, coefficient compatibility of the specified operation maps"
+   }
+  },
+  {
+   "text": "The projection transformation itself reduces. Denote by $P_R(M,K):F_{f,R}M\\otimes_R^LK\\to F_{f,R}(M\\otimes_R^Lf_R^*K)$ the map of [def-exchange-projection]. Its formula at a compactification is the proper counit-defined projection map followed by the canonical open tensor comparison. The comparison $q$ of [lem-fix-compact-support-coefficient-change] is compatible with pullback and the counits defining this projection transformation; [lem-fix-operation-reduction] additionally identifies its tensor associators and adjunction structure maps. Substituting those identified arrows in the displayed definition gives, under the tensor/pullback comparisons,\n$$q_{f,M\\otimes f_A^*K}\\,Q_Y(P_A(M,K))=P_B(Q_XM,Q_YK)\\,(q_{f,M}\\otimes1).$$\nHere $M=\\omega_{f,A}=G_{f,A}A_Y$ is a permitted finite-Tor constructible input by the functors in [lem-coef-finite-exceptional]. The invertibility of $P_A(\\omega_{f,A},K)$ and its $B$ counterpart is exactly [lem-weil-finite-compact-projection-formula], including its pro-etale realization clause. Taking inverses in the displayed square is legitimate: a functor sends an inverse to an inverse, by applying it to the two inverse identities.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-fix-compact-support-coefficient-change",
+    "lem-fix-operation-reduction",
+    "lem-coef-finite-exceptional",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2, coefficient compatibility of the specified operation maps"
+   }
+  },
+  {
+   "text": "Let $t_{R,K}:F_{f,R}(f_R^*K\\otimes_R^L\\omega_{f,R})\\to K$ be the composite in clause 2 of [def-pur-co-smoothness]: apply tensor symmetry, $P_R(\\omega_{f,R},K)^{-1}$, then $\\epsilon_{R,R_Y}\\otimes1$ and the tensor unitor. The map $\\theta_{f,R,K}$ is its adjoint transpose. Identify $Q_X\\omega_{f,A}$ with $\\omega_{f,B}$ by $b_{f,A_Y}$ and $Q_YA_Y=B_Y$. The inverse-projection square of Step 3 identifies the middle arrow of $Q_Yt_{A,K}$ with the corresponding $B$ arrow. The counit equation of [lem-coef-finite-exceptional] identifies the next arrow. Symmetry and the unitor are the canonical tensor comparisons of [lem-fix-operation-reduction] (equivalently swap the two factors in the reassociated derived tensor). Hence $Q_Yt_{A,K}$, conjugated by $q$ and these source identifications, is exactly $t_{B,Q_YK}$. Apply Step 2 with $M=f_A^*K\\otimes_A^L\\omega_{f,A}$ and $a=t_{A,K}$. This yields $b_{f,K}Q_X\\theta_{f,A,K}=\\theta_{f,B,Q_YK}$ under the stated source identifications, as required.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "lem-coef-finite-exceptional",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2, coefficient compatibility of the specified operation maps"
+   }
+  },
+  {
+   "text": "For $X\\xrightarrow fY\\xrightarrow gZ$ write $\\alpha_R:F_{g,R}F_{f,R}\\xrightarrow{\\sim}F_{gf,R}$ for compact-support composition. The canonical $c_R:G_{gf,R}\\to G_{f,R}G_{g,R}$ is its adjunction conjugate: $c_{R,L}$ is the transpose of $\\epsilon_{gf,R,L}\\alpha_{R,G_{gf,R}L}$ under $F_{g,R}F_{f,R}\\dashv G_{f,R}G_{g,R}$. The composite counit is $\\epsilon_{g,R}\\circ F_{g,R}(\\epsilon_{f,R}G_{g,R})$, by [def-weil-pbc-composite-adjunction]. The precise left-hand comparison equation is supplied by [lem-sf-compact-coefficient-composition]:\n$$q_{gf}Q_Z\\alpha_A=\\alpha_B(F_{g,B}q_f)(q_gF_{f,A}).$$\nTake mates of this equation. The right mate of each coefficient square $q_h^{-1}$ is $b_h$, by the counit equation of [lem-coef-finite-exceptional]. Clause 2 of [lem-weil-pbc-mate-pasting] says that the mate for the composite adjunction is\n$$b_{\\mathrm{comp},L}=G_{f,B}(b_{g,L})\\,b_{f,G_{g,A}L}.$$\nClause 3 of the same node says that replacing the left adjunction by $\\alpha_R$ replaces the mate by its conjugate $c_R$. Therefore the mates of the two equal pasted squares give the explicit equation\n$$b_{\\mathrm{comp},L}\\,Q_X(c_{A,L})=c_{B,Q_ZL}\\,b_{gf,L}.$$\nThis is exactly the claimed reduction compatibility for $c$, with all domains and directions specified. Only the existing general mate-pasting theorem and the compact-support composition square are used; no purity orientation is involved.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-sf-compact-coefficient-composition",
+    "lem-coef-finite-exceptional",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2, coefficient compatibility of the specified operation maps"
+   }
+  },
+  {
+   "text": "For the Cartesian square write $E_{R,M}:v_R^*F_{f,R}M\\xrightarrow{\\sim}F_{f',R}u_R^*M$ for compact-support exchange. Its defining compactification formula [def-exchange-projection] is proper direct-image exchange followed by open-extension base change; direct-image exchange is the displayed unit--square-comparison--counit composite. The finite-reduction structural compatibility of [lem-fix-operation-reduction], together with the pullback compatibility of the compact-support comparison [lem-fix-compact-support-coefficient-change], identifies these arrows. Explicitly, after the pullback identifications, their equality is\n$$q_{f',u_A^*M}\\,Q_{Y'}(E_{A,M})=E_{B,Q_XM}\\,v_B^*(q_{f,M}).$$\nThis follows by replacing the three factors in the direct-image exchange formula by their reduced factors, and then replacing the open tensor/base-change identification by its coefficient identification; both resulting composites are the compactification exchange formula over $B$. The direct-image comparison used in that formula is only for the proper compactification factor (hence compact support), not an assertion for arbitrary finite-level ordinary direct images. For every input used below, $M$ is bounded constructible and has an etale origin by [lem-sf-proetale-constructible-origin]. Thus [thm-cbc-finite-level-proetale] makes both $E$ maps isomorphisms for arbitrary $v$, so the same square identifies their inverses.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-fix-operation-reduction",
+    "lem-fix-compact-support-coefficient-change",
+    "lem-sf-proetale-constructible-origin",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2, coefficient compatibility of the specified operation maps"
+   }
+  },
+  {
+   "text": "The canonical extraordinary comparison at an arbitrary $K$ is the $F_{f',R}\\dashv G_{f',R}$ transpose of\n$$s_{R,K}=v_R^*(\\epsilon_{f,R,K})\\,E_{R,G_{f,R}K}^{-1}:F_{f',R}u_R^*G_{f,R}K\\longrightarrow v_R^*K.$$\nThis is the inverse-exchange counit mate [def-weil-pbc-adjunction-mate]; at $K=R_Y$ it is exactly the displayed coefficient-object definition in clause 3 of [def-pur-co-smoothness]. By Step 6, reduction identifies the inverse exchange in $s_A$ with that in $s_B$. By the counit identity of [lem-coef-finite-exceptional], it identifies the remaining factor with $v_B^*\\epsilon_{f,B,Q_YK}$, using $u_B^*b_{f,K}$ to compare the source objects. Consequently $Q_{Y'}s_{A,K}$, after $q_{f'}$ and the pullback comparisons, is precisely $s_{B,Q_YK}$. Applying the explicit transpose identity of Step 2 to $h=f'$ gives\n$$b_{f',v_A^*K}\\,Q_{X'}(\\beta_{f,v,A,K})=\\beta_{f,v,B,Q_YK}\\,u_B^*(b_{f,K}),$$\nwhere $Q_{X'}u_A^*=u_B^*Q_X$ and $Q_{Y'}v_A^*=v_B^*Q_Y$ are understood. Setting $K=A_Y$ gives the coefficient-object comparisons because $Q_YA_Y=B_Y$, proving the remaining clause.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-pur-co-smoothness",
+    "lem-coef-finite-exceptional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2, coefficient compatibility of the specified operation maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-coef-finite-exceptional",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-fix-operation-reduction",
+  "lem-sf-compact-coefficient-composition",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-mate-pasting",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2 and Step 4: expanded finite coefficient mate argument; uses the actual unit/counit equations of the cited DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +167,45 @@
    "results": "Hits: LightCondensed.ihomPoints_symm_comp, SheafOfModules.pullbackComp, CategoryTheory.sheafComposeNatTrans_fac, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc. Generic adjunction/sheaf formulas do not state the geometric finite coefficient comparisons.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of finite coefficients preserves adjoint tensor maps, exceptional composition, base change and adjoint transposes",
+   "results": "Actual hits: IsBaseChange.finitePow, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, IsBaseChange.toDualBaseChange, CategoryTheory.Tor_map, IsBaseChange.toDualBaseChange_tmul, Rep.Tor_map, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange. Generic mates and algebraic base change do not state the geometric finite-coefficient assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(coefficient|reduction)|coefficient.*exceptional|dualizingComplex",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of finite coefficients preserves exceptional inverse image tensor maps and base change mates",
+   "results": "Actual hits: IsBaseChange.finitePow, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, IsBaseChange.finsuppPow, Algebra.Extension.baseChange, IsBaseChange, Algebra.QuasiFinite.baseChange, Algebra.Unramified.baseChange, Algebra.FinitePresentation.baseChange. Generic mates and algebraic base change do not state the geometric finite-coefficient assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "Actual hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp. Generic mates and algebraic base change do not state the geometric finite-coefficient assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between adjunctions which preserves units and counits preserves adjoint transposes and mates of composition and projection maps",
+   "results": "Actual hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.unit_mateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.conjugateEquiv_mateEquiv_vcomp. Generic mates and algebraic base change do not state the geometric finite-coefficient assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-finite-reduction-of-purity",
@@ -76,5 +222,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-finite-adjoint-mate-compatibility",
+  "worker": "stage1",
+  "summary": "NU expands the four compatibility clauses into explicit unit/counit and mate calculations. No statement change and no new nodes. Removes three unused statement dependencies; uses the existing finite projection theorem, compact-support composition square and Mathlib mate-pasting leaf. Checks quotient identity, zero objects, identity maps and arbitrary base change without flatness or purity orientations.",
+  "blueprint": "Nearest ancestor thm-pur-finite-reduction-of-purity, proof Step 2 (tensor map, exceptional composition and operation comparisons) and Step 4 (counit/transpose compatibility); realizes Step 1 of sk-thm-purity-transport.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-finite-exceptional",
+    "why": "Unconditional finite exceptional coefficient comparison, with the two unit/counit equations needed to compare transposes; no theorem of the transport unit supplies this general operation datum."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic pullback/tensor coefficient compatibility and preservation of structure maps used in projection and exchange; not a replacement for the purity construction."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Generic compact-support coefficient comparison, specifically its compatibility with pullback and counits defining projection."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Generic finite-coefficient projection isomorphism on etale-origin constructible inputs, used to type the inverse in the canonical tensor map."
+   },
+   {
+    "node": "lem-sf-compact-coefficient-composition",
+    "why": "Generic composition square for compact-support coefficient comparisons; taking its mates gives the exceptional composition square."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic existence of etale-origin witnesses for bounded constructible finite coefficients, to apply compact-support base change."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Generic compact-support base-change isomorphism for arbitrary base change, used only to invert the exchange in the definition of the extraordinary mate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-finite-exceptional",
+  "lem-fix-operation-reduction",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-sf-compact-coefficient-composition",
+  "lem-sf-proetale-constructible-origin",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-4ae1d67dc",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-4ae1d67dc (reviewer sub-agent of L); spot-checked: Read the complete item, seven proof steps, unit/chapter route, report, cited DAG statements, current blueprint proof, Stacks Tags 0F7J/0GL6, and Mathlib mate source. All hypotheses, coefficient categories, morphism directions, finite-Tor domains, unit/counit equations, projection/composition/base-change mates, edge cases, searches, and duplicate/cycle checks pass. No new nodes or repairs are required."
  }
 }

@@ -14,9 +14,119 @@
   "def-sp-filtered-complex-subquotients",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the Hom abelian groups and bilinear composition of [def-sp-abelian]. Since $P^i=0$ outside a finite interval $[p_0,p_1]$, every displayed sum over $i$ is finite and is also the product of those groups. The formula in the statement gives an additive differential: expanding $d^2f$ gives $d_I^2f=0$, $fd_P^2=0$, and two mixed terms with opposite signs. If $I^j=0$ for $j<i_0$, then $C(P,I)^n=0$ for $n<i_0-p_1$. This proves boundedness below, and applies to each of the other pairs in the statement.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, explicit finite-filtered Hom resolution model; agent calculation before localization"
+   }
+  },
+  {
+   "text": "Choose filtration bounds $F^aP=P$, $F^{b+1}P=0$, $F^cI=I$, $F^{d+1}I=0$, independent of cochain degree. The defining conditions for $F^rC$ are additive, and $d_If$ and $fd_P$ both send $F^pP$ into $F^{p+r}I$, because the two differentials preserve their filtrations [def-sp-filtration, def-sp-filtered-complex-subquotients]. Thus these subgroups form a decreasing filtration by subcomplexes. For $r\\le c-b$ every map satisfies the condition: for $p\\le b$ its target filtration step is all of $I$, and for $p>b$ its source is zero. For $r\\ge d+1-a$, applying the condition to $F^aP=P$ forces every component to be zero. These are uniform filtration bounds, independent of $n$.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, explicit finite-filtered Hom resolution model; agent calculation before localization"
+   }
+  },
+  {
+   "text": "Set $(s^*f)^i=f^is^i$ and $(u_*f)^i=u^{i+n}f^i$ for $f\\in C(P,I)^n$. The chain-map identities $d_Ps=sd_{P'}$ and $d_Ju=ud_I$ give $d(s^*f)=s^*(df)$ and $d(u_*f)=u_*(df)$ by substitution. Filtration preservation of $s$ and $u$ gives preservation of each shift filtration step. Associativity gives $u_*(s^*f)=s^*(u_*f)$, identity maps act as identities, $(s\\circ s')^*=(s')^*s^*$, and $(u'\\circ u)_*=u'_*u_*$. These arguments use only componentwise composition.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, explicit finite-filtered Hom resolution model; agent calculation before localization"
+   }
+  },
+  {
+   "text": "Let $s-t=d_Ph+hd_{P'}$, with $h^i:P'^i\\to P^{i-1}$ preserving the filtration. For homogeneous $f$ of degree $n$, define $S^n(f)=(-1)^nf h$. It has degree $n-1$ and preserves $F^rC$ for every $r$. Direct expansion gives\n$$dS^n(f)=(-1)^nd_Ifh+fh d_{P'},\\qquad S^{n+1}(df)=(-1)^{n+1}d_Ifh+fd_Ph.$$\nTheir sum is $f(s-t)=(s^*-t^*)f$. Thus $S$ is the required filtered homotopy; the degree-dependent sign is essential.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, explicit finite-filtered Hom resolution model; agent calculation before localization"
+   }
+  },
+  {
+   "text": "If $u-v=d_Jk+kd_I$ for a filtration-preserving degree-$-1$ family $k:I\\to J$, put $T^n(f)=kf$. Then\n$$dT^n(f)=d_Jkf+(-1)^nkfd_P,\\qquad T^{n+1}(df)=kd_If-(-1)^nkfd_P.$$\nThe sum is $(u-v)f$, and $T$ preserves every $F^rC$. For a filtered homotopy equivalence, apply Step 3 to its inverse and Steps 4 or 5 to its two inverse-homotopies. The induced composites are therefore filtered-homotopic to the identities, as required in either variable.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, explicit finite-filtered Hom resolution model; agent calculation before localization"
+   }
+  },
+  {
+   "text": "For the remaining assertion assume every $\\operatorname{gr}^qI^j$ is injective. Apply [lem-trf-injective-target-hom-symbol] to $X=P^i$, $Y=I^{i+n}$ and sum over the finitely many nonzero terms of $P$. Quotienting its exact symbol sequences and rearranging the finite sums gives a degreewise isomorphism\n$$\\sigma_r:\\operatorname{gr}^r C(P,I)\\xrightarrow{\\sim}\\bigoplus_p C(\\operatorname{gr}^pP,\\operatorname{gr}^{p+r}I).$$\nOn the $(p,i)$ component, the symbol of $df$ is $d_{\\operatorname{gr}^{p+r}I}\\sigma_r(f)_{p,i}-(-1)^n\\sigma_r(f)_{p,i+1}d_{\\operatorname{gr}^pP}$, by the definition of the quotient differentials [def-sp-filtered-complex-subquotients]. Hence this is an isomorphism of complexes. Naturality of the symbol sequence identifies the map induced by $s^*$ with the direct sum of $(\\operatorname{gr}^ps)^*$. This comparison is canonical; no splitting of the differential is being chosen.",
+   "uses": [
+    "lem-trf-injective-target-hom-symbol",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, lemma-filtered-injective; symbol-sequence consequence isolated in lem-trf-injective-target-hom-symbol, and componentwise quotient-differential calculation"
+   }
+  },
+  {
+   "text": "For bounded $A$ and bounded-below $B$, the ordinary Hom complex satisfies\n$$H^nC(A,B)=\\operatorname{Hom}_{K(\\mathcal A)}(A,B[n]),$$\nnaturally under precomposition. Indeed $df=0$ is precisely $d_Bf=(-1)^nfd_A$, the chain-map equation to $B[n]$ with differential $(-1)^nd_B$ [def-weil-abstract-derived-category]. A boundary has the form $d_Bh+(-1)^nhd_A$; the corresponding chain homotopy to $B[n]$ is $(-1)^nh$. Conversely every such homotopy gives that boundary. Addition and precomposition act on the same component families on both sides, proving the asserted naturality. All component families have finite support because $A$ is bounded.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.5, explicit finite-filtered Hom resolution model; agent calculation before localization"
+   }
+  },
+  {
+   "text": "Fix $p,r,n$, put $A=\\operatorname{gr}^pP$, $A'=\\operatorname{gr}^pP'$, and $B=\\operatorname{gr}^{p+r}I$. The complexes $A,A'$ are bounded and $B[n]$ is bounded below with injective terms: taking subquotients preserves zero terms, and shifting reindexes these injective terms. Thus [lem-weil-pbc-bounded-below-injectives-kinjective] applies to $B[n]$. By [lem-weil-pbc-kinjective-hom-derived], the two homotopy-category Hom groups of Step 7 identify bijectively with $\\operatorname{Hom}_{D(\\mathcal A)}(QA,Q(B[n]))$ and $\\operatorname{Hom}_{D(\\mathcal A)}(QA',Q(B[n]))$. Their comparison is precomposition by $Q(\\operatorname{gr}^ps)$, which is invertible since $\\operatorname{gr}^ps$ is a quasi-isomorphism [def-weil-abstract-derived-category]. Its inverse is precomposition by $Q(\\operatorname{gr}^ps)^{-1}$. Consequently every $H^n((\\operatorname{gr}^ps)^*)$ is bijective. In the finite sum of Step 6, kernels and images of the differential are the sums of the coordinate kernels and images. Its cohomology maps are therefore finite sums of these bijections, hence bijections. Step 6 now proves that every $\\operatorname{gr}^r(s^*)$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070J, lemma-bounded-below-injectives-K-injective; Tag 070I, lemma-K-injective, (1) implies (3); apply to every shifted graded target"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-trf-injective-target-hom-symbol",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§5.1.5, concrete Hom-model invariance supporting the filtered RHom lift. The signed homotopies and graded reduction are supplied explicitly, using Stacks Tags 05TP, 070J and 070I; the full concrete statement is not printed verbatim in Varshavsky."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +162,38 @@
    "results": "{\"t\": \"2026-10-17T08:40:49Z\", \"tool\": \"leansearch\", \"query\": \"filtered Hom complex respects homotopies and inverts graded quasi isomorphisms into filtered injective complexes\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"homotopy\"",
+   "results": "{\"t\": \"2026-10-17T14:12:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomComplex\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.ofHomotopy\", \"CochainComplex.HomComplex.Cochain.ofHomotopy_refl\", \"CochainComplex.HomComplex.δ_ofHomotopy\", \"CochainComplex.HomComplex.Cochain.equivHomotopy\", \"CochainComplex.HomComplex.Cochain.ofHomotopy_ofEq\", \"CochainComplex.HomComplex.Cochain.equivHomotopy_apply_coe\", \"CochainComplex.HomComplex.Cochain.equivHomotopy_apply_of_eq\", \"CochainComplex.HomComplex.Cochain.equivHomotopy_symm_apply_hom\"], \"digest\": \"8e67343eb669282c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary HomComplex homotopies, shifts, K-injectivity and quasi-isomorphism localization do not give the shift-filtered assertion or its graded quasi-isomorphism clause."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*Hom.*quasi|Hom.*filtered.*homotop",
+   "results": "{\"t\": \"2026-10-17T14:12:45Z\", \"tool\": \"grep\", \"query\": \"filtered.*Hom.*quasi|Hom.*filtered.*homotop\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary HomComplex homotopies, shifts, K-injectivity and quasi-isomorphism localization do not give the shift-filtered assertion or its graded quasi-isomorphism clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shift filtered Hom complexes preserve filtered homotopies and graded quasi isomorphisms in the source when the target has injective graded terms",
+   "results": "{\"t\": \"2026-10-17T14:12:46Z\", \"tool\": \"leansearch\", \"query\": \"Shift filtered Hom complexes preserve filtered homotopies and graded quasi isomorphisms in the source when the target has injective graded terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.shift\", \"Homotopy.shift\", \"CochainComplex.instQuasiIsoIntMapHomologicalComplexUpShiftFunctor\", \"HomologicalComplex.quasiIso_map_of_preservesHomology\", \"CochainComplex.instIsKInjectiveObjIntShiftFunctor\", \"CochainComplex.quasiIso_shift_iff\", \"CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso\", \"HomotopyCategory.instIsCompatibleWithShiftHomologicalComplexIntUpHomotopic\"], \"digest\": \"ff217f611d792f0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary HomComplex homotopies, shifts, K-injectivity and quasi-isomorphism localization do not give the shift-filtered assertion or its graded quasi-isomorphism clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex with finite decreasing filtration has a shift filtered Hom complex into a bounded below filtered complex invariant under filtered homotopy and graded quasi isomorphisms into injective graded terms",
+   "results": "{\"t\": \"2026-10-17T14:12:54Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex with finite decreasing filtration has a shift filtered Hom complex into a bounded below filtered complex invariant under filtered homotopy and graded quasi isomorphisms into injective graded terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.IsKInjective\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\"], \"digest\": \"8d283216dbfb5ebf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary HomComplex homotopies, shifts, K-injectivity and quasi-isomorphism localization do not give the shift-filtered assertion or its graded quasi-isomorphism clause."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-derived-hom-calculus",
@@ -75,5 +213,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-hom-complex-invariance",
+  "worker": "stage1",
+  "summary": "Kept the statement and all inherited search records. Wrote the differential, uniform bounds, map identities and both signed filtered homotopies explicitly. Isolated the non-elementary object-level symbol-sequence comparison as one statement-only node, then reduced graded invariance to the existing bounded-below K-injective and homotopy/derived Hom Mathlib leaves. No enough-injectives hypothesis is needed or added.",
+  "blueprint": "Realizes the explicit Hom-model invariance needed in Step 6 of lem-trf-filtered-derived-hom-calculus, through the filtered lift in lem-trf-invariant-localization-filtered-lift, for the open--closed additivity argument of lem-trf-local-term-locality, proof paragraphs (1) and (2).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q45-94523e2bd",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-94523e2bd (reviewer sub-agent of L); spot-checked: Read the item and new lemma in full; checked all eight proof steps, cited statements, Varshavsky §§5.1.4–5.1.5, Stacks 05TP/05TY/070I/070J, and Mathlib sources. Signs, hypotheses, symbol lifting, route, duplicate searches, dependency cycles, and small cases pass. No repairs or tool-use exceptions needed. Full findings written to review.md."
  }
 }

@@ -13,9 +13,91 @@
   "lem-pod-point-dualizing-complex",
   "thm-sf-comp-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the full bounded constructible finite-Tor categories of [def-pod-conventions]. Write $F=Ra_!$, $G=Ra^!$, $I=Ra_{s!}$ and $J=Ra_s^!$. The hypotheses on $a$ give $F\\dashv G$ with unit $\\nu$ and counit $\\mu$ by [fix-prop-adjunctions](2). For the point identity, [lem-sf-constructible-exceptional-adjunction-coefficients] supplies the constructible adjunction $I\\dashv J$ directly. Let $v:I\\xrightarrow{\\sim}\\operatorname{id}$ be [lem-pod-identity-compact-support-normalization]. After replacing $I$ by the identity through this specified $v$, its adjunction counit is the natural isomorphism $u_L:J L\\to L$ of [lem-pod-point-dualizing-complex]; in unnormalized notation this is $\\mu_{s,L}\\circ v_{J L}^{-1}$. In particular $u_{\\Lambda_s}$ is exactly the $u$ in the statement. Retain $J$ and this counit in the calculation, rather than replace $J$ by an unspecified isomorphic functor.",
+   "uses": [
+    "def-pod-conventions",
+    "fix-prop-adjunctions",
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "lem-pod-identity-compact-support-normalization",
+    "lem-pod-point-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+    "place": "Step 1, specialized to the identity structure morphism of the point"
+   }
+  },
+  {
+   "text": "At finite coefficients [thm-sf-comp-composition] gives the actual composition map $\\alpha_{a_s,a}:IF\\to F$ and says that it is the identity under the canonical identity identifications. Thus $\\alpha_{a_s,a}=vF$. This applies to the bounded constructible inputs here: they have etale-origin witnesses by [lem-sf-proetale-constructible-origin](ii), and boundedness implies bounded below. The composite is again $a$, so the exceptional hypothesis for the composite is the one already assumed for $a$.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+    "place": "Step 1, specialized to the identity structure morphism of the point"
+   }
+  },
+  {
+   "text": "The same left-functor identity holds for completed integral composition, as an equality of actual maps. In the simultaneous semilinear-system construction of [lem-sf-integral-compactification-system-realization], take the identity compactification $(\\operatorname{id}_s,\\operatorname{id}_s)$ for the second morphism and any compactification for $a$. The proper/open square then has identity horizontal arrows. By [lem-sf-ambient-proper-open-pasting] its interchange is the identity comparison, and its proper and open compositors are unital. Hence the resulting system composition map is the identity unitor. The realization isomorphisms $c_V$ of [lem-sf-integral-compactification-system-realization] intertwine these composition maps, units, counits and their whiskerings, including nested compact supports. Consequently the realized compositor $IF\\to F$ is $vF$, where integrally $v$ is the inverse of the reduction/total-limit unit as specified in [lem-pod-identity-compact-support-normalization]. All intermediate inputs here are the normalized systems of bounded constructible finite-Tor objects: preservation by $F,G$ is [lem-sf-constructible-exceptional-adjunction-coefficients], and $I$ is the identity after normalization. At $E$ apply raw scalar localization to this equality, and at $\\overline{\\mathbf Q}_\\ell$ use its common finite coefficient-field representative. These are precisely the scalar and common-stage normalizations of the cited identity lemma; they give the same identity unitor at those stages. No assertion that finite evaluation detects equality of derived morphisms is used.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-pod-identity-compact-support-normalization",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+    "place": "Step 1, specialized to the identity structure morphism of the point"
+   }
+  },
+  {
+   "text": "Fix any of the four stages and use the normalization $I=\\operatorname{id}$ just verified. The pasted adjunction for $IF\\dashv GJ$ has counit $u_L\\circ\\mu_{J L}:FGJ L\\to L$, by [fix-prop-adjunctions](3), equivalently [def-weil-pbc-composite-adjunction]. The comparison $m_L:GJ L\\to G L$ in the question is the inverse of the conjugate of $\\alpha_{a_s,a}$. By [def-weil-pbc-adjunction-conjugate] this inverse is the conjugate of $\\alpha_{a_s,a}^{-1}$. The latter left-adjoint map is now the identity of $F$. Substitution into the displayed component formula for the conjugate in that definition gives\n$$m_L=G(u_L\\circ\\mu_{J L})\\circ\\nu_{GJ L}.$$\nThis uses the composite counit as source and the adjunction $F\\dashv G$ as target, so the direction is $GJ\\to G$, as required.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits; componentwise adjunction-conjugate calculation"
+   }
+  },
+  {
+   "text": "Functoriality and the right triangle identity for $F\\dashv G$ in [fix-prop-adjunctions](2) now give, for every $L$ in the point category,\n$$m_L=G(u_L)\\circ G(\\mu_{J L})\\circ\\nu_{GJ L}=G(u_L)\\circ\\operatorname{id}_{GJ L}=G(u_L).$$\nEvaluate at $L=\\Lambda_s$. Since $J\\Lambda_s=w$, $G\\Lambda_s=\\omega$ and $u_{\\Lambda_s}=u$, this is $m=Ra^!u$. The calculation took place in the chosen adjunctions at each stage, including the completed integral adjunction and the localized/common-stage ones; it therefore proves the equality with exactly the coefficient conventions of the statement.",
+   "uses": [
+    "fix-prop-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits; right-adjoint triangle identity after the pasted-counit formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-conventions",
+  "fix-prop-adjunctions",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-pod-identity-compact-support-normalization",
+  "lem-pod-point-dualizing-complex",
+  "thm-sf-comp-composition",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-ambient-proper-open-pasting",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+  "place": "Step 1, identity-factor specialization; expanded using Stacks Tag 0DV0 (lemma-compose-counits) and the existing normalized strict-system interfaces"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +133,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.conjugateEquiv_adjunction_id\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {L R : CategoryTheory.Functor C C} (adj : L ⊣ R)\\n  (α : CategoryTheory.Functor.id C ⟶ L) (c : C),\\n  ((CategoryTheory.conjugateEquiv adj CategoryTheory.Adjunction.id) α).app c =\\n    CategoryTheory.CategoryStruct.comp (α.app (R.obj c)) (adj.c\", \"doc\": \"Given an adjunction $ L ⊣ R $ in a category $\\\\mathcal{C}$, a natural transformation $\\\\alpha: \\\\mathrm{id}_{\\\\mathcal{C}} \\\\Rightarrow L$, and an object $c \\\\in \\\\mathcal{C}$, applying the conjugate equival\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_counit\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\\n  (α : L₂ ⟶ L₁) (d : D),\\n  CategoryTheory.CategoryStruct.comp (L₂.map \", \"doc\": \"For adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and any natural transformation $ α: L₂ → L₁ $, the conjugate equivalence satisfies the equation $ L₂(β_d) ∘ ε₂_d = α_d ∘ ε₁_d $, where $ β $ is the corresp\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_adjunction_id_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {L R : CategoryTheory.Functor C C} (adj : L ⊣ R)\\n  (α : R ⟶ CategoryTheory.Functor.id C) (c : C),\\n  ((CategoryTheory.conjugateEquiv adj CategoryTheory.Adjunction.id).symm α).app c =\\n    CategoryTheory.CategoryStruct.comp (adj.unit.app c) (α\", \"doc\": \"Given an adjunction $ L ⊣ R $ and a natural transformation $ α: R ⟶ 𝟭_C $, the symmetrized conjugate equivalence maps $ α $ to the composition of the adjunction unit $ η $ with $ α $ applied to $ L(c)\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_rightUnitor_hom\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} A] [inst_1 : CategoryTheory.Category.{v₂, u₂} B]\\n  {L : CategoryTheory.Functor A B} {R : CategoryTheory.Functor B A} (adj : L ⊣ R),\\n  (CategoryTheory.conjugateEquiv adj (adj.comp CategoryTheory.Adjunction.id)) L.rightUnitor.hom =\", \"doc\": \"For an adjunction $ L ⊣ R $, the conjugate equivalence between natural transformations involving the composition of $ L $ with the identity functor and the right unitor's homomorphism equals the inver\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_counit_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\\n  (α : R₁ ⟶ R₂) (d : D),\\n  CategoryTheory.CategoryStruct.comp (L₂.map \", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, for any natural transformation $ α : R₁ ⟶ R₂ $ and object $ d $ in $ D $, the composition $ L₂(α) ∘ \\\\epsilon₂^d $ equals the composition $ \\\\text{conjugat\"}\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompIso_id_comp\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"∀ {C₀ : Type u_1} {C₁ : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C₀]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] {F₀₀' : CategoryTheory.Functor C₀ C₀}\\n  {F₀'₁ : CategoryTheory.Functor C₀ C₁} {G₀'₀ : CategoryTheory.Functor C₀ C₀} {G₁₀' : CategoryTheory.Functor C₁ C₀}\\n  (adj₀₀' : F₀\", \"doc\": \"Given adjunctions $ F₀₁ ⊣ G₁₀ $ between $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, $ F₁₂ ⊣ G₂₁ $ between $ \\\\mathcal{D} $ and $ \\\\mathcal{E} $, and an isomorphism $ G₂₁ \\\\circ G₁₀ ≅ G₂₀ $ between the composed \"}\n  {\"name\": \"CategoryTheory.Adjunction.right_triangle\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G),\\n  CategoryTheory.CategoryStruct.comp (G.whiskerLeft adj.unit) (CategoryTheory.Functor.whiskerRigh\", \"doc\": \"Let $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ be a pair of adjoint functors, with $F$ being the left adjoint to $G$. Let $\\\\eta : \\\\mathrm{Id}_{\\\\mathcal{C}} \\\\to G \\\\circ F$ be\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_id\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L₁ : CategoryTheory.Functor C D} {R₁ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁),\\n  (CategoryTheory.conjugateEquiv adj₁ adj₁) (CategoryTheory.CategoryStruct.id L₁) = Category\", \"doc\": \"The conjugate equivalence associated to an adjunction maps the identity natural transformation on the left adjoint to the identity natural transformation on the right adjoint, demonstrating that the c\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned declarations do not state this geometric comparison, its specified maps and coefficient conventions together"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_rightUnitor_hom|conjugateEquiv_counit|comp_counit_app",
+   "results": "; Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; 6 hits. Read Mates.lean 275-295, 534-545 and Basic.lean 565-586 for the relevant conjugate and composite-adjunction formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match: categorical unitor, pasted-counit and right-adjoint uniqueness formulas are ingredients; the specified geometric compositor must first be identified with the identity unitor, especially after integral completion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For adjunctions F left adjoint to G and identity left adjoint to J, the mate of the identity compositor F composed with identity equals G applied to the counit of identity left adjoint to J",
+   "results": "; CategoryTheory.Adjunction.CoreUnitCounit.left_triangle, CategoryTheory.Adjunction.left_triangle, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.Adjunction.unit_app_unit_comp_map_η, CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.right_triangle, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.unit; 8 hits. Read Mates.lean 275-295, 534-545 and Basic.lean 565-586 for the relevant conjugate and composite-adjunction formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match: categorical unitor, pasted-counit and right-adjoint uniqueness formulas are ingredients; the specified geometric compositor must first be identified with the identity unitor, especially after integral completion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_rightUnitor_hom",
+   "results": "; CategoryTheory.conjugateEquiv_rightUnitor_hom; 1 hits. Read Mates.lean 275-295, 534-545 and Basic.lean 565-586 for the relevant conjugate and composite-adjunction formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match: categorical unitor, pasted-counit and right-adjoint uniqueness formulas are ingredients; the specified geometric compositor must first be identified with the identity unitor, especially after integral completion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conjugate of composition of a left adjoint with an identity functor is the right adjoint applied to the identity adjunction counit",
+   "results": "; CategoryTheory.conjugateEquiv_adjunction_id, CategoryTheory.conjugateEquiv_rightUnitor_hom, CategoryTheory.conjugateEquiv_leftUnitor_hom, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointIdIso_hom, CategoryTheory.conjugateEquiv_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Bicategory.conjugateEquiv_adjunction_id, CategoryTheory.conjugateEquiv_adjunction_id_symm; 8 hits. Read Mates.lean 275-295, 534-545 and Basic.lean 565-586 for the relevant conjugate and composite-adjunction formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match: categorical unitor, pasted-counit and right-adjoint uniqueness formulas are ingredients; the specified geometric compositor must first be identified with the identity unitor, especially after integral completion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical isomorphism from the composite of right adjoints to the right adjoint of the same left adjoint is computed by the pasted counit and triangle identity",
+   "results": "; CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.rightAdjointUniq_trans_assoc, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit; 8 hits. Read Mates.lean 275-295, 534-545 and Basic.lean 565-586 for the relevant conjugate and composite-adjunction formulas.",
+   "date": "2026-10-17",
+   "verdict": "no match: categorical unitor, pasted-counit and right-adjoint uniqueness formulas are ingredients; the specified geometric compositor must first be identified with the identity unitor, especially after integral completion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pod-global-duality-map-identification",
@@ -73,5 +190,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-structure-identity-mate",
+  "worker": "stage1",
+  "summary": "Kept the statement and its specified maps. Verified the finite identity compositor and its completed integral, rational and common-stage normalizations using existing system-realization nodes. Expanded the inverse conjugate into the pasted counit and canceled the right triangle. No new nodes.",
+  "blueprint": "thm-pod-identification-of-the-comparison.proof.md, third paragraph: the reverse global-duality comparison is the inverse of the adjunction/evaluation map; this item supplies its structure-morphism identity-factor mate, via fix-cor-verdier-exchange.proof.md Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Realizes the actual nested compact-support compositors and units/counits, needed to check integral identity normalization; it does not replace the unit duality route."
+   },
+   {
+    "node": "lem-sf-ambient-proper-open-pasting",
+    "why": "Its unital proper/open compositors and identity-square interchange compute the identity-factor system compositor before realization."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "why": "Supplies finite-Tor preservation and the coefficient-stage exceptional adjunctions needed for the normalized-system domains."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-sf-constructible-exceptional-adjunction-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-15a6fee06",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-15a6fee06 (reviewer sub-agent of L); spot-checked: Read the full item, all eleven cited statements, cited source passages, and unit/chapter route. Verified mate direction, pasted counit, triangle cancellation, and completed/localized/common-stage compositor normalization; tested identity and scaled-adjunction cases. No new nodes, duplicates, cycles, or repairs required. Accepted three declared tool uses. Detailed checks recorded in review.md."
  }
 }

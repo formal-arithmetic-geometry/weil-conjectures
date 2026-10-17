@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-pod-cup-product-coherence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coherence of the mixed-support cup product",
@@ -12,37 +12,196 @@
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.md",
   "place": "node prop-pod-cup-product-coherence, order 2417"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-pod-mixed-support-cup-product"
+ ],
  "proof": [
   {
-   "text": "The cup product is the composite of the projection transformation of\n[def-exchange-projection] and the direct-image counit of\n[def-weil-derived-direct-image]; both are natural.\nThe tensor associator and unit in [def-weil-derived-tensor],\nthe composite-counit identity of [fix-prop-adjunctions], and\nthe projection coherence of [fix-prop-projection-formula]\nidentify the two parenthesizations of the triple product.\nThe same identities with a unit factor prove the unit assertion.\nIf $a_X$ is proper, [cor-cbc-proper-coincidence] identifies\n$Ra_{X!}$ with $Ra_{X*}$, using the identity compactification.\nUnder this comparison the projection map and counit are the same\nmaps, so the supported and ordinary cup products agree.",
+   "text": "Work first in the point sheaf category, before applying $\\operatorname{Fib}_s$. In the conventions [def-pod-conventions], put $T=La_X^*$, $R=Ra_{X*}$, $F=Ra_{X!}$ and write $P_{K,N}=\\operatorname{PF}_{a_X,K,N}$. By [def-pod-mixed-support-cup-product] the map to prove coherent is\n$$\\mu_{K,L}=F(1_K\\otimes\\varepsilon_L)\\circ P_{K,RL}:FK\\otimes RL\\longrightarrow F(K\\otimes L).$$\nIts definition supplies the finite-Tor domains, including $RL$, $FK$ and the intermediate tensors; take $K,L,M\\in D^b_{ctf}(X,\\Lambda)$ throughout. Write $c_{N,Q}:T(N\\otimes Q)\\simeq TN\\otimes TQ$ for [lem-pur-derived-pullback-tensor-iso]. All associators and unit identifications below are those of that coherent tensor comparison. This works with completed tensors integrally, rationalized operations at $E$, and common finite stages at $\\overline{\\mathbf Q}_\\ell$, rather than discrete non-torsion etale sheaves.",
+   "uses": [
+    "def-pod-conventions",
+    "def-pod-mixed-support-cup-product",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "sentences 1–3: the projection/counit construction and tensor conventions"
+   }
+  },
+  {
+   "text": "For $u:K\\to K'$ and $v:L\\to L'$, naturality of $P$ in both variables [fix-prop-projection-formula] and naturality of the counit of $T\\dashv R$ [fix-prop-adjunctions](1) give\n$$F(u\\otimes v)\\circ\\mu_{K,L}=\\mu_{K',L'}\\circ(Fu\\otimes Rv).$$\nIndeed, move $Fu\\otimes Rv$ through $P$, obtaining $F(u\\otimes T(Rv))$, then use $v\\varepsilon_L=\\varepsilon_{L'}T(Rv)$. This proves naturality as an equality of the specified maps.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "sentences 1–2: naturality"
+   }
+  },
+  {
+   "text": "Use [lem-sf-kunneth-coherence](ii),(iv) over $B=s$ for the triple $(a_X,\\mathrm{id}_s,\\mathrm{id}_s)$ with inputs $(K,N,Q)$, all finite-Tor. The source triple product identifies with $F(K\\otimes TN\\otimes TQ)$. One iterated inverse projection is $(P_{K,N}^{-1}\\otimes1_Q)\\circ P_{K\\otimes TN,Q}^{-1}$; the other is $P_{K,N\\otimes Q}^{-1}$ followed by $1\\otimes\\kappa_{\\mathrm{id},\\mathrm{id}}$. The latter $\\kappa$ is the identity: by (iv) it is the inverse projection for the identity, whose formula in [def-exchange-projection] is the identity counit mate, with identity open-extension comparison. Inverting the equality (the projections are isomorphisms by [fix-prop-projection-formula]) gives\n$$F(1_K\\otimes c_{N,Q})\\circ P_{K,N\\otimes Q}=P_{K\\otimes TN,Q}\\circ(P_{K,N}\\otimes1_Q).\\tag{P}$$\nThus the needed coherence is in the tensor variables, not merely composition of geometric morphisms. The base and all three morphisms satisfy the separated finite-type hypotheses of the cited theorem.",
+   "uses": [
+    "lem-sf-kunneth-coherence",
+    "def-exchange-projection",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "sentences 3–5: projection coherence for the triple product"
+   }
+  },
+  {
+   "text": "Set $N=Q=\\mathbf1_s$ in (P). Under the canonical unit identifications, naturality of $P$ in its first variable identifies $P_{K\\otimes T\\mathbf1_s,\\mathbf1_s}$ with $P_{K,\\mathbf1_s}$. The unital tensor comparison gives $P_{K,\\mathbf1_s}=P_{K,\\mathbf1_s}^2$. This map is invertible by [fix-prop-projection-formula], so cancellation yields $P_{K,\\mathbf1_s}=1_{FK}$. No unproved unit law for the projection transformation is assumed.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "sentence 5: projection with a unit factor"
+   }
+  },
+  {
+   "text": "Write $\\eta,\\varepsilon$ for the ordinary adjunction unit and counit [fix-prop-adjunctions](1). The ordinary cup product is the counit transpose\n$$\\nu_{L,M}=R((\\varepsilon_L\\otimes\\varepsilon_M)c_{RL,RM})\\circ\\eta_{RL\\otimes RM}.$$\nIts transpose is exactly\n$$\\varepsilon_{L\\otimes M}\\circ T\\nu_{L,M}=(\\varepsilon_L\\otimes\\varepsilon_M)c_{RL,RM}.\\tag{C}$$\nTo check this, move $T R((\\varepsilon_L\\otimes\\varepsilon_M)c)$ through the counit by naturality and then cancel $\\varepsilon_{T(RL\\otimes RM)}\\circ T\\eta_{RL\\otimes RM}$ by the triangle identity. The ordinary unit is $u:\\mathbf1_s\\to R\\mathbf1_X$, the transpose of $T\\mathbf1_s\\simeq\\mathbf1_X$; the same triangle identity says $\\varepsilon_{\\mathbf1_X}Tu=1_{\\mathbf1_X}$. These formulas use the tensor comparisons of [lem-pur-derived-pullback-tensor-iso].",
+   "uses": [
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "sentences 3–5: counit and unit identities entering the two cup products"
+   }
+  },
+  {
+   "text": "Expand the two triple products. Naturality of $P$ in $K$ moves $F(1_K\\otimes\\varepsilon_L)$ through $P_{K\\otimes L,RM}$; (P) then gives\n$$\\mu_{K\\otimes L,M}\\circ(\\mu_{K,L}\\otimes1_{RM})=F(1_K\\otimes((\\varepsilon_L\\otimes\\varepsilon_M)c_{RL,RM}))\\circ P_{K,RL\\otimes RM}.$$\nFor the other parenthesization, naturality in the point variable moves $1_{FK}\\otimes\\nu_{L,M}$ through $P_{K,R(L\\otimes M)}$, leaving\n$$\\mu_{K,L\\otimes M}\\circ(1_{FK}\\otimes\\nu_{L,M})=F(1_K\\otimes(\\varepsilon_{L\\otimes M}T\\nu_{L,M}))\\circ P_{K,RL\\otimes RM}.$$\nEquation (C) identifies the two right sides. Restore the canonical associators via [lem-pur-derived-pullback-tensor-iso]. Naturality used here is precisely that of [fix-prop-projection-formula]. This is the requested associativity on $FK\\otimes RL\\otimes RM$, with one compact-support factor throughout.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "sentences 3–4: equality of the two parenthesizations"
+   }
+  },
+  {
+   "text": "For completeness, iterating the ordinary product $\\nu$ is unambiguous: transpose either triple composite under $T\\dashv R$. Apply (C) to the outer product, then naturality of $c$ to the inner product, and apply (C) once more. Both transposes are $(\\varepsilon_L\\otimes\\varepsilon_M\\otimes\\varepsilon_N)c^{(3)}$. The two $c^{(3)}$ agree by associativity in [lem-pur-derived-pullback-tensor-iso]; injectivity of the adjunction Hom bijection [fix-prop-adjunctions](1) proves equality. The identical argument with $u$ gives the ordinary left and right unit laws. For the mixed product, the triple identity of the previous step replaces each local change of parentheses. Induct on the number of factors: any binary parenthesization is changed to the right-associated one by rotating its left branch, then its smaller branches. Rotations involving the unique first compact-support factor use the mixed identity, and all other rotations use the ordinary identity just proved. Hence every iterate agrees with that right-associated composite, including the single-factor identity case.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "sentence 3 and statement: compatibility with the iterate of the cup product"
+   }
+  },
+  {
+   "text": "Naturality of $P$ in the point variable [fix-prop-projection-formula] gives\n$$\\mu_{K,\\mathbf1_X}(1_{FK}\\otimes u)=F(1_K\\otimes(\\varepsilon_{\\mathbf1_X}Tu))P_{K,\\mathbf1_s}=1_{FK},$$\nby the unit calculation in steps 4–5. The class of $u$, namely the adjoint of the identity section of the coefficient unit, is $1\\in H^0(X,\\Lambda)$. In particular at $\\Lambda=A$ this is the unit in the statement. Thus it acts by the identity on the complex and consequently on every cohomology group, after the canonical unit identifications.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "fix-prop-adjunctions",
+    "def-pod-mixed-support-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "sentence 5: the unit assertion"
+   }
+  },
+  {
+   "text": "Assume now that $X$ is proper. Take the identity compactification $(j,p)=(\\mathrm{id}_X,a_X)$ in [def-exchange-projection]. It gives the canonical $F\\simeq R$; [fix-prop-projection-formula] identifies $P$ with the ordinary direct-image projection $\\pi$ under this comparison. Put $b=(\\varepsilon_K\\otimes1_{T(RL)})c_{RK,RL}$. The defining formula for $\\pi_{K,RL}$ is $R(b)\\eta_{RK\\otimes RL}$. Consequently the mixed composite transported by $F\\simeq R$ is\n$$R(1_K\\otimes\\varepsilon_L)\\,R(b)\\,\\eta_{RK\\otimes RL}=R((\\varepsilon_K\\otimes\\varepsilon_L)c_{RK,RL})\\,\\eta_{RK\\otimes RL}=\\nu_{K,L}.$$\nThis proves compatibility with the specified ordinary cup map, not merely an isomorphism between its endpoints. Naturality of the compactification identification lets it pass through each $F$-image in an iterated product, so the same calculation and induction compare all iterates. No comparison of compact and ordinary supports has been used without properness.",
    "uses": [
     "def-exchange-projection",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-tensor",
-    "fix-prop-adjunctions",
-    "fix-prop-projection-formula",
-    "cor-cbc-proper-coincidence"
+    "fix-prop-projection-formula"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "sentences 6–8: identity compactification and agreement of the cup maps"
+   }
+  },
+  {
+   "text": "Finally apply $\\operatorname{Fib}_s$ to these equalities. Its tensor comparison is natural and preserves associativity, unit and symmetry by [lem-sf-point-fibre-derived-tensor]. By [def-pod-mixed-support-cup-product] the resulting maps are exactly $R\\Gamma_c(X,K)\\otimes R\\Gamma(X,L)\\to R\\Gamma_c(X,K\\otimes L)$ of the statement. Hence naturality, associativity, the unit and all iterate identities, and the proper comparison hold in the point coefficient category and on cohomology. Every preceding calculation took place at the chosen coefficient stage with that stage's operations; this last passage does not infer equality of integral morphisms from equality of their separate finite reductions.",
+   "uses": [
+    "lem-sf-point-fibre-derived-tensor",
+    "def-pod-mixed-support-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+    "place": "whole proof: passage from point sheaves to the cohomology complexes"
+   }
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "def-weil-derived-direct-image",
-  "def-weil-derived-tensor",
-  "fix-prop-adjunctions",
+  "def-pod-conventions",
+  "def-pod-mixed-support-cup-product",
+  "lem-pur-derived-pullback-tensor-iso",
   "fix-prop-projection-formula",
-  "cor-cbc-proper-coincidence"
+  "fix-prop-adjunctions",
+  "lem-sf-kunneth-coherence",
+  "def-exchange-projection",
+  "lem-sf-point-fibre-derived-tensor"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing-data/prop-pod-cup-product-coherence.proof.md",
+  "place": "whole proof, with the tensor-variable projection identity specialized from lem-sf-kunneth-coherence (ii),(iv)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cupProduct|projection.*assoc|projection.*unit",
+   "results": "No hits; source restriction CategoryTheory; read Mathlib/CategoryTheory/Monoidal/Functor.lean, especially lines 947–995: general monoidal-adjunction calculus, not compact-support projection or its geometric four-stage realizations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity and unit of the cup product Rf shriek K tensor Rf star L defined using the projection formula and counit",
+   "results": "CategoryTheory.ComonObj.comul_counit_assoc, CoalgCat.MonoidalCategoryAux.counit_tensorObj_tensorObj_left, TensorProduct.counit_def, CoalgCat.MonoidalCategoryAux.counit_tensorObj, Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap, Coalgebra.TensorProduct.assoc, TensorProduct.counit_tmul, CoalgCat.MonoidalCategoryAux.counit_tensorObj_tensorObj_right; read Mathlib/CategoryTheory/Monoidal/Functor.lean, especially lines 947–995: general monoidal-adjunction calculus, not compact-support projection or its geometric four-stage realizations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; read Mathlib/CategoryTheory/Monoidal/Functor.lean, especially lines 947–995: general monoidal-adjunction calculus, not compact-support projection or its geometric four-stage realizations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed support cup product from compact support projection formula and direct image counit is associative and unital",
+   "results": "CompHausLike.LocallyConstant.counitAppApp, CompHausLike.LocallyConstant.incl_of_counitAppApp, CompHausLike.LocallyConstant.counitApp_app, CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.adjunction_left_triangle, CompactlySupportedContinuousMap.comp_assoc; read Mathlib/CategoryTheory/Monoidal/Functor.lean, especially lines 947–995: general monoidal-adjunction calculus, not compact-support projection or its geometric four-stage realizations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointLaxMonoidal|map_.*counit|associativity",
+   "results": "60, 78, 79, 95, 121; source restriction CategoryTheory/Monoidal/Functor.lean; read Mathlib/CategoryTheory/Monoidal/Functor.lean, especially lines 947–995: general monoidal-adjunction calculus, not compact-support projection or its geometric four-stage realizations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal left adjoint induces a lax monoidal right adjoint and an associative module cup product for a projection formula functor",
+   "results": "CategoryTheory.frobeniusMorphism, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightAdjunction, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, CategoryTheory.Functor.instIsLeftAdjointDiscreteTensorLeftCompIncl, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; read Mathlib/CategoryTheory/Monoidal/Functor.lean, especially lines 947–995: general monoidal-adjunction calculus, not compact-support projection or its geometric four-stage realizations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -72,5 +231,39 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-def-pairing-data"
+ "unit": "sk-def-pairing-data",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-pod-cup-product-coherence",
+  "worker": "stage1",
+  "summary": "Expanded the projection/counit proof into ten explicit calculations. Reused relative Kunneth coherence specialized to (a_X,id_s,id_s) for tensor-variable projection associativity; derived its unit by invertible idempotence. Wrote the ordinary counit transpose and the exact mixed associativity, unit, iterate and proper-comparison identities. Added the actual cup-product and conventions statement dependencies. Statement unchanged; no new nodes.",
+  "blueprint": "Steps 1–2 realize sentences 1–2; steps 3–7 realize the triple-product and iterate assertion of sentences 3–4; steps 4,5,8 realize sentence 5; step 9 realizes sentences 6–8; step 10 makes the point-functor passage explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-kunneth-coherence",
+    "why": "Generic canonical product coherence specialized to the identity morphisms of the base supplies tensor-variable projection associativity; the unit definition has no proof steps replacing this tool."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic coherent strong tensor comparison for derived pullback, used with a_X to type the counit transposes and associators."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Generic monoidal point-fibre comparison transfers the sheaf-category identities to the coefficient cohomology complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-kunneth-coherence",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-point-fibre-derived-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q108-75473f128",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q108-75473f128 (reviewer sub-agent of L); spot-checked: Read the complete item, ten proof steps, all eight cited node statements, unit/chapter route, current blueprint source and proof, and delivery-errors A–F. Verified coefficient-stage typing, tensor-variable Künneth specialization, unit and iterate coherence, proper comparison, point-fibre transport, edge cases, duplicate search, Mathlib searches, and route lock. Wrote review.md; no repairs or dropped nodes needed."
+ }
 }

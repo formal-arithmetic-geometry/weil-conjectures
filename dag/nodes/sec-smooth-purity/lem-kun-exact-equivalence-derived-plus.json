@@ -12,9 +12,89 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C(F)$ and $C(G)$ for termwise application to cochain complexes, and $Q_{\\mathcal A},Q_{\\mathcal B}$ for the localization functors. The equivalence of the two descriptions of exactness in [lem-sp-exact-functor-preserves-homology] puts the given additive short-exact-sequence-preserving functors under the hypotheses of [lem-weil-pbc-exact-functor-derived-factorization]. Apply that statement to $F$ and $G$. Thus $C(F)$ and $C(G)$ preserve quasi-isomorphisms, and there are functors $F_D:D(\\mathcal A)\\to D(\\mathcal B)$ and $G_D:D(\\mathcal B)\\to D(\\mathcal A)$ with natural isomorphisms $\\phi^F_K:F_DQ_{\\mathcal A}K\\to Q_{\\mathcal B}C(F)K$ and $\\phi^G_L:G_DQ_{\\mathcal B}L\\to Q_{\\mathcal A}C(G)L$. These are exactly the functors computed on any complex by termwise application; no injective objects or resolutions are assumed.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; formal localization argument for quasi-inverse exact functors, supplied here"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-bounded-below] separately to $F$ and $G$. For every integer $a$, $F_D$ carries $D(\\mathcal A)^{\\ge a}$ into $D(\\mathcal B)^{\\ge a}$, and $G_D$ carries $D(\\mathcal B)^{\\ge a}$ into $D(\\mathcal A)^{\\ge a}$. By [def-weil-pbc-bounded-derived-subcategories], each bounded below object belongs to one such subcategory, with a bound allowed to depend on the object. Restrict $F_D,G_D$ to the full subcategories to obtain $F^+:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ and $G^+:D^+(\\mathcal B)\\to D^+(\\mathcal A)$. On morphisms these restrictions are the same functors, since the subcategories are full.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; formal localization argument for quasi-inverse exact functors, supplied here"
+   }
+  },
+  {
+   "text": "Let $\\eta:\\mathrm{id}_{\\mathcal A}\\xrightarrow{\\sim}GF$ and $\\epsilon:FG\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal B}$ be the given unit and counit. Define $(\\eta^C_K)^r=\\eta_{K^r}$ and $(\\epsilon^C_L)^r=\\epsilon_{L^r}$. These are morphisms of the complexes of [def-weil-abstract-derived-category]: naturality at $d_K^r$ says $GF(d_K^r)\\eta_{K^r}=\\eta_{K^{r+1}}d_K^r$, and naturality of $\\epsilon$ gives $d_L^r\\epsilon_{L^r}=\\epsilon_{L^{r+1}}FG(d_L^r)$. The degreewise inverses satisfy the reverse equations, and naturality at each component of a chain map gives naturality in $K,L$. Hence $\\eta^C:\\mathrm{id}\\xrightarrow{\\sim}C(G)C(F)$ and $\\epsilon^C:C(F)C(G)\\xrightarrow{\\sim}\\mathrm{id}$ are natural isomorphisms of functors on complexes.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; formal localization argument for quasi-inverse exact functors, supplied here"
+   }
+  },
+  {
+   "text": "For each $K$, form the natural isomorphism $a_K=\\phi^G_{C(F)K}\\circ G_D(\\phi^F_K):G_DF_DQ_{\\mathcal A}K\\to Q_{\\mathcal A}C(G)C(F)K$. For each $L$, put $b_L=\\phi^F_{C(G)L}\\circ F_D(\\phi^G_L):F_DG_DQ_{\\mathcal B}L\\to Q_{\\mathcal B}C(F)C(G)L$. The factorizations in [lem-weil-pbc-exact-functor-derived-factorization] give these identifications of the composites with their termwise models. Now $a^{-1}\\circ Q_{\\mathcal A}(\\eta^C)$ is a natural isomorphism $Q_{\\mathcal A}\\to G_DF_DQ_{\\mathcal A}$, and $Q_{\\mathcal B}(\\epsilon^C)\\circ b$ is one from $F_DG_DQ_{\\mathcal B}$ to $Q_{\\mathcal B}$. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to each localization, with these pairs of functors and identity comparison isomorphisms. All four functors before descent invert quasi-isomorphisms because they factor through $Q_{\\mathcal A}$ or $Q_{\\mathcal B}$. We obtain natural isomorphisms $\\eta_D:\\mathrm{id}\\xrightarrow{\\sim}G_DF_D$ and $\\epsilon_D:F_DG_D\\xrightarrow{\\sim}\\mathrm{id}$, characterized by\n$$\\eta_{D,Q_{\\mathcal A}K}=a_K^{-1}Q_{\\mathcal A}(\\eta^C_K),\\qquad \\epsilon_{D,Q_{\\mathcal B}L}=Q_{\\mathcal B}(\\epsilon^C_L)b_L.$$\nTheir inverses are the lifts of the inverse transformations, since lifting respects composition and identities. Thus the descended unit and counit are the given termwise ones under the displayed factorizations.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; formal localization argument for quasi-inverse exact functors, supplied here"
+   }
+  },
+  {
+   "text": "The unit and counit just constructed restrict to natural isomorphisms $\\eta^+:\\mathrm{id}\\xrightarrow{\\sim}G^+F^+$ and $\\epsilon^+:F^+G^+\\xrightarrow{\\sim}\\mathrm{id}$: all their endpoints lie in the bounded below subcategories by Step 2, and fullness in [def-weil-pbc-bounded-derived-subcategories] includes both the components and their inverses. These isomorphisms exhibit the restrictions as quasi-inverses. If the given unit and counit are specified with the adjunction triangle identities, those identities descend as well. Indeed, after precomposition with $Q_{\\mathcal A}$, the transformation $\\epsilon_DF_D\\circ F_D\\eta_D$ becomes, using the Step 4 factorizations and their naturality, $Q_{\\mathcal B}(\\epsilon^C_{C(F)K}\\circ C(F)(\\eta^C_K))=Q_{\\mathcal B}(\\mathrm{id}_{C(F)K})$; the other composite becomes $Q_{\\mathcal A}(C(G)(\\epsilon^C_L)\\circ\\eta^C_{C(G)L})=Q_{\\mathcal A}(\\mathrm{id}_{C(G)L})$. These are the original triangle equations in each degree. Clause (3) of [lem-weil-pbc-localization-universal-property] identifies the two composites with identity natural transformations on the derived categories, and restriction retains these equations.",
+   "uses": [
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; formal localization argument for quasi-inverse exact functors, supplied here"
+   }
+  },
+  {
+   "text": "Every functor preserves isomorphisms: apply it to the two inverse equations. To check reflection explicitly, let $u:X\\to Y$ in $D^+(\\mathcal A)$ and suppose $F^+(u)$ has inverse $t$. Set $v=(\\eta^+_X)^{-1}\\circ G^+(t)\\circ\\eta^+_Y:Y\\to X$. Naturality gives $\\eta^+_Y u=G^+F^+(u)\\eta^+_X$, so $vu=\\mathrm{id}_X$ by $tF^+(u)=\\mathrm{id}$, and $uv=\\mathrm{id}_Y$ by $F^+(u)t=\\mathrm{id}$ and the same naturality equation solved for $u$. Hence $u$ is invertible. For a map $u:X\\to Y$ in $D^+(\\mathcal B)$ such that $G^+(u)$ has inverse $t$, the same calculation with the natural isomorphism $(\\epsilon^+)^{-1}:\\mathrm{id}\\to F^+G^+$ gives the inverse $\\epsilon^+_X\\circ F^+(t)\\circ(\\epsilon^+_Y)^{-1}$. This proves preservation and reflection for both functors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; formal localization argument for quasi-inverse exact functors, supplied here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor) gives exact descent but omits details; the quasi-inverse and unit/counit argument is written here using existing localization and boundedness lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -78,10 +158,59 @@
    "results": "15 hits; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
    "date": "2026-10-17",
    "verdict": "no match for equivalence on bounded below derived categories: exact-functor descent and generic localization facts are candidates but do not themselves state this equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of abelian categories induces an equivalence of bounded below derived categories with termwise unit and counit",
+   "results": "8 hits; CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor descent is present, but no declaration here states the bounded-below equivalence with the given unit and counit"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(equiv|IsEquivalence)|(equiv|IsEquivalence).*mapDerivedCategory|mapDerivedCategoryPlus",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor descent is present, but no declaration here states the bounded-below equivalence with the given unit and counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of abelian categories induces a bounded below derived equivalence",
+   "results": "8 hits; CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Equivalence.IsTriangulated.symm, HasDerivedCategory, CategoryTheory.IsGrothendieckAbelian.of_equivalence, HasDerivedCategory.standard, CategoryTheory.Equivalence.IsTriangulated, CategoryTheory.Functor.mapDerivedCategory.congr_simp",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor descent is present, but no declaration here states the bounded-below equivalence with the given unit and counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, DerivedCategory",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor descent is present, but no declaration here states the bounded-below equivalence with the given unit and counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi inverse additive exact functors descend to equivalences on derived categories by localizing complexes at quasi isomorphisms",
+   "results": "8 hits; CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor descent is present, but no declaration here states the bounded-below equivalence with the given unit and counit"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|[Ee]quivalence",
+   "results": "5 hits; 16, 36, 39, 41, 42; searched Algebra/Homology/DerivedCategory/ExactFunctor.lean; single-file rg output omits filenames, so msearch parsed line numbers as file fields; read ExactFunctor.lean:36,41 directly to verify the actual declarations",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor descent is present, but no declaration here states the bounded-below equivalence with the given unit and counit"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|localizedEquivalence|IsEquivalence",
+   "results": "15 hits; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Algebra/Homology/DerivedCategory",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor descent is present, but no declaration here states the bounded-below equivalence with the given unit and counit"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-0f1c",
@@ -103,5 +232,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-exact-equivalence-derived-plus",
+  "worker": "stage1",
+  "summary": "Retained the statement. Reused existing exact-functor descent, boundedness and localization nodes; wrote the termwise unit/counit, their unique descent, full-subcategory restriction and inverse formula for reflection explicitly. No new nodes. Checked exactness conventions, arbitrary abelian categories without enough injectives, and objectwise lower bounds.",
+  "blueprint": "lem-kun-0f1c, current main-20261015 proof Step 1: the exact sheaf equivalences coming from universal homeomorphisms induce equivalences on D^+, carrying the original unit and counit and reflecting isomorphisms.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic exact-functor cohomology and boundedness lemma; used to restrict both termwise derived functors to D^+. No node of the Kunneth unit states this abstract tool, and it does not replace any geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q77-7acba7920",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-7acba7920 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full; no new nodes. Verified Stacks 015F/010N, Mathlib natural-transformation descent, boundedness, prescribed unit/counit, inverse formulas, edge cases, duplicate candidates, and route. Accepted the declared boundedness tool use. No repairs needed; detailed checks are in review.md."
  }
 }

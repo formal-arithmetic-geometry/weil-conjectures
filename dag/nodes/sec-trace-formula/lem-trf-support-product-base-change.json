@@ -15,9 +15,96 @@
   "def-sf-pf",
   "def-trf-supported-pairing"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=Rf_!A_U$ and $G=Rg_!A_V$. The constant object $A_W$ is locally free of rank one in degree zero, hence bounded constructible with Tor interval $[0,0]$. By [thm-sf-ctf-stability] (i), (ii), (iv), all pullbacks, tensor products and compact-support images occurring below remain in $D^b_{ctf}$; in particular $F,G$ do. By [lem-sf-proetale-constructible-origin] (ii), these bounded constructible pro-etale objects admit bounded etale-origin witnesses, as required by the finite pro-etale domain in [prop-functor-package] (4). Use the concrete composition, compact-support exchange and projection isomorphisms of [prop-functor-package] (3)--(5). These are the specified maps on the finite constructible domain, with the constructible exceptional adjunction and biduality provided there and in [thm-sf-ctf-stability] (v), (vi); thus the geometric operations instantiate the finite-coefficient datum used in the relative-product statements. No properness or smoothness is needed for compact-support exchange. Write $\\alpha_f:Rf_!Rp_!\\cong Rt_!$ and $\\alpha_g:Rg_!Rq_!\\cong Rt_!$ for these composition comparisons.",
+   "uses": [
+    "thm-sf-ctf-stability",
+    "prop-functor-package",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 4, domains for the support-product comparison"
+   }
+  },
+  {
+   "text": "First record explicitly the tensor-unit cancellation needed for $p$ and $q$. For a chosen compactification $h=rj$, [def-exchange-projection] defines $\\operatorname{PF}_{h,M,A}$ as $\\pi_{r;j_!M,A}$ followed by $Rr_*$ applied to the open tensor comparison. The unit clause of [lem-weil-pbc-ringed-projection-mate-exact] says $\\pi_{r;j_!M,A}=1_{Rr_*j_!M}$ after unit identifications. By [lem-sf-open-tensor-normalization], the open comparison $\\gamma_{M,A}$ restricts to the identity; with $j^*j_!\\cong1$, full faithfulness of $j_!$ therefore makes it the identity of $j_!M$ after unit identifications. Consequently the defining two factors give $\\operatorname{PF}_{h,M,A}=1_{Rh_!M}$ under the canonical right-unit identifications. Apply this to $(h,M)=(p,A_T),(q,A_T)$. This is a two-factor substitution in the cited statements, not a new projection-formula theorem.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 (equation-projection-formula-map), 0GL1 (lemma-j-shriek-and-tensor); unit specialization of the canonical maps"
+   }
+  },
+  {
+   "text": "Let $\\kappa_{f,g}:Rt_!A_T\\to F\\otimes G$ be the exact canonical composite of [thm-sf-kunneth-relative] for $(K,L)=(A_U,A_V)$, using $Lp^*A_U\\otimes Lq^*A_V\\cong A_T$. Consider also $\\kappa_{g,f}:Rt_!A_T\\to G\\otimes F$, with its source transported along the canonical swap $U\\times_BV\\cong V\\times_BU$. Expand the latter by that theorem's definition: its outer image is $Rf_!$, its inner projection is $p$, its exchange is $bc'$, and its outer projection transformation is $\\operatorname{PF}_{f,A_U,G}$ of [def-sf-pf]. The inner inverse projection at $(A_T,A_U)$ cancels by step 2. The symmetry $Lp^*A_U\\otimes Lq^*A_V\\cong Lq^*A_V\\otimes Lp^*A_U$ becomes the identity on $A_T$: both factors are tensor units in degree zero, and their unit multiplication is commutative. The pullback/unit identifications here agree by [lem-pur-derived-pullback-tensor-iso]. Thus, writing $\\sigma_{G,F}:G\\otimes F\\to F\\otimes G$ for the signed symmetry, the final target symmetry cancels to give\n$$\\sigma_{G,F}\\kappa_{g,f}=\\operatorname{PF}_{f,A_U,G}^{-1}\\circ Rf_!(bc'^{-1})\\circ\\alpha_f^{-1}=\\mu.$$\nThe unit insertion inside $Rf_!$ is understood exactly as in the statement of $\\mu$.",
+   "uses": [
+    "thm-sf-kunneth-relative",
+    "def-sf-pf",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/thm-sf-kunneth-relative.md",
+    "place": "Definition of the canonical composite, specialized to (g,f; A_V,A_U)"
+   }
+  },
+  {
+   "text": "Expand $\\kappa_{f,g}$ itself by [thm-sf-kunneth-relative]. In order its factors are $\\alpha_g^{-1}$, the inner inverse projection for $q$ at $(A_T,A_V)$, $Rg_!(bc^{-1})$, the symmetry inside $Rg_!$, the inverse outer projection for $g$ at $(A_V,F)$, and the target symmetry. Step 2 cancels the inner projection. The symmetry inside $Rg_!$ only moves the unit $A_V$, so it is the canonical insertion of $A_V$ on the left. Therefore\n$$\\kappa_{f,g}=\\pi_F^{-1}\\circ Rg_!(bc^{-1})\\circ\\alpha_g^{-1},$$\nwhere $A_T\\cong Lp^*A_U$ is inserted after $\\alpha_g^{-1}$. Indeed [def-sf-pf] gives the outer projection map, and the inverse of the statement's definition of $\\pi_F$ is precisely the remaining inverse projection followed by the target symmetry. Every symmetry involving $F$ or $G$ is retained with its Koszul signs; neither compact-support image is assumed concentrated in degree zero.",
+   "uses": [
+    "thm-sf-kunneth-relative",
+    "def-sf-pf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/thm-sf-kunneth-relative.md",
+    "place": "Definition of the canonical composite, specialized to (f,g; A_U,A_V)"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-kunneth-coherence] (i) to $K=A_U$, $L=A_V$ on this Cartesian product. Its assertion concerns the canonical maps just expanded, and identifies\n$$\\kappa_{g,f}=\\sigma_{F,G}\\circ\\kappa_{f,g}$$\nafter the external-product swap and the canonical source identification. The external-product swap on the two constant units was identified with the identity in step 3. Compose with $\\sigma_{G,F}$; the symmetric-monoidal identity $\\sigma_{G,F}\\sigma_{F,G}=1$ gives $\\sigma_{G,F}\\kappa_{g,f}=\\kappa_{f,g}$. Together with step 3, this says $\\mu=\\kappa_{f,g}$. This use of signed symmetry applies to arbitrary separated finite-type $f,g$, not just proper ones.",
+   "uses": [
+    "lem-sf-kunneth-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.md",
+    "place": "Clause (i), symmetry of the specified relative product"
+   }
+  },
+  {
+   "text": "Substitute step 4 into $\\mu=\\kappa_{f,g}$ and compose on the left with $\\pi_F$. The inverse projection and its projection cancel, yielding\n$$\\pi_{Rf_!A_U}\\circ\\mu=Rg_!(bc^{-1})\\circ\\alpha_g^{-1}.$$\nThe source unit identification in step 4 makes $\\alpha_g^{-1}$ exactly the unnamed arrow $Rt_!A_T\\to Rg_!Rq_!Lp^*A_U$ in the question. This is the required equality of specified maps, including their composition comparisons, unit maps and signed symmetries.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 4, displayed support-product equality before taking exceptional adjoints"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-sf-pf",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-kunneth-coherence",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "prop-functor-package",
+  "thm-sf-ctf-stability",
+  "thm-sf-kunneth-relative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+  "place": "Step 4; expanded using the canonical relative product and its signed symmetry, with the tensor-unit normalization from Stacks Tags 0B56, 0GL1 and 0E8I"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +133,52 @@
    "results": "0 hits: . The hits concern ordinary sheaf pullback composition or Cartesian monoidal product projections. None compares these two compact-support support-product maps with the derived projection formula and exchange. No exact or one-line specialization.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|kuenneth|lowerShriek|compactSupport.*baseChange",
+   "results": "0 hits: ; scope Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary module-sheaf adjunctions, Cartesian products, complex unitors or unrelated product symmetries; none gives this compact-support derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula identifies the tensor product of compact support pushforwards of constant sheaves with inverse base change along either leg",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.Over.tensorHom_left_fst, AlgebraicGeometry.pullbackSpecIso_inv_snd, CategoryTheory.Over.tensorObj_left, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, TopCat.Presheaf.Pushforward.comp, SheafOfModules.pushforwardComp_inv_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary module-sheaf adjunctions, Cartesian products, complex unitors or unrelated product symmetries; none gives this compact-support derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"projection\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary module-sheaf adjunctions, Cartesian products, complex unitors or unrelated product symmetries; none gives this compact-support derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the compactly supported relative Kunneth isomorphism the two choices of outer projection agree after signed tensor symmetry",
+   "results": "8 hits: HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal, HomologicalComplex₂.XXIsoOfEq_hom_ιTotal, groupHomology.inhomogeneousChainsIso, HomologicalComplex.alternatingConstHomologyIsoEven, groupHomology.π_comp_H2Iso_hom, groupHomologyIso, groupHomologyIsoTor",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary module-sheaf adjunctions, Cartesian products, complex unitors or unrelated product symmetries; none gives this compact-support derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetry of the derived relative product map built from compact support base change and two inverse projection formulas",
+   "results": "8 hits: ContinuousLinearEquiv.prodComm_symm, Homeomorph.prodComm_symm, ContinuousLinearEquiv.prodProdProdComm_symm, ContinuousLinearMap.coprod_comp_prodComm, ContinuousAlternatingMap.piEquiv_symm_apply, ComplexShape.π_symm, TopCat.piIsoPi_inv_π, ContinuousMap.piEquiv_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary module-sheaf adjunctions, Cartesian products, complex unitors or unrelated product symmetries; none gives this compact-support derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*base.?change|base.?change.*projection|Kunneth|Kuenneth",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary module-sheaf adjunctions, Cartesian products, complex unitors or unrelated product symmetries; none gives this compact-support derived comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-class-diagonal-pairing",
@@ -66,5 +195,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-support-product-base-change",
+  "worker": "stage1",
+  "summary": "Proved the exact other-leg support-product identity by expanding both canonical relative Kunneth composites at the constant units and applying the existing signed symmetry lemma. Wrote the compact-support tensor-unit cancellation from the defining proper/open factors. Statement unchanged; no new nodes or Mathlib leaves. All cited statements were read and backed by verbatim citation excerpts.",
+  "blueprint": "Expands precisely Step 4 of lem-trf-trace-class-diagonal-pairing: the support-product map built with c as outer image agrees, after the Delta projection formula, with inverse base change along Delta. The proof uses general f,g in place of c,Delta; it does not alter the trace-class unit route.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Finite-stage preservation of the pullback, tensor, compact-support and duality domains needed to instantiate the existing relative-product statements; this does not replace a trace-class construction."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Supplies the concrete composition, arbitrary compact-support base change, projection and constructible-adjunction maps used by the support-product recipe."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Its tensor-unit clause identifies the proper factor of the chosen compact-support projection with the identity."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Its full faithfulness and restricted-identity clause identify the open factor of that same projection with the identity."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Its compatibility with signed commutativity and units identifies the constant-unit external-product swap with the source unit identification."
+   },
+   {
+    "node": "lem-sf-kunneth-coherence",
+    "why": "Clause (i) is the existing general signed symmetry of the canonical relative product; this is precisely the coherence invoked by the blueprint trace-pairing step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-ctf-stability",
+  "prop-functor-package",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-kunneth-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q65-d2dd62310",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q65-d2dd62310 (reviewer sub-agent of L); spot-checked: Verified all six steps, cited statements and sources, coefficient domains, signed symmetries, route, and small cases. Repaired one C1 citation gap in Step 1: added the existing constructible-origin lemma to discharge the package’s étale-origin requirement. Corrected JSON and review.md written; statement unchanged, no new nodes or cycles.; 1 file(s) fixed by the reviewer"
  }
 }

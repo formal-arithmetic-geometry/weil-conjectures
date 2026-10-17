@@ -1,0 +1,85 @@
+{
+ "id": "lem-trf-injective-target-hom-symbol",
+ "kind": "statement",
+ "title": "Exact symbol sequence for morphisms into an injectively graded filtered object",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], with Hom groups taken in a common larger universe. Let $(X,F)$ and $(Y,F)$ be objects with finite decreasing filtrations by subobjects [def-sp-filtration]: there are integers $a\\le b$ and $c\\le d$ with $F^aX=X$, $F^{b+1}X=0$, $F^cY=Y$, and $F^{d+1}Y=0$. Suppose that each $\\operatorname{gr}^qY=F^qY/F^{q+1}Y$ is injective in the extension-property sense [def-sp-injective-resolutions]. For $r\\in\\mathbf Z$ define the subgroup\n$$G^r(X,Y)=\\{f\\in\\operatorname{Hom}_{\\mathcal A}(X,Y)\\mid f(F^pX)\\subseteq F^{p+r}Y\\text{ for all }p\\in\\mathbf Z\\}.$$\nFor $f\\in G^r(X,Y)$ let $\\sigma_r(f)_p:\\operatorname{gr}^pX\\to\\operatorname{gr}^{p+r}Y$ be the map induced by $f|_{F^pX}$. Then the sequence of abelian groups\n$$0\\longrightarrow G^{r+1}(X,Y)\\longrightarrow G^r(X,Y)\\xrightarrow{\\sigma_r}\\bigoplus_{p\\in\\mathbf Z}\\operatorname{Hom}_{\\mathcal A}(\\operatorname{gr}^pX,\\operatorname{gr}^{p+r}Y)\\longrightarrow0$$\nis exact. The direct sum is finite because $\\operatorname{gr}^pX=0$ outside $[a,b]$. The induced isomorphism from $G^r/G^{r+1}$ to this sum is natural under precomposition by filtration-preserving maps $X'\\to X$ between finite filtered objects, and under postcomposition by filtration-preserving maps $Y\\to Y'$ between finite filtered objects whose graded pieces are injective.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TP, lemma-filtered-injective. Agent-extracted symbol-sequence consequence of its split-filtration description and the injective extension property of def-sp-injective-resolutions; the exact symbol sequence is not printed verbatim in Tag 05TP."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite decreasing filtrations on objects X and Y in an abelian category with injective graded pieces of Y the degree r symbol map from shift filtered Hom to the sum of Hom between graded pieces is surjective with kernel filtration r plus one",
+   "results": "{\"t\": \"2026-10-17T14:11:14Z\", \"tool\": \"leanfinder\", \"query\": \"For finite decreasing filtrations on objects X and Y in an abelian category with injective graded pieces of Y the degree r symbol map from shift filtered Hom to the sum of Hom between graded pieces is surjective with kernel filtration r plus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity\", \"CochainComplex.cm5b\", \"CategoryTheory.InjectiveResolution.extMk_surjective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CochainComplex.instIsMultiplicativeIntDegreewiseEpiWithInjectiveKernel\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"c2a155b13a26b64b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern filtered index categories, graded totals/reindexing, module filtrations, or ordinary injective resolutions; none gives the shift-filtered Hom symbol sequence for finite filtered objects in an arbitrary abelian category."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ff]iltered|[Ff]iltration).{0,60}(Hom|hom|[Gg]raded)|[Ss]ymbol.*[Hh]om",
+   "results": "{\"t\": \"2026-10-17T14:11:19Z\", \"tool\": \"grep\", \"query\": \"([Ff]iltered|[Ff]iltration).{0,60}(Hom|hom|[Gg]raded)|[Ss]ymbol.*[Hh]om\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/Comma/Final.lean\", \"Mathlib/CategoryTheory/Comma/Final.lean\", \"Mathlib/CategoryTheory/Comma/Final.lean\", \"Mathlib/CategoryTheory/Comma/Final.lean\", \"Mathlib/CategoryTheory/Comma/Final.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\"], \"digest\": \"1cb7a548287941aa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern filtered index categories, graded totals/reindexing, module filtrations, or ordinary injective resolutions; none gives the shift-filtered Hom symbol sequence for finite filtered objects in an arbitrary abelian category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded of filtered morphisms to a finite filtered object with injective graded pieces equals the direct sum of morphisms between associated graded objects",
+   "results": "{\"t\": \"2026-10-17T14:11:19Z\", \"tool\": \"leansearch\", \"query\": \"Associated graded of filtered morphisms to a finite filtered object with injective graded pieces equals the direct sum of morphisms between associated graded objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GradedObject.total\", \"SetLike.gmodule.congr_simp\", \"DirectSum.Gmodule\", \"CategoryTheory.GradedObject.mapMap\", \"CategoryTheory.GradedObject.instFaithfulTotal\", \"DirectSum.of_eq_of_gradedMonoid_eq\", \"SetLike.gmodule\", \"HomologicalComplex₂.toGradedObjectMap\"], \"digest\": \"cb6c81f8bfb4d4de\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern filtered index categories, graded totals/reindexing, module filtrations, or ordinary injective resolutions; none gives the shift-filtered Hom symbol sequence for finite filtered objects in an arbitrary abelian category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Filtration, CategoryTheory.Injective",
+   "results": "{\"t\": \"2026-10-17T14:11:19Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Filtration, CategoryTheory.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern filtered index categories, graded totals/reindexing, module filtrations, or ordinary injective resolutions; none gives the shift-filtered Hom symbol sequence for finite filtered objects in an arbitrary abelian category."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ff]iltered|[Ff]iltration).{0,50}([Hh]om|[Gg]raded)|[Ss]ymbol",
+   "results": "{\"t\": \"2026-10-17T14:11:37Z\", \"tool\": \"grep\", \"query\": \"([Ff]iltered|[Ff]iltration).{0,50}([Hh]om|[Gg]raded)|[Ss]ymbol\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/GrothendieckAbelian.lean\"], \"digest\": \"392598dc8726a876\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern filtered index categories, graded totals/reindexing, module filtrations, or ordinary injective resolutions; none gives the shift-filtered Hom symbol sequence for finite filtered objects in an arbitrary abelian category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded of the filtration on morphisms between finite filtered objects is Hom of their associated graded objects when the target has injective subquotients",
+   "results": "{\"t\": \"2026-10-17T14:11:46Z\", \"tool\": \"leanfinder\", \"query\": \"The associated graded of the filtration on morphisms between finite filtered objects is Hom of their associated graded objects when the target has injective subquotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GradedObject.ιMapObjOrZero_eq\", \"IsModuleFiltration.toGradedSMul\", \"IsModuleFiltration.mk_int\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀\", \"CategoryTheory.GradedObject.ιMapObjOrZero\", \"ModuleCat.FilteredColimits.M.mk_map\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver_map\"], \"digest\": \"e306d74f9ab7da54\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern filtered index categories, graded totals/reindexing, module filtrations, or ordinary injective resolutions; none gives the shift-filtered Hom symbol sequence for finite filtered objects in an arbitrary abelian category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-filtered-hom-complex-invariance",
+  "date": "2026-10-17",
+  "group": "Q45"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof paragraphs (1) and (2), open--closed trace additivity via the filtered RHom construction of Varshavsky §5.1.5: the graded comparison for the concrete shift-filtered Hom complex, used in Step 6 of lem-trf-filtered-derived-hom-calculus.",
+   "via": [
+    "lem-trf-filtered-hom-complex-invariance",
+    "lem-trf-filtered-derived-hom-calculus",
+    "lem-trf-invariant-localization-filtered-lift"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

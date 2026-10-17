@@ -14,9 +14,78 @@
   "prop-functor-package",
   "def-weil-pbc-composite-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use pullback-first notation $P_h(B,M):B\\otimes Rh_!M\\xrightarrow{\\sim}Rh_!(Lh^*B\\otimes M)$ for the projection isomorphism, with the signed symmetry inserted on both sides of the formula in [fix-prop-projection-formula]. This theorem supplies naturality and compatibility with compact-support composition for these actual geometric maps. Its hypotheses hold: $h=f,j$ are separated finite type, and every displayed tensor factor is on the finite-Tor constructible domain stipulated in the item. In particular $\\theta=P_j(Lf^*D,K)^{-1}$, with $Lj^*Lf^*D=D$. Also $P_{\\mathrm{id}}(B,M)=1$: in [def-exchange-projection] take the compactification with both factors identities. The pullback tensor comparison, adjunction unit and counit, and open-extension tensor map are identities under the canonical identity identifications, so the defining projection composite is identity; the two symmetry insertions cancel. This uses the specified geometric projection map, rather than an arbitrary natural isomorphism of its type.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3(d): the projection-formula evaluation against the section counit, for p_1 Delta = id_X"
+   }
+  },
+  {
+   "text": "Write $c_N:Rj^!Rf^!N\\xrightarrow{\\sim}N$ and $a_M:Rf_!Rj_!M\\xrightarrow{\\sim}M$ for the specified comparisons for $fj=\\mathrm{id}_X$. By [def-trf-admissibility], $c$ is the adjunction conjugate of $a$, using the composite Hom bijection of [def-weil-pbc-composite-adjunction]. Consequently the composite bijection sends $a_K$ to $c_K^{-1}$. The defining equality $\\operatorname{adj}_j(l)=c_K^{-1}$ therefore gives $l=\\operatorname{adj}_f(a_K)$. Taking the inverse $f$-adjunction yields\n$$\\varepsilon_{f,K}\\circ Rf_!(l)=a_K.$$\nThis is only evaluation of the specified two inverse Hom bijections; no full faithfulness of $Rj_!$ or $Rf^!$ is used.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3(d): the projection-formula evaluation against the section counit, for p_1 Delta = id_X"
+   }
+  },
+  {
+   "text": "Put $T=V\\circ(1\\otimes l)\\circ\\theta$ and $b=\\varepsilon_{f,W}\\circ Rf_!T:Rf_!Rj_!(D\\otimes K)\\to W$. The definition of $V$ as an $f$-adjunct gives\n$$\\varepsilon_{f,W}\\circ Rf_!V=v\\circ(1_D\\otimes\\varepsilon_{f,K})\\circ P_f(D,Rf^!K)^{-1}.$$\nApply naturality of the inverse projection isomorphism in its second variable to the morphism $l:Rj_!K\\to Rf^!K$:\n$$P_f(D,Rf^!K)^{-1}\\circ Rf_!(1\\otimes l)=(1_D\\otimes Rf_!l)\\circ P_f(D,Rj_!K)^{-1}.$$\nSubstitution, functoriality of tensor, and Step 2 give the explicit formula\n$$b=v\\circ(1_D\\otimes a_K)\\circ P_f(D,Rj_!K)^{-1}\\circ Rf_!\\theta.$$\nOnly naturality of the actual projection map from [fix-prop-projection-formula] and the counit formula for the adjunction of [def-trf-admissibility] enter this calculation.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3(d): the projection-formula evaluation against the section counit, for p_1 Delta = id_X"
+   }
+  },
+  {
+   "text": "Apply the composition compatibility of [fix-prop-projection-formula] to $X\\xrightarrow jZ\\xrightarrow fX$, with base tensor factor $D$ and source object $K$. In the notation of Step 1 its equation is\n$$a_{D\\otimes K}\\circ Rf_!P_j(Lf^*D,K)\\circ P_f(D,Rj_!K)=P_{\\mathrm{id}}(D,K)\\circ(1_D\\otimes a_K)=1_D\\otimes a_K.$$\nThe pullback comparison is $Lj^*Lf^*D=D$. Multiply this equality on the right by $P_f(D,Rj_!K)^{-1}\\circ Rf_!\\theta$; since $\\theta=P_j(Lf^*D,K)^{-1}$, functoriality cancels the adjacent inverse pair. Thus\n$$ (1_D\\otimes a_K)\\circ P_f(D,Rj_!K)^{-1}\\circ Rf_!\\theta=a_{D\\otimes K}.$$\nStep 3 now reads $b=v\\circ a_{D\\otimes K}$. All symmetry constraints are precisely those defining $P_f,P_j$; no permutation of $D$ and $K$ is discarded.",
+   "uses": [
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3(d): the projection-formula evaluation against the section counit, for p_1 Delta = id_X"
+   }
+  },
+  {
+   "text": "Finally, $T=\\operatorname{adj}_f(b)$ by the inverse counit formula for the $f$-adjunction. The composite Hom bijection of [def-weil-pbc-composite-adjunction], with the comparisons fixed in [def-trf-admissibility], sends $b=v\\circ a_{D\\otimes K}$ to $v$, because its identification with the identity adjunction is induced by $a$ and $c$. Its value on $b$ is, by its definition as two successive Hom bijections, $c_W\\circ\\operatorname{adj}_j(T)$. Hence $c_W\\circ\\operatorname{adj}_j(V\\circ(1\\otimes l)\\circ\\theta)=v$, as asserted.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3(d): the projection-formula evaluation against the section counit, for p_1 Delta = id_X"
+   }
+  }
+ ],
+ "proof_deps": [
+  "fix-prop-projection-formula",
+  "def-exchange-projection",
+  "def-trf-admissibility",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+  "place": "Step 3(d), expanded projection-formula naturality and composite-adjunction calculation; Stacks categories.tex Tag 0DV0 (lemma-compose-counits) for composite Hom bijections"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +114,52 @@
    "results": "14 hits: Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean. The mate and composite-counit formulas handle adjunctions but not the compatibility of the geometric projection formula with this section and tensor pairing. Cartesian Frobenius maps concern categorical products, not the derived tensor here. No exact or one-line specialization.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of projection formulas for pushforward along a section and counits of composite adjunctions",
+   "results": "CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.ExponentiableMorphism.pushforwardComp, SheafOfModules.pushforwardComp, CategoryTheory.ExponentiableMorphism.comp_pushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit. Read Adjunction/Basic.lean lines 160-182 and 565-586: inverse counit and composite adjunction formulas only; no geometric compact-support projection compatibility. Other hits concern abstract tensor adjunctions, cartesian products or light condensed objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|comp_counit|homEquiv.*naturality",
+   "results": "Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Category/TwoP.lean, Mathlib/CategoryTheory/Category/TwoP.lean, Mathlib/CategoryTheory/CodiscreteCategory.lean, Mathlib/CategoryTheory/CodiscreteCategory.lean. Read Adjunction/Basic.lean lines 160-182 and 565-586: inverse counit and composite adjunction formulas only; no geometric compact-support projection compatibility. Other hits concern abstract tensor adjunctions, cartesian products or light condensed objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app. Read Adjunction/Basic.lean lines 160-182 and 565-586: inverse counit and composite adjunction formulas only; no geometric compact-support projection compatibility. Other hits concern abstract tensor adjunctions, cartesian products or light condensed objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable exceptional adjunctions and a section, the projection formula and counit identify the adjunct of a tensor evaluation with the original pairing",
+   "results": "CategoryTheory.exp.ev_coev, CategoryTheory.ihom.ev_coev, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.coevaluation_comp_leftAdjointMate, CategoryTheory.ExactPairing.coevaluation_evaluation'', CategoryTheory.coevaluation_comp_rightAdjointMate, CategoryTheory.leftAdjointMate_comp_evaluation. Read Adjunction/Basic.lean lines 160-182 and 565-586: inverse counit and composite adjunction formulas only; no geometric compact-support projection compatibility. Other hits concern abstract tensor adjunctions, cartesian products or light condensed objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|comp_counit_app|homEquiv_unit",
+   "results": "Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean. Read Adjunction/Basic.lean lines 160-182 and 565-586: inverse counit and composite adjunction formulas only; no geometric compact-support projection compatibility. Other hits concern abstract tensor adjunctions, cartesian products or light condensed objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for compact support pushforward is compatible with composition; evaluating a tensor pairing on the exceptional class of a section recovers that pairing",
+   "results": "LightCondensed.ihomPoints_symm_comp, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, CategoryTheory.ExponentiableMorphism.coev_ev, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition. Read Adjunction/Basic.lean lines 160-182 and 565-586: inverse counit and composite adjunction formulas only; no geometric compact-support projection compatibility. Other hits concern abstract tensor adjunctions, cartesian products or light condensed objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-class-diagonal-pairing",
@@ -60,10 +171,34 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-trace-class-diagonal-pairing",
-   "place": "Step 3(d): the projection-formula evaluation against the section counit, for p_1 Delta = id_X",
+   "place": "Step 3(d): the sentence computing the composite-adjoint of the section-supported evaluation, using the definition of varpi and naturality of the projection formula",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-section-evaluation-adjoint",
+  "worker": "stage1",
+  "summary": "Expanded the section evaluation into an explicit naturality square, the projection composition equation for fj=id, and a composite-adjunction calculation. Reused existing geometric projection theorem; no new nodes and no statement change. Checked ordinary Mathlib adjunction formulas, which do not supply the geometric projection composition identity.",
+  "blueprint": "Realizes lem-trf-trace-class-diagonal-pairing proof Step 3(d): definition of varpi; the displayed evaluation with the section counit; reduction by Step 3(a).",
+  "tool_uses": [
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Uses naturality and the composition pentagon of the specified geometric projection maps; this is a generic six-functor tool, not a replacement for the trace-class unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q64-65883c19e",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q64-65883c19e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source locations, and unit/chapter route. Verified all five steps, projection composition, composite adjunctions, finite-Tor coefficient domains, and edge cases. Accepted fix-prop-projection-formula as a generic tool. No new nodes or repairs; review.md records findings and distant inherited DAG defects."
  }
 }

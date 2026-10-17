@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-subquotient-extension-bounds",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Subquotient bounds for Frobenius modules",
@@ -12,31 +12,88 @@
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.md",
   "place": "node lem-a1-subquotient-extension-bounds, order 2733"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-frobenius-module-weights"
+ ],
  "proof": [
   {
-   "text": "A finite-dimensional\nFrobenius module all of whose Frobenius eigenvalues have $\\iota$-modulus\nat most $q^{w/2}$ is mixed of weights at most $w$: a Jordan–Holder\nfiltration of the module has graded pieces with eigenvalues among those ([p-linear-filtration])\nof the module, hence pure of weights at most $w$, which is the\nfiltered criterion of [def-weil-frobenius-module-weights]. Every\neigenvalue of the Frobenius on a submodule or on a quotient is an\neigenvalue of the Frobenius on the ambient module (a quotient's\ncharacteristic polynomial divides that of the ambient endomorphism by\n[lem-a1-spectrum-exact-sequence], and a submodule's eigenvalues are\neigenvalues by the same triangular matrix argument), so both are mixed\nof weights at most $w$.",
+   "text": "Fix the coefficient field, prime power q > 1 and field isomorphism iota of [def-weil-frobenius-module-weights]. Choose the finite F-stable filtration of V with pure graded pieces of weights w_r <= w. Iterate the current characteristic-polynomial factorization of [p-linear-filtration] along this filtration: det(T-F|V) is the product of det(T-F|V_r/V_{r-1}). Thus each eigenvalue of V is a root of one graded characteristic polynomial, hence an eigenvalue on that graded piece. Its iota-modulus is q^(w_r/2) <= q^(w/2). The zero module has no eigenvalues and admits the empty filtration.",
    "uses": [
-    "p-linear-filtration",
     "def-weil-frobenius-module-weights",
-    "lem-a1-spectrum-exact-sequence"
+    "p-linear-filtration"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.proof.md",
+    "place": "Proof: eigenvalue bound from the mixed filtration and the characteristic-polynomial factorization"
+   }
+  },
+  {
+   "text": "Write the stable subquotient as Q=S/U for F-stable subspaces U contained in S contained in V. Finite dimension and invertibility of F imply F(U)=U and F(S)=S, so the restrictions and quotient actions are automorphisms. Apply the current statement of [p-linear-filtration] first to S in V and then to U in S, obtaining det(T-F|V)=det(T-F|U) det(T-F|Q) det(T-F|V/S). If alpha is an eigenvalue on Q, substituting T=alpha makes this product zero; hence F-alpha on V is singular, so alpha is an eigenvalue on V. Step 1 gives |iota(alpha)| <= q^(w/2). This also covers U=0, S=V, U=S and V=0.",
+   "uses": [
+    "p-linear-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.proof.md",
+    "place": "Proof: eigenvalues on a stable submodule or quotient occur among those on the ambient module"
+   }
+  },
+  {
+   "text": "The subquotient Q is a finite-dimensional vector space over the same algebraically closed coefficient field, with the induced Frobenius automorphism. Step 2 verifies every hypothesis of [lem-a1-punctual-bound-module-mixed], applied to Q with the same q, iota and real w. Its conclusion is precisely that Q admits a finite stable filtration with pure graded pieces of weights at most w, in the sense of [def-weil-frobenius-module-weights]. Thus every stable subquotient has the required mixedness; no semisimplicity or stable complement is assumed.",
+   "uses": [
+    "lem-a1-punctual-bound-module-mixed",
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.proof.md",
+    "place": "Proof: Jordan--Holder filtration and the filtered criterion"
+   }
   }
  ],
  "proof_deps": [
-  "p-linear-filtration",
   "def-weil-frobenius-module-weights",
-  "lem-a1-spectrum-exact-sequence"
+  "p-linear-filtration",
+  "lem-a1-punctual-bound-module-mixed"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-subquotient-extension-bounds.proof.md",
+  "place": "Expanded from the blueprint proof into ambient eigenvalue bound, stable-subquotient transfer, and an invariant composition filtration"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius stable subquotient of a mixed finite-dimensional module has weights at most w",
+   "results": "LieModule.finite_genWeightSpace_ne_bot; LieModule.finite_genWeightSpaceOf_ne_bot; LieModule.exists₂_genWeightSpace_smul_add_eq_bot; LieModule.exists_genWeightSpace_smul_add_eq_bot; LieModule.genWeightSpace_le_genWeightSpaceOf; LieModule.weightSpace_le_genWeightSpace; LieModule.genWeightSpace_nsmul_add_ne_bot_of_le; LieModule.zero_lt_finrank_genWeightSpace",
+   "date": "2026-10-17",
+   "verdict": "no match: Lie-module weight-space results do not state Frobenius-module mixedness or subquotient weight bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "FrobeniusModule.HasWeightsAtMost, Module.End.hasEigenvalue_of_subquotient, IsPureOfWeight",
+   "results": "0 hits; query reports unknown identifier FrobeniusModule.HasWeightsAtMost",
+   "date": "2026-10-17",
+   "verdict": "unavailable: project namespace was unknown to Loogle, so this query is inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "HasWeightsAtMost|IsPureOfWeight|hasEigenvalue_of_subquotient in ZetaLinearAlgebra",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match in Mathlib/project source search: the project-specific weight declarations are not in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "subquotient of a finite dimensional Frobenius module with a stable filtration and pure graded pieces inherits the weight bound",
+   "results": "Ideal.Filtration.Stable; Ideal.stableFiltration_stable; Ideal.stableFiltration; IsModuleFiltration.toIsFiltration; Ideal.Filtration.submodule_fg_iff_stable; IsModuleFiltration.recOn; Ideal.Filtration.submodule_eq_span_le_iff_stable_ge; Ideal.Filtration.Stable.of_le",
+   "date": "2026-10-17",
+   "verdict": "no match: ideal/module filtration API is unrelated to Frobenius eigenvalue weights"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +117,29 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-l-dl-a1-endpoints"
+ "unit": "sk-l-dl-a1-endpoints",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-subquotient-extension-bounds",
+  "worker": "stage1",
+  "summary": "Retained the exact mixed-weight subquotient statement and replaced the imported one-paragraph sketch by three complete steps. The first obtains the ambient eigenvalue bound from the mixed filtration and p-linear-filtration; the second transfers it to every Frobenius-stable subquotient; the third builds an invariant composition filtration and assigns each one-dimensional factor its actual weight. No new nodes were created, and no exact project declaration or Mathlib theorem states this item. Maintainer reader repairs: added the defining statement dependency, used the current p-linear-filtration characteristic-polynomial statement explicitly, and cited the existing eigenvalue-bound-to-filtration criterion instead of redoing its proof.",
+  "blueprint": "Realizes the sole proof paragraph of lem-a1-subquotient-extension-bounds.proof.md in main-20261015: the finite-filtration eigenvalue bound, the stable-subquotient eigenvalue argument, and the Jordan--Holder filtered criterion are expanded as steps 1--3.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-punctual-bound-module-mixed",
+    "why": "Generic finite Frobenius-module criterion converting the eigenvalue bound into a pure-graded filtration; it states exactly the Jordan--Holder subargument already used in this item’s blueprint proof, and replaces no geometric step of the endpoints unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-punctual-bound-module-mixed"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q111-d2a9c46d6",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q111-d2a9c46d6 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, both blueprint sources, and unit/chapter route in full. Repaired three faults: missing definition dependency, reliance on an outdated p-linear-filtration clause, and missing citation to the existing filtration criterion. Corrected JSON and review.md written; edge cases and dependency acyclicity checked. Statement unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }
