@@ -1500,6 +1500,7 @@ public import WeilConjectures.AlgebraicGeometry.OpenIsoConormalZero
 public import WeilConjectures.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictionKernelModule
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictionPullbackUnit
+public import WeilConjectures.AlgebraicGeometry.OverProper
 public import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineRestriction
@@ -2317,6 +2318,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TransposePairing
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMap
+public import WeilConjectures.CategoryTheory.Monoidal.Rigid.BraidedTrace
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Trace
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
