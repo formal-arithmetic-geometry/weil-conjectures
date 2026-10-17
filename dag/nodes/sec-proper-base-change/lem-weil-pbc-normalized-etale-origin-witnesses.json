@@ -14,9 +14,90 @@
   "lem-pur-derived-change-of-rings",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F_n=\\nu_T^*$ at coefficient ring $P_n$, and $C_{m,n}=L_m\\otimes^L_{P_m}P_n$, initially in the unbounded derived category. The rings $P_n$ are finite by [def-weil-pbc-adic-coefficient-datum]. The coefficient sheaves and exact termwise functors $F_n$ are those of [def-weil-pbc-proetale-modules]. Applying [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the comparison of ringed topoi gives the canonical coefficient-reduction comparison\n$$c_{m,n}:F_n C_{m,n}\\xrightarrow{\\sim}(F_mL_m)\\otimes^L_{P_m}P_n.$$\nHere this is an isomorphism of $P_n$-complexes, including the quotient action: take a K-flat resolution $Q\\to L_m$ with flat terms; its pullback is K-flat by the cited lemma. Both sides are computed from $Q\\otimes_{P_m}P_n$ by exact inverse image and the ordinary tensor comparison. This comparison carries the scalar action on the last $P_n$ factor to the same action on the other side. Derived change of rings [lem-pur-derived-change-of-rings] computes these quotient tensors by $Q$ and makes their comparisons independent of the resolution.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived (2); agent-written coefficient-reduction and cocycle refinement"
+   }
+  },
+  {
+   "text": "We will use the naturality and quotient associativity of these canonical comparisons. They can be checked on the preceding K-flat models. Extension of a K-flat $P_k$-complex $Q$ to $P_m$ is K-flat over $P_m$: for an acyclic $P_m$-complex $N$, its tensor with $Q\\otimes_{P_k}P_m$ is $Q\\otimes_{P_k}N$, acyclic since restriction of scalars leaves the underlying complex unchanged. Thus the two-stage extension is computed by ordinary balancing. For $k\\geq m\\geq n$, both association maps send\n$$((x\\otimes a)\\otimes b)\\longmapsto x\\otimes q_{m,n}(a)b.$$\nPullback has the same balancing formula, while a chain map $h$ replaces $x$ by $h(x)$ on both paths. This proves quotient-associativity, the unit case $x\\otimes a\\mapsto ax$, and naturality of $c$ on these models; [lem-pur-derived-change-of-rings] descends them through quasi-isomorphisms. In particular these are the associativity identifications stipulated in the statement, with the same quotient-ring actions. No flatness of $P_n$ over $P_m$ is used.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived (2); agent-written coefficient-reduction and cocycle refinement"
+   }
+  },
+  {
+   "text": "Compose $c_{m,n}$, $\\alpha_m\\otimes^LP_n$, and $\\rho_{m,n}$ to obtain an isomorphism $F_nC_{m,n}\\cong M_n$. Choose a lower cohomological bound $a_n$ for $M_n$. By [prop-weil-pbc-site-comparison-finite-level], $F_n$ is exact and every etale $P_n$-module sheaf $H$ has $H\\cong\\nu_{T,*}F_nH$. Exactness identifies $F_n\\mathcal H^i(C_{m,n})$ with $\\mathcal H^i(F_nC_{m,n})$: apply $F_n$ to kernels and images of the differentials and to their quotient. For $i<a_n$ this is zero. Apply the sheaf-level unit to $H=\\mathcal H^i(C_{m,n})$ to get $H\\cong\\nu_{T,*}0=0$. Hence $C_{m,n}\\in D^+(T_{\\mathrm{et}},P_n)$. This argument works for each pair separately and supplies no uniform bound.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived (2); agent-written coefficient-reduction and cocycle refinement"
+   }
+  },
+  {
+   "text": "Now both $C_{m,n}$ and $L_n$ are bounded below. By [thm-weil-pbc-site-comparison], $F_n$ is fully faithful on these categories. Set\n$$d_{m,n}=\\alpha_n^{-1}\\rho_{m,n}(\\alpha_m\\otimes^LP_n)c_{m,n}:F_nC_{m,n}\\xrightarrow{\\sim}F_nL_n.$$\nFullness gives a morphism $\\beta_{m,n}$ with image $d_{m,n}$ and a morphism with image $d_{m,n}^{-1}$. Faithfulness identifies their two composites with identities, so $\\beta_{m,n}$ is invertible. Faithfulness also makes it unique. Multiplying $F_n\\beta_{m,n}=d_{m,n}$ by $\\alpha_n$ gives precisely the required compatibility equation, with its source identified by $c_{m,n}$.",
+   "uses": [
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived (2); agent-written coefficient-reduction and cocycle refinement"
+   }
+  },
+  {
+   "text": "For $m=n$, use the canonical unit identifications $L_n\\otimes^L_{P_n}P_n=L_n$ and $M_n\\otimes^L_{P_n}P_n=M_n$. The unit comparison from Step 2 and the assumed $\\rho_{n,n}=1$ give $d_{n,n}=\\alpha_n^{-1}\\alpha_n=1$. Since [thm-weil-pbc-site-comparison] makes $F_n$ faithful, $\\beta_{n,n}=1$.",
+   "uses": [
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived (2); agent-written coefficient-reduction and cocycle refinement"
+   }
+  },
+  {
+   "text": "Fix $k\\geq m\\geq n$. Both sides of the desired equation have source $C_{k,n}$: Step 2 identifies $(L_k\\otimes^L_{P_k}P_m)\\otimes^L_{P_m}P_n$ with $C_{k,n}$, already bounded below by Step 3. Use the naturality and association of $c$ checked in Step 2, and the compatibility equations of Step 4. After applying $F_n$ and then $\\alpha_n$, the image of the two-stage composite is\n$$\\begin{aligned}\n\\alpha_nF_n\\bigl(\\beta_{m,n}(\\beta_{k,m}\\otimes^LP_n)\\bigr)\n&=\\rho_{m,n}(\\alpha_m\\otimes^LP_n)(F_m\\beta_{k,m}\\otimes^LP_n)\\\\\n&=\\rho_{m,n}(\\rho_{k,m}\\otimes^LP_n)(\\alpha_k\\otimes^LP_n)\\\\\n&=\\rho_{k,n}(\\alpha_k\\otimes^LP_n)\n=\\alpha_nF_n\\beta_{k,n}.\n\\end{aligned}$$\nAll displayed sources are identified by $c$ and scalar-extension associativity, as verified on the balanced models in Step 2. The middle equality is the assumed cocycle for $\\rho$. Cancel the invertible $\\alpha_n$ and then use faithfulness from [thm-weil-pbc-site-comparison]. This proves the cocycle for $\\beta$, and completes the compatible witness data.",
+   "uses": [
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived (2); agent-written coefficient-reduction and cocycle refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-change-of-rings",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09B1, lemma-compare-derived (2); agent-written coefficient-reduction and cocycle refinement"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -73,10 +154,45 @@
    "results": "Mathlib/CategoryTheory/Simple.lean; Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; Mathlib/CategoryTheory/Quotient.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean [Mathlib/CategoryTheory]",
    "date": "2026-10-17",
    "verdict": "no match: generic fully faithful lifting does not supply the etale comparison, boundedness after coefficient reduction, or its tensor coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*(origin|witness|[Dd]erived)|[Pp]ro[Ee]tale.*[Tt]ower",
+   "results": "",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical lifting and exact derived functors do not state the etale/proetale tower theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible etale origin witnesses for normalized finite coefficient towers of derived sheaves",
+   "results": "Algebra.Etale.formallyEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.etalePretopology; Algebra.FormallyEtale.instTensorProduct; RingHom.Etale; AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical lifting and exact derived functors do not state the etale/proetale tower theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible etale origins of a normalized tower of bounded below proetale complexes lift uniquely through the etale proetale comparison",
+   "results": "StandardEtalePair.homEquiv; StandardEtalePair.hom_ext_iff; StandardEtalePair.hom_ext; StandardEtalePresentation.mk.inj; StandardEtalePair.homEquiv_symm_apply; StandardEtalePair.homEquiv_apply_coe; Algebra.FormallyEtale.comp; StandardEtalePair.lift_X",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical lifting and exact derived functors do not state the etale/proetale tower theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "preimageIso|preimage_id|preimage_map",
+   "results": "Mathlib/CategoryTheory/Simple.lean; Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean [Mathlib/CategoryTheory]",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical lifting and exact derived functors do not state the etale/proetale tower theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithful exact inverse image of sheaves reflects bounded below complexes and lifts compatible derived change of coefficient isomorphisms",
+   "results": "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical lifting and exact derived functors do not state the etale/proetale tower theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-preservation-constructible",
@@ -93,5 +209,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-normalized-etale-origin-witnesses",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Expanded the boundedness-reflection argument before invoking D+ full faithfulness, constructed each unique normalization lift and its inverse, and checked identities and cocycles with the canonical balanced coefficient comparisons. No new nodes are needed.",
+  "blueprint": "Refines prop-weil-pbc-preservation-constructible.proof.md, the sentence 'the compatible etale-origin witnesses are carried to compatible witnesses': Steps 1-3 justify reduction and boundedness, Steps 4-6 construct the compatible normalization witnesses.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat change-of-coefficients tool for computing quotient tensors and descending balanced comparisons; it does not replace any geometric step of the proper-base-change unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-8c2a24c3e",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-8c2a24c3e (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, with no fixes written. Every cited statement checked out: adic datum (P_n finite, A commutative Noetherian), proetale-modules (constant coefficient sheaves, exact termwise nu^*), etale-origin-witness, lem-pur-derived-change-of-rings, ringed-topoi derived tensor pullback (genuinely unbounded, with u^*P K-flat for flat-term K-flat P; here nu^{-1}(P_m)_et = (P_m)_proet, so u^* is the fixed-Lambda inverse image), prop-weil-pbc-site-comparison-finite-level (exactness and unit, both used in Step 3), and thm-weil-pbc-site-comparison (fully faithful on D^+, used in Steps 4-6). The source sentence is in blueprint main-20261015 prop-weil-pbc-preservation-constructible.proof.md lines 15-20 ('compatible etale-origin witnesses are carried to compatible witnesses'). Stacks 09B1 (proetale.tex lemma-compare-derived (2)) gives only the D^+ comparison, so proof_origin 'by agent' is correct. Step 3 gets the D^+ bound before full faithfulness is used: exactness gives F_n H^i(C) = H^i(M_n) = 0 for i < a_n, and the unit reflects this to H^i(C) = 0, so there is no circularity. Steps 4-5 lift the isomorphism and its inverse, with uniqueness and beta_{n,n} = 1 from faithfulness. I expanded the Step 6 cocycle myself: naturality of c, the level-(k,m) equation, tensor associativity and the rho cocycle give alpha_n F_n beta_{k,n}, and the source C_{k,n} is in D^+. Small cases tested: m = n, zero objects, empty scheme, k = m, I = 0, zero ring. The M_n in D^+ hypothesis is needed (Z/l over Z/l^2 has unbounded Tor), and nothing is weakened. The parent's normalizations from the adic datum match the rho hypotheses. No new nodes; the grep for duplicates turned up only definitions and statements about geometric functors. I accept the declared tool_use of lem-pur-derived-change-of-rings as generic coefficient calculus. No SGA source is used."
  }
 }
