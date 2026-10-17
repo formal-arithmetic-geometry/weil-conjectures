@@ -384,7 +384,8 @@ lemma ProEtaleWeilSheaf.comp_torsorIdempotent (χ : AddChar G (PadicAlgCl l))
     ← Nat.card_eq_fintype_card, nsmul_eq_mul, mul_inv_cancel₀ hG,
     ProEtaleWeilSheaf.smulEnd_one, Category.id_comp]
 
-
+set_option maxHeartbeats 800000 in
+-- The pullback of the projector is computed on the evaluations, a large categorical term.
 /-- **Isotypic morphisms into the pushforward along a split torsor.** Let `φ : M ⟶ π_* ℚ̄_ℓ` be a
 morphism of pro-étale Weil sheaves on which `G` acts through the character `χ`, whose adjoint
 `π̄^* M ⟶ ℚ̄_ℓ` is an isomorphism. Then `φ` is split by a morphism `r` with `r ≫ φ = e_χ`: `M` is
