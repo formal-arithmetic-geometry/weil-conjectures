@@ -76,10 +76,6 @@ theorem exists_higherDirectImage_limit_fiber_rep {S : Scheme.{v}}
       (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
         (R+(((D.obj (op i)).hom)_*[AddCommGrpCat.{v + 1}]).obj
           ((DerivedCategory.Plus.singleFunctor _ 0).obj (F i))))
-    (hK : ∀ {i j : I} (f : i ⟶ j), K.map f =
-      (eK i).hom ≫ abelianHigherDirectImageMap (D.map f.op).left
-        (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p
-        (F i) (F j) (φ f) ≫ (eK j).inv)
     [HasColimit K]
     (η : K ⟶ (Functor.const I).obj
       ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
@@ -112,7 +108,7 @@ theorem exists_higherDirectImage_limit_fiber_rep {S : Scheme.{v}}
   let Φ := S.uliftPointSmallEtale s
   have : LocallySmall.{v + 1} S.Etale := locallySmall_max.{v + 1, v, v + 1}
   obtain ⟨e, hlift⟩ := exists_higherDirectImage_limit_presheaf_class_cover
-    D c hc F φ hφid hφcomp H eH hH p K eK hK η hη
+    D c hc F φ hφid hφcomp H eH hH p K eK η hη
   let τ : P ⟶ T.obj := toSheafify S.smallEtaleTopology P ≫ e.hom.hom
   have : Presheaf.IsLocallySurjective S.smallEtaleTopology τ := by
     dsimp [τ]
