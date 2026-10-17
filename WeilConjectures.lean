@@ -4684,6 +4684,7 @@ public import WeilConjectures.WeilSheaf.CohomologyNonneg
 public import WeilConjectures.WeilSheaf.CohomologyProEtale
 public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.WeilSheaf.CohomologyShift
+public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology

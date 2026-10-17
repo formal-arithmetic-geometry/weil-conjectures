@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyNonneg
+public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.LowerStar
@@ -234,7 +235,7 @@ theorem subsingleton_compactlySupportedCohomology_adicConstant (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
     (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
     Subsingleton ((adicConstant k₀ l X).compactlySupportedCohomology r).carrier :=
-  sorry
+  subsingleton_compactlySupportedCohomology_adicConstant_of_two_mul_lt k₀ l X e he r hr
 
 /-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
 
