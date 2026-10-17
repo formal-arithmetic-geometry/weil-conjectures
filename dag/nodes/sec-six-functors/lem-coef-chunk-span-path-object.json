@@ -258,5 +258,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b23e835a8",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement checked clause by clause against the node and HTT A.3.4.7-A.3.4.8. The objects are fibrant weak-equivalence spans in U.cf. The inherited enriched end gives exactly the p'a=bp, q'a=cq triples (rfl probe). D, tau, pi0 and pi1 are uniquely characterized canonical data. It states the strict endpoint identities, DwyerKanEquivalence tau, and the Bergner fibration as local Kan J.rlp plus paired PiZeroIso lifting, matching BergnerModelData.fibrations_iff_local_kan_lifting. No extra hypotheses; universes u,w independent; empty-chunk case vacuous. The section 1(B) repair of CoherentNerveComparison (independent object universes for three predicates, bodies unchanged) is needed, since Spans has object type Type (max u w). nt_compile is clean for both delivered modules, a probe, and all 11 side importers of the repaired predicates. Axioms: propext, sorryAx, Classical.choice, Quot.sound. lean.statement matches the file byte for byte. Docstrings and blueprint tags present; no hollow definitions; no duplicate found. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ChunkSpanPathObject",
+  "declaration": "CategoryTheory.SimplicialChunk.chunk_span_path_object",
+  "declarations": [
+   "CategoryTheory.SimplicialChunk.spanProperty",
+   "CategoryTheory.SimplicialChunk.Spans",
+   "CategoryTheory.SimplicialChunk.diagonalFamily",
+   "CategoryTheory.SimplicialChunk.diagonalSpan",
+   "CategoryTheory.SimplicialChunk.chunk_span_path_object"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ChunkSpanPathObject.lean",
+  "statement": "theorem chunk_span_path_object {A : Type w} [Category.{u} A] [ModelCategory A] [SimplicialCategory A] (_T : SimplicialTensorCotensor A) (_hC : CombinatorialModelCategory.{w, u, u} A) (_hSM7 : SimplicialModelLocalization.SatisfiesSM7 A) (U : SimplicialChunk A) : ∃ (D : EnrichedFunctor SSet.{u} U.cf.FullSubcategory (productFamilies U.carrier 2).FullSubcategory) (τ : EnrichedFunctor SSet.{u} U.cf.FullSubcategory (Spans U)) (π₀ π₁ : EnrichedFunctor SSet.{u} (Spans U) U.cf.FullSubcategory), (∀ B, D.obj B = diagonalFamily U B) ∧ (∀ B C j, HEq (D.map B C ≫ enrichedHomπ SSet (D.obj B).obj (D.obj C).obj j) (𝟙 (sHom B C))) ∧ (∀ B, (τ.obj B).obj = diagonalSpan U B) ∧ (∀ B C, HEq (τ.map B C ≫ enrichedHomπ SSet (τ.obj B).obj (τ.obj C).obj none) (D.map B C ≫ (U.product_factorization 2).middle.map (D.obj B) (D.obj C))) ∧ (∀ x, (π₀.obj x).obj = x.obj.obj (some 0)) ∧ (∀ x, (π₁.obj x).obj = x.obj.obj (some 1)) ∧ (∀ x y, HEq (π₀.map x y) (enrichedHomπ SSet x.obj y.obj (some 0))) ∧ (∀ x y, HEq (π₁.map x y) (enrichedHomπ SSet x.obj y.obj (some 1))) ∧ τ.comp SSet π₀ = EnrichedFunctor.id SSet U.cf.FullSubcategory ∧ τ.comp SSet π₁ = EnrichedFunctor.id SSet U.cf.FullSubcategory ∧ DwyerKanEquivalence τ ∧ (∀ x y, SSet.modelCategoryQuillen.J.rlp (CartesianMonoidalCategory.lift (π₀.map x y) (π₁.map x y))) ∧ (∀ (x : Spans U) (B C : U.cf.FullSubcategory) (f : π₀.obj x ⟶ B) (g : π₁.obj x ⟶ C), IsPiZeroIso f → IsPiZeroIso g → ∃ (y : Spans U) (a : x ⟶ y) (h₀ : π₀.obj y = B) (h₁ : π₁.obj y = C), IsPiZeroIso a ∧ SSet.π₀.mk (homEquiv' _ _ ((eHomEquiv SSet).symm (eHomEquiv SSet a ≫ π₀.map x y) ≫ eqToHom h₀)) = SSet.π₀.mk (homEquiv' _ _ f) ∧ SSet.π₀.mk (homEquiv' _ _ ((eHomEquiv SSet).symm (eHomEquiv SSet a ≫ π₁.map x y) ≫ eqToHom h₁)) = SSet.π₀.mk (homEquiv' _ _ g))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -142,22 +142,22 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedCategory",
-  "statement": "abbrev proEtaleDerivedCategory (Y : Scheme.{t}) (A : Type t) [CommRing A] : Type _",
-  "branch": "newtargets-dag",
-  "by": "Q01",
-  "date": "2026-10-16",
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.ModuleDerivedCategory",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleDerivedCategory",
+  "statement": "abbrev ModuleDerivedCategory (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] : Type _",
+  "note": "§1(B), existing interface repair. The intrinsic SheafOfModules record has a Type u coefficient plus its lift, while the finite-coefficient conventions, supported-Hom theorem and direct-image record use Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u+1} P.Coefficient) with P.Coefficient : Type (u+1). The published ModuleDerivedCategory names exactly that ambient unbounded localization on the same small site. This changes only its presentation; the site retains object universe u+1 and morphism universe u, with no equality imposed.",
+  "branch": "slopmaster2",
   "existing": true,
-  "note": "§1(B), record-only repair: the current record supplies fixed-scalar ModuleCat-valued sheaves, while the recorded constructible intervals, intrinsic constructibility, Tor tests and coefficient reduction used by this item have the intrinsic constant-ring SheafOfModules category. The existing proEtaleDerivedCategory is precisely that ordinary unbounded localization on the same small pro-etale site. It uses the canonical ULift of coefficients, module values in t+1, site objects in t+1 and morphisms in t; no size equality or new category is introduced. The fixed-scalar realization remains publicly available through the existing finite-module comparison."
+  "by": "Q103",
+  "date": "2026-10-17"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-2926977e6",
-  "group": "Q01",
+  "reviewer": "NT-stage2-cc-71cb30d3e",
+  "group": "Q103",
   "result": "pass",
-  "note": "Reviewed immutable packet, node statement, source/proof dependencies, Lean declarations, docstrings, report sections, edge cases, and scompile evidence. No substantive or mechanical correction required."
+  "note": "I read the node, the blueprint (main-20261015 and -17, identical), SupportedCup.lean, the report (real Worker report and Second reading by Q103) and the dependency declarations: PurityFiniteSetting, supported_cohomology_hom, ModuleDerivedCategory, ProEtale.derivedTensor (= curriedTensor), DerivedCategory/Monoidal/Shift.lean and Mathlib mapBifunctorShift2Iso. Every clause matches: finite A with n>=1, k-scheme X, closed immersions, h = pullback.fst ≫ i, underived lowerStar in degree 0, D^+ inputs with a,b in Z as supported-Hom representatives, unbounded Hom output with no Tor hypothesis. mu is chosen from a true ∃! (restriction and multiplication; quotient maps are epi), which AGENTS.md permits. theta is lax mu_Q, then the single-complex iso, then mu; its sorry IsIso is true (degree-0 flat implies K-flat). Right-shift-first composite gives exactly the node's (-1)^(b r); upstream left-first shiftTensorShiftIso would differ by (-1)^(ab). Four sorry theorems with proof docstrings, no hollow data, verbatim lean.statement, lines <=100. nt_compile at Sheaf/Paper/SupportedCup.lean: 14.8 s, exit 0, no errors or warnings. Maintainer note: the §1(B) repairs to def-weil-pbc-proetale-site / def-weil-derived-tensor are valid but flip shared records again (H1 → Q27/Q11 → Q01/Q16 → Q103; ~68 files use intrinsic, ~51 fixed-scalar). The maintainer should fix one canonical presentation; the stage-2 fix format cannot revert dependency nodes."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

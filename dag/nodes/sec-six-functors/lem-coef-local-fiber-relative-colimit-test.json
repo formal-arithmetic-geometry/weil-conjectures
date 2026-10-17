@@ -27,7 +27,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-blunt-sharp-join-equivalence"
  ],
  "proof": [
   {
@@ -242,5 +243,28 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-640d141a6 (reviewer sub-agent of L); spot-checked: Read in full: the item, all six steps, the 11 cited statements, the global special case lem-coef-infinity-fiber-relative-colimit-criterion and the citer lem-coef-local-transport-section-colimits. The statement matches HTT Prop 4.3.1.10 (locally cocartesian = pullbacks along edges are cocartesian; any K including empty; every edge including degenerate ones; every transport witness). I did not open HTT: it is not archived and I did not fetch it, so the comparison rests on my knowledge of the proposition and the global node's review. Small cases tested: K empty, K a point, p the identity, a product fibration, an empty base, and a Grothendieck construction over Delta^1. Steps 1, 2, 3, 5 and 6 are correct: transport is used only for the cocartesian edge pullback p_f, a witness exists through the diagram-lifting clause, fiber detection applies over id_{S_z}, and the cocone criterion is applied in the right fiber. Long step 4 (3090 characters) proved inline a separate comparison with its own hypotheses: inner exponentiation of p, the Kan-fibration property of the ambient mapping-space maps, and the identification of their fibers over an edge with mapping spaces in E_f. I checked it and it is correct; the base mapping space in Fun(K,Delta^1) has one simplex in each degree. FIX: added the statement-only node lem-coef-infinity-edge-pullback-mapping-fiber (unsplit, created.item = the item, Mathlib grep recorded: only InnerFibration ((ihom X).map p) at AnodyneExtensions/Inner/PushoutProduct.lean:137, which covers clause (1)). Step 4 now cites it and keeps one argument: the transport formulas and the naturality square of the single cylinder (2716 characters). proof_deps is the union of the step uses again. Statement unchanged. No cycle (closure of 383 nodes); no duplicate in the DAG or the blueprint. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus in steps 5-6.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a7692c46",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Matches node and HTT 4.3.1.10 clause by clause: quasicategories E,S; InnerFibration q; cocartesianFibrationOver on every edge pullback (no global cocartesian condition); strict fiber; left side IsRelativeColimitDiagram q; right side tests every edge a with a(0)=s, degenerate ones included, and every witness H (over Δ1, end 0 = inclusion, end 1 = T then inclusion, each component cocartesian for the edge pullback). IsRightJoinInducedCocone fixes apex and whole cylinder via the recorded bluntSharpCylinderSimplex (i->i if t=0 else n+1+i = node's join formula; outgoing=false gives F -> const apex; uncurry order K⊗Δ1), so the ∃ d is unique and exists. Edge cases checked: empty K, K a point, degenerate edges, empty spaces, universes. stmt_deps gains the landed blunt-sharp node, no cycle. Not hollow, only sorry, source/blueprint docstrings, six-step proof docstring, worker report and second reading present. lean.statement byte-exact. nt_compile.py --json local side overlay: module 2.0 s, exit 0, no errors. Cosmetic only: report.md shows 'Proposition the project server' (text substitution); the Lean docstrings and source place are correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalFiberRelativeColimitTest",
+  "declaration": "SSet.Enhanced.local_fiber_relative_colimit_test",
+  "declarations": [
+   "SSet.Enhanced.IsRightJoinInducedCocone",
+   "SSet.Enhanced.local_fiber_relative_colimit_test"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocalFiberRelativeColimitTest.lean",
+  "statement": "theorem local_fiber_relative_colimit_test {E S K : SSet.{u}} [Quasicategory E] [Quasicategory S] (q : E ⟶ S) [InnerFibration q] (hloc : ∀ a : Δ[1] ⟶ S, cocartesianFibrationOver (pullback.fst a q)) (s : S _⦋0⦌) (c : rightJoinCone K ⟶ fiber q s) : IsRelativeColimitDiagram q (c ≫ pullback.snd (SSet.const (X := Δ[0]) s) q) ↔ ∀ (a : Δ[1] ⟶ S), a.app _ (stdSimplex.obj₀Equiv.symm 0) = s → ∀ (T : fiber q s ⟶ fiber q (a.app _ (stdSimplex.obj₀Equiv.symm 1))) (H : fiber q s ⊗ Δ[1] ⟶ pullback a q), H ≫ pullback.fst a q = snd _ _ → lift (𝟙 _) (SSet.const (stdSimplex.obj₀Equiv.symm 0)) ≫ H ≫ pullback.snd a q = pullback.snd (SSet.const (X := Δ[0]) s) q → lift (𝟙 _) (SSet.const (stdSimplex.obj₀Equiv.symm 1)) ≫ H ≫ pullback.snd a q = T ≫ pullback.snd (SSet.const (X := Δ[0]) (a.app _ (stdSimplex.obj₀Equiv.symm 1))) q → (∀ x : (fiber q s) _⦋0⦌, IsCocartesianEdge (pullback.fst a q) (lift (SSet.const x) (𝟙 Δ[1]) ≫ H)) → ∃ d : (coconeCategory (rightJoinConeInclusion K ≫ c ≫ T)) _⦋0⦌, IsRightJoinInducedCocone (c ≫ T) d ∧ IsColimiting (rightJoinConeInclusion K ≫ c ≫ T) d",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded relative-colimit, strict-fiber, and cocartesian-edge interfaces. The helper specifies the induced coherent cocone by its actual apex and all cylinder simplices, using the existing bluntSharpCylinderSimplex, whose landed node is added to stmt_deps. The quantified transport includes the entire edge-pullback cylinder with both endpoints and every cocartesian component prescribed. The existential cocone in the conclusion is uniquely determined by the helper formula; no arbitrary map or cocone is substituted. No dependency repair or statement correction."
  }
 }

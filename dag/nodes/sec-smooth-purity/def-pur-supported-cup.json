@@ -360,5 +360,47 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71cb30d3e",
+  "group": "Q103",
+  "result": "pass",
+  "note": "I read the node, the blueprint (main-20261015 and -17, identical), SupportedCup.lean, the report (real Worker report and Second reading by Q103) and the dependency declarations: PurityFiniteSetting, supported_cohomology_hom, ModuleDerivedCategory, ProEtale.derivedTensor (= curriedTensor), DerivedCategory/Monoidal/Shift.lean and Mathlib mapBifunctorShift2Iso. Every clause matches: finite A with n>=1, k-scheme X, closed immersions, h = pullback.fst ≫ i, underived lowerStar in degree 0, D^+ inputs with a,b in Z as supported-Hom representatives, unbounded Hom output with no Tor hypothesis. mu is chosen from a true ∃! (restriction and multiplication; quotient maps are epi), which AGENTS.md permits. theta is lax mu_Q, then the single-complex iso, then mu; its sorry IsIso is true (degree-0 flat implies K-flat). Right-shift-first composite gives exactly the node's (-1)^(b r); upstream left-first shiftTensorShiftIso would differ by (-1)^(ab). Four sorry theorems with proof docstrings, no hollow data, verbatim lean.statement, lines <=100. nt_compile at Sheaf/Paper/SupportedCup.lean: 14.8 s, exit 0, no errors or warnings. Maintainer note: the §1(B) repairs to def-weil-pbc-proetale-site / def-weil-derived-tensor are valid but flip shared records again (H1 → Q27/Q11 → Q01/Q16 → Q103; ~68 files use intrinsic, ~51 fixed-scalar). The maintainer should fix one canonical presentation; the stage-2 fix format cannot revert dependency nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedCup",
+  "declaration": "AlgebraicGeometry.ProEtale.supportedCup",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.cupHasDerivedCategory",
+   "AlgebraicGeometry.ProEtale.CupDerivedCategory",
+   "AlgebraicGeometry.ProEtale.cupMonoidal",
+   "AlgebraicGeometry.ProEtale.cupTensorObject",
+   "AlgebraicGeometry.ProEtale.CupPlus",
+   "AlgebraicGeometry.ProEtale.cupSingle",
+   "AlgebraicGeometry.ProEtale.cupConstantIso",
+   "AlgebraicGeometry.ProEtale.cupCoefficientRestriction",
+   "AlgebraicGeometry.ProEtale.cupCoefficientMultiplication",
+   "AlgebraicGeometry.ProEtale.cupIntersection",
+   "AlgebraicGeometry.ProEtale.cupCoefficientMap_existsUnique",
+   "AlgebraicGeometry.ProEtale.cupCoefficientMap",
+   "AlgebraicGeometry.ProEtale.cupCoefficientMap_isIso",
+   "AlgebraicGeometry.ProEtale.cupCoefficient_flat",
+   "AlgebraicGeometry.ProEtale.cupSingleTensorMap",
+   "AlgebraicGeometry.ProEtale.cupDerivedCoefficientMap",
+   "AlgebraicGeometry.ProEtale.cupDerivedCoefficientMap_isIso",
+   "AlgebraicGeometry.ProEtale.cupTensorShiftIso",
+   "AlgebraicGeometry.ProEtale.cupSupportedHom",
+   "AlgebraicGeometry.ProEtale.cupComposite",
+   "AlgebraicGeometry.ProEtale.supportedCup"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedCup.lean",
+  "statement": "def supportedCup (P : WeilConjectures.PurityFiniteSetting.{u}) {Z W X : Scheme.{u}} [X.Over (Spec (CommRingCat.of P.field.k))] (i : Z ⟶ X) (j : W ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j] (F G : CupPlus P X) (a b : ℤ) (α : cupSupportedHom P i F.obj a) (β : cupSupportedHom P j G.obj b) : cupSupportedHom P (cupIntersection i j) (cupTensorObject P X F.obj G.obj) (a + b)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Fixed finite coefficients and pro-etale supported Hom. The helper references share the existing localization and monoidal data explicitly; they do not construct another category or tensor. The normalized coefficient map and canonical K-flat localization comparison, right-shift-first sign, and unbounded output are retained."
  }
 }

@@ -329,12 +329,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-4ba36f4ac (reviewer sub-agent of L); spot-checked: Read the item, six new nodes, cited statements, unit/chapter route, delivery rules A–F, and cited Bergner, HTT, Kerodon, and Cisinski source passages. Verified all 14 proof steps, hypotheses, edge cases, searches, blueprint route, no duplicates/cycles/restated clauses, and no SGA use. Wrote review.md with the concrete checks. No repairs required."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d70b4523a",
-  "group": "NZ",
-  "result": "fix",
-  "note": "H3 finding fixed: the delivered homotopy_pushout_preservation only said the infinity-equivalence preserves infinity-colimiting cocones, which follows from derived_equivalence and never links homotopy pushout squares in sCat to Cat-infinity. The node, its proof step 11 and the citer lem-coef-hammock-infinity-localization step 4 need that link. fixes/CoherentNerveComparison.lean replaces the field: a span D and cocone c in SCat, a span D' with cofibrant apex and cofibrant legs, an objectwise weak equivalence r : D' to D, and a colimit of D' whose comparison hc'.desc ((Cocone.precompose r).obj c) is a weak equivalence, conclude FiniteReedy.IsColimitEdge of diagram/object/transformation under largeNerveMap derived_nerve followed by qcat_localization (RN_hc then the Cat-infinity localization). The theorem docstring step (6) is updated. Signature, lean.statement and all records are unchanged. The fixes include the full report with a maintainer-fix section. All other clauses match the node: DK/Bergner/Joyal classes, replacement with discrete normalization, simplex realization, adjunction, both Quillen statements, derived nerve with IsLocalization and normalization, discrete nerve, quasicategory and Kan conclusions, and the mapping comparison pinned by HTT's max-subset formula (checked to be functorial and simplicial). All fields are satisfiable. The new definition node is valid with no duplicate notion. No hollow defs, sorry only. Delivered and fixed files compile clean with nt_compile.py --json (side overlay), and a #check probe confirms the new field's type."
+  "reviewer": "NT-stage2-cc-b23e835a8",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement checked clause by clause against the node and HTT A.3.4.7-A.3.4.8. The objects are fibrant weak-equivalence spans in U.cf. The inherited enriched end gives exactly the p'a=bp, q'a=cq triples (rfl probe). D, tau, pi0 and pi1 are uniquely characterized canonical data. It states the strict endpoint identities, DwyerKanEquivalence tau, and the Bergner fibration as local Kan J.rlp plus paired PiZeroIso lifting, matching BergnerModelData.fibrations_iff_local_kan_lifting. No extra hypotheses; universes u,w independent; empty-chunk case vacuous. The section 1(B) repair of CoherentNerveComparison (independent object universes for three predicates, bodies unchanged) is needed, since Spans has object type Type (max u w). nt_compile is clean for both delivered modules, a probe, and all 11 side importers of the repaired predicates. Axioms: propext, sorryAx, Classical.choice, Quot.sound. lean.statement matches the file byte for byte. Docstrings and blueprint tags present; no hollow definitions; no duplicate found. No findings."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CoherentNerveComparison",
@@ -354,10 +354,10 @@
   "file": "lean/Sheaf/CategoryTheory/CoherentNerveComparison.lean",
   "statement": "theorem coherent_nerve_comparison : Nonempty CoherentNerveComparisonStatement.{u}",
   "branch": "newtargets-dag",
-  "by": "NZ",
-  "date": "2026-10-16",
+  "by": "Q07",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "Repair of returned head 23874fdc7710: all comparison fields now have concrete types; Bergner and Joyal data use ModelCategory axioms and characterized classes. The replacement is a functor into new enriched categories with a natural unit and full discrete normalization.",
+  "note": "Section 1(B) universe repair: PiZeroEssentiallySurjective, PiZeroEquivalence and DwyerKanEquivalence previously required equal source and target object universes. A span diagram category has object universe max u w for a Type w category with Type u morphisms, while its bifibrant subcategory has object universe w. Generalize these three predicates to independent source/target object universes, retaining the same mapping universe and every mathematical clause. All other declarations and theorem signatures are unchanged.",
   "fixed_by": "NT-stage2-cc-d70b4523a"
  },
  "lean_audit": {

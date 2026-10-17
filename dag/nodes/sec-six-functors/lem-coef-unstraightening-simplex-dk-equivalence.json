@@ -309,5 +309,47 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-692e3ead6 (reviewer sub-agent of L); spot-checked: I read the item, all 13 steps, the one new node, every cited node's statement and HTT pp.78-83 (Remark 2.2.2.12, Lemmas 2.2.3.1, 2.2.3.4-2.2.3.7, 2.2.3.9 and 2.2.3.10). The item statement is unchanged from the side tree and matches HTT 2.2.3.10, with the 2.2.2.12 enrichment. The steps hold. Step 1: V(boundary)=L_mQ is mono, so q:V->id is a weak equivalence, and the derived-counit criterion gives c_B weak for Kan B. Step 2: right-horn lifting via the pointwise lemma and Sing_Q fibers. Step 3: U(FxK)=UF x Sing_Q K, using that the conical colimit of the cone presheaf is C[J^m](x,y)=Q^m. Step 4: tail deformation retract by the pushout-product of Lambda^1_1 with E_j->E_{>=j}. Step 5: a is a DK equivalence because the mapping posets have a top element. Steps 6-7: strict and coherent counits, with the adjunct identities checked (adjunct = Uh). Steps 8-11: L(X x -) is left Quillen through the saturated right-anodyne class; beta is a weak equivalence for all K; theta is the mate, inverted through Ho(Kan) and good cylinders; Ken Brown gives epsilon^* weak. Steps 12-13: essential surjectivity and DK assembly. New node lem-coef-ordered-simplex-cone-evaluation is true: a_! is the colimit over the up-closed subcategory C[Delta^{j..n}], giving V(X_{>=j}), which is HTT p.79 relabelled i=n-j. I tested n=0, the empty set, a vertex at t and an edge crossing j. It is statement-only and self-contained, is not a duplicate of cone-boundary-projective-cells, right-straightening-fiber-comparison or simplex-pointwise, and does not restate a clause of the item. The dependency closure is acyclic. The tool_use lem-cbc-simplicial-homotopy-equivalence-weak is accepted as a generic tool. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e0948190",
+  "group": "NP",
+  "result": "fix",
+  "note": "Statement matches HTT 2.2.3.10/Remark 2.2.2.12 clause by clause: n:N incl. 0; bifibrant = IsProjectivelyCofibrant and objectwise Kan; all right fibrations over Delta[n]; canonical enrichment via cone collapse, pinchedHomIso and maximum map Q->Delta (Classical.choose uniquely determined); weak equivalence + pi0 bijection + essential surjectivity up to pi0 over Delta[n]; one universe u; no hollow defs; proofs exactly sorry; report has Worker report and Second reading by NP. Delivered file compiles clean via nt_compile (2.6 s). This head differs from 277a18dc4 only by renaming coneParameter->coneParameterAt (correct; the previous FIX was refused for that collision) and a new public import of UnstraighteningHomotopyDescent, whose node cites this item in its proof (downstream; nothing used from it), while it keeps the downstream SpaceTransportClassification import. FIX = previous fix + rename: both downstream imports dropped; transportOverHom/transportHomVertex replaced by the landed identical SSet.Enhanced.relativeOperadicDiagrams plus helper overHomVertex (real data, docstrings, in declarations); main docstring carries the node's 13 proof steps; rule-7 imports of proof deps (closure of 56 modules checked: no downstream module, no name collision). Fixed module compiles clean (2.6 s); record statement verbatim; 21 declarations all present; lines <=100. Residual: stmt_deps cannot gain def-coef-relative-symmetric-operadic-algebras in a stage-2 fix."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.UnstraighteningSimplexDkEquivalence",
+  "declaration": "SSet.ConePresheaf.unstraightening_simplex_dk_equivalence",
+  "declarations": [
+   "SSet.ConePresheaf.simplexConeIso_existsUnique",
+   "SSet.ConePresheaf.simplexConeIso",
+   "SSet.ConePresheaf.pinchedHomIso",
+   "SSet.ConePresheaf.pinchedMaximum",
+   "SSet.ConePresheaf.pinchConeLeg",
+   "SSet.ConePresheaf.pinchBaseLeg",
+   "SSet.ConePresheaf.pinchLegs_commute",
+   "SSet.ConePresheaf.pinchCone",
+   "SSet.ConePresheaf.pinchCone_endpoints",
+   "SSet.ConePresheaf.coneParameterAt",
+   "SSet.ConePresheaf.parameterComponent",
+   "SSet.ConePresheaf.parameterComponent_naturality",
+   "SSet.ConePresheaf.parameterLabel",
+   "SSet.ConePresheaf.parameterLabel_restrict",
+   "SSet.ConePresheaf.parameterMap",
+   "SSet.ConePresheaf.parameterMap_restrict",
+   "SSet.ConePresheaf.parameterMap_functorial",
+   "SSet.ConePresheaf.unstraighteningMapping",
+   "SSet.ConePresheaf.overHomVertex",
+   "SSet.ConePresheaf.IsProjectivelyBifibrant",
+   "SSet.ConePresheaf.unstraightening_simplex_dk_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/UnstraighteningSimplexDkEquivalence.lean",
+  "statement": "theorem unstraightening_simplex_dk_equivalence (n : ℕ) : (∀ F : Presheaf (Δ[n] : SSet.{u}), IsProjectivelyBifibrant F → Enhanced.rightFibration (rightProjection F)) ∧ (∀ F G : Presheaf (Δ[n] : SSet.{u}), IsProjectivelyBifibrant F → IsProjectivelyBifibrant G → Enhanced.IsWeakHomotopyEquivalence (unstraighteningMapping F G) ∧ Function.Bijective (SSet.mapπ₀ (unstraighteningMapping F G))) ∧ (∀ E : Over (Δ[n] : SSet.{u}), Enhanced.rightFibration E.hom → ∃ F : Presheaf (Δ[n] : SSet.{u}), IsProjectivelyBifibrant F ∧ ∃ (f : rightObj F ⟶ E) (g : E ⟶ rightObj F), SSet.π₀.mk (overHomVertex (rightProjection F) (rightProjection F) (f.left ≫ g.left) (Over.w (f ≫ g))) = SSet.π₀.mk (overHomVertex (rightProjection F) (rightProjection F) (𝟙 (rightSet F)) (Category.id_comp _)) ∧ SSet.π₀.mk (overHomVertex E.hom E.hom (g.left ≫ f.left) (Over.w (g ≫ f))) = SSet.π₀.mk (overHomVertex E.hom E.hom (𝟙 E.left) (Category.id_comp _)))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-2e0948190"
  }
 }

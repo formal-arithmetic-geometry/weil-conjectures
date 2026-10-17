@@ -212,5 +212,40 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-11444c62d (reviewer sub-agent of L); spot-checked: I read all seven steps and they are correct; review.md has the full checks and I made no fixes. The statement matches HTT §2.2.1 (St_φ X(C)=Map_M(C,v), with φ: C[S]→C^op) and Prop. 2.2.1.1(2), St_{π∘φ} ≅ π_! St_φ. HTT is not archived in literature/ (WANTED recorded, proof_origin agent), so I checked against the standard text from memory. The item adds no hypothesis and is not weakened. It is not a target node, so the base-change and coefficient-category check does not apply. Step 1 uses only the structural clause of lem-coef-cone-boundary-projective-cells (old full subcategory exactly A, M(v,c) empty, M(v,v)=Δ^0), applied with A=D^op,φ and A=D'^op,φ'. q exists because π^op φ C[a] = φ' C[a]. Step 2: the collage E_G's composition is the covariant G action; with M'(v,c) empty and M'(v,v)=Δ^0, the only composites are the action and unit composites. Step 3: the inverse comes from the pushout universal property; F'q=F holds on both factors, and β(b)=(π^*b)u. Step 4: I recomputed (π^*(th))η=η and β_K(ht)=u=β_K(1), so the specified mate is invertible. Steps 5–7: the adjunct equations, the simplex-operator direction u_σ L(θ)=π^*L'(θ) u_{σθ}, and the composite law u_{ρπ}=(π^*u_ρ)u_π all check. Small cases tested: X empty, X=Δ^0 (representables), π=id, π not injective on objects, D empty. Both proof dependencies are in unit sk-prop-sf-biduality-general, and neither one's transitive closure contains the item. lem-coef-marked-cone-straightening-quillen (marked, locally Kan target only), lem-coef-cone-presheaf-adjunction (identity target only) and lem-coef-simplicial-projective-model-calculus are not duplicates. The citer, lem-coef-space-valued-straightening step 8, instantiates exactly the stated hypotheses. Mathlib searches cover grep, leanfinder, loogle and leansearch. No SGA is used and there are no tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7490e64d4",
+  "group": "NM",
+  "result": "fix",
+  "note": "Statement correct: all 15 node clauses match HTT 2.2.1 / Prop 2.2.1.1(2), including the pushout map with real data, unitMap pinned to the pushout's mapping-object maps (targetValueMap), the mate required to be the adjunct of unitMap, unstraightening pinned simplexwise to homEquiv, and the identity/composite laws in the right direction; no Kan or fibrancy hypothesis, single universe u, edge cases (empty X, S, D; pi=id; non-injective pi) covered. No hollow definitions, all theorem bodies sorry, docstrings and the seven-step proof present, worker report and second reading are real. One H4 fault fixed: targetOpposite (with its sorry'd targetOpposite_comp) duplicated the existing SSet.SimplicialRightFibration.enrichedOp (SimplicialRightFibrationPresentation.lean:62, composition law fully proved). The fix imports that module (a proof-dependency ancestor; no import cycle, checked against 1187 descendants), makes targetOpposite an abbrev for enrichedOp, drops targetOpposite_comp; the signature and lean.statement are unchanged; the record JSON updates declarations and note. nt_compile: delivered module clean in 3.0 s; fixed module clean in 2.6 s."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.UnmarkedStraighteningTargetChange",
+  "declaration": "SSet.UnmarkedStraightening.unmarked_straightening_target_change",
+  "declarations": [
+   "SSet.UnmarkedStraightening.targetOpposite",
+   "SSet.UnmarkedStraightening.targetRestrictionObj",
+   "SSet.UnmarkedStraightening.targetRestriction_naturality",
+   "SSet.UnmarkedStraightening.targetRestrictionHom",
+   "SSet.UnmarkedStraightening.targetRestrictionHom_id",
+   "SSet.UnmarkedStraightening.targetRestrictionHom_comp",
+   "SSet.UnmarkedStraightening.targetRestriction",
+   "SSet.UnmarkedStraightening.targetPushoutMap",
+   "SSet.UnmarkedStraightening.targetPushoutMap_objects",
+   "SSet.UnmarkedStraightening.targetValueMap",
+   "SSet.UnmarkedStraightening.TargetChangePresentation",
+   "SSet.UnmarkedStraightening.TargetChangeComparison",
+   "SSet.UnmarkedStraightening.unmarked_straightening_target_change"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/UnmarkedStraighteningTargetChange.lean",
+  "statement": "theorem unmarked_straightening_target_change (S : SSet.{u}) : ∃ (P : TargetChangePresentation S) (T : ∀ (D E : SCat.{u}) (π : D ⟶ E) (φ : rigidification.obj S ⟶ oppositeCategory D), TargetChangeComparison P π φ), (∀ (D : SCat.{u}) (φ : rigidification.obj S ⟶ oppositeCategory D) (X : Over S) (d : D), HEq (((T D D (𝟙 D) φ).unitMap.app X).app d) (𝟙 (((P.L D φ).obj X).functor.obj d))) ∧ (∀ (D E F : SCat.{u}) (π : D ⟶ E) (ρ : E ⟶ F) (φ : rigidification.obj S ⟶ oppositeCategory D) (X : Over S) (d : D), HEq (((T D F (π ≫ ρ) φ).unitMap.app X).app d) ((((T D E π φ).unitMap.app X).app d) ≫ (((T E F ρ (φ ≫ targetOpposite π)).unitMap.app X).app (π.obj d)))) ∧ (∀ (D : SCat.{u}) (φ : rigidification.obj S ⟶ oppositeCategory D) (G : Diagram D), HEq ((T D D (𝟙 D) φ).unstraightening.hom.app G).left (𝟙 (((P.U D φ).obj G).left))) ∧ (∀ (D E F : SCat.{u}) (π : D ⟶ E) (ρ : E ⟶ F) (φ : rigidification.obj S ⟶ oppositeCategory D) (G : Diagram F), HEq ((T D F (π ≫ ρ) φ).unstraightening.hom.app G).left (((T E F ρ (φ ≫ targetOpposite π)).unstraightening.hom.app G).left ≫ ((T D E π φ).unstraightening.hom.app ((targetRestriction ρ).obj G)).left))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical target restriction and the target-change pushout map have explicit data. Existential presentations reuse IsStraightening and SimplexDescription; comparison witnesses normalize the enriched unit map by targetValueMap, the Kan-extension isomorphism by its adjunct, and the right-adjoint isomorphism on every simplex by the same transformation bijection. Simultaneous witnesses state identity and composite laws without model-category hypotheses. HEq expresses only equality transports for the prescribed cone values and for identity/composite enriched functors. Helpers belong to this target-change construction; no independent notion or dependency record is replaced. Reviewer fix (H4): the opposite simplicial functor is the existing SSet.SimplicialRightFibration.enrichedOp (Sheaf.CategoryTheory.SimplicialRightFibrationPresentation, node lem-coef-simplicial-right-fibration-presentation, a proof-dependency ancestor), reused through the bundled-morphism abbrev targetOpposite; the duplicate definition and its postponed targetOpposite_comp are removed.",
+  "fixed_by": "NT-stage2-cc-7490e64d4"
  }
 }

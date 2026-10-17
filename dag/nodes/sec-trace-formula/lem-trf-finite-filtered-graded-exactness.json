@@ -197,5 +197,35 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-22dd65878 (reviewer sub-agent of L); spot-checked: Read the item in full against Stacks homology.tex 05QH lemma-filtered-acyclic (l.5094-5144) and Def 0121. The statement matches the source exactly: vu=0, finite filtrations, gr exact for every p; conclusions (2)-(5) with strictness defined inline; nothing added or dropped. Step 1: the common bounds a=min, b=max(a, zero bounds) are correct, including the all-zero case. Steps 2 and 3: the termwise sequences 0->F^{p+1}K->F^pK->gr^pK->0 and 0->gr^pK->K/F^{p+1}K->K/F^pK->0 are short exact. The cited Mathlib leaf lem-weil-pbc-complex-ses-homology-long-exact (I checked homology_exact₂, HomologySequence.lean l.309) gives the H^1 segment. The inductions have correct bases and ranges and are not circular. The report's note on the source's 'p>=n' typo is correct and the explicit inductions avoid it. Step 4 is the source's (4) argument with the right subobject identities. Step 5 writes out the dual argument correctly: v^{-1}F^pZ=q^{-1}(ker v̄)=F^pY+im u, and its image is v(F^pY) because vu=0. Small cases checked: all zero, one nonzero graded degree, u=0 (strict mono), a projection example. No new nodes. No duplicate in the DAG (lem-sp-finite-filtration-induction is a single-map iso criterion) or in blueprint main-20261015. The route fits under Step 3 of prop-trf-trace-additivity-open-closed via the filtered-injective model. I accept the tool_uses entry for the Mathlib leaf. No SGA. Searches recorded in all three kinds. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e57b31b8",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Statement matches node/Stacks 05QH (1)-(5) clause by clause (vu=0, three IsFinite, hgr for all p over canonical cokernel graded maps, IsStrict as imageSubobject(restriction≫arrow)=imageSubobject f ⊓ step p, underlying, step and cokernel-quotient exactness); edge cases covered; no hollow defs; all sorry. Delivered file compiles rc 0. Faults fixed: (1) H4: used superseded PBCFilteredObject/PBCDecreasingFiltration instead of recorded def-sp-filtration interface (DecreasingFiltration/FilteredObject, HomPreservingSteps category, restrictionSteps/gradedMapSteps), so landed citer lem-trf-filtered-localization-injective-model (FiniteFilteredObjects over FilteredObject) could not apply it; (2) file not a `module` file, unimportable by landed module files; (3) H8 docstring now carries proof steps 1-5, helpers have sketches. fixes/: FiniteFilteredGradedExactness.lean (same path, namespace CategoryTheory.FilteredObject, helpers restrictionSteps_comp/gradedMapSteps_comp), lean-record.json (declaration CategoryTheory.FilteredObject.finite_filtered_graded_exactness + 8 declarations + note), report.md with maintainer-fix section. Fix: nt_compile rc 0, no warnings; control applied it to FiniteFilteredObjects morphisms and caught an injected error; stage2_delivery refit_record/check_lean_text: no refusals or failures. Minor, unfixed: Sheaf/Paper rather than Sheaf/CategoryTheory."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFilteredGradedExactness",
+  "declaration": "CategoryTheory.FilteredObject.finite_filtered_graded_exactness",
+  "declarations": [
+   "CategoryTheory.FilteredObject.IsStrict",
+   "CategoryTheory.FilteredObject.quotientObject",
+   "CategoryTheory.FilteredObject.quotientMap_condition",
+   "CategoryTheory.FilteredObject.quotientMap",
+   "CategoryTheory.FilteredObject.quotientMap_comp",
+   "CategoryTheory.FilteredObject.restrictionSteps_comp",
+   "CategoryTheory.FilteredObject.gradedMapSteps_comp",
+   "CategoryTheory.FilteredObject.finite_filtered_graded_exactness"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFilteredGradedExactness.lean",
+  "statement": "theorem finite_filtered_graded_exactness {X Y Z : FilteredObject C} (u : X ⟶ Y) (v : Y ⟶ Z) (hvu : u.hom ≫ v.hom = 0) (hX : DecreasingFiltration.IsFinite X.filtration) (hY : DecreasingFiltration.IsFinite Y.filtration) (hZ : DecreasingFiltration.IsFinite Z.filtration) (hgr : ∀ p : ℤ, (ShortComplex.mk (gradedMapSteps u p) (gradedMapSteps v p) (gradedMapSteps_comp u v hvu p)).Exact) : FilteredObject.IsStrict u ∧ FilteredObject.IsStrict v ∧ (ShortComplex.mk u.hom v.hom hvu).Exact ∧ (∀ p : ℤ, (ShortComplex.mk (restrictionSteps u p) (restrictionSteps v p) (restrictionSteps_comp u v hvu p)).Exact ∧ (ShortComplex.mk (quotientMap u p) (quotientMap v p) (quotientMap_comp u v hvu p)).Exact)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reviewer fix (H4, H9): restated on the recorded def-sp-filtration representation (upstream CategoryTheory.DecreasingFiltration / FilteredObject, category of HomPreservingSteps in Sheaf.CategoryTheory.Filtration, canonical step and graded maps restrictionSteps / gradedMapSteps of Sheaf.CategoryTheory.FiniteFiltrationInduction) instead of the superseded PBCFilteredObject copy, so that the landed citer lem-trf-filtered-localization-injective-model (FiniteFilteredObjects over FilteredObject) can apply it; the file is now a `module` file. Statement unchanged in content.",
+  "fixed_by": "NT-stage2-cc-6e57b31b8"
  }
 }

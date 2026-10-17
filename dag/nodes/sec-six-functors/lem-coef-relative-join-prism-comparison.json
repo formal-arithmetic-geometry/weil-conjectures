@@ -8,7 +8,9 @@
   "place": "Agent formulation of the relative filtration in proof of Proposition B.1.9, cases (B1 prime) and (C2 prime), printed pp.1478-1480; the inner stages use HTT Lemma 2.1.2.3 and Corollary 2.1.2.7. Read online 2026-10-17; archival copy WANTED. No Stacks tag states this simplicial comparison."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-slice-right-fibration"
  ],
  "proof": [
   {
@@ -250,5 +252,30 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-1dff4e09d (reviewer sub-agent of L); spot-checked: Read the full item (statement and 8 steps), the full statements of def-cbc-enhanced-diagrams-cones, lem-coef-infinity-right-anodyne-product and lem-coef-infinity-anodyne-cocones, step 11 of the parent pattern-generator-product-cells, and the unit sk-prop-sf-biduality-general. Source: HA B.1.9 is not in literature/; it is recorded as WANTED, and the proof is marked as agent-written. The source text was not checked because it is not available locally. Every step is written out in full and I checked each one independently. Steps 1-3: the threshold filtration E_i is closed under operators, psi_i is injective, and psi_i^{-1}(E_i) = (L_i*Q_i) ∪ (P_i*H_i), checked on mixed, pure-B and pure-K simplices; this gives the degreewise pushout. Step 4: taking opposite simplicial sets (op) sends horn Λ_j to Λ_{n-j} and swaps the two factors of a join, so it preserves the inner-anodyne class. Step 5: the right-anodyne product lemma applies with Λ^d_d→Δ^d (d ≥ 1) and the empty set → K^op. Step 6: I checked that the cocone lemma takes its right-anodyne map in the left join factor by a small example ({1}→Δ^1 with Δ^0 gives Λ^2_1, which is inner). After op this gives C_i → P_i*Q_i, and composing the finitely many stages gives D→Z. Steps 7-8: phi is injective, Z ∪ im(phi) = T, and phi^{-1}(Z) = R*K, so the pushout holds. Small cases checked: B=Δ^0, K=Δ^0, m=1 (one inner Λ^2_1 filling and the pushout with Δ^2), and K empty, m=0, A=B, all of which check. With B=Δ^0, A=∅ and with B=Δ^n, A=∂Δ^n, D is exactly the source the parent's (B1)/(C2) products use; the item does not restate a clause of the parent. The proof uses no hypothesis the statement lacks. The two lemmas used are in the item's own unit, so no tool_uses are needed. No SGA citation. No new nodes; the duplicate search found no node stating this filtration or pushout, and the Mathlib searches cover all three kinds. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31a527e84",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Read node, base-node diff (only lean record + two landed stmt_deps pushout-join-saturation/slice-right-fibration, acyclic), dependency Lean (orderedJoinFunctor, orderedJoinInl/Inr), module, report (Worker report + Second reading by Q34). Clause check: T, D (unionProd = ⊤.prod T ⊔ S.prod ⊤ printed), Z (vertex test via inl, s.2 j coordinate verified by probe), R, boundary 0 empty, innerAnodyneExtensions = llp(inner fibrations) = weak-saturation closure via Mathlib theorem, φ uniquely fixed by projection equations (maps to Δ[m] determined on vertices) with Mono, IsPushout orientation correct. Edge cases m=0, B=∅, K=∅, A=B, A=∅, B=K=Δ⁰ m=1 checked. Gates: real helpers, source/blueprint docstrings, single sorry, autoImplicit false, ≤100 cols, proof-dep imports non-public, lean.statement verbatim. nt_compile --json: rc=0, no diagnostics (2.1 s). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RelativeJoinPrismComparison",
+  "declaration": "SSet.Enhanced.relative_join_prism_comparison",
+  "declarations": [
+   "SSet.Enhanced.relativeJoinPrismDomain",
+   "SSet.Enhanced.relativeJoinPrismStage",
+   "SSet.Enhanced.RelativeJoinPrismCoordinates",
+   "SSet.Enhanced.relative_join_prism_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RelativeJoinPrismComparison.lean",
+  "statement": "theorem relative_join_prism_comparison {B : SSet.{u}} (A : B.Subcomplex) (K : SSet.{u}) (m : ℕ) : innerAnodyneExtensions (Subcomplex.homOfLE (le_sup_left : relativeJoinPrismDomain A K m ≤ relativeJoinPrismStage A K m)) ∧ ∃ φ : orderedJoinFunctor.obj (B ⊗ Δ[m], K) ⟶ orderedJoinFunctor.obj (B, K) ⊗ Δ[m], RelativeJoinPrismCoordinates B K m φ ∧ Mono φ ∧ ∃ ρ : orderedJoinFunctor.obj ((A.unionProd (boundary m)).toSSet, K) ⟶ (relativeJoinPrismStage A K m).toSSet, IsPushout ρ (orderedJoinFunctor.map ((A.unionProd (boundary m)).ι, 𝟙 K)) (relativeJoinPrismStage A K m).ι φ",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliaries construct D and the generated Z as actual subcomplexes of the existing ordered join prism. The comparison is existentially stated with exact projection equations that uniquely determine its concatenated coordinates; no arbitrary comparison is assumed or chosen. IsPushout is the stated equivalent of invertibility of the canonical pushout comparison. The two added landed statement dependencies own orderedJoinFunctor and its pure-block inclusions."
  }
 }

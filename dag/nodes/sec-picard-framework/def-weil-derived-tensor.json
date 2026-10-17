@@ -113,25 +113,27 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.DerivedTensor",
-  "declaration": "AlgebraicGeometry.Scheme.derivedTensor",
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedTensor",
   "declarations": [
-   "AlgebraicGeometry.Scheme.derivedTensor",
-   "AlgebraicGeometry.Scheme.derivedTensorRing"
+   "AlgebraicGeometry.ProEtale.derivedTensor",
+   "AlgebraicGeometry.ProEtale.laxMonoidal_Q",
+   "AlgebraicGeometry.ProEtale.laxMonoidal_Qh",
+   "AlgebraicGeometry.ProEtale.isLeftDerivedFunctor₂_derivedTensor"
   ],
-  "statement": "def derivedTensor (K₁ K₂ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ) (_f : P ⟶ K₁) (_hf : QuasiIso _f) (_hP : CochainComplex.IsAcyclicTensorKFlat.{w + 1, w} (R := 𝓡) P) : proEtaleDerivedCategory Y A",
-  "branch": "newtargets-dag",
-  "by": "Q01",
-  "date": "2026-10-16",
+  "statement": "def derivedTensor :\n    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n        DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)",
+  "note": "§1(B), existing interface repair. The intrinsic chosen-resolution declaration cannot be applied in the fixed-scalar ModuleCat-valued sheaf presentation already used by the finite conventions, direct image, supported Hom and tensor-functoriality nodes. Reuse the published pro-etale derived tensor bifunctor, specialized to ModuleCat.{u+1} P.Coefficient. Its K-flat left derivability theorem and localization tensor comparison supply exactly the tensor construction in the node. No new tensor, arbitrary map, or finiteness/Tor assumption is introduced.",
+  "branch": "slopmaster2",
   "existing": true,
-  "note": "§1(B): the current record selects the fixed-scalar sheaf presentation, whereas this consumer and the recorded constructible intervals and reduction functors use intrinsic constant-ring SheafOfModules. Reuse the existing intrinsic interface unchanged; it states the same node in exactly those categories. No new definition is introduced."
+  "by": "Q103",
+  "date": "2026-10-17"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-2926977e6",
-  "group": "Q01",
+  "reviewer": "NT-stage2-cc-71cb30d3e",
+  "group": "Q103",
   "result": "pass",
-  "note": "Reviewed immutable packet, node statement, source/proof dependencies, Lean declarations, docstrings, report sections, edge cases, and scompile evidence. No substantive or mechanical correction required."
+  "note": "I read the node, the blueprint (main-20261015 and -17, identical), SupportedCup.lean, the report (real Worker report and Second reading by Q103) and the dependency declarations: PurityFiniteSetting, supported_cohomology_hom, ModuleDerivedCategory, ProEtale.derivedTensor (= curriedTensor), DerivedCategory/Monoidal/Shift.lean and Mathlib mapBifunctorShift2Iso. Every clause matches: finite A with n>=1, k-scheme X, closed immersions, h = pullback.fst ≫ i, underived lowerStar in degree 0, D^+ inputs with a,b in Z as supported-Hom representatives, unbounded Hom output with no Tor hypothesis. mu is chosen from a true ∃! (restriction and multiplication; quotient maps are epi), which AGENTS.md permits. theta is lax mu_Q, then the single-complex iso, then mu; its sorry IsIso is true (degree-0 flat implies K-flat). Right-shift-first composite gives exactly the node's (-1)^(b r); upstream left-first shiftTensorShiftIso would differ by (-1)^(ab). Four sorry theorems with proof docstrings, no hollow data, verbatim lean.statement, lines <=100. nt_compile at Sheaf/Paper/SupportedCup.lean: 14.8 s, exit 0, no errors or warnings. Maintainer note: the §1(B) repairs to def-weil-pbc-proetale-site / def-weil-derived-tensor are valid but flip shared records again (H1 → Q27/Q11 → Q01/Q16 → Q103; ~68 files use intrinsic, ~51 fixed-scalar). The maintainer should fix one canonical presentation; the stage-2 fix format cannot revert dependency nodes."
  }
 }
