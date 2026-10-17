@@ -69,11 +69,10 @@ lemma pairing_str_iff (P Q R : ProEtaleWeilSheaf k₀ l X)
       (frobeniusStr P ⊗ₘ frobeniusStr Q) ≫ e = μ Fr' _ _ ≫ (Fr').map e ≫ frobeniusStr R := by
   have hμ := NatTrans.IsMonoidal.tensor (τ := (ι).hom) P.carrier.X Q.carrier.X
   have hn := (ι).hom.naturality e
-  simp only [Functor.comp_map] at hn
   rw [frobeniusStr, frobeniusStr, frobeniusStr, ← tensorHom_comp_tensorHom_assoc]
   constructor
   · intro h
-    rw [h, reassoc_of% hμ, reassoc_of% hn]
+    rw [h, ← reassoc_of% hμ, ← reassoc_of% hn]
   · intro h
     rw [← cancel_epi ((ι).hom.app P.carrier.X ⊗ₘ (ι).hom.app Q.carrier.X), h, ← reassoc_of% hμ,
       ← reassoc_of% hn]
@@ -94,25 +93,31 @@ local notation "σX" => (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFroben
 set_option hygiene false in
 local notation "σY" => (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
 
+/-- The Weil structure of `φ^* P` is transported from that of `P`. -/
+lemma upperStar_obj_str (P : ProEtaleWeilSheaf k₀ l Y) :
+    ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P).str =
+      (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ
+          (comp_over φ (Spec (CommRingCat.of k₀)))).app P.carrier ≪≫
+        (φ̄)^*ᵃ[l].mapIso P.str :=
+  IsoAlgebra.mapOfNatIso_obj_str _ P
+
 private lemma frobeniusStr_upperStar_aux (P : ProEtaleWeilSheaf k₀ l Y) :
     frobeniusStr ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P) =
       (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) σX).hom.app
           ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P).carrier.X ≫
       (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) σX).inv.app
           ((φ̄)^*ᵃ[l].obj P.carrier).X ≫
-      (upperStarComp _ σX.hom φ̄).inv.app P.carrier.X ≫
+      (upperStarComp _ (σX).hom φ̄).inv.app P.carrier.X ≫
         (upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app P.carrier.X ≫
-        (upperStarComp _ φ̄ σY.hom).hom.app P.carrier.X ≫
+        (upperStarComp _ φ̄ (σY).hom).hom.app P.carrier.X ≫
         (φ̄)^*[_].map (frobeniusStr P) := by
-  rw [frobeniusStr, show ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P).str = _ from
-    IsoAlgebra.mapOfNatIso_obj_str _ P, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
+  rw [frobeniusStr, upperStar_obj_str, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
   change _ ≫ ((adicUpperStarGeometricFiberMapCompFrobeniusIso l φ
     (comp_over φ (Spec (CommRingCat.of k₀)))).hom.app P.carrier ≫ _).hom = _
   rw [Mod.comp_hom', adicUpperStar_map_hom,
-    adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom]
-  simp only [Category.assoc, frobeniusStr, Functor.map_comp]
-  rfl
+    adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom, frobeniusStr, Functor.map_comp]
+  simp only [Category.assoc]
 
 private lemma hom_inv_id_app_upperStar_assoc
     {F G : Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
@@ -128,10 +133,10 @@ private lemma hom_inv_id_app_upperStar_assoc
 of `P`, through `Fr_X^* φ̄^* ≅ (Fr_X ≫ φ̄)^* = (φ̄ ≫ Fr_Y)^* ≅ φ̄^* Fr_Y^*`. -/
 lemma frobeniusStr_upperStar (P : ProEtaleWeilSheaf k₀ l Y) :
     frobeniusStr ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P) =
-      (upperStarComp _ σX.hom φ̄).inv.app P.carrier.X ≫
+      (upperStarComp _ (σX).hom φ̄).inv.app P.carrier.X ≫
         (upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app P.carrier.X ≫
-        (upperStarComp _ φ̄ σY.hom).hom.app P.carrier.X ≫
+        (upperStarComp _ φ̄ (σY).hom).hom.app P.carrier.X ≫
         (φ̄)^*[_].map (frobeniusStr P) :=
   (frobeniusStr_upperStar_aux φ P).trans (hom_inv_id_app_upperStar_assoc φ _ _ _)
 
@@ -139,17 +144,17 @@ lemma frobeniusStr_upperStar (P : ProEtaleWeilSheaf k₀ l Y) :
 theorem upperStar_pairing_frobeniusStr (P Q R : ProEtaleWeilSheaf k₀ l Y)
     (e : P.carrier.X ⊗ Q.carrier.X ⟶ R.carrier.X)
     (h : (frobeniusStr P ⊗ₘ frobeniusStr Q) ≫ e =
-      μ (σY.hom)^*[WeilCoefficients.{u} l] _ _ ≫ (σY.hom)^*[_].map e ≫ frobeniusStr R) :
+      μ ((σY).hom)^*[WeilCoefficients.{u} l] _ _ ≫ ((σY).hom)^*[_].map e ≫ frobeniusStr R) :
     (frobeniusStr ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P) ⊗ₘ
         frobeniusStr ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj Q)) ≫
         (μ (φ̄)^*[WeilCoefficients.{u} l] P.carrier.X Q.carrier.X ≫ (φ̄)^*[_].map e) =
-      μ (σX.hom)^*[WeilCoefficients.{u} l] _ _ ≫
-        (σX.hom)^*[_].map (μ (φ̄)^*[WeilCoefficients.{u} l] P.carrier.X Q.carrier.X ≫
+      μ ((σX).hom)^*[WeilCoefficients.{u} l] _ _ ≫
+        ((σX).hom)^*[_].map (μ (φ̄)^*[WeilCoefficients.{u} l] P.carrier.X Q.carrier.X ≫
           (φ̄)^*[_].map e) ≫ frobeniusStr ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj R) := by
-  set ψ := (upperStarComp (WeilCoefficients.{u} l) σX.hom φ̄).symm ≪≫
+  set ψ := (upperStarComp (WeilCoefficients.{u} l) (σX).hom φ̄).symm ≪≫
     upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
       φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm ≪≫
-    upperStarComp _ φ̄ σY.hom
+    upperStarComp _ φ̄ (σY).hom
   have hψ : NatTrans.IsMonoidal ψ.hom := by
     simp only [ψ, Iso.trans_hom, Iso.symm_hom]
     infer_instance
