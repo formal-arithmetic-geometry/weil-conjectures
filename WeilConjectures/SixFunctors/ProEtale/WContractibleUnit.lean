@@ -30,6 +30,8 @@ universe u
 
 open CategoryTheory Limits Opposite MonoidalCategory
 
+open scoped TensorProduct
+
 namespace AlgebraicGeometry
 
 namespace Scheme.ProEt
@@ -241,6 +243,111 @@ theorem unitFactorsThroughFiniteCoproducts {R : CommRingCat.{u}} [IsWContractibl
     rw [← NatTrans.naturality_apply, hm' j i, if_pos hj, ← hφ j]
     rfl
   · rw [← NatTrans.naturality_apply, hm' j i, if_neg hj, map_zero]
+
+omit [CommRing Λ] in
+/-- An element of a tensor product of modules is a finite sum of pure tensors. -/
+lemma _root_.TensorProduct.exists_eq_sum_tmul' {R M N : Type*} [CommRing R] [AddCommGroup M]
+    [Module R M] [AddCommGroup N] [Module R N] (z : M ⊗[R] N) :
+    ∃ (n : ℕ) (a : Fin n → M) (b : Fin n → N), z = ∑ i, a i ⊗ₜ b i := by
+  induction z using TensorProduct.induction_on with
+  | zero => exact ⟨0, Fin.elim0, Fin.elim0, by simp⟩
+  | tmul x y => exact ⟨1, fun _ ↦ x, fun _ ↦ y, by simp⟩
+  | add x y hx hy =>
+    obtain ⟨n, a, b, rfl⟩ := hx
+    obtain ⟨m, c, d, rfl⟩ := hy
+    exact ⟨n + m, Fin.append a c, Fin.append b d, by simp [Fin.sum_univ_add]⟩
+
+section Tensor
+
+variable (F G : Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))
+
+/-- The canonical map from the objectwise tensor product of the underlying presheaves of two
+sheaves to their tensor product as sheaves, the sheafification map. -/
+noncomputable def tensorPresheafToSheaf : F.obj ⊗ G.obj ⟶ (F ⊗ G).obj :=
+  toSheafify _ (F.obj ⊗ G.obj) ≫
+    ((Functor.Monoidal.μIso (presheafToSheaf _ _) F.obj G.obj).inv ≫
+      ((sheafificationAdjunction _ _).counit.app F ⊗ₘ
+        (sheafificationAdjunction _ _).counit.app G)).hom
+
+instance : Presheaf.IsLocallySurjective (Scheme.ProEt.topology Y) (tensorPresheafToSheaf F G) := by
+  have : Sheaf.IsLocallySurjective ((Functor.Monoidal.μIso (presheafToSheaf _ _) F.obj G.obj).inv ≫
+      ((sheafificationAdjunction _ _).counit.app F ⊗ₘ
+        (sheafificationAdjunction _ _).counit.app G)) :=
+    (Sheaf.isLocallySurjective_iff_epi' _ _).2 inferInstance
+  dsimp only [tensorPresheafToSheaf]
+  infer_instance
+
+variable {F G} in
+lemma tensorHom_comp_tensorPresheafToSheaf {F' G' : Sheaf (Scheme.ProEt.topology Y)
+    (ModuleCat.{u + 1} Λ)} (s : F ⟶ F') (t : G ⟶ G') :
+    (s.hom ⊗ₘ t.hom) ≫ tensorPresheafToSheaf F' G' =
+      tensorPresheafToSheaf F G ≫ (s ⊗ₘ t).hom := by
+  let L := presheafToSheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)
+  let ε := (sheafificationAdjunction (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)).counit
+  have h : L.map (s.hom ⊗ₘ t.hom) ≫ (Functor.Monoidal.μIso L F'.obj G'.obj).inv ≫
+      (ε.app F' ⊗ₘ ε.app G') =
+      ((Functor.Monoidal.μIso L F.obj G.obj).inv ≫ (ε.app F ⊗ₘ ε.app G)) ≫ (s ⊗ₘ t) := by
+    rw [Functor.Monoidal.map_tensor, Category.assoc, Category.assoc, Functor.Monoidal.μIso_inv,
+      Functor.Monoidal.μ_δ_assoc, Category.assoc, Functor.Monoidal.μIso_inv,
+      tensorHom_comp_tensorHom, tensorHom_comp_tensorHom]
+    congr 2
+    · exact ε.naturality s
+    · exact ε.naturality t
+  simp only [tensorPresheafToSheaf, ← Category.assoc, toSheafify_naturality]
+  simp only [Category.assoc]
+  exact congrArg (fun φ ↦ toSheafify _ (F.obj ⊗ G.obj) ≫ φ.hom) h
+
+end Tensor
+
+/-- On the pro-étale site of the spectrum of a w-contractible ring, morphisms from the unit to a
+tensor product of sheaves are finite sums of tensor products of morphisms from the unit. -/
+theorem unitTensorFinite {R : CommRingCat.{u}} [IsWContractibleRing R] (e : Y ≅ Spec R) :
+    UnitTensorFinite (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) := by
+  classical
+  intro F G x
+  let θ := tensorPresheafToSheaf F G
+  obtain ⟨ι, _, V, f, hcov, hmono, hdisj, p, hp⟩ :=
+    exists_finite_disjoint_preimage e θ (unitHomEquiv _ x)
+  have := Fintype.ofFinite ι
+  choose n a b hab using fun i ↦ TensorProduct.exists_eq_sum_tmul' (p i)
+  choose a' ha' using fun i (k : Fin (n i)) ↦
+    exists_glue_of_disjoint F f hcov hmono hdisj (Pi.single i (a i k))
+  choose b' hb' using fun i (k : Fin (n i)) ↦
+    exists_glue_of_disjoint G f hcov hmono hdisj (Pi.single i (b i k))
+  let one := unitHomEquiv _ (𝟙 (𝟙_ (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))))
+  let u := (unitHomEquiv _).symm ((tensorPresheafToSheaf _ _).app _ (one ⊗ₜ one))
+  let E := Σ i, Fin (n i)
+  let ε := Fintype.equivFin E
+  let s (k : E) := (unitHomEquiv F).symm (a' k.1 k.2)
+  let t (k : E) := (unitHomEquiv G).symm (b' k.1 k.2)
+  have key (k : E) : unitHomEquiv _ (u ≫ (s k ⊗ₘ t k)) = θ.app _ (a' k.1 k.2 ⊗ₜ b' k.1 k.2) := by
+    rw [unitHomEquiv_comp, Equiv.apply_symm_apply]
+    have h := congrArg (fun φ ↦ φ.app (op (Scheme.ProEt.terminal Y)) (one ⊗ₜ one))
+      (tensorHom_comp_tensorPresheafToSheaf (s k) (t k))
+    simp only [NatTrans.comp_app, ConcreteCategory.comp_apply] at h
+    rw [← h]
+    congr 1
+    change (s k).hom.app _ one ⊗ₜ[Λ] (t k).hom.app _ one = _
+    rw [← unitHomEquiv_apply, ← unitHomEquiv_apply, Equiv.apply_symm_apply,
+      Equiv.apply_symm_apply]
+  refine ⟨Fintype.card E, fun _ ↦ u, fun k ↦ s (ε.symm k), fun k ↦ t (ε.symm k),
+    (unitHomEquiv _).injective ?_⟩
+  rw [unitHomEquiv_sum]
+  simp only [key]
+  rw [ε.symm.sum_comp (fun k ↦ θ.app _ (a' k.1 k.2 ⊗ₜ b' k.1 k.2))]
+  refine eq_of_restrict_eq f hcov fun l ↦ ?_
+  rw [map_sum, ← hp l, hab l, map_sum, Fintype.sum_sigma, Finset.sum_eq_single l]
+  · refine Finset.sum_congr rfl fun k _ ↦ ?_
+    rw [← NatTrans.naturality_apply]
+    congr 1
+    change _ = F.obj.map (f l).op (a' l k) ⊗ₜ[Λ] G.obj.map (f l).op (b' l k)
+    rw [ha' l k, hb' l k, Pi.single_eq_same, Pi.single_eq_same]
+  · intro i _ hi
+    refine Finset.sum_eq_zero fun k _ ↦ ?_
+    rw [← NatTrans.naturality_apply]
+    change θ.app _ (F.obj.map (f l).op (a' i k) ⊗ₜ[Λ] G.obj.map (f l).op (b' i k)) = 0
+    rw [ha' i k, Pi.single_eq_of_ne (Ne.symm hi), TensorProduct.zero_tmul, map_zero]
+  · simp
 
 end ProEtale
 
