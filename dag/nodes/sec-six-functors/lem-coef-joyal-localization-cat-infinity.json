@@ -14,9 +14,83 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-cat-infinity-colimits-cartesian-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-joyal-model-structure], in each universe simplicial sets carry the Joyal model structure whose cofibrations are degreewise injective maps and whose weak equivalences are exactly the categorical equivalences used to define $W_{\\mathrm J}$; its fibrant objects are exactly the quasicategories. Thus the class inverted in the statement is the weak-equivalence class of the ordinary Joyal model, and the objects called quasicategories are its fibrant objects.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, Lemma 2.2.5.2 and Proposition 2.2.5.8; online PDF, archival source WANTED"
+   }
+  },
+  {
+   "text": "The coherent-nerve comparison [lem-coef-coherent-nerve-comparison] gives the adjunction $\\mathfrak C\\dashv N_{\\mathrm{hc}}$ as a Quillen equivalence from the Joyal model to the Bergner model. Its derived coherent nerve identifies the resulting homotopy theory of simplicial categories with the infinity category $\\mathrm{Cat}_\\infty$ of small quasicategories, and the comparison is natural for simplicial functors. Consequently the Joyal homotopy theory has the claimed quasicategorical presentation.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, Corollary 2.2.5.4 and Proposition 2.2.5.8; online PDF, archival source WANTED"
+   }
+  },
+  {
+   "text": "For the relative category of small simplicial sets and $W_{\\mathrm J}$, [lem-coef-hammock-infinity-localization] constructs a locally Kan replacement of the hammock localization and its homotopy coherent nerve $\\mathcal L$, together with the map $q:N(\\mathsf{sSet})\\to\\mathcal L$. The node states that this map is a universal infinity localization: precomposition identifies functors out of $\\mathcal L$ with the full infinity subcategory of functors out of $N(\\mathsf{sSet})$ that invert $W_{\\mathrm J}$.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 2.2.5.8; hammock localization construction, online source WANTED"
+   }
+  },
+  {
+   "text": "Let $q_{\\mathrm J}:N(\\mathsf{sSet})\\to\\mathcal L_{\\mathrm J}$ be the coherent localization supplied by the Joyal model structure. The derived-adjunction result applied to the Quillen equivalence of Step 2 gives an equivalence between the coherent localizations of the Joyal and Bergner model categories, with the derived unit and counit as coherent natural transformations. Composing this equivalence with the derived coherent nerve of [lem-coef-coherent-nerve-comparison] identifies $\\mathcal L_{\\mathrm J}$ with $\\mathrm{Cat}_\\infty$. The hammock localization $q_H:N(\\mathsf{sSet})\\to\\mathcal L_H$ of Step 3 has the same universal property as $q_{\\mathrm J}$, so [lem-coef-system-localization-universal] gives an equivalence $u:\\mathcal L_H\\simeq\\mathcal L_{\\mathrm J}$ with $u q_H\\simeq q_{\\mathrm J}$. For a quasicategory $Q$, the derived unit is $\\eta_Q:Q\\to N_{\\mathrm{hc}}R\\mathfrak C[Q]$; the Quillen-equivalence criterion makes it a Joyal weak equivalence. Both ends are quasicategories, and [lem-coef-joyal-quasicategory-characterizations] turns this weak equivalence into a simplicial quasi-inverse and coherent inverse transformations, hence an equivalence in $\\mathrm{Cat}_\\infty$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-system-localization-universal",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, Corollary 2.2.5.4 and Proposition 2.2.5.8; derived localization and Quillen-equivalence comparison"
+   }
+  },
+  {
+   "text": "Now let $q:N(\\mathsf{sSet})\\to\\mathcal L$ be the arbitrary localization in the statement. Since both $q$ and $q_H$ invert exactly $W_{\\mathrm J}$ and satisfy the full coherent functor-category universal property, factorization gives functors $F:\\mathcal L\\to\\mathcal L_H$ and $G:\\mathcal L_H\\to\\mathcal L$ with specified equivalences $Fq\\simeq q_H$ and $Gq_H\\simeq q$. The equivalence of restriction functor categories in [lem-coef-system-localization-universal], applied to the two composites, supplies $GF\\simeq\\mathrm{id}$ and $FG\\simeq\\mathrm{id}$. Define $\\Phi=(\\text{the comparison }\\mathcal L_H\\simeq\\mathrm{Cat}_\\infty)\\circ F$. The derived-unit equivalences of Step 4 and the equivalence $Fq\\simeq q_H$ give $\\Phi(q(Q))\\simeq Q$. If $f:Q\\to Q'$ is a simplicial map between quasicategories, functoriality of $R$, naturality of the adjunction unit, and the naturality of the coherent-nerve comparison for the simplicial functor $\\mathfrak C[f]$ identify the resulting square with $f$; therefore these equivalences are natural in simplicial maps. Every construction is made in a chosen universe, and the universe clauses in the three cited nodes are preserved under enlargement.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-system-localization-universal",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.5.8; universal-property comparison and derived-unit naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-system-localization-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Written from HTT Theorem 2.2.5.1, Corollary 2.2.5.4 and Proposition 2.2.5.8, using the existing hammock-localization and coherent-nerve comparison nodes; HTT is not archived in literature/ (WANTED)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-joyal-presentable-monoidal-localization",
@@ -66,5 +140,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-joyal-localization-cat-infinity",
+  "worker": "stage1",
+  "summary": "Repaired the returned proof by replacing its unsupported fourth step with two explicit steps. The first cites the derived-adjunction result for transport across the Joyal–Bergner Quillen equivalence, uses localization uniqueness to identify the hammock localization with the Joyal localization, and identifies the comparison on a quasicategory with the derived unit; the Joyal characterization node supplies the equivalence in Cat-infinity. The second compares an arbitrary coherent localization q with the hammock q by the universal property, uses contractible uniqueness to obtain inverse equivalences, and proves naturality for simplicial maps through functorial replacement and adjunction-unit naturality. The item statement and no-new-node split are unchanged.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived mapping-complex adjunction: the cartesian Joyal presentation and its coherent localization foundation, including arbitrary localization comparison and natural quasicategory identification.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-d137031a0",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-d137031a0 (reviewer sub-agent of L); spot-checked: I read the statement, all five steps and the full statements of every cited node (joyal-model-structure, coherent-nerve-comparison, hammock-infinity-localization, model-infinity-derived-adjunction, system-localization-universal, joyal-quasicategory-characterizations, coherent-localization-interface, cat-infinity-colimits-cartesian-closure, def-cbc-enhanced-diagrams-cones), plus the citer joyal-presentable-monoidal-localization (Steps 4, 6, 7) and the unit sk-prop-sf-biduality-general. HTT 2.2.5.1/2.2.5.4/2.2.5.8 is not in literature/ (the report has a WANTED line), so the proof is correctly marked agent-written; I checked it against the standard Joyal-to-Bergner Quillen-equivalence argument. Step 1: weak equivalences are exactly W_J, the fibrant objects are the quasicategories, and 2-out-of-3 gives the 'wide subcategory with identities' hypothesis the hammock node needs. Step 4: the derived-adjunction node's hypotheses hold. Every object is Joyal-cofibrant. R𝔠[Q] is locally Kan, hence Bergner-fibrant, since the lifting condition over the terminal category is vacuous. 𝔠[Q]→R𝔠[Q] is a Dwyer–Kan equivalence. So by the Quillen-equivalence criterion η_Q: Q→N_hc R𝔠[Q] is a Joyal weak equivalence. Both ends are quasicategories, so characterization (2) makes η_Q an equivalence in Cat_∞. The localization-uniqueness node applies because W_J contains the isomorphisms. Step 5 handles an arbitrary q: F and G come from the two universal properties, and full faithfulness of restriction gives GF≃id and FG≃id. Naturality follows from functoriality of R, strict naturality of the unit and the coherent-nerve node's naturality for 𝔠[f]. Edge cases checked: ∅, Δ⁰, identity maps, universe enlargement. No new nodes; proof_deps equals the union of uses; no cycle; every cited statement is on the unit; no SGA; statement unchanged and not weakened. A scan of the DAG for duplicates found none. Minor, not changed: the report mentions a citations.json that is not part of the delivery, and the item has no lean_audit key, like about 1,650 other nodes. No fixes; review.md written."
  }
 }
