@@ -16,9 +16,110 @@
   "def-trf-geometric-morphism",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each etale S-scheme U, put H_U=(h_U)^#, and write theta:h_U -> H_U for the sheafification unit. The representable-stalk bijection identifies (h_U)_x with lifts x -> U, sending the class of a map f at (V,v) to fv, naturally in U. The sheafification-stalk bijection transports this identification to (H_U)_x. Thus a lift u:x -> U corresponds to the distinguished germ e_u=[U,u,theta_U(id_U)]. These identifications are natural for S-maps of etale schemes: H_f sends e_u to e_(fu). Here x can be either geometric point, and there is no restriction on the extension defining x.",
+   "uses": [
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-sets-sheafification-geometric-stalk",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization: germ construction; converse and equivariance proved here from representable stalks, Yoneda and the defining inverse limit."
+   }
+  },
+  {
+   "text": "Use the small representative category J_s of affine pointed neighbourhoods in the definition of S_(s). Its inverse-limit projections c_(V,v) are compatible. For a possibly nonaffine pointed (U,u), choose an affine pointed refinement f:(V,v) -> (U,u) and set c_(U,u)=f c_(V,v), transporting through a representative of J_s if necessary. This is independent of the choice: cofilteredness supplies a common pointed refinement, equalizes the two maps into U if necessary, and affine initiality supplies a further affine refinement. On it both composites agree by the cone identities. The same argument gives compatibility with every pointed neighbourhood morphism. Each c_(U,u) is over S since rho is the composite of any affine projection with its structure map.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization: germ construction; converse and equivariance proved here from representable stalks, Yoneda and the defining inverse limit."
+   }
+  },
+  {
+   "text": "Given a:Spec Omega_t -> S_(s) over S, set v_(U,u)=c_(U,u)a, using the compatible projections of step 2. This assigns (U,v_(U,u)) to (U,u) and preserves every pointed refinement, since f c_(V,v)=c_(U,u) for a pointed f:(V,v)->(U,u). The maps F(U) -> F_t, z |-> [U,v_(U,u),z], consequently form a compatible cocone for the colimit defining F_s. They induce lambda_a:F_s -> F_t with precisely the stated formula, independently of representatives. A sheaf morphism sends z to its image and commutes with restrictions, so these maps are natural in F. The inverse-image/direct-image adjunction mate correspondence defines a unique 2-morphism Theta(a):t -> s with mate lambda_a. This also establishes the formula on nonaffine U without requiring F(U) to be represented on an affine U in any unique way.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-strict-henselization-limit",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization: germ construction; converse and equivariance proved here from representable stalks, Yoneda and the defining inverse limit."
+   }
+  },
+  {
+   "text": "Conversely, let alpha:t -> s have inverse-image mate lambda:F_s -> F_t. For each affine pointed (U,u) in J_s apply lambda_(H_U) to e_u from step 1; its image corresponds to a unique lift v_(U,u):Spec Omega_t -> U over S. If f:(V,v)->(U,u) is pointed, naturality with respect to H_f and the identity H_f(e_v)=e_u give f v_(V,v)=v_(U,u). Thus these lifts are a cone on the defining small inverse-limit diagram. Its universal property gives a unique a_alpha:Spec Omega_t -> S_(s) with c_(U,u)a_alpha=v_(U,u). Composing any projection with U -> S shows rho a_alpha=t. This construction uses no specialization assumption or extension of an embedding between the two geometric fields.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-sets-sheafification-geometric-stalk",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization: germ construction; converse and equivariance proved here from representable stalks, Yoneda and the defining inverse limit."
+   }
+  },
+  {
+   "text": "We check the two constructions are inverse. Starting with a, step 3 sends e_u to e_(c_(U,u)a); step 1 therefore recovers exactly the projections c_(U,u)a, and inverse-limit uniqueness recovers a. Starting with alpha, take any germ [U,u,z] of a sheaf F at s. By affine cofinality it suffices to take U affine. Yoneda gives the presheaf map h_U -> F associated to z; the sheafification universal property factors it uniquely through q_z:H_U -> F. On stalks q_z sends e_u to [U,u,z] and e_w to [U,w,z]: this follows by evaluating the Yoneda map on id_U and then restricting. Naturality of lambda with q_z now gives lambda_F([U,u,z])=[U,v_(U,u),z]. This is the mate of Theta(a_alpha) by step 3. Every germ has such a representative, hence the mates agree on every sheaf, and the mate correspondence gives Theta(a_alpha)=alpha. The construction and its inverse involve only canonical maps, so the bijection is canonical.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-geometric-stalks",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization: germ construction; converse and equivariance proved here from representable stalks, Yoneda and the defining inverse limit."
+   }
+  },
+  {
+   "text": "Let tau be a field automorphism fixing t as a scheme map. On F_t define R_tau[U,v,z]=[U,v Spec(tau),z]. Pointed refinements remain pointed after this change of lifts, so the stalk-colimit relations are respected, and the formula commutes with sheaf morphisms. Replacing tau by its inverse gives an inverse natural transformation. Taking mates therefore defines the point automorphism r_tau:t -> t. For every germ [U,u,z] at s one has lambda_(a Spec(tau))([U,u,z])=[U,(c_(U,u)a) Spec(tau),z]=R_tau(lambda_a([U,u,z])). Thus lambda_(a Spec(tau))=R_tau lambda_a. Inverse-image mates reverse the direction and order of direct-image transformations: the mate of Theta(a) composed with r_tau is exactly R_tau lambda_a. By uniqueness of mates this proves Theta(a Spec(tau))=Theta(a) composed with r_tau. Only the equality t Spec(tau)=t was used.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization: germ construction; converse and equivariance proved here from representable stalks, Yoneda and the defining inverse limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-sets-sheafification-geometric-stalk",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-weil-pbc-geometric-stalks",
+  "def-trf-geometric-morphism",
+  "lem-galois-yoneda-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJ2, section-specialization: germ construction; converse and equivariance proved here from representable stalks, Yoneda and the defining inverse limit."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +155,52 @@
    "results": "{\"t\": \"2026-10-17T21:49:37Z\", \"tool\": \"leanfinder\", \"query\": \"An etale geometric stalk functor is prorepresented by its strict local scheme and natural transformations between stalks are morphisms of the prorepresenting schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf\", \"AlgebraicGeometry.instOverSpecStalkCommRingCatPresheaf\"], \"digest\": \"34ec97a8f82af321\"}",
    "date": "2026-10-18",
    "verdict": "no match: forgetFullyFaithful is about etale schemes, standard-etale lift_bijective concerns a presentation, and localization natural-transformation lifts concern category localizations; none classifies etale topos point arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between geometric stalk functors on an etale site correspond to lifts of a geometric point into the strict henselization at a specialization",
+   "results": "{\"t\": \"2026-10-17T22:11:10Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations between geometric stalk functors on an etale site correspond to lifts of a geometric point into the strict henselization at a specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap_apply\"], \"digest\": \"da502de9316452d7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned structure-sheaf stalk specializations and spreading out, not maps of etale topos points or the inverse-limit classification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pointSmallEtale\", \"sheafFiber\", \"strictHenselization\"",
+   "results": "{\"t\": \"2026-10-17T22:11:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"pointSmallEtale\\\", \\\"sheafFiber\\\", \\\"strictHenselization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: zero hits for the combined small-etale point, sheaf-fiber and strict-henselization names"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel.*(Hom|hom|point)|specialization.*(stalk|point)|Point.*strictHensel",
+   "results": "{\"t\": \"2026-10-17T22:11:11Z\", \"tool\": \"grep\", \"query\": \"strictHensel.*(Hom|hom|point)|specialization.*(stalk|point)|Point.*strictHensel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: zero hits in AlgebraicGeometry for the strict-henselization/point-arrow classification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations between geometric stalk functors correspond to lifts into strict localization",
+   "results": "{\"t\": \"2026-10-17T22:11:11Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformations between geometric stalk functors correspond to lifts into strict localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.lift₂NatTrans_app_app\", \"CategoryTheory.Localization.liftNatTrans\", \"CategoryTheory.Localization.liftNatTrans.congr_simp\", \"TopCat.Presheaf.stalkFunctor_map_germ\", \"CategoryTheory.Localization.liftNatTrans_app\", \"CategoryTheory.Localization.lift₂NatTrans\", \"CategoryTheory.Localization.Construction.natTransExtension\", \"TopCat.Presheaf.stalkFunctor_map_germ_apply\"], \"digest\": \"3c5030dbf6bb5579\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: categorical localization natural transformations and topological stalk naturality do not classify etale topos point arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between points of the small etale topos are compatible maps from the source geometric point into all pointed etale neighbourhoods of the target",
+   "results": "{\"t\": \"2026-10-17T22:11:51Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms between points of the small etale topos are compatible maps from the source geometric point into all pointed etale neighbourhoods of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.Hom\", \"CategoryTheory.GrothendieckTopology.Point.Hom.hom\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"e0217d67d5accbdb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Point.Hom and Point.Hom.hom define morphisms by transformations of site-fiber functors; their source does not identify them with geometric lifts into a strict localization. Etale.forgetFullyFaithful concerns maps of etale schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Point.Hom|Hom.sheafFiber|presheafToSheafCompSheafFiberIso",
+   "results": "{\"t\": \"2026-10-17T22:11:51Z\", \"tool\": \"grep\", \"query\": \"Point.Hom|Hom.sheafFiber|presheafToSheafCompSheafFiberIso\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\"], \"digest\": \"93cb7b0a8390cd09\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned sheafification/fiber comparison is a generic ingredient already represented in the DAG, not the inverse-limit classification"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-normal-generic-arrow-transitivity",
@@ -84,5 +227,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-point-arrows-strict-local-lifts",
+  "worker": "stage1",
+  "summary": "Proved the unchanged lift/point-arrow bijection by sheafified representable identity germs and the defining small inverse limit, then checked the full germ formula and field-automorphism equivariance. Read each cited statement, searched project/Mathlib and blueprint, and introduced no nodes. The converse and equivariance are explicitly agent arguments, not assertions attributed to Tag 0GJ2.",
+  "blueprint": "Realizes the strict-local-lift identification in the normal-base point-arrow transitivity input, through the recorded nearby-cycle chain to lem-trf-local-term-locality (1)-(2); retains the imported ancestor, place and via list.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-stalk-representable",
+    "why": "Step 1 identifies representable germs with geometric lifts for arbitrary schemes; this generic stalk computation supplies data for the prescribed strict-local-lift route, rather than replacing any trace-formula step."
+   },
+   {
+    "node": "lem-weil-pbc-sets-sheafification-geometric-stalk",
+    "why": "Steps 1 and 4 transport the representable computation to genuine sheaves; this generic set-valued sheafification tool has no trace-formula-specific replacement."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Step 5 uses Hom(h_U,F)=F(U), not just full faithfulness, to test an arbitrary stalk transformation on all germs; this generic categorical tool does not replace the unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Steps 2, 3 and 5 pass between affine limit projections and arbitrary neighbourhood germs; this indexing tool preserves the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "why": "Step 2 compares two refinements and equalizes pointed parallel maps; this generic neighbourhood-category fact is not a different trace-formula argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-sets-sheafification-geometric-stalk",
+  "lem-galois-yoneda-hom-bijection",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N7-d749275fb",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-d749275fb (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements, sources and unit/chapter route. Verified the lift–arrow bijection, germ formula, mate variance and equivariance; edge cases pass, with no cycles, duplicates or long steps. review.md records accepted tools, the unavailable exact dropped-list check, and my disclosed prohibited Git/SSH attempt."
  }
 }

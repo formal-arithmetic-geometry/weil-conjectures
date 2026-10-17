@@ -15,9 +15,65 @@
   "def-weil-residue-field",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-associated-primes-flat-base-change] with $M=Q$ and $N=P$. The equality clause applies because $R$ is Noetherian and $P$ is $R$-flat. It supplies a prime $\\mathfrak p_0\\in\\operatorname{Ass}_R(Q)$ such that $\\mathfrak q\\in\\operatorname{Ass}_S(P/\\mathfrak p_0P)$. Choose a witness $z\\in P/\\mathfrak p_0P$ with $\\operatorname{Ann}_S(z)=\\mathfrak q$. The witness is nonzero, since the annihilator of zero is the whole ring and $\\mathfrak q$ is proper.",
+   "uses": [
+    "lem-weil-pbc-associated-primes-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0312 (lemma-bourbaki), equality; Tag 05C2 (lemma-bourbaki-fibres), proof reduction to the prime quotient"
+   }
+  },
+  {
+   "text": "Write $\\varphi:R\\to S$ for the given homomorphism and check $\\mathfrak p_0=\\varphi^{-1}(\\mathfrak q)$. Every $a\\in\\mathfrak p_0$ kills the quotient, hence kills $z$. Conversely, for $a\\notin\\mathfrak p_0$, multiplication by $a$ on $R/\\mathfrak p_0$ is injective: $ar\\in\\mathfrak p_0$ forces $r\\in\\mathfrak p_0$ by primality. Tensor this injection with $P$, using [lem-weil-pbc-flat-tensor-exact]. Under the quotient-tensor isomorphism of [lem-weil-pbc-tensor-over-quotient-ring], the resulting map is multiplication by $a$ on $P/\\mathfrak p_0P$ (on $\\bar r\\otimes y$ both maps give $ary$ modulo $\\mathfrak p_0P$). Thus $\\varphi(a)z=0$ would imply $z=0$, a contradiction. This proves the contraction equality and identifies $\\mathfrak p_0$ with the statement's $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05C2 via Tag 05C1 (lemma-post-bourbaki), the nonzerodivisor calculation on the prime quotient, written out using flat tensor exactness"
+   }
+  },
+  {
+   "text": "Write $\\varphi:R\\to S$ for the given homomorphism. Apply [lem-trf-fibre-module-localization] to $A=R$, $B=S$, $N=P$, and the now identified prime $\\mathfrak p$. Its canonical $S$-linear isomorphism identifies $(\\varphi(R\\setminus\\mathfrak p))^{-1}(P/\\mathfrak pP)$ with $P\\otimes_R\\kappa(\\mathfrak p)$. Its annihilator clause applies to the witness $z$ from Step 1 because Step 2 established $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$. Hence the image of $z/1$ in the fibre has $S$-annihilator exactly $\\mathfrak q$. This proves the first assertion directly with an element witness.",
+   "uses": [
+    "lem-trf-fibre-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05C2, localization of the prime quotient as in Tag 05C1; Tag 05BZ (lemma-localize-ass), witness localization"
+   }
+  },
+  {
+   "text": "Put $C=S\\otimes_R\\kappa(\\mathfrak p)$ and $L=P\\otimes_R\\kappa(\\mathfrak p)$, with $(s\\otimes\\lambda)(y\\otimes\\mu)=sy\\otimes\\lambda\\mu$. This balanced formula defines the canonical $C$-action and restricts to the original $S$-action. Apply [lem-trf-fibre-associated-primes-module-ring] to this $C$-module. It says that $\\mathfrak q\\in\\operatorname{Ass}_S(L)$ if and only if the corresponding prime $\\mathfrak Q$ of $C$ lies in $\\operatorname{Ass}_C(L)$, and explicitly transports annihilators of the same element. Applied to Step 3, this is exactly the equivalently clause of the item.",
+   "uses": [
+    "lem-trf-fibre-associated-primes-module-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05E0 (remark-bourbaki), equality of associated-prime sets under the fibre prime correspondence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-associated-primes-flat-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-trf-fibre-module-localization",
+  "lem-trf-fibre-associated-primes-module-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05C2 (lemma-bourbaki-fibres) through Tag 0312 (lemma-bourbaki), the prime-quotient nonzerodivisor argument of Tag 05C1 (lemma-post-bourbaki), and Tag 05E0 (remark-bourbaki). This is the commutative-algebra input cited in the final paragraph of Tag 05DM in flat.tex."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-completion-universally-injective",
@@ -81,5 +137,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-associated-primes-fibre-bound",
+  "worker": "stage1",
+  "summary": "Repaired both returned citation gaps with statement-only helpers for the fibre module/localization and its exact witness transport, and the associated-prime correspondence for every fibre-ring module. Wrote out the missing contraction check with existing flat-tensor-exact and quotient-tensor statements. Removed the irrelevant localization at q and residue-field assertions; preserved the item statement and ancestry.",
+  "blueprint": "Supporting commutative-algebra input along the existing ancestry from lem-trf-local-term-locality: Tag 05DM invokes Tag 05C2/05E0; Steps 1--4 implement the quotient union, contraction of the chosen quotient prime, the fibre localization of its witness, and the fibre-ring interpretation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-associated-primes-flat-base-change",
+    "why": "Generic Bourbaki quotient-associated-prime formula; the trace-formula unit gives no replacement for this commutative-algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-associated-primes-flat-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q90-d9a99e163",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q90-d9a99e163 (reviewer sub-agent of L); spot-checked: Mathematics and source route check out. Repair the item metadata (`created.item`/group incorrectly name Q72’s different item) and define the given map φ before its use in Steps 2–3. Corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-associated-primes-fibre-bound.json; review.md records source, hypothesis, edge-case, route, duplicate, and tool-use checks.; 1 file(s) fixed by the reviewer"
  }
 }

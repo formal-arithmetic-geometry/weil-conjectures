@@ -2,29 +2,143 @@
  "id": "lem-trf-curve-p1-tree-local-criterion",
  "kind": "statement",
  "title": "Proper marked curve contractions and exceptional trees",
- "statement": "Let $k$ be an algebraically closed field [def-weil-field] [def-weil-algebraic-closure]. Let $(C',D')\\to(C,D)$ be a proper modification of proper multipointed $k$-curves [def-weil-proper-morphism] [def-trf-multipointed-curve] [def-trf-multipointed-curve-modification], with geometrically reduced source and target curves [lem-trf-nodal-geometric-fibres-reduced]. Let $x\\in C(k)$ and let $Z$ be the scheme-theoretic fibre [def-pc-scheme-fibre] over $x$, assumed to be a connected curve [def-weil-connected-scheme]; assume the map is an isomorphism away from $x$ and $(C',D')$ is semistable [def-trf-semistable-multipointed-pair] at every point of $Z$. Put $\\partial(Z)=Z\\cap\\overline{C'\\setminus Z}$ in $C'$. Then $(C,D)$ is semistable [def-trf-semistable-multipointed-pair] at $x$ if and only if $Z$ is an exceptional $\\mathbf P^1_k$-tree: a connected [def-weil-connected-scheme] proper [def-weil-proper-morphism] nodal curve [def-trf-nodal-geometric-fibres] whose components are projective lines [def-nagata-projective-space-base-change] and whose incidence graph is a tree, with $|\\partial(Z)|+|D'\\cap Z|\\le 2$..",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and $(C',D')$, $(C,D)$ proper multipointed $k$-curves [def-trf-multipointed-curve, def-weil-proper-morphism] with reduced underlying curves [def-pc-reduced-scheme]. Let $f:C'\\to C$ be a proper surjective $k$-morphism and $f_D:D'\\to D$ a compatible morphism of markings. The marking schemes are finite over $k$ [def-weil-finite-integral-morphism]. Assume equal arithmetic genera\n$$p_a(C')=p_a(C),\\qquad p_a(X)=1-\\chi(X,\\mathcal O_X)$$\nwith Euler characteristic [def-pc-euler-characteristic]. Let $x\\in C(k)$, let $Z=C'\\times_C\\operatorname{Spec}k$ be the scheme-theoretic fibre [def-pc-scheme-fibre], and assume $Z$ is a nonempty connected curve of pure dimension one [def-weil-connected-scheme, def-weil-pure-dimension]. Suppose $f:C'\\setminus Z\\to C\\setminus\\{x\\}$ is an isomorphism and $(C',D')$ is semistable at every point of $Z$ [def-trf-semistable-multipointed-pair]. For the local marking length, let $A_x=\\mathcal O_{D,x}$ be the local Artinian factor of the finite marking algebra at $x$ when $x\\in D$, and $A_x=0$ when $x\\notin D$. Assume its conservation:\n$$\\dim_k A_x=|D'\\cap Z|.$$\n(The empty marking contributes zero; intersections and counts use distinct $k$-points.) Define $\\partial(Z)=|Z|\\cap\\overline{|C'|\\setminus|Z|}$ in $C'$. Then $(C,D)$ is semistable at $x$ if and only if $Z$ is an exceptional projective-line tree: $Z$ is reduced and nodal, each of its reduced irreducible components [def-weil-irreducible-components] is isomorphic over $k$ to $\\mathbf P^1_k$ [def-nagata-projective-space-base-change], its finite incidence multigraph (one vertex per component, one edge per node, including loops at self-nodes) is a tree, and\n$$|\\partial(Z)|+|D'\\cap Z|\\le2.$$\nNodal means that every nonsmooth closed point [def-sbc-smooth-morphisms] has completed local $k$-algebra $k[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. A tree is a connected finite graph without cycles, with loops and parallel edges counted as cycles. The scheme-theoretic fibre is retained in the conclusion; it is not silently replaced by its reduction.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "Lemma 4.4.2 after the local-to-projective reduction, printed pp. 30--31, using Appendix B Corollary B.2 and the definition of boundary on printed pp. 56--57."
  },
  "stmt_deps": [
-  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-projective-space-base-change",
+  "def-pc-euler-characteristic",
   "def-pc-reduced-scheme",
   "def-pc-scheme-fibre",
-  "def-sc-p1-standard",
+  "def-sbc-smooth-morphisms",
   "def-trf-multipointed-curve",
-  "def-trf-multipointed-curve-modification",
-  "def-trf-nodal-geometric-fibres",
+  "def-trf-semistable-multipointed-pair",
   "def-weil-algebraic-closure",
   "def-weil-connected-scheme",
   "def-weil-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-irreducible-components",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-weil-pure-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=Z_{\\mathrm{red}}$. Its support equals that of $Z$, so it is nonempty, connected, pure of dimension one and has the same boundary and marking counts. The reduced-subscheme node supplies this structure. By the nodal-subcurve-boundary lemma, applied to $B\\subset C'$ and the semistable neighbourhood supplied by the hypothesis, $B$ is nodal; its boundary is a finite reduced set, smooth on $B$, with one ambient node per boundary point. Write $v$ for its number of components, $e$ for its internal nodes, and $n$ for its boundary points. Let $g_i$ be the genus of the normalization of its $i$-th reduced component; the normalization-genus lemma supplies smooth proper connected normalizations and finiteness.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-reduced-curve-normalization-genus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, definitions following Lemma B.1 and setup of Corollary B.2, p. 57; reduction introduced only for the intermediate calculation."
+   }
+  },
+  {
+   "text": "Apply the normalization-branches lemma to $f$, $x$ and $B$. All its hypotheses are the properness, reducedness, pure dimensions, connected positive-dimensional fibre, isomorphism off that fibre, and nodal neighbourhood stipulated here. It identifies the normalizations of all noncontracted components with those of $C$. It identifies the normalization points of $C$ above $x$ bijectively with $\\partial(B)$, so the branch number at $x$ is $n$ and $n\\ge1$.",
+   "uses": [
+    "lem-trf-nodal-contraction-normalization-branches"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary B.2 proof, last paragraph, p. 58."
+   }
+  },
+  {
+   "text": "Subtract the normalization-genus formulas for $C'$ and $C$. The noncontracted normalized component genera cancel by the preceding identification; the number of components of $C'$ exceeds that of $C$ by $v$. The local delta terms off $B$ cancel because $f$ is an isomorphism there. At points of $B$, the only nonsmooth ambient points are its $e$ internal nodes and its $n$ boundary nodes. The ordinary-point-delta lemma gives delta $1$ at each node and $0$ at each smooth point. Consequently\n$$p_a(C')-p_a(C)=-v+\\sum_i g_i+e+n-\\delta_C(x).$$\nThe assumed equal genera therefore give $\\delta_C(x)=n-1+(e-v+1)+\\sum_i g_i$.",
+   "uses": [
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-trf-ordinary-point-delta-branches",
+    "lem-trf-nodal-contraction-normalization-branches"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary B.2 proof, genus-formula subtraction, p. 58."
+   }
+  },
+  {
+   "text": "The incidence multigraph of $B$ is connected: a partition of its vertices with no crossing node would partition $B$ into two disjoint unions of its finitely many closed components, each also open, contrary to connectedness. For any finite connected multigraph on $v$ vertices, successively adding an edge to a new vertex from the vertices already reached produces a spanning tree with $v-1$ edges. Thus $e-v+1\\ge0$, with equality exactly when there are no additional edges, that is, when the graph itself is a tree. Each $g_i$ is a vector-space dimension, hence nonnegative. It follows from the preceding equality that $\\delta_C(x)=n-1$ exactly when the graph is a tree and every $g_i=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, Corollary B.2 proof, graph count, p. 58; explicit finite spanning-tree argument."
+   }
+  },
+  {
+   "text": "If the graph is a tree, there are no self-nodes, so every component of $B$ is smooth: at a node incident with another component its reduced single-branch local ring is smooth, while all other points were already smooth on $B$. This single-branch assertion is also the smooth-boundary clause of the nodal-subcurve lemma applied to that component. By the smooth-normal lemma, these smooth components are normal, so their normalizations are themselves (their local rings already equal their integral closures). The genus-zero-smooth-proper-line lemma then identifies each component with $\\mathbf P^1_k$ when $g_i=0$. Conversely, components isomorphic to $\\mathbf P^1_k$ have genus zero by the projective-line-genus-zero lemma. Hence the condition in Step 4 is exactly the projective-line-tree condition for $B$.",
+   "uses": [
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-genus-zero-smooth-proper-line",
+    "lem-asd-projective-line-genus-zero",
+    "lem-sc-smooth-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, definition of projective-line tree after Lemma B.1, p. 57; Stacks 0C6U genus-zero characterization."
+   }
+  },
+  {
+   "text": "The ordinary-point-delta lemma applied at $x$, using its branch number $n$ from Step 2, now says that $x$ is an ordinary $n$-fold point exactly when $B$ is a projective-line tree. In either of these equivalent cases the reduced-fibre clause of the normalization-branches lemma gives $Z=B$. Therefore the same equivalence holds with the actual scheme-theoretic fibre $Z$, including its reducedness. In particular a semistable curve point gives $n=1$ (smooth) or $n=2$ (node), and conversely an ordinary point with $n\\le2$ is a semistable curve point.",
+   "uses": [
+    "lem-trf-ordinary-point-delta-branches",
+    "lem-trf-nodal-contraction-normalization-branches"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, Corollary B.2 and ordinary-point characterization, pp. 56--58; reduced-fibre comparison made explicit."
+   }
+  },
+  {
+   "text": "Put $m=|D'\\cap Z|$. The local marking-length hypothesis gives $\\dim_k A_x=m$. At the fixed $k$-point $x$, the local marking factor is either empty or a local finite $k$-scheme supported at that one point, since $D\\hookrightarrow C$ is a closed immersion. It is empty when $m=0$, since a nonzero local Artinian $k$-algebra has positive dimension. For $m=1$ its unital $k$-algebra is one-dimensional, hence the scalar map $k\\to A_x$ is an isomorphism. Conversely, the etale-algebra-over-field-product lemma expresses an etale local marking algebra as a product of finite separable field extensions of $k$. Locality selects one factor, and algebraic closure identifies it with $k$, so its length is one. Thus at a smooth $x$ the marking is allowed exactly for $m=0$ or $1$; at a node semistability requires the marking to be absent, hence $m=0$. These are precisely the marking and smooth-locus requirements in the semistable-pair definition. Here $A_x$ is the local Artinian factor of the finite scheme $D$ at $x$, rather than the fibre of the closed immersion $D\\hookrightarrow C$: localization of a finite-dimensional algebra at a maximal ideal selects that factor.",
+   "uses": [
+    "def-trf-semistable-multipointed-pair",
+    "def-trf-multipointed-curve",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin §1.2 semistable markings, p. 2, and Appendix B exceptional marking count, p. 58; elementary local marking-algebra argument."
+   }
+  },
+  {
+   "text": "Since $n\\ge1$, the inequality $n+m\\le2$ has exactly the possibilities $(n,m)=(1,0),(1,1),(2,0)$. Steps 6 and 7 say that these are exactly the semistable marked target cases, together with the projective-line-tree condition for the scheme-theoretic fibre. Boundary and marking counts for $B$ and $Z$ agree by Step 1. This proves both directions of the stated equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B marked exceptional-tree condition, p. 58; final numerical assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-multipointed-curve",
+  "def-trf-semistable-multipointed-pair",
+  "lem-asd-projective-line-genus-zero",
+  "lem-sc-smooth-normal",
+  "lem-trf-genus-zero-smooth-proper-line",
+  "lem-trf-nodal-contraction-normalization-branches",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-ordinary-point-delta-branches",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Primary PDF read online, Appendix B pp. 56--58; local archival copy absent. Expansion of the genus calculation, marking-length condition and scheme-fibre comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +174,136 @@
    "results": "Hits were unrelated WeierstrassCurve nonsingularity declarations; no match.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper surjective map of reduced proper curves of equal arithmetic genus, isomorphic away from one connected contracted nodal fibre, has a semistable marked target point if and only if the fibre is a projective line tree with at most two boundary and marked points",
+   "results": "{\"t\": \"2026-10-17T22:08:13Z\", \"tool\": \"leanfinder\", \"query\": \"A proper surjective map of reduced proper curves of equal arithmetic genus, isomorphic away from one connected contracted nodal fibre, has a semistable marked target point if and only if the fibre is a projective line tree with at most two boundary and marked points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\"], \"digest\": \"d8d85fc6a509e17b\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"genus\"",
+   "results": "{\"t\": \"2026-10-17T22:08:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"genus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|arithmeticGenus|ordinary.*fold|projective.*tree",
+   "results": "{\"t\": \"2026-10-17T22:08:12Z\", \"tool\": \"grep\", \"query\": \"semistable|arithmeticGenus|ordinary.*fold|projective.*tree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper curve contraction with equal arithmetic genus contracts a rational nodal tree to a smooth point or ordinary node",
+   "results": "{\"t\": \"2026-10-17T22:08:12Z\", \"tool\": \"leansearch\", \"query\": \"A proper curve contraction with equal arithmetic genus contracts a rational nodal tree to a smooth point or ordinary node\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsProper.casesOn\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.recOn\", \"AlgebraicGeometry.instIsProperOfIsFinite\"], \"digest\": \"ab97726cdf49fa18\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper surjective map of reduced proper curves of equal arithmetic genus, isomorphic away from one connected contracted nodal fibre, has a semistable marked target point if and only if the fibre is a projective line tree with at most two boundary and marked points",
+   "results": "{\"t\": \"2026-10-17T22:08:13Z\", \"tool\": \"leanfinder\", \"query\": \"A proper surjective map of reduced proper curves of equal arithmetic genus, isomorphic away from one connected contracted nodal fibre, has a semistable marked target point if and only if the fibre is a projective line tree with at most two boundary and marked points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\"], \"digest\": \"d8d85fc6a509e17b\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"genus\"",
+   "results": "{\"t\": \"2026-10-17T22:08:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"genus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|arithmeticGenus|ordinary.*fold|projective.*tree",
+   "results": "{\"t\": \"2026-10-17T22:08:12Z\", \"tool\": \"grep\", \"query\": \"semistable|arithmeticGenus|ordinary.*fold|projective.*tree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper curve contraction with equal arithmetic genus contracts a rational nodal tree to a smooth point or ordinary node",
+   "results": "{\"t\": \"2026-10-17T22:08:12Z\", \"tool\": \"leansearch\", \"query\": \"A proper curve contraction with equal arithmetic genus contracts a rational nodal tree to a smooth point or ordinary node\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsProper.casesOn\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.recOn\", \"AlgebraicGeometry.instIsProperOfIsFinite\"], \"digest\": \"ab97726cdf49fa18\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper surjective map of reduced proper curves of equal arithmetic genus, isomorphic away from one connected contracted nodal fibre, has a semistable marked target point if and only if the fibre is a projective line tree with at most two boundary and marked points",
+   "results": "{\"t\": \"2026-10-17T22:08:13Z\", \"tool\": \"leanfinder\", \"query\": \"A proper surjective map of reduced proper curves of equal arithmetic genus, isomorphic away from one connected contracted nodal fibre, has a semistable marked target point if and only if the fibre is a projective line tree with at most two boundary and marked points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\"], \"digest\": \"d8d85fc6a509e17b\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"genus\"",
+   "results": "{\"t\": \"2026-10-17T22:08:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"genus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|arithmeticGenus|ordinary.*fold|projective.*tree",
+   "results": "{\"t\": \"2026-10-17T22:08:12Z\", \"tool\": \"grep\", \"query\": \"semistable|arithmeticGenus|ordinary.*fold|projective.*tree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper curve contraction with equal arithmetic genus contracts a rational nodal tree to a smooth point or ordinary node",
+   "results": "{\"t\": \"2026-10-17T22:08:12Z\", \"tool\": \"leansearch\", \"query\": \"A proper curve contraction with equal arithmetic genus contracts a rational nodal tree to a smooth point or ordinary node\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsProper.casesOn\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.recOn\", \"AlgebraicGeometry.instIsProperOfIsFinite\"], \"digest\": \"ab97726cdf49fa18\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper reduced curves of equal arithmetic genus, a connected nodal fibre contracts to a semistable point precisely when it is a projective line tree and boundary count plus marking length at the target is at most two",
+   "results": "{\"t\": \"2026-10-17T22:11:28Z\", \"tool\": \"leanfinder\", \"query\": \"For proper reduced curves of equal arithmetic genus, a connected nodal fibre contracts to a semistable point precisely when it is a projective line tree and boundary count plus marking length at the target is at most two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\"], \"digest\": \"c51497f076be3ce3\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper surjective map of reduced proper curves of equal arithmetic genus, isomorphic away from one connected contracted nodal fibre, has a semistable marked target point if and only if the fibre is a projective line tree with at most two boundary and marked points",
+   "results": "{\"t\": \"2026-10-17T22:08:13Z\", \"tool\": \"leanfinder\", \"query\": \"A proper surjective map of reduced proper curves of equal arithmetic genus, isomorphic away from one connected contracted nodal fibre, has a semistable marked target point if and only if the fibre is a projective line tree with at most two boundary and marked points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\"], \"digest\": \"d8d85fc6a509e17b\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"genus\"",
+   "results": "{\"t\": \"2026-10-17T22:08:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"genus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|arithmeticGenus|ordinary.*fold|projective.*tree",
+   "results": "{\"t\": \"2026-10-17T22:08:12Z\", \"tool\": \"grep\", \"query\": \"semistable|arithmeticGenus|ordinary.*fold|projective.*tree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper curve contraction with equal arithmetic genus contracts a rational nodal tree to a smooth point or ordinary node",
+   "results": "{\"t\": \"2026-10-17T22:08:12Z\", \"tool\": \"leansearch\", \"query\": \"A proper curve contraction with equal arithmetic genus contracts a rational nodal tree to a smooth point or ordinary node\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsProper.casesOn\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.recOn\", \"AlgebraicGeometry.instIsProperOfIsFinite\"], \"digest\": \"ab97726cdf49fa18\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper reduced curves of equal arithmetic genus, a connected nodal fibre contracts to a semistable point precisely when it is a projective line tree and boundary count plus marking length at the target is at most two",
+   "results": "{\"t\": \"2026-10-17T22:11:28Z\", \"tool\": \"leanfinder\", \"query\": \"For proper reduced curves of equal arithmetic genus, a connected nodal fibre contracts to a semistable point precisely when it is a projective line tree and boundary count plus marking length at the target is at most two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\"], \"digest\": \"c51497f076be3ce3\"}; No match: generic properness and surjectivity declarations do not state the contraction or marking criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-exceptional-local-criterion",
@@ -82,5 +322,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-curve-p1-tree-local-criterion",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: restored the equal-genus hypothesis of Temkin B.2, replaced the vacuous field-curve modification hypothesis by the proper surjective fibre-map hypotheses, and exposed local marking-length conservation. Eight steps perform the genus subtraction and graph/marking calculation. Three new statement-only inputs cover the general reduced-curve normalization formula, ordinary delta/branch criterion, and contraction branch/fibre comparison. Reused existing nodal-boundary and genus-zero inputs; kept the scheme-theoretic fibre in the conclusion. The existing valuation parent must supply the corrected hypotheses.",
+  "blueprint": "Historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion, proof step 5: Appendix B genus/tree calculation. Steps 1--6 realize the Appendix B Corollary B.2 calculation of the inherited stable-modification input, and Steps 7--8 its marked exceptional-tree test. This is auxiliary curve geometry, not a replacement of the current Varshavsky unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced closed subscheme construction for an intermediate calculation; no node of this unit defines that construction."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Generic normality of a smooth component identifies it with its normalization; the unit has no replacement for this fact."
+   },
+   {
+    "node": "lem-asd-projective-line-genus-zero",
+    "why": "Generic structure-sheaf genus of the projective line used for the converse; independent of this unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-smooth-normal",
+  "lem-asd-projective-line-genus-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-f644ac8da",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-f644ac8da (reviewer sub-agent of L); spot-checked: Read the required guidance, packet, report, item, all three new nodes, cited DAG statements, unit/chapter route, and cited sources. Verified all eight proof steps, hypotheses, edge cases, searches, duplicate checks, route restrictions, and the scheme-theoretic fibre and marking-length arguments. Wrote review.md; no repairs needed."
  }
 }

@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category",
   "def-weil-pbc-kahler-differentials",
-  "lem-trf-cotangent-resolution-coherence"
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-mv-polynomial-ring"
  ],
  "created": {
   "by": "worker",
@@ -18,10 +19,134 @@
   "date": "2026-10-18",
   "group": "Q86"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Use [lem-trf-cotangent-resolution-coherence] with $R=A[B]$, augmentation $\\epsilon:R\\twoheadrightarrow B$, $I=\\ker\\epsilon$, and $Q_1=A[R]$, $Q_2=A[Q_1]$. Denote their respective polynomial variables by $X_b,Y_p,Z_f$. Write $M_n=\\Omega^1_{Q_n/A}\\otimes_{Q_n}B$, with $Q_0=R$. The two faces on $Q_1$ send $Y_p$ to $p$ and $X_{\\epsilon(p)}$. On $Q_2$ the three faces send $Z_f$ to $f,Y_{d_0f},Y_{d_1f}$. Thus $L_{B/A}$ is represented by $\\cdots\\to M_2\\xrightarrow{\\partial_2}M_1\\xrightarrow{\\partial_1}M_0$. By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], $M_1$ is free on $u_p=\\mathrm dY_p\\otimes1$ and $M_2$ is free on $\\mathrm dZ_f\\otimes1$. These are precisely the standard-resolution faces, not faces for an arbitrary presentation.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP (remark-explicit-comparison-map): standard resolution and face maps; Tag 08QL functoriality."
+   }
+  },
+  {
+   "text": "Define $D:Q_1\\to I/I^2$ by $D(f)=d_0(f)-d_1(f)\\bmod I^2$. Both face maps have the same image in $B$, so the difference lies in $I$. It is additive, kills $A$, and satisfies $D(fg)=\\overline fD(g)+\\overline gD(f)$ because the product of two face differences lies in $I^2$. Hence [def-weil-pbc-kahler-differentials] gives a $B$-linear map $\\rho:M_1\\to I/I^2$, $\\rho(u_p)=p-X_{\\epsilon(p)}\\bmod I^2$. Its composition with the conormal differential is $\\partial_1$: both send $u_p$ to $\\mathrm dp-\\mathrm dX_{\\epsilon(p)}$. Moreover $\\rho(\\partial_2(\\mathrm dZ_f))=D(f)-D(Y_{d_0f})+D(Y_{d_1f})=0$: the last two terms subtract $d_0f-d_1f$ since $\\epsilon d_0f=\\epsilon d_1f$. Thus degree zero identity, degree minus one $\\rho$, and zero in all lower degrees form a chain map $c:L_{B/A}\\to C(R)$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP: well-definedness and the omitted verification that the displayed arrows form a complex map."
+   }
+  },
+  {
+   "text": "We compute $E=M_1/\\operatorname{im}\\partial_2$ explicitly. Let $t_p$ be the class of $u_p$. For each $f\\in Q_1$, the defining relation is the class of $\\mathrm df\\otimes1$ minus $t_{d_0f}$ plus $t_{d_1f}$ equal to zero. In particular $f=Y_{X_b}$ gives $t_{X_b}=0$ for every $b\\in B$. Taking $f=2Y_0$ gives $t_{2X_0}=-t_0$, and $f=Y_0^2$ gives $t_{X_0^2}=t_0$. For $h,k\\in I$, the choices $f=Y_h+Y_k$ and $f=Y_hY_k$ now give $t_{h+k}=t_h+t_k-t_0$ and $t_{hk}=t_0$. These identities follow by differentiating the displayed polynomials using the Leibniz rule [def-weil-pbc-kahler-differentials]; their coefficients are evaluated in $B$, so the coefficients $\\epsilon(h)$ and $\\epsilon(k)$ in the product derivative vanish.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP: explicit calculation of the cokernel of the incoming differential; details supplied for the omitted truncation verification."
+   }
+  },
+  {
+   "text": "For $r\\in R$, $h\\in I$, set $b=\\epsilon(r)$. The relations for $Y_rY_h$ and $Y_rY_0$ yield respectively $b t_h-t_{rh}+t_{X_bX_0}=0$ and $b t_0-t_0+t_{X_bX_0}=0$. Subtracting gives $t_{rh}-t_0=b(t_h-t_0)$. Together with Step 3 this says that $h\\mapsto t_h-t_0$ is additive, is $R$-linear with the $R$-action through $\\epsilon$, and kills $I^2$ (each product of two elements of $I$ maps to zero). It therefore defines a $B$-linear map $v:I/I^2\\to E$. This uses just quotient-module relations and the computed identities, with no regular-sequence or finiteness hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP: inverse to the induced degree-minus-one comparison, first half of the direct calculation."
+   }
+  },
+  {
+   "text": "The induced map $\\overline\\rho:E\\to I/I^2$ is inverse to $v$. Indeed, for $h\\in I$ one has $\\overline\\rho(t_h-t_0)=(h-X_0)-(0-X_0)=h\\bmod I^2$. Conversely let $p\\in R$ and $b=\\epsilon(p)$. For $f=Y_p-Y_{X_b}$ the defining relation of $E$ becomes $t_p-t_{X_b}-t_{p-X_b}+t_0=0$. Since $t_{X_b}=0$, this reads $v\\overline\\rho(t_p)=t_p$. The $t_p$ generate $E$, so both composites are identities. Therefore $\\rho$ identifies $M_1/\\operatorname{im}\\partial_2$ with $I/I^2$ and intertwines the remaining differential with the conormal differential by Step 2. The degree-zero identity then makes $\\tau_{\\geq-1}L_{B/A}\\to C(R)$ an isomorphism of the displayed two-term complexes. Its construction commutes strictly with ring squares: $X_b,Y_p,Z_f$ map to the variables indexed by their images, and every formula above commutes with those maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08RB/08UP: direct completion of the canonical truncation comparison; no transitivity compatibility is left unproved."
+   }
+  },
+  {
+   "text": "For a surjection $P\\to B$ as in the statement, put $C(P)=[J/J^2\\to\\Omega^1_{P/A}\\otimes_PB]$. Any map $a:R\\to P$ over $B$ induces a chain map $C(a)$: on conormal classes it sends $[h]$ to $[a(h)]$, and on differential tensors it sends $\\mathrm dr\\otimes b$ to $\\mathrm da(r)\\otimes b$. The map on conormal quotients is well defined since $a(I^2)\\subset J^2$; the map on differentials follows from [def-weil-pbc-kahler-differentials], and the two maps commute with the differential on each $[h]$. These formulas work also for semilinear maps over a base-ring square, preserve identities, and compose termwise. A lift $a:R=A[B]\\to P$ exists: choose a preimage in $P$ of each $b\\in B$ and apply [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 00S0 (section-netherlander), equation-functoriality-NL and the generator-lifting argument of Tag 00S1."
+   }
+  },
+  {
+   "text": "For later independence and inverses, the following difference calculation applies to maps of these complexes, including semilinear maps. Suppose $a,b:Q\\to T$ over the same ring square and quotient $B\\to B'$ induce the same map to $B'$, and $K=\\ker(T\\to B')$. Then $a-b$ modulo $K^2$ is a derivation into the $B'$-module $K/K^2$: $a(xy)-b(xy)=a(x)(a(y)-b(y))+(a(x)-b(x))b(y)$. By [def-weil-pbc-kahler-differentials] it gives $H:\\Omega^1_{Q/A}\\otimes_QB\\to K/K^2$, $H(\\mathrm dx\\otimes b_0)=b'_0[a(x)-b(x)]$. On conormal generators $H\\,\\mathrm d([h])=[a(h)-b(h)]$, and on differential generators $\\mathrm dH(\\mathrm dx\\otimes b_0)=b'_0(\\mathrm da(x)-\\mathrm db(x))$. Thus $C(a)-C(b)=\\mathrm dH+H\\mathrm d$. The same calculation is valid for maps into $T/K^2$, interpreting differentials after tensoring with $B'$: $\\mathrm d(K^2)\\otimes B'=0$ by the Leibniz rule. This also verifies independence of lifts represented only modulo a squared ideal.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 00S1 (lemma-NL-homotopy), explicit difference derivation and both homotopy identities, including its omitted calculation."
+   }
+  },
+  {
+   "text": "If $P$ is polynomial, [lem-weil-pbc-nl-presentations-homotopy-equivalent] makes $C(a):C(R)\\to C(P)$ a homotopy equivalence for any lift $a$. For the allowed general case write $P=W^{-1}F$, $F=A[x_e]$. Lift the images of $x_e$ in $B$ to $R/I^2$ by [def-weil-pbc-mv-polynomial-ring]. This makes $D=R/I^2$ an $F$-algebra, with square-zero ideal $N=I/I^2$, and $D/N=B$. The given map $P\\to B$ is an $F$-algebra map. Applying [lem-weil-pbc-localization-square-zero-lifting] yields $\\ell:P\\to R/I^2$ lifting it. Since $\\ell(J)\\subset N$ and $N^2=0$, $\\ell$ induces a map $J/J^2\\to I/I^2$. The derivation $\\mathrm d:R\\to\\Omega^1_{R/A}\\otimes_RB$ vanishes on $I^2$, so it descends to $R/I^2$ and, composed with $\\ell$, gives the degree-zero map by [def-weil-pbc-kahler-differentials]. These maps form a chain map $C(\\ell):C(P)\\to C(R)$.",
+   "uses": [
+    "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-localization-square-zero-lifting",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Algebra Tag 00S1 (lemma-NL-homotopy); localized polynomial comparison using Tag 04EG (lemma-localization-formally-etale) via the cited square-zero lifting leaf."
+   }
+  },
+  {
+   "text": "The two composites in Step 8 are homotopic to identities by Step 7. On $R$ compare $\\ell a:R\\to R/I^2$ with the quotient map; they have the same reduction to $B$, and induce $C(\\ell)C(a)$ and $1_{C(R)}$. In the other direction $a$ descends to $\\bar a:R/I^2\\to P/J^2$. Compare $\\bar a\\ell:P\\to P/J^2$ with the quotient map; they induce $C(a)C(\\ell)$ and $1_{C(P)}$. Thus $C(a)$ is a homotopy equivalence also when $P$ is a localization. Step 7 also says that all choices of $a$ give the same map in the homotopy category, hence the same map in the derived category [def-weil-abstract-derived-category]. Composing the canonical map $c$ of Steps 2–5 with $C(a)$ now defines the required canonical morphism $L_{B/A}\\to C(P)$, independent of every lift. It induces the asserted isomorphism on truncations, since Step 5 identifies the truncation with $C(R)$ and $C(a)$ is a homotopy equivalence.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08RB/08UP and Algebra Tag 00S1: derived comparison via mutually inverse presentation maps; localized case supplied by Step 8."
+   }
+  },
+  {
+   "text": "Finally consider any given diagram $A\\to A'$, $B\\to B'$, $P\\to P'$. Put $R'=A'[B']$ and choose lifts $a:R\\to P$, $a':R'\\to P'$. Let $s:R\\to R'$ be the standard map $X_b\\mapsto X_{b'}$. The composites $R\\xrightarrow{a}P\\to P'$ and $R\\xrightarrow{s}R'\\xrightarrow{a'}P'$ have the same reduction to $B'$. Step 7 gives a semilinear homotopy between their maps $C(R)\\to C(P')$. The canonical comparison $c$ commutes strictly with the standard resolution map by Step 5 and [lem-trf-cotangent-resolution-coherence]. Composing that strict square with this homotopy proves the required naturality square in the derived category (the target is regarded as a $B$-complex by restriction of scalars). The map $C(P)\\to C(P')$ is exactly the formula of Step 6, including for localized presentations. This proves all naturality assertions. The calculation only quotients $M_1$ by $\\operatorname{im}\\partial_2$; it makes no claim on the lower cohomology or any finite generation.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP and Algebra equation-functoriality-NL / Tag 00S1, with the explicit semilinear homotopy."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-localization-square-zero-lifting",
+  "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08RB and 08UP; explicit low-degree quotient calculation supplies the omitted verification, followed by Algebra Tag 00S1 and square-zero lifting for localized presentations."
+ },
  "mathlib_match": null,
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
@@ -88,6 +213,13 @@
    "results": "8 hits; top=['Algebra.SubmersivePresentation.cotangentEquiv_apply', 'Algebra.Extension.h1Cotangentι_apply', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'Algebra.Extension.cotangentComplex', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Extension.H1Cotangent', 'Algebra.Extension.CotangentSpace.map_cotangentComplex']; note=; digest=edf35fe61ee90ab4. Read full output in lem-trf-lci-naive-cotangent-model.search-results.txt. Candidates concern a presentation differential map, its H1, universal differentials, or generic simplicial objects; none states this full derived cotangent assertion. Read Extension/Cotangent/Basic.lean:53-65, 339-344; Etale/Basic.lean:44-49 and the relevant returned types.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "standard derived cotangent complex truncation to degrees minus one and zero equals conormal two term complex of a localized polynomial presentation naturally in ring maps",
+   "results": "['Algebra.Generators.cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl', 'Algebra.Generators.cotangentCompAwaySec', 'Algebra.Generators.cotangentCompAwaySec_apply', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl']; read Extension/Cotangent/LocalizationAway.lean:200-219. These identify conormal modules of a composite localization-away presentation, not the standard derived resolution or its truncation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
@@ -110,5 +242,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-lci-naive-cotangent-model",
+  "worker": "stage1",
+  "summary": "Proved the comparison directly using the first three terms of the standard free resolution: an explicit inverse identifies the cokernel of the incoming differential with the canonical conormal module. Reused the existing polynomial presentation homotopy theorem and localization square-zero lifting leaf for arbitrary localized polynomial presentations. Gave both difference-homotopy identities and the semilinear naturality square. No new nodes or change to the mathematical statement.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Natural projection to the two-term naive cotangent truncation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+    "why": "General polynomial-presentation homotopy equivalence (Stacks 00S1), used as a ring-theoretic tool below the unit route; no trace-formula step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-nl-presentations-homotopy-equivalent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-8d711beae",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-8d711beae (reviewer sub-agent of L); spot-checked: Read the complete packet, item, unit route, dependencies, AGENTS/stage instructions, delivery errors, and Stacks sources Tags 08RB/08UP, 00S1, and 04EG. All ten proof steps are mathematically sound, hypotheses and edge cases check, truncation and localized presentation maps are correctly oriented, searches and duplicate checks are adequate, and no new nodes, forbidden SGA, route-pivot machinery, batch-5 dependencies, or repairs are present. Review written to review.md."
  }
 }

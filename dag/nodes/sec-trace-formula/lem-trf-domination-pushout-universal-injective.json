@@ -12,9 +12,78 @@
   "def-weil-pbc-module-tensor-product",
   "lem-trf-universal-injective-finite-test"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=Q'\\oplus Q$ [def-weil-pbc-direct-sum-modules], $\\delta:P\\to D$, $\\delta(x)=(b(x),-a(x))$, and $E=D/\\delta(P)$ with quotient $\\pi:D\\to E$ [def-weil-pbc-quotient-module]. Define $j(y)=\\pi(y,0)$ and $k(z)=\\pi(0,z)$. Then $jb=ka$. For maps $u:Q'\\to T$, $v:Q\\to T$ satisfying $ub=va$, the linear map $(y,z)\\mapsto u(y)+v(z)$ kills $\\delta(P)$, so descends uniquely to $E\\to T$ with restrictions $u,v$; uniqueness holds because every class is $j(y)+k(z)$. Thus $E$ has the pushout universal property, the colimit of the finite span [def-weil-pbc-category-colimit]. The unique comparison $E\\to Q''$ preserving both legs is an isomorphism: the reverse comparison exists by the same property, and both composites fix the two legs, hence are identities. Under this isomorphism $j$ is the given $b'$. Also $P\\xrightarrow{\\delta}D\\xrightarrow{\\pi}E\\to0$ is exact since $\\pi$ is surjective with kernel $\\delta(P)$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, proof: explicit quotient pushout and its tensor-kernel sequence."
+   }
+  },
+  {
+   "text": "Fix an arbitrary $R$-module $L$ and write $h_L=h\\otimes_R\\mathrm{id}_L$ for every linear map $h$. The tensor universal property [def-weil-pbc-module-tensor-product] gives inverse linear maps $F:D\\otimes_RL\\to(Q'\\otimes_RL)\\oplus(Q\\otimes_RL)$ and $G$ by $F((y,z)\\otimes l)=(y\\otimes l,z\\otimes l)$ and $G(s,t)=(\\iota_1)_L(s)+(\\iota_2)_L(t)$, where $\\iota_1(y)=(y,0)$ and $\\iota_2(z)=(0,z)$. The composites are identities on pure tensors by $(y,z)=(y,0)+(0,z)$, and therefore everywhere by generation by pure tensors. In these coordinates $F\\delta_L(w)=(b_L(w),-a_L(w))$ and $\\pi_LG(s,0)=j_L(s)$; these identities follow on pure tensors and extend linearly.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, proof: explicit quotient pushout and its tensor-kernel sequence."
+   }
+  },
+  {
+   "text": "Apply tensor right exactness [lem-weil-pbc-tensor-right-exact] to the exact sequence $P\\xrightarrow{\\delta}D\\xrightarrow{\\pi}E\\to0$ of Step 1 and the arbitrary module $L$. It gives $\\ker\\pi_L=\\operatorname{im}\\delta_L$. Its hypotheses are exactly the surjectivity and kernel equality already checked; it requires neither $L$ flat nor $\\delta$ injective.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, tensoring the pushout; Tag 00DF, lemma-tensor-product-exact, used to justify the tensor-kernel computation."
+   }
+  },
+  {
+   "text": "We compute $\\ker j_L=b_L(\\ker a_L)$. If $j_L(s)=0$, Step 2 gives $\\pi_LG(s,0)=0$, and Step 3 supplies $w\\in P\\otimes_RL$ with $G(s,0)=\\delta_L(w)$. Applying $F$ yields $(s,0)=(b_L(w),-a_L(w))$, so $a_L(w)=0$ and $s=b_L(w)$. Conversely, if $a_L(w)=0$, Step 2 gives $G(b_L(w),0)=\\delta_L(w)$, and applying $\\pi_L$ gives $j_Lb_L(w)=0$ because $\\pi\\delta=0$. This proves both inclusions directly, without identifying $\\ker(a_L)$ with $(\\ker a)\\otimes_RL$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, proof: explicit quotient pushout and its tensor-kernel sequence."
+   }
+  },
+  {
+   "text": "For this $L$, Step 4 says $j_L$ is injective if and only if $b_L(w)=0$ for every $w\\in\\ker a_L$, equivalently $\\ker a_L\\subseteq\\ker b_L$. Quantifying over every $R$-module $L$ makes the latter condition exactly the definition of domination in the statement. The isomorphism $E\\simeq Q''$ from Step 1 remains an isomorphism after tensoring, since tensoring preserves compositions and identities [def-weil-pbc-module-tensor-product], so $j_L$ is injective exactly when $b'\\otimes\\mathrm{id}_L$ is. Finally the bilinear swap $V\\otimes_RL\\to L\\otimes_RV$, $v\\otimes l\\mapsto l\\otimes v$, has the reverse swap as inverse; on pure tensors it intertwines $b'\\otimes\\mathrm{id}_L$ and $\\mathrm{id}_L\\otimes b'$. Thus these injectivity tests are precisely the left-tensor tests for universal injectivity stated in the item. This proves both directions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, proof: explicit quotient pushout and its tensor-kernel sequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0AUM, lemma-domination-universally-injective, proof: explicit quotient pushout and its tensor-kernel sequence."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -36,10 +105,52 @@
    "results": "0 hits in Mathlib/CategoryTheory.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dominat|universally.injective|[Pp]ure.*[Mm]ono|pushout.*ker",
+   "results": "{\"t\": \"2026-10-17T22:03:47Z\", \"tool\": \"grep\", \"query\": \"dominat|universally.injective|[Pp]ure.*[Mm]ono|pushout.*ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"Mathlib/MeasureTheory/VectorMeasure/BoundedVariation.lean\", \"Mathlib/MeasureTheory/VectorMeasure/Integral.lean\", \"Mathlib/MeasureTheory/VectorMeasure/Integral.lean\", \"Mathlib/MeasureTheory/VectorMeasure/Integral.lean\", \"Mathlib/MeasureTheory/VectorMeasure/Integral.lean\", \"Mathlib/MeasureTheory/VectorMeasure/Integral.lean\", \"Mathlib/MeasureTheory/VectorMeasure/Prod.lean\"], \"digest\": \"a225bb77798fe7c8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary tensor right exactness or tensor-kernel/flatness statements, injective-module extension theorems, or set pushouts; none is this equivalence for module pushouts and all tensor tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For linear maps a and b with common domain the pushout map from the codomain of b is injective after every tensor product precisely when the tensor kernel of a is contained in that of b",
+   "results": "{\"t\": \"2026-10-17T22:03:48Z\", \"tool\": \"leansearch\", \"query\": \"For linear maps a and b with common domain the pushout map from the codomain of b is injective after every tensor product precisely when the tensor kernel of a is contained in that of b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.tensorKer\", \"LinearMap.lTensor_inj_iff_rTensor_inj\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"LinearMap.tensorKerEquiv\", \"Module.Invertible.lTensor_injective_iff\", \"TensorProduct.map_injective_of_flat_flat'\", \"LinearMap.kerLTensorEquivOfSurjective\", \"Module.Invertible.rTensor_injective_iff\"], \"digest\": \"161d0ed195c31941\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary tensor right exactness or tensor-kernel/flatness statements, injective-module extension theorems, or set pushouts; none is this equivalence for module pushouts and all tensor tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.rTensor, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-17T22:03:48Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.rTensor, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"rTensor_mkQ\", \"TensorProduct.map_ker\", \"Module.FaithfullyFlat.range_le_ker_of_exact_rTensor\"], \"digest\": \"360c4d90a7a963fe\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary tensor right exactness or tensor-kernel/flatness statements, injective-module extension theorems, or set pushouts; none is this equivalence for module pushouts and all tensor tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a pushout of modules the kernel of the inclusion is the image of the other map on the kernel; applying this after tensor product detects pure monomorphisms",
+   "results": "{\"t\": \"2026-10-17T22:03:49Z\", \"tool\": \"leanfinder\", \"query\": \"In a pushout of modules the kernel of the inclusion is the image of the other map on the kernel; applying this after tensor product detects pure monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.map_ker\", \"LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm\", \"Module.Flat.ker_lTensor_eq\", \"rTensor_mkQ\", \"lTensor_mkQ\", \"LinearMap.tensorKer_coe\", \"LinearMap.tensorKer\", \"LinearMap.tensorKer_tmul\"], \"digest\": \"dccf1d41175e4026\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary tensor right exactness or tensor-kernel/flatness statements, injective-module extension theorems, or set pushouts; none is this equivalence for module pushouts and all tensor tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pushout of module maps is universally injective exactly when one map dominates the other",
+   "results": "{\"t\": \"2026-10-17T22:03:50Z\", \"tool\": \"leanfinder\", \"query\": \"pushout of module maps is universally injective exactly when one map dominates the other\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.injective_iff\", \"Module.Injective.out\", \"IsLocalizedModule.injective_of_map_eq\", \"IsLocalizedModule.map_injective\", \"injective_of_isLocalized_span\", \"IsLocalizedModule.map_injective_iff_localizedModuleMap_injective\", \"Module.Injective.extension_property\", \"CategoryTheory.Limits.Types.pushoutCocone_inr_injective_of_isColimit\"], \"digest\": \"e26fd93c52a009f2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary tensor right exactness or tensor-kernel/flatness statements, injective-module extension theorems, or set pushouts; none is this equivalence for module pushouts and all tensor tests."
+  },
+  {
+   "tool": "grep",
+   "query": "dominat|universally.injective|pushout.*ker|ker.*pushout",
+   "results": "{\"t\": \"2026-10-17T22:04:01Z\", \"tool\": \"grep\", \"query\": \"dominat|universally.injective|pushout.*ker|ker.*pushout\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\"], \"digest\": \"28e419b3004ddc0f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary tensor right exactness or tensor-kernel/flatness statements, injective-module extension theorems, or set pushouts; none is this equivalence for module pushouts and all tensor tests."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-mittag-leffler-faithfully-flat-descent",
@@ -72,5 +183,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-domination-pushout-universal-injective",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Stacks Tag 0AUM using the explicit quotient pushout, a two-factor tensor comparison, existing Mathlib tensor right exactness, and both inclusions in the tensor-kernel identity. No new node: quotient and comparison calculations are elementary steps, not additional lemmas. No exact project attachment or Mathlib match for the whole equivalence was found.",
+  "blueprint": "Supporting algebraic input in the existing ancestry of lem-trf-local-term-locality (semistable-alteration/projectivity branch): realizes parent lem-trf-mittag-leffler-faithfully-flat-descent steps 4 and 6, which invoke Tag 0AUM. Steps 1-4 expand the quotient and tensor-kernel paragraphs of that source, and Step 5 expands its final equivalence. Historical from.node and via chain retained; no unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q77-28234640d",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-28234640d (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, item, cited nodes, unit/chapter route, and Stacks Tags 0AUM and 00DF. The quotient-pushout proof is correct; hypotheses, tensor order, base-change leg, edge cases, duplicates, searches, and route restrictions check out. No new nodes or repairs are needed. Full review written to review.md."
  }
 }

@@ -11,9 +11,55 @@
   "def-sc-finitely-presented-module",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The assumed tensor sequence is exact for every R-module Q, hence in particular its first map is injective for every finitely presented Q. After the canonical symmetry isomorphisms for tensor products over the commutative ring R, this is precisely the finitely-presented test condition in [lem-trf-universal-injective-finite-test] for the map i:A→B. Thus i⊗id_Q is injective for every finitely presented Q, and the full tensor sequence remains exact by the hypothesis.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-universal-injective-finite-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058K, theorem-universally-exact-criteria, (1) implies (2), restriction to finitely presented tensor tests."
+   }
+  },
+  {
+   "text": "Choose a finite presentation R^n --g₁--> R^m --g₂--> C -> 0, with g₂ surjective and g₂g₁=0. Lift g₂ through p to h₂:R^m -> B. Since p(h₂g₁)=g₂g₁=0 and ker p=i(A), there is h₁:R^n -> A with i h₁=h₂g₁. Write g₁(e_i)=∑_j a_{ij}d_j for bases (e_i) of R^n and (d_j) of R^m, and form the correctly oriented relation map t:R^m -> R^n by t(d_j)=∑_i a_{ij}e_i. Let Q=coker(t), which is finitely presented. The vector x=(h₁(e_i))_i∈A^n maps under i^n to (h₂g₁(e_i))_i=(∑_j a_{ij}h₂(d_j))_i, hence its class in B⊗_R Q is zero because the image of B⊗t is exactly the relations quotienting B^n. By the finitely-presented injectivity from [lem-trf-universal-injective-finite-test], the class of x in A⊗_R Q is zero. Exactness of A⊗R^m -> A⊗R^n -> A⊗Q -> 0 therefore gives z_j∈A with h₁(e_i)=∑_j a_{ij}z_j. Define k₁:R^m->A by k₁(d_j)=z_j; then k₁g₁=h₁. Put h₂' = h₂ - i k₁. Then h₂'g₁=0, so h₂' descends uniquely along g₂ to s:C -> B with s g₂=h₂'. Finally p s g₂=p h₂' = p h₂ = g₂, and surjectivity of g₂ gives p s=id_C. This is the (2)->(3)->(4)->(5) argument of Tag 058K with the relation matrix oriented as in its proof, applied to P=C and φ=id_C.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-universal-injective-finite-test",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058K, theorem-universally-exact-criteria, proof of (2) implies (3), (3) implies (4), and (4) implies (5), applied to P=C and φ=id_C."
+   }
+  },
+  {
+   "text": "For each b∈B, the element b-s(p(b)) lies in ker p=i(A), so injectivity of i gives a unique r(b)∈A with i(r(b))=b-s(p(b)). The uniqueness and linearity of this factor through i show that r:B -> A is R-linear. For a∈A, p(i(a))=0, hence i(r(i(a)))=i(a); injectivity of i gives r∘i=id_A. This is exactly the retraction form of the splitting asserted in Tag 058L.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058L, lemma-universally-exact-split, universally exact implies split; convert a section of p into a retraction of i."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-universal-injective-finite-test",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 058K and 058L: the finite-presentation lifting criterion for universally exact sequences, specialized to the identity of the quotient, followed by the section-to-retraction conversion."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-tensor-kernel-factorization",
@@ -93,5 +139,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-universally-exact-fp-split",
+  "worker": "stage1",
+  "summary": "Retained the imported statement and split its proof into the finite-tensor-test restriction, the finite-presentation lifting argument from Stacks Tag 058K, and the elementary conversion of a section of the quotient map into a retraction of the inclusion. No new nodes were needed and no exact project declaration or Mathlib leaf was found.",
+  "blueprint": "Realizes the Tag 058L universally-exact-split invocation in the supporting Tag 059D/059E algebra branch recorded under the inherited lem-trf-local-term-locality ancestry."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q129-950f41418",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q129-950f41418 (reviewer sub-agent of L); spot-checked: Reviewed item, cited nodes, unit/chapter route, Stacks Tags 058K/058L, edge cases, dependencies, searches, and repaired relation-map orientation. The proof is complete, hypotheses are preserved, and no route or duplication fault remains. Review written to review.md."
  }
 }

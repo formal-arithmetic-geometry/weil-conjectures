@@ -11,9 +11,58 @@
   "def-sc-finitely-presented-module",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "To prove flatness, apply [lem-weil-pbc-flat-fg-ideal-criterion]: it suffices to check, for an arbitrary finitely generated ideal $I\\subset R$, that the multiplication map $\\mu:I\\otimes_R\\prod_{a\\in A}Q_a\\to\\prod_{a\\in A}Q_a$ is injective. The coherence hypothesis in the statement says exactly that this $I$ is finitely presented as an $R$-module.",
+   "uses": [
+    "lem-weil-pbc-flat-fg-ideal-criterion",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CZ, proposition-characterize-coherent, proof of (1) implies (2), first paragraph; flatness criterion Tag 00HD"
+   }
+  },
+  {
+   "text": "By [lem-trf-finite-presentation-tensor-products], the canonical map $\\theta:I\\otimes_R\\prod_{a\\in A}Q_a\\to\\prod_{a\\in A}(I\\otimes_RQ_a)$, sending $i\\otimes(q_a)_a$ to $(i\\otimes q_a)_a$, is bijective because $I$ is finitely presented. For each $a$, flatness of $Q_a$ and [lem-weil-pbc-flat-fg-ideal-criterion] make the multiplication map $\\mu_a:I\\otimes_RQ_a\\to Q_a$ injective.",
+   "uses": [
+    "lem-trf-finite-presentation-tensor-products",
+    "lem-weil-pbc-flat-fg-ideal-criterion",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CZ, proposition-characterize-coherent, proof of (1) implies (2), second and third sentences"
+   }
+  },
+  {
+   "text": "Under $\\theta$, the map $\\mu$ is the product of the maps $\\mu_a$: on a pure tensor $i\\otimes(q_a)_a$ both send it to $(iq_a)_a$, and pure tensors generate the tensor product. The product map $\\prod_a\\mu_a$ is injective componentwise: if two families have equal images, their $a$-components are equal for every $a$ because each $\\mu_a$ is injective. Therefore $\\mu$ is injective. Since $I$ was arbitrary, [lem-weil-pbc-flat-fg-ideal-criterion] proves that $\\prod_{a\\in A}Q_a$ is flat. The argument also covers $A=\\varnothing$, where the product is the zero module and the product map has empty coordinate condition.",
+   "uses": [
+    "lem-trf-finite-presentation-tensor-products",
+    "lem-weil-pbc-flat-fg-ideal-criterion",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CZ, proof of (1) implies (2), final injectivity argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-finite-presentation-tensor-products",
+  "lem-weil-pbc-flat-fg-ideal-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05CZ, proposition-characterize-coherent, implication (1) implies (2), with Tag 00HD flatness criterion and Tag 059K tensor/product comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +101,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-product-noetherian-flat-mittag-leffler",
@@ -64,7 +113,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Ancestor proof (1)--(2), semistable-alteration input, through the final product argument in 05DJ and first sentence of Algebra 05D0, invoking 05CZ to obtain flatness.",
+   "place": "Tag 05CZ, proposition-characterize-coherent, proof of (1) implies (2): for a coherent ring and finitely generated ideal I, finite presentation makes I tensor the product equal to the product of I tensors, and flatness of each factor gives injectivity.",
    "via": [
     "lem-trf-product-noetherian-flat-mittag-leffler",
     "lem-trf-completion-flat-mittag-leffler",
@@ -85,5 +134,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-coherent-product-flat",
+  "worker": "stage1",
+  "summary": "Read Stacks Algebra Tag 05CZ and its flatness criterion Tag 00HD. The item is split into the ideal test, the finite-presentation tensor/product comparison, and the coordinatewise injectivity argument. No new nodes were needed: the finite-presentation comparison and flatness criterion already exist in the DAG. Empty index sets and zero modules are covered explicitly.",
+  "blueprint": "Realizes the inherited local-term-locality ancestor route at Tag 05CZ, proposition-characterize-coherent, implication (1) implies (2), including the finite-presentation comparison and the product of the factorwise multiplication injections.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-fg-ideal-criterion",
+    "why": "The item uses the generic finitely-generated-ideal characterization of flat modules (Tag 00HD), which is a Mathlib leaf imported under another unit and is not replaced by a route-specific node here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-fg-ideal-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q77-b204a881e",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-b204a881e (reviewer sub-agent of L); spot-checked: Mathematics and Stacks checks pass, including all hypotheses and empty-product cases. Corrected DAG metadata at fixes/dag/nodes/sec-trace-formula/lem-trf-coherent-product-flat.json: created.item and created.group incorrectly said lem-trf-product-noetherian-flat-mittag-leffler/Q11; fixed to this item/Q77.; 1 file(s) fixed by the reviewer"
  }
 }

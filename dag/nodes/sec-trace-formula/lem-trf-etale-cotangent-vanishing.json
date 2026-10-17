@@ -7,10 +7,54 @@
   "date": "2026-10-18",
   "group": "Q86"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Apply [lem-trf-etale-ring-map-weakly-etale] to the finite-presentation and square-zero lifting hypotheses. It gives flatness of $C$ over $R$ and flatness of the multiplication map $\\mu:C\\otimes_R C\\to C$.",
+   "uses": [
+    "lem-trf-etale-ring-map-weakly-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R2 (lemma-when-zero), case (5) and the reduction to case (1)"
+   }
+  },
+  {
+   "text": "Because $\\mu$ is surjective (every $c\\in C$ is the image of $c\\otimes1$) and flat by Step 1, [lem-trf-flat-epimorphism-derived-self-tensor] identifies $C\\otimes_{C\\otimes_R C}^{\\mathbf L}C$ with $C[0]$. Applying [lem-trf-derived-diagonal-cotangent-vanishing] to $C\\otimes_R C\\to C$ therefore gives $L_{C/(C\\otimes_R C)}=0$.",
+   "uses": [
+    "lem-trf-flat-epimorphism-derived-self-tensor",
+    "lem-trf-derived-diagonal-cotangent-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08R2 (lemma-when-zero), case (1), and 08R0 (lemma-derived-diagonal)"
+   }
+  },
+  {
+   "text": "Flatness of $C$ over $R$ makes $\\operatorname{Tor}^R_i(C,C)=0$ for every $i>0$. Together with the vanishing of $L_{C/(C\\otimes_R C)}$ from Step 2, [lem-trf-cotangent-bootstrap] applies and yields $L_{C/R}=0$. The cohomology formulation follows from the definition of the derived category.",
+   "uses": [
+    "lem-trf-cotangent-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R1 (lemma-bootstrap), followed by the cohomology criterion in Tag 08R2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-ring-map-weakly-etale",
+  "lem-trf-flat-epimorphism-derived-self-tensor",
+  "lem-trf-derived-diagonal-cotangent-vanishing",
+  "lem-trf-cotangent-bootstrap"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08R2 case (5), 08R0 and 08R1"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -82,5 +126,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-cotangent-vanishing",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Stacks Tag 08R2 case (5). Split the proof into the affine weakly-etale reduction, the flat-surjective derived self-tensor lemma, the derived-diagonal cotangent lemma, and the Tor bootstrap lemma; the four new nodes are statement-only and have no Mathlib match.",
+  "blueprint": "The three item steps realize the supporting ring/sheaf input named in the imported blueprint: Tag 08R2 case (5) reduces to the flat diagonal case (1), Tag 08R0 gives diagonal cotangent vanishing, and Tag 08R1 bootstraps to the original base. The imported ancestry is retained verbatim.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-345e6dd3b",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-345e6dd3b (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements, unit/chapter route, required instructions, and Stacks Tags 08R0, 08R1, 08R2 with edge-case checks. The proof chain and hypotheses are correct; searches, source locations, duplicate checks, route-pivot restrictions, and long-step rule pass. Review written to review.md."
  }
 }
