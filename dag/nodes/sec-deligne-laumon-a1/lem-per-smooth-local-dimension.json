@@ -13,9 +13,102 @@
   "def-pc-scheme-fibre",
   "def-kun-topological-dimension-at-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $p\\in P$ and put $q=g(p)$. The statement of [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] gives a non-negative integer $d=\\dim_p(P_q)$. By [sbc-lem-smooth-relative-dimension-locally-constant], choose an open neighbourhood $U\\subseteq P$ of $p$ such that $\\dim_a(P_{g(a)})=d$ for every $a\\in U$. This is a neighbourhood on the source; no constancy across different connected components of $P$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "sbc-lem-smooth-relative-dimension-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFF, lemma-smoothness-dimension, first sentence of proof; Tag 02G1, lemma-smooth-omega-finite-locally-free"
+   }
+  },
+  {
+   "text": "Let $h=g|_U:U\\to Q$. By [lem-pc-smooth-flat], $g$ is flat and locally of finite presentation. An open subscheme has the restricted structure sheaf [def-weil-open-immersion], so its stalk at $a\\in U$ is the stalk of $P$ at $a$; the stalk map of $h$ is consequently the stalk map of $g$, hence flat by [def-weil-flat-morphism]. Also $U$ is locally Noetherian by the open-subscheme clause of [pqf-def-locnoeth]. For any affine open $V\\subseteq Q$, cover $h^{-1}(V)$ by affine opens $W$ of $U$, which are also affine opens of $P$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], each corresponding algebra is a quotient of a polynomial algebra over $\\mathcal O_Q(V)$ in finitely many variables. The images of those variables generate it. This is exactly the affine-cover condition of [def-weil-finite-type-morphism], so $h$ is locally of finite type. No finite subcover is used.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFF, proof: flat and locally of finite type; Tags 01VF, 01VE and 01TQ (1) implies (2)"
+   }
+  },
+  {
+   "text": "For any $a\\in U$ put $b=g(a)$. By the topological description in [def-pc-scheme-fibre], the underlying spaces of $U_b$ and $P_b$ are respectively $U\\cap g^{-1}(b)$ and $g^{-1}(b)$, with their subspace topologies. Thus $U_b$ is an open subspace of $P_b$ containing the point corresponding to $a$. The open-subspace equality [lem-weil-pbc-dimension-at-point-open-subspace] gives $\\dim_a(U_b)=\\dim_a(P_b)=d$, the last equality being Step 1. Consequently every point of every nonempty fibre of $h$ has local topological dimension $d$. Empty fibres require no assertion.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFF, proof: after shrinking, relative dimension d; Topology Tag 0055, definition-Krull and following remark"
+   }
+  },
+  {
+   "text": "Apply [lem-per-flat-constant-relative-dimension] to $h:U\\to Q$ and $d$. Both schemes are locally Noetherian, $h$ is flat and locally of finite type by Step 2, and its fibre dimensions at all points are $d$ by Step 3. Since $p\\in U$ and $h(p)=q$, it yields $\\dim_p U=\\dim_q Q+d$. No claim that $h$ is surjective is needed by the cited statement.",
+   "uses": [
+    "lem-per-flat-constant-relative-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFF, final sentence of proof, applying Tag 0AFE (lemma-rel-dimension-dimension)"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-dimension-at-point-open-subspace] for the open neighbourhood $U$ of $p$ in $P$: $\\dim_p P=\\dim_p U$. Substitution in Step 4, followed by $d=\\dim_p(P_q)$ from Step 1, gives $\\dim_p P=\\dim_q Q+\\dim_p(P_q)$ as required. These are equalities in the extended nonnegative dimensions, so the substitution also applies when $\\dim_q Q=+\\infty$.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFF, conclusion; Topology Tag 0055, definition-Krull and following remark"
+   }
+  },
+  {
+   "text": "If $g$ is smooth of constant relative dimension $e\\geq0$, [def-sbc-smooth-morphisms] says precisely that $\\dim_p(P_q)=e$ at every $p$, so the last summand is $e$. The dimension used throughout is the neighbourhood minimum of [def-kun-topological-dimension-at-point]; no equality with the dimension of the local ring has been used. If $P$ is empty, both assertions quantified over $p\\in P$ are vacuous.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G2, definition-smooth-relative-dimension; paragraph preceding Tag 0AFF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-pc-smooth-flat",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-per-flat-constant-relative-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AFF, lemma-smoothness-dimension; neighbourhood and affine-cover details made explicit using Tags 0055 and 01TQ"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +144,52 @@
    "results": "AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.relativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(smooth|Smooth).*(krullDim|KrullDim|localDim)|(krullDim|KrullDim|localDim).*(smooth|Smooth)",
+   "results": "No hits; grep directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"dim\"",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.id; Algebra.IsStandardSmoothOfRelativeDimension; Algebra.IsStandardSmooth.relativeDimension; Algebra.instIsStandardSmoothOfRelativeDimensionOfNatNatOfSubsingleton; Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth; Algebra.IsStandardSmoothOfRelativeDimension.localization_away; Algebra.IsStandardSmoothOfRelativeDimension.mvPolynomial; Algebra.IsStandardSmoothOfRelativeDimension.of_algEquiv",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism of locally Noetherian schemes the topological local dimension of the source equals the local dimension of the base plus the dimension of the fibre",
+   "results": "AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; Algebra.IsStandardSmooth.relativeDimension; AlgebraicGeometry.isSmoothOfRelativeDimension_comp; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local topological dimension of the source of a smooth morphism equals local dimension of the target plus local dimension of its fibre",
+   "results": "AlgebraicGeometry.isSmoothOfRelativeDimension_comp; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.IsSmooth.recOn; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway; RingHom.IsStandardSmoothOfRelativeDimension.comp; Algebra.IsStandardSmoothOfRelativeDimension.trans",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension formula for smooth maps of schemes at a point using minimum dimensions of open neighborhoods",
+   "results": "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; Algebra.IsStandardSmooth.relativeDimension; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.isSmooth_iff; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|localDimension|dimensionAt|rel.*[Dd]imension.*[Dd]imension",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-smooth-pullback-support-dimension",
@@ -73,5 +208,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-smooth-local-dimension",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0AFF: choose a constant fibre-dimension neighbourhood using existing smooth local constancy, verify flatness and local finite type after restriction, apply the new general flat dimension formula 0AFE, and transfer back through an open neighbourhood. Statement unchanged; all other inputs already have nodes.",
+  "blueprint": "Realizes the first proof paragraph of lem-per-smooth-pullback-t-exact, through lem-per-smooth-pullback-support-dimension: the geometric increase of support dimension under smooth pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Only its assertion that the local fibre dimension is a non-negative integer is used; this is the generic 02G1 geometry input, not a different perverse-sheaf proof route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Transfers local topological dimensions across the chosen open neighbourhood in the source and in each fibre; no node of the Fourier/perverse unit supplies this generic topological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-0d6b3566d",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-0d6b3566d (reviewer sub-agent of L); spot-checked: I read the mathematics in full. I checked Stacks morphisms.tex Tag 0AFF (lemma-smoothness-dimension, line 7572) and Tag 0AFE (lemma-rel-dimension-dimension, line 5679), both statement and proof, and the definition of relative dimension d (line 5564). The item states 0AFF exactly, with topological local dimensions and nothing weakened. Steps 1-6 follow the 0AFF proof and each is supported by the statements it cites. Step 1: the differentials node gives the finite d and the locally-constant node gives U; def-kun-dimension and def-kun-topological-dimension-at-point are the same formula. Step 2: restricting to the open U keeps flatness (same stalk maps), local Noetherianity and local finite type (01TQ leaf applied to affines W in U). Step 3: the fibre over b is open in the full fibre by def-pc-scheme-fibre, and the open-subspace lemma gives fibre dimension d. Steps 4-5 apply 0AFE and transfer back to P; this holds in extended naturals, so dim_q Q = infinity is covered. The new node lem-per-flat-constant-relative-dimension keeps all of 0AFE's hypotheses; writing relative dimension pointwise is equivalent for fibres locally of finite type over a field. It meets B1-B9 and is not a restatement of the item: it also covers the non-smooth Spec k[eps]/eps^2 -> Spec k. I found no duplicate in the DAG (checked 02JS, 00ON, 00OH, 01UA and the 00OM-based nodes) or in the main-20261015 blueprint. Small cases checked: A^1_k (including its generic point), A^1 over a DVR, Spec K -> Spec R, D(pi t-1), Spec k[eps], and a closed point embedded in A^1 (excluded by flatness). I accept both tool_uses; the two cited closures are slopmaster2-closed. No SGA citation. No changes."
  }
 }

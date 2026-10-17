@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-trace",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The trace function, and the classical Fourier transform",
@@ -13,6 +13,7 @@
   "place": "node sk-def-trace, order 3032"
  },
  "stmt_deps": [
+  "def-fd-trace-function",
   "sk-def-char",
   "sk-def-fourier-set"
  ],
@@ -21,7 +22,7 @@
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -87,5 +88,20 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "sk-def-trace",
+  "worker": "stage1",
+  "summary": "Definition-only split with no new nodes. I checked the current main-20261015 blueprint text, the existing def-fd-trace-function node, the dependent character and Fourier-setting definitions, and the slopmaster2 source. The trace clause is supplied by the existing def-fd-trace-function node; sk-def-char supplies the finite-field character ψ_n and sk-def-fourier-set supplies the coefficient and finite-type setting. The two source declarations found are only partial: FiniteField.fourierTransform gives the generic finite-field specialization of the classical sum, while AlgebraicGeometry.WeilComplex.traceFunction gives a bounded PadicAlgCl trace definition, neither states this combined sketch definition verbatim. No proof steps or new nodes are needed.",
+  "blueprint": "Realizes the complete definition in main-20261015 blueprint sk-def-trace (order 3032): the trace-function clause via the existing def-fd-trace-function node and the classical finite-field Fourier-transform clause via the existing sk-def-char/sk-def-fourier-set conventions."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-efc76a514",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-efc76a514 (reviewer sub-agent of L); spot-checked: I read the item in full: it is a definition only, with no new nodes. Its statement is word for word the current blueprint (main-20261015 sk-def-trace/_section.md, order 3032): the trace-function clause t_K(x)=Tr(F_x^(n)|K_xbar)=sum_j (-1)^j Tr(F_x^(n)|H^j(K)_xbar) for a Weil complex at an F_{q^n}-point, plus the classical transform fhat(y)=sum_x f(x) psi_n(xy). No hypothesis was added or dropped. Its three citations each say what the item takes from them: def-fd-trace-function (the blueprint child, order 3033) states the trace clause exactly; sk-def-char defines psi_n = psi∘Tr; sk-def-fourier-set fixes k_0=F_q, E, and separated finite-type schemes. I tested small cases: with q=2, n=1, the transform of delta_0 is the constant 1 and the transform of the constant 1 is 2·delta_0; the zero complex has trace 0; a shift flips the sign; n=1 is the first Frobenius iterate. A search of dag/nodes finds no other definition of the classical transform, and the item does not depend on itself. lean_audit closed_part is right: FiniteField.fourierTransform and WeilComplex.traceFunction each cover only one clause, and LAdicWeilSheaf.traceFunction is missing. One cosmetic point: the report's Classical.lean line numbers (50–56) differ from the current checkout (41–42). Batch-5 flag: the citation adds only def-fd-trace-function and def-weil-local-frobenius-trace to the item's closure; the lem-pod nodes were already reached through sk-def-fourier-set. def-weil-local-frobenius-trace is a general definition of the local Frobenius and its alternating trace. The same notion appears in the statement of nt-assume-trace-formula, and it is not a step in the proof of the trace formula or of Poincaré duality, so it is outside the assumed statements and is not a reason to return. No fixes, no tool_uses."
  }
 }
