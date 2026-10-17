@@ -413,6 +413,7 @@ public import WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransportB
 public import WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransportNaturality
 public import WeilConjectures.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Homology.KFlatClosure
+public import WeilConjectures.Algebra.Homology.KFlatComparison
 public import WeilConjectures.Algebra.Homology.KFlatConeTrianglePresentation
 public import WeilConjectures.Algebra.Homology.KFlatLocalizedTensorComparisonNatural
 public import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
