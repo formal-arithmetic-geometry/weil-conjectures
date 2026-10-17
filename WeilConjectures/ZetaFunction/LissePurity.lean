@@ -34,10 +34,13 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-  {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
+
+section
+
+variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- The Deligne–Laumon estimate for compactly supported cohomology: for a separated `k₀`-scheme
 `X₀` of finite type and a Weil sheaf `F` mixed of weights at most `w`, `H_c^i(X₀ ⊗ k̄, F)` has
@@ -47,6 +50,8 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology {F : WeilSheaf k₀ l 
     (hF : F.IsMixedOfWeightsAtMost ι w) (i : ℤ) :
     (F.compactlySupportedCohomology i).HasWeightsAtMostOver k₀ ι (w + i) :=
   sorry
+
+end
 
 /-- **Purity for lisse coefficients** (the absolute case of
 `prop-zl-smooth-proper-relative-purity`): for `X₀` smooth and proper of pure dimension `d` over

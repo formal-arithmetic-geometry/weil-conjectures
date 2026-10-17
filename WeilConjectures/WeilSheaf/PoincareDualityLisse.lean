@@ -58,8 +58,8 @@ theorem exists_isPerfPair_compactlySupportedCohomology_dual (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse) (i j : ℤ) (h : i + j = 2 * d) :
     ∃ P : (F.compactlySupportedCohomology i).carrier →ₗ[PadicAlgCl l]
-        (((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)).cohomology j).carrier →ₗ[PadicAlgCl l]
-          PadicAlgCl l,
+        (((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)).cohomology j).carrier →ₗ[
+          PadicAlgCl l] PadicAlgCl l,
       P.IsPerfPair ∧ ∀ x y, P ((F.compactlySupportedCohomology i).frobenius x)
         ((((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)).cohomology j).frobenius y) =
           P x y :=
