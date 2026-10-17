@@ -56,15 +56,15 @@ instance : IsIso (openImmersionCompactificationHom j) := by
 instance : IsProper (openImmersionCompactificationHom j).left :=
   inferInstanceAs (IsProper (𝟙 X.left))
 
-omit [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] in
+omit [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 lemma isPullback_openImmersionCompactificationHom :
     IsPullback (𝟙 U) j (Compactification.ofIsOpenImmersion j.left).overI
       (openImmersionCompactificationHom j) :=
   IsPullback.of_horiz_isIso ⟨by ext; simp [openImmersionCompactificationHom]; rfl⟩
 
-omit [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] in
+omit [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 lemma openImmersionCompactificationHom_comp_overG :
     openImmersionCompactificationHom j ≫ (Compactification.ofIsOpenImmersion j.left).overG =
       𝟙 X := by

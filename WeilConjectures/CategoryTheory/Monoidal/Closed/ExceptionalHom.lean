@@ -193,6 +193,7 @@ theorem homMate_comp_exceptionalHomMap (M N : D) [IsIso ((pf.app (𝟙_ C)).app 
     IsIso.inv_hom_id_assoc, uncurry_homMate, Adjunction.homEquiv_counit, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_assoc, ← Adjunction.homEquiv_counit, Equiv.apply_symm_apply]
 
+omit [MonoidalClosed C] [MonoidalClosed D] in
 /-- Naturality of `leftProjection` in the object `M`. -/
 @[reassoc]
 lemma leftProjection_naturality_left {M M' : D} (a : M' ⟶ M) (T : C) :
@@ -203,6 +204,7 @@ lemma leftProjection_naturality_left {M M' : D} (a : M' ⟶ M) (T : C) :
   rw [BraidedCategory.braiding_naturality_left_assoc, reassoc_of% h, ← P.map_comp,
     ← P.map_comp, BraidedCategory.braiding_naturality_right]
 
+omit [MonoidalClosed C] in
 /-- The class bijection is natural in the target `N` (blueprint `lem-trf-correspondence-class`). -/
 lemma correspondenceClassEquiv_naturality_right (M : D) {N N' : D}
     [IsIso ((pf.app (𝟙_ C)).app M)] (b : N ⟶ N') (g : P.obj (𝟙_ C) ⟶ (ihom M).obj N) :
@@ -212,6 +214,7 @@ lemma correspondenceClassEquiv_naturality_right (M : D) {N N' : D}
     ← Adjunction.homEquiv_naturality_right]
   simp only [Category.assoc]
 
+omit [MonoidalClosed C] in
 /-- The class bijection is natural in the source `M` (blueprint `lem-trf-correspondence-class`):
 precomposing a class with `RHom(a, N)` corresponds to precomposing with `F a`. -/
 lemma correspondenceClassEquiv_naturality_left {M M' : D} (N : D)
@@ -230,6 +233,7 @@ lemma correspondenceClassEquiv_naturality_left {M M' : D} (N : D)
   rw [← cancel_epi (leftProjection pf M' (𝟙_ C)), IsIso.hom_inv_id_assoc, hρ, ← reassoc_of% h,
     IsIso.hom_inv_id_assoc]
 
+omit [MonoidalClosed C] in
 /-- `correspondenceClassEquiv_naturality_right` conjugated by a morphism `A ⟶ F M` and a natural
 isomorphism `G ≅ H ⋙ S`, in the form used for the concrete six functors. -/
 lemma correspondenceClassEquiv_naturality_right_conj (M : D) [IsIso ((pf.app (𝟙_ C)).app M)]
@@ -243,6 +247,7 @@ lemma correspondenceClassEquiv_naturality_right_conj (M : D) [IsIso ((pf.app (�
   rw [correspondenceClassEquiv_naturality_right, Category.assoc, Category.assoc,
     Category.assoc, h]
 
+omit [MonoidalClosed C] in
 /-- `correspondenceClassEquiv_naturality_left` conjugated by a natural isomorphism `G ≅ H ⋙ F`
 and a morphism `S N ⟶ B`, in the form used for the concrete six functors. -/
 lemma correspondenceClassEquiv_naturality_left_conj (N : D) {E' : Type*} [Category E']
