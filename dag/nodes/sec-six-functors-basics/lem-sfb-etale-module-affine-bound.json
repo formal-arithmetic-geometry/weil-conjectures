@@ -16,7 +16,8 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
   "def-sp-injective-resolutions",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence"
  ],
  "proof": [
   {
@@ -255,5 +256,23 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-5bd05ede4 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement. Step 1: N=ℓ^a kills every section, so F is torsion in the sense of def-weil-pbc-etale-sheaves. Step 2: étale implies weakly étale (det-pe-morphisms-etale-comparison (1)), and the one-object presentation of W meets every condition of sk-def-pe-morphisms; the blueprint unit proof itself says 'W (with the constant presentation)'. Step 3: det-pe-unbounded-classical-bounds (1) with Y=X and g=id; e_X matches, including the empty convention. Step 4: lem-weil-pbc-comparison-pullback plus lem-cbc (Stacks 099W, proetale.tex l.3986, part (1); any abelian sheaf, i≥0, and q>e_X≥1). Step 5: lem-pe-constant-left-module-inverse-image (00YV) gives (w^{-1}G)_ab=F_W, consistent with def-weil-pbc-inverse-image acting on module sheaves. Step 6: enough injectives and the ringed-site evaluation comparison (Stacks 03FD, sites-cohomology.tex l.1862, 'any object U'), which is exactly the item's H^q_A. The statement is exactly what parent lem-sfb-unbounded-site-comparison step 5 uses, and it is not weakened. Edge cases tested: X empty, W empty, A=0, a point over F_q or k̄, and non-constructible or non-flat G. No cycle: no cited node's closure reaches the item. I searched for duplicates (thm-sc-finite-type-torsion-cd, lem-sfb-classical-module-affine-evaluation-bound, the bounds node, sk-def-cd) and found none stating the étale module bound. There are no new nodes and no SGA citations. TeX, proof_deps and the 10 recorded searches are in order. Tool uses accepted: det-pe-morphisms-etale-comparison, lem-weil-pbc-comparison-pullback, lem-cbc-abelian-etale-proetale-cohomology-comparison, lem-pe-constant-left-module-inverse-image, lem-weil-pbc-module-sheaves-enough-injectives, lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison. det-pe-unbounded-classical-bounds is on the unit route, since sk-prop-ctf-finite-comparison uses sk-prop-pe-unbounded-classical, so declaring it was redundant but harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleAffineBound",
+  "declaration": "AlgebraicGeometry.etaleModule_affine_cohomology_isZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleAffineBound.lean",
+  "statement": "theorem etaleModule_affine_cohomology_isZero {k : Type u} [Field k] (hk : Finite k ∨ IsAlgClosed k) (ℓ : ℕ) (hℓ : ℓ.Prime) (hℓk : IsUnit (ℓ : k)) (A : Type (u + 1)) [CommRing A] [Finite A] (a : ℕ) (ha : 1 ≤ a) (hA : (ℓ : A) ^ a = 0) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (W : X.Etale) [IsAffine W.left] (G : ringedSiteModules.{u + 1} (Scheme.etaleConstantModuleRing X A)) (q : ℤ) (hq : (2 * ((topologicalKrullDim X).unbotD 0).toNat + 1 : ℕ) < q) (I : InjectiveResolution ((Scheme.etaleConstantModuleFunctor W.left A).obj ((Etale.upperStar (ModuleCat.{u + 1} A) W.hom).obj ((Scheme.etaleConstantModuleRestrictionFunctor X A).obj G)))) : IsZero ((((SheafOfModules.evaluation (Scheme.etaleConstantModuleRing W.left A) (op (Scheme.Etale.mk (𝟙 W.left)))).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology q.toNat)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d76ea0a9",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Every clause matches the node, quantifier order included: field finite or algebraically closed; prime l with IsUnit (l:k); finite CommRing A in Type (u+1) with (l:A)^a=0 and a>=1; X locally of finite type and quasi-compact over Spec k; W : X.Etale with IsAffine W.left; d_X=((topologicalKrullDim X).unbotD 0).toNat (0 for empty X); integer q > 2d_X+1, used at q.toNat; arbitrary ringedSiteModules G over the constant ring sheaf A_X. Module inverse image = recorded constant-ring equivalence around the recorded Etale.upperStar (fixed-coefficient reading of def-weil-pbc-inverse-image); conclusion: IsZero of homology of an arbitrary InjectiveResolution evaluated at the terminal object of W_et. No extra hypotheses, no private notions, no duplicate found; universes forced by the recorded interfaces and matching the citer lem-sfb-unbounded-site-comparison. Non-public imports are exactly the recorded proof-dependency modules. Gates: sorry-only proof, source/blueprint docstrings with all six proof steps, lines <=100, both report sections present. Compile: nt_compile.py retry clean (EtaleModuleAffineBound 18.2 s; the first try timed out in overlay dependency KFlat under load); lcompile.py against the live build exit 0. Proof-stage note only: the enough-injectives (ULift) and evaluation-comparison (SmallCategory) interfaces will need transports."
  }
 }

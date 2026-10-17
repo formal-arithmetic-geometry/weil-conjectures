@@ -11,7 +11,8 @@
   "lem-coef-simplicial-boundary-collapse-test",
   "def-coef-simplicial-tensor-cotensor",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-model-nerve-localization"
  ],
  "proof": [
   {
@@ -297,5 +298,24 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-1793a9ca8 (reviewer sub-agent of L); spot-checked: I read the item, all 7 cited statements, the parent's Step 4, the unit record and blueprint paragraph 2 in full. The statement is true (simplicial model category with every object cofibrant; f is a weak equivalence iff Map(f,Z) is a weak homotopy equivalence for every fibrant Z; no properness assumed). It matches what the parent takes from it. HTT A.3.1 is not archived and proof_origin is agent with a WANTED line, which is correct. Steps 1–7 check: in Step 1 the tensor transposition and SM7 on 0->T give the lifting classes, Map(0,E) is terminal via the cotensor, and {0}->Delta^1 is the horn Lambda^1_0. In Step 2 C_T is a good cylinder: e0 is in W and c is in W by two-out-of-three. In Step 3 Y and E are cofibrant and the lift square commutes (p.sp = p = p.c_E.e_k). In Step 4 (sp)^* = p^*s^* and s^*p^* = id, simplicial-homotopy-equivalence-weak allows either orientation, and f^* = i^*p^* with i^* a trivial Kan fibration. Step 5 computes pi_0 elementarily, including empty K. In Step 6 localized-good-homotopy-test applies to both C_T and I_T, so both cylinder relations equal equality after the localization; edges of Map(T,Z) are exactly C_T-homotopies, which gives h_I(T,Z) = pi_0 Map(T,Z) compatibly with f^*. In Step 7 the converse is in the statement of fixed-cylinder-detection itself. No cycle. No duplicate in the DAG: I compared simplicial-model-target-test, all-cofibrant-simplicial-recognition, cofibration-local-mapping-test, simplicial-mapping-localization, model-cylinder-whitehead, and others. No new nodes. Mathlib has no simplicial model categories. Accepted tool use: lem-cbc-simplicial-homotopy-equivalence-weak, a generic simplicial-homotopy fact that replaces no unit step. Fix: Step 2 had an empty uses list although it relies on the tensor adjunction and the model axioms; I added def-coef-simplicial-tensor-cotensor and lem-coef-simplicial-boundary-collapse-test. Both were already in proof_deps, which still equals the union of the step uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.AllCofibrantMappingDetection",
+  "declaration": "CategoryTheory.all_cofibrant_mapping_detection",
+  "file": "lean/Sheaf/AlgebraicTopology/AllCofibrantMappingDetection.lean",
+  "statement": "theorem all_cofibrant_mapping_detection {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [SimplicialCategory M] (_T : SimplicialTensorCotensor M) (_hSM7 : SatisfiesSM7 M) (_hall : ∀ T : M, IsCofibrant T) {X Y : M} (f : X ⟶ Y) : WeakEquivalence f ↔ ∀ Z : M, IsFibrant Z → SSet.Enhanced.IsWeakHomotopyEquivalence (eHomWhiskerRight SSet f Z)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed SimplicialModelLocalization.SatisfiesSM7 and its canonical cornerMap; the owning node is added to stmt_deps solely for these existing definitions. No localization theorem is assumed in the signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-834b1e19e",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Clause-by-clause match: ModelCategory+HasLimits/HasColimits+both functorial factorizations (boundary-collapse conventions), SimplicialCategory, recorded SimplicialTensorCotensor (K:SSet.{v}), landed SatisfiesSM7 (J.rlp of the canonical cornerMap into Map(A,E)x_{Map(A,D)}Map(B,D), plus weak homotopy equivalence when i or p is weak, equivalent to trivial Kan fibration by the Kan-Quillen dep), all objects cofibrant, arbitrary f, WeakEquivalence f iff for all fibrant Z IsWeakHomotopyEquivalence(eHomWhiskerRight SSet f Z), with the correct precomposition direction. Universes u,v independent; no properness or smallness added. Node diff vs side clone: only lean and stmt_deps; statement byte-identical; added landed stmt_dep lem-coef-simplicial-model-nerve-localization permitted by brief-stage2 l.140, acyclic by reachability check. lean.statement verbatim; docstrings carry source, blueprint tag and 7 proof steps; sorry only; no defs; lines <=100; proof-only imports follow the add_proof_imports convention. Not duplicates: CofibrationLocalMappingTest, SimplicialModelTargetTest. nt_compile.py: 60 s overlay timeout at load ~280 (KFlat); the identical script with a raised limit gave rc=0 on 30 files, all under 60 s; item 25.8 s, no errors or warnings. The Second reading section is the tool-standard direct-delivery note."
  }
 }
