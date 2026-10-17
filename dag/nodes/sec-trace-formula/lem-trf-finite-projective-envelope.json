@@ -18,9 +18,137 @@
   "def-pc-scheme-fibre",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine presentation $B=\\operatorname{Spec}A$ and put $Q=\\mathbf P^d_B$, with structure map $q$. By [lem-weil-pbc-projective-space-standard-charts], its standard opens $Q_i=D_+(X_i)$, $0\\le i\\le d$, cover $Q$ and are affine spaces of dimension $d$ over $B$. The polynomial coordinates identify $Q_0$ with $\\mathbf A^d_B$ of [def-nagata-relative-affine-space]. Write $u:\\mathbf A^d_B\\hookrightarrow Q$ for this open chart. The projection $q$ is proper by [lemma-nagata-projective-space-base-change-proper]. In particular it is quasi-compact and separated, so [lem-weil-pbc-qcqs-over-affine] shows that $Q$ is quasi-compact and quasi-separated. The source $\\mathbf A^d_B=\\operatorname{Spec}A[z_1,\\ldots,z_d]$ of $u$ is affine, hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]; since its target $Q$ is quasi-separated, clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] shows that $u$ is quasi-compact. (Concretely, $u^{-1}(Q_i)$ is the principal open of $Q_0$ where $X_i/X_0$ is invertible.)",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-nagata-relative-affine-space",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NG (lemma-standard-covering-projective-space); affine chart calculation; properness Tag 01WC"
+   }
+  },
+  {
+   "text": "Let $h:T\\to\\mathbf A^d_B$ be the given finite morphism and set $f=u\\circ h:T\\to Q$. By [def-weil-finite-integral-morphism], $h$ is affine; since $\\mathbf A^d_B$ is affine, clause (2) of [lem-weil-pbc-affine-morphism-permanence] makes $T$ affine. Hence $f$ is separated by [lem-weil-pbc-affine-source-morphism-separated]. By [pqf-lem-finite-qf], $h$ is quasi-finite, in particular of finite type. The quasi-compact open immersion $u$ is of finite type by [lem-weil-pbc-qc-open-immersion-finite-type], so [lem-sfb-finite-type-composition-base-change] makes $f$ of finite type. Over a point of $Q_0$ the fibre of $f$ is the corresponding fibre of $h$, while over a point outside $Q_0$ it is empty: this follows by pulling back the open-subscheme identification in [def-weil-open-immersion]. Every point of each fibre is therefore isolated by the quasi-finiteness of $h$. This is exactly quasi-finiteness of $f$ by clause (3) of [pqf-def-quasifinite]. Moreover $f$ is quasi-finite at every point in the sense of clause (1): write $T=\\operatorname{Spec}C$; then $U=T$ and the affine open $V=Q_0=\\operatorname{Spec}A[z_1,\\ldots,z_d]$ of $Q$ satisfy $f(U)\\subset V$, the ring map $A[z_1,\\ldots,z_d]\\to C$ is module-finite by [def-weil-finite-integral-morphism] (as $h^{-1}(\\mathbf A^d_B)=T$), and [lem-weil-pbc-finite-ring-map-quasi-finite] makes it of finite type and quasi-finite at every prime of $C$. So $f$ is everywhere quasi-finite in either reading of the hypothesis of [thm-pqf-zmt-factorization].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "pqf-lem-finite-qf",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-open-immersion",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-finite-ring-map-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05K0 (lemma-quasi-finite-separated-pass-through-finite), checking its hypotheses for the standard affine chart"
+   }
+  },
+  {
+   "text": "Apply [thm-pqf-zmt-factorization] to $f:T\\to Q$. Step 1 supplies the required quasi-compact and quasi-separated target, and Step 2 supplies separatedness, finite type and quasi-finiteness. We obtain a scheme $P$, a quasi-compact open immersion $j:T\\hookrightarrow P$, and a finite morphism $r:P\\to Q$ with $r\\circ j=f$. Define $p=q\\circ r$. Finiteness makes $r$ proper by [lem-weil-pbc-finite-proper]; properness of $q$ from [lemma-nagata-projective-space-base-change-proper] and [lem-weil-pbc-proper-composition] make $p$ proper. The factorization equation gives $p\\circ j=q\\circ u\\circ h$, which is the given structural morphism of $T$ over $B$.",
+   "uses": [
+    "thm-pqf-zmt-factorization",
+    "lem-weil-pbc-finite-proper",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05K0 (lemma-quasi-finite-separated-pass-through-finite); properness of finite maps and composition"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-projective-ample-invertible] with $X=Q$ and the identity closed immersion into $\\mathbf P^d_A$. It gives an ample invertible sheaf on $Q$, without any Noetherian hypothesis on $A$. By [lem-trf-finite-projective-bundle], the finite map $r$ is projective in the projective-bundle sense. Since its target $Q$ admits that ample sheaf, [lem-trf-projective-bundle-to-h-projective] makes $r$ H-projective. The projection $q$ is H-projective by [def-kun-projective], using the identity embedding of $Q$ into $\\mathbf P^d_B$. Therefore [lem-trf-h-projective-composition] makes $p=q\\circ r$ H-projective. Step 3 already proves $p$ proper, hence quasi-compact; together with H-projectivity this is projectivity in exactly the convention of [def-pc-projective-morphism].",
+   "uses": [
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-projective-bundle-to-h-projective",
+    "def-kun-projective",
+    "lem-trf-h-projective-composition",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I (lemma-finite-projective), 087S (lemma-projective-over-quasi-projective-is-H-projective), and 01WE (lemma-H-projective-composition)"
+   }
+  },
+  {
+   "text": "Fix $b\\in B$ and put $k=\\kappa(b)$. The fibre $P_b$ is $P\\times_Q Q_b$, where $Q_b=\\mathbf P^d_k$, by the fibre-product universal property and [lemma-nagata-projective-space-base-change-pullback]. Thus $r_b:P_b\\to Q_b$ is finite by [lem-trf-finite-radicial-basechange]. The standard charts $V_i\\cong\\operatorname{Spec}k[z_1,\\ldots,z_d]$ cover $Q_b$ by [lem-weil-pbc-projective-space-standard-charts]. Their inverse images $W_i=r_b^{-1}(V_i)$ cover $P_b$. By [def-weil-finite-integral-morphism], each $W_i$ is affine, say $\\operatorname{Spec}C_i$, and $k[z_1,\\ldots,z_d]\\to C_i$ is module-finite. The same module generators, together with the images of the $d$ polynomial variables, generate $C_i$ as a $k$-algebra: any element is a polynomial-coefficient linear combination of the module generators. In particular $C_i$ is a finite-type $k$-algebra.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Finite base change, Tag 01WK (lemma-base-change-finite); standard projective charts Tag 01NG"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-ring-map-quasi-finite], each module-finite map $k[z_1,\\ldots,z_d]\\to C_i$ from Step 5 is of finite type and quasi-finite at every prime. All hypotheses of [lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra] therefore hold with $n=d$, and it gives $\\dim W_i\\le d$. This allows noninjective coefficient maps and zero algebras; no surjectivity of $r_b$ is needed. By [lem-sc-scheme-sober], the underlying space of the scheme $P_b$ is sober, hence quasi-sober and $T_0$. Apply [lem-weil-pbc-dimension-bound-open-cover] to the open cover $(W_i)_{0\\le i\\le d}$ to obtain $\\dim P_b\\le d$. Since $b$ was arbitrary, every scheme-theoretic fibre has the asserted bound. Empty fibres have dimension $-\\infty$ and cause no exception.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-dimension-bound-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra), using finite quasi-finiteness; open-cover dimension bound Tag 0B7I"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-nagata-relative-affine-space",
+  "def-pc-projective-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "lem-sc-scheme-sober",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-finite-radicial-basechange",
+  "lem-trf-h-projective-composition",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "pqf-def-quasifinite",
+  "pqf-lem-finite-qf",
+  "thm-pqf-zmt-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05K0 (lemma-quasi-finite-separated-pass-through-finite), applied to the standard affine chart in projective space; supplemented by morphisms.tex Tags 0B3I, 087S, 01WE and algebra.tex Tag 00QG. Expands the final projective-envelope reduction in Orgogozo Proposition 2.3, proof, printed p. 4, read online; local copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +177,52 @@
    "results": "Returned generic finite, proper and Proj declarations, but no projective-envelope theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|projective.*envelope|finite.*projective|projective.*finite",
+   "results": "msearch.py: 0 hits; top=[]; ; subdirectory AlgebraicGeometry; no envelope theorem; affine-transition open-cover hits are unrelated.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme finite over affine space embeds as an open subscheme of a projective scheme with bounded fibre dimension",
+   "results": "msearch.py: 8 hits; top=['AlgebraicGeometry.IsFinite.recOn', 'AlgebraicGeometry.IsFinite.toIsAffineHom', 'AlgebraicGeometry.isFinite_iff', 'AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom', 'AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite', 'AlgebraicGeometry.IsFinite', 'AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop', 'AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite']; ; finite/affine/quasi-finite facts only, not the envelope statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper",
+   "results": "msearch.py: 9 hits; top=['AlgebraicGeometry.instIsProperOfIsFinite', 'AlgebraicGeometry.IsProper.instOfIsFinite', 'AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom', 'AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom', 'AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite', 'AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite', 'AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite', 'AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton']; ; properness of finite maps and finite criteria do not assert projectivity or an envelope.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite scheme over affine d-space has an open immersion into a projective scheme over the affine base with fibres of dimension at most d",
+   "results": "msearch.py: 8 hits; top=['AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite', 'AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.Proj', 'AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.Proj.instIsOpenImmersionAwayι', 'AlgebraicGeometry.AffineSpace.isOpenMap_over', 'AlgebraicGeometry.Proj.affineOpenCover', 'AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat']; ; hits give affine-space/Proj/properness tools, not this envelope with its fibre bound.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|IsHProjective|exists.*[Ff]inite.*[Oo]pen|exists.*[Oo]pen.*[Ff]inite",
+   "results": "msearch.py: 4 hits; top=['Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean', 'Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean', 'Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean', 'Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean']; ; subdirectory AlgebraicGeometry; no envelope theorem; affine-transition open-cover hits are unrelated.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski main theorem gives finite compactification of a finite morphism to affine space inside projective space with bounded relative dimension",
+   "results": "msearch.py: 8 hits; top=['AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite', 'AlgebraicGeometry.IsFinite.toIsAffineHom', 'AlgebraicGeometry.finite_appTop_of_universallyClosed', 'AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat', 'AlgebraicGeometry.instIsProperOfIsFinite', 'AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop', 'AlgebraicGeometry.IsProper.instOfIsFinite']; ; hits give affine-space/Proj/properness tools, not this envelope with its fibre bound.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-bounded-dimension-projective-local-model",
@@ -77,5 +247,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-projective-envelope",
+  "worker": "stage1",
+  "summary": "Unchanged statement; six proof steps apply Zariski factorization to T -> P^d_B, then use finite projective-bundle projectivity and the ample-target conversion to obtain the precise global H-projective convention. Residue-field charts and the existing quasi-finite polynomial algebra bound prove the dimension clause. Every input is an existing node; no new nodes. Checked arbitrary affine bases, non-surjective finite maps, zero-dimensional and empty cases.",
+  "blueprint": "Expands the finite-to-projective-envelope sentence in the first Gabber reduction paragraph recorded in blueprint.from.place, below lem-trf-local-term-locality via lem-trf-bounded-dimension-projective-local-model. The current sk-i-curve-zero unit retains the separate contraction argument; this is a generic geometric tool inside the already seeded nearby-cycle branch. Whole-blueprint searches for finite projective envelope, finite morphism affine space projective, projective compactification, finite affine space, 05K0 and 00QG found no equivalent envelope node.",
+  "tool_uses": [
+   {
+    "node": "thm-pqf-zmt-factorization",
+    "why": "Generic separated quasi-finite finite-factorization theorem over a qcqs target, applied to T -> P^d_B; no trace-unit node supplies this factorization."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Properness of standard projective space, needed for the qcqs target and proper structural morphism."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "Generic projective-space base change identifies Q_b with P^d over the residue field."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Affineness of a finite source over the affine target, used to check separatedness before Zariski factorization."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Passes from properness over the affine base to the qcqs scheme hypothesis of Zariski factorization."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Polynomial standard chart geometry and cover, both for the initial affine chart and for each residue-field fibre."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "why": "Finite polynomial-chart algebras are quasi-finite at every prime, the exact algebraic hypothesis of the dimension bound."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra",
+    "why": "Generic dimension bound for quasi-finite polynomial algebras on the fibre charts; no trace-unit lemma supplies the bound."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Sobriety checks the topological hypotheses of the existing open-cover dimension bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pqf-zmt-factorization",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra",
+  "lem-sc-scheme-sober"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-2d97606f6",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-2d97606f6 (reviewer sub-agent of L); spot-checked: I read the whole item, the statements of all 27 cited nodes and 9 stmt_deps, and the Stacks sources: 05K0 (more-morphisms l.12457), 0B3I (morphisms l.11237), 087S(1) (l.10848), 01WE (l.10631) and 00QG (algebra l.31291). Orgogozo Prop 2.3 has no local copy; the WANTED entry and proof_origin=agent are right. The statement is unchanged and true. I tested it with d=0, empty T or fibres (dimension -infinity), a non-Noetherian A, and non-dominant finite maps. Its use in lem-trf-bounded-dimension-projective-local-model matches the statement. Steps 3-6 hold as written. The ample sheaf on P^d_A over an arbitrary ring, the finite-to-bundle-projective step, 087S and 01WE give H-projectivity, and properness gives the quasi-compactness that def-pc-projective-morphism also needs. def-kun-projective and def-pc-projective-morphism use the same P({0..N};Y). The dimension bound comes from 00QG on the residue-field charts plus the open-cover lemma, whose quasi-sober and T0 hypotheses follow from sobriety. Two small faults, both repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-projective-envelope.json. (1) Step 1 inferred that u is quasi-compact from the chart cover without citing 01K4. It now cites lem-weil-pbc-affine-scheme-qcqs and lem-weil-pbc-qcqs-morphism-permanence(1): affine source, quasi-separated Q. (2) Step 2 proved only clause (3) of pqf-def-quasifinite, but Zariski main asks for 'everywhere quasi-finite'. The step now also checks clause (1) on T=Spec C over Q_0 with lem-weil-pbc-finite-ring-map-quasi-finite, and proof_deps is updated. The two new citations are Mathlib leaves in sk-thm-p1, which is on the route, and add no cycle. The rg duplicate search found nothing; lem-fin-finite-over-projective needs a Noetherian base and states something else. I accept the declared tool_uses: all nine nodes are on the route anyway. No SGA source is cited. There are no new nodes, so nothing is dropped.; 1 file(s) fixed by the reviewer"
  }
 }
