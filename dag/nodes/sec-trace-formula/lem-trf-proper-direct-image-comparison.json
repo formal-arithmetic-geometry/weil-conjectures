@@ -12,11 +12,126 @@
   "def-trf-coefficient-pushforward",
   "def-trf-cohomological-comparison",
   "lem-trf-fixed-map-proper",
-  "def-trf-admissibility"
+  "def-trf-admissibility",
+  "def-trf-kernel-pushforward-maps"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the finite coefficient stage and the proper correspondence diagram from [def-trf-coefficient-conventions] and [def-trf-coefficient-pushforward]. The relations $b_iq=pc_i$ induce the maps $p_X=p$, $p_{X\\times X}=p\\times p$, $p_C=q$, $p_F=h$, and $p_s=\\operatorname{id}_s$ on every labelled fixed-diagram object. The factorization and properness assertion of [lem-trf-fixed-map-proper] makes $p_F$ proper; $p$, $q$, and $p\\times p$ are proper by the hypotheses and stability under products, and the identity is proper. Thus every $p_Z$ is proper. On the finite-Tor constructible domains supplied by [def-trf-admissibility], set $f_Z=Rp_{Z*}=Rp_{Z!}$, using the proper identification in [prop-functor-package]. For each labelled arrow $g:U\\to V$, the equality $p_Vg=\\bar g p_U$ gives the ordinary exchange $\\alpha_g$ by the unit/counit mate, and the exceptional exchange $\\beta_g$ by the specified exceptional adjunction. Their mates are therefore the direct-image and compact-support composition maps for this equality, by the mate definitions in [def-trf-cohomological-comparison]. Set $\\iota=\\operatorname{id}_A$. No leg square is required to be Cartesian.",
+   "uses": [
+    "def-trf-coefficient-conventions",
+    "def-trf-coefficient-pushforward",
+    "lem-trf-fixed-map-proper",
+    "def-trf-admissibility",
+    "prop-functor-package",
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a), first paragraph: proper maps on each diagram object and the induced pre-morphism"
+   }
+  },
+  {
+   "text": "For each $Z$, take the lax tensor map $t_Z$ to be the adjoint of the composite $p_Z^*(Rp_{Z*}M\\otimes Rp_{Z*}N)\\cong p_Z^*Rp_{Z*}M\\otimes p_Z^*Rp_{Z*}N\\to M\\otimes N$, the multiplication formula of [def-trf-kernel-pushforward-maps] applied to $p_Z$. Naturality of the counits, the associativity and signed symmetry of the derived tensor from [def-trf-coefficient-conventions], and the triangle identities in [def-trf-admissibility] show that transposing twice gives the same map, so $t_Z$ is commutative and associative. At $s$, $p_s=\\operatorname{id}_s$ and the same unit/counit calculation gives $\\iota\\circ t_s=\\iota\\otimes\\iota$ (with the unit identifications). These are exactly requirements (I) and (II) of [def-trf-cohomological-comparison].",
+   "uses": [
+    "def-trf-coefficient-conventions",
+    "def-trf-kernel-pushforward-maps",
+    "def-trf-admissibility",
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a), assertion that (I)–(IV) follow by adjointness; Definitions 4.1.1(c) and 4.1.3(I),(II)"
+   }
+  },
+  {
+   "text": "For composable labelled arrows $g:U\\to V$ and $h:V\\to W$, the equations $p_Vg=\\bar g p_U$ and $p_Wh=\\bar h p_V$ identify both composites with $p_Whg$. Proper direct-image composition, compact-support composition, and their identity and associativity equations are supplied by [prop-functor-package], with $Rf_!=Rf_*$ for the proper maps. The mate definition of $\\alpha$ therefore gives $\\alpha_{\\operatorname{id}}=\\operatorname{id}$ and $\\alpha_{hg}=(\\alpha_g h^*)\\circ(\\bar g^*\\alpha_h)$, with the canonical pullback compositors. For tensor compatibility, transpose both sides along $p_U^*\\dashv Rp_{U*}$: each is the two counits followed by the same tensor map, and naturality identifies the composites. Thus (III) and (IV) hold. The construction uses only the specified ordinary and exceptional adjunction maps, so it remains valid for non-Cartesian leg squares.",
+   "uses": [
+    "def-trf-cohomological-comparison",
+    "def-trf-admissibility",
+    "def-trf-coefficient-pushforward",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a), assertion that (I)–(IV) follow by adjointness"
+   }
+  },
+  {
+   "text": "Fix $Z$, write $p=p_Z$, $a=a_Z$, $\\bar a=a_{\\bar Z}$, so $a=\\bar ap$ and $p$ is proper. By [def-trf-cohomological-comparison], $\\delta_Z$ is $\\beta_{a_Z}$ followed by $\\bar a^!\\iota=\\operatorname{id}$; by Step 1, $\\beta_{a_Z}$ is the $R\\bar a_!\\dashv\\bar a^!$ adjoint of $R\\bar a_!Rp_!a^!A_s\\cong Ra_!a^!A_s\\to A_s$ (compact-support composition, then the counit of $a$). The composite exceptional counit of [fix-prop-adjunctions] (3) shows that this is the counit $Rp_!p^!\\omega_{\\bar Z}\\to\\omega_{\\bar Z}$ after the conjugate composition identification $\\omega_Z=a^!A_s\\cong p^!\\bar a^!A_s$ of [def-trf-admissibility], i.e. the trace counit $\\tau_p$ of [def-trf-kernel-pushforward-maps]. By definition $d_Z$ is the tensor--Hom transpose of $Rp_*D_ZM\\otimes Rp_*M\\xrightarrow{t_Z}Rp_*(D_ZM\\otimes M)\\xrightarrow{Rp_*\\mathrm{ev}}Rp_*\\omega_Z\\xrightarrow{\\delta_Z}\\omega_{\\bar Z}$ with $t_Z=\\mu_p$ (Step 2); this is the dual pushforward $\\chi_p$ of [def-trf-kernel-pushforward-maps] for $K=M$. Clause (7) of [prop-functor-package] gives the formal Verdier exchange isomorphism $\\theta:D_{\\bar Z}Rp_!M\\xrightarrow{\\sim}Rp_*D_ZM$; it is the inverse of the Yoneda transform of the chain of [fix-prop-adjunctions] $\\operatorname{Hom}(L,D_{\\bar Z}Rp_!M)\\cong\\operatorname{Hom}(Rp_!M\\otimes L,\\omega_{\\bar Z})\\cong\\operatorname{Hom}(Rp_!(M\\otimes p^*L),\\omega_{\\bar Z})\\cong\\operatorname{Hom}(M\\otimes p^*L,p^!\\omega_{\\bar Z})\\cong\\operatorname{Hom}(p^*L,D_ZM)\\cong\\operatorname{Hom}(L,Rp_*D_ZM)$, the second bijection using the projection map and the last one $p^!\\omega_{\\bar Z}\\cong\\omega_Z$. For proper $p$, with $Rp_!=Rp_*$ ([prop-functor-package], clause (3)), the proper projection map is the transpose of $(\\varepsilon_p\\otimes1)\\circ\\mu_p$. Hence, following $u:L\\to Rp_*D_ZM$ back through the chain and using naturality of $\\mu_p$ and the ordinary triangle identity, $u$ corresponds to the transpose of $\\tau_p\\circ Rp_*\\mathrm{ev}\\circ\\mu_p\\circ(u\\otimes1)$, which is the transpose of $d_Z\\circ u$. Taking $L=Rp_*D_ZM$, $u=\\operatorname{id}$ gives $d_Z=\\theta^{-1}$ (Varshavsky: $d_Z$ is the sheafified adjunction isomorphism). Hence each $d_Z$ is an isomorphism, which is requirement (V) of [def-trf-cohomological-comparison].",
+   "uses": [
+    "def-trf-admissibility",
+    "def-trf-cohomological-comparison",
+    "def-trf-kernel-pushforward-maps",
+    "fix-prop-adjunctions",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a), assertion (V): proper adjunction identifies the duality map"
+   }
+  },
+  {
+   "text": "Let $g:U\\to V$ and $\\bar g:\\bar U\\to\\bar V$ both be proper. By the mate definition in [def-trf-cohomological-comparison], $\\alpha_{g,*}:Rp_{V*}Rg_*\\to R\\bar g_*Rp_{U*}$ is the transpose of $\\bar g^*Rp_{V*}Rg_*\\xrightarrow{\\alpha_g}Rp_{U*}g^*Rg_*\\xrightarrow{\\varepsilon_g}Rp_{U*}$. Since $\\alpha_g$ is itself the mate of the equality $p_Vg=\\bar gp_U$ (Step 1), the composite-counit formula of [fix-prop-adjunctions] (3) and the triangle identities identify $\\alpha_{g,*}$ with the ordinary composition comparison $Rp_{V*}Rg_*\\cong R(p_Vg)_*=R(\\bar gp_U)_*\\cong R\\bar g_*Rp_{U*}$, an isomorphism. In the same way $\\beta_{g,!}$, transposed from $\\beta_g$ with the exceptional unit of [def-trf-admissibility], is the compact-support composition comparison $R\\bar g_!Rp_{U!}\\cong R(\\bar gp_U)_!=R(p_Vg)_!\\cong Rp_{V!}Rg_!$ of [thm-sf-comp-composition], an isomorphism. For proper maps $Rh_!=Rh_*$ ([prop-functor-package], clause (3)) is computed with the trivial compactification $(\\operatorname{id},h)$; by the independence of compactification in [thm-sf-comp-composition] the compact-support composition law for proper composable maps is then the ordinary direct-image composition, with the identity and associativity equations. Thus, under these identifications, $\\beta_{g,!}$ is the composite of the two ordinary composition isomorphisms in the reverse direction, i.e. the inverse of $\\alpha_{g,*}$. This is requirement (VI) of [def-trf-cohomological-comparison].",
+   "uses": [
+    "def-trf-admissibility",
+    "def-trf-cohomological-comparison",
+    "fix-prop-adjunctions",
+    "prop-functor-package",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a), assertion (VI): proper direct-image composition and adjointness"
+   }
+  },
+  {
+   "text": "Requirement (VII). All schemes are Noetherian, so every immersion below is quasi-compact. (a) *Target.* By [det-nagata-theorem-dense] choose dense compactifications $u_Y:Y\\hookrightarrow Y^*$ of $Y\\to s$ and $u_B:B\\hookrightarrow B^*$ of $(u_Y\\times u_Y)b:B\\to Y^*\\times_kY^*$, with $b^*:B^*\\to Y^*\\times_kY^*$ proper; scheme-theoretic density gives topological density (a nonempty open missing the image would have $\\mathcal O(V)\\to0$ injective). $B^*$ is proper over $k$ by [lem-weil-pbc-proper-fp-permanence] and $b^*u_B=(u_Y\\times u_Y)b$. (b) *Source scheme.* Choose a dense compactification $X\\hookrightarrow X'$ by [det-nagata-theorem-dense]. The graph $(\\operatorname{id},u_Yp):X\\to X\\times_kY^*$ is a closed immersion by [lem-weil-pbc-closed-immersion-from-composite] (its composite with the separated projection is $\\operatorname{id}_X$), and $X\\times_kY^*$ is open in $X'\\times_kY^*$; so $X\\to X'\\times_kY^*$ is a quasi-compact immersion. Let $X^*$ be its scheme-theoretic image. By [lemma-nagata-immersion-open-in-scheme-image], $u_X:X\\hookrightarrow X^*$ is a dense open immersion; $X^*$ is closed in $X'\\times_kY^*$, hence proper over $k$ by [lem-weil-pbc-proper-fp-permanence], and the projection $p^*:X^*\\to Y^*$ satisfies $p^*u_X=u_Yp$. (c) *Source correspondence.* Choose a compactification $C\\hookrightarrow C'$ and, as in Varshavsky Remark 1.1.3, let $C^*$ be the scheme-theoretic image of the immersion $(j',u_Bq,(u_X\\times u_X)c):C\\to C'\\times_kB^*\\times_kX^*\\times_kX^*$ (a closed graph in the open $C\\times_k B^*\\times_kX^{*2}$, as before). Again $u_C:C\\hookrightarrow C^*$ is a dense open immersion, $C^*$ is proper over $k$, and the projections give $q^*:C^*\\to B^*$, $c^*:C^*\\to X^*\\times_kX^*$ with $q^*u_C=u_Bq$, $c^*u_C=(u_X\\times u_X)c$. The equalizer of $b_i^*q^*$ and $p^*c_i^*$ is a closed subscheme of $C^*$ (pullback of the diagonal of the separated $Y^*$) through which $C$ factors, so by [lemma-nagata-scheme-image-universal] it is all of $C^*$: $b_i^*q^*=p^*c_i^*$. The maps $p^*,q^*$ are proper by [lemma-nagata-proper-to-separated-target], so $(p^*,q^*)$ is a proper diagram between the proper correspondences $c^*,b^*$ in the sense of [def-trf-coefficient-pushforward], and Steps 1--5 give a pre-comparison $f^*_Z=Rp^*_{Z*}$ on the compactified fixed diagrams satisfying (I)--(VI). (d) *Cartesian restriction squares.* The open immersion $X\\to p^{*-1}(Y)$ is proper by [lemma-nagata-proper-to-separated-target] ($p$ proper, $p^{*-1}(Y)\\to Y$ separated), so its image is open, closed and dense in $p^{*-1}(Y)$; a surjective open immersion is an isomorphism, so $X=p^{*-1}(Y)$. Likewise $C=q^{*-1}(B)$. Hence $X\\times X=(p^*\\times p^*)^{-1}(Y\\times Y)$, and since $\\operatorname{Fix}(b)=\\operatorname{Fix}(b^*)\\times_{B^*}B$ and $\\operatorname{Fix}(c)=\\operatorname{Fix}(c^*)\\times_{C^*}C$ (because $\\Delta^{-1}(Y\\times Y)=Y$), the fixed squares are Cartesian too; $u_s=\\operatorname{id}_s$. So every square $(u_Z,p_Z,u_{\\bar Z},p^*_Z)$ is Cartesian. (e) *Restriction.* Let $\\rho_Z:Rp_{Z*}u_Z^*\\xrightarrow{\\sim}u_{\\bar Z}^*Rp^*_{Z*}$ be the inverse of the proper base-change isomorphism of [prop-functor-package], clause (4). It is the mate of the pullback square, so its transpose is built from the counits of $p_Z,p^*_Z$ and pullback composition; the maps $t^*_Z,\\alpha^*_g,\\beta^*_g$ are transposes of the same counits (Steps 1--2), and restriction to opens preserves both ordinary and exceptional adjunction equations with $u^!=u^*$ as in [def-trf-cohomological-comparison]. Uniqueness of transposes therefore identifies $t_Z,\\alpha_g,\\beta_g$ with the restrictions of $t^*_Z,\\alpha^*_g,\\beta^*_g$, and $\\iota=\\iota^*=\\operatorname{id}$. This is (VII), and $X,Y,C,B$ were not assumed proper over $k$.",
+   "uses": [
+    "det-nagata-theorem-dense",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-closed-immersion-from-composite",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lemma-nagata-scheme-image-universal",
+    "lemma-nagata-proper-to-separated-target",
+    "def-trf-coefficient-pushforward",
+    "prop-functor-package",
+    "def-trf-cohomological-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§4.1.4(a), final paragraph, and Remark 1.1.3: compactifications by closure of the graph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissibility",
+  "def-trf-coefficient-conventions",
+  "def-trf-coefficient-pushforward",
+  "def-trf-cohomological-comparison",
+  "def-trf-kernel-pushforward-maps",
+  "det-nagata-theorem-dense",
+  "fix-prop-adjunctions",
+  "lem-trf-fixed-map-proper",
+  "lem-weil-pbc-closed-immersion-from-composite",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-proper-to-separated-target",
+  "lemma-nagata-scheme-image-universal",
+  "prop-functor-package",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§4.1.4(a), proper push-forward and compactification argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,7 +191,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-specialization-cohomological-comparison",
@@ -96,5 +211,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-proper-direct-image-comparison",
+  "worker": "stage1",
+  "summary": "Audited the proper push-forward statement against Varshavsky §4.1.4(a), the current cohomological-comparison definition, the coefficient push-forward construction, the fixed-map properness lemma, and the finite six-functor package. The proof is split into construction, tensor/unit axioms, composition/tensor exchange, Verdier duality, proper mate isomorphisms, and compactification steps. No new node was needed; existing Nagata nodes supply compactification and extension of the proper maps.",
+  "blueprint": "The steps realize the proper push-forward construction and compactification argument cited in the ancestor blueprint node lem-trf-local-term-locality (specialization proof, §4.1.4(a)).",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "The duality exchange and proper direct-image composition clauses are generic six-functor tools used to verify requirements (V) and (VI); the trace-formula unit only specifies the comparison data."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-7a82d5b3d",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-7a82d5b3d (reviewer sub-agent of L); spot-checked: I read the whole item. I checked it against Varshavsky §4.1.1, Def. 4.1.3 (I)-(VII), §4.1.4(a) and Remark 1.1.3, against every cited node statement, and against the construction of the package clause-(7) Verdier exchange in fix-cor-verdier-exchange and fix-lem-tensor-adjunction. The statement agrees with the source and with def-trf-cohomological-comparison: the types of alpha, beta and the mates, the D^b_ctf(A_{E,n}) coefficients, and no Cartesian or proper-over-k assumption. Admissibility of the correspondences is automatic by def-trf-admissibility. Steps 1-3 are correct. I repaired three faults in fixes/.../lem-trf-proper-direct-image-comparison.json, without changing the statement. (1) Step 6, (VII): the delivery never showed Z = p*_Z^{-1}(Zbar), so rho_Z need not be an isomorphism (E5). It also did not check density or properness of the compactifications. I rewrote the step along Remark 1.1.3 by graph closure: det-nagata-theorem-dense, lemma-nagata-immersion-open-in-scheme-image, lem-weil-pbc-closed-immersion-from-composite, lem-weil-pbc-proper-fp-permanence and lemma-nagata-scheme-image-universal, with lemma-nagata-proper-to-separated-target for the proper open immersion X -> p*^{-1}(Y). That shows every restriction square is Cartesian, including the fixed schemes, and rho_Z is the inverse of proper base change (package clause 4). (2) Step 4, (V): 'mate uniqueness' relied on how the exchange map is built (C3). I wrote out the Yoneda computation: delta_Z is the trace counit and d_Z is chi_p, which equals theta^{-1}. (3) Step 5, (VI): I made explicit that both mates are the ordinary and compact-support composition comparisons, which agree for proper maps by thm-sf-comp-composition. proof_deps are recomputed. The tool_uses are reduced to prop-functor-package, which I accept. The two Nagata nodes are no longer cited and were on the route anyway. There are no new nodes and no duplicates, and every cited unit is on the route of sk-i-curve-zero.; 1 file(s) fixed by the reviewer"
  }
 }
