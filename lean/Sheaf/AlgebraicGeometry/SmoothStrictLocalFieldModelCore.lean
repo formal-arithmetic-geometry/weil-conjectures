@@ -13,19 +13,18 @@ public import Mathlib.FieldTheory.SeparableClosure
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
-import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.Paper.StrictHenselizationFunctoriality
-import WeilConjectures.PointCount
-import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
+import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.StrictHenselizationRegular
-import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
 import Sheaf.RingTheory.StrictHenselizationDimension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import WeilConjectures.PointCount
+import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
+
+import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 
 /-! # The geometric core of a smooth strict localization
 
@@ -42,14 +41,14 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/- The affine-chart presentation with its actual point prime and structural map.
-This is the chart argument of `StrictHenselizationLocalPresentation`, specialized
-to retain the identified prime. Source: Stacks Tag 04HX and the localized-triples lemma. -/
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option maxHeartbeats 800000 in
 -- The nested small-model, affine-chart, and triple diagrams require extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The affine-chart presentation with its point prime and structural map.
+Source: Stacks Tag 04HX and the localized-triples lemma. The canonical affine
+colimit is compared with the triples colimit; its leg equations preserve the
+structural map, so the localized-triples theorem applies to the stated ring. -/
 private theorem smooth_chart_local_presentation
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (R : CommRingCat.{u}) (i : Spec R ⟶ S) [IsOpenImmersion i]
@@ -101,11 +100,8 @@ private theorem smooth_chart_local_presentation
   let : incl.IsEquivalence := strictHenselizationAffineInclusion_isEquivalence s
   let rep := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
   let q := (rep ⋙ incl).op
-  let eSmall : strictHenselizationRing s ≅ colimit (smallStrictHenselizationDiagram s) :=
-    (isColimitSmallStrictHenselizationCocone s).coconePointUniqueUpToIso
-      (colimit.isColimit (smallStrictHenselizationDiagram s))
   let cmp : strictHenselizationRing s ≅ cn.pt :=
-    eSmall ≪≫ Functor.Final.colimitIso q D ≪≫ colimit.isoColimitCocone ⟨cn, hcn⟩
+    Functor.Final.colimitIso q D ≪≫ colimit.isoColimitCocone ⟨cn, hcn⟩
   let k := hct.coconePointUniqueUpToIso hc
   let ringIso : strictHenselizationRing s ≅ c.pt := cmp ≪≫ t ≪≫ k
   have hstruct : Spec.map (ρ ≫ ringIso.inv) ≫ i =
@@ -123,13 +119,8 @@ private theorem smooth_chart_local_presentation
     let Q : ObjectProperty P.FullSubcategory := fun z ↦
       ∃ g : z.obj.1.left ⟶ Spec R, g ≫ i = z.obj.1.hom
     let d : Q.FullSubcategory := ⟨b, ⟨g, hg⟩⟩
-    have hcmp : (smallStrictHenselizationCocone s).ι.app (op j) ≫ cmp.hom =
+    have hcmp : (colimit.cocone (strictHenselizationAffineDiagram s)).ι.app (op j) ≫ cmp.hom =
         cn.ι.app (op b) := by
-      change (smallStrictHenselizationCocone s).ι.app (op j) ≫
-        (eSmall.hom ≫
-        ((Functor.Final.colimitIso q D).hom ≫
-          (colimit.isoColimitCocone ⟨cn, hcn⟩).hom)) = _
-      rw [← Category.assoc, IsColimit.comp_coconePointUniqueUpToIso_hom]
       change colimit.ι (q ⋙ D) (op j) ≫
         ((Functor.Final.colimitIso q D).hom ≫
           (colimit.isoColimitCocone ⟨cn, hcn⟩).hom) = _
@@ -148,11 +139,12 @@ private theorem smooth_chart_local_presentation
         _ = _ := by
           simp only [Category.assoc, k, IsColimit.comp_coconePointUniqueUpToIso_hom]
     have hring : (ΓSpecIso R).inv ≫ g.appTop ≫
-        (smallStrictHenselizationCocone s).ι.app (op j) = ρ ≫ ringIso.inv := by
+        (colimit.cocone (strictHenselizationAffineDiagram s)).ι.app (op j) = ρ ≫ ringIso.inv := by
       apply (cancel_mono ringIso.hom).1
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
       change (ΓSpecIso R).inv ≫ g.appTop ≫
-        (smallStrictHenselizationCocone s).ι.app (op j) ≫ cmp.hom ≫ t.hom ≫ k.hom = ρ
+        (colimit.cocone (strictHenselizationAffineDiagram s)).ι.app (op j) ≫
+        cmp.hom ≫ t.hom ≫ k.hom = ρ
       rw [← Category.assoc _ cmp.hom, hcmp, hleg]
       exact hbase
     let : IsAffine b.obj.1.left := b.property
@@ -163,16 +155,16 @@ private theorem smooth_chart_local_presentation
         (Spec (rep.obj j).1.left.unop).isoSpec.inv ≫ g at hh
       simpa only [isoSpec_Spec_inv] using hh
     have hstr := strictHenselizationStructuralMap_eq s j
-    change Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫
+    change Spec.map ((colimit.cocone (strictHenselizationAffineDiagram s)).ι.app (op j)) ≫
       Spec.map (ΓSpecIso (rep.obj j).1.left.unop).inv ≫ b.obj.1.hom =
       strictHenselizationStructuralMap s at hstr
     calc
       Spec.map (ρ ≫ ringIso.inv) ≫ i =
-          Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫
+          Spec.map ((colimit.cocone (strictHenselizationAffineDiagram s)).ι.app (op j)) ≫
             Spec.map g.appTop ≫ Spec.map (ΓSpecIso R).inv ≫ i := by
         simpa only [Spec.map_comp, Category.assoc] using
           congrArg (fun f ↦ Spec.map f ≫ i) hring.symm
-      _ = Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫
+      _ = Spec.map ((colimit.cocone (strictHenselizationAffineDiagram s)).ι.app (op j)) ≫
           Spec.map (ΓSpecIso (rep.obj j).1.left.unop).inv ≫ b.obj.1.hom := by
         rw [← Category.assoc (Spec.map g.appTop), hgSpec, Category.assoc, hg]
       _ = _ := hstr
@@ -184,7 +176,243 @@ private theorem smooth_chart_local_presentation
         rfl)
   exact ⟨L, hL, ares, hsep, aL, htower, aH,
     ρ ≫ ringIso.inv, hstruct, hbase, hH⟩
--/
+
+
+/-- Regularity and dimension part of the smooth strict-local model.
+Source: blueprint local calculation in dimension d; this is the regularity and
+dimension subargument of `lem-sc-smooth-strict-local-field-model-core`.
+(blueprint: lem-sc-smooth-strict-local-field-model-core) -/
+private theorem smooth_strict_local_core_regular_dimension
+    (K : Type u) [Field K] [IsAlgClosed K] (Y : Scheme.{u}) [IsIntegral Y]
+    (f : Y ⟶ Spec (.of K)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (d a : ℕ) (hd : topologicalKrullDim Y = (d : WithBot ℕ∞))
+    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+    (y : Y) (hy : s (IsLocalRing.closedPoint Ω) = y)
+    [Algebra K (Y.residueField y)]
+    (hκ : Spec.map (CommRingCat.ofHom (algebraMap K (Y.residueField y))) =
+      Y.fromSpecResidueField y ≫ f)
+    [Algebra (Y.residueField y) Ω]
+    (_hΩ : Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) Ω)) ≫
+      Y.fromSpecResidueField y = s)
+    (ha : Algebra.trdeg K (Y.residueField y) = (a : Cardinal))
+    [Algebra K (strictHenselizationRing s)]
+    (_hK : Spec.map (CommRingCat.ofHom (algebraMap K (strictHenselizationRing s))) =
+      strictHenselizationStructuralMap s ≫ f) :
+    IsRegularLocalRing (strictHenselizationRing s) ∧
+    ∃ hlocal : IsLocalRing (strictHenselizationRing s),
+      ∃ hdomain : IsDomain (strictHenselizationRing s),
+        let := hlocal
+        let := hdomain
+        ringKrullDim (strictHenselizationRing s) = ((d - a : ℕ) : WithBot ℕ∞) := by
+  classical
+  obtain ⟨U, hU, hyU, _⟩ := exists_isAffineOpen_mem_and_subset
+    (show y ∈ (⊤ : Y.Opens) from trivial)
+  let R := Γ(Y, U)
+  let j := hU.fromSpec
+  have hsj : Set.range s ⊆ Set.range j := by
+    rintro _ ⟨z, rfl⟩
+    have hz : z = IsLocalRing.closedPoint Ω := Subsingleton.elim _ _
+    rw [hz, hy]
+    exact hU.range_fromSpec.symm ▸ hyU
+  let xR := IsOpenImmersion.lift j s hsj
+  have hxR : xR ≫ j = s := IsOpenImmersion.lift_fac j s hsj
+  have hp : (SpecToEquivOfField Ω (Spec R) xR).1 = hU.primeIdealOf ⟨y, hyU⟩ := by
+    apply j.isOpenEmbedding.injective
+    change j (xR (IsLocalRing.closedPoint Ω)) = _
+    rw [← Scheme.Hom.comp_apply, hxR, hy]
+    exact (hU.fromSpec_primeIdealOf ⟨y, hyU⟩).symm
+  have hpres := smooth_chart_local_presentation R j xR
+  dsimp only at hpres
+  rw [hxR, hp] at hpres
+  obtain ⟨L, hL, ares, hsep, aL, htower, aH, b, hb, hbase, hH⟩ := hpres
+  let := hL
+  let := ares
+  let := hsep
+  let := aL
+  let := htower
+  let := aH
+  let p := (hU.primeIdealOf ⟨y, hyU⟩).asIdeal
+  let B := Localization.AtPrime p
+  let : Algebra R (Y.presheaf.stalk y) :=
+    TopCat.Presheaf.algebra_section_stalk Y.presheaf ⟨y, hyU⟩
+  have : IsLocalization.AtPrime (Y.presheaf.stalk y) p := hU.isLocalization_stalk ⟨y, hyU⟩
+  let e : B ≃+* Y.presheaf.stalk y :=
+    (IsLocalization.algEquiv p.primeCompl B (Y.presheaf.stalk y)).toRingEquiv
+  have hregY : IsRegularLocalRing (Y.presheaf.stalk y) :=
+    Smooth.isRegularLocalRing_stalk f y
+  have hregB : IsRegularLocalRing B := .of_ringEquiv e.symm
+  have hreg : IsRegularLocalRing (strictHenselizationRing s) :=
+    (Algebra.isRegularLocalRing_iff_strictHenselization B L _ hH).mp hregB
+  have hdomain : IsDomain (strictHenselizationRing s) := inferInstance
+  refine ⟨hreg, inferInstance, hdomain, ?_⟩
+  have hdim := Algebra.ringKrullDim_eq_of_isStrictHenselization B L _ hH
+  rw [← hdim, e.ringKrullDim]
+  let : Y.Over (Spec (.of K)) := ⟨f⟩
+  let : LocallyOfFiniteType (Y ↘ Spec (.of K)) := ‹LocallyOfFiniteType f›
+  let : QuasiCompact (Y ↘ Spec (.of K)) := ‹QuasiCompact f›
+  have hcan : f.residueFieldAlgebraMap y = algebraMap K (Y.residueField y) := by
+    have hc : CommRingCat.ofHom (f.residueFieldAlgebraMap y) =
+        CommRingCat.ofHom (algebraMap K (Y.residueField y)) := by
+      apply Spec.map_injective
+      rw [f.specMap_residueFieldAlgebraMap, hκ]
+    exact congrArg CommRingCat.Hom.hom hc
+  have htr : @Algebra.trdeg K (Y.residueField y) _ _
+      (f.residueFieldAlgebraMap y).toAlgebra = (a : Cardinal) := by
+    rw [hcan]
+    exact ha
+  have hformula := topologicalKrullDimAt_eq_stalk_dimension_add_residue_trdeg
+    (K := K) Y y
+  have hpoint : topologicalKrullDimAt y = (d : WithBot ℕ∞) := by
+    rw [← hd]
+    apply topologicalKrullDimAt_eq_of_forall
+    intro V hyV
+    have : Nonempty V := ⟨⟨y, hyV⟩⟩
+    exact topologicalKrullDim_opens_eq f V
+  rw [hpoint, htr, Cardinal.toENat_nat] at hformula
+  have hfinite := IsRegularLocalRing.spanFinrank_maximalIdeal (R := Y.presheaf.stalk y)
+  rw [← hfinite] at hformula ⊢
+  have hn : (IsLocalRing.maximalIdeal (Y.presheaf.stalk y)).spanFinrank + a = d := by
+    exact_mod_cast hformula.symm
+  exact_mod_cast (Nat.eq_sub_of_add_eq hn)
+
+
+/-- Residue-field part of the smooth strict-local model.
+Source: blueprint local calculation in dimension d; this is the residue-field
+subargument of `lem-sc-smooth-strict-local-field-model-core`.
+(blueprint: lem-sc-smooth-strict-local-field-model-core) -/
+private theorem smooth_strict_local_core_residue
+    (K : Type u) [Field K] [IsAlgClosed K] (Y : Scheme.{u}) [IsIntegral Y]
+    (f : Y ⟶ Spec (.of K)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (d a : ℕ) (_hd : topologicalKrullDim Y = (d : WithBot ℕ∞))
+    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+    (y : Y) (hy : s (IsLocalRing.closedPoint Ω) = y)
+    [Algebra K (Y.residueField y)]
+    (hκ : Spec.map (CommRingCat.ofHom (algebraMap K (Y.residueField y))) =
+      Y.fromSpecResidueField y ≫ f)
+    [Algebra (Y.residueField y) Ω]
+    (hΩ : Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) Ω)) ≫
+      Y.fromSpecResidueField y = s)
+    (ha : Algebra.trdeg K (Y.residueField y) = (a : Cardinal))
+    [Algebra K (strictHenselizationRing s)]
+    (_hK : Spec.map (CommRingCat.ofHom (algebraMap K (strictHenselizationRing s))) =
+      strictHenselizationStructuralMap s ≫ f)
+    [IsLocalRing (strictHenselizationRing s)] [IsDomain (strictHenselizationRing s)] :
+    ∃ e : IsLocalRing.ResidueField (strictHenselizationRing s) ≃+*
+        separableClosure (Y.residueField y) Ω,
+      Spec.map (CommRingCat.ofHom
+        ((separableClosure (Y.residueField y) Ω).subtype.comp
+          (e.toRingHom.comp (IsLocalRing.residue (strictHenselizationRing s))))) ≫
+        strictHenselizationStructuralMap s = s := by
+  classical
+  subst y
+  have hmap : Spec.map (CommRingCat.ofHom
+      (algebraMap (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω)) =
+      Spec.map (CommRingCat.ofHom
+        (Y.descResidueField (Scheme.stalkClosedPointTo s)).hom) := by
+    apply (cancel_mono (Y.fromSpecResidueField (s (IsLocalRing.closedPoint Ω)))).1
+    rw [CommRingCat.ofHom_hom, hΩ]
+    exact (Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField Ω Y s).symm
+  have hdesc : algebraMap (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω =
+      (Y.descResidueField (Scheme.stalkClosedPointTo s)).hom := by
+    have hc := (Functor.map_injective Scheme.Spec hmap)
+    exact congrArg (fun g ↦ g.unop.hom) hc
+  obtain ⟨_, _, _, hsep, ⟨e, heuniq⟩⟩ :=
+    AlgebraicGeometry.strictHenselizationResidue s hdesc
+  have hv : (separableClosure (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω).subtype =
+      (separableClosure (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω).val.toRingHom := by
+    ext x
+    rfl
+  refine ⟨e, ?_⟩
+  rw [hv]
+  simpa only [RingHom.comp_assoc] using heuniq.1.2
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Function-field part of the smooth strict-local model.
+Source: blueprint local calculation in dimension d; this is the function-field
+subargument of `lem-sc-smooth-strict-local-field-model-core`.
+(blueprint: lem-sc-smooth-strict-local-field-model-core) -/
+private theorem smooth_strict_local_core_function
+    (K : Type u) [Field K] [IsAlgClosed K] (Y : Scheme.{u}) [IsIntegral Y]
+    (f : Y ⟶ Spec (.of K)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (d a : ℕ) (_hd : topologicalKrullDim Y = (d : WithBot ℕ∞))
+    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+    (y : Y) (hy : s (IsLocalRing.closedPoint Ω) = y)
+    [Algebra K (Y.residueField y)]
+    (_hκ : Spec.map (CommRingCat.ofHom (algebraMap K (Y.residueField y))) =
+      Y.fromSpecResidueField y ≫ f)
+    [Algebra (Y.residueField y) Ω]
+    (_hΩ : Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) Ω)) ≫
+      Y.fromSpecResidueField y = s)
+    (_ha : Algebra.trdeg K (Y.residueField y) = (a : Cardinal))
+    [Algebra K (strictHenselizationRing s)]
+    (_hK : Spec.map (CommRingCat.ofHom (algebraMap K (strictHenselizationRing s))) =
+      strictHenselizationStructuralMap s ≫ f)
+    [IsLocalRing (strictHenselizationRing s)] [IsDomain (strictHenselizationRing s)] :
+    ∃ i : Y.functionField →+* FractionRing (strictHenselizationRing s),
+      Spec.map (CommRingCat.ofHom i) ≫ Y.fromSpecStalk (genericPoint Y) =
+        Spec.map (CommRingCat.ofHom
+          (algebraMap (strictHenselizationRing s)
+            (FractionRing (strictHenselizationRing s)))) ≫
+          strictHenselizationStructuralMap s ∧
+      (letI := i.toAlgebra
+       Algebra.IsAlgebraic Y.functionField (FractionRing (strictHenselizationRing s))) := by
+  classical
+  obtain ⟨U, hU, hyU, _⟩ := exists_isAffineOpen_mem_and_subset
+    (show y ∈ (⊤ : Y.Opens) from trivial)
+  let : Nonempty U := ⟨⟨y, hyU⟩⟩
+  let R := Γ(Y, U)
+  let H := strictHenselizationRing s
+  let Q := FractionRing H
+  let j := hU.fromSpec
+  have hsj : Set.range s ⊆ Set.range j := by
+    rintro _ ⟨z, rfl⟩
+    have hz : z = IsLocalRing.closedPoint Ω := Subsingleton.elim _ _
+    rw [hz, hy]
+    exact hU.range_fromSpec.symm ▸ hyU
+  let xR := IsOpenImmersion.lift j s hsj
+  have hxR : xR ≫ j = s := IsOpenImmersion.lift_fac j s hsj
+  have hpres := smooth_chart_local_presentation R j xR
+  dsimp only at hpres
+  rw [hxR] at hpres
+  obtain ⟨_, _, _, _, _, _, _, b, hb, _, _⟩ := hpres
+  let : Algebra R H := b.hom.toAlgebra
+  have hind : Algebra.IndEtale R H :=
+    strictHenselization_indEtale_of_affine_chart s R j
+      (hsj (Set.mem_range_self (IsLocalRing.closedPoint Ω))) (Iso.refl _) b.hom (by
+        change Spec.map b ≫ j = 𝟙 _ ≫ strictHenselizationStructuralMap s
+        simpa only [Category.id_comp] using hb)
+  have : Module.Flat R H := inferInstance
+  have hbinj : Function.Injective b.hom := FaithfulSMul.algebraMap_injective R H
+  let g : R →+* Q := (algebraMap H Q).comp b.hom
+  have hginj : Function.Injective g := (IsFractionRing.injective H Q).comp hbinj
+  have : IsFractionRing R Y.functionField :=
+    functionField_isFractionRing_of_isAffineOpen Y U hU
+  let i : Y.functionField →+* Q := IsFractionRing.lift hginj
+  have hi (r : R) : i (algebraMap R Y.functionField r) = g r :=
+    IsFractionRing.lift_algebraMap hginj r
+  refine ⟨i, ?_, ?_⟩
+  · have hgeneric : Spec.map (CommRingCat.ofHom (algebraMap R Y.functionField)) ≫ j =
+        Y.fromSpecStalk (genericPoint Y) :=
+      hU.fromSpecStalk_eq_fromSpecStalk _
+    rw [← hgeneric, ← Category.assoc, ← Spec.map_comp]
+    have hm : CommRingCat.ofHom (algebraMap R Y.functionField) ≫
+        CommRingCat.ofHom i = b ≫ CommRingCat.ofHom (algebraMap H Q) := by
+      ext r
+      exact hi r
+    rw [hm, Spec.map_comp, Category.assoc, hb]
+  · let : Algebra Y.functionField Q := i.toAlgebra
+    have : IsScalarTower R Y.functionField Q := IsScalarTower.of_algebraMap_eq'
+      (by ext r; exact (hi r).symm)
+    let φ : H →ₐ[R] Q :=
+      { algebraMap H Q with commutes' := fun r ↦ rfl }
+    have hint (r : H) : _root_.IsIntegral Y.functionField (algebraMap H Q r) :=
+      (Algebra.IndEtale.isSeparable_of_algHom_to_isLocalRing Y.functionField Q φ r).isIntegral
+    refine ⟨fun z ↦ ?_⟩
+    obtain ⟨r, t, _, hrt⟩ := IsFractionRing.div_surjective H z
+    rw [← hrt, div_eq_mul_inv]
+    exact ((hint r).mul (hint t).inv).isAlgebraic
+
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -201,15 +429,16 @@ finite separable over kappa(y); hence the specified maps into Omega land in
 l = separableClosure (Y.residueField y) Omega. The chart/residue-triples comparison
 identifies the coordinate-ring colimit R with the triples colimit. The localized
 triples theorem equips this same ring with its B-algebra strict henselization
-structure, preserving its structural map. The triples theorem gives a surjection
-rho : R -> l with maximal-ideal kernel. It induces the asserted residue-field
-isomorphism e. Its equations on every colimit leg, followed by l -> Omega, give
-Spec(rho) followed by the structural map equal to s, exactly the displayed
-compatibility; hOmega and hy identify the prescribed residue-field embedding.
+structure, preserving its structural map. For the residue field, hOmega and hy
+identify the prescribed embedding with descResidueField(stalkClosedPointTo s):
+cancel the monomorphism fromSpecResidueField and use faithfulness of Spec.
+The existing strictHenselizationResidue theorem then supplies the residue-field
+isomorphism and exactly the required pointed structural factorization.
 
 Smoothness makes B regular local and Noetherian. Strict henselization preserves
-regularity, and a regular local ring is a domain. The map B -> R is faithfully
-flat, hence injective. Thus A -> B -> R -> Q = Frac(R) embeds Frac(A) in Q.
+regularity, and a regular local ring is a domain. The affine-chart ind-etale theorem
+makes R flat over the domain A. Since R is nontrivial, this makes A -> R injective.
+Thus A -> R -> Q = Frac(R) embeds Frac(A) in Q.
 Identify Frac(A) with Y.functionField using the generic stalk of the integral
 scheme. On the affine chart both structural composites are induced by the same
 A-map; the localization universal property and the open immersion give the
@@ -219,9 +448,10 @@ Every nonempty open of the integral locally algebraic Y has dimension d, so
 its dimension at y is d. The finite-type point dimension formula gives
  dim B + trdeg_K kappa(y) = d. With ha this implies a <= d and dim B = d-a.
 Strict henselization preserves this local dimension, proving the dimension of R.
-The algebra structures used in this calculation agree with the given ones:
-hK and hKappa (hκ in Lean), together with the structural-map equations, fix them
-by full faithfulness of Spec and the monomorphism Spec(kappa(y)) -> Y.
+The equation hKappa (hκ in Lean) identifies the given K-algebra on kappa(y)
+with the canonical residue-field algebra by full faithfulness of Spec, as needed
+by the dimension formula. The dimension and function-field conclusions do not
+need the supplied K-algebra structure on R.
 
 Finally the affine-chart ind-etale theorem gives an ind-etale A-algebra R.
 The source-library theorem
@@ -267,7 +497,13 @@ theorem smooth_strict_local_field_model_core
                 strictHenselizationStructuralMap s ∧
             (letI := i.toAlgebra
              Algebra.IsAlgebraic Y.functionField (FractionRing (strictHenselizationRing s))) := by
-  sorry
+  obtain ⟨hreg, hlocal, hdomain, hdim⟩ :=
+    smooth_strict_local_core_regular_dimension K Y f d a hd Ω s y hy hκ hΩ ha hK
+  let := hlocal
+  let := hdomain
+  obtain ⟨he, hres⟩ := smooth_strict_local_core_residue K Y f d a hd Ω s y hy hκ hΩ ha hK
+  obtain ⟨i, hi, halg⟩ := smooth_strict_local_core_function K Y f d a hd Ω s y hy hκ hΩ ha hK
+  exact ⟨hreg, hlocal, hdomain, hdim, he, hres, i, hi, halg⟩
 
 end Scheme
 end AlgebraicGeometry
