@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-pointed-etale-ring-colimit-base-map-naturality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-pointed-etale-ring-colimit",
+   "place": "Step 2: naturality of the base-ring maps under morphisms of representative pointed affine etale neighbourhoods.",
+   "via": [
+    "lem-sbc-pointed-etale-ring-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Naturality of the pointed etale neighbourhood base-ring maps",
+ "statement": "For the chosen small representative category of pointed affine etale neighbourhoods, the maps from the affine base ring R to the coordinate rings obtained from the neighbourhood structure morphisms and GammaSpecIso form a natural transformation.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BSK, naturality in the pointed etale colimit presentation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Let N be the inverse representative functor. For f:j⟶k in the opposite category, the over-category equation for N.map f.unop gives Spec.map of the induced affine morphism followed by the structure map at j equal to the structure map at k. Apply Scheme.Hom.appTop, rewrite Hom.comp_appTop, and precompose by GammaSpecIso R.inv; this is exactly the required contravariant global-sections naturality equation.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J2",
+  "document": "Stacks Project",
+  "place": "Tag 0BSK, direct over-category and global-sections calculation",
+  "note": "The lemma is proved directly in Lean from the representative functor and the over-category equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The maps on global sections of a commuting triangle of schemes compose in reverse order",
+   "results": "Found Scheme.Hom.comp_appTop and Scheme.Γ, the generic composition lemmas used in the direct proof; no exact pointed representative-diagram statement.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemmas; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The global sections of a commuting triangle of affine schemes commute contravariantly with the base ring structure maps",
+   "results": "Found toSpecΓ_naturality and related generic naturality results; no theorem for this pointed representative diagram.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemmas; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.comp_appTop",
+   "results": "Found Scheme.Hom.comp_appTop, used to turn the over-category equation into the required reversed composition of global-section maps.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemmas; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ΓSpecIso_inv_naturality|comp_appTop",
+   "results": "Found GammaSpecIso naturality and appTop composition lemmas; no exact pointed-diagram statement. An analogous calculation is present in Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemmas; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitCone",
+  "date": "2026-10-17",
+  "group": "J2"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitBaseMapNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootLimitBaseMapNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_baseRingMap_naturality",
+  "statement": "theorem strictHenselization_baseRingMap_naturality\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    {j k : (SmallModel.{u} (strictHenselizationNeighbourhoods barY))ᵒᵖ}\n    (f : j ⟶ k) :\n    (ΓSpecIso R).inv ≫ Scheme.Γ.map\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj\n          k.unop).1.hom.op =\n      ((ΓSpecIso R).inv ≫ Scheme.Γ.map\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse.obj\n          j.unop).1.hom.op) ≫\n        (smallStrictHenselizationDiagram barY).map f",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261017T003422-L-3315188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261017T003422-L-3315188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
