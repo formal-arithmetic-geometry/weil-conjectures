@@ -13,7 +13,10 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalStructur
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationCompatibility
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+import WeilConjectures.Mathlib.RingTheory.Henselian
 set_option linter.style.haveILetI false
 set_option linter.unnecessarySimpa false
 @[expose] public section

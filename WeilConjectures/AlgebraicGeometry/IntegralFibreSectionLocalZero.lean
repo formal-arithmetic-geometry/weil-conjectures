@@ -14,7 +14,11 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationModuleFibreFactorization
 import WeilConjectures.AlgebraicGeometry.StrictHenselianIntegralSectionsInjective
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationCompatibility
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-! # Local sections of an integral geometric fibre
 
