@@ -3,11 +3,119 @@
  "kind": "statement",
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a complex representing $C$ and a quasi-isomorphism $P\\to C$ with $P$ K-flat and with flat terms, using [lem-pc-kflat-resolution]. We will construct the comparison on every such $P$, rather than assume a functorial choice of resolution. All sites here are the given small site, so this resolution theorem applies without a size change.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; first sentence of proof of Tag 0D6D, lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topos-kflat-pullback] with identity inverse image and structural map $a:R\\to S$. It says that $P_S=P\\otimes_R S$ is K-flat with flat terms over $S$. The identity functor and its identity adjunction preserve finite limits, so all its hypotheses hold; flatness of $a$ is not required. Apply the same result for $b:S\\to T$ and $ba:R\\to T$. By [lem-pur-derived-change-of-rings], the iterated extension is therefore computed by $(P\\otimes_R S)\\otimes_S T$, and the direct extension by $P\\otimes_R T$. Moreover quasi-isomorphisms between these resolving complexes remain quasi-isomorphisms after each extension, by clause (1) of that node.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat; Tag 06YY, lemma-derived-base-change; middle sentences of proof of Tag 0D6D"
+   }
+  },
+  {
+   "text": "Construct $A_P:(P\\otimes_R S)\\otimes_S T\\to P\\otimes_R T$ and $B_P:P\\otimes_R T\\to(P\\otimes_R S)\\otimes_S T$ by the displayed formulas in the statement, using the sheaf tensor section calculus [def-weil-pbc-ringed-tensor-section-calculus]. For $r\\in R$, the inner balancing relation becomes $a(r)s$ and hence $b(a(r))b(s)t$; for $s_0\\in S$, the outer relation becomes $b(s_0s)t=b(s)b(s_0)t$. Thus $A_P$ is balanced in both stages. The formula for $B_P$ respects $R$-balancing by moving $a(r)$ through the outer tensor. They commute with restrictions and hence define sheaf morphisms. Their composites send $x\\otimes t$ to itself and $(x\\otimes s)\\otimes t$ to $(x\\otimes1)\\otimes b(s)t=(x\\otimes s)\\otimes t$. Pure tensors determine these maps, so they are inverse. Since $S,T$ occupy degree zero, both formulas commute with $d_P$ and define inverse chain maps.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, last sentence; explicit balanced-tensor comparison for identity underlying topoi (sites-modules.tex Tags 03D7 and 03EK)"
+   }
+  },
+  {
+   "text": "The maps $A_P,B_P$ are natural for chain maps: on a tensor the two composites involving $f:P\\to P'$ send it respectively to $f(x)\\otimes b(s)t$ and $(f(x)\\otimes1)\\otimes t$. They respect chain homotopies because they commute with every termwise module map, including the degree $-1$ maps defining a homotopy. By the first assertion of [lem-weil-pbc-site-derived-tensor-descent], the localization of the full homotopy subcategory of flat-term K-flat complexes at its quasi-isomorphisms is equivalent to $D(R)$. The two functors of step 2 invert those quasi-isomorphisms. Clause (2) of [lem-weil-pbc-localization-universal-property] therefore descends $A$ and $B$ to inverse natural transformations. Under the canonical K-flat computations of [lem-pur-derived-change-of-rings] these are exactly the required derived functors. The uniqueness clause gives independence of the representative and all resolution comparisons, not just an isomorphism of the resulting objects.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 0G7D (resolving-class localization), Tag 06YY (K-flat computation); naturality made explicit in the proof of Tag 0D6D"
+   }
+  },
+  {
+   "text": "The normalized derived adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction] identifies the unit at $Q_RP$ with $x\\mapsto x\\otimes1$, and identifies the second unit at $Q_SP_S$ with $x\\otimes s\\mapsto(x\\otimes s)\\otimes1$. Hence their composite sends $x$ to $(x\\otimes1)\\otimes1$. Applying $A_P$ sends this to $x\\otimes b(1)1=x\\otimes1$, the unit for $ba$. That node also states exactness of restriction, so these are morphisms in $D(R)$ after restriction, whose underlying maps are unchanged. Every $C$ is isomorphic to $Q_RP$ by step 1; naturality of the units and of $A$ transports this equality to $C$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, specialized to identity topoi; unit normalization from derived.tex Tags 0FND and 09T5, as recorded in the cited node"
+   }
+  },
+  {
+   "text": "For a third map $c:T\\to U$, the two successive collapses of $((P\\otimes_R S)\\otimes_S T)\\otimes_T U$ both send $((x\\otimes s)\\otimes t)\\otimes u$ to $x\\otimes c(b(s))c(t)u$: one obtains $c(b(s)t)u$, the other $c(b(s))(c(t)u)$. These are equal by multiplicativity of $c$ and associativity in $U$. Pure tensors determine maps by [def-weil-pbc-ringed-tensor-section-calculus]. More generally any parenthesized collapse along a finite chain of ring maps multiplies the images of all scalar entries in the final ring, in their order; induction on the parenthesization proves this from the two-factor formula. Identity maps give the usual unit constraints by $x\\otimes r\\mapsto rx$. Thus all iterated comparisons agree on the resolving complexes. Clause (3) of [lem-weil-pbc-localization-universal-property] gives the same equalities after descent.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; explicit coherence of its termwise identity-topos specialization"
+   }
+  },
+  {
+   "text": "For a commuting diagram of coefficient maps $(R\\xrightarrow a S\\xrightarrow b T)\\to(R'\\xrightarrow{a'}S'\\xrightarrow{b'}T')$, write the vertical maps as $\\alpha,\\beta,\\gamma$. On a compatible semilinear chain map $f$, applying the coefficient maps before or after $A$ yields $f(x)\\otimes b'(\\beta(s))\\gamma(t)$ and $f(x)\\otimes\\gamma(b(s)t)$; these agree since $b'\\beta=\\gamma b$. The inverse formula is compatible as well, since the vertical maps preserve $1$. These identities define sheaf maps and can be checked on pure tensors by [def-weil-pbc-ringed-tensor-section-calculus]. To compute derived change of the base ring, use $P\\otimes_R R'$ as representative over $R'$: [lem-weil-pbc-ringed-topos-kflat-pullback] makes it flat-term K-flat. After extending to the final ring $T'$, the two routes collapse nested tensors to $x\\otimes\\gamma(b(s))\\gamma(t)t'$; step 6 removes parenthesization choices. Consequently this is an identity on actual representatives of the coefficient-change diagram. Localization preserves it by [lem-weil-pbc-localization-universal-property]; naturality in arbitrary derived input morphisms is already supplied by step 4.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; explicit naturality of the balanced-tensor formula under homomorphisms of coefficient diagrams"
+   }
+  },
+  {
+   "text": "On the category with one object and only its identity arrow, with the identity covering, every presheaf is a sheaf: the sheaf condition for that covering is the identity equalizer. A ring sheaf is then a commutative ring, a module sheaf is a module, and the sheaf tensor is the ordinary tensor since sheafification is the identity [def-pur-sheaf-tensor-product]. Thus the same proof specializes to ordinary rings, including nonflat quotient maps.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, applied to the terminal site"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, using Tags 06YS, 06YY and 0G7E; explicit identity-topos tensor formulas, unit normalization, coefficient naturality and coherence supplied here."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-wcontractible-constant-reductions-ml",
@@ -27,7 +135,8 @@
   "lem-pur-derived-change-of-rings",
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
-  "def-pc-sheaf-restrict-scalars"
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
  "mathlib_searches": [
   {
@@ -92,6 +201,62 @@
    "results": "8 hits: SheafOfModules.pushforwardSections_unitHomEquiv, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, ModuleCat.extendScalars_assoc', ModuleCat.extendScalarsComp, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp_assoc",
    "date": "2026-10-17",
    "verdict": "no match: the hits state local sheafification, ordinary module tensor, or condensed/local-site results; none states this pro-étale detection or general ring-sheaf derived normalization lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"changeOfRings\"",
+   "results": "{\"top\": [], \"note\": \"\", \"n_hits\": 0, \"ok\": true}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary scalar extension, underived sheaf pullback, derivations or flat morphisms, not unbounded derived extension of arbitrary ring sheaves with the stated normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable homomorphisms of sheaves of commutative rings, iterated derived extension of scalars is direct derived extension and respects units",
+   "results": "{\"top\": [\"PresheafOfModules.Derivation'\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.Derivation'.Universal.mk\", \"PresheafOfModules.Derivation.d_map\", \"PresheafOfModules.Derivation.postcomp\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"PresheafOfModules.Derivation.ext\", \"PresheafOfModules.Derivation.Universal.fac\"], \"note\": \"\", \"n_hits\": 8, \"ok\": true}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary scalar extension, underived sheaf pullback, derivations or flat morphisms, not unbounded derived extension of arbitrary ring sheaves with the stated normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of ring sheaves is associative and preserves the extension of scalars unit",
+   "results": "{\"top\": [\"AlgHom.extendScalars\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor\", \"PresheafOfModules.Sheafify.mul_smul\", \"ModuleCat.extendScalars_assoc\", \"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendScalars_assoc'\", \"ModuleCat.extendScalars\", \"Algebra.Extension.Hom.toAlgHom\"], \"note\": \"\", \"n_hits\": 8, \"ok\": true}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary scalar extension, underived sheaf pullback, derivations or flat morphisms, not unbounded derived extension of arbitrary ring sheaves with the stated normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(comp|assoc)|extendScalars.*(comp|assoc)|[Kk][Ff]lat",
+   "results": "{\"top\": [], \"note\": \"\", \"n_hits\": 0, \"ok\": true}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary scalar extension, underived sheaf pullback, derivations or flat morphisms, not unbounded derived extension of arbitrary ring sheaves with the stated normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|extendScalarsComp|extendScalars_assoc",
+   "results": "{\"top\": [\"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\"], \"note\": \"\", \"n_hits\": 25, \"ok\": true}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary scalar extension, underived sheaf pullback, derivations or flat morphisms, not unbounded derived extension of arbitrary ring sheaves with the stated normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat derived change of rings transitivity for unbounded complexes of sheaves of modules",
+   "results": "{\"top\": [\"AlgebraicGeometry.Flat.comp\", \"Module.Flat.trans\", \"RingHom.Flat.stableUnderComposition\", \"Module.FaithfullyFlat.trans\", \"RingHom.Flat.comp\", \"CategoryTheory.compatiblePreservingOfFlat\", \"RingHom.FaithfullyFlat.stableUnderComposition\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"note\": \"\", \"n_hits\": 8, \"ok\": true}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary scalar extension, underived sheaf pullback, derivations or flat morphisms, not unbounded derived extension of arbitrary ring sheaves with the stated normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|IsKFlat|extendScalarsComp|extendScalars_assoc",
+   "results": "{\"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"note\": \"\", \"n_hits\": 7, \"ok\": true}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary scalar extension, underived sheaf pullback, derivations or flat morphisms, not unbounded derived extension of arbitrary ring sheaves with the stated normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModuleCat.extendScalarsComp\"",
+   "results": "{\"top\": [\"ModuleCat.extendScalarsComp\", \"ModuleCat.extendScalarsComp_hom_app_one_tmul\"], \"note\": \"\", \"n_hits\": 2, \"ok\": true}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary scalar extension, underived sheaf pullback, derivations or flat morphisms, not unbounded derived extension of arbitrary ring sheaves with the stated normalization"
   }
  ],
  "blueprint": {
@@ -107,5 +272,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-successive-derived-quotient-normalization",
+  "worker": "stage1",
+  "summary": "Realized Stacks 0D6D using the existing flat-term K-flat resolution, pullback preservation, derived scalar extension, resolving-class localization and normalized coefficient-adjunction nodes. Wrote balanced inverse maps and verified units, coefficient naturality and all iterated comparisons explicitly. No new nodes and no statement correction. Preserved the inherited source, blueprint provenance and Mathlib search records; added actual logged searches.",
+  "blueprint": "det-lem-integral-models-stacks: the reduction compatibility needed for the first reduction in the integral criterion, via lem-sfb-integral-cohomological-adic-criterion, lem-sfb-adic-stratified-perfect, lem-sfb-adic-residue-lisse-perfect-lift and lem-sfb-wcontractible-constant-reductions-ml; successive reductions are normalized by the scalar-extension units.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic small-ringed-site flat-term K-flat resolutions, needed for an arbitrary unbounded complex; no integral-model unit node constructs these."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic K-flat preservation applied only to identity topoi and arbitrary structural ring maps, so a second scalar extension can be computed on the same resolution."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The scalar-extension derived functor already used in the statement; its K-flat computation and quasi-isomorphism invariance are generic tools."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Only its resolving-class localization equivalence is used to descend explicit natural chain maps; this does not replace the integral-model route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Its normalized scalar-extension unit formula supplies the meaning of the units in the item; only unit normalization and exact restriction are used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-e15420e4d",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-e15420e4d (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the statements of all 14 cited nodes, the unit, the blueprint ancestor and creating item, and Stacks sites-cohomology at 0D6D (l.3658), 0G7E (l.3508) and 07A6 (l.3990). I checked the tag-to-label map for 06YS, 06YY, 0G7D, 03D7 and 03EK. The delivery has no new nodes and leaves the statement unchanged. The steps follow 0D6D for identity topoi with ring maps a and b. Step 1 takes a flat-term K-flat resolution from lem-pc-kflat-resolution. Step 2 applies lem-weil-pbc-ringed-topos-kflat-pullback with u=id and c=a, b, ba; flatness of the maps is not needed. Step 3 gives balanced inverse maps; I re-checked both balancing relations and both composites. Step 4 descends them through the first assertion of lem-weil-pbc-site-derived-tensor-descent and clause (2) of the localization node. Step 5 normalizes the units through clause (1) of lem-pur-sheaf-ring-derived-coefficient-adjunction, giving x⊗b(1)1=x⊗1. Step 6 proves coherence, with an induction on parenthesizations. Step 7 proves naturality in coefficient diagrams using b'β=γb. Step 8 specializes to the one-object identity-cover site, where every presheaf is a sheaf. I tested the statement on Z→Z/4→Z/2 with C=Z/2: both sides give [Z/2→0→Z/2], and the flat-term K-flat requirement is genuinely needed. proof_deps equals the union of uses and there is no cycle. Duplicate candidates read and rejected: pbc-proetale-derived-pullback-composition (schemes only), sfb-flat-scalar-tower-coherence (exact extensions only), sc-scalar-inverse-image-composition-coherence, sc-kflat-scalar-extension-derived-iso, and the ringed-topoi pullback, tensor-pullback and pushforward nodes. Mathlib searches cover all three kinds; the only hits are underived analogues, so this is not a leaf. I accept the five declared tool_uses as generic black boxes: kflat-resolution, kflat-pullback, derived-change-of-rings, site-derived-tensor-descent (first assertion only) and the coefficient adjunction (unit normalization only). Blueprint from/via/place are consistent and there is no SGA citation. No fixes were made."
  }
 }
