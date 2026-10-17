@@ -3675,6 +3675,7 @@ public import WeilConjectures.RingTheory.Etale.DepthTwo.Lift
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Local
 public import WeilConjectures.RingTheory.Etale.DepthTwo.LocalToGlobal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Rank
+public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Splitting
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
 public import WeilConjectures.RingTheory.Etale.IntegralClosureSpreading
