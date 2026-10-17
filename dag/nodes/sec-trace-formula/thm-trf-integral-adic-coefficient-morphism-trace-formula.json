@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-trf-integral-adic-coefficient-morphism-trace-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral adic trace formula for Frobenius coefficient morphisms",
@@ -19,28 +19,72 @@
   "def-weil-pbc-etale-origin-witness",
   "def-trf-admissibility",
   "prop-trf-rational-frobenius-integral-model",
-  "def-weil-finite-field-fiber"
+  "def-weil-finite-field-fiber",
+  "def-trf-adic-system"
  ],
  "proof": [
   {
-   "text": "*(1).* By [prop-trf-adic-coefficient-morphism-systems], items (1) and (3),\neach $P_n$ and $P_{\\bar y,n}$ is perfect and the families\n$(F_{c,m}(\\psi_n))_n$ and $(\\psi_{n,m,\\bar y})_n$ are compatible; by its\nitem (2) they have lifts, and by its item (4) the traces of any lifts are\nthe compatible systems\n$$\n\\operatorname{tr}_{\\mathcal O_E}(V_m)=\\bigl(\\operatorname{tr}_{A_n}(F_{c,m}(\\psi_n)\\mid P_n)\\bigr)_n,\n\\qquad\n\\operatorname{tr}_{\\mathcal O_E}(V_{y,m})=\\bigl(\\operatorname{tr}_{A_n}(\\psi_{n,m,\\bar y}\\mid P_{\\bar y,n})\\bigr)_n .\n$$\nAt each level $n$, [thm-trf-coefficient-morphism-trace-formula], applied to\n$(K_n,\\psi_n)$ under the assumed hypotheses (it requires no invertibility of\n$\\psi_n$), gives\n$$\n\\operatorname{tr}_{A_n}\\bigl(F_{c,m}(\\psi_n)\\mid P_n\\bigr)\n=\\sum_{y\\in X_0(\\mathbf F_{q^m})}\\operatorname{tr}_{A_n}\\bigl(\\psi_{n,m,\\bar y}\\mid P_{\\bar y,n}\\bigr)\n\\quad\\text{in }A_n,\n$$\nwith the stalk endomorphism normalized as there and in\n[prop-trf-adic-coefficient-morphism-systems]. The index set\n$X_0(\\mathbf F_{q^m})$ is finite ($X_0$ is of finite type over $k_0$) and the\nsame for all $n$, and the reduction $\\mathcal O_E\\to A_n$ is additive. Hence\n$\\operatorname{tr}_{\\mathcal O_E}(V_m)$ and $\\sum_y\\operatorname{tr}_{\\mathcal O_E}(V_{y,m})$\nhave the same image in every $A_n$, and they are equal because\n$\\mathcal O_E\\to\\varprojlim_nA_n$ is injective.",
+   "text": "Fix $m\\geq1$ and put $Y_m=X_0(\\mathbf F_{q^m})$. This set is finite by clause (1) of [lem-weil-point-counts-finite], applied to the finite-type $k_0$-scheme $X_0$ and the finite extension $\\mathbf F_{q^m}/k_0$. It depends on $X_0$ and $m$, not on the coefficient level $n$. By [prop-trf-adic-coefficient-morphism-systems], items (1)–(3), the complexes $P_n,P_{\\bar y,n}$ are perfect, the two operator families $(F_{c,m}(\\psi_n))_n$ and $(\\psi_{n,m,\\bar y})_n$ are compatible, and their integral realizations are bounded finite-free complexes admitting lifts of these families. Choose any such lifts $V_m$ and $V_{y,m}$ for $y\\in Y_m$. No strict Weil structure or invertibility of $\\psi_n$ is required by this proposition.",
    "uses": [
-    "prop-trf-adic-coefficient-morphism-systems",
-    "thm-trf-coefficient-morphism-trace-formula"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*(2).* By [prop-trf-rational-frobenius-integral-model], item (2), the\n$\\psi_n$ form a compatible system of Frobenius coefficient morphisms on the\nreduction tower of $K_{\\mathcal O}$; this tower, with the associativity\nisomorphisms $K_{n+1}\\otimes^L_{A_{n+1}}A_n\\cong\nK_{\\mathcal O}\\otimes^L_{\\mathcal O_E}A_n=K_n$ as $\\nu_n$, is a normalized\n$A_\\bullet$-system of [def-trf-adic-system], its levels lying in\n$D^b_{ctf}(X,A_n)$ by hypothesis. For it\n$P_{\\mathcal O}=R\\Gamma_c(X,K_{\\mathcal O})$ and\n$P_{\\bar y,\\mathcal O}=K_{\\mathcal O,\\bar y}$\n([prop-trf-adic-coefficient-morphism-systems]). By items (3) and (4) of\n[prop-trf-rational-frobenius-integral-model], $U_m$ is the derived limit of\nthe levelwise operators $F_{c,m}(\\psi_n)$ and $U_{y,m}$ that of the\n$\\psi_{n,m,\\bar y}$, i.e. $\\mathrm{pr}_n\\circ U_m=F_{c,m}(\\psi_n)\\circ\\mathrm{pr}_n$\nand likewise for the stalks; so by item (2) of\n[prop-trf-adic-coefficient-morphism-systems] they are lifts of the two\ncompatible families, and (1) gives the identity.",
-   "uses": [
-    "prop-trf-rational-frobenius-integral-model",
-    "def-trf-adic-system",
+    "lem-weil-point-counts-finite",
     "prop-trf-adic-coefficient-morphism-systems"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
+    "place": "(1), existence of lifts and finiteness of the common index set"
+   }
+  },
+  {
+   "text": "For each $n\\geq1$, apply [thm-trf-coefficient-morphism-trace-formula] with coefficient ring $A_n$, complex $K_n$ and coefficient morphism $\\psi_n$. The common finite-field datum and the separated finite-type scheme are those of the hypotheses; $K_n\\in D^b_{ctf}(X,A_n)$ follows from the assumed normalized system, and the explicit etale-origin witness and the graph/fixed-point exceptional-adjoint admissibility on the compactification over $k_0$ are assumed at this level. The theorem does not assume invertibility. Its stalk endomorphism is $(\\psi_{n,m})_{\\bar y}\\circ\\iota_{K_n}$, exactly the normalization in the operator-compatibility clause of [prop-trf-adic-coefficient-morphism-systems]. Consequently\n$$a_n:=\\operatorname{tr}_{A_n}(F_{c,m}(\\psi_n)\\mid P_n)=\\sum_{y\\in Y_m}\\operatorname{tr}_{A_n}(\\psi_{n,m,\\bar y}\\mid P_{\\bar y,n})=:\\sum_{y\\in Y_m}b_{y,n}.$$",
+   "uses": [
+    "thm-trf-coefficient-morphism-trace-formula",
+    "prop-trf-adic-coefficient-morphism-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
+    "place": "(1), application of the finite-level trace identity"
+   }
+  },
+  {
+   "text": "Put $a=\\operatorname{tr}_{\\mathcal O_E}(V_m\\mid P_{\\mathcal O})$ and $b_y=\\operatorname{tr}_{\\mathcal O_E}(V_{y,m}\\mid P_{\\bar y,\\mathcal O})$. Item (4) of [prop-trf-adic-coefficient-morphism-systems], applied to these arbitrary lifts, gives $\\rho_n(a)=a_n$ and $\\rho_n(b_y)=b_{y,n}$, where $\\rho_n:\\mathcal O_E\\to A_n$ is reduction. It also identifies these integral traces with the corresponding elements of $\\varprojlim_n A_n=\\mathcal O_E$, independently of the lifts. Thus the notation for the traces in clause (1) is defined even when the operators are not invertible.",
+   "uses": [
+    "prop-trf-adic-coefficient-morphism-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
+    "place": "(1), traces of lifts and their finite reductions"
+   }
+  },
+  {
+   "text": "Since $Y_m$ is finite by step 1, additivity of the quotient ring homomorphism $\\rho_n$ gives\n$$\\rho_n\\Bigl(a-\\sum_{y\\in Y_m}b_y\\Bigr)=a_n-\\sum_{y\\in Y_m}b_{y,n}=0$$\nfor every $n$, using steps 2–3. Under the identification $\\mathcal O_E=\\varprojlim_n A_n$ in item (4) of [prop-trf-adic-coefficient-morphism-systems], this difference is the tuple all of whose coordinates are zero. Equality of tuples makes it zero. This proves clause (1) for the arbitrary lifts chosen in step 1, and hence for every choice of lifts. The argument also covers $Y_m=\\varnothing$, when the sum is zero.",
+   "uses": [
+    "prop-trf-adic-coefficient-morphism-systems"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
+    "place": "(1), last sentence: finite sums and equality in the inverse limit"
+   }
+  },
+  {
+   "text": "For the lattice clause, specialize the given normalized system to the reduction tower $K_n=K_{\\mathcal O}\\otimes^L_{\\mathcal O_E}A_n$ in the hypotheses: its transitions are the reduction maps $K_{\\mathcal O}\\otimes^L_{\\mathcal O_E}A_{n+1}\\to K_{\\mathcal O}\\otimes^L_{\\mathcal O_E}A_n$, so the normalization isomorphisms $\\nu_n$ of [def-trf-adic-system] adjoint to them are the associativity isomorphisms $K_{n+1}\\otimes^L_{A_{n+1}}A_n\\cong K_{\\mathcal O}\\otimes^L_{\\mathcal O_E}A_n=K_n$, and the levels lie in $D^b_{ctf}(X,A_n)$ by the hypotheses of [prop-trf-rational-frobenius-integral-model]. Item (2) of [prop-trf-rational-frobenius-integral-model] gives Frobenius coefficient morphisms $\\psi_n=u_n\\circ\\kappa_{K_n}$ compatible with exactly these transitions $K_{n+1}\\otimes^L_{A_{n+1}}A_n\\cong K_n$, hence a compatible system in the sense of [prop-trf-adic-coefficient-morphism-systems]; all finite-level witness and admissibility hypotheses remain assumed. The reduction-tower paragraph of [prop-trf-adic-coefficient-morphism-systems] identifies $P_{\\mathcal O}$ with $R\\Gamma_c(X,K_{\\mathcal O})$ and $P_{\\bar y,\\mathcal O}$ with the completed stalk $K_{\\mathcal O,\\bar y}$. Item (3) of [prop-trf-rational-frobenius-integral-model] says that $U_m$ is the derived limit of the levelwise operators $F_{c,m}(\\psi_n)$, so its projections satisfy $\\mathrm{pr}_n\\circ U_m=F_{c,m}(\\psi_n)\\circ\\mathrm{pr}_n$. The lift criterion in item (2) of [prop-trf-adic-coefficient-morphism-systems] therefore makes $U_m$ a lift. For the local operator use the precise assertion of item (4) of [prop-trf-rational-frobenius-integral-model]: $U_{y,m}$ reduces modulo $\\varpi^n$ to $\\psi_{n,m,\\bar y}$. With the canonical reduction isomorphism $\\pi_n:P_{\\bar y,\\mathcal O}\\otimes^L_{\\mathcal O_E}A_n\\xrightarrow{\\sim}P_{\\bar y,n}$ of [prop-trf-adic-coefficient-morphism-systems], this says exactly $\\pi_n\\circ(U_{y,m}\\otimes^L_{\\mathcal O_E}A_n)=\\psi_{n,m,\\bar y}\\circ\\pi_n$, its definition of a lift. Apply the already proved clause (1) with these lifts to obtain\n$$\\operatorname{tr}_{\\mathcal O_E}(U_m\\mid R\\Gamma_c(X,K_{\\mathcal O}))=\\sum_{y\\in Y_m}\\operatorname{tr}_{\\mathcal O_E}(U_{y,m}\\mid K_{\\mathcal O,\\bar y}).$$\nThis proves clause (2), without claiming that the integral maps are isomorphisms.",
+   "uses": [
+    "prop-trf-rational-frobenius-integral-model",
+    "prop-trf-adic-coefficient-morphism-systems",
+    "def-trf-adic-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
+    "place": "(2), lattice specialization, identification of realizations, and verification of the global and local lift conditions"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-point-counts-finite",
   "prop-trf-adic-coefficient-morphism-systems",
   "thm-trf-coefficient-morphism-trace-formula",
   "prop-trf-rational-frobenius-integral-model",
@@ -48,12 +92,83 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-integral-adic-coefficient-morphism-trace-formula.proof.md",
+  "place": "Proof (1)–(2), expanded using the statements of the existing DAG nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral adic Grothendieck Lefschetz trace formula for compatible Frobenius coefficient morphisms on normalized constructible complexes",
+   "results": "8 hits: BDeRham, BDeRhamPlus, PreTilt.coeff_iterate_frobenius', IsArithFrobAt.arithFrobAt, arithFrobAt, PreTilt.coeff_iterate_frobeniusEquiv_symm, AlgHom.IsArithFrobAt, AlgHom.IsArithFrobAt.mk_apply; no result states the integral adic cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Lefschetz|trace.*Frobenius|Frobenius.*trace",
+   "results": "6 hits: Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/FieldTheory/AxGrothendieck.lean; no result states the integral adic cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace of Frobenius on compactly supported cohomology equals the sum of stalk traces for an integral adic coefficient system",
+   "results": "8 hits: LinearMap.trace_eq_sum_trace_restrict, LinearMap.trace_eq_sum_trace_restrict', Matrix.trace_sum, trace_eq_sum_automorphisms, Algebra.trace_prod_apply, LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup, Algebra.intTrace_eq_trace, FiniteField.algebraMap_trace_eq_sum_pow; no result states the integral adic cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.trace",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.trace'; no result states the integral adic cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match (identifier absent from the Loogle index)"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.Lefschetz|stalk.*trace|trace.*stalk|trace.*[Cc]ompact",
+   "results": "0 hits: ; no result states the integral adic cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a constructible complex with an arbitrary Frobenius map over a finite field the trace on compact cohomology is a finite sum of traces on fibers over rational points, compatible with all adic reductions",
+   "results": "8 hits: FiniteField.algebraMap_trace_eq_sum_pow, Algebra.trace_quotient_mk, Algebra.normalizedTrace_eq_of_finiteDimensional, Algebra.normalizedTrace_eq_of_fininteDimensional, Algebra.normalizedTrace, Algebra.trace_quotient_eq_of_isDedekindDomain, Algebra.normalizedTrace_eq_of_finiteDimensional_apply, Algebra.normalizedTrace_eq_of_fininteDimensional_apply; no result states the integral adic cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalCategory.trace",
+   "results": "0 hits: ; loogle: unknown identifier 'MonoidalCategory.trace'; no result states the integral adic cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match (identifier absent from the Loogle index)"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace",
+   "results": "12 hits: LinearMap.trace, LinearMap.trace_id, LinearMap.trace_one, LinearMap.trace_lie, LinearMap.isNilpotent_trace_of_isNilpotent, LinearMap.trace_smulRight, LinearMap.trace_mul_comm, Matrix.trace_toLin_eq; no result states the integral adic cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz fixed point formula for an endomorphism of a constructible sheaf with coefficients in a complete discrete valuation ring",
+   "results": "8 hits: Profinite.NobelingProof.Linear_CC'₀, CompHausLike.LocallyConstantModule.functor, Profinite.NobelingProof.Linear_CC'₁, CompHausLike.LocallyConstantModule.functor_map_val, Profinite.NobelingProof.Linear_CC', CompHausLike.LocallyConstantModule.functor_obj_val, Profinite.NobelingProof.Nobeling_aux, CompHausLike.LocallyConstantModule.functorToPresheaves_map_app; inspected returned types concern locally constant functions, condensed modules and the Nobeling theorem, not a cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Lefschetz trace of a compatible endomorphism of perfect complexes over an adically complete ring equals the inverse limit of the traces after reduction",
+   "results": "8 hits: BDeRhamPlus, IsAdicComplete.of_comp_lift, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.map_val_apply, IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.mkQ_comp_lift, AdicCompletion.eval_lift, AdicCompletion.factor_eval_eq_evalₐ. The returned types concern adic completion and its maps, not the cohomological trace formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -85,5 +200,21 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-thm-trace-transport"
+ "unit": "sk-thm-trace-transport",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-integral-adic-coefficient-morphism-trace-formula",
+  "worker": "stage1",
+  "summary": "Expanded the two imported paragraphs into five checked steps. Reused the closed point-count finiteness node; obtained trace reduction and inverse-limit equality detection from the adic-systems statement. Checked the finite-level hypotheses and stalk normalization. In the lattice case used the local reduction assertion as stated, rather than claiming an unstated local derived-limit theorem. No new nodes or statement changes.",
+  "blueprint": "Current main-20261015 proof (1): steps 1–4 realize lifts, the finite-level identity, reduction of traces, and finite coordinatewise equality; proof (2): step 5 realizes the lattice specialization. These implement unit steps 1–3 and the integral-lattice input for unit step 4. No departure from the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-f4b0c6c81",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-f4b0c6c81 (reviewer sub-agent of L); spot-checked: Read the whole item, the main-20261015 source and proof (the statement is word for word the same as the source and is not weakened), unit sk-thm-trace-transport, and the full statements of prop-trf-adic-coefficient-morphism-systems, prop-trf-rational-frobenius-integral-model, thm-trf-coefficient-morphism-trace-formula (including its blueprint_update), lem-weil-point-counts-finite and def-trf-adic-system. The delivery has no new nodes. The three statement inputs come from units that sk-thm-trace-transport cites; the point-count lemma is a closed Lean tool, so no tool_uses are needed. Step 1: finiteness of X_0(F_{q^m}) for a finite-type scheme and a finite field extension, plus perfectness and lifts from adic-systems (1)-(3); correct. Step 2: every hypothesis of the finite theorem holds at each level; it needs no invertibility, and its stalk map (psi_m)_ybar∘iota matches adic-systems (3); correct. Step 3: lifts and trace reduction are taken from the statement of adic-systems (4); correct. Step 4: the elementary step is genuinely elementary (a finite sum, every reduction is zero, so the element of lim A_n = O_E is zero); it covers the empty point set. Step 5: U_m is a lift because integral-model (3) makes it a derived limit and adic-systems (2) gives the lift criterion. U_{y,m} is a lift because integral-model (4) says it reduces to psi_{n,m,ybar}, and pi_n is the reduction map under the derived-limit identification. Repair made: step 5 did not say why the psi_n of integral-model (2), stated against the associativity transitions, form a compatible system with respect to the nu_n of adic-systems. I added that for the reduction tower the nu_n of def-trf-adic-system are the associativity isomorphisms, and that the levels lie in D^b_ctf by hypothesis. The blueprint proof (2) says this too. I added def-trf-adic-system to the step's uses and to proof_deps. Small cases checked: the empty scheme; Spec F_q with u = multiplication by the uniformizer (both sides varpi^m, zero at low levels); Spec F_{q^2} over F_q at m=1 (both sides 0). The dependency graph has no cycle. Searching the DAG found no duplicate node. No SGA source is used. The corrected file is fixes/dag/nodes/sec-trace-formula/thm-trf-integral-adic-coefficient-morphism-trace-formula.json; the full review is in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

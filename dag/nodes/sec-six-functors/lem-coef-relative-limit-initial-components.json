@@ -29,62 +29,155 @@
   "def-coef-infinity-relative-cone",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $i$, apply the opposite and mapping-space clauses of [lem-coef-infinity-relative-cone-equivalence](4). The simplicial set $J_i^{\\mathrm{op}}$ is a quasicategory, and $\\operatorname{Map}_{J_i^{\\mathrm{op}}}(z,t_i)\\simeq\\operatorname{Map}_{J_i}(t_i,z)$ is weakly contractible by the hypothesis. Thus [lem-coef-infinity-terminal-anodyne] says that $r_i:\\{t_i\\}\\hookrightarrow J_i^{\\mathrm{op}}$ is right anodyne. This uses its final-vertex criterion on the opposite category, so the direction of the mapping spaces agrees with the initial-object hypothesis.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-terminal-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J5",
+    "place": "Corollary 4.7.3.22, final-vertex criterion applied to each opposite component."
+   }
+  },
+  {
+   "text": "Put $A=I_{\\mathrm{disc}}^{\\mathrm{op}}=I_{\\mathrm{disc}}$, $C=J^{\\mathrm{op}}=\\coprod_iJ_i^{\\mathrm{op}}$, and $r=e^{\\mathrm{op}}:A\\hookrightarrow C$. Opposite commutes with this degreewise disjoint union, since it merely changes the simplicial operators. The map $r=\\coprod_i r_i$ is right anodyne by the pushout and transfinite-composition closures of [def-coef-infinity-right-anodyne]: well order the small set $I$; start with all the singleton summands, replace one singleton by its $J_i^{\\mathrm{op}}$ at each successor stage, and take the degreewise union at each limit stage. Each successor map is a pushout of $r_i$, and the composite is exactly $r$. If $I=\\varnothing$, it is the identity of the empty simplicial set, included in the defining class. In particular, $r$ is degreewise injective.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02J5",
+    "place": "Componentwise extension using the weakly saturated definition of right anodyne maps."
+   }
+  },
+  {
+   "text": "First prove the assertion for every specified cone $q$. By [lem-coef-infinity-relative-cone-equivalence](4), $q$ is a $p$-limit diagram exactly when $Q=q^{\\mathrm{op}}:C^{\\triangleright}\\to D^{\\mathrm{op}}$ is a $p^{\\mathrm{op}}$-colimit diagram, and the same duality identifies the restricted cones. Write $x=Q(*)$ and $F=Q|_C$. For every vertex $z$ of $D^{\\mathrm{op}}$, [lem-coef-infinity-relative-cone-constant-test] tests this colimit property on the square with left column $\\operatorname{Map}_{D^{\\mathrm{op}}}(x,z)\\to\\operatorname{Map}_{B^{\\mathrm{op}}}(p(x),p(z))$ and right column $\\operatorname{Map}_{\\operatorname{Fun}(C,D^{\\mathrm{op}})}(F,\\Delta_Cz)\\to\\operatorname{Map}_{\\operatorname{Fun}(C,B^{\\mathrm{op}})}(p^{\\mathrm{op}}F,\\Delta_Cp(z))$. Restricting along $r$ leaves the left column unchanged. Both right-column restriction maps are equivalences by [lem-coef-infinity-anodyne-cocones], applied to the right anodyne monomorphism $r$ and respectively to the quasicategories $D^{\\mathrm{op}}$ and $B^{\\mathrm{op}}$. The constant-test statement is natural in restriction, so the cone maps and their specified homotopies restrict to those of $Q r^{\\triangleright}$. To check the strict-span hypotheses of [lem-coef-kan-homotopy-pullback-invariance], denote the upper-right, lower-left and lower-right spaces by $U,V,W$, with maps $u:U\\to W$ and $v:V\\to W$, and put primes on the corresponding restricted spaces. Let $a:U\\to U'$ and $c:W\\to W'$ be restriction and $b=\\mathrm{id}_V$. Choose the composition representatives and the cone homotopy in the constant test on $C$; use their restrictions for the test on $A$, as permitted by its naturality clause. Restriction of diagrams commutes with postcomposition by $p^{\\mathrm{op}}$ degree by degree, giving $cu=u'a$, and restriction of the chosen base cocone gives $cv=v'b$. In each simplicial degree the resulting path-pullback map is $(h,k,\\gamma)\\mapsto(a(h),k,c\\gamma)$; its endpoint equations are precisely these two equalities. Thus the cited invariance theorem applies to these strictly commuting spans and makes this map a weak equivalence. The specified cone homotopy is restricted by the same rule, so it also identifies the comparison maps into the path pullbacks. The upper-left comparison maps have the same source and commute with this equivalence, so one is a weak equivalence exactly when the other is (on components and each homotopy group this is two-out-of-three for bijections and group isomorphisms). Hence the testing square is a homotopy pullback exactly when the restricted testing square is. This holds for every $z$, proving that $q$ is a $p$-limit diagram if and only if $qe^{\\triangleleft}$ is.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XQ",
+    "place": "Corollary 7.2.2.2, expanded using the existing anodyne restriction theorem, the constant-object test (02X1) and homotopy-pullback invariance (032B)."
+   }
+  },
+  {
+   "text": "Now suppose the required $q_0:I_{\\mathrm{disc}}^{\\triangleleft}\\to D$ exists. Apply the pushout-join clause of [lem-coef-infinity-anodyne-cocones] to $r:A\\hookrightarrow C$ and the monomorphism $\\varnothing\\hookrightarrow\\Delta^0$. It makes $N=(A\\star\\Delta^0)\\amalg_A C\\hookrightarrow C\\star\\Delta^0$ inner anodyne. Taking opposites and using the join identification of [lem-coef-infinity-relative-cone-equivalence](4) gives $m:M=I_{\\mathrm{disc}}^{\\triangleleft}\\amalg_{I_{\\mathrm{disc}}}J\\hookrightarrow J^{\\triangleleft}$. This is still inner anodyne: reversal sends $\\Lambda_k^n\\hookrightarrow\\Delta^n$ to $\\Lambda_{n-k}^n\\hookrightarrow\\Delta^n$, with $0<n-k<n$ when $0<k<n$; its involution also preserves pushouts, transfinite composites and retract diagrams. Glue $q_0$ and $f$ on $M$; they agree exactly on $I_{\\mathrm{disc}}$ because $q_0|_{I_{\\mathrm{disc}}}=fe$. Their projection under $p$ is exactly $g|_M$, by the prescribed base equality for $q_0$ and $g|_J=pf$. The inner fibration definition [def-coef-infinity-fibrations] supplies a filler for each inner horn, and therefore for $m$: lifting is preserved under pushout by extending on the attached summand and gluing; under transfinite composition by successive compatible fillers and the colimit map at limit stages; and under retracts by extending across the larger arrow and restricting by its section. Isomorphisms lift by their inverses. This is precisely the weakly saturated inner-anodyne class defined in the anodyne-cocone statement. We obtain $q:J^{\\triangleleft}\\to D$ extending the glued map over $g$. Thus $q|_J=f$, $pq=g$, and $qe^{\\triangleleft}=q_0$ hold exactly, including the apex and all higher cone simplices. Step 3 makes $q$ a $p$-limit diagram.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XT",
+    "place": "Proposition 7.2.2.9, left-anodyne case, with the opposite of the pushout-join theorem 018J; explicit extension over the fixed base cone."
+   }
+  },
+  {
+   "text": "Conversely, if a $p$-limit extension $q$ of $f$ over $g$ exists, put $q_0=qe^{\\triangleleft}$. The equalities $q_0|_{I_{\\mathrm{disc}}}=fe$ and $pq_0=ge^{\\triangleleft}$ follow by composition, and Step 3 gives its $p$-limit property. Together with Step 4 this proves both directions of the existence equivalence, as well as the already proved particular-cone clause. For $I=\\varnothing$ both indexing simplicial sets are empty, $e$ is the identity, and both cones are the same point over the same vertex of $B$; the proof asserts the equivalence of the two identical existence problems, without asserting either has a solution. No other limit in $D$ has been assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02XT",
+    "place": "Proposition 7.2.2.9, forward implication; empty indexing set checked explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-terminal-anodyne",
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "def-coef-infinity-fibrations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent finite-coefficient adjunction enhancement; direct specialization of online Kerodon 02J5, 02XQ and 02XT, expanded using existing anodyne-cocone, constant-test, opposite-duality and homotopy-pullback nodes. Online sources requested for archival in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Relative limit cones in an inner fibration can be restricted to the initial object of each disjoint component of the indexing infinity category",
-   "results": "{\"t\": \"2026-10-16T21:25:38Z\", \"tool\": \"leanfinder\", \"query\": \"Relative limit cones in an inner fibration can be restricted to the initial object of each disjoint component of the indexing infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.Functor.Initial.limitConeOfComp_cone\", \"CategoryTheory.Limits.LimitPresentation.reindex\", \"CategoryTheory.Functor.Initial.limitConeComp_cone\"], \"digest\": \"3ce1e39600942ad7\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: Read Mathlib/CategoryTheory/Limits/Final.lean:640-665: Functor.Initial.conesEquiv and isLimitWhiskerEquiv are for ordinary Category instances and ordinary cones. The StrictSegal.isPointwiseRightKanExtensionAt hits concern ordinary set-valued simplicial presheaves (Coskeletal.lean:40-67), not relative universal cones in inner fibrations of quasicategories. No one-line specialization gives either relative existence over a fixed base cone or the coherent p-limit criterion."
+   "query": "Relative limit diagrams in an inner fibration can be restricted to initial objects in each disjoint component of a quasicategory",
+   "results": "{\"t\": \"2026-10-16T23:22:02Z\", \"tool\": \"leanfinder\", \"query\": \"Relative limit diagrams in an inner fibration can be restricted to initial objects in each disjoint component of a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling\", \"SSet.Subcomplex.isInitialBot\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\"], \"digest\": \"d21c01d0e467295c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary-category limits, ambient limits of simplicial sets or strict Segal coskeleta, rather than relative universal cones for arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Final.lean:640-672, AlgebraicTopology/Quasicategory/Basic.lean:35-55 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:52-76,184-190."
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Functor.Initial, CategoryTheory.Limits.IsLimit",
-   "results": "{\"t\": \"2026-10-16T21:25:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Initial, CategoryTheory.Limits.IsLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial.isLimitWhiskerEquiv\", \"CategoryTheory.Limits.IsLimit.overPost\", \"CategoryTheory.Functor.Initial.isLimitExtendConeEquiv\", \"CategoryTheory.Functor.Initial.limitConeComp_isLimit\", \"CategoryTheory.Functor.Initial.limitConeOfComp_isLimit\", \"CategoryTheory.Limits.exists_eq_isLimitMap_of_preservesColimit_yoneda\", \"CategoryTheory.regularTopology.parallelPair_pullback_initial\", \"Profinite.Extend.functor_initial\"], \"digest\": \"be055258eb3e7d92\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: Read Mathlib/CategoryTheory/Limits/Final.lean:640-665: Functor.Initial.conesEquiv and isLimitWhiskerEquiv are for ordinary Category instances and ordinary cones. The StrictSegal.isPointwiseRightKanExtensionAt hits concern ordinary set-valued simplicial presheaves (Coskeletal.lean:40-67), not relative universal cones in inner fibrations of quasicategories. No one-line specialization gives either relative existence over a fixed base cone or the coherent p-limit criterion."
+   "results": "{\"t\": \"2026-10-16T23:22:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Initial, CategoryTheory.Limits.IsLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial.isLimitWhiskerEquiv\", \"CategoryTheory.Limits.IsLimit.overPost\", \"CategoryTheory.Functor.Initial.isLimitExtendConeEquiv\", \"CategoryTheory.Functor.Initial.limitConeComp_isLimit\", \"CategoryTheory.Functor.Initial.limitConeOfComp_isLimit\", \"CategoryTheory.Limits.exists_eq_isLimitMap_of_preservesColimit_yoneda\", \"CategoryTheory.regularTopology.parallelPair_pullback_initial\", \"Profinite.Extend.functor_initial\"], \"digest\": \"be055258eb3e7d92\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary-category limits, ambient limits of simplicial sets or strict Segal coskeleta, rather than relative universal cones for arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Final.lean:640-672, AlgebraicTopology/Quasicategory/Basic.lean:35-55 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:52-76,184-190."
   },
   {
    "tool": "grep",
    "query": "initial.*(limit|cone)|limit.*initial|relative.*limit",
-   "results": "{\"t\": \"2026-10-16T21:25:37Z\", \"tool\": \"grep\", \"query\": \"initial.*(limit|cone)|limit.*initial|relative.*limit\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Terminal.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Terminal.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Terminal.lean\"], \"digest\": \"12a161809a1b373a\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: Read Mathlib/CategoryTheory/Limits/Final.lean:640-665: Functor.Initial.conesEquiv and isLimitWhiskerEquiv are for ordinary Category instances and ordinary cones. The StrictSegal.isPointwiseRightKanExtensionAt hits concern ordinary set-valued simplicial presheaves (Coskeletal.lean:40-67), not relative universal cones in inner fibrations of quasicategories. No one-line specialization gives either relative existence over a fixed base cone or the coherent p-limit criterion."
+   "results": "{\"t\": \"2026-10-16T23:22:03Z\", \"tool\": \"grep\", \"query\": \"initial.*(limit|cone)|limit.*initial|relative.*limit\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FinallySmall.lean\", \"Mathlib/CategoryTheory/Limits/FinallySmall.lean\", \"Mathlib/CategoryTheory/Limits/FinallySmall.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\"], \"digest\": \"6214b09ee172b253\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary-category limits, ambient limits of simplicial sets or strict Segal coskeleta, rather than relative universal cones for arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Final.lean:640-672, AlgebraicTopology/Quasicategory/Basic.lean:35-55 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:52-76,184-190."
   },
   {
    "tool": "leansearch",
-   "query": "A relative limit exists over a prescribed base cone if it exists after restriction to a coinitial subcategory",
-   "results": "{\"t\": \"2026-10-16T21:25:37Z\", \"tool\": \"leansearch\", \"query\": \"A relative limit exists over a prescribed base cone if it exists after restriction to a coinitial subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.recOn\", \"CategoryTheory.Limits.LimitCone.cone\", \"CategoryTheory.Limits.getLimitCone\", \"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom\", \"CategoryTheory.Limits.limit.isLimit\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.Limits.IsLimit.ofExistsUnique\", \"CategoryTheory.Limits.isLimitOfCoconeOfConeUnop\"], \"digest\": \"34eeea16d14079f1\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: Read Mathlib/CategoryTheory/Limits/Final.lean:640-665: Functor.Initial.conesEquiv and isLimitWhiskerEquiv are for ordinary Category instances and ordinary cones. The StrictSegal.isPointwiseRightKanExtensionAt hits concern ordinary set-valued simplicial presheaves (Coskeletal.lean:40-67), not relative universal cones in inner fibrations of quasicategories. No one-line specialization gives either relative existence over a fixed base cone or the coherent p-limit criterion."
+   "query": "A relative limit exists over a prescribed base cone if it exists after restriction to a left cofinal subcategory",
+   "results": "{\"t\": \"2026-10-16T23:22:03Z\", \"tool\": \"leansearch\", \"query\": \"A relative limit exists over a prescribed base cone if it exists after restriction to a left cofinal subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.getLimitCone\", \"CategoryTheory.Limits.LimitCone.cone\", \"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.Limits.isColimitCoconeLeftOpOfCone\", \"CategoryTheory.Limits.isLimitOfReflects\", \"CategoryTheory.Limits.IsLimit.ofExistsUnique\", \"CategoryTheory.Limits.isLimitOfCoconeRightOpOfCone\"], \"digest\": \"3524e657cde252a7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary-category limits, ambient limits of simplicial sets or strict Segal coskeleta, rather than relative universal cones for arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Final.lean:640-672, AlgebraicTopology/Quasicategory/Basic.lean:35-55 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:52-76,184-190."
   },
   {
    "tool": "leanfinder",
-   "query": "Computing a limit by selecting an initial object in each connected component of the indexing category, with a prescribed cone under a functor",
-   "results": "{\"t\": \"2026-10-16T21:51:05Z\", \"tool\": \"leanfinder\", \"query\": \"Computing a limit by selecting an initial object in each connected component of the indexing category, with a prescribed cone under a functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.limitOfDiagramInitial\", \"CategoryTheory.CostructuredArrow.CreatesConnected.isLimitRaiseCone\", \"CategoryTheory.Limits.limit\", \"CategoryTheory.Limits.coneOfDiagramInitial\", \"CategoryTheory.Limits.lim\", \"CategoryTheory.Limits.HasLimit\", \"CategoryTheory.Limits.hasLimit_of_domain_hasInitial\", \"CategoryTheory.Limits.IsLimit\"], \"digest\": \"136683a8f2c4f198\"}",
+   "query": "Limits relative to an inner fibration of infinity categories are determined by restricting a cone to one initial vertex in each connected component",
+   "results": "{\"t\": \"2026-10-16T23:35:52Z\", \"tool\": \"leanfinder\", \"query\": \"Limits relative to an inner fibration of infinity categories are determined by restricting a cone to one initial vertex in each connected component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.hasLimits\", \"SSet.Truncated.hasLimits\", \"CategoryTheory.CostructuredArrow.CreatesConnected.isLimitRaiseCone\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.Functor.Initial.limitConeOfComp\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension_lift\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitCone\"], \"digest\": \"1fde7df6c421b1a2\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Final.lean:640-665 and Limits/Shapes/IsTerminal.lean:427-431; these require ordinary Category structures and ordinary cones, not relative limit diagrams for an inner fibration with prescribed base cone."
+   "verdict": "no match: the hits concern ordinary-category limits, ambient limits of simplicial sets or strict Segal coskeleta, rather than relative universal cones for arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/Final.lean:640-672, AlgebraicTopology/Quasicategory/Basic.lean:35-55 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:52-76,184-190."
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.Functor.Initial.conesEquiv",
-   "results": "{\"t\": \"2026-10-16T21:51:03Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Initial.conesEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial.conesEquiv\", \"CategoryTheory.Functor.Initial.conesEquiv_inverse\", \"CategoryTheory.Functor.Initial.conesEquiv_functor\", \"CategoryTheory.Functor.Initial.conesEquiv_counitIso\", \"CategoryTheory.Functor.Initial.conesEquiv_unitIso\"], \"digest\": \"dc8523b5b3867b0d\"}",
+   "query": "\"Quasicategory\", \"limit\"",
+   "results": "{\"t\": \"2026-10-16T23:35:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Final.lean:640-665 and Limits/Shapes/IsTerminal.lean:427-431; these require ordinary Category structures and ordinary cones, not relative limit diagrams for an inner fibration with prescribed base cone."
+   "verdict": "no match: no declarations returned."
   },
   {
    "tool": "grep",
-   "query": "coinitial|leftCofinal|relativeLimit|IsInitial.*[Ll]imit",
-   "results": "{\"t\": \"2026-10-16T21:51:03Z\", \"tool\": \"grep\", \"query\": \"coinitial|leftCofinal|relativeLimit|IsInitial.*[Ll]imit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Terminal.lean\"], \"digest\": \"3d005b0324cf266e\"}",
+   "query": "relativeLimit|relative_limit|leftCofinal|left_cofinal|rightAnodyne|right_anodyne",
+   "results": "{\"t\": \"2026-10-16T23:35:53Z\", \"tool\": \"grep\", \"query\": \"relativeLimit|relative_limit|leftCofinal|left_cofinal|rightAnodyne|right_anodyne\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Final.lean:640-665 and Limits/Shapes/IsTerminal.lean:427-431; these require ordinary Category structures and ordinary cones, not relative limit diagrams for an inner fibration with prescribed base cone."
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|[Aa]nodyne|[Rr]elative[Ll]imit",
+   "results": "{\"t\": \"2026-10-17T00:42:42Z\", \"tool\": \"grep\", \"query\": \"cofinal|[Aa]nodyne|[Rr]elative[Ll]imit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Rank.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RankNat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"f4e9f52b90670331\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the coskeletal and Kan-extension hits concern ordinary diagrams in simplicial sets, and the inner-anodyne hits give lifting calculus only. Read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:55-76 and AnodyneExtensions/Inner/Basic.lean:19-58. None states relative universality for coherent cones in arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"cone\"",
+   "results": "{\"t\": \"2026-10-17T00:42:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal inclusions of simplicial sets preserve universal cones relative to a functor of quasicategories",
+   "results": "{\"t\": \"2026-10-17T00:42:44Z\", \"tool\": \"leanfinder\", \"query\": \"Cofinal inclusions of simplicial sets preserve universal cones relative to a functor of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.rightExtensionInclusion\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"CategoryTheory.CostructuredArrow.CreatesConnected.mapCone_raiseCone\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtension\"], \"digest\": \"5d78ccac1797c8eb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the coskeletal and Kan-extension hits concern ordinary diagrams in simplicial sets, and the inner-anodyne hits give lifting calculus only. Read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:55-76 and AnodyneExtensions/Inner/Basic.lean:19-58. None states relative universality for coherent cones in arbitrary quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-free-extension",
@@ -104,5 +197,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-limit-initial-components",
+  "worker": "stage1",
+  "summary": "Replaced the earlier two-helper attempt by a direct five-step proof using existing DAG statements. Opposite component inclusions are right anodyne by the existing final-vertex criterion; their disjoint union is handled explicitly by weak saturation. Mapping-space restriction plus the constant-object test and homotopy-pullback invariance prove the particular-cone clause. The pushout-join theorem and inner-horn lifting then construct an extension over exactly the given base cone. No new nodes or statement changes.",
+  "blueprint": "Realizes the historical ancestor proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim, through the operadic-free-extension branch recorded in blueprint.from.via. The component reduction uses the existing terminal-anodyne theorem in opposite categories and the left-anodyne case of Kerodon 02XT, retaining the initial-object/cofinal route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NI-7e218e4f2",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-7e218e4f2 (reviewer sub-agent of L); spot-checked: Read the item JSON in full, the report and all nine cited node statements (three definitions plus the anodyne-cocone, terminal-anodyne, relative-cone-equivalence (4), constant-test, Kan pullback-invariance and fibration nodes). The statement is the exact specialization of Kerodon 02XT/02XQ to the inclusion of the initial objects, which is left cofinal by the opposite of 02J5: it assumes only an inner fibration, fixes the boundary and base exactly, and allows an empty or infinite index set. Kerodon is not archived in literature/ and is correctly listed as WANTED; the proof does not depend on it, because it is complete from DAG statements. Step 1: in J_i^op the incoming mapping spaces of t_i are contractible, so {t_i} into J_i^op is right anodyne; orientation correct. Step 2: the coproduct is right anodyne by successive pushouts with unions at limit stages; the empty case is the identity. Step 3: the constant test on C^op and the restriction equivalence from anodyne-cocones (correct variance, diagram to constant) form strict spans once composition choices are restricted; pullback invariance with b=id and two-out-of-three give the particular-cone iff. Step 4: the pushout-join with k from the empty set to the point gives A^▷ ⊔_A C into C^▷, which is inner (checked on Λ^2_1 in Δ^2); opposites keep horns inner; the inner-horn lift preserves the boundary, base and q_0 exactly. Step 5: the converse is elementary and the empty case is handled correctly. Small cases checked: I empty, D empty over B a point, Δ^1 with initial vertex 0, singleton components, p the identity. No new nodes; rg over the snapshot DAG for 02XT/02XQ/02J5 and initial-object/relative-limit wording found no duplicate. The graph is acyclic over 162 nodes, all proof_deps are in unit sk-prop-sf-biduality-general, the blueprint ancestor place matches paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint, and no SGA is used. No changes, no tool_uses."
  }
 }
