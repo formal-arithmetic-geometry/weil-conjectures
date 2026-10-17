@@ -17,9 +17,100 @@
   "def-pc-projective-morphism",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X'=X\\times_SB$ with projections $q:X'\\to X$ and $f':X'\\to B$. By [lem-weil-pbc-strict-henselization-functoriality](1) the geometric point $\\bar s=f\\circ x$ factors through the closed point of $B$ by a canonical lift $\\bar s':\\operatorname{Spec}\\Omega\\to B$; let $x'=(x,\\bar s')$ be the induced geometric point of $X'$, which lies over the closed point of $B$. Fibre bound: let $t\\in B$ with image $t_0\\in S$ and let $z'\\in X'_t$ with image $z\\in X_{t_0}$. The fibre-dimension-after-base-change lemma gives $\\dim_{z'}(X'_t)=\\dim_z(X_{t_0})$, and $\\dim_z(X_{t_0})\\le\\dim X_{t_0}\\le N$ (take the open $X_{t_0}$ itself in the definition of $\\dim_z$). By [lem-weil-pbc-dimension-supremum-local-dimensions] $\\dim X'_t=\\sup_{z'}\\dim_{z'}X'_t\\le N$; so every fibre of $f'$ has dimension at most $N$, and $f'$ is locally of finite type as a base change. Strict localizations: [lem-weil-pbc-strict-base-closed-point-localizations], applied with $\\Xi=\\Omega$ and $a=\\mathrm{id}$ (so $f'x'=\\bar s'$ and $\\bar u=\\bar s$), gives an isomorphism $X'_{(x')}\\xrightarrow{\\sim}X_{(x)}$ over $X$ which, using $B\\cong S_{(\\bar s)}$ (here the identity of $B$, by the uniqueness clause (3) of the functoriality lemma), commutes with the maps to $B$. Hence it suffices to prove the lemma for $f':X'\\to B$ and $x'$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-pc-scheme-fibre",
+    "def-kun-dimension",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-weil-pbc-strict-base-closed-point-localizations",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4: passage to the strict local base and preservation of the fibre-dimension hypothesis."
+   }
+  },
+  {
+   "text": "Apply the local quasi-finite projection lemma to the base-changed morphism and the geometric point $x'$ (the scheme $B=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$ is affine by [def-weil-pbc-strict-henselization-limit]). It gives an affine open $U$ containing the image of $x'$, an integer $d\\le N$, and a separated quasi-finite finite-type map $e:U\\to\\mathbf A^d_B$ over $B$ whose structural composite is the restriction of $f'$.",
+   "uses": [
+    "lem-trf-local-quasi-finite-projection",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4: first reduction by a quasi-finite projection."
+   }
+  },
+  {
+   "text": "The target $\\mathbf A^d_B$ is affine, hence quasi-compact and quasi-separated. Zariski's main theorem in the finite-type separated quasi-finite form therefore factors $e$ as an open immersion $U\\hookrightarrow T$ followed by a finite morphism $T\\to\\mathbf A^d_B$.",
+   "uses": [
+    "thm-pqf-zmt-factorization",
+    "def-nagata-relative-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9nérale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4: Zariski main theorem reduction."
+   }
+  },
+  {
+   "text": "Apply the finite-projective-envelope lemma to $T\\to\\mathbf A^d_B$. We obtain an open immersion $T\\hookrightarrow P$ and a projective proper morphism $p:P\\to B$ extending the structural map, with every fibre of $p$ of dimension at most $d$, hence at most $N$.",
+   "uses": [
+    "lem-trf-finite-projective-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9nérale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4: projective compactification after the finite factorization."
+   }
+  },
+  {
+   "text": "Let $y$ be the image of $x'$ under the open immersions $U\\hookrightarrow T\\hookrightarrow P$; it lies over the closed point of $B$ because $x'$ does and the structural maps to $B$ are compatible ($p\\circ j$ restricted to $U$ is $f'|_U$). An open immersion is ind-etale locally on source and target (on an affine open of the target contained in the image, it is an isomorphism of affine schemes). The ind-etale invariance lemma therefore gives isomorphisms over the targets $U_{(x')}\\xrightarrow{\\sim}X'_{(x')}$, $U_{(x')}\\xrightarrow{\\sim}T_{(x')}$ and $T_{(x')}\\xrightarrow{\\sim}P_{(y)}$; since they commute with the structural maps to $X'$, $T$ and $P$, and $U\\to X'\\to B$, $U\\to T\\to P\\to B$ agree, they are isomorphisms of $B$-schemes. Composing with the isomorphism of step 1 gives $\\theta:X_{(x)}\\xrightarrow{\\sim}P_{(y)}$ over $B$. By step 4, $p$ is projective and proper, and every fibre of $p$ has dimension at most $d\\le N$.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-geometric-point",
+    "def-weil-open-immersion",
+    "def-pc-projective-morphism",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proposition 2.3, proof, printed p. 4: identification of strict localizations and conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-dimension",
+  "def-nagata-relative-affine-space",
+  "def-pc-projective-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-geometric-point",
+  "def-weil-open-immersion",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-proper-morphism",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-trf-finite-projective-envelope",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-local-quasi-finite-projection",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "thm-pqf-zmt-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Proposition 2.3 proof, printed p. 4 (first reduction); source read online only, local copy WANTED, so the steps are agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,7 +156,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-gabber-nearby-cycle-dimension-bound",
@@ -77,7 +168,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Contracting local-term proof, specialization to the normal cone: boundedness input for nearby-cycle external products; Gabber dimension bound, first reduction by a quasi-finite projection and Zariski main theorem.",
+   "place": "Contracting local-term proof by specialization to the normal cone (the step using lem-trf-trace-specialization), through the nearby-cycle dimension bound of the external-product comparison: the first reduction of the Gabber proof (Orgogozo Prop. 2.3) replacing the strict localization of f by that of a projective model with the same fibre bound.",
    "via": [
     "lem-trf-gabber-nearby-cycle-dimension-bound",
     "lem-trf-gabber-strict-local-torsion-bound",
@@ -89,5 +180,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-bounded-dimension-projective-local-model",
+  "worker": "stage1",
+  "summary": "Split the first Gabber reduction into a bounded local quasi-finite projection, Zariski-main finite factorization, and a dimension-preserving projective finite envelope. The final step identifies strict localizations by cofinality of pointed etale neighbourhoods. The source PDF was read online; a local copy is WANTED.",
+  "blueprint": "Realizes the first reduction paragraph of the blueprint ancestor lem-trf-local-term-locality: quasi-finite projection, Zariski main theorem and projective compactification.",
+  "tool_uses": [
+   {
+    "node": "thm-pqf-zmt-factorization",
+    "why": "The Gabber reduction needs the general Zariski-main factorization for a separated quasi-finite finite-type morphism; the trace unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "The fibre bound must be transported from f to the strict-local base change; this generic base-change dimension lemma is outside the trace unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-base-closed-point-localizations",
+    "why": "Step 1 needs X_{(x)} = (X x_S S_{(s)})_{(x')} compatibly with the maps to S_{(s)}; this generic strict-localization base-change lemma states exactly that and no node of the trace unit does (lem-trf-ind-etale-strict-local-invariance gives it only over X)."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Step 1 passes from the local fibre dimensions preserved by base change to the global fibre dimension; generic topological fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pqf-zmt-factorization",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-8634c63fd",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-8634c63fd (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the parent's use of the item, unit sk-i-curve-zero and its ancestor lem-trf-local-term-locality. Orgogozo Prop 2.3 is not local (WANTED), so I checked the mathematics against Stacks: more-morphisms lemma-local-structure-finite-type, morphisms lemma-quasi-finite-points-open, lemma-finite-projective, and 05K0 via thm-pqf-zmt-factorization. Both new statements are true and strictly smaller than the item. Local projection: Noether normalization on the fibre at y, then shrink to the open quasi-finite locus; d=dim_y(fibre)<=N. Envelope: the integral equations homogenize on the charts of P^d_B into a finite O_{P^d}-algebra, so T-bar is finite over P^d_B, H-projective over affine B, T is open in it and fibres have dim<=d. Tested edge cases: T empty, d=0, N=0, T=A^d_B. No duplicates; thm-zl-relative-noether is different. Steps 2-4 check all hypotheses. The item statement is unchanged. Fixes (C1/C4, B2/B3): step 1 asserted X_(x)=(X x_S B)_(x') over B citing only the definition, and passed from local to global fibre dimension uncited; it now cites lem-weil-pbc-strict-base-closed-point-localizations and lem-weil-pbc-dimension-supremum-local-dimensions, both added as tool uses with no cycle. Step 5 claimed open-immersion invariance of strict localization as elementary; it now cites the on-unit lem-trf-ind-etale-strict-local-invariance and is marked non-elementary. In local-quasi-finite-projection, N is now introduced and affine/separated/quasi-finite/A^d are cited. Item proof_origin is now by:agent (source not in literature/), and blueprint.from.place now names the ancestor's normal-cone step. Accepted tool uses: thm-pqf-zmt-factorization, lem-sc-fibre-dimension-after-base-change, plus the two added.; 2 file(s) fixed by the reviewer"
  }
 }

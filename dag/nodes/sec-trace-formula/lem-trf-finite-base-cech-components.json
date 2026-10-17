@@ -13,9 +13,43 @@
   "def-weil-geometric-point",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $b=h\\circ b_U:\\operatorname{Spec}\\Omega\\to S$ for the image geometric point. By [def-weil-geometric-point], the same algebraically closed field \\Omega is used for both geometric fibres. Applying the universal property and uniqueness of [def-pc-fibre-product] twice gives a canonical isomorphism $\\operatorname{Spec}\\Omega\\times_U(U\\times_S Z)\\cong\\operatorname{Spec}\\Omega\\times_S Z$. It intertwines the projection-induced map to $Z$ and the maps to $\\operatorname{Spec}\\Omega$. Hence the two geometric-fibre schemes are isomorphic, and the resulting homeomorphism carries connected components bijectively; this is the stated projection bijection.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 2.6.1, printed p. 5; canonical component bijection reconstructed from fibre-product associativity"
+   }
+  },
+  {
+   "text": "For $q\\ge 0$, let $p_q:Z^{(q)}=Z^{\\times_S(q+1)}\\to S$ be the structure morphism. The case $q=0$ is the given finite map $p$. If $p_q$ is finite, the projection $Z^{(q+1)}=Z^{(q)}\\times_S Z\\to Z^{(q)}$ is the base change of $p$, hence finite by [lem-weil-pbc-finite-morphism-permanence](a); its composite with $p_q$ is finite by [lem-weil-pbc-finite-composition]. Induction gives that every $p_q$ is finite. Applying the first step to $p_q$ and $h$ gives the asserted component bijection for every finite iterated fibre product.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 2.6.1, printed p. 5; iterated finite fibre products"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+  "place": "Agent reconstruction of Lemma 2.6.1 from the universal property of fibre products and finite-morphism permanence"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-finite-base-descent",
@@ -100,5 +134,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-base-cech-components",
+  "worker": "stage1",
+  "summary": "Kept the imported statement unchanged and supplied its proof in two steps. The first identifies the base-changed geometric fibre with the original geometric fibre over the composite point by the universal property of fibre products, so connected components correspond. The second proves finiteness of every iterated fibre product by induction from finite base-change permanence and finite composition. No new node was needed.",
+  "blueprint": "The steps realize the supporting finite-surjective Cech-fibre component input named in the ancestor lem-trf-local-term-locality route, corresponding to Orgogozo Lemma 2.6.1.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-a5c63b479",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-a5c63b479 (reviewer sub-agent of L); spot-checked: I read the item, all five cited nodes, the parent lem-trf-nearby-finite-base-descent, the sibling lem-trf-finite-cover-tube-comparison (where I_q and J_q are defined), the unit sk-i-curve-zero and the chapter. The statement is unchanged and true; it holds even without finiteness. The geometric fibre Spec Ω ×_U (U ×_S Z) is canonically Spec Ω ×_S Z by pasting of cartesian squares, and that isomorphism is the projection-induced map, so components correspond bijectively. Edge cases checked: Z empty, q=0, h=id. The parent uses the lemma with Z=P_q, S=S_0, U=U_0, and these objects match the item's exactly. Step 1 uses only the universal property and uniqueness stated in def-pc-fibre-product and the definition of a geometric point, with no hidden hypothesis. Step 2 is a correctly posed induction on q: finiteness of each Z^(q) -> S follows from lem-weil-pbc-finite-morphism-permanence (a) and lem-weil-pbc-finite-composition. Both are Mathlib leaves (IsFinite base-change stability at Finite.lean:60 and IsFinite.instCompScheme), so they are tools and not part of the route, and no tool_uses are needed. There are no new nodes, proof_deps equals the union of the steps' uses, and there is no cycle. Duplicate check: lem-weil-pbc-geometric-component-count-base-change gives only equal component counts, not the projection-induced bijection the parent needs for face maps, so it is not a duplicate. A blueprint search returned 0 matches, consistent with same_as []. The blueprint ancestor is lem-trf-local-term-locality, as the node records. The Orgogozo PDF (Lemma 2.6.1) is absent from both literature trees, so I could not check that place; the worker filed a WANTED line and set proof_origin.by to agent. There are no SGA citations, and this is not a target node, so the base-change morphism and coefficient checks do not apply. No fixes."
  }
 }
