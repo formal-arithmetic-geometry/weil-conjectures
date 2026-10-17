@@ -25,9 +25,96 @@
   "lem-pc-kflat-resolution",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-flat flat-term resolution $P\\to K$ by [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings], $P\\otimes_{R_E}R_L$ represents the ordinary derived extension. By [def-weil-integral-scalar-extension], the product-and-cone complex $C(P)$ in the statement represents $T_{L/E}K$. The explicit normalization in [lem-weil-finite-free-completed-scalar-comparison] represents $\\chi_K$ by $z\\mapsto(c_Pz,0)$, where $c_P$ is the family of quotient maps. Indeed each quotient map is a chain map and the transitions give $h_Pc_P=0$ strictly, so $d_{C(P)}(c_Pz,0)=(c_Pdz,0)$. These statements apply on the small pro-etale site of the given scheme; they require neither a noetherian hypothesis nor a boundedness hypothesis on $K$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final equivalence display; explicit completed scalar comparison needed for common-stage shift transport (agent argument)."
+   }
+  },
+  {
+   "text": "Write $\\epsilon_m=(-1)^m$ for any integer $m$. The shift convention [def-weil-abstract-derived-category] is $P[m]^r=P^{r+m}$ with differential $\\epsilon_m d_P$. This is again a flat-term K-flat complex: for an acyclic complex $A$, the total tensor convention [def-pc-tensor-complex-sheaves] gives an isomorphism $\\operatorname{Tot}(A\\otimes P[m])\\cong\\operatorname{Tot}(A\\otimes P)[m]$ by multiplying the summand with $A$-degree $i$ by $\\epsilon_m^i$; both differentials agree because $\\epsilon_m^{i+1}=\\epsilon_m\\epsilon_m^i$. The target is acyclic by [def-pc-kflat-complex], since shifting merely reindexes cohomology. Flatness of terms is unchanged by reindexing. Tensoring $P$ with a ring sheaf placed in degree zero commutes with shifting without a sign on tensors. Degreewise products and scalar restriction also merely reindex. Hence $D(P[m])=D(P)[m]$, $h_{P[m]}=h_P[m]$, and $c_{P[m]}=c_P[m]$ under these identifications.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; direct calculation with the signed total tensor of Definition 012Z."
+   }
+  },
+  {
+   "text": "Reorder $\\operatorname{Cone}(h_P)[-1]^r=D(P)^{r-1}\\oplus D(P)^r$ into $(x,y)\\in D(P)^r\\oplus D(P)^{r-1}$. The cone and shift conventions of [def-weil-abstract-derived-category] give the stated differential $(dx,-dy-h_Px)$. In degree $r$ the source $C(P[m])$ therefore has differential $(x,y)\\mapsto(\\epsilon_m dx,-\\epsilon_m dy-h_Px)$, whereas the target $C(P)[m]$ has differential $(x,y)\\mapsto(\\epsilon_m dx,-\\epsilon_m dy-\\epsilon_m h_Px)$. Applying $\\alpha_{m,P}(x,y)=(x,\\epsilon_m y)$ before or after the respective differentials gives in both cases\n$$ (\\epsilon_m dx,-dy-\\epsilon_m h_Px). $$\nThe same coordinate formula in the reverse direction is its inverse, since $\\epsilon_m^2=1$. It is $R_L$-linear. Thus it is a chain isomorphism for every integer $m$, including negative integers.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone, together with homology.tex Tag 011G, definition-shift-cochain; reordered cone sign calculation."
+   }
+  },
+  {
+   "text": "For a chain map $f:P\\to P'$, let $D(f)$ be its product of quotient tensor maps. Each transition square commutes, so $D(f)h_P=h_{P'}D(f)$, and the induced map of the reordered cones is $(x,y)\\mapsto(D(f)x,D(f)y)$. This commutes with $(x,y)\\mapsto(x,\\epsilon_m y)$, proving naturality of $\\alpha_m$. Under the standard degree-reindexing identification $P[m][n]=P[m+n]$, the composite\n$$C(P[m][n])\\xrightarrow{\\alpha_{n,P[m]}}C(P[m])[n]\\xrightarrow{\\alpha_{m,P}[n]}C(P)[m][n]$$\nmultiplies the second coordinate by $\\epsilon_n\\epsilon_m=\\epsilon_{m+n}$ and leaves the first fixed. This is $\\alpha_{m+n,P}$. For $m=0$ its two components are identities. These are precisely the successive-shift and zero-shift laws.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain and following paragraph on zero and successive shifts; direct calculation on the two cone coordinates."
+   }
+  },
+  {
+   "text": "Use the zero second-coordinate formula for the comparison from [lem-weil-finite-free-completed-scalar-comparison]. With the identifications of step 2, for every local section $z$ of $(P\\otimes_{R_E}R_L)[m]$ one has\n$$\\alpha_{m,P}\\chi_{P[m]}(z)=\\alpha_{m,P}(c_P[m](z),0)=(c_P[m](z),0)=\\chi_P[m](z).$$\nThis is an equality of chain maps of $R_L$-module sheaves. In particular it uses the specified comparison arising from the compatible quotient maps, rather than a choice of a morphism completing an abstract triangle.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final equivalence display; the fixed quotient-map comparison and its signed shift square (agent calculation)."
+   }
+  },
+  {
+   "text": "Pass to derived categories. The resolving-class equivalence in [lem-weil-pbc-site-derived-tensor-descent] identifies localization of the homotopy category of flat-term K-flat $R_E$-complexes at quasi-isomorphisms with $D(R_E)$. By [lem-pur-derived-change-of-rings](1)-(2), the ordinary tensor model inverts those quasi-isomorphisms, with its canonical comparisons. By [lem-weil-integral-scalar-extension-well-defined](1)-(2), the strict cone model also inverts them and its comparisons are independent of the resolution. Naturality in step 4 holds after passing to homotopy classes, then also for inverses of quasi-isomorphisms: invert the two vertical isomorphisms in its naturality square. Thus $\\alpha_m$, its inverse, and the identities in steps 4-5 descend along this equivalence. They are natural on $D(R_E)$ and agree under the canonical comparisons from any two resolutions. The first model's shift comparison is the degreewise tensor identification of step 2, and the second model's is the descended $\\alpha_m$. Finally [lem-weil-finite-free-completed-scalar-comparison] identifies the descended map $\\chi_P$ with the specified $\\chi_K$. Step 5 now gives its required shift square in $D(R_L)$, with the zero and successive-shift laws of step 4. The chain calculation did not need completeness; in particular it applies to all the derived-complete inputs in the statement.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and 06YU (definition-derived-tor); descent of the explicit natural chain maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Final equivalence display: explicit shift compatibility for the common-stage completed scalar comparison; sign calculation from Stacks Tags 011G and 014E."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +150,45 @@
    "results": "12 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean; directory Mathlib/Algebra/Homology",
    "date": "2026-10-17",
    "verdict": "candidate only: CochainComplex.mappingCone.shiftIso at Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:347 is a generic cone shift, not the strict completion unit on the ringed site"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*shift|shift.*mappingCone",
+   "results": "12 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; directory Mathlib/Algebra/Homology. Candidate read: CochainComplex.mappingCone.shiftIso, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:347-375.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shifts and mapping-cone formulas do not state the specified completed coefficient comparison or its quotient-map normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, CategoryTheory.Functor.CommShift",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shifts and mapping-cone formulas do not state the specified completed coefficient comparison or its quotient-map normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map to the homotopy inverse limit of quotient complexes commutes with shifts",
+   "results": "8 hits: HomotopyCategory.homologyFunctor_shiftMap, HomotopyCategory.homologyShiftIso_hom_app, CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.shiftTrianglehIso, Homotopy.shift, HomotopyCategory.commShiftQuotient, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, HomotopyCategory.instCommShiftIntUpMapHomotopyCategory",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shifts and mapping-cone formulas do not state the specified completed coefficient comparison or its quotient-map normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical completed scalar extension comparison defined by quotient maps into a strict inverse limit commutes with integer cochain shifts",
+   "results": "8 hits: CochainComplex.shiftEval, CochainComplex.shiftEval_hom_app, CochainComplex.shiftEval_inv_app, CochainComplex.shiftFunctorComm_hom_app_f, CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv_apply, CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₁, CochainComplex.shiftShortComplexFunctorIso_add'_hom_app, CochainComplex.shiftShortComplexFunctorIso_inv_app_τ₁",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shifts and mapping-cone formulas do not state the specified completed coefficient comparison or its quotient-map normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of quotient chain maps gives a map into Cone one minus transition shifted minus one; shifting multiplies the second cone coordinate by minus one to the shift power",
+   "results": "8 hits: HomotopyCategory.spectralObjectMappingCone_δ'_app, CochainComplex.mappingCone.map, CochainComplex.mappingCone.desc_f, CochainComplex.mappingCone.descCochain, HomotopyCategory.spectralObjectMappingCone_ω₁, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.desc, CochainComplex.mappingCone.descShortComplex",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shifts and mapping-cone formulas do not state the specified completed coefficient comparison or its quotient-map normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-admissible",
  "blueprint": {
@@ -77,5 +199,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-point-completed-scalar-shift",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six steps fix the existing strict K-flat quotient-map model, verify shifts preserve that model, calculate the reordered-cone signs, prove naturality and shift-addition coherence, check the zero second-coordinate comparison square, and descend through the existing K-flat localization equivalence. No new nodes or Mathlib leaves. The contextual source attribution to Tag 070M was corrected: that lemma concerns special K-injective truncation towers, not the present sign formula.",
+  "blueprint": "The final equivalence display of def-weil-finite-coefficient-point requires common finite-stage shift transport. Steps 1-6 make explicit the shift compatibility of the completed integral scalar comparison extracted from lem-weil-point-fibre-equivalence; the equivalence itself is not reproved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 1 needs existence of flat-term K-flat resolutions on the same small ringed site; the point-category unit does not construct resolutions."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Steps 1 and 6 use ordinary change of completed ring sheaves and its canonical K-flat model and quasi-isomorphism invariance; this is a general ringed-site tool."
+   },
+   {
+    "node": "def-weil-integral-scalar-extension",
+    "why": "Step 1 uses the already specified strict product-cone realization of integral scalar extension; no point-equivalence assertion is imported."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Steps 1, 5 and 6 use its canonical quotient-map comparison, including the zero shifted-product component and resolution independence; they prove its additional shift compatibility explicitly."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Step 2 uses the total tensor differential to verify K-flatness of shifted resolutions; it is a definition of the general complex model."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Step 2 uses the acyclic-tensor definition to check that shifted resolutions remain allowed representatives."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Step 6 uses only its equivalence from localization of flat-term K-flat complexes to the ambient derived category, on the same small site; no proper-base-change statement is used."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-well-defined",
+    "why": "Step 6 uses quasi-isomorphism invariance and resolution-independent canonical comparisons of the strict-tower model; its shift assertion is not used to infer the comparison square."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-7ce0f5d69",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-7ce0f5d69 (reviewer sub-agent of L); spot-checked: Read the item in full; it creates no new nodes. Also read every cited statement (the comparison node with its explicit (c z,0) form and zero shifted-product component, the integral scalar extension definition, well-defined (1)-(2), derived change of rings (1)-(2), the K-flat resolution node, the localization equivalence in the derived-tensor descent node, and the abstract derived category, tensor and K-flat definitions), Stacks 011G (homology.tex l.3427) and 014E (derived.tex l.2471), and the final displays of the main-20261015 point-category blueprint text. Sign conventions agree with the abstract derived category node. Recomputed independently: Cone(h)[-1] reordered has differential (dx,-dy-hx); C(P[m]) has (e dx,-e dy-hx) and C(P)[m] has (e dx,-e dy-e hx); alpha(x,y)=(x,e y) intertwines them, with both composites equal to (e dx,-dy-e hx). Tested m=0,1,-1,2; the second-coordinate sign is necessary for odd m. Verified the K-flatness of P[m] through the e^i twist of the total tensor, naturality by the diagonal map (Df,Df), successive and zero shift laws (e_m e_n=e_{m+n}), and alpha chi_{P[m]}=chi_P[m] on the specified zero-component map. Descent through the flat K-flat localization equivalence and quasi-isomorphism invariance of both models is sound. Coefficient category is D(R_E) to D(R_L) on the small pro-etale site, matching the comparison node and the parent's use at Spec k (parent step 12). Duplicate search with rg: no other node states this shift square; well-defined (2) gives only the shift of T. No restated clause, no SGA. Accepted tool_uses: kflat-resolution, derived-change-of-rings, finite-free-completed-scalar-comparison, pbc-site-derived-tensor-descent (equivalence only), integral-scalar-extension-well-defined; the unit has uses=[], and the listed definitions are notions. Minor: source.place still mentions 070M as context, while the corrected attributions are in proof_origin and the step sources; no change made."
  }
 }

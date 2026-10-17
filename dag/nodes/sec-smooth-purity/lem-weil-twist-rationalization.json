@@ -2,7 +2,7 @@
  "id": "lem-weil-twist-rationalization",
  "kind": "statement",
  "title": "Integral twist equivalences descend to rationalization",
- "statement": "Let $\\ell$ be a prime and $S$ be a scheme on which $\\ell$ is invertible [def-weil-pbc-proetale-site], let $E/\\mathbf Q_\\ell$ be a finite extension with uniformizer $\\varpi_E$, and let $\\mathcal C=D^b_c(S,\\mathcal O_E)$ be the $\\mathcal O_E$-linear triangulated category of [def-weil-rationalization-karoubi]. Suppose $U,V:\\mathcal C\\to\\mathcal C$ are exact $\\mathcal O_E$-linear functors equipped with natural inverse isomorphisms $VU\\cong\\operatorname{id}_{\\mathcal C}$ and $UV\\cong\\operatorname{id}_{\\mathcal C}$. Then $U$ and $V$ act on the scalar localization $\\mathcal C[1/\\varpi_E]$ defined in [def-weil-rationalization-karoubi] by $U(f\\otimes a)=U(f)\\otimes a$ and $V(f\\otimes a)=V(f)\\otimes a$, and these induced functors are exact inverse equivalences. In particular, if $m\\in\\mathbf Z$ and $U(C)=C(m)$ and $V(C)=C(-m)$ are the inverse integral twist functors of [def-coefficient-twists-detailed], their induced functors are mutually inverse twists on $D^b_c(S,E)$.",
+ "statement": "Let $\\ell$ be a prime and $S$ be a scheme on which $\\ell$ is invertible [def-weil-pbc-proetale-site], let $E/\\mathbf Q_\\ell$ be a finite extension with uniformizer $\\varpi_E$, and let $\\mathcal C=D^b_c(S,\\mathcal O_E)$ be the $\\mathcal O_E$-linear triangulated category of [def-weil-rationalization-karoubi]. Suppose $U,V:\\mathcal C\\to\\mathcal C$ are exact [def-weil-triangulated-category] $\\mathcal O_E$-linear [def-weil-linear-functor] functors equipped with natural inverse isomorphisms $VU\\cong\\operatorname{id}_{\\mathcal C}$ and $UV\\cong\\operatorname{id}_{\\mathcal C}$. Then $U$ and $V$ act on the scalar localization $\\mathcal C[1/\\varpi_E]$ defined in [def-weil-rationalization-karoubi] by $U(f\\otimes a)=U(f)\\otimes a$ and $V(f\\otimes a)=V(f)\\otimes a$, and these induced functors are exact inverse equivalences. In particular, if $m\\in\\mathbf Z$ and $U(C)=C(m)$ and $V(C)=C(-m)$ are the inverse integral twist functors of [def-coefficient-twists-detailed], their induced functors are mutually inverse twists on $D^b_c(S,E)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
   "place": "Proof, final sentence: integral twists and passage to rational coefficients; rationalization of the integral inverse pair in returned item step 9."
@@ -10,11 +10,69 @@
  "stmt_deps": [
   "def-weil-rationalization-karoubi",
   "def-weil-pbc-proetale-site",
+  "def-coefficient-twists-detailed",
+  "def-weil-triangulated-category",
+  "def-weil-linear-functor"
+ ],
+ "proof": [
+  {
+   "text": "Instantiate [lem-pur-semilinear-scalar-localization] with R=S=\\mathcal O_E, t=u=\\varpi_E and the identity coefficient map. The hypotheses that \\mathcal C is an \\mathcal O_E-linear category and that U and V are additive linear functors are part of the stated exact-functor hypotheses; the scalar localization is exactly the raw category \\mathcal C[1/\\varpi_E] of [def-weil-rationalization-karoubi]. The lemma therefore gives induced functors \\bar U and \\bar V, on the same objects, whose arrows satisfy \\bar U(f\\otimes a)=U(f)\\otimes a and \\bar V(f\\otimes a)=V(f)\\otimes a.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
+    "place": "Proof, final sentence: integral twists and passage to rational coefficients; rationalization of the integral inverse pair"
+   }
+  },
+  {
+   "text": "The same lemma says that exact integral functors induce exact localized functors under the linear triangulated hypotheses. Applying its natural-transformation clause to the given inverse isomorphisms \\eta:VU\\Rightarrow\\operatorname{id}_{\\mathcal C} and \\epsilon:UV\\Rightarrow\\operatorname{id}_{\\mathcal C} gives localized natural isomorphisms \\bar\\eta:\\bar V\\bar U\\Rightarrow\\operatorname{id}_{\\mathcal C[1/\\varpi_E]} and \\bar\\epsilon:\\bar U\\bar V\\Rightarrow\\operatorname{id}_{\\mathcal C[1/\\varpi_E]}. The localized composites are the extensions of VU and UV: \\bar V\\bar U is additive, has the object map of VU, agrees with Q\\,VU on integral arrows (since \\bar V(Q(Uf))=Q(VUf)) and is semilinear for the identity of E, so the uniqueness clause of that lemma gives \\bar V\\bar U=\\overline{VU}; likewise \\bar U\\bar V=\\overline{UV} and \\overline{\\operatorname{id}_{\\mathcal C}}=\\operatorname{id}_{\\mathcal C[1/\\varpi_E]}. Hence these components have exactly the displayed endpoints, as also recorded in the lemma's composition and whiskering compatibility.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
+    "place": "Proof, final sentence: rationalization of the integral inverse pair"
+   }
+  },
+  {
+   "text": "The localized functors are exact by Step 2 and satisfy both inverse identities by the two localized natural isomorphisms. Hence \\bar U and \\bar V are exact inverse equivalences of the rationalized category.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
+    "place": "Proof, final sentence: passage from the integral inverse pair to rational coefficients"
+   }
+  },
+  {
+   "text": "For U(C)=C(m) and V(C)=C(-m), [def-coefficient-twists-detailed] defines these object assignments and their actions by derived tensor with the corresponding integral twist objects. Under the assumed inverse-isomorphism hypothesis, Steps 1--3 apply verbatim, and the resulting \\bar U and \\bar V are precisely the induced twists on D^b_c(S,E) because [def-weil-rationalization-karoubi] keeps the integral representatives as objects and tensors every integral morphism with the scalar a\\in E.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-weil-rationalization-karoubi",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
+    "place": "Proof, final sentence: integral twists and passage to rational coefficients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-semilinear-scalar-localization",
+  "def-weil-rationalization-karoubi",
   "def-coefficient-twists-detailed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-weil-twist-preserves.md",
+  "place": "Proof, final sentence: integral twists and passage to rational coefficients; expanded using the generic semilinear scalar-localization lemma"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,7 +110,7 @@
    "verdict": "no match: generic localization, module base change or colimits of types do not state this completed-sheaf/coefficient-category assertion"
   }
  ],
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-twist-preserves",
@@ -70,5 +128,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-twist-rationalization",
+  "worker": "stage1",
+  "summary": "Split the imported rationalization assertion into four steps. The first instantiates the existing semilinear scalar-localization theorem over O_E at the uniformizer; the second localizes the two inverse natural isomorphisms and checks their composite endpoints; the third concludes exact inverse equivalences; the fourth identifies the construction with integral Tate twists and the E-category. No new nodes were needed.",
+  "blueprint": "Realizes the final sentence of prop-weil-twist-preserves: passage of an integral inverse twist pair to rational coefficients.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic extension of linear functors, natural isomorphisms, composition equations, and exactness through raw scalar localization; the sk-prop-sf-existence route has no separate localization lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-c2c07f0b2",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-c2c07f0b2 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement, all 4 steps and its split_report. It creates no new nodes. I checked it against the master source prop-weil-twist-preserves.md, the final sentence of the proof. The main-20261015 proof.md has the same sentence at lines 20-22. I also read parent step 9, the item's only citer. It supplies that the integral twists are exact, O_E-linear, mutually inverse and stay in D^b_c(S,O_E), so the item's hypotheses match how it is used. I read every cited statement: lem-pur-semilinear-scalar-localization (all 9 steps), def-weil-rationalization-karoubi, def-coefficient-twists-detailed, def-weil-pbc-proetale-site, def-weil-linear-scalar-localization, def-weil-triangulated-category, pur9-def-exact-transformation and lem-weil-linear-scalar-localization-triangulated. Coefficient category: the completed integral D^b_c with a raw Hom⊗E localization and no Karoubi completion; it is not a discrete E-module category. The item is not a target, so no base-change morphism is involved. The statement is not weakened. Step 1: with R=S=O_E, t=u=varpi and phi=id, the lemma's hypotheses hold, and the fraction formula gives U(f⊗a)=U(f)⊗a by linearity. Step 2: the lemma's exactness clause needs only the shift comparison of an exact functor. Its natural-transformation clause localizes eta and eps. Step 3 is genuinely elementary. Step 4 is the definitional identification with twists formed on integral representatives. Edge cases checked: m=0, the inverse shifts [1]/[-1], a torsion Hom group (becomes 0) and Hom=O_E (becomes E). No cycle: the lemma's 43-node closure contains neither the item nor its parent. No duplicate: the nearest node, prop-weil-pbc-rational-transport, does not state the inverse-equivalence conclusion. No SGA is cited. I accept the tool_use lem-pur-semilinear-scalar-localization: it is a generic black-box lemma that unit sk-prop-sf-existence does not replace. Fixes, both in fixes/dag/nodes/sec-smooth-purity/lem-weil-twist-rationalization.json: (1) B3: 'exact' now cites [def-weil-triangulated-category] and 'O_E-linear' cites [def-weil-linear-functor]; both are added to stmt_deps. (2) C3: step 2 now derives bar V bar U = overline{VU} and overline{id}=id explicitly from the lemma's uniqueness clause. Minor point: the report lists citations.json as written, but the branch does not contain it.; 1 file(s) fixed by the reviewer"
  }
 }

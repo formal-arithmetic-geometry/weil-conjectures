@@ -11,9 +11,96 @@
   "def-weil-abstract-derived-category",
   "def-pc-perfect-ring-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=K\\oplus L$. By [def-pc-perfect-ring-complex], choose a bounded complex $P^\\bullet$ of finitely generated projective $A$-modules with $Q(P)\\cong S$. Choose integers $a\\leq b$ such that $P^i=0$ outside $[a,b]$, enlarging the bounds if necessary. Apply [lem-pc-finite-projective-complex-free-model] to $P$ with upper bound $b$. It gives a bounded-above finite-free complex $F$ and a quasi-isomorphism $F\\to P$. Composing its derived isomorphism with $Q(P)\\cong S$ shows that $S$ is pseudo-coherent, exactly as defined by [def-pc-ring-pseudo-coherent-complex].",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-pc-finite-projective-complex-free-model",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066S, lemma-summands-perfect, using Tag 0658 (lemma-perfect) and Tag 064U (lemma-pseudo-coherent), implication (3) to (1)"
+   }
+  },
+  {
+   "text": "Choose complex representatives $K_0,L_0$ of $K,L$. Their termwise direct sum represents $S$. The last clause of [lem-pc-ring-pseudo-coherent-summand] applies: since $K_0\\oplus L_0$ is quasi-isomorphic to a bounded-above finite-free complex, so are $K_0$ and $L_0$. Thus both $K$ and $L$ are pseudo-coherent in the sense of [def-pc-ring-pseudo-coherent-complex].",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-summand",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066S, invoking Tag 064X (lemma-summands-pseudo-coherent), final clause"
+   }
+  },
+  {
+   "text": "Every term $P^i$ is flat by [lem-weil-pbc-projective-module-flat]. The complex $P$ is bounded above, so [lem-pc-module-bounded-flat-kflat] makes it K-flat. This applies over the given arbitrary commutative ring $A$; neither Noetherianity nor flatness of a test module is required.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658 (lemma-perfect), forward implication; Tag 064K (lemma-derived-tor-quasi-isomorphism)"
+   }
+  },
+  {
+   "text": "For any $A$-module $M$ placed in degree zero, specialize [lem-pc-derived-tensor-second-factor-functor] to the identity ring map $A\\to A$ and $N=M[0]$. Its K-flat computation clause applied to $P$ identifies $S\\otimes_A^{\\mathbf L}M$ with $Q(P\\otimes_A M)$. The latter complex has term $P^i\\otimes_A M$ in degree $i$, hence is zero in every degree outside $[a,b]$. Its cohomology there is zero. The same interval works for every $M$, so $S$ has finite Tor dimension with amplitude $[a,b]$.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658 (lemma-perfect), forward implication, and Tag 06Y6 (lemma-derived-base-change), K-flat computation"
+   }
+  },
+  {
+   "text": "For $T=K$ and then $T=L$, let $i:T\\to S$ and $p:S\\to T$ be the biproduct inclusion and projection, so $p\\circ i=1_T$. For each $M$ and degree $j$, apply the tensor functor of [lem-pc-derived-tensor-second-factor-functor] and the cohomology functor of [def-weil-abstract-derived-category]. Functoriality gives $H^j(p\\otimes 1)\\circ H^j(i\\otimes 1)=1_{H^j(T\\otimes_A^{\\mathbf L}M)}$. If $j\\notin[a,b]$, these maps factor through $H^j(S\\otimes_A^{\\mathbf L}M)=0$ by Step 4, so the displayed identity is zero. A module whose identity is zero is the zero module. Thus $K$ and $L$ both have Tor amplitude in $[a,b]$. This writes out the summand argument of Tag 066G using the actual inclusion and projection maps.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066G (lemma-summands-tor-amplitude), proof by additivity, expanded using retracts"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-ring-pseudo-coherent-finite-tor-perfect] separately to $C=K$ and $C=L$. Step 2 supplies a bounded-above finite-free model, hence in particular a bounded-above finitely generated projective model, and Step 5 supplies the finite Tor interval $[a,b]$. Its conclusion gives a bounded finitely generated projective model for each object. This is perfectness as defined by [def-pc-perfect-ring-complex], proving both assertions.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066S, concluding with Tag 0658 (lemma-perfect), implication (2) to (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-finite-projective-complex-free-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "lem-pc-ring-pseudo-coherent-summand",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066S (lemma-summands-perfect): Tag 064X for pseudo-coherence, the elementary Tag 066G retract argument for Tor amplitude, and Tag 0658 for the perfectness criterion; forward implication expanded using Tags 064U, 064K and 06Y6."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +129,45 @@
    "results": "CategoryTheory.instHasProjectiveDimensionLTBiprod; Module.instProjectiveDFinsupp; Module.Projective.iff_split; CategoryTheory.Projective.instBiprod; no perfect-complex summand theorem",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a direct summand of a perfect complex over a commutative ring is perfect",
+   "results": "K-projectivity and Retract.hasProjectiveDimensionLT; no theorem about finite projective representatives in D(A).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectComplex|IsPerfect|[Pp]seudo.?[Cc]oherent",
+   "results": "25 hits, all unrelated group perfectness, field perfect closures, perfect pairings or graph perfect matchings; no perfect-complex or pseudo-coherence notion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "retract of a bounded complex of finitely generated projective modules is perfect in the derived category",
+   "results": "Module.Flat.of_retract; CategoryTheory.Retract.hasProjectiveDimensionLT and projectiveDimension_le; Module.Finite.exists_comp_eq_id_of_projective; quasi-isomorphisms stable under retracts. None gives perfectness of a derived summand.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Retract",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "idempotent complete subcategory of perfect complexes bounded finite projective direct summand",
+   "results": "Idempotents.instIsIdempotentCompleteHomologicalComplex, KaroubiHomologicalComplexEquivalence, isIdempotentComplete_of_abelian, K-projectivity. Chain-level idempotent completeness does not split homotopy idempotents into bounded finite projective representatives.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-perfect-ring-classical-generator",
@@ -65,5 +187,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-perfect-ring-summand",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Tag 066S into six steps using only existing nodes: finite-free replacement, pseudo-coherent summands, K-flatness of the perfect model, its uniform tensor bound, the elementary retract argument, and the ring perfectness criterion. The statement and ancestry are retained. No new nodes were necessary; repeated Mathlib searches found no match.",
+  "blueprint": "Realizes thm-pod-point-perfectness, Step 2 integral duals, through the created classical-generator lemma: the finite-projective perfect subcategory is closed under direct summands. Existing ancestry via lem-sf-perfect-ring-classical-generator and lem-sf-perfect-over-derived-complete-ring is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-projective-complex-free-model",
+    "why": "The bounded finite-projective model must be replaced by a bounded-above finite-free model to use the existing ring pseudo-coherence summand theorem; no node of this unit states this generic algebraic replacement."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-summand",
+    "why": "The exact Tag 064X ring pseudo-coherence closure input in Tag 066S; this unit has no separate pseudo-coherence summand theorem."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "The generic bounded-above flat module K-flatness theorem computes the Tor amplitude of the perfect model; this unit has no module K-flatness theorem."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "The generic derived tensor functor for ordinary modules provides both K-flat computation and functoriality on the summand maps; this unit has no such ordinary-module tensor construction."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "why": "The exact Tag 0658 bounded-projective conclusion for a pseudo-coherent ring complex of finite Tor dimension; this unit has no such criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-projective-complex-free-model",
+  "lem-pc-ring-pseudo-coherent-summand",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-6484b5030",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-6484b5030 (reviewer sub-agent of L); spot-checked: I read the item in full, the statement of each of the 9 nodes it cites, and the Stacks text of more-algebra.tex at 066S, 0658, 064X, 066G and the tor-amplitude definition. The item statement matches 066S exactly: A is a commutative ring, the objects are in D(A), and perfect means a bounded complex of finitely generated projective modules. The six steps follow the source route of 0658, 064X and 066G. Step 1: the free-model lemma from 064U gives pseudo-coherence. Step 2: the last clause of the ring pseudo-coherence summand lemma (064X). Step 3: projective implies flat (a Mathlib leaf), and a bounded-above flat complex is K-flat (064K). Step 4: the K-flat clause (2) of the derived tensor functor gives one Tor interval [a,b] for every module M. Step 5: the 066G retract argument written out; it is genuinely elementary. Step 6: the ring criterion from 0658, applied to K and to L separately. proof_deps equals the union of the step uses, and there is no cycle. There are no new nodes. The only similar existing nodes (lem-pc-perfect-summand and the thick-closure lemma) are about D(O_X) on a scheme, a different object, so there is no duplicate. I accept the five declared off-unit tool uses; each is a generic algebra lemma that no node of sk-thm-sf-package states. Edge cases checked: A=0, a zero summand, and a projective but non-free summand over a non-Noetherian ring. Two defects in existing nodes need maintenance; neither is in this delivery, so they do not block it. First, lem-pc-ring-pseudo-coherent-finite-tor-perfect links D(R) and 'perfect' to the scheme definitions, although its text and conclusion are explicitly about the ring. Second, lem-pc-ring-pseudo-coherent-summand cites 064T where the tag is 064U. No fixes were written."
  }
 }

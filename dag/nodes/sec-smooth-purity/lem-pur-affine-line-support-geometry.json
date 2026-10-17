@@ -16,9 +16,85 @@
   "def-weil-open-immersion",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The spectrum of a field is Noetherian: its only ideals are $(0)$ and the unit ideal, so the ascending-chain condition holds and the affine scheme is quasi-compact. Applying [lem-weil-pbc-finite-type-over-noetherian] to the finite-type morphism $Y\\to\\operatorname{Spec}k$ therefore shows that $Y$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph: apply the finite-type/Noetherian hypotheses to the affine-line datum's base $Y$."
+   }
+  },
+  {
+   "text": "For an affine open $V=\\operatorname{Spec}R$ of $Y$, the inverse image in $X=\\mathbf A^1_Y$ is the affine chart $\\operatorname{Spec}R[t]$ by [def-sbc-affine-space]. The polynomial algebra $R[t]$ is generated over $R$ by the single coordinate $t$, so the projection $p:X\\to Y$ is of finite type by the definition of finite type morphism. Since $Y\\to\\operatorname{Spec}k$ is of finite type by hypothesis, [lem-sfb-finite-type-composition-base-change](1) gives that $X\\to\\operatorname{Spec}k$ is of finite type.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph: the affine-line construction and its finite-type geometry."
+   }
+  },
+  {
+   "text": "The coordinate $t$ is a global section of $\\mathcal O_X$: it is the pullback of the variable along the second projection $X=Y\\times_{\\operatorname{Spec}\\mathbb Z}\\operatorname{Spec}\\mathbb Z[t]\\to\\operatorname{Spec}\\mathbb Z[t]$ of [def-sbc-affine-space]. On each chart $p^{-1}(V)=\\operatorname{Spec}R[t]$, $V=\\operatorname{Spec}R\\subset Y$, the zero section is the closed subscheme of the quotient $R[t]\\to R$, $t\\mapsto0$, so $s(Y)\\cap p^{-1}(V)=V(t)$ and $U\\cap p^{-1}(V)=D(t)=\\operatorname{Spec}R[t,t^{-1}]$. Since these charts cover $X$ and whether $t$ vanishes at a point (lies in the maximal ideal of the local ring) is a pointwise condition, $s(Y)$ is exactly the set of points of $X$ where $t$ vanishes. Hence, if $W=\\operatorname{Spec}B$ is any affine open of $X$, then $U\\cap W=D(t|_W)$ with $t|_W\\in B$; [lem-weil-pbc-spec-localization-away-basic-open](ii) identifies this principal open, as a topological space, with $\\operatorname{Spec}B_t$. By [lem-weil-pbc-affine-scheme-qcqs], $\\operatorname{Spec}B_t$ is quasi-compact, so $j^{-1}(W)=U\\cap W$ is quasi-compact. Since this holds for every affine open $W$ of $X$, the open immersion $j:U\\hookrightarrow X$ is quasi-compact in the sense of [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph: the closed-open affine-line pair and the quasi-compact open complement."
+   }
+  },
+  {
+   "text": "The open immersion $j$ is now of finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. Composing this finite-type morphism with the finite-type map $X\\to\\operatorname{Spec}k$ and using [lem-sfb-finite-type-composition-base-change](1) proves that $U\\to\\operatorname{Spec}k$ is of finite type.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph: finite-type and quasi-compact hypotheses for the open complement."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-over-noetherian] to the finite-type maps $X\\to\\operatorname{Spec}k$ and $U\\to\\operatorname{Spec}k$. Because $\\operatorname{Spec}k$ is Noetherian as in Step 1, both $X$ and $U$ are Noetherian. Together with Step 1 this gives the asserted Noetherianity of $Y,X,U$, while Steps 2 and 4 give finite type over $k$ for $X$ and $U$ and the preceding hypothesis gives it for $Y$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph: Noetherian and finite-type support hypotheses before applying the localization triangle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "First paragraph, the closed-open affine-line pair before applying the support localization triangle; geometric prerequisite expanded using the cited Stacks lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +137,38 @@
    "results": "{\"t\": \"2026-10-17T08:45:17Z\", \"tool\": \"grep\", \"query\": \"instLocallyOfFinitePresentation|instIsAffineHom|instQuasiCompact|isNoetherian_of|isNoetherian|isLocallyNoetherian_of\", \"sub\": \"AlgebraicGeometry/AffineSpace.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match for the complete geometry statement: affine-space finite-presentation and Noetherian/open-immersion instances supply separate inputs, but do not state the finite-type punctured-line construction and all its conclusions in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type affine line over a field punctured affine line Noetherian quasi-compact open immersion",
+   "results": "8 hits including AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite and AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset; no complete theorem",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete geometry statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.QuasiCompact",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Noetherian|quasiCompact|AffineSpace (subdirectory Mathlib/AlgebraicGeometry)",
+   "results": "25 hits, including ProjectiveSpectrum/Proper.lean and Geometrically/Integral.lean; no complete theorem",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete geometry statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type scheme over a field has Noetherian affine line and punctured line with quasi compact complement open immersion",
+   "results": "8 hits including AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion and AlgebraicGeometry.IsNoetherian.mk; no single declaration states all clauses",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete geometry statement; component declarations are represented by existing DAG leaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-gysin-structure",
@@ -81,5 +185,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-affine-line-support-geometry",
+  "worker": "stage1",
+  "summary": "Expanded the imported geometric prerequisite into five proof steps. The field base is Noetherian and finite type over it makes Y Noetherian; affine polynomial charts make the relative affine line finite type; the complement is a principal open on every affine chart, giving quasi-compactness of j; quasi-compact open immersion plus composition gives finite type for U; and finite type over the field gives Noetherianity of X and U. Reused existing DAG Mathlib leaves and changed no statement or definition.",
+  "blueprint": "Realizes the first paragraph of lem-pur-gysin-structure.proof.md: the affine-line datum's finite-type, Noetherian, and quasi-compact closed-open support geometry before localization."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-30ff22e38",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-30ff22e38 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery adds no new nodes. I read it against the main-20261015 lem-pur-gysin-structure proof (first paragraph: the pair (s,j) to which the localization triangle is applied), against each cited statement, and against Stacks 01T6 (morphisms.tex:2765) and 01OX (properties.tex:461). Statement: Y finite type over a field k, X=A^1_Y, U its complement of the zero section. Conclusions: X and U are finite type over k, Y, X and U are Noetherian, and j is quasi-compact. This is true. It drops the parent's separatedness, which is harmless, and it supplies exactly what parent step 0 uses. Small cases checked: Y empty, Spec k, Spec k[e]/e^2, P^1_k. Steps: 1 (Spec k Noetherian, then lem-weil-pbc-finite-type-over-noetherian), 2 (chart Spec R[t] plus composition clause (1)), 4 (lem-weil-pbc-qc-open-immersion-finite-type plus composition) and 5 are correct, and each hypothesis is met. Every cited proof node is a Mathlib leaf, so there is no route or tool_use issue. No SGA is cited. Duplicate search over dag/nodes (pur9-def-affine-line, def-pur-affine-line-datum, prop-pur-gm-relative-kummer and others) found no node stating these conclusions. The one fault: step 3 asserted j^{-1}(W)=D(t|_W) for an arbitrary affine W without saying that t is a global section of O_X or that s(Y) is the vanishing locus of t. I rewrote step 3 to state both explicitly, and added def-weil-finite-type-morphism to its uses (already in proof_deps). The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-pur-affine-line-support-geometry.json. No statement changed, and no tool_uses were accepted or needed.; 1 file(s) fixed by the reviewer"
  }
 }

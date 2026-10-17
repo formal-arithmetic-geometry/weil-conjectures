@@ -10,9 +10,119 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\operatorname{Fun}(\\Delta^1,B)$, $A'=\\operatorname{Fun}(\\Delta^1,B')$, $P=B\\times B$, $P'=B'\\times B'$, $X=C\\times D$ and $X'=C'\\times D'$. Products of these quasicategories are quasicategories: fill each coordinate of an inner horn separately and pair the fillers. Apply [lem-coef-infinity-isofibration-exponentiation] to $\\partial\\Delta^1\\hookrightarrow\\Delta^1$. Restriction identifies degreewise with the endpoint maps $p:A\\to P$ and $p':A'\\to P'$ and makes both isofibrations between quasicategories. Indeed $\\partial\\Delta^1$ is the disjoint union of its two vertices, so a map from its product with $\\Delta^n$ is exactly a pair of $n$-simplices. Write $a:X\\to P$ for $(F,G)$ and $a':X'\\to P'$ for $(F',G')$. The displayed $T,T'$ identify degreewise with $X\\times_P A$ and $X'\\times_{P'}A'$. They are quasicategories: extend the $X$ (respectively $X'$) coordinate of an inner horn, lift its image simplex through the inner fibration $p$ (respectively $p'$), and pair the lift with the chosen coordinate. The lift has exactly the prescribed boundary horn and endpoint images.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3: restriction to the two endpoints; explicit degreewise pullback and inner-horn calculation."
+   }
+  },
+  {
+   "text": "Let $H=h\\times h:P\\to P'$ and $V=v\\times w:X\\to X'$. Both are functor equivalences, directly from the definition in [def-cbc-enhanced-diagrams-cones]. Choose quasi-inverses $k,v^{-},w^{-}$ for $h,v,w$, respectively. The inverse candidates are $k\\times k$ and $v^{-}\\times w^{-}$. Pair the given coherent unit and counit transformations in the two coordinates. Their inverse edges and both inverse-witness $2$-simplices are the corresponding pairs of witnesses, so they are equivalence edges in the product functor simplicial sets. This proves the required quasi-inverse identities. The hypotheses on the two squares give the exact equation $Ha=a'V$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03PN",
+    "place": "Remark 4.6.4.4, vertical maps on the endpoint and source products, expanded using quasi-inverses."
+   }
+  },
+  {
+   "text": "Postcomposition $u=\\operatorname{Fun}(\\Delta^1,h):A\\to A'$ is a functor equivalence. Its inverse candidate is postcomposition with $k$ from Step 2. To check coherence directly, for any small shape $K$ and quasicategory $E$, internal evaluation defines a simplicial map\n$$\\Phi_K:\\operatorname{Fun}(E,E)\\longrightarrow\\operatorname{Fun}(\\operatorname{Fun}(K,E),\\operatorname{Fun}(K,E)),$$\nwhose action on a parameterized endomorphism $\\sigma:E\\times\\Delta^n\\to E$ is obtained by transposing $(f,t,z)\\mapsto\\sigma(f(z),t)$. Here the displayed expression means the evaluation map on $\\operatorname{Fun}(K,E)\\times\\Delta^n\\times K$; restrictions in $\\Delta^n$ commute with this formula. Apply $\\Phi_{\\Delta^1}$ to the unit edge $kh\\simeq1_B$ and the counit edge $hk\\simeq1_{B'}$, using $E=B,B'$ respectively. The images connect the two composites of the proposed inverse functors to the identities. A simplicial map sends an inverse edge and its two witnessing $2$-simplices to witnesses of the same equations, so these image edges are equivalences. All functor simplicial sets here are quasicategories by [lem-coef-infinity-isofibration-exponentiation], applied to restriction from a shape to the empty simplicial set. Thus these are precisely the coherent quasi-inverse data of [def-cbc-enhanced-diagrams-cones]. Restriction to endpoints commutes with postcomposition, giving $p'u=Hp$ exactly.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03PN",
+    "place": "Remark 4.6.4.4, vertical map on the arrow functor category; explicit simplicial evaluation action on inverse witnesses."
+   }
+  },
+  {
+   "text": "Form $S=P\\times_{P'}A'$ using $H$ and $p'$, with projections $\\rho:S\\to P$ and $q:S\\to A'$. The hypotheses of [lem-coef-infinity-isofibration-pullback-equivalence] hold with its $(A,B,C,y,\\pi)=(P,P',A',H,p')$: Step 2 supplies the equivalence $H$ and Step 1 the isofibration $p'$. Therefore $S$ is a quasicategory and $q$ is a functor equivalence. The equation at the end of Step 3 defines $j:A\\to S$ by $j(\\eta)=(p(\\eta),u(\\eta))$, with $qj=u$ and $\\rho j=p$ as simplicial maps. By clause (2) of [lem-coef-joyal-quasicategory-characterizations], $q$ and $u$ are weak equivalences in the Joyal model structure. Two-out-of-three in [lem-coef-joyal-model-structure] applied to $qj=u$ makes $j$ a weak equivalence. Its source $A$ and target $S$ are quasicategories, so clause (2) converts this to a functor equivalence $j$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-pullback-equivalence",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03PM",
+    "place": "Corollary 4.5.3.34: first replace the arrow category after changing the base; equivalence of j by the specified composite qj=u."
+   }
+  },
+  {
+   "text": "The projection $\\rho:S\\to P$ is an isofibration. For clarity, use clause (1) of [lem-coef-joyal-quasicategory-characterizations] to regard $p'$ as a Joyal fibration. For a lifting square against any trivial cofibration with right map $\\rho$, project the square to $A'\\to P'$, lift through $p'$, and pair its filler with the prescribed map to $P$. The two coordinates satisfy the pullback equation, so this is a filler for the original square. The lifting characterization in [lem-coef-joyal-model-structure] makes $\\rho$ a fibration; clause (1) converts it to an isofibration, since Step 4 proved $S$ and Step 1 proved $P$ quasicategories. Now [lem-coef-infinity-isofibration-base-change] applies over $P$ to $p:A\\to P$, $\\rho:S\\to P$, $j:A\\to S$ and $a:X\\to P$. Both structure maps are isofibrations and $\\rho j=p$ exactly. It gives the equivalence\n$$\\alpha:T=X\\times_P A\\longrightarrow U=X\\times_P S,\\qquad(x,\\eta)\\longmapsto(x,(a(x),u(\\eta))),$$\nand asserts that $U$ is a quasicategory. No lifting condition on $a$ was used.",
+   "uses": [
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-infinity-isofibration-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03PM",
+    "place": "Corollary 4.5.3.34, fixed-base change on the arrow-side isofibrations; pullback lifting verified explicitly."
+   }
+  },
+  {
+   "text": "The projection $\\tau:T'\\to X'$ is also an isofibration. It is the pullback of $p'$ along $a'$. Apply clause (1) of [lem-coef-joyal-quasicategory-characterizations] to $p'$. A lifting square against a trivial cofibration for $\\tau$ projects to one for $p'$. Pair a filler there with the specified map to $X'$; the pullback equality is exactly the compatibility condition of that lifting square. Thus $\\tau$ has the defining right lifting property for Joyal fibrations in [lem-coef-joyal-model-structure]. Since $T'$ and $X'$ are quasicategories by Step 1, clause (1) makes $\\tau$ an isofibration.",
+   "uses": [
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03PM",
+    "place": "Corollary 4.5.3.34, endpoint fibration after base change; direct right-lifting-property calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-isofibration-pullback-equivalence] a second time, now with its $(A,B,C,y,\\pi)=(X,X',T',V,\\tau)$. Step 2 gives $V$ a functor equivalence and Step 6 gives $\\tau$ an isofibration. The resulting equivalence is the projection $X\\times_{X'}T'\\to T'$. Identify its source with $U$ explicitly: an $n$-simplex of $U$ has coordinates $(x,(z,\\eta'))$ with $z=a(x)$ and $H(z)=p'(\\eta')$. Send it to $(x,(V(x),\\eta'))$. This lies in $X\\times_{X'}T'$ since $p'(\\eta')=Ha(x)=a'V(x)$. Conversely a simplex $(x,(x',\\eta'))$ of that pullback satisfies $x'=V(x)$; send it to $(x,(a(x),\\eta'))$. The two substitutions are inverse and commute with every simplicial operator. Hence the resulting equivalence is the specified map $\\beta:U\\to T'$, $(x,(a(x),\\eta'))\\mapsto(V(x),\\eta')$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-pullback-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03PM",
+    "place": "Corollary 4.5.3.34, change of the source-product category; degreewise identification of the iterated pullbacks."
+   }
+  },
+  {
+   "text": "The composite $\\beta\\alpha$ sends $(c,\\eta,d)$ to $(v(c),h\\eta,w(d))$ in every simplicial degree, by Steps 5 and 7. It is a functor equivalence: clause (2) of [lem-coef-joyal-quasicategory-characterizations] converts $\\alpha,\\beta$ to Joyal weak equivalences, and two-out-of-three in [lem-coef-joyal-model-structure] makes their composite a weak equivalence; clause (2) converts back since $T,T'$ are quasicategories. Projecting that same coordinate formula gives exactly $\\operatorname{pr}_{C'}\\beta\\alpha=v\\operatorname{pr}_C$ and $\\operatorname{pr}_{D'}\\beta\\alpha=w\\operatorname{pr}_D$ as simplicial maps. For $D=D'=\\Delta^0$ take $w=1$ and $G'=hG$; all hypotheses still hold for every chosen object $G(*)$. No step selected a preimage of that object under $F$. Empty inputs cause no exception: products and pullbacks remain the displayed simplicial sets, the inner-horn arguments are conditional on a given horn, and both cited pullback-equivalence results explicitly impose no nonemptiness assumption.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03PN",
+    "place": "Remark 4.6.4.4, specified induced map and strict endpoint equations; arbitrary-object and empty-case checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-equivalence",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-isofibration-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/03PN",
+  "place": "Remark 4.6.4.4 and its Corollary 4.5.3.34 argument, expanded through the existing fixed-base and changed-base isofibration pullback lemmas. Online source read 2026-10-17; no archived Kerodon source is present, so this explicit expansion is marked agent-written; WANTED entries are in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +166,50 @@
    "results": "{\"t\": \"2026-10-17T15:12:12Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative map between two cospans of quasicategories whose three component functors are equivalences induces an equivalence of oriented fiber products, defined using the internal arrow infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.cospanExt\", \"CategoryTheory.Limits.CatCospanTransform.baseIso\", \"CategoryTheory.Limits.CatCospanTransform.mkIso\", \"CategoryTheory.Limits.CatCospanTransform.isIso_iff\", \"CategoryTheory.Limits.cospanIsoMk\", \"CategoryTheory.Limits.cospanIsoMk_hom_app\", \"CategoryTheory.CatCommSq.vInvEquiv\", \"CategoryTheory.CatCommSq.hInvEquiv\"], \"digest\": \"13d6a473618b2e58\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned cospanExt, CatCospanTransform.baseIso/mkIso/isIso_iff and CatCommSq.hInvEquiv/vInvEquiv are ordinary category constructions. Read CatCospanTransform.lean:44-67: its inputs are Type objects with Category instances and ordinary natural isomorphisms, not quasicategories; none states oriented fiber product homotopy invariance."
+  },
+  {
+   "tool": "grep",
+   "query": "isEquivalenceMap|[Qq]uasicategory|[Ii]so[Ff]ibration",
+   "results": "{\"t\": \"2026-10-17T15:33:53Z\", \"tool\": \"grep\", \"query\": \"isEquivalenceMap|[Qq]uasicategory|[Ii]so[Ff]ibration\", \"sub\": \"CategoryTheory/Comma\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Comma/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\"], \"digest\": \"d1733bafab29ea23\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Comma/Basic.lean:275-335 (isEquivalenceMap at 311), Limits/Shapes/Pullback/Categorical/Basic.lean:346-365 (functorEquiv at 354), CatCospanTransform.lean:30-82, CechNerve.lean:145-166 and Quasicategory/Basic.lean:32-92. Comma equivalences, categorical pullback universal properties, cospan transformations and Cech adjunctions concern ordinary categories; truncated homotopy-category lemmas do not prove equivalence of coherent comma quasicategories. Model-category closure results lack the Joyal identification and the required comma assertion. None is an exact match or one-line specialization.",
+   "sub": "CategoryTheory/Comma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comma\", \"isEquivalence\"",
+   "results": "{\"t\": \"2026-10-17T15:33:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comma\\\", \\\"isEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.isEquivalence_preLeft\", \"CategoryTheory.Comma.isEquivalence_preRight\", \"CategoryTheory.Comma.isEquivalence_post\", \"CategoryTheory.Comma.isEquivalenceMap\", \"CommAlgCat.instIsEquivalenceOppositeFiniteEtaleFintypeCatFiniteSpecOfIsSepClosed\", \"CommAlgCat.instIsEquivalenceOppositeFiniteEtaleFintypeCatFiberOfIsSepClosed\"], \"digest\": \"4069d199036bac80\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Comma/Basic.lean:275-335 (isEquivalenceMap at 311), Limits/Shapes/Pullback/Categorical/Basic.lean:346-365 (functorEquiv at 354), CatCospanTransform.lean:30-82, CechNerve.lean:145-166 and Quasicategory/Basic.lean:32-92. Comma equivalences, categorical pullback universal properties, cospan transformations and Cech adjunctions concern ordinary categories; truncated homotopy-category lemmas do not prove equivalence of coherent comma quasicategories. Model-category closure results lack the Joyal identification and the required comma assertion. None is an exact match or one-line specialization.",
+   "sub": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy invariance of oriented fiber products of infinity categories under equivalences of all three categories of a cospan",
+   "results": "{\"t\": \"2026-10-17T15:33:54Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy invariance of oriented fiber products of infinity categories under equivalences of all three categories of a cospan\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj_hom_ext\", \"Homotopy.map_eq_of_inverts_homotopyEquivalences\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"CategoryTheory.Limits.CatCospanTransform.mkIso_hom_left\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CategoryTheory.Limits.opCospan\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.idProdMapHomotopyCategoryCompInverseIso\"], \"digest\": \"4e1948d3cb266783\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Comma/Basic.lean:275-335 (isEquivalenceMap at 311), Limits/Shapes/Pullback/Categorical/Basic.lean:346-365 (functorEquiv at 354), CatCospanTransform.lean:30-82, CechNerve.lean:145-166 and Quasicategory/Basic.lean:32-92. Comma equivalences, categorical pullback universal properties, cospan transformations and Cech adjunctions concern ordinary categories; truncated homotopy-category lemmas do not prove equivalence of coherent comma quasicategories. Model-category closure results lack the Joyal identification and the required comma assertion. None is an exact match or one-line specialization.",
+   "sub": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalences of quasicategories in a strictly commutative map of cospans induce an equivalence of the oriented fiber products defined with the internal arrow quasicategory",
+   "results": "{\"t\": \"2026-10-17T15:33:56Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalences of quasicategories in a strictly commutative map of cospans induce an equivalence of the oriented fiber products defined with the internal arrow quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_symm_apply\", \"CategoryTheory.CosimplicialObject.cechConerveEquiv_apply\", \"SSet.StrictSegal.quasicategory\", \"CategoryTheory.Limits.CategoricalPullback.functorEquiv\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\"], \"digest\": \"0103064e91349311\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Comma/Basic.lean:275-335 (isEquivalenceMap at 311), Limits/Shapes/Pullback/Categorical/Basic.lean:346-365 (functorEquiv at 354), CatCospanTransform.lean:30-82, CechNerve.lean:145-166 and Quasicategory/Basic.lean:32-92. Comma equivalences, categorical pullback universal properties, cospan transformations and Cech adjunctions concern ordinary categories; truncated homotopy-category lemmas do not prove equivalence of coherent comma quasicategories. Model-category closure results lack the Joyal identification and the required comma assertion. None is an exact match or one-line specialization.",
+   "sub": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy comma infinity categories are invariant under compatible equivalences of the two sources and of the target quasicategory",
+   "results": "{\"t\": \"2026-10-17T15:34:04Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy comma infinity categories are invariant under compatible equivalences of the two sources and of the target quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicR.congr_homotopyCategory₂HomMk\", \"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory.ext\"], \"digest\": \"43305e4850cbff03\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Comma/Basic.lean:275-335 (isEquivalenceMap at 311), Limits/Shapes/Pullback/Categorical/Basic.lean:346-365 (functorEquiv at 354), CatCospanTransform.lean:30-82, CechNerve.lean:145-166 and Quasicategory/Basic.lean:32-92. Comma equivalences, categorical pullback universal properties, cospan transformations and Cech adjunctions concern ordinary categories; truncated homotopy-category lemmas do not prove equivalence of coherent comma quasicategories. Model-category closure results lack the Joyal identification and the required comma assertion. None is an exact match or one-line specialization.",
+   "sub": ""
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-cartesian-cylinder-slice-comparison",
@@ -88,5 +238,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-comma-equivalence-invariance",
+  "worker": "stage1",
+  "summary": "Proved coherent oriented-fiber-product homotopy invariance using existing endpoint exponentiation and the two isofibration pullback comparison lemmas; expanded the internal postcomposition inverse witnesses, the change-of-base factorization, the strict coordinate identifications and all endpoint equations. No statement correction, new nodes or Mathlib leaves. Existing searches retained and five actual NU searches appended.",
+  "blueprint": "The inherited ancestry serves prop-coef-integral-exceptional-adjoint, proof paragraph 2, middle finite-coefficient derived mapping-complex comparison, via the marked operadic restriction and symmetric Cartesian-cylinder factorization chain. These eight steps supply its generic coherent comma comparison: endpoint restriction (1), cospan equivalences (2-3), two strict pullback comparisons (4-7), and the induced-map/endpoint assertion (8). The unit route and the blueprint ancestry are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-8aeaf02bf",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-8aeaf02bf (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statements of all six cited nodes. Statement unchanged; it matches Kerodon Remark 4.6.4.4 (Tag 03PN) for strictly commuting cospans with vertical equivalences, and no fibration hypothesis is added. Step 1: exponentiation applied to the boundary of Delta^1 inside Delta^1 makes the endpoint maps p and p' isofibrations; T = X x_P A is a quasicategory by the inner-horn lift through p. Step 2: products of equivalences, with witnesses taken coordinatewise; Ha = a'V holds. Step 3: the evaluation map Phi_K is a genuine simplicial map, so it carries the unit and counit equivalence witnesses to witnesses for Fun(Delta^1,h); p'u = Hp holds exactly. Step 4: pullback-equivalence applied with (P,P',A',H,p') matches its hypotheses; j = (p,u) is an equivalence by clause (2) and two-out-of-three. Steps 5-6: rho and tau are pullbacks of the fibration p', so they are isofibrations by clause (1); base-change applies with p, rho, j and a, and gives alpha. Step 7: second pullback-equivalence with (X,X',T',V,tau); the identification of U with X x_X' T' checks out. Step 8: beta alpha is (v, h composed, w) coordinatewise, and the endpoint equations hold strictly. Small cases checked: empty inputs, D = Delta^0 with G' = hG, discrete B, nerves of posets. No new nodes, no cycle (the dependency closure does not reach the item), no duplicate found in the DAG, all citations stay in unit sk-prop-sf-biduality-general, no tool_uses, no SGA. Not a target, so the base-change morphism and coefficient category check does not apply. No fixes."
  }
 }
