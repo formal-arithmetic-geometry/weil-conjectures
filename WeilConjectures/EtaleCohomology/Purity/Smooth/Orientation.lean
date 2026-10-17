@@ -62,7 +62,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ] (Y : 
   [HasInvertibleExponent Λ Y] {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
   [LocallyOfFiniteType aY]
 
-/-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
+/-- Blueprint `pur9-def-orientation`: The orientation of the zero section
+
+Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
 
 The *orientation* (fundamental class) of the zero section `s : V(t) ⟶ 𝔸¹_Y`, realised as the
 closed subscheme cut out by the coordinate `t`:

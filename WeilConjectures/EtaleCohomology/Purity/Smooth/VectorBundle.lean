@@ -289,8 +289,9 @@ lemma exists_mulVec_coord {W : Scheme.{u}} (i j : E.ι) (a : W ⟶ (π ⁻¹ᵁ 
     rw [Scheme.Hom.comp_appTop]
     rfl
   refine ⟨M.map (c ≫ π ∣_ (E.U i ⊓ E.U j)).appTop.hom, ?_, ?_⟩
-  · rw [← RingHom.map_det]
-    exact hM.map _
+  · have h := hM.map (c ≫ π ∣_ (E.U i ⊓ E.U j)).appTop.hom
+    rw [RingHom.map_det] at h
+    exact h
   · funext t
     simp only [Matrix.mulVec, dotProduct, Matrix.map_apply, coord]
     rw [← key, ← hcb, Category.assoc, key, hlin t, map_sum]
@@ -306,12 +307,13 @@ theorem _root_.AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_m
     (F₁ F₂ : i.EtaleFrame c) {W : Scheme.{u}} [HasInvertibleExponent Λ W] (a : W ⟶ F₁.U)
     (b : W ⟶ F₂.U) [AlgebraicGeometry.Etale a] [AlgebraicGeometry.Etale b]
     (M : Matrix (Fin c) (Fin c) Γ(W, ⊤)) (hM : IsUnit M.det)
-    (hMf : (fun t ↦ b.appTop (F₂.f t)) = M.mulVec fun t ↦ a.appTop (F₁.f t))
-    (g₁ : W.zeroLocusSubscheme (Set.range fun t ↦ a.appTop (F₁.f t)) ⟶ _)
-    (hg₁ : IsPullback g₁ (W.zeroLocusSubschemeι (Set.range fun t ↦ a.appTop (F₁.f t)))
+    (v w : Fin c → Γ(W, ⊤)) (hv : ∀ t, a.appTop (F₁.f t) = v t)
+    (hw : ∀ t, b.appTop (F₂.f t) = w t) (hMf : w = M.mulVec v)
+    (g₁ : W.zeroLocusSubscheme (Set.range v) ⟶ _)
+    (hg₁ : IsPullback g₁ (W.zeroLocusSubschemeι (Set.range v))
       (F₁.U.zeroLocusSubschemeι (Set.range F₁.f)) a)
-    (g₂ : W.zeroLocusSubscheme (Set.range fun t ↦ a.appTop (F₁.f t)) ⟶ _)
-    (hg₂ : IsPullback g₂ (W.zeroLocusSubschemeι (Set.range fun t ↦ a.appTop (F₁.f t)))
+    (g₂ : W.zeroLocusSubscheme (Set.range v) ⟶ _)
+    (hg₂ : IsPullback g₂ (W.zeroLocusSubschemeι (Set.range v))
       (F₂.U.zeroLocusSubschemeι (Set.range F₂.f)) b) :
     haveI : HasInvertibleExponent Λ F₁.U := .of_hom F₁.e
     haveI : HasInvertibleExponent Λ F₂.U := .of_hom F₂.e
@@ -323,18 +325,16 @@ theorem _root_.AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_m
         (frameClass Λ F₂) := by
   have : HasInvertibleExponent Λ F₁.U := .of_hom F₁.e
   have : HasInvertibleExponent Λ F₂.U := .of_hom F₂.e
-  set v : Fin c → Γ(W, ⊤) := fun t ↦ a.appTop (F₁.f t)
-  set w : Fin c → Γ(W, ⊤) := fun t ↦ b.appTop (F₂.f t)
   obtain ⟨gw, hgw⟩ : ∃ g, IsPullback g _ _ _ :=
     ⟨_, isPullback_zeroLocusSubschemeι b (Set.range F₂.f) (Set.range w)
-      (by rw [← Set.range_comp]; rfl)⟩
+      (by rw [← Set.range_comp]; exact congrArg Set.range (funext hw))⟩
   obtain ⟨g₀, hg₀⟩ := Scheme.exists_isPullback_zeroLocusSubschemeι_of_span_eq
     (U := W) (s := Set.range w) (s' := Set.range v)
     (by rw [hMf, Ideal.span_range_mulVec_of_isUnit_det _ hM])
   rw [restrictSupportedClass_comp_tateShift Λ (𝟙 _) b _ (Category.id_comp _).symm _ _ _
     gw hgw g₀ hg₀ g₂ hg₂, frameClass, frameClass,
-    restrictSupportedClass_kummerBoundaryProduct Λ a F₁.f v (fun _ ↦ rfl) g₁ hg₁,
-    restrictSupportedClass_kummerBoundaryProduct Λ b F₂.f w (fun _ ↦ rfl) gw hgw]
+    restrictSupportedClass_kummerBoundaryProduct Λ a F₁.f v hv g₁ hg₁,
+    restrictSupportedClass_kummerBoundaryProduct Λ b F₂.f w hw gw hgw]
   have key : ∀ (w' : Fin c → Γ(W, ⊤)) (_ : w' = M.mulVec v) (g : _ ⟶ _)
       (hg : IsPullback g (W.zeroLocusSubschemeι (Set.range v))
         (W.zeroLocusSubschemeι (Set.range w')) (𝟙 _)),
@@ -408,7 +408,9 @@ theorem exists_thomClass :
     exact (constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestriction Λ
       (E.frame i).e a _ rfl E.zero _ _ (E.frame i).toZ (E.frame i).isPullback g₁ hg₁ _ hg' _ _
         (hδ i)).trans
-      ((restrictSupportedClass_frameClass_eq_of_mulVec Λ (E.frame i) (E.frame j) a b M hM hMf
+      ((restrictSupportedClass_frameClass_eq_of_mulVec Λ (E.frame i) (E.frame j) a b M hM
+        (fun t ↦ a.appTop ((E.frame i).f t)) (fun t ↦ b.appTop ((E.frame j).f t))
+        (fun _ ↦ rfl) (fun _ ↦ rfl) hMf
         g₁ hg₁ g₂ hg₂).trans
       (constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestriction Λ
         (E.frame j).e b _ h E.zero _ _ (E.frame j).toZ (E.frame j).isPullback g₂ hg₂ _ hg' _ _
@@ -434,7 +436,8 @@ lemma frameRestriction_thomClass (i : E.ι) :
   (E.exists_thomClass Λ aS).choose_spec i
 
 include aS in
-/-- The adjoint `Λ_S ⟶ Rz^! (Λ_V(d)[2d])` of the Thom class. -/
+/-- Blueprint `pur9-def-thom-class`: the Thom class map, the adjoint
+`Λ_S ⟶ Rz^! (Λ_V(d)[2d])` of the Thom class. -/
 noncomputable def thomClassMap : constantComplex Λ S ⟶
     (R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d)) :=
   supportedClassMap Λ E.zero (E.thomClass Λ aS)

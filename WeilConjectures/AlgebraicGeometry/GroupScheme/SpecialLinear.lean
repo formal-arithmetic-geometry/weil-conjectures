@@ -26,7 +26,7 @@ determinant `1`.
 
 - `AlgebraicGeometry.GeneralLinearGroup.det`: the determinant `𝔾𝕃(n; k) ⟶ 𝔾ₘ(k)`.
 - `AlgebraicGeometry.SpecialLinearGroup`, notation `𝕊𝕃(n; k)`: the special linear group scheme,
-  with its closed immersion `SpecialLinearGroup.ι` into `𝔾𝕃(n; k)`.
+  with its closed immersion `SpecialLinearGroup.toGeneralLinear` into `𝔾𝕃(n; k)`.
 
 ## Main results
 
@@ -106,17 +106,17 @@ namespace SpecialLinearGroup
 /-- The closed immersion `𝕊𝕃(n; k) ⟶ 𝔾𝕃(n; k)`, the spectrum of the quotient map
 `k[x_ij, det⁻¹] → k[x_ij, det⁻¹] ⧸ (det - 1)`. It is a homomorphism of group schemes.
 (blueprint: `def-sc-general-linear-group`) -/
-noncomputable def ι : 𝕊𝕃(n; k) ⟶ 𝔾𝕃(n; k) :=
+noncomputable def toGeneralLinear : 𝕊𝕃(n; k) ⟶ 𝔾𝕃(n; k) :=
   GeneralLinearGroup.subgroupSchemeι (specialLinearIdeal n k)
 
-instance : IsMonHom (ι n k) :=
+instance : IsMonHom (toGeneralLinear n k) :=
   inferInstanceAs (IsMonHom (GeneralLinearGroup.subgroupSchemeι (specialLinearIdeal n k)))
 
-instance : IsClosedImmersion (ι n k).left :=
+instance : IsClosedImmersion (toGeneralLinear n k).left :=
   inferInstanceAs (IsClosedImmersion
     (GeneralLinearGroup.subgroupSchemeι (specialLinearIdeal n k)).left)
 
-instance : Mono (ι n k) :=
+instance : Mono (toGeneralLinear n k) :=
   inferInstanceAs (Mono (GeneralLinearGroup.subgroupSchemeι (specialLinearIdeal n k)))
 
 variable {n k}
@@ -143,7 +143,7 @@ theorem mem_zeroLocus_specialLinearIdeal_iff {R : Type u} [CommRing R] [Algebra 
 `1`. -/
 theorem range_homMulEquiv_comp_ι (R : Type u) [CommRing R] [Algebra k R] :
     Set.range (fun φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ 𝕊𝕃(n; k) ↦
-      GeneralLinearGroup.homMulEquiv n k R (φ ≫ ι n k)) =
+      GeneralLinearGroup.homMulEquiv n k R (φ ≫ toGeneralLinear n k)) =
         {g | Matrix.GeneralLinearGroup.det g = 1} := by
   ext g
   rw [Set.mem_setOf_eq, ← mem_zeroLocus_specialLinearIdeal_iff,

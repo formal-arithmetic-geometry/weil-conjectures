@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependence
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 
 /-!
 # Linear changes of coordinates preserve the class of the zero section of affine space
@@ -105,24 +106,23 @@ theorem restrictSupportedClass_kummerBoundaryProduct_linearMap
         (leftDerivedUpperStarTateShiftIso Λ _ d)
         (kummerBoundaryProduct Λ (AffineSpace.coordFin S d)) =
       kummerBoundaryProduct Λ (AffineSpace.coordFin S d) := by
-  set t := AffineSpace.coordFin S d
-  set M := g.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom
-  have hM : IsUnit M.det := by
-    rw [← RingHom.map_det]
-    exact hg.map _
+  have hM : IsUnit (g.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom).det := by
+    have h := hg.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom
+    rw [RingHom.map_det] at h
+    exact h
   obtain ⟨gφ, hgφ⟩ : ∃ g, IsPullback g _ _ _ :=
-    ⟨_, isPullback_zeroLocusSubschemeι (AffineSpace.linearMap g) (Set.range t)
-      (Set.range (M.mulVec t)) (by
+    ⟨_, isPullback_zeroLocusSubschemeι (AffineSpace.linearMap g) (Set.range (AffineSpace.coordFin S d))
+      (Set.range ((g.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom).mulVec (AffineSpace.coordFin S d))) (by
         rw [← Set.range_comp]
         exact congrArg Set.range (funext (AffineSpace.linearMap_appTop_coordFin g)))⟩
   obtain ⟨g₀, hg₀⟩ := Scheme.exists_isPullback_zeroLocusSubschemeι_of_span_eq
-    (U := 𝔸(ULift.{u} (Fin d); S)) (s := Set.range (M.mulVec t)) (s' := Set.range t)
+    (U := 𝔸(ULift.{u} (Fin d); S)) (s := Set.range ((g.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom).mulVec (AffineSpace.coordFin S d))) (s' := Set.range t)
     (Ideal.span_range_mulVec_of_isUnit_det _ hM)
   rw [restrictSupportedClass_comp_tateShift Λ (𝟙 _) (AffineSpace.linearMap g) _
       (Category.id_comp _).symm _ _ _ gφ hgφ g₀ hg₀ g' hg',
-    restrictSupportedClass_kummerBoundaryProduct Λ (AffineSpace.linearMap g) t (M.mulVec t)
+    restrictSupportedClass_kummerBoundaryProduct Λ (AffineSpace.linearMap g) (AffineSpace.coordFin S d) ((g.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom).mulVec (AffineSpace.coordFin S d))
       (AffineSpace.linearMap_appTop_coordFin g) gφ hgφ]
-  exact restrictSupportedClass_kummerBoundaryProduct_mulVec Λ t M hM g₀ hg₀
+  exact restrictSupportedClass_kummerBoundaryProduct_mulVec Λ (AffineSpace.coordFin S d) _ hM g₀ hg₀
 
 /-- Blueprint `prop-pur-affine-space-purity-compatibilities`: Symmetry and compatibilities of
 affine-space purity

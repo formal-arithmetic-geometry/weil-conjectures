@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.Sites.LimitSystem.Cartesian
 
 /-!
 # Continuity of étale cohomology at inverse limits
@@ -17,9 +18,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 Let `(Xᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over a scheme `S`, with
 affine transition maps and limit `X`, and let `F` be an étale sheaf on `S`. Then
 `H^q(X, F|_X) = colimᵢ H^q(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). This is blueprint
-`lemma-weil-pbc-etale-cohomology-continuity`, which belongs to the subsection `sk-prop-h2`; its
-proof is not formalised here. It is recorded in the form in which it is used: if all the
-`H^q(Xᵢ, F|_{Xᵢ})` vanish, so does `H^q(X, F|_X)`.
+`lemma-weil-pbc-etale-cohomology-continuity`, proved for abelian sheaves in
+`AlgebraicGeometry.Etale.cohomologyMap_isColimit_of_isLimit'` by dimension shifting along systems
+of sheaves (`WeilConjectures.AlgebraicGeometry.Sites.LimitSystem`).
 
 ## Main definitions
 
@@ -82,6 +83,6 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
     ∀ (i : I) (y : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q),
       Etale.cohomologyMap (c.π.app i).left _ q y = 0 →
         ∃ (j : I) (g : j ⟶ i), Etale.cohomologyMap (D.map g).left _ q y = 0 :=
-  sorry
+  cohomologyMap_isColimit_of_isLimit' F D c hc q
 
 end AlgebraicGeometry.Etale

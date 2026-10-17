@@ -95,6 +95,8 @@ theorem cohomologyMap_isColimit_of_isLimit' {S : Scheme.{u}}
       Etale.cohomologyMap (c.π.app i).left _ q y = 0 →
         ∃ (j : I) (g : j ⟶ i), Etale.cohomologyMap (D.map g).left _ q y = 0 := by
   obtain ⟨α, _, _, _, Φ, _⟩ := IsFiltered.exists_directed Iᵒᵖ
+  have : IsFiltered α := isFiltered_of_directed_le_nonempty α
+  have : IsConnected α := IsFiltered.isConnected α
   let E : αᵒᵖ ⥤ Scheme.{u} := Φ.leftOp ⋙ D ⋙ Over.forget S
   let cE : Cone E := ((Over.forget S).mapCone c).whisker Φ.leftOp
   have hcE : IsLimit cE := (Functor.Initial.isLimitWhiskerEquiv Φ.leftOp _).symm hc
@@ -133,20 +135,23 @@ theorem cohomologyMap_isColimit_of_isLimit' {S : Scheme.{u}}
     let m' : (Φ.obj a).unop ⟶ i := m.unop
     let e := upperStarComp AddCommGrpCat.{u + 1} (D.map m').left (D.obj i).hom (v a)
       (Over.w (D.map m')).symm
-    let ya := Sheaf.H.map (e.inv.app F) q (cohomologyMap (D.map m').left _ q y)
+    let ya : Sheaf.H (Sys.F a) q := Sheaf.H.map (e.inv.app F) q (cohomologyMap (D.map m').left _ q y)
     have h₁ : cohomologyMap (cE.π.app (op a)) _ q (cohomologyMap (D.map m').left _ q y) = 0 :=
       cohomologyMap_comp_eq_zero_of_eq_zero _ _ _
-        (by rw [← Over.comp_left]; exact congrArg CommaMorphism.left (c.w m')) _ _ hy
+        (congrArg CommaMorphism.left (c.w m')) _ _ _ hy
     have h₂ : Sys.toLimitH a q ya = 0 := by
       change Sheaf.H.map _ q (cohomologyMap _ _ q (Sheaf.H.map _ q _)) = 0
-      rw [cohomologyMap_map, h₁, map_zero, map_zero]
+      rw [cohomologyMap_map]
+      erw [h₁]
+      rw [map_zero, map_zero]
     obtain ⟨b, f, hf⟩ := hcont.2 a ya h₂
     refine ⟨(Φ.obj b).unop, (Φ.map f).unop ≫ m', ?_⟩
-    have h₃ : cohomologyMap (E.map f.op) _ q ya = 0 :=
+    have h₃ : cohomologyMap (E.map f.op) _ q
+        (Sheaf.H.map (e.inv.app F) q (cohomologyMap (D.map m').left _ q y)) = 0 :=
       eq_zero_of_sheafH_map_eq_zero (Sys.φ f) hf
-    rw [cohomologyMap_map] at h₃
+    erw [cohomologyMap_map] at h₃
     have h₄ := eq_zero_of_sheafH_map_eq_zero _ h₃
     rw [D.map_comp, Over.comp_left]
-    exact cohomologyMap_comp_eq_zero_of_comp_eq_zero _ _ _ _ h₄
+    exact cohomologyMap_comp_eq_zero_of_comp_eq_zero _ _ _ _ _ h₄
 
 end AlgebraicGeometry.Etale
