@@ -262,6 +262,35 @@ noncomputable def isLimitContinuousSheafTowerCone :
   · exact ULift.ext _ _ (hgu x.down fun m t ↦
       congrArg (fun y : ULift.{u + 1} C(V.unop.left, L ⧸ U m) ↦ y.down t) (hx (op m)))
 
+include hU hopen hbot in
+/-- **Pro-étale cohomology with profinite coefficients in high degrees.** Let `S` be a scheme of
+finite type and of dimension at most `d` over a separably closed field, and `L` a compact
+abelian group with a decreasing sequence of open subgroups `Uₘ` with trivial intersection.
+Then `Hᵠ(S_proét, L) = 0` for `q > 2d`, for the sheaf `U ↦ C(U, L)`. -/
+theorem subsingleton_H_continuousSheaf_of_two_mul_lt_of_compact {K : Type u} [Field K]
+    [IsSepClosed K] (a : S ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)
+    (hS : topologicalKrullDim S ≤ (d : WithBot ℕ∞)) (q : ℕ) (hq : 2 * d < q) :
+    Subsingleton (Sheaf.H (continuousSheaf S L) q) := by
+  have hdisc (m : ℕ) : DiscreteTopology (L ⧸ U m) := QuotientAddGroup.discreteTopology (hopen m)
+  have hfin (m : ℕ) : Finite (L ⧸ U m) := by
+    have := hdisc m
+    exact finite_of_compact_of_discrete
+  refine ProEt.subsingleton_H_of_isLimit_tower (F := continuousSheafTower S U hU)
+    (fun m ↦ ?_) (isLimitContinuousSheafTowerCone S hU hopen hbot) (2 * d)
+    (fun m q hq ↦ ?_) (fun m ↦ ?_) q hq
+  · simp only [continuousSheafTower, Functor.ofOpSequence_map_homOfLE_succ]
+    have := hdisc m
+    exact epi_continuousSheafMap S _ (surjective_quotientTransition U hU m)
+  · have := hdisc m
+    have := hfin m
+    exact subsingleton_H_continuousSheaf_of_two_mul_lt a d hS (L ⧸ U m) q hq
+  · simp only [continuousSheafTower, Functor.ofOpSequence_map_homOfLE_succ]
+    have := hdisc m
+    have := hdisc (m + 1)
+    have := hfin (m + 1)
+    exact surjective_H_map_continuousSheafMap S _ (surjective_quotientTransition U hU m) _
+      (subsingleton_H_continuousSheaf_of_two_mul_lt a d hS _ (2 * d + 1) (by lia))
+
 end Profinite
 
 end AlgebraicGeometry.ProEtale
