@@ -29,16 +29,16 @@
  ],
  "proof": [
   {
-   "text": "Preliminaries for the locally closed extensions used below. A standing scheme is separated of finite type over the field in [sk-def-sfb-dc-setting]; the field is Noetherian since its only ideals are zero and the unit ideal, and [pqf-lem-locnoeth-lft] makes X locally Noetherian. Finite type gives a finite affine cover, hence X is Noetherian. Open subschemes and closed subschemes have affine charts given by localizations and quotient rings, so the same holds for all the locally closed subschemes used here. The Noetherian topology and constructibility facts in [def-weil-constructible-subset] show that these schemes are qcqs, their open immersions are quasi-compact, and their locally closed strata are constructible. For a locally closed immersion $a=i\\circ u$, use $a_!=i_*u_!$. By [lem-weil-pbc-proetale-ringed-open-closed], both factors are exact for any sheaf of coefficient rings. Their coefficient restrictions are the required ones by [sk-prop-sfb-cartesian-coefficients]. We will also use transitivity of this extension by zero, with the following explicit verification. A sheaf $N$ extending a sheaf $M$ on $S\\subset X$ is $i_*u_!M$ whenever its restriction outside $\\overline S$ and its restriction to $\\overline S\\setminus S$ are zero: the open–closed short exact sequence gives $N\\simeq i_*i^*N$, and on $\\overline S$ the same sequence gives $i^*N\\simeq u_!M$. Apply these two canonical identifications to the iterated extension along $T\\subset S\\subset X$. Its restriction to $T$ is $M$ and its restrictions to the complementary pieces vanish, by the identities and base-change isomorphisms in [det-sf-open-closed-sequence-ring-sheaf]. More explicitly, put $C=\\overline T$ in $X$. Since $C\\subseteq\\overline S$, the intersection $C\\cap S$ is open in $C$. On $C\\setminus T$, its open piece $(C\\cap S)\\setminus T$ has zero restriction because $b_!M$ vanishes off $T$ in $S$, and its closed complementary piece $C\\setminus S$ has zero restriction because $a_!$ vanishes off $S$. The open–closed exact sequence on $C\\setminus T$ therefore makes the entire restriction zero. The restriction to $X\\setminus C$ is zero as well: decompose it first by $\\overline S$ and then by $S$, and use $b_!M=0$ on $S\\setminus C$ and $a_!=0$ on the other pieces. The support characterization applied to $T\\subset C\\subset X$ now gives $a_!b_!M\\simeq (ab)_!M$. The composite is a locally closed immersion: writing $S$ closed in an open $V\\subset X$ and $T$ closed in an open $W\\subset S$, choose an open $V'\\subset V$ with $W=S\\cap V'$; then $T$ is closed in $V'$ (on affine charts the two surjective ring maps compose), and $V'$ is open in $X$.",
+   "text": "Preliminaries for the locally closed extensions used below. A standing scheme is separated of finite type over the field in [sk-def-sfb-dc-setting]; the field is Noetherian since its only ideals are zero and the unit ideal, and [pqf-lem-locnoeth-lft] makes X locally Noetherian. Finite type gives a finite affine cover, hence X is Noetherian. Open subschemes and closed subschemes have affine charts given by localizations and quotient rings, so the same holds for all the locally closed subschemes used here. The Noetherian topology and constructibility facts in [def-weil-constructible-subset] show that these schemes are qcqs, their open immersions are quasi-compact, and their locally closed strata are constructible. For a locally closed immersion $a=i\\circ u$, use $a_!=i_*u_!$. By [lem-weil-pbc-proetale-ringed-open-closed], both factors are exact for any sheaf of coefficient rings. Their coefficient restrictions are the required ones by [sk-prop-sfb-cartesian-coefficients]. For locally closed $b:T\\hookrightarrow S$, exactness, factorization independence and the canonical isomorphism $a_!b_!\\simeq(ab)_!$ are precisely the statement of [lem-sfb-locally-closed-extension-coherence], applied with $R=\\Lambda_X$. Its coefficients agree with ours by [sk-prop-sfb-cartesian-coefficients]. The composite immersion is locally closed: write $S$ closed in an open $V\\subset X$, and $T$ closed in an open $W\\subset S$; lift $W$ to an open $V\\prime\\subset V$. Then $T$ is closed in $V\\prime$ because the two affine quotient maps compose, and $V\\prime$ is open in $X$.",
    "uses": [
     "sk-def-sfb-dc-setting",
     "lem-weil-pbc-proetale-ringed-open-closed",
     "sk-prop-sfb-cartesian-coefficients",
-    "det-sf-open-closed-sequence-ring-sheaf",
     "pqf-lem-locnoeth-lft",
     "def-weil-constructible-subset",
     "def-weil-open-immersion",
-    "def-weil-closed-immersion"
+    "def-weil-closed-immersion",
+    "lem-sfb-locally-closed-extension-coherence"
    ],
    "elementary": false,
    "source": {
@@ -88,12 +88,13 @@
    }
   },
   {
-   "text": "For $K\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ choose one finite $E$ and $K_E\\in D^b_c(X,E)$ with $K\\simeq(K_E)_{\\overline{\\mathbf Q}_\\ell}$ by [det-lem-coefficient-finite-descent-objects]. The functor $T=\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}-$ is exact: it is right exact as the extension-of-scalars left adjoint in [sk-def-sfb-change-of-scalars], and preserves finite limits by [lem-sfb-qlbar-flat]. Hence [lem-sf-exact-functor-derived-triangulated] shows that it preserves the cones and shifts in the construction of (1) for $K_E$. Its value on a generator is\n$$\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}(E_X\\otimes_{\\mathcal O_{E,X}}a_!L_0)\\simeq \\overline{\\mathbf Q}_{\\ell,X}\\otimes_{\\mathcal O_{E,X}}a_!L_0.$$\nThis is the associativity of the relative tensor product: the maps on local pure tensors are $q\\otimes(e\\otimes m)\\mapsto qe\\otimes m$ and $q\\otimes m\\mapsto q\\otimes(1\\otimes m)$, mutually inverse and compatible with all balancing relations and restrictions. Thus all generators use this same $E$, proving (2).",
+   "text": "For $K\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ choose one finite $E$ and $K_E\\in D^b_c(X,E)$ with $K\\simeq(K_E)_{\\overline{\\mathbf Q}_\\ell}$ by [det-lem-coefficient-finite-descent-objects]. The functor $T=\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}-$ is exact: it is right exact as the extension-of-scalars left adjoint in [sk-def-sfb-change-of-scalars], and preserves finite limits by [lem-sfb-qlbar-flat]. Since $T$ is exact, the derived extension $T_{E,\\Qlb}=L(T)$ used in [det-lem-coefficient-finite-descent-objects] is the termwise functor $D(T)$, by the clause on exact functors in [sk-def-sfb-derived-categories]. Hence [lem-sf-exact-functor-derived-triangulated] shows that it preserves the cones and shifts in the construction of (1) for $K_E$. Its value on a generator is\n$$\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}(E_X\\otimes_{\\mathcal O_{E,X}}a_!L_0)\\simeq \\overline{\\mathbf Q}_{\\ell,X}\\otimes_{\\mathcal O_{E,X}}a_!L_0.$$\nThis is the associativity of the relative tensor product: the maps on local pure tensors are $q\\otimes(e\\otimes m)\\mapsto qe\\otimes m$ and $q\\otimes m\\mapsto q\\otimes(1\\otimes m)$, mutually inverse and compatible with all balancing relations and restrictions. Thus all generators use this same $E$, proving (2).",
    "uses": [
     "det-lem-coefficient-finite-descent-objects",
     "sk-def-sfb-change-of-scalars",
     "lem-sfb-qlbar-flat",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-sf-exact-functor-derived-triangulated",
+    "sk-def-sfb-derived-categories"
    ],
    "elementary": false,
    "source": {
@@ -147,11 +148,11 @@
   "sk-def-sfb-dc-setting",
   "lem-weil-pbc-proetale-ringed-open-closed",
   "sk-prop-sfb-cartesian-coefficients",
-  "det-sf-open-closed-sequence-ring-sheaf",
   "pqf-lem-locnoeth-lft",
   "def-weil-constructible-subset",
   "def-weil-open-immersion",
   "def-weil-closed-immersion",
+  "lem-sfb-locally-closed-extension-coherence",
   "det-lem-integral-models-operations",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "det-cor-coefficient-heart-ii-generation",
@@ -164,6 +165,7 @@
   "sk-def-sfb-change-of-scalars",
   "lem-sfb-qlbar-flat",
   "lem-sf-exact-functor-derived-triangulated",
+  "sk-def-sfb-derived-categories",
   "sk-def-sfb-bounded-constructible",
   "det-prop-integral-criterion-constant-coefficients",
   "det-pe-constructible-comparison-classical",
@@ -240,7 +242,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -261,19 +263,41 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "det-lem-integral-models-generators",
   "worker": "stage1",
-  "summary": "Retained the statement and all three clauses. Replaced conditional trace use by the existing stratified-lattice theorem; expanded exact extension, transitivity, projection-formula rationalization, filtration cones, flat rational scalar extension, and every derived finite reduction. Constructibility of a locally finite free integral sheaf follows directly from its defining finite constant local models; classical origin follows from the existing constructible comparison. All lemmas already exist; no new nodes.",
-  "blueprint": "Proof paragraph (1) is realized by steps 1–4; paragraph (2) by step 5; paragraph (3) by steps 6–8. Unit sk-lem-integral-models clause (4) retains the generation/lattice/finite-descent route. No chapter or unit route changes."
+  "summary": "Repair of returned step 1: replaced its hidden support and transitivity argument by the existing general locally closed extension coherence theorem, whose statement gives exactness, factorization independence and canonical composition. Kept the item statement, Lean audit and other seven proof steps unchanged; retained the elementary affine quotient verification that the composite is locally closed. No new node duplicates the existing theorem.",
+  "blueprint": "Blueprint proof (1), parenthetical assertion that extension by zero is transitive: step 1 now cites lem-sfb-locally-closed-extension-coherence rather than hiding its proof. Steps 2–4 retain blueprint (1), step 5 retains (2), and steps 6–8 retain (3). No unit/chapter route or statement changes.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-locally-closed-extension-coherence",
+    "why": "Generic exactness, factorization independence and composition of locally closed extension by zero for an arbitrary pulled-back ring sheaf; the integral-models unit uses but does not state this general coherence theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic exact open/closed module extension and vanishing off the immersion; needed by the unit extension-by-zero route."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic algebraic-geometric fact that finite type over a field is locally Noetherian, checking the hypotheses of the integral-models route."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "Generic passage from an abelian short exact sequence to a distinguished triangle, used by the unit filtration route."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic derived functor of an exact functor preserves shifts and triangles, used in rational scalar extension."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q07-b6c8ae1b5",
-  "group": "Q07",
+  "reviewer": "NT-cc-Q21-47f035288",
+  "group": "Q21",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-b6c8ae1b5 (reviewer sub-agent of L); spot-checked: Read all eight steps, cited statements and sources, and the unit/chapter route. Checked support/transitivity, lattice filtration, single-E descent, derived reductions, classical comparison, edge cases, duplicates and cycles. No repairs or new nodes. Three generic tool uses accepted and documented in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-47f035288 (reviewer sub-agent of L); spot-checked: Read in full: the main-20261015 blueprint statement and proof (1)-(3) for this item, the sk-lem-integral-models unit, all eight steps, and the statement of every cited node. Statement unchanged, matches the blueprint, not weakened; coefficients are the pulled-back condensed rings. Repaired step 1 (1568 chars) correctly cites the existing node lem-sfb-locally-closed-extension-coherence; its hypotheses hold: standing X is Noetherian via pqf-lem-locnoeth-lft plus a finite affine cover, R=Lambda_X, quasi-compact open complements. The composite of locally closed immersions is shown locally closed by an elementary argument. No cycle, no new nodes, no duplicates. Steps 2-8 check: operations (4) with M=E_X and M=(A_n)_X, using flatness of E_X and Cartesian coefficients; generation, stratified lattices on the locally closed S (a standing scheme) and ordered refinement; filtration, triangles and a finite induction; finite descent; intrinsic Dbc for L_0, then operations (3); finite and hence Noetherian A_n, a constructible three-piece partition, and the classical comparison. Edge cases: empty strata, rank 0, closed/open/identity immersions, n=1, the nodal non-normal example. One fault (C1/C3): step 5 applied the termwise exact functor to K_E without citing that the left-derived T_{E,Qlb} of det-lem-coefficient-finite-descent-objects equals the termwise functor. Fixed by citing sk-def-sfb-derived-categories ('Exact functors: LF = D(F)') in step 5 and updating proof_deps; the corrected node is in fixes/dag/nodes/sec-six-functors-basics/. Accepted tool uses: lem-sfb-locally-closed-extension-coherence and lem-weil-pbc-proetale-ringed-open-closed; the others are Mathlib leaves. No SGA.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
@@ -286,5 +310,12 @@
    "decls": [],
    "missing": []
   }
- }
+ },
+ "tool_uses": [
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "pqf-lem-locnoeth-lft",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-exact-functor-derived-triangulated"
+ ]
 }

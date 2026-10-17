@@ -13,9 +13,78 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the fixed-$\\Lambda$ presheaves with presheaves of modules over $\\Lambda^{\\mathrm{pre}}$: the identity ring restrictions make semilinearity precisely $\\Lambda$-linearity. A covering-sieve matching family is a compatible tuple of sections; these tuples form a $\\Lambda$-module by componentwise operations. Its projections give the matching limit both in modules and in abelian groups. The comparison from sections is linear, and a bijective linear map has a linear inverse. Hence a fixed-module presheaf is a module-valued sheaf exactly when its underlying abelian presheaf is a sheaf. This also shows that restriction along $\\iota$ lands in the category claimed in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; agent constant-ring specialization on covering-sieve topologies using lem-cbc-sieve-module-sheafification (Mathlib Sheafification.lean:54-172)."
+   }
+  },
+  {
+   "text": "Use the sieve-site module-sheafification node with this constant ring presheaf. It supplies $b\\dashv i$, with $i$ restriction of scalars, and identifies the underlying abelian sheaf of $bN$ and its unit $\\eta_N:N\\to ibN$ with abelian sheafification and its unit. For a fixed-module sheaf $N$, this unit is an isomorphism on abelian presheaves: the sheafification universal property gives $c_N:(N^{\\#})\\to N$ with $c_N\\eta_N=1$, and uniqueness of maps out of the sheafification gives $\\eta_Nc_N=1$. Thus $c_N$ is an additive natural inverse of the unit. The hypotheses are exactly smallness, the chosen universes, and the covering-sieve topology; no fibre products are invoked.",
+   "uses": [
+    "lem-cbc-sieve-module-sheafification",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; agent constant-ring specialization on covering-sieve topologies using lem-cbc-sieve-module-sheafification (Mathlib Sheafification.lean:54-172)."
+   }
+  },
+  {
+   "text": "Transport the $\\underline\\Lambda$-action of $bN$ to the original abelian sheaf $N$ by the explicit formula $s\\star n=c_N(s\\cdot\\eta_N(n))$. Applying the additive bijection $\\eta_N$ to the unit, associativity and distributivity equations reduces them to the module axioms on $bN$. Naturality of $c_N$ and $\\eta_N$ gives compatibility with restrictions. Since the adjunction unit is linear over $\\Lambda^{\\mathrm{pre}}$, $\\iota(a)\\star n=c_N(\\eta_N(an))=an$. Denote the resulting module sheaf on exactly the same abelian sheaf by $E(N)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; agent constant-ring specialization on covering-sieve topologies using lem-cbc-sieve-module-sheafification (Mathlib Sheafification.lean:54-172)."
+   }
+  },
+  {
+   "text": "The sieve-site module-sheafification node says that $i$ is fully faithful. If $Q_1,Q_2$ are two $\\underline\\Lambda$-module structures on the same abelian sheaf extending the fixed-$\\Lambda$ action of $N$, then $iQ_1=iQ_2=N$. Fullness lifts $1_N$ to a module morphism $Q_1\\to Q_2$. Restriction retains its underlying maps, so that lift has component $1_{N(C)}$. Its linearity says $s\\cdot_1 n=s\\cdot_2 n$ for all $C,s,n$. The two actions are equal. This proves the uniqueness asserted, including for the transported action constructed in step 3.",
+   "uses": [
+    "lem-cbc-sieve-module-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; agent constant-ring specialization on covering-sieve topologies using lem-cbc-sieve-module-sheafification (Mathlib Sheafification.lean:54-172)."
+   }
+  },
+  {
+   "text": "Given any fixed-$\\Lambda$-linear natural transformation $f:N\\to M$, apply the same full faithfulness to $E(N),E(M)$. Its restricted objects are exactly $N,M$, so there is a unique module morphism whose underlying map is $f$. In particular $f_C(s\\star n)=s\\star f_C(n)$ for every section $s$ of $\\underline\\Lambda$ and every $n$. Define $E(f)$ to be this same underlying natural transformation. The identity and composite laws hold componentwise, proving functoriality without changing maps.",
+   "uses": [
+    "lem-cbc-sieve-module-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; agent constant-ring specialization on covering-sieve topologies using lem-cbc-sieve-module-sheafification (Mathlib Sheafification.lean:54-172)."
+   }
+  },
+  {
+   "text": "Restriction $R$ along $\\iota$ retains abelian sheaves and their maps, and step 3 gives $RE(N)=N$ with the original fixed-ring action; the same holds on maps. For any $\\underline\\Lambda$-module sheaf $Q$, its own action and the action of $E(RQ)$ both extend that of $RQ$, so step 4 identifies them. Thus $ER(Q)=Q$, again with identity underlying maps, yielding natural identity isomorphisms for both composites. Finally addition of morphisms in both categories is componentwise addition of abelian homomorphisms. Both $R$ and $E$ retain those maps, hence preserve zero and addition. These functors give the stated additive equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; agent constant-ring specialization on covering-sieve topologies using lem-cbc-sieve-module-sheafification (Mathlib Sheafification.lean:54-172)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-cbc-sieve-module-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules, as prototype; explicit equivalence proof using the existing arbitrary-sieve Mathlib leaf lem-cbc-sieve-module-sheafification, not a pretopology-to-sieve identification."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +127,38 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "no match: zero hits in Algebra/Category/ModuleCat, complementing the earlier Sites-directory search and direct reading of the generic module sheafification code."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(ModuleCat|SheafOfModules)|constantSheaf.*(equiv|Equiv)",
+   "results": "{\"t\": \"2026-10-17T08:23:21Z\", \"tool\": \"grep\", \"query\": \"constant.*(ModuleCat|SheafOfModules)|constantSheaf.*(equiv|Equiv)\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact equivalence match: hits supply module-sheaf definitions and scalar-extension ingredients, not this complete equivalence as a one-line specialization. Reuse existing lem-cbc-sieve-module-sheafification for the adjunction and write the equivalence construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module valued sheaf has a unique action of the sheafification of the constant ring presheaf extending its scalar action",
+   "results": "{\"t\": \"2026-10-17T08:23:22Z\", \"tool\": \"leansearch\", \"query\": \"A module valued sheaf has a unique action of the sheafification of the constant ring presheaf extending its scalar action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.instNonemptySMulCandidate\", \"PresheafOfModules.Sheafify.instSubsingletonSMulCandidate\", \"PresheafOfModules.Sheafify.map_smul\", \"PresheafOfModules.Sheafify.map_smul_eq\", \"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"PresheafOfModules.Sheafify.SMulCandidate.h\", \"PresheafOfModules.Sheafify.SMulCandidate\", \"PresheafOfModules.sheafify\"], \"digest\": \"8664884e1985f2a6\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact equivalence match: hits supply module-sheaf definitions and scalar-extension ingredients, not this complete equivalence as a one-line specialization. Reuse existing lem-cbc-sieve-module-sheafification for the adjunction and write the equivalence construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-17T08:23:23Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules\", \"SheafOfModules.unit\", \"SheafOfModules.instCategory\", \"SheafOfModules.sections\", \"SheafOfModules.Hom\", \"SheafOfModules.instPreadditive\", \"SheafOfModules.sectionsFunctor\", \"SheafOfModules.sectionsFunctor_obj\"], \"digest\": \"06d589ddcb0e6dd6\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact equivalence match: hits supply module-sheaf definitions and scalar-extension ingredients, not this complete equivalence as a one-line specialization. Reuse existing lem-cbc-sieve-module-sheafification for the adjunction and write the equivalence construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves valued in modules over a fixed commutative ring are equivalent to sheaves of modules over its constant ring sheaf on an arbitrary Grothendieck topology",
+   "results": "{\"t\": \"2026-10-17T08:23:27Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves valued in modules over a fixed commutative ring are equivalent to sheaves of modules over its constant ring sheaf on an arbitrary Grothendieck topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.forgetToSheafModuleCat\", \"SheafOfModules.unit\", \"SheafOfModules.toSheaf_obj_val\", \"SheafOfModules.instCategory\", \"SheafOfModules.forgetToSheafModuleCat_obj_val\", \"SheafOfModules.forget_obj\", \"SheafOfModules.unit_val\", \"SheafOfModules.forget\"], \"digest\": \"8c2316298c18ee68\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact equivalence match: hits supply module-sheaf definitions and scalar-extension ingredients, not this complete equivalence as a one-line specialization. Reuse existing lem-cbc-sieve-module-sheafification for the adjunction and write the equivalence construction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-dense-hypersheaf-comparison",
@@ -82,5 +179,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-constant-ring-module-sheaves",
+  "worker": "stage1",
+  "summary": "Retained the complete arbitrary-sieve statement. Reused the existing sieve-site module-sheafification Mathlib leaf rather than duplicating its adjunction. Wrote the matching-limit identification, explicit transported action on the original sheaf, full-faithfulness argument for unique actions and linear maps, and additive inverse functors. No new nodes and no Lean attachment.",
+  "blueprint": "Current main-20261015 thm-cbc-finite-level-proetale proof opening Choose a compactification c=(j,p): coefficient-category identification underlying the dense comparison used in the local compact-support gluing route, through the recorded ancestry. No change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-15b1fabe3",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-15b1fabe3 (reviewer sub-agent of L); spot-checked: I read in full the item lem-cbc-constant-ring-module-sheaves (statement unchanged, six steps, no new nodes) and every cited statement: lem-cbc-sieve-module-sheafification (a Mathlib leaf in the same unit sk-prop-sf-cbc), def-weil-pbc-sheafification, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category and def-weil-size-convention. Sources checked: Stacks sites-modules.tex:810-849 (Tag 03CY, proof omitted, so proof_origin=agent is correct). Behind the sibling leaf I read Mathlib ModuleCat/Presheaf/Sheafification.lean:33-36 (arbitrary GrothendieckTopology, no fibre products), :54, :72, :125 (adjunction), :145-149 (unit is toSheafify), :161 (counit iso), :168/171 (full and faithful), and Sites/Sheafification.lean:151. Step checks: (1) the fixed-module sheaf condition holds exactly when the underlying abelian presheaf is a sheaf; correct and elementary. (2) For a sheaf N, the sibling's adjunction and unit clauses plus the sheafification universal property give c with c∘η=1, and uniqueness gives η∘c=1. (3) The transported action s⋆n=c(s·ηn) is written out; ι(a)⋆n=an because η is Λ^pre-linear. (4) and (5) Fullness of i lifts identity maps, giving the unique action, and lifts any Λ-linear f, giving Λ̲-linearity. (6) The two composites are the identity, and both functors are additive. Edge cases checked: the zero ring, the empty site and empty covering sieves. Duplicate check: new-constant-ring-module-sheaf-equivalence and lem-weil-pbc-sheaves-killed-by-n-zmod-modules are étale ZMod special cases. The sibling has the essential-image and unique-action clauses, but not the strict equivalence on the same sheaves and maps that the steps derive. The split does not merely relabel. No route departure, no tool_uses, no SGA, no fixes."
  }
 }

@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "Here is the successive-colimit argument, including its coherence. Apply the dual part of [lem-coef-parametric-universal-arrows] to $T=\\Delta_K:\\mathcal E\\to\\operatorname{Fun}(K,\\mathcal E)$ and to the full subcategory consisting of all $K$-diagrams. Every diagram has a universal arrow to a constant diagram because $\\mathcal E$ admits $K$-colimits; the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] verifies the required mapping-space equivalences. We obtain a coherent $L:\\operatorname{Fun}(K,\\mathcal E)\\to\\mathcal E$, with its universal cocone, and the dual coherent-diagram mapping-space formula. The currying identity $\\operatorname{Fun}(K\\times K,\\mathcal E)=\\operatorname{Fun}(K,\\operatorname{Fun}(K,\\mathcal E))$ follows degreewise by the exponential law for simplicial sets; write $\\widetilde H$ for the curried $H$. The row cocones in step 2 are one transformation $\\widetilde H\\to\\Delta_K\\circ U$. The cited formula, with outer shape $K$, gives a coherent transformation $L\\widetilde H\\to U$ compatible with the row cocones. Its component $a_i:L(H(i,-))\\to U(i)$ compares two colimits of the same row. The universal property of the row cocone with vertex $U(i)$ gives a reverse $b_i:U(i)\\to L(H(i,-))$. Both $b_i a_i$ and the identity induce the universal cocone on $L(H(i,-))$, so the mapping-space equivalence supplied by the cocone criterion identifies them by a homotopy; the same argument with the row cocone at $U(i)$ identifies $a_i b_i$ with its identity. Thus every $a_i$ is an equivalence. Pointwise detection of equivalences in [lem-cbc-enhanced-functor-cone-calculus] therefore makes it an equivalence. For every $z\\in\\mathcal E$ we now have equivalences of entire spaces\n$$\\operatorname{Map}_{\\mathcal E}(Z,z)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(U,\\Delta_Kz)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(L\\widetilde H,\\Delta_Kz)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\operatorname{Fun}(K,\\mathcal E))}(\\widetilde H,\\Delta_K(\\Delta_Kz))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K\\times K,\\mathcal E)}(H,\\Delta_{K\\times K}z).$$\nThe first map is induced by the outer cocone, the second by the comparison of row colimits, the third by the universal row cocone, and the last is currying. Their composite is consequently precomposition with the precise composite cocone of step 2. The dual cocone criterion proves that this cocone with vertex $Z$ is colimiting. In particular, this proof constructs the needed product-indexed colimit from $K$-colimits alone; it invokes no general cocompleteness assumption.",
+   "text": "Apply the dual clause of [lem-coef-parametric-universal-arrows] to $T=\\Delta_K:\\mathcal E\\to\\operatorname{Fun}(K,\\mathcal E)$, with the full subcategory all of $\\operatorname{Fun}(K,\\mathcal E)$. Existence of $K$-colimits in $\\mathcal E$ and the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] supply its universal-arrow hypothesis for every diagram. We obtain a coherent $L:\\operatorname{Fun}(K,\\mathcal E)\\to\\mathcal E$, a universal cocone $\\eta:\\mathrm{id}\\to\\Delta_K L$, and the dual coherent-diagram mapping-space formula, compatible with evaluation. This is only a $K$-colimit construction; no $K\\times K$-colimit is assumed.",
    "uses": [
     "lem-coef-parametric-universal-arrows",
     "lem-cbc-enhanced-functor-cone-calculus"
@@ -60,7 +60,30 @@
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 5.5.8.6 and the absolute case of Lemma 5.5.2.3, with the latter successive-colimit argument written using parametric universal arrows."
+    "place": "HTT Proposition 5.5.8.6, successive-colimit argument: assembly of row colimits, using the existing dual parametric universal-arrow theorem."
+   }
+  },
+  {
+   "text": "Degreewise exponential adjunction for simplicial sets identifies $\\operatorname{Fun}(K\\times K,\\mathcal E)$ with $\\operatorname{Fun}(K,\\operatorname{Fun}(K,\\mathcal E))$; let $\\widetilde H$ be the curried $H$. Under this identity the row face of $\\Theta$ from step 2 is a coherent transformation $\\alpha:\\widetilde H\\to\\Delta_K\\circ U$. Its vertex cocones are colimiting by separate preservation, as checked there. Apply [lem-coef-coherent-row-colimit-comparison] with $I=J=K$, $R=\\widetilde H$ and the $L,\\eta$ just obtained. It gives a coherent equivalence $a:L\\widetilde H\\to U$ whose composite with the universal row cocone is homotopic, as a coherent transformation, to the specified row face $\\alpha$. Thus the comparison includes all coherence data, not merely equivalences of row apices.",
+   "uses": [
+    "lem-coef-coherent-row-colimit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 5.5.8.6 / Lemma 5.5.2.3, comparison of the coherent row colimits; the comparison is now a separate lemma."
+   }
+  },
+  {
+   "text": "For every $z\\in\\mathcal E$, the outer cocone criterion, the row equivalence $a$, the dual coherent-diagram formula of [lem-coef-parametric-universal-arrows], and currying give, in order,\n$$\\operatorname{Map}_{\\mathcal E}(Z,z)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(U,\\Delta_Kz)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(L\\widetilde H,\\Delta_Kz)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\operatorname{Fun}(K,\\mathcal E))}(\\widetilde H,\\Delta_K(\\Delta_Kz))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K\\times K,\\mathcal E)}(H,\\Delta_{K\\times K}z).$$\nThe formula sends a transformation to its composite with $\\eta\\widetilde H$. The compatibility homotopy in the preceding step therefore identifies this composite of maps with precomposition by the row cocone followed by the outer cocone. The explicit $2$-simplex $\\Theta$ from step 2 identifies that composite with $\\gamma$. Thus precomposition by $\\gamma$ is an equivalence for every $z$. The dual criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that this very cocone is colimiting. This supplies the needed $K\\times K$-colimit using only $K$-colimits.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 5.5.8.6 and the absolute successive-colimit argument of Lemma 5.5.2.3, mapping-space test for the explicit composite cocone."
    }
   },
   {
@@ -89,6 +112,7 @@
  ],
  "proof_deps": [
   "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-row-colimit-comparison",
   "lem-coef-parametric-universal-arrows",
   "lem-coef-sifted-nerve-index-calculus"
  ],
@@ -237,10 +261,31 @@
    "results": "{\"t\": \"2026-10-16T20:52:59Z\", \"tool\": \"leanfinder\", \"query\": \"A functor between quasicategories that preserves colimits in each variable preserves simultaneous colimits indexed by a homotopy sifted category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesColimit₂.of_preservesColimits_in_each_variable\", \"CategoryTheory.Limits.isColimitOfPreserves₂\", \"CategoryTheory.Limits.PreservesColimit₂.nonempty_isColimit_mapCocone₂\", \"CategoryTheory.Limits.instHasColimitProdObjFunctorUncurryWhiskeringLeft₂OfPreservesColimit₂\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.Limits.preservesColimitsOfShape_of_evaluation\", \"SSet.hasColimits\"], \"digest\": \"d8cb06381cbec886\"}",
    "date": "2026-10-16",
    "verdict": "no match: LeanFinder returned ordinary CategoryTheory bifunctor declarations, homotopy-category product preservation and strict simplicial-set colimits; read Preserves/Bifunctor.lean:72-79,214-238. These use ordinary categories and hom-set colimit cocones, not quasicategorical colimits. Loogle and grep returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy sifted infinity categories are weakly contractible and the opposite simplex category is homotopy sifted",
+   "results": "{\"t\": \"2026-10-17T08:01:50Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy sifted infinity categories are weakly contractible and the opposite simplex category is homotopy sifted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsSifted.isSifted_of_equiv\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.IsSifted.of_colim_preservesFiniteProducts\", \"SSet.isTerminalHoFunctorDeltaZero\", \"CategoryTheory.IsSifted.isSifted_of_hasBinaryCoproducts_and_nonempty\", \"CategoryTheory.SimplicialObject\", \"CategoryTheory.IsSifted\", \"CategoryTheory.IsSifted.mk\"], \"digest\": \"bbb87fd13a4c3f39\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsSifted and PreservesColimit₂ hits do not state the quasicategorical theorem; the second semantic phrasing returns unrelated graded bifunctor localization lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sifted quasicategory K, a functor of two variables preserving K colimits separately preserves diagonal K colimits",
+   "results": "{\"t\": \"2026-10-17T08:01:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a sifted quasicategory K, a functor of two variables preserving K colimits separately preserves diagonal K colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsSifted.colim_preservesLimits_pair_of_sSifted\", \"CategoryTheory.IsSifted.colim_preservesBinaryProducts_of_isSifted\", \"CategoryTheory.Limits.PreservesColimit₂.of_preservesColimits_in_each_variable\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"CategoryTheory.Limits.isColimitOfPreserves₂\", \"CategoryTheory.Limits.instHasColimitProdObjFunctorUncurryWhiskeringLeft₂OfPreservesColimit₂\", \"CategoryTheory.IsSifted.of_colim_preservesFiniteProducts\", \"CategoryTheory.IsSifted.isSiftedOrEmpty_of_colim_preservesBinaryProducts\"], \"digest\": \"8125568ebaec8ec2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsSifted and PreservesColimit₂ hits do not state the quasicategorical theorem; the second semantic phrasing returns unrelated graded bifunctor localization lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bifunctor between infinity categories commutes with geometric realizations if it commutes with them separately in each variable",
+   "results": "{\"t\": \"2026-10-17T08:01:57Z\", \"tool\": \"leanfinder\", \"query\": \"A bifunctor between infinity categories commutes with geometric realizations if it commutes with them separately in each variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Lifting₃.bifunctorComp₁₂\", \"CategoryTheory.Localization.Lifting₃.bifunctorComp₂₃\", \"CategoryTheory.GradedObject.mapBifunctorComp₂₃MapObjIso\", \"CategoryTheory.GradedObject.mapBifunctorComp₁₂MapObjIso\", \"CategoryTheory.GradedObject.HasGoodTrifunctor₂₃Obj.hasMap\", \"CategoryTheory.GradedObject.ι_mapBifunctorComp₁₂MapObjIso_hom\", \"CategoryTheory.GradedObject.ι_mapBifunctorComp₂₃MapObjIso_hom\", \"CategoryTheory.GradedObject.HasGoodTrifunctor₁₂Obj.hasMap\"], \"digest\": \"219c6f319704f250\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsSifted and PreservesColimit₂ hits do not state the quasicategorical theorem; the second semantic phrasing returns unrelated graded bifunctor localization lemmas."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-colorwise-sifted-colimits",
@@ -253,7 +298,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-sifted-colimit-calculus",
   "worker": "stage1",
-  "summary": "No attachment exists. Reused the existing sifted-nerve-index calculus instead of adding overlapping nodes; proved the arbitrary-K bifunctor assertion explicitly by coherent row colimits, the parametric universal-arrow mapping formula and restriction along the final diagonal. The statement and its K-colimit-only hypotheses are unchanged. No new nodes or Mathlib leaves.",
+  "summary": "Repair of the human return of 2026-10-17: retain the statement, Lean record, route and all other proof steps; replace the 2594-character step 3 by three short steps. Existing parametric universal arrows supply coherent assembly and the diagram mapping-space formula; one new statement-only lemma supplies coherent row-colimit comparison and its compatibility. The remaining mapping-space chain proves the explicit product-indexed cocone colimiting. One new node, no Mathlib leaves.",
   "blueprint": "Realizes the sifted tensor input to the graph/operadic adjunction supporting the finite-level mapping-complex adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint, main-20261015, before taking R lim; preserves the recorded ancestry through operadic-colorwise-sifted-colimits.",
   "tool_uses": [
    {
@@ -266,12 +311,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q55-367d737b2",
-  "group": "Q55",
+  "reviewer": "NT-cc-Q29-98e16672a",
+  "group": "Q29",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-367d737b2 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 5 steps, the source and the searches. I also read the full statements of all 5 cited nodes, the citer lem-coef-operadic-colorwise-sifted-colimits, the unit sk-prop-sf-biduality-general and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. The statement is unchanged from the side DAG; only split-owned fields changed. It has exactly the hypotheses of HTT Prop. 5.5.8.6, with 5.5.8.7 for weak contractibility, 5.5.8.4 for N(Delta^op) and 5.5.8.11-12 for the space-valued definition. HTT is not archived, so I checked it from my knowledge of the text; the agent proof origin is correct. Small cases: empty K is excluded by the empty-product clause; K a point is trivial; a two-point discrete K is correctly not sifted, and the bifunctor claim does fail there for tensor products. Step 1 cites the arbitrary-K first paragraph of lem-coef-sifted-nerve-index-calculus (diagonal finality and weak contractibility); its cocomplete-only nerve clause is not used. Step 3: the dual parametric-universal-arrows formula with T = Delta_K, a row-colimit comparison that is an equivalence at each point and so overall, then currying. The chain of mapping-space equivalences is correct and uses only K-colimits. Step 4 restricts along the final diagonal; the product-category cocone test is correct. Step 5 is a direct citation. There is no cycle: the 274-node closure of the cited nodes does not contain the item. There are no new nodes and no duplicate: the nerve-index node gives the bifunctor clause only for nerves and cocomplete categories, while the citer needs arbitrary sifted K with only K-colimits; the overlapping clauses are cited, not restated. No blueprint node mentions siftedness, so same_as is []. The Mathlib IsSifted and PreservesColimit2 results are for ordinary categories, so there is no match. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus; the same tool use was already accepted for two nodes of this unit. One repair, step 2: it was marked elementary but formed an uncited horn-filler composite in Fun(KxK,E), with legs only 'up to homotopy'. I replaced it with the explicit cocone gamma(i,j,t)=F(p(i,t),q(j,t)) and the explicit 2-simplex Theta(i,j,s)=F(p(i,s1),q(j,s2)), for the simplex (0,0),(0,1),(1,1) of Delta^1xDelta^1. Theta exhibits gamma as the row cocone followed by the outer cocone, with legs exactly F(p_i,q_j). The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-infinity-sifted-colimit-calculus.json; its uses and elementary flag are unchanged. The checks are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-98e16672a (reviewer sub-agent of L); spot-checked: I read all of it: the item, the new node lem-coef-coherent-row-colimit-comparison, the full statements of every cited node, and unit sk-prop-sf-biduality-general. HTT is not archived, so I checked 5.5.8.4/6/7 from my knowledge of the text; proof_origin agent is correct. The repair is real: the old 2594-character step 3 is now steps 3-5, and the statement, stmt_deps, Lean record and the old steps 1,2,4,5 are unchanged. Step 2: I verified Theta face by face for sigma=(0,0),(0,1),(1,1): d2 is the row face, d0 the outer face pulled back along pr1, d1 is gamma with legs F(p_i,q_j). Step 3: the dual parametric clause with T=Delta_K; its universal-arrow condition is exactly colimit existence, by the dual cone-calculus criterion. Step 4: currying is degreewise; the curried row face is alpha: H~ -> Delta_K U with colimiting vertex cocones, so every hypothesis of the new node holds (I=J=K small). Step 5: the mapping-space chain checks out link by link; tracing a map g gives Delta^2 g o Delta o o Delta a o eta H~, which the new node's homotopy and Theta identify with precomposition by gamma, so gamma is colimiting using only K-colimits. Steps 6 and 7 are unchanged and correct. The new node is true: the space of pairs is the homotopy fibre of the dual parametric formula at I; pointwise uniqueness of colimits plus componentwise detection give the equivalence. It holds for I empty, J empty, I a point, and two-point discrete J without siftedness. Form B1-B9 is fine: statement only, honest agent source, recorded searches of all three kinds, blueprint from/via correct, same_as []. It is not a duplicate of parametric-universal-arrows, relative-cocone-parameters, parameter-cone-extension, relative-cone-equivalence, cocone-restriction-initial, the local/pointwise adjoint criteria or pointwise-lan-mapping-property, and it is not a clause of the item. The dependency closure has 545 nodes and does not contain the item. The tool use of lem-cbc-enhanced-functor-cone-calculus (generic cocone criterion) is accepted. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.InfinitySiftedColimitCalculus",
