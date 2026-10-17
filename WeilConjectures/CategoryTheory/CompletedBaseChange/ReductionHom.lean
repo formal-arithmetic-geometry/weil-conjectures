@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.CompletedBaseChange.Rectangle
+public import WeilConjectures.CategoryTheory.CompletedBaseChange.Completed
 
 /-!
 # Morphisms of reductions of base change squares
@@ -130,24 +130,20 @@ lemma arrows_comm :
     ρ.arrowV ≫ τ.mapC = τ.mapA ≫ ρ'.arrowV ∧
     ρ.arrowH' ≫ τ.mapD = τ.mapC ≫ ρ'.arrowH' ∧
     ρ.arrowV' ≫ τ.mapD = τ.mapB ≫ ρ'.arrowV' := by
-  refine ⟨?_, ?_, ?_, ?_⟩ <;> ext K
-  · simp only [NatTrans.comp_app, arrowH, mapA, mapB, whiskerRight_app, whiskerLeft_app,
-      associator_inv_app, associator_hom_app, Category.id_comp, Category.comp_id,
-      Functor.comp_map, Functor.comp_obj]
-    simp only [← Functor.map_comp, projF_naturality]
-  · simp only [NatTrans.comp_app, arrowV, mapA, mapC, whiskerRight_app, whiskerLeft_app,
-      associator_inv_app, associator_hom_app, Category.id_comp, Category.comp_id,
-      Category.assoc, Functor.comp_obj]
-    rw [← τ.commG_assoc]
-    congr 1
-    exact (τ.τY'.naturality _).symm
-  · simp only [NatTrans.comp_app, arrowH', mapC, mapD, whiskerRight_app, whiskerLeft_app,
-      associator_inv_app, associator_hom_app, Category.id_comp, Category.comp_id,
-      Category.assoc, Functor.comp_obj, Functor.comp_map]
-    rw [← projF'_naturality_assoc, ← Functor.map_comp, ← Functor.map_comp]
+  refine ⟨?_, ?_, ?_, ?_⟩ <;> ext K <;> simp only [NatTrans.comp_app]
+  · rw [arrowH_app, arrowH_app]
+    simp only [mapA, mapB, whiskerRight_app, whiskerLeft_app, Functor.comp_map,
+      ← Functor.map_comp, projF_naturality]
+  · rw [arrowV_app, arrowV_app]
+    simp only [mapA, mapC, whiskerRight_app, whiskerLeft_app, Functor.comp_obj, Category.assoc]
+    rw [← τ.τY'.naturality, reassoc_of% (τ.commG (𝔇.lowerF.obj K))]
+  · rw [arrowH'_app, arrowH'_app]
+    simp only [mapC, mapD, whiskerRight_app, whiskerLeft_app, Functor.comp_obj,
+      Functor.comp_map, Category.assoc]
+    rw [projF'_naturality_assoc, ← Functor.map_comp, ← Functor.map_comp]
     congr 2
-    rw [Iso.inv_comp_eq, ← τ.commG'_assoc, Iso.hom_inv_id, Category.comp_id]
-  · simp only [NatTrans.comp_app, arrowV', mapB, mapD, whiskerRight_app, whiskerLeft_app]
+    rw [Iso.inv_comp_eq, ← reassoc_of% (τ.commG' K), Iso.hom_inv_id, Category.comp_id]
+  · simp only [arrowV'_app, mapB, mapD, whiskerRight_app, Functor.comp_map]
     exact (𝔗.exchange.natTrans.naturality (τ.τX.app K)).symm
 
 end Hom

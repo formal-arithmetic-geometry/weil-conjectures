@@ -35,7 +35,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- A natural transformation `τ : F₁ ⟶ F₂` compatible with the shifts induces a natural
 transformation `F₁.mapTriangle ⟶ F₂.mapTriangle`, whose components are the morphisms of
-triangles with components `τ.app T.obj₁`, `τ.app T.obj₂` and `τ.app T.obj₃`. -/
+triangles with components `τ.app T.obj₁`, `τ.app T.obj₂` and `τ.app T.obj₃`, natural in `T`.
+This is blueprint `lem-weil-pbc-commshift-nattrans-triangle-morphism`. -/
 @[simps!]
 def mapTriangle (τ : F₁ ⟶ F₂) [NatTrans.CommShift τ ℤ] : F₁.mapTriangle ⟶ F₂.mapTriangle where
   app T := Triangle.homMk _ _ (τ.app _) (τ.app _) (τ.app _) (by simp) (by simp) (by

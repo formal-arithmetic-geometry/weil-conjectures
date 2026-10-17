@@ -150,7 +150,10 @@ noncomputable def rightDerivedFunctorPlusObjSingleFunctorIsoQ (X : C) :
       asIso (DerivedCategory.Q.map R.ι') ≪≫ (DerivedCategory.quotientCompQhIso C).symm.app _)) ≪≫
     (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L))).symm
 
-/-- The `n`-th homology of `R⁺F` applied to `X` placed in degree `0` is `R^n F X`. -/
+/-- The `n`-th homology of `R⁺F` applied to `X` placed in degree `0` is `R^n F X`: it is induced
+by an injective resolution of `X`, which is a K-injective resolution of `X[0]`.
+This is blueprint `lem-sp-derived-functor-single-identification` (naturality in `X`:
+`CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso`). -/
 noncomputable def homologyRightDerivedFunctorPlusObjSingleFunctorIso (X : C) (n : ℕ) :
     (DerivedCategory.Plus.homologyFunctor D n).obj
         (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C 0).obj X)) ≅
@@ -237,7 +240,7 @@ lemma homologyRightDerivedFunctorPlusObjSingleFunctorIso_hom_naturality {X Y : C
 
 /-- The isomorphism `H^n(R⁺F(X[0])) ≅ R^n F X` of
 `Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso`, as a natural isomorphism of
-functors `C ⥤ D`. -/
+functors `C ⥤ D` (blueprint `lem-sp-derived-functor-single-identification`). -/
 noncomputable def singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso (n : ℕ) :
     DerivedCategory.Plus.singleFunctor C 0 ⋙ F.rightDerivedFunctorPlus ⋙
         DerivedCategory.Plus.homologyFunctor D n ≅ F.rightDerived n :=

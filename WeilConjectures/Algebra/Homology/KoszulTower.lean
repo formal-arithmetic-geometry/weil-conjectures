@@ -421,7 +421,7 @@ theorem exists_homologyMap_koszulTower_eq_zero [IsNoetherianRing R] (f : Fin r �
       have := congr($(K.iCycles_d (n + 1) n) x)
       simpa [K, koszulTower, koszulComplex, ChainComplex.of_d] using this
     have := hk _ hd
-    simp only [φ, koszulTower_map_f, Nat.add_sub_cancel, unop_op] at this ⊢
+    simp only [φ, koszulTower_map_f, Nat.add_sub_cancel] at this ⊢
     exact this
   have hx : (HomologicalComplex.cyclesMap φ (n + 1)) x = (L.toCycles (n + 2) (n + 1)) y := by
     apply (ModuleCat.mono_iff_injective (L.iCycles (n + 1))).1 inferInstance
@@ -429,6 +429,8 @@ theorem exists_homologyMap_koszulTower_eq_zero [IsNoetherianRing R] (f : Fin r �
       HomologicalComplex.toCycles_i]
     rw [← hy]
     simp [L, koszulTower, koszulComplex, ChainComplex.of_d]
+    rw [show n + 2 = n + 1 + 1 from rfl, ChainComplex.of_d]
+    rfl
   rw [ModuleCat.comp_apply, hx, ← ModuleCat.comp_apply, HomologicalComplex.toCycles_comp_homologyπ]
   rfl
 

@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Torsion
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.Transport
 
 /-!
-# Finite-level pro-étale proper base change
+# Proper base change on classical pro-étale complexes
 
 Fix a cartesian square of schemes
 
@@ -22,14 +22,16 @@ v          v
 Y' --g---> Y
 ```
 
-with `f` proper, and a finite coefficient ring `Λ`. For a pro-étale complex `K` on `X` equipped
-with an étale-origin witness `(L, α)`, `L ∈ D⁺(X_ét, Λ)` and `α : ν_X^* L ≅ K`, the pro-étale
-exchange map `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is an isomorphism (blueprint
-`thm-weil-pbc-finite-level-proetale`). It is obtained by conjugating the bounded below étale
-proper base change isomorphism
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_of_isProper`) by the site
+with `f` proper, and a commutative ring `Λ`. For a pro-étale complex `K` on `X` equipped
+with an étale-origin witness `(L, α)`, `L ∈ D⁺(X_ét, Λ)` and `α : ν_X^* L ≅ K`, whose
+cohomology sheaves are torsion abelian sheaves, the pro-étale exchange map
+`Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is an isomorphism (blueprint `sk-thm-properbasechange`,
+`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper_of_isTorsion`). It is
+obtained by conjugating the étale proper base change theorem
+(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`) by the site
 comparison, as recorded by the transport lemma
-`AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap`.
+`AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap`. For a finite ring `Λ` the torsion
+hypothesis is automatic (blueprint `thm-weil-pbc-finite-level-proetale`).
 
 The ambient pro-étale exchange transformation (blueprint
 `def-weil-pbc-ambient-ringed-exchange`) is `AlgebraicGeometry.ProEtale.derivedBaseChangeMap`;

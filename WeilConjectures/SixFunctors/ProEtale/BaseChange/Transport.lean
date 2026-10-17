@@ -84,6 +84,7 @@ lemma leftDerivedUpperStarComparisonIso_square (sq : CommSq g' f' f g)
     ← (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) f').inv.naturality_assoc]
   erw [reassoc_of% hcube]
   erw [hsq]
+  rfl
 
 /-- Blueprint `lem-weil-pbc-transport-identifies-exchange` (subsection
 `sk-thm-properbasechange`): for a Cartesian square
@@ -168,18 +169,35 @@ theorem comparison_derivedBaseChangeMap [QuasiCompact f] [QuasiSeparated f] [Qua
       Iso.hom_inv_id_app_assoc, ← cancel_mono (L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) g').map
         ((leftDerivedUpperStarComparisonIso f Λ).hom.app
           (R+(Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj L)))]
-    simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-      Category.comp_id]
-    exact hC
+    simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+    exact hC.trans (by erw [CategoryTheory.Functor.map_id, Category.comp_id])
   -- transpose both sides under `Lf'^* ⊣ Rf'_*`
   apply ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, baseChangeTargetComparisonIso,
     baseChangeSourceComparisonIso, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.map_comp, Category.assoc, Functor.comp_obj]
-  erw [Adjunction.counit_naturality, hA f', hP]
-  trace_state
-  sorry
+  erw [Adjunction.counit_naturality]
+  have hA' := hA f' (D+(Etale.upperStar (ModuleCat.{u + 1} Λ) g').obj L)
+  have hA'' := congrArg (L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) g')).map (hA f L)
+  simp only [Functor.map_comp] at hA''
+  have hP' : L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) f').map
+        ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+          ((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj
+            (DerivedCategory.Plus.ι.obj L))) ≫
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f').counit.app _ = _ := hP
+  have hE' := congrArg (fun x ↦ D(ν^*(X')[ModuleCat.{u + 1} Λ]).map
+    (DerivedCategory.Plus.ι.map x)) hE
+  simp only [Functor.map_comp] at hE'
+  erw [reassoc_of% hA', hP']
+  erw [(leftDerivedUpperStarComparisonIso f' Λ).inv.naturality_assoc]
+  erw [reassoc_of% hE']
+  erw [(leftDerivedUpperStarComparisonIso g' Λ).hom.naturality]
+  erw [reassoc_of% hC']
+  erw [← hA'']
+  erw [← (ProEtale.leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} Λ)
+    sq.toCommSq).hom.naturality_assoc]
+  rfl
 
 end ProEtale
 
