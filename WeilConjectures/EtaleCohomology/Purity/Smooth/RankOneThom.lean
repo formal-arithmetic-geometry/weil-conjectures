@@ -47,7 +47,7 @@ lemma endUnit_comm (f g : 𝟙_ C ⟶ 𝟙_ C) : f ≫ g = g ≫ f := by
   have hg : 𝟙_ C ◁ g = (λ_ (𝟙_ C)).hom ≫ g ≫ (λ_ (𝟙_ C)).inv := by
     rw [← Category.assoc, ← leftUnitor_naturality, Category.assoc, Iso.hom_inv_id,
       Category.comp_id]
-  rw [unitors_equal] at hg
+  rw [unitors_equal, unitors_inv_equal] at hg
   rw [hf, hg] at h
   simp only [Category.assoc, Iso.inv_hom_id_assoc, cancel_epi] at h
   rw [← Category.assoc, ← Category.assoc, cancel_mono] at h
@@ -76,8 +76,8 @@ variable {V S : Scheme.{u}} {d : ℕ} {π : V ⟶ S} (E : VectorBundle d π)
 
 section Trace
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ S]
-  [HasCompactification π] [QuasiCompact π]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+  [HasCompactification π]
 
 /-- The counit of the composite adjunction `Rπ_! Rz_! ⊣ Rz^! Rπ^!` is an isomorphism, the left
 adjoint being `R(z ≫ π)_! = R(𝟙)_! ≅ 𝟭`. -/
@@ -140,7 +140,8 @@ theorem nonempty_iso_leftDerivedUpperStar_rightDerivedLowerShriek_dualizingCompl
     (R(π ∣_ E.U i)_![ModuleCat.{u + 1} Λ]).mapIso
       (leftDerivedUpperStarTateShiftIso Λ (π ⁻¹ᵁ E.U i).ι d ≪≫
         (twistShiftConstantComplexIso Λ _ d).symm) ≪≫
-    heq.app _ ≪≫ c.app _ ≪≫ (R(𝔸(ULift.{u} (Fin d); E.U i) ↘ E.U i)_![ModuleCat.{u + 1} Λ]).mapIso t₀ ≪≫
+    heq.app _ ≪≫ c.app _ ≪≫
+    (R(𝔸(ULift.{u} (Fin d); E.U i) ↘ E.U i)_![ModuleCat.{u + 1} Λ]).mapIso t₀ ≪≫
     t₁ ≪≫ (leftDerivedUpperStarConstantComplexIso Λ (E.U i).ι).symm⟩
 
 include aS in

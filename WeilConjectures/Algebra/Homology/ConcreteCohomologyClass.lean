@@ -41,6 +41,7 @@ structure ElementwiseAbelian : Prop where
     ∀ x₂ : ToType S.X₂, S.g x₂ = 0 → ∃ x₁, S.f x₁ = x₂
   injective_of_mono : ∀ {X Y : A} (f : X ⟶ Y) [Mono f], Function.Injective f
   surjective_of_epi : ∀ {X Y : A} (f : X ⟶ Y) [Epi f], Function.Surjective f
+  isIso_of_bijective : ∀ {X Y : A} (f : X ⟶ Y), Function.Bijective f → IsIso f
 
 variable {A}
 
