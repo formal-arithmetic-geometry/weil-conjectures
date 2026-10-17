@@ -3,44 +3,153 @@
  "blueprint": {
   "is": "lem-trf-global-operator-triangulated",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The global operator is triangulated in the coefficient",
- "statement": "In the setting of [def-trf-global-operator], let\n$K'\\to K\\to K''\\to K'[1]$ be a distinguished triangle in\n$D^b_{ctf}(X,A)$ and let $(u',u,u'')$ be a morphism of the\ncorresponding triangles of the functors $Lc_2^*$ and $Rc_1^!$.\nThen the global operators of [def-trf-global-operator] fit into a\nmorphism of distinguished triangles\n\n$$\n\\begin{array}{ccc}\nR\\Gamma_c(X,K')&\\xrightarrow{\\ T_c(u')\\ }&R\\Gamma_c(X,K')\\\\\n\\Big\\downarrow&&\\Big\\downarrow\\\\\nR\\Gamma_c(X,K)&\\xrightarrow{\\ T_c(u)\\ }&R\\Gamma_c(X,K)\\\\\n\\Big\\downarrow&&\\Big\\downarrow\\\\\nR\\Gamma_c(X,K'')&\\xrightarrow{\\ T_c(u'')\\ }&R\\Gamma_c(X,K'').\n\\end{array}\n$$",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an integer $n\\ge1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and $s=\\operatorname{Spec}k$, with the finite coefficient conventions of [def-trf-coefficient-conventions]. Let $X,C$ be separated finite-type $k$-schemes and $c=(c_1,c_2):C\\to X\\times_sX$ a cohomological correspondence as in [def-trf-correspondence]. Assume $c_2$ is proper and $c$ is admissible: $c_1$ and each base change of $c_1$ used in the construction are exceptionally admissible at $A$ in the sense of [def-trf-admissibility], using the constructible exceptional adjoint. Let $D^b_{ctf}(X,A)$ be the bounded constructible finite-Tor category [def-weil-finite-tor-amplitude] on the small pro-etale site, and let\n$K'\\to K\\to K''\\to K'[1]$ be a distinguished triangle in\n$D^b_{ctf}(X,A)$ and let $(u',u,u'')$ be a morphism of the\ncorresponding triangles of the functors $Lc_2^*$ and $Rc_1^!$.\nThen the global operators of [def-trf-global-operator] fit into a\nmorphism of distinguished triangles\n\n$$\n\\begin{array}{ccc}\nR\\Gamma_c(X,K')&\\xrightarrow{\\ T_c(u')\\ }&R\\Gamma_c(X,K')\\\\\n\\Big\\downarrow&&\\Big\\downarrow\\\\\nR\\Gamma_c(X,K)&\\xrightarrow{\\ T_c(u)\\ }&R\\Gamma_c(X,K)\\\\\n\\Big\\downarrow&&\\Big\\downarrow\\\\\nR\\Gamma_c(X,K'')&\\xrightarrow{\\ T_c(u'')\\ }&R\\Gamma_c(X,K'').\n\\end{array}\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-additivity/lem-trf-global-operator-triangulated.md",
   "place": "node lem-trf-global-operator-triangulated, order 2352"
  },
  "stmt_deps": [
-  "def-trf-global-operator"
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-trf-admissibility",
+  "def-weil-finite-tor-amplitude",
+  "def-trf-global-operator",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift"
  ],
  "proof": [
   {
-   "text": "By [def-trf-global-operator] the global operator is the composite\nof the counit of the adjunction $Rc_{2,!}\\dashv Rc_2^!$, the\nidentification $R\\Gamma_c(X,Rc_{2,*}Lc_2^*K)\\cong R\\Gamma_c(C,Lc_2^*K)$, the map $R\\Gamma_c(C,u)$ and the\nidentification $R\\Gamma_c(C,Rc_1^!K)\\cong R\\Gamma_c(X,Rc_{1,!}Rc_1^!K)$\nwith its counit. Each of these constructions is a natural\ntransformation of exact functors in the coefficient object: the\nfunctors $Lc_2^*$, $Rc_1^!$, $Rc_{i,*}$, $Rc_{i,!}$,\n$R\\Gamma_c$ are exact (the admissibility of\n[def-trf-admissibility] supplies the adjunctions and\n[prop-trf-compact-support-perfectness] the perfectness needed for\nthe compact-support identifications), the units and counits of\nadjunctions are natural, and the exchange identifications are\ncompatible with base change. Hence, the squares commuting by [lem-trf-global-operator-naturality], the composite is compatible with\ndistinguished triangles, which is the assertion.",
+   "text": "Write $P=Lc_2^*$, $Q=Rc_1^!$, $H_X=R\\Gamma_c(X,-)$ and $H_C=R\\Gamma_c(C,-)$. By [def-trf-coefficient-conventions], $H_V=\\operatorname{Fib}_s\\circ Ra_{V!}$ for $V=X,C$. The finite-Tor category is a full triangulated subcategory by [lem-weil-finite-ctf-triangulated], so the input triangle is distinguished also in $D^b_c(X,A)$. The structure maps $a_V$ are separated finite type and $A=A_{E,n}$ with $\\ell\\ne p$, so [prop-finite-compact-support-constructibility] applies to $Ra_{V!}$ as an exact functor on the bounded constructible categories, so the fibre functor can indeed be applied. The finite-stage clause of [lem-weil-point-fibre-equivalence] makes $\\operatorname{Fib}_s$ exact. Their composite is exact by [lem-weil-pbc-triangulated-functor-composite]. Thus the given triangle $\\Delta=(K',K,K'',d_1,d_2,\\delta)$ has distinguished image $H_X\\Delta$ in $D^b_{\\mathrm{fin}}(A)$, with last arrow $h=\\chi_{H_X}(K')H_X(\\delta)$. By [lem-sf-pullback-tor-amplitude], $P$ carries the finite-Tor input objects into $D^b_{ctf}(C,A)$. In the current [def-trf-admissibility], the specified constructible functors $Rc_{1!}:D^b_{ctf}(C,A)\\to D^b_{ctf}(X,A)$ and $Q=Rc_1^!:D^b_{ctf}(X,A)\\to D^b_{ctf}(C,A)$ are equipped with their natural unit and counit. Applying these two displayed restrictions successively shows that $Q$ and $Rc_{1!}Q$ take the input objects into the respective finite-Tor categories. This uses the constructible adjunction only; the availability of this datum is a theorem for every separated finite-type $c_1$. Thus $H_C$ is defined and shift-commuting on all coefficient objects appearing below, and the $c_1$ counit is a transformation on the stated constructible domain. Use the canonical shifts for $P$ and $Rc_{1!}$, and for $Q$ the canonical composite shift of its defining formula $\\nu_C^*c_1^{\\times}R\\nu_{X,*}$; these are the shifts with which the statement forms the image triangles of $P$ and $Q$, so no other shift on $Q$ is chosen.",
+   "uses": [
+    "def-trf-coefficient-conventions",
+    "lem-weil-finite-ctf-triangulated",
+    "prop-finite-compact-support-constructibility",
+    "lem-weil-point-fibre-equivalence",
+    "lem-weil-pbc-triangulated-functor-composite",
+    "lem-sf-pullback-tor-amplitude",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014V (definition-exact-functor-triangulated-categories), 014Y (lemma-composition-exact); blueprint proof: exactness of compact-support cohomology; compact-support bounded constructibility: more-etale.tex, Tag 0GL0 (theorem-constructible-shriek)"
+   }
+  },
+  {
+   "text": "Separate the five-arrow composite of [def-trf-global-operator] into\n$$a:H_X\\xrightarrow{H_X\\eta_{c_2}}H_XRc_{2*}P\\xrightarrow{\\sim}H_CP,\\qquad b:H_CQ\\xrightarrow{\\sim}H_XRc_{1!}Q\\xrightarrow{H_X\\varepsilon_{c_1}}H_X.$$\nHere the comparison in $a$ is first the inverse of $Rc_{2!}\\xrightarrow{\\sim}Rc_{2*}$ and then the composition map $Ra_{X!}Rc_{2!}\\xrightarrow{\\sim}Ra_{C!}$, after $\\operatorname{Fib}_s$. The comparison in $b$ is the inverse composition map for $a_Xc_1=a_C$. In the current notation of [def-trf-global-operator], the two comparisons are exactly $\\alpha_{c_2,M}=\\operatorname{Fib}_s(\\gamma_{c_2,M})\\circ\\operatorname{Fib}_s(Ra_{X!}(p_{c_2,M}^{-1}))$ with $M=PL$, and $\\operatorname{Fib}_s(\\gamma_{c_1,QL}^{-1})$, respectively. For each input object $L$, $PL$ is bounded constructible by step 1; the exact compact-support restriction there puts $Rc_{2!}PL$ in $D^b_c(X,A)$, and the proper comparison identifies $Rc_{2*}PL$ with this object. Thus every occurrence of $H_XRc_{2*}P$ in $a$ lies in the domain of $H_X$. Properness is used only for $c_2$. The map starting $a$ is the ordinary pullback/direct-image unit, not an exceptional counit. The transformations of [lem-trf-finite-structural-maps-commshift] apply: all schemes are separated finite type over $k$, the coefficients are the finite stage $A$, and $Q$ is the constructible exceptional adjoint already in the correspondence setting. All bounded constructible coefficient objects here have bounded-below etale-origin witnesses by [lem-sf-proetale-constructible-origin], so the comparison-domain restriction is satisfied. Clauses (1)--(3) of [lem-trf-finite-structural-maps-commshift] give shift compatibility of the ordinary unit and the canonical comparisons. Its clause (4), with $f=c_1$ and $Y=X$, gives for the exceptional counit with the canonical composite shift of $Q$ from step 1 exactly $\\varepsilon_{c_1,L[1]}=\\varepsilon_{c_1,L}[1]\\chi_{Rc_{1!}Q}(L)$, the identity functor carrying the identity shift. The composition and whiskering clauses of [lem-weil-pbc-commshift-nattrans-comp-whisker] give shift compatibility of $a$ and $b$, using the exact functors $H_X,H_C$ established in step 1. Objectwise the defining formula is $T_c(v)=b_L\\circ H_C(v)\\circ a_L$ for any coefficient object $L$ and $v:PL\\to QL$.",
    "uses": [
     "def-trf-global-operator",
-    "def-trf-admissibility",
-    "prop-trf-compact-support-perfectness",
-    "lem-trf-global-operator-naturality"
+    "lem-trf-finite-structural-maps-commshift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-sf-proetale-constructible-origin"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-additivity/lem-trf-global-operator-triangulated.proof.md",
+    "place": "Proof, five-arrow factorization and sentence about natural transformations of exact functors; corrected initial unit"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-commshift-nattrans-triangle-morphism] to $a$ and $b$. It gives morphisms of triangles $a_\\Delta:H_X\\Delta\\to(H_CP)\\Delta$ and $b_\\Delta:(H_CQ)\\Delta\\to H_X\\Delta$. The hypothesis says that $(u',u,u'')$ is a morphism $P\\Delta\\to Q\\Delta$, including its third square. Applying $H_C$ gives the triple $(H_Cu',H_Cu,H_Cu'')$ as a morphism $(H_CP)\\Delta\\to(H_CQ)\\Delta$. For the third square explicitly, apply $H_C$ to $Q(\\delta)u''$ followed by $\\chi_Q(K')$, use the given equation with $u'[1]\\chi_P(K')P(\\delta)$, and use naturality of $\\chi_{H_C}$ at $u'$ to replace $\\chi_{H_C}(QK')H_C(u'[1])$ by $(H_Cu')[1]\\chi_{H_C}(PK')$. This is exactly the triangle-morphism equation for the composite shift isomorphisms. The first two squares follow by applying the functor to the given equalities.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0144 (definition-triangle); blueprint proof: compatibility of the correspondence and structural maps with triangles"
+   }
+  },
+  {
+   "text": "Compose the three triangle morphisms of step 3, whose components are $b_L H_C(u_L)a_L=T_c(u_L)$ by step 2. To display the connecting square without suppressing it, let $h_P,h_Q$ be the last arrows of $(H_CP)\\Delta,(H_CQ)\\Delta$. The three third-square equations are $h_Pa_{K''}=a_{K'}[1]h$, $h_QH_C(u'')=H_C(u')[1]h_P$ and $hb_{K''}=b_{K'}[1]h_Q$. Hence\n$$hT_c(u'')=b_{K'}[1]h_QH_C(u'')a_{K''}=b_{K'}[1]H_C(u')[1]h_Pa_{K''}=T_c(u')[1]h.$$\nFor the first square, the first component equations of step 3 give\n$$H_X(d_1)T_c(u')=b_KH_C(Qd_1)H_C(u')a_{K'}=b_KH_C(u)H_C(Pd_1)a_{K'}=T_c(u)H_X(d_1).$$\nFor the second square, its second component equations give\n$$H_X(d_2)T_c(u)=b_{K''}H_C(Qd_2)H_C(u)a_K=b_{K''}H_C(u'')H_C(Pd_2)a_K=T_c(u'')H_X(d_2).$$ Composition is componentwise by [def-weil-pbc-triangles-with-shift]. Both source and target are the distinguished triangle $H_X\\Delta$ of step 1, proving the assertion, including the omitted fourth row of the displayed diagram. No invertibility of any $u$ is used.",
+   "uses": [
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0144 (definition-triangle), componentwise composition of triangle morphisms"
+   }
   }
  ],
  "proof_deps": [
-  "def-trf-global-operator",
+  "def-trf-coefficient-conventions",
+  "lem-weil-finite-ctf-triangulated",
+  "prop-finite-compact-support-constructibility",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "lem-sf-pullback-tor-amplitude",
   "def-trf-admissibility",
-  "prop-trf-compact-support-perfectness",
-  "lem-trf-global-operator-naturality"
+  "def-trf-global-operator",
+  "lem-trf-finite-structural-maps-commshift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "def-weil-pbc-triangles-with-shift"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-additivity/lem-trf-global-operator-triangulated.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-additivity/lem-trf-global-operator-triangulated.proof.md",
+  "place": "Proof, expanded by the geometric shift-compatibility assertion and all three explicit triangle-square calculations; same proof paragraph as the older master snapshot."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cohomological correspondence on a distinguished triangle induces a morphism of compactly supported cohomology triangles",
+   "results": "DerivedCategory.triangleOfSESδ, triangleOfSESIso, CochainComplex.mappingCone.mapTriangleIso and homology boundary lemmas. No cohomological-correspondence/global-operator theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations commuting with shift induce morphisms of triangles and units counits of triangulated adjunctions commute with shift",
+   "results": "Adjunction.IsTriangulated, IsTriangulated.mk', mk'', commShift, and unit_app_commShiftIso_hom_app_assoc. These are general formal tools and do not prove the geometric statement without the canonical shift compatibilities.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated, NatTrans",
+   "results": "0 hits: unknown identifier 'CategoryTheory.Triangulated'; ineffective pattern, retried below",
+   "date": "2026-10-17",
+   "verdict": "invalid query; no absence inference, retried with valid substring query"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.CommShift",
+   "results": "0 hits: unknown identifier 'NatTrans.CommShift'; retried with substring query",
+   "date": "2026-10-17",
+   "verdict": "invalid query; no absence inference, retried with valid substring query"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShift\"",
+   "results": "Functor.CommShift, NatTrans.CommShift, composition and identity instances (Mathlib.CategoryTheory.Shift.CommShift); none states the geometric assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalOperator|global.operator|NatTrans.*IsTriangulated",
+   "results": "Directory CategoryTheory. Mathlib/CategoryTheory/Triangulated/Functor.lean:261,266 only; transport of IsTriangulated across a shift-compatible isomorphism, no global operator.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological correspondence global operator preserves distinguished triangles",
+   "results": "Functor.IsTriangulated.map_distinguished, Functor.map_distinguished, map_distinguished_iff, IsHomological.exact and generic constructors (Triangulated.Functor and HomologicalFunctor). No global-operator statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -65,5 +174,54 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-i-additivity"
+ "unit": "sk-i-additivity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-global-operator-triangulated",
+  "worker": "stage1",
+  "summary": "Preserved the mathematical statement and expanded its inherited setting explicitly after preflight B2. Replaced the imported paragraph by four steps: exact compact-support cohomology; factorization using the ordinary unit and exceptional counit; triangle morphisms from explicitly shift-compatible structural maps; and all three explicit square calculations. Added one statement-only geometric shift-compatibility lemma after searching the DAG, blueprint, Lean and Mathlib. Removed compact-support perfectness and ordinary naturality as insufficient/unneeded proof dependencies. Second reading cites pullback preservation explicitly, removes the redundant exceptional-counit child clause in favor of the existing adjoint-shift Mathlib leaf, and fixes the child TeX escape. Return repair: compared retained files with returned head 253470ab127f7e3754c2b001e8362d057c27a118 and current DAG; revalidated the changed admissibility and global-operator definitions, made their current constructible restrictions and named comparison maps explicit in steps 1--2, and refreshed both verbatim quotations. No statement, dependency, or child lemma changed in this repair. Maintainer reader fix: the exceptional counit is now proved shift-compatible for the canonical composite shift of Rc_1^! (restored as clause (4) of the child) instead of for a right-adjoint shift chosen in the proof, so the hypothesis on (u',u,u'') is read with the canonical image triangle of Rc_1^!; the abstract adjunction-shift leaf is no longer cited.",
+  "blueprint": "Realizes the master blueprint Proof: the five-arrow operator factorization (step 2), exactness of compact-support cohomology (step 1), and compatibility with distinguished triangles (steps 3--4); repairs the initial exceptional-counit typo and spells out the shift condition hidden by naturality. The main-20261015 statement is unchanged; its separate .proof.md contains the same source proof paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "The finite-stage geometric fibre is exact and lands in bounded finite module complexes; no trace-additivity unit lemma supplies this coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "why": "Generic shift-compatible natural transformations yield triangle morphisms; used only after the actual geometric shift compatibility is supplied."
+   },
+   {
+    "node": "lem-weil-finite-ctf-triangulated",
+    "why": "Full triangulated finite-Tor subcategory, used to view the given triangle inside bounded constructibles; a generic coefficient-category tool."
+   },
+   {
+    "node": "prop-finite-compact-support-constructibility",
+    "why": "Exactness and bounded constructible typing of Ra_X! and Ra_C!, needed before applying the geometric fibre; generic compact-support tool."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Bounded constructible pro-etale inputs have etale-origin witnesses, exactly the domain needed for the compact-support composition maps; no trace-additivity argument replaces this site-comparison tool."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Types the ordinary pullback on bounded constructible finite-Tor inputs before H_C and the compact-support comparisons are applied; a generic operation-preservation tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-weil-finite-ctf-triangulated",
+  "prop-finite-compact-support-constructibility",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-66137e610",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-66137e610 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the new child lem-trf-finite-structural-maps-commshift, every cited statement, the current def-trf-global-operator and def-trf-admissibility, def-weil-exceptional-inverse-image, both blueprint snapshots (main-20261015 .proof.md is the same as the master proof), the unit sk-i-additivity, the citers (prop-trf-graph-operator, lem-trf-trace-triangle-compatibility), and Stacks 0144/05SU/0DVC/0A8D/0F7B/0F7J/0GL0 (labels checked in tags/tags). The item statement keeps exactly the hypotheses of the global-operator setting. Steps 1 and 3-4 are correct: domains, exactness and composite shifts check out; the third-square calculation uses naturality of the H_C shift; the substitution h T(u'')=T(u')[1]h checks. In step 2 the five arrows match the current definition, with the correct directions and the ordinary unit. One fault was repaired (E1/C4): step 1 gave Q=Rc_1^! the right-adjoint shift, and step 2 took the counit compatibility from the abstract leaf lem-weil-pbc-adjunction-shift-compatibility-unique. But Rc_1^! is the specified composite nu^* c_1^x Rnu_* with its own canonical shift. The hypothesis on (u',u,u'') depends on which shift forms QDelta, and prop-trf-graph-operator uses c_1=id with the identity shift; no cited statement identifies the two shifts. Fix: clause (4) restored in the child: the counit of the constructible adjunction (def-trf-admissibility) commutes with the canonical composite shift of Rf^! (f^x with the 0A8D adjoint shift); stmt_deps and source updated. Steps 1-2 now use the canonical shift and clause (4); the leaf is dropped from uses and proof_deps; the item statement is unchanged. Clause (4) was checked as true and holds for f=id. No duplicate found: lem-weil-pbc-derived-adjunction-commshift is étale abelian D^+ only, and thm-sf-comp-composition states no shift equation. The child is not a restated parent clause. The six declared tool_uses are accepted. No SGA source is used. Corrected whole files are in fixes/dag/nodes/sec-trace-formula/.; 2 file(s) fixed by the reviewer"
+ }
 }

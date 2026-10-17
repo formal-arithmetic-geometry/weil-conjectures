@@ -1,0 +1,147 @@
+{
+ "id": "lem-trf-finite-structural-maps-commshift",
+ "kind": "statement",
+ "title": "Canonical finite-coefficient structural maps commute with shifts",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\ge1$. Put $A=\\mathcal O_E/\\varpi_E^n$. These are the finite coefficient conventions of [def-trf-coefficient-conventions]. Let $X,Y,Z$ be separated finite-type $k$-schemes and $f:X\\to Y$, $g:Y\\to Z$ separated finite-type morphisms [def-weil-scheme-morphism-properties]. Use the constant-$A$ module derived categories on their small pro-etale sites, the operations of [def-fix-six-functor-datum], and the compactification-independent $Rf_!$ of [def-compact-support-direct-image-detailed]. Statements about compactification comparisons and composition are on bounded constructible complexes with their bounded-below etale-origin witnesses [def-sf-etale-origin-subcategory], as in [thm-sf-comp-composition]; they assert nothing on arbitrary pro-etale complexes. Use the canonical derived shift isomorphisms for $Lf^*,Rf_*,Rf_!$, the composite shift for composite functors, with the constant-$A$ derived operations of [def-weil-derived-pullback-tensor-hom] and the bounded constructible categories of [def-weil-finite-torsion-constructibility].\n\nThe following canonical natural transformations commute with the shift $[1]$:\n\n(1) For proper $f$, the unit $\\eta_f:\\mathrm{id}\\to Rf_*Lf^*$ of the ordinary derived adjunction, on $D^b_c(Y,A)$.\n\n(2) For proper $f$, the canonical proper-coincidence comparison $p_f:Rf_!\\xrightarrow{\\sim}Rf_*$ specified by the compactification $(\\mathrm{id}_X,f)$, on $D^b_c(X,A)$.\n\n(3) The canonical compact-support composition isomorphism $\\alpha_{g,f}:Rg_!Rf_!\\xrightarrow{\\sim}R(gf)_!$ of [thm-sf-comp-composition], on the stated bounded constructible etale-origin domain.\n\n(4) The counit $\\varepsilon_f:Rf_!Rf^!\\to\\mathrm{id}$ of the constructible adjunction $Rf_!\\dashv Rf^!$ of [def-trf-admissibility], on $D^b_{ctf}(Y,A)$ [def-weil-finite-tor-amplitude]. Here $Rf^!=\\nu_X^*f^{\\times}R\\nu_{Y,*}$ is the constructible exceptional inverse image of [def-weil-exceptional-inverse-image], for the compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ used to define it, with $\\nu_X,\\nu_Y$ the comparison morphisms [def-weil-pbc-site-comparison-morphism]. It carries the composite shift of this formula: $\\nu_X^*$ and $R\\nu_{Y,*}$ have their canonical derived shifts, and the etale right adjoint $f^{\\times}$ has the shift adjoint to the canonical shift of the etale compact-support functor $Rp_{\\mathrm{et},*}j^{\\mathrm{et}}_!$. Thus, with $\\mathrm{id}$ carrying the identity shift, $\\varepsilon_f$ is compatible with the canonical shifts, not merely with a shift of $Rf^!$ chosen to make it so.\n\nPrecisely, if $\\tau:F\\to G$ is any transformation in (1)--(4) and $\\chi_F(M):F(M[1])\\xrightarrow{\\sim}F(M)[1]$, $\\chi_G(M):G(M[1])\\xrightarrow{\\sim}G(M)[1]$ are the specified shift comparisons, then\n$$\\chi_G(M)\\circ\\tau_{M[1]}=\\tau_M[1]\\circ\\chi_F(M).$$\nThe inverses of the two isomorphisms in (2)--(3) satisfy the same equation with source and target interchanged. Shifts and triangulated categories have the conventions of [def-weil-triangulated-category].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05SU (lemma-derived-shift), 0DVC (lemma-pre-derived-adjoint-functors), 0A8D (lemma-adjoint-is-exact, shift of a right adjoint, for clause (4)); for the canonical compact-support compositor, literature/stacks-project/more-etale.tex, Tags 0F7B (lemma-shriek-proper-and-open, representative-level map) and 0F7J (lemma-shriek-composition, four-line construction). The combined pro-etale finite-coefficient compatibility assertion is assembled by an agent, not a verbatim Stacks theorem; it supplies the shift-compatibility sentence of the blueprint proof."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-fix-six-functor-datum",
+  "def-compact-support-direct-image-detailed",
+  "thm-sf-comp-composition",
+  "def-weil-triangulated-category",
+  "def-sf-etale-origin-subcategory",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-torsion-constructibility",
+  "def-trf-admissibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical units counits proper direct image comparison and compact support composition for finite coefficient derived sheaves commute with shifts",
+   "results": "SheafOfModules.pushforwardComp and pushforwardPushforwardAdj (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous); unitToPushforwardObjUnit (PullbackFree). These concern underived module sheaves, not compact-support derived comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For pro etale finite torsion coefficients canonical compact support composition and proper coincidence isomorphisms commute with shifts as do ordinary and exceptional adjunction units counits",
+   "results": "CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app (Mathlib/CategoryTheory/Shift/Adjunction) assumes an already compatible adjunction. Other hits concern underived sheaf pushforward or condensed internal Hom. None identifies the geometric comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShift\"",
+   "results": "Functor.CommShift, NatTrans.CommShift and composition/ofIso structures (Mathlib.CategoryTheory.Shift.CommShift). These supply formal shift calculus, not the canonical six-operation comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unit_app_commShiftIso\"",
+   "results": "CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app and its assoc form (Mathlib.CategoryTheory.Shift.Adjunction): compatibility is a hypothesis.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriekComp|properComparison|derived.*[Aa]djunction",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:12,95,117; general derived adjunction, no compact-support or proper-coincidence declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointCommShift|commShift_of_leftAdjoint|unit_app_commShiftIso_hom_app|counit_app_commShiftIso",
+   "results": "Directory CategoryTheory/Shift. Mathlib/CategoryTheory/Shift/Adjunction.lean:41,217,307,360,366. Read also rightAdjointCommShift:388 and commShift_of_leftAdjoint:403: they construct the compatible right-adjoint shift but do not identify geometric compact-support composition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison for composition of compact support derived direct images commutes with the shift of complexes",
+   "results": "Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor), Adjunction.RightAdjointCommShift.iso' (Shift.Adjunction), and general complex shift lemmas; no geometric compact-support composition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointCommShift|commShift_of_leftAdjoint|compatibilityUnit_iso",
+   "results": "Directory argument CategoryTheory/Shift/Adjunction.lean. Five hits were printed, but the single-file grep formatting put line numbers 41,166,180,307,360 in the file field. Repeated the search on CategoryTheory/Shift and read Adjunction.lean directly; the generic adjoint-shift construction does not identify the compact-support geometric maps.",
+   "date": "2026-10-17",
+   "verdict": "no match; single-file output formatting incomplete, repeated with directory query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit and counit of a derived adjunction commute with suspension, and a right derived comparison commutes with shift",
+   "results": "Eight hits: Adjunction.derived'_unit, derived_unit, derivedη_fac_app, derived_counit, derived'_counit, derivedη, CommShift.CompatibilityUnit, derivedη_fac_app_assoc. Read Derived/Adjunction.lean:95-150; these give derived adjunction units/counits and their factorization equations, not the canonical geometric proper-coincidence or compact-support compositor shift equations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointCommShift\"",
+   "results": "Nine hits, including Adjunction.rightAdjointCommShift, RightAdjointCommShift.compatibilityUnit_iso, iso, iso', and rightAdjointCommShift_commShiftIso. Read Shift/Adjunction.lean:388-410. The exceptional-counit specialization is already covered by lem-weil-pbc-adjunction-shift-compatibility-unique, so that clause was removed from this node and cited directly in the parent. No compact-support geometric comparison theorem was returned.",
+   "date": "2026-10-17",
+   "verdict": "no match for the remaining geometric statement; redundant exceptional-counit clause removed"
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.*CommShift|CommShift.*NatTrans|derived.*[Cc]omparison|lowerShriek",
+   "results": "Directory CategoryTheory/Functor: OK 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived direct image composition isomorphism and adjunction unit are compatible with translation of complexes",
+   "results": "Eight hits, including Functor.mapDerivedCategoryFactorsh_hom_app, mapDerivedCategorySingleFunctor, instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, Adjunction.derived_eta/epsilon factorization and derived_unit declarations. These are generic derived factorization/adjunction tools; no compact-support or proper-coincidence geometric comparison theorem. Read the pinned Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean definitions and factorization equations at lines 95--150.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"rightDerived\"",
+   "results": "Twelve hits, including IsRightDerivedFunctor.commShift, NatTrans.CommShift.rightDerivedNatTrans and Functor.instCommShiftNatTransOfIsRightDerivedFunctorComp, from RightDerivedCommShift and RightDerivedCompositionCommShift. Those two files are absent from the pinned local Mathlib/CategoryTheory/Functor/Derived directory (which contains Adjunction, LeftDerived, PointwiseLeftDerived, PointwiseRightDerived and RightDerived); the online results concern general derived comparisons, not the compactification-normalized geometric maps.",
+   "date": "2026-10-17",
+   "verdict": "no exact match in pinned Mathlib; online generic candidates recorded"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|commShift",
+   "results": "Directory CategoryTheory/Functor/Derived: OK 0 hits in the pinned Mathlib. Read Adjunction.lean directly; its derived-unit/counit factorization equations do not identify the geometric compact-support compositor or proper comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-global-operator-triangulated",
+  "date": "2026-10-17",
+  "group": "N4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-additivity",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-global-operator-triangulated",
+   "place": "Proof, sentence 'Each of these constructions is a natural transformation of exact functors in the coefficient object': compatibility with shifts of the specified ordinary unit, exceptional counit and compact-support comparison isomorphisms.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
