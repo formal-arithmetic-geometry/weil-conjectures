@@ -11,9 +11,142 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $V_j(S)=A_j^\\bullet\\otimes_\\Delta S$. This preserves colimits: giving a map out of its coequalizer is giving compatible maps out of every copower, so iterated colimits can be interchanged. The coend maps give $V_j(\\Delta^r)\\cong A_j^r$: the map to $A_j^r$ on a summand indexed by $\\alpha:[s]\\to[r]$ is $A_j(\\alpha)$, and the inverse uses the identity simplex. Their composites are identities by the coend relations. The same argument for the union of proper faces identifies $V_j(\\partial\\Delta^r)$ with $L_rA_j$: a compatible family on proper faces is exactly a cocone on the nonidentity injections into $[r]$, with overlaps identified by their common faces. Thus these boundary maps are cofibrations by the assumed Reedy cofibrancy, including $r=0$, where the source is initial. The collapse $V_j(\\Delta^r)\\to V_j(\\Delta^0)$ is the structure map $A_j^r\\to A_j^0$, hence a weak equivalence by hypothesis.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.1, proof, printed p.130: co-Yoneda and boundary/latching identification."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-boundary-collapse-test] to each $V_j$. Step 1 verifies both its boundary and its collapse tests, and its colimit hypothesis. Hence $V_j$ sends monomorphisms to cofibrations and sends trivial Kan cofibrations to trivial cofibrations; it also sends every weak homotopy equivalence to a weak equivalence. This scalar frame conclusion uses no enrichment on $\\mathcal M$.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 5.4.4(1), printed p.131, via Proposition 5.4.3."
+   }
+  },
+  {
+   "text": "For $c\\in J$ let $F_cX(j)=\\coprod_{\\operatorname{Hom}_J(c,j)}X$. Define a simplicial diagram of colimit-preserving functors into $\\mathcal M^J$ by $T_p(S)=\\coprod_{j_0\\to\\cdots\\to j_p}F_{j_p}V_{j_0}(S)$, using the reversed operators in the statement. Its simplicial identities follow from associativity, functoriality of $A$, and insertion of identities: two removals compose the same consecutive arrows in either order, and removing an inserted identity either cancels that insertion or shifts its position. Its splitting has $N_p(S)$ equal to the coproduct over chains whose $p$ internal arrows are all nonidentity. Erasing all identity arrows gives a unique such chain and a unique order-preserving surjection in the reversed vertex order; reinserting those identities is inverse. This proves the splitting isomorphism, including chains containing inverse arrows whose composite is an identity: no nonidentity arrow is erased. All these functors preserve colimits, since copowers, $V_j$, and colimits in a functor category do so. By its defining coend, $R_T(\\Delta^n)=(PA)^n$.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Sections 3.4 and 19, and the ordinary simplicial replacement of Section 4; reversed-index agent adaptation."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-split-functor-coend-filtration] to $T$ and $i:\\partial\\Delta^n\\to\\Delta^n$. Its degree-$p$ cells are coproducts of $F_{j_p}V_{j_0}(b_{n,p})$, where\n$$b_{n,p}:(\\Delta^n\\times\\partial\\Delta^p)\\amalg_{\\partial\\Delta^n\\times\\partial\\Delta^p}(\\partial\\Delta^n\\times\\Delta^p)\\longrightarrow\\Delta^n\\times\\Delta^p.$$\nThis map is injective degreewise, since it is the inclusion of the union of the two indicated subsets. Step 2 makes $V_{j_0}(b_{n,p})$ a cofibration. The free-diagram functor $F_c$ preserves cofibrations: a lifting square against an objectwise trivial fibration is equivalent, by its coproduct formula, to the single lifting square at $c$, which has a filler; its copies at all arrows $c\\to j$ define the natural filler. A coproduct of these maps has the same property by choosing fillers on each summand.",
+   "uses": [
+    "lem-coef-split-functor-coend-filtration",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Section 3.4, skeletal pushout, printed p.10; Hovey Proposition 5.4.1 for the scalar comparison."
+   }
+  },
+  {
+   "text": "The projective cofibrations form the left lifting class against the objectwise trivial fibrations by the model-category assumptions. They are closed under pushout by [lem-coef-lifting-class-closure] and under the countable continuous composite by [lem-coef-transfinite-left-lifting]. The filtration in step 4 therefore proves that $R_T(\\partial\\Delta^n)\\to R_T(\\Delta^n)$ is a projective cofibration. Because $R_T$ preserves colimits, the same face-cocone calculation as in step 1 gives $L_n(PA)=R_T(\\partial\\Delta^n)$. Thus the Reedy criterion proves the asserted Reedy cofibrancy in $\\mathcal M^J$.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Section 3.4, skeletal pushout and sequential colimit, printed p.10; agent projective lifting argument."
+   }
+  },
+  {
+   "text": "Fix $j\\in J$ and evaluate the simplicial diagram of functors at $j$, writing $T^j_p(S)=\\coprod_{j_0\\to\\cdots\\to j_p\\to j}V_{j_0}(S)$. Composition of the entire chain gives $e:T^j\\to\\operatorname{const}V_j$. Let $h_{-1}:V_j\\to T^j_0$ use the $(j\\xrightarrow{1}j)$ summand. Let $h_p:T^j_p\\to T^j_{p+1}$ append $j$ and the final identity, keeping its coefficient unchanged. In the reversed convention, $d_0h_p=1$; $d_1h_0=h_{-1}e_0$; $d_{i+1}h_p=h_{p-1}d_i$ for $p\\geq1$, $0\\leq i\\leq p$; $s_{i+1}h_p=h_{p+1}s_i$ for $0\\leq i\\leq p$; and $e_0h_{-1}=1$. The first equality composes the appended identity, the second applies $A$ to the final arrow, and all remaining equalities perform exactly the same removal or insertion before the appended vertex. These are equalities of natural transformations in $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Definition 3.11, sourcelike version after reversal, printed pp.12-13."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-extra-degeneracy-prism] in the category of colimit-preserving functors $\\mathrm{sSet}\\to\\mathcal M$ to step 6. It supplies a simplicial section $a$ of $e$ and a combinatorial homotopy between $ae$ and $1$. For $K=\\Delta^n$, [lem-coef-functor-coend-homotopy-prism] gives a map\n$$H:R_{T^j}(K\\times\\Delta^1)\\longrightarrow R_{T^j}(K)$$\nwith endpoints $s\\varepsilon^n(j)$ and $1$. Here $R_{\\operatorname{const}V_j}(K)\\cong V_j(K)$: commute $V_j$ past the coend; the coend of the simplices with constant coefficients is $\\Delta^0$, since every simplex is identified with the degeneracy of its sole degree-zero generator. Consequently $R_e(K)=\\varepsilon^n(j)$, its section is $s=R_a(K)$, and $\\varepsilon^n(j)s=1$.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism",
+    "lem-coef-functor-coend-homotopy-prism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Proposition 3.12, contraction on realization; the omitted categorical prism argument is isolated in its own node."
+   }
+  },
+  {
+   "text": "Both endpoint inclusions $\\{k\\}\\to\\Delta^1$ are horn inclusions and hence anodyne by [lem-coef-kan-quillen-right-proper]. Apply [lem-coef-sset-anodyne-pushout-product] first with $\\varnothing\\to K$, then with $\\partial\\Delta^p\\to\\Delta^p$. It shows that\n$$(K\\times\\Delta^1\\times\\partial\\Delta^p)\\amalg_{K\\times\\{k\\}\\times\\partial\\Delta^p}(K\\times\\{k\\}\\times\\Delta^p)\\longrightarrow K\\times\\Delta^1\\times\\Delta^p$$\nis anodyne. By step 2 each $V_{j_0}$ sends it to a trivial cofibration. Apply [lem-coef-split-functor-coend-filtration] to the evaluated splitting $T^j$ and $K\\times\\{k\\}\\to K\\times\\Delta^1$. Its cells are coproducts of these trivial cofibrations. They have the left lifting property against every fibration, summand by summand. Pushout closure and countable-composite closure give that $i_k:R_{T^j}(K)\\to R_{T^j}(K\\times\\Delta^1)$ is a trivial cofibration. The projection $p$ back to $R_{T^j}(K)$ satisfies $pi_k=1$, so two-out-of-three makes $p$ a weak equivalence.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-split-functor-coend-filtration",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Corollary 5.4.4; Dugger Section 3.12 prism, with the categorical filtration establishing the cylinder."
+   }
+  },
+  {
+   "text": "Choose the ordinary formal localization $\\gamma:\\mathcal M\\to\\mathcal M[W^{-1}]$ in a containing universe (finite zigzags, modulo composition and inverse relations). Since $pi_0=pi_1=1$ and $p$ is a weak equivalence, $\\gamma(i_0)=\\gamma(i_1)=\\gamma(p)^{-1}$. The endpoint equalities for $H$ in step 7 imply $\\gamma(s\\varepsilon^n(j))=1$, while $\\varepsilon^n(j)s=1$ already holds strictly. Thus $\\gamma(\\varepsilon^n(j))$ has the inverse $\\gamma(s)$. By [lem-coef-model-localization-detects-weak-equivalences], $\\varepsilon^n(j)$ is a weak equivalence. This applies to every $n,j$ without imposing fibrancy or properness.",
+   "uses": [
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 1.2.10(iv), printed p.11, applied to the explicit prism cylinder."
+   }
+  },
+  {
+   "text": "For $\\alpha:[n]\\to[m]$, the definition by coends gives $\\varepsilon^m(j)(PA)^\\alpha(j)=A_j^\\alpha\\varepsilon^n(j)$: both maps collapse the $p$-simplex factor and apply $A$ to the composed chain, and $\\alpha$ acts on the other factor. The augmentation components and $A_j^\\alpha$ are weak equivalences, so two-out-of-three makes $(PA)^\\alpha(j)$ a weak equivalence. If $J$ is empty its diagram category is terminal, all the displayed coproducts and naturality conditions have empty indices, and the same lifting and Reedy arguments are vacuous. Degree zero and chains consisting of identities were included in the splitting and filtration, so no nonemptiness condition was used.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Section 19, framed realization; agent conclusion from naturality and two-out-of-three."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-functor-coend-homotopy-prism",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-simplicial-extra-degeneracy-prism",
+  "lem-coef-split-functor-coend-filtration",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Sections 3.4, 3.10-3.12 and 19; Hovey Propositions 5.4.1, 5.4.3, Corollary 5.4.4 and Theorem 1.2.10(iv). Explicit extension to the framed diagram formula, not a quotation of Hirschhorn Theorem 19.3.1."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -84,10 +217,31 @@
    "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
    "date": "2026-10-17",
    "verdict": "no match: inspected signatures and pinned source; ordinary coends, skeletal adjunctions, Cech constructions and cofibrant replacements do not give this relative filtration or framed bar comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "framed.*bar|cosimplicial.*resolution|Reedy",
+   "results": "11 hits; ; Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/MeasureTheory/Covering/Besicovitch.lean, Mathlib/MeasureTheory/Covering/Besicovitch.lean, Mathlib/MeasureTheory/Covering/Besicovitch.lean; digest 49389549cddb4de8",
+   "date": "2026-10-17",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:127-152 gives a chosen ordinary cofibrant replacement, not this framed bar formula; Reedy/Basic.lean:21-24 still lists the Reedy model structure as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"WeakEquivalence\"",
+   "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:127-152 gives a chosen ordinary cofibrant replacement, not this framed bar formula; Reedy/Basic.lean:21-24 still lists the Reedy model structure as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Framed simplicial bar replacement of objectwise cosimplicial resolutions is projectively Reedy cofibrant with weak equivalence augmentation",
+   "results": "8 hits; ; HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj, HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj, HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.resolution, HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution, HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism, HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences; digest 5e5349469e48dcec",
+   "date": "2026-10-17",
+   "verdict": "no match: CofibrantObjectHomotopy.lean:127-152 gives a chosen ordinary cofibrant replacement, not this framed bar formula; Reedy/Basic.lean:21-24 still lists the Reedy model structure as TODO."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-projective-frame-weighted-coend",
@@ -121,5 +275,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-framed-projective-diagram-resolution",
+  "worker": "stage1",
+  "summary": "Proved projective Reedy cofibrancy by a split-functor coend filtration and proved the augmentation using a functor-level extra degeneracy, a categorical prism, and an explicitly verified weak cylinder. Added two statement-only categorical lemmas. Kept the reversed simplicial convention and all hypotheses. No projective-weighted-coend theorem is used, avoiding the ancestor cycle.",
+  "blueprint": "Refines prop-coef-integral-exceptional-adjoint proof paragraph 2, the finite derived coefficient-adjunction comparison, through the existing ancestry: supplies the framed bar input of lem-coef-projective-frame-weighted-coend by scalar frame tensors, free-diagram cells and terminal-chain contraction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-a8ede8746",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-a8ede8746 (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item's ten steps, both new nodes, and the full statement of every cited node. Step 1: the co-Yoneda map gives V_j(Δ^r)≅A^r, the boundary map gives V_j(∂Δ^r)≅L_rA_j, and the collapse is the structure map. Step 2 meets the boundary-collapse test's hypotheses exactly. Step 3: the chain splitting by nonidentity internal arrows gives R_T(Δ^n)=(PA)^n. Steps 4–5: F_c is left adjoint to evaluation, so it preserves projective cofibrations; pushout and ω-composite closure then apply, and L_n(PA)=R_T(∂Δ^n). Step 6: I checked every reversed-convention identity by hand against the hypotheses of lem-coef-simplicial-extra-degeneracy-prism (n=p-1). Step 7: R_{const V}(K)=V(K) because [0] is terminal in Δ. Step 8: the double anodyne pushout-product and the filtration cells for K×{k}→K×Δ^1 make i_k a trivial cofibration, so p is a weak equivalence. Step 9: the localization iff applies. Step 10: two-out-of-three, and the empty-J case is vacuous. New node split-functor-coend-filtration is true: it is the Reedy pushout-product filtration, using L_p(L×Δ^•)=L×∂Δ^p and the summand latching of T. I tested p=0, K=L and constant T. It is not a one-line specialization of lem-coef-weighted-coend-skeletal-filtration, which with J=Δ^op filters in the inner direction with different cells. New node functor-coend-homotopy-prism is true via R_{T⊠L}(K)≅R_T(K×L), checked on generators Δ^q⊠V. Its endpoint orientation agrees with the cited homotopy convention. Neither new node needs enrichment, unlike lem-coef-reedy-realization-prism and lem-coef-tensor-coend-skeletal-pushouts. A DFS over the snapshot DAG finds no cycle. The route stays inside unit sk-prop-sf-biduality-general, and there are no SGA citations and no tool_uses. Hovey, Dugger and Hirschhorn are absent from the literature archive and are reported as WANTED with proof_origin agent; I checked those arguments directly instead of reading the sources. No fixes were written."
  }
 }

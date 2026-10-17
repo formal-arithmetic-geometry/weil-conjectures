@@ -1,0 +1,91 @@
+{
+ "id": "lem-coef-split-functor-coend-filtration",
+ "kind": "statement",
+ "title": "Relative skeletal filtration for split functors",
+ "statement": "Let $\\mathcal C$ be a cocomplete category, with all categories, Hom sets and colimits in containing universes. Use simplicial sets, standard simplices and boundaries of [def-weil-pbc-simplicial-set], and colimits of [def-weil-pbc-category-colimit]. Let $T:\\Delta^{\\mathrm{op}}\\to\\operatorname{Fun}(\\mathrm{sSet},\\mathcal C)$ be a simplicial diagram of functors preserving all small colimits. Suppose given colimit-preserving functors $N_q:\\mathrm{sSet}\\to\\mathcal C$ and natural transformations $N_q\\to T_q$ such that, for every $p$, the canonical degeneracy map\n$$\\coprod_{[p]\\twoheadrightarrow[q]}N_q\\longrightarrow T_p$$\nis an isomorphism of functors; its component indexed by a surjection $\\sigma$ is $N_q\\to T_q\\xrightarrow{T(\\sigma)}T_p$. The identity surjection is included. Define\n$$R_T(K)=\\int^{[p]\\in\\Delta}T_p(K\\times\\Delta^p),$$\nas the coequalizer of the two maps from $\\coprod_{\\alpha:[a]\\to[b]}T_b(K\\times\\Delta^a)$ to $\\coprod_pT_p(K\\times\\Delta^p)$ induced by $T(\\alpha)$ and $\\Delta^\\alpha$ respectively. For every map $i:K\\to L$ of simplicial sets, $R_T(i)$ admits a countable filtration $Z_{-1}=R_T(K)\\to Z_0\\to Z_1\\to\\cdots$ with colimit $R_T(L)$, whose $p$th transition is a pushout of\n$$N_p\\big((L\\times\\partial\\Delta^p)\\amalg_{K\\times\\partial\\Delta^p}(K\\times\\Delta^p)\\big)\\longrightarrow N_p(L\\times\\Delta^p).$$\nThe attaching map is induced by the face operators and the coend maps. The filtration is natural in $i$ and in maps respecting the specified splittings. It includes $p=0$ and empty $K,L$. No model structure or enrichment of $\\mathcal C$ is assumed.",
+ "source": {
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Section 3.4, proof of Theorem 3.5, printed p.10: skeletal pushout; Section 19, printed pp.90-93: realization by cosimplicial resolutions. Agent categorical extension to diagrams of colimit-preserving functors, not a literal assertion of the source. Source read in the sandbox; archival copy WANTED. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "skelet.*coend|coend.*skelet|Splitting.*[Cc]olimit",
+   "results": "1 hits; ; Mathlib/AlgebraicTopology/SimplicialObject/Split.lean; digest af4d36e3dae44319",
+   "date": "2026-10-17",
+   "verdict": "no match: Split.lean:199-219 defines the coproduct splitting and its universal property; it does not give the relative coend filtration with product weights. Skeleton.lean concerns a simplicial set, and RelativeCellComplex.attachCells constructs given cells without identifying these coends."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject.Splitting\"",
+   "results": "12 hits; ; CategoryTheory.SimplicialObject.Splitting.IndexSet, CategoryTheory.SimplicialObject.Splitting.IndexSet.id, CategoryTheory.SimplicialObject.Splitting.IndexSet.EqId, CategoryTheory.SimplicialObject.Splitting.IndexSet.instFintype, CategoryTheory.SimplicialObject.Splitting.IndexSet.instInhabited, CategoryTheory.SimplicialObject.Splitting, CategoryTheory.SimplicialObject.Splitting.summand, CategoryTheory.SimplicialObject.Splitting.N; digest 611011639f9a6857",
+   "date": "2026-10-17",
+   "verdict": "no match: Split.lean:199-219 defines the coproduct splitting and its universal property; it does not give the relative coend filtration with product weights. Skeleton.lean concerns a simplicial set, and RelativeCellComplex.attachCells constructs given cells without identifying these coends."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Skeletal filtration of a coend of a split simplicial diagram of colimit preserving functors has relative cells on products with simplex boundaries",
+   "results": "8 hits; ; HomotopicalAlgebra.RelativeCellComplex.attachCells, CategoryTheory.SmallObject.relativeCellComplexιObj, SSet.skeleton, SimplicialObject.Splitting.isColimit', SSet.Subcomplex.MulticoequalizerDiagram, SimplicialObject.Splitting.isColimit, SSet.skeletonOfMono_obj_eq_top, SSet.iSup_skeleton; digest 7b9e7b3fec93cff7",
+   "date": "2026-10-17",
+   "verdict": "no match: Split.lean:199-219 defines the coproduct splitting and its universal property; it does not give the relative coend filtration with product weights. Skeleton.lean concerns a simplicial set, and RelativeCellComplex.attachCells constructs given cells without identifying these coends."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative skeletal filtration of weighted geometric realization of a split simplicial functor using nondegenerate summands",
+   "results": "8 hits; ; SSet.skeleton, SSet.toTop, SSet.skeleton_succ, SimplicialObject.Splitting.nondegComplex, SSet.skeletonOfMono_succ, SimplicialObject.Split.casesOn, SimplicialObject.Splitting.recOn, SSet.mem_skeleton_obj_iff_of_nonDegenerate; digest 077da513052fc4f1",
+   "date": "2026-10-17",
+   "verdict": "no match: Split.lean:199-219 defines the coproduct splitting and its universal property; it does not give the relative coend filtration with product weights. Skeleton.lean concerns a simplicial set, and RelativeCellComplex.attachCells constructs given cells without identifying these coends."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split simplicial functor with coefficients in left adjoints admits a boundary cell filtration of its weighted realization",
+   "results": "8 hits; ; AlgebraicTopology.DoldKan.Γ₀.splitting, SSet.modelCategoryQuillen.boundary_ι_mem_I, HomotopicalAlgebra.RelativeCellComplex.attachCells, SimplicialObject.Splitting.isColimit, HomotopicalAlgebra.RelativeCellComplex.Cells.k, SimplicialObject.Splitting.isColimit', SSet.modelCategoryQuillen.I, SSet.modelCategoryQuillen.J; digest aa19057d706ed53b",
+   "date": "2026-10-17",
+   "verdict": "no match: Split.lean:199-219 defines the coproduct splitting and its universal property; it does not give the relative coend filtration with product weights. Skeleton.lean concerns a simplicial set, and RelativeCellComplex.attachCells constructs given cells without identifying these coends."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-framed-projective-diagram-resolution",
+  "date": "2026-10-17",
+  "group": "N2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient-adjunction and inverse-limit comparison; independent simplicial-diagram foundation below lem-coef-unstraightening-homotopy-descent. Supporting Dwyer--Kan weak exponentials and the homotopy-limit criterion. Supporting Framed mapping complexes and derived diagram adjunctions in simplicial categories. Weighted-coend lifting input for the first framed diagram adjunction: projective resolutions of entire diagrams paired with injective simplicial weights. Supporting Framed version of the simplicial replacement, with products of simplices; compare §§16.5 and 19.4. Agent-stated extension, not the literal projective-weight assertion of Theorem 19.3.1. Supporting Section 3.4, proof of Theorem 3.5, printed p.10: skeletal pushout; Section 19, printed pp.90-93: realization by cosimplicial resolutions.",
+   "via": [
+    "lem-coef-framed-projective-diagram-resolution",
+    "lem-coef-projective-frame-weighted-coend",
+    "lem-coef-scat-framed-diagram-adjunction",
+    "lem-coef-dk-weak-exponential-limit-criterion",
+    "lem-coef-projective-diagram-simplicial-descent",
+    "lem-coef-unstraightening-homotopy-descent",
+    "lem-coef-contravariant-slice-model",
+    "lem-coef-right-straightening-fiber-comparison",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
