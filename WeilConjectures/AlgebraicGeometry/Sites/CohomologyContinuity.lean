@@ -65,7 +65,7 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
 /-- The coefficient categories `A` for which étale cohomology with values in `A` is continuous
 at cofiltered limits of quasi-compact quasi-separated schemes with affine transition maps, in the
 vanishing form of `AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`.
-Instances: abelian groups and modules over a finite ring. -/
+Instances: abelian groups and modules over a ring. -/
 class HasCohomologyContinuity : Prop where
   isZero_rightDerived_of_isLimit : ∀ {S : Scheme.{u}} (F : Sheaf S.smallEtaleTopology A)
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
@@ -81,7 +81,7 @@ class HasCohomologyContinuity : Prop where
 
 Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
 transition maps, with limit `X = c.pt`, and let `F` be an étale sheaf on `S` with coefficients in
-abelian groups or in modules over a finite ring (`AlgebraicGeometry.Etale.HasCohomologyContinuity`).
+abelian groups or in modules over a ring (`AlgebraicGeometry.Etale.HasCohomologyContinuity`).
 Then `H^q(X, F|_X) = colimᵢ H^q(Dᵢ, F|_{Dᵢ})`; in particular `H^q(X, F|_X)` vanishes as soon as all
 the `H^q(Dᵢ, F|_{Dᵢ})` do. -/
 theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit [HasCohomologyContinuity A]
@@ -111,10 +111,22 @@ instance hasCohomologyContinuity_addCommGrpCat :
     rw [Subsingleton.elim y 0, map_zero] at hy
     exact eq_zero_of_sheafH_map_eq_zero _ hy.symm
 
-instance hasCohomologyContinuity_moduleCat (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+instance hasCohomologyContinuity_moduleCat (Λ : Type (u + 1)) [CommRing Λ] :
     HasCohomologyContinuity (ModuleCat.{u + 1} Λ) where
   isZero_rightDerived_of_isLimit := by
     intro S F I _ _ D _ _ _ c hc q h
+    have : IsCofiltered I := inferInstance
+    obtain ⟨i₀⟩ := IsCofiltered.nonempty (C := I)
+    have (i : I) : CompactSpace ((D ⋙ Over.forget S).obj i) :=
+      inferInstanceAs (CompactSpace (D.obj i).left)
+    have {i j : I} (g : i ⟶ j) : IsAffineHom ((D ⋙ Over.forget S).map g) :=
+      inferInstanceAs (IsAffineHom (D.map g).left)
+    have (i : I) : QuasiSeparatedSpace ((D ⋙ Over.forget S).obj i) :=
+      inferInstanceAs (QuasiSeparatedSpace (D.obj i).left)
+    have : CompactSpace c.pt.left := Scheme.compactSpace_of_isLimit _ _ hc
+    have := isAffineHom_π_app _ _ hc
+    have : QuasiSeparatedSpace c.pt.left :=
+      quasiSeparatedSpace_of_quasiSeparated (((Over.forget S).mapCone c).π.app i₀)
     rw [isZero_rightDerived_sectionsFunctor_iff_forget₂]
     obtain ⟨e⟩ := pullback_forget_modules_iso Λ c.pt.hom F
     refine IsZero.of_iso ?_ (((sectionsFunctor _ _).rightDerived q).mapIso e)

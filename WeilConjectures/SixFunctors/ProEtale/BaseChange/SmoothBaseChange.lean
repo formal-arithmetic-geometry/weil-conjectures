@@ -114,7 +114,7 @@ noncomputable def leftDerivedUpperStarComparisonIso :
 variable (f g) in
 /-- The comparison `ν_{Y'}^* g^* Rf_* ≅ Lg^* Rf_* ν_X^*` of the sources of the étale and the
 pro-étale exchange maps, as functors `D⁺(X_ét) ⥤ D(Y'_proét)`. -/
-noncomputable def baseChangeSourceComparisonIso [Finite Λ] [QuasiCompact f] [QuasiSeparated f] :
+noncomputable def baseChangeSourceComparisonIso [QuasiCompact f] [QuasiSeparated f] :
     (R+(Etale.lowerStar (ModuleCat.{u + 1} Λ) f) ⋙ D+(Etale.upperStar (ModuleCat.{u + 1} Λ) g)) ⋙
         DerivedCategory.Plus.ι ⋙ D(ν^*(Y')[ModuleCat.{u + 1} Λ]) ≅
       DerivedCategory.Plus.ι ⋙ D(ν^*(X)[ModuleCat.{u + 1} Λ]) ⋙
@@ -128,8 +128,7 @@ noncomputable def baseChangeSourceComparisonIso [Finite Λ] [QuasiCompact f] [Qu
 variable (g' f') in
 /-- The comparison `ν_{Y'}^* Rf'_* g'^* ≅ Rf'_* Lg'^* ν_X^*` of the targets of the étale and the
 pro-étale exchange maps, as functors `D⁺(X_ét) ⥤ D(Y'_proét)`. -/
-noncomputable def baseChangeTargetComparisonIso [Finite Λ] [QuasiCompact f']
-    [QuasiSeparated f'] :
+noncomputable def baseChangeTargetComparisonIso [QuasiCompact f'] [QuasiSeparated f'] :
     (D+(Etale.upperStar (ModuleCat.{u + 1} Λ) g') ⋙ R+(Etale.lowerStar (ModuleCat.{u + 1} Λ) f')) ⋙
         DerivedCategory.Plus.ι ⋙ D(ν^*(Y')[ModuleCat.{u + 1} Λ]) ≅
       DerivedCategory.Plus.ι ⋙ D(ν^*(X)[ModuleCat.{u + 1} Λ]) ⋙
@@ -157,8 +156,8 @@ the étale exchange map `g^* Rf_* L ⟶ Rf'_* g'^* L` by the comparison isomorph
 (`AlgebraicGeometry.ProEtale.baseChangeSourceComparisonIso`,
 `AlgebraicGeometry.ProEtale.baseChangeTargetComparisonIso`) gives the pro-étale exchange map
 at `ν_X^* L`. -/
-theorem comparison_derivedBaseChangeMap [Finite Λ] [QuasiCompact f] [QuasiSeparated f]
-    [QuasiCompact f'] [QuasiSeparated f'] (sq : IsPullback g' f' f g)
+theorem comparison_derivedBaseChangeMap [QuasiCompact f] [QuasiSeparated f] [QuasiCompact f']
+    [QuasiSeparated f'] (sq : IsPullback g' f' f g)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     D(ν^*(Y')[ModuleCat.{u + 1} Λ]).map
         (DerivedCategory.Plus.ι.map ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L)) ≫
@@ -180,7 +179,7 @@ smooth and `g` quasi-compact and quasi-separated, and a coefficient ring `Λ` ki
 nonzero integer `N` invertible on `S`, the pro-étale exchange map
 `p^* Rg_* K ⟶ Rh_* e^* K` is an isomorphism for every bounded constructible pro-étale complex
 `K` (that is, of étale origin). -/
-theorem ProEtale.isIso_derivedBaseChangeMap_app_of_smooth [Finite Λ] [Smooth p] [QuasiCompact g]
+theorem ProEtale.isIso_derivedBaseChangeMap_app_of_smooth [Smooth p] [QuasiCompact g]
     [QuasiSeparated g] (sq : IsPullback e h g p) (N : ℕ) (hN₀ : N ≠ 0) (hN : (N : Λ) = 0)
     (hNS : IsUnit (N : Γ(S, ⊤)))
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)))

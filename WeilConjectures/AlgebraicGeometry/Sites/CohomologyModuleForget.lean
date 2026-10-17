@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuityDefs
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
@@ -15,13 +15,13 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 /-!
 # Étale cohomology of sheaves of modules and of their underlying abelian sheaves
 
-For a finite ring `Λ` and an étale sheaf `M` of `Λ`-modules on a scheme `X`, the cohomology
-`Hᵠ(X, M)` computed with sheaves of `Λ`-modules vanishes if and only if the cohomology of the
+For a ring `Λ`, a quasi-compact quasi-separated scheme `X` and an étale sheaf `M` of
+`Λ`-modules on `X`, the cohomology `Hᵠ(X, M)` computed with sheaves of `Λ`-modules vanishes if and only if the cohomology of the
 underlying abelian sheaf of `M` vanishes
 (`AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_iff_forget₂`): the underlying
 abelian sheaves of an injective resolution of `M` form an acyclic resolution of the underlying
-abelian sheaf (`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`), and forgetting the
-module structure is exact and faithful.
+abelian sheaf (`AlgebraicGeometry.Etale.subsingleton_H_forget₂_succ_of_injective`),
+and forgetting the module structure is exact and faithful.
 -/
 
 @[expose] public section
@@ -80,11 +80,11 @@ instance preservesFiniteColimits_sheafCompose_forget₂ {X : Scheme.{u}} :
   exact preservesFiniteColimits_of_natIso
     (sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso _ _)
 
-variable [Finite Λ]
 
 /-- The cohomology of an étale sheaf of `Λ`-modules vanishes if and only if the cohomology of its
 underlying abelian sheaf vanishes. -/
-lemma isZero_rightDerived_sectionsFunctor_iff_forget₂ {X : Scheme.{u}}
+lemma isZero_rightDerived_sectionsFunctor_iff_forget₂ {X : Scheme.{u}} [CompactSpace X]
+    [QuasiSeparatedSpace X]
     (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) :
     IsZero (((sectionsFunctor (ModuleCat.{u + 1} Λ) X).rightDerived q).obj M) ↔
       IsZero (((sectionsFunctor AddCommGrpCat.{u + 1} X).rightDerived q).obj
@@ -96,7 +96,7 @@ lemma isZero_rightDerived_sectionsFunctor_iff_forget₂ {X : Scheme.{u}}
       (G.obj (J.cocomplex.X n)) := fun m ↦
     (Sheaf.subsingleton_H_iff_isZero_rightDerived X.smallEtaleTopology
       (MorphismProperty.Over.mkIdTerminal _ X) (m + 1) _).1
-      (Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ (J.cocomplex.X n) m)
+      (Etale.subsingleton_H_forget₂_succ_of_injective Λ X (J.cocomplex.X n) m)
   let ι' : (CochainComplex.single₀ _).obj (G.obj M) ⟶
       (G.mapHomologicalComplex _).obj J.cocomplex :=
     (HomologicalComplex.singleMapHomologicalComplex G (ComplexShape.up ℕ) 0).inv.app M ≫

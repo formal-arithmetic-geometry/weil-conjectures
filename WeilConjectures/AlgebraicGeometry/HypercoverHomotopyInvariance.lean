@@ -74,7 +74,7 @@ lemma secCxMap_eq {U V : FiniteSplitEtaleHypercover X} (f : U.Refinement V)
       (opComplexIso A U F).hom := by
   ext n
   simp [opComplexIso]
-  rfl
+  erw [Category.id_comp, Category.comp_id]
 
 variable [CategoryWithHomology A]
 
