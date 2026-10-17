@@ -74,7 +74,7 @@ theorem isIso_derivedTensorRight_map_projectionMapOfCompactification_of_tensor
     {NX : DerivedCategory (Sheaf X.smallEtaleTopology A)} (a : L((f)^*[A]).obj NY ≅ NX)
     (hN : IsDualizable NY) (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology A))
-    (h : HasProjectionFormulaOfCompactification A c (K ⊗ NX) L) :
+    (h : HasProjectionFormulaOfCompactification A c (((-⊗ᴸ-(X)[A]).obj K).obj NX) L) :
     IsIso ((derivedTensorRight A Y NY).map
       (((projectionMapOfCompactification A c).app K).app L)) := by
   have hc := isIso_rightDerivedLowerShriekDerivedTensorRightMap_of_isDualizable A c a hN

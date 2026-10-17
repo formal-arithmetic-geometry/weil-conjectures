@@ -49,6 +49,17 @@ set_option hygiene false in
 local notation "𝐃(" X ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ))
 
+omit [CommRing Λ] in
+/-- `(K ⊗ᴸ N) ⊗ᴸ M ≅ (K ⊗ᴸ M) ⊗ᴸ N`, for a general coefficient category. -/
+lemma nonempty_derivedTensor_obj_obj_swap (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    {X : Scheme.{u}} (K N M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    Nonempty (((-⊗ᴸ-(X)[A]).obj (((-⊗ᴸ-(X)[A]).obj K).obj N)).obj M ≅
+      ((-⊗ᴸ-(X)[A]).obj (((-⊗ᴸ-(X)[A]).obj K).obj M)).obj N) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology A)
+  exact ⟨α_ K N M ≪≫ whiskerLeftIso K (β_ N M) ≪≫ (α_ K M N).symm⟩
+
 /-- The reduction modulo `ϖⁿ` lowers the lower bound of an object by at most one: it is the cone
 of the multiplication by `ϖⁿ`. -/
 lemma isGE_reductionModIdeal_obj {X : Scheme.{u}} {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
@@ -95,14 +106,11 @@ theorem isIso_reductionModIdeal_map_projectionMap_of_nsmul [IsPrincipalIdealRing
   let K' := (reductionModIdeal Λ X J).obj K
   have hK' : N • 𝟙 K' = 0 := nsmul_id_reductionModIdeal hNJ K
   have : K'.IsGE (k - 1) := isGE_reductionModIdeal_obj hϖ n K k
-  have : ((reductionModIdeal Λ X J).obj
-      (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M)).IsGE (m + a - 1) :=
+  obtain ⟨e⟩ := nonempty_derivedTensor_obj_obj_swap (ModuleCat.{u + 1} Λ) K
+    (constantSingle (ModuleCat.{u + 1} Λ) X (ModuleCat.of Λ (Λ ⧸ J))) M
+  have : (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M)).obj
+      (constantSingle (ModuleCat.{u + 1} Λ) X (ModuleCat.of Λ (Λ ⧸ J)))).IsGE (m + a - 1) :=
     isGE_reductionModIdeal_obj hϖ n _ (m + a)
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
-    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-  let NX := constantSingle (ModuleCat.{u + 1} Λ) X (ModuleCat.of Λ (Λ ⧸ J))
-  let e : (K ⊗ NX) ⊗ M ≅ (K ⊗ M) ⊗ NX :=
-    α_ K NX M ≪≫ whiskerLeftIso K (β_ NX M) ≪≫ (α_ K M NX).symm
   have : (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K').obj M).IsGE (m + a - 1) :=
     _root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm (m + a - 1)
   have h : HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K' L :=
