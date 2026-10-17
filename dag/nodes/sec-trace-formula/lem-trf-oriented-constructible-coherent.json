@@ -15,9 +15,55 @@
   "def-trf-oriented-constructible-sheaf",
   "def-trf-coherent-topos"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=|F|$. The coherence/constructibility criterion for the underlying sheaf of sets, [lem-trf-coherent-set-criterion], applies because $S$ is Noetherian, $f$ is of finite presentation, and $V_f$ is the vanishing topos of [def-trf-oriented-nearby-cycles]. It identifies coherence of $A$ with the existence of finite constructible stratifications of $X$ and $S$ on whose oriented products $A$ is locally constant with finite set values.",
+   "uses": [
+    "lem-trf-coherent-set-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Author draft, §8.1, printed pp. 17–18, set-valued coherence criterion for oriented products"
+   }
+  },
+  {
+   "text": "Assume $F$ is constructible in the sense of [def-trf-oriented-constructible-sheaf], with strata $X_\\alpha$, $S_\\beta$. By [def-trf-oriented-nearby-cycles] the module inverse image along $P_{\\alpha\\beta}\\to V_f$ is the ordinary inverse image with the induced operations, so the underlying sheaf of sets of the restriction of $F$ is the restriction of $A$; likewise the underlying sheaf of sets of a constant module sheaf $\\underline{M_i}$ is the constant sheaf on the set $M_i$ (forgetting the operations commutes with sheafification). Hence each witnessing isomorphism of module sheaves on $P_{\\alpha\\beta}/U_i$ gives an isomorphism of $A$ restricted there with the constant sheaf on the finite set $M_i$. These are exactly the witnesses required in [lem-trf-coherent-set-criterion], whose \"if\" direction (Step 1) gives that $A$ is coherent.",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf",
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-coherent-set-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Author draft, §8.1, printed pp. 17–18, finite-module specialization of the set-valued criterion"
+   }
+  },
+  {
+   "text": "Conversely assume $A$ is coherent. By [lem-trf-coherent-set-criterion] (Step 1) there are finite constructible stratifications $X_\\alpha$, $S_\\beta$ and, for each $\\alpha,\\beta$, a covering family $(U_i)$ of the final object of $P_{\\alpha\\beta}$ with isomorphisms $\\phi_i$ from the restriction of $A$ to $P_{\\alpha\\beta}/U_i$ onto the constant sheaf $\\underline{M_i}$ on a finite set $M_i$. As in Step 2 the restriction $G$ of $F$ to $P_{\\alpha\\beta}$ is a sheaf of $\\Lambda$-modules with underlying sheaf of sets the restriction of $A$. Fix $i$. Through $\\phi_i$ the addition $G\\times G\\to G$, the zero $1\\to G$ and, for each of the finitely many $\\lambda\\in\\Lambda$, the multiplication $\\lambda:G\\to G$ become morphisms of sheaves $\\underline{M_i}\\times\\underline{M_i}\\to\\underline{M_i}$, $1\\to\\underline{M_i}$, $\\underline{M_i}\\to\\underline{M_i}$ on $P_{\\alpha\\beta}/U_i$. In any topos the constant sheaf on a finite set $N$ is the coproduct $\\coprod_{n\\in N}1$, coproducts are disjoint and stable under pullback, and $\\underline{N}\\times\\underline{N'}=\\underline{N\\times N'}$; so a morphism $\\underline{N}\\to\\underline{N'}$ over $U_i$ is the same as a section of $\\underline{\\operatorname{Map}(N,N')}$ over $U_i$, i.e. a decomposition $U_i=\\coprod_{\\sigma}U_{i,\\sigma}$ indexed by the finite set of maps $\\sigma:N\\to N'$ such that over $U_{i,\\sigma}$ the morphism is the constant one $\\underline{\\sigma}$. Taking the common refinement of the decompositions for the finitely many operations listed, we get a finite cover $U_i=\\coprod_kU_{i,k}$ such that over each $U_{i,k}$ every operation is constant, given by maps $+_k:M_i\\times M_i\\to M_i$, $0_k\\in M_i$, $\\lambda_k:M_i\\to M_i$. If $U_{i,k}$ is not initial, two constant morphisms $\\underline\\sigma,\\underline\\tau:\\underline N\\to\\underline{N'}$ that agree over $U_{i,k}$ have $\\sigma=\\tau$: if $\\sigma(n)\\neq\\tau(n)$, the section $n$ composed with them lands over $U_{i,k}$ in two disjoint summands of $\\coprod_{n'}1$, so $U_{i,k}$ maps to their pullback, which is initial, and hence is initial. The module axioms for $G$ are equalities of morphisms built from these operations, so they hold for the maps $+_k,0_k,\\lambda_k$; so $(M_i,+_k,0_k,\\lambda_k)$ is a finite $\\Lambda$-module $M_{i,k}$ and $\\phi_i$ restricted to $U_{i,k}$ is an isomorphism of $\\Lambda$-module sheaves $G|_{U_{i,k}}\\cong\\underline{M_{i,k}}$ (initial $U_{i,k}$ may be discarded or given any module). The family $(U_{i,k})$ still covers the final object of $P_{\\alpha\\beta}$. Thus each restriction of $F$ is locally constant with finite $\\Lambda$-module values on the same strata, which is exactly constructibility in [def-trf-oriented-constructible-sheaf].",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf",
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-coherent-set-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Author draft, §8.1, printed pp. 17–18, transport of the finite constant module structure on coherent strata"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-coherent-set-criterion",
+  "def-trf-oriented-constructible-sheaf",
+  "def-trf-oriented-nearby-cycles"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Agent-written finite-module specialization of the author draft §8.1 criterion; local archival copy is unavailable"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-psi-constructibility-descent",
@@ -79,5 +125,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-constructible-coherent",
+  "worker": "stage1",
+  "summary": "Audited the Noetherian and finite-presentation hypotheses and split the proof through one new set-valued coherence criterion. The forward implication forgets the finite Lambda-module structure, while the reverse implication transports the module operations across the finite constant-set trivializations supplied by the criterion. The imported statement is unchanged; the Orgogozo source is available online but not archived locally.",
+  "blueprint": "Realizes the coherence/constructibility input used by the ancestor lem-trf-local-term-locality and its Psi constructibility route, specifically the author-draft §8.1 criterion for oriented products.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-af452ec93",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-af452ec93 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-coherent-set-criterion, the parent lem-trf-psi-constructibility-descent (which uses both directions of the item), every cited statement, and unit sk-i-curve-zero. The item statement is unchanged and correct. The new node is the coefficient-free set-valued criterion: not a restated clause, not everything moved down (D1/D2), and no duplicate found by rg over dag/nodes or the main-20261015 blueprint. I tested the small cases Spec k and the empty X. I could not read the source myself: Orgogozo §8.1 is online only and network access is blocked. ILO Exp. XI §2.4-2.5, read locally, gives coherence of oriented products but not the criterion; the WANTED line stands. Not a target node, no SGA cited, no tool_uses needed. I fixed three faults in fixes/: (1) E5 in item step 3: the 'transport' of module operations kept the same cover, but the transported operations are only locally constant; the step is rewritten to refine each U_i by decomposing the finitely many operation morphisms between constant finite sheaves (coproducts of 1). Steps 2-3 now also use def-trf-oriented-nearby-cycles (module inverse image = set inverse image), and proof_deps is updated. (2) B2/B3 in the new node: the statement now defines restriction along P_ab->V_f via lem-trf-oriented-product-universal and spells out 'locally constant with finite set values'; stmt_deps adds def-constructible-stratification, def-weil-constructible-subset and lem-trf-oriented-product-universal, and drops the unused def-trf-oriented-constructible-sheaf. (3) B9: the new node's blueprint.from.via now begins with the item.; 2 file(s) fixed by the reviewer"
  }
 }

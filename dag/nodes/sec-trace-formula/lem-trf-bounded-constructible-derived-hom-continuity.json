@@ -14,9 +14,97 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First treat a pair of constructible sheaves and their shifts. The cited Ext-continuity statement gives the canonical comparison as an isomorphism for every nonnegative degree. For a negative degree $n<0$, both Hom groups vanish: a sheaf $F$ concentrated in degree $0$ lies in $D^{\\leq 0}$ of the standard t-structure, $G[n]$ lies in $D^{\\geq -n}\\subseteq D^{\\geq 1}$ since its only cohomology sheaf sits in degree $-n\\geq1$, and the orthogonality axiom gives $\\operatorname{Hom}(D^{\\leq 0},D^{\\geq 1})=0$; exact inverse image sends sheaves to sheaves, so the same holds at every stage and on $X$. Shifting the two sheaves identifies $\\operatorname{Hom}(F_j[-a],G_j[-b+n])$ and its limit counterpart with the degree $n+a-b$ case. Thus the comparison is an isomorphism in every integer degree for all shifted constructible sheaves, and the Ext-continuity compatibility with later stages and composition is retained.",
+   "uses": [
+    "lem-trf-constructible-etale-ext-continuity",
+    "def-weil-t-structure",
+    "def-sbc-standard-tstructure-derived-category",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09YU with the shift reduction; negative-degree vanishing as in derived.tex Tag 06XS (lemma-negative-exts), here from the orthogonality axiom of the standard t-structure"
+   }
+  },
+  {
+   "text": "Fix a shifted constructible sheaf $Q$ and let $\\mathcal C_Q$ be the bounded constructible objects $P$ for which the comparison is an isomorphism in every degree. Step 1 puts every shifted constructible sheaf in $\\mathcal C_Q$. All triangles are formed at stage $i$ and pulled back: termwise inverse image is exact, hence a triangulated functor on derived categories that carries distinguished triangles to distinguished triangles and commutes with shifts, and it commutes with cohomology sheaves and canonical truncations, so the pulled-back triangles at every stage $j$ and on $X$ are distinguished and the pulled-back Postnikov tower of $P_i$ is the Postnikov tower of $P_j$ and of $P$. If $P\\prime\\to P\\to P\\doubleprime\\to P\\prime[1]$ is a distinguished triangle at stage $i$ with the outer objects in $\\mathcal C_Q$, apply the Hom-out-of-a-triangle exact sequence to $Q_j[n]$ at every stage and to $Q[n]$ at the limit; the Hom-into statement supplies the vanishing of consecutive composites and the rotated exact segment. Filtered-colimit exactness gives an exact top row, and the canonical comparison maps form a commutative ladder because each is induced by a functor and the connecting morphisms of the pulled-back triangles are the pullbacks of the connecting morphism at stage $i$. The first, second, fourth and fifth vertical maps are isomorphisms by the outer hypotheses and shift closure, so the five lemma makes the middle map an isomorphism. Finally, if $\\mathcal H^q(P_i)=0$ outside $[a,b]$, the truncation triangles $\\tau_{\\leq q-1}P_i\\to\\tau_{\\leq q}P_i\\to\\mathcal H^q(P_i)[-q]\\to(\\tau_{\\leq q-1}P_i)[1]$ for $q=a,\\dots,b$, with $\\tau_{\\leq a-1}P_i\\simeq0$ (in $\\mathcal C_Q$ trivially) and $\\tau_{\\leq b}P_i\\simeq P_i$, form a finite Postnikov tower whose graded pieces are the constructible cohomology sheaves shifted by their degrees. Induction on $q$ proves $P\\in\\mathcal C_Q$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-truncation-triangle",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149 (representable Hom exactness) and the canonical truncation triangles (Tag 08J5); filtered-colimit exactness is Tag 00DB and the ladder argument is Tag 05QB"
+   }
+  },
+  {
+   "text": "Now fix an arbitrary bounded constructible $P$ and let $\\mathcal D_P$ be the objects $Q$ for which the comparison is an isomorphism in every degree. Step 2 puts every shifted constructible sheaf in $\\mathcal D_P$. For a distinguished triangle $Q\\prime\\to Q\\to Q\\doubleprime\\to Q\\prime[1]$ at stage $i$, pulled back to every stage and to $X$ as in Step 2, with the outer objects in $\\mathcal D_P$, use the Hom-into-a-triangle exact sequence at each stage and at the limit. The same filtered-colimit ladder and five-lemma argument, now with postcomposition maps, proves $Q\\in\\mathcal D_P$. The truncation triangles of $Q_i$ form a finite Postnikov tower, pulled back to every stage and to $X$, which has shifted constructible cohomology sheaves as its graded pieces, so a second induction proves the comparison for every $Q$. This establishes the displayed isomorphism for all bounded constructible $P,Q$ and all integers $n$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-truncation-triangle",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149 and finite Postnikov induction (canonical truncation triangles, Tag 08J5) on the second variable"
+   }
+  },
+  {
+   "text": "All comparison maps used above are induced by the exact inverse-image functors and their canonical derived composition isomorphisms. The associativity and identity equations for those isomorphisms identify the map of a composite with the composite of the two descended maps; the exact-functor Ext comparison gives the same assertion on the sheaf graded pieces. Naturality of the Hom long exact sequences and uniqueness in the five-lemma inductions then propagate this compatibility through every truncation triangle. The same argument with shift functors gives shift compatibility, and applying a later-stage inverse image to the construction gives passage-to-later-stages compatibility. Hence the isomorphism is canonical with all compatibilities claimed in the statement.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (derived inverse-image composition), together with derived.tex Tag 015F and functoriality in Tag 09YU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-derived-categories",
+  "def-weil-t-structure",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-trf-constructible-etale-ext-continuity",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-truncation-triangle",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Finite Postnikov extension of the sheaf Ext-continuity node using Tags 0149, 00DB and 05QB; exact inverse-image coherence from Tags 0D6D and 015F"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +143,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-spread-out",
@@ -67,7 +155,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof of (1) and (2), normal-cone specialization: arithmetic spreading-out in the Orgogozo modification input (§2.1, p. 3); bounded derived-Hom continuity used to descend the successive Postnikov attachments of K.",
+   "place": "Proof of (1) and (2), normal-cone specialization: bounded derived-Hom continuity is the finite Postnikov extension used to descend the successive attachments of K.",
    "via": [
     "lem-trf-nearby-spread-out",
     "lem-trf-orgogozo-good-modification",
@@ -78,5 +166,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-bounded-constructible-derived-hom-continuity",
+  "worker": "stage1",
+  "summary": "Extended the existing constructible sheaf Ext-continuity comparison to bounded constructible complexes by two finite Postnikov inductions, first in the source and then in the target. Checked the exact Hom rows, filtered-colimit exactness, five-lemma hypotheses, standard truncation triangles, and exact inverse-image coherence; no new node was needed because every auxiliary fact already exists in the DAG. The item statement and all recorded Mathlib searches are unchanged. Maintainer reader (cc, 2026-10-18): added the standard t-structure, truncation-triangle and triangulated-pullback citations to steps 1-3 and corrected the negative-Ext source tag.",
+  "blueprint": "Realizes the bounded derived-Hom continuity input in the local-term/normal-cone proof: shifted sheaf base cases, source-variable Postnikov induction, target-variable Postnikov induction, and propagation of composition, shift, and later-stage compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Step 4 takes the associativity/unit coherence of inverse-image composition isomorphisms, needed to form the directed system of Hom groups and its compatibilities; a generic sheaf-theoretic tool that no node of sk-i-curve-zero gives."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness of etale inverse image on constant-coefficient module sheaves (Lean-closed); generic tool, not route of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-ext-exact-functor-composition-comparison",
+    "why": "Functoriality of Ext under composites of exact functors (Lean-closed); generic homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Canonical truncation triangles in D(A) (Lean-closed); generic homological tool for the Postnikov inductions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-fbca1ea0b",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-fbca1ea0b (reviewer sub-agent of L); spot-checked: Read in full: the item; the unit sk-i-curve-zero; the parent lem-trf-nearby-spread-out at the step that uses it (P=M_q[-q], Q=L_{q-1}, n=1); and every cited statement. Stacks sources checked: 09YU at etale-cohomology line 12552 (qcqs, affine transitions, Noetherian Λ), 0149, 00DB, 05QB, 0D6D, 015F, 06XS (derived line 8713) and 08J5. The statement is true and not weakened. Same coefficient category D(Mod(-,A)) as the sheaf Ext node; no invertibility of |A| needed. Small cases tested: singleton I; the finite-field tower F_{p^{k!}} with Z/ℓ and n=1, where the colimit and H^1 of the algebraic closure are both 0; negative n; zero objects; one-term shifts. The Postnikov source and target inductions, the five-term Hom ladders (0149 plus the rotated triangle), filtered-colimit exactness (00DB) and the five lemma (05QB) are correct. Two repairable citation faults (C1/C4/E5), fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-bounded-constructible-derived-hom-continuity.json: (1) step 1 cited only the abstract def-weil-t-structure and Tag 0145, which is the triangulated-category definition, for negative-Ext vanishing. Added def-sbc-standard-tstructure-derived-category, wrote out D^{≥-n}⊆D^{≥1}, and set the source to 06XS. (2) Steps 2-3 used pulled-back triangles and Postnikov towers without citing that exact pullback is triangulated and commutes with truncations. Added lem-sf-exact-functor-derived-triangulated, prop-weil-pbc-inverse-image-modules-exact and lem-weil-pbc-truncation-triangle, made the stage-i triangles and the q=a..b induction explicit, and updated proof_deps. Accepted tool uses, declared in split_report.tool_uses: lem-weil-pbc-derived-inverse-image-composition (generic inverse-image coherence), plus the Lean-closed prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-ext-exact-functor-composition-comparison and lem-weil-pbc-truncation-triangle. No new nodes. Not duplicates: sk-lem-constructible-ext-continuity, det-lem-constructible-ext-continuity-devissage and det-lem-int-ext-continuity are about filtered colimits on a fixed X. No cycle; no SGA citations.; 1 file(s) fixed by the reviewer"
  }
 }
