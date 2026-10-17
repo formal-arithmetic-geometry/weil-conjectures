@@ -264,5 +264,23 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-25128cfd4 (reviewer sub-agent of L); spot-checked: I read Kerodon 02M2, 02M1, 01N7 and 05ZQ on kerodon.net because Kerodon is not in literature/ (the report lists it as WANTED). I also read all five cited DAG statements in full. The item's statement is exactly Kerodon 02M2, with the definition's functor-category form of localization; no hypothesis was added or dropped and A and B are arbitrary. Steps 1-8 follow 02M1 (2)=>(3)=>(4)=>(1). Step 3 writes out the 02LT enlargement correctly: the eta_G naturality square in hE makes [G(w)] invertible, and mapping-composition turns that into an equivalence edge. Step 4 is the dimension and top-cell induction using the Mathlib cell leaf. Step 5's pullback-of-pushout and W_T-union bookkeeping is correct; I checked g_i(s_0 t_i)=f(a). Step 6 applies the new pushout node with the injective legs u_0=A_bdry->A_Delta and v_0=bdry->Delta^n. Steps 7-8 cover the finite-subset filtered colimit, which is nonempty because it contains the empty subset, then the identity base change. New node lem-coef-localization-monomorphic-pushout is true: it is 01N7 (1)=>(2) specialised to pushouts along monos, which are categorical by 01FJ. New node lem-coef-localization-filtered-colimit is true and is 05ZQ; non-injective transitions do no harm. Both are general and strictly smaller than the item, statement-only, with all three search kinds recorded. Duplicate search: the tags, plus the localization nodes of sec-six-functors I read. The parent lem-coef-universal-localization-pushout assumes universal localization and depends on the item, so citing it would be a cycle; the cartesian-pullback, Dwyer-Kan, model-colimit, homotopy-category and hammock nodes state other results. Every cited statement is in the item's unit or is a definition or Mathlib leaf, so no tool_uses are needed or accepted. No SGA source, no target node, and no change to any unit or chapter. Edge cases checked: A=B=empty, f=id, Delta^1->Delta^0, n=0, T empty. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UniversalLocalizationDegenerateEdges",
+  "declaration": "SSet.Enhanced.universally_localizing_degenerate_edges",
+  "file": "lean/Sheaf/CategoryTheory/UniversalLocalizationDegenerateEdges.lean",
+  "statement": "theorem universally_localizing_degenerate_edges {A B : SSet.{u}} (f : A ⟶ B) (hf : IsUniversallyLocalizing.{u, v} f) : ∀ (E : SSet.{max u v}), Quasicategory E → ∃ r : (ihom (SSet.uliftFunctor.{v, u}.obj B)).obj E ⟶ (edgeInvertingDiagrams A {w | ∃ b : B _⦋0⦌, f.app _ w = B.σ 0 b} E).toSSet, r ≫ (edgeInvertingDiagrams A {w | ∃ b : B _⦋0⦌, f.app _ w = B.σ 0 b} E).ι = (MonoidalClosed.pre (SSet.uliftFunctor.{v, u}.map f)).app E ∧ IsFunctorEquivalence r",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc87338d7",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Kerodon 02M2: A,B arbitrary SSet.{u}; hf : IsUniversallyLocalizing.{u,v} f, same v as the conclusion, no stray universe (pp.universes shows {u_1,u_2}); W_f = {w | ∃ b, f.app _ w = B.σ 0 b} on A_1; ∀ E : SSet.{max u v}, Quasicategory E; r pinned to restriction by r ≫ ι = pre(ulift f); IsFunctorEquivalence r. Scratch file showed the conclusion is definitionally IsLocalizationAtEdges.{u,v} f W_f (recorded notion, no private copy). Node copy changes only lean; lean.statement verbatim; dependency nodes unchanged. Imports: statement deps public, stated proof-dep modules (InfinityMappingComposition, PointwiseEquivalences, Mathlib Skeleton) plain; the 2 localization proof nodes have no module yet. One sorry theorem, no defs; source/blueprint docstrings; 8-step proof docstring; lines <=98. Worker report and Second reading by Q24 present. Edge cases A=B=empty, f=id, empty E, n=0, universes checked. nt_compile.py --json rc 0, no errors or warnings. No findings."
  }
 }

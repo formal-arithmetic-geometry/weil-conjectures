@@ -9,7 +9,10 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-pinched-cube-latching"
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-rigidification-boundary-cube"
  ],
  "proof": [
   {
@@ -255,5 +258,60 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-492949f5c (reviewer sub-agent of L); spot-checked: I read the item, its eight steps, the new node lem-coef-coherent-realization-bead-normal-form, the cited statements (lem-coef-pinched-cube-latching, def-cbc-enhanced-diagrams-cones), the parent's use of the item, and the unit/chapter, all in full. The helper is the computad description of C[K]: each degree is free on beads (σ nondegenerate, weak flag {0,m}=T_0⊆…⊆T_r=[m]), and a subcomplex is detected by its beads. It is correct: T_0={0,m} is right because a flag with an interior vertex in S_0 is a union composite. I tested it on a loop, on Δ^2 with edge 02 collapsed, and on empty K. It is statement-only with B1–B7 satisfied and is not a duplicate: I checked pinched-cube-latching, rigidification-boundary-cube, kan-coherent-nerve-cell-filtration, cone-boundary-projective-cells, coherent-nerve-relative-cube-comparison, fixed-vertex-cofibrations and the marked-cone nodes. Steps 1–3 (unique mixed bead, collapse/union bijection, naturality, collage) are correct; I checked them on Δ^p⋆Δ^q. Steps 4–5 (∂Q and V=∂Q×Δ^1∪Q×{0}, missing simplices [0,n] and [0,n+1]) are correct, checked at n=1 and n=2; Step 4 agrees with the reviewed rigidification-boundary-cube. In Steps 6–8 the composition list is complete (through j<n, through n, Y-postcomposition, nothing into 0), and β|∂Q×{1}=uα holds. No Kan or nonemptiness hypothesis is needed. proof_deps equals the union of the uses, both cited nodes are in the same unit, tool_uses is empty, there is no cycle and no SGA source. It is not a target node, so there is no base change or coefficient category to compare. Riehl–Verity is not in literature/ and I had no network access, so I checked the steps from the DAG statements and small cases rather than the source; the proof is marked agent-written and the paper is WANTED. Minor: the item's source.place still names Def 5.2.8 for the collage while Step 3 cites 5.2.2; this is only a label and is left unchanged. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.JoinBoundaryCubicalExtension",
+  "declaration": "SSet.JoinBoundary.join_boundary_cubical_extension",
+  "declarations": [
+   "SSet.JoinBoundary.Objects",
+   "SSet.JoinBoundary.rhom",
+   "SSet.JoinBoundary.targetHom",
+   "SSet.JoinBoundary.rmap",
+   "SSet.JoinBoundary.join",
+   "SSet.JoinBoundary.left",
+   "SSet.JoinBoundary.right",
+   "SSet.JoinBoundary.point",
+   "SSet.JoinBoundary.incoming",
+   "SSet.JoinBoundary.weight",
+   "SSet.JoinBoundary.Cross",
+   "SSet.JoinBoundary.Cross.IsCanonical",
+   "SSet.JoinBoundary.Cross.IsNatural",
+   "SSet.JoinBoundary.Cross.BlocksAndActions",
+   "SSet.JoinBoundary.Family",
+   "SSet.JoinBoundary.Family.pre",
+   "SSet.JoinBoundary.transformations",
+   "SSet.JoinBoundary.evaluate",
+   "SSet.JoinBoundary.pointSimplex",
+   "SSet.JoinBoundary.coneEvaluate",
+   "SSet.JoinBoundary.Collage",
+   "SSet.JoinBoundary.endpoint",
+   "SSet.JoinBoundary.openBox",
+   "SSet.JoinBoundary.simplexCoordinates",
+   "SSet.JoinBoundary.splitCube",
+   "SSet.JoinBoundary.coneSimplex",
+   "SSet.JoinBoundary.Cubes",
+   "SSet.JoinBoundary.boundaryDiagram",
+   "SSet.JoinBoundary.boundaryValue",
+   "SSet.JoinBoundary.CompatiblePairs",
+   "SSet.JoinBoundary.Extensions",
+   "SSet.JoinBoundary.Represents",
+   "SSet.JoinBoundary.ExtensionClauses",
+   "SSet.JoinBoundary.join_boundary_cubical_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/JoinBoundaryCubicalExtension.lean",
+  "statement": "theorem join_boundary_cubical_extension : ∃ (O : Objects.{u}) (C : Cross O), C.IsCanonical ∧ C.IsNatural ∧ C.BlocksAndActions ∧ Collage.{u, v} O ∧ ∀ m : ℕ, ∃ B : Cubes O m, ∀ (Y : SSet.{u}) (D : Type v) [EnrichedCategory SSet.{u} D] (H : EnrichedFunctor SSet (PinchedCube.rigidification.obj (join (SSet.boundary (m + 1)) Y)) D), ExtensionClauses C B Y D H",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the recorded simplex-colimit rigidification, ordered join and cube boundary. All coordinate witnesses are existential conclusions normalized on simplex units and collapse maps; no definition chooses data from the theorem. The target enrichment has independent object universe v and mapping universe u. Parameterized enriched natural families define the actual transformation simplicial set. The bijection is stated as a mutual unique-filler relation normalized by restriction/transposition, fixing the entire boundary functor. Added statement dependencies own the reused join inclusions and cube definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5380fee7",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read the node, all five statement-dependency records and their Lean declarations (rigidification, coherentSimplexUnit, boundaryCube/Subcomplex/Inclusion, orderedJoinFunctor/Inl/Inr, joinPointTopSimplex), and the full 492-line module. Every clause renders exactly: Objects/Cross/Cubes witnesses are uniquely pinned by normalizations (no choice); IsCanonical fixes the cross iso as the collapse pair; blocks, no backward maps, factor actions and collage bijection are correct; transformations is real data, and u0/beta/c are determined by diagonal evaluation; Q, dQ, V and the coordinate order (n last) are correct; overlap equation and mutual unique correspondence fixing all of H are present. No Kan/nonempty assumptions; independent universes u,v. Edge cases n=1, n=2, empty Y/X/D and z0=zn hold. Statement verbatim; only lean and stmt_deps changed (+3 landed reviewed owners, no cycle). Docstrings with source/blueprint and 8-step proof; sole sorry; report has both sections. nt_compile.py --json: 22 deps plus item compiled, exit 0, no errors or warnings, 4.4 s."
  }
 }

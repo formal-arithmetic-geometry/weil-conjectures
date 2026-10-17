@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
   "def-coef-simplicial-tensor-cotensor",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-coef-simplicial-model-realization",
+  "def-coef-simplicial-realization-map"
  ],
  "proof": [
   {
@@ -333,5 +335,53 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-170bd7484 (reviewer sub-agent of L); spot-checked: Read the item, all 14 steps, the four cited definitions (simplicial set, simplicial object, colimit, simplicial tensor/cotensor), the parent lem-coef-reedy-realization-prism step 1, and Dugger's Primer. Dugger is not in literature/; I fetched the PDF read-only and ran pdftotext into /tmp. Source places confirmed: formula (3.2) on printed p.9; Sk_n coequalizer, colim = |X| and the latching/boundary pushout square in the proof of Theorem 3.5 on printed p.10; tensor adjunctions in §19.1 on printed p.90. Dugger's latching object is a union of degeneracy images in Top. The item uses the categorical latching colimit over proper surjections instead, which is the correct generalization, and marks the proof as agent-written. The statement is true for an arbitrary simplicial object with no cofibrancy, and nothing in it is weakened. I recomputed every step: arrow directions in the latching diagram; D_theta = D_theta'(X(rho) ⊗ 1); E_delta = E_delta'(1 ⊗ Delta^gamma); the mixed overlap through the relation for theta∘delta in degrees below n; agreement on B_n is equivalent to the surjection and injection equations; the epi-mono factorization covers all relations of R_n, including endomorphisms of [n]; unique extension; n = 0; the explicit inverse for colim R_N ≅ |X|; naturality. Small cases tested: n = 0; constant X gives R_1 = R_0; the discrete Delta^1 gives R_1 = Delta^1; latching maps need not be monic. Only definitions are cited (two Mathlib-status, one in the item's own unit), so there is no route issue and no tool_uses are needed. Duplicate check: grepped dag/nodes for latching, skeletal and coend, and read six candidates in full (full-coend realization, Reedy model structure, direct weak factorization systems, coherent-realization relative cells, bisimplicial Reedy calculus, cofibrant colimit comparison); none states this lemma. All four kinds of Mathlib search are recorded, with no match. No new nodes, no SGA, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TensorCoendSkeletalPushouts",
+  "declaration": "CategoryTheory.TensorCoendSkeletal.tensor_coend_skeletal_pushouts",
+  "declarations": [
+   "CategoryTheory.TensorCoendSkeletal.tensor_interchange",
+   "CategoryTheory.TensorCoendSkeletal.Degree",
+   "CategoryTheory.TensorCoendSkeletal.Operator",
+   "CategoryTheory.TensorCoendSkeletal.relationLeft",
+   "CategoryTheory.TensorCoendSkeletal.relationRight",
+   "CategoryTheory.TensorCoendSkeletal.stage",
+   "CategoryTheory.TensorCoendSkeletal.stageι",
+   "CategoryTheory.TensorCoendSkeletal.stageMap_exists",
+   "CategoryTheory.TensorCoendSkeletal.stageMap",
+   "CategoryTheory.TensorCoendSkeletal.stageMap_laws",
+   "CategoryTheory.TensorCoendSkeletal.sequence",
+   "CategoryTheory.TensorCoendSkeletal.LatchingIndex",
+   "CategoryTheory.TensorCoendSkeletal.latchingDiagram",
+   "CategoryTheory.TensorCoendSkeletal.latching",
+   "CategoryTheory.TensorCoendSkeletal.latchingCocone",
+   "CategoryTheory.TensorCoendSkeletal.latchingTo",
+   "CategoryTheory.TensorCoendSkeletal.latchingMap",
+   "CategoryTheory.TensorCoendSkeletal.boundaryLeft",
+   "CategoryTheory.TensorCoendSkeletal.boundaryRight",
+   "CategoryTheory.TensorCoendSkeletal.attaching",
+   "CategoryTheory.TensorCoendSkeletal.attachingTo",
+   "CategoryTheory.TensorCoendSkeletal.IsUpperMap",
+   "CategoryTheory.TensorCoendSkeletal.upperMap_exists",
+   "CategoryTheory.TensorCoendSkeletal.upperMap",
+   "CategoryTheory.TensorCoendSkeletal.toRealization_exists",
+   "CategoryTheory.TensorCoendSkeletal.toRealization",
+   "CategoryTheory.TensorCoendSkeletal.IsAttachingMap",
+   "CategoryTheory.TensorCoendSkeletal.tensor_coend_skeletal_pushouts"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TensorCoendSkeletalPushouts.lean",
+  "statement": "theorem tensor_coend_skeletal_pushouts (T : SimplicialTensorCotensor C) : (∀ X : SimplicialObject C, Nonempty (IsInitial (stage T X 0))) ∧ (∀ (X : SimplicialObject C) (n : ℕ), IsUpperMap T X n (upperMap T X n) ∧ IsPushout (upperMap T X n) (attachingTo T X n) (stageMap T (𝟙 X) (Nat.le_succ n)) (stageι T X (n + 1) ⦋n⦌ (Nat.lt_succ_self n))) ∧ (∀ X : SimplicialObject C, ∃ e : colimit (sequence T X) ≅ SimplicialModelRealization.realization T X, (∀ n : ℕ, colimit.ι (sequence T X) n ≫ e.hom = toRealization T X (n + 1)) ∧ (∀ (Y : SimplicialObject C) (f : X ⟶ Y) (eY : colimit (sequence T Y) ≅ SimplicialModelRealization.realization T Y), (∀ n : ℕ, colimit.ι (sequence T Y) n ≫ eY.hom = toRealization T Y (n + 1)) → ∃! c : colimit (sequence T X) ⟶ colimit (sequence T Y), (∀ n : ℕ, colimit.ι (sequence T X) n ≫ c = stageMap T f (le_refl (n + 1)) ≫ colimit.ι (sequence T Y) n) ∧ c ≫ eY.hom = e.hom ≫ SimplicialModelRealization.map T f)) ∧ (∀ {X Y : SimplicialObject C} (f : X ⟶ Y) (n : ℕ), ∃! b : attaching T X n ⟶ attaching T Y n, IsAttachingMap T f n b ∧ b ≫ upperMap T Y n = upperMap T X n ≫ stageMap T f (le_refl n) ∧ b ≫ attachingTo T Y n = attachingTo T X n ≫ T.tensorMap (SSet.stdSimplex.obj ⦋n⦌) (f.app (op ⦋n⦌)))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f97f3a65",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Read node, 5 stmt deps and their side-clone modules (SimplicialTensorCotensor, tensorTranspose, SimplicialModelRealization, ...Map), delivered module, report. Clause check: bounded coequalizer stage k (stage n+1 = R_n, stage 0 = R_{-1} initial) with all operators of both degrees < k; latching index = op of full Under [n] subcategory of epis with len<n, diagram X(rho), legs X(theta); B_n = actual pushout of 1⊗ι and λ⊗1 on SSet.boundary; IsUpperMap fixes theta and every proper mono face component (lift unique and exists), ∃! carries overlaps; IsPushout top/left/right/bottom orientation correct for all n incl. 0; canonical comparison colim R_n ≅ |X| fixed on all legs; naturality of the squares and the iso via the recorded realization map. No extra hypotheses (HasColimits.{v} same as dependency), u/v independent, no cofibrancy. H4: no Mathlib latching, project Reedy/direct/pinched latching APIs not this notion (Reedy needs HasLimits), no DAG latching node; worker's duplicate parameterMap removed. Node diff only lean plus landed stmt_deps (allowed). 6 sorries = 6 named theorems with step docstrings; no hollow defs; docstrings, line widths, declarations list and verbatim statement checked. nt_compile.py: exit 0, no errors or warnings, 3.9 s."
  }
 }

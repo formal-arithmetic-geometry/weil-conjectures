@@ -232,5 +232,23 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-bd10eb9a9 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Kerodon online (02MA, Proposition 6.3.5.14; 02M2, Corollary 6.3.5.5); Kerodon is not under literature/ and the report lists it as WANTED. Item: its statement is unchanged against the live side copy and matches 02MA hypothesis by hypothesis. Both faces are degreewise pushouts, only the 0-legs are monomorphisms, all three vertical maps are universally localizing, and no quasicategory hypothesis is imposed. New node lem-coef-universal-localization-degenerate-edges matches 02M2: same degenerate-image edge set W_f, every quasicategory target. It is genuinely non-elementary (it needs 02M1) and statement-only. It is not a duplicate: I searched dag/nodes for 'universally localizing' and for degenerate together with localization, and the only hits are the item, the definition, contractible-factor-universal-localization, localization-homotopy-category and brown-right-exact-extension, none of which states it. Small cases: identity, Δ^1→Δ^0, and the empty map, which is not universally localizing. Steps 1–2 (pullback stability, pullback commuting with the pushouts, monomorphisms preserved) are elementary and correct, checked including empty and collapsing legs. Steps 3–6 check against the cited statements: the exponentiation node's isofibration clause has no hypothesis on the indexing simplicial sets, M_0→M_01 is an isofibration through fullness, the componentwise criterion and the mapping-composition criterion, and M is a strict pullback because all the subcategories are full. Step 7 had one fault (C1/C3): it used an uncited claim that postcomposing cones with an equivalence of diagrams gives equivalent cone categories. I fixed it by rewriting step 7 to cite the same-unit lem-coef-infinity-terminal-pullback-criterion (limiting squares are invariant under equivalences of cospan diagrams; comparisons are natural in maps of cones), together with a Yoneda argument through Fun(Q,-)^≃ that gives a quasi-inverse. The new citation creates no cycle, and proof_deps is updated. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, generic quasicategory calculus from unit sk-prop-sf-cbc. There is no SGA source and no target statement is affected. The fix is at fixes/dag/nodes/sec-six-functors/lem-coef-universal-localization-pushout.json; details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UniversalLocalizationPushout",
+  "declaration": "SSet.Enhanced.isUniversallyLocalizing_pushout_map",
+  "file": "lean/Sheaf/CategoryTheory/UniversalLocalizationPushout.lean",
+  "statement": "theorem isUniversallyLocalizing_pushout_map {A₀₁ A₀ A₁ B₀₁ B₀ B₁ : SSet.{u}} (a₀ : A₀₁ ⟶ A₀) (a₁ : A₀₁ ⟶ A₁) (b₀ : B₀₁ ⟶ B₀) (b₁ : B₀₁ ⟶ B₁) (f₀₁ : A₀₁ ⟶ B₀₁) (f₀ : A₀ ⟶ B₀) (f₁ : A₁ ⟶ B₁) (h₀ : a₀ ≫ f₀ = f₀₁ ≫ b₀) (h₁ : a₁ ≫ f₁ = f₀₁ ≫ b₁) (ha₀ : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (a₀.app n)) (hb₀ : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (b₀.app n)) (hf₀₁ : IsUniversallyLocalizing.{u, v} f₀₁) (hf₀ : IsUniversallyLocalizing.{u, v} f₀) (hf₁ : IsUniversallyLocalizing.{u, v} f₁) : IsUniversallyLocalizing.{u, v} (pushout.map a₀ a₁ b₀ b₁ f₀ f₁ f₀₁ h₀ h₁)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73a3e4130",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Statement matches node and Kerodon 02MA clause by clause: six arbitrary SSet.{u} sets, two spans, strict commuting squares, degreewise injectivity on the subscript-0 legs only (degree 0 included), three IsUniversallyLocalizing.{u,v} hypotheses, conclusion on Mathlib's canonical pushout.map (argument order checked), same v throughout, no universe equality, no quasicategory or other extra hypotheses. Edge cases covered: empty overlap, all empty, identities, collapsing legs, non-injective vertical maps, non-quasicategory shapes. Gates: no definitions, single theorem by sorry, source and blueprint docstrings, all 7 proof steps verbatim (script check), stmt_deps imported publicly and proof deps privately, degenerate-edges node has no lean record so it is cited only in the proof plan. Node copy identical to the live side node except lean; lean.statement verbatim equals the file signature. No duplicate: lem-coef-localization-monomorphic-pushout is a different statement. Worker report and Q27 second reading present. nt_compile.py --json against the live library and side overlay: rc 0, no errors, module 1.8 s, max line 98. No findings."
  }
 }

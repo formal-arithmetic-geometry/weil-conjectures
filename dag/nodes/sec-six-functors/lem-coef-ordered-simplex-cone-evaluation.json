@@ -11,7 +11,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-cube-latching",
   "lem-coef-cone-presheaf-adjunction",
-  "lem-coef-simplicial-projective-model-calculus"
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-cone-boundary-projective-cells",
+  "def-coef-infinity-fibrations"
  ],
  "proof": [
   {
@@ -242,5 +244,51 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-5ee28011f (reviewer sub-agent of L); spot-checked: Read the whole item, the statements of all five cited nodes (cone-presheaf-adjunction, cone-boundary-projective-cells, pinched-cube-latching, simplicial-projective-model-calculus, def-cbc-enhanced-diagrams-cones), parent Steps 5-7, and HTT at the cited places: the Q description after Example 2.2.2.5 (p.76), Remark 2.2.2.11, the tail formula in the proof of Lemma 2.2.3.1 (p.79) and Lemma 2.2.3.7 (p.83). HTT was read from a reading copy already on the machine; the archival copy is still WANTED, as the report says. The statement is faithful: the labels change by i=n-j, the transition maps go the right way for the contravariant diagram, and HTT gives the raw tail formula for every X, so the item rightly has no fibrancy hypothesis. a_! exists because a is a Dwyer-Kan equivalence, so the cited projective-model node supplies it. Steps 2-3 identify a_!L(Delta^m)(j) with the coend over T=f^{-1}[j,n] of the B_t, using the statement of cone-boundary-projective-cells (old part is A, M(v,c) empty, M(v,v) a point). Steps 4-5 check the cover by K_t, agreement on overlaps (g union z) and the pinching relation in both directions. Step 6 covers non-injective beta (direct image) and the j<=k inclusion. Step 7 is density and is rightly marked elementary. Step 8 checks the fiber over the constant simplex (Q^m below j, empty above). Step 9 checks the actual adjunct q -> b_j([sigma,q]); it relies on the canonical bijection of L_S -| U_S, which that node's definition of U_S forces. Small cases checked: n=0, X=Delta^0 (gives the representable), n=m=1 (gives Q^1=Delta^1, matching the cube description), constant simplices, empty X and empty tails. No new nodes. The DAG search for the tail formula found no duplicate statement. All citations are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OrderedSimplexConeEvaluation",
+  "declaration": "SSet.OrderedSimplexConeEvaluation.ordered_simplex_cone_evaluation",
+  "declarations": [
+   "SSet.OrderedSimplexConeEvaluation.V",
+   "SSet.OrderedSimplexConeEvaluation.SingQ",
+   "SSet.OrderedSimplexConeEvaluation.tailHom",
+   "SSet.OrderedSimplexConeEvaluation.tail",
+   "SSet.OrderedSimplexConeEvaluation.vertexHom",
+   "SSet.OrderedSimplexConeEvaluation.fiberAt",
+   "SSet.OrderedSimplexConeEvaluation.tailMap",
+   "SSet.OrderedSimplexConeEvaluation.fiberMap",
+   "SSet.OrderedSimplexConeEvaluation.tailShift",
+   "SSet.OrderedSimplexConeEvaluation.tailInclusion",
+   "SSet.OrderedSimplexConeEvaluation.fiberToTail",
+   "SSet.OrderedSimplexConeEvaluation.OrderedDiagram",
+   "SSet.OrderedSimplexConeEvaluation.ordinal",
+   "SSet.OrderedSimplexConeEvaluation.orderAction",
+   "SSet.OrderedSimplexConeEvaluation.ordinalIndex",
+   "SSet.OrderedSimplexConeEvaluation.diagramAction",
+   "SSet.OrderedSimplexConeEvaluation.diagramTransition",
+   "SSet.OrderedSimplexConeEvaluation.restrictDiagram_laws",
+   "SSet.OrderedSimplexConeEvaluation.restrictDiagram",
+   "SSet.OrderedSimplexConeEvaluation.restrictDiagramHom_naturality",
+   "SSet.OrderedSimplexConeEvaluation.restriction",
+   "SSet.OrderedSimplexConeEvaluation.Data",
+   "SSet.OrderedSimplexConeEvaluation.Data.Ulin",
+   "SSet.OrderedSimplexConeEvaluation.ordered_simplex_cone_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OrderedSimplexConeEvaluation.lean",
+  "statement": "theorem ordered_simplex_cone_evaluation (n : ℕ) : Nonempty (Data.{u} n) ∧ ∃ qAdj : V.{u} ⊣ SingQ.{u}, (∀ (K B : SSet.{u}) (f : V.obj K ⟶ B) (m : SimplexCategory) (σ : SSet.stdSimplex.obj m ⟶ K), ((qAdj.homEquiv K B) f).app (op m) (SSet.yonedaEquiv σ) = (SSet.stdSimplex.{u}.leftKanExtensionUnit SSet.PinchedCube.qFunctor.{u}).app m ≫ V.map σ ≫ f) ∧ ∀ D : Data.{u} n, ∃ (e : ∀ (X : Over (Δ[n] : SSet.{u})) (j : Fin (n + 1)), (D.Llin.obj X).obj (op j) ≅ V.obj (tail X j)) (i : ∀ (H : OrderedDiagram n) (j : Fin (n + 1)), fiberAt (D.Ulin.obj H) j ≅ SingQ.obj (H.obj (op j))), (∀ (X Y : Over (Δ[n] : SSet.{u})) (f : X ⟶ Y) (j : Fin (n + 1)), (D.Llin.map f).app (op j) ≫ (e Y j).hom = (e X j).hom ≫ V.map (tailMap f j)) ∧ (∀ (X : Over (Δ[n] : SSet.{u})) (j k : Fin (n + 1)) (h : j ≤ k), (D.Llin.obj X).map (homOfLE h).op ≫ (e X j).hom = (e X k).hom ≫ V.map (tailInclusion X j k h)) ∧ (∀ (X : Over (Δ[n] : SSet.{u})) (H : OrderedDiagram n) (b : D.Llin.obj X ⟶ H) (j : Fin (n + 1)), fiberMap ((D.adjunction.homEquiv X H) b) j ≫ (i H j).hom = (qAdj.homEquiv (fiberAt X j) (H.obj (op j))) (V.map (fiberToTail X j) ≫ (e X j).inv ≫ b.app (op j)))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading repaired the arbitrary adjoint-pair input, absent naturality, bare transition-map existence, and True adjunct clause. Data now specifies the existing changed-index cone pushout on values, ordered action, and slice maps, with existence asserted. The right adjoint is unique up to the canonical adjoint isomorphism. The theorem gives coherent tail and fiber isomorphisms, both naturality equations, and the actual adjunct equation for the generator-normalized coend adjunction. V aliases the existing Kan-extension coend; fiberAt aliases the existing strict fiber. Added two already-landed dependency nodes for these constructions; no mathematical statement correction. The discrete finite ordinal uses Mathlib TransportEnrichment along the constant simplicial-set functor, avoiding a downstream helper dependency. Maintainer review fix: Data no longer carries an arbitrary right adjoint; its adjunction is with the node's U^lin = U a^*, i.e. the new restriction functor along the collapse (restrictDiagram/restriction, transition maps of H on the discrete ordinal) followed by the recorded ConePresheaf.right, and Data.Ulin abbreviates that composite. The theorem signature is unchanged.",
+  "fixed_by": "NT-stage2-cc-9e183f54f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e183f54f",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Delivery correct in substance except H3: the delivered Data let Ulin be an arbitrary right adjoint of the cone-pushout model, so nothing tied it to the node's U^lin = U_{Δ^n} a^* (the fiber clause is about (U a^* H)_j; citer lem-coef-unstraightening-simplex-dk-equivalence needs U h for h : F → a^*H). Fix adds a^* as real data (ordinalIndex, diagramAction, diagramTransition, restrictDiagram, restriction), with postponed law/naturality helper theorems following the landed ConePresheaf.restriction_laws pattern. Data's adjunction is now Llin ⊣ restriction collapse ⋙ ConePresheaf.right Δ[n] and Data.Ulin abbreviates it; theorem signature and lean.statement unchanged. Clause-by-clause check otherwise exact: tail iso with naturality, transitions as V of the tail inclusion, actual adjunct equation, generator-normalized V ⊣ SingQ, reuse of existing coend/fiber/cone, no fibrancy, one bound universe u, edge cases n=0, j=0, j=n, j=k and empty inputs. Gates pass. Delivered and fixed modules both compile with exit 0 and no errors or warnings through nt_compile.py (3.0 s and 3.4 s). fixes/: OrderedSimplexConeEvaluation.lean, lem-coef-ordered-simplex-cone-evaluation.lean-record.json, lem-coef-ordered-simplex-cone-evaluation.report.md."
  }
 }

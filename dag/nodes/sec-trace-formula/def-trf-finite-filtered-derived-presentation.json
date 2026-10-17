@@ -1,0 +1,124 @@
+{
+ "id": "def-trf-finite-filtered-derived-presentation",
+ "kind": "definition",
+ "title": "Presentations of finite filtered bounded below derived categories",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], with cochain complexes and $D^+(\\mathcal C)$ as in [def-weil-abstract-derived-category]. Let $CF_f^+(\\mathcal C)$ be the category of bounded-below cochain complexes with a decreasing filtration by subcomplexes [def-sp-filtration] and [def-sp-filtered-complex-subquotients] such that $F^aK=K$ and $F^bK=0$ for some integers $a,b$ independent of cochain degree. Its morphisms preserve every filtration step, with induced graded maps as in [lem-sp-finite-filtration-induction]. Put $W=\\{f: \\operatorname{gr}^p f\\text{ is a quasi-isomorphism for every }p\\}$. A presentation of $DF_f^+(\\mathcal C)$ is a category $\\mathcal D$ with a localization functor $Q:CF_f^+(\\mathcal C)\\to\\mathcal D$ at $W$, equipped with its induced triangulated structure [def-weil-triangulated-category] and the descended exact functors $\\omega,\\operatorname{gr}^p:\\mathcal D\\to D^+(\\mathcal C)$. These functors come with their natural factorizations on complexes and chain maps. The induced triangulation means exactly the triangles isomorphic to the images of filtered cone triangles. A shifted representative has underlying complex $K[1]$ and the shifted filtration. The cone of $f:K\\to L$ has underlying complex $C(f)$, filtration $F^p C(f)^n=F^pK^{n+1}\\oplus F^pL^n$, and the ordinary cone inclusion and connecting map. The specified localization shift comparisons identify the shifted representative with $(QK)[1]$. For integers $a,b$, write $\\operatorname{Supported}_{[a,b]}(M)$ if $\\operatorname{gr}^p M=0$ for $p<a$ or $p>b$, where zero means zero in the derived category. On the full pure-degree-$p$ subcategory, the canonical natural comparison $\\operatorname{gr}^p M\\simeq\\omega M$ is normalized on complexes with $F^pK=K$ and $F^{p+1}K=0$ by the subobject inclusion and cokernel projection. Presentations carry this normalized comparison; they supply no lift of any ordinary functor.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-weil-triangulated-category",
+  "lem-sp-finite-filtration-induction"
+ ],
+ "source": {
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Sections 5.1.1(a)--(e), 5.1.2(a)--(c), pp.39--40; finite filtered bounded-below case, canonical shift/cone representatives and pure-degree normalization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact functors on filtered derived categories preserving filtration intervals commute with associated graded functors",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary derived functors, no finite filtered localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Filtered\", \"DerivedCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredDerived|filteredDerived",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization of finite filtered bounded below complexes associated graded and forgetful functors",
+   "results": "8 hits: HomologicalComplex.forget, HomologicalComplex.forget_obj, CategoryTheory.GradedObject.instHasForget, HomologicalComplex.instFaithfulGradedObjectForget, CategoryTheory.GradedObject.instHasForget₂, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HomologicalComplexUpToQuasiIso, HomologicalComplexUpToQuasiIso.Q",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary complexes, graded objects, and ordinary derived localization"
+  },
+  {
+   "tool": "grep",
+   "query": "DAG: finite filtered bounded below derived category presentation; blueprint_refs.py search \"filtered derived\"",
+   "results": "def-trf-bounded-filtered-derived-category is specialized to bounded constructible pro-etale sheaves and DF(Ab). lem-trf-filtered-truncation-triangle states properties and has no Lean binding. No definition node supplies this general DF+ presentation. blueprint search returned det-sf-comparison-affine-continuity and sk-prop-sf-comparison, neither defines it.",
+   "date": "2026-10-17",
+   "verdict": "new general definition needed"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-filtered-functor-graded-comparison",
+  "date": "2026-10-17",
+  "group": "Q47"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-trace-additivity-open-closed",
+   "place": "The DF+ notation, induced triangulation, forgetful functor and associated graded functors in the graded comparison statement.",
+   "via": [
+    "lem-trf-filtered-functor-graded-comparison",
+    "lem-trf-filtered-derived-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteFilteredDerivedPresentation",
+  "declaration": "CategoryTheory.FiniteFilteredDerived.Presentation",
+  "declarations": [
+   "CategoryTheory.FiniteFilteredDerived.Complexes",
+   "CategoryTheory.FiniteFilteredDerived.gradedQuasiIso",
+   "CategoryTheory.FiniteFilteredDerived.Localization",
+   "CategoryTheory.FiniteFilteredDerived.quotient",
+   "CategoryTheory.FiniteFilteredDerived.ShiftRepresentative",
+   "CategoryTheory.FiniteFilteredDerived.IsConeTriangle",
+   "CategoryTheory.FiniteFilteredDerived.Presentation",
+   "CategoryTheory.FiniteFilteredDerived.Supported"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteFilteredDerivedPresentation.lean",
+  "statement": "structure Presentation",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3f5200d4",
+  "group": "Q47",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3f5200d4",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Read item, all stmt deps, new def node, both modules, report (Worker report + Second reading by Q47 present), Varshavsky 5.1.1-5.1.4 pp.39-41. Every clause matches: Lift = triangulated G, G~ with interval preservation for all [a,b] and phi: omega G~ ≅ G omega; LiftsTransformation = phi2∘omega(h~) = (h omega)∘phi1; theta natural isos for all p with pure-degree normalization; graded square (5.1.4(ii)); IsIso h → IsIso a (5.1.4(iii), checked true for any Presentation); identity/composite functor and transformation coherence. theta is uniquely determined by the pure normalization + naturality (zigzag F^pK→K, F^pK→gr^p), so the existential is canonical. Presentation is non-hollow (real Mathlib localization, cone filtration F^pK^{n+1}⊕F^pL^n and shift filtration checked, omega/gr pinned on objects and maps). IsFinite is uniform finiteness as in 5.1.1(a). Not a duplicate of Q03's def-trf-finite-filtered-localization (homotopy-category model, filtrations finite per degree rather than uniformly). Item node changes only stmt_deps(+new def) and lean; statement verbatim; new node fields per §5; docstrings and source places present; lines ≤100. Both files compiled separately via nt_compile.py --json (5.4s, 2.9s), no errors or warnings; only the main theorem uses sorryAx. Observation: the family uses one common universe for all categories, documented and needed for one coherent theta family across composites; theta is unique and consumers live in one universe; not a fault."
+ }
+}

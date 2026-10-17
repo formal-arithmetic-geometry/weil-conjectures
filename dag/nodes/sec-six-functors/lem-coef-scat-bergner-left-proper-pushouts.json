@@ -281,5 +281,29 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-b6b680d19 (reviewer sub-agent of L); spot-checked: I read HTT Prop. A.3.2.4 and its proof in a local text extraction (/tmp/q112htt/htt.txt, printed pp.858-860). It gives a left proper model structure on Cat_S when every object of S is cofibrant, which covers sSet. The item's DK-pushout statement (arbitrary object functions, no Kan hypothesis) is that left properness, not weakened. New node lem-coef-scat-arrow-cell-word-filtration matches HTT p.859-860 word by word: the words MC_k, the reduction relation, the length filtration and the N_k⊆M_k pushout. I checked it is true through unique normal forms (U(L) has no composable non-identity arrows), including the cases x=y, K empty, K=L, empty homs and functors that identify objects. It is statement-only and introduces its own objects, with searches of all three kinds and the correct blueprint from/via. It does not duplicate free-factor-normal-form, the signed-word nodes, the fixed-object free calculus or fixed-object left properness. Steps 1-9: I-inj equals the Bergner trivial fibrations under the coherent-nerve definitions, giving the retract under A; cells are serialized by the colimit universal property; the isolated-object case; finite products of weak equivalences through realization; clause (b) of the cofibrant colimit comparison (only the right legs need to be cofibrations); clause (c) for omega and for limit tails; unions at limit stages; the arrow-category retract. All hypotheses were checked against the cited statements. Every cited statement is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle and no SGA source. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialCategoryBergnerLeftProper",
+  "declaration": "CategoryTheory.scat_bergner_left_proper_pushouts",
+  "declarations": [
+   "CategoryTheory.bergnerPushout",
+   "CategoryTheory.bergnerPushoutInr",
+   "CategoryTheory.scat_bergner_left_proper_pushouts"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialCategoryBergnerLeftProper.lean",
+  "statement": "theorem scat_bergner_left_proper_pushouts (N : CoherentNerveComparisonStatement.{u}) : ∀ {A B D : SCat.{u}} (u : A ⟶ B) (i : A ⟶ D), N.bergner.model.categoryWithWeakEquivalences.weakEquivalences u → N.bergner.model.categoryWithCofibrations.cofibrations i → N.bergner.model.categoryWithWeakEquivalences.weakEquivalences (bergnerPushoutInr N u i)",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "note": "The helper bergnerPushout/bergnerPushoutInr installs the cocompleteness field from N.bergner to form the canonical SCat pushout without adding a model or fibrancy hypothesis.",
+  "by": "NG",
+  "date": "2026-10-17"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9474305b2",
+  "group": "NG",
+  "result": "pass",
+  "note": "Matched every clause of the node and HTT A.3.2.4. N : CoherentNerveComparisonStatement.{u} follows the project convention for citers. The weak-equivalence and cofibration classes are pinned to Dwyer-Kan equivalences and LLP against trivial fibrations by BergnerModelData.weak_iff_dwyer_kan and cofibrations_iff_left_lifting, so they do not depend on N. The conclusion is about the pushout.inr D -> B ⊔_A D, in the right direction. No extra hypothesis; single universe u. The helpers bergnerPushout/bergnerPushoutInr are Mathlib's pushout via N.bergner.cocomplete: a probe shows the coprojection equals pushout.inr by rfl and the square IsPushout. lean.statement is verbatim; the node differs from the side DAG only in its lean field; source and blueprint docstrings and the 9-step proof docstring are present; only sorry. No duplicate: fixed_object_scat_left_proper is the fixed-object-set version. nt_compile.py --json (side overlay) compiles the module clean in 1.8 s, and the probe compiles. Report has Worker report and Second reading by NG. No findings."
  }
 }
