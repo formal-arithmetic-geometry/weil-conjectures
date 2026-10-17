@@ -131,6 +131,7 @@ theorem isPerfPair_degreewisePoincarePairing (γ : TateOrientation Λ a d)
   rw [hg x]
   rfl
 
+omit [LocallyOfFiniteType a] in
 /-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality (degreewise form,
 finite-field case).
 
@@ -142,7 +143,6 @@ is proper, then for `i + j = 2d` the degreewise pairing
 
 that is `⟨-, -⟩_i` read on `H^i(X, K) = Hom(Λ_s, (Ra_* K)[i])` through `Ra_! ≅ Ra_*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), is perfect. -/
-omit [LocallyOfFiniteType a] in
 theorem isPerfPair_degreewisePoincarePairing_of_isProper [IsProper a]
     (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (i j : ℤ) (hij : i + j = 2 * d)
