@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-ringed-derived-monoidal-comparisons",
+ "kind": "statement",
+ "title": "Monoidal and adjunction normalization of derived ringed-topos comparisons",
+ "statement": "Let $X\\xrightarrow fY\\xrightarrow gZ$ be morphisms of ringed topoi [def-weil-pbc-ringed-topos-morphism], presented by sites small in the universe of [def-weil-size-convention], with sheaves of commutative rings $A_X,A_Y,A_Z$. Use the ordinary unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], the K-flat derived tensor and pullbacks of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the K-injective direct images and normalized comparisons $\\kappa_{g,f}:R(gf)_*\\xrightarrow{\\sim}Rg_*Rf_*$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Write $P_h=Lh^*$, $R_h=Rh_*$, and give $P_h\\dashv R_h$ the canonical derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact]. Write $t_h:P_h(U\\otimes^L V)\\xrightarrow{\\sim}P_hU\\otimes^LP_hV$ for the canonical tensor comparison, and $e_h:P_hA_{\\mathrm{target}}\\xrightarrow{\\sim}A_{\\mathrm{source}}$ for its unit comparison.\n\nThese comparisons make $P_h$ a symmetric strong monoidal functor: $t_h,e_h$ commute with the derived tensor associators, both unitors, and the symmetry. The associator is induced by $(x\\otimes y)\\otimes z\\mapsto x\\otimes(y\\otimes z)$ and the symmetry by $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ in degrees $p,q$.\n\nThere is a canonical comparison $c_{f,g}:P_{gf}\\xrightarrow{\\sim}P_fP_g$, computed by ordinary module pullback composition on K-flat complexes with flat terms. It is monoidal: for $U,V\\in D(A_Z)$,\n$$t_{f;P_gU,P_gV}\\circ P_f(t_{g;U,V})\\circ c_{f,g,U\\otimes^LV}=(c_{f,g,U}\\otimes^Lc_{f,g,V})\\circ t_{gf;U,V},$$\nand $e_f\\circ P_f(e_g)\\circ c_{f,g,A_Z}=e_{gf}$. The comparison $\\kappa_{g,f}$ is adjunction-compatible: under $c_{f,g}$ and $\\kappa_{g,f}$ the canonical adjunction for $gf$ is the composite adjunction [def-weil-pbc-composite-adjunction]. In particular its counit is\n$$\\varepsilon_{gf,E}=\\varepsilon_{f,E}\\circ P_f(\\varepsilon_{g,R_fE})$$\nunder those comparisons. The canonical comparisons $P_{\\mathrm{id}}\\cong\\mathrm{id}$ and $R_{\\mathrm{id}}\\cong\\mathrm{id}$ identify the tensor comparisons and the adjunction with those of the identity functor and identity adjunction. Finally, if two ringed-topos morphisms with the same source and target are related by a 2-isomorphism of their underlying geometric morphisms whose structural ring maps commute with that 2-isomorphism, then this specified isomorphism induces a monoidal isomorphism of their derived pullbacks and the corresponding adjunction-compatible isomorphism of their derived direct images. All these assertions hold without flatness of the structural ring maps or boundedness of the complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); the tensor and adjunction normalization of these representative-defined comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*[Mm]onoidal|[Mm]onoidal.*derived|counit_comp|comp_counit",
+   "results": {
+    "hits": 12,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+     "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary sheaf/presheaf pullback composition or abstract monoidal adjunction identities, not the normalization of K-flat/K-injective unbounded ringed-topos derived comparisons",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived pullback ringed sites preserves tensor associators symmetry and composite adjunction counits",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pullback",
+     "PresheafOfModules.pullback_assoc",
+     "CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc",
+     "SheafOfModules.pullback_assoc",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.instIsLeftAdjointPullback"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary sheaf/presheaf pullback composition or abstract monoidal adjunction identities, not the normalization of K-flat/K-injective unbounded ringed-topos derived comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"comp\"",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.comp",
+     "CategoryTheory.Adjunction.comp_map_bijective_iff",
+     "CategoryTheory.Adjunction.left_triangle_components",
+     "CategoryTheory.Adjunction.map_comp_bijective_iff",
+     "CategoryTheory.Adjunction.right_triangle_components",
+     "CategoryTheory.Adjunction.compCoyonedaIso",
+     "CategoryTheory.Adjunction.compUliftCoyonedaIso",
+     "CategoryTheory.Adjunction.left_triangle_components_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary sheaf/presheaf pullback composition or abstract monoidal adjunction identities, not the normalization of K-flat/K-injective unbounded ringed-topos derived comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived pullback of modules on ringed topoi is symmetric strong monoidal and its composition comparison is monoidal and conjugate to derived pushforward composition",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackComp",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "PresheafOfModules.pullbackComp",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackObjUnitToUnit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary sheaf/presheaf pullback composition or abstract monoidal adjunction identities, not the normalization of K-flat/K-injective unbounded ringed-topos derived comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat derived extension of scalars tensorator respects associativity braiding and composition and K injective pushforward composition is its adjunction mate",
+   "results": {
+    "hits": 8,
+    "top": [
+     "comonadicExtendScalars",
+     "CategoryTheory.Tor'_obj_map",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "CategoryTheory.Tor'_obj_obj",
+     "CategoryTheory.Tor'_map_app",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: hits give ordinary sheaf/presheaf pullback composition or abstract monoidal adjunction identities, not the normalization of K-flat/K-injective unbounded ringed-topos derived comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-projection-tensor-composition",
+  "date": "2026-10-17",
+  "group": "Q106"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Second identity: moving the outside tensor factor through projection maps; canonical tensor and composite-adjunction comparisons required by the First identity along the diagonal",
+   "via": [
+    "lem-sfb-ringed-projection-tensor-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

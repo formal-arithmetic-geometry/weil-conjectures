@@ -11,9 +11,122 @@
   "def-weil-triangulated-category",
   "def-weil-t-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $m$. Clause (1) of [lem-weil-heart-short-exact-triangles], applied to either category, gives the truncation triangles and the adjunctions. Explicitly, for $U\\in\\mathcal D^{\\le m}$ and $V\\in\\mathcal D^{\\ge m}$, the functions\n$$\\operatorname{Hom}(U,\\tau^{\\le m}M)\\xrightarrow{\\iota^m_M\\circ-}\\operatorname{Hom}(U,M),\\qquad\n\\operatorname{Hom}(\\tau^{\\ge m}M,V)\\xrightarrow{-\\circ\\pi^m_M}\\operatorname{Hom}(M,V)$$\nare bijections. These are the counit and unit formulations of the stated adjunctions; in particular equality after the displayed composition implies equality before it. All truncation symbols below carry the category of their argument, and $\\alpha^{\\pm}_{F,K}$ abbreviates $\\alpha^{\\pm}_{F,m,K}$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i), pp. 29–30: adjunctions and their canonical maps"
+   }
+  },
+  {
+   "text": "Apply $F$ to the canonical distinguished triangle at the cut $(m,m+1)$ in $\\mathcal C$. Exactness in [def-weil-triangulated-category], using the given shift comparison in the last arrow, gives a distinguished triangle\n$$F\\tau^{\\le m}K\\xrightarrow{F\\iota^m_K}FK\\longrightarrow F\\tau^{\\ge m+1}K\\longrightarrow(F\\tau^{\\le m}K)[1].$$\nThe endpoint bounds follow from [def-weil-t-structure] and the two preservation hypotheses on $F$. Clause (1) of [lem-weil-heart-short-exact-triangles] therefore identifies this triangle with the canonical truncation triangle of $FK$, by an isomorphism equal to the identity on $FK$. Its first component gives an isomorphism $\\alpha^-_{F,K}$ with $\\iota^m_{FK}\\alpha^-_{F,K}=F\\iota^m_K$. The first bijection in step 1, with $U=F\\tau^{\\le m}K$, shows that this equation determines its component uniquely, even among all morphisms.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-t-structure",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(ii), pp. 29–30, applied to the image of the triangle at cut m"
+   }
+  },
+  {
+   "text": "For the other sign use the cut $(m-1,m)$: the image triangle has endpoints $F\\tau^{\\le m-1}K\\in\\mathcal D^{\\le m-1}$ and $F\\tau^{\\ge m}K\\in\\mathcal D^{\\ge m}$. The same exactness definition and clause (1) of [lem-weil-heart-short-exact-triangles] give an isomorphism of this triangle with the canonical triangle of $FK$, identical on $FK$. Its third component is an isomorphism $\\alpha^+_{F,K}$ satisfying $\\alpha^+_{F,K}F\\pi^m_K=\\pi^m_{FK}$. Moreover for every $V\\in\\mathcal D^{\\ge m}$, precomposition with $F\\pi^m_K$ is a bijection\n$$\\operatorname{Hom}(F\\tau^{\\ge m}K,V)\\longrightarrow\\operatorname{Hom}(FK,V):$$\nindeed any map on the left is uniquely $b\\alpha^+_{F,K}$ for a map $b:\\tau^{\\ge m}FK\\to V$, and its composite is $b\\pi^m_{FK}$, to which step 1 applies. Taking $V=\\tau^{\\ge m}FK$ proves uniqueness of the lower comparison. These arguments apply to every functor in the statement, including $G$, $H$, and $HF$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-t-structure",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i),(ii), pp. 29–30, at cut m−1; the unit universal property"
+   }
+  },
+  {
+   "text": "Let $u:K\\to L$. For the upper comparison, naturality of $\\iota^m$ and its characterization give\n$$\\iota^m_{FL}\\alpha^-_{F,L}F(\\tau^{\\le m}u)=F(u)F(\\iota^m_K)\n=\\iota^m_{FL}\\tau^{\\le m}(F(u))\\alpha^-_{F,K}.$$\nThe common source $F\\tau^{\\le m}K$ lies in $\\mathcal D^{\\le m}$. The injectivity from clause (1)'s right adjunction, written in step 1, cancels postcomposition with $\\iota^m_{FL}$ and gives naturality of $\\alpha^-_F$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i): elementary counit calculation using the right adjunction"
+   }
+  },
+  {
+   "text": "For the lower comparison compute\n$$\\alpha^+_{F,L}F(\\tau^{\\ge m}u)F(\\pi^m_K)=\\pi^m_{FL}F(u)\n=\\tau^{\\ge m}(F(u))\\alpha^+_{F,K}F(\\pi^m_K).$$\nHere the first equality uses naturality of $\\pi^m$ in $\\mathcal C$ and the second uses it in $\\mathcal D$. The common target $\\tau^{\\ge m}FL$ lies in $\\mathcal D^{\\ge m}$, so the left-adjunction injectivity established in step 3 cancels precomposition with $F(\\pi^m_K)$. This proves naturality of $\\alpha^+_F$. In both signs the componentwise inverses are natural: multiply the naturality equation on the left and right by the relevant inverse components. Thus these natural transformations are natural isomorphisms, and componentwise uniqueness gives uniqueness as natural isomorphisms.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i): elementary unit calculation using the left adjunction"
+   }
+  },
+  {
+   "text": "For an arbitrary natural transformation $\\eta:F\\Rightarrow G$, the two upper-sign morphisms in the asserted square satisfy\n$$\\iota^m_{GK}\\alpha^-_{G,K}\\eta_{\\tau^{\\le m}K}\n=G(\\iota^m_K)\\eta_{\\tau^{\\le m}K}\n=\\eta_K F(\\iota^m_K)\n=\\iota^m_{GK}\\tau^{\\le m}(\\eta_K)\\alpha^-_{F,K}.$$\nNaturality of $\\eta$ gives the middle equality; naturality of $\\iota^m$ gives the last. Since $F\\tau^{\\le m}K\\in\\mathcal D^{\\le m}$, step 1's injectivity gives the upper-sign compatibility. No shift compatibility of $\\eta$ is used.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i): elementary uniqueness calculation for a natural transformation, upper sign"
+   }
+  },
+  {
+   "text": "For the lower sign the two morphisms become equal after precomposition with $F(\\pi^m_K)$, because\n$$\\alpha^+_{G,K}\\eta_{\\tau^{\\ge m}K}F(\\pi^m_K)\n=\\alpha^+_{G,K}G(\\pi^m_K)\\eta_K\n=\\pi^m_{GK}\\eta_K\n=\\tau^{\\ge m}(\\eta_K)\\alpha^+_{F,K}F(\\pi^m_K).$$\nNaturality of $\\eta$ and then of $\\pi^m$ justifies the equalities. The target $\\tau^{\\ge m}GK$ is in $\\mathcal D^{\\ge m}$, so step 3's bijection cancels this precomposition. This proves the lower-sign compatibility for arbitrary $\\eta$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i): elementary uniqueness calculation for a natural transformation, lower sign"
+   }
+  },
+  {
+   "text": "For $F=\\operatorname{id}$ the identity of $\\tau^{\\le m}K$ satisfies $\\iota^m_K\\operatorname{id}=\\iota^m_K$, and the identity of $\\tau^{\\ge m}K$ satisfies $\\operatorname{id}\\pi^m_K=\\pi^m_K$. The uniqueness proved in steps 2 and 3 therefore identifies both comparisons with the identity, naturally in $K$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i): elementary identity calculation and uniqueness"
+   }
+  },
+  {
+   "text": "Let $\\beta^{\\pm}_K=\\alpha^{\\pm}_{H,FK}\\circ H(\\alpha^{\\pm}_{F,K})$. These are natural isomorphisms, since each factor is one. For the upper sign,\n$$\\iota^m_{HFK}\\beta^-_K\n=H(\\iota^m_{FK})H(\\alpha^-_{F,K})=HF(\\iota^m_K).$$\nFor the lower sign,\n$$\\beta^+_K HF(\\pi^m_K)\n=\\alpha^+_{H,FK}H(\\alpha^+_{F,K}F(\\pi^m_K))\n=\\alpha^+_{H,FK}H(\\pi^m_{FK})=\\pi^m_{HFK}.$$\nHere the inner truncations and canonical maps are in $\\mathcal D$ and the outer ones in $\\mathcal B$. The composite $HF$ is exact with its composite shift comparison and preserves both halves: apply the corresponding properties first for $F$, then for $H$. Uniqueness in steps 2 and 3 for $HF$ gives $\\beta^{\\pm}=\\alpha^{\\pm}_{HF,m}$, as required.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i),(ii): elementary composition calculation and uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-triangulated-category",
+  "def-weil-t-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Elementary t-exact-functor consequence of Proposition 1.3.3(i),(ii), pp. 29–30; exact/t-exact terminology in 1.3.16, p. 36. The natural-transformation and composition equations are written out by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +176,52 @@
    "results": "2 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean",
    "date": "2026-10-17",
    "verdict": "no match: general triangulated-functor and truncation infrastructure only; no declaration supplies both canonical comparisons with their characterization and coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*[Ii]so|[Ii]so.*trunc|IsTExact",
+   "results": "25 hits: Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean, Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the results give truncation maps, changes of cutoff, or preservation of distinguished triangles, not the two comparisons for a t-exact functor with the asserted characterizations and coherences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A t-exact functor between triangulated categories commutes naturally with both truncation functors, compatibly with truncation maps",
+   "results": "8 hits: CategoryTheory.Functor.IsTriangulated, ComplexShape.Embedding.truncGEFunctor, ChainComplex.truncate, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Triangulated.TStructure.truncLT, ComplexShape.Embedding.truncLEFunctor, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Triangulated.TStructure.triangleLTGE",
+   "date": "2026-10-17",
+   "verdict": "no match: the results give truncation maps, changes of cutoff, or preservation of distinguished triangles, not the two comparisons for a t-exact functor with the asserted characterizations and coherences"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTExact",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.IsTExact'",
+   "date": "2026-10-17",
+   "verdict": "no match: the results give truncation maps, changes of cutoff, or preservation of distinguished triangles, not the two comparisons for a t-exact functor with the asserted characterizations and coherences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t-exact triangulated functor between categories with t-structures commutes naturally with upper and lower truncation functors",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.truncGEδLT, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Triangulated.TStructure.truncLTι, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.isTriangulated_iff_comp_right, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.map_distinguished",
+   "date": "2026-10-17",
+   "verdict": "no match: the results give truncation maps, changes of cutoff, or preservation of distinguished triangles, not the two comparisons for a t-exact functor with the asserted characterizations and coherences"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*[Ii]so|[Ii]so.*trunc|IsTExact",
+   "results": "20 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean ; subdirectory CategoryTheory/Triangulated/TStructure",
+   "date": "2026-10-17",
+   "verdict": "no match: the results give truncation maps, changes of cutoff, or preservation of distinguished triangles, not the two comparisons for a t-exact functor with the asserted characterizations and coherences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural comparison from a triangulated functor applied to canonical truncation is an isomorphism if the functor preserves the nonpositive and nonnegative subcategories; comparisons respect natural transformations and composition",
+   "results": "8 hits: CategoryTheory.Functor.mapTriangleCompIso, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.isTriangulated_iff_of_iso, CategoryTheory.Pretriangulated.Triangle.functorIsoMk', CategoryTheory.Triangulated.TStructure.truncLTι, CategoryTheory.Functor.isTriangulated_of_precomp_iso, CategoryTheory.Functor.isTriangulated_of_iso, CategoryTheory.Pretriangulated.Triangle.functorIsoMk",
+   "date": "2026-10-17",
+   "verdict": "no match: the results give truncation maps, changes of cutoff, or preservation of distinguished triangles, not the two comparisons for a t-exact functor with the asserted characterizations and coherences"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-constructible-truncations",
@@ -83,5 +238,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-texact-truncation-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the two comparison isomorphisms from the existing closed truncation-triangle uniqueness and adjunction lemma; wrote both naturality equations, arbitrary-natural-transformation compatibility, identity and composition calculations explicitly. No new nodes, no change to the statement, no Lean writing or compilation. Current Mathlib searches and a second semantic phrasing found only the underlying infrastructure.",
+  "blueprint": "prop-constructible-truncations: proof sentence beginning “Being characterized by the vanishing of cohomology sheaves” and final automorphism sentence. This generic lemma supplies the comparison only after preservation of both t-structure halves has been established, as required by its hypotheses."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-142d67722",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-142d67722 (reviewer sub-agent of L); spot-checked: Read the full item, all nine steps, cited statements, BBD 1.3.3 and 1.3.16, and blueprint routes. Both comparisons and all coherence equations check out; small cases confirm the t-exactness hypotheses are necessary. No new nodes, duplicates, missing dependencies, cycles, or repairs. Concrete checks recorded in review.md."
  }
 }

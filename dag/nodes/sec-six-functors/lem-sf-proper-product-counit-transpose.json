@@ -12,48 +12,89 @@
   "def-exchange-projection",
   "def-sf-pf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The maps $p,q$ are base changes of $g,f$, respectively, and $t=gq$ is proper by [lem-weil-pbc-proper-fp-permanence](a),(b). Work in the finite-Tor categories supplied by [def-sf-datum], and use the canonical proper normalization in the statement. The identification of functors in (A4) alone is not used as an identification of arbitrary transformations. For the specified exchange, [fix-lem-exchanges](1),(4) allows the proper compactification $(\\mathrm{id},f)$ in [def-exchange-projection]; its open base-change factor is the identity, so the normalized compact-support exchange is the ordinary counit mate. The projection transformations agree with the ordinary counit-defined projection maps under the proper identifications by [fix-prop-projection-formula] and [def-sf-pf]. These comparisons concern the specified transformations, including their completed and transported versions on the supplied coefficient domains.\nAbbreviate $Lu^*,Ru_*,\\otimes^L_\\Lambda$ by $u^*,u_*,\\otimes$, put $H=p^*K$, and write $b:g^*F\\to q_*H$ for this exchange and $d=\\pi_{q;H,L}\\circ(b\\otimes1_L)$. All tensor and pullback-composition comparisons below are those of [lem-pur-derived-pullback-tensor-iso]. The projection definition [def-exchange-projection] is\n$$\\pi_{u;V,W}=u_*a_{u;V,W}\\circ\\eta_{u,u_*V\\otimes W},\\qquad a_{u;V,W}=(\\varepsilon_{u,V}\\otimes1_{u^*W})\\circ\\mu_u.$$\nCounit naturality and the triangle identity of [fix-prop-adjunctions](1) give\n$$\\varepsilon_{u,V\\otimes u^*W}\\circ u^*\\pi_{u;V,W}=a_{u;V,W}.$$\nIndeed naturality moves $u_*a$ past the counit, leaving $a\\circ\\varepsilon_{u,u^*(u_*V\\otimes W)}\\circ u^*\\eta_{u,u_*V\\otimes W}=a$. Apply this with $(u,V,W)=(q,H,L)$ and use naturality of $\\mu_q$. The exchange definition gives $\\varepsilon_{q,H}\\circ q^*b=p^*\\varepsilon_{f,K}$ under $q^*g^*\\cong p^*f^*$. Therefore\n$$\\varepsilon_{q,D}\\circ q^*d=((\\varepsilon_{q,H}\\circ q^*b)\\otimes1_{q^*L})\\circ\\mu_q=(p^*\\varepsilon_{f,K}\\otimes1_{q^*L})\\circ\\mu_q.$$\nThis is precisely the intermediate transpose in the statement. It is the transpose of the composite with the projection map; no transpose of the ill-typed isolated tensor of the exchange is asserted.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-sf-datum",
+    "def-exchange-projection",
+    "def-sf-pf",
+    "fix-lem-exchanges",
+    "fix-prop-projection-formula",
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Final sentence: transpose of the proper product map given by the two counits (returned step 2)"
+   }
+  },
+  {
+   "text": "Continue in the notation and proper coordinates of Step 1. Put $a=\\Psi_g(F,L)$, so $a=g_*\\sigma_{L,g^*F}\\circ\\pi_{g;L,F}\\circ\\sigma_{F,G}$. Apply the projection calculation of Step 1 with $(u,V,W)=(g,L,F)$. Counit naturality and compatibility of the monoidal comparison with signed symmetry [lem-pur-derived-pullback-tensor-iso] give\n$$\\varepsilon_{g,g^*F\\otimes L}\\circ g^*a=\\sigma_{L,g^*F}\\circ(\\varepsilon_{g,L}\\otimes1_{g^*F})\\circ\\sigma_{g^*F,g^*G}=1_{g^*F}\\otimes\\varepsilon_{g,L}.$$\nThe last equality uses naturality of symmetry and $\\sigma_{B,A}\\circ\\sigma_{A,B}=1$; thus the two signed swaps leave no residual sign. Let $c:g_*q_*\\xrightarrow{\\sim}t_*$ be the supplied composition comparison in the adjunction-compatible normalization specified in the statement. By the definition of $\\lambda$ its ordinary expression is $c_D\\circ g_*d\\circ a$. The composite-counit formula of [fix-prop-adjunctions](3), equivalently the composite-adjunction pasting formula [lem-weil-pbc-mate-pasting](2), reads\n$$\\varepsilon_{t,D}\\circ t^*c_D=\\varepsilon_{q,D}\\circ q^*\\varepsilon_{g,q_*D}.$$\nSubstitution and counit naturality yield\n$$\\begin{aligned}\n\\varepsilon_{t,D}\\circ t^*\\lambda\n&=\\varepsilon_{q,D}\\circ q^*d\\circ q^*(1_{g^*F}\\otimes\\varepsilon_{g,L})\\\\\n&=(p^*\\varepsilon_{f,K}\\otimes1_{q^*L})\\circ(1_{p^*f^*F}\\otimes q^*\\varepsilon_{g,L})\\\\\n&=p^*\\varepsilon_{f,K}\\otimes q^*\\varepsilon_{g,L}.\n\\end{aligned}$$\nHere Step 1 supplies the second line, with the natural monoidal and pullback-composition comparisons of [lem-pur-derived-pullback-tensor-iso] inserted. Its source is $t^*(F\\otimes G)\\cong p^*f^*F\\otimes q^*g^*G$ and its target is $D$. This is the displayed $c_{f,g}$. The argument uses only the supplied adjunctions and comparison maps, so applies at each coefficient stage in [def-sf-datum] and [def-exchange-projection]: completed operations at $\\mathcal O_E$, rationalization at $E$, and compatible common finite stages at $\\overline{\\mathbf Q}_\\ell$. It does not infer equality of integral maps from finite reductions or use a reduction functor from a field coefficient category.",
+   "uses": [
+    "def-exchange-projection",
+    "def-sf-datum",
+    "fix-prop-adjunctions",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Final sentence: transpose of the proper product map given by the two counits (returned step 2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-sf-datum",
+  "def-sf-pf",
+  "fix-lem-exchanges",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Final sentence: transpose of the proper product map given by the two counits (returned step 2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "For proper scheme morphisms the composite of projection formula and Cartesian base change is adjoint to the tensor product of the pulled back adjunction counits",
-   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc The scheme module adjunction and Over-category exponentiable adjunction are not this proper derived external-product transpose. Day-convolution externalProduct is pointwise diagram tensor.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc. These concern scheme-module or over-category adjunctions, not the derived proper external-product transpose.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"projectionFormula\", \"counit\"",
-   "results": "0 hits.  The scheme module adjunction and Over-category exponentiable adjunction are not this proper derived external-product transpose. Day-convolution externalProduct is pointwise diagram tensor.",
+   "query": "projectionFormula, counit, tensor",
+   "results": "0 hits; projectionFormula is unknown to Loogle.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "projectionFormula|projection_formula|externalProduct",
-   "results": "25 hits. Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean. Directory Mathlib/CategoryTheory. The scheme module adjunction and Over-category exponentiable adjunction are not this proper derived external-product transpose. Day-convolution externalProduct is pointwise diagram tensor.",
+   "query": "projectionFormula|projection_formula|externalProduct|counit (CategoryTheory)",
+   "results": "25 hits in Mathlib/CategoryTheory, mostly generic counitIso and unrelated Day-convolution/external-product declarations; none is the derived proper external-product transpose.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "The relative derived proper direct image external product comparison transposes to the tensor of the two counits",
-   "results": "8 hits. TensorProduct.counit_def; Bialgebra.TensorProduct.counitAlgHom_def; TensorProduct.counit_tmul; CoalgCat.MonoidalCategoryAux.counit_tensorObj; Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap; CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derivedε.congr_simp The scheme module adjunction and Over-category exponentiable adjunction are not this proper derived external-product transpose. Day-convolution externalProduct is pointwise diagram tensor.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The mate of a Beck Chevalley exchange followed by the projection transformation for a fiber product is the pulled back counit tensored with identity",
-   "results": "8 hits. CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit The scheme module adjunction and Over-category exponentiable adjunction are not this proper derived external-product transpose. Day-convolution externalProduct is pointwise diagram tensor.",
+   "query": "The mate of a Beck Chevalley exchange followed by projection formula for a proper fiber product is the tensor of the two pulled back counits",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app; CategoryTheory.ChosenPullbacksAlong.Over.fst_eq_fst'; CategoryTheory.mateEquiv; CategoryTheory.ExponentiableMorphism.ev; CategoryTheory.MorphismProperty.Over.mapPullbackAdj_counit_app; CategoryTheory.Dial.tensorHomImpl; TensorProduct.counit_tmul. None states the geometric derived comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-kunneth-coherence",
@@ -70,5 +111,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-proper-product-counit-transpose",
+  "worker": "stage1",
+  "summary": "Two explicit counit calculations prove the intermediate q-transpose and the total transpose. Proper exchange and projection normalization are cited from existing comparison statements, and the tensor-source comparisons and cancellation of signed symmetries are displayed. The statement is unchanged; no new nodes are needed.",
+  "blueprint": "The two steps realize the final sentence of lem-sf-kunneth-coherence.proof.md: the mate identity for PF composed with exchange after reduction to proper morphisms, including the intermediate q-transpose and the final two-counit transpose.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic signed symmetric-monoidal pullback and composition comparisons are used to identify the tensor source and preserve Koszul signs."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic mate pasting identifies the exchange/projection composite and the outer composition comparison with the pasted counit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-19509a4e8",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-19509a4e8 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, sources, and route in full. Added existing proper exchange/projection comparison citations, expanded the typed counit calculations and signed-symmetry cancellation, repaired malformed TeX, and corrected proof provenance. Statement unchanged; no new nodes or cycles. Corrected JSON and concrete source/edge-case checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
  }
 }

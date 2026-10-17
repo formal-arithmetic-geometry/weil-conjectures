@@ -12,9 +12,104 @@
   "lem-coef-infinity-pinch-comparison",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $n$-simplex $k:\\Delta^n\\to K$ and every $h:\\Delta^n\\times\\Delta^1\\to C$ with endpoints $i(b),c$, apply the simplicial map $T$ to $(k,h)$ and obtain $(z,s)\\mapsto T(k(z),h(z,s))$. Its source endpoint is $t(b)$ by $T\\circ(\\mathrm{id}_K\\times i)=t\\circ\\operatorname{pr}_B$, and its target is $T(k(z),c)$, so it is a simplex of the pullback source-fixed arrow left fibration defining $A^T_{b,c}$. The base is $k$. Restriction along every simplex operator in $\\Delta$ commutes with this formula, so these assignments define the stated simplicial map $\\Phi_{b,c}$ over $K$; this is the degreewise expansion of the internal-functor and pullback definitions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05R5",
+    "place": "Definition 7.4.2.2 and the simplicial formula for the source-fixed arrow left fibration"
+   }
+  },
+  {
+   "text": "The coherent mapping bifunctor supplied by space-valued transport is functorial in both variables, including all higher simplices. For each $k$ it sends an arrow $\\alpha:i(b)\\to c$ to $T(k,\\alpha):t(b)\\to T(k,c)$. Because the restriction of $T$ to $K\\times B$ is the displayed constant map, the source of this arrow is independent of $k$ and the assignments for all $k$ assemble into a coherent transformation $\\varepsilon_{b,c}:\\Delta_KH_C(i(b),c)\\to H_E(t(b),T(-,c))$. Applying the same construction to simplices in $B^{\\mathrm{op}}\\times C$ proves coherent naturality in $b,c$; no vertexwise replacement is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05R5",
+    "place": "Theorem 7.4.2.4 and Remark 7.4.2.5, with the Hom-functor compatibilities of Subsection 8.3.5"
+   }
+  },
+  {
+   "text": "Use the transport classification for the source-fixed arrow left fibration of $E$: its pullback along $T(-,c)$ is precisely $q^T_{b,c}$, while the constant functor with value $H_C(i(b),c)$ is represented by $K\\times H_C(i(b),c)\\to K$. The mapping-space comparison in that classification therefore sends $\\varepsilon_{b,c}$ to a map over $K$ from the constant representative to $A^T_{b,c}$. Under the mapping-space identification $H_C(i(b),c)=M_{b,c}$, the right-pinch comparison sends an $n$-simplex to its arrow simplex on $\\Delta^n\\times\\Delta^1$. Evaluating this arrow by $T$ gives exactly $(z,s)\\mapsto T(k(z),h(z,s))$, hence the resulting map over $K$ is $\\Phi_{b,c}\\circ(\\mathrm{id}_K\\times j_{C,i(b),c})$. The equality holds in every degree, so it is an identification of full mapping spaces with their higher homotopies.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05R5",
+    "place": "Proposition 7.4.2.6 and Corollary 7.4.2.17, compared with Corollary 8.3.5.8 (046J) and Remark 8.3.5.9 (03PD)"
+   }
+  },
+  {
+   "text": "The comparison in the preceding step is coherent in $b,c$ because the transport node makes its mapping-space equivalence coherent in both functors and the pinch node makes $j$ natural under every simplicial functor. Thus a simplex of $B^{\\mathrm{op}}\\times C$ carries to the corresponding simplex of maps over $K$, not merely to an equality of vertices. If $r:K'\\to K$, pulling back $q^T_{b,c}$ and the displayed formula along $r$ replaces $k$ by $r k$ and commutes strictly with both sides; the pullback clauses of the two cited classifications give the same conclusion. Enlarging the containing universe leaves the formulas and these identifications unchanged.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05R5",
+    "place": "Remark 7.4.2.5 and Proposition 7.4.2.6, parameter and universe naturality"
+   }
+  },
+  {
+   "text": "For an edge $u:c\\to c'$ of $C$, transport in the second variable sends $\\alpha:i(b)\\to c$ to $u\\circ\\alpha$, while the family $T$ sends it to $T(k,u)\\circ T(k,\\alpha)$. The simplicial functor identity $T(k,u\\circ\\alpha)=T(k,u)\\circ T(k,\\alpha)$ makes the square with upper map $\\Delta_K(u\\circ -)$, lower map $H_E(t(b),T(-,u))$, and vertical maps $\\varepsilon_{b,c},\\varepsilon_{b,c'}$ commute degree by degree. The same calculation on a simplex of the parameter gives the specified coherent homotopy, and the transport comparison identifies it with the corresponding square of maps over $K$.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05R5",
+    "place": "Corollary 8.3.5.8 (046J), Remark 8.3.5.9 (03PD), and Definition 7.4.2.2"
+   }
+  },
+  {
+   "text": "For an edge of $B$, transport in the first variable acts by precomposition: an arrow $v:b'\\to b$ sends $\\alpha:i(b)\\to c$ to $\\alpha\\circ i(v)$ and sends the target-side arrow through $t(v)$. The equality on $K\\times B$ gives $T(k,\\alpha\\circ i(v))=T(k,\\alpha)\\circ t(v)$, so the analogous precomposition square commutes on every simplex. This proves the asserted $B$-naturality together with its higher coherent homotopies.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05R5",
+    "place": "Hom-functor precomposition compatibility in Subsection 8.3.5 and Definition 7.4.2.2"
+   }
+  },
+  {
+   "text": "If $K$ is empty, the constant representative and every map over $K$ are the unique empty simplicial maps, so the construction still gives the claimed transformation. If a mapping space or a fiber is empty, the formulas define maps of the corresponding possibly empty simplicial sets and do not require a chosen point. None of the preceding steps asserts that $\\varepsilon_{b,c}$ or a section space is an equivalence; they establish only the displayed identification and naturality, as required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05R5",
+    "place": "Definitions 7.4.2.1--7.4.2.2 and the stated no-equivalence edge cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/05R5",
+  "place": "Agent-formulated relative evaluation proof from Definition 7.4.2.2, Proposition 7.4.2.6, Corollary 7.4.2.17, Corollary 8.3.5.8 (046J), and Remark 8.3.5.9 (03PD); no archived source was available."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +152,38 @@
    "results": "{\"t\": \"2026-10-17T11:42:47Z\", \"tool\": \"grep\", \"query\": \"constCompEvaluationObj|evaluationUncurried|def compEvaluation\", \"sub\": \"CategoryTheory/Products\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Products/Basic.lean\", \"Mathlib/CategoryTheory/Products/Basic.lean\", \"Mathlib/CategoryTheory/Products/Basic.lean\", \"Mathlib/CategoryTheory/Products/Basic.lean\"], \"digest\": \"54b1153e87204a70\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits concern ordinary categories, simplicial constants, or closure of internal Hom under quasicategories; none identifies a parameterized Hom transformation with its map of left-fibration total spaces. Read Mathlib/CategoryTheory/Products/Basic.lean:245-258,357-362 and AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean. These give evaluation for ordinary categories and quasicategory closure, respectively."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An evaluation functor K times C to E which is constant on K times B induces a natural transformation from constant Hom spaces to the Hom diagram, compatible with unstraightening and composition",
+   "results": "CategoryTheory.CostructuredArrow.CreatesConnected.natTransInCostructuredArrow; CategoryTheory.compEvaluation_hom_app; CategoryTheory.Functor.constCompEvaluationObj_hom_app; CategoryTheory.evaluationUncurried_map; CategoryTheory.Grothendieck.ιNatTrans",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category evaluation and Grothendieck constructions do not state the parameterized quasicategorical left-fibration comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between coherent mapping bifunctors induced by a simplicial family of functors and its map on source-fixed arrow left fibrations",
+   "results": "CategoryTheory.Sigma.natTrans.sigma; CategoryTheory.bifunctorComp₁₂FunctorMap; CategoryTheory.nerveMap; CategoryTheory.SimplicialObject.whiskering_map_app_app",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category or nerve natural transformations, with no source-fixed arrow left-fibration transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftFibration\" \"Functor\"",
+   "results": "query parser error: Function expected at \"LeftFibration\" but this term has type String",
+   "date": "2026-10-17",
+   "verdict": "unavailable: malformed Loogle pattern; no candidate was returned"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation|transport|left fibration [in Mathlib/AlgebraicTopology/Quasicategory]",
+   "results": "Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:56 only (TransportEnrichment.enrichedOrdinaryCategory)",
+   "date": "2026-10-17",
+   "verdict": "no match: no quasicategorical evaluation/transport theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-constant-source-section-comparison",
@@ -72,7 +195,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Historical master proof paragraph 2, first and last R Hom / R inverse-limit comparisons: relative coherent evaluation needed to identify the cone map on whole mapping spaces; extracted from Steps 5 and 7 of lem-coef-infinity-constant-source-section-comparison.",
+   "place": "Historical master proof paragraph 2, first and last R Hom / R inverse-limit comparisons: the relative coherent evaluation identifies the cone map on full mapping spaces, including postcomposition and precomposition transport.",
    "via": [
     "lem-coef-infinity-constant-source-section-comparison",
     "lem-coef-infinity-yoneda-presheaf-limits",
@@ -86,5 +209,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-hom-evaluation",
+  "worker": "stage1",
+  "summary": "Split the relative Hom evaluation statement into the explicit simplicial construction of Phi, the coherent Hom transformation from the constant source condition, its right-pinch/transport identification, parameter and universe naturality, postcomposition and precomposition squares, and empty-case checks. No new DAG nodes were needed because all non-elementary imported notions are stated by the three existing dependencies.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint historical proof paragraph 2 clause requiring relative coherent evaluation for the first and last R Hom / R inverse-limit comparisons."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q89-8cdff6788",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-8cdff6788 (reviewer sub-agent of L); spot-checked: Read the full packet, item, unit route, ancestor blueprint proof, cited node statements, and Kerodon sources 05R5, 01L5, 03MR, 046J, and 03PD. Verified all seven proof steps, hypotheses, universe/coefficient conventions, pullback and pinch formulas, variance squares, edge cases, Mathlib searches, duplicate checks, and acyclicity. Wrote review.md; no fixes required."
  }
 }

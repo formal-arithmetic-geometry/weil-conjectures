@@ -13,9 +13,111 @@
   "def-coef-coherent-monad-modules",
   "lem-coef-enriched-simplicial-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the prescribed triangle $\\beta$ at $L$, whose successive edges are $L\\eta,\\epsilon L$ and whose long edge is $1_L$. The freeness clause of [lem-coef-walking-adjunction-cell-filtration] gives a simplicial functor $H_0:A_0\\to\\mathscr K$ sending the five generators to $L,U,\\eta,\\epsilon,\\beta$. Their boundaries agree by the specified adjunction data. Use the same lemma to fix its filtration $A_i$. The inductive assertion will be: $H_i:A_i\\to\\mathscr K$ is a simplicial functor restricting to $H_0$ on $A_0$, and each successor restricts to its predecessor.",
+   "uses": [
+    "lem-coef-walking-adjunction-cell-filtration",
+    "def-coef-coherent-adjunction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Example 4.2.3, Theorem 4.3.11, and Proposition 4.2.15"
+   }
+  },
+  {
+   "text": "Given $H_i$, restrict it along each type (i) attaching map in [lem-coef-walking-adjunction-cell-filtration]. A functor from $2[\\Lambda_k^n]$ is exactly a horn in the hom-simplicial set between the two chosen object images. This hom is a quasicategory, so its inner horn has a filler by [def-cbc-enhanced-diagrams-cones]. A filler defines the required functor from $2[\\Delta^n]$ agreeing on the horn. This uses only $0<k<n$, never an arbitrary outer-horn filler.",
+   "uses": [
+    "lem-coef-walking-adjunction-cell-filtration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Theorem 4.3.8, first case, and Observation 4.3.7"
+   }
+  },
+  {
+   "text": "For a type (ii) attachment, its boundary diagram under $H_i$ has $1\\to2$ equal to $L$. By the final-edge clause of [lem-coef-walking-adjunction-cell-filtration], the apex is $a=1_d$ or $a=L$, the last $0\\to1$ vertex is $Ua$, and the final cone edge is exactly $\\epsilon a$. These are equalities of simplices, because $H_i$ is a simplicial functor and already fixes $L,U,\\epsilon$. Apply [lem-coef-counit-cone-boundary-extension] with $z=d$ or $z=c$, respectively, to obtain an extension on $3[\\Delta^m]$ agreeing with every earlier boundary simplex. Its hypotheses use the given adjunction in the homotopy $2$-category and local quasicategoricality, with $m\\geq1$.",
+   "uses": [
+    "lem-coef-walking-adjunction-cell-filtration",
+    "lem-coef-counit-cone-boundary-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Theorem 4.3.8, second case; Observation 4.3.4 and Proposition 4.3.6"
+   }
+  },
+  {
+   "text": "For each finite family of attachments, the fillers of the preceding two steps and $H_i$ agree on every gluing domain. The pushout property in [lem-coef-walking-adjunction-cell-filtration] therefore defines $H_{i+1}$ with $H_{i+1}|_{A_i}=H_i$. This proves the inductive assertion, starting from step 1. On the union define $H(\\sigma)=H_i(\\sigma)$ whenever $\\sigma\\in A_i$. The restriction equalities make this independent of $i$. Each face, degeneracy or finite composite occurs in some common $A_i$, so its preservation follows there. Since the union is $\\mathsf{Adj}$, this constructs the asserted simplicial functor and fixes all the initial generators.",
+   "uses": [
+    "lem-coef-walking-adjunction-cell-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Proofs of Theorems 4.3.8 and 4.3.11: successive pushouts and their countable union"
+   }
+  },
+  {
+   "text": "Restrict $H$ to the object $c$ of the walking adjunction. Its hom is $D=N(\\Delta_+)$, as specified in the statement. The singleton, the empty-to-singleton map and the two-to-singleton map are respectively $u\\ell$, $\\eta$ and $u\\epsilon\\ell$. Their images are $UL$, $\\eta$ and $U\\epsilon L$. Composition and identities in a simplicial functor are preserved strictly in every degree; consequently ordinal sum and its empty unit act strictly. This is precisely the walking-monad diagram of [def-coef-coherent-monad-modules], with all its higher simplices given by restriction.",
+   "uses": [
+    "def-coef-coherent-monad-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Introduction 1.3 and section 6.1, restriction to Mnd"
+   }
+  },
+  {
+   "text": "On the hom from $d$ to $c$, set $h=H_{d,c}:W\\to\\mathscr K(d,c)$. For $v\\in D_r$ and $w\\in W_r$, simplicial functoriality gives $h(v\\cdot w)=H_{c,c}(v)\\circ h(w)$; thus $h$ is strictly $D$-equivariant in every degree. The singleton in $W$ is $u$, and the last-element-preserving collapse of the two-element ordinal is the whiskered counit $u\\epsilon$. Hence their images are $U$ and $U\\epsilon:ULU\\to U$. This checks the underlying action and its orientation against [def-coef-coherent-monad-modules]; all higher action and compatibility simplices are the corresponding images under $H$, rather than separately chosen homotopies.",
+   "uses": [
+    "def-coef-coherent-monad-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 3.3.6 and 6.1: restriction of the representable Adj(-,+)"
+   }
+  },
+  {
+   "text": "For a compatible enriched presentation take $\\mathscr K=\\mathscr P$ from [lem-coef-enriched-simplicial-presentation]. Its hom-quasicategories identify the whole simplicial sets of enriched functors and transformations, compatibly with composition and evaluation. Apply steps 1--6 inside that presentation. Thus the output simplices live in its enriched transformation homs. Evaluation of $h$ at $Y\\in E_d$ sends its singleton to $UY$ and its action edge to $U\\epsilon_Y$; degreewise evaluation supplies every higher action simplex as well. If coherent tensor comparisons are part of the input, the tensor-preserving version of the cited presentation retains those comparisons in its hom-quasicategories. Performing the same construction there retains them throughout. Forgetting those comparisons yields the preceding construction. No assertion about enriched coherence is inferred merely from an ordinary homotopy-category equality.",
+   "uses": [
+    "lem-coef-enriched-simplicial-presentation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Enriched specialization of Theorem 4.3.11 using the separately stated compatible presentation"
+   }
+  },
+  {
+   "text": "The construction fixed $\\beta$ because it was already in $A_0$. It imposes no equality with the other prescribed triangle witness: its image is the $2$-simplex subsequently produced when the relevant cell is attached. This is why both initially prescribed witnesses have not been asserted to extend together. If the chosen witness is instead the triangle at $U$, reverse the direction of all $1$-arrows and use the left adjoint $U^{\\mathrm{op}}$ with right adjoint $L^{\\mathrm{op}}$ in $\\mathscr K^{\\mathrm{op}}$; the same unit and counit now have the required reversed types. Reversing back the resulting diagram gives the original adjunction and fixes that witness. Reversal preserves each hom-simplicial set and strict composition, so this introduces no additional filling assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Theorem 4.3.11 and Remark 4.3.12; formal duality for the other choice"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-walking-adjunction-cell-filtration",
+  "def-coef-coherent-adjunction-data",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-counit-cone-boundary-extension",
+  "def-coef-coherent-monad-modules",
+  "lem-coef-enriched-simplicial-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+  "place": "Agent-written specialization of the cell induction of Riehl--Verity 4.3.8--4.3.11, with restrictions as in 6.1; online source read, archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +153,45 @@
    "results": "{\"t\": \"2026-10-17T12:04:15Z\", \"tool\": \"leanfinder\", \"query\": \"An adjunction between enriched infinity categories extends to a homotopy coherent simplicial walking adjunction retaining enriched unit and counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_counitIso\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"SSet.coskAdj\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_unitIso\"], \"digest\": \"d8d01a08e3dba5ef\"}",
    "date": "2026-10-17",
    "verdict": "no match: Monad/Adjunction.lean:43-61 toMonad and its comparison construct an ordinary monad and ordinary algebra functor; Bicategory/Adjunction/Cat.lean concerns ordinary categorical adjunctions. NerveAdjunction and TransportEnrichment hits do not extend adjunction data to a simplicial walking adjunction or retain higher enriched action simplices. Both semantic phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*adjunction|adjunction.*coheren|walking.*adjunction",
+   "results": "{\"t\": \"2026-10-17T12:59:13Z\", \"tool\": \"grep\", \"query\": \"coherent.*adjunction|adjunction.*coheren|walking.*adjunction\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary adjunction constructors in Adjunction/Basic.lean:461-470 and simplicial skeleton/coskeleton or nerve adjunctions do not extend a homotopy 2-category adjunction to a simplicial walking adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.EnrichedFunctor",
+   "results": "{\"t\": \"2026-10-17T12:59:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.EnrichedFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary adjunction constructors in Adjunction/Basic.lean:461-470 and simplicial skeleton/coskeleton or nerve adjunctions do not extend a homotopy 2-category adjunction to a simplicial walking adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Riehl Verity extension of homotopy coherent adjunction preserving unit counit and one triangle",
+   "results": "{\"t\": \"2026-10-17T12:59:13Z\", \"tool\": \"leansearch\", \"query\": \"Riehl Verity extension of homotopy coherent adjunction preserving unit counit and one triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Bicategory.Adjunction.mk.congr_simp\", \"CategoryTheory.Adjunction.mk\", \"CategoryTheory.Adjunction.unit_app_unit_comp_map_η\", \"CategoryTheory.Bicategory.LeftExtension.IsKan.adjunction\", \"CategoryTheory.Adjunction.CoreUnitCounit.noConfusionType\", \"CategoryTheory.Bicategory.LeftExtension.IsAbsKan.adjunction\", \"CategoryTheory.Bicategory.LeftLift.IsKan.adjunction\"], \"digest\": \"e07683523ae87bc4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary adjunction constructors in Adjunction/Basic.lean:461-470 and simplicial skeleton/coskeleton or nerve adjunctions do not extend a homotopy 2-category adjunction to a simplicial walking adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction data in a locally quasicategorical simplicial category extend to the walking coherent adjunction preserving one triangle witness",
+   "results": "{\"t\": \"2026-10-17T12:59:25Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction data in a locally quasicategorical simplicial category extend to the walking coherent adjunction preserving one triangle witness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.coskAdj\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialObject.skAdj\", \"CategoryTheory.Adjunction.localization\", \"SSet.Truncated.coskAdj.reflective\"], \"digest\": \"5a517291fa0487ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary adjunction constructors in Adjunction/Basic.lean:461-470 and simplicial skeleton/coskeleton or nerve adjunctions do not extend a homotopy 2-category adjunction to a simplicial walking adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*adjunction|adjunction.*coheren|walking.*adjunction",
+   "results": "{\"t\": \"2026-10-17T13:03:15Z\", \"tool\": \"grep\", \"query\": \"coherent.*adjunction|adjunction.*coheren|walking.*adjunction\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary adjunction constructors in Adjunction/Basic.lean:461-470 and simplicial skeleton/coskeleton or nerve adjunctions do not extend a homotopy 2-category adjunction to a simplicial walking adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-linear-monad-tensor-enrichment",
@@ -76,5 +213,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-coherent-adjunction-extension",
+  "worker": "stage1",
+  "summary": "Constructed the extension by a countable cell induction relative to the fixed unit, counit and one triangle. Two smaller source lemmas isolate the walking-adjunction cell combinatorics and the counit boundary-extension property. Restrictions yield the strict monad/module diagrams; the separately cited compatible presentation retains enriched and tensor-comparison simplices. No statement change and no Lean attachment.",
+  "blueprint": "Realizes the existing ancestor place: prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived mapping-complex adjunction before the inverse limit, through the enriched coefficient adjunction and its coherent monad/counit-module foundation."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-5c6da68cb",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-5c6da68cb (reviewer sub-agent of L); spot-checked: Read item, both new nodes, cited statements and Riehl–Verity source passages in full. Verified all eight steps, boundary dimensions, counit edges, triangle choice, monad/module orientation, enriched-presentation use, duplicate candidates and target coefficient distinctions. No repairs needed; detailed checks are in review.md."
  }
 }

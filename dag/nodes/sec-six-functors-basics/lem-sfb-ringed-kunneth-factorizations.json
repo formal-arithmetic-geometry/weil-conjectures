@@ -15,11 +15,95 @@
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $T=RM\\otimes^L RN$, $Z=AM\\otimes^L BN$, and write $F:T\\to RUZ$, $G:T\\to RSZ$ for the first and second displayed composites. Put $\\theta:BL\\xrightarrow{\\sim}AL$, $w:BU\\to1$, $s:AS\\to1$, and $v:LR\\to1$ for the comparison and the three counits. Let $d_B=(t_B)\\circ B(t_L)$ and $d_A=(t_A)\\circ A(t_L)$ denote the tensor comparisons for $BL$ and $AL$. The tensor-pullback node supplies the natural isomorphisms $t_L,t_A,t_B$. Apply [lem-sfb-ringed-comparison-tensor-adjunction] with $(f_1,g_1)=(a,q)$ and $(f_2,g_2)=(b,q)$. It gives the canonical $c:RS\\xrightarrow{\\sim}RU$, its adjunction compatibility, and\n$$d_A\\circ\\theta_T=(\\theta_{RM}\\otimes\\theta_{RN})\\circ d_B.$$\nAll these are ordinary unbounded ringed module categories; the two paths have the specified ringed commutation isomorphism, so the lemma's hypotheses hold.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-comparison-tensor-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+   }
+  },
+  {
+   "text": "The mate characterization of [def-weil-pbc-adjunction-mate] gives, with the orientations in the statement,\n$$w_{AM}\\circ B(\\beta_M)=A(v_M)\\circ\\theta_{RM},\\qquad s_{BN}\\circ A(\\bar\\beta_N)=B(v_N)\\circ\\theta_{RN}^{-1}.$$\nIndeed take $(L_1,R_1,L_2,R_2,G,H)=(L,R,B,U,L,A)$ for the first mate and $(L,R,A,S,L,B)$ for the second. The transformations to be mated are respectively $BL\\to AL$ and $AL\\to BL$. These are the node's explicit transpose formulas, with no claim that either mate is invertible.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+   }
+  },
+  {
+   "text": "Transpose $F$ first under $L\\dashv R$ and then under $B\\dashv U$, using [def-weil-pbc-composite-adjunction]. Denote the resulting map $BLT\\to Z$ by $F^\\flat$. In the displayed factor order the transpose of the first $\\pi_q$ is $(1_{LRM}\\otimes v_N)\\circ t_L$. The transpose of $\\pi_b:UAM\\otimes N\\to UZ$ is $(w_{AM}\\otimes1_{BN})\\circ t_B$, by the definition of $\\pi$ in [lem-weil-pbc-ringed-exchange-tensor-coherence]. Naturality of $w$ moves the last projection arrow out of the composite transpose, giving\n$$F^\\flat=(w_{AM}\\otimes1)\\circ t_B\\circ B(\\beta_M\\otimes1_N)\\circ B(1_{LRM}\\otimes v_N)\\circ B(t_L).$$\nNaturality of $t_B$ and bifunctoriality of tensor rewrite this as\n$$F^\\flat=(w_{AM}\\circ B\\beta_M\\;\\otimes\\;Bv_N)\\circ d_B=(Av_M\\circ\\theta_{RM}\\;\\otimes\\;Bv_N)\\circ d_B,$$\nwhere the last equality is step 2. This is an expansion of the particular three arrows of $F$, using neither exchange/projection invertibility nor a projection-formula theorem.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+   }
+  },
+  {
+   "text": "Similarly transpose $G$ successively under $L\\dashv R$ and $A\\dashv S$ and call the map $ALT\\to Z$ $G^\\flat$. Here the transpose of $\\pi_q$ is $(v_M\\otimes1_{LRN})\\circ t_L$, and that of the last projection, written with the fixed factor $M$ first, is $(1_{AM}\\otimes s_{BN})\\circ t_A$. The latter is the same counit-tensor-identity definition after tensor symmetry. Counit naturality and naturality of $t_A$ therefore give\n$$\\begin{aligned}G^\\flat&=(1\\otimes s_{BN})\\circ t_A\\circ A(1_M\\otimes\\bar\\beta_N)\\circ A(v_M\\otimes1_{LRN})\\circ A(t_L)\\\\\n&=(Av_M\\;\\otimes\\;s_{BN}\\circ A\\bar\\beta_N)\\circ d_A\\\\\n&=(Av_M\\;\\otimes\\;Bv_N\\circ\\theta_{RN}^{-1})\\circ d_A.\\end{aligned}$$\nThe last equality is the second mate equation of step 2. No relation between $M$ and $N$ has been imposed.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+   }
+  },
+  {
+   "text": "Use the tensor comparison equation of step 1 and the inverse of $\\theta$. It yields\n$$d_B\\circ\\theta_T^{-1}=(\\theta_{RM}^{-1}\\otimes\\theta_{RN}^{-1})\\circ d_A.$$\nSubstituting this into step 3 and cancelling $\\theta_{RM}\\theta_{RM}^{-1}$ gives\n$$F^\\flat\\circ\\theta_T^{-1}=(Av_M\\otimes Bv_N\\circ\\theta_{RN}^{-1})\\circ d_A=G^\\flat.$$\nUnder $(qa)^*\\cong AL$, this is exactly the displayed common transpose: its initial isomorphism is $(1_{ALRM}\\otimes\\theta_{RN}^{-1})\\circ d_A:ALT\\to ALRM\\otimes BLRN$, followed by $Av_M\\otimes Bv_N$. Thus the mixed $A,B$ factors and the orientation of the comparison are accounted for explicitly.",
+   "uses": [
+    "lem-sfb-ringed-comparison-tensor-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+   }
+  },
+  {
+   "text": "It remains to compare targets with the canonical direct-image comparison, rather than an arbitrary isomorphism of right adjoints. Let $e_A:ALRS\\to1$ and $e_B:BLRU\\to1$ be the composite counits. By [lem-sfb-ringed-comparison-tensor-adjunction],\n$$e_B\\circ BL(c)=e_A\\circ\\theta_{RS}.$$\nApply this at $Z$ and precompose with $BL(c_Z^{-1}\\circ F)$. Naturality of $\\theta$ for the morphism $c_Z^{-1}\\circ F:T\\to RSZ$ gives\n$$F^\\flat=(e_{A,Z}\\circ AL(c_Z^{-1}\\circ F))\\circ\\theta_T.$$\nConsequently the $AL\\dashv RS$ transpose of $c_Z^{-1}\\circ F$ is $F^\\flat\\circ\\theta_T^{-1}$. By step 5 this equals $G^\\flat$. The composite hom bijection of [def-weil-pbc-composite-adjunction] is injective, so $c_Z^{-1}\\circ F=G$, as asserted. Only $\\theta$ and the canonical composition comparisons were inverted; none of $\\beta,\\bar\\beta,\\pi$ was inverted.",
+   "uses": [
+    "lem-sfb-ringed-comparison-tensor-adjunction",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map), 0D6E (lemma-derived-pushforward-composition); explicit two-counit calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-ringed-exchange-tensor-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A7, 0B56 and 0D6E: explicit expansion of the two mates, realizing the blueprint First identity"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -135,10 +219,123 @@
    },
    "date": "2026-10-17",
    "verdict": "no match: abstract mate or monoidal-counit identities and underived sheaf pullbacks do not state the displayed unbounded ringed-topos projection identities or their canonical comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|kunneth|Kunneth",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply underived module comparisons or formal adjunction identities, not both displayed unbounded ringed-topos factorizations and their canonical common transpose",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two projection formula and exchange factorizations of the external product map of derived module sheaves on ringed topoi are equal under composition of direct images",
+   "results": {
+    "hits": 8,
+    "top": [
+     "LinearEquiv.fst_comp_prodComm",
+     "LinearEquiv.snd_comp_prodComm",
+     "SheafOfModules.pushforwardComp",
+     "RingEquiv.snd_comp_coe_prodComm",
+     "CategoryTheory.MonoidalCategory.prodCompExternalProduct",
+     "SheafOfModules.pushforwardComp_hom_app_val_app",
+     "RingEquiv.fst_comp_coe_prodComm",
+     "SheafOfModules.pullbackComp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply underived module comparisons or formal adjunction identities, not both displayed unbounded ringed-topos factorizations and their canonical common transpose"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.mkOfUnitCounit",
+     "CategoryTheory.Adjunction.counit",
+     "CategoryTheory.Adjunction.ext_counit",
+     "CategoryTheory.Adjunction.ofNatIsoLeft_counit",
+     "CategoryTheory.Adjunction.ofNatIsoRight_counit",
+     "CategoryTheory.Adjunction.counit_naturality",
+     "CategoryTheory.Adjunction.counit_naturality_assoc",
+     "CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply underived module comparisons or formal adjunction identities, not both displayed unbounded ringed-topos factorizations and their canonical common transpose"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a square of ringed topoi the two composites of projection formula and base change from tensor of derived pushforwards have transpose the tensor of two adjunction counits",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit",
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc",
+     "SheafOfModules.pullbackComp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply underived module comparisons or formal adjunction identities, not both displayed unbounded ringed-topos factorizations and their canonical common transpose"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal category with strong monoidal left adjoints the two projection morphisms and mates of a commutative square have equal adjoint transposes",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.mateEquiv_square",
+     "CategoryTheory.CommSq.left_adjoint",
+     "CategoryTheory.CommSq.right_adjoint",
+     "CategoryTheory.mateEquiv_symm_apply",
+     "CategoryTheory.mateEquiv_apply",
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+     "CategoryTheory.Bicategory.mateEquiv_square"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply underived module comparisons or formal adjunction identities, not both displayed unbounded ringed-topos factorizations and their canonical common transpose"
+  },
+  {
+   "tool": "grep",
+   "query": "map_μ_comp_counit_app_tensor|mateEquiv_square|conjugateEquiv",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply underived module comparisons or formal adjunction identities, not both displayed unbounded ringed-topos factorizations and their canonical common transpose",
+   "subdirectory": "CategoryTheory"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-p1-adjunction-rational-triangle",
@@ -155,5 +352,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-ringed-kunneth-factorizations",
+  "worker": "stage1",
+  "summary": "Expanded both projection/exchange composites through their two successive adjoint transposes, wrote both mate-counit equations and compared the resulting tensor maps. Extracted only the genuinely missing canonical tensor/adjunction compatibility of ringed path comparisons; no invertibility assumptions were added.",
+  "blueprint": "First identity of det-prop-p1-adjunction-rational-triangle: equality of the two projection/exchange presentations before using the diagonal class and trace.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical natural tensor comparisons for arbitrary ringed module pullbacks; the unit has no separate construction of them."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Only the statement's explicit counit-tensor definition of projection maps is used; it provides the generic canonical map for the unit calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q103-db3c72f67",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q103-db3c72f67 (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all six steps against cited statements and Stacks 07A7, 0B56, 0D6D, 07A4 and 0D6E. Canonical comparisons, mate directions and unbounded module coefficients agree. Edge cases and DAG-wide duplicate searches found no fault; dependency closure is acyclic. Both declared tool uses accepted. No repairs; full review in review.md."
  }
 }

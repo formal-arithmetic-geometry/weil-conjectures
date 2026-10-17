@@ -14,9 +14,181 @@
   "def-weil-abstract-derived-category",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first on either of the two small sites, with ring sheaf $A$, global section $s$ and module sheaf $N$. Write $P_s(A)(U)=A(U)[1/s_U]$ and $P_s(N)(U)=N(U)[1/s_U]$. The definition of ring localization gives $A[1/s]=P_s(A)^\\#$. Applying the sheafification--tensor comparison to the presheaves $P_s(A)$ and $N$, and then the ordinary module localization--tensor isomorphism objectwise, gives\n$$A[1/s]\\otimes_A N\\cong(P_s(A)\\otimes_{p,A}N)^\\#\\cong P_s(N)^\\#.$$\nBoth maps send $1\\otimes n$ to $n/1$. Ring and abelian sheafification have the same underlying set sheaf; module sheafification is abelian sheafification with its uniquely extended action. Thus the specified localization carries the usual ring structure and its module localization has precisely the displayed fraction model, including its unit. These are sheafifications, not assertions that localization already satisfies the sheaf condition sectionwise.",
+   "uses": [
+    "def-weil-pbc-ringed-section-localization",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-weil-pbc-localization-tensor",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW (lemma-sheafification-tensor); Tags 03CY and 03EK; algebra.tex Tag 00DK (lemma-tensor-localization)"
+   }
+  },
+  {
+   "text": "The ring localization has the following mapping property directly from its construction. For a map of commutative ring sheaves $a:A\\to B$ for which $a(s)$ is invertible, the ordinary localization property defines on every object $U$ the unique map\n$$P_s(A)(U)\\to B(U),\\qquad r/s_U^n\\longmapsto a_U(r)a(s)_U^{-n}.$$\nUniqueness makes these maps compatible with restrictions, and ring sheafification extends them uniquely to $A[1/s]\\to B$. Conversely any such extension takes $1/s$ to the inverse of $a(s)$. Consequently restriction along $A\\to A[1/s]$ is a bijection onto the maps that invert $s$. This also proves uniqueness over $A$, even for the zero ring or a nilpotent $s$.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-weil-pbc-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization), applied objectwise and then sheafified using sites.tex Section 00YR"
+   }
+  },
+  {
+   "text": "Likewise, let $H$ be an $A$-module sheaf on which multiplication by $s$ is an isomorphism. Every $A$-linear $h:N\\to H$ extends uniquely to an $A$-linear map $N[1/s]\\to H$: on presheaf fractions it is\n$$n/s^e\\longmapsto (s_H)^{-e}h(n).$$\nFor well-definedness, if $n/s^e=n'/s^{e'}$, some $s^k(s^{e'}n-s^e n')$ is zero. Apply $h$ and cancel the invertible operator $s_H^{k+e+e'}$ to obtain equality of the two displayed values. The formulas are additive, $A$-linear and commute with restrictions, so module sheafification gives the extension. Uniqueness follows by multiplying any fraction by $s^e$ and then using the sheafification adjunction. This proves that $N\\to N[1/s]$ is initial among maps to $s$-invertible module sheaves. An $A$-linear map between such sheaves commutes with $s_H^{-1}$; if both sheaves carry their localized scalar actions, it is $A[1/s]$-linear, since on a scalar $r/s^e$ the action is $r(s_H)^{-e}$ and these formulas extend through sheafification.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00CM, Definition 07JZ (definition-localization-module), fraction relation; sites-modules.tex Tag 03CY"
+   }
+  },
+  {
+   "text": "Put $I=f^{-1}$ and $V=f_*$. The finite-product-preserving adjunction lifts to commutative ring objects, hence to ring sheaves. Fix a ring map $a:R'\\to B$ on $\\mathcal X$, with adjunct $b:R\\to VB$. Under the adjunction on global sections $\\operatorname{Hom}(1,VB)=\\operatorname{Hom}(I1,B)$ and $I1\\cong1$, the section $b(t)$ corresponds to $a(t')$. Their invertibility is equivalent: an inverse section on either side corresponds to an inverse on the other, because the lifted adjunction respects multiplication and one. Therefore the ring adjunction and step 2 give a unique extension $I(R[1/t])\\to B$ of $a$ exactly when $a$ inverts $t'$. Also $I(R[1/t])$ itself inverts $t'$, by applying $I$ to the inverse of $t$ and using transport of ring operations. Hence it and $R'[1/t']$ have the same initial property. The unique maps in the two directions over $R'$ have identity composites by uniqueness. This constructs the required canonical ring isomorphism $\\alpha_f:I(R[1/t])\\xrightarrow{\\sim}R'[1/t']$ preserving the unit.",
+   "uses": [
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi), ring-object adjunction, together with algebra.tex Tag 00CP"
+   }
+  },
+  {
+   "text": "Use the geometric module transport with $A=S=R'$ and coefficient map the identity. It gives $I:\\operatorname{Mod}(R)\\rightleftarrows\\operatorname{Mod}(R'):V$, with the transported actions and underlying adjunction specified in its statement. For an $R'$-module $H$ with invertible $t'$, multiplication by $t$ on $VH$ is $V$ of multiplication by $t'$ (by the prescribed action through the adjunction unit); it is invertible. The module adjunction and step 3 therefore give bijections\n$$\\operatorname{Hom}_{R'}(I(M[1/t]),H)\\cong\\operatorname{Hom}_R(M[1/t],VH)\\cong\\operatorname{Hom}_R(M,VH)\\cong\\operatorname{Hom}_{R'}(IM,H).$$\nThey are restriction along $I(\\eta_M)$, where $\\eta_M:M\\to M[1/t]$. Moreover $t'$ acts invertibly on $I(M[1/t])$, since $I$ transports the scalar action and preserves an inverse. Thus $I(\\eta_M)$ has the initial property of step 3 for $IM$. The unique maps between it and $(IM)[1/t']$ extending the unit are inverse, giving $\\beta_{f,M}$ with\n$$\\beta_{f,M}\\,I(\\eta_M)=\\eta_{IM}.$$\nThe source is a module over $I(R[1/t])$ by transported action. Use $\\alpha_f$ to regard it as an $R'[1/t']$-module; the last assertion of step 3 makes $\\beta_{f,M}$ linear for this ring. This identifies the actual tensor-defined localization of the statement.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 and 03D3 (lemma-pullback-module and lemma-adjoint-push-pull-modules), with the elementary fraction extension of step 3"
+   }
+  },
+  {
+   "text": "Naturality and the fraction normalization follow from the construction, not from a choice of isomorphism. For $h:M\\to N$, both routes from $I(M[1/t])$ to $(IN)[1/t']$ extend $Ih$ followed by its localization unit; step 5 gives their equality. On a local fraction $m/t^n$, multiplication by $t^n$ equals the localization image of $m$. Apply $I$ to this equality using the transported scalar-action equation and then use $\\beta I(\\eta_M)=\\eta_{IM}$. Since $(t')^n$ is invertible on the target, its image is the inverse-image representative of $m$ divided by $(t')^n$. This argument is valid for representatives viewed as arrows from a sheafified representable, so it makes no assumption that $I$ is restriction or that the topoi have enough points. The same calculation with the ring multiplication gives $\\alpha_f(r/t^n)=I(r)/(t')^n$.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, transport of the scalar-action map; sites.tex Tag 00YV, transport of multiplication and inverse equations"
+   }
+  },
+  {
+   "text": "The inverse image on modules is exact. Its underlying set-sheaf functor is $I$, with addition and zero transported as in the module transport statement. Thus it is additive and preserves kernels: a module kernel is the equalizer of a map and the zero map on underlying sheaves, and $I$ preserves finite limits. Its module adjunction from step 5 makes it preserve cokernels by the left-adjoint colimit theorem, applied to the finite cokernel diagram. The module-sheaf limit and exact-forgetful descriptions identify these with the kernels and cokernels in the module categories. Additivity and preservation of kernels and cokernels prove exactness. In particular this argument applies over $R$, and over $R[1/t]$ with inverse-image ring identified by $\\alpha_f$; no flatness of a separate coefficient map is being assumed.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), first paragraph of its proof; Tags 03DA and 03DB; categories.tex Tag 0038"
+   }
+  },
+  {
+   "text": "Scalar localization is exact on either site. To check kernels, let $K=\\ker(N\\to N')$, computed sectionwise. On each object $U$ the sequence $0\\to K(U)\\to N(U)\\to N'(U)$ is exact, so ordinary module localization gives an exact sequence at its first two terms. Exact module sheafification and the model in step 1 identify its sheafification with $0\\to K[1/s]\\to N[1/s]\\to N'[1/s]$. This proves preservation of kernels. For cokernels, the ringed-topos module adjunction applied to the identity geometric morphism and $A\\to A[1/s]$ says that the actual functor $A[1/s]\\otimes_A-$ is left adjoint to restriction of scalars. It therefore preserves cokernels. The exact forgetful functors to abelian sheaves detect the resulting exactness regardless of whether the localized modules are regarded over $A$ or $A[1/s]$. Additivity is immediate from the fraction maps. This proves the second exactness assertion without assuming that a sheaf epimorphism is sectionwise surjective.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EI (lemma-sheafification-exact), 03D7 and 03DA; algebra.tex Tag 00CS (proposition-localization-exact)"
+   }
+  },
+  {
+   "text": "For $g:\\mathcal Z\\to\\mathcal X$, put $J=g^{-1}$ and $R''=J(R')$, with section $t''=J(t')$. The inverse image of $f\\circ g$ is canonically identified with $JI$ by the composite adjunction and its unit-preserving uniqueness isomorphism. The comparison transports ring and module operations: by naturality it commutes with each operation map, and compatibility with finite-product comparisons follows by checking the projections. Its naturality at the localization-unit maps identifies the composite inverse image of those maps with their iterated inverse image. Under these source and coefficient identifications both\n$$\\beta_{f\\circ g,M}\\quad\\hbox{and}\\quad\\beta_{g,IM}\\circ J(\\beta_{f,M})$$\nare $R''$-linear maps $JI(M[1/t])\\to(JIM)[1/t'']$ which, after precomposition with $JI(\\eta_M)$, equal $\\eta_{JIM}$: for the second map, first use $\\beta_f I(\\eta_M)=\\eta_{IM}$, then $\\beta_g J(\\eta_{IM})=\\eta_{JIM}$. Applying the initial property in step 5 successively to $I$ and $J$ gives uniqueness for this source; hence the two maps are equal. The ring comparisons agree by exactly the ring extension uniqueness of step 4, since both restrict to the identity of $R''$. For the identity adjunction, the identity map extends the localization unit, so the same uniqueness gives the identity comparison. These are equalities on every module and are natural by step 6, hence equations of natural transformations with the canonical composition and identity isomorphisms inserted.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Adjunction composition and uniqueness; agent normalization calculation using the unit characterizations proved in steps 4--5"
+   }
+  },
+  {
+   "text": "For a specified ring-sheaf isomorphism $c:R'\\xrightarrow{\\sim}S$, let $u=c(t')$. Step 2 extends $c$ uniquely to $c_{\\mathrm{loc}}:R'[1/t']\\to S[1/u]$, by $r/(t')^n\\mapsto c(r)/u^n$; extending $c^{-1}$ gives its inverse. Reinterpret any $R'$-module as an $S$-module using $c^{-1}$. Under this equivalence, $t'$-invertibility is precisely $u$-invertibility and the localization units are the same maps. Thus step 3 identifies the two module localizations uniquely, compatibly with $c_{\\mathrm{loc}}$. The comparison obtained from $\\beta_f$ using these identifications and the comparison constructed with the identified ring $S$ both extend $I(\\eta_M)$ to the same unit; uniqueness in step 5 proves the required commuting square. The explicit fraction formulas also show preservation of the specified scalar section. Coefficient reinterpretation leaves the underlying abelian sheaves and their kernels and cokernels unchanged, so it is exact.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, uniqueness and formula for localization lifts; module extension formulas of step 3"
+   }
+  },
+  {
+   "text": "Apply the exact-functor derived factorization to inverse image and scalar localization, using steps 7--8. They preserve quasi-isomorphisms and act on every unbounded cochain complex termwise; the exact-functor derived-functor theorem identifies these functors with their left and right derived functors. Naturality of $\\beta_f$ makes its degreewise components a chain isomorphism, since the square for every differential is its module naturality square. The localization universal property for natural transformations descends it to an isomorphism on the unbounded derived categories. It also descends the natural comparisons for exact coefficient reinterpretation and for identity and composition. The equations of steps 9--10 hold degreewise on all complexes; the faithfulness assertion for precomposition with the derived localization makes the descended equations equalities of natural transformations. Thus the specified coherence persists on the full ordinary derived categories, with no boundedness hypothesis or choice of resolution.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); categorical localization of natural transformations as stated in lem-weil-pbc-localization-universal-property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03D2, 03D3, 03D7, 03DA, 03DB, 03EI, 04JC and 0GMW, with sites.tex Tag 00YV; algebra.tex Tags 00CP, 00CS and 00DK; derived.tex Tag 015F",
+  "note": "Explicit fraction universal-property proof of the extracted statement and of its identity/composition and coefficient-identification equations; not a verbatim Stacks theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +224,45 @@
    "results": "; hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pullback",
    "date": "2026-10-17",
    "verdict": "no match: signatures concern ordinary modules, categorical localization, sheafification or structure sheaves, not this derived scalar-localization assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(localiz.*(inverseImage|pullback)|(inverseImage|pullback).*localiz)",
+   "results": "; hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern categorical localization, affine structure-sheaf localization, or composition/free-module comparisons for site-induced module pullback; none states all clauses for arbitrary geometric morphisms and unbounded scalar localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a sheaf of modules localized at powers of a global section is the localization of its inverse image",
+   "results": "; hits: AlgebraicGeometry.Γ_restrict_isLocalization, ModuleCat.Tilde.stalkIso_inv, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp, ModuleCat.Tilde.localizationToStalk_mk, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, ModuleCat.Tilde.openToLocalization, AlgebraicGeometry.StructureSheaf.stalkIso_inv",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern categorical localization, affine structure-sheaf localization, or composition/free-module comparisons for site-induced module pullback; none states all clauses for arbitrary geometric morphisms and unbounded scalar localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"localization\"",
+   "results": "; hits: CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, PresheafOfModules.instIsLocalizationSheafOfModulesSheafificationInverseImageFunctorOppositeAbWToPresheaf, AlgebraicGeometry.StructureSheaf.Localizations, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, AlgebraicGeometry.StructureSheaf.Localizations.comapFun, AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen, AlgebraicGeometry.StructureSheaf.Localizations.comapFun_mk, TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern categorical localization, affine structure-sheaf localization, or composition/free-module comparisons for site-induced module pullback; none states all clauses for arbitrary geometric morphisms and unbounded scalar localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric morphism of sheaf topoi the exact inverse image of modules commutes with localization at a global ring section naturally and coherently with composition",
+   "results": "; hits: SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern categorical localization, affine structure-sheaf localization, or composition/free-module comparisons for site-induced module pullback; none states all clauses for arbitrary geometric morphisms and unbounded scalar localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of ring sheaves and module sheaves commutes with inverting an element by the universal property of localization",
+   "results": "; hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern categorical localization, affine structure-sheaf localization, or composition/free-module comparisons for site-induced module pullback; none states all clauses for arbitrary geometric morphisms and unbounded scalar localization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-condensed-e-realization",
@@ -75,5 +282,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-localization-inverse-image-coherence",
+  "worker": "stage1",
+  "summary": "Constructed fraction models, ring and module universal properties and the canonical inverse-image comparisons; proved exactness and all identity/composition/coefficient-isomorphism equations before descending them to unbounded derived categories. Reused existing nodes only, kept the statement unchanged, and recorded fresh searches and verbatim dependency citations.",
+  "blueprint": "thm-weil-pbc-finite-extension.proof.md: integral-lattice/rationalization paragraph and final independence/coherence sentence, through lem-weil-pbc-condensed-e-realization and nt-target-proetale-e. This is the coefficient-localization compatibility used in that route, not a replacement for proper base change.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic sheafification--tensor comparison on an arbitrary small ringed site, needed only to identify the actual tensor-defined localization with sheafified fractions; no proper-base-change node states this sheafification comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q120-0fc9411d4",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q120-0fc9411d4 (reviewer sub-agent of L); spot-checked: Read the full item, all eleven steps, cited statements and source passages, and checked target coefficients and the specified base-change map. Exactness, localization units, composition coherence, and unbounded descent are justified. No new nodes, duplicates, or delivery-specific faults found. Accepted the declared sheafification–tensor tool use. Wrote review.md."
  }
 }

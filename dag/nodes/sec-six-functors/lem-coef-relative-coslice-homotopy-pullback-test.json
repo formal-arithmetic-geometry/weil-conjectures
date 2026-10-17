@@ -13,9 +13,110 @@
   "lem-coef-infinity-join-cocone-associativity",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=C_{d/}$ and $T=C_{e/}\\times_{D_{qe/}}D_{qd/}$. Apply [lem-cbc-relative-coslice-left-fibration] to $(q,j,d)$: its actual map $\\rho:X\\to T$, $h\\mapsto(h|_{A\\star\\Delta^n},qh)$, is a left fibration over the common apex map to $C$. Put $X_0=C_0\\times_CX$ and $T_0=C_0\\times_CT$. Then $\\rho_0:X_0\\to T_0$ is the pullback of $\\rho$ along $T_0\\to T$. It is a left fibration: project any lifting problem to $T$, lift using $\\rho$, and pair the lifted simplex with the prescribed $C_0$-coordinate. The apex equality holds because $\\rho$ preserves the last join block. This directly verifies the pullback lifting assertion using [def-coef-infinity-fibrations].",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BZ",
+    "place": "Proposition 4.3.6.8; pullback lifting argument, with the apex map from Proposition 4.4.2.13."
+   }
+  },
+  {
+   "text": "We will use the left-handed version of [lem-cbc-right-fibration-space-fiber]. Explicitly, reverse simplex operators by $\\alpha:[m]\\to[n]\\mapsto(i\\mapsto n-\\alpha(m-i))$. This preserves degreewise pullbacks, takes $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, and takes left fibrations to right fibrations by [def-coef-infinity-fibrations]. By [lem-coef-infinity-opposite-subdivision-kan-zigzag], the opposite of a Kan complex is Kan. Thus for a left fibration $L\\to S$ with Kan base $S$, apply [lem-cbc-right-fibration-space-fiber] to $L^{\\mathrm{op}}\\to S^{\\mathrm{op}}$ and reverse each horn filler back. This proves that $L\\to S$ is a Kan fibration and $L$ is Kan. This is just the opposite specialization of the cited theorem, not an assumption on a quasicategory base.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NV",
+    "place": "Corollary 4.4.3.8, left-handed version of the existing right-fibration node."
+   }
+  },
+  {
+   "text": "Fix a vertex $W$ of $C_0$, and write $X_W=C_{d/}\\times_C\\{W\\}$, $U_W=C_{e/}\\times_C\\{W\\}$, $V_W=D_{qd/}\\times_D\\{qW\\}$ and $Z_W=D_{qe/}\\times_D\\{qW\\}$. These are Kan by the hypothesis. Apply [lem-cbc-relative-coslice-left-fibration] with inner fibration $D\\to\\Delta^0$, the same $j$, and diagram $qd$. Its relative restriction is precisely $D_{qd/}\\to D_{qe/}$, since both coslices in the terminal simplicial set are terminal. Pull it back along $Z_W\\to D_{qe/}$. The resulting map is $r_W:V_W\\to Z_W$: a simplex with prescribed apex equal to the constant simplex at $qW$ still has that apex after restriction. Pullback left-horn lifting follows by pairing with the prescribed base simplex as in step 1, using [def-coef-infinity-fibrations]. Step 2 applies since $Z_W$ is Kan, so $r_W$ is a Kan fibration.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BZ",
+    "place": "Proposition 4.3.6.8 for D to the terminal quasicategory; Corollary 4.4.3.8 for the Kan-base specialization."
+   }
+  },
+  {
+   "text": "In degree $n$, a simplex of $T$ over the constant apex $W$ is exactly a pair $(u,v)\\in(U_W)_n\\times(V_W)_n$ satisfying $qu=v|_{A\\star\\Delta^n}$. Hence the strict apex fiber is the degreewise pullback $P_W=U_W\\times_{Z_W}V_W$, and $\\rho$ on apex fibers is $f_W:X_W\\to P_W$. The map $P_W\\to U_W$ is a Kan fibration by step 3: a horn lift is obtained by keeping its prescribed $U_W$-simplex and filling its $V_W$-coordinate against $r_W$. Since $U_W$ is Kan, first filling a projected horn in $U_W$ and then lifting it proves that $P_W$ is Kan. Moreover $f_W$ is a pullback of $\\rho$ along $P_W\\to T$, so is a left fibration by the paired-coordinate argument of step 1. Step 2 now makes $f_W$ a Kan fibration. All these are literal coordinate identifications of the degreewise pullbacks in [def-cbc-enhanced-diagrams-cones], with the lifting properties of [def-coef-infinity-fibrations].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NV",
+    "place": "Corollary 4.4.3.8 and degreewise pullback identifications; agent calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-pullback-path-comparison] to $U_W\\to Z_W\\leftarrow V_W$. All three objects are Kan, and the second leg $r_W$ is a Kan fibration by step 3. The constant-path map $c_W:P_W\\to P(U_W\\to Z_W\\leftarrow V_W)$ is consequently a weak homotopy equivalence. Its composite $c_Wf_W$ is exactly the comparison in the hypothesis: it sends $h$ to $(h|_{A\\star\\Delta^n},qh)$ and the constant path at their common restriction. That composite is a weak homotopy equivalence by assumption. Therefore $f_W$ is a weak homotopy equivalence: on components and every based homotopy group its induced map is the inverse of the isomorphism induced by $c_W$, followed by the isomorphism induced by $c_Wf_W$, in the conventions of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Proposition 3.4.0.7 and the constant-path model of Construction 3.4.0.3; two-out-of-three checked on homotopy groups."
+   }
+  },
+  {
+   "text": "For a vertex $t$ of $T_0$, let $W\\in C_0$ be its apex. Under step 4 it is a vertex of $P_W$. Steps 4 and 5 show that $f_W:X_W\\to P_W$ is a Kan fibration and a weak homotopy equivalence. By [lem-cbc-kan-fibration-fiber-criterion], its strict fiber at $t$ is a contractible Kan complex. This fiber is literally $(X_0)_t=\\{t\\}\\times_{T_0}X_0$: prescribing $t$ already prescribes the $C_0$-coordinate $W$ and both of its compatible cocones. Thus every vertex fiber of $\\rho_0$ is a weakly contractible Kan complex, without testing any apex outside $C_0$.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NU",
+    "place": "Proposition 4.4.2.14: identification of the vertex fibers for the contractible-fiber test."
+   }
+  },
+  {
+   "text": "Reverse simplex operators as in step 2. Since $\\rho_0$ is a left fibration, $\\rho_0^{\\mathrm{op}}$ is a right fibration by [def-coef-infinity-fibrations]. Its vertex fibers are the opposites of the fibers in step 6; they are Kan and weakly contractible by the preservation of Kan complexes and weak homotopy equivalences in [lem-coef-infinity-opposite-subdivision-kan-zigzag]. Apply [lem-coef-right-fibration-contractible-fibers] to conclude that $\\rho_0^{\\mathrm{op}}$ lifts all simplex boundaries. Opposite takes $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ to the same boundary inclusion under reversal of the ordered vertices. Reversing each such lift gives an exact lift for $\\rho_0$, including $n=0$, where the boundary is empty. By [def-weil-pbc-trivial-kan-fibration], this is the asserted trivial Kan fibration. Every restriction and projection equality is preserved because all reversals and pullbacks were simplicial. If $C_0$ is empty both sides are empty and no lifting problem has a target simplex. Empty $A$ or $B$ causes no change in the relative-coslice theorem or in any degreewise calculation above.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+    "lem-coef-right-fibration-contractible-fibers",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NU",
+    "place": "Proposition 4.4.2.14 (2) implies (1), by the existing right-handed criterion and explicit opposite symmetry."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-relative-coslice-left-fibration",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+  "lem-cbc-right-fibration-space-fiber",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-right-fibration-contractible-fibers",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Remark 3.1.1.5 (printed p.319), elaborated using Kerodon 01BZ, 01NV, 0329 and 01NU. Online sources read; no archived reference in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +145,52 @@
    "results": "{\"t\": \"2026-10-17T08:38:01Z\", \"tool\": \"grep\", \"query\": \"[Cc]oslice|[Cc]ocone.*[Ff]ibration|[Ff]ibration.*[Cc]ocone|[Ll]eft[Ff]ibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Basic.lean\"], \"digest\": \"d1fbde3d23bc21ff\"}",
    "date": "2026-10-17",
    "verdict": "no match: only ordinary comma-category comments; no left-fibration relative-coslice criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative sharp join coslice restriction for an inner fibration is trivial Kan if the squares of apex cocone spaces are homotopy pullbacks",
+   "results": "{\"t\": \"2026-10-17T13:19:53Z\", \"tool\": \"leanfinder\", \"query\": \"Relative sharp join coslice restriction for an inner fibration is trivial Kan if the squares of apex cocone spaces are homotopy pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.J\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.StrictSegal.isPointwiseRightKanExtension\"], \"digest\": \"308e32533dd48170\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned all-horn Kan fibrations, primitive quasicategory horns or abstract model-category trivial fibrations; none states the sharp-join relative-coslice homotopy-pullback test. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-105 and Quasicategory/Basic.lean:37-58."
+  },
+  {
+   "tool": "grep",
+   "query": "coslice|left.?fibration|relative.*cocone",
+   "results": "{\"t\": \"2026-10-17T13:20:04Z\", \"tool\": \"grep\", \"query\": \"coslice|left.?fibration|relative.*cocone\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no coslice or left-fibration declarations in the searched AlgebraicTopology source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inner fibration induces a trivial fibration on under categories if the relative cone mapping spaces are homotopy cartesian",
+   "results": "{\"t\": \"2026-10-17T13:20:05Z\", \"tool\": \"leansearch\", \"query\": \"An inner fibration induces a trivial fibration on under categories if the relative cone mapping spaces are homotopy cartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"HomotopicalAlgebra.trivialFibrations\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.trivialFibrations_over_eq\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"HomotopicalAlgebra.trivialCofibrations_over_eq\"], \"digest\": \"9ca42005c468cde2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned all-horn Kan fibrations, primitive quasicategory horns or abstract model-category trivial fibrations; none states the sharp-join relative-coslice homotopy-pullback test. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-105 and Quasicategory/Basic.lean:37-58."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.InnerFibration, SSet.TrivialFibration",
+   "results": "{\"t\": \"2026-10-17T13:20:05Z\", \"tool\": \"loogle\", \"query\": \"SSet.InnerFibration, SSet.TrivialFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.TrivialFibration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: query parser reports unknown identifier SSet.TrivialFibration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left fibration with weakly contractible vertex fibers lifts all simplex boundaries including dimension zero",
+   "results": "{\"t\": \"2026-10-17T13:20:05Z\", \"tool\": \"leanfinder\", \"query\": \"A left fibration with weakly contractible vertex fibers lifts all simplex boundaries including dimension zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Quasicategory.hornFilling\"], \"digest\": \"964ab6525aefea0e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned all-horn Kan fibrations, primitive quasicategory horns or abstract model-category trivial fibrations; none states the sharp-join relative-coslice homotopy-pullback test. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-105 and Quasicategory/Basic.lean:37-58."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fibration\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T13:20:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"fibration\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.innerFibration_pullbackObjObjπ\", \"SSet.fibration_pullbackObjObjπ\"], \"digest\": \"7a68d4e8b3710e59\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Inner/PushoutProduct.lean:70-80; these maps use Cartesian internal hom, not sharp ordered-join coslices or the apex homotopy-pullback test."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-colimit-active-join-boundary",
@@ -75,5 +218,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-coslice-homotopy-pullback-test",
+  "worker": "stage1",
+  "summary": "Unchanged statement; seven steps prove the actual relative restriction is a left fibration, compare strict apex pullbacks to the path model using the lower restriction Kan fibration, and apply the contractible-vertex-fiber boundary-lifting criterion. Reused all generic lemmas from the existing DAG; no new nodes. Opposite conversions are written explicitly to use the existing right-handed statements faithfully.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, original proof paragraph 2: middle derived mapping-complex comparison, through the recorded operadic extension ancestry. This item supplies the strict relative-coslice lifting test in that infrastructure; no chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Generic relative sharp-coslice left-fibration theorem for the exact restriction map; this unit has no replacement statement."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic right-fibration-over-Kan theorem, used on opposites to make the apex restrictions Kan fibrations; no same-unit node states that assertion."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic Kan-fibration weak-equivalence/contractible-fiber criterion, applied to each fixed-apex comparison; the unit does not replace this homotopy-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q83-8a1925f85",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q83-8a1925f85 (reviewer sub-agent of L); spot-checked: Read the full packet, item, route, cited node statements, and cited sources. All seven proof steps are valid: relative-coslice left fibration, opposite Kan-fibration conversion, strict apex pullback construction, path-model comparison, fiber contractibility, and final trivial Kan fibration criterion. Hypotheses, base-change maps, empty cases, dimension-zero lifting, route, and duplicate searches checked. No new nodes or repairs needed; no SGA used."
  }
 }

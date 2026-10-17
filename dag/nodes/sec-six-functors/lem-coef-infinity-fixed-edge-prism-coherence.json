@@ -7,10 +7,107 @@
   "date": "2026-10-17",
   "group": "Q70"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "For a monotone map $\\alpha:[n]\\to[m]$, extend it to $\\widehat\\alpha:[n+2]\\to[m+2]$ by $0\\mapsto0$, $1\\mapsto1$, $i+2\\mapsto\\alpha(i)+2$. These extensions respect identities and composition. Restricting $t$ along $\\widehat\\alpha$ preserves the fixed edge $s$ and the constant final face, so gives the stated simplicial set $T_{\\mathcal E}(s,z)$. Omitting $0$ or $1$ leaves exactly a simplex with its first vertex $y$ or $x$ and its remaining face constant at $z$. These restrictions commute with the extensions of $\\alpha$ fixing one first vertex. Thus $r_1$ and $r_0$ land in the left-pinched mapping spaces defined in [lem-coef-infinity-left-pinch-comparison] and are simplicial maps.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-left-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Proposition 4.6.8.16, proof, and Remark 4.6.8.17; Construction 4.6.8.9 and Notation 4.6.8.15."
+   }
+  },
+  {
+   "text": "The map $r_1$ is a trivial Kan fibration. Indeed, a boundary-lifting problem of dimension $m$ consists of compatible simplices $t_i$ over the faces of $\\Delta^m$ and a prescribed $m$-simplex of $L_{\\mathcal E}(y,z)$. On $\\Delta^{m+2}$ the $t_i$ prescribe the faces omitting $i+2$, and the prescribed simplex of $L(y,z)$ prescribes the face omitting $0$. Their intersections agree because the lifting square commutes. Together these are exactly all codimension-one faces except the face omitting $1$, hence the inner horn $\\Lambda_1^{m+2}$. For $m=0$, the boundary is empty and the domain is instead the two edges $s$ on $01$ and the given arrow on $12$, again $\\Lambda_1^2$. The quasicategory horn axiom fills this horn. The filler retains $s$ on $01$ and its final face is constantly $z$, since that face is already in the prescribed face omitting $0$. It is therefore a simplex of $T$ solving the problem. This proves surjectivity in degree zero and every boundary lifting required by [def-weil-pbc-trivial-kan-fibration].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Proposition 4.6.8.16, proof, and Remark 4.6.8.17; Construction 4.6.8.9 and Notation 4.6.8.15."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-left-pinch-comparison], $L_{\\mathcal E}(y,z)$ is Kan and $j^L:L_{\\mathcal E}(y,z)\\to U_{\\mathcal E}(y,z)$ is a homotopy equivalence. To check that $T$ is Kan, map a horn in $T$ through $r_1$, fill it in $L(y,z)$, and lift this filled simplex back to $T$ using [lem-weil-pbc-trivial-kan-lifts-monomorphisms] for the degreewise injective horn inclusion. Finally [lem-weil-pbc-trivial-kan-homotopy-equivalence] supplies a section and a simplicial homotopy inverse for $r_1$. Consequently the left roof leg $a=j^Lr_1$ is a homotopy equivalence of Kan complexes. All these assertions also hold with $\\mathcal B,p(s),p(z)$ in place of $\\mathcal E,s,z$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-left-pinch-comparison",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Proposition 4.6.8.16, proof, and Remark 4.6.8.17; Construction 4.6.8.9 and Notation 4.6.8.15."
+   }
+  },
+  {
+   "text": "Write $q_m:[2]\\times[m]\\to[m+2]$ for the map in the statement. It is monotone: its three rows have values $0$, $1$, and $i+2$, respectively, and each row is monotone with every value of a later row at least every value of an earlier row. Taking the induced map of standard simplicial sets gives $Q_m:\\Delta^2\\times\\Delta^m\\to\\Delta^{m+2}$. For every monotone $\\alpha:[n]\\to[m]$, the equality $\\widehat\\alpha q_n=q_m(\\mathrm{id}_{[2]}\\times\\alpha)$ holds on each pair $(k,i)$, separately for $k=0,1,2$. Hence $e_m(t)=tQ_m$ commutes with all simplicial operators. On the three vertex factors its values are constantly $x,y,z$, respectively, because the first two rows are constant vertices and the third row lies in the constant final face of $t$. The definition of $V(x,y,z)$ in [lem-coef-infinity-mapping-composition] therefore gives the simplicial map $e:T\\to V(x,y,z)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Proposition 4.6.8.16, proof, and Remark 4.6.8.17; Construction 4.6.8.9 and Notation 4.6.8.15."
+   }
+  },
+  {
+   "text": "Compute the three edge restrictions of $q_m$. On $01\\times[m]$ it is $(0,i)\\mapsto0$, $(1,i)\\mapsto1$, so $tQ_m$ restricts to the constant $m$-simplex at the arrow $s$. On $12\\times[m]$ the two rows are $1$ and $i+2$; after omitting vertex $0$ these are $0$ and $i+1$, exactly the left-pinch formula applied to $r_1(t)$. On $02\\times[m]$ the two rows are $0$ and $i+2$; after omitting vertex $1$ they are again $0$ and $i+1$, the formula applied to $r_0(t)$. Thus, in the edge order $12,01$ specified by [lem-coef-infinity-mapping-composition], one has the strict equalities $\\theta e=(j^Lr_1,c_s)$ and $\\ell e=j^Lr_0$. This also shows that $e$ factors through the fiber of restriction to $01$ at $s$, so retains the specified triangle witness rather than only its edge classes.",
+   "uses": [
+    "lem-coef-infinity-left-pinch-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Proposition 4.6.8.16, proof, and Remark 4.6.8.17; Construction 4.6.8.9 and Notation 4.6.8.15."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-mapping-composition], $\\theta$ is a homotopy equivalence and composition in arrow spaces is $[\\ell][\\theta]^{-1}$. Put $a=j^Lr_1$ and $b=j^Lr_0$. Step 5 gives $[\\theta][e]=([a],[c_s])$ and $[b]=[\\ell][e]$. Multiplying the first equality by $[\\theta]^{-1}$ and substituting in the second gives exactly $[b]=[\\ell][\\theta]^{-1}([a],[c_s])$. No inverse on a mapping space is chosen to obtain the equality. The precomposition class $P_s$ is the restriction of the composition class to the vertex $s$, as specified by the cited node. Thus the equality reads $[b]=P_s[a]$. Since $a$ is invertible by Step 3, $[b][a]^{-1}=P_s$: the roof represents precomposition, with $e$ as its triangle witness. Homotopies may be precomposed with $e$ by composing their maps $V\\times\\Delta^1\\to V$ with $e\\times\\mathrm{id}$; hence the class calculation is valid also before using that $T$ is Kan.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Proposition 4.6.8.16, proof, and Remark 4.6.8.17; Construction 4.6.8.9 and Notation 4.6.8.15."
+   }
+  },
+  {
+   "text": "For a simplex $t$, postcomposition with the given simplicial map $p$ gives $(pt)Q_m=p(tQ_m)$. Similarly, restricting $pt$ to either face is $p$ applied to the restriction of $t$, and precomposing a restricted simplex with the left-pinch map commutes with postcomposition by $p$. These are the equalities $p e=e_{\\mathcal B}p$, $p r_k=r_k p$ and $p j^L=j^L p$ degree by degree, and therefore equalities of simplicial maps. Moreover $p(c_s)=c_{p(s)}$, and restriction to each of $01,12,02$ commutes with $p$. Assemble these identities with Step 5: the roofs over $\\mathcal E$ and $\\mathcal B$, their maps to the fixed-edge triangle spaces, and all three triangle boundary maps commute strictly under $p$. Applying Step 6 to both rows identifies these very roofs with precomposition by $s$ and $p(s)$, respectively. The maps between their triangle witnesses provide the commutation data of the precomposition square. This uses the given prisms throughout; there is no assertion that separately chosen homotopy inverses commute strictly. Only that $p$ is simplicial is used, not an inner-fibration hypothesis.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-left-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Proposition 4.6.8.16, proof, and Remark 4.6.8.17; Construction 4.6.8.9 and Notation 4.6.8.15."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-left-pinch-comparison",
+  "lem-coef-infinity-mapping-composition",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-coefficient mapping-complex adjunction; explicit foundational argument follows online Kerodon 01PF, Proposition 4.6.8.16 and Remark 4.6.8.17, not archived in literature/. Boundary lifting is written out by identifying a single inner horn."
+ },
  "mathlib_match": null,
  "id": "lem-coef-infinity-fixed-edge-prism-coherence",
  "kind": "statement",
@@ -81,6 +178,41 @@
    "results": "{\"t\": \"2026-10-17T08:42:23Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial coslice triangles give a functorial model for composition with a fixed edge including its commutativity homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Truncated.whiskering\", \"CategoryTheory.CosimplicialObject.Truncated.whiskering\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"CategoryTheory.SimplicialObject.cosk\", \"CategoryTheory.SimplicialObject.Truncated.cosk\", \"CategoryTheory.CosimplicialObject.Truncated.whiskering_obj_obj_map\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\", \"CategoryTheory.CosimplicialObject.Truncated.whiskering_obj_obj_obj\"], \"digest\": \"ea72ba3466b3a14d\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern triangle fillers, truncated composition or generic joins; none gives the fixed-edge coslice prism and its strictly natural precomposition roof."
+  },
+  {
+   "tool": "grep",
+   "query": "prism|pinch|coslice|precomposition",
+   "results": "{\"t\": \"2026-10-17T13:20:25Z\", \"tool\": \"grep\", \"query\": \"prism|pinch|coslice|precomposition\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\"], \"digest\": \"ef4b16a4b964db98\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern individual simplex faces, truncated edge composition, general relative homotopy, or ordinary triangulated categories; none states the all-dimensional fixed-edge prism with the three boundary formulas and strict naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed edge triangles in an infinity category determine a natural map to triangle mapping spaces which realizes precomposition",
+   "results": "{\"t\": \"2026-10-17T13:20:25Z\", \"tool\": \"leansearch\", \"query\": \"Fixed edge triangles in an infinity category determine a natural map to triangle mapping spaces which realizes precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.triangleCategory\", \"CategoryTheory.Pretriangulated.Triangle.π₁\", \"SSet.Truncated.Edge.map\", \"CategoryTheory.Functor.mapTriangle_obj\", \"SSet.Edge.map\", \"CategoryTheory.Functor.mapTriangleIso_hom_app_hom₁\", \"CategoryTheory.Pretriangulated.Triangle.functorMk_map_hom₁\", \"CategoryTheory.Pretriangulated.triangleCategory_comp\"], \"digest\": \"f8baeeb86bcfd067\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern individual simplex faces, truncated edge composition, general relative homotopy, or ordinary triangulated categories; none states the all-dimensional fixed-edge prism with the three boundary formulas and strict naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"compStruct\"",
+   "results": "{\"t\": \"2026-10-17T13:20:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"compStruct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Truncated.Edge.CompStruct.idCompId\", \"SSet.Truncated.Edge.CompStruct.compId\", \"SSet.Truncated.Edge.CompStruct.idComp\", \"SSet.Truncated.Edge.CompStruct\", \"SSet.Truncated.Edge.CompStruct.simplex\", \"SSet.Truncated.Edge.CompStruct.ext\", \"SSet.Truncated.Edge.CompStruct.ext_iff\", \"SSet.Truncated.Edge.CompStruct.exists_of_simplex\"], \"digest\": \"c3b821fe0c365712\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern individual simplex faces, truncated edge composition, general relative homotopy, or ordinary triangulated categories; none states the all-dimensional fixed-edge prism with the three boundary formulas and strict naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed-edge triangle prism in a quasicategory realizes precomposition naturally on fixed endpoint mapping spaces",
+   "results": "{\"t\": \"2026-10-17T13:20:27Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed-edge triangle prism in a quasicategory realizes precomposition naturally on fixed endpoint mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Edge.CompStruct.map_simplex\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Edge.CompStruct.simplex\", \"SSet.Truncated.Edge.comp\", \"SSet.Truncated.ev01₂\", \"SSet.Edge.CompStruct.map\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.Truncated.liftOfStrictSegal.f₂\"], \"digest\": \"39aa4587c2d2688d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern individual simplex faces, truncated edge composition, general relative homotopy, or ordinary triangulated categories; none states the all-dimensional fixed-edge prism with the three boundary formulas and strict naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A join of an edge and a simplex maps from a triangular prism, naturally in the simplex, and identifies its three boundaries with left pinch maps",
+   "results": "{\"t\": \"2026-10-17T13:20:59Z\", \"tool\": \"leanfinder\", \"query\": \"A join of an edge and a simplex maps from a triangular prism, naturally in the simplex, and identifies its three boundaries with left pinch maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₁.ι₃\", \"SSet.horn₃₁.ι₀\", \"SSet.horn₃₁.ι₂\", \"SSet.horn₃₂.ι₁\", \"SSet.horn₂₁.ι₁₂\", \"SSet.horn₃₂.ι₀\", \"SSet.horn₃₂.ι₃\", \"SSet.horn₂₂.ι₁₂\"], \"digest\": \"7d93c6b3ec58ce4d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern individual simplex faces, truncated edge composition, general relative homotopy, or ordinary triangulated categories; none states the all-dimensional fixed-edge prism with the three boundary formulas and strict naturality."
   }
  ],
  "blueprint": {
@@ -101,5 +233,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-fixed-edge-prism-coherence",
+  "worker": "stage1",
+  "summary": "Checked the online fixed-edge prism construction, supplied the missing invertibility of the left roof leg by the explicit inner-horn boundary calculation, computed all three boundary restrictions, derived the composition identity, and proved strict simplicial naturality. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the fixed-edge coherence infrastructure for paragraph 2 of prop-coef-integral-exceptional-adjoint, the finite-coefficient mapping-complex adjunction before derived inverse limit; same paragraph in main-20261015. Historical blueprint ancestry and current unit binding retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "why": "Generic simplicial homotopy tool for the roof: lifts the trivial Kan fibration r_1 against a horn inclusion to prove its source is Kan; no statement of this unit gives this elementary simplicial model-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial homotopy tool for the roof: supplies a homotopy inverse for the explicitly proved trivial Kan fibration r_1; no statement of this unit gives this elementary simplicial model-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q08-78b3beda5",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-78b3beda5 (reviewer sub-agent of L); spot-checked: Read the complete item, cited DAG statements, unit/chapter route, Kerodon 01PF and 01L5 source places, and delivery materials. Verified all seven steps, horn lifting including m=0, Kan and homotopy-equivalence consequences, prism degeneracies and boundaries, roof composition identity, strict simplicial naturality under p, edge cases, route, hypotheses, and duplicate status. No new nodes or repairs are needed. Review written to review.md."
  }
 }

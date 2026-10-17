@@ -1,0 +1,164 @@
+{
+ "id": "lem-sfb-ringed-comparison-tensor-adjunction",
+ "kind": "statement",
+ "title": "Tensor and adjunction compatibility of canonical ringed-topos path comparisons",
+ "statement": "Let $W,X_1,X_2,Y$ be topoi presented by sites small in the universe of [def-weil-size-convention], with sheaves of commutative rings and morphisms of ringed topoi $f_i:W\\to X_i$, $g_i:X_i\\to Y$ for $i=1,2$ [def-weil-pbc-ringed-topos-morphism]. Fix an isomorphism $g_1f_1\\cong g_2f_2$ of ringed-topos morphisms, compatible with the structural ring maps. Use the ordinary unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], the canonical derived pullback/direct-image adjunctions, and the tensor comparisons $t_h:Lh^*(K\\otimes^L H)\\xrightarrow{\\sim}Lh^*K\\otimes^L Lh^*H$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Put $P_i=Lf_i^*Lg_i^*$ and $V_i=Rg_{i*}Rf_{i*}$, with the composite adjunction $P_i\\dashv V_i$ and its counit $e_i$ [def-weil-pbc-composite-adjunction]. Let $\\theta:P_2\\xrightarrow{\\sim}P_1$ be the canonical comparison obtained from derived pullback composition and the specified ringed commutation isomorphism. Let $c:V_1\\xrightarrow{\\sim}V_2$ be the canonical comparison obtained from the direct-image composition isomorphisms of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the same commutation isomorphism. Define\n$$d_{i,K,H}=t_{f_i,Lg_i^*K,Lg_i^*H}\\circ Lf_i^*(t_{g_i,K,H}):P_i(K\\otimes^L H)\\longrightarrow P_iK\\otimes^L P_iH.$$\nThen for all $K,H\\in D(Y)$,\n$$d_{1,K,H}\\circ\\theta_{K\\otimes^L H}=(\\theta_K\\otimes^L\\theta_H)\\circ d_{2,K,H}.$$\nMoreover $c$ is the conjugate of $\\theta$ [def-weil-pbc-adjunction-conjugate]. Explicitly, for all $Z\\in D(W)$,\n$$e_{2,Z}\\circ P_2(c_Z)=e_{1,Z}\\circ\\theta_{V_1Z}:P_2V_1Z\\longrightarrow Z.$$\nNo exactness of the underived module pullbacks is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product), 0D6E (lemma-derived-pushforward-composition); canonical comparison coherence extracted from their K-flat constructions and adjoint-uniqueness normalization"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pushforwardComp|derived.*[Cc]ompo",
+   "results": {
+    "hits": 10,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv concern underived module functors, not the canonical unbounded K-flat/K-injective comparisons or their tensor compatibility; abstract mate identities do not establish that normalization",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For morphisms of ringed topoi the canonical derived pullback composition isomorphism is monoidal and its adjoint conjugate is the canonical derived pushforward composition isomorphism",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullback",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "CategoryTheory.toOverPullbackIsoToOver",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.PullbackConstruction.adjunction"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv concern underived module functors, not the canonical unbounded K-flat/K-injective comparisons or their tensor compatibility; abstract mate identities do not establish that normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": {
+    "hits": 5,
+    "top": [
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullback_comp_id",
+     "SheafOfModules.pullback_id_comp",
+     "SheafOfModules.pullback_assoc",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv concern underived module functors, not the canonical unbounded K-flat/K-injective comparisons or their tensor compatibility; abstract mate identities do not establish that normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition comparisons of unbounded derived pullbacks for arbitrary ringed topoi preserve derived tensor products and their derived pushforward comparisons are conjugate under the composite adjunction",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackComp",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "PresheafOfModules.pullbackComp",
+     "SheafOfModules.pullback_comp_id",
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pullback_id_comp",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv concern underived module functors, not the canonical unbounded K-flat/K-injective comparisons or their tensor compatibility; abstract mate identities do not establish that normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars on sheaves of modules is pseudofunctorial as a strong symmetric monoidal functor, and the canonical composition of right derived direct images is its adjoint conjugate",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+     "SheafOfModules.pushforwardNatIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv concern underived module functors, not the canonical unbounded K-flat/K-injective comparisons or their tensor compatibility; abstract mate identities do not establish that normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Pp]ullback|pullback.*[Mm]onoidal|conjugateEquiv_pullback",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+     "Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean",
+     "Mathlib/CategoryTheory/Monoidal/Limits/Shapes/Pullback.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv concern underived module functors, not the canonical unbounded K-flat/K-injective comparisons or their tensor compatibility; abstract mate identities do not establish that normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-kunneth-factorizations",
+  "date": "2026-10-17",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "First identity: write Rq_*Rp_{2*}=R(qp_2)_*=R(qp_1)_*=Rq_*Rp_{1*}, and expand the canonical projection and exchange maps under these identifications",
+   "via": [
+    "lem-sfb-ringed-kunneth-factorizations"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

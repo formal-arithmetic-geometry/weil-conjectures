@@ -18,9 +18,109 @@
   "det-sf-comp-composition-interchange",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [det-sf-comp-composition-interchange](1) first to $(p,i,u,r)$ and then to $(h,u,v,s)$. Thus $r^{-1}(Y)=P$, $s^{-1}(P)=P'$, and $(rs)^{-1}(Y)=P'$ as open subschemes, with restricted maps $p,h,ph$. In particular the two squares and their outer rectangle are Cartesian. The three normalized maps in the statement therefore have the existence and uniqueness in clause (2), for every unbounded input. The outer compactification is one of the three dense compactifications stipulated in the statement. Write $\\eta_j:\\mathrm{id}\\to j^*j_!$ for an open-extension unit.",
+   "uses": [
+    "det-sf-comp-composition-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Canonicity and associativity, first two sentences; the Cartesian identifications are clause (1) of det-sf-comp-composition-interchange."
+   }
+  },
+  {
+   "text": "Use the module adjunction $a^*\\dashv a_*$ of [sk-def-sfb-module-pushforward-pullback]. By the untwisted last assertion of [sk-prop-sfb-cartesian-coefficients], $a^*$ is exact for every map here. By [det-sf-open-closed-sequence-ring-sheaf](1), every open restriction $j^*$ is also right adjoint to the exact functor $j_!$, and $\\eta_j$ is invertible. Hence [lem-weil-pbc-right-adjoint-preserves-kinjective] applies both to $a_*$ and to $j^*$: each preserves K-injective complexes. All these statements apply to the pulled-back ring sheaves, including the finite-subextension condensed ring for $\\overline{\\mathbf Q}_\\ell$. No assertion that open extension preserves K-injectives is used.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; sites-cohomology.tex Tag 08FI, lemma-restrict-K-injective-to-open."
+   }
+  },
+  {
+   "text": "For a module sheaf $M$ on $W$, apply [lem-sfb-proetale-open-restriction-counit] to $r$ and $i$, with $R=\\Lambda_B$. Identify its inverse-image rings with $\\Lambda_W,\\Lambda_Y,\\Lambda_P$ by [sk-prop-sfb-cartesian-coefficients]. This gives $i^*r_*M\\cong p_*u^*M$; at $Q\\to Y$ it is the fibre-product identification $M(W\\times_B Q)=M(P\\times_Y Q)$ with its transported module action. The same cited result for $(s,u)$ and $(rs,i)$ gives $u^*s_*\\cong h_*v^*$ and $i^*(rs)_*\\cong(ph)_*v^*$. Its hypothesis is an arbitrary sheaf of commutative rings, so this use requires no constant or finite coefficient ring.",
+   "uses": [
+    "lem-sfb-proetale-open-restriction-counit",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open, together with the section normalization of lem-sfb-proetale-open-restriction-counit."
+   }
+  },
+  {
+   "text": "Apply the three sheaf isomorphisms of step 3 termwise to K-injective representatives. By step 2 both the restricted complexes and the direct images needed to compute their derived functors remain K-injective. Exact restriction and exact open extension act termwise on every complex by [lem-weil-pbc-exact-functor-derived-factorization]; the right derived images are computed on these representatives by [sk-def-sfb-module-derived-pushpull]. We therefore obtain natural isomorphisms $\\rho_r:i^*Rr_*\\to Rp_*u^*$, $\\rho_s:u^*Rs_*\\to Rh_*v^*$, and $\\rho_{rs}:i^*R(rs)_*\\to R(ph)_*v^*$, with exactly the section normalizations of step 3. In particular these are the canonical restriction identifications used to normalize $I,J,I'$ in the statement.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; restriction of K-injective representatives; derived.tex Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "For $B_0\\in D_{W'}$ put $\\chi_{B_0}=Rp_*(\\rho_{s,B_0})\\circ\\rho_{r,Rs_*B_0}$. The specified comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] gives\n$$\\chi_{B_0}\\circ i^*(\\kappa_{r,s,B_0})=\\kappa_{p,h,v^*B_0}\\circ\\rho_{rs,B_0}.$$\nIndeed, choose a K-injective representative $H$ of $B_0$. Step 2 makes $s_*H$, $v^*H$, and $h_*v^*H$ K-injective, so the extra resolutions in the cited normalization can be chosen to be identities. At $Q\\to Y$, both sides of the display are the section identification on the same complex $H(W'\\times_B Q)=H(P'\\times_Y Q)$: the successive fibre-product identifications of step 3 equal the direct one. The module actions are the same restricted actions. Thus the degreewise maps coincide before localization. This proves the displayed identity with these particular $\\kappa$'s, rather than unspecified direct-image isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-proetale-open-restriction-counit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, with its K-injective normalization; the section identities of step 3."
+   }
+  },
+  {
+   "text": "Set $X=Rh_*A$, $t_A=\\eta_{v,A}^{-1}$, $F_A=Rr_*(J_A)\\circ I_X$, and\n$$L_A=Rp_*Rh_*(t_A)\\circ\\chi_{v_!A}:i^*Rr_*Rs_*v_!A\\longrightarrow Rp_*Rh_*A.$$\nThe two given normalizations say\n$$Rp_*(\\eta_{u,X}^{-1})\\rho_{r,u_!X}\\,i^*I_X\\,\\eta_{i,Rp_*X}=1,\\qquad Rh_*(t_A)\\rho_{s,v_!A}\\,u^*J_A\\,\\eta_{u,X}=1.$$\nNaturality of $\\rho_r$ at $J_A$ now gives, by substitution,\n$$L_A\\,i^*F_A\\,\\eta_{i,Rp_*X}=Rp_*\\bigl(Rh_*(t_A)\\rho_{s,v_!A}\\,u^*J_A\\bigr)\\rho_{r,u_!X}\\,i^*I_X\\,\\eta_{i,Rp_*X}=1.$$\nHere the second normalization replaces the parenthesis by $\\eta_{u,X}^{-1}$, and the first normalization gives the final identity. All inverses used are open units, which are invertible by step 2; invertibility of $I$ or $J$ is unnecessary.",
+   "uses": [
+    "det-sf-comp-composition-interchange",
+    "det-sf-open-closed-sequence-ring-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Canonicity and associativity: the two composites have the same open normalization; explicit substitution into clause (2) of det-sf-comp-composition-interchange."
+   }
+  },
+  {
+   "text": "Put $\\lambda_A=R(ph)_*(t_A)\\rho_{rs,v_!A}$. Step 5 and naturality of $\\kappa_{p,h}$ at $t_A$ give\n$$L_A\\,i^*\\kappa_{r,s,v_!A}=\\kappa_{p,h,A}\\lambda_A.$$\nConsider $G_A=\\kappa_{r,s,v_!A}^{-1}F_A\\,i_!(\\kappa_{p,h,A}):i_!R(ph)_*A\\to R(rs)_*v_!A$. Using this display, naturality of $\\eta_i$, and step 6, its normalization is\n$$\\lambda_A\\,i^*G_A\\,\\eta_{i,R(ph)_*A}=\\kappa_{p,h,A}^{-1}\\bigl(L_A\\,i^*F_A\\,\\eta_{i,Rp_*Rh_*A}\\bigr)\\kappa_{p,h,A}=1.$$\nThe uniqueness assertion of [det-sf-comp-composition-interchange](2), applied to $(ph,i,v,rs)$, yields $G_A=I'_A$. Multiplying by $\\kappa_{r,s,v_!A}$ and $i_!(\\kappa_{p,h,A}^{-1})$ proves exactly the required equality. All factors and the restriction identifications are natural; hence it holds naturally in $A$. The proof used only K-injectives, exact pullback and open extension, so applies to every unbounded $A$.",
+   "uses": [
+    "det-sf-comp-composition-interchange",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Canonicity and associativity, first two sentences: uniqueness after open restriction, with all direct-image comparisons retained."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sf-comp-composition-interchange",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+  "place": "Canonicity and associativity, first two sentences; explicit K-injective section calculation followed by the open-normalization uniqueness argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +156,38 @@
    "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized proper pushforward open extension by zero exchange respects vertical composition on unbounded module derived categories",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.comp_pushforward, SheafOfModules.pushforwardComp, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, CategoryTheory.Functor.sheafPushforwardContinuousComp, PresheafOfModules.pushforward₀, SheafOfModules.pushforward_assoc. Generic mates, underived module pushforward/restriction, and condensed-module naturality do not state the specified unbounded pro-etale proper-open comparison law.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mate\", \"comp\"",
+   "results": "12 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.comp_leftAdjointMate, CategoryTheory.comp_rightAdjointMate, CategoryTheory.comp_leftAdjointMate_assoc, CategoryTheory.comp_rightAdjointMate_assoc. Generic mates, underived module pushforward/restriction, and condensed-module naturality do not state the specified unbounded pro-etale proper-open comparison law.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized proper open interchange on unbounded derived categories of condensed coefficient module sheaves is compatible with composition of proper direct images",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, LightCondMod.hom_naturality_apply, CondensedMod.hom_naturality_apply, SheafOfModules.pushforwardComp, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, AlgebraicGeometry.Scheme.Modules.pushforwardComp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforwardComp_hom_app_val_app. Generic mates, underived module pushforward/restriction, and condensed-module naturality do not state the specified unbounded pro-etale proper-open comparison law.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open restriction of derived direct image commutes with composition, so adjunction normalized extension by zero maps satisfy vertical pasting",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, CategoryTheory.sheafComposeNatTrans_fac, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, PresheafOfModules.pushforward_assoc, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val. Generic mates, underived module pushforward/restriction, and condensed-module naturality do not state the specified unbounded pro-etale proper-open comparison law.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-localizing-lower-shriek-composition",
@@ -78,5 +206,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-interchange-proper-pasting",
+  "worker": "stage1",
+  "summary": "Expanded proper-map pasting into seven steps: Cartesian opens, K-injective preservation, underived restriction with arbitrary coefficient rings, termwise derived restriction, the explicit compatibility with the specified kappa, and two open-normalization calculations. Reused existing DAG statements throughout; no new nodes, no statement change and no boundedness or constructibility assumptions.",
+  "blueprint": "Realizes the first two sentences of Canonicity and associativity in sk-thm-sf-comp-composition.proof.md (refining the first compactification), as used through lem-sfb-localizing-lower-shriek-composition in the first paragraph of det-cor-affine-space-rational-induction. Steps 1-5 make the canonical restriction comparisons explicit; steps 6-7 prove the equality by normalization uniqueness. The inherited affine-space unit and blueprint ancestry are retained.",
+  "tool_uses": [
+   {
+    "node": "det-sf-comp-composition-interchange",
+    "why": "Supplies precisely the normalized proper/open maps and their uniqueness; the affine-space unit uses lower-shriek composition but has no separate theorem giving these normalized maps."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Supplies exact module pullbacks and the ring identifications for condensed coefficients, including the finite-subextension convention; a generic coefficient-system tool."
+   },
+   {
+    "node": "det-sf-open-closed-sequence-ring-sheaf",
+    "why": "Supplies exact open extension, its adjunction and invertible unit for arbitrary ring sheaves; a generic open-module tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Supplies preservation of K-injectives for direct image and open restriction from their exact left adjoints; a generic homological algebra tool."
+   },
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Supplies the underived module open-restriction isomorphism and its fibre-product section normalization for arbitrary ring sheaves; the affine-space unit has no such coefficient-general statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Supplies the specified unbounded derived comparison and its normalization on K-injective representatives; a generic ringed-topos tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sf-comp-composition-interchange",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q86-8a1da93e4",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-8a1da93e4 (reviewer sub-agent of L); spot-checked: Read the item, seven proof steps, chapter/unit route, all cited node statements, blueprint proof, and Stacks Tags 0D6E, 08FI, and 08BJ. The normalized κ direction, coefficient category, K-injective preservation, fibre-product restriction maps, and uniqueness normalization all check. Edge cases (zero input, empty/identity opens, identity proper maps) pass. No new nodes or repairs are needed; review.md was written."
  }
 }

@@ -18,9 +18,92 @@
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-extension-by-zero-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C_T=\\nu_T^*$, $e=j_!^e$, $d=j_!^p$, and use the specified comparison $e_j:C_Te\\xrightarrow{\\sim}dC_U$. Choose K-flat representatives when forming the displayed unbounded derived tensors. The ringed-topoi tensor/pullback comparison gives a canonical isomorphism $C_T(F\\otimes_A^L H)\\cong C_TF\\otimes_A^LC_TH$, natural in both factors. Since $L$ is locally isomorphic to a finite free $A_U$-module, tensoring with $L$ is exact; the shift $[m]$ only translates cohomological degrees. The etale and pro-etale extension-by-zero functors are exact, and $C_T$ is exact and preserves cohomology. Thus $F\\otimes_A^Lj^*G$ and its two open extensions are bounded below. The target tensors are bounded below as well: the existing etale projection isomorphism [lem-pur-etale-open-derived-tensor] and pro-etale projection isomorphism [lem-cbc-extension-zero-projection-formula] identify each target with the corresponding bounded-below source. This also justifies first making all formulas in the unbounded categories and then restricting them to the stated $D^+$ objects.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-cbc-extension-zero-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R, section-comparison; Tag 09AF, lemma-jshriek-comparison; bounded-below restriction"
+   }
+  },
+  {
+   "text": "On the etale site, the canonical open tensor comparison of [lem-pur-etale-open-derived-tensor] is the forward map $\\gamma^e:(j_!^eF)\\otimes_A^LG\\to j_!^e(F\\otimes_A^Lj^*G)$ and is an isomorphism. The open unit is an isomorphism by [prop-weil-open-closed-recollement-adjunctions]. Unwinding the derived restriction/tensor comparison, the inverse of this canonical map is exactly the $j_!^e\\dashv j^*$ adjunct of the open unit of $F$ tensored with $1_{j^*G}$; this is the defining prescription for $\\kappa^e$. Therefore $\\kappa^e=(\\gamma^e)^{-1}$.",
+   "uses": [
+    "lem-pur-etale-open-derived-tensor",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tag 0E8I, sites-modules.tex, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "On the pro-etale site, [lem-cbc-extension-zero-projection-formula] gives the canonical isomorphism $(j_!^pC_UF)\\otimes_A^LC_TG\\xrightarrow{\\sim}j_!^p(C_UF\\otimes_A^Lj_p^*C_TG)$, whose orientation is the forward map $\\gamma^p$. The normalized derived open-tensor statement [lem-sf-open-tensor-normalization] identifies the inverse of this map with the $j_!^p\\dashv j_p^*$ adjunct of the open unit tensored with the identity. Thus the map prescribed in the item is $\\kappa^p=(\\gamma^p)^{-1}$.",
+   "uses": [
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/pur9-def-etale-open-projection.md",
+    "place": "Open-extension projection map; proetale.tex Tag 09AF, lemma-jshriek-comparison"
+   }
+  },
+  {
+   "text": "Take the K-flat representatives from Step 1 simultaneously on the two sites. The ordinary sheaf-level comparison [lem-sf-open-comparison-tensor-normalization] says that the unit-normalized comparison $e_j$ carries the etale adjunct tensor map to the pro-etale adjunct tensor map, after applying the canonical inverse-image and tensor comparisons. Applying this equality degreewise to the total tensor complexes and passing to the derived categories is valid by exactness and the derived tensor/pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. It gives $C_T(\\gamma^e)=\\gamma^p$ under $e_j$ and the specified comparisons. Since both maps are isomorphisms by Steps 2 and 3, taking inverses gives $C_T(\\kappa^e)=\\kappa^p$.",
+   "uses": [
+    "lem-sf-open-comparison-tensor-normalization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-comparison-pullback-exact",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; derived comparison via K-flat total complexes"
+   }
+  },
+  {
+   "text": "All constructions used above are natural in $F$ and $G$: the open units, adjunction bijections, $e_j$, inverse-image comparisons, and tensor comparisons are natural, and the equalities are preserved by composition and inversion of isomorphisms. The argument used only that $L$ is finite locally free to obtain boundedness; no flatness or finite Tor-amplitude condition on $G$ or on $A$ over a smaller ring enters.",
+   "uses": [
+    "lem-sf-open-comparison-tensor-normalization",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; naturality clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-pur-etale-open-derived-tensor",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-open-comparison-tensor-normalization",
+  "lem-cbc-proetale-extension-zero-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AF, lemma-jshriek-comparison, combined with Tag 0GL1, lemma-j-shriek-and-tensor and the unit-normalized comparison lemma"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-vector-integration-site-comparison",
@@ -71,12 +154,51 @@
  "blueprint": {
   "from": {
    "node": "cor-pur-dualizing-object-purity",
-   "place": "Statement, 'Every map involved was normalized by the Kummer generator', and Proof, the inverse diagonal identification: comparison of the normalized vector-bundle map used at the normal-bundle endpoint; hidden general argument of returned lem-pur-vector-integration-site-comparison, Step 7",
+   "place": "Statement sentence “Every map involved was normalized by the Kummer generator”, and proof paragraph on the normalized vector-bundle map at the normal-bundle endpoint; hidden general open tensor projection comparison across the two sites",
    "via": [
     "lem-pur-vector-integration-site-comparison"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-open-projection-site-transport",
+  "worker": "stage1",
+  "summary": "Split the site-transport statement into boundedness, the etale and pro-etale projection isomorphisms, and the comparison calculation. No new nodes were needed: the etale and pro-etale derived open-tensor formulas and the unit-normalized site-comparison lemma already state the required component maps. The final step records naturality and the absence of any hypothesis on G beyond D+.",
+  "blueprint": "Realizes cor-pur-dualizing-object-purity, Statement sentence “Every map involved was normalized by the Kummer generator”, and its proof paragraph on the normalized vector-bundle map at the normal-bundle endpoint; the hidden general argument is the open tensor projection comparison across the two sites.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Its general ringed-topos derived tensor and pullback comparison is used to pass the ordinary comparison calculation to derived objects."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Its exactness statement supplies bounded-below preservation for the etale extension-by-zero functor."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Its stated derived projection isomorphism transfers bounded-below status from the etale open-tensor source to the target."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Its stated pro-etale derived projection isomorphism transfers bounded-below status from the pro-etale open-tensor source to the target."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-cbc-extension-zero-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-b17a91f06",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-b17a91f06 (reviewer sub-agent of L); spot-checked: The mathematics and all five proof steps were read and checked against the cited DAG statements and Stacks sources. One delivery metadata fault is repaired: `created.item` incorrectly named `lem-pur-vector-integration-site-comparison`. Step 1 also lacked a cited justification for boundedness of the derived tensor targets; the repair cites the existing etale and pro-etale projection isomorphisms and explains the boundedness transfer. Corrected JSON: `fixes/dag/nodes/sec-smooth-purity/lem-pur-open-projection-site-transport.json`. Full findings are in `review.md`; no new nodes, duplicates, cycles, SGA citations, or coefficient/base-change mismatches found.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -10,9 +10,92 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-infinity-mapping-composition], choose edges $\\epsilon_b:d_b\\to d'_b$ representing $e_b$ for $b=a,x,y$. Each $\\epsilon_b$ is an equivalence, since its component class is invertible. Set $V=\\{a,x,y\\}\\subset K$, the discrete simplicial subset of all vertices. The three edges define an edge $\\epsilon:d|_V\\to d'|_V$ in $\\operatorname{Fun}(V,\\mathcal C)$: degreewise, a map from $V\\times\\Delta^1$ is precisely three maps from $\\Delta^1$. Choosing inverse edges and inverse-triangle witnesses for the three $\\epsilon_b$ gives, component by component, an inverse and both triangle witnesses for $\\epsilon$; hence $\\epsilon$ is an equivalence edge. This uses only the actual equivalence witnesses, without identifying a homotopy-category isomorphism with an already coherent transformation on $K$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Remark 4.6.8.14 and the homotopy-category equivalence criterion; agent assembly on the discrete vertex subset."
+   }
+  },
+  {
+   "text": "The inclusion $V\\hookrightarrow K$ is degreewise injective and both sets are small in the chosen universe. Apply the restriction clause of [lem-coef-infinity-isofibration-exponentiation] to obtain an isofibration $r:\\operatorname{Fun}(K,\\mathcal C)\\to\\operatorname{Fun}(V,\\mathcal C)$ between quasicategories. Its equivalence-edge lifting property applied at the object $d$ to $\\epsilon:r(d)\\to d'|_V$ supplies an equivalence edge $\\eta_0:d\\to d_0$ with $r(\\eta_0)=\\epsilon$ and $r(d_0)=d'|_V$. Thus $d_0$ has exactly the vertices $d'_a,d'_x,d'_y$. Write its legs as $u_0:d'_a\\to d'_x$ and $v_0:d'_a\\to d'_y$. The edges $\\epsilon_b$ are the exact vertex restrictions of $\\eta_0$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3, restriction isofibration, and the definition of its equivalence-edge lifting property."
+   }
+  },
+  {
+   "text": "Restrict $\\eta_0:K\\times\\Delta^1\\to\\mathcal C$ to the $u$ leg. The square $\\Delta^1\\times\\Delta^1$ has the two triangles with ordered vertices $((0,0),(1,0),(1,1))$ and $((0,0),(0,1),(1,1))$. Their common diagonal $w_x:d_a\\to d'_x$ therefore satisfies $[w_x]=[\\epsilon_x][u]=[u_0][\\epsilon_a]$ by the two-simplex composition clause of [lem-coef-infinity-mapping-composition]. Comparing with the assumed equality gives $[u_0]e_a=[u']e_a$, so cancellation of the isomorphism $e_a$ gives $[u_0]=[u']$. Applying the same two-triangle calculation on the $v$ leg gives $[v_0]=[v']$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Remark 4.6.8.10: two-simplices compute composition on components; explicit square triangulation and cancellation."
+   }
+  },
+  {
+   "text": "Use the arrow mapping space $U_{\\mathcal C}(s,t)=\\{s\\}\\times_{\\mathcal C}\\operatorname{Fun}(\\Delta^1,\\mathcal C)\\times_{\\mathcal C}\\{t\\}$ of [lem-coef-infinity-pinch-comparison]. Its pinch inclusion is the identity on vertices (both vertex sets are edges $s\\to t$) and induces a bijection on realized components. Step 3 consequently puts $u_0,u'$ in one component of the Kan complex $U_{\\mathcal C}(d'_a,d'_x)$, and puts $v_0,v'$ in one component of $U_{\\mathcal C}(d'_a,d'_y)$. By the component clause of [lem-coef-kan-realization-serre], each pair is joined by a finite zigzag of simplicial edges. Such a zigzag in a Kan complex gives a single edge with the required orientation: reverse an edge $f:p\\to q$ by filling $\\Lambda^2_0$ with edges $01=f$ and $02=\\mathrm{id}_p$; the missing edge $12$ goes from $q$ to $p$. Compose successive oriented edges by filling $\\Lambda^2_1$, and induct on the number of edges; for a zigzag of length zero use a degenerate edge. Obtain $h_u:\\Delta^1\\to U_{\\mathcal C}(d'_a,d'_x)$ from $u_0$ to $u'$ and $h_v:\\Delta^1\\to U_{\\mathcal C}(d'_a,d'_y)$ from $v_0$ to $v'$. The reversal and finite induction are direct uses of the Kan horn definition, not a further rectification theorem.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-realization-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10 for pinch comparison; Hovey, Model Categories, Definition 3.4.1 and Lemmas 3.4.2-3.4.3 for components; explicit Kan two-horn argument."
+   }
+  },
+  {
+   "text": "By the degreewise fixed-endpoint definition of $U$ in [lem-coef-infinity-pinch-comparison], adjunction turns $h_u,h_v$ into maps $H_u,H_v:\\Delta^1_{\\mathrm{leg}}\\times\\Delta^1_{\\mathrm{time}}\\to\\mathcal C$. They restrict at time $0$ to $u_0,v_0$, at time $1$ to $u',v'$, and on the leg-source edge to the same constant map at $d'_a$; their leg-target edges are constant at $d'_x,d'_y$. In each simplicial degree the product with $\\Delta^1$ distributes over the pushout of the two leg sets along their source. These identifications respect all simplicial operators. Hence $H_u$ and $H_v$ glue to $H:K\\times\\Delta^1\\to\\mathcal C$. The endpoints are exactly $d_0,d'$, so $H$ is an edge $\\xi:d_0\\to d'$ in $\\operatorname{Fun}(K,\\mathcal C)$ whose three components are degenerate identity edges. No additional compatibility simplex is needed: $K$ is precisely the union of these two edges along the source vertex.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Arrow mapping-space definition; agent degreewise pushout and internal-Hom adjunction calculation."
+   }
+  },
+  {
+   "text": "The functor simplicial set $\\operatorname{Fun}(K,\\mathcal C)$ is a quasicategory by [lem-coef-infinity-isofibration-exponentiation]. Fill its inner two-horn with edges $01=\\eta_0$ and $12=\\xi$, obtaining an edge $\\eta:d\\to d'$ on $02$. At each vertex $b$, evaluation of that two-simplex and [lem-coef-infinity-mapping-composition] give $[\\eta_b]=[\\xi_b][(\\eta_0)_b]=[\\mathrm{id}_{d'_b}]e_b=e_b$. Each $\\eta_b$ is therefore an equivalence by the same node's invertible-class criterion. Apply [lem-coef-infinity-pointwise-equivalences] with the small shape $K$ to conclude that $\\eta$ is an equivalence edge. This proves existence with the prescribed three classes; no step imposes uniqueness on the path, lift, or horn-filler choices.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4 after inner two-horn composition; component computation as in Kerodon 01PF."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-mapping-composition",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-infinity-pointwise-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, coherent derived coefficient adjunction foundations, through the Brown right-exact extension ancestry; explicit span comparison from existing restriction, mapping and component nodes. Online source checks: Cisinski Proposition 7.5.6, printed p. 373, and Kerodon 01F3, 01L5, 01PF, 01DK."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +124,38 @@
    "results": "{\"t\": \"2026-10-17T08:38:27Z\", \"tool\": \"leanfinder\", \"query\": \"For diagrams indexed by the span shape in a quasicategory every isomorphism in the homotopy category can be lifted to a pointwise equivalence of coherent spans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory.mkNatIso\", \"CategoryTheory.Limits.spanExt\", \"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"CategoryTheory.Limits.spanIsoMk\", \"CategoryTheory.Limits.diagramIsoSpan\"], \"digest\": \"c65cc82b271daf95\"}",
    "date": "2026-10-17",
    "verdict": "no match: spanIsoMk/spanExt and IsColimit.ofCoconeEquiv are ordinary category statements. The SSet homotopy-category hits describe the quotient and induced ordinary natural isomorphisms, not a lift to coherent diagrams or cocone squares."
+  },
+  {
+   "tool": "grep",
+   "query": "spanIsoMk|spanExt|mkNatIso",
+   "results": "{\"t\": \"2026-10-17T13:01:29Z\", \"tool\": \"grep\", \"query\": \"spanIsoMk|spanExt|mkNatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\"], \"digest\": \"f6f04738749ee44b\"}; Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean:423-438 and Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean:419-432. spanIsoMk/spanExt construct ordinary-category natural isomorphisms; mkNatIso constructs an ordinary natural isomorphism of functors out of a homotopy category. None constructs a coherent quasicategory span equivalence. Other semantic hit HomotopyCategory.homotopyEquivOfIso concerns chain complexes, not arbitrary quasicategories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, CategoryTheory.Limits.spanIsoMk",
+   "results": "{\"t\": \"2026-10-17T13:01:30Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, CategoryTheory.Limits.spanIsoMk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean:423-438 and Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean:419-432. spanIsoMk/spanExt construct ordinary-category natural isomorphisms; mkNatIso constructs an ordinary natural isomorphism of functors out of a homotopy category. None constructs a coherent quasicategory span equivalence. Other semantic hit HomotopyCategory.homotopyEquivOfIso concerns chain complexes, not arbitrary quasicategories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For two diagrams of shape a span in an infinity category, a commuting isomorphism on their homotopy category spans is induced by a natural equivalence of coherent diagrams",
+   "results": "{\"t\": \"2026-10-17T13:01:30Z\", \"tool\": \"leansearch\", \"query\": \"For two diagrams of shape a span in an infinity category, a commuting isomorphism on their homotopy category spans is induced by a natural equivalence of coherent diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.spanIsoMk\", \"CategoryTheory.Limits.spanIsoMk_hom_app\", \"CategoryTheory.Limits.spanExt\", \"CategoryTheory.Limits.diagramIsoSpan_hom_app\", \"CategoryTheory.Limits.cospanExt\", \"CategoryTheory.Limits.diagramIsoSpan\", \"CategoryTheory.Limits.cospanIsoMk\", \"HomotopyCategory.homotopyEquivOfIso\"], \"digest\": \"ee54357f2d2e13e8\"}; Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean:423-438 and Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean:419-432. spanIsoMk/spanExt construct ordinary-category natural isomorphisms; mkNatIso constructs an ordinary natural isomorphism of functors out of a homotopy category. None constructs a coherent quasicategory span equivalence. Other semantic hit HomotopyCategory.homotopyEquivOfIso concerns chain complexes, not arbitrary quasicategories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between spans in the homotopy category of a quasicategory lifts to an equivalence between coherent span diagrams with prescribed vertex classes",
+   "results": "{\"t\": \"2026-10-17T13:01:35Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism between spans in the homotopy category of a quasicategory lifts to an equivalence between coherent span diagrams with prescribed vertex classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.spanExt\", \"CategoryTheory.Limits.spanIsoMk\", \"CategoryTheory.Limits.spanIsoMk_hom_app\", \"CategoryTheory.Limits.diagramIsoSpan\", \"CategoryTheory.Limits.spanExt_app_one\", \"CategoryTheory.Limits.spanIsoMk_inv_app\", \"CategoryTheory.Limits.spanExt_app_left\", \"CategoryTheory.Limits.spanExt_hom_app_left\"], \"digest\": \"6e2b5de440f13d39\"}; Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean:423-438 and Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean:419-432. spanIsoMk/spanExt construct ordinary-category natural isomorphisms; mkNatIso constructs an ordinary natural isomorphism of functors out of a homotopy category. None constructs a coherent quasicategory span equivalence. Other semantic hit HomotopyCategory.homotopyEquivOfIso concerns chain complexes, not arbitrary quasicategories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-right-exact-extension",
@@ -75,5 +186,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-brown-span-coherent-rectification",
+  "worker": "stage1",
+  "summary": "Q116: supplied a six-step coherent span comparison with no new nodes. Lift the prescribed vertex equivalences through restriction, compute the homotopy-category leg equalities by square triangulation, join the corresponding arrow-space vertices using pinch comparison and Kan components, glue fixed-endpoint squares, then compose and apply pointwise equivalences. Statement unchanged; no uniqueness claim. Exact Lean and whole-blueprint searches found no attachment or duplicate.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction and inverse-limit compatibility), via lem-coef-brown-right-exact-extension proof step 2, the coherent span rectification sentence. The current main-20261015 statement agrees with the historical ancestor statement; this is a foundation below the unit route, not a change to that route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q116-feada1234",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q116-feada1234 (reviewer sub-agent of L); spot-checked: Read the complete item, all six proof steps, cited statements and source locations. Prescribed component classes, fixed-endpoint gluing, horn orientations and equivalence detection check out. No duplicate or circular split found; finite cases passed. No repairs or tool_uses needed. Detailed checks saved in review.md."
  }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-alternating-form-dimension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Alternating-form dimension",
@@ -15,20 +15,57 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "With $B$ the Gram matrix of $\\beta$ one has $B^\\top=-B$; hence\n$\\det(B)=\\det(-B^\\top)=(-1)^n\\det(B)$, and $\\det(B)\\neq0$\n(nondegenerate, $K$ a field) with $\\operatorname{char}(K)\\neq2$ gives\n$(-1)^n=1$, i.e. $n=\\dim_K V$ is even.",
-   "uses": [],
-   "elementary": null
+   "text": "Choose a basis b of V indexed by a finite type ι with |ι|=n=dim_K V  (for example, a basis indexed by Fin n), and let B be the Gram matrix of β in b. Alternation gives B^\\top=-B. Therefore det(B)=det(B^\\top)=det(-B)=(-1)^n det(B), using invariance of determinant under transpose and the determinant of a negated matrix; the exponent is n because the basis index has cardinality n. By the cited nondegeneracy criterion, det(B)\\ne0. Cancelling this nonzero factor yields (-1)^n=1. If n were odd, then (-1)^n=-1, so 1=-1 and hence 2=0 in K, contradicting char(K)\\ne2. Thus n is even, as required.",
+   "uses": [
+    "lem-weil-bilin-form-nondegenerate-det"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-reciprocity/lem-weil-alternating-form-dimension.proof.md",
+    "place": "the sole proof paragraph"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-bilin-form-nondegenerate-det"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/lem-weil-alternating-form-dimension.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-reciprocity/lem-weil-alternating-form-dimension.proof.md",
+  "place": "the sole proof paragraph, expanded to name the finite basis with cardinality dim_K V, determinant identities, and characteristic-not-two cancellation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of a finite dimensional vector space over a field with a nondegenerate alternating bilinear form in characteristic not two is even",
+   "results": "Module.finrank_of_isPerfPair, LinearMap.BilinForm.IsAlt and nondegeneracy declarations; no theorem directly states even dimension.",
+   "date": "2026-10-17",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det_transpose, Matrix.det_neg, AlternatingMap, Nondegenerate",
+   "results": "loogle returned no hits because Nondegenerate was an unknown identifier in the combined pattern.",
+   "date": "2026-10-17",
+   "verdict": "no direct match; determinant names searched separately below"
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*dimension|alternating.*even|det.*transpose Mathlib",
+   "results": "Matrix.det_transpose and Matrix.det_neg in Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean; no alternating-form parity theorem.",
+   "date": "2026-10-17",
+   "verdict": "general determinant identities only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite dimensional nondegenerate alternating bilinear form has even dimension",
+   "results": "LinearMap.IsAlt, LinearMap.BilinForm.Nondegenerate, and LinearMap.BilinForm.nondegenerate_iff_det_ne_zero; no direct parity theorem.",
+   "date": "2026-10-17",
+   "verdict": "generalization: determinant criterion is used via the new Mathlib leaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -48,5 +85,21 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-reciprocity"
+ "unit": "sk-prop-reciprocity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-alternating-form-dimension",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the current main-20261015 blueprint. The proof is one Gram-matrix argument; I made the finite basis, determinant identities, characteristic-not-two cancellation, and parity contradiction explicit, and added one Mathlib leaf for the nondegeneracy-to-nonzero-Gram-determinant implication. No Lean declaration with this blueprint tag or exact statement exists in the reference source.",
+  "blueprint": "Realizes the sole proof paragraph of lem-weil-alternating-form-dimension.proof.md.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q123-360db6cca",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-360db6cca (reviewer sub-agent of L); spot-checked: Mathematics passes, but fixes are needed: self-contained leaf dependencies, inaccurate grep result, current blueprint source metadata, and explicit basis-cardinality identification. Repairs are in fixes/dag/nodes/sec-zeta-weil/, with full checks in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
