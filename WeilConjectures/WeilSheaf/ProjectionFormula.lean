@@ -127,12 +127,39 @@ theorem nonempty_extensionByZeroCompIhomFunctorIso [QuasiCompact i] (B : ProEtal
     exact mono_comp _ _
   -- the restriction along `i` of `m F` and of `a F` are isomorphisms
   have hum (F : ProEtaleWeilSheaf k₀ l X) :
-      IsIso ((ProEtaleWeilSheaf.upperStar k₀ l i).map (m F)) := sorry
+      IsIso ((ProEtaleWeilSheaf.upperStar k₀ l i).map (m F)) := by
+    have h1 : IsIso ((ib)^*ᵃ[l].map ((adicOpenImmersionLowerShriekToLowerStar l ib).app
+        F.carrier)) :=
+      inferInstanceAs (IsIso ((IsoAlgebra.forget _).map
+        ((ProEtaleWeilSheaf.upperStar k₀ l i).map (ρ.app F))))
+    have h2 : IsIso ((ib)^*ᵃ[l].map ((AdicSheaf.ihom B.carrier).map
+        ((adicOpenImmersionLowerShriekToLowerStar l ib).app F.carrier))) := by
+      have := NatIso.naturality_2 (adicUpperStarIhomIso l ib B.carrier)
+        ((adicOpenImmersionLowerShriekToLowerStar l ib).app F.carrier)
+      simp only [Functor.comp_map] at this
+      rw [← this]
+      infer_instance
+    have : IsIso ((IsoAlgebra.forget _).map ((ProEtaleWeilSheaf.upperStar k₀ l i).map (m F))) :=
+      h2
+    exact isIso_of_reflects_iso _ (IsoAlgebra.forget _)
   have hua (F : ProEtaleWeilSheaf k₀ l X) :
       IsIso ((ProEtaleWeilSheaf.upperStar k₀ l i).map (a F)) := by
     simp only [a, Functor.map_comp]
     infer_instance
-  have hz (F : ProEtaleWeilSheaf k₀ l X) : a F ≫ cokernel.π (m F) = 0 := sorry
+  have hz (F : ProEtaleWeilSheaf k₀ l X) : a F ≫ cokernel.π (m F) = 0 := by
+    have hZ : IsZero ((ib)^*ᵃ[l].obj (Fg.obj (cokernel (m F)))) := by
+      have := hum F
+      have : IsIso ((ib)^*ᵃ[l].map (Fg.map (m F))) :=
+        inferInstanceAs (IsIso ((IsoAlgebra.forget _).map
+          ((ProEtaleWeilSheaf.upperStar k₀ l i).map (m F))))
+      have : Epi ((ib)^*ᵃ[l].map (Fg.map (m F))) := IsIso.epi_of_iso _
+      exact (isZero_cokernel_of_epi _).of_iso ((ib)^*ᵃ[l].mapIso (PreservesCokernel.iso Fg (m F)) ≪≫
+        PreservesCokernel.iso (ib)^*ᵃ[l] _)
+    apply Fg.map_injective
+    rw [Functor.map_comp, Functor.map_zero]
+    apply ((adicOpenImmersionLowerShriekAdjunction l ib).homEquiv _ _).injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    exact hZ.eq_of_tgt _ _
   let κ (F : ProEtaleWeilSheaf k₀ l X) := Abelian.monoLift (m F) (a F) (hz F)
   have hκ (F : ProEtaleWeilSheaf k₀ l X) : κ F ≫ m F = a F := Abelian.monoLift_comp _ _ _
   have hiso (F : ProEtaleWeilSheaf k₀ l X) : IsIso (κ F) := sorry
