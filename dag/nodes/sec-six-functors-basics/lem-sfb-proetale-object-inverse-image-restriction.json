@@ -231,5 +231,30 @@
   "group": "Q154",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-84fee8bb4 (reviewer sub-agent of L); spot-checked: FIX: two citation faults (C4/C1) repaired; the mathematics is correct and the statement is unchanged. I read the item and its eight steps in full, together with every cited statement (def-weil-proetale-inverse-image, lem-weil-proetale-weakly-etale-localization, def-pur-localized-ringed-site, def-pur-sheaf-tensor-product, def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification, def-pc-fibre-product, def-weil-pbc-proetale-site), Stacks sites.tex Tag 03CE and its proof, unit sk-lem-proper-heart-bound and the citing node det-proper-heart-bound-lattice step 5(a). The base-change functor is u_r(V)=W×_X V, the u_f of the definition with f=r; it agrees with 03CE's v(X)=X×U/U. The coefficient categories (sets, abelian groups, rings, A_X-modules) and the structure map c^r_A=ε∘r^{-1}ρ match the definition. The initiality of (U,(s,id)) checks out, the arrow being pr_V φ, including for a W→X that is not a monomorphism (W=X⊔X). The explicit inverse colimit comparison, its naturality and the identification d=e^{-1} are all correct, as are the product-comparison action and the tensor collapse along an isomorphism. Fault 1: step 6 used the unit-at-(V,id) description of the adjunction without citing it; it now cites lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction, a Mathlib leaf. Fault 2: step 8 used sheafification of presheaves of modules but cited def-weil-pbc-sheafification; it now cites def-weil-presheaf-modules-sheafification. proof_deps was recomputed as the union of all uses. There are no new nodes, and the duplicate search (étale restriction, isomorphism inverse image, module/abelian comparisons, counit localization) found no duplicate. The declared tool_use of lem-weil-proetale-weakly-etale-localization is accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5843e875e",
+  "group": "N8",
+  "result": "pass",
+  "note": "All three clauses match the node with no extra hypotheses. Clause 1: the index point is Mathlib's mapPullbackAdj unit pullback.lift (𝟙 _) U.hom, the node's (str,id) with fibre-product factors swapped; the presheaf iso is fixed by the coprojection field, toSheafify is asserted iso, and sheafIso_inv fixes the sheaf iso; covers Type/AddCommGrpCat/RingCat, plus CommRingCat for clauses 2-3. Clause 2: e is uniquely fixed by the constant-section condition, and c ≫ e.hom = sheafIso.hom says c = e⁻¹. Clause 3: natural A_W-module iso to SheafOfModules.pushforward with scalars through e. Uses the recorded ProEtaleInverseImage constructions and the existing localizationRestriction; helpers are real data or fixed assertions. Docstrings carry source and blueprint tags; single sorry; lean.statement verbatim; only the lean field changed; both report sections present. nt_compile.py exit 0 on both runs (16.6 s), no errors or warnings (warn.sorry=false in the live lakefile). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleObjectInverseImageRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleObjectInverseImageIndexPoint",
+   "AlgebraicGeometry.Scheme.ProEtaleObjectRestrictionComparison",
+   "AlgebraicGeometry.Scheme.proEtaleObjectModuleRestriction",
+   "AlgebraicGeometry.Scheme.proEtaleObjectInverseImageRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleObjectInverseImageRestriction.lean",
+  "statement": "theorem proEtaleObjectInverseImageRestriction (X : Scheme.{u}) (W : X.ProEt) (A : Type u) [CommRing A] : (∀ U : W.left.ProEt, Nonempty (IsInitial (proEtaleObjectInverseImageIndexPoint W U))) ∧ Nonempty (ProEtaleObjectRestrictionComparison W (Type (u + 1))) ∧ Nonempty (ProEtaleObjectRestrictionComparison W AddCommGrpCat.{u + 1}) ∧ Nonempty (ProEtaleObjectRestrictionComparison W RingCat.{u + 1}) ∧ ∃ (comparison : ProEtaleObjectRestrictionComparison W CommRingCat.{u + 1}) (e : proEtaleConstantRing W.left A ≅ (AlgebraicGeometry.ProEtale.localizationRestriction CommRingCat.{u + 1} W.hom W.prop).obj (proEtaleConstantRing X A)), (∀ U : W.left.ProEt, (toSheafify (ProEt.topology W.left) ((Functor.const W.left.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))).app (op U) ≫ e.hom.hom.app (op U) = (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))).app (op ((MorphismProperty.Over.map (f := W.hom) ⊤ W.prop).obj U))) ∧ proEtaleCoefficientInverseImageMap W.hom A ≫ e.hom = comparison.sheafIso.hom.app (proEtaleConstantRing X A) ∧ ∃ rho : ∀ M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing X A)), proEtaleConstantModulePullback W.hom A M ≅ (proEtaleObjectModuleRestriction W A e).obj M, ∀ (M N : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing X A))) (a : M ⟶ N), proEtaleConstantModulePullbackMap W.hom A a ≫ (rho N).hom = (rho M).hom ≫ (proEtaleObjectModuleRestriction W A e).map a",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All three clauses, including the distinguished initial index, canonical coprojection and sheafification-unit normalizations, the specified coefficient structure map, and natural module-sheaf isomorphisms. Helpers package these assertions or specialize the existing sectionwise pushforward; no coefficient finiteness or monomorphism is assumed."
  }
 }
