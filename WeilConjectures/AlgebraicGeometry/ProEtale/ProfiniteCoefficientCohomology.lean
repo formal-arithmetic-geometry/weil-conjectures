@@ -196,4 +196,126 @@ noncomputable def isLimitContinuousSheafCone (U : ℕ → OpenAddSubgroup A)
     exact congrArg (fun x : ULift.{u + 1} C(V.unop.left, A ⧸ (U m : AddSubgroup A)) ↦ x.down t)
       (hx (op m))
 
+/-- The morphism of sheaves `C(-, A) ⟶ C(-, B)` induced by a surjective homomorphism of discrete
+groups is an epimorphism: a continuous map to `B` is locally constant, hence locally lifts. -/
+lemma epi_continuousSheafMap_of_surjective {B : Type} [TopologicalSpace B] [AddCommGroup B]
+    [IsTopologicalAddGroup B] [DiscreteTopology A] [DiscreteTopology B]
+    (φ : ContinuousAddMonoidHom A B) (hφ : Function.Surjective φ) :
+    Epi (continuousSheafMap S φ) := by
+  rw [← Sheaf.isLocallySurjective_iff_epi']
+  refine ⟨fun {V} s₀ ↦ ?_⟩
+  let s : C(V.left, B) := s₀.down
+  refine Scheme.ProEt.mem_topology_of_openImmersion _ (fun x : V.left ↦ (V.left.fiberOpens s (s x)).ι)
+    (fun x ↦ ⟨x, ⟨x, rfl⟩, Scheme.Opens.ι_apply _ _⟩) fun x ↦
+      ⟨ULift.up (ContinuousMap.const _ (hφ (s x)).choose), ?_⟩
+  exact congrArg ULift.up (ContinuousMap.ext fun y ↦ (hφ (s x)).choose_spec.trans y.2.symm)
+
+end AlgebraicGeometry.ProEtale
+
+namespace CategoryTheory.Sheaf
+
+variable {C : Type*} [Category* C] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{u}]
+
+/-- A short complex `F₁ ⟶ F₂ ⟶ F₃` of abelian sheaves is exact if on sections `F₁(V) ⟶ F₂(V)` is
+injective with image the kernel of `F₂(V) ⟶ F₃(V)`: then `F₁` is the kernel of `F₂ ⟶ F₃`. -/
+lemma exact_of_injective_of_exact_sections {S : ShortComplex (Sheaf J AddCommGrpCat.{u})}
+    (hf : ∀ V, Function.Injective (S.f.hom.app V))
+    (hS : ∀ V (y : S.X₂.obj.obj V), S.g.hom.app V y = 0 → ∃ x, S.f.hom.app V x = y) :
+    S.Exact := by
+  refine S.exact_of_f_is_kernel (isLimitOfReflects (sheafToPresheaf J _)
+    ((KernelFork.isLimitMapConeEquiv _ _).symm (evaluationJointlyReflectsLimits _ fun V ↦
+      (KernelFork.isLimitMapConeEquiv _ _).symm ?_)))
+  let T := S.map (sheafToPresheaf J _ ⋙ (evaluation _ _).obj V)
+  have : Mono T.f := (AddCommGrpCat.mono_iff_injective _).2 (hf V)
+  exact ((ShortComplex.ab_exact_iff T).2 (hS V)).fIsKernel
+
+end CategoryTheory.Sheaf
+
+namespace AlgebraicGeometry.ProEtale
+
+variable (S : Scheme.{u}) {A : Type} [TopologicalSpace A] [AddCommGroup A]
+  [IsTopologicalAddGroup A] [CompactSpace A]
+
+omit [CompactSpace A] in
+/-- The morphism of sheaves induced by the zero homomorphism is zero. -/
+lemma continuousSheafMap_zero {B : Type} [TopologicalSpace B] [AddCommGroup B]
+    [IsTopologicalAddGroup B] : continuousSheafMap S (0 : ContinuousAddMonoidHom A B) = 0 := by
+  ext V x
+  rfl
+
+/-- The kernel `Uₘ / Uₘ₊₁` of the transition map `A / Uₘ₊₁ ⟶ A / Uₘ`, a finite group. -/
+noncomputable abbrev openAddSubgroupQuotientMapKer (U : ℕ → OpenAddSubgroup A)
+    (hU : ∀ m, U (m + 1) ≤ U m) (m : ℕ) : AddSubgroup (A ⧸ (U (m + 1) : AddSubgroup A)) :=
+  (openAddSubgroupQuotientMap U hU m : A ⧸ (U (m + 1) : AddSubgroup A) →+
+    A ⧸ (U m : AddSubgroup A)).ker
+
+/-- The short exact sequence `0 ⟶ C(-, Uₘ / Uₘ₊₁) ⟶ C(-, A / Uₘ₊₁) ⟶ C(-, A / Uₘ) ⟶ 0` of
+sheaves on `S_proét`. -/
+noncomputable def continuousSheafShortComplex (U : ℕ → OpenAddSubgroup A)
+    (hU : ∀ m, U (m + 1) ≤ U m) (m : ℕ) :
+    ShortComplex (Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1}) :=
+  ShortComplex.mk
+    (continuousSheafMap S ⟨(openAddSubgroupQuotientMapKer U hU m).subtype, continuous_subtype_val⟩)
+    (continuousSheafMap S (openAddSubgroupQuotientMap U hU m)) (by
+      rw [← continuousSheafMap_comp, ← continuousSheafMap_zero S]
+      congr 1
+      ext x
+      exact x.2)
+
+lemma shortExact_continuousSheafShortComplex (U : ℕ → OpenAddSubgroup A)
+    (hU : ∀ m, U (m + 1) ≤ U m) (m : ℕ) :
+    (continuousSheafShortComplex S U hU m).ShortExact := by
+  have hinj (V : (Scheme.ProEt S)ᵒᵖ) :
+      Function.Injective ((continuousSheafShortComplex S U hU m).f.hom.app V) := fun x y h ↦
+    ULift.ext _ _ (ContinuousMap.ext fun t ↦ Subtype.ext (congrArg
+      (fun z : ULift.{u + 1} C(V.unop.left, A ⧸ (U (m + 1) : AddSubgroup A)) ↦ z.down t) h))
+  refine .mk' (Sheaf.exact_of_injective_of_exact_sections hinj fun V y hy ↦ ?_) ?_ ?_
+  · let y' : ULift.{u + 1} C(V.unop.left, A ⧸ (U (m + 1) : AddSubgroup A)) := y
+    have hy' (t : V.unop.left) : y'.down t ∈ openAddSubgroupQuotientMapKer U hU m :=
+      congrArg (fun z : ULift.{u + 1} C(V.unop.left, A ⧸ (U m : AddSubgroup A)) ↦ z.down t) hy
+    exact ⟨ULift.up ⟨fun t ↦ ⟨_, hy' t⟩, y'.down.continuous.subtype_mk _⟩, rfl⟩
+  · have (V : (Scheme.ProEt S)ᵒᵖ) :
+        Mono (((sheafToPresheaf _ _).map (continuousSheafShortComplex S U hU m).f).app V) :=
+      (AddCommGrpCat.mono_iff_injective _).2 (hinj V)
+    have : Mono ((sheafToPresheaf _ _).map (continuousSheafShortComplex S U hU m).f) :=
+      NatTrans.mono_of_mono_app _
+    exact (sheafToPresheaf _ _).mono_of_mono_map this
+  · refine epi_continuousSheafMap_of_surjective S _ fun x ↦ ?_
+    obtain ⟨a, rfl⟩ := QuotientAddGroup.mk_surjective x
+    exact ⟨QuotientAddGroup.mk a, rfl⟩
+
+/-- **Pro-étale cohomology with profinite coefficients in high degrees.** Let `S` be a scheme of
+finite type and of dimension at most `d` over a separably closed field, and `A` a compact abelian
+group with a decreasing sequence of open subgroups `Uₘ` with trivial intersection (e.g. `𝒪_E`
+with `Uₘ = ℓᵐ 𝒪_E`). Then `Hᵠ(S_proét, C(-, A)) = 0` for `q > 2d`.
+
+The sheaf `C(-, A)` is the limit of the tower of the sheaves `C(-, A / Uₘ)` with finite
+discrete coefficients, which have no cohomology above `2d`
+(`AlgebraicGeometry.ProEtale.subsingleton_H_continuousSheaf_of_two_mul_lt`). The transition maps
+are epimorphisms with kernels `C(-, Uₘ / Uₘ₊₁)`, so the transition maps on `H^{2d}` are
+surjective, and the pro-étale topos is replete; the Milnor sequence then gives the vanishing
+(`CategoryTheory.Abelian.Ext.subsingleton_of_isLimit_tower`). -/
+theorem subsingleton_H_continuousSheaf_of_profinite {K : Type u} [Field K] [IsSepClosed K]
+    {S : Scheme.{u}} (a : S ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)
+    (hS : topologicalKrullDim S ≤ (d : WithBot ℕ∞)) (U : ℕ → OpenAddSubgroup A)
+    (hU : ∀ m, U (m + 1) ≤ U m) (hU₀ : ∀ x, (∀ m, x ∈ U m) → x = 0) (q : ℕ) (hq : 2 * d < q) :
+    Subsingleton (Sheaf.H (continuousSheaf S A) q) := by
+  have hrep := Scheme.ProEt.epiπAppZeroOfEpi_addCommGrpCat (S := S)
+  have := Abelian.hasFiniteBiproducts (C := Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1})
+  have := lim_preservesEpimorphisms_of_epi_π_app_zero hrep
+  have := hasExactLimitsOfShape_of_preservesEpi
+    (Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1}) (Discrete ℕ)
+  have hepi (m : ℕ) : Epi ((continuousSheafTower S U hU).map (homOfLE m.le_succ).op) := by
+    rw [continuousSheafTower_map_succ]
+    exact (shortExact_continuousSheafShortComplex S U hU m).epi_g
+  refine Abelian.Ext.subsingleton_of_isLimit_tower _
+    (fun P hP t ht ↦ epi_one_sub_of_epiπAppZeroOfEpi hrep hepi hP t ht)
+    (isLimitContinuousSheafCone S U hU hU₀) (2 * d)
+    (fun n q hq ↦ subsingleton_H_continuousSheaf_of_two_mul_lt a d hS _ q hq) (fun n ↦ ?_) q hq
+  have h := Abelian.Ext.surjective_comp_mk₀_of_shortExact
+    (shortExact_continuousSheafShortComplex S U hU n) _ (2 * d)
+    (subsingleton_H_continuousSheaf_of_two_mul_lt a d hS _ (2 * d + 1) (by lia))
+  rw [continuousSheafTower_map_succ]
+  exact h
+
 end AlgebraicGeometry.ProEtale
