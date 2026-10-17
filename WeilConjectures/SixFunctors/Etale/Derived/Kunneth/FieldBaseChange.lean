@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.BaseChangeUniver
 public import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldBaseChangeNormal
 
 /-!
 # Base change towards spectra of fields
@@ -85,30 +86,6 @@ theorem Etale.universalBaseChangeProperty_zero_of_field {K : Type u} [Field K]
   have : GeometricallyReduced ((pullback a π).nilradical.subschemeι ≫ pullback.snd a π) :=
     GeometricallyReduced.of_perfectField _
   exact Etale.universalBaseChangeProperty_zero Λ _
-
-/-- Blueprint `lem-kun-0f1i-normal`: the normal integral case.
-
-Let `K` be a field, `n` an integer invertible in `K` and killing `Λ`, and `X` a scheme of finite
-type over `K`. Let `X' = X ×_K S'` be the base change of `X` to an affine integral scheme `S'`
-with algebraically closed function field, let `L` be an algebraically closed extension of that
-function field, and let `h : Y ⟶ X'` be the fibre of `X' ⟶ S'` over the resulting geometric
-generic point `Spec L ⟶ S'`. Then `R^q h_* (Λ/dΛ) = 0` for all `q ≥ 1` and `d ∣ n`.
-
-The blueprint takes `L` to be the function field itself; the general algebraically closed
-extension is what `AlgebraicGeometry.Etale.exists_isPullback_not_isZero_higherDirectImage`
-produces. -/
-theorem Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed {K : Type u} [Field K]
-    {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
-    (n : ℕ) (hn : IsUnit (n : K)) (hΛ : (n : Λ) = 0)
-    {S' X' : Scheme.{u}} (s : S' ⟶ Spec (.of K)) (b : X' ⟶ X) (p' : X' ⟶ S')
-    (hpb : IsPullback b p' a s) [IsAffine S'] [IsIntegral S']
-    (hnorm : ∀ x : S', IsIntegrallyClosed (S'.presheaf.stalk x))
-    [IsAlgClosed S'.functionField] {L : Type u} [Field L] [IsAlgClosed L]
-    (i : S'.functionField ⟶ CommRingCat.of L) {Y : Scheme.{u}} (e : Y ⟶ Spec (.of L))
-    (h : Y ⟶ X') (sq : IsPullback e h (Spec.map i ≫ S'.fromSpecStalk (genericPoint S')) p')
-    (d : ℕ) (hd : d ∣ n) (q : ℤ) (hq : 1 ≤ q) :
-    IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) :=
-  sorry
 
 /-- Blueprint `lem-kun-0f1i`: base change towards spectra of fields.
 

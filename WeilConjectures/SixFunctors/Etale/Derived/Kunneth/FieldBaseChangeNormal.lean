@@ -67,7 +67,8 @@ noncomputable def IsPullback.isLimitOfIsPullbackMap {P X Y S : J ⥤ C} {fst : P
     (hY : IsLimit cY) (hS : IsLimit cS)
     (hP : IsPullback (hX.map cP fst) (hY.map cP snd) (hS.map cX f) (hS.map cY g)) :
     IsLimit cP where
-  lift s := hP.lift (hX.map s fst) (hY.map s snd) (hS.hom_ext fun j ↦ by simp [(h j).w])
+  lift s := hP.lift (hX.map s fst) (hY.map s snd) (hS.hom_ext fun j ↦ by
+    simpa using congrArg (s.π.app j ≫ ·) (h j).w)
   fac s j := (h j).hom_ext
     (by rw [Category.assoc, ← IsLimit.map_π, ← Category.assoc, hP.lift_fst, IsLimit.map_π])
     (by rw [Category.assoc, ← IsLimit.map_π, ← Category.assoc, hP.lift_snd, IsLimit.map_π])
@@ -89,7 +90,7 @@ lemma isPullback_pullback_const_map {D : J ⥤ C} {W X : C} (a : X ⟶ W)
     IsPullback ((pullback ((Functor.const J).map a) w).map u)
       ((pullback.snd ((Functor.const J).map a) w).app j)
       ((pullback.snd ((Functor.const J).map a) w).app k) (D.map u) := by
-  refine IsPullback.of_right ?_ ((pullback.snd ((Functor.const J).map a) w).naturality u).symm
+  refine IsPullback.of_right ?_ ((pullback.snd ((Functor.const J).map a) w).naturality u)
     (isPullback_pullback_app _ w k)
   have h₁ : (pullback ((Functor.const J).map a) w).map u ≫
       (pullback.fst ((Functor.const J).map a) w).app k =
@@ -138,14 +139,16 @@ noncomputable def isLimitPullbackConstCone [IsConnected J] {D : J ⥤ C} {W X : 
     (isLimitConstCone J X) hD (isLimitConstCone J W) ?_
   have e₁ : (isLimitConstCone J X).map (pullbackConstCone a w cD b p' hw₀ hpb.w)
       (pullback.fst ((Functor.const J).map a) w) = b :=
-    (isLimitConstCone J X).hom_ext fun j ↦ by simp
+    (isLimitConstCone J X).hom_ext fun j ↦ by
+      rw [IsLimit.map_π, pullbackConstCone_π_app_fst]
+      exact (Category.comp_id b).symm
   have e₂ : hD.map (pullbackConstCone a w cD b p' hw₀ hpb.w)
       (pullback.snd ((Functor.const J).map a) w) = p' :=
     hD.hom_ext fun j ↦ by simp
   have e₃ : (isLimitConstCone J W).map (constCone J X) ((Functor.const J).map a) = a :=
     (isLimitConstCone J W).hom_ext fun j ↦ by
       rw [IsLimit.map_π]
-      simp
+      exact (Category.id_comp a).trans (Category.comp_id a).symm
   have e₄ : (isLimitConstCone J W).map cD w = w₀ :=
     (isLimitConstCone J W).hom_ext fun j ↦ by
       rw [IsLimit.map_π, hw₀]
@@ -222,6 +225,7 @@ def pairHom : diagramOfMonotone (pairLeft K A B) ⟶ diagramOfMonotone (pairRigh
     ext x
     exact Subtype.ext rfl
 
+omit [CommRing B] [Algebra K B] in
 lemma finiteType_pairLeft (i : Finset (A ⊕ B)) : Algebra.FiniteType K (pairLeft K A B i) :=
   (Subalgebra.fg_iff_finiteType _).1 ⟨i.preimage Sum.inl Sum.inl_injective.injOn, by
     rw [Finset.coe_preimage]
@@ -240,12 +244,17 @@ lemma pairHom_app_comp_val (i : Finset (A ⊕ B)) :
   ext x
   rfl
 
-lemma finiteType_pairHom (i : Finset (A ⊕ B)) : ((pairHom φ).app i).hom.FiniteType := by
-  rw [pairHom_app, CommRingCat.hom_ofHom]
+lemma finiteType_codRestrict_pairLeft (i : Finset (A ⊕ B)) :
+    ((φ.comp (pairLeft K A B i).val).codRestrict _
+      (map_mem_pairRight φ i)).toRingHom.FiniteType := by
   refine RingHom.FiniteType.of_comp_finiteType (f := algebraMap K (pairLeft K A B i)) ?_
   rw [AlgHom.toRingHom_eq_coe, AlgHom.comp_algebraMap]
   exact RingHom.finiteType_algebraMap.2 (finiteType_pairRight φ i)
 
+lemma finiteType_pairHom (i : Finset (A ⊕ B)) : ((pairHom φ).app i).hom.FiniteType :=
+  finiteType_codRestrict_pairLeft φ i
+
+omit [CommRing B] [Algebra K B] in
 lemma exists_mem_pairLeft (x : A) : ∃ i, x ∈ pairLeft K A B i :=
   ⟨{Sum.inl x}, Algebra.subset_adjoin (by simp)⟩
 
