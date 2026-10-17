@@ -291,5 +291,24 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-4d7ff2846 (reviewer sub-agent of L); spot-checked: I read the item, the new node (HTT Cor. 4.3.1.11), every cited statement, the unit/parent route and delivery-errors A–F. The item statement is unchanged and true; the edge cases K=∅, a=id and point base check out. The new node matches 4.3.1.11 hypothesis by hypothesis; its edge cases J=∅, J=pt, p=id and B=pt check out. It duplicates no existing node: I grepped 4.3.1.11 and read the 7 hits, which are all detection or absolute-colimit results. It is strictly smaller than the item (D1 ok). Steps 1, 2, 4 and 5 are correct: the T_a^op = E_{a^op} realization, the exact identification J_{i_X(x)} = L_x, the isofibration via the mapping criterion, the exact boundary/base equations, and the relative Kan existence hypotheses. Fault repaired (C4/E5): the second reading changed Step 3 to infer that transports preserve K_{/k}-colimits from the merely existential final-index-colimit lemma. I rewrote Step 3: a cocone over a diagram with final object t is colimiting iff its leg at t is an equivalence, using the mapping-space characterization in lem-cbc-enhanced-functor-cone-calculus plus Yoneda on π0, and transports preserve equivalences. That node is restored to the step's uses and to proof_deps. The stale tool_use for it is now accurate and accepted. Fixed file: fixes/dag/nodes/sec-six-functors/lem-coef-cocartesian-relative-cylinder-extension.json. HTT is not archived; the WANTED line and agent proof_origin are correct. No SGA is used. Not a target node, so the base-change and coefficient-category check does not apply.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianRelativeCylinderExtension",
+  "declaration": "SSet.Enhanced.cocartesian_relative_cylinder_extension",
+  "file": "lean/Sheaf/CategoryTheory/CocartesianRelativeCylinderExtension.lean",
+  "statement": "theorem cocartesian_relative_cylinder_extension {K X Y : SSet.{u}} [Quasicategory K] [Quasicategory X] [Quasicategory Y] (a : K ⟶ X) (q : Y ⟶ X) (hq : cocartesianFibration q) (f : K ⟶ Y) (hf : f ≫ q = a) (hcolim : ∀ (x z : X _⦋0⦌), HasInfinityColimitsOfShape (pullback a (joinSliceProjection (SSet.const (X := Δ[0]) x))) (fiber q z)) (htransport : ∀ (x z z' : X _⦋0⦌) (e : X _⦋1⦌), X.δ 1 e = z → X.δ 0 e = z' → ∀ (e_! : fiber q z ⟶ fiber q z'), IsCocartesianTransport e e_! → PreservesInfinityColimitsOfShape (pullback a (joinSliceProjection (SSet.const (X := Δ[0]) x))) e_!) : ∃ F : relativeJoin a (𝟙 X) ⟶ Y, relativeJoinInl a (𝟙 X) ≫ F = f ∧ F ≫ q = relativeJoinProjection a (𝟙 X)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The statement uses the landed relative join, join-slice right fibration, strict fibers, coherent infinity-colimit predicates, and cocartesian transport; no new notion is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f53a7054d",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Read the node, its 4 statement dependencies, the module, the report, and every declaration used (relativeJoin/Inl/Projection, joinSlice/joinSliceProjection, fiber, cocartesianFibration, HasInfinityColimitsOfShape/PreservesInfinityColimitsOfShape/IsInfinityImageCocone, IsCocartesianTransport). All 11 clauses match the node exactly: common SSet.{u}, three quasicategories, exact lift equation, T_a = relativeJoin a (𝟙 X), L_x = pullback along the slice source projection, strict fibers, colimits for every x,z, preservation by every IsCocartesianTransport over an edge z→z', exact restriction and base equations. Edge cases checked: empty K needs initial objects; empty X vacuous; degenerate edges included. Gates: no definitions, sorry only, source/blueprint docstrings and the node's 5-step proof in the docstring, imports = stmt_deps modules + 7 proof_deps modules, only the lean field changed, statement verbatim, max line 88, real Worker report and Second reading by Q81, no pro-etale material. nt_compile.py with the local overlay: clean (1.3 s, rc 0, no warnings). Minor, not a fault: the predicates come from two landed lemma nodes not in stmt_deps; stage-2 tooling forbids adding them and the node defines them inline; no cycle."
  }
 }

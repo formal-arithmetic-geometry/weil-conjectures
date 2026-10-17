@@ -214,5 +214,35 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-0322bf813 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the one new node, every cited statement (def-weil-pbc-simplicial-set, lem-coef-simplicial-model-nerve-localization, lem-coef-model-colimit-localization-comparison, lem-coef-reedy-model-structure, lem-coef-kan-quillen-right-proper), the citer lem-coef-presheaf-simplex-hocolim-resolution step 2, the unit record and the main-20261015 ancestor proof paragraph 'For K'. I could not open Dugger: it is not in literature/ and this machine blocks network access. The item records it as WANTED and marks the proof agent-written, so I checked all the mathematics independently. Item: unchanged and correct. QV(j) is the Bousfield-Kan realization over I/j, with the value at i_0 and the operators satisfying the simplicial identities. Step 2: the latching object is the subcoproduct of chains with an internal identity (Eilenberg-Zilber for nerves, with the terminal arrow kept), a summand inclusion with cofibrant complement is a cofibration, so the simplicial object is Reedy cofibrant by the cited criterion. Step 3: the skeletal pushout along F_{i_n}(V(i_0) tensor boundary inclusions) is the correct reduction of the Reedy cell attachment. The lift uses objectwise trivial fibrations, SM7 on 0->V(i_0) and the boundary-lifting criterion; the cited statements give exactly these. Step 4: I checked each terminal-contraction identity on chains myself, including d_{n+1}t_n=1, d_0t_0=t_{-1}eps, the i=n face merge and the degeneracies. Steps 5-6: the colimit formula via terminal-arrow identification, cocone compatibility, naturality and the empty case are all correct and elementary. New node lem-coef-simplicial-realization-extra-degeneracy is true: the extra degeneracy gives a simplicial homotopy equivalence |X|->Y, and both objects are cofibrant (|X| by Reedy cofibrancy, Y as a retract of X_0), so the map is a weak equivalence. Constant X=cY gives |cY|=Y. The node is statement-only, self-contained and searched by all three kinds, strictly smaller than the item and not a duplicate: rg over all dag/nodes, plus reading the extra-degeneracy-contraction, infinity-split-augmentation-colimit, BK comparison, bisimplicial diagonal, projective-model-calculus, boundary-collapse-test and related candidates. All cited statements are in the unit, so there are no tool_uses; no SGA is cited. No fixes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialBarProjectiveResolution",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialBarProjectiveResolution.lean",
+  "declaration": "HomotopicalAlgebra.simplicialBarProjectiveResolution",
+  "statement": "theorem simplicialBarProjectiveResolution {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [SimplicialCategory M] (T : SimplicialTensorCotensor M) (hM : CombinatorialModelCategory.{u, v, w} M) (hSM7 : CategoryTheory.SimplicialModelLocalization.SatisfiesSM7 M) (I : Type v) [SmallCategory I] : Nonempty (BarResolutionClaim T I)",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "HomotopicalAlgebra.barStage",
+   "HomotopicalAlgebra.barTensorParameterMap",
+   "HomotopicalAlgebra.barCoendShape",
+   "HomotopicalAlgebra.barCoendIndex",
+   "HomotopicalAlgebra.barRealization",
+   "HomotopicalAlgebra.barRealizationι",
+   "HomotopicalAlgebra.ProjectivelyCofibrant",
+   "HomotopicalAlgebra.BarResolutionClaim",
+   "HomotopicalAlgebra.simplicialBarProjectiveResolution"
+  ],
+  "note": "Second reading replaced unspecified proposition fields and the incorrect ordinary-colimit realization with the actual chain/simplex multicoequalizer. Reuses Mathlib ComposableArrows, nerve, Over, and MultispanIndex, and the existing tensor transpose/collapse. All simplicial operators, diagram maps, augmentation, natural colimit comparison, cocone compatibility and empty-index assertions are specified on summands. Construction is functorial on all diagrams; cofibrancy and augmentation weak equivalence require exactly objectwise cofibrancy."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ab60bb16",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Read the brief, packet, snapshot module, report, the three statement deps, the dependency declarations (SimplicialTensorCotensor tensor/tensorUnit/tensorMap, tensorTranspose/tensorCollapse, SatisfiesSM7, CombinatorialModelCategory, modelColimitLocalizationComparison projective structure) and the citer lem-coef-presheaf-simplex-hocolim-resolution. All 13 node clauses match exactly: chains in Over j = chains i0->..->ip->j; face/degeneracy formulas fixed on summands with d0 applying V; QV(j) and R_I(V) are real multicoequalizers with the correct coend arrows; canonical augmentation (collapse then V of the chain composite); projective cofibrancy as LLP against objectwise trivial fibrations, matching the recorded projective structure; objectwise weak equivalence; natural Q⋙colim≅R with summand formula; cocone compatibility checked well defined; functoriality; empty I. Hypotheses are no stronger than the node; universes u,v,w bound; no arrow hypothesis on V. Gates: no hollow definition, single sorry, source/blueprint docstrings with six proof steps, only the item's lean field changed, lean.statement verbatim, both report sections present, no pro-etale content. No duplicate predicate or name collision in side/slopmaster2/Mathlib. nt_compile --json: exit 0, no warnings, twice. Observations only: tensorTranspose/tensorCollapse come from the lem-coef-simplicial-undercategory-model module, not in stmt_deps (no cycle; error 2 forbids adding it); proof-only imports are private."
  }
 }
