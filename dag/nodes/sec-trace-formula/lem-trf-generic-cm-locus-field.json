@@ -12,11 +12,81 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-depth",
   "def-weil-pbc-krull-dimension-ring",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $U$ be the set in the statement. Consider the structure morphism $f:\\operatorname{Spec}A\\to\\operatorname{Spec}k$. Because $k$ is a field, the $k$-module $A$ is flat. The field $k$ is Noetherian, since its only ideals are $(0)$ and $(1)$, both finitely generated. Apply the finite-type-over-Noetherian finite-presentation theorem to $R=k$ and $S=A$ to obtain that $A$ is finitely presented over $k$. Thus $f$ is flat and locally of finite presentation. The existing general fibre Cohen–Macaulay-locus theorem makes the locus where the fibre depth equals fibre Krull dimension open. Here the only fibre is $\\operatorname{Spec}A$, and the affine-stalk localization theorem identifies its local ring at $\\mathfrak q$ with $A_{\\mathfrak q}$. The finite-type Noetherian theorem followed by the localization-Noetherian theorem shows every $A_{\\mathfrak q}$ is Noetherian, so this depth-equals-dimension locus is exactly $U$. Hence $U$ is open.",
+   "uses": [
+    "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RF (openness), as used in Tag 00RG; the general fibre-locus formulation is the existing Tag 045U node; finite presentation from Tag 00FP, label lemma-Noetherian-finite-type-is-finite-presentation"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be a minimal prime of $A$. By the prime-localization correspondence, primes of $A_{\\mathfrak q}$ correspond to primes of $A$ contained in $\\mathfrak q$, so minimality leaves only $\\mathfrak qA_{\\mathfrak q}$; the Krull-dimension definition therefore gives $\\dim A_{\\mathfrak q}=0$. The ring $A_{\\mathfrak q}$ is Noetherian by Step 1. Its sole prime is minimal, so the Noetherian minimal-prime-associated theorem supplies an associated-prime witness for $\\mathfrak qA_{\\mathfrak q}$. Regard $A_{\\mathfrak q}$ as a finite module over itself. The depth-bound theorem for an associated prime gives $\\operatorname{depth}(A_{\\mathfrak q})\\leq\\dim(A_{\\mathfrak q}/\\mathfrak qA_{\\mathfrak q})=0$. The empty regular sequence gives depth at least zero from the depth definition, hence depth equals dimension. This argument allows a nonzero nilpotent maximal ideal (for example $k[\\varepsilon]/(\\varepsilon^2)$), so it does not infer that the maximal ideal is zero. Thus every minimal-prime point lies in $U$.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-noetherian-minimal-prime-associated",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-depth-le-dim-associated-prime",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RG proof, sentence that minimal-prime local rings are Cohen–Macaulay, corrected using Tags 05BV and 0BK4"
+   }
+  },
+  {
+   "text": "The minimal-prime density lemma says that every nonempty open subset of $\\operatorname{Spec}A$ contains a minimal-prime point. Since Step 1 makes $U$ open and Step 2 puts every minimal-prime point in $U$, every nonempty open meets $U$. Therefore $U$ is dense, proving the equivalent formulation as well.",
+   "uses": [
+    "lem-trf-minimal-primes-dense-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RG proof, final minimal-prime density argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finitely-generated-module",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-trf-minimal-primes-dense-spectrum",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-depth-le-dim-associated-prime",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-minimal-prime-associated",
+  "lem-weil-pbc-primes-of-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00RF and 00RG, with the openness input taken from the existing general Tag 045U fibre-locus node and the corrected minimal-prime depth argument using Tags 05BV and 0BK4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-lfp-cm-locus-fibre-dense",
@@ -60,7 +130,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "In the proof of the 055W spreading lemma, the choice of a closed point where h is Cohen–Macaulay, using the fibrewise density assertion of 045U. This auxiliary algebraic assertion is the field-fibre input behind that density step.",
+   "place": "The field-fibre generic Cohen–Macaulay assertion used in the proof of the 055W spreading lemma: openness is supplied by the existing general fibre-locus theorem, while the remaining steps realize the Tag 00RG minimal-prime argument.",
    "via": [
     "lem-trf-flat-lfp-cm-locus-fibre-dense",
     "lem-trf-geometrically-connected-fibre-open-spreading",
@@ -80,5 +150,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-generic-cm-locus-field",
+  "worker": "stage1",
+  "summary": "Repaired the returned split. Removed the redundant Tag 00RF openness child and used the existing general flat locally finitely presented fibre Cohen–Macaulay-locus openness node. Replaced the false claim that a zero-dimensional minimal-prime localization has zero maximal ideal by the valid argument: its unique minimal prime is associated, the depth bound gives depth ≤ 0, and the empty regular sequence gives depth ≥ 0. Added the required Noetherian, localization, prime-correspondence, associated-minimal-prime and depth-bound citations. Repaired the further C4/C1 return by explicitly citing the existing Mathlib leaf lem-weil-pbc-finite-type-noetherian-finite-presentation in Step 1, verifying its Noetherian-base hypothesis directly for the field, and updating proof_deps and the verbatim citation record.",
+  "blueprint": "Realizes the field-fibre generic Cohen–Macaulay assertion in the 055W spreading proof: the openness part uses the existing general fibre-locus theorem, and the corrected remaining steps realize the Tag 00RG minimal-prime argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q90-4440ad0ba",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q90-4440ad0ba (reviewer sub-agent of L); spot-checked: Reviewed the item and new node against Tags 00RF, 00RG, 00FP, 045U, 05BV, and 0BK4; checked all proof steps, dependencies, searches, ancestry, duplicates, route constraints, and edge cases including 0 and k[ε]/(ε²). Wrote review.md with detailed findings."
  }
 }

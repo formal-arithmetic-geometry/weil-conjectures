@@ -1,7 +1,7 @@
 {
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -12,7 +12,7 @@
  "id": "lem-trf-separable-perturbation-factor-selection",
  "kind": "statement",
  "title": "Separable perturbation and factor selection",
- "statement": "Let $K$ be a separably closed field [def-kun-separably-closed], let $K(t)$ carry a valuation subring $O$ with $R=O\\cap K$, and suppose $f\\in K[T]$ is monic irreducible and $f(t)/\\pi\\in O^\\times$ has transcendental residue over $\\kappa(R)$ for some $\\pi\\in K^\\times$. Then there is a monic separable irreducible polynomial $g\\in K[T]$ and $\\pi'\\in K^\\times$ such that $g(t)/\\pi'\\in O^\\times$ and its residue is transcendental over $\\kappa(R)$. Since $K$ is separably closed, every monic separable irreducible $g\\in K[T]$ has degree one. Here $K$ is a field [def-weil-field], $K[T]$ is the polynomial ring in one indeterminate [def-weil-polynomial-ring], and a valuation subring $B$ of a field $F$ is a subring with $x\\in B$ or $x^{-1}\\in B$ for every $x\\ne0$; $\\mathfrak m_B=B\\setminus B^\\times$ and $\\kappa(B)=B/\\mathfrak m_B$. The field and transcendence conventions are [def-pc-field-extension, def-kun-transcendence-degree].",
+ "statement": "Let $K$ be a separably closed field [def-kun-separably-closed], let $K(t)$ carry a valuation subring $O$ with $R=O\\cap K$, and suppose $f\\in K[T]$ is monic irreducible and $f(t)/\\pi\\in O^\\times$ has transcendental residue over $\\kappa(R)$ for some $\\pi\\in K^\\times$. Then there is a monic separable irreducible polynomial $g\\in K[T]$ and $\\pi'\\in K^\\times$ such that $g(t)/\\pi'\\in O^\\times$ and its residue is transcendental over $\\kappa(R)$. Since $K$ is separably closed, every monic separable irreducible $g\\in K[T]$ has degree one. Here $K$ is a field [def-weil-field], $K[T]$ is the polynomial ring in one indeterminate [def-weil-polynomial-ring], and a valuation subring $B$ of a field $F$ is a subring with $x\\in B$ or $x^{-1}\\in B$ for every $x\\ne0$; $\\mathfrak m_B=B\\setminus B^\\times$ and $\\kappa(B)=B/\\mathfrak m_B$. The field and transcendence conventions are [def-pc-field-extension, def-kun-transcendence-degree]. Here $K(t)$ is the fraction field of $K[t]$ [def-weil-rational-function-field], and separable means coprime to the formal derivative [def-pc-separable-polynomial]. Monic means leading coefficient $1$; irreducible means nonzero, not a unit, and with a unit factor in every factorization in $K[T]$.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "Proposition 4.3.1, proof, p. 28, paragraph beginning “Moreover, we can take only separable irreducible polynomials”; local archival PDF unavailable (WANTED)."
@@ -20,14 +20,120 @@
  "stmt_deps": [
   "def-pc-field-extension",
   "def-weil-field",
-  "def-weil-residue-field",
   "def-kun-transcendence-degree",
   "def-kun-separably-closed",
-  "def-weil-polynomial-ring"
+  "def-weil-polynomial-ring",
+  "def-weil-rational-function-field",
+  "def-pc-separable-polynomial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=K(t)$, $k=\\kappa(R)$, $l=\\kappa(O)$, and $u=f(t)/\\pi$. The restriction of the quotient map embeds $k$ in $l$: for $b\\in K^\\times$, $b\\in R^\\times$ if and only if $b,b^{-1}\\in O$, if and only if $b\\in O^\\times$, so $\\mathfrak m_R=K\\cap\\mathfrak m_O$. By [def-weil-rational-function-field], $L$ is generated as a field by $t$, and $t$ is transcendental: a nonzero polynomial stays nonzero in its fraction field. Thus $\\{t\\}$ is a transcendence basis (the extension over the field it generates is the identity), and [def-kun-transcendence-degree] gives $\\operatorname{trdeg}_K L=1$. The transcendental residue $\\bar u$ gives $\\operatorname{trdeg}_k l\\ge1$. Apply [lem-trf-abhyankar-inequality] to the finitely generated field extension $K\\subset L$ and $O$. Since its rational-rank summand is nonnegative, it gives $\\operatorname{trdeg}_k l\\le1$. Hence $\\operatorname{trdeg}_k l=1$.",
+   "uses": [
+    "def-weil-rational-function-field",
+    "def-kun-transcendence-degree",
+    "lem-trf-abhyankar-inequality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof p. 28, separable perturbation paragraph; expanded for the item’s unrestricted t and trivial restriction valuation. Primary PDF read online; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-residual-curve-value-group] with $L=K(t)$ and the residue transcendence degree just proved. It gives, for every $y\\in L^\\times$, a $c_y\\in K^\\times$ with $y/c_y\\in O^\\times$. In particular choose $c\\in K^\\times$ such that $x=t/c$ is a unit. We will also apply exactly this same conclusion to each $t-a_i\\ne0$; nonvanishing follows because $t$ is transcendental.",
+   "uses": [
+    "lem-trf-residual-curve-value-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof p. 28, separable perturbation paragraph; expanded for the item’s unrestricted t and trivial restriction valuation. Primary PDF read online; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "First suppose $R=K$. Every nonzero constant, including $c$ and $\\pi$, is then a unit of $O$, and $t=cx$ is a unit. If its residue $\\tau$ were algebraic over $K=k$, then $f(\\tau)/\\pi$ would be algebraic over $K$: [def-weil-relative-algebraic-closure] explicitly says that algebraic elements form a subfield containing the base. But $f(\\tau)/\\pi=\\bar u$ is transcendental, a contradiction. Thus $g(T)=T$ and $\\pi'=1$ have the required residue. The polynomial $T$ is monic and irreducible (a nonconstant factor of a degree-one polynomial has constant complementary factor, which is a unit), and is separable because its derivative is $1$. We may henceforth assume $R\\ne K$.",
+   "uses": [
+    "def-weil-relative-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof p. 28, separable perturbation paragraph; expanded for the item’s unrestricted t and trivial restriction valuation. Primary PDF read online; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "If $f$ is already separable, take $g=f$ and $\\pi'=\\pi$; all the required residue conditions are the hypotheses. Otherwise [lem-trf-irreducible-separable-derivative] gives $f'=0$. Since $f$ is monic and nonconstant, its degree $d$ is positive. It cannot have degree one, since the derivative of a monic linear polynomial is $1$. Thus $d\\ge2$.",
+   "uses": [
+    "lem-trf-irreducible-separable-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof p. 28, separable perturbation paragraph; expanded for the item’s unrestricted t and trivial restriction valuation. Primary PDF read online; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Choose $b\\in K\\setminus R$. The valuation alternative gives $\\delta=b^{-1}\\in R$, and $\\delta$ is not a unit of $R$, since its inverse is $b\\notin R$. Hence $0\\ne\\delta\\in\\mathfrak m_R\\subset\\mathfrak m_O$. Set $\\epsilon=\\pi\\delta/c\\in K^\\times$ and $h(T)=f(T)+\\epsilon T$. Because $d\\ge2$, $h$ is monic of degree $d$. By the formal derivative formula in [def-pc-separable-polynomial], $h'=\\epsilon$, and the explicit Bezout identity $0\\cdot h+\\epsilon^{-1}h'=1$ makes $h$ separable. Moreover $h(t)/\\pi=u+\\delta x$. Since $x\\in O^\\times$, the second summand lies in $\\mathfrak m_O$, so this element has the same nonzero transcendental residue as $u$, and is a unit. This choice of $\\epsilon$ works even when $t\\notin O$.",
+   "uses": [
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof p. 28, separable perturbation paragraph; expanded for the item’s unrestricted t and trivial restriction valuation. Primary PDF read online; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "By [lem-trf-separable-polynomial-linear-factorization], write $h(T)=\\prod_{i=1}^n(T-a_i)$ with $a_i\\in K$. Since $h$ has positive degree the list is nonempty. For every $i$, $t-a_i\\ne0$, so [lem-trf-residual-curve-value-group] gives $c_i\\in K^\\times$ such that $v_i=(t-a_i)/c_i\\in O^\\times$. Put $C=\\prod_i c_i$. Evaluating the factorization and dividing by $\\pi$ gives $h(t)/\\pi=(C/\\pi)\\prod_i v_i$. The left side and all $v_i$ are units of $O$, hence $C/\\pi\\in K\\cap O^\\times=R^\\times$. Reduction therefore gives $\\bar u=\\overline{C/\\pi}\\prod_i\\bar v_i$ in $l$, with $\\overline{C/\\pi}\\in k^\\times$.",
+   "uses": [
+    "lem-trf-separable-polynomial-linear-factorization",
+    "lem-trf-residual-curve-value-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof p. 28, separable perturbation paragraph; expanded for the item’s unrestricted t and trivial restriction valuation. Primary PDF read online; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "If every $\\bar v_i$ were algebraic over $k$, their product, and its product with $\\overline{C/\\pi}\\in k^\\times$, would be algebraic over $k$: use the subfield and multiplication clauses stated in [def-weil-relative-algebraic-closure], iterated over the finite list. This contradicts the transcendence of $\\bar u$. Choose an index $j$ with $\\bar v_j$ transcendental. Then $g(T)=T-a_j$ and $\\pi'=c_j$ have the required unit and residue properties. The linear polynomial is monic, irreducible by the degree argument of Step 3, and separable by the Bezout identity $0\\cdot g+1\\cdot g'=1$.",
+   "uses": [
+    "def-weil-relative-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof p. 28, separable perturbation paragraph; expanded for the item’s unrestricted t and trivial restriction valuation. Primary PDF read online; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Finally let $g$ be any monic separable irreducible polynomial over $K$. Apply [lem-trf-separable-polynomial-linear-factorization] to $g$. Its factor list cannot be empty, since then $g=1$ is a unit. If there were at least two factors, splitting off the first would factor $g$ into two monic polynomials of positive degree, neither a unit, contradicting irreducibility. Thus there is exactly one factor and $\\deg g=1$. This also covers the already-separable branch of Step 4.",
+   "uses": [
+    "lem-trf-separable-polynomial-linear-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof p. 28, separable perturbation paragraph; expanded for the item’s unrestricted t and trivial restriction valuation. Primary PDF read online; local archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-pc-separable-polynomial",
+  "def-weil-rational-function-field",
+  "def-weil-relative-algebraic-closure",
+  "lem-trf-abhyankar-inequality",
+  "lem-trf-irreducible-separable-derivative",
+  "lem-trf-residual-curve-value-group",
+  "lem-trf-separable-polynomial-linear-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 4.3.1, proof p. 28, separable perturbation paragraph; expanded for the item’s unrestricted t and trivial restriction valuation. Primary PDF read online; local archival copy WANTED. The source’s small-term argument is expanded using existing normalization and Abhyankar nodes; absence of a local archival PDF is recorded in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,6 +162,41 @@
    "results": "{\"hits\": [\"Irreducible.hasSeparableContraction\", \"Polynomial.exists_separable_of_irreducible\", \"Irreducible.separable\", \"Polynomial.separable_or\", \"Polynomial.unique_separable_of_irreducible\", \"Polynomial.Separable.map_irreducible_of_isPurelyInseparable\", \"PerfectField.separable_of_irreducible\", \"IsSepClosed.degree_eq_one_of_irreducible\"], \"digest\": \"824aa7ff467b9b4b\", \"note\": \"\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic declarations only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a valuation ring of K(t) over a separably closed field, replace an irreducible polynomial with transcendental normalized residue by a separable irreducible polynomial",
+   "results": "{\"t\": \"2026-10-17T21:12:45Z\", \"tool\": \"leanfinder\", \"query\": \"For a valuation ring of K(t) over a separably closed field, replace an irreducible polynomial with transcendental normalized residue by a separable irreducible polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Irreducible.hasSeparableContraction\", \"Polynomial.exists_separable_of_irreducible\", \"Polynomial.separable_or\", \"WeierstrassCurve.reduction\", \"Polynomial.Separable.map_irreducible_of_isPurelyInseparable\", \"PerfectField.separable_of_irreducible\", \"IsSepClosed.of_exists_root\", \"WeierstrassCurve.IsGoodReduction\"], \"digest\": \"1aeda579a4711e56\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: derivative/separability and splitting declarations lack the given valuation and residue conclusion; the returned Weierstrass results concern power series and the rational-function declarations do not select a coordinate for O."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable, ValuationSubring",
+   "results": "{\"t\": \"2026-10-17T21:12:45Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Separable, ValuationSubring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: derivative/separability and splitting declarations lack the given valuation and residue conclusion; the returned Weierstrass results concern power series and the rational-function declarations do not select a coordinate for O."
+  },
+  {
+   "tool": "grep",
+   "query": "perturb|transcendental.*residue|residue.*transcendental",
+   "results": "{\"t\": \"2026-10-17T21:12:44Z\", \"tool\": \"grep\", \"query\": \"perturb|transcendental.*residue|residue.*transcendental\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuasiFinite/Polynomial.lean\"], \"digest\": \"be984de71d2025b6\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: derivative/separability and splitting declarations lack the given valuation and residue conclusion; the returned Weierstrass results concern power series and the rational-function declarations do not select a coordinate for O."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separably closed valued field rational function with transcendental residue admits a normalized linear polynomial with transcendental residue",
+   "results": "{\"t\": \"2026-10-17T21:12:44Z\", \"tool\": \"leansearch\", \"query\": \"A separably closed valued field rational function with transcendental residue admits a normalized linear polynomial with transcendental residue\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.degree_eq_one_of_irreducible\", \"IsSepClosed.casesOn\", \"RatFunc.transcendental_X\", \"IsSepClosed.factors_of_separable\", \"IsSepClosed.exists_eval₂_eq_zero_of_injective\", \"RatFunc.num\", \"RatFunc.monic_denom\", \"Field.finSepDegree_eq_zero_of_transcendental\"], \"digest\": \"93f1cde4508ce7ab\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: derivative/separability and splitting declarations lack the given valuation and residue conclusion; the returned Weierstrass results concern power series and the rational-function declarations do not select a coordinate for O."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small linear perturbation of an inseparable polynomial has constant nonzero derivative and preserves valuation residue",
+   "results": "{\"t\": \"2026-10-17T21:12:58Z\", \"tool\": \"leanfinder\", \"query\": \"Small linear perturbation of an inseparable polynomial has constant nonzero derivative and preserves valuation residue\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.HasSeparableContraction\", \"PowerSeries.weierstrassDistinguished\", \"Polynomial.Separable.aeval_derivative_ne_zero\", \"PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization\", \"Polynomial.Separable.eval₂_derivative_ne_zero\", \"PowerSeries.IsWeierstrassFactorization.map_ne_zero\", \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\"], \"digest\": \"fa0ed468a43f989a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: derivative/separability and splitting declarations lack the given valuation and residue conclusion; the returned Weierstrass results concern power series and the rational-function declarations do not select a coordinate for O."
   }
  ],
  "blueprint": {
@@ -79,5 +220,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-separable-perturbation-factor-selection",
+  "worker": "stage1",
+  "summary": "Eight steps retain the statement and Temkin’s perturb-and-factor route, explicitly treating the trivial base valuation and choosing the perturbation after normalizing t. Reused the existing Abhyankar inequality, residual-curve normalization and algebraic-subfield leaf. Added two generic Mathlib leaves for the derivative criterion and separable linear factorization. Appended only notion clarifications; replaced the unused scheme-residue definition dependency by the actual polynomial/rational-function definitions.",
+  "blueprint": "Historical semistable-modification branch of lem-trf-local-term-locality, retained ancestry via lem-trf-rational-valuation-linear-residue Step 2: Temkin Proposition 4.3.1 proof p. 28, small linear perturbation and factor selection. No alteration of the current contracting-correspondence unit statement or its route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-b44cd6a02",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-b44cd6a02 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, unit route, delivery instructions/errors, Temkin Proposition 4.3.1 at the cited place, and Mathlib declarations. The proof and hypotheses are correct; edge cases, duplicates, searches, route, and short-step rule check out. Review written to review.md."
  }
 }

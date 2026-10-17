@@ -1,0 +1,89 @@
+{
+ "id": "lem-trf-separable-polynomial-linear-factorization",
+ "kind": "statement",
+ "title": "Linear factorization of a separable monic polynomial over a separably closed field",
+ "statement": "Let $K$ be a separably closed field [def-kun-separably-closed, def-pc-separably-closed, def-weil-field]. Let $h\\in K[T]$ [def-weil-polynomial-ring] be monic (its leading coefficient is $1$) and separable [def-pc-separable-polynomial]. Then there is a finite list $a_1,\\ldots,a_n\\in K$, possibly empty, such that $h(T)=\\prod_{i=1}^n(T-a_i)$ in $K[T]$. The empty product is $1$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 4.3.1, proof p. 28, separable irreducible factor paragraph; generic polynomial input. Verified directly in Mathlib FieldTheory/IsSepClosed.lean:67 and Algebra/Polynomial/Splits.lean:307–309. The archival Temkin PDF is WANTED; primary PDF read online. No Stacks tag states this exact monic-factorization formulation.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-pc-separably-closed",
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separable polynomial over a separably closed field splits and an irreducible separable polynomial has degree one",
+   "results": "{\"t\": \"2026-10-17T21:14:37Z\", \"tool\": \"leanfinder\", \"query\": \"A separable polynomial over a separably closed field splits and an irreducible separable polynomial has degree one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.degree_eq_one_of_irreducible\", \"IsSepClosed.factors_of_separable\", \"IsSepClosed.splits_of_separable\", \"perfectField_iff_splits_of_natSepDegree_eq_one\", \"IsSepClosed.splits_domain\", \"IsSepClosed.splits_codomain\", \"Polynomial.Splits.degree_eq_one_of_irreducible\", \"Polynomial.Splits.natDegree_eq_one_of_irreducible\"], \"digest\": \"c95c645371bb2f16\"}",
+   "date": "2026-10-18",
+   "verdict": "match: Polynomial.Splits.eq_prod_roots_of_monic; source inspected at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, Polynomial.Splits",
+   "results": "{\"t\": \"2026-10-17T21:14:33Z\", \"tool\": \"loogle\", \"query\": \"IsSepClosed, Polynomial.Splits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsSepClosed.mk\", \"IsSepClosed.splits_of_separable\", \"IsSepClosed.splits_codomain\", \"IsSepClosed.splits_domain\"], \"digest\": \"1bb121ea30ae77a0\"}",
+   "date": "2026-10-18",
+   "verdict": "match: Polynomial.Splits.eq_prod_roots_of_monic; source inspected at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_prod_roots_of_monic|trdeg_of_isFractionRing|trdeg_of_isDomain",
+   "results": "{\"t\": \"2026-10-17T21:14:50Z\", \"tool\": \"grep\", \"query\": \"eq_prod_roots_of_monic|trdeg_of_isFractionRing|trdeg_of_isDomain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\"], \"digest\": \"451e67e54d544892\"}",
+   "date": "2026-10-18",
+   "verdict": "match: Polynomial.Splits.eq_prod_roots_of_monic; source inspected at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a separably closed field a separable polynomial splits and every separable irreducible polynomial has degree one",
+   "results": "{\"t\": \"2026-10-17T21:14:33Z\", \"tool\": \"leansearch\", \"query\": \"Over a separably closed field a separable polynomial splits and every separable irreducible polynomial has degree one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.factors_of_separable\", \"IsSepClosed.splits_codomain\", \"IsSepClosed.degree_eq_one_of_irreducible\", \"IsSepClosed.mk\", \"IsSepClosed.splits_of_separable\", \"IsSepClosed.casesOn\", \"IsSepClosed.rec\", \"IsSepClosed.splits_domain\"], \"digest\": \"5c47c2ac0f2a1c7e\"}",
+   "date": "2026-10-18",
+   "verdict": "match: Polynomial.Splits.eq_prod_roots_of_monic; source inspected at the lines in mathlib_match.how"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.Splits.eq_prod_roots_of_monic",
+  "file": "Mathlib/Algebra/Polynomial/Splits.lean",
+  "how": "specializes in one line: apply Polynomial.Splits.eq_prod_roots_of_monic (lines 307–309) to IsSepClosed.splits_of_separable h hsep (Mathlib/FieldTheory/IsSepClosed.lean:67). The resulting multiset of roots is the finite list up to ordering; the assertion has no specified ordering or cardinality. Both declarations and surrounding hypotheses were read; the field convention agrees with the existing Mathlib leaf def-pc-separably-closed.",
+  "line": 307
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-separable-perturbation-factor-selection",
+  "date": "2026-10-18",
+  "group": "Q39"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable-modification branch of lem-trf-local-term-locality; linear factorization of the separable perturbation, before selecting a transcendental normalized residue. Temkin Proposition 4.3.1, proof p. 28.",
+   "via": [
+    "lem-trf-separable-perturbation-factor-selection",
+    "lem-trf-rational-valuation-linear-residue",
+    "lem-trf-single-valuation-semistable-extraction",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -21,9 +21,190 @@
   "def-weil-module-base-change",
   "lem-trf-two-term-perfect-determinant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite-type Noetherian theorem applied over the field k, followed by Noetherianity of localization and completion, makes S,A,R Noetherian. The local completion map A→R is faithfully flat. Put N=Ω¹_{A/k} and M_R=N⊗_A R. The regular-sequence conormal-basis theorem gives I/I²≃A^{m-d} and J/J²≃R^c, with the stated equation classes as bases. Polynomial differentials followed by localization give Ω¹_{P/k}⊗_P A≃A^m on du_i. Thus both displayed complexes have finite free terms. N is finitely generated: its generators are the images of du_i.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-regular-sequence-conormal-free",
+    "lem-weil-pbc-kahler-differentials-polynomial-extension",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LN (lemma-regular-quasi-regular), 00RX (lemma-differentials-polynomial-ring), 00RT (lemma-differentials-localize), 00MC (lemma-completion-faithfully-flat); basic Noetherian localization and completion."
+   }
+  },
+  {
+   "text": "The cokernel of the algebraic conormal map is N: a P-linear map Ω¹_{P/k}→V for an A-module V factors through that cokernel exactly when the corresponding k-derivation of P vanishes on I, exactly when it descends to A. This is precisely the universal property of N. Tensor right exactness identifies the cokernel after tensoring with R with M_R, with du_i↦d(u_i mod I)⊗1. Apply the completed-Jacobian theorem to the given formal presentation, with residue field F=k and section the structural k→R: F/k is finite separable, the map is continuous and surjective, and all g_j lie in (z). It supplies the unique continuous extension d̂:R→M_R and the cokernel isomorphism for C_T, sending e_i to d̂(z_i). Denote the two augmentation maps to M_R[0] by q_P,q_T.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-trf-completed-jacobian-differentials",
+    "lem-trf-completion-kahler-differential-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C52 (lemma-complete-local-ring-structure-as-algebra), with the completed-Jacobian auxiliary comparison; algebra.tex Tag 00RU (lemma-differential-seq), whose cokernel argument is written here."
+   }
+  },
+  {
+   "text": "The finite-type algebra S is finitely presented over the Noetherian field k. For each field extension k'/k, the perfect-field reduced-tensor theorem makes S⊗_k k' reduced, so Spec S is geometrically reduced. The dense-smooth-open theorem applies and puts every generic point in the smooth locus: an open dense subset meets each component away from the other finitely many components and therefore contains its generic point. Pure dimension d and the equidimensional-open dimension theorem give local topological dimension d on Spec S. The smooth-differentials rank theorem and localization of differentials now give dim_{A_a}(N⊗_A A_a)=d for each minimal prime a of A. Here A_a is the generic field of the corresponding reduced component. By Step 2 the algebraic conormal map over that field has cokernel of dimension d. Its domain and codomain have dimensions m-d and m, so rank-nullity makes it injective.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-perfect-reduced-tensor",
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 056V and 0A21: dense smooth locus and local dimension on a pure-dimensional finite-type scheme; algebra.tex Tags 00I4, 00FP; morphisms.tex Tag 02G1, rank of smooth differentials."
+   }
+  },
+  {
+   "text": "Let p be a minimal prime of R. Flat going-down for A→R shows that its contraction a to A is minimal: otherwise a strictly smaller prime of A would lift to a prime strictly below p. Since A is reduced (a localization of S), A_a is a field by the minimal-prime localization theorem; the same theorem makes F_p=R_p a field because R is reduced. The local map A_a→F_p is an extension of fields. The algebraic exact vector-space sequence of Step 3 therefore remains exact over F_p, and dim_{F_p}(M_R⊗_R F_p)=d. Tensor right exactness applied to Step 2 identifies both base-changed cokernels with this vector space.",
+   "uses": [
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HS (lemma-flat-going-down), 00EU (lemma-minimal-prime-reduced-ring)."
+   }
+  },
+  {
+   "text": "Over each F_p the formal differential has domain dimension c, codomain dimension n and cokernel dimension d=n-c; rank-nullity gives zero kernel. The algebraic differential also has zero kernel over F_p by Step 4. The total-fractions theorem gives Q(R)≃∏_p R_p. The map R→Q(R) is injective: if a/1=0, some nonzerodivisor s satisfies sa=0, hence a=0. Coordinatewise, the same is true for every finite free R-module. Therefore a vector in the kernel of either differential, zero in every F_p by the preceding calculations, is zero in its free source over R. Both q_P and q_T are now quasi-isomorphisms: the only remaining cohomology is their already identified degree-zero cokernel M_R.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02LX (lemma-total-ring-fractions-no-embedded-points) and 00EW (lemma-reduced-ring-sub-product-fields); the free-module kernel argument is written out."
+   }
+  },
+  {
+   "text": "To construct a local lift α:P→T, lift each u_i mod I to an element of T; its residue is the prescribed k-value of u_i. Every polynomial outside the rational maximal ideal q then evaluates to a power series with nonzero constant term, which is a unit (its inverse is its constant inverse times a geometric series). Thus evaluation extends to P. Reducing to the residue field proves α is local, and its composite with T→R is the given P→R. Because α(I)⊆J and α(I²)⊆J², [h]↦[α(h)] defines the degree -1 map; the differential formula defines degree zero. Formal differentiation is a derivation, and differentiating polynomials and inverses proves the chain rule, hence f_α:C_P⊗R→C_T is a chain map.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C52, choosing coordinate lifts; polynomial localization and termwise power-series differentiation, written out."
+   }
+  },
+  {
+   "text": "The finite-module tensor/completion theorem identifies M_R with the adic completion of N, and module-completion completeness makes it separated; the image of (z) is the maximal ideal of R, so these are also the (z)-adic powers. For any series h∈T, truncate modulo (z)^b. Termwise derivatives of the tail lie in (z)^{b-1}; both the universal continuous derivation on R and the formal derivative expression therefore converge to the same element of M_R, since they agree on polynomials. This gives d̂(h mod J)=∑_i (∂h/∂z_i mod J)d̂(z_i). In particular q_T f_α=q_P on each du_i and hence on the complex. In D(R), where the augmentations of Step 5 are invertible, f_α=q_T^{-1}q_P. It is a quasi-isomorphism and its derived class is independent of α.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-trf-completion-kahler-differential-comparison",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MA and 05GG (finite module completion and tensor); varieties.tex 0C52 continuous differential comparison. The chain rule and localization equality are written out."
+   }
+  },
+  {
+   "text": "The adjunction-line theorem identifies K_A in the chosen algebraic chart with (Λ^{m-d}(I/I²))^∨⊗Λ^m(Ω¹_{P/k}⊗_P A). Applying the two-term determinant functor to the isomorphism f_α=q_T^{-1}q_P and its scalar-extension comparison gives Φ_T:K_A⊗_A R≃(Λ^c(J/J²))^∨⊗Λ^n R^n=λ_T. This uses completion of the algebraic modules and the actual conormal map, rather than any claim that completion is a change of the base scheme. Lift-independence follows immediately from Step 7 and functoriality of the determinant.",
+   "uses": [
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-two-term-perfect-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6V local adjunction computation; perfect.tex Tags 0FJX (lemma-determinant-two-term-complexes), 0FJY (remark-functorial-det)."
+   }
+  },
+  {
+   "text": "Let θ:R→L satisfy the stated generic-smooth hypothesis. Smooth differentials have rank the local fibre dimension, here d; localization identifies their fibre with Ω¹_{A/k}⊗_A κ(a) at the specified generic point a. Its further extension to L consequently has dimension d. Tensor right exactness makes this vector space M the cokernel of both C_P⊗L and C_T⊗L. For the algebraic map the source and target dimensions are m-d,m; for the formal map they are c,n with n-c=d. Rank-nullity makes both left maps injective. Thus both sequences are short exact even though R→L need not be flat. The two augmentations after tensoring with L are quasi-isomorphisms, and the equality (q_T⊗L)(f_α⊗L)=q_P⊗L is the tensor of the chain-map equality from Step 7.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1; algebra.tex Tags 00RT, 00DF, followed by vector-space rank-nullity. No flatness of R→L is used."
+   }
+  },
+  {
+   "text": "For the short exact sequence of Step 9 choose its relation basis a_j=[g_j] and any lifts ṽ_i of a basis v_i of M. The vectors d̂g_1,…,d̂g_c,ṽ_1,…,ṽ_d form a basis of L^n. Changing a lift by a relation vector adds a wedge with c+1 relation vectors, hence zero; changing the relation basis multiplies its dual top wedge and its image top wedge by inverse determinants. The resulting δ_T is therefore precisely the displayed well-defined determinant isomorphism. In this split basis the augmentation is the projection [L^c→L^c⊕M]→M[0]. The determinant construction cancels the identical relation factors by evaluation, so det(q_T⊗L)=δ_T^{-1}. The same calculation for P gives det(q_P⊗L)=γ_A, by the adjunction theorem's smooth-locus identification (relations precede quotient lifts in both formulas). Functoriality and scalar-extension compatibility now yield δ_T^{-1}(Φ_T⊗L)=γ_A.",
+   "uses": [
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), its explicit ordered wedge formula, and Tag 0E9Z (lemma-fundamental-class-lci); more-algebra.tex Section 0FJI, determinant of a degreewise surjective quasi-isomorphism, applied to the split augmentation."
+   }
+  },
+  {
+   "text": "For a continuous map between two regular formal presentations inducing 1_R, apply the series chain rule of Step 7 to its coordinate images. Its conormal chain map h satisfies q_{T'}h=q_T, hence h=q_{T'}^{-1}q_T in D(R). Thus for three such presentations the comparisons compose by cancellation; determinant functoriality gives det(h)Φ_T=Φ_{T'}. Algebraic presentation changes likewise commute with the differential augmentations. To compare their source identifications with the fixed K_A, use Step 10 at every L=R_p, p minimal: Step 4 ensures these are allowed generic-smooth fields. The canonical algebraic adjunction transitions agree with γ_A there, so the two candidate line maps agree at every R_p. Their difference is zero: after trivializing the lines on the local ring R it is a scalar, detected by the injection R→∏_p R_p established in Step 5. Hence the comparisons respect all algebraic presentation changes as well, and their cocycle law holds over R. This also proves the normalization for every choice of presentations.",
+   "uses": [
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJY functoriality; duality.tex Tags 0E9Y/0E9Z; algebra.tex Tags 00EW/02LX for equality detection over the reduced completion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-flat-going-down",
+  "lem-trf-completed-jacobian-differentials",
+  "lem-trf-completion-kahler-differential-comparison",
+  "lem-trf-flat-lci-canonical-adjunction",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Auxiliary proof of the completed comparison, using the conormal determinant formula of Tags 0E9Y/0E9Z and the completed-Jacobian comparison. Injectivity is proved by generic ranks over the reduced completion; no formal cotangent base-change assertion is imported from 08SL."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +254,52 @@
    "results": "{\"t\": \"2026-10-17T20:48:26Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical quasi-isomorphism between completed algebraic conormal resolutions and continuous power series Jacobian complexes, natural on determinants and smooth differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply\", \"Algebra.Presentation.differentials.comm₂₃\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.Presentation.differentials.comm₁₂\", \"KaehlerDifferential.quotKerTotalEquiv_symm_comp_D\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\"], \"digest\": \"eee6fb813707d346\"}. Read the returned signatures and Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Smooth/StandardSmoothCotangent.lean and Algebra/Module/Presentation/Differentials.lean: these give ordinary algebraic conormal/Jacobian maps, smooth lifting or endomorphism determinants. They do not compare completed algebraic and continuous formal complexes or their determinant lines with the specified generic normalization.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical comparison between completed algebraic conormal determinant and formal power series conormal determinant",
+   "results": "{\"t\": \"2026-10-17T21:02:04Z\", \"tool\": \"leanfinder\", \"query\": \"canonical comparison between completed algebraic conormal determinant and formal power series conormal determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv\", \"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.Norm.Transitivity.eval_zero_det_det\", \"LinearMap.detAux_def\", \"Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det\"], \"digest\": \"2f92b57464310b83\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Jacobian and ordinary cotangent APIs do not construct the completed/formal determinant comparison with generic normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "determinant, exterior, conormal",
+   "results": "{\"t\": \"2026-10-17T21:02:04Z\", \"tool\": \"loogle\", \"query\": \"determinant, exterior, conormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'determinant'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|determinant",
+   "results": "{\"t\": \"2026-10-17T21:02:04Z\", \"tool\": \"grep\", \"query\": \"conormal|determinant\", \"sub\": \"RingTheory/\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/FractionalIdeal/Norm.lean\", \"Mathlib/RingTheory/Trace/Basic.lean\", \"Mathlib/RingTheory/Discriminant.lean\", \"Mathlib/RingTheory/Discriminant.lean\", \"Mathlib/RingTheory/Discriminant.lean\", \"Mathlib/RingTheory/Discriminant.lean\", \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\"], \"digest\": \"a2309a29c06aa26a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Jacobian and ordinary cotangent APIs do not construct the completed/formal determinant comparison with generic normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Determinant line of completed algebraic conormal complex is naturally isomorphic to determinant of a formal power series Jacobian presentation",
+   "results": "{\"t\": \"2026-10-17T21:11:46Z\", \"tool\": \"leansearch\", \"query\": \"Determinant line of completed algebraic conormal complex is naturally isomorphic to determinant of a formal power series Jacobian presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs.congr_simp\", \"Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.jacobian_ofAlgEquiv\", \"Algebra.PreSubmersivePresentation.jacobian.congr_simp\", \"Algebra.PreSubmersivePresentation.baseChange_jacobian\"], \"digest\": \"363a5c2acd78cfd2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Jacobian and ordinary cotangent APIs do not construct the completed/formal determinant comparison with generic normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "completedCotangent|conormal.*completion|completion.*conormal|determinantLine",
+   "results": "{\"t\": \"2026-10-17T21:11:46Z\", \"tool\": \"grep\", \"query\": \"completedCotangent|conormal.*completion|completion.*conormal|determinantLine\", \"sub\": \"RingTheory/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Jacobian and ordinary cotangent APIs do not construct the completed/formal determinant comparison with generic normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical determinant comparison between two completed local complete intersection Jacobian presentations with the same module of differentials",
+   "results": "{\"t\": \"2026-10-17T21:11:49Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical determinant comparison between two completed local complete intersection Jacobian presentations with the same module of differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"Algebra.PreSubmersivePresentation.ofBijectiveAlgebraMap_jacobian\"], \"digest\": \"474284afab55a769\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Jacobian and ordinary cotangent APIs do not construct the completed/formal determinant comparison with generic normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-formal-plane-adjunction-lattice",
@@ -105,5 +328,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-completed-conormal-determinant-comparison",
+  "worker": "stage1",
+  "summary": "Proved the formal and completed algebraic complexes are finite free resolutions of the same completed differential module. Injectivity is proved explicitly at minimal primes and detected over the reduced completion; all lift maps therefore equal q_T^{-1}q_P. Applied the existing determinant construction and computed its generic normalization in split bases, then checked formal and algebraic presentation coherence. Statement unchanged; zero new nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Missing prerequisite for this local input: compare the completed algebraic conormal determinant with an arbitrary regular formal presentation, preserving the generic differential map, before computing the plane residue.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-geometrically-reduced-dense-smooth-open",
+    "why": "Generic algebraic smoothness for a geometrically reduced finite-type scheme. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Computes the dimension entering the smooth differential rank theorem from pure dimension of Spec S. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Minimal primes of the completion contract to minimal primes of A. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Noetherianity of the completed ring R. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-module-tensor",
+    "why": "Identifies the completed differential module with a genuine finite-module adic completion. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Hilbert basis theorem makes S Noetherian. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Checks the local finite-presentation hypothesis for the dense-smooth-open theorem. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-localization",
+    "why": "Transport of the coordinate differential basis to P. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-polynomial-extension",
+    "why": "Polynomial coordinate basis for differentials. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Flatness of the actual completion map, needed for going-down. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Noetherianity of the local ring A. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "why": "Identifies generic local rings with fields without assuming integrality. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Separatedness needed when passing from polynomial truncations to power series. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "why": "Ensures the dense smooth open contains every generic component point by a finite-components argument. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-perfect-reduced-tensor",
+    "why": "Geometric reducedness over the perfect field. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Detects vectors and line morphisms at all generic component fields. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-conormal-free",
+    "why": "Conormal freeness with the specified equation bases, valid for polynomial localizations and formal rings. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Computes the rank of the differential module at every allowed generic smooth point. This is a generic algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Cokernel preservation under arbitrary tensor extension, including nonflat field maps. This is a generic algebra tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-44314af68",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-44314af68 (reviewer sub-agent of L); spot-checked: Read the item, all eleven steps, cited node statements, unit/chapter route, and cited Stacks sources. The completed conormal comparison is mathematically coherent: hypotheses, generic-rank injectivity, completion/chain-rule argument, determinant normalization, and presentation cocycle all check. No duplicate or missing node, route violation, coefficient-category error, or repair is needed. Review written to review.md."
  }
 }

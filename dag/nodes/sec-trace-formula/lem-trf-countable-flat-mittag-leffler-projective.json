@@ -12,9 +12,103 @@
   "def-trf-mittag-leffler-module",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-flat-tensor-exact], tensoring with the flat module $P$ preserves exactness, including injectivity at the left end. By [lem-weil-pbc-tensor-right-exact] it also preserves surjectivity at the right end. Thus it preserves every short exact sequence, which is precisely the hypothesis of [lem-kun-lazard-flat-module]. That node gives a small nonempty directed poset $I$, finite free modules $F_i\\cong R^{r_i}$, and compatible maps exhibiting $P$ as their colimit.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-kun-lazard-flat-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X, opening sentence; Tag 058G (theorem-lazard)."
+   }
+  },
+  {
+   "text": "Every $F_i\\cong R^{r_i}$ is finitely presented, with presentation $R^0\\to R^{r_i}\\to F_i\\to0$. Apply [lem-trf-ml-countable-colimit] using the assumed countable generation and tensor-product Mittag-Leffler property of $P$. Obtain a nonempty countable directed subset $J\\subseteq I$ for which the restricted cocone still exhibits $P$ as colimit.",
+   "uses": [
+    "lem-trf-ml-countable-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X, application of Tag 059W (lemma-ML-countable-colimit)."
+   }
+  },
+  {
+   "text": "Enumerate $J$ by a sequence $j_1,j_2,\\ldots$, repeating entries when $J$ is finite. Recursively choose $k_1=j_1$ and $k_{n+1}\\in J$ above both $k_n$ and $j_{n+1}$. Set $G_n=F_{k_n}$ and use the inherited transitions. These indices are cofinal. To verify the colimit directly, a compatible family $a_n:G_n\\to T$ extends to $F_j\\to T$ by $a_n f_{j,k_n}$ whenever $j\\le k_n$. Two such choices agree by passing to a larger sequence index; the same computation proves compatibility with every arrow of $J$. Conversely, restriction recovers $a_n$. The universal property in [def-weil-pbc-category-colimit] therefore exhibits $P$ as $\\operatorname{colim}_{n\\ge1}G_n$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W, paragraph immediately after its proof; explicit cofinal-sequence argument."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-mittag-leffler-hom-systems] to this sequence of finite free, hence finitely presented, modules and its colimit $P$. For every $R$-module $N$, it says exactly that the inverse sequence $\\operatorname{Hom}_R(G_n,N)$ has eventually constant transition images, that is, is Mittag-Leffler as defined in [def-weil-pbc-mittag-leffler-system].",
+   "uses": [
+    "lem-trf-mittag-leffler-hom-systems",
+    "def-weil-pbc-mittag-leffler-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X, Hom-system Mittag-Leffler assertion; Tags 059M and 059E (4)."
+   }
+  },
+  {
+   "text": "Fix an arbitrary short exact sequence $0\\to N_1\\xrightarrow{a}N_2\\xrightarrow{b}N_3\\to0$. For every $n$ the induced sequence $0\\to\\operatorname{Hom}_R(G_n,N_1)\\to\\operatorname{Hom}_R(G_n,N_2)\\to\\operatorname{Hom}_R(G_n,N_3)\\to0$ is exact. Indeed, choose a basis identifying $G_n$ with $R^{s_n}$; Hom becomes the finite power $N^{s_n}$. Injectivity and equality of kernel with image hold coordinatewise, and a tuple in $N_3^{s_n}$ lifts by choosing a preimage in $N_2$ of each of its finitely many coordinates. Precomposition with $G_n\\to G_{n+1}$ commutes with postcomposition by $a,b$, so these sequences form a short exact sequence of inverse systems.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X, finite-free Hom exactness, coordinate proof."
+   }
+  },
+  {
+   "text": "The kernel inverse system $\\operatorname{Hom}_R(G_n,N_1)$ is Mittag-Leffler by step 4. All three systems are indexed by positive integers and the maps commute with transitions by step 5. Hence part (3) of [lem-weil-pbc-mittag-leffler-limit-exact], applied to the underlying abelian groups, gives the short exact sequence of their inverse limits. The limit maps are $R$-linear because all component maps are; exactness of underlying groups is exactness of the $R$-modules.",
+   "uses": [
+    "lem-weil-pbc-mittag-leffler-limit-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X, application of Tag 0598 (lemma-ML-exact-sequence)."
+   }
+  },
+  {
+   "text": "For every $N$, map $h:P\\to N$ to $(h\\iota_n)_n$, where $\\iota_n:G_n\\to P$ are the colimit maps. The universal property [def-weil-pbc-category-colimit] gives a unique inverse map from every compatible family. Addition and scalar multiplication agree after restriction to every $G_n$, so this is an $R$-linear isomorphism $\\operatorname{Hom}_R(P,N)\\cong\\varprojlim_n\\operatorname{Hom}_R(G_n,N)$. For $v:N\\to N^\\prime$, the equality $(vh)\\iota_n=v(h\\iota_n)$ proves naturality. These isomorphisms therefore identify the exact sequence of step 6 with the sequence obtained by applying $\\operatorname{Hom}_R(P,-)$ to the arbitrary short exact sequence in step 5. Consequently this Hom functor is exact, so $P$ is projective by [def-weil-pbc-projective-module].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059X, final paragraph and projectivity conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-mittag-leffler-system",
+  "def-weil-pbc-projective-module",
+  "lem-kun-lazard-flat-module",
+  "lem-trf-mittag-leffler-hom-systems",
+  "lem-trf-ml-countable-colimit",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-mittag-leffler-limit-exact",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059X (lemma-countgen-projective), with the positive-integer reindexing and naturality written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +144,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.enoughProjectives\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Projective\", \"type\": \"∀ {R : Type u} [inst : Ring R] [Small.{v, u} R], CategoryTheory.EnoughProjectives (ModuleCat R)\", \"doc\": \"For any small ring $ R $, the category of left $ R $-modules has enough projectives. This means that for every left $ R $-module $ X $, there exists a projective left $ R $-module $ P $ and an epimorp\"}\n  {\"name\": \"Module.instProjectiveDFinsupp\", \"module\": \"Mathlib/Algebra/Module/Projective\", \"type\": \"∀ {R : Type u_1} [inst : Semiring R] {ι : Type u_6} (A : ι → Type u_7) [inst_1 : (i : ι) → AddCommMonoid (A i)]\\n  [inst_2 : (i : ι) → Module R (A i)] [h : ∀ (i : ι), Module.Projective R (A i)], Module.Projective R (Π₀ (i : ι), A i)\", \"doc\": \"If each module $ A_i $ in a family over a semiring $ R $ is projective, then the direct sum of the family, consisting of dependent finite support functions $ \\\\Pi₀(i : \\\\iota), A_i $, is also a projecti\"}\n  {\"name\": \"Module.dual_projective\", \"module\": \"Mathlib/LinearAlgebra/Dual/Lemmas\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [Module.Finite R M] [Module.Projective R M], Module.Projective R (Module.Dual R M)\", \"doc\": \"If $ M $ is a projective $ R $-module, then its dual module $ \\text{Dual}_R(M) $ consisting of all $ R $-linear maps from $ M $ to $ R $ is also a projective $ R $-module.\"}\n  {\"name\": \"ModuleCat.instProjectiveObjFree\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/LeftResolution\", \"type\": \"∀ (R : Type u) [inst : Ring R] (X : Type u), CategoryTheory.Projective ((ModuleCat.free R).obj X)\", \"doc\": \"For any type $X$, the free $R$-module generated by $X$ is a projective object in the category of left $R$-modules.\"}\n  {\"name\": \"ModuleCat.projective_of_module_projective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Projective\", \"type\": \"∀ {R : Type u} [inst : Ring R] (P : ModuleCat R) [Small.{v, u} R] [CategoryTheory.Projective P], Module.Projective R ↑P\", \"doc\": \"For any ring $ R $, if a module $ P $ is projective (i.e., a direct summand of a free module), then $ P $ is a projective object in the category of left $ R $-modules. This establishes that the algebr\"}\n  {\"name\": \"ModuleCat.projective_of_categoryTheory_projective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Projective\", \"type\": \"∀ {R : Type u} [inst : Ring R] (P : ModuleCat R) [Module.Projective R ↑P], CategoryTheory.Projective P\", \"doc\": \"In the category of modules over a ring $ R $, a module is projective (i.e., satisfies the categorical lifting property for epimorphisms) if and only if it is a direct summand of a free module. This in\"}\n  {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.FinitePresentation R M], Module.Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}\n  {\"name\": \"Module.Projective.of_lifting_property''\", \"module\": \"Mathlib/Algebra/Module/Projective\", \"type\": \"∀ {R : Type u} [inst : Semiring R] {P : Type v} [inst_1 : AddCommMonoid P] [inst_2 : Module R P],\\n  (∀ (f : (P →₀ R) →ₗ[R] P), Function.Surjective ⇑f → ∃ h, f ∘ₗ h = LinearMap.id) → Module.Projective R P\", \"doc\": \"A module $ P $ over a semiring $ R $ is projective if every surjective $ R $-linear map from the free $ R $-module generated by $ P $ to $ P $ admits a right inverse, i.e., there exists an $ R $-linea\"}",
    "date": "2026-10-18",
    "verdict": "no match: projective_of_finitePresentation requires finite presentation; countable generation plus the module Mittag-Leffler condition is not its one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "countably generated flat Mittag Leffler module is projective",
+   "results": "{\"t\": \"2026-10-17T21:16:45Z\", \"tool\": \"leanfinder\", \"query\": \"countably generated flat Mittag Leffler module is projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.of_projective\", \"ModuleCat.enoughProjectives\", \"ModuleCat.projective_of_module_projective\", \"IsProjective.iff_projective\", \"ModuleCat.instProjectiveObjFree\", \"ModuleCat.projective_of_categoryTheory_projective\", \"Module.Projective\"], \"digest\": \"9ca82161787f4c57\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finite presentation is stronger than the countable generation assumed here; no module Mittag-Leffler projectivity theorem was returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module is projective if it is flat, countably generated, and tensoring it with any product of modules maps injectively into the product of tensors",
+   "results": "{\"t\": \"2026-10-17T21:16:43Z\", \"tool\": \"leansearch\", \"query\": \"A module is projective if it is flat, countably generated, and tensoring it with any product of modules maps injectively into the product of tensors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Projective\", \"Module.Flat.of_projective\", \"ModuleCat.projective_of_module_projective\", \"ModuleCat.projective_of_categoryTheory_projective\", \"Module.Projective.of_lifting_property''\", \"Module.Projective.iff_split'\", \"IsProjective.iff_projective\", \"Module.Flat.iff_lTensor_injectiveₛ\"], \"digest\": \"2bebed71597dfa8f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finite presentation is stronger than the countable generation assumed here; no module Mittag-Leffler projectivity theorem was returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Module.Flat",
+   "results": "{\"t\": \"2026-10-17T21:16:43Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Module.Flat.of_projective\", \"Module.Flat.projective_of_finitePresentation\"], \"digest\": \"82e36669b0b9614c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finite presentation is stronger than the countable generation assumed here; no module Mittag-Leffler projectivity theorem was returned"
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|059E|059M|059W|059X",
+   "results": "{\"t\": \"2026-10-17T21:16:18Z\", \"tool\": \"grep\", \"query\": \"Mittag|mittag|059E|059M|059W|059X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\"], \"digest\": \"fb061e33f8cfe26f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finite presentation is stronger than the countable generation assumed here; no module Mittag-Leffler projectivity theorem was returned"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-flat-pure-complete-projective",
@@ -84,5 +206,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-countable-flat-mittag-leffler-projective",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Tag 059X: existing Lazard presentation and tensor exactness leaves, new statement-only Tag 059W countable extraction and Tags 059M/059E Hom-system bridge, explicit cofinal sequence, finite-free coordinate exactness, existing countable Mittag-Leffler limit exactness, and the natural Hom-colimit identification. No attachment or new Mathlib leaf.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). Last sentence: 'countably generated, flat and Mittag-Leffler ... whence projective'. The seven steps supply the Tag 059X projectivity sentence inside this inherited supporting algebra branch. Current main-20261015 contracting-correspondence ancestry is retained; no unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-lazard-flat-module",
+    "why": "Generic flat-module finite-free directed presentation, explicitly used by Tag 059X; the trace-formula unit has no replacement algebra lemma."
+   },
+   {
+    "node": "lem-weil-pbc-mittag-leffler-limit-exact",
+    "why": "Generic exactness of countable inverse limits when the kernel system is Mittag-Leffler, explicitly used by Tag 059X; the trace-formula unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-lazard-flat-module",
+  "lem-weil-pbc-mittag-leffler-limit-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q61-01d851a46",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q61-01d851a46 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements and Stacks sources in full. All seven steps are valid; 059M/059E justify Hom stabilization and 059W justifies countable extraction. No duplicates, circularity, hidden long steps or forbidden machinery found. Accepted both algebraic tool_uses. No repairs needed; detailed checks are in review.md."
  }
 }

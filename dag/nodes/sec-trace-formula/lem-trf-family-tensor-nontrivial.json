@@ -12,12 +12,54 @@
   "def-pc-field-extension",
   "lem-weil-pbc-commutative-algebras-colimits-exist"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "For every finite subset $S\\subseteq J$, let $A_S=\\bigotimes_{s\\in S,k}L_s$. The finite-family tensor lemma [lem-trf-finite-family-tensor-nontrivial] says that $A_S$ is nontrivial, with $A_\\varnothing=k$. If $S\\subseteq T$, write $T=S\\sqcup(T\\setminus S)$ and identify $A_T$ with $A_S\\otimes_k B_{S,T}$, where $B_{S,T}=\\bigotimes_{t\\in T\\setminus S,k}L_t$. The structural map $k\\to B_{S,T}$ is injective: its kernel is an ideal of the field $k$, and if it were all of $k$ then $1=0$ in the nontrivial ring $B_{S,T}$. Since $A_S$ is a $k$-vector space, it is flat; applying [lem-trf-flat-tensor-preserves-injection] to $k\\hookrightarrow B_{S,T}$ gives that the canonical transition map $A_S\\to A_T$, $x\\mapsto x\\otimes1$, is injective. The empty-subset transition $k\\to A_S$ is therefore injective as well.",
+   "uses": [
+    "lem-trf-finite-family-tensor-nontrivial",
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, lines 145-166: tensor coproduct as filtered colimit of finite tensors; the detailed nontriviality argument is supplied here."
+   }
+  },
+  {
+   "text": "The finite subsets of $J$, ordered by inclusion, form a filtered index category. The categorical finite-subcoproduct theorem [lem-trf-family-coproduct-finite-filtered] identifies the coproduct $A$ with the filtered colimit of the $A_S$ and these transition maps. This identification is compatible with the canonical map from the empty finite subcoproduct $A_\\varnothing=k$ to $A$.",
+   "uses": [
+    "lem-trf-family-coproduct-finite-filtered",
+    "lem-weil-pbc-commutative-algebras-colimits-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, lines 145-166: tensor coproduct as filtered colimit of finite tensors; the detailed nontriviality argument is supplied here."
+   }
+  },
+  {
+   "text": "In a filtered colimit of rings presented by the disjoint union of the stages modulo the transition relations, equality of two elements from one stage means that their images agree at some later stage. Since every transition map above is injective, the images of $0$ and $1$ from the empty stage remain distinct at every later stage. Hence the canonical map $k=A_\\varnothing\\to A$ is injective, so $A$ is nontrivial. When $J=\\varnothing$ the index has only the empty stage and the same conclusion says $A\\cong k$.",
+   "uses": [
+    "lem-trf-family-coproduct-finite-filtered",
+    "lem-trf-finite-family-tensor-nontrivial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, lines 145-166: tensor coproduct as filtered colimit of finite tensors; the detailed nontriviality argument is supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-family-tensor-nontrivial",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-trf-family-coproduct-finite-filtered",
+  "lem-weil-pbc-commutative-algebras-colimits-exist"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 0CNJ proof, finite-subfamily tensor-product argument underlying the common huge field"
+  "place": "Tag 0CNJ, lines 145-166 (finite tensor filtered-colimit construction), with the nontriviality argument supplied in this node"
  },
  "mathlib_searches": [
   {
@@ -50,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-family-common-extension-field",
@@ -62,12 +104,28 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "the auxiliary product-surjectivity argument of Tag 0CNJ used in the final paragraph of Tag 0CNZ: the tensor coproduct of the residue-field extensions is nontrivial",
+   "place": "the finite-subfamily tensor-product and filtered-coproduct argument in the auxiliary coproduct construction",
    "via": [
     "lem-trf-family-common-extension-field"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-family-tensor-nontrivial",
+  "worker": "stage1",
+  "summary": "Split the small tensor coproduct lemma into the finite-family nontriviality statement, the categorical filtered-colimit presentation by finite subcoproducts, and the flatness statement used to prove transition maps injective. The proof checks the empty family explicitly and obtains an injection of the base field into the filtered colimit.",
+  "blueprint": "Realizes the finite-subfamily tensor-product argument underlying the auxiliary common-field construction associated with Stacks Tag 0CNJ.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q73-6c85d52b3",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q73-6c85d52b3 (reviewer sub-agent of L); spot-checked: The mathematical route is sound, but Tag 0CNJ does not contain the claimed finite-subfamily nontriviality proof: it only displays the filtered-colimit tensor construction and omits the surjectivity construction. Corrected whole DAG JSON files are in fixes/dag/nodes/sec-trace-formula/, updating source places and proof provenance to identify the agent-supplied argument. Review and edge-case checks are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
