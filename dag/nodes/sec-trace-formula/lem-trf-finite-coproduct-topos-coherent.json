@@ -13,9 +13,85 @@
   "def-trf-geometric-morphism",
   "def-trf-coherent-topos"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A presheaf on the disjoint-union site is exactly a tuple of presheaves on the component sites: every object and arrow has a unique component and there are no cross-component morphisms. The sheaf equalizer condition is checked separately on each covering family, so restriction and tuplewise extension give mutually inverse equivalences $\\operatorname{Sh}(\\mathcal C)\\simeq\\prod_i\\operatorname{Sh}(\\mathcal C_i)$. The same description computes limits, colimits and epimorphisms componentwise. For the empty finite index set there is one presheaf and one sheaf, hence the terminal category. This is the direct construction from the sheaf equalizer, limit and colimit definitions in the cited Stacks tags.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VH and 00VM, with limits 00W2 and colimits 00WI; direct disjoint-union construction."
+   }
+  },
+  {
+   "text": "Under the product equivalence, the projection to the $i$-th component is left exact. Its right adjoint sends $A_i$ to the tuple having $A_i$ in component $i$ and the terminal object elsewhere: a morphism from $(B_k)_k$ to this tuple is uniquely a morphism $B_i\\to A_i$, since every other component has a unique map to the terminal object. Thus the resulting geometric morphism has the stated inverse image and right adjoint by [def-trf-geometric-morphism].",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Product-category adjunction calculation for the component inclusions."
+   }
+  },
+  {
+   "text": "Given geometric morphisms $u_i:\\mathcal E_i\\to\\mathcal F$, define $u^{-1}A=(u_i^{-1}A)_i$. It preserves finite limits componentwise. For a tuple $(B_i)_i$, the object $u_*(B_i)_i=\\prod_i u_{i,*}B_i$ is right adjoint because $\\operatorname{Hom}_{\\mathcal F}(A,\\prod_i u_{i,*}B_i)$ is naturally $\\prod_i\\operatorname{Hom}_{\\mathcal E_i}(u_i^{-1}A,B_i)$. The empty product is terminal. The component inclusions satisfy $u j_i\\simeq u_i$ by construction, and uniqueness of the adjoint supplies the compatible natural isomorphisms. Hence this is the coproduct universal property of topoi.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Universal-property calculation for finite products of sheaf categories and geometric morphisms."
+   }
+  },
+  {
+   "text": "Replacing any component site by an equivalent site replaces its sheaf category by an equivalent topos. Taking the finite product of these equivalences gives an equivalence between the corresponding product categories, and the disjoint-union equivalences of Step 1 identify the resulting constructions. Thus the construction is independent of the chosen presentations up to equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Equivalence invariance of the sheaf-category presentation in Definition 00VH."
+   }
+  },
+  {
+   "text": "Assume every component topos is coherent. First, a tuple $A=(A_i)_i$ is quasi-compact exactly when every $A_i$ is quasi-compact. For the forward implication, extend any covering family of $A_i$ to a covering family of $A$ by using identity maps on the other components; a finite subcover of $A$ restricts to one of $A_i$. Conversely, a covering family of $A$ is componentwise epimorphic, so finite subfamilies cover each $A_i$; the union of these finitely many index sets covers $A$. The initial object is quasi-compact by strictness. Next, $A$ is quasi-separated exactly when every $A_i$ is quasi-separated. For the forward implication, put quasi-compact objects over $A_i$ in component $i$ and initial objects elsewhere; their fibre product is quasi-compact, hence its $i$-component is. Conversely, componentwise limits identify a fibre product over $A$ with the tuple of fibre products over $A_i$, which is quasi-compact by the preceding equivalence. Thus $(A_i)_i$ is coherent exactly when every $A_i$ is coherent. This argument uses only [def-trf-coherent-topos] and the strict, disjoint, universal finite-coproduct calculus [lem-trf-set-sheaf-finite-extensivity].",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-trf-set-sheaf-finite-extensivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition of quasi-compact and quasi-separated objects in the coherent-topos node, with the strict/disjoint/universal finite-coproduct calculus of Tag 00WI/00WJ."
+   }
+  },
+  {
+   "text": "For each coherent component choose its small finite-limit-closed full generating subcategory from [def-trf-coherent-topos] and adjoin the initial object; finite limits involving the initial object remain initial by [lem-trf-set-sheaf-finite-extensivity]. The product of these finitely many enlarged subcategories is small, finite-limit-closed, and consists of coherent tuples by Step 5. It generates the product: for a tuple $(A_i)_i$, take the coproduct of the component-supported tuples having a generator in one component and the initial object in every other component. Its map to $(A_i)_i$ is componentwise epimorphic, because the chosen generators cover each $A_i$. Hence the product topos is coherent. If $I=\\varnothing$, the terminal category has its sole object as a small finite-limit-closed coherent generating subcategory.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-trf-set-sheaf-finite-extensivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition of a coherent topos and its generating subcategory, together with the finite extensive coproduct calculus; corrected component-supported generator construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coherent-topos",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-set-sheaf-finite-extensivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00VH, 00VM, 00W2 and 00WI, together with the coherent-topos calculus of Orgogozo §8.1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stratified-product-coherent-conservative",
@@ -79,5 +155,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-coproduct-topos-coherent",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by removing the clause-restating disjoint-union child and carrying the sheaf-category equivalence in Step 1. Reordered the coherence proof: Step 5 proves quasi-compactness, quasi-separatedness and coherence componentwise before ambient coherence; Step 6 constructs a small finite-limit-closed generating family using initial objects in the other components, which works in Set×Set.",
+  "blueprint": "The steps realize the §8.1 converse argument where the finite coproduct of oriented-product topoi is represented by a disjoint-union site, with the corrected componentwise coherence and generator construction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-acc8f853a",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-acc8f853a (reviewer sub-agent of L); spot-checked: Read the complete snapshot instructions, route, item, report, cited nodes, unit/chapter route, and Stacks source. Verified all six proof steps, hypotheses, edge cases (empty index, one component, Set x Set, initial components), componentwise geometric morphisms and coherence, generator construction, dependency union, searches, and route restrictions. No new nodes or duplicate/restated splits remain; no Lean/build/live-project operations were used."
  }
 }

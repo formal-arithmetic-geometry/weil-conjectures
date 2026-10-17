@@ -1,0 +1,72 @@
+{
+ "id": "lem-trf-cm-regular-sequence-generator-count",
+ "kind": "statement",
+ "title": "A tuple in a Cohen–Macaulay local ring is regular exactly at the expected dimension drop",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] of finite Krull dimension $d$ [def-weil-pbc-krull-dimension-ring] with $\\operatorname{depth}(R)\\ge d$ [def-weil-pbc-depth]. For every integer $r\\ge0$ and every $x_1,\\ldots,x_r\\in\\mathfrak m$, the tuple $x_1,\\ldots,x_r$ is an $R$-regular sequence [def-weil-pbc-regular-sequence] if and only if $\\dim\\bigl(R/(x_1,\\ldots,x_r)\\bigr)=d-r$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JN (lemma-reformulate-CM), the displayed equivalence for $x_1,\\ldots,x_c\\in\\mathfrak m$; its Cohen–Macaulay hypothesis is the depth-dimension equality for the local ring."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a Cohen Macaulay local ring, for elements x_1 through x_r in the maximal ideal, the tuple is a regular sequence if and only if the quotient by the tuple has dimension dim R minus r",
+   "results": "{\"t\": \"2026-10-17T20:50:08Z\", \"tool\": \"leanfinder\", \"query\": \"In a Cohen Macaulay local ring, for elements x_1 through x_r in the maximal ideal, the tuple is a regular sequence if and only if the quotient by the tuple has dimension dim R minus r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"RingTheory.Sequence.isRegular_iff\", \"RingTheory.Sequence.isRegular_cons_iff\"], \"digest\": \"dbdf1b7e5e025ba3\"}",
+   "date": "2026-10-18",
+   "verdict": "generalization: Mathlib has the forward dimension formula and regular-sequence criteria but no Cohen–Macaulay converse"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim",
+   "results": "{\"t\": \"2026-10-17T20:50:07Z\", \"tool\": \"loogle\", \"query\": \"RingTheory.Sequence.IsRegular, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*sequence.*dim|ringKrullDim.*IsRegular",
+   "results": "{\"t\": \"2026-10-17T20:50:07Z\", \"tool\": \"grep\", \"query\": \"regular.*sequence.*dim|ringKrullDim.*IsRegular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\"], \"digest\": \"c4cc6bebcaf8771c\"}",
+   "date": "2026-10-18",
+   "verdict": "generalization: only forward regular-sequence dimension formula found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen Macaulay local ring tuple in maximal ideal regular sequence exactly when quotient dimension drops by tuple length",
+   "results": "{\"t\": \"2026-10-17T20:50:07Z\", \"tool\": \"leansearch\", \"query\": \"Cohen Macaulay local ring tuple in maximal ideal regular sequence exactly when quotient dimension drops by tuple length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_le_ringKrullDim_add_card\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson\"], \"digest\": \"43fb0adb818aac15\"}",
+   "date": "2026-10-18",
+   "verdict": "generalization: Mathlib has dimension-drop lemmas but no Cohen–Macaulay converse"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-regular-local-surjection-kernel-comparison",
+  "date": "2026-10-18",
+  "group": "Q03"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "lem-trf-local-term-locality.proof.md, paragraph “(1) and (2)”, final sentences: “Its proof reduces, via the additivity of trace classes along the open–closed decomposition ... and proper pushforward from Z ... which is then shown by the normal-cone argument”. This is supporting local algebra in the existing completion/local-complete-intersection branch reached through the listed via nodes, not a complete-intersection assertion in the blueprint itself. The immediate source for the kernel comparison is Algebra 00SE. The fixed-tuple criterion is Algebra 02JN, used in the immediate parent’s Steps 3, 4, 6 and 8.",
+   "via": [
+    "lem-trf-regular-local-surjection-kernel-comparison",
+    "lem-trf-complete-local-ci-presentation-independence",
+    "lem-trf-regular-quotient-completion-kernel-test"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -42,9 +42,97 @@
   "def-pc-reduced-scheme",
   "def-weil-closed-points"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an algebraically closed extension $\\Omega/k$ and write $X=C_\\Omega$. If $X$ is empty it is reduced. The structure morphism of $X$ is locally of finite type by [lem-weil-pbc-lft-base-change]. Choose a finite affine cover $C=\\bigcup_i\\operatorname{Spec}B_i$ as in [def-weil-finite-type-morphism]. By [lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra], its inverse images form the finite affine cover $X=\\bigcup_i\\operatorname{Spec}(B_i\\otimes_k\\Omega)$. Thus $X$ is quasi-compact and its structure morphism is of finite type. The field $\\Omega$ is Noetherian, so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. The Jacobson statement [lem-sc-lft-over-field-jacobson-space] gives a closed specialization of every point, by applying its density assertion to the nonempty closed set which is that point's closure.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-lft-base-change",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T4 (lemma-base-change-finite-type) and 01T6 (lemma-finite-type-noetherian); varieties.tex Tag 0478 (lemma-locally-finite-type-Jacobson); schemes.tex Tags 01I4 and 01JR for the finite affine cover."
+   }
+  },
+  {
+   "text": "Let $x$ be a closed point of $X$ which is smooth over $\\Omega$. Smoothness is an open condition, so a neighbourhood of $x$ is smooth over $\\Omega$; [sbc-lem-smooth-geometrically-reduced] says that this smooth morphism has geometrically reduced fibres, hence its local ring at $x$ is reduced. If instead the completed local ring at $x$ is $R=\\Omega[[u,v]]/(uv)$, then $R$ is reduced: restriction to the two axes gives an injection $R\\hookrightarrow\\Omega[[u]]\\times\\Omega[[v]]$, because a series vanishing on both axes is divisible by $uv$, and both factors are domains by [lem-weil-pbc-power-series-domain]. The local ring $A=\\mathcal O_{X,x}$ is Noetherian by step 1, and its completion $A\\to\\widehat A$ is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat] and injective by [lem-weil-pbc-faithfully-flat-ideal-contraction], applied with the zero ideal. A nilpotent of $A$ would map to a nilpotent of the reduced ring $R\\cong\\widehat A$, so it is zero; thus $A$ is reduced.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E37, proof of geometric reducedness: smooth completed local rings and the model \\Omega[[u,v]]/(uv); algebra.tex Tags 00MC and 05CK for completion and injectivity."
+   }
+  },
+  {
+   "text": "For an arbitrary point $y\\in X$, choose a closed point $x\\in\\overline{\\{y\\}}$ using the Jacobson statement in step 1. The map $\\mathcal O_{X,x}\\to\\mathcal O_{X,y}$ is a localization (because $y$ is a generization of $x$), so the reducedness of $\\mathcal O_{X,x}$ from step 2 implies the reducedness of $\\mathcal O_{X,y}$. Hence every local ring of $X$ is reduced, and $X$ is reduced by [def-pc-reduced-scheme]. Thus $C_\\Omega$ is reduced for every algebraically closed extension $\\Omega/k$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E37, conclusion from reduced completed local rings to reducedness of the nodal curve"
+   }
+  },
+  {
+   "text": "It remains to descend this conclusion to every field extension. Let $U=\\operatorname{Spec}A$ be an affine chart of $C$ and let $E/k$ be finite purely inseparable. Choose an algebraically closed extension $\\Omega/k$ containing an embedding of $E$. The map $A\\otimes_kE\\to A\\otimes_k\\Omega$ is injective because $A$ is a flat $k$-module and tensoring the injection $E\\hookrightarrow\\Omega$ over $k$ with $A$ preserves injectivity [lem-weil-pbc-module-over-field-flat, lem-weil-pbc-flat-tensor-exact]. By step 3 the target is reduced, so $A\\otimes_kE$ is reduced. Applying [lem-trf-geometric-reducedness-finite-inseparable-test] gives that $A\\otimes_kL$ is reduced for every field extension $L/k$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-trf-geometric-reducedness-finite-inseparable-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030V, finite purely inseparable test for geometric reducedness; curves.tex Tag 0E37"
+   }
+  },
+  {
+   "text": "For every $L/k$, the inverse images of the finite affine cover of $C$ are the open subschemes $\\operatorname{Spec}(A\\otimes_kL)$: this is [lem-weil-pbc-open-fibre-product] together with [lem-weil-pbc-fibre-product-affine-spectra]. Each is reduced by step 4, so the local-ring characterization [def-pc-reduced-scheme] shows that $C_L$ is reduced. Since $L$ was arbitrary, $C$ is geometrically reduced.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes), and 01J0/01J1 (definition-reduced/lemma-reduced); algebra.tex Tag 030V is applied in step 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-power-series-domain",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E37 (lemma-facts-about-nodal-curves), geometric reducedness paragraph, using Tags 01J0/01J1, 00MC, 030V and the model rings"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,7 +157,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -86,5 +174,29 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-i-curve-zero"
+ "unit": "sk-i-curve-zero",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-geometric-fibres-reduced",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 0E37 and the imported blueprint ancestor. The item is proved by checking local rings after every algebraically closed base change: smooth points use smooth geometric reducedness, nodal points use the reduced model Omega[[u,v]]/(uv) and faithful-flat completion, and arbitrary points follow by Jacobson closed specializations. The finite purely inseparable test then descends reducedness to every field extension. No new nodes were needed; all cited statements already exist in the DAG or are Mathlib leaves.",
+  "blueprint": "Realizes the ancestor proof's geometric-reducedness input: the Stacks 0E37 paragraph that reduces to the algebraic closure, checks the smooth and uv completed local rings, and concludes reducedness; the finite-inseparable descent is the explicit completion of the same paragraph's cited 030V argument.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "The smooth-point subargument takes that node's conclusion that a smooth morphism has geometrically reduced fibres; the nodal unit has no replacement for this generic smoothness fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q112-ffc0bf481",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q112-ffc0bf481 (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Repaired base-change and completion-injectivity citations, clarified tensor injectivity, and corrected source locations. Statement unchanged; no new nodes. Corrected closure is acyclic. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
