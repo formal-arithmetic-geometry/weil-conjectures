@@ -29,7 +29,10 @@
   "place": "Proposition 6.4.9, printed p. 298, applied to the opposite target; Theorem 6.1.22, printed pp. 273-274, for parameters. Enlarge to a universe containing B before applying the local-smallness hypothesis of Proposition 6.4.9; only the displayed U-small comma colimits are required, not all colimits in the enlarged universe. The comma maps in the last clause give the adjoint mates of restriction transformations. Read online, July 30 2026 revision; archival copy WANTED. No Stacks tag states this quasicategorical theorem."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -306,5 +309,43 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-4004de9d0 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps, both new statement-only nodes, the full statements of all 11 cited nodes, and the unit and chapter records. I could not read Cisinski (online only; the review service blocks the network; WANTED still stands), so I checked the steps mathematically against the cited DAG statements. The item statement is unchanged against the live side DAG and nothing is weakened. Checks: the comma orientation alpha=alpha' u(r) equals the category of elements of W_j=Hom(u(-),j); R_F(j)(z)=Map(u^*h_j,Q_{F,z}); the three mapping-space equivalences in step 5 have the right variances, and the unit is (u^*h)eta_F; the leg at (a,alpha) is L(alpha)eta_a; theta's naturality gives v_!->u_!, with mate theta^*:u^*->v^*. Size: B is V-small, so the Hom bifunctor, Yoneda and weight nodes apply with (V,V'), and the comma categories are U-small. Edge cases A empty, J empty and u=id all hold. New node space-presheaf-right-kan-mapping-formula is true (Yoneda plus the adjunction; counit is evaluation at 1_{u(a)}). It is the item's universal case B=S^op, so it is strictly smaller, and the reduction to it in steps 2-8 is real work, not D1/D4 relabelling. Its future splitter must avoid space-yoneda-density, yoneda-presheaf-limits, presentable-infinity-adjoints, space-valued-pointwise-lan and infinity-yoneda-evaluation, all of which reach the item. New node discrete-weight-coherent-cocones is true (W = colim of h_a over E_W; I checked W empty, W representable and A a point). No duplicates found by rg or blueprint_refs (same_as [] is right). No cycle: none of the 11 proof_deps reaches the item. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-composition-spine, which 158 and 11 existing sec-six-functors nodes already use the same way. Fix (form only): both new nodes get the missing blueprint.from.via (the item plus its via) and the brief section 3 fields proof [], proof_deps [], proof_origin null, mathlib_match null, in fixes/dag/nodes/sec-six-functors/. Statements are untouched.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7862ac623",
+  "group": "N0",
+  "result": "pass",
+  "note": "Delivery changes only the item's lean and stmt_deps; the three added stmt_deps (presentable, parametric-universal-arrows, final-index-colimit) are landed nodes with lean records, used by the Lean, and acyclic. lean.statement is verbatim. Hypotheses exact: A,J : Type u small categories; B : SSet.{max u v} quasicategory; HasSmallColimits.{u,max u v} (u-small shapes only, no local smallness or presentability). Conclusions checked clause by clause: unit orientation (comma outgoing=false gives id -> u^*L); ParametricUniversalArrow gives whole mapping-space equivalences; pointwise colimiting cocone on CostructuredArrow u j (u(r);a'=a, i.e. the node's a=a'u(r)) with apex exactly (u_!F)(j) and legs restriction; postcomposition structure maps; unit = (a,1) leg; parameter universe w via lifted b and parameters clause, compatible with restriction/evaluation; theta:u->v gives v_!->u_! via CommaMorphism.change, and legs naturality yields the mate equation tau*eta^v = (u_!F)(theta_a)*eta^u, so the right mate is theta^*; higher coherence via the simplicial extensions/legs maps. Consistency checked (Lan along CommaIndex -> (A=>J)^op x J). Edge cases: empty A, empty J, u=id, identity/composite theta, independent universes. No hollow definitions; docstrings carry source and blueprint; only the item theorem has sorry; no duplicate in Mathlib or lean/Sheaf. nt_compile.py --json on the snapshot file over the local side overlay: rc 0, no errors or warnings (an injected error was reported, so the tool works). Report has a real Worker report and Second reading by N0. Remark only: the mate u^*->v^* is characterised by the mate equation, not built as a separate transformation."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OrdinaryPointwiseKanExtension",
+  "declaration": "SSet.Enhanced.OrdinaryKan.ordinary_pointwise_kan_extension",
+  "declarations": [
+   "SSet.Enhanced.OrdinaryKan.CommaIndex",
+   "SSet.Enhanced.OrdinaryKan.CommaMorphism",
+   "SSet.Enhanced.OrdinaryKan.commaIndexCategory",
+   "SSet.Enhanced.OrdinaryKan.sourceProjection",
+   "SSet.Enhanced.OrdinaryKan.functorProjection",
+   "SSet.Enhanced.OrdinaryKan.targetProjection",
+   "SSet.Enhanced.OrdinaryKan.commaInclusion",
+   "SSet.Enhanced.OrdinaryKan.identitySection",
+   "SSet.Enhanced.OrdinaryKan.unitHomotopy",
+   "SSet.Enhanced.OrdinaryKan.liftCylinder",
+   "SSet.Enhanced.OrdinaryKan.liftProduct",
+   "SSet.Enhanced.OrdinaryKan.parameterDiagram",
+   "SSet.Enhanced.OrdinaryKan.parameterLegs",
+   "SSet.Enhanced.OrdinaryKan.legSource",
+   "SSet.Enhanced.OrdinaryKan.legTarget",
+   "SSet.Enhanced.OrdinaryKan.ExtensionData",
+   "SSet.Enhanced.OrdinaryKan.ordinary_pointwise_kan_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OrdinaryPointwiseKanExtension.lean",
+  "statement": "theorem ordinary_pointwise_kan_extension (A J : Type u) [SmallCategory A] [SmallCategory J] (B : SSet.{max u v}) [Quasicategory B] (hB : SSet.Presentability.HasSmallColimits.{u, max u v} B) : Nonempty (ExtensionData.{u, v, w} A J B)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The universal comma category and one coherent family of colimit legs retain the pointwise structure maps, unit normalization, contravariant mate law and all higher simplices. The existing parametric universal-arrow interface gives whole mapping-space adjunctions. Explicit degreewise lifts and transposed comma cocones include arbitrary coherent parameters in every containing universe."
  }
 }
