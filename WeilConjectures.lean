@@ -2131,6 +2131,7 @@ public import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmers
 public import WeilConjectures.AlgebraicGeometry.PBCNoetherianApproximation
 public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineRestriction
+public import WeilConjectures.AlgebraicGeometry.Picard.AffineSite
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineSpaceRigidity
 public import WeilConjectures.AlgebraicGeometry.Picard.AlgebraPicardFunctor
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
