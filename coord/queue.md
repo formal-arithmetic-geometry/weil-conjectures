@@ -23,10 +23,10 @@
 | `WeilConjectures.WeilSheaf.CurveEndpoints` | 6 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof |
-| `Sheaf.CategoryTheory.DerivedPerfectSmallClassCore` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedPerfectSmallClassProperties` | 7 | 1 | proof |
 | `WeilConjectures.WeilSheaf.DenseOpen` | 7 | 1 | proof |
 | `WeilConjectures.WeilSheaf.LowerShriekOperations` | 7 | 3 | proof |
+| `Sheaf.CategoryTheory.DerivedPerfectSmallClassCoreAlpha` | 8 | 1 | proof |
 | `Sheaf.RingTheory.FiniteAlgebraExtremallyDisconnected` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof |
