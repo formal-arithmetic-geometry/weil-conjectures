@@ -58,7 +58,7 @@ derived base change, which the repository does not have; they are not stated.
 
 @[expose] public section
 
-universe w u
+universe w u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite Pretriangulated
 
@@ -86,6 +86,28 @@ noncomputable def reductionModIdealMap {J J' : Ideal Λ} (h : J ≤ J') :
 
 end Transition
 
+section General
+
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] {Y : Scheme.{u}}
+
+/-- The tensor–internal-hom adjoint `D ⟶ RHom(C, Λ_Y)` of a pairing `b : C ⊗ᴸ D ⟶ Λ_Y` in
+`D(Y_ét)`. It is an isomorphism exactly when `b` is perfect
+(`AlgebraicGeometry.Etale.IsPerfectPairing`). Like that definition, it is stated for a general
+coefficient category, so that the kernel need not compare tensor products at `ModuleCat Λ`. -/
+noncomputable def pairingAdjoint {C D : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (b : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _) : D ⟶ (ihom C).obj (𝟙_ _) :=
+  MonoidalClosed.curry (C := _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) b
+
+lemma IsPerfectPairing.isIso_pairingAdjoint
+    {C D : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    {b : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _} (hb : IsPerfectPairing b) :
+    IsIso (pairingAdjoint b) :=
+  hb.isIso
+
+end General
+
 section Adjoint
 
 variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ]
@@ -104,10 +126,8 @@ noncomputable abbrev poincareSecondVariable : DerivedCategoryModule Λ X :=
 
 of the derived Poincaré pairing `β_K` (`AlgebraicGeometry.Etale.poincarePairing`), read in
 `D(Spec k_ét, Λ)`. -/
-noncomputable def poincareAdjoint :
-    ((R((a)_*[ModuleCat.{u + 1} Λ])).obj (poincareSecondVariable (T := T) K))⟦(2 * d : ℤ)⟧ ⟶
-      (ihom ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).obj (𝟙_ _) :=
-  MonoidalClosed.curry (C := DerivedCategoryModule Λ (Spec (.of k))) (poincarePairing a γ K)
+noncomputable def poincareAdjoint :=
+  pairingAdjoint (poincarePairing a γ K)
 
 variable {K}
 
@@ -119,8 +139,9 @@ isomorphism, over every coefficient ring `Λ`, in particular over `𝒪_E`; its 
 duality isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]`
 (`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable`). -/
 theorem isIso_poincareAdjoint (hKd : IsDualizable K) : IsIso (poincareAdjoint a γ K) :=
-  (isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a γ hKd).isIso
+  (isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a γ hKd).isIso_pairingAdjoint
 
+include γ in
 /-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: Adic reconstruction and
 scalar extension (the duality isomorphism in `D(Λ)`).
 
@@ -138,50 +159,65 @@ theorem nonempty_iso_ihom_compactlySupportedGlobalSections (hKd : IsDualizable K
     ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)
   exact ⟨e.symm ≪≫ RΓ.mapIso (asIso (poincareAdjoint a γ K)).symm ≪≫
     (RΓ.commShiftIso (2 * d : ℤ)).app _ ≪≫
-    ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ a).app _)⟦(2 * d : ℤ)⟧'⟩
+    (shiftFunctor _ (2 * d : ℤ)).mapIso
+      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ a).app _)⟩
 
 variable {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
 
 /-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: Adic reconstruction and
-scalar extension (the finite-level pairings form a morphism of normalized systems).
+scalar extension (the finite-level dualities are the reductions of `β_K^♯`).
 
 Let `ϖ` be a nonzerodivisor of `Λ` (a uniformizer of `𝒪_E`) and `A_n = Λ/(ϖ)ⁿ`, read through
-`K ↦ K_n = K ⊗ᴸ (A_n)_X`. For `K` perfect over `Λ_X` and every `n`:
+`K ↦ K_n = K ⊗ᴸ (A_n)_X`. For `K` perfect over `Λ_X` and every `n`, the reduction
+`β_K^♯ ⊗ᴸ A_n` is an isomorphism. By
+`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_poincareAdjoint_source` and
+`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_poincareAdjoint_target` its source is
+`RΓ(X, K^∨(d)_n)[2d]` and its target `RHom(RΓ_c(X, K), A_n)`, the `A_n`-dual of
+`RΓ_c(X, K_n) ≅ RΓ_c(X, K) ⊗ᴸ A_n`: the reduction is the finite-level duality, and these form
+a morphism of towers (`AlgebraicGeometry.Etale.poincareAdjoint_reduction_naturality`). -/
+theorem isIso_reductionModIdeal_map_poincareAdjoint (hKd : IsDualizable K) (J : Ideal Λ) :
+    IsIso ((reductionModIdeal Λ (Spec (.of k)) J).map (poincareAdjoint a γ K)) := by
+  have := isIso_poincareAdjoint a γ hKd
+  infer_instance
 
-1. the reduction `β_K^♯ ⊗ᴸ A_n` is an isomorphism;
-2. its source is `RΓ(X, K^∨(d)_n)[2d]` and its target is `RHom(RΓ_c(X, K), A_n)`, the
-   `A_n`-dual of `RΓ_c(X, K_n) ≅ RΓ_c(X, K) ⊗ᴸ A_n`: the reduction is the finite-level duality;
-3. for `n ≤ m` the reductions commute with the transitions `A_m ⟶ A_n`: the finite-level
-   dualities form a morphism of towers. -/
-theorem poincareAdjoint_reduction (hKd : IsDualizable K) (n : ℕ) :
-    IsIso ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).map
-        (poincareAdjoint a γ K)) ∧
-      Nonempty ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj
-          (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (poincareSecondVariable (T := T) K))⟦(2 * d : ℤ)⟧) ≅
-        ((R((a)_*[ModuleCat.{u + 1} Λ])).obj ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj
-          (poincareSecondVariable (T := T) K)))⟦(2 * d : ℤ)⟧) ∧
-      Nonempty ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj
-          ((ihom ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).obj (𝟙_ _)) ≅
-        (ihom ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)).obj
-          ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj (𝟙_ _))) ∧
+/-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: the reductions of `β_K^♯`
+along the finite stages form a morphism of towers: for `J ≤ J'` (for example
+`(ϖ)ᵐ ≤ (ϖ)ⁿ` for `n ≤ m`) they commute with the transitions `Λ/J ⟶ Λ/J'`. -/
+theorem poincareAdjoint_reduction_naturality {J J' : Ideal Λ} (h : J ≤ J') :
+    (reductionModIdeal Λ (Spec (.of k)) J).map (poincareAdjoint a γ K) ≫
+        (reductionModIdealMap Λ (Spec (.of k)) h).app _ =
+      (reductionModIdealMap Λ (Spec (.of k)) h).app _ ≫
+        (reductionModIdeal Λ (Spec (.of k)) J').map (poincareAdjoint a γ K) :=
+  (reductionModIdealMap Λ (Spec (.of k)) h).naturality (poincareAdjoint a γ K)
+
+include hϖ in
+/-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: the source of the reduction
+of `β_K^♯` is `RΓ(X, K^∨(d)_n)[2d]`. -/
+theorem nonempty_iso_reductionModIdeal_poincareAdjoint_source (n : ℕ) :
+    Nonempty ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj
+        (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (poincareSecondVariable (T := T) K))⟦(2 * d : ℤ)⟧) ≅
+      ((R((a)_*[ModuleCat.{u + 1} Λ])).obj ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj
+        (poincareSecondVariable (T := T) K)))⟦(2 * d : ℤ)⟧) := by
+  obtain ⟨e⟩ := nonempty_iso_map_reductionModIdeal
+    (R((a)_*[ModuleCat.{u + 1} Λ]) ⋙ shiftFunctor _ (2 * d : ℤ)) hϖ n
+    (poincareSecondVariable (T := T) K)
+  exact ⟨e.symm⟩
+
+include hϖ in
+/-- Blueprint `thm-pod-adic-reconstruction-and-scalar-extension`: the target of the reduction
+of `β_K^♯` is `RHom(RΓ_c(X, K), A_n)`, and `RΓ_c(X, K_n) ≅ RΓ_c(X, K) ⊗ᴸ A_n`. -/
+theorem nonempty_iso_reductionModIdeal_poincareAdjoint_target (n : ℕ) :
+    Nonempty ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj
+        (((derivedHom (ModuleCat.{u + 1} Λ) _).obj (op ((R(a)_![ModuleCat.{u + 1} Λ]).obj K))).obj
+          (𝟙_ _)) ≅
+      ((derivedHom (ModuleCat.{u + 1} Λ) _).obj (op ((R(a)_![ModuleCat.{u + 1} Λ]).obj K))).obj
+        ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj (𝟙_ _))) ∧
       Nonempty ((R(a)_![ModuleCat.{u + 1} Λ]).obj
           ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj K) ≅
         (reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj
-          ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)) ∧
-      ∀ m (h : Ideal.span {ϖ} ^ m ≤ Ideal.span {ϖ} ^ n),
-        (reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ m)).map (poincareAdjoint a γ K) ≫
-            (reductionModIdealMap Λ (Spec (.of k)) h).app _ =
-          (reductionModIdealMap Λ (Spec (.of k)) h).app _ ≫
-            (reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).map
-              (poincareAdjoint a γ K) := by
-  have := isIso_poincareAdjoint a γ hKd
-  refine ⟨inferInstance, ?_, ?_, ?_, fun m h ↦ ((reductionModIdealMap Λ _ h).naturality _).symm⟩
-  · obtain ⟨e⟩ := nonempty_iso_map_reductionModIdeal
-      (R((a)_*[ModuleCat.{u + 1} Λ]) ⋙ shiftFunctor _ (2 * d : ℤ)) hϖ n
-      (poincareSecondVariable (T := T) K)
-    exact ⟨e.symm⟩
-  · exact nonempty_iso_reductionModIdeal_derivedHom_obj hϖ n _ _
-  · exact nonempty_iso_map_reductionModIdeal (R(a)_![ModuleCat.{u + 1} Λ]) hϖ n K
+          ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)) :=
+  ⟨nonempty_iso_reductionModIdeal_derivedHom_obj hϖ n _ _,
+    nonempty_iso_map_reductionModIdeal (R(a)_![ModuleCat.{u + 1} Λ]) hϖ n K⟩
 
 end Adjoint
 
