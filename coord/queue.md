@@ -1,6 +1,6 @@
 # Work queue
 
-26 items; claim with `tools/claim.py next <group> [--stage N]`.
+27 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (26)
+## Stage 3: modules to prove (27)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -21,9 +21,10 @@
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek` | 1 | 3 | proof |
 | `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition` | 2 | 2 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs` | 3 | 2 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic` | 3 | 7 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 9 | proof |
+| `Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono` | 4 | 1 | proof |
+| `Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeSection` | 4 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence` | 4 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal` | 5 | 1 | proof |
 | `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal` | 5 | 10 | proof |
@@ -39,11 +40,9 @@
 | `Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
 
-Also listed above and claimable: 4 modules whose proof uses a node that has no Lean declaration yet.
+Also listed above and claimable: 2 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek` | 1 | 3 |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs` | 3 | 2 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic` | 3 | 7 |
-| `Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine` | 8 | 1 |
