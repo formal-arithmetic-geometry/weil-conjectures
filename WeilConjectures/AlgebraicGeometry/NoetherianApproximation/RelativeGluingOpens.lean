@@ -45,7 +45,7 @@ lemma Scheme.homOfLE_comp_resLE {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) {
     (e : W ≤ V) (e' : V ≤ f ⁻¹ᵁ U) :
     X.homOfLE e ≫ f.resLE U V e' = f.resLE U W (e.trans e') := by
   rw [← cancel_mono U.ι]
-  simp [Scheme.homOfLE_ι_assoc]
+  simp
 
 lemma Scheme.Hom.resLE_apply_val {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) (V : X.Opens)
     (e : V ≤ f ⁻¹ᵁ U) (x : V) : (f.resLE U V e x).1 = f x.1 := by

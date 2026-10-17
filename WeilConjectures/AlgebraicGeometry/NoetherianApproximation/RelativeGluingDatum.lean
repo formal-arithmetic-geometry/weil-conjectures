@@ -26,13 +26,13 @@ are moved between the stages of a cofiltered system.
 
 ## Main definitions
 
-- `AlgebraicGeometry.RelativeGluingDatum`: the datum.
-- `AlgebraicGeometry.RelativeGluingDatum.IsOpenValid`, `AlgebraicGeometry.RelativeGluingDatum.IsValid`:
-  the gluing axioms.
-- `AlgebraicGeometry.RelativeGluingDatum.toOpensGlueData`, `AlgebraicGeometry.RelativeGluingDatum.glued`,
-  `AlgebraicGeometry.RelativeGluingDatum.toBase`: the glued scheme over `B`.
-- `AlgebraicGeometry.RelativeGluingDatum.transport`, `AlgebraicGeometry.RelativeGluingDatum.IsTransport`:
-  transport along `γ : B' ⟶ B`.
+- `AlgebraicGeometry.RelativeGluingDatum.IsOpenValid`,
+  `AlgebraicGeometry.RelativeGluingDatum.IsValid`: the gluing axioms.
+- `AlgebraicGeometry.RelativeGluingDatum.toOpensGlueData`,
+  `AlgebraicGeometry.RelativeGluingDatum.glued`, `AlgebraicGeometry.RelativeGluingDatum.toBase`:
+  the glued scheme over `B`.
+- `AlgebraicGeometry.RelativeGluingDatum.transport`,
+  `AlgebraicGeometry.RelativeGluingDatum.IsTransport`: transport along `γ : B' ⟶ B`.
 - `AlgebraicGeometry.RelativeGluingDatum.IsCompatible`: compatibility of a datum with a family of
   monomorphisms `ℓₐ : Yₐ ×_T B ⟶ X`; compatible data are valid.
 -/

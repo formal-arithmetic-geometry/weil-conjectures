@@ -49,6 +49,10 @@ abbrev ring (a : G.ι) : CommRingCat.{u} := CommRingCat.of (l.A a)
 /-- The basic-open element `f a b r` as an element of the coefficient subring of the chart `a`. -/
 def fElem (a b : G.ι) (r : G.κ a b) : l.A a := ⟨G.f a b r, l.f_mem a b r⟩
 
+@[simp]
+lemma coe_fElem (a b : G.ι) (r : G.κ a b) : (l.fElem a b r : Γ(S, G.U a)) = G.f a b r :=
+  rfl
+
 /-- The overlap `⋃_r D(f a b r) ⊆ Spec Aₐ` of the chart `a` with the chart `b`. -/
 noncomputable def overlap (a b : G.ι) : (Spec (l.ring a)).Opens :=
   ⨆ r, chartBasicOpen (l.A a) (l.fElem a b r)
@@ -112,16 +116,13 @@ lemma chartLiftOverlap_toChart (a b : G.ι) :
   (l.exists_chartLiftOverlap_comp_eq a b).choose_spec
 
 /-- The unit condition `unit_symm`, transported to `D(f a b r)` and the subring `Aₐ`. -/
-lemma exists_unit_symm (a b : G.ι) (r : G.κ a b)
-    (hi : S.basicOpen ((l.fElem a b r : l.A a) : Γ(S, G.U a)) ≤ G.U b) :
-    ∃ e : G.κ b a → Γ(S, S.basicOpen ((l.fElem a b r : l.A a) : Γ(S, G.U a))),
-      (∀ q, e q ∈ localizationSubring (l.A a) ((l.fElem a b r : l.A a) : Γ(S, G.U a))
-        (S.basicOpen ((l.fElem a b r : l.A a) : Γ(S, G.U a))) le_rfl) ∧
-      ∑ q, e q * S.resLE hi ((l.fElem b a q : l.A b) : Γ(S, G.U b)) = 1 := by
+lemma exists_unit_symm (a b : G.ι) (r : G.κ a b) (hi : S.basicOpen (G.f a b r) ≤ G.U b) :
+    ∃ e : G.κ b a → Γ(S, S.basicOpen (G.f a b r)),
+      (∀ q, e q ∈ localizationSubring (l.A a) (G.f a b r) (S.basicOpen (G.f a b r)) le_rfl) ∧
+      ∑ q, e q * S.resLE hi (G.f b a q) = 1 := by
   obtain ⟨c, hc, hsum⟩ := l.unit_symm a b r
   refine ⟨fun q ↦ S.resLE (G.basicOpen_f a b r).le (c q), fun q ↦ ?_, ?_⟩
   · have := resLE_mem_localizationSubring_of_mem le_rfl (G.basicOpen_f a b r).le (hc q)
-    change _ ∈ localizationSubring (l.A a) (G.f a b r) (S.basicOpen (G.f a b r)) le_rfl
     rw [l.localization_eq a b r]
     exact this
   · have := congrArg (S.resLE (G.basicOpen_f a b r).le) hsum
@@ -129,7 +130,6 @@ lemma exists_unit_symm (a b : G.ι) (r : G.κ a b)
     rw [← this]
     refine Finset.sum_congr rfl fun q _ ↦ ?_
     rw [map_mul, resLE_resLE_apply]
-    rfl
 
 lemma range_toChart_subset (a b : G.ι) : Set.range (l.toChart a b) ⊆ l.overlap b a :=
   range_subset_iSup_basicOpen (l.fElem a b) (G.U a).2 rfl (l.inf_eq_iSup_basicOpen a b)
@@ -315,6 +315,9 @@ variable {l} {l' : G.Stage} (hll : l ≤ l')
 abbrev incl (a : G.ι) : l.ring a ⟶ l'.ring a :=
   CommRingCat.ofHom (Subring.inclusion (hll a))
 
+lemma incl_refl (a : G.ι) : incl (le_refl l) a = 𝟙 _ :=
+  rfl
+
 lemma SpecMap_incl_preimage_overlap (a b : G.ι) :
     Spec.map (incl hll a) ⁻¹ᵁ l.overlap a b = l'.overlap a b := by
   rw [overlap, Scheme.Hom.preimage_iSup]
@@ -349,13 +352,16 @@ lemma trans_comp_SpecMap_incl (a b : G.ι) :
   rw [trans_ι_assoc, chartLiftOverlap_toChart_assoc, subringChart_comp_SpecMap_inclusion,
     chartLiftOverlap_overlapMap_assoc, trans_ι, chartLiftOverlap_toChart]
 
+@[reassoc]
+lemma comp_SpecMap_incl_ι (a b : G.ι) :
+    l'.trans a b ≫ (l'.overlap b a).ι ≫ Spec.map (incl hll b) ≫ l.ι b =
+      (l'.overlap a b).ι ≫ Spec.map (incl hll a) ≫ l.ι a := by
+  rw [trans_comp_SpecMap_incl_assoc, glue_condition, overlapMap_ι_assoc]
+
 /-- The transition morphism `S_{l'} ⟶ S_l` for stages `l ≤ l'`, induced by the inclusions of the
 coefficient subrings. -/
 noncomputable def transition : l'.scheme ⟶ l.scheme :=
-  l'.glueData.glueMorphisms (fun a ↦ Spec.map (incl hll a) ≫ l.ι a) fun a b ↦ by
-    change l'.trans a b ≫ (l'.overlap b a).ι ≫ Spec.map (incl hll b) ≫ l.ι b =
-      (l'.overlap a b).ι ≫ Spec.map (incl hll a) ≫ l.ι a
-    rw [trans_comp_SpecMap_incl_assoc, glue_condition, overlapMap_ι_assoc]
+  l'.glueData.glueMorphisms (fun a ↦ Spec.map (incl hll a) ≫ l.ι a) (comp_SpecMap_incl_ι hll)
 
 @[reassoc (attr := simp)]
 lemma ι_transition (a : G.ι) : l'.ι a ≫ transition hll = Spec.map (incl hll a) ≫ l.ι a :=
@@ -378,11 +384,14 @@ instance isAffineHom_transition : IsAffineHom (transition hll) := by
   rw [transition_preimage_opensRange_ι]
   exact isAffineOpen_opensRange _
 
+/-- Part of blueprint `lemma-nagata-valid-refinements-directed`: the transition morphisms satisfy
+the identity law. -/
 lemma transition_refl : transition (le_refl l) = 𝟙 _ :=
   l.hom_ext fun a ↦ by
-    rw [ι_transition, Category.comp_id]
-    rw [show incl (le_refl l) a = 𝟙 _ from rfl, Spec.map_id, Category.id_comp]
+    rw [ι_transition, Category.comp_id, incl_refl, Spec.map_id, Category.id_comp]
 
+/-- Part of blueprint `lemma-nagata-valid-refinements-directed`: the transition morphisms satisfy
+the composition law. -/
 lemma transition_trans {l'' : G.Stage} (hll' : l' ≤ l'') :
     transition (hll.trans hll') = transition hll' ≫ transition hll :=
   l''.hom_ext fun a ↦ by

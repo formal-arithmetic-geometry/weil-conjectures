@@ -164,8 +164,8 @@ lemma iSup_opensRange_ℓ : ⨆ a, (M.ℓ a).opensRange = ⊤ := by
   exact R.iSup_chart
 
 instance (a : R.J) : CompactSpace ↥(pullback (M.p a) (c.π.app M.stage)) :=
-  have : IsAffine (pullback (M.p a) (c.π.app M.stage)) :=
-    isAffine_of_isIso (M.chartIso a).inv
+  have : IsAffine (R.chart a) := R.isAffineOpen_chart a
+  have : IsAffine (pullback (M.p a) (c.π.app M.stage)) := .of_isIso (M.chartIso a).inv
   inferInstance
 
 /-- The overlap of the chart `a` with the chart `b` in the limit. -/
@@ -264,7 +264,7 @@ lemma overlapMapDescent_comp (a b : R.J) :
       ((baseChangeDiagram D (M.p a)).map (M.overlapMapStage hc a b).hom ⁻¹ᵁ
         M.overlapOpen hc a b).ι ≫ pullback.fst _ _ ≫ M.p a := by
   refine (M.exists_overlapMap hc a b).choose_spec.choose_spec.1.trans ?_
-  simp
+  rfl
 
 lemma resLE_overlapMapDescent (a b : R.J) :
     ((baseChangeCone D c (M.p a)).π.app (M.overlapMapStage hc a b).left).resLE _ _
@@ -310,6 +310,19 @@ lemma chartMap_limit_eq {j : Over M.stage} (a : R.J) :
       (baseChangeCone D c (M.p a)).π.app j :=
   rfl
 
+lemma limitTransport_rawDatum_ψ (a b : R.J) :
+    (M.limitTransport (M.rawDatum hc)).ψ a b =
+      ((baseChangeCone D c (M.p a)).π.app (M.overlapMapStage hc a b).left).resLE _ _
+        (by
+          simp only [RelativeGluingDatum.transport, rawDatum]
+          rw [chartMap_limit_eq, ← Scheme.Hom.comp_preimage, Cone.w]) ≫
+        M.overlapMapDescent hc a b := by
+  dsimp only [limitTransport, RelativeGluingDatum.transport, rawDatum]
+  rw [← Category.assoc]
+  congr 1
+  rw [← cancel_mono (Scheme.Opens.ι _), Category.assoc, Scheme.Hom.resLE_comp_ι,
+    Scheme.Hom.resLE_comp_ι_assoc, Scheme.Hom.resLE_comp_ι, chartMap_limit_eq, Cone.w]
+
 /-- Blueprint `lemma-nagata-relative-gluing-datum-descends`: Property of the descended finite
 affine presentation. The base change of the raw datum to the limit is the overlap datum of `X`:
 its overlaps are the overlaps `Lₐ ∩ ℓₐ⁻¹(L_b)` and its overlap maps are compatible with the
@@ -317,24 +330,19 @@ open immersions `ℓₐ` (i.e. they are the overlap maps of `X`). -/
 theorem isCompatible_rawDatum :
     RelativeGluingDatum.IsCompatible M.ℓ (M.limitTransport (M.rawDatum hc)) := by
   have hV (a b : R.J) : (M.limitTransport (M.rawDatum hc)).V a b = M.limitOverlap a b := by
-    simp only [RelativeGluingDatum.transport, rawDatum, chartMap_limit_eq,
-      ← Scheme.Hom.comp_preimage, Cone.w]
+    simp only [RelativeGluingDatum.transport, rawDatum]
+    rw [chartMap_limit_eq, ← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, Cone.w,
+      Cone.w]
     exact M.preimage_overlapOpen hc a b
   refine ⟨hV, fun a b ↦ ?_⟩
   have key : (M.limitTransport (M.rawDatum hc)).map a b =
       Scheme.homOfLE _ (hV a b).le ≫ M.limitOverlapMap a b := by
     apply pullback.hom_ext
-    · rw [RelativeGluingDatum.map_fst]
-      simp only [RelativeGluingDatum.transport, rawDatum, chartMap_limit_eq]
-      rw [Scheme.Hom.resLE_comp_resLE_assoc]
-      have e := Scheme.Hom.resLE_eq_of_eq
-        ((baseChangeCone D c (M.p a)).w (M.rawStageHom hc a b))
-        ((baseChangeDiagram D (M.p a)).map (M.overlapMapStage hc a b).hom ⁻¹ᵁ
-          M.overlapOpen hc a b)
-        ((M.limitTransport (M.rawDatum hc)).V a b)
-      rw [e, ← Scheme.homOfLE_comp_resLE _ _ (by rw [hV, ← M.preimage_overlapOpen hc a b]),
-        Category.assoc, resLE_overlapMapDescent, limitOverlapMapFst, Scheme.homOfLE_homOfLE_assoc,
-        Category.assoc]
+    · rw [RelativeGluingDatum.map_fst, limitTransport_rawDatum_ψ,
+        ← Scheme.homOfLE_comp_resLE _ _ (by rw [hV, ← M.preimage_overlapOpen hc a b])
+          (by rw [← Scheme.Hom.comp_preimage, Cone.w]),
+        Category.assoc, resLE_overlapMapDescent, limitOverlapMapFst, Category.assoc]
+      exact Scheme.homOfLE_homOfLE_assoc _ _ _ _
     · rw [RelativeGluingDatum.map_snd, Category.assoc, limitOverlapMap_snd,
         Scheme.homOfLE_ι_assoc]
   rw [key, Category.assoc, limitOverlapMap_ℓ, Scheme.homOfLE_ι_assoc]

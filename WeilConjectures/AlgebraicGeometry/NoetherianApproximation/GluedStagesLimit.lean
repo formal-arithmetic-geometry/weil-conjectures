@@ -154,11 +154,14 @@ lemma subringChart_homOfLE_eq (a b : G.ι) :
 inclusions `Aₐ ⊆ Γ(S, Uₐ)`. -/
 noncomputable def fromS : S ⟶ l.scheme :=
   G.openCover.glueMorphisms (fun a ↦ subringChart (l.A a) le_rfl ≫ l.ι a) fun a b ↦ by
-    have hP := isPullback_opens_inf (G.U a : S.Opens) (G.U b)
-    change pullback.fst (G.U a : S.Opens).ι (G.U b : S.Opens).ι ≫ _ =
-      pullback.snd (G.U a : S.Opens).ι (G.U b : S.Opens).ι ≫ _
+    have hP : IsPullback (S.homOfLE inf_le_left) (S.homOfLE inf_le_right) (G.openCover.f a)
+        (G.openCover.f b) :=
+      isPullback_opens_inf (G.U a : S.Opens) (G.U b)
     rw [← hP.isoPullback_inv_fst, ← hP.isoPullback_inv_snd, Category.assoc, Category.assoc,
       l.subringChart_homOfLE_eq a b]
+
+lemma openCover_f (a : G.ι) : G.openCover.f a = (G.U a : S.Opens).ι :=
+  rfl
 
 @[reassoc (attr := simp)]
 lemma ι_fromS (a : G.ι) : (G.U a : S.Opens).ι ≫ l.fromS = subringChart (l.A a) le_rfl ≫ l.ι a :=
@@ -167,8 +170,8 @@ lemma ι_fromS (a : G.ι) : (G.U a : S.Opens).ι ≫ l.fromS = subringChart (l.A
 @[reassoc (attr := simp)]
 lemma fromS_transition {l' : G.Stage} (hll : l ≤ l') : l'.fromS ≫ transition hll = l.fromS :=
   G.openCover.hom_ext _ _ fun a ↦ by
-    change (G.U a : S.Opens).ι ≫ _ = (G.U a : S.Opens).ι ≫ _
-    rw [ι_fromS_assoc, ι_transition, ι_fromS, subringChart_comp_SpecMap_inclusion_assoc]
+    rw [openCover_f, ι_fromS_assoc, ι_transition, ι_fromS,
+      subringChart_comp_SpecMap_inclusion_assoc]
 
 lemma fromS_preimage_opensRange_ι (a : G.ι) : l.fromS ⁻¹ᵁ (l.ι a).opensRange = G.U a := by
   refine G.opens_ext fun b ↦ ?_
