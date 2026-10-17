@@ -14,7 +14,9 @@
   "def-weil-pbc-ringed-section-localization",
   "def-weil-pbc-module-localization-away",
   "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-exact-functor-derived-functor"
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-pbc-countable-bounded-below-hom-continuity",
+  "def-pur-sheaf-modules-hom-module"
  ],
  "proof": [
   {
@@ -192,5 +194,35 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-5b42e07b8 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Sources checked: Bhatt–Scholze 6.8.2, 6.8.12 and 6.8.14(2); Stacks 093W, 0CRK, 094A, 0949, 015F, 07A6 and 00HT. The statement is unchanged and not weakened: the hypothesis on K is exactly the content of 6.8.12 used in 6.8.14(2). Steps 2, 3 and 5 are correct. In Step 3, the telescope Hom lemma's two coproduct comparisons are the K-hypothesis applied to the constant families L[q] and L[q+1], whose common lower bound comes from L being bounded below. I tested the new telescope node on t=0, t a unit, L=0 and Z→Z[1/p]; it is true via termwise colimit = hocolim (Stacks 0949). It does not duplicate anything and does not restate a clause of the item. Three faults repaired in fixes/. (1) C1: Step 1 asserted exactness of R_t⊗_R− without a citation. Added lem-pc-sites-module-sheafification-tensor, lem-weil-pbc-localization-flat (00HT), lem-weil-pbc-ringed-site-module-sheafification-exact and lem-pc-sheaf-modules-tensor-closed. (2) C4/E1: Steps 1 and 4 used def-sfb-derived-extend-restrict-adjunction, an abstract module-object node whose hypotheses were not checked and which fixes no unit. Replaced it with lem-pur-sheaf-ring-derived-coefficient-adjunction (unit x↦x⊗1) and lem-pur-derived-change-of-rings, with the Kan-uniqueness identification L phi^* ≅ F written out. Step 4 now derives t^{-n}F(u) by the triangle identity. split_report.tool_uses is updated to these generic tools (the two lem-pc ones are already accepted in this unit). (3) New node: restriction of scalars now cites def-pc-sheaf-restrict-scalars, the unit is defined explicitly and the leg is written as U(t^{-n})∘η. The source tag 0CRK is corrected to 0949 (lemma-colim-hocolim) and def-weil-pbc-category-colimit is added to stmt_deps. The content is unchanged. No SGA and no cycle; all cited ids exist.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4ae91fc76",
+  "group": "N6",
+  "result": "pass",
+  "note": "Full statement, dependencies, source metadata, Lean modules, edge cases, docstrings, compiler evidence, and dry-run preflight checked; no substantive or mechanical faults found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationDerivedHom",
+  "declaration": "CategoryTheory.scalarLocalization_derivedHom",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationDerivedHom.lean",
+  "statement": "theorem scalarLocalization_derivedHom (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u}) (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R (a t))))] (E : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤ ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R (a t)))) (hE : ∀ M, E.obj M = SheafOfModules.changeOfRings (ringedLocalizationRingUnit R (a t)) M) (hmap : ∀ {M N} (f : M ⟶ N), E.map f = eqToHom (hE M) ≫ SheafOfModules.changeOfRingsHom (ringedLocalizationRingUnit R (a t)) M f ≫ eqToHom (hE N).symm) [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E] : (fun [_iA : Linear A (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))] [_iT : Linear (Localization.Away t) (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R (a t)))))] ↦ scalarLocalizationHomComparison A t E.mapDerivedCategory DerivedCategory.CountableBoundedBelowHomContinuous (fun L ↦ ∃ b : ℤ, L.IsGE b)) (_iA := scalarLocalizationDerivedLinear A R a) (_iT := scalarLocalizationDerivedLinear (Localization.Away t) (ringedLocalizationRing R (a t)) (scalarLocalizationCoefficientMap A R a t))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.scalarLocalizationSectionsMap_mem",
+   "CategoryTheory.scalarLocalizationSectionsMap",
+   "CategoryTheory.scalarLocalizationCoefficientLinear",
+   "CategoryTheory.scalarLocalizationDerivedLinear",
+   "CategoryTheory.scalarLocalizationSections_isUnit",
+   "CategoryTheory.scalarLocalizationCoefficientMap",
+   "CategoryTheory.scalarLocalizationHomEquiv",
+   "CategoryTheory.scalarLocalization_exact",
+   "CategoryTheory.scalarLocalizationHomComparison",
+   "CategoryTheory.scalarLocalization_derivedHom"
+  ]
  }
 }

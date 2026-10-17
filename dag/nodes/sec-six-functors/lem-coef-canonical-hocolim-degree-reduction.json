@@ -195,5 +195,43 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-8602d6f0f (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement (zigzags, model-colimit-localization-comparison, cartesian-grothendieck-colimit-formula, infinity-mapping-composition, pointwise-equivalences, split-augmentation-colimit, localization-detects-weak-equivalences, def-cbc-enhanced-diagrams-cones), the duplicate candidates and the governing docs; review.md has the details. Dugger Prop. 4.6/App. A and HTT 4.2.4.3 are not in literature/ and there is no network, so I checked the steps mathematically against the cited DAG statements instead (both sources are WANTED; proof_origin is agent). Results: (1) Step 1: eta is natural (A_e(c_m)A_e(alpha)A_a^n = A_a^0 A_d(c_n)) and eta i = 1; new node A with g=i gives eta_* i^T_* = i^W_*. (2) Step 2: K is exactly the Cartesian Grothendieck total category of n -> I_n over Delta, and W sends transport arrows to identities. (3) Step 3: the transition maps of F are (alpha^*)_*, and hC agrees with Ho(M). (4) Step 4: s_n = F(c_n^op) = (i_n)_*, so s is a pointwise equivalence, and the constant diagram is split. (5) Step 5: node B applied to tau = s^{-1} and the identity cocone gives a colimit with apex F_0; the degree-0 leg is invertible because s_0 is degenerate, and the fiber-inclusion clause identifies it with i^W_*. (6) Step 6: the lift exists, weak-equivalence detection needs no fibrancy, and the augmentations u A_d(v_n) are natural with c_n v_n = 1. New node A (value-diagram naturality) is true and generic: both sides are maps hocolim_J(Fg) -> hocolim_K G, and it is not stated by zigzags. New node B (cocone transport) is true: precomposition by an equivalence edge plus the cone-calculus criterion and 2-of-3; for empty K it reduces to the initial-object test. B is not a one-line specialization of relative-cone-equivalence(1), which needs the cocone vs K^triangleright comparison. Neither new node restates the item, both are statement-only with three kinds of search recorded, and all steps are under 2000 characters. No SGA is used, the item is not a target node, and there is no cycle. Two harmless leftovers, no change made: the new nodes lack merged_into/lean_audit (as many unsplit nodes do), and the item's maintainer tool_uses still lists lem-cbc-enhanced-functor-cone-calculus, which the item no longer cites. No new tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3a88128d6",
+  "group": "NK",
+  "result": "fix",
+  "note": "Mathematics and dependency repair accepted; both Lean files compile cleanly through scompile.py. Wrote review.md and a complete replacement report under fixes/, replacing the H11 placeholder with an actual independent reading. No Lean or JSON changes needed; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CanonicalHocolimDegreeReduction",
+  "declaration": "HomotopicalAlgebra.CanonicalHocolim.degree_reduction",
+  "declarations": [
+   "HomotopicalAlgebra.CanonicalHocolim.degree",
+   "HomotopicalAlgebra.CanonicalHocolim.resolutionAugmentation",
+   "HomotopicalAlgebra.CanonicalHocolim.DegreeIndex",
+   "HomotopicalAlgebra.CanonicalHocolim.degreeValue",
+   "HomotopicalAlgebra.CanonicalHocolim.collapseInclusion",
+   "HomotopicalAlgebra.CanonicalHocolim.collapseValueIso",
+   "HomotopicalAlgebra.CanonicalHocolim.TotalIndex",
+   "HomotopicalAlgebra.CanonicalHocolim.totalValue",
+   "HomotopicalAlgebra.CanonicalHocolim.zeroBase",
+   "HomotopicalAlgebra.CanonicalHocolim.zeroInclusion",
+   "HomotopicalAlgebra.CanonicalHocolim.zeroValueIso",
+   "HomotopicalAlgebra.CanonicalHocolim.degreeCocone",
+   "HomotopicalAlgebra.CanonicalHocolim.totalCocone",
+   "HomotopicalAlgebra.CanonicalHocolim.augmentation",
+   "HomotopicalAlgebra.CanonicalHocolim.degreeComparison",
+   "HomotopicalAlgebra.CanonicalHocolim.totalComparison",
+   "HomotopicalAlgebra.CanonicalHocolim.degree_reduction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CanonicalHocolimDegreeReduction.lean",
+  "statement": "theorem degree_reduction (hM : CombinatorialModelCategory.{u, v, w} M) (A : D ⥤ SimplexCategory ⥤ M) (hReedy : ∀ d : D, Reedy.leftClass (monomorphisms SimplexCategory) (cofibrations M) (initial.to (A.obj d))) (hResolution : ∀ (d : D) {n m : SimplexCategory} (a : n ⟶ m), weakEquivalences M ((A.obj d).map a)) (X : M) (R : ∀ n : ℕ, ProjectiveHocolimReplacement (M := M) (DegreeIndex A X n)) (RK : ProjectiveHocolimReplacement (M := M) (TotalIndex A X)) {H : Type u'} [Category.{v'} H] (L : M ⥤ H) [L.IsLocalization (weakEquivalences M)] (hn : ∀ n : ℕ, IsIso (degreeComparison hM A X n (R 0) (R n) L)) : IsIso (totalComparison hM A X (R 0) RK L) ∧ (∃ f : (R 0).hocolim.obj (degreeValue A X 0) ⟶ RK.hocolim.obj (totalValue A X), L.map f = totalComparison hM A X (R 0) RK L ∧ weakEquivalences M f ∧ f ≫ augmentation RK (totalCocone A X) = augmentation (R 0) (degreeCocone A X 0)) ∧ (∀ n : ℕ, degreeComparison hM A X n (R 0) (R n) L ≫ L.map (augmentation (R n) (degreeCocone A X n)) = L.map (augmentation (R 0) (degreeCocone A X 0)))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical comma indexing categories, degree-zero value diagrams, collapse and zero inclusions, actual augmentation cocones, and canonical localized reindexing comparisons. The theorem includes an actual weak-equivalence representative strictly over X. Uses the accompanying lean-only dependency repair to retain trivial-fibration replacement augmentations."
  }
 }

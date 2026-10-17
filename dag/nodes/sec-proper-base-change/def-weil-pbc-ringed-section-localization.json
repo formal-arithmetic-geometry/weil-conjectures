@@ -88,29 +88,25 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lean": {
-  "module": "Sheaf.CategoryTheory.RingedSectionLocalization",
-  "declaration": "CategoryTheory.ringedSectionLocalization",
-  "declarations": [
-   "CategoryTheory.ringedSectionLocalizationCarrier",
-   "CategoryTheory.ringedSectionLocalization_isUnit",
-   "CategoryTheory.ringedSectionLocalizationMap",
-   "CategoryTheory.ringedSectionLocalizationMap_smul",
-   "CategoryTheory.ringedSectionLocalizationLinearMap",
-   "CategoryTheory.ringedSectionLocalizationLinearMap_id",
-   "CategoryTheory.ringedSectionLocalizationLinearMap_comp",
-   "CategoryTheory.ringedSectionLocalizationPresheaf",
-   "CategoryTheory.ringedSectionLocalization",
-   "CategoryTheory.ringedSectionLocalizationPresheaf_one_natural",
-   "CategoryTheory.ringedSectionLocalizationUnit",
-   "CategoryTheory.ringedSliceSection_natural",
-   "CategoryTheory.ringedSliceSection"
-  ],
-  "file": "lean/Sheaf/CategoryTheory/RingedSectionLocalization.lean",
-  "statement": "def ringedSectionLocalization (s : (O.obj ⋙ forget CommRingCat).sections) : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)",
+  "module": "Sheaf.CategoryTheory.RingedSectionLocalizationRing",
+  "declaration": "CategoryTheory.ringedLocalizationRing",
+  "file": "lean/Sheaf/CategoryTheory/RingedSectionLocalizationRing.lean",
+  "statement": "def ringedLocalizationRing : Sheaf J CommRingCat.{u}",
   "branch": "newtargets-dag",
-  "by": "NE",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.ringedLocalizationRing_map_id",
+   "CategoryTheory.ringedLocalizationRing_map_comp",
+   "CategoryTheory.ringedLocalizationRingPresheaf",
+   "CategoryTheory.ringedLocalizationRing_unit_naturality",
+   "CategoryTheory.ringedLocalizationRingPresheafUnit",
+   "CategoryTheory.ringedLocalizationRing",
+   "CategoryTheory.ringedLocalizationRingUnit",
+   "CategoryTheory.ringedLocalizationRing_moduleComparison"
+  ],
+  "note": "§1(B): the recorded module exposes only the localized R-module, so D(R[1/t]) and extension of scalars to its ring sheaf cannot be typed from it. This module imports and retains that construction, builds the actual commutative-ring presheaf with its existing localization lifts, sheafifies it as a ring, and supplies the canonical ring map and the normalized comparison with the original module sheafification. No arbitrary ring or scalar-extension map is substituted."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -121,11 +117,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-dae1d157f",
-  "group": "NE",
+  "reviewer": "NT-stage2-Codex-4ae91fc76",
+  "group": "N6",
   "result": "pass",
-  "note": "Wrote review.md. Checked source correspondence, all dependencies and eight Lean modules, canonical constructions, edge cases, universes, records and docstrings. Immutable files match the commit; server-only compilation passed. No delivery errors found."
+  "note": "Full statement, dependencies, source metadata, Lean modules, edge cases, docstrings, compiler evidence, and dry-run preflight checked; no substantive or mechanical faults found."
  }
 }
