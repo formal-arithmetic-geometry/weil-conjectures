@@ -1,0 +1,77 @@
+{
+ "id": "lem-cbc-exact-product-functor-strict-limit",
+ "kind": "statement",
+ "title": "Canonical strict derived-limit comparison for exact product-preserving module functors",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites with sheaves of commutative rings $R,S$, and put $\\mathcal A=\\operatorname{Mod}(R)$ and $\\mathcal B=\\operatorname{Mod}(S)$ [def-weil-sheaf-of-modules-category]. Assume countable products in both categories are exact. Let $F:\\mathcal A\\to\\mathcal B$ be additive and exact and assume its canonical countable-product comparison $\\phi:F(\\prod_nM_n)\\to\\prod_nF(M_n)$, characterized by $\\mathrm{pr}_n\\phi=F(\\mathrm{pr}_n)$, is an isomorphism for every family. Write $F_D$ for its termwise derived functor [lem-sf-exact-functor-derived-triangulated], and $F^{\\operatorname{Tow}}_D$ for termwise application to complexes of strict towers [def-weil-inverse-system, lem-weil-tower-category-levelwise-abelian]. Let $L_{\\mathcal A},L_{\\mathcal B}$ be total right derived inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit].\n\nThere is a natural isomorphism\n$$\\lambda_M:F_D L_{\\mathcal A}M\\xrightarrow{\\sim}L_{\\mathcal B}F^{\\operatorname{Tow}}_D M.$$\nIt is the following specified comparison. For a strict tower complex $M$ with transition shift $s$, put $P_M=\\prod_nM_n$ termwise and let $H_M^q=P_M^q\\oplus P_M^{q-1}$ with differential $d(x,y)=(dx,(1-s)x-dy)$. Use the normalized natural Roos isomorphism of [lem-weil-strict-roos-comparison], in these signed coordinates, to write $\\theta_M:L_{\\mathcal A}M\\xrightarrow{\\sim}H_M$; its K-injective normalization is $z\\mapsto(\\iota z,0)$. If $\\kappa_M:F_DH_M\\to H_{FM}$ is the map $\\phi$ on both summands, then\n$$\\lambda_M=\\theta_{FM}^{-1}\\kappa_M F_D(\\theta_M).$$\nThis equals the comparison obtained by preserving the ordinary inverse limit and then resolving the image tower: for $M\\to I$ K-injective and $F I\\to J$ a K-injective target resolution, it is represented by $F\\lim I\\cong\\lim F I\\to\\lim J$ and the inverse of the derived image of $FM\\to FI$. It is independent of those resolutions. For the specified Roos triangles, with first maps $p,p'$ and connecting maps $\\delta,\\delta'$, and the shift comparison $\\xi$, it satisfies\n$$p'\\lambda_M=\\phi F_D(p),\\qquad\\lambda_M[1]\\xi F_D(\\delta)=\\delta'\\phi.$$\nFor every complex $C$ and strict augmentation $\\gamma:\\Delta C\\to M$, it carries $F_D$ of the canonical derived map $C\\to L_{\\mathcal A}M$ induced by $\\gamma$ to the canonical derived map $F_DC\\to L_{\\mathcal B}FM$ induced by $F\\gamma$. Here $\\Delta C$ is the constant tower; both maps are those of the normalized Roos comparison, equivalently of the constant-tower/derived-limit adjunction.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Final proof paragraph applying lem-cbc-exact-functor-rlim to defining derived limits; extracted canonical comparison and augmentation argument of returned Step 5. Supporting source: Stacks Tag 0940, sites-cohomology.tex section-derived-limits, especially lemma-derived-limit-is-ok; functorial comparison is an agent-written refinement."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor between abelian sheaf categories preserving countable products commutes naturally with total derived inverse limit of strict towers by the Roos fiber model",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, Condensed.hasExactLimitsOfShape, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app. Exact-functor and mapping-cone comparison infrastructure only; no natural comparison with total derived inverse limit of strict towers, resolution comparison, and augmentation normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"NatIso\"",
+   "results": "3 hits: CategoryTheory.Functor.rightDerivedNatIso, CategoryTheory.Functor.rightDerivedNatIso_hom, CategoryTheory.Functor.rightDerivedNatIso_inv. Exact-functor and mapping-cone comparison infrastructure only; no natural comparison with total derived inverse limit of strict towers, resolution comparison, and augmentation normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete statement"
+  },
+  {
+   "tool": "grep",
+   "query": "map.*(derivedLimit|homotopyLimit)|Roos|preserves.*[Ll]imit.*[Dd]erived",
+   "results": "0 hits: . Exact-functor and mapping-cone comparison infrastructure only; no natural comparison with total derived inverse limit of strict towers, resolution comparison, and augmentation normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor preserving products commutes with total derived inverse limit with natural comparison on strict towers",
+   "results": "8 hits: CategoryTheory.exactFunctor, CategoryTheory.ExactFunctor.of, CategoryTheory.leftExactFunctor, CategoryTheory.LeftExactFunctor, CategoryTheory.Limits.instIsIsoPiComparison, CategoryTheory.Functor.exact_tfae, CategoryTheory.LeftExactFunctor.of, CategoryTheory.ExactFunctor. Exact-functor and mapping-cone comparison infrastructure only; no natural comparison with total derived inverse limit of strict towers, resolution comparison, and augmentation normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Roos mapping cone gives a canonical natural commutation of an exact product preserving functor with derived inverse limits including the augmentation maps",
+   "results": "8 hits: CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.map_δ, HomotopyCategory.spectralObjectMappingCone_ω₁, CochainComplex.mappingCone.mapTrianglehIso, CochainComplex.mappingCone.map_inr, CochainComplex.mappingCone.mapTriangleIso. Exact-functor and mapping-cone comparison infrastructure only; no natural comparison with total derived inverse limit of strict towers, resolution comparison, and augmentation normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-completed-extension-zero-comparison",
+  "date": "2026-10-17",
+  "group": "NN"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Final proof paragraph applying lem-cbc-exact-functor-rlim to defining derived limits; extracted canonical comparison and augmentation argument of returned Step 5. Supporting source: Stacks Tag 0940, sites-cohomology.tex section-derived-limits, especially lemma-derived-limit-is-ok; functorial comparison is an agent-written refinement.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
