@@ -29,69 +29,185 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=\\mathcal P(A)$, which has small mapping spaces by [lem-coef-infinity-presheaf-free-cocompletion], and let $B\\subset P$ be the full subcategory of objects equivalent to representables. The Yoneda functor is fully faithful by [lem-coef-infinity-yoneda-presheaf-limits]. By [lem-coef-infinity-full-essential-image] choose a coherent quasi-inverse $k:B\\to A$, with counit $yk\\simeq\\mathrm{id}_B$. The target-fixed slice right fibration $P_{/X}\\to P$ is classified by $\\operatorname{Map}_P(-,X)$, by [lem-coef-space-transport-classification]. Pull it back along $y$ and write $E=A\\times_P P_{/X}\\to A$. Its classifier is $a\\mapsto\\operatorname{Map}_P(y(a),X)\\simeq X(a)$, naturally by [lem-coef-infinity-yoneda-evaluation]. The classification theorem permits a small right-fibration model $p:I\\to A$ for this classifier since $A$ and all $X(a)$ are small. The equivalence of classifiers gives inverse maps with coherent inverse homotopies over $A$ between $I$ and $E$. In particular, their total quasicategories are equivalent. An object is a pair $(a,x)$ with $x\\in X(a)$, and the corresponding arrow $y(a)\\to X$ is given by Yoneda evaluation.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-presheaf-free-cocompletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 5.1.5.2 and Corollary 5.3.5.4 proof; smallness via straightening/unstraightening."
+   }
+  },
+  {
+   "text": "Let $C=B\\times_P P_{/X}$. By [lem-coef-infinity-presheaf-representable-slice-density], its source projection has a canonical colimiting cocone to $X$. Since $y$ takes values in $B$, $E=A\\times_B C$ degreewise, and $r:E\\to C$, $(a,u)\\mapsto(y(a),u)$, is the projection of this pullback; it keeps the arrow $u$ to $X$. The projection $P_{/X}\\to P$ is a right fibration by [lem-coef-infinity-slice-right-fibration] with $K=\\Delta^0$, so its pullback $\\pi:C\\to B$ is a right fibration, horn lifting problems pulling back; in particular $C$ is a quasicategory and $\\pi$ is an inner fibration. Passing to opposites exchanges $\\Lambda^n_i$ with $\\Lambda^n_{n-i}$ and preserves equivalence edges, so $\\pi^{\\mathrm{op}}$ is a left fibration of quasicategories. The last clause of [lem-cbc-left-fibration-equivalence-lift], applied to $\\pi^{\\mathrm{op}}$ in the universe $\\mathcal U'$ in which all these quasicategories are small, gives for each $c\\in C$ and each equivalence edge $\\pi(c)\\to b'$ of $B$ an equivalence edge of $C$ with source $c$ lying exactly over it. Thus $\\pi$ is an isofibration in the sense used by [lem-coef-infinity-isofibration-pullback-limit]. That statement, with $T=A$ and $g=y$, gives for every quasicategory $Q$ an equivalence $\\operatorname{Fun}(Q,E)^\\simeq\\simeq\\operatorname{Fun}(Q,A)^\\simeq\\times^h_{\\operatorname{Fun}(Q,B)^\\simeq}\\operatorname{Fun}(Q,C)^\\simeq$ compatible with the projections. Postcomposition with $k$ is an inverse of $y_*$ up to the natural equivalences $ky\\simeq\\mathrm{id}_A$ and $yk\\simeq\\mathrm{id}_B$ of step 1 whiskered by $Q$; these whiskered transformations are equivalences in $\\operatorname{Fun}(Q,A)$ and $\\operatorname{Fun}(Q,B)$ because their vertex components are equivalences ([lem-cbc-enhanced-functor-cone-calculus]), hence paths in the cores. Hence $y_*:\\operatorname{Fun}(Q,A)^\\simeq\\to\\operatorname{Fun}(Q,B)^\\simeq$ is a homotopy equivalence of Kan complexes. The projection of a path-space pullback along a homotopy equivalence is a homotopy equivalence, so $r_*:\\operatorname{Fun}(Q,E)^\\simeq\\to\\operatorname{Fun}(Q,C)^\\simeq$ is one for every $Q$. Taking $Q=C$, a point over $\\mathrm{id}_C$ gives $s:C\\to E$ with an equivalence $rs\\simeq\\mathrm{id}_C$; taking $Q=E$, the points $sr$ and $\\mathrm{id}_E$ have equivalent images $rsr\\simeq r$, so $sr\\simeq\\mathrm{id}_E$ because $r_*$ is injective on components. Thus $r$ is a functor equivalence over the projections to $P$, and it carries the arrows to $X$ identically. Reindex this cocone by the equivalence $I\\simeq E\\simeq C$. It remains colimiting: restriction along an equivalence and its quasi-inverse gives inverse equivalences on the spaces of coherent cocones with any fixed apex, so preserves the universal mapping-space property of the cocone. Its underlying diagram is $yp$ and its components are the arrows corresponding to fibre points. Thus $X\\simeq\\operatorname{colim}_I yp$, with $I$ small. No filteredness is asserted yet.",
+   "uses": [
+    "lem-coef-infinity-presheaf-representable-slice-density",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-cbc-left-fibration-equivalence-lift",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 5.1.5.3; explicit reindexing of its canonical representable-slice cocone. Comparison E≃C written via the isofibration pullback statement (Kerodon/HTT invariance of right fibrations under base equivalence)."
+   }
+  },
+  {
+   "text": "Assume (1), with small $\\kappa$-filtered index $J$ and $t:J\\to A$. For a $\\kappa$-small $q:K\\to A$ and colimiting cocone $\\lambda:q\\to\\Delta_K a$, objectwise presheaf colimits (small colimits exist in $\\mathcal S=\\mathcal P(\\Delta^0)$ by [lem-coef-infinity-presheaf-free-cocompletion]) and the contravariant representable colimit-to-limit property in [lem-coef-infinity-yoneda-presheaf-limits] give\n$$X(a)\\simeq\\operatorname{colim}_{j\\in J}\\operatorname{Map}_A(a,t(j))\\simeq\\operatorname{colim}_{j\\in J}\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}_A(q(k),t(j)).$$\nApply [lem-coef-spaces-kappa-limit-filtered-colimit] to the coherent diagram $(k,j)\\mapsto\\operatorname{Map}_A(q(k),t(j))$, the restriction of the coherent mapping bifunctor $H_A$ of [lem-coef-space-transport-classification] along $q^{\\mathrm{op}}\\times t$, to obtain\n$$X(a)\\simeq\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{colim}_{j\\in J}\\operatorname{Map}_A(q(k),t(j))\\simeq\\lim_{k\\in K^{\\mathrm{op}}}X(q(k)).$$\nTaking opposites does not change the number of nondegenerate simplices, so $K^{\\mathrm{op}}$ is still $\\kappa$-small. Every comparison is induced by the legs of $\\lambda$: after evaluation at $j,k$ it is precomposition by $q(k)\\to a$. The naturality clauses of both cited statements retain these maps and coherences. Hence the displayed equivalence is exactly the specified comparison in (2). Both cited statements allow $K=\\varnothing$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-presheaf-free-cocompletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Corollary 5.3.5.4, (1) implies (3), using Proposition 5.1.2.2 and Proposition 5.3.3.3."
+   }
+  },
+  {
+   "text": "We record the section calculation used next, directly from the cited mapping-space formulas. For a small simplicial set $K$ and $q:K\\to A$, put $F=Xq^{\\mathrm{op}}$ and let $\\Gamma_q$ be the space of sections of $q^*I\\to K$. The dual classification in [lem-coef-space-transport-classification] identifies\n$$\\Gamma_q\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal S)}(\\Delta *,F).$$\nMore generally, it identifies maps $T\\to\\Gamma_q$ with transformations $\\Delta T\\to F$, because the constant functor $T$ classifies $K\\times T\\to K$ and a map $K\\times T\\to q^*I$ over $K$ is exactly a $T$-parameter family of sections. By the limiting-cone mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus], these transformations are $\\operatorname{Map}_{\\mathcal S}(T,\\lim F)$, naturally in $T$; the limit exists by [lem-coef-infinity-yoneda-presheaf-limits]. Thus $\\Gamma_q\\simeq\\lim F$, with restriction to each vertex and its coherences the actual section evaluations. For a cocone $\\lambda:q\\to\\Delta_K a$, a point $x\\in X(a)$ induces the section with values $X(\\lambda_k)(x)$. This is the pullback/constant-functor mapping-space formula of the classification statement applied to $\\lambda$, so it includes all higher simplices. To spell out the compatibility assertion, regard $\\lambda$ as the map $K\\times\\Delta^1\\to A$ from $q$ to the constant diagram at $a$. Its pullback right fibration has classifier $X\\lambda^{\\mathrm{op}}$, that is, the arrow $\\Delta_{K^{\\mathrm{op}}}X(a)\\to F$ with components $X(\\lambda_k)$. By the classification mapping-space formula, a section over this cylinder is a coherent transformation from the terminal functor to that arrow diagram. Fixing its endpoint sections to be $r$ and the constant point $x$, such a transformation is a coherent square whose remaining datum is a path from the composite $\\Delta *\\xrightarrow{x}\\Delta X(a)\\to F$ to the point of $\\operatorname{Map}(\\Delta *,F)$ represented by $r$. A path in the reverse direction gives this path by inversion, since this mapping object is a space. The same description for parameter spaces $T$ retains the higher compatibilities. Under classification this section is a map $K\\times\\Delta^1\\to I$ over $\\lambda$ with those endpoints, hence exactly a transformation $r\\to\\Delta_K(a,x)$, which is a cocone by definition.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Corollaries 3.3.3.3-3.3.3.4 (dual section model for limits); calculation written from the cited classification formula and the limit definition."
+   }
+  },
+  {
+   "text": "Assume (2). For a $\\kappa$-small diagram $r:K\\to I$, let $q=pr$. By step 4, its section data correspond to a point $s\\in\\lim_{K^{\\mathrm{op}}}X(q(k))$. By the hypothesis on $A$ choose a colimiting cocone $\\lambda:q\\to\\Delta_K a$. Condition (2) makes the actual restriction map $X(a)\\to\\lim_{K^{\\mathrm{op}}}X(q(k))$ an equivalence. An inverse equivalence supplies a point $x\\in X(a)$ and a path from its image to $s$, with all higher compatibility data. The last clause of step 4 makes these data a coherent cocone from $r$ to $(a,x)$ in $I$. For $K=\\varnothing$, $a$ is initial, the limit is terminal, and (2) makes $X(a)$ contractible and in particular nonempty; this again gives a cocone. Thus every $\\kappa$-small diagram in $I$ admits a cocone, precisely the definition of $\\kappa$-filteredness in [def-coef-presentable-infinity-category].",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Corollary 5.3.5.4, expanded proof of (3) implies (2), using the section calculation in step 4."
+   }
+  },
+  {
+   "text": "The small index $I$ of step 2 is now $\\kappa$-filtered by step 5. Its projection $p:I\\to A$ and the colimiting fibre-point cocone from step 2 therefore give exactly the presentation required in (1). This proves (2) implies (1); step 3 proves the reverse implication.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4, printed p.404; category-of-elements argument expanded by the author."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-presheaf-representable-slice-density",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-kappa-limit-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary 5.3.5.4 with its coherent category-of-elements argument written out; source read online, not archived: WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "A space valued presheaf on a small infinity category with kappa small colimits is a kappa filtered colimit of representables if and only if it sends kappa small colimits to limits",
-   "results": "{\"t\": \"2026-10-16T20:17:32Z\", \"tool\": \"leanfinder\", \"query\": \"A space valued presheaf on a small infinity category with kappa small colimits is a kappa filtered colimit of representables if and only if it sends kappa small colimits to limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.Limits.isFiltered_costructuredArrow_yoneda_iff_nonempty_preservesFiniteLimits\", \"CategoryTheory.Limits.isIndObject_iff\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit\", \"CategoryTheory.Limits.IsIndObject\", \"CategoryTheory.Limits.preservesFiniteLimits_of_isFiltered_costructuredArrow_yoneda\"], \"digest\": \"d6eef8396aca83d8\"}",
+   "results": "{\"t\": \"2026-10-17T00:45:52Z\", \"tool\": \"leanfinder\", \"query\": \"A space valued presheaf on a small infinity category with kappa small colimits is a kappa filtered colimit of representables if and only if it sends kappa small colimits to limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.Limits.isFiltered_costructuredArrow_yoneda_iff_nonempty_preservesFiniteLimits\", \"CategoryTheory.Limits.isIndObject_iff\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_colimit\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit\", \"CategoryTheory.Limits.IsIndObject\", \"CategoryTheory.Limits.preservesFiniteLimits_of_isFiltered_costructuredArrow_yoneda\"], \"digest\": \"d6eef8396aca83d8\"}",
    "date": "2026-10-17",
    "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:185-218, especially CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits at lines 209-216. It assumes an ordinary SmallCategory and a Type-valued functor and concerns ordinary finite limits. CategoryTheory.Ind.leftExactFunctorEquivalence is its ordinary category-level version. Neither treats space-valued coherent presheaves on arbitrary quasicategories or an arbitrary regular cardinal. The other semantic hits concern ordinary density, representable functors and finite-limit preservation. They are related candidates, not one-line specializations of this assertion."
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Limits.IsIndObject, CategoryTheory.Limits.PreservesFiniteLimits",
-   "results": "{\"t\": \"2026-10-16T20:18:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsIndObject, CategoryTheory.Limits.PreservesFiniteLimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits\"], \"digest\": \"2f4fba2a273abbae\"}",
+   "results": "{\"t\": \"2026-10-17T00:45:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsIndObject, CategoryTheory.Limits.PreservesFiniteLimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits\"], \"digest\": \"c317caee3f10afcc\"}",
    "date": "2026-10-17",
    "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:185-218, especially CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits at lines 209-216. It assumes an ordinary SmallCategory and a Type-valued functor and concerns ordinary finite limits. CategoryTheory.Ind.leftExactFunctorEquivalence is its ordinary category-level version. Neither treats space-valued coherent presheaves on arbitrary quasicategories or an arbitrary regular cardinal. The other semantic hits concern ordinary density, representable functors and finite-limit preservation. They are related candidates, not one-line specializations of this assertion."
   },
   {
    "tool": "grep",
    "query": "isIndObject.*[Ll]imit|[Ll]imit.*isIndObject|[Pp]reserves.*[Ll]imit|[Ff]lat",
-   "results": "{\"t\": \"2026-10-16T20:17:51Z\", \"tool\": \"grep\", \"query\": \"isIndObject.*[Ll]imit|[Ll]imit.*isIndObject|[Pp]reserves.*[Ll]imit|[Ff]lat\", \"sub\": \"CategoryTheory/Limits/Indization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\"], \"digest\": \"ea1f5780c0d55bf4\"}",
-   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-16T22:54:19Z\", \"tool\": \"grep\", \"query\": \"isIndObject.*[Ll]imit|[Ll]imit.*isIndObject|[Pp]reserves.*[Ll]imit|[Ff]lat\", \"sub\": \"CategoryTheory/Limits/Indization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\"], \"digest\": \"9605c436a29304a9\"}",
+   "date": "2026-10-16",
    "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:185-218, especially CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits at lines 209-216. It assumes an ordinary SmallCategory and a Type-valued functor and concerns ordinary finite limits. CategoryTheory.Ind.leftExactFunctorEquivalence is its ordinary category-level version. Neither treats space-valued coherent presheaves on arbitrary quasicategories or an arbitrary regular cardinal. The other semantic hits concern ordinary density, representable functors and finite-limit preservation. They are related candidates, not one-line specializations of this assertion."
   },
   {
    "tool": "leansearch",
    "query": "A space valued presheaf is a filtered colimit of representables exactly when it preserves small limits on the opposite category",
-   "results": "{\"t\": \"2026-10-16T20:17:52Z\", \"tool\": \"leansearch\", \"query\": \"A space valued presheaf is a filtered colimit of representables exactly when it preserves small limits on the opposite category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"AlgebraicGeometry.PresheafedSpace.colimit_presheaf\", \"CategoryTheory.Functor.representable_preservesLimit\", \"CategoryTheory.Functor.representable_preservesLimits\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite\", \"AlgebraicGeometry.PresheafedSpace.colimit\"], \"digest\": \"90fb40d2945be9dd\"}",
+   "results": "{\"t\": \"2026-10-17T00:45:52Z\", \"tool\": \"leansearch\", \"query\": \"A space valued presheaf is a filtered colimit of representables exactly when it preserves small limits on the opposite category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"AlgebraicGeometry.PresheafedSpace.colimit_presheaf\", \"CategoryTheory.Functor.representable_preservesLimit\", \"CategoryTheory.Functor.representable_preservesLimits\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite\", \"AlgebraicGeometry.PresheafedSpace.colimit\"], \"digest\": \"90fb40d2945be9dd\"}",
    "date": "2026-10-17",
    "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:185-218, especially CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits at lines 209-216. It assumes an ordinary SmallCategory and a Type-valued functor and concerns ordinary finite limits. CategoryTheory.Ind.leftExactFunctorEquivalence is its ordinary category-level version. Neither treats space-valued coherent presheaves on arbitrary quasicategories or an arbitrary regular cardinal. The other semantic hits concern ordinary density, representable functors and finite-limit preservation. They are related candidates, not one-line specializations of this assertion."
   },
   {
    "tool": "leanfinder",
    "query": "Ind objects in a quasicategory presheaf category are exactly left exact presheaves when the source has bounded colimits",
-   "results": "{\"t\": \"2026-10-16T20:18:17Z\", \"tool\": \"leanfinder\", \"query\": \"Ind objects in a quasicategory presheaf category are exactly left exact presheaves when the source has bounded colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind.leftExactFunctorEquivalence\", \"CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits\", \"CategoryTheory.Limits.IsIndObject\", \"CategoryTheory.instPreservesFiniteColimitsIndYoneda\", \"CategoryTheory.Limits.isIndObject_colimit\", \"CategoryTheory.Limits.isIndObject_limit_comp_yoneda_comp_colim\", \"CategoryTheory.instRepresentablyCoflatIndYoneda\", \"CategoryTheory.Limits.instAB5IndOfHasFiniteLimits\"], \"digest\": \"d536a923adeace2f\"}",
-   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-16T22:54:21Z\", \"tool\": \"leanfinder\", \"query\": \"Ind objects in a quasicategory presheaf category are exactly left exact presheaves when the source has bounded colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind.leftExactFunctorEquivalence\", \"CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits\", \"CategoryTheory.Limits.IsIndObject\", \"CategoryTheory.instPreservesFiniteColimitsIndYoneda\", \"CategoryTheory.Limits.isIndObject_colimit\", \"CategoryTheory.Limits.isIndObject_limit_comp_yoneda_comp_colim\", \"CategoryTheory.instRepresentablyCoflatIndYoneda\", \"CategoryTheory.Limits.instAB5IndOfHasFiniteLimits\"], \"digest\": \"d536a923adeace2f\"}",
+   "date": "2026-10-16",
    "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:185-218, especially CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits at lines 209-216. It assumes an ordinary SmallCategory and a Type-valued functor and concerns ordinary finite limits. CategoryTheory.Ind.leftExactFunctorEquivalence is its ordinary category-level version. Neither treats space-valued coherent presheaves on arbitrary quasicategories or an arbitrary regular cardinal. The other semantic hits concern ordinary density, representable functors and finite-limit preservation. They are related candidates, not one-line specializations of this assertion."
   },
   {
    "tool": "leanfinder",
    "query": "Flat presheaves valued in spaces on a quasicategory with cardinal bounded colimits are precisely left exact functors on its opposite category",
-   "results": "{\"t\": \"2026-10-16T21:36:58Z\", \"tool\": \"leanfinder\", \"query\": \"Flat presheaves valued in spaces on a quasicategory with cardinal bounded colimits are precisely left exact functors on its opposite category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.lan_flat_of_flat\", \"CategoryTheory.flat_of_preservesFiniteLimits\", \"CategoryTheory.preservesFiniteLimits_iff_flat\", \"CategoryTheory.flat_iff_lan_flat\", \"CategoryTheory.lan_preservesFiniteLimits_of_flat\", \"CategoryTheory.coflat_of_preservesFiniteColimits\", \"CategoryTheory.preservesFiniteColimits_iff_coflat\", \"CategoryTheory.preservesFiniteLimits_of_flat\"], \"digest\": \"dfcd99bc51dd26cb\"}",
-   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-16T22:54:22Z\", \"tool\": \"leanfinder\", \"query\": \"Flat presheaves valued in spaces on a quasicategory with cardinal bounded colimits are precisely left exact functors on its opposite category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.lan_flat_of_flat\", \"CategoryTheory.flat_of_preservesFiniteLimits\", \"CategoryTheory.preservesFiniteLimits_iff_flat\", \"CategoryTheory.flat_iff_lan_flat\", \"CategoryTheory.lan_preservesFiniteLimits_of_flat\", \"CategoryTheory.coflat_of_preservesFiniteColimits\", \"CategoryTheory.preservesFiniteColimits_iff_coflat\", \"CategoryTheory.preservesFiniteLimits_of_flat\"], \"digest\": \"dfcd99bc51dd26cb\"}",
+   "date": "2026-10-16",
    "verdict": "No match. Second reader inspected CategoryTheory.flat_of_preservesFiniteLimits at Mathlib/CategoryTheory/Functor/Flat.lean:163-169 and CategoryTheory.preservesFiniteLimits_iff_flat at lines 280-282: both use ordinary Category instances and finite limits, not quasicategories or arbitrary cardinal bounds. CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits at Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:209-216 uses a Type-valued ordinary presheaf. None is an exact match or one-line specialization to space-valued presheaves on arbitrary quasicategories."
   },
   {
    "tool": "grep",
    "query": "isIndObject_iff_preservesFiniteLimits|preservesFiniteLimits_iff_flat",
-   "results": "{\"t\": \"2026-10-16T21:37:43Z\", \"tool\": \"grep\", \"query\": \"isIndObject_iff_preservesFiniteLimits|preservesFiniteLimits_iff_flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\"], \"digest\": \"00736eddc21265ca\"}",
+   "results": "{\"t\": \"2026-10-17T00:45:52Z\", \"tool\": \"grep\", \"query\": \"isIndObject_iff_preservesFiniteLimits|preservesFiniteLimits_iff_flat\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\"], \"digest\": \"1dd6bcee56593fb3\"}",
    "date": "2026-10-17",
    "verdict": "No match. Second reader inspected CategoryTheory.flat_of_preservesFiniteLimits at Mathlib/CategoryTheory/Functor/Flat.lean:163-169 and CategoryTheory.preservesFiniteLimits_iff_flat at lines 280-282: both use ordinary Category instances and finite limits, not quasicategories or arbitrary cardinal bounds. CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits at Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:209-216 uses a Type-valued ordinary presheaf. None is an exact match or one-line specialization to space-valued presheaves on arbitrary quasicategories."
   },
   {
    "tool": "loogle",
    "query": "\"flat\", \"preservesFiniteLimits\"",
-   "results": "{\"t\": \"2026-10-16T21:37:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"flat\\\", \\\"preservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorRightOfCarrier\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.iff_preservesFiniteLimits_tensorRight\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"CategoryTheory.preservesFiniteLimits_of_flat\", \"CategoryTheory.flat_of_preservesFiniteLimits\"], \"digest\": \"f6ee1d020fad1866\"}",
-   "date": "2026-10-17",
+   "results": "{\"t\": \"2026-10-16T22:54:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"flat\\\", \\\"preservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorRightOfCarrier\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.iff_preservesFiniteLimits_tensorRight\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"CategoryTheory.preservesFiniteLimits_of_flat\", \"CategoryTheory.flat_of_preservesFiniteLimits\"], \"digest\": \"f6ee1d020fad1866\"}",
+   "date": "2026-10-16",
    "verdict": "No match. Second reader inspected CategoryTheory.flat_of_preservesFiniteLimits at Mathlib/CategoryTheory/Functor/Flat.lean:163-169 and CategoryTheory.preservesFiniteLimits_iff_flat at lines 280-282: both use ordinary Category instances and finite limits, not quasicategories or arbitrary cardinal bounds. CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits at Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:209-216 uses a Type-valued ordinary presheaf. None is an exact match or one-line specialization to space-valued presheaves on arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left exact space valued functor on a quasicategory has kappa filtered Grothendieck construction",
+   "results": "{\"t\": \"2026-10-17T01:16:58Z\", \"tool\": \"leanfinder\", \"query\": \"left exact space valued functor on a quasicategory has kappa filtered Grothendieck construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsFilteredOrEmptyGrothendieckOfαCategoryObjCat\", \"CategoryTheory.instIsFilteredGrothendieckOfαCategoryObjCat\", \"CategoryTheory.GrothendieckTopology.Point.instHasExactColimitsOfShapeOppositeElementsFiberOfLocallySmallOfAB5OfSizeOfHasFiniteLimits\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.Limits.instHasExactColimitsOfShapeIndOfHasFiniteLimits\", \"CategoryTheory.isFiltered_of_isFiltered_costructuredArrow\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsFiltered.SmallFilteredIntermediate.instIsFilteredOrEmpty\"], \"digest\": \"cd3c4fc3ca440ea5\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read CategoryTheory.Ind.leftExactFunctorEquivalence in Mathlib/CategoryTheory/Limits/Indization/Category.lean:302-310 and isIndObject_iff_preservesFiniteLimits in Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:203-216. Both concern ordinary SmallCategory and Type-valued presheaves; the present statement concerns coherent space-valued presheaves on arbitrary quasicategories and all infinite regular cardinals. The Grothendieck-construction hits concern ordinary categories. The quasicategory source hits introduce quasicategories, not this recognition theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind.leftExactFunctorEquivalence",
+   "results": "{\"t\": \"2026-10-17T01:16:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Ind.leftExactFunctorEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Ind.leftExactFunctorEquivalence\"], \"digest\": \"ab69a247992fd763\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read CategoryTheory.Ind.leftExactFunctorEquivalence in Mathlib/CategoryTheory/Limits/Indization/Category.lean:302-310 and isIndObject_iff_preservesFiniteLimits in Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:203-216. Both concern ordinary SmallCategory and Type-valued presheaves; the present statement concerns coherent space-valued presheaves on arbitrary quasicategories and all infinite regular cardinals. The Grothendieck-construction hits concern ordinary categories. The quasicategory source hits introduce quasicategories, not this recognition theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "leftExactFunctorEquivalence|isFiltered_costructuredArrow_yoneda_iff|quasicategor|[Rr]ight[Ff]ibration",
+   "results": "{\"t\": \"2026-10-17T01:16:57Z\", \"tool\": \"grep\", \"query\": \"leftExactFunctorEquivalence|isFiltered_costructuredArrow_yoneda_iff|quasicategor|[Rr]ight[Ff]ibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\"], \"digest\": \"9d1214acb3d515f9\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read CategoryTheory.Ind.leftExactFunctorEquivalence in Mathlib/CategoryTheory/Limits/Indization/Category.lean:302-310 and isIndObject_iff_preservesFiniteLimits in Mathlib/CategoryTheory/Limits/Indization/IndObject.lean:203-216. Both concern ordinary SmallCategory and Type-valued presheaves; the present statement concerns coherent space-valued presheaves on arbitrary quasicategories and all infinite regular cardinals. The Grothendieck-construction hits concern ordinary categories. The quasicategory source hits introduce quasicategories, not this recognition theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-bounded-colimit-presentation",
@@ -111,5 +227,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-presheaf-ind-criterion",
+  "worker": "stage1",
+  "summary": "Reused existing canonical representable-slice density, Yoneda evaluation, full-essential-image equivalence and transport classification. Expanded the category-of-elements recognition proof in six steps, deriving the sections/limit comparison directly from the classification mapping-space formula and the limit universal property. Removed the earlier proposed density duplicate and all proposed new nodes. Statement unchanged. Maintainer reader (2026-10-17): step 2's comparison E≃C rewritten through lem-coef-infinity-isofibration-pullback-limit (right fibration C→B is an isofibration by lem-cbc-left-fibration-equivalence-lift on opposites); step 3 now cites the mapping bifunctor and the existence of colimits in spaces.",
+  "blueprint": "Realizes the presheaf-recognition prerequisite of the bounded-colimit tensor foundation on the existing ancestry of prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2 (displayed mapping-complex adjunction). This is below the unit route, without replacing its geometric or coefficient steps.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 4 uses only the generic limiting-cone mapping-space criterion to identify coherent transformations from a constant diagram with maps into its limit; this is independent of the unit route and no local definition asserts the criterion; step 2 also uses its clause that a transformation is an equivalence iff its vertex components are."
+   },
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Step 2 (maintainer-reader repair) takes only its generic clause that a left fibration of quasicategories lifts equivalence edges with prescribed target, applied to the opposite of the right fibration C→B, to see that C→B is an isofibration; no node of this unit states that right fibrations are isofibrations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-left-fibration-equivalence-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-759565904",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-759565904 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 10 cited statements, the 6 nodes used for the repair, the unit and chapter records, and the A–H rules. The item's statement is unchanged and correct: it matches HTT Corollary 5.3.5.4 (1)<=>(3) for A admitting kappa-small colimits, with the empty shape included and no hypothesis added. HTT is not archived and is WANTED; I did not fetch it, and proof_origin=agent is correct. Small cases checked: A=Delta^0, N(0->1) with kappa=omega, the empty presheaf, representable X. No new nodes. No duplicate: ind-kappa-presentability, ind-kappa-extension, accessible-compact-slice-density, space-yoneda-density and continuous-presheaf-representability state different results. No cycle, no SGA, Mathlib has only the ordinary-category version (not a leaf). Steps 1, 4, 5 and 6 are correct against their cited statements; the step-4 cylinder orientation and section/path argument check out. Two faults repaired in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-presheaf-ind-criterion.json (only proof, proof_deps and split_report changed). (1) E5, step 2: the comparison E=A x_B C -> C was justified by an informal inverse (b,v)->(k(b),v eps_b), which needs a transport along the right fibration that no cited node gives. It is now proved as follows: C->B is a right fibration (lem-coef-infinity-slice-right-fibration, then pullback) and an isofibration (last clause of lem-cbc-left-fibration-equivalence-lift on the opposites). lem-coef-infinity-isofibration-pullback-limit with T=A, g=y gives Fun(Q,E)^~ = Fun(Q,A)^~ x^h Fun(Q,C)^~. y_* is a homotopy equivalence by k and the whiskered unit/counit (lem-cbc-enhanced-functor-cone-calculus). The cases Q=C and Q=E give the quasi-inverse. (2) C1/C3, step 3: it now cites the mapping bifunctor H_A of lem-coef-space-transport-classification and the colimits in S from lem-coef-infinity-presheaf-free-cocompletion. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus (declared by the delivery) and lem-cbc-left-fibration-equivalence-lift (added). Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
