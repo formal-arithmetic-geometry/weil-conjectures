@@ -1,0 +1,91 @@
+{
+ "id": "lem-trf-henselizations-common-normal-cover",
+ "kind": "statement",
+ "title": "A common normal-domain cover of two ordinary henselizations",
+ "statement": "Let $A$ be a commutative ring and $\\mathfrak p_1,\\mathfrak p_2\\subset A$ prime ideals. There exist a normal integral domain $P$ [def-weil-pbc-normal-ring] and a surjective homomorphism $\\pi:P\\to A$. Put $\\mathfrak q_i=\\pi^{-1}(\\mathfrak p_i)$. The induced local maps $P_{\\mathfrak q_i}\\to A_{\\mathfrak p_i}$ extend to local surjective homomorphisms $P^h_{\\mathfrak q_i}\\to A^h_{\\mathfrak p_i}$ of ordinary henselizations [def-weil-pbc-localization-at-prime; def-weil-pbc-henselization-at-prime], compatible with $\\pi$ and the structure maps. No finite-generation assumption on $A$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "algebra.tex Tag 05WQ (lemma-quotient-henselization), together with the polynomial-ring normal-domain presentation of a ring; precise auxiliary form of the quotient reduction in Huebner--Schmidt Theorem 6.3, printed p. 13. The combined common-cover statement is an agent-formulated auxiliary lemma, not the wording of Tag 05WQ."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-henselization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a ring and two primes there is a normal domain surjecting onto the ring and inducing local surjections on ordinary henselizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"surjective_of_isLocalization_isMaximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Exactness\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S]\\n  (Rₚ : (p : Ideal R) → [p.IsMaximal] → Type u_3) [inst_3 : (p : Ideal R) → [inst : p.IsMaximal] → CommSemiring (Rₚ p)]\\n  [inst_4 : (p : Ideal R) → [inst_4 : p.IsMaximal] → Algebra R (Rₚ p)] (Sₚ \", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $R$, the induced algebra map $R_{\\\\mathfrak{p}} \\\\to S_{\\\\mathfrak{p}}$ is surjective, then the algebra map $R \\\\to S$ is surjective.\"}\n  {\"name\": \"Algebra.HasGoingDown.of_comap_localRingHom_surjective\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (∀ (P : Ideal S) [inst_3 : P.IsPrime],\\n      Function.Surjective (PrimeSpectrum.comap (Localization.localRingHom (Ideal.under R P) P (algebraMap R S) ⋯))) →\\n    Algebra.HasGoingDown R S\", \"doc\": \"If for every prime ideal $ P $ in $ S $, the induced map on prime spectra from the localization of $ R $ at the contraction of $ P $ to the localization of $ S $ at $ P $ is surjective, then the algeb\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"RingHom.surjective_localRingHom_of_surjective\", \"module\": \"Mathlib/RingTheory/RingHom/Surjective\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  Function.Surjective ⇑f →\\n    ∀ (P : Ideal S) [inst_2 : P.IsPrime], Function.Surjective ⇑(Localization.localRingHom (Ideal.comap f P) P f ⋯)\", \"doc\": \"If $ f : R \\\\to S $ is a surjective ring homomorphism between commutative rings and $ P $ is a prime ideal in $ S $, then the induced ring homomorphism from the localization of $ R $ at the preimage of\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → {S : Type u_2} → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is surjective on stalks if for every prime ideal $ \\\\mathfrak{p} \\\\subseteq S $, the induced map on localizations $ R_{f^{-1}(\\\\mathfrak{p})}\"}\n  {\"name\": \"RingHom.surjective_localRingHom_iff\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] {f : R →+* S} (P : Ideal S)\\n  [inst_2 : P.IsPrime],\\n  Function.Surjective ⇑(Localization.localRingHom (Ideal.comap f P) P f ⋯) ↔\\n    ∀ (s : S), ∃ x r, ∃ c ∉ P, f r ∉ P ∧ c * f r * s = c * f x\", \"doc\": \"Let $ f : R \\\\to S $ be a ring homomorphism between commutative semirings, with prime ideals $ I \\\\subseteq R $ and $ J \\\\subseteq S $ such that $ I $ is the preimage of $ J $ under $ f $. The induced lo\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselization commutes with quotient of a local ring and every commutative ring is a quotient of an integrally closed domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"(S : Type u_6) →\\n  {R : Type u_7} →\\n    [inst : CommRing R] →\\n      (p : Ideal R) →\\n        [inst_1 : p.IsMaximal] →\\n          (Rₚ : Type u_8) →\\n            [inst_2 : CommRing Rₚ] →\\n              [inst_3 : Algebra R Rₚ] →\\n                [IsLocalization.AtPrime Rₚ p] →\\n                  [inst_5 : Is\", \"doc\": \"For a commutative ring $ S $ and a prime ideal $ p $, the quotient ring $ S/pS $ is isomorphic to the quotient ring $ S_p/pS_p $, where $ S_p $ denotes the localization of $ S $ at the complement of $\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, RingHom.Surjective",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'RingHom.Surjective'",
+   "date": "2026-10-18",
+   "verdict": "invalid query; retried with HenselianLocalRing, Function.Surjective, which returned only the root-lifting TFAE"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli[sz]ation.*quotient|quotient.*henseli[sz]ation|exists.*normal.*surject",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common normal domain presentation inducing quotient maps on henselizations at two primes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Quotient.isDomain\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Basic\", \"type\": \"[hI : I.IsPrime] : IsDomain (R ⧸ I)\", \"doc\": \"If $ I $ is a prime ideal in a ring $ R $, then the quotient ring $ R/I $ is an integral domain.\"}\n  {\"name\": \"PrimeSpectrum.isQuotientMap_of_generalizingMap\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(h₂ : GeneralizingMap (comap f)) : Topology.IsQuotientMap (comap f)\", \"doc\": \"Given a ring homomorphism $ f : R \\\\to S $ between commutative semirings, if the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ on prime spectra is a generalizing map (satisfying the\"}\n  {\"name\": \"KummerDedekind.quotMapEquivQuotQuotMap.congr_simp\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {x : S} {I : Ideal R}\\n  [inst_3 : IsDomain R] [inst_4 : IsIntegrallyClosed R] [inst_5 : IsDedekindDomain S]\\n  [inst_6 : Module.IsTorsionFree R S] (hx : Ideal.comap (algebraMap R S) (conductor R x) ⊔ I = \", \"doc\": \"Let $ R $ be an integrally closed domain, $ S $ a Dedekind domain that is torsion-free as an $ R $-module, and $ x \\\\in S $ integral over $ R $. For any ideal $ I \\\\subseteq R $, if the conductor ideal \"}\n  {\"name\": \"Ideal.Quotient.instIsPrimeQuotientMapRingHomAlgebraMapMkOfLiesOver\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \"(p : Ideal R) (P : Ideal A) [P.IsPrime] [P.LiesOver p] : (P.map (Ideal.Quotient.mk <| p.map (algebraMap R A))).IsPrime\", \"doc\": \"If $ P $ is a prime ideal in a ring $ A $ lying over an ideal $ p $ in a commutative ring $ R $, then the image of $ P $ under the quotient map $ A \\to A/pA $ (where $ pA $ is the ideal generated by $ \"}\n  {\"name\": \"idealFactorsFunOfQuotHom_coe_coe\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : IsDedekindDomain A] {I : Ideal R}\\n  {J : Ideal A} {f : R ⧸ I →+* A ⧸ J} (hf : Function.Surjective ⇑f) (X : { p // p ∣ I }),\\n  ↑((idealFactorsFunOfQuotHom hf) X) =\\n    Ideal.comap (Ideal.Quotient.mk J) (Ideal.map f (I\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with $ A $ a Dedekind domain. For a surjective ring homomorphism $ f : R/I \\to A/J $ between quotient rings, and for any prime ideal $ X $ dividing $ I $, the i\"}\n  {\"name\": \"PrimeSpectrum.isQuotientMap_of_specializingMap\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(h₂ : SpecializingMap (comap f)) : Topology.IsQuotientMap (comap f)\", \"doc\": \"Given a ring homomorphism $ f : R \\\\to S $ between commutative semirings, if the induced map $ \\\\operatorname{Spec}(f) : \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ on prime spectra is a special\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"instIsLocalHomAtPrimeRingHomAlgebraMap\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Ideal\", \"type\": \"(p : Ideal R) [p.IsPrime] (q : Ideal A) [q.IsPrime] [q.LiesOver p] :\\n  IsLocalHom (algebraMap (Localization.AtPrime p) (Localization.AtPrime q))\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$ such that $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, the canonical algebra map from the localization of $A$ at $\\\\mathfrak{p}$\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Function.Surjective",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \" (R : Type u) [CommRing R] [IsLocalRing R] : [HenselianLocalRing R, ∀ (f : Polynomial R), f.Monic → ∀ (a₀ : IsLocalRing.ResidueField R), (Polynomial.aeval a₀) f = 0 → (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRoot a ∧ (IsLocalRing.residue R) a = a₀, ∀ {K : Type u} [inst : Field \", \"doc\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-artin-join-theorem-6-3",
+  "date": "2026-10-18",
+  "group": "Q05"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "algebra.tex Tag 05WQ (lemma-quotient-henselization), together with the polynomial-ring normal-domain presentation of a ring; precise auxiliary form of the quotient reduction in Huebner--Schmidt Theorem 6.3, printed p. 13. The combined common-cover statement is an agent-formulated auxiliary lemma, not the wording of Tag 05WQ.",
+   "via": [
+    "lem-trf-artin-join-theorem-6-3",
+    "lem-trf-artin-henselian-tensor-residue-dichotomy",
+    "lem-trf-artin-tensor-etale-acyclic",
+    "lem-trf-gabber-nearby-cycle-dimension-bound",
+    "lem-trf-gabber-strict-local-torsion-bound",
+    "lem-trf-finite-type-torsion-universal-star",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

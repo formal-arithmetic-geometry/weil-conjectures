@@ -2,7 +2,7 @@
  "id": "lem-trf-smooth-geometrically-normal",
  "kind": "statement",
  "title": "Smooth schemes over fields are geometrically normal",
- "statement": "Let $k$ be a field and $X$ a scheme with a smooth morphism $X\\to\\operatorname{Spec}(k)$ [def-pc-scheme, def-sbc-smooth-morphisms]. Then $X$ is geometrically normal over $k$: for every field extension $K/k$ [def-pc-field-extension], every local ring of the base change $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-base-change] is a normal domain [def-weil-pbc-normal-ring]. In particular $X$ is geometrically reduced over $k$ [def-pc-geometrically-irreducible].",
+ "statement": "Let $k$ be a field and $X$ a scheme with a smooth morphism $X\\to\\operatorname{Spec}(k)$ [def-pc-scheme, def-sbc-smooth-morphisms]. Then $X$ is geometrically regular, geometrically normal, and geometrically reduced over $k$: for every finite purely inseparable field extension $K'/k$ [def-pc-field-extension], the base change $X_{K'}=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K'$ [def-pc-base-change] is regular [def-weil-regular-scheme]; for every field extension $K/k$, every local ring of $X_K$ is a normal domain [def-weil-pbc-normal-ring] and $X_K$ is reduced [def-pc-reduced-scheme].",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 056T, lemma-smooth-geometrically-normal."
@@ -12,12 +12,103 @@
   "def-sbc-smooth-morphisms",
   "def-pc-field-extension",
   "def-pc-base-change",
+  "def-weil-regular-scheme",
   "def-weil-pbc-normal-ring",
-  "def-pc-geometrically-irreducible"
+  "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary field extension $K/k$ and put $Y=X_K$ with structure map $f_K:Y\\to\\operatorname{Spec}K$. Clause (2) of [lem-pc-proper-base-change] applies to the smooth map $X\\to\\operatorname{Spec}k$ and the field-extension map $\\operatorname{Spec}K\\to\\operatorname{Spec}k$, so $f_K$ is smooth. This requires neither a fixed relative dimension nor quasi-compactness of $X$.",
+   "uses": [
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VB, lemma-base-change-smooth; applied as in varieties.tex, Tag 056T"
+   }
+  },
+  {
+   "text": "By [def-sbc-smooth-morphisms], $f_K$ is locally of finite presentation. Its affine neighbourhoods in [def-sbc-locally-finite-presentation] can have target $\\operatorname{Spec}K$, since this field spectrum has only one nonempty open. They give an affine open cover $Y=\\bigcup_i U_i$ with $U_i=\\operatorname{Spec}B_i$ and $B_i\\cong K[t_1,\\ldots,t_{n_i}]/(g_1,\\ldots,g_{m_i})$. The images of the $t_j$ generate $B_i$ as a $K$-algebra. Thus $f_K$ is locally of finite type, and each $U_i\\to\\operatorname{Spec}K$ is of finite type: its single affine chart is a finite affine covering as required in [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TP, definition-finite-presentation; Tag 01T1, definition-finite-type; the local-finite-type input of varieties.tex, Tag 056S, lemma-smooth-regular"
+   }
+  },
+  {
+   "text": "Every ideal of the field $K$ is either zero or the unit ideal, so $K$ is Noetherian by [def-weil-pbc-noetherian-ring]. Its one-point spectrum is locally Noetherian by [pqf-def-locnoeth] and quasi-compact, hence Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] separately to each finite-type map $U_i\\to\\operatorname{Spec}K$ from Step 2. Each $U_i$ is Noetherian. Its affine open neighbourhoods with Noetherian coordinate rings, furnished by local Noetherianity, are also affine open neighbourhoods in $Y$. They cover $Y$, so [pqf-def-locnoeth] makes $Y$ locally Noetherian. No finite cover of all of $Y$ is asserted or needed.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian, applied to the finite-type affine charts; Properties Tag 01OV, definition-noetherian"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-geometric-regularity-smooth-field-criterion] over the field $K$ to $f_K$, smooth by Step 1 and locally of finite type by Step 2. Take its finitely generated extension $L/K$ to be the identity extension $K/K$. The identity base change $Y\\times_{\\operatorname{Spec}K}\\operatorname{Spec}K\\cong Y$ is given by the projection, with inverse $(\\operatorname{id}_Y,f_K)$, by [def-pc-base-change]. The criterion therefore says that every local ring of $Y$ is regular. Together with Step 3, the equivalence in [def-weil-regular-scheme] says that $Y$ is regular. This holds for every $K/k$, in particular for every finite purely inseparable $K'/k$, as required for the geometrically regular clause.",
+   "uses": [
+    "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "def-pc-base-change",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038X, lemma-geometrically-regular-smooth; Tag 056S, lemma-smooth-regular; Properties Tag 02IT, lemma-characterize-regular; Tag 056T, regularity conclusion"
+   }
+  },
+  {
+   "text": "For the same arbitrary field extension $K/k$, apply clause (1) of [rem-pc-regular-normal] to the regular scheme $Y$ of Step 4. It gives that $Y$ is normal, which that node defines explicitly as every local ring $\\mathcal O_{Y,y}$ being an integral domain integrally closed in its field of fractions. This is exactly the normal-domain conclusion for every local ring of $X_K$; since $K/k$ was arbitrary, $X$ is geometrically normal.",
+   "uses": [
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0569, lemma-regular-normal; this is the last cited lemma of the proof of varieties.tex, Tag 056T"
+   }
+  },
+  {
+   "text": "For every field extension $K/k$, Step 5 makes each local ring of $X_K$ a domain. In a domain, $a^n=0$ with $n\\geq1$ implies $a=0$, by induction on $n$ using the absence of zero divisors. Hence all these local rings are reduced, so $X_K$ is reduced by [def-pc-reduced-scheme]. This proves the geometrically reduced clause, including when $X_K$ is empty, where there are no stalks to check.",
+   "uses": [
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, reducedness conclusion; Schemes Tag 01J0, definition-reduced"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "def-pc-base-change",
+  "def-weil-regular-scheme",
+  "rem-pc-regular-normal",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 056T, lemma-smooth-geometrically-normal and its proof, expanding regularity through Tag 056S and the geometric-regularity criterion Tag 038X; arbitrary field base change proves the explicit normality and reducedness clauses directly"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -38,7 +129,7 @@
    "query": "IsIntegral, IsNormal, Noetherian, connectedComponent",
    "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsNormal'\", \"top\": []}",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "query rejected: unknown identifier; not used as evidence of absence"
   },
   {
    "tool": "leanfinder",
@@ -46,10 +137,52 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.smoothLocus_eq_univ\", \"AlgebraicGeometry.IsSmooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\"]}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme over a field is geometrically regular, geometrically normal, and geometrically reduced after every field extension",
+   "results": "{\"t\": \"2026-10-17T19:58:52Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth scheme over a field is geometrically regular, geometrically normal, and geometrically reduced after every field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.smoothLocus_eq_univ\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"37f15d3b6cadf211\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Smooth, GeometricallyReduced, GeometricallyRegular, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-17T19:58:53Z\", \"tool\": \"loogle\", \"query\": \"Smooth, GeometricallyReduced, GeometricallyRegular, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Smooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; not used as evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyReduced|GeometricallyRegular|smooth.*normal",
+   "results": "{\"t\": \"2026-10-17T19:58:53Z\", \"tool\": \"grep\", \"query\": \"GeometricallyReduced|GeometricallyRegular|smooth.*normal\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth morphism to Spec of a field gives geometrically regular normal reduced scheme",
+   "results": "{\"t\": \"2026-10-17T19:58:53Z\", \"tool\": \"leansearch\", \"query\": \"smooth morphism to Spec of a field gives geometrically regular normal reduced scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.rec\"], \"digest\": \"e3bf4f75a8596695\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyRegular|GeometricallyNormal|[Ss]mooth.*[Ii]ntegrallyClosed|[Ii]ntegrallyClosed.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-17T20:45:11Z\", \"tool\": \"grep\", \"query\": \"GeometricallyRegular|GeometricallyNormal|[Ss]mooth.*[Ii]ntegrallyClosed|[Ii]ntegrallyClosed.*[Ss]mooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every field extension K of k, a scheme smooth over k has regular local rings and integrally closed domain stalks after scalar extension to K",
+   "results": "{\"t\": \"2026-10-17T20:45:12Z\", \"tool\": \"leanfinder\", \"query\": \"For every field extension K of k, a scheme smooth over k has regular local rings and integrally closed domain stalks after scalar extension to K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"25efb3828f05ce51\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "created": {
@@ -79,5 +212,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-geometrically-normal",
+  "worker": "stage1",
+  "summary": "Repair of e727ee3779: retained the returned statement, prior searches and blueprint ancestry; replaced fixed-relative-dimension permanence by general smooth base change, supplied local Noetherianity using finite-type affine charts over a field, and followed the source regular-to-normal theorem at scheme level. The invalid normal-domain localization and unsupported affine stalk comparison are removed rather than used. Declared the three generic off-unit theorem uses. No new nodes.",
+  "blueprint": "Realizes the auxiliary smooth-component input in the proof of lem-trf-local-term-locality: after arbitrary field base change, smoothness supplies regular/normal/reduced local geometry.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Step 1 uses only clause (2), arbitrary smooth base change without a relative-dimension hypothesis. This is a generic geometric permanence tool; the trace-formula unit does not state it."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "why": "Step 4 uses the forward smooth-to-geometrically-regular implication over the field K with identity extension L=K. It supplies the regular-local-ring input of Stacks 056S, not a replacement for any trace-formula argument."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Step 5 uses only clause (1), regular scheme implies normal scheme (Stacks 0569), with no finiteness, dimension, connectedness or decomposition clause. This generic tool is exactly the last input of Stacks 056T; the trace-formula unit has no corresponding theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q02-de8972ac8",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-de8972ac8 (reviewer sub-agent of L); spot-checked: Read the full item, cited nodes, unit/chapter route, report, and Stacks sources. All six steps are mathematically valid with checked hypotheses, base-change maps, edge cases, searches, and tool uses; no new nodes or route violations remain. Review written to review.md."
  }
 }

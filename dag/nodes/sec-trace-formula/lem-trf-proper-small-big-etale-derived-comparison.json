@@ -15,11 +15,72 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories",
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-trf-topos-derived-base-change-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the canonical comparison $\\beta_K:\\pi_Y^{-1}Rf_{s,*}K\\to Rf_{b,*}\\pi_X^{-1}K$ by [def-trf-topos-derived-base-change-map], taking the four coefficient rings to be constant $\\mathbf Z$. Thus the four categories are derived categories of abelian sheaves, and the inverse-image functors are exact. The inverse-image square is the canonical big/small square of [lem-trf-big-small-etale-pullback-formula], rather than a freely chosen identification. The transpose of $\\beta_K$ is $f_b^{-1}\\pi_Y^{-1}Rf_{s,*}K\\cong\\pi_X^{-1}f_s^{-1}Rf_{s,*}K\\to\\pi_X^{-1}K$, with the last arrow induced by the small-site counit.",
+   "uses": [
+    "def-trf-topos-derived-base-change-map",
+    "lem-trf-big-small-etale-pullback-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDJ, lemma-compare-higher-direct-image-proper, proof of part (2)"
+   }
+  },
+  {
+   "text": "Fix any object $g:T\\to Y$ of $B_Y$, and write $X_T=X\\times_YT$, $h:X_T\\to X$ and $f_T:X_T\\to T$. By [lem-trf-big-small-etale-localization-derived-pushforward], $i_g$ is induced by the continuous and cocontinuous functor $u_g:T_{\\mathrm{Et}}\\to B_Y$, and its inverse image is small-site restriction. For a big-site complex $N$ and any etale $U\\to T$, [lem-trf-site-object-derived-sections-pullback] gives $R\\Gamma(U,i_g^{-1}N)\\cong R\\Gamma(u_g(U),N)$; this specifies the actual small-site sections used here. The same localization node supplies\n$$i_g^{-1}\\pi_Y^{-1}Rf_{s,*}K\\cong g_s^{-1}Rf_{s,*}K,$$\n$$i_g^{-1}Rf_{b,*}\\pi_X^{-1}K\\cong R(f_T)_{s,*}(i_h^{-1}\\pi_X^{-1}K)\\cong R(f_T)_{s,*}h_s^{-1}K.$$\nEvery $Rf_{s,*}$ in these expressions is applied to $K$ on $X_{\\mathrm{Et}}$; only $R(f_T)_{s,*}$ is applied to a complex on $(X_T)_{\\mathrm{Et}}$.",
+   "uses": [
+    "lem-trf-big-small-etale-localization-derived-pushforward",
+    "lem-trf-site-object-derived-sections-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDJ, lemma-compare-higher-direct-image-proper, proof of part (2)"
+   }
+  },
+  {
+   "text": "The arrow-compatibility clause of [lem-trf-big-small-etale-localization-derived-pushforward] identifies $i_g^{-1}\\beta_K$, under the comparisons in step 2, with the small-site exchange $g_s^{-1}Rf_{s,*}K\\to R(f_T)_{s,*}h_s^{-1}K$. This is the precise exchange of [def-weil-pbc-derived-exchange]: its transpose is the inverse-image square followed by $h_s^{-1}$ of the counit for $f_s$. Apply [thm-weil-pbc-bounded-below] to the cartesian square $(f,f_T,g,h)$ and the original $K$. Its hypotheses are exactly the properness of $f$, bounded-below $K$, and torsion of every cohomology sheaf of $K$, all assumed in the item. Therefore $i_g^{-1}\\beta_K$ is an isomorphism for every $g$.",
+   "uses": [
+    "lem-trf-big-small-etale-localization-derived-pushforward",
+    "def-weil-pbc-derived-exchange",
+    "thm-weil-pbc-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDJ, lemma-compare-higher-direct-image-proper, proof of part (2)"
+   }
+  },
+  {
+   "text": "The family of all $i_g^{-1}$ is jointly conservative on $D^+(\\mathrm{Ab}(B_Y))$ by [lem-trf-big-small-etale-localization-derived-pushforward]. Since every $i_g^{-1}\\beta_K$ is an isomorphism by step 3, $\\beta_K$ is an isomorphism. It is the canonical mate constructed in step 1, so this proves exactly the stated comparison. The small-site theorem was used with torsion cohomology alone; no common annihilator or invertibility hypothesis was introduced.",
+   "uses": [
+    "lem-trf-big-small-etale-localization-derived-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDJ, lemma-compare-higher-direct-image-proper, proof of part (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-topos-derived-base-change-map",
+  "def-weil-pbc-derived-exchange",
+  "lem-trf-big-small-etale-localization-derived-pushforward",
+  "lem-trf-big-small-etale-pullback-formula",
+  "lem-trf-site-object-derived-sections-pullback",
+  "thm-weil-pbc-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DDJ, lemma-compare-higher-direct-image-proper, part (2), using Cohomology on Sites Tag 0DD8 for objectwise derived sections"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-etale-comparison-hypotheses",
@@ -85,5 +146,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-small-big-etale-derived-comparison",
+  "worker": "stage1",
+  "summary": "Repaired all E4/C4 return points: the localization node explicitly distinguishes i_g (small-site restriction) from g_b (big-site localization), keeps both 075A formulas typed, and identifies the restricted comparison with g_s^{-1}Rf_{s,*}K -> Rf_prime,s,* g_prime,s^{-1}K. The generic 07A7 definition explicitly names four ring-module derived categories, structural ring maps and adjunctions. The item now follows 0DDJ(2) directly, omitting the unnecessary underived detour and applying small-site proper base change to original f and K. Its statement is unchanged.",
+  "blueprint": "Realizes the parent blueprint's normal-cone first-descent use of the small/big etale comparison; the new generic node supplies the Tag 0DD8 objectwise derived-section comparison used in that descent.",
+  "tool_uses": [
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "The generic proper base-change theorem for bounded-below small-etale torsion complexes is applied to the original proper f and K; no node of the trace-formula unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-bounded-below"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-4f3ea6a4e",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-4f3ea6a4e (reviewer sub-agent of L); spot-checked: Read the item and all three new nodes in full. Stacks 0DDJ(2), 075A(3)/(5), 0DD8 and 07A7 support the proof, coefficient categories and canonical mate. Repaired one citation gap for derived-functor existence and canonical composition using existing DAG nodes. Corrected whole JSON is under fixes/dag/nodes; review.md records step checks, edge cases, route checks and accepted tool use. No target weakened or new cycle introduced.; 1 file(s) fixed by the reviewer"
  }
 }

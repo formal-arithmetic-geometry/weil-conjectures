@@ -17,9 +17,210 @@
   "def-trf-oriented-nearby-cycles",
   "def-trf-oriented-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U=S\\setminus T$ and $U_X=X\\times_SU=X\\setminus X_T$, and let $u=h_U$ and $u_X=h_{U_X}$ be their subterminal etale sheaves. For any scheme map $e:A\\to B$ and etale object $W\\to B$, the set-sheaf adjunction [lem-weil-pbc-sets-etale-inverse-image-composition-units], representable sheaf property [lem-weil-pbc-small-etale-representable-presheaf-sheaf], and Yoneda [lem-galois-yoneda-hom-bijection] give, naturally in $H$, $\\operatorname{Hom}(e^{-1}h_W,H)=\\operatorname{Hom}(h_W,e_*H)=H(A\\times_BW)=\\operatorname{Hom}(h_{A\\times_BW},H)$. Thus $e^{-1}h_W\\simeq h_{A\\times_BW}$. In particular $f^{-1}u\\simeq u_X$ and $k^{-1}u=0$, since $T\\times_SU$ is empty. The sheaf $h_{\\varnothing}$ is initial: Yoneda identifies maps from it to $H$ with $H(\\varnothing)$, a singleton by the empty covering of the empty object. By [lem-weil-pbc-closed-immersion-base-change], $q:X_T\\hookrightarrow X$ is closed. The scheme clause of [lem-trf-oriented-closed-base-localization] identifies $T_{\\mathrm{Et}}$ and $(X_T)_{\\mathrm{Et}}$ with the closed complements of $u$ and $u_X$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-yoneda-hom-bijection",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-oriented-closed-base-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA, proposition-closed-immersion-pushforward; the displayed representable calculation is the adjunction and Yoneda argument for small-etale base change."
+   }
+  },
+  {
+   "text": "Let $p_1,p_2$ be the projections of $V_f$. The universal property [lem-trf-oriented-product-universal] gives $r:E_T\\to V_f$ from $X\\to X$, $T\\to S$ and the structural $2$-arrow. For any topos $\\mathcal H$, a morphism $a:\\mathcal H\\to V_f$ consists of $a_1:\\mathcal H\\to X_{\\mathrm{Et}}$, $a_2:\\mathcal H\\to S_{\\mathrm{Et}}$, and $a_2\\Rightarrow fa_1$. It factors through $E_T$ precisely when $a_2$ factors through $T_{\\mathrm{Et}}$. By [lem-trf-oriented-closed-base-localization], the latter is equivalent to $a_2^{-1}u=0$, with unique compatible factorization including $2$-morphisms. Consequently $r$ is the closed complement of $p_2^{-1}u$, hence is exactly the asserted inverse image of $T_{\\mathrm{Et}}$. This identifies the canonical morphism, not just an abstractly equivalent topos.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-oriented-closed-base-localization",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI Theorem 1.4 and §1.9; closed-complement factorization is Stacks 08LY, lemma-closed-subtopos, through the cited localization statement."
+   }
+  },
+  {
+   "text": "For the equivalence, allow an arbitrary additional scheme map $l:Y\\to T$; this will also cover the stratum restrictions. Put $P_Y=X_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}Y_{\\mathrm{Et}}$ using $kl:Y\\to S$, and $Q_Y=(X_T)_{\\mathrm{Et}}\\overleftarrow\\times_{T_{\\mathrm{Et}}}Y_{\\mathrm{Et}}$. The universal property gives $v_Y:Q_Y\\to P_Y$. Denote the projections of $P_Y$ by $a,b$ and its arrow by $\\tau:klb\\Rightarrow fa$. By the $2$-morphism convention [def-trf-geometric-morphism], the inverse-image mate of $\\tau$ at $u$ is $a^{-1}f^{-1}u\\to b^{-1}l^{-1}k^{-1}u=0$. Its source is therefore initial by strictness of the initial set sheaf [lem-trf-set-sheaf-finite-extensivity]. Step 1 gives $a^{-1}u_X=0$. Apply the factorization clause of [lem-trf-oriented-closed-base-localization] to the closed embedding $q$: there is $\\bar a:P_Y\\to(X_T)_{\\mathrm{Et}}$ with $q\\bar a\\simeq a$, unique compatibly with all $2$-morphisms.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "def-trf-geometric-morphism",
+    "lem-trf-set-sheaf-finite-extensivity",
+    "lem-trf-oriented-closed-base-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 08LY and 08M0: closed-complement factorization; agent specialization of XI 1.4, using the mate of the oriented arrow."
+   }
+  },
+  {
+   "text": "The identity $fq=kf_T$ now rewrites $\\tau$ as $klb\\Rightarrow kf_T\\bar a$. By [lem-trf-etale-closed-complement-sets], $k_*$ is fully faithful on sheaves of sets. Hence this transformation lifts uniquely to $\\bar\\tau:lb\\Rightarrow f_T\\bar a$: for every sheaf $H$ of $P_Y$, fullness gives the unique component $l_*b_*H\\to f_{T,*}\\bar a_*H$ whose image under $k_*$ is $\\tau_H$; faithfulness makes these components natural. This explicitly checks the direct-image convention for $2$-morphisms. Apply [lem-trf-oriented-product-universal] to $(\\bar a,b,\\bar\\tau)$ to construct $w_Y:P_Y\\to Q_Y$. Applying $k$ to $\\bar\\tau$ recovers exactly $\\tau$, so $v_Yw_Y$ has the projections and oriented arrow of $1_{P_Y}$; uniqueness in that universal property gives $v_Yw_Y\\simeq1_{P_Y}$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-geometric-morphism",
+    "lem-trf-etale-closed-complement-sets",
+    "lem-trf-oriented-product-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI Theorem 1.4 and §1.9; fullness of the closed etale embedding is Stacks 04CA, proposition-closed-immersion-pushforward (1)."
+   }
+  },
+  {
+   "text": "Similarly, the first projection of $w_Yv_Y$ and the first projection of $Q_Y$ become the same morphism after composition with $q$. The factorization uniqueness, including $2$-morphisms, in [lem-trf-oriented-closed-base-localization] identifies them; their second projections are both the projection to $Y_{\\mathrm{Et}}$. After applying $k$, their structural arrows agree by the construction of $\\bar\\tau$. Faithfulness of $k_*$ [lem-trf-etale-closed-complement-sets] makes the arrows themselves agree. The uniqueness clause of [lem-trf-oriented-product-universal] gives $w_Yv_Y\\simeq1_{Q_Y}$. Thus $v_Y$ is an equivalence for every $Y\\to T$, without qcqs or point hypotheses. With $Y=T$ this is exactly $v:V_{f_T}\\to E_T$. Its inverse image gives the claimed equivalence of set sheaves. Applying the equivalence to addition and scalar operations gives the module equivalence, with the constant coefficient ring identified by [lem-pe-constant-left-module-inverse-image].",
+   "uses": [
+    "lem-trf-oriented-closed-base-localization",
+    "lem-trf-etale-closed-complement-sets",
+    "lem-trf-oriented-product-universal",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI Theorem 1.4, uniqueness with projections and oriented arrow; direct closed-complement proof of the closed-immersion special case of Orgogozo 8.3.1."
+   }
+  },
+  {
+   "text": "We record the precise compatibility needed on rectangles. For scheme maps $c:A\\to X$ and $d:B\\to Y$ over $S$ and $T$ respectively, form $A_T=A\\times_ST$. There are induced morphisms $A_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}B_{\\mathrm{Et}}\\to P_Y$ and $(A_T)_{\\mathrm{Et}}\\overleftarrow\\times_{T_{\\mathrm{Et}}}B_{\\mathrm{Et}}\\to Q_Y$. Their square with $v_B$ (Steps 3–5 for $A,B$) and $v_Y$ commutes: both composites have first projection $c\\,q_A$ followed by the source first projection, second projection $d$ followed by the source second projection, and oriented arrow obtained by applying $k$ to the source arrow. These are exactly the same triple of data in [lem-trf-oriented-product-universal], so its uniqueness gives the compatible isomorphism. For a composite of restrictions, the two resulting isomorphisms agree by that same uniqueness. This proves the required restriction compatibility for locally closed strata as well; no stratum is assumed to be etale or a representable object of the small etale site.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI §1.9 functoriality and compatibility with composition, deduced from Theorem 1.4; applied also to immersions, not XI 1.10(b) etale localization."
+   }
+  },
+  {
+   "text": "For any geometric morphism $h:\\mathcal A\\to\\mathcal B$, inverse image preserves locally constant finite values. Here is the needed argument from the definition in [def-trf-oriented-constructible-sheaf]. A trivializing cover $(W_i\\to1)$ pulls back to a cover $(h^{-1}W_i\\to1)$: $h^{-1}$ preserves coproducts by [lem-weil-pbc-left-adjoint-preserves-colimits], and preserves epimorphisms because its adjunction turns cancellation after $h^{-1}e$ into cancellation after $e$. It preserves terminal objects and products by [def-trf-geometric-morphism], so it induces the corresponding slice pullbacks. A constant set sheaf of value $M$ is the sheaf coproduct of $M$ terminal sheaves (sheafify the constant presheaf), hence pulls back to the same constant set. For modules, [lem-sfb-geometric-inverse-image-constant-module] gives the identical finite module on each pulled-back slice. Thus local finite models pull back unchanged. If $h$ is an equivalence, apply its inverse to the same argument to obtain reflection as well. Finiteness is finiteness of the same set or module, without any invertibility hypothesis on its order.",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf",
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R, lemma-pullback-locally-constant (whose omitted proof is written here using the indicated constant and adjunction statements)."
+   }
+  },
+  {
+   "text": "The partition arguments use only Noetherian underlying spaces. Since $f$ is of finite presentation, it is of finite type [def-weil-pbc-scheme-conventions], so $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The closed-subset descending-chain condition on $S$ and $X$ is [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]; it is inherited by their closed subspaces $T$ and $X_T$ simply by regarding closed subsets of a closed subspace as closed subsets of the ambient space. Therefore every locally closed subset of any of these spaces is constructible by [def-weil-constructible-subset]. Pulling back the strata of a finite partition gives a finite disjoint covering by locally closed subsets, since inverse images preserve open and closed subsets; the scheme strata are the actual fibre products. Conversely a stratum immersion into $X_T$ followed by $q$ is an immersion into $X$: factor it through an open of $X_T$, write that open as $X_T\\cap O$ for an open $O$ of $X$, and view its closed part as closed in $O$.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-weil-constructible-subset",
+    "def-constructible-stratification",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005L, lemma-constructible-Noetherian-space; definition-stratification, with the displayed elementary pullback and composition of strata."
+   }
+  },
+  {
+   "text": "Suppose $F$ on $E_T$ is constructible, witnessed by finite partitions $(X_\\alpha)$ and $(T_\\beta)$. Use the partition $X_\\alpha\\times_ST$ of $X_T$ and the same $T$-partition; Step 8 verifies the required locally closed constructible hypotheses. For each pair $(\\alpha,\\beta)$, Steps 3–5 applied to $A=X_\\alpha$ and $Y=T_\\beta$ give an equivalence from the target rectangle $((X_\\alpha\\times_ST)_{\\mathrm{Et}}\\overleftarrow\\times_{T_{\\mathrm{Et}}}(T_\\beta)_{\\mathrm{Et}})$ to the original $E_T$ rectangle. Step 6 identifies the restriction of $v^{-1}F$ with the inverse image of the restriction of $F$. Step 7 transfers the finite local models. This proves constructibility of $v^{-1}F$, for sets and for constant-$\\Lambda$ modules, exactly by [def-trf-oriented-constructible-sheaf]. Empty strata may be discarded; the same proof includes empty rectangles.",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf",
+    "lem-trf-oriented-product-universal",
+    "def-pc-fibre-product",
+    "def-constructible-stratification",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI Theorem 1.4 and §1.9 applied to stratum immersions; finite rectangle criterion is the cited constructibility definition."
+   }
+  },
+  {
+   "text": "Conversely, let a sheaf $G=v^{-1}F$ be constructible on $V_{f_T}$ with strata $A_\\alpha\\hookrightarrow X_T$ and $T_\\beta\\hookrightarrow T$. Regard the same schemes $A_\\alpha$ as strata in $X$ and adjoin $X\\setminus X_T$, using Step 8. Since $A_\\alpha\\to S$ factors through $T$, its base change $A_\\alpha\\times_ST\\to A_\\alpha$ is an isomorphism: locally a closed immersion is a quotient $R\\to R/I$, and $B\\otimes_R R/I=B/IB=B$ for an $R/I$-algebra $B$. Thus Steps 3–6 identify the corresponding $E_T$ rectangle with the $V_{f_T}$ rectangle, and Step 7 reflects the finite local models. The extra complement rectangle is degenerate: on it $a^{-1}f^{-1}u=1$ but the structural mate maps this to $0$, so [lem-trf-set-sheaf-finite-extensivity] gives $1\\simeq0$. Every sheaf there has the unique constant local model. These partitions therefore witness constructibility of $F$.",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-trf-oriented-product-universal",
+    "lem-trf-set-sheaf-finite-extensivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI Theorem 1.4 and §1.9; agent reverse-partition argument, including the complement rectangle."
+   }
+  },
+  {
+   "text": "Finally let $H$ be constructible on $V_f$, with partitions $(X_\\alpha)$ and $(S_\\beta)$. On $E_T$ use $(X_\\alpha)$ and $T_\\beta=T\\times_SS_\\beta$; these are finite constructible locally closed partitions by Step 8. From the maps $X_\\alpha\\to X_\\alpha$, $T_\\beta\\to S_\\beta$ and their maps to $S$, [lem-trf-oriented-product-universal] constructs $h_{\\alpha\\beta}:(X_\\alpha)_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}(T_\\beta)_{\\mathrm{Et}}\\to (X_\\alpha)_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}(S_\\beta)_{\\mathrm{Et}}$. Its composite to $V_f$ is the rectangle map to $E_T$ followed by $r$: both have the same two projections and the structural arrow over $S$, so uniqueness identifies them, compatibly with further restrictions. Thus $(r^{-1}H)|_{\\alpha\\beta}\\simeq h_{\\alpha\\beta}^{-1}(H|_{\\alpha\\beta})$. Step 7 transfers finite local constancy along this actual $h_{\\alpha\\beta}$; this proves the asserted preservation under $r^{-1}$ without using a comparison for the different map $v$.",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf",
+    "lem-trf-oriented-product-universal",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI §1.9 functoriality, checked for the actual map E_T to V_f; pullback of finite local models is Step 7 (Stacks 093R)."
+   }
+  },
+  {
+   "text": "For any closed subscheme $Z\\hookrightarrow X$, apply the constructions above to $Z\\to S$ and $Z_T=Z\\times_ST$. Steps 1–7 were proved for arbitrary scheme morphisms and require only that $k$ and its base change be closed, the latter supplied by [lem-weil-pbc-closed-immersion-base-change]. Steps 8–11 require only the Noetherian underlying spaces of source and bases; the closed subspaces $Z\\subseteq X$ and $Z_T\\subseteq Z$ have these by the descending-chain argument of Step 8. Thus no unverified finite-presentation hypothesis on $Z\\to S$ is being used. The same partitions, complement, and canonical morphism calculations give all the assertions for $Z$. Identity and empty closed subschemes are included: the constructions reduce respectively to identity maps and degenerate topoi.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Closed-complement construction, Tags 08LY and 08M0; the preceding proof is independent of finite presentation except for the Noetherian partition check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-pc-fibre-product",
+  "def-trf-geometric-morphism",
+  "def-trf-oriented-constructible-sheaf",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-closed-immersion",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-scheme-conventions",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-trf-etale-closed-complement-sets",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-trf-oriented-product-universal",
+  "lem-trf-set-sheaf-finite-extensivity",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XI Theorem 1.4 and §1.9, together with Stacks 04CA, 08LY, 08M0 and 093R. Direct proof for closed immersions using the oriented arrow and complementary subtopoi; not a claim that XI 1.8 or 1.10 proves integral base change."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,7 +266,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-constructible-subquotients",
@@ -77,7 +278,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof of (1) and (2), normal-cone specialization: the nearby-cycle constructibility input used before specialization-zero-section; Closed base restriction of a vanishing topos.",
+   "place": "Paragraph (1) and (2): “Varshavsky’s theorem is proved by specialization to the normal cone of Z (his §§1.3–1.4 and 2.1)”; a downstream nearby-cycle constructibility input via the retained creator chain, not a separately numbered step in that blueprint proof.",
    "via": [
     "lem-trf-oriented-constructible-subquotients",
     "lem-trf-psi-proper-surjective-constructibility",
@@ -89,5 +290,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-closed-base-restriction",
+  "worker": "stage1",
+  "summary": "Repair of returned head 397f006d7453: withdrew both proposed helper nodes and replaced the point argument by a direct closed-complement proof. The oriented arrow kills the first projection’s inverse image of the open complement, hence factors that projection through X_T; full faithfulness of the closed etale embedding lifts the oriented 2-arrow over T. Constructed mutually inverse geometric morphisms using the oriented universal property. Wrote the rectangle compatibility for both v and r, the finite local-model pullback argument, both partition directions, the degenerate complement, and the closed-Z hypothesis check. Statement and historical ancestry chain unchanged; no new nodes.",
+  "blueprint": "Current main-20261015 lem-trf-local-term-locality.proof.md, paragraph (1) and (2), the sentence on specialization to the normal cone. The existing creator chain leads to nearby-cycle constructibility; the present technical input is proved below that chain without replacing a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Generic Yoneda Hom bijection and naturality, used only to identify the inverse image of the open-complement sheaf."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic constant-ring module pullback and composition identification, to lift a topos equivalence to the stated constant-module categories."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic constant module comparison for arbitrary topoi and their slices, to retain the same finite local model."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic stability of closed immersions needed for X_T and the closed-source restriction."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity supplies the source-space hypothesis for constructible partitions."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic preservation of the trivializing-cover coproduct by a geometric inverse image."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic topological Noetherianity of a Noetherian scheme and its closed subspaces; used only for partitions."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Set-valued small-etale adjunction and base-change direct-image formula, needed to identify the complement subterminal; no trace-unit statement replaces this generic construction."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic etale representability sheaf property used in the explicit adjunction/Yoneda calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-yoneda-hom-bijection",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-e9b827156",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-e9b827156 (reviewer sub-agent of L); spot-checked: Read the item, all twelve steps, every cited node statement, unit/chapter route, report, and cited source material. Verified hypotheses, oriented base-change morphisms, finite constant-ring module coefficients, constructibility transfers, closed-subscheme variant, edge cases, route-pivot compliance, absence of SGA 4 usage, and no long-step hidden lemma. No duplicate or repair node is needed."
  }
 }

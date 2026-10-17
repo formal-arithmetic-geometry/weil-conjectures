@@ -1,0 +1,114 @@
+{
+ "id": "def-trf-topos-derived-base-change-map",
+ "kind": "definition",
+ "title": "Derived base-change map for a commutative square of ringed topoi",
+ "statement": "Let $\\mathcal E,\\mathcal E',\\mathcal F,\\mathcal F'$ be Grothendieck topoi in the chosen universe [def-weil-pbc-topos, def-weil-size-convention], with sheaves of commutative rings $A_{\\mathcal E},A_{\\mathcal E'},A_{\\mathcal F},A_{\\mathcal F'}$. Give a commutative square of ringed-topos morphisms [def-weil-pbc-ringed-topos-morphism]\n$$\\begin{array}{ccc}(\\mathcal E',A_{\\mathcal E'})&\\xrightarrow{g'}&(\\mathcal E,A_{\\mathcal E})\\\\ f'\\downarrow&&\\downarrow f\\\\(\\mathcal F',A_{\\mathcal F'})&\\xrightarrow{g}&(\\mathcal F,A_{\\mathcal F}),\\end{array}$$\nincluding compatible structural ring maps and a specified inverse-image square identification. For each corner $\\mathcal V$, put $D_{\\mathcal V}=D(\\operatorname{Mod}(A_{\\mathcal V}))$, the ordinary derived category of sheaves of modules over that corner's ring [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For every edge $a:(\\mathcal V,A_{\\mathcal V})\\to(\\mathcal W,A_{\\mathcal W})$, use module pullback $a^*M=A_{\\mathcal V}\\otimes_{a^{-1}A_{\\mathcal W}}a^{-1}M$ and module direct image $a_*$ with its structural $A_{\\mathcal W}$-action [lem-weil-pbc-ringed-topoi-module-adjunction]. Use their total derived functors $La^*:D_{\\mathcal W}\\to D_{\\mathcal V}$ and $Ra_*:D_{\\mathcal V}\\to D_{\\mathcal W}$ [lem-weil-pbc-ringed-topoi-derived-pullback, lem-weil-pbc-ringed-topoi-derived-pushforward-composition], their standard derived adjunction $La^*\\dashv Ra_*$ [lem-pc-derived-adjoint-functors], and the canonical composition identification induced by the specified ringed-topos square [lem-sfb-ringed-derived-monoidal-comparisons]\n$$\\theta:Lf'^*Lg^*\\xrightarrow{\\sim}Lg'^*Lf^*\\quad\\text{of functors }D_{\\mathcal F}\\to D_{\\mathcal E'}.$$\nThe derived base-change morphism for $K\\in D_{\\mathcal E}$ is the mate [def-weil-pbc-adjunction-mate]\n$$\\beta_K:Lg^*Rf_*K\\longrightarrow Rf'_*Lg'^*K\\quad\\text{in }D_{\\mathcal F'},$$\nwhose transpose under $Lf'^*\\dashv Rf'_*$ is\n$$Lf'^*Lg^*Rf_*K\\xrightarrow{\\theta_{Rf_*K}}Lg'^*Lf^*Rf_*K\\xrightarrow{Lg'^*\\varepsilon_{f,K}}Lg'^*K.$$\nHere $\\varepsilon_f:Lf^*Rf_*\\to\\mathrm{id}_{D_{\\mathcal E}}$ is the counit. Equivalently $\\beta_K$ is the unit $\\eta_{f',Lg^*Rf_*K}$ followed by $Rf'_*(\\theta_{Rf_*K})$ and then $Rf'_*Lg'^*(\\varepsilon_{f,K})$. For abelian sheaves, take the constant ring $\\mathbf Z$ at all four corners with the canonical inverse-image identifications; the exact inverse images then replace $La^*$, and each $D_{\\mathcal V}$ is $D(\\mathrm{Ab}(\\mathcal V))$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7, Remark base-change, and the preceding construction of derived base-change maps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topos",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-derived-adjoint-functors",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived base change map for a commutative square of topoi as an adjunction mate",
+   "results": "{\"top\": [\"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.sheafComposeNatTrans\", \"SheafOfModules.pullbackComp\"], \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf adjunctions, not the derived topos base-change map."
+  },
+  {
+   "tool": "loogle",
+   "query": "base change mate derived direct image inverse image",
+   "results": "{\"top\": [], \"note\": \"loogle: Unknown identifier `base`\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeMap|derived.*base.*change|Rf_.*inverse",
+   "results": "{\"top\": [], \"note\": \"\", \"sub\": \"Mathlib\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change transformation for a square of geometric morphisms",
+   "results": "{\"top\": [\"CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff\", \"CategoryTheory.TwoSquare.lanBaseChange_app\", \"CategoryTheory.TwoSquare.lanBaseChange\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app\", \"CategoryTheory.TwoSquare\", \"CategoryTheory.TwoSquare.natTrans\", \"CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact\", \"CategoryTheory.TwoSquare.mk\"], \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic Kan-extension/base-change infrastructure, not the requested theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change for a commutative square of ringed topoi is the mate of derived module pullback composition under the derived pullback pushforward adjunction",
+   "results": "{\"t\": \"2026-10-17T20:36:04Z\", \"tool\": \"leanfinder\", \"query\": \"Derived base change for a commutative square of ringed topoi is the mate of derived module pullback composition under the derived pullback pushforward adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"19b1e0c6818ddce0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits supply topology, underived pushforward/pullback or the abstract mate (already carried by def-weil-pbc-adjunction-mate), not this derived ringed-topos or big/small-site statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "{\"t\": \"2026-10-17T20:36:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"mateEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits supply topology, underived pushforward/pullback or the abstract mate (already carried by def-weil-pbc-adjunction-mate), not this derived ringed-topos or big/small-site statement."
+  },
+  {
+   "tool": "grep",
+   "query": "(derived.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*derived|mateEquiv)",
+   "results": "{\"t\": \"2026-10-17T20:36:02Z\", \"tool\": \"grep\", \"query\": \"(derived.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*derived|mateEquiv)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"6c5e2ed289e6fa05\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits supply topology, underived pushforward/pullback or the abstract mate (already carried by def-weil-pbc-adjunction-mate), not this derived ringed-topos or big/small-site statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical morphism Lg star Rf pushforward K to Rf prime pushforward Lg prime star K for sheaves of modules on ringed topoi",
+   "results": "{\"t\": \"2026-10-17T20:36:03Z\", \"tool\": \"leansearch\", \"query\": \"Canonical morphism Lg star Rf pushforward K to Rf prime pushforward Lg prime star K for sheaves of modules on ringed topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀\", \"PresheafOfModules.pushforward₀_obj\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pullback\"], \"digest\": \"b988f78d05a36abd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits supply topology, underived pushforward/pullback or the abstract mate (already carried by def-weil-pbc-adjunction-mate), not this derived ringed-topos or big/small-site statement."
+  }
+ ],
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proper-small-big-etale-derived-comparison",
+  "date": "2026-10-18",
+  "group": "N1"
+ },
+ "mathlib_match": null,
+ "status": "unsplit",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0DDJ part (2): the canonical comparison is the base-change transformation for the commutative square of topoi, formed as an adjunction mate",
+   "via": [
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -12,9 +12,61 @@
   "def-weil-pbc-module-localization",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=\\ker(\\psi_{i_0})$. By finite generation choose $z_1,\\ldots,z_r\\in K$ generating $K$ over $D_{i_0}$. Regard the underlying abelian groups $P_i$ and $P$ as $\\mathbf Z$-modules. Additive maps are exactly $\\mathbf Z$-linear maps, so the assumed abelian-group colimit is also their module colimit. Apply the vanishing clause of [lem-weil-pbc-filtered-colimit-modules-elementwise] separately to $\\psi_{i_0}(z_a)=0$: for each $a$ obtain $j_a\\ge i_0$ with $p_{j_ai_0}(z_a)=0$. The index category is small and filtered because $I$ is small, nonempty and directed, as required.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph; Tag 00D7 (lemma-zero-directed-limit) for eventual vanishing; Tag 07JZ (definition-localization-module) for fractions"
+   }
+  },
+  {
+   "text": "Choose a common upper bound $j$ of $i_0,j_1,\\ldots,j_r$ by repeatedly applying directedness; if $r=0$, take $j=i_0$. For any $l\\ge j$, composition compatibility gives $p_{li_0}(z_a)=p_{lj_a}(p_{j_ai_0}(z_a))=0$. For $y\\in K$, write $y=\\sum_a b_a z_a$ with $b_a\\in D_{i_0}$ using [def-weil-finitely-generated-module]. Additivity and semilinearity give $p_{li_0}(y)=\\sum_a d_{li_0}(b_a)p_{li_0}(z_a)=0$. Thus one $j$ kills the whole initial kernel at every later stage.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph; Tag 00D7 (lemma-zero-directed-limit) for eventual vanishing; Tag 07JZ (definition-localization-module) for fractions"
+   }
+  },
+  {
+   "text": "Fix $l\\ge j$ and $x\\in P_l$ with $\\psi_l(x)=0$. Apply the assumed isomorphism $W_{li_0}^{-1}P_{i_0}\\cong P_l$. By the fraction construction in [def-weil-pbc-module-localization], its preimage has the form $y/w$ with $y\\in P_{i_0}$ and $w\\in W_{li_0}$. The stipulated formula for the isomorphism gives $x=d_{li_0}(w)^{-1}p_{li_0}(y)$, hence $p_{li_0}(y)=d_{li_0}(w)x$. Here $d_{li_0}(w)$ is a unit of $D_l$ by the ring-localization hypothesis.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph; Tag 00D7 (lemma-zero-directed-limit) for eventual vanishing; Tag 07JZ (definition-localization-module) for fractions"
+   }
+  },
+  {
+   "text": "Apply the actual cocone and linearity identities to the equation of Step 3: $\\psi_{i_0}(y)=\\psi_l(p_{li_0}(y))=\\psi_l(d_{li_0}(w)x)=d_{li_0}(w)\\psi_l(x)=0$, where the scalar action on the last two expressions is the given $D_l$-action on $P$. Therefore $y\\in K$. Step 2 gives $p_{li_0}(y)=0$, and Step 3 gives $x=d_{li_0}(w)^{-1}0=0$. Thus $\\ker\\psi_l=0$. Since $\\psi_l$ is additive, $\\psi_l(x_1)=\\psi_l(x_2)$ implies $\\psi_l(x_1-x_2)=0$ and then $x_1=x_2$, proving injectivity for every $l\\ge j$. Only invertibility of localization denominators is used; no nonzerodivisor assumption is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph; Tag 00D7 (lemma-zero-directed-limit) for eventual vanishing; Tag 07JZ (definition-localization-module) for fractions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph: finite-kernel generators killed at a common later stage, then denominator argument; Tag 00D7 (lemma-zero-directed-limit) makes the eventual-vanishing assertion explicit"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +95,52 @@
    "results": "8 hits: Ring.DirectLimit.of_injective, Submodule.FG.directLimit, Module.DirectLimit.of_f, DirectLimit.Module.of_f, IsLocalizedModule.map_injective_iff_localizedModuleMap_injective, FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂, FGModuleCat.forget₂CreatesColimit, Module.DirectLimit.Eqv.of_map",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(kernel|ker).*(colimit|directLimit|DirectLimit)|eventual.*inject",
+   "results": "25 hits: Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Subobject/Limits.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern inverse systems, categorical kernels, finite-presentation kernels or the local injectivity test; none states this stabilization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated kernel in a filtered colimit with localization transition maps vanishes at a finite stage and all later colimit maps are injective",
+   "results": "8 hits: RingHom.ker_fg_of_localizationSpan, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.Limits.Concrete.colimit_rep_eq_zero, CommRingCat.FilteredColimits.colimitCoconeIsColimit, LinearMap.ker_localizedMap_eq_localized₀_ker, FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂, CommGrpCat.FilteredColimits.colimitCoconeIsColimit, FGModuleCat.forget₂CreatesColimit",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern elementwise vanishing, localization of kernels, or finite generation, not the whole directed-system assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule, Function.Injective",
+   "results": "8 hits: IsLocalizedModule.isRegular_of_smul_left_injective, IsLocalizedModule.smul_injective, IsLocalizedModule.injective_iff_isRegular, IsLocalizedModule.fromLocalizedModule.inj, IsLocalizedModule.injective_of_map_zero, IsLocalizedModule.injective_of_map_eq, IsLocalizedModule.map_injective, IsLocalizedModule.map_injective_iff_localizedModuleMap_injective",
+   "date": "2026-10-17",
+   "verdict": "no match: injective_of_map_zero assumes the kernel is already killed on the initial image; it does not produce a common stage from finite generation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed system of module localizations with finitely generated kernel at one stage has injective maps to its colimit at every sufficiently late stage",
+   "results": "8 hits: Module.DirectLimit.lift_injective, injective_of_isLocalized_span, IsLocalizedModule.map_injective, injective_of_isLocalized_maximal, Module.DirectLimit.of.zero_exact, Module.fgSystem.instDirectedSystemSubtypeSubmoduleFGMemValCoeLinearMapId, AdicCompletion.map_injective, IsLocalizedModule.map_injective_iff_localizedModuleMap_injective",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give individual eventual-zero or localization injectivity facts, not finite-kernel stabilization of a varying-ring localization system"
+  },
+  {
+   "tool": "grep",
+   "query": "injective_of_map_zero|of.zero_exact|ker.*[Ff][Gg]|[Ff][Gg].*ker",
+   "results": "14 hits: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/ZLattice/Basic.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean; subdirectory Algebra/Module",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern inverse systems, categorical kernels, finite-presentation kernels or the local injectivity test; none states this stabilization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generation lets one kill the whole kernel of a stage map to a direct limit by one transition, and localization denominators make later stage maps injective",
+   "results": "8 hits: Ring.DirectLimit.of.zero_exact, Module.DirectLimit.of.zero_exact, AddCommGroup.DirectLimit.of.zero_exact, FirstOrder.Language.DirectLimit.exists_fg_substructure_in_Sigma, FirstOrder.Language.DirectLimit.exists_quotient_mk'_sigma_mk'_eq, Module.DirectLimit.exists_of₂, injective_of_isLocalized_span, Module.DirectLimit.lift_injective",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give individual eventual-zero or localization injectivity facts, not finite-kernel stabilization of a varying-ring localization system"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-general-mod-injective",
@@ -77,5 +171,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-localization-system-kernel-stabilization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the finite-kernel/localization argument of Stacks 046Y into four steps: eventual vanishing of each initial kernel generator, a common directed upper bound killing the entire kernel at every later stage, an explicit initial-stage fraction representing a later kernel element, and the cocone/linearity calculation forcing its numerator into the killed kernel. Reused the existing elementwise-colimit Mathlib leaf and localization/finite-generation definitions; no new nodes. Fresh searches and a second semantic phrasing found no whole-item Mathlib match.",
+  "blueprint": "Realizes the recorded helper 046Y in the ancestry of lem-trf-local-term-locality (the 0GSG finite-presentation reduction); specifically the middle-paragraph finite-kernel and denominator argument used in Step 5 of lem-trf-valuation-general-mod-injective. No change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q117-0960f0f5b",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q117-0960f0f5b (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, unit/chapter route and Stacks 046Y, 00D7, 07JZ source passages. All four steps correctly prove eventual injectivity; varying scalars, localization maps and edge cases check out. No new nodes, duplicates, hidden lemmas, long steps or prohibited machinery. Full findings recorded in review.md; no repairs needed."
  }
 }

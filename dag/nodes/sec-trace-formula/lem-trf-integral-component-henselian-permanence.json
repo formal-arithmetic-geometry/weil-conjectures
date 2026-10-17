@@ -1,0 +1,83 @@
+{
+ "id": "lem-trf-integral-component-henselian-permanence",
+ "kind": "statement",
+ "title": "Connected integral algebras over henselian local rings",
+ "statement": "Let $R$ be a henselian local commutative ring [def-weil-pbc-henselian-terminology] and let $S$ be a nonzero commutative $R$-algebra integral over $R$, meaning that every element of $S$ satisfies a monic polynomial with coefficients in the image of $R$. Suppose that the only idempotents of $S$ are $0$ and $1$. Then $S$ is henselian local, the structural homomorphism $R\\to S$ is local, and the residue field $S/\\mathfrak m_S$ is algebraic over $R/\\mathfrak m_R$ [def-weil-algebraic-element]. If $R$ is strictly henselian, then $S$ is strictly henselian as well. No finiteness, reducedness or domain hypothesis is imposed on $S$.",
+ "source": {
+  "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+  "place": "Printed p. 12, permanence paragraph citing Artin Proposition 3.3 (integral algebras over quasi-acyclic rings); connected specialization with the strict-residue consequence. Stacks more-algebra.tex Tag 092X (lemma-integral-over-henselian) states the domain case; Tag 09XK (lemma-integral-over-henselian-pair) supplies the general henselian-pair input. This is the connected version, with the finite-subalgebra/filtered-colimit argument left to its own split. Online paper and both local Stacks statements read; archival Huebner--Schmidt and original Artin copies WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-algebraic-element"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral algebra over a ring with henselian local connected components has henselian local components integral over a component of the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Algebra.ZariskisMainProperty.of_isIntegral\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [p.IsPrime] [Algebra.IsIntegral R S], Algebra.ZariskisMainProperty R p\", \"doc\": \"If $ S $ is an integral extension of $ R $, then every prime ideal $ \\\\mathfrak{p} \\\\subseteq S $ satisfies Zariski's Main Theorem property: there exists an element $ r $ in the integral closure of $ R \"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected integral algebra over a henselian local ring is local henselian and is strictly henselian if its base is strictly henselian",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.IsIntegral",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]enselian.*[Ii]ntegral|[Ii]ntegral.*[Hh]enselian|[Hh]enselian.*[Cc]onnected",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral extension preserves henselian local connected components with algebraic residue field extensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"instIsAlgebraicResidueFieldOfIsIntegral\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Instances\", \"type\": \"[p.IsPrime] [q.IsPrime] [Algebra.IsIntegral A B] : Algebra.IsAlgebraic p.ResidueField q.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if $B$ is an integral algebra over $A$, then the residue field of $\\\\mathfrak\"}\n  {\"name\": \"isIntegral_localization\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \"[Algebra.IsIntegral R S] :\\n  (map Sₘ (algebraMap R S) (show _ ≤ (Algebra.algebraMapSubmonoid S M).comap _ from M.le_comap_map) :\\n      Rₘ →+* _).IsIntegral\", \"doc\": \"If $ S $ is an integral extension of $ R $, then the canonical ring homomorphism from the localization of $ R $ at a submonoid $ M $ to the localization of $ S $ at the image of $ M $ under the algebr\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u) [CommRing R] [IsLocalRing R] :\\n  TFAE\\n    [HenselianLocalRing R,\\n      ∀ f : R[X],\\n        f.Monic →\\n          ∀ a₀ : ResidueField R, aeval a₀ f = 0 → aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀,\\n      ∀ {K : Type u} [Field K],\\n        ∀ (φ : R →+* K),\\n         \", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"integralClosure.isIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \"(R A : Type*) [CommRing R] [CommRing A] [Algebra R A] : IsIntegralClosure (integralClosure R A) R A\", \"doc\": \"The integral closure of $ R $ in $ A $ is the integral closure of $ R $ in $ A $. This instance asserts that the subalgebra of $ A $ consisting of all elements integral over $ R $ satisfies the condit\"}\n  {\"name\": \"instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Instances\", \"type\": \"[Algebra.IsIntegral R S] : Algebra.IsIntegral Rₚ Sₚ\", \"doc\": \"If $ S $ is integral over $ R $, then the localization of $ S $ at the complement of a prime ideal $ P $ is integral over the localization of $ R $ at $ P $. This instance asserts that integrality is \"}\n  {\"name\": \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \"[IsDomain R] [FiniteDimensional K L] : IsIntegrallyClosed (integralClosure R L)\", \"doc\": \"If $ R $ is an integral domain and $ L $ is a finite-dimensional extension of its fraction field $ K $, then the integral closure of $ R $ in $ L $ is integrally closed.\"}\n  {\"name\": \"HenselianLocalRing.casesOn\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {motive : HenselianLocalRing R → Sort u} →\\n      (t : HenselianLocalRing R) →\\n        ([toIsLocalRing : IsLocalRing R] →\\n            (is_henselian :\\n                ∀ (f : Polynomial R),\\n                  f.Monic →\\n                    ∀ (a₀ : R),\\n        \", \"doc\": \"Given a Henselian local ring $ R $, this function allows defining a function by cases on the structure of $ R $ by specifying its behavior on the underlying local ring structure and the Henselian prop\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-artin-join-theorem-6-3",
+  "date": "2026-10-18",
+  "group": "Q05"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Printed p. 12, permanence paragraph citing Artin Proposition 3.3 (integral algebras over quasi-acyclic rings); connected specialization with the strict-residue consequence. Stacks more-algebra.tex Tag 092X (lemma-integral-over-henselian) states the domain case; Tag 09XK (lemma-integral-over-henselian-pair) supplies the general henselian-pair input. This is the connected version, with the finite-subalgebra/filtered-colimit argument left to its own split. Online paper and both local Stacks statements read; archival Huebner--Schmidt and original Artin copies WANTED.",
+   "via": [
+    "lem-trf-artin-join-theorem-6-3",
+    "lem-trf-artin-henselian-tensor-residue-dichotomy",
+    "lem-trf-artin-tensor-etale-acyclic",
+    "lem-trf-gabber-nearby-cycle-dimension-bound",
+    "lem-trf-gabber-strict-local-torsion-bound",
+    "lem-trf-finite-type-torsion-universal-star",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

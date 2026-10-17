@@ -10,43 +10,145 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-size-convention",
+  "pqf-def-affine-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each finite subset $F\\subseteq J$, construct an $S$-scheme $P_F$ with the universal property of the finite product of $(T_j)_{j\\in F}$ in schemes over $S$. Induct on $|F|$: for $F=\\varnothing$ use $P_\\varnothing=S$ and its identity structure map, which is affine by [pqf-def-affine-morphism]. If $j\\notin E$, form $P_{E\\cup\\{j\\}}=P_E\\times_ST_j$ by [def-pc-fibre-product]. Maps over $S$ into this pullback are exactly a map into $P_E$ and a map into $T_j$, so its universal property is the required one. Its projection to $P_E$ is affine by the base-change clause (1) of [lem-weil-pbc-affine-morphism-permanence], applied to $g_j:T_j\\to S$. Its structure map to $S$ is affine by [lem-weil-pbc-affine-composition] and the induction hypothesis. Thus every $P_F\\to S$ is affine.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNI, lemma-infinite-product, proof hint using Tag 01YX (lemma-directed-inverse-system-has-limit)"
+   }
+  },
+  {
+   "text": "For $F\\subseteq G$, define $r_{GF}:P_G\\to P_F$ over $S$ by forgetting the coordinates outside $F$. The finite-product universal properties give $r_{FF}=1$ and $r_{HF}=r_{GF}r_{HG}$ for $F\\subseteq G\\subseteq H$, since their composites to every factor agree. They also identify $P_G$ with $P_F\\times_SP_{G\\setminus F}$, with $r_{GF}$ the first projection: maps to either side are exactly maps to all factors indexed by $G$. This is a base-change square for the affine map $P_{G\\setminus F}\\to S$ of Step 1. Clause (1) of [lem-weil-pbc-affine-morphism-permanence] therefore makes $r_{GF}$ affine. The finite subsets of the small set $J$ form a small nonempty directed poset (the empty subset is an element and $F\\cup G$ is an upper bound). Thus $(P_F,r_{GF})$ is a small directed inverse system with affine transition morphisms.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNI, lemma-infinite-product, proof hint using Tag 01YX (lemma-directed-inverse-system-has-limit)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-limit-affine-transition] to this directed inverse system. There exists a scheme limit $T=\\varprojlim_F P_F$ with compatible legs $p_F:T\\to P_F$, and every $p_F$ is affine. Let $t=p_\\varnothing:T\\to S$ be its structure morphism. Compatibility for $\\varnothing\\subseteq F$ makes every $p_F$ an $S$-morphism. The singleton legs are consequently $S$-morphisms $\\pi_j:T\\to T_j$, using the canonical identification $P_{\\{j\\}}=T_j$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNI, lemma-infinite-product, proof hint using Tag 01YX (lemma-directed-inverse-system-has-limit)"
+   }
+  },
+  {
+   "text": "Fix any $S$-scheme $a:Y\\to S$. For a family of $S$-morphisms $h_j:Y\\to T_j$, the finite-product universal properties from Step 1 give unique $S$-morphisms $h_F:Y\\to P_F$ with these coordinates; for the empty subset take $h_\\varnothing=a$. Forgetting coordinates shows $r_{GF}h_G=h_F$. The limit universal property gives a unique scheme morphism $h:Y\\to T$ with $p_Fh=h_F$ for every $F$. At $F=\\varnothing$ this gives $th=a$, so $h$ is over $S$, and at singletons it gives $\\pi_jh=h_j$. Conversely, any $S$-morphism with these singleton composites has the same composites to every $P_F$ by finite-product uniqueness, hence equals $h$ by limit uniqueness. Thus $T$ is the product in schemes over $S$, and the limit construction already gives its stated finite-product description and affine projections. If $J$ is empty this proof gives $T=S$ with its terminal property over $S$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNI, lemma-infinite-product, proof hint using Tag 01YX (lemma-directed-inverse-system-has-limit)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-composition",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-limit-affine-transition",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CNI, lemma-infinite-product; proof hint expanded using Tags 01YX and 01SD/01SC"
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "An arbitrary product of affine scheme morphisms over a base exists as a scheme",
-   "results": "AlgebraicGeometry.pointsPi_surjective and scheme pullback instances; no arbitrary scheme product existence theorem in the queried form.",
+   "tool": "grep",
+   "query": "infinite-product|product.*affine",
+   "results": "{\"t\": \"2026-10-17T20:41:35Z\", \"tool\": \"grep\", \"query\": \"infinite-product|product.*affine\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Incorrect subdirectory prefix; repeated grep using the documented AlgebraicGeometry subdirectory. This zero result is not absence evidence.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Infinite products of affine schemes over a base exist in the category of schemes",
-   "results": "Scheme limits and affine covers appear, but no statement of Tag 0CNI.",
+   "results": "{\"t\": \"2026-10-17T20:41:36Z\", \"tool\": \"leansearch\", \"query\": \"Infinite products of affine schemes over a base exist in the category of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.AffineScheme.hasColimits\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"AlgebraicGeometry.instCategoryAffineScheme\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.AffineScheme.hasLimits\", \"AlgebraicGeometry.AffineScheme.createsLimitsForgetToScheme\", \"AlgebraicGeometry.instHasFiniteLimitsScheme\"], \"digest\": \"dc92c72bb39c7b40\"}; Read the returned hits. AffineScheme.hasLimits and createsLimitsForgetToScheme concern absolute affine schemes (AffineScheme.lean:231–247), so do not cover an arbitrary base S; finite pullbacks and affine maps supply only constituents.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits, affine product",
-   "results": "0 hits.",
+   "results": "{\"t\": \"2026-10-17T20:41:36Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, CategoryTheory.Limits, affine product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "invalid query; retried with fully qualified names"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary product of affine scheme morphisms over a base exists as a scheme",
+   "results": "{\"t\": \"2026-10-17T20:41:43Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary product of affine scheme morphisms over a base exists as a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.affine_affine_hasPullback\", \"AlgebraicGeometry.AffineScheme.hasLimits\", \"AlgebraicGeometry.instCartesianMonoidalCategoryScheme\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine\"], \"digest\": \"0e378a06eaf82e30\"}; Read the returned hits. AffineScheme.hasLimits and createsLimitsForgetToScheme concern absolute affine schemes (AffineScheme.lean:231–247), so do not cover an arbitrary base S; finite pullbacks and affine maps supply only constituents.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "infinite-product|product.*affine",
-   "results": "No declaration matching arbitrary affine scheme products over a base.",
+   "query": "AffineScheme.hasLimits|isAffineHom_isStableUnderBaseChange|pullback",
+   "results": "{\"t\": \"2026-10-17T20:41:51Z\", \"tool\": \"grep\", \"query\": \"AffineScheme.hasLimits|isAffineHom_isStableUnderBaseChange|pullback\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Incorrect subdirectory prefix; repeated grep using the documented AlgebraicGeometry subdirectory. This zero result is not absence evidence.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "products of affine morphisms over a fixed scheme indexed by a small set",
+   "results": "{\"t\": \"2026-10-17T20:41:52Z\", \"tool\": \"leansearch\", \"query\": \"products of affine morphisms over a fixed scheme indexed by a small set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AffineMap.pi\", \"AffineMap.prod\", \"AffineMap.prodMap\", \"AffineMap.coe_prod\", \"AffineMap.pi_comp\", \"AlgebraicGeometry.Scheme.AffineCover.map\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\", \"AlgebraicGeometry.Scheme.AffineCover.f\"], \"digest\": \"9e71b47b8f3da3b4\"}; Read the returned hits. AffineScheme.hasLimits and createsLimitsForgetToScheme concern absolute affine schemes (AffineScheme.lean:231–247), so do not cover an arbitrary base S; finite pullbacks and affine maps supply only constituents.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineScheme.hasLimits, IsAffineHom, pullback",
+   "results": "{\"t\": \"2026-10-17T20:41:52Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.AffineScheme.hasLimits, IsAffineHom, pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsAffineHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "invalid query; retried with fully qualified names"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme theoretic product of an arbitrary small family of affine morphisms over a scheme",
+   "results": "{\"t\": \"2026-10-17T20:41:54Z\", \"tool\": \"leanfinder\", \"query\": \"scheme theoretic product of an arbitrary small family of affine morphisms over a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineHomDescScheme\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.pointsPi\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.AffineScheme.hasLimits\", \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine\"], \"digest\": \"fc040ad244dcb523\"}; Read the returned hits. AffineScheme.hasLimits and createsLimitsForgetToScheme concern absolute affine schemes (AffineScheme.lean:231–247), so do not cover an arbitrary base S; finite pullbacks and affine maps supply only constituents.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "infinite.product|product.*affine|hasProducts",
+   "results": "{\"t\": \"2026-10-17T20:46:38Z\", \"tool\": \"grep\", \"query\": \"infinite.product|product.*affine|hasProducts\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineHom, CategoryTheory.Limits.HasProduct",
+   "results": "{\"t\": \"2026-10-17T20:46:38Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsAffineHom, CategoryTheory.Limits.HasProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-integral-surjective-refinement",
@@ -58,7 +160,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The product-existence input in Tag 0CNZ: form products of affine morphisms over the base.",
+   "place": "Proof (1)–(2), \"proved by specialization to the normal cone of Z (his §§1.3–1.4 and 2.1)\": affine product existence in the nearby-cycle proper-hyperdescent branch, via the fppf integral refinement of Tag 0CNZ.",
    "via": [
     "lem-trf-fppf-integral-surjective-refinement",
     "lem-trf-fppf-finite-surjective-refinement",
@@ -76,5 +178,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-affine-infinite-product-existence",
+  "worker": "stage1",
+  "summary": "Expanded the proof hint of Stacks 0CNI with finite products, base change and composition of affine morphisms, then the existing directed affine-transition limit theorem and an explicit universal-property proof in schemes over S, including the empty family. Reused all supporting DAG nodes; added the missing affine-morphism statement dependency. No statement change or new node.",
+  "blueprint": "Expands the affine-product-existence input of the fppf integral-refinement branch below the ancestor proof (1)–(2), specialization to the normal cone of Z. Steps 1–4 follow Tag 0CNI: construct finite products, prove affine transitions, use Tag 01YX, and verify the product universal property.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic existence and affine projections for the finite-subset inverse system, exactly the Tag 01YX input called for in Tag 0CNI; unit sk-i-curve-zero contains no replacement for this scheme-limit theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q56-c008a74ef",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-c008a74ef (reviewer sub-agent of L); spot-checked: Read the mandated DAG, unit, item, cited nodes, Stacks Tags 0CNI/01YX/01SD/01SC, blueprint route, and searches. The finite-product induction, affine transition proof, directed inverse-limit application, and universal property are correct, with edge cases checked. No duplicate, citation, route, long-step, or mathematical faults found. Wrote review.md."
  }
 }

@@ -2,7 +2,7 @@
  "id": "lem-trf-space-qc-separated-etale-local",
  "kind": "statement",
  "title": "Quasi-compactness and separation of spaces are etale local on the target",
- "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Let $\\{Y_i\\to Y\\}_{i\\in I}$ be a jointly surjective family of etale maps from schemes. Write $f_i:X\\times_YY_i\\to Y_i$ for the base changes. A morphism $g:X'\\to Y'$ of algebraic spaces is called quasi-compact if for every affine scheme $Z$ and every map $h_Z\\to Y'$ the algebraic space $X'\\times_{Y'}Z$ is quasi-compact, meaning that it admits a surjective etale map $h_U\\to X'\\times_{Y'}Z$ from a quasi-compact scheme $U$ [def-weil-pbc-quasi-compact-scheme], and separated if its representable diagonal is a closed immersion, meaning that each scheme test is a closed immersion [def-weil-closed-immersion]. Then $f$ is quasi-compact and separated if and only if every $f_i$ is quasi-compact and separated. For scheme morphisms these properties agree with [def-weil-finite-type-morphism] [def-weil-proper-morphism].",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Let $\\{Y_i\\to Y\\}_{i\\in I}$ be a jointly surjective family of etale maps from schemes. Write $f_i:X\\times_YY_i\\to Y_i$ for the base changes. A morphism $g:X'\\to Y'$ of algebraic spaces is called quasi-compact if for every affine scheme $Z$ and every map $h_Z\\to Y'$ the algebraic space $X'\\times_{Y'}Z$ is quasi-compact, meaning that it admits a surjective etale map $h_U\\to X'\\times_{Y'}Z$ from a quasi-compact scheme $U$ [def-weil-pbc-quasi-compact-scheme], and separated if its representable diagonal is a closed immersion, meaning that each scheme test is a closed immersion [def-weil-closed-immersion]. Then $f$ is quasi-compact and separated if and only if every $f_i$ is quasi-compact and separated.",
  "source": {
   "document": "literature/stacks-project/spaces-morphisms.tex",
   "place": "Tags 03KG (lemma-quasi-compact-local), (1) iff (4), and 03KM (lemma-separated-local), (1) iff (5); a family is combined by disjoint union. Quasi-compact algebraic spaces as in spaces-properties.tex Tag 03E3 (definition-quasi-compact)."
@@ -11,13 +11,73 @@
   "def-pc-scheme",
   "def-trf-algebraic-space",
   "def-weil-closed-immersion",
-  "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism",
   "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Suppose $f$ is quasi-compact and separated. For every affine scheme $Z\\to Y_i$, transitivity of fibre products gives $(X\\times_YY_i)\\times_{Y_i}Z\\cong X\\times_YZ$; its quasi-compact atlas is provided by the hypothesis on $f$. Thus each $f_i$ is quasi-compact. The diagonal of $f_i$ is the pullback of $\\Delta_f:X\\to X\\times_YX$ along $Y_i\\times_Y(X\\times_YX)\\to X\\times_YX$. On every scheme test, this is a scheme base change of a closed immersion; [lem-weil-pbc-closed-immersion-base-change] makes it a closed immersion. Hence each $f_i$ is separated as well.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03KG (lemma-quasi-compact-local), (1) implies (2), and 03KM (lemma-separated-local), (1) implies (2); scheme base change of closed immersions: morphisms.tex Tag 01QR."
+   }
+  },
+  {
+   "text": "For separatedness in the converse, assume every $f_i$ is separated. Put $B=X\\times_YX$ and test its representable diagonal on any scheme $T\\to B$. The fibre $D=X\\times_BT$ is a scheme. The composite $T\\to B\\to Y$ gives schemes $T_i=T\\times_YY_i$ forming a jointly surjective etale family over $T$ by [lem-trf-space-fibre-products-etale-covers]. Regard this as a cover of the terminal object in $T_{\\mathrm{et}}$. It is fpqc by [lem-weil-pbc-fpqc-finer-than-etale]. Transitivity identifies $D\\times_TT_i\\to T_i$ with the scheme test along $T_i\\to B\\times_YY_i$ of the diagonal of $f_i$, since $B\\times_YY_i\\cong(X\\times_YY_i)\\times_{Y_i}(X\\times_YY_i)$. It is therefore a closed immersion. Apply [lem-pc-fpqc-descend-closed-immersion] to the scheme morphism $D\\to T$ and the fpqc family $(T_i\\to T)_i$. Thus $D\\to T$ is a closed immersion for every test $T$, which is exactly separatedness of $f$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-pc-fpqc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KM (lemma-separated-local), proof of (5) implies (1); its representable descent input spaces.tex Tag 03KD is implemented here testwise by topologies.tex Tag 022C and descent.tex Tag 02L6."
+   }
+  },
+  {
+   "text": "Assume now that every $f_i$ is quasi-compact, and fix an affine scheme $Z\\to Y$. Set $A=X\\times_YZ$. By [lem-trf-space-fibre-products-etale-covers], the fibre products $Z_i=Z\\times_YY_i$ are schemes and $(Z_i\\to Z)_i$ is a jointly surjective etale family. Apply [lem-weil-pbc-etale-covering-affine-refinement] to this family over the affine scheme $Z$. It gives finitely many affine opens $W_a\\subseteq Z_{i(a)}$ with $(W_a\\to Z)_a$ etale and jointly surjective. Each $W_a$ has a map to $Y_{i(a)}$ through $Z_{i(a)}$. Quasi-compactness of $f_{i(a)}$, tested on this affine $W_a$, supplies a quasi-compact scheme $U_a$ and a surjective etale atlas $U_a\\to (X\\times_YY_{i(a)})\\times_{Y_{i(a)}}W_a\\cong A\\times_ZW_a$. In particular every $U_a$ now has its required map to $A$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-covering-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KG (lemma-quasi-compact-local), affine-test reduction and the finite-refinement argument; topologies.tex Tag 0218 (lemma-etale-affine), spaces-properties.tex Tag 03E3 (definition-quasi-compact)."
+   }
+  },
+  {
+   "text": "The composites $U_a\\to A\\times_ZW_a\\to A$ form a jointly surjective etale family. Indeed, for any scheme $R\\to A$, put $R_a=R\\times_ZW_a$. The family $(R_a\\to R)_a$ is an etale cover by [lem-trf-space-fibre-products-etale-covers]. The scheme $U_a\\times_{A\\times_ZW_a}R_a$ is canonically $U_a\\times_AR$ and is etale-surjective over $R_a$, as a base change of the chosen atlas. Apply [lem-weil-pbc-etale-covering-composition] to these two levels of scheme covers: $(U_a\\times_AR\\to R)_a$ is an etale cover. This verifies representability, etaleness and covering surjectivity on every scheme test. Hence $U=\\coprod_aU_a\\to A$ is an etale surjection. The scheme $U$ is quasi-compact: restrict an open covering to each of the finitely many quasi-compact $U_a$, choose finite subcovers, and take their finite union [def-weil-pbc-quasi-compact-scheme]. This gives the required quasi-compact atlas of $A$. Since $Z\\to Y$ was arbitrary, $f$ is quasi-compact. Together with the preceding steps this proves the equivalence.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-covering-composition",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KG (lemma-quasi-compact-local), descent on affine tests; topologies.tex Tag 0217 (lemma-etale), (2), and spaces-properties.tex Tag 03E3 (definition-quasi-compact)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-fpqc-finer-than-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KG (lemma-quasi-compact-local) and 03KM (lemma-separated-local), with the scheme-test form of representable descent from spaces.tex Tag 03KD; topologies.tex Tags 0217, 0218, 022C; descent.tex Tag 02L6; spaces-properties.tex Tag 03E3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-space-ample-local",
@@ -78,5 +138,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-space-qc-separated-etale-local",
+  "worker": "stage1",
+  "summary": "Repair of returned head 93c5bc5488. The imported statement falsely identified the scheme notions in this theorem with finite type and properness; Spec k[x_1,x_2,\\ldots] \\to Spec k is quasi-compact and separated but neither finite type nor proper. I removed that clause and its Step 5 proof, leaving the four steps proving exactly the etale-local equivalence for quasi-compactness and separatedness. E3/E4 is repaired by taking affine W_a in Z\\times_YY_i, and C1/D3 by applying existing fpqc closed-immersion descent to each scheme test of the representable diagonal. No new nodes are needed.",
+  "blueprint": "Realizes the imported proof sentence in the ancestry of lem-trf-local-term-locality asserting that quasi-compactness and separation of spaces are etale local on the target.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Forms the scheme tests and preserves etale covering families under the base changes needed for this algebraic-space locality tool in the polarized-descent ancestry."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Converts the etale cover of a scheme test of the diagonal to an fpqc cover; no node of sk-i-curve-zero supplies this general topology comparison."
+   },
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Descends the closed immersion D -> T on each scheme test of the diagonal. This general scheme descent tool supplies the missing input of the source proof and does not replace the trace-formula unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N0-58ef23d29",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-58ef23d29 (reviewer sub-agent of L); spot-checked: Read the packet, report, unit/chapter route, item, all four proof steps, every cited node, and Stacks sources Tags 03KG, 03KM, 03E3, 02X2, 04T9, 041F, 01QR, 022C, 0218, 0217, and 02L6. The removed finite-type/properness clause is fully absent. Remaining hypotheses, base changes, diagonal tests, etale/fpqc descent, affine refinement, finite atlas construction, empty-family cases, and tool uses check out. No duplicate/new node, route-pivot, SGA, or coefficient-category issue found. Review written to review.md."
  }
 }
