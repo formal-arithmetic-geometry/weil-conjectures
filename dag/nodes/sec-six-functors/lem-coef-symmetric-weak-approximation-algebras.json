@@ -14,9 +14,195 @@
   "lem-cbc-relative-coslice-left-fibration",
   "lem-coef-infinity-relative-cone-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=N(\\mathsf{Fin}_*)$. We first record how the chosen witness $f=ge$ can be used in strict relative functor categories. For an isofibration $V\\to B$, postcomposition $\\operatorname{Fun}(T,V)\\to\\operatorname{Fun}(T,B)$ is an isofibration by exponentiation (take the empty subobject of $T$). Precomposition by an equivalence $e:C\\to D$ is an equivalence on the two total functor categories: compose with a quasi-inverse of $e$ and its two natural equivalences, which remain equivalences by the pointwise criterion. The strict fibres over the prescribed base functors are categorical pullbacks by the isofibration-pullback statement. The equivalence of these pullbacks therefore gives the asserted equivalence $e^*$ on strict relative functor categories, with all transformations. The maps $P\\to S$ and $Q\\to S$ are isofibrations: base isomorphisms are inert, their cocartesian lifts have inverse lifts, and cocartesian cancellation/initiality identifies the composites with identities. This argument also applies with $V\\to B$ equal to either witness $D'\\to P$. Consequently two witnesses admit an equivalence $k:D\\to D'$ over $P$ and an equivalence $ke\\simeq e'$ over $P$: obtain $k$ from the essential surjectivity of restriction, and its inverse from the other restriction; full faithfulness identifies their composites. Such an equivalence identifies the local lift categories over each fixed colour projection. By the cocartesian mapping criterion it preserves and reflects their locally cocartesian edges, and it preserves the condition that the image in $P$ is inert. Hence it identifies the two local-projection algebra subcategories. This proves the claimed independence of the witness as well as the ambient transport used below.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-symmetric-operadic-fibration-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 2.3.3.6 and 2.3.3.20, Remark 2.3.3.7; expanded strict-fibre argument"
+   }
+  },
+  {
+   "text": "The unary hypothesis does pass to this witness, for a specific reason. The strict fibres $C_{\\langle1\\rangle}$ and $D_{\\langle1\\rangle}$ are quasicategories: the base is the nerve of an ordinary category, so a filler of a horn whose base is constant has constant base. For two objects of the fibre their mapping spaces are exactly the components over $1_{\\langle1\\rangle}$ of the ambient mapping spaces. The fully faithful equivalence $e$ identifies these components. Given $d\\in D_{\\langle1\\rangle}$, choose $c$ and an equivalence $e(c)\\simeq d$. Its base is a pointed bijection onto $\\langle1\\rangle$, forcing $c$ to have arity one and that bijection to be the identity. Thus $e_{\\langle1\\rangle}$ is also essentially surjective, and the equivalence criterion gives that it is an equivalence. Since $f_{\\langle1\\rangle}=g_{\\langle1\\rangle}e_{\\langle1\\rangle}$, $g_{\\langle1\\rangle}$ is an equivalence. All subsequent steps concern $g$, and Step 1 will return the answer to $f$.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, first reduction; explicit check of the strict unary fibre"
+   }
+  },
+  {
+   "text": "We will use the symmetric product axiom in its relative-cone form. For objects $z_i\\in Q_{\\langle1\\rangle}$, the Segal equivalence produces $z\\in Q_{\\langle n\\rangle}$ and inert projection legs to the $z_i$ (correct equivalent endpoints by the isofibration property). These legs form a $q$-limit over the discrete colour-projection cone; conversely such a relative product cone has inert legs. Here is the mapping-space verification, to specify exactly which axiom is used. For any test cone $t=(a\\to a_i)$, put $M=\\operatorname{Map}_Q(a,z)$, $V=\\prod_i\\operatorname{Map}_Q(a,z_i)$ and $H=\\prod_i\\operatorname{Map}_Q(a_i,z_i)$, and use subscript $S$ for their base analogues. The symmetric output-mapping axiom says on every fibre over an edge $u$ that $M\\to V\\times^h_{V_S}M_S$ is an equivalence; homotopy-fibre detection makes it an equivalence of spaces. The join-cone mapping formula and pullback pasting give\n$$\\operatorname{Map}_{\\operatorname{Fun}(\\{1,\\ldots,n\\}^{\\triangleleft},Q)}(t,z)\\simeq H\\times^h_V M\\simeq H\\times^h_{H_S}(H_S\\times^h_{V_S}M_S),$$\nexactly the defining relative-limit square. For the converse, compare the proposed cone with the constructed inert cone with the same boundary and base. The same relative universal square, on its fibres over the identity base cone and identity boundary, supplies maps in both directions and contractible spaces of comparisons; their composites are identities up to homotopy. The cone vertices are therefore equivalent over $\\langle n\\rangle$, so the proposed legs are inert by the cocartesian mapping criterion. This includes $n=0$: the products of spaces are points and the required equivalence is $M\\simeq M_S$. No presentability of $Q$ is used.",
+   "uses": [
+    "lem-coef-symmetric-operadic-fibration-recognition",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10 and Theorem 2.3.3.23 proof, relative-product uses on pp. 267-268"
+   }
+  },
+  {
+   "text": "Take the Cartesian unstraightening $u:E\\to\\Delta^1$ of $g:D\\to P$, with $E_0=P$ and $E_1=D$. Its cross-fibre mapping spaces satisfy $\\operatorname{Map}_E(x,d)\\simeq\\operatorname{Map}_P(x,g(d))$, naturally: this is the Cartesian mapping-fibre formula at a chosen Cartesian edge $g(d)\\to d$. The colimit of the classifying diagram $D\\to P$ is $P$, since its index has final object $P$. The Cartesian-colimit-localization theorem supplies a retraction $r:E\\to P$ and the equivalence\n$$\\operatorname{Fun}(P,T)\\simeq\\operatorname{Fun}_{\\mathrm{Cart}(u)}(E,T).$$\nIts canonical colimit cocone has the identity leg on the terminal object $P$ and the leg $g$ on $D$; choose this standard representative so $r|_P=1_P$ and $r|_D=g$. If the simplicial representatives record these endpoint maps only up to coherent equivalence, the exponentiation isofibration lifts the endpoint equivalences and the isofibration-pullback statement identifies the resulting strict fibres. Give $E$ the base functor $pr$. Apply this equivalence for both $T=Q$ and $T=S$; strict fibres are categorical fibres by Step 1. Let $\\mathcal X$ be the full subcategory of $\\operatorname{Fun}_{S}(E,Q)$ whose restriction to $P$ preserves inert arrows and whose $u$-Cartesian arrows have equivalence images. Then restriction $\\mathcal X\\to\\operatorname{Alg}(P,Q)$ is an equivalence, with inverse $A\\mapsto Ar$.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-coef-cartesian-colimit-localization",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, p. 266: Cartesian cylinder, retraction and category X"
+   }
+  },
+  {
+   "text": "Fix $x\\in P_{\\langle n\\rangle}$. Write $K_x=D\\times_EE_{x/}$, with objects $\\alpha:x\\to g(d)$, and let $I_x\\subset K_x$ be full on those objects for which $\\alpha$ is inert in $P$. These are quasicategories, using the join-coslice left fibration and pullback along $D\\to E$. Compare $K_x$ with $K'_x=D\\times_PP_{x/}$, formed with $g$. The retraction $r$ of Step 4 satisfies $r|_P=1_P$ and $r|_D=g$, so it induces a map $K_x\\to K'_x$ over $D$. Both are left fibrations over $D$ by the join-coslice left-fibration statement and pullback. On the fibre over $d$ the map is $\\operatorname{Map}_E(x,d)\\to\\operatorname{Map}_P(x,g(d))$ induced by $r$. By the Cartesian mapping-fibre statement, composition with the Cartesian edge $c_d:g(d)\\to d$ identifies the source with $\\operatorname{Map}_P(x,g(d))$. The Cartesian-colimit localization says that $r$ carries $c_d$ to an equivalence of $P$. Hence the fibre map is an equivalence, and the vertex-fibre criterion for left fibrations makes $K_x\\to K'_x$ an equivalence over $D$. Inertness of an object is read off from its image in $P$, so this equivalence identifies $I_x$ with the full subcategory $I'_x\\subset K'_x$ on inert $\\alpha$. It therefore identifies the homotopy comma categories $(I_x)_{/a}$ and $(I'_x)_{/r(a)}$. Steps 6 and 7 compute their indexing categories in $K'_x$ through the same equivalence. Now let $a:x\\to g(d)$ be an object of $K'_x$. The comma category $(I'_x)_{/a}$ has objects $\\beta:d'\\to d$ and inert $\\gamma:x\\to g(d')$, together with the coherent triangle $g(\\beta)\\gamma\\simeq a$. Its simplices are the simultaneous join-slice simplices of the displayed $F_g(d,a)$ from the statement, so it is weakly contractible. Hence so is $(I_x)_{/a}$ for every object $a$ of $K_x$. The opposite comma criterion says that $I_x\\to K_x$ is coinitial. Its cone comparisons, applied to $Q$ and $S$, identify the constant-source mapping spaces naturally; together with the join-cone formula they preserve and reflect the relative-limit square. The dual relative-join-slice restriction supplies extensions with exactly prescribed boundary on $K_x$ and prescribed base cone. Thus both existence and the universal property of a $q$-limit over $K_x$ can be tested on $I_x$. Notice that $I_x$ is full: its comparisons were never restricted to inert arrows of $D$.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-cofinal-relative-join-slice-restriction",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-coef-cartesian-colimit-localization",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, p. 267: coinitial inert-factorization subcategory"
+   }
+  },
+  {
+   "text": "Let $J_x\\subset I_x$ be full on the objects with target in $D_{\\langle1\\rangle}$. Take $A_0\\in\\mathcal A_g(D,Q)$ and put $H=A_0|_{I_x}$. We claim $H$ is pointwise $q$-right Kan extended from $J_x$. At $\\alpha:x\\to g(d)$ in $I_x$, say $d$ has arity $m$, the indexing coslice $(J_x)_{\\alpha/}$ splits into $m$ components indexed by the output colours of $d$. To see this, a triangle $x\\to g(d)\\to g(d')$ with both maps from $x$ inert and $d'$ unary forces the base map $d\\to d'$ to be a unique projection $\\rho_i:\\langle m\\rangle\\to\\langle1\\rangle$. Cocartesian cancellation makes the edge in $P$ inert as well. Each component is the lift category of arrows $d\\to d'$ over that fixed base edge, with the additional inert-composite condition. Choose the locally $pg$-cocartesian projection $\\delta_i:d\\to d_i$ promised by the hypothesis. Its image is inert, so its composite with $\\alpha$ gives an object of the component. In the pullback over the fixed base edge, cocartesian initiality makes $\\delta_i$ initial; the same is true in the full subcategory just described because it contains $\\delta_i$. The join-slice mapping formula identifies these lift categories with the stated coslice components, including the contractible triangle choices. The relative-limit initial-components lemma reduces the Kan condition to the discrete cone $A_0(d)\\to A_0(d_i)$. Its legs are inert by the definition of $\\mathcal A_g$, so Step 3 proves the required relative product. This also handles $m=0$, when the indexing coslice is empty.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-relative-limit-initial-components",
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-symmetric-operadic-fibration-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, p. 267: right Kan extension from the unary inert targets; initial, not final, lift objects"
+   }
+  },
+  {
+   "text": "The category $J_x$ is the disjoint union of $n$ components $J_{x,i}$, according to the base projection $\\rho_i:\\langle n\\rangle\\to\\langle1\\rangle$. Choose inert projections $x\\to x_i$ in $P$ and, by the equivalence $g_{\\langle1\\rangle}$ established in Step 2, objects $d_i$ with equivalences $x_i\\simeq g(d_i)$. These give objects $t_i=(x\\to g(d_i))$ in $J_{x,i}$. They are initial. Indeed for $t=(x\\to g(d))$ in this component, its mapping space from $t_i$ is the homotopy fibre of\n$$\\operatorname{Map}_{D_{\\langle1\\rangle}}(d_i,d)\\longrightarrow\\operatorname{Map}^{\\rho_i}_P(x,g(d))$$\nover the arrow specifying $t$. The first map is an equivalence onto $\\operatorname{Map}_{P_{\\langle1\\rangle}}(g(d_i),g(d))$ by full faithfulness, and precomposition with the inert arrow specifying $t_i$ is an equivalence by the cocartesian mapping criterion. Its fibre is contractible. The displayed mapping fibre is the join-coslice mapping formula (or the same relative cocartesian criterion), so the argument includes the coherent triangles. The initial-components lemma and Step 3 now give a $q$-limit of $A_0|_{J_x}$ over the prescribed base cone, and characterize such cones by inert legs to the $A_0(d_i)$. In arity zero $J_x$ is empty; the arity-zero axiom of $Q$ gives its relative empty product.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-relative-limit-initial-components",
+    "lem-coef-symmetric-operadic-fibration-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1) proof, p. 267: unary components; explicit initiality calculation"
+   }
+  },
+  {
+   "text": "Apply the cone-comparison clause of relative right Kan restriction to Step 6: the relative limit on $J_x$ extends to one on $I_x$, and an existing cone on $I_x$ is limiting exactly when its unary restriction is. Step 5 then extends it to $K_x$ and detects its relative universal property there. Consequently, for every $A_0\\in\\mathcal A_g(D,Q)$, the relative limits required to extend $A_0$ from the full subcategory $D\\subset E$ exist at every vertex of $P$. At a vertex $d\\in D$, the indexing category $D\\times_E E_{d/}$ has initial object $1_d$, and the initial-components lemma gives its canonical limit at $A_0(d)$. Relative right Kan restriction now produces an extension $A:E\\to Q$ over $S$, on all coherent simplices. More precisely, such an $A$ is right Kan extended from $A_0$ if and only if for each $x$ its legs to the chosen initial unary targets $d_i$ of Step 7 are inert. This criterion follows by applying in order Step 5, the cone comparison of Step 6, the initial-components lemma of Step 7, and the converse product criterion of Step 3.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-relative-limit-initial-components",
+    "lem-coef-cofinal-relative-join-slice-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, pp. 267-268: (a) and the precise criterion (b-prime)"
+   }
+  },
+  {
+   "text": "Suppose $A\\in\\mathcal X$. The localization equivalence of Step 4 gives $A\\simeq(A|_P)r$ over $S$. Restricting to $D$ shows that $A_0=A|_D$ carries every specified local projection to an inert edge, since $g$ carries it to an inert edge and $A|_P$ preserves these. Inertness is invariant under equivalent functors by the cocartesian mapping criterion, so $A_0\\in\\mathcal A_g$. For each $x$, its legs to the objects $d_i$ of Step 7 are composites of inert arrows in $P$ and Cartesian comparison edges, which $A$ sends to equivalences. Their images are therefore inert. Step 8 proves that $A$ is pointwise right Kan extended from $A_0$.",
+   "uses": [
+    "lem-coef-cartesian-colimit-localization",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-relative-right-kan-universal-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, p. 268: (b), forward implication"
+   }
+  },
+  {
+   "text": "Conversely, let $A$ be right Kan extended from $A_0\\in\\mathcal A_g$. For $d\\in D_{\\langle n\\rangle}$ choose its local projections $d\\to d_i$ and put $x=g(d)$. The objects $(x\\to g(d_i))$ are among the initial unary targets of Step 7: they are inert, and the mapping-space calculation there applies to any such object. Step 8 makes the legs $A(x)\\to A_0(d_i)$ inert. The legs $A_0(d)\\to A_0(d_i)$ are inert by the algebra condition. They are two relative product cones with the same boundary and base; the comparison $A(x)\\to A_0(d)$ induced by the Cartesian edge is therefore an equivalence by Step 3's universal-comparison calculation. All $u$-Cartesian edges have equivalence images. For the canonical Cartesian edge $g(d)\\to d$ this was just proved. For any other $u$-Cartesian edge $e:x\\to d$, the Cartesian mapping-fibre statement factors it through the canonical edge by an edge $h:x\\to g(d)$ in $P$. Since both edges over $\\Delta^1$ are Cartesian, the dual of cocartesian composition and the relative-cone equivalence shows that $h$ is Cartesian over the identity and hence an equivalence; $A$ sends both $h$ and the canonical edge to equivalences. A $u$-Cartesian edge over a degenerate edge of $\\Delta^1$ is an equivalence by the same lift-category comparison with the identity, and $A$ sends it to an equivalence. Thus condition (ii) defining $\\mathcal X$ holds, including at arity zero.\n\nNext let $v:x\\to y$ be inert in $P$. Choose inert colour projections $y\\to y_j$, replace $y_j$ by equivalent $g(d_j)$ using $g_{\\langle1\\rangle}$, and use the Cartesian edges $g(d_j)\\to d_j$. Step 8 makes $A(x)\\to A_0(d_j)$ inert. The latter Cartesian comparisons are equivalences, so $A(x)\\to A(y_j)$ is equivalent, by an inverse equivalence, to an inert composite; it is inert by cocartesian composition and the mapping criterion. Applied to $y$ itself the same reasoning makes $A(y)\\to A(y_j)$ inert. To deduce that $A(v)$ is inert, take a cocartesian lift of its inert base map from $A(x)$ and factor $A(v)$ through it by the cocartesian mapping criterion. Both resulting cones to the $A(y_j)$ are relative products by Step 3; their comparison over the identity is an equivalence. Thus the factor after the chosen cocartesian lift is an equivalence, and cocartesian composition makes $A(v)$ cocartesian. This also applies when $y$ has arity zero, using the empty relative product. Therefore $A|_P$ preserves every inert arrow and $A\\in\\mathcal X$.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-symmetric-operadic-fibration-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23 proof, p. 268: (b), converse; explicit Cartesian-edge and all-inert tests"
+   }
+  },
+  {
+   "text": "By Steps 8-10, $\\mathcal X$ is exactly the full subcategory of pointwise right Kan extensions whose restrictions are in $\\mathcal A_g(D,Q)$. The universal-restriction theorem gives a trivial Kan fibration $\\mathcal X\\to\\mathcal A_g(D,Q)$, because every such boundary has an extension by Step 8; pulling the theorem's restriction back to this full subcategory retains the boundary-lifting property. Combined with Step 4, this yields $g^*:\\operatorname{Alg}(P,Q)\\simeq\\mathcal A_g(D,Q)$. Step 1 transports it through $e^*$ to $\\mathcal A_f(C,Q)$. The resulting functor on an arbitrary simplex is $A\\mapsto A\\circ g\\circ e=A\\circ f$, since the section in Step 4 was composition with $r$. It is the displayed restriction functor, with all noninvertible transformations and their higher coherences. Step 1 also proved that the target is independent of the witness. If the colour categories are empty, no unary choices are needed at positive arity; the remaining arity-zero cases were covered in Steps 3, 6, 7 and 10. No Kan hypothesis on the colour category has been introduced.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), end of proof and restriction identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-coef-cartesian-colimit-localization",
+  "lem-coef-cofinal-relative-join-slice-restriction",
+  "lem-coef-infinity-cartesian-mapping-fiber",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-relative-limit-initial-components",
+  "lem-coef-relative-right-kan-universal-restriction",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-symmetric-operadic-fibration-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-coefficient derived mapping-complex comparison; explicit expansion of Higher Algebra Theorem 2.3.3.23(1), pp. 266-268, read online (not archived)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +241,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-approximation-marked-equivalence",
@@ -82,5 +268,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-weak-approximation-algebras",
+  "worker": "stage1",
+  "summary": "Repaired the retained Cartesian-cylinder proof into eleven explicit steps: strict-fibre transport and unary invariance, the symmetric relative-product calculation, coinitial inert slices, right Kan extension from unary components, and both implications of the extension criterion. Replaced every nonsymmetric-operad citation; retained statement, ancestry and historical searches. No new nodes.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient operadic restriction comparison in the derived mapping-complex argument, using the inherited operadic approximation and right-Kan foundations.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Generic coherent join-coslice left-fibration and pullback calculus, already a statement dependency of the item, supplies the small indexing coslices in Steps 5-7. It does not replace any unit-level proof step; no same-unit node states this relative coslice interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-7b480b2ff",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-7b480b2ff (reviewer sub-agent of L); spot-checked: Read the item, all 19 proof dependencies and 5 statement dependencies, unit sk-prop-sf-biduality-general and delivery-errors A-F. No new nodes. No dependency path leads back to the item (graph walk). The source, HA 2.3.3.6/2.3.3.20/2.3.3.23(1), is not archived and network access is blocked for readers, so it could not be opened and the WANTED entry stands. The statement is unchanged by this delivery and checked mathematically: its condition (1), locally pg-cocartesian lifts with inert image, implies the locally g-cocartesian version, and the algebra condition agrees up to equivalence. So nothing is strengthened beyond the source and nothing is weakened. Small cases checked: f=id, empty colour category, the unary endomorphisms {id,0}, arity 0, and the fact that sigma∘(inert) inert forces sigma=rho_i. Steps 1-4 and 6-11 checked against the cited statements and correct (relative product via join-cone, fibre detection and pasting; cylinder localization with r|_P=1, r|_D=g; initial components; right-Kan trivial fibration). Fault E5 in Step 5: it said (I_x)_{/a}, a comma category in the cylinder E, has 'precisely' the simplices of F_g(d,a), which is defined in P. Repaired by comparing K_x with D×_P P_{x/} through r: a map of left fibrations over D that is an equivalence on fibres by lem-coef-infinity-cartesian-mapping-fiber, lem-coef-cartesian-colimit-localization and the vertex-fibre criterion of lem-coef-simplicial-right-fibration-presentation (added to uses and proof_deps). Step 10: added Cartesian edges over degenerate edges and the correct cancellation direction. Accepted tool use: lem-cbc-relative-coslice-left-fibration (generic coslice calculus, already a statement dependency). Corrected node written to fixes/dag/nodes/sec-six-functors/lem-coef-symmetric-weak-approximation-algebras.json.; 1 file(s) fixed by the reviewer"
  }
 }
