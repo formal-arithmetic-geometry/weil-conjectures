@@ -16,9 +16,168 @@
   "def-weil-derived-complete",
   "def-weil-linear-scalar-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=\\widehat{\\mathcal O}_{E,X}$, $B_n=(A_{E,n})_X$, $r=j_U^*$, and choose a containing module universe in which the site and its slices are small. Restriction is exact and has the exact left adjoint $j_{U!}$ by [lem-pur-site-restriction-module-adjunction-exact]. Their termwise functors compute their derived functors, so [lem-pc-derived-adjoint-functors] gives the derived adjunction $j_{U!}\\dashv r$. In particular $r$ preserves derived products: for any $T$ on the slice, $\\operatorname{Hom}(T,r\\prod_i^D Z_i)=\\operatorname{Hom}(j_{U!}T,\\prod_i^D Z_i)=\\prod_i\\operatorname{Hom}(T,rZ_i)$. The comparison is the one with components the restricted projections. On sheaves, limits are sectionwise by [lem-weil-pbc-module-sheaves-limits-sectionwise], hence restriction literally commutes with their products and with restriction of scalars along $B\\to B_n$. The slice ring is $rB$, with its original coefficient actions, by [def-pur-localized-ringed-site].",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ (sites-modules-lemma-extension-by-zero-exact); with literature/stacks-project/derived.tex Tag 09T5 (derived-lemma-derived-adjoint-functors); product comparison by the displayed adjunction calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the localization morphism of topoi, whose ring map is the identity of $rB$. Module pullback is $B|_U\\otimes_{B|_U}(-|_U)$ and is identified with $r$. Thus a flat-term K-flat representative $P$ remains flat-term K-flat after restriction, and the canonical tensor comparison gives $r(P\\otimes_B B_n)=rP\\otimes_{rB}rB_n$. This computes $r(K\\otimes_B^L B_n)\\cong rK\\otimes_{rB}^L rB_n$, including the quotient transitions and maps from $K$, because all these maps on representatives are induced by the same coefficient projections. This applies to any input complex, including $M$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "For $K$ in the stated category, [def-weil-derived-complete-integral-detailed] supplies a Roos triangle witnessing [def-weil-derived-complete]. Apply the exact derived restriction of step 1 to that triangle. The product comparison of step 1 and the reduction comparison of step 2 carry its first map to the family of reduction maps for $rK$ and its middle map to $1-s_U$: component $n$ is projection to $n$ minus transition composed with projection to $n+1$. The resulting distinguished triangle is exactly the derived-completeness condition on the slice. Repeat with $M$. No assertion about constructibility on the slice or a new uniform amplitude bound is needed for this conclusion.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-complete",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (derived-definition-derived-limit, Roos triangle); with literature/stacks-project/sites-modules.tex Tag 03DJ (exact restriction); application to the stated completeness condition"
+   }
+  },
+  {
+   "text": "Choose flat-term K-flat representatives $P,Q$ of any two inputs. The integral tensor of [def-pur-integral-derived-operations] is the specified shifted cone for the strict tower $C_n=\\operatorname{Res}_n\\operatorname{Tot}(P_n\\otimes_{B_n}Q_n)$. By [lem-weil-proetale-countable-products-exact] and [lem-weil-derived-limit-existence], the ambient termwise products represent derived products. Step 2 identifies $rC_n$ with the slice tower used in the same construction. Step 1 therefore identifies its termwise product with the product in the slice derived category as well. Exact restriction commutes with finite direct sums, shifts and the explicit mapping-cone differential. Consequently it carries $\\operatorname{Cone}(1-s)[-1]$ to $\\operatorname{Cone}(1-s_U)[-1]$, yielding the asserted completed tensor comparison. It also preserves the canonical map from the ordinary tensor to this cone: on a representative it is $z\\mapsto((z\\bmod\\varpi_E^n)_n,0)$. This is a comparison of actual complexes, not a uniqueness assertion for arbitrary triangulated cones. Functoriality under changing representatives is [lem-pur-integral-operations-well-defined].",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08TC, 0941; Bhatt–Scholze Definition 3.4.10; explicit cone comparison"
+   }
+  },
+  {
+   "text": "The internal Hom in the item is ordinary ringed-site derived internal Hom, by [def-pur-integral-derived-operations]. Thus [lem-weil-pbc-ringed-internal-hom-exact-restriction] supplies $rH(L,N)\\cong H_U(rL,rN)$ for all unbounded inputs, where $H=R\\mathcal Hom_B$. Use its model normalization from [lem-weil-pbc-ringed-slice-evaluation-transpose]: restrict a K-injective representative of the second variable and identify the local families of module maps. This gives precisely the asserted comparison for $K,M$ and also for $K,B$. The coefficient object restricts to $rB[0]$ with the identity coefficient action. All the comparisons so far compose under $V\\to U$, since further slice restriction just forgets one more structural arrow and the maps of sections, quotient towers, products and cone coordinates are unchanged.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB, 08FI; relocalization 03EH (Sites)"
+   }
+  },
+  {
+   "text": "We now identify the completion unit used to define completed evaluation. By [lem-weil-l-adic-extension-integers-dvr], $\\mathcal O_E$ is a PID contained in $E$ and $\\varpi_E\\ne0$; all its ideals are therefore finitely generated, so it is Noetherian. Apply [lem-weil-pbc-completed-constant-sheaf-reduction] with $A=\\mathcal O_E$ and $I=(\\varpi_E)$. The free resolution $[A\\xrightarrow{\\varpi_E^n}A]$ of $A/\\varpi_E^n$, in degrees $[-1,0]$, gives a quasi-isomorphism $Q_n=[B\\xrightarrow{\\varpi_E^n}B]\\to B_n$. The transition on $Q_n$ is $(\\varpi_E,1)$; the quotient maps therefore give a strict map of towers. The same assertion holds after exact restriction to any slice. For a flat-term K-flat representative $P$ of $Z$, tensoring these maps with $P$ gives a levelwise quasi-isomorphism to its reduction tower. Taking total derived inverse limits preserves this quasi-isomorphism, by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. By [lem-weil-pbc-ringed-cech-koszul-dual-limit] its source is canonically $H(C_{\\varpi_E},Z)$, where $C_{\\varpi_E}=[B\\to B[1/\\varpi_E]]$. The unit is the strict-tower unit, not an arbitrary lift of the projections. By [lem-weil-pbc-extended-cech-completion-model], this identifies $C(Z)=R\\lim_n\\operatorname{Res}_n(Z\\otimes_B^L B_n)$, with this unit $\\eta_Z$, as the reflection into locally derived $(\\varpi_E)$-complete objects. These statements apply on every slice with $rB,rB_n$ too.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-extended-cech-completion-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099F (proposition-derived-completion), 0A0E (lemma-derived-completion-koszul); Koszul comparison 0913 and 0A0A; coefficient reduction in Bhatt–Scholze §6.5"
+   }
+  },
+  {
+   "text": "The completeness condition of the item implies the local completeness in step 6. Indeed the Roos triangle in [def-weil-derived-complete] identifies its object, with its maps to the reductions, with their total derived limit; this total limit is $C(Z)$ of step 6 and is locally complete. Local completeness is invariant under isomorphism. Hence $M$ and $rM$ are locally complete by step 3. Moreover $H(K,M)$ is locally complete: for every further slice $W$ and every $f\\in(\\varpi_E)B(W)$, the internal-Hom and restriction calculus of [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives\n$$H_W(B_W[1/f],H_W(K_W,M_W))\\cong H_W(K_W,H_W(B_W[1/f],M_W))=0.$$\nThe exchange uses the two tensor-Hom currying isomorphisms and tensor symmetry; the last equality is exactly local completeness of $M$. The same computation gives local completeness of $H_U(rK,rM)$. In particular precomposition with $\\eta_Z$ induces a bijection $\\operatorname{Hom}(C(Z),H(K,M))\\cong\\operatorname{Hom}(Z,H(K,M))$, and likewise on the slice, by the reflection in step 6.",
+   "uses": [
+    "def-weil-derived-complete",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099A (lemma-derived-complete-internal-hom); reflection Tag 099F; Bhatt–Scholze Lemma 3.4.11"
+   }
+  },
+  {
+   "text": "Set $D_K=H(K,B)$ and $Z=D_K\\otimes_B^L M$. Let $u:Z\\to H(K,M)$ be the ordinary evaluation comparison: its tensor-Hom adjunct is\n$$(D_K\\otimes^L M)\\otimes^L K\\longrightarrow(D_K\\otimes^L K)\\otimes^L M\\xrightarrow{\\operatorname{ev}_{K,B}\\otimes1}B\\otimes^L M\\longrightarrow M.$$\nThe first arrow is tensor associativity and the symmetry interchanging $M,K$; the last is the coefficient unitor. [lem-weil-pbc-ringed-slice-evaluation-transpose] says that the canonical restriction comparisons preserve the counit, transposition and Koszul symmetry. The tensor comparison is the termwise one of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; on pure tensors it preserves reassociation and $b\\otimes m\\mapsto bm$. Thus the displayed adjunct restricts to the identical displayed adjunct on the slice, and transposition shows that $r(u)$ is the ordinary slice comparison under step 5.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9, 08JB and 07A4; explicit adjunct and coefficient-unit normalization"
+   }
+  },
+  {
+   "text": "There is a canonical identification $C(Z)=D_K\\widehat\\otimes^L M$: using K-flat representatives $P,Q$, its level-$n$ identification is the balanced tensor isomorphism\n$$(P\\otimes_B Q)\\otimes_B B_n\\cong(P\\otimes_B B_n)\\otimes_{B_n}(Q\\otimes_B B_n),\\quad(p\\otimes q)\\otimes a\\mapsto(p\\otimes1)\\otimes(q\\otimes a).$$\nIts inverse multiplies the two $B_n$-coefficients, and these formulas commute with differentials, quotient transitions, and the unit maps. The completed evaluation comparison is the adjunct of evaluation under the completed tensor-Hom adjunction (Bhatt–Scholze Lemma 3.4.11), whose transposition is precomposition with the completion unit; thus it is the unique arrow $\\widehat u:C(Z)\\to H(K,M)$ with $\\widehat u\\eta_Z=u$, using step 7. The product/cone comparison of step 4 also identifies $rC(Z)$ with $C_U(rZ)$ and $r\\eta_Z$ with $\\eta_{rZ}$. Restrict the equality $\\widehat u\\eta_Z=u$ and use step 8. Both the transported $r\\widehat u$ and the slice completed evaluation now extend the same ordinary comparison along $\\eta_{rZ}$ into the locally complete target $H_U(rK,rM)$. The bijection in step 7 makes them equal. This proves compatibility of the actual completed evaluation morphisms, and the same uniqueness proves its coherence under successive restriction. For a complete input $L$, the coefficient-unit constraint is $C(L\\otimes_B^L B)\\cong C(L)\\xrightarrow{\\eta_L^{-1}}L$; step 7 and the reflector make $\\eta_L$ invertible. Since restriction preserves both $\\eta_L$ and the ordinary unitor, the completed comparisons preserve this coefficient-unit constraint too.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-extended-cech-completion-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099F universal property; Bhatt–Scholze Definition 3.4.10 and Lemma 3.4.11; balanced tensor formula written explicitly"
+   }
+  },
+  {
+   "text": "Restriction is $\\mathcal O_E$-linear because its action on module morphisms is sectionwise. It therefore induces the functor between the scalar localizations [def-weil-linear-scalar-localization], given on morphisms by $f\\otimes a\\mapsto r(f)\\otimes a$. This respects identities and composition by $r(gf)=r(g)r(f)$ and the displayed bilinear composition law in that definition. Applying it to the equality of completed evaluation maps in step 9 gives the stated equality of their images after inverting $\\varpi_E$. Applying it to the identity and composition equalities of the comparisons also preserves their coherence. This argument only uses scalar localization of Hom modules and makes no identification with a different coefficient category.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "scalar localization of Hom modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-derived-adjoint-functors",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+  "lem-weil-pbc-extended-cech-completion-model",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+  "place": "Restriction input to the local bounded-projective proof of prop-sf-dualizable-hom, expanded using Stacks ringed-site tensor/Hom and completion calculus."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +221,87 @@
    "results": "AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
    "date": "2026-10-17",
    "verdict": "no match: the hits concern ordinary etale schemes and their site, not preservation of the derived-complete coefficient category on a slice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a slice ringed site commutes with derived completion, tensor product, internal Hom and evaluation",
+   "results": "LightCondensed.ihomPoints_symm_comp; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; ModuleCat.Tilde.res_apply; AlgebraicGeometry.Scheme.restrictFunctorΓ; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.StructureSheaf.toOpen_res",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Over",
+   "results": "CategoryTheory.Sheaf.over; CategoryTheory.GrothendieckTopology.overPullback; CategoryTheory.GrothendieckTopology.overMapPullback; CategoryTheory.Sheaf.pushforwardOverMapIso; CategoryTheory.GrothendieckTopology.overMapPullbackCongr; CategoryTheory.Sheaf.toPushforwardOverPullback; CategoryTheory.GrothendieckTopology.overMapPullbackId; CategoryTheory.GrothendieckTopology.overMapPullbackComp",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "completedTensor|derivedCompletion|restriction.*[Ii]hom|[Ii]hom.*restriction",
+   "results": "none (directory Mathlib/CategoryTheory)",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a slice site preserves completed derived tensor and internal Hom evaluation",
+   "results": "CategoryTheory.Sheaf.ΓRes; SheafOfModules.evaluationPreservesLimit; ModuleCat.Tilde.res_apply; SheafOfModules.evaluationPreservesLimitsOfSize; SheafOfModules.Finite.evaluationPreservesFiniteLimits; HomologicalComplex.instPreservesLimitsOfShapeEvalOfHasLimitsOfShape; LightCondensed.ihomPoints; PresheafOfModules.evaluation_preservesFiniteLimits",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization functor from sheaves of modules to a slice site is exact and preserves products and tensor Hom adjunction counits",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; SheafOfModules.pushforwardPushforwardAdj; PresheafOfModules.sheafificationAdjunction; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsRightAdjointPushforward; CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed topos with a regular element t, derived t-adic completion is left adjoint to complete complexes and internal Hom into a complete complex is complete",
+   "results": "CondensedMod.LocallyConstant.adjunction; Condensed.freeForgetAdjunction; LightCondensed.freeForgetAdjunction; Condensed.setAbAdjunction; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondMod.LocallyConstant.adjunction; Condensed.profiniteSolidification; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCompletion|adicCompletion|adic.*complete|completion.*adjunction",
+   "results": "none (directory Mathlib/CategoryTheory)",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completion is left adjoint to inclusion of complete complexes and derived Hom into a complete object is complete",
+   "results": "AdicCompletion; AdicCompletion.module; AdicCompletion.of_surjective_iff; IsAdicComplete.bot; AdicCompletion.instCommRing; IsAdic.isAdicComplete_iff; AdicCompletion.instAddCommGroup; IsAdicComplete",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of a complex of sheaves is a reflective localization and completed tensor is left adjoint to derived internal Hom into a complete object",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.Adjunction.derived; CategoryTheory.Sheaf.adjunction; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derived'_counit; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, CategoryTheory.Reflective",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "def AdicCompletion|class IsAdicComplete|theorem derived|def derived",
+   "results": "Mathlib/RingTheory/AdicCompletion/Basic.lean; Mathlib/RingTheory/AdicCompletion/Basic.lean (directory Mathlib/RingTheory/AdicCompletion)",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the complete ringed-slice tensor/Hom/evaluation assertion; the classical module completion and abstract derived-adjunction hits omit the sheaf completion comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -91,5 +327,99 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-rational-slice-completed-evaluation",
+  "worker": "stage1",
+  "summary": "Retained the original statement and searches. Expanded exact slice restriction, coherent reduction and Roos-cone comparisons, and derived-Hom restriction. Identified the completion reflector using existing ringed Cech/Koszul nodes, then proved preservation of completed evaluation by its unique extension from ordinary evaluation. Rationalization is the stated Hom-module scalar localization. No new nodes.",
+  "blueprint": "prop-sf-dualizable-hom proof: restriction of the coefficient dual, completed tensor and evaluation before the local bounded-projective termwise identification; unit proof: preservation of the coefficient unit and canonical comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site tool: Restriction and extension by zero for modules on a localized site. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic ringed-site tool: Derived functors of adjoint functors are adjoint. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Generic ringed-site tool: Limits of sheaves of modules exist and are computed sectionwise. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-site tool: Derived tensor comparison for arbitrary ringed topoi. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic ringed-site tool: Countable products of pro-etale modules are exact. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic ringed-site tool: Existence and computation of derived limits. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic ringed-site tool: The towers defining integral pullback and completed tensor product are invariant under change of K-flat resolution. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site tool: Derived internal Hom calculus on small ringed sites. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Generic ringed-site tool: Slice restriction preserves evaluation for an arbitrary dualizing object. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic ringed-site tool: The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Generic ringed-site tool: Completed constant coefficients and finite reduction. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic ringed-site tool: Strict tower homotopy limit. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "why": "Generic ringed-site tool: Extended Cech complex and Koszul dual limit. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-pbc-extended-cech-completion-model",
+    "why": "Generic ringed-site tool: Global extended Čech model and its derived completion unit. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site tool: Derived tensor and K-flat representative descent on a ringed site. This unit only gives the bounded-projective calculation, not this ambient restriction/completion interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-derived-adjoint-functors",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+  "lem-weil-pbc-extended-cech-completion-model",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-86908934a",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-86908934a (reviewer sub-agent of L); spot-checked: Read in full: the item (statement and 10 steps), the statements of all 27 cited nodes, the unit sk-prop-sf-dualizable-biduality and the main-20261015 proof files, the parent prop-sf-dualizable-hom (steps 8, 10, 12 cite the item) and the sibling lem-sf-rational-thick-evaluation. Checked at the source: Stacks 099F (the completion is RHom(K,E) with its unit), the tag map for 03DJ/09T5/08TC/0941/08JB/08FI/03EH/0913/0A0A/099A/08J9/07A4/0G7E, and Bhatt–Scholze Def. 3.4.10 and Lemma 3.4.11 (step 7 repeats its slice argument T(RHom(K,L),x)=RHom(K,T(L,x))). The coefficient category is Ô_{E,X}-modules throughout, consistent with def-pur-integral-derived-operations and the parent; rationalization is the Hom-module scalar localization; no base-change morphism enters; the statement is not weakened. The steps are correct: exact restriction and the derived adjunction give preservation of derived products, so the slice cone model is valid without assuming exact products on the slice; the restricted Roos triangle gives completeness on the slice; the resolution [B --ϖ^n--> B] → B_n (Noetherian O_E) and the Koszul/strict-tower/extended-Čech nodes identify R lim of the reductions with the reflection, with matching units; local completeness of H(K,M) follows by currying; the transpose node gives the ordinary evaluation square; the extension along η is unique. Small cases U=X, K=0, M=0, n=1 and an empty slice pass. No new nodes. No duplicate found (lem-coef-completed-tensor-hom-transpose, lem-sfb-dc-hom-preserves and lem-sf-rational-thick-evaluation state other things). No cycle, no missing or merged citations, no SGA. All 15 declared tool_uses accepted as generic ringed-site and completion tools that do not replace the unit's step. Fixes, in one corrected item file: step 1 source document set to sites-modules.tex 03DJ plus derived.tex 09T5, and step 3 to derived.tex 08TC plus sites-modules.tex 03DJ (both wrongly named sites-cohomology.tex); step 9 now says the completed evaluation is the adjunct under the completed tensor–Hom adjunction (BS 3.4.11), which justifies its uniqueness characterization.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -104,16 +104,53 @@
    }
   },
   {
-   "text": "For the promised description of $R$, put $C=\\operatorname{Fun}(A,E)$ and let $V$ be the underlying quasicategory of $(C^\\natural)^{(\\Delta^1)^\\sharp}$. Its objects are equivalence edges of $C$, and its $n$-simplices are maps $\\Delta^n\\times\\Delta^1\\to C$ carrying each edge $\\{v\\}\\times\\Delta^1$ to an equivalence. Thus $V$ is the full subcategory of $\\operatorname{Fun}(\\Delta^1,C)$ on the equivalence edges; other parameter edges are unrestricted. The endpoint inclusion $(\\partial\\Delta^1)^\\sharp\\hookrightarrow(\\Delta^1)^\\sharp$ is a cofibration. Its internal-Hom map into the fibrant $C^\\natural$ is a fibration: a lifting problem against a trivial cofibration is, by the exponential adjunction, a lifting problem for its pushout product with this endpoint inclusion, which is trivial by the marked-model axiom. Since the target $C^\\natural\\times C^\\natural$ is fibrant, the marked exponent is itself fibrant; the fibrant-object characterization therefore identifies its marking with exactly the equivalences of $V$. The constant-path map $C\\to V$ is an equivalence. Indeed evaluation at $0$ is its retraction, and the map $(s,t)\\mapsto\\min(s,t)$ on $[1]\\times[1]$ contracts every equivalence edge to its source; at a vertex $e:x\\to y$ of $V$, the resulting edge from the constant path at $x$ to $e$ has components $\\mathrm{id}_x$ and $e$ in $C$. Both are equivalences. The pointwise criterion in $\\operatorname{Fun}(\\Delta^1,C)$ makes this edge an equivalence there and in its full subcategory $V$, so the contraction is a natural equivalence by the pointwise criterion again. Thus $C^\\natural\\to V^\\natural\\to C^\\natural\\times C^\\natural$ is a path object. Put $R=\\operatorname{Fun}(B,E)\\times_{C,\\operatorname{ev}_0}V\\times_{\\operatorname{ev}_1,C}\\operatorname{Fun}(D,E)$. To verify directly that it is the pullback in $\\mathrm{Cat}_\\infty$, test a quasicategory $Q$. The functor $\\operatorname{Map}^{\\sharp}(Q^\\natural,-)$ preserves the displayed strict pullback and takes fibrant marked objects to Kan complexes, by the marked-model simplicial axiom. The exponential adjunction identifies\n$$\\operatorname{Map}^{\\sharp}(Q^\\natural,V^\\natural)=\\operatorname{Fun}(\\Delta^1,\\operatorname{Map}^{\\sharp}(Q^\\natural,C^\\natural)).$$\nIndeed the tensor is product with $(\\Delta^n)^\\sharp$ and $V^\\natural=(C^\\natural)^{(\\Delta^1)^\\sharp}$, so both sides in degree $n$ consist of the same marked maps. Thus $\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(Q,R)$ is exactly the path-space homotopy pullback of the three mapping Kan complexes into $\\operatorname{Fun}(B,E),C,\\operatorname{Fun}(D,E)$. The mapping-space cone criterion proves that this is the pullback, with its displayed cone. Its vertices are the two functors and an equivalence of their restrictions. Its edges and higher simplices are their transformations with coherent compatibility along that equivalence; the transformations on $B,D$ need not be invertible, because the $\\Delta^n$ parameter is minimally marked in the underlying internal Hom.",
+   "text": "For the description of the pullback, put $C=\\operatorname{Fun}(A,E)$, $W=(C^\\natural)^{(\\Delta^1)^\\sharp}$ and let $V$ be its underlying simplicial set. Apply [lem-coef-infinity-equivalence-arrow-path-object]: $V$ is the full subcategory of $\\operatorname{Fun}(\\Delta^1,C)$ on equivalence edges, $W=V^\\natural$, and its joint endpoint map is a model fibration. This applies because $C$ is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus].",
    "uses": [
-    "lem-coef-marked-point-cartesian-model",
-    "lem-cbc-enhanced-functor-cone-calculus",
-    "def-cbc-enhanced-diagrams-cones"
+    "lem-coef-infinity-equivalence-arrow-path-object",
+    "lem-cbc-enhanced-functor-cone-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Corollary 3.1.4.3, internal marked Hom in Section 3.1.3, and Proposition A.2.4.4 and Remark A.2.4.5; the interval contraction and the lifting adjunction are written out."
+    "place": "HTT Sections 3.1.3–3.1.4 and Remark A.2.4.5; apply the extracted marked endpoint-fibration and sharp mapping-complex lemmas, then unfold the simplex data."
+   }
+  },
+  {
+   "text": "Set $X=\\operatorname{Fun}(B,E)$, $Y=\\operatorname{Fun}(D,E)$ with their restriction functors to $C$. Form $H=(X^\\natural\\times Y^\\natural)\\times_{C^\\natural\\times C^\\natural}V^\\natural$ and write $R$ for its underlying simplicial set. The endpoint fibration from Step 7 satisfies the hypothesis of [lem-coef-infinity-pullback-mapping-space], so $H=R^\\natural$ is fibrant and $R$ is a quasicategory. Neither restriction $X\\to C$ nor $Y\\to C$ is assumed to be a fibration.",
+   "uses": [
+    "lem-coef-infinity-equivalence-arrow-path-object",
+    "lem-coef-infinity-pullback-mapping-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Sections 3.1.3–3.1.4 and Remark A.2.4.5; apply the extracted marked endpoint-fibration and sharp mapping-complex lemmas, then unfold the simplex data."
+   }
+  },
+  {
+   "text": "For every quasicategory $Q$, apply [lem-coef-infinity-pullback-mapping-space]. Its isomorphism computes $\\operatorname{Map}^\\sharp(Q^\\natural,R^\\natural)$ as the path-space homotopy pullback of the sharp mapping Kan complexes into $X^\\natural,C^\\natural,Y^\\natural$. By the mapping-space identification of Step 1 these are the corresponding $\\mathrm{Cat}_\\infty$ mapping spaces. The formula preserves the given projections and interval path, so the mapping-space cone criterion proves that $R$, with this cone, is the pullback used in Step 5.",
+   "uses": [
+    "lem-coef-infinity-pullback-mapping-space",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Sections 3.1.3–3.1.4 and Remark A.2.4.5; apply the extracted marked endpoint-fibration and sharp mapping-complex lemmas, then unfold the simplex data."
+   }
+  },
+  {
+   "text": "Unfold the degreewise marked pullback and the full-subcategory description of $V$. An $n$-simplex of $R$ consists of diagrams $B\\times\\Delta^n\\to E$ and $D\\times\\Delta^n\\to E$, together with a map $\\Delta^n\\times\\Delta^1\\to C$ having their restrictions as endpoints and carrying every $\\{v\\}\\times\\Delta^1$ to an equivalence. For $n=0$ this is the two functors and an equivalence between their restrictions; for $n=1$ it is their transformations with the compatible square, and higher $n$ retain its coherences. No condition is imposed that the $\\Delta^n$ directions be equivalences. Thus noninvertible transformations are retained.",
+   "uses": [
+    "lem-coef-infinity-equivalence-arrow-path-object",
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Sections 3.1.3–3.1.4 and Remark A.2.4.5; apply the extracted marked endpoint-fibration and sharp mapping-complex lemmas, then unfold the simplex data."
    }
   },
   {
@@ -134,7 +171,9 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-cat-infinity-colimits-cartesian-closure",
   "lem-cbc-enhanced-functor-cone-calculus",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-equivalence-arrow-path-object",
+  "lem-coef-infinity-pullback-mapping-space"
  ],
  "proof_origin": {
   "by": "agent",
@@ -179,7 +218,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-hammock-infinity-localization",
@@ -188,10 +227,10 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-coef-infinity-functor-pushout",
   "worker": "stage1",
-  "summary": "Kept every clause and universe generality. Added point-set marked-model and strict/coherent-diagram technical inputs, avoiding the cycle through combinatorial-localization-presentability. Wrote the exponential, product-pushout, mapping tests, inverse, isocomma and naturality arguments explicitly. No Lean attachment or Mathlib match.",
+  "summary": "Repair of returned 3005-character Step 7: extracted two independent arguments as statement-only technical nodes: marked equivalence-arrow endpoint fibrancy with the natural marking of the interval exponent, and the sharp mapping-complex cotensor/path-pullback calculation. Four short steps apply them and unfold the simplex data. All other proof steps, the statement, statement dependencies and stage-2 Lean record are unchanged. (Maintainer reader: the delivered constant-arrow contraction node and its step were dropped, since no later step used the path-object conclusion.)",
   "blueprint": "Integral exceptional-adjoint proof, paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; technical foundations for the finite-adjunction-diagram realization, specifically the full functor-category pushout comparison in lem-coef-hammock-infinity-localization.",
   "tool_uses": [
    {
@@ -204,12 +243,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NH-4f835306c",
-  "group": "NH",
+  "reviewer": "NT-cc-ND-d0c3d1146",
+  "group": "ND",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-4f835306c (reviewer sub-agent of L); spot-checked: Read the complete item, both new nodes, report, route documents, delivery errors A–F, blueprint source, Scholze Lecture II, and all cited HTT locations. Verified every proof step, hypotheses, universe and fibrancy arguments, path-object construction, edge cases, duplicate search, Mathlib searches, and route compliance. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-d0c3d1146 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, the report, every cited statement (marked-point-cartesian-model, enhanced-diagrams-cones, enhanced-functor-cone-calculus, coherent-nerve-comparison, cat-infinity-colimits-cartesian-closure), the blueprint ancestor prop-coef-integral-exceptional-adjoint paragraph 2 and the unit record. HTT is not archived, so the WANTED line stands; every fact used is contained in the cited marked-model statement. The endpoint node is true: in (Delta^n)^flat x (Delta^1)^sharp only the {v}xDelta^1 edges are marked, so V is the full subcategory on equivalence edges; W=V^natural by pointwise equivalences and 2-out-of-3; the endpoint fibration follows from the pushout-product clause against fibrant C^natural. The sharp-mapping node is true: H is a pullback of a fibration over fibrant X^natural x Y^natural, and the isomorphism holds degreewise because Hom(K,Map^sharp(Q,C)) = Hom(Q x K^sharp, C) and (Delta^n x Delta^1)^sharp is the product of sharps. Small cases checked: empty C, a point, N([1]) (keeps the noninvertible square), and empty Q, X or Y. The contraction node is true (min homotopy plus the pointwise criterion) and is not a citable duplicate: lem-cbc-cofiltered-coherent-equivalence-diagrams with I=[1] would cover it, but its closure reaches the item (cycle). However, no later step uses it: delivered Step 8, its only citation, concludes a path-object property that Steps 9-12 never use. Step 10 already uses the path-space pullback formula, and Step 11 uses only the V description. Fix: removed delivered Step 8, recomputed proof_deps, updated split_report.summary, and dropped the node (no other citer). The remaining steps were checked against their hypotheses; all are under 2000 characters; no cycle (the closures of both remaining nodes do not reach the item); the new nodes do not restate the item. The existing tool_use lem-cbc-enhanced-functor-cone-calculus is accepted.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.InfinityFunctorPushout",

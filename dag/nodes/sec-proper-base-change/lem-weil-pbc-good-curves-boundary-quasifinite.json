@@ -22,9 +22,138 @@
   "lem-weil-pbc-reduced-induced-closed-subscheme",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $i$, the finite morphism $t_i$ is proper by [lem-weil-pbc-finite-proper]. Therefore $f_i=t_i\\circ b_i:C_i\\to B$ is proper by [lem-weil-pbc-proper-composition]. In particular each $f_i$ is separated, of finite type and universally closed, by [def-weil-proper-morphism].",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3 (lemma-composition-proper), 01WN (lemma-finite-proper), 01W1 (definition-proper)"
+   }
+  },
+  {
+   "text": "The clopen components of $C=\\coprod_i C_i$ supplied by [lem-weil-pbc-scheme-coproduct-family] let us check properness directly from [def-weil-proper-morphism]. For an affine open $V\\subset B$, each $f_i^{-1}(V)$ has a finite affine cover by finite-type $\\mathcal O_B(V)$-algebras; their union over the finite set $I$ gives the same kind of cover of $f^{-1}(V)$, so $f:C\\to B$ is of finite type [def-weil-finite-type-morphism]. The target $C\\times_B C$ of its diagonal is covered by the open pieces $C_i\\times_B C_j$: pulling back the two open component decompositions gives this cover. On a piece with $i\\ne j$ the inverse image of the diagonal is empty; on a piece with $i=j$ it is the closed immersion $\\Delta_{f_i}$. Thus its inverse image on every affine chart of such a piece is a quotient by an ideal, so $\\Delta_f$ is a closed immersion by the affine-local criterion in [def-weil-closed-immersion]. Finally, after any $B'\\to B$, the pullbacks of the clopen components are again disjoint and cover. A closed subset restricts to a closed subset in each component; its image in $B'$ is the finite union of their closed images, hence closed. Thus $f$ is universally closed and therefore proper. All three checks also hold for $I=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1 (definition-proper); direct verification for a finite disjoint union using Schemes Tags 01JB/01JC"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-reduced-induced-closed-subscheme], $Z\\to C$ is a closed immersion with underlying image $C\\setminus O$. Apply [lem-weil-pbc-closed-immersion-proper] to the proper morphism $C\\to B$ from step 2: $h:Z\\to B$ is proper. Hence $h$ is separated and of finite type [def-weil-proper-morphism]. Since $B$ is locally Noetherian, [pqf-lem-lft-fp-locnoeth] gives local finite presentation of $h$. It is quasi-compact because it is of finite type. Its diagonal is a closed immersion by separatedness, hence proper by [lem-weil-pbc-closed-immersion-proper], and therefore of finite type and quasi-compact. Thus $h$ is also quasi-separated, and the finite-presentation convention in [def-weil-pbc-scheme-conventions] shows that $h$ is of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "pqf-lem-lft-fp-locnoeth",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W5 (lemma-closed-immersion-proper), 01TX (lemma-noetherian-finite-type-finite-presentation), 01TP (definition-finite-presentation)"
+   }
+  },
+  {
+   "text": "Fix $i\\in I$ and $s\\in T_i$, and put $X=(C_i)_s$. Properness survives this base change by [lem-weil-pbc-proper-base-change], so $X$ is separated and of finite type over $\\kappa(s)$ [def-weil-proper-morphism]. A field is Noetherian (its only ideals are zero and the whole ring), so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. The fibre-smoothness clause of [sbc-lem-smooth-criterion] makes $X$ smooth over $\\kappa(s)$. Since $X$ is locally of finite type over $\\kappa(s)$ and smooth, the forward implication of [lem-weil-pbc-geometric-regularity-smooth-field-criterion], applied with the finitely generated (by no elements) extension $L=\\kappa(s)$, for which $X_L=X\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s)\\cong X$ by its first projection, shows that every local ring $\\mathcal O_{X,x}$ is a regular local ring; as $X$ is Noetherian, $X$ is regular. This criterion holds over any field, with no perfectness, dimension or algebraic-closedness hypothesis. Geometric connectedness includes connectedness over the identity field extension [def-pc-geometrically-irreducible]; $X$ is nonempty by hypothesis. The final assertion of [rem-pc-regular-normal] therefore gives that $X$ is irreducible. This argument uses neither a perfect residue field nor dimension exactly one.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "def-pc-geometrically-irreducible",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056S (lemma-smooth-regular); Properties Tags 0569 (lemma-regular-normal), 033M (lemma-normal-Noetherian); Morphisms Tags 01T6, 01VB, 01W4"
+   }
+  },
+  {
+   "text": "Let $U=(O_i)_s\\subset X$. The homeomorphisms from scheme fibres to the topological point-inverse-images in [def-pc-scheme-fibre], together with the open-subscheme identification [def-weil-open-immersion], identify $U$ with an open subset of $X$; it is nonempty by hypothesis. Schemes are Kolmogorov: if two points had the same closure, that irreducible closed subset would have two generic points, contradicting [lem-sc-scheme-sober]. Thus [lem-sc-dim-one-point-outside-open-closed] applies to the irreducible space $X$ of dimension at most one and to $U$. It makes every point of the closed subset $E_{i,s}=X\\setminus U$ closed in $X$. Since $X$ is Noetherian, [lem-sc-noetherian-closed-points-finite] gives that $E_{i,s}$ is finite. In dimension zero the conclusion is stronger: $U=X$, because any point of its complement would give a proper nonempty irreducible closed subset of the irreducible zero-dimensional space $X$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-open-immersion",
+    "lem-sc-scheme-sober",
+    "lem-sc-dim-one-point-outside-open-closed",
+    "lem-sc-noetherian-closed-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKX (lemma-constant-shriek-rel-dim-1), the second boundary; expanded by the dimension-one closed-point argument and Properties Tag 0BA8 (lemma-Noetherian-irreducible-components)"
+   }
+  },
+  {
+   "text": "Fix $b\\in B$. For each $i$, the finite morphism $t_i$ is quasi-finite by [pqf-lem-finite-qf], so [pqf-lem-qf-finitefibres] says that $S_{i,b}=t_i^{-1}(\\{b\\})$ is a finite set. The component description [lem-weil-pbc-scheme-coproduct-family] and the image statement [lem-weil-pbc-reduced-induced-closed-subscheme] identify the underlying set $h^{-1}(\\{b\\})$ with the disjoint union, over $i\\in I$ and $s\\in S_{i,b}$, of the sets $E_{i,s}$ of step 5: a point of $Z$ lies in a unique $C_i$, its image under $b_i$ is a unique $s$, and it is outside $O_i$. Here [def-pc-scheme-fibre] identifies points of $(C_i)_s$ with points of $C_i$ mapping to $s$; no base-change invariance of the reduced subscheme structure is asserted or needed. There are finitely many indices and each $E_{i,s}$ is finite. Hence $h$ has finite fibres.",
+   "uses": [
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-finitefibres",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NU (lemma-finite-quasi-finite), Tag 02NH (lemma-quasi-finite); Schemes Tag 01K1 (lemma-fibre-topological)"
+   }
+  },
+  {
+   "text": "We proved in step 3 that $h$ is of finite type, hence locally of finite type and quasi-compact, and in step 6 that all its fibres are finite. Apply the reverse implication of [pqf-lem-qf-finitefibres]: $h$ is quasi-finite. Its separatedness and finite presentation were already established in step 3. If $B$, $I$, or a particular $T_i$ is empty, the corresponding point or component arguments are vacuous; an empty component contributes no points and all conclusions remain valid.",
+   "uses": [
+    "pqf-lem-qf-finitefibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NH (lemma-quasi-finite)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "pqf-lem-lft-fp-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "def-pc-geometrically-irreducible",
+  "rem-pc-regular-normal",
+  "def-pc-scheme-fibre",
+  "def-weil-open-immersion",
+  "lem-sc-scheme-sober",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "lem-sc-noetherian-closed-points-finite",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-finitefibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, expanding the sentence \"Again Zprime to V is quasi-finite\" using the geometry of Tag 0GK7 (lemma-make-good-curves)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +196,31 @@
    "results": "8 hits: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instIsProperOfIsFinite",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complement of a nonempty open subset in every fibre of a smooth proper geometrically connected curve family is quasi-finite",
+   "results": "8 hits: AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, TopologicalSpace.Opens.compl, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme, AlgebraicGeometry.locallyQuasiFinite_iff; candidates read in Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean, Proper.lean, and FinitePresentation.lean: definitions, finite-fibre criteria or permanence only; none states the good-curves boundary assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closed complement of a fibrewise nonempty open in a proper smooth connected curve family over a noetherian scheme is quasi-finite and finitely presented",
+   "results": "8 hits: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsProper.toLocallyOfFiniteType; candidates read in Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean, Proper.lean, and FinitePresentation.lean: definitions, finite-fibre criteria or permanence only; none states the good-curves boundary assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of an open meeting every fibre of a smooth proper family of geometrically connected schemes of dimension at most one over a noetherian base is quasi-finite",
+   "results": "8 hits: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme, AlgebraicGeometry.LocallyOfFiniteType; candidates read in Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean, Proper.lean, and FinitePresentation.lean: definitions, finite-fibre criteria or permanence only; none states the good-curves boundary assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
@@ -93,5 +243,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-good-curves-boundary-quasifinite",
+  "worker": "stage1",
+  "summary": "Expanded the second-boundary assertion of Tag 0GKX using existing DAG nodes only. Properness of the finite coproduct is checked from definitions; finite presentation includes quasi-separatedness; regular connected ordinary fibres are irreducible and their nonempty open complements have finitely many closed points. The original statement and statement dependencies are unchanged. No new nodes.",
+  "blueprint": "Realizes the classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper through its existing descendant lem-weil-pbc-etale-constant-shriek-rel-dim-1: Tag 0GKX second localization triangle, specifically \"Again Zprime to V is quasi-finite\", for the compactifications of Tag 0GK7. This is below the fixed proper-base-change unit route.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Only the generic scheme-theoretic fact that smooth morphisms have smooth ordinary fibres is used; the proper-base-change unit contains no replacement for this geometric tool."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Only the generic fact that a regular connected Noetherian scheme is irreducible is used to turn fibrewise nonemptiness into density; this does not replace a unit step."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-points-finite",
+    "why": "The generic finiteness criterion for a closed subset of closed points in a Noetherian scheme is applied to each boundary fibre; no same-unit node gives this criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-criterion",
+  "rem-pc-regular-normal",
+  "lem-sc-noetherian-closed-points-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-e87565605",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-e87565605 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 7 steps and the statement of every cited node, plus the sources Stacks 0GKX (the second boundary Z', 'Again Z' -> V is quasi-finite') and 0GK7 clauses (4)(b) and (5)-(8). The item's hypotheses match how the parent lem-weil-pbc-etale-constant-shriek-rel-dim-1 uses it in its step 4. The statement is true and not weakened. Edge cases checked: empty I, B or T_i; O_i=C_i; 0-dimensional fibres; P^1 minus points; and dropping fibrewise nonemptiness, which makes the statement fail. There are no new nodes and no duplicate of the item in the DAG. The route check passes, and I accept the three declared generic tool uses. No target node, base-change morphism or coefficient category is involved. One fault (C4/E1), now fixed: step 4 got regularity of the fibre over an arbitrary residue field kappa(s) from lem-sc-smooth-regular, whose 'smooth curve' comes from def-sc-curves and needs an algebraically closed field. I replaced it with the same-unit node lem-weil-pbc-geometric-regularity-smooth-field-criterion (any field, locally of finite type, reviewed), applied with L=kappa(s), in the step text, uses and proof_deps. The replacement does not create a cycle. Every other step was checked against the cited statements: step 2's finite-coproduct properness is a genuinely elementary few-line check; step 3 gives finite presentation including quasi-separatedness; step 5's Kolmogorov, dimension at most 1, Noetherian argument and step 6's set-level fibre decomposition are sound. Fix file: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-good-curves-boundary-quasifinite.json.; 1 file(s) fixed by the reviewer"
  }
 }

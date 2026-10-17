@@ -13,9 +13,132 @@
   "lem-coef-operad-groupoid-operator-map",
   "lem-coef-operadic-localization-operation-criterion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the arity. By [lem-coef-operadic-localization-operation-criterion] source changes must lie over the identity of $[n]$. Thus the operation space is the pullback of the target-fixed arrow slice along the source fiber, followed by restriction to the component of the unique active map $[n]\\to[1]$. By [lem-coef-infinity-slice-right-fibration] this is a right fibration over that source fiber, with fibers the corresponding active mapping spaces. Pullback and restriction to the specified discrete base-map component preserve the horn-lifting property: the missing triangle is filled in the original slice and its base map is forced. By [lem-coef-simplicial-operator-nerve], the source fiber for $M$ is $X^{n+1}$. For $O$ its displayed operator mapping formula over the identity of $[n]$ is the product of the unary mapping sets, hence its source fiber is $(X^{\\mathrm{op}}\\times X)^n$ by the unary formula in [lem-coef-operad-groupoid-operator-map]. All these fibers are spaces: unary arrows are invertible and $G$ is locally Kan, so [lem-coef-coherent-nerve-comparison] applies. The dual classification in [lem-coef-space-transport-classification] identifies each operation space with the total space of its active-mapping-space functor, contravariant in the source. Its transport is precomposition. This keeps the coherent triangles and every higher simplex, rather than quotienting their vertices.",
+   "uses": [
+    "lem-coef-operadic-localization-operation-criterion",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-simplicial-operator-nerve",
+    "lem-coef-operad-groupoid-operator-map",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 4.2.2, 4.2.4 and 4.2.6; proof of Theorem 4.2.7; fixed-arity restriction as required by Erratum Corollary E.0.1. Agent expansion; online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $n\\geq1$. For a string $(z_0,\\ldots,z_n)$ the active mapping space to $(x,y)$ is $G(z_0,x)\\times G(z_n,y)$: the opposite active map selects precisely the two endpoints. This is the string mapping formula of [lem-coef-simplicial-operator-nerve]. A source change $(u_0,\\ldots,u_n)$ acts by precomposition at those two endpoints and does nothing in the internal coordinates. Invert the first arrow, writing the operation as $(\\alpha:x\\to z_0,z_1,\\ldots,z_{n-1},\\gamma:z_n\\to y)$. Strict inverses commute with every simplicial operator by [lem-coef-operad-groupoid-operator-map], and [lem-coef-coherent-nerve-comparison] respects composition coherently. Under [lem-coef-space-transport-classification], the endpoint functors have total spaces $A_x$ and $B_y$ (the source-fixed and target-fixed arrow spaces); each unused internal coordinate has total space $X$. Taking their product gives $A_x\\times X^{n-1}\\times B_y$. Indeed both sides classify the same product mapping-space functor: a simplex in the product over a source simplex is exactly a tuple of endpoint simplices, with independent internal coordinates. Uniqueness under transport classification gives the required equivalence for $M$.",
+   "uses": [
+    "lem-coef-simplicial-operator-nerve",
+    "lem-coef-operad-groupoid-operator-map",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 4.2.2, 4.2.4 and 4.2.6; proof of Theorem 4.2.7; fixed-arity restriction as required by Erratum Corollary E.0.1. Agent expansion; online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "To recognize the internal factors on the $O$ side, the two-endpoint evaluation $\\operatorname{Fun}(\\Delta^1,X)\\to X\\times X$ is a Kan fibration: apply [lem-cbc-internal-hom-fibration-corner-map] to $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ and $X\\to *$, using that $X$ is Kan by [lem-coef-coherent-nerve-comparison]. Its fiber at $(b,a)$ is the arrow mapping space $U_X(b,a)$, naturally equivalent to $\\operatorname{Map}_X(b,a)$ by [lem-coef-infinity-pinch-comparison]. Along paths $s:b\\to b'$ and $h:a\\to a'$ its transport is $\\beta\\mapsto h\\beta s^{-1}$: a square in the arrow space says $\\beta's=h\\beta$, and both paths are invertible in the space $X$. These are the precomposition/postcomposition transports, with their coherent homotopies, of [lem-coef-space-transport-classification]. Hence this arrow space realizes the mapping-space functor with both endpoints allowed to vary, after identifying the contravariant endpoint by inversion. This identification includes all simplicial parameters by the naturality clauses of the pinch comparison and transport classification.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 4.2.2, 4.2.4 and 4.2.6; proof of Theorem 4.2.7; fixed-arity restriction as required by Erratum Corollary E.0.1. Agent expansion; online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "For an input list $((a_0,b_1),\\ldots,(a_{n-1},b_n))$, the explicit formula of [lem-coef-operad-groupoid-operator-map] gives the active-operation space $G(x,a_0)\\times\\prod_{i=1}^{n-1}G(b_i,a_i)\\times G(b_n,y)$. Its identity-arity source changes are independent unary operations $(r_i:a'_i\\to a_i,s_i:b_i\\to b'_i)$. Substitution gives the triangle relations $\\alpha=r_0\\alpha'$, $\\beta_i=r_i\\beta'_i s_i$ and $\\gamma=\\gamma's_n$. Put $h_i=r_i^{-1}$. These relations are exactly the coherent endpoint triangles for $A_x$, the internal arrow squares $\\beta'_i s_i=h_i\\beta_i$, and the endpoint triangles for $B_y$. As in Steps 1 and 3, [lem-coef-coherent-nerve-comparison] identifies the enriched factors and their compositions with the coherent mapping-space functor, and [lem-coef-space-transport-classification] identifies their total spaces. Variables in the different factors are disjoint. The product therefore classifies precisely this same functor and gives $\\operatorname{Op}_{O,n}(x,y)\\simeq A_x\\times\\operatorname{Fun}(\\Delta^1,X)^{n-1}\\times B_y$.",
+   "uses": [
+    "lem-coef-operad-groupoid-operator-map",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 4.2.2, 4.2.4 and 4.2.6; proof of Theorem 4.2.7; fixed-arity restriction as required by Erratum Corollary E.0.1. Agent expansion; online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "The formula for $\\Phi_G$ in [lem-coef-operad-groupoid-operator-map] sends $(z_0,\\ldots,z_n;a:z_0\\to x,b:z_n\\to y)$ to the list of adjacent pairs with operation $(a^{-1},1_{z_1},\\ldots,1_{z_{n-1}},b)$. Thus the endpoint factors in Steps 2 and 4 are unchanged, and each internal coordinate $z_i$ becomes the constant path $1_{z_i}$. A source change $u_i$ becomes $(u_{i-1}^{-1},u_i)$ on the adjacent pair, so in Step 4 its two endpoint changes at the internal constant path are both $u_i$. This is exactly the action of the constant-path map on a varying simplex. The prescribed functor commutes with simplicial operators, and [lem-coef-coherent-nerve-comparison] and [lem-coef-space-transport-classification] are natural on these maps. Consequently the identification is of the full induced map of operation spaces, with all higher simplices.",
+   "uses": [
+    "lem-coef-operad-groupoid-operator-map",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 4.2.2, 4.2.4 and 4.2.6; proof of Theorem 4.2.7; fixed-arity restriction as required by Erratum Corollary E.0.1. Agent expansion; online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Specialize [lem-coef-space-path-fibration-replacement] to $\\operatorname{id}_X:X\\to X$. Its mapping-path object is $\\operatorname{Fun}(\\Delta^1,X)$, and its constant-path inclusion is exactly $c:X\\to\\operatorname{Fun}(\\Delta^1,X)$, so $c$ is an equivalence. An inverse for the product map of Step 5 is endpoint evaluation on each internal factor, with identities on $A_x$ and $B_y$; the inverse homotopies are the coordinatewise inverse homotopies for $c$. Equivalently these homotopies are given explicitly by $H(\\gamma,t)(s)=\\gamma(\\min(s,t))$, which joins the constant path at $\\gamma(0)$ to $\\gamma$ and commutes with simplicial operators. Thus the positive-arity map is an equivalence. When $n=1$ the internal product is a point and the map is already the identity on $A_x\\times B_y$.",
+   "uses": [
+    "lem-coef-space-path-fibration-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 4.2.2, 4.2.4 and 4.2.6; proof of Theorem 4.2.7; fixed-arity restriction as required by Erratum Corollary E.0.1. Agent expansion; online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $n=0$ the string source is a single object $z$, and its active mapping space is $G(z,x)\\times G(z,y)$ by [lem-coef-simplicial-operator-nerve], since both endpoints of $[1]\\to[0]$ select $z$. By [lem-coef-coherent-nerve-comparison] and [lem-coef-space-transport-classification], its total space is the space of coherent spans $(z,a:z\\to x,b:z\\to y)$, with simultaneous source changes and all their homotopies. Normalize such a span by the source equivalence $a:z\\to x$, obtaining $(x,1_x,ba^{-1})$. This exhibits a coherent equivalence to the space of arrows $x\\to y$, with inverse $h\\mapsto(x,1_x,h)$. More explicitly a triangle from $(z,a,b)$ to $(z',a',b')$ has $a'u\\simeq a$, $b'u\\simeq b$; hence $b'(a')^{-1}\\simeq ba^{-1}$. The components $a$ form the equivalence from a span to its normalized span, and the preceding triangle equations are its naturality homotopies. Their higher compatibilities are precisely the coherent composition, unit and transport compatibilities of the two cited comparison/classification nodes; the formulas use the strict simplicial inversion and composition in $G$. Thus this is a comparison of spaces, not merely a bijection of span classes. The arrow mapping space with endpoints fixed is equivalent to $\\operatorname{Map}_X(x,y)$ by [lem-coef-infinity-pinch-comparison].",
+   "uses": [
+    "lem-coef-simplicial-operator-nerve",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 4.2.2, 4.2.4 and 4.2.6; proof of Theorem 4.2.7; fixed-arity restriction as required by Erratum Corollary E.0.1. Agent expansion; online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "On the $O$ side the arity-zero source list is empty, its identity-arity fiber is the terminal space, and its operation space is exactly $G(x,y)$ by the $n=0$ clause of [lem-coef-operad-groupoid-operator-map] and the operator formula of [lem-coef-simplicial-operator-nerve]. Therefore [lem-coef-coherent-nerve-comparison] identifies it with $\\operatorname{Map}_X(x,y)$. The prescribed zero-length-block formula for $\\Phi_G$ sends $(z,a,b)$ to $ba^{-1}$. This is exactly the normalization map of Step 7, whose inverse on the span description is $h\\mapsto(x,1_x,h)$. Hence the nullary induced map is an equivalence as well. All changes of source used here stay over the identity of $[0]$, just as those of Steps 2--5 stay over the identity of $[n]$.",
+   "uses": [
+    "lem-coef-operad-groupoid-operator-map",
+    "lem-coef-simplicial-operator-nerve",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 4.2.2, 4.2.4 and 4.2.6; proof of Theorem 4.2.7; fixed-arity restriction as required by Erratum Corollary E.0.1. Agent expansion; online source, archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-operadic-localization-operation-criterion",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-simplicial-operator-nerve",
+  "lem-coef-operad-groupoid-operator-map",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-space-transport-classification",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-space-path-fibration-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Proof of Theorem 4.2.7, expanded into fixed-arity product and nullary-span calculations; Erratum Corollary E.0.1. WANTED: archival copy in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +177,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-many-object-operad-accessibility",
@@ -79,5 +202,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-groupoid-active-operation-equivalence",
+  "worker": "stage1",
+  "summary": "Computed the complete fixed-arity operation spaces using the source-fiber pullback of the target-fixed slice and coherent mapping-space transport. Wrote the endpoint inversion, independent internal path factors, the induced constant-path map, and the separate nullary span normalization. Reused the existing mapping-path equivalence instead of creating a redundant path lemma. No statement correction and no new nodes.",
+  "blueprint": "Supporting operadic ordinary-replacement computation for the second proof paragraph of prop-coef-integral-exceptional-adjoint, through lem-coef-many-object-operad-accessibility: realizes its extracted Theorem 4.2.7 active-operation comparison, with positive-arity products (steps 1--6) and nullary operations (steps 7--8).",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-internal-hom-fibration-corner-map",
+    "why": "Generic coherent slice, mapping-space transport, or Kan path-space calculus needed to compute the operation spaces; no statement in this unit supplies this general tool. The fixed-arity operadic route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-internal-hom-fibration-corner-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-f5f7ffbce",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-f5f7ffbce (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps and the full statement of every cited node, plus the citer's step (lem-coef-many-object-operad-accessibility step 8), the unit sk-prop-sf-biduality-general and chapter sec-six-functors. No new nodes. I checked the statement independently from the D(G), O_G and Phi_G formulas. M side, n>=1: the active hom is G(z0,x)xG(zn,y), giving A_x x X^{n-1} x B_y. O side: the operation is G(x,a0) x prod G(bi,ai) x G(bn,y). I recomputed substitution: the delivery writes the triangle relations in the opposite direction, which is consistent, and with h_i=r_i^{-1} they become the squares of Step 3. Phi sends (a^{-1},1,...,1,b), and the pair source change (u_{i-1}^{-1},u_i) moves both endpoints of the internal constant path by u_i. n=0: spans map to b a^{-1}, h->(x,1,h) is a section, and it is an equivalence because the span space is a right fibration over a contractible X_{/x}. Edge cases checked: discrete G, one object with automorphisms (answer H, not conjugacy classes), different components (empty), n=1, empty G. Corner-map hypotheses hold (boundary inclusion of Delta^1, X Kan). Path replacement with f=id gives c a weak equivalence, and the min homotopy is a simplicial homotopy. proof_deps equals the union of uses, all ids exist and none is merged, there is no cycle and all steps are under 2000 characters. The only off-unit citation is the Mathlib leaf lem-cbc-internal-hom-fibration-corner-map; its tool_use is accepted. Gepner-Haugseng is not archived: it is recorded as WANTED, proof_origin=agent is correct, and the check above does not rely on it. No SGA source is used. Reusing the existing path-replacement node rather than adding a duplicate path lemma is correct. No fixes."
  }
 }

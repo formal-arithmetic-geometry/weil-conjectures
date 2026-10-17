@@ -11,9 +11,86 @@
   "def-weil-pbc-category-colimit",
   "def-coef-good-cellular-tree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B_{R,S}(W)=W\\amalg_R S$ for root change. A map from this pushout to $Z$ is precisely a pair $W\\to Z$, $S\\to Z$ agreeing on $R$. Thus a cocone under $S$ from the root-changed restriction is exactly a cocone under $R$ from the original restriction with the chosen map $S\\to Z$. This proves preservation of restricted colimits, including the empty one. For a cell square, maps out of $(Y\\amalg_P Q)\\amalg_R S$ and out of $(Y\\amalg_R S)\\amalg_P Q$ are the same triples of maps from $Y,Q,S$, agreeing on $P$ and $R$. Hence the specified cell remains a pushout with $P,Q$ unchanged. For $R\\to S\\to S'$ the same calculation gives $(W\\amalg_R S)\\amalg_S S'\\cong W\\amalg_R S'$. All these isomorphisms commute with every defining leg; their composites agree because maps out of a colimit are determined by those legs.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.1.5.3 and Notation A.1.5.2, printed p. 800; universal-property expansion of root change"
+   }
+  },
+  {
+   "text": "Starting from $E$, repeatedly adjoin a minimal remaining element $t_\\gamma$ and take unions at limits, obtaining downward-closed $E_\\gamma$ and $E_\\beta=T$. This stops with $\\beta<\\tau$: otherwise the distinct choices for $\\gamma<\\tau$ inject $\\tau$ into $T$. Every predecessor of $t_\\gamma$ is in $E_\\gamma$. Construct increasing $i_\\gamma$ and trees $D^\\gamma$ on $E_\\gamma$ under $V_{i_\\gamma}$. Retain isomorphisms $\\theta_{\\delta\\gamma}:B_{V_{i_\\delta},V_{i_\\gamma}}D^\\delta\\cong D^\\gamma|_{E_\\delta}$ for $\\delta\\le\\gamma$, and $\\psi_\\gamma:B_{V_{i_\\gamma},V}D^\\gamma\\cong D|_{E_\\gamma}$. Require $\\theta_{\\delta\\eta}$ to equal $\\theta_{\\gamma\\eta}\\circ B\\theta_{\\delta\\gamma}$ after Step 1's associativity, and require the $\\psi$ to commute with these comparisons. All are isomorphisms of trees, including both cell legs. Start with $i_0=i$, $D^0=D^E$, identity $\\theta_{00}$ and the supplied $\\psi_0$. These stronger comparison data make the eventual identification on $E$ prescribed rather than merely existent.",
+   "uses": [
+    "def-coef-good-cellular-tree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.1.5.11, data (a)-(c), zero stage and well-founded exhaustion, printed pp. 806-807"
+   }
+  },
+  {
+   "text": "At a successor let $t=t_\\gamma$, $B=\\{s:s<t\\}\\subseteq E_\\gamma$, $a=i_\\gamma$, and let $Y$ be the predecessor colimit of $D^\\gamma|_B$ under $V_a$. Step 1 and $\\psi_\\gamma$ identify $D(B)$ with $Y\\amalg_{V_a}V$. The tail $I_{\\ge a}$ is small and $\\tau$-filtered: adjoin $a$ to any fewer-than-$\\tau$ indices and choose an upper bound. The cocone $W_j=Y\\amalg_{V_a}V_j\\to Y\\amalg_{V_a}V$ on this tail is colimiting. Indeed, maps $W_j\\to Z$ compatible in $j$ are exactly a single map $Y\\to Z$ and compatible maps $V_j\\to Z$ agreeing on $V_a$; the maps from $Y$ coincide since $a$ is the tail's least element. To extend the latter family to any $V_k$, choose $j\\ge k,a$ and compose $V_k\\to V_j\\to Z$. Another choice gives the same map by passage to a common upper bound; this also verifies compatibility for $k\\le k'$. The colimit property of $V$ now gives exactly a map $Y\\amalg_{V_a}V\\to Z$, uniquely. This proves the tail-colimit identification without a cofinality assumption left implicit.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.1.5.11, successor-stage tail-colimit argument, printed p. 807"
+   }
+  },
+  {
+   "text": "The definition of $\\tau$-presentability of $P_t$ identifies $\\operatorname{Hom}(P_t,D(B))$ with the colimit of $\\operatorname{Hom}(P_t,W_j)$ over this small $\\tau$-filtered tail. Apply clause (1) of the filtered-colimit-of-sets node to the specified attaching map $P_t\\to D(B)$. It is represented by $b_t:P_t\\to W_j$ for some $j\\ge a$, and its composite to $D(B)$ equals the specified map, not just an isomorphic choice. This uses no presentability of $Q_t$ or any root.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.1.5.11, factorization of the attaching map through one filtered stage, printed p. 807"
+   }
+  },
+  {
+   "text": "Set $i_{\\gamma+1}=j$. On $E_\\gamma$ use $B_{V_a,V_j}D^\\gamma$; at $t$ take $W_j\\amalg_{P_t}Q_t$ with its specified cell square. For $s<t$ the order map is the composite from the $s$ vertex to the predecessor colimit $W_j$ and then to this pushout. There is no old vertex above $t$ since $E_\\gamma$ is downward-closed. The cocone identities prove functoriality. Step 1 identifies the predecessor colimit and proves that after root change to $V$ this new square is the original square. The resulting isomorphism at $t$ is the unique one commuting with the predecessor and $Q_t$ legs, and agrees with old order maps by their factorization through the predecessor colimit. Keep $\\psi_\\gamma$ on old vertices. Define all $\\theta_{\\delta,\\gamma+1}$ by root change of $\\theta_{\\delta\\gamma}$ and associativity. Their coherence and compatibility with $\\psi$ follow on every defining leg from Step 1, so the induction invariant persists.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-coef-good-cellular-tree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.1.5.11, successor pushout and compatibility clauses, printed p. 807"
+   }
+  },
+  {
+   "text": "At a nonzero limit $\\lambda\\le\\beta$ choose an upper bound $i_\\lambda$ of the fewer-than-$\\tau$ indices $i_\\gamma$, $\\gamma<\\lambda$. For each $s\\in E_\\lambda$ let $b(s)<\\lambda$ be its first stage of occurrence, and define its new vertex as $B_{V_{i_{b(s)}},V_{i_\\lambda}}D^{b(s)}(s)$. For any later $\\gamma<\\lambda$ containing $s$, $\\theta_{b(s),\\gamma}$ and Step 1 give an identification with the root-changed $\\gamma$ vertex. Coherence of $\\theta$ says these identifications agree after every further stage. Define an order map using a stage containing both endpoints; define a cell square at $s$ using stage $b(s)$. Such a stage contains every predecessor of $s$ since it is downward-closed. Independence of the stage follows from $\\theta$ on order arrows and both cell legs. Functoriality is checked in one stage containing any three vertices. The entire predecessor diagram at $s$ is therefore isomorphic to its root-changed diagram at $b(s)$; Step 1 proves that its specified square is still a pushout. These same identifications define $\\theta_{\\gamma\\lambda}$; root-changing the earlier $\\psi$ gives $\\psi_\\lambda$, independent of the choice by their compatibility. Their coherence is checked on each vertex using a common stage below $\\lambda$. This constructs the limit tree and all induction data, rather than assuming gluing from agreement only over $V$. At the final stage set $j=i_\\beta$, $D'=D^\\beta$. Then $\\theta_{0\\beta}^{-1}$ and $\\psi_\\beta$ are the requested isomorphisms. Their compatibility with $\\psi_0$ is exactly the prescribed condition on $E$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-coef-good-cellular-tree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.1.5.11, limit-stage gluing and conclusion, printed p. 807"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-good-cellular-tree",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Direct expansion of HTT Lemma A.1.5.11, printed pp. 806-807; HTT is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +133,52 @@
    "results": "{\"t\": \"2026-10-17T08:46:02Z\", \"tool\": \"grep\", \"query\": \"isCardinalPresentable_of_isColimit|exists_hom_of_isColimit|RelativeCellComplex\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\"], \"digest\": \"650e2669247d628f\"}",
    "date": "2026-10-17",
    "verdict": "no match: relative cell complexes and individual attachment constructors do not extend a specified lower-subtree descent through a fixed filtered root presentation; read RelativeCellComplex/Basic.lean:40-125 and Presentable/Basic.lean:286-292"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a specified partial cellular tree descent along a filtered presentation of the root to a later stage, preserving the lower subtree",
+   "results": "{\"t\": \"2026-10-17T10:13:54Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a specified partial cellular tree descent along a filtered presentation of the root to a later stage, preserving the lower subtree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.SuccStruct.extendToSucc.obj\", \"PFunctor.M.isubtree_cons\", \"CategoryTheory.SmallObject.SuccStruct.extendToSucc.map\", \"CategoryTheory.SmallObject.SuccStruct.arrowMap_extendToSucc\", \"CategoryTheory.SmallObject.SuccStruct.extendToSucc.map_eq\", \"CategoryTheory.SmallObject.SuccStruct.extendToSucc_map\", \"CategoryTheory.SmallObject.SuccStruct.extendToSucc\", \"CategoryTheory.SmallObject.SuccStruct.arrowSucc_extendToSucc\"], \"digest\": \"65c9aa3b4f5af3a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cell constructors, small-object iterations or filteredness structures; they do not descend a specified lower subtree through a fixed filtered root presentation. Read RelativeCellComplex/Basic.lean:40-125, Presentable/Basic.lean:286-292 and IsCardinalForSmallObjectArgument.lean:140-148,318-327."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCardinalPresentable, CategoryTheory.Limits.pushout, CategoryTheory.Functor.Final",
+   "results": "{\"t\": \"2026-10-17T10:13:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsCardinalPresentable, CategoryTheory.Limits.pushout, CategoryTheory.Functor.Final\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cell constructors, small-object iterations or filteredness structures; they do not descend a specified lower subtree through a fixed filtered root presentation. Read RelativeCellComplex/Basic.lean:40-125, Presentable/Basic.lean:286-292 and IsCardinalForSmallObjectArgument.lean:140-148,318-327."
+  },
+  {
+   "tool": "grep",
+   "query": "cellular.*descent|descent.*cellular|root.*stage|CellularTree",
+   "results": "{\"t\": \"2026-10-17T10:13:55Z\", \"tool\": \"grep\", \"query\": \"cellular.*descent|descent.*cellular|root.*stage|CellularTree\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cell constructors, small-object iterations or filteredness structures; they do not descend a specified lower subtree through a fixed filtered root presentation. Read RelativeCellComplex/Basic.lean:40-125, Presentable/Basic.lean:286-292 and IsCardinalForSmallObjectArgument.lean:140-148,318-327."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a partial cellular tree diagram over a filtered root stage to all fewer than tau cells",
+   "results": "{\"t\": \"2026-10-17T10:13:56Z\", \"tool\": \"leansearch\", \"query\": \"Extend a partial cellular tree diagram over a filtered root stage to all fewer than tau cells\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"PartOrdEmb.Limits.instHasColimit\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.i\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.casesOn\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.recOn\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.noConfusionType\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.instPartialOrderDiagramWithUniqueTerminal\", \"Filter.pmap\"], \"digest\": \"8e19f9883e2edca3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cell constructors, small-object iterations or filteredness structures; they do not descend a specified lower subtree through a fixed filtered root presentation. Read RelativeCellComplex/Basic.lean:40-125, Presentable/Basic.lean:286-292 and IsCardinalForSmallObjectArgument.lean:140-148,318-327."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a specified partial descent of a cellular tree along a filtered stage of its root to a later stage with all fewer than kappa cells",
+   "results": "{\"t\": \"2026-10-17T10:19:18Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a specified partial descent of a cellular tree along a filtered stage of its root to a later stage with all fewer than kappa cells\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.hj\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"CategoryTheory.SmallObject.transfiniteCompositionOfShapeSuccStructPropιIteration\", \"CategoryTheory.SmallObject.relativeCellComplexιObjFObjSuccIso\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\"], \"digest\": \"9fc5d7d7fdda8eff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cell constructors, small-object iterations or filteredness structures; they do not descend a specified lower subtree through a fixed filtered root presentation. Read RelativeCellComplex/Basic.lean:40-125, Presentable/Basic.lean:286-292 and IsCardinalForSmallObjectArgument.lean:140-148,318-327."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isPushout|def attachCells|def relativeCellComplexιObj|attachCellsOfSuccStructProp",
+   "results": "{\"t\": \"2026-10-17T10:43:49Z\", \"tool\": \"grep\", \"query\": \"exists_isPushout|def attachCells|def relativeCellComplexιObj|attachCellsOfSuccStructProp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\"], \"digest\": \"00b63af42cd3dabe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: PreIndSpreads.exists_isPushout assumes a spreading property and descends an arrow only, not the specified tree; read MorphismProperty/Ind.lean:161-183. Small-object attachment constructors at IsCardinalForSmallObjectArgument.lean:140-148 and 318-327 do not give relative filtered-root descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-weak-saturation-tree-presentation",
@@ -71,7 +190,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction before the first displayed derived-limit comparison: the generic recognition input below the marked-point model uses a good-tree presentation of cofibrations. Extracted from returned Step 4: compatible descent of all cell attachments extending the already processed lower subtree.",
+   "place": "Proof paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction before the first displayed derived-limit comparison: compatible descent of all cell attachments extending an already processed lower subtree.",
    "via": [
     "lem-coef-weak-saturation-tree-presentation",
     "lem-coef-accessible-intersection-generators",
@@ -89,5 +208,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-partial-cellular-root-descent-extension",
+  "worker": "stage1",
+  "summary": "Expanded the relative version of HTT A.1.5.11 with coherent comparisons between every pair of stages. The proof factors each presentable attaching map through the filtered root tail, performs its specified pushout, and constructs limit vertices and maps explicitly from their first occurrence. It preserves the given lower subtree and both cell legs. Repaired two missing citation quotes and the formerly implicit limit compatibility; no new nodes are needed.",
+  "blueprint": "The current main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph beginning For K in D^b_c(X,R), before the first displayed derived-limit comparison: compatible descent of all cell attachments extending an already processed lower subtree.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-cd6173492",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-cd6173492 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full. The statement is true. Hand-tested cases: E=T gives beta=0 and psi_0; T empty is trivial; E empty is the citer's use in lem-coef-weak-saturation-tree-presentation; one cell factors P->V through V_j; two incomparable cells also hold. Steps 1, 3 and 5 are correct universal-property calculations (pushouts and undercategory colimits, the tail colimit over I_{>=a}, and the successor pushout giving D(t) through D's specified square). Step 2 sets up the induction explicitly: a minimal-element exhaustion that ends at beta<tau, coherent theta and psi, and the base case. Step 4 uses only tau-presentability of P_t, and clause (1) of lem-weil-pbc-filtered-colimit-sets-elementwise applies on the small tau-filtered tail. Step 6 bounds fewer than tau indices, takes each vertex at its first stage, and gets the prescribed composite on E from psi compatibility. Citations (def-weil-pbc-category-colimit, def-coef-good-cellular-tree, the Mathlib leaf) say what the steps use. There is no cycle, no off-route statement, no new node, and tool_uses=[] is correct. Duplicate check: lem-coef-small-cellular-tree-descent assumes a locally presentable category and presentable endpoints and has no specified lower subtree. The approximations, subset-enlargement and presentable-vertices nodes are different statements. Blueprint from/same_as is consistent with the parent. HTT A.1.5.11 is not archived under literature/, so the source place could not be checked against the text; the item marks the proof agent-formulated, and the argument stands on its own. No fixes."
  }
 }

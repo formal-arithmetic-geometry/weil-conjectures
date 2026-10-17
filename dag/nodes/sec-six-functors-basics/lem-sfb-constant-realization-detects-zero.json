@@ -3,11 +3,59 @@
  "kind": "statement",
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P$ for the constant presheaf of $R$-modules with value $T$, and $\\eta:P\\to\\underline T$ for its module-sheafification unit, viewing the sections of $\\underline T$ as $R$-modules by restriction along $R\\to\\underline R(V)$ [def-sf-site-constant-module-functor]. By [lem-sf-constant-module-unit-locally-bijective], this unit is locally injective. Thus, if $a,b\\in T=P(U)$ satisfy $\\eta_U(a)=\\eta_U(b)$, there is a covering family $\\{U_i\\to U\\}_{i\\in I}$ on which $P(U_i\\to U)(a)=P(U_i\\to U)(b)$. Use here the small site and coefficient universe in [def-weil-pbc-proetale-site], enlarging the universe of values to contain its objects and arrows as necessary.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "lem-sf-constant-module-unit-locally-bijective",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WB, theorem-plus, local equality in the plus construction; Tag 00WK, lemma-sections-sheafification; module unit: sites-modules.tex Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "Choose a point $u\\in U$. By the covering condition of [def-weil-pbc-proetale-site], an affine open neighbourhood $V\\subset U$ of $u$ is the union of the images of finitely many affine opens in the $U_i$. At least one of those images contains $u$, so some $U_i$ is nonempty; in particular the covering family has a member. The restriction map $P(U)\\to P(U_i)$ is $\\operatorname{id}_T$ by [def-sf-site-constant-module-functor]. Therefore the local equality from step 1 is precisely $a=b$ in $T$. This proves injectivity of $\\eta_U$. The only use of nonemptiness is to exclude an empty covering of $U$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-sf-site-constant-module-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0989, definition-fpqc-covering, and the following sentence: a pro-etale covering is jointly surjective"
+   }
+  },
+  {
+   "text": "If $\\underline T(U)=0$, then for every $t\\in T$ the elements $\\eta_U(t)$ and $\\eta_U(0)$ agree, so step 2 gives $t=0$ and $T=0$. If $\\underline T|_U$ is the zero module sheaf, evaluate at the object $\\operatorname{id}_U:U\\to U$ of the localized site. The sectionwise restriction rule of [def-pur-localized-ringed-site] gives $(\\underline T|_U)(U/U)=\\underline T(U)$. The zero module sheaf has the zero module of sections at every object: the presheaf of zero modules satisfies the sheaf condition and is both initial and terminal under the morphism definition in [def-weil-sheaf-of-modules-category]. Hence $\\underline T(U)=0$, and the preceding implication applies.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX, definition-localize-ringed-site, item (4), and Tag 03CW, definition-sheaf-modules (in Section 03CV)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-site-constant-module-functor",
+  "lem-sf-constant-module-unit-locally-bijective",
+  "def-weil-pbc-proetale-site",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Specialization of Tags 00WB/00WK and sites-modules.tex Tag 03CY to the constant module presheaf; nonempty-cover argument from proetale.tex Tag 0989; restriction rule Tag 04IX"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-wcontractible-constant-reductions-ml",
@@ -84,6 +132,55 @@
    "results": "8 hits: LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CondensedMod.isDiscrete_tfae, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor",
    "date": "2026-10-17",
    "verdict": "no match: the hits state local sheafification, ordinary module tensor, or condensed/local-site results; none states this pro-étale detection or general ring-sheaf derived normalization lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf sections on a nonempty proetale site object injects the original module",
+   "results": "8 hits: LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instFaithfulSheafLightProfiniteCoherentTopologyTypeConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor, LightCondMod.LocallyConstant.instFaithfulModuleCatFunctor, CondensedMod.LocallyConstant.instFaithfulSheafCompHausCoherentTopologyTypeConstantSheaf, AlgebraicGeometry.Scheme.Modules.instFaithfulPresheafOfModulesToPresheafOfModules, CondensedMod.LocallyConstant.instFaithfulModuleCatCondensedDiscrete",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed or local sites, topological stalks, or the structure sheaf of an integral scheme; they do not state the arbitrary-module pro-etale unit-injectivity assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map from a module to sections of its constant sheaf on a nonempty pro etale scheme object is injective",
+   "results": "8 hits: TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, TopCat.Presheaf.stalkToFiber_injective, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.germ_injective_of_isIntegral, AlgebraicGeometry.IsAffineOpen.stalkMap_injective, AlgebraicGeometry.Scheme.germToFunctionField_injective, SheafOfModules.Hom.mk.injEq",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed or local sites, topological stalks, or the structure sheaf of an integral scheme; they do not state the arbitrary-module pro-etale unit-injectivity assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(injective|[Mm]ono)|[Cc]onstant.*[Ss]heaf.*[Nn]onempty",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed or local sites, topological stalks, or the structure sheaf of an integral scheme; they do not state the arbitrary-module pro-etale unit-injectivity assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"injective\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed or local sites, topological stalks, or the structure sheaf of an integral scheme; they do not state the arbitrary-module pro-etale unit-injectivity assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsLocallyInjectiveToSheafify|constantSheaf.*[Ff]aithful|unit.*[Ii]njective",
+   "results": "10 hits: Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed or local sites, topological stalks, or the structure sheaf of an integral scheme; they do not state the arbitrary-module pro-etale unit-injectivity assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toSheafify\", \"IsLocallyInjective\"",
+   "results": "4 hits: CategoryTheory.Presheaf.isLocallyInjective_toSheafify', CategoryTheory.Presheaf.isLocallyInjective_toSheafify, CategoryTheory.GrothendieckTopology.instIsLocallyInjectiveToSheafify, PresheafOfModules.instIsLocallyInjectiveToSheafify",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic local injectivity and separated-plus results are proof inputs, not detection on a nonempty pro-etale object; reuse lem-sf-constant-module-unit-locally-bijective"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of a constant presheaf is injective at objects with no empty covering sieve",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Plus.inj_of_sep, CategoryTheory.GrothendieckTopology.instIsLocallyInjectiveToSheafify, CategoryTheory.Presheaf.isLocallyInjective_toSheafify', CategoryTheory.Presheaf.isLocallyInjective_toSheafify, CategoryTheory.Presheaf.isLocallyInjective_toPlus, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_injective, CategoryTheory.Sheaf.IsConstant, CategoryTheory.Presheaf.isLocallyInjective_of_injective",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic local injectivity and separated-plus results are proof inputs, not detection on a nonempty pro-etale object; reuse lem-sf-constant-module-unit-locally-bijective"
   }
  ],
  "blueprint": {
@@ -99,5 +196,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-constant-realization-detects-zero",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved local equality using the existing constant-module unit lemma, then used joint surjectivity of a pro-etale cover of a nonempty scheme and identity constant-presheaf restrictions to prove injectivity. The zero-section and zero-restriction consequences are explicit. No new nodes; searched the full DAG, blueprint and project Lean, and searched Mathlib twice by concept.",
+  "blueprint": "Preparatory constant-realization detection below det-lem-integral-models-stacks, Proof first sentence invoking sk-prop-integral-criterion, through the existing via chain for the weakly-contractible constant-reduction argument. No change to the integral-models unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-constant-module-unit-locally-bijective",
+    "why": "Generic local injectivity of the linear sheafification unit on any small site; the integral-models unit has no such site-theoretic lemma. It supplies only local equality, and steps 2 and 3 prove all nonempty-object conclusions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-constant-module-unit-locally-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-5dde60050",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-5dde60050 (reviewer sub-agent of L); spot-checked: I read the item and the full three-step proof; there are no new nodes. The statement is unchanged and true. It needs the nonempty hypothesis: for U empty, the empty cover makes the sections of the constant sheaf zero even when T≠0, so the claim would fail; I also checked U a point and U a disjoint union of two points. Step 1 uses the reviewed, Lean-landed lem-sf-constant-module-unit-locally-bijective: the unit is locally injective. Its equalizer sieve contains a covering family of the pro-étale site, which is what the step uses. Sources checked: Stacks 00WB theorem-plus, 00WK, 03CY. Step 2 is elementary: since V is nonempty, the covering condition of def-weil-pbc-proetale-site gives at least one member of the cover, under both the old wording and the blueprint_update wording. Restrictions are the identity by def-sf-site-constant-module-functor. Source: proetale.tex 0989 and the remark after it that a covering is jointly surjective. Step 3 is elementary: restriction to the localized site gives the same sections at U by 04IX(4), and a zero object of the module-sheaf category has zero sections (03CW). The coefficients are discrete constant modules, not adic ones. I accept the declared tool use of lem-sf-constant-module-unit-locally-bijective: its unit sk-prop-sf-comparison is outside the integral-models route, and it is a generic site lemma. I searched the DAG and the blueprint for duplicates and found none; constant-module-section-properties and reflects-isomorphism are different statements. There is no SGA citation, and I made no fixes."
  }
 }

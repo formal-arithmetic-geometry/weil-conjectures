@@ -12,9 +12,178 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the effect of one boundary-arrow cell in a category $C$ directed on the given blocks. Attach $U(K)\\to U(L)$ at $u\\in O_a,v\\in O_b$, where $K=\\partial\\Delta^n$, $L=\\Delta^n$. In the word-filtration formula, words containing at least two new letters have a factor $C(v,u)=\\varnothing$, so only lengths zero and one remain. The coefficient for the length-one words from $w$ to $z$ is\n$$H_C(w,z)=C(v,z)\\times C(w,u).$$\nIt is empty unless $w\\in O_a,z\\in O_b$: a block before $a$ or after $b$ would otherwise be necessary. Thus all other mapping sets, including both endpoint full subcategories, are unchanged, and the remaining mapping set is exactly\n$$C^+(w,z)=C(w,z)\\amalg_{H_C(w,z)\\times K}(H_C(w,z)\\times L).$$\nThe old-to-new maps are monomorphisms. These assertions are the length-one specialization of [lem-coef-scat-arrow-cell-word-filtration], not an assertion that enriched pushouts are generally computed mappingwise. The fixed-object and variable-object attachments agree by [lem-coef-scat-fixed-object-pushout-comparison]. Both formulas retain the actual composition attaching maps.",
+   "uses": [
+    "lem-coef-scat-arrow-cell-word-filtration",
+    "lem-coef-scat-fixed-object-pushout-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "Put $O=\\coprod_{i\\in S}O_i$. Work in $\\mathrm{sCat}_O$ with the model structure of [lem-coef-fixed-object-simplicial-free-calculus]. For $u\\in O_a,v\\in O_b,n\\geq0$ take the set $J$ of maps $F^O_{u,v}(\\partial\\Delta^n)\\to F^O_{u,v}(\\Delta^n)$ from [lem-coef-fixed-object-free-arrow-adjunction]. The smallness hypothesis for [lem-coef-small-object-cell-factorization] holds with $\\kappa=\\aleph_0$. Indeed a filtered colimit with fixed objects has the degreewise filtered colimits as mapping sets: compose two represented arrows at a common stage; independence and the associative and unit equations hold at a later common stage. This constructs the colimit and verifies its universal property. Evaluation therefore preserves these colimits. By the displayed free/evaluation adjunction, maps from a domain in $J$ are maps from the finite simplicial set $\\partial\\Delta^n$ into that evaluation. Finitely many nondegenerate simplices and finitely many face equations factor, and become equal, at a common stage. Hence this Hom functor preserves the required chains, including $n=0$ with empty boundary. All sets of generators and attaching squares are small after the fixed universe enlargement.",
+   "uses": [
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-small-object-cell-factorization] to $f:T\\to V$ and $J$, obtaining $T\\xrightarrow{j}V'\\xrightarrow{p}V$ with $j$ a $J$-cell map and $p$ having the right lifting property against $J$. Write the continuous cellular sequence as $(T_\\alpha)$, with $T_0=T$ and $T_\\theta=V'$. The standard construction attaches all commutative generator squares at each stage; the compactness just checked allows countably many stages. Each generator is a fixed-object cofibration: by adjunction, its lifting problem against a local trivial Kan fibration is a boundary-lifting problem. It is consequently a Bergner cofibration by [lem-coef-fixed-object-simplicial-free-calculus]; equivalently the attachment comparison and the boundary-arrow generators of [lem-coef-simplicial-interval-lifting] give the same assertion. The cellular left factor has the corresponding left lifting property, so $j$ is a Bergner cofibration. Step 1, applied successively, says that every $T_\\alpha$ is directed and that $j$ is the identity on every nonextreme mapping set. Filtered colimits here are the mappingwise colimits verified in step 2.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-scat-fixed-object-pushout-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "For $u\\in O_a,v\\in O_b$, the free/evaluation adjunction converts the lifting property of $p$ into the right lifting property of $V'(u,v)\\to V(u,v)$ against every boundary inclusion. By [lem-coef-kan-quillen-right-proper] it is a trivial Kan fibration, hence a weak homotopy equivalence. On every other mapping set $V'$ equals $T$, so $p$ there is $f$, a weak homotopy equivalence by hypothesis. The functor $p$ is identity on objects, so its mappingwise equivalences also give essential surjectivity. It is thus a Dwyer--Kan equivalence by [lem-coef-coherent-nerve-comparison]. In particular this replacement of $V$ neither assumes nor produces a local Kan hypothesis on the original data.",
+   "uses": [
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "Let $B_\\alpha=B\\amalg_T T_\\alpha$, with the functor from $T_\\alpha$ given by the pushout cocone; put $P=B_\\theta$. At a successor this attaches exactly the same arrow cells to $B_\\alpha$ as to $T_\\alpha$. This follows from the universal property: giving a functor out of either iterated pushout is giving a functor out of $B$ and one out of the enlarged $T_\\alpha$ agreeing on $T$. A coproduct of cells may be well ordered and attached one at a time, with the same universal property at its end. No new objects occur in any such attachment (step 1). Hence $B_\\alpha$ has object set $\\coprod_{i\\in I}O_i$, is directed, and its nonextreme mapping sets are exactly those of $B$. Its full endpoint subcategories remain $B|_{O_a}$ and $B|_{O_b}$. At limits the same statements follow from the mappingwise filtered-colimit construction of step 2.",
+   "uses": [
+    "lem-coef-scat-arrow-cell-word-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "The ordinary pushout $P=B\\amalg_T V'$ computes the Bergner homotopy pushout. In fact this model structure is left proper by [lem-coef-scat-bergner-left-proper-pushouts], is locally presentable with functorial small-object factorizations for the sets $I$ and $J$ of [lem-coef-simplicial-interval-lifting], and it is combinatorial. Indeed that statement characterizes $J$-inj exactly as the Bergner fibrations of [lem-coef-coherent-nerve-comparison], so the trivial cofibrations, having the left lifting property against them, are $J$-cof. By adjunction and the boundary characterization of [lem-coef-kan-quillen-right-proper], $I$-inj consists of the object-surjective functors that are trivial Kan fibrations on every mapping set. Such a functor is a local Kan fibration and a Dwyer--Kan equivalence, being bijective on components of mapping sets and surjective on objects. It lifts equivalence vertices: lift the target object, then the vertex, which stays invertible because $\\pi_0$ of the functor is fully faithful. Conversely, a trivial Bergner fibration is locally a trivial Kan fibration. It is surjective on objects: given $b$, essential surjectivity gives some $pa\\to b$ invertible in $\\pi_0$, and equivalence lifting gives an $a'$ with $pa'=b$. Hence the trivial fibrations are $I$-inj and the cofibrations are $I$-cof. Moreover $j:T\\to V'$ is a cofibration by step 3. Thus comparison (a) of [lem-cbc-left-proper-derived-cell-colimits] applies, without assuming $T$, $B$ or $V'$ cofibrant. The map of spans $(B\\leftarrow T\\to V')\\to(B\\leftarrow T\\to V)$ is an objectwise weak equivalence by step 4. The projective derived-colimit comparison [lem-coef-model-colimit-localization-comparison] identifies their homotopy pushout cocones. Consequently $P$ represents the stated $Z$, with the original cocone after inverting $p$. Its labelled objects are the original ones. All mapping-space assertions can therefore be checked on $P$ and its cocone. These are equivalences of labelled cocones.",
+   "uses": [
+    "lem-coef-scat-bergner-left-proper-pushouts",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-cbc-left-proper-derived-cell-colimits",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "Fix $x\\in O_a,z\\in O_b$. Define simplicial sets and their actual comparison maps\n$$R_\\alpha=B(x,z)\\amalg_{T(x,z)}T_\\alpha(x,z),\\qquad r_\\alpha:R_\\alpha\\to B_\\alpha(x,z).$$\nThe map $r_\\alpha$ is induced by the two composition-preserving cocone maps. We prove by cellular induction that it is a weak homotopy equivalence. At $\\alpha=0$, it is the identity of $B(x,z)$. For a single next cell at $(u,v)$ define\n$$H_T=T(v,z)\\times T(x,u),\\qquad H_B=B(v,z)\\times B(x,u).$$\nBoth factors lie within endpoint blocks. They remain unchanged throughout both sequences by steps 1 and 5, so these formulas are valid at every stage. The map $H_T\\to H_B$ is the product of the original two maps induced by $g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "By the hypothesis on $g$, the two factors in $H_T\\to H_B$ are weak homotopy equivalences. Their product, and its product with $K$ or $L$, are weak homotopy equivalences. For completeness, [lem-coef-realization-finite-limits] identifies the realization of a finite simplicial product with the product in k-spaces. Components of a finite product are pairs of components and, at a paired basepoint, sphere maps and their homotopies into a product are pairs. Hence all homotopy groups are products of the corresponding homotopy groups. The weak-equivalence definition in [lem-coef-kan-quillen-right-proper] now gives the assertion, also if a factor is empty. No fibrant replacement of a mapping set is used here.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "By step 1 and the ordinary pushout universal property, the next $R$ is\n$$R_{\\alpha+1}=R_\\alpha\\amalg_{H_T\\times K}(H_T\\times L),$$\nwhere the attaching map is through $T_\\alpha(x,z)$, whereas\n$$B_{\\alpha+1}(x,z)=B_\\alpha(x,z)\\amalg_{H_B\\times K}(H_B\\times L).$$\nThe evident map of these spans commutes because the attaching squares were pushed forward by the functor $T_\\alpha\\to B_\\alpha$, which preserves composition. Its three component maps are weak homotopy equivalences: the map of old terms is $r_\\alpha$ by induction, and the two coefficient maps are from step 8. Both maps $H_T\\times K\\to H_T\\times L$ and $H_B\\times K\\to H_B\\times L$ are monomorphisms degreewise. Apply the pushout assertion of [lem-coef-sset-gluing-filtered-equivalences] to obtain that $r_{\\alpha+1}$ is a weak homotopy equivalence. This proves the successor step, also through the one-cell refinement of a family of attachments.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "At a nonzero limit $\\beta$, step 2 gives $T_\\beta(x,z)=\\operatorname{colim}_{\\alpha<\\beta}T_\\alpha(x,z)$ and $B_\\beta(x,z)=\\operatorname{colim}_{\\alpha<\\beta}B_\\alpha(x,z)$. The definition of $R$ commutes with this colimit: maps from either side to a test simplicial set are a map from $B(x,z)$ and compatible maps from all $T_\\alpha(x,z)$, agreeing on $T(x,z)$. Thus $r_\\beta$ is the filtered colimit of the maps $r_\\alpha$. The ordinal is nonempty and directed, so the filtered-colimit clause of [lem-coef-sset-gluing-filtered-equivalences] proves it is a weak homotopy equivalence. In particular\n$$B(x,z)\\amalg_{T(x,z)}V'(x,z)\\xrightarrow{\\ \\sim\\ }P(x,z).$$\nThis is the comparison from the original mapping-space cocone; its maps from the two terms were kept throughout the induction.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "The map $T(x,z)\\to V'(x,z)$ is a monomorphism, since each cell was a monomorphism by step 1 and a continuous union of monomorphisms is a monomorphism degreewise. All simplicial sets are cofibrant by [lem-coef-kan-quillen-right-proper]. Therefore the ordinary pushout in step 10 is a homotopy pushout of spaces: compare a cofibrant replacement of its span to the original span using assertion (b) of [lem-coef-model-cofibrant-colimit-comparison]. All six objects are cofibrant and the distinguished legs are cofibrations, as that assertion requires. Combining the weak equivalence in step 10 with $V'(x,z)\\to V(x,z)$ from step 4 identifies the whole square with the square in the statement, using the cocone comparison in step 6. On every other mapping set $B\\to P$ is the identity by step 5, hence a weak homotopy equivalence. This also proves the object-set assertion for the representative $P$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-model-cofibrant-colimit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  },
+  {
+   "text": "Finally retain maps of diagrams. Choose the small-object construction of step 3 by attaching every generator square, rather than choosing individual fillers. A block-preserving map sends the square at $(u,v,n)$ to its image square at the image objects, even if it identifies objects. The finite-word construction of the free-arrow functor in [lem-coef-fixed-object-free-arrow-adjunction] supplies the induced maps of attaching objects. This gives maps of the cellular sequences by induction and by the colimit universal property at limits; the countable-stage choice in step 3 is uniform. Word reduction, the two cocone inclusions defining $r_\\alpha$, and the coefficient maps are natural by [lem-coef-scat-arrow-cell-word-filtration]. The derived-colimit comparisons of [lem-coef-model-colimit-localization-comparison] preserve the cocones and their maps. Hence all comparisons just established are natural after the stipulated weak equivalences are inverted. Empty endpoint blocks give an empty generator family and no extreme pairs to check; an empty individual mapping set is allowed in every cell and every product above.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-scat-arrow-cell-word-filtration",
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-left-proper-derived-cell-colimits",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-scat-arrow-cell-word-filtration",
+  "lem-coef-scat-bergner-left-proper-pushouts",
+  "lem-coef-scat-fixed-object-pushout-comparison",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-sset-gluing-filtered-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, inherited coherent coefficient-adjunction foundation; Q43 supplies the extreme-arrow cellular argument, using the existing enriched free-arrow and model-colimit nodes. This auxiliary assertion is not a numbered theorem in the blueprint or HTT."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +219,45 @@
    "results": "{\"t\": \"2026-10-17T08:06:14Z\", \"tool\": \"leanfinder\", \"query\": \"Attaching only arrows from the least to the greatest stratum in a directed enriched category is a homotopy pushout of bimodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.attachCellsιFunctorObj_isColimit₂\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_isColimit₁\", \"CategoryTheory.OrthogonalReflection.step\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\", \"HomotopicalAlgebra.nonempty_attachCells_iff\", \"CategoryTheory.Arrow.cechConerve\", \"CategoryTheory.Arrow.cechConerve_obj\", \"CategoryTheory.OrthogonalReflection.toStep\"], \"digest\": \"1ea90000a8cb2c03\"}",
    "date": "2026-10-17",
    "verdict": "no match: read returned types; these are ordinary coends, enriched Hom definitions, Cech conerves, Dold-Kan constructions or ordinary colimits, not the stated derived enriched gluing theorem. Read Mathlib/CategoryTheory/Limits/Shapes/End.lean:45-79, AlgebraicTopology/SimplicialCategory/Basic.lean:49-72, AlgebraicTopology/SimplicialNerve.lean:28-32 and 193, and AlgebraicTopology/SimplicialSet/HornColimits.lean:338-424. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*pushout|pushout.*homotopy|Bergner",
+   "results": "{\"t\": \"2026-10-17T10:16:43Z\", \"tool\": \"grep\", \"query\": \"homotopy.*pushout|pushout.*homotopy|Bergner\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\"], \"digest\": \"6c65635d1779c527\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary functor-category pushouts, Cech conerves, generic relative cell attachments, simplex generators, or composition of left homotopies; none states extreme-block excision for Bergner homotopy pushouts. Read the types in the actual search output; inspected LeftHomotopy.lean:65-90 and the ordinary pushout evaluation source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy pushout of enriched categories changing only arrows from initial to final objects is computed on extreme mapping spaces",
+   "results": "{\"t\": \"2026-10-17T10:16:43Z\", \"tool\": \"leansearch\", \"query\": \"A homotopy pushout of enriched categories changing only arrows from initial to final objects is computed on extreme mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.IsPushout.of_isColimit_binaryCofan_of_isInitial\", \"coprodIsoPushout\", \"CategoryTheory.IsPushout.of_is_coproduct\", \"CategoryTheory.Limits.hasFiniteColimits_of_hasInitial_and_pushouts\", \"CategoryTheory.Limits.pushout.congrHom_hom\", \"CategoryTheory.Limits.pushoutPushoutLeftIsPushout\", \"CategoryTheory.IsPushout.inl_isoIsPushout_hom\"], \"digest\": \"9054260a200b9ef2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary functor-category pushouts, Cech conerves, generic relative cell attachments, simplex generators, or composition of left homotopies; none states extreme-block excision for Bergner homotopy pushouts. Read the types in the actual search output; inspected LeftHomotopy.lean:65-90 and the ordinary pushout evaluation source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-17T10:16:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialCategory\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary functor-category pushouts, Cech conerves, generic relative cell attachments, simplex generators, or composition of left homotopies; none states extreme-block excision for Bergner homotopy pushouts. Read the types in the actual search output; inspected LeftHomotopy.lean:65-90 and the ordinary pushout evaluation source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed simplicial category, attaching free arrows only from the least block to the greatest block computes a homotopy pushout on those mapping spaces",
+   "results": "{\"t\": \"2026-10-17T10:16:45Z\", \"tool\": \"leanfinder\", \"query\": \"In a directed simplicial category, attaching free arrows only from the least block to the greatest block computes a homotopy pushout on those mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"CategoryTheory.Arrow.cechConerve_map\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\", \"HomotopicalAlgebra.AttachCells\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_m\", \"CategoryTheory.Arrow.cechConerve_obj\", \"CategoryTheory.Arrow.mapCechConerve\"], \"digest\": \"56a8c846599cb80c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary functor-category pushouts, Cech conerves, generic relative cell attachments, simplex generators, or composition of left homotopies; none states extreme-block excision for Bergner homotopy pushouts. Read the types in the actual search output; inspected LeftHomotopy.lean:65-90 and the ordinary pushout evaluation source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative free simplicial category extension adding only arrows between extreme blocks satisfies mapping space excision under weakly equivalent endpoint categories",
+   "results": "{\"t\": \"2026-10-17T10:16:46Z\", \"tool\": \"leanfinder\", \"query\": \"A relative free simplicial category extension adding only arrows between extreme blocks satisfies mapping space excision under weakly equivalent endpoint categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.P_σ\", \"SimplexCategoryGenRel.generators\", \"SimplexCategoryGenRel\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"SSet.modelCategoryQuillen.J\", \"FreeSimplexQuiver.homRel\", \"SimplexCategoryGenRel.toSimplexCategory\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\"], \"digest\": \"fb833841e8ffed96\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary functor-category pushouts, Cech conerves, generic relative cell attachments, simplex generators, or composition of left homotopies; none states extreme-block excision for Bergner homotopy pushouts. Read the types in the actual search output; inspected LeftHomotopy.lean:65-90 and the ordinary pushout evaluation source."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-directed-three-face-mapping-pushout",
@@ -84,5 +288,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-extreme-bimodule-attachment",
+  "worker": "stage1",
+  "summary": "Q43 proves extreme-arrow excision by restricted free-boundary-cell factorization, the existing one-arrow word filtration, endpoint coefficient weak equivalences, and a complete successor/limit induction. All supporting statements already exist; no new node is needed. The statement is unchanged, no Kan or cofibrancy hypothesis is added, and the original cocone comparisons are retained.",
+  "blueprint": "Inherited ancestry: prop-coef-integral-exceptional-adjoint, paragraph 2 (coherent derived coefficient adjunction), through the three-horn face comparison and directed-three-face-mapping-pushout. The present main-20261015 paragraph does not itself mention this enriched auxiliary lemma; this is an agent-supplied cellular proof below that inherited foundation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-left-proper-derived-cell-colimits",
+    "why": "Only generic model-category clause (a) is used to recognize a pushout along one cofibration in the left proper Bergner model as a derived pushout, without cofibrancy assumptions. No node of this unit states that general noncofibrant comparison; this does not replace the coefficient-adjunction or three-face route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-left-proper-derived-cell-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-e04b2d363",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-e04b2d363 (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps and the statements of all 14 cited nodes in full. The delivery has 0 new nodes; the statement and source are unchanged and cite no SGA. There is no dependency cycle (the 779-node closure does not contain the item), and the item does not duplicate lem-coef-directed-enriched-amalgamation or any other node found by rg. Small cases check out: T(x,z)=S^0 with V(x,z)=B(x,z)=pt gives Z(x,z)≃S^1; empty or singleton blocks behave correctly; an intermediate block where g is not an equivalence is left unchanged. Step 1 is right: C(v,u) is empty because a<b, so words with k≥2 vanish, and H_1 is nonempty only on O_a×O_b because a and b are extreme in I. Steps 2–5 are right: compactness with κ=ℵ0, the restricted free-cell factorization, p a local trivial fibration at the extreme pairs and equal to f elsewhere, and B_α=B⊔_T T_α. Steps 7–11 are right: a cellular induction using the gluing and filtered clauses with monomorphism legs, step 8 giving H_T→H_B as a weak equivalence by the endpoint hypothesis, and clause (b) of the cofibrant-colimit node in sSet. One C3/C4 fault was in step 6. Clause (a) of the tool lemma needs a combinatorial model category, but lem-coef-simplicial-interval-lifting does not state that I-inj equals the trivial Bergner fibrations. I wrote out that identification and the J-cof argument, adding coherent-nerve-comparison and kan-quillen-right-proper to the step's uses (both were already in proof_deps); the corrected item is under fixes/dag/nodes/sec-six-functors/. I accept the tool use of lem-cbc-left-proper-derived-cell-colimits, clause (a) only.; 1 file(s) fixed by the reviewer"
  }
 }

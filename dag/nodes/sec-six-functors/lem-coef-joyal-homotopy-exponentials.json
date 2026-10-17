@@ -34,7 +34,8 @@
   {
    "text": "First verify that the stated internal Hom is a quasicategory. A horn $\\Lambda_i^n\\to\\operatorname{Fun}(K,Q)$ transposes to a map $K\\times\\Lambda_i^n\\to Q$. Apply [lem-coef-inner-anodyne-pushout-product] to the inner horn inclusion and $\\varnothing\\hookrightarrow K$: its pushout-product is $K\\times\\Lambda_i^n\\hookrightarrow K\\times\\Delta^n$, up to interchanging factors, and is inner anodyne. Here an inner horn is inner anodyne because every inner fibration lifts against it by definition. Since $Q\\to\\Delta^0$ is an inner fibration, the transposed map extends, giving the required horn filler. All sets and maps remain in the chosen universe.",
    "uses": [
-    "lem-coef-inner-anodyne-pushout-product"
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-joyal-strict-currying"
    ],
    "elementary": false,
    "source": {
@@ -45,7 +46,8 @@
   {
    "text": "Products with any simplicial set preserve categorical equivalences. Indeed, for $u:A\\to B$ a categorical equivalence, any $K$, and any test quasicategory $C$, simplicial currying gives isomorphisms $\\operatorname{Fun}(B\\times K,C)\\cong\\operatorname{Fun}(B,\\operatorname{Fun}(K,C))$ and the corresponding isomorphism for $A$. Step 1 makes the new target $\\operatorname{Fun}(K,C)$ a quasicategory. Use the current conventions of [lem-coef-joyal-model-structure], which now refers directly to the enhanced-diagram conventions: its standard simplices, degreewise products and inner-horn definition of quasicategory agree with the ones in Step 1 and in the displayed currying formulas. By that node's testing definition, restriction along $u$ induces an equivalence after applying $h$ to the latter functor simplicial sets; hence restriction along $u\\times1_K$ does too. This holds for every $C$, so $u\\times1_K$ is a categorical equivalence. Factoring $u\\times v$ as $(u\\times1)$ followed by $(1\\times v)$ proves the same for products of two categorical equivalences. The strict product bifunctor therefore descends to the ordinary localization: first localize in each variable, using this preservation of inverted arrows.",
    "uses": [
-    "lem-coef-joyal-model-structure"
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-strict-currying"
    ],
    "elementary": false,
    "source": {
@@ -91,9 +93,44 @@
    }
   },
   {
-   "text": "Simplicial currying identifies actual maps $f:X\\to\\operatorname{Fun}(K,Q)$ with maps $\\widetilde f:X\\times K\\to Q$. Explicitly, at an $n$-simplex $(x,k)$ it sends $(x,k)$ to the value of $f_n(x):K\\times\\Delta^n\\to Q$ on $(k,1_{[n]})$. Conversely a map $g:X\\times K\\to Q$ sends $x\\in X_n$ to the simplicial map whose value on $(k,\\alpha:[m]\\to[n])$ is $g_m(X(\\alpha)(x),k)$. These formulas commute with all simplex operators and undo one another. They identify homotopies $X\\times E\\to\\operatorname{Fun}(K,Q)$ with homotopies $(X\\times K)\\times E\\to Q$, interchanging the $K,E$ factors. Step 1 gives fibrancy of $\\operatorname{Fun}(K,Q)$, so the representative/equality criterion of Step 4 on both sides yields the required bijection\n$$[X,\\operatorname{Fun}(K,Q)]_{\\mathrm J}\\cong[X\\times K,Q]_{\\mathrm J}.$$\nThe forward formula is exactly $\\operatorname{ev}\\circ(f\\times1_K)$ for the actual simplicial evaluation map. Strict currying is natural in all three variables. To check explicitly that the function objects respect inverted arrows, for a categorical equivalence $u:Q\\to Q'$ between quasicategories, the displayed bijection identifies the map induced by $\\operatorname{Fun}(K,u)$ on Hom sets from any $X$ with postcomposition by the isomorphism $[u]$ on $[X\\times K,Q]_{\\mathrm J}$. For a categorical equivalence $v:K\\to K'$, it identifies the map induced by $\\operatorname{Fun}(v,Q)$ with precomposition by $[1_X\\times v]$, an isomorphism by Step 2. Both induced maps are therefore bijections for every $X$. An arrow $t:Y\\to Z$ inducing such bijections is an isomorphism: take $X=Z$ to get $s:Z\\to Y$ with $ts=1_Z$, then injectivity with $X=Y$ and $tst=t$ gives $st=1_Y$. Thus these function-object maps are isomorphisms in the ordinary localization. Step 2 already makes products functorial there; the strict naturality squares now remain commuting after replacing any inverted arrow by its inverse. Together with Step 5 this proves the exponential universal property with its specified evaluation and its naturality in all the variables.",
+   "text": "Strict simplicial currying gives a bijection between actual maps $X\\to\\operatorname{Fun}(K,Q)$ and maps $X\\times K\\to Q$. In one direction, evaluate $f_n(x):K\\times\\Delta^n\\to Q$ on $(k,1_{[n]})$; in the other, send $x\\in X_n$ to the simplicial map whose value on $(k,\\alpha:[m]\\to[n])$ is $g_m(X(\\alpha)(x),k)$. These constructions are inverse by the simplicial identities, and the forward map is exactly composition with the actual evaluation map.",
    "uses": [
-    "lem-coef-model-localization-homotopy-classes"
+    "lem-coef-joyal-strict-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 1.2.7.3, printed p.94, using Proposition 2.2.5.7; the evaluation and homotopy compatibility are written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-joyal-strict-currying] with $X$ replaced by $X\\times E$: maps $H:X\\times E\\to\\operatorname{Fun}(K,Q)$ correspond to maps $(X\\times E)\\times K\\to Q$, and composing with the permutation isomorphism $(X\\times K)\\times E\\to(X\\times E)\\times K$, $(x,k,e)\\mapsto(x,e,k)$, to maps $\\widetilde H:(X\\times K)\\times E\\to Q$. Naturality of that bijection in its first variable, applied to $1_X\\times e_i:X\\cong X\\times\\Delta^0\\to X\\times E$ for $i=0,1$, says that the transpose of $H\\circ(1_X\\times e_i)$ is $\\widetilde H\\circ(1_{X\\times K}\\times e_i)$, since the permutation carries $(1_{X\\times K}\\times e_i)$ to $(1_X\\times e_i)\\times1_K$ under the identifications with products by $\\Delta^0$. Hence, for prescribed $f_0,f_1:X\\to\\operatorname{Fun}(K,Q)$, fixed-cylinder homotopies $X\\times E\\to\\operatorname{Fun}(K,Q)$ from $f_0$ to $f_1$ correspond bijectively to fixed-cylinder homotopies $(X\\times K)\\times E\\to Q$ from $\\widetilde f_0$ to $\\widetilde f_1$. No fibrancy of $E$ or $Q$ is used.",
+   "uses": [
+    "lem-coef-joyal-strict-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 1.2.7.3, printed p.94, using Proposition 2.2.5.7; the evaluation and homotopy compatibility are written explicitly."
+   }
+  },
+  {
+   "text": "Step 1 makes $\\operatorname{Fun}(K,Q)$ fibrant. Apply the representative/equality criterion of Step 4 to $(X,\\operatorname{Fun}(K,Q))$ and $(X\\times K,Q)$. Step 6 bijects their actual representatives, and Step 7 bijects their fixed-cylinder homotopies with the prescribed endpoints. Passing to these equivalence classes gives\n$$[X,\\operatorname{Fun}(K,Q)]_{\\mathrm J}\\cong[X\\times K,Q]_{\\mathrm J}.$$\nIts forward map is induced by actual evaluation, and strict naturality follows from Step 6.",
+   "uses": [
+    "lem-coef-model-localization-homotopy-classes",
+    "lem-coef-joyal-strict-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 1.2.7.3, printed p.94, using Proposition 2.2.5.7; the evaluation and homotopy compatibility are written explicitly."
+   }
+  },
+  {
+   "text": "If $u:Q\\to Q'$ is a categorical equivalence between quasicategories, the bijection identifies $[\\operatorname{Fun}(K,u)]$ with postcomposition by the isomorphism $[u]$; if $v:K\\to K'$ is a categorical equivalence, it identifies $[\\operatorname{Fun}(v,Q)]$ with precomposition by the isomorphism $[1_X\\times v]$, using Step 2. The categorical Yoneda criterion [lem-coef-joyal-homset-iso-detection] then makes both function-object maps isomorphisms, since their maps on Hom sets are bijective for every $X$. Therefore the strict product and evaluation maps descend through the localization, and the displayed bijections prove the exponential universal property with its specified evaluation and full naturality.",
+   "uses": [
+    "lem-coef-model-localization-homotopy-classes",
+    "lem-coef-joyal-homset-iso-detection"
    ],
    "elementary": false,
    "source": {
@@ -114,7 +151,7 @@
    }
   },
   {
-   "text": "It follows that products of two DK equivalences of simplicial categories are DK equivalences. Their maps on mapping simplicial sets are products of weak homotopy equivalences, covered by Step 7. Also $\\pi_0(A\\times B)\\cong\\pi_0A\\times\\pi_0B$: components of a product mapping simplicial set are pairs of components, since edge zigzags project to each coordinate and coordinate zigzags can be combined after inserting identity steps in the other coordinate. Composition and identities act coordinatewise. Hence the induced $\\pi_0$ functor is the product of two equivalences: the inverse functors and their natural isomorphisms can be paired. This verifies both parts of the DK definition in [lem-coef-coherent-nerve-comparison], including for empty object sets.",
+   "text": "It follows that products of two DK equivalences of simplicial categories are DK equivalences. Their maps on mapping simplicial sets are products of weak homotopy equivalences, covered by Step 10. Also $\\pi_0(A\\times B)\\cong\\pi_0A\\times\\pi_0B$: components of a product mapping simplicial set are pairs of components, since edge zigzags project to each coordinate and coordinate zigzags can be combined after inserting identity steps in the other coordinate. Composition and identities act coordinatewise. Hence the induced $\\pi_0$ functor is the product of two equivalences: the inverse functors and their natural isomorphisms can be paired. This verifies both parts of the DK definition in [lem-coef-coherent-nerve-comparison], including for empty object sets.",
    "uses": [
     "lem-coef-coherent-nerve-comparison"
    ],
@@ -138,7 +175,7 @@
    }
   },
   {
-   "text": "Write $P_{K,L}:\\mathfrak C[K\\times L]\\to\\mathfrak C[K]\\times\\mathfrak C[L]$ for the functor whose components are rigidifications of the two projections. First let $K=N_{\\mathrm{hc}}T$, $L=N_{\\mathrm{hc}}U$, with $T,U$ locally Kan. From the defining nerve formula, $N_{\\mathrm{hc}}(T\\times U)\\cong N_{\\mathrm{hc}}T\\times N_{\\mathrm{hc}}U$: a simplicial functor out of each simplex thickening into a product is exactly a pair of such functors. The product $T\\times U$ is locally Kan, by filling each horn in each mapping-set coordinate. Under this nerve identification, the composite $(\\epsilon_T\\times\\epsilon_U)P_{K,L}$ equals $\\epsilon_{T\\times U}$: postcomposing either map with a product projection gives the same map by naturality of the adjunction counit. Step 9 makes all three counits DK equivalences, and Step 8 makes $\\epsilon_T\\times\\epsilon_U$ a DK equivalence. Two-out-of-three proves that $P_{K,L}$ is a DK equivalence in this case.",
+   "text": "Write $P_{K,L}:\\mathfrak C[K\\times L]\\to\\mathfrak C[K]\\times\\mathfrak C[L]$ for the functor whose components are rigidifications of the two projections. First let $K=N_{\\mathrm{hc}}T$, $L=N_{\\mathrm{hc}}U$, with $T,U$ locally Kan. From the defining nerve formula, $N_{\\mathrm{hc}}(T\\times U)\\cong N_{\\mathrm{hc}}T\\times N_{\\mathrm{hc}}U$: a simplicial functor out of each simplex thickening into a product is exactly a pair of such functors. The product $T\\times U$ is locally Kan, by filling each horn in each mapping-set coordinate. Under this nerve identification, the composite $(\\epsilon_T\\times\\epsilon_U)P_{K,L}$ equals $\\epsilon_{T\\times U}$: postcomposing either map with a product projection gives the same map by naturality of the adjunction counit. Step 12 makes all three counits DK equivalences, and Step 11 makes $\\epsilon_T\\times\\epsilon_U$ a DK equivalence. Two-out-of-three proves that $P_{K,L}$ is a DK equivalence in this case.",
    "uses": [
     "lem-coef-coherent-nerve-comparison",
     "lem-coef-quillen-derived-counit-criterion"
@@ -150,7 +187,7 @@
    }
   },
   {
-   "text": "For arbitrary $K,L$, choose the maps $v_K:K\\to K'=N_{\\mathrm{hc}}(R\\mathfrak C[K])$ and $v_L:L\\to L'=N_{\\mathrm{hc}}(R\\mathfrak C[L])$ constructed in Step 9. Naturality of the product projections gives the commuting square\n$$\\begin{array}{ccc}\\mathfrak C[K\\times L]&\\xrightarrow{P_{K,L}}&\\mathfrak C[K]\\times\\mathfrak C[L]\\\\ \\downarrow\\mathfrak C[v_K\\times v_L]&&\\downarrow\\mathfrak C[v_K]\\times\\mathfrak C[v_L]\\\\ \\mathfrak C[K'\\times L']&\\xrightarrow{P_{K',L'}}&\\mathfrak C[K']\\times\\mathfrak C[L'].\\end{array}$$\nStep 2 and [lem-coef-rigidification-equivalence-detection] make the left vertical map a DK equivalence. The same detection theorem and Step 8 make the right vertical map a DK equivalence. Step 10 makes the bottom map a DK equivalence. Two-out-of-three in the Bergner structure of [lem-coef-coherent-nerve-comparison] therefore makes the actual top map $P_{K,L}$ a DK equivalence. This proves the remaining clause without replacing the specified natural map by an unspecified derived isomorphism.",
+   "text": "For arbitrary $K,L$, choose the maps $v_K:K\\to K'=N_{\\mathrm{hc}}(R\\mathfrak C[K])$ and $v_L:L\\to L'=N_{\\mathrm{hc}}(R\\mathfrak C[L])$ constructed in Step 12. Naturality of the product projections gives the commuting square\n$$\\begin{array}{ccc}\\mathfrak C[K\\times L]&\\xrightarrow{P_{K,L}}&\\mathfrak C[K]\\times\\mathfrak C[L]\\\\ \\downarrow\\mathfrak C[v_K\\times v_L]&&\\downarrow\\mathfrak C[v_K]\\times\\mathfrak C[v_L]\\\\ \\mathfrak C[K'\\times L']&\\xrightarrow{P_{K',L'}}&\\mathfrak C[K']\\times\\mathfrak C[L'].\\end{array}$$\nStep 2 and [lem-coef-rigidification-equivalence-detection] make the left vertical map a DK equivalence. The same detection theorem and Step 11 make the right vertical map a DK equivalence. Step 13 makes the bottom map a DK equivalence. Two-out-of-three in the Bergner structure of [lem-coef-coherent-nerve-comparison] therefore makes the actual top map $P_{K,L}$ a DK equivalence. This proves the remaining clause without replacing the specified natural map by an unspecified derived isomorphism.",
    "uses": [
     "lem-coef-rigidification-equivalence-detection",
     "lem-coef-coherent-nerve-comparison"
@@ -166,7 +203,9 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-ex-infinity-finite-products",
   "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-joyal-homset-iso-detection",
   "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-strict-currying",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-model-localization-homotopy-classes",
@@ -314,7 +353,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-diagram-rectification",
@@ -327,16 +366,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-joyal-homotopy-exponentials",
   "worker": "stage1",
-  "summary": "Eleven steps prove all original clauses, using existing DAG nodes only. The proof spells out internal-Hom horn lifting, product stability in the testing convention, a fixed categorical cylinder and its comparison with arbitrary cylinders, quotient-level currying with actual evaluation, and the counit/replacement square for the actual rigidification product comparison. No statement change, new node, Lean edit or compilation. Repair of return for reviewed head 826dd1d533: revalidated all nine cited statements against the current DAG, checked the Joyal node's revised definition binding, and made its use in Steps 2 and 4 explicit; refreshed all four affected statement quotes. The mathematical statement and dependency sets are unchanged.",
-  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2: coherent derived coefficient adjunction preceding the displayed RHom/Rlim calculation; via the recorded ancestry, supplies the Joyal product/exponential tool used in Step 5 of lem-coef-enriched-diagram-rectification."
+  "summary": "The returned step 6 is replaced by four short steps citing separate strict-currying, endpoint-homotopy-currying, and Mathlib Yoneda-detection nodes. All other original arguments and the proof route are retained; their step references are renumbered, and the new strict-currying node also supplies the transpositions in Steps 1 and 2. The item statement and Lean record remain verbatim. Search records have been reconciled with their preserved log, and blueprint ancestry and the helper composition-order typo are repaired. Maintainer review (Q21 reader): the endpoint-compatible cylinder currying is the naturality clause of lem-coef-joyal-strict-currying applied to the endpoint maps 1_X x e_i, a few-line consequence; it is written out in Step 7 and the separate helper node is dropped (delivery-errors C1 exception).",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2: coherent derived coefficient adjunction preceding the displayed RHom/Rlim calculation; the inserted currying and localization substeps make precise the Joyal product/exponential argument used in the recorded route."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q31-6400c272e",
-  "group": "Q31",
+  "reviewer": "NT-cc-Q21-624f1fe96",
+  "group": "Q21",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-6400c272e (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all 11 steps. I read the full statements of all ten dependencies (joyal-model-structure, coherent-nerve-comparison, inner-anodyne-pushout-product, model-localization-homotopy-classes, model-infinity-derived-adjunction, ex-infinity-finite-products, kan-quillen-right-proper, quillen-derived-counit-criterion, rigidification-equivalence-detection, complete-algebroid) and the parent's step 5. The statement is unchanged and true (HTT Cor 2.2.5.4/2.2.5.6, Prop 2.2.5.7/1.2.7.3; the Joyal structure is cartesian, C[K×L]→C[K]×C[L] is a DK equivalence, and Fun(K,Q) is the exponential), and it gives the parent exactly what step 5 uses. Every step checks against what its cited nodes say. Step 1: the pushout-product with ∅⊂K gives Λ×K→Δ×K, which is inner anodyne. Step 2: currying of the testing definition. Step 3: E=N(indiscrete 2-object groupoid); E→Δ^0 is a categorical equivalence because the right Quillen adjoint preserves weak equivalences between fibrant objects and N_hc agrees with N on discrete categories. Step 4: the fixed-cylinder lift; the factorization, 2-of-3 and both lifting systems are verified. Steps 5–6: product and exponential bijections, with explicit currying formulas and a Yoneda-type iso test. Steps 7–8: products of weak homotopy equivalences via Ex^∞, then Kan–Quillen right properness along Kan projections, then products of DK equivalences. Steps 9–11: the counit criterion, the triangle identity ε∘C[v]=r with detection, the fibrant-nerve case via counit naturality, and the replacement square with 2-of-3 for the actual map P_{K,L}. Edge cases (empty K, empty X, K=Δ^0, Δ^1 vs E) pass. There are no new nodes. All citations are in the same unit, so no tool_uses are needed. There is no cycle: the item is not in its 214-node closure. Mathlib has no Joyal model structure, which I confirmed by grep. I found no duplicate: infinity-functor-pushout is an ∞-level cartesian-closure statement, not this one. HTT is not in literature/ and I could not open it; it is recorded as WANTED, with proof_origin agent. No SGA is cited. I made no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-624f1fe96 (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement, all 14 steps, the three new nodes and the statement of every cited node. Every step checks against what its cited statements actually say. Step 4: the lifting square commutes since p j e_i = c e_i = 1_X; both lifts come from the weak factorization systems the Joyal node states. Step 6: the evaluation map is simplicial (checked by hand); this uses the strict-currying node, which is the new part of the delivery. Steps 8-9: the representatives and the fixed-cylinder relations correspond under currying. Step 9 uses the Yoneda leaf in exactly its postcomposition form. Steps 10-14 are as reviewed before. The new node lem-coef-joyal-strict-currying is true and self-contained, with correct explicit formulas. Small cases hold: X or K empty, and K=Δ^0. The Mathlib candidate is correctly left unmatched, since comparing it with the explicit model is a theorem. I found no duplicate in the DAG. lem-coef-joyal-homset-iso-detection exactly matches CategoryTheory.isIso_of_yoneda_map_bijective (Yoneda.lean:897-901, read). Lean's x≫f is f∘x, matching the node's postcomposition. Repair: lem-coef-joyal-cylinder-currying is only the naturality-in-X clause of strict currying, applied to 1_X×e_i and composed with the permutation. Under the C1 exception I wrote that out in Step 7, which now cites lem-coef-joyal-strict-currying, and dropped the node. Step 8 and proof_deps are updated and no citation of it remains. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-joyal-homotopy-exponentials.json. Route: all proof citations are in unit sk-prop-sf-biduality-general, so there are no tool_uses. Blueprint: the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 was read in main-20261015. HTT is not in literature/: the item already records WANTED and proof_origin agent, and the cited places (Prop 1.2.7.3, Cor 2.2.5.6, Prop 2.2.5.7) agree with the statement. No SGA. This is not a target node, so the base-change morphism and coefficient-category checks do not apply. Details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

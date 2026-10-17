@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Pass to the etale representative $M'$ of $M$ by [lem-sf-proetale-constructible-origin]. The two directions of [lem-sf-comparison-tor-amplitude] give $M'$ the same finite Tor interval and transfer an etale finite-Tor output back to the pro-etale category. The Rees lift is separated finite type over $D$, and its fibres and zero section are exactly those asserted by [lem-trf-dnc-functorial-geometry]. Apply [lem-trf-nearby-cycle-finiteness-exchange] to this lift and the generic pullback of $M'$: the output is bounded constructible of finite Tor amplitude. Thus the preservation assertion follows on the category specified by [def-trf-deformation-specialization]. From now through Step 9 work on the etale site; all comparison maps are the specified maps, so the resulting isomorphisms transfer back. We prove the zero-section comparison as an isomorphism on all bounded constructible etale inputs, a slightly stronger auxiliary assertion needed for truncations.",
+   "text": "Pass to the etale representative $M'$ of $M$ by [lem-sf-proetale-constructible-origin]. The two directions of [lem-sf-comparison-tor-amplitude] give $M'$ the same finite Tor interval and transfer an etale finite-Tor output back to the pro-etale category. The Rees lift is separated finite type over $D$, and its fibres and zero section are exactly those asserted by [lem-trf-dnc-functorial-geometry]. Apply [lem-trf-nearby-cycle-finiteness-exchange] to this lift and the generic pullback of $M'$: the output is bounded constructible of finite Tor amplitude. Thus the preservation assertion follows on the category specified by [def-trf-deformation-specialization]. From now through Step 6 work on the etale site; all comparison maps are the specified maps, so the resulting isomorphisms transfer back. We prove the zero-section comparison as an isomorphism on all bounded constructible etale inputs, a slightly stronger auxiliary assertion needed for truncations.",
    "uses": [
     "lem-sf-proetale-constructible-origin",
     "lem-sf-comparison-tor-amplitude",
@@ -29,68 +29,29 @@
    }
   },
   {
-   "text": "First establish the constant-family unit without using the zero-section theorem. Put $E_T(L)=\\operatorname{Cone}(L\\to\\operatorname{sp}_{T_D}L)$, taking the cone on functorial derived models. Nearby-cycle exactness and unit compatibility in [lem-trf-nearby-cycle-finiteness-exchange] make this a triangulated defect functor. For proper $h:T'\\to T$, proper base change for $h_D$ identifies $E_T(Rh_*L)$ with $Rh_*E_{T'}(L)$; for smooth $h$, smooth base change identifies $E_{T'}(h^*L)$ with $h^*E_T(L)$. These are comparisons of the unit maps, not merely comparisons of objects. On a geometric point the nearby-cycle unit is the identity: the geometric generic point has trivial small etale topos, so the stalk computation $i^*Rj_*L_{\\bar\\eta}=L$ has no positive cohomology. On a smooth scheme, a constant finite module therefore has zero defect by smooth base change from that point. A locally constant finite sheaf has zero defect by an etale trivializing cover and the same smooth exchange. For a bounded complex whose cohomology is locally constant, its finite truncation triangles and exactness give the same conclusion. The definition [def-weil-pbc-constructible-complexes] implies that every bounded constructible complex on affine space has such locally constant cohomology on some dense open subset: discard the closures of the finitely many nondense strata for the finitely many cohomology sheaves. Hence $E_{\\mathbf A^n}(L)$ vanishes on a dense open.",
+   "text": "Constant-family unit. Apply [lem-trf-dnc-defect-proper-smooth-comparison] to the closed pair $(T,T)$, i.e. $X=Z=T$ and $i=\\operatorname{id}_T$: part of its assertion is that the nearby-cycle unit $\\theta_N:N\\to\\operatorname{sp}_{T_D}N$ of the constant lift is an isomorphism for every $N\\in D^b_c(T_{\\mathrm{et}},A)$, with no finite Tor hypothesis. By Step 1, the unit on $M\\in D^b_{ctf}(T,A)$ is the comparison pullback of the unit on an etale representative, so it is an isomorphism; this is the first constant-family assertion. The zero-section map $\\gamma_{X,Z,L}:z^*\\operatorname{sp}_{\\widetilde X_Z}L\\xrightarrow{\\mathrm{BC}^*}\\operatorname{sp}_{Z_D}i^*L\\xrightarrow{\\theta^{-1}}i^*L$ of equation (1.8) is exactly the canonical zero-section map of that node, and $C_{X,Z}(L)$ denotes its defect cone there.",
    "uses": [
-    "lem-trf-nearby-cycle-finiteness-exchange",
-    "def-weil-pbc-constructible-complexes",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-trf-dnc-defect-proper-smooth-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
-    "place": "Remark 3.2.5, definition of the constant-family defect and its generic vanishing"
+    "place": "Example 1.3.3(a), Remark 3.2.5, equation (1.8)"
    }
   },
   {
-   "text": "Prove $E_T=0$ by induction on affine ambient dimension. Zariski locality follows from smooth exchange for open immersions. A finite-type affine scheme has a closed immersion into some $\\mathbf A^n$; proper exchange for this immersion and closed direct image, exact by [lem-cbc-open-closed-recollement] and faithful because the counit $i^*Ri_*\\simeq\\operatorname{id}$ is invertible by [prop-weil-open-closed-recollement-adjunctions], reduce to affine space. The case $n=0$ was computed in Step 2. For $n>0$, let $Y$ be the reduced closure of the cohomological support of $E_{\\mathbf A^n}(L)$, a proper closed subset by Step 2. Choose a nonzero polynomial $P$ vanishing on $Y$ and a direction $v$ on which its highest homogeneous part is nonzero; such a direction exists because $k$ is infinite. After a linear coordinate change and scalar division, $P$ is monic in the coordinate along $v$. Consequently projection $q:\\mathbf A^n\\to\\mathbf A^{n-1}$ is finite on $Y$: its coordinate ring is a quotient of the algebra generated by that coordinate satisfying the monic equation. In the compactification $\\bar q:\\mathbf P^1\\times\\mathbf A^{n-1}\\to\\mathbf A^{n-1}$, the homogenized monic equation has value $1$ at infinity, so the closure of $Y$ stays in $\\mathbf A^n$. Extend $L$ by zero to $\\bar L$. The projection $\\bar q$ is proper by [lemma-nagata-projective-space-base-change-proper]; [thm-dg-finite-type-constructibility] makes $R\\bar q_*\\bar L$ bounded constructible (all schemes here are finite type over $k$ and the order of $A$ is invertible). Proper exchange and induction give $R\\bar q_*E(\\bar L)=E_{\\mathbf A^{n-1}}(R\\bar q_*\\bar L)=0$. On the affine chart its defect is supported on $Y$, and elsewhere only on the infinity section. Their disjoint union is finite over $\\mathbf A^{n-1}$. Localization [lem-cbc-open-closed-recollement] identifies the defect with closed direct image from this finite support. The finite-stalk formula [lem-weil-pbc-finite-stalk-formula-restriction] together with exact geometric stalks [prop-weil-pbc-geometric-stalks-exact] makes direct image from a finite scheme exact and conservative: its stalk is the finite product of the input stalks, so a zero product forces every input stalk to vanish, and [lemma-weil-pbc-geometric-stalk-conservative] detects zero sheaves. Thus $E(\\bar L)=0$ and its restriction $E_{\\mathbf A^n}(L)=0$. This closes the induction and proves that the canonical unit $L\\to\\operatorname{sp}_{T_D}L$ is an isomorphism for every bounded constructible etale $L$.",
+   "text": "Reductions. By [lem-trf-dnc-defect-proper-smooth-comparison], $C_{X,Z}$ is triangulated, compatible with restriction to open subsets, and has the proper comparison $C_{X,Z}(Rh_*L')\\cong Rh_{Z*}C_{X',Z'}(L')$ for proper $h:X'\\to X$ with $Z'=h^{-1}Z$, and the smooth comparison $C_{X',Z'}(h^*L)\\cong h_Z^*C_{X,Z}(L)$; moreover $C_{X,Z}(j_!j^*L)\\to C_{X,Z}(L)$ is an isomorphism and $C_{X,Z}(i_*N)=0$. Hence vanishing of $C_{X,Z}$ is Zariski-local on $X$, and it suffices to prove $C_{X,Z}(L)=0$ for bounded constructible etale $L$ with $i^*L=0$. For $Z=\\varnothing$ the target category is zero and there is nothing to prove.",
    "uses": [
-    "lem-trf-nearby-cycle-finiteness-exchange",
-    "lem-cbc-open-closed-recollement",
-    "lemma-nagata-projective-space-base-change-proper",
-    "lem-weil-pbc-finite-stalk-formula-restriction",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "thm-dg-finite-type-constructibility",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "prop-weil-open-closed-recollement-adjunctions"
+    "lem-trf-dnc-defect-proper-smooth-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
-    "place": "Remark 3.2.5, final sentence, with the finite-projection induction of §3.2.4 written out"
+    "place": "Lemma 3.2.1(a)--(b) and §3.2.2(I)"
    }
   },
   {
-   "text": "Using the constant-family unit just proved, define $C_{X,Z}(L)=\\operatorname{Cone}(\\gamma_{X,Z,L})$ where $\\gamma:z^*\\operatorname{sp}_{\\widetilde X_Z}L\\to\\operatorname{sp}_{Z_D}i^*L\\xrightarrow{\\sim}i^*L$ is the map of equation (1.8); the last arrow is the inverse unit. These functorial model cones are exact by [lem-trf-nearby-cycle-finiteness-exchange]. We need its proper/smooth comparison for a morphism $h:X'\\to X$ and $Z'=h^{-1}Z$. The geometry node gives a closed immersion from the Rees lift of $(X',Z')$ into $\\widetilde X_Z\\times_X X'$, so the lifted $h$ is proper if $h$ is proper by [lem-weil-pbc-proper-fp-permanence]. If $h$ is flat, tensoring the inclusion $R[t,I/t]\\subset R[t,t^{-1}]$ with the flat coordinate algebra $R'$ remains injective by [lem-weil-pbc-flat-tensor-exact]; its image is exactly $R'[t,IR'/t]$ since both algebras are generated by $R'[t]$ and the same elements $f/t$. Thus in the flat case the closed immersion is an isomorphism. In particular a smooth $h$ has smooth lift, by smooth base change [lem-sbc-smooth-relative-dimension-permanence]. Its inverse-image zero section is $Z'$ by the geometry node. Nearby-cycle proper/smooth exchange, and ordinary proper/smooth base change on the special fibres in [prop-functor-package], therefore identify the maps $\\gamma$, and hence their cones, as\n$$C_{X,Z}(Rh_*L')\\simeq Rh_{Z*}C_{X',Z'}(L')\\quad(h\\text{ proper}),\\qquad C_{X',Z'}(h^*L)\\simeq h_Z^*C_{X,Z}(L)\\quad(h\\text{ smooth}).$$\nCompatibility with the maps follows from the composition/unit compatibility in the nearby-cycle node. This verifies Lemma 3.2.1 on the actual Rees lifts, rather than presupposing smoothness for an arbitrary normal cone.",
-   "uses": [
-    "def-trf-deformation-specialization",
-    "lem-trf-dnc-functorial-geometry",
-    "lem-trf-nearby-cycle-finiteness-exchange",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "prop-functor-package"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
-    "place": "Equation (1.8), Lemma 1.4.3(c),(e), and Lemma 3.2.1(a)--(b)"
-   }
-  },
-  {
-   "text": "If $Z=X$, its ideal is zero, so its Rees deformation is the constant family $X_D$ and $\\gamma$ is the inverse unit of Step 3, hence $C_{X,X}=0$. Apply proper comparison from Step 4 to the closed immersion $i:Z\\hookrightarrow X$ (proper by [lem-weil-pbc-proper-fp-permanence]) to obtain $C_{X,Z}(i_*i^*L)=0$. The localization triangle of [lem-cbc-open-closed-recollement] and exactness of $C$ then identify $C_{X,Z}(j_!j^*L)$ with $C_{X,Z}(L)$, where $j:X\\setminus Z\\hookrightarrow X$. Thus it suffices to prove $C=0$ when $i^*L=0$. For $Z=\\varnothing$, the target category on $Z$ is zero and the assertion is immediate.",
-   "uses": [
-    "lem-cbc-open-closed-recollement",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-trf-dnc-functorial-geometry"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
-    "place": "§3.2.2(I), including the degenerate closed pairs"
-   }
-  },
-  {
-   "text": "Let $b:X'=\\operatorname{Bl}_Z X\\to X$ and $Z'=b^{-1}Z$. The ideal of $Z$ is finite type because $X$ is Noetherian; [lemma-nagata-blowup-proper] makes $b$ proper, [thm-nagata-global-blowup-complement] identifies its complement with $X\\setminus Z$, and [thm-nagata-blowup-principalizes-center] makes $Z'$ an effective Cartier divisor. Because $i^*L=0$, the unit $L\\to Rb_*b^*L$ is an isomorphism: outside $Z$ it is the identity under that complement isomorphism, and over $Z$ proper base change in [prop-functor-package] gives zero, since $b^*L$ restricts to zero on $Z'$. Exactness [prop-weil-pbc-geometric-stalks-exact] and conservativity of geometric stalks check the isomorphism. Step 4 consequently reduces the desired vanishing to $(X',Z',b^*L)$. We may hence assume that $Z$ is Cartier. By Zariski locality, choose an affine chart $X=\\operatorname{Spec}B$ where $Z=V(f)$ is principal. If $B$ is generated over $k$ by $b_1,\\ldots,b_r$, the surjection $k[x_1,\\ldots,x_r,y]\\to B$ sending $y$ to $f$ gives a closed immersion $e:X\\hookrightarrow\\mathbf A^{r+1}$ whose inverse image of the hyperplane $H=V(y)$ is exactly $Z$, including its nonreduced structure. Closed direct image is exact by [lem-cbc-open-closed-recollement] and faithful by applying the invertible closed counit of [prop-weil-open-closed-recollement-adjunctions]; applying proper comparison to $e$ reduces the assertion to $(\\mathbf A^{r+1},H,e_*L)$. Thus it suffices to handle affine space with a coordinate hyperplane.",
+   "text": "Let $b:X'=\\operatorname{Bl}_Z X\\to X$ and $Z'=b^{-1}Z$. The ideal of $Z$ is finite type because $X$ is Noetherian; [lemma-nagata-blowup-proper] makes $b$ proper, [thm-nagata-global-blowup-complement] identifies its complement with $X\\setminus Z$, and [thm-nagata-blowup-principalizes-center] makes $Z'$ an effective Cartier divisor. Because $i^*L=0$, the unit $L\\to Rb_*b^*L$ is an isomorphism: outside $Z$ it is the identity under that complement isomorphism, and over $Z$ proper base change in [prop-functor-package] gives zero, since $b^*L$ restricts to zero on $Z'$. Exactness [prop-weil-pbc-geometric-stalks-exact] and conservativity of geometric stalks check the isomorphism. The proper comparison of Step 3 consequently reduces the desired vanishing to $(X',Z',b^*L)$. We may hence assume that $Z$ is Cartier. By Zariski locality (Step 3), choose an affine chart $X=\\operatorname{Spec}B$ where $Z=V(f)$ is principal. If $B$ is generated over $k$ by $b_1,\\ldots,b_r$, the surjection $k[x_1,\\ldots,x_r,y]\\to B$ sending $y$ to $f$ gives a closed immersion $e:X\\hookrightarrow\\mathbf A^{r+1}$ whose inverse image of the hyperplane $H=V(y)$ is exactly $Z$, including its nonreduced structure. Closed direct image is exact by [lem-cbc-open-closed-recollement] and faithful by applying the invertible closed counit of [prop-weil-open-closed-recollement-adjunctions]; applying proper comparison to $e$ reduces the assertion to $(\\mathbf A^{r+1},H,e_*L)$. Thus it suffices to handle affine space with a coordinate hyperplane.",
    "uses": [
     "lemma-nagata-blowup-proper",
     "thm-nagata-global-blowup-complement",
@@ -99,7 +60,8 @@
     "lemma-weil-pbc-geometric-stalk-conservative",
     "lem-cbc-open-closed-recollement",
     "prop-weil-pbc-geometric-stalks-exact",
-    "prop-weil-open-closed-recollement-adjunctions"
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-trf-dnc-defect-proper-smooth-comparison"
    ],
    "elementary": false,
    "source": {
@@ -108,10 +70,11 @@
    }
   },
   {
-   "text": "We prove $C_{\\mathbf A^n,H}(L)=0$ for $H=\\mathbf A^{n-1}\\times\\{0\\}$ by induction on $n\\geq1$, with all bounded constructible inputs. Step 5 reduces the input to $L|_H=0$. Apply the explicit affine-space coordinate-hyperplane case of [lem-trf-dnc-generic-zero-section-vanishing]. Since the target $L|_H$ is zero, its assertion says precisely that $C_{\\mathbf A^n,H}(L)$ has zero stalk at every generic point of $H$ (a shift of the specialized restriction does not affect vanishing). Its bounded constructibility implies that the closure $Y$ of its cohomological support is a proper closed subset of $H$. For $n=1$, $H$ is a point and its sole point is generic, so this already proves vanishing and starts the induction.",
+   "text": "We prove $C_{\\mathbf A^n,H}(L)=0$ for $H=\\mathbf A^{n-1}\\times\\{0\\}$ by induction on $n\\geq1$, with all bounded constructible inputs. Step 3 reduces the input to $L|_H=0$. Apply the explicit affine-space coordinate-hyperplane case of [lem-trf-dnc-generic-zero-section-vanishing]. Since the target $L|_H$ is zero, its assertion says precisely that $C_{\\mathbf A^n,H}(L)$ has zero stalk at every generic point of $H$ (a shift of the specialized restriction does not affect vanishing). Its bounded constructibility implies that the closure $Y$ of its cohomological support is a proper closed subset of $H$. For $n=1$, $H$ is a point and its sole point is generic, so this already proves vanishing and starts the induction.",
    "uses": [
     "lem-trf-dnc-generic-zero-section-vanishing",
-    "def-weil-pbc-constructible-complexes"
+    "def-weil-pbc-constructible-complexes",
+    "lem-trf-dnc-defect-proper-smooth-comparison"
    ],
    "elementary": false,
    "source": {
@@ -120,14 +83,13 @@
    }
   },
   {
-   "text": "For $n>1$, choose a nonzero polynomial on $H\\simeq\\mathbf A^{n-1}$ vanishing on $Y$ and a direction $l\\subset H$ at which its highest homogeneous part is nonzero. As in Step 3, after coordinates along $l$ the polynomial is monic, so $q|_Y:Y\\to H/l$ is finite and the closure of $Y$ in the relative projective-line compactification has no point at infinity. Put $X'=\\mathbf A^n/l\\simeq\\mathbf A^{n-1}$, $Z'=H/l\\simeq\\mathbf A^{n-2}$ and compactify $q:\\mathbf A^n\\to X'$ by $\\bar q:\\bar X=\\mathbf P^1\\times X'\\to X'$; let $\\bar Z=\\bar q^{-1}Z'$ and extend $L$ by zero to $\\bar L$. The projection is proper by [lemma-nagata-projective-space-base-change-proper]. Step 4 and the induction hypothesis give\n$$R\\bar q_{Z*}C_{\\bar X,\\bar Z}(\\bar L)=C_{X',Z'}(R\\bar q_*\\bar L)=0.$$\nIndeed $(X',Z')$ is the affine hyperplane pair in dimension $n-1$, and its input is bounded constructible by [thm-dg-finite-type-constructibility], whose finite-ring and invertibility hypotheses hold for $A=A_{E,n}$. On the affine chart the defect restricts to $C_{\\mathbf A^n,H}(L)$, supported on $Y$; elsewhere it is supported on the infinity section over $Z'$. These two disjoint closed subsets form a finite scheme over $Z'$ (use their reduced structures), so by [lem-cbc-open-closed-recollement] the defect is closed direct image from their union. The finite-stalk formula [lem-weil-pbc-finite-stalk-formula-restriction] , exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact], and geometric-stalk conservativity then make $R\\bar q_{Z*}$ conservative on such supported complexes, exactly as in Step 3. Hence the defect is zero. This closes the induction. Steps 5--6 reduce every closed pair to it, proving $\\gamma_{X,Z,M}$ is the isomorphism claimed in equation (1.8), on the original finite coefficient category by Step 1.",
+   "text": "For $n>1$, apply [lem-trf-constant-family-defect-finite-projection] to the proper closed subset $Y\\subset H\\simeq\\mathbf A^{n-1}$ from Step 5. It gives a line $l\\subset H$ such that $Y\\to H/l$ is finite and its closure in the relative projective line avoids infinity. Put $X'=\\mathbf A^n/l\\simeq\\mathbf A^{n-1}$ and $Z'=H/l\\simeq\\mathbf A^{n-2}$. Compactify $q:\\mathbf A^n\\to X'$ by $\\bar q:\\bar X=\\mathbf P^1\\times X'\\to X'$, put $\\bar Z=\\bar q^{-1}Z'$, and extend $L$ by zero to $\\bar L$. The projection is proper by [lemma-nagata-projective-space-base-change-proper], and $R\\bar q_*\\bar L$ is bounded constructible by [thm-dg-finite-type-constructibility], since $A$ is finite of order invertible in $k$. The proper comparison of Step 3 and the induction hypothesis give\n$$R\\bar q_{Z*}C_{\\bar X,\\bar Z}(\\bar L)\\simeq C_{X',Z'}(R\\bar q_*\\bar L)=0.$$\nOn the affine chart the defect is supported on $Y$ by open restriction (Step 3); outside it only the infinity section over $Z'$ remains. The projection lemma makes the union of these disjoint closed supports finite over $Z'$. Apply [lem-trf-finite-support-defect-conservativity] to $h=\\bar q_Z$ and this union: the defect vanishes. This closes the induction. The reductions of Steps 3--4 now prove $\\gamma_{X,Z,M}$ is an isomorphism for every closed pair, and Step 1 transfers the result to the original finite-coefficient category.",
    "uses": [
+    "lem-trf-constant-family-defect-finite-projection",
     "lemma-nagata-projective-space-base-change-proper",
     "thm-dg-finite-type-constructibility",
-    "lem-cbc-open-closed-recollement",
-    "lem-weil-pbc-finite-stalk-formula-restriction",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "prop-weil-pbc-geometric-stalks-exact"
+    "lem-trf-finite-support-defect-conservativity",
+    "lem-trf-dnc-defect-proper-smooth-comparison"
    ],
    "elementary": false,
    "source": {
@@ -136,64 +98,86 @@
    }
   },
   {
-   "text": "For the constant lift, write $\\theta_L:L\\to\\operatorname{sp}_{T_D}L$ for the canonical unit, proved invertible in Step 3. Write $b:\\operatorname{sp}_{T_D}\\omega_T\\to\\omega_T$ for the exceptional exchange in the definition [def-trf-deformation-specialization], including the inverse constant-family comparison on the base point. Compatibility of ordinary exchange with the units, and of exceptional exchange with its adjoint mate, in [lem-trf-nearby-cycle-finiteness-exchange] gives $b\\theta_{\\omega_T}=1_{\\omega_T}$: taking the mate of the ordinary unit square yields this equality by the adjunction triangle equations. The special-fibre composition/adjunction identifications are those of [prop-functor-package]. For $\\alpha:A_T\\to\\omega_T$, naturality of $\\theta$ gives $\\operatorname{sp}(\\alpha)\\theta_{A_T}=\\theta_{\\omega_T}\\alpha$. Consequently the defining Borel--Moore specialization is\n$$b\\,\\operatorname{sp}(\\alpha)\\,\\theta_{A_T}=b\\theta_{\\omega_T}\\alpha=\\alpha.$$\nThis proves the identity for the specified canonical map, with no properness assumption on $T$, and transfers to the finite-Tor pro-etale realization by Step 1.",
+   "text": "For the constant lift, write $\\theta_L:L\\to\\operatorname{sp}_{T_D}L$ for the canonical unit, invertible by Step 2. Write $b:\\operatorname{sp}_{T_D}\\omega_T\\to\\omega_T$ for the exceptional exchange in the definition [def-trf-deformation-specialization], including the inverse constant-family comparison on the base point. Compatibility of ordinary exchange with the units, and of exceptional exchange with its adjoint mate, in [lem-trf-nearby-cycle-finiteness-exchange] gives $b\\theta_{\\omega_T}=1_{\\omega_T}$: taking the mate of the ordinary unit square yields this equality by the adjunction triangle equations. The special-fibre composition/adjunction identifications are those of [prop-functor-package]. For $\\alpha:A_T\\to\\omega_T$, naturality of $\\theta$ gives $\\operatorname{sp}(\\alpha)\\theta_{A_T}=\\theta_{\\omega_T}\\alpha$. Consequently the defining Borel--Moore specialization is\n$$b\\,\\operatorname{sp}(\\alpha)\\,\\theta_{A_T}=b\\theta_{\\omega_T}\\alpha=\\alpha.$$\nThis proves the identity for the specified canonical map, with no properness assumption on $T$, and transfers to the finite-Tor pro-etale realization by Step 1.",
    "uses": [
     "def-trf-deformation-specialization",
     "lem-trf-nearby-cycle-finiteness-exchange",
-    "prop-functor-package"
+    "prop-functor-package",
+    "lem-trf-dnc-defect-proper-smooth-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
-    "place": "Examples 1.3.3(a)--(b), with the constant-family unit established independently in Steps 2--3"
+    "place": "Examples 1.3.3(a)--(b), with the constant-family unit of Step 2"
    }
   },
   {
-   "text": "Let $r:T_D\\hookrightarrow\\widetilde T$ be the closed immersion in the final clause, and write $r_0:T\\hookrightarrow\\widetilde T_0$. Since $r$ induces an isomorphism on reductions, it is surjective on underlying sets, so [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism] makes $r$ a finite universal homeomorphism, and every base change of $r$ (to $D^{\\rm sh}$, to the geometric generic fibre, and to the special fibre, giving $r_0$) is again a surjective closed immersion, hence by the same lemma a finite universal homeomorphism. Topological invariance of the etale site [lemma-weil-pbc-universal-homeomorphism-site-equivalence] and the resulting equivalence of small etale topoi [prop-weil-pbc-universal-homeomorphism-topos] apply to these total $D$-schemes; no finite-type-over-$k$ theorem is applied to them. Their etale equivalences identify $i^*Rj_*$ and the nearby-cycle units, since on the generic fibre $r$ is the prescribed identity. The closed immersion $r$ is proper by [lem-weil-pbc-proper-fp-permanence]. Equivalently, the proper exchange for $r$ in [lem-trf-nearby-cycle-finiteness-exchange] gives $\\operatorname{sp}_{\\widetilde T}L\\simeq Rr_{0*}\\operatorname{sp}_{T_D}L$, compatibly with the exchange maps and their adjoint mates. On special fibres, [i-topology] makes $r_0^*$ and $Rr_{0*}=Rr_{0!}$ inverse equivalences. In particular the right adjoint $r_0^!$ of $Rr_{0!}$ is the same quasi-inverse, and [thm-trf-dualizing-complex-composition] identifies $r_0^!\\omega_{\\widetilde T_0}$ with $\\omega_T$. The defining Borel--Moore composite is therefore the constant-family composite followed by the equivalence-induced map\n$$\\operatorname{Hom}(A_T,\\omega_T)\\xrightarrow{\\sim}\\operatorname{Hom}(A_{\\widetilde T_0},\\omega_{\\widetilde T_0}).$$\nThe latter is given by the invertible unit $A_{\\widetilde T_0}\\to Rr_{0*}A_T$ and the invertible exceptional counit $Rr_{0!}r_0^!\\omega_{\\widetilde T_0}\\to\\omega_{\\widetilde T_0}$. By Step 9 the first composite is the identity, so this proves the final specialization isomorphism and its claimed identification through reduction. The same equivalence has a pro-etale realization, exactly [i-topology], so no coefficient categories have been silently identified.",
+   "text": "Let $r:T_D\\hookrightarrow\\widetilde T$ be the closed immersion of the last clause. It lifts $\\operatorname{id}_T$, and its special fibre is $r_0:T\\hookrightarrow\\widetilde T_0$. Closed immersions are proper by [lem-weil-pbc-proper-fp-permanence]. Apply [lem-trf-proper-specialization-borel-moore-compatibility] with $h=\\operatorname{id}_T$ and $\\widetilde h=r$. By [def-trf-borel-moore-pushforward], $\\operatorname{id}_{T*}\\alpha=\\alpha$: its unit and counit are those of the identity adjunctions and its composition isomorphism is the identity one. Hence for every Borel–Moore section $\\alpha$,\n$$\\operatorname{sp}_{\\widetilde T}(\\alpha)=r_{0*}\\bigl(\\operatorname{sp}_{T_D}(\\alpha)\\bigr).$$\nThus Step 7 reduces the final assertion to invertibility of the Borel–Moore pushforward $r_{0*}$.",
    "uses": [
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-    "prop-weil-pbc-universal-homeomorphism-topos",
-    "lem-trf-nearby-cycle-finiteness-exchange",
-    "i-topology",
-    "thm-trf-dualizing-complex-composition",
-    "def-trf-deformation-specialization",
-    "lem-weil-pbc-proper-fp-permanence"
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-proper-specialization-borel-moore-compatibility",
+    "def-trf-borel-moore-pushforward"
    ],
    "elementary": false,
    "source": {
     "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
-    "place": "Proof of Theorem 2.1.3(b), final reduction paragraph; Examples 1.3.3(a)--(b)"
+    "place": "Proof of Theorem 2.1.3(b), final reduction paragraph"
+   }
+  },
+  {
+   "text": "Since $r$ induces an isomorphism on reductions, it is surjective on underlying spaces. By [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism], $r$ and all its base changes are finite universal homeomorphisms. The small etale sites on the total schemes and after the strict-henselian and geometric-generic base changes are equivalent by [lemma-weil-pbc-universal-homeomorphism-site-equivalence]. On the finite-type special fibres, [i-topology] makes $r_0^*$ and $Rr_{0*}=Rr_{0!}$ quasi-inverse on $D^b_{ctf}$, with invertible unit and counit. The composition isomorphism of [thm-trf-dualizing-complex-composition] identifies $r_0^!\\omega_{\\widetilde T_0}$ with $\\omega_T$.",
+   "uses": [
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "i-topology",
+    "thm-trf-dualizing-complex-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Proof of Theorem 2.1.3(b), final reduction paragraph"
+   }
+  },
+  {
+   "text": "By [def-trf-borel-moore-pushforward], $r_{0*}$ sends $\\beta:A_T\\to\\omega_T$ to the composite of the ordinary unit $A_{\\widetilde T_0}\\to Rr_{0*}A_T$, $Rr_{0*}\\beta$, the dualizing composition identification, and the exceptional counit $Rr_{0!}r_0^!\\omega_{\\widetilde T_0}\\to\\omega_{\\widetilde T_0}$. All comparison arrows are invertible by Step 9; in particular the exceptional counit is invertible because $Rr_{0!}$ is an equivalence, so its right adjoint $r_0^!$ is a quasi-inverse. Since the direct-image equivalence is fully faithful, this is an isomorphism on the Hom modules. Combined with Steps 7--8, the specialization is exactly the constant-family identity followed by this equivalence-induced isomorphism, as asserted.",
+   "uses": [
+    "def-trf-borel-moore-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Proof of Theorem 2.1.3(b), final reduction paragraph and Examples 1.3.3"
    }
   }
  ],
  "proof_deps": [
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-comparison-tor-amplitude",
-  "lem-trf-dnc-functorial-geometry",
-  "lem-trf-nearby-cycle-finiteness-exchange",
+  "def-trf-borel-moore-pushforward",
   "def-trf-deformation-specialization",
   "def-weil-pbc-constructible-complexes",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-cbc-open-closed-recollement",
-  "lemma-nagata-projective-space-base-change-proper",
-  "lem-weil-pbc-finite-stalk-formula-restriction",
-  "thm-dg-finite-type-constructibility",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-open-closed-recollement-adjunctions",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "prop-functor-package",
-  "lemma-nagata-blowup-proper",
-  "thm-nagata-global-blowup-complement",
-  "thm-nagata-blowup-principalizes-center",
-  "lem-trf-dnc-generic-zero-section-vanishing",
-  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
   "i-topology",
-  "thm-trf-dualizing-complex-composition",
+  "lem-cbc-open-closed-recollement",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "lem-trf-constant-family-defect-finite-projection",
+  "lem-trf-dnc-defect-proper-smooth-comparison",
+  "lem-trf-dnc-functorial-geometry",
+  "lem-trf-dnc-generic-zero-section-vanishing",
+  "lem-trf-finite-support-defect-conservativity",
+  "lem-trf-nearby-cycle-finiteness-exchange",
+  "lem-trf-proper-specialization-borel-moore-compatibility",
+  "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-  "prop-weil-pbc-universal-homeomorphism-topos"
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "prop-functor-package",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-dg-finite-type-constructibility",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-global-blowup-complement",
+  "thm-trf-dualizing-complex-composition"
  ],
  "proof_origin": {
   "by": "document",
@@ -231,7 +215,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-term-locality",
@@ -253,8 +237,8 @@
   "date": "2026-10-17",
   "item": "lem-trf-specialization-zero-section",
   "worker": "stage1",
-  "summary": "Replaced the empty imported proof by the full defect-functor reduction and affine-dimension induction of Varshavsky §3.2, first proving the constant-family unit independently. Added two genuine lower lemmas: nearby-cycle finiteness/exchange over the trait, and generic zero-section vanishing for a normal principal pair (Claim 3.2.3). Wrote out the flat Rees base change, blowup/hyperplane reduction, monic-polynomial finite projection, boundary support, and conservative finite direct-image arguments. Kept the item statement unchanged. All new-node Mathlib searches were actually run and logged; no exact Lean attachment or Mathlib leaf.",
-  "blueprint": "Refines the normal-cone input to the proof paragraphs (1),(2) of ancestor lem-trf-local-term-locality: preservation, zero-section identification, and invertible specialization of the fixed deformation. Item Steps 1--8 realize Proposition 1.4.2 through §3.2.1--3.2.4, with Step 7 exposing Claim 3.2.3 as a smaller generic lemma. Steps 2--3 independently implement Remark 3.2.5, Step 9 implements Examples 1.3.3(a)--(b), and Step 10 the reduction paragraph of Theorem 2.1.3(b).",
+  "summary": "Repaired the returned split by exposing the hidden finite-projection and finite-support arguments of the constant-family induction as two statement-only nodes, and the hidden proper-specialization compatibility in the nilpotent reduction as a third statement-only node. Replaced long steps 3 and 10 by short cited steps, retaining the item statement and route. Maintainer reader (S1, 2026-10-17): the constant-family unit, the proper/smooth defect comparisons and the 3.2.2(I) localization (former Steps 2--8) are the statement of the existing reviewed node lem-trf-dnc-defect-proper-smooth-comparison; the proof now cites it instead of re-proving it, leaving 10 steps. Unused tool-use declarations removed.",
+  "blueprint": "Refines the normal-cone input to the proof paragraphs (1),(2) of ancestor lem-trf-local-term-locality. The constant-family unit and Lemma 3.2.1/§3.2.2(I) come from the existing defect-comparison node; the zero-section dimension induction is decomposed through finite projection and finite-support conservativity; the final reduction is decomposed through proper specialization exchange and topological invariance.",
   "tool_uses": [
    {
     "node": "lem-sf-proetale-constructible-origin",
@@ -277,20 +261,8 @@
     "why": "Properness of the explicit relative projective-line compactification. No result of the curve-zero unit supplies this generic tool."
    },
    {
-    "node": "lem-weil-pbc-finite-stalk-formula-restriction",
-    "why": "Conservativity and exactness of direct image on complexes supported on a finite subscheme. No result of the curve-zero unit supplies this generic tool."
-   },
-   {
     "node": "lem-weil-pbc-proper-fp-permanence",
     "why": "Base change, composition, and closed-immersion properness for the Rees lift. No result of the curve-zero unit supplies this generic tool."
-   },
-   {
-    "node": "lem-weil-pbc-flat-tensor-exact",
-    "why": "Injectivity in flat base change of the Rees subalgebra. No result of the curve-zero unit supplies this generic tool."
-   },
-   {
-    "node": "lem-sbc-smooth-relative-dimension-permanence",
-    "why": "Smoothness of the Rees base change for a smooth map of pairs. No result of the curve-zero unit supplies this generic tool."
    },
    {
     "node": "prop-functor-package",
@@ -327,6 +299,14 @@
    {
     "node": "prop-weil-open-closed-recollement-adjunctions",
     "why": "The invertible closed counit proves that closed direct image reflects zero complexes; exactness alone would not prove this. No curve-zero node supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "Generic support/properness or comparison tool used in the same Varshavsky reduction, not a replacement for the curve-zero unit route."
+   },
+   {
+    "node": "thm-trf-dualizing-complex-composition",
+    "why": "Generic support/properness or comparison tool used in the same Varshavsky reduction, not a replacement for the curve-zero unit route."
    }
   ]
  },
@@ -348,14 +328,16 @@
   "i-topology",
   "thm-dg-finite-type-constructibility",
   "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-open-closed-recollement-adjunctions"
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "thm-trf-dualizing-complex-composition"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q19-6ad852b4a",
-  "group": "Q19",
+  "reviewer": "NT-cc-Q13-cece4269e",
+  "group": "Q13",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-6ad852b4a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, unit sk-i-curve-zero, the parent lem-trf-local-term-locality and Varshavsky math/0505564 §1.3.1–1.3.4, 1.4.1–1.4.3, Thm 2.1.3, §3.1–3.2.5. No SGA is cited. The item statement is unchanged and correct: Prop 1.4.2/(1.8), Ex 1.3.3(a)-(b), Rem 3.2.5, and the reduction step in the proof of 2.1.3(b). sp is defined via the étale representative, and Step 1 transfers finite Tor both ways, so no coefficient categories are silently identified. All 10 steps check: the defect-cone reductions, the flat Rees base change (1.4.3(c)), the blowup and hyperplane embedding, the monic-direction projection (closure misses infinity), finite-support conservativity, and the BM identity b sp(α) θ_A = α by naturality and the mate triangle. Long steps: Step 3 is one induction argument whose sub-computations take a few lines each and are written out, so it is accepted. Step 10 hid the fact that a closed immersion which is an isomorphism on reductions is a universal homeomorphism, which already exists as lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism (C5). Fixed by citing it and prop-weil-pbc-universal-homeomorphism-topos (both on route). Both new nodes are true, strictly smaller than the item, not circular, and have no duplicate in the DAG. Generic vanishing is exactly Claim 3.2.3, tested on f a unit, f vanishing on a component, and V(x^e) with j_!A. For the nearby-cycle node I fixed B3 by citing def-weil-proper-morphism and def-sbc-smooth-morphisms. The only off-route citation, i-topology, is declared in tool_uses and accepted. Note for the future split of the generic-vanishing node: it will need Lemma 3.2.1 (proper/smooth Rees lifts) as a node, because this item proves it only inline in Step 4.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-cece4269e (reviewer sub-agent of L); spot-checked: I read all of the item, the three new nodes, every cited statement (28), unit sk-i-curve-zero, and Varshavsky math/0505564 §§1.3.1-1.3.4, Notation 1.4.1, (1.8), Prop 1.4.2, Lemma 1.4.3 with proof, the proof of Thm 2.1.3(b), and §§3.1-3.2.5. The statement is unchanged and matches Prop 1.4.2/(1.8), Ex 1.3.3(a)-(b) and the 2.1.3(b) reduction. The base-change map is BC* for the zero-section lift followed by theta^{-1}, as in (1.8). The coefficient category is the pro-etale D^b_ctf through etale representatives, with Tor amplitude transferred in both directions; nothing is weakened and no SGA is cited. Main fault (C5): the existing reviewed node lem-trf-dnc-defect-proper-smooth-comparison, in the same unit, already states the constant-family unit for all etale D^b_c, the defect cone of (1.8), Lemma 3.2.1 proper/smooth comparisons and §3.2.2(I) localization. The delivered Steps 2-8 re-proved all of this inline. The inline proof was correct, but the fix cites the node instead: 15 steps become 10, cross-references are renumbered, and the closure is checked acyclic. Both extracted lemmas are still used in the §3.2.4 induction (now Step 6), so no node is dropped. Small completions: Step 8 now states id_* alpha = alpha, and Step 10 says the exceptional counit is invertible because Rr_{0!} is an equivalence. Stale tool_uses declarations for nodes the proof no longer cites were removed (finite-stalk-formula, flat-tensor-exact, smooth-permanence); i-topology is accepted as the only off-route tool use. I corrected the blueprint.from.place of lem-trf-constant-family-defect-finite-projection. Checks on the new nodes: the projection lemma is true by the monic-direction and homogenization argument, checked on Y empty, m=1 and a line in A^2. Finite-support conservativity is true via K=i_*i^*K, exactness of finite pushforward and the finite stalk formula, checked on K=0, V empty and V=W. The BM proper-specialization compatibility is true (h_0 proper by base change) and does not restate any item clause. None of the three duplicates an existing node. Corrected files are in fixes/dag/nodes/sec-trace-formula/.; 2 file(s) fixed by the reviewer"
  }
 }

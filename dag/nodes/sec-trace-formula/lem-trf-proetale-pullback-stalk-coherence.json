@@ -1,0 +1,71 @@
+{
+ "id": "lem-trf-proetale-pullback-stalk-coherence",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 05V1 (lemma-point-morphism-sites), 0F4F (lemma-point-functor); proetale.tex Tag 0993 (lemma-classical-point). Agent deduction of represented-germ normalization and coherence from these colimit formulas."
+ },
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "def-weil-pbc-proetale-site",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-frobenius-conjugacy",
+  "date": "2026-10-17",
+  "group": "N3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-c-proper-global",
+ "kind": "statement",
+ "title": "Coherence of finite-coefficient pro-etale pullback stalk comparisons",
+ "statement": "Let $A$ be a finite commutative ring. Let $Z\\xrightarrow{h}Y\\xrightarrow{f}X$ be morphisms of schemes, with small pro-etale sites and compatible small skeletons and universes [def-weil-pbc-proetale-site]. Use the constant coefficient sheaves, their canonical inverse-image identifications preserving constant sections [prop-weil-pbc-proetale-constant-ring-map], and the derived pullbacks of [def-weil-pbc-proetale-operations]. For a bounded complex $H$ of $A_X$-module sheaves and a geometric point $v:s=\\operatorname{Spec}\\Omega\\to Z$ [def-weil-geometric-point], write $H_u$ for the termwise geometric stalk complex at a geometric point $u$, with stalks as in [def-weil-proetale-geometric-stalk]. For a morphism $t:T\\to S$, geometric point $u:s\\to T$, and coefficient complex $M$ on $S$, there is a natural $A$-linear isomorphism\n$$c_{t,u,M}:(Lt^*M)_u\\xrightarrow{\\sim}M_{tu}.$$\nIt is the canonical inverse-image stalk comparison, normalized as follows using [def-weil-proetale-inverse-image]: for a sheaf $M$, a representative consists of $a\\in M(V)$, a site morphism $\\theta:U\\to T\\times_SV$, and a pointed lift $u':s\\to U$ over $u$. Its image is $[V,\\operatorname{pr}_V\\theta u',a]$. The inverse sends $[V,w,a]$ to the pullback-unit section on $T\\times_SV$ with pointed lift $(u,w)$.\n\nLet $\\chi_{h,f}:L(fh)^*\\xrightarrow{\\sim}Lh^*Lf^*$ be the canonical composition isomorphism of [lem-weil-pbc-proetale-derived-pullback-composition]. Then\n$$c_{fh,v,H}=c_{f,hv,H}\\circ c_{h,v,Lf^*H}\\circ(\\chi_{h,f,H})_v.$$\nUnder the canonical identity-pullback identification, $c_{\\mathrm{id},u,H}=\\mathrm{id}_{H_u}$. For $\\alpha\\in\\operatorname{Aut}(\\Omega)$, let $r_{u,\\alpha,M}:M_u\\to M_{u\\operatorname{Spec}(\\alpha)}$ send $[V,w,a]$ to $[V,w\\operatorname{Spec}(\\alpha),a]$. Then\n$$r_{tu,\\alpha,M}\\circ c_{t,u,M}=c_{t,u\\operatorname{Spec}(\\alpha),M}\\circ r_{u,\\alpha,Lt^*M}.$$\nThese equalities are natural in the coefficient complex and hold in the ordinary derived categories after localization at quasi-isomorphisms.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical inverse image geometric point fibre functor compatible with composition and field automorphism reparametrization",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.asFiber; AlgebraicGeometry.Scheme.Hom.fiberι_asFiber; AlgebraicGeometry.Scheme.Hom.fiberι_fiberHomeo_symm; AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply; CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber; CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app; AlgebraicGeometry.Scheme.Hom.fiber; AlgebraicGeometry.Scheme.Hom.fiberι",
+   "date": "2026-10-17",
+   "verdict": "no match: topological/structure-sheaf stalks, ordinary scheme pullbacks, finite-set Galois fibres, or Witt-vector/Frobenius results do not state the ordinary pro-etale coefficient-complex comparison and its specified germ normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkPullback\"",
+   "results": "[loogle] OK 9 hit(s); TopCat.Presheaf.stalkPullbackIso; TopCat.Presheaf.stalkPullbackHom; TopCat.Presheaf.stalkPullbackInv; TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom; TopCat.Presheaf.germ_stalkPullbackInv; TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom_assoc; TopCat.Presheaf.germ_stalkPullbackInv_assoc; TopCat.Presheaf.germ_stalkPullbackHom; TopCat.Presheaf.germ_stalkPullbackHom_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: topological/structure-sheaf stalks, ordinary scheme pullbacks, finite-set Galois fibres, or Witt-vector/Frobenius results do not state the ordinary pro-etale coefficient-complex comparison and its specified germ normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPullbackIso|stalk.*[Cc]omp|[Cc]omp.*stalk",
+   "results": "[grep] OK 16 hit(s); Mathlib/Topology/Sheaves/Skyscraper.lean:176; Mathlib/Topology/Sheaves/Skyscraper.lean:223; Mathlib/Topology/Sheaves/Skyscraper.lean:384; Mathlib/Topology/Sheaves/Skyscraper.lean:411; Mathlib/Topology/Sheaves/Skyscraper.lean:413; Mathlib/Topology/Sheaves/Abelian.lean:21; Mathlib/Topology/Sheaves/Abelian.lean:102; Mathlib/Topology/Sheaves/Abelian.lean:103; Mathlib/Topology/Sheaves/Abelian.lean:111; Mathlib/Topology/Sheaves/Abelian.lean:113; Mathlib/Topology/Sheaves/CommRingCat.lean:117; Mathlib/Topology/Sheaves/Stalks.lean:136; Mathlib/Topology/Sheaves/Stalks.lean:155; Mathlib/Topology/Sheaves/Stalks.lean:335; Mathlib/Topology/Sheaves/Stalks.lean:342; Mathlib/Topology/Sheaves/Stalks.lean:347; subdirectory Topology/Sheaves",
+   "date": "2026-10-17",
+   "verdict": "no match: topological/structure-sheaf stalks, ordinary scheme pullbacks, finite-set Galois fibres, or Witt-vector/Frobenius results do not state the ordinary pro-etale coefficient-complex comparison and its specified germ normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "pro etale derived pullback geometric stalk isomorphism composition coherence",
+   "results": "[leansearch] OK 8 hit(s); TopCat.Presheaf.germ_stalkPullbackHom_assoc; TopCat.Presheaf.stalkPullbackIso; AlgebraicGeometry.Scheme.stalkMap_hom_inv_apply; AlgebraicGeometry.Scheme.Modules.pullbackComp; CategoryTheory.Pseudofunctor.DescentData.pullFunctorCompIso; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.Scheme.stalkMap_comp; TopCat.Presheaf.stalkPullbackHom",
+   "date": "2026-10-17",
+   "verdict": "no match: topological/structure-sheaf stalks, ordinary scheme pullbacks, finite-set Galois fibres, or Witt-vector/Frobenius results do not state the ordinary pro-etale coefficient-complex comparison and its specified germ normalization."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-frobenius-conjugacy",
+   "place": "Proof (2): canonical identification of the pro-etale stalk of a pullback with the stalk at the translated point, and transporting the iterated-Weil cocycle through those identifications; extracted from returned proof step 4.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

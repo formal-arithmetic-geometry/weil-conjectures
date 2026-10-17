@@ -9,11 +9,107 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kspace-exponential-law",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "For $x\\in X_n$ define $s_x:\\Delta^n\\to X$ in degree $r$ by $s_x(\\alpha)=X(\\alpha)(x)$ for $\\alpha:[r]\\to[n]$. The functor identities give its naturality. Conversely, any simplicial map $s:\\Delta^n\\to X$ satisfies $s_r(\\alpha)=X(\\alpha)(s_n(\\mathrm{id}_{[n]}))$, by its naturality at $\\alpha$. Thus $x\\mapsto s_x$ and $s\\mapsto s_n(\\mathrm{id})$ are inverse. Applying this also with $X=\\Delta^m$, every map between standard simplices is induced by its unique monotone map. Consequently the objects of $\\operatorname{Simp}(X)$ are pairs $(n,x)$ and a morphism $(r,z)\\to(n,x)$ is precisely an $\\alpha:[r]\\to[n]$ with $z=X(\\alpha)(x)$. This is a small category: the object set is $\\coprod_{n\\geq0}X_n$, and every hom-set is a subset of the finite set of monotone maps between the two finite ordinals.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "§3.1, definition of the category of simplices and Lemma 3.1.3, printed p.75; explicit evaluation calculation"
+   }
+  },
+  {
+   "text": "Let $a_{n,x}:\\Delta^n\\to Z$ be a cocone on this simplex diagram. Define $f_n(x)=(a_{n,x})_n(\\mathrm{id}_{[n]})$. For $\\alpha:[r]\\to[n]$, the cocone equation is $a_{r,X(\\alpha)x}=a_{n,x}\\circ\\Delta(\\alpha)$; evaluation at $\\mathrm{id}_{[r]}$ gives $f_r(X(\\alpha)x)=Z(\\alpha)(f_n(x))$. Hence $f:X\\to Z$ is simplicial. The evaluation formula of step 1 gives $f\\circ s_x=a_{n,x}$ in every degree. Conversely these equations determine $f_n(x)$ by evaluation at the identity, so $f$ is unique. This proves the canonical cocone colimiting by the ordinary categorical universal property. It also covers $X=\\varnothing$: the cocone family and the map from the empty simplicial set are both unique.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 3.1.3, printed p.75; expansion of its one-sentence proof"
+   }
+  },
+  {
+   "text": "For a fixed set $T$, ordinary currying and evaluation give inverse bijections $\\operatorname{Hom}(T\\times B,V)=\\operatorname{Hom}(B,V^T)$, natural in $B,V$, where $V^T$ is the set of functions $T\\to V$. Thus $T\\times-$ is a left adjoint. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to conclude that it preserves every small set colimit, including the empty one. By [lem-weil-pbc-presheaf-colimits-sectionwise] with indexing category $\\Delta$, a small colimit of simplicial sets is formed degreewise in sets. Products are also degreewise by [def-cbc-enhanced-diagrams-cones]. For a fixed simplicial set $B$, the degree-$r$ comparison for $B\\times-$ is therefore exactly the just-established comparison for $B_r\\times-$ in sets. Its inverses commute with every simplicial operator because the comparison does; hence it is an isomorphism of simplicial sets. Interchanging the two factors gives the assertion in the other variable. In particular both product functors preserve the simplex colimits of step 2.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact (1); sites.tex, Tag 00VB, section-limits-colimits-PSh; degreewise specialization"
+   }
+  },
+  {
+   "text": "Use the notation $kC(Y,Z)$ and k-ification of [lem-coef-kspace-exponential-law]. First, $kC(Y,Z)$ is a k-space, so the right side lies in $\\mathcal K$: the identity $kT\\to T$ is continuous since every open set of $T$ passes every compact test, and a compact Hausdorff test $a:C\\to T$ is continuous into $kT$ directly from the definition of its open sets; thus $kT$ and $T$ have the same compact tests, whence $k(kT)=kT$. Moreover, for k-spaces $C,Y$ the k-ified product $k(C\\times Y)$ is the product $C\\times^{\\mathcal K}Y$ of the statement. The exponential law assumed in the statement says precisely that $-\\times^{\\mathcal K}Y$ is left adjoint to $kC(Y,-)$: its hom-set bijections are natural in the source and target. For fixed $Y$ and $g:Z\\to Z'$, the right-adjoint action is postcomposition $h\\mapsto g\\circ h$, as specified by that naturality. Therefore [lem-weil-pbc-left-adjoint-preserves-colimits] shows that $-\\times^{\\mathcal K}Y$ carries every existing small colimit cocone to a colimit cocone. The symmetry $(x,y)\\mapsto(y,x)$ of the k-ified products gives the same result for $Y\\times^{\\mathcal K}-$: the ordinary swap and its inverse are continuous, and k-ification preserves their inverse equations. This includes empty diagrams. No product-topology assertion about ordinary, un-k-ified products is required.",
+   "uses": [
+    "lem-coef-kspace-exponential-law",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact (1), applied to the assumed exponential law; Hovey Proposition 2.4.22(5), printed p.58"
+   }
+  },
+  {
+   "text": "Write $q_{B,E}:R(B\\times E)\\to R(B)\\times^{\\mathcal K}R(E)$ for the pair of maps $R(\\operatorname{pr}_1),R(\\operatorname{pr}_2)$. For maps $b:B\\to B'$ and $e:E\\to E'$, functoriality and the two projection equations imply\n$$q_{B',E'}\\circ R(b\\times e)=(R(b)\\times^{\\mathcal K}R(e))\\circ q_{B,E}.$$\nIndeed composing either side with the first projection gives $R(b\\circ\\operatorname{pr}_1)$ and with the second gives $R(e\\circ\\operatorname{pr}_2)$. This proves naturality of the actual canonical comparison before constructing any inverse.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 3.1.8, printed p.77, canonical comparison; elementary projection calculation"
+   }
+  },
+  {
+   "text": "Fix $m$ and put $B=\\Delta^m$. Index by $(n,y)\\in\\operatorname{Simp}(Y)$, writing $j_y:\\Delta^n\\to Y$. By steps 2 and 3, the legs $B\\times\\Delta^n\\to B\\times Y$ give a colimit; applying the assumed colimit-preserving $R$ gives a colimit with apex $R(B\\times Y)$ and legs $u_y=R(\\mathrm{id}_B\\times j_y)$. By step 4 and colimit preservation of $R$, the legs $v_y=\\mathrm{id}_{R(B)}\\times^{\\mathcal K}R(j_y)$ give a colimit with apex $R(B)\\times^{\\mathcal K}R(Y)$. Put $h_y=q_{B,\\Delta^n}$, an isomorphism by hypothesis. Step 5 gives naturality of $h_y$ in the simplex index and $q_{B,Y}u_y=v_yh_y$. Therefore the maps $u_yh_y^{-1}$ form a cocone on the second diagram: for any transition $a:i\\to j$, naturality gives $h_j^{-1}D'(a)=D(a)h_i^{-1}$, and the cocone equation for $u$ then gives the required equation. The universal property supplies $g$ with $gv_y=u_yh_y^{-1}$. Now $(gq_{B,Y})u_y=u_y$ and $(q_{B,Y}g)v_y=v_y$ for every index. The uniqueness clauses of the two colimits give $gq_{B,Y}=\\mathrm{id}$ and $q_{B,Y}g=\\mathrm{id}$. Thus $q_{\\Delta^m,Y}$ is an isomorphism for every $m,Y$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 3.1.8, first sentence of proof, printed p.77; explicit colimit inverse for a fixed standard simplex"
+   }
+  },
+  {
+   "text": "Fix an arbitrary $Y$, and index now by $(m,x)\\in\\operatorname{Simp}(X)$ with legs $i_x:\\Delta^m\\to X$. Steps 2 and 3 and colimit preservation of $R$ give a colimit with apex $R(X\\times Y)$ and legs $u_x=R(i_x\\times\\mathrm{id}_Y)$. Step 4 gives a colimit with apex $R(X)\\times^{\\mathcal K}R(Y)$ and legs $v_x=R(i_x)\\times^{\\mathcal K}\\mathrm{id}_{R(Y)}$. By step 6, $h_x=q_{\\Delta^m,Y}$ is an isomorphism; step 5 gives $q_{X,Y}u_x=v_xh_x$ and naturality of $h_x$ in this index. Thus the same explicit cocone equation $h_j^{-1}D'(a)=D(a)h_i^{-1}$ shows that $u_xh_x^{-1}$ induces a map $g$ with $gv_x=u_xh_x^{-1}$. Comparing composites with every $u_x$ and $v_x$ gives $gq_{X,Y}=\\mathrm{id}$ and $q_{X,Y}g=\\mathrm{id}$ by colimit uniqueness. An isomorphism in this category is a continuous map with continuous inverse, hence a homeomorphism. Equation of step 5 proves naturality in both variables; multiplying that equation by the inverses also proves naturality of the inverse. Empty simplex categories cause no exception, since uniqueness of maps out of an initial object is the same empty-family uniqueness clause used here.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 3.1.8, first sentence of proof, printed p.77; explicit second colimit argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
   "lem-coef-kspace-exponential-law"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Explicit expansion of Lemma 3.1.3 and the first sentence of the proof of Lemma 3.1.8; missing local archive recorded in report.md. Categorical input proofs checked in literature/stacks-project/categories.tex (0038) and sites.tex (00VB)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +138,66 @@
    "results": "{\"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteProd.lean\"], \"note\": \"\", \"digest\": \"a6474ff477feb5db\"}",
    "date": "2026-10-17",
    "verdict": "no match: search results do not state the required natural-language topological lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit preserving functor from simplicial sets into a cartesian closed category preserves binary products if it preserves products of standard simplices",
+   "results": "{\"top\": [\"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"SSet.instMonoidalClosed\", \"SSet.Truncated.instCartesianMonoidalCategory\"], \"note\": \"\", \"digest\": \"1059c53286e72f94\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole package: presheaf-density and hoFunctor-specific comparison hits are partial results, not the conditional assertion for arbitrary R into k-spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "tautologicalCocone|isColimit.*[Yy]oneda|colimit.*[Ee]lement|prod.*[Cc]olimit",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/GlueData.lean\"], \"note\": \"\", \"digest\": \"03ac388c19025963\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole package: presheaf-density and hoFunctor-specific comparison hits are partial results, not the conditional assertion for arbitrary R into k-spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf, CategoryTheory.Limits.IsColimit",
+   "results": "{\"top\": [], \"note\": \"loogle: unknown identifier 'CategoryTheory.Presheaf'\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; no conclusion of mathematical absence from this query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every presheaf is the colimit of representables indexed by its category of elements",
+   "results": "{\"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"AlgebraicGeometry.PresheafedSpace.colimit_presheaf\", \"TopCat.instHasColimitsOfShapePresheaf\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone_pt\", \"AlgebraicGeometry.PresheafedSpace.instHasColimits\", \"CategoryTheory.Presheaf.coconeOfRepresentable\", \"AlgebraicGeometry.PresheafedSpace.pushforwardDiagramToColimit_obj\"], \"note\": \"\", \"digest\": \"d7d327757b495b08\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: Presheaf.isColimitTautologicalCocone at Mathlib/CategoryTheory/Limits/Presheaf.lean:692 proves the simplex-presentation clause alone"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitTautologicalCocone|isIso_prodComparison_of_stdSimplex|preservesColimit_of_cartesianClosed",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean\"], \"note\": \"\", \"digest\": \"eeb0801e32328efb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole package: presheaf-density and hoFunctor-specific comparison hits are partial results, not the conditional assertion for arbitrary R into k-spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "Presheaf.isColimitTautologicalCocone",
+   "results": "{\"top\": [], \"note\": \"loogle: unknown identifier 'Presheaf.isColimitTautologicalCocone'\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; no conclusion of mathematical absence from this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between colimit preserving functors on presheaves is an isomorphism if it is an isomorphism on representables",
+   "results": "{\"top\": [\"CategoryTheory.isIso_iff_isIso_yoneda_map\", \"LightCondensed.lanPresheafIso\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_yoneda_iff\", \"CategoryTheory.isIso_iff_isIso_coyoneda_map\", \"CategoryTheory.Limits.IsIndObject.iff_of_iso\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_uliftYoneda_iff\", \"CategoryTheory.Yoneda.isIso\", \"CategoryTheory.Presheaf.isIso_of_isLeftKanExtension\"], \"note\": \"\", \"digest\": \"ab77af28c720353e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole package: presheaf-density and hoFunctor-specific comparison hits are partial results, not the conditional assertion for arbitrary R into k-spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.isColimitTautologicalCocone",
+   "results": "{\"top\": [\"CategoryTheory.Presheaf.isColimitTautologicalCocone\"], \"note\": \"\", \"digest\": \"198c73f823192399\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: this declaration at Mathlib/CategoryTheory/Limits/Presheaf.lean:692 proves the simplex-colimit clause, but not the full arbitrary-R k-space product package"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-realization-finite-limits",
@@ -71,5 +223,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-simplex-colimit-product",
+  "worker": "stage1",
+  "summary": "Expanded the simplex cocone using evaluation at identity simplices; used the existing Mathlib leaves for sectionwise presheaf colimits and left-adjoint colimit preservation; constructed continuous inverses for the two successive canonical product comparisons. Statement unchanged. No new nodes. Checked smallness and empty diagrams, exact citation statements, Hovey online, current blueprint ancestry, and project-source attachment searches.",
+  "blueprint": "Serves the existing derived coefficient-adjunction ancestry of prop-coef-integral-exceptional-adjoint: its simplex-presentation/product-colimit subargument used by lem-coef-realization-finite-limits. Current main-20261015 node is in sk-thm-sf-package; retained inherited unit and ancestry without editing maintainer metadata."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-d18ed1c18",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-d18ed1c18 (reviewer sub-agent of L); spot-checked: I read all of the item and checked all 7 steps against what the cited nodes state: def-cbc-enhanced-diagrams-cones, def-weil-pbc-simplicial-set, def-weil-pbc-category-colimit, lem-weil-pbc-left-adjoint-preserves-colimits (Stacks 0038), lem-weil-pbc-presheaf-colimits-sectionwise and lem-coef-kspace-exponential-law. I also read the parent lem-coef-realization-finite-limits; its step 7 is the only use of this item. Hovey is not in the local literature, so I could not open the cited places (Lemma 3.1.3 and the proof of Lemma 3.1.8); I checked that mathematics myself, and the node is correctly marked proof_origin.by=agent. The statement is unchanged and not weakened. Edge cases hold: X empty, X=Delta^0, degenerate simplices, Simp(X) small, and constant-empty R (binary product only, no claim about the terminal object). Steps 1-3: Yoneda evaluation, a direct proof that the simplex cocone is a colimit, and degreewise product-colimit commutation in sets; all correct. Steps 5-7: naturality of the comparison, then the two cocone-inverse arguments; I checked the equations and they are correct. The one fault was in step 4: it reads the exponential law as an adjunction inside K, but the cited exponential-law node never says that kC(Y,Z) is a k-space (k(kT)=kT). I wrote that two-line argument into step 4, and also that k(C x Y) is the product in K; no other field changed. The whole corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-simplex-colimit-product.json. The delivery has no new nodes and no duplicates (rg over the DAG for simplex-category, colimit-of-representables and realization-product nodes found only different or stronger statements). The route is fine: the only cited statements are Mathlib leaves and one node of the same unit, so no tool_uses were needed or accepted. No SGA is used, and there is no base-change morphism or coefficient category to check (not a target node).; 1 file(s) fixed by the reviewer"
  }
 }

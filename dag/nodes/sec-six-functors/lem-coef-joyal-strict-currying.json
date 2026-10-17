@@ -1,0 +1,95 @@
+{
+ "id": "lem-coef-joyal-strict-currying",
+ "kind": "statement",
+ "title": "Strict simplicial currying for simplicial sets",
+ "statement": "Use simplicial sets, standard simplices, degreewise products and the functor simplicial set of [def-cbc-enhanced-diagrams-cones], in fixed universes $\\mathcal U\\in\\mathcal U'$. For any $\\mathcal U$-small simplicial sets $X,K,Q$, set $\\operatorname{Fun}(K,Q)_n=\\operatorname{Hom}_{\\mathsf{sSet}}(K\\times\\Delta^n,Q)$, with operators by precomposition on the simplex factor. There is a bijection\n$$\\operatorname{Hom}_{\\mathsf{sSet}}(X,\\operatorname{Fun}(K,Q))\\cong\\operatorname{Hom}_{\\mathsf{sSet}}(X\\times K,Q),$$\nnatural in $X$, contravariantly in $K$, and covariantly in $Q$. Its forward map sends $f$ to $\\operatorname{ev}\\circ(f\\times1_K)$, where $\\operatorname{ev}_n(h,k)=h_n(k,1_{[n]})$. Its inverse sends $g:X\\times K\\to Q$ to the map whose value at $x\\in X_n$ is the simplicial map $K\\times\\Delta^n\\to Q$ given in degree $m$ by $(k,\\alpha:[m]\\to[n])\\mapsto g_m(X(\\alpha)(x),k)$. These assertions require no fibrancy hypothesis.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 1.2.7.3, printed p.94, explicit simplicial currying and localization argument"
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For simplicial sets X K Q, maps from X to the internal hom from K to Q are naturally in bijection with maps from X times K to Q, and transposition commutes with precomposition",
+   "results": "{\"top\": [\"SSet.instMonoidalClosed\", \"SSet.yonedaEquiv_comp\", \"SSet.prodStdSimplex.objEquiv_naturality\", \"SSet.Truncated.instMonoidalClosed\", \"SSet.yonedaEquiv\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"SSet.ι₁_comp_assoc\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "candidate: SSet.instMonoidalClosed is returned by the semantic index; the local source supplies FunctorToTypes.functorHomEquiv, but not the comparison with the explicitly defined Hom(K times Delta^n,Q) model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For simplicial sets X K Q the exponential has n simplices simplicial maps K times the standard n simplex to Q and maps X into this exponential are maps X times K into Q",
+   "results": "{\"top\": [\"SSet.instMonoidalClosed\", \"CategoryTheory.SimplicialCategory.sHom\", \"SSet.stdSimplex\", \"SSet\", \"SSet.ι₀\", \"SSet.ι₁\", \"SSet.Augmented\", \"SSet.toTop\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "candidate: again returns SSet.instMonoidalClosed and simplicial enriched Hom; no exact declaration for the displayed model and formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For simplicial sets the cartesian internal hom gives a natural bijection of maps out of a product, computed by evaluation",
+   "results": "{\"top\": [\"SSet.Truncated.instMonoidalClosed\", \"CategoryTheory.CartesianMonoidalCategory.homEquivToProd\", \"SSet.prodStdSimplex.objEquiv_naturality\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"SSet.instMonoidalClosed\", \"SSet.yonedaEquiv\", \"SSet.prodStdSimplex.objEquiv\", \"CategoryTheory.CartesianMonoidalCategory.homEquivToProd_apply\"], \"note\": \"\", \"n_hits\": 8}",
+   "date": "2026-10-17",
+   "verdict": "candidate: generic monoidal closed structure, not its explicit identification with this Hom-valued model."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.FunctorToTypes.functorHomEquiv",
+   "results": "{\"top\": [\"CategoryTheory.FunctorToTypes.functorHomEquiv\", \"CategoryTheory.FunctorToTypes.functorHomEquiv_apply_app\", \"CategoryTheory.FunctorToTypes.functorHomEquiv_symm_apply_app\"], \"note\": \"\", \"n_hits\": 3}",
+   "date": "2026-10-17",
+   "verdict": "candidate: generic adjunction for the structured-family internal hom; its local source was read."
+  },
+  {
+   "tool": "grep",
+   "query": "def functorHomEquiv|def adj|instance monoidalClosed",
+   "results": "{\"top\": [\"37\", \"59\", \"75\"], \"note\": \"\", \"n_hits\": 3}",
+   "date": "2026-10-17",
+   "verdict": "candidate: Mathlib/CategoryTheory/Monoidal/Closed/FunctorToTypes.lean lines 37,59,75. Identifying structured HomObj families with simplicial maps K times Delta^n to Q, naturally in n, remains a comparison to prove; not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.instMonoidalClosed",
+   "results": "{\"top\": [], \"note\": \"loogle: unknown identifier 'SSet.instMonoidalClosed'\", \"n_hits\": 0}",
+   "date": "2026-10-17",
+   "verdict": "no match: identifier absent from Loogle despite semantic-index hit; local Monoidal.lean imports the generic FunctorToTypes closed instance."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-joyal-homotopy-exponentials",
+  "date": "2026-10-17",
+  "group": "Q21"
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.FunctorToTypes.functorHomEquiv",
+  "file": "Mathlib/CategoryTheory/Monoidal/Closed/FunctorToTypes.lean",
+  "lines": "37-38",
+  "reason": "The actual functorHom is a structured HomObj family. A natural identification with Hom(K times Delta^n,Q) is needed, together with the displayed evaluation and transpose formulas; generic closedness alone does not state that identification."
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: explicit currying/localization subargument in the Joyal homotopy exponential calculation.",
+   "via": [
+    "lem-coef-joyal-homotopy-exponentials",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

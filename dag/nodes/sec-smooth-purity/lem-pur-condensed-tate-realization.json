@@ -13,17 +13,161 @@
   "lem-weil-pbc-condensed-e-realization",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "sk-prop-sfb-qlbar-colimit-x",
-  "lem-weil-pbc-condensed-point-basis-evaluation",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
   "def-weil-pbc-scheme-conventions",
   "prop-weil-pbc-qbar-condensed-two-colimit",
   "def-pur-roots-of-unity-sheaf",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "def-weil-pbc-bounded-constructible-complete"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A_n=(\\mathbf Z/\\ell^n\\mathbf Z)_X$ and $R=R_X$. The integral-limit and localization clauses of [sk-prop-sfb-qlbar-colimit-x], with $E=\\mathbf Q_\\ell$, identify $R$ canonically with $\\varprojlim_{n\\geq1}A_n$ and $E_X^c$ with $R[1/\\ell]$. The finite-quotient comparison [lem-pur-condensed-zl-reduction-mod-ell-power] identifies $R/\\ell^nR$ with $A_n$, compatibly with every quotient transition. Thus the completed coefficient ring for the given object $M_d$ is the very ring acting in the condensed Tate construction, with the specified projections, rather than the constant sheaf $\\mathbf Z_\\ell$. Moreover [lem-weil-pbc-completed-constant-sheaf-reduction], applied with $A=\\mathbf Z_\\ell$ and $I=(\\ell)$ (Noetherian, every $A/I^n=\\mathbf Z/\\ell^n\\mathbf Z$ finite), identifies the constant sheaves $A_n$ with the coefficient sheaves $(P_n)_X$ of [def-weil-pbc-adic-coefficient-datum] and hence $\\varprojlim_nA_n$ with the completed ring $A_X$ over which the integral category $\\mathcal I_X$ and the realization $J_X$ are formed. Composing, $R\\cong A_X$ compatibly with all projections, so $M_d$, $J_X$ and the Tate construction are all taken over the one ring $R$.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-pur-condensed-zl-reduction-mod-ell-power",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.1 and Lemma 6.8.2(1); quotient comparison: Stacks 093M, sites-modules-lemma-completion-flat"
+   }
+  },
+  {
+   "text": "Put $H_n=\\mu_{\\ell^n,X}$. It is killed by $\\ell^n$ by [def-pur-roots-of-unity-sheaf]. In the sheaf tensor product of [def-pur-sheaf-tensor-product] define $a_n:R\\otimes_{\\mathbf Z}H_n\\to H_n$ by $r\\otimes z\\mapsto\\rho_n(r)z$, with inverse $z\\mapsto1\\otimes z$. To check the other composite, locally lift $\\rho_n(r)$ to an integer $a$ and write $r-a=\\ell^n b$ locally using Step 1; then $(r-a)\\otimes z=b\\otimes\\ell^n z=0$. These local identities prove the equality of sheaf maps. For the root-power map $t_n:H_{n+1}\\to H_n$, one has $t_n(\\rho_{n+1}(r)z)=\\rho_n(r)t_n(z)$; hence $a_n(1\\otimes t_n)=t_na_{n+1}$. At $n=0$, $H_0=\\mu_{1,X}$ has only the identity section, so is the zero abelian sheaf and $R\\otimes_{\\mathbf Z}H_0=0$.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor and balanced maps; the finite-level construction is also in the archived Tate source exhibit in coord/reports/maintenance/nt-target-smooth-purity-qbar.md"
+   }
+  },
+  {
+   "text": "The internal-module/section-ring equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] preserves the underlying sheaves. By the sectionwise limit construction [def-pur-sheaf-inverse-limit], the compatible isomorphisms $a_n$ give $T_X\\cong Z_X$ as $R$-modules. This also handles the index $0$ in [def-pur-condensed-tate-twists]: a compatible family $(z_n)_{n\\geq1}$ extends uniquely by $z_0=0$, and forgetting $z_0$ is its inverse. The comparison respects all positive-index projections, so the action of $R=\\lim A_n$ on $Z_X$ is the one induced by the finite actions.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-sheaf-inverse-limit",
+    "def-pur-condensed-tate-twists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits; sectionwise limits and the cone universal property"
+   }
+  },
+  {
+   "text": "For $d\\geq0$ put $P_d=Z_X^{\\otimes_R d}$, with $P_0=R$, and $H_{n,d}=H_n^{\\otimes_{A_n}d}$, with $H_{n,0}=A_n$. Let $p_n:Z_X\\to H_n$ be the limit projections; by Step 3 they are $R$-linear for the action of $R$ on $H_n$ through $\\rho_n$, so $\\varphi_n:Z_X\\otimes_RA_n\\to H_n$, $z\\otimes\\bar a\\mapsto\\bar a\\,p_n(z)$, is well defined (balanced). Clause 1 of [lem-pur-twist-sheaf-locally-free] makes the transitions $H_{n+1}\\to H_n$ epimorphisms, so $p_n$ is an epimorphism by [det-pe-replete-epimorphism], and hence so is $\\varphi_n$. Clause 2, with $E=\\mathbf Q_\\ell$ and its ring $\\varprojlim_rA_r=R$ (Step 1), gives a pro-etale cover $\\{V\\}$ with $Z_X|_V\\cong R|_V$, generated by a section $e$, and an abstract isomorphism $Z_X\\otimes_RA_n\\cong H_n$; restricted to $V$ both source and target of $\\varphi_n$ are free of rank one over $A_n$. An $A_n$-linear epimorphism $A_n\\to A_n$ is multiplication by a section $a$ with $1$ locally a multiple of $a$; so $a$ is locally, hence globally, a unit, and $\\varphi_n|_V$ is an isomorphism. Thus $\\varphi_n$ is an isomorphism and $p_n(e)$ generates $H_n|_V$. Tensoring the $\\varphi_n$ gives $P_d\\otimes_RA_n\\to H_{n,d}$, $(z_1\\otimes\\cdots\\otimes z_d)\\otimes\\bar a\\mapsto\\bar a\\,p_n(z_1)\\otimes\\cdots\\otimes p_n(z_d)$; on $V$ it sends the generator $e^{\\otimes d}\\otimes1$ to the generator $p_n(e)^{\\otimes d}$, so it is an isomorphism. It commutes with transitions because $t_np_{n+1}=p_n$. Trivializing $H_{n,d}|_V$ by these compatible generators, the map $P_d\\to\\lim_nH_{n,d}$ becomes $R\\to\\lim_nA_n$ on $V$, an isomorphism by Step 1; restriction to $V$ commutes with these sectionwise limits, so $P_d\\cong\\lim_nH_{n,d}$ globally. The transitions $H_{n+1,d}\\to H_{n,d}$ are epimorphisms: on $V$ they are the quotient maps $A_{n+1}\\to A_n$.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "det-pe-replete-epimorphism",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.1.10 (repleteness), Lemma 6.8.2(1) and Proposition 6.8.4(1); the local generator argument is written out here"
+   }
+  },
+  {
+   "text": "Each $P_d$ is locally isomorphic to $R$ by Step 4. Consequently tensoring an exact sequence with $P_d$ restricts on that cover to the original exact sequence; exactness of sheaves is local, so $P_d$ is flat in the sense of [def-pc-flat-sheaf-modules]. By [lem-pc-kflat-closure], $P_d$ placed in degree zero, or shifted by $[2d]$, is K-flat. This proves directly that its derived tensor products with coefficient sheaves can be computed using $P_d$ itself.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-kflat-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Bounded-above flat complexes are K-flat (lemma-bounded-flat-K-flat, Tag 06YQ); also the K-flat resolving class of Tag 06YS"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-proetale-surjective-tower-derived-limit], clauses 1-2, to the strict tower $(H_{n,d})_{n\\geq1}$ of $R$-module sheaves; its epimorphism hypothesis was verified in Step 4. So $\\lim_nH_{n,d}\\cong P_d$ (Step 4) in degree zero, with the map to $\\prod_nH_{n,d}$ given by the projections, is a derived limit: it has a Roos triangle on $1-s$, and $\\prod_nH_{n,d}$ in degree zero is the product in $D(R)$. The functorial derived limit of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] has its natural Roos triangle on the same map $1-s$ of the same product. Applying (TR3) of [def-weil-triangulated-category] to the rotated triangles with the identities of $\\prod_nH_{n,d}$ gives $\\psi:P_d\\to R\\lim_nH_{n,d}$ compatible with both maps to the product and with the connecting maps; by [lemma-weil-pbc-r-lim-levelwise-isomorphism] (all $u_n$ identities) $\\psi$ is an isomorphism. It is the only morphism compatible with the projections: the difference of two such factors through a morphism $P_d\\to(\\prod_nH_{n,d})[-1]$, and the last clause of [lem-weil-proetale-surjective-tower-derived-limit] says there is none but $0$ between sheaves placed in degrees $0$ and $1$. The exact functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] commutes with shifts, giving the required $R$-linear isomorphism $M_d\\cong P_d[2d]$, determined by the compatible projections $P_d\\to H_{n,d}$.",
+   "uses": [
+    "lem-weil-proetale-surjective-tower-derived-limit",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-triangulated-category",
+    "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.1.10, with Propositions 3.2.3(1) and 4.2.8 for the pro-etale site; strict derived-limit exactness: Stacks 0941"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-condensed-e-realization], $J_X$ is induced by derived extension from the completed integral coefficient ring. Hence on the given integral constructible object, now represented by $P_d[2d]$, its value after rationalization is $(E_X^c\\otimes_RP_d)[2d]$. This computation uses the K-flat formula of [lem-pur-derived-change-of-rings]; [lem-pur-kflat-change-of-rings] ensures that $E_X^c\\otimes_RP_d$ is still K-flat over $E_X^c$. Applying the defining scalar extension for $U_X$ therefore gives $\\iota_XU_X(M_d)\\cong(B_X\\otimes_{E_X^c}(E_X^c\\otimes_RP_d))[2d]\\cong(B_X\\otimes_RP_d)[2d]$. The last map is $b\\otimes(e\\otimes z)\\mapsto be\\otimes z$, with inverse $b\\otimes z\\mapsto b\\otimes(1\\otimes z)$; balancing proves both composite identities. The coefficient homomorphism $R\\to B_X$ is exactly the bottom-field inclusion through $E_X^c$, as in [def-pur-condensed-tate-twists]. No flatness of $B_X$ over $R$ is required, since we use the K-flat line.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-condensed-tate-twists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 0G7E: K-flat scalar extension; the balancing formula is Tag 03EK in sites-modules.tex; coefficient realization as specified by the cited J_X comparison"
+   }
+  },
+  {
+   "text": "For the identity morphism of the underlying topos with ring map $R\\to B_X$, apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] repeatedly to $P_{j+1}=P_j\\otimes_R Z_X$, starting at $P_0=R$. Step 5 and [lem-pur-kflat-change-of-rings] allow all these derived tensors to be read as ordinary tensor products. The resulting comparison is $B_X\\otimes_RP_d\\cong(B_X\\otimes_R Z_X)^{\\otimes_{B_X}d}$. For $d\\geq1$ it sends $b\\otimes(z_1\\otimes\\cdots\\otimes z_d)$ to $(b\\otimes z_1)\\otimes(1\\otimes z_2)\\otimes\\cdots\\otimes(1\\otimes z_d)$; its inverse sends $(b_1\\otimes z_1)\\otimes\\cdots\\otimes(b_d\\otimes z_d)$ to $(\\prod_i b_i)\\otimes(z_1\\otimes\\cdots\\otimes z_d)$. Both maps are balanced, commute with restriction, and are inverse on pure tensors. Step 3 identifies $B_X\\otimes_RZ_X$ with the module $L_X$ of [def-pur-condensed-tate-twists]. Its $d$-th power is the module defining $\\mathrm{tateTwistDerived}\\,X\\,\\ell\\,d$. Placing it in degree zero and shifting $[2d]$ proves the claimed isomorphism by Step 7.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-condensed-tate-twists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, applied to change of coefficient ring on a fixed topos"
+   }
+  },
+  {
+   "text": "For $d=0$, Step 4 is $R=\\lim_nA_n$ and Step 6 is $R\\lim_nA_n\\cong R$; the multiplication maps in Step 7 give $B_X\\otimes_{E_X^c}(E_X^c\\otimes_RR)\\cong B_X$. This is the unit comparison required in the statement and the initial case of Step 8. All maps used were defined by coefficient projections, root-power transitions, and the displayed balanced maps. Local generators were used only to test whether those specified maps are isomorphisms, so changing generators does not change the global map. Thus the resulting comparison is canonical. If $X$ is empty all these module sheaves are zero and the same formulas give the unique isomorphism.",
+   "uses": [
+    "def-pur-condensed-tate-twists",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, tensor unit and balancing; archived Tate source: tateTwistNat 0 and tateTwistDerived"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-pur-condensed-zl-reduction-mod-ell-power",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-condensed-tate-twists",
+  "lem-pur-twist-sheaf-locally-free",
+  "det-pe-replete-epimorphism",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-closure",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-triangulated-category",
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+  "place": "Step 2, expanded coefficient-realization bridge using the exact archived Tate construction and the cited coefficient, limit and K-flat results"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +196,80 @@
    "results": "LinearEquiv.extendScalarsOfIsLocalizationEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp, RootPairing.restrictScalars_coe_root, RestrictScalars.addEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, Bornology.IsVonNBounded.extend_scalars",
    "date": "2026-10-17",
    "verdict": "no match: returned declarations are generic category, inverse-system, condensed or smooth notions and do not state this node"
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwistDerived|tateModule|ellAdicSheaf",
+   "results": "{\"t\": \"2026-10-17T09:24:20Z\", \"tool\": \"grep\", \"query\": \"tateTwistDerived|tateModule|ellAdicSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"46814415533aaa1b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of the l-adic roots of unity tower equals the condensed proetale Tate twist",
+   "results": "{\"t\": \"2026-10-17T09:24:22Z\", \"tool\": \"leansearch\", \"query\": \"Derived scalar extension of the l-adic roots of unity tower equals the condensed proetale Tate twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.lanCondensedSet\", \"PadicComplex.instIsScalarTowerPadicPadicAlgCl\", \"IntermediateField.isScalarTower_mid'\", \"AdicCompletion.instIsScalarTower\", \"Algebra.Extension.instIsScalarTowerRing\", \"IntermediateField.botContinuousSMul\", \"Algebra.Extension.instRingOfIsScalarTower.congr_simp\", \"instIsScalarTowerCyclotomicField\"], \"digest\": \"d92c6b9ec4db89e0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tateTwist\"",
+   "results": "{\"t\": \"2026-10-17T09:24:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"tateTwist\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free rank one inverse limit of roots of unity realizes finite Tate twist tensor powers after extension of scalars",
+   "results": "{\"t\": \"2026-10-17T09:24:28Z\", \"tool\": \"leanfinder\", \"query\": \"A locally free rank one inverse limit of roots of unity realizes finite Tate twist tensor powers after extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorH1Cotangent\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"cyclotomicCharacter.toFun_apply\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"BDeRhamPlus\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"cyclotomicCharacter.toFun\", \"CommRing.Pic.mapAlgebra_apply\"], \"digest\": \"188c15ed01f67f2b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization of a derived inverse limit of finite roots-of-unity Tate twists as tensor powers of the condensed l-adic Tate module",
+   "results": "{\"t\": \"2026-10-17T09:24:34Z\", \"tool\": \"leanfinder\", \"query\": \"Realization of a derived inverse limit of finite roots-of-unity Tate twists as tensor powers of the condensed l-adic Tate module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"cyclotomicCharacter.toFun_apply\", \"BDeRhamPlus\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"cyclotomicCharacter.toFun\", \"cyclotomicCharacter.toZModPow_toFun\", \"InfiniteGalois.profiniteGalGrpIsoLimit\", \"cyclotomicCharacter.toZModPow\"], \"digest\": \"2bdcdca5679c76c7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
+  },
+  {
+   "tool": "grep",
+   "query": "ellAdicSheaf|padicIntCondensed|continuousMapRingObj|toZMod.*[Ll]imit",
+   "results": "{\"t\": \"2026-10-17T09:26:26Z\", \"tool\": \"grep\", \"query\": \"ellAdicSheaf|padicIntCondensed|continuousMapRingObj|toZMod.*[Ll]imit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"46814415533aaa1b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous p-adic integer coefficient sheaf is the inverse limit of constant ZMod p power sheaves on the proetale site",
+   "results": "{\"t\": \"2026-10-17T09:26:26Z\", \"tool\": \"leansearch\", \"query\": \"A continuous p-adic integer coefficient sheaf is the inverse limit of constant ZMod p power sheaves on the proetale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt\", \"PadicInt.lift\", \"PadicInt.limNthHom\", \"LightCondensed\", \"LightCondensed.IsDiscrete\", \"PadicInt.instIsAdicCompleteMaximalIdeal\", \"Profinite.asLimitCone\", \"CategoryTheory.Sheaf.IsConstant.mk\"], \"digest\": \"13b778e3738a7c17\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ellAdicSheaf\"",
+   "results": "{\"t\": \"2026-10-17T09:26:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"ellAdicSheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ellAdicSheaf\", \"AlgebraicGeometry.Scheme.isZero_ellAdicSheaf_of_isEmpty\"], \"digest\": \"1a17848bd5bf3cbe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of the condensed ring of continuous p-adic integer valued functions to a scheme proetale site equals the inverse limit of constant finite quotient sheaves",
+   "results": "{\"t\": \"2026-10-17T09:26:37Z\", \"tool\": \"leanfinder\", \"query\": \"The pullback of the condensed ring of continuous p-adic integer valued functions to a scheme proetale site equals the inverse limit of constant finite quotient sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"BDeRhamPlus\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"CondensedMod.ofSheafProfinite\", \"Condensed.profiniteSolid\"], \"digest\": \"203a76c9817f013c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Condensed p-adic integer coefficient pullback has quotient the constant ZMod prime power sheaf and agrees with the completed integral coefficient ring",
+   "results": "{\"t\": \"2026-10-17T09:26:37Z\", \"tool\": \"leanfinder\", \"query\": \"Condensed p-adic integer coefficient pullback has quotient the constant ZMod prime power sheaf and agrees with the completed integral coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"WittVector.factorPowSucc_comp_fontaineThetaModPPow\", \"PadicInt.cast_toZModPow\", \"instCommRingBDeRhamPlus\", \"PadicInt.coe_adicCompletionIntegersEquiv_apply\", \"PadicInt.toZModHom\", \"PadicInt.toZModPow\", \"PadicInt.toZModPow_eq_iff_ext\"], \"digest\": \"bf181942d9cf5f2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Scheme.ellAdicSheaf is a continuous coefficient sheaf, not the Tate tower realization or its comparison with the specified condensed scalar-extension functor; the other displayed hits concern ordinary rings or generic condensed modules."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "nt-target-smooth-purity-qbar",
@@ -66,13 +280,97 @@
  "unit": "sk-thm-purity-transport",
  "blueprint": {
   "from": {
-   "node": null,
-   "place": "The coefficient-realization step: identify the reconstructed Tate tower with the actual condensed Tate twist used by the target",
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Step 2: scalar extension from the rational stage to the Qbar stage; the precise condensed Tate endpoint required by nt-target-smooth-purity-qbar",
    "via": [
     "nt-target-smooth-purity-qbar"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-condensed-tate-realization",
+  "worker": "stage1",
+  "summary": "Expanded the condensed Tate realization into nine steps, reusing existing coefficient-limit and quotient nodes instead of adding duplicates. Checked the exact archived construction including the free module on an abelian sheaf, n=0, balanced base ring, finite transitions, shifted derived limit, scalar realization and twist-zero unit. The item statement is unchanged. Removed two unused basis-evaluation statement dependencies and repaired the historical blueprint source reference through the explicitly recorded parent target. No Lean work or compiler was used. Maintainer reader (2026-10-17): Step 1 now cites the identification of the constant-sheaf limit with the completed ring A_X of the integral category; Step 4 derives that the projection-induced quotient maps are isomorphisms (repleteness plus the local rank-one statement) instead of reading 'canonical' into the abstract isomorphism of clause 2; Step 6 compares the two Roos triangles explicitly (TR3, levelwise-isomorphism lemma, vanishing of negative Ext).",
+  "blueprint": "Realizes the coefficient-realization subargument of thm-pur-rational-and-qbar-purity proof Step 2, as used by nt-target-smooth-purity-qbar; the integral local-line computation and the actual condensed Tate endpoint are now explicit.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Identifies the pulled-back integral ring and its rational localization with the completed coefficients; the purity unit does not supply this coefficient comparison."
+   },
+   {
+    "node": "lem-pur-condensed-zl-reduction-mod-ell-power",
+    "why": "Identifies the specific condensed integral quotient with the constant finite ring, with transition compatibility; this is coefficient algebra, not a replacement purity argument."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Provides local rank-one triviality and the finite quotient projections for the roots-of-unity inverse limit; the item concerns realizing that line, not proving finite smooth purity."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Uses bounded-above flat complexes as K-flat representatives for coefficient extension."
+   },
+   {
+    "node": "lem-weil-proetale-surjective-tower-derived-limit",
+    "why": "Uses repleteness of the pro-etale topos to compute the derived limit of an epimorphic tower of module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Fixes the exact functorial derived-limit model and its compatibility with the common shift."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Uses only its scalar-extension description of J_X on an integral constructible object, not its exchange or direct-image clauses."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes derived scalar extension on a K-flat representative on the same site."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Ensures the intermediate scalar extension remains K-flat before the second scalar extension."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Uses monoidality for the identity topos with coefficient ring change, identifying tensor powers after extension."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Identifies the constant finite sheaves and their limit with the coefficient sheaves (P_n)_X and completed ring A_X of the integral category on which J_X is defined; no node of the purity unit states this coefficient identification."
+   },
+   {
+    "node": "det-pe-replete-epimorphism",
+    "why": "Repleteness of the pro-etale topos: the projection from the roots-of-unity limit to each finite level is an epimorphism, needed to see that the projection-induced quotient map is the stated isomorphism."
+   },
+   {
+    "node": "lemma-weil-pbc-r-lim-levelwise-isomorphism",
+    "why": "A Roos-triangle completion over identity maps of towers is an isomorphism; compares the degree-zero limit with the functorial derived limit defining M_d."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-pur-condensed-zl-reduction-mod-ell-power",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pc-kflat-closure",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "det-pe-replete-epimorphism",
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-feb175c79",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-feb175c79 (reviewer sub-agent of L); spot-checked: Read the item, all 9 steps, every cited node statement, the unit sk-thm-purity-transport, the parent nt-target-smooth-purity-qbar steps 5-6, the archived Tate construction (maintenance report lines 176-223; SmoothPurity/Defs.lean smoothPurityIso) and Bhatt-Scholze 3.1.10, 6.8.1-6.8.4. The coefficient category matches the master source in the item, def-pur-condensed-tate-twists and the Lean: D(Mod_{B_X}) with B_X = p_X^* padicAlgClRingObj. The coefficient map is padicIntRingObjToPadicAlgCl and tateTwistNat is defined recursively. The statement is unchanged and true. I tested d=0, d=1, the n=0 level, ell=2, non-split mu and empty X. No new nodes, no duplicate (tateTwistDerived appears only in the target nodes and def-pur-condensed-tate-twists), no cycle, no SGA. Three faults, all repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-condensed-tate-realization.json. (1) C1/C4: J_X is defined over A_X = lim (P_n)_X (Cont(pi0) coefficient sheaves of def-weil-pbc-adic-coefficient-datum), but R was never identified with it. Step 1 now cites lem-weil-pbc-completed-constant-sheaf-reduction (A=Z_ell, I=(ell)). (2) C4: Step 4 read 'canonical quotient maps' into clause 2 of lem-pur-twist-sheaf-locally-free, whose statement gives only an abstract isomorphism, and inferred an isomorphism from 'both sides are A_n'. It now proves that the projection-induced phi_n is an isomorphism: det-pe-replete-epimorphism makes p_n an epimorphism, and an epimorphism between local rank-one free modules is an isomorphism; the generator-to-generator check follows. (3) E5: Step 6 asserted a 'canonical' identification of the degree-zero Roos-triangle limit with the functorial R lim defining M_d. def-weil-derived-limit makes that comparison a separate claim. It now uses TR3 (def-weil-triangulated-category), lemma-weil-pbc-r-lim-levelwise-isomorphism, and uniqueness from vanishing Hom(P_d, (prod H)[-1]) (last clause of lem-weil-proetale-surjective-tower-derived-limit). I updated proof_deps and added three tool_uses for these off-unit generic lemmas; the ten declared tool uses are accepted. Remark: clause 2 of lem-pur-twist-sheaf-locally-free leaves its module structure and its isomorphism unspecified in the statement; that is a matter for that node, not this delivery.; 1 file(s) fixed by the reviewer"
  }
 }

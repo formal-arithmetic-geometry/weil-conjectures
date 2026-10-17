@@ -78,12 +78,15 @@
    }
   },
   {
-   "text": "Form $Q=A\\times_{C,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,C)\\times_{\\operatorname{ev}_1,C}Z$, and let $q:Q\\to Z$ be the last projection. By [lem-coef-space-path-fibration-replacement] the mapping-path projection for $f$ is a Kan fibration; its pullback $q$ is Kan because a horn lifting square in a pullback is exactly a horn lifting square upstairs with the base coordinate retained. Since $Z$ is Kan, projected-horn filling followed by this lifting shows $Q$ Kan. Define $k:X\\to Q$ by $x\\mapsto(u(x),\\operatorname{const}_{fu(x)},r(x))$. The equality $fu=vr$ makes this well-defined. For any vertex $z$ of $Z$, the strict fiber $Q_z$ is exactly $\\operatorname{hofib}_{v(z)}(f)$. Apply [lem-cbc-right-fibration-space-fiber] to $q$ (a Kan fibration lifts every positive-index horn): its natural constant-path map $j_z:Q_z\\to\\operatorname{hofib}_z(q)$ is a weak equivalence. Define $F_z=\\operatorname{hofib}_z(r)$ and $g_z:F_z\\to Q_z$ by $(x,\\gamma)\\mapsto(u(x),v\\gamma,z)$. For an original object $z=d$, this is exactly the strict-square homotopy-fiber map of Step 4, so $g_d$ is a weak equivalence. Write $h_z:F_z\\to\\operatorname{hofib}_z(q)$ for the fiber map of $k$, namely $(x,\\gamma)\\mapsto(k(x),\\gamma)$. There is a specific simplicial homotopy from $h_z$ to $j_zg_z$: at interval parameter $t$ send $(x,\\gamma)$ to the $Q$-point $(u(x),s\\mapsto v\\gamma(\\min(s,t)),\\gamma(t))$, together with the final $Z$-path $s\\mapsto\\gamma(\\max(s,t))$. The order-preserving functions $\\min,\\max:[1]\\times[1]\\to[1]$ induce simplicial maps. Thus these formulas apply to $n$-simplices with their $\\Delta^n$ parameter retained and commute with every simplicial operator. The first path starts at $v r(x)=f u(x)$ and ends at $v\\gamma(t)$; the second starts at $\\gamma(t)$ and ends at $z$. At $t=0$ the first path is constant and the second is $\\gamma$, giving $h_z$; at $t=1$ they are $v\\gamma$ and the constant path at $z$, giving $j_zg_z$. To justify weak-equivalence invariance under this homotopy without a basepoint assumption, the projection $p:F_z\\times\\Delta^1\\to F_z$ is a simplicial homotopy equivalence: its section at $0$ is an inverse, with cylinder contraction $(x,t,s)\\mapsto(x,\\min(t,s))$. By [lem-cbc-simplicial-homotopy-equivalence-weak], $p$ is a weak equivalence; since $p i_0=p i_1=1$, both endpoint inclusions are weak equivalences on components and all groups. If $z=d$, the homotopy $H$ has $H i_1=j_dg_d$ a weak equivalence, so $H$ and then $H i_0=h_d$ are weak equivalences by composing these isomorphisms. Therefore the particular fiber map $\\operatorname{hofib}_d(k)$ is a weak equivalence for every original object $d$.",
+   "text": "Form $Q=A\\times_{C,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,C)\\times_{\\operatorname{ev}_1,C}Z$ with projection $q:Q\\to Z$. The mapping-path projection for $f$ is a Kan fibration by [lem-coef-space-path-fibration-replacement]. Its pullback $q$ lifts horns by retaining the base coordinate in each lift. Since $Z$ is Kan, filling the projected horn and then lifting it makes $Q$ Kan. Define $k(x)=(u(x),\\operatorname{const}_{fu(x)},r(x))$; it lies in $Q$ since $fu=vr$. For each vertex $z$, $Q_z=\\operatorname{hofib}_{v(z)}(f)$ by its coordinates. By [lem-cbc-right-fibration-space-fiber], the constant-path map $j_z:Q_z\\to\\operatorname{hofib}_z(q)$ is a weak equivalence; $q$ lifts all horns, so in particular is a right fibration. Put $F_z=\\operatorname{hofib}_z(r)$ and $g_z(x,\\gamma)=(u(x),v\\gamma,z)$. For an original object $d$, Step 4 says $g_d$ is a weak equivalence. By [lem-coef-quillen-b-path-minmax-homotopy], the actual fiber map $h_z(x,\\gamma)=(k(x),\\gamma)$ is simplicially homotopic to $j_zg_z$. The projection $p:F_z\\times\\Delta^1\\to F_z$ has its zero section as a homotopy inverse, with contraction $(x,t,s)\\mapsto(x,\\min(t,s))$. It is weak by [lem-cbc-simplicial-homotopy-equivalence-weak]. Realizations are maps of k-spaces [lem-coef-realization-finite-limits], and a simplicial map is weak exactly when its realization lies in the class $W$ of [lem-coef-topological-serre-model], which satisfies two-out-of-three. Since $|p||i_a|=1$, the endpoint sections $i_a$ are weak. For $z=d$ the homotopy $H_d$ satisfies $H_di_1=j_dg_d$ weak, so $H_d$ is weak by two-out-of-three (this covers basepoints such as $(x,0)$ outside the image of $i_1$), and $h_d=H_di_0$ is weak as a composite. Thus the particular fiber map $\\operatorname{hofib}_d(k)$ is weak for every original object $d$.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-space-path-fibration-replacement",
     "lem-cbc-right-fibration-space-fiber",
-    "lem-cbc-simplicial-homotopy-equivalence-weak"
+    "lem-coef-quillen-b-path-minmax-homotopy",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-topological-serre-model"
    ],
    "elementary": false,
    "source": {
@@ -92,13 +95,11 @@
    }
   },
   {
-   "text": "Here original objects suffice, despite the extra vertices of $Z=\\operatorname{Sing}|N\\mathcal D|$. Replace $r:X\\to Z$ and $q:Q\\to Z$ by their mapping-path fibrations, using [lem-coef-space-path-fibration-replacement]. The map $k$ induces a map of these fibrations over $Z$, sending $(x,\\gamma)$ to $(k(x),\\gamma)$; its strict vertex-fiber maps are exactly $\\operatorname{hofib}_z(k)$. For any vertex $z$ of $Z$, regard it as a point of $|N\\mathcal D|$ and choose a simplex representing it. The straight segment in that topological simplex to any of its vertices is a singular edge in $Z$ joining $z$ to the image of an original object $d$. Pull the two mapping-path fibrations back along this edge $\\Delta^1\\to Z$. They remain Kan fibrations by the explicit lifting argument of Step 5; their realizations are Serre fibrations by [lem-coef-kan-realization-serre], and realization identifies their endpoint fibers with the realized simplicial fibers by [lem-coef-realization-finite-limits]. For a Serre fibration over $|\\Delta^1|=[0,1]$, inclusion of either endpoint fiber in the total space is a weak equivalence: in the exact sequence of [lem-coef-serre-homotopy-exact-sequence] all positive homotopy groups of the base vanish, while path lifting and the orbit/stabilizer clause with trivial $\\pi_1([0,1])$ identify components. This holds at every fiber basepoint; every total-space component meets each endpoint fiber by path lifting. The interval is contracted by $(t,s)\\mapsto(1-s)t$ (or $1-(1-s)(1-t)$ at the other endpoint), so the asserted vanishing is explicit. Naturality of that exact sequence gives a commutative square of the endpoint-fiber inclusion maps for our map of fibrations. The weak equivalence at endpoint $d$ from Step 5 therefore implies weak equivalence of the map of total spaces, and then weak equivalence at endpoint $z$, by composing the component and group isomorphisms. If one endpoint fiber is empty, path lifting makes the total space and other endpoint fiber empty as well. We have proved $\\operatorname{hofib}_z(k)$ weakly equivalent for every vertex $z$ of $Z$.",
+   "text": "Replace $r:X\\to Z$ and $q:Q\\to Z$ by the mapping-path Kan fibrations of [lem-coef-space-path-fibration-replacement]. The map $k$ induces a map of these fibrations over $Z$, $(x,\\gamma)\\mapsto(k(x),\\gamma)$, whose strict vertex-fiber maps are exactly $\\operatorname{hofib}_z(k)$. A vertex $z$ of $Z=\\operatorname{Sing}|N\\mathcal D|$ is a point of the realization. By its quotient definition in [def-cbc-enhanced-diagrams-cones], choose a representing point $t$ in a topological simplex of $N\\mathcal D$. The path $s\\mapsto(1-s)t+s e_i$ in that simplex, followed by its characteristic map, is a continuous path from $z$ to an original object vertex $d$. By the definition of the singular complex it is a singular edge $\\Delta^1\\to Z$. Apply [lem-coef-kan-fibration-edge-fiber-transport] to the map of mapping-path fibrations and this edge. Its hypotheses require only Kan fibrations over the common base, which we have. The weak equivalence at $d$ from Step 5 therefore implies weak equivalence at $z$. Empty fibers are included in that lemma. Hence $\\operatorname{hofib}_z(k)$ is weak for every vertex $z$ of $Z$.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-space-path-fibration-replacement",
-    "lem-coef-kan-realization-serre",
-    "lem-coef-realization-finite-limits",
-    "lem-coef-serre-homotopy-exact-sequence"
+    "lem-coef-kan-fibration-edge-fiber-transport"
    ],
    "elementary": false,
    "source": {
@@ -126,10 +127,11 @@
   "lem-coef-quillen-b-comma-homotopy-fiber",
   "lem-coef-space-path-fibration-replacement",
   "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-quillen-b-path-minmax-homotopy",
   "lem-cbc-simplicial-homotopy-equivalence-weak",
-  "lem-coef-kan-realization-serre",
-  "lem-coef-serre-homotopy-exact-sequence",
-  "lem-coef-spaces-homotopy-fiber-detection"
+  "lem-coef-kan-fibration-edge-fiber-transport",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-topological-serre-model"
  ],
  "proof_origin": {
   "by": "agent",
@@ -293,7 +295,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-fibrant-localization-pullbacks",
@@ -318,7 +320,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-quillen-b-discrete-fibration-base-change",
   "worker": "stage1",
-  "summary": "No finished project declaration was found. Keep the statement unchanged. The unique-lift comma isomorphisms transfer the Quillen B hypothesis, and the new point-fiber theorem identifies the canonical fiber maps. Existing acyclic mapping-path, realization and fiber-detection lemmas prove the square, including all singular vertices. No elementary comma calculation was made a node. Second reading replaces path concatenation by a degreewise min/max homotopy.",
+  "summary": "Repair of the human return on long Steps 5 and 6. Preserve the statement, Lean record, route, and other five steps exactly. Extract the explicit min/max fiber-comparison homotopy and natural endpoint-fiber transport along a base edge into two searched, statement-only nodes; Steps 5 and 6 now cite those nodes and retain the elementary coordinate/lifting and straight-segment calculations. Every step is shorter than 2000 characters. Refresh verbatim citations and the signed Q01 review.",
   "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed RHom/Rlim coefficient-adjunction calculation, through the inherited coherent-localization infrastructure chain; the unit has no more specific proof steps.",
   "tool_uses": [
    {
@@ -341,12 +343,12 @@
   "lem-cbc-simplicial-homotopy-equivalence-weak"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NZ-cf7440b4d",
-  "group": "NZ",
+  "reviewer": "NT-cc-Q01-0b3cdd02f",
+  "group": "Q01",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-cf7440b4d (reviewer sub-agent of L); spot-checked: I read every step and the full statements of all ten cited nodes. The item is Cisinski Prop. 4.6.11 dualised to overcategories, and its statement is unchanged. The source is not in the literature folder and is correctly listed as WANTED. Step 2: I redid the unique-lift calculation; (pi down d) is isomorphic to (U down Vd), compatibly with transition maps, so pi inherits the Quillen B hypothesis. Step 3: Sing|-| is Kan by the horn-pair retraction, and its unit is weak for every simplicial set. Step 4: the naturality square (F=a, G=V) gives exactly Phi_d and the strict-square fiber map. Step 5: Q is the pullback of the path fibration, so it is Kan. I checked that the min/max homotopy is made of monotone maps of [n]x[1], with correct endpoints h_z and j_z g_z. The cylinder projection is weak by the simplicial homotopy-equivalence lemma. Step 6: every singular vertex has a straight-segment edge to an object vertex. Realizations of Kan fibrations over Delta^1 are Serre fibrations (non-Kan base allowed), and the exact sequence over [0,1] gives the endpoint inclusions, empty fibers included. Step 7: fiber detection with X,Q,Z,Z Kan, v=id and a constant homotopy. The new node lem-coef-quillen-b-comma-homotopy-fiber is the classical point form of Theorem B. I tested it on E=* -> BG (discrete G = Omega BG) and on empty comma categories, and checked the path direction against the def-cbc homotopy-fiber convention. It is self-contained, statement-only, and strictly weaker than the item (it follows from the item applied to B/b -> B), not a restated clause. Whoever later splits it must avoid the route through the downstream Kan theorem. A DAG-wide grep for Quillen/Theorem B/4.6.11-12/discrete fibration/comma found no duplicate; I read the aspherical-base-change, special-resolutions, equifibered-diagonal and arrow-source-fibers candidates. No cycle: the dependency closure has 67 nodes and does not contain the item. The blueprint ancestor and via chain are correct, and the unit has no steps. I accept the three declared off-unit cbc tools (realization-singular-unit-weak, right-fibration-space-fiber, simplicial-homotopy-equivalence-weak) for the maintainer to record in tool_uses. No SGA source. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-0b3cdd02f (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all 9 cited statements, the unit record and the blueprint ancestor in full. Cisinski, Kerodon and Hovey are not in the local literature (the report lists them as WANTED), so I checked the new agent-derived statements mathematically myself. Step 2: the unique-lift inverse makes Phi_d an isomorphism. Step 4: the naturality clause of the comma lemma applies to the square (a,V). Step 5: the min/max homotopy is correct; at t=0 it gives h_z, at t=1 it gives j_z g_z, the path endpoints fu(x)->v(gamma t) and gamma(t)->z match, and every map used is a monotone map of [n]x[1]. Q and q are Kan, and j_z is a weak equivalence by lem-cbc-right-fibration-space-fiber. Step 6: the straight-segment singular edge runs from z to an object vertex, and the edge lemma applies to E_r, E_q over Z. Step 7 is fiber detection over id_Z. New node lem-coef-quillen-b-path-minmax-homotopy is true and statement-only; I tested it with all spaces a point and with empty X or empty F_z. New node lem-coef-kan-fibration-edge-fiber-transport is true: the realization is a Serre fibration over [0,1], and the long exact sequence plus path lifting give the endpoint inclusions. I tested the identity on Delta^1, a disconnected fiber and the empty cases. Neither new node is a duplicate: lem-coef-kan-pullback-path-comparison needs a Kan base, and the edge-pullback mapping-fiber lemma is about mapping spaces. Neither restates a clause of the item. One fault, repaired (C1/E5): Step 5 inferred that H_d is weak from H_d i_1 weak 'by composing isomorphisms', which is two-out-of-three. The basepoints (x,0) are outside the image of i_1, so this needs basepoint change, and no node was cited. lem-coef-homotopy-groups-basepoint-change would create a cycle through lem-coef-kan-quillen-right-proper. The corrected item file now cites lem-coef-topological-serre-model, which is in the same unit, reviewed pass and does not reach the item, together with lem-coef-realization-finite-limits; proof_deps is updated, Step 5 is 1802 characters, and nothing else changed. I accept the three existing tool_uses, which are unchanged.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.QuillenBDiscreteFibrationBaseChange",

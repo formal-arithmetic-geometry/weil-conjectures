@@ -11,55 +11,155 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coherent cocone category T is the simplicial pullback specified in [def-cbc-enhanced-diagrams-cones]. Since E and K are small, the simplicial set Fun(K,E), the arrow simplicial set Fun(Δ¹,Fun(K,E)), and the displayed pullback are small in the chosen universe; the same definition supplies its coherent higher simplices. Thus T is small, and V is the pullback projection recording the apex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.5.15, setup of the cocone category; size bookkeeping expanded from the definitions"
+   }
+  },
+  {
+   "text": "Apply the filtered-coslice assertion of [lem-coef-infinity-cofinal-coslice-calculus] with D=E, τ=κ and the κ-small diagram p. Its first assertion says that D_{p/} is κ-filtered whenever D is κ-filtered and the indexing simplicial set is κ-small. Therefore T=E_{p/} is κ-filtered (including the empty indexing shape).",
+   "uses": [
+    "lem-coef-infinity-cofinal-coslice-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.5.15, filteredness of the cocone category"
+   }
+  },
+  {
+   "text": "Use the degreewise pullback model of [def-cbc-enhanced-diagrams-cones], and write D=Fun(K,E). An n-simplex of T is a pair (a,b), where a:Δ^n→E and b:Δ^n×Δ¹→D has initial endpoint constant at p and final endpoint Δ_K a. An n-simplex of (e↓V) adds c:Δ^n×Δ¹→E with initial endpoint constant at e and final endpoint a. Since (K⨿Δ⁰)×Δ^m=(K×Δ^m)⨿Δ^m in each degree m, restriction gives a simplicial isomorphism Fun(K⨿Δ⁰,E)=D×E. Under it the constant-diagram map is a↦(Δ_K a,a), and p⨿e corresponds to (p,e). The pair (b,c) is therefore exactly a map Δ^n×Δ¹→Fun(K⨿Δ⁰,E) from the constant p⨿e to the constant-diagram image of a. Thus (a,b,c)↦(a,(b,c)) and the inverse coordinate projections identify the comma pullback with E_{(p⨿e)/}. These inverse maps commute with every simplicial operator because all operators are restrictions on the same three coordinates. They fix a, hence respect the apex projection. This is a simplicial isomorphism, in particular the required functor equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent argument from the explicit coherent cocone pullback definition; coordinate splitting for a disjoint union, serving the final cofinality argument of HTT Proposition 5.4.5.15"
+   }
+  },
+  {
+   "text": "The coproduct K⨿Δ⁰ is κ-small because κ is infinite and K is κ-small. Applying [lem-coef-infinity-cofinal-coslice-calculus] again to the κ-filtered quasicategory E and the diagram p⨿e shows that E_{(p⨿e)/} is κ-filtered. The equivalence in the preceding step therefore transfers κ-filteredness to every (e↓V).",
+   "uses": [
+    "lem-coef-infinity-cofinal-coslice-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.5.15, filteredness after adjoining one object"
+   }
+  },
+  {
+   "text": "Every small κ-filtered quasicategory is weakly contractible by the explicit filteredness consequence in [lem-coef-infinity-coslice-colimit-formula]. Thus each coherent comma quasicategory (e↓V), already shown κ-filtered, is weakly contractible.",
+   "uses": [
+    "lem-coef-infinity-coslice-colimit-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.1.3.1 together with Proposition 5.4.5.15, contractibility of filtered comma categories"
+   }
+  },
+  {
+   "text": "To check that the strict comma used above computes the homotopy comma of [lem-coef-infinity-cofinal-comma-criterion], put S_e={e}×_{E,ev_0}Fun(Δ¹,E) and t=ev_1:S_e→E. Apply [lem-coef-infinity-arrow-target-right-fibration] to the quasicategory E^op and the vertex e. Reversing the vertex order of every simplex identifies Fun(Δ¹,E^op) with Fun(Δ¹,E)^op and exchanges ev_0 with ev_1, since the reversal of Δ¹×Δ^n is Δ¹×Δ^n with both factors reversed. Under it the node's E_e and its source evaluation become S_e^op and t^op. Reversal exchanges the horns Λ^m_j and Λ^m_{m-j}, so t lifts every Λ^m_j with m≥1 and 0≤j<m: t is a left fibration in the sense of [def-coef-infinity-fibrations]. S_e is a quasicategory: fill an inner horn of S_e first in E after applying t, then lift the filler along t. S_e is small, being a simplicial subset of the small Fun(Δ¹,E). By [lem-cbc-left-fibration-equivalence-lift], t is an isofibration in the sense of [lem-coef-infinity-isofibration-exponentiation]: it lifts inner horns, and equivalence edges with prescribed source to equivalence edges of S_e. Apply [lem-coef-infinity-isofibration-pullback-limit] to the isofibration t and the functor V:T→E. The degreewise pullback T×_E S_e, which is exactly the comma (e↓V), is a quasicategory and is the infinity-categorical pullback T×^h_E S_e required by the criterion. Thus the comma categories of the cited cofinal criterion are weakly contractible by step 5, and that criterion applies to V. This proves the asserted cofinal comma condition (and its colimit-cofinality consequence). No colimit in E has been assumed; K=∅ is included.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-left-fibration-equivalence-lift",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-infinity-cofinal-comma-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.1.3.1 (cofinal comma criterion), applied to V; the coslice projection S_e→E is used as a left fibration, hence an isofibration, through the cited DAG nodes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-cofinal-coslice-calculus",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Lemmas 5.3.1.20–21, Theorem 4.1.3.1 and the final cofinality argument of Proposition 5.4.5.15; agent-expanded degreewise pullback identification"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "The apex projection from the cocone category of a kappa small diagram in a kappa filtered quasicategory is cofinal with weakly contractible comma categories",
-   "results": "{\"t\": \"2026-10-17T08:33:31Z\", \"tool\": \"leanfinder\", \"query\": \"The apex projection from the cocone category of a kappa small diagram in a kappa filtered quasicategory is cofinal with weakly contractible comma categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.cocone\", \"CategoryTheory.IsCardinalFiltered.nonempty_cocone\", \"CategoryTheory.IsCardinalFiltered.coeq\", \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\", \"CategoryTheory.IsCardinalFiltered.toMax\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.aux\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.final_functor\", \"CategoryTheory.IsCardinalFiltered.max\"], \"digest\": \"24f146d54e74ee92\"}",
+   "query": "The apex projection from the cocone category of a kappa-small diagram in a kappa-filtered quasicategory is cofinal and its comma category is the cocone category on the disjoint union with an object",
+   "results": "{\"t\": \"2026-10-17T10:15:19Z\", \"tool\": \"leanfinder\", \"query\": \"The apex projection from the cocone category of a kappa-small diagram in a kappa-filtered quasicategory is cofinal and its comma category is the cocone category on the disjoint union with an object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.cocone\", \"CategoryTheory.IsCardinalFiltered.toMax\", \"CategoryTheory.IsCardinalFiltered.nonempty_cocone\", \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\", \"CategoryTheory.IsCardinalFiltered.coeq\", \"CategoryTheory.IsCardinalFiltered.max\", \"CategoryTheory.IsFiltered.cocone\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.aux\"], \"digest\": \"607bd0fc47558936\"}",
    "date": "2026-10-17",
-   "verdict": "no match: hits read; ordinary CategoryTheory categories have Hom sets, whereas this statement concerns coherent transformations and mapping spaces in arbitrary quasicategories. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:32-43 supplies only the quasicategory horn-filling class. No exact theorem or one-line specialization. Under.final_forget at Mathlib/CategoryTheory/Filtered/Final.lean:218 and Functor.final_of_isFiltered_structuredArrow:52 use ordinary filtered categories/connected comma categories, not weak contractibility of coherent comma quasicategories."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The comma of an object with the forgetful cocone apex functor is the cocone category on the disjoint union of the original diagram with that object",
-   "results": "{\"t\": \"2026-10-17T08:33:33Z\", \"tool\": \"leanfinder\", \"query\": \"The comma of an object with the forgetful cocone apex functor is the cocone category on the disjoint union of the original diagram with that object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.forgetCocone\", \"CategoryTheory.Limits.Cocone.toOver\", \"CategoryTheory.Limits.Cocone.toCostructuredArrowCocone\", \"CategoryTheory.Under.liftCocone\", \"CategoryTheory.Comma.colimitAuxiliaryCocone\", \"CategoryTheory.Limits.Cocone.underPost\", \"CategoryTheory.Over.liftCocone\", \"CategoryTheory.Comma.coconeOfPreserves\"], \"digest\": \"8c6d5a6a94ee179d\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits read; ordinary CategoryTheory categories have Hom sets, whereas this statement concerns coherent transformations and mapping spaces in arbitrary quasicategories. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:32-43 supplies only the quasicategory horn-filling class. No exact theorem or one-line specialization. Under.final_forget at Mathlib/CategoryTheory/Filtered/Final.lean:218 and Functor.final_of_isFiltered_structuredArrow:52 use ordinary filtered categories/connected comma categories, not weak contractibility of coherent comma quasicategories."
+   "verdict": "no match: Mathlib hits are ordinary-category results and do not state coherent quasicategory cocone/comma equivalences."
   },
   {
    "tool": "loogle",
-   "query": "\"Cocone\", \"Final\"",
-   "results": "{\"t\": \"2026-10-17T08:33:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocone\\\", \\\"Final\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.colimitCoconeComp\", \"CategoryTheory.Functor.Final.colimitCoconeOfComp\", \"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.Functor.Final.extendCocone\", \"CategoryTheory.Functor.Final.colimitCoconeComp_cocone\", \"CategoryTheory.Functor.Final.isColimitExtendCoconeEquiv\", \"CategoryTheory.Functor.Final.extendCocone_obj_pt\", \"CategoryTheory.Functor.Final.coconesEquiv_inverse\"], \"digest\": \"107eb126910a62a8\"}",
+   "query": "CategoryTheory.Comma, CategoryTheory.Under.final_forget, CategoryTheory.Functor.Final",
+   "results": "{\"t\": \"2026-10-17T10:15:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Comma, CategoryTheory.Under.final_forget, CategoryTheory.Functor.Final\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: hits read; ordinary CategoryTheory categories have Hom sets, whereas this statement concerns coherent transformations and mapping spaces in arbitrary quasicategories. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:32-43 supplies only the quasicategory horn-filling class. No exact theorem or one-line specialization. Under.final_forget at Mathlib/CategoryTheory/Filtered/Final.lean:218 and Functor.final_of_isFiltered_structuredArrow:52 use ordinary filtered categories/connected comma categories, not weak contractibility of coherent comma quasicategories."
+   "verdict": "no match: Mathlib hits are ordinary-category results and do not state coherent quasicategory cocone/comma equivalences."
   },
   {
    "tool": "grep",
-   "query": "cofinal|[Ff]iltered|[Ff]inal|[Cc]omma",
-   "results": "{\"t\": \"2026-10-17T08:33:30Z\", \"tool\": \"grep\", \"query\": \"cofinal|[Ff]iltered|[Ff]inal|[Cc]omma\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "cofinal|[Ff]iltered|[Cc]omma|[Cc]ocone",
+   "results": "{\"t\": \"2026-10-17T10:15:20Z\", \"tool\": \"grep\", \"query\": \"cofinal|[Ff]iltered|[Cc]omma|[Cc]ocone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: hits read; ordinary CategoryTheory categories have Hom sets, whereas this statement concerns coherent transformations and mapping spaces in arbitrary quasicategories. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:32-43 supplies only the quasicategory horn-filling class. No exact theorem or one-line specialization. Under.final_forget at Mathlib/CategoryTheory/Filtered/Final.lean:218 and Functor.final_of_isFiltered_structuredArrow:52 use ordinary filtered categories/connected comma categories, not weak contractibility of coherent comma quasicategories."
+   "verdict": "no match: Mathlib hits are ordinary-category results and do not state coherent quasicategory cocone/comma equivalences."
   },
   {
    "tool": "leansearch",
-   "query": "The forgetful apex functor from coherent cocones in a filtered infinity category is final",
-   "results": "{\"t\": \"2026-10-17T08:33:30Z\", \"tool\": \"leansearch\", \"query\": \"The forgetful apex functor from coherent cocones in a filtered infinity category is final\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocones.forget\", \"CategoryTheory.Under.final_forget\", \"CategoryTheory.Limits.Cocones.forget_obj\", \"CategoryTheory.Limits.Cones.forget\", \"CategoryTheory.Comma.isFiltered_of_final\", \"CategoryTheory.Functor.final_of_isFiltered_structuredArrow\", \"CategoryTheory.Limits.Cones.forget_obj\", \"CategoryTheory.Limits.Cocones.forget_map\"], \"digest\": \"659ef6a2221e9671\"}",
+   "query": "The comma category of an object and the apex projection from a coherent cocone category is equivalent to the coherent cocone category for the original diagram with that object adjoined",
+   "results": "{\"t\": \"2026-10-17T10:15:21Z\", \"tool\": \"leansearch\", \"query\": \"The comma category of an object and the apex projection from a coherent cocone category is equivalent to the coherent cocone category for the original diagram with that object adjoined\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.extend_pt\", \"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Comma.coconeOfPreserves_pt_left\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.Cocone.whisker_pt\", \"CategoryTheory.Limits.Cocone.pt\", \"TopCat.coconePtOfCoconeForget\", \"CategoryTheory.WithInitial.coconeEquiv_functor_obj_pt\"], \"digest\": \"c046a4d5000df636\"}",
    "date": "2026-10-17",
-   "verdict": "no match: hits read; ordinary CategoryTheory categories have Hom sets, whereas this statement concerns coherent transformations and mapping spaces in arbitrary quasicategories. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:32-43 supplies only the quasicategory horn-filling class. No exact theorem or one-line specialization. Under.final_forget at Mathlib/CategoryTheory/Filtered/Final.lean:218 and Functor.final_of_isFiltered_structuredArrow:52 use ordinary filtered categories/connected comma categories, not weak contractibility of coherent comma quasicategories."
+   "verdict": "no match: Mathlib hits are ordinary-category results and do not state coherent quasicategory cocone/comma equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent comma quasicategory of an object e under the apex projection from E_{p/} is equivalent over E to E_{(p coproduct e)/}",
+   "results": "{\"t\": \"2026-10-17T10:16:08Z\", \"tool\": \"leanfinder\", \"query\": \"The coherent comma quasicategory of an object e under the apex projection from E_{p/} is equivalent over E to E_{(p coproduct e)/}\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.ofCommaFstEquivalence\", \"CategoryTheory.StructuredArrow.commaMapEquivalence\", \"CategoryTheory.StructuredArrow.ofCommaSndEquivalence\", \"CategoryTheory.CostructuredArrow.isEquivalence_toOver\", \"CategoryTheory.CostructuredArrow.ofCostructuredArrowProjEquivalence\", \"CategoryTheory.Comma.isEquivalenceMap\", \"CategoryTheory.CostructuredArrow.ofCommaFstEquivalenceInverse\", \"CategoryTheory.Join.costructuredArrowEquiv\"], \"digest\": \"324436f453ee7f1d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib hits are ordinary-category results and do not state coherent quasicategory cocone/comma equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Comma, CategoryTheory.Limits.Cocone, CategoryTheory.Under",
+   "results": "{\"t\": \"2026-10-17T10:16:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Comma, CategoryTheory.Limits.Cocone, CategoryTheory.Under\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib hits are ordinary-category results and do not state coherent quasicategory cocone/comma equivalences."
   },
   {
    "tool": "grep",
-   "query": "final_forget|final_of_isFiltered_structuredArrow",
-   "results": "{\"t\": \"2026-10-17T08:34:40Z\", \"tool\": \"grep\", \"query\": \"final_forget|final_of_isFiltered_structuredArrow\", \"sub\": \"CategoryTheory/Filtered\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Filtered/Final.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\"], \"digest\": \"48775f301f41e8c8\"}",
+   "query": "cocone|comma|under|apex",
+   "results": "{\"t\": \"2026-10-17T10:16:09Z\", \"tool\": \"grep\", \"query\": \"cocone|comma|under|apex\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Action.lean\", \"Mathlib/CategoryTheory/PEmpty.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/MarkovCategory/Basic.lean\", \"Mathlib/CategoryTheory/Retract.lean\", \"Mathlib/CategoryTheory/Retract.lean\", \"Mathlib/CategoryTheory/Widesubcategory.lean\", \"Mathlib/CategoryTheory/Widesubcategory.lean\"], \"digest\": \"0382b6f97d3c5ed6\"}",
    "date": "2026-10-17",
-   "verdict": "no match: hits read; ordinary CategoryTheory categories have Hom sets, whereas this statement concerns coherent transformations and mapping spaces in arbitrary quasicategories. Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:32-43 supplies only the quasicategory horn-filling class. No exact theorem or one-line specialization. Under.final_forget at Mathlib/CategoryTheory/Filtered/Final.lean:218 and Functor.final_of_isFiltered_structuredArrow:52 use ordinary filtered categories/connected comma categories, not weak contractibility of coherent comma quasicategories."
+   "verdict": "no match: Mathlib hits are ordinary-category results and do not state coherent quasicategory cocone/comma equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent cocones under a diagram p together with an arrow from e to the apex are the same as cocones under p disjoint union e",
+   "results": "{\"t\": \"2026-10-17T10:16:09Z\", \"tool\": \"leansearch\", \"query\": \"Coherent cocones under a diagram p together with an arrow from e to the apex are the same as cocones under p disjoint union e\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CofanTypes.sigma_pt\", \"CategoryTheory.Limits.CofanTypes.equivOfIsColimit.congr_simp\", \"TopCat.sigmaCofan\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.Limits.Sigma.cocone\", \"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"CategoryTheory.Limits.Cocone.extend\", \"CategoryTheory.Limits.coproductIsCoproduct'\"], \"digest\": \"77aa3969cfed1645\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib hits are ordinary-category results and do not state coherent quasicategory cocone/comma equivalences."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-compact-cocones",
@@ -86,5 +186,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-filtered-cocone-apex-cofinal",
+  "worker": "stage1",
+  "summary": "Retained the statement and all recorded searches from the earlier attempt. Repaired its unsupported sharp-join reassociation: the defined coherent comma is directly isomorphic, degree by degree, to cocones on the disjoint-union diagram. Added the existing isofibration exponential-corner and pullback-limit results to justify that the displayed strict comma computes the homotopy comma used by the cofinality criterion. Filteredness and weak contractibility use existing nodes. No new node or colimit-existence hypothesis is introduced.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint, mapping-complex adjunction infrastructure through lem-coef-accessible-compact-cocones: cofinality of the compact-cocone apex projection, following HTT Proposition 5.4.5.15 final argument. The comma clause is proved by the defining simplicial pullback, rather than an unsupported join reassociation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Step 6 needs that the left fibration ev_1 from the coslice S_e to E lifts equivalence edges to equivalence edges of S_e (an isofibration), so that the pullback-limit theorem applies; no node of sk-prop-sf-biduality-general states that left fibrations are isofibrations, and this generic sk-prop-sf-cbc lemma is used as a black box."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-left-fibration-equivalence-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-23bf3d9c7",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-23bf3d9c7 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement (def-cbc-enhanced-diagrams-cones, def-coef-presentable-infinity-category, cofinal-coslice-calculus, coslice-colimit-formula, isofibration-exponentiation, isofibration-pullback-limit, cofinal-comma-criterion), plus the unit and chapter records, the main-20261015 ancestor and the parent's step 7. HTT is not archived, so I checked its places (Thm 4.1.3.1 and the final step of 5.4.5.15) from my knowledge of the text; the worker's WANTED line stands. The statement is true and unchanged. I tested it on the poset omega with p=(1,3) and e=5, on K empty, on E=Delta^0, and on E empty (impossible, since the empty diagram needs a cocone). There are no new nodes. My duplicate search found nothing: I read coslice-calculus, filtered-cofinal-pullback, join-cocone-associativity, cat-infinity-filtered-finite-calculus, reflection-inverting-limit-restriction and the parent. Steps 1-5 are correct. Step 3 is a real degreewise isomorphism, Fun(K+Delta^0,E)=Fun(K,E)xE with (a,b,c) matching (a,(b,c)). Step 4 holds because adding one simplex keeps K kappa-small. Step 5 uses only the standalone sentence that kappa-filtered quasicategories are weakly contractible. One fault, C2/E5, in step 6: it says an equivalence lift along Fun(Delta^1,E)->ExE stays an equivalence in S_e, but the inverse and its witnesses need not lie over id_e, so that needs a non-elementary fact. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-filtered-cocone-apex-cofinal.json. Step 6 now gets ev_1:S_e->E as a left fibration by applying lem-coef-infinity-arrow-target-right-fibration to E^op (elementary reversal, def-coef-infinity-fibrations), then an isofibration by lem-cbc-left-fibration-equivalence-lift, then applies pullback-limit to that leg and V. proof_deps is again the union of uses. Accepted tool_use, declared in split_report.tool_uses: lem-cbc-left-fibration-equivalence-lift (sk-prop-sf-cbc), a generic black-box lemma that no node of the unit states. No cycle: none of the cited nodes' closures contains the item. No SGA, the statement is not weakened, and no node was dropped.; 1 file(s) fixed by the reviewer"
  }
 }

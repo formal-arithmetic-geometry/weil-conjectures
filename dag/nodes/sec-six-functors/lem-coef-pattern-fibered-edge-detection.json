@@ -41,16 +41,12 @@
    }
   },
   {
-   "text": "Assume (2). For any marked $W\\to\\bar C$, call $W$ good if postcomposition induces a weak homotopy equivalence $\\operatorname{Map}^\\sharp_C(W,X)\\to\\operatorname{Map}^\\sharp_C(W,Y)$. Call an edge $u$ locally cocartesian if $(u,\\mathrm{id}_{\\Delta^1})$ is cocartesian in the pullback along its base edge. For an edge over $S$, local cocartesianness is equivalent to global cocartesianness. Indeed a global cocartesian edge remains cocartesian on pullback, by its horn lifting property. Conversely choose a global cocartesian lift $v$ with the same source and base edge, using clause (ii) of [def-coef-categorical-pattern-fibrancy]. The local lifts $u,v$ are initial in the same lift quasicategory by [lem-coef-infinity-cocartesian-composition-initiality]; comparison supplies an equivalence between their targets in the vertex fibre and a triangle relating $u$ to $v$. A fibre equivalence is globally cocartesian by [lem-coef-infinity-cocartesian-mapping-criterion]: its top mapping-space map is an equivalence and its bottom map is the identity. Composition in [lem-coef-infinity-cocartesian-composition-initiality] then makes $u$ globally cocartesian. Consequently the marking in clause (ii) is exactly the locally cocartesian edges over $S$. Over a degenerate base edge it is exactly the fibre equivalences, by the initial-lift argument of Step 2 and the same mapping criterion.\n\nFor every base edge $e$, the equivalence $f_e:E\\to F$ preserves and reflects cocartesian edges over $\\Delta^1$. To see this without a quasi-inverse over the base, apply the mapping criterion to an edge and each target vertex. An equivalence induces equivalences on the two upper mapping spaces: a quasi-inverse induces inverse maps after conjugating endpoints by the components of the two inverse natural equivalences. Naturality identifies their composites with identity maps up to homotopy, using the associative and unital mapping-space composition of [lem-coef-infinity-mapping-composition]. The lower spaces are unchanged because $f_e$ is strictly over $\\Delta^1$. Essential surjectivity covers the remaining targets in $F$: equivalences between targets lie over identities, since $\\Delta^1$ has no other equivalences, and postcomposition gives equivalent squares. The homotopy-pullback property is unchanged under these equivalences by [lem-coef-kan-homotopy-pullback-invariance]. Hence an edge of $X$ is locally cocartesian if and only if its image is. Here categorical equivalence has the quasi-inverse meaning supplied by [lem-coef-joyal-quasicategory-characterizations]; no relative quasi-inverse is claimed.\n\nPut $K_Z=\\operatorname{Map}^\\sharp_C(W^\\flat,Z)$ for $Z=X,Y$; these are Kan by [lem-coef-pattern-anodyne-lifting-products]. From the coordinatewise product marking of [lem-coef-marked-point-cartesian-model], its simplices have vertical components marked over degenerate base edges, thus fibre equivalences. For a marked edge $b$ of $W$, each naturality square has these equivalences as vertical sides. Composition and cancellation of cocartesian edges show that the image of $b$ is cocartesian at one endpoint if and only if it is at the other. The same triangles show that all diagonal product edges $(b,i\\to j)$ are marked whenever the vertex diagrams preserve the marking. Therefore $\\operatorname{Map}^\\sharp_C(W,Z)$ is exactly the full simplicial subset of $K_Z$ on marking-preserving vertex diagrams, and this subset is a union of connected components. Preservation and reflection just proved say that the selected components in $K_X$ are exactly the inverse image of those in $K_Y$. A weak equivalence $K_X\\to K_Y$ restricts to a weak equivalence on these unions (bijection on selected components and the same based homotopy groups). Thus goodness of $W^\\flat$ implies goodness of $W$.",
+   "text": "Assume (2). Call $W\\to\\bar C$ good when postcomposition induces a weak homotopy equivalence $\\operatorname{Map}^{\\sharp}_C(W,X)\\to\\operatorname{Map}^{\\sharp}_C(W,Y)$. By [lem-coef-cocartesian-local-global], markings in $X,Y$ are exactly local cocartesian edges over $S$, and the vertical marked edges are exactly fibre equivalences. For every base edge $e$, apply [lem-coef-interval-equivalence-cocartesian] to $f_e$: its projections are inner fibrations by clause (i) of [def-coef-categorical-pattern-fibrancy], and (2) supplies its categorical equivalence. Thus $f$ preserves and reflects local cocartesianness, and therefore the marking on every edge over $S$.\n\nBy [lem-coef-pattern-marked-mapping-components], $\\operatorname{Map}^{\\sharp}_C(W,Z)$ is the full union of components of $K_Z=\\operatorname{Map}^{\\sharp}_C(W^\\flat,Z)$ selected by marking-preserving vertices, for $Z=X,Y$. The selected vertices of $K_X$ are exactly the inverse image of those of $K_Y$, by the preceding reflection argument. If $W^\\flat$ is good, $K_X\\to K_Y$ is a weak equivalence of Kan complexes. Its restriction to these unions is a bijection on selected components and has the same based homotopy groups as the original map. It is therefore a weak homotopy equivalence. Hence goodness of $W^\\flat$ implies goodness of $W$.",
    "uses": [
+    "lem-coef-cocartesian-local-global",
+    "lem-coef-interval-equivalence-cocartesian",
     "def-coef-categorical-pattern-fibrancy",
-    "lem-coef-infinity-cocartesian-composition-initiality",
-    "lem-coef-infinity-cocartesian-mapping-criterion",
-    "lem-coef-joyal-quasicategory-characterizations",
-    "lem-coef-kan-homotopy-pullback-invariance",
-    "lem-coef-marked-point-cartesian-model",
-    "lem-coef-pattern-anodyne-lifting-products",
-    "lem-coef-infinity-mapping-composition"
+    "lem-coef-pattern-marked-mapping-components"
    ],
    "elementary": false,
    "source": {
@@ -72,20 +68,16 @@
    }
   },
   {
-   "text": "We first justify the zero and one simplex tests. For $e:\\Delta^1\\to C$ let $E=X\\times_C\\Delta^1$, $F=Y\\times_C\\Delta^1$. Their projections to $\\Delta^1$ are isofibrations: they are inner fibrations, and every equivalence in $\\Delta^1$ is an identity and lifts to an identity. The equivalence $E\\to F$ from (2), interpreted by [lem-coef-joyal-quasicategory-characterizations], therefore induces equivalences on vertex fibres by [lem-coef-infinity-isofibration-base-change]. This includes the test at any $c\\in C$ by taking its degenerate edge and then either endpoint. We have consequently proved that $E_B=X\\times_C B\\to F_B=Y\\times_C B$ is an equivalence over $B$ for every simplex $B=\\Delta^0$ or $\\Delta^1$, and both projections are isofibrations.\n\nBy [lem-coef-infinity-isofibration-exponentiation] (take $\\varnothing\\hookrightarrow B$), $\\operatorname{Fun}(B,E_B)\\to\\operatorname{Fun}(B,B)$ and its $F$ analogue are isofibrations. Postcomposition with $E_B\\to F_B$ is a functor equivalence: postcompose with an ordinary quasi-inverse and its natural equivalences, using [lem-coef-infinity-pointwise-equivalences] to check the induced transformations. Apply [lem-coef-infinity-isofibration-base-change] to these functors over $\\operatorname{Fun}(B,B)$ and the vertex $\\mathrm{id}_B$. Their strict fibres, the quasicategories $\\operatorname{Sec}_B(E_B)$ and $\\operatorname{Sec}_B(F_B)$ of sections, are equivalent. Passing to cores gives an equivalence of spaces: quasi-inverses and their equivalence transformations restrict to the cores, with the mapping-space interpretation in [lem-coef-marked-point-cartesian-model].\n\nThese cores are precisely $\\operatorname{Map}^\\sharp_C(B^\\flat,X)$ and $\\operatorname{Map}^\\sharp_C(B^\\flat,Y)$. Indeed an $n$-simplex is a family of sections on $B\\times\\Delta^n$; the flat marking on $B$ imposes only that the vertical edges be marked. By the marked-equals-fibre-equivalence argument in Step 3 (using clause (ii), initiality and the mapping criterion), this says exactly that the component edges are fibre equivalences. The pointwise criterion identifies them with equivalence edges of the section quasicategory. Concretely, inverse witnesses in $\\operatorname{Fun}(B,E_B)$ remain over $\\mathrm{id}_B$: $\\operatorname{Fun}(B,B)$ is the nerve of a poset for $B=\\Delta^0,\\Delta^1$, so any simplex whose vertices are all $\\mathrm{id}_B$ is constant. This proves the asserted equality of cores, not just an analogy with edge pullbacks. Hence both flat base cases are good, including degenerate $e$ and edges outside $S$.\n\nThe flat consecutive-edge spine is now good by successive pushouts at vertices using Step 4. Its underlying inclusion $i:\\operatorname{Sp}[n]\\hookrightarrow\\Delta^n$ is inner anodyne by [lem-cbc-spine-inner-anodyne]. For each boundary inclusion $j:\\partial\\Delta^m\\hookrightarrow\\Delta^m$, [lem-coef-inner-anodyne-pushout-product] makes $i\\mathbin\\square j$ inner anodyne. Thus the inner fibration $Z\\to C$ fills every underlying lifting problem for restriction $\\operatorname{Map}^\\sharp_C((\\Delta^n)^\\flat,Z)\\to\\operatorname{Map}^\\sharp_C(\\operatorname{Sp}[n]^\\flat,Z)$ against $j$. The resulting lift preserves markings: every marked edge of $(\\Delta^n)^\\flat\\times(\\Delta^m)^\\sharp$ has constant first coordinate, and every vertex of $\\Delta^n$ is in the spine, so every such edge already belongs to the prescribed spine part. Restriction therefore has the right lifting property against all boundary inclusions, including $m=0$, and is a trivial Kan fibration by [lem-coef-kan-quillen-right-proper]. In the commutative square for $X,Y$, both restrictions and the spine comparison are weak equivalences; two-out-of-three gives the full simplex comparison. Thus every flat simplex is good.",
+   "text": "For $e:B\\to C$, $B=\\Delta^0$ or $\\Delta^1$, the pullbacks $E_B=X\\times_C B$, $F_B=Y\\times_C B$ are quasicategories with inner-fibration projections. These projections are isofibrations since $B$ has only identity equivalences, which lift to identities. Condition (2) makes $E_B\\to F_B$ a categorical equivalence when $B=\\Delta^1$. For a vertex $c$, use its degenerate edge and apply [lem-coef-infinity-isofibration-base-change] at an endpoint, interpreting (2) by [lem-coef-joyal-quasicategory-characterizations]. Thus the comparison is an equivalence also for $B=\\Delta^0$. By [lem-coef-cocartesian-local-global] the vertical markings are precisely fibre equivalences; [lem-coef-pattern-section-core-identification] identifies the sharp flat mapping complexes with section cores and makes their comparison a weak equivalence. Both base cases are good.\n\nThe consecutive-edge spine is good by successive vertex pushouts using Step 4. Its inclusion $i:\\operatorname{Sp}[n]\\hookrightarrow\\Delta^n$ is inner anodyne by [lem-cbc-spine-inner-anodyne]. For every boundary $j:\\partial\\Delta^m\\hookrightarrow\\Delta^m$, [lem-coef-inner-anodyne-pushout-product] makes $i\\square j$ inner anodyne. The inner fibration $Z\\to C$ fills the underlying adjoint problem for restriction from $(\\Delta^n)^\\flat$ to $\\operatorname{Sp}[n]^\\flat$. Every required marked edge has constant first coordinate, whose vertex is in the spine, so its marking is already prescribed. Restriction has RLP against all boundaries, including $m=0$, and is a trivial Kan fibration by [lem-coef-kan-quillen-right-proper]. The two restrictions for $X,Y$ and the spine comparison are weak equivalences; two-out-of-three proves every flat simplex good.",
    "uses": [
-    "lem-coef-joyal-quasicategory-characterizations",
-    "lem-coef-infinity-isofibration-exponentiation",
-    "lem-coef-infinity-isofibration-base-change",
-    "lem-coef-infinity-pointwise-equivalences",
-    "lem-coef-marked-point-cartesian-model",
     "def-coef-categorical-pattern-fibrancy",
-    "lem-coef-infinity-cocartesian-composition-initiality",
-    "lem-coef-infinity-cocartesian-mapping-criterion",
-    "lem-coef-pattern-anodyne-lifting-products",
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-isofibration-base-change",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-cocartesian-local-global",
+    "lem-coef-pattern-section-core-identification",
     "lem-cbc-spine-inner-anodyne",
-    "lem-coef-inner-anodyne-pushout-product"
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
    ],
    "elementary": false,
    "source": {
@@ -145,19 +137,20 @@
  "proof_deps": [
   "def-coef-categorical-pattern-fibrancy",
   "lem-cbc-spine-inner-anodyne",
+  "lem-coef-cocartesian-local-global",
   "lem-coef-infinity-cocartesian-composition-initiality",
-  "lem-coef-infinity-cocartesian-mapping-criterion",
   "lem-coef-infinity-isofibration-base-change",
-  "lem-coef-infinity-isofibration-exponentiation",
-  "lem-coef-infinity-mapping-composition",
   "lem-coef-infinity-pointwise-equivalences",
   "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-interval-equivalence-cocartesian",
   "lem-coef-joyal-quasicategory-characterizations",
   "lem-coef-kan-fibration-tower-limit",
   "lem-coef-kan-homotopy-pullback-invariance",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-marked-point-cartesian-model",
-  "lem-coef-pattern-anodyne-lifting-products"
+  "lem-coef-pattern-anodyne-lifting-products",
+  "lem-coef-pattern-marked-mapping-components",
+  "lem-coef-pattern-section-core-identification"
  ],
  "proof_origin": {
   "by": "document",
@@ -216,7 +209,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-categorical-pattern-model-calculus",
@@ -248,7 +241,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-pattern-fibered-edge-detection",
   "worker": "stage1",
-  "summary": "Repaired the returned nine-step split against Higher Algebra B.2.4(a)-(j): cited initial-lift uniqueness and pointwise equivalences for marked homotopies; proved local/global cocartesian agreement and the full-subcomplex marking reduction; expanded the section-core base cases with isofibration exponentiation and base change; corrected the pushout implication, P-equivalence two-out-of-three argument, and strict skeletal-colimit/tower-limit argument. The sole new node is the retained spine-anodyne statement, now correctly sourced to HA Example B.1.2. The item statement is unchanged. Second reading removed the auxiliary spine node: the existing spine-inner-anodyne and inner-anodyne pushout-product statements give the restriction-fibration assertion directly, with every marked vertical edge already prescribed over a spine vertex. No new nodes remain.",
+  "summary": "Repair of the human return of 2026-10-17: the original Step 3 (3792 characters) is replaced by a short application of three statement-only lemmas for local/global cocartesian comparison, interval equivalence invariance, and marked mapping components; Step 5 (3753 characters) uses a fourth statement-only section-core lemma and retains the explicit spine pushout-product calculation. All other seven steps, the statement, and the Lean record are unchanged. Every remaining non-elementary step is shorter than 2000 characters; the HA B.2.4(a)-(j) route is retained. Four new unsplit nodes, no Mathlib leaves.",
   "blueprint": "Realizes the auxiliary mapping-complex model argument in proof paragraph 2 of prop-coef-integral-exceptional-adjoint; the edge criterion is Higher Algebra Lemma B.2.4 (1) iff (3), pp.1483-1485.",
   "tool_uses": [
    {
@@ -263,9 +256,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q08-e7a8e69eb",
-  "group": "Q08",
+  "reviewer": "NT-cc-ND-f3b249aef",
+  "group": "ND",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-e7a8e69eb (reviewer sub-agent of L); spot-checked: I read the full item, its nine steps and the statements of all 15 cited nodes. I checked them against Higher Algebra B.2.1, B.2.2, B.2.3 and B.2.4 with proof (a)-(j) (printed pp.1482-1485) and Example B.1.2. The item statement matches B.2.4 (1)<=>(3) specialised to the DAG's patterns, where C is a quasicategory and every 2-simplex is scaled. It tests every edge, including degenerate edges and edges outside S, and does not use the vertex-only variant (3'). The statement is unchanged and nothing is weakened. All nine steps are correct: Step 1 (formal (1)<=>(2)); Step 2 (marked components are cocartesian over degenerate edges, hence fibre equivalences by initiality, then pointwise and Joyal); Step 3 (local and global cocartesian edges agree, f_e preserves and reflects them, and the marked mapping space is a full union of components); Step 4 (strict pullback along a Kan fibration plus homotopy-pullback invariance); Step 5 (isofibration exponentiation and base change at id_B for B=Delta^0, Delta^1; the core equals Map^sharp because Fun(B,B) is a poset nerve; the spine case through lem-cbc-spine-inner-anodyne and the inner-anodyne pushout-product, with markings preserved because every vertex lies in the spine); Step 6 (two-out-of-three); Step 7 (coproducts and skeletal induction); Step 8 (strict degreewise limit plus the Kan-fibration tower node); Step 9 (homotopy inverse). Small cases checked: n=0,1, degenerate e, edges outside S, empty W and empty sections, spine n=2, infinite-dimensional W. There are no new nodes; I agree with dropping the spine node. I found no duplicate of the item by rg over dag/nodes. A DFS over 452 transitive dependencies finds no cycle and no missing or merged node, and every step's uses equal proof_deps. No SGA source is used. Accepted tool use: lem-cbc-spine-inner-anodyne (unit sk-prop-sf-cbc), a black-box generic simplicial fact that no same-unit node states; it is already an accepted tool in this unit, and it replaces no unit step. One fix, in fixes/dag/nodes/sec-six-functors/lem-coef-pattern-fibered-edge-detection.json: Step 7 said the coproduct of n-simplices is good 'by the preceding step', which points to Step 6. It now cites coproduct closure plus Step 5 and names V, W, V' in the Step 4 pushout. Nothing else changed. Two minor looseness points do not need a repair: the 'identity' bottom map in Step 3 is only homotopic to the identity, and Step 8 argues invariance of limits in one sentence. HA was read from a text extraction of HA.pdf already cached on this server (/tmp/q08edge/ha.txt). HA is not in literature/, so the report's WANTED line stands.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-f3b249aef (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and the statements of the 16 nodes they cite, against HA Lemma B.2.4 (a)-(j), Def B.2.1, Ex B.2.2, Lemma B.2.3 and Prop B.1.14 (pp.1481-1485, read from the cached extraction /tmp/q08edge/ha.txt; HA is not in literature/, so the WANTED line stands). The item statement is unchanged: (1)<=>(3) over all edges, degenerate edges and edges outside S included; nothing is weakened. Repaired Step 3 is HA (a). The local-global node applies because clause (ii) gives global lifts over S. The interval node applies to f_e (inner-fibration projections between quasicategories, strictly over Delta^1, categorical equivalence by (2)). The components node gives the full union of components; the selected components are a preimage, so the restricted map is bijective on pi0 with unchanged homotopy groups. Repaired Step 5 is HA (c),(d),(f): isofibrations over Delta^0/Delta^1, base change at s0(c), the vertical markings identified with E^{v~}, the section-core node, and the spine lift (marked edges {k}xe' with k in Sp[n], pushout-product, RLP for all boundaries including m=0). All four new nodes are true; I tested each on small cases. Local-global: comparison of initial lifts plus a composition triangle; for a=id_c, E_c x Delta^1. Interval: mapping criterion with empty or contractible base mapping spaces. Components: square and triangle composition through initiality. Section-core: fibres over poset nerves keep the inverse witnesses; the core definition of def-cbc-enhanced-diagrams-cones matches. All are statement-only and self-contained, with correct blueprint.from/via and real searches (LeanSearch recorded unavailable). None restates the item, and rg over dag/nodes found no duplicate (closest hits read and ruled out). Step uses equal proof_deps; no cycle over 632 reachable nodes; no SGA. Accepted tool use: lem-cbc-spine-inner-anodyne. Fix: Step 5's sentence 'Condition (2) gives E_B->F_B' now says the map is a categorical equivalence; the corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

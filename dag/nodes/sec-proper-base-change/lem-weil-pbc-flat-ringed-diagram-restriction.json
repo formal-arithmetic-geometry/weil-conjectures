@@ -23,9 +23,157 @@
   "def-pur-kinjective-complex",
   "lem-pc-pre-derived-adjoint-functors-general"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the diagram categories themselves. By [lem-weil-pbc-diagram-site-realization] they are abelian categories of module sheaves on small diagram sites, and kernels and cokernels are componentwise in $J$. By [def-weil-sheaf-of-modules-category], a module kernel is the sectionwise kernel and a module cokernel is the sheafification of the sectionwise cokernel. Restriction [def-pc-sheaf-restrict-scalars] changes neither underlying abelian sheaf nor maps. The sectionwise kernels have the restricted action. The same underlying cokernel sheaf, with its induced restricted action, is a cokernel after restriction: its universal factorization is linear because the quotient map is locally surjective and the original map is linear. Thus $r_T$ preserves kernels and cokernels and is exact. This also shows that exactness of a sequence of $S_T$-module sheaves is detected after restriction to $R_T$.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian; section on change of rings, Tag 03CZ"
+   }
+  },
+  {
+   "text": "Define $E_T$ on a diagram $M$ by $(E_TM)(j)=S_T\\otimes_{R_T}M(j)$, with the sheaf tensor of [def-pur-sheaf-tensor-product]. Sectionwise the two maps in [lem-weil-pbc-scalar-extension-hom] send $h$ to $m\\mapsto h(1\\otimes m)$ and send $f$ to $s\\otimes m\\mapsto sf(m)$. They commute with site restrictions and diagram arrows: the latter formula applied to $s\\otimes M(\\alpha)m$ is $s f_k(M(\\alpha)m)=sN(\\alpha)f_j(m)$. The universal property in [def-weil-presheaf-modules-sheafification] therefore gives inverse natural bijections $\\operatorname{Hom}(E_TM,N)=\\operatorname{Hom}(M,r_TN)$ on diagram sheaves. Hence $E_T\\dashv r_T$. The hypothesis [def-pc-flat-sheaf-modules] says that its underlying $R_T$-module tensor functor is exact; exactness is detected on underlying module sheaves by step 1, and is componentwise in $J$. Consequently $E_T$ is exact as an $S_T$-module-valued functor.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-scalar-extension-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; flatness as defined in the statement"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to the additive adjunction $E_T\\dashv r_T$ of step 2. Its left adjoint is exact by flatness, and its categories are abelian by step 1. Therefore $r_T$ preserves K-injective complexes of diagrams. This is K-injectivity in the whole diagram category, not an inference from the K-injectivity of separate evaluations.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives"
+   }
+  },
+  {
+   "text": "For $B=R,S$, [lem-weil-pbc-geometric-module-transport], with ring identification $c_B^{-1}$ and structural map the identity of $B_U$, gives the prescribed $L_B\\dashv F_B$, whose underlying Hom bijection is the given sheaf adjunction. These Hom bijections commute with every $J$-arrow by their naturality, so restrict to diagram morphisms. The underlying set sheaf of $L_B$ is $u^{-1}$ of the underlying set sheaf. Kernels of module maps are equalizers with the zero map by [def-weil-sheaf-of-modules-category]; finite-limit preservation of $u^{-1}$ therefore shows that $L_B$ preserves kernels and zero objects. It preserves cokernels as well: maps $L_BN\\to H$ killing $L_Bf$ correspond under the adjunction exactly to maps $N\\to F_BH$ killing $f$, which factor uniquely through its cokernel. Thus $L_R,L_S$ are exact, also on diagrams. By [lem-weil-pbc-right-adjoint-preserves-kinjective], $F_R,F_S$ preserve K-injectives.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; derived.tex Tag 08BJ"
+   }
+  },
+  {
+   "text": "Construct the ordinary $b^0:r_UL_S\\simeq L_Rr_V$ by the identity on the identified underlying $u^{-1}$ sheaves. Its $R_U$-linearity is precisely $a_Uc_R=c_Su^{-1}a_V$. Write $\\rho_R:R_V\\to u_*R_U$ and $\\rho_S:S_V\\to u_*S_U$ for the adjoints of $c_R,c_S$. Naturality of the sheaf adjunction gives $u_*(a_U)\\rho_R=\\rho_Sa_V$. Hence the two $R_V$-actions on the same sheaf $u_*N$ agree: one uses $a_V$ then $\\rho_S$ and the other uses $\\rho_R$ then $u_*a_U$ before the $S_U$-action. This gives the ordinary comparison $q:r_VF_S\\simeq F_Rr_U$, the identity with these actions identified. All identifications on objects and maps are those in [lem-weil-pbc-geometric-module-transport] and [def-pc-sheaf-restrict-scalars]. They are natural in the module, hence commute with every diagram arrow.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; naturality of the underlying adjunction"
+   }
+  },
+  {
+   "text": "Let $\\eta^R,\\eta^S$ be the ordinary units. The normalization in [lem-weil-pbc-geometric-module-transport] says that their underlying sheaf maps are both the unit of $u^{-1}\\dashv u_*$. Since $b^0$ and $q$ in step 5 are the identity under those same identifications, faithfulness of the underlying-sheaf functor gives\n$$F_R((b^0_M)^{-1})\\eta^R_{r_VM}=q_{L_SM}\\,r_V(\\eta^S_M).$$\nFor any module diagram map $h:L_SM\\to N$, apply $F_Rr_U(h)$ to this equation. Naturality of $q$ gives\n$$F_R(r_U(h)(b^0_M)^{-1})\\eta^R_{r_VM}\n=q_Nr_V(F_S(h)\\eta^S_M).$$\nThese are exactly the ordinary adjunct formulas. By [lem-weil-pbc-termwise-adjunction-homotopy] they remain the formulas on complexes and homotopy classes, with the same comparisons $b^0,q$ applied degreewise.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; derived.tex Tag 0DVC, lemma-pre-derived-adjoint-functors"
+   }
+  },
+  {
+   "text": "Apply [prop-pur-kinjective-resolutions-exist] on each small ringed diagram site supplied by [lem-weil-pbc-diagram-site-realization]. This gives functorial K-injective resolutions in all four diagram categories. Applying an additive functor to complexes preserves shifts and mapping cones (the cone uses only finite direct sums and the differential matrix), so its functor from the homotopy category to the target derived category is exact triangulated. Thus [lem-weil-pbc-kinjective-total-derived] supplies $RF_R,RF_S$ and their normalized computation isomorphisms on K-injectives. For the exact functors $r_T,L_R,L_S$ use [lem-weil-pbc-exact-functor-derived-functor]: their termwise localizations compute their derived functors on every complex. In particular, localizing $b^0$ gives the required $b$. These are the representing data that [lem-pc-pre-derived-adjoint-functors-general] requires. For $F=F_R,F_S$ let $\\beta:QF_h\\to RF\\,Q$ be the comparison of [lem-weil-pbc-kinjective-total-derived], invertible on K-injectives. For a complex $K$ and a quasi-isomorphism $s:K\\to I'$ put $p_s=RF(Qs)^{-1}\\beta_{I'}$, a cocone by naturality of $\\beta$. Fix a K-injective resolution $s_0:K\\to I_0$ and $\\rho=\\beta_{I_0}^{-1}RF(Qs_0)$, so $p_{s_0}\\rho=1$. Given $s$, filteredness and a further K-injective resolution give $s_k:K\\to I_k$, $I_k$ K-injective, with $a:I_0\\to I_k$, $c:I'\\to I_k$ under $K$; naturality of $\\beta$ at $a$ and invertibility of $\\beta_{I_k}$ give $QF_h(a)\\rho p_s=QF_h(c)$, the transition map. So $p$ exhibits the ind-system as essentially constant [def-pc-essentially-constant-ind-diagram]; for K-injective $K$ and $s=\\mathrm{id}$, $p_{\\mathrm{id}}=\\beta_K$. Dually, for $G=L_R,L_S$ with comparison $\\varphi:G_DQ\\simeq QG$ and a quasi-isomorphism $t:P\\to M$, put $u_t=QG(t)^{-1}\\varphi_M$ (invertible since $G$ is exact), a cone; with $t_0=\\mathrm{id}$, $r=\\varphi_M^{-1}$ and $k=t$ the pro condition of [def-pc-essentially-constant-pro-diagram] is $u_tr\\,QG(t)=1$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-pc-essentially-constant-ind-diagram",
+    "def-pc-essentially-constant-pro-diagram",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y, lemma-K-injective-defined, and 070K, lemma-enough-K-injectives-implies; ringed-site resolutions via injectives.tex Tag 079P; Tag 0FND proof (essentially constant ind/pro systems)"
+   }
+  },
+  {
+   "text": "For a complex $N$ choose a K-injective resolution $N\\to I$ from step 7. Exactness makes $r_UN\\to r_UI$ a quasi-isomorphism, and step 3 makes $r_UI$ K-injective. Hence [lem-weil-pbc-kinjective-total-derived] computes the two sides of $d_N$ as $Q(r_VF_SI)$ and $Q(F_Rr_UI)$ respectively. Define $d_N$ by $Q(q_I)$ under these computation isomorphisms. It is invertible. A morphism between K-injective representatives has a unique homotopy class representing a given derived morphism by [lem-weil-pbc-kinjective-hom-derived]; naturality of $q$ makes this square commute on that class. Every derived object has such a representative, and a quasi-isomorphism between two of them is a homotopy equivalence by the same cited lemma. The comparisons therefore define a natural isomorphism on the whole derived category, independent of resolution through the canonical comparison maps. On $N=QI$ it is exactly the comparison induced by the underived identity required in the statement.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, lemma-K-injective, 070Y, lemma-K-injective-defined, and 070K, lemma-enough-K-injectives-implies"
+   }
+  },
+  {
+   "text": "To check adjuncts, represent $M$ by a complex $C$ and $N$ by $QI$ with $I$ K-injective in the $S_U$ diagram category. By [lem-weil-pbc-kinjective-hom-derived], $t$ is represented by a chain map $h:L_SC\\to I$. Under the normalization formula in [lem-pc-pre-derived-adjoint-functors-general], taking its source quasi-isomorphism to be the identity and its target to be this K-injective representative, $t^\\sharp$ is represented by $f=F_S(h)\\eta^S_C:C\\to F_SI$, followed by the K-injective computation isomorphism. The same formula for $L_R\\dashv RF_R$ computes the adjunct of $r_U(t)b_M^{-1}$ using $r_UI$, which is K-injective by step 3, as\n$$F_R(r_U(h)(b^0_C)^{-1})\\eta^R_{r_VC}.$$\nStep 6 identifies this chain map with $q_Ir_V(f)$. Localizing and inserting exactly the computation isomorphisms used in step 8 gives $d_Nr_V(t^\\sharp)$. Functoriality in both localized variables, included in the normalized-adjunction lemma, transports the equality back along the representing isomorphisms for $M,N$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, explicit representative formula; Tag 070I, lemma-K-injective"
+   }
+  },
+  {
+   "text": "All functors, resolutions and chain maps used above live in the category of $J$-diagrams. In particular $b^0$ and $q$ commute with the transition corresponding to $\\alpha:j\\to k$ by their module naturality; the degreewise maps in their complex versions retain that equality. The chosen resolutions are resolutions of diagrams, so their structure maps and comparison maps are diagram morphisms too. Localization is a functor and preserves these equalities. Thus $b,d$ and the adjunct equation are statements in derived diagram categories, with every transition retained; no reconstruction of a derived diagram from its separate evaluations was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND and 0DVC; explicit diagram-functor construction of the preceding steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-scalar-extension-hom",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-pc-essentially-constant-ind-diagram",
+  "def-pc-essentially-constant-pro-diagram",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0FND, 0DVC, 08BJ, 070I, 070Y and 070K; sites-modules.tex Tags 03CZ and 03D3, applied to compatible coefficient changes on small diagram sites"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -82,10 +230,45 @@
    "results": "{\"top\": [\"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse_obj_π_app\", \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIsoApp_inv_hom\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.w\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj_π_app\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso_inv_app_hom\"], \"note\": \"\", \"n_hits\": 8}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary sheaf restriction, pullback adjunctions and generic mates do not state the normalized unbounded diagram coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a flat sheaf of rings map preserves K-injective complexes and commutes with derived direct image and inverse image of diagrams",
+   "results": "{\"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.sheafificationCompPullback\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.sheafificationCompToSheaf\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"SheafOfModules.bijective_pushforwardSections\"], \"note\": \"\", \"n_hits\": 8, \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ChangeOfRings.lean lines 33-43 and PullbackContinuous.lean lines 39-110; ordinary restriction and site-presented adjunctions do not state the unbounded diagram coefficient comparison or its normalized adjunct equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "{\"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.instAdditiveRestrictScalars\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.restrictScalars_map_val\"], \"note\": \"\", \"n_hits\": 4, \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ChangeOfRings.lean lines 33-43 and PullbackContinuous.lean lines 39-110; ordinary restriction and site-presented adjunctions do not state the unbounded diagram coefficient comparison or its normalized adjunct equation"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|kInjective|KInjective",
+   "results": "{\"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"note\": \"\", \"n_hits\": 10, \"sub\": \"Algebra/Category/ModuleCat/Sheaf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ChangeOfRings.lean lines 33-43 and PullbackContinuous.lean lines 39-110; ordinary restriction and site-presented adjunctions do not state the unbounded diagram coefficient comparison or its normalized adjunct equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image commutes with flat restriction of sheaf ring coefficients and preserves adjunction transposes for diagram categories",
+   "results": "{\"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pushforward\", \"SheafOfModules.instIsRightAdjointPushforward\", \"PresheafOfModules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"note\": \"\", \"n_hits\": 8, \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ChangeOfRings.lean lines 33-43 and PullbackContinuous.lean lines 39-110; ordinary restriction and site-presented adjunctions do not state the unbounded diagram coefficient comparison or its normalized adjunct equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible isomorphisms on inverse image ring sheaves identify scalar restricted derived pullback and pushforward, preserving their units and counits",
+   "results": "{\"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"note\": \"\", \"n_hits\": 8, \"sub\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ChangeOfRings.lean lines 33-43 and PullbackContinuous.lean lines 39-110; ordinary restriction and site-presented adjunctions do not state the unbounded diagram coefficient comparison or its normalized adjunct equation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
@@ -97,7 +280,7 @@
  "blueprint": {
   "from": {
    "node": "lemma-weil-pbc-completed-exchange-coherence",
-   "place": "Proof, first two sentences: finite exchange equations and compatibility as tower morphisms; coefficient-restriction comparison hidden in step 5 of the strict-mate normalization",
+   "place": "Proof in main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md, first paragraph (finite-level equalities preserved by tower morphisms) and second paragraph (naturality of coefficient reduction); coefficient-restriction comparison hidden in step 5 of the strict-mate normalization",
    "via": [
     "lem-weil-pbc-strict-tower-exchange-mate-normalization"
    ]
@@ -112,5 +295,69 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "worker": "stage1",
+  "summary": "Split using only existing DAG statements: exact flat scalar extension makes restriction preserve K-injective diagrams; compatible ring maps identify the underlying pullback/direct-image squares; derive on diagram K-injectives and check the normalized adjunct formula on a chain representative. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the coefficient-restriction compatibility required by lemma-weil-pbc-completed-exchange-coherence in main-20261015, through step 5 of lem-weil-pbc-strict-tower-exchange-mate-normalization. Its separate .proof.md file first requires finite-level equalities to be preserved by tower morphisms, then says these equations commute with tower transitions by naturality of coefficient reduction. The present split supplies the flat coefficient restriction and normalized-adjunct compatibility used at that point. The proof is an agent argument using the cited Stacks results.",
+  "tool_uses": [
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "The sheafified tensor construction defines scalar extension in step 2; no replacement of a proper-base-change unit step is involved. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-extension-hom",
+    "why": "The ordinary ring-module tensor Hom bijection supplies the explicit sectionwise formulas in step 2. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Its module-linear universal property extends the sectionwise tensor maps to sheaves in step 2. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Its exactness definition is the flatness hypothesis used for the scalar-extension adjunction. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "The generic exact-left-adjoint theorem applies to the flat scalar-extension adjunction in step 3 and the exact inverse-image adjunction in step 4. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Its explicit unit formula lifts the ordinary adjunction calculation to homotopy categories in step 6. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "The generic small ringed-site theorem supplies unbounded resolutions on the existing diagram-site models in step 7. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Its Hom bijection and homotopy-equivalence clause justify representative-independent naturality and chain representatives in steps 8 and 9. The item unit contains no statement of this generic tool."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "The statement already fixes this generic derived-adjunction normalization; its representative formula is needed in step 9. The item unit contains no statement of this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-scalar-extension-hom",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-9e0979442",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-9e0979442 (reviewer sub-agent of L); spot-checked: I read the item, its 10 steps, every cited node's statement, the parent lem-weil-pbc-strict-tower-exchange-mate-normalization (steps 5-7 apply this item), the main-20261015 completed-exchange-coherence proof.md, and the Stacks sources 08BJ, 070K, 070I, 070Y, 0FND, 0DVC, 03CZ, 03D3 and 03DA, with labels checked against tags/tags. The statement is true and matches the parent's coefficient category: L_B is u^{-1} with its action transported through an isomorphism c_B, F_B is u_* with its action through the adjoint ring map, all on diagram-site module categories. Flatness is needed: with R=Z and S=Z/p on a point site, the complex Z/p is K-injective over Z/p but not over Z. Edge cases J empty, zero rings and u=id behave correctly. It is not a duplicate of lem-weil-pbc-ring-sheaf-change-adjunction (single pro-etale sites, no flatness, no diagrams; neither specializes to the other) and not a restated parent clause. Steps 1-6, 8 and 10 check: the coefficient square gives linearity of b^0, rho_R and rho_S are adjuncts of the two equal composites, the unit identity follows from the transport node's underlying-Hom clause, and 08BJ applies to E_T -| r_T (exact by flatness) and to L_B -| F_B (exact because u^{-1} preserves finite limits). The one gap, C2/E5 type: step 9 applied the representative formula of lem-pc-pre-derived-adjoint-functors-general without constructing the representing essentially-constant cocone and cone that the formula requires. I fixed this in step 7: p_s=RF(Qs)^{-1}beta_{I'} with rho=beta_{I_0}^{-1}RF(Qs_0), and I checked the transition identity QF_h(a) rho p_s = QF_h(c). Dually u_t=QG(t)^{-1}phi_M with r=phi_M^{-1}. Step 7's uses now include def-pc-essentially-constant-ind-diagram and def-pc-essentially-constant-pro-diagram (definitions, so notions rather than route) and lem-pc-pre-derived-adjoint-functors-general, and proof_deps is recomputed as the union. I accept the declared tool uses prop-pur-kinjective-resolutions-exist (generic K-injective resolutions) and lem-pc-pre-derived-adjoint-functors-general (the normalization the statement fixes). The other off-unit citations are on route through sk-def-exchange, or are definitions or Mathlib leaves. No new nodes, no SGA, statement unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

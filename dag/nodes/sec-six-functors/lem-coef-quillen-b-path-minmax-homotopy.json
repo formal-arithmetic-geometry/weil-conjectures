@@ -1,0 +1,89 @@
+{
+ "id": "lem-coef-quillen-b-path-minmax-homotopy",
+ "kind": "statement",
+ "title": "Min/max homotopy for the constant-path pullback comparison",
+ "statement": "Use small simplicial sets, Kan complexes, products, internal functor simplicial sets, homotopy fibers and weak homotopy equivalences as in [def-cbc-enhanced-diagrams-cones]. Let $X,A,Z,C$ be Kan complexes with maps $r:X\\to Z$, $u:X\\to A$, $f:A\\to C$, $v:Z\\to C$ satisfying $fu=vr$ strictly. Put\n$$Q=A\\times_{C,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,C)\\times_{\\operatorname{ev}_1,C}Z,$$\nlet $q:Q\\to Z$ be the last projection, and suppose $Q$ is Kan. Define $k:X\\to Q$ by $k(x)=(u(x),\\operatorname{const}_{fu(x)},r(x))$. For a vertex $z\\in Z$, put $F_z=\\operatorname{hofib}_z(r)$ and $Q_z=\\{z\\}\\times_ZQ$. Define simplicial maps\n$$g_z:F_z\\to Q_z,\\quad (x,\\gamma)\\mapsto(u(x),v\\gamma,z),$$\n$$j_z:Q_z\\to\\operatorname{hofib}_z(q),\\quad y\\mapsto(y,\\operatorname{const}_z),\\qquad h_z:F_z\\to\\operatorname{hofib}_z(q),\\quad(x,\\gamma)\\mapsto(k(x),\\gamma).$$\nThere is a simplicial homotopy $H_z:F_z\\times\\Delta^1\\to\\operatorname{hofib}_z(q)$ from $h_z$ to $j_zg_z$, given by\n$$H_z((x,\\gamma),t)=\\big((u(x),s\\mapsto v\\gamma(\\min(s,t)),\\gamma(t)),\\ s\\mapsto\\gamma(\\max(s,t))\\big).$$\nHere $\\min,\\max:[1]\\times[1]\\to[1]$ induce maps of nerves $\\Delta^1\\times\\Delta^1\\to\\Delta^1$; the formula means composition with these maps while retaining the entire simplex parameter of $(x,\\gamma)$. The endpoints are exactly $H_z|_{t=0}=h_z$ and $H_z|_{t=1}=j_zg_z$. Empty fibers are allowed.",
+ "source": {
+  "document": "https://kerodon.net/tag/0148",
+  "place": "Construction 3.6.5.1, simplicial cylinder convention; the displayed min/max homotopy is agent-derived, extracted from Step 5 of lem-coef-quillen-b-discrete-fibration-base-change. Not asserted verbatim by Kerodon. Online source read 2026-10-17; archival copy WANTED. No Stacks tag for this comparison."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "WeakHomotopyEquivalence, Kan, SerreFibration, homotopyFiber",
+   "results": "{\"t\": \"2026-10-17T08:21:36Z\", \"tool\": \"loogle\", \"query\": \"WeakHomotopyEquivalence, Kan, SerreFibration, homotopyFiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'WeakHomotopyEquivalence'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Theorem: The min and max simplicial interval formulas give a homotopy between the mapping path fiber map and constant path inclusion",
+   "results": "{\"t\": \"2026-10-17T08:21:37Z\", \"tool\": \"leansearch\", \"query\": \"Theorem: The min and max simplicial interval formulas give a homotopy between the mapping path fiber map and constant path inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Path.toHomotopyConst\", \"Path.toHomotopyConst_apply\", \"Path.Homotopy.symm_apply\", \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"SSet.RelativeMorphism.Homotopy.mk.sizeOf_spec\", \"SSet.RelativeMorphism.Homotopy.h₁\", \"Path.Homotopy.map\", \"SSet.RelativeMorphism.Homotopy.h₀\"], \"digest\": \"fe78d72fe8f5251b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: homological-complex homotopy fibers, generic relative-homotopy definitions, and abstract path-object composition do not state this explicit min/max homotopy. Read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58, AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:85-95, and AlgebraicTopology/ModelCategory/PathObject.lean:267-306."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Theorem: The min and max simplicial interval formulas give a homotopy between the mapping path fiber map and constant path inclusion",
+   "results": "{\"t\": \"2026-10-17T08:21:40Z\", \"tool\": \"leanfinder\", \"query\": \"Theorem: The min and max simplicial interval formulas give a homotopy between the mapping path fiber map and constant path inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GenLoop.homotopyTo\", \"GenLoop.homotopyFrom\", \"GenLoop.homotopyFrom_apply\", \"GenLoop.homotopyTo_apply\", \"Path.toHomotopyConst_apply\", \"unitInterval.uhpath01\", \"Path.Homotopy.reflTransSymmAux_mem_I\", \"Path.Homotopy.reflTransSymmAux\"], \"digest\": \"62c009b12018706d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: homological-complex homotopy fibers, generic relative-homotopy definitions, and abstract path-object composition do not state this explicit min/max homotopy. Read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58, AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:85-95, and AlgebraicTopology/ModelCategory/PathObject.lean:267-306."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy[Ff]iber|homotopy_fiber|[Mm]in.*[Mm]ax|[Mm]ax.*[Mm]in",
+   "results": "{\"t\": \"2026-10-17T08:41:08Z\", \"tool\": \"grep\", \"query\": \"homotopy[Ff]iber|homotopy_fiber|[Mm]in.*[Mm]ax|[Mm]ax.*[Mm]in\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: homological-complex homotopy fibers, generic relative-homotopy definitions, and abstract path-object composition do not state this explicit min/max homotopy. Read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58, AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:85-95, and AlgebraicTopology/ModelCategory/PathObject.lean:267-306."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyFiber\"",
+   "results": "{\"t\": \"2026-10-17T08:41:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"homotopyFiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"HomologicalComplex.HasHomotopyFiber\", \"HomologicalComplex.instHasHomotopyFiberOfHasBinaryBiproducts\", \"HomologicalComplex.homotopyFiber\", \"HomologicalComplex.HasHomotopyFiber.hasBinaryBiproduct\", \"HomologicalComplex.HasHomotopyFiber.mk\"], \"digest\": \"06075d3ef82a4bd1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: homological-complex homotopy fibers, generic relative-homotopy definitions, and abstract path-object composition do not state this explicit min/max homotopy. Read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58, AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:85-95, and AlgebraicTopology/ModelCategory/PathObject.lean:267-306."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strictly commuting square of Kan complexes has a constant path map to its path pullback; the induced homotopy fiber map is simplicially homotopic to the strict fiber comparison followed by constant paths",
+   "results": "{\"t\": \"2026-10-17T08:41:19Z\", \"tool\": \"leanfinder\", \"query\": \"A strictly commuting square of Kan complexes has a constant path map to its path pullback; the induced homotopy fiber map is simplicially homotopic to the strict fiber comparison followed by constant paths\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.trans_p₀\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PrepathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.trans_p₁\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PrepathObject.trans_p₀\", \"HomotopicalAlgebra.PrepathObject.trans_P\"], \"digest\": \"d57b1a209d1c2029\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: homological-complex homotopy fibers, generic relative-homotopy definitions, and abstract path-object composition do not state this explicit min/max homotopy. Read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58, AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:85-95, and AlgebraicTopology/ModelCategory/PathObject.lean:267-306."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-quillen-b-discrete-fibration-base-change",
+  "date": "2026-10-17",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient-adjunction calculation: coherent localization infrastructure; Dual of Proposition 4.6.11, using the overcategory form of the local-constancy test in Lemma 4.6.9; applied to nerves of ordinary categories, since the nerve of a discrete fibration is a right fibration. Compare Corollary 4.6.12.; Returned item Step 5: the min/max comparison of the particular homotopy-fiber map with the strict-fiber map.",
+   "via": [
+    "lem-coef-quillen-b-discrete-fibration-base-change",
+    "lem-coef-brown-fibrant-localization-pullbacks",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

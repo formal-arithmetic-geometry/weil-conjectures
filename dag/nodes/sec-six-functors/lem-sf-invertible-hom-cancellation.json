@@ -1,0 +1,87 @@
+{
+ "id": "lem-sf-invertible-hom-cancellation",
+ "kind": "statement",
+ "title": "Cancellation of an invertible factor in the evaluation-defined internal Hom",
+ "statement": "Let $\\mathcal C$ be a symmetric monoidal category [def-sfb-monoidal-category] with unit $\\mathbf1$, symmetry $\\sigma$, and a specified internal Hom bifunctor $H$ right adjoint to $A\\otimes-$ in each first variable, with its natural currying bijections and evaluation maps [lem-pod-closed-uncurry-laws]. Let $L$ be tensor-invertible: there is an object $L^{-1}$ and an isomorphism $L\\otimes L^{-1}\\cong\\mathbf1$. For every object $V$, let\n$$\ni_{V,L}:H(V,\\mathbf1)\\longrightarrow H(V\\otimes L,L)\n$$\nbe the transpose of the pairing\n$$\n(V\\otimes L)\\otimes H(V,\\mathbf1)\n\\xrightarrow{1_V\\otimes\\sigma_{L,H(V,\\mathbf1)}}V\\otimes H(V,\\mathbf1)\\otimes L\n\\xrightarrow{\\mathrm{ev}_{V,\\mathbf1}\\otimes1_L}\\mathbf1\\otimes L\\cong L.\n$$\nThe associators in this display are the specified ones. Then $i_{V,L}$ is an isomorphism, natural contravariantly in $V$ and with respect to isomorphisms of $L$. This is the specified evaluation-transpose map, not an unspecified choice of an isomorphism between the two internal Hom objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.proof.md",
+  "place": "Step 5, inverse twist in the double application of Step 3; abstract evaluation-transpose cancellation extracted from the returned item proof step 7 (agent expansion)"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "lem-pod-closed-uncurry-laws"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal closed category tensoring source and target by the same invertible object preserves internal Hom by the evaluation defined canonical comparison",
+   "results": "{\"t\": \"2026-10-17T08:43:57Z\", \"tool\": \"leanfinder\", \"query\": \"In a symmetric monoidal closed category tensoring source and target by the same invertible object preserves internal Hom by the evaluation defined canonical comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorRightHomEquiv_naturality\"], \"digest\": \"d700f23906b40cba\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ihomCurryIso (InternalCurrying.lean:80) curries a tensor source but does not cancel an invertible factor from both arguments. Rigid/Basic.lean:386 and :684 concern Hom-set adjunctions and uniqueness of duals. PicardGroup.lean:83,147 and Contraction.lean:281,312,321 concern ordinary modules. None states the evaluation-defined internal-Hom cancellation for arbitrary objects in a symmetric closed monoidal category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed",
+   "results": "{\"t\": \"2026-10-17T08:43:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed\", \"CategoryTheory.MonoidalClosed.closed\", \"CategoryTheory.MonoidalClosed.mk\", \"CategoryTheory.MonoidalClosed.internalHom\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom\", \"CategoryTheory.MonoidalClosed.ofEquiv\", \"CategoryTheory.MonoidalClosed.internalHom_obj\"], \"digest\": \"e718cf89d43ce94f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ihomCurryIso (InternalCurrying.lean:80) curries a tensor source but does not cancel an invertible factor from both arguments. Rigid/Basic.lean:386 and :684 concern Hom-set adjunctions and uniqueness of duals. PicardGroup.lean:83,147 and Contraction.lean:281,312,321 concern ordinary modules. None states the evaluation-defined internal-Hom cancellation for arbitrary objects in a symmetric closed monoidal category."
+  },
+  {
+   "tool": "grep",
+   "query": "ihom.*[Ii]so|[Ii]so.*ihom|internalHom.*[Ii]so|tensor.*[Ii]nvertible",
+   "results": "{\"t\": \"2026-10-17T08:43:46Z\", \"tool\": \"grep\", \"query\": \"ihom.*[Ii]so|[Ii]so.*ihom|internalHom.*[Ii]so|tensor.*[Ii]nvertible\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\"], \"digest\": \"c5ea226f5d0a363c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ihomCurryIso (InternalCurrying.lean:80) curries a tensor source but does not cancel an invertible factor from both arguments. Rigid/Basic.lean:386 and :684 concern Hom-set adjunctions and uniqueness of duals. PicardGroup.lean:83,147 and Contraction.lean:281,312,321 concern ordinary modules. None states the evaluation-defined internal-Hom cancellation for arbitrary objects in a symmetric closed monoidal category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal hom cancellation of an invertible tensor factor in a symmetric monoidal closed category",
+   "results": "{\"t\": \"2026-10-17T08:43:47Z\", \"tool\": \"leansearch\", \"query\": \"Internal hom cancellation of an invertible tensor factor in a symmetric monoidal closed category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.inv_hom_id_tensor\", \"CategoryTheory.MonoidalCategory.hom_inv_id_tensor'\", \"CategoryTheory.ihom.adjunction\", \"Module.Invertible.rightCancelEquiv\", \"CategoryTheory.MonoidalCategory.tensor_hom_inv_id'\", \"CategoryTheory.MonoidalCategory.inv_hom_whiskerRight'_assoc\", \"CategoryTheory.MonoidalCategory.tensor_hom_inv_id\", \"CategoryTheory.MonoidalCategory.inv_hom_id_tensor'\"], \"digest\": \"94bf3e600abe92e9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ihomCurryIso (InternalCurrying.lean:80) curries a tensor source but does not cancel an invertible factor from both arguments. Rigid/Basic.lean:386 and :684 concern Hom-set adjunctions and uniqueness of duals. PicardGroup.lean:83,147 and Contraction.lean:281,312,321 concern ordinary modules. None states the evaluation-defined internal-Hom cancellation for arbitrary objects in a symmetric closed monoidal category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation transpose [V,1] to [V tensor L,L] is an isomorphism when tensoring with L is an equivalence",
+   "results": "{\"t\": \"2026-10-17T08:45:58Z\", \"tool\": \"leanfinder\", \"query\": \"The evaluation transpose [V,1] to [V tensor L,L] is an isomorphism when tensoring with L is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.linearEquivDual\", \"lTensorHomEquivHomLTensor\", \"rTensorHomEquivHomRTensor\", \"dualTensorHomEquiv\", \"Module.Invertible.linearEquiv\", \"ModuleCat.monoidalClosedHomEquiv\", \"transpose_dualTensorHom\", \"ModuleCat.ihom_coev_app\"], \"digest\": \"3c5ec6f8bc2df782\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ihomCurryIso (InternalCurrying.lean:80) curries a tensor source but does not cancel an invertible factor from both arguments. Rigid/Basic.lean:386 and :684 concern Hom-set adjunctions and uniqueness of duals. PicardGroup.lean:83,147 and Contraction.lean:281,312,321 concern ordinary modules. None states the evaluation-defined internal-Hom cancellation for arbitrary objects in a symmetric closed monoidal category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomCurryIso\"",
+   "results": "{\"t\": \"2026-10-17T08:45:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"ihomCurryIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.ihomCurryIso\", \"CategoryTheory.MonoidalClosed.ihomCurryIso_hom\", \"CategoryTheory.MonoidalClosed.ihomCurryIso_inv\"], \"digest\": \"e8b6c6a4630d7404\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ihomCurryIso (InternalCurrying.lean:80) curries a tensor source but does not cancel an invertible factor from both arguments. Rigid/Basic.lean:386 and :684 concern Hom-set adjunctions and uniqueness of duals. PicardGroup.lean:83,147 and Contraction.lean:281,312,321 concern ordinary modules. None states the evaluation-defined internal-Hom cancellation for arbitrary objects in a symmetric closed monoidal category."
+  },
+  {
+   "tool": "grep",
+   "query": "def.*(ihomCurryIso|leftDualIso|tensorLeftHomEquiv)|expComparison",
+   "results": "{\"t\": \"2026-10-17T08:45:47Z\", \"tool\": \"grep\", \"query\": \"def.*(ihomCurryIso|leftDualIso|tensorLeftHomEquiv)|expComparison\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"digest\": \"94a4b5ccc65021be\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ihomCurryIso (InternalCurrying.lean:80) curries a tensor source but does not cancel an invertible factor from both arguments. Rigid/Basic.lean:386 and :684 concern Hom-set adjunctions and uniqueness of duals. PicardGroup.lean:83,147 and Contraction.lean:281,312,321 concern ordinary modules. None states the evaluation-defined internal-Hom cancellation for arbitrary objects in a symmetric closed monoidal category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-dual-perfect",
+  "date": "2026-10-17",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "blueprint": {
+  "from": {
+   "node": "thm-sf-dual-perfect",
+   "place": "Proof Step 5, 'Applying Step 3 twice' and moving the invertible twist to its inverse: evaluation-defined cancellation H(V,1) -> H(V tensor L,L), expanded in returned proof step 7.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -13,9 +13,113 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-derived-space-module-coyoneda"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First make the middle block strictly full. Define $A_0$ with the same objects and mapping sets as $A$ except that its $O$-by-$O$ mapping sets are those of $T$. Composition inside $O$ is that of $T$, and composition on $A(l,o)$ uses the given $T$-action; all other compositions are inherited from $A$. There is no composition $O\\to L\\to O$, because $A(o,l)$ is empty, so these prescriptions are associative and exhaustive. Define $B_0$ in the same way using $B(r,o)=\\varnothing$. The functors $A_0\\to A$ and $B_0\\to B$ fix objects and are weak equivalences on mapping sets: only the middle mapping sets change, and there the assertion is a hypothesis. Thus they are Dwyer--Kan equivalences by [lem-coef-coherent-nerve-comparison]. The span $A_0\\leftarrow T\\to B_0$ has genuinely full inclusions.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Inherited auxiliary directed-gluing branch; agent proof, not an assertion quoted from the current coefficient-limit proof"
+   }
+  },
+  {
+   "text": "Choose object-preserving local trivial fibrations $S\\to T$, $C_L\\to A|_L$, and $C_R\\to B|_R$ with Bergner-cofibrant sources. They are fixed-object cofibrant replacements; [lem-coef-fixed-object-simplicial-free-calculus] identifies fixed-object cofibrant objects with Bergner-cofibrant ones. Apply [lem-coef-triangular-cofibrant-resolution] to $A_0$ with diagonal resolutions $(C_L,S)$ and to $B_0$ with $(S,C_R)$. Denote the resulting categories by $\\widetilde A,\\widetilde B$. Their common full middle subcategory is exactly $S$; both inclusions of $S$ are cofibrations, and all three categories are cofibrant. Their maps to $A_0,T,B_0$ fix objects and are local trivial fibrations. Consequently $P=\\widetilde A\\amalg_S\\widetilde B$ is a representative of the derived pushout by [lem-coef-simplicial-derived-pushout-mapping]. Combining these maps of spans with Step 1 identifies its cocone with that of $Z$ in the derived sense. No padding of missing outer objects in a fixed-object span, or single-arrow pushout comparison, is used.",
+   "uses": [
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-triangular-cofibrant-resolution",
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Inherited auxiliary directed-gluing branch; agent proof, not an assertion quoted from the current coefficient-limit proof"
+   }
+  },
+  {
+   "text": "Compute this ordinary pushout directly. Put $X_l(s)=\\widetilde A(l,s)$ and $Y_r(s)=\\widetilde B(s,r)$. Construct a category $P_0$ on $L\\amalg O\\amalg R$ that agrees with $\\widetilde A,\\widetilde B$ on their pairs, has $P_0(r,l)=\\varnothing$, and has $P_0(l,r)=X_l\\otimes_S Y_r$. This is the coequalizer of [def-coef-enriched-coend], with its two factors interchanged to chronological order. Its relations identify $(xf,y)$ with $(x,fy)$. The composite of $x:l\\to s$ and $y:s\\to r$ is their coend class. Composition at the endpoints is induced from composition in $\\widetilde A,\\widetilde B$; the displayed balancing relation and the associativity and commuting module-action identities make these operations well defined and associative. These are all possible compositions, since no arrow decreases the block label. A pair of functors from $\\widetilde A,\\widetilde B$ agreeing on $S$ extends uniquely to $P_0$: on $(x,y)$ it must take the composite of their images, and this is balanced over $S$. Conversely every functor from $P_0$ restricts to that pair. Restriction and extension are inverse, also with any prescribed object function. This proves the ordinary pushout universal property, so $P=P_0$, including its cocone maps.",
+   "uses": [
+    "def-coef-enriched-coend"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Inherited auxiliary directed-gluing branch; agent proof, not an assertion quoted from the current coefficient-limit proof"
+   }
+  },
+  {
+   "text": "For fixed $l,r$, the lemma [lem-coef-triangular-cofibrant-resolution] makes $X_l$ projectively cofibrant over $S$ and $Y_r$ projectively cofibrant over $S^{\\mathrm{op}}$. Hence their ordinary coend already computes the derived coend as defined in [lem-coef-derived-space-module-coyoneda]. More explicitly, take projective cofibrant replacements of either module. The invariance clauses of [lem-coef-enriched-coend-homotopy-invariance], first with the other module fixed and then with its replacement fixed, show that the two replacement augmentations induce weak equivalences on coends. Step 3 therefore gives $P(l,r)\\simeq X_l\\otimes_S^{\\mathbb L}Y_r$, through its composition augmentation.",
+   "uses": [
+    "lem-coef-triangular-cofibrant-resolution",
+    "lem-coef-derived-space-module-coyoneda",
+    "lem-coef-enriched-coend-homotopy-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Inherited auxiliary directed-gluing branch; agent proof, not an assertion quoted from the current coefficient-limit proof"
+   }
+  },
+  {
+   "text": "Compare the bar for $(X_l,S,Y_r)$ with the bar for $(A(l,-)|_T,T,B(-,r)|_T)$ using the resolution maps. In degree $n$ this is the coproduct over the same tuples $(o_0,\\ldots,o_n)$ of the maps\n$$X_l(o_0)\\times S(o_0,o_1)\\times\\cdots\\times S(o_{n-1},o_n)\\times Y_r(o_n)\\longrightarrow A(l,o_0)\\times T(o_0,o_1)\\times\\cdots\\times T(o_{n-1},o_n)\\times B(o_n,r).$$\nEvery factor is a trivial Kan fibration by Step 2 and [lem-coef-triangular-cofibrant-resolution]. The boundary lifting criterion of [lem-coef-kan-quillen-model-right-proper-core] shows that their finite product is a trivial fibration by lifting each coordinate. Their coproduct is also a trivial fibration: a simplex of the target belongs to one summand, whose index is forced on the lifting problem, and one lifts in that summand (including the empty-boundary case). Thus the comparison is a weak equivalence in every bar degree. Homotopy realization preserves this degreewise weak equivalence, by definition of a derived realization; concretely, [lem-coef-bisimplicial-diagonal-equivalence] also gives a weak equivalence of the bar diagonals. The two-sided bar formula of [lem-coef-derived-space-module-coyoneda] identifies their homotopy realizations with the derived coends, proving\n$$P(l,r)\\simeq A(l,-)|_T\\otimes_T^{\\mathbb L}B(-,r)|_T.$$",
+   "uses": [
+    "lem-coef-triangular-cofibrant-resolution",
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-derived-space-module-coyoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Inherited auxiliary directed-gluing branch; agent proof, not an assertion quoted from the current coefficient-limit proof"
+   }
+  },
+  {
+   "text": "For pairs in the $A$-side, Step 3 gives $P(a,a')=\\widetilde A(a,a')$, and on the $B$-side it gives $P(b,b')=\\widetilde B(b,b')$. The two prescriptions agree on the common full $S$-block. Their resolution maps are weak equivalences by [lem-coef-triangular-cofibrant-resolution], and the maps $A_0\\to A,B_0\\to B$ of Step 1 are weak equivalences on mapping sets. Hence the derived cocone maps from $A,B$ are weak equivalences on their own mapping spaces. Also $P(r,l)=\\varnothing$ exactly. Object-preserving local weak equivalences are Dwyer--Kan equivalences by [lem-coef-coherent-nerve-comparison], so these conclusions give the asserted statements for a homotopy-pushout representative $Z$ at the corresponding cocone objects.",
+   "uses": [
+    "lem-coef-triangular-cofibrant-resolution",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Inherited auxiliary directed-gluing branch; agent proof, not an assertion quoted from the current coefficient-limit proof"
+   }
+  },
+  {
+   "text": "Check the specified comparison and naturality. The map from each bar summand to the pushout composes its successive arrows; a face composes adjacent arrows or applies an action, and a degeneracy inserts an identity. Thus its augmentation is precisely the derived composition pairing of the two cocone maps. A block-preserving map of spans sends each summand to the summand with the image tuple and applies the given functor to every factor. It preserves all these compositions, actions and identities, even when it identifies objects in a block. The functorial resolutions of [lem-coef-triangular-cofibrant-resolution] and the natural derived-pushout comparison of [lem-coef-simplicial-derived-pushout-mapping] give the same map on the two sides of Step 5. Composition at the endpoints acts on the first and last factors. The additional-variable and augmentation clauses of [lem-coef-derived-space-module-coyoneda] preserve these actions. Initially they are actions by $C_L^{\\mathrm{op}}\\times C_R$; restriction along its object-preserving Dwyer--Kan equivalence to $A|_L^{\\mathrm{op}}\\times B|_R$ is a Quillen equivalence on modules by [lem-coef-simplicial-projective-model-calculus], so the comparison retains the stated original module variables. If $O$ is empty the coend and every bar degree are empty; if an outer block is empty there is no corresponding mixed pair. Empty mapping factors give empty summands. All arguments use cofibrant resolutions and homotopy realization, so no local Kan hypothesis was introduced.",
+   "uses": [
+    "lem-coef-triangular-cofibrant-resolution",
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-derived-space-module-coyoneda",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Inherited auxiliary directed-gluing branch; agent proof, not an assertion quoted from the current coefficient-limit proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-enriched-coend",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-derived-space-module-coyoneda",
+  "lem-coef-enriched-coend-homotopy-invariance",
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-simplicial-derived-pushout-mapping",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-triangular-cofibrant-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "The current source has the coefficient-limit adjunction argument. This is a separately checked proof of its inherited auxiliary gluing node, using strict full-block replacement, explicit pushout universal property, and derived bar comparison; HTT Appendix A.3.3 and Bergner Sections 1--2 are background only."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +155,52 @@
    "results": "{\"t\": \"2026-10-17T08:06:03Z\", \"tool\": \"leanfinder\", \"query\": \"Derived enriched amalgamation along a full common subcategory with all arrows pointing from the left part through the common part to the right part\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instEnrichedOrdinaryCategoryFullSubcategory\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.enrichedComp\", \"CategoryTheory.Enriched.FunctorCategory.instHasEnrichedHomUnderCompMapForget\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHom_condition'\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHom_condition\", \"CategoryTheory.Enriched.FunctorCategory.diagram\", \"CategoryTheory.Enriched.FunctorCategory.HasFunctorEnrichedHom\"], \"digest\": \"7eeb0fb102dd4f9e\"}",
    "date": "2026-10-17",
    "verdict": "no match: read returned types; these are ordinary coends, enriched Hom definitions, Cech conerves, Dold-Kan constructions or ordinary colimits, not the stated derived enriched gluing theorem. Read Mathlib/CategoryTheory/Limits/Shapes/End.lean:45-79, AlgebraicTopology/SimplicialCategory/Basic.lean:49-72, AlgebraicTopology/SimplicialNerve.lean:28-32 and 193, and AlgebraicTopology/SimplicialSet/HornColimits.lean:338-424. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*pushout|derived.*coend|Bergner",
+   "results": "{\"t\": \"2026-10-17T10:18:31Z\", \"tool\": \"grep\", \"query\": \"homotopy.*pushout|derived.*coend|Bergner\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the logged hits. Ordinary coends, enriched Hom, Tor and homotopy-category products do not compute mapping spaces in a directed Bergner homotopy pushout."
+  },
+  {
+   "tool": "loogle",
+   "query": "EnrichedFunctor, pushout, coend",
+   "results": "{\"t\": \"2026-10-17T10:18:31Z\", \"tool\": \"loogle\", \"query\": \"EnrichedFunctor, pushout, coend\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'EnrichedFunctor'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the logged hits. Ordinary coends, enriched Hom, Tor and homotopy-category products do not compute mapping spaces in a directed Bergner homotopy pushout."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping space from a left block to a right block in a directed enriched homotopy pushout is the derived coend over the common full middle category",
+   "results": "{\"t\": \"2026-10-17T10:18:31Z\", \"tool\": \"leansearch\", \"query\": \"The mapping space from a left block to a right block in a directed enriched homotopy pushout is the derived coend over the common full middle category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom_map\", \"CategoryTheory.Limits.coend.map\", \"CategoryTheory.Under.mapPushoutAdj\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHom\", \"CategoryTheory.CatEnrichedOrdinary.homEquiv\", \"CategoryTheory.Limits.coend.ι_map_assoc\", \"CategoryTheory.EnrichedFunctor.map\", \"CategoryTheory.Limits.coendFunctor_map\"], \"digest\": \"7b640d9c03a41a02\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the logged hits. Ordinary coends, enriched Hom, Tor and homotopy-category products do not compute mapping spaces in a directed Bergner homotopy pushout."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived mapping spaces in a Bergner homotopy pushout of simplicial categories along a full middle subcategory are derived tensor products of incoming and outgoing modules",
+   "results": "{\"t\": \"2026-10-17T10:18:33Z\", \"tool\": \"leanfinder\", \"query\": \"Derived mapping spaces in a Bergner homotopy pushout of simplicial categories along a full middle subcategory are derived tensor products of incoming and outgoing modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor'_map_app\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.functor_map\", \"SSet.Truncated.hoFunctor.monoidal\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor_map\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.curriedInverse\", \"CategoryTheory.Tor\"], \"digest\": \"8f0325e31bcdcec9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the logged hits. Ordinary coends, enriched Hom, Tor and homotopy-category products do not compute mapping spaces in a directed Bergner homotopy pushout."
+  },
+  {
+   "tool": "grep",
+   "query": "coend|Bergner|homotopy.*pushout",
+   "results": "{\"t\": \"2026-10-17T10:22:40Z\", \"tool\": \"grep\", \"query\": \"coend|Bergner|homotopy.*pushout\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\"], \"digest\": \"6c65635d1779c527\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the logged hits. Ordinary coends, enriched Hom, Tor and homotopy-category products do not compute mapping spaces in a directed Bergner homotopy pushout."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits.coend\"",
+   "results": "{\"t\": \"2026-10-17T10:22:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.Limits.coend\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coend\", \"CategoryTheory.Limits.coendFunctor\", \"CategoryTheory.Limits.coend.ι\", \"CategoryTheory.Limits.coendFunctor_obj\", \"CategoryTheory.Limits.coend.map_id\", \"CategoryTheory.Limits.coend.map\", \"CategoryTheory.Limits.coendFunctor_map\", \"CategoryTheory.Limits.coend.hom_ext\"], \"digest\": \"9169503d4b2d16af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the logged hits. Ordinary coends, enriched Hom, Tor and homotopy-category products do not compute mapping spaces in a directed Bergner homotopy pushout."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-directed-three-face-mapping-pushout",
@@ -85,5 +231,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-directed-enriched-amalgamation",
+  "worker": "stage1",
+  "summary": "Resumed the retained four-step draft and searches. Repaired its unsupported application of a single-arrow fixed-object pushout comparison and its uncited word/bar assertion. Strictified the middle block explicitly, isolated the genuine two-block cofibrant collage construction as one new unsplit lemma, proved the strict pushout universal property, and compared coends through trivial-fibration bar maps. Checked cocones, endpoint variables, arbitrary object maps, and all empty cases; original statement unchanged.",
+  "blueprint": "Inherited auxiliary branch of prop-coef-integral-exceptional-adjoint, paragraph 2: coherent middle adjunction and directed gluing in the three-face comparison. The main-20261015 proof instead makes the coefficient-limit adjunction explicit; this split handles the already imported auxiliary item without changing that unit or the current coefficient route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-a8719d93c",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-a8719d93c (reviewer sub-agent of L); spot-checked: PASS: I read the item, the new node and the 9 cited statements in full; the amalgamation result and the collage lemma are both true, and I made no changes. (1) Item statement unchanged; true; it matches both uses in the parent lem-coef-directed-three-face-mapping-pushout (step 4: blocks K_0 | K_1+K_2 | K_3; step 6: K_0 | K_2 | K_3). (2) Steps: S1 strict A_0 is associative since A(o,l) is empty, and A_0->A is Dwyer-Kan by definition. S2 the new lemma's hypotheses hold for A_0 (U=L, V=O) and B_0 (U=O, V=R), with the same middle category S, so the cofibrant span gives the derived pushout. S3 checked every block triple; the pushout universal property holds for any object function. S4 endpoint projective cofibrancy plus the two invariance clauses give ordinary coend = derived coend. S5 products and coproducts of the trivial fibrations Ã(l,o)->A(l,o), S->T, B̃(o,r)->B(o,r) are trivial fibrations by the boundary criterion; the bisimplicial-diagonal node and the bar formula complete the change of base. S6 and S7: cocone maps, empty reverse Hom, naturality, and module variables kept via the Quillen equivalence. Every use agrees with the cited statement, proof_deps is the union of the uses, the graph is acyclic, all citations are in the same unit, and there are no tool uses. (3) New lem-coef-triangular-cofibrant-resolution is true: projective bimodule cells are exactly Bergner free-arrow cells in the collage, because mixed arrows cannot compose; this gives a cofibrant collage, cofibrant diagonal inclusions and projectively cofibrant endpoint modules. Tested empty blocks, empty M and a monoid diagonal. It is statement-only and self-contained, with the full search record and correct created/blueprint fields. It is not a restatement of the item and no DAG duplicate exists (nearest: extreme-bimodule-attachment, scat-fixed-object-pushout-comparison, fixed-object-simplicial-free-calculus). (4) HTT and Bergner are not in literature/; the worker declared them WANTED and the proof is marked agent-written, so I checked against their standard content, not a copy. No SGA. The from.place inherited from the earlier chain does not match the current ancestor proof; the split_report says so without changing the route. Not a target, so no base-change or coefficient check applies."
  }
 }

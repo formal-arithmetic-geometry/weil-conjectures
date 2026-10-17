@@ -13,9 +13,113 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-derived-space-module-coyoneda"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We may work with ordinary iterated geometric realizations of the bar diagrams, in $\\mathcal K$. Here is the comparison being used. For a bisimplicial set $Z$, apply the simplex-colimit presentation in each variable to write it as the coend of $Z_{m,n}$ copies of $\\Delta^m\\boxtimes\\Delta^n$. The diagonal of this presentation is the coend of $Z_{m,n}$ copies of $\\Delta^m\\times\\Delta^n$, since taking a diagonal is degreewise evaluation and preserves colimits. Realization preserves these colimits and sends this product to $|\\Delta^m|\\times|\\Delta^n|$. Thus realization of the diagonal is naturally homeomorphic to the iterated realization. Repeating this argument treats three variables. Products with a fixed k-space preserve these colimits by the exponential law. Finally the diagonal-space-colimit comparison says that these diagonals compute homotopy realization, with their actual cocones; apply it successively in all the simplicial directions. This justifies all subsequent changes between the iterated topological and homotopy realizations, without any Reedy or Kan assumption on the input.",
+   "uses": [
+    "lem-coef-simplicial-simplex-colimit-product",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-kspace-exponential-law",
+    "lem-coef-bisimplicial-diagonal-space-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof."
+   }
+  },
+  {
+   "text": "Let $B_n=\\coprod_{c_0,\\ldots,c_n}X(c_0)\\times\\prod_{i<n}T(c_i,c_{i+1})\\times Y(c_n)$ be the bar, and let $A_\\bullet,B^1_\\bullet$ be the two diagonal-block bars. A summand with a transition from $O_1$ to $O_0$ is empty. Every remaining object word is wholly in one block or has a unique form $(a_0,\\ldots,a_p,b_0,\\ldots,b_q)$ with $a_i\\in O_0,b_j\\in O_1$. Define a bisimplicial object in simplicial sets by\n$$M_{p,q}=\\coprod_{a_0,\\ldots,a_p;b_0,\\ldots,b_q}X(a_0)\\times\\prod_{i<p}T_0(a_i,a_{i+1})\\times N(a_p,b_0)\\times\\prod_{j<q}T_1(b_j,b_{j+1})\\times Y(b_q).$$\nIts $p$-faces compose adjacent $T_0$ arrows, act on $X$, or compose the last $T_0$ arrow with $N$; its $q$-faces compose $N$ with the first $T_1$ arrow, compose adjacent $T_1$ arrows, or act on $Y$. Degeneracies insert identities. The two sets of operators commute by associativity and the module laws. These are precisely the faces and degeneracies of a mixed bar word which do not remove its entire block.",
+   "uses": [
+    "lem-coef-derived-space-module-coyoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof."
+   }
+  },
+  {
+   "text": "There are augmentations $M_{p,q}\\to A_p$ and $M_{p,q}\\to B^1_q$. The first composes $N(a_p,b_0)$ with the complete $T_1$ chain and applies the contravariant $Y$ action, leaving $X(a_0)$ and the $T_0$ chain. The second applies the $T_0$ chain followed by $N(a_p,b_0)$ to $X(a_0)$, leaving the $T_1$ chain and $Y(b_q)$. Associativity makes these maps constant along the augmented simplicial direction. Put $U=|A_\\bullet|$, $V=|B^1_\\bullet|$, and $W=|M_{\\bullet,\\bullet}|$, with the internal simplicial direction also realized, and write $f:W\\to U,g:W\\to V$ for these maps. By the single bar formula, $U,V$ represent $X_0\\otimes^\\mathbb L_{T_0}Y_0$ and $X_1\\otimes^\\mathbb L_{T_1}Y_1$. Realizing $p$ first computes the module $X_0\\otimes^\\mathbb L_{T_0}N$ objectwise at $b_0$; the $q$-bar then computes its derived tensor with $Y_1$. The Fubini comparison identifies this with the other parenthesization, and identifies $f,g$ with the two specified action maps. The retained-variable and augmentation clauses of the cited derived-coend result apply to precisely this module-valued calculation.",
+   "uses": [
+    "lem-coef-derived-space-module-coyoneda",
+    "lem-coef-bisimplicial-diagonal-space-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof."
+   }
+  },
+  {
+   "text": "Write $L=|B_\\bullet|$, again realizing the internal direction too. Construct $F:D(f,g)\\to L$ as the actual bar inclusions on $U,V$. On a mixed summand represented by $m\\in|M_{p,q}|$, barycentric coordinates $u\\in|\\Delta^p|$, $v\\in|\\Delta^q|$, and $t\\in[0,1]$, set\n$$F([m,u,v,t])=[m,((1-t)u_0,\\ldots,(1-t)u_p,tv_0,\\ldots,tv_q)].$$\nFor $0<t<1$ the outer coordinates have the mixed object word of step 2. At $t=0$, deleting all zero-weight $O_1$ vertices is exactly the augmentation $f$ of step 3; at $t=1$, deleting the zero-weight $O_0$ vertices is $g$. Deleting any other zero coordinate composes the corresponding adjacent arrows or applies the endpoint module action, exactly as in $M$. Repeating an object by an identity adds its two weights, and the displayed formula commutes with that addition. Internal simplicial identifications affect only $m$. Consequently the formula respects every realization and cylinder relation and gives a continuous map of the stated quotients.",
+   "uses": [
+    "lem-coef-derived-space-module-coyoneda",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof."
+   }
+  },
+  {
+   "text": "This map is a homeomorphism. On each mixed outer simplex let $t$ be the sum of its $O_1$ weights. For $0<t<1$, divide the $O_0$ weights by $1-t$ and the $O_1$ weights by $t$, recovering $u,v$ and the same mixed label. For $t=0$ or $1$, use respectively the pure $O_0$ or $O_1$ face; its image in the double cylinder is independent of all discarded data by its endpoint identifications. These rules are inverse to the formula of step 4. To check the topology at the endpoints, the map $|\\Delta^p|\\times|\\Delta^q|\\times[0,1]\\to|\\Delta^{p+q+1}|$ given by that formula is a quotient map: it is a continuous surjection. The three factors are compact by the simplex-compactness node (identify $[0,1]$ with $|\\Delta^1|$), and their product is compact by the Tychonoff node. The target is Hausdorff as a Euclidean subspace, so the compact-Hausdorff-surjection node makes the map quotient. Its fibers at $0$ forget $v$ and at $1$ forget $u$, with no other identifications. Thus the simplex is exactly this join quotient. Taking the coends with mixed labels imposes the internal face and degeneracy relations; the endpoint quotients impose exactly the two augmentations. All these are colimits in $\\mathcal K$, and product with a label space preserves them by the exponential law. Hence the cellwise join quotients induce the claimed homeomorphism of the full quotients, with inverse continuous even at the two pure bars.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-kspace-exponential-law",
+    "lem-coef-standard-simplex-compact",
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-sfb-compact-hausdorff-surjection-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof."
+   }
+  },
+  {
+   "text": "By step 1, $U,V,W$ are naturally homeomorphic to realizations of their diagonal simplicial sets, and under these homeomorphisms $f,g$ are the realizations of the diagonals of the augmentations of step 3, which are simplicial maps because those augmentations are constant along the augmented direction. Apply the double-mapping-cylinder theorem to these three simplicial sets and the continuous maps $f,g$ transported along those homeomorphisms. Its specified cocone makes the homotopy type of $D(f,g)$, namely that of $\\operatorname{Sing}D(f,g)$, the homotopy pushout of $\\operatorname{Sing}U\\leftarrow\\operatorname{Sing}W\\to\\operatorname{Sing}V$. To compare with homotopy realizations, which are the localizations of the diagonal simplicial sets themselves, use the characteristic-map units $u_K:K\\to\\operatorname{Sing}|K|$ for $K$ the diagonals of $A_\\bullet$, $M_{\\bullet,\\bullet}$, $B^1_\\bullet$ and $B_\\bullet$. Each is a weak homotopy equivalence by the singular-unit theorem, with no Kan hypothesis, and the units commute strictly with the realized simplicial maps $f,g$ and with the bar inclusions by naturality. Hence the span of homotopy realizations is equivalent to the singular span, compatibly with its maps, and the homotopy type of $L$ is the homotopy realization of $B_\\bullet$. Step 5 identifies this cocone with the two bar inclusions and the explicit mixed-word homotopy in $L$. The bar formula identifies the homotopy realization of $B_\\bullet$ with $X\\otimes_T^\\mathbb L Y$, and step 3 identifies all three terms of the span and its maps. This gives exactly the displayed equivalence of the item, including the two specified inclusions.",
+   "uses": [
+    "lem-coef-double-mapping-cylinder-space-pushout",
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-coef-derived-space-module-coyoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof."
+   }
+  },
+  {
+   "text": "For a block-preserving enriched functor and maps of modules, each word, arrow factor and module factor in steps 2--4 maps to the corresponding word and factor. The scalar formula $((1-t)u,tv)$ is unchanged; hence $F$ commutes with these maps, including functors that identify objects within a block. If the data have extra enriched module variables, perform the same construction at each value: their action maps commute with all compositions and module actions just used, so the resulting comparisons are maps of those modules. For a composition augmentation, both routes replace a chain of arrow factors by its composite acting on the appropriate endpoint; associativity gives the same resulting label while the scalar coordinates are unchanged. The Fubini comparisons also commute with these augmentations by the cited statement. Finally, if either block is empty, all $M_{p,q}$ and the corresponding pure bar are empty; the cylinder quotient and total bar are both the other pure bar. If both blocks are empty they are both empty. This verifies all naturality, augmentation and empty-block clauses without adding hypotheses.",
+   "uses": [
+    "lem-coef-derived-space-module-coyoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-bisimplicial-diagonal-space-colimit",
+  "lem-coef-derived-space-module-coyoneda",
+  "lem-coef-double-mapping-cylinder-space-pushout",
+  "lem-coef-kspace-exponential-law",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-simplex-colimit-product",
+  "lem-coef-standard-simplex-compact",
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "lem-weil-pbc-tychonoff-product-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,7 +158,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-directed-three-face-mapping-pushout",
@@ -85,5 +189,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-triangular-bar-excision",
+  "worker": "Q46 stage1",
+  "summary": "Constructed the mixed two-direction bar and its two composition augmentations; wrote the coordinate join-quotient isomorphism with a double mapping cylinder and applied a separate generic cylinder theorem. Retained all module, functor, augmentation and empty-block clauses. Only inherited TeX/newline escaping was corrected.",
+  "blueprint": "Paragraph 2, coherent middle derived adjunction; inherited operadic-extension technical branch, two-block bar calculation supporting the common edge 12. Calculation supplied by Q46, not asserted to appear in this blueprint proof. Steps 1--7 supply the two-block bar calculation, without replacing any unit-level route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "Step 6 takes only the weak equivalence K -> Sing|K| for arbitrary simplicial sets, to compare the Sing-defined homotopy types of the cylinder lemma with homotopy realizations of the bar diagonals; a generic realization tool of sk-prop-sf-cbc that no node of sk-prop-sf-biduality-general states (accepted the same way for lem-coef-quillen-b-comma-homotopy-fiber, lem-coef-ordinary-nerve-discrete-hom-comparison, lem-coef-space-valued-straightening)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-singular-unit-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-e7f11aea3",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-e7f11aea3 (reviewer sub-agent of L); spot-checked: I read the item, all 7 of its steps, the new cylinder node, the statement of every cited node, the parent's step 4, the unit record and the main-20261015 blueprint proof. The item's statement is true and is not weakened. I checked both action directions against the parent's use and tested it on small cases: one object per block with N a set, N empty, an empty block, and terminal modules. Steps 1-5 and 7 check out. That covers the mixed-word bar, the block-removing faces handled by the augmentations, the coordinate map ((1-t)u, tv), and the join quotient. That quotient follows from the compactness, Tychonoff and quotient-map Mathlib leaves. The new node lem-coef-double-mapping-cylinder-space-pushout is a true generic statement and only a statement. I tested it at C empty, at A=B=point and at f=id. It does not restate a clause of the item. A DAG search for cylinder, homotopy pushout, hocolim and Sing found no duplicate. Its search records cover all three kinds. There are no cycles. I repaired one fault (E5/C1). Step 6 matched the cylinder lemma's Sing-defined homotopy types with the derived coends, which are homotopy realizations, but cited nothing for the weak equivalence K -> Sing|K|. The fix cites the existing lem-cbc-realization-singular-unit-weak with the naturality argument and adds it to proof_deps. I accept it as a declared tool use, since this unit has already accepted the same use for three nodes. I also set step 1 to non-elementary. The corrected item is in fixes/dag/nodes/sec-six-functors/lem-coef-triangular-bar-excision.json. No nodes are dropped and no SGA source is cited.; 1 file(s) fixed by the reviewer"
  }
 }

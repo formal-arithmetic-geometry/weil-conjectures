@@ -102,16 +102,46 @@
    }
   },
   {
-   "text": "To construct the marked internal Hom $Y^X$, take its underlying simplicial set to have $n$-simplices the marked maps $X\\times(\\Delta^n)^\\flat\\to Y$, with operators given by restriction. Mark an edge precisely when its map $X\\times(\\Delta^1)^\\flat\\to Y$ also preserves the additional markings of $X\\times(\\Delta^1)^\\sharp$. Degenerate edges satisfy this condition. Under the underlying exponential bijection, a map $Z\\to Y^X$ preserves markings precisely when evaluation carries every pair of a marked edge of $Z$ and a marked edge of $X$ to a marked edge of $Y$. This is exactly the condition for $Z\\times X\\to Y$ to preserve markings, proving the marked exponential adjunction. The sharp mapping formula defines composition by the diagonal on the simplex parameter and evaluation; associativity and units are those of composition of marked maps. The tensor is $X\\times K^\\sharp$. Its cotensor is the marked internal Hom $Y^{K^\\sharp}$, because $(-)^\\sharp$ preserves products: in degree $n$, the cotensor adjunction identifies marked maps $X\\times(\\Delta^n)^\\sharp\\times K^\\sharp\\to Y$ with maps $K\\times\\Delta^n\\to\\operatorname{Map}^\\sharp(X,Y)$. The tensor adjunction follows from the same identity with the $X$ and $K$ variables grouped together. For a trivial cofibration $j:K\\hookrightarrow L$ of Kan-model simplicial sets and a quasicategory $C$, all edges of the parameter are marked, so $\\operatorname{Map}^\\sharp(K^\\sharp,C^\\natural)=\\operatorname{Fun}(K,C^\\simeq)$. Restriction to $K$ is a trivial Kan fibration: a boundary lifting problem adjoints to a lift of $C^\\simeq\\to*$ against a pushout product of a boundary inclusion with $j$, which is anodyne by the cited unmarked pushout-product lemma. Therefore $j^\\sharp$ belongs to $W$. For a cofibration $i$ of marked sets and a cofibration $j$ of unmarked simplicial sets, the simplicial pushout product is $i\\mathbin\\square j^\\sharp$. Step 6 makes it a cofibration, trivial when $i$ is trivial or when $j$ is trivial by the preceding test. This is the simplicial model axiom; the sharp parameter is essential.",
+   "text": "Apply [lem-coef-marked-internal-hom] to construct the marked internal Hom $Y^X$. Its explicit simplices and edge markings give the exponential adjunction by evaluation, including the marking-preservation criterion. This supplies the internal Hom used in the statement, in the input universe.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper",
-    "lem-coef-sset-anodyne-pushout-product",
-    "lem-cbc-enhanced-functor-cone-calculus"
+    "lem-coef-marked-internal-hom"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Corollary 3.1.4.4; the unmarked mapping-space claim is proved by lifting and pushout products. Internal Homs preceding Remark 3.1.3.1."
+    "place": "Section 3.1.3, opening paragraph: marked internal Hom; extracted construction and adjunction."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-marked-sharp-enrichment] to the sharp mapping formula of the statement. Its diagonal-parameter composition, identities and natural simplicial currying isomorphisms supply the required enrichment, tensor $X\\times K^\\sharp$ and cotensor $Y^{K^\\sharp}$. These isomorphisms use the same underlying transpose maps, so they have the normalization in the statement.",
+   "uses": [
+    "lem-coef-marked-sharp-enrichment"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, mapping formulas; simplicial structure of Corollary 3.1.4.4."
+   }
+  },
+  {
+   "text": "Let $j:K\\hookrightarrow L$ be a trivial cofibration in the Kan model structure. By [lem-coef-marked-sharp-anodyne-restriction], for every quasicategory $C$ its sharp restriction map into $C^\\natural$ is a trivial Kan fibration, hence a weak homotopy equivalence by [lem-coef-kan-quillen-right-proper]. These are exactly the tests defining $W$, so $j^\\sharp\\in W$. The helper proves this using the natural identity with maps into $C^\\simeq$ and boundary lifting against the unmarked pushout products.",
+   "uses": [
+    "lem-coef-marked-sharp-anodyne-restriction",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.1.4.4, proof: fully marked trivial cofibrations and mapping into the largest Kan subcomplex."
+   }
+  },
+  {
+   "text": "For a cofibration $i$ of marked sets and a cofibration $j$ of simplicial sets, $j^\\sharp$ is injective on underlying simplices. The tensor formula makes the simplicial pushout product exactly $i\\mathbin\\square j^\\sharp$: full marking preserves the parameter products and pushouts. Step 6 makes it a cofibration, trivial if $i$ is trivial or if $j$ is trivial, since the preceding step proves $j^\\sharp\\in W$. This proves the simplicial model axiom with the sharp parameter.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.1.4.4, final pushout-product deduction from the established cartesian axiom."
    }
   },
   {
@@ -147,7 +177,9 @@
   "lem-coef-marked-saturation-perfect-equivalences",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-perfect-weak-equivalence-model-recognition",
-  "lem-coef-sset-anodyne-pushout-product",
+  "lem-coef-marked-internal-hom",
+  "lem-coef-marked-sharp-enrichment",
+  "lem-coef-marked-sharp-anodyne-restriction",
   "lem-cbc-enhanced-functor-cone-calculus",
   "lem-coef-coherent-nerve-comparison"
  ],
@@ -243,7 +275,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-functor-pushout",
@@ -256,16 +288,12 @@
   "date": "2026-10-17",
   "item": "lem-coef-marked-point-cartesian-model",
   "worker": "stage1",
-  "summary": "Preserved all clauses and universe generality. Split model recognition into marked lifting calculus, perfectness via finite saturation, and generic perfect-class recognition; derived fibrancy, products, simplicial structure and mapping cores explicitly. No Lean attachment, Mathlib match, or SGA source.",
+  "summary": "Repair of the human re-split return: preserved the statement, Lean record, route and original steps 1-6, 8-9 verbatim. Replaced the 2072-character step 7 by four short steps citing three new statement-only lemmas for marked internal Hom, sharp enrichment with tensor/cotensor adjunctions, and fully marked parameter core/restriction. All new nodes searched in the entire DAG, blueprint and project source and with logged Mathlib searches; no exact matches. The final simplicial pushout-product deduction remains explicit.",
   "blueprint": "Integral exceptional-adjoint proof, paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; technical foundations for the finite-adjunction-diagram realization, specifically the full functor-category pushout comparison in lem-coef-hammock-infinity-localization. Technical input: Cartesian simplicial model of marked simplicial sets over a point.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
     "why": "Generic pointwise equivalences and Kan cores, required for the mapping identity; no geometric route is replaced."
-   },
-   {
-    "node": "lem-coef-sset-anodyne-pushout-product",
-    "why": "Generic unmarked Kan anodyne pushout products verify the sharp-parameter simplicial axiom; technical foundations of this unit."
    }
   ]
  },
@@ -274,12 +302,12 @@
   "lem-coef-sset-anodyne-pushout-product"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-batch",
-  "group": "N4",
+  "reviewer": "NT-cc-NR-884162762",
+  "group": "NR",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited node's statement in full, and checked steps 1-9 one by one. The mathematics is correct and is the point case of HTT 3.1.3.7, 3.1.4.1-3.1.4.4 and Def 3.0.0.1; the generic recognition node is HTT A.2.6.15. Step 2: pushout stability holds by right properness, because restriction along a mono is a Kan fibration. Step 3: I-injective maps reflect markings, so the section and homotopy lifts are marked; all hypotheses of the recognition node are established. Step 4: fibrant objects are exactly the C natural, including the empty quasicategory. Step 5: the two-test inverse argument is complete, and the general case reduces through two marked-anodyne maps and two-out-of-three. Step 7: the internal Hom and cotensor are constructed explicitly, and the sharp-parameter axiom follows from the Mathlib leaf (mono pushout-product anodyne) with C-core Kan. Steps 8-9: the core identity and universe independence follow through the saturation units. New nodes, tested on small cases: in the detector A the faces give the edges e, id, e, id, e, g with d3 and d0 as the inverse witnesses, so the restriction is an isomorphism; countable generation holds by marking edges inside countable Kan subcomplexes; the finite generators make T preserve filtered colimits, and T(X) is Q natural because Cartesian edges over a point are equivalences; the recognition node's all-Cof pushout hypothesis implies the source's. No duplicate was found in the whole DAG (Joyal, cotorsion, small-object, Bousfield and presheaf-presentation nodes read), no new node restates a clause of the item, there is no cycle, and no SGA is cited. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus (Kan cores and the pointwise criterion) and lem-coef-sset-anodyne-pushout-product (a Mathlib leaf). FIX (B3): the item statement used 'the Kan model structure' with no node defining it; I added [lem-coef-kan-quillen-right-proper] to the statement and to stmt_deps, with no other change. Caveat: HTT is not in literature/ and the reviewer has no network, so the HTT place numbers come from my own knowledge of HTT and were not checked against the PDF, and the remark numbers 3.1.1.3, 3.1.1.10 and 3.1.3.4 are unconfirmed. Every clause was verified mathematically on its own.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-884162762 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full. All three new lemmas are true and self-contained. I checked them directly: (1) lem-coef-marked-internal-hom: degenerate edges of H(X,Y) are marked, and Z→H(X,Y) corresponds to Z×X→Y, both on underlying maps and on markings. Checked with X or Y empty. (2) lem-coef-marked-sharp-enrichment: the diagonal composite preserves markings. Fun(K,Map♯(X,Y)) equals Map♯(X×K♯,Y) because every edge (e,a) comes from Δ¹ and (K×Δⁿ)♯ = K♯×(Δⁿ)♯. The cotensor H(K♯,Y) follows from the first lemma. (3) lem-coef-marked-sharp-anodyne-restriction: Map♯(K♯,C♮) = Fun(K,C^≃), because C^≃ is determined by its edges. The restriction statement is true because C^≃ is Kan and the pushout product of an anodyne map with a monomorphism is anodyne. Checked with C empty, K or L empty, and m=0. Duplicate search: the lifting calculus, the relative and pattern models, the enriched-colimit node, the core-Kan-fibration node, the classification node and the enriched tensor calculus each fail to state these facts or depend on the item. The enrichment lemma is only the formal enrichment/tensor/cotensor part of the simplicial clause. The model structure, SM7, fibrant objects and core identity are still proved in the item's own steps, so it does not merely restate a parent clause. New steps 7–10 cite exactly what the helpers state. In step 9, a trivial Kan fibration is a weak equivalence (Kan–Quillen), so j♯ is in W. Step 10 is elementary: ♯ preserves products and pushouts, so the simplicial pushout product equals i□j♯, and step 6 then gives SM7. Unchanged steps 1–6 and 11–12 match their cited statements. There is no cycle (graph check). Each new node records LeanFinder, LeanSearch, Loogle and grep searches, and blueprint from/via are correct. No SGA is cited. HTT is not archived, so the report carries a WANTED line, proof_origin is agent, and I checked the source places mathematically rather than against the PDF. I accept the tool_use lem-cbc-enhanced-functor-cone-calculus. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.MarkedPointCartesianModel",

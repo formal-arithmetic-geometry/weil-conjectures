@@ -10,9 +10,99 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix any quasicategory $E$. Let $H_1(E)$ be the full subcategory of $\\operatorname{Fun}(\\Delta^1,E)$ on equivalence edges. The constant-arrow map $k:E\\to H_1(E)$ and evaluation $v$ at vertex $0$ satisfy $vk=1$. The monotone function $m:[1]\\times[1]\\to[1]$, $m(i,t)=\\min(i,t)$, induces a transformation $kv\\to1_{H_1(E)}$: for each parameter simplex $A:\\Delta^1\\times\\Delta^n\\to E$, use $A(m(i,t),z)$, keeping $z\\in\\Delta^n$ unchanged. This formula commutes with all simplicial operators. At an object $f:x\\to y$ its two vertex components are $1_x,f$, both equivalences. By [lem-coef-infinity-pointwise-equivalences] its component in the arrow category is an equivalence. Fullness retains its inverse and inverse-triangle simplices inside $H_1(E)$. Apply the same pointwise criterion with shape $H_1(E)$ and target $H_1(E)$ to conclude that the whole transformation is an equivalence. All these functor simplicial sets and full subcategories are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. Thus $k$ is a coherent equivalence, and $\\Delta^1\\to\\Delta^0$ localizes at the nondegenerate edge, in the sense of [def-coef-universally-localizing-simplicial-map].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZJ",
+    "place": "05ZJ first sentence, expanding 05ZG through Example 6.3.1.14: interval collapse."
+   }
+  },
+  {
+   "text": "Put $A=\\Delta^{\\{0,2\\}}\\amalg\\Delta^{\\{1,3\\}}$, $B=\\Delta^0\\amalg\\Delta^0$, and let $c:A\\to B$ collapse the two components separately. Let $V$ be the two nondegenerate edges of $A$. Degreewise $\\operatorname{Fun}(A,E)=\\operatorname{Fun}(\\Delta^1,E)^2$ and $\\operatorname{Fun}(B,E)=E^2$, since product with $\\Delta^n$ distributes over the two-component coproduct. The $V$-inverting full subcategory is $H_1(E)^2$. The product of the two copies of $v$ in step 1 is a quasi-inverse to $c^*$, and its two inverse equivalences and their triangle witnesses are the coordinatewise pairs of those in step 1. Thus $c$ localizes at $V$. The inclusion $i:A\\to\\Delta^3$ is injective in each degree: its images are the increasing vertex strings taking values in $\\{0,2\\}$ or $\\{1,3\\}$; these sets of strings are disjoint.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZJ",
+    "place": "05ZG monomorphism hypothesis and its coproduct-of-intervals localization input; verified directly."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-localization-monomorphic-pushout] to the source span $(X_{01},X_0,X_1)=(A,\\Delta^3,A)$ with legs $(i,1_A)$, and the target span $(Y_{01},Y_0,Y_1)=(A,\\Delta^3,B)$ with legs $(i,c)$. The vertical maps are $(p_{01},p_0,p_1)=(1_A,1_{\\Delta^3},c)$. Both zeroth legs are the degreewise injection $i$ from step 2. Set $V_{01}=V_0=\\varnothing$, $V_1=V$. The identity vertical maps localize at the empty collection, and $c$ localizes at $V$ by step 2; both required edge-image inclusions are vacuous. The source pushout is $\\Delta^3$ and the target pushout is the specified $Q$. Therefore the quotient $a:\\Delta^3\\to Q$ localizes at the edges $W=\\{02,13\\}$. In particular for every $E$ its restriction factors as a coherent equivalence $r:\\operatorname{Fun}(Q,E)\\to L_W(E)$, where $L_W(E)$ is the full subcategory of $\\operatorname{Fun}(\\Delta^3,E)$ on diagrams inverting $02,13$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-coef-localization-monomorphic-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZJ",
+    "place": "05ZJ first sentence / 05ZG: explicit map of monomorphic pushout spans."
+   }
+  },
+  {
+   "text": "We identify $L_W(E)$ with the full subcategory $L_{\\rm all}(E)$ of diagrams inverting every edge of $\\Delta^3$. Let $F:\\Delta^3\\to E$, write $f=F(01)$, $g=F(12)$, $h=F(23)$, and suppose $F(02),F(13)$ are equivalences. By [lem-coef-infinity-mapping-composition], the faces give $[g][f]=[F(02)]$ and $[h][g]=[F(13)]$ in $hE$. Put $u=([g][f])^{-1}$ and $w=([h][g])^{-1}$. Then $[f]u$ is a right inverse to $[g]$, and $w[h]$ is a left inverse. They coincide because $w[h]=w[h][g]([f]u)=[f]u$. Hence $[g]$ is invertible. Now $[f]=[g]^{-1}[F(02)]$ and $[h]=[F(13)][g]^{-1}$ are invertible, as is $[F(03)]=[h][g][f]$. The cited node identifies invertible classes precisely with equivalence edges. This lists all six nondegenerate edges; degenerate edges are identities. The converse is immediate. Thus the two full subcategories have exactly the same vertices, and hence the same simplices by the full-subcategory definition.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZJ",
+    "place": "05ZJ final sentence, expanding Proposition 5.4.6.5 (0051), two-out-of-six."
+   }
+  },
+  {
+   "text": "Let $q:\\Delta^3\\to\\Delta^0$. The constant-diagram map $t:E\\to L_{\\rm all}(E)$ is a coherent equivalence with quasi-inverse evaluation $v_0$ at vertex $0$. Indeed $v_0t=1_E$. The monotone function $b:[3]\\times[1]\\to[3]$ given by $b(i,0)=0$ and $b(i,1)=i$ defines a transformation $tv_0\\to1$: on a parameter simplex $F:\\Delta^3\\times\\Delta^n\\to E$ use $F(b(i,s),z)$. At its two endpoints this is respectively the constant diagram on $F(0,z)$ and $F(i,z)$, so fullness makes this a transformation in $L_{\\rm all}(E)$. At an object $F$ its component is an equivalence in $\\operatorname{Fun}(\\Delta^3,E)$ by [lem-coef-infinity-pointwise-equivalences], since its components are the edges $F(0i)$, all equivalences. Its inverse witnesses stay in the full subcategory. By [lem-cbc-enhanced-functor-cone-calculus] that subcategory is a quasicategory. Applying the pointwise criterion once more with shape and target $L_{\\rm all}(E)$ makes the entire transformation a coherent natural equivalence. This proves directly the assertion in 05ZJ that $q$ localizes at all edges, and step 4 identifies its image with $L_W(E)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZJ",
+    "place": "05ZJ middle sentences: the projection of the simplex localizes at all its edges; explicit constant-diagram contraction retaining all transformations."
+   }
+  },
+  {
+   "text": "We finish with the specified precomposition map, retaining higher simplices. Since $q=pa$, the functors from steps 3 and 5 satisfy $r p^*=t$ strictly, with common target $L_W(E)=L_{\\rm all}(E)$. A coherent functor equivalence induces an ordinary equivalence on homotopy categories: apply its quasi-inverse, and take the component classes of its coherent inverse transformations; each naturality square gives the naturality equation by its two triangle relations in [lem-coef-infinity-mapping-composition]. Thus $h(r)$ and $h(t)$ are equivalences. Ordinary cancellation gives that $h(p^*)$ is an equivalence: if $R$ is a quasi-inverse to $h(r)$, then $h(p^*)\\cong R h(r)h(p^*)=R h(t)$, a composite of equivalences. This holds for every quasicategory $E$ in every sufficiently large universe. Apply (iii)$\\Rightarrow$(ii) of [lem-coef-joyal-functor-equivalence-test] to the simplicial map $p:Q\\to\\Delta^0$. It gives exactly that $p^*:E\\to\\operatorname{Fun}(Q,E)$ is a coherent functor equivalence. The test allows arbitrary simplicial source and target, so no quasicategory condition on $Q$ was used. If $E$ is empty, both $\\operatorname{Fun}(Q,E)$ and $\\operatorname{Fun}(\\Delta^3,E)$ are empty since these shapes have vertices; all preceding equivalences and contractions are then the unique maps of empty simplicial sets.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZJ",
+    "place": "05ZJ comparison of the two localizations (01MX), expanded via condition (iii) of the existing whole-functor-category equivalence test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-universally-localizing-simplicial-map",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-localization-monomorphic-pushout"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/05ZJ",
+  "place": "Corollary 6.3.2.7 (05ZJ), following 05ZG and 0051 with explicit contractions, pushout spans and cancellation. Online source read 2026-10-17; archival Kerodon WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +145,45 @@
    "results": "{\"t\": \"2026-10-17T06:54:35Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient of the three simplex collapsing edges 02 and 13 is categorically equivalent to a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instUniqueOneTruncation₂DeltaZero\", \"SSet.stdSimplex.isTerminalObj₀\", \"SimplexCategory.instUniqueCarrierObjTopCatToTopMkOfNatNat\", \"SimplexCategory.instUniqueCarrierObjTopCatToTop₀MkOfNatNat\", \"SSet.Truncated.ι0₂\", \"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.Truncated.ι1₂\", \"SSet.Truncated.ev0₂\"], \"digest\": \"4dec786c14b01167\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected the returned signatures. Ordinary category localization, horn pushouts, nerves and terminal standard simplices do not give the coherent universal property or categorical contractibility of the specified quotient. Read Mathlib/CategoryTheory/Localization/Predicate.lean:45-58 and AlgebraicTopology/Quasicategory/Basic.lean:35-57."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Collapsing the disjoint edges 02 and 13 of the three simplex yields a simplicial set categorically equivalent to a point",
+   "results": "{\"t\": \"2026-10-17T08:23:39Z\", \"tool\": \"leanfinder\", \"query\": \"Collapsing the disjoint edges 02 and 13 of the three simplex yields a simplicial set categorically equivalent to a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₁.ι₀\", \"SSet.horn₃₁.ι₃\", \"SSet.horn₂₀.ι₀₂\", \"SSet.horn₂₂.ι₀₂\", \"SSet.horn₃₁.ι₂\", \"SSet.horn₃₂.ι₃\", \"SSet.horn₃₂.ι₁\", \"SSet.horn₃₂.ι₀\"], \"digest\": \"88458b6c22e08f28\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types. HornColimits.lean gives horn inclusions, Quasicategory/Basic.lean:35-96 gives horn fillers, NerveAdjunction.lean:288-310 gives maps to ordinary nerves, and HomotopyCat.lean:560-566 concerns the homotopy category of the point. None gives categorical contractibility of this quotient or the whole coherent functor-category equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "categoricalEquivalence|CategoricalEquivalence|inverse.?gadget|05ZJ",
+   "results": "{\"t\": \"2026-10-17T08:26:26Z\", \"tool\": \"grep\", \"query\": \"categoricalEquivalence|CategoricalEquivalence|inverse.?gadget|05ZJ\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types. HornColimits.lean gives horn inclusions, Quasicategory/Basic.lean:35-96 gives horn fillers, NerveAdjunction.lean:288-310 gives maps to ordinary nerves, and HomotopyCat.lean:560-566 concerns the homotopy category of the point. None gives categorical contractibility of this quotient or the whole coherent functor-category equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of the standard three simplex identifying the edges 02 and 13 to separate points is categorically contractible",
+   "results": "{\"t\": \"2026-10-17T08:26:26Z\", \"tool\": \"leansearch\", \"query\": \"The quotient of the standard three simplex identifying the edges 02 and 13 to separate points is categorically contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplyConnectedSpace.ofContractible\", \"SimplexCategory.toTop\", \"SimplexCategory.instPathConnectedSpaceCarrierObjTopCatToTop\", \"SSet.S1\", \"CategoryTheory.Pretriangulated.contractibleTriangle\", \"SimplexCategory.toTop₀_obj\", \"SimplexCategory.toTopObjOneHomeo\", \"SSet.stdSimplex.isTerminalObj₀\"], \"digest\": \"a42ab973499c175f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types. HornColimits.lean gives horn inclusions, Quasicategory/Basic.lean:35-96 gives horn fillers, NerveAdjunction.lean:288-310 gives maps to ordinary nerves, and HomotopyCat.lean:560-566 concerns the homotopy category of the point. None gives categorical contractibility of this quotient or the whole coherent functor-category equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, SSet.stdSimplex",
+   "results": "{\"t\": \"2026-10-17T08:26:26Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, SSet.stdSimplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\", \"SSet.quasicategory_of_filler\"], \"digest\": \"e2216e3cd1b1bc06\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types. HornColimits.lean gives horn inclusions, Quasicategory/Basic.lean:35-96 gives horn fillers, NerveAdjunction.lean:288-310 gives maps to ordinary nerves, and HomotopyCat.lean:560-566 concerns the homotopy category of the point. None gives categorical contractibility of this quotient or the whole coherent functor-category equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant functor E to Fun Q E is an equivalence for every quasicategory where Q is the tetrahedron with two opposite edges collapsed",
+   "results": "{\"t\": \"2026-10-17T08:26:34Z\", \"tool\": \"leanfinder\", \"query\": \"The constant functor E to Fun Q E is an equivalence for every quasicategory where Q is the tetrahedron with two opposite edges collapsed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.Quasicategory₂\", \"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.hoFunctor.terminalIso\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.QCat\"], \"digest\": \"c7818c9bf070efbe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned types. HornColimits.lean gives horn inclusions, Quasicategory/Basic.lean:35-96 gives horn fillers, NerveAdjunction.lean:288-310 gives maps to ordinary nerves, and HomotopyCat.lean:560-566 concerns the homotopy category of the point. None gives categorical contractibility of this quotient or the whole coherent functor-category equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-edge-inversion-pushout",
@@ -95,5 +220,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-inverse-gadget-categorical-contractibility",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six-step proof follows 05ZJ: explicit interval contraction, coproduct and mono check, monomorphic pushout localization, elementary two-out-of-six calculation, explicit simplex contraction, and whole-functor-category cancellation. Reuses existing nodes; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes 05ZJ in the recorded finite-gadget supporting localization branch of prop-coef-integral-exceptional-adjoint. Steps 1-3 expand its 05ZG input; step 4 expands 0051; steps 5-6 expand the comparison to the point. Historical ancestry and unit unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 1 and 5 use only fibrancy of functor categories and full subcategories, a generic tool from sk-prop-sf-cbc; no node of this unit states that exact fibrancy clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-24d139b48",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-24d139b48 (reviewer sub-agent of L); spot-checked: I read the item, all seven cited node statements and the unit/parent records, and Kerodon 05ZJ online (archive is WANTED). Q matches the source: Δ^3 with the edges 02 and 13 collapsed to separate points. The statement is the full Fun-equivalence, which is condition (ii) of the Joyal test, so the target is not weakened. Small cases hold: E empty, E terminal, E the nerve of a category (hQ is the contractible groupoid on two objects). Step 1: the min-contraction is monotone and pointwise-equivalences is applied twice; fullness keeps the inverses in H_1(E). Step 2: the coproduct-to-product identity and the degreewise mono check are correct. Step 3: I checked every hypothesis of lem-coef-localization-monomorphic-pushout (spans (A,Δ^3,A)→(A,Δ^3,B), maps (1,1,c), injective zeroth legs, vacuous edge-image conditions), giving localization at {02,13}. Step 4: the two-out-of-six calculation wh=fu is correct and all six edges are covered. Step 5: the contraction b is monotone and correct. Step 6: r∘p*=t strictly, cancellation on homotopy categories, then Joyal test (iii)⇒(ii); this replaces the source's 01MX reduction correctly. There are no new nodes and no cycle; the only user is lem-coef-simplicial-edge-inversion-pushout, consistent with this statement. Duplicate search found none; same_as=[] is right. I accept the tool_use lem-cbc-enhanced-functor-cone-calculus (generic fibrancy of Fun and full subcategories). No SGA source is used. No fixes written."
  }
 }

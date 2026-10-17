@@ -14,9 +14,103 @@
   "lem-coef-twisted-arrow-left-fibration",
   "lem-coef-coherent-end-twisted-arrow-formula"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal D=\\operatorname{Fun}(C,\\mathcal S_{\\mathcal V})=\\mathcal F$. Transpose the coherent Hom bifunctor restricted along $A^{\\mathrm{op}}$ to obtain a coherent functor $R:\\mathcal D\\to\\mathcal D$ with $R(Q)(a)=\\operatorname{Map}_{\\mathcal D}(A(a),Q)$. The two contravariances, that of $A$ and that of the first Hom variable, cancel, so $R(Q)$ is covariant on $C$. Its transpose is exactly $M_A$. The local-smallness clause of spatial mapping interchange supplies a coherent Hom bifunctor valued in $\\mathcal S_{\\mathcal V}$, so $R$ really lands in $\\mathcal D$. Functor categories used here are quasicategories. Choose $\\mathcal V\\in\\mathcal W$ so that $\\mathcal D$ and all the displayed functor categories are small in a further containing universe. Later we apply the coherent-end theorem with value universe $\\mathcal W$ and index $\\mathcal D$, rather than incorrectly treating $\\mathcal D$ as $\\mathcal V$-small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-spatial-mapping-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping calculation; agent-written contraction using the existing spatial-interchange and coherent-end statements. Online Kerodon Example 8.3.4.22 supplies context, not this argument verbatim."
+   }
+  },
+  {
+   "text": "For arbitrary $P,Q\\in\\mathcal D$, apply spatial mapping interchange with $K=L=C$, $F=P$ and $W=B_A$. Its $R_Q$ is exactly $R(Q)$, so it gives a natural equivalence\n$$\\operatorname{Map}_{\\mathcal D}(P,R(Q))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(C^{\\mathrm{op}}\\times C,\\mathcal S_{\\mathcal V})}(B_A,T_{P,Q}),\\qquad T_{P,Q}(a,b)=\\operatorname{Map}_{\\mathcal S_{\\mathcal V}}(P(a),Q(b)).$$\nFor $\\alpha:P\\to R(Q)$ the corresponding $\\tau$ has whole-space component $\\tau_{a,b}(w)(x)=\\alpha_a(x)_b(w)$. All hypotheses hold: both indexing categories are $\\mathcal V$-small and $B_A$ is the coherent transpose of the given $A$. We use the equivalence on entire transformation spaces, together with its stated coherent naturality in $P,Q$; no pointwise family is being assembled here.",
+   "uses": [
+    "lem-coef-spatial-mapping-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping calculation; agent-written contraction using the existing spatial-interchange and coherent-end statements. Online Kerodon Example 8.3.4.22 supplies context, not this argument verbatim."
+   }
+  },
+  {
+   "text": "Restrict $\\tau:B_A\\to T_{P,Q}$ along $\\lambda=(s,t)$ and compose with the given $\\xi:\\Delta*\\to B_A\\lambda$. This gives a coherent cone $\\tau\\lambda\\circ\\xi:\\Delta*\\to T_{P,Q}\\lambda$. The coherent-end formula for $P,Q:C\\to\\mathcal S_{\\mathcal V}$, read in the reverse direction, turns this cone into a point of $\\operatorname{Map}_{\\mathcal D}(P,Q)$. Indeed its limit is the space of cones from $*$, by the mapping-space characterization of a limiting cone and $\\operatorname{Map}(*,Z)\\simeq Z$. The latter is the point-family theorem with shape $\\Delta^0$. Consequently this procedure defines a map\n$$\\kappa_{P,Q}:\\operatorname{Map}_{\\mathcal D}(P,R(Q))\\longrightarrow\\operatorname{Map}_{\\mathcal D}(P,Q).$$\nRestriction, composition with $\\xi$, and the natural inverse of the end equivalence act on all simplices. Their naturality, and that of Step 2, make $\\kappa$ a coherent map of bifunctors on $\\mathcal D^{\\mathrm{op}}\\times\\mathcal D$, with $P$ contravariant and $Q$ covariant. At the identity-arrow projection of $a$, its formula is $\\kappa_{P,Q}(\\alpha)_a(x)=\\alpha_a(x)_a(\\xi_a)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-spatial-mapping-interchange",
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-point-cocone-criterion",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping calculation; agent-written contraction using the existing spatial-interchange and coherent-end statements. Online Kerodon Example 8.3.4.22 supplies context, not this argument verbatim."
+   }
+  },
+  {
+   "text": "Now apply the coherent-end theorem with index category $\\mathcal D$, target category $\\mathcal D$ and smallness universe $\\mathcal W$. Both the object set of $\\mathcal D$ and its mapping spaces are $\\mathcal W$-small, since $C$ and every value of its functors are $\\mathcal V$-small and $\\mathcal V\\in\\mathcal W$. Apply it first to $R,R:\\mathcal D\\to\\mathcal D$. The identity of $R$ determines a coherent section over $\\operatorname{Tw}(\\mathcal D)$ of $(Q_0,Q_1)\\mapsto\\operatorname{Map}_{\\mathcal D}(R(Q_0),R(Q_1))$. Restrict the coherent map $\\kappa$ of Step 3 along $(Q_0,Q_1)\\mapsto(R(Q_0),Q_1)$ and apply it to this section. The result is a section of $(Q_0,Q_1)\\mapsto\\operatorname{Map}_{\\mathcal D}(R(Q_0),Q_1)$. Applying the end equivalence to $R,\\mathrm{id}_{\\mathcal D}$ gives a single coherent transformation $\\eta:R\\to\\mathrm{id}_{\\mathcal D}$. Its component at $Q$ is $\\kappa_{R(Q),Q}(1_{R(Q)})$. This use of the outer end is what supplies all coherence in $Q$, including the mixed simplices with $C$; no claim of naturality is inferred from isolated edge homotopies.",
+   "uses": [
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping calculation; agent-written contraction using the existing spatial-interchange and coherent-end statements. Online Kerodon Example 8.3.4.22 supplies context, not this argument verbatim."
+   }
+  },
+  {
+   "text": "Transpose the actual map $\\mathcal D\\times\\Delta^1\\to\\operatorname{Fun}(C,\\mathcal S_{\\mathcal V})$ defining $\\eta$ to obtain $C\\times\\mathcal D\\times\\Delta^1\\to\\mathcal S_{\\mathcal V}$. This is $e_\\xi:M_A\\to E$. In Step 3 put $P=R(Q)$ and $\\alpha=1_{R(Q)}$. Its component calculation gives\n$$e_{\\xi,a,Q}(x)=x_a(\\xi_a),\\qquad x\\in\\operatorname{Map}_{\\mathcal D}(A(a),Q).$$\nThis is a whole-space evaluation map because the interchange formula and both identity-arrow projections are formulas of maps of spaces, not just of vertices. Transposition here is the defining internal-functor adjunction: an $n$-simplex is exactly a map from the product with $\\Delta^n$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-spatial-mapping-interchange",
+    "lem-coef-coherent-end-twisted-arrow-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping calculation; agent-written contraction using the existing spatial-interchange and coherent-end statements. Online Kerodon Example 8.3.4.22 supplies context, not this argument verbatim."
+   }
+  },
+  {
+   "text": "For $u:a\\to b$, the two edges in $\\operatorname{Tw}(C)$ from $1_a$ and $1_b$ to $u$ give, by the section $\\xi$, a homotopy\n$$A(a)(u)(\\xi_a)\\simeq A(u)_b(\\xi_b).$$\nFor $x:A(a)\\to Q$, naturality of $x$ and this homotopy give\n$$e_{\\xi,b,Q}(x\\circ A(u))=x_b(A(u)_b(\\xi_b))\\simeq x_b(A(a)(u)(\\xi_a))\\simeq Q(u)(x_a(\\xi_a)).$$\nFor $v:Q\\to Q'$, the component formula gives $e_{\\xi,a,Q'}(v\\circ x)\\simeq v_a(e_{\\xi,a,Q}(x))$ by the composition homotopy. These are restrictions of the transformation already constructed in Steps 4–5, whose end projections and interchange maps retain higher simplices. Thus the displayed homotopies have all higher mixed compatibilities. The same construction applies to a simplicial family of $(A,\\xi)$: Step 2 is coherent in the weight $B_A$, Step 3 is composition with the entire section family, and both end equivalences commute with extra parameters and restriction. Taking their natural inverses in these functor categories gives the family of transformations and its restriction compatibilities. If $C$ is empty then $C\\times\\mathcal D$ is empty and the transformation is unique. If $C$ is nonempty the supplied points $\\xi_a$ impose exactly their stated nonemptiness, without any additional representability or equivalence hypothesis.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-spatial-mapping-interchange",
+    "lem-coef-coherent-end-twisted-arrow-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent mapping calculation; agent-written contraction using the existing spatial-interchange and coherent-end statements. Online Kerodon Example 8.3.4.22 supplies context, not this argument verbatim."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-end-twisted-arrow-formula",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-space-point-cocone-criterion",
+  "lem-coef-spatial-mapping-interchange",
+  "lem-coef-twisted-arrow-left-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2: coherent scalar mapping calculation. Six-step proof via spatial mapping interchange, contraction by the supplied section, and a second coherent end over the entire functor category. The cited online references do not state this argument verbatim."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,10 +188,136 @@
    "results": "{\"t\": \"2026-10-17T06:34:27Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation of a natural transformation at a dinatural element is natural in its source object and target functor in an infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.DinatTrans\", \"CategoryTheory.DinatTrans.dinaturality_assoc\", \"CategoryTheory.DinatTrans.mk\", \"CategoryTheory.DinatTrans.ctorIdx\", \"CategoryTheory.DinatTrans.app\", \"CategoryTheory.NatTrans\", \"CategoryTheory.evaluation\", \"CategoryTheory.DinatTrans.term_⤞_\"], \"digest\": \"a5684eefe2fad5d7\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search; read CategoryTheory/DinatTrans.lean:38-66, Yoneda.lean:1048-1085 and Products/Basic.lean:245-255. These are ordinary categories, Type-valued functors or dinatural edge equations; none states the transformation on quasicategorical whole mapping spaces induced by a coherent Tw(C)-section."
+  },
+  {
+   "tool": "grep",
+   "query": "dinatural|extranatural|coyonedaEvaluation",
+   "results": "{\"t\": \"2026-10-17T08:11:46Z\", \"tool\": \"grep\", \"query\": \"dinatural|extranatural|coyonedaEvaluation\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/DinatTrans.lean\", \"Mathlib/CategoryTheory/DinatTrans.lean\", \"Mathlib/CategoryTheory/DinatTrans.lean\"], \"digest\": \"3edaebee1c25e700\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of natural transformations at a coherent dinatural section is natural in both variables for infinity categories",
+   "results": "{\"t\": \"2026-10-17T08:11:47Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation of natural transformations at a coherent dinatural section is natural in both variables for infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.DinatTrans.dinaturality_assoc\", \"CategoryTheory.DinatTrans.ctorIdx\", \"CategoryTheory.DinatTrans.mk\", \"CategoryTheory.DinatTrans\", \"CategoryTheory.evaluation\", \"CategoryTheory.DinatTrans.term_⤞_\", \"CategoryTheory.sectionsFunctorNatIsoCoyoneda_hom_app_app\", \"CategoryTheory.evaluation_obj_map\"], \"digest\": \"12da9ae72665136a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dinatural section of a space valued profunctor gives a coherent evaluation transformation natural in the index and target functor",
+   "results": "{\"t\": \"2026-10-17T08:11:57Z\", \"tool\": \"leanfinder\", \"query\": \"A dinatural section of a space valued profunctor gives a coherent evaluation transformation natural in the index and target functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sectionsFunctor\", \"CategoryTheory.eval\", \"CategoryTheory.Limits.opCompYonedaSectionsEquiv\", \"CategoryTheory.Functor.sections\", \"CategoryTheory.Limits.opCompYonedaSectionsEquiv_apply_app\", \"CategoryTheory.Limits.compYonedaSectionsEquiv\", \"CategoryTheory.Functor.sectionsFunctor_obj\", \"CategoryTheory.yonedaEvaluation\"], \"digest\": \"9af06680a463a397\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent end contraction by a dinatural element produces evaluation on transformation spaces in a quasicategory",
+   "results": "{\"t\": \"2026-10-17T08:13:01Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent end contraction by a dinatural element produces evaluation on transformation spaces in a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.end_.map\", \"CategoryTheory.Limits.end_.π\", \"CategoryTheory.Limits.end_.map_comp\", \"CategoryTheory.Limits.end_.map_π_assoc\", \"CategoryTheory.Limits.endFunctor\", \"CategoryTheory.Limits.end_.map_comp_assoc\", \"CategoryTheory.Limits.end_.condition\", \"CategoryTheory.Limits.end_.map_π\"], \"digest\": \"6fe09d20017f0c9c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "grep",
+   "query": "profunctor|universal.*section|section.*universal|twisted.*arrow",
+   "results": "{\"t\": \"2026-10-17T08:43:39Z\", \"tool\": \"grep\", \"query\": \"profunctor|universal.*section|section.*universal|twisted.*arrow\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Profunctor/Basic.lean\", \"Mathlib/CategoryTheory/Profunctor/Basic.lean\", \"Mathlib/CategoryTheory/Profunctor/Basic.lean\", \"Mathlib/CategoryTheory/Profunctor/Basic.lean\", \"Mathlib/CategoryTheory/Profunctor/Basic.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\"], \"digest\": \"11189020b10761d6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "grep",
+   "query": "coyonedaLemma|coyonedaEvaluation|coyonedaPairing",
+   "results": "{\"t\": \"2026-10-17T08:43:39Z\", \"tool\": \"grep\", \"query\": \"coyonedaLemma|coyonedaEvaluation|coyonedaPairing\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/IndYoneda.lean\", \"Mathlib/CategoryTheory/Limits/IndYoneda.lean\", \"Mathlib/CategoryTheory/Limits/IndYoneda.lean\", \"Mathlib/CategoryTheory/Limits/IndYoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\"], \"digest\": \"a8b9921b06decd3e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DinatTrans, CategoryTheory.Limits.end_",
+   "results": "{\"t\": \"2026-10-17T08:43:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.DinatTrans, CategoryTheory.Limits.end_\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.coyonedaLemma",
+   "results": "{\"t\": \"2026-10-17T08:43:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.coyonedaLemma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.coyonedaLemma\"], \"digest\": \"4bbab55755d6527c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent covariant Yoneda evaluation is natural in both the source object and the target space valued functor",
+   "results": "{\"t\": \"2026-10-17T08:43:40Z\", \"tool\": \"leansearch\", \"query\": \"Coherent covariant Yoneda evaluation is natural in both the source object and the target space valued functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.representableByEquiv\", \"CategoryTheory.evaluation\", \"CategoryTheory.yonedaLemma\", \"CategoryTheory.Yoneda.naturality\", \"CategoryTheory.yonedaEquiv_naturality'\", \"CategoryTheory.Functor.RepresentableBy.toIso\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.yonedaEvaluation\"], \"digest\": \"293012b39e8c8da2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps from a Hom profunctor to an arbitrary space valued profunctor are coherent dinatural sections on the twisted arrow category",
+   "results": "{\"t\": \"2026-10-17T08:43:40Z\", \"tool\": \"leansearch\", \"query\": \"Maps from a Hom profunctor to an arbitrary space valued profunctor are coherent dinatural sections on the twisted arrow category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.homObjFunctor\", \"CategoryTheory.BundledHom.map\", \"CategoryTheory.Limits.compCoyonedaSectionsEquiv\", \"CategoryTheory.presheafHomSectionsEquiv\", \"CategoryTheory.BundledHom.MapHom\", \"CategoryTheory.Functor.HomObj.map\", \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.map\", \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.coev_app\"], \"digest\": \"b396d752815e8a42\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a small quasicategory C and a space valued profunctor B the space of maps from the Hom profunctor to B is the space of coherent sections of B over the twisted arrow category",
+   "results": "{\"t\": \"2026-10-17T08:43:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a small quasicategory C and a space valued profunctor B the space of maps from the Hom profunctor to B is the space of coherent sections of B over the twisted arrow category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.yonedaEquiv\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.OverPresheafAux.YonedaCollection\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.OverPresheafAux.restrictedYonedaObj\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\"], \"digest\": \"46934fb0026c283f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Yoneda equivalence Map of corepresentable functor at a into Q with Q at a is a coherent natural equivalence on C times Fun C Spaces",
+   "results": "{\"t\": \"2026-10-17T08:43:50Z\", \"tool\": \"leanfinder\", \"query\": \"The Yoneda equivalence Map of corepresentable functor at a into Q with Q at a is a coherent natural equivalence on C times Fun C Spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.corepresentableByEquiv\", \"CategoryTheory.Functor.CorepresentableBy.homEquiv\", \"CategoryTheory.Functor.coreprW\", \"CategoryTheory.Functor.CorepresentableBy.toIso\", \"CategoryTheory.Functor.CorepresentableBy.homEquiv_eq\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.yonedaLemma\", \"CategoryTheory.Functor.corepresentableByUliftFunctorEquiv_apply_homEquiv\"], \"digest\": \"71a522dd44efb4c4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity profunctor corepresents the functor taking a space valued profunctor to its homotopy coherent end",
+   "results": "{\"t\": \"2026-10-17T08:44:51Z\", \"tool\": \"leanfinder\", \"query\": \"The identity profunctor corepresents the functor taking a space valued profunctor to its homotopy coherent end\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsCorepresentableIdType\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Functor.coreprx\", \"CategoryTheory.Functor.coreprX\", \"CategoryTheory.Functor.corepresentableBy\", \"CategoryTheory.Functor.coreprW\", \"CategoryTheory.Functor.coreprW_hom_app\", \"CategoryTheory.Functor.instIsCorepresentableObjOppositeTypeCoyoneda\"], \"digest\": \"4ab81771acc5e06e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Yoneda pairing and evaluation are equivalent as infinity categorical functors on the product of the object category and the space valued functor category",
+   "results": "{\"t\": \"2026-10-17T08:44:52Z\", \"tool\": \"leansearch\", \"query\": \"The Yoneda pairing and evaluation are equivalent as infinity categorical functors on the product of the object category and the space valued functor category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaLemma\", \"CategoryTheory.yonedaPairing\", \"CategoryTheory.evaluationUncurried\", \"CategoryTheory.yonedaEvaluation\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.Functor.representableByEquiv\", \"CategoryTheory.yonedaPairing_map\", \"CategoryTheory.curriedYonedaLemma\"], \"digest\": \"c6aa2a1547964f25\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "grep",
+   "query": "DinatTrans|evaluation|Twisted",
+   "results": "{\"t\": \"2026-10-17T09:24:45Z\", \"tool\": \"grep\", \"query\": \"DinatTrans|evaluation|Twisted\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\"], \"digest\": \"2e0b163feac53461\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DinatTrans evaluation natural transformation",
+   "results": "{\"t\": \"2026-10-17T09:24:46Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.DinatTrans evaluation natural transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `evaluation`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query rejected: loogle: Unknown identifier `evaluation`; the earlier valid fully qualified Loogle query in this same log has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent evaluation map from a dinatural section of a space-valued profunctor on a quasicategory to Map(A(a),Q) -> Q(a), natural in a and Q",
+   "results": "{\"t\": \"2026-10-17T09:24:53Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent evaluation map from a dinatural section of a space-valued profunctor on a quasicategory to Map(A(a),Q) -> Q(a), natural in a and Q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.S.toN\", \"SSet.yonedaEquiv\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"SSet.N.toS\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.toTop\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.nerve\"], \"digest\": \"d3cda2b85f2806cf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category DinatTrans and Type-valued coyoneda do not assert the quasicategorical whole-space transformation with higher mixed simplices. Reopened Mathlib/CategoryTheory/DinatTrans.lean:38–66 and CategoryTheory/Yoneda.lean:1048–1085. Logged enriched Hom and simplex Yoneda hits do not supply this assertion; the former draft's SimplicialCategory/Basic.lean location is absent from this checkout and is not claimed as a verified source."
+  },
+  {
+   "tool": "grep",
+   "query": "def sHomFunctor|def homObjFunctor",
+   "results": "{\"t\": \"2026-10-17T10:49:31Z\", \"tool\": \"grep\", \"query\": \"def sHomFunctor|def homObjFunctor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/FunctorHom.lean\"], \"digest\": \"a35061acc67d4827\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/FunctorHom.lean:78–112. homObjFunctor sends a contravariant ordinary Type-valued functor to its natural transformations into a fixed functor. It does not give the space-valued quasicategorical arbitrary-family evaluation transformation. This query also checks the stale enriched-Hom source location in an earlier draft; no sHomFunctor definition occurs in this checkout."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-parametric-discrete-yoneda",
@@ -129,5 +349,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dinatural-section-evaluation",
+  "worker": "stage1",
+  "summary": "Replaced an incomplete edgewise-coherence draft by six steps using spatial mapping interchange and two coherent ends. The first contraction is natural in arbitrary P,Q; the outer end at a larger universe sends the identity of R to the desired single transformation. Checked both variances, full-space evaluation, mixed coherences, parameter families, empty C, and every cited statement. Statement unchanged; no new nodes or Mathlib leaves. Avoided cyclic Yoneda/straightening citations.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent scalar presheaf mapping calculation, specifically the coherent evaluation of a dinatural identity section used in the end-Yoneda step with an auxiliary indexing parameter.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic functor-quasicategory and mapping-space limiting-cone criterion, used to interpret the coherent section space in Step 3. It changes no coefficient or geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-341ef6711",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-341ef6711 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all six steps, all eight cited statements, the unit, the parent lem-coef-parametric-discrete-yoneda and blueprint paragraph 2 of prop-coef-integral-exceptional-adjoint. Delivery shape is right: one commit, the item JSON and the report, no new nodes. The statement is unchanged and self-contained, and it is true. Small cases pass: C empty gives a unique transformation; C a point gives evaluation of Map(X,Q) at the given point of X; C=[1] has the correct dinaturality direction. A four-point to two-point example confirms the statement rightly claims no equivalence. The arrows 1_a→u and 1_b→u in Tw(C) give the stated naturality for u. Separately, via the end formula ξ is a transformation y→A, and Yoneda then gives the same e_ξ. Step 1: Hom bifunctor plus transposition, with S_V-valued Hom from the first clause of spatial interchange. Step 2: interchange with K=L=C, F=P, W=B_A; the displayed equivalence and component formula are exactly the cited statement. Step 3: the cone criterion, the point criterion with K=Δ^0 and the end formula give κ, with κ(α)_a(x)=α_a(x)_a(ξ_a), which I checked. Step 4: the outer end over D at universe W (hypotheses hold given V∈W) takes id_R through κ_{RQ0,Q1} to η:R→id; this is where the coherence in Q comes from. Step 5 (transpose and substitute) is fairly marked elementary. Step 6 checks the edge homotopies, the family clause (every cited tool allows extra simplicial parameters) and empty C. proof_deps equals the union of step uses. Route: everything is in sk-prop-sf-biduality-general except def-cbc (a notion) and lem-cbc-enhanced-functor-cone-calculus. I accept that declared tool use; sibling reviewed nodes in the unit already carry it. The dependency closure (390 nodes) does not reach the item, so there is no cycle. Duplicate search (dinatural, extranatural, 03M4, 03P7, coherent or evaluation transformation) found no duplicate: the pointwise-Yoneda, space-Yoneda-density and parameterized-evaluation nodes state different things. No SGA source is used. Kerodon and Cisinski are not in the literature folder; they are correctly listed as WANTED and the proof is marked agent-written. No base-change morphism or coefficient category is involved. No fixes."
  }
 }

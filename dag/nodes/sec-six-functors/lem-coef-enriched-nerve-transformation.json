@@ -2,7 +2,7 @@
  "id": "lem-coef-enriched-nerve-transformation",
  "kind": "statement",
  "title": "Enriched transformations induce coherent nerve transformations",
- "statement": "Use coherent transformations and internal functor simplicial sets of [def-cbc-enhanced-diagrams-cones], and the simplicial category of Kan complexes and its mapping complexes from [def-coef-infinity-category-of-spaces]. Use small simplicial categories and the homotopy coherent nerve of [lem-coef-coherent-nerve-comparison]. A simplicial functor acts on objects and mapping simplicial sets and preserves composition and identity vertices. An enriched natural transformation consists of component vertices satisfying the naturality equality on every mapping simplicial set. The interval $[1]$ has objects $0,1$, one vertex in each mapping set except the empty mapping set from $1$ to $0$, and the forced compositions.\n\nFix universes $\\mathcal U\\in\\mathcal U'$. Let $C$ be a $\\mathcal U'$-small simplicial category, let $T_0,T_1:C\\to\\operatorname{Kan}_{\\mathcal U}$ be simplicial functors, and let $\\tau:T_0\\Rightarrow T_1$ be an enriched natural transformation whose naturality equation is an equality on each mapping simplicial set.  There is a simplicial functor $C\\times[1]\\to\\operatorname{Kan}_{\\mathcal U}$ restricting to $T_0$ and $T_1$ at the endpoints and using $\\tau$ on the cross mapping complexes.  Consequently its homotopy coherent nerve gives a coherent transformation\n\\[\nN_{\\mathrm{hc}}T_0\\Rightarrow N_{\\mathrm{hc}}T_1.\n\\]\nThis construction is natural under products, opposites, restriction, and whiskering, and the component at each object $c$ is the vertex $\\tau_c$ of $\\operatorname{Fun}(T_0c,T_1c)$.",
+ "statement": "Use coherent transformations and internal functor simplicial sets of [def-cbc-enhanced-diagrams-cones], and the simplicial category of Kan complexes and its mapping complexes from [def-coef-infinity-category-of-spaces]. Use small simplicial categories and the homotopy coherent nerve of [lem-coef-coherent-nerve-comparison]. A simplicial functor acts on objects and mapping simplicial sets and preserves composition and identity vertices. An enriched natural transformation consists of component vertices satisfying the naturality equality on every mapping simplicial set. The interval $[1]$ has objects $0,1$, one vertex in each mapping set except the empty mapping set from $1$ to $0$, and the forced compositions.\n\nFix universes $\\mathcal U\\in\\mathcal U'$. Let $C$ be a $\\mathcal U'$-small simplicial category, let $T_0,T_1:C\\to\\operatorname{Kan}_{\\mathcal U}$ be simplicial functors, and let $\\tau:T_0\\Rightarrow T_1$ be an enriched natural transformation whose naturality equation is an equality on each mapping simplicial set.  There is a simplicial functor $C\\times[1]\\to\\operatorname{Kan}_{\\mathcal U}$ restricting to $T_0$ and $T_1$ at the endpoints and using $\\tau$ on the cross mapping complexes.  Consequently its homotopy coherent nerve gives a coherent transformation\n\\[\nN_{\\mathrm{hc}}T_0\\Rightarrow N_{\\mathrm{hc}}T_1.\n\\]\nThis construction is natural under products, opposites, restriction, and whiskering, and the component at each object $c$ is the vertex $\\tau_c$ of $\\operatorname{Fun}(T_0c,T_1c)$. The compatibility with opposites is understood with its variance: for a simplicial target $B$, taking opposites gives the interval construction for $T_1^{\\mathrm{op}}\\Rightarrow T_0^{\\mathrm{op}}:C^{\\mathrm{op}}\\to B^{\\mathrm{op}}$, under $[1]^{\\mathrm{op}}\\cong[1]$ exchanging its endpoints. Here $B=\\operatorname{Kan}_{\\mathcal U}$; no identification of $B^{\\mathrm{op}}$ with $B$ is intended. Products mean the coordinatewise construction for product targets, and its postcomposition with any given enriched product functor; whiskering means precomposition or postcomposition by simplicial functors. The coherent transformation is an edge of $\\operatorname{Fun}(N_{\\mathrm{hc}}C,\\mathcal S_{\\mathcal U})$, so no local Kan hypothesis on $C$ is required.",
  "source": {
   "document": "https://people.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "Explicit enriched interval construction for an enriched natural transformation, with the coherent nerve of HTT Section 1.1.5 and Theorem 2.2.5.1; not a verbatim theorem of HTT."
@@ -12,9 +12,97 @@
   "lem-coef-coherent-nerve-comparison",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=\\operatorname{Kan}_{\\mathcal U}$. Define $H(c,i)=T_i(c)$. On a same-endpoint mapping set use $T_i:C(c,d)\\to B(T_i c,T_i d)$. On the cross mapping set from $(c,0)$ to $(d,1)$ use\n$$H_{01}(f)=\\tau_d\\circ T_0(f)=T_1(f)\\circ\\tau_c.$$\nThe equality is exactly the assumed enriched naturality equality of simplicial maps, not just equality on vertices. Composition with a fixed vertex means composition after the constant simplicial map from the terminal simplicial set, hence is itself a simplicial map. On a mapping set from level $1$ to level $0$ there is the unique map out of the empty simplicial set. This defines all the mapping maps of $C\\times[1]$.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Adjunction calculation for K in D^b_c(X,R); agent-written enriched nerve support, explicit calculation step 1 (not a verbatim blueprint claim)."
+   }
+  },
+  {
+   "text": "Check the enriched functor axioms degreewise. For composable $m$-simplices $f:c\\to d$ and $g:d\\to e$, all at level $i$, the equation is the functor equation of $T_i$. For levels $0,0,1$ one has\n$$H(g)H(f)=\\tau_e T_0(g)T_0(f)=\\tau_e T_0(gf)=H(gf).$$\nFor levels $0,1,1$ one has\n$$H(g)H(f)=T_1(g)\\tau_d T_0(f)=\\tau_e T_0(g)T_0(f)=H(gf),$$\nusing enriched naturality for $g$ in degree $m$. These exhaust the nondecreasing triples of levels; for any other triple the domain mapping product is empty. Identities occur within one level, so are preserved by $T_i$. Thus $H$ is a simplicial functor with the required endpoint restrictions. These calculations work for any simplicial target $B$ and use no Kan filling or model structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Adjunction calculation for K in D^b_c(X,R); agent-written enriched nerve support, explicit calculation step 2 (not a verbatim blueprint claim)."
+   }
+  },
+  {
+   "text": "For each $n$, abbreviate $Q_n=\\mathfrak C[\\Delta^n]$, with the subset-poset mapping sets specified in the coherent-nerve statement. A functor $Q_n\\to C\\times[1]$ is exactly a pair of enriched functors to $C$ and to $[1]$: project all its object and mapping maps, and recover it by pairing. These inverse operations commute with restriction along every monotone map. Thus the degreewise bijections are a simplicial isomorphism\n$$N_{\\mathrm{hc}}(C\\times[1])\\cong N_{\\mathrm{hc}}C\\times N_{\\mathrm{hc}}[1].$$\nThe cited statement identifies the coherent nerve of an ordinary discrete-enriched category with its ordinary nerve. A functor $[n]\\to[1]$ is a weakly increasing map $[n]\\to[1]$, so $N_{\\mathrm{hc}}[1]=\\Delta^1$, including its operators. Postcomposition with $H$ therefore defines a simplicial map $h:N_{\\mathrm{hc}}C\\times\\Delta^1\\to N_{\\mathrm{hc}}B$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Adjunction calculation for K in D^b_c(X,R); agent-written enriched nerve support, explicit calculation step 3 (not a verbatim blueprint claim)."
+   }
+  },
+  {
+   "text": "The space-category definition identifies $N_{\\mathrm{hc}}B=\\mathcal S_{\\mathcal U}$. The internal functor simplicial set has $1$-simplices precisely the maps $N_{\\mathrm{hc}}C\\times\\Delta^1\\to\\mathcal S_{\\mathcal U}$, so $h$ is the claimed coherent transformation. Restriction at interval endpoint $i$ gives $N_{\\mathrm{hc}}T_i$, because $H|_{C\\times\\{i\\}}=T_i$. At $c$, restrict to the constant object functor at $c$ in the first coordinate. The edge is the enriched functor $Q_1\\to B$ with objects $T_0c,T_1c$ and its unique nonidentity mapping vertex $H_{01}(1_c)=\\tau_c$. This proves the asserted component identification directly, without passing to homotopy classes.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Adjunction calculation for K in D^b_c(X,R); agent-written enriched nerve support, explicit calculation step 4 (not a verbatim blueprint claim)."
+   }
+  },
+  {
+   "text": "For a simplicial functor $u:D\\to C$, the cross mapping map of $H\\circ(u\\times\\mathrm{id})$ is $\\tau_{ud}T_0(u(f))$, exactly the formula for the restricted transformation. For a simplicial functor $v:B\\to B'$, its postcomposition has cross map $v(\\tau_d)v(T_0(f))$, exactly the formula for $v\\tau$. Their endpoint formulas agree as well, so these are equal enriched functors. On every nerve simplex the construction is postcomposition of the representing enriched functor, which commutes with both equalities. This proves restriction and both kinds of whiskering, with all simplicial operators.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Adjunction calculation for K in D^b_c(X,R); agent-written enriched nerve support, explicit calculation step 5 (not a verbatim blueprint claim)."
+   }
+  },
+  {
+   "text": "For a second transformation $\\sigma:S_0\\Rightarrow S_1$ on $D$ with simplicial target $B'$, form the external product on $C\\times D$ with target $B\\times B'$. Its interval functor is\n$$(c,d,i)\\longmapsto(H_\\tau(c,i),H_\\sigma(d,i)).$$\nIts cross map on $(f,g)$ is $(\\tau_{c'}T_0(f),\\sigma_{d'}S_0(g))$, the cross formula for the product transformation. Thus it equals $(H_\\tau\\times H_\\sigma)$ after the diagonal of the interval. Degreewise pairing of representing enriched functors, as in step 3, identifies its nerve with the paired coherent transformations on the same $\\Delta^1$. Postcomposition with any specified simplicial functor $B\\times B'\\to E$ commutes by step 5. This includes objectwise products of space-valued functors via the enriched Cartesian product functor; its mapping maps send a pair of parameterized maps to their Cartesian product at the same parameter, so preserve identities and composition pointwise.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Adjunction calculation for K in D^b_c(X,R); agent-written enriched nerve support, explicit calculation step 6 (not a verbatim blueprint claim)."
+   }
+  },
+  {
+   "text": "For opposites use $B^{\\mathrm{op}}(x,y)=B(y,x)$ with reversed composition. The functor $H^{\\mathrm{op}}$ has source $C^{\\mathrm{op}}\\times[1]^{\\mathrm{op}}$; exchanging interval endpoints makes it the interval construction for $T_1^{\\mathrm{op}}\\Rightarrow T_0^{\\mathrm{op}}$. Indeed a cross map associated to $f\\in C(d,c)$ is the opposite of $\\tau_cT_0(f)=T_1(f)\\tau_d$, precisely the cross formula in $B^{\\mathrm{op}}$. To identify nerves explicitly, reverse $[n]$ by $r_n(i)=n-i$ and send a subset $S$ to $r_n(S)$. This gives an enriched isomorphism $Q_n^{\\mathrm{op}}\\cong Q_n$: it preserves inclusion of subsets, sends endpoints to reversed endpoints, and commutes with union. Consequently it identifies $N_{\\mathrm{hc}}(A^{\\mathrm{op}})_n$ with $(N_{\\mathrm{hc}}A)_n$ with reversed operators. For $\\alpha:[m]\\to[n]$, whose induced enriched functor sends a subset to its image as in [def-coef-infinity-category-of-spaces], those operators use $\\alpha^{\\mathrm{rev}}(i)=n-\\alpha(m-i)$; the identity $r_n\\alpha=\\alpha^{\\mathrm{rev}}r_m$ verifies their compatibility. Here the opposite of a simplicial set means exactly this reversal of operators. Applied to $H$, this identifies its opposite nerve map with the coherent transformation from $N_{\\mathrm{hc}}T_1^{\\mathrm{op}}$ to $N_{\\mathrm{hc}}T_0^{\\mathrm{op}}$ into $N_{\\mathrm{hc}}B^{\\mathrm{op}}$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Adjunction calculation for K in D^b_c(X,R); agent-written enriched nerve support, explicit calculation step 7 (not a verbatim blueprint claim)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting enriched interval argument for the coherent Yoneda evaluation used below the displayed derived-limit adjunction; constructed from the existing nerve and internal-functor definitions."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +138,52 @@
    "results": "{\"t\": \"2026-10-17T08:35:06Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent nerve of a simplicial category preserves products and opposites and takes an enriched natural transformation to a coherent natural transformation via the enriched interval category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerve_map\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerveMap\", \"CategoryTheory.nerve.functorOfNerveMap_obj\"], \"digest\": \"6255556a7b1c3b38\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected returned definitions; Enriched/Basic.lean:539 is restricted to Type-enriched functors, Sites/Monoidal.lean:51 concerns ordinary diagrams on an ordinary category, and SimplicialNerve supplies the nerve construction without the stated enriched interval or presheaf comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans|prod|opposite|interval",
+   "results": "{\"t\": \"2026-10-17T10:33:35Z\", \"tool\": \"grep\", \"query\": \"NatTrans|prod|opposite|interval\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"19\", \"61\", \"128\"], \"digest\": \"982f34e5b687efc9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected SimplicialNerve.lean:193 and its entire construction; Enriched/Basic.lean:455 defines transformations only and :539 concerns Type enrichment. Returned ordinary-nerve adjunction lemmas concern ordinary categories, not this enriched interval theorem. No returned declaration states the full assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve, CategoryTheory.EnrichedNatTrans",
+   "results": "{\"t\": \"2026-10-17T10:33:35Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialNerve, CategoryTheory.EnrichedNatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected SimplicialNerve.lean:193 and its entire construction; Enriched/Basic.lean:455 defines transformations only and :539 concerns Type enrichment. Returned ordinary-nerve adjunction lemmas concern ordinary categories, not this enriched interval theorem. No returned declaration states the full assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An enriched natural transformation gives a functor from the product with the walking arrow and a homotopy of simplicial nerves",
+   "results": "{\"t\": \"2026-10-17T10:33:35Z\", \"tool\": \"leansearch\", \"query\": \"An enriched natural transformation gives a functor from the product with the walking arrow and a homotopy of simplicial nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedNatTrans\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.EnrichedNatTrans.out\", \"CategoryTheory.EnrichedNatTrans.mk\", \"CategoryTheory.EnrichedNatTrans.recOn\", \"CategoryTheory.EnrichedNatTrans.casesOn\", \"CategoryTheory.EnrichedNatTrans.mk.inj\", \"CategoryTheory.EnrichedNatTrans.rec\"], \"digest\": \"99f5d95ec7cd9297\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected SimplicialNerve.lean:193 and its entire construction; Enriched/Basic.lean:455 defines transformations only and :539 concerns Type enrichment. Returned ordinary-nerve adjunction lemmas concern ordinary categories, not this enriched interval theorem. No returned declaration states the full assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict enriched natural transformation of simplicial functors induces a coherent natural transformation of homotopy coherent nerves using the interval category",
+   "results": "{\"t\": \"2026-10-17T10:33:38Z\", \"tool\": \"leanfinder\", \"query\": \"A strict enriched natural transformation of simplicial functors induces a coherent natural transformation of homotopy coherent nerves using the interval category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.functor_map\", \"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"CategoryTheory.nerveMap\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"6f30403c5239ed6f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected SimplicialNerve.lean:193 and its entire construction; Enriched/Basic.lean:455 defines transformations only and :539 concerns Type enrichment. Returned ordinary-nerve adjunction lemmas concern ordinary categories, not this enriched interval theorem. No returned declaration states the full assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "EnrichedNatTrans|SimplicialNerve|enriched.*[Nn]at.*[Tt]rans",
+   "results": "{\"t\": \"2026-10-17T10:33:49Z\", \"tool\": \"grep\", \"query\": \"EnrichedNatTrans|SimplicialNerve|enriched.*[Nn]at.*[Tt]rans\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected SimplicialNerve.lean:193 and its entire construction; Enriched/Basic.lean:455 defines transformations only and :539 concerns Type enrichment. Returned ordinary-nerve adjunction lemmas concern ordinary categories, not this enriched interval theorem. No returned declaration states the full assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy coherent nerve takes a simplicially enriched natural transformation to an edge in the internal functor simplicial set, preserving products and opposites",
+   "results": "{\"t\": \"2026-10-17T10:33:51Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent nerve takes a simplicially enriched natural transformation to an edge in the internal functor simplicial set, preserving products and opposites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"CategoryTheory.nerve.edgeMk\", \"CategoryTheory.nerve.functorOfNerveMap_map\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve.functorOfNerveMap_obj\"], \"digest\": \"69cbc30b3a823327\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected SimplicialNerve.lean:193 and its entire construction; Enriched/Basic.lean:455 defines transformations only and :539 concerns Type enrichment. Returned ordinary-nerve adjunction lemmas concern ordinary categories, not this enriched interval theorem. No returned declaration states the full assertion or specializes to it in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-yoneda-evaluation",
@@ -79,5 +209,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-nerve-transformation",
+  "worker": "stage1",
+  "summary": "Direct seven-step construction with zero new nodes: enriched interval maps, exhaustive composition checks, degreewise product nerve comparison, internal-functor edge and components, restriction/whiskering, products and explicit opposite reversal. Clarified variance of opposites and the functor-simplicial-set interpretation for a possibly non-locally-Kan source. Read every cited statement; no model or mapping-space comparison theorem is tacitly used. Existing search records retained and current searches appended.",
+  "blueprint": "Current main-20261015 ancestor prop-coef-integral-exceptional-adjoint.proof.md, paragraph For K in D^b_c(X,R) and displayed Rlim adjunction chain. This is a supporting nerve construction for the intermediate infinity-Yoneda evaluation, not a claim that the ancestor contains a separate enriched-interval theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-e37c958f5",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-e37c958f5 (reviewer sub-agent of L); spot-checked: I read the whole item, the three cited statements (def-cbc-enhanced-diagrams-cones, lem-coef-coherent-nerve-comparison, def-coef-infinity-category-of-spaces), the citer lem-coef-infinity-yoneda-evaluation step 8 and the unit sk-prop-sf-biduality-general. The unit has no steps, and the only statement cited is in the same unit, so no tool_uses are needed. HTT is absent from literature/: the report records it as WANTED and proof_origin is agent, which is correct. Statement: the original text is kept; the appended sentences fix the variance of opposites (T1^op => T0^op into B^op, with [1]^op exchanging the endpoints; I checked that the components lie in B^op(T1c,T0c)=B(T0c,T1c)) and say what products, whiskering and Fun(N_hc C,S_U) mean. Nothing is weakened. Steps 1-6 check out: the cross map comes from naturality as an equality of simplicial maps; the composition checks 001 and 011 hold, and every other level triple has an empty factor; N_hc(C x [1]) = N_hc C x Delta^1 follows from pairing plus the comparison node's ordinary-nerve clause; the component at c is H_01(1_c)=tau_c on Q_1(0,1)=Delta^0; restriction, whiskering and products are literal equalities of enriched functors. Step 7 is correct: r_n gives Q_n^op = Q_n, keeping inclusion order and union, and r_n alpha = alpha^rev r_m holds. But it uses the fact that a monotone map acts on subsets by image, which only def-coef-infinity-category-of-spaces states (C4 missing citation). I added that citation and clause to the step 7 text and uses; proof_deps is unchanged. There are no new nodes, and the rg search of the DAG found no duplicate. Edge cases checked: C empty, C a single point, tau = id, empty mapping sets.; 1 file(s) fixed by the reviewer"
  }
 }

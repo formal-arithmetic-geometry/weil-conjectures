@@ -17,9 +17,111 @@
   "def-pc-fibre-product",
   "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=R[t]/(t^n-1)$ and let $q:R[t]\\to B$ be the quotient map. Its kernel is $(t^n-1)$, so $q(t)^n=1$. Under $B=\\Gamma(P,\\mathcal O_P)$ this says $x^n=1$. Since $n\\geq1$, $xx^{n-1}=x^{n-1}x=x^n=1$, so $x$ has the asserted inverse. Give $P$ its $V$-structure by the spectrum of the composite $R\\to R[t]\\xrightarrow q B$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 040M, example-roots-of-unity: the affine presentation and its universal coordinate"
+   }
+  },
+  {
+   "text": "Fix any structure morphism $s:U\\to V$, put $C=\\Gamma(U,\\mathcal O_U)$ and write $\\rho:R\\to C$ for $s^\\sharp$. The affine-target morphism lemma, applied to $B$ and to $R$, gives bijections between morphisms $U\\to P$ and ring maps $\\varphi:B\\to C$, and between morphisms $U\\to V$ and ring maps $R\\to C$. By the definition of composition of scheme morphisms, the composite $U\\to P\\to V$ induces $\\varphi\\circ(R\\to B)$. Thus it equals $s$ exactly when $\\varphi$ is an $R$-algebra homomorphism. This restricts the first bijection to $\\operatorname{Mor}_V(U,P)\\cong\\operatorname{Hom}_{R\\text{-alg}}(B,C)$. No affineness assumption on $U$ has been made.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1, lemma-morphism-into-affine; applied to the presentation of Tag 040M"
+   }
+  },
+  {
+   "text": "For $c\\in C$ define $E_c:R[t]\\to C$ by $E_c(\\sum_i r_it^i)=\\sum_i\\rho(r_i)c^i$. These are finite sums. This preserves addition and $1$, and the convolution formula for multiplication gives $E_c(fg)=\\sum_{i,j}\\rho(r_i)\\rho(s_j)c^{i+j}=E_c(f)E_c(g)$. It extends $\\rho$ and sends $t$ to $c$. Conversely any ring map extending $\\rho$ with $t\\mapsto c$ must have this formula, because each polynomial is the finite sum of its coefficient monomials. Hence it is the unique such map.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 040M, example-roots-of-unity: elementary evaluation calculation for the displayed polynomial ring"
+   }
+  },
+  {
+   "text": "If $c^n=1$, then $E_c(t^n-1)=0$, and $\\varphi_c(q(f))=E_c(f)$ is well defined: when $q(f)=q(g)$ the difference $f-g$ lies in $(t^n-1)$, so it is $(t^n-1)h$ for a polynomial $h$, and its evaluation is zero. The quotient map is surjective, so this formula defines an $R$-algebra map and determines it uniquely. Conversely any $\\varphi:B\\to C$ gives $c=\\varphi(q(t))$ with $c^n=1$, and $\\varphi q=E_c$ by step 3, so $\\varphi=\\varphi_c$. Thus steps 2--4 give exactly $a\\mapsto a^\\sharp(x)$ as a bijection with $\\{c\\in C:c^n=1\\}$. Every such $c$ is a unit with inverse $c^{n-1}$, and a unit is determined by its underlying element; consequently this is the required bijection with the roots in $C^\\times$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 040M, example-roots-of-unity: elementary quotient and inverse calculations establishing its functor of points"
+   }
+  },
+  {
+   "text": "For any morphism $b:U_1\\to U_2$ over $V$ and any $a:U_2\\to P$, the definition of composition gives $(a\\circ b)^\\sharp(x)=b^\\sharp(a^\\sharp(x))$. A ring homomorphism takes a unit with inverse $y$ to a unit with inverse the image of $y$, and preserves $n$-th powers. Thus this is equality of the roots on both sides, proving naturality in every morphism of $V$-schemes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 040M, example-roots-of-unity: functor of points, naturality by composition"
+   }
+  },
+  {
+   "text": "Restrict the bijections to the objects $U\\to V$ of the small etale site. The representable-presheaf sheaf lemma applies to the $V$-scheme $P$ and shows that $U\\mapsto\\operatorname{Mor}_V(U,P)$ is a sheaf of sets. The roots-of-unity definition assigns to each such $U$ exactly $\\{z\\in\\Gamma(U,\\mathcal O_U)^\\times:z^n=1\\}$, and its restrictions are pullback on sections. Step 5 shows that the bijections commute with these restrictions, so their inverses do as well. They therefore identify $h_P$ with the underlying sheaf of sets of $\\mu_{n,V}$. The lemma does not require $P\\to V$ to be etale.",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-asd-etale-roots-of-unity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, section-kummer, first paragraph, using Tag 03O3, lemma-representable-sheaf-fpqc"
+   }
+  },
+  {
+   "text": "Let $v:V\\prime\\to V$ be arbitrary, let $P\\prime=V\\prime\\times_V P$, and write $p:P\\prime\\to P$ and $\\pi:P\\prime\\to V\\prime$ for its projections. For a $V\\prime$-scheme $s:U\\to V\\prime$, the fibre-product universal property makes $a\\mapsto p\\circ a$ a bijection $\\operatorname{Mor}_{V\\prime}(U,P\\prime)\\to\\operatorname{Mor}_V(U,P)$, where $U$ is given the $V$-structure $v\\circ s$: its inverse sends $b$ to the unique pair $(s,b)$. The projection equations prove that these maps are inverse and commute with precomposition. Composing with steps 2--5 gives the desired natural bijection, and its value is $(p\\circ a)^\\sharp(x)=a^\\sharp(p^\\sharp x)$. This does not require $V\\prime$ to be affine.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 040M, example-roots-of-unity: base-change paragraph, expanded by the fibre-product universal property"
+   }
+  },
+  {
+   "text": "Finally let $a:U\\to P$ be over $V$, put $U\\prime=V\\prime\\times_V U$ with projection $r:U\\prime\\to U$, and let $a\\prime:U\\prime\\to P\\prime$ be its base change. The defining projection equation is $p\\circ a\\prime=a\\circ r$. Applying the maps on sections to $x$ gives $(a\\prime)^\\sharp(p^\\sharp x)=r^\\sharp(a^\\sharp x)$. This identifies the root of the base-changed morphism with the pullback of the original root, exactly as asserted.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 040M, example-roots-of-unity: base-change functor of points and its projection formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "def-asd-etale-roots-of-unity",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 040M, example-roots-of-unity: explicit proof of the representability assertion and base-change paragraph, using Schemes Tag 01I1 and Etale Cohomology Tags 03PK and 03O3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +171,52 @@
    "results": "0 hits: ; directory Mathlib/AlgebraicGeometry",
    "date": "2026-10-17",
    "verdict": "no match: algebraic roots of unity, affine spaces and structure sheaves do not supply the roots functor representation on all schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Spec\", \"homEquiv\"",
+   "results": "12 hits: AlgebraicGeometry.Spec.homEquiv, AlgebraicGeometry.Spec.homEquivRingHom, AlgebraicGeometry.Spec.homEquivAlgHom, AlgebraicGeometry.Spec.homEquiv_apply, AlgebraicGeometry.Spec.homEquiv_symm_apply, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply', AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: affine Hom equivalences supply the existing general affine-target dependency"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spec R[t]/(t^n-1) represents the functor of nth roots of unity on all schemes over R naturally under base change",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.mapSpecMap, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply, AlgebraicGeometry.AffineSpace.homOverEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinates or algebraic roots only; no quotient-root representation on all schemes or full base-change assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|roots.of.unity|homEquiv.*Roots|Roots.*homEquiv",
+   "results": "0 hits: ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinates or algebraic roots only; no quotient-root representation on all schemes or full base-change assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor of n-th roots of unity is represented by the spectrum of the polynomial quotient R[X]/(X^n-1)",
+   "results": "8 hits: mem_rootsOfUnity_iff_mem_nthRoots, Polynomial.isRoot_cyclotomic_iff, Polynomial.cyclotomic', Polynomial.cyclotomic.roots_eq_primitiveRoots_val, Polynomial.cyclotomic.roots_to_finset_eq_primitiveRoots, rootsOfUnityEquivNthRoots_apply, modularCyclotomicCharacter.toFun_spec, Polynomial.roots_of_cyclotomic",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinates or algebraic roots only; no quotient-root representation on all schemes or full base-change assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of nth roots of unity on a scheme is represented by the spectrum of R[X] modulo X^n minus one and commutes with arbitrary base change",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply, modularCyclotomicCharacter.spec, AlgebraicGeometry.AffineSpace.homOfVector",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinates or algebraic roots only; no quotient-root representation on all schemes or full base-change assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|nthRoots|homOverEquiv",
+   "results": "3 hits: 22, 76, 153; directory Mathlib/AlgebraicGeometry/AffineSpace.lean; tool reports single-file line numbers in its file field; inspected homOverEquiv at actual line 153",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinates or algebraic roots only; no quotient-root representation on all schemes or full base-change assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-asd-etale-finite-twist-pullback",
@@ -91,5 +235,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-asd-affine-roots-representability",
+  "worker": "stage1",
+  "summary": "Expanded every clause of the root-scheme representation using the existing affine-target morphism Mathlib leaf, explicit finite-sum evaluation and quotient descent, and the existing representable-etale-sheaf lemma. Naturality and arbitrary base change are checked on the universal coordinate. No statement change or new node; no Lean declaration in the project states the full item.",
+  "blueprint": "prop-asd-smooth-base-change, proof paragraph 2: ordinary inverse-image and twist base-change isomorphism, via lem-asd-etale-finite-twist-pullback; supplies the affine root representation used in that twist comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Generic affine-target morphism classification used for arbitrary U; it is an existing Mathlib leaf, independent of the smooth/twist route."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic representable sheaf property on the small etale site, applied to P; the unit supplies no substitute and the node is already Lean-closed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-ad9b209e2",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-ad9b209e2 (reviewer sub-agent of L); spot-checked: I read the delivery in full; review.md has the details. Shape: one commit with the item and the report. Statement, stmt_deps, blueprint, created and unit are byte-identical to the side and live DAGs, where the item is still unsplit. The seven original searches are kept unchanged, followed by six new ones. Sources: Stacks 040M (groupoids.tex l.417-453) and 03PK (etale-cohomology l.2819ff, using 03O3); 01I1, 03O3, 03PK and 040M match their labels in tags/tags. The item is 040M base-changed to Spec R. The source allows n=0, where the quotient is Z[x] and does not give units, so the item's n>=1 is necessary, not a weakening. Steps: step 1 (quotient and spectrum definitions) gives x^n=1 and the inverse x^{n-1}. Step 2 applies the affine-target Mathlib leaf to an arbitrary U and gets the R-algebra condition from composition on global sections. Steps 3-4 are evaluation and quotient descent, written out and elementary. Step 5 is naturality. Step 6 uses the representable-sheaf lemma for any T-scheme, which does not need P etale, so it holds in characteristic dividing n. Step 7 checks both directions of the fibre-product bijection for arbitrary V'. Step 8 checks the base-change morphism through the projection equation p∘(id×a)=a∘r, giving a'^#(p^#x)=r^#(a^#x). Small cases checked: n=1; Z with n=2 gives ±1; F_2[ε] with n=2 gives two roots; U empty; R=0. Duplicates: searched by tags, t^n-1 and represent+roots. def-sc-gm-ga, the pro-etale mu nodes and the sbc root-cover nodes are all different statements. There are no new nodes and no SGA. I accept both declared tool_uses, since one is a Mathlib leaf and the other is Lean-closed and generic. No fixes were made."
  }
 }

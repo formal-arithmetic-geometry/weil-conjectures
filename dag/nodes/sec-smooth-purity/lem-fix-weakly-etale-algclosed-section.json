@@ -1,0 +1,90 @@
+{
+ "id": "lem-fix-weakly-etale-algclosed-section",
+ "kind": "statement",
+ "title": "Nonempty weakly etale schemes over algebraically closed fields admit sections",
+ "statement": "Let $\\Omega$ be an algebraically closed field [def-weil-algebraic-closure], let $Z$ be a scheme [def-pc-scheme], and let $q:Z\\to\\operatorname{Spec}\\Omega$ [def-weil-affine-spectrum] be a weakly etale morphism [def-weil-weakly-etale-morphism]. If the underlying topological space of $Z$ is nonempty, then there exists a morphism $s:\\operatorname{Spec}\\Omega\\to Z$ with $q\\circ s=\\mathrm{id}_{\\operatorname{Spec}\\Omega}$ (a section of $q$).",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0F6C, lemma-geometric-lift-to-cover, proof: separable algebraic residue fields; extracted section-existence argument after base change to the algebraically closed geometric-point field"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-weakly-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "nonempty weakly etale scheme over an algebraically closed field admits a section",
+   "results": "8 hits. StandardEtalePair.hasMap_X, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.IsEtale.instFormallyUnramified; etale finite-type results do not cover arbitrary weakly etale schemes. Read RingTheory/Etale/Field.lean: the product decomposition requires EssFiniteType or Etale.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.WeaklyEtale, IsAlgClosed",
+   "results": "0 hits. ; no declaration for the conjunction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weakly.*etale.*(section|residue)|WeaklyEtale|fromSpecResidueField",
+   "results": "23 hits. Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; directory AlgebraicGeometry/Morphisms. Read WeaklyEtale.lean:44-128: definitions, locality and stability only, no section existence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every point of a weakly etale scheme over an algebraically closed field is the image of a section of its structural morphism",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.range_fromSpecResidueField, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.toSpecΓ_base, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; read ResidueField.lean:60-145 and fromSpecResidueField: these provide the residue-field morphism, not an Omega-algebra map from the residue field back to Omega.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme weakly etale over an algebraically closed field has a rational point through every point",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.etaleLocus_eq_univ_iff, Algebra.etaleLocus; etale finite-type results do not cover arbitrary weakly etale schemes. Read RingTheory/Etale/Field.lean: the product decomposition requires EssFiniteType or Etale.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-geometric-stalk-topos-point",
+  "date": "2026-10-17",
+  "group": "Q14"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-finite-tor-perfect",
+   "place": "Proof, first paragraph: geometric stalk as topos-point inverse image; section of a nonempty weakly etale geometric fibre in the cover-lifting argument",
+   "via": [
+    "lem-fix-geometric-stalk-topos-point"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale",
+   "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale",
+   "lines": [
+    77,
+    100
+   ],
+   "kind": "theorem",
+   "sorry": false,
+   "note": "Exact statement: for a field K with IsAlgClosed K, a scheme V and f : V ⟶ Spec K with WeaklyEtale f and a point v : V, there is σ : Spec K ⟶ V with σ ≫ f = 𝟙 (diagrammatic order, i.e. f∘σ = id); the point v is the nonemptiness hypothesis. K and V lie in one universe u, as in the project's size convention. Source read in ~/weil-conjectures-slopmaster2 at lines 77-100 (imports only Mathlib and WeilConjectures.Mathlib.RingTheory.Etale.Weakly, whose nonempty_algHom_of_isAlgClosed it uses); archived sorry map local/sorry_map_slopmaster2_7d675a26.jsonl.gz records s=false, ts=false. Added by the maintainer reader; the split itself sets no closed audit metadata."
+  }
+ ]
+}
