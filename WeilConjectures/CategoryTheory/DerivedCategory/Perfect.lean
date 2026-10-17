@@ -19,6 +19,7 @@ public import Mathlib.RingTheory.SimpleModule.InjectiveProjective
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.RightDual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
@@ -426,15 +427,41 @@ theorem isPerfect_of_finiteTorAmplitude [IsNoetherianRing R]
   obtain ⟨c, d, hcd⟩ := hTor
   exact isPerfect_of_torAmplitudeIn (d - c).toNat (by omega) hcd hfin
 
+omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
+/-- Any right dual `Mᘁ` of a finitely generated projective module `M` is finitely generated
+projective: it is isomorphic to `[M, R] = Hom_R(M, R)`. -/
+private lemma projective_finite_rightDual (M : ModuleCat.{u} R) [Module.Finite R M]
+    [Module.Projective R M] [HasRightDual M] :
+    Module.Projective R (Mᘁ : ModuleCat.{u} R) ∧ Module.Finite R (Mᘁ : ModuleCat.{u} R) := by
+  let e : Mᘁ ≅ ModuleCat.of R (Module.Dual R M) :=
+    (ihomUnitIsoRightDual M).symm ≪≫ (ModuleCat.homLinearEquiv (S := R)).toModuleIso
+  exact ⟨Module.Projective.of_equiv e.symm.toLinearEquiv,
+    Module.Finite.equiv e.symm.toLinearEquiv⟩
+
 /-- Blueprint `sk-lem-finite` (Step 3 of its proof): the dual of a perfect point complex.
 
 The dual `C^∨ = RHom_R(C, R)` of a perfect complex `C` is perfect: if `C` is represented by a
 bounded complex `P` of finitely generated projective modules, `C^∨` is represented by the
 termwise dual complex `Hom_R(P^{-i}, R)`, again bounded with finitely generated projective
-terms. -/
+terms. Indeed `Q P` and `Q P^∨` form an exact pairing
+(`DerivedCategory.nonempty_exactPairing_Q_obj_rightDual`), so `[Q P, R] ≅ Q P^∨`. -/
 theorem IsPerfect.ihom_unit {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
-    ((ihom C).obj (𝟙_ _)).IsPerfect :=
-  sorry
+    ((ihom C).obj (𝟙_ _)).IsPerfect := by
+  obtain ⟨P, a, b, _, _, hP, ⟨e⟩⟩ := hC
+  have hd (n : ℤ) : IsDualizable (P.X n) := by
+    have := (hP n).1
+    have := (hP n).2
+    exact ModuleCat.isDualizable_of_projective (P.X n)
+  let (n : ℤ) : HasRightDual (P.X n) := (hd n).some
+  obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
+  obtain ⟨_⟩ := nonempty_exactPairing_Q_obj_rightDual P a b
+  let : HasRightDual (Q.obj P) := ⟨Q.obj P.rightDual⟩
+  refine IsPerfect.of_iso (isPerfect_Q_obj P.rightDual (-b) (-a) fun i ↦ ?_)
+    ((ihomUnitIsoRightDual (Q.obj P)).symm ≪≫
+      (MonoidalClosed.internalHom.mapIso e.op).app (𝟙_ _))
+  have := (hP (-i)).1
+  have := (hP (-i)).2
+  exact projective_finite_rightDual (P.X (-i))
 
 omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
 /-- A complex of modules over a semisimple ring (for example a field) is quasi-isomorphic to the

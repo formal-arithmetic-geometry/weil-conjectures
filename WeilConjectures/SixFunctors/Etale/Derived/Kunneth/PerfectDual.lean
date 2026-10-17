@@ -110,8 +110,9 @@ of `P ⊠ Q = p^* P ⊗ᴸ q^* Q` is `P^∨ ⊠ Q^∨` (`sk-prop-sf-dualizable-b
 for it: for non-perfect complexes the statement needs the exceptional Künneth formula. -/
 theorem Orientation.nonempty_iso_verdierDual_externalProduct {X Y S : Scheme.{u}} (a : X ⟶ S)
     (b : Y ⟶ S) [HasCompactification a] [HasCompactification b]
-    [HasCompactification (pullback.fst a b ≫ a)] {d e : ℕ} (oX : Orientation Λ a d)
-    (oY : Orientation Λ b e) (oXY : Orientation Λ (pullback.fst a b ≫ a) (d + e))
+    [HasCompactification (pullback.fst a b ≫ a)] [HasInvertibleExponent Λ S] {d e : ℕ}
+    (oX : Orientation Λ a d) (oY : Orientation Λ b e)
+    (oXY : Orientation Λ (pullback.fst a b ≫ a) (d + e))
     {P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {Q : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hP : IsDualizable P) (hQ : IsDualizable Q) :
@@ -119,7 +120,10 @@ theorem Orientation.nonempty_iso_verdierDual_externalProduct {X Y S : Scheme.{u}
         (op (externalProduct (ModuleCat.{u + 1} Λ) a b P Q)) ≅
       externalProduct (ModuleCat.{u + 1} Λ) a b ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op P))
         ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op Q))) := by
-  have hP' := isDualizable_leftDerivedUpperStar (pullback.fst a b) hP
+  have : HasInvertibleExponent Λ X := .of_hom a
+  have : HasInvertibleExponent Λ Y := .of_hom b
+  have : HasInvertibleExponent Λ (pullback a b) := .of_hom (pullback.fst a b ≫ a)
+  have hP':= isDualizable_leftDerivedUpperStar (pullback.fst a b) hP
   have hQ' := isDualizable_leftDerivedUpperStar (pullback.snd a b) hQ
   obtain ⟨e₁⟩ := oXY.nonempty_iso_verdierDual_coefficientDual
     (isDualizable_derivedTensor hP' hQ')

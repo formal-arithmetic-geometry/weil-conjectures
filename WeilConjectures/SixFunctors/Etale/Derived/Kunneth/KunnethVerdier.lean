@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DualReduction
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHomMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
 public import WeilConjectures.SixFunctors.Etale.Derived.PointDualizing
@@ -28,13 +29,11 @@ for `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)`. As in the blueprint it is the exte
 exceptional Künneth isomorphism `α` (`prop-trf-exceptional-kunneth`) for `𝟙_X × a_Y`, which
 reads `M ⊠ ω_Y ≅ Rp_X^! M`.
 
-## Main definitions
-
-- `AlgebraicGeometry.Etale.verdierDualEvaluation` (`def-trf-dualizing-complex`): the
-  evaluation `M ⊗ᴸ 𝔻_X M ⟶ ω_X`.
-
 ## Main statements
 
+- `AlgebraicGeometry.Etale.verdierDualEvaluation_eq_homEquiv_symm_id`
+  (`def-trf-dualizing-complex`): the evaluation `M ⊗ᴸ 𝔻_X M ⟶ ω_X` is the transpose of the
+  identity.
 - `AlgebraicGeometry.Etale.isIso_externalHomMap`, `AlgebraicGeometry.Etale.nonempty_iso_externalHom`
   (`prop-trf-external-hom`): `β`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_pullbackFst`: `α` for
@@ -63,20 +62,6 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `def-trf-dualizing-complex`: Dualizing complex and Verdier dual, the evaluation.
-
-For `a : X ⟶ S` with dualizing complex `ω_X = Ra^! Λ_S`
-(`AlgebraicGeometry.Etale.dualizingComplex`) and Verdier dual `𝔻_X = RHom(-, ω_X)`
-(`AlgebraicGeometry.Etale.verdierDual`), the evaluation `M ⊗ᴸ 𝔻_X M ⟶ ω_X` is the transpose of
-the identity of `𝔻_X M` under the tensor–internal-Hom adjunction
-`Hom(M ⊗ᴸ 𝔻_X M, ω_X) ≅ Hom(𝔻_X M, RHom(M, ω_X))`. (The blueprint writes the two factors in the
-other order, `𝔻_X M ⊗ᴸ M`; the adjunction of the library tensors on the left.) -/
-noncomputable def verdierDualEvaluation {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj M).obj ((verdierDual _ a).obj (op M)) ⟶
-      dualizingComplex _ a :=
-  (derivedTensorHomAdjunction _ M).counit.app (dualizingComplex _ a)
-
 /-- The unit `Λ_X` lies in `Dctf(X, Λ)`: it is the constant sheaf `Λ` placed in degree `0`,
 which is constructible and flat. -/
 theorem constructibleFiniteTor_unit (X : Scheme.{u}) :
@@ -86,6 +71,22 @@ theorem constructibleFiniteTor_unit (X : Scheme.{u}) :
     (torAmplitudeIn _ X 0 0).prop_of_iso (_root_.DerivedCategory.singleFunctorObjUnitIso _)
       (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
         (ObjectProperty.flat_of_isDualizable isDualizable_unit))⟩
+
+/-- Blueprint `def-trf-dualizing-complex`: Dualizing complex and Verdier dual.
+
+For `a : X ⟶ S`, the dualizing complex is `ω_X = Ra^! Λ_S`
+(`AlgebraicGeometry.Etale.dualizingComplex`), the Verdier dual is `𝔻_X = RHom(-, ω_X)`
+(`AlgebraicGeometry.Etale.verdierDual`), and the evaluation `ev_M : M ⊗ᴸ 𝔻_X M ⟶ ω_X`
+(`AlgebraicGeometry.Etale.verdierDualEvaluation`) is the transpose of the identity of `𝔻_X M`
+under the tensor–internal-Hom adjunction `Hom(M ⊗ᴸ 𝔻_X M, ω_X) ≅ Hom(𝔻_X M, RHom(M, ω_X))`.
+(The blueprint writes the two factors in the other order, `𝔻_X M ⊗ᴸ M`; the internal Hom of the
+library is right adjoint to tensoring on the left.) -/
+theorem verdierDualEvaluation_eq_homEquiv_symm_id {X S : Scheme.{u}} (a : X ⟶ S)
+    [HasCompactification a]
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    verdierDualEvaluation _ a M =
+      ((ihom.adjunction M).homEquiv _ _).symm (𝟙 ((verdierDual _ a).obj (op M))) := by
+  simp [verdierDualEvaluation, Adjunction.homEquiv_counit, ihom.ev]
 
 /-- The internal hom out of the unit is the identity, `RHom(Λ_X, -) ≅ 𝟭`: both are right
 adjoint to `Λ_X ⊗ᴸ - ≅ 𝟭`. -/
@@ -103,48 +104,7 @@ noncomputable def externalProductUnitLeftIso {B X Y : Scheme.{u}} (f : X ⟶ B) 
   ((derivedTensor _ _).mapIso (leftDerivedUpperStarUnitIso _ (pullback.fst f g))).app _ ≪≫
     derivedTensorLeftUnitor _ _ _
 
-/-- The external product with the unit in the second factor is the pullback of the first factor:
-`K ⊠ Λ_Y ≅ p_X^* K`. -/
-noncomputable def externalProductUnitRightIso {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    externalProduct (ModuleCat.{u + 1} Λ) f g K (𝟙_ _) ≅
-      (L((pullback.fst f g)^*[ModuleCat.{u + 1} Λ])).obj K :=
-  ((derivedTensor _ _).obj _).mapIso (leftDerivedUpperStarUnitIso _ (pullback.snd f g)) ≪≫
-    derivedTensorRightUnitor _ _ _
-
-/-- For an isomorphism of schemes `e`, the exceptional inverse image is the derived pullback,
-`Re^! ≅ Le^*`: an isomorphism is a quasi-compact open immersion, for which
-`Re^! ≅ D(e^*)` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`). -/
-noncomputable def rightDerivedUpperShriekIsoOfIsIso {X Y : Scheme.{u}} (e : X ⟶ Y) [IsIso e]
-    [HasCompactification e] :
-    R(e)^![ModuleCat.{u + 1} Λ] ≅ L((e)^*[ModuleCat.{u + 1} Λ]) :=
-  rightDerivedUpperShriekIsoOfIsOpenImmersion Λ e ≪≫
-    (leftDerivedUpperStarIsoMapDerivedCategory _ e).symm
-
 variable {k : Type u} [Field k]
-
-/-- TEMPORARY: to be replaced by kv-alpha's result.
-
-Blueprint `prop-trf-exceptional-kunneth`: the exceptional Künneth map `α` is an isomorphism. The
-statement is exactly the `exceptional` field of `AlgebraicGeometry.Etale.HasKunnethComparisons`
-over `S = Spec k`, for a finite coefficient ring whose exponent is invertible in `k`. -/
-theorem nonempty_iso_exceptional_temp [HasInvertibleExponent Λ (Spec (.of k))]
-    {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ Spec (.of k)) (b₂ : Y₂ ⟶ Spec (.of k))
-    [LocallyOfFiniteType b₁] [QuasiCompact b₁] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
-    (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
-    [QuasiCompact f₁] [QuasiCompact f₂]
-    [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-    [(R(f₁)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(f₂)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-    [(R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-    {N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))} :
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y₁ N₁ →
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y₂ N₂ →
-    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂)
-        ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁) ((R(f₂)^![ModuleCat.{u + 1} Λ]).obj N₂) ≅
-      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![ModuleCat.{u + 1} Λ]).obj
-        (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) :=
-  sorry
 
 /-- Blueprint `prop-trf-external-hom`: External Hom; the `β` map.
 
@@ -190,78 +150,29 @@ theorem nonempty_iso_externalHom [HasInvertibleExponent Λ (Spec (.of k))] {Z₁
   have := isIso_externalHomMap Λ c₁ c₂ hE₁ hE₂ hN₁ hN₂
   ⟨asIso (externalHomMap (ModuleCat.{u + 1} Λ) c₁ c₂ E₁ N₁ E₂ N₂)⟩
 
-/-- Transport of an exceptional inverse image along a factorization through an isomorphism:
-if `φ ≫ π = ψ` with `π` an isomorphism of schemes, then `Rψ^! M ≅ Rφ^! (Lπ^* M)`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_of_comp_isIso {P Q X : Scheme.{u}} (φ : P ⟶ Q)
-    (π : Q ⟶ X) (ψ : P ⟶ X) [IsIso π] [HasCompactification φ] [HasCompactification π]
-    [HasCompactification ψ] [HasCompactification (φ ≫ π)] [QuasiCompact (φ ≫ π)]
-    (h : φ ≫ π = ψ)
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((R(ψ)^![ModuleCat.{u + 1} Λ]).obj M ≅
-      (R(φ)^![ModuleCat.{u + 1} Λ]).obj ((L((π)^*[ModuleCat.{u + 1} Λ])).obj M)) := by
-  have hcongr : ∀ (χ : P ⟶ X) [HasCompactification χ], χ = φ ≫ π →
-      Nonempty (R(χ)^![ModuleCat.{u + 1} Λ] ≅ R(φ ≫ π)^![ModuleCat.{u + 1} Λ]) := by
-    rintro χ _ rfl
-    exact ⟨Iso.refl _⟩
-  obtain ⟨c₀⟩ := hcongr ψ h.symm
-  obtain ⟨c₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ φ π
-  exact ⟨c₀.app M ≪≫ c₁.app M ≪≫
-    (R(φ)^![ModuleCat.{u + 1} Λ]).mapIso ((rightDerivedUpperShriekIsoOfIsIso Λ π).app M)⟩
-
-/-- The exceptional Künneth isomorphism `α` for `𝟙_X × b`: for `a : X ⟶ Spec k`,
-`b : Y ⟶ Spec k` and `M ∈ Dctf(X, Λ)`, with `p_X : X ×_k Y ⟶ X` the first projection,
+/-- The exceptional Künneth isomorphism `α` for `𝟙_X × b`: for `a : X ⟶ Spec k` of finite type,
+`b : Y ⟶ Spec k` and any `M`, with `p_X : X ×_k Y ⟶ X` the first projection,
 
 `Rp_X^! M ≅ M ⊠ ω_Y`.
 
 This is `α` (`prop-trf-exceptional-kunneth`) for `f₁ = 𝟙_X`, `f₂ = b` and the coefficients
-`(M, Λ_k)`, read through `R(𝟙_X)^! ≅ 𝟭`, `X ×_k k ≅ X` and the composition law for `R^!`. -/
+`(M, Λ_k)`: the one-sided exceptional Künneth formula
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor`) for `b` and
+`X = k ×_k X`, read through `La^* Λ_k ≅ Λ_X` and the unitors. -/
 theorem nonempty_iso_rightDerivedUpperShriek_pullbackFst
     [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}} (a : X ⟶ Spec (.of k))
-    (b : Y ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
+    (b : Y ⟶ Spec (.of k)) [LocallyOfFiniteType a] [QuasiCompact a]
     [HasCompactification b] [QuasiCompact b] [HasCompactification (pullback.fst a b)]
-    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M ≅
       externalProduct (ModuleCat.{u + 1} Λ) a b M (dualizingComplex _ b)) := by
-  -- `π : X ×_k k ⟶ X` is an isomorphism
-  obtain ⟨π, hπ⟩ : ∃ π, π = pullback.fst a (𝟙 (Spec (.of k))) := ⟨_, rfl⟩
-  have : IsIso π := hπ ▸ inferInstance
-  have : HasCompactification (b ≫ 𝟙 (Spec (.of k))) := HasCompactification.comp_of_isProper _
-  have hφ : pullback.fst (𝟙 X ≫ a) (b ≫ 𝟙 (Spec (.of k))) ≫ (𝟙 X ≫ inv π) =
-      pullback.mapOverBase (𝟙 X) b a (𝟙 (Spec (.of k))) := by
-    rw [← cancel_mono π, hπ]
-    simp
-  have : HasCompactification (pullback.fst (𝟙 X ≫ a) (b ≫ 𝟙 (Spec (.of k))) ≫ (𝟙 X ≫ inv π)) :=
-    HasCompactification.comp_of_isProper _
-  have : HasCompactification (pullback.mapOverBase (𝟙 X) b a (𝟙 (Spec (.of k)))) := .of_eq hφ
-  obtain ⟨e₀⟩ := nonempty_iso_exceptional_temp Λ a (𝟙 _) (𝟙 X) b hM
-    (constructibleFiniteTor_unit Λ _)
-  -- transport along `𝟙 X ≫ a = a` and `b ≫ 𝟙 = b`
-  have key : ∀ (a' : X ⟶ Spec (.of k)) (b' : Y ⟶ Spec (.of k)), a' = a → b' = b →
-      ∀ (φ : pullback a' b' ⟶ pullback a (𝟙 (Spec (.of k)))) [HasCompactification φ]
-        [QuasiCompact (φ ≫ π)] [HasCompactification (φ ≫ π)], φ ≫ π = pullback.fst a' b' →
-      Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a' b'
-          ((R(𝟙 X)^![ModuleCat.{u + 1} Λ]).obj M) (dualizingComplex _ b) ≅
-        (R(φ)^![ModuleCat.{u + 1} Λ]).obj
-          (externalProduct (ModuleCat.{u + 1} Λ) a (𝟙 _) M (𝟙_ _))) →
-      Nonempty ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M ≅
-        externalProduct (ModuleCat.{u + 1} Λ) a b M (dualizingComplex _ b)) := by
-    rintro a' b' rfl rfl φ _ _ _ h ⟨e⟩
-    obtain ⟨c⟩ := nonempty_iso_rightDerivedUpperShriek_of_comp_isIso Λ φ π _ h M
-    subst hπ
-    exact ⟨c ≪≫ (R(φ)^![ModuleCat.{u + 1} Λ]).mapIso
-        (externalProductUnitRightIso Λ a (𝟙 _) M).symm ≪≫ e.symm ≪≫
-      externalProductMapIso _ a' b'
-        ((rightDerivedUpperShriekIdIso (ModuleCat.{u + 1} Λ) X).app M) (Iso.refl _)⟩
-  have hφπ : pullback.mapOverBase (𝟙 X) b a (𝟙 (Spec (.of k))) ≫ π =
-      pullback.fst (𝟙 X ≫ a) (b ≫ 𝟙 (Spec (.of k))) := by
-    rw [hπ, pullback.mapOverBase_fst, Category.comp_id]
-  have : HasCompactification (pullback.mapOverBase (𝟙 X) b a (𝟙 (Spec (.of k))) ≫ π) :=
-    .of_eq hφπ.symm
-  have : QuasiCompact (pullback.mapOverBase (𝟙 X) b a (𝟙 (Spec (.of k))) ≫ π) := by
-    rw [hφπ]
-    infer_instance
-  exact key _ _ (Category.id_comp a) (Category.comp_id b) _ hφπ e₀
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_derivedTensor Λ (𝟙 (Spec (.of k))) a
+    (IsPullback.id_vert a) b (IsPullback.of_hasPullback a b).flip (𝟙_ _) M
+  obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) (pullback a b)
+  exact ⟨(R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).mapIso
+      (((derivedTensor _ X).mapIso (leftDerivedUpperStarUnitIso _ a)).app _ ≪≫
+        derivedTensorLeftUnitor _ _ _ ≪≫ (leftDerivedUpperStarId _ X).app M).symm ≪≫ e ≪≫
+    ((derivedTensor _ _).obj _).mapIso (eqToIso (by rw [Category.comp_id])) ≪≫ (β.app _).app _⟩
 
 /-- Blueprint `thm-trf-kunneth-verdier`: Künneth–Verdier isomorphism; the `κ` map.
 
@@ -290,7 +201,7 @@ theorem nonempty_iso_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] {X
   have hω : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y (dualizingComplex _ b) :=
     constructibleFiniteTor_dualizingComplex Λ (𝟙 _) b (constructibleFiniteTor_unit Λ _)
   obtain ⟨β⟩ := nonempty_iso_externalHom Λ a b (constructibleFiniteTor_unit Λ X) hN hM hω
-  obtain ⟨α⟩ := nonempty_iso_rightDerivedUpperShriek_pullbackFst Λ a b hM
+  obtain ⟨α⟩ := nonempty_iso_rightDerivedUpperShriek_pullbackFst Λ a b M
   exact ⟨externalProductMapIso _ a b ((derivedHomUnitIso Λ X).app M).symm (Iso.refl _) ≪≫ β ≪≫
     ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).mapIso
       (externalProductUnitLeftIso Λ a b N).op).app _ ≪≫
@@ -308,6 +219,7 @@ theorem verdierDualExternalProduct [PerfectField k] [HasInvertibleExponent Λ (S
     VerdierDualExternalProduct Λ k :=
   (kunnethVerdier Λ).verdierDualExternalProduct
 
+variable (k) in
 /-- Blueprint `sk-thm-sf-kunneth-verdier`: Künneth–Verdier isomorphism.
 
 The four product comparison maps of `AlgebraicGeometry.Etale.HasKunnethComparisons` are
@@ -324,14 +236,14 @@ and `N` in `Dctf(Y, A)`,
 `κ : M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`
 
 on `X ×_S Y`, where `𝔻_Y = RHom(-, ω_Y)` is the Verdier dual relative to `b : Y ⟶ S`. -/
-variable (k) in
 theorem hasKunnethComparisons [HasInvertibleExponent Λ (Spec (.of k))] :
     HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k)) where
   kunnethShriek := by
     intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ hM₁ hM₂
     exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct (Λ := Λ) b₁ b₂ f₁ f₂
       hM₁ hM₂
-  exceptional b₁ b₂ f₁ f₂ hN₁ hN₂ := nonempty_iso_exceptional_temp Λ b₁ b₂ f₁ f₂ hN₁ hN₂
+  exceptional b₁ b₂ f₁ f₂ hN₁ hN₂ :=
+    nonempty_iso_externalProduct_rightDerivedUpperShriek Λ b₁ b₂ f₁ f₂ hN₁ hN₂
   externalHom c₁ c₂ hE₁ hE₂ hN₁ hN₂ := nonempty_iso_externalHom Λ c₁ c₂ hE₁ hE₂ hN₁ hN₂
   kunnethVerdier a b hM hN := nonempty_iso_kunnethVerdier Λ a b hM hN
 
