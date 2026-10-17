@@ -1,10 +1,81 @@
 {
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $H$ be any acyclic complex of $R$-module sheaves. Since $P$ is K-flat, $\\operatorname{Tot}(H\\otimes_R P)$ is acyclic by the defining test for K-flatness. Applying K-flatness of $Q$ to this acyclic complex gives that $\\operatorname{Tot}(\\operatorname{Tot}(H\\otimes_R P)\\otimes_R Q)$ is acyclic. The direct-sum total differential identifies this complex with $\\operatorname{Tot}(H\\otimes_R T)$ by the reassociation map described below. Thus $T$ is K-flat. The argument quantifies over all acyclic $H$ and uses no boundedness in either direction.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A2, label lemma-tensor-product-K-flat, proof"
+   }
+  },
+  {
+   "text": "For every pair of degrees $p,q$, the sheaf $P^p\\otimes_R Q^q$ is flat: for an $R$-module sheaf $G$, the associativity isomorphism of the symmetric monoidal structure of [lem-pc-sheaf-modules-tensor-closed] gives $G\\otimes_R(P^p\\otimes_R Q^q)\\cong(G\\otimes_R P^p)\\otimes_R Q^q$ naturally in $G$, so tensoring on the right by $P^p\\otimes_RQ^q$ is isomorphic to the composite of tensoring on the right by $P^p$ and then by $Q^q$; both functors are exact because the corresponding terms are flat, and a composite of exact functors is exact. This works for arbitrary integers $p,q$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0G6Q, label lemma-tensor-flats, proof"
+   }
+  },
+  {
+   "text": "For fixed $i$, the index set of pairs $(p,q)$ with $p+q=i$ is countable. Therefore $T^i=\\bigoplus_{p+q=i}P^p\\otimes_R Q^q$ is a countable direct sum of flat sheaves, hence flat by the countable-direct-sum clause of [lem-pc-kflat-closure]. This proves flatness of every term of $T$, including for unbounded $P$ and $Q$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0G6Q, label lemma-tensor-flats; total-term formula from the definition of the total tensor complex"
+   }
+  },
+  {
+   "text": "On the summand indexed by integers $(a,p,q)$ with $a+p+q=n$, define $h\\otimes(x\\otimes y)\\mapsto(h\\otimes x)\\otimes y$, the associativity isomorphism $H^a\\otimes_R(P^p\\otimes_RQ^q)\\cong(H^a\\otimes_RP^p)\\otimes_RQ^q$ of [lem-pc-sheaf-modules-tensor-closed]. By the same node, $H^a\\otimes_R-$ is a left adjoint and so commutes with arbitrary direct sums, and by symmetry so does $-\\otimes_RQ^q$; hence the degree-$n$ term of each side is $\\bigoplus_{a+p+q=n}H^a\\otimes_RP^p\\otimes_RQ^q$ (bracketed accordingly), and taking the direct sum of the summand maps over all such triples gives a degreewise isomorphism $\\operatorname{Tot}(H\\otimes_R T)\\cong\\operatorname{Tot}(\\operatorname{Tot}(H\\otimes_R P)\\otimes_R Q)$. The differential on the source has the three components $dh\\otimes(x\\otimes y)$, $(-1)^a h\\otimes(dx\\otimes y)$, $(-1)^{a+p}h\\otimes(x\\otimes dy)$ with signs $1,(-1)^a,(-1)^{a+p}$, and the reassociated target has $(dh\\otimes x)\\otimes y$, $(-1)^a(h\\otimes dx)\\otimes y$, $(-1)^{a+p}(h\\otimes x)\\otimes dy$ with the same three signs; since the associativity isomorphism is natural, the map commutes with the differential. Its inverse is the inverse reassociation on each summand, and naturality in $H$ follows from naturality of the associator. Direct sums make this valid without boundedness assumptions.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A2, proof display and direct-sum total-complex convention"
+   }
+  },
+  {
+   "text": "The complex $T$ is K-flat with flat terms by Steps 1 and 3, so $T$ lies in the resolving subcategory $\\mathcal P_R$ of [lem-weil-pbc-site-derived-tensor-descent]. Applying its canonical model comparison to $P,Q\\in\\mathcal P_R$ gives $Q_R\\operatorname{Tot}(P\\otimes_R Q)\\cong Q_RP\\otimes_R^{\\mathbf L}Q_RQ$. Since $T=\\operatorname{Tot}(P\\otimes_RQ)$, this is the claimed identification of the localized object of $T$ with the derived tensor of the localized objects. Consequently $T$ is an admissible flat-term K-flat representative for subsequent derived tensor computations (and for any derived pullback construction that uses this resolving class).",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, label lemma-pullback-tensor-product, proof; resolving-class comparison in the existing site-derived-tensor descent node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-closure",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A2 (lemma-tensor-product-K-flat), Tag 0G6Q (sites-modules-lemma-tensor-flats), and Tag 07A4 proof"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-derived-pullback-tensor-iso",
@@ -28,46 +99,60 @@
  ],
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "K-flat total tensor complexes of flat-term sheaf resolutions and flat total terms",
-   "results": "Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_exact'; Module.Flat.lTensor_exact; Module.Flat.iff_rTensor_exact'; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.of_flat_tensorProduct",
-   "date": "2026-10-17",
-   "verdict": "generalization: candidate declarations are not the full node"
-  },
-  {
-   "tool": "loogle",
-   "query": "KFlat, TensorProduct, DerivedCategory",
-   "results": "loogle: unknown identifier 'KFlat'",
+   "tool": "grep",
+   "query": "KFlat|IsKFlat|kFlat.*tensor|tensor.*kFlat",
+   "results": "none (0 hits) in Mathlib/CategoryTheory",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "KFlat|kflat|derived.*tensor|inverse.*limit|scalar.*extension",
-   "results": "",
+   "tool": "loogle",
+   "query": "HomologicalComplex.IsKFlat, TensorProduct, direct sum, total complex",
+   "results": "0 hits; unknown identifier HomologicalComplex.IsKFlat",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "K-flat total tensor complexes of flat-term sheaf resolutions and flat total terms",
-   "results": "HomologicalComplex₂.total; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; HomologicalComplex.tensorObj; Module.Flat.iff_rTensor_exact; Module.Flat.instTensorProduct; Module.Flat.iff_lTensor_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "query": "the direct-sum total tensor of two unbounded K-flat complexes with flat terms is K-flat and has flat terms",
+   "results": "Module.Flat.instTensorProduct; Module.Flat.directSum; HomologicalComplex.tensorObj; PiTensorProduct.ofDirectSumEquiv_tprod_apply; Module.Flat.directSum_iff; Module.Flat.rTensor_shortComplex_exact; TensorProduct.directSumLeft; TensorProduct.finsuppLeft",
    "date": "2026-10-17",
-   "verdict": "generalization: candidate declarations are not the full node"
+   "verdict": "generalization: module flatness and total-complex infrastructure, no full sheaf K-flat theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat total tensor of two unbounded complexes with flat terms over a sheaf of rings",
+   "results": "HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; HomologicalComplex.HasTensor; HomologicalComplex.ιTensorObj; HomologicalComplex.tensorObj; HomologicalComplex.instHasTensorOfHasTensorX",
+   "date": "2026-10-17",
+   "verdict": "generalization: monoidal complex infrastructure, no K-flat sheaf theorem"
   },
   {
    "tool": "grep",
-   "query": "KFlat|flat.*direct.sum|total.*tensor",
-   "results": "",
+   "query": "directSum|tensorObj|IsKFlat|KFlat",
+   "results": "none (0 hits) in Mathlib/Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat complexes are closed under the total tensor product and degreewise direct sums of flat sheaf modules remain flat",
+   "results": "Module.Flat.directSum; Module.Flat.instTensorProduct; Module.Flat.dfinsupp; HomologicalComplex.tensorObj; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_flat_tensorProduct; TensorProduct.LinearIndepOn.tmul_of_flat_left",
+   "date": "2026-10-17",
+   "verdict": "generalization: module flatness and total-complex infrastructure, no full sheaf K-flat theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.directSum, Module.Flat.instTensorProduct, HomologicalComplex.tensorObj",
+   "results": "0 hits",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "The direct sum total tensor of two unbounded K flat complexes of sheaves is K flat with flat terms",
-   "results": "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; Module.Flat.directSum_iff; Module.Flat.directSum; Module.FaithfullyFlat.directSum; Module.Flat.dfinsupp_iff",
+   "query": "direct sum totalization of K-flat sheaf complexes preserves K-flatness and flat terms",
+   "results": "Module.Flat.directSum_iff; Module.Flat.directSum; Module.Flat.dfinsupp_iff; Module.Flat.dfinsupp; Module.FaithfullyFlat.directSum; HomologicalComplex.HasGoodTrifunctor₁₂Obj; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTrifunctor₂₃Obj",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary module flatness, monoidal complex infrastructure, sheaf limits or ring cotangent comparisons do not state this sheaf derived-system construction"
+   "verdict": "generalization: ordinary module flatness and monoidal complex infrastructure, no full sheaf theorem"
   }
  ],
  "blueprint": {
@@ -80,5 +165,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-kflat-total-tensor-model",
+  "worker": "stage1",
+  "summary": "Read the source proof of Stacks Tag 07A2 for K-flatness of the total tensor on an arbitrary ringed site, and Tag 0G6Q for flatness of tensor products and direct sums. The proof is written as the K-flat test, termwise tensor-flatness, countable direct-sum flatness, the explicit reassociation chain isomorphism with its three Koszul signs, and the resolving-class localization comparison. No new statement node is needed: the closure argument is carried by the item steps and the existing generic closure and tensor-descent nodes.",
+  "blueprint": "Realizes the former proof step 2 of the ancestor coefficient-twist node: closure of the K-flat resolving class under total tensor of flat-term resolutions and the resulting iterated derived-tensor model.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Its generic site-level statement supplies flatness of countable direct sums, which is needed for the terms of the total tensor and is not a clause of the purity-conventions route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Its generic resolving-class equivalence supplies the canonical derived-tensor comparison for the localized total model; the purity-conventions unit has no localization theorem."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Its generic statement supplies the associativity isomorphism of the sheaf tensor product and that tensoring with a fixed module is a left adjoint (so commutes with direct sums), used in Steps 2 and 4; the purity-conventions unit has no node for the monoidal structure of module sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-ND-878a00539",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-878a00539 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and the statement of every cited node. Sources checked: Stacks 07A2 (sites-cohomology l.3060-3078), the proof of 07A4 and 0G6Q (sites-modules l.4593). The delivery has no new nodes. The mathematics is correct. Step 1 applies the K-flat test in the same tensor order as def-pc-kflat-complex. Step 3: the index set {p+q=i} is countable, so the countable-direct-sum clause of lem-pc-kflat-closure applies. I recomputed the step 4 differential signs: 1, (-1)^a and (-1)^(a+p) agree on both sides. Step 5 cites only the comparison clause of the descent node, and a small site satisfies that node's smallness hypothesis. Small cases pass: zero complexes, R[0], and complexes unbounded in both directions. No duplicate exists: lem-pc-kflat-tensor-product is for ringed spaces only, and the associativity nodes are for modules over a ring, not sheaves. No cycle, no SGA, statement unchanged. I made 2 repairs in fixes/.../lem-pur-kflat-total-tensor-model.json. (1) C1: steps 2 and 4 used the associativity of the sheaf tensor product, and step 4 also used that tensor commutes with infinite direct sums, but neither step cited a node for this. Both steps now cite lem-pc-sheaf-modules-tensor-closed (symmetric monoidal and closed, so tensor is a left adjoint), with the argument written out. (2) B5: the source of steps 2 and 3 said sites-cohomology.tex for 0G6Q; it is now sites-modules.tex. I updated proof_deps. Accepted tool_uses: lem-pc-kflat-closure, lem-weil-pbc-site-derived-tensor-descent, and the added lem-pc-sheaf-modules-tensor-closed.; 1 file(s) fixed by the reviewer"
  }
 }
