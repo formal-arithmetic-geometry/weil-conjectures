@@ -54,7 +54,7 @@ private theorem open_model_iso (X : Scheme.{uP}) (U : X.Opens)
   have : PreservesFiniteColimits (R ⋙ A) := comp_preservesFiniteColimits _ _
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hFmap, hFadd, ε, hL, htri, hK⟩ :=
-    derivedPullback_spec U.ι
+    (derivedPullback_spec U.ι)
   have h : F = Modules.tensorPullback U.ι :=
     CategoryTheory.Functor.ext hF (fun M N a ↦ hFmap a)
   subst F

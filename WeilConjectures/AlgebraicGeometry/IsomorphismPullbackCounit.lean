@@ -41,7 +41,7 @@ theorem counit_isIso_kFlat
     IsIso ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-      derivedPullback_spec j
+      (derivedPullback_spec j)
   have h : E = Scheme.Modules.tensorPullback j :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E

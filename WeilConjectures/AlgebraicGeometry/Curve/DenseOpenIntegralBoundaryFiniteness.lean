@@ -25,6 +25,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-! # Finite cohomology of the dense-open boundary
 
@@ -62,7 +63,7 @@ private theorem finite_constructible_stalk {X : Scheme.{u}}
   have hfin : Finite (((Scheme.pointSmallEtale t).sheafFiber).obj
       ((Scheme.etaleSetPullback (S.immersion j)).obj
         ((sheafCompose X.smallEtaleTopology (forget AddCommGrpCat.{u + 1})).obj A))) :=
-    (hS j).2 Ω t
+    (hS j).finite_sheafFiber Ω t
   let ea := (etaleInverseImageAlgebraicStructures (S.domain j) X (S.immersion j)).2.choose
   let e₁ := (Scheme.pointSmallEtale t).sheafFiber.mapIso (ea.app A)
   let e₂ := ((Scheme.pointSmallEtale t).sheafFiberCompIso

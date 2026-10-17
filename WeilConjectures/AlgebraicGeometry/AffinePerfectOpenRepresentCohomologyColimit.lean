@@ -144,7 +144,7 @@ theorem affine_perfect_open_represent_cohomology_colimit
   have hv₂ (e : ℕ) : v e ≫ R.map (koszulOpenUnit A r f e) = 𝟙 _ := by
     have := hiso e
     exact IsIso.inv_hom_id _
-  have hmap := (affine_perfect_open_represent_cohomology_core A r f E).2.2
+  have hmap := (affine_perfect_open_represent_cohomology_core A r f).2.2
   have hvmap (a b : ℕ) (h : a ≤ b) :
       v b ≫ R.map (koszulOpenMap A r f a b h) = v a := by
     calc

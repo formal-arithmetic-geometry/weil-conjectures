@@ -128,7 +128,7 @@ theorem derivedPullback_tensorProduct
   classical
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hmap, hadd, ε, hder, htri, hε⟩ :=
-      derivedPullback_spec g
+      (derivedPullback_spec g)
   -- The recorded object and map formulas determine the termwise functor strictly.
   have hEq : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)

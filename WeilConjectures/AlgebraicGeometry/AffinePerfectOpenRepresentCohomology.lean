@@ -144,7 +144,7 @@ theorem affine_perfect_open_represent_cohomology
                       (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory.map φ) ∧
         Nonempty (IsColimit (Cocone.mk _ ι)) := by
   obtain ⟨htri, hperf, hmap⟩ :=
-    affine_perfect_open_represent_cohomology_core A r f E
+    affine_perfect_open_represent_cohomology_core A r f
   have hcol := affine_perfect_open_represent_cohomology_colimit A r f E
   exact ⟨htri, hperf, hmap, hcol⟩
 
