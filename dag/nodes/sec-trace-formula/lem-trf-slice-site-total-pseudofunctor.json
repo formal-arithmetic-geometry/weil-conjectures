@@ -153,5 +153,23 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-5db9d796c (reviewer sub-agent of L); spot-checked: The statement, hypotheses, dependencies, Tag 09WC source route, and edge cases check out. The original Step 3 omitted the pullback object, arrows, commutativity, and universal-property argument where Tag 09WC says details are omitted; Step 2 also needed the generated-topology closure justification. Corrected full DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-slice-site-total-pseudofunctor.json, and review.md records all checks.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TotalSitePseudofunctor",
+  "declaration": "CategoryTheory.totalSite_of_coherent_pseudofunctor",
+  "file": "lean/Sheaf/CategoryTheory/TotalSitePseudofunctor.lean",
+  "statement": "theorem totalSite_of_coherent_pseudofunctor {I : Type u} [Category.{v} I] {F : LocallyDiscrete Iᵒᵖ ⥤ᵖ Cat.{w, w}} (D : CoherentSitePseudofunctor I F) : ∃ (J : GrothendieckTopology (Pseudofunctor.CoGrothendieck F)), J = D.totalTopology ∧ (∀ (X : Pseudofunctor.CoGrothendieck F) (j : I) (U : F.obj ⟨op j⟩) (f : X ⟶ (Pseudofunctor.CoGrothendieck.ι F j).obj U) (K : Type (max w w)) (V : K → F.obj ⟨op j⟩) (a : ∀ k, V k ⟶ U), Presieve.ofArrows V a ∈ D.coverage j U → ∃ (P : K → Pseudofunctor.CoGrothendieck F) (p : ∀ k, P k ⟶ X) (q : ∀ k, P k ⟶ (Pseudofunctor.CoGrothendieck.ι F j).obj (V k)), (∀ k, IsPullback (p k) (q k) f ((Pseudofunctor.CoGrothendieck.ι F j).map (a k))) ∧ Sieve.ofArrows P p ∈ J X)",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false,
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f6a7ef644",
+  "group": "N7",
+  "result": "pass",
+  "note": "Statement, dependencies, source clauses, universes, edge cases, docstrings, report sections, route-pivot compliance, and scompile local/server evidence checked successfully."
  }
 }

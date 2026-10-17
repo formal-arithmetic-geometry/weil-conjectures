@@ -21,7 +21,9 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism",
-  "lem-trf-riemann-zariski-finite-refinement"
+  "lem-trf-riemann-zariski-finite-refinement",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification"
  ],
  "proof": [
   {
@@ -156,5 +158,27 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-1e3620272 (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics is correct and three repairable faults were fixed in fixes/dag/nodes/sec-trace-formula. Source: the Temkin PDF (arXiv 0707.3953v3) is not in literature/, so Temkin Lemma 3.2.2, Lemma 5.1(ii), Remark 3.1.1(ii) and the Thm 1.5 proof could not be read. Instead both new statements were checked from first principles. Spread node: V is the filtered union of finitely generated subalgebras A_i of an affine chart, each Spec A_i is an L-quasi-model, and the fraction fields of the A_i exhaust L; standard finite-presentation limit arguments then descend the curves, the closed immersion, properness, flatness, pure fibre dimension and the generic isomorphism. Stability node: the stable locus is a constructible set of fibre conditions containing the image of Spec V; a limit argument over the RZ models gives a quasi-model neighbourhood; the generic isomorphism spreads to a dense open; an open containing the generic fibre of a flat curve is schematically dense. Small cases tested: empty marking, trivial valuation, a point base, a pair that is already an isomorphism. Faults repaired: (1) B2/B3/B7 in lem-trf-stable-modification-finite-presentation-spread: the closed-immersion hypothesis E_V into Y_V was missing, 'multipointed pair' was undefined, the generic isomorphism over U_0 was not stated, and meanings were deferred to the item. The statement was rewritten self-contained and stmt_deps corrected. (2) B2/B3 in lem-trf-stable-modification-stability-locus: L, V, the map Spec V to U_0 and the valuation point were not introduced, and stable eta-modification was defined only by citing lemma nodes. The definitions are now written inline and uniqueness-normal was dropped from stmt_deps. (3) C4/E1 in the item: step 2 applied the stability node without checking its smooth-generic-curve and etale-marking hypothesis, which now comes from the first clause of semistable-marked-base-change. Step 3 was vague and is now an elementary transitivity of fibre products. Step 4 now uses the RZ node's description of points and its open injection. The two new nodes were removed from the item's stmt_deps. proof_origin was changed to agent because the Temkin PDF is missing (WANTED). Item statement unchanged. The DAG duplicate search (limit, constructible-fibre and isomorphism-locus terms) found no duplicate. No tool_uses, no SGA, all citations stay in unit sk-i-curve-zero.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.StableModificationSpreading",
+  "declaration": "AlgebraicGeometry.stable_modification_spreading",
+  "file": "lean/Sheaf/TraceFormula/StableModificationSpreading.lean",
+  "statement": "theorem stable_modification_spreading (T : Scheme.{u}) [IsIntegral T] (t : T ⟶ Spec (.of (ULift.{u} ℤ))) [LocallyOfFiniteType t] [QuasiCompact t] (L : Type u) [Field L] [Algebra T.functionField L] [IsSepClosure T.functionField L] (η : Spec (.of L) ⟶ T) (hη : η = Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)) (x : RiemannZariski.Point T L η) (v : RiemannZariski.ValuationPoint T L η) (hx : RiemannZariski.Corresponds x v) (P : MultipointedCurve T) (hgenX : Smooth (P.x.fiberToSpecResidueField (genericPoint T))) (hgenD : Etale (P.d.fiberToSpecResidueField (genericPoint T))) (PV : MultipointedCurve (Spec (.of v.V))) (QV : BaseChangePair P v.centre) (f : MultipointedCurve.Hom PV QV.pair) (hf : f.IsStable (Spec.map (CommRingCat.ofHom v.V.subtype))) : ∃ (U : RiemannZariski.QuasiModel T L η) (lift : Spec (.of v.V) ⟶ U.X), lift ≫ U.map = v.centre ∧ Spec.map (CommRingCat.ofHom v.V.subtype) ≫ lift = U.generic ∧ ∃ (Y : MultipointedCurve U.X) (QU : BaseChangePair P U.map) (g : MultipointedCurve.Hom Y QU.pair), g.IsStable U.generic ∧ (∃ (eX : pullback Y.x lift ≅ PV.X) (eD : pullback Y.d lift ≅ PV.D), eX.hom ≫ PV.x = pullback.snd Y.x lift ∧ eD.hom ≫ PV.d = pullback.snd Y.d lift ∧ eD.hom ≫ PV.i = Y.markingBaseChange lift ≫ eX.hom ∧ eX.hom ≫ f.curve ≫ QV.curveMap ≫ pullback.fst P.x v.centre = pullback.fst Y.x lift ≫ g.curve ≫ QU.curveMap ≫ pullback.fst P.x U.map ∧ eD.hom ≫ f.marking ≫ QV.markingMap ≫ pullback.fst P.d v.centre = pullback.fst Y.d lift ≫ g.marking ≫ QU.markingMap ≫ pullback.fst P.d U.map) ∧ (∃ Uo : U.X.Opens, Dense (Uo : Set U.X) ∧ genericPoint U.X ∈ Uo ∧ IsIso (g.curveBaseChange Uo.ι) ∧ IsIso (g.markingBaseChange Uo.ι)) ∧ RiemannZariski.ValuationPoint.LiftsTo v U",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.BaseChangePair",
+   "AlgebraicGeometry.stable_modification_spreading"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dc62ef923",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, declarations, edge cases, docstrings, report sections, and immutable Lean module. Reproduced scompile.py successfully with no errors or warnings; no substantive or mechanical findings remain."
  }
 }
