@@ -12,9 +12,91 @@
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $r_i:[n]\\to[n_i]$ be the inert map with $r_i^{\\mathrm{op}}(a)=t_{i-1}+a$. Write $\\rho_i:[k]\\to[1]$ for the edge projection. On opposite ordinals both $\\rho_i\\alpha$ and $\\beta_i r_i$ send $0$ to $t_{i-1}$ and $1$ to $t_i$, hence they agree. The category $I_k$ in the incidence axiom has precisely $k$ edge objects and $k+1$ vertex objects, with its nonidentity arrows the two endpoint incidences of each edge. Apply that axiom with $X=D$ and $\\phi=\\alpha$. It gives an equivalence $a:\\operatorname{Map}^{\\alpha}_Q(D,C)\\to\\operatorname{holim} A$, where $A$ has edge values $A_i=\\operatorname{Map}^{\\rho_i\\alpha}_Q(D,C_i)$ and vertex values $A_j^0=\\operatorname{Map}^{\\eta_j\\alpha}_Q(D,V_j)$. Its structure maps are postcomposition with the fixed endpoint diagram. This application uses the mapping-space axiom, not just the fiber-category Segal equivalence.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definitions 2.4.1(iii) and 3.1.13(iii), fixed-source incidence diagram"
+   }
+  },
+  {
+   "text": "For each $q_i:D\\to D_i$, apply the cocartesian mapping criterion with target $C_i$. Its hypotheses hold: $Q\\to\\Delta^{\\mathrm{op}}$ is an inner fibration, and $Q$ is a quasicategory because an inner horn in $Q$ first fills in the quasicategory $N(\\Delta^{\\mathrm{op}})$ and then lifts through the inner fibration; $q_i$ is cocartesian by choice. Its square has top row $\\operatorname{Map}_Q(D_i,C_i)\\to\\operatorname{Map}_Q(D,C_i)$ and bottom row $\\operatorname{Map}_{\\Delta^{\\mathrm{op}}}([n_i],[1])\\to\\operatorname{Map}_{\\Delta^{\\mathrm{op}}}([n],[1])$, the latter given by precomposition with $r_i$. Mapping spaces in the nerve of the ordinary ordinal category are discrete. Taking the fiber of this homotopy pullback at $\\beta_i$ therefore yields an equivalence $f_i:\\operatorname{Map}^{\\beta_i}_Q(D_i,C_i)\\to A_i$, given by precomposition with $q_i$. It is the fiber at this particular base arrow; injectivity of precomposition on the entire set of base arrows is neither assumed nor needed.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition 3.1.13(i); agent expansion using the cocartesian mapping-space criterion"
+   }
+  },
+  {
+   "text": "Define $f:T_{D,C,\\alpha}\\to A$ on edge objects by $f_i$ and on vertex objects by the identity. At an endpoint $C_i\\to V_j$, the required square compares $(C_i\\to V_j)\\circ(b_i\\circ q_i)$ with $((C_i\\to V_j)\\circ b_i)\\circ q_i$. These are the associativity comparison for this composable string. The coherent-composition theorem supplies that comparison and its higher homotopies; its naturality makes them compatible with every parameter simplex. The fixed inert incidence diagram supplies the endpoint arrows and their witnesses. Thus $f$ is a coherent transformation of the entire incidence diagrams, with the structure maps of $T$ exactly as in the statement. By step 2 all its components are equivalences, so the componentwise-equivalence criterion makes $f$ an equivalence in the functor quasicategory.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definitions 2.4.1(iii), 3.1.13(iii); coherent replacement of edge terms"
+   }
+  },
+  {
+   "text": "The finite nerve $N(I_k)$ is small, and all diagram values are spaces in the fixed universe. The existence of small limits of spaces therefore gives both limits. An equivalence of diagrams identifies their cone categories: postcompose a cone with $f$, and postcompose with a functor inverse of $f$ for the inverse construction; the inverse-edge homotopies on postcomposition maps from coherent composition, whiskered by the two inverse homotopies of $f$, give the inverse homotopies on cones. Hence this identification preserves terminal cones. The cone characterization of limits identifies the induced map $\\operatorname{holim}T\\to\\operatorname{holim}A$ as an equivalence. Compose $a$ from step 1 with its inverse. The result is the required comparison to $\\operatorname{holim}T$. Its edge components are exactly restriction followed by inverse cocartesian factorization, since the equivalences inverted in step 2 are precomposition by the specified $q_i$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition 3.1.13(iii); agent assembly by universal properties of limits"
+   }
+  },
+  {
+   "text": "For a source equivalence $e:D'\\to D$ over $\\mathrm{id}_{[n]}$ and the specified induced equivalences $e_i:D'_i\\to D_i$, the block diagram gives $q_i e\\simeq e_iq'_i$. On edge mapping spaces this identifies $e^*f_i$ with $f'_i e_i^*$; on vertex mapping spaces use $e^*$ itself. Coherent composition supplies the homotopies of these squares and their compatibilities on higher simplices. Likewise an equivalence of inert projection diagrams induces postcomposition equivalences on all edge and vertex terms and on the target mapping space, with the incidence squares witnessed by that diagram equivalence. In both cases inverse edges induce inverse homotopies on mapping spaces. The restriction cone of step 1 commutes with these transformations. Since $f$ is an equivalence in a functor quasicategory, its inverse and inverse homotopies are coherent there; whiskering those homotopies and the cone equivalences of step 4 gives the asserted coherence of the resulting comparison. This uses equivalences of whole projection diagrams, not arbitrary independently chosen endpoint homotopies.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definitions 2.4.1(iii), 3.1.13(i),(iii); agent expansion of naturality"
+   }
+  },
+  {
+   "text": "The comparison is an equivalence of spaces. The homotopy-fiber criterion therefore makes its homotopy fiber over each point of $\\operatorname{holim}T$ contractible; such a point includes all endpoint paths and their higher compatibilities. If $n_i=0$, then $r_i^{\\mathrm{op}}$ includes the singleton $\\{t_i\\}$ and $\\beta_i^{\\mathrm{op}}:[1]\\to[0]$ is constant. The base identity in step 1 and the fixed-base-arrow application in step 2 remain valid. This covers $n=0$ as well. For $k=1$ the incidence diagram still retains both endpoint vertices, so no endpoint datum was discarded. At no point was an arbitrary arrow of $Q_{[1]}$ inverted: only source equivalences, equivalences of diagrams, and equivalences of spaces were inverted. Consequently no groupoid hypothesis on $Q_{[1]}$ has been used.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Agent consequences of the comparison; zero-length-block and non-groupoidal edge-fiber checks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Expansion of Definitions 2.4.1(iii), 3.1.13(i),(iii), in the inherited Erratum E.0.1 subroute; online source read 2026-10-17, archive WANTED. No Stacks tag states this infinity-operadic comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +125,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.RelativeMorphism.Homotopy.h₁\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.RelativeMorphism\", \"type\": \"∀ {X Y : SSet} {A : X.Subcomplex} {B : Y.Subcomplex} {φ : A.toSSet ⟶ B.toSSet} {f g : SSet.RelativeMorphism A B φ}\\n  (self : f.Homotopy g), CategoryTheory.CategoryStruct.comp SSet.ι₁ self.h = g.map\", \"doc\": \"For any homotopy between relative morphisms $f,g:(X,A)\\\\to(Y,B)$ compatible with $\\\\phi:A\\\\to B$, the composition of the standard 1-simplex inclusion $\\\\iota_1:X\\\\to X\\\\times\\\\Delta[1]$ with the homotopy map\"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy.rel\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.RelativeMorphism\", \"type\": \"∀ {X Y : SSet} {A : X.Subcomplex} {B : Y.Subcomplex} {φ : A.toSSet ⟶ B.toSSet} {f g : SSet.RelativeMorphism A B φ}\\n  (self : f.Homotopy g),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.MonoidalCategoryStruct.whiskerRight A.ι (SSet.stdSimplex.obj (SimplexCategory.mk 1))) self.h =\\n    Ca\", \"doc\": \"For relative morphisms $f,g:(X,A)\\\\to(Y,B)$ with a fixed map $\\\\phi:A\\\\to B$, the homotopy $h:X\\\\times\\\\Delta^1\\\\to Y$ satisfies the compatibility condition: the composition of the whiskered inclusion $A\\\\ho\"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy.mk.inj\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.RelativeMorphism\", \"type\": \"∀ {X Y : SSet} {A : X.Subcomplex} {B : Y.Subcomplex} {φ : A.toSSet ⟶ B.toSSet} {f g : SSet.RelativeMorphism A B φ}\\n  {h : CategoryTheory.MonoidalCategoryStruct.tensorObj X (SSet.stdSimplex.obj (SimplexCategory.mk 1)) ⟶ Y}\\n  {h₀ : autoParam (CategoryTheory.CategoryStruct.comp SSet.ι₀ h = f.map) SSet.\", \"doc\": \"Two homotopies between relative morphisms $(X,A) \\to (Y,B)$ are equal if their underlying homotopy maps, endpoint equalities, and subcomplex compatibility conditions coincide. Specifically, if $h = h_1\"}\n  {\"name\": \"ContinuousMap.HomotopyRel\", \"module\": \"Mathlib.Topology.Homotopy.Basic\", \"type\": \"(f₀ f₁ : C(X, Y)) (S : Set X)\", \"doc\": \"A homotopy between continuous maps $f_0$ and $f_1$ from $X$ to $Y$ such that every intermediate continuous map in the homotopy agrees with $f_0$ on all points of the subset $S \\\\subseteq X$.\"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.RelativeMorphism\", \"type\": \"{X Y : SSet} →\\n  {A : X.Subcomplex} →\\n    {B : Y.Subcomplex} → {φ : A.toSSet ⟶ B.toSSet} → SSet.RelativeMorphism A B φ → SSet.RelativeMorphism A B φ → Type u\", \"doc\": \"Given simplicial sets $X$ and $Y$, subcomplexes $A \\\\subseteq X$ and $B \\\\subseteq Y$, a morphism $\\\\phi: A \\\\to B$, and two relative morphisms $f,g: (X,A) \\\\to (Y,B)$, this defines the type of homotopies \"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy.h₀\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.RelativeMorphism\", \"type\": \"∀ {X Y : SSet} {A : X.Subcomplex} {B : Y.Subcomplex} {φ : A.toSSet ⟶ B.toSSet} {f g : SSet.RelativeMorphism A B φ}\\n  (self : f.Homotopy g), CategoryTheory.CategoryStruct.comp SSet.ι₀ self.h = f.map\", \"doc\": \"For any simplicial sets $X$ and $Y$, subcomplexes $A \\\\subseteq X$ and $B \\\\subseteq Y$, a morphism $\\\\phi: A \\\\to B$, and relative morphisms $f,g: (X,A) \\\\to (Y,B)$, a homotopy $h$ between $f$ and $g$ sat\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \": StrictSegal (nerve C)\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy.h\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.RelativeMorphism\", \"type\": \"{X Y : SSet} →\\n  {A : X.Subcomplex} →\\n    {B : Y.Subcomplex} →\\n      {φ : A.toSSet ⟶ B.toSSet} →\\n        {f g : SSet.RelativeMorphism A B φ} →\\n          f.Homotopy g →\\n            (CategoryTheory.MonoidalCategoryStruct.tensorObj X (SSet.stdSimplex.obj (SimplexCategory.mk 1)) ⟶ Y)\", \"doc\": \"A morphism from the product of a simplicial set $X$ with the standard 1-simplex $\\\\Delta^1$ to $Y$, representing a homotopy between relative morphisms $f,g:(X,A)\\\\to(Y,B)$ that restricts to the given ma\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: StrictSegal and ordinary nerve hits concern set-level spine bijections, not coherent operadic mapping/lifting-space comparisons. HomologicalComplex.homotopyFiber is for complexes, and GlueData is ordinary open gluing. Candidate files were read. Loogle reports an unknown identifier for the putative IsPullback name."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|Segal.*(mapping|limit|incidence)",
+   "results": "{\"t\": \"2026-10-17T11:33:51Z\", \"tool\": \"grep\", \"query\": \"operad|Segal.*(mapping|limit|incidence)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"fd86d48dbea6a9e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict-Segal/ordinary-category cocartesian declarations do not state the quasicategorical incidence mapping-space comparison. Read StrictSegal.lean:280-322 and FiberedCategory/Cocartesian.lean:45-84; grep operad hits are bibliography only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocartesian edges give equivalences on mapping spaces over a fixed arrow and operadic incidence mapping limits",
+   "results": "{\"t\": \"2026-10-17T11:33:51Z\", \"tool\": \"leansearch\", \"query\": \"Cocartesian edges give equivalences on mapping spaces over a fixed arrow and operadic incidence mapping limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsCocartesian.mk\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.mk\"], \"digest\": \"3e03023509358bd4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict-Segal/ordinary-category cocartesian declarations do not state the quasicategorical incidence mapping-space comparison. Read StrictSegal.lean:280-322 and FiberedCategory/Cocartesian.lean:45-84; grep operad hits are bibliography only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.StrictSegal",
+   "results": "{\"t\": \"2026-10-17T11:33:51Z\", \"tool\": \"loogle\", \"query\": \"SSet.StrictSegal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.StrictSegal\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\", \"SSet.StrictSegal.spineToSimplex\", \"SSet.StrictSegal.spine_spineToSimplex_apply\", \"SSet.StrictSegal.spineEquiv\"], \"digest\": \"6b047282c1b06ae8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict-Segal/ordinary-category cocartesian declarations do not state the quasicategorical incidence mapping-space comparison. Read StrictSegal.lean:280-322 and FiberedCategory/Cocartesian.lean:45-84; grep operad hits are bibliography only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a generalized nonsymmetric infinity operad mapping spaces are homotopy limits of inert block maps and vertex maps with coherent endpoint compatibility",
+   "results": "{\"t\": \"2026-10-17T11:33:54Z\", \"tool\": \"leanfinder\", \"query\": \"In a generalized nonsymmetric infinity operad mapping spaces are homotopy limits of inert block maps and vertex maps with coherent endpoint compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.nerve\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.SimplicialNerve\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\"], \"digest\": \"b34d2d0dd1210e46\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict-Segal/ordinary-category cocartesian declarations do not state the quasicategorical incidence mapping-space comparison. Read StrictSegal.lean:280-322 and FiberedCategory/Cocartesian.lean:45-84; grep operad hits are bibliography only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal property of a coCartesian arrow identifies mapping spaces over a prescribed composite base morphism; relative Segal condition for generalized operads",
+   "results": "{\"t\": \"2026-10-17T11:34:35Z\", \"tool\": \"leanfinder\", \"query\": \"The universal property of a coCartesian arrow identifies mapping spaces over a prescribed composite base morphism; relative Segal condition for generalized operads\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\"], \"digest\": \"2d8c50324104f2e2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict-Segal/ordinary-category cocartesian declarations do not state the quasicategorical incidence mapping-space comparison. Read StrictSegal.lean:280-322 and FiberedCategory/Cocartesian.lean:45-84; grep operad hits are bibliography only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-operation-segal-product",
@@ -73,5 +190,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-block-incidence-lifting",
+  "worker": "stage1",
+  "summary": "Q13 supplies six proof steps using the existing incidence mapping axiom, cocartesian mapping criterion, coherent composition, cone calculus, limits of spaces and homotopy-fiber criterion. No statement change and no new nodes. Checked fixed base arrows, all incidence vertices, zero blocks, source-equivalence coherence and absence of a groupoid assumption on the edge fiber.",
+  "blueprint": "Historical prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction; existing operadic-localization subroute through Erratum E.0.1. Steps 1-4 realize its fixed-source incidence/block comparison; steps 5-6 supply coherence and lifting-space consequences.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic coherent composition and inverse-edge homotopies, needed for endpoint and parameter compatibility; this unit has no replacement foundation."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise equivalences and cone/terminal calculus, used to transport the incidence limit; this unit has no corresponding foundational lemma."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic homotopy-fiber criterion for equivalences of spaces; used only after establishing the comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-00cd2e7f4",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-00cd2e7f4 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, with the statement of every cited node. Step 1 is the generalized-operad incidence axiom (iii) of lem-coef-operadic-algebra-presentability applied with X=D and phi=alpha over I_k. I checked that it matches Gepner-Haugseng arXiv:1312.3178v4 Def. 2.4.1(3) and 3.1.13(3), read online. I could not reach the Erratum E.0.1 text, which is acceptable because the proof is marked agent-written and the archive is WANTED. The ordinal identities (rho_i alpha)^op = (beta_i r_i)^op and the eta_j alpha vertex choice are correct. Step 2 takes the fiber at beta_i of the cocartesian mapping criterion; it is valid because the base mapping spaces are discrete. Steps 3-4 build the transformation and transport the limit; the 1-dimensional N(I_k) needs only squares. Step 5 gives naturality and step 6 the homotopy-fiber criterion. I tested k=1, n=0, zero-length blocks next to nonzero blocks, and the absence of a groupoid hypothesis; all hold. The statement is not weakened and is at least as general as the parent lem-coef-operadic-operation-segal-product needs. There are no new nodes, no duplicate in the DAG (only symmetric-operad analogues), no cycle, no SGA, and proof_deps equals the union of the steps' uses. I accept the three declared tool_uses: lem-cbc-simplicial-composition-spine, lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-fibration-fiber-criterion. FIX (two small faults, corrected item in fixes/dag/nodes/sec-six-functors/): (1) step 2 did not check the criterion's hypothesis that Q is a quasicategory; I added the inner-horn argument. (2) Step 4 used the inverse homotopies of postcomposition from lem-cbc-simplicial-composition-spine without citing it (C1/C4); I added it to the step's uses and text.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,89 @@
   "lem-coef-dg-enrichment-rectification",
   "lem-coef-enriched-category-tensor-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the small universe of the hypothesis. Write $L=\\mathrm{dgCat}_{\\mathbf Z}[\\mathrm{qe}^{-1}]_\\infty$ and $C=\\operatorname{Cat}_{\\mathbf D(\\mathbf Z)}$. Apply [lem-coef-localization-homotopy-category] to the category of small dg categories and its quasi-equivalences. Its hypothesis is exactly the coherent localization defining $L$; it identifies $hL$ with $\\mathsf{Hqe}$, compatibly with dg functors. If needed make that category small in a further universe; the universe-invariance assertion of [lem-coef-dgcat-model-structure] preserves the original morphisms and mapping spaces. We henceforth use this identification. In particular $\\operatorname{Hom}_{\\mathsf{Hqe}}(A,B)=\\pi_0\\operatorname{Map}_L(A,B)$. Naturality stated for strict dg functors also extends to their formally inverted quasi-equivalences: a commuting square of bijections still commutes after inverting its vertical bijections.",
+   "uses": [
+    "lem-coef-localization-homotopy-category",
+    "lem-coef-dgcat-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 1.6.6, Corollary 1.6.8, Remarks 7.1.4 and 7.1.6, printed pp. 24-25 and 324-325; application to dg categories by the agent."
+   }
+  },
+  {
+   "text": "Let $E:L\\simeq C$ be the equivalence given by [lem-coef-dg-enrichment-rectification]. By [lem-coef-enriched-category-tensor-calculus], $F=\\operatorname{Fun}_{\\mathbf D(\\mathbf Z)}(EJ,EB)$ is an object of the same category of small enriched categories. Essential surjectivity of $E$ gives a small dg category $F_{\\mathrm{dg}}$ and an equivalence $\\rho:E(F_{\\mathrm{dg}})\\simeq F$. Keep this choice fixed. This uses rectification for objects only; no naturality data for the given family $\\alpha$ has yet been lifted.",
+   "uses": [
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 5.8 and Example 5.11, over Z; representing-object specialization by the agent."
+   }
+  },
+  {
+   "text": "Full faithfulness of $E$, postcomposition with $\\rho$, and the closed tensor adjunction of [lem-coef-enriched-category-tensor-calculus] give, naturally in $A$, equivalences of spaces\n$$\\operatorname{Map}_L(A,F_{\\mathrm{dg}})\\simeq\\operatorname{Map}_C(EA,F)\\simeq\\operatorname{Map}_C(EA\\otimes EJ,EB)\\simeq\\operatorname{Map}_L(A\\otimes^L J,B).$$\nFor the last equivalence use exactly the tensor comparison assumed in the item, together with full faithfulness of $E$ from [lem-coef-dg-enrichment-rectification]. The closed adjunction sends $v:EA\\to F$ to $\\operatorname{ev}\\circ(v\\otimes1_{EJ})$. Taking connected components gives natural bijections $\\beta_A:\\operatorname{Hom}_{\\mathsf{Hqe}}(A,F_{\\mathrm{dg}})\\cong\\operatorname{Hom}_{\\mathsf{Hqe}}(A\\otimes^L J,B)$; step 1 supplies the identification with these Hom sets. Thus $F_{\\mathrm{dg}}$ represents the very same set-valued functor as $R_0$, with the specified evaluation convention.",
+   "uses": [
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Remark 9.5; closed enriched tensor and evaluation, specialized by the agent."
+   }
+  },
+  {
+   "text": "Put $\\gamma_A=\\beta_A^{-1}\\alpha_A$, a natural bijection from $\\operatorname{Hom}(A,R_0)$ to $\\operatorname{Hom}(A,F_{\\mathrm{dg}})$ in $\\mathsf{Hqe}$. Define $e_0=\\gamma_{R_0}(1_{R_0})$ and $f_0=\\gamma_{F_{\\mathrm{dg}}}^{-1}(1_{F_{\\mathrm{dg}}})$. Naturality, evaluated on an arrow $u:A\\to R_0$, says $\\gamma_A(u)=e_0\\circ u$. Evaluating on $f_0$ gives $e_0\\circ f_0=1_{F_{\\mathrm{dg}}}$. Applying the same calculation to the inverse natural family gives $\\gamma_A^{-1}(v)=f_0\\circ v$ and hence $f_0\\circ e_0=1_{R_0}$. These two identities prove that $e_0$ is an isomorphism. Moreover for every $u$ we have $\\alpha_A(u)=\\beta_A(e_0\\circ u)$. This is the full representing-object uniqueness argument, using only naturality, identities and inverses of bijections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Agent argument after Theorem 5.8: explicit ordinary representing-object comparison; not a theorem asserted in the paper."
+   }
+  },
+  {
+   "text": "Choose an edge $e:R_0\\to F_{\\mathrm{dg}}$ representing the class $e_0$ in $hL$. The definition of $hL$ and the equivalence-edge criterion of [lem-coef-localization-homotopy-category] show that this edge exists and is an equivalence, since $e_0$ is invertible. The functor $E$ of [lem-coef-dg-enrichment-rectification] sends $e$ to an enriched equivalence; such equivalences are fully faithful and essentially surjective. Consequently, for all objects $x,y$ of the derived enrichment of $R_0$, the induced map\n$$E(R_0)(x,y)\\longrightarrow E(F_{\\mathrm{dg}})(Ee(x),Ee(y))$$\nis an equivalence in $\\mathbf D(\\mathbf Z)$. Composing with $\\rho$ identifies these with the derived mapping objects of $F$. Thus the mapping-object conclusion follows from an actual enhanced equivalence, rather than from the bijections of Hom sets alone. Its homotopy class realizes $\\alpha$ by the last formula in step 4.",
+   "uses": [
+    "lem-coef-localization-homotopy-category",
+    "lem-coef-dg-enrichment-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 1.6.6, Corollary 1.6.8, Remarks 7.1.4 and 7.1.6, printed pp. 24-25 and 324-325; application to dg categories by the agent."
+   }
+  },
+  {
+   "text": "Let $\\epsilon_0=\\alpha_{R_0}(1_{R_0})$ and choose a representative $\\epsilon:R_0\\otimes^L J\\to B$ in $L$. Step 4 gives $\\epsilon_0=\\beta_{R_0}(e_0)$. By the explicit closed-adjunction formula in step 3, the latter class is represented, after applying $E$ and the assumed tensor identification, by\n$$E(R_0)\\otimes EJ\\xrightarrow{(\\rho\\circ E(e))\\otimes1}F\\otimes EJ\\xrightarrow{\\operatorname{ev}}EB.$$\nThe coherent evaluation and tensoring in this formula are those of [lem-coef-enriched-category-tensor-calculus]. Their preimage under the fully faithful $E$ has the same class as $\\epsilon$ in $hL$. By the homotopy-class description of morphisms in [lem-coef-localization-homotopy-category], they are joined by a homotopy in the mapping space $\\operatorname{Map}_L(R_0\\otimes^L J,B)$. This proves exactly the asserted evaluation compatibility. No choice of a contractible space of lifts of the family $\\alpha$ is asserted or needed.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-localization-homotopy-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Remark 9.5; closed enriched tensor and evaluation, specialized by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-localization-homotopy-category",
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-dg-enrichment-rectification",
+  "lem-coef-enriched-category-tensor-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Theorem 5.8 and Example 5.11, combined with Haugseng arXiv:2311.13362v1 Remark 9.5 and Cisinski CatLR Theorem 1.6.6, Corollary 1.6.8 and Remark 7.1.6. The representing-bijection and evaluation argument is written explicitly by the agent; these online sources are not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -78,10 +158,45 @@
    "results": "Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
    "date": "2026-10-17",
    "verdict": "no match: inspected generic internal-hom/currying declarations, none states this dg comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rectif|dgCat|dg.category|quasi.equivalence",
+   "results": "No hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary enriched functor categories, ordinary closed monoidal evaluation, and derived categories or Tor of objects do not state rectification or the enhanced dg-category comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rectification of categories enriched in the derived infinity category of abelian groups compares dg internal Hom representing objects and evaluation",
+   "results": "CategoryTheory.exp.ev; CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_apply_app; CategoryTheory.MonoidalCategory.dayConvolutionInternalHomDiagramFunctor_obj_obj_obj_obj; CategoryTheory.ihom.ev; CategoryTheory.EnrichedCategory.Hom; CategoryTheory.eHomFunctor_obj_obj; CategoryTheory.CatEnrichedOrdinary.homEquiv; HasDerivedCategory.standard",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary enriched functor categories, ordinary closed monoidal evaluation, and derived categories or Tor of objects do not state rectification or the enhanced dg-category comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Enriched.FunctorCategory.homEquiv",
+   "results": "CategoryTheory.Enriched.FunctorCategory.homEquiv; CategoryTheory.Enriched.FunctorCategory.homEquiv_id; CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π; CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π_assoc; CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_apply_app; CategoryTheory.Enriched.FunctorCategory.homEquiv_comp; CategoryTheory.Enriched.FunctorCategory.homEquiv_comp_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary enriched functor categories, ordinary closed monoidal evaluation, and derived categories or Tor of objects do not state rectification or the enhanced dg-category comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dg category representing derived tensor Hom is equivalent to a rectification of the enriched internal Hom in the infinity category of dg categories",
+   "results": "CategoryTheory.eHomEquiv; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.Tor_obj; CategoryTheory.Tor'; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'_obj_map; CategoryTheory.EnrichedOrdinaryCategory.homEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary enriched functor categories, ordinary closed monoidal evaluation, and derived categories or Tor of objects do not state rectification or the enhanced dg-category comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object representing Hom from derived tensor with a dg category agrees with the enriched functor infinity category by uniqueness of representing objects",
+   "results": "CategoryTheory.Enriched.FunctorCategory.homEquiv; CategoryTheory.Enriched.FunctorCategory.functorHomEquiv; CategoryTheory.Enriched.FunctorCategory.enrichedHomπ; CategoryTheory.Enriched.FunctorCategory.HasFunctorEnrichedHom; CategoryTheory.Enriched.FunctorCategory.HasEnrichedHom; CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_apply_app; CategoryTheory.Enriched.FunctorCategory.enrichedHom_condition; CategoryTheory.Enriched.FunctorCategory.enrichedHom_condition'",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary enriched functor categories, ordinary closed monoidal evaluation, and derived categories or Tor of objects do not state rectification or the enhanced dg-category comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-quasifunctor-invariance",
@@ -103,5 +218,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dgfunctor-rectified-model-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the comparison via the ordinary representing bijections after choosing a small rectification; wrote out the two inverse identities and the evaluation formula, and used the existing localization-homotopy-category theorem to lift the resulting isomorphism to an enhanced equivalence. No new nodes, no Lean attachment, no statement change. Reused the three statement foundations and one existing localization theorem; all searches were run and logged.",
+  "blueprint": "Realizes the from.place in prop-coef-integral-exceptional-adjoint, proof paragraph 2: the finite enriched Hom adjunction and its specified maps. Steps 1-3 establish the rectified representing object, step 4 proves the ordinary comparison, step 5 realizes it coherently and identifies mapping objects, and step 6 checks evaluation. This is a foundational comparison below that fixed unit route, not a replacement of the coefficient/duality proof."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N3-ea50601c8",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-ea50601c8 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the full statements of the four cited nodes (localization-homotopy-category, dgcat-model-structure, dg-enrichment-rectification, enriched-category-tensor-calculus) and the parent dg-quasifunctor-invariance together with its citing step. Step 1: the localization node gives hL = Hqe, because the rectification node defines L as the coherent localization at quasi-equivalences. Naturality descends from strict dg functors to Hqe through the node's universal property for natural transformations. Step 2: essential surjectivity of E gives F_dg and rho, and F lies in Cat_D(Z) because the tensor-calculus node makes it closed. Step 3: full faithfulness of E, postcomposition with rho, the closed adjunction and the assumed tensor agreement give beta, natural in L, with the explicit curry formula. Step 4: I checked the elementary Yoneda argument line by line: gamma(u)=e0 u, e0 f0=1 and f0 e0=1, so alpha=beta(e0 -). Step 5: the edge criterion of the localization node makes e an equivalence, and E sends it to an enriched equivalence that is fully faithful on D(Z) mapping objects. Step 6: alpha(1)=beta(e0), and equal hL classes give a homotopy; only one homotopy is claimed. Small cases are consistent: J empty (R0 terminal, F terminal), B empty with J nonempty (both empty), J the unit. The statement matches the parent's use, and the tensor hypothesis is kept explicit, so nothing is weakened. There are no new nodes and no cycle (transitive walk over 1165 nodes). An rg search for rectif/Hqe found no duplicate. All citations stay in the same unit, so no tool_uses are needed, and no SGA is cited. The item is not a target, so the base-change check does not apply. The external sources are not archived and are filed as WANTED; the proof is correctly marked agent-written and uses only node statements. No fixes."
  }
 }

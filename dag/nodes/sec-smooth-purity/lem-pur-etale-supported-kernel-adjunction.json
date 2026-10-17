@@ -12,11 +12,102 @@
   "def-weil-open-immersion",
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-pur-abelian-sheaf-kernel"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The closed immersion $i$ is finite by [lem-weil-pbc-closed-immersion-finite]. Apply [lemma-weil-pbc-finite-direct-image-exact] to $i$ in the category of abelian etale sheaves. Thus $i_*$ is exact on all abelian sheaves, with no finiteness hypothesis on their sections and no quasi-compactness hypothesis on $j$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, proof: exactness of i_*; section-closed-immersions."
+   }
+  },
+  {
+   "text": "Write $u_F:F\\to j_*j^{-1}F$ for the unit of [def-weil-pbc-inverse-image] and $a_F:P_Z(F)\\to F$ for its kernel inclusion [def-pur-abelian-sheaf-kernel]. For $v:F\\to F'$, naturality gives $u_{F'}v=j_*j^{-1}(v)u_F$, so $v a_F$ factors uniquely through $a_{F'}$; these factorizations define $P_Z$ on morphisms and obey the functor laws by uniqueness. Applying $i^{-1}$ defines the stated functor $i^!_0$. By [prop-weil-pbc-inverse-image-exact], $j^{-1}$ preserves this kernel. The counit $\\varepsilon^j:j^{-1}j_*\\to1$ is invertible by [lem-kun-open-immersion-restriction]; the triangle identity $\\varepsilon^j_{j^{-1}F}\\,j^{-1}(u_F)=1$ makes $j^{-1}(u_F)$ its inverse. Hence $j^{-1}P_Z(F)=\\ker(j^{-1}u_F)=0$, naturally in $F$.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-pur-abelian-sheaf-kernel",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-kun-open-immersion-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, preceding paragraph defining H_Z; Tag 04CA, proposition-closed-immersion-pushforward; open counit as restriction in section-extension-by-zero."
+   }
+  },
+  {
+   "text": "For any abelian sheaf $H$ on $X$, [lem-weil-pbc-inverse-image-stalk-germ] identifies $(j^{-1}H)_{\\bar o}$ with $H_{j\\bar o}$. Every geometric point of $X$ outside $Z$ factors through the open subscheme $O$. Thus $j^{-1}H=0$ implies that every geometric stalk of $H$ outside $Z$ vanishes. Conversely, if all those stalks vanish, all stalks of $j^{-1}H$ vanish, and [lemma-weil-pbc-geometric-stalk-conservative] applied to $0\\to j^{-1}H$ gives $j^{-1}H=0$. By [lem-kun-04ca], this vanishing criterion is precisely membership in the essential image of $i_*$. In particular Step 2 gives $P_Z(F)\\cong i_*B$ for some abelian sheaf $B$ on $Z$, and applying the converse criterion to $i_*G$ gives $j^{-1}i_*G=0$ for every abelian sheaf $G$ on $Z$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-kun-04ca"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA, proposition-closed-immersion-pushforward (2), and Tag 09XQ, identification of H_Z with a sheaf on Z."
+   }
+  },
+  {
+   "text": "Let $\\eta^i:1\\to i_*i^{-1}$ be the closed unit [def-weil-pbc-inverse-image]. The closed counit $\\varepsilon^i:i^{-1}i_*\\to1$ is invertible by [prop-openclosed-lowerstar-fully-faithful]. The triangle identity says $i_*(\\varepsilon^i_B)\\eta^i_{i_*B}=1$, so $\\eta^i_{i_*B}=i_*(\\varepsilon^i_B)^{-1}$ is invertible. For an isomorphism $e:P_Z(F)\\to i_*B$ from Step 3, naturality gives $i_*i^{-1}(e)\\eta^i_{P_Z(F)}=\\eta^i_{i_*B}e$. All factors except $\\eta^i_{P_Z(F)}$ are invertible, so it too is invertible. Consequently the particular canonical map $q_F=\\eta^i_{P_Z(F)}:P_Z(F)\\to i_*i^!_0F$ is an isomorphism; naturality of $\\eta^i$ and the functor from Step 2 make $q$ a natural isomorphism.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "prop-openclosed-lowerstar-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA, proposition-closed-immersion-pushforward, proof: the canonical unit on supported sheaves; Tag 09XQ, preceding paragraph."
+   }
+  },
+  {
+   "text": "For $h:i_*G\\to F$, the open adjunction [def-weil-pbc-inverse-image] identifies $\\operatorname{Hom}_X(i_*G,j_*j^{-1}F)$ with $\\operatorname{Hom}_O(j^{-1}i_*G,j^{-1}F)$. The latter has only the zero morphism by Step 3. Therefore $u_Fh=0$, and the kernel property [def-pur-abelian-sheaf-kernel] gives a unique $\\widetilde h:i_*G\\to P_Z(F)$ with $a_F\\widetilde h=h$. Conversely every such $\\widetilde h$ yields $h=a_F\\widetilde h$. These operations are inverse and commute with precomposition in $G$ and postcomposition in $F$, since $a$ is natural and its factorizations are unique. This gives a natural bijection $\\operatorname{Hom}_X(i_*G,F)\\cong\\operatorname{Hom}_X(i_*G,P_Z(F))$.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-pur-abelian-sheaf-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, proof: every map from i_*G factors through the subsheaf of supported sections."
+   }
+  },
+  {
+   "text": "Compose the bijection of Step 5 with postcomposition by $q_F$ from Step 4, then with the inverse of the fully faithful map on Hom sets from [lem-kun-04ca]. This gives\n$$\\operatorname{Hom}_X(i_*G,F)\\cong\\operatorname{Hom}_X(i_*G,i_*i^!_0F)\\cong\\operatorname{Hom}_Z(G,i^!_0F).$$\nExplicitly it sends $h$ to the unique $k$ satisfying $i_*k=q_F\\widetilde h$; its inverse sends $k$ to $a_Fq_F^{-1}i_*k$. Substituting these formulas gives the identity in both orders, using faithfulness of $i_*$. Each operation is natural in $G,F$, as shown in Steps 4 and 5 and by functoriality of $i_*$. These are the claimed natural adjunction bijections for $i_*\\dashv i^!_0$, with the exactness of its left adjoint already proved in Step 1.",
+   "uses": [
+    "lem-kun-04ca"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, displayed Hom identity in its proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-pbc-inverse-image",
+  "def-pur-abelian-sheaf-kernel",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-kun-open-immersion-restriction",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-04ca",
+  "prop-openclosed-lowerstar-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XQ, lemma-sections-with-support-acyclic, proof and preceding definition of H_Z; Tag 04CA, proposition-closed-immersion-pushforward (2)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +143,45 @@
    "results": "{\"t\": \"2026-10-17T08:39:42Z\", \"tool\": \"leanfinder\", \"query\": \"the maximal subsheaf supported on a closed subset is right adjoint to extension from that subset and preserves injective objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"instIsRightAdjointSheafSkyscraperSheafFunctorOfHasColimits\", \"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.HasSheafify.isRightAdjoint\", \"CategoryTheory.instIsRightAdjointSheafΓ\", \"CategoryTheory.Sheaf.adjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"CategoryTheory.smallSheafificationAdjunction\"], \"digest\": \"3227cf8f24662797\"}",
    "date": "2026-10-17",
    "verdict": "no match: local injectivity of morphisms and the general right-adjoint injectivity criterion do not construct the closed etale support adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes, the kernel of an etale abelian sheaf restricting to the open complement is the pushforward of its closed restriction and is right adjoint to closed pushforward",
+   "results": "{\"t\": \"2026-10-17T12:10:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed immersion of schemes, the kernel of an etale abelian sheaf restricting to the open complement is the pushforward of its closed restriction and is right adjoint to closed pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.kerAdjunction\", \"AlgebraicGeometry.Scheme.kerAdjunction_unit_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.kerFunctor\", \"AlgebraicGeometry.Scheme.kerAdjunction_counit_app\"], \"digest\": \"273e425d0ed4e405\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure sheaves, ideal-sheaf kernels or monoidal adjunctions, not the right adjoint to closed pushforward of abelian etale sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|sections_with_support|closed.*[Aa]djunction|[Aa]djunction.*closed",
+   "results": "{\"t\": \"2026-10-17T12:11:08Z\", \"tool\": \"grep\", \"query\": \"sectionsWithSupport|sections_with_support|closed.*[Aa]djunction|[Aa]djunction.*closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Parametrized.lean\", \"Mathlib/CategoryTheory/Adjunction/Parametrized.lean\", \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"Mathlib/Condensed/Light/Monoidal.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\"], \"digest\": \"480e736cbca504c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure sheaves, ideal-sheaf kernels or monoidal adjunctions, not the right adjoint to closed pushforward of abelian etale sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"support\"",
+   "results": "{\"t\": \"2026-10-17T12:11:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"support\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_pow\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_pow_succ\"], \"digest\": \"4c075eb61bc414bd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure sheaves, ideal-sheaf kernels or monoidal adjunctions, not the right adjoint to closed pushforward of abelian etale sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale closed immersion direct image is exact and has right adjoint given by the kernel of restriction to the open complement",
+   "results": "{\"t\": \"2026-10-17T12:11:35Z\", \"tool\": \"leansearch\", \"query\": \"The etale closed immersion direct image is exact and has right adjoint given by the kernel of restriction to the open complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.IsClosedImmersion.mk\"], \"digest\": \"1f30af13056b133f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure sheaves, ideal-sheaf kernels or monoidal adjunctions, not the right adjoint to closed pushforward of abelian etale sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of sections of an abelian sheaf supported on a closed subscheme is right adjoint to extension by zero from the closed subscheme",
+   "results": "{\"t\": \"2026-10-17T12:11:38Z\", \"tool\": \"leanfinder\", \"query\": \"The functor of sections of an abelian sheaf supported on a closed subscheme is right adjoint to extension by zero from the closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.kerAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.kerAdjunction_unit_app\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"CategoryTheory.instIsRightAdjointSheafΓ\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"a2c452e7f1231668\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure sheaves, ideal-sheaf kernels or monoidal adjunctions, not the right adjoint to closed pushforward of abelian etale sheaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-relative-support-bottom-descent",
@@ -74,5 +200,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-etale-supported-kernel-adjunction",
+  "worker": "stage1",
+  "summary": "Proved the support adjunction using the existing closed-support essential-image equivalence, actual closed and open adjunction counits, exact inverse image, and the existing finite-direct-image theorem. Made the canonical supported unit, kernel factorization and both directions of the natural Hom bijection explicit. No new nodes; statement unchanged.",
+  "blueprint": "The first two sentences of the current lem-pur-frame-independence.proof.md need sheaf-theoretic supported cohomology. This supplies the closed-support adjunction used in Step 4 of its descendant lem-pur-relative-support-bottom-descent; the argument follows Stacks 09XQ and 04CA without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-04ca",
+    "why": "The general equivalence between closed etale sheaves and sheaves supported on Z is a generic tool; the Kummer unit contains no such equivalence."
+   },
+   {
+    "node": "lem-kun-open-immersion-restriction",
+    "why": "Only the underived open counit isomorphism is used to show the restricted support kernel is zero; no Kunneth or derived Leray assertion is invoked."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-04ca",
+  "lem-kun-open-immersion-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-4d1149a9a",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-4d1149a9a (reviewer sub-agent of L); spot-checked: Read in full: the item, all 14 cited statements (including the main-20261015 blueprint_update of finite-direct-image-exact and of geometric-stalk-conservative), and the Stacks source at Prop 04CA (proposition-closed-immersion-pushforward) and section-cohomology-support / Lemma 09XQ (lemma-sections-with-support-acyclic) with its Hom identity. The statement matches 09XQ+04CA: an arbitrary closed immersion and Ab(X_et), with no quasi-compact or torsion hypothesis. That generality is correct on the étale site because geometric points off Z factor through O and stalks are conservative. It is unlike the pro-étale def-pur-flasque-support and det-lem-formal-closed-support-adjunction, which need quasi-compact j and work with different coefficients. Step checks: (1) closed immersion is finite, then f_* is exact on Ab. (2) Kernel functoriality, j^{-1} exact, invertible open counit plus the triangle identity give j^{-1}P_Z=0. (3) Stalk-germ comparison, factoring through O and conservativity give the stalk criterion; lem-kun-04ca's essential-image clause gives P_Z F≅i_*B and j^{-1}i_*G=0. (4) Invertible closed counit (prop-openclosed-lowerstar-fully-faithful; its coefficient category includes Ab), triangle identity and naturality show the canonical unit is iso. (5) Open adjunction plus kernel universal property. (6) Composition with the 04CA full faithfulness; explicit inverses check out. Edge cases Z=X, Z=∅, nonreduced Z and injective F all work. No new nodes. The duplicate search over dag/nodes (09XQ, H_Z, ker(F→j_*j^{-1}F), support adjunctions) found no étale abelian duplicate. Acyclic; the only citer, lem-pur-relative-support-bottom-descent Step 4, uses exactly this. Route: the off-route, non-closed citations are lem-kun-04ca and the underived counit of lem-kun-open-immersion-restriction, both declared tool_uses, which I accept. The other citations are on route, closed, Mathlib leaves or definitions. No SGA. No fixes written. Minor: the item has no lean_audit field; this comes from the earlier NC creation and is maintainer metadata, not a fault of this split."
  }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-affine-hc2-pure",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Purity of $H_c^2$ on an affine curve",
@@ -15,45 +15,180 @@
  "stmt_deps": [
   "def-weil-frobenius-module-weights",
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
  ],
  "proof": [
   {
-   "text": "By [lem-a1-affine-hc2] there is a canonical Frobenius-equivariant\nisomorphism $H_c^2(U,\\mathcal F)\\simeq W(-1)$, where\n$W=V_{\\pi_1(U)}$ is the coinvariant quotient of the geometric generic\nstalk $V=\\mathcal F_{\\bar\\eta}$ under the geometric fundamental group.",
+   "text": "Put $U=U_0\\times_{k_0}k$, $V=\\mathcal F_{\\bar\\eta}$ and $W=V_{\\pi_1(U)}$. Apply [lem-a1-affine-hc2] to the given smooth geometrically connected affine curve and lisse Weil sheaf: it supplies a Frobenius-equivariant isomorphism $e:H_c^2(U,\\mathcal F)\\xrightarrow{\\sim}W(-1)$. In particular the Frobenius used below is the one on this cohomology group, not a local Frobenius at an arbitrary closed point of $U_0$.",
    "uses": [
     "lem-a1-affine-hc2"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-affine-hc2-pure.proof.md",
+    "place": "first paragraph: the top-cohomology isomorphism"
+   }
   },
   {
-   "text": "*The coinvariants are pure of weight $w$.* The curve $U_0$ is smooth\nand geometrically connected, in particular nonempty, so\n[lem-a1-geometric-coinvariants-pure] shows that $W$ with its induced\nFrobenius $F_W$, the Frobenius of the coinvariants in\n[lem-a1-affine-hc2], is $\\iota$-pure of weight $w$.",
+   "text": "The nonempty smooth geometrically connected curve $U_0$ and the given punctually pure lisse Weil sheaf satisfy exactly the hypotheses of [lem-a1-geometric-coinvariants-pure]. Thus $(W,F_W)$ is pure of weight $w$. The current blueprint version of that lemma defines $W=\\Gamma(U,\\mathcal F^\\vee)^\\vee$ and explicitly identifies it, when $U$ is connected as here, with $V_{\\pi_1(U)}$ with induced Frobenius. Hence it is the same Frobenius quotient as in step 1; there is no assumption of semisimplicity.",
    "uses": [
-    "lem-a1-geometric-coinvariants-pure",
-    "lem-a1-affine-hc2"
+    "lem-a1-geometric-coinvariants-pure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-affine-hc2-pure.proof.md",
+    "place": "second paragraph: purity of the coinvariants"
+   }
   },
   {
-   "text": "*The twist.* By [lem-wf-tate-twist-frobenius] the geometric Frobenius\nacts on the twist $\\Qlb(-1)$ by multiplication by $q$, so the Frobenius\nof $W(-1)$ is $qF_W$, whose eigenvalues $q\\lambda$ have\n$\\iota$-modulus $q\\cdot q^{w/2}=q^{(w+2)/2}$. Hence\n$H_c^2(U,\\mathcal F)\\simeq W(-1)$ is $\\iota$-pure of weight $w+2$.",
+   "text": "Apply [lem-wf-tate-twist-frobenius] with $X_0=\\operatorname{Spec}k_0$, its unique closed point, and $m=-1$: $Q_x=q$, so the finite-coefficient-field Tate line $E(-1)$ has Frobenius $q$. The global-point and scalar-extension statement [lem-pur-twist-frobenius-scalar] gives the same multiplication by $q$ on the one-dimensional $\\Qlb(-1)$. By the tensor Frobenius formula of [def-weil-frobenius-coefficient-twists], choosing a nonzero vector $t$ in that line identifies $W(-1)$ with $W$ by $v\\otimes t\\mapsto v$, and its Frobenius with $qF_W$: $F(v\\otimes t)=F_W(v)\\otimes qt$. This uses the rank-one line and its specified Frobenius, without asserting that a choice of basis is canonical.",
    "uses": [
-    "lem-wf-tate-twist-frobenius"
+    "lem-wf-tate-twist-frobenius",
+    "lem-pur-twist-frobenius-scalar",
+    "def-weil-frobenius-coefficient-twists"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-affine-hc2-pure.proof.md",
+    "place": "third paragraph: geometric Frobenius on the Tate line and tensor action"
+   }
+  },
+  {
+   "text": "For an eigenvalue $\\beta$ of $qF_W$ choose a nonzero eigenvector $v$. Since $q\\ne0$, the equation $qF_Wv=\\beta v$ is equivalent to $F_Wv=(\\beta/q)v$. Step 2 and [def-weil-frobenius-module-weights] therefore give $|\\iota(\\beta/q)|=q^{w/2}$. As $\\iota$ fixes the positive rational integer $q$, multiplicativity of the complex absolute value gives $|\\iota(\\beta)|=q\\,q^{w/2}=q^{1+w/2}=q^{(w+2)/2}$. If $h\\ne0$ is an eigenvector in $H_c^2$ then $e(h)\\ne0$ and Frobenius equivariance makes it an eigenvector of the same eigenvalue in $W(-1)$; hence this bound is precisely purity of $H_c^2$ of weight $w+2$. If $W=0$, step 1 gives $H_c^2=0$ and there are no eigenvalues, so the same definition proves purity of every weight.",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-affine-hc2-pure.proof.md",
+    "place": "third paragraph: explicit eigenvector and absolute-value calculation"
+   }
   }
  ],
  "proof_deps": [
   "lem-a1-affine-hc2",
   "lem-a1-geometric-coinvariants-pure",
-  "lem-wf-tate-twist-frobenius"
+  "lem-wf-tate-twist-frobenius",
+  "lem-pur-twist-frobenius-scalar",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-frobenius-module-weights"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-affine-hc2-pure.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-affine-hc2-pure.proof.md",
+  "place": "all three paragraphs; expanded tensor action and eigenvector calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|FrobeniusModule|compactlySupportedCohomology|IsPureOfWeight",
+   "date": "2026-10-17",
+   "results": {
+    "hits": [],
+    "count": 0,
+    "note": ""
+   },
+   "verdict": "no match: hits concern ordinary sheaf cohomology, affine schemes, compact support of functions, Lie weights or purely inseparable Frobenius; none states weights of compactly supported Weil-sheaf cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Top compact support cohomology of a pure lisse sheaf on a curve has weight w+2",
+   "date": "2026-10-17",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.IdealSheafData.support",
+     "ExistsContDiffBumpBase.w_compact_support",
+     "HasCompactSupport.isCompact",
+     "compactlySupported_eq_top_of_isCompact",
+     "HasCompactMulSupport",
+     "Condensed",
+     "LightCondensed",
+     "LieModule.chainTop"
+    ],
+    "count": 8,
+    "note": ""
+   },
+   "verdict": "no match: hits concern ordinary sheaf cohomology, affine schemes, compact support of functions, Lie weights or purely inseparable Frobenius; none states weights of compactly supported Weil-sheaf cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"IsPure\"",
+   "date": "2026-10-17",
+   "results": {
+    "hits": [
+     "IsPurelyInseparable.iterateFrobenius",
+     "IsPurelyInseparable.algebraMap_iterateFrobenius",
+     "IsPurelyInseparable.iterateFrobenius_algebraMap",
+     "IsPurelyInseparable.iterateFrobeniusₛₗ",
+     "IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ",
+     "IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap",
+     "IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base"
+    ],
+    "count": 7,
+    "note": ""
+   },
+   "verdict": "no match: hits concern ordinary sheaf cohomology, affine schemes, compact support of functions, Lie weights or purely inseparable Frobenius; none states weights of compactly supported Weil-sheaf cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a lisse Weil sheaf punctually pure of weight w on a smooth geometrically connected affine curve, compactly supported cohomology in degree two is pure of weight w plus two",
+   "date": "2026-10-17",
+   "results": {
+    "hits": [
+     "CategoryTheory.Sheaf.H",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "CategoryTheory.Sheaf.cohomologyPresheaf",
+     "CategoryTheory.Sheaf.instAddCommGroupH",
+     "AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "Rep.FiniteCyclicGroup.groupCohomologyIsoEven"
+    ],
+    "count": 8,
+    "note": ""
+   },
+   "verdict": "no match: hits concern ordinary sheaf cohomology, affine schemes, compact support of functions, Lie weights or purely inseparable Frobenius; none states weights of compactly supported Weil-sheaf cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate[Tt]wist|pure.*weight|weight.*pure|geometric.*[Ff]robenius",
+   "date": "2026-10-17",
+   "results": {
+    "hits": [
+     "Mathlib/NumberTheory/SelbergSieve.lean"
+    ],
+    "count": 1,
+    "note": ""
+   },
+   "verdict": "no match: hits concern ordinary sheaf cohomology, affine schemes, compact support of functions, Lie weights or purely inseparable Frobenius; none states weights of compactly supported Weil-sheaf cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality for curves identifies degree two cohomology with compact support with geometric monodromy coinvariants with a Tate twist, and pure sheaves give pure Frobenius modules",
+   "date": "2026-10-17",
+   "results": {
+    "hits": [
+     "Rep.FiniteCyclicGroup.groupCohomologyIso₀",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "Rep.FiniteCyclicGroup.groupCohomologyIsoEven",
+     "groupCohomologyIsoExt",
+     "Rep.FiniteCyclicGroup.homResolutionIso",
+     "groupCohomology.H1Iso",
+     "groupCohomology.H0Iso",
+     "groupCohomologyIso"
+    ],
+    "count": 8,
+    "note": ""
+   },
+   "verdict": "no match: hits concern ordinary sheaf cohomology, affine schemes, compact support of functions, Lie weights or purely inseparable Frobenius; none states weights of compactly supported Weil-sheaf cohomology"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -122,5 +257,39 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-affine-hc2-pure",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three-paragraph blueprint route; verified all cited statements, made the E to Qbar_l twist passage explicit using the existing point-scalar lemma, and wrote out tensor Frobenius, eigenvector scaling, equivariant transport and the zero case. Added definition dependencies for the lisse Weil sheaf and ambient scheme/field conventions. No new nodes.",
+  "blueprint": "main-20261015 proof: paragraph 1 is step 1, paragraph 2 is step 2, paragraph 3 is steps 3 and 4. The endpoint argument realizes the degree-two contribution to unit sk-thm-dl-a1-upper, without changing its route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-affine-hc2",
+    "why": "The blueprint explicitly uses this general smooth-affine-curve top-cohomology description; it supplies the endpoint input, not a replacement for the unit Fourier argument."
+   },
+   {
+    "node": "lem-wf-tate-twist-frobenius",
+    "why": "Generic Tate-line Frobenius computation explicitly cited by the blueprint; the unit has no separate scalar computation."
+   },
+   {
+    "node": "lem-pur-twist-frobenius-scalar",
+    "why": "Generic coefficient-compatible point computation supplies the Qbar_l scalar extension of the E-valued Tate-line formula, absent from the unit statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-affine-hc2",
+  "lem-wf-tate-twist-frobenius",
+  "lem-pur-twist-frobenius-scalar"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-185c2b489",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-185c2b489 (reviewer sub-agent of L); spot-checked: I read all of the item. The statement matches main-20261015 lem-a1-affine-hc2-pure.md verbatim and is not weakened, and there are no new nodes. Step 1: lem-a1-affine-hc2 has the same hypotheses as the item (smooth, geometrically connected, affine curve; lisse Weil sheaf), and the step takes only its stated Frobenius-equivariant isomorphism H_c^2 ≅ V_{π1(U)}(-1). Step 2: the hypotheses of lem-a1-geometric-coinvariants-pure hold in both the original and the blueprint_update version. U_0 is nonempty because it is geometrically connected, and it is separated and of finite type as def-wf-fundamental-representation requires. The update identifies Γ(U,F^∨)^∨ with V_{π1(U)} with its induced Frobenius, so F_W is the same operator in both steps. Step 3: lem-wf-tate-twist-frobenius at X_0 = Spec k_0 with m = -1 gives q on E(-1). lem-pur-twist-frobenius-scalar gives the same scalar after extending to Qbar_l, so the change of coefficients is cited rather than silently assumed. The Frobenius of the twist comes from the tensor formula in clause 5 of def-weil-frobenius-coefficient-twists, which gives Frobenius qF_W on W(-1). Step 4 is genuinely elementary: an eigenvector calculation under the definition of weights, the transport of eigenvectors along the equivariant isomorphism, and the case W = 0. I tested the constant sheaf, a geometrically constant rank-one sheaf (eigenvalue qα), a sheaf with W = 0, a non-semisimple Frobenius, and a curve with no rational point; all are consistent. proof_deps equals the union of the uses, every cited id exists, there is no cycle, and no SGA source is cited. On duplicates: lem-a1-middle-extension-endpoints and sk-l-dl-a1-endpoints are generalizations that give the item with j = id, and lem-zl-affine-curve-hc2-purity is a special case that cites the item. The item is itself a blueprint node, so none of these duplicates it. I accept the tool uses of lem-a1-affine-hc2 and lem-wf-tate-twist-frobenius, which the blueprint proof itself cites, and of lem-pur-twist-frobenius-scalar for the coefficient comparison. I made no changes."
+ }
 }

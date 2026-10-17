@@ -3,25 +3,151 @@
  "blueprint": {
   "is": "def-tw-eigenvalue",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Eigenvalues and q-adic absolute values",
- "statement": "Let $\\alpha\\in\\overline{\\mathbf Q}_\\ell$ be an eigenvalue of the\n$\\overline{\\mathbf Q}_\\ell$-linear automorphism $\\Phi_X^*$ of\n[def-tw-frobenius-action]. The $q$-adic absolute value of\n$\\alpha$, in the *weight normalization*, is\n\n$$\n|\\alpha|:=q^{v(\\alpha)},\\qquad|q|=q,\n$$\n\nwhere $v$ is the $\\mathbf Q_\\ell$-adic valuation normalized by\n$v(q)=1$ (equivalently:\n$|\\alpha|=|\\alpha|_{\\mathbf Q_\\ell\\text{-adic}}^{-1}$ for the usual\nnormalized absolute value on $\\mathbf Q_\\ell$ with\n$|\\ell|=\\ell^{-1}$), extended to each finite extension of\n$\\mathbf Q_\\ell$ by the usual\n$(|\\alpha|)^{[K:\\mathbf Q_\\ell]}= |N_{K/\\mathbf Q_\\ell}(\\alpha)|$ rule (the absolute value\n$|\\cdot|_{\\mathbf Q_\\ell\\text{-adic}}$ alone would give\n$|q|=q^{-1}$, so the reciprocal normalization is what makes\n$|q|=q$ and hence the weight convention below). The\neigenvalue $\\alpha$ has *weight* $w\\in\\mathbf Z$ if\n$|\\alpha|=q^{w/2}$.",
+ "statement": "Fix a prime $p$, an integer $r\\geq1$, $q=p^r$, and a prime $\\ell\\neq p$, with the finite-field and coefficient conventions of [def-tw-conventions]. Let $X_0$ be a separated scheme of finite type over $\\mathbf F_q$, put $X=X_0\\times_{\\mathbf F_q}\\overline{\\mathbf F}_q$, and fix an integer $i$. Write $F=\\Phi_X^*$ for the $\\overline{\\mathbf Q}_\\ell$-linear automorphism of $H^i(X,\\overline{\\mathbf Q}_\\ell)$ defined in [def-tw-frobenius-action]. A scalar $\\alpha\\in\\overline{\\mathbf Q}_\\ell$ is an eigenvalue of $F$ if there is $v\\neq0$ with $F(v)=\\alpha v$.\n\nFix a field isomorphism $\\iota:\\overline{\\mathbf Q}_\\ell\\xrightarrow{\\sim}\\mathbf C$, with no continuity condition. For $\\beta\\in\\overline{\\mathbf Q}_\\ell$ define\n$$\n|\\beta|_\\iota:=|\\iota(\\beta)|,\n$$\nwhere the right-hand side is the complex absolute value of [def-weil-complex-absolute-value]. In particular, this convention gives $|q|_\\iota=q$.\n\nAn eigenvalue $\\alpha$ has $\\iota$-weight $w\\in\\mathbf Z$ relative to $q$ if\n$$\n|\\alpha|_\\iota=q^{w/2},\n$$\nwhere $w/2$ is a real number and the power is the positive real power of [def-weil-real-power]. When $\\iota$ is fixed, write $|\\alpha|$ for $|\\alpha|_\\iota$ and say weight $w$ in this $\\iota$-dependent sense.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-operations/def-tw-eigenvalue.md",
   "place": "node def-tw-eigenvalue, order 2591"
  },
  "stmt_deps": [
+  "def-tw-conventions",
   "def-tw-frobenius-action",
-  "def-tw-conventions"
+  "def-weil-complex-absolute-value",
+  "def-weil-real-power"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "q-adic absolute value eigenvalue weight normalization valuation",
+   "results": "8 hits: PreTilt.valAux, padicNormE, PadicAlgCl.valuation_def, Padic.valuation, padicNorm, Padic.mulValuation, Padic.ratNorm, PadicAlgCl.valuation_coe",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "grep",
+   "query": "(padicNorm|Padic.*valuation|AbsoluteValue|Valuation)",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "invalid scope: repeated Mathlib prefix; not evidence of absence; superseded by the correctly scoped searches",
+   "subdirectory": "Mathlib/NumberTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "q-adic absolute value of an eigenvalue and weight normalization",
+   "results": "8 hits: Rat.AbsoluteValue.padic, IsDedekindDomain.HeightOneSpectrum.intAdicAbvDef, Padic.isAbsoluteValue, Rat.AbsoluteValue.padic_eq_padicNorm, NumberField.RingOfIntegers.HeightOneSpectrum.adicAbv_def, IsDedekindDomain.HeightOneSpectrum.adicAbv, NumberField.RingOfIntegers.HeightOneSpectrum.adicAbv, IsDedekindDomain.HeightOneSpectrum.intAdicAbv",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, AbsoluteValue, Padic, q-adic norm",
+   "results": "0 hits: ; loogle: Unknown identifier `q`",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: Unknown identifier `q`; retried below, not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "padicNorm|AbsoluteValue|Valuation",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "invalid scope: repeated Mathlib prefix; not evidence of absence; superseded by the correctly scoped searches",
+   "subdirectory": "Mathlib/NumberTheory/Padics"
+  },
+  {
+   "tool": "leansearch",
+   "query": "define a weight by absolute value q to the w over 2",
+   "results": "8 hits: RCLike.abs_wInner_le, LieModule.Weight.mk, MvPowerSeries.IsWeightedHomogeneous, Finsupp.weight_apply, Quiver.Path.weight, BoundingSieve.weights, LieModule.Weight.noConfusionType, MvPolynomial.IsWeightedHomogeneous",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "AbsoluteValue, Valuation, Padic",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "weight of eigenvalue over algebraic closure of Q_l q-adic valuation",
+   "results": "8 hits: PreTilt.valAux, LieModule.Weight.hasEigenvalueAt, PreTilt.valAux_eq, Valuation.FiniteField.algebraMap_eq_one, Height.totalWeight, Valuation.FiniteField.algebraMap_le_one, WittVector.StandardOneDimIsocrystal, LieModule.trace_toEnd_genWeightSpace",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "grep",
+   "query": "padicNorm|valuation_coe|valuation_def",
+   "results": "25 hits: Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Defs.lean, Mathlib/NumberTheory/Padics/PadicNorm.lean, Mathlib/NumberTheory/Padics/PadicNorm.lean, Mathlib/NumberTheory/Padics/PadicNorm.lean, Mathlib/NumberTheory/Padics/PadicNorm.lean, Mathlib/NumberTheory/Padics/PadicNorm.lean, Mathlib/NumberTheory/Padics/Complex.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary ell-adic norms, incompatible with the disputed normalization and not the corrected complex weight convention",
+   "subdirectory": "NumberTheory/Padics"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPureOfWeight|frobeniusWeight|iota.*weight",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An eigenvalue has weight w relative to q if its image under an embedding into the complex numbers has norm q raised to w over two",
+   "results": "8 hits: Module.End.Eigenvalues, NumberField.InfinitePlace.norm_embedding_eq, Module.End.HasEigenvalue, RootPairing.Hom.root_weightMap, NumberField.FinitePlace.norm_embedding_eq, NumberField.InfinitePlace.embedding, Module.End.Eigenvalues.val, Module.End.hasGenEigenvalue_iff_hasEigenvalue",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPureOfWeight\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius eigenvalue has iota weight w if its complex absolute value equals q to the power w divided by two",
+   "results": "8 hits: FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, FiniteField.orderOf_frobeniusAlgHom, WittVector.frobeniusRotationCoeff, FiniteField.frobeniusAlgHom_apply, AlgHom.IsArithFrobAt.apply_of_pow_eq_one, gaussSum_frob, Module.End.HasUnifEigenvalue.exp_ne_zero, MulChar.IsQuadratic.gaussSum_frob",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "grep",
+   "query": "def.*(abs|norm)|norm_def",
+   "results": "25 hits: Mathlib/Analysis/Complex/Hadamard.lean, Mathlib/Analysis/Complex/Hadamard.lean, Mathlib/Analysis/Complex/Norm.lean, Mathlib/Analysis/Complex/Norm.lean, Mathlib/Analysis/Complex/Norm.lean, Mathlib/Analysis/Complex/Norm.lean, Mathlib/Analysis/Complex/Norm.lean, Mathlib/Analysis/Complex/PhragmenLindelof.lean",
+   "date": "2026-10-17",
+   "verdict": "partial match only: Complex.norm_def defines the complex norm, already represented by def-weil-complex-absolute-value; it does not define eigenvalue weights",
+   "subdirectory": "Analysis/Complex"
+  },
+  {
+   "tool": "leansearch",
+   "query": "iota purity of weight n complex norm of Frobenius eigenvalues equals q to the n over 2",
+   "results": "8 hits: FiniteField.Extension.frob, IsPurelyInseparable.algebraMap_iterateFrobenius, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap, iterateFrobeniusEquiv_eq_pow, WittVector.StandardOneDimIsocrystal.frobenius_apply, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base, IsPrimitiveRoot.nnnorm_eq_one, iterateFrobenius_def",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Complex.norm_def\"",
+   "results": "1 hits: Complex.norm_def",
+   "date": "2026-10-17",
+   "verdict": "partial match only: Complex.norm_def defines the complex norm, already represented by def-weil-complex-absolute-value; it does not define eigenvalue weights"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pull back complex absolute value along a field embedding and define pure weight using q raised to half an integer",
+   "results": "8 hits: ModularForm.eta_q, ModularForm.eta, NumberField.mixedEmbedding.norm, NumberField.InfinitePlace.apply, NumberField.mixedEmbedding.normAtPlace, EisensteinSeries.eisSummand, NumberField.mixedEmbedding.convexBodySumFactor, NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not define the full eigenvalue weight convention"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -46,5 +172,20 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-operations"
+ "unit": "sk-p-real-operations",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-tw-eigenvalue",
+  "worker": "stage1",
+  "summary": "Q100 direct-delivery review: corrected the impossible ell-adic normalization (q is an ell-adic unit) to the complex absolute value through a fixed field isomorphism, as in Deligne Weil II (1.2.6). Made the eigenvector meaning explicit, retained the integer-weight clause, and cited existing complex-absolute-value and real-power definitions. Read all four dependency statements, checked the two source snapshots and related Lean definitions, and recorded actual Mathlib searches. This is a definition with no proof steps and no new nodes. The source error and counterexample are detailed in report.md.",
+  "blueprint": "Realizes the eigenvalue, absolute-value notation and weight clauses of blueprint def-tw-eigenvalue (master order 2591, current main order 2935), with the explicitly reported correction of its nonexistent ell-adic normalization. The enclosing sk-p-real-operations local-polynomial argument is unchanged. The complex-weight convention agrees with sk-d-real-weights and def-weil-frobenius-module-weights; neither states this global single-eigenvalue definition in full."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-97d712377",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-97d712377 (reviewer sub-agent of L); spot-checked: Read the item, all 4 stmt_deps, both citers, the unit, the chapter, both blueprint snapshots and Weil II (0.2) and (1.2.1)-(1.2.6) in full. The source error is real. Both blueprint snapshots normalize by v_ℓ(q)=1, but ℓ≠p makes q an ℓ-adic unit: for p=q=2 and ℓ=3, v_3(2)=0 and |2|_3=1. The reciprocal of a non-archimedean norm also breaks the triangle inequality (1/|1+2|_3=3 > 1/|1|_3+1/|2|_3=2). The fix uses a fixed field isomorphism ι with |β|_ι=|ι(β)| and integer ι-weight |α|_ι=q^{w/2}. This is exactly Deligne's (0.2)/(1.2.6.1), and the chapter's sk-d-real-weights and def-weil-frobenius-module-weights use the same convention. The change is named in the report under Source error, as E7 requires. The node is not a target and does not weaken one. Checked: hypotheses match def-tw-conventions and def-tw-frobenius-action, eigenvalue is defined inline, the real-power domain holds since q>0 and w/2 is real, and |q|_ι=q. Small cases α=1, q, q^{-1}, roots of unity and H^i=0 behave correctly, and the weight is unique since q>1. No duplicate definition in the DAG (rg). Both citers (root-of-unity modulus, multiplicativity) still hold. No new nodes, no proof steps, no tool_uses, no SGA. For the maintainer: the report wrongly says the title was corrected. `title` is maintainer-owned and still says 'q-adic absolute values', so please retitle it. Please also record the definition change in HUMAN.md so the downstream semantic review is reopened. No fixes made."
+ }
 }

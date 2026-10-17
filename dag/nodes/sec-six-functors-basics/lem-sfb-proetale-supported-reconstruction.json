@@ -1,0 +1,88 @@
+{
+ "id": "lem-sfb-proetale-supported-reconstruction",
+ "kind": "statement",
+ "title": "Normalized reconstruction from two successive support conditions",
+ "statement": "Let $X,Z,S,B$ be schemes [def-pc-scheme], $i:Z\\hookrightarrow X$ and $e:B\\hookrightarrow Z$ closed immersions [def-weil-closed-immersion], and $k:X\\setminus i(Z)\\hookrightarrow X$, $u:S\\hookrightarrow Z$ their complementary open immersions [def-weil-open-immersion], so $u(S)=Z\\setminus e(B)$. Assume $k,u$ are quasi-compact morphisms: their inverse images of affine opens are quasi-compact. Let $R$ be any sheaf of commutative rings on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. All module sheaves [def-weil-sheaf-of-modules-category] below have coefficient rings obtained by inverse image of $R$ [def-weil-proetale-inverse-image]. Use the specified module adjunction $i^{-1}\\dashv i_*$ [lem-weil-pbc-ringed-topoi-module-adjunction], with unit $\\eta_i$ and counit $\\varepsilon_i$, and $u_!\\dashv u^{-1}$, with unit $\\eta_u$ and counit $\\varepsilon_u$, where $u_!$ is the sheafified extension-by-zero functor [lem-weil-pbc-proetale-ringed-open-closed]. Let $A$ be an $R$-module sheaf on $X$, $M$ a module sheaf on $S$, and $\\sigma:u^{-1}i^{-1}A\\xrightarrow{\\sim}M$ an isomorphism. Suppose $k^{-1}A=0$ and $e^{-1}i^{-1}A=0$. Then\n$$\\lambda=\\varepsilon_{u,i^{-1}A}\\circ u_!(\\sigma^{-1}):u_!M\\longrightarrow i^{-1}A$$\nis an isomorphism, and the adjoint transpose\n$$\\theta=i_*(\\lambda^{-1})\\circ\\eta_{i,A}:A\\longrightarrow i_*u_!M$$\nis an isomorphism. It is the unique morphism with prescribed restriction\n$$u^{-1}(\\varepsilon_{i,u_!M})\\circ u^{-1}i^{-1}(\\theta)=\\eta_{u,M}\\circ\\sigma.$$\nThe maps are natural for pairs of morphisms $A\\to A'$, $M\\to M'$ commuting with the given $\\sigma,\\sigma'$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Composite consequence of Tag 09AH, lemma-ses-associated-to-open, applied to two successive complementary pairs. The specified adjunction transpose and its normalization are the support-reconstruction argument extracted from the parent, not a verbatim theorem in that tag."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "recollement|extensionByZero|extension_by_zero|support.*[Cc]losed",
+   "results": "25 hits: Mathlib/RingTheory/Spectrum/Prime/Module.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Geometry/Manifold/SmoothApprox.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules on Zariski opens, sheafification, or abstract Serre quotients and complexes; none states reconstruction for two successive open/closed support conditions over arbitrary pro-etale ring sheaves with prescribed normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"counit\"",
+   "results": "4 hits: PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction, PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules on Zariski opens, sheafification, or abstract Serre quotients and complexes; none states reconstruction for two successive open/closed support conditions over arbitrary pro-etale ring sheaves with prescribed normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For complementary open and closed immersions, a module sheaf supported on the closed piece and whose restriction there is supported on an open subset is canonically recovered from that open restriction by the adjunction unit and extension by zero counit",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules on Zariski opens, sheafification, or abstract Serre quotients and complexes; none states reconstruction for two successive open/closed support conditions over arbitrary pro-etale ring sheaves with prescribed normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For open closed localization of module sheaves, reconstruct a sheaf from its open restriction when its complementary closed restriction is zero, with counit and unit normalization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.unit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, stalkSkyscraperSheafAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules on Zariski opens, sheafification, or abstract Serre quotients and complexes; none states reconstruction for two successive open/closed support conditions over arbitrary pro-etale ring sheaves with prescribed normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of an abelian recollement supported on the closed part is recovered by closed pushforward; if its closed restriction vanishes off an open stratum then open extension by zero reconstructs it with a unique prescribed restriction isomorphism",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.exists_d_comp_eq_d, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, ComplexShape.Embedding.AreComplementary.hom_ext'",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules on Zariski opens, sheafification, or abstract Serre quotients and complexes; none states reconstruction for two successive open/closed support conditions over arbitrary pro-etale ring sheaves with prescribed normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|recollement|[Ss]upport.*[Cc]losed",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules on Zariski opens, sheafification, or abstract Serre quotients and complexes; none states reconstruction for two successive open/closed support conditions over arbitrary pro-etale ring sheaves with prescribed normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-closed-extension-coherence",
+  "date": "2026-10-17",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "Proof (2), final composition-compatibility sentence: support reconstruction and adjunction-transpose normalization inside the mixed open/closed comparison (parent split Step 7).",
+   "via": [
+    "lem-sfb-locally-closed-extension-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

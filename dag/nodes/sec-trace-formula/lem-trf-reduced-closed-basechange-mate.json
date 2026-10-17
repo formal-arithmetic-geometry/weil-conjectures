@@ -2,7 +2,7 @@
  "id": "lem-trf-reduced-closed-basechange-mate",
  "kind": "statement",
  "title": "Ordinary mate of compact-support base change on a reduced closed fibre",
- "statement": "Fix the global finite-field and finite coefficient conventions [def-trf-coefficient-conventions], with $A=A_{E,n}$, and use the derived finite-Tor constructible operations and adjunctions [def-trf-admissibility]. Let $P,X,Z$ be separated finite-type $k$-schemes, let $f,t:P\\to X$ be $k$-morphisms, and let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion]. Put $P_Z=P\\times_{f,X}Z$ [def-weil-pbc-cartesian-square], let $D=(P_Z)_{\\mathrm{red}}$ be its reduction [def-pc-reduced-scheme], and write $g:D\\hookrightarrow P$ and $d_1:D\\to Z$ for the induced maps. Suppose a morphism $d_2:D\\to Z$ is given with $tg=id_2$. For $T=Rf_!t^*$ and $S=Rd_{1!}d_2^*$ there is a natural isomorphism\n$$B_K:i^*TK\\xrightarrow{\\sim}S i^*K \\quad(K\\in D^b_{ctf}(X,A)),$$\nformed by compact-support base change along $i$, followed by the reduction equivalence [i-topology] from $P_Z$ to $D$ and pullback composition.\nFor $L\\in D^b_{ctf}(Z,A)$ let $\\varepsilon_{i,L}:i^*Ri_*L\\to L$ be the ordinary counit. Define\n$$\\gamma_L:t^*Ri_*L\\xrightarrow{\\eta_g}Rg_*g^*t^*Ri_*L=Rg_*d_2^*i^*Ri_*L\\xrightarrow{Rg_*d_2^*\\varepsilon_{i,L}}Rg_*d_2^*L,$$\nand let $\\Xi:Rf_!Rg_*\\xrightarrow{\\sim}Ri_*Rd_{1!}$ be proper compact-support composition. The ordinary adjoint under $i^*\\dashv Ri_*$ of\n$$\\Xi\\circ Rf_!\\gamma_L:T Ri_*L\\longrightarrow Ri_*SL$$\nis exactly\n$$S(\\varepsilon_{i,L})\\circ B_{Ri_*L}:i^*T Ri_*L\\longrightarrow SL.$$\nIn particular, for $b_K:K\\to Ri_*i^*K$ the ordinary unit, the naturality equation is\n$$S(\\varepsilon_{i,i^*K})\\circ B_{Ri_*i^*K}\\circ i^*T(b_K)=B_K,$$\nusing $\\varepsilon_{i,i^*K}\\circ i^*b_K=1$. No Cartesian condition is imposed on the square with legs $t,d_2$.",
+ "statement": "Fix the global finite-field and finite coefficient conventions [def-trf-coefficient-conventions], with $A=A_{E,n}$, and use the derived finite-Tor constructible operations and adjunctions [def-trf-admissibility]. Let $P,X,Z$ be separated finite-type $k$-schemes, let $f,t:P\\to X$ be $k$-morphisms, and let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion]. Put $P_Z=P\\times_{f,X}Z$ [def-weil-pbc-cartesian-square], let $D=(P_Z)_{\\mathrm{red}}$ be its reduction [def-weil-pbc-scheme-reduction], and write $g:D\\hookrightarrow P$ and $d_1:D\\to Z$ for the induced maps. Suppose a morphism $d_2:D\\to Z$ is given with $tg=id_2$. For $T=Rf_!t^*$ and $S=Rd_{1!}d_2^*$ there is a natural isomorphism\n$$B_K:i^*TK\\xrightarrow{\\sim}S i^*K \\quad(K\\in D^b_{ctf}(X,A)),$$\nformed by compact-support base change along $i$, followed by the reduction equivalence [i-topology] from $P_Z$ to $D$ and pullback composition.\nFor $L\\in D^b_{ctf}(Z,A)$ let $\\varepsilon_{i,L}:i^*Ri_*L\\to L$ be the ordinary counit. Define\n$$\\gamma_L:t^*Ri_*L\\xrightarrow{\\eta_g}Rg_*g^*t^*Ri_*L=Rg_*d_2^*i^*Ri_*L\\xrightarrow{Rg_*d_2^*\\varepsilon_{i,L}}Rg_*d_2^*L,$$\nand let $\\Xi:Rf_!Rg_*\\xrightarrow{\\sim}Ri_*Rd_{1!}$ be proper compact-support composition. The ordinary adjoint under $i^*\\dashv Ri_*$ of\n$$\\Xi\\circ Rf_!\\gamma_L:T Ri_*L\\longrightarrow Ri_*SL$$\nis exactly\n$$S(\\varepsilon_{i,L})\\circ B_{Ri_*L}:i^*T Ri_*L\\longrightarrow SL.$$\nIn particular, for $b_K:K\\to Ri_*i^*K$ the ordinary unit, the naturality equation is\n$$S(\\varepsilon_{i,i^*K})\\circ B_{Ri_*i^*K}\\circ i^*T(b_K)=B_K,$$\nusing $\\varepsilon_{i,i^*K}\\circ i^*b_K=1$. No Cartesian condition is imposed on the square with legs $t,d_2$.",
  "source": {
   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
   "place": "§1.1.8(i), Cartesian up to nilpotents, §1.5.6(a) and §5.3.3, closed graded identification; legs interchanged"
@@ -12,12 +12,106 @@
   "def-trf-admissibility",
   "i-topology",
   "def-weil-closed-immersion",
-  "def-pc-reduced-scheme",
+  "def-weil-pbc-scheme-reduction",
   "def-weil-pbc-cartesian-square"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q=P_Z$, $q:Q\\to P$, $a:Q\\to Z$, and $r:D=Q_{\\mathrm{red}}\\to Q$, so $g=qr$ and $d_1=ar$. The square $(f,a,q,i)$ is Cartesian. The base-change lemma makes $q$ a closed immersion. Reduction makes $r$ a surjective closed immersion and universal homeomorphism, and closed immersions are finite. Thus $Q$ and $D$ are separated finite-type $k$-schemes by finite-over-separated-finite-type permanence. Each $k$-morphism between the schemes in use is finite type by the finite-type-to-separated-target lemma, and separated because its relative diagonal is the inverse image of its source's closed $k$-diagonal. The composite $g$ is a closed immersion: on affine charts two surjective ring homomorphisms compose to a surjection. By the closed-immersion-proper lemma, $i,q,r,g$ are proper, so the proper-coincidence comparisons used below apply. All pullbacks, ordinary direct images and compact direct images below preserve $D^b_{ctf}$ by clauses (i), (iii), (iv) of the stability theorem. In particular $Ri_*L$ is a legitimate input. We use the named ordinary adjunctions and their composition normalization throughout.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-over-separated-finite-type",
+    "lemma-nagata-finite-type-to-separated-target",
+    "thm-sf-ctf-stability",
+    "fix-prop-adjunctions",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QR (lemma-base-change-closed-immersion), 054M (lemma-reduction-universal-homeomorphism), 035C (lemma-closed-immersion-finite); finite-type and separated-domain verification; Tag 01W5 (lemma-closed-immersion-proper) for proper coincidence"
+   }
+  },
+  {
+   "text": "For $M\\in D^b_{ctf}(P,A)$ let $E_M:i^*Rf_!M\\xrightarrow{\\sim}Ra_!q^*M$ be compact-support exchange. Its invertibility is the compact-support base-change clause of the functor package. Since $i$ is finite, apply [lem-trf-finite-horizontal-shriek-mate] with $(X,Y,X',Y',p,g,f')=(P,X,Q,Z,q,i,a)$. If $\\chi^q:Rf_!Rq_*\\xrightarrow{\\sim}Ri_*Ra_!$ is proper compact-support composition, its conclusion is precisely\n$$Ri_*(E_M)\\circ\\eta_{i,Rf_!M}=\\chi^q_{q^*M}\\circ Rf_!(\\eta_{q,M}).\\tag{1}$$\nThis identifies the actual geometric exchange, not just an unspecified isomorphism with the same endpoints.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "prop-functor-package",
+    "lem-trf-finite-horizontal-shriek-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.8(i), genuine Cartesian square before reduction; finite-horizontal mate normalization supplied by the cited existing node"
+   }
+  },
+  {
+   "text": "The reduction equivalence [i-topology] has invertible ordinary unit $\\eta_r:\\mathrm{id}\\to Rr_*r^*$ and $Rr_*=Rr_!$. Consequently, under compact-support composition, the reduction comparison is\n$$Ra_!N\\xrightarrow{Ra_!(\\eta_{r,N})}Ra_!Rr_*r^*N\\simeq Rd_{1!}r^*N.$$\nSet $E^D_M=Ra_!(\\eta_{r,q^*M})\\circ E_M$, with this final composition identification understood. It is a natural isomorphism. For $M=t^*K$, the equality $tg=id_2$ identifies $r^*q^*t^*K=d_2^*i^*K$, so $E^D_{t^*K}$ is exactly the specified $B_K$. This uses only composition of pullbacks for the second leg.",
+   "uses": [
+    "i-topology",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.8(i), Cartesian up to nilpotents; §1.5.6(a), reduced closed restriction"
+   }
+  },
+  {
+   "text": "We now substitute the reduction unit into (1). Let $\\chi^g:Rf_!Rg_*\\xrightarrow{\\sim}Ri_*Rd_{1!}$ be composition. The composite ordinary unit formula gives\n$$\\eta_{g,M}=Rq_*(\\eta_{r,q^*M})\\circ\\eta_{q,M}.$$\nNaturality of $\\chi^q$ at $\\eta_{r,q^*M}$ gives\n$$\\chi^q_{Rr_*r^*q^*M}\\circ Rf_!Rq_*(\\eta_{r,q^*M})\n=Ri_*Ra_!(\\eta_{r,q^*M})\\circ\\chi^q_{q^*M}.$$\nAssociativity of compact-support composition identifies $\\chi^g$ with $\\chi^q Rr_*$ followed by $Ri_*(Ra_!Rr_*\\simeq Rd_{1!})$, after $Rg_*=Rq_*Rr_*$ and the proper comparisons. Substitute these two equalities and (1) to obtain\n$$\\chi^g_{g^*M}\\circ Rf_!(\\eta_{g,M})\n=Ri_*(E^D_M)\\circ\\eta_{i,Rf_!M}.\\tag{2}$$\nThis is a direct naturality calculation; no exchange theorem for a second Cartesian square is invoked.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "prop-functor-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.8(i); explicit composition-unit calculation for inserting the reduction equivalence"
+   }
+  },
+  {
+   "text": "Fix $L\\in D^b_{ctf}(Z,A)$ and put $M=t^*Ri_*L$ and $N=d_2^*L$. Under $g^*M=d_2^*i^*Ri_*L$, let $\\delta=d_2^*(\\varepsilon_{i,L}):g^*M\\to N$. The given map is $\\gamma_L=Rg_*(\\delta)\\circ\\eta_{g,M}$. Naturality of $\\chi^g$ at $\\delta$ and (2) compute its pushforward:\n$$\\begin{aligned}\n\\Xi_N\\circ Rf_!(\\gamma_L)\n&=Ri_*Rd_{1!}(\\delta)\\circ\\chi^g_{g^*M}\\circ Rf_!(\\eta_{g,M})\\\\\n&=Ri_*\\bigl(S(\\varepsilon_{i,L})\\circ B_{Ri_*L}\\bigr)\\circ\\eta_{i,TRi_*L}.\n\\end{aligned}$$\nHere $\\Xi=\\chi^g$ is the composition map in the statement. The right-hand side is the inverse ordinary transpose of $S(\\varepsilon_{i,L})\\circ B_{Ri_*L}$. Transposing it explicitly applies $i^*$ and then $\\varepsilon_i$; naturality of $\\varepsilon_i$ moves this morphism to the left, and $\\varepsilon_{i,i^*A}\\circ i^*(\\eta_{i,A})=1$ for $A=TRi_*L$ cancels the remaining two factors. This proves the asserted ordinary adjoint formula.",
+   "uses": [
+    "fix-prop-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.6(a)(ii), proper pushforward; §1.5.9 and §5.3.3, closed graded map; explicit ordinary transpose calculation, legs interchanged"
+   }
+  },
+  {
+   "text": "Finally, naturality of $B:i^*T\\to Si^*$ for the unit $b_K:K\\to Ri_*i^*K$ reads\n$$B_{Ri_*i^*K}\\circ i^*T(b_K)=S(i^*b_K)\\circ B_K.$$\nPostcompose with $S(\\varepsilon_{i,i^*K})$. Functoriality combines the two $S$-images, and the ordinary triangle identity $\\varepsilon_{i,i^*K}\\circ i^*b_K=1$ leaves $B_K$. This is the stated naturality equation. All formulas are natural in their coefficients, and the second leg has been used solely through $tg=id_2$.",
+   "uses": [
+    "fix-prop-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.3.3, compatibility of the closed graded coefficient with the localization map; explicit naturality and triangle cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "lemma-nagata-finite-type-to-separated-target",
+  "thm-sf-ctf-stability",
+  "fix-prop-adjunctions",
+  "lem-weil-pbc-closed-immersion-proper",
+  "prop-functor-package",
+  "lem-trf-finite-horizontal-shriek-mate",
+  "i-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§1.1.6, 1.1.8(i), 1.5.6(a), 1.5.9, 5.3.3; explicit ordinary-mate calculation using the existing finite-horizontal normalization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +140,52 @@
    "results": "0 hits: ; Mathlib/CategoryTheory; these are ordinary adjunctions or scalar/topological base change, not the stated compact-support coefficient-map comparison",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For compact support direct image on constructible derived categories, base change to a reduced closed fibre has ordinary adjoint the closed pushforward composition and unit map",
+   "results": "{\"t\": \"2026-10-17T10:20:46Z\", \"tool\": \"leanfinder\", \"query\": \"For compact support direct image on constructible derived categories, base change to a reduced closed fibre has ordinary adjoint the closed pushforward composition and unit map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\"], \"digest\": \"708dcef01b54cadc\"}; Ordinary sheaf adjunction or general category-theoretic mate results, not an exact statement or one-line specialization identifying the specified compact-support geometric exchange after reduction. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:83-150 for the general mate formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-17T10:20:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}; Ordinary sheaf adjunction or general category-theoretic mate results, not an exact statement or one-line specialization identifying the specified compact-support geometric exchange after reduction. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:83-150 for the general mate formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*counit|counit.*baseChange|shriek.*mate|mate.*shriek",
+   "results": "{\"t\": \"2026-10-17T10:20:47Z\", \"tool\": \"grep\", \"query\": \"baseChange.*counit|counit.*baseChange|shriek.*mate|mate.*shriek\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Ordinary sheaf adjunction or general category-theoretic mate results, not an exact statement or one-line specialization identifying the specified compact-support geometric exchange after reduction. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:83-150 for the general mate formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate of compactly supported base change for a reduced closed subscheme is the unit followed by proper composition",
+   "results": "{\"t\": \"2026-10-17T10:20:48Z\", \"tool\": \"leansearch\", \"query\": \"The mate of compactly supported base change for a reduced closed subscheme is the unit followed by proper composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.unit_mateEquiv\", \"CompHausLike.LocallyConstant.adjunction_unit\", \"IsBaseChange.comp\", \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"Module.Dual.baseChange_baseChange\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.IsProper.comp_iff\", \"IsBaseChange.comp_iff\"], \"digest\": \"c0ce2f2a4a982fff\"}; Ordinary sheaf adjunction or general category-theoretic mate results, not an exact statement or one-line specialization identifying the specified compact-support geometric exchange after reduction. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:83-150 for the general mate formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley transformation for proper horizontal maps and compact support pushforward, compatibility with adjunction units after a universal homeomorphism",
+   "results": "{\"t\": \"2026-10-17T10:21:52Z\", \"tool\": \"leanfinder\", \"query\": \"Beck Chevalley transformation for proper horizontal maps and compact support pushforward, compatibility with adjunction units after a universal homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\"], \"digest\": \"03c2ea03f2943799\"}; Ordinary sheaf adjunction or general category-theoretic mate results, not an exact statement or one-line specialization identifying the specified compact-support geometric exchange after reduction. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:83-150 for the general mate formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|LowerShriek|compactSupport.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*compactSupport",
+   "results": "{\"t\": \"2026-10-17T10:21:52Z\", \"tool\": \"grep\", \"query\": \"lowerShriek|LowerShriek|compactSupport.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*compactSupport\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Ordinary sheaf adjunction or general category-theoretic mate results, not an exact statement or one-line specialization identifying the specified compact-support geometric exchange after reduction. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:83-150 for the general mate formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-triangle-compatibility",
@@ -66,5 +202,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-reduced-closed-basechange-mate",
+  "worker": "stage1",
+  "summary": "Split the closed-reduced mate identity into the genuine finite-horizontal Cartesian mate, insertion of the reduction unit, naturality of proper composition, and explicit ordinary triangle cancellations. No new nodes. Corrected only the definition reference for the reduction object; the old reference defined reducedness, not the reduction construction. Searched project Lean and Mathlib without an attachment or exact Mathlib match. Resumption audit explicitly cites the existing closed-immersion-proper leaf to justify proper coincidence.",
+  "blueprint": "Induced closed morphisms paragraph of lem-trf-trace-triangle-compatibility: identifies the reduced closed pushforward and its compatibility with the localization unit, realizing the triangle-compatibility step of sk-i-additivity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Reduction is a surjective closed universal homeomorphism; this is a geometric tool, not a replacement of the localization route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-separated-finite-type",
+    "why": "Verifies the scheme domains of the closed fibre and its reduction; the additivity unit has no general scheme-domain lemma."
+   },
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Verifies finite type of the given k-morphisms; a generic scheme-theoretic tool absent from the additivity unit."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Uses ordinary composite-unit normalization and triangle identities only, needed to compute the closed localization map."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Uses compact-support base change, proper coincidence and associative composition as generic geometric operations for the closed restriction."
+   },
+   {
+    "node": "lem-trf-finite-horizontal-shriek-mate",
+    "why": "Supplies the actual geometric exchange/unit identity on the unreduced Cartesian square; the additivity unit does not state this normalization."
+   },
+   {
+    "node": "i-topology",
+    "why": "Removes nilpotents using the specified invertible unit; no node in the additivity unit supplies topological invariance."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Uses only pullback and the two direct-image preservation clauses (i), (iii), (iv) to verify all finite-Tor domains."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "lemma-nagata-finite-type-to-separated-target",
+  "fix-prop-adjunctions",
+  "prop-functor-package",
+  "lem-trf-finite-horizontal-shriek-mate",
+  "i-topology",
+  "thm-sf-ctf-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-544f641c6",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-544f641c6 (reviewer sub-agent of L); spot-checked: I read the item in full, all 16 cited statements, both citers and Varshavsky §§1.1.6, 1.1.8(i), 1.5.6(a), 1.5.9, 5.3.3. There are no new nodes and I made no changes; fixes/ is empty. Statement: the content is unchanged. The only change replaces the stmt_dep def-pc-reduced-scheme, which defines the property of being reduced, with def-weil-pbc-scheme-reduction, which constructs X_red; that is the correct reference. With the legs interchanged (Varshavsky pushes forward along c_2, the project along c_1), B_K matches Varshavsky's 1.1.8(i) base-change map for a square Cartesian up to nilpotents on c_1^{-1}(Z)_red, with the same orientation and the same coefficient category D^b_ctf(-,A_{E,n}). Only tg = i d_2 is assumed on the second leg, and nothing is weakened. Step 1: the scheme hypotheses follow from the closed-immersion base-change, reduction, finiteness and properness leaves, the finite-over-separated-finite-type leaf, the nagata finite-type lemma (its old statement is true, and its blueprint_update only weakens the conclusion), and ctf-stability (i), (iii), (iv). Step 2: substituting (P,X,Q,Z,q,i,a) into lem-trf-finite-horizontal-shriek-mate gives (1) exactly; I checked that its hypotheses hold (Cartesian square, i finite, f separated of finite type). Step 3: i-topology gives an invertible η_r and Rr_*=Rr_!, so E^D_{t^*K}=B_K. Steps 4–6: I recomputed (2) from the composite-unit formula, naturality of χ^q and associativity, then the transpose Ri_*(S(ε)∘B)∘η_i and the triangle-identity cancellation; all are correct. Edge cases checked: Z empty, i=id, P=Spec k[ε]/ε², a non-Cartesian constant second leg, and zero objects. The tool_uses are declared and accepted. There is no cycle, proof_deps equals the union of the step uses, and no SGA source is used. My duplicate search compared invariant-closed-basechange-identification, proper-coefficient-adjoint, finite-horizontal-shriek-mate, trace-map-exchange and invariant-localization-filtered-lift; none duplicates the item."
  }
 }

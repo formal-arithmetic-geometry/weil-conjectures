@@ -12,9 +12,144 @@
   "lem-coef-cocartesian-straightening",
   "lem-coef-system-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=NC$ and $A(c)=(NH(c),W_c)$. First identify the relative nerve of the strict diagram $NH$ with $NT$, using the explicit simplex formula of [lem-cbc-marked-relative-nerve-quillen]. A simplex of $NT$ is a string $(c_i,x_i)$ with base arrows $f_{ij}$ and fibre arrows $v_{ij}:H(f_{ij})x_i\\to x_j$, satisfying $v_{ik}=v_{jk}\\,H(f_{jk})(v_{ij})$. For a nonempty subset $J\\subseteq[n]$ with maximum $m$, define the functor $t_J:[J]\\to H(c_m)$ by $t_J(j)=H(f_{jm})x_j$ and $t_J(i\\to j)=H(f_{jm})(v_{ij})$. The displayed composition identity makes this a functor, and strictness of $H$ gives exactly the restriction identities in the cited relative-nerve formula. Conversely its singleton and two-element components recover $x_i$ and $v_{ij}$; its three-element components give the displayed identity. The larger components are then forced by the restriction identities. The two constructions are inverse and commute with all monotone restrictions, including repetitions, since $H$ preserves identities. They give an isomorphism over $K$. Under it the marked edges of $N_C^+(NH(-)^\\natural)$ are precisely the pairs $(f,v)$ with $v$ an isomorphism.",
+   "uses": [
+    "lem-cbc-marked-relative-nerve-quillen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 4.2, Definition 4.4 and Lemma 4.8; the simplex isomorphism written out"
+   }
+  },
+  {
+   "text": "Each $NH(c)$ is a quasicategory: view $H(c)$ as a locally Kan simplicial category with discrete mapping sets and use [lem-coef-coherent-nerve-comparison], which identifies its coherent nerve with its ordinary nerve. Thus $NH(c)^\\natural$ is fibrant in the marked model of [lem-coef-marked-point-cartesian-model]. The diagram is projectively fibrant, since projective fibrations are objectwise. Apply [lem-cbc-marked-relative-nerve-quillen] to this diagram. Its marked relative nerve is a fibrant cocartesian family, and the derived comparison identifies its classifying diagram with $c\\mapsto NH(c)$, including the identity comparison on every fibre. Combined with step 1 this classifies $NT\\to K$, with exactly the marking just computed. In particular all $\\bar f_x=(f,1)$ are cocartesian. The comparison is natural in strict diagrams and in restriction of the base, as asserted in that node; we retain this classification datum.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-cbc-marked-relative-nerve-quillen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 4.6(ii), Remark 4.7 and Lemma 4.8; also HTT Corollary 3.2.5.20 and Proposition 3.2.5.21"
+   }
+  },
+  {
+   "text": "Since $N_C^+(NH(-)^\\natural)$ is fibrant in the cocartesian model structure of [lem-coef-marked-relative-cartesian-model], whose fibrant objects are exactly $Z^\\natural$ with marking the cocartesian edges, step 1 shows that every cocartesian edge of $NT$ has the form $(f,v)$ with $v$ an isomorphism, and factors as $(1,v)\\bar f_x$. The functor $q$ sends $(1,v)$ to an equivalence in $\\mathcal P_d$ and sends $\\bar f_x$ to a cocartesian edge by hypothesis. In the intrinsic mapping-square criterion of [lem-coef-cocartesian-straightening], postcomposing an edge with an equivalence identifies its mapping square with the old square by equivalences on the top row, so preserves the homotopy-pullback property. Hence $q$ preserves every cocartesian edge. Write $D=\\operatorname{St}_K(p)$. Applying the straightening equivalence to this morphism and the classification from step 2 gives a coherent transformation $\\theta:UA\\to D$, where $U$ forgets the system. Its component at $c$ is $q_c$, under the retained fibre identifications. This is a morphism of classifying diagrams, so already includes the transport squares and every compositional coherence.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Second proof paragraph, coherent finite-stage comparison; agent argument using the stated straightening equivalence"
+   }
+  },
+  {
+   "text": "The transformation $\\theta$ lifts to $\\theta^W:A\\to GD$ in $\\operatorname{Fun}(K,\\mathsf{WCat}_\\infty)$. Here is the check on the systems, rather than a separate choice of transport comparisons. Its component $q_c$ inverts $W_c$, since $q_c\\simeq J_c\\lambda_c$ and $\\lambda_c$ inverts $W_c$ by [lem-coef-system-localization-universal]. The arrows of $A$ preserve $W$ by hypothesis, and every arrow of $D$ preserves equivalences. For a mixed arrow in the coherent diagram $K\\times\\Delta^1$, either composite $D(f)q_c\\simeq q_dH(f)$ therefore preserves the designated systems. The mapping spaces defining $\\mathsf{WCat}_\\infty$ are unions of the system-preserving components of functor cores. All the coherence simplices of $\\theta$ lie in those same components, so lift with their entire simplices; composition stays there. This proves the lift in the concrete coherent-nerve model of $\\operatorname{Cat}_\\infty$ from [lem-coef-marked-point-cartesian-model]. In particular this step retains the given higher coherences of $q$; it does not reconstruct a transformation from unrelated fibre maps.",
+   "uses": [
+    "lem-coef-system-localization-universal",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Second proof paragraph; relative-diagram lift checked directly from the systems and their union-of-components mapping spaces"
+   }
+  },
+  {
+   "text": "Postcomposition gives functors $L_*:\\operatorname{Fun}(K,\\mathsf{WCat}_\\infty)\\rightleftarrows\\operatorname{Fun}(K,\\operatorname{Cat}_\\infty):G_*$. These are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. Whisker the unit $\\eta$ and counit $\\epsilon$ of the adjunction in [lem-coef-system-localization-universal] by the entire diagrams. They give transformations $1\\to G_*L_*$ and $L_*G_*\\to1$. Precomposing each of the two coherent triangle homotopies by $K$ gives the triangle homotopy in the corresponding functor quasicategory: concretely a simplicial homotopy of transformations precomposed on its diagram variable remains such a homotopy. Thus these postcomposition functors carry the unit, counit and triangles needed for the coherent adjunct mapping-space lemma; there is no assumption here that an objectwise bijection of homotopy classes supplies the higher data.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Second proof paragraph; formal whiskering of the specified localization adjunction and its triangles"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-adjunction-mapping-equivalence] to the functors and triangles of step 5. With $H_\\infty=L_*A$, it gives the equivalence of full mapping spaces\n$$\\Phi:\\operatorname{Map}_{\\operatorname{Fun}(K,\\operatorname{Cat}_\\infty)}(H_\\infty,D)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathsf{WCat}_\\infty)}(A,G_*D),\\qquad b\\longmapsto G_*b\\circ\\eta_A.$$\nIts inverse is represented by $a\\mapsto\\epsilon_D\\circ L_*a$. Take $\\beta=\\epsilon_D\\circ L_*\\theta^W$ together with the inverse-equivalence homotopy $\\Phi(\\beta)\\simeq\\theta^W$. Forgetting systems yields a coherent identification $\\beta\\lambda\\simeq\\theta$, where $\\lambda:UA\\to H_\\infty$ is the underlying pointwise localization unit. All higher naturality is retained, because this is an equivalence of mapping spaces in functor quasicategories, not a collection of independent fibrewise extensions.",
+   "uses": [
+    "lem-coef-infinity-adjunction-mapping-equivalence",
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Second proof paragraph; coherent localization-adjunction calculation, with explicit adjunct and its specified restriction homotopy"
+   }
+  },
+  {
+   "text": "Evaluate this identification at $c$. It gives $\\beta_c\\lambda_c\\simeq q_c\\simeq J_c\\lambda_c$, where the second homotopy is the specified factorization in the hypothesis. The functor-category localization equivalence of [lem-coef-system-localization-universal], applied to target $\\mathcal P_c$, is fully faithful on the mapping spaces between $\\beta_c$ and $J_c$. It therefore lifts the displayed homotopy to a natural equivalence $\\alpha_c:\\beta_c\\simeq J_c$, with its specified restriction; the space of such lifts is contractible. To check equivalence, lift the inverse homotopy too and use full faithfulness on the two composites to obtain inverse-triangle homotopies. In particular $\\beta_c$ is an equivalence, since $J_c$ is. The factorization and the classification data are retained in these identifications; forgetting them would discard the uniqueness assertion being proved.",
+   "uses": [
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Second proof paragraph; full faithfulness of fibre localization applied to the specified comparison functors"
+   }
+  },
+  {
+   "text": "One may realize these components by the very representatives $J_c$, if equality of simplicial edge representatives is desired. Let $V\\subseteq K$ be its discrete simplicial subset of vertices and put $B=(K\\times\\partial\\Delta^1)\\cup(V\\times\\Delta^1)\\subseteq K\\times\\Delta^1$. Keep $H_\\infty,D$ on the two endpoint copies of $K$ and put $J_c$ on the vertex intervals; these data define a functor $B\\to\\operatorname{Cat}_\\infty$. The paths $\\alpha_c$ of step 7 in the functor cores, viewed as homotopies of parallel edges with fixed endpoints, give an equivalence from the restriction of $\\beta$ to these boundary data. The restriction isofibration in [lem-coef-infinity-isofibration-exponentiation], applied to this degreewise inclusion and the quasicategory $\\operatorname{Cat}_\\infty$, lifts that equivalence. Its new endpoint is a transformation $\\overline\\theta:H_\\infty\\to D$ with component $J_c$ and the same endpoint diagrams. Compose the lifted equivalence with the restriction homotopy of step 6 to retain $\\overline\\theta\\lambda\\simeq\\theta$. This is only a change of representatives of the comparison with its identifications.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Second proof paragraph; representative adjustment by the existing restriction-isofibration theorem"
+   }
+  },
+  {
+   "text": "All components of $\\overline\\theta$ are equivalences by step 7. The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] makes it an equivalence in $\\operatorname{Fun}(K,\\operatorname{Cat}_\\infty)$. Applying the inverse of the equivalence [lem-coef-cocartesian-straightening] yields an equivalence $\\int_C H_\\infty\\simeq\\mathcal P$ over $K$. The evaluation/base-change assertion of that node identifies its fibre functors with the retained $J_c$. Its transport along $f$ is the arrow of $L_*A$, namely the localization of $H(f)$; the transformation $\\overline\\theta$ identifies it with transport in $p$. For a string of base arrows, this identification is the restriction of that same transformation to its simplex, and for every face and degeneracy it is its simplicial restriction. Hence it includes the asserted compositional and higher naturality coherences.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Second proof paragraph; transport of the coherent equivalence through straightening"
+   }
+  },
+  {
+   "text": "Finally retain the comparison with $q$, all fibre-factorization homotopies, and the classification data, as the statement requires. The space of pairs $(b,\\Phi(b)\\simeq\\theta^W)$ is the homotopy fibre of the mapping-space equivalence in step 6 and is contractible. Each additional identification with $J_c$ together with its specified restriction is a homotopy fibre of the fully faithful fibre-localization equivalence of step 7, hence is also contractible. These identifications can be realized as in step 8; one counts the resulting transformations with their equivalences and restriction data, not arbitrary fillers after those data have been forgotten. Classification together with its equivalence is contractible by [lem-coef-cocartesian-straightening]. Thus these successive spaces of retained choices are contractible. The maps defining them use composition, whiskering of $L,\\eta,\\epsilon$, and the natural mapping-space equivalence of [lem-coef-infinity-adjunction-mapping-equivalence]. Restriction of the base and functors of the displayed data commute with those operations and with straightening. This gives the claimed natural construction, including all parameter simplices. Empty $C$ and empty fibres require no separate choices: the same homotopy-fibre statements and empty products apply in the containing universes.",
+   "uses": [
+    "lem-coef-infinity-adjunction-mapping-equivalence",
+    "lem-coef-system-localization-universal",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Second proof paragraph; naturality and uniqueness with the factorization and classification data retained"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-marked-relative-nerve-quillen",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-system-localization-universal",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-adjunction-mapping-equivalence",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-marked-relative-cartesian-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Second proof paragraph, coherent finite-coefficient adjunction before derived inverse limit; explicit classifying-diagram comparison via the localization adjunction. Relative-nerve input follows Haugseng 4.1 and the already stated marked relative-nerve theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +206,52 @@
    "results": "{\"t\": \"2026-10-17T08:39:45Z\", \"tool\": \"leansearch\", \"query\": \"A natural transformation of diagrams factors through their pointwise infinity categorical localizations coherently\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "unstraighten|cocartesian.*localiz|localiz.*cocartesian|relative.?nerve",
+   "results": "{\"t\": \"2026-10-17T11:27:11Z\", \"tool\": \"grep\", \"query\": \"unstraighten|cocartesian.*localiz|localiz.*cocartesian|relative.?nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits for infinity-categorical straightening/localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-17T11:27:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\"], \"digest\": \"8ecc599d4e57ab3e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories, Grothendieck constructions, sheafification or ordinary derived/Kan extensions, not this coherent infinity-category classifier comparison. Read Mathlib/CategoryTheory/Grothendieck.lean:20-75, CategoryTheory/FiberedCategory/Cocartesian.lean:68-90, CategoryTheory/Functor/Derived/PointwiseRightDerived.lean:146-157, CategoryTheory/Adjunction/Whiskering.lean:28-55, CategoryTheory/Localization/Adjunction.lean:32-90 and CategoryTheory/Sites/Localization.lean:28-65."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise localization of a diagram of infinity categories is left adjoint to inclusion of diagrams marked by equivalences",
+   "results": "{\"t\": \"2026-10-17T11:27:12Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise localization of a diagram of infinity categories is left adjoint to inclusion of diagrams marked by equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsoOfIsLocalization\", \"CategoryTheory.Functor.hasPointwiseLeftDerivedFunctorAt_iff\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionAtOfIsoOfIsLocalization\", \"CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionOfIsIsoOfIsLocalization\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfHasPointwiseLeftDerivedFunctor\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.mk\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\"], \"digest\": \"58479b7ab9bfcb1f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories, Grothendieck constructions, sheafification or ordinary derived/Kan extensions, not this coherent infinity-category classifier comparison. Read Mathlib/CategoryTheory/Grothendieck.lean:20-75, CategoryTheory/FiberedCategory/Cocartesian.lean:68-90, CategoryTheory/Functor/Derived/PointwiseRightDerived.lean:146-157, CategoryTheory/Adjunction/Whiskering.lean:28-55, CategoryTheory/Localization/Adjunction.lean:32-90 and CategoryTheory/Sites/Localization.lean:28-65."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocartesian functor from an ordinary Grothendieck construction that localizes every fiber induces a coherent equivalence between its pointwise localized diagram and the straightening of the target fibration",
+   "results": "{\"t\": \"2026-10-17T11:27:14Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian functor from an ordinary Grothendieck construction that localizes every fiber induces a coherent equivalence between its pointwise localized diagram and the straightening of the target fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalence_functor\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalence\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceFunctor\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"CategoryTheory.CostructuredArrow.grothendieckPrecompFunctorEquivalence\"], \"digest\": \"4a3df6cedc9586b5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories, Grothendieck constructions, sheafification or ordinary derived/Kan extensions, not this coherent infinity-category classifier comparison. Read Mathlib/CategoryTheory/Grothendieck.lean:20-75, CategoryTheory/FiberedCategory/Cocartesian.lean:68-90, CategoryTheory/Functor/Derived/PointwiseRightDerived.lean:146-157, CategoryTheory/Adjunction/Whiskering.lean:28-55, CategoryTheory/Localization/Adjunction.lean:32-90 and CategoryTheory/Sites/Localization.lean:28-65."
+  },
+  {
+   "tool": "grep",
+   "query": "isPointwiseLeftKanExtensionOfIsoOfIsLocalization|instIsLocalizationFunctorOppositeSheafPresheafToSheafW|IsStronglyCocartesian|def whiskerRight",
+   "results": "{\"t\": \"2026-10-17T11:27:56Z\", \"tool\": \"grep\", \"query\": \"isPointwiseLeftKanExtensionOfIsoOfIsLocalization|instIsLocalizationFunctorOppositeSheafPresheafToSheafW|IsStronglyCocartesian|def whiskerRight\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"digest\": \"3c4c7c5cb4626ed1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories, Grothendieck constructions, sheafification or ordinary derived/Kan extensions, not this coherent infinity-category classifier comparison. Read Mathlib/CategoryTheory/Grothendieck.lean:20-75, CategoryTheory/FiberedCategory/Cocartesian.lean:68-90, CategoryTheory/Functor/Derived/PointwiseRightDerived.lean:146-157, CategoryTheory/Adjunction/Whiskering.lean:28-55, CategoryTheory/Localization/Adjunction.lean:32-90 and CategoryTheory/Sites/Localization.lean:28-65."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction of infinity categories induces an adjunction by postcomposition on coherent functor categories so a natural transformation factors through pointwise localization with contractible choices",
+   "results": "{\"t\": \"2026-10-17T11:27:58Z\", \"tool\": \"leanfinder\", \"query\": \"An adjunction of infinity categories induces an adjunction by postcomposition on coherent functor categories so a natural transformation factors through pointwise localization with contractible choices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.localization\", \"CategoryTheory.Adjunction.Localization.η\", \"CategoryTheory.Adjunction.Localization.ε\", \"CategoryTheory.Adjunction.Localization.η_app\", \"CategoryTheory.Adjunction.Localization.ε_app\", \"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Adjunction.localization_unit_app\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\"], \"digest\": \"a99fe85dd3be684a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories, Grothendieck constructions, sheafification or ordinary derived/Kan extensions, not this coherent infinity-category classifier comparison. Read Mathlib/CategoryTheory/Grothendieck.lean:20-75, CategoryTheory/FiberedCategory/Cocartesian.lean:68-90, CategoryTheory/Functor/Derived/PointwiseRightDerived.lean:146-157, CategoryTheory/Adjunction/Whiskering.lean:28-55, CategoryTheory/Localization/Adjunction.lean:32-90 and CategoryTheory/Sites/Localization.lean:28-65."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-grothendieck-fibre-localization",
@@ -99,5 +276,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-grothendieck-classifier-localization",
+  "worker": "stage1",
+  "summary": "Q43 wrote the coherent classifier comparison in ten steps, reusing existing relative-nerve, straightening, systems-localization, adjunct mapping-space and componentwise-equivalence nodes. No new nodes and no statement change. The argument factors the whole transformation via L left adjoint G, identifies the specified fibre functors by full faithfulness, and retains the restriction and classification data in its contractibility assertion. Searched project source, DAG, whole blueprint and Mathlib; no attachment or Mathlib match.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint, original second proof paragraph, requires coherent finite-stage adjunction maps before R lim. This item supplies the classifier comparison inside the descendant Grothendieck fibre-localization argument. Steps 1-3 realize the relative-nerve classification; steps 4-8 the coherent localization factorization; steps 9-10 its equivalence and uniqueness. No unit statement or route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-marked-relative-nerve-quillen",
+    "why": "Generic marked relative-nerve formula and its comparison with unstraightening for a strict ordinary-indexed diagram; the current unit has no such formula."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory functor-category closure and detection of natural equivalences on components; no coefficient-specific argument or unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-marked-relative-nerve-quillen",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-8b82e7267",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-8b82e7267 (reviewer sub-agent of L); spot-checked: I read the item in full: all 10 steps, the statement of every cited node, and Haugseng arXiv:1312.3881v4 online (Def 4.2/4.4, Thm 4.6, Rem 4.7, Lemma 4.8, Cor 4.22). The statement is unchanged and not weakened. It is a genuine proper sublemma of lem-coef-grothendieck-fibre-localization, and there are no new nodes. Step 1: I checked the simplex formula (functoriality of t_J, restriction by strictness of H, composition law (g,w)(f,v)=(gf,w g_!v), marked edges are those with v invertible) against Haugseng Lemma 4.8. Steps 2-9 each use only statement clauses of their cited nodes. Step 4: the lift to WCat_inf is a check of its definition (unions of components, systems closed under homotopy). Step 5: the counit and triangle homotopies are part of 'left adjoint' in the DAG convention (pointwise-adjoint criterion). Step 6: the adjunct direction is correct, and forgetting systems gives beta lambda ~ theta. Step 7: full faithfulness of restriction along lambda_c gives alpha_c, with a contractible space of choices. Step 8: the lift along the isofibration over B=(K x dDelta^1) u (V x Delta^1) gives components exactly J_c. Step 10: the contractibility is assembled from homotopy fibres. Small cases checked: C terminal, W = isomorphisms, an empty fibre. One fault, fixed: step 3 assumed that every cocartesian edge of NT is (f,v) with v invertible, which needs the clause 'fibrant objects are exactly Z^natural' of lem-coef-marked-relative-cartesian-model (same unit, no cycle). I added that citation to step 3 and to proof_deps in fixes/. tool_uses accepted: lem-cbc-marked-relative-nerve-quillen and lem-cbc-enhanced-functor-cone-calculus are generic black boxes from unit sk-prop-sf-cbc. No SGA source is used, and there is no cycle.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,88 @@
+{
+ "id": "lem-pe-ring-sheafification-underlying-sets",
+ "kind": "statement",
+ "title": "Ring sheafification commutes with underlying sets on any small site",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], and take ring and set values in a common universe containing the site data [def-weil-size-convention]. Let $P:\\mathcal C^{\\mathrm{op}}\\to\\operatorname{Ring}$ be a presheaf of associative unital rings, not assumed commutative, and let $\\eta_P:P\\to P^\\#$ be its ring-valued sheafification [def-weil-pbc-sheafification]. Write $|-|$ for forgetting to sets, and $\\eta_{|P|}:|P|\\to(|P|)^\\#$ for set-valued sheafification. There is an isomorphism $e_P:(|P|)^\\#\\xrightarrow{\\sim}|P^\\#|$, natural in $P$, satisfying $e_P\\circ\\eta_{|P|}=|\\eta_P|$. In particular, $|P^\\#|$ is a sheaf of sets and $|\\eta_P|$ exhibits the sheafification of $|P|$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YR, section-sheaves-algebraic-structures, assertions (alpha), (beta), (gamma), (epsilon); rings are a type of algebraic structure. The precise natural isomorphism and unit identity are Mathlib sheafifyComposeIso and sheafComposeIso_hom_fac."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On any small site sheafification of a presheaf of possibly noncommutative rings commutes with forgetting to sets and identifies the sheafification units",
+   "results": "Returned PresheafOfModules.sheafificationCompForgetCompToPresheaf, sheafificationCompToSheaf and module adjunction/unit lemmas; none of these hits is the ring-to-set comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match among these semantic hits; the second phrasing and Loogle find the general comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafifyComposeIso\"",
+   "results": "CategoryTheory.sheafifyComposeIso, Mathlib.CategoryTheory.Sites.PreservesSheafification.",
+   "date": "2026-10-17",
+   "verdict": "generalization: specialize to forget RingCat; includes arbitrary noncommutative rings."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafifyComposeIso|sheafComposeIso_hom_fac|PreservesSheafification",
+   "results": "CategoryTheory/Sites/PreservesSheafification.lean: returned documentation at 16,21,25,32 and the class at 61; the narrower follow-up reads the declarations.",
+   "date": "2026-10-17",
+   "verdict": "candidate; broad search hits were capped before declaration lines."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of ring presheaves commutes with the forgetful functor to sets",
+   "results": "Returned PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, toSheaf_map_sheafificationHomEquiv_symm, sheafificationCompForgetCompToPresheaf, ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget, toPresheaf_map_toSheafify, toPresheaf_map_sheafificationAdjunction_unit_app, sheafificationCompToSheaf, and AlgebraicGeometry.Scheme.ringCatSheaf.",
+   "date": "2026-10-17",
+   "verdict": "no exact ring-to-set comparison among these hits; Loogle and the follow-up LeanFinder identify the general comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "CategoryTheory.sheafifyComposeIso and sheafComposeIso_hom_fac with the forgetful functor from RingCat to Type",
+   "results": "CategoryTheory.sheafifyComposeIso, CategoryTheory.sheafComposeIso_hom_fac and presheafToSheafCompComposeAndSheafifyIso, alongside module sheafification comparisons.",
+   "date": "2026-10-17",
+   "verdict": "generalization: the first two declarations specialized to forget RingCat give the isomorphism and its unit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafifyComposeIso|sheafComposeIso_hom_fac",
+   "results": "CategoryTheory/Sites/PreservesSheafification.lean:32 documentation, 233 definition sheafifyComposeIso, 239 lemma sheafComposeIso_hom_fac, 240 its unit equation, and 246 inverse equation. Read lines 228-247 and 305-314, plus RingCat forgetful instances.",
+   "date": "2026-10-17",
+   "verdict": "match: natural comparison and unit compatibility, with RingCat instance hypotheses verified in source."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.sheafifyComposeIso, CategoryTheory.sheafComposeIso_hom_fac",
+  "file": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+  "line": 233,
+  "how": "Specializes in one line per clause to F := forget RingCat: sheafifyComposeIso at lines 233-236 gives the natural comparison and sheafComposeIso_hom_fac at lines 239-242 gives its unit equation. The concrete-forgetful PreservesSheafification instance at lines 305-314 applies. Instance hypotheses read: RingCat.forget_preservesLimits, Mathlib/Algebra/Category/Ring/Limits.lean:403-404 (arbitrary sized version :396-401); RingCat.FilteredColimits.forget_preservesFilteredColimits, Mathlib/Algebra/Category/Ring/FilteredColimits.lean:309-310; RingCat.forgetReflectIsos, Mathlib/Algebra/Category/Ring/Basic.lean:360-365. HasSheafCompose is Whiskering.lean:161-163, and HasSheafify for value universes containing the site follows from LeftExact.lean:308-312. These are instances for RingCat and Type in the chosen common universe, not additional assumptions on the site or on commutativity."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-pe-constant-left-module-inverse-image",
+  "date": "2026-10-17",
+  "group": "Q142"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sf-comparison",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comparison-affine-continuity",
+   "place": "Proof Step 1, exact constant-coefficient comparison inverse image: identification of the sheafified constant coefficient ring on the two sites before transporting its module action.",
+   "via": [
+    "lem-pe-constant-left-module-inverse-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

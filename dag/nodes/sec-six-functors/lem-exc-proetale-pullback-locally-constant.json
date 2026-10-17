@@ -15,9 +15,51 @@
   "prop-weil-pbc-proetale-constant-ring-map",
   "def-weil-proetale-locally-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The base-change functor defining the pro-etale inverse image preserves finite limits and coverings, so by the site pullback construction it gives a geometric morphism of the two pro-etale topoi. The module inverse image in the statement is $f^*F=f^{-1}F\\otimes_{f^{-1}A_X}A_V$ along the structure map $c$, which [prop-weil-pbc-proetale-constant-ring-map] shows is an isomorphism. Tensoring along a ring isomorphism is $f^{-1}F$ with $A_V$ acting through $c^{-1}$. This is the module inverse image $f_A^*$ of [lem-pe-constant-left-module-inverse-image]: its canonical isomorphism $f^{-1}A_X\\cong A_V$ also preserves constant scalars, so it equals $c$, since a ring-sheaf map out of the constant sheaf $A_V$ is determined on constant sections. Apply [lem-sfb-geometric-inverse-image-constant-module] to this morphism with the finite $A$-module $M_j$. It gives a canonical $A_V$-linear isomorphism $f^*\\underline{M_j}_X\\cong\\underline{M_j}_V$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R, lemma-pullback-locally-constant; the pro-etale geometric-morphism specialization uses Tags 00X6 and 00YV"
+   }
+  },
+  {
+   "text": "Put $W_j=V\\times_XU_j=u_f(U_j)$. The family $\\{W_j\\to V\\}$ is a covering because the base-change functor $u_f$ of [def-weil-proetale-inverse-image] is covering-preserving. Apply [lem-weil-pbc-localize-ringed-site-morphism] to $u_f$, the ring map $c:f^{-1}A_X\\to A_V$ and the object $U_j$. It gives the localized morphism of sites $f_j:V_{\\mathrm{proet}}/W_j\\to X_{\\mathrm{proet}}/U_j$, induced by $(T\\to U_j)\\mapsto(u_f(T)\\to W_j)$, with ring map $c|_{W_j}$. It also gives a natural isomorphism $(f^*F)|_{W_j}\\cong f_j^*(F|_{U_j})$ of tensor module pullbacks. The ring map $c|_{W_j}$ is an isomorphism, being the restriction of the isomorphism of [prop-weil-pbc-proetale-constant-ring-map]. So, as in step 1, $f_j^*$ is the module inverse image of [lem-pe-constant-left-module-inverse-image] for the geometric morphism $f_j$. Restricted constant ring sheaves are the constant ring sheaves of the localized sites, by the same lemma applied to the localization morphisms. Apply $f_j^*$ to the given trivialization $F|_{U_j}\\cong\\underline{M_j}_{U_j}$, then apply [lem-sfb-geometric-inverse-image-constant-module] to $f_j$. The composite is\n$$\n (f^*F)|_{W_j}\\cong f_j^*(F|_{U_j})\\cong f_j^*\\underline{M_j}_{U_j}\\cong\\underline{M_j}_{W_j}.\n$$\nEach $M_j$ is unchanged, hence remains a finite $A$-module. These are precisely the required local trivializations. No step selects a point or a nonzero section: for an empty $W_j$ both module sheaves are zero, so the same isomorphism applies. For empty $X$ the covering may be empty, and then so is its base change.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R, lemma-pullback-locally-constant (proof omitted); localization of the morphism of ringed sites: Tag 04J0, lemma-localize-morphism-ringed-sites, and sites.tex Tag 03CF, lemma-localize-morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-localize-ringed-site-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093R, lemma-pullback-locally-constant: its proof is omitted; the two steps supply the covering argument using the cited existing constant-module and localized-inverse-image statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +116,66 @@
    "results": "25 hits: Mathlib/Probability/Distributions/Gaussian/CharFun.lean, Mathlib/Analysis/Calculus/MeanValue.lean, Mathlib/Analysis/Calculus/MeanValue.lean, Mathlib/Analysis/Calculus/MeanValue.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean",
    "date": "2026-10-17",
    "verdict": "no match: constant-sheaf characterizations, locally constant functions, or condensed constructions do not state pro-etale module inverse image preserving finite local trivializations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a morphism of pro-etale topoi preserves locally constant sheaves of finite modules and preserves each constant module model",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map; CompHausLike.LocallyConstantModule.functor_map_val; LightCondMod.LocallyConstant.functorToPresheaves; CompHausLike.LocallyConstantModule.functor_obj_val; CondensedMod.LocallyConstant.functor; LightCondMod.LocallyConstant.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat. None states pro-etale module pullback preserving finite local models.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of a locally constant finite module sheaf on a small pro-etale site is locally constant on the base-changed pro-etale site with the same finite module values",
+   "results": "8 hits: LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; SheafOfModules.pullbackObjFreeIso; Condensed.lanSheafProfinite; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstant.functor_obj_val; CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app; AlgebraicGeometry.Scheme.Modules.inv_app; CompHausLike.LocallyConstantModule.functor_map_val. None states the requested pro-etale module result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsConstant, SheafOfModules.pullback, IsLocallyConstantSheaf",
+   "results": "0 hits; unknown identifier IsLocallyConstantSheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant|IsFiniteLocallyConstant|constantSheaf.*pullback|pullback.*constant",
+   "results": "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ColimCoyoneda.lean:149; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:158; neither gives the requested module-sheaf statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric inverse image of a constant module sheaf is canonically the constant sheaf with the same module",
+   "results": "8 hits: ModuleCat.Tilde.res_const; AlgebraicGeometry.StructureSheaf.comap_const; AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app; ModuleCat.tilde; AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map; SheafOfModules.unit. None is the general site statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometric morphism sends a constant sheaf of modules to the constant sheaf with the same module",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.Sheaf.isConstant_congr; CategoryTheory.Sheaf.IsConstant.mem_essImage; CategoryTheory.Sheaf.mem_essImage_of_isConstant; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.constantSheafΓAdj; CategoryTheory.constantSheaf; CategoryTheory.Sheaf.isConstant_iff_mem_essImage. None states the module inverse-image comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, CategoryTheory.Sheaf.IsConstant",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(pullback|inverseImage)|((pullback|inverseImage).*constant)",
+   "results": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:158; no general pro-etale module result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-exc-explicit-preservation",
@@ -89,10 +187,54 @@
  "blueprint": {
   "from": {
    "node": "thm-exc-explicit-preservation",
-   "place": "Imported proof paragraph 1, constructibility calculation: inverse image of each locally constant finite module trivialization remains locally constant with the same finite module labels",
+   "place": "Proof paragraph 1: inverse image of a locally constant finite module sheaf is locally constant with the same finite module fibres",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-proetale-pullback-locally-constant",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Tag 093R's omitted proof for the pro-etale geometric morphism. The existing general constant-module inverse-image lemma supplies each pulled-back constant model; the pro-etale inverse-image and constant-ring nodes supply the covering, localization, and coefficient identifications. No new node was needed. Maintainer-reader FIX: step 2 now takes the localized morphism and the restriction isomorphism of tensor module pullbacks from lem-weil-pbc-localize-ringed-site-morphism (Stacks 03CF/04J0). Both steps now write out how the tensor pullback along the coefficient isomorphism is identified with the fixed-ring module inverse image of lem-pe-constant-left-module-inverse-image.",
+  "blueprint": "Realizes the first proof paragraph of thm-exc-explicit-preservation at the sentence 'inverse image of a locally constant finite module sheaf is locally constant with the same finite module fibres'.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "The step needs the generic geometric-morphism theorem that inverse image sends every constant module sheaf to the same constant module sheaf; no node in this unit supplies that general tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "The module pullback must be identified over the target constant ring via the canonical pro-etale coefficient isomorphism; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "The restriction compatibility on localized sites is needed to transport each local trivialization; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "The pro-etale base-change functor must be recognized as inducing a geometric morphism with the required inverse-image functor; no node in this unit supplies the site-level construction."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Step 2 needs the localized morphism of sites and the isomorphism (f^*F)|_{W_j} = f_j^*(F|_{U_j}) for the tensor module pullback (Stacks 03CF/04J0); no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-localize-ringed-site-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-360867710",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-360867710 (reviewer sub-agent of L); spot-checked: I read the item, the unit sk-prop-sf-rf-shriek-preservation, the parent thm-exc-explicit-preservation and every cited statement in full. Source: Stacks 093R (sites-modules.tex lemma-pullback-locally-constant, about line 8435; its proof is omitted, so the item is correctly an agent proof); I also checked 03CF (sites.tex line 6265) and 04J0 (sites-modules.tex line 2369). The statement is correct and not weakened: it is exactly the 'locally constant with the same finite models' that the parent's step 2 uses, with f_proet of def-weil-proetale-inverse-image and A_X-module coefficients, and the coefficient map c is shown to be an isomorphism and matched to c^f_A by prop-weil-pbc-proetale-constant-ring-map. Tested cases: X empty, V empty, an empty W_j, f = id, and f an object of X_proet (which agrees with lem-sfb-proetale-object-inverse-image-restriction). No duplicate in the DAG (the matches found are etale analogues or different statements); no new nodes. One fault, C3/C4, repaired: step 2 took the localized morphism f_j and the isomorphism (f^*F)|_{W_j} = f_j^*(F|_{U_j}) from a loose compatibility clause of the unsplit lem-pe-constant-left-module-inverse-image, which does not state that isomorphism and concerns a different pullback functor. The fix cites the reviewed node lem-weil-pbc-localize-ringed-site-morphism (03CF/04J0), which states exactly this for tensor module pullbacks with ring map c|_U. Steps 1 and 2 now also write out why the tensor pullback along the isomorphism c is the fixed-ring module inverse image f_R^* that lem-sfb-geometric-inverse-image-constant-module uses. Accepted tool_uses: lem-sfb-geometric-inverse-image-constant-module, prop-weil-pbc-proetale-constant-ring-map, lem-pe-constant-left-module-inverse-image, lem-weil-pbc-left-exact-site-inverse-image-tensor, plus the added lem-weil-pbc-localize-ringed-site-morphism. Statement, stmt_deps and blueprint are unchanged; proof_deps is the union of the uses; both steps are under 2000 characters; no cycle; no SGA. Corrected file: fixes/dag/nodes/sec-six-functors/lem-exc-proetale-pullback-locally-constant.json; details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
