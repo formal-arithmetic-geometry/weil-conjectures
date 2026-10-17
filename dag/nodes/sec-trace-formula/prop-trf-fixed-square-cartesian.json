@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "prop-trf-fixed-square-cartesian",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The fixed square is Cartesian",
- "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, put $s=\\Spec k$, and let\n$c=(c_1,c_2):C\\to X\\times_sX$ be a\ncohomological correspondence with\nfixed scheme\n$F=\\operatorname{Fix}(c)$ of [def-trf-fixed-scheme] and projections\n$i_F:F\\to C$, $d:F\\to X$. Then the square\n\n$$\n\\begin{array}{ccc}\nF & \\xrightarrow{i_F} & C\\\\\n{\\scriptstyle d}\\downarrow & & \\downarrow{\\scriptstyle c}\\\\\nX & \\xrightarrow{\\Delta_X} & X\\times_sX\n\\end{array}\n$$\n\nis Cartesian, the composites\n$c_1i_F$ and $c_2i_F$ both equal $d$, and the identity\n$\\Delta_Xd=ci_F$ holds. Moreover the composition law for the\nexceptional inverse image gives\n\n$$\nRd^!\\xrightarrow{\\ \\sim\\ }Ri_F^!Rc_1^!\n$$\n\n(the adjoint form of the composition law $R(c_1i_F)_!\\cong Rc_{1!}Ri_{F!}$ of [thm-sf-comp-composition],\nas $d=c_1i_F$); it is the only unconditional \"!\"-transport of the two\nlegs in the fixed square, see also the remark below.",
+ "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, put $s=\\Spec k$, and let\n$c=(c_1,c_2):C\\to X\\times_sX$ be a\ncohomological correspondence with\nfixed scheme\n$F=\\operatorname{Fix}(c)$ of [def-trf-fixed-scheme] and projections\n$i_F:F\\to C$, $d:F\\to X$. Then the square\n\n$$\n\\begin{array}{ccc}\nF & \\xrightarrow{i_F} & C\\\\\n{\\scriptstyle d}\\downarrow & & \\downarrow{\\scriptstyle c}\\\\\nX & \\xrightarrow{\\Delta_X} & X\\times_sX\n\\end{array}\n$$\n\nis Cartesian, the composites\n$c_1i_F$ and $c_2i_F$ both equal $d$, and the identity\n$\\Delta_Xd=ci_F$ holds. Moreover the composition law for the\nexceptional inverse image gives\n\n$$\nRd^!\\xrightarrow{\\ \\sim\\ }Ri_F^!Rc_1^!\n$$\n\nas a natural isomorphism of functors $D^b_{ctf}(X,A)\\to D^b_{ctf}(F,A)$\n(the adjoint form of the composition law $R(c_1i_F)_!\\cong Rc_{1!}Ri_{F!}$ of [thm-sf-comp-composition],\nas $d=c_1i_F$). The displayed isomorphism is a composition comparison for $d=c_1i_F$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/prop-trf-fixed-square-cartesian.md",
   "place": "node prop-trf-fixed-square-cartesian, order 2279"
@@ -18,30 +18,213 @@
   "def-trf-coefficient-conventions",
   "def-trf-correspondence",
   "def-weil-finite-field-fiber",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-cartesian-square"
  ],
  "proof": [
   {
-   "text": "By [def-trf-fixed-scheme], $F$ is the fiber product\n$C\\times_{X\\times_sX,c,\\Delta_X}X$, which is precisely the assertion that\nthe square is Cartesian. The composites $c_1i_F$ and $c_2i_F$ are the\nprojections $p_1,p_2:X\\times_sX\\to X$ applied to the identity\n$\\Delta_Xd=ci_F$ of [def-trf-fixed-scheme], hence both equal $d$;\nthe identity $\\Delta_Xd=ci_F$ is part of the fiber-product data. The\nlast displayed isomorphism is the composition law for the exceptional\ninverse image of [def-trf-admissibility] applied to the equality\n$d=c_1i_F$ in the form\n$R(c_1i_F)^!=Ri_F^!Rc_1^!$.",
+   "text": "By [def-trf-fixed-scheme], $F=C\\times_{X\\times_sX,c,\\Delta_X}X$ with its specified projections $i_F,d$. In particular $ci_F=\\Delta_Xd$. Explicitly, for every scheme $T$ and morphisms $a:T\\to C$, $b:T\\to X$ satisfying $ca=\\Delta_Xb$, the defining universal property gives a unique $t:T\\to F$ with $i_Ft=a$ and $dt=b$. This is exactly the Cartesian-square condition of [def-weil-pbc-cartesian-square], with the canonical identification of $F$ with the displayed fibre product.",
    "uses": [
     "def-trf-fixed-scheme",
-    "def-trf-admissibility"
+    "def-weil-pbc-cartesian-square"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/prop-trf-fixed-square-cartesian.proof.md",
+    "place": "Proof, sole paragraph"
+   }
+  },
+  {
+   "text": "Let $p_1,p_2:X\\times_sX\\to X$ be the two product projections. By definition of $c=(c_1,c_2)$ and of the diagonal, $p_jc=c_j$ and $p_j\\Delta_X=\\mathrm{id}_X$. Applying $p_j$ to $ci_F=\\Delta_Xd$ gives $c_ji_F=d$ for $j=1,2$. These agree with the projection identities recorded in [def-trf-fixed-scheme]. Thus the commutativity identity and both leg identities hold as identities of scheme morphisms, not merely on points.",
+   "uses": [
+    "def-trf-fixed-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/prop-trf-fixed-square-cartesian.proof.md",
+    "place": "Proof, sole paragraph"
+   }
+  },
+  {
+   "text": "Check the geometric hypotheses for the functors. By [def-trf-correspondence], $X$ and $C$ are separated finite-type $k$-schemes. Since separatedness means the diagonal is a closed immersion [def-weil-proper-morphism], $\\Delta_X$ is closed. The Cartesian square of Step 1 and [lem-weil-pbc-proper-fp-permanence](b),(c) make $i_F$ a closed immersion and hence proper, separated and finite type. Its affine inverse images have coordinate rings $B/I$ for affine charts $\\operatorname{Spec}B\\subset C$ [def-weil-closed-immersion]; a finite affine $k$-cover of $C$ therefore gives a finite affine cover of $F$ by finitely generated $k$-algebras, so $F$ is finite type [def-weil-finite-type-morphism]. Separatedness of $F/k$ follows by composition from [lem-weil-pbc-proper-fp-permanence](e). Apply [lemma-nagata-finite-type-to-separated-target] to the triangles $C\\to X\\to\\operatorname{Spec}k$ and $F\\to X\\to\\operatorname{Spec}k$: $c_1$ and $d$ are finite type. They are separated as well: for either $T=C,F$ and $h:T\\to X$, the square expressing $\\Delta_{T/X}$ as the pullback of $\\Delta_{T/k}$ along $T\\times_XT\\to T\\times_kT$ is Cartesian by the fibre-product universal property; [lem-weil-pbc-proper-fp-permanence](b) makes this diagonal closed. Thus $i_F,c_1,d$ are all separated finite-type morphisms between separated finite-type $k$-schemes.",
+   "uses": [
+    "def-trf-correspondence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lemma-nagata-finite-type-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QR (lemma-base-change-closed-immersion), 01W5 (lemma-closed-immersion-proper), 01T8 (lemma-permanence-finite-type); schemes.tex Tag 01KU (lemma-separated-permanence)"
+   }
+  },
+  {
+   "text": "The targets $C,X$ of these three morphisms are quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine], applied to their separated finite-type structure maps to the affine scheme $\\operatorname{Spec}k$. Thus [thm-nagata-compactification] supplies a compactification $T\\xrightarrow{j}\\overline T\\xrightarrow{p}Y$ for each of $i_F,c_1,d$. The proper map $p$ is finite type [def-weil-proper-morphism]. To check that $\\overline T$ is finite type over $k$, cover $Y$ by finitely many affine finite-type $k$-charts and each inverse image by finitely many affine finite-type charts over that chart. Composing the two finite lists of algebra generators gives finitely generated $k$-algebras and a finite affine cover, precisely [def-weil-finite-type-morphism]. Each $\\overline T$ therefore has finite dimension by [lem-kun-dimension-finite-type]; choose a nonnegative integral upper bound (choose $0$ for the empty scheme). These are exactly the compactification and dimension hypotheses needed for the bounded-class adjunction in the next steps.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "thm-nagata-compactification",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/prop-trf-fixed-square-cartesian.proof.md",
+    "place": "Proof, sole paragraph"
+   }
+  },
+  {
+   "text": "Use ordinary constant-$A_{E,n}$ module coefficients and the constructible exceptional functor of [def-weil-exceptional-inverse-image], rather than an unrestricted ambient pro-etale right adjoint. Every object of $D^b_{ctf}(T,A)$, being bounded constructible, has a bounded etale-origin witness by [lem-sf-proetale-constructible-origin](ii). By [thm-sf-preservation-class](1),(2) for the three maps of Step 3, $Rd^!N$ and $Ri_F^!Rc_1^!N$ lie in $D^b_{ctf}(F,A)$ whenever $N\\in D^b_{ctf}(X,A)$; the intermediate $Rc_1^!N$ is bounded below. All targets here are separated finite-type $k$-schemes, as required by that theorem. The coefficient ring is exactly the finite ring $A=A_{E,n}$ with $\\ell\\ne\\operatorname{char}k$ fixed in [def-trf-coefficient-conventions].",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-proetale-constructible-origin",
+    "thm-sf-preservation-class",
+    "def-trf-coefficient-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/prop-trf-fixed-square-cartesian.proof.md",
+    "place": "Proof, sole paragraph"
+   }
+  },
+  {
+   "text": "For $M\\in D^b_{ctf}(F,A)$ and $N\\in D^b_{ctf}(X,A)$, apply [thm-sf-comp-composition] with $f=i_F$, $g=c_1$ and $g f=d$ from Step 2. It gives $\\alpha:Rc_{1!}Ri_{F!}\\xrightarrow{\\sim}Rd_!$ on bounded-below etale-origin inputs, and says that the compact-support functors preserve that class. Thus $Ri_{F!}M$ is a valid source input to the bounded-class adjunction for $c_1$. The natural Hom bijections of [thm-sf-ambient-adjoint-class](2), with the exceptional functors of Step 5, give\n$$\\begin{aligned}\n\\operatorname{Hom}_F(M,Rd^!N)&\\cong\\operatorname{Hom}_X(Rd_!M,N)\\\\\n&\\xrightarrow{\\alpha_M^*}\\operatorname{Hom}_X(Rc_{1!}Ri_{F!}M,N)\\\\\n&\\cong\\operatorname{Hom}_C(Ri_{F!}M,Rc_1^!N)\\\\\n&\\cong\\operatorname{Hom}_F(M,Ri_F^!Rc_1^!N).\n\\end{aligned}$$\nThe outer source inputs have etale origin by Step 5; the middle one has etale origin and is bounded below by the composition theorem. The target inputs $N,Rc_1^!N$ are bounded below by Step 5. Compactifications with finite dimension bounds were fixed in Step 4. Hence every application has precisely the domain its cited statement allows. The second arrow is precomposition by $\\alpha_M$, so the resulting comparison has the requested direction $Rd^!\\to Ri_F^!Rc_1^!$.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/prop-trf-fixed-square-cartesian.proof.md",
+    "place": "Proof, sole paragraph"
+   }
+  },
+  {
+   "text": "Write $P=Rd^!N$ and $Q=Ri_F^!Rc_1^!N$, both in $D^b_{ctf}(F,A)$ by Step 5, and denote Step 6's natural bijection by $H_M:\\operatorname{Hom}(M,P)\\to\\operatorname{Hom}(M,Q)$. Put $a=H_P(\\mathrm{id}_P):P\\to Q$ and $b=H_Q^{-1}(\\mathrm{id}_Q):Q\\to P$. Naturality in $M$ gives $H_M(v)=a v$; thus $ab=\\mathrm{id}_Q$, while $H_P(ba)=aba=a=H_P(\\mathrm{id}_P)$ and injectivity gives $ba=\\mathrm{id}_P$. Consequently $a$ is an isomorphism. For a morphism $u:N\\to N'$, put $P(u)=Rd^!(u)$ and $Q(u)=Ri_F^!Rc_1^!(u)$, and write $H^N,H^{N'}$ for the two Hom bijections. Naturality in the target variable gives $Q(u)a_N=H^{N'}_{P_N}(P(u))$. Naturality in the source variable, applied to $P(u):P_N\\to P_{N'}$, gives $H^{N'}_{P_N}(P(u))=a_{N'}P(u)$. Thus $Q(u)a_N=a_{N'}P(u)$, so these components form the asserted natural isomorphism $Rd^!\\xrightarrow{\\sim}Ri_F^!Rc_1^!$ on $D^b_{ctf}(X,A)$. Its construction from precomposition by $\\alpha$ is exactly the adjoint composition comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/prop-trf-fixed-square-cartesian.proof.md",
+    "place": "Proof, sole paragraph"
+   }
   }
  ],
  "proof_deps": [
   "def-trf-fixed-scheme",
-  "def-trf-admissibility"
+  "def-weil-pbc-cartesian-square",
+  "def-trf-correspondence",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-qcqs-over-affine",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "def-weil-exceptional-inverse-image",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-preservation-class",
+  "def-trf-coefficient-conventions",
+  "thm-sf-comp-composition",
+  "thm-sf-ambient-adjoint-class"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/prop-trf-fixed-square-cartesian.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-corr/prop-trf-fixed-square-cartesian.proof.md",
+  "place": "Proof, sole paragraph, expanded into universal-property, hypothesis and Hom-bijection arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fixed scheme of a cohomological correspondence is the pullback along the diagonal, with the exceptional inverse image composition isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal; Scheme.Pullback.diagonalCover_map; ExistsHomHomCompEqCompAux.D′; Scheme.Pullback.pullbackP1Iso; ExistsHomHomCompEqCompAux.g; Scheme.Pullback.t; Scheme.Pullback.t′; AlgebraicGeometry.AffineSpace.isPullback_map. These are scheme pullback constructions, not exceptional inverse-image composition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fixUpperShriekIso|isPullback_equalizer_ι_diagonal|rightDerivedUpperShriek",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of exceptional inverse images for the Cartesian fixed point square of a cohomological correspondence",
+   "results": "Function.invOn_fixedPoints_comp; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_inv_app_snd_app; CatCommSqOver.precomposeObjComp_inv_app_snd_app; CategoryTheory.MorphismProperty.IsStableUnderComposition.inverseImage; CategoryTheory.CatCommSq.hInv_iso_inv_app; CategoryTheory.CommSq.horiz_inv; CategoryTheory.CommSq.vert_inv; CategoryTheory.CatCommSq.hComp_iso_inv_app. No hit states the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightAdjointUniq",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'rightAdjointUniq'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def comp|def rightAdjointUniq",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean:102 def rightAdjointUniq; Basic.lean:536 def compYonedaIso; Basic.lean:544 def compCoyonedaIso; Basic.lean:553 def compUliftCoyonedaIso; Basic.lean:567 def comp; Additive.lean:111 def compPreadditiveYonedaIso. Read Basic.lean:560-585 and Unique.lean:95-110: composition and uniqueness of adjoints, not a six-functor theorem. Search subdirectory: CategoryTheory/Adjunction.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; general categorical ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right adjoints to naturally isomorphic composite functors are naturally isomorphic",
+   "results": "CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso; CategoryTheory.Functor.isRightAdjoint_of_iso; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app_assoc; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_app. These cover the formal adjunction argument only.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; general categorical ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite of two functors with right adjoints has the composite right adjoint in reverse order",
+   "results": "CategoryTheory.Functor.isRightAdjoint_comp; CategoryTheory.Functor.isLeftAdjoint_comp; CategoryTheory.Adjunction.comp (Mathlib/CategoryTheory/Adjunction/Basic); CategoryTheory.Adjunction.toCat_comp_toCat (Mathlib/CategoryTheory/Bicategory/Adjunction/Cat); CategoryTheory.Adjunction.whiskerRight (Mathlib/CategoryTheory/Adjunction/Whiskering); CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_assoc (Mathlib/CategoryTheory/Adjunction/Unique). Read Adjunction.comp at Basic.lean:567: formal composition only.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item; the formal adjunction ingredient is already represented by lem-cat-right-adjoint-composition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes the equalizer of two maps is the pullback of their pair along the diagonal",
+   "results": "AlgebraicGeometry.isClosedImmersion_equalizer_ι_left; AlgebraicGeometry.IsImmersion.instιScheme; AlgebraicGeometry.Scheme.Pullback.instHasPullback; AlgebraicGeometry.Scheme.Pullback.affine_hasPullback; AlgebraicGeometry.Scheme.Pullback.instHasPullbacks; AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback; AlgebraicGeometry.Scheme.exists_preimage_of_isPullback; AlgebraicGeometry.Scheme.Pullback.affine_affine_hasPullback. These state geometric ingredients, without exceptional composition.",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriekComp|exceptionalInverseImage|shriek.*comp",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of left adjoint functors induces an isomorphism of their right adjoints",
+   "results": "CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso; CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.ofNatIsoLeft; CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso; CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_inv_app; CategoryTheory.Functor.isRightAdjoint_of_iso; CategoryTheory.Adjunction.leftAdjointUniq. These are abstract categorical statements, without the geometric existence, etale-origin domain, and preservation hypotheses of the item.",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item; formal categorical ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso'",
+   "date": "2026-10-17",
+   "verdict": "no indexed declaration found by this query"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -93,5 +276,54 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-fixed-square-cartesian",
+  "worker": "stage1",
+  "summary": "Expanded the fixed-product definition into its universal property and both scheme-morphism identities. Checked finite-type/separatedness, compactifications, finite dimension, etale-origin inputs and constructible finite-Tor preservation before spelling out the Hom-bijection proof and its inverse maps. Reused existing nodes throughout, with no new nodes or Lean attachment. STATEMENT-DISPUTED: the source’s informal exclusivity word \"only\" is literally false since d=c_2 i_F also gives the exceptional composition comparison; retained every displayed claim and replaced the exclusivity wording by the nonexclusive composition interpretation. Second reading by N7 made the intended finite-Tor constructible functor domain explicit and expanded naturality in the target object into its two Hom-bijection equations; no proof route, hypotheses, or displayed conclusion changed.",
+  "blueprint": "Current main-20261015 proof: sentences 1-3 are Steps 1-2; the final exceptional composition sentence is realized by Steps 3-7 with the implicit hypotheses and the adjunction argument made explicit. The sk-d-corr unit route through sk-thm-sf-comp-composition is retained.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Generic finite-type test for the two legs and fixed projection; no local correspondence node states it."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic existence of compactifications for the bounded-class adjunction."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimensionality of the chosen compactifications."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic etale-origin witnesses for finite-Tor constructible inputs."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Generic constructible finite-Tor preservation makes both representing objects lie in the full test category."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Generic bounded-class Hom adjunction supplies the formal adjoint of compact-support composition, without any ambient-adjoint assumption."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-finite-type-to-separated-target",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-preservation-class",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-8376bb518",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-8376bb518 (reviewer sub-agent of L); spot-checked: Read the item, the main-20261015 statement (order 2623) and proof, the sk-d-corr unit, and all 17 cited statements in full. Steps 1-2 apply the fibre-product universal property of def-trf-fixed-scheme and match the definition of def-weil-pbc-cartesian-square. Step 3: permanence (b),(c),(e) and the current lemma-nagata-finite-type-to-separated-target make i_F a closed immersion, c_1 and d separated and finite type, and F separated and finite type over k; I checked the monomorphism argument for the diagonal myself. Step 4: the qcqs targets let thm-nagata-compactification give compactifications, which are finite type over k with finite dimension bounds, as thm-sf-ambient-adjoint-class needs. Step 5: lem-sf-proetale-constructible-origin(ii) gives inputs of etale origin, and thm-sf-preservation-class(1),(2) applies to i_F, c_1 and d because C and X are separated targets; coefficients are A_{E,n} throughout. Step 6: thm-sf-comp-composition(f=i_F, g=c_1) gives alpha and preserves the etale-origin class; adjunction class (2),(3) apply, and precomposition by alpha gives the stated direction. Step 7: a correct Yoneda argument in D^b_ctf, with naturality in N verified. Stacks labels 01QR, 01W5, 01KU and 01T8 match the tags file. There are no new nodes. My rg search for unconditional R(gf)^! composition finds only definitions, conditional nodes (lem-sf-mate, fix-prop-adjunctions), smooth-only nodes, or the sk-thm-sf-package import, so there is no duplicate. All six declared tool uses are generic black boxes and I accept them. Two statement changes are accepted: the explicit D^b_ctf typing matches def-trf-admissibility, and dropping 'the only unconditional !-transport' is fine because in the DAG setting c_2 also admits Rc_2^!; no displayed assertion is lost and the item is not a target. Small cases checked: empty C, Frobenius graph, constant leg, and a nonreduced F. Notes for the maintainer: the protected source field still says master/order 2279, and the blueprint_update of lemma-nagata-finite-type-to-separated-target weakens it to locally finite type, which would then need a quasi-compactness line in Step 3. No fixes were written."
  }
 }
