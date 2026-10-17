@@ -113,13 +113,20 @@ private lemma inv_app_adicUpperStar_obj_X
     α.inv.app ((j)^*ᵃ[l].obj M).X = α.inv.app ((j)^*[WeilCoefficients.{u} l].obj M.X) :=
   rfl
 
+variable (l) in
+/-- The exchange isomorphism `j^* ⋙ (a⁻¹)_* ≅ (b⁻¹)_* ⋙ j^*` of `ℓ`-adic pullbacks along a
+commutative square `a ≫ j = j ≫ b` with `a`, `b` isomorphisms. -/
+noncomputable abbrev adicUpperStarExchangeIso :
+    (j)^*ᵃ[l] ⋙ (a.inv)_*ᵃ[l] ≅ (b.inv)_*ᵃ[l] ⋙ (j)^*ᵃ[l] :=
+  Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l a).symm ≪≫
+    (adicUpperStarComp l _ _).symm ≪≫ adicUpperStarCongr l c ≪≫ adicUpperStarComp l _ _ ≪≫
+    Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l b) _
+
 /-- The exchange isomorphism of `ℓ`-adic pullbacks is, on underlying sheaves, the exchange
 isomorphism `AlgebraicGeometry.ProEtale.upperStarExchangeIso`. Stated for arbitrary `j`, `a`,
 `b`: for the geometric Frobenii the kernel times out on the same proof. -/
 lemma adicUpperStarExchangeIso_hom_app_hom (M : AdicSheaf l Y) :
-    ((Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l a).symm ≪≫
-      (adicUpperStarComp l _ _).symm ≪≫ adicUpperStarCongr l c ≪≫ adicUpperStarComp l _ _ ≪≫
-      Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l b) _).hom.app M).hom =
+    ((adicUpperStarExchangeIso l j a b c).hom.app M).hom =
       (upperStarExchangeIso (WeilCoefficients.{u} l) j a b c).hom.app M.X := by
   rw [upperStarExchangeIso_hom_app]
   simp only [Iso.trans_hom, Iso.symm_hom,
@@ -129,77 +136,64 @@ lemma adicUpperStarExchangeIso_hom_app_hom (M : AdicSheaf l Y) :
     adicUpperStarComp_inv_app_hom, adicUpperStarComp_hom_app_hom, adicUpperStarCongr_hom_app_hom]
   rw [inv_app_adicUpperStar_obj_X]
 
+variable {j a b c}
+
+variable (l) in
+/-- The structure isomorphism `(b⁻¹)_* 𝓗om(A, B) ≅ 𝓗om(A, B)` induced by isomorphisms
+`(b⁻¹)_* A ≅ A` and `(b⁻¹)_* B ≅ B`; for the geometric Frobenius `b` this is the Weil
+structure of `AlgebraicGeometry.ProEtaleWeilSheaf.ihom`. -/
+noncomputable abbrev ihomStr {Z : Scheme.{u}} (b : Z ≅ Z) {A B : AdicSheaf l Z}
+    (sA : (b.inv)_*ᵃ[l].obj A ≅ A) (sB : (b.inv)_*ᵃ[l].obj B ≅ B) :
+    (b.inv)_*ᵃ[l].obj ((AdicSheaf.ihom A).obj B) ≅ (AdicSheaf.ihom A).obj B :=
+  (adicLowerStarCompIhomIso l b.inv A).symm.app B ≪≫ (Mod.ihomMapIso sA.symm).app _ ≪≫
+    (AdicSheaf.ihom A).mapIso sB
+
+/-- The evaluation `𝓗om(A, B) ⊗ A ⟶ B` is compatible with the structure isomorphisms. -/
+lemma ihomStr_evaluation {Z : Scheme.{u}} (b : Z ≅ Z) {A B : AdicSheaf l Z}
+    (sA : (b.inv)_*ᵃ[l].obj A ≅ A) (sB : (b.inv)_*ᵃ[l].obj B ≅ B) :
+    ((ihomStr l b sA sB).hom.hom ⊗ₘ sA.hom.hom) ≫ Mod.evaluation A B =
+      μ (b.inv)_*[WeilCoefficients.{u} l] ((AdicSheaf.ihom A).obj B).X A.X ≫
+        (b.inv)_*[WeilCoefficients.{u} l].map (Mod.evaluation A B) ≫ sB.hom.hom := by
+  have : (Mod.mapModComap (G := (b.inv)_*[WeilCoefficients.{u} l])
+      (adicConstantSheafToLowerStar l b.inv)).IsEquivalence := isEquivalence_adicLowerStar l _
+  have h := Mod.μ_comp_map_evaluation (adicConstantSheafToLowerStar l b.inv)
+    (fun _ _ ↦ Functor.LaxBraided.braided _ _) A B
+  have hstr : (ihomStr l b sA sB).hom.hom =
+      ((adicLowerStarCompIhomIso l b.inv A).inv.app B).hom ≫
+      ((Mod.ihomMap sA.inv).app _).hom ≫ ((AdicSheaf.ihom A).map sB.hom).hom := rfl
+  have hφ : sA.hom.hom ≫ sA.inv.hom = 𝟙 _ := by
+    rw [← Mod.comp_hom', Iso.hom_inv_id, Mod.id_hom']
+  rw [hstr, tensorHom_def', comp_whiskerRight, comp_whiskerRight]
+  simp only [Category.assoc]
+  rw [Mod.evaluation_naturality A sB.hom, Mod.evaluation_ihomMap_assoc sA.inv,
+    ← whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, hφ,
+    MonoidalCategory.whiskerLeft_id, Category.id_comp, ← Category.assoc, ← h, Category.assoc]
+
+variable (l c) in
+/-- The structure isomorphism `(a⁻¹)_* j^* M ≅ j^* M` induced by `(b⁻¹)_* M ≅ M` along the
+exchange isomorphism; for the geometric Frobenii this is the Weil structure of
+`AlgebraicGeometry.ProEtaleWeilSheaf.upperStar`. -/
+noncomputable abbrev upperStarStr {M : AdicSheaf l Y} (sM : (b.inv)_*ᵃ[l].obj M ≅ M) :
+    (a.inv)_*ᵃ[l].obj ((j)^*ᵃ[l].obj M) ≅ (j)^*ᵃ[l].obj M :=
+  (adicUpperStarExchangeIso l j a b c).app M ≪≫ (j)^*ᵃ[l].mapIso sM
+
+lemma upperStarStr_hom_hom {M : AdicSheaf l Y} (sM : (b.inv)_*ᵃ[l].obj M ≅ M) :
+    (upperStarStr l c sM).hom.hom =
+      (upperStarExchangeIso (WeilCoefficients.{u} l) j a b c).hom.app M.X ≫
+        (j)^*[WeilCoefficients.{u} l].map sM.hom.hom := by
+  sorry
+
+/-- **Pullbacks of compatible pairings are compatible.** -/
+theorem upperStarStr_pairing {P Q R : AdicSheaf l Y} (sP : (b.inv)_*ᵃ[l].obj P ≅ P)
+    (sQ : (b.inv)_*ᵃ[l].obj Q ≅ Q) (sR : (b.inv)_*ᵃ[l].obj R ≅ R)
+    (e : P.X ⊗ Q.X ⟶ R.X)
+    (h : (sP.hom.hom ⊗ₘ sQ.hom.hom) ≫ e =
+      μ (b.inv)_*[WeilCoefficients.{u} l] P.X Q.X ≫ (b.inv)_*[_].map e ≫ sR.hom.hom) :
+    ((upperStarStr l c sP).hom.hom ⊗ₘ (upperStarStr l c sQ).hom.hom) ≫
+        (μ (j)^*[WeilCoefficients.{u} l] P.X Q.X ≫ (j)^*[_].map e) =
+      μ (a.inv)_*[WeilCoefficients.{u} l] ((j)^*[_].obj P.X) ((j)^*[_].obj Q.X) ≫
+        (a.inv)_*[_].map (μ (j)^*[WeilCoefficients.{u} l] P.X Q.X ≫ (j)^*[_].map e) ≫
+          (upperStarStr l c sR).hom.hom := by
+  sorry
+
 end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.ProEtaleWeilSheaf
-
-open ProEtale
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
-variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [Y.Over (Spec (CommRingCat.of k₀))]
-variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
-
-variable (k₀ l) in
-/-- The exchange isomorphism `φ̄^* ⋙ Fr_X^* ≅ Fr_Y^* ⋙ φ̄^*` of sheaves of `ℚ̄_ℓ`-modules on the
-geometric fibres, with `Fr^* = (Fr⁻¹)_*`: the underlying isomorphism of
-`AlgebraicGeometry.ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso`. -/
-noncomputable abbrev upperStarFrobeniusExchangeIso :
-    (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))^*[
-        WeilCoefficients.{u} l] ⋙
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l] ≅
-    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l] ⋙
-      (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))^*[
-        WeilCoefficients.{u} l] :=
-  upperStarExchangeIso (WeilCoefficients.{u} l)
-    (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ
-      (comp_over φ (Spec (CommRingCat.of k₀)))).symm
-
-/-- The Weil structure of the pullback of a pro-étale Weil sheaf, on underlying sheaves. -/
-lemma upperStar_obj_str_hom_hom (P : ProEtaleWeilSheaf k₀ l Y) :
-    ((upperStar k₀ l φ).obj P).str.hom.hom =
-      (upperStarFrobeniusExchangeIso k₀ l φ).hom.app P.carrier.X ≫
-        (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l].map
-          P.str.hom.hom := by
-  have h1 : ((upperStar k₀ l φ).obj P).str = (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ
-      (comp_over φ (Spec (CommRingCat.of k₀)))).app P.carrier ≪≫
-        (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l].mapIso P.str :=
-    IsoAlgebra.mapOfNatIso_obj_str _ P
-  rw [h1, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Mod.comp_hom', adicUpperStar_map_hom]
-  exact congrArg (· ≫ _) (adicUpperStarExchangeIso_hom_app_hom _ _ _ _ P.carrier)
-
-/-- **Pullbacks of compatible pairings are compatible.** A pairing `e : P ⊗ Q ⟶ R` of the
-underlying sheaves of pro-étale Weil sheaves compatible with their Weil structures induces the
-compatible pairing `φ̄^* P ⊗ φ̄^* Q ⟶ φ̄^*(P ⊗ Q) ⟶ φ̄^* R`. -/
-theorem upperStar_pairing_str (P Q R : ProEtaleWeilSheaf k₀ l Y)
-    (e : P.carrier.X ⊗ Q.carrier.X ⟶ R.carrier.X)
-    (h : (P.str.hom.hom ⊗ₘ Q.str.hom.hom) ≫ e =
-      μ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
-          P.carrier.X Q.carrier.X ≫
-        ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map e ≫
-          R.str.hom.hom) :
-    (((upperStar k₀ l φ).obj P).str.hom.hom ⊗ₘ ((upperStar k₀ l φ).obj Q).str.hom.hom) ≫
-        (μ (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l]
-          P.carrier.X Q.carrier.X ≫
-          (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_].map e) =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
-          ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_].obj P.carrier.X)
-          ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_].obj Q.carrier.X) ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
-          (μ (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l]
-            P.carrier.X Q.carrier.X ≫
-            (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_].map e) ≫
-          ((upperStar k₀ l φ).obj R).str.hom.hom := by
-  have hψ := NatTrans.IsMonoidal.tensor (τ := (upperStarFrobeniusExchangeIso k₀ l φ).hom)
-    P.carrier.X Q.carrier.X
-  have nψ := (upperStarFrobeniusExchangeIso k₀ l φ).hom.naturality e
-  simp only [Functor.LaxMonoidal.comp_μ, Functor.comp_map, Functor.comp_obj] at hψ nψ
-  rw [upperStar_obj_str_hom_hom, upperStar_obj_str_hom_hom, upperStar_obj_str_hom_hom,
-    ← tensorHom_comp_tensorHom_assoc, μ_natural_assoc, ← Functor.map_comp, h]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% hψ, reassoc_of% nψ]
-
-end AlgebraicGeometry.ProEtaleWeilSheaf
