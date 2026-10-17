@@ -9,7 +9,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.WeilSheaf.DirectImageStalkMap
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.LowerStarTriangulated
-public import WeilConjectures.WeilSheaf.Semicontinuity
+public import WeilConjectures.WeilSheaf.RealPurity
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 
 /-!
@@ -38,7 +38,7 @@ Purity of the middle term is not needed: only the outer two terms enter the weig
 
 The curve is assumed separated, quasi-compact and geometrically connected over `k₀`, the
 hypotheses under which boundary semicontinuity
-(`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage_of_curve`) is stated; quasi-compactness
+(`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`) is stated; quasi-compactness
 is also needed for the derived direct image `Rj_*` to be defined. The blueprint reduces the
 general case to this one by restricting to a connected affine neighbourhood of the missing point
 and replacing `k₀` by its algebraic closure in the function field; neither the compatibility of
@@ -139,9 +139,9 @@ theorem shortExact_map_directImage (ι : PadicAlgCl l →+* ℂ)
         FrobeniusModule.HasWeightsAtMost.of_surjective
           (WeilSheaf.stalkAtMap _ _ _ (WeilSheaf.homologySheafZeroDerivedLowerStarIso j S.X₃).inv)
           (WeilSheaf.stalkAtMap_frobenius _ _ _ _) (WeilSheaf.surjective_stalkAtMap _ _ _ _)
-          (WeilSheaf.hasWeightsAtMost_directImage_of_curve j S.X₃ h₃ p₃.hasWeightsAtMost x)
+          (WeilSheaf.IsLisse.hasWeightsAtMost_directImage j j.denseRange h₃ p₃.hasWeightsAtMost x)
       -- `(j_*F₁^∨)_s̄` has weights at most `-w`, `F₁^∨` being pure of weight `-w`
-      have hD := WeilSheaf.hasWeightsAtMost_directImage_of_curve (ι := ι) j (S.X₁.dual h₁)
+      have hD := WeilSheaf.IsLisse.hasWeightsAtMost_directImage (ι := ι) j j.denseRange
         h₁.dual (β := -w) (fun y ↦ by
           obtain ⟨e⟩ := WeilSheaf.nonempty_equiv_stalk_dual h₁ y
           exact (((p₁ y).dual).of_equiv e).hasWeightsAtMost) x

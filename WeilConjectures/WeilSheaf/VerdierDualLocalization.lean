@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
@@ -31,6 +32,13 @@ the local boundary duality (`lem-a1-local-boundary-duality`):
 -/
 
 @[expose] public section
+
+-- The import of `WeilConjectures.WeilSheaf.Localization` brings in the instance
+-- `AlgebraicGeometry.specOverSpec` of `(Spec A).Over (Spec R)` for an algebra, under which
+-- `Spec k₀` would lie over itself through `Algebra.id` rather than through the identity, which the
+-- structure-morphism instances `(X ↘ S).IsOver S` do not unify with. The canonical instance is
+-- given priority.
+attribute [instance 1100] CategoryTheory.instOverClass
 
 universe u
 
@@ -134,6 +142,65 @@ theorem nonempty_upperShriek_verdierDual_iso [HasUpperShriek k₀ l f]
 
 end Exchange
 
+section ClosedImmersion
+
+variable {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
+  [X.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
+  (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+  (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- The direct image with compact support `Ri₀! ≅ Ri_*` along a closed immersion is fully
+faithful (`AlgebraicGeometry.WeilComplex.fullyFaithfulDerivedLowerStar`). -/
+noncomputable def fullyFaithfulDerivedLowerShriekOfIsClosedImmersion :
+    (derivedLowerShriek k₀ l i).FullyFaithful :=
+  (fullyFaithfulDerivedLowerStar i).ofIso (derivedLowerShriekIsoDerivedLowerStar i).symm
+
+/-- The direct image with compact support `Ri₀! ≅ Ri_*` along a closed immersion with an open
+complement has a right adjoint, the exceptional inverse image `Ri^!`
+(`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar`). -/
+theorem hasUpperShriek_of_isCompl (hij : IsCompl (Set.range j.base) (Set.range i.base)) :
+    HasUpperShriek k₀ l i :=
+  have := isLeftAdjoint_derivedLowerStar (k₀ := k₀) (l := l) i j hij.symm
+  Functor.isLeftAdjoint_of_iso (derivedLowerShriekIsoDerivedLowerStar i).symm
+
+variable [HasUpperShriek k₀ l i]
+
+/-- **The exceptional restriction of a direct image from the open complement vanishes**
+(blueprint: `lem-a1-local-boundary-duality`, step 3, `Ri^! Rj_* G = 0`): for a closed immersion
+`i` with open complement `j`, `Ri^! Rj_* G = 0`. For every `N` on `Z`,
+`Hom(N, Ri^! Rj_* G) ≅ Hom(Ri₀! N, Rj_* G) ≅ Hom(i_* N, Rj_* G) = 0`, as `j^* i_* = 0`
+(`AlgebraicGeometry.WeilComplex.subsingleton_hom_shift`). -/
+theorem isZero_upperShriek_obj_derivedLowerStar_obj
+    (hij : IsCompl (Set.range j.base) (Set.range i.base)) (G : WeilComplex k₀ l U) :
+    IsZero ((upperShriek i).obj ((derivedLowerStar j).obj G)) := by
+  set A := (upperShriek i).obj ((derivedLowerStar j).obj G)
+  have : Subsingleton ((derivedLowerStar i).obj A ⟶ (derivedLowerStar j).obj G) := by
+    have h := subsingleton_hom_shift (k₀ := k₀) (l := l) i j hij.symm A G 0
+    exact @Equiv.subsingleton _ _
+      (Iso.homCongr ((shiftFunctorZero _ ℤ).app _).symm (Iso.refl _)) h
+  have : Subsingleton (A ⟶ A) :=
+    (((derivedLowerShriekUpperShriekAdjunction i).homEquiv A _).symm.trans
+      (Iso.homCongr ((derivedLowerShriekIsoDerivedLowerStar i).app A) (Iso.refl _))).subsingleton
+  exact (IsZero.iff_id_eq_zero A).2 (Subsingleton.elim _ _)
+
+/-- **The closed unit** (blueprint: `prop-sf-localization-all-stages`, clause (4), the unit
+`Q ⟶ Ri^! i_* Q` is an isomorphism; `prop-sf-closed-unit-all-stages`): for a closed immersion
+`i`, the unit of the adjunction `Ri₀! ⊣ Ri^!` is an isomorphism, `Ri₀! ≅ Ri_*` being fully
+faithful. -/
+theorem isIso_derivedLowerShriekUpperShriekAdjunction_unit_app (Q : WeilComplex k₀ l Z) :
+    IsIso ((derivedLowerShriekUpperShriekAdjunction (k₀ := k₀) (l := l) i).unit.app Q) := by
+  have h := fullyFaithfulDerivedLowerShriekOfIsClosedImmersion (k₀ := k₀) (l := l) i
+  have := h.full
+  have := h.faithful
+  have :=
+    (derivedLowerShriekUpperShriekAdjunction (k₀ := k₀) (l := l) i).unit_isIso_of_L_fully_faithful
+  infer_instance
+
+end ClosedImmersion
+
 section Localization
 
 variable {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
@@ -146,6 +213,7 @@ variable {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
 
+omit [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))] in
 /-- **Step 3: the exceptional restriction of an extension by zero** (blueprint:
 `lem-a1-local-boundary-duality`, step 3): for complementary immersions `j` and `i`,
 `Ri^! Rj₀! G ≅ (i^* Rj_* G)[-1]`. Apply the triangulated functor `Ri^!` to the open–closed
@@ -194,7 +262,7 @@ theorem nonempty_verdierDual_upperStar_derivedLowerStar_iso
       ((upperStar i).obj ((derivedLowerStar j).obj ((verdierDual k₀ l U).obj (op G))))⟦(-1 : ℤ)⟧)
     := by
   have := isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀))
-  have := isLeftAdjoint_derivedLowerShriek (k₀ := k₀) (l := l) i
+  have := hasUpperShriek_of_isCompl (k₀ := k₀) (l := l) j i hij
   obtain ⟨e₂⟩ := nonempty_upperShriek_verdierDual_iso i ((derivedLowerStar j).obj G)
   obtain ⟨e₁⟩ := nonempty_verdierDual_derivedLowerStar_iso j G
   obtain ⟨e₃⟩ := nonempty_upperShriek_derivedLowerShriek_iso j i hij

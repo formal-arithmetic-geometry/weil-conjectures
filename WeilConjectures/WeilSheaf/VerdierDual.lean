@@ -217,38 +217,6 @@ theorem nonempty_tensorLisse_dual_iso_derivedHom (P : WeilSheaf k₀ l X) (hP : 
 
 end Lisse
 
-section Localization
-
-variable {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-  [X.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
-  (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
-  (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
-  [HasUpperShriek k₀ l i]
-
-/-- **The exceptional restriction of a direct image from the open complement vanishes**
-(blueprint: `prop-sf-localization-all-stages`, clause (4), `Ri^! Rj_* G = 0`): for a closed
-immersion `i` with open complement `j`, `Ri^! Rj_* G = 0`. Here `Ri^!` is the right adjoint of
-`Ri₀! ≅ Ri_*`. -/
-theorem isZero_upperShriek_obj_derivedLowerStar_obj
-    (hij : IsCompl (Set.range j.base) (Set.range i.base)) (G : WeilComplex k₀ l U) :
-    IsZero ((upperShriek i).obj ((derivedLowerStar j).obj G)) :=
-  sorry
-
-/-- **The closed unit** (blueprint: `prop-sf-localization-all-stages`, clause (4), the unit
-`Q ⟶ Ri^! i_* Q` is an isomorphism; `prop-sf-closed-unit-all-stages`): for a closed immersion
-`i`, the unit of the adjunction `Ri₀! ⊣ Ri^!` is an isomorphism, `Ri₀! ≅ Ri_*` being fully
-faithful. -/
-theorem isIso_derivedLowerShriekUpperShriekAdjunction_unit_app (Q : WeilComplex k₀ l Z) :
-    IsIso ((derivedLowerShriekUpperShriekAdjunction (k₀ := k₀) (l := l) i).unit.app Q) :=
-  sorry
-
-end Localization
-
 end WeilComplex
 
 namespace WeilSheaf
