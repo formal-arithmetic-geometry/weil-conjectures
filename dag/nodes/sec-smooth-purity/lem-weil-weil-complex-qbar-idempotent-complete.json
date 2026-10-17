@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-weil-weil-complex-qbar-idempotent-complete",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Idempotent completeness of the common-stage Weil category",
- "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a\nprime $\\ell\\neq p$, a finite-type $k_0$-scheme $Y_0$ with\n$Y=Y_0\\times_{k_0}k$, and an algebraic closure $\\Qlb$ of $\\Ql$, and let\n$D^b_{c,\\mathrm W}(Y,\\Qlb)$ be the common-stage Weil category of\n[def-weil-weil-sheaf-complex]. Then $D^b_{c,\\mathrm W}(Y,\\Qlb)$ is idempotent\ncomplete, and the canonical functor\n\n$$\n D^b_{c,\\mathrm W}(Y,\\Qlb)\\longrightarrow\n \\Kar\\bigl(D^b_{c,\\mathrm W}(Y,\\Qlb)\\bigr)\n$$\n\ninto its Karoubi envelope is an exact equivalence.",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a\nprime $\\ell\\neq p$, a finite-type $k_0$-scheme $Y_0$ with\n$Y=Y_0\\times_{k_0}k$, and an algebraic closure $\\Qlb$ of $\\Ql$, and let\n$D^b_{c,\\mathrm W}(Y,\\Qlb)$ be the common-stage Weil category of\n[def-weil-weil-sheaf-complex]. Then $D^b_{c,\\mathrm W}(Y,\\Qlb)$ is idempotent\ncomplete, and the canonical functor\n\n$$\n D^b_{c,\\mathrm W}(Y,\\Qlb)\\longrightarrow\n \\Kar\\bigl(D^b_{c,\\mathrm W}(Y,\\Qlb)\\bigr)\n$$\n\ninto its Karoubi envelope is an equivalence.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/lem-weil-weil-complex-qbar-idempotent-complete.md",
   "place": "node lem-weil-weil-complex-qbar-idempotent-complete, order 1887"
@@ -19,31 +19,113 @@
  ],
  "proof": [
   {
-   "text": "At a finite coefficient field $E$, the category $D^b_{c,\\mathrm W}(Y,E)$ of\n[def-weil-weil-sheaf-complex] is the localization of bounded complexes of\nconstructible $E$-Weil sheaves at equivariant quasi-isomorphisms, and its\nheart is the category of constructible $E$-Weil sheaves, which is abelian:\nkernels and cokernels of morphisms of Weil sheaves are computed in the\nconstructible heart [def-weil-constructible-heart], and the Frobenius\nisomorphism $\\theta$ is carried along. The equivariant standard\n$t$-structure is therefore bounded with abelian heart, so by the Karoubian\nbounded-$t$ theorem every finite stage $D^b_{c,\\mathrm W}(Y,E)$ is idempotent\ncomplete and its canonical functor into the Karoubi envelope is an exact\nequivalence. The category $D^b_{c,\\mathrm W}(Y,\\Qlb)$ is the 2-colimit of\nthese stages over the directed set of finite extensions of $\\Ql$, as recorded\nin the common-stage construction of\n[def-weil-algebraically-closed-coefficients]; by the filtered retract-descent\nproposition it is idempotent complete, an idempotent of the colimit\ndescending to a finite stage and splitting there, and its canonical functor\ninto the Karoubi envelope is again an exact equivalence.",
+   "text": "Write $\\mathcal C=D^b_c(Y,\\Qlb)$ and $T=Lg_Y^*$, so that the Weil category is the category of pairs $(K,\\theta:TK\\xrightarrow{\\sim}K)$ of [def-weil-weil-sheaf-complex]. The scheme $Y$ is finite type over $k$: a finite affine cover of $Y_0$ by spectra of finitely generated $k_0$-algebras base changes to a finite affine cover of $Y$ by their tensor products with $k$, generated over $k$ by the images of the same generators [def-weil-finite-type-morphism]. Therefore [lem-weil-qbar-idempotent-complete] applies and $\\mathcal C$ is idempotent complete. For any idempotent $e$ on a Weil pair $(K,\\theta)$, its underlying endomorphism satisfies $e^2=e$ and $e\\theta=\\theta T(e)$. Choose in $\\mathcal C$ a splitting $i:L\\to K$, $r:K\\to L$, with $ri=1_L$ and $ir=e$. In particular $ei=i$ and $re=r$.",
    "uses": [
     "def-weil-weil-sheaf-complex",
-    "def-weil-constructible-heart",
-    "def-weil-algebraically-closed-coefficients"
+    "def-weil-finite-type-morphism",
+    "lem-weil-qbar-idempotent-complete"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-weil-weil-complex-qbar-idempotent-complete.proof.md",
+    "place": "Replacement for the first sentence and finite-stage reduction: use the underlying common-stage category and its existing idempotent-completeness theorem."
+   }
+  },
+  {
+   "text": "The category of Weil pairs is additive. Indeed the pullback $T$ is additive by its morphism formulas in [def-weil-derived-pullback-tensor-hom]: the rational-stage formulas extend additively and the common-stage formulas apply these maps conjugated by comparison isomorphisms. Thus $u\\theta=\\theta'T(u)$ cuts out an abelian subgroup of each underlying Hom group [def-weil-weil-sheaf-complex]. The zero object has its unique structure isomorphism, and the biproduct of $(K,\\theta)$ and $(K',\\theta')$ has underlying object $K\\oplus K'$ and structure $T(K\\oplus K')\\cong TK\\oplus TK'\\xrightarrow{\\theta\\oplus\\theta'}K\\oplus K'$. The usual inclusions and projections commute with these structure maps, so their biproduct identities hold also for pairs.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-weil-weil-complex-qbar-idempotent-complete.proof.md",
+    "place": "Correction of the claimed triangulated structure: only the additive structure follows directly from the reviewed fixed-pair definition."
+   }
+  },
+  {
+   "text": "Give $L$ the structure map $\\theta_L=r\\theta T(i):TL\\to L$. Its inverse is $\\psi=T(r)\\theta^{-1}i:L\\to TL$, since functoriality and $e\\theta=\\theta T(e)$ give\n$$\n\\theta_L\\psi=r\\theta T(ir)\\theta^{-1}i=r e i=1_L,\n\\qquad\n\\psi\\theta_L=T(r)\\theta^{-1}e\\theta T(i)=T(r e i)=1_{TL}.\n$$\nHence $(L,\\theta_L)$ is a Weil pair by [def-weil-weil-sheaf-complex]. The two splitting maps are Weil morphisms because\n$$\ni\\theta_L=e\\theta T(i)=\\theta T(ei)=\\theta T(i),\n\\qquad\n\\theta_LT(r)=r\\theta T(e)=r e\\theta=r\\theta.\n$$\nTheir composites remain $ri=1$ and $ir=e$ in the category of pairs, whose composition and identities are those of $\\mathcal C$. Thus every idempotent of the Weil category splits.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-weil-weil-complex-qbar-idempotent-complete.proof.md",
+    "place": "Replacement for the claimed equivariant bounded-t-structure argument: explicit Frobenius structure on the retract."
+   }
+  },
+  {
+   "text": "Put $\\mathcal W=D^b_{c,\\mathrm W}(Y,\\Qlb)$. For an object $(X,e)$ of $\\Kar(\\mathcal W)$, choose a splitting $i:L\\to X$, $r:X\\to L$ in $\\mathcal W$ as above. By [def-weil-karoubi-envelope], $i$ and $r$ are morphisms $(L,1_L)\\to(X,e)$ and $(X,e)\\to(L,1_L)$, since $ei=i$ and $re=r$. Their composites are $1_L$ and $e$, respectively, which are exactly the two identities in the envelope. Every object of the envelope is therefore isomorphic to the image of an object of $\\mathcal W$. Full faithfulness is [lem-weil-karoubi-envelope-fully-faithful], so the canonical functor is an equivalence. Its action on morphisms is the identity, hence it is additive for the inherited Hom-group structures.",
+   "uses": [
+    "def-weil-karoubi-envelope",
+    "lem-weil-karoubi-envelope-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-weil-weil-complex-qbar-idempotent-complete.proof.md",
+    "place": "Last clause: full faithfulness and explicit essential surjectivity; exactness removed because the fixed-pair definition supplies no triangulation."
+   }
   }
  ],
  "proof_deps": [
   "def-weil-weil-sheaf-complex",
-  "def-weil-constructible-heart",
-  "def-weil-algebraically-closed-coefficients",
-  "prop-weil-filtered-retract-descent",
-  "prop-weil-heart-abelian",
-  "thm-weil-karoubian-bounded-t"
+  "def-weil-finite-type-morphism",
+  "lem-weil-qbar-idempotent-complete",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-karoubi-envelope",
+  "lem-weil-karoubi-envelope-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/lem-weil-weil-complex-qbar-idempotent-complete.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-weil-weil-complex-qbar-idempotent-complete.proof.md",
+  "place": "Correction of the derived-of-Weil-sheaves identification; explicit splitting in fixed pairs and the Karoubi construction."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|WeilComplex|WeilSheaf",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An idempotent in the category of objects equipped with an isomorphism from an endofunctor splits if every idempotent in the underlying category splits.",
+   "results": "CategoryTheory.IsIdempotentComplete.mk; CategoryTheory.Limits.splitEpiOfIdempotentCoequalizer; CategoryTheory.IsIdempotentComplete.idempotents_split; CategoryTheory.Idempotents.split_iff_of_iso; CategoryTheory.IsIdempotentComplete; CategoryTheory.IsIdempotentComplete.casesOn; CategoryTheory.Idempotents.split_imp_of_iso; CategoryTheory.IsIdempotentComplete.recOn",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra, CategoryTheory.IsIdempotentComplete",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of Weil complexes given by fixed pairs under Frobenius on the common-stage constructible derived category with algebraic closure of l-adic coefficients is idempotent complete.",
+   "results": "CategoryTheory.Idempotents.instIsIdempotentCompleteHomologicalComplex; CategoryTheory.Idempotents.isIdempotentComplete_of_abelian; CategoryTheory.Idempotents.instIsIdempotentCompleteKaroubi; CategoryTheory.Idempotents.instIsIdempotentCompleteSimplicialObject; CategoryTheory.Idempotents.Karoubi; CategoryTheory.Idempotents.Karoubi.HomologicalComplex.p_idem; CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.functor_obj; CategoryTheory.Idempotents.Karoubi.HomologicalComplex.p_idem_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Idempotent completeness of the category of fixed objects of an endofunctor with an invertible structure map; the inclusion into the Karoubi envelope is an equivalence.",
+   "results": "CategoryTheory.Idempotents.toKaroubi_isEquivalence; CategoryTheory.Idempotents.toKaroubiEquivalence; CategoryTheory.Idempotents.instIsIdempotentCompleteKaroubi; CategoryTheory.Idempotents.karoubiUniversal; CategoryTheory.Idempotents.functorExtension_obj_obj; CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension; CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension₂; CategoryTheory.Idempotents.karoubiUniversal₂; read Mathlib/CategoryTheory/Idempotents/Karoubi.lean:139-150, 223-236: generic Karoubi equivalence only, assumes idempotent completeness of the source.",
+   "date": "2026-10-17",
+   "verdict": "partial match: final Karoubi-equivalence clause only; no theorem on the common-stage Weil category"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIdempotentComplete|toKaroubi_isEquivalence",
+   "results": "Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean; Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean; Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/CategoryTheory/Idempotents/FunctorCategories.lean; Mathlib/CategoryTheory/Idempotents/FunctorCategories.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole statement"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -78,5 +160,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-weil-complex-qbar-idempotent-complete",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: exact equivalence presupposes a triangulated structure, but the reviewed definition is a fixed-pair category and explicitly disclaims such a structure. Removed only exact, retaining all hypotheses and both categorical conclusions; the equivalence is also additive. Replaced the incorrect derived-of-Weil-sheaves identification by an explicit Frobenius structure on a splitting of the underlying idempotent. The only non-elementary input is the existing common-stage coefficient idempotent-completeness lemma. No new nodes.",
+  "blueprint": "Current main-20261015 proof is unchanged from the imported proof and incorrectly identifies fixed pairs with a derived category of Weil sheaves. Steps 1 and 3 replace that false inference; step 2 establishes additivity and step 4 proves the final Karoubi equivalence. This is a correction below the unit level: sk-def-purity-conv is a conventions remark with no proof steps; its statement and the chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-qbar-idempotent-complete",
+    "why": "Provides idempotent completeness of the underlying common-stage coefficient category, a generic tool for lifting a splitting to a Frobenius-fixed pair. The conventions unit states no such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-qbar-idempotent-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-48981e064",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-48981e064 (reviewer sub-agent of L); spot-checked: I read the item, its four steps, the master and main-20261015 blueprint statement and proof, every cited node's statement, the unit sk-def-purity-conv (no proof steps) and the one DAG citer. Statement: the only change is dropping 'exact'. This is justified and not a target weakening. def-weil-weil-sheaf-complex defines a fixed-pair category and says no triangulated structure is part of it, so 'exact equivalence' has no meaning there. The Jordan-block example at Spec k_0 (a nonsplit equivariant extension, while Hom of pairs into Lambda[1] is zero) shows the blueprint proof wrongly identifies fixed pairs with D^b of Weil sheaves. That is a source error the maintainer should record in HUMAN.md; the report names it under 'Statement corrected' rather than the E7 heading '## Source error'. The item is not a GOAL target. Its only citer, prop-pod-dual-tate-data-compatibility, uses only idempotent splitting, which is kept. Step 1: Y is finite type over k, elementary from def-weil-finite-type-morphism. lem-weil-qbar-idempotent-complete needs exactly a finite-type k-scheme and l != p, and its C_Y is the same category as D^b_c(Y,Qlb); it gives only the underlying splitting. A DFS over all dependencies of the cited nodes finds no cycle. Step 2: Lg* is additive (linear rational-level formula, and at the common stage it is conjugated by comparison isomorphisms); the morphism condition cuts out subgroups and the biproduct structure is correct. Step 3: I checked by hand that theta_L psi = rei = 1, psi theta_L = T(rei) = 1, i theta_L = theta T(i) and theta_L T(r) = r theta, using e theta = theta T(e). Step 4: i = e i 1 and r = 1 r e are Karoubi morphisms with composites 1_L and e, which gives essential surjectivity; full faithfulness is the cited node, applied to the additive category from step 2. Small cases e=0, e=1, empty Y_0, a block-diagonal theta and a swap-stable diagonal summand all work. There are no new nodes. A DAG-wide scan for idempotent plus Weil or fixed-pair statements found no duplicate (prop-trf-karoubi-independence is unrelated). Accepted tool_use: lem-weil-qbar-idempotent-complete (unit sk-prop-sf-biduality-general), used as a black-box idempotent completeness of the coefficient category; the blueprint route also left the unit here. No SGA citation. No fixes written."
+ }
 }
