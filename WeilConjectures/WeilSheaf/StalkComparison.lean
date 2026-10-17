@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPointsCount
+public import WeilConjectures.SixFunctors.ProEtale.Adic.SubobjectStalk
 public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
@@ -87,6 +88,32 @@ lemma isIso_globalSectionsTransport {P P' Y Y' : Scheme.{u}} (e : P' ≅ P) {t :
   rw [globalSectionsTransport_eq_of_iso A e h ψ]
   infer_instance
 
+/-- If finitely many subsheaves `Q i` span an `ℓ`-adic sheaf `B` on `Y`, then for `j : Y' ⟶ Y`
+and a geometric point `t` of `Y'`, the images of the stalks at `t` of the pullbacks `j^* Q i`
+span the stalk of `j^* B`: the stalk of `j^*` at `t` is the stalk at `t ≫ j`. -/
+lemma iSup_range_adicStalkMap_adicUpperStar_eq_top {l : ℕ} [Fact l.Prime] {Y Y' : Scheme.{u}}
+    (j : Y' ⟶ Y) {Ω : Type u} [Field Ω] (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y')
+    {B : AdicSheaf l Y} {M : ℕ} (Q : Fin M → Subobject B)
+    (hQ : (Finset.univ : Finset (Fin M)).sup Q = ⊤) :
+    ⨆ i, LinearMap.range (adicStalkMap t ((j)^*ᵃ[l].map (Q i).arrow)) = ⊤ := by
+  let e (A : AdicSheaf l Y) := WeilCoefficients.linearEquivOfIso ((Sheaf.Γ _ _).mapIso
+    ((upperStarComp (WeilCoefficients.{u} l) t j).app A.X))
+  have hc {A A' : AdicSheaf l Y} (u : A ⟶ A') :
+      (e A').toLinearMap ∘ₗ adicStalkMap (t ≫ j) u =
+        adicStalkMap t ((j)^*ᵃ[l].map u) ∘ₗ (e A).toLinearMap := by
+    have n := congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map ((Sheaf.Γ _ _).map f)).hom)
+      ((upperStarComp (WeilCoefficients.{u} l) t j).hom.naturality u.hom)
+    simp only [Functor.map_comp, ModuleCat.hom_comp] at n
+    exact n
+  have key (i : Fin M) : LinearMap.range (adicStalkMap t ((j)^*ᵃ[l].map (Q i).arrow)) =
+      (adicStalkSubspace (t ≫ j) (Q i)).map (e B).toLinearMap := by
+    rw [adicStalkSubspace, ← LinearMap.range_comp, hc,
+      LinearMap.range_comp_of_range_eq_top _ (LinearEquiv.range _)]
+  have htop : ⨆ i, adicStalkSubspace (t ≫ j) (Q i) = ⊤ := by
+    rw [← adicStalkSubspace_top (t ≫ j) B, ← hQ, adicStalkSubspace_finset_sup]
+    simp
+  simp_rw [key, ← Submodule.map_iSup, htop, Submodule.map_top, LinearEquiv.range]
+
 end AlgebraicGeometry.ProEtale
 
 namespace FrobeniusModule
@@ -141,6 +168,11 @@ theorem IsPureOfWeight.of_iSup_range_eq_top {ι : Type*} {M : ι → FrobeniusMo
   obtain ⟨i, hi⟩ := hasEigenvalue_of_iSup_range_eq_top g hg hsup hα
   exact h i α hi
 
+/-- A Frobenius module isomorphic to an `ι`-real one is `ι`-real. -/
+theorem IsReal.of_equiv {ι' : K →+* ℂ} {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N)
+    (h : N.IsReal ι') : M.IsReal ι' :=
+  h.of_charpoly_eq_pow 1 (by rw [pow_one, e.charpoly_frobeniusEnd])
+
 end FrobeniusModule
 
 namespace AlgebraicGeometry.Scheme.Hom
@@ -194,3 +226,35 @@ theorem mem_finitePoints_of_comp_geometricGaloisFrobenius_pow {m : ℕ} (hm : m 
   exact key
 
 end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry.WeilSheaf
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+
+/-- The linear map underlying a composite of morphisms of `ℚ̄_ℓ`-modules. -/
+lemma _root_.AlgebraicGeometry.WeilCoefficients.toModuleCat_map_comp_hom
+    {M N P : WeilCoefficients.{u} l} (f : M ⟶ N) (g : N ⟶ P) :
+    ((WeilCoefficients.toModuleCat l).map (f ≫ g)).hom =
+      ((WeilCoefficients.toModuleCat l).map g).hom ∘ₗ
+        ((WeilCoefficients.toModuleCat l).map f).hom := by
+  rw [Functor.map_comp]
+  rfl
+
+/-- An `ι`-real Weil sheaf is `ι`-real at every geometric point `s` with `s ≫ Frᵐ = σᵐ ≫ s`,
+`m ≥ 1`: the point under `s` is a closed point `x` of degree dividing `m`, and the Frobenius of
+`F_s` relative to `𝔽_{qᵐ}` has the characteristic polynomial of a power of `Fₓ`. -/
+theorem IsReal.stalkAt {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} (h : F.IsReal ι)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    {m : ℕ} (hm : m ≠ 0)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (F.stalkAt s m hs).IsReal ι := by
+  obtain ⟨hx, hdvd⟩ := Scheme.Hom.mem_finitePoints_of_comp_geometricGaloisFrobenius_pow _ hm hs
+  have hx₁ := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base
+    (X ↘ Spec (CommRingCat.of k₀)) ⟨_, hx⟩
+  exact (h ⟨_, hx⟩).of_charpoly_eq_pow _ (F.charpoly_frobeniusEnd_stalkAt_of_dvd _ s hx₁
+    (hx₁ ▸ hx) hdvd (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+      _ ⟨_, hx⟩) hs)
+
+end AlgebraicGeometry.WeilSheaf
