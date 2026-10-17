@@ -268,5 +268,29 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-0fef84886 (reviewer sub-agent of L); spot-checked: I read all of it and made no changes. The delivery is the item plus its report, with no new nodes. The statement is unchanged from Q43's version and is true. Small cases tested: the point site with Z->Z/n, q=id, F=0, R=0 and the empty cover. Without the hypothesis it fails (Z->Q, F=Z), so local surjectivity is genuinely needed. Step 1 builds u=theta(1 tensor -), which is R'-linear by balancing; the cited definitions say what the step uses. Step 2 reads off local representatives: module sheafification is the abelian sheafification; lem-pc-sites-sheafification-underlying-sets makes |theta| a set sheafification; def-weil-pbc-sheafification defines sheafification only by its universal property, so lem-weil-pbc-site-sheafification-sections-local (00WK) applies directly. Its universe convention is a stage-2 detail. Step 3 writes elements as finite sums of pure tensors, which is elementary. Step 4 lifts the coefficients on successive refinements; transitivity 00VH(ii) and the calculation 1 tensor sum(a_j m_j) = x_i| check out, and the n=0 and empty cases are handled. Step 5 proves the epimorphism by right cancellation using the uniqueness part of the sheaf axiom. Sources checked: Bhatt-Scholze Prop 6.8.4(1), p.59 ('Easy and left to the reader', so proof_origin agent is right), and Stacks 03EK, 03CY, 00YR, 00WK, 00VH, 00VM and 00VR at their labels. An rg search of dag/nodes found no duplicate; lem-weil-pbc-site-flat-quotient-tensor-ses, lem-sc-etale-tensor-sections-local-surjectivity and lem-weil-sheaf-scalar-extension-ring-iso were read and differ. The blueprint via chain is consistent with the parent's step 4 and det-lem-coefficient-heart-closure paragraph (2). Both tool_uses are accepted: sections-local is a generic off-unit tool, and underlying-sets is a Mathlib leaf. No SGA is used. This is not a target node, so no base-change check applies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c2638797",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Every node clause has a matching Lean clause: site C:Type u/Category.{u} small in the coefficient universe; R₀ R : Sheaf J CommRingCat.{u}, q : R₀ ⟶ R; hq = Presheaf.IsLocallySurjective of the RingCat map; F : SheafOfModules (𝓡 R₀); R ⊗_{R'} F = recorded changeOfRings q F (sectionwise extendScalars then module sheafification, Stacks 03EK), restricted along q; map = ExtendRestrictScalarsAdj.unit then the sheafification unit (rfl test confirms m ↦ 1⊗m); both conclusions (IsLocallySurjective on underlying abelian presheaves ∧ Epi in SheafOfModules) present. The instance binders are inherited from changeOfRings and are found by inferInstance with full Mathlib for small sites in universe u, so they add no assumption. No hollow def (naturality is a named sorry theorem with docstring), no proofs, source/blueprint docstrings everywhere, lines ≤100, lean.statement verbatim, all 4 lean.declarations present, only lean changed on the item, dependency nodes identical to the side clone. No duplicate declaration found (topological-only adjunctions; siteCoefficientTensorAdj in a Paper lemma module is obtained by choice and is not a stmt_dep). nt_compile.py --json: clean, 2.2 s/2.5 s, exit code 0. Observations only: main docstring compresses the 5 steps; some dependency-representing imports are not strictly used; second-reading section is the post-2026-10-17 note that workers deliver directly."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralTensorQuotientEpimorphism",
+  "declaration": "SheafOfModules.integral_tensor_quotient_epimorphism",
+  "file": "lean/Sheaf/SixFunctors/IntegralTensorQuotientEpimorphism.lean",
+  "statement": "theorem integral_tensor_quotient_epimorphism {R₀ R : Sheaf J CommRingCat.{u}} (q : R₀ ⟶ R) (hq : Presheaf.IsLocallySurjective J ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map q).hom) (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R₀)) : Presheaf.IsLocallySurjective J ((PresheafOfModules.toPresheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R₀).obj).map (integralTensorQuotientUnit q F).val) ∧ Epi (integralTensorQuotientUnit q F)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SheafOfModules.integralTensorQuotientPresheafUnit_naturality",
+   "SheafOfModules.integralTensorQuotientPresheafUnit",
+   "SheafOfModules.integralTensorQuotientUnit",
+   "SheafOfModules.integral_tensor_quotient_epimorphism"
+  ]
  }
 }
