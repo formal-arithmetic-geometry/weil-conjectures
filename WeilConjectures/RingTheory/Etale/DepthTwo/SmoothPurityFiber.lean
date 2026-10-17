@@ -78,6 +78,43 @@ lemma fiberLocalRingHom_algebraMap (b : B) :
     fiberLocalRingHom q P hP (algebraMap B _ b) = algebraMap (q.Fiber B) _ (1 ⊗ₜ b) :=
   Localization.localRingHom_to_map _ _ _ _ _
 
+/-- If `x ∈ B` has zero image in the local ring of the fibre `κ(q) ⊗ B` at `P`, then `x` lies in
+every prime `Q` between `qB` and `P`. -/
+lemma mem_of_fiberLocalRingHom_eq_zero (Q : Ideal B) [Q.IsPrime]
+    (hqQ : q.map (algebraMap R₀ B) ≤ Q) (hQP : Q ≤ P) {x : B}
+    (hx : fiberLocalRingHom q P hP (algebraMap B _ x) = 0) : x ∈ Q := by
+  have hQ : q = Q.comap (algebraMap R₀ B) :=
+    le_antisymm (Ideal.map_le_iff_le_comap.1 hqQ) (hP ▸ Ideal.comap_mono hQP)
+  let φ : q.Fiber B →ₐ[R₀] Q.ResidueField :=
+    Algebra.TensorProduct.lift (Ideal.ResidueField.mapₐ q Q (Algebra.ofId R₀ B) hQ)
+      (IsScalarTower.toAlgHom R₀ B Q.ResidueField) fun _ _ ↦ .all _ _
+  have hφ (b : B) : φ (1 ⊗ₜ b) = algebraMap B Q.ResidueField b := by
+    simp [φ]
+  have hker (y : q.Fiber B) (hy : φ y = 0) : y ∈ fiberPrime q P hP := by
+    obtain ⟨r, hr, s, hrs⟩ := Ideal.Fiber.exists_smul_eq_one_tmul q y
+    have hs : s ∈ Q := by
+      rw [← Ideal.algebraMap_residueField_eq_zero, ← hφ, ← hrs, map_smul, hy, smul_zero]
+    have h1 : r • y ∈ fiberPrime q P hP := by
+      rw [hrs, fiberPrime, RingHom.mem_ker, fiberToResidueField_one_tmul,
+        Ideal.algebraMap_residueField_eq_zero]
+      exact hQP hs
+    rw [Algebra.smul_def] at h1
+    refine ((inferInstance : (fiberPrime q P hP).IsPrime).mem_or_mem h1).resolve_left
+      fun h ↦ hr ?_
+    rw [fiberPrime, RingHom.mem_ker, AlgHom.commutes,
+      IsScalarTower.algebraMap_apply R₀ B P.ResidueField,
+      Ideal.algebraMap_residueField_eq_zero] at h
+    rw [hP]
+    exact h
+  let φ' : Localization.AtPrime (fiberPrime q P hP) →+* Q.ResidueField :=
+    IsLocalization.lift (M := (fiberPrime q P hP).primeCompl)
+      fun y ↦ isUnit_iff_ne_zero.2 fun h ↦ y.2 (hker _ h)
+  rw [fiberLocalRingHom_algebraMap] at hx
+  have := congrArg φ' hx
+  rw [IsLocalization.lift_eq, map_zero] at this
+  rw [← Ideal.algebraMap_residueField_eq_zero, ← hφ]
+  exact this
+
 /-- The local rings of the fibre of a smooth algebra are domains (they are regular). -/
 instance isDomain_localization_fiberPrime [Algebra.Smooth R₀ B] :
     IsDomain (Localization.AtPrime (fiberPrime q P hP)) :=
