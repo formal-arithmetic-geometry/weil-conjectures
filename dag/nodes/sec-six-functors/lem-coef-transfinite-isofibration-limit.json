@@ -2,18 +2,127 @@
  "id": "lem-coef-transfinite-isofibration-limit",
  "kind": "statement",
  "title": "Continuous transfinite towers of categorical fibrations compute coherent limits",
- "statement": "Use the universes, simplicial sets, quasicategories, coherent diagrams, cores and mapping spaces of [def-cbc-enhanced-diagrams-cones], and isofibrations of [lem-coef-infinity-isofibration-exponentiation]. Fix a small nonzero ordinal $\\lambda$ and a strict inverse diagram $X:\\lambda^{\\mathrm{op}}\\to\\mathsf{sSet}$ of small quasicategories. Assume that $X_{\\alpha+1}\\to X_\\alpha$ is an isofibration whenever $\\alpha+1<\\lambda$, and that, for every nonzero limit ordinal $\\beta<\\lambda$, the canonical map $X_\\beta\\to\\lim_{\\alpha<\\beta}X_\\alpha$ is a simplicial isomorphism. Then the degreewise simplicial limit $L=\\lim_{\\alpha<\\lambda}X_\\alpha$ is a quasicategory and its projection cone is a limit cone in $\\mathrm{Cat}_\\infty$. For every small simplicial set $K$, the canonical equality $\\operatorname{Fun}(K,L)=\\lim_{\\alpha<\\lambda}\\operatorname{Fun}(K,X_\\alpha)$ presents a limit in $\\mathrm{Cat}_\\infty$ as well. These comparisons are induced by projections and are natural in maps of continuous inverse diagrams and restrictions of $K$. No surjectivity on objects is assumed.",
+ "statement": "Use the universes, simplicial sets, quasicategories, coherent diagrams, cores and mapping spaces of [def-cbc-enhanced-diagrams-cones], and isofibrations of [lem-coef-infinity-isofibration-exponentiation]. Use $\\mathrm{Cat}_\\infty$ and the coherent diagram associated to a strict diagram as defined in [def-cbc-enhanced-cartesian-fibration], in a containing universe. Fix a small nonzero ordinal $\\lambda$ and a strict inverse diagram $X:\\lambda^{\\mathrm{op}}\\to\\mathsf{sSet}$ of small quasicategories. Assume that $X_{\\alpha+1}\\to X_\\alpha$ is an isofibration whenever $\\alpha+1<\\lambda$, and that, for every nonzero limit ordinal $\\beta<\\lambda$, the canonical map $X_\\beta\\to\\lim_{\\alpha<\\beta}X_\\alpha$ is a simplicial isomorphism. Then the degreewise simplicial limit $L=\\lim_{\\alpha<\\lambda}X_\\alpha$ is a quasicategory and its projection cone is a limit cone in $\\mathrm{Cat}_\\infty$. For every small simplicial set $K$, the canonical equality $\\operatorname{Fun}(K,L)=\\lim_{\\alpha<\\lambda}\\operatorname{Fun}(K,X_\\alpha)$ presents a limit in $\\mathrm{Cat}_\\infty$ as well. These comparisons are induced by projections and are natural in maps of continuous inverse diagrams and restrictions of $K$. No surjectivity on objects is assumed.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "Appendix A.2.9, especially Proposition A.2.9.19, Example A.2.9.22, and Corollaries A.2.9.24(ii) and A.2.9.25(2): well-founded inverse Reedy diagrams and injective fibrancy. The statement is the agent-formulated continuous-ordinal specialization in the Joyal model, extending the sequential case of Kerodon Example 7.6.5.10 (03HT), read online. No Stacks tag states this result; archival copy WANTED."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-isofibration-exponentiation"
+  "lem-coef-infinity-isofibration-exponentiation",
+  "def-cbc-enhanced-cartesian-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=\\lambda^{\\mathrm{op}}$ and let $\\mathcal M$ be the Joyal model category of [lem-coef-joyal-model-structure]. Apply [lem-coef-ordinal-inverse-diagram-model] to $\\mathcal M$ and this small ordinal. Its matching object at $\\alpha$ is $M_\\alpha X=\\lim_{\\gamma<\\alpha}X_\\gamma$. At $0$ the matching map is $X_0\\to\\Delta^0$, a Joyal fibration since $X_0$ is a quasicategory. At a successor $\\alpha+1$, the earlier diagram has initial index $\\alpha$, so its cones are uniquely specified by the component at $\\alpha$; hence $M_{\\alpha+1}X=X_\\alpha$ canonically. The matching map is the assumed isofibration. Clause (1) of [lem-coef-joyal-quasicategory-characterizations], with exactly the equivalence-edge lifting condition used in [lem-coef-infinity-isofibration-exponentiation], makes it a Joyal fibration. At a nonzero limit the matching map is a simplicial isomorphism by continuity, hence a fibration (transport any lifting square through its inverse). These exhaust the indices, so $X$ is fibrant in this diagram model structure. No natural-number degree restriction is being used.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-ordinal-inverse-diagram-model",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, inverse-limit infrastructure: ordinal matching-object check; general model input is HTT A.2.9.19 and A.2.9.24(ii), recorded in the cited ordinal-model node."
+   }
+  },
+  {
+   "text": "The constant-diagram functor $c:\\mathcal M\\to\\mathcal M^I$ has right adjoint the strict limit: a natural map $cT\\to D$ is a compatible family of maps $T\\to D_\\alpha$, so factors uniquely through $\\lim_I D$. The model structure of [lem-coef-ordinal-inverse-diagram-model] makes cofibrations and trivial cofibrations objectwise. Thus $c$ preserves both classes. By [lem-coef-model-infinity-derived-adjunction], its right adjoint preserves fibrations. It preserves the terminal object as well: a compatible family in the constant terminal diagram is unique. Apply it to the fibrant diagram $X$ of Step 1. Its strict limit $L$ is fibrant in $\\mathcal M$, hence a quasicategory by [lem-coef-joyal-model-structure]. The ordinary counit $cL\\to X$ has precisely the stated simplicial projections as its components.",
+   "uses": [
+    "lem-coef-ordinal-inverse-diagram-model",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction before the inverse limit: constant/strict-limit adjunction and its Quillen class check."
+   }
+  },
+  {
+   "text": "Let $W$ be the Joyal weak equivalences and $W_I$ their objectwise class. Write $\\mathcal C=\\mathcal M[W^{-1}]_\\infty$ and $\\mathcal D=\\mathcal M^I[W_I^{-1}]_\\infty$. The constant functor preserves all weak equivalences, so [lem-coef-model-infinity-derived-adjunction] identifies its left derived functor with its directly localized functor $\\bar c$. All simplicial sets are cofibrant because initial inclusions are monomorphisms, and $X$ is already fibrant by Step 1. Thus the derived right functor at $q_I X$ is represented by the exact object $L=\\lim_I X$, with counit represented by the projection transformation $cL\\to X$. The derived adjunction gives, for every object $T$ of $\\mathcal C$, a natural equivalence $\\operatorname{Map}_{\\mathcal C}(T,qL)\\simeq\\operatorname{Map}_{\\mathcal D}(\\bar cT,q_I X)$. It is the map obtained by applying $\\bar c$ and then composing with that counit. Hence this equivalence retains the cone, not merely its apex.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-ordinal-inverse-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, displayed R Hom / R lim adjunction: coherent derived adjunction including its counit, applied to a fibrant inverse diagram."
+   }
+  },
+  {
+   "text": "[lem-coef-small-diagram-model-rectification] applies, $\\mathcal M$ being a model category with functorial factorizations and $I$ small. $\\Theta_I$ identifies $\\mathcal D$ with $\\operatorname{Fun}(N(I),\\mathcal C)$, carrying $q_IX$ to $q\\circ N(X)$, the localized constants to the coherent constants and the counit of Step 3 to the image of the projection cone. Step 3 becomes $\\operatorname{Map}_{\\mathcal C}(T,qL)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal C)}(\\Delta T,q\\circ N(X))$, given by composition with that cone, so by the mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] the image of the projection cone is limiting in $\\mathcal C$. Pass to $\\mathrm{Cat}_\\infty$ of [def-cbc-enhanced-cartesian-fibration] by the derived coherent-nerve identification of [lem-coef-coherent-nerve-comparison], computed on objects and strict maps by $Q\\mapsto N_{\\mathrm{hc}}R\\mathfrak C[Q]$; equivalences preserve limiting cones by the same criterion. For a quasicategory $Q$ the unit $\\eta_Q:Q\\to N_{\\mathrm{hc}}R\\mathfrak C[Q]$ is adjunct to the Dwyer--Kan equivalence $\\mathfrak C[Q]\\to R\\mathfrak C[Q]$, whose target is locally Kan, hence Bergner fibrant; as $Q$ is Joyal cofibrant, the Quillen-equivalence clause makes $\\eta_Q$ a categorical equivalence of quasicategories, natural in strict maps. By clause (2) of [lem-coef-joyal-quasicategory-characterizations] each $\\eta_{X_\\alpha}$ and $\\eta_L$ is an equivalence in $\\mathrm{Cat}_\\infty$. The strict cone $cL\\to X$ is a strict diagram on the ordinary category $I^{\\triangleleft}$; the coherent nerve of an ordinary category is its ordinary nerve, so $\\eta$ is a coherent transformation between its coherent nerve diagram, as specified in [def-cbc-enhanced-cartesian-fibration], and the transported cone. By the vertex-component clause of [lem-cbc-enhanced-functor-cone-calculus] it is an equivalence of cones. Hence the projection cone with apex $L$ is limiting in this exact $\\mathrm{Cat}_\\infty$.",
+   "uses": [
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, passage from the derived inverse limit to a coherent limit: ordinary-diagram rectification, Joyal--Bergner comparison, and the coherent cone criterion."
+   }
+  },
+  {
+   "text": "For every simplicial degree $n$, the internal functor object of [def-cbc-enhanced-diagrams-cones] and the degreewise limit give $\\operatorname{Fun}(K,L)_n=\\operatorname{Hom}(K\\times\\Delta^n,L)=\\lim_{\\alpha<\\lambda}\\operatorname{Hom}(K\\times\\Delta^n,X_\\alpha)=\\lim_{\\alpha<\\lambda}\\operatorname{Fun}(K,X_\\alpha)_n$. A map into a degreewise limit is exactly a compatible family, so these are canonical identifications. They commute with the operators induced by maps of standard simplices, and assemble to the asserted equality of simplicial sets. The same calculation applies to any initial segment of the tower.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, functoriality of the inverse limit: degreewise compatible-family calculation of the internal Hom."
+   }
+  },
+  {
+   "text": "Set $Y_\\alpha=\\operatorname{Fun}(K,X_\\alpha)$. By [lem-cbc-enhanced-functor-cone-calculus] these are quasicategories. Apply [lem-coef-infinity-isofibration-exponentiation] to each successor transition with $A=\\varnothing$ and $B=K$. Since $\\operatorname{Fun}(\\varnothing,-)=\\Delta^0$, the corner map is exactly $Y_{\\alpha+1}\\to Y_\\alpha$, so it is an isofibration. At every nonzero limit stage, Step 5 identifies the comparison $Y_\\beta\\to\\lim_{\\alpha<\\beta}Y_\\alpha$ with the internal Hom of the given simplicial isomorphism, hence an isomorphism. Thus $Y$ has all the hypotheses used for the arbitrary tower $X$ in Steps 1--4. Applying that argument to $Y$ proves that its strict limit is its limit in $\\mathrm{Cat}_\\infty$. By Step 5 that strict limit and its cone are $\\operatorname{Fun}(K,L)$ and the images of the original projections.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, retained coherent parameters in the inverse-limit adjunction: exponentiated tower and the same derived-limit argument."
+   }
+  },
+  {
+   "text": "For a strict map of continuous inverse diagrams $a:X\\to X'$, the limit map sends the compatible family $(x_\\alpha)$ to $(a_\\alpha x_\\alpha)$, and $\\pi_\\alpha\\lim(a)=a_\\alpha\\pi_\\alpha$ in every simplicial degree. For $K'\\to K$, precomposition on $\\operatorname{Hom}(K\\times\\Delta^n,-)$ commutes with every projection and with the compatible-family identification of Step 5. These identities give the stated naturality of comparisons and cones; the coherent versions retain these transformations by the naturality clauses of [lem-coef-model-infinity-derived-adjunction] and [lem-coef-small-diagram-model-rectification]. No stage used surjectivity on objects. Empty stages and $K=\\varnothing$ are permitted.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-small-diagram-model-rectification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, last paragraph: specified maps and naturality retained by the derived-limit calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-joyal-model-structure",
+  "lem-coef-ordinal-inverse-diagram-model",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-small-diagram-model-rectification",
+  "lem-coef-coherent-nerve-comparison",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, displayed derived Hom/inverse-limit calculation. Agent-written ordinal matching-object and coherent derived-adjunction specialization from the cited DAG statements; the new general diagram-model input is separately stated, not used as a bare URL theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -66,7 +175,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-flexible-weight-enriched-lift",
@@ -78,7 +187,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: coherent mapping-complex adjunction before the derived inverse limit; inverse-tower comparison needed in cellular enriched cone construction.",
+   "place": "Proof paragraph 2: coherent mapping-complex adjunction before the derived inverse limit; the inverse-tower comparison used in the cellular enriched cone construction.",
    "via": [
     "lem-coef-flexible-weight-enriched-lift",
     "lem-coef-linear-monad-tensor-enrichment",
@@ -89,5 +198,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-transfinite-isofibration-limit",
+  "worker": "stage1",
+  "summary": "Repair of returned split. Added one statement-only general inverse-ordinal diagram model lemma; replaced bare-URL limit claims by the constant/limit Quillen check, coherent derived adjunction, small ordinary-diagram rectification, Joyal--Bergner comparison and cone mapping-space criterion. The existing direct Joyal-fibration characterization supplies the isofibration conversion, avoiding a walking-isomorphism extension gap. Added the existing Cat-infinity definition as a statement dependency. Retained degreewise exponentiation and naturality, all previous search evidence, and original creation provenance.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 (displayed R Hom / R lim calculation and specified maps): inverse-tower and coherent-parameter infrastructure of its cellular enriched-cone descendants.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General mapping-space characterization of coherent limits and closure of functor quasicategories; this is a foundation for the derived inverse-limit comparison, not a replacement of the biduality or coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-b5661eecb",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-b5661eecb (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node lem-coef-ordinal-inverse-diagram-model, every cited statement, the parent lem-coef-flexible-weight-enriched-lift (steps 4 and 6), the Kan-tower sibling, the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint (paragraph 2). New node: it is the Reedy structure on the inverse category theta^op, from HTT A.2.9 / Hirschhorn 15.3.4. HTT is not archived and is marked WANTED, so I checked it from my own knowledge. With an inverse shape, latching objects are initial, so cofibrations and trivial cofibrations are objectwise, and fibrations are given by relative matching maps with M_alpha = lim_{beta<alpha}. I tested theta = 0, 1, 2, omega and omega+1. It is not a duplicate: lem-coef-reedy-model-structure allows only N-valued degrees, the injective-model node needs combinatoriality and gives no matching test, and the latching-lifting node is a lifting statement only. It does not restate the item, and its form (statement only, searches, blueprint from/via) is correct. Item: the statement is unchanged except for the Cat-infinity definition reference, which is meaning-preserving. Edge cases checked: lambda=1, successor and limit lambda, empty stages, K empty. Step 1: zero stage, successor matching object = X_alpha, isofibration = clause (1) of the characterizations node, and an isomorphism at limit stages. Steps 2-3: the Quillen check and the derived counit with X fibrant. Step 5: elementary. Step 6: corner map with A empty gives Fun(K,X_{a+1}) -> Fun(K,X_a). Step 7: naturality. All of these are correct. One E5 fault: Step 4 moved from the Joyal localization to the Cat-infinity of def-cbc-enhanced-cartesian-fibration (coherent nerve of the strict diagram) only by saying 'all comparisons are natural'. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-transfinite-isofibration-limit.json: Step 4 now spells out the argument. The unit Q -> N_hc R C[Q] is a categorical equivalence, from the Quillen-equivalence clause with a locally Kan target. Clause (2) of lem-coef-joyal-quasicategory-characterizations then makes it an equivalence in Cat-infinity. The vertex-component clause of the cone-calculus node makes it an equivalence of cones over the ordinary category I^<|. lem-coef-joyal-quasicategory-characterizations is added to Step 4's uses; it was already in proof_deps. The already-reviewed lem-coef-degreewise-cartesian-pullback-cat-infinity uses the coherent-nerve identification the same way. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, a generic limit criterion from the cbc unit. No SGA, no cycle, no node dropped.; 1 file(s) fixed by the reviewer"
  }
 }

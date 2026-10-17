@@ -16,9 +16,123 @@
   "lem-coef-algebroid-presentability",
   "lem-coef-algebroid-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the asserted $\\mathcal V$-valued Hom functor directly from the algebroid operations; it is not supplied as a theorem by tensor calculus. For endpoint arrows $f:x'\\to x$, $g:y\\to y'$, represent them by $\\mathbf1\\to\\mathcal E(x',x)$ and $\\mathbf1\\to\\mathcal E(y,y')$. Insert these on the two sides of the middle factor in the three-input composition to obtain $\\mathcal E(x,y)\\to\\mathcal E(x',y')$, $h\\mapsto g h f$. An $n$-simplex of $U\\mathcal E$ is, by the adjunction between free enrichment and $U$ in tensor calculus applied to $K=\\Delta^n$, an enriched functor $(\\Delta^n)_{\\mathcal V}\\to\\mathcal E$: its points $\\mathbf1\\to\\mathcal E(x_i,x_j)$ come with their composition simplices in the algebroid. For chains $x_n\\to\\cdots\\to x_0$ and $y_0\\to\\cdots\\to y_n$, so represented, keep the middle factor uncomposed and use the algebroid's operation on each longer string to supply the simplex between the corresponding Hom objects. A face composes adjacent endpoint inputs or removes an extreme input; a degeneracy inserts its unit. Their compatibilities are exactly the operadic composition and inert-restriction compatibilities in the definition of an algebroid. This also treats families: for a space $K$ of endpoint arrows, use the adjoint map $K\\otimes\\mathbf1\\to\\mathcal E(x',x)$, and similarly on the right; separate colimit preservation turns their tensor into the family indexed by the product of the parameter spaces. Thus the construction supplies all simplices of a coherent functor $(U\\mathcal E)^{\\mathrm{op}}\\times U\\mathcal E\\to\\mathcal V$. Compose with the coherent Hom functor $\\operatorname{Map}_{\\mathcal V}(v,-)$ to get $H_v$.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "§4.3, algebroid operations; direct marked-middle-slot construction by the agent."
+   }
+  },
+  {
+   "text": "Apply the collage lemma with $C=D=U\\mathcal E$ and $H=H_v$. Its smallness hypothesis concerns $U\\mathcal E$: the enriched category has a small object space, and its underlying mapping spaces are small in the fixed universes of tensor calculus. The smallness of $S$ is used later, not here. Put $A_v\\subseteq\\operatorname{Fun}(\\Delta^1,C_v)$ equal to the full subcategory on mixed arrows, with endpoint evaluation to $U\\mathcal E\\times U\\mathcal E$. Its objects are $(x,y,a)$ with $a\\in H_v(x,y)$. For mixed arrows $a:x_0\\to y_1$ and $b:x'_0\\to y'_1$, the arrow-morphism-square lemma describes a morphism as endpoint arrows $f:x\\to x'$, $g:y\\to y'$ and a path $b f\\simeq g a$ in $H_v(x,y')$. This is the homotopy equalizer of the two maps from the product of endpoint mapping spaces to $H_v(x,y')$. The collage lemma identifies these two maps and their higher actions with enriched precomposition and postcomposition, and its mixed-string presentation specifies their coherent compositions.",
+   "uses": [
+    "lem-coef-space-bimodule-collage",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-enriched-category-tensor-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.3.1 Definition 2.3.1.3 and Remark 2.3.1.4; coherent square description from the cited arrow-morphism statement."
+   }
+  },
+  {
+   "text": "Put $B_v=U\\operatorname{Fun}_{\\mathcal V}(T_v,\\mathcal E)$. Apply the free-enriched-edge square presentation to the complete target $\\mathcal E$. It presents its objects by exactly the triples $(x,y,a:v\\to\\mathcal E(x,y))$ and its morphisms by $(f,g,\\gamma:b f\\simeq g a)$, with the whole path space and all strings of squares. This result concerns only the single free edge. In particular it makes no assertion about $\\mathcal E^S(P,Q)$ or enriched ends. Since $H_v(x,y')=\\operatorname{Map}_{\\mathcal V}(v,\\mathcal E(x,y'))$, the endpoint maps $d_0,d_1$ and paths in this presentation are exactly those calculated for $A_v$ in step 2.",
+   "uses": [
+    "lem-coef-free-enriched-edge-square-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Remark 9.5 and Gepner–Haugseng Remark 4.3.4; agent-formulated free-edge square refinement."
+   }
+  },
+  {
+   "text": "Compare the two complete Segal presentations over $U\\mathcal E\\times U\\mathcal E$. Send a triple $(x,y,a)$ of $B_v$ to the mixed arrow labeled by $a$ in $A_v$. On a string of squares keep its two endpoint strings and its paths $b f\\simeq g a$, interpreting the latter by the mixed-string presentation of the collage. This defines the comparison on the whole string, including its compatibility simplices; it is not a choice of a homotopy for each commutative square. Conversely read those same labels and paths. Inner faces on both sides paste paths and compose endpoint arrows; outer faces restrict and degeneracies insert identities. Hence these two operations commute with every simplicial operator and are inverse on the coherent presentations. The complete-Segal/quasicategory comparison gives an equivalence $B_v\\simeq A_v$ over the endpoint category. This is the endpoint-fibration comparison; no enriched twisted-arrow formula was used to obtain it.",
+   "uses": [
+    "lem-coef-free-enriched-edge-square-presentation",
+    "lem-coef-space-bimodule-collage",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-complete-segal-quasicategory-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.3.1 correspondence; explicit comparison of square/string presentations by the agent."
+   }
+  },
+  {
+   "text": "Take coherent $S$-diagrams in this equivalence and fix the endpoint diagrams to $(P,Q)$. Work with the homotopy fibers on cores, so fixing endpoints includes their specified coherent identifications. The resulting space for $A_v$ is the space of mixed transformations from $P_0$ to $Q_1$ in $\\operatorname{Fun}(S,C_v)$: by the definition of internal functor simplicial sets, a diagram of mixed arrows is the same map $S\\times\\Delta^1\\to C_v$, and the same product rearrangement works with every additional simplex parameter. Restriction along $S\\times\\partial\\Delta^1\\hookrightarrow S\\times\\Delta^1$ is an isofibration by the exponentiation lemma. Its strict endpoint fiber computes the categorical pullback and its core computes the homotopy fiber by the isofibration-pullback lemma. All transformations in that fiber are equivalences, since their endpoint components are identities; the componentwise criterion of functor-cone calculus therefore makes it a space. The pinch comparison identifies this fixed-end arrow space with $\\operatorname{Map}_{\\operatorname{Fun}(S,C_v)}(P_0,Q_1)$. Postcomposing diagrams with the inverse equivalences in step 4 and their endpoint-compatible homotopies gives inverse maps on these spaces. Thus the left side of the required equivalence is the fixed-end space of $S$-diagrams in $B_v$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Internal-functor product adjunction and fixed-end mapping-space comparison; agent argument after the endpoint-preserving equivalence of step 4."
+   }
+  },
+  {
+   "text": "Apply the cotensor identity of tensor calculus with $\\mathcal A=T_v$ and $K=S$:\n$$\\operatorname{Fun}_{\\mathcal V}(T_v,\\mathcal E)^S\\simeq\\operatorname{Fun}_{\\mathcal V}(T_v,\\mathcal E^S).$$\nIts underlying category on the left is $\\operatorname{Fun}(S,B_v)$ by the coherent cotensor identification. Evaluation at the two distinguished objects of $T_v$ corresponds under this identity to the two endpoint $S$-diagrams, so its fiber fixes the objects $P,Q$ in $\\mathcal E^S$. The free-algebroid universal property identifies the space of enriched functors $F_v\\to\\mathcal E^S$ with these endpoints with $\\operatorname{Map}_{\\mathcal V}(v,\\mathcal E^S(P,Q))$. Because $\\mathcal E^S$ is complete, restriction along $F_v\\to LF_v=T_v$ is an equivalence on these functor spaces; locality and the completion unit in the completion lemma justify this restriction. Therefore the fixed-end space of step 5 is exactly the claimed right side. Uncurrying also identifies it with enriched maps $T_v\\otimes S_{\\mathcal V}\\to\\mathcal E$ having endpoints $P,Q$, proving the additional probe clause.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-algebroid-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Remark 9.5; cotensor/currying identity and completion, with the fixed-end free-graph property from Gepner–Haugseng Remark 4.3.4."
+   }
+  },
+  {
+   "text": "The comparison reads mixed labels and its inverse glues their coherent mixed strings, by steps 2–4. The free-edge and cotensor identifications use endpoint evaluation, so the equivalence of steps 5–6 has these same component evaluations. A label at a nonidentity arrow $s\\to t$ of $S$ lies in $H_v(Ps,Qt)$; its indexing is the twisted-arrow diagram, not the set of all pairs of objects. We use no formula for an enriched end here. Restriction in $S$, precomposition by a coefficient map $v'\\to v$, and coherent maps of endpoint diagrams act on the same labels, paths and strings on both sides. The collage and free-edge presentations commute with these operations and with space parameters, while currying and completion are coherent; the inverse homotopies consequently commute with them as well. For $S=\\varnothing$ both fixed-end spaces are contractible (the enriched terminal category has terminal Hom object). For $S=*$ they reduce to $H_v(P,Q)$. For $v=\\mathbf1$ the labels are ordinary mapping-space arrows; the comparison is the ordinary coherent transformation comparison.",
+   "uses": [
+    "lem-coef-space-bimodule-collage",
+    "lem-coef-free-enriched-edge-square-presentation",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-algebroid-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Remark 9.5; parameter compatibility in the cited presentations and direct edge-case checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-complete-algebroid",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-algebroid-completion",
+  "lem-coef-algebroid-presentability",
+  "lem-coef-complete-segal-quasicategory-comparison",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-free-enriched-edge-square-presentation",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-space-bimodule-collage"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Repair of the circular enriched-end argument: direct Hom construction, comparison of free-edge and collage mixed-arrow square presentations over endpoints, then cotensor currying. External references are read online and remain WANTED for archival."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,13 +161,6 @@
    "results": "{\"top\": [\"CategoryTheory.EnrichedNatTrans\", \"CategoryTheory.Limits.CatCospanTransform\", \"CategoryTheory.Limits.CatCospanTransform.category\", \"CategoryTheory.Limits.CatCospanTransformMorphism.mk\", \"CategoryTheory.EnrichedFunctor.hom_ext_iff\", \"CategoryTheory.Limits.CatCospanTransform.noConfusionType\", \"CategoryTheory.Limits.CatCospanTransformMorphism\", \"CategoryTheory.Limits.CatCospanTransform.noConfusion\"], \"n_hits\": 8, \"note\": \"\", \"digest\": \"24f035b7ddd0e882\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned ordinary enriched/category-theory declarations, not this complete infinity-categorical statement."
-  },
-  {
-   "tool": "grep",
-   "query": "xyzCollageCrossingUniqueQ",
-   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: nearby Mathlib files concern ordinary enriched/profunctor constructions, not this infinity-categorical statement."
   },
   {
    "tool": "leanfinder",
@@ -85,13 +192,6 @@
   },
   {
    "tool": "grep",
-   "query": "uniqueXYZ987",
-   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: nearby Mathlib files concern ordinary enriched/profunctor constructions, not this infinity-categorical statement."
-  },
-  {
-   "tool": "grep",
    "query": "EnrichedNatTrans|free.*[Ee]nriched|collage",
    "results": "{\"t\": \"2026-10-17T14:03:31Z\", \"tool\": \"grep\", \"query\": \"EnrichedNatTrans|free.*[Ee]nriched|collage\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\"], \"digest\": \"0dd98201da5c7f4d\"}",
    "date": "2026-10-17",
@@ -120,7 +220,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-flexible-weight-enriched-lift",
@@ -143,5 +243,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-collage-crossing-transformations",
+  "worker": "stage1",
+  "summary": "Repaired every point of the returned delivery. Constructed the coherent enriched Hom functor explicitly from marked-middle-slot algebroid operations. Replaced the unsupported and circular enriched end formula by an equivalence over endpoints between the mixed-arrow category of the collage and the underlying enriched free-edge functor category, using one new strictly lower single-edge square-presentation lemma. Currying and the fixed-end free-edge property then give the required equivalence for arbitrary S. Corrected smallness (UE) and label indexing (arrows of S), and removed the two padding grep records. The statement is unchanged.",
+  "blueprint": "Retains the inherited prop-coef-integral-exceptional-adjoint paragraph-2 ancestry through flexible-weight-enriched-lift. The seven steps supply the coherent enriched mapping infrastructure used by that parent before its end formula, without citing the parent or its enriched end clause.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 5 takes only its general componentwise criterion (a transformation in Fun(K,C) is an equivalence iff its vertex components are) and Kan-mapping-space clause, to see that the strict endpoint fiber of Fun(S,A_v) is a space; no node of the biduality unit states this generic quasicategory fact, and it replaces no step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-b259565f9",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-b259565f9 (reviewer sub-agent of L); spot-checked: Read the whole item, the new node lem-coef-free-enriched-edge-square-presentation, the statements of all 13 cited nodes, the parent's step 9 and unit sk-prop-sf-biduality-general. The external sources (HTT 2.3.1.3–4, Haugseng 2311.13362 Rem. 9.5, Gepner–Haugseng §4.3) are not local. The delivery marks them WANTED with an agent proof_origin; I did not fetch them and checked the mathematics independently. The item is true: the left side is the end over S of Map_V(v,E(P-,Q-)), which equals Map_V(v,E^S(P,Q)). Checked at S empty, S a point, v initial and v=1, plus the T_v⊗S_V probe clause. The new node is true. Its morphism space is the homotopy equalizer of b∘f and g∘a in Map(v,E(x,y')), coming from the free-edge transformation pullback. At v=1 it reduces to the arrow-square lemma, at v=0 B_v=UE×UE, and the Kronecker case and empty E also check out. It has no S, collage or end, so it is not a restatement (D1). An rg search of the DAG and the six closest candidates found no duplicate. Steps 2–7 use only what the cited statements say: the collage mapping spaces and actions, the arrow-square formula, the complete-Segal equivalence, isofibration plus pullback for the fixed-end fibers, the pinch comparison, cotensor currying, and the free-algebroid property with completion. Hypotheses hold: E is small and complete, V presentable so H_v is small and UE is small. The dependency closure (1242 nodes) contains neither the item nor its parent, so there is no cycle; proof_deps equals the union of uses. The repairs of the previous C4/E5/D4 return points are confirmed. Fixes: (1) lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) is outside the route and was not declared; I accept it as a tool use for the generic componentwise-equivalence and Kan-mapping-space clauses in step 5 and added it to split_report.tool_uses. (2) Added the missing lean_audit (none/none) to the new node. (3) Added one sentence to step 1 saying that n-simplices of UE are enriched functors (Δ^n)_V→E, by the free-enrichment ⊣ U adjunction of tensor calculus. Statements are unchanged and no nodes are dropped.; 2 file(s) fixed by the reviewer"
  }
 }
