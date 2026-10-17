@@ -1,0 +1,115 @@
+{
+ "id": "new-integral-residue-pull-flat-model-comparison-mate-normalized",
+ "kind": "statement",
+ "title": "Counit-normalized mate calculation for the integral residue pull comparison",
+ "statement": "For every scheme map f and homotopy-category object H of integral coefficient modules, after composing the flat-model comparison composite with the inverse residue pullback counit, the result equals the residue pull mate followed by residue pullback of the integral reduction counit.",
+ "stmt_deps": [
+  "new-integral-residue-pull-square-data",
+  "new-integral-residue-pull-ordinary-unit"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; derived mate comparison after the flatness clause"
+ },
+ "proof": [
+  {
+   "text": "Expand the derived reduction and pullback counits. Transpose the resulting equality under the extension/restriction adjunction, use the restriction/pullback square and the ordinary scalar unit identity, then cancel the residue pullback counit.",
+   "uses": [
+    "new-integral-residue-pull-square-data",
+    "new-integral-residue-pull-ordinary-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-pull-square-data",
+  "new-integral-residue-pull-ordinary-unit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; normalized mate calculation",
+  "note": "Strictly smaller normalized equation used to prove the flat-model comparison; the final target follows by composing with the residue upper-star counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized derived counit mate identity for scalar extension and pullback",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε.congr_simp, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.RestrictionCoextensionAdj.counit', CategoryTheory.ChosenPullbacksAlong.isoInv_mapPullbackAdj_counit_app_left",
+   "date": "2026-10-17",
+   "verdict": "Generic derived counit and scalar adjunction results only; no complete specialized residue mate theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived mate calculation counit normalized pullback scalar extension restriction",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, PresheafOfModules.pullbackComp, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, SheafOfModules.pullbackObjUnitToUnit, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-17",
+   "verdict": "Generic counit and pullback results only; no complete specialized derived mate calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit_symm",
+   "results": "1 hit: CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-17",
+   "verdict": "The generic mate identity is applicable but does not itself state the specialized residue comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*counit",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "No additional specialized result found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResiduePullFlatModelComparison",
+  "date": "2026-10-17",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-integral-residue-pull-flat-model-comparison",
+   "place": "normalized mate subcalculation",
+   "via": [
+    "new-integral-residue-pull-flat-model-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized",
+  "file": "lean/Sheaf/Paper/IntegralResiduePullFlatModelMateNormalized.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePull_flatModel_mate_normalized",
+  "statement": "theorem residueExchangePull_flatModel_mate_normalized\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (H : HomotopyCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n        (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ))\n    (hC : IsIso ((residueExchangeUpperStarCounit\n      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).app\n      (((Mod.extendScalars\n        (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory\n          (.up ℤ)).obj H))) :\n    ((residueExchangeReduction ℓ E X).map\n        ((residueExchangeUpperStarCounit (integralCoeff ℓ E) f).app H) ≫\n      (residueExchangeReductionCounit ℓ E X).app\n        ((((f)^*⟦integralCoeff ℓ E⟧).mapHomotopyCategory (.up ℤ)).obj H) ≫\n      DerivedCategory.Qh.map\n        ((NatTrans.mapHomotopyCategory\n          (pullIso (integralReductionMap ℓ E) f).hom (.up ℤ)).app H)) ≫\n      inv ((residueExchangeUpperStarCounit\n        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).app\n        (((Mod.extendScalars\n          (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory\n            (.up ℤ)).obj H)) =\n    (residueExchangePullHom ℓ E f).app (DerivedCategory.Qh.obj H) ≫\n      (residueExchangeUpperStar\n        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).map\n        ((residueExchangeReductionCounit ℓ E Y).app H)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T064700-L-725521",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T064700-L-725521",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

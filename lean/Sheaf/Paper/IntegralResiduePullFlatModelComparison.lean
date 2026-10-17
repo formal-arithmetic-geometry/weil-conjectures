@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.IntegralResiduePullSquareData
 import Sheaf.Paper.IntegralResiduePullOrdinaryUnit
+import Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
 
 /-! # Comparison equality for the integral residue pull model
 
@@ -60,6 +62,27 @@ theorem residueExchangePull_flatModel_comparison
           (((Mod.extendScalars
             (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory
               (.up ℤ)).obj H)) := by
-  sorry
+  dsimp only
+  have _ := hP
+  have _ := hcolim
+  let H := (HomotopyCategory.quotient _ (.up ℤ)).obj P
+  have hC : IsIso ((residueExchangeUpperStarCounit
+      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).app
+      (((Mod.extendScalars
+        (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory
+          (.up ℤ)).obj H)) := by
+    unfold residueExchangeUpperStarCounit residueExchangeUpperStar
+    dsimp only [id_eq]
+    infer_instance
+  have hn := residueExchangePull_flatModel_mate_normalized ℓ E f H hC
+  have hh := congrArg (fun z => z ≫
+      (residueExchangeUpperStarCounit
+        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).app
+        (((Mod.extendScalars
+          (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory
+            (.up ℤ)).obj H)) hn
+  simp only [Category.assoc] at hh
+  simpa [H] using hh
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing
