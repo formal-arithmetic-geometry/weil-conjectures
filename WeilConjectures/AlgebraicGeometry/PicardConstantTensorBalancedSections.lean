@@ -52,7 +52,7 @@ the first identity below. Restricting the displayed pure-tensor formulas
 restricts the ring coefficient and t while keeping s fixed. Tensor induction
 gives the second identity. These arguments also apply to the empty open,
 zero M, and zero G; no geometric hypothesis is needed. -/
-def picardConstantTensorBalancedSections
+noncomputable def picardConstantTensorBalancedSections
     (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules)
     (V : Y.Opens) :
@@ -104,7 +104,9 @@ theorem picardConstantTensorBalancedSections_smul
       (q V (tmul V 1 s)) ⊗ₜ[Γ(Y, V)]
         (show G.val.obj (op V) from t) := by
     apply (e V).injective
-    simp only [AddEquiv.apply_symm_apply, he, one_smul]
+    rw [AddEquiv.apply_symm_apply]
+    refine Eq.symm ((he V 1 s t).trans ?_)
+    simp
   rw [hi]
   change e V (a • (_ ⊗ₜ[Γ(Y, V)] _)) = _
   rw [← TensorProduct.tmul_smul]
@@ -128,7 +130,7 @@ theorem picardConstantTensorBalancedSections_map
     exact TensorProduct.tmul k a s
   let e := picardConstantTensorBalancedSections k Y g M G
   let q := picardConstantScalarExtensionSections k Y g M
-  have hq := picardConstantScalarExtensionSections_map k Y g M
+  have hq := @picardConstantScalarExtensionSections_map k _ Y g M
   have he := picardConstantTensorBalancedSections_tmul k Y g M G
   let P := (PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
     (picardConstantVector k Y M)

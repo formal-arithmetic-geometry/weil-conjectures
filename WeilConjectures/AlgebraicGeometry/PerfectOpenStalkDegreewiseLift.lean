@@ -43,7 +43,8 @@ Intersect the finitely many neighbourhoods, then take an affine neighbourhood W
 of x inside the intersection. Restrict all representatives to W. Cofinality of
 neighbourhoods inside W and the open-immersion stalk-ring isomorphisms give a
 natural isomorphism `openModuleStalkRestrictionComparison` between restriction
-followed by the W stalk and the U stalk; apply it termwise to obtain e. The germ formulas give the stated component
+followed by the W stalk and the U stalk; apply it termwise to obtain e. The germ
+formulas give the stated component
 identities. Empty source support intervals and zero ranks require no representatives
 and give the zero family. No perfectness assumption on Q or affineness
 assumption on U is needed. No differential compatibility is imposed or asserted. -/

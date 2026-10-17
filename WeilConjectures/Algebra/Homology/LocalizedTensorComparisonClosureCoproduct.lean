@@ -119,7 +119,6 @@ predicate. The constructions include an empty family: the coproduct of zero
 complexes and every coproduct comparison used above are zero-object maps.
 (blueprint: lem-pc-localized-tensor-comparison-closure-coproducts). -/
 theorem localizedTensorComparisonProperty_closure_coproducts
-    (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :
     ∀ {I : Type u} (G : I → DerivedCategory (ModuleCat.{u} A))
@@ -172,7 +171,6 @@ Proof: apply the proved all-representatives coproduct closure theorem to the
 given cocone and summand predicates, then specialize to U, e, hU, mU and i.
 (blueprint: lem-pc-localized-tensor-comparison-closure-coproducts-fixed-degree). -/
 theorem localizedTensorComparisonProperty_closure_coproducts_fixed_degree
-    (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)
     {I : Type u} (G : I → DerivedCategory (ModuleCat.{u} A))
@@ -190,7 +188,7 @@ theorem localizedTensorComparisonProperty_closure_coproducts_fixed_degree
     IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap
       ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by
   exact localizedTensorComparisonProperty_closure_coproducts
-    R A B C Q N t hC hQ G S ι hc hs U e hU mU i
+    R A B C Q N t hQ G S ι hc hs U e hU mU i
 
 
 end ModuleCat

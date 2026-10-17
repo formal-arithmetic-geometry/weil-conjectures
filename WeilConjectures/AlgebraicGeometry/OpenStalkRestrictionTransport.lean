@@ -94,9 +94,9 @@ inside W gives the additive restriction-stalk isomorphism. Its germ formula,
 checked on a common neighbourhood for a scalar and a vector, makes it linear
 after the open-immersion stalk-ring scalar transports. The same formula proves
 naturality. These canonical isomorphisms e are
-`openModuleStalkRestrictionComparison`. Restricting from U to V and then to W is
-restricting from U to W, sectionwise. The canonical W-to-V stalk
-comparison d0 satisfies the displayed law for the canonical V-to-U comparison e0:
+`openModuleStalkRestrictionComparison`. The comparison c of two slice restrictions is
+the sectionwise identity; associativity of inclusions gives its naturality. The canonical
+W-to-V stalk comparison d0 satisfies the displayed law for the canonical V-to-U comparison e0:
 both sides take a section germ to that same germ on U.
 
 For an arbitrary comparison a on V, put R = restriction from U to V. Transport
@@ -123,10 +123,16 @@ theorem exists_openStalk_restriction_transport
         (homOfLE hVU)
       let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
         (homOfLE hWV)
-      ∃ d : Q ⋙ openModuleStalkFunctor X W ⟨x, hxW⟩ ≅
-          openModuleStalkFunctor X V ⟨x, hxV⟩,
+      let P := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+        (homOfLE hWU)
+      ∃ (c : R ⋙ Q ≅ P)
+        (d : Q ⋙ openModuleStalkFunctor X W ⟨x, hxW⟩ ≅
+          openModuleStalkFunctor X V ⟨x, hxV⟩),
+        (∀ M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),
+          c.hom.app M = 𝟙 _) ∧
         ∀ M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),
-          (openModuleStalkRestrictionComparison X U W hWU x hxU hxW).hom.app M =
+          (openModuleStalkFunctor X W ⟨x, hxW⟩).map (c.hom.app M) ≫
+              (openModuleStalkRestrictionComparison X U W hWU x hxU hxW).hom.app M =
             d.hom.app (R.obj M) ≫ a.hom.app M := by
   classical
   -- Any family of comparisons works: descend its composite with a.inv along restriction.
@@ -145,14 +151,14 @@ theorem exists_openStalk_restriction_transport
     (Functor.associator R Q S).symm ≪≫ Functor.isoWhiskerRight c S ≪≫
       e W hxW hWU ≪≫ a.symm
   obtain ⟨d, hd⟩ := descend_iso R J adj (Q ⋙ S) T t
-  refine ⟨d, fun M ↦ ?_⟩
+  refine ⟨c, d, fun M ↦ rfl, fun M ↦ ?_⟩
   have hlaw : S.map (c.hom.app M) ≫ (e W hxW hWU).hom.app M =
       d.hom.app (R.obj M) ≫ a.hom.app M := by
     rw [hd M]
-    dsimp [t]
-    simp only [Category.id_comp, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-    rfl
-  simpa [c, restriction_comp_iso] using hlaw
+    simp only [t, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Functor.associator_inv_app, Category.id_comp]
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  exact hlaw
 
 end
 end AlgebraicGeometry.Scheme
