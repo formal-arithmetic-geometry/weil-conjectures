@@ -1,0 +1,68 @@
+{
+ "id": "lem-pur-dnc-etale-rees-chart",
+ "kind": "statement",
+ "title": "Étale deformation chart and its smooth projection",
+ "statement": "Let $A$ be a commutative ring, let $d\\geq0$, put $C=A[x_1,\\ldots,x_d]$, and let $C\\to R$ be an étale ring map (so the induced affine-scheme morphism is étale [def-weil-etale-morphism]). Write $I=(x_1,\\ldots,x_d)R$, $E=C[t,x_1/t,\\ldots,x_d/t]\\subseteq C[t,t^{-1}]$, and $D=R[t,I/t]\\subseteq R[t,t^{-1}]$. The canonical map $R\\otimes_C E\\to D$ is an isomorphism. Under $E\\cong A[t,u_1,\\ldots,u_d]$ with $x_i\\mapsto t u_i$, using affine spectra [def-weil-affine-spectrum], the induced map $\\operatorname{Spec}D\\to\\operatorname{Spec}A[t,u_1,\\ldots,u_d]$ is étale, and its composite with the affine-space projection [def-sbc-affine-space] $\\operatorname{Spec}A[t,u_1,\\ldots,u_d]\\to\\operatorname{Spec}A[t]$ is smooth of relative dimension $d$ [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/_section.md",
+  "place": "Clause (2), local deformation algebra $C[t,J/t]$, flat tensor injection, and étale base change"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-sbc-affine-space",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an etale algebra R over A[x_1,...,x_d], the deformation algebra R[t,(x_i)/t] is an etale base change of A[t,u_1,...,u_d]",
+   "results": "RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.IsStandardSmooth.exists_etale_mvPolynomial; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.Etale.toAlgebra; StandardEtalePair.instEtaleRing; Algebra.Etale.comp; none state the deformation algebra isomorphism.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.Smooth, RingTheory.TensorProduct",
+   "results": "No hits; Loogle reported unknown identifier 'AlgebraicGeometry.IsEtale'.",
+   "date": "2026-10-17",
+   "verdict": "no match (invalid identifier; semantic searches and source grep supply the substantive checks)"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedRees|ReesAlgebra|IsEtale|SmoothOfRelativeDimension|flat.*tensor",
+   "results": "25 displayed RingTheory hits, including Module.Flat.lTensor_preserves_injective_linearMap in Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean:100 and standard-smooth relative-dimension declarations. These preserve injections or state smoothness facts; none identifies the extended-Rees deformation algebra.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale base change of the standard deformation algebra C[t,J/t] is R[t,I/t] and is smooth",
+   "results": "Algebra.Smooth.baseChange; Algebra.Etale.baseChange; Algebra.IsStandardSmoothOfRelativeDimension.baseChange; RingHom.Smooth.isStableUnderBaseChange; these are general base-change facts and do not state the Rees-chart identification.",
+   "date": "2026-10-17",
+   "verdict": "generalization: only generic étale/smooth base-change declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-dnc-section-family",
+  "date": "2026-10-17",
+  "group": "Q80"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-dnc-section-family",
+   "place": "Step 4, the flat tensor calculation identifying the deformation chart with an étale base change of affine space.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

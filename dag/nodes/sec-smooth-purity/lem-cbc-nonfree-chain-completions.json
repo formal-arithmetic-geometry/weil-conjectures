@@ -10,9 +10,59 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Let $(p,1)$ be the first vertex of $\\tau$ whose second coordinate is $1$. For every $a<p$, surjectivity of the first projection supplies a vertex with first coordinate $a$. Such a vertex must occur before $(p,1)$, so its second coordinate is at most $1$; by minimality of $(p,1)$ it is $0$. Strict increase in the product order then forces these vertices, in order, to be $(0,0),(1,0),\\ldots,(p-1,0)$. The vertex $(p,0)$ cannot occur, because together with $(p,1)$ it would violate the hypothesis that $\\tau$ has no vertical $0$-to-$1$ pair. Thus the asserted initial segment is exactly the one displayed (and for $p=0$ it is just $(0,1)$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DN",
+    "place": "Lemma 4.4.4.7 proof, exhaustion paragraph: choose the first vertex with second coordinate 1 and identify the initial chain."
+   }
+  },
+  {
+   "text": "Suppose that inserting one vertex $x$ into $\\tau$ gives a free chain $\\tau'$. By definition $\\tau'$ contains a pair $(b,0),(b,1)$. Since $\\tau$ contains no such pair and $\\tau'$ differs from $\\tau$ only by $x$, the vertex $x$ is one of the two vertices of this pair. If $x=(b,0)$, then $(b,1)$ is already in $\\tau$; if $x=(b,1)$, then $(b,0)$ is already in $\\tau$. (The surjectivity requirements give no further constraint on $x$: $\\tau$ already has every first coordinate and every second coordinate $1,\\ldots,n$, and the second coordinate $0$ is supplied by the pair.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DN",
+    "place": "Lemma 4.4.4.7 proof, missing-face analysis: the inserted vertex must complete a vertical pair."
+   }
+  },
+  {
+   "text": "In the case $x=(b,0)$, the required partner $(b,1)$ lies in $\\tau$. Since $(p,1)$ is its first level-$1$ vertex, monotonicity gives $b\\geq p$. If $b>p$, then $(b,0)$ is incomparable with the existing $(p,1)$: the first coordinate is larger but the second coordinate is smaller. Hence $b=p$. Step 1 shows that $(p,0)$ is absent, and that its only possible position is immediately before $(p,1)$, after $(p-1,0)$ when $p>0$. This gives the first asserted insertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DN",
+    "place": "Lemma 4.4.4.7 proof, exhaustion paragraph: insert $(p,0)$ immediately before $(p,1)$."
+   }
+  },
+  {
+   "text": "In the case $x=(b,1)$, the required partner $(b,0)$ lies in $\\tau$. Every level-$0$ vertex precedes $(p,1)$, so step 1 gives $0\\leq b<p$. If $b<p-1$, then the existing vertex $(b+1,0)$ is incomparable with $(b,1)$: its first coordinate is larger and its second coordinate is smaller. Thus $b=p-1$ and $p>0$. Step 1 shows that $(p-1,1)$ is absent, and its position is forced to be immediately after $(p-1,0)$ and immediately before $(p,1)$. This is the second asserted insertion; for $p=0$ the level-$0$ partner does not exist, so this case is impossible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DN",
+    "place": "Lemma 4.4.4.7 proof, final paragraph: the only other free enlargement inserts $(p-1,1)$ and has index $p-1$."
+   }
+  },
+  {
+   "text": "Conversely, each displayed insertion is order-preserving and strict: $(p-1,0)<(p,0)<(p,1)$ (the first inequality only when $p>0$) in the first case, while $(p-1,0)<(p-1,1)<(p,1)$ in the second. The first projection stays surjective because $\\tau$'s was. The second projection contains $1,\\ldots,n$ from $\\tau$ and $0$ from the inserted pair; this matters when $p=0$, where $\\tau$ has no vertex of second coordinate $0$ by step 1. Two vertices $(b,0),(b,1)$ of a chain are adjacent, since a vertex between them would have to equal one of them. The inserted vertical pair is the unique one: any such pair either lies in $\\tau$, which has none, or contains the inserted vertex, whose only partner is the displayed one. By step 1 the vertices before the pair are $(0,0),\\ldots,(p-1,0)$, so the pair occupies positions $p,p+1$ in the first chain and $p-1,p$ in the second, counting from zero. This proves the stated classification and position claims.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DN",
+    "place": "Lemma 4.4.4.7 proof, verification of the two free enlargements and their indices."
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01DN",
+  "place": "Lemma 4.4.4.7 proof, expanded finite-poset classification of one-vertex free enlargements; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +105,52 @@
    "results": "{\"t\": \"2026-10-17T07:08:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a nonfree simplex in a product of simplices the only free simplices of one larger dimension containing it have adjacent indices p and p minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.S.IsUniquelyCodimOneFace\", \"SSet.S.IsUniquelyCodimOneFace.index\", \"SSet.horn\", \"SSet.S.IsUniquelyCodimOneFace.iff\", \"SSet.S.IsUniquelyCodimOneFace.existsUnique_δ_cast_simplex\", \"SSet.face_le_horn\", \"SSet.S.IsUniquelyCodimOneFace.δ_index\", \"SSet.S.IsUniquelyCodimOneFace.δ_eq_iff\"], \"digest\": \"2491507c7ed6f942\"}",
    "date": "2026-10-17",
    "verdict": "no match: read UnionProd.lean:87-110,124-209,250-320 (IsIndex, uniqueness of an index inside a fixed simplex, and the paired-face construction); IsUniquelyCodimOneFace.lean:64-104 and PairingCore.lean:175-215 concern the unique face operator for a fixed pair. None classifies all free one-vertex superchains of a nonfree chain. The first semantic search also returned general chain refinement and Boolean-product lemmas, which do not give the two explicit inserted vertices. LeanSearch returned insertion and monotonicity facts, not this classification."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIndex|IsType₂|index",
+   "results": "{\"t\": \"2026-10-17T08:05:25Z\", \"tool\": \"grep\", \"query\": \"IsIndex|IsType₂|index\", \"sub\": \"AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"40\", \"46\", \"97\", \"104\", \"106\"], \"digest\": \"4179d977883fe616\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; generic chain/path insertion facts and simplicial pairing constructions do not classify both explicit free superchains. Read UnionProd.lean:87-120,250-320, IsUniquelyCodimOneFace.lean:64-104, and PairingCore.lean:175-215. The unique-face statements concern a fixed pair of simplices, not all free superchains of a given chain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classify insertion of one point into an increasing chain in the product of two finite ordinals",
+   "results": "{\"t\": \"2026-10-17T08:05:26Z\", \"tool\": \"leansearch\", \"query\": \"Classify insertion of one point into an increasing chain in the product of two finite ordinals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Fin.insertNthOrderIso_apply\", \"Fin.insertNthOrderIso\", \"Pi.GCongr.single_mono\", \"Fin.insertNth_add\", \"Fin.insertNth_le_iff\", \"IsChain.insert\", \"Pi.mulSingle_strictMono\", \"Pi.single_strictMono\"], \"digest\": \"147b1536f1ef892a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; generic chain/path insertion facts and simplicial pairing constructions do not classify both explicit free superchains. Read UnionProd.lean:87-120,250-320, IsUniquelyCodimOneFace.lean:64-104, and PairingCore.lean:175-215. The unique-face statements concern a fixed pair of simplices, not all free superchains of a given chain."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"prodStdSimplex\", \"pairing\"",
+   "results": "{\"t\": \"2026-10-17T08:05:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"prodStdSimplex\\\", \\\"pairing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.prodStdSimplex.pairingCore.Type₁\", \"SSet.prodStdSimplex.pairingCore.Type₁.d\", \"SSet.prodStdSimplex.pairingCore.Type₁.isType₂_δ\", \"SSet.prodStdSimplex.pairingCore.Type₁.index\", \"SSet.prodStdSimplex.pairingCore.Type₁.isIndex\", \"SSet.prodStdSimplex.pairing\", \"SSet.prodStdSimplex.instIsRegularPairing\", \"SSet.prodStdSimplex.instIsInnerPairingCoreSucc\"], \"digest\": \"360ece7ea0c89c5a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; generic chain/path insertion facts and simplicial pairing constructions do not classify both explicit free superchains. Read UnionProd.lean:87-120,250-320, IsUniquelyCodimOneFace.lean:64-104, and PairingCore.lean:175-215. The unique-face statements concern a fixed pair of simplices, not all free superchains of a given chain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonfree strict chain in a product of finite linear orders has exactly two one vertex insertions that create a vertical zero to one pair",
+   "results": "{\"t\": \"2026-10-17T08:05:36Z\", \"tool\": \"leanfinder\", \"query\": \"A nonfree strict chain in a product of finite linear orders has exactly two one vertex insertions that create a vertical zero to one pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.chain'_cons_of_lt\", \"Profinite.NobelingProof.GoodProducts.isChain_cons_of_lt\", \"LTSeries.exists_relSeries_covBy\", \"LTSeries.exists_relSeries_covBy_and_head_eq_bot_and_last_eq_bot\", \"Profinite.NobelingProof.Products.max_eq_o_cons_tail'\", \"SimplexCategoryGenRel.IsAdmissible.cons_cons\", \"SimplexCategoryGenRel.isAdmissible_of_isChain_of_forall_getElem_le\", \"SimplexCategoryGenRel.isAdmissible_iff_isChain_and_le\"], \"digest\": \"0cf0578c2d130a82\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; generic chain/path insertion facts and simplicial pairing constructions do not classify both explicit free superchains. Read UnionProd.lean:87-120,250-320, IsUniquelyCodimOneFace.lean:64-104, and PairingCore.lean:175-215. The unique-face statements concern a fixed pair of simplices, not all free superchains of a given chain."
+  },
+  {
+   "tool": "grep",
+   "query": "IsUniquelyCodimOneFace|existsUnique|index_eq",
+   "results": "{\"t\": \"2026-10-17T08:11:34Z\", \"tool\": \"grep\", \"query\": \"IsUniquelyCodimOneFace|existsUnique|index_eq\", \"sub\": \"AlgebraicTopology/SimplicialSet/AnodyneExtensions\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\"], \"digest\": \"1750169a5ec52fca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; generic chain/path insertion facts and simplicial pairing constructions do not classify both explicit free superchains. Read UnionProd.lean:87-120,250-320, IsUniquelyCodimOneFace.lean:64-104, and PairingCore.lean:175-215. The unique-face statements concern a fixed pair of simplices, not all free superchains of a given chain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monotone lattice path missing a vertical edge between levels zero and one, classify all ways of adjoining a single vertex to obtain such an edge",
+   "results": "{\"t\": \"2026-10-17T08:11:44Z\", \"tool\": \"leanfinder\", \"query\": \"In a monotone lattice path missing a vertical edge between levels zero and one, classify all ways of adjoining a single vertex to obtain such an edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Quiver.Path.exists_notMem_mem_hom_path_path_of_notMem_mem\", \"Quiver.Path.exists_mem_notMem_hom_path_path_of_notMem_mem\", \"CategoryTheory.SimplicialThickening.Path.left_le\", \"Quiver.Path.exists_eq_comp_and_notMem_tail_of_mem_vertices\", \"CategoryTheory.SimplicialThickening.Path.le_right\", \"PFunctor.M.isPath_cons'\", \"CategoryTheory.SimplicialThickening.Path.le\", \"SimplexCategoryGenRel.simplicialInsert_isAdmissible\"], \"digest\": \"4c7b819cc8d697d6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned candidates; generic chain/path insertion facts and simplicial pairing constructions do not classify both explicit free superchains. Read UnionProd.lean:87-120,250-320, IsUniquelyCodimOneFace.lean:64-104, and PairingCore.lean:175-215. The unique-face statements concern a fixed pair of simplices, not all free superchains of a given chain."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-initial-prism-horn-filtration",
@@ -70,7 +162,7 @@
  "blueprint": {
   "from": {
    "node": "thm-cbc-finite-level-proetale",
-   "place": "Proof opening compactification choice, via the inherited invertible-prism-extension chain: Kerodon 01DN final missing-face argument, classification of the free one-vertex enlargements of the missing face.",
+   "place": "Proof opening compactification choice of thm-cbc-finite-level-proetale, through the via chain ending in the initial-prism-horn-filtration split. This node serves the missing-face paragraph of Kerodon 01DN (Lemma 4.4.4.7) as carried by step 4 of lem-cbc-initial-prism-horn-filtration: it classifies the only free one-vertex enlargements of a nonfree chain, namely the insertion of (p,0) or of (p-1,1).",
    "via": [
     "lem-cbc-initial-prism-horn-filtration",
     "lem-cbc-invertible-prism-extension",
@@ -81,5 +173,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-nonfree-chain-completions",
+  "worker": "stage1",
+  "summary": "Expanded Kerodon Lemma 4.4.4.7's missing-face argument into a direct finite-poset proof. The first step derives the exact initial segment from the first second-coordinate-1 vertex; the next three steps classify the inserted vertex and exclude every value except (p,0) and (p-1,1); the final step verifies both converses and position indices. No child node was created because all arguments are immediate case analyses from the chain and product-order definitions.",
+  "blueprint": "The steps realize the proof's final missing-face paragraph in thm-cbc-finite-level-proetale's inherited Kerodon 01DN route: initial segment, classification of both one-vertex free enlargements, exclusion of the alternative, and position verification."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-bc34c04e8",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-bc34c04e8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the contract, the packet, the report, the item in full, def-weil-pbc-simplicial-set (it defines [r]), the parent lem-cbc-initial-prism-horn-filtration (its step 4 is the only user and takes exactly the two completions with indices p and p-1), unit sk-prop-sf-cbc and ancestor thm-cbc-finite-level-proetale. Kerodon 01DN has no local copy and stays WANTED; proof_origin=agent is correct. The statement is true. I checked it by hand and with my own enumeration of all 110 admissible chains for m<=3, 1<=n<=3, covering m=0, n=1, p=0 and p=m. Steps 1, 3 and 4 are correct and elementary: incomparability of (b,0) with (p,1) for b>p, and of (b,1) with (b+1,0) for b<p-1. No new nodes. rg over the DAG and the main-20261015 blueprint for 01DN, nonfree, vertical pair, strict chain and one-vertex found no duplicate, and the node is not a restated clause of its parent. Not a target, no SGA, no tool_uses. FIX, in fixes/dag/nodes/sec-smooth-purity/lem-cbc-nonfree-chain-completions.json: (1) step 2's justification was a non sequitur (coordinate coverage does not force the inserted vertex into the pair), so I rewrote it to argue from the definition of free and the absence of a pair in tau; (2) step 5 said surjectivity 'remains', which glosses p=0 where level 0 is gained from the pair, so I added that, plus adjacency and uniqueness of the pair and the position count; (3) blueprint.from.place named a 'final missing-face paragraph' of thm-cbc-finite-level-proetale that does not exist, so I rewrote it in the form of the parent's place. Statement and dependencies are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,92 @@
   "def-weil-pbc-sheafification",
   "det-def-sfb-sheaf-tensor-local-iso"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First justify all inverse maps used in the statement. For any presheaf $X$ and sheaf $T$, precomposition with $\\eta_X$ is a bijection $\\operatorname{Hom}(iaX,iT)\\to\\operatorname{Hom}(X,iT)$ by [def-weil-pbc-sheafification]. The Hom characterization of $W$ in [det-def-sfb-sheaf-tensor-local-iso] therefore gives $\\eta_X\\in W$, and clause 1 gives invertibility after $a$ of $\\eta_X\\otimes_p\\operatorname{id}_Y$ and $\\operatorname{id}_Y\\otimes_p\\eta_X$, for every presheaf $Y$. These include all maps inverted in $\\alpha^\\star,\\lambda^\\star,\\rho^\\star$. For a sheaf $T$, the universal property extends $\\operatorname{id}_{iT}$ to $r:aiT\\to T$ with $ir\\circ\\eta_{iT}=\\operatorname{id}_{iT}$. Both $\\eta_{iT}\\circ ir$ and the identity of $iaiT$ become $\\eta_{iT}$ after precomposition with $\\eta_{iT}$, so uniqueness in that same universal property makes them equal. Thus $r=\\epsilon_T$ and $i\\epsilon_T\\circ\\eta_{iT}=\\operatorname{id}_{iT}$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-sheaf-tensor-local-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
+    "place": "First paragraph: comparisons built from units become invertible after sheafification"
+   }
+  },
+  {
+   "text": "We will use the following one-line cancellation, without any sheaf monoidal coherence. Naturality of the unit of the adjunction in [def-weil-pbc-sheafification] says, for $t:X\\to Y$,\n$$i(a(t))\\circ\\eta_X=\\eta_Y\\circ t.$$\nIndeed both sides are the adjunct of $a(t)$ under the stated universal property. When $a(t)$ is invertible, postcomposition by its inverse gives\n$$i(a(t)^{-1})\\circ\\eta_Y\\circ t=\\eta_X.$$\nWe abbreviate $i(a(u))$ by $ia(u)$ below. These are equalities of presheaf morphisms.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
+    "place": "Second paragraph, first sentence: natural unit comparisons and inverse cancellation"
+   }
+  },
+  {
+   "text": "For the associator put $X=iF\\otimes_piG$, $Y=iG\\otimes_piH$, $S=X\\otimes_piH$, $T=iF\\otimes_pY$, $D=iaX\\otimes_piH$, and $E=iF\\otimes_piaY$. Write $t=\\eta_X\\otimes_p\\operatorname{id}_{iH}:S\\to D$, $v=\\operatorname{id}_{iF}\\otimes_p\\eta_Y:T\\to E$, and $k=(f\\otimes_pg)\\otimes_ph$. Bifunctoriality of the objectwise tensor of [det-def-sfb-sheaf-tensor-presheaf] expands\n$$d(d(f,g),h)=\\eta_D\\circ t\\circ k.$$\nThe inverse $a(t)^{-1}$ exists by step 1 and [det-def-sfb-sheaf-tensor-local-iso]. Substitute the definition of $\\alpha^\\star$, cancel using step 2, and apply unit naturality to $v\\circ\\alpha^p_{iF,iG,iH}$:\n$$\n i\\alpha^\\star\\circ\\eta_D\\circ t\\circ k\n =ia(v)\\circ ia(\\alpha^p_{iF,iG,iH})\\circ\\eta_S\\circ k\n =\\eta_E\\circ v\\circ\\alpha^p_{iF,iG,iH}\\circ k.\n$$\nNaturality of the presheaf associator gives\n$$\\alpha^p_{iF,iG,iH}\\circ k=(f\\otimes_p(g\\otimes_ph))\\circ\\alpha^p_{P,Q,R}.$$\nThus the last displayed expression equals\n$$\\eta_E\\circ(f\\otimes_p(\\eta_Y\\circ(g\\otimes_ph)))\\circ\\alpha^p_{P,Q,R}\n=d(f,d(g,h))\\circ\\alpha^p_{P,Q,R},$$\nas required. Only the presheaf associator's naturality is used.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-sheaf-tensor-local-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
+    "place": "Second paragraph, first sentence: associator is conjugate by the unit comparisons"
+   }
+  },
+  {
+   "text": "For the left unitor put $t=\\eta_I\\otimes_p\\operatorname{id}_{iF}:I\\otimes_piF\\to iaI\\otimes_piF$, $D=iaI\\otimes_piF$, and $k=\\operatorname{id}_I\\otimes_pf$. By tensor bifunctoriality,\n$$d(\\eta_I,f)=\\eta_D\\circ t\\circ k.$$\nThe tensor stability in [det-def-sfb-sheaf-tensor-local-iso] justifies the inverse in the following calculation. Steps 1 and 2 and unit naturality for $\\lambda^p_{iF}$ give\n$$\n i\\lambda^\\star_F\\circ d(\\eta_I,f)\n =i\\epsilon_F\\circ ia(\\lambda^p_{iF})\\circ\\eta_{I\\otimes_piF}\\circ k\n =i\\epsilon_F\\circ\\eta_{iF}\\circ\\lambda^p_{iF}\\circ k\n =\\lambda^p_{iF}\\circ(\\operatorname{id}_I\\otimes_pf).\n$$\nNaturality of the presheaf left unitor in [det-def-sfb-sheaf-tensor-presheaf] identifies the last expression with $f\\circ\\lambda^p_P$. This proves the left-unitor equality for arbitrary $f$.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-sheaf-tensor-local-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
+    "place": "Second paragraph, first sentence: left unitor and the unit comparison"
+   }
+  },
+  {
+   "text": "For the right unitor put $t=\\operatorname{id}_{iF}\\otimes_p\\eta_I:iF\\otimes_pI\\to iF\\otimes_piaI$, $D=iF\\otimes_piaI$, and $k=f\\otimes_p\\operatorname{id}_I$. Then\n$$d(f,\\eta_I)=\\eta_D\\circ t\\circ k.$$\nHere too $a(t)$ is invertible by [det-def-sfb-sheaf-tensor-local-iso]. Substitute $\\rho^\\star_F$ and use steps 1 and 2:\n$$\n i\\rho^\\star_F\\circ d(f,\\eta_I)\n =i\\epsilon_F\\circ ia(\\rho^p_{iF})\\circ\\eta_{iF\\otimes_pI}\\circ k\n =i\\epsilon_F\\circ\\eta_{iF}\\circ\\rho^p_{iF}\\circ k\n =\\rho^p_{iF}\\circ(f\\otimes_p\\operatorname{id}_I)\n =f\\circ\\rho^p_P.\n$$\nThe middle equality is unit naturality for $\\rho^p_{iF}$ followed by $i\\epsilon_F\\circ\\eta_{iF}=\\operatorname{id}$; the final equality is naturality of the presheaf right unitor in [det-def-sfb-sheaf-tensor-presheaf].",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-sheaf-tensor-local-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
+    "place": "Second paragraph, first sentence: right unitor and the unit comparison"
+   }
+  },
+  {
+   "text": "Finally put $X=iF\\otimes_piG$ and $Y=iG\\otimes_piF$. By the definition of $\\beta^\\star$, unit naturality from step 2, and naturality of the presheaf symmetry in [det-def-sfb-sheaf-tensor-presheaf],\n$$\n i\\beta^\\star_{F,G}\\circ d(f,g)\n =ia(\\beta^p_{iF,iG})\\circ\\eta_X\\circ(f\\otimes_pg)\n =\\eta_Y\\circ\\beta^p_{iF,iG}\\circ(f\\otimes_pg)\n =\\eta_Y\\circ(g\\otimes_pf)\\circ\\beta^p_{P,Q}\n =d(g,f)\\circ\\beta^p_{P,Q}.\n$$\nThis proves the fourth equality directly. None of the six steps assumes coherence, naturality, or functorial monoidality of the proposed sheaf structure maps.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
+    "place": "Second paragraph, first sentence: symmetry induced by the objectwise symmetry"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "det-def-sfb-sheaf-tensor-local-iso",
+  "det-def-sfb-sheaf-tensor-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
+  "place": "Second paragraph, first sentence, expanded into explicit naturality and inverse-cancellation calculations"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +140,45 @@
    "results": "{\"t\": \"2026-10-17T07:05:15Z\", \"tool\": \"grep\", \"query\": \"lemma (leftUnitor_hom_app|rightUnitor_hom_app|associator_hom_app)|lemma.*braid|tensorBifunctor|def μ\", \"sub\": \"CategoryTheory/Localization/Monoidal\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\"], \"digest\": \"ddbf01bac8ef9a81\"}",
    "date": "2026-10-17",
    "verdict": "Related localization and cartesian-sheaf declarations; no exact match. Read Sites/Monoidal.lean:168-201, Localization/Monoidal/Basic.lean:124-126,214-247 and Braided.lean:57-64. Their tensors and comparison maps are abstract localization lifts, not the explicit reflected tensor and unit-map composites in this statement; identifying them requires a separate comparison, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "associator_hom_app|leftUnitor_hom_app|rightUnitor_hom_app|braiding_hom_app",
+   "results": "{\"t\": \"2026-10-17T07:51:43Z\", \"tool\": \"grep\", \"query\": \"associator_hom_app|leftUnitor_hom_app|rightUnitor_hom_app|braiding_hom_app\", \"sub\": \"CategoryTheory/Localization/Monoidal\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\"], \"digest\": \"3d31b02ac21d35c4\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: read Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean:124–126,214–247 and Braided.lean:57–64. These use a localization-lift tensor rather than the explicit reflected tensor and its unit composites."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Monoidal.associator_hom_app",
+   "results": "{\"t\": \"2026-10-17T07:51:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.Monoidal.associator_hom_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.associator_hom_app\"], \"digest\": \"5fa7b8488c86c688\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: associator_hom_app, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean:241–247, computes the abstract localized associator using its μ; the explicit tensor/comparison identification is additional work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a reflective monoidal localization the structure maps defined using inverses of reflected units commute with the units of reflection",
+   "results": "{\"t\": \"2026-10-17T07:51:44Z\", \"tool\": \"leansearch\", \"query\": \"In a reflective monoidal localization the structure maps defined using inverses of reflected units commute with the units of reflection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_inv\", \"CategoryTheory.Localization.Monoidal.ε'\", \"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_ε\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"Submonoid.LocalizationMap.mk'\"], \"digest\": \"0cdb1f739cabfb7c\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: functorCoreMonoidalOfComp and the localized monoidal instances already use monoidal localization data; they do not give these four explicit identities before sheaf coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification tensor associator unitors symmetry commute with canonical unit comparisons for arbitrary maps into sheaves",
+   "results": "{\"t\": \"2026-10-17T07:51:53Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification tensor associator unitors symmetry commute with canonical unit comparisons for arbitrary maps into sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.toSheafify_sheafifyLift_assoc\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"CategoryTheory.sheafifyMap_sheafifyLift_assoc\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"CategoryTheory.toSheafify_sheafifyLift_assoc\", \"CategoryTheory.toSheafify_plusPlusIsoSheafify_hom_assoc\", \"CategoryTheory.GrothendieckTopology.whiskerRight_toSheafify_sheafifyCompIso_hom_assoc\", \"CategoryTheory.sheafifyComposeIso\"], \"digest\": \"e157eaeddb3c6375\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: the toSheafify/sheafifyLift identities are single sheafification factorization laws; the tensor comparison identities here still require the displayed naturality calculations. The sheaf monoidal instance uses the abstract localization tensor (Sites/Monoidal.lean:168–201)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the reflection unit proves compatibility of explicitly sheafified associativity unit and symmetry maps with tensor comparison morphisms, without monoidal coherence assumptions",
+   "results": "{\"t\": \"2026-10-17T08:28:32Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the reflection unit proves compatibility of explicitly sheafified associativity unit and symmetry maps with tensor comparison morphisms, without monoidal coherence assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafComposeIso_hom_fac_assoc\", \"CategoryTheory.sheafComposeIso_inv_fac_assoc\", \"CategoryTheory.sheafComposeIso_hom_fac\", \"CategoryTheory.GrothendieckTopology.toSheafify_comp_sheafifyCompIso_inv_assoc\", \"CategoryTheory.GrothendieckTopology.whiskerRight_toSheafify_sheafifyCompIso_hom_assoc\", \"CategoryTheory.sheafifyComposeIso\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.sheafComposeIso_inv_fac\"], \"digest\": \"b059ad723cff9d48\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: the toSheafify/sheafifyLift identities are single sheafification factorization laws; the tensor comparison identities here still require the displayed naturality calculations. The sheaf monoidal instance uses the abstract localization tensor (Sites/Monoidal.lean:168–201)."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-def-sfb-sheaf-tensor-structure",
@@ -77,5 +195,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-sheaf-tensor-unit-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the four comparison identities into six explicit steps using only the three existing statement dependencies: the sheafification universal property, tensor stability of local isomorphisms, and the objectwise symmetric monoidal structure. No new nodes or coherence assumptions. Reused completed search records and checked the more general localization candidates.",
+  "blueprint": "Steps 1–2 spell out the unit and inverse cancellations used in the first and second paragraphs of det-def-sfb-sheaf-tensor-structure.proof.md. Steps 3–6 realize the second paragraph’s first sentence for the associator, left unitor, right unitor and symmetry; they supply the compatibility needed before the parent proves coherence."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6f7404cfc",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6f7404cfc (reviewer sub-agent of L); spot-checked: I read the item in full: six steps, no new nodes. Statement, stmt_deps, source and blueprint fields match the base copy; only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed. Sources checked: blueprint main-20261015 det-def-sfb-sheaf-tensor-structure.md and .proof.md (second paragraph: structure maps are conjugates of the objectwise ones by unit comparisons), and the statements of det-def-sfb-sheaf-tensor-presheaf, def-weil-pbc-sheafification (a Mathlib leaf, so not route) and det-def-sfb-sheaf-tensor-local-iso (Hom characterization of W and clause 1). Type checks: α*, λ*, ρ* and β* match the blueprint composites, and d(f,g) lands in i(F⋆G). Step 1: η_X is in W by the universal property; clause 1 gives every inverse used; iε∘η=id follows from uniqueness. Step 2: unit naturality and its cancellation form are correct. Step 3: the associator calculation cancels a(t)^{-1}, then uses unit naturality and associator naturality; correct. Steps 4–5: the unitor calculations use iε_F∘η_{iF}=id; correct. Step 6: symmetry is correct. Edge cases: with the identity reflector, zero objects or zero maps the identities reduce to naturality or hold trivially; f, g, h are never cancelled and no flatness is used. The parent's step 4 uses exactly these four formulas. Graph: acyclic (the cited nodes' dependencies do not reach the item); no off-unit tool use; no SGA. Duplicate search over dag/nodes found only the unit and parent monoidal-structure claims and lem-sfb-monoidal-adjunction-mates, none of which states these identities. I accept the Mathlib searches (grep, loogle, leansearch, leanfinder): no exact match. No fixes were needed."
  }
 }

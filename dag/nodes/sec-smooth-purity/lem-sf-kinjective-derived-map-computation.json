@@ -13,9 +13,99 @@
   "def-weil-abstract-derived-category",
   "def-sfb-right-derived-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the homotopy-category functor $F_K$ of [def-sfb-right-derived-functor]. This is independent of the chosen representative: if $u-v=d s+s d$, additivity gives $F(u)-F(v)=F(d)F(s)+F(s)F(d)$, so $F(s)$ is a homotopy. Functoriality degree by degree gives $F_K(vu)=F_K(v)F_K(u)$ and $F_K(1)=1$. Thus $Q_{\\mathcal B}(Fg)$ is well-defined on a homotopy class.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014X (lemma-additive-exact-homotopy-category), elementary homotopy calculation"
+   }
+  },
+  {
+   "text": "The unit of [def-sfb-right-derived-functor] has invertible components $\\eta_I$ on every K-injective $I$. The localization $Q_{\\mathcal A}$ inverts the quasi-isomorphism $a:N\\to I$, and the functor $RF$ preserves isomorphisms. Consequently $c_a=\\eta_I^{-1}RF(Q_{\\mathcal A}a)$ is an isomorphism with inverse $RF((Q_{\\mathcal A}a)^{-1})\\eta_I$. The same applies to $b$ and to every other resolution in the statement.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies): computing unit on K-injectives"
+   }
+  },
+  {
+   "text": "Put $t=(Q_{\\mathcal A}b)h(Q_{\\mathcal A}a)^{-1}:Q_{\\mathcal A}I\\to Q_{\\mathcal A}J$. Since $J$ is K-injective, [lem-weil-pbc-kinjective-hom-derived] applied with source $I$ and target $J$ says that $Q_{\\mathcal A}:\\operatorname{Hom}_{K(\\mathcal A)}(I,J)\\to\\operatorname{Hom}_{D(\\mathcal A)}(Q_{\\mathcal A}I,Q_{\\mathcal A}J)$ is bijective. Its surjectivity gives the required $g$ with $Q_{\\mathcal A}g=t$, and its injectivity gives uniqueness.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), implication (1) to (3)"
+   }
+  },
+  {
+   "text": "Naturality of the unit in [def-sfb-right-derived-functor] on the homotopy class $g:I\\to J$ gives $RF(Q_{\\mathcal A}g)\\eta_I=\\eta_J Q_{\\mathcal B}(Fg)$. Using the preceding equation for $Q_{\\mathcal A}g$, functoriality and the inverse computed in step 2 gives directly $$c_b RF(h)c_a^{-1}=\\eta_J^{-1}RF((Q_{\\mathcal A}b)h(Q_{\\mathcal A}a)^{-1})\\eta_I=\\eta_J^{-1}RF(Q_{\\mathcal A}g)\\eta_I=Q_{\\mathcal B}(Fg).$$",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), unit naturality; agent-written explicit calculation"
+   }
+  },
+  {
+   "text": "For the identity derived morphism with the same resolution at both ends, its transported target is $1_{Q_{\\mathcal A}I}$, whose unique representative is $1_I$. For $h:Q_{\\mathcal A}N\\to Q_{\\mathcal A}N^{\\prime}$ and $h^{\\prime}:Q_{\\mathcal A}N^{\\prime}\\to Q_{\\mathcal A}N^{\\prime\\prime}$ use resolutions $a,b,d$ and representatives $g,g^{\\prime}$. Then $$Q_{\\mathcal A}(g^{\\prime}g)=(Q_{\\mathcal A}d)h^{\\prime}(Q_{\\mathcal A}b)^{-1}(Q_{\\mathcal A}b)h(Q_{\\mathcal A}a)^{-1}=(Q_{\\mathcal A}d)(h^{\\prime}h)(Q_{\\mathcal A}a)^{-1}.$$ Injectivity in [lem-weil-pbc-kinjective-hom-derived] makes $g^{\\prime}g$ the representative of $h^{\\prime}h$. The functors $F_K$ and $Q_{\\mathcal B}$ preserve these identities and composites, proving compatibility of the formula.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), uniqueness of representatives; elementary identity and composition calculation"
+   }
+  },
+  {
+   "text": "Apply steps 3 and 4 to $h=1_{Q_{\\mathcal A}N}$ with resolutions $a$ and $a^{\\prime}$. They give the unique $k:I\\to I^{\\prime}$ with $Q_{\\mathcal A}k=(Q_{\\mathcal A}a^{\\prime})(Q_{\\mathcal A}a)^{-1}$ and the transition formula $T_{a^{\\prime},a}:=c_{a^{\\prime}}c_a^{-1}=Q_{\\mathcal B}(Fk)$. Each transition is invertible, with inverse $T_{a,a^{\\prime}}$, because both $c$ maps are invertible. For a third resolution, cancellation gives $$T_{a^{\\prime\\prime},a^{\\prime}}T_{a^{\\prime},a}=c_{a^{\\prime\\prime}}c_{a^{\\prime}}^{-1}c_{a^{\\prime}}c_a^{-1}=T_{a^{\\prime\\prime},a}.$$ This also gives the identity transition when the two resolutions coincide.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y, consequence of the preceding representative and unit calculations"
+   }
+  },
+  {
+   "text": "For alternative resolutions $a^{\\prime}$ of $N$ and $b^{\\prime}$ of $N^{\\prime}$, let $M_{b,a}(h)=c_bRF(h)c_a^{-1}$. Then $$T_{b^{\\prime},b}M_{b,a}(h)=c_{b^{\\prime}}RF(h)c_a^{-1}=M_{b^{\\prime},a^{\\prime}}(h)T_{a^{\\prime},a}.$$ By step 4 the two $M$ maps are exactly the images $Q_{\\mathcal B}(Fg)$ for the respective unique homotopy classes. This explicit commutative square proves that the transitions intertwine the displayed formula for every derived morphism, completing all clauses.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), agent-written explicit change-of-resolution square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined); explicit unit naturality, composition, and transition calculations written here for the ancestor compact-support comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +148,52 @@
    "results": "none; directory Mathlib/Algebra/Homology",
    "date": "2026-10-17",
    "verdict": "no match: rightDerived_map_eq and InjectiveResolution.isoRightDerivedObj concern derived functors on objects via nonnegative injective resolutions. Generic derived comparison/unit lemmas do not state the arbitrary unbounded K-injective morphism formula with its canonical resolution transitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*map|rightDerivedFunctor.*naturality|KInjective.*map",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected rightDerived_map_eq (RightDerived.lean:164) and isoRightDerivedObj (:114) concern ordinary injective resolutions of objects and their higher derived functors; bounded-below RightDerivedFunctorPlus and generic localization comparison hits do not state this unbounded K-injective map/transition package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived functor morphism computed on any K-injective replacement with change of resolution isomorphisms",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.Hom; CategoryTheory.injectiveResolutions; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected rightDerived_map_eq (RightDerived.lean:164) and isoRightDerivedObj (:114) concern ordinary injective resolutions of objects and their higher derived functors; bounded-below RightDerivedFunctorPlus and generic localization comparison hits do not state this unbounded K-injective map/transition package."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"map\"",
+   "results": "CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app; CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app_assoc; CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι; CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected rightDerived_map_eq (RightDerived.lean:164) and isoRightDerivedObj (:114) concern ordinary injective resolutions of objects and their higher derived functors; bounded-below RightDerivedFunctorPlus and generic localization comparison hits do not state this unbounded K-injective map/transition package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unbounded right derived functor on a derived morphism is computed by the unique homotopy class between arbitrary K-injective resolutions, naturally in the resolution choices",
+   "results": "CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.rightDerived; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected rightDerived_map_eq (RightDerived.lean:164) and isoRightDerivedObj (:114) concern ordinary injective resolutions of objects and their higher derived functors; bounded-below RightDerivedFunctorPlus and generic localization comparison hits do not state this unbounded K-injective map/transition package."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|KInjective|Qh_map_bijective",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; directory Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected rightDerived_map_eq (RightDerived.lean:164) and isoRightDerivedObj (:114) concern ordinary injective resolutions of objects and their higher derived functors; bounded-below RightDerivedFunctorPlus and generic localization comparison hits do not state this unbounded K-injective map/transition package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor unit is invertible on K-injective complexes; naturality computes maps in the unbounded derived category using the Hom bijection into a K-injective",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected rightDerived_map_eq (RightDerived.lean:164) and isoRightDerivedObj (:114) concern ordinary injective resolutions of objects and their higher derived functors; bounded-below RightDerivedFunctorPlus and generic localization comparison hits do not state this unbounded K-injective map/transition package."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-compact-support-restriction-of-scalars",
@@ -80,5 +212,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-kinjective-derived-map-computation",
+  "worker": "stage1",
+  "summary": "Unchanged unbounded statement; seven proof steps derive the arbitrary-resolution formula from existing Hom comparison and derived-unit computation. Identity, composition, transition inverse, cocycle and change-of-resolution square are written explicitly. No new nodes or attachments.",
+  "blueprint": "Ancestor def-weil-integral-rational-qbar-compact-support, derived inverse-limit formula and the finite-level comparison in lem-sf-compact-support-restriction-of-scalars: make the arbitrary-resolution derived-map computation and its coherent transitions explicit. The current main-20261015 ancestor is in sec-six-functors-basics/sk-prop-int-brown; historical ancestry and the assigned unit are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Its Mathlib leaf supplies the bijection from homotopy-category maps into a K-injective complex to derived-category morphisms needed to choose and prove uniqueness of g and k."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-2d53e5656",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-2d53e5656 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the full review is in review.md; no fixes needed. The delivery is one commit with the item and its report and no new nodes. The statement, stmt_deps and blueprint ancestry are unchanged and no SGA source is cited. The statement is well-typed and true: c_a = eta_I^{-1} RF(Q a) : RF(Q N) -> Q(FI). By naturality of eta at g, c_b RF(h) c_a^{-1} = eta_J^{-1} RF(Q b h (Q a)^{-1}) eta_I = eta_J^{-1} RF(Qg) eta_I = Q(Fg). The transitions T = c_{a'} c_a^{-1} are the case h = 1. The cocycle identity and the intertwining square follow by cancellation, and both sides of the square equal c_{b'} RF(h) c_a^{-1}. Steps 1-7 each use exactly what the cited node statements give: F_K, invertibility of eta on K-injectives and the unit naturality from def-sfb-right-derived-functor; Q inverting quasi-isomorphisms from def-weil-abstract-derived-category; the unbounded Hom bijection from lem-weil-pbc-kinjective-hom-derived (Mathlib Qh_map_bijective) for existence and uniqueness. Only step 1 is marked elementary, which is right. Nothing uses boundedness, exactness of F or preservation of quasi-isomorphisms. I tested zero complexes, F = 0, F = id, a = identity on a K-injective N, coinciding resolutions, and a non-monic resolution of an acyclic N into 0. I checked the Stacks sources in derived.tex: 070I lemma-K-injective (l.9632), 070Y lemma-K-injective-defined (l.9747), 070K (l.9767) and 014X (l.3431), against tags/tags; the 014Z->014X correction is right. Duplicate search with rg over the DAG found nothing that duplicates or generalizes the item; I read lem-weil-pbc-kinjective-total-derived, lem-sp-kinjective-computes (bounded below, objects only), def-sfb-right-derived-functor and both citers. Both citers use only clauses the item states. The route stays in sk-def-sf-operations, since the cited nodes are only definitions and a Mathlib leaf. I accept the declared tool_use of lem-weil-pbc-kinjective-hom-derived."
  }
 }
