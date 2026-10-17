@@ -98,7 +98,7 @@ private theorem inverse_iso_pullback {X Y : Scheme.{u}} (s : X ≅ Y)
     (HomotopyCategory.quasiIso _ (.up ℤ)) G.mapDerivedCategory γ
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback s.hom)
+      (derivedPullback_spec s.hom)
   have h : E = Scheme.Modules.tensorPullback s.hom :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E

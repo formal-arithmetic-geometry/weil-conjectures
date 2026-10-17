@@ -68,7 +68,7 @@ private theorem derivedOpen_iso_restrict
   let B := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hFmap, hFadd, ε, hL, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   have h : F = Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hF (fun M N a ↦ hFmap a)
   subst F

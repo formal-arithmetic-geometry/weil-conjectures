@@ -72,7 +72,7 @@ private theorem mixedPullbackCounit_isIso {S T : Scheme.{u}} (g : T ⟶ S)
   let q := HomotopyCategory.quotient A (.up ℤ)
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε₀, hL, htri, hflat⟩ :=
-      Classical.choose_spec (exists_derivedPullback.{u, w} g)
+      (derivedPullback_spec.{u, w} g)
   have hEq : E = K := CategoryTheory.Functor.ext hE (fun _ _ a ↦ hEmap a)
   subst E
   have : IsIso (ε₀.app (q.obj C)) := hflat C hC

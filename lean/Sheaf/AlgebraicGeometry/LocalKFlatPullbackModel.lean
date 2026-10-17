@@ -116,7 +116,7 @@ theorem derivedPullback_local_kFlat_model {T X : Scheme.{u}} (f : T ⟶ X)
   obtain ⟨θ⟩ := derivedPullback_openRestriction_iso_universes f W U hUV
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hFmap, hFadd, ε, hL, htri, hflat⟩ :=
-    Classical.choose_spec (exists_derivedPullback r)
+    (derivedPullback_spec r)
   let H : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) :=
     Scheme.Modules.tensorPullback r

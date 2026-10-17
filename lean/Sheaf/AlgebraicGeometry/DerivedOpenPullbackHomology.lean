@@ -60,7 +60,7 @@ theorem nonempty_homology_derivedOpenPullback_iso_restrict
   let B := SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hFmap, hFadd, ε, hL, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback W.ι)
+    (derivedPullback_spec W.ι)
   have h : F = tensorPullback W.ι := CategoryTheory.Functor.ext hF (fun M N a ↦ hFmap a)
   subst F
   let η : tensorPullback W.ι ≅ restrictFunctor W.ι :=

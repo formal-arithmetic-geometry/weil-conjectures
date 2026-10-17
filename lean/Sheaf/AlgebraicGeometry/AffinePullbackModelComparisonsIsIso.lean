@@ -104,10 +104,7 @@ theorem affinePullbackModelComparisons_isIso
       IsIso (affineModelSectionsComparison B
         (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj K)) := by
   classical
-  let K : CochainComplex
-      (SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace)) ℤ :=
-    (@Functor.mapHomologicalComplex _ _ _ _ _ _ _
-      (tilde.functor R) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M
+  intro K
   constructor
   · let A := SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace)
     have hK : CochainComplex.IsAcyclicTensorKFlat (R := (Spec R).sheaf) K := by
@@ -120,7 +117,7 @@ theorem affinePullbackModelComparisons_isIso
         (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF)).2
     obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
       E, hE, hEmap, hEadd, ε, hL, htri, hflat⟩ :=
-      Classical.choose_spec (exists_derivedPullback g)
+      (derivedPullback_spec g)
     have hEq : E = Scheme.Modules.tensorPullback g :=
       CategoryTheory.Functor.ext hE (fun _ _ a ↦ hEmap a)
     clear hE hEmap hI hImap hIadd hIlim hIcolim hIres I htri

@@ -73,7 +73,7 @@ theorem nonempty_kFlat_stalk_residueCohomology_linearEquiv
   let B := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
   let f := X.fromSpecResidueField x
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, ε, _, _, hcompute⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   have hF' : F = Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
   subst F

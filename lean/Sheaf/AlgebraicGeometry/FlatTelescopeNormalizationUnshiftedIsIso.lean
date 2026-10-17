@@ -197,7 +197,7 @@ theorem flat_telescope_normalization_unshifted_isIso
   let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
   let F := derivedPullback f
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, ⟨sF, hF⟩, _⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   let : F.CommShift ℤ := sF
   have : F.IsTriangulated := hF
   let L : H ⥤ schemeDerivedCategory Z := DerivedCategory.Qh ⋙ F

@@ -165,7 +165,7 @@ theorem exists_localizedStrictPerfectResidueHomology_iso (S : Scheme.{u}) (U : S
       HasDerivedCategory.standard _
     let f := U.toScheme.fromSpecResidueField x
     obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, ε, _, _, hcompute⟩ :=
-      Classical.choose_spec (exists_derivedPullback.{u, u + 1} f)
+      (derivedPullback_spec.{u, u + 1} f)
     have hF' : F = Scheme.Modules.tensorPullback f :=
       CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
     subst F

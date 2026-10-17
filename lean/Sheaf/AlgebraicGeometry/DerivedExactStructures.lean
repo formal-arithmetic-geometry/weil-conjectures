@@ -71,7 +71,7 @@ theorem rightAdjointTensor_exactStructures
   let := qc_triangulated Y
   let := qc_triangulated Z
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, ⟨sL, hL⟩, _⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   let : (derivedPullback f).CommShift ℤ := sL
   let : (derivedPullback f).IsTriangulated := hL
   let := a.rightAdjointCommShift ℤ
@@ -113,7 +113,7 @@ theorem projection_exactStructures
       letI := sG
       F.IsTriangulated ∧ G.IsTriangulated := by
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, ⟨sL, hL⟩, _⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   let : (derivedPullback f).CommShift ℤ := sL
   let : (derivedPullback f).IsTriangulated := hL
   let := a.rightAdjointCommShift ℤ

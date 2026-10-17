@@ -41,6 +41,5 @@ theorem perfectOverlapStageTransport_hom_app
         m hmap).hom.app A := by
   unfold perfectOverlapStageTransport
   simp only [Scheme.Hom.preimage_inf]
-  rfl
 
 end AlgebraicGeometry

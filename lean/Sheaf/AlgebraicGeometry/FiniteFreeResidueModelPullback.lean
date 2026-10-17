@@ -39,7 +39,7 @@ private theorem pullback_Q_iso {X Y : Scheme.{u}} (g : X ⟶ Y)
       DerivedCategory.Q.obj (((Modules.pullback g).mapHomologicalComplex (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hFmap, hFadd, ε, hL, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback g)
+    (derivedPullback_spec g)
   have h : F = Modules.tensorPullback g := CategoryTheory.Functor.ext hF (fun _ _ a ↦ hFmap a)
   subst F
   have : (Modules.tensorPullback g).Additive := hFadd

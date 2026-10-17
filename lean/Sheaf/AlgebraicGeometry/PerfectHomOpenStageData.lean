@@ -70,7 +70,7 @@ private theorem perfect_exactOpenRestriction (Y : Scheme.{u}) (A : Y.Opens)
   let T : B ⥤ C := Modules.tensorPullback A.ι
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hFmap, hFadd, ε, hL, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback A.ι)
+    (derivedPullback_spec A.ι)
   have h : F = T := CategoryTheory.Functor.ext hF (fun M N a ↦ hFmap a)
   subst F
   let η : T ≅ Modules.restrictFunctor A.ι :=

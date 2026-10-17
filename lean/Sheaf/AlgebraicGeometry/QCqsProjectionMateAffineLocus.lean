@@ -134,7 +134,7 @@ private theorem pullback_exact {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :
     ∃ (_h : (derivedPullback f).CommShift ℤ), (derivedPullback f).IsTriangulated := by
   obtain ⟨I, hI, hmap, hadd, hlim, hcolim, hres, E, hE, hEmap, hEadd,
-    ε, hleft, htri, hε⟩ := Classical.choose_spec (exists_derivedPullback f)
+    ε, hleft, htri, hε⟩ := (derivedPullback_spec f)
   exact htri
 
 set_option backward.isDefEq.respectTransparency false in

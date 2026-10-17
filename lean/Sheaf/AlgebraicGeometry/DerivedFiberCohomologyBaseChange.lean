@@ -75,7 +75,7 @@ theorem derivedFiberCohomology_baseChange_iso (X Y : Scheme.{u})
     convert CochainComplex.isKFlat_pullback g.base Y.sheaf X.sheaf ⟨g.c⟩ P hP using 1
     rfl
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, ε, _, _, hcompute⟩ :=
-    Classical.choose_spec (exists_derivedPullback g)
+    (derivedPullback_spec g)
   have hF' : F = G := CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
   subst F
   let A := SheafOfModules.{u} (moduleRings X.toRingedSpace)

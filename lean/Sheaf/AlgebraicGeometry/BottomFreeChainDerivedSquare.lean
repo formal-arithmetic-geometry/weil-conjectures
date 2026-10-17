@@ -12,7 +12,8 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.PerfectHomTransport
+import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Derived square for a finite free chart model -/
@@ -45,52 +46,11 @@ private theorem tensorCounit {X Y : Scheme.{u}} (g : X ⟶ Y)
           IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback g)
+    (derivedPullback_spec g)
   have h : E = Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hE (fun _ _ f ↦ hEmap f)
   subst E
   exact ⟨hEadd, ε, hL, hK⟩
-
-set_option synthInstance.maxSize 2048 in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem openPullbackIso (X : Scheme.{u}) (U : X.Opens)
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :
-    let R : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
-        SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=
-      SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
-        (Modules.overEquiv U).functor
-    Nonempty (derivedPullback U.ι ≅ R.mapDerivedCategory) := by
-  dsimp only
-  let R : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=
-    SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
-    (Modules.overEquiv U).functor
-  obtain ⟨a, ε, hL, _⟩ := tensorCounit U.ι
-  have := hL
-  obtain ⟨adj⟩ := Modules.nonempty_tensorPullbackAdjunction U.ι
-  let θ : Modules.tensorPullback U.ι ≅ R :=
-    adj.leftAdjointUniq (Modules.restrictAdjunction U.ι) ≪≫
-      (Modules.overFunctorEquiv U).symm
-  have : R.Additive := by dsimp [R]; infer_instance
-  have : PreservesFiniteLimits R := by dsimp [R]; infer_instance
-  have : PreservesFiniteColimits R := by dsimp [R]; infer_instance
-  let θh : (Modules.tensorPullback U.ι).mapHomotopyCategory (.up ℤ) ≅
-      R.mapHomotopyCategory (.up ℤ) :=
-    { hom := θ.hom.mapHomotopyCategory (.up ℤ)
-      inv := θ.inv.mapHomotopyCategory (.up ℤ)
-      hom_inv_id := by rw [← NatTrans.mapHomotopyCategory_comp]; simp
-      inv_hom_id := by rw [← NatTrans.mapHomotopyCategory_comp]; simp }
-  let δ := Functor.isoWhiskerRight θh
-    (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))
-  let α := R.mapDerivedCategoryFactorsh ≪≫ δ.symm
-  have := Functor.isLeftDerivedFunctor_of_inverts
-    (HomotopyCategory.quasiIso
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ))
-    R.mapDerivedCategory α
-  exact ⟨Functor.leftDerivedUnique R.mapDerivedCategory (derivedPullback U.ι)
-    ε α.hom (HomotopyCategory.quasiIso _ (.up ℤ))⟩
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
@@ -171,20 +131,16 @@ theorem bottomFreeChain_derived_square
         R.mapDerivedCategory.map ((derivedPullback g).map f) ≫ eQ.hom =
           eP.hom ≫ DerivedCategory.Q.map β := by
   classical
-  dsimp only
-  intro hF
+  intro V F hF R P Q β
   let := hF
-  let V := g ⁻¹ᵁ W
   let := HasDerivedCategory.standard
     (SheafOfModules.{u} ((moduleRings T'.toRingedSpace).over V))
-  let R := SheafOfModules.overFunctor.{u} (moduleRings T'.toRingedSpace) V
   let E : SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace) ⥤
       SheafOfModules.{u} ((moduleRings T'.toRingedSpace).over V) :=
     (Modules.overEquiv V).inverse
   let h := g.resLE W V (le_refl V)
   let H : SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace) := Modules.tensorPullback h
-  let F := H ⋙ E
   have : E.Additive := by dsimp [E]; infer_instance
   have : PreservesFiniteLimits E := by dsimp [E]; infer_instance
   have : PreservesFiniteColimits E := by dsimp [E]; infer_instance
@@ -225,27 +181,35 @@ theorem bottomFreeChain_derived_square
       ∃ ψ : DerivedCategory.Q ⋙ (derivedPullback h ⋙ E.mapDerivedCategory) ⟶
         F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q,
         IsIso (ψ.app A) ∧ IsIso (ψ.app B) := ⟨ψ, hψA, hψB⟩
-  obtain ⟨oV⟩ := openPullbackIso T' V
+  have oV : derivedPullback V.ι ≅
+      (schemeOpenRestriction T' V).mapDerivedCategory :=
+    singleComplexOpenPullbackIso T' V
   let e : SheafOfModules.{u} ((moduleRings T'.toRingedSpace).over V) ≌
       SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace) := Modules.overEquiv V
-  let eD := e.mapDerivedCategory
-  have oV' : derivedPullback V.ι ≅ R.mapDerivedCategory ⋙ eD.functor :=
+  -- Only an isomorphism to the composite is needed, so use the transported unit
+  -- directly, without constructing an adjointified derived equivalence.
+  have unit : 𝟭 _ ≅ e.functor.mapDerivedCategory ⋙ E.mapDerivedCategory :=
+    (Functor.mapDerivedCategoryIdIso _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso e.unitIso ≪≫
+        Functor.mapDerivedCategoryCompIso e.functor e.inverse
+  have oV' : derivedPullback V.ι ≅
+      R.mapDerivedCategory ⋙ e.functor.mapDerivedCategory :=
     oV ≪≫ Functor.mapDerivedCategoryCompIso R e.functor
   have rV : R.mapDerivedCategory ≅ derivedPullback V.ι ⋙ E.mapDerivedCategory :=
     (Functor.rightUnitor _).symm ≪≫
-      Functor.isoWhiskerLeft R.mapDerivedCategory eD.unitIso ≪≫
+      Functor.isoWhiskerLeft R.mapDerivedCategory unit ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight oV'.symm E.mapDerivedCategory
-  obtain ⟨_, _, _, c, _⟩ := exists_derivedPullbackComposition.{u, w}
+  -- Keep the fixed composition family behind its typed interface.
   have d : derivedPullback g ⋙ R.mapDerivedCategory ≅
       derivedPullback W.ι ⋙ (derivedPullback h ⋙ E.mapDerivedCategory) :=
     Functor.isoWhiskerLeft (derivedPullback g) rV ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight
-        (c V.ι g ≪≫
+        (perfectHomComposition V.ι g ≪≫
           eqToIso (congrArg (fun k ↦ derivedPullback k)
             (Hom.resLE_comp_ι g (le_refl V)).symm) ≪≫
-          (c h W.ι).symm) E.mapDerivedCategory ≪≫
+          (perfectHomComposition h W.ι).symm) E.mapDerivedCategory ≪≫
       Functor.associator _ _ _
   let L := derivedPullback h ⋙ E.mapDerivedCategory
   refine ⟨d.app X ≪≫ L.mapIso eA ≪≫ asIso (ψ.app A),

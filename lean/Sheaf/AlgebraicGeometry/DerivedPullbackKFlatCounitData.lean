@@ -45,7 +45,7 @@ theorem exists_derivedPullback_kFlat_counit_data
   obtain ⟨e⟩ := exists_derivedPullback_shifted_unit_iso f
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
       E, hE, hEmap, hEadd, ε, hε⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   have hE' : E = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hE (fun _ _ a ↦ hEmap a)
   subst E

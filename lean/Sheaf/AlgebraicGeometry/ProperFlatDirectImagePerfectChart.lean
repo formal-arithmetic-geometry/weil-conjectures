@@ -116,7 +116,7 @@ theorem exists_properFlatDirectImagePerfectChart
     have := Modules.isGrothendieckAbelian (pullback f (a ≫ V.ι))
     obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
       A, hA, hAmap, hAadd, ε, hε, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback a)
+      (derivedPullback_spec a)
     have hAeq : A = Modules.tensorPullback a :=
       CategoryTheory.Functor.ext hA (fun M N q ↦ hAmap q)
     subst A

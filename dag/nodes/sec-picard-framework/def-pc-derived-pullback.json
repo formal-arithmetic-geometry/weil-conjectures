@@ -52,6 +52,11 @@
     "lem-pur-left-derived-from-kflat-class"
    ],
    "elementary": false
+  },
+  {
+   "text": "Store exactly the original chosen functor behind the non-exposed data definition, and let derivedPullback refer to it. Unfolding the interface and data proves derivedPullback_eq_choose; rewriting this equation in Classical.choose_spec yields derivedPullback_spec. This changes no functor or counit properties.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -62,9 +67,11 @@
   "lem-pur-left-derived-from-kflat-class"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "agent": "D3",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma Tag 06YJ (lemma-derived-base-change), proof: direct resolving-class construction of LF"
+  "place": "Tags 06YJ and 0D5S; retain the existing resolving-class proof and add its fixed-data interface."
  },
  "mathlib_searches": [
   {
@@ -196,9 +203,12 @@
   "existing": false,
   "declarations": [
    "AlgebraicGeometry.exists_derivedPullback",
-   "AlgebraicGeometry.derivedPullback"
+   "AlgebraicGeometry.derivedPullbackData",
+   "AlgebraicGeometry.derivedPullback",
+   "AlgebraicGeometry.derivedPullback_eq_choose",
+   "AlgebraicGeometry.derivedPullback_spec"
   ],
-  "note": "The chosen functor satisfies the left-derived universal property for the recorded tensor pullback, is triangulated, and has a natural counit invertible on every K-flat complex; exact inverse image preserves K-flat resolutions. The shared SheafOfModules category instances are used throughout."
+  "note": "The chosen functor satisfies the left-derived universal property for the recorded tensor pullback, is triangulated, and has a natural counit invertible on every K-flat complex; exact inverse image preserves K-flat resolutions. The shared SheafOfModules category instances are used throughout. The original fixed choice is stored behind derivedPullbackData; derivedPullback_eq_choose proves equality with that original choice, and derivedPullback_spec exposes exactly its original properties."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -209,12 +219,12 @@
   "note": "g:T⟶S on Scheme.{u}; source/target schemeDerivedCategory S/T on the moduleRings carrier with sibling HasDerivedCategory.{w} binders; L pinned by IsLeftDerivedFunctor ε for E pinned (obj/map eqToHom) to tensorPullbackObj/Map g; CommShift+IsTriangulated; ε invertible on every IsKFlat P (Lg*E ≅ g*P); I pinned to inverseImageModule/Map, exact, carries K-flat resolutions to K-flat resolutions over inverseImageRing (06YC); def = Classical.choose as exists_tensorPullbackAdjunction; no source/Mathlib O_X-module derived pullback (source only étale upperStar.leftDerivedFunctor); recompiled on sheaf-dag c77be01c6 with #check"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T063519-L-3159337",
+  "landing": "20261017T191956-L-3002698",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

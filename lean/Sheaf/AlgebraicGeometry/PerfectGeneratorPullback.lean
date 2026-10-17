@@ -67,7 +67,7 @@ theorem perfect_generator_pullback {X X' : Scheme.{u}}
   classical
   have _ := hperfect
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, ⟨cs, ht⟩, _⟩ :=
-    Classical.choose_spec (exists_derivedPullback g)
+    (derivedPullback_spec g)
   let : (derivedPullback g).CommShift ℤ := cs
   obtain ⟨adj⟩ := nonempty_derivedPullbackAdjunction g
   constructor

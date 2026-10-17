@@ -113,7 +113,7 @@ theorem relativelyFlat_tensor_baseChange_iso
     (fun _ ↦ tensorPullback_kFlat (pullback.fst f g) P hP)
   let c := (pulledComparison.app ⟨PUnit.unit⟩).app ⟨PUnit.unit⟩
   obtain ⟨_, _, _, _, _, _, _, F₀, hF₀, hmap₀, _, ε₀, _, _, hK₀⟩ :=
-    Classical.choose_spec (exists_derivedPullback (pullback.fst f g))
+    (derivedPullback_spec (pullback.fst f g))
   have hEq₀ : F₀ = Scheme.Modules.tensorPullback (pullback.fst f g) :=
     CategoryTheory.Functor.ext hF₀ (fun _ _ b ↦ hmap₀ b)
   subst F₀

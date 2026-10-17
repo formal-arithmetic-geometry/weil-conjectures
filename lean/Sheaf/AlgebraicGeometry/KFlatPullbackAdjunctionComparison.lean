@@ -29,7 +29,7 @@ private theorem counit_isIso {S S' : Scheme.{u}} (g : S' ⟶ S)
     (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P) :
     IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, δ, hδ, _, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback g)
+    (derivedPullback_spec g)
   have hF' : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
   subst F

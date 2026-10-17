@@ -153,6 +153,17 @@ theorem exists_derivedPullback {T S : Scheme.{u}} (g : T ⟶ S)
   · intro P hP
     exact hε (q.obj P) ⟨P, hP, rfl⟩
 
+/-- The fixed chosen construction behind the derived-pullback interface. This uses exactly
+its original existence theorem, with no additional choice of functor.
+Source: Stacks Project, Tag 0D5S (blueprint: def-pc-derived-pullback). -/
+@[no_expose] noncomputable def derivedPullbackData {T S : Scheme.{u}} (g : T ⟶ S)
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings T.toRingedSpace))] :
+    schemeDerivedCategory S ⥤ schemeDerivedCategory T :=
+  Classical.choose (exists_derivedPullback g)
+
 /-- The derived pullback `L g^* : D(𝒪_S) ⥤ D(𝒪_T)`.
 
 For `g : T ⟶ S`, this is the composite of termwise inverse image and derived change
@@ -168,6 +179,61 @@ noncomputable def derivedPullback {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings T.toRingedSpace))] :
     schemeDerivedCategory S ⥤ schemeDerivedCategory T :=
-  Classical.choose (exists_derivedPullback g)
+  derivedPullbackData g
+
+/-- The fixed derived pullback has the original chosen construction. -/
+theorem derivedPullback_eq_choose {T S : Scheme.{u}} (g : T ⟶ S)
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings T.toRingedSpace))] :
+    derivedPullback g = Classical.choose (exists_derivedPullback g) := by
+  unfold derivedPullback derivedPullbackData
+  rfl
+
+/-- The defining inverse-image, tensor-counit and K-flat properties of the fixed
+functor. This API avoids unfolding the construction when using its properties.
+Source: Stacks Project, Tag 0D5S (blueprint: def-pc-derived-pullback). -/
+theorem derivedPullback_spec {T S : Scheme.{u}} (g : T ⟶ S)
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings T.toRingedSpace))] :
+    let L := derivedPullback g
+      ∃ (I : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
+          SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology T)
+            (forget₂ CommRingCat.{u} RingCat.{u})).obj
+              (TopCat.Sheaf.inverseImageRing g.base S.sheaf)))
+        (hI : ∀ M, I.obj M = TopCat.Sheaf.inverseImageModule g.base S.sheaf M)
+        (_ : ∀ {M N} (a : M ⟶ N),
+          I.map a = eqToHom (hI M) ≫
+            TopCat.Sheaf.inverseImageModuleMap g.base S.sheaf M a ≫
+              eqToHom (hI N).symm)
+        (_ : I.Additive),
+        PreservesFiniteLimits I ∧ PreservesFiniteColimits I ∧
+        (∀ {P G : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ}
+          (s : P ⟶ G), CochainComplex.IsKFlatResolution (R := S.sheaf) s →
+            CochainComplex.IsKFlatResolution
+              (R := TopCat.Sheaf.inverseImageRing g.base S.sheaf)
+              ((I.mapHomologicalComplex (ComplexShape.up ℤ)).map s)) ∧
+        ∃ (E : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
+            SheafOfModules.{u} (moduleRings T.toRingedSpace))
+          (h : ∀ M, E.obj M = Scheme.Modules.tensorPullbackObj g M)
+          (_ : ∀ {M N} (a : M ⟶ N),
+            E.map a = eqToHom (h M) ≫ Scheme.Modules.tensorPullbackMap g a ≫
+              eqToHom (h N).symm)
+          (_ : E.Additive)
+          (ε : DerivedCategory.Qh ⋙ L ⟶
+            E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh),
+          L.IsLeftDerivedFunctor ε
+              (HomotopyCategory.quasiIso
+                (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (ComplexShape.up ℤ)) ∧
+            (∃ (_ : L.CommShift ℤ), L.IsTriangulated) ∧
+            ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ,
+              CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P →
+                IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
+  dsimp only
+  rw [derivedPullback_eq_choose]
+  exact Classical.choose_spec (exists_derivedPullback g)
 
 end AlgebraicGeometry

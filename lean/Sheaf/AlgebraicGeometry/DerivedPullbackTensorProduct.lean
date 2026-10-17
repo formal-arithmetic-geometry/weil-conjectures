@@ -118,7 +118,8 @@ theorem derivedPullback_tensorProduct
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map b) (curriedTensor _)
                 (ComplexShape.up ℤ)) ∧
         ∀ P N : CochainComplex (SheafOfModules.{uPull} (moduleRings S.toRingedSpace)) ℤ,
-          CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P → CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P →
+            CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) N →
             IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
                 (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
               DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
@@ -126,7 +127,7 @@ theorem derivedPullback_tensorProduct
   classical
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hmap, hadd, ε, hder, htri, hε⟩ :=
-      Classical.choose_spec (exists_derivedPullback g)
+      (derivedPullback_spec g)
   -- The recorded object and map formulas determine the termwise functor strictly.
   have hEq : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)

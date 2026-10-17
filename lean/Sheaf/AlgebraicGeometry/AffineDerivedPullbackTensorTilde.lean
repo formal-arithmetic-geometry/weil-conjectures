@@ -77,9 +77,8 @@ private theorem tensorDerivedCounit {X Y : Scheme.{u}} (f : X ⟶ Y)
       ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
         CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
           IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
-  have d := Classical.choose_spec (exists_derivedPullback f)
-  obtain ⟨E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-    d.choose_spec.choose_spec.choose_spec.choose_spec.2.2.2
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+    E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ := derivedPullback_spec f
   have h : E = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E

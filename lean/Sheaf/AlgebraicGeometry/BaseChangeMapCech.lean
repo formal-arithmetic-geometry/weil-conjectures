@@ -73,7 +73,7 @@ theorem baseChangeMap_cech
   let p := pullback.fst f g
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, δ, hδ, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback p)
+      (derivedPullback_spec p)
   have h : E = Scheme.Modules.tensorPullback p :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E

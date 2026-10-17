@@ -207,7 +207,7 @@ private theorem counitModel_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
     CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
   subst F
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, δ, hδ, _, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback.{uModel, wModel} g)
+    (derivedPullback_spec.{uModel, wModel} g)
   have hF' : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
   subst F
@@ -292,7 +292,8 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map b) (curriedTensor _)
                 (ComplexShape.up ℤ))
     (hiso : ∀ P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
-          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P → CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
+            CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
             IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
                 (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
               DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map

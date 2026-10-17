@@ -69,7 +69,7 @@ theorem exists_derivedPullback_kFlat_counit_adjustment_factor
   let Q := DerivedCategory.Qh (C := A)
   let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
   obtain ⟨_, _, _, _, _, _, _, E, hE, hEmap, hEadd, δ, hδ, _, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   have hE' : E = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E

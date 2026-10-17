@@ -82,9 +82,9 @@ private theorem pullback_transport {X Y : Scheme.{u}} (f : X ⟶ Y)
         (@DerivedCategory.Qh _ _ _ hY₂) (HomotopyCategory.quasiIso _ (.up ℤ))).functor ⋙
           @derivedPullback _ _ f hY₂ hX₂) := by
   obtain ⟨I₁, hi₁, him₁, hia₁, hil₁, hic₁, hir₁, E₁, he₁, hem₁, hea₁,
-    ε₁, hε₁, ht₁, hf₁⟩ := Classical.choose_spec (@exists_derivedPullback _ _ f hY₁ hX₁)
+    ε₁, hε₁, ht₁, hf₁⟩ := (@derivedPullback_spec _ _ f hY₁ hX₁)
   obtain ⟨I₂, hi₂, him₂, hia₂, hil₂, hic₂, hir₂, E₂, he₂, hem₂, hea₂,
-    ε₂, hε₂, ht₂, hf₂⟩ := Classical.choose_spec (@exists_derivedPullback _ _ f hY₂ hX₂)
+    ε₂, hε₂, ht₂, hf₂⟩ := (@derivedPullback_spec _ _ f hY₂ hX₂)
   let η : E₁ ≅ E₂ := NatIso.ofComponents
     (fun M ↦ eqToIso ((he₁ M).trans (he₂ M).symm)) (by
       intro M N a
@@ -181,7 +181,7 @@ private theorem exact_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
       @Functor.mapDerivedCategory _ _ _ hY _ _ _ hX
         (Scheme.Modules.tensorPullback f) _ _ _) := by
   obtain ⟨_, _, _, _, _, _, _, F, hF, hFm, _, ε, hL, _, _⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   have h : F = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hFm a)
   subst F

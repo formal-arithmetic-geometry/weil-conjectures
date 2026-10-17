@@ -45,7 +45,7 @@ private theorem tensorDerivedCounit {X Y : Scheme.{u₁}} (f : X ⟶ Y)
           IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback f)
+      (derivedPullback_spec f)
   have h : E = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E

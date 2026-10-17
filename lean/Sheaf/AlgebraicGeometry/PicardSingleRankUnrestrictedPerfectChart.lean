@@ -136,10 +136,9 @@ private theorem derivedPullback_zero_isZero {T S : Scheme.{u}} (g : T ⟶ S)
     IsZero ((derivedPullback g).obj (0 : schemeDerivedCategory S)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, ⟨hshift, htri⟩, hε⟩ :=
-      Classical.choose_spec (exists_derivedPullback g)
+      (derivedPullback_spec g)
   let := hshift
   let := htri
-  change IsZero ((Classical.choose (exists_derivedPullback g)).obj _)
   exact Functor.map_isZero _ (isZero_zero _)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -248,7 +247,7 @@ theorem exists_picardSingleRankUnrestrictedPerfectChart
         have := Modules.isGrothendieckAbelian (pullback f (a ≫ V.ι))
         obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
           A, hA, hAmap, hAadd, ε, hε, htri, hK⟩ :=
-          Classical.choose_spec (exists_derivedPullback a)
+          (derivedPullback_spec a)
         have hAeq : A = Modules.tensorPullback a :=
           CategoryTheory.Functor.ext hA (fun M N q ↦ hAmap q)
         subst A

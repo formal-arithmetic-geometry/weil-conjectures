@@ -55,7 +55,7 @@ private theorem exists_derivedPullback_standard_leftDerived
     (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := HasDerivedCategory.standard _
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback f)
+      (derivedPullback_spec f)
   have hE' : E = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   have hP' : P = Scheme.Modules.tensorPullback f :=

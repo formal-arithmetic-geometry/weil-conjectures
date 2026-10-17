@@ -33,11 +33,12 @@
    "elementary": false
   },
   {
-   "text": "For an open U of X, the tensor-pullback adjunction and the exact restriction adjunction identify tensorPullback U.ι with overFunctor followed by overEquiv.functor. Exact restriction has an invertible localization factorization; the universal property of a left-derived functor therefore identifies its mapDerivedCategory naturally with derivedPullback U.ι. Apply this to V in T prime. The derived module-site equivalence and its unit then identify R.mapDerivedCategory with L(V.ι)* followed by overEquiv.inverse.mapDerivedCategory. Compose the two comparisons supplied by lem-pc-ringed-spaces-derived-pullback-composition and the identity h followed by W.ι equals V.ι followed by g to obtain a natural isomorphism d from Lg* followed by R.mapDerivedCategory to L(W.ι)* followed by Lh* followed by overEquiv.inverse.mapDerivedCategory.",
+   "text": "For an open U of X, the tensor-pullback adjunction and the exact restriction adjunction identify tensorPullback U.ι with overFunctor followed by overEquiv.functor. Exact restriction has an invertible localization factorization; the universal property of a left-derived functor therefore identifies its mapDerivedCategory naturally with derivedPullback U.ι. Apply this to V in T prime. The derived module-site equivalence and its unit then identify R.mapDerivedCategory with L(V.ι)* followed by overEquiv.inverse.mapDerivedCategory. Compose the two comparisons supplied by lem-pc-ringed-spaces-derived-pullback-composition and the identity h followed by W.ι equals V.ι followed by g to obtain a natural isomorphism d from Lg* followed by R.mapDerivedCategory to L(W.ι)* followed by Lh* followed by overEquiv.inverse.mapDerivedCategory. Use perfectHomComposition from lem-pc-perfect-hom-transport for these two comparisons, rather than eliminating the full composition existence predicate inside the proof.",
    "uses": [
     "def-pc-derived-pullback",
     "def-pc-module-pullback",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-perfect-hom-transport"
    ],
    "elementary": false
   },
@@ -45,6 +46,13 @@
    "text": "Put L = Lh* followed by overEquiv.inverse.mapDerivedCategory. Define eP = d.app X followed by L.mapIso eA followed by asIso (psi.app A), and define eQ with Z and B. Naturality of d rewrites the left-hand side of the desired square. Functoriality of L and hsquare replace L.map (L(W.ι)* f followed by eB.hom) by L.map (eA.hom followed by Q.map alpha). Naturality of psi at alpha gives exactly the required right-hand side. This is a direct associativity calculation and changes no object or localization instance.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Use the already constructed singleComplexOpenPullbackIso for exact open restriction, rather than repeating its left-derived uniqueness construction privately. Introduce the statement's fixed functors and complexes directly. Transport the underived over-site equivalence unit using mapDerivedCategoryIdIso, mapDerivedCategoryNatIso and mapDerivedCategoryCompIso; only this unit isomorphism is needed, so constructing an adjointified derived equivalence is unnecessary. The remaining counit/naturality calculation is unchanged.",
+   "uses": [
+    "def-pc-single-complex-open-restriction-data"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -52,12 +60,16 @@
   "lem-pc-bounded-above-flat-kflat",
   "def-pc-derived-pullback",
   "def-pc-module-pullback",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-single-complex-open-restriction-data",
+  "lem-pc-perfect-hom-transport"
  ],
  "proof_origin": {
   "by": "worker",
+  "agent": "D3",
+  "date": "2026-10-18",
   "document": "https://stacks.math.columbia.edu/tag/06YJ",
-  "place": "Tags 06YD and 06YJ for K-flat computation, Tag 0D5S for composition; G3 formal proof of the naturality and exact-localization transports, 2026-10-13"
+  "place": "Retain the original bounded-free/K-flat counit calculation, reusing the fixed public open-pullback comparison."
  },
  "mathlib_searches": [
   {
@@ -128,13 +140,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T145725-L-751008",
-  "kind": "proof",
+  "landing": "20261017T191956-L-3002698",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {

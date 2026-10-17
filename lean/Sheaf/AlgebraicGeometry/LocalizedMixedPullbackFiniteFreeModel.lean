@@ -62,7 +62,7 @@ private theorem tensor_derived_model {X Y : Scheme.{u}} (g : X ⟶ Y)
         (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hFmap, hFadd, ε, hderived, htri, hε⟩ :=
-    Classical.choose_spec (exists_derivedPullback g)
+    (derivedPullback_spec g)
   let e : F ≅ Scheme.Modules.tensorPullback g := NatIso.ofComponents
     (fun M ↦ eqToIso (hF M)) (by
       intro M N a

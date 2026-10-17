@@ -45,7 +45,7 @@ private theorem perfect_exact_pullback {Y X : Scheme.{u}} (g : Y ⟶ X)
   let T : B ⥤ SheafOfModules.{u} (moduleRings Y.toRingedSpace) := Modules.tensorPullback g
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     G, hG, hGmap, hGadd, ε, hL, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback g)
+    (derivedPullback_spec g)
   have h : G = T := CategoryTheory.Functor.ext hG (fun M N a ↦ hGmap a)
   subst G
   have : PreservesFiniteLimits T := preservesFiniteLimits_of_natIso θ

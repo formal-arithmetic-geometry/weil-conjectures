@@ -49,7 +49,7 @@ theorem exists_restricted_module_pullback_comparison
   let H := (schemeOpenRestriction X (f ⁻¹ᵁ V)).obj G
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback.{u, w} p)
+      (derivedPullback_spec.{u, w} p)
   have h : E = Scheme.Modules.tensorPullback p :=
     CategoryTheory.Functor.ext (F := E) (G := Scheme.Modules.tensorPullback p)
       hE (fun M N a ↦ hEmap a)

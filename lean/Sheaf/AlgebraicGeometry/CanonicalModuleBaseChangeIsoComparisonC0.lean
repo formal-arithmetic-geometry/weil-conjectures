@@ -63,7 +63,7 @@ theorem canonicalModuleBaseChange_iso_comparison_c0
   let p := pullback.fst (f ≫ eS.hom) (eT.inv ≫ g ≫ eS.hom)
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hε, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback p)
+    (derivedPullback_spec p)
   have h : E = Scheme.Modules.tensorPullback p :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   subst E

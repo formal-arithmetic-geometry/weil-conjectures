@@ -31,7 +31,7 @@ theorem exists_derivedPullback_shifted_unit_iso
     Nonempty ((derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅
         (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧) := by
   obtain ⟨I, hI, hmap, hadd, hlim, hcolim, hres, E, hE, hEmap, hEadd,
-    ε, hleft, htri, hε⟩ := Classical.choose_spec (exists_derivedPullback f)
+    ε, hleft, htri, hε⟩ := (derivedPullback_spec f)
   obtain ⟨s, _⟩ := htri
   let : (derivedPullback f).CommShift ℤ := s
   exact ⟨((derivedPullback f).commShiftIso (1 : ℤ)).app _ ≪≫

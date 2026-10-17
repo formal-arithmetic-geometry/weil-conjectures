@@ -39,7 +39,7 @@ private theorem open_pullback_restriction_iso (X : Scheme.{u}) (U : X.Opens)
   classical
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     T, hT, hTmap, hTadd, ε, hL, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback U.ι)
+      (derivedPullback_spec U.ι)
   have ht : T = Scheme.Modules.tensorPullback U.ι :=
     CategoryTheory.Functor.ext hT (fun _ _ φ ↦ hTmap φ)
   subst T

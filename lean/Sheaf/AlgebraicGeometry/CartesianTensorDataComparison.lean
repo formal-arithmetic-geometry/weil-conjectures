@@ -61,7 +61,7 @@ private theorem iso_pullback_computes {Y Y' : Scheme.{u}} (i : Y' ≅ Y)
   have : T.IsEquivalence := tensorPullback_iso_equivalence i
   have : T.Additive := Functor.additive_of_preserves_binary_products _
   obtain ⟨_, _, _, _, _, _, _, F, hF, hFmap, _, ε, hL, _, _⟩ :=
-    Classical.choose_spec (exists_derivedPullback i.hom)
+    (derivedPullback_spec i.hom)
   have h : F = T := CategoryTheory.Functor.ext hF (fun _ _ a ↦ hFmap a)
   subst F
   let W := HomotopyCategory.quasiIso

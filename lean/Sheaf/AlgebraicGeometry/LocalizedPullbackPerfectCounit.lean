@@ -108,7 +108,7 @@ theorem localizedPullback_perfectCounit {T S : Scheme.{u}} (g : T ⟶ S)
   have : C.Additive := Functor.additive_of_preserves_binary_products _
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hderived, htri, hε⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   have hEq : E = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hE (fun _ _ a ↦ hEmap a)
   subst E
