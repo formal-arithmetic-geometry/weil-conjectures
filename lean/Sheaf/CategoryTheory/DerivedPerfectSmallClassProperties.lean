@@ -5,6 +5,7 @@ public import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 public import Mathlib.CategoryTheory.Presentable.Basic
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Sheaf.CategoryTheory.DerivedPerfectSmallClassCore
 
 @[expose] public section
 
