@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "cor-wf-rank-one-punctual-purity-curve",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Punctual purity of a rank-one Weil character on a curve",
- "statement": "In the situation of\n[thm-wf-rank-one-finite-geometric-image-curve], with $c$ and\n$\\varepsilon$ from [cor-wf-rank-one-degree-factorization-curve]\n(applicable because $\\chi(\\Pi)$ is finite by that theorem), fix an embedding\n$\\iota:\\overline{\\mathbf Q}_\\ell\\hookrightarrow\\mathbf C$, and use its\nrestriction to $E$ (equivalently, choose an embedding $E\\hookrightarrow \\mathbf C$ and an extension to $\\overline{\\mathbf Q}_\\ell$). The rank-one lisse Weil sheaf\nassociated with $\\chi$ by the\nfundamental representation\nis punctually $\\iota$-pure of the\nreal weight\n\n$$\nw_\\iota(\\chi)=2\\log_q|\\iota(c)|,\n$$\n\nwhere $c=\\chi(s)$ for any\ndegree-one element $s$.\nThe sheaf, degree, and punctual-purity conventions are those of\n[def-wf-fundamental-representation], [def-wf-weil-group], [def-weil-punctual-weights].",
+ "statement": "In the situation of\n[thm-wf-rank-one-finite-geometric-image-curve], with $c$ and\n$\\varepsilon$ from [cor-wf-rank-one-degree-factorization-curve]\n(applicable because $\\chi(\\Pi)$ is finite by that theorem), fix an embedding\n$\\iota:\\overline{\\mathbf Q}_\\ell\\hookrightarrow\\mathbf C$, and use its\nrestriction to $E$ (equivalently, choose an embedding $E\\hookrightarrow \\mathbf C$ and an extension to $\\overline{\\mathbf Q}_\\ell$). The rank-one lisse Weil sheaf\nassociated with $\\chi$ by the\nfundamental representation\nis punctually $\\iota$-pure of the\nreal weight\n\n$$\nw_\\iota(\\chi)=2\\log_q|\\iota(c)|,\n$$\n\nwhere $c=\\chi(s)$ for any\ndegree-one element $s$.\nThe sheaf, degree, and punctual-purity conventions are those of\n[def-wf-fundamental-representation], [def-wf-weil-group], [def-weil-punctual-weights].\n\nExplicitly, for this embedding $\\iota$, punctual purity means that for every closed point $x$ and every eigenvalue $\\alpha$ of its local geometric-Frobenius operator $F_x$ [def-weil-local-frobenius-trace], one has $|\\iota(\\alpha)|=\\#\\kappa(x)^{w_\\iota(\\chi)/2}$. This is the absolute-value condition of [def-weil-punctual-weights], applied also when $\\iota$ is an embedding rather than a surjective isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/cor-wf-rank-one-punctual-purity-curve.md",
   "place": "node cor-wf-rank-one-punctual-purity-curve, order 2628"
@@ -17,52 +17,143 @@
   "cor-wf-rank-one-degree-factorization-curve",
   "def-wf-fundamental-representation",
   "def-wf-weil-group",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "def-weil-local-frobenius-trace"
  ],
  "proof": [
   {
-   "text": "Let $x\\in|U_0|$ be closed and set\n$d=[\\kappa(x):\\mathbf F_q]$. The local geometric-Frobenius operator of\n[def-weil-local-frobenius-trace] is represented in the Weil group by\na conjugacy class $F_x$ of degree $d$ [p-real-operations], with degree as in\n[def-wf-weil-group]. Because $\\chi$ is one-dimensional, its value\non this class is well defined. The factorization of\n[cor-wf-rank-one-degree-factorization-curve] gives its unique stalk\neigenvalue as\n\n$$\n\\alpha_x=\\chi(F_x)=\\varepsilon(F_x)c^d.\n$$",
+   "text": "The hypotheses on $U_0$ are precisely those of [lem-wf-curve-normal-smooth-compactification]. Its first conclusion says that $U_0$ is smooth over $\\mathbf F_q$. Together with the given geometric connectedness, separatedness, finite type and pure dimension one, this puts $U_0$ in the curve setting of the sheaf–representation equivalence and local Frobenius comparison used below. Only smoothness is used; no compactification is chosen.",
+   "uses": [
+    "lem-wf-curve-normal-smooth-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/cor-wf-rank-one-punctual-purity-curve.proof.md",
+    "place": "First paragraph, curve hypotheses for p-real-operations"
+   }
+  },
+  {
+   "text": "Apply [thm-wf-rank-one-finite-geometric-image-curve] to the given continuous $E^\\times$-valued character: its hypotheses are unchanged, so $\\chi(\\Pi)$ is finite. Thus [cor-wf-rank-one-degree-factorization-curve] applies with the chosen degree-one $s$. It gives $c=\\chi(s)\\in E^\\times$ and a finite-order character $\\varepsilon$, with $\\chi(w)=\\varepsilon(w)c^{\\deg(w)}$ for all $w$. Regard $\\chi$ as the one-dimensional $\\Qlb$-representation obtained from its $E$-line by scalar extension. By [prop-wf-weil-sheaf-representation-equivalence] it has a corresponding lisse Weil sheaf $L$; its geometric generic stalk, with the fundamental action of [def-wf-fundamental-representation], is this line. This is the rank-one associated sheaf of the statement.",
+   "uses": [
+    "thm-wf-rank-one-finite-geometric-image-curve",
+    "cor-wf-rank-one-degree-factorization-curve",
+    "prop-wf-weil-sheaf-representation-equivalence",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/cor-wf-rank-one-punctual-purity-curve.proof.md",
+    "place": "First paragraph, factorization and the associated fundamental representation"
+   }
+  },
+  {
+   "text": "Fix a closed point $x$ of $U_0$ and put $d=[\\kappa(x):\\mathbf F_q]$. The closed-point clause of [def-weil-local-frobenius-trace] gives $d\\ge1$ and the local operator $F_x$ on the stalk of $L$. By [p-real-operations], a geometric Frobenius representative at $x$ has degree $d$ and its characteristic factor on this stalk equals $\\det(1-T\\chi(F_x))$. As this is a one-dimensional representation, the factor is $1-T\\chi(F_x)$; hence its sole eigenvalue is $\\alpha_x=\\chi(F_x)$. Conjugation does not change a character value, since $\\chi(hF_xh^{-1})=\\chi(h)\\chi(F_x)\\chi(h)^{-1}=\\chi(F_x)$. The factorization in [cor-wf-rank-one-degree-factorization-curve] therefore gives $\\alpha_x=\\varepsilon(F_x)c^d$.",
    "uses": [
     "def-weil-local-frobenius-trace",
     "p-real-operations",
-    "def-wf-weil-group",
     "cor-wf-rank-one-degree-factorization-curve"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/cor-wf-rank-one-punctual-purity-curve.proof.md",
+    "place": "First paragraph and displayed eigenvalue factorization"
+   }
   },
   {
-   "text": "The character $\\varepsilon$ has finite image, so\n$\\varepsilon(F_x)$ is a root of unity. By\n[lem-tw-root-of-unity-modulus],\n$|\\iota(\\varepsilon(F_x))|=1$. Therefore\n\n$$\n|\\iota(\\alpha_x)|=|\\iota(c)|^d\n=q^{d w_\\iota(\\chi)/2}\n=|\\kappa(x)|^{w_\\iota(\\chi)/2}.\n$$",
+   "text": "By [cor-wf-rank-one-degree-factorization-curve], $\\varepsilon$ is a finite-order character, so choose $N\\ge1$ with $\\varepsilon(w)^N=1$ for all $w$. For every $w$, the field embedding preserves this identity, and complex multiplicativity gives $|\\iota(\\varepsilon(w))|^N=1$. This nonnegative real number $|\\iota(\\varepsilon(w))|$ must be $1$: a value below $1$ has $N$th power below $1$, and a value above $1$ has $N$th power above $1$. In particular, the eigenvalue from step 3 satisfies $|\\iota(\\alpha_x)|=|\\iota(c)|^d$. This argument needs no surjectivity of $\\iota$.",
    "uses": [
-    "lem-tw-root-of-unity-modulus"
+    "cor-wf-rank-one-degree-factorization-curve"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/cor-wf-rank-one-punctual-purity-curve.proof.md",
+    "place": "Second paragraph, root-of-unity modulus; elementary argument for embeddings"
+   }
   },
   {
-   "text": "This is precisely the definition in [def-weil-punctual-weights].\nIf $s'=gs$ is another degree-one lift, then\n$\\chi(s')/\\chi(s)=\\chi(g)$ is a root of unity by\n[thm-wf-rank-one-finite-geometric-image-curve]; hence its complex\nmodulus is one and the displayed weight does not depend on $s$.",
+   "text": "Put $a=|\\iota(c)|>0$ (since $c\\in E^\\times$) and $w=2\\log(a)/\\log(q)$. Since $q$ is a finite-field cardinality, $q>1$. A basis of the degree-$d$ extension $\\kappa(x)/\\mathbf F_q$ identifies its elements with $d$-tuples over $\\mathbf F_q$, so $\\#\\kappa(x)=q^d$. By the definition of real powers of positive numbers,\n$$\n(q^d)^{w/2}=\\exp\\bigl(d\\log(q)\\,\\log(a)/\\log(q)\\bigr)=\\exp(d\\log(a))=a^d=|\\iota(\\alpha_x)|.\n$$\nThis is the punctual-purity condition in [def-weil-punctual-weights] for the rank-one sheaf $L$, at every closed point. We use its displayed absolute-value formula, which is meaningful for the fixed embedding as well as for the isomorphisms allowed by that definition. Every $\\alpha_x$ lies in $E$, so only $\\iota|_E$ enters the condition.",
    "uses": [
-    "def-weil-punctual-weights",
-    "thm-wf-rank-one-finite-geometric-image-curve"
+    "def-weil-punctual-weights"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/cor-wf-rank-one-punctual-purity-curve.proof.md",
+    "place": "Second displayed modulus identity and third paragraph, definition of purity"
+   }
+  },
+  {
+   "text": "Finally let $s'$ be any other degree-one element. Using the same factorization [cor-wf-rank-one-degree-factorization-curve] gives $\\chi(s')=\\varepsilon(s')c$. Step 4 applied to $w=s'$ yields $|\\iota(\\chi(s'))|=|\\iota(c)|$. Consequently $2\\log_q|\\iota(\\chi(s'))|=2\\log_q|\\iota(c)|$. Thus the displayed real weight is independent of the degree-one lift, as asserted.",
+   "uses": [
+    "cor-wf-rank-one-degree-factorization-curve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/cor-wf-rank-one-punctual-purity-curve.proof.md",
+    "place": "Third paragraph, independence of the degree-one lift"
+   }
   }
  ],
  "proof_deps": [
+  "lem-wf-curve-normal-smooth-compactification",
+  "thm-wf-rank-one-finite-geometric-image-curve",
+  "cor-wf-rank-one-degree-factorization-curve",
+  "prop-wf-weil-sheaf-representation-equivalence",
+  "def-wf-fundamental-representation",
   "def-weil-local-frobenius-trace",
   "p-real-operations",
-  "def-wf-weil-group",
-  "cor-wf-rank-one-degree-factorization-curve",
-  "lem-tw-root-of-unity-modulus",
-  "def-weil-punctual-weights",
-  "thm-wf-rank-one-finite-geometric-image-curve"
+  "def-weil-punctual-weights"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/cor-wf-rank-one-punctual-purity-curve.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/cor-wf-rank-one-punctual-purity-curve.proof.md",
+  "place": "Proof, three paragraphs; expanded curve hypotheses, elementary modulus and logarithm calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "punctual purity of a rank-one Weil character on a curve",
+   "results": "FunctionField.classNumber; AddChar.PrimitiveAddChar.prim; quadraticChar; AddChar.IsPrimitive.of_ne_one; AddChar.FiniteField.primitiveChar_to_Complex_isPrimitive; WeierstrassCurve.Affine.CoordinateRing.XYIdeal'; WeierstrassCurve.Affine.Point.toClass_some; AddChar.FiniteField.primitiveChar",
+   "date": "2026-10-17",
+   "verdict": "no match: unrelated field, character, valuation or isocrystal results; no lisse Weil sheaf purity theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPunctuallyPure, frobeniusWeight, WeilGroup",
+   "results": "loogle: unknown identifier 'IsPunctuallyPure'",
+   "date": "2026-10-17",
+   "verdict": "no match: query rejected with unknown identifier IsPunctuallyPure; this is not evidence of absence alone"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusWeight|IsPunctuallyPure|punctual.*pure",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no occurrences in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rank-one Weil character on a curve is punctually pure with weight determined by the degree-one Frobenius value",
+   "results": "ModularForm.levelOne_weight_zero_rank_one; WittVector.isocrystal_classification; IsPurelyInseparable.insepDegree_eq; Valuation.IsRankOneDiscrete.generator_mem_range; Valuation.RankOne.rec; AddChar.wInner_cWeight_self; WeierstrassCurve.ΨSq_one; WeierstrassCurve.φ_one",
+   "date": "2026-10-17",
+   "verdict": "no match: unrelated field, character, valuation or isocrystal results; no lisse Weil sheaf purity theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous one dimensional l-adic representation of the Weil group has constant normalized complex absolute value at all closed point Frobenius elements",
+   "results": "cyclotomicCharacter.continuous; groupCohomology.exists_mul_galRestrict_of_norm_eq_one; spectralNorm_unique_of_finiteDimensional_normal; NumberField.FinitePlace.norm_embedding_eq; NumberField.FinitePlace.norm_def; IsDedekindDomain.HeightOneSpectrum.embedding_mul_absNorm; NumberField.FinitePlace.norm_le_one; NumberField.FinitePlace.mk_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: unrelated field, character, valuation or isocrystal results; no lisse Weil sheaf purity theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilGroup|WeilSheaf|punctual|frobeniusWeight",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no occurrences in Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -94,5 +185,21 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-wf-rank-one-punctual-purity-curve",
+  "worker": "stage1",
+  "summary": "Completed the existing blueprint route without creating nodes. Reused normal-curve smoothness, finite geometric image, the finite-order factorization, the sheaf–representation equivalence and the local Frobenius polynomial comparison. Expanded the root-of-unity and real logarithm calculations as elementary steps, explicitly valid for a field embedding. Clarified the imported embedding/isomorphism convention mismatch by spelling out the punctual-purity formula; all original hypotheses and conclusions remain. Read the tagged Lean candidates: they prove representation-level weights and lift independence, not the associated sheaf-level predicate of this item.",
+  "blueprint": "Step 1 supplies the curve hypothesis for the first paragraph; steps 2–3 realize the first paragraph and its factorization. Steps 4–5 realize the second paragraph and purity conclusion. Step 6 realizes independence of the lift in the third paragraph. This is the purity portion of the fourth step of sk-p-real-rankone; the geometric finiteness portion remains thm-wf-rank-one-finite-geometric-image-curve.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-d5c45fa97",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-d5c45fa97 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. Delivery: one commit holding the item and its report, no new nodes, no unit record changed; the item is not the unit's key node, so leaving realized empty is right. Statement: the hypotheses and conclusion are verbatim from the blueprint (master order 2628 and main-20261015 order 2972 have the same text). The worker added one paragraph that spells out the absolute-value condition for an embedding iota, where def-weil-punctual-weights is written for an isomorphism. Every eigenvalue lies in E, and every embedding of E into C extends to an isomorphism of Qlbar onto C, so the paragraph is equivalent to the definition and weakens nothing; d-real-setup itself fixes iota as an embedding. Route: every cited statement is on the route (own unit, sk-p-rankone, sk-i-real-compactification, sk-i-real-sheaves, sk-p-real-operations; the rest are definitions), no tool uses, no cycle, no SGA. Step 1: lem-wf-curve-normal-smooth-compactification has exactly the item's hypotheses, and its first conclusion gives the smoothness that the chapter's definition of a curve requires. Step 2: the finite-image theorem, then the factorization corollary (c=chi(s), finite-order epsilon, chi(w)=epsilon(w)c^deg w), then the sheaf from prop-wf-weil-sheaf-representation-equivalence, all taken from statements. Step 3: p-real-operations gives the degree-e_x geometric Frobenius class and P_x=det(1-T rho(F_x)); the degree sign agrees with def-wf-weil-group, so alpha_x=epsilon(F_x)c^d. That the stalk is one-dimensional is left implicit; it follows because F_x is invertible, so this is not a gap. Step 4: a direct root-of-unity modulus argument valid for any embedding, correctly used instead of lem-tw-root-of-unity-modulus, which needs an isomorphism. Step 5: #kappa(x)=q^d and the log/exp identity, with q>1 and |iota(c)|>0. Step 6: lift independence via the factorization applied to s'. proof_deps equals the union of the steps' uses. Small cases tested: trivial and finite-order chi give weight 0; c=q^-1 gives weight -2, confirming the geometric-Frobenius sign; degree d>1; no rational point; change of lift. Duplicates: cor-mg-rankone-weight-from-element (sk-p-readout, off route) is an iff criterion for a supplied weight, not the same statement, and the item is an imported blueprint node. The slopmaster2 theorem IsLisse.isPunctuallyPure_of_finrank_eq_one (Purity.lean:162) is a representation-level predicate, so there is no exact attachment and lean_audit none is right. Mathlib searches: all three kinds recorded. No changes made."
+ }
 }

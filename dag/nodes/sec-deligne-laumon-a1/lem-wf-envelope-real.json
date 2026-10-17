@@ -1,111 +1,172 @@
 {
-  "id": "lem-wf-envelope-real",
-  "blueprint": {
-    "is": "lem-wf-envelope-real",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The envelope is real",
-  "statement": "The envelope $\\operatorname{Env}_\\iota(\\mathcal F;b)$ of\n[def-wf-normalized-real-envelope] is $\\iota$-real in the sense of\n[def-wf-iota-real].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-envelope-real.md",
-    "place": "node lem-wf-envelope-real, order 2765"
-  },
-  "stmt_deps": [
+ "id": "lem-wf-envelope-real",
+ "blueprint": {
+  "is": "lem-wf-envelope-real",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The envelope is real",
+ "statement": "Let $\\mathcal F$ be a lisse Weil sheaf, punctually $\\iota$-pure of weight $w$, and let $b\\in\\Qlb^\\times$ satisfy $|\\iota(b)|=q^{-w/2}$. Then the envelope $\\operatorname{Env}_\\iota(\\mathcal F;b)$ of [def-wf-normalized-real-envelope] is $\\iota$-real in the sense of [def-wf-iota-real]. Moreover, $\\operatorname{Env}_\\iota(\\mathcal F;b)$ is lisse.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-envelope-real.md",
+  "place": "node lem-wf-envelope-real, order 2765"
+ },
+ "stmt_deps": [
+  "def-wf-normalized-real-envelope",
+  "def-weil-punctual-weights",
+  "def-wf-iota-real"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-wf-constant-twist-weight], the normalized twist $\\mathcal F^0=\\mathcal F\\otimes\\mathcal B_b$ has punctual weight $0$ under the displayed norm hypothesis (equivalently, this is the normalization in [def-wf-normalized-real-envelope]). At a closed point $y$, write $\\beta_j$ for the eigenvalues of the Frobenius on $\\mathcal F^0_{\\bar y}$. Thus $|\\iota(\\beta_j)|=q_y^0=1$.",
+   "uses": [
+    "lem-wf-constant-twist-weight",
     "def-wf-normalized-real-envelope",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf $\\mathcal F^0=\\mathcal F\\otimes\\mathcal B_b$ is lisse of finite rank, since $\\mathcal F$ is and $\\mathcal B_b$ of [def-wf-constant-weil-twist] is a rank-one lisse Weil sheaf (a tensor product of locally constant finite-rank sheaves is locally constant of finite rank). The second summand of the envelope is the linear dual of $\\mathcal F^0$. By [lem-tw-dual-stalk-frobenius], applied to the lisse sheaf $\\mathcal F^0$, its local Frobenius is the contragredient, and [p-linear-spectra] gives eigenvalues $\\beta_j^{-1}$. Since $|\\iota(\\beta_j)|=1$, the elementary identity $z^{-1}=\\overline z$ for $|z|=1$ gives $\\iota(\\beta_j^{-1})=\\overline{\\iota(\\beta_j)}$. The local characteristic factor of the direct sum is the product of the two factors, so its eigenvalue multiset is stable under complex conjugation.",
+   "uses": [
+    "def-wf-constant-weil-twist",
+    "lem-tw-dual-stalk-frobenius",
+    "p-linear-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the definition [def-wf-iota-real], conjugation stability of the local eigenvalue multiset at every closed point is exactly that $\\operatorname{Env}_\\iota(\\mathcal F;b)$ is $\\iota$-real.",
+   "uses": [
     "def-wf-iota-real"
-  ],
-  "proof": [
-    {
-      "text": "At a closed point $y$, the local characteristic factor of the\nenvelope is the product of the local factors of the two summands, with\neigenvalues $\\beta_j$ (of $\\mathcal F^0_{\\bar y}$) and\n$\\beta_j^{-1}$ (of its dual), where\n$|\\iota(\\beta_j)|=q_y^{0}=1$ by the normalization of\n[def-wf-normalized-real-envelope] and the punctual purity of\nweight $0$ of [def-weil-punctual-weights]. Hence\n\n$$\n\\iota\\bigl(\\beta_j^{-1}\\bigr)=\\overline{\\iota(\\beta_j)}\n$$\n\n($\\overline z=|z|^2z^{-1}=z^{-1}$ for $|z|=1$), so the local\neigenvalue multiset is stable under complex conjugation; by\n[def-wf-iota-real] the envelope is $\\iota$-real.",
-      "uses": [
-        "def-wf-normalized-real-envelope",
-        "def-weil-punctual-weights",
-        "def-wf-iota-real"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finally, $\\mathcal F^0$ is lisse as noted in step 2, the dual of a lisse sheaf is lisse by [lem-tw-dual-stalk-frobenius], and a direct sum of lisse sheaves is lisse by the definition of local constancy. Therefore the envelope is lisse.",
+   "uses": [
     "def-wf-normalized-real-envelope",
-    "def-weil-punctual-weights",
-    "def-wf-iota-real"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-envelope-real.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2765,
-  "blueprint_uses": [
-    "def-weil-punctual-weights",
-    "def-wf-iota-real",
-    "def-wf-normalized-real-envelope"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.WeilSheaf.isReal_realEnvelope"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed_part",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.isReal_realEnvelope",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            384,
-            400
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.isReal_realEnvelope",
-        "AlgebraicGeometry.LAdicWeilSheaf.IsLisse.realEnvelope"
-      ],
-      "open": []
-    }
-  },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-l-dl-a1-energy",
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-    "declaration": "AlgebraicGeometry.WeilSheaf.isReal_realEnvelope",
-    "branch": "slopmaster2",
-    "line": 388,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.isReal_realEnvelope"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\mathcal F$ be a Weil sheaf, punctually $\\iota$-pure of weight $w$,\nand let $b\\in\\Qlb^\\times$ with $|\\iota(b)|=q^{-w/2}$ (for instance\n$b=\\iota^{-1}(q^{-w/2})$). Then the envelope\n$\\operatorname{Env}_\\iota(\\mathcal F;b)$ of\n[def-wf-normalized-real-envelope] is $\\iota$-real in the sense of\n[def-wf-iota-real]. If $\\mathcal F$ is lisse, so is\n$\\operatorname{Env}_\\iota(\\mathcal F;b)$.",
-    "proof": [
-      {
-        "text": "At a closed point $y$, the local characteristic factor of the\nenvelope is the product of the local factors of the two summands, with\neigenvalues $\\beta_j$ (of $\\mathcal F^0_{\\bar y}$) and\n$\\beta_j^{-1}$ (of its dual), where\n$|\\iota(\\beta_j)|=q_y^{0}=1$ by the normalization of\n[def-wf-normalized-real-envelope] and the punctual purity of\nweight $0$ of [def-weil-punctual-weights]. Hence\n\n$$\n\\iota\\bigl(\\beta_j^{-1}\\bigr)=\\overline{\\iota(\\beta_j)}\n$$\n\n($\\overline z=|z|^2z^{-1}=z^{-1}$ for $|z|=1$), so the local\neigenvalue multiset is stable under complex conjugation; by\n[def-wf-iota-real] the envelope is $\\iota$-real.",
-        "uses": [
-          "def-wf-normalized-real-envelope",
-          "def-weil-punctual-weights",
-          "def-wf-iota-real"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "lem-tw-dual-stalk-frobenius"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "def-weil-punctual-weights",
+  "def-wf-constant-weil-twist",
+  "def-wf-iota-real",
+  "def-wf-normalized-real-envelope",
+  "lem-tw-dual-stalk-frobenius",
+  "lem-wf-constant-twist-weight",
+  "p-linear-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-envelope-real.proof.md",
+  "place": "proof text; expanded to include the lissity clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -l 'WeilSheaf|realEnvelope|PunctuallyPure|Weil sheaf' Mathlib/ (pinned Mathlib of weil-conjectures-sheaf); rg 'inv_eq_conj'",
+   "results": "no file for Weil sheaves or envelopes; Mathlib/Analysis/RCLike/Basic.lean:470 RCLike.inv_eq_conj and Mathlib/Analysis/Complex/Basic.lean:363 Complex.inv_eq_conj (z^{-1}=conj z for |z|=1), the elementary identity of step 2 only",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2765,
+ "blueprint_uses": [
+  "def-weil-punctual-weights",
+  "def-wf-iota-real",
+  "def-wf-normalized-real-envelope"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.isReal_realEnvelope"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.isReal_realEnvelope",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      384,
+      400
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.isReal_realEnvelope",
+    "AlgebraicGeometry.LAdicWeilSheaf.IsLisse.realEnvelope"
+   ],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+  "declaration": "AlgebraicGeometry.WeilSheaf.isReal_realEnvelope",
+  "branch": "slopmaster2",
+  "line": 388,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.isReal_realEnvelope"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\mathcal F$ be a Weil sheaf, punctually $\\iota$-pure of weight $w$,\nand let $b\\in\\Qlb^\\times$ with $|\\iota(b)|=q^{-w/2}$ (for instance\n$b=\\iota^{-1}(q^{-w/2})$). Then the envelope\n$\\operatorname{Env}_\\iota(\\mathcal F;b)$ of\n[def-wf-normalized-real-envelope] is $\\iota$-real in the sense of\n[def-wf-iota-real]. If $\\mathcal F$ is lisse, so is\n$\\operatorname{Env}_\\iota(\\mathcal F;b)$.",
+  "proof": [
+   {
+    "text": "At a closed point $y$, the local characteristic factor of the\nenvelope is the product of the local factors of the two summands, with\neigenvalues $\\beta_j$ (of $\\mathcal F^0_{\\bar y}$) and\n$\\beta_j^{-1}$ (of its dual), where\n$|\\iota(\\beta_j)|=q_y^{0}=1$ by the normalization of\n[def-wf-normalized-real-envelope] and the punctual purity of\nweight $0$ of [def-weil-punctual-weights]. Hence\n\n$$\n\\iota\\bigl(\\beta_j^{-1}\\bigr)=\\overline{\\iota(\\beta_j)}\n$$\n\n($\\overline z=|z|^2z^{-1}=z^{-1}$ for $|z|=1$), so the local\neigenvalue multiset is stable under complex conjugation; by\n[def-wf-iota-real] the envelope is $\\iota$-real.",
+    "uses": [
+     "def-wf-normalized-real-envelope",
+     "def-weil-punctual-weights",
+     "def-wf-iota-real"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-envelope-real",
+  "worker": "stage1",
+  "summary": "Corrected the imported statement to the mathematically intended lisse hypothesis and added the lissity conclusion from the current blueprint. The original arbitrary-constructible reading is false: a Weil line on G_m with Frobenius i extended by zero has a missing-point dual eigenvalue -i, so its envelope need not be real. The proof now separates normalization to weight zero, the contragredient inverse-eigenvalue calculation, the definition of reality, and preservation of lissity. All cited facts are existing DAG nodes; no new nodes were needed.",
+  "blueprint": "Realizes the current blueprint proof paragraph: normalization gives weight zero, the dual contributes inverse eigenvalues, unit-modulus inversion is complex conjugation, and the local spectrum is conjugation-stable. The final step supplies the current blueprint statement's additional lissity clause.",
+  "tool_uses": [
+   {
+    "node": "lem-tw-dual-stalk-frobenius",
+    "why": "steps 2 and 4 take the contragredient Frobenius on the dual stalk and the lissity of the dual of a lisse finite-rank Weil sheaf; this is a generic linear-dual fact of sk-r-real-linear and no node of sk-l-dl-a1-energy states it"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-tw-dual-stalk-frobenius"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-d961238b5",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-d961238b5 (reviewer sub-agent of L); spot-checked: I read the item, the current blueprint statement and proof (main-20261015/sk-l-dl-a1-energy, which matches main-20261017 here), the def/twist blueprint files, the unit record, every cited node's statement and the Lean at TraceEnergy.lean:344-400. Statement: the worker requires F to be lisse throughout, where the current blueprint says only 'Weil sheaf'. This is justified and is not a weakening of a defined object. The DAG def-wf-normalized-real-envelope defines Env only for lisse F; its blueprint_update says the envelope is 'intended for F lisse'; and the Lean realEnvelope takes hF : F.IsLisse as an argument. The worker's counterexample checks out: F = j_!L on A^1, where L is a geometrically constant line on G_m with Frobenius i. Its dual j_*L^vee has Frobenius -i at the origin, while F has stalk 0 there. So the envelope's spectrum at 0 is {-i}, which is not stable under complex conjugation. The added conclusion 'Env is lisse' comes from the blueprint (and Lean IsLisse.realEnvelope). Both citers (lem-wf-l2-purity-rigidity, lem-zl-relative-curve-mixedness) apply the lemma only to lisse sheaves, and the second one uses the lissity conclusion. Allowing any b with |iota(b)|=q^{-w/2} follows the def's blueprint_update and the Lean signature. Small cases checked: a constant line on Spec F_q (spectrum {beta, conj(beta)}, real polynomial), a point of degree m (eigenvalue b^m alpha), rank 0 (P=1). Steps: (1) constant-twist-weight with c=-w gives weight 0, correct. (2) dual-stalk Frobenius plus p-linear-spectra (the contragredient has inverse eigenvalues), and z^{-1}=conj(z) when |z|=1, correct. (3) this is the definition of iota-real. (4) the lissity step is elementary. There is no restated clause, no new node and no cycle. No duplicate: lem-wf-pure-realizable is a different envelope (F plus the twisted dual F^vee⊗B_c at weight w). No SGA source is used. FIX applied in fixes/dag/nodes/sec-deligne-laumon-a1/lem-wf-envelope-real.json (statement unchanged): (a) step 2 used dual-stalk-frobenius on F^0 before showing F^0 is lisse; it now proves F^0 is lisse of finite rank via def-wf-constant-weil-twist (added to uses and proof_deps), and step 4 refers back to it. (b) The off-unit statement lem-tw-dual-stalk-frobenius (unit sk-r-real-linear) was undeclared; I declared it in split_report.tool_uses and accept it as a generic linear-dual tool. (c) mathlib_searches was empty although the report says searches were run; I recorded my own grep of the pinned Mathlib, which found nothing for Weil sheaves and only Complex.inv_eq_conj. Minor: the report mentions a citations.json that the delivery does not contain. The Lean isReal_realEnvelope is not attached, correctly: the audit says closed_part, the lean record says sorry_free false, and the LAdic variants are missing.; 1 file(s) fixed by the reviewer"
+ }
 }

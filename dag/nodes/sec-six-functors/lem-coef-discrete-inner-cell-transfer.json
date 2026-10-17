@@ -29,19 +29,134 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-segal-presheaf-localization"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "For a set $S$, write $D(S)$ for the constant simplicial set on $S$, a Kan complex representing its discrete space. Work in the Kan model structure: by [lem-coef-kan-quillen-right-proper] its cofibrations are monomorphisms, so all objects are cofibrant, and its fibrant objects are Kan complexes. By [lem-coef-simplicial-presheaf-projective-model] it is combinatorial and simplicial. Thus [lem-coef-simplicial-model-nerve-localization] identifies its infinity localization with $\\mathcal S$ and computes maps from a cofibrant object to a Kan complex by the usual simplicial mapping set. In particular, for every Kan complex $T$, $\\operatorname{Map}_{\\mathcal S}(D(S),T)$ is represented by $\\operatorname{Fun}(D(S),T)=\\prod_{s\\in S}T$: in each simplicial degree a map is precisely one simplex of $T$ for each $s$. This formula is natural in set maps and in $T$, including $S=\\varnothing$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example A.3.2.18 and Theorem 4.2.4.1; model and mapping comparisons are supplied by the cited nodes."
+   }
+  },
+  {
+   "text": "For one successor attachment write $X'=X\\amalg_A B$, where $A\\hookrightarrow B$ is a small coproduct of inner horn inclusions. Fix degree $n$ and put $C=B_n\\setminus A_n$, so $B_n=A_n\\amalg C$ and $X'_n=X_n\\amalg C$, even when $A_n\\to X_n$ is not injective. By Step 1, restriction of maps into a Kan complex $T$ along $A_n\\hookrightarrow B_n$ is the projection $T^{A_n}\\times T^C\\to T^{A_n}$. This is a Kan fibration: for a horn lifting problem keep the prescribed first coordinates and fill the horn in each $C$-coordinate using the Kan property of $T$. The homotopy-pullback clause of [lem-coef-kan-quillen-right-proper] therefore computes\n$$T^{X_n}\\times^h_{T^{A_n}}T^{B_n}\\simeq T^{X_n}\\times T^C=T^{X'_n}.$$\nThe map from the last term to the pullback is exactly restriction along the set-pushout cocone. The colimit mapping-space criterion of [lem-coef-infinity-yoneda-presheaf-limits] proves that this specified cocone is a pushout in spaces. Its objectwise-colimit clause then shows $dX'\\simeq dX\\amalg_{dA}dB$ in $P(\\Delta)$. These are the canonical cocone comparisons, so they are compatible with the simplicial operators, without requiring the complements $C$ themselves to be simplicial subsets.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definition 6.1 and the unlabelled cell argument in the proof of Corollary 7.4; agent expansion of the discrete-space comparison."
+   }
+  },
+  {
+   "text": "Let $\\lambda$ be a small nonzero limit ordinal in the given continuous cell construction. In degree $n$, take the strict $\\lambda$-diagram $E_\\alpha=D((X_\\alpha)_n)$ of simplicial sets. Its degreewise colimit is $D((X_\\lambda)_n)$, because continuity gives the corresponding set colimit. The category $\\lambda$ is nonempty and filtered: a finite collection of ordinals below $\\lambda$ has an upper bound below $\\lambda$. Apply [lem-coef-model-colimit-localization-comparison] in the combinatorial Kan model structure of Step 1 and choose a projectively cofibrant replacement $QE\\to E$. Its ordinary colimit, with its specified cocone, becomes the coherent colimit of $E$ after localization. The replacement is objectwise a weak homotopy equivalence, so [lem-coef-filtered-colimit-weak-equivalences] makes\n$$\\operatorname{colim}_{\\alpha<\\lambda}QE_\\alpha\\longrightarrow\\operatorname{colim}_{\\alpha<\\lambda}E_\\alpha=D((X_\\lambda)_n)$$\na weak homotopy equivalence. Under the comparison with spaces from Step 1 it is an equivalence and identifies the canonical set-colimit cocone with the coherent colimit. By the objectwise clause of [lem-coef-infinity-yoneda-presheaf-limits], the canonical cocone $dX_\\alpha\\to dX_\\lambda$ is colimiting in $P(\\Delta)$. Thus the limit stage is justified by the cited replacement and filtered-colimit theorems, rather than by assuming that $d$ preserves arbitrary colimits.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-filtered-colimit-weak-equivalences",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definition 6.1 and the unlabelled cell argument in the proof of Corollary 7.4; agent expansion of the discrete-space comparison."
+   }
+  },
+  {
+   "text": "The class $\\mathcal A_\\Delta$ also contains small coproducts of its generating horn maps. To check this using only its stated closure operations, well-order a small family $h_j:A_j\\hookrightarrow B_j$ of inner horns by an ordinal $\\mu$. Set\n$$Y_\\beta=\\left(\\coprod_{j<\\beta}B_j\\right)\\amalg\\left(\\coprod_{\\beta\\leq j<\\mu}A_j\\right)\\quad(\\beta\\leq\\mu).$$\nEach $Y_\\beta\\to Y_{\\beta+1}$ is the pushout of $h_\\beta$ along its summand inclusion; Step 2 carries this square to a pushout in $P(\\Delta)$. At a nonzero limit stage the degreewise union is $Y_\\beta$, so Step 3 makes this a continuous chain after $d$. Small discrete coproducts become coproducts of spaces by the product formula for mapping spaces in Step 1, and hence coproducts of presheaves by the objectwise clause of [lem-coef-infinity-yoneda-presheaf-limits]. The endpoints are therefore the coproducts of $dA_j$ and $dB_j$. Closure under transfinite composition puts their map in $\\mathcal A_\\Delta$. For the empty family it is the identity of the initial object, the empty transfinite composite. Consequently Step 2 sends every original successor attachment to a pushout of a map in $\\mathcal A_\\Delta$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definition 6.1 and the unlabelled cell argument in the proof of Corollary 7.4; agent expansion of the discrete-space comparison."
+   }
+  },
+  {
+   "text": "Choose the arrow-category retract presentation assumed for $u$, and write $v:X_0\\to X_\\theta$ for the unretracted continuous cell composite. The preceding step puts every successor map $dX_\\alpha\\to dX_{\\alpha+1}$ in $\\mathcal A_\\Delta$, and Step 3 verifies continuity at every nonzero limit stage. Closure under small transfinite compositions gives $dv\\in\\mathcal A_\\Delta$ (including a zero-length composite). Applying the functor $d$ to the entire retract diagram preserves its identity composites, so $du$ is an arrow-category retract of $dv$. The defining retract closure gives $du\\in\\mathcal A_\\Delta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definition 6.1 and the unlabelled cell argument in the proof of Corollary 7.4; agent expansion of the discrete-space comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-filtered-colimit-weak-equivalences"
+ ],
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "rg -n 'innerAnodyneExtensions' and rg -n 'homotopy pushout|hocolim|HomotopyPushout' over /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
-   "results": "innerAnodyneExtensions: only AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean and Inner/PushoutProduct.lean (ordinary simplicial sets, lifting/cell classes); homotopy-pushout query: no hits",
+   "query": "innerAnodyneExtensions|HomotopyPushout|discrete.*filtered.*colimit",
+   "results": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean and Inner/PushoutProduct.lean; no homotopy-pushout or discrete-filtered-colimit transfer theorem.",
    "date": "2026-10-17",
-   "verdict": "no match: Mathlib has the ordinary simplicial-set cell class but no infinity category of space-valued presheaves on Delta or comparison of degreewise colimits with its colimits. The LeanSearch/LeanFinder/Loogle services are not reachable from this review machine and were not run."
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Discrete space presheaves preserve inner horn cell attachments of simplicial sets",
+   "results": "TopCat.discrete; TopCat.instHasColimitsOfShapePresheaf; CategoryTheory.Limits.preservesColimitsOfShape_of_discrete; no exact infinity-presheaf transfer declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.innerAnodyneExtensions",
+   "results": "SSet.innerAnodyneExtensions and stability instances; ordinary simplicial-set cell presentation only.",
+   "date": "2026-10-17",
+   "verdict": "generalization: ordinary simplicial-set cell presentation; no P(Delta) transfer"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary simplicial set inner horn cell complex becomes inner anodyne in presheaves of discrete spaces",
+   "results": "SSet.modelCategoryQuillen.J, SSet.horn_obj_zero, SSet.modelCategoryQuillen.I, SSet.Quasicategory.hornFilling; no presheaf-space transfer.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of sets as discrete homotopy types preserves filtered colimits, pushouts along injections and horn cell complexes",
+   "results": "SSet.hasColimits; SSet.instIsStableUnderFilteredColimitsMonomorphisms; DeltaGenerated.hasColimits; no discrete-space presheaf transfer.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "discrete simplicial sets mapped to presheaves of spaces preserve pushouts of monomorphisms, transfinite compositions, and retracts",
+   "results": "SSet.modelCategoryQuillen.J; SSet.modelCategoryQuillen.I; SSet.instIsStableUnderCobaseChangeMonomorphisms; SSet.hasColimits; no infinity-presheaf transfer.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.innerAnodyneExtensions_eq_retracts_transfiniteCompositions",
+   "results": "SSet.innerAnodyneExtensions_eq_retracts_transfiniteCompositions (Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean).",
+   "date": "2026-10-17",
+   "verdict": "generalization: ordinary simplicial-set cell presentation; used only as background, not as a transfer theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "discrete.*space|pushout.*monomorphism",
+   "results": "CategoryTheory/Adhesive/Basic.lean; CategoryTheory/Abelian/Basic.lean; no theorem for discrete spaces in P(Delta).",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "reviewer",
   "item": "lem-coef-labelled-spine-prism-horn-calculus",
@@ -61,5 +176,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-coefficient mapping-complex adjunction before R lim, via the existing enriched tensor foundation ancestry. Agent expansion of Haugseng Definition 6.1 and Corollary 7.4, with model-colimit comparisons and filtered-colimit closure supplied by existing nodes; online foundational references are not archived."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-discrete-inner-cell-transfer",
+  "worker": "stage1",
+  "summary": "Resumed the saved split and retained all logged searches. Repaired doubled TeX escaping, removed an obsolete citation, replaced the uncited assertion about filtered unions of discrete spaces with the existing model-colimit and filtered-weak-equivalence theorems, and explicitly derived small coproduct closure by well-ordering horn attachments. Five steps, no new nodes, statement unchanged mathematically. All cited statements were opened and checked, including model hypotheses and the canonical cocone comparisons.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim: the passage from the ordinary inner-horn filtration to inner anodyne maps in P(Delta).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-cfa562a09",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-cfa562a09 (reviewer sub-agent of L); spot-checked: I read the item and all eight cited nodes in full, plus the unit sk-prop-sf-biduality-general and the paragraph-2 ancestor proof in main-20261015. No new nodes and no fixes. The statement is self-contained with single-backslash TeX. It agrees with its two citers, lem-coef-labelled-spine-prism-horn-calculus and lem-coef-segal-space-inner-anodyne-locality step 5. An rg search of dag/nodes for inner-anodyne and discrete-space terms found no duplicate; lem-coef-simple-inner-anodyne-base-change only uses the class A_Delta. Small cases tested: a single horn; a horn collapsed to a point, where the pushout along an injection stays discrete; the empty family and zero-length composites; a countable chain. The report's two-point-to-point pushout counterexample correctly shows that d does not preserve arbitrary pushouts. Step 1: lem-coef-kan-quillen-right-proper gives monomorphism cofibrations and Kan fibrant objects, lem-coef-simplicial-presheaf-projective-model gives combinatorial and simplicial, and lem-coef-simplicial-model-nerve-localization gives Map(D(S),T)=prod_S T. Step 2: B_n=A_n+C because A->B is injective, and the projection T^{A_n}xT^C->T^{A_n} is a Kan fibration. So the homotopy-pullback clause on a cospan of Kan complexes, the colimit mapping-space criterion and the objectwise clause of lem-coef-infinity-yoneda-presheaf-limits give the pushout in P(Delta). Step 3: lambda is filtered; lem-coef-model-colimit-localization-comparison applies with no cofibrancy assumption on D, and lem-coef-filtered-colimit-weak-equivalences has no injectivity hypothesis. Step 4: the well-ordered chain Y_beta is correct. Step 5: d preserves retracts. proof_deps equals the union of the uses lists. Every cited statement is in the item's unit apart from definitions, so no tool_uses. No cycle. Haugseng arXiv:2311.13362 is not archived; it is WANTED and proof_origin is agent, which is correct."
  }
 }

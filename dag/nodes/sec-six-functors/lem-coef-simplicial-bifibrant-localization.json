@@ -12,9 +12,116 @@
   "def-coef-simplicial-tensor-cotensor",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p_X:QX\\to X$ and $j_X:X\\to RX$ for the chosen natural replacement maps. The left and right classes of a weak factorization system are closed under composition: solve a lifting problem against a composite by first lifting across its first factor and then its second (in the right-class case, solve against the last factor first). Thus $0\\to QX\\xrightarrow{j_{QX}}RQX$ is a cofibration, and $RQX\\to1$ is a fibration by choice of $R$. Hence $RQX$ is bifibrant. If $X$ is already fibrant, $QX\\xrightarrow{p_X}X\\to1$ is a composite of fibrations, so $QX$ is bifibrant as well. Here we use only the weak factorization system and object definitions in [lem-coef-simplicial-boundary-collapse-test].",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent coefficient adjunction: agent-written ordinary prerequisite, proof Step 1; finite-string replacement argument under the stated recognition hypotheses."
+   }
+  },
+  {
+   "text": "Naturality gives $p_Y\\circ Qf=f\\circ p_X$ and $j_{QY}\\circ Qf=RQf\\circ j_{QX}$. All $p$ and $j$ are weak. Two-out-of-three therefore gives, for every actual arrow $f:X\\to Y$, the equivalences $f\\in W\\Longleftrightarrow Qf\\in W\\Longleftrightarrow RQf\\in W$. This both proves preservation and reflection of weak equivalences by $RQ$ and checks that hypothesis (i) may later be applied to $RQf$, whose endpoints are bifibrant by Step 1. The two-out-of-three axiom is part of [lem-coef-simplicial-boundary-collapse-test].",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent coefficient adjunction: agent-written ordinary prerequisite, proof Step 2; finite-string replacement argument under the stated recognition hypotheses."
+   }
+  },
+  {
+   "text": "The component sets in the statement do form the arrows of a category $H$. For a fixed vertex in either factor, enriched composition from [def-coef-simplicial-tensor-cotensor] sends an edge to an edge, hence sends any finite zigzag of edges to such a zigzag. Changing the two representatives in turn shows that composition is well defined on vertex classes. Its identity and associativity equations descend directly from the enriched identity and associativity equations. This uses the statement's definition of $\\pi_0$ by vertex zigzags, and needs no Kan condition on the mapping simplicial sets.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent coefficient adjunction: agent-written ordinary prerequisite, proof Step 3; finite-string replacement argument under the stated recognition hypotheses."
+   }
+  },
+  {
+   "text": "Let $X,Y$ be bifibrant and let an edge from $f$ to $g$ in $\\operatorname{Map}(X,Y)$ correspond under the cotensor adjunction of [def-coef-simplicial-tensor-cotensor] to $h:X\\to Y^{\\Delta^1}$. Write $e_0,e_1:Y^{\\Delta^1}\\to Y$ for evaluation and $c:Y\\to Y^{\\Delta^1}$ for the constant path map, so $e_0h=f$, $e_1h=g$ and $e_0c=e_1c=1_Y$. By hypothesis (ii), both $q(e_i)$ are invertible. The last equations force $q(c)=q(e_0)^{-1}=q(e_1)^{-1}$, hence $q(e_0)=q(e_1)$ and $q(f)=q(g)$. Apply this to each edge, in either direction, of a finite zigzag. Thus $G:H\\to\\mathcal L$, $G(X)=qX$, $G([f])=q(f)$, is well defined; the functor equations follow from those of $q$.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent coefficient adjunction: agent-written ordinary prerequisite, proof Step 4; finite-string replacement argument under the stated recognition hypotheses."
+   }
+  },
+  {
+   "text": "Define $S:\\mathcal M\\to H$ by $S(X)=RQX$ and $S(f)=[RQf]$. Functorial replacement and Step 3 give its functor equations. If $w\\in W$, Step 2 and hypothesis (i) make $S(w)$ invertible. Define $F:\\mathcal L\\to H$ on the finite strings in the statement by sending an ordinary arrow $f$ to $S(f)$ and a formal inverse $w^{-1}$ to $S(w)^{-1}$, and multiplying along each string. The composition and identity relations hold because $S$ is a functor; the two inverse relations hold because these are actual inverses in $H$. This is therefore well defined on the quotient, and $Fq=S$ exactly.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent coefficient adjunction: agent-written ordinary prerequisite, proof Step 5; finite-string replacement argument under the stated recognition hypotheses."
+   }
+  },
+  {
+   "text": "For every $X$ put $\\alpha_X=q(j_{QX})\\circ q(p_X)^{-1}:qX\\to q(RQX)=GF(qX)$. Both factors are invertible. The two naturality squares for $p$ and $j$ give $GF(qf)\\circ\\alpha_X=\\alpha_Y\\circ qf$ for each actual $f:X\\to Y$. For $w\\in W$ this equality also gives $GF(qw)^{-1}\\circ\\alpha_Y=\\alpha_X\\circ(qw)^{-1}$ by multiplying by the two inverses. Iterating along any finite string proves naturality on every arrow of $\\mathcal L$. Thus $\\alpha:1_{\\mathcal L}\\xrightarrow{\\sim}GF$ is precisely the comparison induced by $X\\leftarrow QX\\to RQX$.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent coefficient adjunction: agent-written ordinary prerequisite, proof Step 6; finite-string replacement argument under the stated recognition hypotheses."
+   }
+  },
+  {
+   "text": "When $X$ is bifibrant, Step 1 makes $QX$ bifibrant, so hypothesis (i) makes both $[p_X]$ and $[j_{QX}]$ invertible in $H$. Set $\\beta_X=[j_{QX}]\\circ[p_X]^{-1}:X\\to RQX=FGX$. For an actual $f:X\\to Y$ between bifibrant objects, the two replacement naturality equations give $[RQf]\\circ\\beta_X=\\beta_Y\\circ[f]$. Every arrow of $H$ is a vertex class, so this proves $\\beta:1_H\\xrightarrow{\\sim}FG$ natural on all of $H$. Moreover, directly from its formula, $G(\\beta_X)=\\alpha_{qX}$. No assertion that $Q$ or $R$ is an enriched functor was used.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent coefficient adjunction: agent-written ordinary prerequisite, proof Step 7; finite-string replacement argument under the stated recognition hypotheses."
+   }
+  },
+  {
+   "text": "For bifibrant $X,Y$ and any $a:qX\\to qY$ in $\\mathcal L$, define $h=\\beta_Y^{-1}\\circ F(a)\\circ\\beta_X\\in H(X,Y)$. Using $G\\beta=\\alpha$ from Step 7 and naturality from Step 6 gives $G(h)=\\alpha_{qY}^{-1}\\circ GF(a)\\circ\\alpha_{qX}=a$, so $G$ is full. If $G(h)=G(k)$, applying $F$ and naturality of $\\beta$ gives $h=\\beta_Y^{-1}\\circ FG(h)\\circ\\beta_X=\\beta_Y^{-1}\\circ FG(k)\\circ\\beta_X=k$, so it is faithful. Every object $qX$ is isomorphic via $\\alpha_X$ to $G(RQX)$. Together with the explicit natural isomorphisms of Steps 6-7, this proves that $G$ is an equivalence with inverse $F$, having exactly the object and actual-arrow formulas claimed.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent coefficient adjunction: agent-written ordinary prerequisite, proof Step 8; finite-string replacement argument under the stated recognition hypotheses."
+   }
+  },
+  {
+   "text": "If an actual arrow $a$ belongs to $W$, $q(a)$ is invertible by the inverse relation in the definition of $\\mathcal L$. Conversely, if $q(a)$ is invertible, applying $F$ makes $[RQa]=F(q(a))$ invertible. Since $RQa$ has bifibrant endpoints, hypothesis (i) gives $RQa\\in W$, and Step 2 then gives $a\\in W$. This establishes saturation without assuming it for the original category. Finally, for any arrow $u:qX\\to qY$ with $X,Y$ bifibrant, fullness in Step 8 supplies $h\\in H(X,Y)$ with $G(h)=u$. By definition $h=[f]$ for an actual vertex $f:X\\to Y$, so $u=q(f)$, proving the stated representation clause.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent coefficient adjunction: agent-written ordinary prerequisite, proof Step 9; finite-string replacement argument under the stated recognition hypotheses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-boundary-collapse-test",
+  "def-coef-simplicial-tensor-cotensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent coefficient adjunction; explicit ordinary finite-string localization prerequisite from projective-model calculus Step 12 (original Step 14), conditional on the two recognition hypotheses. No coherent localization theorem is invoked."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +150,52 @@
    "results": "{\"t\": \"2026-10-17T08:19:44Z\", \"tool\": \"leansearch\", \"query\": \"Weak equivalences in a model category are exactly maps invertible in its homotopy category of bifibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.WeakEquivalence.mk\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.mem_weakEquivalences\"], \"digest\": \"70e30d72946fba8d\"}",
    "date": "2026-10-17",
    "verdict": "no match: BifibrantObject.HoCat and its localization results use ordinary right homotopy classes. The required comparison with components of the given simplicial enrichment and the replacement-recognition criterion is additional mathematics, not a one-line specialization. Read BifibrantObjectHomotopy.lean:39-83,93-159 and FundamentalLemma.lean:34-118."
+  },
+  {
+   "tool": "grep",
+   "query": "BifibrantObject|toLocalization|weakEquivalence_homMk_iff",
+   "results": "{\"t\": \"2026-10-17T09:22:07Z\", \"tool\": \"grep\", \"query\": \"BifibrantObject|toLocalization|weakEquivalence_homMk_iff\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\"], \"digest\": \"a674c356f5abd5ff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:39-83,93-159 and FundamentalLemma.lean:34-118. HoCat uses ordinary RightHomotopyRel, not vertex zigzags in the specified simplicial enrichment. The recognition-based enriched comparison with the chosen RQ formulas is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy classes of maps between cofibrant fibrant objects compute morphisms in a model category localization",
+   "results": "{\"t\": \"2026-10-17T09:22:08Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy classes of maps between cofibrant fibrant objects compute morphisms in a model category localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyClass\", \"HomotopicalAlgebra.LeftHomotopyClass.mk\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.leftHomotopyRel_iff_rightHomotopyRel\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\"], \"digest\": \"a6fbb8c785e5de82\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:39-83,93-159 and FundamentalLemma.lean:34-118. HoCat uses ordinary RightHomotopyRel, not vertex zigzags in the specified simplicial enrichment. The recognition-based enriched comparison with the chosen RQ formulas is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BifibrantObject\", \"HoCat\"",
+   "results": "{\"t\": \"2026-10-17T09:22:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"BifibrantObject\\\", \\\"HoCat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.HoCat\", \"HomotopicalAlgebra.BifibrantObject.instLocallySmallHoCat\", \"HomotopicalAlgebra.BifibrantObject.HoCat.ιCofibrantObject\", \"HomotopicalAlgebra.BifibrantObject.HoCat.ιFibrantObject\", \"HomotopicalAlgebra.BifibrantObject.toHoCat\", \"HomotopicalAlgebra.BifibrantObject.instFullHoCatToHoCat\", \"HomotopicalAlgebra.BifibrantObject.toHoCat_obj_surjective\", \"HomotopicalAlgebra.BifibrantObject.instIsLocalizationHoCatToHoCatWeakEquivalences\"], \"digest\": \"1cc3076838703695\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:39-83,93-159 and FundamentalLemma.lean:34-118. HoCat uses ordinary RightHomotopyRel, not vertex zigzags in the specified simplicial enrichment. The recognition-based enriched comparison with the chosen RQ formulas is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of bifibrant objects with morphisms pi zero of simplicial mapping spaces is equivalent to the ordinary localization at weak equivalences",
+   "results": "{\"t\": \"2026-10-17T09:22:09Z\", \"tool\": \"leanfinder\", \"query\": \"The category of bifibrant objects with morphisms pi zero of simplicial mapping spaces is equivalent to the ordinary localization at weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.BifibrantObject.ι\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"4af84b57184b12cc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:39-83,93-159 and FundamentalLemma.lean:34-118. HoCat uses ordinary RightHomotopyRel, not vertex zigzags in the specified simplicial enrichment. The recognition-based enriched comparison with the chosen RQ formulas is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial|SSet|pi.?0|π₀|ConnectedComponents",
+   "results": "{\"t\": \"2026-10-17T09:23:13Z\", \"tool\": \"grep\", \"query\": \"simplicial|SSet|pi.?0|π₀|ConnectedComponents\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"e319842b0feca068\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:39-83,93-159 and FundamentalLemma.lean:34-118. HoCat uses ordinary RightHomotopyRel, not vertex zigzags in the specified simplicial enrichment. The recognition-based enriched comparison with the chosen RQ formulas is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simplicial enriched model category, components of mapping spaces of cofibrant fibrant objects give a localization functor with inverse functorial cofibrant fibrant replacement",
+   "results": "{\"t\": \"2026-10-17T09:23:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial enriched model category, components of mapping spaces of cofibrant fibrant objects give a localization functor with inverse functorial cofibrant fibrant replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\"], \"digest\": \"8f3f78bbfd70683a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean:39-83,93-159 and FundamentalLemma.lean:34-118. HoCat uses ordinary RightHomotopyRel, not vertex zigzags in the specified simplicial enrichment. The recognition-based enriched comparison with the chosen RQ formulas is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-projective-model-calculus",
@@ -73,5 +222,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-bifibrant-localization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and proved all clauses directly from its recognition hypotheses, cotensor adjunction, functorial replacement and finite-string relations. Constructed both functors and natural comparisons explicitly, checked full faithfulness and saturation, and introduced no new nodes. Searched project Lean and Mathlib and distinguished ordinary right homotopy from components of the specified simplicial mapping spaces.",
+  "blueprint": "Realizes the ordinary categorical prerequisite of prop-coef-integral-exceptional-adjoint proof paragraph 2 (coherent coefficient adjunction before the displayed derived inverse-limit calculation), through the original projective-model calculus Step 14, now Step 12. Keeps the full from/via ancestry and does not invoke the downstream infinity-localization comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-306abfe28",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-306abfe28 (reviewer sub-agent of L); spot-checked: I read all nine steps and the full statement of lem-coef-simplicial-bifibrant-localization. The delivery has no new nodes and leaves the statement unchanged. Cited nodes: lem-coef-simplicial-boundary-collapse-test is used only for the model-category definitions in its preamble (two-out-of-three, the two weak factorization systems, cofibrant and fibrant objects). def-coef-simplicial-tensor-cotensor is used for enriched composition and for the cotensor isomorphism, where (k,b) maps to eps(k)b. All cited nodes are in the unit sk-prop-sf-biduality-general, so the proof stays on route and there are no tool uses. Source: I read paragraph 2 of the main-20261015 prop-coef-integral-exceptional-adjoint.proof.md. It only motivates the result, so proof_origin=agent is correct. I checked every step. Step 1: composites of cofibrations and of fibrations; QX is called fibrant only when X is fibrant. Step 2: two-out-of-three is used in both directions. Step 3: composition is well defined on zigzag classes, with no Kan condition needed. Step 4: from the cotensor definition, an edge gives h with e_i h equal to the two endpoints, and the constant path c gives e_i c = 1. Then (ii) forces q(e0) = q(e1), so q(f) = q(g). Steps 5-7: F is well defined on the word quotient. I recomputed the naturality of alpha and beta from the replacement squares, and G(beta_X) = alpha_qX holds. Step 8: the full, faithful and essentially surjective calculations are correct. Step 9: saturation goes through F, (i) and Step 2, and the representation clause follows from fullness. Edge cases: the discrete enrichment with the trivial model structure is consistent, and empty mapping sets cause no problem. The hypotheses (i) and (ii) actually hold for simplicial model categories (the parent shows this in its step 14 via SM7). Duplicates: I checked lem-coef-chunk-bifibrant-localization, localization-homotopy-category, bifibrant-comparison-common-replacement, fibrant-subcategory-localization and model-localization-map-surjective. None states this result. lem-coef-model-localization-detects-weak-equivalences generalizes only the saturation clause of the pre-existing statement, which Step 9 proves directly. The recorded Mathlib searches (LeanSearch, Loogle, LeanFinder, grep) were run, and the Mathlib BifibrantObject results use right homotopy, so there is no match. No fixes."
  }
 }

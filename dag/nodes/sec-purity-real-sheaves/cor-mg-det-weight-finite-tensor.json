@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "cor-mg-det-weight-finite-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Determinant weights of a finite tensor power",
@@ -14,40 +14,133 @@
  },
  "stmt_deps": [
   "def-mg-determinantal-weight-multiset",
-  "def-real-weil-representation-operations"
+  "def-real-weil-representation-operations",
+  "def-wf-geometric-semisimplicity"
  ],
  "proof": [
   {
-   "text": "Choose a composition series of the Weil representation in the sense of\n[def-mg-weil-composition-series], with simple factors $A_i$. By\n[lem-mg-jordan-holder] and [def-mg-determinantal-weight-multiset], after\nreindexing, $\\alpha_i=\\dw_\\iota(A_i)$ (the geometric semisimplicity of\n[def-wf-geometric-semisimplicity] is not needed for the argument). By\n[lem-rp-determinant-weights-agree], every $A_i$ and every\nJordan–Holder constituent of $\\mathcal F_0^{\\otimes k}$ has finite\ngeometric determinant, and for each of them the determinant weight\n$\\dw_\\iota$ of [def-wf-determinantal-weight] equals\n$\\dw_{\\lambda_\\iota}$. We prove both assertions by induction on $k$,\nusing the two-factor tensor rule [prop-ag-det-weight-two-factor-tensor]\nwith $\\lambda=\\lambda_\\iota$. For $k=1$ the constituents of\n$\\mathcal F_0$ are the $A_i$ by [lem-mg-jordan-holder], with\ndeterminant weights $\\alpha_i$. For $k\\ge2$ apply\n[prop-ag-det-weight-two-factor-tensor] to $\\mathcal V_0=\\mathcal\nF_0^{\\otimes(k-1)}$ and $\\mathcal E_0=\\mathcal F_0$, both nonzero and\nlisse on $X_0$, with composition series whose factors are the\nconstituents of $\\mathcal F_0^{\\otimes(k-1)}$, respectively the $A_j$;\nall of these, and all constituents of $\\mathcal F_0^{\\otimes k}$, have\nfinite geometric determinant by the previous paragraph. Every\nconstituent $Q$ of $\\mathcal F_0^{\\otimes k}$ therefore has\n$\\dw(Q)=\\dw(V_i)+\\alpha_j$ for a constituent $V_i$ of\n$\\mathcal F_0^{\\otimes(k-1)}$, which by induction has weight\n$\\alpha_{i_1}+\\cdots+\\alpha_{i_{k-1}}$. Conversely, by induction every\nsum $\\alpha_{i_1}+\\cdots+\\alpha_{i_{k-1}}$ is the weight of some\nconstituent $V_i$, and the converse half of\n[prop-ag-det-weight-two-factor-tensor] gives a constituent of\n$\\mathcal F_0^{\\otimes k}$ of weight $\\dw(V_i)+\\alpha_{i_k}$. The\nstatement about $\\beta$ follows by taking all indices with\n$\\alpha_{i_r}=\\beta$.",
+   "text": "By [lem-mg-composition-series-exists], choose a composition series of the Weil representation of $\\mathcal F_0$ in the sense of [def-mg-weil-composition-series], with simple factors $A_1,\\ldots,A_n$. By [lem-mg-jordan-holder], the factors are independent of the chosen series up to permutation and isomorphism with multiplicity. The definition of the determinantal-weight multiset therefore lets us reindex so that $\\alpha_i=\\dw_\\iota(A_i)$ for every $i$. By [lem-rp-determinant-weights-agree], each $A_i$ has finite geometric determinant and $\\dw_\\iota(A_i)=\\dw_{\\lambda_\\iota}(A_i)$. The same lemma gives finite geometric determinant and equality of the two weight notions for every nonzero Jordan--Hölder constituent of every tensor power, since by the exact tensor equivalence [prop-wf-weil-sheaf-representation-equivalence] between lisse Weil sheaves on $X_0$ and Weil representations, every tensor power of the Weil representation of $\\mathcal F_0$ and every subquotient of it is the Weil representation of a lisse Weil sheaf on $X_0$, so each such constituent is a nonzero (irreducible) lisse Weil sheaf on $X_0$.",
    "uses": [
     "def-mg-weil-composition-series",
     "lem-mg-jordan-holder",
     "def-mg-determinantal-weight-multiset",
-    "def-wf-geometric-semisimplicity",
     "lem-rp-determinant-weights-agree",
     "def-wf-determinantal-weight",
-    "prop-ag-det-weight-two-factor-tensor"
+    "lem-mg-composition-series-exists",
+    "prop-wf-weil-sheaf-representation-equivalence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-finite-tensor.proof.md",
+    "place": "opening paragraph"
+   }
+  },
+  {
+   "text": "We prove by induction on $k\\ge 1$ the two assertions that every constituent of $\\mathcal F_0^{\\otimes k}$ has weight equal to a sum of $k$ of the $\\alpha_i$, and that every such sum occurs. For $k=1$, the constituents are exactly the factors $A_i$ of the chosen composition series by [lem-mg-jordan-holder] and [def-real-weil-representation-operations], and their weights are $\\alpha_i$ by the preceding identification. Thus both assertions hold in the base case.",
+   "uses": [
+    "lem-mg-jordan-holder",
+    "def-real-weil-representation-operations",
+    "def-mg-weil-composition-series",
+    "def-mg-determinantal-weight-multiset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-finite-tensor.proof.md",
+    "place": "base case"
+   }
+  },
+  {
+   "text": "Assume the assertions for $k-1\\ge1$. Write $\\mathcal V_0=\\mathcal F_0^{\\otimes(k-1)}$ and $\\mathcal E_0=\\mathcal F_0$. The recursive tensor action of [def-real-weil-representation-operations] identifies their tensor product with $\\mathcal F_0^{\\otimes k}$. Tensoring nonzero vectors gives a nonzero tensor: choose linear functionals taking value $1$ on each vector, whose tensor evaluates it to $1$. Thus every positive tensor power is nonzero. The tensor matrix coefficients are products of the original continuous coefficients, so these remain finite-dimensional Weil representations, continuous on the geometric subgroup; by the exact tensor equivalence [prop-wf-weil-sheaf-representation-equivalence] they are the Weil representations of the nonzero lisse Weil sheaves $\\mathcal V_0$ and $\\mathcal E_0$ on $X_0$, whose tensor product is the lisse Weil sheaf with Weil representation that of $\\mathcal F_0^{\\otimes k}$. By [lem-mg-composition-series-exists], choose composition series whose factors are the Jordan--Hölder constituents of $\\mathcal V_0$ and the factors $A_j$ of $\\mathcal E_0$. All these factors and all constituents of the tensor product have finite geometric determinant by Step 1. Apply [prop-ag-det-weight-two-factor-tensor] with $\\lambda=\\lambda_\\iota$. It says that every constituent $Q$ of $\\mathcal F_0^{\\otimes k}$ has $\\dw_{\\lambda_\\iota}(Q)=\\dw_{\\lambda_\\iota}(V_i)+\\dw_{\\lambda_\\iota}(A_j)$ for some constituent $V_i$ of $\\mathcal V_0$ and some $j$. Using Step 1 and the induction hypothesis gives $\\dw_\\iota(Q)=\\alpha_{i_1}+\\cdots+\\alpha_{i_{k-1}}+\\alpha_j$.",
+   "uses": [
+    "def-real-weil-representation-operations",
+    "prop-ag-det-weight-two-factor-tensor",
+    "lem-rp-determinant-weights-agree",
+    "def-mg-weil-composition-series",
+    "lem-mg-composition-series-exists",
+    "prop-wf-weil-sheaf-representation-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-finite-tensor.proof.md",
+    "place": "inductive step, forward implication"
+   }
+  },
+  {
+   "text": "Conversely, let $\\alpha_{i_1}+\\cdots+\\alpha_{i_k}$ be any sum. By the induction hypothesis, the first $k-1$ terms occur as the weight of some constituent $V_i$ of $\\mathcal V_0$. The converse clause of [prop-ag-det-weight-two-factor-tensor] then supplies a constituent of $\\mathcal F_0^{\\otimes k}$ of weight $\\dw_{\\lambda_\\iota}(V_i)+\\dw_{\\lambda_\\iota}(A_{i_k})=\\alpha_{i_1}+\\cdots+\\alpha_{i_k}$, using Step 1 for the final equality. Hence the induction closes. If $\\beta=\\max_i\\alpha_i$, every occurring sum is at most $k\\beta$, while choosing an index with $\\alpha_i=\\beta$ in every position gives the occurring sum $k\\beta$; therefore the largest determinant weight is $k\\beta$.",
+   "uses": [
+    "prop-ag-det-weight-two-factor-tensor",
+    "lem-rp-determinant-weights-agree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-finite-tensor.proof.md",
+    "place": "inductive step, converse and maximum"
+   }
   }
  ],
  "proof_deps": [
-  "def-mg-weil-composition-series",
-  "lem-mg-jordan-holder",
   "def-mg-determinantal-weight-multiset",
-  "def-wf-geometric-semisimplicity",
-  "lem-rp-determinant-weights-agree",
+  "def-mg-weil-composition-series",
+  "def-real-weil-representation-operations",
   "def-wf-determinantal-weight",
-  "prop-ag-det-weight-two-factor-tensor"
+  "lem-mg-composition-series-exists",
+  "lem-mg-jordan-holder",
+  "lem-rp-determinant-weights-agree",
+  "prop-ag-det-weight-two-factor-tensor",
+  "prop-wf-weil-sheaf-representation-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-finite-tensor.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-finite-tensor.proof.md",
+  "place": "full proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "detWeight|det_weight|determinant.?weight|WeilSheaf",
+   "results": "0 hits; . No determinant-weight or Weil-sheaf declaration names found.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant weights of simple constituents of a tensor power are sums of determinant weights of simple factors",
+   "results": "8 hits; Matrix.det_kroneckerTMul, TensorProduct.exists_multiset, TensorPower.mulEquiv, exteriorPower.toTensorPower_apply_ιMulti, TensorProduct.exists_finsupp_left, Algebra.Norm.Transitivity.comp_det_mul_pow, FDRep.char_tensor, LinearMap.det_eq_det_mul_det. Matrix.det_kroneckerTMul computes a whole tensor determinant, not weights of simple constituents; TensorPower.mulEquiv is tensor associativity; FDRep.char_tensor multiplies characters. No match.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, TensorProduct",
+   "results": "12 hits; Representation.tprod, Representation.tprod_apply, Representation.smul_one_tprod_asModule, Representation.smul_tprod_one_asModule, Representation.dualTensorHom_comm, Representation.TensorProduct.lid, Representation.TensorProduct.rid, Representation.TensorProduct.comm. Representation.tprod/tprod_apply and tensor intertwining equivalences define tensor actions; none states the determinant-weight constituent sum rule.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Determinant weights of Jordan Holder constituents of tensor powers of a lisse Weil sheaf are all sums of constituent determinant weights",
+   "results": "8 hits; LieModule.weight_vector_multiplication, FDRep.char_tensor, LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add, LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add, LieModule.exists₂_genWeightSpace_smul_add_eq_bot, LieModule.trace_comp_toEnd_genWeightSpace_eq, LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub, LieModule.trace_toEnd_genWeightSpace. LieModule weight-space/weight-vector results concern Lie algebra eigenweights; FDRep.char_tensor concerns ordinary characters. Neither states determinant weights of Weil constituents.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*[Ww]eight|[Ww]eight.*[Cc]onstituent|[Ww]eight.*[Tt]ensor",
+   "results": "0 hits; . No determinant-weight or Weil-sheaf declaration names found.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "RepresentationTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple factors of the kth tensor power of a representation have weights equal to k term sums of simple factor weights, and the maximum weight is k times the maximum",
+   "results": "8 hits; LieModule.weight_vector_multiplication, LieModule.chainTopCoeff, LieModule.genWeightSpace_nsmul_add_ne_bot_of_le, LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add, LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add, LieModule.chainTop, LieModule.genWeightSpace_zsmul_add_ne_bot, LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub. LieModule weight-space/weight-vector results concern Lie algebra eigenweights; FDRep.char_tensor concerns ordinary characters. Neither states determinant weights of Weil constituents.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -79,5 +172,21 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-detweights"
+ "unit": "sk-d-real-detweights",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-mg-det-weight-finite-tensor",
+  "worker": "stage1",
+  "summary": "Read the current main-20261015 blueprint statement and proof, the imported master proof, and every cited DAG statement. Kept the statement unchanged, filled the blueprint search metadata, and rewrote the imported paragraph as four explicit steps: identify the determinant-weight list and finite-determinant hypotheses, establish the induction base, prove the forward inductive implication via the two-factor tensor rule, and prove the converse and maximum. No new nodes are needed because every dependency already exists in the DAG.",
+  "blueprint": "The four steps realize the current blueprint proof's opening identification paragraph, base case, inductive forward implication, and converse/maximal-weight paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-89c3a32f1",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-89c3a32f1 (reviewer sub-agent of L); spot-checked: Read in full: the item, the main-20261015 and master statement and proof (identical, order 2638), the unit sk-d-real-detweights (a definition sketch with no steps), and the statement of every cited node. The statement is unchanged and matches the source: one multiset entry per occurrence of a simple factor, normal geometrically connected curve, and geometric semisimplicity kept in stmt_deps (the blueprint says the proof does not use it). I tested it on k=1, a rank-one sheaf, A(rank 2, weight 0)+B(rank 1, weight 1) with k=2 (sums {0,1,2}, max 2β) and a nonsplit extension; all agree. Step 1 (reindexing by Jordan–Hölder and lem-rp-determinant-weights-agree, which gives finite geometric determinant and dw_ι=dw_{λι}), step 2 (base case) and step 4 (converse and kβ max) are correct. In step 3 I checked every hypothesis of prop-ag-det-weight-two-factor-tensor: nonzeroness (dual-functional argument), the same curve, composition series exist, and the finite determinants come from step 1. The induction is set up explicitly and nothing is relabelled. One fault (C1): steps 1 and 3 treat Weil representations (constituents and the tensor power F^{⊗(k-1)}) as lisse Weil sheaves, which lem-rp and the two-factor proposition need, but cite nothing for it. Fixed by citing the existing Lean-closed node prop-wf-weil-sheaf-representation-equivalence (exact tensor equivalence that matches subquotients; its unit sk-i-real-sheaves is on the route) in the text and uses of steps 1 and 3, with proof_deps recomputed. Accepted tool use: lem-mg-jordan-holder (generic Jordan–Hölder, Lean closed_part via Representation.CompositionSeries.jordanHolder, off-route in sk-r-linear-library). prop-ag-det-weight-two-factor-tensor and lem-mg-composition-series-exists are Lean-closed tools. The only other DAG hit is lem-rp-upper-bound, which uses this item, so there is no duplicate. No new nodes, no SGA.; 1 file(s) fixed by the reviewer"
+ }
 }
