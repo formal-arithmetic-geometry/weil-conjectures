@@ -26,8 +26,7 @@
   "def-weil-pbc-proper-open-comparison",
   "cor-cbc-derived-extension-zero-base-change",
   "lem-weil-pbc-exchange-forget-coefficients",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-direct-image-preserves-injectives"
+  "def-pc-fibre-product"
  ],
  "proof": [
   {
@@ -45,7 +44,7 @@
    }
   },
   {
-   "text": "Choose a universe in which the small etale sites are small. By [prop-pur-kinjective-resolutions-exist] their constant-ring module-sheaf categories are Grothendieck abelian. They have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Represent $K$ by a bounded-below complex $J$ of injective module sheaves using [lem-weil-pbc-dplus-injective-representative], and choose a bounded-below injective resolution $t:k_!J\\to I$. Exactness [lem-weil-pbc-extension-by-zero-exact] makes $k_!J$ a bounded-below representative of $k_!K$. Each $k_!J^n$ is $p_*$-acyclic by [lem-cbc-open-extended-injective-proper-acyclic]. Clause (3) of [lemma-weil-pbc-leray-acyclicity] therefore says that $p_*t:p_*k_!J\\to p_*I$ is a quasi-isomorphism and computes the derived-functor comparison. Since $r_*J$ computes $Rr_*K$ by [def-weil-pbc-direct-image], the composite $i_!r_*J\\xrightarrow{\\delta_Q}p_*k_!J\\xrightarrow{p_*t}p_*I$ gives the required isomorphism. Finite $\\Lambda$ is torsion: multiplying positive integers annihilating its finitely many additive elements gives $N>0$ with $N\\Lambda=0$, hence $NM=0$ for every $\\Lambda$-module $M$. This is precisely case (b) of 0F7B, with no residue-characteristic restriction.",
+   "text": "Choose a universe in which the small etale sites are small. By [prop-pur-kinjective-resolutions-exist] their constant-ring module-sheaf categories are Grothendieck abelian. They have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Represent $K$ by a bounded-below complex $J$ of injective module sheaves using [lem-weil-pbc-dplus-injective-representative], and choose a bounded-below injective resolution $t:k_!J\\to I$: the same lemma gives a bounded-below injective complex $I$ with $QI\\cong Q(k_!J)$, and by [lem-weil-pbc-kinjective-hom-derived] this isomorphism is $Q(t)$ for a chain map $t$, necessarily a quasi-isomorphism. Exactness [lem-weil-pbc-extension-by-zero-exact] makes $k_!J$ a bounded-below representative of $k_!K$. Each $k_!J^n$ is $p_*$-acyclic by [lem-cbc-open-extended-injective-proper-acyclic]. Clause (3) of [lemma-weil-pbc-leray-acyclicity] therefore says that $p_*t:p_*k_!J\\to p_*I$ is a quasi-isomorphism and computes the derived-functor comparison. Since $r_*J$ computes $Rr_*K$ by [def-weil-pbc-direct-image], the composite $i_!r_*J\\xrightarrow{\\delta_Q}p_*k_!J\\xrightarrow{p_*t}p_*I$ gives the required isomorphism. Finite $\\Lambda$ is torsion: multiplying positive integers annihilating its finitely many additive elements gives $N>0$ with $N\\Lambda=0$, hence $NM=0$ for every $\\Lambda$-module $M$. This is precisely case (b) of 0F7B, with no residue-characteristic restriction.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "lem-weil-pbc-module-sheaves-enough-injectives",
@@ -53,7 +52,8 @@
     "lem-weil-pbc-extension-by-zero-exact",
     "lem-cbc-open-extended-injective-proper-acyclic",
     "lemma-weil-pbc-leray-acyclicity",
-    "def-weil-pbc-direct-image"
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false,
    "source": {
@@ -117,12 +117,15 @@
    }
   },
   {
-   "text": "For base change first work with sheaves. The support inclusions into ordinary direct images in [lem-cbc-proper-support-sheaf-composition] identify $i_!r_*$ and $p_*k_!$ inside $(ir)_*=(pk)_*$. Its pullback-composition clause says that the two paths consisting of the ordinary comparisons and the extension-by-zero comparisons give the pullback comparison for that same composite morphism. Thus the ordinary version of the required base-change diagram commutes. More explicitly, after inclusion into $(p_1k_1)_*d^{-1}F=(i_1r_1)_*d^{-1}F$, either path pulls a local section of $F$ to the same section on the base-changed test scheme. These are injective inclusions; inverse image preserves them by [prop-weil-pbc-inverse-image-modules-exact]. Hence equality in the common ordinary direct image is equality in the support subsheaf. The open comparisons here are the specific $\\beta_i,\\beta_k$ of [cor-cbc-derived-extension-zero-base-change], not isomorphisms chosen independently of the pullback maps. Their construction is the restriction of the ordinary pullback comparison to the support subsheaf. The ordinary-comparison pasting is also the unit/counit mate equation in clauses (1),(2) of [lem-weil-pbc-mate-pasting] for the module inverse-image adjunctions; all constant-ring pullbacks are the identifications of [prop-weil-pbc-inverse-image-modules-exact].",
+   "text": "For base change first work with sheaves. The support inclusions into ordinary direct images in [lem-cbc-proper-support-sheaf-composition] identify $i_!r_*$ and $p_*k_!$ inside $(ir)_*=(pk)_*$. Its pullback-composition clause says that the two paths consisting of the ordinary comparisons and the extension-by-zero comparisons give the pullback comparison for that same composite morphism. Thus the ordinary version of the required base-change diagram commutes. These are injective inclusions; inverse image preserves them by [prop-weil-pbc-inverse-image-modules-exact]. Hence equality in the common ordinary direct image is equality in the support subsheaf. The open comparisons $\\beta_i,\\beta_k$ of [cor-cbc-derived-extension-zero-base-change] agree with the restrictions $c_k,c_i$ of the ordinary comparisons to the support subsheaves, which the support node calls canonical; we check this for $k$ (the case of $i$ is identical). By [lem-cbc-extension-zero-base-change], $\\beta_k^{-1}$ is the $k_{1!}\\dashv k_1^{-1}$ mate of $x=\\theta\\circ d^{-1}\\eta_k:d^{-1}F\\to k_1^{-1}a^{-1}k_!F$. Since $\\beta_k$ is invertible, $c_k=\\beta_k$ iff $c_k\\beta_k^{-1}=\\mathrm{id}$, iff the adjoint $k_1^{-1}(c_k)\\circ x$ is the unit $\\eta_{k_1}$ [lem-weil-pbc-extension-by-zero-adjunction]. Evaluate on an etale $W\\to A_1$: by the presheaf formula [def-weil-pbc-extension-by-zero] and the explicit adjunction, $\\eta_k,\\eta_{k_1}$ are the identity on sections over objects factoring through the open, $\\theta$ is the identity on germs, and the ordinary comparison restricts a section along $W\\to V\\times_BA$, which is $W\\to V$ for $V$ factoring through $A$. So both maps send the germ of $s\\in F(V)$ to the same germ, and $c_k=\\beta_k$. The ordinary-comparison pasting is also the unit/counit mate equation in clauses (1),(2) of [lem-weil-pbc-mate-pasting] for the module inverse-image adjunctions; all constant-ring pullbacks are the identifications of [prop-weil-pbc-inverse-image-modules-exact].",
    "uses": [
     "lem-cbc-proper-support-sheaf-composition",
     "prop-weil-pbc-inverse-image-modules-exact",
     "cor-cbc-derived-extension-zero-base-change",
-    "lem-weil-pbc-mate-pasting"
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-extension-zero-base-change",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-extension-by-zero"
    ],
    "elementary": false,
    "source": {
@@ -131,17 +134,41 @@
    }
   },
   {
-   "text": "Now take $J,t:k_!J\\to I$ as in step 2, and choose a bounded-below injective resolution $s:d^{-1}J\\to J_1$. Exact inverse image and exact extension by zero [prop-weil-pbc-inverse-image-modules-exact] [lem-weil-pbc-extension-by-zero-exact] make the diagram start with quasi-isomorphisms\n$$k_{1!}d^{-1}J\\xrightarrow{k_{1!}s}k_{1!}J_1,\\qquad\nk_{1!}d^{-1}J\\xrightarrow{\\beta_k^{-1}}a^{-1}k_!J\\xrightarrow{a^{-1}t}a^{-1}I.$$\nChoose a bounded-below injective resolution $v:k_{1!}J_1\\to I_1$. By [lem-weil-pbc-kinjective-hom-derived], the morphism from $a^{-1}I$ to $I_1$ corresponding in the derived category to $v\\circ k_{1!}s\\circ\\beta_k\\circ(a^{-1}t)^{-1}$ is represented by a chain map $z:a^{-1}I\\to I_1$. It satisfies\n$$z\\circ a^{-1}t\\circ\\beta_k^{-1}\\simeq v\\circ k_{1!}s,$$\nbecause the maps from $k_{1!}d^{-1}J$ into the K-injective $I_1$ have the same derived class. This is the needed homotopy-commutative resolution diagram, not a claim that $d^{-1}J$ or $a^{-1}I$ is injective. The module exchange maps are represented by the ordinary comparisons $b^{-1}p_*I\\to p_{1,*}a^{-1}I$ followed by $p_{1,*}z$, and $c^{-1}r_*J\\to r_{1,*}d^{-1}J$ followed by $r_{1,*}s$. To verify this computation rather than take it from a definition, use the exact module adjunction of [prop-weil-pbc-inverse-image-modules-exact], its termwise adjunction on homotopy categories [lem-weil-pbc-termwise-adjunction-homotopy], and the K-injective Hom bijection. Exactness of inverse image shows its additive right adjoint preserves K-injectives: if $H$ is acyclic and $P$ is K-injective, $\\operatorname{Hom}_K(H,p_*P)=\\operatorname{Hom}_K(p^{-1}H,P)=0$. Thus the two homotopy-category Hom sets in this adjunction identify with the corresponding derived Hom sets for injective target resolutions, with the same counit represented by $\\varepsilon_{p,P}$. For a source representative $P$ and a target resolution $z:a^{-1}P\\to I_1$, the transpose of $p_{1,*}z\\circ\\operatorname{Ex}^0_P$ is the chain map $z\\circ a^{-1}\\varepsilon_{p,P}\\circ\\theta$, by the defining adjoint formula of [def-weil-pbc-underived-exchange] and the underived adjunction triangle identities. That formula is stated for abelian sheaves; [prop-weil-pbc-inverse-image-modules-exact] gives exactly those same units and counits on constant-ring modules, and its section-restriction maps are linear, so the displayed formula is the module formula too. Maps into $I_1$ are computed modulo homotopy by [lem-weil-pbc-kinjective-hom-derived], so this is also its derived transpose. This is exactly the defining derived mate in [def-weil-pbc-derived-exchange], formed for module adjunctions as specified in [lem-weil-pbc-exchange-forget-coefficients]. For the left proper map, the chain map $r_{1,*}s\\circ\\operatorname{Ex}^0_{r,J}$ has transpose $s\\circ d^{-1}\\varepsilon_{r,J}\\circ\\theta_r:r_1^{-1}c^{-1}r_*J\\to J_1$. The termwise adjunction and the Hom bijection into $J_1$ identify this transpose with the derived composite $d^{-1}\\varepsilon_r\\circ\\theta_r$ followed by the resolution identification. Hence this chain map represents $\\operatorname{Ex}_r$. No module computation is being inferred from the abelian-only termwise-exchange theorem. Apply the ordinary equality of step 7 degreewise to $J$. Naturality of $\\delta_{Q_1}$ with respect to $s$ gives equality for the next segment. For the last segment apply $p_{1,*}$ to the displayed homotopy: it remains a homotopy since direct image is additive. The outside paths are therefore equal in the homotopy category after passing through $p_{1,*}I_1$, and hence in $D^+$. Written using the normalization of step 2 these paths are exactly\n$$(Rp_{1,*}\\beta_k)\\circ(\\operatorname{Ex}_p k_!)\\circ(b^{-1}\\gamma_Q)\n=(\\gamma_{Q_1}d^{-1})\\circ(i_{1!}\\operatorname{Ex}_r)\\circ(\\beta_iRr_*).$$\nProperness and openness in $Q_1$ hold by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-open-immersion-base-change], respectively. Thus all comparisons used here are of the stated kind for arbitrary $b$. The exchanges stay in the constant-$\\Lambda$ module categories; the comparison [lem-weil-pbc-exchange-forget-coefficients] identifies their underlying abelian exchanges but is not used to infer equality from derived forgetting.",
+   "text": "Take $J,t:k_!J\\to I$ as in step 2, and choose a bounded-below injective resolution $s:d^{-1}J\\to J_1$. Exact inverse image and exact extension by zero [prop-weil-pbc-inverse-image-modules-exact] [lem-weil-pbc-extension-by-zero-exact] make the diagram start with quasi-isomorphisms\n$$k_{1!}d^{-1}J\\xrightarrow{k_{1!}s}k_{1!}J_1,\\qquad\nk_{1!}d^{-1}J\\xrightarrow{\\beta_k^{-1}}a^{-1}k_!J\\xrightarrow{a^{-1}t}a^{-1}I.$$\nChoose a bounded-below injective resolution $v:k_{1!}J_1\\to I_1$. By [lem-weil-pbc-kinjective-hom-derived], the morphism from $a^{-1}I$ to $I_1$ corresponding in the derived category to $v\\circ k_{1!}s\\circ\\beta_k\\circ(a^{-1}t)^{-1}$ is represented by a chain map $z:a^{-1}I\\to I_1$. It satisfies\n$$z\\circ a^{-1}t\\circ\\beta_k^{-1}\\simeq v\\circ k_{1!}s,$$\nbecause the maps from $k_{1!}d^{-1}J$ into the K-injective $I_1$ have the same derived class. This is the needed homotopy-commutative resolution diagram, not a claim that $d^{-1}J$ or $a^{-1}I$ is injective. Here $z$ is a quasi-isomorphism because its derived class is a composite of isomorphisms. The bounded-below representatives and their K-injectivity are supplied by [lem-weil-pbc-dplus-injective-representative].",
    "uses": [
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-extension-by-zero-exact",
     "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-pbc-derived-exchange",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F, label lemma-shriek-proper-and-open-base-change, entire homotopy-commutative resolution diagram"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-exchange-module-termwise] to the Cartesian square of $p$ with source representative $I$ and target replacement $z:a^{-1}I\\to I_1$, and to the Cartesian square of $r$ with source $J$ and replacement $s:d^{-1}J\\to J_1$. It gives the representatives\n$$e_p=p_{1,*}z\\circ\\operatorname{Ex}^0_{p,I},\\qquad e_r=r_{1,*}s\\circ\\operatorname{Ex}^0_{r,J}.$$\nWith the target identifications of step 8, $e_p$ represents $(Rp_{1,*}\\beta_k)\\circ(\\operatorname{Ex}_p k_!)$ and $e_r$ represents $\\operatorname{Ex}_r$. In the first case the identification from $a^{-1}k_!K$ to the target represented by $I_1$ is exactly $v\\circ k_{1!}s\\circ\\beta_k\\circ(a^{-1}t)^{-1}$. The exchanges themselves are those specified in [lem-weil-pbc-exchange-forget-coefficients]. Indeed both are mates of the same inverse-image square isomorphism and counit; on our bounded-below injective representatives the derived-functor comparisons in the termwise lemma are the same resolution identifications as those in [def-weil-pbc-direct-image]. Thus restricting its calculation to the full subcategories $D^+$ [def-weil-pbc-bounded-derived-subcategories] gives precisely these bounded-below module mates. This uses the module version of the termwise theorem, not its abelian-sheaf counterpart. Its hypotheses hold because $I,J,I_1,J_1$ are K-injective, $z,s$ are quasi-isomorphisms, and constant-ring inverse images are exact by [prop-weil-pbc-inverse-image-modules-exact].",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-module-termwise",
     "lem-weil-pbc-exchange-forget-coefficients",
-    "def-weil-pbc-underived-exchange",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0736 (lemma-base-change-map-flat-case) and 07A7 (remark-base-change); module termwise representative calculation, specialized to bounded-below resolutions"
+   }
+  },
+  {
+   "text": "Apply step 7 degreewise to $J$, and use the representatives $e_p,e_r$ from step 9. Put $\\delta_1=\\delta_{Q_1}$, and write $\\operatorname{Ex}^0_{p,k_!J}$ for the ordinary exchange on $k_!J$. Naturality of ordinary exchange for $t$ gives\n$$e_p\\circ b^{-1}(p_*t)\\circ b^{-1}\\delta_Q\n=p_{1,*}(z\\circ a^{-1}t)\\circ\\operatorname{Ex}^0_{p,k_!J}\\circ b^{-1}\\delta_Q.$$\nBy the homotopy of step 8 this is homotopic to\n$$p_{1,*}(v\\circ k_{1!}s)\\circ p_{1,*}\\beta_k\\circ\\operatorname{Ex}^0_{p,k_!J}\\circ b^{-1}\\delta_Q.$$\nThe sheaf equality of step 7 replaces the last three factors by $\\delta_1(d^{-1}J)\\circ i_{1!}\\operatorname{Ex}^0_{r,J}\\circ\\beta_i(r_*J)$. Naturality of $\\delta_1$ for $s$ then makes the result\n$$p_{1,*}v\\circ\\delta_1(J_1)\\circ i_{1!}(r_{1,*}s\\circ\\operatorname{Ex}^0_{r,J})\\circ\\beta_i(r_*J).$$\nDirect image carries the homotopy used above to a homotopy: applying its additive functor to $dH+Hd$ gives $d(p_{1,*}H)+(p_{1,*}H)d$. After localization the first and last displayed expressions are the two sides of the required base-change equation, by the normalization in step 2 and step 9. The open comparisons are exactly those of [cor-cbc-derived-extension-zero-base-change]. All objects are in $D^+$; equality can also be read in the ambient derived category because the subcategory is full [def-weil-pbc-bounded-derived-subcategories]. The base-changed proper and open maps satisfy the needed hypotheses by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-open-immersion-base-change]. No Cartesian assumption on $Q$ was used; only the projection squares for this base change are Cartesian.",
+   "uses": [
+    "cor-cbc-derived-extension-zero-base-change",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change"
    ],
    "elementary": false,
    "source": {
@@ -172,12 +199,13 @@
   "lem-weil-pbc-direct-image-preserves-injectives",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-mate-pasting",
-  "def-weil-pbc-derived-exchange",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-open-immersion-base-change",
+  "lem-cbc-extension-zero-base-change",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-derived-exchange-module-termwise",
   "lem-weil-pbc-exchange-forget-coefficients",
-  "def-weil-pbc-underived-exchange",
-  "lem-weil-pbc-termwise-adjunction-homotopy"
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-open-immersion-base-change"
  ],
  "proof_origin": {
   "by": "document",
@@ -275,10 +303,59 @@
    "results": "service unavailable: Internal Server Error; No hits. Read returned signatures: ordinary structure-sheaf pushforward, ideal sheaves, K-injectivity or generic sheaf inclusions do not state this small-etale proper-support result.",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|extensionByZero|properOpenInterchange",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open interchange isomorphism for derived etale module sheaves",
+   "results": "[\"AlgebraicGeometry.Scheme.Hom.appIso\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\"]",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along open immersions commutes with derived proper pushforward in a commutative square of schemes, compatibly with composition and base change",
+   "results": "[\"AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Hom.comp_appIso\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\"]",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|extension_by_zero|proper.*interchange",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical natural isomorphism between open immersion lower shriek followed by proper derived direct image, coherent for pasted squares and arbitrary pullback",
+   "results": "[\"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.Scheme.Hom.comp_appIso\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp_assoc\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'_assoc\"]",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-cbc-finite-torsion",
   "by": "worker",
@@ -287,11 +364,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-cbc-proper-open-interchange-coherence",
   "worker": "stage1",
-  "summary": "Followed Stacks 0F7B/C/D/F through underived proper-support sections and acyclic resolution comparisons. Kept the non-Cartesian square and unrestricted opens, derived the normalization and refinement alpha agreement, and wrote both composition and base-change diagrams rather than moving the coherence clauses into new children. Two new statement-only inputs concern generic sheaf-support calculus and injective acyclicity.",
-  "blueprint": "Refinement comparison paragraph and final sentence of thm-cbc-finite-torsion: steps 1-4 construct and normalize the comparison; steps 5-6 give composition and identities; steps 7-8 give the base-change equation.",
+  "summary": "Re-audited Stacks 0F7B/C/D/F and every cited statement. Retained the full non-Cartesian proper/open comparison, normalization, refinement agreement, both composition laws and canonical module base-change equation. Replaced the hidden module-exchange computation in the former 4214-character final step by the existing general module-termwise exchange theorem, with explicit bounded-below specialization; separated the resolution construction and wrote the actual diagram-factor calculations. No new nodes are needed.",
+  "blueprint": "Current main-20261015 thm-cbc-finite-torsion proof, refinement comparison paragraph and final identity/pasting sentence: steps 1-4 construct and normalize the interchange; steps 5-6 prove composition and identities; steps 7-10 prove compatibility with the proper and open base-change factors.",
   "tool_uses": [
    {
     "node": "prop-pur-kinjective-resolutions-exist",
@@ -302,19 +379,11 @@
     "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
    },
    {
-    "node": "lem-weil-pbc-dplus-injective-representative",
-    "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
-   },
-   {
     "node": "lem-weil-pbc-extension-by-zero-exact",
     "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
    },
    {
     "node": "lemma-weil-pbc-leray-acyclicity",
-    "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-hom-derived",
     "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
    },
    {
@@ -342,24 +411,12 @@
     "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
    },
    {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
-   },
-   {
-    "node": "lem-weil-pbc-proper-base-change",
-    "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
-   },
-   {
-    "node": "lem-weil-pbc-open-immersion-base-change",
-    "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
+    "node": "lem-weil-pbc-derived-exchange-module-termwise",
+    "why": "Generic constant-coefficient module exchange computation on K-injective representatives; this unit has no independent termwise computation theorem."
    },
    {
     "node": "lem-weil-pbc-exchange-forget-coefficients",
     "why": "Generic resolution, adjunction, sheaf restriction or scheme base-change tool needed in the explicit proper/open resolution argument; this unit does not state this general input."
-   },
-   {
-    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-    "why": "Generic termwise adjunction needed to identify the explicitly calculated module exchange transpose with its derived mate."
    }
   ]
  },
@@ -380,15 +437,16 @@
   "lem-weil-pbc-proper-base-change",
   "lem-weil-pbc-open-immersion-base-change",
   "lem-weil-pbc-exchange-forget-coefficients",
-  "lem-weil-pbc-termwise-adjunction-homotopy"
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-derived-exchange-module-termwise"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NN-1e5e6b5af",
-  "group": "NN",
+  "reviewer": "NT-cc-Q04-8e2179db9",
+  "group": "Q04",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-1e5e6b5af (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, all cited statements, unit/chapter route, and Stacks sources 0F4X/0F4Y/0F50/0F51/0F55/0F77/0F7B/0F7C/0F7D/0F7F. Verified hypotheses, non-Cartesian scope, finite-module coefficients, canonical base-change morphisms, all eight proof steps, duplicates, and edge cases. No repair required; review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-8e2179db9 (reviewer sub-agent of L); spot-checked: Read the whole item (statement unchanged from the side base; only the unused stmt_dep lem-weil-pbc-direct-image-preserves-injectives was removed; no new nodes), all 26 cited statements, Stacks more-etale.tex 0F7B/0F7C/0F7D/0F7F and remark-going-around, the main-20261015 thm-cbc-finite-torsion refinement paragraph and the unit sk-prop-sf-cbc. The statement is the open-immersion, D^+, finite-Λ module specialization of 0F7B case (b), with no Cartesian hypothesis. Both pasting equations are typed as in 0F7C and 0F7D. The base-change equation is exactly the 0F7F square with the module exchanges of lem-weil-pbc-exchange-forget-coefficients and the β maps of cor-cbc-derived-extension-zero-base-change; by pasting, A_1=A×_B B_1=A×_C C_1, so those squares are Cartesian. Steps 1-10 check against the cited statements: support composition, acyclicity of k_!(injective), Leray (3), the refinement case equal to α_u through θ and the adjunction, the vertical and horizontal resolution calculations, the step-8 homotopy and the module-termwise exchange. I recomputed the final chain of equalities and homotopies. Edge cases checked: Λ=0, A=∅, both identity squares, r=id refinement, and a non-Cartesian clopen example. Fixed two C1/C3 faults. Step 2: the bounded-below injective resolution t needs the Hom bijection to become a chain map; added lem-weil-pbc-kinjective-hom-derived. Step 7: it identified β_i, β_k with the restricted ordinary pullback comparison by their construction; replaced this with a mate and germ check from the statements of lem-cbc-extension-zero-base-change, lem-weil-pbc-extension-by-zero-adjunction and def-weil-pbc-extension-by-zero, all now cited. Accepted the declared tool_uses: generic resolution, adjunction, restriction and exchange tools, plus lem-weil-pbc-derived-exchange-module-termwise. Weakest point: step 9's prose identification of the unbounded module mate with the D^+ module exchange; the DAG has an agreement node only at Z, but the formal argument is acceptable. No duplicate (lem-amb-unbounded-proper-open-interchange adds Noetherian hypotheses), no cycle, no SGA source. Process note: the side ledger records a 15:07 retirement of this item's Q04 claim, before this 15:43 commit; the maintainer should check whether the merge still applies. Fix file: fixes/dag/nodes/sec-smooth-purity/lem-cbc-proper-open-interchange-coherence.json (proof and proof_deps only).; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

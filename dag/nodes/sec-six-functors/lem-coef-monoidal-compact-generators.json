@@ -84,11 +84,10 @@
    }
   },
   {
-   "text": "Consider the full subcategory $D^\\otimes\\subseteq\\mathcal V^\\otimes$ whose fiber over $[n]$ consists of tuples in $D^n$ under the Segal equivalence of [def-coef-monoidal-infinity-category]. For a base arrow $\\alpha:[n]\\to[m]$, its opposite is an order-preserving map $a:[m]\\to[n]$. The $i$th output, by the Segal projections, is the fold of the consecutive block with endpoints $a(i-1),a(i)$: factor this component base arrow as restriction to that subinterval followed by its active fold. If the endpoints agree this is the nullary fold. Thus the transport gives tensor products of these blocks, allowing empty blocks and discarded initial or final entries. Binary tensor closure and the unit clause prove closure under all these transports. Thus every ambient cocartesian lift with source in $D^\\otimes$ has target there. Its mapping-space pullback condition restricts to the full subcategory, by [lem-coef-cocartesian-straightening]. Inner horn fillers also stay in the full subcategory, since their vertices do. Consequently $D^\\otimes\\to\\Delta^{\\mathrm{op}}$ is cocartesian and the inclusion preserves cocartesian arrows. The Segal equivalences and relative mapping-space product axiom in [def-coef-monoidal-infinity-category] restrict to the same full subcategory. This proves the monoidal axioms with their inherited higher coherences.\n\nHere is the size and replacement argument for the word small. Each fiber $D^n$ is essentially small; choose representatives for all finite tuples in a small model of $D$, for all $n$. This is a small family of objects of $D^\\otimes$. For two objects over $[n],[m]$, respectively, the mapping space lies over the finite discrete set $\\operatorname{Hom}_{\\Delta^{\\mathrm{op}}}([n],[m])$. Its fiber at $\\alpha$ is $\\operatorname{Map}_{D^m}(\\alpha_!a,b)$, by the cocartesian mapping-space square in [lem-coef-cocartesian-straightening]. These fibers are small up to equivalence, so the mapping space is small up to equivalence (take the finite disjoint union of small Kan representatives). Hence $D^\\otimes$ is locally small. Apply [lem-coef-infinity-small-full-subcategory] to the chosen tuple representatives in $D^\\otimes$, obtaining a small equivalent total category $T$. The composite $T\\to D^\\otimes\\to\\Delta^{\\mathrm{op}}$ is an intrinsic cocartesian fibration: its lifts and mapping-space pullback squares are carried across the equivalence. By the intrinsic-to-simplicial replacement assertion of [lem-coef-cocartesian-straightening], formed in the same small universe, replace it by a small simplicial cocartesian fibration $C^\\otimes\\to\\Delta^{\\mathrm{op}}$ equivalent over the base. Its fiber $C$ over $[1]$ is small, the equivalence transports both Segal axioms, and the resulting $j:C\\to\\mathcal V$ is fully faithful and strong monoidal with essential image $D$.",
+   "text": "The underlying $\\mathcal V$ is locally small by [def-coef-presentable-infinity-category]. Let $D\\subseteq\\mathcal V$ be the replete full subcategory of $\\kappa$-compact objects. Step 2 proves essential smallness and inclusion of the unit, and steps 3–4 prove binary tensor closure. Thus every hypothesis of [lem-coef-small-monoidal-full-subcategory] holds for this $D$. Apply it to obtain a small monoidal $C^\\otimes$ and its fully faithful strong monoidal functor $j:C\\to\\mathcal V$ with replete essential image $D$. In particular the strong monoidal inclusion required in the statement has been constructed with its coherent, unital monoidal structure.",
    "uses": [
-    "def-coef-monoidal-infinity-category",
-    "lem-coef-cocartesian-straightening",
-    "lem-coef-infinity-small-full-subcategory"
+    "def-coef-presentable-infinity-category",
+    "lem-coef-small-monoidal-full-subcategory"
    ],
    "elementary": false,
    "source": {
@@ -137,9 +136,7 @@
   "lem-coef-accessible-infinity-rank-calculus",
   "lem-coef-compact-small-colimits",
   "lem-coef-spaces-small-colimits-universe",
-  "def-coef-monoidal-infinity-category",
-  "lem-coef-cocartesian-straightening",
-  "lem-coef-infinity-small-full-subcategory",
+  "lem-coef-small-monoidal-full-subcategory",
   "lem-coef-infinity-yoneda-presheaf-limits",
   "lem-cbc-enhanced-functor-cone-calculus",
   "lem-coef-ind-kappa-presentability",
@@ -252,7 +249,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-segal-localization-model",
@@ -277,8 +274,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-monoidal-compact-generators",
   "worker": "stage1",
-  "summary": "No closed project attachment found. Kept the statement and gave the cardinal-bound, two-stage bounded-colimit tensor proof, explicit compact-retract calculation, coherent monoidal small replacement and restricted-Yoneda Ind recognition. Reused all general infrastructure from existing DAG nodes; no new node and no ordinary-category substitution. Sources were read online and archival copies are requested in report.md.",
-  "blueprint": "Auxiliary presentable-monoidal compact-density input below paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction); realizes the Proposition 7.15 / Corollary 7.16 input recorded in the item ancestry, not a new unit route.",
+  "summary": "N2 repairs the dedicated long-step return: extracted old step 5 into the general statement-only small monoidal full-subcategory lemma, after DAG/blueprint/project/Mathlib searches. Step 5 now verifies its hypotheses and applies it. All other proof steps, the exact statement, Lean record, creation metadata and route are retained. Citations and a fresh self-review cover all seven steps.",
+  "blueprint": "Auxiliary presentable-monoidal compact-density input below paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction); realizes the Proposition 7.15 / Corollary 7.16 input recorded in the item ancestry, not a new unit route. The extracted lemma isolates the coherent monoidal restriction and small replacement hidden in old step 5, at the same ancestor place.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -290,11 +287,11 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q40-85173ea2d",
-  "group": "Q40",
+  "reviewer": "NT-cc-N2-920987458",
+  "group": "N2",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-85173ea2d (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 7 steps and the statements of all 16 cited nodes. It has one commit and no new nodes, and the statement and stmt_deps are unchanged from base. The statement is true (the standard tensor-closed kappa-compact generators result: Chu–Haugseng 7.15/7.16 with HTT 5.3.5/5.4.2). Those archives are absent, the WANTED lines are recorded and proof_origin is agent. No SGA source is used. Steps checked: (1) the presentability and essentially-small G, plus the common rank rho for {1} and the g⊗h; (2) kappa=(2^theta)^+, where mu^nu <= (2^theta)^theta = 2^theta < kappa gives lambda << kappa exactly as defined in the rank calculus, kappa is uncountable, and rho-compact implies kappa-compact in the right direction; (3) the bounded retract presentations and two successive applications of compact-small-colimits; (4) the retract-of-equivalence inverse r_A g^-1 i_B, checked; (5) the D^⊗ block/fold description, checked: empty blocks give the unit, and cocartesian lifts, Segal and relative-limit conditions restrict to the full subcategory; local smallness then gives a small replacement through infinity-small-full-subcategory and straightening; (6) the restricted Yoneda functor preserves kappa-filtered colimits objectwise, with the universe comparison; (7) the Ind-extension gives F, and the uniqueness argument gives RF ≃ i. FIX (C1/C4): step 7 applies lem-coef-ind-kappa-extension with target P(C), which needs P(C) locally small, but no cited node said so. I added the same-unit node lem-coef-infinity-presheaf-presentability (P(D) is presentable for small D, hence locally small via def-coef-presentable-infinity-category) to step 7's uses and to proof_deps. A cycle check found no path back to the item. I accept the tool_use of lem-cbc-enhanced-functor-cone-calculus, which is only the generic pointwise-equivalence test and is already accepted on sibling nodes. Minor: the report wrongly says created.item was changed; the file correctly keeps Q39's created field.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-920987458 (reviewer sub-agent of L); spot-checked: Read the full item (7 steps), the new node lem-coef-small-monoidal-full-subcategory, all 18 cited statements, the old step 5 in the side DAG (read only), and Chu–Haugseng arXiv 2006.08269v2 §7 online (Prop 7.15, Cor 7.16, Rem 7.17). The new lemma is the general form of 7.15's closing line 'inherits cocartesian morphisms', plus the small model of 7.17. It is true: the transport along α tensors blocks, including empty blocks (the unit), so binary closure, the unit and repleteness give closure under every n-ary tensor. Segal and relative-limit conditions restrict to a full subcategory, and essential smallness gives a small model through infinity-small-full-subcategory and straightening. Small cases checked: D=V with V small, D={objects equivalent to 1}, the terminal category, the point fiber over [0]; empty D is excluded by the unit hypothesis. B1–B9 hold: statement only, self-contained, definitions cited, real searches recorded (Mathlib's fullMonoidalSubcategory is for ordinary categories only), correct ancestor and via. It is not a clause of the parent and duplicates no existing node (checked monoidal-yoneda-embedding, associative-reflective-localization, operadic-day-convolution, infinity-small-full-subcategory, cocartesian-straightening). Step 5 checks every hypothesis of the lemma. Steps 1–4, 6 and 7 are re-verified: lambda << kappa=(2^theta)^+ via square-power; rho-compact implies kappa-compact in the right direction; two uses of compact-small-colimits on kappa-small shapes; the retract inverse r_A g^-1 i_B; the restricted Yoneda functor is computed objectwise, with the universe comparison; the Ind-extension hypotheses hold for both V and P(C), so RF ≃ i. The tool use of lem-cbc-enhanced-functor-cone-calculus is accepted. No SGA is used. No changes made."
  }
 }

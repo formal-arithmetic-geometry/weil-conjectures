@@ -27,8 +27,7 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-coef-infinity-pinch-comparison"
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -73,19 +72,44 @@
    }
   },
   {
-   "text": "Write $\\mathcal Q=\\operatorname{Fun}(K,E)$, $\\mathcal R=\\operatorname{Fun}(K,B)$ and $A'=\\eta_!A$. For $H\\in\\mathcal F_G$ apply [lem-coef-infinity-cocartesian-mapping-criterion] to $\\lambda$ and $H$. It supplies the homotopy-pullback square with rows $\\operatorname{Map}_{\\mathcal Q}(A',H)\\xrightarrow{\\lambda^*}\\operatorname{Map}_{\\mathcal Q}(A,H)$ and $\\operatorname{Map}_{\\mathcal R}(G,G)\\xrightarrow{\\eta^*}\\operatorname{Map}_{\\mathcal R}(pA,G)$. The lower map sends $1_G$ to $\\eta$, with its unit homotopy. Both vertical maps are Kan fibrations by [lem-coef-infinity-inner-mapping-fiber]. The fiber $\\mathcal F_G$ is a quasicategory: any inner horn in it is an inner-horn problem for $p_K$ over the constant simplex at $G$, whose filler remains in the degreewise fiber. By the definition of right-pinched mapping spaces in [def-cbc-enhanced-diagrams-cones], an $n$-simplex of the strict fiber of the left vertical map over $1_G$ is a map $\\Delta^{n+1}\\to\\mathcal Q$ whose initial face is constant at $A'$, whose last vertex is $H$, and whose entire image in $\\mathcal R$ is constant at $G$. These are exactly the $n$-simplices of $\\operatorname{Map}_{\\mathcal F_G}(A',H)$, with identical operators. Apply [lem-coef-kan-pullback-path-comparison] with $u$ this left vertical Kan fibration between Kan complexes and $v:\\Delta^0\\to\\operatorname{Map}_{\\mathcal R}(G,G)$ the vertex $1_G$: the constant-path inclusion identifies that strict fiber with the path-space homotopy fiber $\\operatorname{hofib}_{1_G}$. Next let $P$ be the path-space homotopy fiber product of the right vertical map and $\\eta^*$, with its projection $\\pi:P\\to\\operatorname{Map}_{\\mathcal R}(G,G)$; the homotopy-pullback hypothesis says that the canonical map $\\operatorname{Map}_{\\mathcal Q}(A',H)\\to P$ over $\\operatorname{Map}_{\\mathcal R}(G,G)$ is a weak homotopy equivalence. By [lem-coef-spaces-homotopy-fiber-detection], with $v$ the identity and the identity homotopy, it induces a weak homotopy equivalence $\\operatorname{hofib}_{1_G}(\\text{left})\\to\\operatorname{hofib}_{1_G}(\\pi)$. Unwinding the path-space model, $\\operatorname{hofib}_{1_G}(\\pi)$ is the space of points of $\\operatorname{Map}_{\\mathcal Q}(A,H)$ with a path from their image to $\\eta^*(1_G)$; the unit homotopy $\\eta^*(1_G)\\simeq\\eta$, concatenated in the Kan complex $\\operatorname{Map}_{\\mathcal R}(pA,G)$, identifies this with the homotopy fiber over $\\eta$ of the right vertical map. Explicitly the forward comparison sends a map in the strict fiber to its precomposition with $\\lambda$ and the base path supplied by the unit and composition triangle; this is the formula in the statement. The relative Kan and strict-fiber comparisons commute with the simplicial coordinate maps, and the constant-path comparison is natural because it is defined degreewise by inserting constant paths. For a map $H\\to H'$ the composition calculus of [lem-cbc-simplicial-composition-spine] supplies $(h' h)\\lambda\\simeq h'(h\\lambda)$, natural under $p_K$, and its higher simplices supply the same equation for all parameter families. Consequently these comparisons are natural in $H$, including their homotopies and base paths.",
+   "text": "Write $\\mathcal Q=\\operatorname{Fun}(K,E)$, $\\mathcal R=\\operatorname{Fun}(K,B)$, $A'=\\eta_!A$, and fix $H\\in\\mathcal F_G$. Put $M'=\\operatorname{Map}_{\\mathcal Q}(A',H)$, $M=\\operatorname{Map}_{\\mathcal Q}(A,H)$, $N'=\\operatorname{Map}_{\\mathcal R}(G,G)$, $N=\\operatorname{Map}_{\\mathcal R}(pA,G)$. These are Kan complexes by [lem-cbc-enhanced-functor-cone-calculus]. By [lem-coef-infinity-cocartesian-mapping-criterion], the square $M'\\to M$ over $N'\\xrightarrow{\\eta^*}N$ is a homotopy pullback, with its composition homotopy. Both vertical maps are Kan fibrations by [lem-coef-infinity-inner-mapping-fiber], since $p_K$ is inner. The strict fiber $\\mathcal F_G$ is a quasicategory: fill each inner horn using $p_K$ over the constant simplex at $G$. In the right-pinched definition of [def-cbc-enhanced-diagrams-cones], a simplex in the strict fiber of $M'\\to N'$ over $1_G$ is a simplex $\\Delta^{n+1}\\to\\mathcal Q$ with initial face constant at $A'$, last vertex $H$, and entire image in $\\mathcal R$ constant at $G$. These are exactly the simplices of $F=\\operatorname{Map}_{\\mathcal F_G}(A',H)$, with the same operators. The strict-fiber comparison of [lem-coef-kan-pullback-path-comparison], applied to the Kan fibration $M'\\to N'$ and $\\{1_G\\}\\to N'$, therefore says that the square $F\\to M'$ over $\\Delta^0\\xrightarrow{1_G}N'$ is a homotopy pullback.",
    "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
     "lem-coef-infinity-cocartesian-mapping-criterion",
     "lem-coef-infinity-inner-mapping-fiber",
     "def-cbc-enhanced-diagrams-cones",
-    "lem-coef-kan-pullback-path-comparison",
-    "lem-cbc-simplicial-composition-spine",
-    "lem-coef-spaces-homotopy-fiber-detection"
+    "lem-coef-kan-pullback-path-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "HTT Lemma 2.4.4.1 and Propositions 2.4.4.2-2.4.4.3, with the cocartesian dual of the mapping square. The degreewise strict fiber is computed here; its homotopy-fiber comparison and coherent composition are the cited existing theorems."
+    "place": "Lemma 2.4.4.1 and Proposition 2.4.4.3, dual; degreewise calculation of the strict fiber."
+   }
+  },
+  {
+   "text": "Place the two squares of Step 4 side by side, with top row $F\\to M'\\to M$ and bottom row $\\Delta^0\\xrightarrow{1_G}N'\\xrightarrow{\\eta^*}N$. The specified-homotopy pasting assertion of [lem-coef-infinity-homotopy-pullback-pasting] applies: the right square and the left square are homotopy pullbacks. Hence the outer rectangle is a homotopy pullback. Its comparison map is exactly\n$$F\\longrightarrow\\operatorname{hofib}_{\\eta}(M\\longrightarrow N).$$\nHere the unit homotopy $\\eta^*(1_G)\\simeq\\eta$ and the square's composition homotopy are concatenated as prescribed by the cited pasting assertion; these unit and composition homotopies are supplied by [lem-cbc-simplicial-composition-spine]. Thus the comparison sends $h:A'\\to H$ to $h\\lambda$ with its specified base path to $\\eta$, and is a weak equivalence. This is the displayed formula, with its precomposition map, rather than an unidentified equivalence between its two spaces.",
+   "uses": [
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "Kerodon Proposition 3.4.1.11 (0110), specified-homotopy pasting, applied at the identity vertex; HTT Proposition 2.4.4.2, cocartesian dual."
+   }
+  },
+  {
+   "text": "The formula is natural in $H$. Apply [lem-coef-infinity-hom-bifunctor-functoriality] to $p_K:\\mathcal Q\\to\\mathcal R$ and to the inclusion $\\mathcal F_G\\to\\mathcal Q$, enlarging the containing universe if necessary. Their induced mapping-space maps assemble to coherent natural transformations, whose covariant action is postcomposition. The spine calculus [lem-cbc-simplicial-composition-spine] makes the square in Step 4 natural in this variable: for $a:H\\to H'$, its comparison is $a(h\\lambda)\\simeq(ah)\\lambda$, with its image under $p_K$ and all higher parameter simplices. Taking the fixed fiber is restriction of these diagrams to the constant identity vertex; the strict-fiber identification is degreewise. The constant-path inclusions of [lem-coef-kan-pullback-path-comparison] commute with every map of the diagrams, since they insert the constant path at the common image. Consequently the pasted comparison in Step 5 is a coherent natural transformation with precisely these composition paths. Each of its components is an equivalence by Step 5; the componentwise equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] makes it a natural equivalence of space-valued diagrams.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/046J",
+    "place": "Kerodon Corollary 8.3.5.8 (046J), Remark 8.3.5.9, and composition of morphisms (01PF)."
    }
   },
   {
@@ -113,36 +137,34 @@
    }
   },
   {
-   "text": "To assemble comparisons of different parenthesizations, use induction on the dimension of the comparison data. For a fixed base simplex $\\sigma$ and source $A$, every parenthesized composite of its cocartesian lifts is itself a lift of the long edge with source $A$, by Step 5 applied to its triangles; Step 6 supplies those triangles and their higher witnesses over $\\sigma$. Thus all parenthesizations are initial objects in the SAME $L(A,\\sigma|_{\\{0,n\\}})$. Let $Z$ be its full subcategory of initial objects. By [lem-cbc-enhanced-functor-cone-calculus], $Z$ is a contractible Kan complex. Since $Z$ is a Kan complex, $Z\\to\\Delta^0$ is a right fibration whose only fiber $Z$ is a weakly contractible Kan complex, so [lem-coef-right-fibration-contractible-fibers] makes it a trivial Kan fibration: it lifts every boundary $\\partial\\Delta^r\\hookrightarrow\\Delta^r$. For comparison dimension zero choose the prescribed vertices (the lifts); in dimension one fill the two-vertex boundary to choose the comparison with its lift triangle; in dimension two fill the three-edge boundary to compare the composite of two comparisons with the direct comparison. In particular the two paths comparing a threefold transport with the direct long-edge lift have a specified homotopy. The operations on a proper-face comparison are explicit. For a prefix lift $l:A\\to x$ and a comparison triangle $cu\\simeq u'$ between lifts $u:x\\to y$, $u':x\\to y'$, retain the triangle $c(ul)\\simeq(cu)l\\simeq u'l$, using [lem-cbc-simplicial-composition-spine]. For an omitted final base edge $g$, take cocartesian lifts $m:y\\to z$ and $m':y'\\to z'$ of $g$. The equivalence $c$ in the strict intermediate fiber is cocartesian: its inverse-triangle witnesses make precomposition with $c$ a homotopy equivalence on all mapping spaces by the same spine calculus, and its base edge is an identity, so [lem-coef-infinity-cocartesian-mapping-criterion] applies. Step 5 makes $m'c$ cocartesian. Thus $m$ and $m'c$ are initial lifts in $L(y,g)$ by [lem-coef-infinity-cocartesian-composition-initiality]. Choose their comparison $d:z\\to z'$ retaining the triangle $dm\\simeq m'c$. Its composite with the earlier triangle gives $d(mu)\\simeq(m'c)u\\simeq m'(cu)\\simeq m'u'$. Repeating this for the omitted suffix and then using the prefix calculation puts both comparison endpoints and their retained triangles over the same long base edge with source $A$. The lifted base simplex from Step 6 supplies the prescribed base composition triangles in these equations. Step 5 keeps every endpoint lift initial in this same $L$. In dimension $r>2$, perform this operation on all previously chosen proper faces. On their intersections use the already fixed lower-dimensional data and the relative parameter fillers of Step 6, so they satisfy the simplicial identities and give a map $\\partial\\Delta^r\\to Z$; its filler provides the next associativity compatibility. Degenerate comparisons are the degeneracies of the already chosen data and are kept fixed. When the chosen realizations of a lifted base simplex differ, first use the relative parameter extension in Step 6 to compare the whole realizations, keeping their prescribed spine data; then perform this same boundary-filling induction on their long-edge lifts. This constructs all higher comparisons, including units and associativity, from explicit boundary problems, and the fillers remain in the lift category, so their commuting triangles are part of the data. No coefficient category, limits of $K$-diagrams, or straightening theorem enters.",
+   "text": "For compatibility among all base simplices, realize the transport data by actual lifted simplices. For $\\sigma:\\Delta^n\\to\\mathcal R$ and $A_0\\in\\mathcal Q$ over $\\sigma(0)$, let $\\operatorname{Lift}(\\sigma,A_0)$ have as $r$-simplices the marked maps $(\\Delta^n)^\\sharp\\times(\\Delta^r)^\\flat\\to\\mathcal Q^c$ over $\\sigma\\circ\\mathrm{pr}_1$, constant at $A_0$ on $\\{0\\}\\times\\Delta^r$. Apply [lem-coef-infinity-marked-initial-vertex] to $q$ of Step 8 with $U=\\{0\\}^\\sharp$, $T=\\partial\\Delta^r$, $T'=\\Delta^r$: every $\\partial\\Delta^r\\to\\operatorname{Lift}(\\sigma,A_0)$ extends over $\\Delta^r$ for all $r\\geq0$, so $\\operatorname{Lift}(\\sigma,A_0)$ is a nonempty contractible Kan complex. With $U=(I^n)^\\sharp$ the same holds for lifts with a prescribed spine of chosen transports. All edges of a lift are marked, hence $p_K$-cocartesian. An operator $\\alpha:[m]\\to[n]$ restricts a lift over $\\sigma$ to a lift over $\\sigma\\alpha$ starting at its vertex $\\alpha(0)$, strictly compatibly with composition; so lifts over all base simplices and faces form one simplicial system and nothing chosen independently is glued. Over a $2$-simplex with spine $\\eta,\\theta$ a lift with spine $(\\lambda,\\mu)$ is a triangle $(\\lambda,\\mu,\\nu)$ of Step 7; degenerate lifts (Step 3) give the units, and lifts over higher simplices give associativity and all higher data, each in a contractible space. The direct lift $\\delta$ and $\\nu$ are initial in $L(A,\\theta\\eta)$ by [lem-coef-infinity-cocartesian-composition-initiality], and by [lem-cbc-enhanced-functor-cone-calculus] their comparisons with lift triangle form a contractible Kan complex, mapped to one another by face restriction. Thus the Step 7 comparisons extend, up to contractible choice, to a coherent system of lifted simplices over their specified base simplices.",
    "uses": [
-    "lem-cbc-enhanced-functor-cone-calculus",
-    "lem-coef-right-fibration-contractible-fibers",
-    "lem-cbc-simplicial-composition-spine",
-    "lem-coef-infinity-cocartesian-mapping-criterion",
-    "lem-coef-infinity-cocartesian-composition-initiality"
+    "lem-coef-infinity-marked-initial-vertex",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-enhanced-functor-cone-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Remark 2.4.1.9, dual, with the boundary-filling construction in the contractible Kan subcategory of initial lifts; parameter extension was established in Step 6."
+    "place": "Proposition 3.1.2.3, dual, applied to the marked initial-vertex and spine inclusions of Step 8 with parameter boundaries; Proposition 2.4.1.7 and Corollary 2.4.1.6, duals, for the initial lifts. No straightening is invoked."
    }
   },
   {
-   "text": "For completeness, when $H$ lies over $G'$ rather than $G$, apply [lem-coef-infinity-cocartesian-mapping-criterion] to $\\lambda$ with this same test object $H$. Taking the left vertical homotopy fiber at $\\theta:G\\to G'$ identifies $\\operatorname{hofib}_{\\theta}(\\operatorname{Map}_{\\mathcal Q}(A',H)\\to\\operatorname{Map}_{\\mathcal R}(G,G'))$ with $\\operatorname{hofib}_{\\theta\\eta}(\\operatorname{Map}_{\\mathcal Q}(A,H)\\to\\operatorname{Map}_{\\mathcal R}(pA,G'))$. Combining this with the fiber formula for $\\mu$ gives the successive-precomposition equivalence whose compatibility is required. The point $\\theta\\eta$ includes the specified base composition triangle. The compatibility with mapping-space precomposition uses these very triangles. With the notation of Step 5, for $H\\in\\mathcal F_{G'}$ and $h:(\\theta\\eta)_!A\\to H$, the comparison triangle gives the homotopy\n$$h\\delta\\simeq(hc)\\nu\\simeq((hc)\\mu)\\lambda.$$\nIts image in $\\mathcal R$ is the specified base composition triangle, so taking the path-space homotopy fibers keeps the prescribed path over $\\theta\\eta$. The precomposition functors associated with a coherent simplex and its faces, units and associativity homotopies are supplied by [lem-cbc-simplicial-composition-spine]; apply it in $\\mathcal Q$ and in $\\mathcal R$ and use its naturality in the simplicial functor $p_K$. Hence an $r$-simplex of comparison data built in Steps 6-7 produces the matching $r$-fold homotopy of these precomposition maps, with precisely the face and degeneracy equations of that simplex. Postcomposition by a morphism $H\\to H'$ gives the same equations by the same composition calculus. The constant-path strict/homotopy-fiber comparison of [lem-coef-kan-pullback-path-comparison], applied to the relative Kan fibrations exactly as in Step 4 together with [lem-coef-spaces-homotopy-fiber-detection], is defined degreewise and hence natural in commutative squares and carries these equations to the equivalences of Step 4. This proves their compatibility with successive transport as maps of spaces with coherent homotopies, not merely as bijections on components.",
+   "text": "These comparisons respect the mapping formula. Use the notation of Step 7: $\\lambda:A\\to A'$, $\\mu:A'\\to A''$, their long edge $\\nu$, a direct lift $\\delta:A\\to(\\theta\\eta)_!A$, and the comparison $c:A''\\to(\\theta\\eta)_!A$ with its triangle $c\\nu\\simeq\\delta$. For $h:(\\theta\\eta)_!A\\to H$ in the final fiber, [lem-cbc-simplicial-composition-spine] gives\n$$h\\delta\\simeq(hc)\\nu\\simeq((hc)\\mu)\\lambda.$$\nThe base of this homotopy is the specified composite triangle for $\\theta\\eta$, because the lifted triangle lies over it. More generally apply the mapping-square criterion [lem-coef-infinity-cocartesian-mapping-criterion] to $\\lambda$ and a test object over $G'$. Paste with the path-space fiber over $\\theta:G\\to G'$ by [lem-coef-infinity-homotopy-pullback-pasting], exactly as in Steps 4-5. This identifies the fiber at $\\theta$ with the fiber at $\\theta\\eta$; using the formula for $\\mu$ gives successive precomposition. Thus the displayed homotopy is a homotopy of the required fiber maps. For every higher comparison of Step 9, the spine calculus and the coherent Hom-functoriality of [lem-coef-infinity-hom-bifunctor-functoriality] carry its faces and degeneracies to the corresponding higher homotopies of precomposition, including their images under $p_K$. The constant-path comparisons used in Steps 4-6 commute with these maps. This proves compatibility in the space-valued natural equivalences, including units and all higher composition data.",
    "uses": [
     "lem-cbc-simplicial-composition-spine",
-    "lem-coef-kan-pullback-path-comparison",
     "lem-coef-infinity-cocartesian-mapping-criterion",
-    "lem-coef-spaces-homotopy-fiber-detection"
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "The composition diagrams in Propositions 2.4.4.2-2.4.4.3, duals; coherent composition is the cited simplicial-spine calculus (Kerodon 01PF)."
+    "place": "HTT Propositions 2.4.4.2-2.4.4.3, duals, and Kerodon 0110, 01PF and 046J: the specified triangles give the compatibility maps."
    }
   },
   {
-   "text": "If $G$ is constant at $b$, an $n$-simplex of $\\mathcal F_G$ is exactly a map $K\\times\\Delta^n\\to E$ whose image under $p$ is the constant map at $b$. Such maps are precisely the maps $K\\times\\Delta^n\\to E_b$; precomposition with simplicial operators is identical on both sides. Hence $\\mathcal F_G=\\operatorname{Fun}(K,E_b)$ degreewise. For $K=\\Delta^0$ the same definitions identify $p_K$ with $p$ and the formula of Step 4 with the object-level formula. For $K=\\varnothing$, both functor simplicial sets and the relevant fiber are a point, and the formula identifies points. No step used a limit or colimit of a $K$-diagram.",
+   "text": "If $G$ is constant at $b$, an $n$-simplex of $\\mathcal F_G$ is exactly a map $K\\times\\Delta^n\\to E$ whose image under $p$ is the constant map at $b$. Such maps are precisely the maps $K\\times\\Delta^n\\to E_b$; precomposition with simplicial operators is identical on both sides. Hence $\\mathcal F_G=\\operatorname{Fun}(K,E_b)$ degreewise. For $K=\\Delta^0$ the same definitions identify $p_K$ with $p$ and the formula of Step 5 with the object-level formula. For $K=\\varnothing$, both functor simplicial sets and the relevant fiber are a point, and the formula identifies points. No step used a limit or colimit of a $K$-diagram.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones"
    ],
@@ -154,25 +176,25 @@
   }
  ],
  "proof_deps": [
-  "def-coef-infinity-fibrations",
-  "lem-coef-infinity-cocartesian-mapping-criterion",
-  "lem-coef-infinity-cocartesian-composition-initiality",
-  "lem-coef-infinity-marked-cocartesian-lifting",
-  "def-coef-infinity-marked-coanodyne",
-  "lem-coef-marked-anodyne-lifting-calculus",
   "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-marked-coanodyne",
   "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-coef-infinity-inner-mapping-fiber",
-  "lem-coef-kan-pullback-path-comparison",
   "lem-cbc-simplicial-composition-spine",
-  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-infinity-marked-cocartesian-lifting",
   "lem-coef-infinity-marked-initial-vertex",
-  "lem-coef-right-fibration-contractible-fibers"
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-marked-anodyne-lifting-calculus"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-  "place": "Repair: expand HTT 3.1.2.1 by its marked lifting and pushout-product proof (3.1.1.6, 3.1.2.3); use 2.4.4.1-2.4.4.3 and 2.4.1.6-2.4.1.9, duals; write relative boundary extension and the induction for coherent comparisons. HTT read online; no archive in literature/."
+  "place": "Expanded opposite-category argument for HTT 3.1.2.1 from marked lifting and 3.1.2.3; mapping formula from Kan strict-fiber comparison and Kerodon 0110; coherent transport from contractible spaces of marked lifted simplices (Step 9). Sources read online, archival copies WANTED."
  },
  "mathlib_searches": [
   {
@@ -265,10 +287,45 @@
    "results": "CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.postcompose; CategoryTheory.Functor.IsStronglyCocartesian.of_comp; CategoryTheory.Functor.RightExtension.postcompose₂; CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtensionAt.postcompose; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension.postcompose; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.postcompose; CategoryTheory.Functor.IsCocartesian.fac; CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian",
    "date": "2026-10-17",
    "verdict": "no match: returned declarations are ordinary-category Kan-extension or cocartesian facts, not the stated quasicategorical theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by a cocartesian fibration of quasicategories induces a cocartesian fibration on functor quasicategories with pointwise cocartesian edges",
+   "results": "{\"t\": \"2026-10-17T07:21:46Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition by a cocartesian fibration of quasicategories induces a cocartesian fibration on functor quasicategories with pointwise cocartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_comp_map\", \"CategoryTheory.Functor.IsStronglyCocartesian.comp\", \"CategoryTheory.Functor.IsCocartesian.fac\"], \"digest\": \"4ab3974bcf65fac2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are ordinary-category cocartesian or exponentiable-morphism declarations; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-78, whose hypotheses are Category instances and whose conclusions are unique factorizations of hom sets. No quasicategorical cocartesian exponentiation statement; the quasicategory grep and Loogle query found no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|Cocartesian|coCartesian [AlgebraicTopology/Quasicategory]",
+   "results": "{\"t\": \"2026-10-17T07:21:56Z\", \"tool\": \"grep\", \"query\": \"cocartesian|Cocartesian|coCartesian\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are ordinary-category cocartesian or exponentiable-morphism declarations; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-78, whose hypotheses are Category instances and whose conclusions are unique factorizations of hom sets. No quasicategorical cocartesian exponentiation statement; the quasicategory grep and Loogle query found no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exponentiation of a cocartesian inner fibration by a simplicial set preserves cocartesian lifts tested at vertices",
+   "results": "{\"t\": \"2026-10-17T07:21:56Z\", \"tool\": \"leansearch\", \"query\": \"Exponentiation of a cocartesian inner fibration by a simplicial set preserves cocartesian lifts tested at vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.fac_assoc\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.ExponentiableMorphism.OverMkHom\"], \"digest\": \"006735dd7c683406\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are ordinary-category cocartesian or exponentiable-morphism declarations; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-78, whose hypotheses are Category instances and whose conclusions are unique factorizations of hom sets. No quasicategorical cocartesian exponentiation statement; the quasicategory grep and Loogle query found no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Cocartesian\"",
+   "results": "{\"t\": \"2026-10-17T07:21:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Cocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are ordinary-category cocartesian or exponentiable-morphism declarations; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-78, whose hypotheses are Category instances and whose conclusions are unique factorizations of hom sets. No quasicategorical cocartesian exponentiation statement; the quasicategory grep and Loogle query found no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exponentiating a cocartesian inner fibration by an arbitrary simplicial set preserves cocartesian fibrations and coherent transport",
+   "results": "{\"t\": \"2026-10-17T07:21:58Z\", \"tool\": \"leanfinder\", \"query\": \"Exponentiating a cocartesian inner fibration by an arbitrary simplicial set preserves cocartesian fibrations and coherent transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\", \"CategoryTheory.Functor.IsCocartesian.fac_assoc\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\"], \"digest\": \"c508a6595b11ba4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits are ordinary-category cocartesian or exponentiable-morphism declarations; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-78, whose hypotheses are Category instances and whose conclusions are unique factorizations of hom sets. No quasicategorical cocartesian exponentiation statement; the quasicategory grep and Loogle query found no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-grothendieck-limits-colimits",
@@ -281,8 +338,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-pointwise-cocartesian-transport",
   "worker": "stage1",
-  "summary": "Repair rebased onto current DAG: reuse the existing horn/mapping-space criterion and marked-anodyne pushout-product calculus; retain five smaller new nodes for the opposite marked class, its lifting test, mapping fibers, cocartesian composition/initiality, and marked simplex extensions. Derive functor exponentiation by transposing marked lifting squares and reversing the cited product theorem; give relative parameter boundaries and comparison induction for coherence. Explicitly quantify the source vertex in the original lift hypothesis. Second reading narrows the new mapping-space input to HTT Lemma 2.4.4.1, reuses the existing strict/homotopy-fiber theorem, and derives the fiber formula and its naturality in Step 4 instead of repeating that conclusion in a new node.",
-  "blueprint": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim, via the algebra-fibration construction in lem-coef-algebroid-presentability: transport the input coherent diagram along the base cocone and identify mapping spaces over that cocone. Steps 1-9 supply the same coherent-diagram transport and mapping-complex route below this ancestor, not a replacement of a unit step.",
+  "summary": "Q74 rechecks the inherited draft against the current DAG and online HTT/Kerodon. Retains the marked lifting proof of pointwise exponentiation and the relative parameter lifting problems. Replaces the hidden iterated-fiber identification with an explicit application of the existing homotopy-pullback pasting node. Uses the existing Hom-functoriality node for naturality and, after maintainer review, contractible spaces of marked lifted simplices with strict face restriction (Step 9) for compatibility across base faces, rather than an unsupported gluing of independent long-edge comparison spaces. No new nodes; every proof input is an existing statement. The statement, coefficient categories and all target meanings are unchanged.",
+  "blueprint": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim, via the algebra-fibration construction in lem-coef-algebroid-presentability: transport the input coherent diagram along the base cocone and identify mapping spaces over that cocone. Steps 1-11 supply the same coherent-diagram transport and mapping-complex route below this ancestor, not a replacement of a unit step.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -299,12 +356,12 @@
   "lem-cbc-simplicial-composition-spine"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q22-b785da76f",
-  "group": "Q22",
+  "reviewer": "NT-cc-Q74-380600643",
+  "group": "Q74",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-b785da76f (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and the five new nodes in full, plus the statements of every cited node and of the parent citers lem-coef-infinity-grothendieck-limits-colimits (Steps 1-3) and lem-coef-free-operadic-active-slice-formula. HTT is not archived under literature/, so proof_origin=agent and the WANTED line are correct; I checked the citations against HTT Def 3.1.1.1, Prop 3.1.1.6/Rem 3.1.1.10, Props 3.1.2.1 and 3.1.2.3, Lemma 2.4.4.1, Props 2.4.1.5/2.4.1.7 and 2.4.4.2-3, all as duals. The statement is the faithful dual of 3.1.2.1 with the fiber formula; the x-quantifier repair is correct and nothing is weakened. No target, coefficient category or base-change morphism is involved. Small cases checked: K empty, K a point, G constant, identity and product fibrations, B a point. The five new nodes are each true, strictly smaller lemmas, not restatements of the item, and not duplicates: I opened lem-coef-infinity-isofibration-exponentiation (which uses the arrow-space U model), lem-coef-marked-relative-cartesian-model, lem-cbc-spine-inner-anodyne, lem-coef-marked-anodyne-lifting-calculus and others. The new nodes have their records, blueprint references and searches in place. Steps 1-3 and 5-6: the reversal of the four generators, the transposition, the first-edge cancellation hypothesis and the common L(A, long edge) all check out. FIX, in fixes/ for the item only: (1) C1, Steps 4 and 8: the step from homotopy pullback to homotopy fibers now cites the same-unit lem-coef-spaces-homotopy-fiber-detection, with the argument written out. (2) C7, Steps 4 and 8: lem-cbc-right-fibration-space-fiber is replaced by the same-unit lem-coef-kan-pullback-path-comparison. (3) C7, Step 7: lem-cbc-kan-fibration-fiber-criterion is replaced by the same-unit lem-coef-right-fibration-contractible-fibers. proof_deps and tool_uses are updated, and no cycle is introduced. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-composition-spine.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-380600643 (reviewer sub-agent of L); spot-checked: I read the whole item (statement and all 11 steps), the full statement of all 15 cited nodes, and the previous live/side nine-step version for comparison. The statement is unchanged and faithful: the dual of HTT 3.1.2.1 with the 2.4.4.2 mapping-fiber formula. Dropping the pinch-comparison stmt_dep is justified. No target, coefficient category or base-change morphism is involved. Small cases checked: K empty, K=Delta^0, G constant, B a point, p the identity, eta degenerate. Steps 1-8, 10 and 11 check against what the cited statements say. In particular: Step 2's reversal of the marked generators, (ii) with initial edge to (ii) with final edge, (iii) and (iv) fixed, and the vertexwise marking of Q; Step 3 uses the only-if direction of marked-cocartesian-lifting with Q and R quasicategories; Step 4's strict fiber over 1_G is degreewise Map_{F_G}(A',H); Step 5's pasting uses the specified-homotopy clause; Step 7 meets composition-initiality's first-edge hypothesis; Step 8's relative clause takes T = boundary of Delta^r, including r=0. Fault (C3/C4, E5): Step 9 took higher coherence from lem-coef-cocartesian-straightening and then asserted that the straightening's higher cells are realized by the Step 8 lifted simplices and agree with Step 7's triangle-retaining comparisons. The straightening statement gives values, the 1-cells f_!, base change and contractible choices, but nothing about 2-cells or higher cells being lifted simplices, and Step 10 depends on that link. Fix: Step 9 is rewritten (1812 characters) to build the coherent system directly from Lift(sigma,A_0), the marked maps (Delta^n)^sharp x (Delta^r)^flat -> Q^c. By marked-initial-vertex with U={0}^sharp, or U the spine for a prescribed spine, it is a nonempty contractible Kan complex. Face restriction is literal, so nothing chosen independently is glued; composition-initiality and functor-cone calculus give the comparisons to the direct lifts. proof_deps is again the exact union of uses, with straightening removed; proof_origin.place, the summary sentence and the Steps 1-11 wording in split_report.blueprint are updated, and nothing else changed. No new nodes, nothing dropped, no cycle (dependency closures checked), no SGA, route unchanged (only the two already-accepted cbc tool uses). The Mathlib no-match verdict is justified. HTT and Kerodon are not archived, so proof_origin=agent and the WANTED lines are correct. Process note: the side ledger retired the Q74 claim/delivery at 2026-10-17 15:23:48 after a live sync, and the live node is unsplit with stage-2 lean metadata; whether this merge still applies is for the maintainer.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.PointwiseCocartesianTransport",
