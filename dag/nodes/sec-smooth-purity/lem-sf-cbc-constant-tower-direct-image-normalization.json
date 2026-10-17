@@ -22,9 +22,83 @@
   "lem-weil-ringed-tower-pushforward-limit-comparison",
   "lem-weil-pbc-ringed-projection-mate-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the diagram site of [lem-weil-pbc-diagram-site-realization] for the index category $J=\\mathbf N_{\\geq1}^{op}$. The tower category is abelian with exact evaluations by [lem-weil-tower-category-levelwise-abelian]. Choose a K-injective representative $M\\to J_M$ using [prop-pur-kinjective-resolutions-exist]. The functor $\\Delta$ is right adjoint to the exact evaluation $\\operatorname{ev}_1$: a map from a tower to a constant tower is uniquely determined by its component at $1$, and the other components are forced by the transition maps. Hence [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $\\Delta J_M$ K-injective. For the constant coefficient rings, [lem-pe-constant-left-module-inverse-image] identifies module pullback with exact geometric inverse image; its right adjoint is the module direct image of [def-weil-pbc-proetale-operations]. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective] also makes $f_*J_M$ K-injective. On this representative the termwise direct image is literally $f_*\\Delta J_M=\\Delta(f_*J_M)$, and [lem-weil-pbc-kinjective-total-derived] identifies it with the derived termwise direct image. This gives the natural isomorphism $\\chi_{f,M}:\\Delta(Rf_*M)\\xrightarrow{\\sim}R_f^{\\mathcal T}(\\Delta M)$. Evaluating the displayed literal equality at every $n$ gives the identity of $Rf_*M$, proving clause (2).",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070K (lemma-enough-K-injectives-implies); agent specialization to the constant-tower adjunction, using sites.tex Tag 00YV for exact constant-coefficient inverse image."
+   }
+  },
+  {
+   "text": "On the same diagonal K-injective representative, the ordinary inverse limit of the constant tower is $J_M$, so the derived inverse limit $\\mathcal L_X(\\Delta M)$ is canonically $M$, and similarly $\\mathcal L_Y(\\Delta Rf_*M)$ is $Rf_*M$, by the K-injective computation in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The comparison $a_{f,\\Delta M}$ of [lem-weil-ringed-tower-pushforward-limit-comparison] is induced by the underived equality $f_*\\lim=\\lim f_*^{\\mathcal T}$. For a constant tower this equality is the literal identity on $f_*J_M$, and the source and target identifications are the two canonical diagonal limit identifications just described. Therefore $\\mathcal L_Y(\\chi_{f,M})^{-1}\\circ a_{f,\\Delta M}$ is the identity, proving clause (3).",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok), 0A07 (lemma-Rf-commutes-with-Rlim), first proof; agent specialization to constant K-injective towers."
+   }
+  },
+  {
+   "text": "Let $Q_{\\bullet}=(\\underline{P_n}_Y)_n$. Choose a flat-term K-flat representative $K_M\\to M$ by [lem-pc-kflat-resolution], independently of $J_M$ in Step 1. Under [lem-weil-pbc-diagram-site-realization], tensor products and total tensor complexes are computed componentwise: evaluate the sheaf tensor universal property at each diagram index. For any acyclic tower complex $B$, every $B_n$ is acyclic, and $(B\\otimes\\Delta K_M)_n=B_n\\otimes K_M$ is acyclic; exact evaluations detect acyclicity by [lem-weil-tower-category-levelwise-abelian]. Thus $\\Delta K_M$ is K-flat and $(K_M\\otimes_{\\underline A_X}\\underline{P_n}_X)_n$ represents $\\mathcal R_X(M)$ with its quotient augmentation. By [lem-pe-constant-left-module-inverse-image], the exact termwise pullback carries $Q_{\\bullet}$ to $(\\underline{P_n}_X)_n$, compatibly with every quotient map; exactness means that its derived pullback has this same value. Apply [lem-weil-pbc-ringed-projection-mate-exact] to the diagram ringed-topos morphism, $E=\\Delta M$, and $P=Q_{\\bullet}$. Using its canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and precomposing with $\\chi_{f,M}\\otimes1$ identifies its source with $\\mathcal R_Y(Rf_*M)$ and its target with $R_f^{\\mathcal T}\\mathcal R_X(M)$. This is the specified map $h_{f,M}$.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A4 (lemma-pullback-tensor-product), 0B56 (equation-projection-formula-map); componentwise K-flat argument supplied by the reviewer, constant-coefficient pullback from sites.tex Tag 00YV."
+   }
+  },
+  {
+   "text": "Naturality in the coefficient argument and the tensor-unit normalization in [lem-weil-pbc-ringed-projection-mate-exact] applied to the strict quotient map $\\Delta\\underline A_Y\\to Q_{\\bullet}$ give, before taking any inverse limit, the equality of tower morphisms $h_{f,M}\\circ i_{Rf_*M}=R_f^{\\mathcal T}(i_M)\\circ\\chi_{f,M}$. Indeed the projection for the tensor unit is the identity on the diagonal direct image, while the two vertical arrows are exactly the quotient augmentations; the diagonal direct-image identification is the literal map used to define $\\chi_{f,M}$ in Step 1. Thus the displayed equality is the required clause (4), with all maps normalized by the same counit-tensor construction.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map); naturality and tensor-unit specialization of the counit-tensor construction, as stated in lem-weil-pbc-ringed-projection-mate-exact."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-pc-kflat-resolution",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-category-levelwise-abelian",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent argument using Tags 0940, 0941, 0A07, 06YS, 07A4, 0B56 and derived.tex Tags 08BJ, 070K. Supports the compactification-composition normalization needed for blueprint fix-lem-exchanges Step 5; the blueprint does not contain the claimed direct-image-generator or final-normalization paragraphs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +120,66 @@
    "results": "0 hits",
    "date": "2026-10-17",
    "verdict": "no match: Mathlib has no declaration for this tower-level direct-image normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived direct image of a constant strict tower is the constant tower of the derived direct image",
+   "results": "CategoryTheory.instIsConstantObjSheafSheafCompose; CategoryTheory.Sheaf.isConstant_of_forget; generic scheme/direct-limit hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no project-specific tower normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.NatIso, IsIso",
+   "results": "0 hits; parser rejected unknown identifier CategoryTheory.NatIso",
+   "date": "2026-10-17",
+   "verdict": "unavailable: parser rejected identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*tower|derived.*direct.*image|projection.*formula [Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived direct image of a constant inverse system and compatibility with derived inverse limit and projection formula",
+   "results": "CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π; InverseSystem.invLimEquiv_apply_coe; DirectLimit.map₀_def; InverseSystem.limit; generic direct-limit hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic inverse-system declarations only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functor preserves constant diagram inverse system",
+   "results": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.rightDerivedZeroIsoSelf; generic derived-functor hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no constant-tower statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit, CategoryTheory.NatTrans, IsIso",
+   "results": "0 hits; parser rejected unknown identifier IsIso",
+   "date": "2026-10-17",
+   "verdict": "unavailable: parser rejected identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|KInjective|inverse.*system [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right derived functor commutes with constant inverse system",
+   "results": "CategoryTheory.Functor.rightDerived_fac; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.isRightDerivedFunctor_of_inverts; generic right-derived hits",
+   "date": "2026-10-17",
+   "verdict": "no match: generic right-derived API only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-cbc-compact-support-composition-limit",
@@ -73,5 +203,74 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sf-cbc-constant-tower-direct-image-normalization",
+  "worker": "stage1",
+  "summary": "Expanded the constant-tower direct-image normalization into four steps. The split constructs the diagonal derived direct-image isomorphism on the diagram site, checks its evaluation and derived-limit normalization on K-injective representatives, constructs the quotient-tower projection mate by the ringed-site counit-tensor formula, and proves the augmentation equation by its unit normalization. No new DAG nodes were needed. Maintainer-reader repairs: corrected proof provenance and step source locations; distinguished K-flat K_M from K-injective J_M; supplied the existing exact constant-coefficient pullback citation and explicit diagonal K-flat check. Statement unchanged.",
+  "blueprint": "Supplies ordinary constant-coefficient strict-tower infrastructure for fix-lem-exchanges Proof Step 5 (compactification independence and compatibility with composition). Neither master Step 5 nor main-20261015 fix-lem-exchanges.proof.md contains the direct-image-generator/final-normalization paragraphs claimed in the delivery; the argument is agent-supplied from the cited generic statements.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic diagram-site realization is used to model strict towers and their evaluations; the compact-support base-change route has no replacement for this foundational construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic strict-tower derived inverse limit is used to identify limits of diagonal K-injective towers; this is infrastructure for the stated normalization."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic direct-image/limit comparison is used for the canonical map a and its underived normalization on a diagonal tower."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ringed-topos projection mate supplies the counit-tensor map, naturality, and tensor-unit normalization used to define h and prove clause (4)."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor/pullback comparison identifies the diagram-site tensor used in the projection mate with the specified reduction tower."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic K-injective preservation by a right adjoint to an exact functor justifies the diagonal K-injective representative."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of K-injective resolutions is used to choose the representative for the unbounded derived direct image."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic total-derived-functor computation on K-injectives identifies the literal diagonal direct image with R_f^T."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat resolution is used to realize the quotient tensor tower strictly before localization."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic exact inverse image for arbitrary constant rings identifies coefficient pullbacks and makes direct image preserve K-injectives; finite-ring specializations do not cover A."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pc-kflat-resolution",
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-4e1b22d56",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-4e1b22d56 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Corrected proof provenance, distinguished K-flat and K-injective representatives, and supplied constant-coefficient pullback justifications. Statement unchanged. Corrected JSON and review.md written; dependency closure is acyclic and avoids forbidden batch-5 proof nodes.; 1 file(s) fixed by the reviewer"
  }
 }

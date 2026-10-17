@@ -32,9 +32,133 @@
   "lem-coef-day-relative-exponential-model",
   "lem-coef-monoidal-block-projection-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-day-relative-exponential-model], the specified $Q_C$ is the coherent pullback of $p^\\times$, with the stated block Kan transports. We retain this model throughout. By [lem-coef-infinity-presheaf-presentability], $P(C)$ is presentable and admits all small colimits, since $C$ is small. Apply that same statement to the terminal category to obtain small colimits in $\\mathcal S\\simeq P(*)$. All functor categories and the right-fibration classifier are formed in the containing universes; finite products of $C$ and the comma categories below remain small in the input universe.",
+   "uses": [
+    "lem-coef-day-relative-exponential-model",
+    "lem-coef-infinity-presheaf-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Definition 6.14 and Remark 6.15; presheaf presentability as separately cited; agent expansion, online source read, archive WANTED."
+   }
+  },
+  {
+   "text": "Fix $r>0$, $1\\leq k\\leq r$, the other presheaves, a small diagram $G:J\\to P(C)$ in slot $k$, and $z\\in C$. Put $A=(C^{\\mathrm{op}})^r$, $v=c_r^{\\mathrm{op}}:A\\to C^{\\mathrm{op}}$ and $K_z=(v\\downarrow z)$, with objects $(\\mathbf x,v(\\mathbf x)\\to z)$ in $C^{\\mathrm{op}}$. Define the coherent diagram\n$$H:J\\times K_z\\to\\mathcal S,\\qquad H(t,(\\mathbf x,\\gamma))=G(t)(x_k)\\times\\prod_{i\\ne k}F_i(x_i).$$\nBy [lem-coef-space-presheaf-cocompletion], product with a fixed space is a left adjoint. Its preservation of each colimit follows directly by applying its mapping adjunction to the mapping-space colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits]. That node also makes presheaf colimits objectwise. Consequently the pointwise Kan formula of [lem-coef-infinity-space-valued-pointwise-lan] gives\n$$\\star_r(F_1,\\ldots,\\operatorname{colim}_JG,\\ldots,F_r)(z)\\simeq\\operatorname{colim}_{K_z}\\operatorname{colim}_J H\\simeq\\operatorname{colim}_J\\operatorname{colim}_{K_z}H.$$\nThe second equivalence, including its cocone legs, is [lem-coef-infinity-product-colimit-fubini]. The last expression is the value of the required presheaf colimit. These comparisons are coherent in $z$ and the input diagram by the cited statements. Hence they prove separate cocontinuity, including empty $J$ and empty $K_z$. At $r=0$ there is no variable to test. Together with step 1, this proves clause (1).",
+   "uses": [
+    "lem-coef-space-presheaf-cocompletion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "lem-coef-infinity-product-colimit-fubini"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Corollary 6.10 and Remark 6.15, with the full parameter/comma diagram written out; agent expansion, online source read, archive WANTED."
+   }
+  },
+  {
+   "text": "Use [lem-coef-representable-right-fibration-classifier], which concerns arbitrary infinity categories, without a monoidal hypothesis. Let $M:S\\to\\operatorname{Cat}_\\infty$ classify $C^\\otimes$ in the projection-pullback normal form of [lem-coef-monoidal-block-projection-coherence], so $M([r])=C^r$. Pulling back its universal unstraightening gives, by [lem-coef-cocartesian-straightening], a coherent slice-family functor on $C^\\otimes$. At $\\mathbf c\\in C^r$ its value is $(C^r)_{/\\mathbf c}\\to C^r$. On an arrow over $\\alpha:[r]\\to[s]$ represented by $f:M(\\alpha)\\mathbf c\\to\\mathbf d$, it sends a slice arrow $u:\\mathbf x\\to\\mathbf c$ to $f\\circ M(\\alpha)(u)$. This is the classifier's functor on the entire unstraightening; it already includes the composition and higher simplices of this particular $M$. Its product-cone comparison identifies $(C^r)_{/\\mathbf c}$ with $\\prod_i C_{/c_i}$ naturally in the slice parameters.",
+   "uses": [
+    "lem-coef-representable-right-fibration-classifier",
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Corollaries 6.4–6.5 and the first part of the proof of Proposition 6.12; agent expansion, online source read, archive WANTED."
+   }
+  },
+  {
+   "text": "Resolve that product slice into its ordered factors. For a base arrow $\\alpha$ with retained blocks $I_j$, put $b_j=c_{|I_j|}:C^{I_j}\\to C$. The slice-family block with target $d_j$ is the actual square of right fibrations whose top map is\n$$\\prod_{i\\in I_j}C_{/c_i}\\longrightarrow C_{/d_j},\\qquad (u_i:x_i\\to c_i)\\longmapsto f_j\\circ b_j(u_i),$$\nand whose bottom map is $b_j$. For an empty block the top map selects $f_j:\\mathbf1_C\\to d_j$. By the block mapping-space description of [lem-coef-cartesian-operadic-envelope], these squares, for all $j$, give a map in $\\operatorname{RFib}^\\times$ over exactly $\\underline C(\\alpha)$. On every parameter simplex use the slice-family functor of step 3 and its product-cone comparison, then take these same output components. Thus this construction supplies higher simplices as well as arrows. All faces retaining a single block commute with this construction because the slice-family and its product projections are coherent functors, as stated in [lem-coef-representable-right-fibration-classifier]. The remaining composition faces are checked in step 5. The object over $[r]$ is the tuple $(C_{/c_i}\\to C)_i$, which classifies $j^r(\\mathbf c)$.",
+   "uses": [
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-representable-right-fibration-classifier",
+    "lem-coef-day-relative-exponential-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Remark 6.6 and proof of Proposition 6.12: passage from product slices to the ordered tuple of slices; agent expansion, online source read, archive WANTED."
+   }
+  },
+  {
+   "text": "For consecutive arrows with block components $f_j:b_j(\\mathbf c_{I_j})\\to d_j$ and $g_l:e_l(\\mathbf d_{J_l})\\to a_l$, the composite of the displayed slice maps takes $(u_i)$ to\n$$g_l\\circ e_l\\bigl(f_j\\circ b_j(u_i)\\bigr)_{j\\in J_l}.$$\nFunctoriality of $e_l$ rewrites this as $g_l\\circ e_l(f_j)\\circ e_l(b_j(u_i))$. The specified substitution simplex of $M$ identifies the last factor with the operation on the concatenated retained input list, and the first two factors with the component of the original composite arrow. This is exactly the slice image of that composite, not an independently chosen comparison. For any longer chain use the corresponding higher simplex of $M$ inside the coherent slice-family functor of step 3; its faces are the shorter chains just described, by [lem-coef-representable-right-fibration-classifier]. The product comparisons and coordinate projections used here are those specified in [lem-coef-cartesian-operadic-envelope] and [lem-coef-monoidal-block-projection-coherence]; hence discarded inputs are discarded on every face. Unary identities use identity slice maps, and empty blocks use the specified unit slice. We have therefore constructed a coherent functor into $\\operatorname{RFib}^\\times$ over $\\underline C$, and the defining pullback of $Q_C$ gives a functor $j^\\otimes:C^\\otimes\\to Q_C$. Its substitution simplices come from those of $C^\\otimes$ under this actual slice functor, with no comparison to a second Day model.",
+   "uses": [
+    "lem-coef-representable-right-fibration-classifier",
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-day-relative-exponential-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proof of Proposition 6.12; explicit composition and higher-simplex check for the slice construction; agent expansion, online source read, archive WANTED."
+   }
+  },
+  {
+   "text": "For any block functor $b:C^r\\to C$ and tuple $\\mathbf c$, the external product $\\boxtimes_i j(c_i)$ is $j_{C^r}(\\mathbf c)$: mapping spaces of products are their component products. The slice map for $f=\\mathrm{id}_{b(\\mathbf c)}$ corresponds to the transformation\n$$\\eta:j_{C^r}(\\mathbf c)\\longrightarrow j_C(b(\\mathbf c))b^{\\mathrm{op}},\\qquad (u_i)\\longmapsto b(u_i).$$\nBy [lem-coef-infinity-pointwise-yoneda-evaluation], for every $H\\in P(C)$, composition with $\\eta$ identifies\n$$\\operatorname{Map}(j_C(b(\\mathbf c)),H)\\simeq H(b(\\mathbf c))\\simeq\\operatorname{Map}(j_{C^r}(\\mathbf c),Hb^{\\mathrm{op}}).$$\nIndeed evaluation on the tuple of identities sends $\\eta$ to $\\mathrm{id}_{b(\\mathbf c)}$, so these are the maps induced by the actual slice square in step 4. This is the Kan universal property of [lem-coef-infinity-space-valued-pointwise-lan]. It proves that this specific square is $p$-cocartesian, by [lem-coef-day-relative-exponential-model], and gives $\\star_rj^r\\simeq jc_r$. For $r=0$, $C^0=*$ and its representable is the point; evaluation gives the same argument for the unit map selecting $\\mathrm{id}_{\\mathbf1_C}$. No colimits of $C$ or nonempty comma-category hypothesis are used.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "lem-coef-day-relative-exponential-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proof of Corollary 6.4 and Remark 6.11: the representable Kan unit is the slice-arrow map; agent expansion, online source read, archive WANTED."
+   }
+  },
+  {
+   "text": "Any cocartesian arrow over $\\alpha$ differs from a chosen cocartesian lift by a fibre equivalence: the two defining mapping-space pullback properties give inverse comparisons over the identity. This uses the criterion stated in [lem-coef-infinity-pointwise-cocartesian-transport]. For the chosen transport arrow, every block square is the square with $f_j=\\mathrm{id}$ of step 6. The block-transport criterion of [lem-coef-day-relative-exponential-model] therefore makes its image cocartesian in $Q_C$. Composing with a fibre equivalence preserves this property, again by the cited cocartesian-transport statement. Thus $j^\\otimes$ preserves every cocartesian arrow. Its comparisons $\\star_rj^r\\simeq jc_r$ are precisely the mates of its slice squares. Since steps 4–5 constructed a functor on all higher simplices, these comparisons satisfy substitution, grafting and unary identities with the planar projection-pullback convention of [lem-coef-monoidal-block-projection-coherence]. This proves clause (2), including the nullary vertex. The coherences used here are those already belonging to the pullback $Q_C$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-day-relative-exponential-model",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Corollary 6.10 and Proposition 6.16, proved here from the actual representable block squares; agent expansion, online source read, archive WANTED."
+   }
+  },
+  {
+   "text": "Let $\\mathbf c\\in C^r$, $\\mathbf d\\in C^s$ and fix $\\alpha:[r]\\to[s]$. The object case of [lem-coef-infinity-pointwise-cocartesian-transport] identifies the homotopy fibre over $\\alpha$ of the source total mapping space with $\\operatorname{Map}_{C^s}(\\alpha_!\\mathbf c,\\mathbf d)$, and that of the target with $\\operatorname{Map}_{P(C)^s}(\\alpha_!j^r\\mathbf c,j^s\\mathbf d)$. By step 7, the latter source object is $j^s(\\alpha_!\\mathbf c)$, and the fibre map is the map induced by $j^s$: the precomposition square defining the two equivalences commutes since $j^\\otimes$ preserves composition. By [lem-coef-infinity-yoneda-presheaf-limits], $j$ is fully faithful; the product mapping-space formula makes $j^s$ fully faithful, also when $s=0$, where both mapping spaces are points. Hence the map is an equivalence over every $\\alpha$. The base mapping space is the discrete set of arrows in $\\Delta^{\\mathrm{op}}$. Apply [lem-coef-spaces-homotopy-fiber-detection] with the identity map on this base to conclude that the total mapping-space map is an equivalence. This proves clause (3) directly for the functor constructed above.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Full faithfulness via the cocartesian fibre mapping-space formula; agent addition to Proposition 6.16; agent expansion, online source read, archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cartesian-operadic-envelope",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-day-relative-exponential-model",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-infinity-presheaf-presentability",
+  "lem-coef-infinity-product-colimit-fubini",
+  "lem-coef-infinity-space-valued-pointwise-lan",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-monoidal-block-projection-coherence",
+  "lem-coef-representable-right-fibration-classifier",
+  "lem-coef-space-presheaf-cocompletion",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/2006.08269",
+  "place": "Section 6 as specified in source; explicit slice-family construction, substitution check, parameter/comma Fubini diagram and total mapping-space calculation. Sources read online but not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +166,39 @@
    "results": "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean (1-categorical Day convolution via CorepresentableBy of F ⊠ G, lines 180-281; no Yoneda strong monoidality statement); Monoidal/Types/Coyoneda.lean, Monoidal/DayConvolution/DayFunctor.lean, Monoidal/Cartesian/Mon.lean, Monoidal/Cartesian/GrpLimits.lean, Enriched/Ordinary/Basic.lean, Enriched/Basic.lean (1-categorical); no right fibrations or infinity-categorical Day convolution",
    "date": "2026-10-18",
    "verdict": "no match: Mathlib has only 1-categorical Day convolution; no quasicategorical right-fibration model or its monoidal Yoneda embedding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right-fibration Day convolution Yoneda strong monoidal operations preserve colimits",
+   "results": "{\"t\": \"2026-10-17T16:22:40Z\", \"tool\": \"leanfinder\", \"query\": \"right-fibration Day convolution Yoneda strong monoidal operations preserve colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ι_map_tensorHom_eq\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.corepresentableByRight_homEquiv\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.tensorHom_id\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.id_tensorHom\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitRightUnit\", \"CategoryTheory.MonoidalCategory.LawfulDayConvolutionMonoidalCategoryStruct.ι_map_rightUnitor_hom_eq_rightUnitor_hom\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitRightφ\"], \"digest\": \"b35611479fff363d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits; ordinary Category/Type-valued presheaves and ordinary Grothendieck or fibered categories do not assert the quasicategorical universal representable family."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.DayConvolution, CategoryTheory.yoneda, strong monoidal",
+   "results": "{\"t\": \"2026-10-17T16:22:41Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory.DayConvolution, CategoryTheory.yoneda, strong monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `strong`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query parser rejected the identifier; no mathematical absence conclusion from this search."
+  },
+  {
+   "tool": "grep",
+   "query": "DayConvolution|strong monoidal.*Yoneda|Yoneda.*monoidal|right.?fibration",
+   "results": "{\"t\": \"2026-10-17T16:22:41Z\", \"tool\": \"grep\", \"query\": \"DayConvolution|strong monoidal.*Yoneda|Yoneda.*monoidal|right.?fibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: word-boundary search in CategoryTheory has no RFib/right-fibration classifier; broad RSl hits were unrelated substrings. The anonymous ordinary representable Kan instance was read at Mathlib/CategoryTheory/Limits/Presheaf.lean:420; ordinary cocartesian universal properties at FiberedCategory/Cocartesian.lean:55; ordinary Grothendieck construction at Grothendieck.lean:73,232. None is this infinity-categorical statement.",
+   "subdirectory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right-fibration Day convolution on presheaves has separately cocontinuous operations and a fully faithful strong monoidal Yoneda embedding",
+   "results": "{\"t\": \"2026-10-17T16:22:42Z\", \"tool\": \"leansearch\", \"query\": \"A right-fibration Day convolution on presheaves has separately cocontinuous operations and a fully faithful strong monoidal Yoneda embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayConvolution.mk\", \"CategoryTheory.yonedaMonFullyFaithful\", \"CategoryTheory.MonoidalCategory.DayConvolution\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithulι\", \"CategoryTheory.MonoidalCategory.DayConvolution.leftKanExtension\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.convolutions\", \"CategoryTheory.MonoidalCategory.DayFunctor.term_⊛⥤_\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.mkLawfulDayConvolutionMonoidalCategoryStruct\"], \"digest\": \"d65d586aff0d7fdc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the hits; ordinary Category/Type-valued presheaves and ordinary Grothendieck or fibered categories do not assert the quasicategorical universal representable family."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -66,5 +219,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-day-model-yoneda-strong-monoidal",
+  "worker": "stage1",
+  "summary": "Repaired every return point: removed the unproved identification with the separately constructed Day-Yoneda model and all uses of that model and finite-variable restriction. One new generic, nonmonoidal statement-only lemma identifies the universal family of slice right fibrations. Constructed the enhancement in RFib^times using actual slice maps, checked composition and higher simplices through the coherent universal slice family and product cones, recognized the actual block Kan units by Yoneda evaluation, and proved full faithfulness from cocartesian fibre mapping spaces. Added an explicit presentability citation and the full J times comma Fubini diagram. Statement and its dependencies are unchanged; no SGA route.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction: the right-fibration Day pullback, its separately cocontinuous operations, and the strong monoidal fully faithful Yoneda enhancement with planar coherence. The item is a supporting lemma for lem-coef-operadic-day-convolution."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-96a9f8c44",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-96a9f8c44 (reviewer sub-agent of L); spot-checked: Read the item, new classifier node, cited nodes, unit/chapter route, sources, and errors A–F. Verified ordered-block base change, coefficient category, cocontinuity, Yoneda Kan units, planar coherences, cocartesian preservation, full faithfulness, hypotheses, and edge cases. Wrote review.md; no repairs needed."
  }
 }

@@ -20,9 +20,185 @@
   "lem-weil-derived-direct-image-composition",
   "prop-compactification-coherence-detailed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout at $A=A_{E,n}$ with ordinary derived tensor; write $P_v=Lv^*$ and $R_v=Rv_*$, and suppress only the canonical pullback/tensor/direct-image compositors. Use $\\epsilon_o:o_!P_o\\to1$ for an open-adjunction counit, to distinguish it from the proper-adjunction counits defining $\\pi$. All calculations below take place in the ambient unbounded categories. Compactification and composition isomorphisms are used only on bounded-below etale-origin objects, as required in the item. The definitions give the chosen-candidate formulas for $\\operatorname{Ex}_!$ and $\\operatorname{PF}$; the composition theorem gives the witnessed-domain $\\alpha$. We prove the equality first for the displayed $(j,a)$ and $(k,b)$.",
+   "uses": [
+    "def-pur-conventions",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-pbc-etale-origin-witness",
+    "def-exchange-projection",
+    "thm-sf-comp-composition",
+    "lem-weil-derived-direct-image-composition",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Opening paragraph: specified operations; worker expansion of the proper-reduction calculation"
+   }
+  },
+  {
+   "text": "Set $W=\\overline X\\times_B Z$, with $v:W\\to Z$, $i:W\\hookrightarrow C$ and $j_q:P\\hookrightarrow W$. Thus $q=vj_q$, $ti=kv$ and $ij_q=u$. The square $(i,v,k,t)$ is Cartesian. Both $v$ and $t$ are base changes of $a$, hence proper; $i$ and $j_q$ are base changes of the opens $k$ and $j$. All these schemes are finite type over $k$: proper maps are finite type, and finite type is stable under composition and base change. They are Noetherian since a field is Noetherian (its only ideals are $0$ and $k$) and finite type over a Noetherian scheme preserves that property. Opens in a Noetherian scheme are Noetherian and quasi-compact, so $k$ and $i$ are quasi-compact open immersions as required below. Thus $(j_q,v)$ compactifies $q$, and $(u,c)$ compactifies $h$ since $c=bt$ is proper. These are compatible compactifications in the triangle of [lem-sf-composition-projection-mate]. Write $\\Gamma:k_!R_v\\to R_ti_!$ for its normalized proper/open mate. The composition comparison in these coordinates is $\\kappa_{b,t}^{-1}R_b\\Gamma$, with the open compositor $i_!j_{q!}\\cong u_!$ inserted. This uses the description of $\\alpha$ as the normalized triangle mate, not an inversion of $\\Gamma$ on arbitrary inputs.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-compactifications-refinements",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-sf-composition-projection-mate",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-weil-derived-direct-image-composition",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Proper reduction: compatible product compactifications and the composition triangle"
+   }
+  },
+  {
+   "text": "Put $L=R_aH$, $L_0=P_bL$, $F=P_rH$, $E=P_iF$, $K=j_{q!}P_pM$, and $K_D=j_{q!}D$. The open base-change isomorphism is $\\beta:E\\xrightarrow{\\sim}K$. Write\n$$A=\\operatorname{Ex}_{*,a,b,H}:L_0\\to R_tF,\\qquad \\rho_F:P_kR_tF\\xrightarrow{\\sim}R_vP_iF.$$\nHere $\\rho$ is open restriction from [lem-exc-proetale-derived-open-restriction]. It is also $\\operatorname{Ex}_{*,t,k}$: on a K-injective representative its restriction formula has transpose $P_i(\\varepsilon_t)$ under $P_v\\dashv R_v$, exactly the transpose in [def-exchange-projection]. Horizontal mate pasting along $g=bk$ therefore gives\n$$B_0:=\\operatorname{Ex}_{!,f,g,M}=R_v(\\beta)\\,\\rho_F\\,P_k(A):P_kL_0\\to R_vK.$$\nThe last factor $R_v(\\beta)$ is the open factor for the compactification $(j,a)$ of $f$. There is no exchange for $q$ in this formula.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-sf-open-tensor-normalization",
+    "lem-exc-proetale-derived-open-restriction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Proper-reduction mate calculation: exchange pasting along the actual base-change map $g=bk$"
+   }
+  },
+  {
+   "text": "Let $m=i_!K$, $\\chi=\\epsilon_{i,F}\\,i_!(\\beta^{-1}):m\\to F$, and $s=\\Gamma_K\\,k_!(B_0):k_!P_kL_0\\to R_tm$. The needed square has vertical maps $\\epsilon_{k,L_0}$ and $R_t\\chi$, and its equation is\n$$R_t(\\chi)\\,s=A\\,\\epsilon_{k,L_0}.\\tag{*}$$\nHere is the counit check. The normalized $\\Gamma_E$ is the $k_!\\dashv P_k$ adjunct of $\\lambda_E^{-1}$, where $\\lambda_E=P_kR_ti_!E\\xrightarrow{\\rho}R_vP_ii_!E\\cong R_vE$ [lem-sf-proper-open-tensor-compatibility]. Naturality of $\\rho$ and $P_i(\\epsilon_{i,F})$ times the open unit equal to $1_E$ give\n$$\\rho_F\\,P_k\\bigl(R_t(\\epsilon_{i,F})\\Gamma_E\\bigr)=1_{R_vE}.$$\nConsequently $R_t(\\epsilon_{i,F})\\Gamma_E\\,k_!(\\rho_F)$ has open-adjunction transpose $1_{P_kR_tF}$, so equals $\\epsilon_{k,R_tF}$. Substitute the formula for $B_0$ from Step 3, use naturality of $\\Gamma$ with $\\beta$, and use naturality of $\\epsilon_k$ with $A$ to obtain (*). These are adjunction naturality and the triangle identity; no tensor, projection or exchange map is cancelled.",
+   "uses": [
+    "lem-sf-proper-open-tensor-compatibility",
+    "lem-exc-proetale-derived-open-restriction",
+    "lem-sf-open-tensor-normalization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Worker-written explicit open-counit calculation for the proper-reduction mate identity"
+   }
+  },
+  {
+   "text": "Write $\\delta_o$ for the normalized open tensor map with the extended object in the first slot. Identify $P_kJ\\cong N$ by the open unit. Define\n$$\\nu=k_!(\\sigma_{N,P_kL_0})\\,\\delta_{k;N,L_0}\\,\\sigma_{L_0,J}:L_0\\otimes J\\xrightarrow{\\sim}k_!(P_kL_0\\otimes N),$$\n$$\\eta=\\epsilon_{k,L_0}\\otimes1_J:k_!P_kL_0\\otimes J\\to L_0\\otimes J.$$\nThen $\\eta$ is an isomorphism and\n$$\\nu\\eta=\\delta_{k;P_kL_0,J}.\\tag{**}$$\nIndeed, the open tensor maps identify both source and target of $\\eta$ with an object in the fully faithful image of $k_!$. Restriction to $Z$ makes $\\eta$, $\\nu$, and the displayed $\\delta_k$ the identity on $P_kL_0\\otimes N$, with the two symmetries in $\\nu$ cancelling. Full faithfulness of open extension proves (**) and invertibility of $\\eta$. This uses only the normalization and full-faithfulness clauses of the open-tensor lemma.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Worker-written source-side open tensor comparison in the proper-reduction calculation"
+   }
+  },
+  {
+   "text": "The open factor in $\\operatorname{PF}_q$ is\n$$d=\\gamma_{j_q;P_pM,N}:K\\otimes P_vN\\xrightarrow{\\sim}K_D.$$\nDefine $w=i_!(d)\\,\\delta_{i;K,P_tJ}:m\\otimes P_tJ\\to u_!D$. It is related to the displayed $e$ by the explicit equation\n$$w=e\\,(\\chi\\otimes1_{P_tJ}).\\tag{***}$$\nBoth maps in (***) have source canonically isomorphic, by $m=u_!P_pM$ and the open tensor comparison, to $u_!D$, and target $u_!D$. Their restrictions to $P$ are $1_D$: $\\beta$, $d$, the open tensor comparisons and $e$ have that normalization, while the open counit $\\chi$ restricts to the inverse of $\\beta$ followed by the open unit identification. Full faithfulness of $u_!$ therefore proves (***). In particular, $w$ itself is not claimed to be $e$; its source is $m\\otimes P_tJ$, whereas $e$ starts at $F\\otimes P_tJ$.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "def-exchange-projection",
+    "lem-sf-ambient-proper-open-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Worker-written target-side open normalization, including the missing counit"
+   }
+  },
+  {
+   "text": "Set\n$$\\Psi=\\Gamma_{K_D}\\,k_!R_v(d)\\,k_!(\\pi_{v;K,N})\\,k_!(B_0\\otimes1_N):k_!(P_kL_0\\otimes N)\\to R_tu_!D.$$\nBy [def-exchange-projection], these are exactly the exchange $B_0$ and the proper/open factors of $\\operatorname{PF}_q$, followed by the triangle mate of Step 2. Let\n$$z=R_b(\\sigma_{J,L_0})\\,\\pi_{b;J,L}\\,\\sigma_{L,R_bJ}:L\\otimes R_bJ\\to R_b(L_0\\otimes J).$$\nExpanding $\\operatorname{PF}_g$ for $(k,b)$, its open factor is $\\delta_{k;N,P_bL}$. The symmetry immediately after $\\operatorname{PF}_g$ in $T$ changes this factor to $\\nu$. Thus, in the chosen compactification coordinates,\n$$T=\\kappa_{b,t}^{-1}R_b(\\Psi\\nu)\\,z,\\qquad\n\\Omega=\\kappa_{b,t}^{-1}R_b\\bigl(\\pi_{t;F,J}(A\\otimes1_J)\\bigr)\\,z.$$\nThese formulas display both the actual $\\operatorname{Ex}_{*,a,b,H}$ and $\\pi_b$ contributions. They follow by substitution of the specified definitions; no $q$-exchange or $k''$ open factor is inserted into $\\operatorname{PF}_q$.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-sf-composition-projection-mate",
+    "lem-weil-derived-direct-image-composition",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Proper reduction: full expansion of the actual $T$ and $\\Omega$ factors"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-proper-open-projection-mate] to $(i,v,k,t)$ with objects $K$ on $W$ and $J$ on $\\overline Z$. Both vertical maps are proper and both horizontal maps are open by Step 2. Its identity, followed by $R_ti_!(d)$ and using naturality of $\\Gamma$, is\n$$\\Gamma_{K_D}k_!R_v(d)\\,k_!(\\pi_{v;K,N})\\,\\delta_{k;R_vK,J}\n=R_t(w)\\,\\pi_{t;m,J}(\\Gamma_K\\otimes1_J).$$\nPrecompose with $k_!(B_0)\\otimes1_J$. Naturality of $\\delta_k$ in its first input and (**) identify the left side with $\\Psi\\nu\\eta$. Thus\n$$\\Psi\\nu\\eta=R_t(w)\\,\\pi_{t;m,J}(s\\otimes1_J).\\tag{****}$$\nThe projection-mate identity is valid on arbitrary unbounded objects, so no finite Tor-amplitude or constructibility assumption enters this application.",
+   "uses": [
+    "lem-sf-proper-open-projection-mate",
+    "lem-sf-open-tensor-normalization",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Mate identity in the proper-reduction paragraph, now with the typed source and target maps"
+   }
+  },
+  {
+   "text": "Use (***) in (****), naturality of the ordinary projection in its first input $\\chi:m\\to F$, and (*) to calculate\n$$\\begin{aligned}\n\\Psi\\nu\\eta\n&=R_t(e)\\,R_t(\\chi\\otimes1)\\,\\pi_{t;m,J}(s\\otimes1_J)\\\\\n&=R_t(e)\\,\\pi_{t;F,J}(R_t(\\chi)s\\otimes1_J)\\\\\n&=R_t(e)\\,\\pi_{t;F,J}(A\\otimes1_J)\\eta.\n\\end{aligned}$$\nCancel the open-tensor isomorphism $\\eta$ of Step 5. Apply $R_b$, precompose with $z$, and postcompose with $\\kappa_{b,t}^{-1}$. The two expansions in Step 7 and naturality of $\\kappa_{b,t}$ at $e$ give $T=R_c(e)\\Omega$. This is ordinary composition and naturality of the defined maps. Neither a projection map, an exchange map nor $\\chi$ is inverted.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Worker-written final diagram chase after the proper/open projection-mate identity"
+   }
+  },
+  {
+   "text": "Finally compare any original choices defining the forward maps with the displayed choices. The compactification-coherence theorem supplies common refinements and normalized comparisons satisfying the cocycle. The projection-refinement lemma gives the commuting square for each $\\operatorname{PF}$ factor, including the base-changed compactification of $q$. Item 4 of [fix-lem-exchanges] gives that square for $\\operatorname{Ex}_!$ on its witnessed domain. The composition theorem gives independence of $\\alpha$ under those comparisons. Symmetry is natural. Pasting these squares shows that $T$ for the original choices equals the $T$ calculated above after the specified source and target identifications. The calculation applies separately to every displayed pair $(aj,bk)$, so it also proves the assertion for any such pair, without asserting refinement naturality of an unspecified product route. Every compared tensor input has the bounded-below etale-origin witness explicitly required in the item.",
+   "uses": [
+    "prop-compactification-coherence-detailed",
+    "lem-pur-pf-refinement-compatibility",
+    "fix-lem-exchanges",
+    "thm-sf-comp-composition",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Opening coherence paragraph: independence of compactification choices"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pc-fibre-product",
+  "def-pur-conventions",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-etale-origin-witness",
+  "fix-lem-exchanges",
+  "lem-exc-proetale-derived-open-restriction",
+  "lem-pur-pf-refinement-compatibility",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proper-open-projection-mate",
+  "lem-sf-proper-open-tensor-compatibility",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "prop-compactification-coherence-detailed",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Explicit finite-level counit and tensor diagram chase expanding the proper-reduction paragraph; follows its route, supplies its omitted maps"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,7 +244,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-forward-product-symmetry",
@@ -88,5 +264,144 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-finite-product-compactification",
+  "worker": "stage1",
+  "summary": "Repair of returned head 4add8588f3: deleted the vague product-mate node, corrected Ex and PF expansions, wrote the exchange-pasting/counit square and two open tensor equations explicitly, and performed the projection-mate diagram chase. The sole new node now states only PF refinement compatibility.",
+  "blueprint": "prop-pur-affine-space-composition-law Steps 3--4 via the finite forward-product symmetry; realizes the proper-reduction and mate-identity paragraph of the current lem-sf-kunneth-coherence proof.",
+  "tool_uses": [
+   {
+    "node": "def-exchange-projection",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "def-pur-conventions",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "def-weil-compactifications-refinements",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "def-weil-pbc-etale-origin-witness",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "lem-exc-proetale-derived-open-restriction",
+    "why": "Uses the unbounded constant-finite pro-etale restriction rho and lambda, with their canonical normalization; no item-unit node supplies this ambient restriction theorem."
+   },
+   {
+    "node": "lem-sf-ambient-proper-open-pasting",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "lem-sf-composition-projection-mate",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "lem-sf-proper-open-projection-mate",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "lem-sf-proper-open-tensor-compatibility",
+    "why": "Uses its finite ambient normalization of Gamma as the open-adjunction adjunct of lambda inverse; no item-unit node states that normalization."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Uses general horizontal pasting of adjunction mates to factor the ordinary exchange along g=bk; no geometry route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Uses the stated generic operation, geometric stability, normalization or adjunction identity to calculate the finite compactification maps; it does not replace the affine-space unit route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Verifies finite-type and Noetherian hypotheses so the open immersions in the product square are quasi-compact; used only as a general geometric stability fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Verifies finite-type and Noetherian hypotheses so the open immersions in the product square are quasi-compact; used only as a general geometric stability fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Verifies finite-type and Noetherian hypotheses so the open immersions in the product square are quasi-compact; used only as a general geometric stability fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-exchange-projection",
+  "def-pc-fibre-product",
+  "def-pur-conventions",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-etale-origin-witness",
+  "fix-lem-exchanges",
+  "lem-exc-proetale-derived-open-restriction",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proper-open-projection-mate",
+  "lem-sf-proper-open-tensor-compatibility",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "prop-compactification-coherence-detailed",
+  "thm-sf-comp-composition",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q105-eabf86357",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q105-eabf86357 (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, cited DAG statements, blueprint sources, and delivery errors A–F. Verified hypotheses, typed maps, coefficient category, normalized base-change/refinement comparisons, edge cases, duplication, route/tool uses, and all ten proof steps. Wrote review.md; no repairs needed."
  }
 }

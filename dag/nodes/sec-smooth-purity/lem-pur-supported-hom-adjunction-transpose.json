@@ -2,7 +2,7 @@
  "id": "lem-pur-supported-hom-adjunction-transpose",
  "kind": "statement",
  "title": "The supported-Hom identification is the closed-support adjunction transpose",
- "statement": "Fix the finite coefficient ring $A=A_{E,n}$ of [def-pur-conventions]. Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth, def-pc-scheme] and $i:Z\\hookrightarrow X$ a closed immersion [def-weil-closed-immersion]. Work on the small pro-etale site with constant coefficient sheaf $A_X$ and derived category $D(X_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site], with $i_*$ the underived module direct image [def-weil-proetale-module-direct-image] and shifts $(K[a])^r=K^{r+a}$ [def-weil-abstract-derived-category]. Let $C_i:D(A)\\rightleftarrows D(X_{\\mathrm{proet}},A):R\\Gamma_Z$ be the derived adjunction specified in [def-pur-proetale-supported-exterior-product], with $C_i(A)=i_*A_Z$ in degree zero; it is normalized there by requiring that the underived adjoint of $a:M\\to\\Gamma_Z(F)$, precomposed with the quotient $q_i:\\underline M_X\\to C_i(M)$, is the constant-sheaf adjoint of $a$ followed by $\\Gamma_Z(F)\\subseteq\\Gamma(X,F)$. Let $F$ be a bounded-below complex of $A_X$-module sheaves and $a\\in\\mathbf Z$. Identify $H^a_Z(X,F)=H^aR\\Gamma_Z(X,F)$ [def-pur-support-cohomology] with $\\operatorname{Hom}_{D(A)}(A[-a],R\\Gamma_Z(X,F))$ by sending a class to the map carrying $1$ in degree $a$ to a representing cocycle. For $x\\in H^a_Z(X,F)$ let $x^\\flat:C_i(A)[-a]=C_i(A[-a])\\to F$ be its adjoint under $C_i\\dashv R\\Gamma_Z$. Then the natural isomorphism $\\chi^a_{i,F}:H^a_Z(X,F)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(X_{\\mathrm{proet}},A)}(i_*A_Z,F[a])$ of [lem-pur-supported-hom] satisfies\n$$\\chi^a_{i,F}(x)=x^\\flat[a].$$\nEquivalently, both identifications are derived from the same underived bijection $\\operatorname{Hom}(i_*A_Z,M)\\cong\\Gamma_Z(X,M)$, $\\varphi\\mapsto\\varphi_X(q_i(1))$. No finiteness hypothesis on $F$ is imposed.",
+ "statement": "Fix the finite coefficient ring $A=A_{E,n}$ of [def-pur-conventions]. Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth, def-pc-scheme] and $i:Z\\hookrightarrow X$ a closed immersion [def-weil-closed-immersion]. Work on the small pro-etale site with constant coefficient sheaf $A_X$ and derived category $D(X_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site], with $i_*$ the underived module direct image [def-weil-proetale-module-direct-image] and shifts $(K[a])^r=K^{r+a}$ [def-weil-abstract-derived-category]. Let $C_i:D(A)\\rightleftarrows D(X_{\\mathrm{proet}},A):R\\Gamma_Z$ be the derived adjunction specified in [def-pur-proetale-supported-exterior-product], with $C_i(A)=i_*A_Z$ in degree zero; it is normalized there by requiring that the underived adjoint of $a:M\\to\\Gamma_Z(F)$, precomposed with the quotient $q_i:\\underline M_X\\to C_i(M)$, is the constant-sheaf adjoint of $a$ followed by $\\Gamma_Z(F)\\subseteq\\Gamma(X,F)$. Let $F$ be a bounded-below complex of $A_X$-module sheaves and $a\\in\\mathbf Z$. Identify $H^a_Z(X,F)=H^aR\\Gamma_Z(X,F)$ [def-pur-support-cohomology] with $\\operatorname{Hom}_{D(A)}(A[-a],R\\Gamma_Z(X,F))$ by sending a class to the map carrying $1$ in degree $a$ to a representing cocycle. For $x\\in H^a_Z(X,F)$ let $x^\\flat:C_i(A)[-a]=C_i(A[-a])\\to F$ be its adjoint under $C_i\\dashv R\\Gamma_Z$. Then the natural isomorphism $\\chi^a_{i,F}:H^a_Z(X,F)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(X_{\\mathrm{proet}},A)}(i_*A_Z,F[a])$ of [lem-pur-supported-hom], with the following explicit normalization, satisfies\n$$\\chi^a_{i,F}(x)=x^\\flat[a].$$\nHere $\\chi^a_{i,F}$ is the canonical supported-Hom isomorphism obtained by deriving the inverse of the underived evaluation bijection $v_M:\\operatorname{Hom}(i_*A_Z,M)\\to\\Gamma_Z(X,M)$, $v_M(\\varphi)=\\varphi_X(q_i(1))$, and then applying the injective-resolution identification of cohomology of derived Hom with derived-category morphisms [lem-sc-p1-rhom-hom-derived-roof]. Equivalently, both identifications are derived from the same underived bijection $\\operatorname{Hom}(i_*A_Z,M)\\cong\\Gamma_Z(X,M)$, $\\varphi\\mapsto\\varphi_X(q_i(1))$. No finiteness hypothesis on $F$ is imposed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
   "place": "Step 5, \"=\\operatorname{cl}(f)\\boxtimes\\operatorname{cl}(g) by naturality and associativity of supported cup products\": the supported cup product and the exterior product of classes with supports must read classes through the same supported-Hom identification (agent-formulated normalization)."
@@ -17,11 +17,100 @@
   "def-weil-abstract-derived-category",
   "def-pur-proetale-supported-exterior-product",
   "def-pur-support-cohomology",
-  "lem-pur-supported-hom"
+  "lem-pur-supported-hom",
+  "lem-sc-p1-rhom-hom-derived-roof"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=C_i(A)=i_*A_Z$ and $G=\\Gamma_Z(X,-)$. For a sheaf $M$, write $b:A\\to G(M)$ for the underived adjoint of $\\varphi:P\\to M$. The normalization in [def-pur-proetale-supported-exterior-product] says that $\\varphi q_i$ is the constant-sheaf adjoint of $A\\xrightarrow{b}G(M)\\hookrightarrow\\Gamma(X,M)$. Evaluation at $1$ therefore gives $\\varphi_X(q_i(1))=b(1)$. Evaluation at $1$ identifies $\\operatorname{Hom}_A(A,G(M))$ with $G(M)$, with inverse $s\\mapsto(a\\mapsto as)$. Consequently the adjunction gives exactly the bijection $v_M$ displayed in the statement. Its inverse sends $s$ to the adjoint $f_s:P\\to M$ of $a\\mapsto as$. Both maps are additive and $A$-linear; for example the precomposites with the quotient $q_i$ of $f_{s+t}$ and $f_s+f_t$ agree, hence so do these maps. Naturality gives $v_N(k\\varphi)=G(k)v_M(\\varphi)$ for every $k:M\\to N$.",
+   "uses": [
+    "def-pur-proetale-supported-exterior-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+    "place": "Underived normalized adjunction; evaluation of the normalization at 1"
+   }
+  },
+  {
+   "text": "Work in $\\mathcal B=\\Sh(X_{\\mathrm{proet}},A)$ on the chosen small skeleton [def-weil-pbc-proetale-site]. The coefficient ring sheaf is commutative, so [prop-pur-kinjective-resolutions-exist] makes $\\mathcal B$ Grothendieck and [lem-sp-grothendieck-enough-injectives] supplies enough injectives. Apply [lem-sc-bounded-below-injective-resolution] to the given bounded-below $F$ on this small ringed site. Fix a quasi-isomorphism $e:F\\to I$ with $I$ bounded below, termwise injective and K-injective. Clause (2) of [lem-weil-pbc-right-derived-plus-injective] identifies $RG(QI)$ with $Q(GI)$ via the derived unit $\\beta_I:Q(GI)\\xrightarrow{\\sim}RG(QI)$. Thus a supported class $x$ is represented by a cocycle $s\\in G(I^a)$, transported along $\\beta_I$ and $RG(Qe)^{-1}$, as prescribed by [def-pur-support-cohomology]. Here $Q$ denotes localization in the appropriate complex category.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective), 05TH (lemma-injective-acyclic), 05TI (lemma-enough-injectives-right-derived)"
+   }
+  },
+  {
+   "text": "Apply step 1 in each degree of $I$. Naturality with respect to $d_I^r$ gives $v_{I^{r+1}}(d_I^r\\varphi)=G(d_I^r)v_{I^r}(\\varphi)$, so $v_I:\\operatorname{Hom}(P,I)\\to G(I)$ is an isomorphism of cochain complexes. It sends the cocycle $f_s:P\\to I^a$ to $s$. This termwise natural isomorphism derives to the canonical isomorphism between the two right derived functors: by clause (1) of [lem-weil-pbc-right-derived-plus-injective], derive $v$ and $v^{-1}$, and their composites are identities by the uniqueness there, since their precomposites with the derived units are identities. Clause (2) identifies this comparison on $I$ with precisely $Qv_I$. The same computation applies to the underlying additive Hom complex: its cocycles and boundaries are the underlying groups of the displayed $A$-module complex. Hence the derived inverse used to normalize $\\chi$ carries $x$ to the class represented by $f_s$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH, 05TI; uniqueness of the right-derived extension applied to the natural evaluation isomorphism"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-rhom-hom-derived-roof] to $\\mathcal B$, $M=P$, the bounded-below $F$, the resolution $e$ of step 2, and $n=a$. The enough-injectives hypothesis was verified in step 2, and the chosen $I$ has all the stated properties. Its cocycle formula sends the class of $f_s$ to $Qe[a]^{-1}\\circ Q(f_s:P[0]\\to I[a])$. Together with step 3, this computes the normalized supported-Hom map:\n$$\\chi^a_{i,F}(x)=Qe[a]^{-1}\\circ Q(f_s:P[0]\\to I[a]).$$\nThere is no projectivity requirement on $P$ in the cited statement.",
+   "uses": [
+    "lem-sc-p1-rhom-hom-derived-roof"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (derived-Hom cocycle formula) and 070I (lemma-K-injective); the specified cocycle normalization"
+   }
+  },
+  {
+   "text": "Compute the other transpose with the canonical derived adjunction of [def-pur-proetale-supported-exterior-product]. Let $\\widetilde s:A[-a]\\to G(I)$ be the complex map taking $1$ in degree $a$ to $s$. The morphism representing $x$ is $RG(Qe)^{-1}\\beta_I Q\\widetilde s$. By [lem-sc-derived-adjunction-from-underived], the derived counit $\\varepsilon'$ satisfies\n$$\\varepsilon'_{QI}\\circ C_i(\\beta_I)=Q(\\varepsilon^0_I)$$\nafter the canonical exact-$C_i$ localization identifications, where $\\varepsilon^0_I:C_i(GI)\\to I$ is the termwise underived counit. This is exactly its stated counit equation, with the comparison for the exact left functor identified with the identity; the required derived adjunction and comparisons are the ones fixed in the definition. Naturality of $\\varepsilon'$ with respect to $Qe$ therefore gives\n$$x^\\flat=Qe^{-1}\\circ Q(\\varepsilon^0_I)\\circ Q(C_i(\\widetilde s)).$$\nThe complex map $\\varepsilon^0_I C_i(\\widetilde s):P[-a]\\to I$ has only one possibly nonzero component, in degree $a$. That component is the underived adjoint of $A\\to G(I^a)$, $1\\mapsto s$, hence is $f_s$ by step 1. It is a complex map because $G(d_I^a)s=0$ and step 1 is natural in $I^a$.",
+   "uses": [
+    "def-pur-proetale-supported-exterior-product",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors), 09T5 (lemma-derived-adjoint-functors); normalized derived counit on representatives"
+   }
+  },
+  {
+   "text": "Shift the formula of step 5 by $[a]$. With the cochain convention of [def-weil-abstract-derived-category], the map $P[-a]\\to I$ having component $f_s$ in degree $a$ shifts to the map $P[0]\\to I[a]$ having the identical component $f_s$ in degree zero. Shift changes differentials, not the components of a degree-zero complex map. Thus\n$$x^\\flat[a]=Qe[a]^{-1}\\circ Q(f_s:P[0]\\to I[a])=\\chi^a_{i,F}(x)$$\nby step 4. Explicitly, if $s$ is replaced by $s+G(d_I^{a-1})t$, step 1 replaces $f_s$ by $f_s+d_I^{a-1}f_t$. On the unshifted maps $P[-a]\\to I$ this difference has homotopy component $f_t$ in degree $a$, while on $P[0]\\to I[a]$ it has homotopy component $(-1)^a f_t$ in degree zero, since $d_{I[a]}=(-1)^a d_I$. Thus the equality uses exactly the stated cocycle convention for every integer $a$. All maps were obtained from the same natural evaluation bijection, establishing also the equivalent formulation.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Coherent shift convention and explicit boundary homotopy; final comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-proetale-supported-exterior-product",
+  "def-weil-pbc-proetale-site",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-pur-support-cohomology",
+  "lem-sc-p1-rhom-hom-derived-roof",
+  "lem-sc-derived-adjunction-from-underived",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+  "place": "Step 5, supported cup/exterior-product compatibility; explicit normalization argument using Stacks derived.tex Tags 013K, 05TH, 05TI, 06XR, 070I, 070J, 0DVC, 09T5"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -36,10 +125,45 @@
    "results": "0 hits",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedHom|supportedSections|cohomologyWithSupport|supportedCoefficientAdjunction",
+   "results": "{\"t\": \"2026-10-17T16:31:57Z\", \"tool\": \"grep\", \"query\": \"supportedHom|supportedSections|cohomologyWithSupport|supportedCoefficientAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology with supports as Hom from the closed constant sheaf agrees with derived adjunction transpose",
+   "results": "{\"t\": \"2026-10-17T16:31:58Z\", \"tool\": \"leansearch\", \"query\": \"Derived cohomology with supports as Hom from the closed constant sheaf agrees with derived adjunction transpose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Adjunction.derived'\", \"TopCat.Presheaf.pushforwardToOfIso\", \"CategoryTheory.constantSheafΓAdj\", \"CompHausLike.LocallyConstant.counit_app_val\", \"SheafOfModules.PullbackConstruction.adjunction\", \"stalkSkyscraperSheafAdjunction\"], \"digest\": \"89e1fdc98cf125de\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"t\": \"2026-10-17T16:31:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"05a3b8c6fadac431\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The isomorphism from cohomology with closed support to derived Hom out of the closed constant sheaf equals the transpose under the derived supported sections adjunction",
+   "results": "{\"t\": \"2026-10-17T16:31:59Z\", \"tool\": \"leanfinder\", \"query\": \"The isomorphism from cohomology with closed support to derived Hom out of the closed constant sheaf equals the transpose under the derived supported sections adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right\", \"CategoryTheory.Sheaf.ΓHomEquiv\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"digest\": \"0867baeb73809dfc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at one identifies morphisms from a free rank one object to a complex with its cohomology and commutes with a derived adjunction",
+   "results": "{\"t\": \"2026-10-17T16:32:10Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation at one identifies morphisms from a free rank one object to a complex with its cohomology and commutes with a derived adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply\", \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle\", \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_symm_apply\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"CochainComplex.HomComplex.Cochain.fromSingleEquiv\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply\", \"CochainComplex.toSingle₀Equiv\"], \"digest\": \"82ca713e7112b856\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-exterior-product-frame",
@@ -59,5 +183,64 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": null
+ "lean_audit": null,
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-supported-hom-adjunction-transpose",
+  "worker": "stage1",
+  "summary": "Made the supported-Hom evaluation normalization explicit; proved the equality by calculating both sides on the same bounded-below injective resolution and the same underived adjoint. Existing generic DAG tools suffice; no new nodes.",
+  "blueprint": "sk-thm-regular Step 5, last displayed supported-cup/exterior-product identity; supports the morphism/class identification in lem-pur-exterior-product-frame.",
+  "tool_uses": [
+   {
+    "node": "def-pur-proetale-supported-exterior-product",
+    "why": "The definition fixes the actual pro-etale closed-support adjunction and its evaluation normalization; this is the datum explicitly compared by the item. No node of sk-thm-regular supplies this generic interface; no geometric step of the unit is replaced."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic small-ringed-site Grothendieck category theorem supplies the ambient resolution setting. No node of sk-thm-regular supplies this generic interface; no geometric step of the unit is replaced."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic Grothendieck category tool verifies the enough-injectives hypothesis of the derived-Hom computation. No node of sk-thm-regular supplies this generic interface; no geometric step of the unit is replaced."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic bounded-below resolution theorem used for the actual small pro-etale ringed site. No node of sk-thm-regular supplies this generic interface; no geometric step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic right-derived universal property and computation on bounded-below injective complexes. No node of sk-thm-regular supplies this generic interface; no geometric step of the unit is replaced."
+   },
+   {
+    "node": "lem-sc-p1-rhom-hom-derived-roof",
+    "why": "Generic cocycle formula computing derived Hom for an arbitrary object P, without projectivity. No node of sk-thm-regular supplies this generic interface; no geometric step of the unit is replaced."
+   },
+   {
+    "node": "lem-sc-derived-adjunction-from-underived",
+    "why": "Generic canonical derived counit equation, applied to the adjunction already fixed in the definition. No node of sk-thm-regular supplies this generic interface; no geometric step of the unit is replaced."
+   },
+   {
+    "node": "def-pur-support-cohomology",
+    "why": "Specifies the supported sections complex whose cohomology is being compared. No node of sk-thm-regular supplies this generic interface; no geometric step of the unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-proetale-supported-exterior-product",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sc-p1-rhom-hom-derived-roof",
+  "lem-sc-derived-adjunction-from-underived",
+  "def-pur-support-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-47d763d78",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-47d763d78 (reviewer sub-agent of L); spot-checked: Corrected fixes/dag/nodes/sec-smooth-purity/lem-pur-supported-hom-adjunction-transpose.json: created.item incorrectly named lem-pur-exterior-product-frame instead of the delivered item. Full mathematical review is recorded in review.md; no new nodes or mathematical gaps found.; 1 file(s) fixed by the reviewer"
+ }
 }

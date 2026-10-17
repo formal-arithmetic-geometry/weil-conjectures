@@ -12,11 +12,229 @@
   "def-trf-orgogozo-induction-data",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-exc-excellent-ring",
+  "def-kun-topological-krull-dimension",
+  "def-pc-scheme-fibre",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=\\kappa(\\eta_S)$ and $d=\\dim X_K$. The integral generic fibre is of finite type over $K$, so $d$ is finite by [lem-kun-dimension-finite-type]. Apply [lem-sbc-generic-components-split] to $X_K$: it gives a finite separable field extension $L/K$ such that every irreducible component of $X_L$ is geometrically irreducible. This is precisely the field extension used at the start of Orgogozo's proof; it asserts geometric irreducibility, not geometric reducedness.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-sbc-generic-components-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.3.2, first sentence of proof, printed p. 9"
+   }
+  },
+  {
+   "text": "Take the normalization $S_0$ of $S$ in $L$, using [lem-weil-pbc-normalization-in-residue-field-extension] at $\\eta_S$. Its function field is $L$. It is finite: on an affine integral chart $\\operatorname{Spec}R\\subset S$, excellence makes $R$ Nagata by [lem-exc-quasi-excellent-nagata]; the prime $0$ in [def-weil-pbc-nagata-ring] and [def-weil-pbc-japanese-domain] say exactly that its integral closure in the finite extension $L/K$ is a finite $R$-module. This is the affine construction specified by the normalization node. The integral map is dominant, so is surjective: its image is closed (finite maps are proper by [lem-weil-pbc-finite-proper]) and contains $\\eta_S$. It is an alteration. Its finite-type affine coordinate rings are excellent by [lem-exc-finite-type-localization-excellent], hence Noetherian, and finite over a Noetherian quasi-compact base gives a Noetherian scheme by [lem-weil-pbc-finite-type-over-noetherian]. By [lem-trf-closed-dominant-dimension], $\\dim S_0=\\dim S$.",
+   "uses": [
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-proper",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.3.2, normalization of S in the finite generic extension; Stacks 035H, 032R, 032F, 07QV, 07QU and 02JX"
+   }
+  },
+  {
+   "text": "The scheme $X_{S_0}$ is proper over $S_0$ by [lem-weil-pbc-proper-base-change], hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and excellent by the affine form of [lem-exc-finite-type-localization-excellent]. It has finitely many irreducible components by [lem-weil-pbc-noetherian-finite-components]. Give every component its reduced induced structure using [lem-weil-pbc-reduced-induced-closed-subscheme]. The components dominating $S_0$ are the reduced closures $W_i$ of the components of $X_L$: localizing an affine ring at the nonzero elements of the integral base identifies its primes over $0$ with the primes of its generic fibre, so minimal such primes correspond to dominating components. Their generic fibres are geometrically irreducible by Step 1, and have dimension $d$: each reduced component of $X_L$ maps finitely and dominantly to the integral $X_K$ (on an affine chart its ring is a quotient of the finite algebra $A\\otimes_K L$, and $A\\otimes_K L$ is finite free over $A$ on a $K$-basis of $L$, hence flat; [lem-sc-flat-going-down] applied below a minimal prime forces its contraction to be the minimal prime $0$ of the domain $A$), so [lem-trf-closed-dominant-dimension] gives equality. Each $W_i$ is proper over $S_0$ by [lem-weil-pbc-closed-immersion-proper]; its dimension is finite by the same dimension formula, since its function field is finitely generated over $L$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-trf-closed-dominant-dimension",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.3.2, reduced closures of generic components and the vertical components"
+   }
+  },
+  {
+   "text": "For $d\\geq1$, apply [lem-trf-de-jong-geometrically-irreducible-tower] separately to each proper dominant $W_i\\to S_0$. All its excellence, integrality, finite-dimension and geometric-irreducibility hypotheses were checked in Steps 2--3. Write its output as $b_i:T_i\\to S_0$ and $h_i:P_i\\to W_i$, where $P_i\\to T_i$ is a tower of length $d$. If $d=0$, instead take $T_i=W_i$, $P_i=T_i$ and $h_i=1$: the generic fibre of $W_i\\to S_0$ is a zero-dimensional integral finite-type scheme over $L$, hence a finite field spectrum by [lem-pc-dim-zero-finite-over-field]. Thus its generic fibre is finite and [lem-weil-pbc-generic-finite-morphism-open-neighborhood] makes $W_i\\to S_0$ finite over a dense open. It is proper dominant, hence surjective, and so an alteration. The identity is the required length-zero tower.",
+   "uses": [
+    "lem-trf-de-jong-geometrically-irreducible-tower",
+    "lem-pc-dim-zero-finite-over-field",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.3.2, application of de Jong 5.9 and the parenthetical finite-morphism case"
+   }
+  },
+  {
+   "text": "Construct a common integral alteration $T\\to S_0$ explicitly. Form the finite product $R=\\prod_{S_0}T_i$. It is proper over $S_0$: each product projection is a base change of a proper $T_i\\to S_0$, then use composition [lem-weil-pbc-proper-base-change, lem-weil-pbc-proper-composition]. Its generic fibre is the spectrum of the tensor product over $L$ of finitely many nonzero finite field extensions. This tensor product is a nonzero finite-dimensional $L$-algebra (tensor products of nonzero finite-dimensional vector spaces over a field are nonzero). Choose one prime in it and take its reduced closure $T$ in $R$, using [lem-weil-pbc-reduced-induced-closed-subscheme]. Then $T$ is integral, proper over $S_0$ by [lem-weil-pbc-closed-immersion-proper], and dominates $S_0$. Its generic fibre is that single closed point, with residue field finite over $L$. By [lem-weil-pbc-generic-finite-morphism-open-neighborhood] it is finite over a dense open, hence an alteration. Each projection gives $T\\to T_i$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.3.2, sentence taking a common altered base; explicit finite-product construction"
+   }
+  },
+  {
+   "text": "The composite $a:T\\to S_0\\to S$ is proper by [lem-weil-pbc-proper-composition], dominant and integral on sources. Its generic function-field extension is finite, so its generic fibre is finite: its nonempty affine charts have finite-type coordinate domains inside a finite extension of $K$, hence are finite-dimensional fields, and its irreducibility makes it a single point; [lem-weil-pbc-generic-finite-morphism-open-neighborhood] gives finiteness over a dense open of $S$. Thus $a$ is an alteration. The finite-type morphisms $T\\to S_0\\to S$ and [lem-weil-pbc-finite-type-over-noetherian] make $T$ Noetherian. Excellence follows affine locally from [lem-exc-finite-type-localization-excellent]. Finally [lem-trf-closed-dominant-dimension], applied to $a$ with its finite function-field extension, gives $\\dim T=\\dim S$, so in particular $T$ has finite dimension.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Proposition 3.3.1 / Lemma 3.3.2, the final integral altered base; Stacks 02JX"
+   }
+  },
+  {
+   "text": "Pull each tower back along $T\\to T_i$ and write $Q_i=P_i\\times_{T_i}T$. Each curve factor remains proper, flat and of finite presentation by [lem-weil-pbc-proper-base-change], [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence]. Its geometric fibre is a geometric fibre of the original curve, so connectedness, reducedness, pure dimension one and the ordinary-double-point condition persist, directly by their geometric definitions. Thus $Q_i\\to T$ is again a tower of length $d$. The map $Q_i\\to W_i\\times_{S_0}T$ is proper by [lem-weil-pbc-proper-to-separated]: its source is proper over $T$ by composition of the curve factors, and its target is separated over $T$. For length zero these statements hold for the identity tower.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.3.2, replacing the altered bases by a common one and pulling back the towers"
+   }
+  },
+  {
+   "text": "The image of $Q_i\\to W_i\\times_{S_0}T$ contains every point of its generic fibre over $T$. To check this before the final field extension, put $F_i=k(W_i)$, $E_i=k(T_i)$ and $H_i=k(P_i)$. The generic point of $P_i$ induces $F_i\\otimes_L E_i\\to H_i$. Its kernel is a minimal prime: $H_i$ is finite over $F_i$, the image is a field finite over $F_i$, and $F_i\\otimes_LE_i$ is a finite-dimensional $F_i$-algebra. Geometric irreducibility of $(W_i)_L$ says there is just one minimal prime after this field change. Hence the generic point of the irreducible generic fibre of $(W_i)_{T_i}$ lies in the image. The map is proper, as in Step 7, so its image on that generic fibre is closed and therefore is the whole fibre. Surjectivity persists under the field extension $E_i\\to k(T)$ by [lem-weil-pbc-surjective-base-change]. Consequently the closed image of $Q_i$ contains the entire dominating component of $(W_i)_T$. No assertion about its vertical components is used.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.3.2, the unique dominating component after base change; generic-field verification"
+   }
+  },
+  {
+   "text": "Set $Z=X\\times_ST$. This is proper over $T$, hence Noetherian, and has finitely many components [lem-weil-pbc-proper-base-change, lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-noetherian-finite-components]. Let $V\\subset Z$ be the reduced closed union of all components not dominating $T$ [lem-weil-pbc-reduced-induced-closed-subscheme]. Its structure map is proper [lem-weil-pbc-closed-immersion-proper]. Its image is closed and omits the generic point of integral $T$, hence is nowhere dense. The remaining components are precisely the closures of the components of $X_{k(T)}$, each covered by a $Q_i$ from Step 8. Put $P=(\\coprod_i Q_i)\\amalg V$. Its induced map $e:P\\to Z$ is surjective by these two classes of components. It is proper: after every base change a closed subset of a finite disjoint union has image a finite union of closed images; finite type holds on the finitely many summands, and the diagonal is the disjoint union of their closed diagonals together with empty off-diagonal pieces. This checks properness directly from [def-weil-proper-morphism].",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.3.2, adjoining all the vertical components and taking the finite disjoint union"
+   }
+  },
+  {
+   "text": "Supply the finite singular closed subscheme for every curve factor $q:C\\to B$ in the pulled-back towers. Apply [lem-trf-nodal-family-fitting-singular] to this proper flat finitely presented nodal curve. It gives the first-Fitting closed subscheme $D=\\operatorname{Sing}(q)\\subset C$, supported exactly on the nonsmooth locus, with $D\\to B$ unramified. The composite is proper by [lem-weil-pbc-closed-immersion-proper], locally quasi-finite by [lem-weil-pbc-unramified-quasi-finite-at-points], and therefore finite by [pqf-lem-proper-lqf-finite]. Choose this $D$. Its complement $C\\setminus D$ is the relative smooth locus supplied by the same nodal-family statement, so $C\\setminus D\\to B$ is smooth over the base $B$. The geometric fibres are connected reduced schemes of pure dimension one by Step 7, and the ordinary double point condition is the stated completion at the maximal ideal of the geometric fibre local ring. These are precisely the current definition's curve clauses. This works even when $D$ is nonreduced. In conjunction with Step 9, the towers and $V$ make $P\\to T$ exactly an almost plurinodal datum of [def-trf-orgogozo-induction-data]. Each tower has relative dimension $d$ (its length), while $V$ has nowhere dense image.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-lem-proper-lqf-finite",
+    "def-trf-orgogozo-induction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Proposition 3.3.1, tower data; Stacks 0C59 and 0C5B (nodal families), 02LS (proper locally quasi-finite is finite)"
+   }
+  },
+  {
+   "text": "Take the augmented Cech nerve of $e:P\\to Z$: $Y_n=P\\times_Z\\cdots\\times_ZP$ with $n+1$ factors, faces omitting a coordinate and degeneracies repeating one. The fibre-product universal property [def-pc-fibre-product] proves the simplicial identities: both sides of each identity select or repeat exactly the same coordinates. The degree-zero matching map is $e$, proper surjective by Step 9. For $n\\geq1$ the matching object is $P^{n+1}_Z$: its compatible vertices are $n+1$ points of $P$ with common image in $Z$, and every higher face is uniquely the corresponding subtuple. This holds on morphisms from every test scheme, so the universal property makes the matching map an isomorphism. Thus $Y_\\bullet\\to Z$ is a proper hypercover and $Y_0=P$. The products must be over $Z=X_T$ to give this augmentation.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Proposition 3.3.1, coskeleton argument after Lemma 3.3.2; explicit Cech construction over X_T"
+   }
+  },
+  {
+   "text": "Every $Y_n\\to Z$ is proper, by induction on its number of factors using [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition]. As $Z\\to T$ is proper, each $Y_n\\to T$ is proper, in particular of finite type. The Noetherian scheme $T$ is quasi-compact, so [lem-fin-finite-type-fibre-dimension-bound] gives a finite bound on the dimensions of its fibres, separately for each $n$. No common bound in $n$, and no bound by the original $d$, is claimed. Steps 6, 10 and 11 provide all the other clauses of the statement.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Proposition 3.3.1 and Remark 3.3.3; Stacks 0A3V (lemma-morphism-finite-type-bounded-dimension)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-dimension-finite-type",
+  "lem-sbc-generic-components-split",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-exc-quasi-excellent-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-proper",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-closed-dominant-dimension",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-trf-de-jong-geometrically-irreducible-tower",
+  "lem-pc-dim-zero-finite-over-field",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proper-to-separated",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-proper-morphism",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-lem-proper-lqf-finite",
+  "def-trf-orgogozo-induction-data",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-sc-flat-going-down"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+  "place": "Online author PDF, Proposition 3.3.1 and Lemma 3.3.2, printed p. 9; archival PDF WANTED. Explicit common-base construction, generic-field check, singular subschemes and Cech matching calculation added by Q82."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +270,45 @@
    "results": "{\"t\": \"2026-10-17T15:50:08Z\", \"tool\": \"leansearch\", \"query\": \"A proper dominant morphism of excellent integral schemes admits after alteration a proper hypercover whose first term is almost plurinodal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.Cover.add\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\"], \"digest\": \"4213263ed67da94d\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures in work/lem-trf-plurinodal-proper-hypercover.leansearch.txt; the hits concern ordinary scheme properties, normed-ring units, simplicial objects or homological cycles, and do not state this nearby-cycle/alteration assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper dominant scheme morphism over an excellent integral base has a plurinodal alteration after altering the base",
+   "results": "{\"t\": \"2026-10-17T16:19:28Z\", \"tool\": \"leansearch\", \"query\": \"A proper dominant scheme morphism over an excellent integral base has a plurinodal alteration after altering the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsDominant.casesOn\", \"AlgebraicGeometry.IsProper.casesOn\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"4dc19db377bc87ab\"}; Read the returned signatures: No declaration constructs the required alterations or a proper hypercover with semistable degree zero.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "plurinodal|alteration|semistable",
+   "results": "{\"t\": \"2026-10-17T16:19:28Z\", \"tool\": \"grep\", \"query\": \"plurinodal|alteration|semistable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: No declaration constructs the required alterations or a proper hypercover with semistable degree zero.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"plurinodal\"",
+   "results": "{\"t\": \"2026-10-17T16:19:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"plurinodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: No declaration constructs the required alterations or a proper hypercover with semistable degree zero.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically irreducible proper family over an excellent base admits simultaneous alterations of source and base into a tower of projective semistable curves",
+   "results": "{\"t\": \"2026-10-17T16:19:29Z\", \"tool\": \"leanfinder\", \"query\": \"A geometrically irreducible proper family over an excellent base admits simultaneous alterations of source and base into a tower of projective semistable curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.baseChange_nonsingular\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"19179c4d61ccaa6d\"}; Read the returned signatures: No declaration constructs the required alterations or a proper hypercover with semistable degree zero.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "De Jong theorem 5.9: alteration of an excellent proper family with geometrically irreducible generic fibre into a projective plurinodal fibration",
+   "results": "{\"t\": \"2026-10-17T16:20:56Z\", \"tool\": \"leanfinder\", \"query\": \"De Jong theorem 5.9: alteration of an excellent proper family with geometrically irreducible generic fibre into a projective plurinodal fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"d7d5844b96866f11\"}; Read the returned signatures: No declaration constructs the required alterations or a proper hypercover with semistable degree zero.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-orgogozo-good-modification",
@@ -77,5 +330,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-plurinodal-proper-hypercover",
+  "worker": "stage1",
+  "summary": "Retained the statement. Realized Orgogozo 3.3.1/3.3.2 by finite generic component splitting, de Jong diagrams on geometrically irreducible components, an explicit common integral alteration, retention of all vertical components, and the Cech nerve over X_T. Added two statement-only inputs, de Jong 5.9 and Stacks 02JX. Reused existing nodal Fitting singular geometry and proper/quasi-finite finiteness to supply the finite singular loci. The trait-only plurinodal theorem is not applicable. No Lean attachment was found. Revalidated all cited statements against the current DAG after the returned delivery; Step 10 now explicitly checks smoothness over each curve base and the spelled-out geometric curve clauses of the current induction-data definition.",
+  "blueprint": "Realizes the normal-cone-specialization Orgogozo modification input of lem-trf-local-term-locality, through lem-trf-orgogozo-good-modification: Steps 1--9 give the componentwise almost-plurinodal construction of Lemma 3.3.2; Step 10 supplies the explicit tower data; Step 11 realizes the coskeleton sentence of Proposition 3.3.1; Steps 6 and 12 provide dimension and finite-fibre-bound clauses.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of a finite-type scheme over the generic field; a generic dimension tool."
+   },
+   {
+    "node": "lem-sbc-generic-components-split",
+    "why": "Finite separable extension splitting generic components, exactly the first sentence of Orgogozo 3.3.2; the unit has no field-component splitting tool."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Construct the normalization of the base in the finite generic field extension."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Excellence implies Nagata, used to make the normalization finite."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Excellence of the finite normalization, closed components and common alteration."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Canonical reduced closed structures on component closures and vertical unions."
+   },
+   {
+    "node": "lem-pc-dim-zero-finite-over-field",
+    "why": "The generic finite-field fibre in the length-zero case."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Pass from a finite generic fibre to finiteness on a dense open, the definition of an alteration."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "The unramified nodal singular subscheme is locally quasi-finite."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Separate finite fibre-dimension bound for each finite-type Cech term, with quasi-compact base T."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-sbc-generic-components-split",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pc-dim-zero-finite-over-field",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-fin-finite-type-fibre-dimension-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q82-8178c4ab7",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-8178c4ab7 (reviewer sub-agent of L); spot-checked: Reviewed item and both new nodes against Orgogozo Prop. 3.3.1/Lem. 3.3.2, de Jong Thm. 5.9, and Stacks Tag 02JX. All 12 steps, hypotheses, citations, edge cases, route constraints, searches, and duplicate checks pass; no SGA 4/4½ or forbidden batch-5 dependencies. Review written to review.md."
  }
 }

@@ -11,17 +11,91 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces",
   "lem-coef-coherent-nerve-comparison",
+  "lem-coef-simplicial-model-coherent-diagrams"
+ ],
+ "proof": [
+  {
+   "text": "Start with the rigidifications of the given small quasicategories. The Bergner model structure and the coherent-nerve Quillen equivalence in [lem-coef-coherent-nerve-comparison] give cofibrant replacements of the rigidifications. Factor each such cofibrant object to the terminal simplicial category as a trivial cofibration followed by a fibration; the target remains cofibrant and its mapping simplicial sets are Kan. The derived coherent nerve therefore supplies equivalences N_{\\mathrm{hc}}A\\simeq C and N_{\\mathrm{hc}}B\\simeq D. Use the functorial factorizations, so these endpoint choices vary coherently with endpoint functors.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 and Theorem 2.2.5.1; Bergner model structure and coherent-nerve Quillen equivalence"
+   }
+  },
+  {
+   "text": "Put K=N_{\\mathrm{hc}}(A)^{\\mathrm{op}}\\times N_{\\mathrm{hc}}B and I=A^{\\mathrm{op}}\\times B. The product rigidification comparison of [lem-coef-joyal-homotopy-exponentials], followed by the counit comparison for locally Kan simplicial categories in [lem-coef-enriched-diagram-rectification], gives a Dwyer--Kan equivalence u:\\mathfrak C[K]\\to I. Transport H along the endpoint equivalences from Step 1 to a coherent K-diagram p:K\\to\\mathcal S_{\\mathcal U}.",
+   "uses": [
+    "lem-coef-joyal-homotopy-exponentials",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.6 and Proposition 4.2.4.4; product rigidification and transport along equivalences"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-model-coherent-diagrams] and [lem-coef-simplicial-projective-model-calculus] with the Kan simplicial model category of [lem-coef-simplicial-model-nerve-localization], with index I and the Dwyer--Kan equivalence u. Its strict enriched presentation of p gives an enriched functor F:I\\to\\mathsf{sSet}_{\\mathcal U} presenting p. Take a projectively cofibrant replacement followed by a projective fibrant replacement and call the resulting diagram M. Projective fibrations are objectwise, so every M(a,b) is a Kan complex; the fixed universe makes these values \\mathcal U-small. The coherent-nerve comparison in the same theorem gives a coherent equivalence N_{\\mathrm{hc}}M\\simeq p, hence with H after the endpoint transport.",
+   "uses": [
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-coherent-nerve-comparison",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Appendix A.3.3; enriched diagram presentation"
+   }
+  },
+  {
+   "text": "Because M is an enriched functor on A^{\\mathrm{op}}\\times B, its structure maps are strict maps A(a\\prime,a)\\times M(a,b)\\to M(a\\prime,b) and M(a,b)\\times B(b,b\\prime)\\to M(a,b\\prime), with the enriched identity and composition equations. The evaluation and coherent-composition clause of [lem-coef-simplicial-model-coherent-diagrams] identifies these maps, including every transformation simplex, with first-variable precomposition and second-variable postcomposition for p and hence for H. Thus the coherent equivalence preserves both actions, their units, composition simplices, and all higher coherences.",
+   "uses": [
+    "lem-coef-enriched-diagram-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1; enriched evaluation and coherent composition"
+   }
+  },
+  {
+   "text": "All choices used above are functorial replacements and enriched diagram constructions. The naturality clauses of [lem-coef-coherent-nerve-comparison] and [lem-coef-simplicial-model-coherent-diagrams] therefore make the endpoint equivalences, M, and the comparison natural in H, in maps of endpoint infinity-categories, and in any additional small simplicial parameter. Empty categories, empty values, and the point-valued case are included because the same model structures and functorial replacements apply without a nonemptiness hypothesis.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-simplicial-model-coherent-diagrams"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 and Theorem 2.2.5.1; naturality clauses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-joyal-homotopy-exponentials",
   "lem-coef-simplicial-model-coherent-diagrams",
+  "lem-coef-simplicial-model-nerve-localization",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Theorem 2.2.1.2, Corollary 2.2.5.6, Theorem 2.2.5.1 and Proposition 4.2.4.4; explicit two-variable strictification"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "strict Kan valued simplicial bimodule on A opposite times B rectifying a coherent space valued functor with both actions",
-   "results": "No matching construction; hits were SSet.QCat.strictBicategory, CategoryTheory.SimplicialNerve, and ordinary simplicial-category infrastructure.",
+   "results": "Hits: SSet.QCat.strictBicategory; SSet.Augmented; CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂; SSet.StrictSegal; SSet.QCat.bicategory; CategoryTheory.SimplicialNerve. None states the required two-variable rectification.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
@@ -35,41 +109,27 @@
   {
    "tool": "grep",
    "query": "EnrichedFunctor|SimplicialNerve|FunctorCategory in Mathlib/CategoryTheory",
-   "results": "Mathlib/CategoryTheory/Enriched/Basic.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean; these provide ordinary enriched functors and nerves, not the coherent two-variable rectification theorem.",
+   "results": "Hits in Mathlib/AlgebraicTopology/SimplicialNerve.lean:24,28,50,157 and Mathlib/CategoryTheory/Enriched/Basic.lean:299,311,313,315,319; these are ordinary enriched functors and simplicial nerves, not coherent two-variable rectification.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "strict enriched bifunctor from a product of simplicial categories to Kan complexes presents a coherent functor of infinity categories",
-   "results": "Hits were CategoryTheory.EnrichedFunctor, CategoryTheory.SimplicialNerve, and CategoryTheory.SimplicialObject.instEnrichedCategorySSet; none states the required rectification.",
+   "results": "Hits: CategoryTheory.EnrichedFunctor.ctorIdx; CategoryTheory.EnrichedFunctor; CategoryTheory.Enriched.FunctorCategory.functorEnrichedCategory; CategoryTheory.SimplicialThickening.functor; CategoryTheory.SimplicialObject.instEnrichedCategorySSet; CategoryTheory.CatEnriched.instStrict; none states the required rectification.",
    "date": "2026-10-18",
    "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.EnrichedFunctorCategory",
-   "results": "loogle: unknown identifier CategoryTheory.EnrichedFunctorCategory; no hits.",
-   "date": "2026-10-18",
-   "verdict": "no match (unknown identifier)"
   },
   {
    "tool": "leanfinder",
    "query": "a coherent bifunctor from C opposite times D to spaces has a strict enriched Kan valued model on simplicial category models of C and D",
-   "results": "Hits were CategoryTheory.SimplicialNerve and simplicial-object enrichment; no two-variable coherent rectification theorem.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "EnrichedFunctor|SimplicialNerve|FunctorCategory in Mathlib/CategoryTheory",
-   "results": "Ordinary enriched functor and functor-category declarations only; no coherent space-valued bimodule rectification.",
+   "results": "Hits: CategoryTheory.SimplicialObject.instEnrichedCategorySSet; SSet.QCat.catEnrichedOrdinaryCategory; SSet.QCat.strictBicategory; CategoryTheory.SimplicialNerve; CategoryTheory.SimplicialObject.instSimplicialCategorySSet; CategoryTheory.SimplicialCategory; none states the required rectification.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-bimodule-collage",
@@ -93,5 +153,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-strict-bimodule-rectification",
+  "worker": "stage1",
+  "summary": "Audited the imported two-variable strictification statement against the blueprint route and the coherent-nerve, Kan-model, and enriched-diagram nodes. No closed Lean declaration or Mathlib theorem states it. The proof constructs functorial Bergner cofibrant locally Kan endpoint models, transports the coherent bimodule, applies the strict enriched diagram presentation in the Kan model category, and checks that the resulting strict actions and all higher coherences are the transported pre/postcomposition actions. No new DAG nodes were needed; all cited facts are existing nodes. Repair: step 3 now cites the projective model-calculus node for the projective replacement and objectwise fibrancy claims, and the unused statement dependency was removed.",
+  "blueprint": "The steps realize the proof paragraph of prop-coef-integral-exceptional-adjoint that replaces the coherent space-valued bimodule by a strict Kan-valued enriched bimodule before the directed collage construction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-15b541144",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-15b541144 (reviewer sub-agent of L); spot-checked: Step 3 used projective model replacements and objectwise fibrancy without citing lem-coef-simplicial-projective-model-calculus, despite listing it as a statement dependency. The corrected DAG JSON adds that citation and removes the unused statement dependency. All cited statements, route, hypotheses, actions, universes, empty cases, and Mathlib searches were checked; no new nodes or tool_uses are needed.; 1 file(s) fixed by the reviewer"
  }
 }
