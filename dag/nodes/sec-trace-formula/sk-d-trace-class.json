@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "sk-d-trace-class",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-trf-trace-class"
+  ]
  },
  "kind": "definition",
  "title": "Diagonal trace class",
- "statement": "Let $s$ be the spectrum of a field, $X$ quasi-compact and compactifiable\nover $s$, and $K\\in D^b_{ctf}(X,A)$.\nFor $(X,K)$, the diagonal identity is the\nendocorrespondence with support $X$, support map\n$\\Delta_X:X\\to X\\times X$, identity legs, and coefficient map $1_K$.\nFor another endocorrespondence $(C,c,u)$, its intersection with this\ndiagonal is $F=\\Fix(c)=C\\times_{X\\times X}X$. Its trace class\n$\\Tr_c(u):A_F\\to\\omega_F$ is the supported pairing of $u$ against the\ndiagonal identity: the contraction of [sk-d-pairing] applied to the supported\nclasses $\\widetilde u$ of $u$ and of $1_K$, carried out over the Cartesian\nsquare $F=C\\times_{X\\times X}X$, so that it lands directly on $F$:\n\n$$\n\\Tr_c(u)=\\langle u,1_K\\rangle_{\\mathrm{LV}}:A_F\\longrightarrow\\omega_F .\n$$\n\nIt agrees with the Verdier trace class (the mate of $u$ followed by the trace\nmap of external duality, [def-trf-trace-class]) by\n[lem-trf-trace-class-diagonal-pairing].\n\nThis is a class on the specified scheme $F$; integration, when defined,\nis a separate operation.",
+ "statement": "Use the finite-level coefficient and base conventions of [sk-d-setup]\nand the given geometric operations of [sk-d-six]. Thus $s=\\Spec k$,\n$k=\\overline{\\mathbf F}_q$, and $A=\\mathcal O_E/\\varpi^n$, $n\\geq1$,\nwith $\\ell\\ne\\operatorname{char}(k)$. Let $X$ be a geometric scheme,\nquasi-compact and compactifiable over $s$, and let $K\\in D^b_{ctf}(X,A)$.\nFor $(X,K)$, the diagonal identity is the\nendocorrespondence with support $X$, support map\n$\\Delta_X:X\\to X\\times X$, identity legs, and coefficient map $1_K$.\nLet $(C,c,u)$ be an endocorrespondence of [sk-d-corr], with geometric\nsupport $C$, support map $c=(c_1,c_2):C\\to X\\times_sX$, and coefficient\nmap $u:Lc_2^*K\\to Rc_1^!K$. Use the supported-class and pairing data\nof [sk-d-corr] and [sk-d-pairing]: the support maps are compactifiable\nand the exceptional adjunctions and comparisons used in the contraction\nare on $D^b_{ctf}$, as in [sk-d-six]. Its intersection with the\ndiagonal is $F=\\Fix(c)=C\\times_{X\\times X}X$. Its trace class\n$\\Tr_c(u):A_F\\to\\omega_F$ is the supported pairing of $u$ against the\ndiagonal identity: the contraction of [sk-d-pairing] applied to the supported\nclasses $\\widetilde u$ of $u$ and of $1_K$, carried out over the Cartesian\nsquare $F=C\\times_{X\\times X}X$, so that it lands directly on $F$:\n\n$$\n\\Tr_c(u)=\\langle u,1_K\\rangle_{\\mathrm{LV}}:A_F\\longrightarrow\\omega_F .\n$$\n\nIt agrees with the Verdier trace class (the mate of $u$ followed by the trace\nmap of external duality, [def-trf-trace-class]) by\n[lem-trf-trace-class-diagonal-pairing].\n\nThis is a class on the specified scheme $F$; integration, when defined,\nis a separate operation.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/_section.md",
   "place": "node sk-d-trace-class, order 2657"
@@ -16,14 +18,80 @@
   "sk-d-pairing",
   "def-trf-trace-class",
   "lem-trf-trace-class-diagonal-pairing",
-  "sk-d-corr"
+  "sk-d-corr",
+  "sk-d-setup",
+  "sk-d-six"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Lefschetz Verdier trace class of a cohomological correspondence is the supported pairing with the diagonal identity on its fixed point scheme",
+   "results": "8 hits: DerivedCategory.IsLE, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.mem_homologicalKernel_trW_iff, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.Functor.mem_homologicalKernel_W_iff, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE.",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned declarations concern generic derived cohomological bounds or group cohomology, not supported cohomological correspondences or a section on the fixed scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace class on the fixed point scheme of a cohomological correspondence defined by Verdier duality and pairing with the diagonal",
+   "results": "8 hits: LinearMap.trace_comp_comm, LinearMap.trace, LinearMap.trace_transpose', LinearMap.trace_eq_contract_of_basis, LinearMap.traceAux, LinearMap.trace_eq_contract, Submodule.mem_traceDual, LinearMap.trace_conj.",
+   "date": "2026-10-17",
+   "verdict": "No match: the linear-map trace declarations concern finite modules and do not construct a Borel–Moore section on a fixed scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\"",
+   "results": "12 hits: Lean.Macro.trace, Lean.Macro.State.traceMsgs, Lean.Parser.Tactic.bvTrace, Lean.Parser.Tactic.dbgTrace, Lean.Parser.Tactic.dsimpTrace, Lean.Parser.Tactic.dsimpTraceArgsRest, Lean.Parser.Tactic.simpAllTrace, Lean.Parser.Tactic.simpAllTraceArgsRest.",
+   "date": "2026-10-17",
+   "verdict": "No match: the broad trace search returns Lean tracing infrastructure; the qualified MonoidalCategory.trace name search returns no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "traceClass|Verdier|supportedPairing|borelMoore",
+   "results": "25 hits: Mathlib/Tactic/GCongr/Core.lean, Mathlib/Tactic/FunProp/Types.lean, Mathlib/Tactic/FunProp/Types.lean, Mathlib/Tactic/FunProp/Types.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean.",
+   "date": "2026-10-17",
+   "verdict": "No match: the broad grep returns tactic registerTraceClass occurrences only, and the geometric-directory search returns no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomological correspondence has a Borel Moore homology class on its fixed locus obtained by contracting its supported class against the diagonal unit",
+   "results": "8 hits: groupCohomology.infNatTrans_app, groupHomology.H1CoresCoinf_X₁, groupCohomology.H1InfRes_X₁, groupCohomology, groupHomology.single_isCycle₁_of_mem_fixedPoints, continuousCohomology, Rep.FiniteCyclicGroup.groupCohomologyIso₀, groupCohomology.coindIso.",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned declarations concern generic derived cohomological bounds or group cohomology, not supported cohomological correspondences or a section on the fixed scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalCategory.trace\"",
+   "results": "0 hits: .",
+   "date": "2026-10-17",
+   "verdict": "No match: the broad trace search returns Lean tracing infrastructure; the qualified MonoidalCategory.trace name search returns no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|supportedPairing|borelMoore|noncomputable def traceClass",
+   "results": "0 hits: . Searched Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "No match: the broad grep returns tactic registerTraceClass occurrences only, and the geometric-directory search returns no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|supportedPairing|borelMoore|cohomological.correspondence",
+   "results": "19 hits: Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean. Searched Mathlib/CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "No match: all 19 hits are references to Verdier or Verdier localizations, not geometric supported classes or pairings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The local cohomological trace is a morphism from the tensor unit to the dualizing complex of the fixed points of a correspondence",
+   "results": "8 hits: localCohomology.diagram, LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, FGModuleCat.FGModuleCatCoevaluation, CategoryTheory.IsGrothendieckAbelian.tensorObj, Rep.invariantsAdjunction_unit_app, Rep.resCoindAdjunction_counit_app_hom_hom, Rep.invariantsAdjunction_counit_app_hom.",
+   "date": "2026-10-17",
+   "verdict": "No match: results concern algebraic local cohomology, internal Hom of condensed modules, module coevaluation or representation adjunctions."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -66,5 +134,20 @@
     "AlgebraicGeometry.ProEtale.GeometricOperations.traceClass"
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-trace-class",
+  "worker": "stage1",
+  "summary": "Audited the diagonal trace-class definition against the current main-20261015 blueprint, its unit and chapter, the four existing statement dependencies, and the slopmaster2 traceClass declaration. The item is a definition assembled from existing correspondence, supported-pairing, Verdier-trace-class, and diagonal-pairing notions, so no new node or proof step is needed. The source declaration traceClass is complete but only constructs the supported pairing and explicitly says the comparison with supportedPairing is not formalised; it therefore does not attach to the full item. Marked the imported definition split and completed its blueprint metadata. Ran and read the required authentic Mathlib searches in two semantic phrasings, plus LeanSearch, Loogle and geometric-source grep; none states this construction. Recorded def-trf-trace-class under same_as: it defines the same class by the Verdier composite, while this unit records its supported-pairing construction and invokes the existing comparison lemma. Second reading explicitly binds the inherited finite-field coefficient conventions, geometric support, coefficient arrow, and supported-operation domain; no arbitrary-field comparison or ambient exceptional adjoint is asserted. Independently searched Mathlib by local-cohomological-trace terminology and the category-theory sources.",
+  "blueprint": "Realizes the complete definition paragraph of literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/_section.md (node sk-d-trace-class, order 2657), including the diagonal identity, fixed-scheme intersection, supported-pairing trace class, Verdier-trace comparison, and separate integration remark."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-afaa18a67",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-afaa18a67 (reviewer sub-agent of L); spot-checked: I read the item, the unit record and all six statement dependencies in full. I checked them against the current blueprint (main-20261015, identical to main-20261017): sk-d-trace-class order 2657, sk-d-pairing 2652, def-trf-trace-class 2653, lem-trf-trace-class-diagonal-pairing 2662 (statement and the opening of its proof), and sk-d-setup 2610. The node follows the current text: Tr_c(u) is defined as the supported pairing <u,1_K>_LV on F = C x_{XxX} X, it agrees with the Verdier class by the cited lemma, and integration stays a separate operation. The second reader replaced 'spectrum of a field' with the explicit chapter setting (k = F̄_q, A = O_E/ϖ^n, X geometric). sk-d-setup fixes this s for the whole chapter, and every DAG user of the item lies in that setting, so this is a binding, not a narrowing. The report's STATEMENT-DISPUTED heading overstates it: no source error is involved. Specialising sk-d-pairing to D = X, d = Δ, v = 1_K gives E = F, which matches the diagonal case of def-trf-supported-pairing. The comparison lemma's admissibility hypotheses hold automatically for geometric C and X by def-trf-admissibility, and the lemma does not cite the item, so there is no cycle. same_as [def-trf-trace-class] is correct. The item is a definition, so the empty proof and citations are right. There are no new nodes or tool_uses, no SGA citation, and the unit realized fields are correct. I read the slopmaster2 GeometricOperations.traceClass declaration (abstract package G, comparison with supportedPairing not formalised), and declining an exact attachment is defensible. Edge cases checked: C = ∅, u = 0, K = 0, identity correspondence, and X = s with K = A. No fixes were needed."
  }
 }

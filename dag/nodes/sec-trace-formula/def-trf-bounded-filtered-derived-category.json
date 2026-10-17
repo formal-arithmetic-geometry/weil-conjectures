@@ -2,7 +2,7 @@
  "id": "def-trf-bounded-filtered-derived-category",
  "kind": "definition",
  "title": "Bounded filtered constructible derived category",
- "statement": "Let $X$ be a separated finite-type scheme over the algebraic closure $k$ of a finite field and let $A=A_{E,n}$ be the finite constant coefficient ring of [def-trf-coefficient-conventions]. Work in the abelian category of $A_X$-module sheaves on the small pro-étale site specified there. A bounded filtered complex is a bounded cochain complex $M$ with a finite decreasing filtration by subcomplexes $F^pM$, equal to $M$ for sufficiently small $p$ and zero for sufficiently large $p$. Put $\\operatorname{gr}^pM=F^pM/F^{p+1}M$. The bounded filtered derived category $D^bF(X,A)$ is the localization of bounded filtered complexes and filtration-preserving chain maps at maps inducing quasi-isomorphisms on every graded piece; localization means formally inverting those maps. Write $\\omega$ for forgetting the filtration and $\\operatorname{gr}^p$ for the graded-piece functors. Filtration truncation $t^{\\ge p}$ retains the subcomplex $F^pM$ with its induced filtration; $t^{\\le p}$ takes the quotient by $F^{p+1}M$, with its quotient filtration, and $t^{<p}=t^{\\le p-1}$. The full subcategory $D^bF_{ctf}(X,A)$ consists of objects with every graded piece in $D^b_{ctf}(X,A)$ of [def-trf-coefficient-conventions]. Superscripts $[a,b]$ restrict to grades $a\\le p\\le b$. The same filtered construction for complexes of abelian groups is denoted $DF(\\mathbf{Ab})$, without a bound on cochain degrees and with finite filtration. An ordinary complex can be placed in filtration degree zero, by $F^pM=M$ for $p\\le0$ and $F^pM=0$ for $p>0$.",
+ "statement": "Let $X$ be a separated finite-type scheme over the algebraic closure $k$ of a finite field and let $A=A_{E,n}$ be the finite constant coefficient ring of [def-trf-coefficient-conventions]. Use the universe and small-site convention of [def-weil-size-convention]. Let $A_X$ be the constant sheaf of rings [def-weil-pbc-constant-sheaf] on the small pro-étale site specified in [def-trf-coefficient-conventions], and work in the abelian category $\\operatorname{Mod}(A_X)$ of [def-weil-sheaf-of-modules-category]. Cochain complexes, chain maps and quasi-isomorphisms have the meanings of [def-weil-abstract-derived-category]. A bounded filtered complex is a bounded cochain complex $M$ with a finite decreasing filtration $F^pM$ by subcomplexes [def-sp-filtration], equal to $M$ for sufficiently small $p$ and zero for sufficiently large $p$, with both filtration bounds independent of the cochain degree. Bounded means $M^r=0$ outside some finite interval of integers $r$. Put $\\operatorname{gr}^pM=F^pM/F^{p+1}M$. The bounded filtered derived category $D^bF(X,A)$ is the localization of bounded filtered complexes and filtration-preserving chain maps at maps inducing quasi-isomorphisms on every graded piece; localization means the ordinary category obtained by adjoining formal inverses to those maps, subject to the category relations and the inverse relations. Write $\\omega$ for forgetting the filtration and $\\operatorname{gr}^p$ for the graded-piece functors. Filtration truncation $t^{\\ge p}$ retains the subcomplex $F^pM$ with its induced filtration; $t^{\\le p}$ takes the quotient by $F^{p+1}M$, with its quotient filtration, and $t^{<p}=t^{\\le p-1}$. The full subcategory $D^bF_{ctf}(X,A)$ consists of objects with every graded piece in $D^b_{ctf}(X,A)$ of [def-trf-coefficient-conventions]. For integers $a\\le b$, superscripts $[a,b]$ denote the full subcategories whose graded pieces vanish outside $a\\le p\\le b$. At complex level, $t^{\\ge p}M$ has filtration $F^r(t^{\\ge p}M)=F^{\\max(r,p)}M$, and $t^{\\le p}M$ has filtration $F^r(t^{\\le p}M)=(F^rM+F^{p+1}M)/F^{p+1}M$. The same filtered construction for complexes of abelian groups is denoted $DF(\\mathbf{Ab})$, without a bound on cochain degrees and with a finite filtration whose bounds are independent of the cochain degree. An ordinary complex can be placed in filtration degree zero, by $F^pM=M$ for $p\\le0$ and $F^pM=0$ for $p>0$.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tags 05S2 (definition-filtered-derived), 05S4 (definition-filtered-derived-bounded), 05S5 (lemma-filtered-complex-cohomology-bounded); uniformly finite filtration and bounded representatives as in Varshavsky §5.1.1–5.1.2 and §5.2.1(a)",
@@ -14,7 +14,12 @@
   ]
  },
  "stmt_deps": [
-  "def-trf-coefficient-conventions"
+  "def-trf-coefficient-conventions",
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration"
  ],
  "proof": [],
  "proof_deps": [],
@@ -82,10 +87,59 @@
    "results": "8 hits: HomologicalComplexUpToQuasiIso, HasDerivedCategory, HasDerivedCategory.standard, DerivedCategory, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HomologicalComplexUpToQuasiIso.Q, HomologicalComplexUpToQuasiIso.homologyFunctor",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredDerived|filteredDerived|FilteredComplex|filtered quasi-isomorphism",
+   "results": "0 hits: none; read returned signatures; ordinary derived categories, quasi-isomorphisms and filtered colimits do not define the finite-filtered localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Filtered\", \"Complex\"",
+   "results": "2 hits: HomologicalComplex.instHasFilteredColimitsOfSize, SSet.Subcomplex.instPreservesColimitsOfShapeToSSetFunctorOfIsFilteredOrEmpty; read returned signatures; ordinary derived categories, quasi-isomorphisms and filtered colimits do not define the finite-filtered localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded derived category of finite decreasing filtered cochain complexes localized at associated graded quasi-isomorphisms",
+   "results": "8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.IsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory; read returned signatures; ordinary derived categories, quasi-isomorphisms and filtered colimits do not define the finite-filtered localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered derived category of an abelian category with finite filtrations and filtration truncation functors",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.TStructure.t, DerivedCategory.instIsLEObjSingleFunctor; read returned signatures; ordinary derived categories, quasi-isomorphisms and filtered colimits do not define the finite-filtered localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category of bounded filtered complexes at graded quasi-isomorphisms",
+   "results": "8 hits: QuasiIso, HomologicalComplex.quasiIso, HomotopyCategory.quasiIso, quasiIso_comp, HasDerivedCategory.standard, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, HasDerivedCategory; read returned signatures; ordinary derived categories, quasi-isomorphisms and filtered colimits do not define the finite-filtered localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*complex|complex.*filtration|FilteredDerived|filteredDerived",
+   "results": "6 hits: Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean, Mathlib/Algebra/Homology/GrothendieckAbelian.lean; independently read the results. Simplicial subcomplex filtrations, filtered colimits and ordinary derived cohomological bounds do not define the filtered localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Category of filtered cochain complexes with finitely many filtration steps, inverting morphisms that are quasi isomorphisms on subquotients",
+   "results": "8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsLE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory, DerivedCategory.isGE_Q_obj_iff; independently read the results. Simplicial subcomplex filtrations, filtered colimits and ordinary derived cohomological bounds do not define the filtered localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-triangle-compatibility",
@@ -102,5 +156,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-bounded-filtered-derived-category",
+  "worker": "stage1",
+  "summary": "Split the definition by naming the existing module-sheaf, constant-sheaf, universe, cochain/quasi-isomorphism and finite-filtration definitions. Read Varshavsky §§5.1.1–5.1.2 and 5.2.1(a), and Stacks 0121, 05S2–05S6. Retained the uniformly finite filtration convention; made strict cochain boundedness and the induced/quotient filtrations explicit. Descent and exactness are statements of the existing lem-trf-filtered-operations-hom, kept as a pointer rather than a circular dependency. No new nodes or proof steps. Second reader independently confirmed all defining clauses and six statement dependencies against their current statements and the original sources; added the exact Stacks 0121 source and two independent Mathlib searches. Mathematical statement unchanged.",
+  "blueprint": "Nearest ancestor lem-trf-trace-triangle-compatibility, Additivity proof paragraph: the lift to D^bF_ctf(X,A) and the two-step filtration. This definition supplies its category, forgetful and graded notation; it is not the statement node of sk-i-additivity."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-da9fc5858",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-da9fc5858 (reviewer sub-agent of L); spot-checked: I read the whole item and found no fault, so I made no fixes. The delivery adds no new nodes and does not change the statement's meaning: the coefficient ring is still the finite ring O_E/ϖ^n (n≥1) on the small pro-étale site, with no completion or rational coefficients. I opened all six statement dependencies (def-trf-coefficient-conventions, def-weil-size-convention, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-sp-filtration); each states what the item takes from it. Sources checked: (1) Varshavsky pp.39-41, §5.1.1(a)-(e) and §5.1.2(a), which use filtrations bounded uniformly across cochain degrees, the truncation t^{[a,b]}=F^a/F^{b+1}, ω and gr, and localization at maps that are quasi-isomorphisms on every graded piece; also §5.2.1(a) (ctf condition on every graded piece) and Example 5.2.3. (2) Stacks tags 05S2, 05S4, 05S5 and 05S6 (labels confirmed in the tags file). By 05S6, localizing strictly bounded filtered complexes gives Stacks' bounded filtered derived category DF^b. (3) Stacks 0121, through def-sp-filtration. The formulas F^r(t^{≥p}M)=F^{max(r,p)}M and F^r(t^{≤p}M)=(F^rM+F^{p+1}M)/F^{p+1}M match Varshavsky's t^{≤b}. Edge cases: empty X; the zero complex; n=1; an ordinary complex in grade 0; the ancestor's two-step filtration j_!j^*M⊂M (gr^0=K_Z, gr^1=K_U). Defining [a,b] by graded pieces vanishing in the derived category picks out the same objects as Varshavsky's DF^{[a,b]}, because an acyclic F^{b+1} or M/F^a gives a filtered quasi-isomorphism. DF(Ab) uses the uniformly finite filtration that the ancestor's RHom^F needs. No duplicates: lem-trf-filtered-derived-hom-calculus, lem-trf-filtered-derived-operation-lifts, lem-trf-filtered-projective-model and the def-kun/lem-kun filtered nodes are statements, or other ambient categories. No cycle: lem-trf-filtered-operations-hom depends on the item and is not cited by it. The item is not the statement node of sk-i-additivity and leaves the route unchanged. Mathlib searches cover all three kinds. Mathlib has only generic localization (Localization/Construction.lean 104-130), so the item is correctly not a Mathlib leaf. No SGA is cited. There are no proof steps, so no tool_uses. Two inaccuracies in the report, neither affecting the node: it says lem-trf-filtered-operations-hom is kept as a pointer, but the item has no pointers field; and it says Stacks 0121 was added to the source, but the source does not name 0121, which is cited through def-sp-filtration."
  }
 }
