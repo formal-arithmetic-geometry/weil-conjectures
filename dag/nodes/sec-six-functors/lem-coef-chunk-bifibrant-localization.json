@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "lem-coef-simplicial-projective-model-calculus",
-  "lem-coef-simplicial-localization-comparison-calculus"
+  "lem-coef-simplicial-localization-comparison-calculus",
+  "lem-coef-simplicial-small-chunks"
  ],
  "proof": [
   {
@@ -181,5 +182,35 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-1ec85e33b (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node, the statements of all six cited nodes, and the parent step that uses the item. All of them are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. Source: HTT A.3.6.17 is not in literature/ and the reviewer network is blocked, so I could not open it. It is recorded as WANTED and the proof is marked agent, so I checked the mathematics independently. Steps 1-4 and 6 are correct. Step 1: the empty cofan gives a cofibrant replacement inside U; Q preserves weak equivalences by two-out-of-three, and the components lie in W and G respectively. Step 2: the one-fan gives Z with both lifts r and s valid. Step 3: SM7 gives trivial Kan fibrations i_f^* and (p_f)_*, using Map(X,*)=* and Map(empty,-)=*; boundary lifting for Delta^1 is in kan-quillen; both inverse products check. Step 4: the already-invertible clause applies, and i and Q carry the markings correctly. Step 6: the naturality chain is correct. The new node lem-coef-enriched-natural-localization-homotopy is true (tested on [0] to [1] with W the arrow, on empty C and on W empty). But it is a few-line consequence of the existing same-unit node lem-coef-simplicial-natural-equivalence-homotopy plus the injectivity and image clause of lem-coef-simplicial-inversion-universal-property (C5/C1). The report did not compare it with that node or with simplicial-marked-cylinder-comparison. FIX: dropped the new node and rewrote step 5. It now whiskers q by the localization maps ell and a, gets [ell iQ]=[ell] and [aQi]=[a] from natural-equivalence-homotopy, and cancels ell and a by injectivity, giving [i-bar][Q-bar]=1 and [Q-bar][i-bar]=1. It then applies detects-weak-equivalences and two-out-of-three as before. proof_deps and the split_report summary are updated, and no file cites the dropped node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ChunkBifibrantLocalization",
+  "declaration": "CategoryTheory.ChunkBifibrantLocalization.chunk_bifibrant_localization",
+  "declarations": [
+   "CategoryTheory.ChunkBifibrantLocalization.fibrantProperty",
+   "CategoryTheory.ChunkBifibrantLocalization.fibrantChunkPair",
+   "CategoryTheory.ChunkBifibrantLocalization.bifibrantChunkInclusion",
+   "CategoryTheory.ChunkBifibrantLocalization.chunkComparison",
+   "CategoryTheory.ChunkBifibrantLocalization.chunkRestriction",
+   "CategoryTheory.ChunkBifibrantLocalization.PreservesChunkWeakEquivalences",
+   "CategoryTheory.ChunkBifibrantLocalization.chunkMap_preserves",
+   "CategoryTheory.ChunkBifibrantLocalization.fibrantChunkMap",
+   "CategoryTheory.ChunkBifibrantLocalization.chunk_bifibrant_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ChunkBifibrantLocalization.lean",
+  "statement": "theorem chunk_bifibrant_localization {M : Type w} [Category.{u} M] [ModelCategory M] [SimplicialCategory M] (T : SimplicialTensorCotensor M) (hC : CombinatorialModelCategory.{w, u, u} M) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 M) {B : BergnerModelData.{max u w}} (L : LocalizationSystem B) (U : SimplicialChunk M) (hU : ObjectProperty.Small.{u} U.carrier) : DwyerKanEquivalence (A := underlying (liftBundle U.cf.FullSubcategory)) (B := underlying (L.functor.obj (fibrantChunkPair U))) (chunkComparison L U) ∧ ∀ (N : Type w) [Category.{u} N] [ModelCategory N] [SimplicialCategory N] (T' : SimplicialTensorCotensor N) (hC' : CombinatorialModelCategory.{w, u, u} N) (hSM7' : SimplicialModelLocalization.SatisfiesSM7 N) (V : SimplicialChunk N) (hV : ObjectProperty.Small.{u} V.carrier) (F : EnrichedFunctor SSet.{u} U.carrier.FullSubcategory V.carrier.FullSubcategory) (hF : ∀ X : U.carrier.FullSubcategory, IsFibrant X.obj → IsFibrant (F.obj X).obj) (hBF : ∀ X : U.carrier.FullSubcategory, bifibrantObjects M X.obj → bifibrantObjects N (F.obj X).obj) (hW : PreservesChunkWeakEquivalences F), chunkComparison L U ≫ L.functor.map (fibrantChunkMap F hF hW) = chunkRestriction F U.cf V.cf (fun _ h ↦ h.1) (fun X ↦ ⟨(F.obj ⟨X.obj, X.property.1⟩).property, hBF ⟨X.obj, X.property.1⟩ X.property.2⟩) ≫ chunkComparison L V",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed SimplicialChunk definition from lem-coef-simplicial-small-chunks, added to stmt_deps. The localization system is the dependency's actual derived-pushout localization, supplied as data; the theorem holds for every such system. Functors are defined on the full chunks, not required to extend to the ambient model categories. All mapping objects are inherited, with only the explicit liftBundle universe transport. chunkMap_preserves states the marking-preservation part of the node's naturality clause."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb43e6ea0",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Matched every node clause to the Lean. A is M with ModelCategory, SimplicialCategory, tensor/cotensor T, combinatorial hC and SM7. U is the landed SimplicialChunk plus Small.{u}; its fan/cofan factorizations quantify over all n, so the empty case is included. U^f is carrier ⊓ fibrantObjects and U^cf is the landed SimplicialChunk.cf. W is ambient WeakEquivalence read from the mapping vertex, as in the landed fibrantPair. Localization is L.functor of a LocalizationSystem, i.e. a Bergner derived pushout presentation, and the theorem holds for every L. eta_U is inclusion by identity on mapping sets followed by L.unit, and its conclusion is DwyerKanEquivalence. Naturality is quantified over N, chunk V, an EnrichedFunctor on the chunks only, hF, hBF and hW; the square L(F^f) eta_U = eta_V F^cf is stated strictly and is true by unit naturality. New helpers chunkRestriction, fibrantChunkPair and PreservesChunkWeakEquivalences are justified because the landed restrict and fibrantPair need whole-ambient functors. chunkMap_preserves is the named postponed Prop and is true. No duplicates found in side, live or newtargets lean/Sheaf. No hollow defs; only sorry proofs. Docstrings carry HTT A.3.6.17 and the blueprint id, with the 6 proof steps. Lines are at most 100 characters. stmt_deps gained only the landed lem-coef-simplicial-small-chunks, which stage2_delivery allows. lean.statement is verbatim and all 9 declarations are present. Universes w and u stay independent, with only the liftBundle lift to max u w. nt_compile.py --json on the snapshot file gave rc=0 with no errors or warnings in 1.9 s. Findings: none."
  }
 }

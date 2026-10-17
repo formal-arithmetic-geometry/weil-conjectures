@@ -8,7 +8,9 @@
   "place": "Agent-formulated coherent row-colimit comparison extracted from the successive-colimit reconstruction of HTT Proposition 5.5.8.6 (printed p.507), referring to the absolute case of Lemma 5.5.2.3 (printed pp.463-464). The PDF was read online; this precise cylinder/mapping-space formulation is not quoted as a theorem of HTT. No Stacks tag states the quasicategorical result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -258,5 +260,31 @@
   "group": "Q73",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-3071dd42c (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and the full statements of all 5 cited nodes: def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-cbc-kan-fibration-fiber-criterion, lem-coef-infinity-pointwise-equivalences and lem-coef-parametric-universal-arrows. I also read the unit sk-prop-sf-biduality-general, paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint, and step 3 of the only citer, lem-coef-infinity-sifted-colimit-calculus. Step 1: the dual cocone criterion makes (L,eta) universal-arrow data with D_0=Fun(J,E). Step 2: the dual parametric formula with K=I gives Phi. It transfers to the specified (L,eta) through the contractible choice space, using an equivalence e and two-out-of-three; I checked the directions. Step 3: the fiber criterion makes the homotopy fiber over alpha contractible, and it is nonempty because contractible means a bijection on components. Step 4: a two-sided inverse at each vertex, from surjectivity and then injectivity on pi_0 of both cocone criteria. Step 5: the in-unit pointwise criterion makes every point an equivalence, so the space of pairs is the whole fiber. Small cases tested and true: I=J=point, J empty (initial objects), I empty, J two points (coproducts, no siftedness), nerves of ordinary categories. No new nodes. proof_deps equals the union of the uses. No cycle (370 nodes reached, the item not among them). No duplicate in the DAG: the pointwise-Kan-extension, cocone-colimit and parametric-universal-arrow nodes differ. No SGA cited. HTT is not held locally; it is recorded as WANTED and proof_origin is agent. Not a target node, so the base-change and coefficient checks do not apply. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-fibration-fiber-criterion, both generic off-unit tools used as black boxes. Mathlib searches are genuine: one loogle parse error is recorded as an invalid query, and the rest are no-matches because Mathlib has only 1-categorical analogues. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentRowColimitComparison",
+  "declaration": "SSet.Enhanced.coherent_row_colimit_comparison",
+  "declarations": [
+   "SSet.Enhanced.rowColimitComparisonTriangles",
+   "SSet.Enhanced.rowColimitComparisonSource",
+   "SSet.Enhanced.rowColimitComparisonLong",
+   "SSet.Enhanced.rowColimitComparisonEdge",
+   "SSet.Enhanced.coherent_row_colimit_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoherentRowColimitComparison.lean",
+  "statement": "theorem coherent_row_colimit_comparison (I J : SSet.{u}) (E : SSet.{max u v}) [Quasicategory E] (L : (ihom (SSet.uliftFunctor.{v}.obj J)).obj E ⟶ E) (η : ((ihom ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)) _⦋1⦌) (hη₁ : ((ihom ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)).δ 1 η = diagramVertex (𝟙 ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E))) (hη₀ : ((ihom ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)).δ 0 η = diagramVertex (L ≫ constantDiagrams (SSet.uliftFunctor.{v}.obj J) E)) (hη : ∀ A : (SSet.uliftFunctor.{v}.obj J) ⟶ E, ∃ c : (coconeCategory A) _⦋0⦌, c.1.1 = L.app _ (diagramVertex A) ∧ c.1.2 = diagramVertex (SSet.yonedaEquiv.symm ((evaluation ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E) ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E) (diagramVertex A)).app _ η)) ∧ IsColimiting A c) (R : (SSet.uliftFunctor.{v}.obj I) ⟶ (ihom (SSet.uliftFunctor.{v}.obj J)).obj E) (U : (SSet.uliftFunctor.{v}.obj I) ⟶ E) (α : ((ihom (SSet.uliftFunctor.{v}.obj I)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)) _⦋1⦌) (hα₁ : ((ihom (SSet.uliftFunctor.{v}.obj I)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)).δ 1 α = diagramVertex R) (hα₀ : ((ihom (SSet.uliftFunctor.{v}.obj I)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)).δ 0 α = diagramVertex (U ≫ constantDiagrams (SSet.uliftFunctor.{v}.obj J) E)) (hα : ∀ i : (SSet.uliftFunctor.{v}.obj I) _⦋0⦌, ∃ c : (coconeCategory (Functor.natTransEquiv ((unitHomEquiv _).symm (R.app _ i)))) _⦋0⦌, c.1.1 = U.app _ i ∧ c.1.2 = diagramVertex (SSet.yonedaEquiv.symm ((evaluation (SSet.uliftFunctor.{v}.obj I) ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E) i).app _ α)) ∧ IsColimiting (Functor.natTransEquiv ((unitHomEquiv _).symm (R.app _ i))) c) : ∃ (v : rowColimitComparisonTriangles L η R U ⟶ arrowMappingSpace ((ihom (SSet.uliftFunctor.{v}.obj I)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)) (diagramVertex R) (diagramVertex (U ≫ constantDiagrams (SSet.uliftFunctor.{v}.obj J) E))) (b : (arrowMappingSpace ((ihom (SSet.uliftFunctor.{v}.obj I)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)) (diagramVertex R) (diagramVertex (U ≫ constantDiagrams (SSet.uliftFunctor.{v}.obj J) E))) _⦋0⦌), v ≫ arrowMappingSpaceInclusion ((ihom (SSet.uliftFunctor.{v}.obj I)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)) (diagramVertex R) (diagramVertex (U ≫ constantDiagrams (SSet.uliftFunctor.{v}.obj J) E)) = rowColimitComparisonLong L η R U ∧ (arrowMappingSpaceInclusion ((ihom (SSet.uliftFunctor.{v}.obj I)).obj ((ihom (SSet.uliftFunctor.{v}.obj J)).obj E)) (diagramVertex R) (diagramVertex (U ≫ constantDiagrams (SSet.uliftFunctor.{v}.obj J) E))).app _ b = diagramVertex (SSet.yonedaEquiv.symm α) ∧ KanComplex (homotopyFiber v b) ∧ IsContractible (homotopyFiber v b) ∧ Nonempty ((homotopyFiber v b) _⦋0⦌) ∧ ∀ z : (homotopyFiber v b) _⦋0⦌, IsEquivalenceEdge ((ihom (SSet.uliftFunctor.{v}.obj I)).obj E) (rowColimitComparisonEdge L η R U z.1.1)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical triangle composition span and its fixed-endpoint long-edge map model the full coherent comparison space. Both the map and the basepoint are pinned by their images under the mapping-space inclusion. Small shapes are explicitly lifted to an arbitrary containing universe. Added the already recorded parametric-universal-arrow and pinch-comparison nodes as statement dependencies for their canonical triangle and arrow-space interfaces; no node statement changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bce49f39d",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read node, module, report and the def-cbc / ParametricUniversalArrows / RightPinchComparison declarations. Clause match: E:SSet.{max u v} [Quasicategory], small I,J lifted via uliftFunctor with no universe equality; eta edge with δ1=id, δ0=L≫Δ_J; hη pins each cocone's apex L(A) and edge eta_A, IsColimiting = initial in the coherent cocone comma; alpha edge R→U≫Δ_J; hα pins apex U(i) and edge alpha_i on the row natTransEquiv(unitHomEquiv.symm(R i)). Conclusion: homotopyFiber over alpha of the unique canonical v (pinned by a monomorphic inclusion) from the universalCompositionTriangles span (right=false: faces ηR, Δ_J a, long edge their composite) into the full arrowMappingSpace; Kan, IsContractible, Nonempty, and every point an IsEquivalenceEdge in Fun(I,E). No extra hypotheses. Edge cases I=∅, J=∅, points, discrete J consistent. lean.statement verbatim; helpers non-hollow; docstrings carry source and blueprint; the added stmt_deps (parametric-universal-arrows, infinity-pinch-comparison) are landed, used in the statement, acyclic (DFS). No duplicate in side lean/dag. nt_compile.py --json on the snapshot text: rc=0, clean (warn.sorry=false in lakefile). Second-reading section is the standard 2026-10-17 placeholder, also present in landed reports. No findings."
  }
 }
