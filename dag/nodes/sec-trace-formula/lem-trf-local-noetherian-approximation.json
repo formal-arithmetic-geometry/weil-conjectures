@@ -270,5 +270,23 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-4c7653d4d (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements and mathematical sources in full. The six-step approximation argument and both constructible-locus statements are valid; no repairs needed. Concrete source, hypothesis, edge-case, duplicate, route and long-step checks are recorded in review.md, including the limitation that the live pivot list was unavailable under the no-git restriction."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalNoetherianApproximation",
+  "declaration": "AlgebraicGeometry.exists_local_noetherian_approximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalNoetherianApproximation.lean",
+  "statement": "theorem exists_local_noetherian_approximation (R S : CommRingCat.{u}) [Algebra R S] [Algebra.FinitePresentation R S] (hflat : (algebraMap R S).Flat) (hfibres : ∀ p : PrimeSpectrum R, GeometricallyIntegral (Spec.map (CommRingCat.ofHom (algebraMap p.asIdeal.ResidueField (p.asIdeal.Fiber S))))) : ∃ (R₀ S₀ : CommRingCat.{u}) (_ : Algebra R₀ S₀) (a : R₀ →+* R) (b : S₀ →+* S), RingHom.FiniteType (Int.castRingHom R₀) ∧ RingHom.FiniteType (algebraMap R₀ S₀) ∧ (algebraMap R₀ S₀).Flat ∧ (∀ p₀ : PrimeSpectrum R₀, GeometricallyIntegral (Spec.map (CommRingCat.ofHom (algebraMap p₀.asIdeal.ResidueField (p₀.asIdeal.Fiber S₀))))) ∧ IsPushout (CommRingCat.ofHom (algebraMap R₀ S₀)) (CommRingCat.ofHom a) (CommRingCat.ofHom b) (CommRingCat.ofHom (algebraMap R S))",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-29277ff86",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, route-pivot compliance, and compiler evidence all checked successfully."
  }
 }
