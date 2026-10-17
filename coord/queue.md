@@ -1,6 +1,6 @@
 # Work queue
 
-25 items; claim with `tools/claim.py next <group> [--stage N]`.
+28 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (25)
+## Stage 3: modules to prove (28)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -25,6 +25,8 @@
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof |
 | `WeilConjectures.WeilSheaf.DenseOpen` | 7 | 1 | proof |
 | `WeilConjectures.WeilSheaf.LowerShriekOperations` | 7 | 3 | proof |
+| `Sheaf.AlgebraicGeometry.ClosedProperSupportLocality` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk` | 8 | 1 | proof |
 | `Sheaf.RingTheory.FiniteAlgebraExtremallyDisconnected` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof |
@@ -32,6 +34,7 @@
 | `Sheaf.CategoryTheory.AlphaCompactClassSmallClosed` | 10 | 1 | proof |
 | `Sheaf.CategoryTheory.GrothendieckDerivedPerfectWellGenerators` | 10 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProjectiveCoordinateBoundary` | 11 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | 11 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Delta` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteDescent` | 12 | 1 | proof |
