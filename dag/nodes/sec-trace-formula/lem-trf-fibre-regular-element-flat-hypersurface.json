@@ -12,7 +12,8 @@
   "def-sbc-locally-finite-presentation",
   "def-weil-flat-morphism",
   "def-pc-scheme-fibre",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "lem-sbc-scheme-fibre-stalk-quotient"
  ],
  "proof": [
   {
@@ -349,5 +350,24 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q112-f3009b331 (reviewer sub-agent of L); spot-checked: Tag 056Y and all twelve proof steps, cited DAG statements, hypotheses, edge cases, and route constraints were checked. Repair the invalid created metadata: it named Q19 and lem-trf-cm-closed-point-flat-quasifinite-slice instead of Q112 and this item. Corrected whole DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-fibre-regular-element-flat-hypersurface.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FibreRegularElementFlatHypersurface",
+  "declaration": "AlgebraicGeometry.exists_affine_flat_hypersurface_of_fiber_regular",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FibreRegularElementFlatHypersurface.lean",
+  "statement": "theorem exists_affine_flat_hypersurface_of_fiber_regular {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] (x : X) (hflat : (f.stalkMap x).hom.Flat) (h : X.presheaf.stalk x) (hh : h ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (hregular : Function.Injective (fun z : (f.fiber (f x)).presheaf.stalk (f.asFiber x) ↦ (f.fiberStalkMap x).hom h * z)) : ∃ (U : X.Opens) (hU : IsAffineOpen U) (hx : x ∈ U) (a : Γ(X, U)), X.presheaf.germ U x hx a = h ∧ x ∈ Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {a}))) ≫ hU.fromSpec) ∧ Flat (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {a}))) ≫ hU.fromSpec ≫ f) ∧ LocallyOfFinitePresentation (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {a}))) ≫ hU.fromSpec ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of the returned caf8870bb169 delivery: a complete theorem module and node record replace the missing sandbox packet. The canonical fibreStalkMap is reused from the already recorded fibre-stalk node, now explicitly a statement dependency. The affine principal quotient and its spectrum map are the actual hypersurface, with the original pointwise flatness hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5d63aab38",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement, dependencies, source Tag 056Y, docstrings, edge cases, route-pivot constraints, and report sections checked. scompile.py reproduced successful sandbox and library compilation; no substantive findings."
  }
 }
