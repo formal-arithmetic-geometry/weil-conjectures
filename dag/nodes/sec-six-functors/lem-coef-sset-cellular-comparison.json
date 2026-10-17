@@ -8,50 +8,170 @@
   "place": "Proposition 2.2.2.7, cellular proof, and Remark 2.2.2.8; weak-homotopy generalization of the same boundary-attachment and filtered-skeleton argument; agent-explicit auxiliary assertion. HTT is read online, archival copy WANTED; no Stacks tag states this assertion."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Both $P$ and $Q$ preserve the colimit of the empty diagram. Thus $P(\\varnothing)$ and $Q(\\varnothing)$ are initial simplicial sets, each isomorphic to $\\varnothing$. There is just one map between them, and it is an isomorphism. Its realization has no components or base points, so the weak-homotopy conditions hold. Consequently $\\eta_{\\varnothing}$ is a weak homotopy equivalence.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.7, proof, printed p. 77; Remark 2.2.2.8. Generalization to P, Q and eta supplied here."
+   }
+  },
+  {
+   "text": "For the finite case, induct first on the bound $d\\geq0$ for the dimensions of nondegenerate simplices, and within a fixed $d$ on their number in dimension $d$. The outer base below dimension zero is the empty set: the nondegenerate decomposition implies that a simplicial set without nondegenerate simplices is empty. At the inner base, having no nondegenerate $d$-simplices reduces to the previous dimension bound. Define $\\partial\\Delta^d$ to be the subobject of maps into $[d]$ which are not surjective; for $d=0$ it is empty. A nondegenerate simplex of $\\Delta^d$ is an injective monotone map into $[d]$: a noninjective map factors through a proper surjection, and an injective map cannot be a degeneracy. There are finitely many such injections. In the boundary their dimensions are strictly below $d$. Hence the outer induction gives that $\\eta_{\\partial\\Delta^d}$ is a weak homotopy equivalence, also for $d=0$ by Step 1.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-weil-pbc-simplicial-set-glue-simplex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.7, proof, printed p. 77; Remark 2.2.2.8. Generalization to P, Q and eta supplied here."
+   }
+  },
+  {
+   "text": "Let $A$ be finite with at least one nondegenerate simplex $\\sigma$ of maximal dimension $d$. Apply the top-simplex-removal statement, with this dimension bound and this $\\sigma$, to obtain $U\\subseteq A$ with one fewer nondegenerate $d$-simplex and no new nondegenerate simplices. Its stated degree conditions are exactly hypotheses (1), (2) and (3) of the simplex-gluing statement, with $n=d$, $V=A$, and $x=\\sigma$. That statement therefore gives the pushout $A\\cong U\\amalg_{\\partial\\Delta^d}\\Delta^d$, using the characteristic map of $\\sigma$. The inner induction applies to $U$, giving the weak homotopy equivalence $\\eta_U$. The other two comparison maps for this span are $\\eta_{\\partial\\Delta^d}$ from Step 2 and $\\eta_{\\Delta^d}$ from the hypothesis. The characteristic map need not be an injection, and no such assumption is used.",
+   "uses": [
+    "lem-coef-finite-simplicial-top-simplex-removal",
+    "lem-weil-pbc-simplicial-set-glue-simplex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.7, proof, printed p. 77; Remark 2.2.2.8. Generalization to P, Q and eta supplied here."
+   }
+  },
+  {
+   "text": "Apply $P$ and $Q$ to the pushout in Step 3. Colimit preservation makes both resulting squares pushouts. Naturality of $\\eta$ on the boundary inclusion and its attaching map gives a commuting map between the spans $P(\\partial\\Delta^d)\\to P(\\Delta^d),P(U)$ and $Q(\\partial\\Delta^d)\\to Q(\\Delta^d),Q(U)$. Their three components are weak homotopy equivalences by Step 3. The legs into $P(\\Delta^d)$ and $Q(\\Delta^d)$ are degreewise injective, since the boundary inclusion is degreewise injective and both functors preserve these maps. Thus the first clause of the gluing statement applies. It says that the induced map on these pushouts is a weak homotopy equivalence. The induced map is $\\eta_A$: on each of the two pushout legs this is precisely the naturality equation for $U\\to A$ and $\\Delta^d\\to A$, and maps out of a pushout are uniquely determined by these legs. This completes both inductions and proves the assertion for every simplicial set having finitely many nondegenerate simplices.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.7, proof, printed p. 77; Remark 2.2.2.8. Generalization to P, Q and eta supplied here."
+   }
+  },
+  {
+   "text": "For arbitrary small $X$, let $I$ be its poset of simplicial subsets having finitely many nondegenerate simplices, ordered by inclusion. This is a small set, being a subset of the power set of $\\coprod_{n\\geq0}X_n$. It contains $\\varnothing$. A simplex of a simplicial subset is degenerate in it exactly when it is degenerate in $X$: a degeneracy witness is a face of that simplex and so still lies in the subset. The union of finitely many members therefore again has finitely many nondegenerate simplices; it is an upper bound, including the empty union. Every $x\\in X_n$ belongs to such a subset, namely the image of $\\Delta^n\\to X$, $\\alpha\\mapsto X(\\alpha)(x)$. Indeed factor each monotone $\\alpha$ as a surjection followed by an injection. Its image simplex is a degeneracy of the image of that injection; if it is nondegenerate the surjection must be an identity. Thus the nondegenerate simplices of this image belong to the finite list indexed by injective maps into $[n]$. Hence $X=\\bigcup_{K\\in I}K$. This union is the ordinary degreewise colimit: a compatible family of simplicial maps on the subsets gives one on the union, independent of the subset chosen because two subsets have a common upper bound; it commutes with operators since each subset is simplicial.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.7, proof, printed p. 77; Remark 2.2.2.8. Generalization to P, Q and eta supplied here."
+   }
+  },
+  {
+   "text": "The restrictions of $P$ and $Q$ to $I$ are small ordinary diagrams. Their colimit cocones $P(K)\\to P(X)$ and $Q(K)\\to Q(X)$ are colimiting, by Step 5 and preservation of small colimits. Naturality makes the components $\\eta_K$ a map of these diagrams. The map it induces on the colimits is $\\eta_X$: both maps restrict on each $P(K)$ to $Q(K\\hookrightarrow X)\\eta_K$, by naturality, and the colimit universal property gives equality. Every $\\eta_K$ is a weak homotopy equivalence by Step 4. The poset $I$ is small, nonempty, and every finite subset has an upper bound, as verified in Step 5. The second clause of the gluing-and-filtered-colimit statement therefore proves that $\\eta_X$ is a weak homotopy equivalence. This applies also to $X=\\varnothing$, whose index poset consists of its empty subset.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.7, proof, printed p. 77; Remark 2.2.2.8. Generalization to P, Q and eta supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-weil-pbc-simplicial-set-glue-simplex",
+  "lem-coef-finite-simplicial-top-simplex-removal",
+  "lem-coef-sset-gluing-filtered-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundational cellular comparison in the inherited unstraightening chain below paragraph 2; follows HTT Proposition 2.2.2.7, printed p. 77 (online source, archive WANTED), with arbitrary P,Q and eta."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "A natural transformation between colimit preserving functors from simplicial sets to simplicial sets preserving monomorphisms is a weak homotopy equivalence on every object if it is so on standard simplices",
    "results": "{\"t\": \"2026-10-17T08:38:19Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation between colimit preserving functors from simplicial sets to simplicial sets preserving monomorphisms is a weak homotopy equivalence on every object if it is so on standard simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.cofibration_iff\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"713a425bf7564605\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read CategoryWithFibrations.lean:35–100, Basic.lean skeleton adjunction definitions and NerveAdjunction.lean."
+   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100 and NerveAdjunction.lean:452–460; these give cofibration definitions and a specific Cat-valued product comparison."
   },
   {
    "tool": "grep",
    "query": "(cellular|skelet|stdSimplex).*(weakEquivalence|weakHomotopy|natTrans)|weakEquivalence.*(cellular|skelet|stdSimplex)",
    "results": "{\"t\": \"2026-10-17T08:40:18Z\", \"tool\": \"grep\", \"query\": \"(cellular|skelet|stdSimplex).*(weakEquivalence|weakHomotopy|natTrans)|weakEquivalence.*(cellular|skelet|stdSimplex)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read CategoryWithFibrations.lean:35–100, Basic.lean skeleton adjunction definitions and NerveAdjunction.lean."
+   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100 and NerveAdjunction.lean:452–460; these give cofibration definitions and a specific Cat-valued product comparison."
   },
   {
    "tool": "leansearch",
    "query": "A natural transformation between colimit preserving functors on simplicial sets preserving injections is a weak homotopy equivalence if it is so on every simplex",
    "results": "{\"t\": \"2026-10-17T08:40:19Z\", \"tool\": \"leansearch\", \"query\": \"A natural transformation between colimit preserving functors on simplicial sets preserving injections is a weak homotopy equivalence if it is so on every simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimMap\", \"SSet.Truncated.hom_ext\", \"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"CategoryTheory.preservesColimitNatIso\", \"SSet.hoFunctor.preservesTerminal'\", \"SSet.Truncated.HomotopyCategory.mkNatTrans.congr_simp\", \"CategoryTheory.preservesColimitNatIso_hom_app\", \"CategoryTheory.Limits.limMap_mono\"], \"digest\": \"a146b127fa8ddd95\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read CategoryWithFibrations.lean:35–100, Basic.lean skeleton adjunction definitions and NerveAdjunction.lean."
+   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100 and NerveAdjunction.lean:452–460; these give cofibration definitions and a specific Cat-valued product comparison."
   },
   {
    "tool": "loogle",
    "query": "\"SSet\", \"NatTrans\"",
    "results": "{\"t\": \"2026-10-17T08:40:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"NatTrans\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk\", \"SSet.FundamentalGroupoid.natTransMk\", \"SSet.FundamentalGroupoid.natTransMk_app\", \"SSet.toπ₀NatTrans\", \"SSet.toNormalizedChainComplexNatTrans_app\", \"SSet.toNormalizedChainComplexNatTrans\"], \"digest\": \"21078d08d456ebeb\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read CategoryWithFibrations.lean:35–100, Basic.lean skeleton adjunction definitions and NerveAdjunction.lean."
+   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100 and NerveAdjunction.lean:452–460; these give cofibration definitions and a specific Cat-valued product comparison."
   },
   {
    "tool": "leanfinder",
    "query": "A natural map of cocontinuous endofunctors on simplicial sets is a weak homotopy equivalence by induction over boundary attachments and passage to the sequential colimit of skeleta",
    "results": "{\"t\": \"2026-10-17T08:40:29Z\", \"tool\": \"leanfinder\", \"query\": \"A natural map of cocontinuous endofunctors on simplicial sets is a weak homotopy equivalence by induction over boundary attachments and passage to the sequential colimit of skeleta\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.cosk\", \"SSet.skAdj\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.SimplicialObject.sk\", \"CategoryTheory.SimplicialObject.cosk\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\"], \"digest\": \"b90e3f76fb5c6f73\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read CategoryWithFibrations.lean:35–100, Basic.lean skeleton adjunction definitions and NerveAdjunction.lean."
+   "verdict": "no match: the hits concern cofibrations, ordinary colimit comparison maps, skeleton/coskeleton adjunctions and ordinary nerve equivalences; none gives weak-homotopy detection for a natural transformation of cocontinuous monomorphism-preserving endofunctors. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100 and NerveAdjunction.lean:452–460; these give cofibration definitions and a specific Cat-valued product comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"NatTrans\"",
+   "results": "{\"t\": \"2026-10-17T10:13:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"NatTrans\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk\", \"SSet.FundamentalGroupoid.natTransMk\", \"SSet.FundamentalGroupoid.natTransMk_app\", \"SSet.toπ₀NatTrans\", \"SSet.toNormalizedChainComplexNatTrans_app\", \"SSet.toNormalizedChainComplexNatTrans\"], \"digest\": \"21078d08d456ebeb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cofibration definitions, homotopy-category natural-transformation constructors, skeleton/coskeleton adjunctions, or the homotopy-category product comparison; none states cellular weak-homotopy detection for arbitrary P,Q. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100, HomotopyCat.lean:383–406 and NerveAdjunction.lean:452–460; grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cellular induction detects objectwise weak equivalences of cocontinuous functors on simplicial sets from their values on simplices",
+   "results": "{\"t\": \"2026-10-17T10:13:45Z\", \"tool\": \"leansearch\", \"query\": \"Cellular induction detects objectwise weak equivalences of cocontinuous functors on simplicial sets from their values on simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.IsCoskeletal.casesOn\", \"CategoryTheory.SimplicialObject.IsCoskeletal.recOn\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"HomotopicalAlgebra.AttachCells\", \"CategoryTheory.SimplicialObject.IsCoskeletal.rec\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\"], \"digest\": \"a56f02a302520d81\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cofibration definitions, homotopy-category natural-transformation constructors, skeleton/coskeleton adjunctions, or the homotopy-category product comparison; none states cellular weak-homotopy detection for arbitrary P,Q. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100, HomotopyCat.lean:383–406 and NerveAdjunction.lean:452–460; grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "(cellular|skelet|stdSimplex).*(weakEquivalence|weakHomotopy|natTrans)|weakEquivalence.*(cellular|skelet|stdSimplex)",
+   "results": "{\"t\": \"2026-10-17T10:13:47Z\", \"tool\": \"grep\", \"query\": \"(cellular|skelet|stdSimplex).*(weakEquivalence|weakHomotopy|natTrans)|weakEquivalence.*(cellular|skelet|stdSimplex)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cofibration definitions, homotopy-category natural-transformation constructors, skeleton/coskeleton adjunctions, or the homotopy-category product comparison; none states cellular weak-homotopy detection for arbitrary P,Q. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100, HomotopyCat.lean:383–406 and NerveAdjunction.lean:452–460; grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between colimit preserving monomorphism preserving endofunctors of simplicial sets is a weak equivalence if its components on standard simplices are weak equivalences",
+   "results": "{\"t\": \"2026-10-17T10:13:51Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation between colimit preserving monomorphism preserving endofunctors of simplicial sets is a weak equivalence if its components on standard simplices are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.cofibration_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"77fe18f14aa1f2c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cofibration definitions, homotopy-category natural-transformation constructors, skeleton/coskeleton adjunctions, or the homotopy-category product comparison; none states cellular weak-homotopy detection for arbitrary P,Q. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100, HomotopyCat.lean:383–406 and NerveAdjunction.lean:452–460; grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural map of cocontinuous endofunctors on simplicial sets is a weak homotopy equivalence by induction over boundary attachments and passage to directed unions of finite simplicial subsets",
+   "results": "{\"t\": \"2026-10-17T10:15:20Z\", \"tool\": \"leanfinder\", \"query\": \"A natural map of cocontinuous endofunctors on simplicial sets is a weak homotopy equivalence by induction over boundary attachments and passage to directed unions of finite simplicial subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"SSet.hoFunctor\", \"SSet.cosk\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"SSet.coskAdj\"], \"digest\": \"56342810de7e9d24\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are cofibration definitions, homotopy-category natural-transformation constructors, skeleton/coskeleton adjunctions, or the homotopy-category product comparison; none states cellular weak-homotopy detection for arbitrary P,Q. Read AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35–100, HomotopyCat.lean:383–406 and NerveAdjunction.lean:452–460; grep has no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-unstraightening-simplex-pointwise",
@@ -82,5 +202,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-sset-cellular-comparison",
+  "worker": "stage1",
+  "summary": "Statement retained exactly. Reused existing top-simplex removal, simplex pushout, nondegenerate decomposition, and gluing/filtered weak-equivalence statements; no new nodes. Supplied nested finite induction, empty base, explicit finite-subset directed union and identification of the induced maps with eta. Read HTT 2.2.2.7–8 online and Stacks 017R, 018R, 018S locally. No project Lean attachment or Mathlib match found.",
+  "blueprint": "The derived coefficient adjunction and inverse-limit calculation in paragraph 2 of prop-coef-integral-exceptional-adjoint, through lem-coef-unstraightening-simplex-pointwise: supplies the cellular detection subargument specified by the item ancestry; no unit step replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-simplicial-set-glue-simplex",
+    "why": "Generic ordinary simplex-attachment pushout, Stacks 018R, including the empty boundary. Our unit has no replacement for this exact combinatorial statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-simplicial-set-glue-simplex"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-7e5a55ce0",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-7e5a55ce0 (reviewer sub-agent of L); spot-checked: I read all of the item and the statements of the six nodes it cites. The statement is unchanged from the base. It is a correct Kan-Quillen generalization of HTT Prop. 2.2.2.7 / Rem. 2.2.2.8, marked as agent-written with HTT listed as WANTED, and no target is weakened. Small cases I tested: -xK -> -xK' for a weak homotopy equivalence K->K'; the identity; the constant-empty functors; X empty. Step 1 is correct: P(empty) and Q(empty) are initial, so eta there is vacuously a weak homotopy equivalence. Step 2 is correct: both bases of the nested induction are stated, and the nondegenerate simplices of the boundary have dimension below d. Step 3 is correct: the conclusions of top-simplex-removal are exactly hypotheses (1)-(3) of glue-simplex, which I checked against Stacks 018R (simplicial.tex l.3084, tags/tags) and the 018S proof at l.3141. Step 4 is correct: the cube-lemma clause needs injective maps only on the boundary-to-simplex legs, which the preservation hypothesis gives, and the induced map is identified with eta_A. Step 5 is correct: finite simplicial subsets form a small directed poset and their union is the degreewise colimit. Step 6 is correct: it uses the filtered-colimit clause. The weak homotopy equivalence of lem-coef-kan-quillen-model-right-proper-core and that of def-cbc are the same definition, and monomorphisms are the degreewise injective maps. proof_deps equals the union of the uses, and there is no cycle. The unit route is respected, and I accept the declared tool_use of lem-weil-pbc-simplicial-set-glue-simplex as an ordinary combinatorial pushout; the nondegenerate decomposition is a Mathlib leaf. The duplicate search (rg for 2.2.2.7, 'cellular' and colimit+mono preservation) found no node stating this comparison. There are no new nodes and no fixes."
  }
 }

@@ -12,9 +12,93 @@
   "lem-coef-dg-quasifunctor-invariance",
   "lem-coef-enhanced-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The pullback relation is preserved by the differentials, identities, and componentwise composition: if p_t(a)=q_s(b), then applying the differential gives the same equality because s and t are closed, and for composable pairs the two composites agree by associativity. Thus the displayed pullback complexes form a dg category and the projection pi is a dg functor. This is a direct check from the dg-category axioms and the definition of a pullback.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-formulated resolution-square construction, dg closure and composition"
+   }
+  },
+  {
+   "text": "Fix $s,t$ and write $X=\\mathcal A(e_s,e_t)$, $Y=\\mathcal A(e_s,d_t)$, $Z=\\mathcal A(d_s,d_t)$, with $p:X\\to Y$ postcomposition by $t$ and $q:Z\\to Y$ precomposition by $s$. Put $K=\\ker p$. For a cycle $k\\in K^n$, injectivity of $H^n(p)$ gives $a\\in X^{n-1}$ with $da=k$. Then $p(a)$ is a cycle. Surjectivity of $H^{n-1}(p)$ gives a cycle $z\\in X^{n-1}$ and $v\\in Y^{n-2}$ with $p(a)-p(z)=dv$. Lift $v$ to $w\\in X^{n-2}$ by degreewise surjectivity. Now $a-z-dw$ lies in $K^{n-1}$ and has differential $k$. Thus every cycle of $K$ is a boundary, by the kernel/image definition of cohomology in [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-formulated pullback projection, kernel acyclicity"
+   }
+  },
+  {
+   "text": "The projection $r:X\\times_Y Z\\to Z$ is degreewise surjective: lift $q(b)$ under $p$ for each homogeneous $b$. Its kernel identifies with $K$ via $k\\mapsto(k,0)$. If $b\\in Z^n$ is closed, choose a lift $c\\in(X\\times_Y Z)^n$; then $dc$ is a cycle in $K^{n+1}$. Step 2 gives $h\\in K^n$ with $dh=dc$, so $c-h$ is a closed lift of this very $b$. This proves surjectivity on cohomology. If a cycle $c$ has $r(c)=db$, lift $b$ to $a$ in degree $n-1$. Then $c-da$ is a cycle in $K^n$, hence equals $dk$ for $k\\in K^{n-1}$, and $c=d(a+k)$. This proves injectivity on cohomology and hence the quasi-isomorphism assertion [def-weil-abstract-derived-category]. The closed-lift argument with $n=0$ lifts every prescribed closed arrow between any specified pair $s,t$. The object hypothesis makes $\\pi$ surjective on objects.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-formulated closed-arrow lifting"
+   }
+  },
+  {
+   "text": "By the quasi-equivalence criterion in [lem-coef-dg-quasifunctor-invariance], the mapping-complex quasi-isomorphisms and object-surjectivity proved above make $\\pi$ a quasi-equivalence: $H^0\\pi$ is essentially surjective since every target object is literally projected. Apply the functorial derived-enrichment equivalence of [lem-coef-dg-enrichment-rectification]. Since its source inverts quasi-equivalences, the derived enrichment of $\\pi$ is an enriched equivalence, with mapping objects and closed degree-zero arrows as specified there. Choose an enriched inverse $\\sigma$ and coherent equivalences $\\sigma\\pi\\simeq1_{\\mathcal R}$ and $\\pi\\sigma\\simeq1_{\\mathcal D}$. We do not assert that $\\sigma$ is a strict dg functor.",
+   "uses": [
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-dg-enrichment-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; passage from the resolution-square projection to derived enriched equivalence"
+   }
+  },
+  {
+   "text": "Write $q_R:\\mathcal R\\to L_R=\\mathcal R[W_{\\mathcal R}^{-1}]$ and $q_D:\\mathcal D\\to L_D=\\mathcal D[W^{-1}]$ for the enriched localizations. The functor $G=q_R\\sigma$ inverts $W$: given $w:d\\to d'$ in $W$, choose objects $s,t$ projecting exactly to its endpoints and a closed lift $u:s\\to t$ from step 3. Then $u\\in W_{\\mathcal R}$. Naturality of $\\sigma\\pi\\simeq1_{\\mathcal R}$ gives $\\alpha_t\\circ\\sigma(w)\\simeq u\\circ\\alpha_s$. Applying $q_R$, the three other arrows are equivalences, so $G(w)$ is an equivalence. This uses this very $w$, without any saturation or conjugation-closure assumption on $W$. Also $q_D\\pi$ inverts $W_{\\mathcal R}$ by its definition. The enhanced functor-category universal property of [lem-coef-enhanced-localization-universal] therefore gives $\\overline G:L_D\\to L_R$ and $\\overline\\pi:L_R\\to L_D$ with $\\overline Gq_D\\simeq q_R\\sigma$ and $\\overline\\pi q_R\\simeq q_D\\pi$.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-formulated relative localization of the resolution-square projection"
+   }
+  },
+  {
+   "text": "Using the comparisons in step 5, restriction of $\\overline G\\,\\overline\\pi$ along $q_R$ is $\\overline Gq_D\\pi\\simeq q_R\\sigma\\pi\\simeq q_R$. Restriction of $\\overline\\pi\\,\\overline G$ along $q_D$ is $\\overline\\pi q_R\\sigma\\simeq q_D\\pi\\sigma\\simeq q_D$. Fully faithful restriction on transformations and their higher homotopies in [lem-coef-enhanced-localization-universal] lifts these to $\\overline G\\,\\overline\\pi\\simeq1_{L_R}$ and $\\overline\\pi\\,\\overline G\\simeq1_{L_D}$. The resulting enriched inverse equivalences give inverse precomposition and postcomposition functors: whiskering the two displayed equivalences gives their unit and counit comparisons. They identify transformation objects as well, and applying them objectwise to a coherent diagram gives inverse diagram functors; the same node supplies compatibility with composition and all higher homotopies. This proves every enhanced clause.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; enhanced functor and coherent-diagram consequences"
+   }
+  },
+  {
+   "text": "For $s:d_s\\to e_s$ and $t:d_t\\to e_t$, the square equation is $tb=as$. For each pair use $X=\\mathcal A(e_s,e_t)$, $Y=\\mathcal A(d_s,e_t)$, $Z=\\mathcal A(d_s,d_t)$, $p(a)=as$ and $q(b)=tb$. Both are chain maps because $s,t$ are closed; the assumed precomposition map is precisely $p$. Swapping the two factors identifies the displayed dual morphism complex with $X\\times_Y Z$, with projection $r$ to $Z$. The componentwise dg checks in step 1 and the cycle calculations in steps 2–3 apply verbatim to these maps. The object hypothesis again makes the projection surjective. Steps 4–6 now apply to this dg projection and any chosen $W$, proving the dual clause with the stated variance.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; dual resolution-square projection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-coef-dg-enrichment-rectification",
+  "lem-coef-dg-quasifunctor-invariance",
+  "lem-coef-enhanced-localization-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "The blueprint paragraph motivates the construction but does not assert this generic lemma. The proof is the explicit pullback-kernel calculation, closed-arrow lift, quasi-equivalence criterion, and enhanced localization universal property."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +134,45 @@
    "results": "OK 8 hits: instFullLightDiagram'LightDiagramToLightFunctor, instFullLightDiagramProfiniteLightDiagramToProfinite, CategoryTheory.CostructuredArrow.full_map₂, CategoryTheory.fullyFaithfulInducedFunctor, AugmentedSimplexCategory.instFullSimplexCategoryInclusion, CategoryTheory.StructuredArrow.full_map₂, SimplexCategory.Truncated.inclusion.fullyFaithful, CategoryTheory.InducedCategory.full",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/Enriched/Basic.lean:14-31,62-78 and AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-95; these give ordinary enrichment or ordinary quotient categories, not the dg commuting-square projection and enhanced localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded resolution arrow category projection is a quasi equivalence and an equivalence after localization",
+   "results": "quasiIso_iff_of_arrow_mk_iso; CategoryTheory.Localization.Construction.objEquiv; quasiIso_of_arrow_mk_iso; HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso; CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'; CategoryTheory.Localization.structuredArrowEquiv; CategoryTheory.ProjectiveResolution.quasiIso; HomologicalComplexUpToQuasiIso.Q",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary chain-complex quasi-isomorphism and localization results, no dg commuting-square projection with enhanced localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dg category of resolution arrows and commuting squares projects by a quasi equivalence when its mapping complexes are pullbacks of surjective quasi isomorphisms",
+   "results": "HomotopicalAlgebra.CofibrantObject.HoCat.resolution; DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh; LocalizerMorphism resolution declarations",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary model-category resolution results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "EnrichedCategory",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-17",
+   "verdict": "unusable query: Loogle reported unknown identifier; no mathematical absence is inferred from this query. The quoted-name Loogle query recorded above succeeded."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiEquivalence|QuasiEquivalence|dgCategory|DgCategory",
+   "results": "0 hits in subdirectory CategoryTheory (logged sub=CategoryTheory).",
+   "date": "2026-10-17",
+   "verdict": "no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of projection from enriched commuting square category with acyclic surjective fibers",
+   "results": "StructuredArrow/CostructuredArrow fullness and unrelated diagram inclusions",
+   "date": "2026-10-17",
+   "verdict": "no match: no dg commuting-square theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-model-mapping-comparison",
@@ -75,5 +194,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-resolution-square-projection",
+  "worker": "stage1",
+  "summary": "Audited and completed the seven-step split: direct dg pullback checks, explicit kernel primitives, arbitrary-degree cycle lifts and cohomology injectivity, quasi-equivalence via derived enrichment, localization inverses with specified-arrow lifts, and explicit dual substitutions. No new nodes or statement change.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint.md motivates the resolution-square comparison; this generic foundation is agent-formulated and is used by the mapping-comparison node."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-26fff5f83",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-26fff5f83 (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement unchanged. Also read the full statements of def-weil-abstract-derived-category, lem-coef-dg-quasifunctor-invariance, lem-coef-dg-enrichment-rectification and lem-coef-enhanced-localization-universal, and the only citer, lem-coef-dg-model-mapping-comparison (its steps 3-6 use exactly the postcomposition and dual precomposition hypotheses). Source: master prop-coef-integral-exceptional-adjoint.md, proof paragraph 2 (derived coefficient adjunction). It does not state this generic lemma, so proof_origin agent is right. This is not a target node and involves no base-change morphism or coefficient category. No SGA. Checked by hand: the square relation is preserved by d, composition and identities, because s,t are closed of degree 0. The pullback projection is a degreewise surjection with kernel ker p, which is acyclic since p is a surjective quasi-isomorphism (the primitive a-z-dw in step 2 checked in every degree). The closed lift in step 3 holds in every degree, including the n=0 arrow lift. The quasi-equivalence follows from the cited definition, and functorial derived enrichment gives the enriched inverse sigma. Step 5's inversion of W lifts the given w itself, so W need not be saturated. Step 6 inverts via q^* full faithfulness. The dual substitution tb=as with p(a)=as was checked. Small cases tested: S empty, identity resolutions (R=D), several s over one d, W empty or all closed arrows, unbounded degrees. The route stays in unit sk-prop-sf-biduality-general apart from a mathlib definition, so no tool_uses. The transitive walk (1118 nodes) finds no cycle. rg found no duplicate among the left-resolution, presheaf-model, module-diagram and free-cell nodes. No fixes."
  }
 }

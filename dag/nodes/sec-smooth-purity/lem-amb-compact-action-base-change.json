@@ -25,9 +25,89 @@
   "thm-cbc-finite-torsion",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The square with top map $a$, bottom map $1_Y$, and vertical map $f$ is cartesian. In the fibre product $X\\times_Y Y$, the comparison map is $(a,f)$ by the universal property [def-pc-fibre-product]. Since $a$ is an isomorphism and $fa=f$, the map $a^{-1}$ composed with the first projection is an inverse comparison; the two composites are identities because their projections agree. Thus the compact-support square required by [def-cbc-compact-support-square] is the stated square.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-cbc-compact-support-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraph 1: the Cartesian square for the automorphism and its base-change comparison"
+   }
+  },
+  {
+   "text": "Apply [thm-cbc-finite-torsion] to this cartesian square, the finite ring $A$, the supplied compactification $c$, and the bounded-below object $K$. It gives an isomorphism $E_a(K):Rf_!K\\to Rf_!a^*K$ after the canonical identification of the lower base with $Y$, and says that this exchange is natural in $K$ and independent of the compactification representative. By the compact-support definition [def-amb-etale-compact-support], $Rf_!$ is a functor on the ordinary derived category, so the coefficient isomorphism $\\theta:a^*K\\xrightarrow{\\sim}K$ induces $Rf_!(\\theta)$. The composite $\\rho_{a,\\theta}=Rf_!(\\theta)\\circ E_a(K)$ is therefore an automorphism. It does not depend on the compactification representative: $E_a(K)$ does not by [thm-cbc-finite-torsion], and $Rf_!(\\theta)$ does not because the proper-refinement comparisons identifying the chosen-compactification candidates are natural isomorphisms on $D^+(X_{\\mathrm{et}},A)$ [lem-amb-etale-compact-comparisons] (its hypotheses hold: $A$ is finite, $X,Y$ are Noetherian, and $f$ is separated of finite type with the compactification $c$), so they carry $Rf_!^{c}(\\theta)$ to $Rf_!^{c''}(\\theta)$ for any other compactification $c''$.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "def-amb-etale-compact-support",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraph 1: functoriality of compact supports gives the automorphism over the base"
+   }
+  },
+  {
+   "text": "For $a=1_X$ and $\\theta=1_K$, the identity clause of [thm-cbc-finite-torsion] identifies the exchange with the identity after the canonical identity-pullback comparison. The functoriality in [def-amb-etale-compact-support] sends $1_K$ to $1_{Rf_!K}$, so the composite is $\\rho_{1,1}=1$.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraph 1: identity action clause"
+   }
+  },
+  {
+   "text": "Put $F=Rf_!$ and $F_T=Rf_{T!}$. Form the pullback compactification as in [def-cbc-compact-support-square]; its open immersion is quasi-compact because quasi-compact morphisms are stable under base change [lem-pc-quasi-compact-base-change], so it is an allowed compactification of $f_T$. The base-changed morphism $f_T$ is separated of finite type by [lem-pod-separated-finite-type-base-change], and $X_T$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] since $T$ is Noetherian. The fibre-product universal property [def-pc-fibre-product] gives $u'a_T=au'$ and the inverse $a^{-1}\\times_Y1_T$ to $a_T$. Write $\\delta:u'^*a^*K\\xrightarrow{\\sim}a_T^*K_T$ for the inverse-image composition comparison. Define\n$$D=F_T(\\delta)\\circ C_u(a^*K):u^*F(a^*K)\\longrightarrow F_T(a_T^*K_T).$$\nThe two horizontally pasted squares (first the $a$-square then the $u$-square, or first the $u$-square then the $a_T$-square) have the same top composite $au'=u'a_T$ and the same bottom map $u$. The horizontal pasting clause of [thm-cbc-finite-torsion] therefore gives\n$$D\\circ u^*E_a(K)=E_{a_T}(K_T)\\circ C_u(K).$$\nIts naturality in the coefficient morphism $\\theta:a^*K\\to K$, with $\\theta_T\\circ\\delta=u'^*\\theta$, gives\n$$C_u(K)\\circ u^*F(\\theta)=F_T(\\theta_T)\\circ D.$$\nUsing functoriality [def-amb-etale-compact-support] and associativity, the required equality is the explicit calculation\n$$C_u(K)\\circ u^*\\rho_{a,\\theta}=F_T(\\theta_T)\\circ D\\circ u^*E_a(K)=F_T(\\theta_T)\\circ E_{a_T}(K_T)\\circ C_u(K)=\\rho_{a_T,\\theta_T}\\circ C_u(K).$$",
+   "uses": [
+    "def-cbc-compact-support-square",
+    "thm-cbc-finite-torsion",
+    "def-amb-etale-compact-support",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-fibre-product",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1 and 2: pull back the compact-support action and compare the coefficient isomorphism"
+   }
+  },
+  {
+   "text": "The exchange maps and the comparison $C_u$ in the preceding step are the canonical compactification-independent maps of [thm-cbc-finite-torsion]. That theorem states compatibility with the canonical comparisons for refinements and independence of the common refinement, so replacing the base-changed compactification by any supplied compactification on $X_T$ transports both sides using the same canonical source and target comparisons; these comparisons are natural in the coefficient object [lem-amb-etale-compact-comparisons], so they also commute with $F_T(\\theta_T)$ and $F_T(\\delta)$. Hence the displayed equality is the equality of the actual morphisms specified in the statement, even when the chosen compactification on $X_T$ differs from the pullback one.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraph 2: compatibility with changing compactification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-cbc-compact-support-square",
+  "def-pc-fibre-product",
+  "lem-amb-etale-compact-comparisons",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-cbc-finite-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+  "place": "Proof paragraphs 1 and 2, auxiliary coherence statement for compact-support actions and pullback"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,10 +164,38 @@
    "results": "0 hits: ",
    "date": "2026-10-17",
    "verdict": "no match: returned algebraic tensor base-change or ordinary structure-module pushforward facts, not the ordinary-etale compact-support exchange action or its Cartesian-model/base-change compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite coefficient compact-support pushforward action induced by an automorphism is compatible with arbitrary base change",
+   "results": "8 hits: IsBaseChange.finsuppPow; IsBaseChange.finitePow; IsBaseChange.of_comp; WeierstrassCurve.baseChange_preΨ'; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; WeierstrassCurve.VariableChange.map_baseChange; Algebra.IsPushout.cancelBaseChange; Algebra.IsPushout.cancelBaseChangeAux",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern algebraic base change, finite morphism stability, or variable changes, not ordinary-etale compact-support exchange actions"
+  },
+  {
+   "tool": "loogle",
+   "query": "baseChange, compactSupport, lowerShriek",
+   "results": "0 hits | loogle: unknown identifier 'baseChange'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query parser rejected the identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|lowerShriek|shriekBaseChange [Mathlib/]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality under arbitrary base change of the compact-support exchange associated to an automorphism",
+   "results": "8 hits: RingHom.IsStableUnderBaseChange; LinearEquiv.baseChange_trans; IsBaseChange.finsuppPow; IsBaseChange.transvection; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange; IsBaseChange.toDualBaseChange; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ring, linear, or morphism-property base change, not ordinary-etale compact-support exchange"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -104,5 +212,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-amb-compact-action-base-change",
+  "worker": "stage1",
+  "summary": "Expanded the auxiliary coherence statement into five proof steps. The first checks the Cartesian model of an automorphism square from the fibre-product universal property; the remaining steps apply finite-coefficient compact-support base change for the action, its identity case, naturality and pasting under arbitrary base change, and compactification independence. No new nodes were needed. Resumed the earlier sandbox, corrected the ill-typed pasting equation by explicitly naming its target comparison D, fixed doubled TeX escapes, and checked base-changed geometric hypotheses using existing nodes.",
+  "blueprint": "Realizes the auxiliary statement in proof paragraphs 1 and 2 of lem-amb-linear-trace-invariance.proof.md: paragraph 1 supplies the action and Cartesian model, while paragraph 2 supplies pullback compatibility and compactification coherence.",
+  "tool_uses": [
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "The item needs finite-coefficient compact-support exchange naturality, identity, pasting, and compactification independence; no node in sk-prop-an supplies these generic base-change properties."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic stability of separated finite-type morphisms verifies the hypotheses for the pulled-back automorphism square."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian stability verifies that the pulled-back compact-support candidate has Noetherian source."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-cbc-finite-torsion",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-4ea5ecd05",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-4ea5ecd05 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 5 steps, the parent lem-amb-linear-trace-invariance (step 3 is its only use of the item), the blueprint main-20261015 sk-prop-an/lem-amb-linear-trace-invariance proof paragraphs 1–2, unit sk-prop-an, and the statement of every cited node, including the definition behind the exchange (def-cbc-exchange-map), def-amb-etale-compact-support with its blueprint_update, and lem-amb-etale-compact-comparisons. The coefficient category is the same throughout: ordinary étale D^+ with a finite commutative ring A, in the item, the parent, thm-cbc-finite-torsion and def-cbc-exchange-map. The base-change map is the exchange map of def-cbc-exchange-map (Rp_*j_! form), made compactification-independent as in thm-cbc-finite-torsion; no pro-étale coefficients are identified with it. All hypotheses of the theorem hold, and the statement is unchanged and not weakened. Step 1: elementary and correct; (a,f) has inverse a^{-1}pr_1 because fa^{-1}=f. Step 4: I recomputed it. Pasting the a-square with the u-square in either order gives the same Cartesian square with top au'=u'a_T, which yields D∘u^*E_a=E_{a_T}∘C_u with δ the quotient of the two associativity isomorphisms. Naturality of C_u applied to θ, using θ_T∘δ=u'^*θ, gives C_u∘u^*F(θ)=F_T(θ_T)∘D, and the three-term chain is correct. Edge cases checked: f=1 (forces a=1, ρ=θ), the fold map Y⊔Y→Y with the swap, empty X, and the parent's d=0 and identity-section cases. No new nodes, no duplicate found in the DAG, no cycle, no SGA. Two citation faults fixed in fixes/dag/nodes/sec-smooth-purity/lem-amb-compact-action-base-change.json (only proof and proof_deps changed). (1) C4/C1, steps 2 and 5: the statement's claim that ρ is independent of the compactification needs the refinement comparisons to be natural in K, so that Rf_!(θ), F_T(θ_T) and F_T(δ) are carried along. thm-cbc-finite-torsion covers only the exchange map, and def-amb-etale-compact-support defers this property. Added [lem-amb-etale-compact-comparisons]: same unit sk-prop-sf-cbc, so on route, and its hypotheses are met. (2) C1, step 4: the pullback compactification must have a quasi-compact open part to be an allowed compactification and to apply the theorem. Added the Mathlib leaf [lem-pc-quasi-compact-base-change]. proof_deps is again the union of the steps' uses. The declared tool_uses are accepted as harmless: thm-cbc-finite-torsion is on route, and the other two are Mathlib leaves.; 1 file(s) fixed by the reviewer"
  }
 }
