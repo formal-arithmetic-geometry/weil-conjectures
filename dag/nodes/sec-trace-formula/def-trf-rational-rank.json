@@ -2,14 +2,15 @@
  "id": "def-trf-rational-rank",
  "kind": "definition",
  "title": "Rational rank of an abelian group",
- "statement": "For an abelian group $G$, its rational rank is $\\operatorname{rrk}(G):=\\dim_{\\mathbf Q}(G\\otimes_{\\mathbf Z}\\mathbf Q)$, where $\\mathbf Q$ is the rational field [def-weil-field], and this is the dimension of the rationalization of $G$.",
+ "statement": "For an abelian group $G$, its rational rank is the cardinal-valued invariant $\\operatorname{rrk}(G):=\\dim_{\\mathbf Q}(G\\otimes_{\\mathbf Z}\\mathbf Q)$, where $\\mathbf Q$ is the rational field [def-weil-field], $G\\otimes_{\\mathbf Z}\\mathbf Q$ has its canonical $\\mathbf Q$-vector-space structure, and $\\dim_{\\mathbf Q}$ means the cardinality of a Hamel basis (possibly infinite). Thus $\\operatorname{rrk}(G)$ is the dimension of the rationalization of $G$ without a finite-dimensionality assumption.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "§2.1, notation immediately before Lemma 2.1.2: $E_{l/k}=\\dim_{\\mathbf Q}((|l^\\times|/|k^\\times|)\\otimes_{\\mathbf Z}\\mathbf Q)$; local archival copy unavailable.",
   "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
  },
  "stmt_deps": [
-  "def-weil-field"
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product"
  ],
  "proof": [],
  "proof_deps": [],
@@ -17,35 +18,42 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "definition of rational rank of an abelian group as dimension over Q of tensor with Q",
-   "results": "8 hits: AddGroup.rank, Module.rank, Module.finrank, and unrelated number-field rank declarations; none defines rational rank as dimension of G tensor Q.",
+   "query": "cardinal dimension of an arbitrary rational vector space Module.rank tensor product abelian group",
+   "results": "8 hits: Real.rank_rat_real and Complex.rank_rat_complex; cardinalMk_eq_cardinalMk_field_pow_rank; rank_fun'; lift_cardinalMk_eq_lift_cardinalMk_field_pow_lift_rank; max_aleph0_card_le_rank_fun_nat; RCLike.rank_le_two; rank_fun_infinite. Module.rank is the general cardinal-valued dimension API; no rational-rank definition for G tensor Q appears.",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "generalization: Module.rank is the cardinal-valued dimension notion"
   },
   {
    "tool": "loogle",
    "query": "Module.rank, TensorProduct, Rat",
-   "results": "0 hits.",
+   "results": "0 hits; Loogle reported an application type mismatch for the uninstantiated TensorProduct pattern.",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match: malformed pattern"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.rank",
+   "results": "12 hits, led by Module.rank in Mathlib.LinearAlgebra.Dimension.Basic, whose type is cardinal-valued module rank; no declaration combines it with an abelian-group rationalization as a named rational-rank definition.",
+   "date": "2026-10-18",
+   "verdict": "generalization: Module.rank is the cardinal-valued dimension API"
   },
   {
    "tool": "grep",
-   "query": "rational rank|tensor.*Rat|Module.rank",
-   "results": "25 hits in Mathlib/LinearAlgebra, mainly Module.rank and TensorProduct APIs; no definition named rational rank for an abelian group.",
+   "query": "Module.rank|dimension.*basis|TensorProduct [Mathlib/LinearAlgebra/Dimension]",
+   "results": "25 hits in Mathlib/LinearAlgebra/Dimension, including Mathlib/LinearAlgebra/Dimension/Basic.lean:17,60,68 for Module.rank as cardinal-valued dimension and Dimension/Constructions.lean:27 for rank_tensorProduct; no rational-rank definition.",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "generalization: Module.rank and tensor-product rank APIs"
   },
   {
    "tool": "leansearch",
-   "query": "rational rank of an abelian group dimension of G tensor Q",
-   "results": "8 hits: AddGroup.rank, Module.rank, IsAddTorsionFree.of_module_rat and related rank declarations; no exact definition.",
+   "query": "cardinal dimension of G tensor Q for arbitrary abelian group",
+   "results": "8 hits: NumberField.Embeddings.card, ModN.natCard_eq, Cardinal.mk_freeAbelianGroup, RegularWreathProduct.card, Cardinal.mk_freeAddGroup, card_dvd_exponent_nsmul_rank, AddGroup.rank, Cardinal.mk_quaternion; no exact rational-rank definition.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-residual-curve-value-group",
@@ -94,5 +102,21 @@
   "group": "Q15",
   "result": "fix",
   "note": "Mathematics, dependencies, universes, and verbatim signatures verified; both immutable Lean modules compile through scompile.py. H11 repaired with a complete replacement report in fixes/lem-trf-abhyankar-inequality.report.md. Full findings recorded in review.md. Branch unchanged."
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-trf-rational-rank",
+  "worker": "stage1",
+  "summary": "Repair of the returned definition-only split. The unrestricted abelian-group statement now uses cardinal-valued Q-dimension (basis cardinality, equivalently Mathlib's Module.rank) and explicitly records the canonical Q-vector-space structure on G tensor Q; the incompatible finite-dimensional dimension dependency was removed, while the field and tensor-product dependencies remain. No matching finished project declaration or Mathlib definition of rational rank was found.",
+  "blueprint": "The item realizes the rational-rank notation in the Proposition 4.3.1 proof of lem-trf-local-term-locality: the Q-dimension of a value-group quotient tensor Q, as recorded in blueprint.from. The imported notation is generalized faithfully to arbitrary abelian groups by taking cardinal-valued Hamel-basis dimension, so no finite-dimensional hypothesis is introduced. The definition has no proof steps; its blueprint realization is the cited notation sentence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N7-1df6a12f3",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-1df6a12f3 (reviewer sub-agent of L); spot-checked: Read the complete item, unit, chapter, dependencies, source route, and delivery instructions. Temkin §2.1 p.7 confirms the cardinal-valued Q-dimension and permits infinite cardinals. The repaired definition is well-typed for arbitrary abelian groups, passes zero, Z, torsion, and infinite-rank cases, removes the invalid finite-dimensional dependency, introduces no duplicate or restated node, and has no proof or route-pivot issues. Review written to review.md."
  }
 }

@@ -24,39 +24,42 @@
  ],
  "proof": [
   {
-   "text": "Work first at a fixed finite coefficient stage and a fixed compactification $c=(j,p_f)$. The scheme $\\overline X$ is finite type over $k$: cover $Y$ by finitely many affine charts whose coordinate algebras have finite sets of $k$-algebra generators, and cover the preimages by finitely many affine charts with finitely generated algebras over those coordinate rings (the proper morphism $p_f$ is of finite type). The images of the base generators together with the relative generators generate each source algebra over $k$, giving a finite affine cover of finite type. Choose a nonnegative integer $d$ bounding its dimension, using lem-kun-dimension-finite-type (take $d=0$ for an empty scheme). The open extension theorem puts $j_!K$ in the finite-Tor category with the original Tor interval $[a,b]$; apply cor-sf-direct-image-ctf-proetale to the proper morphism $p_f$ to obtain $F_AK=Rp_{f,*}j_!K$ constructible with Tor interval $[a,b+2d]$. All these schemes are Noetherian by the finite-type-over-Noetherian theorem. The bound is independent of the finite coefficient exponent. Exact open extension and derived direct image are triangulated, so this restriction of $F_A$ is exact.",
+   "text": "Work first at a fixed finite coefficient stage and a fixed compactification (c=(j,p_f)). The scheme (overline X) is finite type over (k): finite affine covers of (Y) and of the finite-type morphism (p_f) give finitely generated coordinate algebras over (k). Choose a nonnegative dimension bound (d) by lem-kun-dimension-finite-type (take (d=0) for the empty scheme). The open-extension theorem puts (j_!K) in the finite-Tor category with its original interval ([a,b]); cor-sf-direct-image-ctf-proetale gives (F_AK=Rp_{f,*}j_!K) constructible with interval ([a,b+2d]). Finite type over the Noetherian field makes all schemes Noetherian. Open extension and proper derived direct image are exact by the two triangulated-functor nodes, so (F_A) is exact on the finite-Tor subcategory and its compactification refinements agree.",
    "uses": [
     "lem-kun-dimension-finite-type",
     "lem-trf-open-ctf",
     "cor-sf-direct-image-ctf-proetale",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-derived-direct-image-triangulated"
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "prop-compactification-coherence-detailed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Construction 2.17, Theorem 2.18; finite-coefficient constructibility and uniform bounds, with the cited DAG statements supplying the precise pro-etale conclusions."
+    "place": "Construction 2.17, Theorem 2.18 and Corollary 2.19; finite-stage compact supports and amplitude bounds."
    }
   },
   {
-   "text": "Apply cor-pur-general-admissibility-datum to $f$ itself. Its hypotheses allow $X$ and $Y$ to be nonseparated over $k$. It gives bounded constructible and finite-Tor preservation for $G_A$, with constants depending on a finite family of affine presentations of $f$, independent of the coefficient exponent. Every bounded constructible input is of etale origin by lem-sf-proetale-constructible-origin. Consequently the natural Hom bijection of thm-sf-ambient-adjoint-class applies to every $K,L$ in the two finite-Tor categories. These are full triangulated subcategories by lem-weil-finite-ctf-triangulated. Restrict that bijection and use lem-weil-pbc-adjunction-of-natural-bijection: $\\eta_K$ is the transpose of $1_{F_AK}$ and $\\epsilon_L$ the inverse transpose of $1_{G_AL}$, and both triangles hold. Equip the right adjoint with the shift comparison obtained by transposing the shift comparison of $F_A$: its unit and counit commute with shifts by the two transpose formulas, and lem-sf-triangulated-right-adjoint makes $G_A$ exact. This is the transported etale adjunction; it makes no assertion about a right adjoint to compact supports on unrestricted pro-etale objects.",
+   "text": "Work on the ordinary unbounded etale derived categories. The compactification has Noetherian source and target by Step 1, so thm-amb-etale-exceptional-adjoint supplies $F_A^{\\mathrm{et}}=Rp_{\\mathrm{et},*}j_!^{\\mathrm{et}}\\dashv G_A^{\\mathrm{et}}$. Apply thm-sf-ambient-adjoint-class to the same compactification: for bounded-below pro-etale $L$ it gives the bounded-below composite $G_AL=\\nu_X^*G_A^{\\mathrm{et}}R\\nu_{Y,*}L$ and its natural Hom bijection for bounded-below etale-origin inputs. This is exactly the finite functor defined in def-weil-exceptional-inverse-image. The preservation corollary applies to this specified composite, including nonseparated finite-type $X,Y$, and gives constructibility and finite-Tor bounds. Thus the Hom bijection restricts to the full finite-Tor constructible categories. Its transpose formulas give units, counits and triangles. The unique adjoint shift comparison supplies coherent shifts and unit/counit compatibility; the triangulated-right-adjoint lemma then gives exactness. No Brown theorem is applied to a pro-etale category or to an unspecified localizing closure.",
    "uses": [
-    "cor-pur-general-admissibility-datum",
-    "lem-sf-proetale-constructible-origin",
+    "thm-amb-etale-exceptional-adjoint",
     "thm-sf-ambient-adjoint-class",
+    "def-weil-exceptional-inverse-image",
+    "cor-pur-general-admissibility-datum",
     "lem-weil-finite-ctf-triangulated",
     "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
     "lem-sf-triangulated-right-adjoint"
    ],
    "elementary": false,
    "source": {
     "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Propositions 2.23, 2.29(2), 3.16(2); current blueprint exceptional-functor paragraph, constructible typing and adjunction. The local smooth-purity prerequisite is the existing lecture-notes route of cor-pur-general-admissibility-datum."
+    "place": "Propositions 2.23, 2.29(2), 3.16(2), with the current blueprint exceptional-functor paragraph."
    }
   },
   {
-   "text": "The finite scalar-change functors have the asserted domains even for a nonflat quotient. Indeed a finite-Tor input has a bounded flat model by lem-sf-flat-model. After extension from $A$ to the finite ring $B$, each term is $B$-flat: tensoring it with a $B$-module is the original flat term tensored with the underlying $A$-module. Thus the same interval is a Tor bound. Cohomological constructibility of the tensor with the constant finite $A$-module $B$ follows from lem-pur-finite-tensor-constructible-cohomology. This also gives constructibility as a $B$-module: on each locally constant finite $A$-stratum, the finitely many endomorphisms giving the $B$-action are locally constant after refining the trivializing etale covers, so the same sheaf is locally constant with finite $B$-stalk. This applies to $A_n\\to A_m$, to $A_n\\to R'/\\varpi^nR'$, and to their composites. No flatness of $A_m$ over $A_n$ is used.",
+   "text": "A finite-Tor input has a bounded flat model by lem-sf-flat-model. After extension from (A) to a finite coefficient ring (B), tensoring with a (B)-module is the original flat tensor followed by restriction, so the same Tor interval is retained; no flatness of a quotient (A_n\\to A_m) is used. The finite-tensor constructibility theorem gives constructible cohomology, and refining the finite etale trivializing covers makes the induced (B)-action locally constant with finite (B)-stalks. K-flat change of rings is independent of the chosen model by lem-pur-derived-change-of-rings. Hence all finite coefficient-change functors in the statement have the displayed domains; higher stages are handled below.",
    "uses": [
     "lem-sf-flat-model",
     "lem-pur-finite-tensor-constructible-cohomology",
@@ -65,11 +68,11 @@
    "elementary": false,
    "source": {
     "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Finite-coefficient change of rings; Proposition 2.29(2). Constructibility input is Stacks Tag 09BQ (proetale.tex, lemma-tensor-c)."
+    "place": "Finite-coefficient tensor and change-of-rings argument in the coefficient-comparison part of the construction."
    }
   },
   {
-   "text": "Prove finite coefficient comparisons on the ordinary etale derived categories before restricting them. Write $F_A^e\\dashv G_A^e$ for ordinary etale compact support and its right adjoint. For $A\\to B$ as in step 3, restriction $r_T$ from $B$ to $A$ is exact and reflects isomorphisms, since its cohomology is the same underlying sheaf. There is a canonical identification $r_YF_B^e\\cong F_A^e r_X$: open extension commutes with restriction termwise, and the proper-direct-image identification is the two factorizations of the same ringed-topos morphism in lem-weil-pbc-ringed-topoi-derived-pushforward-composition. For the identity topos morphism with structural ring map A to B, lem-weil-pbc-ringed-topoi-module-adjunction gives the underived extension/restriction adjunction. Its left derived functor is everywhere defined by lem-pur-derived-change-of-rings; restriction is exact, so its termwise functor is its absolute right derived functor. Lemma lem-sc-derived-adjunction-from-underived therefore supplies the derived extension/restriction adjunction on these ordinary etale categories. Apply lem-pur-etale-exceptional-constant-tensor with the constant complex $V=B\\in D(A\\text{-}\\mathrm{Mod})$. Its first tensor comparison, read using $r_YF_B^e\\cong F_A^e r_X$, proves that the specified $q:T_YF_A^e\\to F_B^eT_X$ is an isomorphism. Adjunction then identifies $r_XG_B^e$ with $G_A^e r_Y$: for every $H$, the chain $\\operatorname{Hom}_A(H,r_XG_B^eM)=\\operatorname{Hom}_B(T_XH,G_B^eM)=\\operatorname{Hom}_B(F_B^eT_XH,M)=\\operatorname{Hom}_A(F_A^eH,r_YM)=\\operatorname{Hom}_A(H,G_A^e r_YM)$ is natural, using $q$ in the middle. Under this identification, restriction of the counit-transpose $b:T_XG_A^e\\to G_B^eT_Y$ is exactly the second tensor comparison in lem-pur-etale-exceptional-constant-tensor, as its displayed transpose shows. That comparison is invertible for $V=B$ even when $B$ is not perfect over $A$; conservativity of $r_X$ proves $b$ invertible. The ordinary etale right adjoints used here exist by thm-amb-etale-exceptional-adjoint; no separatedness of the schemes over $k$ enters this argument.",
+   "text": "On ordinary etale categories use $F_A^{\\mathrm{et}}\\dashv G_A^{\\mathrm{et}}$. Exact restriction of scalars $r_T$ is conservative. Open extension commutes with restriction termwise, and ringed-topos direct-image composition gives $r_YF_B^{\\mathrm{et}}\\cong F_A^{\\mathrm{et}}r_X$. Derived scalar extension $T_T$ is left adjoint to $r_T$, computed by K-flat models. Define $q:T_YF_A^{\\mathrm{et}}\\to F_B^{\\mathrm{et}}T_X$ by transposing $F_A^{\\mathrm{et}}$ of the scalar unit. After restriction it is the constant-$B$ projection map of lem-pur-etale-exceptional-constant-tensor, hence an isomorphism. The Hom chain using $T\\dashv r$, $F_A\\dashv G_A$, $F_B\\dashv G_B$ and $q$ identifies $r_XG_B^{\\mathrm{et}}\\cong G_A^{\\mathrm{et}}r_Y$. Under this identification, restriction of the counit-transpose map $b:T_XG_A^{\\mathrm{et}}\\to G_B^{\\mathrm{et}}T_Y$ is precisely the constant-$B$ exceptional tensor map of that same lemma: both have transpose the inverse projection map followed by $1\\otimes\\epsilon_A$. That lemma makes it invertible even when $B$ is nonflat over $A$; conservativity then proves that $b$ is invertible as a $B$-linear map. The identity and composite $q$ comparisons are the tensor associators on K-flat models.",
    "uses": [
     "thm-amb-etale-exceptional-adjoint",
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
@@ -82,86 +85,101 @@
    "elementary": false,
    "source": {
     "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Construction 2.26 and Proposition 2.29(2), constant coefficient complex B; Stacks Tag 0D6E for ringed-topos derived composition."
+    "place": "Ordinary etale coefficient comparison and exceptional adjunction."
    }
   },
   {
-   "text": "Transport step 4 to the finite constructible pro-etale categories. Use the etale-origin equivalence of lem-sf-proetale-constructible-origin and its Tor-amplitude equivalence lem-sf-comparison-tor-amplitude, and use thm-weil-pbc-site-comparison to identify $R\\nu_*\\nu^*$ with the identity on bounded-below etale complexes. The compact-support identification is the named comparison of lem-sf-class-compact-support-comparison; the exceptional identification is $\\nu_X^*G_A^eR\\nu_{Y,*}$ from step 2. Exact inverse image commutes with tensor of constant coefficients: on a flat resolution this is the balancing map $\\nu^*(P\\otimes_A B)\\cong\\nu^*P\\otimes_A B$. Therefore the transported $q$ is the canonical compact-support coefficient map, and $b$ is its counit-normalized transpose. Units and counits here are exactly those in step 2, since both were obtained from the same natural Hom bijection. The simultaneous section models of lem-coef-semilinear-derived-sections apply to the inverse images, derived direct images, open extension, coefficient tensor and their transposes. Thus these are coherent maps of coefficient systems, rather than choices of maps inferred from finite objectwise isomorphisms.",
+   "text": "Transport the preceding comparison across the etale--pro-etale constructible-origin equivalence. The Tor-amplitude comparison preserves the same interval, the site-comparison unit identifies (R\\nu_*\\nu^*) with the identity on bounded-below etale complexes, and the compact-support comparison identifies pro-etale (F_A) with the transported etale (F_A^{\\mathrm{et}}). Exact inverse image commutes with tensoring by a constant coefficient ring on a flat model, so the transported (q) is the canonical pro-etale coefficient map. The transported (b), units, and counits are the same maps because they are characterized by the natural Hom transposes; hence they are independent of witnesses and compactification choices.",
    "uses": [
     "lem-sf-proetale-constructible-origin",
     "lem-sf-comparison-tor-amplitude",
     "thm-weil-pbc-site-comparison",
     "lem-sf-class-compact-support-comparison",
-    "lem-coef-semilinear-derived-sections"
+    "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-    "place": "Finite etale/pro-etale comparison in the current exceptional-functor definition; Construction 5.15 and Lemma 5.16 for simultaneous coefficient systems."
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AK (lemma-compare-constructible), 09AL (lemma-compare-constructible-derived) and 09B1 (lemma-compare-derived); compact-support Hom transport is spelled out in literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md."
    }
   },
   {
-   "text": "At each coefficient change define $b_L$ as the $F'\\dashv G'$ transpose of $T_Y\\epsilon_L\\circ q_{G L}^{-1}$. The inverse-transpose formula gives $\\epsilon'_{T_YL}\\circ F'(b_L)\\circ q_{G L}=T_Y\\epsilon_L$, the requested counit equation. For the unit equation compare $b_{F K}\\circ T_X\\eta_K$ and $G'(q_K^{-1})\\circ\\eta'_{T_XK}$ as maps $T_XK\\to G'T_YF K$. Their $F'\\dashv G'$ inverse transposes are both $q_K^{-1}$: for the first, naturality of $q$ reduces the transpose to $T_Y(\\epsilon_{F K}\\circ F\\eta_K)\\circ q_K^{-1}=q_K^{-1}$ by the first triangle; for the second this is the unit-transpose formula. Injectivity of transposition proves equality; composing with $G'(q_K)$ gives the displayed unit equation. Identity and composition for $q$ are the coherent tensor comparisons of step 5, and identity and composition for $b$ follow by mate pasting. This proves the mixed finite-quotient/finite-extension cocycles, including the equations on units and counits.",
+   "text": "For a coefficient map $T$, define $b_L:T_XG_AL\\to G_BT_YL$ as the $F_B\\dashv G_B$ transpose of $T_Y\\epsilon_L\\circ q_{G_AL}^{-1}$. The inverse-transpose formula gives the displayed counit equation. Put $a_K=b_{F_AK}\\circ T_X\\eta_{A,K}:T_XK\\to G_BT_YF_AK$. Its inverse transpose is\n$$T_Y\\epsilon_{A,F_AK}\\circ q_{G_AF_AK}^{-1}\\circ F_BT_X\\eta_{A,K}\n=T_Y(\\epsilon_{A,F_AK}\\circ F_A\\eta_{A,K})\\circ q_K^{-1}=q_K^{-1},$$\nby naturality of $q$ and the triangle identity. After postcomposing $a_K$ with $G_B(q_K)$, its inverse transpose is $q_K\\circ q_K^{-1}=1_{F_BT_XK}$. This is also the inverse transpose of $\\eta_{B,T_XK}$. Injectivity proves exactly the completed unit equation in the statement. The unique-adjoint coefficient lemma transports this counit-normalized comparison to any other adjoint choices; mate pasting applied to the identity and tensor-composition comparisons for $q$ proves the identity and composition cocycles for $b$.",
    "uses": [
+    "det-sp-unique-right-adjoint",
+    "det-sp-unique-adjoint-coefficients",
     "lem-weil-pbc-adjunction-of-natural-bijection",
     "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Adjunction transposes and pasting, Stacks Tag 0037 and the mate-pasting formulas; explicit calculation from the finite comparisons."
-   }
-  },
-  {
-   "text": "Assemble the finite functors as functors of normalized derived coefficient systems. On the full stable enhanced finite-Tor subcategories take the enhanced $F_n$ supplied by lem-coef-semilinear-derived-sections, and the equivalences $q$ and ordinary adjoints $G_n$ of steps 1--6. The finite-Tor categories are stable by lem-weil-finite-ctf-triangulated. All hypotheses of lem-coef-cartesian-section-adjoint-mates now hold, including invertibility of the right mates. It produces enhanced right-adjoint realizations and an adjunction $\\mathcal F\\dashv\\mathcal G$ on cartesian sections, with actual coherent unit/counit maps and their triangle identities. Semilinear-derived-sections identifies these sections with normalized strict derived systems. This realization of $\\mathcal G$ is the one in def-weil-exceptional-inverse-image: the system adjoint of lem-pur-etale-coefficient-system-adjoint is first transported by the system site comparison of lem-pur-coefficient-system-derived-comparison. On bounded-below systems with etale-origin evaluations the system counit is an isomorphism, so the same Hom chain as the finite comparison transports the system adjunction. Its evaluations and counits are the finite ones; uniqueness of the right adjoint identifies it with the section realization, as a natural isomorphism of system functors compatible with the adjunction, not just a list of identifications of evaluated objects.",
-   "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-finite-ctf-triangulated",
-    "lem-coef-cartesian-section-adjoint-mates",
-    "lem-pur-etale-coefficient-system-adjoint",
-    "lem-pur-coefficient-system-derived-comparison",
-    "det-sp-unique-right-adjoint"
    ],
    "elementary": false,
    "source": {
     "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Constructions 5.14--5.15, Lemmas 5.16 and 5.22, Proposition 5.24; the cited general cartesian-section lemma supplies enhanced adjunction descent."
+    "place": "Adjunction mates and coefficient cocycles."
    }
   },
   {
-   "text": "Use the reduction/limit adjunction $\\mathcal R_T\\dashv\\mathcal L_T$ of lem-coef-derived-system-evaluation-calculus. Its unit is invertible on the derived-complete objects in question: compute it from the strict augmentation $P\\to(P\\otimes A_n)_n$, $x\\mapsto(x\\otimes1)_n$, on one K-flat representative and then apply total limit. In the Roos cone model this is the augmentation into the product with zero shifted-product component, exactly the specified construction of $\\chi_{E/E}$ in lem-weil-finite-free-completed-scalar-comparison after $P\\otimes_RR=P$. This identifies the actual unit using its complex model, rather than only its projections. The $E'=E$ case of lem-weil-finite-free-completed-scalar-comparison explicitly asserts that this same natural map is an isomorphism on derived-complete objects. Its counit is invertible on normalized systems by lem-coef-normalized-dvr-effectivity, with the canonical coherent counit comparisons of that statement. Thus reduction and total limit give inverse equivalences between the integral finite-Tor category and normalized systems with bounded constructible finite-Tor evaluations having common cohomological and Tor bounds. For the reverse direction, effectivity gives derived completeness and the prescribed reductions; the common bounds are exactly the two integral definitions. The equivalence is fully faithful on morphisms because it is an adjunction with invertible unit and counit. This use of strict derived systems avoids inferring equality of integral maps merely from equality of their reductions.",
+   "text": "Form $\\mathsf S_A(T_{\\mathrm{et}})$ with $A_n=R/\\varpi^n$ (not an $\\ell$-power reindexing). Apply lem-pur-etale-coefficient-system-adjoint directly to the fixed compactification. It supplies an actual $R$-linear exact adjunction $\\mathcal F^{\\mathrm{et}}=Rp_{A,*}j_{!,A}\\dashv\\mathcal G^{\\mathrm{et}}$ on ordinary unbounded etale system derived categories. In particular its stated canonical isomorphism $e_n\\mathcal G^{\\mathrm{et}}\\cong G_{A_n}^{\\mathrm{et}}e_n$ preserves evaluated units, counits and transition mates; its uniform lower bound and bounded-below normalization assertions apply here. These are conclusions of this cited theorem, not consequences asserted from $e_n\\mathcal F^{\\mathrm{et}}\\cong F_{A_n}^{\\mathrm{et}}e_n$ alone. Zheng Lemma 5.22 uses the derived evaluation-left-adjoint comparisons of Lemma 5.13 and (5.16.2). We use its system theorem, including that evaluation result, rather than constructing a different Brown adjoint and identifying it by evaluations. No separatedness of the structure maps of $X,Y$ is required by this theorem.",
+   "uses": [
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; Constructions 5.14–5.16, Lemma 5.22 (deduced from Lemma 5.13 and (5.16.2)), Proposition 5.24."
+   }
+  },
+  {
+   "text": "Write $C_T=\\nu_{T,A}^*$ and $V_T=R\\nu_{T,A,*}$ on actual derived systems. The system-comparison theorem and finite site-comparison unit make $C_T,V_T$ inverse equivalences between bounded-below etale systems and bounded-below pro-etale systems with etale-origin levels. Indeed the unit evaluates to the finite unit and is invertible by joint conservativity; the counit and preservation of normalization are stated by the system-comparison theorem. Form the compact-support system comparison $C_Y\\mathcal F^{\\mathrm{et}}\\to\\mathcal F^{\\mathrm{proet}}C_X$: use the proper direct-image mate of the commuting inverse images, followed by the open comparison. These are actual system maps by derived system adjunction and direct-image composition. Their evaluations are the canonical finite comparisons, invertible by the finite proper and open comparison nodes; joint conservativity proves invertibility of the system comparison, without assuming faithfulness on maps. Consequently, for normalized bounded-below systems $M,N$ with constructible finite-Tor levels,\n$$\\operatorname{Hom}(\\mathcal F^{\\mathrm{proet}}M,N)\\cong\\operatorname{Hom}(\\mathcal F^{\\mathrm{et}}V_XM,V_YN)\\cong\\operatorname{Hom}(V_XM,\\mathcal G^{\\mathrm{et}}V_YN)\\cong\\operatorname{Hom}(M,C_X\\mathcal G^{\\mathrm{et}}V_YN).$$\nThus the transported right functor is $\\mathcal G=C_X\\mathcal G^{\\mathrm{et}}V_Y$, with actual system units, counits and triangles. Its transitions are the finite mates from Step 6 and Step 7, and it preserves normalization and common bounds. The composite $\\mathcal G\\mathcal R_Y$ is exactly $\\mathcal T_f$ in def-weil-exceptional-inverse-image, before applying the derived limit.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-system-level-left-extension",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AK (lemma-compare-constructible) and 09B1 (lemma-compare-derived), applied through lem-pur-coefficient-system-derived-comparison to the etale-system adjunction of Zheng Lemma 5.22."
+   }
+  },
+  {
+   "text": "Use the ordinary reduction--limit adjunction $\\mathcal R_T\\dashv\\mathcal L_T$ on strict towers. Its unit is the map $P\\to\\mathcal L_T\\mathcal R_TP$ whose compatible finite projections on one flat-term K-flat representative are the actual reduction maps $P\\to\\operatorname{Res}_n(P\\otimes^L A_n)$; the total-limit cone is the stated (R\\lim) cone, so for a derived-complete integral object the unit is an isomorphism by the (E'=E) case of the finite-free completed-scalar comparison. Its counit is an isomorphism on normalized towers by normalized-DVR effectivity. Hence derived-complete integral finite-Tor objects are equivalent to normalized towers with the common bounds required in the statement, and all maps are maps in the ordinary derived categories.",
    "uses": [
     "lem-coef-derived-system-evaluation-calculus",
     "lem-weil-finite-free-completed-scalar-comparison",
     "lem-coef-normalized-dvr-effectivity",
     "def-weil-derived-complete-integral-detailed",
-    "def-weil-finite-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-    "place": "Coefficient completion and normalization; compare Bhatt--Scholze Definitions 3.5.2, 6.8.1 and Lemma 6.8.2; the general system adjunction/effectivity nodes specify the canonical maps."
-   }
-  },
-  {
-   "text": "The system functors in step 7 preserve the common bounds needed in step 8. For $\\mathcal F$, step 1 gives the same Tor interval $[a,b+2d]$ at every finite level. Taking the degree-zero test module $A_n$ in the definition of Tor amplitude shows that these same intervals bound cohomology, since $F_{A_n}K_n\\otimes^L_{A_n}A_n\\cong F_{A_n}K_n$. Thus the cohomological bound is uniform as well. Lemma lem-coef-integral-compact-support identifies its total limit, with its finite projections, with the integral $Rf_!$ of the item. For $\\mathcal G$, cor-pur-general-admissibility-datum gives common cohomological and Tor intervals independent of $n$; normalization of its strict realization is also stated in lem-pur-etale-coefficient-system-adjoint and preserved by system comparison. Effectivity therefore puts its total limit in the integral finite-Tor category, and this limit is precisely the integral $Rf^!$ in the definition. Conjugate the system adjunction by the equivalences of step 8: $\\operatorname{Hom}(F_RK,L)\\cong\\operatorname{Hom}(\\mathcal F\\mathcal R_XK,\\mathcal R_YL)\\cong\\operatorname{Hom}(\\mathcal R_XK,\\mathcal G\\mathcal R_YL)\\cong\\operatorname{Hom}(K,G_RL)$. This is natural, so its units, counits and triangles are the transported system ones. Evaluation gives the integral-reduction comparisons and both equations of step 6 as actual maps of systems. Exactness follows from the exact finite system functors and the exact total-limit functor of lem-weil-pbc-ringed-strict-tower-homotopy-limit, restricted to the full triangulated integral finite-Tor categories.",
-   "uses": [
-    "lem-coef-integral-compact-support",
-    "cor-pur-general-admissibility-datum",
-    "lem-pur-etale-coefficient-system-adjoint",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-integral-ctf-triangulated",
-    "def-weil-finite-tor-amplitude"
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Lemma 5.22, Proposition 5.24 and Construction 5.25 (printed pp. 36--37), with the integral equivalence and uniform finite-Tor bounds established in steps 8--9."
+    "place": "Derived reduction and total-limit reconstruction."
    }
   },
   {
-   "text": "For $E\\subset E'$, use the finite-free system comparison of lem-pur-etale-coefficient-system-adjoint, transported as in step 7; the compact-support system comparison is the coherent $q$ of steps 4--5. The former statement includes identity, composition, quotient compatibility and agreement on the subsequence $B_n=R'/\\varpi^nR'=R'/\\varpi'^{en}R'$. On normalized systems this subsequence loses no data: recover level $m$ by choosing $n$ with $en\\geq m$ and taking the derived quotient of level $en$ to $m$; the normalization cocycle identifies the results for two choices of $n$. This also specifies morphisms and inverse comparisons, so gives an equivalence of the normalized section categories. Under the completion equivalence, the resulting scalar functor is the integral scalar extension in the item: lem-weil-finite-free-completed-scalar-comparison identifies that strict-tower functor with ordinary tensor by the finite-free completed coefficient sheaf $\\widehat R'_T$. Its derived reductions are the same $B_n$ tensors, by associativity, and it is derived complete. Constructibility is stated in lem-weil-integral-scalar-extension-constructible, and the flat-model argument of step 3 gives a common Tor interval. Conjugate the coherent system $q,b$ and the system unit/counit equations through these equivalences. This produces integral scalar comparison isomorphisms and the stated equations, with their quotient, identity and composition coherences. All identifications here are of functors and system maps before total limit; no faithfulness of reduction on individual ordinary derived-category Hom groups is assumed.",
+   "text": "The common bounds required for the equivalence are uniform: Step 1 gives ([a,b+2d]) at every finite level for compact supports, and the admissibility theorem gives coefficient-independent bounds for the right adjoints. The integral compact-support comparison identifies the total limit and each finite reduction with (Rf_!K), while normalized effectivity identifies the right-adjoint tower with the completed (G_R). The integral finite-Tor category is triangulated, so the adjunction, units, counits and exactness descend from the tower category.",
+   "uses": [
+    "lem-coef-integral-compact-support",
+    "cor-pur-general-admissibility-datum",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-weil-integral-ctf-triangulated",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Integral coefficient reconstruction and uniform bounds."
+   }
+  },
+  {
+   "text": "For a finite extension (E\\subset E'), the finite-free coefficient-system comparison transports the tower adjunction and its (q,b) maps. The subsequence (R'/\\varpi^nR'=R'/\\varpi'^{en}R') is cofinal; normalized transition maps recover every level (m) from any level (en\\ge m), and the cocycle makes the result independent of the choice. The completed comparison (chi_{E'/E}) identifies this tower scalar extension with ordinary derived scalar extension and the integral scalar-extension definition; constructibility is preserved by the integral scalar-extension theorem.",
    "uses": [
     "lem-pur-etale-coefficient-system-adjoint",
     "lem-weil-finite-free-completed-scalar-comparison",
@@ -171,104 +189,99 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-    "place": "Finite-free system comparison and normalization; cofinal powers of uniformizers in the current exceptional-functor construction."
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Finite extension and ramification-index coefficient comparison."
    }
   },
   {
-   "text": "Pass to $E$ by the raw scalar localization in def-weil-rationalization-karoubi. Every integral constructible object lies in the integral finite-Tor category by lem-coef-integral-residue-tor, so step 9 is available on every integral representative of a rational object. The integral functors, comparisons and adjunction are $R$-linear: their complex and coefficient-system constructions commute with scalar multiplication; equivalently their adjunction transposes satisfy $\\Psi(ah)=a\\Psi(h)$. Tensor each Hom bijection with $E$ and its inverse with $E$. They remain inverse and natural, giving $\\operatorname{Hom}_Y(F_EK,L)\\cong\\operatorname{Hom}_X(K,G_EL)$. Units, counits and all their equations are the images of the integral ones, since they are defined by the images of identities. The definitions give $q,b$ for rationalization itself, and localizing step 10 gives the comparisons for finite rational scalar extensions. A distinguished rational triangle is isomorphic to an integral triangle's image, so the localized functors are exact by the scalar-localization triangulation theorem. No idempotent completion is inserted.",
+   "text": "Localize the integral (R)-linear adjunction at (\\varpi). Every integral constructible object has finite-Tor reductions by the residue-Tor theorem, so the preceding construction applies to every integral representative. The Hom bijections are (R)-linear, hence localization gives inverse natural Hom bijections for (E)-coefficients; units, counits, triangles, and coefficient cocycles are images of the integral ones. Finally represent two \\(\\overline{\\mathbf Q}_\\ell\\)-objects over a common finite coefficient field. Step 6 makes the finite-stage Hom bijections commute with every further scalar extension, so they pass to the directed colimit defining the common-stage category. This yields the adjunction and all comparisons for (E) and \\(\\overline{\\mathbf Q}_\\ell\\), with field reduction interpreted through an integral representative.",
    "uses": [
     "def-weil-rationalization-karoubi",
     "lem-coef-integral-residue-tor",
-    "lem-weil-linear-scalar-localization-triangulated"
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-    "place": "Raw scalar localization and passage of operations, Zheng Section 6; explicit Hom-module localization argument following the current coefficient definitions."
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Rational localization and common finite coefficient stages."
    }
   },
   {
-   "text": "Finally use the common-stage definition of def-weil-algebraically-closed-coefficients. For $K$ represented over $E$ and $L$ over $E'$, choose a common finite coefficient field $H$; step 11 gives a Hom bijection there. For a further finite extension write $T$ for scalar extension and $\\Psi,\\Psi'$ for the two adjunction bijections. If $h:F K\\to L$, its scalar extension has source identified by $q_K$, so its representative is $T_Yh\\circ q_K^{-1}$. Naturality of $b$ and the unit equation give $\\Psi'(T_Yh\\circ q_K^{-1})=G'(T_Yh)\\circ G'(q_K^{-1})\\circ\\eta'_{T_XK}=G'(T_Yh)\\circ b_{F K}\\circ T_X\\eta_K=b_L\\circ T_X(\\Psi(h))$. Thus the bijections commute with the transition maps on both Hom groups. Their inverses commute too, by applying the inverse bijection to this equality. Taking the directed colimit of these bijections and their inverses therefore gives inverse natural maps on the displayed common-stage Hom groups. Objects, maps, units and counits are represented at a common finite stage; the triangle and coefficient-composition equations hold there, hence also in the common-stage category. Every distinguished triangle is represented at a finite stage, proving exactness. This defines the functors and comparisons independently of representatives. Finite reduction at a field stage is interpreted only after choosing its integral representative, as required in the statement.",
-   "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-rationalization-karoubi",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-    "place": "Common finite coefficient-field stages, final higher-coefficient paragraphs of the exceptional-functor definition."
-   }
-  },
-  {
-   "text": "The remaining refinement and shift normalizations hold simultaneously with the coefficient comparisons. At finite levels thm-sf-ambient-adjoint-class states compactification-cocycle compatibility of the Hom bijections, and prop-compactification-coherence-detailed identifies the compact-support maps. For a refinement write $a:F_1\\xrightarrow{\\sim}F_2$ for that comparison, and define $\\rho_L:G_2L\\to G_1L$ as the $F_1\\dashv G_1$ transpose of $\\epsilon_{2,L}\\circ a_{G_2L}$. Then $\\epsilon_{1,L}\\circ F_1(\\rho_L)=\\epsilon_{2,L}\\circ a_{G_2L}$ by inverse transposition. The inverse transposes of $\\rho_{F_2K}\\circ\\eta_{2,K}$ and $G_1(a_K)\\circ\\eta_{1,K}$ both equal $a_K$: for the first use the preceding counit identity, naturality of $a$, and $\\epsilon_{2,F_2K}\\circ F_2\\eta_{2,K}=1$; for the second use the unit-transpose formula. Hence these two maps agree. Transposing $a^{-1}$ gives the inverse of $\\rho$, and mate pasting proves identity, composition and compatibility with the coherent coefficient squares. These formulas establish refinement compatibility of both adjunction maps. Lemma lem-coef-semilinear-derived-sections realizes these maps and their compositions on systems, so step 7, the completion equivalence and scalar localization carry the same identities to the higher stages. For shifts, the finite $F$ is the usual derived exact functor, and the shift of $G$ is its adjunction-compatible shift from step 2. Tensor, comparison and normalized system maps commute with shifts on the complex models; the formula $b_L=G'(T_Y\\epsilon_L\\circ q_{G L}^{-1})\\circ\\eta'_{T_XG L}$ therefore identifies its shifted value with the shifted $b_L$, using shift compatibility of each factor. Total limit is exact, and scalar localization and common-stage shifts are defined stagewise, so these shift identities persist. Empty $X$ gives zero functors and unique comparisons. If $Y$ is empty, so is $X$; use zero bounds rather than a dimension or a maximum of empty charts. Identity coefficient changes, including $n=m$, give identities by step 6, and ramified extensions use $en$, never an unadjusted $n$.",
+   "text": "For a compactification refinement, transpose its compact-support comparison (a:F_1\\xrightarrow{\\sim}F_2) to obtain (\\rho:G_2\\to G_1). The counit equation is the inverse-transpose identity, and the unit equation follows by taking the two inverse transposes and using the triangle identity; mate pasting gives identity and composition. The shift comparison for the right adjoint is uniquely determined by the shift comparison for (F) and unit compatibility, and the shift-compatible natural transformations remain compatible under composition and whiskering. Therefore the adjunction, coefficient comparisons, refinement cocycles and shifts all satisfy the displayed identities. Empty schemes give zero functors and the stated zero bounds; ramified extensions use (en).",
    "uses": [
     "thm-sf-ambient-adjoint-class",
     "prop-compactification-coherence-detailed",
     "lem-weil-pbc-mate-pasting",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-    "place": "Compactification comparisons and shifts; Construction 5.15 and the current blueprint adjunction and higher coefficient-stage paragraphs."
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Compactification refinement and shift compatibility."
    }
   }
  ],
  "proof_deps": [
-  "lem-kun-dimension-finite-type",
-  "lem-trf-open-ctf",
-  "cor-sf-direct-image-ctf-proetale",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-derived-direct-image-triangulated",
   "cor-pur-general-admissibility-datum",
-  "lem-sf-proetale-constructible-origin",
-  "thm-sf-ambient-adjoint-class",
-  "lem-weil-finite-ctf-triangulated",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-sf-triangulated-right-adjoint",
-  "lem-sf-flat-model",
-  "lem-pur-finite-tensor-constructible-cohomology",
-  "lem-pur-derived-change-of-rings",
-  "thm-amb-etale-exceptional-adjoint",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-pur-etale-exceptional-constant-tensor",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-sc-derived-adjunction-from-underived",
-  "lem-sf-comparison-tor-amplitude",
-  "thm-weil-pbc-site-comparison",
-  "lem-sf-class-compact-support-comparison",
-  "lem-coef-semilinear-derived-sections",
-  "lem-weil-pbc-mate-pasting",
-  "lem-coef-cartesian-section-adjoint-mates",
-  "lem-pur-etale-coefficient-system-adjoint",
-  "lem-pur-coefficient-system-derived-comparison",
-  "det-sp-unique-right-adjoint",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-coef-normalized-dvr-effectivity",
+  "cor-sf-direct-image-ctf-proetale",
+  "def-weil-algebraically-closed-coefficients",
   "def-weil-derived-complete-integral-detailed",
+  "def-weil-exceptional-inverse-image",
   "def-weil-finite-tor-amplitude",
-  "lem-coef-integral-compact-support",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-integral-ctf-triangulated",
-  "lem-weil-integral-scalar-extension-constructible",
   "def-weil-integral-scalar-extension",
   "def-weil-rationalization-karoubi",
+  "det-sp-unique-adjoint-coefficients",
+  "det-sp-unique-right-adjoint",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-integral-compact-support",
   "lem-coef-integral-residue-tor",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-pur-etale-exceptional-constant-tensor",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-pur-system-level-left-extension",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-flat-model",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-trf-open-ctf",
+  "lem-weil-finite-ctf-triangulated",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-ctf-triangulated",
+  "lem-weil-integral-scalar-extension-constructible",
   "lem-weil-linear-scalar-localization-triangulated",
-  "def-weil-algebraically-closed-coefficients",
-  "prop-compactification-coherence-detailed"
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-compactification-coherence-detailed",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-sf-ambient-adjoint-class",
+  "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-  "place": "Constructible etale-comparison adjunction and strict coefficient systems; detailed proof from the cited ordinary etale tensor theorem, general cartesian-section adjunction, and reduction/limit equivalence."
+  "place": "Ordinary derived constructible etale-comparison adjunction, coefficient towers, reduction/limit reconstruction, scalar localization, and refinement compatibility."
  },
  "mathlib_searches": [
   {
@@ -385,7 +398,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-sf-tensor-hom",
@@ -404,171 +417,191 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "item": "lem-sf-constructible-exceptional-adjunction-coefficients",
   "worker": "stage1",
-  "summary": "Proved the constructible adjunction at finite coefficients, descended coherent adjunctions along normalized systems to completed integral coefficients, and passed through raw rational localization and common finite stages. All inputs are existing nodes. The proof allows nonseparated finite-type schemes and avoids the separated-scheme duality comparisons and any unrestricted ambient pro-etale adjunction. No statement change, no new nodes.",
-  "blueprint": "sk-thm-sf-tensor-hom: third Hom bijection Rf_! dashv Rf^! and final finite-reduction, scalar-extension and shift compatibility; preserves the constructible interpretation in the current exceptional-functor definition.",
+  "summary": "Repaired the Q71 return at head 3eead2df6836: finite adjunction is the ordinary etale adjoint transported by the specified site comparison; apply the existing ordinary etale-system adjunction theorem with its derived evaluation result, then transport actual normalized system adjunctions and identify the defining integral composite. Corrected the completed unit transpose to the identity and malformed TeX/source locations. Statement unchanged; no new nodes.",
+  "blueprint": "sk-thm-sf-tensor-hom: third Hom bijection Rf_! dashv Rf^! and final finite-reduction, scalar-extension and shift compatibility; current exceptional-functor definition.",
   "tool_uses": [
    {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Step(s) 1: Finiteness of the dimension of a finite type scheme. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-trf-open-ctf",
-    "why": "Step(s) 1: Extension by zero preserves constructibility and Tor amplitude. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
+    "node": "cor-pur-general-admissibility-datum",
+    "why": "Preservation for a general separated finite-type morphism; used in step(s) 2, 10 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
    },
    {
     "node": "cor-sf-direct-image-ctf-proetale",
-    "why": "Step(s) 1: The pro-étale direct image for all finite-Tor objects. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
+    "why": "The pro-étale direct image for all finite-Tor objects; used in step(s) 1 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
    },
    {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Step(s) 1: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Step(s) 1: An exact functor of abelian categories induces a triangulated functor on derived categories. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-pbc-derived-direct-image-triangulated",
-    "why": "Step(s) 1: The derived direct image on bounded below derived categories is a triangulated functor. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "cor-pur-general-admissibility-datum",
-    "why": "Step(s) 2, 9: Preservation for a general separated finite-type morphism. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-sf-proetale-constructible-origin",
-    "why": "Step(s) 2, 5: Constructible pro-étale coefficients are of étale origin. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "thm-sf-ambient-adjoint-class",
-    "why": "Step(s) 2, 13: The exceptional adjoint on the bounded comparison class. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-finite-ctf-triangulated",
-    "why": "Step(s) 2, 7: Finite-stage finite-Tor-amplitude complexes form a triangulated subcategory. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
-    "why": "Step(s) 2, 6: An adjunction from hom-set bijections natural in both variables. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-sf-triangulated-right-adjoint",
-    "why": "Step(s) 2: A shift-compatible right adjoint of a triangulated functor is triangulated. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-sf-flat-model",
-    "why": "Step(s) 3: Bounded flat model of finite Tor amplitude. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-pur-finite-tensor-constructible-cohomology",
-    "why": "Step(s) 3: Finite-level derived tensor has constructible cohomology without a boundedness claim. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Step(s) 3, 4, 10: Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "thm-amb-etale-exceptional-adjoint",
-    "why": "Step(s) 4: The ordinary ambient exceptional adjoint. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Step(s) 4: Canonical composition comparison for unbounded ringed-topos direct images. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-pur-etale-exceptional-constant-tensor",
-    "why": "Step(s) 4: Constant-coefficient tensor calculus for the finite etale exceptional adjoint. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-galois-yoneda-hom-bijection",
-    "why": "Step(s) 4: Yoneda evaluation for every presheaf of sets. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Step(s) 4: Module pullback and pushforward adjunction on arbitrary ringed topoi. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-sc-derived-adjunction-from-underived",
-    "why": "Step(s) 4: Derived functors inherit an adjunction. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-sf-comparison-tor-amplitude",
-    "why": "Step(s) 5: Finite Tor amplitude under the site comparison. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Step(s) 5: Bounded-below site comparison. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-sf-class-compact-support-comparison",
-    "why": "Step(s) 5: On the coefficient class the compact-support functor is computed on the étale site. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "Step(s) 5, 7, 13: Derived semilinear sections and coefficient-linear geometric operations. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Step(s) 6, 13: Mates of pasted squares and of conjugate-whiskered squares. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-coef-cartesian-section-adjoint-mates",
-    "why": "Step(s) 7: Adjoint mates on cartesian derived sections. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-pur-etale-coefficient-system-adjoint",
-    "why": "Step(s) 7, 9, 10: Ordinary etale adjoint on strict coefficient systems. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-pur-coefficient-system-derived-comparison",
-    "why": "Step(s) 7: Derived direct image and evaluation of coefficient systems. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
+    "node": "det-sp-unique-adjoint-coefficients",
+    "why": "Right adjoints inherit the coefficient comparisons; used in step(s) 6 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
    },
    {
     "node": "det-sp-unique-right-adjoint",
-    "why": "Step(s) 7: Right adjoints are unique up to a unique counit-compatible isomorphism. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
+    "why": "Right adjoints are unique up to a unique counit-compatible isomorphism; used in step(s) 6 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Comparison of extension by zero with the site morphism; used in step(s) 8 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
    },
    {
     "node": "lem-coef-derived-system-evaluation-calculus",
-    "why": "Step(s) 8: Coherent derived reduction, limit adjunction and fiberwise evaluation. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Step(s) 8, 10: Finite free completed coefficient extension is ordinary derived scalar extension. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-coef-normalized-dvr-effectivity",
-    "why": "Step(s) 8, 9: Effectivity of a normalized DVR tower. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
+    "why": "Coherent derived reduction, limit adjunction and fiberwise evaluation; used in step(s) 9 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
    },
    {
     "node": "lem-coef-integral-compact-support",
-    "why": "Step(s) 9: Integral compact supports have the prescribed reductions. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Step(s) 9, 13: Strict tower homotopy limit. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-integral-ctf-triangulated",
-    "why": "Step(s) 9: Integral finite-Tor-amplitude complexes form a triangulated subcategory. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
-   },
-   {
-    "node": "lem-weil-integral-scalar-extension-constructible",
-    "why": "Step(s) 10: Integral scalar extension preserves bounded constructible integral complexes. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
+    "why": "Integral compact supports have the prescribed reductions; used in step(s) 10 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
    },
    {
     "node": "lem-coef-integral-residue-tor",
-    "why": "Step(s) 11: The residue reduction controls integral Tor amplitude. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
+    "why": "The residue reduction controls integral Tor amplitude; used in step(s) 12 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Effectivity of a normalized DVR tower; used in step(s) 9, 10 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Yoneda evaluation for every presheaf of sets; used in step(s) 4 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finiteness of the dimension of a finite type scheme; used in step(s) 1 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Derived direct image and evaluation of coefficient systems; used in step(s) 7, 8 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions; used in step(s) 3, 4, 11 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-pur-etale-coefficient-system-adjoint",
+    "why": "Ordinary etale adjoint on strict coefficient systems; used in step(s) 7, 11 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-pur-etale-exceptional-constant-tensor",
+    "why": "Constant-coefficient tensor calculus for the finite etale exceptional adjoint; used in step(s) 4 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-pur-finite-tensor-constructible-cohomology",
+    "why": "Finite-level derived tensor has constructible cohomology without a boundedness claim; used in step(s) 3 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Derived left extension from coefficient levels; used in step(s) 8 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-sc-derived-adjunction-from-underived",
+    "why": "Derived functors inherit an adjunction; used in step(s) 4 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "On the coefficient class the compact-support functor is computed on the étale site; used in step(s) 5 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Finite Tor amplitude under the site comparison; used in step(s) 5 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "An exact functor of abelian categories induces a triangulated functor on derived categories; used in step(s) 1 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Bounded flat model of finite Tor amplitude; used in step(s) 3 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Constructible pro-étale coefficients are of étale origin; used in step(s) 5 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-sf-triangulated-right-adjoint",
+    "why": "A shift-compatible right adjoint of a triangulated functor is triangulated; used in step(s) 2 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Extension by zero preserves constructibility and Tor amplitude; used in step(s) 1 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-finite-ctf-triangulated",
+    "why": "Finite-stage finite-Tor-amplitude complexes form a triangulated subcategory; used in step(s) 2 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Finite free completed coefficient extension is ordinary derived scalar extension; used in step(s) 9, 11 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-integral-ctf-triangulated",
+    "why": "Integral finite-Tor-amplitude complexes form a triangulated subcategory; used in step(s) 10 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Integral scalar extension preserves bounded constructible integral complexes; used in step(s) 11 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
    },
    {
     "node": "lem-weil-linear-scalar-localization-triangulated",
-    "why": "Step(s) 11: The scalar localization of a linear triangulated category is triangulated. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
+    "why": "The scalar localization of a linear triangulated category is triangulated; used in step(s) 12 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "An adjunction from hom-set bijections natural in both variables; used in step(s) 2, 5, 6, 8, 12 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "Shift isomorphisms compatible with an adjunction: counit from unit, and uniqueness on the right adjoint; used in step(s) 2, 13 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "why": "Composites and whiskerings of shift-compatible natural transformations are shift-compatible; used in step(s) 13 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "why": "A shift-compatible natural transformation gives morphisms of the image triangles; used in step(s) 13 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Canonical derived direct-image comparison is the invertible counit mate; used in step(s) 8 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "The derived direct image on bounded below derived categories is a triangulated functor; used in step(s) 1 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6); used in step(s) 1 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Mates of pasted squares and of conjugate-whiskered squares; used in step(s) 6, 13 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Strict tower homotopy limit; used in step(s) 9, 10 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical composition comparison for unbounded ringed-topos direct images; used in step(s) 4, 8 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Module pullback and pushforward adjunction on arbitrary ringed topoi; used in step(s) 4 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
    },
    {
     "node": "prop-compactification-coherence-detailed",
-    "why": "Step(s) 13: Compactification coherence. This supplies an independent prerequisite for the constructible adjunction and its coefficient passage, which the tensor-Hom unit uses but does not prove."
+    "why": "Compactification coherence; used in step(s) 1, 13 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "The ordinary ambient exceptional adjoint; used in step(s) 2, 4 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "The exceptional adjoint on the bounded comparison class; used in step(s) 2, 13 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Bounded-below site comparison; used in step(s) 5, 8 as a prerequisite for adjunction/coefficient compatibility. The compatibility unit collects this structure; it does not establish this underlying result."
    }
   ]
  },
@@ -612,15 +645,22 @@
   "lem-weil-integral-scalar-extension-constructible",
   "lem-coef-integral-residue-tor",
   "lem-weil-linear-scalar-localization-triangulated",
-  "prop-compactification-coherence-detailed"
+  "prop-compactification-coherence-detailed",
+  "det-sp-unique-adjoint-coefficients",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pur-system-level-left-extension",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q148-852b73f87",
-  "group": "Q148",
+  "reviewer": "NT-Codex-Q71-bcc0b5b8e",
+  "group": "Q71",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-852b73f87 (reviewer sub-agent of L); spot-checked: I read the whole item, all 13 steps, and the verbatim statements of every cited node (45 proof_deps, 13 stmt_deps). I also read the unit sk-thm-sf-compatibility (clause 7), the main-20261015 def-weil-exceptional-inverse-image.md, and Zheng Construction 2.26, Prop 2.29(2), Lemma 5.22, Prop 5.24 and Construction 5.25. The delivery changes only status unsplit->split; the proof is the existing reviewed split, now re-routed under sk-thm-sf-compatibility. Mechanical checks: proof_deps equals the union of the step uses; no cited id is missing or merged; no cycle (checked through cor-pur-general-admissibility-datum -> cor-sf-ambient-adjoint-discharge). Route under the new unit: every cited statement is inside it except lem-trf-open-ctf, which is a declared tool use, and I accept it as a black-box ctf-preservation lemma for j_!. No SGA is cited and there are no new nodes. lem-coef-finite-exceptional and prop-coef-integral-exceptional-adjoint assume X and Y separated, so they are special cases, not duplicates. Recomputed: the step 6 mate identities (both displayed equations hold), the step 12 compatibility of the Hom bijections with the transition maps, and the step 13 refinement transposes. Zheng 2.29(2) allows any N in D(Lambda) with no perfectness, matching lem-pur-etale-exceptional-constant-tensor with V=B in step 4. Edge cases tested: f=id; A^1->pt with Tor [2,2] inside [0,2] and G(A_n)=A_n(1)[2] inside the bound [-2,1]; Z/4->Z/2; empty X or Y; n=m; ramified index e. Long steps: step 4 is one argument (the finite-coefficient comparison at the etale level, made of short derivations from cited statements; the inline compact-support/restriction-of-scalars identification is two lines from lem-weil-pbc-ringed-topoi-derived-pushforward-composition). Step 13 is three short mate/shift/edge-case computations using cited pasting and refinement statements. Neither hides a lemma with its own hypotheses, so both may stay. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q71-bcc0b5b8e (reviewer sub-agent of L); spot-checked: Read the full item, all 13 proof steps, 58 cited node statements, unit/chapter route, blueprint definition, Zheng pp. 21, 23–24, 34–37, and Stacks comparison sources. Verified hypotheses, coefficient categories, base-change maps q and b, units/counits, ordinary derived route, edge cases, cocycles, and ramified indexing. No new nodes, duplicates, SGA or dropped route-pivot machinery; no remaining faults. Review written to review.md."
  },
  "blueprint_parent": {
   "node": "sk-thm-sf-compatibility",

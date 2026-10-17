@@ -14,41 +14,207 @@
   "def-pc-fibre-product",
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open neighbourhood $X^0$ of $x$. The restricted morphism $Y^0=f^{-1}(X^0)\\to X^0$ is proper by [lem-weil-pbc-proper-base-change]. Its fibre over $x$ and the restricted invertible module give the original fibre and module. It suffices to produce the required open $U\\subseteq X^0$, since every affine open of $U$ and its inverse image are the same in the original schemes. Rename this restriction $f:Y\\to X$. The affine base $X$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs].",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, first sentence of proof; Tag 01W4 for proper base change."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proper-limit-noetherian] to obtain a small nonempty directed system $f_i:Y_i\\to X_i$ with affine transitions, proper $f_i$, affine $X_i$ of finite type over $\\operatorname{Spec}\\mathbf Z$, and limits $Y$ and $X$ with projections $a_i:Y\\to Y_i$, $b_i:X\\to X_i$ satisfying $f_i a_i=b_i f$. By [lem-weil-pbc-finite-type-over-noetherian], each $X_i$ is Noetherian and each $Y_i$ is Noetherian, since proper means finite type [def-weil-proper-morphism]. In particular $Y_i$ is quasi-compact; it is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated].",
+   "uses": [
+    "lem-weil-pbc-proper-limit-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, approximation paragraph, invoking Limits Tag 0A0P; Tags 01T6 and 01OY for the stage hypotheses."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-invertible-affine-limit-descent] to $(Y_i)$ and $\\mathcal M$ to obtain $i_0$, an invertible module $M_0$ on $Y_{i_0}$, and $a_{i_0}^*M_0\\cong\\mathcal M$. For $i\\geq i_0$ define $M_i=q_{i i_0}^*M_0$. These modules are invertible, their further pullbacks agree with the $M_j$, and $a_i^*M_i\\cong\\mathcal M$, by the invertible-pullback and composition clauses of [lem-weil-pbc-invertible-pullback-tensor]. Work on the directed tail $i\\geq i_0$. It retains the same limits: for a cone on the tail, its component at an arbitrary $i$ is the component at any $j\\geq i,i_0$ followed by the transition to $i$; the cone identities and a common upper bound show independence of $j$. This extends cones uniquely and proves the required universal properties.",
+   "uses": [
+    "lem-trf-invertible-affine-limit-descent",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, descent of the invertible modules via Limits Tag 0B8W."
+   }
+  },
+  {
+   "text": "Put $x_i=b_i(x)$ and $F_i=(Y_i)_{x_i}$. By [lem-weil-pbc-limit-residue-field], $\\operatorname{Spec}\\kappa(x)$ is the compatible limit of the $\\operatorname{Spec}\\kappa(x_i)$. Thus [lem-weil-pbc-limit-fibre-products] identifies $Y_x$ with $\\varprojlim F_i$ and gives affine transition maps on the $F_i$. Each $F_i\\to\\operatorname{Spec}\\kappa(x_i)$ is proper by [lem-weil-pbc-proper-base-change], hence of finite type and separated. Consequently each $F_i$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine]. The restriction of $M_0$ to $F_{i_0}$ pulls back to $M_i|_{F_i}$ and to $\\mathcal M|_{Y_x}$, by the commuting fibre squares and the pullback composition isomorphisms of [lem-weil-pbc-invertible-pullback-tensor].",
+   "uses": [
+    "lem-weil-pbc-limit-residue-field",
+    "lem-weil-pbc-limit-fibre-products",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, residue-field colimit and the application of Limits Tag 09MT; Limits Tag 0CUG and lemma-limit-fibre-product."
+   }
+  },
+  {
+   "text": "The hypothesis makes $\\mathcal M|_{Y_x}$ ample. The pullback isomorphism of Step 4 and [lem-sc-ample-iso] therefore satisfy the hypothesis of [lem-trf-ample-affine-limit-descent] for the system $(F_i)$ and $M_0|_{F_{i_0}}$. Obtain $i\\geq i_0$ such that $M_i|_{F_i}$ is ample. The base $X_i$ is Noetherian by Step 2 and $f_i$ is proper, so [lem-trf-noetherian-fibre-ample-neighbourhood] gives an affine open neighbourhood $V_i$ of $x_i$ with $M_i|_{f_i^{-1}(V_i)}$ ample in the absolute sense.",
+   "uses": [
+    "lem-sc-ample-iso",
+    "lem-trf-ample-affine-limit-descent",
+    "lem-trf-noetherian-fibre-ample-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, invoking Limits Tag 09MT and Cohomology of Schemes Tag 0D2N."
+   }
+  },
+  {
+   "text": "Set $U=b_i^{-1}(V_i)$. It is open and contains $x$. The projection $b_i$ is affine by [lem-weil-pbc-limit-affine-transition]; since $V_i$ is affine, $U$ is affine by [lem-weil-pbc-affine-morphism-permanence](2). The projection $a_i$ is also affine by [lem-weil-pbc-limit-affine-transition]. The commuting equation $f_i a_i=b_i f$ gives $f^{-1}(U)=a_i^{-1}(f_i^{-1}(V_i))$. Hence $a_i$ restricts to an affine morphism $a:Y_U\\to f_i^{-1}(V_i)$ by base-change stability [lem-weil-pbc-affine-morphism-permanence](1). Pull back the ample module of Step 5 along $a$ using [lem-weil-pbc-pullback-ample-invertible]. By the pullback composition comparison [lem-weil-pbc-invertible-pullback-tensor] and the isomorphism of Step 3, this pullback is $\\mathcal M|_{Y_U}$. It is ample by [lem-sc-ample-iso]. Its absolute ampleness includes quasi-compactness of $Y_U$ by [def-weil-pbc-ample-invertible-module].",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-ample-iso",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, final paragraph; this uses the affine projections directly on inverse images of an affine $V_i$, without a Cartesian approximation assumption."
+   }
+  },
+  {
+   "text": "For any affine open $W\\subseteq U$, the inclusion $W\\to U$ is a morphism between affine schemes, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Its base change $Y_W\\to Y_U$ is affine by [lem-weil-pbc-affine-morphism-permanence](1). Apply [lem-weil-pbc-pullback-ample-invertible] to the ample $\\mathcal M|_{Y_U}$ of Step 6. Its pullback is $\\mathcal M|_{Y_W}$ by [def-pc-module-pullback], and [lem-sc-ample-iso] gives ampleness. This proves ampleness over every affine open of $U$, together with the quasi-compactness of $f^{-1}(U)$ already obtained.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "def-pc-module-pullback",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, final hints; Morphisms Tags 01SH and 0892 (affine pullback)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-proper-morphism",
+  "lem-sc-ample-iso",
+  "lem-trf-ample-affine-limit-descent",
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-trf-noetherian-fibre-ample-neighbourhood",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-limit-residue-field",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-limit-noetherian",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D2S, lemma-ample-in-neighbourhood, proof. After choosing affine V_i, its final hints are implemented directly by restricting the affine limit projections and then pulling back along affine opens of U."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "proper morphism invertible sheaf ample on fibre implies relatively ample on an open neighbourhood of the base point",
-   "results": "hits concern proper morphism locality and affine neighborhoods; no ampleness theorem",
+   "query": "For a proper morphism of schemes a line bundle ample on one fibre is relatively ample over an open neighbourhood of that base point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism property $ P $ of schemes holds locally on affine opens of the target if, for every morphism $ f : X \\\\to Y $ and every affine open subset $ U \\\\subseteq Y $, the restriction $ f|_U : f^{-1}(\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] (y : ↥Y),\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness on the base of fibrewise ampleness for a proper morphism of schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[LocallyOfFinitePresentation f] (hf : GeneralizingMap f) : IsOpenMap f\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(𝒰 : Y.OpenCover) [∀ i, IsAffine (𝒰.X i)] : P f ↔ ∀ i, Q (𝒰.pullbackHom f i)\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ such that each $ \\\\mathcal{U}_i $ is affine. Then $ f $ has the affine property if and only if for every in\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is universally open, every base change $ Y' \\\\to Y $ induces an open map $ X \\\\times_Y Y' \\\\to Y' $ on the underlying topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \": @UniversallyOpen = universally (topologically @IsOpenMap)\", \"doc\": \"The property of a morphism of schemes being universally open is equivalent to the property that its underlying continuous map is an open map, and this openness is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.universallyOpen_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyOpen f ↔ (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally open if and only if for every base change $ Y' \\to Y $, the induced continuous map on topological spaces $ X \\times_Y Y' \\to Y' $ is an open map. This e\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*neigh|neigh.*ample|IsAmple|relatively.?ample",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/FilterBasis.lean\", \"line\": \"48\", \"text\": \"  Example : if `G` is a topological group then the neighbourhoods of the identity are a\"}\n  {\"file\": \"Mathlib/Topology/Algebra/FilterBasis.lean\", \"line\": \"58\", \"text\": \"  axioms. Example : if `G` is a topological group then the neighbourhoods of the identity are an\"}\n  {\"file\": \"Mathlib/Topology/Algebra/FilterBasis.lean\", \"line\": \"232\", \"text\": \"  Example : if `R` is a topological ring then the neighbourhoods of the identity are a\"}\n  {\"file\": \"Mathlib/Topology/Algebra/FilterBasis.lean\", \"line\": \"291\", \"text\": \"  Example : if `M` is a topological module then the neighbourhoods of zero are a\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Finite.lean\", \"line\": \"21\", \"text\": \"necessary. For example, `SimpleGraph.neighborFinset v` only requires that `v` have\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf ample on the special fibre of a proper scheme becomes ample on the inverse image of some affine neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property of ring homomorphisms that is stable under composition with localization and preserved by localization. Let $x \\\\in X$ be a point.\\\\n\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.sourceAffineLocally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes with affine target satisfies the property $ P $ if, for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ also satisfies $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : {X : AlgebraicGeometry.Scheme} → X.Opens → Prop) {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  (∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (∀ (x : ↥U), ∃ V, ∃ (_ : ↑x ∈ V), ∃ x, P V) → P U) →\\n    (∀ (X Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion \", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.affineLocally_iff_affineOpens_le\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y),\\n  AlgebraicGeometry.affineLocally (fun {R S} [CommRing R] [CommRing S] => P) f ↔\\n    ∀ (U : ↑Y.affineOpens) (V : ↑X.affineOpens) (e : ↑V ≤ (TopologicalSpace.Opens.m\", \"doc\": \"A morphism property $ P $ holds locally on affine opens of both the source and target schemes if and only if for every affine open subset $ U $ of the target $ Y $ and every affine open subset $ V $ o\"}\n  {\"name\": \"AlgebraicGeometry.affineLocally_iff_forall_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y),\\n  AlgebraicGeometry.affineLocally (fun {R S} [CommRing R] [CommRing S] => P) f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Open\", \"doc\": \"A morphism property $ P $ holds locally on affine opens of both the source and target if and only if for every affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ contained i\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism invertible sheaf ample on fibre implies relatively ample on an open neighbourhood of the base point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism property $ P $ of schemes holds locally on affine opens of the target if, for every morphism $ f : X \\\\to Y $ and every affine open subset $ U \\\\subseteq Y $, the restriction $ f|_U : f^{-1}(\"}\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A predicate asserting that a property of morphisms with affine target is local on the target scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property of ring homomorphisms that is stable under composition with localization and preserved by localization. Let $x \\\\in X$ be a point.\\\\n\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.to_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : AlgebraicGeometry.AffineTargetMorphismProperty} [self : P.IsLocal] {X Y : AlgebraicGeometry.Scheme}\\n  [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y) (r : ↑(Y.presheaf.obj (Opposite.op ⊤))),\\n  P f → P (f ∣_ Y.basicOpen r)\", \"doc\": \"If $ P $ is a local property of morphisms with affine targets, then for any morphism $ f : X \\to Y $ with affine target $ Y $, and for any section $ r $ of the structure sheaf of $ Y $, the restriction\"}\n  {\"name\": \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : AlgebraicGeometry.AffineTargetMorphismProperty} [P.IsLocal] {X Y UX UY : AlgebraicGeometry.Scheme}\\n  [inst : AlgebraicGeometry.IsAffine UY] {f : X ⟶ Y} {iY : UY ⟶ Y} [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X}\\n  {f' : UX ⟶ UY}, CategoryTheory.IsPullback iX f' f iY → AlgebraicGeometry\", \"doc\": \"Given a local property $ P $ of morphisms with affine target, if a morphism $ f: X \\\\to Y $ satisfies $ P $ locally on affine opens of $ Y $, and there exists a pullback square involving an open immers\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
   },
   {
    "tool": "leansearch",
    "query": "ampleness in a neighbourhood for a proper morphism",
-   "results": "generic IsProper and locally finite type declarations; no ampleness result",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"[QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f] (H : ValuativeCriterion f) : IsProper f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is quasi-compact, quasi-separated, locally of finite type, and satisfies the valuative criterion, then $ f $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.of_forall_source_exists_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"[P.RespectsRight IsOpenImmersion] [P.HasOfPostcompProperty IsOpenImmersion] (f : X ⟶ Y)\\n  (hX : ∀ x, ∃ (U : Y.Opens), f x ∈ U ∧ P ((f ⁻¹ᵁ U).ι ≫ f)) : P f\", \"doc\": \"Let $P$ be a property of morphisms between schemes that is stable under post-composition with open immersions. This means that for any morphism $g$ and any open immersion $i$ for which the composition\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
   },
   {
    "tool": "loogle",
    "query": "IsAmple, IsProper, neighbourhood",
-   "results": "0 hits; unknown identifier IsAmple",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'IsAmple'",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
   },
   {
    "tool": "grep",
    "query": "ample-in-neighbourhood|relatively ample|IsAmple [Mathlib]",
-   "results": "0 hits in Mathlib",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(IsAmple|[Aa]mple|[Aa]mpleness)\\b",
+   "results": "[grep] OK 0 hit(s) in Mathlib/AlgebraicGeometry",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-fibrewise-ample-projective",
@@ -84,5 +250,94 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ample-neighbourhood",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0D2S by Noetherian approximation, descent of the invertible module, limits of residue fields and fibres, descent of fibre ampleness, the Noetherian cohomological case, and affine pullback on an affine neighbourhood and all its affine subopens. Three statement-only children isolate 0B8W(2), 09MT, and 0D2N. Item statement and statement dependencies unchanged; every cited statement read.",
+  "blueprint": "Realizes the existing fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality, through lem-trf-proper-fibrewise-ample-projective: its application of 0D2S is now expanded using that tag's Noetherian approximation route. The unit and chapter records are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ample-iso",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Ampleness is invariant under isomorphisms of invertible modules. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Affine schemes are quasi-compact and quasi-separated. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Pullback and tensor product of invertible modules, and their fibres. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Limits of schemes along affine transition morphisms. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-fibre-products",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Fibre products commute with limits along affine transition morphisms. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-residue-field",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A point of a limit is the limit of its images. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A locally Noetherian scheme is quasi-separated (Stacks 01OY). No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A morphism between affine schemes is affine (Stacks 01SH). No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Properness is stable under base change. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-limit-noetherian",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A proper morphism is a limit of proper morphisms over schemes of finite type over Z. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Pullback of an ample invertible module. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A scheme separated and of finite type over an affine scheme is quasi-compact and quasi-separated. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ample-iso",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-limit-residue-field",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-limit-noetherian",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-f07ccd9cd",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-f07ccd9cd (reviewer sub-agent of L); spot-checked: Read all required instructions, the item, three new nodes, cited DAG nodes, unit route, and Stacks sources. Verified every proof step, hypotheses, affine/base-change morphisms, ampleness transfers, edge cases, searches, uniqueness, and duplicate checks. No forbidden machinery or citations; review written to review.md."
  }
 }
