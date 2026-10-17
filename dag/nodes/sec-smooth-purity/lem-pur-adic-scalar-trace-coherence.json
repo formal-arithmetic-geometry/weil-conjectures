@@ -16,13 +16,78 @@
   "def-coefficient-twists-detailed",
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-pur-compact-support-integral-coefficient-comparison",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-weil-scalar-extension-composition",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-twist-derived-scalar"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A_W=C_{E/E_0,W}$, $B_W=C_{F/E,W}$, $D_W=C_{F/E_0,W}$, and let $\\alpha^W:B_WA_W\\xrightarrow{\\sim}D_W$ be ordinary derived tensor associativity. The finite-free completed scalar comparison identifies these with the specified strict-tower extensions on derived-complete objects, naturally in the object. Put $U_L=\\mathbf1_{L,Y}$ and restore the coefficient-unit maps suppressed in the statement: $u_E:A_YU_0\\xrightarrow{\\sim}U_E$, $u_F:D_YU_0\\xrightarrow{\\sim}U_F$, $v:B_YU_E\\xrightarrow{\\sim}U_F$. Thus the actual formula is $t_L=u_L C_{L/E_0,Y}(t_0)c_{L/E_0,T_0}^{-1}P_L(\\theta_L^{-1})$. All comparisons are on their stated domains: by twist preservation the units twisted by $d$ lie in the integral constructible finite-Tor category; shift by $[2d]$ shifts the uniform Tor interval $[0,0]$ to $[-2d,-2d]$. Hence $T_0,T_E,T_F$ have uniform finite Tor amplitude. Since $\\theta_E$ identifies $A_XT_0$ with $T_E$, the comparison at $A_XT_0$ below is also on this domain. The schemes satisfy the separated finite-type hypotheses, and $\\ell$ is invertible because $\\ell\\ne p$.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "prop-weil-twist-preserves",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient-extension transport; explicit formal calculation by NK using the specified integral comparisons"
+   }
+  },
+  {
+   "text": "Apply integral twist/scalar coherence with the tower $E_0\\subset E\\subset F$, $S=X$, $C=\\mathbf1_{E_0,X}$ and $m=d$. After the coefficient-unit identifications its equation, shifted by $[2d]$, is\n$$\\theta_F\\circ\\alpha^X_{T_0}=a_{F/E,\\mathbf1_E}\\circ B_X(\\theta_E).$$\nThe shifts introduce no extra sign: extension tensors with a coefficient ring in degree zero, so reassociation before or after shifting has the same termwise map. Here $\\theta_L=u_L(d)[2d]\\circ\\beta_{L/E_0,\\mathbf1_{E_0,X}}[2d]$ and $a_{F/E,\\mathbf1_E}=v(d)[2d]\\circ\\beta_{F/E,\\mathbf1_{E,X}}[2d]$, with $\\beta$ the natural twist comparison of [lem-weil-integral-twist-derived-scalar] and $u_L,v$ the coefficient-unit maps at $X$; the coherence equation gives $\\theta_F\\alpha^X_{T_0}=u_F(d)\\,\\alpha^X_{\\mathbf1}(d)\\,\\beta_{F/E,A_X\\mathbf1}\\,B_X(\\beta_{E/E_0,\\mathbf1})[2d]$, and naturality of $\\beta_{F/E}$ at $u_E$ gives $a_{F/E,\\mathbf1_E}B_X(\\theta_E)=v(d)\\,B_X(u_E)(d)\\,\\beta_{F/E,A_X\\mathbf1}\\,B_X(\\beta_{E/E_0,\\mathbf1})[2d]$; the two agree by the unit equation below, which holds at $X$ by the same multiplication argument. Inverting and multiplying the displayed equation gives\n$$\\theta_F^{-1}\\circ a_{F/E,\\mathbf1_E}=\\alpha^X_{T_0}\\circ B_X(\\theta_E^{-1}).$$\nThe coefficient-unit maps satisfy $u_F\\circ\\alpha^Y_{U_0}=v\\circ B_Y(u_E)$: both are the multiplication map $(x\\otimes b)\\otimes c\\mapsto xbc$. This also verifies the unit specialization used to obtain the displayed twist equation.",
+   "uses": [
+    "lem-weil-integral-twist-scalar-coherence",
+    "lem-weil-integral-twist-derived-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient-extension transport; explicit formal calculation by NK using the specified integral comparisons"
+   }
+  },
+  {
+   "text": "Abbreviate $c_A=c_{E/E_0,T_0}$, $c_D=c_{F/E_0,T_0}$, and $c_{B,M}=c_{F/E,M}$. The compact-support coefficient comparison states, for the tower $E_0\\subset E\\subset F$,\n$$c_D\\circ\\alpha^Y_{P_{E_0}T_0}=P_F(\\alpha^X_{T_0})\\circ c_{B,A_XT_0}\\circ B_Y(c_A).$$\nSince all these maps are isomorphisms, multiply by $c_D^{-1}$ on the left and $B_Y(c_A^{-1})$ on the right to get\n$$c_D^{-1}\\circ P_F(\\alpha^X_{T_0})\\circ c_{B,A_XT_0}=\\alpha^Y_{P_{E_0}T_0}\\circ B_Y(c_A^{-1}).$$\nNaturality of the same comparison at the morphism $\\theta_E^{-1}:T_E\\to A_XT_0$ gives\n$$P_F(B_X\\theta_E^{-1})\\circ c_{B,T_E}=c_{B,A_XT_0}\\circ B_Y(P_E\\theta_E^{-1}).$$",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient-extension transport; explicit formal calculation by NK using the specified integral comparisons"
+   }
+  },
+  {
+   "text": "Expand the left side of the required equality, restoring its target $U_F$. Substitute the inverse twist equation of Step 2, use functoriality of $P_F$, and then the naturality equation of Step 3. With $a=a_{F/E,\\mathbf1_E}$ this gives\n$$\\begin{aligned}\nt_F\\circ P_F(a)\\circ c_{B,T_E}\n&=u_F\\circ D_Y(t_0)\\circ c_D^{-1}\\circ P_F(\\theta_F^{-1}\\circ a)\\circ c_{B,T_E}\\\\\n&=u_F\\circ D_Y(t_0)\\circ c_D^{-1}\\circ P_F(\\alpha^X_{T_0})\\circ c_{B,A_XT_0}\\circ B_Y(P_E\\theta_E^{-1}).\n\\end{aligned}$$\nEvery map in this equality has source $B_YP_ET_E$ and target $U_F$; only functoriality and the preceding equations were used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient-extension transport; explicit formal calculation by NK using the specified integral comparisons"
+   }
+  },
+  {
+   "text": "Substitute the inverse composition equation of Step 3 into Step 4. Naturality of the tensor associator at $t_0:P_{E_0}T_0\\to U_0$ reads $D_Y(t_0)\\circ\\alpha^Y_{P_{E_0}T_0}=\\alpha^Y_{U_0}\\circ B_YA_Y(t_0)$. Thus\n$$\\begin{aligned}\nt_F\\circ P_F(a)\\circ c_{B,T_E}\n&=u_F\\circ D_Y(t_0)\\circ\\alpha^Y_{P_{E_0}T_0}\\circ B_Y(c_A^{-1})\\circ B_Y(P_E\\theta_E^{-1})\\\\\n&=u_F\\circ\\alpha^Y_{U_0}\\circ B_Y\\bigl(A_Y(t_0)\\circ c_A^{-1}\\circ P_E(\\theta_E^{-1})\\bigr)\\\\\n&=v\\circ B_Y\\bigl(u_E\\circ A_Y(t_0)\\circ c_A^{-1}\\circ P_E(\\theta_E^{-1})\\bigr)\n=v\\circ B_Y(t_E).\n\\end{aligned}$$\nThe third equality is the unit equation of Step 2, and the last is the definition of $t_E$. Identifying $B_YU_E$ with $U_F$ by $v$ is precisely the coefficient-unit convention in the statement, so this is the asserted identity. No normalization or nonzero condition on $t_0$ has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Coefficient-extension transport; explicit formal calculation by NK using the specified integral comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-weil-twist-preserves",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-integral-twist-scalar-coherence",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-weil-integral-twist-derived-scalar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+  "place": "Coefficient-extension transport; explicit formal calculation by NK using the specified integral comparisons"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +130,52 @@
    "results": "0 hits",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*trace|trace.*scalar|extend.*[Cc]oeff",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A trace map transported along coefficient extension is compatible with a tower of coefficient extensions",
+   "results": "Algebra.trace_trace, Algebra.trace_comp_trace, LinearMap.trace_baseChange, and normalizedTrace/integral-trace declarations concern algebraic element or endomorphism traces, not six-functor trace maps.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality supplies the generic naturality equation; other hits are pullback/pushout cone and Grothendieck-construction lemmas. None states the integral trace identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a morphism through transitive natural isomorphisms commutes with further extension of coefficients in a tower",
+   "results": "ModuleCat.extendScalarsComp and its associativity lemmas concern ordinary modules over rings, not integral pro-etale compact-support comparisons.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|compact.support|[Tt]ate[Tt]wist|[Tt]ate.*twist",
+   "results": "25 printed hits concern topological functions with compact support (Urysohn, partition of unity, algebraic support), not sheaf compact-support pushforward or Tate twists.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support pushforward commutes coherently with extension of integral l-adic coefficients and the Tate twist",
+   "results": "BDeRhamPlus, BDeRham, condensed profiniteSolid and scalar-extension formalism, adic factorPow_comp_extend, and PresheafOfModules.pushforward0CompToPresheaf; none is the required derived integral compact-support trace coherence.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-adic-purity-scalar-naturality",
@@ -85,5 +192,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-adic-scalar-trace-coherence",
+  "worker": "stage1",
+  "summary": "NK retained the statement and proved the scalar coherence by the existing integral twist/scalar coherence and compact-support comparison composition law, displaying naturality, inverse cancellation, and the coefficient-unit maps. No new nodes. Removed rational-only scalar-composition and unused integral internal-Hom dependencies.",
+  "blueprint": "Realizes the coefficient transitivity argument behind thm-pur-rational-and-qbar-purity and old sk-thm-purity-transport Step 3; retains the current blueprint coefficient transport route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-twist-preserves",
+    "why": "Supplies the integral constructible finite-Tor domain for the twisted units; the compatibility unit does not replace the construction and domain theorem for twists."
+   },
+   {
+    "node": "lem-weil-integral-twist-scalar-coherence",
+    "why": "Supplies coherence of the canonical twist comparison with integral tensor associators, needed before the formal trace calculation; no purity or trace theorem is used from another unit."
+   },
+   {
+    "node": "lem-weil-integral-twist-derived-scalar",
+    "why": "Supplies the natural twist comparison beta from which theta_L and a_{F/E,1_E} are built, and its naturality used in Step 2; generic coefficient tool, not a purity or trace theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-twist-preserves",
+  "lem-weil-integral-twist-scalar-coherence",
+  "lem-weil-integral-twist-derived-scalar"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NK-8bb41c27f",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-8bb41c27f (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited node's statement in full. Checked statements: finite-free completed scalar comparison, twist-preserves, finite-Tor amplitude, integral twist/scalar coherence, compact-support coefficient comparison with its composition law, and the twist comparison beta. Sources read: master sk-thm-purity-transport Step 3 and main-20261015 thm-pur-rational-and-qbar-purity. Neither states the identity, so proof_origin=agent is correct. Domains hold: the twisted units are in integral D^b_ctf, f is finite type, and ell is invertible. I recomputed Steps 2-5 as equations and they are correct: the inverse twist equation, the inverse of the composition law, naturality of c_{F/E} at theta_E^{-1}, naturality of the associator at t_0, and the unit square u_F alpha = v B(u_E). Edge cases checked: d=0, E_0=E, E=F, t_0=0, ramified extensions. No new nodes and no duplicate. The parent's step 10 uses the item verbatim. No cycle, no SGA, and the tool uses are reachable on the unit route. Fix: theta_L and a_{F/E,1_E} are built from the natural twist comparison beta of lem-weil-integral-twist-derived-scalar, and Step 2 implicitly used beta's naturality at u_E. That node is now added to stmt_deps, to Step 2's uses and to proof_deps, with the expansion written out and a tool_uses entry. The statement is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

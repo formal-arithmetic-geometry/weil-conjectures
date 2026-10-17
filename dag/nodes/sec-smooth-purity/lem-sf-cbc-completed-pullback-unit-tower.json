@@ -23,9 +23,121 @@
   "def-weil-pbc-completed-pullback",
   "lemma-weil-pbc-completed-pullback-reduction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Model of $\\mathcal R_W$. Let $Q\\to N$ be a flat-term K-flat resolution [lem-pc-kflat-resolution]. By [lem-weil-pbc-diagram-site-realization] module sheaves on the diagram site are towers; every covering family of that site lies in a single level, so sections, sheafification and hence the sheaf tensor product over $\\Delta\\underline A_W$ are computed levelwise, and by [lem-weil-tower-category-levelwise-abelian] kernels, cokernels and cohomology of tower complexes are levelwise. Hence $\\Delta Q\\to\\Delta N$ is a quasi-isomorphism, every $\\Delta Q^i$ is flat, and $\\Delta Q$ is K-flat [def-pc-kflat-complex]: for an acyclic tower complex $F$, level $n$ of $\\operatorname{Tot}(F\\otimes\\Delta Q)$ is $\\operatorname{Tot}(F_n\\otimes_{\\underline A_W}Q)$, acyclic because $F_n$ is acyclic and $Q$ is K-flat. By [lem-pur-derived-change-of-rings] (2) for the ring map $\\Delta\\underline A_W\\to(\\underline{P_n}_W)_n$ of the diagram site, $\\mathcal R_W(N)$ is represented by $\\Delta Q\\otimes_{\\Delta\\underline A_W}(\\underline{P_n}_W)_n=(Q\\otimes_A\\underline{P_n}_W)_n$ with transitions $1_Q\\otimes\\rho_n$. A morphism $N\\to N'$ is a roof of chain maps between such resolutions (resolve its apex again by [lem-pc-kflat-resolution]) and goes to the levelwise tensored roof. Thus evaluation at $n$ of $\\mathcal R_W$ is naturally $F_n=-\\otimes^L_A\\underline{P_n}_W$, regarded over $\\underline A_W$ by restriction of scalars, as asserted in the statement.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-pc-kflat-complex",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution), Tag 06YN (definition-K-flat), Tag 06YT/06YU (derived change of rings computed on K-flat complexes); levelwise description of the diagram site as in Tag 0940 (section-derived-limits)"
+   }
+  },
+  {
+   "text": "Fix $N\\in D(T',A)$, write $F_n=-\\otimes^L_A\\underline{P_n}$, and take $Q\\to N$ as in Step 1. By [lem-sp-completed-pullback-adjunction], $C_{T'}N$ is computed by a K-injective tower resolution $j:(Q\\otimes_A\\underline{P_m})_m\\to J_\\bullet$ followed by $\\lim_mJ_m$; this is the model of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], whose evaluations $p_n:\\lim_mJ_m\\to J_n\\cong F_nN$ are the limit projections. Its completion unit $\\eta_N$ is the canonical map $N\\to R\\lim_m(N\\otimes^L_A\\underline{P_m})$, which [lem-weil-pbc-constant-completion-equivalence] (last paragraph, with $\\mathcal O=\\underline A$) identifies with the derived-completion unit, respecting units. That canonical map is $Q\\to\\lim_mJ_m$ obtained by factoring the compatible maps $j_m\\circ(x\\mapsto x\\otimes1):Q\\to J_m$ through the limit, so $p_n\\eta_N=u_{n,N}$, where $u_{n,N}:N\\to\\operatorname{Res}F_nN$ is the scalar-extension unit. Nothing here uses the cone model of the completion map; all limits are in the K-injective model. Apply [lemma-weil-pbc-adic-completion-reduction] on $T'$ with $\\Lambda=A$ and $K=N$. Its hypotheses are exactly our Noetherian, additive-torsion and perfect-quotient assumptions; it imposes no completeness hypothesis on $N$, and its $L$ and $p_a$ are the same K-injective model. It gives an isomorphism $b_{n,N}:F_nC_{T'}N\\to F_nN$, namely the scalar-extension adjoint of $p_n$. Naturality of this adjunction in the source identifies $b_{n,N}F_n(\\eta_N)$ with the adjoint of $p_n\\eta_N=u_{n,N}$, hence with $\\mathrm{id}_{F_nN}$. Since $b_{n,N}$ is invertible, $F_n(\\eta_N)=b_{n,N}^{-1}$. This proves the specified formula for the level-$n$ inverse.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lemma-weil-pbc-adic-completion-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
+    "place": "Finite reduction of adic completion; adjunction calculation for its projection map; Stacks Tag 099M (proetale-lemma-naive-completion) fixes the unit"
+   }
+  },
+  {
+   "text": "The morphism $f=\\mathcal R_{T'}(\\eta_N)$ already exists in the derived category of strict towers, since $\\mathcal R$ is the functor in the statement. Evaluation of its K-flat quotient model is $F_n(\\eta_N)$, which Step 2 proves invertible. By [lem-weil-tower-category-levelwise-abelian], kernels and cokernels in the tower category are levelwise. Thus the cohomology tower of a representative of $\\operatorname{Cone}(f)$ evaluates to $H^i(\\operatorname{Cone}(F_n\\eta_N))=0$ at every $n$, and is itself zero. Its representative is acyclic; the map from zero to it is therefore a quasi-isomorphism, inverted in [def-weil-abstract-derived-category]. The cone is zero and $f$ is invertible. This proves (i) in $D(\\mathcal T_{T'})$, rather than constructing a morphism from a family of maps in $D(T',A)$. Evaluation of the unique inverse of $f$ is the inverse of its evaluation, so it is precisely $b_{n,N}$.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 02MZ, lemma-inverse-systems-abelian (2); explicit cohomology/cone argument"
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat representative $Q$ of $K$ using [lem-pc-kflat-resolution]. By [lem-weil-pbc-ringed-pullback-preserves-kflat], $g^*Q$ is again flat-term K-flat. The normalized tensor comparison supplied by [lem-weil-pbc-canonical-ringed-tensor-comparison-construction], with its data spelled out in [def-weil-pbc-canonical-ringed-tensor-comparison], gives chain isomorphisms $\\beta_{n,Q}:g^*(Q\\otimes_A\\underline{P_n}_T)\\xrightarrow{\\sim}g^*Q\\otimes_A\\underline{P_n}_{T'}$. For $\\rho_n:P_{n+1}\\to P_n$, naturality in the second tensor factor gives the chain equation $\\beta_{n,Q}\\,g^*(1_Q\\otimes\\rho_n)=(1_{g^*Q}\\otimes\\rho_n)\\,\\beta_{n+1,Q}$. Naturality in the first factor gives the same commuting square for each chain map $Q\\to Q'$, and the chain maps respect differentials. Hence $\\beta_Q$ is a natural isomorphism of actual tower complexes, not just of their levelwise derived images. Its inverse has the orientation of $\\tau_{g,K}$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-weil-pbc-canonical-ringed-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, functoriality in both factors; sites-cohomology.tex Tags 06YS and 0G7E"
+   }
+  },
+  {
+   "text": "If $s:Q\\to Q'$ is a quasi-isomorphism between the chosen K-flat complexes, [lem-pur-derived-change-of-rings] (1) makes every $s\\otimes\\underline{P_n}$ a quasi-isomorphism. Levelwise exactness from [lem-weil-tower-category-levelwise-abelian] then makes the map of entire quotient towers a quasi-isomorphism. Exactness of constant-coefficient $g^*$, assumed in the statement, preserves these quasi-isomorphisms; applying the same change-of-rings assertion to $g^*s$ handles the other side. The constructions also respect chain homotopies: tensoring the homotopy with $1$ and then applying $g^*$ gives its homotopy at all levels, commuting with every $\\rho_n$. The equivalence $W^{-1}\\mathcal P\\simeq D(T,A)$ of [lem-weil-pbc-site-derived-tensor-descent] now descends the natural strict isomorphism $\\beta_Q^{-1}$ of Step 4. Indeed its naturality square holds for chain maps, hence for inverses of the quasi-isomorphisms just inverted, and hence for every composite in the localization. The descended $\\tau_{g,K}$ is natural on the derived category and independent of the representative $Q$. This proves the first assertion of (ii).",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT, 06YU and 0G7D: tensor quasi-isomorphism invariance and localization of the flat-term K-flat class; strict-tower descent written out"
+   }
+  },
+  {
+   "text": "Put $M=Lg^*K$. Compose the inverse from (i) with the isomorphism of Steps 4–5 to obtain $q_{g,K}=\\tau_{g,K}\\mathcal R_{T'}(\\eta_M)^{-1}$ in $D(\\mathcal T_{T'})$. For a morphism $a:M\\to M'$, naturality of $\\eta$ gives $\\mathcal R(Ca)\\mathcal R(\\eta_M)=\\mathcal R(\\eta_{M'})\\mathcal R(a)$; multiplying by the two inverses yields $\\mathcal R(a)\\mathcal R(\\eta_M)^{-1}=\\mathcal R(\\eta_{M'})^{-1}\\mathcal R(Ca)$. Combined with naturality of $\\tau$, this is naturality of $q$. Both factors are morphisms in the derived category of strict towers, so their composite has that typing. More explicitly, if $t_n^N$ denotes the quotient transition on $\\mathcal R(N)$, the transition equation for $f=\\mathcal R(\\eta_M)$ gives $t_n^M b_{n+1,M}=b_{n,M}t_n^{CM}$ after multiplication by the evaluated inverses. Combining this with the displayed transition equation for $\\beta$ in Step 4 proves transition compatibility of every evaluated $q_n=\\tau_{g,K,n}b_{n,M}$, as required in (ii).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Proof Steps 2 and 5, completed-pullback generator of the strict-tower refinement; inverse and transition equations supplied by the worker"
+   }
+  },
+  {
+   "text": "Suppose $K$ is derived $I$-complete. The equivalence, finite-reduction maps and unit compatibility of [lem-weil-pbc-constant-completion-equivalence], together with [def-weil-pbc-completed-pullback], identify $C_{T'}Lg^*K$ with the completed pullback and identify its defining strict tower with $G_g\\mathcal R_T(K)$ through $\\tau_{g,K}$. Under these identifications its limit projection is $\\tau_{g,K,n}p_{n,M}$. Step 2 says $b_{n,M}$ is adjoint to $p_{n,M}$; naturality of the same scalar-extension adjunction says $\\tau_{g,K,n}b_{n,M}$ is adjoint to $\\tau_{g,K,n}p_{n,M}$. By [lemma-weil-pbc-completed-pullback-reduction], $\\alpha_n$ is exactly the map induced by that defining limit projection. Hence $q_{g,K,n}=\\tau_{g,K,n}b_{n,M}=\\alpha_n$ in the finite coefficient derived category, and also after restriction to constant $A$ coefficients. This compares the normalized maps, not merely the isomorphism classes of their endpoints, and proves (iii).",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-completed-pullback",
+    "lemma-weil-pbc-completed-pullback-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099L–099N, especially lemma-pushforward-Noetherian-case (2),(5); projection normalization in the cited blueprint reduction lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "def-weil-pbc-completed-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lemma-weil-pbc-adic-completion-reduction",
+  "lemma-weil-pbc-completed-pullback-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Proof Steps 2 and 5; strict-tower completed-pullback refinement, using Stacks Tags 099M, 099N, 03EL, 06YS, 0G7E and existing finite-reduction lemma"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +159,52 @@
    "results": "0 hits",
    "date": "2026-10-17",
    "verdict": "no match: Mathlib has no declaration for this derived pro-etale tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adic completion unit becomes an isomorphism after derived tensor with every finite ideal power quotient, compatibly as a strict inverse system",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary adic module completion or unrelated scalar towers, not the derived strict-tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"completion\", \"tensor\"",
+   "results": "12 hits: AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary adic module completion or unrelated scalar towers, not the derived strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCompletion|completion.*unit|strict.*tower",
+   "results": "25 hits: Mathlib/FieldTheory/PolynomialGaloisGroup.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary adic module completion or unrelated scalar towers, not the derived strict-tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion unit is an isomorphism modulo every power of the ideal and pullback commutes with the strict tower of reductions",
+   "results": "8 hits: IsAdicComplete.StrictMono.liftRingHom.congr_simp, AdicCompletion, AdicCompletion.map_val_apply, AdicCompletion.liftRingHom.congr_simp, AdicCompletion.instOne, AdicCompletion.map_id, AdicCompletion.module, AdicCompletion.transitionMap_comp_reduceModIdeal",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary adic module completion or unrelated scalar towers, not the derived strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCompletion|derived.*completion|completion.*derived",
+   "results": "0 hits: ; searched Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration found by this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural derived inverse image commutes with the inverse system of derived quotient tensors and the completion unit reduces to an equivalence",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.eval_comp_of, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary adic module completion or unrelated scalar towers, not the derived strict-tower comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-cbc-compact-support-composition-limit",
@@ -74,5 +228,69 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sf-cbc-completed-pullback-unit-tower",
+  "worker": "stage1",
+  "summary": "Proved the unit inverse by the existing arbitrary-input finite-reduction theorem and the scalar-extension adjunction; promoted invertibility by levelwise cohomology, built the pullback comparison as a strict chain-tower map and descended it through K-flat localization, and identified the normalized completed-coefficient projections. No new nodes and no statement change. Maintainer review fix (2026-10-18): added a first step proving the strict quotient-tower representation of R_W asserted in the statement, and rewrote the unit step in the K-injective R lim model (dropping the cone model of def-weil-pbc-completion-map, which is a different R lim model).",
+  "blueprint": "fix-lem-exchanges Proof Steps 2 and 5: naturality and completed-pullback generator in the strict-tower refinement used for compact-support composition. The original blueprint gives no separate proof of this refinement.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-adic-completion-reduction",
+    "why": "Arbitrary-input finite-reduction isomorphism normalized by its limit projection; used to invert the reduced unit, not to replace compact-support base change. No node of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General existence of flat-term K-flat representatives on a site. No node of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "General preservation of the resolving class under module pullback. No node of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "why": "General canonical sheaf-tensor pullback isomorphism, used termwise before deriving. No node of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General quasi-isomorphism invariance on K-flat complexes, used to descend strict quotient towers. No node of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "General localization equivalence of the flat-term K-flat class, used for representative independence. No node of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "General coefficient equivalence with finite-reduction and unit comparisons, required by clause (iii). No node of this unit supplies this general interface."
+   },
+   {
+    "node": "lemma-weil-pbc-completed-pullback-reduction",
+    "why": "Names the projection-normalized alpha_n appearing in clause (iii). No node of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Fixes the K-injective model of R lim and its evaluations, the same model used by lem-sp-completed-pullback-adjunction and lemma-weil-pbc-adic-completion-reduction; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-adic-completion-reduction",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-ef8b636f6",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-ef8b636f6 (reviewer sub-agent of L); spot-checked: I read in full the item, every cited node's statement, the unit sk-prop-sf-cbc, the main-20261015 fix-lem-exchanges and its proof, and Stacks proetale.tex 099M/099N. The statement keeps its hypotheses and coefficient categories: (i) holds for every N and (ii) for every K, and completeness is used only in (iii), through the constant/completed equivalence. The q of (ii) is the comparison in the proof of 099N(5). Steps 3-6 (old numbering) are correct: the β direction, descent through W^{-1}P, the naturality algebra, and alpha_n = tau_n b_n by adjunction naturality. I found two repairable faults and fixed both. (1) C4/E4: the old Step 1 took p_n eta = u_n from the cone model of def-weil-pbc-completion-map, but C_{T'} and the reduction lemma's L, p_a are both the K-injective model of lem-weil-pbc-ringed-strict-tower-homotopy-limit. I rewrote the step in the K-injective model, citing the last paragraph of lem-weil-pbc-constant-completion-equivalence for the unit and lem-weil-pbc-ringed-strict-tower-homotopy-limit for the model, and dropped def-weil-pbc-completion-map. (2) The statement's claim that R_W(N) is the strict tower (Q⊗P_n)_n was never proved. I added a new Step 1: on the diagram site tensor and cohomology are levelwise, Delta Q is K-flat with flat terms, and lem-pur-derived-change-of-rings (2) gives the representation. I renumbered the step references, recomputed proof_deps and added a tool_use declaration. There are no new nodes and no duplicates (I checked the closest four DAG nodes), and the dependency check shows no cycle. I accept the eight declared tool uses plus the R lim model one I added; they should be recorded at merge. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-sf-cbc-completed-pullback-unit-tower.json; full checks in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
