@@ -138,8 +138,7 @@ theorem isIso_map_externalIhomMap_iff_of_baseChange {Z₁ Z₂ P Z₁' P' : Sche
     {g : P' ⟶ P} [HasCompactification g] [IsIso (projectionMap A g)]
     [IsIso (projectionMap A g₁)] (sq : CommSq p₁' g g₁ p₁)
     (Ex : R(g₁)_![A] ⋙ L((p₁)^*[A]) ⟶ L((p₁')^*[A]) ⋙ R(g)_![A]) [IsIso Ex]
-    (hEx : ∀ (M : _root_.DerivedCategory (Sheaf Z₁'.smallEtaleTopology A))
-      (N : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A)),
+    (hEx : ∀ M N,
       (L((p₁)^*[A])).map (X := (R(g₁)_![A]).obj M ⊗ N)
           (Y := (R(g₁)_![A]).obj (M ⊗ (L((g₁)^*[A])).obj N)) (((projectionMap A g₁).app M).app N) ≫
         Ex.app (M ⊗ (L((g₁)^*[A])).obj N) ≫
@@ -166,7 +165,13 @@ theorem isIso_map_externalIhomMap_iff_of_baseChange {Z₁ Z₂ P Z₁' P' : Sche
   have : ∀ N, IsIso (derivedSquareUpperStarIsoInvApp A sq N) := fun N ↦ by
     unfold derivedSquareUpperStarIsoInvApp
     infer_instance
-  exact Adjunction.isIso_map_externalIhomMap_iff (rightDerivedUpperShriekAdjunction A g)
+  exact Adjunction.isIso_map_externalIhomMap_iff
+    (C₁ := _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A))
+    (C₁' := _root_.DerivedCategory (Sheaf Z₁'.smallEtaleTopology A))
+    (C₂ := _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology A))
+    (C := _root_.DerivedCategory (Sheaf P.smallEtaleTopology A))
+    (C' := _root_.DerivedCategory (Sheaf P'.smallEtaleTopology A))
+    (rightDerivedUpperShriekAdjunction A g)
     (fun M N ↦ ((projectionMap A g).app M).app N) (rightDerivedUpperShriekAdjunction A g₁)
     (fun M N ↦ ((projectionMap A g₁).app M).app N)
     (projectionMap_app_app_naturality_left g) (projectionMap_app_app_naturality_left g₁)

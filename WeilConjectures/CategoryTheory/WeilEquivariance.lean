@@ -36,7 +36,8 @@ A ⊗ G [A, ω] ──φ_A⁻¹ ⊗ 1──▶ G A ⊗ G [A, ω] ──μ──�
 ```
 for an autoequivalence `G` it is `G [A, ω] ≅ [G A, G ω] ──[G A, φ_ω]──▶ [G A, ω] ──[φ_A⁻¹, ω]──▶
 [A, ω]`, the first map being the internal-hom comparison of `G`. The evaluation
-`A ⊗ [A, ω] ⟶ ω` is equivariant (`CategoryTheory.MonoidalClosed.isWeilEquivariant_ev`), and the tensor-hom adjoint
+`A ⊗ [A, ω] ⟶ ω` is equivariant (`CategoryTheory.MonoidalClosed.isWeilEquivariant_ev`), and the
+tensor-hom adjoint
 `B ⟶ [A, ω]` of an equivariant pairing `A ⊗ B ⟶ ω` is equivariant
 (`CategoryTheory.MonoidalClosed.isWeilEquivariant_curry`). No integral lattice of `φ_A` is
 needed: the construction only uses `φ_A` and its inverse.

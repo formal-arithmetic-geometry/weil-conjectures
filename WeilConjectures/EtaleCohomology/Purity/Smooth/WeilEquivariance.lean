@@ -100,13 +100,13 @@ section Purity
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {d : ℕ} (f : X ⟶ Y) [HasCompactification f]
-  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
+  [HasInvertibleExponent Λ X]
   (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅ (twistShift Λ X d).obj (constantComplex Λ X))
   (Φ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙
       (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
     R(f)^![ModuleCat.{u + 1} Λ])
 
-omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
+omit [HasInvertibleExponent Λ X] in
 /-- The smooth purity map `γ_{f,K}` built from a tensor formula `Φ` natural in `K` is natural
 in `K`. -/
 lemma smoothPurityIso_hom_naturality {K K' : DerivedCategoryModule Λ Y} (v : K ⟶ K') :
@@ -217,7 +217,6 @@ noncomputable abbrev compactSupportWeilTransport (sq : IsPullback gX f f gY)
       (R(f)_![ModuleCat.{u + 1} Λ]).obj M :=
   lowerShriekWeilDatum sq φM
 
-omit [HasInvertibleExponent Λ Y] in
 /-- Under the base-change compatibility `hcoh` of purity, the datum `φ^!_{f,K}` of
 `def-pur-tate-datum` is the exceptional transport of `φ_K`
 (`AlgebraicGeometry.Etale.upperShriekMateWeilDatum`). -/
@@ -299,7 +298,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {k₀ :
   [Finite k₀] {X₀ Y₀ : Scheme.{u}} {aX : X₀ ⟶ Spec (.of k₀)} {aY : Y₀ ⟶ Spec (.of k₀)}
   {f₀ : X₀ ⟶ Y₀} {hf₀ : f₀ ≫ aY = aX} (D : PurityFrobeniusDatum Λ f₀ hf₀) {d : ℕ}
   [HasCompactification (Hom.geometricFiberMap f₀ hf₀)]
-  [HasInvertibleExponent Λ aX.geometricFiber] [HasInvertibleExponent Λ aY.geometricFiber]
+  [HasInvertibleExponent Λ aX.geometricFiber]
   (θ : dualizingComplex (ModuleCat.{u + 1} Λ) (Hom.geometricFiberMap f₀ hf₀) ≅
     (twistShift Λ aX.geometricFiber d).obj (constantComplex Λ aX.geometricFiber))
   (Φ : L((Hom.geometricFiberMap f₀ hf₀)^*[ModuleCat.{u + 1} Λ]) ⋙
@@ -373,7 +372,7 @@ section Compatibilities
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {d : ℕ} (f : X ⟶ Y) [HasCompactification f]
-  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
+  [HasInvertibleExponent Λ X]
   (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅ (twistShift Λ X d).obj (constantComplex Λ X))
   (Φ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙
       (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
