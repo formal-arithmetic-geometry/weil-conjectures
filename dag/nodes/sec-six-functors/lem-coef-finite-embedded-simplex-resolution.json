@@ -245,5 +245,23 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-464c4fb8a (reviewer sub-agent of L); spot-checked: I read the whole item, all three new nodes and every cited statement (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, glue-simplex, the nondegenerate-decomposition Mathlib leaf, and the parent poset-nerve replacement). The item statement is unchanged and matches HTT Variant 4.2.3.16 (*)/(*') with no added or dropped hypotheses. The worker's source error is real: I checked HTT p.256 with pdftotext. HTT's pushout (K~0 x Delta^n) amalg over boundary Delta^n needs a lift of the boundary through the cofinal K~0 -> K0, and HTT does not supply it. The replacement follows Kerodon 02MQ diagram (6.19) for a single cell; I read 02M0, 02M8, 02MA, 02MQ and 02MT online. The new nodes state exactly Def 6.3.5.1, Cor 6.3.5.12 and Prop 6.3.5.14 (monomorphisms on the 0-legs; the item uses the 0-side D x C -> D, which matches Kerodon's (b)). I checked step by step: the X0 subset argument and glue-simplex hypotheses (1)-(3); base change of the H pullback; the graph embeddings and span commutation; nonsingularity of products (the (alpha,beta) injectivity argument), cones and pushouts; finiteness; weak contractibility of the cone; and that Fun(X,E) -> Fun_W(Q,E) is an equivalence onto a full subcategory with the same pinched mapping spaces. Small cases tested: X empty, n=0, the loop Delta^1/boundary, H empty. No duplicates in the DAG (grepped for universally localizing, the Kerodon tags and localization nodes). The new nodes are statement-only, self-contained and correctly referenced. Fix: step 2 uses lem-weil-pbc-simplicial-set-glue-simplex (unit sk-prop-h2, split and not closed) without a tool_uses declaration. I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors/lem-coef-finite-embedded-simplex-resolution.json; the same tool is already accepted elsewhere in this unit. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-weil-pbc-simplicial-set-glue-simplex. The item is not a target and involves no base change or coefficient category. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteEmbeddedSimplexResolution",
+  "declaration": "SSet.exists_finite_embedded_simplex_resolution",
+  "file": "lean/Sheaf/CategoryTheory/FiniteEmbeddedSimplexResolution.lean",
+  "statement": "theorem exists_finite_embedded_simplex_resolution {X : SSet.{u}} [X.Finite] : ∃ (Q : SSet.{u}) (_ : Q.Finite) (_ : Q.Nonsingular) (q : Q ⟶ X), ∀ (E : SSet.{u}) (_ : E.Quasicategory) (p : X ⟶ E) (T : E _⦋0⦌), SSet.Enhanced.IsFunctorEquivalence (SSet.Enhanced.mappingSpaceMap ((MonoidalClosed.pre q).app E) (SSet.Enhanced.diagramVertex p) ((SSet.Enhanced.constantDiagrams X E).app _ T))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ee77db17",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Matches the node clause by clause, quantifiers in the same order: X : SSet.{u} with [X.Finite]; exists Q with Q.Finite, Q.Nonsingular (Mathlib's exact mono-on-nondegenerate-simplices class) and q : Q ⟶ X; for all E with E.Quasicategory, p : X ⟶ E, T : E _⦋0⦌, IsFunctorEquivalence of mappingSpaceMap ((pre q).app E) (diagramVertex p) (constantDiagrams X E T), i.e. restriction itself on right-pinched mapping spaces. Between Kan mapping spaces IsFunctorEquivalence is homotopy equivalence, the node's 'equivalence of Kan complexes', and it implies the IsWeakHomotopyEquivalence the consumer (lem-coef-infinity-poset-nerve-cofinal-replacement) uses. No extra hypotheses on X, Q or E; X empty and vertexless E are covered; the single universe is the dependency's convention. lean.statement appears verbatim in the file; docstrings cite HTT 4.2.3.16 and Kerodon 02MQ/02MT plus the blueprint id and contain all 7 proof steps verbatim; stmt_deps import correct; only sorry; no definitions. nt_compile.py --json on the snapshot file: rc=0, no messages (tool checked: it reports errors, hides sorry warnings). Report has real Worker report and Second reading by Q34 sections; one cosmetic garbled phrase there, no fix needed."
  }
 }
