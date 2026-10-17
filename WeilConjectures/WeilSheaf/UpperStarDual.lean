@@ -100,11 +100,13 @@ lemma upperStar_adicConstant_one_str :
     erw [reassoc_of% hιXY]
     exact hY
   rw [hs, hfs]
-  rw [ιX.inv.naturality_assoc]
+  erw [ιX.inv.naturality_assoc]
   erw [reassoc_of% hι]
-  rw [Functor.map_comp_assoc, ψ.hom.naturality, reassoc_of% hψu, ← Functor.map_comp,
-    ← Functor.map_comp, hYfs]
-  rfl
+  rw [Functor.map_comp_assoc]
+  erw [ψ.hom.naturality_assoc]
+  erw [reassoc_of% hψu]
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  erw [hYfs]
 
 end ProEtaleWeilSheaf
 
