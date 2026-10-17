@@ -10,9 +10,58 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each i, pull back the Kan fibration p_i along the edge e to obtain q_i:T_i=Delta^1 x_S Y_i \\to Delta^1. Horn lifting is preserved by pullback, so q_i is a Kan fibration even though S and Y_i need not be Kan. By [lem-coef-kan-realization-serre], |q_i|:|T_i| \\to |Delta^1| is a Serre fibration. The finite-limit and naturality assertion of [lem-coef-realization-finite-limits] identifies |T_i| with the k-space pullback |Delta^1| x_{|S|} |Y_i| and identifies the realization of each strict endpoint fiber with the corresponding fiber of |q_i| over 0 or 1. Thus the maps in the first assertion are precisely the endpoint-fiber inclusions for these Serre fibrations.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-realization-serre",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 3.6.2, printed p. 97 (PDF p. 107), together with realization preserving finite pullbacks; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let q:E \\to |Delta^1| be one of these Serre fibrations and F_a=q^{-1}(a). If E is empty, F_a is empty and F_a \\to E is a weak homotopy equivalence by the component-and-based-group definition. Otherwise choose x in E. Lift a path in the interval from q(x) to a; path lifting in [lem-coef-serre-homotopy-exact-sequence] gives a point of F_a, so every endpoint fiber is nonempty. The same node gives the exact sequence and path-transport action. Since the interval is contractible, its positive homotopy groups and fundamental group vanish. For every point y in F_a, apply that exact sequence with base point y and base point a in the interval. Exactness therefore makes pi_n(F_a,y) \\to pi_n(E,y) an isomorphism for every n>=1. This checks every base point in the source fiber, rather than using the previously chosen x, which need not belong to F_a. At degree zero, path lifting makes the map on fiber components surjective, while the orbit description in the cited statement has orbit set equal to the components of E and the acting fundamental group is trivial; hence it is injective as well. This proves F_a \\to E is a weak equivalence for a=0,1, including disconnected total spaces and empty cases. By the definition in [def-cbc-enhanced-diagrams-cones], the corresponding simplicial endpoint inclusions are weak homotopy equivalences.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.16 and Proposition 2.4.18, printed pp. 55-57, for the Serre exact sequence, path lifting and component action; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The map m over S induces a map of pullbacks M:T_0 \\to T_1 and, for each endpoint a, a commutative square of strict fibers and total pullbacks. Realization preserves this square by [lem-coef-realization-finite-limits]. The vertical endpoint maps in the square are weak equivalences by Steps 1-2. The class of realized weak equivalences satisfies two-out-of-three by [lem-coef-topological-serre-model], so the horizontal fiber map m_{s_a} is a weak equivalence exactly when M is. Applying this for a=0 and a=1 proves the stated equivalence between the two strict-fiber maps and the induced map T_0 \\to T_1. No property of S beyond the given edge, and no nonemptiness or connectedness assumption, entered the argument.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-topological-serre-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Naturality of endpoint inclusions and two-out-of-three for weak homotopy equivalences; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-serre-homotopy-exact-sequence",
+  "lem-coef-topological-serre-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Agent expansion of the endpoint-fiber argument from Corollary 3.6.2 using Lemma 2.4.16 and Proposition 2.4.18; archival PDF WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -65,7 +114,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quillen-b-discrete-fibration-base-change",
@@ -92,5 +141,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-fibration-edge-fiber-transport",
+  "worker": "stage1",
+  "summary": "Checked the unchanged item against Hovey Corollary 3.6.2, Lemma 2.4.16 and Proposition 2.4.18. The split realizes the parent proof step by pulling back each Kan fibration to the simplicial interval, identifying realization fibers by finite-limit preservation, proving endpoint inclusions by the Serre exact sequence and path transport including empty cases, and using naturality plus two-out-of-three for the map of fibrations. No new node was needed: the endpoint assertion is the item itself and all other inputs are existing DAG statements.",
+  "blueprint": "Returned item Step 6: endpoint-fiber inclusions over an interval and their naturality for a map of Kan fibrations.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q96-9ede0ace5",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-9ede0ace5 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, Hovey source locations, and unit/chapter route in full. Corrected Step 2 to apply the exact sequence at every basepoint in the endpoint fiber. Statement unchanged; empty, disconnected, and non-Kan-base cases checked. No missing dependencies or cycles. Wrote review.md and the whole corrected DAG JSON under fixes/.; 1 file(s) fixed by the reviewer"
  }
 }

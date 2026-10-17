@@ -10,9 +10,86 @@
  "stmt_deps": [
   "def-nagata-category"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Write $\\alpha_f=\\Phi_f^{-1}(\\alpha):f_!A\\to h^*X$. The strict identities $a^*=f^*h^*$ and $b^*=h^*g^*$ identify the given square equation with $f^*h^*w\\circ\\alpha=f^*\\beta\\circ v$. The equation $hf=a$ and the definition of $u_f$ make all displayed composites well typed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "strict total-category calculation"
+   }
+  },
+  {
+   "text": "Naturality of the inverse adjunction bijection for $f_!\\dashv f^*$ gives $\\Phi_f^{-1}(f^*d\\circ v)=d\\circ\\Phi_f^{-1}(v)=d\\circ u_f$ for every $d:B\\to h^*X$. Since $\\Phi_f^{-1}(\\alpha)=\\alpha_f$ and $\\Phi_f^{-1}$ is bijective, the total diagonal condition $f^*d\\circ v=\\alpha$ is equivalent to $d\\circ u_f=\\alpha_f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "naturality of the adjunction correspondence"
+   }
+  },
+  {
+   "text": "Apply $\\Phi_f$ to the two maps $h^*w\\circ\\alpha_f$ and $\\beta\\circ u_f$ from $f_!A$ to $h^*g^*Y$. Their images are respectively $f^*h^*w\\circ\\alpha=a^*w\\circ\\alpha$ and $f^*\\beta\\circ v$. The commutativity hypothesis therefore implies $h^*w\\circ\\alpha_f=\\beta\\circ u_f$, since $\\Phi_f$ is bijective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "mate of the commuting-square equation"
+   }
+  },
+  {
+   "text": "By definition $\\widetilde\\alpha=\\Phi_h^{-1}(\\alpha_f)$ and $\\widetilde\\beta=\\Phi_h^{-1}(\\beta)$. Naturality of $\\Phi_h$ sends $w\\circ\\widetilde\\alpha$ to $h^*w\\circ\\alpha_f$ and sends $\\widetilde\\beta\\circ h_!u_f$ to $\\beta\\circ u_f$. Step 3 and injectivity of $\\Phi_h$ give $w\\widetilde\\alpha=\\widetilde\\beta\\circ h_!u_f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "second adjunction mate"
+   }
+  },
+  {
+   "text": "For a total diagonal $d:B\\to h^*X$, put $\\delta=\\Phi_h^{-1}(d)$. If $f^*d\\circ v=\\alpha$, Step 2 gives $d\\circ u_f=\\alpha_f$. Naturality of $\\Phi_h$ then gives $\\Phi_h(\\delta\\circ h_!u_f)=d\\circ u_f=\\Phi_h(\\widetilde\\alpha)$, hence $\\delta\\circ h_!u_f=\\widetilde\\alpha$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "correspondence of left triangle equations"
+   }
+  },
+  {
+   "text": "The other total diagonal equation $h^*w\\circ d=\\beta$ is, by naturality of $\\Phi_h$, exactly $\\Phi_h(w\\circ\\delta)=\\Phi_h(\\widetilde\\beta)$. Since $\\Phi_h$ is injective, it yields $w\\circ\\delta=\\widetilde\\beta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "correspondence of right triangle equations"
+   }
+  },
+  {
+   "text": "Conversely, let $\\delta:h_!B\\to X$ satisfy $\\delta\\circ h_!u_f=\\widetilde\\alpha$ and $w\\circ\\delta=\\widetilde\\beta$, and set $d=\\Phi_h(\\delta):B\\to h^*X$. Applying $\\Phi_h$ to the first fibre equation gives $d\\circ u_f=\\alpha_f$; applying $\\Phi_h$ to the second gives $h^*w\\circ d=\\beta$. Apply $\\Phi_f$ to the equality $d\\circ u_f=\\alpha_f$. Naturality and $\\Phi_f(u_f)=v$ identify its left side with $f^*d\\circ v$, while $\\Phi_f(\\alpha_f)=\\alpha$ identifies its right side with $\\alpha$. Hence $f^*d\\circ v=\\alpha$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "reverse mate construction"
+   }
+  },
+  {
+   "text": "The two constructions are inverse because $\\Phi_h^{-1}(\\Phi_h(\\delta))=\\delta$ and $\\Phi_h(\\Phi_h^{-1}(d))=d$. Thus $d\\mapsto\\Phi_h^{-1}(d)$ is the asserted bijection between total and fibre diagonals, with inverse $\\delta\\mapsto\\Phi_h(\\delta)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "inverse-bijection conclusion"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Haugseng, Proposition 4.25, Section 4.3 lifting assertion; explicit ordinary adjunction-mate calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -93,7 +170,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-fibre-assembly",
@@ -117,5 +194,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-adjunction-square-lifts",
+  "worker": "stage1",
+  "summary": "Checked the imported abstract total-category statement against the strict diagram and adjunction definitions. No finished Lean declaration exists. Split the proof into eight elementary mate calculations: rewrite the square, use naturality of Phi_f, derive the fibre square equation, transport it through Phi_h, and prove both directions and inverse identities for the diagonal bijection. No new nodes were needed; the only external statement dependency is the existing Mathlib category leaf def-nagata-category.",
+  "blueprint": "The steps realize the former step 7 / lifting assertion in the ancestor prop-coef-integral-exceptional-adjoint proof: adjunction correspondence of total lifting squares with squares in one fibre."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-5bb170021",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-5bb170021 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source lifting argument, and unit/chapter route. Corrected ill-typed uses of Phi_f in steps 2 and 7; statement and dependencies unchanged. Finite-set checks confirm four-lift and empty-lift cases. No duplicate or missing non-elementary premise found. Review and whole corrected JSON saved under the review directory.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-curve-h1-dual-tate-module",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Untwisted integral classes form the dual Tate module",
@@ -20,40 +20,123 @@
  ],
  "proof": [
   {
-   "text": "At level $n$, the finite-level pairing lemma\n[lem-wf-curve-finite-level-pd] gives the adjoint isomorphism\n\n$$\nH^1(C,A_n)\\xrightarrow{\\sim}\n\\operatorname{Hom}_{A_n}\\bigl(H^1(C,A_n(1)),A_n\\bigr).\n\\tag{4.2}\n$$\n\nThe equivariance and compatibility under reduction are those of\n[thm-pod-equivariance-of-the-twisted-pairing]. By\n[lem-wf-curve-kummer-jacobian-tate-module], the second factor is\n$J[\\ell^n](\\overline{k}_0)$. Thus (4.2) gives natural compatible\nGalois-equivariant isomorphisms\n\n$$\nH^1(C,A_n)\\xrightarrow{\\sim}\n\\operatorname{Hom}_{A_n}\n\\bigl(J[\\ell^n](\\overline{k}_0),A_n\\bigr).\n\\tag{4.3}\n$$\n\nThe transition maps\n$J[\\ell^{n+1}](\\overline{k}_0)\\xrightarrow{[\\ell]} J[\\ell^n](\\overline{k}_0)$ are surjective by\n[thm-av-final](d). We spell out the resulting quotient\ndescription. Put $r=2\\dim J$. By\n[thm-av-final](c), the level-one group is\n$(\\mathbf Z/\\ell\\mathbf Z)^r$; choose a basis and lift its vectors\nsuccessively through the displayed surjections. At level $n$, the chosen\nlifts form a basis of the free\n$\\mathbf Z/\\ell^n\\mathbf Z$-module $J[\\ell^n](\\overline{k}_0)$: their\nreductions form a basis modulo $\\ell$, so elementary Nakayama (or the\nusual row-reduction over the local ring $\\mathbf Z/\\ell^n\\mathbf Z$)\nshows that they generate, and equality of the cardinalities\n$\\ell^{nr}$ makes the resulting surjection an isomorphism. The compatible\nbases identify the whole inverse system with\n$(\\mathbf Z/\\ell^n\\mathbf Z)^r$ under reduction. Consequently\n$T_\\ell J\\cong\\mathbf Z_\\ell^r$ ([thm-av-final](d)), every projection is surjective, and its\nkernel is exactly $\\ell^nT_\\ell J$. Thus the projections give canonical\nisomorphisms (independent of the bases used to prove them)\n\n$$\nJ[\\ell^n](\\overline{k}_0)\\cong T_\\ell J/\\ell^nT_\\ell J.\n$$",
+   "text": "Put $M_n=J[\\ell^n](\\overline{k}_0)$ and $U_n=H^1(C,A_n)$. Write $\\kappa_n:H^1(C,A_n(1))\\simeq M_n$ for [lem-wf-curve-kummer-jacobian-tate-module]. The perfect pairing of [lem-wf-curve-finite-level-pd] gives an $A_n$-linear isomorphism\n$$\\phi_n:U_n\\xrightarrow{\\sim}\\operatorname{Hom}_{A_n}(M_n,A_n),\\qquad\n\\phi_n(x)(y)=\\operatorname{tr}_{C,n}(x\\smile\\kappa_n^{-1}y).$$\nIndeed, perfectness means exactly that the adjoint into the dual of the second factor is bijective, and precomposition with $\\kappa_n^{-1}$ is an isomorphism of the two duals. The curve is smooth projective and geometrically connected and $\\ell$ is invertible, precisely as required by both cited statements.",
    "uses": [
     "lem-wf-curve-finite-level-pd",
-    "thm-pod-equivariance-of-the-twisted-pairing",
-    "lem-wf-curve-kummer-jacobian-tate-module",
+    "lem-wf-curve-kummer-jacobian-tate-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-h1-dual-tate-module.md",
+    "place": "Blueprint proof, equation (4.2) and construction of (4.3)"
+   }
+  },
+  {
+   "text": "Use [lem-wf-curve-trace-cup-naturality] in degree $i=1$, and the equivariance and transition clauses of [lem-wf-curve-kummer-jacobian-tate-module]. If $r_n:U_{n+1}\\to U_n$ is reduction and $y\\in M_{n+1}$, these statements give the explicit compatibility\n$$\\phi_n(r_nx)(\\ell y)=\\phi_{n+1}(x)(y)\\bmod\\ell^n.$$\nFor $\\sigma\\in\\operatorname{Gal}(\\overline{k}_0/k_0)$, semilinear trace-cup invariance gives\n$$\\phi_n(\\sigma x)(\\sigma y)=\\phi_n(x)(y),\\quad\\text{equivalently}\\quad\n\\phi_n(\\sigma x)(y)=\\phi_n(x)(\\sigma^{-1}y).$$\nThus the dual action is the contragredient action, with trivial action on $A_n$. The auxiliary lemma applies to $C/\\overline{k}_0$, a smooth proper connected curve over an algebraically closed field, and to its semilinear Galois isomorphisms. It supplies full Galois invariance and coefficient reduction; Frobenius invariance alone would not supply these for arbitrary $k_0$.",
+   "uses": [
+    "lem-wf-curve-trace-cup-naturality",
+    "lem-wf-curve-kummer-jacobian-tate-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-h1-dual-tate-module.md",
+    "place": "Blueprint proof, claimed equivariance and reduction compatibility before (4.3)"
+   }
+  },
+  {
+   "text": "Let $T=T_\\ell J$ with projections $p_n:T\\to M_n$, using the coordinate description of [def-wf-abelian-tate-module]. Divisibility of $J(\\overline{k}_0)$ in [thm-av-final](d) implies that $M_{n+1}\\xrightarrow{\\ell}M_n$ is onto: a lift $z$ of $y$ satisfies $\\ell^{n+1}z=\\ell^ny=0$. Recursively lifting $y\\in M_n$ upwards and setting the lower coordinates to $\\ell^{n-j}y$ constructs a tuple with $p_n(t)=y$; hence $p_n$ is onto. Further, $p_n(\\ell^nt)=0$. Conversely, if $p_n(t)=0$, put $s_j=t_{j+n}$; then $\\ell^js_j=t_n=0$ and $\\ell s_{j+1}=s_j$, so $s\\in T$ and $\\ell^ns=t$. Therefore $\\ker p_n=\\ell^nT$ and the maps $p_n$ identify $T/\\ell^nT$ with $M_n$. All these projections commute with Galois because its action is componentwise.",
+   "uses": [
+    "def-wf-abelian-tate-module",
     "thm-av-final"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-h1-dual-tate-module.md",
+    "place": "Blueprint proof, quotient description following (4.3); direct lifting-and-shift argument in place of compatible bases"
+   }
   },
   {
-   "text": "Consequently\n\n$$\n\\varprojlim_n\\operatorname{Hom}_{A_n}\n(J[\\ell^n](\\overline{k}_0),A_n)\n\\cong\n\\varprojlim_n\\operatorname{Hom}_{\\mathbf Z_\\ell}\n(T_\\ell J/\\ell^nT_\\ell J,\\mathbf Z_\\ell/\\ell^n\\mathbf Z)\n\\cong \\operatorname{Hom}_{\\mathbf Z_\\ell}(T_\\ell J,\\mathbf Z_\\ell).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "For a compatible tuple $x=(x_n)\\in\\varprojlim U_n$, define\n$$F_x(t)=(\\phi_n(x_n)(p_nt))_{n\\geq1}.$$\nStep 2 makes these residues compatible, so this is an element of $\\mathbf Z_\\ell$, which is the ring of compatible residues in [def-tate-module-abelian-group]. Coordinatewise additivity and scalar multiplication show that $F_x:T\\to\\mathbf Z_\\ell$ is $\\mathbf Z_\\ell$-linear. If $F_x=0$, surjectivity of $p_n$ and injectivity of $\\phi_n$ give $x_n=0$ for every $n$; thus $x\\mapsto F_x$ is injective.",
+   "uses": [
+    "def-tate-module-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-h1-dual-tate-module.md",
+    "place": "Blueprint proof, inverse-limit-to-Hom map; explicit coordinate construction"
+   }
   },
   {
-   "text": "The last map sends a homomorphism to its reductions; it is bijective because\n$T_\\ell J$ is finite free over $\\mathbf Z_\\ell$, as just proved. Only\nordinary inverse limits are used here; no derived-limit comparison is being\ninvoked. Although bases were used to verify the quotient description, the\nprojections, pairings, and reduction maps themselves are canonical and\nGalois equivariant. This proves (4.1) with its Galois action.",
+   "text": "Conversely let $F:T\\to\\mathbf Z_\\ell$ be $\\mathbf Z_\\ell$-linear. By step 3, $F\\bmod\\ell^n$ kills $\\ker p_n=\\ell^nT$ and descends uniquely to an $A_n$-linear $f_n:M_n\\to A_n$. For $y\\in M_{n+1}$ choose $t\\in T$ with $p_{n+1}t=y$. Both $f_n(\\ell y)$ and $f_{n+1}(y)\\bmod\\ell^n$ are $F(t)\\bmod\\ell^n$. Put $x_n=\\phi_n^{-1}(f_n)$. Step 2 gives $\\phi_n(r_nx_{n+1})(\\ell y)=f_n(\\ell y)$; surjectivity of $\\ell:M_{n+1}\\to M_n$ implies $r_nx_{n+1}=x_n$. This tuple maps back to $F$, since every residue of its value on every $t$ agrees with that of $F(t)$. The two constructions are inverse and linear.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-h1-dual-tate-module.md",
+    "place": "Blueprint proof, final Hom/inverse-limit identification; explicit inverse"
+   }
+  },
+  {
+   "text": "Give the dual the action $(\\sigma F)(t)=F(\\sigma^{-1}t)$. By step 2 and the equivariance of $p_n$ in step 3,\n$$F_{\\sigma x}(t)_n=\\phi_n(\\sigma x_n)(p_nt)\n=\\phi_n(x_n)(\\sigma^{-1}p_nt)=F_x(\\sigma^{-1}t)_n.$$\nEquality of all residues proves Galois equivariance. The isomorphism uses only the canonical cup-trace pairing, Kummer maps and projections; the lifts in step 3 were used only to prove surjectivity. This proves the stated natural isomorphism using ordinary inverse limits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-h1-dual-tate-module.md",
+    "place": "Blueprint proof, last paragraph: canonicity and Galois action"
+   }
   }
  ],
  "proof_deps": [
   "lem-wf-curve-finite-level-pd",
-  "thm-pod-equivariance-of-the-twisted-pairing",
   "lem-wf-curve-kummer-jacobian-tate-module",
-  "thm-av-final"
+  "lem-wf-curve-trace-cup-naturality",
+  "def-wf-abelian-tate-module",
+  "thm-av-final",
+  "def-tate-module-abelian-group"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-curve-h1-dual-tate-module.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tateModule|etale.*cohomology|[Jj]acobian.*curve",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean. These concern other objects, not the stated etale-cohomology comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt, LinearMap.dualMap",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of first etale cohomology of a smooth projective curve with Z mod l power coefficients is the linear dual of the Tate module of its Jacobian",
+   "results": "Read returned hits: IsDedekindDomain.selmerGroup.fromUnitLift, Field.absoluteGaloisGroupAbelianization, IsDedekindDomain.selmerGroup, IsDedekindDomain.selmerGroup.valuation, IsDedekindDomain.selmerGroup.fromUnit, Algebra.Extension.instAddCommGroupH1Cotangent, InfiniteGalois.profiniteGalGrpIsoLimit, Algebra.H1Cotangent. These concern other objects, not the stated etale-cohomology comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "First etale cohomology of a proper smooth curve is the dual of the l-adic Tate module of its Jacobian",
+   "results": "Read returned hits: Algebra.FormallyEtale.subsingleton_h1Cotangent, groupCohomology.H1, Algebra.FormallySmooth.subsingleton_h1Cotangent, AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.Scheme.Etale, Algebra.formallyEtale_iff, Algebra.Extension.H1Cotangent. These concern other objects, not the stated etale-cohomology comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality identifies cohomology H1 of a curve with characters of its Jacobian torsion points",
+   "results": "Read returned hits: groupCohomology.H1ofAutOnUnitsUnique, WeierstrassCurve.Affine.Point.toClass, WeierstrassCurve.Affine.Point.toClass_apply, CharacterModule.intSpanEquivQuotAddOrderOf_apply_self, IsDedekindDomain.selmerGroup.fromUnit, WeierstrassCurve.Affine.Point.toClass_some, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.Hilbert90.aux. These concern other objects, not the stated etale-cohomology comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -85,5 +168,34 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-curve-h1-dual-tate-module",
+  "worker": "stage1",
+  "summary": "Checked the exact statement, both blueprint snapshots, and the tagged sorried Lean finite-level declaration. Kept the statement. Exposed arbitrary-field trace-cup naturality as one new statement-only lemma because the imported Frobenius theorem does not imply full Galois/reduction compatibility. Gave elementary lifting-and-shift proofs of the Tate quotients and explicit inverse constructions of the Hom-limit isomorphism.",
+  "blueprint": "Steps 1-2 realize (4.2)-(4.3); step 3 realizes the quotient paragraph; steps 4-5 realize the limit-Hom identification; step 6 realizes final canonicity/equivariance. No unit-route change.",
+  "tool_uses": [
+   {
+    "node": "thm-av-final",
+    "why": "Its divisibility assertion supplies torsion-point lifts; this is exactly the abelian-variety input named in the blueprint proof."
+   },
+   {
+    "node": "lem-wf-curve-kummer-jacobian-tate-module",
+    "why": "Its Galois-equivariant, transition-compatible finite Kummer identification is the Jacobian tool explicitly used in the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-av-final",
+  "lem-wf-curve-kummer-jacobian-tate-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q112-dcadd343b",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q112-dcadd343b (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all six proof steps, cited statements, blueprint route, Milne §§14/22, and Stacks 0FPJ/0H9A. Coefficient transitions, semilinear invariance, Tate quotients, and inverse constructions are correct. No duplicate, cycle, or target weakening found. Detailed checks and accepted tool uses are in review.md."
+ }
 }

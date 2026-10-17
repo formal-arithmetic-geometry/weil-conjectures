@@ -61,7 +61,7 @@
     "def-pur-localized-ringed-site",
     "def-pur-hom-complex"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 08JB, label lemma-restriction-RHom-to-U; its proof using Tag 08FI"
@@ -75,31 +75,46 @@
     "lem-sf-comparison-pullback-exact",
     "lem-pur-site-restriction-module-adjunction-exact"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-comparison-constructible.md",
     "place": "Proof, sentence 1: site comparison restricts to open subschemes (adjunction calculation written out)"
    }
   },
   {
-   "text": "Under the identifications of steps 3 and 4, restriction takes the specified canonical comparison $\\beta_{X,K,M}$ to $\\beta_{U,K|_U,M|_U}$, rather than merely relating their source and target objects. Here is the evaluation check. The derived tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], together with [lem-sf-comparison-pullback-exact], identifies the transpose defining $\\beta_X$ with\n$$\\nu_X^*R\\mathcal Hom(K,M)\\otimes_A^L\\nu_X^*K\\longrightarrow\\nu_X^*(R\\mathcal Hom(K,M)\\otimes_A^LK)\\xrightarrow{\\nu_X^*\\mathrm{ev}}\\nu_X^*M.$$\nThe tensor-Hom bijection used to transpose is obtained on each site by choosing K-flat representatives of the tensor arguments [lem-pc-kflat-resolution] and a K-injective target [def-pur-derived-internal-hom]. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] also to each localization morphism $j_U$: the chosen K-flat complexes with flat terms remain K-flat with flat terms after restriction. Their restricted quasi-isomorphisms remain quasi-isomorphisms by exact restriction from step 2, and the K-injective target remains K-injective by step 3. Thus the following calculation uses the same valid resolution models before and after restriction. The complex currying isomorphism [lem-sc-derived-hom-tensor-total], the K-injectivity of Hom from a K-flat into a K-injective [lem-pur-hom-kflat-into-kinjective], and [lem-pur-rhom-global-sections] give the derived Hom bijection. These are the sectionwise currying and evaluation maps. Restriction of them is the same currying and evaluation: on a homogeneous tensor $f\\otimes x$ evaluation is $f(x)$ before and after restriction. Tensor restriction and the pullback tensor comparisons are induced by the same map on pure tensors, and the adjunction identification of step 4 respects units and counits by its construction from the Hom bijections. Thus the restricted transpose is exactly $\\nu_U^*\\mathrm{ev}$ with its tensor comparison; its transpose is $\\beta_U$. This establishes the required equality of comparison maps.",
+   "text": "Under the identifications of steps 3 and 4, the canonical comparison $\\beta_{X,K,M}$ is defined as the transpose of evaluation. The derived tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], together with exactness of comparison pullback from [lem-sf-comparison-pullback-exact], identifies this transpose with\n$$\nu_X^*R\\mathcal Hom(K,M)\\otimes_A^L\nu_X^*K\\longrightarrow\nu_X^*(R\\mathcal Hom(K,M)\\otimes_A^LK)\\xrightarrow{\nu_X^*\\mathrm{ev}}\nu_X^*M.$$\nChoose K-flat representatives of the tensor arguments by [lem-pc-kflat-resolution] and a K-injective target as in [def-pur-derived-internal-hom]. The resulting comparison is therefore the evaluation-defined map used in the theorem.",
    "uses": [
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-sf-comparison-pullback-exact",
     "lem-pc-kflat-resolution",
-    "def-pur-derived-internal-hom",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-pur-rhom-global-sections"
+    "def-pur-derived-internal-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), 0A90 (lemma-compose), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 08JA (lemma-section-RHom-over-U) and 08JB (lemma-restriction-RHom-to-U); evaluation calculation for the canonical comparison"
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), 0A90 (lemma-compose), and evaluation calculation for the canonical comparison"
    }
   },
   {
-   "text": "Apply [lem-weil-finite-duality-site-comparison] on each $U_i$. Its separated finite-type hypothesis was checked in step 1, and its first and second input hypotheses in step 2. The coefficient is exactly the same finite stage $A_{E,n}$, with $\\ell\\ne p$ as in the fixed conventions. Its statement says that the canonical evaluation-defined map $\\beta_{K_i,M_i}$ is an isomorphism. By step 5 this is the restriction of $\\beta_{X,K,M}$ to $U_{i,\\mathrm{proet}}$. We use only that lemma's internal-Hom assertion; its dualizing-object and biduality assertions are unnecessary.",
+   "text": "The tensor-Hom bijection in the preceding transpose is computed on each site using the complex currying isomorphism [lem-sc-derived-hom-tensor-total]. The Hom complex from a K-flat complex into a K-injective one is K-injective by [lem-pur-hom-kflat-into-kinjective], and [lem-pur-rhom-global-sections] identifies its zeroth derived global sections with the derived Hom group. For the K-flat representatives with flat terms chosen in step 5, restriction preserves K-flatness with flat terms by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the localization morphism of [def-pur-localized-ringed-site]. Restriction preserves K-injective models by step 3, and the displayed currying and evaluation maps are componentwise the same after restriction: on a homogeneous tensor $f\\otimes x$ evaluation is $f(x)$. Hence the adjunction identification from step 4 respects units and counits, so the restricted transpose is exactly the comparison map $\\beta_{U,K|_U,M|_U}$.",
+   "uses": [
+    "lem-sc-derived-hom-tensor-total",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-pur-rhom-global-sections",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A96 (lemma-RHom from K-flat into K-injective), 08JA (lemma-section-RHom-over-U), and 08JB (lemma-restriction-RHom-to-U); evaluation compatibility"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-finite-duality-site-comparison] on each $U_i$. Its separated finite-type hypothesis was checked in step 1, and its first and second input hypotheses in step 2. The coefficient is exactly the same finite stage $A_{E,n}$, with $\\ell\\ne p$ as in the fixed conventions. Its statement says that the canonical evaluation-defined map $\\beta_{K_i,M_i}$ is an isomorphism. By steps 5 and 6 this is the restriction of $\\beta_{X,K,M}$ to $U_{i,\\mathrm{proet}}$. We use only that lemma's internal-Hom assertion; its dualizing-object and biduality assertions are unnecessary.",
    "uses": [
     "lem-weil-finite-duality-site-comparison"
    ],
@@ -110,7 +125,7 @@
    }
   },
   {
-   "text": "Finally fix $r\\in\\mathbf Z$ and apply $\\mathcal H^r$ to $\\beta_X$. Exact restriction commutes with these cohomology sheaves, so step 6 gives an inverse on every $U_i$. These inverses agree on overlaps by uniqueness of a two-sided inverse. For every pro-etale object $V\\to X$, the opens $V\\times_XU_i$ cover $V$; the sheaf axiom glues the local inverse maps uniquely, and their two composites are the identity since they are so on this cover. Therefore $\\mathcal H^r(\\beta_X)$ is an isomorphism for every $r$. The cohomology detection criterion [lem-weil-pbc-unbounded-derived-iso-cohomology], applied to the abelian category of pro-etale $A$-module sheaves, proves that $\\beta_X$ itself is an isomorphism. If $X$ is empty the sheaf axiom for the empty covering gives the same conclusion, so the argument also covers the empty affine covering.",
+   "text": "Finally fix $r\\in\\mathbf Z$ and apply $\\mathcal H^r$ to $\\beta_X$. Exact restriction commutes with these cohomology sheaves, so steps 6 and 7 give an inverse on every $U_i$. These inverses agree on overlaps by uniqueness of a two-sided inverse. For every pro-etale object $V\\to X$, the opens $V\\times_XU_i$ cover $V$; the sheaf axiom glues the local inverse maps uniquely, and their two composites are the identity since they are so on this cover. Therefore $\\mathcal H^r(\\beta_X)$ is an isomorphism for every $r$. The cohomology detection criterion [lem-weil-pbc-unbounded-derived-iso-cohomology], applied to the abelian category of pro-etale $A$-module sheaves, proves that $\\beta_X$ itself is an isomorphism. If $X$ is empty the sheaf axiom for the empty covering gives the same conclusion, so the argument also covers the empty affine covering.",
    "uses": [
     "lem-pur-site-restriction-module-adjunction-exact",
     "lem-weil-pbc-unbounded-derived-iso-cohomology"
@@ -224,7 +239,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -252,11 +267,11 @@
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-hom-ctf",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "thm-sf-hom-comparison-constructible",
   "worker": "stage1",
-  "summary": "Expanded the finite affine-cover reduction into seven steps with the exact canonical-map compatibility, the flat-model check on the first input, and sheaf-local detection of isomorphisms. Reused existing nodes throughout; no new nodes or statement changes. The slopmaster2 theorem has sorry and states only existence of an isomorphism, so is not an attachment. Second reading made explicit that localization preserves the K-flat flat-term models used in the canonical-map calculation.",
-  "blueprint": "Steps 1-2 realize the finite affine-cover reduction; steps 3-5 expand the opening locality sentence, including compatibility of the canonical arrow; step 6 realizes the invocation of the separated comparison; step 7 completes the locality reduction.",
+  "summary": "Audited the imported affine-cover proof against the current source and every cited DAG statement. Kept the statement and all existing dependencies, changed no statement hypotheses, classified all proof steps as non-elementary where they invoke named lemmas, and split the 2038-character evaluation-compatibility paragraph into two complete steps: construction of the evaluation transpose and its restriction/currying compatibility. The slopmaster2 theorem remains sorry-bearing and only gives a Nonempty isomorphism, so it is not an attachment. No new nodes were needed.",
+  "blueprint": "Steps 1-2 realize the finite affine-cover reduction; steps 3-6 expand the opening locality sentence, including the canonical-map compatibility and its evaluation/currying calculation; step 7 realizes the invocation of the separated comparison; step 8 completes the locality reduction.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
@@ -305,6 +320,10 @@
    {
     "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
     "why": "Detects the global derived isomorphism after gluing the inverses on cohomology sheaves. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "The general etale flat-model equivalence supplies a bounded flat representative for the finite-Tor first input in step 2; restriction then preserves its interval. This is a generic model tool for the prescribed open-cover reduction, and does not replace the separated comparison route."
    }
   ]
  },
@@ -320,15 +339,16 @@
   "lem-sc-derived-hom-tensor-total",
   "lem-pur-hom-kflat-into-kinjective",
   "lem-pur-rhom-global-sections",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sf-flat-model"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-N7-b311ecb51",
-  "group": "N7",
+  "reviewer": "NT-Codex-Q33-9e499ab83",
+  "group": "Q33",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-b311ecb51 (reviewer sub-agent of L); spot-checked: Reviewed the target against blueprint order 2198, the unit/chapter route, all seven proof steps, all 22 cited DAG statements, and the cited Stacks sources. Hypotheses, coefficient category, canonical comparison map, localization, edge cases, searches, and duplicate/cycle checks pass; no new nodes or repairs are required. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-9e499ab83 (reviewer sub-agent of L); spot-checked: Reviewed the item, route, all 23 cited node statements, blueprint, Lean source, and Stacks sources. Step 6 omitted the explicit K-flat preservation citation under localization; the corrected whole-node JSON adds the required tensor-pullback and localization citations, fixes step references/newline rendering, and declares the flat-model tool use. No statement change or new nodes.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.ConstructibleHomComparison",

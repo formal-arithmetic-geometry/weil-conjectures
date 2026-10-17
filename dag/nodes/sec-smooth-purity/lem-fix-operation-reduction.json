@@ -39,21 +39,18 @@
    }
   },
   {
-   "text": "For finite $A=A_{E,n}\\to B=A_{E,m}$ let the first variable $K$ be site-perfect [def-weil-site-perfect-complex]. Restrict to a covering on which it has a bounded finite-projective complex model $P$. Choose a flat-term K-flat resolution $Q$ of any representative of the second variable by [lem-pc-kflat-resolution], with K-flatness as in [def-pc-kflat-complex]; no finite-Tor assumption on that variable is needed. Here is the finite-filtration check that permits this possibly unbounded resolution. Filter $\\mathcal Hom^\\bullet(P,C)$ by the subcomplexes $F_i=\\{h:h^p=0\\text{ for }p>i\\}$ for the finitely many degrees $i$ of $P$; the Hom differential preserves $F_i$ because its $p$-component depends only on $h^p,h^{p+1}$. Starting with its lowest degree, the successive graded complexes are $\\mathcal Hom(P^i,C)[i]$. Each is a direct summand of a finite sum of shifts of $C$. Thus if $C$ is acyclic all graded pieces are acyclic. Induction on the filtration proves acyclicity of the whole complex: at each degreewise split short exact sequence, the image of a cocycle in the quotient has a primitive locally on the site; lift that primitive, subtract its differential, and use local acyclicity of the subcomplex. This proves vanishing of cohomology sheaves, without assuming that epimorphisms of sheaves are surjective on every section module. Applying this to the cone of a quasi-isomorphism shows that $\\mathcal Hom(P,-)$ preserves quasi-isomorphisms. Compare $Q$ with its K-injective resolution in [def-pur-derived-internal-hom]; hence $\\mathcal Hom(P,Q)$ computes the derived Hom. The same finite-filtration argument after tensoring with an arbitrary acyclic complex shows that $\\mathcal Hom(P,Q)$ is K-flat: every graded piece is a direct summand of a finite sum of shifts of the K-flat complex $Q$, and the filtration remains degreewise split after tensoring. Consequently ordinary coefficient tensor computes its derived reduction. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $Q\\otimes_A B$ is again K-flat; the preceding Hom argument over $B$ computes the other derived Hom by $\\mathcal Hom(P\\otimes_A B,Q\\otimes_A B)$. For a finite free term $A^r$, $\\mathcal Hom_A(A^r,Q^j)= (Q^j)^r$ by evaluation on the basis. The coefficient comparison is the identity between $((Q^j)^r)\\otimes_A B$ and $(Q^j\\otimes_A B)^r$. For a direct summand, tensor the splitting maps $pi=1$ and restrict this identity to their idempotent images. This gives the finite-projective assertion without assuming $B$ flat over $A$. In each Hom degree only finitely many degrees of $P$ occur, so these identities commute with the total Hom differential $d(h)=d_Qh-(-1)^{|h|}hd_P$ [def-pur-hom-complex] and yield a chain isomorphism. Its evaluation formula is $h\\otimes b,p\\otimes c\\mapsto h(p)\\otimes bc$, with the same total-complex signs on the two sides. Derived internal Hom commutes with slice restriction by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The local-isomorphism detection clause of [lem-weil-pbc-ringed-projection-restriction], specialized to the identity scheme morphism, therefore makes the comparison a global isomorphism. This establishes the stated site-perfect comparison and its evaluation compatibility. A coefficient dual of a perfect point complex has the reversed bounded complex of finite-projective dual modules as its model: a summand of $A^r$ dualizes to a summand of $(A^r)^\\vee=A^r$, and the dual differential is precomposition with the usual shifted sign. It is thus also site-perfect.",
+   "text": "For finite $A=A_{E,n}\\to B=A_{E,m}$ let $K$ be site-perfect [def-weil-site-perfect-complex]. The ringed-site duality theorem [lem-sfb-ringed-site-perfect-duality] gives $R\\mathcal Hom_A(K,L)=K^\\vee\\otimes_A^L L$ for arbitrary $L$, with its evaluation-defined map, and makes $K^\\vee$ perfect. Locally represent $K$ by a bounded complex $P$ of finite-projective sheaves. The canonical map $P^\\vee\\otimes_A B\\to(P\\otimes_A B)^\\vee$ is a chain isomorphism: for $P^i=A^r$ it is the identity on $B^r$, and for a summand it is the restriction of that identity along the tensor of its splitting. Only finitely many degrees occur, and precomposition with the differential gives the same dual differential on both sides. Apply the tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the duality theorem over $A$ and $B$ to obtain\n$$F R\\mathcal Hom_A(K,L)\\cong F(K^\\vee)\\otimes_B^L FL\\cong(FK)^\\vee\\otimes_B^L FL\\cong R\\mathcal Hom_B(FK,FL).$$\nThe local map is the transpose of reduced evaluation: on each term it sends $h\\otimes b,p\\otimes c$ to $h(p)\\otimes bc$, with the same total-complex signs. By [lem-weil-pbc-ringed-internal-hom-exact-restriction] this is the restriction of the global comparison; the local-isomorphism criterion of [lem-weil-pbc-ringed-projection-restriction], for the identity morphism, proves it invertible globally. No finite-Tor hypothesis on $L$ is used. The perfectness of the coefficient dual of a perfect point complex is also the duality theorem's first conclusion.",
    "uses": [
     "def-weil-site-perfect-complex",
-    "def-pur-hom-complex",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-projection-restriction",
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-weil-pbc-ringed-projection-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), 08JB (lemma-restriction-RHom-to-U); blueprint paragraph 1, finite-projective Hom and evaluation calculation; finite-length filtration argument extending the calculation to arbitrary second complexes"
+    "place": "Tags 08JJ (lemma-dual-perfect-complex), 08JB (lemma-restriction-RHom-to-U); blueprint paragraph 1; finite-projective dual comparison by tensoring a splitting"
    }
   },
   {
@@ -132,23 +129,21 @@
    }
   },
   {
-   "text": "For finite coefficient fields $E\\subset L$, [lem-pur-integral-operations-scalar-extension] supplies the natural scalar comparisons for completed pullback, tensor and internal Hom, with identity and tower composition laws. For direct image, [lem-weil-finite-free-completed-scalar-comparison] identifies integral scalar extension with ordinary tensor by $S_W=\\widehat{\\mathcal O}_{L,W}$ and says that $S_W$ is finite free over $R_W=\\widehat{\\mathcal O}_{E,W}$. The completed coefficient inverse-image identifications of step 5 identify $f^{-1}S_Y$ with $S_X$. Apply the site-perfect clause of [lemma-weil-pbc-perfect-projection-formula] with $P=S_Y$ to obtain the ordinary direct-image scalar comparison. Its $S_Y$-linearity follows from naturality with respect to multiplication by sections of $S_Y$; after choosing a temporary $R_Y$-basis it is the canonical finite-biproduct comparison. The derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact], applied to the identity topos with ring map $R_W\\to S_W$, shows that restriction of an $S_W$-K-injective remains $R_W$-K-injective: its left adjoint is exact since $S_W$ is finite free, and the acyclic-test Hom complexes are adjoint by [lem-weil-pbc-ringed-topoi-module-adjunction] applied termwise. Hence restriction commutes with the separately derived geometric direct images, so the projection comparison has exactly the desired $S$-coefficient target. Fix also the scalar-Hom map, since a natural isomorphism alone does not specify its evaluation normalization. For arbitrary representatives $P$ of $M$, choose an $R$-K-injective resolution $N\\to I$ and an $S$-K-injective resolution $I\\otimes_R S\\to J$ [def-pur-derived-internal-hom, def-pur-kinjective-complex]. As an $R$-complex, $I\\otimes_R S$ is a finite sum of copies of $I$, so is K-injective; restriction of $J$ is K-injective by the acyclic test above. The cone of their quasi-isomorphism is acyclic and K-injective: applying the Hom-complex acyclic test to a cone gives a cone of acyclic complexes. Its identity is therefore null-homotopic by the K-injective definition, so this cone is contractible. Applying $\\mathcal Hom_R^\\bullet(P,-)$ still gives a contractible cone. In a finite $R$-basis of $S$, the canonical map $\\mathcal Hom_R^\\bullet(P,I)\\otimes_R S\\to\\mathcal Hom_R^\\bullet(P,I\\otimes_R S)$ is an isomorphism, even for unbounded $P$: each Hom degree is a product, and finite sums commute with these products. Composing with $\\mathcal Hom_R^\\bullet(P,I\\otimes_R S)\\to\\mathcal Hom_R^\\bullet(P,J)$ and applying the module adjunction on each slice identifies the latter complex with $\\mathcal Hom_S^\\bullet(P\\otimes_R S,J)$. These compute the two derived internal Homs; tensor by $S$ is exact, so no K-flatness of the Hom model is needed here. The resulting comparison sends $h\\otimes s$ to $(p\\otimes t\\mapsto h(p)\\otimes st)$ before the map to $J$. Thus its transpose is precisely scalar extension of evaluation, and the description is independent of the temporary basis. For compact support compose the same comparison for the proper factor with the open tensor comparison of step 5. To compare with its integral tower definition, use [lem-weil-pbc-ringed-strict-tower-homotopy-limit]: the derived limit is the product-cone model, and tensor by finite free $S$ commutes with products and cones (in a basis both are a finite number of copies of the same product-cone). The cofinal powers $\\varpi_L^{e n}$ equal the ideals $\\varpi_E^n\\mathcal O_L$; the scalar-comparison lemma already identifies this tower realization with ordinary tensor. These constructions provide the required scalar comparisons before rationalization. For successive scalar extensions $R\\to S\\to T$, both composites of the tensor, pullback, open-extension and scalar-Hom comparisons send $x\\otimes s\\otimes t$ (or $h\\otimes s\\otimes t$) to $x\\otimes st$ (respectively the map $p\\otimes u\\mapsto h(p)\\otimes stu$). Both direct-image composites are the mates of this same pullback comparison, so are equal by the mate bijection [def-weil-pbc-adjunction-mate]. Applying this equality to the product-cone model gives it for compact support. Taking $S=R$ makes each formula the identity. These are the identity and tower laws for the specified maps used in step 9.",
+   "text": "For finite $E\\subset L$, use the completed pullback/tensor/Hom comparisons and tower laws of [lem-pur-integral-operations-scalar-extension]. By [lem-weil-finite-free-completed-scalar-comparison], scalar extension is ordinary tensor by $S_W=\\widehat{\\mathcal O}_{L,W}$, finite free over $R_W=\\widehat{\\mathcal O}_{E,W}$. Step 5's coefficient inverse-image identifications give compatible ringed squares. Apply [lem-weil-pbc-flat-ringed-diagram-restriction] with terminal index category: finite freeness implies flatness, and its restriction/direct-image comparison identifies the coefficient target, including adjuncts. Apply [lemma-weil-pbc-perfect-projection-formula] with the site-perfect object $S_Y$ to get the direct-image scalar isomorphism. Naturality for multiplication by sections makes it $S_Y$-linear. The evaluation-defined scalar-Hom isomorphism for arbitrary variables is [lem-sf-ringed-finite-free-hom-base-change]; its finite-free hypothesis was just verified, and its transpose is exactly scalar extension of evaluation. For compact support combine the proper-factor comparison with step 5's open tensor comparison. In the strict-tower triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], finite-free tensor commutes with derived products and cones: in a basis it is a finite sum of identity functors. The scalar-comparison lemma identifies this realization with the defined integral scalar extension. For $R\\to S\\to T$, the tensor and Hom maps send $x\\otimes s\\otimes t$ to $x\\otimes st$ and $h\\otimes s\\otimes t$ to $(p\\otimes u\\mapsto h(p)\\otimes stu)$. Direct-image composites are mates of the same pullback map, hence equal by [def-weil-pbc-adjunction-mate]; the product-cone construction gives compact-support equality. With $S=R$ all formulas are identities.",
    "uses": [
     "lem-pur-integral-operations-scalar-extension",
     "lem-weil-finite-free-completed-scalar-comparison",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
     "lemma-weil-pbc-perfect-projection-formula",
-    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-ringed-finite-free-hom-base-change",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "def-pur-derived-internal-hom",
-    "def-pur-kinjective-complex",
     "def-weil-pbc-adjunction-mate"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "paragraph 3, scalar extension; Stacks 07A4 (tensor pullback), 07A6 (derived adjunction), 0941 (derived limit); finite-free Hom-complex calculation and K-injective acyclic test (Stacks derived.tex, Tag 070H, definition-K-injective), fixing scalar evaluation and tower maps"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), with the evaluation-normalized finite-free specialization lem-sf-ringed-finite-free-hom-base-change; Tag 0A07 (lemma-Rf-commutes-with-Rlim); blueprint paragraph 3; flat coefficient restriction uses derived.tex Tags 0FND and 0DVC"
    }
   },
   {
@@ -168,11 +163,13 @@
    }
   },
   {
-   "text": "It remains to fix the maps in the claimed coherences. Write $F_X,F_Y$ for one coefficient extension, $L_A\\dashv R_A$ and $L_B\\dashv R_B$ for ordinary pullback/direct image, and $a:L_BF_Y\\xrightarrow{\\sim}F_XL_A$ for step 1. Define $b:F_YR_A\\to R_BF_X$ as the mate of $a$ [def-weil-pbc-adjunction-mate]. Its defining transpose is $F_X\\varepsilon_A\\circ a_{R_A}$, so the counit identity is\n$$\\varepsilon_B F_X\\circ L_B b=F_X\\varepsilon_A\\circ aR_A.$$\nThe inverse-mate formula in that same definition and naturality, followed by the two triangle identities, give the unit identity\n$$R_Ba\\circ\\eta_B F_Y=bL_A\\circ F_Y\\eta_A.$$\nThe projection comparison in step 4 is defined by exactly this adjunction transpose [lem-weil-pbc-ringed-projection-mate-exact], and its tensor associativity constraint is the one computed in step 1; the finite compact-support counit equality is already part of the statement cited in step 7. For Hom, the comparisons in steps 2 and 3 satisfy\n$$\\operatorname{ev}_B\\circ(c\\otimes1)=F(\\operatorname{ev}_A)\\circ\\mu^{-1},$$\nwhere $\\mu$ is the tensor comparison: this is the coordinate evaluation calculation in step 2 and the explicit evaluation clause of [lem-coef-integral-hom-reduction]. For scalar extension this equation follows from the K-injective Hom calculation in step 8 and its formula $h\\otimes s,p\\otimes t\\mapsto h(p)\\otimes st$; choosing a finite basis proves invertibility but is not part of that map's definition. These equalities imply compatibility with each tensor-Hom transpose by applying the injective adjunction bijection. Transposing both paths in a projection or exchange square therefore gives the same composite of reduced evaluation, tensor reassociation and a reduced counit. Units follow by the displayed unit equation, and successive coefficient changes agree because both transposes have the same formula; the adjunction bijection makes the original paths equal. Conditional exceptional comparisons use their adjunction mates and the isomorphism assumption of step 7, not an implication that arbitrary mates of isomorphisms are invertible. Finally step 9 transports these equations to rational and common-stage coefficients. Thus the result concerns the specified transformations and their constraints, rather than just existence of unrelated isomorphisms.",
+   "text": "Write $F_X,F_Y$ for coefficient extension, $L_A\\dashv R_A$, $L_B\\dashv R_B$ for pullback/direct image, and $a:L_BF_Y\\xrightarrow{\\sim}F_XL_A$ for step 1. Define $b:F_YR_A\\to R_BF_X$ by [def-weil-pbc-adjunction-mate]. Its transpose gives the counit equation\n$$\\varepsilon_B F_X\\circ L_B b=F_X\\varepsilon_A\\circ aR_A.$$\nThe inverse-mate formula, naturality and the two triangle identities give\n$$R_Ba\\circ\\eta_B F_Y=bL_A\\circ F_Y\\eta_A.$$\nThe projection comparison is this transpose [lem-weil-pbc-ringed-projection-mate-exact], with step 1's tensor constraint. The finite compact-support counit equation is included in [lem-fix-compact-support-coefficient-change]. For Hom the equation is\n$$\\operatorname{ev}_B\\circ(c\\otimes1)=F(\\operatorname{ev}_A)\\circ\\mu^{-1},$$\nwith $\\mu$ the tensor comparison. Step 2's dual evaluation calculation, [lem-coef-integral-hom-reduction], and [lem-sf-ringed-finite-free-hom-base-change] give this equation for finite site-perfect, integral and scalar comparisons respectively. Applying the adjunction bijection shows compatibility with tensor-Hom transposes. Thus transposing either route in a projection or exchange square gives the same composite of evaluation, reassociation and counit. The displayed unit equation handles units. For successive coefficient changes both transposes have the same tensor formula, so injectivity of the adjunction bijection gives equality. Exceptional comparisons use their mates and the explicit admissibility isomorphism assumption of step 7; invertibility is not inferred merely by taking a mate. Step 9 carries these equations to rational and common-stage coefficients. These are equalities of the specified maps.",
    "uses": [
     "def-weil-pbc-adjunction-mate",
     "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-coef-integral-hom-reduction"
+    "lem-coef-integral-hom-reduction",
+    "lem-sf-ringed-finite-free-hom-base-change",
+    "lem-fix-compact-support-coefficient-change"
    ],
    "elementary": false,
    "source": {
@@ -186,12 +183,9 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-pur-integral-operations-preserve-constructible",
   "def-weil-site-perfect-complex",
-  "def-pur-hom-complex",
+  "lem-sfb-ringed-site-perfect-duality",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-weil-pbc-ringed-projection-restriction",
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex",
-  "def-pur-derived-internal-hom",
   "lem-weil-pbc-standard-quotients-perfect",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
   "lem-coef-integral-hom-reduction",
@@ -205,6 +199,7 @@
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "lem-weil-pbc-ringed-slice-extension-tensor",
   "lem-weil-proetale-weakly-etale-localization",
+  "lem-pc-kflat-resolution",
   "lem-weil-pbc-proetale-immersion-limit-preservation",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-weil-pbc-finite-type-over-noetherian",
@@ -216,14 +211,14 @@
   "def-weil-exceptional-adjoint-admissibility",
   "lem-pur-integral-operations-scalar-extension",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-sf-ringed-finite-free-hom-base-change",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "def-pur-kinjective-complex",
   "def-weil-pbc-adjunction-mate",
   "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients",
-  "lem-weil-scalar-extension-exact-triangulated"
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-weil-pbc-ringed-projection-mate-exact"
  ],
  "proof_origin": {
   "by": "agent",
@@ -321,10 +316,17 @@
    "results": "8 displayed hits; ModuleCat.ExtendScalars.obj'; ModuleCat.extendScalars; ModuleCat.ExtendScalars.map'; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; AlgHom.extendScalars; CommRingCat.moduleCatExtendScalarsPseudofunctor; ModuleCat.ExtendScalars.map'_id; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply",
    "date": "2026-10-16",
    "verdict": "No match to the derived-complete operation/coherence package: the returned declarations concern ordinary modules, tensor base change or monoidal categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars preserves internal Hom for a site perfect first argument with compatibility of evaluation",
+   "results": "8 hits; LightCondensed.ihom_map_val_app; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; LightCondensed.ihomPoints_apply; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; LightCondensed.ihomPoints; CategoryTheory.Functor.mapExtLinearMap_apply; LightCondensed.instMonoidalClosedLightCondMod",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived light-condensed internal Hom or linearity of derived exact functors; none states site-perfect coefficient change with evaluation or the item package."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -366,7 +368,7 @@
   "date": "2026-10-17",
   "item": "lem-fix-operation-reduction",
   "worker": "stage1",
-  "summary": "Audited the unchanged imported statement against current main-20261015, searched both read-only Lean sources and Mathlib, and expanded the three source proof paragraphs into ten steps using existing nodes only. Replaced definition-only justifications by explicit completed-operation, Hom-model, quotient-sheaf, direct-image and finite-free scalar tools; separated bounded-domain checks from existence of ambient comparisons; and displayed evaluation and both mate identities. No new node, attachment or statement correction. The resumed audit removes an unnecessary finite-Tor condition on the finite-level Hom second variable by an explicit finite-filtration argument. Second reading specifies the finite filtration and local sheaf lifting in step 2, and adds the finite-free K-injective Hom calculation and mate tower equations in step 8 to justify scalar evaluation normalization and the maps used in step 9.",
+  "summary": "Audited the unchanged imported statement against current main-20261015, searched both read-only Lean sources and Mathlib, and expanded the three source proof paragraphs into ten steps using existing nodes only. Replaced definition-only justifications by explicit completed-operation, Hom-model, quotient-sheaf, direct-image and finite-free scalar tools; separated bounded-domain checks from existence of ambient comparisons; and displayed evaluation and both mate identities. No new node, attachment or statement correction. The resumed audit removes an unnecessary finite-Tor condition on the finite-level Hom second variable by an explicit finite-filtration argument. Second reading specifies the finite filtration and local sheaf lifting in step 2, and adds the finite-free K-injective Hom calculation and mate tower equations in step 8 to justify scalar evaluation normalization and the maps used in step 9. Repair reading on 2026-10-17 replaces the long step-2 perfect-Hom argument, the step-8 finite-free Hom and restriction arguments by existing ringed-site lemmas, and abbreviates the mate calculation. The statement and all maintainer metadata are unchanged; this is a stage-1 delivery, not the stage-2 Lean delivery requested in the mismatched return.",
   "blueprint": "Current main-20261015 paragraph 1: steps 1-2; paragraph 2: steps 3-7; paragraph 3: steps 8-10. The unit projection-formula route is retained and the final coherence assertion is realized by the explicit evaluation/mate equations of step 10.",
   "tool_uses": [
    {
@@ -462,10 +464,6 @@
     "why": "Extension by zero preserves the direct sums in total tensor complexes because it is a left adjoint."
    },
    {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "The module-level tensor/restriction adjunction, applied to Hom complexes, justifies the K-injective acyclic test for finite free coefficient extension."
-   },
-   {
     "node": "lem-weil-l-adic-extension-integers-dvr",
     "why": "The DVR statement makes O_E Noetherian, as required by the completed coefficient quotient theorem."
    },
@@ -476,6 +474,18 @@
    {
     "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "why": "Quasi-compactness of the chosen open immersion and of open intersections gives the stated constructible open-complement domains."
+   },
+   {
+    "node": "lem-sfb-ringed-site-perfect-duality",
+    "why": "Ringed-site perfect duality replaces the long bounded finite-projective Hom argument; its statement includes perfect duals and the evaluation-defined tensor-Hom isomorphism."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-hom-base-change",
+    "why": "Finite-free ringed coefficient change of arbitrary-variable internal Hom with its actual evaluation normalization; replaces the long inline K-injective comparison."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "why": "Terminal-diagram specialization identifies restriction and derived geometric direct image, preserving adjuncts; finite freeness verifies its flatness assumption."
    }
   ]
  },
@@ -506,14 +516,17 @@
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-weil-pbc-flat-ringed-diagram-restriction"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NW-3c1d2f541",
-  "group": "NW",
+  "reviewer": "NT-Codex-Q121-0e0127b6b",
+  "group": "Q121",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-3c1d2f541 (reviewer sub-agent of L); spot-checked: Read the complete item, report, unit/chapter route, all ten proof steps, every cited DAG statement, and cited source passages. The repaired finite-filtration Hom argument, completed quotient resolution, direct-image/tower comparison, compact-support construction, finite-free scalar Hom normalization, and mate coherences are valid with all hypotheses preserved. Edge cases pass; no new nodes or SGA citations. Review written to review.md. Historical chapter/unit binding mismatch with current blueprint is recorded as maintainer metadata."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q121-0e0127b6b (reviewer sub-agent of L); spot-checked: Read all ten proof steps and 42 dependency statements; checked current blueprint, cited Stacks/Bhatt–Scholze passages, and archived master target interfaces. Hypotheses, evaluation/mate coherence, and edge cases pass. No cycles, duplicates, new nodes, or repairs. Accepted all 29 declared tool uses. Detailed findings are in review.md."
  }
 }

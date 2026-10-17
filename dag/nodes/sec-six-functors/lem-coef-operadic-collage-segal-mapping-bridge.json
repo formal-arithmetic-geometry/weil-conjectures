@@ -14,9 +14,92 @@
   "def-coef-infinity-relative-cone",
   "lem-coef-infinity-isofibration-exponentiation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose nested universes large enough for $X,B$ and their mapping spaces; $K=N(I_r)$ is small. Put $F(\\alpha)=\\operatorname{Map}_X(z,f(\\alpha))$ and $1_K=\\Delta_K*$ in $\\mathcal C=\\operatorname{Fun}(K,\\mathcal S)$. The constant-source section comparison gives $\\operatorname{Map}_{\\operatorname{Fun}(K,X)}(\\Delta_Kz,f)\\simeq\\operatorname{Map}_{\\mathcal C}(1_K,F)$. For any space-valued diagram $T:K\\to\\mathcal S$, the dual transport classification represents $T$ by a right fibration over $K^{\\mathrm{op}}$ and represents $1_K$ by the identity right fibration. Its mapping-space formula identifies $\\operatorname{Map}_{\\mathcal C}(1_K,T)$ with the section space of this right fibration. The right-fibration section-limit theorem identifies that section space, with its evaluation cone, with $\\operatorname{holim}_{K}T$. Apply this with $T=F$. Transport along each incidence arrow is postcomposition with its image under $f$, by the mapping-bifunctor clause of transport classification. Thus this is the required homotopy limit over $I_r$, with its specified projections.",
+   "uses": [
+    "lem-coef-infinity-constant-source-section-comparison",
+    "lem-coef-space-transport-classification",
+    "lem-coef-right-fibration-section-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.3.4 and Remark 3.3.3.5, combined with the existing constant-source comparison; agent specialization to the incidence diagram"
+   }
+  },
+  {
+   "text": "Write $\\lambda:\\Delta_Kx\\to f$ for the given cone and put $U=\\operatorname{Map}_X(z,x)$, $V=\\operatorname{Map}_{\\operatorname{Fun}(K,X)}(\\Delta_Kz,f)$, $C=\\operatorname{Map}_B(pz,px)$ and $D=\\operatorname{Map}_{\\operatorname{Fun}(K,B)}(\\Delta_Kpz,pf)$. The horizontal maps are composition with $\\lambda$ and $p\\lambda$. For $\\phi\\in C$, its image in $D$ is the transformation $\\psi_\\phi=(p\\lambda)\\circ\\Delta_K\\phi$, whose component is $\\psi_{\\phi,\\alpha}=p(\\lambda_\\alpha)\\phi$. It is not $\\Delta_K\\phi$: the target diagram $pf$ need not be constant. The cone and the functor $p$ specify the commutation homotopy of this square, retaining its higher composition data.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition A.3.1(2), relative limit condition; agent expansion of the induced mapping-space square"
+   }
+  },
+  {
+   "text": "Let $G(\\alpha)=\\operatorname{Map}_B(pz,pf(\\alpha))$. Applying the section comparison in Step 1 to $X$ and $B$ identifies $V\\to D$ with $\\operatorname{Map}_{\\mathcal C}(1_K,F)\\to\\operatorname{Map}_{\\mathcal C}(1_K,G)$ induced by $p$. The point $\\psi_\\phi$ corresponds to a coherent transformation $b_\\phi:1_K\\to G$. Form $H_\\phi=F\\times^h_G1_K$ using $b_\\phi$. The pointwise-limit clause gives this pullback in $\\mathcal C$ and identifies its value at $\\alpha$ with $\\operatorname{hofib}_{\\psi_{\\phi,\\alpha}}(F(\\alpha)\\to G(\\alpha))$. The representable $\\operatorname{Map}_{\\mathcal C}(1_K,-)$ preserves this pullback. Since $1_K$ is terminal by the same pointwise-limit clause, $\\operatorname{Map}_{\\mathcal C}(1_K,1_K)$ is contractible. Consequently the resulting pullback is exactly $\\operatorname{hofib}_{\\psi_\\phi}(V\\to D)\\simeq\\operatorname{Map}_{\\mathcal C}(1_K,H_\\phi)$. Step 1 identifies the latter with $\\operatorname{holim}_\\alpha H_\\phi(\\alpha)$. This gives the asserted homotopy limit of relative mapping spaces with the varying base arrows and their coherent incidence maps.",
+   "uses": [
+    "lem-coef-infinity-constant-source-section-comparison",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.1.2.2 and Corollary 5.1.2.3, pointwise limits; Proposition 5.1.3.2, representables preserve limits; agent application to a pullback along b_phi"
+   }
+  },
+  {
+   "text": "Take the path pullback $P=V\\times^h_D C$ and its comparison $e:U\\to P$ supplied by the square's commutation homotopy. The mapping-path replacement of $V\\to D$ is a Kan fibration over $D$; hence $P\\to C$, its pullback, is a Kan fibration (a horn lifting problem pulls back to the same horn lifting problem upstairs). Its strict fibre at $\\phi$ is, degree by degree, $V\\times_{D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,D)\\times_{\\operatorname{ev}_1,D}\\{\\psi_\\phi\\}$, which is $\\operatorname{hofib}_{\\psi_\\phi}(V\\to D)$. The strict-to-path-pullback comparison identifies this strict fibre with $\\operatorname{hofib}_{\\phi}(P\\to C)$. Apply the existing homotopy-fibre detection theorem to $e$ over $\\mathrm{id}_C$. It says $e$ is an equivalence exactly when every map $\\operatorname{hofib}_\\phi(U\\to C)\\to\\operatorname{hofib}_{\\psi_\\phi}(V\\to D)$ is an equivalence. The definition of homotopy pullback identifies the first condition with the required square test. The first fibre is $\\operatorname{Map}_X^\\phi(z,x)$ by definition, and Step 3 identifies the second with the displayed homotopy limit. These identifications prove both implications.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-space-path-fibration-replacement",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZN",
+    "place": "Proposition 3.3.7.1 in the existing homotopy-fibre formulation; path replacement 0101 and strict/path comparison 0329; agent application to e over id_C"
+   }
+  },
+  {
+   "text": "The map on fibres just obtained is the stated comparison, not an unspecified equivalence: the constant-source comparison sends postcomposition by $\\lambda$ to the family $u\\mapsto\\lambda_\\alpha u$. After applying $p$, its base component is $p(\\lambda_\\alpha)\\phi=\\psi_{\\phi,\\alpha}$. Pullback projections therefore give precisely the maps into each $H_\\phi(\\alpha)$, with their incidence homotopies. The section/limit theorem preserves these evaluation maps, and representable preservation of pullbacks is natural in the entire span. Restriction, application of a functor to arrow simplices, and composition of the specified path homotopies commute with maps of cones and with commutative maps of $p:X\\to B$. Thus the equivalences and comparisons are natural in all the stated data. For $r=0$ the section limit is a one-object limit; if $C$ is empty then $U=P=\\varnothing$ and the fibre test is vacuous, as required. Empty individual mapping spaces and fibres are allowed throughout.",
+   "uses": [
+    "lem-coef-infinity-constant-source-section-comparison",
+    "lem-coef-space-transport-classification",
+    "lem-coef-right-fibration-section-limit",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition A.3.1(2) and Remark A.4.2; agent verification of the actual comparison and its naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-constant-source-section-comparison",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-right-fibration-section-limit",
+  "lem-coef-space-path-fibration-replacement",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Agent expansion of Definition A.3.1(2) and the mapping-cylinder construction in Remark A.4.2, using the cited section, pointwise-limit and fibre-detection statements; online sources not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -37,7 +120,7 @@
    "query": "CategoryTheory.Limit, Quasicategory, Fun",
    "results": "No hits; Loogle reported unknown identifier CategoryTheory.Limit.",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "unavailable: invalid Loogle pattern (unknown identifier); not evidence of absence"
   },
   {
    "tool": "grep",
@@ -66,10 +149,52 @@
    "results": "{\"t\": \"2026-10-17T08:57:05Z\", \"tool\": \"grep\", \"query\": \"marked|isofibration|categoricalEquivalence|homotopyLimit|mappingSpace\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: only opposite equivalences of simplicial sets and ordinary homotopy-category equivalences; no coherent incidence or relative-functor assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "mapping space in functor category from a constant diagram to a diagram indexed by the nerve of an incidence category is the homotopy limit of objectwise mapping spaces",
+   "results": "{\"t\": \"2026-10-17T11:58:16Z\", \"tool\": \"leansearch\", \"query\": \"mapping space in functor category from a constant diagram to a diagram indexed by the nerve of an incidence category is the homotopy limit of objectwise mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom\", \"CategoryTheory.Limits.constLimAdj\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Cat.HasLimits.homDiagram\", \"CategoryTheory.Limits.hasLimit_const_of_isConnected\", \"CategoryTheory.Limits.limit.homIso_hom\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"2b5a2fb70b1b79ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical/nerve results do not supply the coherent mapping-space and relative-fibre comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits, CategoryTheory.Functor, SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-17T11:58:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits, CategoryTheory.Functor, SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid Loogle pattern (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an infinity category of space valued diagrams, maps from the terminal diagram identify the homotopy fiber over a section with the limit of the pointwise homotopy fibers",
+   "results": "{\"t\": \"2026-10-17T12:55:25Z\", \"tool\": \"leanfinder\", \"query\": \"In an infinity category of space valued diagrams, maps from the terminal diagram identify the homotopy fiber over a section with the limit of the pointwise homotopy fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FundamentalGroupoidFunctor.piTopToPiCone\", \"classifyingSpaceUniversalCover.cechNerveTerminalFromIso\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.right_unitality\", \"HomotopicalAlgebra.FibrantObject.ι\", \"HomologicalComplex.homotopyCofiber.descEquiv\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"classifyingSpaceUniversalCover.cechNerveTerminalFromIsoCompForget\"], \"digest\": \"e3f5caa34f123df7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern ordinary Hom-set limits, ordinary simplicial-set pullbacks, fibrant/path objects or product fundamental groupoids, not the stated coherent incidence mapping-space and relative-fibre comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The space of coherent transformations from a constant diagram to a quasicategory diagram is its limit of mapping spaces, and relative mapping spaces are fibers over the specified base transformation",
+   "results": "{\"t\": \"2026-10-17T12:57:03Z\", \"tool\": \"leansearch\", \"query\": \"The space of coherent transformations from a constant diagram to a quasicategory diagram is its limit of mapping spaces, and relative mapping spaces are fibers over the specified base transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom\", \"CategoryTheory.Limits.limitCompCoyonedaIsoCone\", \"CategoryTheory.Limits.limMap_eq\", \"CategoryTheory.Limits.IsLimit.homIso\", \"CategoryTheory.Limits.LimitPresentation.π\", \"CategoryTheory.Limits.IsLimit.homEquiv\", \"CategoryTheory.Limits.limit.homIso\"], \"digest\": \"5a7b14e252b7200e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern ordinary Hom-set limits, ordinary simplicial-set pullbacks, fibrant/path objects or product fundamental groupoids, not the stated coherent incidence mapping-space and relative-fibre comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T12:57:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.relativeCellComplexOfMono.isPullback\", \"SSet.Subcomplex.Pairing.RankFunction.isPullback\", \"SSet.finite_of_isPullback\", \"SSet.instFinitePullback\", \"SSet.innerFibration_pullbackObjObjπ\", \"SSet.fibration_pullbackObjObjπ\"], \"digest\": \"2ca51a8c4abacd21\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern ordinary Hom-set limits, ordinary simplicial-set pullbacks, fibrant/path objects or product fundamental groupoids, not the stated coherent incidence mapping-space and relative-fibre comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?limit|homotopy.?fiber|mappingSpace|constant.*diagram",
+   "results": "{\"t\": \"2026-10-17T12:57:04Z\", \"tool\": \"grep\", \"query\": \"homotopy.?limit|homotopy.?fiber|mappingSpace|constant.*diagram\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern ordinary Hom-set limits, ordinary simplicial-set pullbacks, fibrant/path objects or product fundamental groupoids, not the stated coherent incidence mapping-space and relative-fibre comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-collage-comparison",
@@ -79,7 +204,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim; operadic free extension in the fixed-object rectification chain: Remark A.4.2 mapping cylinder, used to recover the specified algebra unit and its mapping-space property. Supporting argument extracted from lem-coef-operadic-collage-comparison step 3.",
+   "place": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim; operadic free extension in the fixed-object rectification chain: mapping-cylinder mapping-space property and its relative fibre test.",
    "via": [
     "lem-coef-operadic-collage-comparison",
     "lem-coef-operadic-free-cocone-characterization",
@@ -95,5 +220,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-collage-segal-mapping-bridge",
+  "worker": "stage1",
+  "summary": "Five-step split using existing nodes only: constant-source section/limit comparison, actual composite base transformation, pointwise pullback plus representable preservation of limits, fibre detection over id_C, and verification of the specified maps and naturality. Repaired the earlier use of an edge-pullback result with nonconstant base diagram. The never-committed generic square draft is folded into the direct application of the existing fibre-detection result. Statement unchanged; no new nodes.",
+  "blueprint": "Historical ancestry retained: prop-coef-integral-exceptional-adjoint proof paragraph 2, mapping-complex adjunction before R lim, through the recorded rectification/free-operad/collage chain. The present steps supply the mapping-space verification of relative Segal cones at Gepner-Haugseng Definition A.3.1(2) and the mapping cylinder of Remark A.4.2; they do not replace any unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q111-807114d37",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q111-807114d37 (reviewer sub-agent of L); spot-checked: Mathematics passes: all five steps, cited statements, source locations, route, varying-base fibres, naturality and edge cases checked; no new nodes or dependency cycle. Corrected one B7 record: an invalid Loogle query now says unavailable rather than no match. Full review and corrected item JSON written under review.md and fixes/.; 1 file(s) fixed by the reviewer"
  }
 }

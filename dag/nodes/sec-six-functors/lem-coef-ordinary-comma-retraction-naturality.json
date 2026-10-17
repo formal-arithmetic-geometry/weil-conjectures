@@ -10,9 +10,77 @@
  "stmt_deps": [
   "def-coef-zigzag-homotopy-calculus"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "The formulas in the statement really define $A_F$. Its identity at $(c,a)$ is $(1_c,1_a)$. For three successive arrows $(h,u),(k,v),(\\ell,w)$, the two bracketings have base $\\ell kh$ and the same fibre arrow $F(h)F(k)(w)\\,F(h)(v)\\,u$: use $F(kh)=F(h)F(k)$ and preservation of composition by $F(h)$. The unit laws follow from $F(1_c)=1_{F(c)}$. Projection to the base therefore defines $P_F$. In $D_F(c)$, composing $v:(x,t)\\to(y,t')$ and $w:(y,t')\\to(z,t'')$ is permitted because $P_F(wv)t=P_F(w)P_F(v)t=P_F(w)t'=t''$. Identities also satisfy the triangle equation. For $s:b\\to c$, precomposition sends $(x,t)$ to $(x,ts)$ and leaves $v$ unchanged; the triangle equation becomes $P_F(v)ts=t's$. Associativity and units in $C$ give $D_F(s)D_F(r)=D_F(rs)$ for $r:c\\to d$, and $D_F(1)=1$. All these verifications also apply to $F'$ and $F''$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, 9.1 and 9.10 (printed pp.31–32): explicit strict naturality expansion, calculation 1."
+   }
+  },
+  {
+   "text": "Check the stated $R^F_c$ on arrows, not just objects. An arrow represented by $(h,u):(d,a)\\to(e,b)$ has $ht=t'$, so $F(t)u$ ends at $F(t)F(h)b=F(t')b$. On a consecutive arrow $(k,v)$ its value on the composite is\n$$F(t)(F(h)(v)u)=F(ht)(v)\\,F(t)(u),$$\nwhich is the composite of the two $R^F_c$ images. It sends identities to identities. Thus $R^F_c$ is a functor. Moreover, for $s:b\\to c$, on an object and on a fibre arrow $u$ the formulas $F(ts)a=F(s)F(t)a$ and $F(ts)u=F(s)F(t)u$ show the strict equality $R^F_bD_F(s)=F(s)R^F_c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, 9.1 and 9.10 (printed pp.31–32): explicit strict naturality expansion, calculation 2."
+   }
+  },
+  {
+   "text": "Write $h':c'\\to d'$. Naturality of $\\alpha$ is the equality of functors\n$$\\alpha_{c'}F'(h')=F(Hh')\\alpha_{d'}.$$\nConsequently $\\alpha_{c'}u'$ has target $\\alpha_{c'}F'(h')b'=F(Hh')\\alpha_{d'}b'$, so $K(h',u')$ has exactly the required type. For a consecutive $(k',v')$, functoriality of $\\alpha_{c'}$ and the displayed naturality equality on the arrow $v'$ give\n$$\\alpha_{c'}(F'(h')(v')u')=F(Hh')(\\alpha_{d'}v')\\,\\alpha_{c'}u'.$$\nTogether with $H(k'h')=Hk'\\,Hh'$, this is $K((k',v')(h',u'))=K(k',v')K(h',u')$. Functors $H$ and $\\alpha_{c'}$ preserve identities, giving the identity law. On $(c',a')$ and $(h',u')$, the two projection composites give respectively $Hc'$ and $Hh'$. Thus $P_FK=HP_{F'}$ strictly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, 9.1 and 9.10 (printed pp.31–32): explicit strict naturality expansion, calculation 3."
+   }
+  },
+  {
+   "text": "For a comma arrow $v':(x',t')\\to(y',t'')$ in $D_{F'}(c')$, the proposed image satisfies\n$$P_F(Kv')\\,Ht'=H(P_{F'}v')\\,Ht'=H(P_{F'}(v')t')=Ht''.$$\nHence $L_{c'}$ is defined on arrows. Its identity and composition laws follow directly from those of $K$, since comma composition is the underlying composition. For $s':b'\\to c'$, both $L_{b'}D_{F'}(s')$ and $D_F(Hs')L_{c'}$ send $(x',t')$ to $(Kx',H(t's'))=(Kx',(Ht')(Hs'))$ and send $v'$ to $Kv'$. This proves the asserted strict commutation with precomposition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, 9.1 and 9.10 (printed pp.31–32): explicit strict naturality expansion, calculation 4."
+   }
+  },
+  {
+   "text": "Let $x'=(d',a')$ and $t':c'\\to d'$. The object images in the retraction square are equal, since naturality at $t'$ gives\n$$R^F_{Hc'}L_{c'}(x',t')=F(Ht')\\alpha_{d'}a'=\\alpha_{c'}F'(t')a'=\\alpha_{c'}R^{F'}_{c'}(x',t').$$\nFor an arrow $v'=(h',u'):(x',t')\\to(y',t'')$, with $h't'=t''$, the left composite has arrow image $F(Ht')(\\alpha_{d'}u')$, and the right one has image $\\alpha_{c'}(F'(t')u')$. The same naturality equality, now evaluated on $u'$, makes them equal. Their targets agree by $h't'=t''$ and Step 2. Equality on objects and arrows proves equality of functors, rather than just an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, 9.1 and 9.10 (printed pp.31–32): explicit strict naturality expansion, calculation 5."
+   }
+  },
+  {
+   "text": "For the composable data in the statement, the family $\\delta_{c''}=\\alpha_{Jc''}\\gamma_{c''}$ is natural: for $s'':c''\\to d''$, naturality of $\\gamma$ and then of $\\alpha$ gives\n$$\\alpha_{Jc''}\\gamma_{c''}F''(s'')=\\alpha_{Jc''}F'(Js'')\\gamma_{d''}=F(HJs'')\\alpha_{Jd''}\\gamma_{d''}.$$\nOn $(c'',a'')$, both $K_{HJ,\\delta}$ and $K_{H,\\alpha}K_{J,\\gamma}$ have image $(HJc'',\\alpha_{Jc''}\\gamma_{c''}a'')$. On $(h'',u'')$ both have image $(HJh'',\\alpha_{Jc''}(\\gamma_{c''}u''))$. This proves their strict equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, 9.1 and 9.10 (printed pp.31–32): explicit strict naturality expansion, calculation 6."
+   }
+  },
+  {
+   "text": "On $(x'',t'')\\in D_{F''}(c'')$, the composite $L^{H,\\alpha}_{Jc''}L^{J,\\gamma}_{c''}$ has image $(K_{H,\\alpha}K_{J,\\gamma}x'',H(Jt''))$. Step 6 identifies this with $(K_{HJ,\\delta}x'',(HJ)t'')$, the image under $L^{HJ,\\delta}_{c''}$. On arrows both images are $K_{HJ,\\delta}v''$ by the same step. For identity data $(1_C,1_F)$, the $K$ formulas give $(c,a)\\mapsto(c,a)$ and $(h,u)\\mapsto(h,u)$; the $L$ formulas give $(x,t)\\mapsto(x,t)$ and $v\\mapsto v$. They are therefore identity functors. Every equality used only functor laws and naturality, so no equivalence condition on any component or on a base functor has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, 9.1 and 9.10 (printed pp.31–32): explicit strict naturality expansion, calculation 7."
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, auxiliary localization foundation for the derived coefficient-adjunction mapping-limit comparison: direct expansion of the ordinary comma retraction in Dwyer–Kan 9.10 and base/endpoint functoriality of 9.1."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +116,52 @@
    "results": "{\"t\": \"2026-10-17T08:41:40Z\", \"tool\": \"leanfinder\", \"query\": \"comma-category retraction naturality under base functor and endpoint natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.retractArrowApp\", \"CategoryTheory.NatTrans.retractArrowApp_r\", \"CategoryTheory.NatTrans.retractArrowApp_i\", \"CategoryTheory.RetractArrow.map_r_right\", \"CategoryTheory.RetractArrow.map_i_right\", \"CategoryTheory.RetractArrow.map_r_left\", \"CategoryTheory.RetractArrow.map\", \"CategoryTheory.Retract.map_r\"], \"digest\": \"ec0ee6e54a903dec\"}",
    "date": "2026-10-17",
    "verdict": "no match: LeanSearch gives Comma.map, read Mathlib/CategoryTheory/Comma/Basic.lean (generic change-of-comma functors); Grothendieck.map and map_comp_eq at CategoryTheory/Grothendieck.lean:248–315 are covariant total constructions. None gives the simultaneous contravariant construction with the retraction R and its strict square. LeanFinder gives generic RetractArrow and NatTrans.retractArrowApp, not this retraction. No one-line specialization states the whole lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "def map|map_comp_eq|def pre|def post|def.*[Rr]etract",
+   "results": "{\"t\": \"2026-10-17T13:00:34Z\", \"tool\": \"grep\", \"query\": \"def map|map_comp_eq|def pre|def post|def.*[Rr]etract\", \"sub\": \"CategoryTheory/Grothendieck.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"248\", \"293\", \"300\", \"312\", \"313\"], \"digest\": \"4bfd7c1165f9ecb4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Grothendieck.lean:248–315 (covariant total map, identity, composition), CategoryTheory/Bicategory/Grothendieck.lean:337–392 (contravariant pseudofunctor map), and CategoryTheory/Comma/Basic.lean (comma change functors). These do not state the retraction square with simultaneous base change, and the full item is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Comma.map, CategoryTheory.Grothendieck.map",
+   "results": "{\"t\": \"2026-10-17T13:00:35Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Comma.map, CategoryTheory.Grothendieck.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the combined Comma.map/Grothendieck.map pattern has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the comma category evaluation retraction for contravariant category valued functors",
+   "results": "{\"t\": \"2026-10-17T13:00:35Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of the comma category evaluation retraction for contravariant category valued functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.commaCategory\", \"CategoryTheory.Comma.full_map\", \"CategoryTheory.Comma.opFunctorCompSnd_hom_app\", \"CategoryTheory.Comma.map\", \"CategoryTheory.Comma.natTrans_app\", \"CategoryTheory.Comma.postIso\", \"CategoryTheory.Comma.faithful_map\", \"CategoryTheory.Comma.post\"], \"digest\": \"49db79e0f1ae825c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Grothendieck.lean:248–315 (covariant total map, identity, composition), CategoryTheory/Bicategory/Grothendieck.lean:337–392 (contravariant pseudofunctor map), and CategoryTheory/Comma/Basic.lean (comma change functors). These do not state the retraction square with simultaneous base change, and the full item is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict naturality of the contravariant Grothendieck construction comma retraction under a base functor and a natural transformation",
+   "results": "{\"t\": \"2026-10-17T13:00:42Z\", \"tool\": \"leanfinder\", \"query\": \"Strict naturality of the contravariant Grothendieck construction comma retraction under a base functor and a natural transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.ιNatTrans\", \"CategoryTheory.Grothendieck.ιCompMap\", \"CategoryTheory.Grothendieck.map_map\", \"CategoryTheory.Grothendieck.map\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.map_map_fiber\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.map\", \"CategoryTheory.Grothendieck.ιCompFunctorFrom\", \"CategoryTheory.CostructuredArrow.ιCompGrothendieckPrecompFunctorToCommaCompFst\"], \"digest\": \"2df08e53233c7059\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Grothendieck.lean:248–315 (covariant total map, identity, composition), CategoryTheory/Bicategory/Grothendieck.lean:337–392 (contravariant pseudofunctor map), and CategoryTheory/Comma/Basic.lean (comma change functors). These do not state the retraction square with simultaneous base change, and the full item is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "CoGrothendieck|comma.*[Rr]etract|[Rr]etract.*comma",
+   "results": "{\"t\": \"2026-10-17T13:01:39Z\", \"tool\": \"grep\", \"query\": \"CoGrothendieck|comma.*[Rr]etract|[Rr]etract.*comma\", \"sub\": \"CategoryTheory/Bicategory/Grothendieck.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"28\", \"45\", \"238\", \"244\"], \"digest\": \"d0687c78e289230c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CoGrothendieck.map in Mathlib/CategoryTheory/Bicategory/Grothendieck.lean:337–362 and map_comp_eq at 391–392 concern pseudofunctor total categories; no comma retraction square or simultaneous change of base is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation from a comma category c under the category of elements of a presheaf of categories is functorial in the presheaf and in the indexing category",
+   "results": "{\"t\": \"2026-10-17T13:01:43Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation from a comma category c under the category of elements of a presheaf of categories is functorial in the presheaf and in the indexing category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.functorToRepresentables\", \"CategoryTheory.Functor.elementsFunctor\", \"CategoryTheory.CategoryOfElements.fromCostructuredArrow\", \"CategoryTheory.CategoryOfElements.map\", \"CategoryTheory.Presheaf.restrictedYoneda\", \"CategoryTheory.CategoryOfElements.toCostructuredArrow\", \"CategoryTheory.OverPresheafAux.yonedaCollectionFunctor\", \"CategoryTheory.OverPresheafAux.YonedaCollection\"], \"digest\": \"4aee159ee9672db2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits CategoryOfElements.map and elementsFunctor concern Type-valued diagrams, not this Cat-valued comma retraction or its base-change square."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ordinary-two-sided-bar-comparison",
@@ -81,5 +191,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ordinary-comma-retraction-naturality",
+  "worker": "stage1",
+  "summary": "Checked the ordinary Grothendieck/comma constructions against Dwyer–Kan 9.1 and 9.10, and proved strict functoriality and the retraction square by seven explicit object-and-arrow calculations. The statement and its hypotheses are retained. No new nodes: every calculation uses only the definitions displayed in the statement, functor laws and naturality. Searched the project, DAG, blueprint and Mathlib; no exact completed project declaration or full Mathlib match was found.",
+  "blueprint": "Realizes the auxiliary ordinary comma retraction naturality needed by lem-coef-ordinary-two-sided-bar-comparison (its naturality clause), in the localization foundation descending from paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed derived mapping-limit comparison. The chapter/unit route and inherited blueprint ancestry are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-be2a850d1",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-be2a850d1 (reviewer sub-agent of L); spot-checked: Read the item, cited dependency, parent, chapter/unit route, report, source sections, and all seven proof steps in full. The strict Grothendieck/comma constructions, contravariant variance, retraction, base-change square, composition, identities, and naturality are correctly typed and verified on objects and arrows. Dwyer–Kan §9.1 and §9.10 support the construction; Mathlib searches found no whole-lemma match. Edge cases (empty/terminal bases, empty fibres, nonidentity arrows) pass. No duplicate, cycle, missing citation, route violation, target change, SGA use, or A–F fault found. Review written to review.md."
  }
 }

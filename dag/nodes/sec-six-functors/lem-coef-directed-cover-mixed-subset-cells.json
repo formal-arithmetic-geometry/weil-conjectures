@@ -2,18 +2,131 @@
  "id": "lem-coef-directed-cover-mixed-subset-cells",
  "kind": "statement",
  "title": "Mixed join subset and its relative index-simplex attachments",
- "statement": "Use small simplicial sets, simplicial subsets, ordinary nerves, standard simplices and pushouts of [def-cbc-enhanced-diagrams-cones], and ordered joins of [lem-coef-join-slice-cocone-comparison]. Let $K$ be a small simplicial set, let $I$ be any small partially ordered set, and let $K_i\\subseteq K$ be simplicial subsets with $K_i\\subseteq K_j$ for $i\\leq j$. Define a degreewise subset $H\\subseteq K\\star N(I)$ by including both pure factors and exactly the mixed simplices $\\sigma\\star(i_0\\leq\\cdots\\leq i_r)$ for which $\\sigma\\in K_{i_0}$. This is a simplicial subset. For any simplicial subset $Y\\subseteq N(I)$, let $H_Y\\subseteq H$ contain all of $K$, the pure simplices of $Y$, and precisely the mixed simplices whose final block belongs to $Y$. Then $H_\\varnothing=K$, $H_{N(I)}=H$, and $H_{\\bigcup_\\alpha Y_\\alpha}=\\bigcup_\\alpha H_{Y_\\alpha}$ for every increasing family $(Y_\\alpha)$. Suppose $Y'$ is obtained from $Y$ by adjoining a single nondegenerate $n$-simplex $\\tau=(i_0<\\cdots<i_n)$ whose entire boundary belongs to $Y$. The commutative square with horizontal arrows $K_{i_0}\\star\\partial\\Delta^n\\to H_Y$ and $K_{i_0}\\star\\Delta^n\\to H_{Y'}$, and vertical inclusions $K_{i_0}\\star\\partial\\Delta^n\\hookrightarrow K_{i_0}\\star\\Delta^n$ and $H_Y\\hookrightarrow H_{Y'}$, is a pushout of simplicial sets. The lower map concatenates a simplex of $K_{i_0}$ with a face or degeneracy of $\\tau$, and uses the pure-factor inclusions on the pure summands. Here $\\partial\\Delta^0=\\varnothing$, so the vertex case attaches $K_i^{\\triangleright}=K_i\\star\\Delta^0$ along $K_i$. Neither directedness, a covering hypothesis, nor nonemptiness of $I$, $K$ or any $K_i$ is assumed.",
+ "statement": "Use small simplicial sets and simplicial subsets of [def-weil-pbc-simplicial-set], ordinary nerves and standard simplices of [def-cbc-enhanced-diagrams-cones], and the explicit ordered-join construction of [lem-coef-join-slice-cocone-comparison]. Write $\\partial\\Delta^n$ for the simplicial subset of $\\Delta^n$ consisting in degree $m$ of the nonsurjective monotone maps $[m]\\to[n]$. A pushout square means that maps from its lower-right object to any simplicial set are uniquely specified by maps from the other two adjacent objects agreeing on the upper-left object. Let $K$ be a small simplicial set, let $I$ be any small partially ordered set, and let $K_i\\subseteq K$ be simplicial subsets with $K_i\\subseteq K_j$ for $i\\leq j$. Define a degreewise subset $H\\subseteq K\\star N(I)$ by including both pure factors and exactly the mixed simplices $\\sigma\\star(i_0\\leq\\cdots\\leq i_r)$ for which $\\sigma\\in K_{i_0}$. This is a simplicial subset. For any simplicial subset $Y\\subseteq N(I)$, let $H_Y\\subseteq H$ contain all of $K$, the pure simplices of $Y$, and precisely the mixed simplices whose final block belongs to $Y$. Then $H_\\varnothing=K$, $H_{N(I)}=H$, and $H_{\\bigcup_\\alpha Y_\\alpha}=K\\cup\\bigcup_\\alpha H_{Y_\\alpha}$ for every increasing family $(Y_\\alpha)$ (including the empty family); for a nonempty family the extra union with $K$ is redundant. Suppose $Y'$ is obtained from $Y$ by adjoining a single nondegenerate $n$-simplex $\\tau=(i_0<\\cdots<i_n)$ not already in $Y$ and whose entire boundary belongs to $Y$. The commutative square with horizontal arrows $K_{i_0}\\star\\partial\\Delta^n\\to H_Y$ and $K_{i_0}\\star\\Delta^n\\to H_{Y'}$, and vertical inclusions $K_{i_0}\\star\\partial\\Delta^n\\hookrightarrow K_{i_0}\\star\\Delta^n$ and $H_Y\\hookrightarrow H_{Y'}$, is a pushout of simplicial sets. The lower map concatenates a simplex of $K_{i_0}$ with a face or degeneracy of $\\tau$, and uses the pure-factor inclusions on the pure summands. Here $\\partial\\Delta^0=\\varnothing$, so the vertex case attaches $K_i^{\\triangleright}=K_i\\star\\Delta^0$ along $K_i$. Neither directedness, a covering hypothesis, nor nonemptiness of $I$, $K$ or any $K_i$ is assumed.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "HTT Notation 4.2.3.1, Remark 4.2.3.2 and proof of Proposition 4.2.3.4, printed pp. 248-250: the square for an index-simplex attachment, specialized to inclusions indexed by a poset. Read online; archival copy WANTED. No Stacks tag states this simplicial/quasicategorical comparison."
  },
  "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-join-slice-cocone-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the disjoint pure and mixed summands in the ordered-join formula of [lem-coef-join-slice-cocone-comparison]. An operator on a mixed simplex either leaves only one block, hence gives a permitted pure simplex, or restricts both blocks. In the latter case its new initial index is some $i_j\\geq i_0$, and its new first block is an operator applied to $\\sigma\\in K_{i_0}$, so belongs to $K_{i_0}\\subseteq K_{i_j}$. Operators on pure factors remain pure. This verifies closure for every monotone operator, hence the degreewise subset $H$ is a simplicial subset in the sense of [def-weil-pbc-simplicial-set].",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation 4.2.3.1 and Remark 4.2.3.2, printed pp. 248-249: restriction of the two ordered blocks. Read online; archival copy WANTED. Elementary agent expansion of the poset-inclusion case."
+   }
+  },
+  {
+   "text": "Fix a simplicial subset $Y\\subseteq N(I)$. An operator on a mixed simplex of $H_Y$ that retains both blocks sends its final block into $Y$, because $Y$ is a simplicial subset. If only the final block survives, the result is a pure simplex of $Y$; if only the initial block survives, the result lies in $K$. Pure $Y$ and pure $K$ simplices are also preserved. Thus $H_Y$ is a simplicial subset of $H$. In particular $Y\\subseteq Z$ implies $H_Y\\subseteq H_Z$ by the membership rule.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p. 249: the subsets denoted K_X. Read online; archival copy WANTED. Elementary agent expansion of the poset-inclusion case."
+   }
+  },
+  {
+   "text": "No pure nerve or mixed simplex has final block in the empty simplicial subset, so $H_\\varnothing=K$; allowing every final block gives $H_{N(I)}=H$. For any increasing family $(Y_\\alpha)$, a pure nerve or mixed simplex belongs to $H_{\\bigcup_\\alpha Y_\\alpha}$ exactly when its final block lies in some $Y_\\alpha$, exactly when it belongs to some $H_{Y_\\alpha}$. All pure $K$ simplices occur on the left regardless of the family. This proves $H_{\\bigcup_\\alpha Y_\\alpha}=K\\cup\\bigcup_\\alpha H_{Y_\\alpha}$, including the empty family. For a nonempty family each $H_{Y_\\alpha}$ already contains $K$, giving the original union formula in that case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed pp. 249-250: initial, terminal and nonzero limit stages. Read online; archival copy WANTED. Elementary agent expansion of the poset-inclusion case."
+   }
+  },
+  {
+   "text": "Write $t:\\Delta^n\\to N(I)$ for $t(f)=(i_{f(0)}\\leq\\cdots\\leq i_{f(b)})$ on an arbitrary $f:[b]\\to[n]$. The strict inequalities among the $i_j$ imply that $t(f)$ determines $f$, so $t$ is degreewise injective. If $f$ is nonsurjective, it belongs to $\\partial\\Delta^n$ and $t(f)\\in Y$ by the boundary hypothesis. If $f$ is surjective, choose its monotone section $s:[n]\\to[b]$ by taking the least element of each fiber. Then $t(f)\\in Y$ would imply $\\tau=s^*t(f)\\in Y$, a contradiction. Consequently $t^{-1}(Y)=\\partial\\Delta^n$ in every degree. This also holds for $n=0$: every $[b]\\to[0]$ is surjective.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p. 250: adjoining a nondegenerate index simplex; boundary inverse image made explicit. Read online; archival copy WANTED. Elementary agent expansion of the poset-inclusion case."
+   }
+  },
+  {
+   "text": "Put $A=K_{i_0}$, $B=A\\star\\Delta^n$, and $C=A\\star\\partial\\Delta^n$. Define $u:B\\to H_{Y\\prime}$ by the pure inclusion of $A$ into $K$, by $t$ on the pure simplex factor, and by $(\\sigma,f)\\mapsto\\sigma\\star t(f)$ on a mixed summand. This mixed simplex lies in $H$: its first index is $i_{f(0)}\\geq i_0$, and $\\sigma\\in K_{i_0}\\subseteq K_{i_{f(0)}}$. Its final block is in $Y\\prime$. The formulas commute with each operator by restriction of the blocks, including an empty block. They define a simplicial map. This map is injective in each degree because it preserves the summand and both coordinates, $A\\hookrightarrow K$ is injective, and $t$ is injective.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p. 250: the lower map from K_{I_0} star sigma. Read online; archival copy WANTED. Elementary agent expansion of the poset-inclusion case."
+   }
+  },
+  {
+   "text": "Compute the inverse image $u^{-1}(H_Y)$. Every pure $A$ simplex is in it and in $C$. A pure $\\Delta^n$ simplex $f$ is in it precisely when $t(f)\\in Y$, hence precisely when $f\\in\\partial\\Delta^n$ by step 4. The same equivalence holds for a mixed simplex $(\\sigma,f)$, since membership in $H_Y$ tests exactly its final block. Thus $u^{-1}(H_Y)=C$. In particular $u|_C$ lands in $H_Y$, giving the upper horizontal arrow and making the stated square commute. Both vertical arrows are inclusions of simplicial subsets.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p. 250: the overlap of the index-simplex attachment. Read online; archival copy WANTED. Elementary agent expansion of the poset-inclusion case."
+   }
+  },
+  {
+   "text": "By adjoining $\\tau$ we mean $Y\\prime=Y\\cup t(\\Delta^n)$, the union of simplicial subsets. A simplex of $H_{Y\\prime}$ outside $H_Y$ is not pure $K$. Its nonempty final block must therefore be $t(f)$ for some $f:[b]\\to[n]$, and $f$ must be surjective by step 4. For a pure nerve simplex this is already in $u(B)$. For a mixed simplex its first index is $i_{f(0)}=i_0$, so its first block lies in $K_{i_0}=A$, and it too belongs to $u(B)$. Consequently $H_{Y\\prime}=H_Y\\cup u(B)$ degreewise; step 6 identifies the intersection as $u(C)$.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p. 250: every new simplex is in the displayed join cell. Read online; archival copy WANTED. Elementary agent expansion of the poset-inclusion case."
+   }
+  },
+  {
+   "text": "To verify the pushout without invoking a colimit theorem, let $T$ be any simplicial set and let $g:H_Y\\to T$, $h:B\\to T$ agree after restriction to $C$. Define a function in each degree on $H_{Y\\prime}=H_Y\\cup u(B)$ by $g(x)$ on $H_Y$ and $h(b)$ on $u(b)$. Injectivity of $u$ and the equality $H_Y\\cap u(B)=u(C)$ make it well-defined. For any simplicial operator, represent its input in $H_Y$ or in $u(B)$; that same representative gives its image under the operator, and naturality follows from naturality of $g$ or $h$. Agreement on the overlap handles either representation. Thus these functions give a simplicial map, and coverage by the two images proves its uniqueness. This is exactly the pushout universal property specified in the statement.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p. 250: universal property of its pushout square, expanded degreewise. Read online; archival copy WANTED. Elementary agent expansion of the poset-inclusion case."
+   }
+  },
+  {
+   "text": "For $n=0$, the boundary has no simplices, so the join formula gives $A\\star\\partial\\Delta^0=A$ and $A\\star\\Delta^0=A^{\\triangleright}$. The same square therefore attaches the local cone along $A$. If $A=\\varnothing$, this attaches just the pure vertex. If $K=\\varnothing$, all mixed summands vanish and the square is the usual boundary attachment in $N(I)$. If $I=\\varnothing$, then $H=H_\\varnothing=K$ and no index-simplex attachment is possible. Every construction and calculation above uses only the given inclusions and monotonicity, never directedness, a covering condition, or nonemptiness.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 4.2.3.2 and proof of Proposition 4.2.3.4, printed pp. 249-250: vertex attachments and empty-factor conventions. Read online; archival copy WANTED. Elementary agent expansion of the poset-inclusion case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-join-slice-cocone-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Notation 4.2.3.1, Remark 4.2.3.2, and the index-simplex pushout in the proof of Proposition 4.2.3.4, printed pp. 248-250, read online. No local archival copy; WANTED. Explicit poset-inclusion proof, including empty-family correction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +155,66 @@
    "results": "{\"t\": \"2026-10-17T08:34:58Z\", \"tool\": \"leansearch\", \"query\": \"Mixed simplicial subset built from a monotone cover and filtered by simplex boundary attachments\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.boundary\", \"SSet.skeleton\", \"SSet.Subcomplex\", \"SSet.stdSimplex.face_obj\", \"SSet.stdSimplex.face\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"Geometry.SimplicialComplex.ofSubcomplex_faces\"], \"digest\": \"b15b6dcb20599a4c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures and pinned source. General subcomplex pushouts, skeleton cell decompositions and ordinary-category cocones do not state the mixed join attachment or coherent incidence replacement assertion. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "join|BicartSq|isPushout",
+   "results": "{\"t\": \"2026-10-17T13:06:03Z\", \"tool\": \"grep\", \"query\": \"join|BicartSq|isPushout\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\"], \"digest\": \"a95b62b35c6b2440\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned skeleton, subcomplex, horn and relative-cell-complex results do not give the mixed join construction or its attachment. In particular SSet.Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-101, read) assumes the intersection/union identifications which are the substantive content here; not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial subsets of an ordered join built from increasing subcomplexes and pushouts along boundaries of nerve simplices",
+   "results": "{\"t\": \"2026-10-17T13:06:03Z\", \"tool\": \"leansearch\", \"query\": \"Simplicial subsets of an ordered join built from increasing subcomplexes and pushouts along boundaries of nerve simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex\", \"Geometry.SimplicialComplex.ofSubcomplex\", \"SSet.boundary\", \"SSet.stdSimplex.face\", \"SSet.skeleton_succ\", \"CategoryTheory.SimplicialThickening\", \"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.stdSimplex.face_obj\"], \"digest\": \"4a630e22bf25c6e1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned skeleton, subcomplex, horn and relative-cell-complex results do not give the mixed join construction or its attachment. In particular SSet.Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-101, read) assumes the intersection/union identifications which are the substantive content here; not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Subcomplex, \"pushout\"",
+   "results": "{\"t\": \"2026-10-17T13:06:03Z\", \"tool\": \"loogle\", \"query\": \"SSet.Subcomplex, \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.relativeCellComplexOfMono.isPushout\", \"SSet.Subcomplex.unionProd.isPushout\", \"SSet.Subcomplex.Pairing.RankFunction.isPushout\", \"SSet.Subcomplex.unionProd.pushoutObjObj\", \"SSet.Subcomplex.unionProd.pushoutObjObj_pt\", \"SSet.Subcomplex.unionProd.pushoutObjObj_inl\", \"SSet.Subcomplex.unionProd.pushoutObjObj_inr\"], \"digest\": \"f59583c775582431\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned skeleton, subcomplex, horn and relative-cell-complex results do not give the mixed join construction or its attachment. In particular SSet.Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-101, read) assumes the intersection/union identifications which are the substantive content here; not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monotone family of simplicial subsets indexed by a poset defines a mixed simplicial subset of an ordered join; adding one nerve simplex attaches the join with its first subset along the simplex boundary",
+   "results": "{\"t\": \"2026-10-17T13:06:04Z\", \"tool\": \"leanfinder\", \"query\": \"A monotone family of simplicial subsets indexed by a poset defines a mixed simplicial subset of an ordered join; adding one nerve simplex attaches the join with its first subset along the simplex boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.skeletonOfMono_succ\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.horn.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.Subcomplex.Pairing\", \"SSet.Subcomplex.Pairing.II\", \"SSet.skeleton_succ\", \"SSet.skeletonOfMono\"], \"digest\": \"2852c1aeec85ae49\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned skeleton, subcomplex, horn and relative-cell-complex results do not give the mixed join construction or its attachment. In particular SSet.Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-101, read) assumes the intersection/union identifications which are the substantive content here; not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a poset nerve, adjoining a strict chain to a simplicial subset induces a pushout of the joins K_i star boundary Delta[n] to K_i star Delta[n] for a monotone diagram of subcomplexes",
+   "results": "{\"t\": \"2026-10-17T13:06:53Z\", \"tool\": \"leanfinder\", \"query\": \"In a poset nerve, adjoining a strict chain to a simplicial subset induces a pushout of the joins K_i star boundary Delta[n] to K_i star Delta[n] for a monotone diagram of subcomplexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn.isColimit\", \"SSet.horn₂₂.isPushout\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₀.isPushout\", \"PartialOrder.mem_range_nerve_σ_iff\", \"CategoryTheory.Arrow.cechConerve_map\"], \"digest\": \"986c26cd5e098501\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned skeleton, subcomplex, horn and relative-cell-complex results do not give the mixed join construction or its attachment. In particular SSet.Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-101, read) assumes the intersection/union identifications which are the substantive content here; not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bjoin\\b|\\bstar\\b|mixed|first.*vertex",
+   "results": "{\"t\": \"2026-10-17T13:07:17Z\", \"tool\": \"grep\", \"query\": \"\\\\bjoin\\\\b|\\\\bstar\\\\b|mixed|first.*vertex\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no ordered join, star, mixed-simplex or first-vertex construction in the searched simplicial-set source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mixed part of a simplicial join for an order preserving family of simplicial subsets, and its relative simplex cell attachments",
+   "results": "{\"t\": \"2026-10-17T13:07:17Z\", \"tool\": \"leansearch\", \"query\": \"The mixed part of a simplicial join for an order preserving family of simplicial subsets, and its relative simplex cell attachments\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.AttachCells.cell\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.mk\", \"SSet.skeleton_succ\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\", \"CategoryTheory.SimplicialThickening\", \"SSet.Subcomplex.preimage_max\"], \"digest\": \"4cf797eefdda3bce\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned skeleton, subcomplex, horn and relative-cell-complex results do not give the mixed join construction or its attachment. In particular SSet.Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-101, read) assumes the intersection/union identifications which are the substantive content here; not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Subcomplex.BicartSq.isPushout",
+   "results": "{\"t\": \"2026-10-17T13:07:17Z\", \"tool\": \"loogle\", \"query\": \"SSet.Subcomplex.BicartSq.isPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\"], \"digest\": \"0032bd184b9d4595\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned skeleton, subcomplex, horn and relative-cell-complex results do not give the mixed join construction or its attachment. In particular SSet.Subcomplex.BicartSq.isPushout (SubcomplexColimits.lean:86-101, read) assumes the intersection/union identifications which are the substantive content here; not an exact match or a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-directed-cover-colimit-assembly",
@@ -72,5 +241,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-directed-cover-mixed-subset-cells",
+  "worker": "stage1",
+  "summary": "Q54 checked HTT 4.2.3.1-4.2.3.4 online, source project declarations, the complete statements of the three cited definition/construction nodes, the current blueprint and Mathlib candidates. The split is nine elementary block/membership/universal-property calculations and creates no nodes. STATEMENT-DISPUTED: the empty-family union identity was false for nonempty K; corrected it by adjoining K explicitly, which agrees with the old formula for nonempty families. Added explicit boundary, pushout and missing simplicial-subset conventions; made the new-cell condition explicit.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 mapping-complex adjunction infrastructure, through lem-coef-directed-cover-colimit-assembly: steps 1-3 realize the mixed subset and its initial/limit stages; steps 4-8 prove its index-simplex pushout; step 9 checks the vertex and empty cases. The current main-20261015 copy is refiled under sk-thm-sf-package; no chapter/unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-a6de125c4",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-a6de125c4 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all nine proof steps, cited nodes, HTT source locations, unit route, downstream citers, edge cases, searches, and duplicate/cycle checks. The empty-family union correction is valid and downstream uses remain sound. Full details are in review.md."
  }
 }

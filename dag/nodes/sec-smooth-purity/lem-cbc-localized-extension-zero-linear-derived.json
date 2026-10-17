@@ -20,9 +20,83 @@
   "def-weil-linear-functor",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $c_V:A\\to\\mathcal O(V)$ for the compatible structural ring maps. For parallel module-sheaf morphisms $t,t':F\\to G$, define $(t+t')_V(x)=t_V(x)+t'_V(x)$ and $(at)_V(x)=c_V(a)t_V(x)$. By [def-weil-sheaf-of-modules-category], these are morphisms: restrictions are semilinear and carry $c_V(a)$ to $c_W(a)$; commutativity of $\\mathcal O(V)$ makes $at$ an $\\mathcal O(V)$-linear map. The module axioms hold sectionwise, and for composable maps $t,s$, $s_V(c_V(a)t_V(x))=c_V(a)s_V(t_V(x))$ gives bilinearity of composition. Apply this also on $\\mathcal C/U$, where $\\mathcal O_U(V\\to U)=\\mathcal O(V)$ by [def-pur-localized-ringed-site]. These are the $A$-linear structures of [def-weil-linear-category]. Both module categories are abelian by [def-weil-sheaf-of-modules-category]: the site is small in the stated universe, and so is its slice.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CW (definition-sheaf-modules), Tag 03DA (lemma-abelian), and Tag 04IX (definition-localize-ringed-site); sectionwise central scalar calculation."
+   }
+  },
+  {
+   "text": "Use [def-weil-extension-by-zero-presheaf]. On the summand indexed by $\\varphi:V\\to U$, $P_t(V)$ is $t_{(V,\\varphi)}$. For every finite-support sum $x=\\sum_\\varphi\\iota_\\varphi x_\\varphi$, its image under $P_{t+t'}(V)$ is $\\sum_\\varphi\\iota_\\varphi(t(x_\\varphi)+t'(x_\\varphi))=P_t(V)x+P_{t'}(V)x$; under $P_{at}(V)$ it is $\\sum_\\varphi\\iota_\\varphi(c_V(a)t(x_\\varphi))=c_V(a)P_t(V)x$. Thus $P_{t+t'}=P_t+P_{t'}$ and $P_{at}=aP_t$ as module-presheaf morphisms. These identities allow any number of maps $V\\to U$, including none; no subterminality of $U$ is used.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), displayed direct-sum presheaf and first paragraph of its proof."
+   }
+  },
+  {
+   "text": "Let $\\eta_F:P_F\\to P_F^\\#$ be the module-sheafification map of [def-weil-presheaf-modules-sheafification]. Functoriality gives $(j_{U!}t)\\eta_F=\\eta_GP_t$. Consequently both $j_{U!}(t+t')$ and $j_{U!}t+j_{U!}t'$ precompose with $\\eta_F$ to $\\eta_G(P_t+P_{t'})$. Likewise $j_{U!}(at)\\eta_F=\\eta_GP_{at}=\\eta_G(aP_t)=a\\eta_GP_t=(a\\,j_{U!}t)\\eta_F$, since $\\eta_G$ is a module map. The unique factorization into the module sheaf $P_G^\\#$ in that cited statement makes precomposition with $\\eta_F$ injective. It proves both required sheaf-morphism identities. The equality for sums also implies preservation of zero, by cancellation in the Hom group. Thus $j_{U!}$ is additive and $A$-linear.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), module-linear unit and unique factorization; the scalar and sum identities follow by precomposition."
+   }
+  },
+  {
+   "text": "The exact functor $j_{U!}$ of [lem-pur-site-restriction-module-adjunction-exact] is precisely the module sheafification $P_F^\\#$ with the functorial direct-sum action used above; that node assumes an arbitrary localized ringed site, not merely a scheme or finite constant coefficients. Apply [lem-sf-exact-functor-derived-triangulated] to these two abelian module categories and this exact additive functor. It yields the termwise induced unbounded functor $D(j_{U!})$, commuting with integer shifts and preserving distinguished triangles. In particular it is additive. No boundedness or resolution hypothesis is needed for this exact-functor construction.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03DJ (lemma-extension-by-zero and lemma-extension-by-zero-exact); derived.tex Tag 015F (lemma-right-derived-exact-functor), implemented by Mathlib ExactFunctor.lean:35-105."
+   }
+  },
+  {
+   "text": "By [lem-weil-linear-abelian-derived-category] applied to the two abelian $A$-linear categories of Step 1, the derived Hom groups have exactly the structures induced by degreewise scalars and localization required in the statement. Apply [lem-cbc-exact-linear-derived-functor] with $R=A$ and $F=j_{U!}$: Step 3 gives its $A$-linearity and Step 4 its exactness. The conclusion is $D(j_{U!})(af)=aD(j_{U!})(f)$ and preservation of sums for every derived morphism, not only for morphisms represented by a single cochain map. Together with Step 4 this proves all the assertions.",
+   "uses": [
+    "lem-weil-linear-abelian-derived-category",
+    "lem-cbc-exact-linear-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "place": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, lines 120-125; induced scalar structures in DerivedCategory/Linear.lean:24-40."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-linear-category",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-cbc-exact-linear-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI/03DJ and 03CY provide extension, exactness and the module-sheafification universal property; the explicit scalar identities are extracted here and the general derived linearity/triangulatedness are the cited Mathlib statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -65,10 +139,52 @@
    "results": "23 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean; directory Mathlib/Algebra/Homology/DerivedCategory",
    "date": "2026-10-17",
    "verdict": "no exact match: Mathlib ExactFunctor.lean lines 120-125 supplies derived linearity once a sheaf functor is already known linear, but does not give the localized module extension-by-zero scalar identity; sheafification scalar hits concern objectwise scalar structures"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Ll]inear|localizedModuleExtension.*[Ll]inear|instLinearDerivedCategoryMapDerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the generic exact derived functor is linear once the sheaf functor is linear, but the direct-sum and module-sheafification identities still require Steps 1-3. Function extension by zero is not extension of sheaves; Sheafify.* hits state module axioms for sheafified objects, not this functor on Hom groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for modules over a ringed site commutes with addition and scalar multiplication on morphisms and induces a linear derived functor",
+   "results": "8 hits: Function.ExtendByZero.linearMap, DFinsupp.lmk, Function.ExtendByZero.hom, Function.ExtendByZero.hom_apply, PresheafOfModules.Sheafify.zero_smul, Function.ExtendByZero.linearMap_apply, ContinuousLinearMap.extend_zero, CategoryTheory.Abelian.Ext.linearEquiv₀",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the generic exact derived functor is linear once the sheaf functor is linear, but the direct-sum and module-sheafification identities still require Steps 1-3. Function extension by zero is not extension of sheaves; Sheafify.* hits state module axioms for sheafified objects, not this functor on Hom groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, SheafOfModules",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the generic exact derived functor is linear once the sheaf functor is linear, but the direct-sum and module-sheafification identities still require Steps 1-3. Function extension by zero is not extension of sheaves; Sheafify.* hits state module axioms for sheafified objects, not this functor on Hom groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for sheaves of modules on a localized ringed site is a linear functor and induces a linear triangulated functor on unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinear, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.instLinearSingleFunctor, DerivedCategory.instLinearShiftFunctorInt, Ext",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the generic exact derived functor is linear once the sheaf functor is linear, but the direct-sum and module-sheafification identities still require Steps 1-3. Function extension by zero is not extension of sheaves; Sheafify.* hits state module axioms for sheafified objects, not this functor on Hom groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the direct sum over maps V to U extension presheaf preserves scalar multiples of module morphisms on ringed sites",
+   "results": "8 hits: PresheafOfModules.Sheafify.add_smul, PresheafOfModules.Sheafify.SMulCandidate.mk', PresheafOfModules.Sheafify.smul_add, PresheafOfModules.Sheafify.SMulCandidate.x, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.smulCandidate",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the generic exact derived functor is linear once the sheaf functor is linear, but the direct-sum and module-sheafification identities still require Steps 1-3. Function extension by zero is not extension of sheaves; Sheafify.* hits state module axioms for sheafified objects, not this functor on Hom groups."
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*[Ll]inear|localizedModule.*[Ll]inear|extendByZero",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean; searched Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the generic exact derived functor is linear once the sheaf functor is linear, but the direct-sum and module-sheafification identities still require Steps 1-3. Function extension by zero is not extension of sheaves; Sheafify.* hits state module axioms for sheafified objects, not this functor on Hom groups."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-integral-compact-support-uniform-restriction",
@@ -87,5 +203,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-localized-extension-zero-linear-derived",
+  "worker": "stage1",
+  "summary": "Proved central scalar structures, presheaf linearity and sheafified linearity explicitly; reused exact localized module extension and exact derived triangulatedness. Added one general Mathlib leaf for derived linearity, keeping the statement unchanged and all arbitrary-site, arbitrary-commutative-coefficient and unbounded hypotheses.",
+  "blueprint": "Realizes thm-cbc-finite-extension proof, sole paragraph, the O_E-linear integral functors clause, through the extension-by-zero part of lem-cbc-integral-compact-support-uniform-restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exactness for module extension on any localized ringed site; the compact-support unit has no replacement for this ringed-site tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact-functor passage to unbounded derived categories with shift and triangle compatibility."
+   },
+   {
+    "node": "lem-weil-linear-abelian-derived-category",
+    "why": "Generic derived Hom scalar structures and linear localization needed to identify the stated A-actions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-linear-abelian-derived-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q44-0f03a7262",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-0f03a7262 (reviewer sub-agent of L); spot-checked: Read the item, new leaf, cited statements and source passages in full. All five steps are valid; Stacks 03CY/03DI/03DJ and Mathlib ExactFunctor.lean:122–125 support the argument. Checked hypotheses, edge cases, duplicates, coefficient boundaries and acyclicity. Accepted all three declared generic tool uses. No repairs; details in review.md."
  }
 }
