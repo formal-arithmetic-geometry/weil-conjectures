@@ -23,6 +23,7 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 
 /-!
 # Descent of open direct image and exchange along finite radicial covers

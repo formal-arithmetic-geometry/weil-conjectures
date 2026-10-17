@@ -41,6 +41,7 @@ import Sheaf.AlgebraicGeometry.ProjectiveCoordinateBoundary
 import Sheaf.AlgebraicGeometry.SmoothGenericDirectImage
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 
 /-!
 # Generic bounded constructibility for an open immersion

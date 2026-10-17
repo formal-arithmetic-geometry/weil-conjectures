@@ -62,6 +62,9 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Etale locality of the ordinary ambient adjoint
 

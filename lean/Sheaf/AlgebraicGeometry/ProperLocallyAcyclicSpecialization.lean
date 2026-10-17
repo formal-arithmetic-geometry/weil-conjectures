@@ -28,6 +28,8 @@ import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreUnit
 import Sheaf.AlgebraicGeometry.SpecializationCospecializationCompatibility
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import WeilConjectures.AlgebraicGeometry.StrictLocalDerivedGlobalExchange
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Proper locally acyclic specialization

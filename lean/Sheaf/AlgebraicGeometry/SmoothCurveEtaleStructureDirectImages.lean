@@ -43,6 +43,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting
 
 /-! # Structure-sheaf direct images for smooth proper curves
 

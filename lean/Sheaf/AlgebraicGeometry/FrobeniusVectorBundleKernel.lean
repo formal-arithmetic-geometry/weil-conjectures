@@ -33,6 +33,7 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 import WeilConjectures.AlgebraicGeometry.TensorPullback
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Fixed points of Frobenius-semilinear vector-bundle endomorphisms
