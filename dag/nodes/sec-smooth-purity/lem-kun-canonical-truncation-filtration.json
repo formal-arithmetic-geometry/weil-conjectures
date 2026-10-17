@@ -9,13 +9,90 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
   "def-sp-filtration",
-  "def-sp-filtered-complex-subquotients",
-  "def-sbc-standard-tstructure-derived-category"
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sp-filtered-complex-subquotients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose integers m≤n with K^r=0 for r<m and r>n. If i≤−n, then the cutoff −i is at least n; because the differential out of K^n has zero target, τ_{≤−i}K agrees with K in every degree. If i≥−m+1, then the cutoff is at most m−1 and every retained term is zero, so τ_{≤−i}K=0. Hence F^iK=K for i≤−n and F^iK=0 for i≥−m+1; the filtration is finite in the sense of [def-kun-finite-filtered-module-homotopy]. The inclusions τ_{≤−i−1}K⊆τ_{≤−i}K are subcomplex inclusions, so this is a decreasing filtration by subcomplexes.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-sp-filtration",
+    "def-kun-finite-filtered-module-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, canonical truncation definition and its cohomology formula"
+   }
+  },
+  {
+   "text": "Fix i and put q=−i. The canonical truncation-step result [lem-weil-pbc-truncation-step-ses], applied in the abelian category of R-modules, identifies τ_{≤q}K/τ_{≤q−1}K with a complex supported in degrees q−1 and q: its degree-q−1 term is K^{q−1}/ker(d^{q−1}), its degree-q term is ker(d^q), and its differential is induced by d^{q−1}. The induced map from the first term to ker(d^q) is monic with image im(d^{q−1}); using the canonical coimage-image identification in an abelian category, this is the displayed two-term complex im(d^{q−1})↪ker(d^q). Since q=−i, this is F^iK/F^{i+1}K in degrees −i−1 and −i. The same result gives the natural quasi-isomorphism from this quotient to H^q(K)[−q]=H^{−i}(K)[i].",
+   "uses": [
+    "lem-weil-pbc-truncation-step-ses",
+    "def-sp-filtered-complex-subquotients",
+    "def-weil-abstract-derived-category",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 08J5 (successive canonical truncation triangle), with the degreewise quotient calculation from Homology Tag 0118"
+   }
+  },
+  {
+   "text": "For a chain map u:K→L, the truncation-step theorem's naturality clause says that u restricts to τ_{≤q}u and τ_{≤q−1}u and induces the corresponding map on the quotient, commuting with the projection to H^q(−)[−q]. Therefore the two-term-to-cohomology quasi-isomorphisms above are natural in u, and the induced map on the graded quotient is H^{−i}(u)[i] under the displayed identifications.",
+   "uses": [
+    "lem-weil-pbc-truncation-step-ses",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 08J5 and canonical truncation functoriality; Homology Tag 0118"
+   }
+  },
+  {
+   "text": "If h is a chain homotopy from u to v, then h restricts to every truncation step. Indeed, for x∈(τ_{≤q}K)^r, if r<q the target degree r−1 is retained in τ_{≤q}L; if r=q then h^q(x) lies in L^{q−1}, which is again retained; and if r>q the source truncation term is zero. Thus h^r maps τ_{≤q}K^r into τ_{≤q}L^{r−1}. The identity u−v=dh+hd remains true after restriction because all truncations are subcomplexes. Hence truncation maps are connected by a filtration-preserving chain homotopy.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-kun-finite-filtered-module-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, degreewise definition of canonical truncations"
+   }
+  },
+  {
+   "text": "Finally let u:K→L be a quasi-isomorphism. By the natural identifications of Step 3, the map on the i-th graded quotient corresponds to H^{−i}(u)[i]. A quasi-isomorphism is, by definition, an isomorphism on every cohomology module, so H^{−i}(u)[i] is an isomorphism. Therefore every graded quotient map is a quasi-isomorphism, as required.",
+   "uses": [
+    "lem-weil-pbc-truncation-step-ses",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 08J5, together with the definition of quasi-isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sp-abelian",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-truncation-step-ses"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0118 (canonical truncations and cohomology), with derived Remark 08J5 and the explicit degreewise quotient/naturality calculation of lem-weil-pbc-truncation-step-ses"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +124,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-derived-canonical-filtration",
@@ -69,5 +146,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-canonical-truncation-filtration",
+  "worker": "stage1",
+  "summary": "Audited the bounded canonical-truncation filtration against Stacks Homology Tag 0118 and derived Remark 08J5. No new node was needed: the existing truncation-step statement supplies the two-term quotient, its quasi-isomorphism to shifted cohomology, and naturality; the remaining finite-bound and homotopy claims are degreewise arguments from the definitions. The imported Mathlib searches were read and retained; Mathlib has truncation APIs but no exact filtered graded identification.",
+  "blueprint": "Realizes the preliminary integral homological algebra sentence in lem-kun-0f0f about canonical truncation-filtration homotopies and the two-term quotient with shifted cohomology graded piece.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-step-ses",
+    "why": "Steps 2, 3 and 5 take the degreewise quotient tau_{<=q}K/tau_{<=q-1}K, its quasi-isomorphism to H^q(K)[-q] and its naturality (clauses (a)-(c)) as a generic abelian-category fact, applied to R-modules; the Kunneth unit sk-prop-sf-kunneth-ordinary cites no unit and has no node stating this."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-step-ses"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-d921dbaf7",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-d921dbaf7 (reviewer sub-agent of L); spot-checked: I read all five steps of the item against Stacks Tag 0118 (homology.tex, section-truncations) and Remark 08J5 (derived.tex, remark-truncation-distinguished-triangle), and they are correct. I also read every cited node's statement and the citer lem-kun-derived-canonical-filtration. Checks: the finite bounds a=-n<b=-m+1 hold; the graded piece is im d^{-i-1} into ker d^{-i}, by clauses (a)/(b) of lem-weil-pbc-truncation-step-ses and coimage=image; naturality is clause (c); a homotopy restricts degree by degree to the truncations (for r=q, h^q lands in L^{q-1}, which is retained); the graded maps of a quasi-isomorphism are quasi-isomorphisms by two-out-of-three. The coefficient category (R-modules, R commutative) and the shift convention H^q[-q], q=-i, match the definitions and the citer. Small cases tested: K=0; R in degree 0; R->R the identity in degrees 0,1; a two-term complex with zero differential. The DAG search for duplicates (def-kun-truncations, the truncation-step node, the sp truncation nodes) found none, and the delivery has no new nodes. Fix: stmt_deps now equals the statement's citations; def-kun-finite-filtered-module-homotopy was cited but missing, and adding it makes no cycle; lem-weil-pbc-truncation-step-ses was in stmt_deps without being cited and stays in proof_deps. I accepted lem-weil-pbc-truncation-step-ses (unit sk-thm-properbasechange) as a tool use in steps 2, 3 and 5 and recorded it in split_report.tool_uses, since the unit cites no units and no node of the unit states this fact. Unchanged: source.document says homology.tex although 05S6 and 0H7Z are in derived.tex and more-algebra.tex; this came from the base node and is harmless.; 1 file(s) fixed by the reviewer"
  }
 }

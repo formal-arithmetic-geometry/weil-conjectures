@@ -14,9 +14,131 @@
   "lem-cbc-relative-coslice-left-fibration",
   "lem-coef-infinity-relative-cone-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H:K_x\\to K'_x$ for the functor induced by $r$. Both apex projections to $D$ are left fibrations. Indeed specialize the relative-coslice theorem with $q:C\\to *$, $K_0=\\varnothing$, $K=\\Delta^0$ and $f=x$, first for $C=E$ and then for $C=P$: its map $\\rho$ is $C_{x/}\\to C$. Pulling back a horn lifting problem along $D\\to C$ and pairing its lift with the prescribed base simplex proves the same lifting property for the displayed pullbacks. Filling the projected inner horn in $D$ and then lifting makes their totals quasicategories. The strict fibers at $d$ are $L_E(x,d)$ and $L_P(x,g(d))$: their $n$-simplices have initial vertex $x$ and constant FINAL $n$-face at the indicated endpoint. These are the LEFT-pinched spaces of the cited definition; they are not the right-pinched $\\operatorname{Map}$ spaces. The fiber map of $H$ applies $r$ simplexwise.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-infinity-left-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), printed pp. 266-268, Cartesian-cylinder coinitiality reduction; agent expansion using the cited statements, not a verbatim proof in Higher Algebra."
+   }
+  },
+  {
+   "text": "Fix $d$ and use only the specified $u$-Cartesian edge $c_d:g(d)\\to d$. Apply the Cartesian mapping-fiber theorem with $(p,e,w)=(u,c_d,x)$, $s=0$, $t=1$, and $E_s=P$. The right-pinched space $\\operatorname{Map}_{\\Delta^1}(0,1)$ is a point in every degree (there is a unique simplex constant at $0$ on the initial face and at $1$ on the last vertex). Thus its homotopy fiber at $0\\to1$ is $\\operatorname{Map}_E(x,d)$. The theorem gives an equivalence $c_{d*}:\\operatorname{Map}_P(x,g(d))\\to\\operatorname{Map}_E(x,d)$, namely coherent postcomposition. Every Cartesian hypothesis here is on $c_d$, not on an arbitrary edge of $E$. No functoriality over $\\Delta^1$ is being asserted for $r$.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), printed pp. 266-268, Cartesian-cylinder coinitiality reduction; agent expansion using the cited statements, not a verbatim proof in Higher Algebra."
+   }
+  },
+  {
+   "text": "Put $R_d=r_*:\\operatorname{Map}_E(x,d)\\to\\operatorname{Map}_P(x,g(d))$. Functoriality of the Hom bifunctor and preservation of canonical composition give $[R_d][c_{d*}]=[r(c_d)_*]$, because $r|_P=1_P$. By hypothesis $r(c_d)$ is an equivalence. Choose its inverse edge; associativity and the two inverse and unit homotopies of the mapping-composition theorem make postcomposition by this inverse a homotopy inverse for $r(c_d)_*$. Since $c_{d*}$ is already an equivalence, $R_d$ is an equivalence (compose the displayed identity with its inverse). This use of Hom functoriality is valid for the arbitrary functor $r$; it does not invoke the restricted naturality clause of the Cartesian mapping-fiber theorem.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), printed pp. 266-268, Cartesian-cylinder coinitiality reduction; agent expansion using the cited statements, not a verbatim proof in Higher Algebra."
+   }
+  },
+  {
+   "text": "For each endpoint pair use the natural span $L_C(x,y)\\xrightarrow{j^L}U_C(x,y)\\xleftarrow{j}\\operatorname{Map}_C(x,y)$. Both arrows are homotopy equivalences of Kan complexes. Its naturality under $r$ and Step 3 imply that the ACTUAL fiber map $L_E(x,d)\\to L_P(x,g(d))$ is an equivalence. To pass to totals, enlarge universes to contain all the fibers and apply space-valued transport over $D$ to the two left fibrations of Step 1. It identifies $H$ with a coherent transformation of the classifying functors, and compatibility with pullback to each vertex identifies its component with this fiber map. The pointwise equivalence criterion makes that transformation invertible. The transport mapping-space equivalence, compatible with composition, transports its inverse and the two inverse homotopies to a functor $J$ over $D$ and inverse homotopies over $D$. Their vertex components lie in Kan fibers and hence are equivalences (their inverse edges and triangles already lie in those fibers). Thus these are coherent natural equivalences, proving $H$ a functor equivalence over $D$. This derives the fiberwise criterion from cited statements rather than leaving it implicit.",
+   "uses": [
+    "lem-coef-infinity-left-pinch-comparison",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), printed pp. 266-268, Cartesian-cylinder coinitiality reduction; agent expansion using the cited statements, not a verbatim proof in Higher Algebra."
+   }
+  },
+  {
+   "text": "The selected vertices satisfy $H^{-1}(I'_x)=I_x$ by definition. Let $b=(d,\\gamma)\\in I'_x$ and write $HJ(b)=(d,\\delta)$. The equivalence $HJ\\simeq1$ of Step 4 is over $D$, so its component is a path in the strict Kan fiber at $d$. Take its inverse edge there, directed from $b$ to $HJ(b)$. By the LEFT-pinched description in Step 1, this edge is a triangle in $P$ with edges $\\gamma:x\\to g(d)$, $1_{g(d)}$, and $\\delta:x\\to g(d)$. The definition of inert in the operadic-recognition statement says that $\\gamma$ is $p$-cocartesian over an inert pointed map. The identity edge is $p$-cocartesian, and cocartesian composition in this triangle makes $\\delta$ $p$-cocartesian. In the nerve of pointed finite sets the triangle gives $p(\\delta)=1\\circ p(\\gamma)=p(\\gamma)$, so its base map is inert as well. Thus $\\delta$ is inert, and $J(b)\\in I_x$. Fullness restricts $H,J$ and both inverse natural equivalences to the selected full subcategories: every simplex all of whose vertices are selected belongs to them. This proves $I_x\\simeq I'_x$ using only the inert-edge definition and the generic composition theorem, without invoking an operadic approximation or factorization theorem.",
+   "uses": [
+    "lem-coef-symmetric-operadic-fibration-recognition",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.4.1.6 and Proposition 2.4.1.7, printed p. 117, opposite-category duals; elementary application to the triangle with final edge an identity. Read online 2026-10-17; archive WANTED in report.md."
+   }
+  },
+  {
+   "text": "Apply coherent oriented-fiber-product invariance to the strictly commuting cospans $I_x\\hookrightarrow K_x\\leftarrow\\Delta^0$ and $I'_x\\hookrightarrow K'_x\\leftarrow\\Delta^0$, where the right maps select $a$ and $H(a)$. The three vertical maps are respectively the restricted equivalence of Step 5, $H$ of Step 4, and the identity of the point. The resulting arrow pullbacks are precisely the coherent comma categories specified in the item. It follows that $(I_x)_{/a}\\simeq(I'_x)_{/H(a)}$. The right object is an object of the AMBIENT category; no membership $a\\in I_x$ or $H(a)\\in I'_x$ has been used. The relative-cone theorem supplies no part of this inference.",
+   "uses": [
+    "lem-coef-infinity-comma-equivalence-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03PN",
+    "place": "Remark 4.6.4.4 (Tag 03PN), specialized to a full inclusion and a point; agent application."
+   }
+  },
+  {
+   "text": "For the second comma put $L=K'_x$ and $v=(d,\\alpha)$. Apply the slice-diagonal clause of arrow-join geometry with ambient quasicategory $C=L$, full subcategory $A=I'_x$, and the arbitrary object $c=v$ of $L$. It gives an equivalence $I'_x\\times_L L_{/v}\\to(I'_x)_{/v}$, preserving the source projection. Here $L_{/v}$ is the sharp join target slice, whereas the right side is the coherent arrow comma from Step 6. The theorem explicitly allows $c$ outside $A$. It remains to identify the left side by a simplicial isomorphism, rather than applying a single-slice lemma to an iterated slice.",
+   "uses": [
+    "lem-coef-infinity-arrow-join-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), printed pp. 266-268, Cartesian-cylinder coinitiality reduction; agent expansion using the cited statements, not a verbatim proof in Higher Algebra."
+   }
+  },
+  {
+   "text": "Unpack an $n$-simplex of $L_{/v}$. It is a map $b:\\Delta^n\\star\\Delta^0\\to D$ with last vertex $d$, together with a map $t:\\Delta^0\\star(\\Delta^n\\star\\Delta^0)\\to P$. Its restriction to the last two blocks is $gb$, its first vertex is $x$, and its outer edge (first to last vertex) is $\\alpha$. The sharp-join correspondence and its ordered associator identify this with a map $(\\Delta^0\\star\\Delta^n)\\star\\Delta^0\\to P$ with exactly the same restrictions. In the target slice $B=P_{/g(d)}$ this is precisely a map $\\Delta^0\\star\\Delta^n\\to B$ whose first vertex is $\\alpha$, whose projection to $B$ on the final $\\Delta^n$ is the simplex $gb$ of $B$. Together with $b\\in(D_{/d})_n$ these are exactly the $n$-simplices of $D_{/d}\\times_B B_{\\alpha/}$. The inverse groups the same three ordered blocks the other way. Every face or degeneracy acts on the middle block and fixes the first and last vertices; the naturality of the sharp-join correspondence therefore makes these inverse degreewise bijections simplicial. This is an explicit reassociation of defining data, not an asserted general iterated-slice comparison.",
+   "uses": [
+    "lem-coef-infinity-join-cocone-associativity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), printed pp. 266-268, Cartesian-cylinder coinitiality reduction; agent expansion using the cited statements, not a verbatim proof in Higher Algebra."
+   }
+  },
+  {
+   "text": "The source vertex of the simplex in Step 8 at middle vertex $i$ is the arrow $\\gamma_i:x\\to g(b_i)$ obtained by restricting $t$ to the first vertex and $i$. Thus its source face lies in the full $I'_x$ exactly when every $\\gamma_i$ is inert. Under the isomorphism this is exactly the full-subcategory condition defining $F_g(d,\\alpha)$. Its other edge is $\\beta_i:b_i\\to d$ and its triangular face is $g(\\beta_i)\\gamma_i\\simeq\\alpha$; no condition on $\\beta_i$ or on comparisons was imposed. Restricting the simplicial isomorphism proves $I'_x\\times_L L_{/v}\\cong F_g(d,\\alpha)$. Combine Steps 6-8 and this restriction for both required comma equivalences. If $D$ is empty the equivalence of totals is between empty categories and there is no $a$; if the inert subcategories are empty the same formulas give empty commas. The construction never uses a unary equivalence or contractibility of any factorization category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 2.3.3.23(1), printed pp. 266-268, Cartesian-cylinder coinitiality reduction; agent expansion using the cited statements, not a verbatim proof in Higher Algebra."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-coef-infinity-arrow-join-geometry",
+  "lem-coef-infinity-cartesian-mapping-fiber",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-comma-equivalence-invariance",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-join-cocone-associativity",
+  "lem-coef-infinity-left-pinch-comparison",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-space-transport-classification",
+  "lem-coef-symmetric-operadic-fibration-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Theorem 2.3.3.23(1), Cartesian-cylinder coinitiality reduction; agent expansion of the explicit comparison, supporting the derived Hom calculation in paragraph 2 of the recorded blueprint ancestor."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +167,38 @@
    "results": "{\"t\": \"2026-10-17T09:28:49Z\", \"tool\": \"leansearch\", \"query\": \"A mapping cylinder retraction identifies homotopy comma categories of arrows from a fixed object with coherent factorization categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantBrownFactorization.fibration_r\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'_r\", \"CategoryTheory.Retract.ctorIdx\", \"HomotopicalAlgebra.FibrantBrownFactorization.r\", \"CategoryTheory.Retract.mk\", \"CategoryTheory.RetractArrow\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk\", \"CategoryTheory.Factorisation.instCategory\"], \"digest\": \"cc170e883d1863eb\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary structured-arrow equivalences and model-category cylinders do not state this quasicategorical cylinder and iterated-slice comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Cartesian fibration over the interval with a chosen Cartesian edge over every object induces an equivalence between coherent slice categories and the retracted slice, including inert full subcategories and iterated comma slices.",
+   "results": "{\"t\": \"2026-10-17T13:02:28Z\", \"tool\": \"leanfinder\", \"query\": \"A Cartesian fibration over the interval with a chosen Cartesian edge over every object induces an equivalence between coherent slice categories and the retracted slice, including inert full subcategories and iterated comma slices.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\", \"CategoryTheory.Over.iteratedSliceEquiv_inverse\", \"CategoryTheory.Over.iteratedSliceEquiv_counitIso\", \"CategoryTheory.Over.iteratedSliceEquiv_unitIso\", \"CategoryTheory.Over.iteratedSliceEquivOverMapIso\", \"CategoryTheory.CostructuredArrow.isEquivalence_toOver\", \"CategoryTheory.CostructuredArrow.ofCostructuredArrowProjEquivalence\"], \"digest\": \"3d6257bb62f2ce81\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category/cylinder results do not state the quasicategorical coherent cylinder-slice comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StructuredArrow\", \"Cartesian\", \"equivalence\"",
+   "results": "{\"t\": \"2026-10-17T13:02:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"StructuredArrow\\\", \\\"Cartesian\\\", \\\"equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category/cylinder results do not state the quasicategorical coherent cylinder-slice comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "coslice|Cartesian.*slice|iterated.*slice",
+   "results": "{\"t\": \"2026-10-17T13:02:28Z\", \"tool\": \"grep\", \"query\": \"coslice|Cartesian.*slice|iterated.*slice\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\"], \"digest\": \"9b4c0e5536ad8cb4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category/cylinder results do not state the quasicategorical coherent cylinder-slice comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Cartesian cylinder retraction identifies coherent undercategories and inert factorization comma categories.",
+   "results": "{\"t\": \"2026-10-17T13:02:29Z\", \"tool\": \"leansearch\", \"query\": \"A Cartesian cylinder retraction identifies coherent undercategories and inert factorization comma categories.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantBrownFactorization.mk'_r\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData\", \"CategoryTheory.Retract.ctorIdx\", \"HomotopicalAlgebra.Cylinder.noConfusionType\", \"CategoryTheory.Retract.casesOn\", \"CategoryTheory.Retract.map\", \"CategoryTheory.Retract\", \"CategoryTheory.Retract.mk\"], \"digest\": \"39f208f5cccb9363\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category/cylinder results do not state the quasicategorical coherent cylinder-slice comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-weak-approximation-algebras",
@@ -76,5 +226,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-cartesian-cylinder-slice-comparison",
+  "worker": "stage1",
+  "summary": "Repair of all five returned mathematical faults: left-pinched fibers are compared to right-pinched maps through their natural arrow-space span; the mapping-fiber theorem is applied only to the specified Cartesian c_d; Hom functoriality handles r; transport and pointwise detection supply a cited proof of equivalence over D; an explicit Kan-fiber triangle and generic cocartesian composition restrict it; a new generic cospan-invariance lemma supplies coherent commas at arbitrary ambient objects; an explicit three-block degreewise bijection proves the iterated interchange. Item statement and hypotheses unchanged.",
+  "blueprint": "Paragraph 2 and derived Hom display of prop-coef-integral-exceptional-adjoint.proof.md: supporting coherent finite-coefficient adjunction infrastructure, reached through the retained via chain; the cylinder comparison is an expanded infrastructure lemma, not a literal assertion of that paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Generic sharp coslice left-fibration construction, needed to identify the actual fibers; this unit does not replace that simplicial infrastructure."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Pointwise equivalence criterion in a functor quasicategory, combined with the current unit's transport classification; no same-unit node states this criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-2fe3c5254",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-2fe3c5254 (reviewer sub-agent of L); spot-checked: I read the item, the new node and the full statements of all 13 proof dependencies. Steps 1-9 are correct. S1: relative-coslice with K0 empty and K = a point gives source-fixed coslices that are left fibrations; their strict fibers are exactly the left-pinched L_E(x,d) and L_P(x,g(d)). S2: the Cartesian mapping-fiber theorem is applied only to the given c_d, with x in E_0 = P; Map_{Δ^1}(0,1) is a point. S3: Hom functoriality and composition classes give [R_d][c_d*] = [r(c_d)_*], so R_d is an equivalence by 2-out-of-3. S4: the pinch spans commute strictly with r. Transport plus the pointwise criterion give J and homotopies over D whose components lie in Kan fibers. S5: I checked the vertex convention of the fiber edge: edges 01 = γ, 12 = id, 02 = δ. Cocartesian composition and p(δ) = p(γ) in N(Fin_*) make δ inert; arity 0 is included. S6: the new node applies with an ambient object a not assumed in I_x. S7: arrow-join-geometry's slice-diagonal clause applies with A = I'_x, C = K'_x, c = v. S8-9: an honest elementary regrouping of one Δ^{n+2} simplex; the full-subcategory conditions agree and nothing is required of β. No cycle: the item is not reachable from any of its dependencies. The new node lem-coef-infinity-comma-equivalence-invariance is true: I checked it against Kerodon Remark 4.6.4.4 (tag 03PN), fetched online, which states the same result. It is a statement only, self-contained, with four kinds of Mathlib search recorded (no match). It is not a duplicate of comma-mapping-pullback (mapping spaces only, no essential surjectivity) or isofibration-base-change (one fixed base), and I found no other candidate in a snapshot scan. Accepted tool uses: lem-cbc-relative-coslice-left-fibration and lem-cbc-enhanced-functor-cone-calculus, both generic simplicial tools from sk-prop-sf-cbc. The item statement is unchanged and is not a target; HA 2.3.3.23 stays WANTED and proof_origin is agent. No fixes."
  }
 }

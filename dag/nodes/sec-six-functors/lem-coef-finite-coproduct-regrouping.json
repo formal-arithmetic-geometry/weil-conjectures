@@ -12,9 +12,92 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a finite discrete set $I$ and diagram $a:I\\to\\mathcal E$, the internal functor simplicial set is the degreewise product $\\operatorname{Fun}(I,\\mathcal E)=\\prod_{i\\in I}\\mathcal E$: a map $I\\times\\Delta^n\\to\\mathcal E$ is one $n$-simplex per $i$. The right-pinched definition then gives a simplicial isomorphism\n$$\\operatorname{Map}_{\\operatorname{Fun}(I,\\mathcal E)}(a,\\Delta_I t)=\\prod_{i\\in I}\\operatorname{Map}_{\\mathcal E}(a_i,t).$$\nIndeed in degree $n$ both sides specify the same family of maps $\\Delta^{n+1}\\to\\mathcal E$ with constant initial face at $a_i$ and last vertex $t$; all operators restrict each coordinate. Under this isomorphism the map $g\\mapsto\\Delta_I(g)\\circ\\lambda$ of the cocone criterion, for specified legs $\\lambda_i:a_i\\to b$, is coordinatewise precomposition $f\\mapsto(f\\lambda_i)_i$ up to homotopy: the spaces $V$, the edge restrictions $\\theta,\\ell$ and the right-pinch inclusions $j$ (all defined by restriction or precomposition of simplices) characterizing the canonical composition class in the mapping-composition theorem are, for the product quasicategory $\\prod_{i\\in I}\\mathcal E$, the products of those for $\\mathcal E$, so that characterization makes the composition class of $\\operatorname{Fun}(I,\\mathcal E)$ the product of those of $\\mathcal E$. The functor and mapping spaces are quasicategories and Kan complexes, respectively, by the cone-calculus theorem. Thus its dual cocone criterion says that specified legs $a_i\\to b$ are colimiting exactly when restriction $\\operatorname{Map}(b,t)\\to\\prod_i\\operatorname{Map}(a_i,t)$ is an equivalence for every $t$. This applies to $I=\\varnothing$ as well: both the functor category and the empty product of mapping spaces are the point.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03E9",
+    "place": "Definitions 7.6.1.1 and 7.6.1.3 and Remark 7.6.1.5, dual cocone version; agent expansion for the specified right-pinched convention."
+   }
+  },
+  {
+   "text": "Fix a test vertex $t$. Apply Step 1 to each specified block cocone $u_s$. Its colimiting hypothesis makes the actual restriction map\n$$\\beta_{s,t}:\\operatorname{Map}(y_s,t)\\longrightarrow\\prod_{r\\in R_s}\\operatorname{Map}(x_{sr},t)$$\na weak equivalence of Kan complexes. No block coproduct is constructed or chosen here: its vertex and all legs are precisely the given $y_s,u_{sr}$. For $R_s=\\varnothing$ this says $\\operatorname{Map}(y_s,t)\\to *$ is a weak equivalence, exactly the initial-object condition.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03E9",
+    "place": "Remark 7.6.1.5 and Example 7.6.1.8, dual mapping-space criterion applied to the assumed block cocones."
+   }
+  },
+  {
+   "text": "The map $\\beta_t=\\prod_s\\beta_{s,t}$ is a weak equivalence. Here is a short reduction to the cited homotopy-pullback invariance statement, rather than an additional product-preservation assertion. Over the one-point Kan complex the displayed path-space pullback $P(U\\to *,V\\to *)$ is exactly $U\\times V$, since $\\operatorname{Fun}(\\Delta^1,*)=*$ degreewise. Apply that statement to two weak equivalences and the identity of $*$: all cospan squares commute strictly, so their product map is a weak equivalence. Induction on the number of elements of $S$, starting with $*\\xrightarrow{1}*$, gives the claim. The products remain Kan because any horn is filled one coordinate at a time. Finally the map $(a_{sr})\\mapsto((a_{sr})_{r\\in R_s})_{s\\in S}$ identifies the single product indexed by $\\coprod_s R_s$ with the iterated product in every simplicial degree, with inverse evaluation at $(s,r)$.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03E9",
+    "place": "Proposition 7.6.1.23, dual: elementary finite-product reduction of the block mapping-space equivalences."
+   }
+  },
+  {
+   "text": "Write $\\alpha_t(f)=(fv_s)_s$ and $\\gamma_t(f)=(fw_{sr})_{s,r}$ for restriction along the specified outer and flattened legs. The mapping-composition theorem makes these maps on the whole Kan mapping spaces, interpreted up to simplicial homotopy. For each $(s,r)$ it gives the homotopy $ (fv_s)u_{sr}\\simeq f(v_su_{sr})$ from associativity. The specified $2$-simplex gives $[w_{sr}]=[v_s][u_{sr}]$, and restriction depends only on this component class; consequently $f(v_su_{sr})\\simeq fw_{sr}$ as maps with variable $f\\in\\operatorname{Map}(z,t)$. Take these finitely many homotopies coordinatewise. Their composite in the homotopy category of Kan complexes yields\n$$\\beta_t\\alpha_t\\simeq\\gamma_t.$$\nThus the triangle compares actual restriction maps on entire mapping spaces, not just maps on components. No compatibility between different $(s,r)$ is demanded, because the indexing diagram is discrete.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03E9",
+    "place": "Proposition 7.6.1.23, dual, with composition comparison expanded using Kerodon Subsection 4.6.8 (01PF)."
+   }
+  },
+  {
+   "text": "These constructions retain the variable $t$ coherently. Choose a universe containing all mapping spaces and a further one containing $\\mathcal E$. The Hom-bifunctor theorem gives $H_{\\mathcal E}:\\mathcal E^{\\mathrm{op}}\\times\\mathcal E\\to\\mathcal S$ with its canonical unit and composition homotopies. Each $u_{sr}$ therefore gives a coherent natural transformation $H(y_s,-)\\to H(x_{sr},-)$; its value at $t$ is restriction by $u_{sr}$. Taking the finite coordinate product gives precisely $\\beta$ with values $\\beta_t$. In every simplicial parameter, the product is a tuple of the same component data, with faces and degeneracies componentwise. The same construction gives $\\alpha$ and $\\gamma$, and applying $H$ to the given composition triangles supplies their comparison. This proves the asserted naturality in $t$ with higher simplices retained, without choosing inverses separately at each $t$. Step 3 proves that every component of this natural comparison $\\beta$ is an equivalence.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03E9",
+    "place": "Proposition 7.6.1.23 and its preservation/naturality interpretation; coherent naturality is supplied by the existing Hom bifunctor, not inferred from vertex values."
+   }
+  },
+  {
+   "text": "For every $t$, Step 3 makes $\\beta_t$ a weak equivalence and Step 4 identifies $\\gamma_t$ with $\\beta_t\\alpha_t$ up to homotopy. Weak equivalences obey two-out-of-three in the Kan-Quillen model structure. Homotopic maps have the same weak-equivalence property: their realized maps are homotopic, so induce the same component map and conjugate maps on based homotopy groups along the basepoint track. Hence $\\alpha_t$ is a weak equivalence if and only if $\\gamma_t$ is. Apply the dual cocone criterion of Step 1, first to the family $(y_s)_s$ and then to $(x_{sr})_{(s,r)}$, to conclude the required if and only if. If $S=\\varnothing$, $\\beta_t$ is the identity of $*$ and both conditions say that $z$ is initial. Empty blocks have already been included in Step 2; in particular if every block is empty both criteria still compare with the empty flattened family. Only the supplied block colimits were used.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03E9",
+    "place": "Proposition 7.6.1.23, dual mapping-space cancellation, including Example 7.6.1.8 for empty families."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent derived coefficient adjunction; supporting finite-coproduct envelope argument inherited through blueprint.from.via. Direct mapping-space cancellation proof, checked against online Kerodon Subsection 7.6.1 (03E9), especially Proposition 7.6.1.23, and Subsection 4.6.8 (01PF); these are not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +140,59 @@
    "results": "{\"t\": \"2026-10-17T08:35:22Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory, if maps from each finite block exhibit its apex as a coproduct, a cocone on the block apices is colimiting exactly when its composite on all entries is colimiting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.isColimit\", \"CategoryTheory.Limits.Cofan.isColimitTrans\", \"SSet.hasColimits\", \"CategoryTheory.extendCofanIsColimit\", \"SSet.finite_of_isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"HomotopicalAlgebra.AttachCells.isColimit₁\", \"HomotopicalAlgebra.AttachCells.isColimit₂\"], \"digest\": \"48e51a137cdf4458\"}",
    "date": "2026-10-17",
    "verdict": "no match: Cofan.combPairIsColimit in CategoryTheory/Limits/Shapes/CombinedProducts.lean:76-119 is ordinary category theory with set-valued Hom; it does not assert cancellation for whole coherent mapping spaces or the specified 2-simplex comparison. Read that declaration and the Category assumptions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coproduct cocones in a quasicategory mapping spaces regrouping",
+   "results": "{\"t\": \"2026-10-17T15:06:39Z\", \"tool\": \"leanfinder\", \"query\": \"finite coproduct cocones in a quasicategory mapping spaces regrouping\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFiniteCoprod\", \"SSet.finite_of_isColimit\", \"SSet.instFiniteSigmaObjOfFinite\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.finiteSubcoproductsCocone\", \"SSet.hasColimits\", \"SSet.horn.isColimit\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.finiteSubcoproductsCocone_ι_app\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.finiteSubcoproductsCocone_pt\"], \"digest\": \"19c3d1839776d3c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searches return ordinary categorical coproducts or colimits of simplicial sets, not coherent colimits inside an arbitrary quasicategory. Read CombinedProducts.lean:70-104 and Products.lean:622-642; both assume an ordinary Category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cofan.isColimitTrans, CategoryTheory.Limits.combineCocones",
+   "results": "{\"t\": \"2026-10-17T15:06:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.Cofan.isColimitTrans, CategoryTheory.Limits.combineCocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searches return ordinary categorical coproducts or colimits of simplicial sets, not coherent colimits inside an arbitrary quasicategory. Read CombinedProducts.lean:70-104 and Products.lean:622-642; both assume an ordinary Category."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*product.*weak.*equiv|weak.*equiv.*product",
+   "results": "{\"t\": \"2026-10-17T15:06:40Z\", \"tool\": \"grep\", \"query\": \"finite.*product.*weak.*equiv|weak.*equiv.*product\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searches return ordinary categorical coproducts or colimits of simplicial sets, not coherent colimits inside an arbitrary quasicategory. Read CombinedProducts.lean:70-104 and Products.lean:622-642; both assume an ordinary Category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite products of weak equivalences of Kan complexes are weak equivalences",
+   "results": "{\"t\": \"2026-10-17T15:06:40Z\", \"tool\": \"leansearch\", \"query\": \"finite products of weak equivalences of Kan complexes are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"ContinuousMap.HomotopyEquiv.piCongrRight\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"HomotopicalAlgebra.instIsMultiplicativeWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"ContinuousMap.HomotopyEquiv.prodCongr\", \"CategoryTheory.Equivalence.prod\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_trivialFibrations\"], \"digest\": \"ec155cf75566b279\"}",
+   "date": "2026-10-17",
+   "verdict": "supporting-fact search, not a match for the item: returned generic model-category product instances. No new node is needed: proof Step 3 derives the finite product assertion in three lines from the existing homotopy-pullback-invariance node over the point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an infinity category coproduct universal properties are preserved by flattening a finite family of finite families",
+   "results": "{\"t\": \"2026-10-17T15:08:48Z\", \"tool\": \"leanfinder\", \"query\": \"In an infinity category coproduct universal properties are preserved by flattening a finite family of finite families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFiniteSigmaObjOfFinite\", \"CategoryTheory.FinitaryPreExtensive.isUniversal_finiteCoproducts_Fin\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.liftToFinset_obj_obj\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.liftToFinset\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.finiteSubcoproductsCocone\", \"CategoryTheory.FinitaryPreExtensive.isUniversal_finiteCoproducts\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.liftToFinsetObj_obj\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone\"], \"digest\": \"18813625c97de171\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searches return ordinary categorical coproducts or colimits of simplicial sets, not coherent colimits inside an arbitrary quasicategory. Read CombinedProducts.lean:70-104 and Products.lean:622-642; both assume an ordinary Category."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oproduct|[Cc]ocone|[Cc]olimit|[Mm]apping",
+   "results": "{\"t\": \"2026-10-17T15:08:48Z\", \"tool\": \"grep\", \"query\": \"[Cc]oproduct|[Cc]ocone|[Cc]olimit|[Mm]apping\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searches return ordinary categorical coproducts or colimits of simplicial sets, not coherent colimits inside an arbitrary quasicategory. Read CombinedProducts.lean:70-104 and Products.lean:622-642; both assume an ordinary Category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coproduct of coproducts in a quasicategory has the same mapping space universal property as the flattened family",
+   "results": "{\"t\": \"2026-10-17T15:08:49Z\", \"tool\": \"leansearch\", \"query\": \"A coproduct of coproducts in a quasicategory has the same mapping space universal property as the flattened family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instHasCoproductSigmaFstSndOfSigmaObj\", \"CategoryTheory.Limits.sigmaSigmaIso\", \"CategoryTheory.Limits.Sigma.ι_comp_map'_assoc\", \"CategoryTheory.Limits.coprod.desc'\", \"CategoryTheory.Limits.coprod.map\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.finiteSubcoproductsCocone_pt\", \"CategoryTheory.ObjectProperty.coproductFrom\", \"CategoryTheory.Limits.FormalCoproduct.mk\"], \"digest\": \"ea6e98f0448c2b4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: searches return ordinary categorical coproducts or colimits of simplicial sets, not coherent colimits inside an arbitrary quasicategory. Read CombinedProducts.lean:70-104 and Products.lean:622-642; both assume an ordinary Category."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-finite-coproduct-envelope",
@@ -86,5 +218,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-finite-coproduct-regrouping",
+  "worker": "stage1",
+  "summary": "Six-step mapping-space proof using existing coherent cone calculus, mapping composition, Hom bifunctor and homotopy-pullback invariance. Discrete cone spaces are identified degreewise, finite products of block equivalences are reduced to pullback invariance, and the specified triangles compare the actual restriction maps. Statement unchanged; no new nodes. Empty outer family and empty blocks checked.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-coefficient adjunction: supporting operadic presentability argument; finite-coproduct extension of an arbitrary indexing diagram before taking a sifted colimit. Supporting parent proof step 5: regrouping singleton coproduct legs into finite blocks.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 1, 2 and 6 use its generic coherent cocone mapping-space criterion and Kan mapping-space assertion. No statement of this unit replaces this foundational cone calculus; it is used as a black box, not to replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-c68997d92",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-c68997d92 (reviewer sub-agent of L); spot-checked: I read the whole item: all six steps and the full statement of every cited node. I also read lem-coef-infinity-pinch-comparison, def-coef-infinity-category-of-spaces, all ten steps of the parent envelope (step 8 is the only user) and the unit. The statement is the standard regrouping/cancellation of coproducts in an infinity-category, the colimit dual of Kerodon 7.6.1.23, and it is true. Kerodon is not archived and I did not fetch it, so I checked the statement mathematically. I tested S empty (both sides say z is initial), a single block, some and all blocks empty, and ordinary nerves. Step 1 is correct: Fun(I,E) is the product of copies of E and Map is the product of coordinate Maps, degreewise. Step 3 is a valid specialization of homotopy-pullback invariance with W=W'=* and c=id, where P=UxV, followed by finite induction; the elementary mark is acceptable. Step 4 takes associativity at the vertex (v_s,u_sr), the 2-simplex class equation and class-dependence of precomposition from mapping-composition, and gives a homotopy of whole-space maps. Step 5's Hom-bifunctor edges, universe choice and products of functors through N_hc(Kan) are sound. Step 6's 2-out-of-3 and homotopy invariance are correct. No other colimits are used and there are no new nodes. My rg search over dag/nodes found no duplicate; lem-coef-infinity-limits-products-pullbacks and the labelled-coproduct node state different things. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus: it is a generic cocone criterion that no node of this unit gives, and other nodes of the unit cite it the same way. No SGA source is used and the statement is unchanged. FIX: Step 1 silently identified the cone-calculus map g -> Delta_I(g) o lambda with coordinatewise precomposition. I added one sentence deriving this from the characterization in lem-coef-infinity-mapping-composition: V, theta, ell and the right-pinch maps j are all defined by restriction or precomposition, so for a product quasicategory they are products. I added that node to Step 1's uses; it was already in proof_deps. The corrected whole file is fixes/dag/nodes/sec-six-functors/lem-coef-finite-coproduct-regrouping.json.; 1 file(s) fixed by the reviewer"
  }
 }
