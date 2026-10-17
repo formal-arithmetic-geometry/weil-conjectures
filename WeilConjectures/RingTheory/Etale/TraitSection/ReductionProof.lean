@@ -98,7 +98,15 @@ theorem etale_localization_integralClosure_of_baseChange (ε : B →ₐ[R₀] R�
     rw [IsScalarTower.algebraMap_smul (A := Bk) b x |>.symm, smul_comm g]
     exact (IsScalarTower.algebraMap_smul (A := Bk) b (g • x))⟩
   letI := Algebra.TraitSection.rightTensorAction (B := B) (B₁ := B₁) (L := L) G
-  have : SMulCommClass G Bk₁ L₁ := sorry
+  have hfixι (g : G) (k : Bk₁) : g • algebraMap Bk₁ L₁ k = algebraMap Bk₁ L₁ k := by
+    induction k using TensorProduct.induction_on with
+    | zero => rw [map_zero, smul_zero]
+    | add a b ha hb => rw [map_add, smul_add, ha, hb]
+    | tmul b c =>
+      change b ⊗ₜ[B] (g • algebraMap Bk L c) = b ⊗ₜ[B] algebraMap Bk L c
+      rw [smul_algebraMap]
+  have : SMulCommClass G Bk₁ L₁ := ⟨fun g k x ↦ by
+    rw [Algebra.smul_def, Algebra.smul_def, smul_mul', hfixι]⟩
   have hfix₁ (x : L₁) (hx : ∀ g : G, g • x = x) : x ∈ Set.range (algebraMap Bk₁ L₁) :=
     Algebra.TraitSection.mem_range_of_forall_smul_eq (Bk := Bk) G hfix x hx
   have hrank₁ (p) : Module.rankAtStalk (R := Bk₁) L₁ p = Nat.card G := sorry
