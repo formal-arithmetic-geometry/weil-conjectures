@@ -62,12 +62,12 @@ theorem projectionMapAssociativity {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompacti
     ProjectionMapAssociativity (ModuleCat.{u + 1} Λ) f :=
   sorry
 
-/-- Blueprints `sk-thm-sf-comp-composition`, `sk-prop-sf-pf-coherence` and `sk-thm-sf-package`
-(clause (2)): the composition law for `Rf_!` and its coherence with the projection formula and
-with base change.
+/-- Blueprints `sk-prop-sf-pf-coherence` and `sk-thm-sf-package` (clause (2)): the coherence of
+the composition law for `Rf_!` with the projection formula and with base change.
 
 There is a composition isomorphism `E f g h w : Rh_! ≅ Rf_! ⋙ Rg_!` for all `f`, `g` and
-`h = f ≫ g` admitting compactifications (`sk-thm-sf-comp-composition`) such that
+`h = f ≫ g` admitting compactifications (the composition law itself is
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`) such that
 1. (`sk-prop-sf-pf-coherence`, the pentagon for composable `f`, `g`, compatible with the
    composition law) the projection maps compose: for `M` on `X` and `N` on `Z`,
    ```

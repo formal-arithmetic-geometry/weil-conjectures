@@ -104,10 +104,13 @@ theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf 
 
 end LowerShriek
 
-/-- **Finite direct images are exact** (blueprint: `lemma-weil-pbc-finite-direct-image-exact`,
-with the passage to `ℚ̄_ℓ`-coefficients of `def-weil-pbc-qbar-category`): for a finite morphism
-`p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for
-`r > 0`. -/
+/-- **Finite direct images are exact** for Weil sheaves (blueprint `def-weil-pbc-qbar-category`):
+for a finite morphism `p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil
+sheaf vanish for `r > 0`.
+
+This is the passage to pro-étale `ℚ̄_ℓ`-coefficients of the exactness of finite direct images
+for étale sheaves, which is proved as
+`AlgebraicGeometry.Etale.isZero_homology_rightDerivedFunctor_lowerStar_of_isFinite`. -/
 theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
     [IsFinite p] [p.IsOver (Spec (CommRingCat.of k₀))]

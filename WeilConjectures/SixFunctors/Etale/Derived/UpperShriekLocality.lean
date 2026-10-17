@@ -190,7 +190,7 @@ noncomputable def rightDerivedLowerShriekProperIso :
 
 /-- The adjunction `Rp_* ⊣ Rp^!` for a proper `p`: the adjunction `Rp_! ⊣ Rp^!` transported
 along `Rp_! ≅ Rp_*`. -/
-noncomputable def rightDerivedLowerStarUpperShriekAdjunction :
+noncomputable def rightDerivedLowerStarUpperShriekAdjunctionOfIsProper :
     R((p)_*[ModuleCat.{u + 1} Λ]) ⊣ R(p)^![ModuleCat.{u + 1} Λ] :=
   (rightDerivedUpperShriekAdjunction _ p).ofNatIsoLeft (rightDerivedLowerShriekProperIso Λ p)
 
@@ -206,7 +206,7 @@ noncomputable def rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction
     Rf_!(c)[ModuleCat.{u + 1} Λ] ⊣ R(c.g)^![ModuleCat.{u + 1} Λ] ⋙
       D((c.i)^*[ModuleCat.{u + 1} Λ]) :=
   (derivedOpenImmersionLowerShriekUpperStarAdjunction _ c.i).comp
-    (rightDerivedLowerStarUpperShriekAdjunction Λ c.g)
+    (rightDerivedLowerStarUpperShriekAdjunctionOfIsProper Λ c.g)
 
 /-- Blueprint `det-sf-mate-compactification`: the counit of
 `Rf_!(c) ⊣ Rp^! ⋙ Di^*` is the composite `Rp_* i_! i^* Rp^! N ⟶ Rp_* Rp^! N ⟶ N` of the
@@ -217,7 +217,7 @@ lemma rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction_counit_app
       R((c.g)_*[ModuleCat.{u + 1} Λ]).map
           ((derivedOpenImmersionLowerShriekUpperStarAdjunction _ c.i).counit.app
             (R(c.g)^![ModuleCat.{u + 1} Λ].obj N)) ≫
-        (rightDerivedLowerStarUpperShriekAdjunction Λ c.g).counit.app N := by
+        (rightDerivedLowerStarUpperShriekAdjunctionOfIsProper Λ c.g).counit.app N := by
   simp [rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction]
 
 variable [HasCompactification f] [QuasiCompact f]
