@@ -10,9 +10,52 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-cbc-internal-hom-fibration-corner-map] to the degreewise injection $\\varnothing\\hookrightarrow C$ and the given Kan fibration $q:E\\to L$. Since $\\operatorname{Fun}(\\varnothing,E)$ and $\\operatorname{Fun}(\\varnothing,L)$ are one-point simplicial sets, its corner map identifies with the Kan fibration $q_C:\\operatorname{Fun}(C,E)\\to\\operatorname{Fun}(C,L)$ given by postcomposition. The formula $d=c\\circ(i\\times\\mathrm{id}_{\\Delta^1}):C\\times\\Delta^1\\to L$ defines an edge of the target, by the internal-hom definition in [def-cbc-enhanced-diagrams-cones]. Its final endpoint is $i=qa$. Lift this edge through $q_C$ with prescribed final vertex $a$, using the horn $\\Lambda^1_1=\\{1\\}\\hookrightarrow\\Delta^1$. The lifted edge is a map $A:C\\times\\Delta^1\\to E$ with $qA=d$ and $A(-,1)=a$. Put $A_0=A(-,0)$. Then $qA_0=\\operatorname{const}_b\\circ i$, so pairing $A_0$ with the unique map $C\\to\\{b\\}$ defines $u:C\\to K=\\{b\\}\\times_LE$ by the degreewise pullback formula.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+    "place": "SSet.fibration_pullbackObjObjπ, lines 70-93, specialized to the empty inclusion into C; agent dimension-one final-endpoint horn lift"
+   }
+  },
+  {
+   "text": "Use the assumed extension property on the map $u:C\\to K$ from step 1 to choose $v:L\\to K$ satisfying $vi=u$. Let $\\widetilde v:L\\to E$ be its composite with the pullback projection $K\\to E$. The pullback identity gives $q\\widetilde v=\\operatorname{const}_b:L\\to L$, and $vi=u$ gives $\\widetilde v i=A_0$. These are equalities of simplicial maps, since the products and pullbacks in [def-cbc-enhanced-diagrams-cones] are degreewise.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+    "place": "Agent lemma, fiber-extension hypothesis in the statement"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-internal-hom-fibration-corner-map] to $i:C\\hookrightarrow L$ itself and $q:E\\to L$. Its Kan corner map is $r:\\operatorname{Fun}(L,E)\\to T$, where $T=\\operatorname{Fun}(C,E)\\times_{\\operatorname{Fun}(C,L)}\\operatorname{Fun}(L,L)$. By [def-cbc-enhanced-diagrams-cones], $A$ is an edge of the first factor and $c$ an edge of the second. The identity $qA=c(i\\times\\mathrm{id})$ is precisely their compatibility in the pullback, so $(A,c)$ is an edge of $T$. Its initial vertex is $(A_0,\\operatorname{const}_b)=r(\\widetilde v)$ by step 2. Lift this edge through $r$ with prescribed initial vertex $\\widetilde v$, using $\\Lambda^1_0=\\{0\\}\\hookrightarrow\\Delta^1$. The resulting edge of $\\operatorname{Fun}(L,E)$ is $H:L\\times\\Delta^1\\to E$ with $qH=c$ and $H(i\\times\\mathrm{id})=A$. Set $s=H(-,1)$. Evaluating the first equality at $1$ gives $qs=c(-,1)=\\mathrm{id}_L$, and evaluating the second gives $si=A(-,1)=a$, as required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+    "place": "SSet.fibration_pullbackObjObjπ, lines 70-93, applied to i:C→L; agent dimension-one initial-endpoint horn lift and evaluation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-fibration-corner-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+  "place": "SSet.fibration_pullbackObjObjπ, lines 70-93, with the contraction and fiber-extension construction written out"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,10 +112,24 @@
    "results": "{\"t\": \"2026-10-17T07:08:30Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.Fibration, \\\"SSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instFibrationOfIsIso\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.horn.IsCompatible.lift\", \"SSet.horn.IsCompatible.lift_comp\", \"SSet.horn.IsCompatible.δ_lift\", \"SSet.horn.IsCompatible.lift_comp_assoc\", \"SSet.horn.IsCompatible.δ_lift_assoc\"], \"digest\": \"996ee0d2644f01c7\"}",
    "date": "2026-10-17",
    "verdict": "No match. The hits supply horn lifting, exponentiation/corner fibrations, relative homotopy composition, or strict Segal fillers. None states section extension over a specified contraction from the extension property in a single fiber. SSet.fibration_pullbackObjObjπ (PushoutProduct.lean:70-93) is an ingredient, already represented by lem-cbc-internal-hom-fibration-corner-map; applying it requires two distinct homotopy lifts separated by a fiber extension, so this is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Kan fibration over a simplicial set with a specified contraction admits extension of partial sections if maps into the chosen vertex fiber extend",
+   "results": "{\"t\": \"2026-10-17T08:36:00Z\", \"tool\": \"leansearch\", \"query\": \"A Kan fibration over a simplicial set with a specified contraction admits extension of partial sections if maps into the chosen vertex fiber extend\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.Bicategory.LeftExtension.IsAbsKan.isKan\"], \"digest\": \"0d22b76a10f77482\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the logged hits: generic horn-lifting, simplicial subcomplex lift, relative morphism, and strict Segal extension results do not assert section extension from a specified contraction and extension in one strict fiber. The corner-map theorem is an ingredient already represented by lem-cbc-internal-hom-fibration-corner-map; two path lifts and an intervening fiber extension are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a section of a Kan fibration over a simplicial subset of a base contracted to a vertex, assuming maps into that vertex fiber extend",
+   "results": "{\"t\": \"2026-10-17T08:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a section of a Kan fibration over a simplicial subset of a base contracted to a vertex, assuming maps into that vertex fiber extend\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Subcomplex.lift\", \"SSet.KanComplex.hornFilling\", \"SSet.RelativeMorphism.ofSimplex₀\", \"SSet.modelCategoryQuillen.J\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"4db1795a9e4556dd\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the logged hits: generic horn-lifting, simplicial subcomplex lift, relative morphism, and strict Segal extension results do not assert section extension from a specified contraction and extension in one strict fiber. The corner-map theorem is an ingredient already represented by lem-cbc-internal-hom-fibration-corner-map; two path lifts and an intervening fiber extension are needed."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-kan-fibration-fiber-criterion",
@@ -106,5 +163,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-kan-contracted-base-section-extension",
+  "worker": "stage1",
+  "summary": "Retained the exact statement and split its proof into final-endpoint path lifting through Fun(C,q), the assumed extension in the vertex fiber, and initial-endpoint path lifting through the corner map for i:C→L. Corrected the earlier sandbox attempt, which applied the corner theorem to incorrectly indexed cylinder maps. The only non-elementary dependency is the existing Mathlib corner-map node; no new nodes or statement dependencies are needed.",
+  "blueprint": "Realizes the proof opening and the Kan-fibration foundation used by step 4 of lem-cbc-kan-fibration-fiber-criterion: transport the boundary section along the prescribed contraction, extend the resulting fiber map, and lift back relative to C."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-8f7a5eeab",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-8f7a5eeab (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged; 3 steps) and both cited statements, def-cbc-enhanced-diagrams-cones (horn convention, Fun(K,C)_n=Hom(K×Δ^n,C), degreewise pullbacks) and the Mathlib leaf lem-cbc-internal-hom-fibration-corner-map. Checked the leaf against Mathlib PushoutProduct.lean:70-93 (SSet.fibration_pullbackObjObjπ). Also read the parent lem-cbc-kan-fibration-fiber-criterion: its step 5 applies this item with L=Δ^n, C=∂Δ^n, and step 4 supplies the fiber hypothesis. Read the unit sk-prop-sf-cbc and the blueprint main-20261015 thm-cbc-finite-level-proetale proof opening. Step 1: for the corner map on ∅→C, Fun(∅,−) is a single point, so the map is q_C. d=c(i×id) has 1-vertex i=qa. Λ¹₁={1} by the def node. The lift A gives qA₀=const_b, hence u:C→K. Correct. Step 2 is the hypothesis plus pullback projections (qṽ=const_b, ṽi=A₀) and is correctly marked elementary. Step 3: the corner map for i lands in T=Fun(C,E)×_{Fun(C,L)}Fun(L,L). (A,c) lies in T because qA=c(i×id). Its 0-vertex (A₀,const_b) equals r(ṽ). The lift over Λ¹₀={0} gives H with qH=c and H(i×id)=A, so s=H(−,1) has qs=id and si=a. Correct. All four hypotheses are used; no Kan property of L or E and no fixed basepoint is assumed. Small cases: C=∅ (gives a nonempty fiber and a global section), L=Δ⁰, i=id, nonconstant c(b,−). No new nodes. An rg search over dag/nodes found no duplicate. The only citations are a same-unit Mathlib leaf and a definition, so the route is fine and no tool_uses are needed. No SGA citation. A–F all pass. No changes made."
  }
 }

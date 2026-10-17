@@ -1,0 +1,84 @@
+{
+ "id": "lem-sfb-trace-base-change-first",
+ "kind": "statement",
+ "title": "Trace and base-change rearrangement before the first triangle",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$. Schemes are separated finite-type $k$-schemes and morphisms are $k$-morphisms [sk-def-sfb-dc-setting]. Write $R_Z=\\mathcal O_{E,Z}$ for the pulled-back condensed coefficient ring, $D(Z)=D(\\Mod_{R_Z})$ for its unbounded derived category [sk-def-sfb-module-derived-pushpull], and $\\mathcal L(Z)=\\Loc(\\Dbc(Z,\\mathcal O_E))$ [sk-def-sfb-constructible, sk-def-localizing-closure]. Pullbacks and direct images are the canonical derived functors with adjunction $h^*\\dashv Rh_*$ [def-sfb-module-derived-pushpull-adjunction], and pullback coefficients are identified by [sk-prop-sfb-cartesian-coefficients]. All tensors are derived tensors over $R_Z$ [sk-def-sfb-derived-tensor-hom]. For a proper $h:Z\\to B$, let $\\pi_{h,L,N}:L\\otimes Rh_*N\\to Rh_*(h^*L\\otimes N)$ be the canonical projection map, the adjoint transpose of $1\\otimes c_{h,N}$, where $c_h$ is the canonical counit.\n\nLet $f:X\\to Y$ be proper, let $W=X\\times_YX$ with projections $p_1,p_2$ [def-weil-pbc-cartesian-square], and use the canonical identification $fp_1=fp_2$. Put $T_Y=R_Y(1)[2]$, $T_X=f^*T_Y$, and $T_W=p_1^*T_X=p_2^*T_X$, with twists as in [sk-def-sp-tate-twist] and pullback/tensor comparisons as in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let $b_2:f^*Rf_*\\to Rp_{2*}p_1^*$ and $b_1:f^*Rf_*\\to Rp_{1*}p_2^*$ be the canonical base-change mates [def-weil-pbc-adjunction-mate]. Assume these and the projection maps used below are isomorphisms on $\\mathcal L$ and that the displayed functors preserve $\\mathcal L$. Take morphisms $t:Rf_*T_X\\to R_Y$ and $t_i:Rp_{i*}T_W\\to R_X$ satisfying $t_i\\circ b_{i,T_X}=f^*t$ for $i=1,2$. Define $G(K)=f^*K\\otimes T_X$ and\n$$e_K=(1_K\\otimes t)\\circ\\pi_{f,K,T_X}^{-1}:Rf_*GK\\to K.$$\nFor $N\\in\\mathcal L(X)$ define the natural isomorphism\n$$B_N:Rp_{2*}(p_1^*N\\otimes T_W)\\xrightarrow{\\pi_{p_2,T_X,p_1^*N}^{-1}}Rp_{2*}p_1^*N\\otimes T_X\\xrightarrow{b_{2,N}^{-1}\\otimes1}GRf_*N,$$\nwhere the first arrow uses the canonical tensor symmetries.\n\nFor every $N\\in\\mathcal L(X)$ one has\n$$e_{Rf_*N}\\circ Rf_*(B_N)=Rf_*(1_N\\otimes t_1)\\circ Rf_*(\\pi_{p_1,N,T_W}^{-1}).$$\nThe source of the left side is $Rf_*Rp_{2*}(p_1^*N\\otimes T_W)$; that of the right side is identified with it by $Rf_*Rp_{2*}\\simeq R(fp_2)_*=R(fp_1)_*\\simeq Rf_*Rp_{1*}$. Both targets are $Rf_*N$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "(1), first triangle: reassociate q p_2 = q p_1 and move M outside Rp_1*"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-cartesian-square",
+  "sk-def-sp-tate-twist",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism, the tensor projection formula and proper base change commute with a trace map on a pulled-back invertible coefficient object",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit tensor projection map is compatible with a Cartesian square and the pullback of a linear functional",
+   "results": "8 hits; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategorySnd_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategorySnd_mapPullbackAdj_unit_app, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_unit_app, TensorProduct.counit_def, FGModuleCat.FGModuleCatEvaluation_apply, FGModuleCat.FGModuleCatEvaluation_apply'",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"baseChange\"",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|rightAdjointProjectionMap|trace.*baseChange",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of proper base change and projection formula with an integration trace on derived sheaves of modules",
+   "results": "8 hits; LinearMap.trace_baseChange, IsBaseChange.comp_iff, Algebra.intTrace_eq_trace, AlgebraicGeometry.IsProper.isStableUnderBaseChange, IsBaseChange.directSumPow, Algebra.algebraMap_intTrace, SheafOfModules.sheafificationCompPullback, Algebra.intTrace.congr_simp",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-thm-int-restriction-line",
+  "date": "2026-10-17",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "place": "(1), first triangle: reassociate q p_2 = q p_1 and move M outside Rp_1*",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

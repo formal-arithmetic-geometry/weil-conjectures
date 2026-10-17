@@ -10,9 +10,104 @@
  "stmt_deps": [
   "lem-coef-marked-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T(X,Y)_n=\\operatorname{Hom}_{\\mathrm{sSet}^+}(X\\times(\\Delta^n)^\\sharp,Y)$. If $\\alpha:[m]\\to[n]$, the map $\\Delta(\\alpha):(\\Delta^m)^\\sharp\\to(\\Delta^n)^\\sharp$ is marked, because every edge of both parameters is marked. Precomposition with $1_X\\times\\Delta(\\alpha)$ defines the operator of $T(X,Y)$. The identity and composition rules for these operators follow from those for precomposition, so $T(X,Y)$ is a simplicial set. Since $\\Delta^0$ has one simplex in each degree and its sole edge is degenerate, the projection $X\\times(\\Delta^0)^\\sharp\\to X$ is a marked isomorphism. Thus the vertices of $T(X,Y)$ are exactly the marked maps $X\\to Y$.",
+   "uses": [
+    "lem-coef-marked-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph, printed p.154 (PDF page 172); sharp-parameter mapping property. Corollary 3.1.4.4, printed p.162 (PDF page 180), uses this enrichment. Both read online on 2026-10-17; the coordinate verifications are agent-written."
+   }
+  },
+  {
+   "text": "For $f\\in T(X,Y)_n$ and $g\\in T(Y,Z)_n$, form $X\\times(\\Delta^n)^\\sharp\\to Y\\times(\\Delta^n)^\\sharp\\to Z$, with first map $(f,\\operatorname{pr}_2)$ and second map $g$. The first map is marked: an edge $(e,t)$ is marked precisely when $e$ is marked in $X$, and then $f(e,t)$ is marked in $Y$ and $t$ is marked in the parameter. The resulting composite is $g(f(x,t),t)$. Restricting along $\\alpha$ restricts both $f$ and $g$, so this gives a simplicial composition map. Both triple composites evaluate to $h(g(f(x,t),t),t)$; composing with the constant family $(x,t)\\mapsto x$ evaluates to $f(x,t)$ on either side. This proves associativity and the unit laws, including the ordinary laws on vertices.",
+   "uses": [
+    "lem-coef-marked-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph, printed p.154 (PDF page 172); sharp-parameter mapping property. Corollary 3.1.4.4, printed p.162 (PDF page 180), uses this enrichment. Both read online on 2026-10-17; the coordinate verifications are agent-written."
+   }
+  },
+  {
+   "text": "Here is the sharp-parameter currying calculation, for any simplicial set $L$. A marked map $a:X\\times L^\\sharp\\to Y$ assigns to $\\ell\\in L_m$ the marked map $a\\circ(1_X\\times\\ell):X\\times(\\Delta^m)^\\sharp\\to Y$, where $\\ell$ denotes the simplex map. This is a simplicial map $b:L\\to T(X,Y)$ by restriction. Conversely, given such a $b$, define $a_m(x,\\ell)=(b_m(\\ell))_m(x,\\mathrm{id}_{[m]})$. For $\\alpha:[r]\\to[m]$, naturality of $b$ and of $b_m(\\ell)$ gives\n$$a_r(\\alpha^*x,\\alpha^*\\ell)=(b_m(\\ell))_r(\\alpha^*x,\\alpha)=\\alpha^*a_m(x,\\ell).$$\nThus $a$ is simplicial. For a marked edge $(e,\\ell)$ of $X\\times L^\\sharp$, the edge $(e,\\mathrm{id}_{[1]})$ of $X\\times(\\Delta^1)^\\sharp$ is marked; its image under the marked map $b_1(\\ell)$ is $a_1(e,\\ell)$. Hence $a$ preserves markings.",
+   "uses": [
+    "lem-coef-marked-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph, printed p.154 (PDF page 172); sharp-parameter mapping property. Corollary 3.1.4.4, printed p.162 (PDF page 180), uses this enrichment. Both read online on 2026-10-17; the coordinate verifications are agent-written."
+   }
+  },
+  {
+   "text": "The two constructions in Step 3 are inverse. Starting with $a$ and evaluating its restriction at the identity simplex recovers $a_m(x,\\ell)$. Starting with $b$, the recovered map associated to $\\ell\\in L_m$ has, at $x\\in X_r$ and $\\tau:[r]\\to[m]$, value\n$$a_r(x,\\tau^*\\ell)=(b_r(\\tau^*\\ell))_r(x,\\mathrm{id}_{[r]})=(b_m(\\ell))_r(x,\\tau).$$\nIt is therefore exactly $b_m(\\ell)$ in every degree. We obtain a bijection $\\operatorname{Hom}_{\\mathrm{sSet}^+}(X\\times L^\\sharp,Y)\\cong\\operatorname{Hom}_{\\mathrm{sSet}}(L,T(X,Y))$. Its formulas commute with a map $L'\\to L$, a marked map $X'\\to X$, and a marked map $Y\\to Y'$: each side respectively restricts $\\ell$, substitutes for $x$, or postcomposes the displayed value. This also proves naturality, without a density or colimit theorem.",
+   "uses": [
+    "lem-coef-marked-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph, printed p.154 (PDF page 172); sharp-parameter mapping property. Corollary 3.1.4.4, printed p.162 (PDF page 180), uses this enrichment. Both read online on 2026-10-17; the coordinate verifications are agent-written."
+   }
+  },
+  {
+   "text": "Apply Step 4 with $L=K\\times\\Delta^n$. The marked sets $(K\\times\\Delta^n)^\\sharp$ and $K^\\sharp\\times(\\Delta^n)^\\sharp$ agree, since an edge is marked on both sides regardless of its coordinates. Reassociating the products gives bijections\n$$T(X\\times K^\\sharp,Y)_n\\cong\\operatorname{Hom}_{\\mathrm{sSet}}(K\\times\\Delta^n,T(X,Y))=\\operatorname{Fun}(K,T(X,Y))_n.$$\nNaturality in $L$ from Step 4, with the map $1_K\\times\\Delta(\\alpha)$, proves compatibility with every simplicial operator in $n$. The inverse bijections have the same compatibility, so these degreewise bijections form the first required simplicial isomorphism. They exhibit $X\\times K^\\sharp$ as the tensor.",
+   "uses": [
+    "lem-coef-marked-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph, printed p.154 (PDF page 172); sharp-parameter mapping property. Corollary 3.1.4.4, printed p.162 (PDF page 180), uses this enrichment. Both read online on 2026-10-17; the coordinate verifications are agent-written."
+   }
+  },
+  {
+   "text": "Apply the exponential adjunction in [lem-coef-marked-internal-hom] to $Z=X\\times(\\Delta^n)^\\sharp$, exponent $K^\\sharp$, and target $Y$. It gives\n$$T(X,H(K^\\sharp,Y))_n\\cong\\operatorname{Hom}_{\\mathrm{sSet}^+}((X\\times(\\Delta^n)^\\sharp)\\times K^\\sharp,Y).$$\nInterchanging the last two factors identifies the right side with $T(X\\times K^\\sharp,Y)_n$: both product markings require exactly that the $X$-edge be marked. The adjunction's naturality and this coordinate permutation commute with all restrictions in $n$. Combine this simplicial isomorphism with Step 5, reversing it where necessary, to obtain $\\operatorname{Fun}(K,T(X,Y))\\cong T(X,H(K^\\sharp,Y))$. This exhibits $H(K^\\sharp,Y)$ as the cotensor.",
+   "uses": [
+    "lem-coef-marked-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph, printed p.154 (PDF page 172); sharp-parameter mapping property. Corollary 3.1.4.4, printed p.162 (PDF page 180), uses this enrichment. Both read online on 2026-10-17; the coordinate verifications are agent-written."
+   }
+  },
+  {
+   "text": "The comparisons in Steps 5 and 6 use the same map on the three factors. Explicitly, if $a:X\\times K^\\sharp\\times(\\Delta^n)^\\sharp\\to Y$, its tensor transpose sends $(k,t)\\in K_m\\times(\\Delta^n)_m$ to the map on $X\\times(\\Delta^m)^\\sharp$ with value $(x,s)\\mapsto a(x,s^*k,s^*t)$, for $s:[r]\\to[m]$ and $x\\in X_r$. Its cotensor transpose sends $(x,t)$ to the map $k\\mapsto a(x,k,t)$ under the marked exponential adjunction. Consequently precomposition, postcomposition and parameter restriction on either description evaluate to exactly the same value of $a$. For composition of parameter families, both descriptions give $g(f(x,k,t),t)$; identities give the unchanged value. This verifies the stated compatibility with composition and identities. In particular, the tensor universal element sends $k$ to $(x\\mapsto(x,k))$ and the cotensor universal element is evaluation $(k,h)\\mapsto h(k)$; the two comparisons are induced by composition with these elements.",
+   "uses": [
+    "lem-coef-marked-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph, printed p.154 (PDF page 172); sharp-parameter mapping property. Corollary 3.1.4.4, printed p.162 (PDF page 180), uses this enrichment. Both read online on 2026-10-17; the coordinate verifications are agent-written."
+   }
+  },
+  {
+   "text": "All degreewise products, subsets of edges, sets of maps and the countably indexed simplicial families used above belong to the input Grothendieck universe. In particular, the marked internal Hom and its adjunction stay there by the last sentence of [lem-coef-marked-internal-hom]. The formulas make no fibrancy, nonemptiness or finiteness assumption on $X,Y,K$. For $K=\\varnothing$, the tensor is empty and the cotensor is $H(\\varnothing,Y)$, the terminal marked point; both sides of either adjunction are terminal simplicial sets. For $K=\\Delta^0$, the tensor and cotensor reduce to $X$ and $Y$, and the comparisons reduce to the identity mapping object. Thus the same constructions include these edge cases and establish the universe assertion.",
+   "uses": [
+    "lem-coef-marked-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph, printed p.154 (PDF page 172); sharp-parameter mapping property. Corollary 3.1.4.4, printed p.162 (PDF page 180), uses this enrichment. Both read online on 2026-10-17; the coordinate verifications are agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-marked-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient-adjunction calculation: auxiliary sharp enrichment used through the historical marked-model ancestry. Coordinate expansion of HTT Section 3.1.3 p.154 and the enrichment underlying Corollary 3.1.4.4 p.162, read online; HTT is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +143,45 @@
    "results": "{\"t\": \"2026-10-17T08:27:51Z\", \"tool\": \"grep\", \"query\": \"marked.*[Cc]losed|marked.*[Cc]otensor|marked.*[Ee]nrich|sharp.*[Tt]ensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Recover.lean\"], \"digest\": \"2afd0b32bbad3f62\"}",
    "date": "2026-10-17",
    "verdict": "no match: SimplicialCategory/Basic.lean:53-72 assumes an enrichment; SimplicialCategory/SimplicialObject.lean:33-40 gives enrichment for simplicial objects, not the marked category or sharp tensor. The only grep hit is an unrelated tactic comment in Tactic/Recover.lean:60. Unmarked SSet closure does not specialize in one line to the marked adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "marked.*[Ee]nrich|marked.*[Cc]otensor|sharp.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-17T12:09:36Z\", \"tool\": \"grep\", \"query\": \"marked.*[Ee]nrich|marked.*[Cc]otensor|sharp.*[Tt]ensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic simplicial enrichment and unmarked simplicial-set closure do not supply the sharp marking construction. Read Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean:15-27,45-72, SimplicialCategory/SimplicialObject.lean:33-40 and SimplicialSet/Monoidal.lean:34-76. The grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sharp mapping spaces of marked simplicial sets form a simplicial enrichment with tensor and cotensor adjunctions",
+   "results": "{\"t\": \"2026-10-17T12:09:36Z\", \"tool\": \"leansearch\", \"query\": \"The sharp mapping spaces of marked simplicial sets form a simplicial enrichment with tensor and cotensor adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.instMonoidalClosed\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"SSet.instCartesianMonoidalCategory\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\", \"SSet.instFiniteTensorUnit\", \"SSet.whiskerRight_app_apply\", \"SSet.Truncated.instCartesianMonoidalCategory\"], \"digest\": \"f2a049c20372fe2e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic simplicial enrichment and unmarked simplicial-set closure do not supply the sharp marking construction. Read Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean:15-27,45-72, SimplicialCategory/SimplicialObject.lean:33-40 and SimplicialSet/Monoidal.lean:34-76. The grep and Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-17T12:09:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialCategory\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic simplicial enrichment and unmarked simplicial-set closure do not supply the sharp marking construction. Read Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean:15-27,45-72, SimplicialCategory/SimplicialObject.lean:33-40 and SimplicialSet/Monoidal.lean:34-76. The grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sharp mapping simplicial sets of marked simplicial sets admit tensors by fully marked simplicial sets and cotensors by marked internal Hom",
+   "results": "{\"t\": \"2026-10-17T12:09:38Z\", \"tool\": \"leanfinder\", \"query\": \"Sharp mapping simplicial sets of marked simplicial sets admit tensors by fully marked simplicial sets and cotensors by marked internal Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"SSet.Truncated.instMonoidalClosed\", \"SSet.instCartesianMonoidalCategory\", \"SSet.Truncated.hoFunctor.monoidal\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.instFiniteTensorObj\", \"SSet.Truncated.instMonoidalTruncation\"], \"digest\": \"226d728fdaee3487\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic simplicial enrichment and unmarked simplicial-set closure do not supply the sharp marking construction. Read Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean:15-27,45-72, SimplicialCategory/SimplicialObject.lean:33-40 and SimplicialSet/Monoidal.lean:34-76. The grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial sets sharp mapping object Hom X times fully marked standard simplex tensor cotensor currying adjunction",
+   "results": "{\"t\": \"2026-10-17T12:10:42Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial sets sharp mapping object Hom X times fully marked standard simplex tensor cotensor currying adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"SSet.ι₁\", \"SSet.ι₀\", \"CategoryTheory.SimplicialCategory.sHom\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"SSet.Truncated.instMonoidalClosed\", \"SSet.Augmented.stdSimplex\", \"SSet.Augmented\"], \"digest\": \"a8e07573b87ebc7d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic simplicial enrichment and unmarked simplicial-set closure do not supply the sharp marking construction. Read Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean:15-27,45-72, SimplicialCategory/SimplicialObject.lean:33-40 and SimplicialSet/Monoidal.lean:34-76. The grep and Loogle returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-point-cartesian-model",
@@ -78,5 +208,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-sharp-enrichment",
+  "worker": "stage1",
+  "summary": "Unchanged statement, eight explicit elementary coordinate steps, no new nodes. Constructed restrictions and diagonal composition, verified sharp-parameter transposition and its inverse in every degree including marking preservation, specialized it to the tensor, and applied the existing marked internal Hom adjunction to the cotensor. Checked enriched compatibilities, empty and point parameters, arbitrary markings and universe bounds. Read HTT pp.154 and 162 online and the whole existing internal-Hom statement; repeated all search kinds with a second semantic phrasing and found no full Mathlib match or project attachment.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, paragraph 2, derived coefficient-adjunction / inverse-limit display, via the recorded marked-point model ancestry. Realizes the extracted marked-point model Step 7: sharp mapping composition and the tensor/cotensor adjunctions. No unit statement or route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-70f58072a",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-70f58072a (reviewer sub-agent of L); spot-checked: I read the whole item, its 8 steps, the full statement of the cited lem-coef-marked-internal-hom (same unit; its proof does not depend on the item, so there is no cycle), the parent lem-coef-marked-point-cartesian-model step that consumes the item, and the ancestor blueprint proof paragraph 2 (main-20261015). HTT §3.1.3 p.154 defines Map^♯ by Hom(K,Map^♯(X,Y))=Hom^+(X×K^♯,Y), and Cor. 3.1.4.4 uses tensor K^♯; the item's formulas agree with both. HTT is not archived, so the worker filed a WANTED line and proof_origin is agent. I recomputed every step myself: the restriction maps and vertices via X×(Δ^0)^♯≅X; diagonal composition, associativity and units; the currying naturality chain a_r(α^*x,α^*ℓ)=α^*a_m(x,ℓ) and the marking check at (e,id_[1]); both inverse compositions; (K×Δ^n)^♯=K^♯×(Δ^n)^♯; the cotensor from the cited node's natural bijection with Z=X×(Δ^n)^♯ and the factor swap; and the universe clause. Small cases: K=Δ^0 gives H((Δ^0)^♯,Y)≅Y; K=∅ gives tensor ∅ and a terminal cotensor; X=∅ gives terminal mapping objects. The elementary labels are justified because every step only unfolds definitions. proof_deps equals the union of the uses. There are no new nodes, no statement change, no SGA citation and no tool_uses. The rg duplicate search found only relative Map^ε_S nodes, which state no enrichment, so there is no duplicate. No fixes were made."
  }
 }
