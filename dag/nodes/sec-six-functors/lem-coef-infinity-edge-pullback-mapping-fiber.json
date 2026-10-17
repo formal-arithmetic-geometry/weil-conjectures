@@ -251,5 +251,40 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-aa93ed776 (reviewer sub-agent of L); spot-checked: PASS, no changes; I wrote no fixes. I read the item in full: statement unchanged, 9 steps, no new nodes. I also read the full statements of every cited node: def-cbc-enhanced-diagrams-cones (right-pinched Map with last-vertex operators, and the hofib model), def-coef-infinity-fibrations, the Mathlib leaf lem-coef-inner-anodyne-pushout-product (SSet.innerAnodyneExtensions_pushoutObjObjι'), lem-coef-infinity-inner-mapping-fiber, lem-coef-kan-pullback-path-comparison, lem-coef-infinity-mapping-composition and lem-coef-infinity-pinch-comparison. Statement checks: (2) maps K×Δ^{n+1}→Δ^1 are fixed by their vertices, so the only one is q_n∘pr (also for K empty), and its image under f is the right-pinched degeneracy of Δ_Kf. (3) The strict fiber is matched by (u,q_n pr) and is compatible with operators since q_n∘α^+=q_m. The hofib is exactly P(π,Δ^0→W), so path-comparison applies; its hypotheses (U, W, Δ^0 Kan, π a Kan fibration) come from inner-mapping-fiber applied to p_K and to Q→Δ^0. (4) I checked myself that composition classes are natural under simplicial functors, using naturality of θ, ℓ and the pinch inclusion and cancelling the homotopy equivalence j'. Step 1 is the pushout-product of an inner horn with ∅⊂K. Small cases tested: K empty, E=B=Δ^1, f degenerate, p=id, and two isolated objects over Δ^1 (empty Map, no nonemptiness assumed). Route: all cited statements are in sk-prop-sf-biduality-general, plus definitions and a Mathlib leaf, so no tool_uses are needed. There is no coefficient category or base change in this simplicial lemma. Duplicate search over the DAG (edge pullback, strict fiber, HTT 2.3.2.5/2.4.4.1, isofibration exponentiation, cocartesian mapping criterion, pattern edge detection) found no node stating the item. HTT is not archived (WANTED); the proof is correctly marked by=agent against the main-20261015 blueprint proof of prop-coef-integral-exceptional-adjoint, paragraph 2. No SGA source is used. Mathlib searches cover leansearch, loogle, leanfinder and grep."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f28e4f9c8",
+  "group": "N1",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. Hypotheses are exactly p inner, E and B quasicategories, f any edge, K any SSet.{u}; nothing extra. The frame's diagrams over constant 0/1 in Fun(K,E_f) are equivalent to the node's A:K→E_b, Z:K→E_s. (1): inner p_K, four quasicategory conjuncts, canonical iso d with both projections. (2): Unique interval simplices in every degree, and f_* gives the degeneracies of v with v.1=Δ_K f. (3): Kan total and base, J.rlp pi (all horns), strict-fiber iso e over forget=j_*, comparison c fixed coordinatewise as (forget, constant path at v) into the recorded homotopyFiber, and IsWeakHomotopyEquivalence. (4): RestrictionNatural over all a:L→K via MonoidalClosed.pre, checked satisfiable; Δ_K is the case a:K→Δ0. CoherentNatural states the node's image-of-composite convention, matching proof step 9; it is weak but faithful. Edge cases checked: empty K, degenerate f, empty fibers, empty E. Gates: no hollow defs, one sorry, all 15 docstrings with source and blueprint id, nine proof steps in the docstring, lines ≤100, statement verbatim, node differs only in lean. Report has a real Worker report; the Second reading section is the accepted post-2026-10-17 note. nt_compile.py --json on the snapshot module: rc=0, no errors or warnings, 1.8 s. Cosmetic only: redaction artifacts in the report's source prose."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EdgePullbackMappingFiber",
+  "declaration": "SSet.Enhanced.edge_pullback_mapping_fiber",
+  "declarations": [
+   "SSet.Enhanced.EdgePullbackFrame",
+   "SSet.Enhanced.EdgePullbackFrame.category",
+   "SSet.Enhanced.EdgePullbackFrame.inclusion",
+   "SSet.Enhanced.EdgePullbackFrame.projection",
+   "SSet.Enhanced.EdgePullbackFrame.domain",
+   "SSet.Enhanced.EdgePullbackFrame.total",
+   "SSet.Enhanced.EdgePullbackFrame.base",
+   "SSet.Enhanced.EdgePullbackFrame.pi",
+   "SSet.Enhanced.EdgePullbackFrame.forget",
+   "SSet.Enhanced.EdgePullbackFrame.interval",
+   "SSet.Enhanced.EdgePullbackFrame.IsComparison",
+   "SSet.Enhanced.EdgePullbackFrame.RestrictionNatural",
+   "SSet.Enhanced.EdgePullbackFrame.CoherentNatural",
+   "SSet.Enhanced.edge_pullback_mapping_fiber"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EdgePullbackMappingFiber.lean",
+  "statement": "theorem edge_pullback_mapping_fiber {E B : SSet.{u}} (p : E ⟶ B) [InnerFibration p] [Quasicategory E] [Quasicategory B] (f : Δ[1] ⟶ B) (F : EdgePullbackFrame p f) : InnerFibration ((ihom F.K).map p) ∧ Quasicategory ((ihom F.K).obj E) ∧ Quasicategory ((ihom F.K).obj B) ∧ Quasicategory (pullback p f) ∧ Quasicategory F.category ∧ (∃ d : F.category ≅ pullback ((ihom F.K).map p) ((ihom F.K).map f), d.hom ≫ pullback.fst _ _ = F.inclusion ∧ d.hom ≫ pullback.snd _ _ = F.projection) ∧ (∀ n : SimplexCategoryᵒᵖ, Nonempty (Unique (F.interval.obj n))) ∧ KanComplex F.domain ∧ KanComplex F.total ∧ KanComplex F.base ∧ SSet.modelCategoryQuillen.J.rlp F.pi ∧ ∃ (v : F.base _⦋0⦌) (e : F.domain ≅ fiber F.pi v) (c : F.domain ⟶ homotopyFiber F.pi v), F.IsComparison v e c ∧ (∀ (n : SimplexCategoryᵒᵖ) (s : F.interval.obj n), ((ihom F.K).map f).app _ s.1 = ((SSet.const (X := F.interval) v).app n s).1) ∧ F.RestrictionNatural v e c ∧ F.CoherentNatural v c",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The frame encodes the two fiber diagrams in the actual edge pullback, with their full constant-endpoint equations. The strict-fiber isomorphism has projection exactly mappingSpaceMap of j. Every simplex of the path comparison is specified to have that same first coordinate and the constant path at the unique base vertex. Naturality is stated for all indexing restrictions and all supplied coherent witnesses (zero-one words), including triangles and their higher restrictions. All helpers belong to this node; no dependency is redefined or strengthened."
  }
 }
