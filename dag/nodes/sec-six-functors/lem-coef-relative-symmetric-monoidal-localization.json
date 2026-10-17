@@ -24,7 +24,10 @@
   "place": "Proposition 4.1.7.4 and Remark 4.1.7.5 (printed pp. 485-486); Construction 4.1.7.1 fixes the system of arrows. Read online, not archived in literature/. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-relative-symmetric-operadic-algebras",
+  "def-coef-universally-localizing-simplicial-map",
+  "lem-coef-system-localization-universal"
  ],
  "proof": [
   {
@@ -182,5 +185,38 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e21ad7fd1",
+  "group": "NY",
+  "result": "fix",
+  "note": "Lean and dependency audit passed; fixed delivery-errors H1 by supplying a complete report replacement with substantive second-reading checks."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeSymmetricMonoidalLocalization",
+  "declaration": "SSet.Enhanced.relative_symmetric_monoidal_localization",
+  "declarations": [
+   "SSet.Enhanced.symmetricUnderlying",
+   "SSet.Enhanced.symmetricFiberInclusion",
+   "SSet.Enhanced.symmetricUnderlyingInclusion",
+   "SSet.Enhanced.IsSymmetricTransport",
+   "SSet.Enhanced.IsSymmetricTensorOperation",
+   "SSet.Enhanced.symmetricTensorWith",
+   "SSet.Enhanced.IsTensorStable",
+   "SSet.Enhanced.IsStrongSymmetricMonoidal",
+   "SSet.Enhanced.symmetricUnderlyingMap",
+   "SSet.Enhanced.strongMonoidalFunctorSubcomplex",
+   "SSet.Enhanced.strongWFunctorSubcomplex",
+   "SSet.Enhanced.relative_symmetric_monoidal_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeSymmetricMonoidalLocalization.lean",
+  "statement": "theorem relative_symmetric_monoidal_localization {E : SSet.{u}} (p : E ⟶ finStarBase.{u}) (hE : IsSymmetricInfinityOperad p) (W : (symmetricUnderlying p) _⦋1⦌ → Prop) (hW : IsEnhancedSystem (symmetricUnderlying p) W) (hTensor : IsTensorStable p W) : ∃ (F : SSet.{u}) (q : F ⟶ finStarBase.{u}) (f : E ⟶ F), IsSymmetricInfinityOperad q ∧ f ≫ q = p ∧ ∃ hf : f ≫ q = p, IsStrongSymmetricMonoidal p q f ∧ IsLocalizationAtEdges (symmetricUnderlyingMap f hf) {w | W w} ∧ ∀ (G : SSet.{u}) (r : G ⟶ finStarBase.{u}), IsSymmetricInfinityOperad r → ∃ e : (strongMonoidalFunctorSubcomplex q r).toSSet ⟶ (strongWFunctorSubcomplex p r W).toSSet, e ≫ (strongWFunctorSubcomplex p r W).ι = (strongMonoidalFunctorSubcomplex q r).ι ≫ (MonoidalClosed.pre f).app G ∧ IsFunctorEquivalence e",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Operadic encoding over the finite pointed-set skeleton; tensor stability is expressed through canonical cocartesian binary transports, and the conclusion uses the exact coherent edge-localization predicate plus the full strong-monoidal functor subcategories."
  }
 }
