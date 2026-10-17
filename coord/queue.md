@@ -12,7 +12,7 @@
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
-| `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | repair |
+| `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | proof |
 | `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | proof |
 | `Sheaf.CategoryTheory.DerivedPerfectSmallClassCore` | 7 | 1 | proof |
