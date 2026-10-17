@@ -208,5 +208,49 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-c60f7733a (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and all three new nodes in full, together with the statements of every cited node. Kerodon is not under literature/, so I checked the cited tags online, read-only, and the WANTED line and proof_origin.by=agent are correct. 03JT (Prop 8.1.1.15): its horns are Λ^n_{n-i}, and the basic subsets are exactly H_{n,k} of join-horn with k=n-i. 03JW (Prop 8.1.2.1): an isomorphism X→Y is initial in {X}×_{C^op}Tw(C). That matches twisted-pullback-identity-initial, whose extra hypothesis that P_x is a quasicategory is proved in Step 3, so there is no cycle. 03J6 (Cor 5.6.6.20): left fibrations U,V over C, F over C, an initial X̃, and F an equivalence iff F(X̃) is initial. That matches the criterion node in its sufficient direction over the base. 03K0 (Prop 8.1.2.10): two left fibrations, id_X initial, the image initial, then 5.6.6.20; Steps 3-5 follow this exactly. Step 2: the faces d_j delete the pair (j̄, j), the intersections are compatible, and Tw is a quasicategory only after the fibration property is proved. Step 4: the final-to-initial transfer through U_{D^op}(a,b)≅U_D(b,a)^op, |K^op|≅|K|, the cylinder lemma and the homotopy-weak lemma is valid for right-pinched mapping spaces. Step 6: Tw(C^op)≅Tw(C) via the swap j̄↔j exchanges the blocks and adds no extra opposite. Small cases: my own check/joinhorn.py finds an inner-horn filtration for every n≤4 and 0≤k<n, and none for the excluded k=n. For n=1 H is the spine of Δ^3. With n=0, and for ordinary categories (P_x≅x/C), both comparison maps behave as stated. The criterion holds over a point base. Duplicate search with rg over dag/nodes (twisted arrow, initial and left fibration, coslice, inner anodyne, corepresent; eleven candidates read) found none. No new node restates a clause of the item. Route: all proof deps are in sk-prop-sf-biduality-general apart from the definition def-cbc. No tool_uses are needed or accepted, and no SGA source is used. A transitive closure over 119 dependencies shows no cycle. Mathlib has no TwistedArrow or LeftFibration result and no such filtration, so no new node is a Mathlib leaf. No target, coefficient category or base-change morphism is touched. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TwistedArrowLeftFibration",
+  "declaration": "SSet.Enhanced.twistedArrow_left_fibration",
+  "declarations": [
+   "SSet.Enhanced.twistedOrdinal",
+   "SSet.Enhanced.twistedOrdinalMap",
+   "SSet.Enhanced.twistedOrdinal_relations",
+   "SSet.Enhanced.twistedOrdinalFunctor",
+   "SSet.Enhanced.twistedArrow",
+   "SSet.Enhanced.twistedArrowMap",
+   "SSet.Enhanced.twistedSource_naturality",
+   "SSet.Enhanced.twistedTarget_naturality",
+   "SSet.Enhanced.twistedSource",
+   "SSet.Enhanced.twistedTarget",
+   "SSet.Enhanced.twistedProjection",
+   "SSet.Enhanced.twistedSourceFiber",
+   "SSet.Enhanced.twistedSourceFiberInclusion",
+   "SSet.Enhanced.twistedTargetFiber",
+   "SSet.Enhanced.twistedTargetFiberInclusion",
+   "SSet.Enhanced.joinCoslice",
+   "SSet.Enhanced.joinCosliceProjection",
+   "SSet.Enhanced.joinSlicePostcomp",
+   "SSet.Enhanced.joinCoslicePostcomp",
+   "SSet.Enhanced.twistedCollapseFirst",
+   "SSet.Enhanced.twistedCollapseSecond",
+   "SSet.Enhanced.joinCosliceSimplex",
+   "SSet.Enhanced.twistedArrow_left_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TwistedArrowLeftFibration.lean",
+  "statement": "theorem twistedArrow_left_fibration : ∃ source : ∀ (C : SSet.{u}) (x : C _⦋0⦌), joinCoslice C x ⟶ twistedSourceFiber C x, ∃ target : ∀ (C : SSet.{u}) (y : C _⦋0⦌), (joinSlice (SSet.yonedaEquiv.symm y)).op ⟶ twistedTargetFiber C y, (∀ (C : SSet.{u}) [Quasicategory C], leftFibration (twistedProjection C) ∧ Quasicategory (twistedArrow C) ∧ (∀ x : C _⦋0⦌, Quasicategory (joinCoslice C x) ∧ Quasicategory (twistedSourceFiber C x) ∧ IsFunctorEquivalence (source C x) ∧ source C x ≫ twistedSourceFiberInclusion C x ≫ twistedTarget C = joinCosliceProjection C x) ∧ (∀ y : C _⦋0⦌, Quasicategory ((joinSlice (SSet.yonedaEquiv.symm y)).op) ∧ Quasicategory (twistedTargetFiber C y) ∧ IsFunctorEquivalence (target C y) ∧ target C y ≫ twistedTargetFiberInclusion C y ≫ twistedSource C = SSet.opFunctor.map (joinSliceProjection (SSet.yonedaEquiv.symm y)))) ∧ (∀ (C : SSet.{u}) (x : C _⦋0⦌) (n : SimplexCategoryᵒᵖ) (s : (joinCoslice C x).obj n), (source C x ≫ twistedSourceFiberInclusion C x).app n s = C.map (twistedCollapseFirst n.unop).op (joinCosliceSimplex C x n s)) ∧ (∀ (C : SSet.{u}) (y : C _⦋0⦌) (n : SimplexCategoryᵒᵖ) (s : ((joinSlice (SSet.yonedaEquiv.symm y)).op).obj n), (target C y ≫ twistedTargetFiberInclusion C y).app n s = C.map (twistedCollapseSecond n.unop).op (s.extension.app (op ⦋n.unop.len + 1⦌) (joinPointTopSimplex n.unop.len))) ∧ (∀ (C : SSet.{u}) (x : C _⦋0⦌), (∃ s : (joinCoslice C x) _⦋0⦌, joinCosliceSimplex C x (op ⦋0⦌) s = C.σ 0 x ∧ (source C x ≫ twistedSourceFiberInclusion C x).app (op ⦋0⦌) s = C.σ 0 x) ∧ (∃ s : ((joinSlice (SSet.yonedaEquiv.symm x)).op) _⦋0⦌, s.extension.app (op ⦋1⦌) (joinPointTopSimplex 0) = C.σ 0 x ∧ (target C x ≫ twistedTargetFiberInclusion C x).app (op ⦋0⦌) s = C.σ 0 x)) ∧ (∀ (C D : SSet.{u}) (f : C ⟶ D), twistedArrowMap f ≫ twistedProjection D = twistedProjection C ≫ (SSet.opFunctor.map f ⊗ₘ f)) ∧ (∀ (C D : SSet.{u}) (f : C ⟶ D) (x : C _⦋0⦌), source C x ≫ twistedSourceFiberInclusion C x ≫ twistedArrowMap f = joinCoslicePostcomp f x ≫ source D (f.app _ x) ≫ twistedSourceFiberInclusion D (f.app _ x)) ∧ (∀ (C D : SSet.{u}) (f : C ⟶ D) (y : C _⦋0⦌), target C y ≫ twistedTargetFiberInclusion C y ≫ twistedArrowMap f = SSet.opFunctor.map (joinSlicePostcomp f y) ≫ target D (f.app _ y) ≫ twistedTargetFiberInclusion D (f.app _ y))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses Mathlib ordinal concatenation, simplicial opposite, and the recorded join-slice and fibration notions. Helper proof obligations for the explicit ordinal construction belong to this node. The main existential comparison maps are uniquely specified on every simplex by the two block-collapse formulas; their equivalence, base equations, identities and naturality are all stated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94d7ad818",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read item node (7 steps, Kerodon 03JG/03JK/03JQ/03K0 + dual), the module (23 decls), report (real Worker report and Second reading by Q67), dependency decls leftFibration/fiber/IsFunctorEquivalence/JoinSliceSimplex/joinSlice/joinSliceProjection/joinPointTopSimplex, and Mathlib tensorHomOf/inl'/inr'/SSet.op. Tw(C) = twistedOrdinalFunctor.op ⋙ C with first-block operator rev.map θ = θ^op; λ a leftFibration under only [Quasicategory C]; coslice = op of recorded joinSlice in C^op, operators traced to id⋆θ; fibers via recorded fiber; existential source/target uniquely fixed in every degree by const⋆id / id⋆const collapse formulas after an injective pullback inclusion, so canonical and not arbitrary; IsFunctorEquivalence plus base triangles, identity-vertex and naturality clauses present. Node changed only in lean; dependency node files identical to base; statement verbatim; declarations complete; 4 sorry, all theorem proofs; docstrings and proof steps present; imports follow brief-stage2 l.104; no line >100 chars; one unrestricted universe u. Edge cases n=0, n=1, empty C ok. nt_compile.py --json: rc=0, 2.1 s, no diagnostics. No findings, no fixes."
  }
 }

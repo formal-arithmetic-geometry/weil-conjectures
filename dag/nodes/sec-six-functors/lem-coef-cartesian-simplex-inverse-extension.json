@@ -323,5 +323,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CartesianSimplexInverseExtension",
+  "declaration": "SSet.Marked.Over.cartesian_simplex_inverse_extension",
+  "file": "lean/Sheaf/AlgebraicTopology/CartesianSimplexInverseExtension.lean",
+  "statement": "theorem cartesian_simplex_inverse_extension (n : ℕ) (hn : 1 ≤ n) (X Y : Over (Δ[n] : SSet.{u})) (hX : IsNaturallyFibrant false X) (hY : IsNaturallyFibrant false Y) (f : X ⟶ Y) (hf : ∀ s : (Δ[n] : SSet.{u}) _⦋0⦌, Enhanced.IsFunctorEquivalence (fiberMap f s)) (rBoundary : pullObject (boundary n).ι Y ⟶ pullObject (boundary n).ι X) (hBoundary : (mapSharp (pullObject (boundary n).ι X) (pullObject (boundary n).ι X)) _⦋1⦌) (hBoundary₀ : (mapSharp (pullObject (boundary n).ι X) (pullObject (boundary n).ι X)).δ 1 hBoundary = mapVertex ((pull (boundary n).ι).map f ≫ rBoundary)) (hBoundary₁ : (mapSharp (pullObject (boundary n).ι X) (pullObject (boundary n).ι X)).δ 0 hBoundary = mapVertex (𝟙 _)) : ∃ (r : Y ⟶ X) (h : (mapSharp X X) _⦋1⦌), (mapSharp X X).δ 1 h = mapVertex (f ≫ r) ∧ (mapSharp X X).δ 0 h = mapVertex (𝟙 X) ∧ (pull (boundary n).ι).map r = rBoundary ∧ (pullback.snd (boundary n).ι X.hom.val ▷ (Δ[1] : SSet.{u})) ≫ h.left.val = hBoundary.left.val ≫ pullback.snd (boundary n).ι X.hom.val",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ba9e175a",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Checked all 11 clauses against the node and the dependency definitions (Over, IsNaturallyFibrant false, fiberMap/Enhanced.fiber, IsFunctorEquivalence, pullObject/pull, mapSharp/mapVertex/productLeft); nothing weaker or stronger. Source and target are δ1 = f≫r and δ0 = 𝟙. The boundary-cylinder equation through pullback.snd is exact equality (fst agrees automatically via productLeft). No added assumptions; single universe u. Edge cases covered: n=1, empty X/Y/fibers, non-injective f; n=0 is excluded by the node. No hollow definitions; source and blueprint docstrings present with all 11 proof steps; the only proof is sorry; no pro-etale content. lean.statement matches the file verbatim; the node differs from the base only in lean. Report has real Worker report and Second reading by Q92 sections. nt_compile.py --json on the snapshot: rc=0, 1.9 s, no errors or warnings. Not delivery faults: the interfaces live in the downstream MarkedRelativeCartesianModel module, which must be split before stage 3 can prove the downstream theorem (the landed dependency module has the same pattern); stale sandbox-PDF wording in source.place."
  }
 }

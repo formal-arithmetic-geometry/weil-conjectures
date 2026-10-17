@@ -30,7 +30,9 @@
   "def-weil-pbc-simplicial-set",
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-monoidal-infinity-category",
-  "lem-coef-infinity-free-module-bar"
+  "lem-coef-infinity-free-module-bar",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-infinity-sifted-colimit-calculus"
  ],
  "proof": [
   {
@@ -269,5 +271,38 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityMonadicBar",
+  "declaration": "SSet.Enhanced.infinity_monadic_bar",
+  "declarations": [
+   "SSet.Enhanced.monadicEdgeFamily",
+   "SSet.Enhanced.monadicWhisker",
+   "SSet.Enhanced.monadicPower",
+   "SSet.Enhanced.monadicIndexEdge",
+   "SSet.Enhanced.monadicBarFace",
+   "SSet.Enhanced.monadicBarDegeneracy",
+   "SSet.Enhanced.monadicBarAugmentation",
+   "SSet.Enhanced.monadicExtraDegeneracy",
+   "SSet.Enhanced.monadicMultiplication",
+   "SSet.Enhanced.monadicModuleActionIndex",
+   "SSet.Enhanced.monadicComparisonAction",
+   "SSet.Enhanced.infinity_monadic_bar"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityMonadicBar.lean",
+  "statement": "theorem infinity_monadic_bar {C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (L : C ⟶ D) (U : D ⟶ C) (adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L U) (hD : HasInfinityColimitsOfShape splitSimplicialIndex D) (hU : PreservesInfinityColimitsOfShape splitSimplicialIndex U) (hconservative : ∀ e : D _⦋1⦌, IsEquivalenceEdge C (U.app _ e) → IsEquivalenceEdge D e) : ∃ (T : CoherentMonad C) (K : D ⟶ coherentMonadModules T) (B : splitAugmentedIndex ⊗ D ⟶ D) (E : splitExtendedIndex ⊗ D ⟶ C), coherentMonadFunctor T = L ≫ U ∧ (coherentMonadUnitIndex ▷ C) ≫ T.action = monadicEdgeFamily adj.unitEdge ∧ monadicMultiplication T = monadicWhisker L U adj.counitEdge ∧ K ≫ coherentModuleForget T = U ∧ L ≫ K ≫ coherentModuleDiagram T = coherentFreeDiagram T ∧ monadicComparisonAction T K = monadicWhisker (𝟙 D) U adj.counitEdge ∧ IsFunctorEquivalence K ∧ IsFullyFaithful K ∧ lift (SSet.const splitAugmentationVertex) (𝟙 D) ≫ B = 𝟙 D ∧ (∀ r : ℕ, lift (SSet.const (coherentBarDegree r)) (𝟙 D) ≫ B = U ≫ coherentMonadPower T r ≫ L) ∧ (monadicBarAugmentation ▷ D) ≫ B = monadicEdgeFamily adj.counitEdge ∧ (∀ (r : ℕ) (i : Fin (r + 2)), (monadicBarFace r i ▷ D) ≫ B = monadicWhisker (monadicPower (U ≫ L) (r + 1 - i.val)) (monadicPower (U ≫ L) i.val) adj.counitEdge) ∧ (∀ (r : ℕ) (i : Fin (r + 1)), (monadicBarDegeneracy r i ▷ D) ≫ B = (𝟙 Δ[1] ⊗ₘ (monadicPower (U ≫ L) (r - i.val) ≫ U)) ≫ monadicEdgeFamily adj.unitEdge ≫ L ≫ monadicPower (U ≫ L) i.val) ∧ (splitExtensionIndexMap ▷ D) ≫ E = B ≫ U ∧ (∀ r : ℕ, (monadicExtraDegeneracy r ▷ D) ≫ E = monadicWhisker (U ≫ coherentMonadPower T r) (𝟙 C) adj.unitEdge) ∧ ∀ Z : D _⦋0⦌, IsSplitAugmentationColimit (coherentBarAt B Z)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed coherent monad/module, monoidal infinity-category, and sifted-colimit interfaces. Geometric realizations and preservation are exactly HasInfinityColimitsOfShape splitSimplicialIndex and PreservesInfinityColimitsOfShape splitSimplicialIndex; the duplicate local notions were removed. The theorem retains the coherent adjunction, comparison, counit bar, all face/degeneracy formulas, and split realization clause."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15da97b71",
+  "group": "N3",
+  "result": "pass",
+  "note": "Read node, all 6 stmt_deps and their Lean declarations (CoherentMonadModules, InfinityFreeModuleBar, InfinitySplitAugmentationColimit, InfinitySiftedColimitCalculus, CoherentAdjunction, EnhancedDiagramsCones), report (Worker report + Second reading by N3 present). Every clause matches: T=UL with strict unit/mult UεL, K over C with action Uε_Z and KL=F, IsFunctorEquivalence+IsFullyFaithful, bar B with degree U≫T^r≫L, augmentation ε, all Fin(r+2) faces/Fin(r+1) degeneracies, split E with σ0 extra degeneracy = η before the first factor (checked against splitSimplexExtend: σ0∘δ1=id gives Uε∘ηU=1), realization via IsSplitAugmentationColimit; hypotheses hD/hU/hconservative exact. Strict equalities are those supplied by the Riehl–Verity coherent adjunction extension, so not stronger. Edge cases r=0, endpoint indices, empty ordinal and empty categories, single arbitrary universe are fine. Helpers are real data with docstrings; only sorry; no name collisions; node changes only lean plus stmt_deps gaining 2 landed nodes; lean.statement verbatim; declarations list exact. nt_compile.py rc=0, module 1.5s, no errors/warnings. Cosmetic only: HA numbers sanitized to 'the project server' in report text."
  }
 }
