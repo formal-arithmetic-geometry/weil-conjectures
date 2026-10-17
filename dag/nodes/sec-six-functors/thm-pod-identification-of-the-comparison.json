@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-pod-identification-of-the-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Identification of the Poincare pairing with Verdier duality",
@@ -15,74 +15,156 @@
  "stmt_deps": [
   "def-pod-conventions",
   "def-pod-perfect-complex-on-x",
-  "def-pod-perfect-derived-pairing"
+  "def-pod-derived-poincare-pairing"
  ],
  "proof": [
   {
-   "text": "Work at the chosen coefficient stage. The adjunctions, tensor–Hom\noperations and projection transformation below are those at that stage\nin [fix-prop-projection-formula] and the adjunction definitions cited below.\nThey are taken at the chosen coefficient stage.\nPut $C=Ra_{X!}K$, $\\omega=Ra_X^!\\Lambda$, and\n$D=Ra_{X*}R\\mathcal Hom_X(K,\\omega)$. The identification\n[thm-sf-dual-perfect] identifies $D$ with the first\nobject of the displayed map. By\n[def-pod-derived-poincare-pairing], [def-pod-coefficient-dual-on-x], [def-pur-smooth-trace],\nthe pairing, before this identification, is cup product followed by\nevaluation into $\\omega$ and the counit $Ra_{X!}\\omega\\to\\Lambda$.",
+   "text": "Work at the fixed coefficient stage and in [def-pod-conventions]; in particular $X$ is smooth, separated, geometrically connected and finite type of pure dimension $d$, $a=a_X$ is admissible, and $K$ is bounded constructible finite-Tor and perfect over $\\Lambda_X$ ([def-pod-perfect-complex-on-x]). We identify point sheaf objects with their coefficient complexes using $F=\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point], the exact equivalence [lem-weil-point-fibre-equivalence], and its coherent tensor and unit comparisons [lem-sf-point-fibre-derived-tensor]; occurrences of $F$ and these comparisons are suppressed below. Put $C=Ra_!K$, $\\omega=Ra^!\\Lambda$, $L=R\\mathcal Hom_X(K,\\omega)=\\mathbb D_XK$, $D=Ra_*L$, and $H_s=R\\mathcal Hom_s(C,\\Lambda_s)$ (initially abbreviated $H$). The finite-level preservation statements [thm-sf-ctf-stability] put $\\omega,L$ in $D^b_{ctf}(X,\\Lambda)$ and $C,D,H$ in $D^b_{ctf}(s,\\Lambda)$: apply exceptional preservation to $\\Lambda$, internal-Hom preservation to $(K,\\omega)$, the two direct-image assertions to $K,L$, and internal-Hom preservation at $s$ to $(C,\\Lambda)$. At integral coefficients the two direct-image membership assertions are [lem-sf-integral-direct-image-constructible] for $L$ and [lem-sf-integral-compact-support-constructible] for $K$; use [thm-sf-ctf-stability] (vii) to identify $D^b_c$ with $D^b_{ctf}$ and to preserve internal Hom and the exceptional adjoint. At field coefficients use the specified rationalization and common-stage constructions of the cited operations and the field clause of (vii). Here the sheaf object denoted by $H$ is $H_s=R\\mathcal Hom_s(C,\\Lambda_s)$; its coefficient interpretation is justified as follows, rather than assumed from essential surjectivity on a larger category. For any $U,V\\in D^b_{ctf}(s,\\Lambda)$ define\n$$\\kappa_{U,V}:F R\\mathcal Hom_s(U,V)\\longrightarrow R\\operatorname{Hom}_\\Lambda(FU,FV)$$\nas the coefficient tensor–Hom transpose of $F(\\operatorname{ev}_{U,V})$, precomposed with the inverse tensor comparison. For $T=\\Lambda_s[-r]$, full faithfulness, the restricted tensor–Hom adjunction [det-thm-sf-ctf-stability-adjunctions], and tensor comparison give\n$$\\operatorname{Hom}(FT,F R\\mathcal Hom_s(U,V))\\cong\\operatorname{Hom}(T,R\\mathcal Hom_s(U,V))\\cong\\operatorname{Hom}(U\\otimes T,V)\\cong\\operatorname{Hom}(FU\\otimes FT,FV)\\cong\\operatorname{Hom}(FT,R\\operatorname{Hom}_\\Lambda(FU,FV)).$$\nBy the defining transpose formula and the uncurry laws [lem-pod-closed-uncurry-laws], this bijection is exactly postcomposition with $\\kappa_{U,V}$. Since $FT=\\Lambda[-r]$ and the coefficient unit is free of rank one, these Hom groups are the degree-$r$ cohomology groups (a map from the single free module complex is a cycle modulo boundaries). Thus $\\kappa_{U,V}$ is an isomorphism by [lem-weil-pbc-unbounded-derived-iso-cohomology]. At algebraically closed coefficients make this calculation at a common finite field and then take its morphism class. Its evaluation compatibility is its defining equation\n$$\\operatorname{ev}^{\\mathrm{coeff}}\\circ(1_{FU}\\otimes\\kappa_{U,V})=F(\\operatorname{ev}_{U,V})\\circ\\tau_{U,R\\mathcal Hom_s(U,V)}^{-1},$$\nwhere $\\tau_{M,N}:F(M\\otimes N)\\xrightarrow{\\sim}FM\\otimes FN$ is the tensor comparison. In particular $\\kappa_{C,\\Lambda_s}$ identifies $FH_s$ with the displayed coefficient $H$ and carries currying to coefficient currying. Cohomology has only been used to prove invertibility of this specified comparison, not equality of two derived maps. We now suppress $F$, $\\kappa$ and the tensor comparisons as announced. The comparison [thm-sf-dual-perfect], including its compatibility with evaluation, gives $\\theta:D\\xrightarrow{\\sim}Q$, where $Q=R\\Gamma(X,K^\\vee(d))[2d]$. In the current definition [def-pod-mixed-support-cup-product], the projection input is $Ra_*L=D$, and its point-valued cup map is exactly $F$ of the projection/counit composite, precomposed with the inverse tensor comparison just specified. Define $p:C\\otimes^L_\\Lambda D\\to\\Lambda$ by the mixed-support cup product of [def-pod-mixed-support-cup-product], evaluation $K\\otimes^L_{\\Lambda_X}L\\to\\omega$, and the exceptional counit $\\mu:Ra_!\\omega\\to\\Lambda$. The evaluation of [def-pod-coefficient-dual-on-x] and the pairing definition [def-pod-derived-poincare-pairing] give $\\beta_K=p\\circ(1_C\\otimes\\theta^{-1})$: that definition explicitly identifies the normalized smooth trace at every coefficient stage with the exceptional counit through the orientation. Its finite-level trace is the composite of [def-pur-smooth-trace]; higher stages here use the all-stage pairing definition, not an extension of the finite-level trace statement. Write $b_D=\\operatorname{curry}(p):D\\to H$; the transpose laws [lem-pod-closed-uncurry-laws] give $b_K^\\sharp=b_D\\circ\\theta^{-1}$.",
    "uses": [
-    "fix-prop-projection-formula",
+    "def-pod-conventions",
+    "def-pod-perfect-complex-on-x",
+    "thm-sf-ctf-stability",
     "thm-sf-dual-perfect",
-    "def-pod-derived-poincare-pairing",
     "def-pod-coefficient-dual-on-x",
-    "def-pur-smooth-trace"
+    "def-pod-derived-poincare-pairing",
+    "def-pur-smooth-trace",
+    "def-pod-mixed-support-cup-product",
+    "lem-pod-closed-uncurry-laws",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-fibre-equivalence",
+    "lem-sf-point-fibre-derived-tensor",
+    "det-thm-sf-ctf-stability-adjunctions",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-sf-integral-compact-support-constructible",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+    "place": "first paragraph"
+   }
   },
   {
-   "text": "Let $T=\\Lambda[-r]$ for any integer $r$. This is a perfect point\ncomplex, so its pullback and its tensor product with $K$ are in the\nstated finite-Tor domains. The adjunctions and projection\nformula give natural bijections\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_s(T,D)\n&\\cong\\operatorname{Hom}_X(La_X^*T,R\\mathcal Hom_X(K,\\omega))\\\\\n&\\cong\\operatorname{Hom}_X(K\\otimes_\\Lambda^LLa_X^*T,Ra_X^!\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(Ra_{X!}(K\\otimes_\\Lambda^LLa_X^*T),\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(C\\otimes_\\Lambda^LT,\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(T,R\\operatorname{Hom}_\\Lambda(C,\\Lambda)).\n\\end{aligned}\n$$\n\nHere the first bijection is $La_X^*\\dashv Ra_{X*}$ from\n[def-weil-derived-direct-image]; the second and fifth are\ntensor–internal-Hom adjunction from\n[def-weil-derived-pullback-tensor-hom]; the third is\n$Ra_{X!}\\dashv Ra_X^!$ from\n[def-weil-exceptional-inverse-image]; and the fourth is the\nprojection formula of [def-exchange-projection], [fix-prop-projection-formula].",
+   "text": "Take an arbitrary $T\\in D^b_{ctf}(s,\\Lambda)$, not just a shift of the unit. By [thm-sf-ctf-stability], $La^*T$ and $K\\otimes^L_{\\Lambda_X}La^*T$ lie in $D^b_{ctf}(X,\\Lambda)$, so the projection formula applies to $(K,T)$ and the exceptional adjunction applies to its tensor product and $\\Lambda$. The ordinary and exceptional adjunctions at all four coefficient stages are [fix-prop-adjunctions] (1), (2), with the exceptional functor of [def-weil-exceptional-inverse-image]. The restricted tensor–internal-Hom adjunction is [det-thm-sf-ctf-stability-adjunctions] (2), with the symmetry interchanging the tensor factors when needed. The operations are those of [def-weil-derived-pullback-tensor-hom]. Thus the adjunctions and the projection isomorphism [def-exchange-projection], [fix-prop-projection-formula] give a natural bijection $\\Phi_T$:\n$$\n\\begin{aligned}\n\\operatorname{Hom}_s(T,D)\n&\\cong\\operatorname{Hom}_X(La^*T,L)\\\\\n&\\cong\\operatorname{Hom}_X(K\\otimes^L_{\\Lambda_X}La^*T,Ra^!\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(Ra_!(K\\otimes^L_{\\Lambda_X}La^*T),\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(C\\otimes^L_\\Lambda T,\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(T,H).\n\\end{aligned}\n$$\nThe first bijection sends $t$ to $\\varepsilon_L\\circ La^*t$, where $\\varepsilon$ is the ordinary counit. The next sends it to evaluation against $K$, the third sends $e$ to $\\mu\\circ Ra_!e$, and the fourth precomposes with $P_T=\\operatorname{PF}_{a,K,T}:C\\otimes T\\xrightarrow{\\sim}Ra_!(K\\otimes La^*T)$. The fifth curries, with evaluation and transpose laws [lem-pod-closed-uncurry-laws]. These are natural bijections on every test object in the stated category; no adjunction for ordinary uncompleted integral operations has been substituted for the completed one.",
    "uses": [
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
+    "thm-sf-ctf-stability",
+    "fix-prop-adjunctions",
     "def-weil-exceptional-inverse-image",
+    "det-thm-sf-ctf-stability-adjunctions",
+    "def-weil-derived-pullback-tensor-hom",
     "def-exchange-projection",
-    "fix-prop-projection-formula"
+    "fix-prop-projection-formula",
+    "lem-pod-closed-uncurry-laws"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+    "place": "second paragraph and displayed Hom chain"
+   }
   },
   {
-   "text": "These bijections are induced by $b_K^\\sharp$, not merely abstract\nbijections of groups. Indeed, a map $t:T\\to D$ is first pulled back\nand composed with the counit $La_X^*Ra_{X*}\\to\\mathrm{id}$, then\nevaluated against $K$, then pushed forward and composed with\n$Ra_{X!}Ra_X^!\\Lambda\\to\\Lambda$. By\n[def-pod-mixed-support-cup-product], this is precisely the map\n$C\\otimes T\\xrightarrow{1\\otimes t}C\\otimes D\\to\\Lambda$\nobtained from the specified pairing. Its tensor–Hom transpose is\n$b_K^\\sharp\\circ t$. Thus $b_K^\\sharp$ induces an isomorphism on\nevery $H^r=\\operatorname{Hom}_s(\\Lambda[-r],-)$, under the point-category\nequivalences at all four coefficient stages in\n[def-weil-finite-coefficient-point]; its cone has zero\ncohomology and is zero by [def-weil-derived-cohomology-sheaves].\nThis proves that the actual adjoint is an isomorphism. The same\nadjunction and evaluation characterize the canonical global-duality\ncomparison of [thm-pod-global-verdier-duality]; consequently the\ncomparison written there in the reverse direction is its inverse. At every\nstep the two inputs used are separated: the adjunction, projection and\ntensor–internal-Hom calculus is [lem-sf-tensor-hom], [thm-sf-verdier-exchange],\nwhose abstract outcome is [thm-sf-identification], and the identification\nof the Verdier dual of a smooth $X$ with $K^\\vee (d)[2d]$ is the\nsmooth-purity orientation [thm-pur-finite-coefficient-smooth-purity]\nconsumed through [thm-sf-dual-perfect].\nProperness of $X$ is used nowhere in this argument: the adjunctions,\nthe projection formula and the smooth-purity orientation hold for any\nsmooth separated finite-type $X$ with admissible $a_X$.",
+   "text": "We identify the actual maps, using the mixed-support construction of [def-pod-mixed-support-cup-product], the natural projection isomorphism [fix-prop-projection-formula], the counit of [fix-prop-adjunctions], and the transpose laws [lem-pod-closed-uncurry-laws]. Let $e:K\\otimes La^*D\\to\\omega$ be $\\operatorname{ev}_{K,\\omega}\\circ(1_K\\otimes\\varepsilon_L)$, so $p=\\mu\\circ Ra_!e\\circ P_D$ in point sheaf notation. By the current cup-product definition its coefficient version is $F(\\mu\\circ Ra_!e\\circ P_D)$ precomposed with the inverse tensor comparison; the identifications fixed in Step 1 carry evaluation, currying and composition to these coefficient maps. For $t:T\\to D$ put $e_t=e\\circ(1_K\\otimes La^*t)$. Naturality of the projection transformation gives\n$$P_D\\circ(1_C\\otimes t)=Ra_!(1_K\\otimes La^*t)\\circ P_T.$$\nConsequently the uncurried map in the Hom chain is\n$$\\mu\\circ Ra_!e_t\\circ P_T\n =\\mu\\circ Ra_!e\\circ P_D\\circ(1_C\\otimes t)\n =p\\circ(1_C\\otimes t).$$\nCurrying and [lem-pod-closed-uncurry-laws] therefore give $\\Phi_T(t)=b_D\\circ t$ for every $T$. To prove invertibility explicitly, take $T=H$ and let $v=\\Phi_H^{-1}(1_H):H\\to D$. Then $b_Dv=1_H$. At $T=D$, injectivity of $\\Phi_D$ gives $vb_D=1_D$, since $\\Phi_D(vb_D)=b_Dvb_D=b_D=\\Phi_D(1_D)$. These tests are allowed because Step 1 placed $D,H$ in $D^b_{ctf}(s,\\Lambda)$. Thus $b_D$ and $b_K^\\sharp=b_D\\theta^{-1}$ are isomorphisms.\n\nFor the inverse identification, [lem-pod-global-duality-map-identification] specifies the tensor–Hom comparison by its actual projection/evaluation/counit transpose, identifies it with both [lem-sf-tensor-hom] and [fix-lem-tensor-adjunction], and states its relation to the exchange [fix-cor-verdier-exchange]. Its displayed formula for $\\alpha_s$ is exactly the sheaf map $b_D$ computed above. With the point comparison $\\kappa$ of Step 1 it therefore gives $\\alpha=\\kappa F\\alpha_s=b_D$ in the suppressed coefficient notation. This identification uses the formula, not uniqueness of an unspecified canonical isomorphism. The point-dualizing identification is the evaluated map $j:F(D_sC)\\to(FC)^\\vee$ of [lem-pod-point-dualizing-complex]. The map-identification lemma states $j=\\kappa F\\rho$ and $g=Fe\\circ j^{-1}=\\alpha^{-1}$ for the global map of [thm-pod-global-verdier-duality]. Thus the cited statement, including its point-normalization equation, supplies precisely the needed identification of the global map. Hence $g=v$, and\n$$(\\theta g)b_K^\\sharp=\\theta(vb_D)\\theta^{-1}=1_Q,\\qquad\nb_K^\\sharp(\\theta g)=b_Dv=1_H.$$\nThe inverse is therefore global Verdier duality followed by the smooth comparison $\\theta$ of [thm-sf-dual-perfect]. No properness is used; all adjunctions and projection maps have the separated finite-type hypotheses, and smoothness is used only in $\\theta$.",
    "uses": [
     "def-pod-mixed-support-cup-product",
-    "def-weil-finite-coefficient-point",
-    "def-weil-derived-cohomology-sheaves",
-    "thm-pod-global-verdier-duality",
+    "fix-prop-projection-formula",
+    "fix-prop-adjunctions",
+    "lem-pod-closed-uncurry-laws",
     "lem-sf-tensor-hom",
-    "thm-sf-verdier-exchange",
-    "thm-sf-identification",
-    "thm-pur-finite-coefficient-smooth-purity",
-    "thm-sf-dual-perfect"
+    "thm-pod-global-verdier-duality",
+    "def-pod-conventions",
+    "thm-sf-dual-perfect",
+    "lem-pod-global-duality-map-identification",
+    "lem-pod-point-dualizing-complex",
+    "fix-lem-tensor-adjunction",
+    "fix-cor-verdier-exchange"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+    "place": "third and fourth paragraphs"
+   }
   }
  ],
  "proof_deps": [
-  "fix-prop-projection-formula",
-  "thm-sf-dual-perfect",
-  "def-pod-derived-poincare-pairing",
+  "def-exchange-projection",
   "def-pod-coefficient-dual-on-x",
+  "def-pod-conventions",
+  "def-pod-derived-poincare-pairing",
+  "def-pod-mixed-support-cup-product",
+  "def-pod-perfect-complex-on-x",
   "def-pur-smooth-trace",
-  "def-weil-derived-direct-image",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-exceptional-inverse-image",
-  "def-exchange-projection",
-  "def-pod-mixed-support-cup-product",
   "def-weil-finite-coefficient-point",
-  "def-weil-derived-cohomology-sheaves",
-  "thm-pod-global-verdier-duality",
+  "det-thm-sf-ctf-stability-adjunctions",
+  "fix-cor-verdier-exchange",
+  "fix-lem-tensor-adjunction",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-pod-closed-uncurry-laws",
+  "lem-pod-global-duality-map-identification",
+  "lem-pod-point-dualizing-complex",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-point-fibre-derived-tensor",
   "lem-sf-tensor-hom",
-  "thm-sf-verdier-exchange",
-  "thm-sf-identification",
-  "thm-pur-finite-coefficient-smooth-purity"
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-point-fibre-equivalence",
+  "thm-pod-global-verdier-duality",
+  "thm-sf-ctf-stability",
+  "thm-sf-dual-perfect"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+  "place": "complete proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "identification of the Poincare pairing with Verdier duality as a canonical isomorphism",
+   "results": "8 hits, including RootPairing.PolarizationEquiv and LinearMap.toPerfPair; none states the derived Poincare/Verdier comparison",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, DerivedCategory, tensor internal Hom, Verdier duality",
+   "results": "Invalid query: Loogle reported Unknown identifier `tensor`; no absence conclusion follows from this query.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare|Verdier|RΓ_c|dualizing [Mathlib]",
+   "results": "Recorded originally as 0 hits; rerun by the maintainer reader on 2026-10-17 over ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (identical counts in the weil-conjectures-sheaf Mathlib checkout): 32 files, 81 lines (Verdier localization/triangulated subcategories, unrelated Poincaré recurrence and order-dual uses; no RΓ_c). None states the derived Poincaré/Verdier comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical isomorphism identifying a derived Poincare pairing adjoint with global Verdier duality",
+   "results": "8 hits, including CategoryTheory.rightDualIso_id, LinearMap.IsPerfPair.dualEval, and CategoryTheory.rightDualIso; none states the geometric comparison",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pairing constructed from the counits of two adjunctions and an invertible projection morphism has invertible currying",
+   "results": "8 hits: reflective monoidal internal-Hom isomorphisms, Frobenius morphisms, rigid tensor adjunctions, and curry identities; none includes the geometric comparison and its specified inverse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal equivalence preserves internal hom and evaluation under the closed category adjunction",
+   "results": "8 hits including CategoryTheory.MonoidalClosed.ofEquiv, ofEquiv_curry_def, ofEquiv_uncurry_def, and Cartesian expComparison; generic transport facts, no geometric Poincare/Verdier inverse identification. The required internal-Hom comparison is proved explicitly in Step 1, with no new node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -128,5 +210,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-package"
+ "unit": "sk-thm-sf-package",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-pod-identification-of-the-comparison",
+  "worker": "stage1",
+  "summary": "Second reading repaired the all-stage ordinary-adjunction citation, explicitly supplied finite-Tor preservation and the restricted tensor-Hom adjunction, expanded the projection-naturality calculation identifying the actual pairing, and used arbitrary finite-Tor point test objects to construct and verify the inverse. The inverse comparison is identified as a derived morphism, not merely through its cohomology. No new nodes. Repair 2026-10-17: revalidated the current mixed-support definition; made its point-fibre/tensor transport explicit in Steps 1 and 3 and replaced the type-only quotations by the full defining projection/counit composite. Existing point-fibre equivalence and tensor-comparison nodes supply this transport; no new nodes. Fresh second reading: refreshed stale conventions quotations; supplied explicit integral ordinary/compact-support constructibility; replaced unsupported essential-surjectivity transport by the evaluation-defined internal-Hom comparison, proved invertible on shifted units while retaining map-level evaluation compatibility. Repair 2026-10-17: added a focused map-identification lemma showing that the global Verdier exchange, after the point dualizing comparison, is the inverse of the same tensor–Hom adjunction map; Step 3 now cites that lemma, [lem-pod-point-dualizing-complex], [fix-lem-tensor-adjunction], and [fix-cor-verdier-exchange]. Final repair audit: made the new normalization lemma specify the actual counit/projection transpose, both tensor–Hom comparisons, the exchange and the evaluation-defined point identification; put its complete source-based proof in report.md while retaining the required statement-only unsplit node. Removed Step 3 appeals to facts appearing only in proofs of older nodes.",
+  "blueprint": "Realizes setup and evaluation compatibility in the first paragraph, the Hom chain in the second paragraph, and map identification/global-duality inverse in the third paragraph; expands its test objects to arbitrary D^b_ctf point objects to verify two-sided inverse identities. Uses the all-stage adjunction and preservation interfaces in the package route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-252502c8c",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-252502c8c (reviewer sub-agent of L); spot-checked: I read the whole delivery and the mathematics is correct. Repaired one search-record fault (B7) and one typo. Item statement: unchanged and verbatim the main-20261015 statement. It keeps all four coefficient stages, nonproper X, admissible a_X and K perfect in D^b_ctf. Step 1: stability puts C, D, H, omega and L in the finite-Tor categories. The claim that kappa is postcomposition on the Hom chain checks out, and DerivedCategory.isIso_iff is used only for invertibility, never for equality of maps. The thm-sf-dual-perfect evaluation compatibility gives beta_K = p(1 tensor theta^{-1}). Step 2: I checked the five bijections against fix-prop-adjunctions (1),(2), det-thm-sf-ctf-stability-adjunctions (2), def-exchange-projection and fix-prop-projection-formula, for any finite-Tor point object T. Step 3: projection naturality gives Phi_T(t)=b_D t, and the tests at T=H and T=D give a genuine two-sided inverse. New node lem-pod-global-duality-map-identification is true. (a) alpha_s is the inverse-chain value in fix-lem-tensor-adjunction.proof Step 1, which is also the lem-sf-tensor-hom blueprint_update chain. (b) fix-cor-verdier-exchange Steps 1-2 with a_s=id give mate m=a^!u, so naturality gives e=alpha_s^{-1} rho; thm-sf-identification step 2 does the same computation. (c) The DAG proof of lem-pod-point-dualizing-complex (steps 1, 5, 6) builds j as kappa F(rho). (d) Steps 1-2 of the DAG proof of thm-pod-global-verdier-duality give g = Fe j^{-1}, hence g = (kappa F alpha_s)^{-1}. Small cases: X=s gives e=id; K=0; common stage at Qlbar; nonproper A^1. The new node is strictly smaller than the item: no perfectness, orientation or pairing. It states the blueprint's unproved third-paragraph sentence. It is not circular, and a grep found no duplicate (thm-sf-identification normalizes inline for a different global-duality node). All dependencies are on the transitive unit route, including sk-rem-sf-pf-done; no tool_uses and no SGA. Fixes: (1) Three grep records claimed 0 hits under Mathlib. Rerun gives 132, 32 and 32 files: item 'Poincare|Verdier|RΓ_c|dualizing', new node 'Verdier|tensor.*Hom|RHom' and 'Poincare|Verdier|dualizing'. The results text is corrected; queries and verdicts are unchanged. (2) Typo in the new node statement: 'counits, For each' is now 'counits. For each'. Whole corrected files are in fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
+ }
 }
