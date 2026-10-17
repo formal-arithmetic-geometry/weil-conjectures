@@ -1,0 +1,88 @@
+{
+ "id": "lem-weil-pbc-derived-tensor-truncation-window",
+ "kind": "statement",
+ "title": "A fixed cohomology degree of derived tensor depends on finite truncation windows",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], let $R$ be a sheaf of commutative rings, and use the abelian category of $R$-module sheaves [def-weil-sheaf-of-modules-category] and its derived category $D(R)$ [def-weil-abstract-derived-category]. Derived tensor is the bifunctor computed by total tensors of K-flat resolutions with flat terms [lem-weil-pbc-site-derived-tensor-descent]. Let $K,L\\in D(R)$ and $b_K,b_L\\in\\mathbf Z$ satisfy $H^q(K)=0$ for $q>b_K$ and $H^q(L)=0$ for $q>b_L$ [def-weil-derived-cohomology-sheaves]. For every $i\\in\\mathbf Z$ and integers $a,c$ with $a\\leq i-b_L$ and $c\\leq i-b_K$, the canonical good-truncation maps [def-kun-truncations] induce an isomorphism of $R$-module sheaves $$H^i(K\\otimes_R^{\\mathbf L}L)\\xrightarrow{\\sim}H^i((\\tau_{\\geq a}K)\\otimes_R^{\\mathbf L}(\\tau_{\\geq c}L)).$$ The truncated factors have cohomology only in $[a,b_K]$ and $[c,b_L]$, respectively, with the interval interpreted as empty if its lower endpoint exceeds its upper endpoint. No Noetherian, local-constancy, finite-generation, or existence-of-points hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094H (lemma-locally-constant-tensor-product), first equality of the proof, with cutoffs corrected to account for the other factor's upper bound; the source's uniform i-1 cutoff is false for shifted complexes (see report.md)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-derived-cohomology-sheaves",
+  "def-kun-truncations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*trunc|trunc.*tensor",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give individual good truncations, homology bounds, or total-tensor infrastructure, not a fixed-degree derived tensor comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of derived tensor unchanged by sufficiently low good truncation of bounded above complexes",
+   "results": "CochainComplex.truncate; CochainComplex.quasiIso_truncGEMap_iff; CochainComplex.truncate_obj_d; CochainComplex.quasiIso_truncLEMap_iff; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; CochainComplex.quasiIso_πTruncGE_iff; CochainComplex.truncate_obj_X; CochainComplex.ιTruncLE",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give individual good truncations, homology bounds, or total-tensor infrastructure, not a fixed-degree derived tensor comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"trunc\"",
+   "results": "SSet.Truncated.tensor_map_apply_fst; SSet.Truncated.tensor_map_apply_snd; SSet.Truncated.HomotopyCategory.instUniqueObjOppositeTruncatedTensorUnit; SSet.Truncated.Edge.tensor; SSet.Truncated.Edge.id_tensor_id; SSet.Truncated.Edge.tensor_edge; SSet.Truncated.Edge.CompStruct.tensor; SSet.Truncated.Edge.tensor_surjective",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give individual good truncations, homology bounds, or total-tensor infrastructure, not a fixed-degree derived tensor comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Good lower truncations of bounded above complexes do not change a fixed cohomology degree of their derived tensor when the cutoffs account for both upper bounds",
+   "results": "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; CochainComplex.shortComplexTruncLEX₃ToTruncGE; CochainComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc; CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; CochainComplex.truncLE; CochainComplex.truncGE; CochainComplex.shortComplexTruncLE; CochainComplex.quasiIso_ιTruncLE_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give individual good truncations, homology bounds, or total-tensor infrastructure, not a fixed-degree derived tensor comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(IsLE|isLE|truncGE)|truncGE.*tensor|derivedTensor.*(bound|homology)",
+   "results": "Mathlib/Algebra/Lie/Loop.lean; Mathlib/LinearAlgebra/TensorProduct/Basis.lean; Mathlib/LinearAlgebra/TensorProduct/Basis.lean; Mathlib/LinearAlgebra/TensorProduct/Basis.lean; Mathlib/LinearAlgebra/TensorProduct/Basis.lean; Mathlib/LinearAlgebra/TensorProduct/Basis.lean; Mathlib/Analysis/Convex/Cone/TensorProduct.lean; Mathlib/CategoryTheory/Monoidal/Closed/Types.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give individual good truncations, homology bounds, or total-tensor infrastructure, not a fixed-degree derived tensor comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If complexes K and L vanish above b and c then H i of their derived tensor agrees with H i of tau ge (i-c) K tensor derived tau ge (i-b) L",
+   "results": "HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; CochainComplex.ConnectData.homologyIsoPos; DerivedCategory.isZero_of_isGE; DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt; DerivedCategory.isGE_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give individual good truncations, homology bounds, or total-tensor infrastructure, not a fixed-degree derived tensor comparison on arbitrary ringed sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-locally-constant-tensor",
+  "date": "2026-10-17",
+  "group": "Q14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), finite lisse cohomology reductions: the fixed-degree bounded truncation in the Tag 094H tensor argument used below nilpotent-reduction-lissity",
+   "via": [
+    "lem-weil-pbc-locally-constant-tensor",
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

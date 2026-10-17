@@ -13,7 +13,7 @@
     "lem-weil-pbc-zariski-h0-proper-henselian-pair"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sections of the inverse image to a directed limit of spectral spaces over a quasi-compact open are a colimit",
@@ -54,19 +54,20 @@
    }
   },
   {
-   "text": "*Step 3 (the isomorphisms $c$ are compatible with triple composites).* Let $A\\xrightarrow{q}B\\xrightarrow{b}C\\xrightarrow{a}D$ be continuous maps, $\\mathcal G$ a sheaf of sets on $D$, and write $c^{h,g}:h^{-1}g^{-1}\\to(gh)^{-1}$ for the isomorphisms of [lem-weil-pbc-sets-inverse-image-composition]. Claim: for every open $V\\subseteq C$ and $t\\in(a^{-1}\\mathcal G)(V)$,\n$$c^{q,ab}_{\\mathcal G}\\bigl(\\eta^q_{(ab)^{-1}\\mathcal G,b^{-1}V}(c^{b,a}_{\\mathcal G}(\\eta^b_{a^{-1}\\mathcal G,V}(t)))\\bigr)=c^{bq,a}_{\\mathcal G}\\bigl(\\eta^{bq}_{a^{-1}\\mathcal G,V}(t)\\bigr).\\qquad(*)$$\n(i) For a continuous $h:S\\to T$ and sheaves $\\mathcal K$ on $T$, $\\mathcal F$ on $S$, the adjunction bijection of [def-weil-pbc-topological-inverse-image] (3), $\\psi\\mapsto\\psi\\circ\\theta\\mapsto h_*(\\psi\\theta)\\circ i_{\\mathcal K}=h_*\\psi\\circ\\eta^h_{\\mathcal K}$, shows that a morphism $\\psi:h^{-1}\\mathcal K\\to\\mathcal F$ is determined by the maps $\\psi_{h^{-1}V}\\circ\\eta^h_{\\mathcal K,V}$ ($V\\subseteq T$ open), and that every morphism $\\mathcal K\\to h_*\\mathcal F$ is of this form. (ii) $\\eta^h$ is natural: for $u:\\mathcal K\\to\\mathcal K'$, $\\eta^h_{\\mathcal K',V}\\circ u_V=(h^{-1}u)_{h^{-1}V}\\circ\\eta^h_{\\mathcal K,V}$ (unit of an adjunction, same node). (iii) Let $\\Phi=c^{q,ab}_{\\mathcal G}\\circ q^{-1}(c^{b,a}_{\\mathcal G})$ and $\\Psi=c^{bq,a}_{\\mathcal G}\\circ c^{q,b}_{a^{-1}\\mathcal G}$, two morphisms $q^{-1}b^{-1}a^{-1}\\mathcal G\\to(abq)^{-1}\\mathcal G$. Applying (i) for $q$, then for $b$ to $q_*\\psi\\circ\\eta^q$, then for $a$, a morphism $\\psi:q^{-1}b^{-1}a^{-1}\\mathcal G\\to\\mathcal F$ is determined by the maps $s\\mapsto\\psi(\\eta^q(\\eta^b(\\eta^a_{\\mathcal G,W}(s))))$, $s\\in\\mathcal G(W)$, $W\\subseteq D$ open (sections over $a^{-1}W$, $(ab)^{-1}W$, $(abq)^{-1}W$). On these, by (ii) with $u=c^{b,a}_{\\mathcal G}$ and the defining property of $c$ (applied to $c^{b,a}$, then $c^{q,ab}$): $\\Phi(\\eta^q\\eta^b\\eta^a s)=c^{q,ab}(\\eta^q(c^{b,a}(\\eta^b\\eta^as)))=c^{q,ab}(\\eta^q(\\eta^{ab}s))=\\eta^{abq}(s)$; and by the defining property of $c^{q,b}$ for the sheaf $a^{-1}\\mathcal G$ and the section $\\eta^a(s)$, then of $c^{bq,a}$: $\\Psi(\\eta^q\\eta^b\\eta^as)=c^{bq,a}(\\eta^{bq}(\\eta^as))=\\eta^{abq}(s)$. Hence $\\Phi=\\Psi$. (iv) By (ii), the left side of $(*)$ is $\\Phi(\\eta^q(\\eta^b t))=\\Psi(\\eta^q(\\eta^bt))=c^{bq,a}(c^{q,b}_{a^{-1}\\mathcal G}(\\eta^q\\eta^bt))=c^{bq,a}(\\eta^{bq}t)$, the last equality by the defining property of $c^{q,b}$ for $a^{-1}\\mathcal G$ and $t$.",
+   "text": "*Step 3 (coherence of the composition isomorphisms).* Let $A\\xrightarrow{q}B\\xrightarrow{b}C\\xrightarrow{a}D$ be continuous maps, $\\mathcal G$ a sheaf of sets on $D$, and write $c^{h,g}:h^{-1}g^{-1}\\to(gh)^{-1}$. Apply [lem-sc-left-adjoint-composition-iso-associativity] to the categories of sheaves on $D,C,B,A$ and the six inverse-image/direct-image adjunctions for $a,b,q,ab,bq,abq$ [def-weil-pbc-topological-inverse-image]. The equalities between the right adjoints hold on sections, since $g_*h_*\\mathcal F(W)=\\mathcal F(h^{-1}g^{-1}W)=(gh)_*\\mathcal F(W)$, also on restriction maps and morphisms. The defining unit equation in [lem-weil-pbc-sets-inverse-image-composition] identifies its $c$ with the canonical $c$ in the associativity node, by uniqueness. Thus\n$$\\Phi:=c^{q,ab}_{\\mathcal G}\\circ q^{-1}(c^{b,a}_{\\mathcal G})=c^{bq,a}_{\\mathcal G}\\circ c^{q,b}_{a^{-1}\\mathcal G}=: \\Psi.$$\nFor an open $V\\subseteq C$ and $t\\in(a^{-1}\\mathcal G)(V)$, naturality of the unit $\\eta^q$ gives\n$$c^{q,ab}_{\\mathcal G}(\\eta^q(c^{b,a}_{\\mathcal G}(\\eta^b(t))))=\\Phi(\\eta^q\\eta^b(t))=\\Psi(\\eta^q\\eta^b(t))=c^{bq,a}_{\\mathcal G}(\\eta^{bq}(t)).\\qquad(*)$$\nThe last equality is precisely the defining unit equation for $c^{q,b}$ applied to the sheaf $a^{-1}\\mathcal G$; all sections in this equality are taken over $q^{-1}b^{-1}V$.",
    "uses": [
     "def-weil-pbc-topological-inverse-image",
-    "lem-weil-pbc-sets-inverse-image-composition"
+    "lem-weil-pbc-sets-inverse-image-composition",
+    "lem-sc-left-adjoint-composition-iso-associativity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 0A32 (label lemma-compute-pullback-to-limit, line 3565), proof, compatibility of the canonical isomorphisms of Sheaves Lemma Tag 008I needed for the colimit system, which Stacks leaves implicit; written out by the agent"
+    "place": "Sheaves, Tag 008I (lemma-pullback-composition), canonical adjoint isomorphisms; the coherence implicit in Tag 0A32 (lemma-compute-pullback-to-limit), via the existing Mathlib associativity leaf."
    }
   },
   {
-   "text": "*Step 4 (the system identities; part (a)).* For $i\\le j\\le k\\le l$ and an open $W\\subseteq X_j$: ($\\alpha$) $\\rho^{f_{jk}^{-1}W}_k\\circ\\rho^W_{kj}=\\rho^W_j$: this is $(*)$ of Step 3 with $a=f_{ij}$, $b=f_{jk}$, $q=p_k$, $V=W$ (then $ab=f_{ik}$, $bq=p_j$). ($\\beta$) $\\rho^{f_{jk}^{-1}W}_{lk}\\circ\\rho^W_{kj}=\\rho^W_{lj}$: $(*)$ with $a=f_{ij}$, $b=f_{jk}$, $q=f_{kl}$. ($\\gamma$) $\\rho^W_{jj}=\\mathrm{id}$: here $f_{jj}=\\mathrm{id}$ and $\\mathrm{id}_*\\mathcal K=\\mathcal K$, so by Step 3 (i) there is a morphism $\\varepsilon:\\mathrm{id}^{-1}\\mathcal G_j\\to\\mathcal G_j$ with $\\varepsilon_V\\circ\\eta^{\\mathrm{id}}_{\\mathcal G_j,V}=\\mathrm{id}$ for all $V$; then $\\varepsilon(\\eta^{\\mathrm{id}}(\\eta^{f_{ij}}_{\\mathcal G,V}(s)))=\\eta^{f_{ij}}_{\\mathcal G,V}(s)$, which is the property characterizing $c^{\\mathrm{id},f_{ij}}_{\\mathcal G}$ in [lem-weil-pbc-sets-inverse-image-composition] (uniqueness clause), so $c=\\varepsilon$ and $\\rho^W_{jj}(t)=\\varepsilon(\\eta^{\\mathrm{id}}(t))=t$. With $W=U_{i'}$, $j=i'$, $k=i''$, $l=i'''$ (Step 2) this is (a): $\\rho_{i'i'}=\\mathrm{id}$, $\\rho_{i''}\\circ\\rho_{i''i'}=\\rho_{i'}$, $\\rho_{i'''i''}\\circ\\rho_{i''i'}=\\rho_{i'''i'}$.",
+   "text": "*Step 4 (the system identities; part (a)).* For $i\\le j\\le k\\le l$ and an open $W\\subseteq X_j$: ($\\alpha$) $\\rho^{f_{jk}^{-1}W}_k\\circ\\rho^W_{kj}=\\rho^W_j$: this is $(*)$ of Step 3 with $a=f_{ij}$, $b=f_{jk}$, $q=p_k$, $V=W$ (then $ab=f_{ik}$, $bq=p_j$). ($\\beta$) $\\rho^{f_{jk}^{-1}W}_{lk}\\circ\\rho^W_{kj}=\\rho^W_{lj}$: $(*)$ with $a=f_{ij}$, $b=f_{jk}$, $q=f_{kl}$. ($\\gamma$) $\\rho^W_{jj}=\\mathrm{id}$: here $f_{jj}=\\mathrm{id}$ and $\\mathrm{id}_*\\mathcal K=\\mathcal K$, so by the adjunction bijection of [def-weil-pbc-topological-inverse-image] (3) there is a morphism $\\varepsilon:\\mathrm{id}^{-1}\\mathcal G_j\\to\\mathcal G_j$ with $\\varepsilon_V\\circ\\eta^{\\mathrm{id}}_{\\mathcal G_j,V}=\\mathrm{id}$ for all $V$; then $\\varepsilon(\\eta^{\\mathrm{id}}(\\eta^{f_{ij}}_{\\mathcal G,V}(s)))=\\eta^{f_{ij}}_{\\mathcal G,V}(s)$, which is the property characterizing $c^{\\mathrm{id},f_{ij}}_{\\mathcal G}$ in [lem-weil-pbc-sets-inverse-image-composition] (uniqueness clause), so $c=\\varepsilon$ and $\\rho^W_{jj}(t)=\\varepsilon(\\eta^{\\mathrm{id}}(t))=t$. With $W=U_{i'}$, $j=i'$, $k=i''$, $l=i'''$ (Step 2) this is (a): $\\rho_{i'i'}=\\mathrm{id}$, $\\rho_{i''}\\circ\\rho_{i''i'}=\\rho_{i'}$, $\\rho_{i'''i''}\\circ\\rho_{i''i'}=\\rho_{i'''i'}$.",
    "uses": [
     "def-weil-pbc-topological-inverse-image",
     "lem-weil-pbc-sets-inverse-image-composition"
@@ -117,12 +118,13 @@
    }
   },
   {
-   "text": "*Step 8 (local form of a section over $p_i^{-1}U_i$).* Let $s\\in(p_i^{-1}\\mathcal G)(p_i^{-1}U_i)$. Claim: there are $n\\ge1$ and, for $l=1,\\dots,n$, quasi-compact opens $W_l\\subseteq X$ and $V_l\\subseteq U_i$ of $X_i$ and $u_l\\in\\mathcal G(V_l)$ with $W_l\\subseteq p_i^{-1}(V_l)$, $\\bigcup_lW_l=p_i^{-1}(U_i)$ and $s|_{W_l}=\\eta^{p_i}_{\\mathcal G,V_l}(u_l)|_{W_l}$. Fix $x\\in p_i^{-1}(U_i)$, $y=p_i(x)$. By [lem-weil-pbc-sets-inverse-image-stalk] the map $\\mathcal G_y\\to(p_i^{-1}\\mathcal G)_x$, $u_y\\mapsto(\\eta^{p_i}_{\\mathcal G,V}(u))_x$, is bijective, so $s_x=(\\eta^{p_i}_{\\mathcal G,V}(u))_x$ for some open $V\\ni y$ and $u\\in\\mathcal G(V)$. Choose a quasi-compact open $V'$ with $y\\in V'\\subseteq V\\cap U_i$ [def-weil-spectral-space]; as $\\eta^{p_i}$ commutes with restriction, $(\\eta^{p_i}_{\\mathcal G,V'}(u|_{V'}))_x=s_x$. By [lem-weil-pbc-filtered-colimit-sets-elementwise] (2) for the stalk at $x$ there is an open $O\\ni x$, $O\\subseteq p_i^{-1}(V')$, with $s|_O=\\eta^{p_i}_{\\mathcal G,V'}(u|_{V'})|_O$; choose a quasi-compact open $W_x$ with $x\\in W_x\\subseteq O$ ($X$ is spectral, Step 1). The $W_x$ cover the quasi-compact set $p_i^{-1}(U_i)$ (Step 1), so finitely many do; if $p_i^{-1}(U_i)=\\emptyset$ take $n=1$, $W_1=V_1=\\emptyset$ and $u_1$ the unique section of the sheaf $\\mathcal G$ over $\\emptyset$.",
+   "text": "*Step 8 (local form of a section over $p_i^{-1}U_i$).* Let $s\\in(p_i^{-1}\\mathcal G)(p_i^{-1}U_i)$. Claim: there are $n\\ge1$ and, for $l=1,\\dots,n$, quasi-compact opens $W_l\\subseteq X$ and $V_l\\subseteq U_i$ of $X_i$ and $u_l\\in\\mathcal G(V_l)$ with $W_l\\subseteq p_i^{-1}(V_l)$, $\\bigcup_lW_l=p_i^{-1}(U_i)$ and $s|_{W_l}=\\eta^{p_i}_{\\mathcal G,V_l}(u_l)|_{W_l}$. Fix $x\\in p_i^{-1}(U_i)$, $y=p_i(x)$. By [lem-weil-pbc-sets-inverse-image-stalk] the map $\\mathcal G_y\\to(p_i^{-1}\\mathcal G)_x$, $u_y\\mapsto(\\eta^{p_i}_{\\mathcal G,V}(u))_x$, is bijective, so $s_x=(\\eta^{p_i}_{\\mathcal G,V}(u))_x$ for some open $V\\ni y$ and $u\\in\\mathcal G(V)$. Choose a quasi-compact open $V'$ with $y\\in V'\\subseteq V\\cap U_i$ [def-weil-spectral-space]; as $\\eta^{p_i}$ commutes with restriction, $(\\eta^{p_i}_{\\mathcal G,V'}(u|_{V'}))_x=s_x$. By [lem-weil-pbc-filtered-colimit-sets-elementwise] (2) for the stalk at $x$ there is an open $O\\ni x$, $O\\subseteq p_i^{-1}(V')$, with $s|_O=\\eta^{p_i}_{\\mathcal G,V'}(u|_{V'})|_O$; choose a quasi-compact open $W_x$ with $x\\in W_x\\subseteq O$ ($X$ is spectral, Step 1). The $W_x$ cover the quasi-compact set $p_i^{-1}(U_i)$ (Step 1), so finitely many do; if $p_i^{-1}(U_i)=\\emptyset$ take $n=1$, $W_1=V_1=\\emptyset$ and $u_1$ the unique section of the sheaf $\\mathcal G$ over $\\emptyset$. Here the empty covering of $\\emptyset$ has exactly one compatible family, so its unique gluing gives $\\mathcal G(\\emptyset)=\\{*\\}$ by the sheaf equalizer axiom [def-weil-pbc-sites-and-cohomology] (1), on the site of open subsets with open coverings.",
    "uses": [
     "lem-weil-pbc-sets-inverse-image-stalk",
     "lem-weil-pbc-filtered-colimit-sets-elementwise",
     "def-weil-spectral-space",
-    "lem-weil-pbc-spectral-directed-limit-spectral"
+    "lem-weil-pbc-spectral-directed-limit-spectral",
+    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
    "source": {
@@ -154,10 +156,10 @@
    }
   },
   {
-   "text": "*Step 11 (gluing; part (b)).* By Step 7 for each pair $(l,l')$ there is $k_{ll'}\\ge j$ with $\\rho^{W_{ll'}}_{k_{ll'}j}(\\sigma_l|_{W_{ll'}})=\\rho^{W_{ll'}}_{k_{ll'}j}(\\sigma_{l'}|_{W_{ll'}})$; take $k\\ge$ all $k_{ll'}$; by Step 4 ($\\beta$) the equality holds with $k$ in place of $k_{ll'}$. Put $\\tau_l=\\rho^{W_{l,j}}_{kj}(\\sigma_l)\\in\\mathcal G_k(f_{jk}^{-1}W_{l,j})$. By Step 2, $\\tau_l$ and $\\tau_{l'}$ agree on $f_{jk}^{-1}(W_{ll'})$, and the $f_{jk}^{-1}(W_{l,j})$ cover $f_{jk}^{-1}(U_j)=U_k$. Since $\\mathcal G_k=f_{ik}^{-1}\\mathcal G$ is a sheaf [def-weil-pbc-topological-inverse-image] (3), [def-weil-pbc-sheafification], there is $\\tau\\in\\mathcal G_k(U_k)$ with $\\tau|_{f_{jk}^{-1}W_{l,j}}=\\tau_l$. Then, by Step 2, Step 4 ($\\alpha$) and Step 10, $\\rho_k(\\tau)|_{W_l}=\\rho^{f_{jk}^{-1}W_{l,j}}_k(\\tau_l)=\\rho^{W_{l,j}}_j(\\sigma_l)=s|_{W_l}$ (note $p_k^{-1}f_{jk}^{-1}W_{l,j}=W_l$). As the $W_l$ cover $p_i^{-1}(U_i)$ and $p_i^{-1}\\mathcal G$ is a sheaf, $\\rho_k(\\tau)=s$. This is (b) with $i'=k$.",
+   "text": "*Step 11 (gluing; part (b)).* By Step 7 for each pair $(l,l')$ there is $k_{ll'}\\ge j$ with $\\rho^{W_{ll'}}_{k_{ll'}j}(\\sigma_l|_{W_{ll'}})=\\rho^{W_{ll'}}_{k_{ll'}j}(\\sigma_{l'}|_{W_{ll'}})$; take $k\\ge$ all $k_{ll'}$; by Step 4 ($\\beta$) the equality holds with $k$ in place of $k_{ll'}$. Put $\\tau_l=\\rho^{W_{l,j}}_{kj}(\\sigma_l)\\in\\mathcal G_k(f_{jk}^{-1}W_{l,j})$. By Step 2, $\\tau_l$ and $\\tau_{l'}$ agree on $f_{jk}^{-1}(W_{ll'})$, and the $f_{jk}^{-1}(W_{l,j})$ cover $f_{jk}^{-1}(U_j)=U_k$. Since $\\mathcal G_k=f_{ik}^{-1}\\mathcal G$ is a sheaf [def-weil-pbc-topological-inverse-image] (3), [def-weil-pbc-sites-and-cohomology] (1), applied to open subsets and open coverings, there is $\\tau\\in\\mathcal G_k(U_k)$ with $\\tau|_{f_{jk}^{-1}W_{l,j}}=\\tau_l$. Then, by Step 2, Step 4 ($\\alpha$) and Step 10, $\\rho_k(\\tau)|_{W_l}=\\rho^{f_{jk}^{-1}W_{l,j}}_k(\\tau_l)=\\rho^{W_{l,j}}_j(\\sigma_l)=s|_{W_l}$ (note $p_k^{-1}f_{jk}^{-1}W_{l,j}=W_l$). As the $W_l$ cover $p_i^{-1}(U_i)$ and $p_i^{-1}\\mathcal G$ is a sheaf, $\\rho_k(\\tau)=s$. This is (b) with $i'=k$.",
    "uses": [
     "def-weil-pbc-topological-inverse-image",
-    "def-weil-pbc-sheafification"
+    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
    "source": {
@@ -183,19 +185,20 @@
   "def-weil-spectral-space",
   "def-weil-pbc-topological-inverse-image",
   "lem-weil-pbc-sets-inverse-image-composition",
+  "lem-sc-left-adjoint-composition-iso-associativity",
   "lem-weil-pbc-sets-inverse-image-stalk",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-constructible-topology",
   "lem-weil-pbc-spectral-limit-constructible-closed-nonempty",
   "lem-weil-pbc-sheaf-sections-determined-by-germs",
-  "lem-weil-pbc-spectral-limit-descend-opens",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-spectral-limit-descend-opens"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Lemma Tag 0A32 (label lemma-compute-pullback-to-limit, line 3565), proof (injectivity via Topology Tag 0A2W, surjectivity via Topology Tags 0A2Z and 0A30), for a directed set; the explicit transition maps and the compatibility of the composition isomorphisms of Sheaves Tag 008I with triple composites (Steps 2-4), the germ criterion (Step 5), the constructible closedness of Z_k (Step 6) and the colimit identification (Step 12) are written out by the agent where Stacks leaves them implicit"
+  "place": "Stacks Sheaves Tag 0A32 (lemma-compute-pullback-to-limit), proof, for a directed set. Explicit maps and identities in Steps 2-4 use Tag 008I and the existing Mathlib left-adjoint associativity leaf; germ and constructible-closedness details in Steps 5-6 and the final colimit description make implicit arguments explicit."
  },
  "mathlib_searches": [
   {
@@ -239,10 +242,59 @@
    "results": "TopCat.Presheaf.pullback (Presheaf.lean:287), pullbackPushforwardAdjunction (:291), pullbackObjObjOfImageOpen (:313), TopCat.Sheaf.pullback (Functors.lean:91); nothing on limits of spectral spaces",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralLimit|limit.*pullback.*section|pullback.*limit.*section",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of pullback sheaf along projection from inverse limit of spectral spaces commute with filtered colimits",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp; TopCat.Presheaf.germ_stalkPullbackInv; SheafOfModules.sheafificationCompPullback; SheafOfModules.pullbackObjFreeIso; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat; CategoryTheory.Sheaf.isColimitSheafifyCocone",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.pullback, CategoryTheory.Limits.colimit",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of inverse image sheaf on a directed inverse limit of spectral spaces over a quasi-compact open are the filtered colimit of sections at finite stages",
+   "results": "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; Condensed.isColimitLocallyConstantPresheafDiagram; Condensed.isColimitLocallyConstantPresheaf_desc_apply; LightCondensed.isColimitLocallyConstantPresheafDiagram; LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso_assoc|def leftAdjointCompIso|leftAdjointCompIso_hom",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean (subdirectory CategoryTheory/Adjunction)",
+   "date": "2026-10-17",
+   "verdict": "match: existing associativity leaf used in Step 3; not a match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of sets on a spectral inverse limit has sections descended from a finite stage on every compact open",
+   "results": "Condensed.lanSheafProfinite; Condensed.isSheafProfinite; LightCondSet.ofSheafLightProfinite; CondensedSet.ofSheafProfinite; LightProfinite.hasSheafify_type; CondensedSet.ofSheafCompHaus; Condensed.ofSheafForgetProfinite; Condensed.isSheafStonean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_appTop_π_eq_of_isLimit|exists_app_map_eq_map_of_isLimit|nonempty_isColimit_Γ_mapCocone",
+   "results": "714; 718; 823; 842; 961 (subdirectory AlgebraicGeometry/AffineTransitionLimit.lean)",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-transition scheme structure-sheaf theorem, not arbitrary sheaves on spectral spaces"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -264,17 +316,20 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
-  "date": "2026-10-10",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-spectral-limit-pullback-sections",
   "worker": "stage1",
-  "summary": "Checked against Sheaves, Lemma Tag 0A32 (lemma-compute-pullback-to-limit, sheaves.tex line 3565) and its proof, for a directed set; tags 0A32, 0A2W, 0A2Z, 0A30, 008H, 008I, 0079, 04AX verified in stacks-project/tags/tags. Statement kept except that (a) now also states rho_{i'i'} = id (needed for the system to be a functor, which the 'in other words' colimit presupposes; proved in Step 4 from the uniqueness clause of the composition isomorphism). Twelve steps: the limit and its quasi-compact opens with the cofinality of {k >= j} (0A2Z node); the maps rho^W on arbitrary opens and their restriction compatibility; the compatibility of the composition isomorphisms c with triple composites, proved by applying the adjunction injectivity three times and the defining property of c (the step the composition node's review asked for); the system identities and part (a); the germ criterion from the stalk of an inverse image (008H leaf) and the stalk bijection induced by c; the set Z where two sections differ is closed in the constructible topology; injectivity for an arbitrary quasi-compact open via the new node for Topology 0A2W (1) and sections determined by germs (0079), giving (c); the local form of a section over p_i^{-1}U_i; descent of the covering by the 0A30 node (1)-(3); the sections at a finite level agree after pullback; gluing at a later index by the general injectivity, giving (b); the colimit identification by the filtered-colimit leaf. One new unsplit node, lem-weil-pbc-spectral-limit-constructible-closed-nonempty (Topology 0A2W, Mathlib candidate: Konig lemma for compact Hausdorff spaces plus quasi-compactness of the constructible topology; Hausdorffness of the constructible topology is not in Mathlib). The item itself is not in Mathlib (searches recorded)."
+  "summary": "Q29 checked all twelve steps and every cited statement against Stacks Sheaves 0A32, with Topology 0A2Z, 0A2W and 0A30. Retained the statement and the existing proof route, replaced the long inline coherence sublemma by the existing Mathlib leaf lem-sc-left-adjoint-composition-iso-associativity and its explicit specialization, and cited the actual sheaf equalizer axiom for gluing and the empty open. Repeated logged Mathlib searches; no exact match for the item. No new nodes.",
+  "blueprint": "Historical ancestry retained: thm-weil-pbc-henselian-idempotent-lifting, the old split step 2 at Stacks Etale Cohomology Tag 0A0B (lemma-zariski-h0-proper-over-henselian-pair), choice of C and computation of its sections. This item supplies the spectral-limit continuity used in the finite-space construction along the recorded via chain. Steps 1 and 5-12 realize Sheaves 0A32; steps 2-4 make its canonical maps explicit. The main-20261015 ancestor now only compares idempotents and no longer presents that topological subargument; this historical ancestry is not treated as a source for the present mathematical assertion, whose source is 0A32."
  },
  "lead_note": "L 2026-10-10: the worker's new node for 0A2W duplicated lem-weil-pbc-spectral-limit-constructible-closed-nonempty (created 05:20 by the 0A30 split); step 7 repointed to the existing node and the duplicate not created.",
  "reviewed": {
-  "date": "2026-10-10",
+  "date": "2026-10-17",
   "by": "L",
-  "result": "accepted",
-  "note": "12 steps following Sheaves 0A32 with the implicit parts written out: X spectral and the opens; the maps rho on every open, compatible with restriction; the compatibility of the composition isomorphisms c with triple composites (from the uniqueness clause and naturality of the units, as asked at the review of the composition node); the system identities (a) including rho_jj = id (added to the statement); germs under the stalk leaf; the set where two sections differ is constructibly closed; injectivity (c) for any quasi-compact open by the 0A2W node (repointed by L to the existing node) and sections-determined-by-germs; local form of a section; descending the cover by the 0A30 node (1)-(3); sections at level j; gluing at a later index (b); the colimit identification by the elementwise leaf."
+  "reviewer": "NT-cc-Q29-ec0c53b0e",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-ec0c53b0e (reviewer sub-agent of L); spot-checked: Read Stacks Sheaves 0A32 (sheaves.tex:3565) and its proof. I also checked the tags-file labels for 0A2W, 0A2Z, 0A30 and 008I. The item's statement is 0A32 for a directed set and sheaves of sets, with the transition and cocone maps made explicit through units and the composition isomorphisms c; ρ_ii = id is part (a). It matches the recorded Lean (a)/(b)/(c) clause for clause, so it is not weakened. Small cases checked: a singleton I (p_i a homeomorphism), U_i empty, and X empty. In every case the statement holds and the proof covers it. I checked all twelve steps against the cited statements. Step 3: the Mathlib leaf lem-sc-left-adjoint-composition-iso-associativity (CompositionIso.lean:170 leftAdjointCompIso_assoc, read) specializes exactly. The six inverse-image/direct-image adjunctions apply, the right adjoints are strictly equal by def (1), and the leaf's c is identified with the composition node's c by its uniqueness clause. Its conclusion is Φ = Ψ, and (*) follows by naturality of η^q and the unit equation for a^{-1}G. Step 4: (α) and (β) are substitutions into (*) that I verified; (γ) uses the adjoint ε of the identity and uniqueness. Step 5 uses the stalk leaf and the stalk map of c. Step 6: the disagreement locus is constructibly closed, using that W is quasi-compact. Step 7: 0A2W node on the tail, with Z_k = f_jk^{-1}Z_j by Step 5, then sections-determined-by-germs. Steps 8–9: finite quasi-compact local form, then clauses (1)–(3) of the 0A30 node with matching indices. Steps 10–11: unit equation, quasi-separated overlaps, injectivity on overlaps, and gluing by the sheaf axiom of def-weil-pbc-sites-and-cohomology (1). Step 12 uses the elementwise filtered-colimit leaf. proof_deps equals the union of uses, and there is no cycle. All statement nodes are in unit sk-thm-p1; the one cross-unit node is a Mathlib leaf, so no tool_uses are needed. There are no new nodes. The duplicate search (rg for 0A32 and compute-pullback-to-limit) found only different statements: the 0A33 colimit-of-sheaves node, which cites this item, the 0A35 colimit-of-sites nodes, and the étale 09YU node. No SGA source is used. No fixes. Remark: the stale 2026-10-10 'reviewed' record should be overwritten at the merge."
  },
  "lean": {
   "module": "Sheaf.Topology.SpectralLimitPullbackSections",

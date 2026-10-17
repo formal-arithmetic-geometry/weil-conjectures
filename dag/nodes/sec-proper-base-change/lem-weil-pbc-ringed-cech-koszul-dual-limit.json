@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-pbc-completed-pullback",
-   "place": "Detailed form, final paragraph: \"derived completion, computed as\" the displayed derived limit; the finite Koszul model and its completion-unit comparison underpin that identification.",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback: the displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence \"The comparison from ordinary pullback is the completion map of Lg^*K.\" The finite Koszul model and its unit are the supporting comparison; historical ancestry is retained.",
    "via": [
     "lem-weil-pbc-ringed-koszul-completion-reflector",
     "lem-weil-pbc-constant-completion-equivalence"
@@ -25,14 +25,16 @@
   "def-pc-tensor-complex-sheaves",
   "def-pur-derived-internal-hom",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-weil-pbc-ringed-koszul-system"
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pur-hom-complex"
  ],
  "proof": [
   {
-   "text": "Expand $P_m$: its degree-$q$ summands have bases $e_I$ for $|I|=q$, and $d(e_I)=\\sum_{j\\notin I}(-1)^{|\\{i\\in I:i<j\\}|}b_j^m e_{I\\cup\\{j\\}}$. Put $t_I=\\prod_{i\\in I}b_i$. The identity $t_{I\\cup\\{j\\}}b_j^m=t_I b_j^{m+1}$ verifies the forward maps are chain maps. In the dual Hom differential, the one-factor differential is $b_j^m$ from degree $-1$ to degree $0$; the transition is $(b_j,1)$. For the multi-factor dual, evaluate $\\phi_1\\otimes\\cdots\\otimes\\phi_r$ on $p_1\\otimes\\cdots\\otimes p_r$ with sign $(-1)^{\\sum_{a<b}|\\phi_b||p_a|}$, moving each $\\phi_b$ past the earlier $p_a$. Substitution into $d\\phi=-(-1)^{|\\phi|}\\phi d_P$ gives the tensor dual differential, and degree-zero transition maps introduce no extra signs. Evaluation gives $\\mathcal Hom^\\bullet(P_m,N)\\cong\\operatorname{Tot}(N\\otimes Q_m)$: on homogeneous $x\\in N^a$, $\\phi\\in Q_m^c$, send $x\\otimes\\phi$ to $(p\\mapsto\\phi(p)x)$ for $p\\in P_m^{-c}$. Inserting the Hom differential gives $d_Nx\\otimes\\phi+(-1)^a x\\otimes d_Q\\phi$, and precomposition by $P_m\\to P_{m+1}$ becomes $1_N\\otimes(Q_{m+1}\\to Q_m)$.",
+   "text": "Expand $P_m$: its degree-$q$ summands have bases $e_I$ for $|I|=q$, and $d(e_I)=\\sum_{j\\notin I}(-1)^{|\\{i\\in I:i<j\\}|}b_j^m e_{I\\cup\\{j\\}}$. Put $t_I=\\prod_{i\\in I}b_i$. The identity $t_{I\\cup\\{j\\}}b_j^m=t_I b_j^{m+1}$ verifies the forward maps are chain maps. Take $m\\geq1$, equivalently stage $m-1$ of [def-weil-pbc-ringed-koszul-system]. In the dual Hom differential, the one-factor differential is $b_j^m$ from degree $-1$ to degree $0$; the transition is $(b_j,1)$. For the multi-factor dual, evaluate $\\phi_1\\otimes\\cdots\\otimes\\phi_r$ on $p_1\\otimes\\cdots\\otimes p_r$ with sign $(-1)^{\\sum_{a<b}|\\phi_b||p_a|}$, moving each $\\phi_b$ past the earlier $p_a$. Substitution into $d\\phi=-(-1)^{|\\phi|}\\phi d_P$ gives the tensor dual differential, and degree-zero transition maps introduce no extra signs. Evaluation gives $\\mathcal Hom^\\bullet(P_m,N)\\cong\\operatorname{Tot}(N\\otimes Q_m)$: on homogeneous $x\\in N^a$, $\\phi\\in Q_m^c$, send $x\\otimes\\phi$ to $(p\\mapsto\\phi(p)x)$ for $p\\in P_m^{-c}$. Inserting the Hom differential gives $d_Nx\\otimes\\phi+(-1)^a x\\otimes d_Q\\phi$, and precomposition by $P_m\\to P_{m+1}$ becomes $1_N\\otimes(Q_{m+1}\\to Q_m)$.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
+    "def-pur-hom-complex",
+    "def-weil-pbc-ringed-koszul-system"
    ],
    "elementary": true,
    "source": {
@@ -44,12 +46,28 @@
    "text": "For $I$, send $a e_I$ at stage $m$ to $a/t_I^m$. This is compatible with transition multiplication by $t_I$. Every fraction is represented at a sufficiently large stage; $a/t_I^m=a'/t_I^{m'}$ means a power of $t_I$ kills the cross-multiplied difference, exactly equality at a later stage. Perform this calculation on sections and sheafify, as required for the colimit of module sheaves. The insertion term $b_j^m a e_{I\\cup\\{j\\}}$ maps to $a/t_I^m$ localized at $b_j$, with the alternating sign from step 1. Thus both differentials and the degree-zero projection agree with $C_b$ and $\\epsilon$. For $I=\\varnothing$, $t_I=1$ and this is the constant copy of $\\mathcal O$.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
     "place": "Tag 0913, colimit calculation"
+   }
+  },
+  {
+   "text": "Every term of $P_m$ and $Q_m$ is a finite direct sum of $\\mathcal O$. Such a term is flat: tensor with $\\mathcal O^a$ is the finite direct-sum functor, hence preserves kernels and cokernels componentwise. Both complexes are bounded, so the bounded-above-flat theorem on sites makes them K-flat. In particular total tensor with $Q_m$ preserves quasi-isomorphisms: for a quasi-isomorphism $v$, its cone is acyclic, $\\operatorname{Cone}(v)\\otimes Q_m$ is acyclic by K-flatness, and the total-tensor differential identifies this with $\\operatorname{Cone}(v\\otimes1)$ (reorder the target and shifted-source summands; on the latter the differential is $-d_{source}+(-1)^p d_Q$ for original source degree $p+1$, exactly minus its total differential). The cone criterion proves the assertion. This applies to unbounded $N$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); cone criterion derived.tex Tag 05RT (lemma-acyclic)."
    }
   },
   {
@@ -65,7 +83,7 @@
    }
   },
   {
-   "text": "Put $H_m=\\mathcal Hom^\\bullet(P_m,I)=\\operatorname{Tot}(I\\otimes Q_m)$ with the strict inverse transitions from step 1. Every $H_m$ is K-injective by the bounded split-projective tensor theorem (each term of $Q_m$ is finite free). Set $B=\\prod_m H_m$ termwise. The product-K-injective theorem identifies $B$ with the product in $D(\\mathcal O)$, without assuming exact products of sheaves. The sheaf Hom universal property gives $\\mathcal Hom^\\bullet(S,I)=B$; precomposition by $u$ is $1-s$, where $(s h)_m=h_{m+1}\\circ(P_m\\to P_{m+1})$. Expanding the two summands of the mapping cone and its Hom differential identifies $\\mathcal Hom^\\bullet(T,I)$ with the mapping fibre $\\operatorname{Cone}(1-s:B\\to B)[-1]$, with differential $(y,x)\\mapsto(-d_By-(1-s)x,d_Bx)$ in terms $B^{k-1}\\oplus B^k$ Explicitly a degree-$k$ Hom element has components $(\\alpha,\\beta)$ on $S[1]$ and $S$; the identification is $(\\alpha,\\beta)\\mapsto((-1)^{k-1}\\alpha,\\beta)$. Its differential becomes the displayed one by $d\\alpha=d_B\\alpha-(-1)^k u^*\\beta$ and $d\\beta=d_B\\beta$.",
+   "text": "Put $H_m=\\mathcal Hom^\\bullet(P_m,I)=\\operatorname{Tot}(I\\otimes Q_m)$ with the strict inverse transitions from step 1. Every $H_m$ is K-injective by the bounded split-projective tensor theorem (each term of $Q_m$ is finite free). Set $B=\\prod_m H_m$ termwise. The product-K-injective theorem identifies $B$ with the product in $D(\\mathcal O)$, without assuming exact products of sheaves. The sheaf Hom universal property gives $\\mathcal Hom^\\bullet(S,I)=B$; precomposition by $u$ is $1-s$, where $(s h)_m=h_{m+1}\\circ(P_m\\to P_{m+1})$. Expanding the two summands of the mapping cone and its Hom differential identifies $\\mathcal Hom^\\bullet(T,I)$ with the mapping fibre $\\operatorname{Cone}(1-s:B\\to B)[-1]$, with differential $(y,x)\\mapsto(-d_By-(1-s)x,d_Bx)$ in terms $B^{k-1}\\oplus B^k$. Explicitly a degree-$k$ Hom element has components $(\\alpha,\\beta)$ on $S[1]$ and $S$; the identification is $(\\alpha,\\beta)\\mapsto((-1)^{k-1}\\alpha,\\beta)$. Its differential becomes the displayed one by $d\\alpha=d_B\\alpha-(-1)^k u^*\\beta$ and $d\\beta=d_B\\beta$.",
    "uses": [
     "def-pur-hom-complex",
     "def-weil-abstract-derived-category",
@@ -79,96 +97,134 @@
    }
   },
   {
-   "text": "Apply the strict-tower theorem to $H_\\bullet$. More explicitly, the tower category is Grothendieck: colimits and filtered exactness are levelwise; if $G$ is a generator of $\\operatorname{Mod}(\\mathcal O)$, the direct sum of its images under the left adjoints to all evaluations is a generator, since evaluation detects nonzero morphisms. The ringed-site Grothendieck theorem supplies $G$, and the general degreewise-injective K-injective existence theorem therefore applies to this tower category. Take a K-injective tower resolution $H_\\bullet\\to J_\\bullet$ with injective terms. Its evaluations $J_m$ are K-injective: evaluation has the exact left adjoint which places a module at levels $1,\\ldots,m$, with identity transitions there and zero above $m$; adjunction carries maps from acyclic complexes to null-homotopic maps. Thus $H_m\\to J_m$ is a quasi-isomorphism between K-injectives and is a homotopy equivalence: the comparison principle gives $g:J_m\\to H_m$ with $g f\\simeq 1$, and its injectivity with target $J_m$ gives $f g\\simeq 1$. The termwise product map $\\prod H_m\\to\\prod J_m$ is a homotopy equivalence (take the product of the component inverses and homotopies); it commutes with $1-s$. The induced map of mapping fibres is therefore a quasi-isomorphism. For an injective tower $J^k$, the monomorphism $L_m(F)\\hookrightarrow L_{m+1}(F)$ of these evaluation left adjoints shows that $\\operatorname{Hom}(F,J_{m+1}^k)\\to\\operatorname{Hom}(F,J_m^k)$ is surjective; taking $F=J_m^k$ splits each transition. Consequently $1-s:\\prod J_m^k\\to\\prod J_m^k$ is surjective on sections: recursively choose $x_{m+1}$ lifting $x_m-y_m$, starting with $x_1=0$. Its kernel is $\\lim J_m^k$. The resulting short exact sequence of complexes gives the canonical quasi-isomorphism $(0,\\iota):\\lim J_m\\to\\operatorname{Cone}(1-s)[-1]$; its quotient cone is contractible, being the cone of the identity on $\\prod J_m$. Thus the strict-tower Roos computation identifies $\\lim_m J_m$ with $\\operatorname{Cone}(1-s:\\prod J_m\\to\\prod J_m)[-1]$. Consequently the fibre in step 4 computes the total right derived inverse limit of the strict tower $H_\\bullet$. This construction fixes the comparison by actual maps of complexes, rather than by a choice of a map between abstract triangles.",
+   "text": "Write $H_\\bullet=(\\mathcal Hom^\\bullet(P_m,I))_m$ and $B=\\prod_m H_m$ as above. The small-diagram Grothendieck theorem, with index $\\mathbf N_{\\geq1}^{op}$, shows that $\\operatorname{Tow}(\\operatorname{Mod}(\\mathcal O))$ is Grothendieck. Choose the functorial resolution $f:H_\\bullet\\to J_\\bullet$ supplied by the degreewise-injective K-injective existence theorem. Thus $J_\\bullet$ is K-injective as a tower complex and every $J^k$ is an injective tower. Evaluation is exact by the levelwise-abelian theorem, so $f_m:H_m\\to J_m$ is a quasi-isomorphism. Evaluation preserves K-injectives, so each $J_m$ is K-injective. The strict-tower theorem identifies $R\\lim H_\\bullet$ with $\\lim J_m$. No product-exactness hypothesis has been introduced.",
    "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-pur-kinjective-complex",
-    "lem-pc-ringed-space-product-kinjective",
-    "def-weil-abstract-derived-category",
-    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
     "lem-pur-kinjective-degreewise-existence",
-    "lem-sp-kinjective-comparison-principle",
-    "def-sp-injective-resolutions"
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, label lemma-derived-limit-is-ok, proof; ringed-module version recorded by the cited strict-tower theorem"
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), first and third paragraphs of the proof; injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck)."
    }
   },
   {
-   "text": "The complexes $Q_m$ are K-flat: filter the bounded complex by its finitely many stupid truncations; tensoring an acyclic complex with each successive quotient gives a finite direct sum of a shift of that acyclic complex, and the degreewise split short exact sequences then give acyclicity of the total tensor complex by finite induction. Therefore $\\operatorname{Tot}(N\\otimes Q_m)\\to\\operatorname{Tot}(I\\otimes Q_m)$ is a levelwise quasi-isomorphism of strict towers. It is an isomorphism in the derived tower category, and $R\\lim$ sends it to an isomorphism. Combining steps 3--5 with its inverse gives $\\theta_N$. A quasi-isomorphism of representatives gives the same commuting diagram, by evaluation and the functorial resolution defining derived internal Hom, so $\\theta_N$ descends naturally to $D(\\mathcal O)$.",
+   "text": "For a module $F$, let $L_m(F)$ be the tower with $F$ in levels $1,\\ldots,m$, identity transitions there, and zero above $m$. A tower map $L_m(F)\\to T$ is determined by its level-$m$ map $F\\to T_m$, all lower components being its composites with transitions. Thus $L_m$ is left adjoint to evaluation. The natural inclusion $L_m(F)\\hookrightarrow L_{m+1}(F)$ is componentwise monic. For the injective tower $J^k$, the injectivity extension property therefore makes $\\operatorname{Hom}(F,J_{m+1}^k)\\to\\operatorname{Hom}(F,J_m^k)$ surjective. Taking $F=J_m^k$ gives a sheaf-module splitting $\\sigma_m^k$ of each transition. Put $B_J=\\prod_m J_m$. Given sections $y_m$ of $J_m^k$, set $x_1=0$ and $x_{m+1}=\\sigma_m^k(x_m-y_m)$. Then $x_m-t_mx_{m+1}=y_m$. This is a sectionwise, restriction-compatible right inverse to $1-s_J$; each component uses only finitely many operations. Its kernel is $\\lim J_m$ by the limit universal property. Apply the degreewise-epimorphism kernel-to-fibre lemma to obtain the canonical quasi-isomorphism $\\kappa_J:\\lim J_m\\to F_J=\\operatorname{Cone}(1-s_J:B_J\\to B_J)[-1]$, $z\\mapsto(0,z)$.",
    "uses": [
-    "def-pc-kflat-complex",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-sp-injective-resolutions",
+    "def-weil-abstract-derived-category",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), injective transitions and final short exact sequence; explicit module-sheaf splitting argument."
+   }
+  },
+  {
+   "text": "Since $H_m$ and $J_m$ are K-injective, the comparison principle makes every $f_m$ a homotopy equivalence. Indeed it supplies $g_m$ with $g_m f_m\\simeq1$; injectivity of precomposition by $f_m$ into the K-injective target $J_m$ then gives $f_m g_m\\simeq1$. Taking products of these inverses and homotopies makes $b=\\prod f_m:B\\to B_J$ a homotopy equivalence. The map $b$ strictly commutes with $1-s$ because $f$ is a tower map. Hence it induces the diagonal chain map $F(f):F_H=\\operatorname{Cone}(1-s:B\\to B)[-1]\\to F_J$. The two copies of $b$ and this cone map form a morphism of cone triangles. The triangle isomorphism lemma shows $F(f)$ is an isomorphism in $D(\\mathcal O)$. Therefore $F_H\\xrightarrow{F(f)}F_J\\xleftarrow{\\kappa_J}\\lim J_m$ canonically identifies $F_H$ with $R\\lim H_\\bullet$. Naturality holds because $J$, $f$, $\\kappa_J$, and the diagonal fibre map are functorial; the component homotopy inverses were used only to prove that this specified map is invertible.",
+   "uses": [
+    "lem-sp-kinjective-comparison-principle",
+    "def-weil-abstract-derived-category",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), comparing the strict resolution with the termwise K-injective Roos model; derived.tex Tag 014A (lemma-third-isomorphism-triangle)."
+   }
+  },
+  {
+   "text": "Use the K-flatness established in step 3 with the functorial resolution $N^\\bullet\\to I$. It gives a levelwise quasi-isomorphism of strict towers $T(N)_m=\\operatorname{Tot}(N^\\bullet\\otimes Q_m)\\to H_m=\\operatorname{Tot}(I\\otimes Q_m)$. Exactness and cohomology in towers are levelwise, so this map is a quasi-isomorphism in the tower category. It becomes invertible in its derived category, and applying the total derived inverse-limit functor gives an isomorphism $R\\lim T(N)\\to R\\lim H$. Define $\\theta_N$ by composing the isomorphisms of steps 4--5 and 8 with the inverse of this last map. A quasi-isomorphism $N^\\bullet\\to(N')^\\bullet$ gives the same commuting diagram, by the tensor and Hom evaluation of step 1 and the functorial resolution. Both constructions invert all quasi-isomorphisms, so localization gives a natural isomorphism on $D(\\mathcal O)$, independent of representatives under their derived comparison maps.",
+   "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-weil-abstract-derived-category",
     "def-pur-derived-internal-hom",
+    "lem-weil-tower-category-levelwise-abelian",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ (lemma-bounded-flat-K-flat), finite free bounded case; Tag 0A0A (lemma-colim-and-lim-of-duals)"
+    "place": "Tag 0A0A (lemma-colim-and-lim-of-duals); strict total derived limit Tag 0941 (lemma-derived-limit-is-ok)."
    }
   },
   {
-   "text": "The compatible projections $P_m\\to\\mathcal O[0]$ induce the augmentation $T\\to C_b\\xrightarrow{\\epsilon}\\mathcal O[0]$. Precomposition sends $x\\in I$ to the family of Hom maps supported on $P_m^0$, all with value $x$; under evaluation these are exactly the degree-zero maps $I\\to I\\otimes Q_m$. Their family lies in $\\ker(1-s)$, so the map into the fibre is $x\\mapsto(0,(x)_m)$. Composing with $\\lim J_m\\to\\operatorname{Cone}(1-s)[-1]$ is the same map obtained by factoring the compatible component maps $I\\to J_m$ through $\\lim J_m$. This proves the asserted equality with the strict-tower unit, including its naturality, before passing to the derived category.",
+   "text": "The projections $P_m\\to\\mathcal O[0]$ give $T\\to C_b\\xrightarrow{\\epsilon}\\mathcal O[0]$ of step 4. For $x\\in I^k$, precomposition sends $x$ to the family of degree-$k$ Hom maps supported on $P_m^0$, with value $x$ there. Step 1 identifies these with the degree-zero inclusions $I\\to I\\otimes Q_m$. The map on the shifted summand of the telescope is zero. Thus its fibre coordinates are exactly $(0,(x)_m)$. After $F(f)$ this is $(0,(f_m(x))_m)=\\kappa_J((f_m(x))_m)$, where the compatible family is the factorization $I\\to\\lim J_m$ of the unit maps. Consequently $\\kappa_J^{-1}F(f)$ carries the augmentation map to the ordinary-limit unit followed by its derived comparison. Naturality of that comparison for $N^\\bullet\\to I$, and then inversion of $R\\lim T(N)\\to R\\lim H$, proves the stated equality for $\\theta_N$.",
    "uses": [
     "def-pur-hom-complex",
     "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-ringed-koszul-system",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A0A (lemma-colim-and-lim-of-duals), proof, with the compatible Koszul augmentations"
+    "place": "Tag 0A0A (lemma-colim-and-lim-of-duals), explicit augmentation and degree-zero unit in the Koszul specialization."
    }
   },
   {
-   "text": "Restriction to $\\mathcal C/U$ is exact, and $I|_U$ is K-injective by the cited restriction lemma. The Hom definition gives $\\mathcal Hom^\\bullet(L,I)|_U=\\mathcal Hom^\\bullet(L|_U,I|_U)$ by evaluating its sections over objects over $U$. Restriction preserves products (they are sectionwise), finite totalizations and the displayed cone. Hence the fibre in step 4 restricts to precisely the fibre constructed on the slice from $P_m|_U$ and $I|_U$. Steps 4--6 applied on that slice identify this fibre with the strict derived limit of the restricted tower. All evaluation, projection and $1-s$ maps are the same after further restriction, so both the comparison and the unit commute with those restrictions and with maps of $N$. No assertion that arbitrary products of sheaves are exact is used.",
+   "text": "Restriction to $\\mathcal C/U$ is exact, and $I|_U$ is K-injective by the restriction lemma. The Hom-complex definition, evaluated over every $V\\to U$, gives $\\mathcal Hom^\\bullet(L,I)|_U=\\mathcal Hom^\\bullet(L|_U,I|_U)$. Products are sectionwise, so restriction preserves $B$, $1-s$, and the finite-sum cone $F_H$. Restricting finite free tensor factors gives the same ordered tensor factors and evaluation maps over $\\mathcal O|_U$. Thus the isomorphism from $R\\mathcal Hom(C_b,N)|_U$ to $F_H|_U$ is precisely the one constructed on the slice. The derived internal-Hom restriction theorem identifies its source with $R\\mathcal Hom(C_b|_U,N|_U)$. Steps 6--9 on the slice identify its target fibre with the strict derived limit there, yielding the asserted target restriction identification. On an object $W\\to V\\to U$, every component is the restriction of the same evaluation, transition, and projection map; hence these comparisons and the map $(0,(x)_m)$ of step 10 commute with further restriction. The same formulas commute with morphisms in $N$. This establishes the comparison for these towers without asserting exactness of products of sheaves.",
    "uses": [
     "lem-pur-site-restriction-module-adjunction-exact",
     "lem-pur-kinjective-restrict-localized",
     "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JB (lemma-restriction-RHom-to-U); label lemma-restrict-K-injective-to-open; sites-modules.tex labels lemma-extension-by-zero and lemma-extension-by-zero-exact"
+    "place": "Tag 08JB (lemma-restriction-RHom-to-U); label lemma-restrict-K-injective-to-open; Tag 0941 (lemma-derived-limit-is-ok) on the slice."
    }
   },
   {
-   "text": "For $r=0$, all $P_m$ and $Q_m$ are $\\mathcal O[0]$, all transitions are identities, and $C_b=\\mathcal O[0]$. In the fibre model the map $1-s:\\prod I\\to\\prod I$ is split surjective as a map of complexes: solve $x_m-x_{m+1}=y_m$ by $x_1=0$ and $x_{m+1}=x_m-y_m$ (only finite sums for each component). Its kernel is the diagonal copy of $I$. The inclusion $I\\to\\operatorname{Cone}(1-s)[-1]$ from step 7 is therefore a quasi-isomorphism giving the constant-tower identification. Under it $\\theta_N$ and the unit are the identity.",
+   "text": "For $r=0$, the empty tensors are $P_m=Q_m=\\mathcal O[0]$, all transitions are identities, and $C_b=\\mathcal O[0]$. In the fibre model $B=\\prod_m I$ the chain map $1-s$ is split surjective: $y\\mapsto x$ with $x_1=0$ and $x_{m+1}=x_m-y_m$ is a chain-map right inverse, since each component is a finite sum. Its kernel is the diagonal copy of $I$. The kernel-to-fibre lemma identifies $I$ with $F_H$ by $x\\mapsto(0,(x)_m)$. This is exactly the map of step 10; therefore $\\theta_N$ and the unit are the identity under the constant-tower identification. The same calculation also covers the zero coefficient sheaf. No nonzero or regularity hypothesis on the list was used anywhere.",
    "uses": [
     "def-pur-derived-internal-hom",
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A0A (lemma-colim-and-lim-of-duals), empty Koszul system specialization"
+    "place": "Tag 0A0A (lemma-colim-and-lim-of-duals), empty Koszul list, with the kernel-to-fibre model of Tag 0941."
    }
   }
  ],
  "proof_deps": [
   "def-pc-tensor-complex-sheaves",
   "def-pur-hom-complex",
+  "def-weil-pbc-ringed-koszul-system",
   "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pc-kflat-complex",
+  "lem-pur-quasi-iso-cone-acyclic",
   "lem-pc-complex-hocolim-colimit",
   "def-pur-derived-internal-hom",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-split-perfect-tensor-kinjective",
   "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-pur-kinjective-complex",
-  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
   "lem-pur-kinjective-degreewise-existence",
-  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "def-sp-injective-resolutions",
-  "def-pc-kflat-complex",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-sf-triangle-morphism-iso",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-pur-kinjective-restrict-localized"
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
  ],
  "proof_origin": {
   "by": "document",
@@ -210,10 +266,45 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|extendedCech|cech.*dual|dual.*cech",
+   "results": "3 hit(s); Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary limits, local cohomology via Ext, or underived closed condensed modules; none states the ringed-site strict derived Koszul comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"Koszul\"",
+   "results": "0 hit(s); ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary limits, local cohomology via Ext, or underived closed condensed modules; none states the ringed-site strict derived Koszul comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of an extended Cech complex is the derived inverse limit of tensor products with dual Koszul complexes",
+   "results": "8 hit(s); HomologicalComplex.instHasLimit, HomologicalComplex.extend.leftHomologyData.isLimitKernelFork, HasDerivedCategory.standard, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, HomologicalComplex.instHasFiniteLimits, HomologicalComplex.instHasLimitsOfShape, DerivedCategory, HomologicalComplex.extend.leftHomologyData.cokernelCofork",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary limits, local cohomology via Ext, or underived closed condensed modules; none states the ringed-site strict derived Koszul comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from the extended Cech complex equals the derived inverse limit of tensor products with the dual finite Koszul complexes on a ringed site",
+   "results": "8 hit(s); CategoryTheory.Sheaf.H, LightCondensed.ihomPoints_apply, localCohomology.diagram, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, LightCondMod.ofSheafLightProfinite, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary limits, local cohomology via Ext, or underived closed condensed modules; none states the ringed-site strict derived Koszul comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom turns the sequential homotopy colimit of bounded finite free complexes of sheaves of modules into the homotopy limit of dual tensor complexes",
+   "results": "8 hit(s); LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary limits, local cohomology via Ext, or underived closed condensed modules; none states the ringed-site strict derived Koszul comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-koszul-completion-reflector",
   "by": "worker",
@@ -234,39 +325,47 @@
   }
  },
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-ringed-cech-koszul-dual-limit",
   "worker": "stage1",
-  "summary": "Removed the redundant dual-colimit node. Computed Hom of the telescope as the explicit Roos fibre using existing finite-free K-injective, product and slice-restriction lemmas; checked strict-tower comparison, representative independence, unit and empty list.",
-  "blueprint": "Detailed form, final paragraph: derived completion computed as the displayed derived limit; finite Koszul model and completion-unit comparison.",
+  "summary": "Audited the inherited split against Stacks 0913, 0A0A, 0941 and 08JB. Reused existing site-level K-flatness, small-diagram Grothendieck, exact tower evaluation, evaluation K-injectivity, kernel-to-fibre and triangle-isomorphism nodes to remove hidden general lemmas from the long strict-tower step. Kept the statement unchanged and made the canonical fibre comparison, its unit, naturality, restrictions and empty-list calculation explicit. No new nodes.",
+  "blueprint": "Supports the current completed-pullback derived-limit equality and its final completion-map sentence, keeping the inherited blueprint ancestor and via chain; only the finite Koszul/strict tower comparison is split here.",
   "tool_uses": [
    {
     "node": "lem-pc-complex-hocolim-colimit",
-    "why": "Generic telescope theorem identifying a degreewise filtered colimit of complexes with the homotopy colimit; the proper-base-change unit supplies no replacement for this general colimit tool."
+    "why": "General telescope-to-colimit theorem for complexes of module sheaves; no proper-base-change-unit statement supplies this calculation."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General site-level K-flatness theorem for bounded-above flat complexes, applied to finite free Koszul complexes without assuming enough points."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "General cone criterion, applied to show K-flat total tensor preserves quasi-isomorphisms."
    },
    {
     "node": "lem-pc-ringed-space-product-kinjective",
-    "why": "Generic abelian-category product of K-injectives, valid for module sheaves on any site; needed to represent derived products without AB4*."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic exact slice restriction and extension-by-zero adjunction, used to verify slice compatibility."
-   },
-   {
-    "node": "lem-pur-kinjective-restrict-localized",
-    "why": "Generic K-injective preservation under slice restriction; no unit-specific purity result used."
-   },
-   {
-    "node": "lem-pur-ringed-site-grothendieck-abelian",
-    "why": "Generic Grothendieck property of module sheaves, needed for injective-term strict-tower resolution."
+    "why": "General products of K-injectives represent derived products without exactness of sheaf products."
    },
    {
     "node": "lem-pur-kinjective-degreewise-existence",
-    "why": "General Grothendieck category K-injective resolution with injective terms, applied to the tower category."
+    "why": "General functorial injective-term K-injective resolution in a Grothendieck category, applied to the strict tower category."
    },
    {
     "node": "lem-sp-kinjective-comparison-principle",
-    "why": "General abelian-category K-injective comparison, used only for the product comparison in the Roos model."
+    "why": "General comparison bijection into a K-injective target, applied to the levelwise resolution maps."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic two-isomorphisms criterion for a specified morphism of cone triangles; no purity or comparison theorem from its unit is used."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exactness of restriction to a slice of a ringed site."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic preservation of K-injectives under slice restriction."
    }
   ]
  },
@@ -277,15 +376,18 @@
   "lem-pur-kinjective-restrict-localized",
   "lem-pur-ringed-site-grothendieck-abelian",
   "lem-pur-kinjective-degreewise-existence",
-  "lem-sp-kinjective-comparison-principle"
+  "lem-sp-kinjective-comparison-principle",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sf-triangle-morphism-iso"
  ],
  "reviewed": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NA-1fac0ded1",
-  "group": "NA",
+  "reviewer": "NT-cc-Q15-a3ed9afd6",
+  "group": "Q15",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-1fac0ded1 (reviewer sub-agent of L); spot-checked: Full mathematical and source review passed. One route defect remains: step 3 cites off-unit split node lem-pc-complex-hocolim-colimit without declaring it in split_report.tool_uses. Added the complete corrected DAG JSON under fixes/dag/nodes/sec-proper-base-change/. Review written to review.md; no statement or proof weakening.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-a3ed9afd6 (reviewer sub-agent of L); spot-checked: Read the item, all 12 steps and the full statement of every cited node; no fixes made, review.md written. The statement is unchanged from the side-DAG copy; the only stmt_deps addition is def-pur-hom-complex, which the statement uses. No new nodes; proof_deps equals the union of step uses; acyclic; no cited id is missing or merged. Source checks: Stacks 0913 (Koszul basis, transition by t_I, alternating Cech sign), 0A0A, 0941 (injective-term K-injective representative and the i_{n,!} adjoint, which is the step-7 L_m), 08JB; tags/tags mapping confirmed; the blueprint main-20261015 def-weil-pbc-completed-pullback display and final sentence are quoted correctly; no SGA. Recomputed: the one-factor dual differential is +b^m with transition (b,1); the evaluation Hom(P_m,N)=Tot(N⊗Q_m) sign; the telescope-Hom fibre sign (alpha,beta)->((-1)^{k-1}alpha,beta) matches the Cone[-1] differential of lem-weil-degreewise-epi-kernel-cocone-qis; u*=1-s; the L_m adjunction and the splitting recursion x_m - t_m x_{m+1} = y_m; the comparison-principle argument for two-sided homotopy inverses; the cone-triangle invertibility; the unit coordinates (0,(x)_m); the slice argument uses only K-injectivity of I|_U. Edge cases r=0, b=0, b a unit and the zero ring all hold. Hypotheses: small site and commutative O, in force; no exact products assumed. lem-weil-pbc-extended-cech-completion-model is a different statement, not a duplicate. Accepted tool_uses (all declared in split_report.tool_uses): lem-pc-complex-hocolim-colimit, lem-pc-bounded-above-flat-kflat-site, lem-pur-quasi-iso-cone-acyclic, lem-pc-ringed-space-product-kinjective, lem-pur-kinjective-degreewise-existence, lem-sp-kinjective-comparison-principle, lem-sf-triangle-morphism-iso, lem-pur-site-restriction-module-adjunction-exact, lem-pur-kinjective-restrict-localized. For the merger: the maintainer-owned tool_uses field still lists lem-pur-ringed-site-grothendieck-abelian, which the new proof no longer cites. The side ledger also has repeated 'live completion superseded side split' sync lines for this id; whether that supersedes the delivery is the merge tool's decision."
  },
  "reviewed_lean": {
   "date": "2026-10-15",

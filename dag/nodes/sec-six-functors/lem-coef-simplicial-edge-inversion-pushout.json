@@ -11,9 +11,98 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-universally-localizing-simplicial-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A$ and $B$ for the two vertices of $Q$, respectively the classes of $\\{0,2\\}$ and $\\{1,3\\}$. They are distinct. The map $e$ carries the endpoints of $\\Delta^1$ to $B,A$. It is degreewise injective: the simplices of $\\Delta^1$ are weakly increasing strings of its two vertices. A nonconstant string maps to a string in $\\{1,2\\}$ using both entries; it lies in neither collapsed edge, so the pushout identifies it with no other simplex. The two constant strings map to different vertices and their degeneracies. Hence $e$ and its coproduct over any small $W$ are monomorphisms.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZL",
+    "place": "05ZL opening monomorphism check, expanded degree by degree using the quotient in 05ZJ."
+   }
+  },
+  {
+   "text": "For any simplicial map $F:Q\\to E$ into a quasicategory, write $a,b,c$ for the images of the edges $01,12,23$. Thus $a,c:F(A)\\to F(B)$ and $b:F(B)\\to F(A)$. The faces $012$ and $123$, whose long edges are collapsed, give $[b][a]=1_{F(A)}$ and $[c][b]=1_{F(B)}$ in the homotopy category supplied by [lem-coef-infinity-mapping-composition]. Associativity gives $[a]=[c][b][a]=[c]$, and then $[a][b]=1_{F(B)}$. Thus $[b]$ is invertible. The same cited statement identifies invertibility of its component with the inverse-triangle definition of an equivalence edge. Consequently $F(e)=b$ is an equivalence. Restriction along $e$ therefore factors simplicially through the full subcategory $H(E)\\subseteq\\operatorname{Fun}(\\Delta^1,E)$ on equivalence edges: this condition holds at each vertex of every parameter simplex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZL",
+    "place": "05ZK: the distinguished edge is inverted; explicit inverse equations from faces 012 and 123."
+   }
+  },
+  {
+   "text": "The constant-arrow functor $k_1:E\\to H(E)$ is a coherent equivalence. Indeed evaluation $v_0:H(E)\\to E$ at the source satisfies $v_0k_1=1_E$. The monotone map $m:[1]\\times[1]\\to[1]$, $m(s,t)=\\min(s,t)$, induces a coherent transformation $\\eta:k_1v_0\\to1_{H(E)}$: its component at an arrow $f:x\\to y$ is the square with vertical edges $1_x$ and $f$. The formula for all parameters is evaluation of the universal arrow after $m$ on the arrow and homotopy coordinates, keeping all diagram coordinates unchanged; it therefore commutes with every simplicial operator. At both parameter endpoints the objects are in $H(E)$, so fullness makes it a transformation in $H(E)$. Functor and full-subcategory fibrancy follow from [lem-cbc-enhanced-functor-cone-calculus]. By [lem-coef-infinity-pointwise-equivalences] the square is an equivalence in the arrow category, since $1_x,f$ are equivalences. Its inverse and inverse triangles remain in the full subcategory $H(E)$. Applying the same pointwise statement to $\\eta$ shows it is a coherent natural equivalence. This supplies the second quasi-inverse equation for $k_1$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZL",
+    "place": "05ZK reduction to Example 6.3.1.14; explicit proof that collapsing the interval localizes its sole nondegenerate edge."
+   }
+  },
+  {
+   "text": "By [lem-coef-inverse-gadget-categorical-contractibility], the constant-diagram map $k_Q:E\\to\\operatorname{Fun}(Q,E)$ is a coherent equivalence. Let $r:\\operatorname{Fun}(Q,E)\\to H(E)$ be the factor of $e^*$ from step 2. Then $rk_Q=k_1$ exactly, since restricting a constant diagram is constant. Choose coherent quasi-inverses $u_Q$ of $k_Q$ and $u_1$ of $k_1$. The functor $s=k_Q u_1$ is a quasi-inverse to $r$: $rs=k_1u_1\\simeq1$, while the counit $k_Qu_Q\\simeq1$ gives $r\\simeq k_1u_Q$ and hence $sr\\simeq k_Qu_1k_1u_Q\\simeq k_Qu_Q\\simeq1$. Here $\\operatorname{Fun}(Q,E)$, $H(E)$ and the functor simplicial sets between them are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. Whiskering by a functor is a simplicial map of functor simplicial sets, so it carries an inverse edge and its two inverse-triangle $2$-simplices to the same data. Concatenation of two equivalence edges is a filler of an inner $2$-horn, and by [lem-coef-infinity-mapping-composition] its class is the composite of two invertible classes in the homotopy category, hence again an equivalence edge. Therefore $e$ localizes $\\Delta^1$ at its nondegenerate edge, with the entire functor-category property of [def-coef-universally-localizing-simplicial-map].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-coef-inverse-gadget-categorical-contractibility",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZL",
+    "place": "05ZK proof, using 05ZJ; the quasi-inverse calculation is written explicitly."
+   }
+  },
+  {
+   "text": "Put $A_W=\\coprod_{w\\in W}\\Delta^1$, $B_W=\\coprod_{w\\in W}Q$ and $i=\\coprod e$. Let $V$ consist of the one distinguished nondegenerate edge in each component of $A_W$. Degreewise, a map $(\\coprod K_w)\\times\\Delta^n\\to E$ is exactly a family of maps $K_w\\times\\Delta^n\\to E$, compatibly with simplicial operators. Hence the restriction $i^*$ is the product of the restrictions $r$ from step 4, and its edge-inverting full subcategory is $\\prod_{w\\in W}H(E)$. Taking products of the explicit quasi-inverses and of their inverse equivalences proves that $i$ is a localization at $V$. The inverse triangles are coordinatewise inverse triangles, so no mere equivalence on cores or on homotopy categories is substituted. When $W$ is empty both products are the terminal simplicial set and the assertion is the identity.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZL",
+    "place": "05ZL final sentence, Remark 6.3.1.15 (05ZC); direct coproduct-to-product calculation."
+   }
+  },
+  {
+   "text": "Let $f:A_W\\to C$ be the map representing the edges $w$. Apply [lem-coef-localization-monomorphic-pushout] to the following map of spans: $(X_{01},X_0,X_1)=(A_W,A_W,C)$, with legs $1,f$, and $(Y_{01},Y_0,Y_1)=(A_W,B_W,C)$, with legs $i,f$. Set $(p_{01},p_0,p_1)=(1,i,1)$ and $(V_{01},V_0,V_1)=(\\varnothing,V,\\varnothing)$. The spans commute strictly. The required monomorphisms are $1_{A_W}$ and $i$, established in step 1. The maps $p_{01},p_1$ localize at the empty collection because their restriction functors are identities; $p_0$ localizes at $V$ by step 5. Both conditions on the images of $V_{01}$ are vacuous. The source pushout is canonically $C$ and the target pushout is exactly $D$. The resulting edge collection is $f(V)=W$, including when an edge $w$ is degenerate. The induced map is exactly $j:C\\to D$. The cited conclusion therefore gives the required factorization and coherent equivalence onto all $W$-inverting diagrams for every $E$, without assuming $C$ or $D$ quasicategorical.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-coef-localization-monomorphic-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZL",
+    "place": "05ZL categorical-pushout step (05ZD and 01FJ), realized by the existing monomorphic-pushout localization lemma with the displayed spans."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-pointwise-equivalences",
+  "def-coef-universally-localizing-simplicial-map",
+  "lem-coef-inverse-gadget-categorical-contractibility",
+  "lem-coef-localization-monomorphic-pushout"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/05ZL",
+  "place": "Corollaries 6.3.2.7-6.3.2.9 (05ZJ, 05ZK, 05ZL), with the interval contraction, coproduct calculation and explicit specialization of the existing monomorphic-pushout lemma written out. Online sources read; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +145,38 @@
    "results": "{\"t\": \"2026-10-17T06:32:37Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing a simplicial set by a degreewise pushout with the walking invertible arrow finite inverse gadget\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.sk\", \"SSet.modelCategoryQuillen.I\", \"SSet.QCat\", \"SSet.Finite.instIsFinitelyPresentable\", \"SSet.cosk\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"fae1d9d4f5b9abaf\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary category localizations do not give coherent localization of arbitrary simplicial sets. Horn pushout hits and QCat/finite-presentability hits do not assert the inverse-gadget universal property. Read Mathlib/CategoryTheory/Localization/Predicate.lean:45-58 and the returned types."
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*simplic|simplic.*localiz|invert.*edge|edge.*invert",
+   "results": "{\"t\": \"2026-10-17T06:54:32Z\", \"tool\": \"grep\", \"query\": \"localiz.*simplic|simplic.*localiz|invert.*edge|edge.*invert\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures. Ordinary category localization, horn pushouts, nerves and terminal standard simplices do not give the coherent universal property or categorical contractibility of the specified quotient. Read Mathlib/CategoryTheory/Localization/Predicate.lean:45-58 and AlgebraicTopology/Quasicategory/Basic.lean:35-57."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of simplicial sets by pushout attaching inverse gadgets to marked edges",
+   "results": "{\"t\": \"2026-10-17T06:54:33Z\", \"tool\": \"leansearch\", \"query\": \"Localization of simplicial sets by pushout attaching inverse gadgets to marked edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.Localization\", \"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_m\", \"SSet.horn₂₂.isPushout\", \"CategoryTheory.MorphismProperty.Localization'\", \"HomotopicalAlgebra.AttachCells.mk\", \"SSet.horn₂₀.isPushout\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"3dde74c8420f9ff8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures. Ordinary category localization, horn pushouts, nerves and terminal standard simplices do not give the coherent universal property or categorical contractibility of the specified quotient. Read Mathlib/CategoryTheory/Localization/Predicate.lean:45-58 and AlgebraicTopology/Quasicategory/Basic.lean:35-57."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"IsLocalization\"",
+   "results": "{\"t\": \"2026-10-17T06:54:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"IsLocalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures. Ordinary category localization, horn pushouts, nerves and terminal standard simplices do not give the coherent universal property or categorical contractibility of the specified quotient. Read Mathlib/CategoryTheory/Localization/Predicate.lean:45-58 and AlgebraicTopology/Quasicategory/Basic.lean:35-57."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushout adjoining a finite inverse gadget to each selected edge localizes an arbitrary simplicial set",
+   "results": "{\"t\": \"2026-10-17T06:54:36Z\", \"tool\": \"leanfinder\", \"query\": \"Pushout adjoining a finite inverse gadget to each selected edge localizes an arbitrary simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.sk\", \"SSet.hasColimits\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.KanComplex\", \"SSet.cosk\", \"SSet.Subcomplex.MulticoequalizerDiagram\"], \"digest\": \"579cc856dc4e6904\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures. Ordinary category localization, horn pushouts, nerves and terminal standard simplices do not give the coherent universal property or categorical contractibility of the specified quotient. Read Mathlib/CategoryTheory/Localization/Predicate.lean:45-58 and AlgebraicTopology/Quasicategory/Basic.lean:35-57."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-localization-existence",
@@ -95,5 +212,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-edge-inversion-pushout",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Added only categorical contractibility of the explicitly given finite inverse gadget. Proved edge inversion from the two quotient faces, the interval localization by the min contraction, the coproduct localization by coordinatewise quasi-inverses, and the general attachment by a fully specified map of spans in the existing monomorphic-pushout lemma. No project attachment or Mathlib match was found.",
+  "blueprint": "Realizes the finite-gadget construction in the recorded supporting localization-existence branch of prop-coef-integral-exceptional-adjoint. Steps 1,5,6 realize 05ZL; steps 2-4 expand its use of 05ZK and isolate only 05ZJ as the new statement-only child. The chapter and unit route and the historical ancestry are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 3 and 4 take only that functor simplicial sets and their full subcategories are quasicategories (generic functor-category fibrancy, unit sk-prop-sf-cbc); no node of sk-prop-sf-biduality-general states this, and its closure does not reach the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-2ba248686",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-2ba248686 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-inverse-gadget-categorical-contractibility, every cited node's statement and Kerodon 05ZJ/05ZK/05ZL online (not archived; WANTED stands). Statements: the item matches 05ZL with Q and e expanded (edge {1,2}, edges 02 and 13 collapsed separately, C and W arbitrary). The child matches 05ZJ in the whole-functor-category sense, which is condition (ii) of the existing lem-coef-joyal-functor-equivalence-test. Small cases on Q: faces 012/123/013/023 give ba=1, cb=1, a=03=c, so hQ is the walking isomorphism; E empty, E=Δ0 and nerves of ordinary categories also check out. The child is strictly smaller than the item. An rg search of the whole DAG found no duplicate: the infinite-nerve J node, the Bergner and Segal-space nodes and the homotopy-category calculus nodes state other things. Step checks: step 1 injectivity holds degree by degree. Step 2 uses only what lem-coef-infinity-mapping-composition states. Step 3: the min(s,t) contraction is correct, and its inverse and triangle witnesses stay in the full subcategory H(E). Step 4: the two-out-of-three calculation is correct. Step 5: product of the same quasi-inverse in every coordinate, so no choice over W. Step 6: every hypothesis of lem-coef-localization-monomorphic-pushout holds (u0=1, v0=i injective by step 1, p=(1,i,1), V=(∅,V,∅)), the pushouts are C and D, and the edge set is f(V)=W. Edge cases: W empty, C empty, degenerate edges and shared endpoints. No cycle. Two repairs to the item, written to fixes: (C1/C2) step 4 used, without citing them, that the functor simplicial sets are quasicategories and that composites of equivalence edges are equivalences; it now cites lem-cbc-enhanced-functor-cone-calculus and lem-coef-infinity-mapping-composition, both already in proof_deps. (C8) lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) is off the unit's route and was not declared; split_report.tool_uses now declares it for functor-category fibrancy only, and I accept that tool use. The statements and the child are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
