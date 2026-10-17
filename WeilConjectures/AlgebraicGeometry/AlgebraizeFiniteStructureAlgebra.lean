@@ -21,6 +21,7 @@ import all WeilConjectures.AlgebraicGeometry.SupportedThickeningDictionary
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 import WeilConjectures.AlgebraicGeometry.GrothendieckExistence
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
@@ -37,6 +38,33 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
+
+/-- An automorphism of a left adjoint with invertible counit extends to an automorphism of
+the identity functor of the target, compatible with isomorphisms out of the image. -/
+private theorem extend_pullback_automorphism
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (adj : L ⊣ R) (hε : ∀ H : D, IsIso (adj.counit.app H)) (t : L ≅ L) :
+    ∃ s : 𝟭 D ≅ 𝟭 D, ∀ (G : C) (H : D) (ψ : L.obj G ≅ H),
+      ψ.hom ≫ s.inv.app H = t.inv.app G ≫ ψ.hom := by
+  let := hε
+  have : IsIso adj.counit := NatIso.isIso_of_isIso_app _
+  let ε := asIso adj.counit
+  let s : 𝟭 D ≅ 𝟭 D := ε.symm ≪≫ Functor.isoWhiskerLeft R t ≪≫ ε
+  have hs (G : C) : s.inv.app (L.obj G) = t.inv.app G := by
+    have htri := adj.left_triangle_components G
+    have hunit : L.map (adj.unit.app G) = inv (adj.counit.app (L.obj G)) :=
+      (asIso (adj.counit.app (L.obj G))).comp_hom_eq_id.mp htri
+    simp only [s, ε, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, asIso_hom, asIso_inv,
+      NatIso.isIso_inv_app]
+    change (inv (adj.counit.app (L.obj G)) ≫ t.inv.app (R.obj (L.obj G))) ≫
+      adj.counit.app (L.obj G) = _
+    have hn := t.inv.naturality (adj.unit.app G)
+    dsimp only [Functor.comp_obj, Functor.id_obj] at hn
+    rw [← hunit, hn, Category.assoc, htri, Category.comp_id]
+  refine ⟨s, fun G H ψ ↦ ?_⟩
+  simpa only [Functor.id_map, hs G] using s.inv.naturality ψ.hom
+
 
 set_option autoImplicit false
 
