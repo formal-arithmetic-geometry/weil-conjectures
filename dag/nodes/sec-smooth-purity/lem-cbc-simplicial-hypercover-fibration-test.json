@@ -26,7 +26,11 @@
   "def-weil-size-convention",
   "def-weil-pbc-sheafification",
   "lem-coef-simplicial-presheaf-localization-comparison",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-local-simplicial-presheaf-maps",
+  "def-cbc-bounded-representable-hypercover",
+  "def-cbc-derived-hypersheaf-presentation",
+  "lem-coef-simplicial-presheaf-projective-model"
  ],
  "proof": [
   {
@@ -234,5 +238,27 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-3562d98eb (reviewer sub-agent of L); spot-checked: I could not read the DHI paper (arXiv:math/0205027v2) at the cited places: it is not in literature/, I found no copy on the machine, and network access is blocked for reviewers. So I checked every step against the full statements of the nodes it cites, and checked the new node's statement mathematically. The delivery's WANTED line stands. Statement: the item is unchanged and not a target node, so no base-change or coefficient check applies. No SGA is cited. Step 1: QU->B_U makes both ends cofibrant, as the Bousfield theorem requires. T-local equals H-local and T-equivalences equal W_H, and the cofibrations agree, so the fibrations agree. Step 2: objectwise weak equivalences lie in W_H, so p is a projective fibration and X, Y are objectwise Kan. Step 3: the constant h_T->h_T is a hypercover with identity matching maps, K is empty when n=0, and density keeps the strict equations. Step 4: the pushout-product adjunction makes the corner r a fibration and X^L, Y^L and B fibrant. Step 5: h_T is cofibrant (the n=0 generator), e is in W_H, the rows are weak equivalences into localized fibrants, the columns are Kan fibrations, and a' maps exactly to e*(b). Step 6: pi_0 surjectivity and injectivity give an edge path, and lifting it through the endpoint horns gives a vertex exactly over b. Step 7: the Yoneda adjunction and the boundary criterion (including n=0) finish the proof. proof_deps equals the union of the steps' uses. New node lem-cbc-hypercover-relative-lifting: true by DHI Prop 5.1 plus Jardine's local-fibration comparison. It is self-contained, statement-only, searched in Mathlib, has its blueprint fields, and is strictly smaller than the item (no D1). I tested K=L, K=L=empty, K=empty with L=Delta^0, the trivial topology and empty covers. Splitter note: if DHI 5.1 assumes boundary-lifting local acyclicity, the comparison from homotopy-sheaf local weak equivalences to that hypothesis needs its own node when this node is split. rg found no duplicate: kan-relative-realization-lift, dense-hypercover-set, bousfield-quillen-descent and the scheme refinement nodes all differ, and there is no cycle. All six off-unit generic model tool_uses are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialHypercoverFibrationTest",
+  "declaration": "CategoryTheory.LocalSimplicialPresheaf.simplicial_hypercover_fibration_test",
+  "declarations": [
+   "CategoryTheory.LocalSimplicialPresheaf.simplicialAugmentation",
+   "CategoryTheory.LocalSimplicialPresheaf.simplicial_hypercover_fibration_test"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialHypercoverFibrationTest.lean",
+  "statement": "theorem simplicial_hypercover_fibration_test {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (I : C → Type u) (H : ∀ T : C, I T → AugmentedOver.{u, u} C T) (hH : ∀ (T : C) (i : I T), IsHypercover J (augmentedOverToAugmented (H T i))) (hDense : ∀ (T : C) (U : AugmentedOver.{u, u} C T), IsHypercover J (augmentedOverToAugmented U) → ∃ i : I T, Nonempty (H T i ⟶ U)) (m : ModelCategory (Cᵒᵖ ⥤ SSet.{u})) (hW : m.categoryWithWeakEquivalences.weakEquivalences = (SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences).functorCategory Cᵒᵖ) (hF : m.categoryWithFibrations.fibrations = (SSet.modelCategoryQuillen.J.rlp).functorCategory Cᵒᵖ) (E : SimplicialCategory (Cᵒᵖ ⥤ SSet.{u})) (hE : SSet.ProjectivePresheaf.IsUsualEnrichment E) (Q : (Cᵒᵖ ⥤ SSet.{u}) ⥤ (Cᵒᵖ ⥤ SSet.{u})) (ε : Q ⟶ 𝟭 _) (hQ : ∀ Z : Cᵒᵖ ⥤ SSet.{u}, m.categoryWithCofibrations.cofibrations (initial.to (Q.obj Z)) ∧ m.categoryWithFibrations.fibrations (ε.app Z) ∧ m.categoryWithWeakEquivalences.weakEquivalences (ε.app Z)) (L : ModelCategory (Cᵒᵖ ⥤ SSet.{u})) (hLC : L.categoryWithCofibrations.cofibrations = m.categoryWithCofibrations.cofibrations) (hLW : L.categoryWithWeakEquivalences.weakEquivalences = @localEquivalences _ _ m E Q (Σ T : C, I T) _ _ (fun i ↦ simplicialAugmentation (H i.1 i.2))) (hLF : ∀ Z : Cᵒᵖ ⥤ SSet.{u}, L.categoryWithFibrations.fibrations (terminal.from Z) ↔ @IsLocal _ _ m E Q (Σ T : C, I T) _ _ (fun i ↦ simplicialAugmentation (H i.1 i.2)) Z) {X Y : Cᵒᵖ ⥤ SSet.{u}} (p : X ⟶ Y) (hp : L.categoryWithFibrations.fibrations p) (hX : L.categoryWithFibrations.fibrations (terminal.from X)) (hY : L.categoryWithFibrations.fibrations (terminal.from Y)) (hw : IsLocalWeakEquivalence J p) : (∀ T : C, SSet.modelCategoryQuillen.J.rlp (p.app (op T)) ∧ SSet.Enhanced.IsWeakHomotopyEquivalence (p.app (op T))) ∧ ∀ (T : C) (n : ℕ), HasLiftingProperty (SSet.ProjectivePresheaf.representable T ◁ (Functor.const Cᵒᵖ).map (SSet.boundary n).ι) p",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1452c8549",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, source, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile reproduced clean sandbox/library compilation; no defects found."
  }
 }

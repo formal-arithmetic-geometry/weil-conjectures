@@ -182,5 +182,38 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-ad3a70f65 (reviewer sub-agent of L); spot-checked: I read the full item, the cited def-coef-left-module-operadic-encoding, the parent lem-coef-lm-prism-approximation steps 8-10, and the sibling lem-coef-lm-module-fibre-reconstruction. The delivery adds no new nodes and makes no unit, tool_uses or SGA changes. The arrow directions are consistent. T_beta agrees with the definition's Cut. K_beta is a legal arrow because admissibility sends the module input to * when the target has no module colour. B_beta is part of the shared preamble and is used by the sibling. Step 1 (concatenating fibres under composition) and step 4 (discarded inputs) use only the definition's composition and discard clauses, as cited; the endpoint hypotheses alpha(0)=0 and alpha(n)=s give coverage and are needed. Step 2 is a joint induction on i with base lambda(alpha(0))=delta(0); it gives lambda∘alpha=delta and lambda(s)=delta(n). Step 3 (elementary) shows delta(0)<=lambda<=delta(n)<=r. Step 5 identifies h with D^eta_lambda. I tested r=3,s=2,n=1, alpha=(0,2), delta=(0,3); s=0 (which forces delta constant); n=0; eta=0 with delta(0)>0; repeated alpha values; and empty C_j. None gives a counterexample. The sibling module-target lemma is a different statement, not a duplicate. HA 4.1.2.11 and Rem. 4.2.2.8 are not archived (WANTED is recorded), but the proof needs only the explicit definition. The blueprint ancestor prop-coef-integral-exceptional-adjoint exists. No fixes were needed."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LMAlgebraFibreReconstruction",
+  "file": "lean/Sheaf/CategoryTheory/LMAlgebraFibreReconstruction.lean",
+  "declaration": "SSet.Enhanced.lm_algebra_fibre_reconstruction",
+  "declarations": [
+   "SSet.Enhanced.lmX1",
+   "SSet.Enhanced.lmX0",
+   "SSet.Enhanced.lmLiftWord",
+   "SSet.Enhanced.lmModuleTail",
+   "SSet.Enhanced.lmT",
+   "SSet.Enhanced.lmKProperty",
+   "SSet.Enhanced.lmK",
+   "SSet.Enhanced.lmBProperty",
+   "SSet.Enhanced.lmB",
+   "SSet.Enhanced.lmD",
+   "SSet.Enhanced.lmLambdaValue",
+   "SSet.Enhanced.lmIntervalFor",
+   "SSet.Enhanced.lm_algebra_fibre_reconstruction"
+  ],
+  "statement": "theorem lm_algebra_fibre_reconstruction (η : Bool) (r s n : ℕ) (α : ⦋n⦌ ⟶ ⦋s⦌) (δ : ⦋n⦌ ⟶ ⦋r⦌) (hα0 : (α.toOrderHom ⟨0, by omega⟩).val = 0) (hαn : (α.toOrderHom (Fin.last n)).val = s) (h : (if η then lmX1 r else lmX0 r) ⟶ lmX1 s) (hh : h ≫ lmT α = lmD η δ) : (∀ j : Fin (s + 1), lmLambdaValue δ h j ≤ r) ∧ (∀ j : Fin s, h.hom j = lmIntervalFor η ((List.finRange r).filter (fun i ↦ lmLambdaValue δ h j.castSucc < i.val + 1 ∧ i.val + 1 ≤ lmLambdaValue δ h j.succ))) ∧ (∀ i : Fin (n + 1), lmLambdaValue δ h ⟨(α.toOrderHom i).val, by have hi := (α.toOrderHom i).isLt simpa only [SimplexCategory.len_mk] using hi⟩ = (δ.toOrderHom i).val) ∧ (∀ i : Fin (if η then lmX1 r else lmX0 r).arity, (∀ j : Fin s, i ∉ h.hom j) ↔ i.val + 1 ≤ (δ.toOrderHom ⟨0, by omega⟩).val ∨ (δ.toOrderHom (Fin.last n)).val < i.val + 1 ∨ (η = false ∧ i.val = r)) ∧ (∃ lam : ⦋s⦌ ⟶ ⦋r⦌, (∀ j : Fin (s + 1), (lam.toOrderHom j).val = lmLambdaValue δ h j) ∧ (lam.toOrderHom (Fin.last s)).val = (δ.toOrderHom (Fin.last n)).val ∧ h = lmD η lam)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-17"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-362f6ebe1",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, dependency declarations, every hypothesis and conclusion, edge cases, docstrings, and verbatim signature. Per-file scompile.py checks passed without diagnostics; no remaining delivery errors found."
  }
 }
