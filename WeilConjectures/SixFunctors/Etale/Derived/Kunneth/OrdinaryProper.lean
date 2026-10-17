@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
@@ -76,7 +77,7 @@ theorem nonempty_iso_kunneth_of_isProper {X Y W : Scheme.{u}} (aX : X ⟶ Spec (
           ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj K))) := by
   have : IsProper p₂ := MorphismProperty.of_isPullback (P := @IsProper) sq inferInstance
   -- projection formula for `p₂` and proper base change for the square
-  have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ p₂
+  have := isIso_rightDerivedLowerStarProjectionMap_of_isProper Λ isAddTorsion_of_finite p₂
   have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
   let pf : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj ((R((p₂)_*[ModuleCat.{u + 1} Λ])).obj

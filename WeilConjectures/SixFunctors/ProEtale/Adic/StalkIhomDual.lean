@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomDual
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GermMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GermMonoidal
 
 /-!
 # Stalks of the map `F ⊗ N ⟶ 𝓗om(F^∨, N)` for a lisse sheaf `F`

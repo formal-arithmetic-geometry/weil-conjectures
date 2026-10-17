@@ -41,7 +41,7 @@ namespace Etale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-open DerivedCategory
+open _root_.DerivedCategory
 
 /-- The unit comparison `Lg^* Λ_Y ≅ Λ_Z` is induced by the counit `η` of `g^*`. -/
 lemma leftDerivedUpperStarUnitIso_hom_comp_ε :

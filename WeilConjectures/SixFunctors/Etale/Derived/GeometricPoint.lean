@@ -28,6 +28,8 @@ of the zero section (`prop-pur-affine-line-orientation-uniqueness`).
 - `AlgebraicGeometry.Etale.sheafHom_ext_of_upperStar_map_eq`
 - `AlgebraicGeometry.Etale.singleFunctor_hom_ext_of_leftDerivedUpperStar_map_eq`
 - `AlgebraicGeometry.Etale.hom_ext_of_leftDerivedUpperStar_map_eq`
+- `AlgebraicGeometry.Etale.isZero_homology_constantComplex`,
+  `AlgebraicGeometry.Etale.homologyZeroConstantComplexIso`: the cohomology sheaves of `Λ_X`
 -/
 
 @[expose] public section
@@ -126,6 +128,24 @@ theorem constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq
     φ = ψ :=
   hom_ext_of_leftDerivedUpperStar_map_eq (constantComplexIsoSingleFunctor Λ X)
     (e ≪≫ constantComplexIsoSingleFunctor Λ X) h
+
+variable (Λ X) in
+/-- The cohomology sheaves of the constant complex `Λ_X` vanish outside degree zero. -/
+lemma isZero_homology_constantComplex (n : ℤ) (hn : n ≠ 0) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj (constantComplex Λ X)) :=
+  (HomologicalComplex.isZero_single_obj_homology _ _ _ _ hn).of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ n).mapIso
+      (constantComplexIsoSingleFunctor Λ X ≪≫
+        (_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app _) ≪≫
+      (_root_.DerivedCategory.homologyFunctorFactors _ n).app _)
+
+variable (Λ X) in
+/-- The zeroth cohomology sheaf of the constant complex `Λ_X` is the constant sheaf `Λ`. -/
+noncomputable def homologyZeroConstantComplexIso :
+    (_root_.DerivedCategory.homologyFunctor _ 0).obj (constantComplex Λ X) ≅
+      (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ) :=
+  (_root_.DerivedCategory.homologyFunctor _ 0).mapIso (constantComplexIsoSingleFunctor Λ X) ≪≫
+    (_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app _
 
 end Etale
 

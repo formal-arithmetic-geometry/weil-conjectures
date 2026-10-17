@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Descent
 public import Mathlib.CategoryTheory.Sites.Adjunction
-public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 
 /-!
 # Extension of scalars of pro-étale sheaves of modules

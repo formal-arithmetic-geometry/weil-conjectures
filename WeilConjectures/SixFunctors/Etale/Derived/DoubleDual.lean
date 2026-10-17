@@ -5,413 +5,473 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapClosed
-public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
-public import WeilConjectures.SixFunctors.OpenClosed.Derived
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 
 /-!
-# The double-dual morphism under proper push-forward
+# The double-dual morphism: shifts, triangles, restriction and push-forward
 
-Let `f : X ⟶ Y` be a proper morphism over a base `S`. This file compares the double-dual
-morphisms `δ_K : K ⟶ 𝔻 𝔻 K` (`AlgebraicGeometry.Etale.verdierDualDoubleDual`) on `X` and on
-`Y` (blueprint `lem-weil-delta-proper-pushforward`).
-
-## Main definitions
-
-- `AlgebraicGeometry.Etale.rightDerivedLowerStarVerdierDualHom`: the ambient exchange
-  `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_* K`, the adjoint of the pairing
-  `Rf_* K ⊗ᴸ Rf_* 𝔻_X K ⟶ Rf_*(K ⊗ᴸ 𝔻_X K) ⟶ Rf_* ω_X ⟶ ω_Y`.
+Let `a : X ⟶ S` admit a compactification, `ω_X = Ra^! Λ_S` and `𝔻_X = RHom(-, ω_X)`. This file
+records the formal properties of the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`
+(`AlgebraicGeometry.Etale.verdierDualDoubleDual`) used in the dévissage proof of Verdier
+biduality (blueprint subsection `sk-prop-sf-biduality-general`).
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.rightDerivedLowerStar_map_verdierDualDoubleDual_app_comp`: the exchange
-  carries `Rf_* δ_K` to `δ_{Rf_* K}`.
-- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff`: in
-  particular `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is.
+Blueprint `lem-weil-duality-pairing` (`δ` commutes with shifts and is a morphism of
+distinguished triangles), for a general coefficient category `A`:
+
+- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_shift_iff`: `δ_{K⟦n⟧}` is an
+  isomorphism if and only if `δ_K` is;
+- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_obj₂`: for a distinguished triangle
+  `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧`, if `δ_{K₁}` and `δ_{K₃}` are isomorphisms, so is `δ_{K₂}`;
+- `AlgebraicGeometry.Etale.verdierBidualityLocus_isTriangulated`: the complexes `K` with `δ_K`
+  an isomorphism form a triangulated subcategory of `D(X_ét)`.
+
+Blueprints `lem-weil-delta-restriction` and `lem-weil-delta-proper-pushforward`, formal core:
+
+- `CategoryTheory.MonoidalClosed.map_toIhomIhom_comp_dualComparison`: for a lax braided functor
+  `G` and `e : G W ⟶ W'`, the comparison `G [X, W] ⟶ [G X, W']` carries `G δ_X` to `δ_{G X}`;
+- `CategoryTheory.MonoidalClosed.mapToIhomIhomArrowIso`: hence, when the comparisons are
+  isomorphisms, `G δ_X` and `δ_{G X}` are isomorphic arrows;
+- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_of_surjective`: biduality descends
+  along a surjective étale morphism once `Lj^* δ_K` is identified with `δ_{Lj^* K}`.
 
 ## Implementation notes
 
-The exchange map is the comparison map `G [K, W] ⟶ [G K, G W]` of the lax monoidal right
-adjoint `G = Rf_*` of the oplax monoidal functor `Lf^*`, followed by the counit
-`Rf_* ω_X ≅ Rf_* f^! ω_Y ⟶ ω_Y`. It is an isomorphism by the proper projection formula
-(`CategoryTheory.Adjunction.isIso_internalAdjunctionHom`), and its compatibility with the
-double-dual morphisms is the general
-`CategoryTheory.MonoidalClosed.map_toIhomIhom_comp_ihomComparison_comp_ihom_map`, `Rf_*` being
-lax braided as the right adjoint of the braided functor `Lf^*`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_braiding_comp_tensorComparison`).
+The exactness of `RHom(-, ω_X)` available in the repository
+(`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_left`) only provides *some* third
+morphism for the image of a distinguished triangle, so `δ` is not directly a morphism of
+triangles. The triangulated five lemma is therefore proved in the form
+`CategoryTheory.Pretriangulated.isIso_app_obj₂_of_distTriang`, which only uses the exactness of
+`Hom(Y, 𝔻𝔻 -)` at the middle terms of the images of a triangle and of its rotations; the
+connecting maps there are `𝔻𝔻` of those of the triangle, and naturality of `δ` replaces the
+compatibility with the third morphisms. It needs `δ` to be invertible at `K₁⟦1⟧` and
+`K₃⟦-1⟧`, supplied by the shift compatibility.
 
-The statements are made for a general coefficient category `A`: elaborating them directly at
-`ModuleCat Λ` makes the kernel unfold the monoidal structures and time out.
+The shift compatibility uses `K⟦n⟧ ≅ K ⊗ᴸ Λ_X⟦n⟧` with `Λ_X⟦n⟧` invertible: in a braided
+monoidal closed category, `[-, W]` is self-adjoint on the right with unit `δ`
+(`CategoryTheory.MonoidalClosed.ihomFlipSelfAdjunction`), and conjugating this adjunction by the
+autoequivalences `- ⊗ L` and `[L, -]` shows that `δ_{X ⊗ L}` is invertible if and only if `δ_X`
+is (`CategoryTheory.MonoidalClosed.isIso_toIhomIhom_tensor_iff`). No sign bookkeeping is needed,
+since the unit of an adjunction is invertible at an object independently of the chosen
+adjunction (`CategoryTheory.Adjunction.isIso_unit_app_iff_of_iso`).
+
+## TODO
+
+To deduce `lem-weil-delta-restriction` and `lem-weil-delta-proper-pushforward` from
+`CategoryTheory.MonoidalClosed.mapToIhomIhomArrowIso`, two inputs are missing from the
+repository:
+
+- the derived pullback `Lg^*`, with its monoidal structure
+  `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`, is not known to be braided for the
+  derived braiding `AlgebraicGeometry.Etale.derivedBraidedCategory`, and no lax
+  braided monoidal structure on `Rf_*` is available;
+- the comparison maps `Lj^* RHom(K, N) ⟶ RHom(Lj^* K, Lj^* N)` for an open immersion `j` and
+  `Rf_* RHom(K, Rf^! N) ⟶ RHom(Rf_* K, N)` for a proper `f` are not known to be isomorphisms:
+  the isomorphisms `AlgebraicGeometry.Etale.nonempty_iso_mapDerivedCategory_upperStar_derivedHom`
+  and `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` are built by uniqueness of
+  adjoints and are not identified with them.
 -/
 
 @[expose] public section
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory MonoidalClosed Opposite Functor.LaxMonoidal
+open CategoryTheory Limits MonoidalCategory Opposite
 
 open scoped CategoryTheory.Functor
 
-namespace AlgebraicGeometry.Etale
+namespace CategoryTheory
 
-section General
+namespace Adjunction
 
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
+variable {C D : Type*} [Category* C] [Category* D]
 
-variable {X Y S : Scheme.{u}} (f : X ⟶ Y) [IsProper f] [(R(f)_![A]).IsLeftAdjoint]
-
-/-- The adjunction `Rf_* ⊣ Rf^!` of a proper morphism `f`, obtained from `Rf_! ⊣ Rf^!` and the
-proper coincidence `Rf_! ≅ Rf_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`). -/
-noncomputable def rightDerivedLowerStarUpperShriekAdjunction :
-    R((f)_*[A]) ⊣ R(f)^![A] :=
-  (rightDerivedUpperShriekAdjunction A f).ofNatIsoLeft
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar A f)
-
-attribute [local instance] leftDerivedUpperStarOplaxMonoidal derivedBraidedCategory
-
-instance isIso_projectionHom_derivedUpperStarLowerStarAdjunction
-    [IsIso (rightDerivedLowerStarProjectionMap A f)]
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    IsIso ((derivedUpperStarLowerStarAdjunction A f).projectionHom M L) := by
-  rw [Adjunction.projectionHom_eq_rightAdjointProjectionMap _
-    (leftDerivedUpperStarTensorComparison A f) (fun _ _ ↦ rfl)]
-  exact inferInstanceAs (IsIso (((rightDerivedLowerStarProjectionMap A f).app M).app L))
-
-/-- The derived direct image `Rf_*` is lax braided, as the right adjoint of the derived pullback
-`Lf^*`, which is compatible with the braidings. Its lax monoidal structure is
-`CategoryTheory.Adjunction.rightAdjointLaxMonoidal` for `Lf^* ⊣ Rf_*`. -/
-@[instance_reducible]
-noncomputable def rightDerivedLowerStarLaxBraided {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    R((f)_*[A]).LaxBraided :=
-  (derivedUpperStarLowerStarAdjunction A f).rightAdjointLaxBraidedOfMapBraidingCompδ
-    (leftDerivedUpperStar_map_braiding_comp_tensorComparison A f)
-
-variable (aY : Y ⟶ S) [HasCompactification aY] [(R(aY)_![A]).IsLeftAdjoint]
-  [HasCompactification (f ≫ aY)] [(R(f ≫ aY)_![A]).IsLeftAdjoint]
-  (e : dualizingComplex A (f ≫ aY) ≅ R(f)^![A].obj (dualizingComplex A aY))
-
-/-- The map `Rf_* ω_X ≅ Rf_* f^! ω_Y ⟶ ω_Y` of a proper morphism `f`, for an identification
-`e : ω_X ≅ f^! ω_Y`, the second map being the counit of `Rf_* ⊣ Rf^!`. -/
-noncomputable def rightDerivedLowerStarDualizingComplexHom :
-    R((f)_*[A]).obj (dualizingComplex A (f ≫ aY)) ⟶ dualizingComplex A aY :=
-  R((f)_*[A]).map e.hom ≫ (rightDerivedLowerStarUpperShriekAdjunction A f).counit.app _
-
-/-- Blueprint `lem-weil-delta-proper-pushforward`: the ambient exchange
-`Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_* K` of a proper morphism `f`, for an identification `e : ω_X ≅ f^! ω_Y`:
-the adjoint of the pairing
-`Rf_* K ⊗ᴸ Rf_* 𝔻_X K ⟶ Rf_*(K ⊗ᴸ 𝔻_X K) ⟶ Rf_* ω_X ⟶ ω_Y`, that is, the comparison map of the
-lax monoidal functor `Rf_*` followed by
-`AlgebraicGeometry.Etale.rightDerivedLowerStarDualizingComplexHom`. -/
-noncomputable def rightDerivedLowerStarVerdierDualHom
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    R((f)_*[A]).obj ((verdierDual A (f ≫ aY)).obj (op K)) ⟶
-      (verdierDual A aY).obj (op (R((f)_*[A]).obj K)) :=
-  letI := rightDerivedLowerStarLaxBraided A f
-  (ihomComparison R((f)_*[A]) K).natTrans.app _ ≫
-    (ihom _).map (rightDerivedLowerStarDualizingComplexHom A f aY e)
-
-/-- The exchange map `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_* K` is the internal adjunction map
-`Rf_* RHom(K, f^! ω_Y) ⟶ RHom(Rf_* K, ω_Y)` (`CategoryTheory.Adjunction.internalAdjunctionHom`)
-up to the identification `e`. -/
-lemma rightDerivedLowerStarVerdierDualHom_eq
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    rightDerivedLowerStarVerdierDualHom A f aY e K =
-      R((f)_*[A]).map ((ihom K).map e.hom) ≫
-        (derivedUpperStarLowerStarAdjunction A f).internalAdjunctionHom
-          (rightDerivedLowerStarUpperShriekAdjunction A f) K (dualizingComplex A aY) := by
-  let := rightDerivedLowerStarLaxBraided A f
-  dsimp only [rightDerivedLowerStarVerdierDualHom, Adjunction.internalAdjunctionHom,
-    rightDerivedLowerStarDualizingComplexHom]
-  have h := (ihomComparison R((f)_*[A]) K).natTrans.naturality e.hom
-  dsimp only [Functor.comp_map] at h
-  rw [Functor.map_comp, ← Category.assoc, ← h, Category.assoc]
-
-instance isIso_rightDerivedLowerStarVerdierDualHom [IsIso (rightDerivedLowerStarProjectionMap A f)]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsIso (rightDerivedLowerStarVerdierDualHom A f aY e K) := by
-  rw [rightDerivedLowerStarVerdierDualHom_eq]
-  have := Adjunction.isIso_internalAdjunctionHom (derivedUpperStarLowerStarAdjunction A f)
-    (rightDerivedLowerStarUpperShriekAdjunction A f) K (dualizingComplex A aY)
-  infer_instance
-
-/-- The exchange map `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_* K` is natural in `K`. -/
-@[reassoc]
-lemma rightDerivedLowerStar_map_verdierDual_map_comp_verdierDualHom
-    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (g : K ⟶ K') :
-    R((f)_*[A]).map ((verdierDual A (f ≫ aY)).map g.op) ≫
-        rightDerivedLowerStarVerdierDualHom A f aY e K =
-      rightDerivedLowerStarVerdierDualHom A f aY e K' ≫
-        (verdierDual A aY).map (R((f)_*[A]).map g).op := by
-  let := rightDerivedLowerStarLaxBraided A f
-  dsimp only [rightDerivedLowerStarVerdierDualHom]
-  rw [← Category.assoc]
-  erw [map_pre_app_comp_ihomComparison]
-  rw [Category.assoc, Category.assoc]
-  congr 1
-  exact pre_comm_ihom_map _ _
-
-/-- Blueprint `lem-weil-delta-proper-pushforward`: The double-dual morphism under a proper
-push-forward.
-
-For `f : X ⟶ Y` proper over `S`, the ambient exchange `Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerStarVerdierDualHom`) identifies `Rf_* δ_K` with
-`δ_{Rf_* K}`: the square
-```
-  Rf_* K ──────── Rf_* δ_K ────────→ Rf_* 𝔻_X 𝔻_X K
-     │                                     │
-  δ_{Rf_* K}                            exchange
-     ↓                                     ↓
-  𝔻_Y 𝔻_Y Rf_* K ──𝔻_Y(exchange)──→ 𝔻_Y Rf_* 𝔻_X K
-```
-commutes, for every complex `K`. -/
-theorem rightDerivedLowerStar_map_verdierDualDoubleDual_app_comp
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    R((f)_*[A]).map ((verdierDualDoubleDual A (f ≫ aY)).app K) ≫
-        rightDerivedLowerStarVerdierDualHom A f aY e ((verdierDual A (f ≫ aY)).obj (op K)) =
-      (verdierDualDoubleDual A aY).app (R((f)_*[A]).obj K) ≫
-        (verdierDual A aY).map (rightDerivedLowerStarVerdierDualHom A f aY e K).op := by
-  let := rightDerivedLowerStarLaxBraided A f
-  exact map_toIhomIhom_comp_ihomComparison_comp_ihom_map R((f)_*[A]) _ K
-    (rightDerivedLowerStarDualizingComplexHom A f aY e)
-
-include e in
-/-- Blueprint `lem-weil-delta-proper-pushforward`: if the projection formula holds for the proper
-morphism `f`, then `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is. -/
-theorem isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff
-    [IsIso (rightDerivedLowerStarProjectionMap A f)]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsIso (R((f)_*[A]).map ((verdierDualDoubleDual A (f ≫ aY)).app K)) ↔
-      IsIso ((verdierDualDoubleDual A aY).app (R((f)_*[A]).obj K)) := by
-  have h := rightDerivedLowerStar_map_verdierDualDoubleDual_app_comp A f aY e K
+/-- Blueprint `lem-weil-duality-pairing` (auxiliary): whether the unit of an adjunction is an
+isomorphism at an object only depends on the left adjoint up to isomorphism. -/
+lemma isIso_unit_app_iff_of_iso {F₁ F₂ : C ⥤ D} {G₁ G₂ : D ⥤ C} (adj₁ : F₁ ⊣ G₁)
+    (adj₂ : F₂ ⊣ G₂) (e : F₁ ≅ F₂) (X : C) :
+    IsIso (adj₁.unit.app X) ↔ IsIso (adj₂.unit.app X) := by
+  rw [← unit_rightAdjointUniq_hom_app (adj₁.ofNatIsoLeft e) adj₂ X]
+  have h : (adj₁.ofNatIsoLeft e).unit.app X = adj₁.unit.app X ≫ G₁.map (e.hom.app X) := rfl
+  rw [h]
   constructor
   · intro
-    have : IsIso ((verdierDualDoubleDual A aY).app (R((f)_*[A]).obj K) ≫
-        (verdierDual A aY).map (rightDerivedLowerStarVerdierDualHom A f aY e K).op) := by
-      rw [← h]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _
-      ((verdierDual A aY).map (rightDerivedLowerStarVerdierDualHom A f aY e K).op)
+    infer_instance
   · intro
-    have : IsIso (R((f)_*[A]).map ((verdierDualDoubleDual A (f ≫ aY)).app K) ≫
-        rightDerivedLowerStarVerdierDualHom A f aY e ((verdierDual A (f ≫ aY)).obj (op K))) := by
-      rw [h]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _ (rightDerivedLowerStarVerdierDualHom A f aY e _)
+    have : IsIso (adj₁.unit.app X ≫ G₁.map (e.hom.app X)) :=
+      IsIso.of_isIso_comp_right _ ((rightAdjointUniq (adj₁.ofNatIsoLeft e) adj₂).hom.app _)
+    exact IsIso.of_isIso_comp_right _ (G₁.map (e.hom.app X))
 
-end General
+end Adjunction
 
+namespace MonoidalClosed
 
-section Restriction
+variable {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
+
+/-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism as a unit. The contravariant
+functor `[-, W]` is adjoint to itself on the right: maps `M ⟶ [X, W]`
+correspond to maps `X ⊗ M ⟶ W`, hence through the braiding to maps `M ⊗ X ⟶ W`, hence to maps
+`X ⟶ [M, W]`. Its unit is the double-dual map `CategoryTheory.MonoidalClosed.toIhomIhom`
+(`CategoryTheory.MonoidalClosed.ihomFlipSelfAdjunction_unit_app`). -/
+noncomputable def ihomFlipSelfAdjunction (W : C) :
+    (internalHom.flip.obj W).rightOp ⊣ internalHom.flip.obj W :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv X M :=
+        { toFun f := curry ((β_ M.unop X).hom ≫ uncurry f.unop)
+          invFun g := (curry ((β_ M.unop X).inv ≫ uncurry g)).op
+          left_inv f := by simp
+          right_inv g := by simp }
+      homEquiv_naturality_left_symm := by
+        intro X X' M f g
+        apply Quiver.Hom.unop_inj
+        apply uncurry_injective
+        dsimp only [Equiv.coe_fn_symm_mk, Equiv.coe_fn_mk, Functor.rightOp_map,
+          Functor.flip_obj_map]
+        simp only [internalHom_map, Quiver.Hom.unop_op, unop_comp]
+        rw [uncurry_pre_app, uncurry_curry, uncurry_curry, uncurry_natural_left,
+          BraidedCategory.braiding_inv_naturality_left_assoc]
+      homEquiv_naturality_right := by
+        intro X M M' f g
+        apply uncurry_injective
+        dsimp only [Equiv.coe_fn_symm_mk, Equiv.coe_fn_mk, Functor.rightOp_map,
+          Functor.flip_obj_map]
+        simp only [internalHom_map, unop_comp]
+        rw [uncurry_pre_app, uncurry_curry, uncurry_curry, uncurry_natural_left,
+          BraidedCategory.braiding_naturality_left_assoc] }
+
+/-- Blueprint `lem-weil-duality-pairing`: the unit of the self-adjunction of `[-, W]` is the
+double-dual map `X ⟶ [[X, W], W]`. -/
+lemma ihomFlipSelfAdjunction_unit_app (W X : C) :
+    (ihomFlipSelfAdjunction W).unit.app X = toIhomIhom W X := by
+  change curry ((β_ _ X).hom ≫ uncurry (𝟙 _)) = _
+  rw [uncurry_id_eq_ev]
+  rfl
+
+/-- Blueprint `lem-weil-duality-pairing`, compatibility with shifts (formal core). Biduality
+relative to `W` is invariant under twisting by an invertible object: for `L`
+invertible, the double-dual map of `X ⊗ L` is an isomorphism if and only if that of `X` is.
+
+The functor `- ⊗ L` is an autoequivalence of `C`, `[-, L]` one of `Cᵒᵖ`, and internal currying
+`[X ⊗ L, W] ≅ [L, [X, W]]` intertwines them with `[-, W]`; the units of the two composite
+adjunctions are then isomorphisms at the same objects. -/
+theorem isIso_toIhomIhom_tensor_iff (W X : C) {L : C} (hL : IsInvertible L) :
+    IsIso (toIhomIhom W (X ⊗ L)) ↔ IsIso (toIhomIhom W X) := by
+  obtain ⟨L', ⟨e⟩, ⟨e'⟩⟩ := hL
+  let E₁ : C ≌ C := Equivalence.mk (tensorRight L) (tensorRight L')
+    ((rightUnitorNatIso C).symm ≪≫ (tensoringRight C).mapIso e.symm ≪≫ tensorRightTensor L L')
+    ((tensorRightTensor L' L).symm ≪≫ (tensoringRight C).mapIso e' ≪≫ rightUnitorNatIso C)
+  let E₀ : C ≌ C := Equivalence.mk (tensorLeft L) (tensorLeft L')
+    ((leftUnitorNatIso C).symm ≪≫ (tensoringLeft C).mapIso e'.symm ≪≫ tensorLeftTensor L' L)
+    ((tensorLeftTensor L L').symm ≪≫ (tensoringLeft C).mapIso e ≪≫ leftUnitorNatIso C)
+  have : (tensorLeft L).IsEquivalence := E₀.isEquivalence_functor
+  have : (ihom L).IsEquivalence := (ihom.adjunction L).isEquivalence_right_of_isEquivalence_left
+  let E₂ : Cᵒᵖ ≌ Cᵒᵖ := (ihom L).asEquivalence.op
+  let adj := ihomFlipSelfAdjunction W
+  let iso : E₁.functor ⋙ (internalHom.flip.obj W).rightOp ≅
+      (internalHom.flip.obj W).rightOp ⋙ E₂.functor :=
+    NatIso.ofComponents (fun X ↦ (ihomCurryIso X L W).symm.op) (fun {X Y} f ↦ by
+      apply Quiver.Hom.unop_inj
+      dsimp
+      simp only [Iso.op_inv, Quiver.Hom.unop_op, internalHom_map]
+      rw [Iso.inv_comp_eq, <- Category.assoc, Iso.eq_comp_inv]
+      exact pre_whiskerRight_app_comp_ihomCurryIso_hom f L W)
+  have h := Adjunction.isIso_unit_app_iff_of_iso (E₁.toAdjunction.comp adj)
+    (adj.comp E₂.toAdjunction) iso X
+  rw [Adjunction.comp_unit_app, Adjunction.comp_unit_app] at h
+  rwa [Equivalence.toAdjunction_unit, Equivalence.toAdjunction_unit, isIso_comp_left_iff,
+    isIso_comp_right_iff, isIso_iff_of_reflects_iso _ E₁.inverse,
+    ihomFlipSelfAdjunction_unit_app, ihomFlipSelfAdjunction_unit_app] at h
+
+section Functor
+
+variable {D : Type*} [Category* D] [MonoidalCategory D] [BraidedCategory D] [MonoidalClosed D]
+  (G : C ⥤ D) [G.LaxBraided] {W : C} {W' : D} (e : G.obj W ⟶ W')
+
+/-- Blueprints `lem-weil-delta-restriction` and `lem-weil-delta-proper-pushforward`: the
+comparison `G [X, W] ⟶ [G X, G W] ⟶ [G X, W']` of duals along a lax monoidal functor
+`G` and a map `e : G W ⟶ W'`. For the derived direct image along a proper morphism and the
+trace `Rf_* ω_X ⟶ ω_Y` it is the Verdier exchange `Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`; for the restriction
+to an open subscheme and `j^* ω_Y ≅ ω_W` it is `j^* 𝔻_Y ⟶ 𝔻_W j^*`. -/
+noncomputable def dualComparison (X : C) : G.obj ((ihom X).obj W) ⟶ (ihom (G.obj X)).obj W' :=
+  (Functor.LaxMonoidal.ihomComparison G X).natTrans.app W ≫ (ihom (G.obj X)).map e
+
+/-- Blueprints `lem-weil-delta-restriction` and `lem-weil-delta-proper-pushforward` (formal
+core): the double-dual map is compatible with lax braided functors: for `G` lax braided and
+`e : G W ⟶ W'`, the square
+```
+       G X ─────────── G δ_X ──────────→ G [[X, W], W]
+        │                                     │
+   δ_{G X}                          dualComparison [X, W]
+        ↓                                     ↓
+  [[G X, W'], W'] ─[dualComparison X, W']─→ [G [X, W], W']
+```
+commutes. -/
+@[reassoc]
+lemma map_toIhomIhom_comp_dualComparison (X : C) :
+    G.map (toIhomIhom W X) ≫ dualComparison G e ((ihom X).obj W) =
+      toIhomIhom W' (G.obj X) ≫ (pre (dualComparison G e X)).app W' := by
+  apply uncurry_injective
+  rw [uncurry_pre_app, uncurry_natural_left, dualComparison, dualComparison,
+    uncurry_natural_right, uncurry_eq]
+  simp only [Category.assoc]
+  rw [Functor.LaxMonoidal.ihomComparison_ev_assoc, Functor.LaxMonoidal.μ_natural_right_assoc,
+    ← G.map_comp_assoc, ← uncurry_eq, uncurry_toIhomIhom, G.map_comp_assoc,
+    Functor.LaxBraided.braided_assoc, uncurry_toIhomIhom,
+    BraidedCategory.braiding_naturality_left_assoc, MonoidalCategory.whiskerLeft_comp_assoc,
+    ihom.ev_naturality, Functor.LaxMonoidal.ihomComparison_ev_assoc]
+
+omit [BraidedCategory D] in
+/-- Blueprint `lem-weil-delta-proper-pushforward` (auxiliary): the precomposition
+`[Y, W'] ⟶ [X, W']` with an isomorphism `X ⟶ Y` is an isomorphism. -/
+lemma isIso_pre_app {X Y : D} (f : X ⟶ Y) [IsIso f] (Z : D) : IsIso ((pre f).app Z) :=
+  ⟨(pre (inv f)).app Z, by simp [← NatTrans.comp_app, ← pre_map],
+    by simp [← NatTrans.comp_app, ← pre_map]⟩
+
+/-- Blueprints `lem-weil-delta-restriction` and `lem-weil-delta-proper-pushforward`: if the
+dual comparisons of `X` and of `[X, W]` along a lax braided functor `G` are isomorphisms, then
+`G δ_X` is isomorphic, as an arrow, to the double-dual map of `G X` relative
+to `W'`. -/
+noncomputable def mapToIhomIhomArrowIso (X : C) [IsIso (dualComparison G e X)]
+    [IsIso (dualComparison G e ((ihom X).obj W))] :
+    Arrow.mk (G.map (toIhomIhom W X)) ≅ Arrow.mk (toIhomIhom W' (G.obj X)) :=
+  haveI := isIso_pre_app (dualComparison G e X) W'
+  Arrow.isoMk (Iso.refl _)
+    (asIso (dualComparison G e ((ihom X).obj W)) ≪≫
+      (asIso ((pre (dualComparison G e X)).app W')).symm)
+    (by simp [map_toIhomIhom_comp_dualComparison_assoc])
+
+/-- Blueprints `lem-weil-delta-restriction` and `lem-weil-delta-proper-pushforward`: if the
+dual comparisons of `X` and of `[X, W]` along a lax braided functor `G` are isomorphisms, then
+`G δ_X` is an isomorphism if and only if the double-dual map of `G X`
+relative to `W'` is. -/
+theorem isIso_map_toIhomIhom_iff (X : C) [IsIso (dualComparison G e X)]
+    [IsIso (dualComparison G e ((ihom X).obj W))] :
+    IsIso (G.map (toIhomIhom W X)) ↔ IsIso (toIhomIhom W' (G.obj X)) :=
+  (MorphismProperty.isomorphisms D).arrow_mk_iso_iff (mapToIhomIhomArrowIso G e X)
+
+end Functor
+
+end MonoidalClosed
+
+namespace Pretriangulated
+
+variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+
+/-- Blueprint `lem-weil-duality-pairing` (formal core): a five lemma for a natural
+transformation `δ : 𝟭 ⟶ F` to an endofunctor `F` which sends distinguished triangles to
+triangles that are distinguished for *some* third morphism. If `δ` is an isomorphism at `T.obj₁`,
+`T.obj₃`, `T.obj₁⟦1⟧` and `T.obj₃⟦-1⟧` for a distinguished triangle `T`, then it is an
+isomorphism at `T.obj₂`.
+
+No compatibility of `δ` with the third morphisms is needed: the argument only uses the
+exactness of `Hom(Y, F -)` at the middle terms of the images of `T` and of its rotations, the
+connecting maps being `F` applied to those of `T`. -/
+theorem isIso_app_obj₂_of_distTriang (F : C ⥤ C) (δ : 𝟭 C ⟶ F)
+    (hF : ∀ T ∈ distTriang C, ∃ w, Triangle.mk (F.map T.mor₁) (F.map T.mor₂) w ∈ distTriang C)
+    (T : Triangle C) (hT : T ∈ distTriang C) [IsIso (δ.app T.obj₁)] [IsIso (δ.app T.obj₃)]
+    [IsIso (δ.app (T.obj₁⟦(1 : ℤ)⟧))] [IsIso (δ.app (T.obj₃⟦(-1 : ℤ)⟧))] :
+    IsIso (δ.app T.obj₂) := by
+  have nat : ∀ {X Y : C} (f : X ⟶ Y), f ≫ δ.app Y = δ.app X ≫ F.map f := fun f ↦ δ.naturality f
+  have inj : ∀ {Y : C} (g : Y ⟶ T.obj₂), g ≫ δ.app T.obj₂ = 0 → g = 0 := by
+    intro Y g hg
+    have h₁ : g ≫ T.mor₂ = 0 := by
+      rw [← cancel_mono (δ.app T.obj₃), Category.assoc, nat T.mor₂, reassoc_of% hg, zero_comp,
+        zero_comp]
+    obtain ⟨g₁, rfl⟩ := Triangle.coyoneda_exact₂ T hT g h₁
+    obtain ⟨w, hw⟩ := hF _ (inv_rot_of_distTriang T hT)
+    have h₂ : (g₁ ≫ δ.app T.obj₁) ≫ F.map T.invRotate.mor₂ = 0 := by
+      change (g₁ ≫ δ.app T.obj₁) ≫ F.map T.mor₁ = 0
+      rw [Category.assoc, ← nat T.mor₁, ← Category.assoc, hg]
+    obtain ⟨h₀, hh₀⟩ := Triangle.coyoneda_exact₂ _ hw (g₁ ≫ δ.app T.obj₁) h₂
+    replace hh₀ : g₁ ≫ δ.app T.obj₁ = h₀ ≫ F.map T.invRotate.mor₁ := hh₀
+    have : IsIso (δ.app T.invRotate.obj₁) := ‹IsIso (δ.app (T.obj₃⟦(-1 : ℤ)⟧))›
+    have : g₁ = (h₀ ≫ inv (δ.app T.invRotate.obj₁)) ≫ T.invRotate.mor₁ := by
+      rw [← cancel_mono (δ.app T.obj₁), hh₀, Category.assoc, Category.assoc]
+      erw [nat T.invRotate.mor₁]
+      rw [IsIso.inv_hom_id_assoc]
+    rw [this, Category.assoc, Category.assoc]
+    erw [comp_distTriang_mor_zero₁₂ _ (inv_rot_of_distTriang T hT)]
+    rw [comp_zero, comp_zero]
+  have surj : ∀ {Y : C} (f : Y ⟶ F.obj T.obj₂), ∃ g, g ≫ δ.app T.obj₂ = f := by
+    intro Y f
+    obtain ⟨w, hw⟩ := hF _ (rot_of_distTriang T hT)
+    obtain ⟨w', hw'⟩ := hF T hT
+    have hc : (f ≫ F.map T.mor₂ ≫ inv (δ.app T.obj₃)) ≫ T.mor₃ = 0 := by
+      rw [← cancel_mono (δ.app (T.obj₁⟦(1 : ℤ)⟧)), zero_comp, Category.assoc, Category.assoc,
+        Category.assoc, nat T.mor₃, IsIso.inv_hom_id_assoc]
+      erw [comp_distTriang_mor_zero₁₂ _ hw]
+      rw [comp_zero]
+    obtain ⟨d, hd⟩ := Triangle.coyoneda_exact₃ T hT _ hc
+    have h₃ : (f - d ≫ δ.app T.obj₂) ≫ F.map T.mor₂ = 0 := by
+      rw [Preadditive.sub_comp, Category.assoc, ← nat T.mor₂, ← Category.assoc, ← hd]
+      simp
+    obtain ⟨e, he⟩ := Triangle.coyoneda_exact₂ _ hw' _ h₃
+    replace he : f - d ≫ δ.app T.obj₂ = e ≫ F.map T.mor₁ := he
+    refine ⟨d + e ≫ inv (δ.app T.obj₁) ≫ T.mor₁, ?_⟩
+    rw [Preadditive.add_comp, Category.assoc, Category.assoc, nat T.mor₁,
+      IsIso.inv_hom_id_assoc, ← he]
+    abel
+  have : Mono (δ.app T.obj₂) := Preadditive.mono_of_cancel_zero _ fun g hg ↦ inj g hg
+  obtain ⟨s, hs⟩ := surj (𝟙 _)
+  have : IsSplitEpi (δ.app T.obj₂) := IsSplitEpi.mk' ⟨s, hs⟩
+  exact isIso_of_mono_of_isSplitEpi _
+
+end Pretriangulated
+
+end CategoryTheory
+
+namespace AlgebraicGeometry
+
+open Scheme CategoryTheory.Pretriangulated
+
+namespace Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
+  [Abelian.HasFunctorialFlatResolution A]
+  {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
 
 attribute [local instance] derivedBraidedCategory
 
-variable {Z Y S S' : Scheme.{u}} (g : Z ⟶ Y) (aY : Y ⟶ S) [HasCompactification aY]
-  [(R(aY)_![A]).IsLeftAdjoint] (aZ : Z ⟶ S') [HasCompactification aZ]
-  [(R(aZ)_![A]).IsLeftAdjoint]
-  (e : L((g)^*[A]).obj (dualizingComplex A aY) ⟶ dualizingComplex A aZ)
+/-- Blueprint `lem-weil-duality-pairing` (auxiliary): the Verdier dual on morphisms is
+`RHom(-, ω_X)`. -/
+lemma verdierDual_map {K K' : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ}
+    (f : K ⟶ K') :
+    (verdierDual A a).map f = ((RHom(X)[A]).map f).app (dualizingComplex A a) :=
+  rfl
 
-/-- Blueprint `lem-weil-delta-restriction`: the comparison `Lg^* 𝔻_Y K ⟶ 𝔻_Z Lg^* K` of the
-derived pullback along `g : Z ⟶ Y` with the Verdier duals, for a map
-`e : Lg^* ω_Y ⟶ ω_Z`: the comparison map `Lg^* RHom(K, ω_Y) ⟶ RHom(Lg^* K, Lg^* ω_Y)` of the
-monoidal functor `Lg^*`, followed by `e`. -/
-noncomputable def leftDerivedUpperStarVerdierDualHom
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    L((g)^*[A]).obj ((verdierDual A aY).obj (op K)) ⟶
-      (verdierDual A aZ).obj (op (L((g)^*[A]).obj K)) :=
-  letI := leftDerivedUpperStarBraided A g
-  (ihomComparison L((g)^*[A]) K).natTrans.app _ ≫ (ihom _).map e
+/-- Blueprint `lem-weil-duality-pairing`: the double dual `𝔻_X 𝔻_X` carries a distinguished
+triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧` to a triangle `𝔻𝔻K₁ ⟶ 𝔻𝔻K₂ ⟶ 𝔻𝔻K₃ ⟶ 𝔻𝔻K₁⟦1⟧` whose first
+two maps are induced by those of the given triangle and which is distinguished for a suitable
+third map: `RHom(-, ω_X)` is exact (`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_left`,
+blueprint `lem-sf-hom-triangulated`), applied twice. -/
+theorem exists_distTriang_verdierDual_verdierDual
+    (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
+    (hT : T ∈ distTriang _) :
+    ∃ w, Triangle.mk (((verdierDual A a).rightOp ⋙ verdierDual A a).map T.mor₁)
+      (((verdierDual A a).rightOp ⋙ verdierDual A a).map T.mor₂) w ∈ distTriang _ := by
+  obtain ⟨w, hw⟩ := exists_distTriang_derivedHom_left (dualizingComplex A a) T hT
+  obtain ⟨w', hw'⟩ := exists_distTriang_derivedHom_left (dualizingComplex A a) _ hw
+  simp only [Functor.comp_map, Functor.rightOp_map, verdierDual_map]
+  exact ⟨w', hw'⟩
 
-/-- Blueprint `lem-weil-delta-restriction`: The double-dual morphism restricts.
+/-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism `δ_K` is natural, so whether
+it is an isomorphism only depends on `K` up to isomorphism. -/
+theorem isIso_verdierDualDoubleDual_app_iff_of_iso
+    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (e : K ≅ K') :
+    IsIso ((verdierDualDoubleDual A a).app K) ↔ IsIso ((verdierDualDoubleDual A a).app K') :=
+  NatTrans.isIso_app_iff_of_iso _ e
 
-For `g : Z ⟶ Y` and a map `e : Lg^* ω_Y ⟶ ω_Z`, the comparison
-`Lg^* 𝔻_Y ⟶ 𝔻_Z Lg^*` (`AlgebraicGeometry.Etale.leftDerivedUpperStarVerdierDualHom`) identifies
-`Lg^* δ_K` with `δ_{Lg^* K}`: the square
-```
-  Lg^* K ──────── Lg^* δ_K ────────→ Lg^* 𝔻_Y 𝔻_Y K
-     │                                     │
-  δ_{Lg^* K}                          comparison
-     ↓                                     ↓
-  𝔻_Z 𝔻_Z Lg^* K ──𝔻_Z(comparison)──→ 𝔻_Z Lg^* 𝔻_Y K
-```
-commutes. For `g` an open immersion, the comparison is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStarVerdierDualHom`). -/
-theorem leftDerivedUpperStar_map_verdierDualDoubleDual_app_comp
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    L((g)^*[A]).map ((verdierDualDoubleDual A aY).app K) ≫
-        leftDerivedUpperStarVerdierDualHom A g aY aZ e ((verdierDual A aY).obj (op K)) =
-      (verdierDualDoubleDual A aZ).app (L((g)^*[A]).obj K) ≫
-        (verdierDual A aZ).map (leftDerivedUpperStarVerdierDualHom A g aY aZ e K).op := by
-  letI := leftDerivedUpperStarBraided A g
-  exact map_toIhomIhom_comp_ihomComparison_comp_ihom_map L((g)^*[A]) _ K e
+/-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism is compatible with shifts,
+`δ_{K⟦n⟧}` is an isomorphism if and only if `δ_K` is.
 
-section OpenImmersion
+As `K⟦n⟧ ≅ K ⊗ᴸ Λ_X⟦n⟧` with `Λ_X⟦n⟧` invertible, this is the invariance of biduality under
+twisting by an invertible object, `CategoryTheory.MonoidalClosed.isIso_toIhomIhom_tensor_iff`. -/
+theorem isIso_verdierDualDoubleDual_app_shift_iff
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ) :
+    IsIso ((verdierDualDoubleDual A a).app (K⟦n⟧)) ↔
+      IsIso ((verdierDualDoubleDual A a).app K) := by
+  let e : K⟦n⟧ ≅ K ⊗ (𝟙_ _)⟦n⟧ :=
+    ((((curriedTensor _).obj K).commShiftIso n).app (𝟙_ _) ≪≫
+      (shiftFunctor _ n).mapIso (ρ_ K)).symm
+  rw [isIso_verdierDualDoubleDual_app_iff_of_iso A a e, verdierDualDoubleDual_app,
+    verdierDualDoubleDual_app]
+  exact MonoidalClosed.isIso_toIhomIhom_tensor_iff _ _
+    (AlgebraicGeometry.Etale.DerivedCategory.isInvertible_shift isInvertible_unit n)
 
-variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
-  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
-  [hJ : Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+/-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism is compatible with
+distinguished triangles. For a distinguished triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧` of `D(X_ét)`, if
+`δ_{K₁}` and `δ_{K₃}` are isomorphisms, then so is `δ_{K₂}`.
 
-variable {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j]
+This is the triangulated five lemma
+(`CategoryTheory.Pretriangulated.isIso_app_obj₂_of_distTriang`) for the natural
+transformation `δ : 𝟭 ⟶ 𝔻_X 𝔻_X`, using the exactness of `𝔻_X 𝔻_X`
+(`AlgebraicGeometry.Etale.exists_distTriang_verdierDual_verdierDual`) and the compatibility of
+`δ` with shifts (`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_shift_iff`). -/
+theorem isIso_verdierDualDoubleDual_app_obj₂
+    (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
+    (hT : T ∈ distTriang _) (h₁ : IsIso ((verdierDualDoubleDual A a).app T.obj₁))
+    (h₃ : IsIso ((verdierDualDoubleDual A a).app T.obj₃)) :
+    IsIso ((verdierDualDoubleDual A a).app T.obj₂) := by
+  have := (isIso_verdierDualDoubleDual_app_shift_iff A a T.obj₁ 1).2 h₁
+  have := (isIso_verdierDualDoubleDual_app_shift_iff A a T.obj₃ (-1)).2 h₃
+  exact isIso_app_obj₂_of_distTriang _ _ (exists_distTriang_verdierDual_verdierDual A a) T hT
 
-/-- The adjunction `D(j_!) ⊣ Lj^*` along an open immersion `j`, from `D(j_!) ⊣ D(j^*)` and
-`Lj^* ≅ D(j^*)`. -/
-noncomputable def derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction :
-    D((j)_!open[A]) ⊣ L((j)^*[A]) :=
-  (derivedOpenImmersionLowerShriekUpperStarAdjunction A j).ofNatIsoRight
-    (leftDerivedUpperStarIsoMapDerivedCategory A j).symm
+/-- Blueprint `lem-weil-duality-pairing`: the *biduality locus*, the complexes `K` of `D(X_ét)`
+whose double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. It is a triangulated
+subcategory (`AlgebraicGeometry.Etale.verdierBidualityLocus_isTriangulated`). -/
+def verdierBidualityLocus :
+    ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
+  fun K ↦ IsIso ((verdierDualDoubleDual A a).app K)
 
-instance isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_unit :
-    IsIso (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction A j).unit := by
-  have : (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction A j).unit =
-      (derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit ≫
-        Functor.whiskerLeft D((j)_!open[A]) (leftDerivedUpperStarIsoMapDerivedCategory A j).inv := by
-    ext K
-    simp [derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction,
-      Adjunction.ofNatIsoRight, Adjunction.homEquiv_unit]
-  rw [this]
-  infer_instance
+/-- Blueprint `lem-weil-duality-pairing`: the biduality locus is closed under isomorphisms. -/
+instance verdierBidualityLocus_isClosedUnderIsomorphisms :
+    (verdierBidualityLocus A a).IsClosedUnderIsomorphisms :=
+  ⟨fun e h ↦ (isIso_verdierDualDoubleDual_app_iff_of_iso A a e).1 h⟩
 
-include hJ in
-/-- The left projection map `D(j_!)(Lj^* K ⊗ᴸ N) ⟶ K ⊗ᴸ D(j_!) N` of an open immersion `j`
-(`CategoryTheory.Adjunction.leftProjectionHom`) is an isomorphism: after `Lj^*` it is an
-isomorphism since the unit of `D(j_!) ⊣ Lj^*` is, and after restriction to the closed complement
-of `j` both sides vanish. -/
-lemma isIso_leftProjectionHom_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
-    (N : _root_.DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-    letI := leftDerivedUpperStarBraided A j
-    IsIso ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction A j).leftProjectionHom
-      K N) := by
-  letI := leftDerivedUpperStarBraided A j
-  let adj := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction A j
-  refine isIso_of_isIso_leftDerivedUpperStar_closedComplement_map A j _ ?_ ?_
-  · have h : adj.unit.app _ ≫ L((j)^*[A]).map (adj.leftProjectionHom K N) =
-        L((j)^*[A]).obj K ◁ adj.unit.app N ≫ μ L((j)^*[A]) K (D((j)_!open[A]).obj N) := by
-      rw [Adjunction.leftProjectionHom]
-      exact (adj.homEquiv_unit _ _ _).symm.trans (Equiv.apply_symm_apply _ _)
-    have : IsIso (adj.unit.app _ ≫ L((j)^*[A]).map (adj.leftProjectionHom K N)) := by
-      rw [h]
-      infer_instance
-    exact IsIso.of_isIso_comp_left (adj.unit.app _) _
-  · exact isIso_of_source_target_iso_zero _
-      (isZero_leftDerivedUpperStar_closedComplement_obj_openImmersionLowerShriek A j _).isoZero
-      ((isZero_derivedTensor_obj_obj_of_isZero_right (L((j.closedComplement)^*[A]).obj K)
-        (isZero_leftDerivedUpperStar_closedComplement_obj_openImmersionLowerShriek A j N)).of_iso
-          (leftDerivedUpperStarTensorIso A j.closedComplement K _)).isoZero
+/-- Blueprint `lem-weil-duality-pairing`: the biduality locus is stable under shifts. -/
+instance verdierBidualityLocus_isStableUnderShift :
+    (verdierBidualityLocus A a).IsStableUnderShift ℤ :=
+  ⟨fun n ↦ ⟨fun K hK ↦ (isIso_verdierDualDoubleDual_app_shift_iff A a K n).2 hK⟩⟩
 
-include hJ in
-/-- **Restriction to an open commutes with the internal hom.** For an open immersion `j`, the
-comparison map `Lj^* RHom(K, L) ⟶ RHom(Lj^* K, Lj^* L)` of the monoidal functor `Lj^*` is an
-isomorphism, by the projection formula for `j_!`. -/
-lemma isIso_ihomComparison_leftDerivedUpperStar_of_isOpenImmersion
-    (K L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    letI := leftDerivedUpperStarBraided A j
-    IsIso ((ihomComparison L((j)^*[A]) K).natTrans.app L) := by
-  letI := leftDerivedUpperStarBraided A j
-  have := isIso_leftProjectionHom_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-    A j K
-  exact (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction A j
-    ).isIso_ihomComparison_of_isIso_leftProjectionHom K L
+/-- Blueprint `lem-weil-duality-pairing`: the biduality locus is closed under extensions. -/
+instance verdierBidualityLocus_isTriangulatedClosed₂ :
+    (verdierBidualityLocus A a).IsTriangulatedClosed₂ :=
+  .mk' fun T hT h₁ h₃ ↦ isIso_verdierDualDoubleDual_app_obj₂ A a T hT h₁ h₃
 
-variable (aU : U ⟶ S') [HasCompactification aU] [(R(aU)_![A]).IsLeftAdjoint]
-  (e : L((j)^*[A]).obj (dualizingComplex A aY) ⟶ dualizingComplex A aU)
+open ZeroObject in
+/-- Blueprint `lem-weil-duality-pairing`: the biduality locus contains the zero object, whose
+double dual is zero. -/
+instance verdierBidualityLocus_containsZero : (verdierBidualityLocus A a).ContainsZero where
+  exists_zero := by
+    refine ⟨0, isZero_zero _, ?_⟩
+    have h : IsZero ((verdierDual A a).obj (op ((verdierDual A a).obj
+        (op (0 : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))))) :=
+      isZero_ihom_obj_of_isZero (isZero_ihom_obj_of_isZero (isZero_zero _) _) _
+    exact ⟨⟨0, (isZero_zero _).eq_of_src _ _, h.eq_of_src _ _⟩⟩
 
-include hJ in
-lemma isIso_leftDerivedUpperStarVerdierDualHom [IsIso e]
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    IsIso (leftDerivedUpperStarVerdierDualHom A j aY aU e K) := by
-  letI := leftDerivedUpperStarBraided A j
-  have := isIso_ihomComparison_leftDerivedUpperStar_of_isOpenImmersion A j K
-    (dualizingComplex A aY)
-  dsimp only [leftDerivedUpperStarVerdierDualHom]
-  infer_instance
+/-- Blueprint `lem-weil-duality-pairing`: since the double-dual morphism commutes with shifts
+and is a morphism of distinguished triangles, the complexes `K` for which `δ_K` is an
+isomorphism form a triangulated subcategory of `D(X_ét)`. -/
+instance verdierBidualityLocus_isTriangulated :
+    (verdierBidualityLocus A a).IsTriangulated where
 
-include hJ in
-/-- Blueprint `lem-weil-delta-restriction`: biduality restricts to opens. For an open immersion
-`j : U ⟶ Y` and an isomorphism `e : Lj^* ω_Y ≅ ω_U`, the restriction `Lj^* δ_K` of the
-double-dual morphism is an isomorphism if and only if the double-dual morphism `δ_{Lj^* K}` of
-the restriction is. -/
-theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff [IsIso e]
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    IsIso (L((j)^*[A]).map ((verdierDualDoubleDual A aY).app K)) ↔
-      IsIso ((verdierDualDoubleDual A aU).app (L((j)^*[A]).obj K)) := by
-  have h := leftDerivedUpperStar_map_verdierDualDoubleDual_app_comp A j aY aU e K
-  have := isIso_leftDerivedUpperStarVerdierDualHom A aY j aU e K
-  have := isIso_leftDerivedUpperStarVerdierDualHom A aY j aU e ((verdierDual A aY).obj (op K))
-  constructor
-  · intro
-    have : IsIso ((verdierDualDoubleDual A aU).app (L((j)^*[A]).obj K) ≫
-        (verdierDual A aU).map (leftDerivedUpperStarVerdierDualHom A j aY aU e K).op) := by
-      rw [← h]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _
-      ((verdierDual A aU).map (leftDerivedUpperStarVerdierDualHom A j aY aU e K).op)
-  · intro
-    have : IsIso (L((j)^*[A]).map ((verdierDualDoubleDual A aY).app K) ≫
-        leftDerivedUpperStarVerdierDualHom A j aY aU e ((verdierDual A aY).obj (op K))) := by
-      rw [h]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _
-      (leftDerivedUpperStarVerdierDualHom A j aY aU e ((verdierDual A aY).obj (op K)))
+section Localization
 
-end OpenImmersion
+variable (Λ : Type (u + 1)) [CommRing Λ] {X U S : Scheme.{u}} (a : X ⟶ S) (b : U ⟶ S)
+  [HasCompactification a] [HasCompactification b] [(R(a)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+  [(R(b)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] (j : U ⟶ X) [Etale j] [Surjective j]
 
-end Restriction
+/-- Blueprint `lem-weil-delta-restriction`: biduality is local for the étale topology, the
+descent step. Let `j : U ⟶ X` be étale and surjective (for instance the disjoint union of the
+members of an open cover). If `Lj^* δ_K` is identified, as an arrow, with the double-dual
+morphism `δ_{Lj^* K}` of `U` and the latter is an isomorphism, then `δ_K` is an isomorphism,
+isomorphisms descending along `j`
+(`AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map_of_surjective`).
 
-section Finite
+The identification of `Lj^* δ_K` with `δ_{Lj^* K}` is the content of the blueprint lemma; its
+formal core is `CategoryTheory.MonoidalClosed.mapToIhomIhomArrowIso`, see the module
+docstring for what remains to apply it to `Lj^*`. -/
+theorem isIso_verdierDualDoubleDual_app_of_surjective
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (e : Arrow.mk ((L((j)^*[ModuleCat.{u + 1} Λ])).map
+        ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K)) ≅
+      Arrow.mk ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) b).app
+        ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)))
+    (h : IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) b).app
+      ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K))) :
+    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
+  isIso_of_isIso_leftDerivedUpperStar_map_of_surjective Λ j _
+    (((MorphismProperty.isomorphisms _).arrow_mk_iso_iff e).2 h)
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+end Localization
 
-/-- Blueprint `lem-weil-delta-proper-pushforward`, at a finite coefficient ring `Λ`: for
-`f : X ⟶ Y` proper over `S`, `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is. -/
-theorem isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff_of_finite
-    {X Y S : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (aY : Y ⟶ S) [HasCompactification aY]
-    [HasCompactification (f ≫ aY)] [QuasiCompact (f ≫ aY)]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (R((f)_*[ModuleCat.{u + 1} Λ]).map
-        ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).app K)) ↔
-      IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aY).app
-        (R((f)_*[ModuleCat.{u + 1} Λ]).obj K)) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f aY
-  have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ f
-  exact isIso_rightDerivedLowerStar_map_verdierDualDoubleDual_app_iff _ f aY (e.app (𝟙_ _)) K
+end Etale
 
-/-- Blueprint `lem-weil-delta-restriction`, at a finite coefficient ring `Λ`: for a
-quasi-compact open immersion `j : U ⟶ Y` and `Y` over `S`, the restriction `Lj^* δ_K` of the
-double-dual morphism of `Y` is an isomorphism if and only if the double-dual morphism
-`δ_{Lj^* K}` of `U` is. The dualizing complexes are identified by
-`Lj^* ω_Y ≅ Rj^! ω_Y ≅ ω_U` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`,
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`). -/
-theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_finite
-    {U Y S : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [HasCompactification j]
-    [QuasiCompact j] (aY : Y ⟶ S) [HasCompactification aY] [HasCompactification (j ≫ aY)]
-    [QuasiCompact (j ≫ aY)]
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (L((j)^*[ModuleCat.{u + 1} Λ]).map
-        ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aY).app K)) ↔
-      IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) (j ≫ aY)).app
-        (L((j)^*[ModuleCat.{u + 1} Λ]).obj K)) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ j aY
-  let e' : L((j)^*[ModuleCat.{u + 1} Λ]).obj (dualizingComplex _ aY) ≅
-      dualizingComplex _ (j ≫ aY) :=
-    (leftDerivedUpperStarIsoMapDerivedCategory _ j).app _ ≪≫
-      (rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).symm.app _ ≪≫ (e.app (𝟙_ _)).symm
-  exact isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff _ aY j (j ≫ aY) e'.hom K
-
-end Finite
-
-end AlgebraicGeometry.Etale
+end AlgebraicGeometry

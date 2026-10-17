@@ -52,7 +52,7 @@ namespace Etale
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 section
 
-open DerivedCategory Functor.LaxMonoidal
+open _root_.DerivedCategory Functor.LaxMonoidal
 
 /-- The bifunctor `(K, M) ↦ Lg^*K ⊗ᴸ Lg^*M`, of type `D(Y_ét) ⥤ D(Y_ét) ⥤ D(Z_ét)`. -/
 noncomputable abbrev derivedTensorLeftDerivedUpperStar :

@@ -293,6 +293,25 @@ lemma MorphismProperty.Over.isIso_pullbackMapComparison_of_isPullback
 
 end PullbackMapComparison
 
+section PullbackCongr
+
+set_option backward.defeqAttrib.useBackward true in
+/-- The base change isomorphism along an equality `f = g` is compatible with the second
+projections. This complements mathlib's
+`CategoryTheory.MorphismProperty.Over.pullbackCongr_hom_app_left_fst`. -/
+@[reassoc (attr := simp)]
+lemma MorphismProperty.Over.pullbackCongr_hom_app_left_snd {f g : X ⟶ Y}
+    [P.HasPullbacksAlong f] [P.IsStableUnderBaseChangeAlong f] [Q.IsStableUnderBaseChange]
+    (h : f = g) (B : P.Over Q Y) :
+    haveI : P.HasPullbacksAlong g := by subst h; infer_instance
+    ((MorphismProperty.Over.pullbackCongr h).hom.app B).left ≫ pullback.snd B.hom g =
+      pullback.snd B.hom f := by
+  subst h
+  simp [MorphismProperty.Over.pullbackCongr]
+
+end PullbackCongr
+
+
 end CategoryTheory
 
 namespace CategoryTheory.MorphismProperty.Over

@@ -5,68 +5,39 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
-public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+public import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
 # The unbounded derived base change map restricts to the bounded below one
 
 For a commutative square of schemes `g' ≫ f = f' ≫ g`, the derived base change map
-`AlgebraicGeometry.Etale.derivedBaseChangeMap` on the unbounded derived categories, evaluated at
-a bounded below complex `K`, is the bounded below derived base change map
-`AlgebraicGeometry.Etale.baseChange` at `K`, modulo the identifications of the derived functors
-on the bounded below derived categories with the restrictions of the unbounded ones. Both maps
-are mates of the derived square isomorphisms, and the bounded below derived adjunctions are the
-restrictions of the unbounded ones (`CategoryTheory.map_mateEquiv_app_of_restrict`).
+`Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*` on the unbounded derived categories
+(`AlgebraicGeometry.Etale.derivedBaseChangeMap`) restricts on the bounded below derived
+categories to the derived base change map `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`,
+modulo the identifications `Lg^* ≅ D(g^*)` of the derived pullbacks and
+`R⁺f_* ⋙ ι ≅ ι ⋙ Rf_*` of the derived pushforwards
+(`AlgebraicGeometry.Etale.ι_map_derivedBaseChangeMapPlus_app`). In particular the two are
+isomorphisms at the same bounded below objects
+(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_ι_obj_iff`), so that the base change
+theorems and the pasting laws available on the bounded below derived categories apply to the
+unbounded derived base change map at bounded below objects.
 
-## Main statements
-
-- `AlgebraicGeometry.Etale.ι_map_baseChange_app`: the bounded below derived base change map is
-  the restriction of the unbounded one.
-- `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_ι_iff`: the unbounded derived base
-  change map is an isomorphism at a bounded below complex if and only if the bounded below one
-  is.
+The proof checks the characterisation `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext` of
+the bounded below map on the restriction of the unbounded one: on a bounded below complex both
+are computed by the underived base change map
+(`AlgebraicGeometry.Etale.derivedBaseChangeMap_app_fac`,
+`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app`).
 -/
 
 @[expose] public section
 
 universe u' u
 
-open CategoryTheory Category Limits
+open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor
-
-namespace CategoryTheory.Functor
-
-variable {C D E : Type*} [Category* C] [Category* D] [Category* E] [Abelian C] [Abelian D]
-  [Abelian E] [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-
-/-- The inverse of `Functor.mapDerivedCategoryPlusNatIso` is the restriction of the inverse of
-`Functor.mapDerivedCategoryNatIso`. -/
-@[simp]
-lemma ι_map_mapDerivedCategoryPlusNatIso_inv_app {F G : C ⥤ D} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits G]
-    [PreservesFiniteColimits G] (e : F ≅ G) (X : DerivedCategory.Plus C) :
-    DerivedCategory.Plus.ι.map ((mapDerivedCategoryPlusNatIso e).inv.app X) =
-      (mapDerivedCategoryNatIso e).inv.app (DerivedCategory.Plus.ι.obj X) := by
-  rw [← cancel_mono ((mapDerivedCategoryNatIso e).hom.app _), Iso.inv_hom_id_app,
-    ← ι_map_mapDerivedCategoryPlusNatIso_hom_app, ← Functor.map_comp, Iso.inv_hom_id_app]
-  exact DerivedCategory.Plus.ι.map_id _
-
-/-- The inverse of `Functor.mapDerivedCategoryPlusCompIso` is the restriction of the inverse of
-`Functor.mapDerivedCategoryCompIso`. -/
-@[simp]
-lemma ι_map_mapDerivedCategoryPlusCompIso_inv_app (F : C ⥤ D) (G : D ⥤ E) [F.Additive]
-    [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits G]
-    [PreservesFiniteColimits G] (X : DerivedCategory.Plus C) :
-    DerivedCategory.Plus.ι.map ((mapDerivedCategoryPlusCompIso F G).inv.app X) =
-      (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Plus.ι.obj X) := by
-  rw [← cancel_mono ((mapDerivedCategoryCompIso F G).hom.app _), Iso.inv_hom_id_app,
-    ← ι_map_mapDerivedCategoryPlusCompIso_hom_app, ← Functor.map_comp, Iso.inv_hom_id_app]
-  exact DerivedCategory.Plus.ι.map_id _
-
-end CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
@@ -74,81 +45,151 @@ namespace Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
-
-/-- The identification `ι ⋙ Lg^* ≅ D⁺(g^*) ⋙ ι` of the restriction of the unbounded derived
-pullback to the bounded below derived category with the bounded below derived pullback. -/
-noncomputable abbrev leftDerivedUpperStarPlusIso {Y Z : Scheme.{u}} (g : Z ⟶ Y) :
-    DerivedCategory.Plus.ι ⋙ L((g)^*[A]) ≅ D+((g)^*[A]) ⋙ DerivedCategory.Plus.ι :=
-  Functor.isoWhiskerLeft DerivedCategory.Plus.ι (leftDerivedUpperStarIsoMapDerivedCategory A g) ≪≫
-    ((g)^*[A]).mapDerivedCategoryPlusCompatibility.symm
+  [Abelian.HasFunctorialFlatResolution A]
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-omit [HasSmallSiteSheafify A] in
-/-- The pullback comparison `θ_sq` on the bounded below derived categories is the restriction of
-the derived square isomorphism on the unbounded derived categories. -/
-lemma ι_map_pullbackSquareComparison_hom_app (sq : CommSq g' f' f g)
-    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)) :
-    DerivedCategory.Plus.ι.map ((Etale.pullbackSquareComparison A sq).hom.app K) =
-      (leftDerivedUpperStarPlusIso A f').inv.app (D+((g)^*[A]).obj K) ≫
-        L((f')^*[A]).map ((leftDerivedUpperStarPlusIso A g).inv.app K) ≫
-        (derivedSquareUpperStarIso A sq).hom.app (DerivedCategory.Plus.ι.obj K) ≫
-        L((g')^*[A]).map ((leftDerivedUpperStarPlusIso A f).hom.app K) ≫
-        (leftDerivedUpperStarPlusIso A g').hom.app (D+((f)^*[A]).obj K) := by
-  rw [Etale.pullbackSquareComparison_eq]
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
-    upperStarCompDerivedPlus, Iso.trans_inv, Functor.ι_map_mapDerivedCategoryPlusNatIso_inv_app,
-    Functor.ι_map_mapDerivedCategoryPlusCompIso_inv_app,
-    Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-    Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, Category.assoc]
-  simp only [Functor.comp_obj, ObjectProperty.ι_obj, Functor.mapDerivedCategoryPlusCompatibility,
-    Iso.refl_symm, Iso.refl_inv, NatTrans.id_app, leftDerivedUpperStarIsoMapDerivedCategory,
-    Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, CategoryTheory.Functor.map_id,
-    derivedSquareUpperStarIso, leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
-    Functor.leftDerivedFunctorCompIso, Iso.trans_assoc, Iso.symm_self_id_assoc, Iso.trans_symm,
-    Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Functor.isoWhiskerRight_inv,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
-    Functor.whiskerRight_app, NatTrans.naturality, NatTrans.naturality_assoc, assoc, cancelIso,
-    Iso.inv_hom_id_app_assoc, id_comp]
-  erw [Iso.inv_hom_id_app_assoc, CategoryTheory.Functor.map_id]
-  erw [Category.id_comp, Category.comp_id]
+open _root_.DerivedCategory
 
-omit [HasSmallSiteSheafify A] in
-/-- **The bounded below derived base change map is the restriction of the unbounded one.** For a
-commutative square `g' ≫ f = f' ≫ g` and `K ∈ D⁺(X_ét)`, the derived base change map
-`AlgebraicGeometry.Etale.baseChange` at `K` is the unbounded derived base change map
-`AlgebraicGeometry.Etale.derivedBaseChangeMap` at `K`, modulo the identifications of the bounded
-below derived functors with the restrictions of the unbounded ones. -/
-lemma ι_map_baseChange_app (sq : CommSq g' f' f g)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    DerivedCategory.Plus.ι.map ((Etale.baseChange A sq).app K) =
-      (leftDerivedUpperStarPlusIso A g).inv.app (R+((f)_*[A]).obj K) ≫
-        L((g)^*[A]).map (((f)_*[A]).rightDerivedFunctorPlusCompatibility.hom.app K) ≫
-        (derivedBaseChangeMap A sq).app (DerivedCategory.Plus.ι.obj K) ≫
-        R((f')_*[A]).map ((leftDerivedUpperStarPlusIso A g').hom.app K) ≫
-        ((f')_*[A]).rightDerivedFunctorPlusCompatibility.inv.app (D+((g')^*[A]).obj K) := by
-  rw [Etale.baseChange_app_eq_mateEquiv, ← Adjunction.derivedAdjunctionPlus_eq_derivedPlus,
-    ← Adjunction.derivedAdjunctionPlus_eq_derivedPlus]
-  exact map_mateEquiv_app_of_restrict (derivedUpperStarLowerStarAdjunction A f)
-    (derivedUpperStarLowerStarAdjunction A f') _ _ (leftDerivedUpperStarPlusIso A f)
-    ((f)_*[A]).rightDerivedFunctorPlusCompatibility.symm (leftDerivedUpperStarPlusIso A f')
-    ((f')_*[A]).rightDerivedFunctorPlusCompatibility.symm (leftDerivedUpperStarPlusIso A g)
-    (leftDerivedUpperStarPlusIso A g')
-    (Adjunction.map_restrictFullyFaithful_ofNatIsoLeft_counit_app _ _ _ _ _ _)
-    (Adjunction.map_restrictFullyFaithful_ofNatIsoLeft_unit_app _ _ _ _ _ _)
-    (TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso A sq).hom) _
-    (ι_map_pullbackSquareComparison_hom_app A sq) K
+/-- The image under the inclusion `D⁺ ⥤ D` of the unit of the bounded below right derived functor
+is the unit of the unbounded right derived functor, through the compatibility isomorphism
+`Functor.rightDerivedFunctorPlusCompatibility`. -/
+@[reassoc]
+lemma _root_.CategoryTheory.Functor.ι_map_rightDerivedFunctorPlusUnit_app_comp
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] (F : C ⥤ D) [F.Additive] [EnoughInjectives C]
+    [Abelian.HasKInjectiveResolutions C] (K : HomotopyCategory.Plus C) :
+    Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+        F.rightDerivedFunctorPlusCompatibility.hom.app (Plus.Qh.obj K) =
+      F.rightDerivedFunctorUnit.app K.obj := by
+  have h : F.rightDerivedFunctorPlusιUnit.app K ≫
+      F.rightDerivedFunctorPlusCompatibility.hom.app (Plus.Qh.obj K) =
+      F.ιRightDerivedFunctorUnit.app K := by
+    simp [Functor.rightDerivedFunctorPlusCompatibility]
+  exact h
 
-omit [HasSmallSiteSheafify A] in
-/-- The unbounded derived base change map is an isomorphism at a bounded below complex if and
-only if the bounded below derived base change map is. -/
-theorem isIso_derivedBaseChangeMap_app_ι_iff (sq : CommSq g' f' f g)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    IsIso ((derivedBaseChangeMap A sq).app (DerivedCategory.Plus.ι.obj K)) ↔
-      IsIso ((Etale.baseChange A sq).app K) := by
-  rw [← isIso_iff_of_reflects_iso _ DerivedCategory.Plus.ι, ι_map_baseChange_app,
-    isIso_comp_left_iff, isIso_comp_left_iff, isIso_comp_right_iff]
+/-- The restriction of the unbounded derived base change map to the bounded below derived
+categories, as a natural transformation `R⁺f_* ⋙ D⁺(g^*) ⟶ D⁺(g'^*) ⋙ R⁺f'_*`. It is the bounded
+below derived base change map (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_eq`). -/
+noncomputable def derivedBaseChangeMapRestrictPlus (sq : CommSq g' f' f g) :
+    (f)_*[A].rightDerivedFunctorPlus ⋙ ((g)^*[A]).mapDerivedCategoryPlus ⟶
+      ((g')^*[A]).mapDerivedCategoryPlus ⋙ (f')_*[A].rightDerivedFunctorPlus where
+  app K := Plus.ι.preimage
+    (D((g)^*[A]).map (((f)_*[A]).rightDerivedFunctorPlusCompatibility.hom.app K) ≫
+      (leftDerivedUpperStarIsoMapDerivedCategory A g).inv.app _ ≫
+      (derivedBaseChangeMap A sq).app (Plus.ι.obj K) ≫
+      R((f')_*[A]).map ((leftDerivedUpperStarIsoMapDerivedCategory A g').hom.app _) ≫
+      ((f')_*[A]).rightDerivedFunctorPlusCompatibility.inv.app
+        (((g')^*[A]).mapDerivedCategoryPlus.obj K))
+  naturality K L φ := by
+    apply Plus.ι.map_injective
+    simp only [Functor.comp_obj, Functor.comp_map, Functor.map_comp, Functor.map_preimage]
+    have h₁ := ((f)_*[A]).rightDerivedFunctorPlusCompatibility.hom.naturality φ
+    have h₂ := (leftDerivedUpperStarIsoMapDerivedCategory A g).inv.naturality
+      ((R((f)_*[A])).map (Plus.ι.map φ))
+    have h₃ := (derivedBaseChangeMap A sq).naturality (Plus.ι.map φ)
+    have h₄ := (leftDerivedUpperStarIsoMapDerivedCategory A g').hom.naturality (Plus.ι.map φ)
+    have h₅ := ((f')_*[A]).rightDerivedFunctorPlusCompatibility.inv.naturality
+      ((((g')^*[A]).mapDerivedCategoryPlus).map φ)
+    simp only [Functor.comp_obj, Functor.comp_map] at h₁ h₂ h₃ h₄ h₅
+    change D((g)^*[A]).map (Plus.ι.map (((f)_*[A]).rightDerivedFunctorPlus.map φ)) ≫ _ = _
+    rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, reassoc_of% h₂,
+      reassoc_of% h₃, ← Functor.map_comp_assoc, h₄, Functor.map_comp_assoc]
+    erw [h₅]
+    simp only [Category.assoc]
+
+/-- **The unbounded derived base change map restricts to the bounded below one.** -/
+theorem derivedBaseChangeMapRestrictPlus_eq (sq : CommSq g' f' f g) :
+    derivedBaseChangeMapRestrictPlus A sq = derivedBaseChangeMapPlus A sq := by
+  refine derivedBaseChangeMapPlus_ext A sq _ fun K ↦ ?_
+  apply Plus.ι.map_injective
+  simp only [derivedBaseChangeMapRestrictPlus, Functor.map_comp, Functor.map_preimage]
+  have hu := Functor.ι_map_rightDerivedFunctorPlusUnit_app_comp (f)_*[A] K
+  have hu' := Functor.ι_map_rightDerivedFunctorPlusUnit_app_comp (f')_*[A]
+    (((g')^*[A]).mapHomotopyCategoryPlus.obj K)
+  have hfac : L((g)^*[A]).map ((f)_*[A].rightDerivedFunctorUnit.app K.obj) ≫
+      (derivedBaseChangeMap A sq).app (Qh.obj K.obj) ≫
+      R((f')_*[A]).map ((g')^*[A].leftDerivedFunctorCounit.app K.obj) =
+      (g)^*[A].leftDerivedFunctorCounit.app (((f)_*[A].mapHomotopyCategory (.up ℤ)).obj K.obj) ≫
+      Qh.map ((NatTrans.mapHomotopyCategory (baseChangeMap A sq) (.up ℤ)).app K.obj) ≫
+      (f')_*[A].rightDerivedFunctorUnit.app (((g')^*[A].mapHomotopyCategory (.up ℤ)).obj K.obj) :=
+    derivedBaseChangeMap_app_fac A sq K.obj.as
+  have hL := (leftDerivedUpperStarIsoMapDerivedCategory A g).inv.naturality
+    ((f)_*[A].rightDerivedFunctorUnit.app K.obj)
+  have hc := NatTrans.congr_app ((g)^*[A].leftDerivedFunctorIsoMapDerivedCategory_hom_fac)
+    (((f)_*[A].mapHomotopyCategory (.up ℤ)).obj K.obj)
+  have hc' := NatTrans.congr_app ((g')^*[A].leftDerivedFunctorIsoMapDerivedCategory_hom_fac)
+    K.obj
+  have hF := Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app (g)^*[A]
+    ((f)_*[A].mapHomotopyCategoryPlus.obj K)
+  have hF' := Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app (g')^*[A] K
+  have hbc := NatTrans.ι_map_mapHomotopyCategoryPlus_app (baseChangeMap A sq) K
+  have hN := (f')_*[A].rightDerivedFunctorPlusCompatibility.inv.naturality
+    ((g')^*[A].mapDerivedCategoryPlusFactorsh.inv.app K)
+  simp only [Functor.comp_obj, Functor.comp_map, NatTrans.comp_app, Functor.whiskerLeft_app] at *
+  have hFi : Plus.ι.map ((g')^*[A].mapDerivedCategoryPlusFactorsh.inv.app K) =
+      (g')^*[A].mapDerivedCategoryFactorsh.inv.app K.obj := by
+    exact congrArg Iso.inv (Iso.ext (α := Plus.ι.mapIso
+      ((g')^*[A].mapDerivedCategoryPlusFactorsh.app K))
+      (β := (g')^*[A].mapDerivedCategoryFactorsh.app K.obj) hF')
+  have hu'' : Plus.ι.map ((f')_*[A].rightDerivedFunctorPlusUnit.app
+      ((g')^*[A].mapHomotopyCategoryPlus.obj K)) =
+      (f')_*[A].rightDerivedFunctorUnit.app ((g')^*[A].mapHomotopyCategoryPlus.obj K).obj ≫
+        (f')_*[A].rightDerivedFunctorPlusCompatibility.inv.app
+          (Plus.Qh.obj ((g')^*[A].mapHomotopyCategoryPlus.obj K)) := by
+    rw [← hu', Category.assoc, Iso.hom_inv_id_app]
+    exact (Category.comp_id _).symm
+  have hisoL : (leftDerivedUpperStarIsoMapDerivedCategory A g').hom.app (Qh.obj K.obj) =
+      (g')^*[A].leftDerivedFunctorCounit.app K.obj ≫
+        (g')^*[A].mapDerivedCategoryFactorsh.inv.app K.obj := by
+    rw [← hc', Category.assoc, Iso.hom_inv_id_app]
+    exact (Category.comp_id _).symm
+  have hisoL' : (leftDerivedUpperStarIsoMapDerivedCategory A g).inv.app
+      (Qh.obj (((f)_*[A].mapHomotopyCategory (ComplexShape.up ℤ)).obj K.obj)) ≫
+      (g)^*[A].leftDerivedFunctorCounit.app (((f)_*[A].mapHomotopyCategory (.up ℤ)).obj K.obj) =
+      (g)^*[A].mapDerivedCategoryFactorsh.hom.app
+        (((f)_*[A].mapHomotopyCategory (ComplexShape.up ℤ)).obj K.obj) := by
+    rw [← hc]
+    exact Iso.inv_hom_id_app_assoc _ _ _
+  have e₁ : Plus.ι.map (D+((g)^*[A]).map ((f)_*[A].rightDerivedFunctorPlusUnit.app K)) =
+      D((g)^*[A]).map (Plus.ι.map ((f)_*[A].rightDerivedFunctorPlusUnit.app K)) := rfl
+  have e₂ : Plus.ι.map (Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap A sq)).app
+      K)) = Qh.map ((HomotopyCategory.Plus.ι _).map
+        ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap A sq)).app K)) := rfl
+  rw [e₁, ← Functor.map_comp_assoc, hu]
+  change D((g)^*[A]).map ((f)_*[A].rightDerivedFunctorUnit.app K.obj) ≫
+    (leftDerivedUpperStarIsoMapDerivedCategory A g).inv.app (R((f)_*[A]).obj (Qh.obj K.obj)) ≫
+    (derivedBaseChangeMap A sq).app (Qh.obj K.obj) ≫
+    R((f')_*[A]).map ((leftDerivedUpperStarIsoMapDerivedCategory A g').hom.app (Qh.obj K.obj)) ≫
+    _ = _
+  rw [reassoc_of% hL, hisoL, Functor.map_comp, Category.assoc, reassoc_of% hfac]
+  rw [reassoc_of% hisoL', hF, e₂, hbc, hu'', Category.assoc, ← hN, hFi]
+  rfl
+
+/-- The image under the inclusion `D⁺ ⥤ D` of the bounded below derived base change map at `K` is
+the unbounded derived base change map at `K`, modulo the identifications `Lg^* ≅ D(g^*)` and
+`R⁺f_* ⋙ ι ≅ ι ⋙ Rf_*`. -/
+lemma ι_map_derivedBaseChangeMapPlus_app (sq : CommSq g' f' f g)
+    (K : Plus (Sheaf X.smallEtaleTopology A)) :
+    Plus.ι.map ((derivedBaseChangeMapPlus A sq).app K) =
+      D((g)^*[A]).map (((f)_*[A]).rightDerivedFunctorPlusCompatibility.hom.app K) ≫
+        (leftDerivedUpperStarIsoMapDerivedCategory A g).inv.app _ ≫
+        (derivedBaseChangeMap A sq).app (Plus.ι.obj K) ≫
+        R((f')_*[A]).map ((leftDerivedUpperStarIsoMapDerivedCategory A g').hom.app _) ≫
+        ((f')_*[A]).rightDerivedFunctorPlusCompatibility.inv.app
+          (((g')^*[A]).mapDerivedCategoryPlus.obj K) := by
+  rw [← derivedBaseChangeMapRestrictPlus_eq]
+  exact Plus.ι.map_preimage _
+
+/-- **The unbounded derived base change map is an isomorphism at a bounded below object if and only
+if the bounded below one is.** -/
+lemma isIso_derivedBaseChangeMap_app_ι_obj_iff (sq : CommSq g' f' f g)
+    (K : Plus (Sheaf X.smallEtaleTopology A)) :
+    IsIso ((derivedBaseChangeMap A sq).app (Plus.ι.obj K)) ↔
+      IsIso ((derivedBaseChangeMapPlus A sq).app K) := by
+  rw [← isIso_iff_of_reflects_iso _ Plus.ι, ι_map_derivedBaseChangeMapPlus_app,
+    isIso_comp_left_iff, isIso_comp_left_iff, ← Category.assoc, isIso_comp_right_iff,
+    isIso_comp_right_iff]
 
 end Etale
 

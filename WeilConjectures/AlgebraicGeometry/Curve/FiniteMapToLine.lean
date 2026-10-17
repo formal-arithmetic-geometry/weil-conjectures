@@ -156,39 +156,40 @@ namespace AlgebraicGeometry
 
 /-- If `X` is an integral scheme smooth of relative dimension `n` over a field `k`, then the
 Kähler differentials of its function field `K` over `k` form an `n`-dimensional `K`-vector space:
-near the generic point, `X` is étale over `𝔸ⁿ_k`. -/
-theorem finrank_kaehlerDifferential_functionField {k : Type u} [Field k] {X : Scheme.{u}}
-    [IsIntegral X] (f : X ⟶ Spec (.of k)) (n : ℕ) [SmoothOfRelativeDimension n f]
-    [Algebra k X.functionField]
-    (hk : algebraMap k X.functionField = (X.presheaf.germ ⊤ (genericPoint X) trivial).hom.comp
-      (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)) :
-    Module.finrank X.functionField Ω[X.functionField⁄k] = n := by
-  obtain ⟨U, -, V, hV, hx, e, H⟩ :=
+near the generic point, `X` is étale over `𝔸ⁿ_k`. The base ring is any ring `R` identified with
+`Γ(Spec k, ⊤)` by `e`, e.g. `k` itself or `Γ(Spec k, ⊤)`. -/
+theorem finrank_kaehlerDifferential_functionField {k R : Type u} [Field k] [CommRing R]
+    {X : Scheme.{u}} [IsIntegral X] (f : X ⟶ Spec (.of k)) (n : ℕ) [SmoothOfRelativeDimension n f]
+    [Algebra R X.functionField] (e : R ≃+* Γ(Spec (.of k), ⊤))
+    (hk : algebraMap R X.functionField = (X.presheaf.germ ⊤ (genericPoint X) trivial).hom.comp
+      (f.appTop.hom.comp e.toRingHom)) :
+    Module.finrank X.functionField Ω[X.functionField⁄R] = n := by
+  have : Nontrivial R := e.toEquiv.nontrivial
+  obtain ⟨U, -, V, hV, hx, e', H⟩ :=
     SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension (n := n) (f := f)
       (genericPoint X)
-  obtain rfl : U = ⊤ := eq_top_iff.mpr fun z _ ↦ Subsingleton.elim (f (genericPoint X)) z ▸ e hx
+  obtain rfl : U = ⊤ := eq_top_iff.mpr fun z _ ↦ Subsingleton.elim (f (genericPoint X)) z ▸ e' hx
   obtain ⟨φ, hφC, hφ⟩ := H.exists_etale_mvPolynomial
   have : Nonempty V := ⟨⟨genericPoint X, hx⟩⟩
   have := functionField_isFractionRing_of_isAffineOpen X V hV
-  let ε : MvPolynomial (Fin n) k ≃+* MvPolynomial (Fin n) Γ(Spec (.of k), ⊤) :=
-    MvPolynomial.mapEquiv _ (Scheme.ΓSpecIso (.of k)).symm.commRingCatIsoToRingEquiv
-  let : Algebra k Γ(X, V) := ((f.appLE ⊤ V e).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra
-  let : Algebra (MvPolynomial (Fin n) k) Γ(X, V) := (φ.comp ε.toRingHom).toAlgebra
-  have : IsScalarTower k (MvPolynomial (Fin n) k) Γ(X, V) := .of_algebraMap_eq fun c ↦ by
+  let ε : MvPolynomial (Fin n) R ≃+* MvPolynomial (Fin n) Γ(Spec (.of k), ⊤) :=
+    MvPolynomial.mapEquiv _ e
+  let : Algebra R Γ(X, V) := ((f.appLE ⊤ V e').hom.comp e.toRingHom).toAlgebra
+  let : Algebra (MvPolynomial (Fin n) R) Γ(X, V) := (φ.comp ε.toRingHom).toAlgebra
+  have : IsScalarTower R (MvPolynomial (Fin n) R) Γ(X, V) := .of_algebraMap_eq fun c ↦ by
     simp [RingHom.algebraMap_toAlgebra, ε, ← hφC]
-    rfl
-  have : Algebra.Etale (MvPolynomial (Fin n) k) Γ(X, V) :=
+  have : Algebra.Etale (MvPolynomial (Fin n) R) Γ(X, V) :=
     RingHom.Etale.respectsIso.2 _ _ hφ
-  have : IsScalarTower k Γ(X, V) X.functionField := .of_algebraMap_eq fun c ↦ by
+  have : IsScalarTower R Γ(X, V) X.functionField := .of_algebraMap_eq fun c ↦ by
     rw [hk]
     simp [RingHom.algebraMap_toAlgebra, Scheme.Hom.appLE]
-  have e₁ := tensorKaehlerEquivOfFormallyEtale k (MvPolynomial (Fin n) k) Γ(X, V)
-  have : Module.Free Γ(X, V) Ω[Γ(X, V)⁄k] := .of_equiv e₁
-  have hB : Module.finrank Γ(X, V) Ω[Γ(X, V)⁄k] = n := by
+  have e₁ := tensorKaehlerEquivOfFormallyEtale R (MvPolynomial (Fin n) R) Γ(X, V)
+  have : Module.Free Γ(X, V) Ω[Γ(X, V)⁄R] := .of_equiv e₁
+  have hB : Module.finrank Γ(X, V) Ω[Γ(X, V)⁄R] = n := by
     rw [← e₁.finrank_eq, Module.finrank_baseChange, Module.finrank_eq_card_basis
-      (mvPolynomialBasis k (Fin n)), Fintype.card_fin]
+      (mvPolynomialBasis R (Fin n)), Fintype.card_fin]
   rw [Module.finrank_of_isLocalizedModule_of_free X.functionField (nonZeroDivisors Γ(X, V))
-    (KaehlerDifferential.map k k Γ(X, V) X.functionField), hB]
+    (KaehlerDifferential.map R R Γ(X, V) X.functionField), hB]
 
 
 variable {k : Type u} [Field k]
@@ -218,7 +219,8 @@ theorem exists_isFinite_etale_morphismRestrict [PerfectField k] (p : ℕ) [Fact 
   have := functionField_isFractionRing_of_isAffineOpen C ⊤ (isAffineOpen_top C)
   obtain ⟨ψ, hψ, -, hflat, h, hh0, hU⟩ := Algebra.exists_finite_formallyUnramified_away p
     (ringKrullDim_le_of_smoothOfRelativeDimension s 1)
-    (finrank_kaehlerDifferential_functionField s 1 rfl)
+    (finrank_kaehlerDifferential_functionField s 1
+      (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.symm rfl)
   let e := MvPolynomial.uniqueAlgEquiv k PUnit.{u + 1}
   let φ : MvPolynomial PUnit.{u + 1} k →ₐ[k] Γ(C, ⊤) := ψ.comp e.toAlgHom
   have hφ : φ.Finite := RingHom.Finite.comp hψ (RingHom.Finite.of_surjective _ e.surjective)

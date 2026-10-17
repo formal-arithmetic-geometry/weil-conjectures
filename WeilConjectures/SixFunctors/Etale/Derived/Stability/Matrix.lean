@@ -10,14 +10,13 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekConstructible
-public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Stability
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
 
 /-!
 # The preservation matrix of the six operations
@@ -241,8 +240,8 @@ objects, `Rf^! : Dctf(Y) ⥤ Dctf(X)` for every such `f` (no admissibility hypot
 Verdier dual `𝔻_X : Dctf(X) ⥤ Dctf(X)`. The pro-étale internal-Hom cell is
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_derivedHom_mapDerivedCategory`.
 -/
-theorem constructibleFiniteTor_preservation [IsAlgClosed k] [QuasiCompact f]
-    [HasCompactification f] [IsSeparated aX] [HasCompactification aX] :
+theorem constructibleFiniteTor_preservation [QuasiCompact f] [HasCompactification f]
+    [IsSeparated aX] [HasCompactification aX] [IsAlgClosed k] :
     (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
@@ -310,8 +309,8 @@ results come with these intervals:
 The pro-étale and boundary entries are
 `AlgebraicGeometry.ProEtale.DerivedCategory.preservationMatrix_of_isAlgClosure`, and the
 integral entries (item 5) are `AlgebraicGeometry.Etale.preservationMatrix_integral`. -/
-theorem torAmplitudeIn_preservation [IsAlgClosed k] [QuasiCompact f] [HasCompactification f]
-    [IsSeparated aX] [HasCompactification aX] :
+theorem torAmplitudeIn_preservation [QuasiCompact f] [HasCompactification f]
+    [IsSeparated aX] [HasCompactification aX] [IsAlgClosed k] :
     (∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧

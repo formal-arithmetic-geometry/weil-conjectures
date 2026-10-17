@@ -5,306 +5,182 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDual
-public import WeilConjectures.SixFunctors.Etale.Derived.Point
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.Data.Int.Interval
+public import WeilConjectures.ConstructibleSheaf.Simple
 public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
-public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
-public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleIsGE
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
-# Complexes supported on closed points
+# Complexes supported at closed points
 
-A morphism of bounded constructible complexes on a scheme of finite type over an algebraically
-closed field which is an isomorphism on the geometric stalks at the nonclosed points and after
-`Ra_*` is an isomorphism.
+A step of the proof of blueprint `thm-weil-etale-geometric-biduality`: each cohomology sheaf of
+the cone `Δ` has constructible support, and a constructible subset of a Noetherian finite type
+`k`-scheme consisting of closed points is finite. Hence all the cohomology of `Δ` is supported
+on a finite set of closed points, which is the underlying set of a closed subscheme finite over
+`k`.
 
-The cone `Δ` of such a morphism has vanishing derived direct image `Ra_* Δ` and homology sheaves
-supported on finitely many closed points. If `Δ` were nonzero, its lowest nonzero homology sheaf
-`G = Hⁿ(Δ)` would receive a nonzero morphism from `a^* a_* G` (`G` being a finite sum of
-skyscraper sheaves at points with separably closed residue fields), hence `Δ` would receive a
-nonzero morphism from `a^*(a_* G)[-n]`, which is impossible as `a^* ⊣ Ra_*` and `Ra_* Δ = 0`.
+## Main statements
+
+- `Set.Finite.of_isClosed_constructibleTopology`: in a Noetherian quasi-sober space, a subset of
+  the closed points which is closed in the constructible topology is finite.
+- `AlgebraicGeometry.Etale.finite_compl_stalkZeroLocus`: for a constructible sheaf `F` on a
+  quasi-compact scheme locally of finite type over a field whose stalks vanish at all
+  non-closed points, the support of `F` is a finite set of closed points.
+- `AlgebraicGeometry.exists_opens_isFinite_closedComplement`: a finite set of closed points of a
+  scheme locally of finite type over a field is the underlying set of a closed subscheme which
+  is finite over the field.
+- `AlgebraicGeometry.Etale.exists_isFinite_isZero_upperStar_of_boundedConstructible`: a bounded
+  constructible complex whose homology sheaves vanish at all non-closed points restricts to
+  zero on the complement of a closed subscheme finite over the base field.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory Opposite Topology ZeroObject TopologicalSpace
+open CategoryTheory Limits Topology TopologicalSpace
 
 open scoped CategoryTheory.Functor
+
+/-- In a Noetherian quasi-sober space, a set of closed points which is closed in the
+constructible topology is finite: it is compact in the constructible topology, in which closed
+points are open (their complements are quasi-compact opens). Used in the proof of blueprint
+`thm-weil-etale-geometric-biduality`. -/
+theorem Set.Finite.of_isClosed_constructibleTopology {X : Type*} [TopologicalSpace X]
+    [NoetherianSpace X] [QuasiSober X] {s : Set X} (hs : IsClosed[constructibleTopology X] s)
+    (hs' : s ⊆ closedPoints X) : s.Finite := by
+  let φ : WithConstructibleTopology X → X := WithTopology.ofTopology
+  let ψ : X → WithConstructibleTopology X := WithTopology.toTopology _
+  have hK : IsClosed (φ ⁻¹' s) := WithConstructibleTopology.isClosed_iff.2 hs
+  have hopen (x : X) (hx : x ∈ s) : IsOpen ({ψ x} : Set (WithConstructibleTopology X)) := by
+    rw [WithConstructibleTopology.isOpen_iff]
+    have : WithTopology.toTopology _ ⁻¹' ({ψ x} : Set (WithConstructibleTopology X)) = {x} := by
+      ext y
+      simp only [Set.mem_preimage, Set.mem_singleton_iff]
+      exact ⟨fun h ↦ congrArg WithTopology.ofTopology h, fun h ↦ h ▸ rfl⟩
+    rw [this]
+    exact (NoetherianSpace.isCompact _).isOpen_constructibleTopology_of_isClosed (hs' hx)
+  obtain ⟨t, ht⟩ := hK.isCompact.elim_finite_subcover (fun y : φ ⁻¹' s ↦ {ψ (φ y)})
+    (fun y ↦ hopen _ y.2) fun y hy ↦ Set.mem_iUnion.2 ⟨⟨y, hy⟩, rfl⟩
+  refine ((t.finite_toSet.image fun y ↦ φ y.1)).subset fun x hx ↦ ?_
+  obtain ⟨y, hy, hxy⟩ := Set.mem_iUnion₂.1 (ht (show ψ x ∈ φ ⁻¹' s from hx))
+  exact ⟨y, hy, congrArg WithTopology.ofTopology (Set.mem_singleton_iff.1 hxy).symm⟩
 
 namespace AlgebraicGeometry
 
 open Scheme
 
-/-- In a noetherian scheme, a subset which is closed in the constructible topology and consists
-of closed points is finite: it is compact in the constructible topology, in which every closed
-point is open (its complement being quasi-compact). -/
-lemma Scheme.finite_of_isClosed_constructibleTopology {X : Scheme.{u}} [CompactSpace X]
-    [QuasiSeparatedSpace X] [NoetherianSpace X] {Z : Set X}
-    (hZ : IsClosed[constructibleTopology X] Z)
-    (hcl : ∀ z ∈ Z, IsClosed ({z} : Set X)) : Z.Finite := by
-  let Z' : Set (WithConstructibleTopology X) := WithTopology.ofTopology ⁻¹' Z
-  have hc : IsCompact Z' := (WithConstructibleTopology.isClosed_iff (s := Z').2 hZ).isCompact
-  have ho (w : Z') : IsOpen ({w.1} : Set (WithConstructibleTopology X)) := by
-    rw [WithConstructibleTopology.isOpen_iff, WithTopology.preimage_toTopology,
-      Set.image_singleton]
-    exact (NoetherianSpace.isCompact _).isOpen_constructibleTopology_of_isClosed (hcl _ w.2)
-  obtain ⟨t, ht⟩ := hc.elim_finite_subcover (fun w : Z' ↦ {w.1}) ho
-    (fun w hw ↦ Set.mem_iUnion.2 ⟨⟨w, hw⟩, rfl⟩)
-  have hZ' : Z'.Finite := (t.finite_toSet.image Subtype.val).subset fun w hw ↦ by
-    obtain ⟨i, hi, hwi⟩ := Set.mem_iUnion₂.1 (ht hw)
-    exact ⟨i, hi, hwi.symm⟩
-  rw [← Set.image_preimage_eq Z (WithTopology.ofTopology_surjective (constructibleTopology X))]
-  exact hZ'.image _
+/-- A closed immersion with finitely many points into a scheme locally of finite type over a
+field `k` is finite over `k`: it is quasi-compact, of finite type and has finite fibres, and
+`Spec k` is Artinian. Used in the proof of blueprint `thm-weil-etale-geometric-biduality`. -/
+theorem isFinite_comp_of_finite_range {k : Type u} [Field k] {X Z : Scheme.{u}}
+    (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] (i : Z ⟶ X) [IsClosedImmersion i]
+    (hi : (Set.range i.base).Finite) : IsFinite (i ≫ a) := by
+  have : Finite Z := Set.finite_range_iff i.isEmbedding.injective |>.1 hi
+  have : QuasiCompact (i ≫ a) := inferInstance
+  have : LocallyQuasiFinite (i ≫ a) :=
+    (locallyQuasiFinite_iff_finite_preimage_singleton).2 fun _ ↦ Set.toFinite _
+  exact IsFinite.of_locallyQuasiFinite _
+
+/-- A finite set of closed points of a scheme locally of finite type over a field `k` is the
+underlying set of a closed subscheme finite over `k`: the closed complement of the open
+complement. It has finitely many points and is of finite type over `k`, hence finite. Used in
+the proof of blueprint `thm-weil-etale-geometric-biduality`. -/
+theorem exists_opens_isFinite_closedComplement {k : Type u} [Field k] {X : Scheme.{u}}
+    (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] {S : Set X} (hS : S.Finite)
+    (hS' : S ⊆ closedPoints X) :
+    ∃ U : X.Opens, (U : Set X) = Sᶜ ∧ IsFinite (U.closedComplement ≫ a) := by
+  have hcl : IsClosed S := by
+    rw [← Set.biUnion_of_singleton S]
+    exact hS.isClosed_biUnion fun x hx ↦ hS' hx
+  refine ⟨⟨Sᶜ, hcl.isOpen_compl⟩, rfl, ?_⟩
+  set U : X.Opens := ⟨Sᶜ, hcl.isOpen_compl⟩
+  have hrange : Set.range U.closedComplement.base = S := by
+    rw [Scheme.Opens.range_closedComplement]
+    exact compl_compl S
+  exact isFinite_comp_of_finite_range a U.closedComplement (hrange ▸ hS)
 
 namespace Etale
 
-variable {Λ : Type (u + 1)} [CommRing Λ]
+variable {Λ : Type (u + 1)}
 
-/-- An étale sheaf on `X` all of whose geometric stalks vanish is zero. -/
-lemma isZero_of_isZero_sheafFiber {X : Scheme.{u}}
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (h : ∀ x : X, IsZero ((X.uliftPointSmallEtale x).sheafFiber.obj F)) : IsZero F := by
-  have : IsIso (0 : F ⟶ 0) := Scheme.isIso_of_isIso_sheafFiber_map _ fun x ↦ by
-    have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
-    have : PreservesFiniteLimits ((X.uliftPointSmallEtale x).sheafFiber
-      (A := ModuleCat.{u + 1} Λ)) := inferInstance
-    have : ((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).Additive :=
-      Functor.additive_of_preserves_binary_products _
-    exact ⟨⟨0, (h x).eq_of_src _ _, (Functor.map_isZero _ (isZero_zero _)).eq_of_src _ _⟩⟩
-  exact (isZero_zero _).of_iso (asIso (0 : F ⟶ 0))
-
-/-- Over separably closed fields, the pushforward along a morphism `g : Spec K ⟶ Spec k`
-reflects zero objects: the pullback `g^*` is an equivalence, both constant sheaf functors being
-equivalences. -/
-lemma isZero_of_isZero_lowerStar_of_isSepClosed {k K : Type u} [Field k] [IsSepClosed k]
-    [Field K] [IsSepClosed K] (g : Spec (.of K) ⟶ Spec (.of k))
-    (H : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hH : IsZero ((g)_*[ModuleCat.{u + 1} Λ].obj H)) : IsZero H := by
-  let cs := constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-  let e : (g)^*[ModuleCat.{u + 1} Λ] ≅
-      cs.inv ⋙ constantSheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
-    (Functor.leftUnitor _).symm ≪≫
-      Functor.isoWhiskerRight cs.asEquivalence.counitIso.symm _ ≪≫ Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (constantSheafCompUpperStarIso Λ g)
-  have : (g)^*[ModuleCat.{u + 1} Λ].IsEquivalence := Functor.isEquivalence_of_iso e.symm
-  let e' := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).rightAdjointUniq
-    (g)^*[ModuleCat.{u + 1} Λ].asEquivalence.toAdjunction
-  exact (Functor.map_isZero (g)^*[ModuleCat.{u + 1} Λ] (hH.of_iso (e'.app H).symm)).of_iso
-    ((g)^*[ModuleCat.{u + 1} Λ].asEquivalence.counitIso.app H).symm
-
-/-- **Sheaves supported on finitely many closed points with separably closed residue fields are
-detected by their pushforward to a separably closed field.** Let `a : X ⟶ Spec k` with `k`
-separably closed, `U` an open subset of `X` whose complement is a finite set of closed points
-with separably closed residue fields, and `G` a sheaf vanishing on `U`. If `a_* G = 0` then
-`G = 0`.
-
-Writing `iₓ : Spec κ(x) ⟶ X` for the points `x ∉ U`, the units assemble to an isomorphism
-`G ≅ ⨁ₓ iₓ_* iₓ^* G` (as in `AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar`), so
-each `(iₓ ≫ a)_* iₓ^* G` is a summand of `a_* G`, hence zero, and the pushforward along a
-morphism of spectra of separably closed fields reflects zero objects. -/
-theorem isZero_of_isZero_lowerStar_of_isZero_upperStar {k : Type u} [Field k] [IsSepClosed k]
-    {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) (U : X.Opens) (hfin : (U : Set X)ᶜ.Finite)
-    (hcl : ∀ x ∉ U, IsClosed ({x} : Set X))
-    (hsep : ∀ x ∉ U, IsSepClosed (X.residueField x))
-    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hG : IsZero ((U.ι)^*[ModuleCat.{u + 1} Λ].obj G))
-    (haG : IsZero ((a)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by
-  let ι := {x : X // x ∉ U}
-  have : Finite ι := hfin.to_subtype
-  have := Fintype.ofFinite ι
-  have : HasFiniteBiproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-    HasFiniteBiproducts.of_hasFiniteProducts
-  have (x : ι) : IsClosedImmersion (X.fromSpecResidueField x.1) :=
-    isClosed_singleton_iff_isClosedImmersion.1 (hcl x.1 x.2)
-  let adj (x : ι) :=
-    upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (X.fromSpecResidueField x.1)
-  let G' (x : ι) : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
-    (X.fromSpecResidueField x.1)_*[ModuleCat.{u + 1} Λ].obj
-      ((X.fromSpecResidueField x.1)^*[ModuleCat.{u + 1} Λ].obj G)
-  let φ : G ⟶ ⨁ G' := biproduct.lift fun x ↦ (adj x).unit.app G
-  -- the family consisting of `U` and of the points `x ∉ U` is jointly surjective
-  let V : Option ι → Scheme.{u} := fun o ↦ o.elim (U : Scheme.{u})
-    fun x ↦ Spec (X.residueField x.1)
-  let b : ∀ o, V o ⟶ X := fun o ↦ match o with
-    | none => U.ι
-    | some x => X.fromSpecResidueField x.1
-  have hφ : IsIso φ := by
-    refine isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ) b
-      (fun y ↦ ?_) φ fun o ↦ ?_
-    · by_cases hy : y ∈ U
-      · exact ⟨none, ⟨y, hy⟩, rfl⟩
-      · exact ⟨some ⟨y, hy⟩, IsLocalRing.closedPoint _, X.fromSpecResidueField_apply _ _⟩
-    rcases o with _ | x
-    · let P := (U.ι)^*[ModuleCat.{u + 1} Λ]
-      have hz (x : ι) : IsZero (P.obj (G' x)) :=
-        isZero_upperStar_lowerStar_of_disjoint_range _ U.ι (X.fromSpecResidueField x.1)
-          (by
-            rw [Scheme.range_fromSpecResidueField, Set.disjoint_singleton_right]
-            simpa using x.2) _
-      have : IsZero (P.obj (⨁ G')) := by
-        rw [IsZero.iff_id_eq_zero, ← P.map_id, ← IsBilimit.total (biproduct.isBilimit G'),
-          P.map_sum]
-        exact Finset.sum_eq_zero fun j _ ↦ by
-          rw [P.map_comp, (hz j).eq_of_tgt (P.map (biproduct.π G' j)) 0, zero_comp]
-      exact (hG.eq_of_src (P.map φ) (hG.iso this).hom) ▸ Iso.isIso_hom _
-    · let P := (X.fromSpecResidueField x.1)^*[ModuleCat.{u + 1} Λ]
-      have hz (y : ι) (hxy : y ≠ x) : IsZero (P.obj (G' y)) := by
-        -- `iₓ` factors through the open complement `V` of `y`, over which `G' y` vanishes
-        let V : X.Opens := ⟨{y.1}ᶜ, (hcl y.1 y.2).isOpen_compl⟩
-        have hV : Set.range (X.fromSpecResidueField x.1) ⊆ Set.range V.ι := by
-          rw [Scheme.range_fromSpecResidueField, Scheme.Opens.range_ι, Set.singleton_subset_iff]
-          exact fun h ↦ hxy (Subtype.ext h).symm
-        have h0 := isZero_upperStar_lowerStar_of_disjoint_range _ V.ι
-          (X.fromSpecResidueField y.1)
-          (by rw [Scheme.Opens.range_ι, Scheme.range_fromSpecResidueField]; simp [V])
-          ((X.fromSpecResidueField y.1)^*[ModuleCat.{u + 1} Λ].obj G)
-        exact (Functor.map_isZero (IsOpenImmersion.lift V.ι _ hV)^*[ModuleCat.{u + 1} Λ]
-          h0).of_iso ((upperStarComp (ModuleCat.{u + 1} Λ) (IsOpenImmersion.lift V.ι _ hV)
-            V.ι _ (IsOpenImmersion.lift_fac _ _ _).symm).app _)
-      have hπ : IsIso (P.map (biproduct.π G' x)) := by
-        refine ⟨P.map (biproduct.ι G' x), ?_, ?_⟩
-        · rw [← P.map_comp, ← P.map_id, ← IsBilimit.total (biproduct.isBilimit G'), P.map_sum,
-            Finset.sum_eq_single x (fun y _ hxy ↦ ?_) (by simp)]
-          rw [P.map_comp, (hz y hxy).eq_zero_of_tgt (P.map (biproduct.π G' y)), zero_comp]
-        · rw [← P.map_comp, biproduct.ι_π_self, P.map_id]
-      have hunit : IsIso (P.map ((adj x).unit.app G)) := by
-        have : IsIso (P.map ((adj x).unit.app G) ≫ (adj x).counit.app (P.obj G)) := by
-          rw [(adj x).left_triangle_components G]
-          exact IsIso.id _
-        exact IsIso.of_isIso_comp_right _ ((adj x).counit.app (P.obj G))
-      have : IsIso (P.map φ ≫ P.map (biproduct.π G' x)) := by
-        rw [← P.map_comp, biproduct.lift_π]
-        exact hunit
-      exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ hπ this
-  -- each summand `G' x` is zero, its pushforward being a summand of `a_* G = 0`
-  let Pa := (a)_*[ModuleCat.{u + 1} Λ]
-  have hB : IsZero (Pa.obj (⨁ G')) := haG.of_iso (Pa.mapIso (asIso φ)).symm
-  have hG' (x : ι) : IsZero (G' x) := by
-    have : IsSepClosed (IsLocalRing.ResidueField (X.presheaf.stalk x.1)) := hsep x.1 x.2
-    have h1 : IsZero (Pa.obj (G' x)) := by
-      rw [IsZero.iff_id_eq_zero, ← Pa.map_id, ← biproduct.ι_π_self G' x, Pa.map_comp,
-        hB.eq_of_tgt (Pa.map (biproduct.ι G' x)) 0, zero_comp]
-    have h2 : IsZero ((X.fromSpecResidueField x.1)^*[ModuleCat.{u + 1} Λ].obj G) :=
-      isZero_of_isZero_lowerStar_of_isSepClosed (X.fromSpecResidueField x.1 ≫ a) _
-        (h1.of_iso ((Etale.lowerStarComp (ModuleCat.{u + 1} Λ) _ a).app _).symm)
-    exact Functor.map_isZero _ h2
-  have : IsZero (⨁ G') := by
-    rw [IsZero.iff_id_eq_zero, ← IsBilimit.total (biproduct.isBilimit G')]
-    exact Finset.sum_eq_zero fun j _ ↦ by rw [(hG' j).eq_of_tgt ((biproduct.bicone G').π j) 0,
-      zero_comp]
-  exact this.of_iso (asIso φ)
-
-end Etale
-namespace Etale
-
-open _root_.AlgebraicGeometry.Etale.DerivedCategory
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-
-/-- **Detection on closed points and global sections.** Let `X` be of finite type over an
-algebraically closed field `k`, with structure morphism `a`, and let `f : K ⟶ L` be a morphism
-of bounded constructible complexes on `X_ét` whose geometric stalks are isomorphisms at every
-nonclosed point. Then the cone of `f` is supported on finitely many closed points, and `f` is an
-isomorphism as soon as `Ra_* f` is. -/
-theorem isIso_of_isIso_rightDerivedLowerStar_map_of_not_isClosed {k : Type u} [Field k]
-    [IsAlgClosed k] {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a]
-    [QuasiCompact a]
-    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hL : boundedConstructible (ModuleCat.{u + 1} Λ) X L) (f : K ⟶ L)
-    (hf : ∀ (x : X), ¬ IsClosed ({x} : Set X) → ∀ q : ℤ,
-      IsIso ((X.uliftPointSmallEtale x).sheafFiber.map
-        ((_root_.DerivedCategory.homologyFunctor _ q).map f)))
-    (ha : IsIso ((R((a)_*[ModuleCat.{u + 1} Λ])).map f)) :
-    IsIso f := by
-  obtain ⟨Δ, g, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle f
-  refine (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).1 ?_
-  -- `Ra_* Δ = 0`
-  have hRΔ : IsZero ((R((a)_*[ModuleCat.{u + 1} Λ])).obj Δ) :=
-    (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _
-      ((R((a)_*[ModuleCat.{u + 1} Λ])).map_distinguished _ hT)).2 ha
-  obtain ⟨⟨⟨m, hm⟩, -⟩, hc⟩ :=
-    (boundedConstructible (ModuleCat.{u + 1} Λ) X).ext_of_isTriangulatedClosed₃ _ hT hK hL
-  -- the homology sheaves of `Δ` vanish at the nonclosed points
-  have hstalk (x : X) (hx : ¬ IsClosed ({x} : Set X)) (q : ℤ) :
-      IsZero ((X.uliftPointSmallEtale x).sheafFiber.obj
-        ((_root_.DerivedCategory.homologyFunctor _ q).obj Δ)) := by
-    have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
-    have : PreservesFiniteLimits ((X.uliftPointSmallEtale x).sheafFiber
-      (A := ModuleCat.{u + 1} Λ)) := inferInstance
-    have : PreservesFiniteColimits ((X.uliftPointSmallEtale x).sheafFiber
-      (A := ModuleCat.{u + 1} Λ)) := inferInstance
-    have : ((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).Additive :=
-      Functor.additive_of_preserves_binary_products _
-    exact _root_.DerivedCategory.isZero_map_homologyFunctor_obj₃_of_isIso _ _ hT q
-      (hf x hx q) (hf x hx (q + 1))
-  by_contra hne
-  -- the lowest nonzero homology sheaf `G = Hⁿ(Δ)`
-  have hex : ∃ q, ¬ IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj Δ) := by
-    by_contra! h0
-    have : IsIso (0 : Δ ⟶ 0) := (_root_.DerivedCategory.isIso_iff _ _).2 fun n ↦
-      isIso_of_source_target_iso_zero _ (h0 n).isoZero
-        ((Functor.map_isZero _ (isZero_zero _)).isoZero)
-    exact hne (IsZero.of_iso (isZero_zero _) (asIso (0 : Δ ⟶ 0)))
-  obtain ⟨n, hn, hmin⟩ := Int.exists_least_of_bdd ⟨m, fun q hq ↦ by
-    by_contra h
-    exact hq ((_root_.DerivedCategory.isGE_iff Δ m).1 hm q (by omega))⟩ hex
-  have : Δ.IsGE n := (_root_.DerivedCategory.isGE_iff Δ n).2 fun i hi ↦ by
-    by_contra h
-    exact absurd (hmin i h) (by omega)
-  set G := (_root_.DerivedCategory.homologyFunctor _ n).obj Δ with hG
-  have : IsConstructibleSheaf G := hc n
-  -- `G` is supported on a finite set `Z` of closed points
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace a
+/-- Blueprint `thm-weil-etale-geometric-biduality`: let `X` be quasi-compact and locally of
+finite type over a field, and let `F` be a constructible sheaf of `Λ`-modules on `X_ét` whose
+stalks vanish at all non-closed points. Then the support of `F` is a finite set of closed
+points. The support is closed in the constructible topology
+(`AlgebraicGeometry.Etale.isOpen_constructibleTopology_stalkZeroLocus`), and `X` is
+Noetherian. -/
+theorem finite_compl_stalkZeroLocus [Ring Λ] {k : Type u} [Field k] {X : Scheme.{u}}
+    (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] [CompactSpace X]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
+    (hF : ∀ x ∉ closedPoints X,
+      IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F)) :
+    (stalkZeroLocus F)ᶜ.Finite ∧ (stalkZeroLocus F)ᶜ ⊆ closedPoints X := by
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian a
   have : IsNoetherian X := {}
-  let Z := (stalkZeroLocus G)ᶜ
-  have hZcl (z : X) (hz : z ∈ Z) : IsClosed ({z} : Set X) := by
-    by_contra hz'
-    refine hz ?_
-    have h' : IsZero ((pointSmallEtale (X.algClosurePoint z)).sheafFiber.obj G) :=
-      (hstalk z hz' n).of_iso
-        (((pointSmallEtale (X.algClosurePoint z)).uliftSheafFiberIso _).app G).symm
-    simpa using mem_stalkZeroLocus_of_isZero_sheafFiber G (X.algClosurePoint z) h'
-  have hZfin : Z.Finite := Scheme.finite_of_isClosed_constructibleTopology
-    (@IsOpen.isClosed_compl X (constructibleTopology X) _
-      (isOpen_constructibleTopology_stalkZeroLocus G)) hZcl
-  have hZ : IsClosed Z := by
-    rw [← Set.biUnion_of_singleton Z]
-    exact hZfin.isClosed_biUnion hZcl
-  let U : X.Opens := ⟨stalkZeroLocus G, by
-    rw [← compl_compl (stalkZeroLocus G)]
-    exact hZ.isOpen_compl⟩
-  have hsep (x : X) (hx : x ∉ U) : IsSepClosed (X.residueField x) := by
-    have := isAlgClosed_residueField_of_isClosed a x (hZcl x hx)
-    infer_instance
-  -- `G` vanishes on `U`
-  have hGU : IsZero ((U.ι)^*[ModuleCat.{u + 1} Λ].obj G) := by
-    refine isZero_of_isZero_sheafFiber _ fun y ↦ ?_
-    let s := (U : Scheme.{u}).algClosurePoint y
-    exact (y.2 _ (s ≫ U.ι) (by simp [s])).of_iso
-      ((upperStarCompUliftSheafFiberIso (ModuleCat.{u + 1} Λ) U.ι s).app G ≪≫
-        ((pointSmallEtale (s ≫ U.ι)).uliftSheafFiberIso _).app G)
-  -- `a_* G = 0`
-  have haG : IsZero ((a)_*[ModuleCat.{u + 1} Λ].obj G) := by
-    by_contra hN
-    let adj := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a
-    have hε : adj.counit.app G ≠ 0 := fun h0 ↦ hN (by
-      rw [IsZero.iff_id_eq_zero, ← adj.right_triangle_components G, h0, Functor.map_zero,
-        comp_zero])
-    obtain ⟨g, hg⟩ := _root_.DerivedCategory.exists_ne_zero_hom_singleFunctor_of_isGE _ hε
-    let e := (((a)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor n).app
-      ((a)_*[ModuleCat.{u + 1} Λ].obj G)
-    let adjD := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a
-    refine hg ?_
-    rw [← cancel_epi e.hom, comp_zero]
-    exact (adjD.homEquiv _ _).injective (hRΔ.eq_of_tgt _ _)
-  exact hn (isZero_of_isZero_lowerStar_of_isZero_upperStar a U hZfin (fun x hx ↦ hZcl x hx)
-    hsep G hGU haG)
+  have hsub : (stalkZeroLocus F)ᶜ ⊆ closedPoints X := by
+    intro x hx
+    by_contra h
+    refine hx ?_
+    have := mem_stalkZeroLocus_of_isZero_sheafFiber F (X.algClosurePoint x) (hF x h)
+    rwa [X.algClosurePoint_base] at this
+  refine ⟨Set.Finite.of_isClosed_constructibleTopology ?_ hsub, hsub⟩
+  exact @IsOpen.isClosed_compl X (constructibleTopology X) _
+    (isOpen_constructibleTopology_stalkZeroLocus F)
+
+/-- Blueprint `thm-weil-etale-geometric-biduality`: let `X` be quasi-compact and locally of
+finite type over a field `k`, with structure morphism `a`, and let `K ∈ D(X_ét, Λ)` be bounded
+with constructible homology sheaves whose stalks vanish at all non-closed points. Then the
+homology of `K` is supported on a finite set of closed points: there are a closed immersion
+`i : Z ⟶ X` with `i ≫ a` finite and an open immersion `j : U ⟶ X` onto the complement of its
+image with `j^* K = 0`. -/
+theorem exists_isFinite_isZero_upperStar_of_boundedConstructible [CommRing Λ] {k : Type u}
+    [Field k] {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] [CompactSpace X]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (h : ∀ (q : ℤ), ∀ x ∉ closedPoints X,
+      IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj K))) :
+    ∃ (Z U : Scheme.{u}) (i : Z ⟶ X) (j : U ⟶ X), IsClosedImmersion i ∧ IsFinite (i ≫ a) ∧
+      IsOpenImmersion j ∧ Set.range i.base = (Set.range j.base)ᶜ ∧
+      IsZero (D((j)^*[ModuleCat.{u + 1} Λ]).obj K) := by
+  obtain ⟨⟨⟨n₀, hn₀⟩, ⟨n₁, hn₁⟩⟩, hc⟩ := hK
+  let H (q : ℤ) := (_root_.DerivedCategory.homologyFunctor
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj K
+  let S : Set X := ⋃ q ∈ Finset.Icc n₀ n₁, (stalkZeroLocus (H q))ᶜ
+  have hS : S.Finite := (Finset.Icc n₀ n₁).finite_toSet.biUnion fun q _ ↦
+    have := hc q
+    (finite_compl_stalkZeroLocus a (H q) (h q)).1
+  have hS' : S ⊆ closedPoints X := Set.iUnion₂_subset fun q _ ↦
+    have := hc q
+    (finite_compl_stalkZeroLocus a (H q) (h q)).2
+  have hsub (q : ℤ) : (stalkZeroLocus (H q))ᶜ ⊆ S := by
+    by_cases hq : q ∈ Finset.Icc n₀ n₁
+    · exact Set.subset_biUnion_of_mem (u := fun q ↦ (stalkZeroLocus (H q))ᶜ) hq
+    · have hz : IsZero (H q) := by
+        have hq' : q < n₀ ∨ n₁ < q := by
+          rw [Finset.mem_Icc] at hq
+          omega
+        rcases hq' with h' | h'
+        · exact (_root_.DerivedCategory.isGE_iff K n₀).1 hn₀ q h'
+        · exact (_root_.DerivedCategory.isLE_iff K n₁).1 hn₁ q h'
+      rw [(isZero_iff_stalkZeroLocus_eq_univ _).1 hz, Set.compl_univ]
+      exact Set.empty_subset _
+  obtain ⟨U, hU, hfin⟩ := exists_opens_isFinite_closedComplement a hS hS'
+  refine ⟨_, U, U.closedComplement, U.ι, inferInstance, hfin, inferInstance, ?_, ?_⟩
+  · rw [Scheme.Opens.range_closedComplement, Scheme.Opens.range_ι]
+  refine _root_.DerivedCategory.isZero_of_forall_isZero_homology _ fun q ↦ ?_
+  refine IsZero.of_iso ?_ ((((U.ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso
+    q).app K).symm
+  refine (isZero_iff_stalkZeroLocus_eq_univ _).2 (Set.eq_univ_of_forall fun y ↦ ?_)
+  refine mem_stalkZeroLocus_upperStar _ _ ?_
+  by_contra hy
+  have := hsub q hy
+  rw [← compl_compl S, ← hU] at this
+  exact this y.2
 
 end Etale
 

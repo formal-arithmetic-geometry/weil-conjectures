@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import Mathlib.RepresentationTheory.Irreducible
 public import Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
@@ -33,6 +34,8 @@ quotient is the honest subquotient `S / U`.
 * `Subrepresentation.isIrreducible_toRepresentation_iff_isAtom`: a subrepresentation is
   irreducible if and only if it is an atom of the lattice of subrepresentations.
 * `Subrepresentation.subquotient`: the representation of `W` on `S ⧸ U`.
+* `Subrepresentation.dualAnnihilator`, `Subrepresentation.subquotientDualEquiv`: the annihilator
+  `U^⊥` of a subrepresentation in the contragredient, and the equivalence `U^⊥ / S^⊥ ≅ (S / U)^∨`.
 * `Subrepresentation.translate`: translation by `g` of subrepresentations of the restriction to a
   normal subgroup.
 * `Subrepresentation.orderIsoOfForallIff`: representations with the same invariant subspaces have
@@ -212,6 +215,87 @@ theorem subquotient_apply_mk (S U : Subrepresentation ρ) (w : W) (x : S.toSubmo
 theorem toSubmodule_le_toSubmodule {S T : Subrepresentation ρ} :
     S.toSubmodule ≤ T.toSubmodule ↔ S ≤ T :=
   Iff.rfl
+
+section Dual
+
+/-- The *annihilator* `U^⊥` of a subrepresentation `U`: the linear forms vanishing on `U`, a
+subrepresentation of the contragredient representation. -/
+def dualAnnihilator (U : Subrepresentation ρ) : Subrepresentation ρ.dual where
+  toSubmodule := U.toSubmodule.dualAnnihilator
+  apply_mem_toSubmodule w f hf := by
+    rw [Submodule.mem_dualAnnihilator] at hf ⊢
+    intro x hx
+    rw [Representation.dual_apply, Module.Dual.transpose_apply, LinearMap.comp_apply]
+    exact hf _ (U.apply_mem_toSubmodule w⁻¹ hx)
+
+/-- A linear form lies in `U^⊥` if and only if it vanishes on `U`. -/
+theorem mem_dualAnnihilator {U : Subrepresentation ρ} {f : Module.Dual k V} :
+    f ∈ U.dualAnnihilator ↔ ∀ x ∈ U, f x = 0 :=
+  Submodule.mem_dualAnnihilator f
+
+/-- Taking annihilators reverses inclusions. -/
+theorem dualAnnihilator_antitone : Antitone (dualAnnihilator : Subrepresentation ρ → _) :=
+  fun _ _ h ↦ Submodule.dualAnnihilator_anti (toSubmodule_le_toSubmodule.2 h)
+
+@[simp]
+theorem dualAnnihilator_bot : (⊥ : Subrepresentation ρ).dualAnnihilator = ⊤ :=
+  toSubmodule_injective Submodule.dualAnnihilator_bot
+
+@[simp]
+theorem dualAnnihilator_top : (⊤ : Subrepresentation ρ).dualAnnihilator = ⊥ :=
+  toSubmodule_injective Submodule.dualAnnihilator_top
+
+/-- For `U ≤ S`, a linear form on `V` vanishing on `U` induces a linear form on the subquotient
+`S / U`. -/
+noncomputable def dualAnnihilatorToDualSubquotient (U S : Subrepresentation ρ) :
+    U.dualAnnihilator.toSubmodule →ₗ[k]
+      Module.Dual k (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) where
+  toFun f := Submodule.liftQ _ ((f : Module.Dual k V) ∘ₗ S.toSubmodule.subtype) fun x hx ↦
+    mem_dualAnnihilator.1 f.2 x hx
+  map_add' _ _ := Submodule.linearMap_qext _ rfl
+  map_smul' _ _ := Submodule.linearMap_qext _ rfl
+
+@[simp]
+theorem dualAnnihilatorToDualSubquotient_apply_mk (U S : Subrepresentation ρ)
+    (f : U.dualAnnihilator.toSubmodule) (x : S.toSubmodule) :
+    dualAnnihilatorToDualSubquotient U S f (Submodule.Quotient.mk x) = (f : Module.Dual k V) x :=
+  rfl
+
+/-- The kernel of `U^⊥ → (S / U)^∨` is `S^⊥`. -/
+theorem ker_dualAnnihilatorToDualSubquotient (U S : Subrepresentation ρ) :
+    LinearMap.ker (dualAnnihilatorToDualSubquotient U S) =
+      S.dualAnnihilator.toSubmodule.comap U.dualAnnihilator.toSubmodule.subtype := by
+  ext f
+  simp only [LinearMap.mem_ker, Submodule.mem_comap, Submodule.subtype_apply]
+  refine ⟨fun h ↦ mem_dualAnnihilator.2 fun x hx ↦ ?_, fun h ↦ Submodule.linearMap_qext _ ?_⟩
+  · simpa using congr($h (Submodule.Quotient.mk ⟨x, hx⟩))
+  · exact LinearMap.ext fun x ↦ mem_dualAnnihilator.1 h x x.2
+
+/-- For `U ≤ S`, every linear form on `S / U` comes from a linear form on `V` vanishing on `U`. -/
+theorem dualAnnihilatorToDualSubquotient_surjective {U S : Subrepresentation ρ} (h : U ≤ S) :
+    Function.Surjective (dualAnnihilatorToDualSubquotient U S) := by
+  intro φ
+  obtain ⟨g, hg⟩ := LinearMap.exists_extend (φ ∘ₗ Submodule.mkQ _ : S.toSubmodule →ₗ[k] k)
+  have hgU : g ∈ U.dualAnnihilator := mem_dualAnnihilator.2 fun x hx ↦ by
+    have := congr($hg ⟨x, h hx⟩)
+    simp only [LinearMap.comp_apply, Submodule.subtype_apply, Submodule.mkQ_apply] at this
+    rw [this]
+    exact (congrArg φ ((Submodule.Quotient.mk_eq_zero _).2 hx)).trans (map_zero φ)
+  exact ⟨⟨g, hgU⟩, Submodule.linearMap_qext _ hg⟩
+
+/-- **The contragredient of a subquotient.** For subrepresentations `U ≤ S`, the subquotient
+`U^⊥ / S^⊥` of the contragredient representation is the contragredient of the subquotient `S / U`.
+(blueprint: part L3 of `sk-r-linear-library`) -/
+noncomputable def subquotientDualEquiv {U S : Subrepresentation ρ} (h : U ≤ S) :
+    (U.dualAnnihilator.subquotient S.dualAnnihilator).Equiv (S.subquotient U).dual :=
+  .mk ((Submodule.quotEquivOfEq _ _ (ker_dualAnnihilatorToDualSubquotient U S).symm).trans
+    ((dualAnnihilatorToDualSubquotient U S).quotKerEquivOfSurjective
+      (dualAnnihilatorToDualSubquotient_surjective h))) fun w ↦ by
+    refine Submodule.linearMap_qext _ (LinearMap.ext fun f ↦ Submodule.linearMap_qext _
+      (LinearMap.ext fun x ↦ ?_))
+    rfl
+
+end Dual
 
 section Equiv
 

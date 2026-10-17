@@ -6,10 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsQuotientDerived
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 /-!
@@ -42,7 +42,7 @@ restriction of scalars to `Λ`, and the reduction `K ⊗ᴸ_Λ A_n` through
 the derived base change `K ⊗ᴸ_Λ A_n ∈ D(X_ét, A_n)` is characterised by its universal property
 (`AlgebraicGeometry.Etale.IsDerivedBaseChange`): it is left adjoint to restriction of scalars.
 The comparison maps of the blueprint are only asserted to exist, as in
-`WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison`.
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison`.
 -/
 
 @[expose] public section
@@ -76,9 +76,10 @@ section RestrictScalars
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') (X : Scheme.{u})
 
 /-- Restriction of scalars `D(X_ét, Λ') ⥤ D(X_ét, Λ)` along a ring morphism `φ : Λ →+* Λ'`,
-induced by the exact restriction of scalars of étale sheaves. -/
+induced by the exact restriction of scalars of étale sheaves: the case of the small étale site
+of `CategoryTheory.Sheaf.derivedRestrictScalars`. -/
 noncomputable abbrev derivedRestrictScalars : 𝐃(X, Λ') ⥤ 𝐃(X, Λ) :=
-  (Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategory
+  Sheaf.derivedRestrictScalars X.smallEtaleTopology φ
 
 variable {φ X}
 
@@ -113,30 +114,11 @@ lemma smul_id_derivedRestrictScalars_obj {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
 `K' ∈ D(X_ét, Λ')` *exhibits `K'` as the derived base change `K ⊗ᴸ_Λ Λ'`* if it is universal
 among morphisms from `K` to restrictions of scalars: derived base change is left adjoint to
 restriction of scalars. For `Λ' = Λ ⧸ J` the restriction of scalars of `K'` is then the
-reduction `K ⊗ᴸ (Λ ⧸ J)_X` (`AlgebraicGeometry.Etale.reductionModIdeal`). -/
-def IsDerivedBaseChange {K : 𝐃(X, Λ)} {K' : 𝐃(X, Λ')}
+reduction `K ⊗ᴸ (Λ ⧸ J)_X` (`AlgebraicGeometry.Etale.reductionModIdeal`). This is the case of
+the small étale site of `CategoryTheory.Sheaf.IsDerivedBaseChange`. -/
+abbrev IsDerivedBaseChange {K : 𝐃(X, Λ)} {K' : 𝐃(X, Λ')}
     (η : K ⟶ (derivedRestrictScalars φ X).obj K') : Prop :=
-  ∀ N : 𝐃(X, Λ'), Function.Bijective fun g : K' ⟶ N ↦ η ≫ (derivedRestrictScalars φ X).map g
-
-/-- A derived base change is unique: if `η : K ⟶ R K'` is universal among morphisms from `K` to
-objects in the image of a right adjoint `R` of `F`, then `K' ≅ F K`, compatibly with `η` and the
-unit of the adjunction. -/
-lemma exists_iso_of_adjunction_of_bijective {C D : Type*} [Category* C] [Category* D]
-    {F : C ⥤ D} {R : D ⥤ C} (adj : F ⊣ R) {K : C} {K' : D} (η : K ⟶ R.obj K')
-    (hη : ∀ N : D, Function.Bijective fun g : K' ⟶ N ↦ η ≫ R.map g) :
-    ∃ e : F.obj K ≅ K', adj.unit.app K ≫ R.map e.hom = η := by
-  obtain ⟨h, hh⟩ := (hη (F.obj K)).2 (adj.unit.app K)
-  let g : F.obj K ⟶ K' := (adj.homEquiv K K').symm η
-  have hg : adj.unit.app K ≫ R.map g = η := by
-    rw [← Adjunction.homEquiv_unit, Equiv.apply_symm_apply]
-  refine ⟨⟨g, h, ?_, ?_⟩, hg⟩
-  · apply (adj.homEquiv _ _).injective
-    simp only [Adjunction.homEquiv_unit, Functor.map_comp, Functor.map_id, Category.comp_id]
-    rw [reassoc_of% hg]
-    exact hh
-  · apply (hη K').1
-    simp only [Functor.map_comp, Functor.map_id, Category.comp_id]
-    rw [reassoc_of% hh, hg]
+  Sheaf.IsDerivedBaseChange η
 
 end RestrictScalars
 
@@ -222,19 +204,8 @@ theorem nonempty_iso_reductionModIdeal_derivedHom (n : ℕ) {K L : 𝐃(X, Λ)}
     Nonempty ((reductionModIdeal Λ X (I ^ n)).obj
         (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L) ≅
       (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj
-        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) := by
-  let adj := derivedExtendScalarsAdjunction (I ^ n) X
-  obtain ⟨eK, -⟩ := exists_iso_of_adjunction_of_bijective adj η hη
-  obtain ⟨eL, -⟩ := exists_iso_of_adjunction_of_bijective adj η' hη'
-  obtain ⟨eR⟩ := nonempty_iso_restrictScalars_leftDerived_obj (I ^ n) X L
-  subst hI
-  obtain ⟨e₁⟩ := nonempty_iso_reductionModIdeal_derivedHom_obj hϖ n K L
-  exact ⟨e₁ ≪≫ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso
-      (eR.symm ≪≫ (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) X).mapIso
-        eL) ≪≫
-    (derivedHomCompIsoOfAdjunction adj K).app Ln ≪≫
-    (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) X).mapIso
-      (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) X).mapIso eK.op).app Ln)⟩
+        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) :=
+  sorry
 
 include hϖ hI in
 /-- Blueprint `lem-coef-integral-hom-reduction`: Integral internal Hom and reduction.

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 
 /-!
 # The Frobenius exchange isomorphisms of `φ̄^*` and `φ̄_*` are mates

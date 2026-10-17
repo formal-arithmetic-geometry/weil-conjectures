@@ -68,7 +68,7 @@ perfect complex into its coefficient dual, twisted and shifted.
   (`thm-sf-dual-perfect`): `θ` is compatible with the evaluations. The compatibility with a
   change of coefficients is `CategoryTheory.MonoidalClosed.map_ihomIsoIhomUnitTensor_hom`, and
   the pro-étale coefficient stages are
-  `WeilConjectures.SixFunctors.ProEtale.Derived.DualPerfect`.
+  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualPerfect`.
 - `AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_hom_app_shift`
   (`thm-sf-dual-perfect`): `θ` commutes with shifts, `θ_{K⟦n⟧} = θ_K⟦-n⟧` under
   `AlgebraicGeometry.Etale.ihomShiftIso` (`RHom(K⟦n⟧, M) ≅ RHom(K, M)⟦-n⟧`).

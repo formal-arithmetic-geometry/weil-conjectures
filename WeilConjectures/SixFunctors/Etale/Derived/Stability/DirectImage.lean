@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
@@ -15,9 +16,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 # Stability of `Dctf`: direct image and internal hom
 
 For torsion coefficients `Λ` with invertible exponent and schemes of finite type over a field,
-this file proves that the direct image `Rf_*`, the compactly supported direct image `Rf_!` and
-the internal hom preserve the bounded constructible complexes, with the shifts of the Tor
-amplitude recorded by the blueprint.
+this file proves that the direct image `Rf_*`, the compactly supported direct image `Rf_!`
+preserve the bounded constructible complexes, with the shifts of the Tor amplitude recorded by
+the blueprint, and the local tools for the internal hom; the stability of `Dctf` under the
+internal hom is in `WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom`.
 
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
 documentation records the implementation notes.
@@ -88,19 +90,52 @@ theorem boundedConstructible_rightDerivedLowerStar [ConcreteCategory.FinitelyGen
 
 /-- Blueprint `sk-thm-sf-direct-image-tor-amplitude`: Direct image with finite Tor amplitude.
 
-Let `f : X ⟶ Y` be a separated morphism of finite-type `k`-schemes with `dim X ≤ d`, and let `K`
-be a bounded constructible complex on `X_ét` of Tor amplitude in `[a, b]`, killed by an integer
-`N` invertible on `Y`. Then `Rf_* K` has Tor amplitude in `[a, b + 2d]`. The shift `2d` is the
-uniform vanishing of `Rᵖf_*` above twice the dimension of the source. The coefficients are as in
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`. -/
-theorem torAmplitudeIn_rightDerivedLowerStar [ConcreteCategory.FinitelyGeneratedOfMono A]
+Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes with `dim X ≤ d`, let `Λ` be a finite
+ring and let `K` be a complex of étale sheaves of `Λ`-modules on `X` of Tor amplitude in
+`[a, b]`. Then `Rf_* K` has Tor amplitude in `[a, b + 2d]`. The shift `2d` is the uniform
+vanishing of `Rᵖf_*` above twice the dimension of the source.
+
+This is `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_finite`: by the
+projection formula for finitely generated constant coefficients, `Rf_* K ⊗ᴸ κ_Y ≅ Rf_*(K ⊗ᴸ κ_X)`
+for the residue ring `κ` of `Λ`, which has homology in `[a, b + 2d]`, and the residue test
+concludes. The remaining hypotheses of the blueprint statement (`f` separated, `K` bounded
+constructible and killed by an integer `N` invertible on `Y`) are kept for the callers but are
+not needed. For coefficients which are not finite, see
+`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing`. -/
+theorem torAmplitudeIn_rightDerivedLowerStar
     {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
     [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
     [IsSeparated f] (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (N : ℕ) [NeZero N]
-    (hN : N • 𝟙 K = 0) (hNY : IsUnit (N : Γ(Y, ⊤)))
-    (hbc : boundedConstructible A X K) (hta : torAmplitudeIn A X a b K) :
-    torAmplitudeIn A Y a (b + 2 * (d : ℤ)) ((R((f)_*[A])).obj K) :=
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (N : ℕ)
+    [NeZero N] (_hN : N • 𝟙 K = 0) (_hNY : IsUnit (N : Γ(Y, ⊤)))
+    (_hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
+  torAmplitudeIn_rightDerivedLowerStar_of_finite Λ aX aY f hf d hd a b hta
+
+omit [Finite Λ] in
+/-- The Tor amplitude bound of blueprint `sk-thm-sf-direct-image-tor-amplitude` for Noetherian
+coefficients which need not be finite.
+
+Let `f : X ⟶ Y` be a separated morphism of finite-type `k`-schemes with `dim X ≤ d`, let `Λ` be a
+Noetherian ring, and let `K` be a bounded constructible complex of étale sheaves of `Λ`-modules
+on `X` of Tor amplitude in `[a, b]`, killed by an integer `N` invertible on `Y`. Then `Rf_* K` has
+Tor amplitude in `[a, b + 2d]`. This is used at the integral coefficient stage, for the reductions
+of an `𝒪_E`-complex modulo powers of the maximal ideal. For a finite ring `Λ` it is
+`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`; in general the residue test is
+not available and the proof goes through the geometric stalks, using that the stalks of `Rf_* K`
+are computed by a projection formula with arbitrary constant coefficients. -/
+theorem torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing [IsNoetherianRing Λ]
+    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+    [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    [IsSeparated f] (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (N : ℕ)
+    [NeZero N] (hN : N • 𝟙 K = 0) (hNY : IsUnit (N : Γ(Y, ⊤)))
+    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
   sorry
 
 omit [Finite Λ] in
@@ -176,7 +211,7 @@ theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}}
     ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta⟩, hta⟩
   exact constructibleFiniteTor_rightDerivedLowerStar Λ (c.g ≫ aY) aY c.g rfl ⟨h.1.1, a, b, h.2⟩
 
-/-! #### Internal hom -/
+/-! #### Internal hom: local tools -/
 
 omit [Finite Λ] in
 /-- Constructibility of a sheaf of modules is local for a finite open cover of a scheme whose

@@ -22,7 +22,8 @@ cohomology of the quasi-compact quasi-separated scheme `W ×_X Y` does.
 - `AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImagePresheaf_app`: the
   presheaf `W ↦ Hᵠ(W ×_X Y, F|)` commutes with filtered colimits on each `W` with `W ×_X Y`
   quasi-compact and quasi-separated.
-- `AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`: higher direct images
+- `AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage` and
+  `AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`: higher direct images
   along a quasi-compact quasi-separated morphism commute with filtered colimits of sheaves.
 -/
 
@@ -48,17 +49,14 @@ theorem Etale.preservesColimitsOfShape_higherDirectImagePresheaf_app {X Y : Sche
     (h : Y ⟶ X) (q : ℤ) (W : X.Etale)
     [CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left]
     [QuasiSeparatedSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left]
-    (J : Type) [SmallCategory J] [IsFiltered J] :
+    (J : Type (u + 1)) [SmallCategory J] [IsFiltered J] :
     PreservesColimitsOfShape J
       (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
         Etale.higherDirectImagePresheafFunctor Λ h q ⋙ (evaluation _ _).obj (op W)) := by
   let W' := (MorphismProperty.Over.pullback @Etale ⊤ h).obj W
-  have : IsFiltered (AsSmall.{u} J) := IsFiltered.of_equivalence AsSmall.equiv
-  have := Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject Λ W'.left q
-    (AsSmall.{u} J)
   have h₁ : PreservesColimitsOfShape J
       (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ W'.left).obj (Etale.finalObject _)) q) :=
-    preservesColimitsOfShape_of_equiv AsSmall.equiv.symm _
+    Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject Λ W'.left q J
   have h₂ : PreservesColimitsOfShape J ((W'.hom)^*[ModuleCat.{u + 1} Λ]) :=
     (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) _).leftAdjoint_preservesColimits
       |>.preservesColimitsOfShape
@@ -85,7 +83,8 @@ lemma Etale.compactSpace_and_quasiSeparatedSpace_pullback {X Y : Scheme.{u}} (h 
 
 /-- Sections of a filtered colimit of sheaves of `Λ`-modules, computed by sheafifying the
 colimit of presheaves, come locally from a stage of the diagram. -/
-lemma Etale.sheafifyCocone_locally {X : Scheme.{u}} {J : Type} [SmallCategory J] [IsFiltered J]
+lemma Etale.sheafifyCocone_locally {X : Scheme.{u}} {J : Type (u + 1)} [SmallCategory J]
+    [IsFiltered J]
     (E : J ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {W : X.Etale}
     (s : ToType ((Sheaf.sheafifyCocone (colimit.cocone
       (E ⋙ sheafToPresheaf _ _))).pt.obj.obj (op W))) :
@@ -104,8 +103,6 @@ lemma Etale.sheafifyCocone_locally {X : Scheme.{u}} {J : Type} [SmallCategory J]
   rintro V g ⟨t, ht⟩
   have : PreservesColimit ((E ⋙ sheafToPresheaf _ _) ⋙ (evaluation _ _).obj (op V))
       (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-    have := preservesFilteredColimitsOfSize_shrink.{0, u + 1, 0, u + 1}
-      (CategoryTheory.forget (ModuleCat.{u + 1} Λ))
     inferInstance
   obtain ⟨j, x, hx⟩ := Concrete.isColimit_exists_rep _
     (isColimitOfPreserves ((evaluation _ _).obj (op V)) (colimit.isColimit _)) t
@@ -125,13 +122,12 @@ For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct im
 `colim_i R^q h_* F_i ≅ R^q h_* (colim_i F_i)`. The functor is written out as the degree-`q`
 homology of the derived pushforward of a sheaf placed in degree `0`, the functor whose value
 at `F` is `AlgebraicGeometry.Etale.higherDirectImage`. -/
-theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X)
-    [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (J : Type) [SmallCategory J] [IsFiltered J] :
-    PreservesColimitsOfShape J
+theorem Etale.preservesFilteredColimitsOfSize_higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X)
+    [QuasiCompact h] [QuasiSeparated h] (q : ℤ) :
+    PreservesFilteredColimitsOfSize.{u + 1, u + 1}
       (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
         R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q) := by
-  constructor
-  intro D
+  refine ⟨fun J _ _ ↦ ⟨fun {D} ↦ ?_⟩⟩
   let G := DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
     R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q
   let P := DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
@@ -206,8 +202,6 @@ theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h :
       ((Scheme.AffineEtale.Spec X).obj U) J
     have : PreservesColimitsOfShape J
         (P ⋙ (evaluation _ _).obj (op ((Scheme.AffineEtale.Spec X).obj U))) := this
-    have := preservesFilteredColimitsOfSize_shrink.{0, u + 1, 0, u + 1}
-      (CategoryTheory.forget AddCommGrpCat.{u + 1})
     let βU := (P.obj (D.obj j)).map (k₂ ≫ g'').op β
     have hβU : (P.map (c.ι.app j)).app _ βU = (P.map (c.ι.app j)).app _ 0 := by
       simp only [βU, op_comp, Functor.map_comp, ConcreteCategory.comp_apply, map_zero]
@@ -268,8 +262,6 @@ theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h :
       ((Scheme.AffineEtale.Spec X).obj U) J
     have : PreservesColimitsOfShape J
         (P ⋙ (evaluation _ _).obj (op ((Scheme.AffineEtale.Spec X).obj U))) := this
-    have := preservesFilteredColimitsOfSize_shrink.{0, u + 1, 0, u + 1}
-      (CategoryTheory.forget AddCommGrpCat.{u + 1})
     obtain ⟨j, β, hβ⟩ := Concrete.isColimit_exists_rep _
       (isColimitOfPreserves (P ⋙ (evaluation _ _).obj (op ((Scheme.AffineEtale.Spec X).obj U)))
         (colimit.isColimit D)) ((P.obj c.pt).map k₂.op t)
@@ -289,5 +281,19 @@ theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h :
     erw [hβ, NatTrans.naturality_apply (ψ c.pt) k₂.op t, ht]
     simp only [op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
     rfl
+
+/-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
+direct image, for filtered categories in `Type`
+(`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`). -/
+theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X)
+    [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (J : Type) [SmallCategory J] [IsFiltered J] :
+    PreservesColimitsOfShape J
+      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+        R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q) :=
+  have := Etale.preservesFilteredColimitsOfSize_higherDirectImage Λ h q
+  have := preservesFilteredColimitsOfSize_shrink.{0, u + 1, 0, u + 1}
+    (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+        R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q)
+  inferInstance
 
 end AlgebraicGeometry

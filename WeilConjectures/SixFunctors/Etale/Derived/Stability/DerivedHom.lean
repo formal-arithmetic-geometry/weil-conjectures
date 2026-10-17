@@ -5,20 +5,21 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Biduality
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 /-!
-# Stability of `Dctf`: internal hom
+# Stability of `Dctf` under the internal hom
 
-For torsion coefficients `Λ` with invertible exponent and schemes of finite type over an
-algebraically closed field, this file proves that the internal hom preserves the bounded
-constructible complexes of finite Tor amplitude, with the shifts of the Tor amplitude recorded
-by the blueprint. The proofs go through Verdier biduality
-(`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`), which is why the field is
-algebraically closed, as in `sk-def-sf-setting`.
+For a finite coefficient ring `Λ` whose exponent is invertible on schemes of finite type over an
+algebraically closed field `k`, the internal hom `RHom(K, M)` of two objects of `Dctf` lies in
+`Dctf`, with the Tor interval of blueprint `sk-thm-sf-hom-ctf`. As in the blueprint, this goes
+through Verdier biduality: `RHom(K, M) ≅ 𝔻(𝔻M ⊗ᴸ K)`
+(`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`).
 
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
-documentation records the implementation notes.
+documentation records the implementation notes. The blueprint states these results over
+`k = 𝔽̄_q`; the algebraic closedness of `k` is used by Verdier biduality.
 -/
 
 @[expose] public section

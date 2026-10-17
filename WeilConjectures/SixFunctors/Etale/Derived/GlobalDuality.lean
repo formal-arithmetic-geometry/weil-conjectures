@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.SixFunctors.Etale.Derived.DualizingComplexId
+public import WeilConjectures.SixFunctors.Etale.Derived.HomShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
@@ -43,6 +43,8 @@ is perfect: its tensor–internal-hom adjoint is an isomorphism.
   category in which the projection formula holds.
 - `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit`
   (`sk-thm-sf-global-duality`): `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`.
+- `AlgebraicGeometry.Etale.dualizingComplexIdIso` (`lem-sf-point`): `ω_S ≅ Λ_S` for the
+  identity of the base.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation`
   (`sk-thm-sf-identification`): under an orientation, `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
 
@@ -98,6 +100,38 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
+section Point
+
+variable (S : Scheme.{u})
+
+/-- Blueprint `lem-sf-point` (the dualizing complex of the base): the derived lower shriek along
+the identity of `S` is the identity, `R(𝟙_S)_! ≅ 𝟭`. The identity is proper, so `R(𝟙_S)_!` is
+`R(𝟙_S)_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and
+`(𝟙_S)_* ≅ 𝟭`. -/
+noncomputable def rightDerivedLowerShriekIdIso : R(𝟙 S)_![A] ≅ 𝟭 _ :=
+  rightDerivedLowerShriekIsoRightDerivedLowerStar A (𝟙 S) ≪≫
+    Functor.rightDerivedFunctorNatIso (lowerStarId A S) ≪≫
+    (𝟭 _).rightDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
+
+/-- The derived lower shriek along the identity of `S` is a left adjoint, being isomorphic to
+the identity (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIdIso`). -/
+instance isLeftAdjoint_rightDerivedLowerShriek_id : (R(𝟙 S)_![A]).IsLeftAdjoint :=
+  ⟨_, ⟨Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso A S).symm⟩⟩
+
+/-- Blueprint `lem-sf-point` (the dualizing complex of the base): the exceptional inverse image
+along the identity of `S` is the identity, `R(𝟙_S)^! ≅ 𝟭`, being right adjoint to
+`R(𝟙_S)_! ≅ 𝟭`. -/
+noncomputable def rightDerivedUpperShriekIdIso : R(𝟙 S)^![A] ≅ 𝟭 _ :=
+  (rightDerivedUpperShriekAdjunction A (𝟙 S)).rightAdjointUniq
+    (Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso A S).symm)
+
+/-- Blueprint `lem-sf-point`: for the structure morphism `a_s = 𝟙_s` of the base, the dualizing
+complex is the unit, `ω_s = Ra_s^! Λ ≅ Λ_s`. -/
+noncomputable def dualizingComplexIdIso : dualizingComplex A (𝟙 S) ≅ 𝟙_ _ :=
+  (rightDerivedUpperShriekIdIso A S).app _
+
+end Point
+
 variable {X S : Scheme.{u}} (aX : X ⟶ S) [HasCompactification aX] [(R(aX)_![A]).IsLeftAdjoint]
 
 /-- The Verdier dual of the unit is the dualizing complex, `𝔻_X Λ_X = RHom(Λ_X, ω_X) ≅ ω_X`. -/
@@ -130,35 +164,12 @@ section Shift
 
 variable {Z : Scheme.{u}}
 
-attribute [local instance] Sheaf.monoidalCategory in
-/-- Tensoring with a shifted complex shifts the tensor product, `K⟦a⟧ ⊗ᴸ M ≅ (K ⊗ᴸ M)⟦a⟧`,
-naturally in `M`. -/
-noncomputable def derivedTensorObjShiftIso
-    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
-    (derivedTensor A Z).obj (K⟦a⟧) ≅ (derivedTensor A Z).obj K ⋙ shiftFunctor _ a :=
-  NatIso.ofComponents (fun M ↦ (((derivedTensor A Z).flip.obj M).commShiftIso a).app K)
-    (fun f ↦
-      have : NatTrans.CommShift ((derivedTensor A Z).flip.map f) ℤ :=
-        Functor.CommShift₂.commShift_flip_map (h := .int)
-          (G := curriedTensor (_root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))) f
-      (NatTrans.shift_app_comm ((derivedTensor A Z).flip.map f) a K).symm)
-
-/-- The derived internal hom out of a shifted complex, `RHom(K⟦a⟧, M) ≅ RHom(K, M⟦-a⟧)`,
-naturally in `M`: the conjugate of `K⟦a⟧ ⊗ᴸ - ≅ (K ⊗ᴸ -)⟦a⟧`. -/
-noncomputable def derivedHomShiftIso
-    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
-    (RHom(Z)[A]).obj (op (K⟦a⟧)) ≅ shiftFunctor _ (-a) ⋙ (RHom(Z)[A]).obj (op K) :=
-  conjugateIsoEquiv (derivedTensorHomAdjunction A (K⟦a⟧))
-    ((derivedTensorHomAdjunction A K).comp (shiftEquiv _ a).toAdjunction)
-    (derivedTensorObjShiftIso A K a).symm
-
 /-- The coefficient dual turns shifts into opposite shifts, `(K⟦a⟧)^∨ ≅ (K^∨)⟦-a⟧`. -/
 noncomputable def coefficientDualShiftIso
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
     (DerivedCategory.coefficientDual A Z).obj (op (K⟦a⟧)) ≅
       ((DerivedCategory.coefficientDual A Z).obj (op K))⟦-a⟧ :=
-  (derivedHomShiftIso A K a).app (𝟙_ _) ≪≫
-    (((RHom(Z)[A]).obj (op K)).commShiftIso (-a)).app (𝟙_ _)
+  (derivedHomShiftIso A K a).app (𝟙_ _)
 
 /-- Blueprint `sk-thm-sf-global-duality` (shifts): global duality for a shifted complex is the
 shift of global duality, `RΓ_c(X, K⟦a⟧)^∨ ≅ RΓ(X, 𝔻_X K)⟦-a⟧`. It is the coefficient dual of the

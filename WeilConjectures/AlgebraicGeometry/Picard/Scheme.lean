@@ -132,14 +132,13 @@ theorem isInvertibleDirectImage_of_finrankH_eq (K : Type u) [Field K] [Algebra k
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have hK : IsField (CommRingCat.of K) := Field.toIsField K
   -- `H¹(X_K, ℒ)` is finite-dimensional, hence zero, and `H^q(X_K, ℒ) = 0` for `q ≥ 2` since
-  -- `X_K` has dimension `1`
+  -- `X_K` is a curve (`Modules.subsingleton_H_of_two_le`)
   have hH (q : ℕ) (hq : 0 < q) : Subsingleton (ℒ.H q) := by
     obtain rfl | hq := eq_or_lt_of_le (Nat.succ_le_of_lt hq)
     · have := Modules.finiteDimensional_H_of_isProper (k := K) ℒ 1
       exact Module.finrank_zero_iff (R := K).1 h1
-    · refine Modules.subsingleton_H_of_topologicalKrullDim_lt ℒ ?_
-      refine (topologicalKrullDim_le_of_smoothOfRelativeDimension g 1).trans_lt ?_
-      exact_mod_cast hq
+    · have := Modules.IsInvertible.of_sheafOfModules ℒ
+      exact Modules.subsingleton_H_of_two_le K ℒ (by omega)
   -- `R^q g_* ℒ` lives on `Spec K`, where it is determined by its sections `H^q(X_K, ℒ)`
   refine ⟨show SheafOfModules.IsInvertible.{u, u, u} ((Modules.higherDirectImage g 0).obj ℒ)
     from ?_, fun q hq ↦ show IsZero ((Modules.higherDirectImage g q).obj ℒ) from ?_⟩

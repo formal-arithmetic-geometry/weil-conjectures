@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationRecollement
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegralClosedSupport
 
 /-!
@@ -37,7 +37,7 @@ complementary quasi-compact open immersion `j : U ⟶ X`, `X` being of finite ty
    `AlgebraicGeometry.Etale.isIso_boundedConstructibleRationalClosedUpperShriekAdjunction_unit`).
 
 The proof applies the rationalization of recollement data
-(`WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationRecollement`) to the
+(`WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement`) to the
 integral recollement data of `WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral`:
 the integral `i_*`, `j^*` and `Rj_*` are `Λ`-linear triangulated functors, `i_*` is fully
 faithful, `j^* ⊣ Rj_*` has invertible counit, `j^* i_* = 0`, and an object killed by `j^*` is in
