@@ -202,5 +202,23 @@
   "group": "Q138",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-7d8f3d125 (reviewer sub-agent of L); spot-checked: I read the item, all four cited nodes and the Kerodon sources in full. The statement is true and is the special case of Kerodon 00M5 (Prop 2.4.6.10) with 00M0 (Rem 2.4.6.4(c)) for Kan_W. I tested the empty, one-empty, point and disconnected cases. Step 1 correctly applies the Mathlib leaf lem-cbc-kan-functor-space-kan (Kerodon 00TN, checked) and the in-unit lem-coef-kan-coherent-nerve-quasicategory (00LJ, checked). Step 2 fills a Lambda^2_0 outer horn in a Kan complex to reverse an edge; it is elementary and correct. Steps 3 and 4 check C[Delta^2] in the project's inclusion subset-poset convention. Here the edge {0,2} ⊂ {0,1,2} runs from 1_A to gf, the opposite of Kerodon's 00KX direction, and the worker handled this without assuming any comparison of conventions. The union composition {1,2} ∪ {0,1} goes to g∘f, the unit laws hold, and the faces are f, g, 1_A. sigma and tau are exactly def-cbc's inverse-triangle witnesses. There are no new nodes. lem-coef-kan-weak-equivalence-space-edge is a stronger statement needing Whitehead's theorem, not a duplicate. The searches are recorded. The tool_uses are harmless: one is a Mathlib leaf and one is a definition. Fix: step 2 cited tag 00LW as Remark 2.4.6.4, but 00LW is Subsection 2.4.6 and the remark is tag 00M0. I corrected the step 2 source document and place and added (00M0) to the item's source.place. The report's WANTED line has the same misnumbering and should request 00M0.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cc57e6dd0",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, exact dependency declarations, sources, universes, empty cases, docstrings, and verbatim signature. Reproduced clean sandbox and library compiles (1.8s/1.9s). No defects; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanCoherentNerveInverseEquivalence",
+  "declaration": "CategoryTheory.Spaces.kanHomotopyInverse_isEquivalence",
+  "file": "lean/Sheaf/CategoryTheory/KanCoherentNerveInverseEquivalence.lean",
+  "statement": "theorem kanHomotopyInverse_isEquivalence {A B : SSet.{u}} [SSet.KanComplex A] [SSet.KanComplex B] (f : A ⟶ B) (g : B ⟶ A) (e_f : infinityCategory.{u} _⦋1⦌) (e_g : infinityCategory.{u} _⦋1⦌) (hf : SSet.Enhanced.RightFibrationLimit.IsSpaceEdge f e_f) (hg : SSet.Enhanced.RightFibrationLimit.IsSpaceEdge g e_g) (hf₁ : infinityCategory.{u}.δ 1 e_f = pointCoconeVertex ⟨A, inferInstance⟩) (hf₀ : infinityCategory.{u}.δ 0 e_f = pointCoconeVertex ⟨B, inferInstance⟩) (hg₁ : infinityCategory.{u}.δ 1 e_g = pointCoconeVertex ⟨B, inferInstance⟩) (hg₀ : infinityCategory.{u}.δ 0 e_g = pointCoconeVertex ⟨A, inferInstance⟩) (hA : Nonempty (SSet.Homotopy (f ≫ g) (𝟙 A)) ∨ Nonempty (SSet.Homotopy (𝟙 A) (f ≫ g))) (hB : Nonempty (SSet.Homotopy (g ≫ f) (𝟙 B)) ∨ Nonempty (SSet.Homotopy (𝟙 B) (g ≫ f))) : ∃ (σ τ : infinityCategory.{u} _⦋2⦌), infinityCategory.{u}.map (SimplexCategory.δ (2 : Fin 3)).op σ = e_f ∧ infinityCategory.{u}.map (SimplexCategory.δ (0 : Fin 3)).op σ = e_g ∧ infinityCategory.{u}.map (SimplexCategory.δ (1 : Fin 3)).op σ = infinityCategory.{u}.map (SimplexCategory.σ (0 : Fin 1)).op (pointCoconeVertex ⟨A, inferInstance⟩) ∧ infinityCategory.{u}.map (SimplexCategory.δ (2 : Fin 3)).op τ = e_g ∧ infinityCategory.{u}.map (SimplexCategory.δ (0 : Fin 3)).op τ = e_f ∧ infinityCategory.{u}.map (SimplexCategory.δ (1 : Fin 3)).op τ = infinityCategory.{u}.map (SimplexCategory.σ (0 : Fin 1)).op (pointCoconeVertex ⟨B, inferInstance⟩) ∧ SSet.Enhanced.IsEquivalenceEdge infinityCategory.{u} e_f",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

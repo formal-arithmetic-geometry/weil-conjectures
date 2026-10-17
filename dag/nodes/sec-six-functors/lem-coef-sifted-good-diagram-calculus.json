@@ -28,7 +28,9 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-model-infinity-derived-adjunction",
-  "lem-coef-model-colimit-localization-comparison"
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-simplicial-bar-projective-resolution",
+  "lem-coef-infinity-sifted-colimit-calculus"
  ],
  "proof": [
   {
@@ -355,5 +357,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e277400e7",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Statement, definitions, dependencies, docstrings, edge cases, report sections, and canonical nonsymmetric constructions checked; sandbox and library scompile checks passed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiftedGoodDiagramCalculus",
+  "declaration": "HomotopicalAlgebra.siftedGoodDiagramCalculus",
+  "declarations": [
+   "HomotopicalAlgebra.ProjectiveCofibration",
+   "HomotopicalAlgebra.GoodDiagram",
+   "HomotopicalAlgebra.GoodMorphism",
+   "HomotopicalAlgebra.PushoutProductAxiom"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiftedGoodDiagramCalculus.lean",
+  "statement": "theorem siftedGoodDiagramCalculus {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MonoidalCategory M] [MonoidalClosed M] (hRightClosed : ∀ A : M, (tensorRight A).IsLeftAdjoint) (hM : CombinatorialModelCategory.{u, v, w} M) (hUnit : IsCofibrant (𝟙_ M)) (hLeftProper : (weakEquivalences M).IsStableUnderCobaseChangeAgainst (cofibrations M)) (hPushoutProduct : PushoutProductAxiom M) : ∀ (I : Type v) [SmallCategory I], SSet.Enhanced.IsInfinitySifted (nerve I) → (∀ (A : M), IsCofibrant A → GoodDiagram ((Functor.const I).obj A)) ∧ (∀ (X : I ⥤ M), ProjectivelyCofibrant X → GoodDiagram X) ∧ (∀ {X Y : I ⥤ M} (f : X ⟶ Y), ProjectivelyCofibrant X → ProjectivelyCofibrant Y → ProjectiveCofibration f → GoodMorphism f) ∧ (∀ {X Y : I ⥤ M}, Retract X Y → GoodDiagram Y → GoodDiagram X) ∧ (∀ {X Y X' Y' : I ⥤ M} (f : X ⟶ Y) (g : X' ⟶ Y'), RetractArrow f g → GoodMorphism g → GoodMorphism f) ∧ (∀ {X Y X' : I ⥤ M} (f : X ⟶ Y) (g : X ⟶ X'), GoodMorphism f → GoodDiagram X' → GoodMorphism (pushout.inr f g)) ∧ (∀ (J : Type v) [LinearOrder J] [OrderBot J] [SuccOrder J] [WellFoundedLT J] (F : J ⥤ (I ⥤ M)) [F.IsWellOrderContinuous], GoodDiagram (F.obj ⊥) → (∀ j : J, ¬ IsMax j → GoodMorphism (F.map (homOfLE (Order.le_succ j)))) → ∀ (c : Cocone F), IsColimit c → GoodDiagram c.pt ∧ ∀ j : J, GoodMorphism (c.ι.app j)) ∧ (∀ {X Y : I ⥤ M}, GoodDiagram X → GoodDiagram Y → GoodDiagram (X ⊗ Y)) ∧ (∀ {X X' Y Y' : I ⥤ M} (f : X ⟶ X') (g : Y ⟶ Y'), GoodMorphism f → GoodMorphism g → GoodMorphism (Arrow.mk f □ Arrow.mk g).hom)",
+  "by": "NZ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Statement-only closure calculus with canonical colim.map comparisons, the existing projective-cofibrancy and infinity-siftedness definitions, both ordered tensor adjoints, correctly oriented retracts, and well-order continuous chains with every actual cocone map. Repairs the saved packet without changing the informal statement.",
+  "branch": "newtargets-dag"
  }
 }

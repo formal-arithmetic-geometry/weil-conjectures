@@ -255,5 +255,23 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-6fc5d9874 (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes, and the statement is unchanged and not weakened. Against HTT printed p.256 (fetched online and extracted with pdftotext): Variant 4.2.3.16 (*), 'every nondegenerate simplex is a monomorphism', is exactly the item's hypothesis. Its claims that I_0 ⊆ I has a left adjoint and that N(I_0) is a poset are exactly the item's thinness, poset and unique-factorization clauses. Lurie assumes K finite there, but the argument does not use finiteness. Step checks: 1, thinness from vertex equations and injectivity of τ_0, correct. 2, a noninjective arrow gives adjacent equal values; the Mathlib leaf lem-weil-pbc-simplex-degeneracy-factorization (eq_σ_comp_of_not_injective', Basic.lean:732, read) then makes σ degenerate. Variance and the n=0 case are handled, and the 'surjective operator' and 'm<n' conventions of def-weil-pbc-simplicial-set agree. 3, antisymmetry by equal dimension and monotone injection [n]->[n] = id, correct. 4, the Stacks 017R leaf (simplicial.tex:1796, read; Mathlib Degenerate.lean names exist) is applied to the top simplex, with an explicit Yoneda translation. 5, the least-element section, cancellation on s-fibres through injective τ_0, and τΔ(t)=σ̄, correct. 6, uniqueness from the section, correct. proof_deps is the union of uses. The non-definition citations are Mathlib leaves, so no tool_uses. The parent cofinal-replacement steps 1-2 use exactly this statement. comma-initial (a consequence, not cited), subdivision-face-poset-calculus and finite-embedded-simplex-resolution are not duplicates, and there is no cycle. Tests: the empty, vertex, degenerate-over-vertex and nondegenerate-input cases; the Δ^1/∂Δ^1 counterexample shows (*) is needed; a brute-force check on Δ^2 up to dimension 3 (34 simplices, 88 arrows into nondegenerate targets) passed. There is no base-change morphism or coefficient category here. FIX: source.place named only Variant 4.2.3.15 (5), although the report said 4.2.3.16 had been added. It now names Variant 4.2.3.16 (*) and the left-adjoint/poset sentences, p.256, with 4.2.3.15 (5) as a comparison. That is the only field changed. The HTT archival copy is still WANTED, and proof_origin.by=agent is correct.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0b32d8351",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Statement, dependencies, source, docstrings, edge cases, searches, and Lean compile all check out."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.NondegenerateSimplexFacePoset",
+  "declaration": "SSet.nondegenerate_simplex_face_poset",
+  "file": "lean/Sheaf/AlgebraicTopology/NondegenerateSimplexFacePoset.lean",
+  "statement": "theorem nondegenerate_simplex_face_poset {X : SSet.{u}} [X.Nonsingular] : (∀ (x y : X.N), Subsingleton {f : ⦋x.dim⦌ ⟶ ⦋y.dim⦌ // X.map f.op y.simplex = x.simplex}) ∧ (∀ (x y : X.N) (f : {f : ⦋x.dim⦌ ⟶ ⦋y.dim⦌ // X.map f.op y.simplex = x.simplex}), Mono f.1) ∧ IsPartialOrder X.N (fun x y ↦ Nonempty {f : ⦋x.dim⦌ ⟶ ⦋y.dim⦌ // X.map f.op y.simplex = x.simplex}) ∧ (∀ (σ : X.S), ∃! (p : Σ r : ℕ, X.nonDegenerate r × (⦋σ.dim⦌ ⟶ ⦋r⦌)), Epi p.2.2 ∧ X.map p.2.2.op p.2.1.1 = σ.simplex) ∧ (∀ (σ : X.S) (τ : X.N) (α : {f : ⦋σ.dim⦌ ⟶ ⦋τ.dim⦌ // X.map f.op τ.simplex = σ.simplex}), ∃! (t : {f : ⦋σ.toN.dim⦌ ⟶ ⦋τ.dim⦌ // X.map f.op τ.simplex = σ.toN.simplex}), α.1 = σ.toNπ ≫ t.1)",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
