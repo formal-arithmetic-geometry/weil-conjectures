@@ -13,9 +13,74 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each object $U$, put $P_U=\\mathcal O[h_U]$, the presheaf $V\\mapsto\\bigoplus_{\\varphi:V\\to U}\\mathcal O(V)$ of [lem-weil-pbc-free-yoneda-presheaf-module], and put $L_U=P_U^\\#$ using [def-weil-presheaf-modules-sheafification]. The adjunction in the latter statement and the evaluation bijection in the former give $\\operatorname{Hom}_{\\operatorname{Mod}(\\mathcal O)}(L_U,F)\\cong\\operatorname{Hom}_{\\operatorname{PMod}(\\mathcal O)}(P_U,F)\\cong F(U)$ for every module sheaf $F$. Explicitly, a sheaf morphism $b:L_U\\to F$ corresponds to the value at $e_{\\mathrm{id}_U}$ of the presheaf map $\\widetilde b:P_U\\to F$ obtained by precomposing with the sheafification unit. Conversely, $s\\in F(U)$ determines the presheaf map $e_\\varphi\\mapsto F(\\varphi)(s)$ and its unique extension to $L_U$. The common-universe hypothesis ensures these direct sums and sheafifications belong to the category in which $I$ is injective.",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, first paragraph; sites-modules.tex Tag 03DI, equation-map-lower-shriek-OU-into-module; Remark 03EJ and module sheafification Tag 03CY"
+   }
+  },
+  {
+   "text": "Define $a:P_W\\to P_T$ at $V$ by the $\\mathcal O(V)$-linear map $a_V(e_\\varphi)=e_{m\\circ\\varphi}$ for $\\varphi:V\\to W$. This is a morphism of module presheaves: for $g:V\\prime\\to V$ and $r\\in\\mathcal O(V)$, restricting $a_V(r e_\\varphi)$ gives $\\mathcal O(g)(r)e_{m\\circ\\varphi\\circ g}$, which is also $a_{V\\prime}$ applied to the restriction of $r e_\\varphi$. Finite sums of these generators exhaust $P_W(V)$, so the equality proves naturality on every section.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, second paragraph: map between the displayed direct-sum presheaves"
+   }
+  },
+  {
+   "text": "Since $m$ is monic, $\\varphi\\mapsto m\\circ\\varphi$ is injective on $\\operatorname{Hom}(V,W)$ for every $V$. For a finitely supported tuple $x=(x_\\varphi)$, the coefficient of $a_V(x)$ at $m\\circ\\varphi$ is exactly $x_\\varphi$, because no other index has this image. Thus $a_V(x)=0$ forces every $x_\\varphi=0$, proving $a_V$ injective. Consequently $a$ is monic as a presheaf morphism: if $a\\circ b=a\\circ c$, evaluate at each $V$, cancel the injective $a_V$ on each section, and obtain $b=c$. This uses no claim that the componentwise coefficient-recovery maps are natural.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, last two sentences: the monomorphism gives injectivity on direct sums"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-module-sheafification-exact] to the given ringed site. Sheafification preserves finite limits, and hence monomorphisms, so the monomorphism $a$ from Step 3 gives a monomorphism $a^\\#:L_W\\hookrightarrow L_T$ of sheaves of $\\mathcal O$-modules. This is sheafification for the actual sheaf of rings $\\mathcal O$, rather than sheafification for modules over a fixed constant ring.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, final sentence; sites-modules.tex Tag 03EI, lemma-sheafification-exact"
+   }
+  },
+  {
+   "text": "The category $\\operatorname{Mod}(\\mathcal O)$ is abelian for the small site and common universe by [def-weil-sheaf-of-modules-category]. By the definition of injectivity in [def-sp-injective-resolutions], precomposition with $a^\\#$ is surjective from $\\operatorname{Hom}(L_T,I)$ to $\\operatorname{Hom}(L_W,I)$. To identify this map, take $t\\in I(T)$ and its morphism $b_t:L_T\\to I$ from Step 1. The corresponding presheaf map sends $e_\\psi$ to $I(\\psi)(t)$ by [lem-weil-pbc-free-yoneda-presheaf-module]. Naturality of the sheafification unit shows that the presheaf map associated to $b_t\\circ a^\\#$ is $\\widetilde b_t\\circ a$. Evaluating it at $e_{\\mathrm{id}_W}$ gives $\\widetilde b_{t,W}(e_m)=I(m)(t)$. Therefore the surjective Hom map is precisely $I(T)\\to I(W)$. For each $s\\in I(W)$, extend its map $L_W\\to I$ across $a^\\#$ and evaluate the extension at $e_{\\mathrm{id}_T}$ to obtain $t$ with $I(m)(t)=s$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, first paragraph: injectivity and the restriction map; sites-modules.tex Tag 03DA, lemma-abelian; homology.tex characterization of injectives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, entire proof (lines 1970-2009), with the free-presheaf evaluation formula of sites-modules.tex Remark 03EJ and the equation after Tag 03DI, and exact module sheafification Tag 03EI."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +123,50 @@
    "results": "{\"t\": \"2026-10-17T15:55:11Z\", \"tool\": \"grep\", \"query\": \"injective.*restriction|restriction.*injective\", \"sub\": \"Algebra/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match. Read Presheaf/EpiMono.lean:29-55: injective_of_mono concerns Function.Injective of components of a morphism, not an injective object or restriction along a site arrow. LocallyInjectiveToSheafify is likewise unrelated. Read CofilteredSystem.lean:323: eventually_injective concerns finite inverse systems of sets. SheafOfModules.instAbelian only supplies the abelian category.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*restriction|restriction.*surject",
+   "results": "{\"t\": \"2026-10-17T16:30:26Z\", \"tool\": \"grep\", \"query\": \"injective.*restriction|restriction.*surject\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types. PresheafOfModules.injective_of_mono and mono_iff_surjective concern componentwise injectivity of a presheaf morphism, not injectivity of an object or surjectivity of restriction. CategoryTheory.Injective.factorThru gives the final categorical extension property only (Basic.lean:32 and its factorThru construction), without the section-representing monomorphism. SheafOfModules.GeneratingSections.epi concerns free sheaves on global generating sections (Generators.lean:45-56), not this site-arrow statement. Locally-injective sheafification and geometric sheafed-space hits are different assertions. No exact or one-line specialized match.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an injective object in sheaves of modules on a ringed site, sections extend across every monomorphism in the site",
+   "results": "{\"t\": \"2026-10-17T16:30:26Z\", \"tool\": \"leansearch\", \"query\": \"For an injective object in sheaves of modules on a ringed site, sections extend across every monomorphism in the site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Injective.factorThru\", \"CategoryTheory.Injective.ι_mono\", \"CategoryTheory.Sheaf.mono_of_injective\", \"PresheafOfModules.injective_of_mono\", \"PresheafOfModules.mono_of_injective\", \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\", \"AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi\"], \"digest\": \"a4c26fda6701ed94\"}; Read the returned types. PresheafOfModules.injective_of_mono and mono_iff_surjective concern componentwise injectivity of a presheaf morphism, not injectivity of an object or surjectivity of restriction. CategoryTheory.Injective.factorThru gives the final categorical extension property only (Basic.lean:32 and its factorThru construction), without the section-representing monomorphism. SheafOfModules.GeneratingSections.epi concerns free sheaves on global generating sections (Generators.lean:45-56), not this site-arrow statement. Locally-injective sheafification and geometric sheafed-space hits are different assertions. No exact or one-line specialized match.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "a4c26fda6701ed94"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Injective\"",
+   "results": "{\"t\": \"2026-10-17T16:30:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"PresheafOfModules.injective_of_mono\", \"PresheafOfModules.mono_of_injective\", \"PresheafOfModulesOfCommRing.Derivation.Universal.postcomp_injective\", \"PresheafOfModules.IsLocallyInjective\", \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\"], \"digest\": \"17b297fe83020dca\"}; Read the returned types. PresheafOfModules.injective_of_mono and mono_iff_surjective concern componentwise injectivity of a presheaf morphism, not injectivity of an object or surjectivity of restriction. CategoryTheory.Injective.factorThru gives the final categorical extension property only (Basic.lean:32 and its factorThru construction), without the section-representing monomorphism. SheafOfModules.GeneratingSections.epi concerns free sheaves on global generating sections (Generators.lean:45-56), not this site-arrow statement. Locally-injective sheafification and geometric sheafed-space hits are different assertions. No exact or one-line specialized match.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "17b297fe83020dca"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective sheaf of modules restriction along a monomorphism of objects in a ringed site is surjective",
+   "results": "{\"t\": \"2026-10-17T16:30:28Z\", \"tool\": \"leanfinder\", \"query\": \"injective sheaf of modules restriction along a monomorphism of objects in a ringed site is surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.injective_of_mono\", \"PresheafOfModules.mono_iff_surjective\", \"AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi\", \"CategoryTheory.Sheaf.instMonoAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization\", \"PresheafOfModules.mono_of_injective\", \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"PresheafOfModules.IsLocallyInjective\", \"PresheafOfModules.instMonoModuleCatCarrierObjOppositeRingCatApp\"], \"digest\": \"0be0fee005cc8d8a\"}; Read the returned types. PresheafOfModules.injective_of_mono and mono_iff_surjective concern componentwise injectivity of a presheaf morphism, not injectivity of an object or surjectivity of restriction. CategoryTheory.Injective.factorThru gives the final categorical extension property only (Basic.lean:32 and its factorThru construction), without the section-representing monomorphism. SheafOfModules.GeneratingSections.epi concerns free sheaves on global generating sections (Generators.lean:45-56), not this site-arrow statement. Locally-injective sheafification and geometric sheafed-space hits are different assertions. No exact or one-line specialized match.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "0be0fee005cc8d8a"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective module sheaf I and a mono W to T in the site, the map I(T) to I(W) is an epimorphism of modules",
+   "results": "{\"t\": \"2026-10-17T16:30:39Z\", \"tool\": \"leanfinder\", \"query\": \"For an injective module sheaf I and a mono W to T in the site, the map I(T) to I(W) is an epimorphism of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.injective_of_mono\", \"SheafOfModules.GeneratingSections.epi\", \"PresheafOfModules.mono_of_injective\", \"SheafOfModules.GeneratingSections.opEpi_comp\", \"SheafOfModules.GeneratingSections.ofEpi\", \"SheafOfModules.GeneratingSections.ofEpi_I\", \"PresheafOfModules.mono_iff_surjective\", \"CategoryTheory.Sheaf.mono_of_injective\"], \"digest\": \"af717483b266f8e4\"}; Read the returned types. PresheafOfModules.injective_of_mono and mono_iff_surjective concern componentwise injectivity of a presheaf morphism, not injectivity of an object or surjectivity of restriction. CategoryTheory.Injective.factorThru gives the final categorical extension property only (Basic.lean:32 and its factorThru construction), without the section-representing monomorphism. SheafOfModules.GeneratingSections.epi concerns free sheaves on global generating sections (Generators.lean:45-56), not this site-arrow statement. Locally-injective sheafification and geometric sheafed-space hits are different assertions. No exact or one-line specialized match.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "af717483b266f8e4"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-module-restriction-kernel-comparison",
@@ -80,5 +185,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-ringed-site-injective-mono-restriction",
+  "worker": "stage1",
+  "summary": "Kept the statement and its four statement dependencies unchanged. Expanded the Tag 093X argument into five steps: free-presheaf sections representability followed by module sheafification; explicit natural basis map; coordinatewise monicity and categorical cancellation; exact sheafification; injective extension with explicit identification of restriction. Reused existing Mathlib leaves for all non-elementary inputs, creating no nodes. Audited the project source without finding an exact attachment; retained inherited searches and added five logged searches with two semantic phrasings.",
+  "blueprint": "thm-pur-with-support-exactness, Proof Step 3: surjectivity of restriction on injective resolution terms in the displayed short exact kernel sequence; Proof Step 4: the module-coefficient version on a general small site. This realizes the generic Tag 093X input cited by lem-pur-module-restriction-kernel-comparison, Steps 2, 4 and 6, rather than the false extension claim for an arbitrary sheaf in blueprint Step 2."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-f3f99dad9",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-f3f99dad9 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement unchanged, five steps, 11 Mathlib searches of all three kinds, and the blueprint fields. It matches Stacks 093X (sites-cohomology.tex l.1962-2009) hypothesis by hypothesis: ringed site with commutative O (conventions l.51), a monomorphism m, and I injective in Mod(O), with surjective restriction as the conclusion. I checked the tag-to-label mappings for 093X, 03DI, 03EJ, 03CY, 03EI and 03DA in tags/tags. Every cited statement says what its step takes. Step 1: free-Yoneda leaf (beta -> beta_U(e_id)) plus the module-sheafification adjunction. Step 2: I checked naturality of e_phi -> e_{m phi} by hand. Step 3: m monic gives a coordinatewise injection, hence a mono in PMod. Step 4: the ringed-site sheafification leaf preserves finite limits, hence monos, for the actual O, not just a constant ring. Step 5: Mod(O) is abelian on a small site, and the identification works because the unit satisfies a^#.eta_W = eta_T.a, giving b_t(e_m) = I(m)(t). Small cases all hold: m = id, O = 0, an empty covering of T (both sides zero), and Z/2 on a point, where the module is injective but not abelian-injective and the proof never uses abelian injectivity. Monicity is used only in Step 3. No new nodes. The nearest DAG node, lem-weil-pbc-injective-sheaf-mono-restriction, is the abelian special case (O = Z_C), not a duplicate. All cited nodes are Mathlib leaves or definitions, so there is no route departure and no tool_uses. Blueprint ancestry is thm-pur-with-support-exactness Steps 3-4 via the parent, consistent with main-20261015. No SGA source, no cycle, no target touched. Minor and not counted: the item has no lean_audit field, carried over from its Q55 creation. No fixes written."
  }
 }

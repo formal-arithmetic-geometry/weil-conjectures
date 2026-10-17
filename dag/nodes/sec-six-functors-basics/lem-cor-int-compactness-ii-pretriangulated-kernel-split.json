@@ -9,11 +9,72 @@
   "def-weil-preadditive-category",
   "def-weil-pbc-additive-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The given kernel arrow $k$ is a monomorphism: if $ka=kb$ for $a,b:T\\to K$, then $ka$ is annihilated by $d$ and both $a$ and $b$ are factorizations through the given kernel. Its uniqueness clause gives $a=b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05QU, proof of (1) implies (3), the kernel inclusion is a monomorphism"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pretriangulated-monomorphisms-split] to $k$ to choose $r_0:X\\to K$ with $r_0k=1_K$. By TR1 in [def-weil-triangulated-category] complete $k$ to a distinguished triangle $K\\xrightarrow{k}X\\xrightarrow{p}Z\\xrightarrow{h}K[1]$. Its twice-rotated triangle starts with $h$ followed by $-k[1]$. Clause (i) of [lem-weil-pbc-hom-into-triangle-exact] gives $k[1]h=0$. Composing by $r_0[1]$ gives $h=0$, since $(r_0k)[1]=1_{K[1]}$. Now [lem-pc-derived-zero-third-split] gives $e:X\\xrightarrow{\\sim}K\\oplus Z$ with $ek=i_K$ and $p=p_Ze$. Write $r=p_Ke:X\\to K$ and $s=e^{-1}i_Z:Z\\to X$. The biproduct equations of [def-weil-additive-category] give\n$$rk=1_K,\\quad pk=0,\\quad ps=1_Z,\\quad kr+sp=1_X.$$",
+   "uses": [
+    "lem-sfb-pretriangulated-monomorphisms-split",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-pc-derived-zero-third-split",
+    "def-weil-additive-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05QU, first monomorphism splitting in proof (1) implies (3); preceding lemma-split for the compatible biproduct triangle"
+   }
+  },
+  {
+   "text": "Put $g=ds:Z\\to Y$. Multiplying $kr+sp=1_X$ by $d$, and using $dk=0$, gives $d=gp$. To prove $g$ monic, suppose $ga=0$ for $a:T\\to Z$. Then $dsa=0$, so the given kernel supplies $b:T\\to K$ with $sa=kb$. Applying $p$ gives $a=psa=pkb=0$. If $ga_1=ga_2$, apply this to $a_1-a_2$ to obtain $a_1=a_2$; subtraction and bilinearity are available by [def-weil-preadditive-category]. Thus [lem-sfb-pretriangulated-monomorphisms-split] supplies $t:Y\\to Z$ with $tg=1_Z$. In particular $td=tgp=p$.",
+   "uses": [
+    "def-weil-preadditive-category",
+    "lem-sfb-pretriangulated-monomorphisms-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05QU, proof (1) implies (3), the restricted map on the complementary summand is monic and splits"
+   }
+  },
+  {
+   "text": "Apply $F$ to the identities $rk=1_K$, $kr+sp=1_X$, $td=p$, and $dk=0$. Functoriality preserves compositions and identities, while [def-weil-pbc-additive-functor] preserves sums and zero. Thus $F(d)F(k)=0$. For any object $T$ of $\\mathcal D$ and arrow $a:T\\to F(X)$ satisfying $F(d)a=0$, one has\n$$F(p)a=F(t)F(d)a=0,$$\n$$a=(F(k)F(r)+F(s)F(p))a=F(k)(F(r)a).$$\nHere bilinearity is [def-weil-preadditive-category]. Hence $b=F(r)a$ is a factorization through $F(k)$. If $F(k)b'=a$, then $b'=F(r)F(k)b'=F(r)a=b$. This is the required universal property. The object $T$ is arbitrary in $\\mathcal D$, and no other kernel, biproduct, or limit is assumed to exist there.",
+   "uses": [
+    "def-weil-pbc-additive-functor",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05QU, split projection-coprojection form; explicit additive image and kernel-factorization calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-additive-category",
+  "def-weil-pbc-additive-functor",
+  "def-weil-preadditive-category",
+  "def-weil-triangulated-category",
+  "lem-pc-derived-zero-third-split",
+  "lem-sfb-pretriangulated-monomorphisms-split",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05QU proof of (1) implies (3); final additive image calculation written out from the splitting identities"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-cor-int-compactness-ii-extension-zero",
@@ -86,6 +147,97 @@
    "results": "{\"t\": \"2026-10-17T11:43:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pretriangulated.instSplitMonoCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.instSplitMonoCategory\"], \"digest\": \"b5bee1453bcf62e8\"}",
    "date": "2026-10-17",
    "verdict": "no exact match: the split-monomorphism instance is one ingredient, not the assertion for an arbitrary morphism having a kernel; inspected Pretriangulated.lean:466 and LeftExact.lean:85-112"
+  },
+  {
+   "tool": "grep",
+   "query": "preserv.*kernel|kernel.*preserv|Pretriangulated.*split|projection.*biproduct",
+   "results": "{\"t\": \"2026-10-17T16:20:37Z\", \"tool\": \"grep\", \"query\": \"preserv.*kernel|kernel.*preserv|Pretriangulated.*split|projection.*biproduct\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\"], \"digest\": \"62350d50796a58d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: results give homological functors, biproduct preservation, or preservation of a supplied splitting; none deduces preservation of an arbitrary existing kernel from a pre-triangulated source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor maps every kernel that exists in a pretriangulated source to a kernel in a preadditive target",
+   "results": "{\"t\": \"2026-10-17T16:20:38Z\", \"tool\": \"leansearch\", \"query\": \"An additive functor maps every kernel that exists in a pretriangulated source to a kernel in a preadditive target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.additiveFunctor\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.instAdditiveOfIsHomological\", \"CategoryTheory.Functor.Additive\", \"CategoryTheory.Functor.IsTriangulated\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.instAdditiveObjFunctorAdditiveFunctor\", \"CategoryTheory.AdditiveFunctor.of\"], \"digest\": \"5cf0334d7ab73681\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: results give homological functors, biproduct preservation, or preservation of a supplied splitting; none deduces preservation of an arbitrary existing kernel from a pre-triangulated source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive, CategoryTheory.Limits.IsLimit, kernel",
+   "results": "{\"t\": \"2026-10-17T16:20:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Additive, CategoryTheory.Limits.IsLimit, kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'kernel'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'kernel'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor from a pretriangulated category to a preadditive category preserves an existing kernel",
+   "results": "{\"t\": \"2026-10-17T16:20:44Z\", \"tool\": \"leanfinder\", \"query\": \"An additive functor from a pretriangulated category to a preadditive category preserves an existing kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"CategoryTheory.Functor.IsHomological\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Functor.IsHomological.toPreservesZeroMorphisms\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.instAdditiveOfIsHomological\"], \"digest\": \"cdd67dd9c767a0e0\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: results give homological functors, biproduct preservation, or preservation of a supplied splitting; none deduces preservation of an arbitrary existing kernel from a pre-triangulated source."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel|cokernel|SplitMonoCategory|exists_iso_binaryBiproduct",
+   "results": "{\"t\": \"2026-10-17T16:30:15Z\", \"tool\": \"grep\", \"query\": \"kernel|cokernel|SplitMonoCategory|exists_iso_binaryBiproduct\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/WeakKernels.lean\", \"Mathlib/CategoryTheory/Triangulated/WeakKernels.lean\", \"Mathlib/CategoryTheory/Triangulated/WeakKernels.lean\", \"Mathlib/CategoryTheory/Triangulated/WeakKernels.lean\"], \"digest\": \"243c8f663a99bc6e\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: results give homological functors, biproduct preservation, or preservation of a supplied splitting; none deduces preservation of an arbitrary existing kernel from a pre-triangulated source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map in a pretriangulated category having a kernel admits split biproduct decompositions of both its domain and codomain",
+   "results": "{\"t\": \"2026-10-17T16:30:16Z\", \"tool\": \"leansearch\", \"query\": \"A map in a pretriangulated category having a kernel admits split biproduct decompositions of both its domain and codomain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isBilimitBinaryBiconeOfIsSplitEpiOfKernel\", \"CategoryTheory.Pretriangulated.instHasBinaryBiproducts\", \"CategoryTheory.Limits.binaryBiconeOfIsSplitEpiOfKernel\", \"CategoryTheory.Limits.biprod.map_eq\", \"CategoryTheory.Limits.binaryBiconeOfIsSplitEpiOfKernel_inr\", \"CategoryTheory.Pretriangulated.instSplitEpiCategory\", \"CategoryTheory.Pretriangulated.exists_iso_binaryBiproduct_of_distTriang\", \"CategoryTheory.Pretriangulated.instHasFiniteBiproducts\"], \"digest\": \"82c37c0f2c4cb491\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: results give homological functors, biproduct preservation, or preservation of a supplied splitting; none deduces preservation of an arbitrary existing kernel from a pre-triangulated source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.instSplitMonoCategory",
+   "results": "{\"t\": \"2026-10-17T16:30:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pretriangulated.instSplitMonoCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.instSplitMonoCategory\"], \"digest\": \"b5bee1453bcf62e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: results give homological functors, biproduct preservation, or preservation of a supplied splitting; none deduces preservation of an arbitrary existing kernel from a pre-triangulated source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split kernels in triangulated categories are preserved by additive functors to arbitrary preadditive categories",
+   "results": "{\"t\": \"2026-10-17T16:30:16Z\", \"tool\": \"leansearch\", \"query\": \"Split kernels in triangulated categories are preserved by additive functors to arbitrary preadditive categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Splitting.map\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive\", \"CategoryTheory.ShortComplex.Splitting.map_s\", \"CategoryTheory.ShortComplex.Splitting.map_r\", \"CategoryTheory.instIsSplitEpiMap\", \"CategoryTheory.instIsSplitMonoMap\"], \"digest\": \"08cc627871ac0c5f\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: results give homological functors, biproduct preservation, or preservation of a supplied splitting; none deduces preservation of an arbitrary existing kernel from a pre-triangulated source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a particular kernel k of a morphism d in a pretriangulated category, choose decompositions X isomorphic K plus Z and Y isomorphic Z plus Q that carry k to the inclusion and d to projection followed by inclusion",
+   "results": "{\"t\": \"2026-10-17T16:30:18Z\", \"tool\": \"leanfinder\", \"query\": \"Given a particular kernel k of a morphism d in a pretriangulated category, choose decompositions X isomorphic K plus Z and Y isomorphic Z plus Q that carry k to the inclusion and d to projection followed by inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.binaryBiproductData\", \"CategoryTheory.Pretriangulated.exists_iso_binaryBiproduct_of_distTriang\", \"CategoryTheory.IsTriangulated.mk'\", \"CategoryTheory.Pretriangulated.distinguishedTriangles\", \"CategoryTheory.Pretriangulated.distinguished_cocone_triangle\", \"CategoryTheory.Pretriangulated.distinguished_cocone_triangle₂\", \"CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂\", \"CategoryTheory.Triangulated.SpectralObject.distinguished'\"], \"digest\": \"e1ccb07e372165b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: results give homological functors, biproduct preservation, or preservation of a supplied splitting; none deduces preservation of an arbitrary existing kernel from a pre-triangulated source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism having a kernel in a triangulated category decomposes as the zero map plus an identity plus a zero map, with its given kernel included as a direct summand",
+   "results": "{\"t\": \"2026-10-17T16:30:20Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism having a kernel in a triangulated category decomposes as the zero map plus an identity plus a zero map, with its given kernel included as a direct summand\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.instSplitMonoCategory\", \"CategoryTheory.Pretriangulated.exists_iso_binaryBiproduct_of_distTriang\", \"CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂\", \"CategoryTheory.Pretriangulated.Triangle.yoneda_exact₃\", \"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂\", \"CategoryTheory.Pretriangulated.binaryBiproductData_bicone_inl\", \"CategoryTheory.Pretriangulated.instSplitEpiCategory\", \"CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one\"], \"digest\": \"1995f74c9e7fc2d0\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: results give homological functors, biproduct preservation, or preservation of a supplied splitting; none deduces preservation of an arbitrary existing kernel from a pre-triangulated source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a pretriangulated category every monomorphism admits a left inverse",
+   "results": "{\"t\": \"2026-10-17T16:32:35Z\", \"tool\": \"leanfinder\", \"query\": \"In a pretriangulated category every monomorphism admits a left inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.instSplitMonoCategory\", \"CategoryTheory.Pretriangulated.Triangle.mono₁\", \"CategoryTheory.Pretriangulated.instSplitEpiCategory\", \"CategoryTheory.Pretriangulated.Triangle.mor₃_eq_zero_of_mono₁\", \"CategoryTheory.Pretriangulated.Triangle.mor₂_eq_zero_of_mono₃\", \"CategoryTheory.Pretriangulated.Triangle.mor₃_eq_zero_iff_mono₁\", \"CategoryTheory.Pretriangulated.Triangle.mono₃\", \"CategoryTheory.Pretriangulated.Triangle.mor₁_eq_zero_of_mono₂\"], \"digest\": \"fed33bde3f00f602\"}",
+   "date": "2026-10-17",
+   "verdict": "component match only: split monomorphisms, triangle splittings and additive preservation of supplied splitting data; no exact whole-item match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every monomorphism in a pretriangulated category is a split monomorphism",
+   "results": "{\"t\": \"2026-10-17T16:32:36Z\", \"tool\": \"leansearch\", \"query\": \"Every monomorphism in a pretriangulated category is a split monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.instSplitMonoCategory\", \"CategoryTheory.isSplitMono_of_mono\", \"CategoryTheory.SplitMonoCategory.mk\", \"CategoryTheory.SplitMonoCategory\", \"CategoryTheory.SplitEpi.splitMono\", \"CategoryTheory.SplitMono\", \"CategoryTheory.IsSplitMono.mono\", \"CategoryTheory.SplitMonoCategory.isSplitMono_of_mono\"], \"digest\": \"6590861681907593\"}",
+   "date": "2026-10-17",
+   "verdict": "component match only: split monomorphisms, triangle splittings and additive preservation of supplied splitting data; no exact whole-item match"
+  },
+  {
+   "tool": "grep",
+   "query": "instance : SplitMonoCategory|isSplitMono_of_mono",
+   "results": "{\"t\": \"2026-10-17T16:32:36Z\", \"tool\": \"grep\", \"query\": \"instance : SplitMonoCategory|isSplitMono_of_mono\", \"sub\": \"CategoryTheory/Triangulated/Pretriangulated.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"466\", \"467\"], \"digest\": \"3ec06f3cbdc273b3\"}",
+   "date": "2026-10-17",
+   "verdict": "component match only: split monomorphisms, triangle splittings and additive preservation of supplied splitting data; no exact whole-item match"
   }
  ],
  "chapter": "sec-six-functors-basics",
@@ -98,5 +250,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-cor-int-compactness-ii-pretriangulated-kernel-split",
+  "worker": "stage1",
+  "summary": "Retained the original statement, source, provenance, statement dependencies and historical searches. Proved kernel monicity, constructed its compatible biproduct complement from a cone triangle, proved the induced complementary map monic and split it, and verified the image kernel universal property by explicit equations. Reused existing triangle and additive-category nodes. The only new node is the exact Mathlib leaf asserting split monomorphisms in a pre-triangulated category; no normal-form claim is deferred.",
+  "blueprint": "The four steps realize the generic split-kernel tool in the reviewed ancestor Step 2, serving the all-existing-limits sentence of ancestor blueprint proof (1). The decomposition argument of Stacks 05QU remains in the item; the new Mathlib leaf supplies only a retraction for each monomorphism."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-4eb965359",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-4eb965359 (reviewer sub-agent of L); spot-checked: I read the item and the new leaf in full, and every cited statement. The item statement is unchanged and true: Stacks derived.tex lemma-when-split (05QU, l.730), (1)=>(3), carried through an additive functor. It is exactly what the parent det-cor-int-compactness-ii-extension-zero Step 2 needs, where only the one existing kernel is known. Step 1: a kernel arrow is mono, from uniqueness in the stated kernel definition. Step 2: TR1 gives the cone (k,p,h); TR2 twice gives (h,-k[1],-p[1]); clause (i) of lem-weil-pbc-hom-into-triangle-exact gives k[1]h=0, and r0[1] then gives h=0. lem-pc-derived-zero-third-split then gives e with ek=i_K and p=p_Z e. I recomputed rk=1, pk=0, ps=1 and kr+sp=e^-1(i_Kp_K+i_Zp_Z)e=1. Step 3: d=gp; g is mono through the given kernel and ps=1, pk=0, so the leaf gives t with tg=1 and td=p. Step 4: F(d)F(k)=0, F(p)a=F(t)F(d)a=0, a=F(k)F(r)a, and uniqueness follows from F(r)F(k)=1, for arbitrary T in a merely preadditive D. New node lem-sfb-pretriangulated-monomorphisms-split: an exact Mathlib leaf. I read Pretriangulated.lean:466-471, the SplitMonoCategory C instance, and EpiMono.lean:50-54,168-172. Its statement is self-contained, B9 refs are right and the searches are raw records. rg for SplitMonoCategory/isSplitMono_of_mono and mono+triangulated found no duplicate, and the leaf does not restate a clause of the item. Every dependency is a Mathlib leaf, so there are no route or tool_uses issues and no cycle. There is no target, base-change morphism or coefficient comparison, and no SGA. Edge cases d=0, d mono, d=1 and the zero functor all check out. No fixes."
  }
 }
