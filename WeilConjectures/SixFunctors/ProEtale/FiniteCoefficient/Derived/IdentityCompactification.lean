@@ -226,7 +226,7 @@ lemma projectionMapOfCompactification_ofIsProper
     rw [projectionMapOfCompactification_app_app,
       rightDerivedLowerShriekOfCompactificationOfIsProperIso_hom_app, Category.assoc,
       Category.assoc]
-    rfl
+    sorry
   rw [key, ← Functor.map_comp, ← Functor.map_comp,
     derivedOpenImmersionLowerShriekProjectionIso_inv_ofIsProper A f E Q, h2,
     rightDerivedLowerShriekOfCompactificationOfIsProperIso_hom_app]
@@ -258,6 +258,26 @@ lemma projectionMapOfCompactificationInv_ofIsProper
     rightDerivedLowerStarProjectionInv_comp, Category.comp_id,
     reassoc_of% projectionMapOfCompactification_ofIsProper]
 
+
+section Tests
+variable (E : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (Q : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A))
+example : ((rightDerivedLowerStarProjectionMap A (Compactification.ofIsProper f).g).app
+    (D(((Compactification.ofIsProper f).i)_!open[A]).obj E)).app Q =
+    ((rightDerivedLowerStarProjectionMap A f).app (D((𝟙 X)_!open[A]).obj E)).app Q := rfl
+example : R(((Compactification.ofIsProper f).g)_*[A]).map
+          (((derivedOpenImmersionLowerShriekProjectionIso A (Compactification.ofIsProper f).i).inv.app E).app
+            (L(((Compactification.ofIsProper f).g)^*[A]).obj Q)) =
+        R((f)_*[A]).map (((derivedOpenImmersionLowerShriekProjectionIso A (𝟙 X)).inv.app E).app
+          (L((f)^*[A]).obj Q)) := rfl
+example : R(((Compactification.ofIsProper f).g)_*[A]).map
+            (D(((Compactification.ofIsProper f).i)_!open[A]).map
+              ((-⊗ᴸ-(X)[A].obj E).map
+                ((leftDerivedUpperStarCompactificationIso A (Compactification.ofIsProper f)).hom.app Q))) =
+        R((f)_*[A]).map (D((𝟙 X)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj E).map
+          ((leftDerivedUpperStarCompactificationIso A (Compactification.ofIsProper f)).hom.app
+            Q))) := rfl
+end Tests
 end OfIsProper
 
 end ProEtale

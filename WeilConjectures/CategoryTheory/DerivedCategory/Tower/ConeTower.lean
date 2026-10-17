@@ -45,7 +45,7 @@ variable {C : Type*} [Category C] [HasZeroMorphisms C]
 /-- Being pro-zero is invariant under isomorphisms of towers. -/
 lemma of_iso {F G : ℕᵒᵖ ⥤ C} (e : F ≅ G) (hF : F.IsProZero) : G.IsProZero := fun n ↦ by
   obtain ⟨m, h, hm⟩ := hF n
-  exact ⟨m, h, by rw [← NatIso.naturality_2 e, hm, zero_comp, comp_zero]⟩
+  exact ⟨m, h, by rw [← cancel_mono (e.inv.app _), zero_comp, e.inv.naturality, hm, comp_zero]⟩
 
 /-- A tower whose transition maps become zero after applying a functor which preserves zero
 morphisms stays pro-zero after applying it. -/
@@ -77,7 +77,7 @@ lemma mappingCone.mapHomologicalComplexIso_hom_naturality {K L : CochainComplex 
       (mapHomologicalComplexIso φ H).hom ≫
         mappingCone.map _ _ ((NatTrans.mapHomologicalComplex τ _).app K)
           ((NatTrans.mapHomologicalComplex τ _).app L)
-          ((NatTrans.mapHomologicalComplex τ _).naturality φ).symm := by
+          ((NatTrans.mapHomologicalComplex τ _).naturality φ) := by
   ext n
   dsimp [mapHomologicalComplexIso]
   simp only [mapHomologicalComplexXIso_eq φ _ n (n + 1) rfl, ext_to_iff _ _ _ rfl,
@@ -108,7 +108,7 @@ end
 
 section
 
-variable {C : Type*} [Category C] [Preadditive C] [HasBinaryBiproducts C] {J : Type*} [Category J]
+variable {C : Type*} [Category C] [Abelian C] {J : Type*} [Category J]
 
 set_option backward.defeqAttrib.useBackward true in
 /-- Evaluating the mapping cone of a morphism of complexes of diagrams gives the diagram of
@@ -146,19 +146,20 @@ lemma isIso_rlim_map_Q_map_of_isProZero {Y Y' : CochainComplex (ℕᵒᵖ ⥤ A)
       (isHomotopyLimit_rlimCone (Q.obj (mappingCone u)))
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1 hZ
 
+
 /-- For a K-flat complex `X`, the image in `D(A)` of `X ⊗ g` vanishes when that of `g` does. -/
 lemma Q_map_whiskerLeft_eq_zero (X : CochainComplex.KFlat A) {M N : CochainComplex A ℤ}
     {g : M ⟶ N} (hg : Q.map g = 0) : Q.map (X.1 ◁ g) = 0 := by
-  have hL : (TensorCommShift₂.L A).map g = 0 := by
+  have hL : Qh.map ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).map g) = 0 := by
     have := (quotientCompQhIso A).hom.naturality g
-    dsimp at this
-    rw [← cancel_mono ((quotientCompQhIso A).hom.app N), zero_comp, this, hg, comp_zero]
+    rw [← cancel_mono ((quotientCompQhIso A).hom.app N), zero_comp]
+    exact this.trans (by rw [hg, comp_zero])
   have h := ((TensorCommShift₂.liftingIsoHom A).app X).naturality g
   dsimp at h
-  rw [hL, MonoidalCategory.whiskerLeft_zero, zero_comp] at h
-  have h' : (TensorCommShift₂.L A).map (X.1 ◁ g) = 0 := by
-    rw [← cancel_epi (((TensorCommShift₂.liftingIsoHom A).app X).app M)]
-    simpa using h.symm
+  rw [hL, MonoidalPreadditive.whiskerLeft_zero, zero_comp] at h
+  have h' : Qh.map ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).map (X.1 ◁ g)) = 0 := by
+    rw [← cancel_epi (((TensorCommShift₂.liftingIsoHom A).app X).app M), comp_zero]
+    exact h.symm
   have := (quotientCompQhIso A).hom.naturality (X.1 ◁ g)
   dsimp at this
   rw [← cancel_epi ((quotientCompQhIso A).hom.app _), ← this, h', zero_comp, comp_zero]
@@ -171,14 +172,17 @@ noncomputable def tensorTowerFunctorMapMappingConeIso {P P' : ℕᵒᵖ ⥤ Coch
         (mappingCone ((tensorTowerFunctorMap ε).app X)) ≅
       mappingConeFunctor ε ⋙ (curriedTensor (CochainComplex A ℤ)).obj X :=
   functorEquivalenceFunctorObjMappingConeIso _ ≪≫
-    NatIso.ofComponents (fun m ↦ (mapBifunctorMappingCone₂Iso X (ε.app m) _).symm)
+    (NatIso.ofComponents (fun m ↦ by
+        exact (mapBifunctorMappingCone₂Iso X (ε.app m) (curriedTensor A)).symm)
       fun {m m'} f ↦ by
         rw [← cancel_epi (mapBifunctorMappingCone₂Iso X (ε.app m) _).hom]
         simp only [Iso.symm_hom, Iso.hom_inv_id_assoc]
         rw [← cancel_mono (mapBifunctorMappingCone₂Iso X (ε.app m') _).hom, Category.assoc,
           Category.assoc, Iso.inv_hom_id, Category.comp_id]
         exact (mapBifunctorMappingCone₂Iso_hom_naturality _ (𝟙 X) (ε.app m) (ε.app m')
-          (P.map f) (P'.map f) (ε.naturality f).symm).symm
+          (P.map f) (P'.map f) (ε.naturality f).symm).symm :
+      mappingConeFunctor ((HomologicalComplex.functorEquivalence A (.up ℤ) ℕᵒᵖ).functor.map
+        ((tensorTowerFunctorMap ε).app X)) ≅ _)
 
 /-- **Maps of coefficient towers with pro-zero cones.** If the tower of mapping cones
 `m ↦ cone(εₘ)` of a map of coefficient towers `ε : P ⟶ P'` is pro-zero in `D(A)`, then for
@@ -200,6 +204,7 @@ theorem isIso_rlim_map_reductionTowerMap_app {P P' : ℕᵒᵖ ⥤ CochainComple
       exact ⟨m, h, Q_map_whiskerLeft_eq_zero X hm⟩
     change IsIso (_ ≫ (rlim A).map (Q.map ((tensorTowerFunctorMap ε).app X.1)) ≫ _)
     infer_instance
+  have := Localization.essSurj (TensorCommShift₂.LKFlat A) (kFlatQuasiIso A)
   obtain ⟨X, ⟨e⟩⟩ : ∃ X, Nonempty ((TensorCommShift₂.LKFlat A).obj X ≅ K) :=
     ⟨_, ⟨(TensorCommShift₂.LKFlat A).objObjPreimageIso K⟩⟩
   have h := (Functor.whiskerRight (reductionTowerMap ε) (rlim A)).naturality e.hom
@@ -208,7 +213,7 @@ theorem isIso_rlim_map_reductionTowerMap_app {P P' : ℕᵒᵖ ⥤ CochainComple
       (rlim A).map ((reductionTower P).map e.inv) ≫
         (rlim A).map ((reductionTowerMap ε).app ((TensorCommShift₂.LKFlat A).obj X)) ≫
           (rlim A).map ((reductionTower P').map e.hom) := by
-    rw [h, ← Functor.map_comp_assoc, ← Functor.map_comp, e.inv_hom_id,
+    rw [← h, ← Category.assoc, ← Functor.map_comp (rlim A), ← Functor.map_comp (reductionTower P), e.inv_hom_id,
       CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp]
   have := key X
   rw [hK]

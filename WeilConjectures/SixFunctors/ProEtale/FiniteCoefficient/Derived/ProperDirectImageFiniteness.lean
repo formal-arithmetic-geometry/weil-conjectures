@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DirectImageFiniteness
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonIso
 
 /-!
 # Finiteness of proper direct images on the pro-étale site
@@ -71,7 +71,10 @@ noncomputable def rightDerivedComparisonUpperStarObjIso
     (_root_.DerivedCategory.homologyFunctor _ q).mapIso
       ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f)).mapIso
         (((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app F').symm ≪≫
-      rightDerivedLowerStarMapDerivedCategoryObjIso (ModuleCat.{u + 1} Λ) f _ hF') ≪≫
+      ((rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} Λ)).app ⟨_, hF'⟩).symm ≪≫
+      D(ν^*(Y)[ModuleCat.{u + 1} Λ]).mapIso
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlusCompatibility.app
+          ⟨_, hF'⟩)) ≪≫
     (((ν^*(Y)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso q).app _).symm
 
 end Comparison

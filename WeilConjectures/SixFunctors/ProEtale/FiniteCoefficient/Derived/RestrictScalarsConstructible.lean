@@ -10,6 +10,7 @@ public import WeilConjectures.ConstructibleSheaf.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleSerre
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Reduction
 
 /-!
 # Restriction of scalars of pro-étale complexes: direct images and constructibility
@@ -22,7 +23,8 @@ Let `φ : Λ →+* Λ'` be a morphism of commutative rings. Restriction of scala
   sheaf of `Λ'`-modules is `f_*`-acyclic as a sheaf of `Λ`-modules, being a direct summand of
   a coextension of scalars `Hom_Λ(Λ', I)` of an injective sheaf `I`
   (`CategoryTheory.Sheaf.rightAcyclic_restrictScalars_obj_of_injective`, for any site);
-- commutes with the comparison `ν^*` (`AlgebraicGeometry.ProEtale.comparisonUpperStarRestrictScalarsIso`);
+- commutes with the comparison `ν^*`
+  (`AlgebraicGeometry.ProEtale.comparisonUpperStarRestrictScalarsIso`);
 - for `φ = Λ → Λ ⧸ J` with `Λ ⧸ J` finite, preserves and reflects bounded constructibility
   (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible_derivedRestrictScalars_obj_iff`)
   and membership in `D_c^[a, b]`
@@ -144,6 +146,15 @@ theorem rightAcyclic_lowerStar_restrictScalars_obj
   Sheaf.rightAcyclic_restrictScalars_obj_of_injective _ φ _
     (epi_lowerStar_map_of_surjective f) I
 
+/-- Restriction of scalars commutes with the direct image `f_*` of pro-étale sheaves: both
+composites are computed sectionwise. -/
+noncomputable def lowerStarCompRestrictScalarsIso :
+    ProEtale.lowerStar (ModuleCat.{u + 1} Λ') f ⋙
+        Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ ≅
+      Sheaf.restrictScalars (Scheme.ProEt.topology X) φ ⋙
+        ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f :=
+  Iso.refl _
+
 /-- The comparison `Res(R⁺f_* K) ⟶ R⁺f_*(Res K)` between restriction of scalars along `φ` and
 the derived direct image of pro-étale sheaves on `D⁺`: the base change morphism of the
 identification `f_* ∘ Res = Res ∘ f_*`. It is an isomorphism
@@ -153,9 +164,7 @@ noncomputable def rightDerivedPlusLowerStarRestrictScalars :
         (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).mapDerivedCategoryPlus ⟶
       (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategoryPlus ⋙
         (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus :=
-  Functor.rightDerivedFunctorPlusBaseChange 
-    (γ := Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ)
-    (β := Sheaf.restrictScalars (Scheme.ProEt.topology X) φ) (𝟙 _)
+  Functor.rightDerivedFunctorPlusBaseChange (lowerStarCompRestrictScalarsIso φ f).hom
 
 /-- **Restriction of scalars commutes with the derived direct image on `D⁺`**, since it sends
 injective pro-étale sheaves of `Λ'`-modules to `f_*`-acyclic sheaves of `Λ`-modules. -/
@@ -216,7 +225,8 @@ lemma smul_id_restrictScalars_obj_eq_zero
     r • 𝟙 ((Sheaf.restrictScalars (Scheme.ProEt.topology T) (Ideal.Quotient.mk J)).obj H) =
       0 := by
   ext U x
-  exact (congrArg (· • x) (Ideal.Quotient.eq_zero_iff_mem.2 hr)).trans (zero_smul _ x)
+  change (Ideal.Quotient.mk J r) • x = 0
+  rw [Ideal.Quotient.eq_zero_iff_mem.2 hr, zero_smul]
 
 /-- `ν_*` commutes with the multiplication by a scalar. -/
 lemma comparisonLowerStar_map_smul_id
@@ -240,8 +250,9 @@ lemma constructibleSheaf_of_restrictScalars [Finite (Λ ⧸ J)]
   have hJ (r : Λ) (hr : r ∈ J) : r • 𝟙 G = 0 := by
     refine Linear.smul_id_eq_zero_of_iso
       (asIso ((comparisonAdjunction (ModuleCat.{u + 1} Λ) T).unit.app G)).symm ?_
-    rw [← comparisonLowerStar_map_smul_id,
-      Linear.smul_id_eq_zero_of_iso e.symm (smul_id_restrictScalars_obj_eq_zero J H hr),
+    refine (comparisonLowerStar_map_smul_id
+      ((ν^*(T)[ModuleCat.{u + 1} Λ]).obj G) r).symm.trans ?_
+    rw [Linear.smul_id_eq_zero_of_iso e.symm (smul_id_restrictScalars_obj_eq_zero J H hr),
       Functor.map_zero]
   let eG := Sheaf.restrictScalarsCoextendScalarsIso G hJ
   have : IsConstructibleSheaf ((Sheaf.restrictScalars T.smallEtaleTopology
@@ -272,6 +283,8 @@ lemma DerivedCategory.boundedConstructible_derivedRestrictScalars_obj [Finite (�
       (Ideal.Quotient.mk J)).obj
         ((_root_.DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology _) n).obj K')) :=
     (isConstructibleSheaf_restrictScalars_iff J _).2 (hK'.2 n)
+  have : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ n ⋙
+      Sheaf.restrictScalars T.smallEtaleTopology (Ideal.Quotient.mk J)).obj K') := this
   exact IsConstructibleSheaf.of_iso
     (((Sheaf.restrictScalars _ _).mapDerivedCategoryHomologyFunctorIso n).app K')
 

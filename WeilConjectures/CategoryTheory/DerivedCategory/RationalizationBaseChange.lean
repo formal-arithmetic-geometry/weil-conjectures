@@ -81,9 +81,12 @@ lemma mateEquiv_mapFac_hom (adj : F ⊣ G) :
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj, Functor.comp_map,
     Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,
     Category.comp_id, mapAdjunction_unit_app, Category.assoc]
+  erw [Category.comp_id]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [Functor.map_id, Category.id_comp]
   rw [← h,
-    ← Functor.map_comp_assoc, adj.right_triangle_components, Functor.map_id, Category.id_comp]
+    ← Functor.map_comp_assoc, adj.right_triangle_components]
+  erw [Functor.map_id, Category.id_comp]
 
 end Rationalization
 
@@ -158,7 +161,16 @@ noncomputable def rationalizationReduction : Reduction 𝔇 (𝔇.rationalizatio
   δG' := mapFac M 𝔇.upperG'
   cube := by
     ext Y
-    simp [rationalizationIso_hom_app]
+    simp only [TwoSquare.hComp_app, TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app]
+    simp only [isoSquare, TwoSquare.natTrans, TwoSquare.mk, rationalization_iso,
+      rationalization_upperG', rationalization_upperF']
+    rw [rationalizationIso_hom_app]
+    simp only [Category.assoc, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+      Category.id_comp, Category.comp_id]
+    erw [← (map M 𝔇.upperG').map_comp, Iso.inv_hom_id_app]
+    erw [Functor.map_id, Category.comp_id]
+    rfl
 
 lemma rationalizationReduction_projF :
     (𝔇.rationalizationReduction M).projF = (mapFac M 𝔇.lowerF).inv :=

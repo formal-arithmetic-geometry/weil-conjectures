@@ -102,7 +102,7 @@ noncomputable def shiftMorphismAdd (a b : A) :
     shiftFunctor (C i) (a + b) ⟶ shiftFunctor (C i) a ⋙ shiftFunctor (C i) b)
   comm h x := by
     rw [Morphism.comp_β_hom_app]
-    exact commShiftIso_add_comm (S.T h) a b x
+    exact commShiftIso_add_comm A (S.T h) a b x
 
 variable [IsDirectedOrder I]
 
@@ -188,8 +188,7 @@ noncomputable def shiftMkCore : ShiftMkCore S.PairCategory A where
     exact shiftFunctorAdd_zero_add_hom_app (C := C X.stage) n X.obj
   add_zero_hom_app n X := by
     rw [eqToHom_shift X (add_zero n), shiftAddIso_hom_app]
-    erw [shiftZeroIso_inv_app]
-    rw [← Functor.map_comp]
+    erw [shiftZeroIso_inv_app, ← Functor.map_comp]
     congr 1
     exact shiftFunctorAdd_add_zero_hom_app (C := C X.stage) n X.obj
 
