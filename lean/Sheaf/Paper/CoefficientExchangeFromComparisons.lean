@@ -3,11 +3,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H2 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OverSquare
-
 public import Sheaf.Paper.FiniteDiscreteDerivedCoefficientData
 import Sheaf.CategoryTheory.ThreeStepAdjunctionComparison
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # The specified exchange from coherent coefficient comparisons -/
 
@@ -64,8 +61,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private lemma restricted_unit_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -75,42 +70,24 @@ private lemma restricted_unit_hom
     [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
     [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ U)) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h.asOver (Spec (.of k)))).unit.app K).hom =
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ
+      (h.asOver (Spec (.of k)))).unit.app K).hom =
       (derivedUpperStarLowerStarAdjunction Λ h).unit.app K.obj := by
   change (boundedConstructible _).ι.map
-    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h.asOver (Spec (.of k)))).unit.app K) = _
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ
+      (h.asOver (Spec (.of k)))).unit.app K) = _
   rw [boundedConstructibleUpperStarLowerStarAdjunction,
     Adjunction.map_restrictFullyFaithful_unit_app]
+  simp only [boundedConstructibleUpperStarCompatibility,
+    boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso,
+    Iso.symm_hom, Iso.refl_inv, NatTrans.id_app]
   dsimp only [boundedConstructibleUpperStar, boundedConstructibleLowerStar,
     ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj]
-  simp [boundedConstructibleUpperStarCompatibility,
-    boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso,
-    Iso.symm, Iso.refl, NatTrans.id_app]
--/
-
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-private lemma restricted_counit_hom
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
-    {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
-    [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
-    [IsSeparated (T ↘ Spec (.of k))]
-    [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
-    [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]
-    (K : ProEtale.BoundedConstructible (condensedRingObj Λ T)) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h.asOver (Spec (.of k)))).counit.app K).hom =
-      (derivedUpperStarLowerStarAdjunction Λ h).counit.app K.obj := by
-  change (boundedConstructible _).ι.map
-    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (h.asOver (Spec (.of k)))).counit.app K) = _
-  rw [boundedConstructibleUpperStarLowerStarAdjunction,
-    Adjunction.map_restrictFullyFaithful_counit_app]
-  dsimp only [boundedConstructibleUpperStar, boundedConstructibleLowerStar,
-    ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj]
-  simp [boundedConstructibleUpperStarCompatibility,
-    boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso,
-    Iso.symm, Iso.refl, NatTrans.id_app]
--/
+  change (derivedUpperStarLowerStarAdjunction Λ h).unit.app K.obj ≫
+    (R((h)_*⟦Λ⟧)).map (𝟙 _) ≫ 𝟙 _ = _
+  rw [CategoryTheory.Functor.map_id]
+  simp only [Category.comp_id]
+  exact Category.comp_id _
 
 private lemma restricted_comp_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -124,10 +101,12 @@ private lemma restricted_comp_hom
     [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))]
     [IsSeparated (V ↘ Spec (.of k))] (j : U ⟶ V) [j.IsOver (Spec (.of k))]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ V)) :
-    ((boundedConstructibleUpperStarComp Λ ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).hom.app K).hom =
+    ((boundedConstructibleUpperStarComp Λ ℓ
+      (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).hom.app K).hom =
       (leftDerivedUpperStarComp Λ h j).hom.app K.obj := by
   change (boundedConstructible _).ι.map
-    ((boundedConstructibleUpperStarComp Λ ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).hom.app K) = _
+    ((boundedConstructibleUpperStarComp Λ ℓ
+      (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).hom.app K) = _
   simp only [ObjectProperty.ι_obj, Functor.comp_obj, boundedConstructibleUpperStarComp,
     Functor.FullyFaithful.preimageIso, Functor.whiskeringRight_obj_obj,
     boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso, Iso.trans_hom,
@@ -149,11 +128,13 @@ private lemma restricted_square_iso
       ((boundedConstructiblePullbackSquareComparison Λ ℓ (sq.asOver (Spec (.of k)))).app K) =
       (coefficientAmbientSquare Λ sq).app K.obj := by
   have h₁ : (boundedConstructible _).ι.mapIso
-      ((boundedConstructibleUpperStarComp Λ ℓ (f'.asOver (Spec (.of k))) (g.asOver (Spec (.of k)))).app K) =
+      ((boundedConstructibleUpperStarComp Λ ℓ
+        (f'.asOver (Spec (.of k))) (g.asOver (Spec (.of k)))).app K) =
       (leftDerivedUpperStarComp Λ f' g).app K.obj :=
     Iso.ext (restricted_comp_hom ℓ k Λ f' g K)
   have h₂ : (boundedConstructible _).ι.mapIso
-      ((boundedConstructibleUpperStarComp Λ ℓ (g'.asOver (Spec (.of k))) (f.asOver (Spec (.of k)))).app K) =
+      ((boundedConstructibleUpperStarComp Λ ℓ
+        (g'.asOver (Spec (.of k))) (f.asOver (Spec (.of k)))).app K) =
       (leftDerivedUpperStarComp Λ g' f).app K.obj :=
     Iso.ext (restricted_comp_hom ℓ k Λ g' f K)
   rw [boundedConstructiblePullbackSquareComparison_app, coefficientAmbientSquare_app]
@@ -172,11 +153,19 @@ private lemma unit_step_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
-    ((boundedConstructibleBaseChangeUnitStep Λ ℓ (f.asOver (Spec (.of k))) (g.asOver (Spec (.of k))) (f'.asOver (Spec (.of k)))).app K).hom =
+    ((boundedConstructibleBaseChangeUnitStep Λ ℓ
+      (f.asOver (Spec (.of k))) (g.asOver (Spec (.of k)))
+      (f'.asOver (Spec (.of k)))).app K).hom =
       (coefficientDerivedAdjunction Λ f').unit.app
         ((coefficientDerivedUpperStar Λ g).obj
           ((coefficientDerivedLowerStar Λ f).obj K.obj)) := by
-  sorry
+  rw [coefficientDerivedAdjunction_eq]
+  unfold coefficientDerivedUpperStar coefficientDerivedLowerStar
+  simp only [boundedConstructibleBaseChangeUnitStep, NatTrans.comp_app,
+    Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Category.id_comp]
+  exact restricted_unit_hom ℓ k Λ f'
+    ((boundedConstructibleUpperStar Λ ℓ (g.asOver (Spec (.of k)))).obj
+      ((boundedConstructibleLowerStar Λ ℓ (f.asOver (Spec (.of k)))).obj K))
 
 private lemma square_step_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -193,17 +182,43 @@ private lemma square_step_hom
     simp only [boundedConstructibleBaseChangeSquareStep, Functor.squareTransport_app]
   have ht := congrArg (fun z ↦ ((boundedConstructible _).ι.mapIso z).hom) hs
   exact ht.trans (congrArg ((coefficientDerivedLowerStar Λ f').map)
-    (restricted_square_hom ℓ k Λ sq ((boundedConstructibleLowerStar Λ ℓ (f.asOver (Spec (.of k)))).obj K)))
+    (restricted_square_hom ℓ k Λ sq
+      ((boundedConstructibleLowerStar Λ ℓ (f.asOver (Spec (.of k)))).obj K)))
 
 private lemma counit_step_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
-    ((boundedConstructibleBaseChangeCounitStep Λ ℓ (f.asOver (Spec (.of k))) (f'.asOver (Spec (.of k))) (g'.asOver (Spec (.of k)))).app K).hom =
+    ((boundedConstructibleBaseChangeCounitStep Λ ℓ
+      (f.asOver (Spec (.of k))) (f'.asOver (Spec (.of k)))
+      (g'.asOver (Spec (.of k)))).app K).hom =
       (coefficientDerivedLowerStar Λ f').map
         ((coefficientDerivedUpperStar Λ g').map
           ((coefficientDerivedAdjunction Λ f).counit.app K.obj)) := by
-  sorry
+  rw [coefficientDerivedAdjunction_eq]
+  unfold coefficientDerivedLowerStar coefficientDerivedUpperStar
+  simp only [boundedConstructibleBaseChangeCounitStep, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.comp_map, Functor.leftUnitor_hom_app,
+    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom]
+  change (R((f')_*⟦Λ⟧)).map ((L((g')^*⟦Λ⟧)).map
+    (((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ
+      (f.asOver (Spec (.of k)))).counit.app K).hom)) ≫ 𝟙 _ = _
+  rw [Category.comp_id]
+  congr 1
+  congr 1
+  change (boundedConstructible _).ι.map
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ
+      (f.asOver (Spec (.of k)))).counit.app K) = _
+  rw [boundedConstructibleUpperStarLowerStarAdjunction,
+    Adjunction.map_restrictFullyFaithful_counit_app]
+  simp only [boundedConstructibleUpperStarCompatibility,
+    boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso,
+    Iso.symm_inv, Iso.refl_hom, NatTrans.id_app]
+  dsimp only [boundedConstructibleUpperStar, boundedConstructibleLowerStar,
+    ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj]
+  change 𝟙 _ ≫ (L((f)^*⟦Λ⟧)).map (𝟙 _) ≫
+    (derivedUpperStarLowerStarAdjunction Λ f).counit.app K.obj = _
+  rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
 
 /-- Coherent coefficient comparisons identify the three specified exchange factors.
 Source: Mathlib adjunction restriction and mates; the specified exchange definitions
