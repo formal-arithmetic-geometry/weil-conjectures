@@ -243,5 +243,24 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-7d5867f6c (reviewer sub-agent of L); spot-checked: Read the whole item, the full statement of every cited node and the proof of lem-coef-simplicial-right-fibration-presentation. HTT 2.2.3.14 is not in literature/ (recorded WANTED, proof_origin agent), so each step was checked independently against the cited DAG statements. One fault (C3/C4). The statement names the contravariant model structure of lem-coef-simplicial-right-fibration-presentation, whose weak equivalences are defined by Fun_{/S} mapping tests. The factorization, the right-anodyne trivial cofibrations and the fibration criterion used in the proof all come from the cone-defined structure of lem-coef-contravariant-slice-model. Only the presentation node's proof identifies the two, and a step may use a node's statement only. Fixed by a new first step: both structures have monomorphisms as cofibrations and right fibrations as fibrant objects, so the existing same-unit node lem-coef-model-structure-determined-by-fibrant-objects gives the same fibrations, weak equivalences and trivial cofibrations. Later step references were renumbered and proof_deps updated; a DFS confirms no cycle. Verified the remaining steps. Horn squares over S lift via the right-anodyne trivial cofibrations. Factor u=qi; rq is a right fibration by two horn lifts. u_s and q_s are Kan fibrations over the Kan complex Y_s via lem-cbc-right-fibration-space-fiber. lem-coef-kan-fibration-arbitrary-base-fibers gives weak fibers over each y, with X_s×_{Y_s}{y}=X×_Y{y}. The RFib(Y) criterion gives g and h over Y, and the Λ^2_0 orientation fix is correct. The endpoint gluing equations hold (ue'=b, h_1a=gia=e'j). {1}⊂Δ^1 is Λ^1_1; the pushout product with the mono j is right anodyne and u lifts against it; H_0 solves the original square. Edge cases: empty S, empty fibers, Y a point, n=1. No Kan or quasicategory hypothesis on S or Y is used. No new nodes and no duplicate (grep). Tool use lem-cbc-right-fibration-space-fiber accepted (generic black box, already used in this unit by lem-coef-contravariant-slice-model). The report claims created was changed to Q42, but the file keeps created.item=lem-coef-relative-cone-presheaf-fibers/NP, which is correct, so nothing was changed there. Fixed file: fixes/dag/nodes/sec-six-functors/lem-coef-contravariant-fibrations-between-right-fibrations.json (proof and proof_deps only).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-629035afe",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Exact HTT statement and Lean signature match; dependencies and universes are appropriate; report sections and docstrings are present; scompile.py passed with server confirmation; no substantive findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ContravariantFibrationsBetweenRightFibrations",
+  "declaration": "SSet.Enhanced.contravariant_fibration_iff_rightFibration",
+  "file": "lean/Sheaf/CategoryTheory/ContravariantFibrationsBetweenRightFibrations.lean",
+  "statement": "theorem contravariant_fibration_iff_rightFibration {S X Y : SSet.{u}} (D : SimplicialRightFibration.RightData S) (p : X ⟶ S) (r : Y ⟶ S) (f : X ⟶ Y) (comm : f ≫ r = p) (hp : rightFibration p) (hr : rightFibration r) : D.slice.simplicial.model.categoryWithFibrations.fibrations (Over.homMk f comm : Over.mk p ⟶ Over.mk r) ↔ rightFibration f",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The parameter D is the contravariant-model presentation data furnished by lem-coef-simplicial-right-fibration-presentation (Presentation.right S). Its explicit fibration projection avoids any ambient Kan-model instance. The theorem works for every such presentation and uses the existing rightFibration predicate; no new definition or stronger base hypothesis is introduced."
  }
 }
