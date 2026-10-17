@@ -13,9 +13,131 @@
   "lem-coef-join-slice-cocone-comparison",
   "lem-coef-infinity-join-cone-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\alpha^\\vee(i)=m-\\alpha(r-i)$ for $\\alpha:[r]\\to[m]$. Direct substitution gives $(\\alpha\\beta)^\\vee=\\alpha^\\vee\\beta^\\vee$ and $(\\alpha^\\vee)^\\vee=\\alpha$, so the opposite construction in the statement is simplicial and involutive, on maps as well as objects. Define $\\rho_m:\\Delta^m\\to(\\Delta^m)^{\\mathrm{op}}$ on a $k$-simplex $\\beta:[k]\\to[m]$ by $\\beta\\mapsto\\beta^\\vee$. The equation $(\\beta\\gamma)^\\vee=\\beta^\\vee\\gamma^\\vee$ proves simpliciality, and double reversal supplies its inverse. For $\\alpha:[r]\\to[m]$ it also gives\n$$\\rho_m\\Delta(\\alpha)=(\\Delta(\\alpha^\\vee))^{\\mathrm{op}}\\rho_r.$$\nOpposites preserve degreewise products: both product operators apply the same reversed operator to each coordinate.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Definition 2.1.14, published p.680; agent expansion of the order-reversal definition."
+   }
+  },
+  {
+   "text": "The horn description in [def-cbc-enhanced-diagrams-cones] says a simplex lies in $\\Lambda_i^n$ precisely when its image misses a vertex different from $i$. Reversing vertex indices therefore identifies $(\\Lambda_i^n)^{\\mathrm{op}}$ with $\\Lambda_{n-i}^n$ under $\\rho_n$. For $0<i<n$, a horn in $C^{\\mathrm{op}}$ reverses to this inner horn in $C$, has a filler by the quasicategory hypothesis, and reversing that filler fills the original horn. Thus $C^{\\mathrm{op}}$ is a quasicategory. The opposite $Y^{\\mathrm{op}}$ is still small, because its sets of simplices are unchanged. Apply [lem-coef-join-slice-cocone-comparison] to $L=Y^{\\mathrm{op}}$, $\\mathcal E=C^{\\mathrm{op}}$, $a=d^{\\mathrm{op}}$. It supplies exactly the specified $J_a$, $P_a$ and comparison $r_a$, defined by precomposition with the fat-join collapse, and makes the two targets quasicategories.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Definition 2.1.14 and Example 3.2.6, published pp.680,685; horn calculation and application of the existing comparison theorem."
+   }
+  },
+  {
+   "text": "For each $m$ define\n$$b_m:Y^{\\mathrm{op}}\\star\\Delta^m\\longrightarrow(\\Delta^m\\star Y)^{\\mathrm{op}}.$$\nOn the pure $Y$ summand it is the identity, on the pure parameter summand it is $\\rho_m$, and on a mixed $k$-simplex $(y,\\beta)$ with $y\\in Y_v$, $\\beta:[u]\\to[m]$, $u+v+1=k$, it sends $(y,\\beta)$ to $(\\beta^\\vee,y)$ in the underlying $\\Delta^m_u\\times Y_v$ summand. These formulas reverse the order of the two blocks. To check an operator $\\gamma:[h]\\to[k]$, split its ordered image into the part in each block, allowing one part to be empty. The reversed operator $\\gamma^\\vee$ selects those same two parts in the reverse order and reverses the restricted maps within them. The $Y^{\\mathrm{op}}$ operator is exactly this reversed restriction; for the parameter it agrees by $(\\beta\\delta)^\\vee=\\beta^\\vee\\delta^\\vee$. The same check with an empty part gives the pure cases. Hence $b_m$ is simplicial. Swapping the blocks back and reversing $\\beta$ again is an inverse, since $(\\beta^\\vee)^\\vee=\\beta$.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Example 3.2.6 and the join cone in (6.1.1), published pp.685,707; explicit calculation using the existing degreewise join formula."
+   }
+  },
+  {
+   "text": "For $H\\in Q_m$ put $R_m(H)=H^{\\mathrm{op}}b_m$. It restricts on $Y^{\\mathrm{op}}$ to $a$, so belongs to $(J_a)_m$. Its apex is $(H|_{\\Delta^m})^{\\mathrm{op}}\\rho_m$; a map $x:\\Delta^m\\to C$ represents the element $x_m(\\mathrm{id}_{[m]})\\in C_m$, and this reversed apex represents the identical element in $(C^{\\mathrm{op}})_m$, because $\\rho_m$ fixes the identity simplex. Thus $R$ is over $C^{\\mathrm{op}}$. The formulas for $b$ give\n$$b_m(\\mathrm{id}\\star\\Delta(\\alpha))=(\\Delta(\\alpha^\\vee)\\star\\mathrm{id})^{\\mathrm{op}}b_r.$$\nThe $\\alpha$-operator in $Q^{\\mathrm{op}}$ sends $H$ to $H(\\Delta(\\alpha^\\vee)\\star\\mathrm{id})$, whereas in $J_a$ it is restriction along $\\mathrm{id}\\star\\Delta(\\alpha)$. The displayed equality therefore proves that $R$ commutes with every operator. Each $R_m$ is bijective: apply opposite and $b_m^{-1}$ to recover $H$. These inverses commute with operators by the same equality. This proves the stated simplicial isomorphism $R$.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-join-slice-cocone-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Definition 2.1.14, Example 3.2.6 and (6.1.1); agent verification of the join-slice reversal in every parameter degree."
+   }
+  },
+  {
+   "text": "Uncurry the defining comma pullback in [def-cbc-enhanced-diagrams-cones]. Its $m$-simplices are exactly $(x,h)$ with the endpoints in the statement, and operators precompose $x$ and the parameter coordinate of $h$. Define\n$$\\widetilde x=x^{\\mathrm{op}}\\rho_m,\\qquad\n\\widetilde h=h^{\\mathrm{op}}(\\mathrm{id}_{Y^{\\mathrm{op}}}\\times\\rho_m\\times\\rho_1).$$\nProducts commute with opposite by Step 1, so these are maps to $C^{\\mathrm{op}}$. Since $\\rho_1$ interchanges the endpoints, $\\widetilde h|_0=a\\operatorname{pr}_{Y^{\\mathrm{op}}}$ and $\\widetilde h|_1=\\widetilde x\\operatorname{pr}_{\\Delta^m}$. Currying therefore gives an $m$-simplex of exactly $P_a$, with apex $\\widetilde x$. Put $S_m(x,h)=(\\widetilde x,\\widetilde h)$. On a $k$-simplex $(y,\\beta,\\epsilon)$ the cylinder formula is\n$$\\widetilde h_k(y,\\beta,\\epsilon)=h_k(y,\\beta^\\vee,\\epsilon^\\vee).$$\nThis specifies the entire coherent transformation, including all higher cylinder simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Definitions 3.2.3–3.2.4, published p.684, and Definition 2.1.14; agent expansion of the comma pullback and reversal formula."
+   }
+  },
+  {
+   "text": "For $\\alpha:[r]\\to[m]$, an operator in $V^{\\mathrm{op}}$ restricts the old parameter by $\\alpha^\\vee$. Step 1 gives $\\rho_m\\Delta(\\alpha)=(\\Delta(\\alpha^\\vee))^{\\mathrm{op}}\\rho_r$, and the identity on the $Y$ coordinate and $\\rho_1$ on the interval do not depend on $m$. Substitution in the formulas of Step 5 therefore proves $S_r(V(\\alpha^\\vee)(x,h))=P_a(\\alpha)S_m(x,h)$. Repeating those formulas, now starting from a cocone in $C^{\\mathrm{op}}$, reverses its two endpoints again and gives $(x,h)$: on each coordinate this is $(\\beta^\\vee)^\\vee=\\beta$ and $(\\epsilon^\\vee)^\\vee=\\epsilon$. It is an inverse in every degree and hence a simplicial inverse. The apex calculation in Step 4 applies also to $\\widetilde x$, so $S$ lies over $C^{\\mathrm{op}}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Definitions 2.1.14 and 3.2.4, published pp.680,684; direct operator and inverse checks for the specified comma objects."
+   }
+  },
+  {
+   "text": "Let $f:Y'\\to Y$ and restrict $d$ to $df$. On each join summand, applying $f$ to $y$ commutes with $b_m$, because its other coordinate is unchanged and $f$ is simplicial. Thus $R$ commutes with restriction in $Y$. In the formula for $S$, restriction replaces $h_k(y,\\beta,\\epsilon)$ by $h_k(f_k(y'),\\beta,\\epsilon)$; this also commutes with reversing $\\beta,\\epsilon$. For a simplicial map $g:C\\to C'$, postcomposition replaces $H_k,h_k,x_k$ by $g_kH_k,g_kh_k,g_kx_k$. Since taking opposite leaves these degreewise functions unchanged, both formulas commute with this postcomposition. The same is true of their inverses. These are strict equalities of simplicial maps and require no choice of equivalences or coherence fillers. When one uses the quasicategorical comparison theorem, the postcomposition target $C'$ is of course a quasicategory.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Definition 2.1.14 and Definitions 3.2.3–3.2.4; naturality checked on the explicit components."
+   }
+  },
+  {
+   "text": "Fix a vertex $\\ell:\\Delta^0\\star Y\\to C$ and let $x=\\ell|_{\\Delta^0}$. Put $k=R_0(\\ell)$. By the defining clause of [lem-coef-join-slice-cocone-comparison], $r_{a,0}(k)$ has cylinder $k$ precomposed with $Y^{\\mathrm{op}}\\times\\Delta^1\\to Y^{\\mathrm{op}}\\star\\Delta^0$: for an $n$-simplex $(y,u)$, the collapse keeps the restriction of $y$ to the initial $0$-block of $u:[n]\\to[1]$ and puts the constant apex on its final $1$-block. Applying $S_0^{-1}$ replaces $u$ by $u^\\vee(i)=1-u(n-i)$; the parameter $\\Delta^0$ stays fixed. The initial $0$-block of $u^\\vee$ is exactly the reversed final $1$-block of $u$, and its final $1$-block is the reversed initial $0$-block of $u$. Applying $b_0$ to the collapsed simplex therefore puts $x$ on the initial $0$-block of $u$ and the restriction of $y$ on its final $1$-block. In fact, if the latter block starts at $t$, its inclusion $\\delta:\\{0,\\ldots,n-t\\}\\to[n]$, $j\\mapsto t+j$, is the reversal of the initial-block inclusion; the $Y^{\\mathrm{op}}$ restriction becomes exactly $Y(\\delta)y$. This is precisely the left-cone collapse in [lem-coef-infinity-join-cone-calculus]. Pure blocks give respectively the constant apex or $y$. Consequently the resulting cylinder is exactly $\\ell$ after that collapse, on every simplex, not merely up to homotopy.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-join-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Example 3.2.6 and (6.1.1), published pp.685,707; agent refinement comparing the prescribed right fat-join and left fat-cone collapses."
+   }
+  },
+  {
+   "text": "At $u=0$ the cylinder of Step 8 is constant at $x$, and at $u=1$ it is exactly $d$ on the whole simplicial set $Y$. It therefore descends, with its separately retained apex $x$, to $T_Y=\\Delta^0\\amalg_{Y\\times\\{0\\}}(Y\\times\\Delta^1)$, and is $\\ell$ precomposed with its prescribed collapse. The degree-zero sets of an object and its opposite are identical, so this proves the literal vertex equality in the statement. No operation above requires a simplex of $Y$. If $Y=\\varnothing$, then $Q=C$, $J_a=C^{\\mathrm{op}}$, and both comma objects are their apex objects because their cylinder data have empty domain. Both isomorphisms are then the identity under these identifications. The fat joins and $T_Y$ reduce to their apex or parameter simplices, so the same vertex equality holds. If $C$ has no vertices there are no such $\\ell$ and that assertion is vacuous; the isomorphisms still hold in every degree.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+    "place": "Definitions 3.2.3–3.2.4 and (6.1.1); endpoints and empty-shape cases of the explicit constructions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-join-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://emilyriehl.github.io/files/recognizing.pdf",
+  "place": "Definitions 2.1.14 and 3.2.3–3.2.5, Example 3.2.6 and (6.1.1), published pp.680,684–685,707, read online. Explicit degreewise proof of the strengthened opposite/coherence statement using the existing join and comma constructions; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +180,52 @@
    "results": "{\"t\": \"2026-10-17T09:23:07Z\", \"tool\": \"loogle\", \"query\": \"SSet.opFunctor, SSet.op\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.opFunctor_map\", \"SSet.Subcomplex.preimage_op_unionProd\"], \"digest\": \"8d965abcd8ce4d52\"}",
    "date": "2026-10-17",
    "verdict": "No match: ordinary-category Join.opEquiv is not a simplicial-set join/comma comparison. Read Mathlib/CategoryTheory/Join/Opposites.lean:14–49 and 87–144. Read AlgebraicTopology/SimplicialSet/Op.lean:14–26,39–92, SimplexCategory/Rev.lean:25–84, SimplicialObject/Op.lean:34–92 and SimplicialSet/Monoidal.lean:245–265: these give reversal, products and involutivity, but no join-slice/comma isomorphisms or identification of the fat-cone comparison. The StrictSegal hits assume a strict Segal simplicial set and concern ordinary pointwise Kan extensions, not arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "fatJoin|fat_join|joinSlice|join_slice|opFunctor|opEquivalence|join.*[Oo]p|[Oo]p.*[Jj]oin",
+   "results": "{\"t\": \"2026-10-17T10:36:25Z\", \"tool\": \"grep\", \"query\": \"fatJoin|fat_join|joinSlice|join_slice|opFunctor|opEquivalence|join.*[Oo]p|[Oo]p.*[Jj]oin\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\"], \"digest\": \"1c3add4573c61a6e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: SSet.opFunctor/op_map/op_σ and SimplicialObject.opEquivalence give simplicial reversal only (SimplicialSet/Op.lean:42–92, SimplicialObject/Op.lean:36–92, SimplexCategory/Rev.lean:25–84); products in SimplicialSet/Monoidal.lean:119–123. CategoryTheory.Join.opEquiv (CategoryTheory/Join/Opposites.lean:31–47, read) concerns ordinary categories, not the simplicial join-slice/comma constructions. Cylinder.symm merely swaps abstract model-category cylinder inclusions (ModelCategory/Cylinder.lean:71–82,149–156); it does not give the specified simplicial opposite or fat-join comparison. The grep specific to fat join/join slice/comma cone has no hits. No full match or one-line specialization for this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.opFunctor, SSet.op",
+   "results": "{\"t\": \"2026-10-17T10:36:25Z\", \"tool\": \"loogle\", \"query\": \"SSet.opFunctor, SSet.op\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.opFunctor_map\", \"SSet.Subcomplex.preimage_op_unionProd\"], \"digest\": \"8d965abcd8ce4d52\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: SSet.opFunctor/op_map/op_σ and SimplicialObject.opEquivalence give simplicial reversal only (SimplicialSet/Op.lean:42–92, SimplicialObject/Op.lean:36–92, SimplexCategory/Rev.lean:25–84); products in SimplicialSet/Monoidal.lean:119–123. CategoryTheory.Join.opEquiv (CategoryTheory/Join/Opposites.lean:31–47, read) concerns ordinary categories, not the simplicial join-slice/comma constructions. Cylinder.symm merely swaps abstract model-category cylinder inclusions (ModelCategory/Cylinder.lean:71–82,149–156); it does not give the specified simplicial opposite or fat-join comparison. The grep specific to fat join/join slice/comma cone has no hits. No full match or one-line specialization for this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reversing vertex order exchanges simplicial coherent cones and cocones and commutes with the fat join collapse",
+   "results": "{\"t\": \"2026-10-17T10:36:25Z\", \"tool\": \"leansearch\", \"query\": \"Reversing vertex order exchanges simplicial coherent cones and cocones and commutes with the fat join collapse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.opEquivalence\", \"SSet.op\", \"SimplexCategory.revEquivalence\", \"SSet.opFunctor\", \"CategoryTheory.simplicialCosimplicialEquiv_inverse_obj\", \"SimplexCategory.rev_map_apply\", \"SimplicialObject.opEquivalence_functor\", \"SimplicialObject.opFunctor\"], \"digest\": \"1bd7c71251f4e271\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: SSet.opFunctor/op_map/op_σ and SimplicialObject.opEquivalence give simplicial reversal only (SimplicialSet/Op.lean:42–92, SimplicialObject/Op.lean:36–92, SimplexCategory/Rev.lean:25–84); products in SimplicialSet/Monoidal.lean:119–123. CategoryTheory.Join.opEquiv (CategoryTheory/Join/Opposites.lean:31–47, read) concerns ordinary categories, not the simplicial join-slice/comma constructions. Cylinder.symm merely swaps abstract model-category cylinder inclusions (ModelCategory/Cylinder.lean:71–82,149–156); it does not give the specified simplicial opposite or fat-join comparison. The grep specific to fat join/join slice/comma cone has no hits. No full match or one-line specialization for this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite simplicial sets exchange left join slices and right join slices and coherent comma cones and cocones compatibly with the fat join comparison",
+   "results": "{\"t\": \"2026-10-17T10:36:27Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite simplicial sets exchange left join slices and right join slices and coherent comma cones and cocones compatibly with the fat join comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.inclLeftCompOpEquivInverse\", \"CategoryTheory.Join.opEquiv\", \"CategoryTheory.Join.opEquiv_functor_obj_op_left\", \"CategoryTheory.Join.opEquiv_functor_obj_op_right\", \"CategoryTheory.Join.InclLeftCompRightOpOpEquivFunctor\", \"CategoryTheory.Join.inclRightCompOpEquivInverse\", \"CategoryTheory.Join.opEquiv_functor_map_op_inclLeft\", \"CategoryTheory.Join.InclRightCompRightOpOpEquivFunctor\"], \"digest\": \"afa9311e5a20489b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: SSet.opFunctor/op_map/op_σ and SimplicialObject.opEquivalence give simplicial reversal only (SimplicialSet/Op.lean:42–92, SimplicialObject/Op.lean:36–92, SimplexCategory/Rev.lean:25–84); products in SimplicialSet/Monoidal.lean:119–123. CategoryTheory.Join.opEquiv (CategoryTheory/Join/Opposites.lean:31–47, read) concerns ordinary categories, not the simplicial join-slice/comma constructions. Cylinder.symm merely swaps abstract model-category cylinder inclusions (ModelCategory/Cylinder.lean:71–82,149–156); it does not give the specified simplicial opposite or fat-join comparison. The grep specific to fat join/join slice/comma cone has no hits. No full match or one-line specialization for this item."
+  },
+  {
+   "tool": "grep",
+   "query": "fat.?join|join.?slice|comma.?cone|ordered.?block|block.?reversal",
+   "results": "{\"t\": \"2026-10-17T10:37:48Z\", \"tool\": \"grep\", \"query\": \"fat.?join|join.?slice|comma.?cone|ordered.?block|block.?reversal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: SSet.opFunctor/op_map/op_σ and SimplicialObject.opEquivalence give simplicial reversal only (SimplicialSet/Op.lean:42–92, SimplicialObject/Op.lean:36–92, SimplexCategory/Rev.lean:25–84); products in SimplicialSet/Monoidal.lean:119–123. CategoryTheory.Join.opEquiv (CategoryTheory/Join/Opposites.lean:31–47, read) concerns ordinary categories, not the simplicial join-slice/comma constructions. Cylinder.symm merely swaps abstract model-category cylinder inclusions (ModelCategory/Cylinder.lean:71–82,149–156); it does not give the specified simplicial opposite or fat-join comparison. The grep specific to fat join/join slice/comma cone has no hits. No full match or one-line specialization for this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial order reversal converts a map from Delta n join K into a map from K opposite join Delta n and reverses the endpoints of the cylinder defining cones",
+   "results": "{\"t\": \"2026-10-17T10:37:50Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial order reversal converts a map from Delta n join K into a map from K opposite join Delta n and reverses the endpoints of the cylinder defining cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op_σ\", \"SSet.op_map\", \"SimplicialObject.opFunctor_obj_σ\", \"HomotopicalAlgebra.Precylinder.symm\", \"SSet.opFunctor_map\", \"CategoryTheory.SimplicialObject.Augmented.rightOp_right_map\", \"SimplicialObject.opFunctor_obj_map\", \"HomotopicalAlgebra.Cylinder.symm\"], \"digest\": \"f81f1cc5ba4800cb\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: SSet.opFunctor/op_map/op_σ and SimplicialObject.opEquivalence give simplicial reversal only (SimplicialSet/Op.lean:42–92, SimplicialObject/Op.lean:36–92, SimplexCategory/Rev.lean:25–84); products in SimplicialSet/Monoidal.lean:119–123. CategoryTheory.Join.opEquiv (CategoryTheory/Join/Opposites.lean:31–47, read) concerns ordinary categories, not the simplicial join-slice/comma constructions. Cylinder.symm merely swaps abstract model-category cylinder inclusions (ModelCategory/Cylinder.lean:71–82,149–156); it does not give the specified simplicial opposite or fat-join comparison. The grep specific to fat join/join slice/comma cone has no hits. No full match or one-line specialization for this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-weight-limit-recognition",
@@ -92,5 +256,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-opposite-join-comma-comparison",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Constructed the join and comma opposite isomorphisms explicitly on all simplices; verified reversed parameter operators, inverses, apex projections, naturality and the exact cylinder/block formula for the prescribed fat-left-cone image, including the empty indexing shape. The only theorem invocation is the existing right join-slice/cocone comparison, after checking the opposite target is a quasicategory by the horn definition. No Lean declaration attaches the full item.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, the inverse-limit mapping-space calculation, through its descendant lem-coef-coherent-weight-limit-recognition steps 7–9: opposite join/comma isomorphisms and identification of the actual comparison cone. No unit or chapter route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-d020dcee4",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-d020dcee4 (reviewer sub-agent of L); spot-checked: I read the item statement, all 9 steps, the full statements of the 4 cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-slice-right-fibration, lem-coef-join-slice-cocone-comparison, lem-coef-infinity-join-cone-calculus) and the citing recognition lemma's Steps 7-9. The statement is true and not weakened. Checks: (ab)^v = a^v b^v and double reversal is the identity, so the opposite construction is simplicial and involutive; horn reversal sends Lambda_i^n to Lambda_{n-i}^n, so C^op is a quasicategory; block reversal b_m is simplicial, including empty blocks; the endpoint swap by rho_1 makes S land in P_a; the operator identity rho_m Delta(alpha) = Delta(alpha^v)^op rho_r gives operator compatibility of R and S. I re-derived the Step 8 identity in general ((u^v)^{-1}(0) = {0..n-t}, restriction j -> t+j). On representables Y = Delta^p it gives the closed form: 0 if u(i)=0, y(i)+1 if u(i)=1, which is exactly the left collapse T_Y -> Delta^0*Y. The Y empty case (V = C, P_a = C^op), the empty-C case and the pure-block cases hold. Step 2 is the only theorem use, and its hypotheses (small L, quasicategory E) are met. Every other step is a fair elementary coordinate identity, and each cited statement says what the step takes from it (C3/C4). The route stays inside unit sk-prop-sf-biduality-general; the def-cbc node is a definition. There are no SGA citations, no new nodes and no tool_uses. Duplicate candidates are lem-coef-infinity-cocone-opposite-join-functor (only the single-vertex join and Fun-op ingredients) and lem-coef-infinity-relative-cone-equivalence clause 4 (only the vertex slice); neither states this item. The Riehl-Verity source is not in literature/; it is recorded as WANTED with proof_origin agent. No fixes were written."
  }
 }
