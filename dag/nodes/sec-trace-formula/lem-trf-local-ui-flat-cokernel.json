@@ -10,9 +10,49 @@
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let 0→N→N′→N″→0 be any short exact sequence of R-modules. Tensoring the given universally exact sequence with each of N, N′, and N″ yields three short exact rows, and tensoring 0→N→N′→N″→0 with the flat module M₂ yields an injective middle vertical map M₂⊗N→M₂⊗N′. The resulting commutative 3×3 diagram has exact rows and an injective middle vertical arrow.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058P, proof of lemma-ui-flat-domain, diagram setup"
+   }
+  },
+  {
+   "text": "Let N→N′ be any injective R-linear map and complete it to a short exact sequence 0→N→N′→N″→0 with N″ its cokernel. Let x∈M₁⊗N map to zero in M₁⊗N′. By commutativity of the left square, the image of x in M₂⊗N′ (through M₁⊗N′) equals the image under M₂⊗N→M₂⊗N′ of its image in M₂⊗N, so the latter vanishes, since M₂⊗N→M₂⊗N′ is injective (step 1). Since the top row is exact, M₁⊗N→M₂⊗N is injective, so x=0. Thus M₁⊗N→M₁⊗N′ is injective for every injection N→N′, and M₁ is flat by the definition of flatness.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058P, proof of lemma-ui-flat-domain, argument that M₁ is flat"
+   }
+  },
+  {
+   "text": "Keep the diagram of step 1 for an injection N→N′ with cokernel N″. Let x∈M₃⊗N map to zero in M₃⊗N′. The top row is exact, so x is the image of some y∈M₂⊗N. Let y′ be the image of y in M₂⊗N′; it maps to the image of x in M₃⊗N′, which is zero, so by exactness of the middle row y′ is the image of some z′∈M₁⊗N′. The image of z′ in M₂⊗N″ equals the image of y′ there, which is zero because N→N′→N″ is zero. The bottom row is exact, so M₁⊗N″→M₂⊗N″ is injective and z′ maps to zero in M₁⊗N″. By right exactness of M₁⊗−, the left column M₁⊗N→M₁⊗N′→M₁⊗N″→0 is exact (and short exact by the flatness of M₁ from step 2), so z′ is the image of some z∈M₁⊗N. Then y minus the image of z in M₂⊗N maps to y′−y′=0 in M₂⊗N′, and injectivity of M₂⊗N→M₂⊗N′ (step 1) gives that y is the image of z. Hence x, the image of y in M₃⊗N, is the image of an element of M₁⊗N under the composite M₁⊗N→M₂⊗N→M₃⊗N, which is zero; so x=0. Thus M₃⊗N→M₃⊗N′ is injective for every injection N→N′, and M₃ is flat by the definition of flatness.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058P, proof of lemma-ui-flat-domain, final diagram chase"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058P, lemma-ui-flat-domain"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +84,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-generic-basis-universal-injective",
@@ -56,7 +96,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), 'We conclude that Coker(α)_q is R-flat by Algebra Lemma 058P'.",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument (Stacks 05I3, globalized by Algebra 05CL), through the parent lem-trf-local-generic-basis-universal-injective (Stacks flat.tex, Tag 05I3, lemma-induction-step, implication (1)⇒(2)), whose last sentence “We conclude that Coker(α)_q is R-flat by Algebra, Lemma algebra-lemma-ui-flat-domain” is this item (Tag 058P).",
    "via": [
     "lem-trf-local-generic-basis-universal-injective",
     "lem-trf-free-subtraction-flatness",
@@ -73,5 +113,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-ui-flat-cokernel",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 058P and expanded its tensor diagram proof into three steps. The existing flatness definition node supplies the meaning of flatness and the tensor-injectivity criterion used throughout; no additional intermediate lemma is needed. The statement is unchanged.",
+  "blueprint": "Realizes, in the Raynaud--Gruson flattening input of lem-trf-local-term-locality proof (1)--(2), the final sentence of the proof of Stacks 05I3 (1)⇒(2) used by the parent lem-trf-local-generic-basis-universal-injective step 3: “We conclude that Coker(α)_q is R-flat by Algebra Lemma 058P”. Steps 1--3 realize the three sentences of the proof of Tag 058P."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-c1fe0da0e",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-c1fe0da0e (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes. Checked against Stacks algebra.tex:20041, Tag 058P lemma-ui-flat-domain. The statement agrees with the source's M3 clause, which is the clause the citer lem-trf-local-generic-basis-universal-injective step 3 uses (Stacks flat.tex 05I3 (1)=>(2), line 2404). It is unchanged and not weakened, and universal exactness is defined inline. Small cases: a split sequence gives a flat M3; 0->Z->Z->Z/2->0 is not universally exact and Z/2 is not flat, so the hypothesis is needed. The only dependency is def-weil-pbc-flat-ring-map (Mathlib-leaf definition, 00HB). It is used correctly in each step, and since it is a notion, no tool_uses are needed. rg for 058P / 'universally exact' over dag/nodes finds no duplicate. FIX (2 faults): (E3/E5) step 3's closing inference cited injectivity of M1⊗N->M1⊗N', but the chase needs middle-row exactness, injectivity of the bottom row, left-column exactness at M1⊗N' and middle-column injectivity; I rewrote it as the full chase, and also wrote step 2 out explicitly. (B9) blueprint.from.place and split_report.blueprint attributed the sentence 'We conclude that Coker(α)_q is R-flat by Algebra Lemma 058P' to lem-trf-local-term-locality, but it is Stacks flat.tex 05I3 reached through the parent; I corrected the attribution. The corrected item is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }

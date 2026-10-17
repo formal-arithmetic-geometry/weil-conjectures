@@ -2,7 +2,7 @@
  "id": "lem-trf-integral-cone-counit-realization",
  "kind": "statement",
  "title": "The derived-limit counit recovers a compatible tower family from its cone lift",
- "statement": "Let $\\mathcal A$ be the category of modules on a small ringed site [def-weil-sheaf-of-modules-category] and let $C_\\bullet=(C_m,t_m)$ be a strict inverse tower of complexes. Choose a K-injective tower resolution $q:C_\\bullet\\to I_\\bullet$ with injective terms [def-pur-kinjective-complex, lem-weil-pbc-ringed-strict-tower-homotopy-limit], so that $R\\lim C_\\bullet=\\lim I_\\bullet$ [def-weil-derived-limit] and the inclusion $\\iota:\\lim I_\\bullet\\to\\operatorname{Cone}(1-s)[-1](I_\\bullet)$, with zero shifted-product component, is a quasi-isomorphism. Let $\\epsilon_C:\\Delta R\\lim C_\\bullet\\to C_\\bullet$ be the derived-limit counit in the derived category of strict towers, namely $[q]^{-1}$ composed with the ordinary limit-cone map $\\Delta\\lim I_\\bullet\\to I_\\bullet$. If $P$ is a complex and $\\theta_m:P\\to C_m$ is a compatible family, $t_m\\circ\\theta_{m+1}=\\theta_m$, write $\\theta^\\Delta:\\Delta P\\to C_\\bullet$ for the induced strict tower map and $\\tilde\\theta:P\\to\\operatorname{Cone}(1-s)[-1](C_\\bullet)$ for the cone lift $z\\mapsto(0,(\\theta_m(z))_m)$. Let $r_\\theta=[\\iota]^{-1}\\circ[\\operatorname{Cone}(1-s)[-1](q)\\circ\\tilde\\theta]:P\\to R\\lim C_\\bullet$. Then in the derived category of strict towers\n$$\\epsilon_C\\circ\\Delta(r_\\theta)=\\theta^\\Delta.$$\nThus the cone lift realizes the given compatible family at every level; the equality is before applying any further functor or passing to individual quotient derived categories, and no exactness of countable products is assumed.",
+ "statement": "Let $\\mathcal A$ be the category of modules on a small ringed site [def-weil-sheaf-of-modules-category] and let $C_\\bullet=(C_m,t_m)$ be a strict inverse tower of complexes. Choose a K-injective tower resolution $q:C_\\bullet\\to I_\\bullet$ whose terms $I^p_\\bullet$ are injective objects of the category of strict towers [def-pur-kinjective-complex, def-sp-injective-resolutions, lem-weil-pbc-ringed-strict-tower-homotopy-limit], so that $R\\lim C_\\bullet=\\lim I_\\bullet$ [def-weil-derived-limit] and the inclusion $\\iota:\\lim I_\\bullet\\to\\operatorname{Cone}(1-s)[-1](I_\\bullet)$, with zero shifted-product component, is a quasi-isomorphism. Let $\\epsilon_C:\\Delta R\\lim C_\\bullet\\to C_\\bullet$ be the derived-limit counit in the derived category of strict towers, namely $[q]^{-1}$ composed with the ordinary limit-cone map $\\Delta\\lim I_\\bullet\\to I_\\bullet$. If $P$ is a complex and $\\theta_m:P\\to C_m$ is a compatible family, $t_m\\circ\\theta_{m+1}=\\theta_m$, write $\\theta^\\Delta:\\Delta P\\to C_\\bullet$ for the induced strict tower map and $\\tilde\\theta:P\\to\\operatorname{Cone}(1-s)[-1](C_\\bullet)$ for the cone lift $z\\mapsto(0,(\\theta_m(z))_m)$. Let $r_\\theta=[\\iota]^{-1}\\circ[\\operatorname{Cone}(1-s)[-1](q)\\circ\\tilde\\theta]:P\\to R\\lim C_\\bullet$. Then in the derived category of strict towers\n$$\\epsilon_C\\circ\\Delta(r_\\theta)=\\theta^\\Delta.$$\nThus the cone lift realizes the given compatible family at every level; the equality is before applying any further functor or passing to individual quotient derived categories, and no exactness of countable products is assumed.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0941, derived inverse-limit cone and functoriality; counit identity for the universal limit cone"
@@ -11,11 +11,84 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-derived-limit",
   "def-pur-kinjective-complex",
+  "def-sp-injective-resolutions",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first prove the assertion of the statement that $\\iota$ is a quasi-isomorphism. Fix a degree $p$ and write $J=I^p_\\bullet$, an injective object of $\\operatorname{Tow}(\\mathcal A)$ with transitions $t^J_n:J_{n+1}\\to J_n$. For an object $F$ of $\\mathcal A$ and $n\\geq1$ let $T_n(F)$ be the tower equal to $F$ at levels $1,\\ldots,n$ with identity transitions there and $0$ above $n$. A tower map $T_n(F)\\to J$ is determined by its level-$n$ component $F\\to J_n$, the lower components being forced to be the transitions composed with it; conversely every map $F\\to J_n$ arises. The map $T_n(F)\\to T_{n+1}(F)$ which is the identity at levels $\\leq n$ and $0\\to F$ at level $n+1$ is a tower map and is levelwise monic, hence a monomorphism of $\\operatorname{Tow}(\\mathcal A)$ by [lem-weil-tower-category-levelwise-abelian]. Restriction along it sends the tower map with top component $\\psi:F\\to J_{n+1}$ to the one with level-$n$ component $t^J_n\\psi$. Taking $F=J_n$ and the map corresponding to $\\mathrm{id}_{J_n}$, injectivity of $J$ [def-sp-injective-resolutions] gives $\\sigma_n:J_n\\to J_{n+1}$ with $t^J_n\\sigma_n=\\mathrm{id}_{J_n}$. Let $\\Pi^p=\\prod_mJ_m$ (products of module sheaves exist, computed sectionwise) and define $\\tau:\\Pi^p\\to\\Pi^p$ by the product universal property with $\\mathrm{pr}_1\\tau=0$ and recursively $\\mathrm{pr}_{n+1}\\tau=\\sigma_n(\\mathrm{pr}_n\\tau-\\mathrm{pr}_n)$. Then $\\mathrm{pr}_n(1-s)\\tau=\\mathrm{pr}_n\\tau-t^J_n\\mathrm{pr}_{n+1}\\tau=\\mathrm{pr}_n$, so $(1-s)\\tau=\\mathrm{id}$ and $1-s:\\prod_mI_m\\to\\prod_mI_m$ is an epimorphism in every degree; $\\tau$ need not commute with differentials and is used only degreewise. The degreewise kernel of $1-s$ consists of the compatible families, i.e. it is the termwise inverse limit $\\lim_mI_m$ with its inclusion into the product. Since $1-s$ is a chain map (the differentials of $I_\\bullet$ commute with transitions), [lem-weil-degreewise-epi-kernel-cocone-qis] applied to $f=1-s$ says that the map with zero shifted-product component and the kernel inclusion as product component, which is $\\iota$, is a quasi-isomorphism $\\lim I_\\bullet\\to\\operatorname{Cone}(1-s)[-1](I_\\bullet)$. No exactness of countable products is used.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-sp-injective-resolutions",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), proof: transitions of an injective tower are split surjective, so $1-s$ is surjective on the product with kernel the limit"
+   }
+  },
+  {
+   "text": "Let $\\bar\\theta:P\\to\\lim_m I_m$ be the unique chain map whose $m$-th projection is $q_m\\circ\\theta_m$. The maps $q_m\\circ\\theta_m$ are compatible because $q$ is a strict map of towers and the family $\\theta_m$ satisfies $t_m\\circ\\theta_{m+1}=\\theta_m$. Thus the ordinary termwise inverse-limit universal property gives $\\bar\\theta$, and its uniqueness is part of that universal property. The termwise inverse-limit model computes $R\\lim C_\\bullet$ for the chosen K-injective tower resolution by [lem-weil-pbc-ringed-strict-tower-homotopy-limit].",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, derived inverse-limit cone construction; the compatible-family universal property is the first paragraph's strict tower model"
+   }
+  },
+  {
+   "text": "Put $H_I=\\operatorname{Cone}(1-s)[-1](I_\\bullet)$. On the strict chain level, $\\operatorname{Cone}(1-s)[-1](q)\\circ\\widetilde\\theta$ has zero shifted-product component and product component $(q_m\\circ\\theta_m)_m$. By the definition of $\\bar\\theta$ in Step 2, the inclusion $\\iota$ with zero shifted-product component has exactly the same two components after composing with $\\bar\\theta$. Hence\n$$\\iota\\circ\\bar\\theta=\\operatorname{Cone}(1-s)[-1](q)\\circ\\widetilde\\theta.$$\nThe compatibility equations make $(1-s)(q_m\\theta_m)_m=0$, so both sides are indeed chain maps; this coordinate calculation uses no exactness of countable products.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, explicit Roos cone map and compatible-family calculation"
+   }
+  },
+  {
+   "text": "Passing the equality of Step 3 to the derived category and using the quasi-isomorphism $\\iota$ of Step 1, we obtain\n$$[\\iota]^{-1}\\circ[\\operatorname{Cone}(1-s)[-1](q)\\circ\\widetilde\\theta]=[\\bar\\theta].$$\nBy the definition of $r_\\theta$, this says $r_\\theta=[\\bar\\theta]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, derived-category realization of the Roos cone"
+   }
+  },
+  {
+   "text": "Let $\\lambda_I:\\Delta\\lim_m I_m\\to I_\\bullet$ be the ordinary limit-cone map. For every level $m$, the $m$-component of $\\lambda_I\\circ\\Delta(\\bar\\theta)$ is the projection of $\\bar\\theta$, namely $q_m\\circ\\theta_m$. The $m$-component of $q\\circ\\theta^\\Delta$ is also $q_m\\circ\\theta_m$. Equality of strict tower maps is levelwise, so\n$$\\lambda_I\\circ\\Delta(\\bar\\theta)=q\\circ\\theta^\\Delta.$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, naturality of the ordinary limit cone with compatible maps"
+   }
+  },
+  {
+   "text": "The counit in the statement is $\\epsilon_C=[q]^{-1}\\circ[\\lambda_I]$. Combining this definition with Steps 4 and 5 gives\n$$\\epsilon_C\\circ\\Delta(r_\\theta)=[q]^{-1}\\circ[\\lambda_I]\\circ\\Delta([\\bar\\theta])=[q]^{-1}\\circ[q]\\circ[\\theta^\\Delta]=[\\theta^\\Delta].$$\nThus the equality holds in the derived category of strict towers, before any further functor or passage to individual quotient derived categories.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, counit and functoriality of the derived inverse-limit construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-sp-injective-resolutions",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, derived inverse-limit cone and functoriality; the counit realization is the explicit componentwise calculation above"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-integral-inverse-image-comparison-composition",
@@ -68,5 +141,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-integral-cone-counit-realization",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against its Stacks Tag 0941 source, the existing derived-limit and strict-tower nodes, and the read-only slopmaster2 source. No finished Lean declaration exists. The proof now constructs the compatible map into the termwise inverse limit, identifies its cone inclusion with the given cone lift componentwise, passes through the assumed quasi-isomorphism, and cancels the resolution map in the derived tower category. No new node was needed: every intermediate assertion is a direct universal-property or component calculation from the statement and the cited strict-tower model.",
+  "blueprint": "The item's nearest blueprint ancestor is thm-trf-l-function-euler-product; this split realizes its Step 1 sentence about lifting a compatible finite-level comparison family through the strict reduction tower and its Roos cone realization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "The proof uses its strict-tower theorem as the generic model identifying total derived inverse limit with termwise inverse limit and its Roos cone; this foundational tool is from the proper-base-change unit and is not supplied by the trace-transport route."
+   },
+   {
+    "node": "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "why": "Step 1 takes from its statement that the kernel of a degreewise epimorphism of complexes maps quasi-isomorphically to the shifted cone with zero shifted component; a generic homological-algebra tool from the proper-base-change unit that the trace-transport route does not supply (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-e423a33d5",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-e423a33d5 (reviewer sub-agent of L); spot-checked: I read the item, the citer (lem-trf-integral-inverse-image-comparison-composition, Steps 3–4), the strict-tower node's statement and all 5 proof steps, lem-weil-strict-roos-comparison, the unit sk-thm-trace-transport and the chapter, and Stacks 0941 (lemma-derived-limit-is-ok) with its proof. The counit identity is correct. Old Steps 2–5 (now 3–6) are correct component calculations: Cone(1-s)[-1] chain-map conditions and conventions checked against lem-weil-degreewise-epi-kernel-cocone-qis; small cases P=0, theta=0, constant Z tower all hold. One fault (C3/C4): the statement asserts that iota: lim I -> Cone(1-s)[-1](I) is a quasi-isomorphism, citing nodes whose statements do not say it (the strict-tower node proves it only in its proof), and old Step 3 called it 'assumed'. lem-weil-strict-roos-comparison does state it, but needs exact countable products, which the item avoids. Fix: new Step 1 proves it. Extending id along the monomorphism T_n(J_n) -> T_{n+1}(J_n) gives split transitions for injective towers; a recursive tau shows 1-s is a degreewise split epimorphism with kernel lim I; lem-weil-degreewise-epi-kernel-cocone-qis then gives the quasi-isomorphism. This follows Stacks 0941's proof and uses no product exactness. 'Injective terms' is clarified as injective in Tow(A), and def-sp-injective-resolutions is added to stmt_deps. Steps are renumbered and proof_deps recomputed. tool_uses gains lem-weil-degreewise-epi-kernel-cocone-qis (unit sk-thm-properbasechange; generic tool). I accept the declared tool use of lem-weil-pbc-ringed-strict-tower-homotopy-limit. Not a duplicate: lem-weil-strict-roos-comparison assumes exact products and states the identification loosely. No new nodes, no SGA, no target touched.; 1 file(s) fixed by the reviewer"
  }
 }

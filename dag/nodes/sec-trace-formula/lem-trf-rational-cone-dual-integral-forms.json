@@ -8,41 +8,77 @@
   "place": "Remark 3.1.29, printed p. 103, points to the rational polyhedral fan description but does not state this lattice form. Kato 1994, Toric singularities, is WANTED for the integral dual-cone theorem."
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-rational-cone-dual-finite] to $V=L\\otimes_{\\mathbf Z}\\mathbf Q$ and the given vectors $v_j$. It gives a finite family of rational linear forms $\\lambda_i:V\\to\\mathbf Q$ with $C=\\{x:\\lambda_i(x)\\ge0\\ \\text{for all }i\\}$. If $V=0$, take the empty family and $r=0$; hence assume $V\\ne0$.",
+   "uses": [
+    "lem-trf-rational-cone-dual-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 3.1.29, printed p. 103; Kato 1994 rational polyhedral-cone theorem (WANTED)."
+   }
+  },
+  {
+   "text": "Choose the given finite $\\mathbf Z$-basis of $L$ and write each $\\lambda_i$ in the associated dual basis with rational coefficients. Multiply $\\lambda_i$ by a positive integer $d_i$ clearing all denominators, and set $\\varphi_i=d_i\\lambda_i$. Then $\\varphi_i(L)\\subseteq\\mathbf Z$, so each $\\varphi_i$ is an integral group homomorphism $L\\to\\mathbf Z$; multiplying an inequality by $d_i>0$ does not change its nonnegative locus, so $C=\\{x:\\varphi_i(x)\\ge0\\ \\text{for all }i\\}$. The rescaled forms span the same $\\mathbf Q$-subspace as the $\\lambda_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent expansion of the lattice-coordinate step following Expose VIII, Remark 3.1.29, printed p. 103."
+   }
+  },
+  {
+   "text": "The forms $\\varphi_i$ span $\\operatorname{Hom}_{\\mathbf Q}(V,\\mathbf Q)$. Indeed, if $x\\in V$ is annihilated by every $\\varphi_i$, then both $x$ and $-x$ satisfy all the defining inequalities, hence $x\\in C\\cap(-C)=\\{0\\}$ by pointedness. Thus their common kernel is zero; in finite dimension this is equivalent to their linear span being the whole dual space (extend a basis of their span and use the nonzero coordinate functional on a complementary direction). Therefore the resulting finite family has the required spanning property. Since $V\\ne0$, its dual is nonzero and a spanning family cannot be empty, so $r\\ge1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent expansion of the pointedness/spanning argument following Expose VIII, Remark 3.1.29, printed p. 103."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-rational-cone-dual-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Remark 3.1.29, printed p. 103 motivates the rational polyhedral route; Kato 1994 is WANTED for the finite H-cone theorem, and the lattice denominator and pointedness arguments are expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A pointed rational polyhedral cone spanning a finite dimensional rational vector space is defined by finitely many integral linear forms spanning the dual",
-   "results": "PointedCone.span, PointedCone.dual_span, PointedCone.dual, PointedCone; no integral H-cone theorem.",
+   "query": "finite integral linear inequalities characterize a pointed rational polyhedral cone and span the dual",
+   "results": "PointedCone.mem_span_set, PointedCone.dual_span, PointedCone.span, PointedCone.subset_span, PointedCone.dual, ConvexCone.IsReproducing.isGenerating, PointedCone.positive, ConvexCone.IsGenerating; no theorem giving integral inequalities for rational cones.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "PointedCone.DualFG, PointedCone.dual, DualFG",
-   "results": "0 hits; unknown identifier DualFG.",
+   "query": "PointedCone.dual, PointedCone.dual_span, ConvexCone.IsGenerating",
+   "results": "0 hits; unknown identifier 'PointedCone.dual_span'.",
    "date": "2026-10-18",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "DualFG|dual.*cone|cone.*dual|rational.*polyhedral",
-   "results": "Geometry/Convex/Cone/DualFinite.lean:14-21 and Dual.lean definitions; no lattice theorem.",
+   "query": "dual.*cone|cone.*dual|rational.*polyhedral [Mathlib/Geometry/Convex/Cone]",
+   "results": "Mathlib/Geometry/Convex/Cone/DualFinite.lean:12-26 documents PointedCone.DualFG and says finite-dimensional FG/DualFG equivalence is Minkowski-Weyl; no theorem proves the rational/integral specialization.",
    "date": "2026-10-18",
-   "verdict": "generalization: abstract DualFG only"
+   "verdict": "generalization: PointedCone.DualFG definitions only"
   },
   {
    "tool": "leansearch",
-   "query": "finite integral linear inequalities characterize pointed rational polyhedral cone and span dual space",
-   "results": "ConvexCone.Pointed, PointedCone.dual_span, PointedCone.dual, PointedCone.span; no required theorem.",
+   "query": "finite integral linear inequalities characterize pointed rational polyhedral cone and span the dual",
+   "results": "ProperCone.dual, ProperCone.mem_dual, PointedCone.dual, PointedCone.dual_span, PointedCone.mem_toConvexCone, ConvexCone.pointed_iff_not_blunt, ConvexCone.toPointedCone, PointedCone.span; no required theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-sharp-fs-orthant-embedding",
@@ -70,5 +106,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-rational-cone-dual-integral-forms",
+  "worker": "stage1",
+  "summary": "No exact Lean declaration exists. I split the proof into the finite rational half-space description of a rational polyhedral cone and two elementary steps: clearing denominators on a lattice basis, then proving the defining forms span the dual from pointedness and the zero common kernel. The statement is unchanged and the rank-zero and nonzero cases are explicit.",
+  "blueprint": "The three steps realize the rational polyhedral cone embedding by integral dual inequalities in the ancestor proof's Proof (1)--(2), motivated by Expose VIII Remark 3.1.29, printed p. 103.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-524a3064e",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-524a3064e (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-trf-rational-cone-dual-finite in full. Source: ILO Exposé VIII Remark 3.1.29, printed p.103. It only points to Kato 1994 §9.6 and Nizioł 2006, and the delivery says so honestly: proof marked as written by an agent, Kato WANTED. Step 1 takes exactly the new node's statement, the finite rational H-description, and handles V=0 with the empty family. Step 2 clears denominators in the dual basis of the Z-basis; positive scalars leave the inequalities and the span unchanged; elementary. Step 3: a common kernel of zero follows from pointedness (x and -x both lie in C), and in finite dimension that gives span = V*; for V≠0 this forces r≥1; elementary and correct. The new node is the rational Minkowski–Weyl theorem, which is true. I tested it on: m=0 (C={0}, forms ±coordinates), C=V (s=0), the cone in Q^2 spanned by (1,0),(1,2) (forms y and 2x-y), and a non-pointed half-plane (form y). It is not a clause of the item: it has no lattice, integrality or spanning. It is not a duplicate: the rg search of the DAG found only the Gordan node and the sharp-cone-lattice node, which state different things. Mathlib (Geometry/Convex/Cone/DualFinite.lean) has only the DualFG definition and API, with Minkowski–Weyl mentioned in a docstring but not proved, so it stays unsplit. The citer lem-trf-sharp-fs-orthant-embedding uses exactly the item's conclusions. No route departure, no tool_uses, no SGA. This is not a target node, so there is no base-change morphism to check. No fixes were made."
  }
 }

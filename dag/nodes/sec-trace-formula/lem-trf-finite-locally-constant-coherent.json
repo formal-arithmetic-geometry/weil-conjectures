@@ -13,9 +13,99 @@
   "def-weil-size-convention",
   "def-weil-pbc-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite-cover site criterion [lem-trf-finitary-site-coherent-generators] makes $\\mathcal E$ coherent, makes every $H_V=h_V^\\#$ ($V\\in\\mathcal C$) coherent, and makes every finite limit of such objects coherent; in particular the final object $1=H_{*}$ ($*$ the final object of $\\mathcal C$) is coherent, hence quasi-compact [def-trf-coherent-topos]. Let $(U_i\\to1)_{i\\in I}$ be a finite trivializing family for $F$, the $U_i$ arbitrary objects of $\\mathcal E$. The $H_V$ generate, so each $U_i$ receives an epimorphism from a coproduct of objects $H_V$; the composite family of all these $H_V\\to U_i\\to1$ is epimorphic onto the quasi-compact $1$, so a finite subfamily $(H_{V_k}\\to1)_{k\\in K}$ is epimorphic, each $H_{V_k}$ mapping through some $U_{i(k)}$. Pulling the trivialization $F\\times U_{i(k)}\\simeq\\coprod_{M_{i(k)}}U_{i(k)}$ back along $H_{V_k}\\to U_{i(k)}$ gives $F\\times H_{V_k}\\simeq\\coprod_{M_{i(k)}}H_{V_k}$ (constant sheaf on a finite set $M$ in a slice $\\mathcal E/W$ is $\\coprod_MW$, as sheafification is a left adjoint and so preserves coproducts). So we may and do assume $U_k=H_{V_k}$, $k\\in K$, coherent objects. Finite coproducts of coherent objects are coherent by [lem-trf-coherent-object-approximation].",
+   "uses": [
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-trf-coherent-object-approximation",
+    "def-trf-coherent-topos",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 093P, Definition 093Q and Lemmas 093R, 093S, 093U; finite-cover coherence criterion in Orgogozo author draft §8.1"
+   }
+  },
+  {
+   "text": "Throughout, for an object $W$ of $\\mathcal E$ the functor $-\\times W$ preserves all colimits, epimorphisms and images: colimits in $\\mathcal E$ are sheafifications of sectionwise presheaf colimits, sectionwise $-\\times W$ commutes with colimits of presheaves of sets, and sheafification [def-weil-pbc-sheafification] commutes with finite products [lem-weil-pbc-sheafification-sets-exact] and fixes $W$, so $(\\operatorname{colim}^{\\mathrm{psh}}G_k)^\\#\\times W\\simeq(\\operatorname{colim}^{\\mathrm{psh}}(G_k\\times W))^\\#$. With the representable trivializing family $(U_k=H_{V_k})_{k\\in K}$ of Step 1 and trivializations $F\\times U_k\\simeq\\coprod_{m\\in M_k}U_k$, each $m\\in M_k$ gives a section $s_{k,m}:U_k\\to F$, and $p:P=\\coprod_{k}\\coprod_{m\\in M_k}U_k\\to F$ is an epimorphism: $\\coprod_kU_k\\to1$ is an epimorphism, hence so is $\\coprod_k(F\\times U_k)\\to F$, and each $F\\times U_k$ is the image of the summands indexed by $M_k$. $P$ is coherent by Step 1. Its kernel pair is the finite coproduct $R=P\\times_FP=\\coprod_{(k,m),(l,n)}E_{km,ln}$, where $E_{km,ln}\\hookrightarrow U_k\\times U_l$ is the equalizer of $s_{k,m}\\mathrm{pr}_1$ and $s_{l,n}\\mathrm{pr}_2$. Fix one such pair and put $W_j=U_k\\times U_l\\times U_j=H_{V_k\\times V_l\\times V_j}$ ($j\\in K$), coherent by Step 1; the $W_j\\to U_k\\times U_l$ form a finite epimorphic family. On $W_j$ the two sections become maps $W_j\\to F\\times W_j\\simeq\\coprod_{a\\in M_j}W_j$ over $W_j$; by finite extensivity [lem-trf-set-sheaf-finite-extensivity] they decompose $W_j=\\coprod_aW_{j,a}=\\coprod_aW'_{j,a}$ (pullbacks of the summands), and the equalizer restricted to $W_j$ is $E\\times_{U_k\\times U_l}W_j\\simeq\\coprod_a(W_{j,a}\\times_{W_j}W'_{j,a})$, a coproduct summand of $W_j$ again by extensivity. A summand $S$ of a quasi-compact object $W=S\\sqcup S'$ is quasi-compact: an epimorphic family onto $S$ together with $S'\\to W$ is epimorphic onto $W$, a finite subfamily is, and pulling it back along $S\\to W$ (disjointness and universality) leaves a finite epimorphic subfamily onto $S$. So each $E\\times_{U_k\\times U_l}W_j$ is quasi-compact; these finitely many objects cover $E$ (pullback of an epimorphic family along $E\\to U_k\\times U_l$), so $E$ is quasi-compact (refine any epimorphic family onto $E$ on each of them), and the finite coproduct $R$ is quasi-compact by the same argument [def-trf-coherent-topos]. The quotient criterion [lem-trf-coherent-epimorphic-quotient] applied to $p$ gives that $F$ is coherent.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-trf-coherent-object-approximation",
+    "lem-trf-coherent-epimorphic-quotient",
+    "lem-trf-set-sheaf-finite-extensivity",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 093P, Lemmas 093S and 093U(1), with the finite-cover presentation argument of Orgogozo author draft §8.1"
+   }
+  },
+  {
+   "text": "For a finite family of finite locally constant sheaves, the products $U_{i_1}\\times\\dots\\times U_{i_r}$ of members of their trivializing families form a common finite trivializing family (an epimorphism stays one after $-\\times W$, Step 2), and on each member every sheaf of the family is $\\coprod_{M}W$ for a finite set $M$. A morphism $\\coprod_MW\\to\\coprod_NW$ over $W$ decomposes, by finite extensivity [lem-trf-set-sheaf-finite-extensivity] applied to the finitely many maps $W\\to\\coprod_NW$, along a finite decomposition $W=\\coprod_cW_c$ into summands on each of which it is $\\coprod_MW_c\\to\\coprod_NW_c$ induced by a map of finite sets; replacing $W$ by the $W_c$ keeps a finite epimorphic family of $1$. Finite limits and coproducts commute with $-\\times W_c$ (limits by construction of the slice, coproducts by Step 2 [lem-weil-pbc-sheafification-sets-exact]), so on each member the terminal object, products, equalizers and finite coproducts are $\\coprod_LW_c$ for the corresponding finite set $L$ (one point, product, equalizer, disjoint union). This proves closure under finite limits and finite coproducts, the empty cases being the constant sheaves on one point and on $\\emptyset$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-set-sheaf-finite-extensivity",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 093P, Lemma 093S(1), together with the finite-limit and finite-colimit argument for finite locally constant sheaves"
+   }
+  },
+  {
+   "text": "Given $\\varphi:F\\to G$ between finite locally constant sheaves, take the finite refinement of Step 3, on each member $W$ of which $\\varphi\\times W$ is $\\coprod_MW\\to\\coprod_NW$ induced by a map of finite sets $f:M\\to N$. Images commute with $-\\times W$ (an image is the equalizer of the cokernel pair, and $-\\times W$ preserves pushouts by Step 2 and finite limits), and the image of $\\coprod_MW\\to\\coprod_NW$ is the summand $\\coprod_{f(M)}W$: the inclusion of a summand is monic [lem-trf-set-sheaf-finite-extensivity] and $\\coprod_MW\\to\\coprod_{f(M)}W$ is split epi on each summand. So $\\operatorname{im}(\\varphi)\\times W\\simeq\\coprod_{f(M)}W$ on each of finitely many members, and the image is finite locally constant.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-trf-set-sheaf-finite-extensivity",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 093P, Lemma 093S(1), morphism and image closure for finite locally constant sheaves"
+   }
+  },
+  {
+   "text": "Let $R\\rightrightarrows F$ be an internal equivalence relation with $R$ and $F$ finite locally constant. Take the finite refinement of Step 3 for both projections; on each member $W$ they are $\\coprod_NW\\rightrightarrows\\coprod_MW$ induced by maps of finite sets $a,b:N\\to M$. The quotient $F/R$ is the coequalizer of $R\\rightrightarrows F$, and $-\\times W$ preserves coequalizers (Step 2), so $(F/R)\\times W$ is the coequalizer of $\\coprod_NW\\rightrightarrows\\coprod_MW$, which is $\\coprod_{Q}W$ with $Q$ the coequalizer of $a,b$ in finite sets (a coequalizer of a map of coproducts of the single object $W$ is computed on index sets, since $\\coprod_{(-)}W$ is a left adjoint from sets to $\\mathcal E/W$). $Q$ is finite, so $F/R$ is finite locally constant. This is the finite quotient argument behind Stacks 093S(1), with no infinitary operation.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-trf-set-sheaf-finite-extensivity",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 093P, Lemma 093U(1), kernel/equivalence-relation and quotient closure for finite locally constant sheaves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coherent-topos",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-coherent-epimorphic-quotient",
+  "lem-trf-coherent-object-approximation",
+  "lem-trf-finitary-site-coherent-generators",
+  "lem-trf-set-sheaf-finite-extensivity",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 093P, Definition 093Q and Lemmas 093R, 093S, 093U; finite-cover coherence expansion following Orgogozo author draft §8.1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-coherent-set-criterion",
@@ -59,9 +149,10 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "§8.1 coherence criterion: finite locally constant set sheaves on the finite-cover triple sites are coherent and are stable under the finite operations used in the generator argument.",
+   "place": "§8.1 coherence criterion: finite locally constant set sheaves on finite-cover triple sites are coherent and stable under finite limits, finite coproducts, images, and quotients.",
    "via": [
     "lem-trf-coherent-set-criterion",
+    "lem-trf-oriented-constructible-coherent",
     "lem-trf-psi-constructibility-descent",
     "lem-trf-psi-good-oriented-cohomology-strata",
     "lem-trf-nearby-cycle-sheaf-finiteness",
@@ -71,5 +162,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-locally-constant-coherent",
+  "worker": "stage1",
+  "summary": "Audited the imported finite locally constant coherence and finite-operation statement. No finished Lean declaration or duplicate DAG node exists. The split keeps the finite-cover coherence proof in the item: finite constant trivializations give a finite coherent epimorphism, its kernel pair is quasi-compact after finite refinement, and the coherent quotient criterion applies; common finite refinements then prove closure under finite limits, coproducts, images and quotients. Existing generic coherent-topos and finite-extensivity nodes are cited rather than duplicated.",
+  "blueprint": "Realizes the §8.1 coherence criterion sentence used by the ancestor proof: finite locally constant set sheaves on finite-cover sites are coherent and stable under the listed finite operations.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-c63def836",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-c63def836 (reviewer sub-agent of L); spot-checked: I read in full the item, every cited statement, the citer lem-trf-coherent-set-criterion, unit sk-i-curve-zero and Stacks sites-modules 093P (093Q, 093R, 093S(1), 093U). The statement is true and is used as stated, so I did not change or weaken it. Small cases checked: the topos where 1 is 0, empty limits and coproducts, identity and constant maps, the equality and full relations, and a two-point constant sheaf. The citer's use with arbitrary slice objects is covered. All cited lemmas are in the unit, Mathlib leaves or definitions. No new nodes, no duplicates, no SGA citation, no tool_uses needed. Three repairable faults are corrected in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-locally-constant-coherent.json. (1) Steps 1-2 took the trivializing U_i to be representable (H_{U_i}), but the statement allows any objects of E. Added the reduction: 1 is coherent, so a finite subfamily of representables H_V trivializes F. (2) Step 2 wrongly said P is constant on each refined member and that the kernel pair is locally a coproduct of representables (E3). Rewrote it: R is a finite coproduct of equalizers, each a summand of a coherent W_j by extensivity. A summand of a quasi-compact object is quasi-compact, so R is quasi-compact and lem-trf-coherent-epimorphic-quotient gives coherence. (3) Steps 3-5 used, uncited, that -xW preserves colimits, epimorphisms, images and coequalizers. They now justify it from sheafification commuting with finite products (lem-weil-pbc-sheafification-sets-exact, a Mathlib leaf), and step 3 writes out the 093S(1) decomposition of morphisms. proof_deps updated. blueprint.from.via corrected to put the creator lem-trf-coherent-set-criterion first, followed by the creator's own via. The merge may need to apply this field by hand. Details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
