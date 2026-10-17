@@ -145,11 +145,9 @@ theorem subsingleton_sheafH_rootsOfUnitySheaf_line {n : ℕ} (hn : (n : k) ≠ 0
       q) := by
   have hn0 := pos_of_natCast_ne_zero hn
   obtain rfl | hq := Nat.eq_or_lt_of_le hq
-  · obtain ⟨-, -, -, h⟩ := IsCurve.sheafH_rootsOfUnitySheaf_of_subsingleton
-      (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) n hn
-      (IsCurve.subsingleton_cohomologicalBrauerGroup
-        (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)))
-    obtain ⟨e⟩ := h (exists_pow_eq_units_line n (exists_pow_eq_units_of_isAlgClosed hn0))
+  · obtain ⟨e⟩ := Scheme.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one _ n
+      (isUnit_natCast_of_ne_zero (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) hn)
+      (exists_pow_eq_units_line n (exists_pow_eq_units_of_isAlgClosed hn0))
     have := subsingleton_cohomologicalPicardGroup_line (k := k)
     exact e.toEquiv.subsingleton
   · exact IsCurve.subsingleton_sheafH_of_two_le_of_isAffine
