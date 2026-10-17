@@ -12,7 +12,9 @@
   "def-weil-pbc-simplicial-object",
   "def-trf-geometric-morphism",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-trf-total-site-component-restriction"
  ],
  "proof": [
   {
@@ -166,5 +168,29 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-303323efe (reviewer sub-agent of L); spot-checked: The mathematics is correct after two small repairs: cite lem-trf-total-site-component-restriction (and lem-pe-constant-left-module-inverse-image) for componentwise kernels/images and update proof_deps; correct the child lemma’s ordinary Λ-module coefficient wording. Corrected files are under fixes/dag/nodes/sec-trace-formula/. Sources, route, edge cases, and Mathlib searches were checked in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4dca9e1e3",
+  "group": "NL",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, hypotheses, conclusions, universes, edge cases and verbatim signature. Per-file compilation reproduced cleanly through scompile.py; local overlay refusal and successful server confirmation documented. No substantive defects; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.TotalSiteFreeModuleResolution",
+  "declaration": "CategoryTheory.totalSiteFreeModuleResolution",
+  "declarations": [
+   "CategoryTheory.TotalSiteConstantModuleDiagram",
+   "CategoryTheory.TotalSiteConstantModuleDiagram.base",
+   "CategoryTheory.TotalSiteConstantModuleDiagram.summands",
+   "CategoryTheory.totalSiteFreeModuleResolution"
+  ],
+  "file": "lean/Sheaf/TraceFormula/TotalSiteFreeModuleResolution.lean",
+  "statement": "theorem totalSiteFreeModuleResolution {C : SimplexCategoryᵒᵖ → Type u} [∀ i, SmallCategory (C i)] {J : ∀ i, GrothendieckTopology (C i)} {D : Type u} [SmallCategory D] {K : GrothendieckTopology D} {Λ : Type u} [CommRing Λ] [∀ i, HasWeakSheafify (J i) RingCat.{u}] [HasWeakSheafify K RingCat.{u}] {T : Type v} [Category.{u} T] [Abelian T] (S : TotalSiteConstantModuleDiagram C J D K Λ T) : ∃ (a : Modules K Λ ⥤ T) (ea : ∀ (G : Modules K Λ) (m : SimplexCategoryᵒᵖ), (S.system.component m).obj (a.obj G) ≅ S.base G m) (P : Modules K Λ ⥤ ChainComplex T ℕ) (e : ∀ (G : Modules K Λ) (p : ℕ) (m : SimplexCategoryᵒᵖ), (S.system.component m).obj ((P.obj G).X p) ≅ ∐ S.summands G p m) (d : ∀ (G : Modules K Λ) (p : ℕ) (i : Fin (p + 2)), (P.obj G).X (p + 1) ⟶ (P.obj G).X p) (ε : ∀ G : Modules K Λ, (P.obj G).X 0 ⟶ a.obj G), (∀ {G H : Modules K Λ} (h : G ⟶ H) (m : SimplexCategoryᵒᵖ), (S.system.component m).map (a.map h) ≫ (ea H m).hom = (ea G m).hom ≫ (S.augmentationLift m).moduleFunctor.map h) ∧ (∀ (G : Modules K Λ) (m k : SimplexCategoryᵒᵖ) (β : k ⟶ m), (S.lift β).moduleFunctor.map (ea G m).inv ≫ S.system.transition (a.obj G) m k β ≫ (ea G k).hom = (S.augment β).hom.app G) ∧ (∀ {G H : Modules K Λ} (h : G ⟶ H) (p : ℕ) (m : SimplexCategoryᵒᵖ) (α : SimplexCategory.mk p ⟶ m.unop), Sigma.ι (S.summands G p m) α ≫ (e G p m).inv ≫ (S.system.component m).map ((P.map h).f p) ≫ (e H p m).hom = (S.augmentationLift m).moduleFunctor.map h ≫ Sigma.ι (S.summands H p m) α) ∧ (∀ (G : Modules K Λ) (p : ℕ) (m k : SimplexCategoryᵒᵖ) (β : k ⟶ m) (α : SimplexCategory.mk p ⟶ m.unop), (S.lift β).moduleFunctor.map (Sigma.ι (S.summands G p m) α ≫ (e G p m).inv) ≫ S.system.transition ((P.obj G).X p) m k β ≫ (e G p k).hom = (S.augment β).hom.app G ≫ Sigma.ι (S.summands G p k) (α ≫ β.unop)) ∧ (∀ (G : Modules K Λ) (p : ℕ) (i : Fin (p + 2)) (m : SimplexCategoryᵒᵖ) (α : SimplexCategory.mk (p + 1) ⟶ m.unop), Sigma.ι (S.summands G (p + 1) m) α ≫ (e G (p + 1) m).inv ≫ (S.system.component m).map (d G p i) ≫ (e G p m).hom = Sigma.ι (S.summands G p m) (SimplexCategory.δ i ≫ α)) ∧ (∀ (G : Modules K Λ) (p : ℕ), (P.obj G).d (p + 1) p = ∑ i : Fin (p + 2), (-1 : ℤ) ^ (i : ℕ) • d G p i) ∧ (∀ {G H : Modules K Λ} (h : G ⟶ H), (P.map h).f 0 ≫ ε H = ε G ≫ a.map h) ∧ (∀ (G : Modules K Λ) (m : SimplexCategoryᵒᵖ) (α : SimplexCategory.mk 0 ⟶ m.unop), Sigma.ι (S.summands G 0 m) α ≫ (e G 0 m).inv ≫ (S.system.component m).map (ε G) ≫ (ea G m).hom = 𝟙 (S.base G m)) ∧ (∀ G : Modules K Λ, (P.obj G).d 1 0 ≫ ε G = 0 ∧ Epi (ε G) ∧ (∀ n : ℕ, (P.obj G).ExactAt (n + 1)) ∧ ∃ h : (P.obj G).d 1 0 ≫ ε G = 0, (ShortComplex.mk _ _ h).Exact) ∧ (∃ Φ : ∀ (p : ℕ) (G : Modules K Λ) (I : T), ((P.obj G).X p ⟶ I) ≃ (S.base G (op (SimplexCategory.mk p)) ⟶ (S.system.component (op (SimplexCategory.mk p))).obj I), (∀ (p : ℕ) (G : Modules K Λ) (I : T) (f : (P.obj G).X p ⟶ I), Φ p G I f = Sigma.ι (S.summands G p (op (SimplexCategory.mk p))) (𝟙 _) ≫ (e G p (op (SimplexCategory.mk p))).inv ≫ (S.system.component (op (SimplexCategory.mk p))).map f) ∧ (∀ (p : ℕ) (G : Modules K Λ) (I : T) (f : S.base G (op (SimplexCategory.mk p)) ⟶ (S.system.component (op (SimplexCategory.mk p))).obj I) (m : SimplexCategoryᵒᵖ) (α : SimplexCategory.mk p ⟶ m.unop), Sigma.ι (S.summands G p m) α ≫ (e G p m).inv ≫ (S.system.component m).map ((Φ p G I).symm f) = (S.augment α.op).inv.app G ≫ (S.lift α.op).moduleFunctor.map f ≫ S.system.transition I (op (SimplexCategory.mk p)) m α.op) ∧ (∀ (p : ℕ) (G : Modules K Λ) (I I' : T) (k : I ⟶ I') (f : (P.obj G).X p ⟶ I), Φ p G I' (f ≫ k) = Φ p G I f ≫ (S.system.component (op (SimplexCategory.mk p))).map k) ∧ (∀ (p : ℕ) (G H : Modules K Λ) (h : G ⟶ H) (I : T) (f : (P.obj H).X p ⟶ I), Φ p G I ((P.map h).f p ≫ f) = (S.augmentationLift (op (SimplexCategory.mk p))).moduleFunctor.map h ≫ Φ p H I f) ∧ (∀ G : Modules K Λ, Φ 0 G (a.obj G) (ε G) = (ea G (op (SimplexCategory.mk 0))).inv))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

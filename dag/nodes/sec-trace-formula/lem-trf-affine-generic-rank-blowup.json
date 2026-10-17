@@ -15,7 +15,9 @@
   "def-weil-pbc-module-localization",
   "def-weil-residue-field",
   "def-weil-affine-spectrum",
-  "def-weil-pbc-free-module"
+  "def-weil-pbc-free-module",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-power-torsion"
  ],
  "proof": [
   {
@@ -256,5 +258,30 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-e8b659f80 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks Tag 0810 (flat.tex, lemma-helper-blowup-affine-space), Tag 05FT, Tag 080Z (more-algebra) and Tag 05DH. The item statement matches 0810 hypothesis by hypothesis and was not changed. q_p=pB follows from flatness, and 'nonzero in the fibre' is equivalent to g not in p'S'. I checked all 10 steps: the kernel generators zA and 1-zu, the coordinate ideal C (using the endomorphism i∘(b·)∘ρ), V(I)=V(h), cancelling h to get CR*=cR*, the divided coordinates generating the unit ideal, 080Z applied locally with ker(c) inside the a-power torsion, spreading the generators out, Fit_{r-1} vanishing through the new injection node and regularity of a, and the transfer back to N. Both corrections to the source are right: (1) R'_a=R_f fails, for example R=k[x,y], I=(x), a=xy gives R'=R[1/y]; (2) the divided generator need not be a unit, for example R=k, B=k[x], J=(x). All three new nodes are true, give only a statement, introduce their own objects, are not duplicates (rg found no node for 05FT, 080Z or 05DH; lem-trf-free-subtraction-flatness and the two pbc localization-injectivity nodes state different things) and do not restate a clause of the item. Mathlib has no Fitting ideals. I accepted the Nagata chart lemmas as tool uses. Nothing cites SGA. I made no changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0f01a30a7",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Reviewed the immutable delivery against Tag 0810 and all statement dependencies. Repaired the H9 fibre-ring convention using Ideal.Fiber; complete replacements are in fixes/. Original and corrected modules compile cleanly through scompile.py. Findings and checks are recorded in review.md; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.AffineGenericRankBlowup",
+  "declaration": "AlgebraicGeometry.exists_affine_generic_rank_blowup",
+  "declarations": [
+   "AlgebraicGeometry.affineGenericRankChartAlgebra",
+   "AlgebraicGeometry.affineGenericRankChartModule",
+   "AlgebraicGeometry.exists_affine_generic_rank_blowup"
+  ],
+  "file": "lean/Sheaf/TraceFormula/AffineGenericRankBlowup.lean",
+  "statement": "theorem exists_affine_generic_rank_blowup (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B] (N : ModuleCat.{w} B) (hflat : RingHom.Flat (algebraMap R B)) [Algebra.FinitePresentation R B] [Module.Finite B N] (h : R) (r : ℕ) (hfp : Module.FinitePresentation (Localization.Away (algebraMap R B h)) (LocalizedModule.Away (algebraMap R B h) N)) (hgeom : ∀ (p : PrimeSpectrum R) (K : Type (max u v w)) [Field K] [Algebra (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal)) K] [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal)) K], IsDomain (B ⊗[R] K)) (hfree : ∀ (p : PrimeSpectrum R) (q : PrimeSpectrum B), q.asIdeal = RingHom.ker (Algebra.TensorProduct.includeRight : B →ₐ[R] p.asIdeal.Fiber B).toRingHom → h ∉ p.asIdeal → Nonempty (LocalizedModule.AtPrime q.asIdeal N ≃ₗ[Localization.AtPrime q.asIdeal] (Fin r → Localization.AtPrime q.asIdeal))) : ∃ I : Ideal R, I.FG ∧ I.radical = (Ideal.span {h}).radical ∧ ∀ (a : R), a ∈ I → ∀ p' : PrimeSpectrum (AffineBlowup.chartRing I a : Type u), ∃ g : affineGenericRankChartAlgebra R B I a, g ∉ p'.asIdeal.map (Algebra.TensorProduct.includeRight (R := R) (A := B) (B := (AffineBlowup.chartRing I a : Type u))).toRingHom ∧ Nonempty (LocalizedModule.Away g (affineGenericRankChartModule R B N I a) ≃ₗ[Localization.Away g] (Fin r → Localization.Away g))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The two helper declarations construct only the chart algebra and module explicitly introduced in this node, using the existing chartRing and powTorsion notions. The generic-prime kernel equality specifies exactly the inverse image of the zero prime. Radical equality is equivalent to equality of vanishing sets; the nonzero fibre-image clause is equivalently g outside the extended base prime, by flatness. No statement correction is made. Maintainer convention repair: the generic-fibre map now uses Mathlib Ideal.Fiber and its canonical includeRight; tensor symmetry identifies its kernel with the delivered includeLeft kernel. No mathematical statement change.",
+  "fixed_by": "NT-stage2-Codex-0f01a30a7"
  }
 }
