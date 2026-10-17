@@ -29,9 +29,166 @@
   "def-coef-infinity-relative-cone",
   "lem-coef-infinity-isofibration-exponentiation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Fun}(C,D)$ and $Y=\\operatorname{Fun}(A,D)\\times_{\\operatorname{Fun}(A,B)}\\operatorname{Fun}(C,B)$, and let $V:X\\to Y$ send $F$ to $(F|_A,pF)$. By [lem-coef-infinity-isofibration-exponentiation] this is an isofibration between quasicategories. The same is true for the parameter corner $P_n:\\operatorname{Fun}(\\Delta^n,D)\\to\\operatorname{Fun}(\\partial\\Delta^n,D)\\times_{\\operatorname{Fun}(\\partial\\Delta^n,B)}\\operatorname{Fun}(\\Delta^n,B)$. Degreewise pullbacks of inner fibrations are inner fibrations (pull back each horn problem), so the fibers over $s$ used in the statement are quasicategories. Their full subcategories $R,T$ are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. For any small $L$, write $W_L:\\operatorname{Fun}(L^{\\triangleleft},D)\\to\\operatorname{Fun}(L,D)\\times_{\\operatorname{Fun}(L,B)}\\operatorname{Fun}(L^{\\triangleleft},B)$ for its cone corner. By [lem-coef-infinity-relative-cone-initial-corner], $W_L$ is an isofibration and a cone is a $p$-limit precisely when its vertex is $W_L$-final, with the boundary-filling meaning of [lem-coef-infinity-relative-initial-boundary].",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-relative-cone-initial-corner",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030F",
+    "place": "7.3.6.7 (030F), proof, exponential corners; 7.1.6.13 (02XB) and the final dual of 7.1.5.17 (02WS)."
+   }
+  },
+  {
+   "text": "Here is the parameter calculation needed below, written out rather than assumed as a relative version of an absolute-cone theorem. Let $w:E\\to F$ be any isofibration of quasicategories, $n>0$, and $Q:\\Delta^n\\to E$ with $Q(n)$ $w$-final. Then $Q$ is final relative to the exponential boundary corner $w_n$. Indeed, a positive-dimensional boundary-lifting test for this assertion, in dimension $m>0$, is a lift into $E$ from $(\\partial\\Delta^m\\times\\Delta^n)\\cup(\\Delta^m\\times\\partial\\Delta^n)$ over a prescribed map into $F$, with its last row $\\{m\\}\\times\\Delta^n$ equal to $Q$. Filter the product relative to this union by nondegenerate simplices and their full boundaries, as in [lem-coef-infinity-monomorphism-boundary-cells]. Every missing simplex projects surjectively onto both $[m]$ and $[n]$; otherwise it already lies in the union. Its terminal vertex is therefore $(m,n)$, whose prescribed image is the $w$-final object $Q(n)$, and its dimension is positive. The final boundary-filling criterion of [lem-coef-infinity-relative-initial-boundary] fills it. Induction over these cells gives every required lift, so that criterion applied to $w_n$ proves the assertion. Apply this with $w=W_L$. Interchanging the two functor variables identifies $(W_L)_n$ with the cone corner for $P_n$: both targets specify a $D$-diagram on $L\\times\\Delta^n$, a $D$-cone family on $L^{\\triangleleft}\\times\\partial\\Delta^n$, and a $B$-cone family on $L^{\\triangleleft}\\times\\Delta^n$, with their common restrictions equal. Thus any cone family whose last-parameter cone is a $p$-limit is a $P_n$-limit diagram, by [lem-coef-infinity-relative-cone-initial-corner]. The exponential corners here are isofibrations by [lem-coef-infinity-isofibration-exponentiation].",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-infinity-relative-cone-initial-corner",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030F",
+    "place": "7.3.6.7 (030F), local parameter-cone argument; direct boundary-cell proof of the final dual of the calculation in HTT Lemma 4.3.2.10 (printed p.278)."
+   }
+  },
+  {
+   "text": "Fix any pointwise $p$-right Kan extended $H:C\\to D$, with no fixed-base assumption needed for this paragraph. We show that $H$ is $V$-final. A boundary test of positive dimension $n$ for $V$ has a prescribed map $F_{\\partial}:C\\times\\partial\\Delta^n\\to D$, a map $h:A\\times\\Delta^n\\to D$, and a prescribed $B$-map on $C\\times\\Delta^n$, agreeing on overlaps, with the last boundary vertex $F_n=H$. Curry this as the lifting problem $A\\subset C$ against $P_n$ from step 1. At each $c$, its local cone problem has boundary $L_c\\to\\operatorname{Fun}(\\Delta^n,D)$ and a prescribed cone in the target of $P_n$. Equivalently it is a boundary-lifting problem $\\partial\\Delta^n\\to\\operatorname{Fun}(L_c^{\\triangleleft},D)$ for $W_{L_c}$; its final vertex is $Hl_c$, a $p$-limit and hence $W_{L_c}$-final. The final boundary criterion gives a cone family with exactly the required boundary and base. Step 2 makes this a $P_n$-limit cone. Now the right-hand clause of [lem-coef-infinity-relative-kan-existence], applied to the full inclusion $A\\subset C$ and the isofibration $P_n$, gives the global lift $C\\to\\operatorname{Fun}(\\Delta^n,D)$. Uncurrying solves the original boundary problem exactly. The final criterion in [lem-coef-infinity-relative-initial-boundary] proves that $H$ is $V$-final. Smallness is unchanged: each $L_c$ and each finite simplex is small in the stated universe.",
+   "uses": [
+    "lem-coef-infinity-relative-kan-existence",
+    "lem-coef-infinity-relative-cone-initial-corner",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030F",
+    "place": "7.3.6.7 (030F), proof, equations (7.35)-(7.37), right-hand dual; local existence is 7.3.5.5 (0302)."
+   }
+  },
+  {
+   "text": "In particular, for arbitrary $F:C\\to D$ and pointwise $p$-right Kan extended $H$, restriction gives a homotopy pullback square with upper row $\\operatorname{Map}_{\\operatorname{Fun}(C,D)}(F,H)\\to\\operatorname{Map}_{\\operatorname{Fun}(A,D)}(F|_A,H|_A)$ and lower row the corresponding maps for $pF,pH$ in $B$. To justify the pullback model, use the arrow mapping spaces $U$ of [lem-coef-infinity-pinch-comparison]. The mapping space $U_Y(VF,VH)$ is the degreewise pullback of the three $U$ spaces for the factors of $Y$, because both functor objects and endpoint fibers commute with degreewise pullbacks. The leg arising from $\\operatorname{Fun}(A,p)$ is a Kan fibration by [lem-coef-infinity-isofibration-exponentiation], so [lem-coef-kan-pullback-path-comparison] identifies this strict pullback with its path pullback. The natural pinch equivalences transfer the result to the stipulated right-pinched spaces; [lem-coef-kan-homotopy-pullback-invariance] makes this replacement legitimate. Step 3 says precisely that the remaining comparison from $\\operatorname{Map}_X(F,H)$ to $\\operatorname{Map}_Y(VF,VH)$ is an equivalence, by the mapping-space definition of relative-final in [lem-coef-infinity-relative-initial-boundary]. This proves the asserted square for all $F$, with its actual restriction maps and all coherent homotopies.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030F",
+    "place": "7.3.6.7 (030F), relative mapping-space square (7.34), right-hand dual; 4.6.1.22 (01P8) and the natural pinch comparison."
+   }
+  },
+  {
+   "text": "Restriction sends $R$ into $T$, since each $Hl_c$ itself supplies the required local cone. For a vertex $h$ of $T$, the exact local cones in the definition of $T$ satisfy all hypotheses of the right-hand clause of [lem-coef-infinity-relative-kan-existence]; hence there is $H\\in R$ restricting exactly to $h$. This is the dimension-zero boundary lift. For a boundary lifting problem $\\partial\\Delta^n\\to R$ over a simplex $\\Delta^n\\to T$, $n>0$, regard its data as a boundary problem for $V$ with base component constantly $s$. Its last vertex is in $R$, so step 3 supplies its filler, preserving $s$ exactly. Every vertex of $\\Delta^n$ already belongs to its boundary; hence every vertex of the filler is in $R$. Since $R$ is full in the fixed-base functor category, the entire filler lies in $R$. This proves the boundary lifting property in every dimension, that is, the asserted trivial Kan fibration, with the convention of [def-weil-pbc-trivial-kan-fibration]. No condition that all diagrams on $A$ be extendible has been used.",
+   "uses": [
+    "lem-coef-infinity-relative-kan-existence",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.3.2.15 (printed p.284), opposite dual; 7.3.5.5 (0302) and step 3 for positive-dimensional lifting."
+   }
+  },
+  {
+   "text": "The boundary lifts extend to lifts against every simplicial monomorphism: use the relative skeletal filtration of [lem-coef-infinity-monomorphism-boundary-cells], choose the lifts for its attached boundaries, and take their compatible unions at limit stages. In the Joyal model structure of [lem-coef-joyal-model-structure], cofibrations are exactly the monomorphisms and their right orthogonal consists of trivial fibrations. Thus $R\\to T$ is a categorical equivalence. Both sides are quasicategories by step 1, so [lem-coef-joyal-quasicategory-characterizations](2) makes this an equivalence of infinity categories with a coherent quasi-inverse. The preceding argument actually proved boundary lifting, and so retains transformations and higher simplices with any prescribed compatible boundary, not just this equivalence consequence.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.3.2.15 (printed p.284), equivalence consequence; Joyal model recognition."
+   }
+  },
+  {
+   "text": "For the cone-comparison clause put $s_H=pH$, independently of the previously fixed base functor. For its existence assertion suppose $q_A$ is a $p$-limit over the specified $b|_{A^{\\triangleleft}}$. First apply [lem-coef-infinity-relative-kan-existence] to the full inclusion $A\\subset C^{\\triangleleft}$, with boundary $H|_A$ and base $b$. Here $C^{\\triangleleft}$ is a small quasicategory: in a mixed inner horn, the apex vertices form an initial block, and a face deleting an apex vertex other than the missing inner face supplies the entire $C$-tail; it determines the mixed filler. Horns entirely in $C$ fill in $C$, and horns entirely at the apex are degenerate. This is the join and horn description of [def-coef-infinity-relative-cone] and [def-cbc-enhanced-diagrams-cones]. For $c\\in C$, its local coslice with $A$ is exactly $L_c$, since there is no arrow from $C$ back to the new apex; $Hl_c$ supplies its local $p$-limit. At the apex $*$ the local coslice is exactly $A$ (a simplex is the apex followed by an $A$-simplex), and $q_A$ supplies its local limit. The theorem therefore produces $q':C^{\\triangleleft}\\to D$ over exactly $b$, restricting exactly to $H|_A$, pointwise right Kan extended from $A$. Consequently $q'|_C$ is relatively right Kan extended from $A$, and $q'|_{A^{\\triangleleft}}$ is a $p$-limit cone over precisely the same boundary and base as $q_A$. We next arrange the larger prescribed boundary exactly, rather than identifying these cones without a lifting argument.",
+   "uses": [
+    "lem-coef-infinity-relative-kan-existence",
+    "def-coef-infinity-relative-cone",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.3.2.7 (printed pp.274-277), cone comparison, opposite dual; exact-existence construction via 7.3.5.5 (0302)."
+   }
+  },
+  {
+   "text": "The two cones $q'|_{A^{\\triangleleft}}$ and $q_A$ are final relative to $W_A$ by [lem-coef-infinity-relative-cone-initial-corner], and have the same image $(H|_A,b|_{A^{\\triangleleft}})$. Apply the final boundary criterion of [lem-coef-infinity-relative-initial-boundary] in dimension one, with this image constant, to obtain comparison edges in both directions over its identity. Apply it in dimension two to the boundaries consisting of these two edges and the appropriate identity edge. Their final vertices are again one of the two relative-final cones; the resulting triangles exhibit the two edges as inverses, using the equivalence convention of [def-cbc-enhanced-diagrams-cones]. In particular there is an equivalence from $q'|_{A^{\\triangleleft}}$ to $q_A$ whose restriction to $A$ and image in $B$ are strictly degenerate transformations. The exponential corner for $A^{\\triangleleft}\\subset C^{\\triangleleft}$ is an isofibration by [lem-coef-infinity-isofibration-exponentiation]. Lift this equivalence starting at $q'$ and keeping the full base $b$ constant. Its target $q''$ therefore satisfies $q''|_{A^{\\triangleleft}}=q_A$ and $pq''=b$ exactly. The resulting equivalence $q'\\simeq q''$ preserves each local relative-limit condition by the right-hand dual of [lem-coef-infinity-relative-cone-equivalence](1). Hence $H''=q''|_C$ is still pointwise $p$-right Kan extended from $A$, and $H''|_A=H|_A$ exactly.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-initial-corner",
+    "lem-coef-infinity-relative-initial-boundary",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030F",
+    "place": "7.1.5.17 (02WS), final boundary test in dimensions 1 and 2; 4.4.5.1 (01F1), exact equivalence lifting; 7.1.6.9 (02X4), invariance."
+   }
+  },
+  {
+   "text": "Both $H''$ and $H$ are $V$-final by step 3 and have identical image $(H|_A,s_H)$. The same dimension-one comparisons and dimension-two inverse triangles, now for $V$ and over the constant image $(H|_A,s_H)$, give edges $e:H''\\to H$ and $f:H\\to H''$ of $\\operatorname{Fun}(C,D)$ and $2$-simplices $\\sigma,\\tau$ witnessing $fe\\simeq\\operatorname{id}_{H''}$ and $ef\\simeq\\operatorname{id}_H$, all of whose restrictions to $A$ are degenerate at $H|_A$ and whose images under $p$ are degenerate at $s_H$. This uses the final boundary test of [lem-coef-infinity-relative-initial-boundary] and the definition of equivalence in [def-cbc-enhanced-diagrams-cones]. Put $K=C\\cup_A A^{\\triangleleft}\\subset C^{\\triangleleft}$; since products with $\\Delta^r$ preserve this pushout, $K\\times\\Delta^r=(C\\times\\Delta^r)\\cup_{A\\times\\Delta^r}(A^{\\triangleleft}\\times\\Delta^r)$. Glue $e,f,\\sigma,\\tau$ on $C$ to the degenerate edges and $2$-simplices at $q_A$ on $A^{\\triangleleft}$; they agree exactly on $A$, where both are degenerate at $H|_A$. This gives an edge $g$ of $\\operatorname{Fun}(K,D)$ from $q''|_K$ to $(H,q_A)$, with inverse and both inverse triangles, all lying over the degenerate simplices at $b|_K$. Hence $(g,\\operatorname{id}_b)$ together with these witnesses paired with degenerate simplices at $b$ is an equivalence edge, in the sense of [def-cbc-enhanced-diagrams-cones], of the pullback $\\operatorname{Fun}(K,D)\\times_{\\operatorname{Fun}(K,B)}\\operatorname{Fun}(C^{\\triangleleft},B)$ itself, not merely of its first factor. Apply the isofibration corner of [lem-coef-infinity-isofibration-exponentiation] for the monomorphism $K\\subset C^{\\triangleleft}$, lifting this equivalence from $q''$ over the fixed $b$. The target of this lift is the desired $q$, with $q|_C=H$, $q|_{A^{\\triangleleft}}=q_A$ and $pq=b$ all as exact equalities. The simplicial set $K$ need not be a quasicategory: exponentiation allows every small monomorphism.",
+   "uses": [
+    "lem-coef-infinity-relative-initial-boundary",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030F",
+    "place": "7.3.6.7 (030F), relative-final universal property, and 4.4.5.1 (01F1), exponential lifting with fixed base; strict cone comparison."
+   }
+  },
+  {
+   "text": "Finally take any cone $q:C^{\\triangleleft}\\to D$ with boundary $H$, prescribed base $b$, and restriction $q_A$, without supposing either cone limiting. Fix $z\\in D$ and put $x=q(*)$. Its constant-source testing square has upper row $\\operatorname{Map}_D(z,x)\\to\\operatorname{Map}_{\\operatorname{Fun}(C,D)}(\\Delta_Cz,H)$ and lower row the corresponding $B$-spaces. Paste it on the right with the restriction square of step 4, applied to $F=\\Delta_Cz$. The outer rectangle is exactly the constant-source testing square for $q_A$: all arrows come from the given cone and its actual restriction. The right square is a homotopy pullback. Consequently the left square is a homotopy pullback if and only if the outer rectangle is. One can check this cancellation directly with [lem-coef-kan-quillen-right-proper]: replace the two vertical maps below these squares by compatible Kan fibrations, use right properness to preserve their homotopy pullbacks, and identify the iterated ordinary pullback with the ordinary pullback over the outer corner. Equivalently, the two path-pullback comparisons differ by pulling back an equivalence along the fibrational model of $\\operatorname{Map}_B(pz,px)$; right properness and two-out-of-three give the same assertion. By the constant-source test of [lem-coef-infinity-relative-cone-constant-test], the left squares for all $z$ characterize $q$ as a $p$-limit, while the outer rectangles characterize $q_A$. This proves both implications of the claimed universal-property comparison. In conjunction with steps 7-9 it also proves existence over the exact base and boundary whenever $q_A$ is limiting. Only the particular local limits already specified were ever required.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-relative-cone-constant-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.3.2.7 (printed pp.274-277), last assertion, opposite dual; 7.3.6.7 (030F), relative mapping square, and 7.1.6.19 (02X1), constant-source test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-relative-cone-initial-corner",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-relative-kan-existence",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "def-coef-infinity-relative-cone",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-infinity-relative-cone-constant-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/030F",
+  "place": "Agent-written right-hand dual of the proof of Kerodon Proposition 7.3.6.7 (030F), with the product-boundary calculation written explicitly and cone existence rectified twice by isofibration lifting. Also checked against HTT 4.3.2.7, 4.3.2.12-15 and Remark 4.3.2.18. Online sources read; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +231,59 @@
    "results": "{\"t\": \"2026-10-16T21:41:43Z\", \"tool\": \"grep\", \"query\": \"quasicategory|relative.*Kan|Kan.*relative|trivial.*fibration\", \"sub\": \"CategoryTheory/Functor/KanExtension\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:73-90 and Pointwise.lean:798-811; these concern ordinary categories and ordinary terminal right extensions, not a relative functor quasicategory or a trivial Kan fibration. Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:224-235 concerns strict Segal simplicial sets as Type-valued diagrams. The second phrasing still returns ordinary Kan extensions; grep for relative/quasicategorical extensions has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative right Kan extension restriction trivial Kan fibration cone comparison",
+   "results": "8 hits, including CategoryTheory.Functor.coneOfIsRightKanExtension, coneOfIsRightKanExtension_π and isLimitConeOfIsRightKanExtension (Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean), RightExtension.coneAt (Pointwise.lean), and ordinary simplicial-object right extensions.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:45-90 and Pointwise.lean:780-811, and AlgebraicTopology/Quasicategory/Basic.lean:29-105. The Kan extensions are for ordinary Category instances and terminal objects of ordinary extension categories. The quasicategory file supplies primitive inner horn filling, not relative cone or coherent restriction calculus. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRightKanExtension, CategoryTheory.Functor",
+   "results": "0 hits; service reported: loogle: unknown identifier 'IsRightKanExtension'.",
+   "date": "2026-10-17",
+   "verdict": "unavailable: this unqualified identifier was not recognized; reran with the fully qualified quoted name below."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*Kan|Kan.*extension|trivial.*fibration",
+   "results": "25 hits in CategoryTheory/Functor/KanExtension, ordinary Kan-extension definitions including Basic.lean:73-90.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:45-90 and Pointwise.lean:780-811, and AlgebraicTopology/Quasicategory/Basic.lean:29-105. The Kan extensions are for ordinary Category instances and terminal objects of ordinary extension categories. The quasicategory file supplies primitive inner horn filling, not relative cone or coherent restriction calculus. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative right Kan extension restriction of coherent diagrams is a trivial Kan fibration and cones can be checked on the subcategory",
+   "results": "8 hits, including CategoryTheory.Functor.RightExtension.precomp, rightKanExtension, IsRightKanExtension, isPointwiseRightKanExtensionOfIsRightKanExtension and isLimitConeOfIsRightKanExtension, all ordinary CategoryTheory functor statements.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:45-90 and Pointwise.lean:780-811, and AlgebraicTopology/Quasicategory/Basic.lean:29-105. The Kan extensions are for ordinary Category instances and terminal objects of ordinary extension categories. The quasicategory file supplies primitive inner horn filling, not relative cone or coherent restriction calculus. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent right Kan extension along full subcategory universal relative final object of restriction of functors",
+   "results": "8 hits, including CategoryTheory.Functor.pointwiseRightKanExtensionIsUniversal, isUniversalOfIsRightKanExtension, liftOfIsRightKanExtension and RightExtension.IsPointwiseRightKanExtension.isUniversal, ordinary category-theoretic statements.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:45-90 and Pointwise.lean:780-811, and AlgebraicTopology/Quasicategory/Basic.lean:29-105. The Kan extensions are for ordinary Category instances and terminal objects of ordinary extension categories. The quasicategory file supplies primitive inner horn filling, not relative cone or coherent restriction calculus. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Functor.IsRightKanExtension\"",
+   "results": "12 hits, including CategoryTheory.Functor.IsRightKanExtension, isRightKanExtensionAlongEquivalence and isRightKanExtension_iff; signatures explicitly assume ordinary Category instances.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:45-90 and Pointwise.lean:780-811, and AlgebraicTopology/Quasicategory/Basic.lean:29-105. The Kan extensions are for ordinary Category instances and terminal objects of ordinary extension categories. The quasicategory file supplies primitive inner horn filling, not relative cone or coherent restriction calculus. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Kk]an|[Kk]an.?extension|[Ii]sofibration",
+   "results": "0 hits in AlgebraicTopology/Quasicategory.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean:45-90 and Pointwise.lean:780-811, and AlgebraicTopology/Quasicategory/Basic.lean:29-105. The Kan extensions are for ordinary Category instances and terminal objects of ordinary extension categories. The quasicategory file supplies primitive inner horn filling, not relative cone or coherent restriction calculus. No exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-composable-bimodule-operad-segal",
@@ -85,5 +291,29 @@
   "group": "Q77"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-right-kan-universal-restriction",
+  "worker": "stage1",
+  "summary": "Statement preserved. Proved the relative-final universal property of right Kan extensions via local parameter cones, derived restriction boundary lifting and the relative mapping-space square, then constructed the exact cone by local existence and two equivalence lifts. Constant-source tests plus homotopy-pullback cancellation give both directions of cone universality. All inputs already occur in the DAG: zero new nodes and zero Mathlib leaves. No project attachment and no completeness hypothesis.",
+  "blueprint": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Coherent two-sided bar from a bimodule and a left module. Operadic Segal encoding of composable bimodules, before forming or realizing any bar. Supporting input: Construct extension from short paths using relative inert products, and retain transformations and cone universality. Steps 1-6 supply the coherent extension/restriction input; steps 7-10 supply the cone-universality input. This is generic infrastructure for the inherited operadic Segal/bar route, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic closure of coherent functor objects and their full subcategories under the quasicategory condition in step 1; no node in this unit gives a separate replacement, and no geometric unit step is bypassed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-0bf0b5ca8",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-0bf0b5ca8 (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, 10 steps, no new nodes. Also read all 20 cited node statements, the unit record sk-prop-sf-biduality-general, and the sources: HTT 4.3.2.7/4.3.2.15 and Kerodon 030F/0302 (online only; WANTED is recorded and proof_origin is agent). The statement is the fibre over a fixed s of the right-hand dual of HTT 4.3.2.15, with the existing isofibration hypothesis, so nothing is weakened. Steps 1-8 and 10 check out against the cited statements. In step 2's product-cell argument every missing simplex ends at the prescribed final vertex (m,n); m=n=1 checked. In step 3 the local W_{L_c} problems meet every hypothesis of relative-kan-existence. Step 5's dimension-0 lift and the fullness of R give exactly the definition of trivial Kan fibration. The step 7 join argument is checked, including that the local index at the apex is L_* = A. Step 10's pasting uses the naturality of the constant-source test under restriction. Repair to step 9: the glued edge was shown to be an equivalence only in Fun(K,D), via cone-calculus. The isofibration corner needs an equivalence edge in the pullback Fun(K,D)x_{Fun(K,B)}Fun(C^<,B). The fix also glues the inverse and both witness triangles, which lie over degenerate data. Step 9's uses drop cone-calculus, proof_deps is unchanged, and the tool_uses 'why' now names step 1 only. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (generic, step 1). No cycle; no duplicate. The unsplit lem-coef-relative-right-kan-restriction is a special case of this item (it adds 'every h extends') and could cite it in its own split. Edge cases A=C, C empty, A empty, p=id, B a point and empty T pass.; 1 file(s) fixed by the reviewer"
+ }
 }
