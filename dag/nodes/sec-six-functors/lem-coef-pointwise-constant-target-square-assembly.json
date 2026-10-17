@@ -31,9 +31,89 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify the path-space notion with a limiting cospan in the infinity category $\\mathcal S$ of spaces. For Kan complexes $U\\to Z\\leftarrow V$, the Cartesian simplicial Kan model structure is combinatorial and simplicial by [lem-coef-simplicial-presheaf-projective-model], and all its objects are cofibrant (its cofibrations are monomorphisms, as specified in [lem-coef-simplicial-model-coherent-diagrams]). Its simplicial model axiom applied to $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ and $Z\\to *$ makes $Z^{\\Delta^1}\\to Z\\times Z$ a fibration. The constant-path map $Z\\to Z^{\\Delta^1}$ is a weak equivalence: it is the map into the mapping-path replacement of $\\mathrm{id}_Z$ in [lem-cbc-kan-fibration-fiber-criterion]. Thus $Z\\to Z^{\\Delta^1}\\to Z\\times Z$ is a path object. The final clause of [lem-coef-simplicial-model-coherent-diagrams] now states that $U\\times_{Z,\\mathrm{ev}_0}Z^{\\Delta^1}\\times_{\\mathrm{ev}_1,Z}V$ with its two projections and path represents the limit of the cospan in $\\mathcal S$. Consequently the comparison specified in [def-coef-infinity-relative-cone] is an equivalence precisely when the square, with that commutation homotopy, is a limiting cospan cone. This applies both to the assumed pointwise squares and to the square to be proved.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.2.4.1; Proposition A.2.4.4 and Remark A.2.4.5, path-object computation of a fibrant cospan limit"
+   }
+  },
+  {
+   "text": "Here is the needed constant-target mapping calculation, with its comparison map. Let $H:B\\to\\mathcal D$ be any coherent diagram in a quasicategory and let $t\\in\\mathcal D$. Pull the target-fixed arrow right fibration $\\operatorname{Fun}(\\Delta^1,\\mathcal D)\\times_{\\mathrm{ev}_1,\\mathcal D}\\{t\\}\\to\\mathcal D$ back along $H$, obtaining $E_{H,t}\\to B$. By [lem-coef-space-transport-classification] it classifies $F_{H,t}:B^{\\mathrm{op}}\\to\\mathcal S$ with $F_{H,t}(b)\\simeq\\operatorname{Map}_{\\mathcal D}(H(b),t)$; edge transport is precomposition. Put $\\mathcal P=\\operatorname{Fun}(B^{\\mathrm{op}},\\mathcal S)$ and $\\mathbf1=\\Delta_{B^{\\mathrm{op}}}*$. The classification's mapping-space formula, applied from the identity right fibration $B\\to B$ to $E_{H,t}\\to B$, gives $\\operatorname{Map}_{\\mathcal P}(\\mathbf1,F_{H,t})\\simeq\\operatorname{Fun}_{/B}(B,E_{H,t})$. An $n$-simplex of this section space is exactly a map $B\\times\\Delta^n\\times\\Delta^1\\to\\mathcal D$ equal to $H\\circ\\mathrm{pr}_B$ at endpoint $0$ and constantly $t$ at endpoint $1$. Currying identifies it degree by degree with the arrow mapping space $U_{\\operatorname{Fun}(B,\\mathcal D)}(H,\\Delta_Bt)$. The functor category is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus], so the natural right-pinch equivalence of [lem-coef-infinity-pinch-comparison] identifies this with $\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal D)}(H,\\Delta_Bt)$. These comparisons retain all simplices: none asserts equality with a strict degreewise limit of the vertex mapping spaces.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05QS",
+    "place": "Proposition 7.4.1.6 (05QS), right-fibration/contravariant dual and its section-space comparison; Proposition 4.6.5.10 (01L5) for the right-pinch comparison"
+   }
+  },
+  {
+   "text": "Transpose $f$ to $\\widehat f:B\\to\\operatorname{Fun}(K,\\mathcal X)$ using the simplicial exponential identity, and transpose $\\alpha$ to $\\widehat\\alpha:\\widehat f\\to\\Delta_K\\circ a$. Form in $\\mathcal P$ the four diagrams $F_0=F_{a,w}$, $F_1=F_{\\widehat f,\\Delta_Kw}$, $G_0=F_{ra,rw}$, and $G_1=F_{r_K\\widehat f,\\Delta_Krw}$, where $r_K$ is postcomposition by $r$. The upper map $F_0\\to F_1$ sends a component $u:a(b)\\to w$ to $(\\Delta_Ku)\\circ\\alpha_b$; the lower map sends $v:ra(b)\\to rw$ to $(\\Delta_Kv)\\circ r\\alpha_b$. The vertical maps are induced by $r$ and $r_K$. The coherent mapping bifunctor, its precomposition rule, and the composition and pullback compatibility in [lem-coef-space-transport-classification] give this square as a coherent square of $B^{\\mathrm{op}}$-diagrams, with the canonical commutation homotopy inherited from $r$ and $\\alpha$. Naturality of the pinch map under every simplicial functor identifies the maps obtained by applying $\\operatorname{Map}_{\\mathcal P}(\\mathbf1,-)$ with the maps in the requested global square. In particular, currying identifies $\\operatorname{Map}_{\\operatorname{Fun}(B,\\operatorname{Fun}(K,\\mathcal X))}(\\widehat f,\\Delta_B\\Delta_Kw)$ with $\\operatorname{Map}_{\\operatorname{Fun}(B\\times K,\\mathcal X)}(f,\\Delta_{B\\times K}w)$: in every simplicial degree this just reassociates the factors $B,K,\\Delta^n$. Precomposition with $\\widehat\\alpha$ becomes precomposition with $\\alpha$ after $\\mathrm{pr}_B^*$, including the commutation homotopy; the same explicit factor reassociation identifies the lower-right corner and lower horizontal map.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 and Proposition 4.2.4.4, transport and coherent diagram comparison; Kerodon Proposition 4.6.5.10 (01L5), natural right-pinch map"
+   }
+  },
+  {
+   "text": "At every vertex $b$, the square $(F_0(b),F_1(b),G_0(b),G_1(b))$ is precisely the assumed square, with its specified homotopy. Step 1 therefore makes it a limiting cospan cone in $\\mathcal S$. The pointwise-limit clause of [lem-coef-infinity-yoneda-presheaf-limits], applied to the small simplicial set $B^{\\mathrm{op}}$, makes the square of Step 3 a pullback square in $\\mathcal P$: explicitly $F_0\\simeq F_1\\times_{G_1}G_0$, with its given cone. The same node states that covariant representable mapping-space functors preserve all existing small limits. Apply that clause in $\\mathcal P$ to the representable $\\operatorname{Map}_{\\mathcal P}(\\mathbf1,-)$. Its image square is a pullback in spaces. Step 3 identifies that square and its cone with the requested global square. Step 1 identifies its limit with the path pullback of [def-coef-infinity-relative-cone]; the induced comparison has coordinates the two global legs and their canonical commutation path. It is an equivalence, which is exactly the claimed homotopy-pullback assertion. No limit or colimit in $\\mathcal X$ or $\\mathcal Y$ was used, and $r$ was never required to be a fibration. All space-valued diagrams and mapping spaces can be placed in one enlarged universe.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.1.2.3 and its opposite (pointwise limits); Proposition 5.1.3.2 (representables preserve limits)"
+   }
+  },
+  {
+   "text": "If $B=\\varnothing$, both $B$ and $B\\times K$ are empty, and the internal-functor formula in [def-cbc-enhanced-diagrams-cones] gives the terminal simplicial set in every functor category appearing in the four corners. Its right-pinched mapping space has exactly one simplex in every degree. If $K=\\varnothing$, $B\\times K=\\varnothing$, so the two right-hand corners are terminal spaces. The path-pullback formula in [def-coef-infinity-relative-cone] then reads $*\\times_* *^{\\Delta^1}\\times_* C\\cong C$. Thus each pointwise hypothesis is exactly an equivalence on its left column, and the already proved conclusion is exactly the equivalence on the global left column. This also covers $B=K=\\varnothing$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Empty-shape specialization of the explicit internal-functor and path-pullback definitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-simplicial-model-coherent-diagrams",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit assembly from the cited existing node statements, checked against HTT Corollary 5.1.2.3, Proposition 5.1.3.2, Theorem 4.2.4.1 and Remark A.2.4.5, and Kerodon Proposition 7.4.1.6 (05QS). These online references are not archived in literature/; WANTED recorded in report."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +128,31 @@
    "results": "none",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyPullback|IsHomotopyPullback|rightPinch|mappingSpace",
+   "results": "{\"t\": \"2026-10-17T04:23:25Z\", \"tool\": \"grep\", \"query\": \"homotopyPullback|IsHomotopyPullback|rightPinch|mappingSpace\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable functor on the category of space valued presheaves preserves pullback squares computed at each object",
+   "results": "{\"t\": \"2026-10-17T04:23:36Z\", \"tool\": \"leanfinder\", \"query\": \"A representable functor on the category of space valued presheaves preserves pullback squares computed at each object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff\", \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"PresheafOfModules.pullbackObjIsDefined\", \"TopCat.Presheaf.pullback\", \"CategoryTheory.Square.isPullback_iff_map_coyoneda_isPullback\", \"factorsThrough_of_pullbackCondition\", \"TopCat.Presheaf.pullbackObjObjOfImageOpen\", \"CategoryTheory.Functor.relativelyRepresentable.isPullback\"], \"digest\": \"399f19bee73a702d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary categories and Type-valued presheaves; none states the quasicategorical mapping-space and homotopy-pullback assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The space of natural transformations from a homotopy coherent diagram to a constant object is computed by sections of the target fixed arrow right fibration",
+   "results": "{\"t\": \"2026-10-17T04:25:30Z\", \"tool\": \"leansearch\", \"query\": \"The space of natural transformations from a homotopy coherent diagram to a constant object is computed by sections of the target fixed arrow right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sectionsEquivHom\", \"CategoryTheory.CostructuredArrow.CreatesConnected.natTransInCostructuredArrow\", \"CategoryTheory.Limits.compCoyonedaSectionsEquiv_apply_app\", \"CategoryTheory.Limits.opCompYonedaSectionsEquiv_apply_app\", \"CategoryTheory.Functor.sectionsEquivHom_apply_app\", \"CategoryTheory.presheafHomSectionsEquiv\", \"CategoryTheory.Limits.compCoyonedaSectionsEquiv\", \"CategoryTheory.Limits.opCompYonedaSectionsEquiv\"], \"digest\": \"3d156ca18ec472fd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary categories and Type-valued presheaves; none states the quasicategorical mapping-space and homotopy-pullback assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -68,5 +169,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-pointwise-constant-target-square-assembly",
+  "worker": "stage1",
+  "summary": "Five-step proof with no new nodes: path objects model cospan limits; right-fibration transport and the pinch map identify constant-target transformation spaces with a representable on space-valued diagrams; the coherent square is constructed with its actual maps; pointwise limits and preservation by that representable prove assembly; both empty shapes are checked. Corrected unsupported citations and doubled TeX escapes without changing mathematical content.",
+  "blueprint": "The steps realize the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived mapping-complex comparison before the inverse limit, specifically the supporting foundation sentence “pointwise assembly of constant-target mapping-space squares.”",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic mapping-path replacement fact used only for the identity of a Kan complex, to verify the standard path object; it does not replace the unit route."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic fact that internal functor simplicial sets with quasicategory targets are quasicategories, needed to apply the natural pinch comparison; no unit-specific geometry is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-58c6ebd1c",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-58c6ebd1c (reviewer sub-agent of L); spot-checked: I read the whole item, all nine cited node statements, the parent lem-coef-operadic-colimit-finite-amalgamation (its only citer, applying it with B=J_1, K=J_2, r=q_act and a constant target W), the unit and chapter records, and the blueprint ancestor's proof. The statement is true and not weakened: the constant-target mapping space is the limit over B^op of the pointwise mapping spaces, and limits commute with pullbacks. I tested it on B=Δ^0, B=∅, K=∅, both empty, r=id, X and Y terminal, and B=Δ^1. Step 1 checks: projective-model gives the simplicial Kan structure and SM7; model-coherent-diagrams gives monomorphism cofibrations and its final clause on fibrant cospans; kan-fibration-fiber-criterion with f=id_Z gives the path object, which is the path pullback of def-coef-infinity-relative-cone. Step 2 checks: right-fibration classification plus pullback of the target-fixed arrow fibration gives Map_P(1,F)≃Fun_{/B}(B,E); I checked the n-simplices against U_{Fun(B,D)}(H,Δ_B t), and the pinch comparison applies because Fun(B,D) is a quasicategory. Step 3: the coherent square in Fun(B^op,S) comes from functoriality and first-variable transport along α̂, plus the isomorphism Fun(B,Fun(K,X))≅Fun(B×K,X). Step 4: objectwise limit detection for a small simplicial shape and preservation of limits by the covariant representable, both stated clauses of yoneda-presheaf-limits. Step 5 is elementary. No extra hypotheses and no cycle. The duplicate candidates (relative-cocone-parameters, coherent-diagram-coyoneda, coherent-pullback-comparison, terminal-pullback-criterion) all state something different. I accept the two declared tool_uses, lem-cbc-kan-fibration-fiber-criterion and lem-cbc-enhanced-functor-cone-calculus: generic, used as black boxes, off the route. HTT is not archived; the proof is by:agent from node statements, WANTED is recorded, and no SGA is used. One fix (B4): the second reading's TeX normalization had turned the array row separators \\\\ in both displayed squares into control-spaces, so each array was one row with five &. I restored them in fixes/dag/nodes/sec-six-functors/lem-coef-pointwise-constant-target-square-assembly.json; nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
