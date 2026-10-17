@@ -10,9 +10,82 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-kan-pullback-path-comparison] first to $U=X$, $V=\\Delta^0$, $W=Y$, $u=r$, $v=y$, and then to $U=\\Delta^0$, $V=X$, $u=y$, $v=r$. The displayed path pullbacks are precisely $P_y$ and $Q_y$ by their degreewise definitions in [def-cbc-enhanced-diagrams-cones], so both are Kan complexes. Only the unconditional Kan assertion is used; neither leg is assumed to be a fibration. The one-point simplicial set is Kan because any horn map into it has the unique extension.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0101",
+    "place": "Example 3.1.8.10 and Corollary 3.1.3.3 (00TM), path-pullback fibrancy; the existing path-pullback lemma supplies both orientations."
+   }
+  },
+  {
+   "text": "Let $I=\\Delta^1$, let $J=N(\\mathcal J)$ and $i:I\\hookrightarrow J$ be as in [lem-coef-walking-isomorphism-edge-anodyne], and put $A=\\operatorname{Fun}(I,Y)$, $B=\\operatorname{Fun}(J,Y)$, $q=i^*:B\\to A$. For a boundary lifting problem of dimension $m\\geq0$ for $q$, transposition of the defining internal-functor formula gives an extension problem into $Y$ from $(\\partial\\Delta^m\\times J)\\cup(\\Delta^m\\times I)$ to $\\Delta^m\\times J$. This inclusion is the pushout-product of the monomorphism $\\partial\\Delta^m\\hookrightarrow\\Delta^m$ and the anodyne map $i$. By [lem-coef-sset-anodyne-pushout-product] it has the left lifting property against $Y\\to\\Delta^0$, which is a Kan fibration since $Y$ is Kan. Thus the extension exists. Transposing back supplies the required boundary lift, including $m=0$. By [def-weil-pbc-trivial-kan-fibration], $q$ is a trivial Kan fibration.",
+   "uses": [
+    "lem-coef-walking-isomorphism-edge-anodyne",
+    "lem-coef-sset-anodyne-pushout-product",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Corollary 3.1.3.6, with Corollary 3.1.3.3 (00TM). Agent endpoint-reversal construction from the walking-isomorphism extension and relative lifting."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to $q$ and the degreewise injection $\\varnothing\\hookrightarrow A$, with bottom map $1_A$. Choose a resulting simplicial section $\\sigma:A\\to B$, so $q\\sigma=1_A$. The groupoid automorphism interchanging $0,1$ induces an involution $\\tau:J\\to J$. Write $\\theta=\\tau^*:B\\to B$ and $t=q\\theta:B\\to A$. Put $T=t\\sigma:A\\to A$. Restriction to the two vertices gives the strict identities $\\operatorname{ev}_0T=\\operatorname{ev}_1$ and $\\operatorname{ev}_1T=\\operatorname{ev}_0$: indeed $\\tau i$ has vertices $1,0$, and $q\\sigma=1_A$ preserves both original endpoints. These are equalities of simplicial maps, hence hold for every parameter simplex.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Corollary 3.1.3.6, with Corollary 3.1.3.3 (00TM). Agent endpoint-reversal construction from the walking-isomorphism extension and relative lifting."
+   }
+  },
+  {
+   "text": "The two maps $\\sigma T,\\theta\\sigma:A\\to B$ have the same composite with $q$, namely $T$. Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to $q$ and the degreewise injection $A\\times\\partial I\\hookrightarrow A\\times I$, using these two maps on the endpoint summands and $T\\operatorname{pr}_A$ on the bottom. This gives $H:A\\times I\\to B$ with $H|_0=\\sigma T$, $H|_1=\\theta\\sigma$ and $qH=T\\operatorname{pr}_A$. Put $h=tH$. Its endpoint maps are $T^2$ and $t\\theta\\sigma=q\\theta^2\\sigma=q\\sigma=1_A$. For $e=0,1$, evaluation satisfies $\\operatorname{ev}_e h=\\operatorname{ev}_{1-e}qH=\\operatorname{ev}_{1-e}T\\operatorname{pr}_A=\\operatorname{ev}_e\\operatorname{pr}_A$. Thus this single simplicial homotopy from $T^2$ to the identity fixes both endpoints throughout, with no reversal of the homotopy interval.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Corollary 3.1.3.6, with Corollary 3.1.3.3 (00TM). Agent endpoint-reversal construction from the walking-isomorphism extension and relative lifting."
+   }
+  },
+  {
+   "text": "Define $R(x,a)=(Ta,x)$ and $S(a,x)=(x,Ta)$ on the displayed pullbacks. The endpoint identities of Step 3 verify each pullback equation: $a:r(x)\\to y$ goes to $Ta:y\\to r(x)$, and conversely. These formulas commute with every simplicial operator because $T$ is simplicial, and both leave $x$ unchanged. They give $SR(x,a)=(x,T^2a)$ and $RS(a,x)=(T^2a,x)$. The formulas $(x,a,s)\\mapsto(x,h(a,s))$ and $(a,x,s)\\mapsto(h(a,s),x)$ therefore define the two required homotopies, by the endpoint equations of Step 4. Their composites with projection to $X$ are exactly the projection to $x$, independent of $s$. If $X$ or either pullback is empty, the same maps and homotopies restrict to the unique empty-domain maps. Every construction stays in the common universe.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Corollary 3.1.3.6, with Corollary 3.1.3.3 (00TM). Agent endpoint-reversal construction from the walking-isomorphism extension and relative lifting."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-pullback-path-comparison",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-walking-isomorphism-edge-anodyne",
+  "lem-coef-sset-anodyne-pushout-product",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction: path-orientation comparison in the coherent finite-core fiber-contraction infrastructure along the recorded ancestry. Agent proof using online Kerodon 00TM/00UT/0101, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -57,10 +130,46 @@
    "date": "2026-10-17",
    "verdict": "no match: the two LeanFinder phrasings find PrepathObject.symm and PathObject.symm, which merely interchange the two structural projections on the same object. Read ModelCategory/PathObject.lean:70-83 and 105-114; they supply no simplicial path-reversal map over endpoints or inverse homotopies. LeanSearch returns topological Path.symm/Homotopy.symm and simplex reversal, which do not give maps between these simplicial pullbacks. Loogle gives zero hits; the homotopy-fiber/path-reversal grep is empty.",
    "sub": "AlgebraicTopology/ModelCategory/PathObject.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "path.*revers|revers.*path|homotopy.*fiber",
+   "results": "{\"t\": \"2026-10-17T13:04:27Z\", \"tool\": \"grep\", \"query\": \"path.*revers|revers.*path|homotopy.*fiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic searches find truncated edge-homotopy symmetry and abstract PathObject.symm; read ModelCategory/PathObject.lean:70-83 and 105-114. The latter swaps structural projections on the same path object and does not construct a path-reversal endomorphism or homotopies over endpoints on this explicit simplicial path object. Topological path-symmetry hits concern continuous paths. Loogle and the path-reversal grep return no match.",
+   "sub": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a map of Kan complexes the two orientations of a path homotopy fiber are simplicially homotopy equivalent over the source",
+   "results": "{\"t\": \"2026-10-17T13:04:28Z\", \"tool\": \"leansearch\", \"query\": \"For a map of Kan complexes the two orientations of a path homotopy fiber are simplicially homotopy equivalent over the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.symm\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.leftHomotopyRel_iff_rightHomotopyRel\", \"Path.Homotopy.symm\", \"Path.Homotopic.Quotient.mk_symm\", \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_symm_mk\", \"Path.Homotopy.symm₂\"], \"digest\": \"34a4d45afc7f3e42\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic searches find truncated edge-homotopy symmetry and abstract PathObject.symm; read ModelCategory/PathObject.lean:70-83 and 105-114. The latter swaps structural projections on the same path object and does not construct a path-reversal endomorphism or homotopies over endpoints on this explicit simplicial path object. Topological path-symmetry hits concern continuous paths. Loogle and the path-reversal grep return no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KanComplex\", \"homotopy\"",
+   "results": "{\"t\": \"2026-10-17T13:04:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanComplex\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic searches find truncated edge-homotopy symmetry and abstract PathObject.symm; read ModelCategory/PathObject.lean:70-83 and 105-114. The latter swaps structural projections on the same path object and does not construct a path-reversal endomorphism or homotopies over endpoints on this explicit simplicial path object. Topological path-symmetry hits concern continuous paths. Loogle and the path-reversal grep return no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial path reversal for a Kan complex induces homotopy inverse maps on the two endpoint models of a homotopy fiber",
+   "results": "{\"t\": \"2026-10-17T13:04:32Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial path reversal for a Kan complex induces homotopy inverse maps on the two endpoint models of a homotopy fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL.symm\", \"SSet.Truncated.HomotopicR.symm\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.symm_h\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.symm\", \"HomotopicalAlgebra.PathObject.symm\", \"HomotopicalAlgebra.PathObject.symm_ι\", \"HomotopicalAlgebra.PathObject.RightHomotopy.symm\", \"Path.Homotopy.symm₂_apply\"], \"digest\": \"a4cc1532b96ab664\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic searches find truncated edge-homotopy symmetry and abstract PathObject.symm; read ModelCategory/PathObject.lean:70-83 and 105-114. The latter swaps structural projections on the same path object and does not construct a path-reversal endomorphism or homotopies over endpoints on this explicit simplicial path object. Topological path-symmetry hits concern continuous paths. Loogle and the path-reversal grep return no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map reversing simplicial paths in a Kan complex squares to the identity up to a simplicial homotopy relative to both endpoints",
+   "results": "{\"t\": \"2026-10-17T13:06:12Z\", \"tool\": \"leanfinder\", \"query\": \"A map reversing simplicial paths in a Kan complex squares to the identity up to a simplicial homotopy relative to both endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL.symm\", \"SSet.Truncated.HomotopicR.symm\", \"SSet.Truncated.HomotopicR.refl\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.symm_h\", \"Path.Homotopic.symm_trans\", \"GenLoop.fromLoop_symm_toLoop\", \"Path.Homotopic.trans_symm\", \"HomotopyGroup.inv_spec\"], \"digest\": \"e63d9a688f8162eb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic searches find truncated edge-homotopy symmetry and abstract PathObject.symm; read ModelCategory/PathObject.lean:70-83 and 105-114. The latter swaps structural projections on the same path object and does not construct a path-reversal endomorphism or homotopies over endpoints on this explicit simplicial path object. Topological path-symmetry hits concern continuous paths. Loogle and the path-reversal grep return no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-core-fiber-contraction",
@@ -92,5 +201,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-fiber-path-reversal",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved Kan fibrancy with the existing general path-pullback result; used a section of walking-isomorphism restriction and one relative boundary lift to obtain simplicial reversal and an endpoint-fixed homotopy of its square to the identity. Added only the strictly smaller walking-isomorphism edge-anodyneness lemma, after DAG/blueprint/project/Mathlib searches. No hypothesis on r beyond being a simplicial map, no nonemptiness, and no simplicial reversal of Delta^1 is used.",
+  "blueprint": "Paragraph 2 (displayed derived coefficient-adjunction calculation) of prop-coef-integral-exceptional-adjoint, through the exact recorded finite-core fiber-contraction ancestry: supplies comparison of its two path-fiber orientations without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-b270c6d84",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-b270c6d84 (reviewer sub-agent of L); spot-checked: Read both nodes and all cited statements/sources; verified all five steps, endpoint-fixed homotopies, horn filtration, edge cases, duplicates, and unit route. Mathematics passes. Added only missing merged_into and lean_audit bookkeeping fields to the new node under fixes/. Full checks recorded in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

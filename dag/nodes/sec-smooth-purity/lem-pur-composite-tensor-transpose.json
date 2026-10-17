@@ -1,0 +1,75 @@
+{
+ "id": "lem-pur-composite-tensor-transpose",
+ "kind": "statement",
+ "title": "Double transpose of tensor-counit maps for composite adjunctions",
+ "statement": "Let $\\mathcal C_X,\\mathcal C_Y,\\mathcal C_Z$ be monoidal categories [def-sfb-monoidal-category], and let $S_f:\\mathcal C_Y\\to\\mathcal C_X$ and $S_g:\\mathcal C_Z\\to\\mathcal C_Y$ be strong monoidal functors [def-sfb-strong-monoidal-functor]. Let $P_f:\\mathcal C_X\\to\\mathcal C_Y$ and $P_g:\\mathcal C_Y\\to\\mathcal C_Z$ have right adjoints $G_f,G_g$, with specified adjunction Hom bijections and counits $\\epsilon_f:P_fG_f\\to\\mathrm{id}$ and $\\epsilon_g:P_gG_g\\to\\mathrm{id}$. Use their composite adjunction [def-weil-pbc-composite-adjunction]. Suppose $P_f$ has a projection formula relative to $S_f$ and $P_g$ one relative to $S_g$, meaning natural isomorphisms with the unit and associativity equations of [def-sfb-projection-formula], written\n$$\\pi^f_{B,M}:P_f(S_fB\\otimes M)\\xrightarrow{\\sim}B\\otimes P_fM,\\qquad\n\\pi^g_{K,L}:P_g(S_gK\\otimes L)\\xrightarrow{\\sim}K\\otimes P_gL.$$\nAll following expressions use the specified associators, unitors and strong monoidal comparisons. Give $P_c=P_gP_f$ relative to $S_c=S_fS_g$ the composite projection isomorphism\n$$\\pi^c_{K,M}=\\pi^g_{K,P_fM}\\circ P_g(\\pi^f_{S_gK,M}),$$\nand put $G_c=G_fG_g$, with counit $\\epsilon^c_K=\\epsilon_{g,K}\\circ P_g(\\epsilon_{f,G_gK})$.\nFor $h=f,g,c$ define $W_h=G_h\\mathbf1$ and $\\tau^h_B:S_hB\\otimes W_h\\to G_hB$ as the adjoint transpose of\n$$P_h(S_hB\\otimes W_h)\\xrightarrow{\\pi^h_{B,W_h}}B\\otimes P_hW_h\n\\xrightarrow{1\\otimes\\epsilon_{h,\\mathbf1}}B\\otimes\\mathbf1\\xrightarrow{\\rho_B}B.$$\nWrite $W=W_f$, $V=W_g$, and $q=\\tau^f_V:S_fV\\otimes W\\to G_fV=W_c$. For any $K\\in\\mathcal C_Z$ let $N=S_f(S_gK\\otimes V)\\otimes W$, identified with $S_cK\\otimes S_fV\\otimes W$. Under\n$$\\operatorname{Hom}_{\\mathcal C_X}(N,G_fG_gK)\\cong\n\\operatorname{Hom}_{\\mathcal C_Z}(P_gP_fN,K),$$\nboth morphisms\n$$\\tau^f_{G_gK}\\circ(S_f\\tau^g_K\\otimes1_W),\\qquad\n\\tau^c_K\\circ(1_{S_cK}\\otimes q)$$\nhave the same inverse transpose, namely\n$$\\begin{aligned}\nP_gP_fN&\\xrightarrow{P_g\\pi^f_{S_gK\\otimes V,W}}\nP_g((S_gK\\otimes V)\\otimes P_fW)\\\\\n&\\xrightarrow{P_g(1\\otimes\\epsilon_{f,\\mathbf1})}P_g(S_gK\\otimes V)\n\\xrightarrow{\\pi^g_{K,V}}K\\otimes P_gV\n\\xrightarrow{1\\otimes\\epsilon_{g,\\mathbf1}}K.\n\\end{aligned}$$\nThe unit constraints are inserted in the last and second arrows. No $\\tau^h$, $q$ or $W_h$ is assumed invertible, and no geometric morphism, smoothness or purity assertion is part of this statement.\nThe same formula holds for functors and adjunction Hom bijections restricted to full domains of definition, provided all the displayed objects, arrows, Hom bijections and the naturality and projection-coherence equations used in the two composites are defined and hold on those domains. No value outside these domains is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+  "place": "Second paragraph, sentence “The two tensor transformations agree: transposing them gives the projection formula followed by the same two counits, composed in their adjunction order”; extracted formal calculation from inherited Step 8. Adjunction transpose convention: Stacks Tag 0037, categories.tex, definition-adjoint and following unit/counit formulas."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-pbc-composite-adjunction",
+  "def-sfb-projection-formula"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|projection.*[Tt]ranspose|[Tt]ranspose.*projection|[Tt]ensor.*[Cc]ounit",
+   "results": "20 hits: Mathlib/CategoryTheory/Monoidal/Hopf_.lean, Mathlib/CategoryTheory/Monoidal/Hopf_.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.counit",
+   "results": "3 hits: CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-17",
+   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor action on the right adjoint to a functor with projection formula respects composite adjunctions by the composite counit formula",
+   "results": "8 hits: CategoryTheory.Bicategory.Adjunction.compCounit, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_counit, CategoryTheory.FunctorToTypes.adj, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Functor.closedCounit, CategoryTheory.Adjunction.comp_counit_app",
+   "date": "2026-10-17",
+   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two adjunctions with coherent projection formulas, compute the double adjoint transpose of the composite tensor-counit maps using the two counits in order",
+   "results": "8 hits: CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In monoidal categories a projection formula and right adjoint define a tensor transformation S B tensor G one to G B; the double transpose of two such transformations equals the iterated projection isomorphisms followed by counits",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.tensorRightAdjunction, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit, CategoryTheory.tensorLeftAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-cohomological-smoothness",
+  "date": "2026-10-17",
+  "group": "Q39"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-cohomological-smoothness",
+   "place": "Second paragraph, sentence “The two tensor transformations agree: transposing them gives the projection formula followed by the same two counits, composed in their adjunction order”; extracted formal calculation from inherited Step 8. Adjunction transpose convention: Stacks Tag 0037, categories.tex, definition-adjoint and following unit/counit formulas.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

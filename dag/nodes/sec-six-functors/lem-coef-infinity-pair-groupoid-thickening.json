@@ -10,9 +10,82 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An $n$-simplex of $N(E_X)$ is a functor $[n]\\to E_X$. Its objects form a list $(y_0,\\ldots,y_n)$; for every such list there is exactly one functor, because each arrow and every identity/composition equation in $E_X$ is unique. Restriction along $\\beta:[m]\\to[n]$ sends the list to $(y_{\\beta(0)},\\ldots,y_{\\beta(m)})$. This proves the stated coordinate description, including faces and degeneracies, directly from [def-cbc-enhanced-diagrams-cones]. Each $X^{n+1}$ and $I_n\\times X^{n+1}$ is small in the fixed universe, so both $J_X$ and $K$ are small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definition 2.2 and basic facts (1), (3), (4), printed pp.14-15: simplicial and inverse-triangle definitions. Agent coordinate expansion of the opening reduction in HTT Proposition 5.3.1.16, printed p.383; HTT read online but archive WANTED."
+   }
+  },
+  {
+   "text": "Verify the Kan condition of [def-cbc-enhanced-diagrams-cones] by filling a horn $h:\\Lambda_i^n\\to J_X$, $n\\geq1$. For $n=1$ the horn specifies one endpoint; choose $x_0$ for the other endpoint, giving the required two-coordinate list. For $n\\geq2$ the horn contains every vertex of $\\Delta^n$: for a vertex $k$, choose a face omitting a vertex different from both $i$ and $k$, which is possible among $n+1\\geq3$ vertices. Let $y_k$ be its image. The single simplex $(y_0,\\ldots,y_n)$ fills the horn. Indeed any simplex of the horn is a monotone map $\\gamma:[m]\\to[n]$ belonging to a retained face, and its image under $h$ has vertices $y_{\\gamma(0)},\\ldots,y_{\\gamma(m)}$; step 1 says those vertices uniquely determine its image in $J_X$. Thus the proposed filler restricts to $h$, including on all degenerate simplices. This treats outer as well as inner horns.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definition 2.2 and basic facts (1), (3), (4), printed pp.14-15: simplicial and inverse-triangle definitions. Agent coordinate expansion of the opening reduction in HTT Proposition 5.3.1.16, printed p.383; HTT read online but archive WANTED."
+   }
+  },
+  {
+   "text": "For an inner horn in $K=I\\times J_X$, project to the two factors, fill the first projected horn using the hypothesis that $I$ is a quasicategory, and fill the second by step 2. Their ordered pair is a filler because products and their operators are degreewise, as specified in [def-cbc-enhanced-diagrams-cones]. Hence $K$ is a quasicategory. The projection $p$ is simplicial. The map $s$ which pairs each $\\sigma\\in I_n$ with the constant list $(x_0,\\ldots,x_0)$ is simplicial, since restriction of a constant list is constant. Coordinatewise, $ps=\\mathrm{id}_I$. Write $A=sp$ and $B=\\mathrm{id}_K$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definition 2.2 and basic facts (1), (3), (4), printed pp.14-15: simplicial and inverse-triangle definitions. Agent coordinate expansion of the opening reduction in HTT Proposition 5.3.1.16, printed p.383; HTT read online but archive WANTED."
+   }
+  },
+  {
+   "text": "Construct the transformation and its witnesses at once using the internal-hom formula of [def-cbc-enhanced-diagrams-cones]. For $r=0,1,2$ and a word $w=(w_0,\\ldots,w_r)$ with letters in $\\{0,1\\}$, define $T_w:K\\times\\Delta^r\\to K$. In degree $n$, on $((\\sigma,(y_0,\\ldots,y_n)),\\alpha:[n]\\to[r])$, its value is $(\\sigma,(z_0,\\ldots,z_n))$, where $z_k=x_0$ when $w_{\\alpha(k)}=0$ and $z_k=y_k$ when $w_{\\alpha(k)}=1$. For every $\\beta:[m]\\to[n]$, both restricting this output and applying the formula to the restricted input give first coordinate $I(\\beta)(\\sigma)$ and $k$th second coordinate $x_0$ or $y_{\\beta(k)}$ according to $w_{\\alpha(\\beta(k))}$. Thus each $T_w$ is a simplicial map, hence an $r$-simplex of $\\operatorname{Fun}(K,K)$. Restriction along $\\lambda:[q]\\to[r]$ gives $T_{(w_{\\lambda(0)},\\ldots,w_{\\lambda(q)})}$ by substitution; repeated letters give the corresponding degenerate simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definition 2.2 and basic facts (1), (3), (4), printed pp.14-15: simplicial and inverse-triangle definitions. Agent coordinate expansion of the opening reduction in HTT Proposition 5.3.1.16, printed p.383; HTT read online but archive WANTED."
+   }
+  },
+  {
+   "text": "Set $\\eta=T_{(0,1)}$ and $\\theta=T_{(1,0)}$. The face calculation of step 4 gives endpoints $A\\to B$ and $B\\to A$ respectively, and gives exactly the displayed formula in the statement for $\\eta$. For $T_{(0,1,0)}$, the edges $01$, $12$, $02$ are respectively $\\eta$, $\\theta$, $T_{(0,0)}$; the last is the degenerate identity edge at $A$. For $T_{(1,0,1)}$ they are respectively $\\theta$, $\\eta$, $T_{(1,1)}$, the last being the degenerate identity at $B$. These are the two inverse-triangle witnesses required by [def-cbc-enhanced-diagrams-cones]. Thus $\\eta$ is a coherent natural equivalence with inverse $\\theta$, rather than merely a simplicial homotopy.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definition 2.2 and basic facts (1), (3), (4), printed pp.14-15: simplicial and inverse-triangle definitions. Agent coordinate expansion of the opening reduction in HTT Proposition 5.3.1.16, printed p.383; HTT read online but archive WANTED."
+   }
+  },
+  {
+   "text": "The formula for $T_{(0,1)}$ leaves the first coordinate $\\sigma$ unchanged, in every degree and for every $\\alpha$, so $p\\eta=p\\operatorname{pr}_K$ as simplicial maps $K\\times\\Delta^1\\to I$. We have a quasi-inverse $s$ of $p$, with $sp\\simeq\\mathrm{id}_K$ supplied by step 5 and $ps=\\mathrm{id}_I$ supplied by step 3. The identity transformation of the latter equality has itself as inverse and the constant $2$-simplices as its witnesses. The functor-equivalence definition in [def-cbc-enhanced-diagrams-cones] therefore proves the asserted equivalence of $p$. No step used filteredness or a chosen vertex of $I$. If $I$ is empty all maps out of $K=\\varnothing$ in these formulas are the unique empty maps, so the same witnesses and identities still apply.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, Definition 2.2 and basic facts (1), (3), (4), printed pp.14-15: simplicial and inverse-triangle definitions. Agent coordinate expansion of the opening reduction in HTT Proposition 5.3.1.16, printed p.383; HTT read online but archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/scholze-six-functor-formalisms.pdf",
+  "place": "Lecture II, Definition 2.2 and basic facts (1), (3), (4), printed pp.14-15, expanded by the explicit coordinate construction. HTT Proposition 5.3.1.16 opening proof paragraph supplies the motivating product, but not the displayed contraction; HTT archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,10 +156,52 @@
    "results": "{\"t\": \"2026-10-17T08:53:39Z\", \"tool\": \"grep\", \"query\": \"equivFun|natTrans|natIso\", \"sub\": \"AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"33\", \"40\"], \"digest\": \"2bfb7094d8a8b683\"}",
    "date": "2026-10-17",
    "verdict": "No match: read NerveCodiscrete.lean:30-36, where Codiscrete.equivFun gives only the degreewise vertex-list bijection, not the coherent contraction of I times the nerve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection from the product of a quasicategory with the nerve of a nonempty codiscrete groupoid is a coherent equivalence with explicit constant section and simplicial contraction",
+   "results": "{\"t\": \"2026-10-17T13:07:04Z\", \"tool\": \"leanfinder\", \"query\": \"The projection from the product of a quasicategory with the nerve of a nonempty codiscrete groupoid is a coherent equivalence with explicit constant section and simplicial contraction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.OneTruncation₂.ofNerve₂\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"CategoryTheory.nerve.homEquiv\", \"SSet.prodStdSimplex.isoNerve\"], \"digest\": \"cf01ae8ef748a82b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Codiscrete.equivFun (Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean:33-35), CategoryTheory.Nerve.quasicategory (Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:32), CategoryTheory.Codiscrete.natIso (Mathlib/CategoryTheory/CodiscreteCategory.lean:107-109), and SSet.coherentIso (Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean:143). These provide coordinate data, ordinary natural isomorphisms, or a walking isomorphism, not the stated product equivalence for arbitrary quasicategories I with this precise contraction. The homotopy-category and ordinary-groupoid search hits likewise do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "Codiscrete|pairGroupoid|pair.groupoid|codiscrete",
+   "results": "{\"t\": \"2026-10-17T13:07:43Z\", \"tool\": \"grep\", \"query\": \"Codiscrete|pairGroupoid|pair.groupoid|codiscrete\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\"], \"digest\": \"cb4b7c37075ed770\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Codiscrete.equivFun (Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean:33-35), CategoryTheory.Nerve.quasicategory (Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:32), CategoryTheory.Codiscrete.natIso (Mathlib/CategoryTheory/CodiscreteCategory.lean:107-109), and SSet.coherentIso (Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean:143). These provide coordinate data, ordinary natural isomorphisms, or a walking isomorphism, not the stated product equivalence for arbitrary quasicategories I with this precise contraction. The homotopy-category and ordinary-groupoid search hits likewise do not state the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonempty indiscrete groupoid has Kan nerve and its product with an infinity category is equivalent to that category",
+   "results": "{\"t\": \"2026-10-17T13:07:43Z\", \"tool\": \"leansearch\", \"query\": \"A nonempty indiscrete groupoid has Kan nerve and its product with an infinity category is equivalent to that category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Subgroupoid.discrete\", \"CategoryTheory.Groupoid.noConfusionType\", \"CategoryTheory.Groupoid.noConfusion\", \"FundamentalGroupoid.punitEquivDiscretePUnit\", \"CategoryTheory.Groupoid\", \"CategoryTheory.Grpd.piLimitFanIsLimit\", \"CategoryTheory.isGroupoidProd\", \"FundamentalGroupoidFunctor.preservesProduct\"], \"digest\": \"97047ba5fee4be8b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Codiscrete.equivFun (Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean:33-35), CategoryTheory.Nerve.quasicategory (Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:32), CategoryTheory.Codiscrete.natIso (Mathlib/CategoryTheory/CodiscreteCategory.lean:107-109), and SSet.coherentIso (Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean:143). These provide coordinate data, ordinary natural isomorphisms, or a walking isomorphism, not the stated product equivalence for arbitrary quasicategories I with this precise contraction. The homotopy-category and ordinary-groupoid search hits likewise do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Codiscrete\"",
+   "results": "{\"t\": \"2026-10-17T13:07:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Codiscrete\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Filter.codiscrete\", \"Filter.codiscreteWithin\", \"codiscrete_eq_cofinite\", \"Filter.self_mem_codiscreteWithin\", \"codiscreteWithin_eq_bot_iff\", \"codiscrete_le_cofinite\", \"cofinite_le_codiscrete\", \"Set.Subsingleton.mem_codiscreteWithin\"], \"digest\": \"dc4701cd2716e073\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Codiscrete.equivFun (Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean:33-35), CategoryTheory.Nerve.quasicategory (Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:32), CategoryTheory.Codiscrete.natIso (Mathlib/CategoryTheory/CodiscreteCategory.lean:107-109), and SSet.coherentIso (Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean:143). These provide coordinate data, ordinary natural isomorphisms, or a walking isomorphism, not the stated product equivalence for arbitrary quasicategories I with this precise contraction. The homotopy-category and ordinary-groupoid search hits likewise do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial homotopy contracts the nerve of a chaotic category to a chosen vertex and yields inverse natural equivalences for arbitrary quasicategories",
+   "results": "{\"t\": \"2026-10-17T13:08:07Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial homotopy contracts the nerve of a chaotic category to a chosen vertex and yields inverse natural equivalences for arbitrary quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.OneTruncation₂.ofNerve₂\", \"SSet.OneTruncation₂.nerveEquiv_symm_apply_obj\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.homEquiv\", \"SSet.OneTruncation₂.nerveEquiv_symm_apply_map\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\"], \"digest\": \"1a98c78fccb670f7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Codiscrete.equivFun (Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean:33-35), CategoryTheory.Nerve.quasicategory (Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:32), CategoryTheory.Codiscrete.natIso (Mathlib/CategoryTheory/CodiscreteCategory.lean:107-109), and SSet.coherentIso (Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean:143). These provide coordinate data, ordinary natural isomorphisms, or a walking isomorphism, not the stated product equivalence for arbitrary quasicategories I with this precise contraction. The homotopy-category and ordinary-groupoid search hits likewise do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "contract|[Hh]omotop|[Ee]quiv",
+   "results": "{\"t\": \"2026-10-17T13:08:51Z\", \"tool\": \"grep\", \"query\": \"contract|[Hh]omotop|[Ee]quiv\", \"sub\": \"AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"18\", \"44\", \"45\", \"118\"], \"digest\": \"08de2f9a7a874f71\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Codiscrete.equivFun (Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean:33-35), CategoryTheory.Nerve.quasicategory (Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:32), CategoryTheory.Codiscrete.natIso (Mathlib/CategoryTheory/CodiscreteCategory.lean:107-109), and SSet.coherentIso (Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean:143). These provide coordinate data, ordinary natural isomorphisms, or a walking isomorphism, not the stated product equivalence for arbitrary quasicategories I with this precise contraction. The homotopy-category and ordinary-groupoid search hits likewise do not state the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cofinal-kappa-poset",
@@ -113,5 +228,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-pair-groupoid-thickening",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six direct coordinate arguments prove the nerve description, all Kan horns (including n=1), product inner horns, simpliciality, and the two explicit inverse triangles for the specified contraction, plus its strict compatibility over I. The only cited node is the existing enhanced-diagram definition; no pointwise-equivalence or nerve-of-groupoid theorem is assumed. No new nodes or Mathlib leaves. Searched the project source, whole DAG and imported blueprint and recorded four Mathlib search kinds with a second semantic phrasing. Checked the empty-I and singleton-X cases.",
+  "blueprint": "Retains the ancestry through lem-coef-infinity-cofinal-kappa-poset to prop-coef-integral-exceptional-adjoint, proof paragraph 2: coherent finite-coefficient mapping-complex adjunction before R lim. This is precisely the pair-groupoid product at the opening of HTT Proposition 5.3.1.16, used by the ancestor cofinal-poset construction; the current main-20261015 blueprint integral-adjoint proof paragraph 2 is unchanged. No unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q106-096a5c991",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q106-096a5c991 (reviewer sub-agent of L); spot-checked: Wrote review.md. The item and cited enhanced-diagram definition were read in full; Scholze Lecture II pp.14–15 and HTT Proposition 5.3.1.16 p.383 were checked. All six coordinate steps are valid, including outer horns, product quasicategory, simpliciality, explicit inverse triangles, strict projection compatibility, and empty-I/small-X cases. No new nodes, duplicates, missing hypotheses, route violations, or repairs were found."
  }
 }

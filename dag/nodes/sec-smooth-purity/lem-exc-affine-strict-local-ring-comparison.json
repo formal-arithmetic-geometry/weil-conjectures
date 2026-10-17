@@ -21,9 +21,164 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-strict-henselization-point-evaluation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H=L^{\\mathrm{sh}}$ and $a:L\\to H$ for its given structural map. The open immersion identifies the chart with an open subscheme, so $\\bar x$ lifts uniquely to $\\bar x_D:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}D$: its one-point source has image in that open, and its sheaf map restricts there. Its residue embedding is the specified $\\kappa(\\mathfrak p)\\to\\Omega$. By the relative-separable-closure statement, $K$ is a separable closure of $\\kappa(\\mathfrak p)=L/\\mathfrak pL$. Denote the resulting evaluation by $r:L\\to K$. Keep this very field and embedding throughout.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-geometric-point",
+    "def-weil-pbc-relative-separable-closure",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, first paragraph; algebra.tex Tag 04GW, lemma-strict-henselization-different"
+   }
+  },
+  {
+   "text": "Apply the affine-neighbourhood/triples comparison with $Y=X$, $U=\\operatorname{Spec}D$, and $\\kappa(\\bar x)=K$. It identifies the chosen ring $C$, with its colimit legs, with the colimit of $D$-etale residue triples $t=(B_t,q_t,\\phi_t)$ over $(\\mathfrak p,K)$. Write $c_t:B_t\\to C$ for the transported legs and $e_t:B_t\\to K$ for their pointed evaluations. The identity triple $t_0=(D,\\mathfrak p,\\kappa(\\mathfrak p)\\hookrightarrow K)$ has a morphism to every triple, namely its structural map $\\alpha_t:D\\to B_t$; hence $c_t\\alpha_t=c_{t_0}=b:D\\to C$. Compatibility with the chart neighbourhood leg identifies $b$ with the $D$-algebra map required in the statement. All colimits here and below are taken on small representative categories: the chosen neighbourhood-colimit definition and the pointed-algebra definition provide these representatives, and the chart equivalence preserves the colimit legs.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-etale-residue-triples",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, affine-triple translation"
+   }
+  },
+  {
+   "text": "Apply the strict-henselization-triples theorem to this $D$-triple colimit. It makes $C$ strictly henselian local and supplies a surjection $\\epsilon:C\\to K$ with $\\ker\\epsilon=\\mathfrak m_C=\\mathfrak pC$ and $\\epsilon c_t=e_t$. On every neighbourhood over the chart, inclusion $j:K\\hookrightarrow\\Omega$ composed with $e_t$ is exactly its geometric-point evaluation, by the pointed-neighbourhood/triple correspondence. Thus $j\\epsilon$ and $\\mathrm{ev}_{\\bar x}$ agree on those neighbourhood legs. Their equality on $C$ follows from the canonical chart-colimit identification and the defining universal property of the evaluation map. In particular $\\epsilon b$ is the original evaluation $D\\to\\kappa(\\mathfrak p)\\to K$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-strict-henselization-point-evaluation",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring; algebra.tex Tags 04GP and 04GW, lemma-strict-henselization and lemma-strict-henselization-different"
+   }
+  },
+  {
+   "text": "Use the defining pointed-etale $L$-algebra cocone $d_u:S_u\\to H$ chosen in the statement; write $v_u:S_u\\to K$ for its pointing. We need its specified residue map, not one from an unrelated cocone. Convert a local-base residue triple $(S,q,\\phi)$ to the pointed algebra $(S,\\phi\\circ\\mathrm{ev}_q)$. Conversely, the field-spectrum correspondence applied to $v:S\\to K$ gives $q=\\ker v$ and the unique embedding $\\phi:\\kappa(q)\\to K$ factoring $v$. Since $v$ restricts to $r$ on $L$, $q$ lies over $\\mathfrak pL$. These operations are inverse on objects up to the canonical identity of the ring, and on morphisms they retain the same ring map: the pointing equation is precisely the residue-triple equation. They preserve the $L$-maps and every evaluation into $K$. Therefore the given legs $d_u$ form a universal ring cocone for the local-base triples as well: a competing ring cocone pulls back to the pointed-algebra diagram. Its leg at $(L,r)$ equips its vertex with an $L$-algebra structure; the arrows from $(L,r)$ to all objects make every leg $L$-linear. It therefore descends uniquely by the defining algebra-colimit property, and the inverse construction proves factorization and uniqueness on the triples. The induced map to $K$ is exactly the given $\\psi:H\\to K$, since on each given leg it equals $v_u$.",
+   "uses": [
+    "def-sc-ring-strict-henselization",
+    "def-weil-pbc-etale-residue-triples",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GW, lemma-strict-henselization-different, pointed-algebra interpretation of the local-base triples"
+   }
+  },
+  {
+   "text": "Apply the strict-henselization-triples theorem over the local ring $L$, at its maximal ideal $\\mathfrak pL$, with the same separable closure $K$, to the cocone of the preceding step. It makes $H$ strictly henselian local, and its compatible evaluation map is surjective with kernel $\\mathfrak m_H$. This compatible evaluation is $\\psi$ by its equations on the defining legs, so $\\psi$ has exactly these properties and $\\psi a=r$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GP and 04GW, lemma-strict-henselization and lemma-strict-henselization-different"
+   }
+  },
+  {
+   "text": "For $s\\in D\\setminus\\mathfrak p$, the value $\\epsilon(b(s))$ is nonzero, so $b(s)\\notin\\mathfrak m_C$ and the local-ring unit criterion makes $b(s)$ a unit. The localization universal property gives a unique $b_L:L=D_{\\mathfrak p}\\to C$ extending $b$. The maps $\\epsilon b_L$ and $r:L\\to K$ agree on $D$, and hence are equal by uniqueness for localization. Thus $C$, with the specified residue evaluation, is now an $L$-algebra over exactly the chosen $L\\to K$.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9, lemma-characterize-local-ring; localization universal property, as used in the comparison of Tag 04GW"
+   }
+  },
+  {
+   "text": "For each defining pointed-etale $L$-algebra $(S_u,v_u)$ of $H$, apply the unique henselian ring lifting lemma with base $R=L$, target $S=C$, base map $b_L$, residue surjection $\\epsilon$, and prescribed map $v_u:S_u\\to K$. Its compatibility hypothesis is $v_u|_L=r=\\epsilon b_L$. Obtain a unique $f_u:S_u\\to C$ with $f_u|_L=b_L$ and $\\epsilon f_u=v_u$. If $\\beta:S_u\\to S_w$ is a pointed transition, both $f_w\\beta$ and $f_u$ meet these same two equations; the uniqueness clause identifies them. The defining colimit therefore gives $f:H\\to C$ with $fd_u=f_u$. Evaluate on the identity pointed algebra $L$ to obtain $fa=b_L$; evaluate on every $d_u$ to obtain $\\epsilon f=\\psi$.",
+   "uses": [
+    "lem-sc-etale-henselian-ring-lift",
+    "def-sc-ring-strict-henselization",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HQ, lemma-map-into-henselian, followed by the defining colimit universal property"
+   }
+  },
+  {
+   "text": "For each $D$-triple $t$, apply the same lifting lemma with base $R=D$, target $S=H$, base map $D\\to L\\xrightarrow{a}H$, residue surjection $\\psi$, and prescribed map $e_t:B_t\\to K$. The compatibility holds because both restrictions to $D$ are the geometric-point evaluation. Obtain a unique $g_t:B_t\\to H$ with these base and residue equations. For every triple transition $\\beta:B_t\\to B_w$, uniqueness identifies $g_w\\beta$ with $g_t$. The $D$-triple colimit of step 2 gives $g:C\\to H$ satisfying $gc_t=g_t$. At $t_0$ its base equation is $gb=a\\circ(D\\to L)$; colimit extensionality gives $\\psi g=\\epsilon$. Moreover $gb_L=a$ as maps $L\\to H$, since they agree on $D$ and localization uniqueness applies.",
+   "uses": [
+    "lem-sc-etale-henselian-ring-lift",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HQ, lemma-map-into-henselian; Tag 04GW, lemma-strict-henselization-different, colimit comparison"
+   }
+  },
+  {
+   "text": "For each $D$-triple $t$, the maps $fgc_t$ and $c_t:B_t\\to C$ have the same structural $D$-map $b$, and $\\epsilon fgc_t=\\psi gc_t=e_t=\\epsilon c_t$. The uniqueness clause of the henselian lifting lemma gives $fgc_t=c_t$, so $fg=\\mathrm{id}_C$ by colimit extensionality. For each defining $L$-etale algebra $S_u$, the maps $gfd_u$ and $d_u:S_u\\to H$ have the same structural $L$-map $a$ (use $gb_L=a$), and $\\psi gfd_u=\\epsilon fd_u=v_u=\\psi d_u$. The same uniqueness clause gives $gfd_u=d_u$, so $gf=\\mathrm{id}_H$. Set $\\theta=g$ with inverse $f$. Its equation on $b$ makes it a $D$-algebra isomorphism, and $\\psi\\theta=\\epsilon$.",
+   "uses": [
+    "lem-sc-etale-henselian-ring-lift",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HQ, lemma-map-into-henselian, uniqueness on each etale stage; Tag 04GW, lemma-strict-henselization-different"
+   }
+  },
+  {
+   "text": "The structural-map definition evaluated at the chart neighbourhood gives $\\rho=i\\circ\\operatorname{Spec}(b)$. Contravariance of $\\operatorname{Spec}$ and $\\theta b=a\\circ(D\\to L)$ therefore give $\\rho\\circ\\operatorname{Spec}(\\theta)=i\\circ\\operatorname{Spec}(D\\to L\\to H)$, with the claimed orientation. Both rings are strictly henselian by steps 3 and 5. Also $j\\psi\\theta=j\\epsilon=\\mathrm{ev}_{\\bar x}$ by steps 3 and 9. Since $\\epsilon$ and $\\psi$ are surjective with maximal-ideal kernels and $j$ is an inclusion, the evaluation on $C$ has image $K$ and kernel $\\mathfrak m_C$. On quotients, an element represented by $c\\in C$ is identified on the two sides with $\\epsilon(c)$ and $\\psi(\\theta(c))$ respectively; these are equal. Thus the residue-field map induced by $\\theta$ is the identity of $K$ under exactly the stated identifications.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-structural-map",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, structural and residue compatibility of the canonical comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-weil-geometric-point",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "def-weil-pbc-etale-residue-triples",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-sc-ring-strict-henselization",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-weil-pbc-strict-henselization-point-evaluation",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-sc-etale-henselian-ring-lift",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, lemma-describe-etale-local-ring, affine/triple route; algebra.tex Tags 04GW and 04GP. Explicit residue-preserving comparison uses Tag 08HQ, lemma-map-into-henselian, on the two defining colimits.",
+  "group": "Q85",
+  "date": "2026-10-17"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +214,38 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.over_def, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.descResidueField, AlgebraicGeometry.Scheme.residue_descResidueField, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe. ",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict.henseli|etaleResidueTriples",
+   "results": "0 hits: . ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The geometric strict local ring of a scheme at a geometric point is the strict henselization of the prime localization of any affine chart containing the point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.residueField, HenselianLocalRing.toIsLocalRing, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.StructureSheaf.localRingLocalizations, AlgebraicGeometry.Scheme.evaluation.congr_simp, AlgebraicGeometry.StructureSheaf.instAtPrimeLocalizationsValCarrierTopMemOpensAsIdeal, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, AlgebraicGeometry.IsAffineOpen.isLocalization_stalk. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "StrictHenselization, AlgebraicGeometry.Scheme",
+   "results": "0 hits: . loogle: unknown identifier 'StrictHenselization'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coordinate ring colimit of affine pointed etale neighborhoods of a geometric point in Spec D is the strict henselization of D localized at its prime, compatibly with residue evaluation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.stalkClosedPointIso, AlgebraicGeometry.Scheme.descResidueField, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, AlgebraicGeometry.Scheme.residue, AlgebraicGeometry.Scheme.stalkClosedPointTo, AlgebraicGeometry.Scheme.over_def. ",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-exc-curve-open-constructible-general",
@@ -74,10 +257,44 @@
  "blueprint": {
   "from": {
    "node": "thm-exc-curve-open-constructible-general",
-   "place": "Proof paragraph 1, strict-local stalk calculation before applying lem-exc-punctured-curve-branches: identification of the neighbourhood-limit ring with the algebraic strict henselization of an affine local ring.",
+   "place": "Proof paragraph 1 of thm-exc-curve-open-constructible-general, strict-local stalk calculation before lem-exc-punctured-curve-branches: affine chart comparison with the algebraic strict henselization, including the structural morphism and fixed residue evaluation.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-affine-strict-local-ring-comparison",
+  "worker": "stage1",
+  "summary": "Unchanged statement split into ten steps. Reused the affine-neighbourhood/triples comparison and the triple local-structure theorem. Converted the specified local pointed-algebra cocone without losing its residue evaluation; extended the chart algebra map by localization; used existing unique single-etale henselian lifts to construct mutually inverse maps. No new nodes.",
+  "blueprint": "Realizes the strict-local ring identification needed in paragraph 1 of thm-exc-curve-open-constructible-general before applying lem-exc-punctured-curve-branches; the parent delivery step 5 requests exactly this structural/residue-compatible affine comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Generic affine-chart equivalence between pointed neighbourhoods and residue triples; supplies the colimit and its legs, not a replacement for the curve-stalk argument."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic commutative-algebra local-structure and residue-map theorem for the two triple colimits; no theorem in the item unit replaces it."
+   },
+   {
+    "node": "lem-sc-etale-henselian-ring-lift",
+    "why": "Generic unique lifting from a single etale algebra into a henselian local ring; used on individual stages to construct the two comparison maps and prove their inverseness while fixing residue evaluation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-etale-henselian-ring-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q85-2ebb83b09",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-2ebb83b09 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit/chapter route, all 17 cited node statements, Stacks Tags 04HX, 04GW, 04GP, 08HQ and supporting definitions, blueprint route, searches, hypotheses, base-change context, and edge cases. The ten-step residue-compatible comparison proof is valid; no new nodes, duplicates, circularity, weakened target, SGA citation, or repair is required. review.md records the checks."
  }
 }

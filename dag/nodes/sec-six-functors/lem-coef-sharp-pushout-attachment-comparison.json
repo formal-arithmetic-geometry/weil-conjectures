@@ -11,11 +11,89 @@
   "lem-coef-sharp-pullback-calculus",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Consider the square $X\\xrightarrow{f}X^{\\prime}$ over $\\mathrm{id}_A$, with vertical maps $pf$ and $p$. Its canonical comparison to $A\\times_A X^{\\prime}=X^{\\prime}$ is $f$, a weak equivalence by hypothesis. Since $p$ is sharp, the comparison criterion of [lem-coef-sharp-pullback-calculus] makes this square homotopy cartesian. Both vertical maps are sharp by hypothesis. The further base-change clause of that same node therefore says that, for every $t:T\\to A$, the actual induced map $X\\times_A T\\to X^{\\prime}\\times_A T$ is a weak equivalence. This is an application of the cited statement, not an assertion that arbitrary pullback preserves weak equivalences.",
+   "uses": [
+    "lem-coef-sharp-pullback-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Lemma 8.3, printed p. 16, last two sentences: base changes of f over A"
+   }
+  },
+  {
+   "text": "For any $u:U\\to B$, give $X$ its map $hpf=qjf=qgi$ to $B$, give $X^{\\prime}$ the map $hp=qj$, and put $T=U\\times_B A$ with its projection to $A$. Write $Z_U=U\\times_B Z$ for each of $Z=X,Y,X^{\\prime},Y^{\\prime}$. The maps $(x,(v,a))\\mapsto(v,x)$ identify $X\\times_A T$ with $X_U$ and $X^{\\prime}\\times_A T$ with $X^{\\prime}_U$; the inverse sends $(v,x)$ to $(x,(v,pf(x)))$ in the first case and uses $p(x)$ in the second. These degreewise bijections commute with every simplicial operator and carry the map in step 1 to $f_U=U\\times_B f$. Thus $f_U$ is a weak equivalence for every $U\\to B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Lemma 8.3, printed p. 16: U times_B f is the base change over U times_B A"
+   }
+  },
+  {
+   "text": "All four corners of the given pushout have the compatible maps to $B$ just specified. The span is a small diagram in the slice over $B$. By [lem-coef-sset-pullback-preserves-colimits], pulling it back along $U\\to B$ gives the pushout $Y^{\\prime}_U=Y_U\\amalg_{X_U}X^{\\prime}_U$, with maps $i_U,f_U,g_U,j_U$. If $i$ is mono, then $i_U$ is mono; if $f$ is mono, then $f_U$ is mono. Indeed a pullback of a degreewise injection is injective: equality of the images of $(v,x_1),(v,x_2)$ forces $x_1=x_2$. No injectivity of $U\\to B$ is needed.",
+   "uses": [
+    "lem-coef-sset-pullback-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Lemma 8.3, printed p. 16, displayed pulled-back pushout; Proposition 3.7"
+   }
+  },
+  {
+   "text": "Suppose first that $i$ is mono. Apply the pushout clause of [lem-coef-sset-gluing-filtered-equivalences] to the map of spans $(X_U\\xrightarrow{i_U}Y_U,\\ X_U\\xrightarrow{1}X_U)\\to(X_U\\xrightarrow{i_U}Y_U,\\ X_U\\xrightarrow{f_U}X^{\\prime}_U)$ whose components are $(1,1,f_U)$. The designated first legs are $i_U$ in both spans, so both monomorphism hypotheses hold. All three component maps are weak equivalences, by step 2 and the identity axiom of the model structure [lem-coef-kan-quillen-model-right-proper-core]. The first pushout is $Y_U$, the second is $Y^{\\prime}_U$ by step 3, and the induced map is precisely $g_U$. Hence $g_U$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Lemma 8.3, printed p. 16, left-properness argument when i is mono"
+   }
+  },
+  {
+   "text": "If instead $f$ is mono, then $f_U$ is both mono and a weak equivalence by steps 2 and 3. In the model structure of [lem-coef-kan-quillen-model-right-proper-core], this makes $f_U$ a trivial cofibration, equivalently a member of ${}^{\\square}\\mathcal F$, where $\\mathcal F$ is the class of Kan fibrations (the model lifting and factorization axioms). The pushout-closure clause of [lem-coef-lifting-class-closure] gives $g_U\\in{}^{\\square}\\mathcal F$, using the pushout of step 3. Thus $g_U$ is a trivial cofibration and in particular a weak equivalence. This branch requires no monomorphism hypothesis on $i$. Together with step 4, it proves that every $g_U$ is a weak equivalence under the stated disjunction.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Lemma 8.3, printed p. 16, cofibration pushout argument when f is mono"
+   }
+  },
+  {
+   "text": "Use the weak-equivalence preservation criterion in [lem-coef-sharp-pullback-calculus] to test $q$. Let $a:U\\to V$ be any weak equivalence over $B$. Since $qg$ is sharp, the induced map $a_Y:Y_U\\to Y_V$ is a weak equivalence. Let $a_{Y^{\\prime}}:Y^{\\prime}_U\\to Y^{\\prime}_V$ be the map to be tested. Naturality of pullback gives $a_{Y^{\\prime}}g_U=g_Va_Y$: on a pair $(v,y)$ both composites apply $a$ to the first coordinate and $g$ to the second. Steps 4 and 5 give weak equivalences $g_U,g_V$. Composition and two-out-of-three in [lem-coef-kan-quillen-model-right-proper-core] now show that $a_{Y^{\\prime}}$ is a weak equivalence. Since $a$ was arbitrary, the cited criterion proves that $q$ is sharp.",
+   "uses": [
+    "lem-coef-sharp-pullback-calculus",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Lemma 8.3, printed p. 16, first two sentences and Proposition 2.7; expanded final weak-equivalence test"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sharp-pullback-calculus",
+  "lem-coef-sset-pullback-preserves-colimits",
+  "lem-coef-sset-gluing-filtered-equivalences",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-lifting-class-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+  "place": "Lemma 8.3, printed p. 16, read online 2026-10-17; expanded using existing DAG statements. The source is not archived in literature/; archive requested in report.md."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-sharp-special-colimit-gluing",
@@ -75,6 +153,58 @@
    "date": "2026-10-17",
    "verdict": "no match: inspected hits concern strict pullbacks, colimits, model-category cofibrancy or stability of trivial cofibrations; none gives the stated sharp-map or homotopy-cartesian cocone comparison.",
    "directory": "CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "SharpMap|IsSharp|homotopy.?cartesian|Rezk",
+   "results": "{\"t\": \"2026-10-17T11:18:44Z\", \"tool\": \"grep\", \"query\": \"SharpMap|IsSharp|homotopy.?cartesian|Rezk\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict pullbacks, monomorphism closure, horns, or generic trivial-cofibration pushouts; none states sharpness of this attachment. Generic pushout stability is used through the existing lifting-class-closure and model-core nodes.",
+   "directory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rezk sharp map pushout attachment weak equivalence simplicial sets",
+   "results": "{\"t\": \"2026-10-17T11:18:44Z\", \"tool\": \"leansearch\", \"query\": \"Rezk sharp map pushout attachment weak equivalence simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.AttachCells.isPushout\", \"CategoryTheory.Limits.Types.Pushout.Rel.casesOn\", \"SSet.horn₂₀.isPushout\", \"CategoryTheory.Limits.Types.Pushout.Rel.recOn\", \"SSet.Subcomplex.BicartSq.isPushout\", \"HomotopicalAlgebra.AttachCells.mk\"], \"digest\": \"6be7a514aa8f2802\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict pullbacks, monomorphism closure, horns, or generic trivial-cofibration pushouts; none states sharpness of this attachment. Generic pushout stability is used through the existing lifting-class-closure and model-core nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T11:18:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.relativeCellComplexOfMono.isPullback\", \"SSet.Subcomplex.Pairing.RankFunction.isPullback\", \"SSet.finite_of_isPullback\", \"SSet.instFinitePullback\", \"SSet.innerFibration_pullbackObjObjπ\", \"SSet.fibration_pullbackObjObjπ\"], \"digest\": \"2ca51a8c4abacd21\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict pullbacks, monomorphism closure, horns, or generic trivial-cofibration pushouts; none states sharpness of this attachment. Generic pushout stability is used through the existing lifting-class-closure and model-core nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sharp maps of simplicial sets remain sharp after attaching a weak equivalence by a pushout along a monomorphism",
+   "results": "{\"t\": \"2026-10-17T11:18:54Z\", \"tool\": \"leanfinder\", \"query\": \"Sharp maps of simplicial sets remain sharp after attaching a weak equivalence by a pushout along a monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn₂₂.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₂₁.isPushout\"], \"digest\": \"0194db670fd1a49e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict pullbacks, monomorphism closure, horns, or generic trivial-cofibration pushouts; none states sharpness of this attachment. Generic pushout stability is used through the existing lifting-class-closure and model-core nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullbacks of a weak equivalence between sharp maps are weak equivalences and cobase change along a cofibration preserves this property",
+   "results": "{\"t\": \"2026-10-17T11:19:50Z\", \"tool\": \"leanfinder\", \"query\": \"Pullbacks of a weak equivalence between sharp maps are weak equivalences and cobase change along a cofibration preserves this property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\"], \"digest\": \"b7fdf79ae108953b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict pullbacks, monomorphism closure, horns, or generic trivial-cofibration pushouts; none states sharpness of this attachment. Generic pushout stability is used through the existing lifting-class-closure and model-core nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "instWeakEquivalenceInlOf|instWeakEquivalenceInrOf|instIsStableUnderCobaseChangeTrivialCofibrations",
+   "results": "{\"t\": \"2026-10-17T11:23:14Z\", \"tool\": \"grep\", \"query\": \"instWeakEquivalenceInlOf|instWeakEquivalenceInrOf|instIsStableUnderCobaseChangeTrivialCofibrations\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict pullbacks, monomorphism closure, horns, or generic trivial-cofibration pushouts; none states sharpness of this attachment. Generic pushout stability is used through the existing lifting-class-closure and model-core nodes.",
+   "directory": "AlgebraicTopology/ModelCategory"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStableUnderCobaseChange|WeakEquivalence.*pushout",
+   "results": "{\"t\": \"2026-10-17T11:24:09Z\", \"tool\": \"grep\", \"query\": \"IsStableUnderCobaseChange|WeakEquivalence.*pushout\", \"sub\": \"AlgebraicTopology/ModelCategory/Instances.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"119\", \"161\", \"198\", \"203\", \"208\"], \"digest\": \"e955675aac34ad28\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict pullbacks, monomorphism closure, horns, or generic trivial-cofibration pushouts; none states sharpness of this attachment. Generic pushout stability is used through the existing lifting-class-closure and model-core nodes.",
+   "directory": "AlgebraicTopology/ModelCategory/Instances.lean"
   }
  ],
  "kind": "statement",
@@ -101,5 +231,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-sharp-pushout-attachment-comparison",
+  "worker": "stage1",
+  "summary": "NQ checked Rezk Lemma 8.3 and kept the statement unchanged. The split makes the base change over A explicit, preserves the slice pushout, handles separately the i-mono gluing and f-mono trivial-cofibration cases, and finishes by the sharp-map weak-equivalence test. Every input is already a DAG node; no new nodes.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the mapping-complex comparison, through the recorded ancestry ending in lem-coef-sharp-special-colimit-gluing: this item supplies Rezk Lemma 8.3 for the two span normalizations in Proposition 8.1(2). The current main-20261015 proof retains that mapping-complex comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-ed11585f9",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-ed11585f9 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, route and source passages. Corrected step 2’s ill-typed qgif to qjf=qgi in the whole JSON under fixes/. Both monomorphism cases and the sharpness test are valid; dependency traversal found no cycles or missing nodes. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,175 +1,448 @@
 {
-  "id": "lem-zl-affine-curve-range",
-  "blueprint": {
-    "is": "lem-zl-affine-curve-range",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Cohomological range of an affine curve",
-  "statement": "If $C_0$ is a smooth affine curve and $\\mathcal F$ is constructible\nin the coefficients of [def-weil-pbc-qbar-category], then\n$H_c^i(C,\\mathcal F)=0$ for $i\\notin\\{0,1,2\\}$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.md",
-    "place": "node lem-zl-affine-curve-range, order 2735"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-qbar-category",
-    "def-weil-ordinary-compact-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "For r < 0, unfold compact support as exact extension by zero followed by the right derived functor of pushforward along the chosen proper compactification. The exact functor sends a degree-zero sheaf to a degree-zero sheaf; Functor.isGE_rightDerivedFunctor_obj_singleFunctor and DerivedCategory.isZero_of_isGE give zero negative homology. WeilComplex.isZero_homologySheaf_obj_iff transfers this to the Weil cohomology sheaf. Global sections, forgetting adic coefficients, and coefficient restriction preserve zero objects; ModuleCat.subsingleton_of_isZero gives the required carrier subsingleton.",
-      "uses": [
-        "def-compact-support-direct-image-detailed",
-        "def-weil-ordinary-compact-cohomology"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "In the remaining case 2 < r, apply [lem-zl-affine-curve-range-positive] to obtain a zero Weil cohomology sheaf, then the same global-sections argument. The parent declaration is unchanged; this is a decomposition with a proved negative-degree branch and an open geometric upper-bound branch.",
-      "uses": [
-        "lem-zl-affine-curve-range-positive",
-        "def-weil-ordinary-compact-cohomology"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-compact-support-direct-image-detailed",
-    "def-weil-ordinary-compact-cohomology",
-    "lem-zl-affine-curve-range-positive"
-  ],
-  "proof_origin": {
-    "by": "F3 stage 3",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.md",
-    "place": "Stage-3 reduction separating negative and high degrees"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2735,
-  "blueprint_uses": [
-    "def-compact-support-direct-image-detailed",
+ "id": "lem-zl-affine-curve-range",
+ "blueprint": {
+  "is": "lem-zl-affine-curve-range",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomological range of an affine curve",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ of [def-weil-finite-field-fiber] and a prime $\\ell\\ne\\operatorname{char}(k_0)$. Let $C_0$ be a smooth affine curve over $k_0$, meaning a finite-type affine scheme whose structure morphism is smooth of relative dimension one [def-sbc-smooth-morphisms], and put $C=C_0\\times_{k_0}k$. Let $\\mathcal F$ be a constructible $\\overline{\\mathbf Q}_\\ell$-Weil sheaf on $C_0$ [def-weil-weil-sheaf-complex], in the common finite-stage coefficient category [def-weil-pbc-qbar-category]. Thus its underlying constructible complex is a sheaf in degree zero. With compact-support cohomology as in [def-weil-ordinary-compact-cohomology], one has\n$$H_c^i(C,\\mathcal F)=0\\qquad(i\\in\\mathbf Z\\setminus\\{0,1,2\\}).$$\nNo connectedness or geometric connectedness is assumed; the empty curve is included.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.md",
+  "place": "node lem-zl-affine-curve-range, order 2735"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sbc-smooth-morphisms",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-pbc-qbar-category",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Forget the Weil isomorphism: by [def-weil-ordinary-compact-cohomology] the underlying coefficient group is computed from the underlying constructible complex. Represent that complex by $(E,K)$ at a finite extension $E/\\mathbf Q_\\ell$ using [def-weil-pbc-qbar-category]. Replace $K$ by $F_E=\\mathcal H^0(K)$ at this stage. The truncations of [prop-constructible-truncations] commute with the finite-stage transition functors, so the image of $F_E$ is $\\mathcal H^0(\\operatorname{For}\\mathcal F)=\\operatorname{For}\\mathcal F$, since $\\mathcal F$ is a Weil sheaf, not an arbitrarily shifted complex. It suffices to compute compact supports of this degree-zero $E$-object and then extend scalars.",
+   "uses": [
     "def-weil-ordinary-compact-cohomology",
     "def-weil-pbc-qbar-category",
-    "lem-sc-cohomological-dimension",
+    "prop-constructible-truncations",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.proof.md",
+    "place": "Preparatory finite-stage and degree-zero clarification"
+   }
+  },
+  {
+   "text": "The geometric curve $C$ has dimension at most one. Choose any integral representative $K_{\\mathcal O}\\in D^b_c(C,\\mathcal O_E)$ of $F_E$; it exists because rationalization has the same objects as the integral category [def-weil-pbc-rational-category]. Apply [lem-trf-curve-integral-lattice] with $X_0=C_0$ and $K_E=F_E$. It supplies a constructible integral sheaf $M$, with injective multiplication by $\\varpi_E$, such that $F_E\\simeq M[1/\\varpi_E]$. Its derived reductions are the degree-zero sheaves $M_n=M/\\varpi_E^nM$, are finite-Tor constructible, and have explicit etale-origin witnesses. Use their quotient-induced transition maps throughout. No integral Weil isomorphism on $M$ is needed.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "lem-trf-curve-integral-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.proof.md",
+    "place": "Second paragraph: choose a constructible integral lattice and its finite reductions"
+   }
+  },
+  {
+   "text": "Smoothness of relative dimension one survives geometric base change by [lem-sbc-smooth-relative-dimension-permanence]. Decompose $C=\\coprod_{a\\in I}C_a$ into finitely many connected smooth curves using [lem-sc-smooth-curve-connected-coproduct]; the affine finite-type hypothesis gives quasi-compactness and separatedness. For each $a$, [lem-sc-compactification] gives a smooth proper connected completion $j_a:C_a\\hookrightarrow\\overline C_a$. Let $\\overline C=\\coprod_a\\overline C_a$ and $j=\\coprod_a j_a$. This is a proper compactification: a finite affine cover of the pieces proves finite type; the diagonal is closed on each clopen product piece, and after any base change the image of a closed subset is the finite union of the closed images in the pieces. These are exactly the three conditions in [def-weil-proper-morphism]. If $I$ is empty, all finite-level cohomology groups below are zero by the empty-product case of [lem-weil-pbc-finite-coproduct-cohomology-assembly].",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sc-smooth-curve-connected-coproduct",
     "lem-sc-compactification",
-    "lem-weil-pbc-mittag-leffler",
-    "prop-weil-pbc-direct-image-limits",
-    "sbc-thm-finiteness-finite-type"
-  ],
-  "uses_not_cited": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-coproduct-cohomology-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.proof.md",
+    "place": "First paragraph: smooth proper completion, componentwise including the empty curve"
+   }
+  },
+  {
+   "text": "For every $n\\ge1$, [lem-trf-open-ctf] makes $j_!M_n$ a finite-Tor constructible sheaf in degree zero on $\\overline C$. The chosen-compactification formula [lem-trf-compactification-cohomology] gives\n$$K_n:=R\\Gamma_c(C,M_n)\\simeq R\\Gamma(\\overline C,j_!M_n).$$\nThe required etale-origin witness is supplied in Step 2. By [lem-sf-proetale-constructible-origin], $j_!M_n$ is the pullback of a degree-zero constructible etale sheaf $G_n$. The cohomology comparison [sk-prop-sf-comparison] identifies the last complex with $R\\Gamma(\\overline C_{\\mathrm{Et}},G_n)$; finite coefficients here are discrete $A_{E,n}$, not the completed integral coefficient sheaf.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "lem-trf-compactification-cohomology",
+    "lem-sf-proetale-constructible-origin",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.proof.md",
+    "place": "First paragraph: finite-level compactification formula and site comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-cohomological-dimension] to $G_n|_{\\overline C_a}$ on each smooth proper connected curve over the algebraically closed field $k$. These are torsion etale sheaves because $A_{E,n}$ is finite. The constant-ring module/abelian cohomology comparison [lem-pe-left-module-derived-evaluation-forget] identifies the underlying abelian cohomology with that used in the torsion bound. Hence their cohomology is zero above two, and [lem-weil-pbc-finite-coproduct-cohomology-assembly] gives $H^r(K_n)=0$ for $r>2$. For negative degrees, use [lem-weil-pbc-module-sheaves-enough-injectives]: embed $G_n$ in an injective $J^0$, embed its cokernel in $J^1$, and iterate. The differentials $J^a\\to J^{a+1}$ factor through the successive cokernels, giving an injective resolution with $J^a=0$ for $a<0$. It computes derived sections because bounded-below injective complexes are K-injective [prop-weil-pbc-kinjective-resolutions-exist]. Applying sections leaves every negative term zero, hence $H^r(K_n)=0$ for $r<0$. Finally [sbc-thm-finiteness-finite-type] for the proper finite-type structure map of $\\overline C$ makes its derived direct image bounded constructible. At the algebraically closed point, finite constructible coefficients have finite stalks; thus every $H^r(K_n)$ is a finite abelian group. All coefficients have order prime to $\\operatorname{char}k$.",
+   "uses": [
+    "lem-sc-cohomological-dimension",
+    "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "sbc-thm-finiteness-finite-type",
+    "lem-pe-left-module-derived-evaluation-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.proof.md",
+    "place": "First paragraph and second paragraph: finite-level range and proper finiteness"
+   }
+  },
+  {
+   "text": "Let $a:C\\to s=\\operatorname{Spec}k$. The integral compact-support definition [def-weil-integral-rational-qbar-compact-support] is\n$$Ra_!M=R\\varprojlim_n\\operatorname{Res}_nRa_{!,n}M_n,$$\nwith precisely the quotient-induced transitions fixed in Step 2. Apply [lem-kun-site-rgamma-derived-limit] on the small pro-etale ringed site of $s$, at its final object. It identifies derived sections of this derived-limit triangle with the derived limit of the sections of its levels, after forgetting scalars. Sections at $s$ are exact by [lem-weil-point-proetale-sections-exact], so those level complexes are exactly the underlying abelian complexes $K_n$ of Step 4, by [def-weil-ordinary-compact-cohomology]. Consequently\n$$P:=R\\Gamma_c(C,M)\\simeq R\\varprojlim_n K_n\\quad\\text{in }D(\\operatorname{Ab}).$$\nHere $\\operatorname{Res}_n$ changes the scalar action only; all limits use the completed integral coefficient sheaf before sections are taken.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-kun-site-rgamma-derived-limit",
+    "lem-weil-point-proetale-sections-exact",
     "def-weil-ordinary-compact-cohomology"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine",
-          "module": "WeilConjectures.WeilSheaf.Cohomology",
-          "lines": [
-            130,
-            140
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper",
-          "lines": [
-            324,
-            339
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine"
-      ],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
-          "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
-          "lines": [
-            405,
-            415
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.proof.md",
+    "place": "Second paragraph: inverse-limit computation; Stacks Tag 0D6K"
+   }
   },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-l-dl-a1-endpoints",
-  "lean": {
-    "module": "WeilConjectures.WeilSheaf.Cohomology",
-    "declaration": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine",
-    "branch": "slopmaster2",
-    "line": 130,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "The groups $H^{i-1}(K_n)$ are finite for every integer $i$, so the Milnor-map assertion of [lem-weil-pbc-mittag-leffler] applies to the countable tower of abelian complexes from Step 6 and gives\n$$H^i(P)\\simeq\\varprojlim_n H^i(K_n).$$\nEquivalently, in the Milnor short exact sequence of [lem-pc-derived-limit-milnor-sequence], its left term $R^1\\varprojlim H^{i-1}(K_n)$ is zero. For $i\\notin\\{0,1,2\\}$ every group in the right-hand limit is zero by Step 5, so $H^i(P)=0$. In particular, when $i=3$ the groups $H^2(K_n)$ may be nonzero, but their finiteness still kills the $R^1\\varprojlim$ term; no degree-three class is introduced.",
+   "uses": [
+    "lem-weil-pbc-mittag-leffler",
+    "lem-pc-derived-limit-milnor-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.proof.md",
+    "place": "Third paragraph: Mittag--Leffler, including the possible degree-three obstruction"
+   }
   },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F3",
-    "result": "pass",
-    "landing": "20261015T182204-L-785636",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "If $C_0$ is a smooth affine curve over $k_0$ (affine and smooth of\nrelative dimension one) and $\\mathcal F$ is a constructible Weil sheaf on\n$C_0$ in the coefficients of [def-weil-pbc-qbar-category], then\n$H_c^i(C,\\mathcal F)=0$ for $i\\notin\\{0,1,2\\}$.",
-    "proof": [
-      {
-        "text": "Choose a smooth proper completion $j:C\\hookrightarrow\\overline C$\nby [lem-sc-compactification]. At finite coefficient level,\n\n$$\nR\\Gamma_c(C,\\mathcal F_n)\n=R\\Gamma(\\overline C,j_!\\mathcal F_n)\n$$\n\nby [def-compact-support-direct-image-detailed]. The object\n$j_!\\mathcal F_n$ is a sheaf in degree zero.\nThe cohomological-dimension bound\n[lem-sc-cohomological-dimension](a), applied to this sheaf,\ntherefore gives vanishing outside degrees $0,1,2$.",
-        "uses": [
-          "lem-sc-compactification",
-          "def-compact-support-direct-image-detailed",
-          "lem-sc-cohomological-dimension"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "For a constructible integral lattice and its finite reductions,\nthe groups $H^r(\\overline C,j_!\\mathcal F_n)$ are finite by\n[sbc-thm-finiteness-finite-type] applied to the proper\nstructure morphism of $\\overline C$.\nThe inverse-limit computation\n[prop-weil-pbc-direct-image-limits] has Milnor exact sequence\n\n$$\n0\\longrightarrow\\varprojlim\\nolimits^1\nH^{r-1}(\\overline C,j_!\\mathcal F_n)\n\\longrightarrow H_c^r(C,\\mathcal F_{\\mathcal O_E})\n\\longrightarrow\\varprojlim H^r(\\overline C,j_!\\mathcal F_n)\n\\longrightarrow0.\n$$",
-        "uses": [
-          "sbc-thm-finiteness-finite-type",
-          "prop-weil-pbc-direct-image-limits"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The first term vanishes by [lem-weil-pbc-mittag-leffler];\nthus passage to the integral lattice introduces no degree $3$\nterm. Rationalizing, and then making the finite scalar extensions\nof [def-weil-pbc-qbar-category], preserves this vanishing and\ngives the assertion for $\\mathcal F$.\nThe argument concerns sheaves in degree zero: an arbitrary shift\nof such a sheaf would shift the cohomological range.",
-        "uses": [
-          "lem-weil-pbc-mittag-leffler",
-          "def-weil-pbc-qbar-category"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "The rational comparison in [lem-trf-curve-integral-lattice] gives\n$$H_c^i(C,F_E)\\simeq H^i(P)\\otimes_{\\mathcal O_E}E.$$\nThis is zero for each of the degrees in question by Step 7. At the algebraically closed stage, [def-weil-integral-rational-qbar-compact-support] computes $Ra_!\\mathcal F$ from the same finite-stage object by extending $E$ to $\\overline{\\mathbf Q}_\\ell$. The point realization is stagewise by [def-weil-finite-coefficient-point], and [lem-weil-cohomology-commutes-scalar-extension] identifies its cohomology with $H_c^i(C,F_E)\\otimes_E\\overline{\\mathbf Q}_\\ell=0$. By the definition of Weil cohomology in [def-weil-ordinary-compact-cohomology], this is the underlying coefficient space of the claimed group; the unique Frobenius action on the zero space finishes the assertion.",
+   "uses": [
+    "lem-trf-curve-integral-lattice",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-cohomology-commutes-scalar-extension",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.proof.md",
+    "place": "Third paragraph: rationalization, finite stages, and forgetting the Weil structure"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-pbc-qbar-category",
+  "prop-constructible-truncations",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-pbc-rational-category",
+  "lem-trf-curve-integral-lattice",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-smooth-curve-connected-coproduct",
+  "lem-sc-compactification",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "lem-trf-open-ctf",
+  "lem-trf-compactification-cohomology",
+  "lem-sf-proetale-constructible-origin",
+  "sk-prop-sf-comparison",
+  "lem-sc-cohomological-dimension",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "sbc-thm-finiteness-finite-type",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-mittag-leffler",
+  "lem-pc-derived-limit-milnor-sequence",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-cohomology-commutes-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-zl-affine-curve-range.proof.md",
+  "place": "All three paragraphs, with explicit degree-zero lattice, site comparison, disconnected and inverse-limit details"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported cohomology of a constructible l-adic sheaf on a smooth affine curve vanishes outside degrees zero one two",
+   "results": "Hits: DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, CochainComplex.isZero_of_isGE, CochainComplex.isZero_of_isLE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective. Read the printed signatures; no declaration states the constructible adic compact-support curve range.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupportedCohomology|affine.curve.*cohom|cohom.*curve",
+   "results": "Hits: none. Read the printed signatures; no declaration states the constructible adic compact-support curve range.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactlySupportedCohomology\"",
+   "results": "Hits: none. Read the printed signatures; no declaration states the constructible adic compact-support curve range.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported etale cohomology of a smooth curve vanishes above degree two",
+   "results": "Hits: CochainComplex.isStrictlyGE_iff, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.FormallyEtale.of_unramified_and_smooth, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, CochainComplex.IsStrictlyGE, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero. Read the printed signatures; no declaration states the constructible adic compact-support curve range.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale compact support cohomology of a constructible sheaf on an algebraic curve has cohomological dimension at most two",
+   "results": "Hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, DerivedCategory.isLE_iff, DerivedCategory.isZero_of_isGE. Read the printed signatures; no declaration states the constructible adic compact-support curve range.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2735,
+ "blueprint_uses": [
+  "def-compact-support-direct-image-detailed",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-pbc-qbar-category",
+  "lem-sc-cohomological-dimension",
+  "lem-sc-compactification",
+  "lem-weil-pbc-mittag-leffler",
+  "prop-weil-pbc-direct-image-limits",
+  "sbc-thm-finiteness-finite-type"
+ ],
+ "uses_not_cited": [
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine",
+     "module": "WeilConjectures.WeilSheaf.Cohomology",
+     "lines": [
+      130,
+      140
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper",
+     "lines": [
+      324,
+      339
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine"
+   ],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-endpoints",
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.Cohomology",
+  "declaration": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine",
+  "branch": "slopmaster2",
+  "line": 130,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T182204-L-785636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "If $C_0$ is a smooth affine curve over $k_0$ (affine and smooth of\nrelative dimension one) and $\\mathcal F$ is a constructible Weil sheaf on\n$C_0$ in the coefficients of [def-weil-pbc-qbar-category], then\n$H_c^i(C,\\mathcal F)=0$ for $i\\notin\\{0,1,2\\}$.",
+  "proof": [
+   {
+    "text": "Choose a smooth proper completion $j:C\\hookrightarrow\\overline C$\nby [lem-sc-compactification]. At finite coefficient level,\n\n$$\nR\\Gamma_c(C,\\mathcal F_n)\n=R\\Gamma(\\overline C,j_!\\mathcal F_n)\n$$\n\nby [def-compact-support-direct-image-detailed]. The object\n$j_!\\mathcal F_n$ is a sheaf in degree zero.\nThe cohomological-dimension bound\n[lem-sc-cohomological-dimension](a), applied to this sheaf,\ntherefore gives vanishing outside degrees $0,1,2$.",
+    "uses": [
+     "lem-sc-compactification",
+     "def-compact-support-direct-image-detailed",
+     "lem-sc-cohomological-dimension"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For a constructible integral lattice and its finite reductions,\nthe groups $H^r(\\overline C,j_!\\mathcal F_n)$ are finite by\n[sbc-thm-finiteness-finite-type] applied to the proper\nstructure morphism of $\\overline C$.\nThe inverse-limit computation\n[prop-weil-pbc-direct-image-limits] has Milnor exact sequence\n\n$$\n0\\longrightarrow\\varprojlim\\nolimits^1\nH^{r-1}(\\overline C,j_!\\mathcal F_n)\n\\longrightarrow H_c^r(C,\\mathcal F_{\\mathcal O_E})\n\\longrightarrow\\varprojlim H^r(\\overline C,j_!\\mathcal F_n)\n\\longrightarrow0.\n$$",
+    "uses": [
+     "sbc-thm-finiteness-finite-type",
+     "prop-weil-pbc-direct-image-limits"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The first term vanishes by [lem-weil-pbc-mittag-leffler];\nthus passage to the integral lattice introduces no degree $3$\nterm. Rationalizing, and then making the finite scalar extensions\nof [def-weil-pbc-qbar-category], preserves this vanishing and\ngives the assertion for $\\mathcal F$.\nThe argument concerns sheaves in degree zero: an arbitrary shift\nof such a sheaf would shift the cohomological range.",
+    "uses": [
+     "lem-weil-pbc-mittag-leffler",
+     "def-weil-pbc-qbar-category"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-affine-curve-range",
+  "worker": "stage1",
+  "summary": "Follows main-20261015 rather than the stale stage-3 reduction. Makes the sheaf/finite-field conventions explicit; reuses existing lattice, component, site-comparison, derived-section and Milnor lemmas. No new nodes. Handles disconnected and empty curves, and the degree-three lim^1 obstruction.",
+  "blueprint": "First paragraph is Steps 3–5; integral-lattice and finite-group paragraph is Steps 1–2, 5–6; final Mittag--Leffler and coefficient passage is Steps 7–8. This carries the final curve-cohomological-dimension sentence of the endpoints unit.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Commutes truncations with finite coefficient extension so a Qbar sheaf has a degree-zero finite-stage representative."
+   },
+   {
+    "node": "lem-trf-curve-integral-lattice",
+    "why": "Supplies a torsion-free degree-zero integral model and its finite reductions; no endpoints-unit node supplies this lattice lemma."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic Base change and composition of smooth morphisms of fixed relative dimension used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-sc-smooth-curve-connected-coproduct",
+    "why": "Generic Finite coproduct decomposition of a smooth relative-dimension-one curve used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-sc-compactification",
+    "why": "Generic Compactification of a smooth curve used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "why": "Generic Cohomology of a finite coproduct is the product of component cohomologies used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Generic Extension by zero preserves constructibility and Tor amplitude used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-compactification-cohomology",
+    "why": "Generic Cohomology on a chosen compactification used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "Generic Bounded-below cohomology comparison used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-sc-cohomological-dimension",
+    "why": "Generic Cohomological dimension of a smooth curve used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on the small etale site have enough injectives used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "sbc-thm-finiteness-finite-type",
+    "why": "Generic Finiteness of higher direct images of finite-type morphisms used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Generic Derived evaluation of arbitrary left-module sheaves commutes with forgetting scalars used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-kun-site-rgamma-derived-limit",
+    "why": "Supplies derived sections of the integral tower as a derived limit in D(Ab), the precise comparison needed before applying the endpoints-unit Mittag--Leffler lemma."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic Sections over an algebraically closed point are exact on the pro-etale site used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-pc-derived-limit-milnor-sequence",
+    "why": "Generic Milnor exact sequence for a derived inverse limit used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-cohomology-commutes-scalar-extension",
+    "why": "Generic Cohomology commutes with extension of scalars along a field extension used to implement the blueprint finite-coefficient compactification and Milnor route; no endpoints-unit node states this auxiliary fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-truncations",
+  "lem-trf-curve-integral-lattice",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-smooth-curve-connected-coproduct",
+  "lem-sc-compactification",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "lem-trf-open-ctf",
+  "lem-trf-compactification-cohomology",
+  "lem-sf-proetale-constructible-origin",
+  "sk-prop-sf-comparison",
+  "lem-sc-cohomological-dimension",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "sbc-thm-finiteness-finite-type",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-weil-cohomology-commutes-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q11-b215449af",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-b215449af (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source passages. All eight steps follow the current finite-coefficient/Milnor route; coefficient distinctions, hypotheses, empty/disconnected cases and degree-three lim¹ vanishing check out. Accepted all 19 declared tool uses. No new nodes, cycles through the item, or repairs. Detailed checks written to review.md."
+ }
 }

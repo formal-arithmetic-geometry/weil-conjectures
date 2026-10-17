@@ -7,10 +7,113 @@
  },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "By [lem-coef-model-infinity-derived-adjunction], $R$ preserves fibrations, trivial fibrations and weak equivalences between fibrant objects. Since a right adjoint preserves the terminal object, $RY$ is fibrant for fibrant $Y$. The composite of the fibration $q_{RY}:QRY\\to RY$ with $RY\\to *$ is a fibration, so $QRY$ is fibrant and is cofibrant by hypothesis. Closure of fibrations under composition follows directly by solving the two successive lifting problems. Thus the given enriched composite restricts to $F=QR:\\mathcal N^{cf}\\to\\mathcal M^{cf}$. Naturality gives $q_B Qf=fq_A$ for every arrow $f:A\\to B$. If $f$ is weak, both $fq_A$ and $q_B$ are weak, so two-out-of-three makes $Qf$ weak. Consequently $F$ preserves weak equivalences between bifibrants. Both bifibrant simplicial categories are locally Kan by applying the simplicial model axiom of [lem-coef-simplicial-model-nerve-localization] to the initial map of their source and terminal map of their target.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.21, replacement functors; elementary bifibrancy and two-out-of-three argument for the specified Q."
+   }
+  },
+  {
+   "text": "Take the coherent derived adjunction $\\mathbb L=\\mathbf LL\\dashv\\mathbb R=\\mathbf RR$ supplied by [lem-coef-model-infinity-derived-adjunction], using the underlying ordinary functor $Q$ for cofibrant replacement. For any $X\\in\\mathcal M$ put $P=QX$, and choose a functorial fibrant replacement $t_{LP}:LP\\to TLP$. The map $u_P:P\\to RTLP$ adjoint to $t_{LP}$ is weak: $P$ is cofibrant, $TLP$ is fibrant, and $t_{LP}$ is weak, so the assumed Quillen-equivalence criterion applies. The cited derived-unit formula identifies the unit at the localization of $X$ with the localization of $u_P$ after inverting the localization of $q_X$. It is therefore an equivalence. This is the actual coherent unit of the cited adjunction, rather than an independently chosen family of arrows.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.21, proof: the map v-prime from a cofibrant object to the right adjoint of a fibrant replacement; application to QX."
+   }
+  },
+  {
+   "text": "For fibrant $Y\\in\\mathcal N$ consider $c_Y:LQRY\\xrightarrow{Lq_{RY}}LRY\\xrightarrow{\\epsilon_Y}Y$. Its ordinary adjoint is $q_{RY}:QRY\\to RY$, by naturality of the adjunction bijection and the defining property of $\\epsilon$. Since $QRY$ is cofibrant and $Y$ is fibrant, the Quillen-equivalence criterion implies that $c_Y$ is weak. The counit formula of [lem-coef-model-infinity-derived-adjunction] identifies its localization with the derived counit at $Y$. Every object of $\\mathcal N_\\infty$ is equivalent to a fibrant representative by fibrant replacement, so naturality gives equivalence components everywhere. Step 2 gives the same for the unit. By [lem-cbc-enhanced-functor-cone-calculus], componentwise equivalences are equivalences in the whole functor quasicategories. Thus these unit and counit transformations exhibit $\\mathbb L$ and $\\mathbb R$ as coherent inverse equivalences.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.21, dual replacement argument for the other composite; actual counit checked using its adjunct, followed by the componentwise criterion."
+   }
+  },
+  {
+   "text": "For $\\mathcal A=\\mathcal M,\\mathcal N$, let $B_{\\mathcal A}$ be the underlying ordinary category of $\\mathcal A^{cf}$, $i_{\\mathcal A}:B_{\\mathcal A}\\to\\mathcal A$ its inclusion, and $C_{\\mathcal A}=N_{\\mathrm{hc}}(\\mathcal A^{cf})$. Include the discrete enrichment of $B_{\\mathcal A}$ into $\\mathcal A^{cf}$ and take coherent nerves, obtaining $j_{\\mathcal A}:N(B_{\\mathcal A})\\to C_{\\mathcal A}$. The ordinary-nerve identification of [lem-coef-coherent-nerve-comparison] says that $j$ sends an ordinary string to the coherent simplex constant at each of its composites. By [lem-coef-simplicial-model-nerve-localization] there is an equivalence $e_{\\mathcal A}:C_{\\mathcal A}\\simeq\\mathcal A_\\infty$ with $e_{\\mathcal A}j_{\\mathcal A}\\simeq\\ell_{\\mathcal A}N(i_{\\mathcal A})$, where $\\ell_{\\mathcal A}$ denotes localization. Its statement also says that $N(B_{\\mathcal A})[W^{-1}]_\\infty\\simeq\\mathcal A_\\infty$ via inclusion. Hence $j_{\\mathcal A}$ is itself localization at $W$: compose restriction along $j_{\\mathcal A}$ with the equivalence induced by $e_{\\mathcal A}$ and use the full functor-category universal property. In particular restriction along $j_{\\mathcal A}$ is fully faithful on functor infinity categories.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20, its localization universal property; canonical ordinary-to-coherent nerve map expanded using the subset-poset construction."
+   }
+  },
+  {
+   "text": "Put $H=N_{\\mathrm{hc}}F$ and let $F_0:B_{\\mathcal N}\\to B_{\\mathcal M}$ be the underlying ordinary functor. The construction in step 4 gives the strict equality $Hj_{\\mathcal N}=j_{\\mathcal M}N(F_0)$: both sides send a string to the same composites, since $F$ is enriched. Consequently $e_{\\mathcal M}Hj_{\\mathcal N}\\simeq\\ell_{\\mathcal M}N(QRi_{\\mathcal N})$. The ordinary natural transformation $qR:QRi_{\\mathcal N}\\Rightarrow Ri_{\\mathcal N}$ has weak components; after localization its nerve is a coherent natural equivalence by [lem-cbc-enhanced-functor-cone-calculus]. Thus this last functor is equivalent to $\\ell_{\\mathcal M}N(Ri_{\\mathcal N})$. On the other hand the coherent replacement formula in [lem-coef-model-infinity-derived-adjunction] gives $\\mathbb R e_{\\mathcal N}j_{\\mathcal N}\\simeq\\ell_{\\mathcal M}N(Ri_{\\mathcal N})$: every input is fibrant, and the natural comparison $RY\\to RTY$ is weak because $R$ preserves weak equivalences between fibrants. This identifies the two precomposed functors, including their transformations, not only their objects.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.21 and Remark 1.3.4.27, right derived replacement composite; enriched ordinary-nerve square and qR comparison written explicitly."
+   }
+  },
+  {
+   "text": "Restriction along $j_{\\mathcal N}$ is fully faithful by step 4. The coherent natural equivalence between the restrictions constructed in step 5 therefore lifts to an equivalence $e_{\\mathcal M}H\\simeq\\mathbb R e_{\\mathcal N}$: lift the transformation and its inverse by fullness on mapping spaces, and lift their inverse homotopies by faithfulness. This uses the entire functor-category localization property of [lem-coef-simplicial-model-nerve-localization]. Combining it with step 3 and the inverses of $e_{\\mathcal M},e_{\\mathcal N}$ gives a coherent inverse $K\\simeq e_{\\mathcal N}^{-1}\\mathbb L e_{\\mathcal M}$ of $H$, with equivalences $KH\\simeq1$ and $HK\\simeq1$. Thus the specified $H$, for the given arbitrary enriched $Q$, represents $\\mathbf RR$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20 and Lemma 1.3.4.21; elementary uniqueness through the full localization universal property."
+   }
+  },
+  {
+   "text": "The comparison just proved is an equivalence of functors in the functor infinity category. It therefore identifies their actions on mapping spaces and their composition homotopies. More concretely [lem-coef-coherent-nerve-comparison] identifies the mapping spaces of $C_{\\mathcal A}$ naturally with the actual enriched mapping sets of $\\mathcal A^{cf}$, by a comparison preserving enriched composition and its coherent homotopies. Naturality for the simplicial functor $F$ identifies the mapping map induced by $H$ with the given map induced by $QR$, including these composition data. The localization comparison of [lem-coef-simplicial-model-nerve-localization] then identifies them with localized derived mapping spaces. The functor equivalence criterion in [lem-cbc-enhanced-functor-cone-calculus] also shows that these maps are equivalences.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20 with its mapping-space interpretation; explicit use of natural coherent-nerve and localization comparisons."
+   }
+  },
+  {
+   "text": "Finally check the stated testing convention for categorical equivalence. For every quasicategory $Z$, precomposition with $H$ gives $H^*:\\operatorname{Fun}(C_{\\mathcal M},Z)\\to\\operatorname{Fun}(C_{\\mathcal N},Z)$, and precomposition with $K$ is its inverse up to coherent natural equivalence: whisker $KH\\simeq1$ and $HK\\simeq1$ from step 6 with diagrams into $Z$. These are natural equivalences by the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus]. Passing to homotopy categories makes them natural isomorphisms, so $hH^*$ is an equivalence of ordinary categories for every $Z$. This is exactly categorical equivalence in [lem-coef-joyal-model-structure]. The equivalence unit and counit of the derived adjunction were established in steps 2 and 3. No step asserts that $R$ preserves cofibrant objects.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.21, equivalence conclusion interpreted in the Joyal testing convention; elementary whiskering of the displayed inverses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-joyal-model-structure"
+ ],
  "id": "lem-coef-derived-restriction-bifibrant-nerve-equivalence",
  "kind": "statement",
  "title": "Bifibrant nerve presentation of derived right Quillen equivalences",
@@ -74,9 +177,55 @@
    "results": "{\"t\": \"2026-10-17T08:26:42Z\", \"tool\": \"grep\", \"query\": \"QuillenEquivalence|Quillen equivalence\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned types concern ordinary homotopy/localization categories, ordinary nerve, chosen replacements only functorial in HoCat, or the definition of the coherent nerve. No enriched bifibrant-nerve derived-equivalence theorem. Read SimplicialNerve.lean:14-34 and CofibrantObjectHomotopy.lean:131-178."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial Quillen equivalence induces an equivalence on the homotopy coherent nerves of bifibrant objects after enriched cofibrant replacement",
+   "results": "{\"t\": \"2026-10-17T13:05:34Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial Quillen equivalence induces an equivalence on the homotopy coherent nerves of bifibrant objects after enriched cofibrant replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"0090ff259bf5d847\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/truncation and ordinary-category localization or adjunction results do not state an infinity derived-equivalence theorem. Read SimplicialNerve.lean:14-34, CofibrantObjectHomotopy.lean:131-178, and Functor/Derived/Adjunction.lean:37-58,144-150. The grep hit in SingularSet.lean:37 is a future-work comment."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuillenEquivalence",
+   "results": "{\"t\": \"2026-10-17T13:05:35Z\", \"tool\": \"loogle\", \"query\": \"QuillenEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'QuillenEquivalence'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/truncation and ordinary-category localization or adjunction results do not state an infinity derived-equivalence theorem. Read SimplicialNerve.lean:14-34, CofibrantObjectHomotopy.lean:131-178, and Functor/Derived/Adjunction.lean:37-58,144-150. The grep hit in SingularSet.lean:37 is a future-work comment."
+  },
+  {
+   "tool": "grep",
+   "query": "QuillenEquivalence|Quillen equivalence|enriched.*replacement",
+   "results": "{\"t\": \"2026-10-17T13:05:35Z\", \"tool\": \"grep\", \"query\": \"QuillenEquivalence|Quillen equivalence|enriched.*replacement\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"80d8c618cea3e9c4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/truncation and ordinary-category localization or adjunction results do not state an infinity derived-equivalence theorem. Read SimplicialNerve.lean:14-34, CofibrantObjectHomotopy.lean:131-178, and Functor/Derived/Adjunction.lean:37-58,144-150. The grep hit in SingularSet.lean:37 is a future-work comment."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived right adjoint of a Quillen equivalence is represented by enriched cofibrant replacement on fibrant cofibrant objects",
+   "results": "{\"t\": \"2026-10-17T13:06:54Z\", \"tool\": \"leansearch\", \"query\": \"The derived right adjoint of a Quillen equivalence is represented by enriched cofibrant replacement on fibrant cofibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"CategoryTheory.Adjunction.rightAdjointOfEquiv_obj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.Equivalence.isRightAdjoint_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"CategoryTheory.Adjunction.rightAdjointOfEquiv\"], \"digest\": \"ffd026a7bb4a01a9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/truncation and ordinary-category localization or adjunction results do not state an infinity derived-equivalence theorem. Read SimplicialNerve.lean:14-34, CofibrantObjectHomotopy.lean:131-178, and Functor/Derived/Adjunction.lean:37-58,144-150. The grep hit in SingularSet.lean:37 is a future-work comment."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quillen equivalence has invertible derived unit and counit on infinity categorical localizations",
+   "results": "{\"t\": \"2026-10-17T13:07:01Z\", \"tool\": \"leanfinder\", \"query\": \"Quillen equivalence has invertible derived unit and counit on infinity categorical localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_unit_of_unit\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isEquivalence\", \"CategoryTheory.LocalizerMorphism.isEquivalence\", \"CategoryTheory.LocalizerMorphism.isEquivalence_imp\", \"CategoryTheory.LocalizerMorphism.isEquivalence_iff\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\"], \"digest\": \"deab0be8ed7516ce\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/truncation and ordinary-category localization or adjunction results do not state an infinity derived-equivalence theorem. Read SimplicialNerve.lean:14-34, CofibrantObjectHomotopy.lean:131-178, and Functor/Derived/Adjunction.lean:37-58,144-150. The grep hit in SingularSet.lean:37 is a future-work comment."
+  },
+  {
+   "tool": "grep",
+   "query": "def derived|SimplicialNerve|quasicategor",
+   "results": "{\"t\": \"2026-10-17T13:07:01Z\", \"tool\": \"grep\", \"query\": \"def derived|SimplicialNerve|quasicategor\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"65a4b84f7106691d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve/truncation and ordinary-category localization or adjunction results do not state an infinity derived-equivalence theorem. Read SimplicialNerve.lean:14-34, CofibrantObjectHomotopy.lean:131-178, and Functor/Derived/Adjunction.lean:37-58,144-150. The grep hit in SingularSet.lean:37 is a future-work comment."
   }
  ],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+  "place": "Theorem 1.3.4.20, Lemma 1.3.4.21 and Remark 1.3.4.27, printed pp.117-120; independent enriched-replacement comparison expanded via the existing full localization universal property."
+ },
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
@@ -94,5 +243,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-derived-restriction-bifibrant-nerve-equivalence",
+  "worker": "stage1",
+  "summary": "Eight steps using only existing nodes. Proves bifibrancy of QR, computes the actual derived unit and counit from the Quillen-equivalence mapping criterion, identifies the specified coherent nerve through the ordinary-bifibrant localization square, and checks mapping/composition coherence and the Joyal test. No new nodes; statement unchanged.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint before the displayed derived coefficient-adjunction calculation, specifically the derived restriction and enriched replacement argument of descendant lem-coef-enriched-diagram-rectification returned step 7, first two paragraphs.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise equivalence criterion for coherent functor categories, used to invert localized weak natural transformations and the derived unit/counit; the bifibrancy and derived-adjunction nodes in this unit do not themselves state that criterion. This supports the existing coefficient-adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-f456a8b54",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-f456a8b54 (reviewer sub-agent of L); spot-checked: Read the item, report, required DAG/route documents, all five cited node statements, Higher Algebra §§1.3.4.20–21 and Remark 1.3.4.27, and checked edge cases and hypotheses. Two substantive arguments were incorrectly marked elementary (steps 2 and 6); the item source still named HTT despite HA theorem references. Corrected whole DAG JSON is in fixes/dag/nodes/sec-six-functors/lem-coef-derived-restriction-bifibrant-nerve-equivalence.json; review.md records the checks. No nodes were dropped.; 1 file(s) fixed by the reviewer"
  }
 }

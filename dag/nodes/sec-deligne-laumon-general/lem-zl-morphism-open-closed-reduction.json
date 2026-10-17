@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-zl-morphism-open-closed-reduction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Open–closed reduction for the direct-image assertion",
@@ -14,69 +14,201 @@
  },
  "stmt_deps": [
   "def-weil-punctual-weights",
-  "def-weil-complex-weights"
+  "def-weil-complex-weights",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof": [
   {
-   "text": "*Step 0: exact sequences of sheaves.* Let $A\\xrightarrow{a}B\n\\xrightarrow{b}C$ be an exact sequence of constructible Weil sheaves on\n$Y_0$ with $A$ and $C$ $\\iota$-mixed of weights at most $u$. Then $B$ is\n$\\iota$-mixed of weights at most $u$. Indeed, put\n$B'=\\operatorname{im}(a)$, a Weil quotient of $A$, and note that $B/B'$\nis a Weil subsheaf of $C$ by exactness. Both are $\\iota$-mixed of\nweights at most $u$ by [lem-a1-mixed-direct-summand](1), and then so is\nthe extension $0\\to B'\\to B\\to B/B'\\to0$ by\n[lem-a1-mixed-direct-summand](2).",
+   "text": "Use the finite-field, $\\Qlb$, embedding $\\iota$ and weight conventions of [def-weil-punctual-weights] and [def-weil-complex-weights]. Work with the common-stage coefficient categories and fixed-pair Weil objects of [def-weil-weil-sheaf-complex]. A triangle of Weil objects here means an underlying distinguished triangle with Weil-equivariant arrows; no triangulated structure on the category of fixed pairs is assumed. First observe that if $A\\xrightarrow a B\\xrightarrow b C$ is exact at $B$ in constructible Weil sheaves and $A,C$ are mixed of weights at most $u$, then $B$ has that bound. Indeed $I=\\operatorname{im}a$ is a quotient of $A$, and $B/I\\cong\\operatorname{im}b$ is a subobject of $C$. Clause (1) of [lem-a1-mixed-direct-summand] bounds both; clause (2) applies to $0\\to I\\to B\\to B/I\\to0$.",
    "uses": [
+    "def-weil-punctual-weights",
+    "def-weil-complex-weights",
+    "def-weil-weil-sheaf-complex",
     "lem-a1-mixed-direct-summand"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Step 0: exact sequences of sheaves"
+   }
   },
   {
-   "text": "*Restriction.* If $h:W_0\\hookrightarrow X_0$ is a locally closed\nimmersion and $\\mathcal F$ is mixed of weights at most $w$, then so is\n$h^*\\mathcal F$: restrict the filtration; a closed point of $W_0$ is a\nclosed point of $X_0$ with the same residue field, stalk and local\nFrobenius. Applied to cohomology sheaves, $h^*$ carries\n$D_{\\le w}(X_0)$ into $D_{\\le w}(W_0)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Part 1.* For a Weil complex $K$ on $X_0$ take the open–closed\nrecollement triangle $j_{0!}j_0^*K\\to K\\to i_{0*}i_0^*K\\to$ of\n[def-weil-open-closed-recollement], which exists and is\nWeil-equivariant by [prop-sf-open-closed-triangle-all-stages]. Applying\n$Rf_{0!}$ and the composition constraint of item (3) of\n[prop-functor-package] (with its Weil descent, item (1)) gives the\ndistinguished triangle\n\n$$\nR(f_0j_0)_!\\,j_0^*K\\longrightarrow Rf_{0!}K\\longrightarrow\nR(f_0i_0)_!\\,i_0^*K\\longrightarrow .\n$$\n\nComplex form: if $K\\in D_{\\le w}(X_0)$, then $j_0^*K$ and $i_0^*K$ lie\nin $D_{\\le w}$ by the restriction remark, so the outer terms lie in\n$D_{\\le w}(Y_0)$ by hypothesis, and\n[lem-zl-complex-extension] gives $Rf_{0!}K\\in D_{\\le w}(Y_0)$.\nSheaf form: take $K=\\mathcal F$ in degree zero. The long exact\nsequence of cohomology sheaves ([lem-sp-long-exact-of-triangle])\ncontains the exact sequence\n\n$$\nR^r(f_0j_0)_!\\,j_0^*\\mathcal F\\longrightarrow R^rf_{0!}\\mathcal F\n\\longrightarrow R^r(f_0i_0)_!\\,i_0^*\\mathcal F\n$$\n\nof Weil sheaves. The restrictions $j_0^*\\mathcal F$, $i_0^*\\mathcal F$\nare mixed of weights at most $w$, so the outer terms are mixed of\nweights at most $w+r$ by hypothesis, and Step 0 gives the claim for the\nmiddle term.",
+   "text": "For any locally closed $h_0:W_0\\hookrightarrow X_0$, clause (1) of [lem-zl-immersion-weil-local-behavior] says $h^*$ is exact and identifies closed-point Frobenius stalks with the same residue field. Apply $h^*$ to the finite pure-quotient filtration in [def-weil-punctual-weights]. Its quotients remain pure of the same weights, since their Frobenius eigenvalues and $q_x$ are unchanged; remove repeated filtration terms if necessary. Thus $h^*$ preserves mixed bounds. The cohomology comparison in that clause then gives $\\mathcal H^a(h^*K)=h^*\\mathcal H^a(K)$ with bound $w+a$ for every $a$ whenever $K\\in D_{\\le w}$. By [def-weil-complex-weights], $h^*K\\in D_{\\le w}$.",
    "uses": [
-    "def-weil-open-closed-recollement",
-    "prop-sf-open-closed-triangle-all-stages",
-    "prop-functor-package",
-    "lem-zl-complex-extension",
-    "lem-sp-long-exact-of-triangle"
+    "lem-zl-immersion-weil-local-behavior",
+    "def-weil-punctual-weights",
+    "def-weil-complex-weights"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph"
+   }
   },
   {
-   "text": "*Part 2.* By arbitrary base change for compact-support direct images,\nitem (4) of [prop-functor-package], applied to the Cartesian squares\nover $j'_0$ and $i'_0$,\n\n$$\nj_0'^{*}Rf_{0!}K\\simeq Rf_{V!}\\bigl(K|_{f_0^{-1}V_0}\\bigr),\n\\qquad\ni_0'^{*}Rf_{0!}K\\simeq Rf_{T!}\\bigl(K|_{f_0^{-1}T_0}\\bigr),\n$$\n\nWeil-equivariantly. Complex form: for $K\\in D_{\\le w}(X_0)$ the\nrestrictions of $K$ lie in $D_{\\le w}$, so the right sides lie in\n$D_{\\le w}(V_0)$ and $D_{\\le w}(T_0)$. Extension by zero $j'_{0!}$ has\nthe same stalks at points of $V_0$ and zero stalks elsewhere, and\nextends filtrations by zero, so\n$j'_{0!}j_0'^{*}Rf_{0!}K\\in D_{\\le w}(Y_0)$; the finite pushforward\nbound [lem-zl-finite-pushforward] gives\n$i'_{0*}i_0'^{*}Rf_{0!}K\\in D_{\\le w}(Y_0)$. The target devissage\n[lem-zl-open-closed-weight] then gives $Rf_{0!}K\\in D_{\\le w}(Y_0)$.\nSheaf form: the pullbacks $j_0'^*$, $i_0'^*$ are exact, so taking\n$\\mathcal H^r$ in the displayed isomorphisms for $K=\\mathcal F$ shows\nthat $G=R^rf_{0!}\\mathcal F$ has $j_0'^*G$ and $i_0'^*G$ mixed of weights\nat most $w+r$. Applying the same argument to $G$ in degree zero gives\n$G[0]\\in D_{\\le w+r}(Y_0)$, i.e. $G$ is mixed of weights at most $w+r$.\nThe stratified version follows by induction on the number of\nopen–closed steps.",
+   "text": "Clause (2) of [lem-zl-immersion-weil-local-behavior] makes $j_!$ exact on constructible Weil sheaves and gives its Frobenius-equivariant stalk formula. Extend a pure-quotient filtration by $j_!$: exactness identifies its successive quotients with the extensions by zero of the original quotients. Inside $U_0$ the eigenvalues and residue-field sizes are unchanged; outside $U_0$ there are no eigenvalues, so the purity condition is vacuous. Thus each quotient is pure of its original weight in [def-weil-punctual-weights]. Consequently $j_!$ preserves upper mixed bounds. Since $\\mathcal H^a(Rj_!L)\\cong j_!\\mathcal H^a(L)$, it also preserves $D_{\\le w}$ by [def-weil-complex-weights].",
+   "uses": [
+    "lem-zl-immersion-weil-local-behavior",
+    "def-weil-punctual-weights",
+    "def-weil-complex-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: extension by zero"
+   }
+  },
+  {
+   "text": "For the source decomposition, apply [prop-sf-open-closed-triangle-all-stages] at $\\Lambda=\\Qlb$ to $K$ and the complementary immersions after base change to $k$. Its equivariance clause applies because $j_0,i_0$ descend to $k_0$. Apply $Rf_!$, the exact functor with Weil lift in [prop-weil-operations]. Clause (3) of [prop-functor-package] gives the triangle\n$$R(f_0j_0)_!j_0^*K\\longrightarrow Rf_{0!}K\\longrightarrow R(f_0i_0)_!i_0^*K\\longrightarrow.$$\nAll terms are bounded constructible and all maps are Weil-equivariant by these cited statements. Here and below the schemes are separated of finite type and $\\ell\\ne p$; thus the $\\Qlb$ bounded constructible domains in the package apply, without the additional hypotheses of its smooth-base-change clause.",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
+    "prop-weil-operations",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 1: localization and compact-support composition"
+   }
+  },
+  {
+   "text": "For the complex source assertion, take $K\\in D_{\\le w}(X_0)$. Step 2 and the two assumed complex assertions put the outer terms $A=R(f_0j_0)_!j_0^*K$ and $C=R(f_0i_0)_!i_0^*K$ of step 4 in $D_{\\le w}(Y_0)$. Apply clause (5) of [lem-weil-heart-short-exact-triangles] to the underlying distinguished triangle in the common-stage coefficient category. For every integer $a$ it gives an exact segment $\\mathcal H^a(A)\\to\\mathcal H^a(Rf_{0!}K)\\to\\mathcal H^a(C)$. The triangle is Weil-equivariant, and the cohomology maps are equivariant by [prop-weil-operations]. By [def-weil-complex-weights], the outer sheaves have bound $w+a$. Step 1 with $u=w+a$ bounds the middle sheaf. Since this holds for every $a$, [def-weil-complex-weights] gives $Rf_{0!}K\\in D_{\\le w}(Y_0)$. This is the degreewise extension-stability argument in the stated common-stage category; no comparison with another coefficient category is used.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "prop-weil-operations",
+    "def-weil-complex-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 1: complex form"
+   }
+  },
+  {
+   "text": "For the sheaf source assertion, take $K=\\mathcal F[0]$ in step 4. Clause (5) of [lem-weil-heart-short-exact-triangles], applied in the underlying standard constructible heart, gives the exact segment\n$$R^r(f_0j_0)_!j_0^*\\mathcal F\\longrightarrow R^rf_{0!}\\mathcal F\\longrightarrow R^r(f_0i_0)_!i_0^*\\mathcal F.$$\nThe naturality of cohomology and the equivariance of the triangle, supplied by [prop-weil-operations], make this an exact segment of Weil sheaves. Step 2 bounds both restricted input sheaves by $w$, and the assumed sheaf assertions bound the outer direct images by $w+r$. Step 1 with $u=w+r$ bounds the middle term, for every $r$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "prop-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 1: sheaf form and cohomology sequence"
+   }
+  },
+  {
+   "text": "For the target decomposition use the Cartesian squares over $j'_0:V_0\\hookrightarrow Y_0$ and $i'_0:T_0\\hookrightarrow Y_0$. Their source maps are complementary immersions into $X_0$. Clause (4) of [prop-functor-package] gives\n$$j_0'^*Rf_{0!}K\\cong Rf_{V!}(K|_{f_0^{-1}V_0}),\\qquad i_0'^*Rf_{0!}K\\cong Rf_{T!}(K|_{f_0^{-1}T_0}).$$\nThese are morphisms of Weil complexes by [prop-weil-operations]. We use arbitrary base change for $Rf_!$ at the $\\Qlb$ bounded constructible stage, not smooth base change for $Rf_*$. The restricted morphisms are separated finite-type morphisms since they are obtained by base change from $f_0$. For $K\\in D_{\\le w}(X_0)$, step 2 and the two assumed complex assertions bound both right sides by $w$.",
    "uses": [
     "prop-functor-package",
+    "prop-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: compact-support base change"
+   }
+  },
+  {
+   "text": "Put $M=Rf_{0!}K$. Step 7 bounds $j_0'^*M$ and $i_0'^*M$ by $w$. Step 3 bounds $j'_{0!}j_0'^*M$ by $w$. The closed immersion $i'_0$ is finite by [lem-weil-pbc-closed-immersion-finite] (Stacks Tag 035C), so [lem-zl-finite-pushforward] bounds $Ri'_{0*}i_0'^*M$ by $w$. The two outer terms therefore satisfy exactly the hypotheses of [lem-zl-open-closed-weight], which yields $M\\in D_{\\le w}(Y_0)$. This proves the target complex assertion.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
     "lem-zl-finite-pushforward",
     "lem-zl-open-closed-weight"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: reassembly on the target"
+   }
   },
   {
-   "text": "*Part 3.* The short exact sequence is a distinguished triangle ([lem-weil-heart-short-exact-triangles])\n$\\mathcal F'\\to\\mathcal F\\to\\mathcal F''\\to$; applying the exact functor\n$Rf_{0!}$ and taking cohomology sheaves\n([lem-sp-long-exact-of-triangle]) gives exact sequences\n$R^rf_{0!}\\mathcal F'\\to R^rf_{0!}\\mathcal F\\to R^rf_{0!}\\mathcal F''$,\nand Step 0 applies. For a finite filtration, induct on its length using\nthe sequences $0\\to\\mathcal F_{i-1}\\to\\mathcal F_i\\to\n\\mathcal F_i/\\mathcal F_{i-1}\\to0$.",
+   "text": "For the target sheaf assertion put $K=\\mathcal F[0]$ in the base-change isomorphisms of step 7 and write $G=R^rf_{0!}\\mathcal F$. Clause (1) of [lem-zl-immersion-weil-local-behavior] allows taking $\\mathcal H^r$ through both target pullbacks. Thus $j_0'^*G$ and $i_0'^*G$ identify with $R^rf_{V!}(\\mathcal F|_{f_0^{-1}V_0})$ and $R^rf_{T!}(\\mathcal F|_{f_0^{-1}T_0})$. The input restrictions have bound $w$ by step 2, so these sheaves have bound $w+r$ by the assumed sheaf assertions. Apply the reassembly argument of step 8 to $G[0]$ with bound $w+r$: step 3 bounds its open extension and [lem-zl-finite-pushforward] bounds its closed direct image, then [lem-zl-open-closed-weight] bounds $G[0]$. The degree-zero case of [def-weil-complex-weights] says precisely that $G$ is mixed of weights at most $w+r$.",
+   "uses": [
+    "lem-zl-immersion-weil-local-behavior",
+    "lem-zl-finite-pushforward",
+    "lem-zl-open-closed-weight",
+    "def-weil-complex-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: sheaf form"
+   }
+  },
+  {
+   "text": "For a finite target stratification built by successive open--closed decompositions, induct on its finite decomposition tree. At a leaf the required direct-image assertion is the assumed assertion on that stratum. At an internal vertex its two child assertions imply its assertion by steps 7--9 applied to the corresponding restriction of $f_0$. Repeating up to the root gives the assertion on $Y_0$. The empty piece contributes only the zero functor, and a one-piece stratification is the hypothesis itself.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: finite stratification induction"
+   }
+  },
+  {
+   "text": "For the coefficient assertion forget to the underlying constructible heart. Clause (4) of [lem-weil-heart-short-exact-triangles] turns the given short exact sequence into an underlying distinguished triangle; its connecting morphism is natural, and therefore commutes with Frobenius. Apply the exact Weil-lifted functor $Rf_{0!}$ from [prop-weil-operations], then clause (5) of [lem-weil-heart-short-exact-triangles]. For every $r$ this gives an exact Weil segment $R^rf_{0!}\\mathcal F'\\to R^rf_{0!}\\mathcal F\\to R^rf_{0!}\\mathcal F''$. Its outer terms have bound $w+r$ by hypothesis, so step 1 bounds the middle term. For a filtration $0=\\mathcal F_0\\subset\\cdots\\subset\\mathcal F_n=\\mathcal F$, start with the zero sheaf and apply this argument successively to $0\\to\\mathcal F_{a-1}\\to\\mathcal F_a\\to\\mathcal F_a/\\mathcal F_{a-1}\\to0$. It proves the assertion when every graded piece has the assumed direct-image bounds.",
    "uses": [
     "lem-weil-heart-short-exact-triangles",
-    "lem-sp-long-exact-of-triangle"
+    "prop-weil-operations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 3: coefficient exact sequences and finite filtration"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-punctual-weights",
+  "def-weil-complex-weights",
+  "def-weil-weil-sheaf-complex",
   "lem-a1-mixed-direct-summand",
-  "def-weil-open-closed-recollement",
+  "lem-zl-immersion-weil-local-behavior",
   "prop-sf-open-closed-triangle-all-stages",
+  "prop-weil-operations",
   "prop-functor-package",
-  "lem-zl-complex-extension",
-  "lem-sp-long-exact-of-triangle",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-closed-immersion-finite",
   "lem-zl-finite-pushforward",
-  "lem-zl-open-closed-weight",
-  "lem-weil-heart-short-exact-triangles"
+  "lem-zl-open-closed-weight"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Step 0, Restriction, Parts 1--3; detailed local comparison input separated as lem-zl-immersion-weil-local-behavior"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open closed decompositions of source and target preserve upper weight bounds for compact support direct images of constructible ell adic Weil sheaves",
+   "results": "BoundingSieve.weights, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible Weil weights or six-functor weight assertion; returned compact-support functions or unrelated scheme lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilComplex\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible Weil weights or six-functor weight assertion; returned compact-support functions or unrelated scheme lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|IsMixedOfWeights|HasDirectImageWeightBound",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible Weil weights or six-functor weight assertion; returned compact-support functions or unrelated scheme lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct images with compact support preserve mixed weight bounds by open closed localization and long exact sequences",
+   "results": "HasCompactSupport.norm, HasCompactSupport, HasCompactSupport.abs, hasCompactSupport_def, HasCompactSupport.comp_homeomorph, ContDiffMapSupportedIn.compact_supp, HasCompactSupport.comp_isClosedEmbedding, hasCompactSupport_norm_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible Weil weights or six-functor weight assertion; returned compact-support functions or unrelated scheme lemmas"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -367,5 +499,44 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry); 2026-10-12 sync with the source at 60c0bc866: the source removed AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (sheaf level, per degree) and states the base change on complexes as AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (WeilConjectures.WeilSheaf.LowerShriekFunctoriality, still sorry); record re-pointed; 2026-10-13 sync: upperStar/higherLowerShriek sheaf API replaced upstream by WeilComplex derivedLowerShriek."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-morphism-open-closed-reduction",
+  "worker": "stage1",
+  "summary": "Kept all three clauses and both forms unchanged. Expanded the source/target/coefficient reductions into eleven steps using the current common-stage Qbar_l Weil categories. Isolated a genuine local exactness/Frobenius-stalk comparison as one statement-only node; its weight consequences are elementary filtration steps. Removed the finite-only recollement definition from proof uses, used the existing Weil-operation exactness theorem and heart-cohomology theorem explicitly, and spelled out both finite inductions. Maintainer reading: expanded step 5 into the degreewise heart-cohomology argument using step 1, removing the unsupported application of lem-zl-complex-extension across coefficient presentations; statement unchanged.",
+  "blueprint": "Current main-20261015 proof: step 1 realizes Step 0; steps 2--3 its Restriction and extension-by-zero arguments; steps 4--6 Part 1; steps 7--10 Part 2 including stratification; step 11 Part 3. The new node isolates the non-elementary local comparison input in Restriction and Part 2.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Composition and arbitrary compact-support base change are black-box six-functor tools explicitly required by the excision unit; no node of this unit states them."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "Exactness, Weil equivariance and cohomological compatibility of the given six functors, needed for the unit long exact sequence route, not an alternative reduction."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic heart/triangle/cohomology theorem used to form the exact sequences explicitly required by the unit."
+   },
+   {
+    "node": "lem-zl-finite-pushforward",
+    "why": "Finite pushforward weight bound is a generic tool for the target closed immersion, as in the blueprint proof; it does not replace a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "prop-weil-operations",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-zl-finite-pushforward"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-fd8ce0e12",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-fd8ce0e12 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited sources. Repaired step 5’s unsupported coefficient-category application using the heart cohomology theorem and the existing exact-segment argument; added missing new-node metadata. Statements unchanged. All eleven steps, the new lemma, duplicates, hypotheses, edge cases, and tool uses are checked in review.md; corrected JSON files are under fixes/dag/nodes/.; 2 file(s) fixed by the reviewer"
  }
 }

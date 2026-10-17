@@ -1,0 +1,85 @@
+{
+ "id": "lem-pur-projection-formula-coefficient-coherence",
+ "kind": "statement",
+ "title": "Unit and coefficient associativity of compact-support projection maps",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, a uniformizer $\\varpi_E$ of its valuation ring, and $n\\geq1$. Put $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes, let $f:X\\to Y$ be separated and of finite type [def-weil-scheme-morphism-properties], and fix a compactification $c=(j,r)$ with $X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y$ [def-weil-compactifications-refinements]. Work in the ordinary constant-$A$ module derived categories on the small pro-etale sites [def-weil-pbc-proetale-modules], with derived tensor [def-weil-derived-tensor]. Put $P=Rf_!^c=Rr_*j_!$ [def-compact-support-direct-image-detailed] and $S=Lf^*$ [def-weil-derived-pullback-tensor-hom], with its canonical strong monoidal structure [lem-pur-derived-pullback-tensor-iso, def-sfb-strong-monoidal-functor]. Let $\\delta_{B,B'}:S(B\\otimes B')\\xrightarrow{\\sim}SB\\otimes SB'$ and $e:S\\mathbf1_Y\\xrightarrow{\\sim}\\mathbf1_X$ be its inverse structure maps. Here $\\mathbf1_T=A_T$ in degree zero, and $\\otimes$ denotes the derived tensor.\nFor $M\\in D^b_c(X,A)$ and $B\\in D^b_{ctf}(Y,A)$ [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude], use exactly the compactification projection transformation $\\operatorname{PF}^c_{M,B}:PM\\otimes B\\to P(M\\otimes SB)$ of [def-exchange-projection]. Where these maps are invertible, define\n$$\\pi_{B,M}:P(SB\\otimes M)\\xrightarrow{P(\\beta_{SB,M})}P(M\\otimes SB)\\xrightarrow{(\\operatorname{PF}^c_{M,B})^{-1}}PM\\otimes B\\xrightarrow{\\beta_{PM,B}}B\\otimes PM,$$\nwhere $\\beta$ is tensor symmetry. Invertibility is a separate hypothesis here, not part of the conclusion.\nThese inverse projection maps satisfy the unit and coefficient-variable associativity equations of [def-sfb-projection-formula]. Explicitly, for $B,B'\\in D^b_{ctf}(Y,A)$ and $M\\in D^b_c(X,A)$, whenever all projection components in the following expressions are invertible,\n$$\\lambda_{PM}\\circ\\pi_{\\mathbf1_Y,M}=P\\bigl(\\lambda_M\\circ(e\\otimes1_M)\\bigr),$$\n$$\\alpha_{B,B',PM}\\circ\\pi_{B\\otimes B',M}\n=(1_B\\otimes\\pi_{B',M})\\circ\\pi_{B,SB'\\otimes M}\\circ P\\bigl(\\alpha_{SB,SB',M}\\circ(\\delta_{B,B'}\\otimes1_M)\\bigr).$$\nHere $\\alpha$ and $\\lambda$ are the canonical derived tensor associator and left unitor, and all equations are equalities of derived morphisms at the fixed compactification. All displayed tensor inputs belong to the stated constructible domains; one coefficient factor of finite Tor amplitude suffices for each product with $M$. No right adjoint to $P$, smoothness, purity, or compatibility with composition of two geometric morphisms is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Second paragraph of the current cohomological-smoothness proof, sentence beginning “The two tensor transformations agree”: unit and coefficient-variable associativity needed for its projection-formula calculation. Agent-formulated coherence obligation for the compactification composite, using Stacks sites-cohomology.tex Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); neither tag alone states this compact-support coherence assertion."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-derived-tensor",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-exchange-projection",
+  "def-sfb-projection-formula"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*(unit|assoc|coheren)|(unit|assoc|coheren).*projection",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme pullback pseudofunctor coherence, structure projections, Frobenius morphisms and monoidal-adjunction counit equations do not state unit and coefficient-associativity coherence for the specified compact-support projection map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"assoc\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme pullback pseudofunctor coherence, structure projections, Frobenius morphisms and monoidal-adjunction counit equations do not state unit and coefficient-associativity coherence for the specified compact-support projection map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula isomorphisms for compact support form a module functor with the tensor unit and associativity compatibility",
+   "results": "8 hits: CategoryTheory.FreeMonoidalCategory.instMonoidalProject, CategoryTheory.unitOfTensorIsoUnit, CategoryTheory.Limits.piObjIso_hom_comp_π_assoc, CategoryTheory.frobeniusMorphism_iso_of_preserves_binary_products, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Limits.piObjIso_inv_comp_π_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme pullback pseudofunctor coherence, structure projections, Frobenius morphisms and monoidal-adjunction counit equations do not state unit and coefficient-associativity coherence for the specified compact-support projection map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compactly supported derived projection formula for a scheme morphism satisfies the tensor unit and coefficient tensor associativity coherence equations",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Hom.comp_appTop_assoc, AlgebraicGeometry.Scheme.comp_appTop_assoc, AlgebraicGeometry.Scheme.Hom.comp_app_assoc, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme pullback pseudofunctor coherence, structure projections, Frobenius morphisms and monoidal-adjunction counit equations do not state unit and coefficient-associativity coherence for the specified compact-support projection map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For derived compact support P and strong monoidal pullback S, the inverse of the counit defined projection morphism P(S B tensor M) to B tensor P M respects the monoidal unit and associativity in B",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app, CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.Adjunction.mapMon_counit, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Equivalence.counitInv_app_comp_functor_map_η_inverse, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme pullback pseudofunctor coherence, structure projections, Frobenius morphisms and monoidal-adjunction counit equations do not state unit and coefficient-associativity coherence for the specified compact-support projection map"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-cohomological-smoothness",
+  "date": "2026-10-17",
+  "group": "Q39"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-cohomological-smoothness",
+   "place": "Second paragraph of the current cohomological-smoothness proof, sentence beginning “The two tensor transformations agree”: unit and coefficient-variable associativity needed for its projection-formula calculation. Agent-formulated coherence obligation for the compactification composite, using Stacks sites-cohomology.tex Tag 0B56 (equation-projection-formula-map) and Tag 0GL1 (lemma-j-shriek-and-tensor); neither tag alone states this compact-support coherence assertion.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
