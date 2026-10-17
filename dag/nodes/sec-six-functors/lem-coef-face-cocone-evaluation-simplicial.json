@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "lem-coef-pinched-cube-latching",
-  "lem-coef-simplicial-interval-lifting"
+  "lem-coef-simplicial-interval-lifting",
+  "def-coef-face-cocone-evaluation"
  ],
  "proof": [
   {
@@ -184,5 +185,27 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-b85d3da09 (reviewer sub-agent of L); spot-checked: I read the item, all cited statements (pinched-cube-latching, simplicial-interval-lifting, def-cbc-enhanced-diagrams-cones, face-cocone-splitting-refinement) and the parent boundary-cube proof in full. Compared with the side DAG, the statement, stmt_deps, blueprint and unit are unchanged; the delivery adds only the proof, status, proof_origin, split_report and searches. Step 1 (elementary): the old splitting S_0 sits inside A_0, and each U_b is a subset of T_b that is in the family, so it stays admissible. Step 2 (elementary): the nerve operators are restrictions (def-cbc), the cocone is strictly compatible on U_b inside T_b, and both the enriched functor and the composition are simplicial maps; together these give E_{S_0}(alpha*S) = alpha*E_q(S). Step 3: the refinement lemma, applied to A with R = S_0 and R' = A_0, matches its hypotheses exactly and gives that R' is admissible and E_p(A) = E_{S_0}(A). Small cases checked: p = q = 0; V = {0,1,2} with the first face from {0,2} to {0,1,2}, which gives the union composite; the proper-subset family, which the admissibility hypothesis correctly excludes; degeneracies; |V| = 1. I also checked admissibility of A_0 directly. No new nodes, no duplicates (grep for face-cocone and splitting set), no cycle; the refinement lemma has no proof deps. Every cited statement is in the unit sk-prop-sf-biduality-general, and def-cbc is a definition, so no tool_uses are needed. HTT is not in the local literature, so proof_origin is agent and HTT is listed as WANTED, which is correct. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FaceCoconeEvaluationSimplicial",
+  "declaration": "SSet.FaceCocone.evaluation_simplicial",
+  "declarations": [
+   "SSet.FaceCocone.evaluation_simplicial"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FaceCoconeEvaluationSimplicial.lean",
+  "statement": "theorem evaluation_simplicial {V : Type u} [LinearOrder V] [Finite V] [Nonempty V] {D : SCat.{u}} (c : Data V D) {i j : V} (hij : i < j) {q : ℕ} (S : Flag i j q) (R : Splitting S) (hcan : R.IsCanonical) (hR : c.IsAdmissible R) {p : ℕ} (α : ⦋p⦌ ⟶ ⦋q⦌) : (∃ R' : Splitting (restrict S α), R'.IsCanonical) ∧ ∀ (R' : Splitting (restrict S α)), R'.IsCanonical → ∃ hR' : c.IsAdmissible R', c.evaluation R' hR' = (hom D (c.vertex i) (c.vertex j)).map α.op (c.evaluation R hR)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The shared evaluation constructions belong to def-coef-face-cocone-evaluation. Splitting sets are presented by increasing finite enumerations; IsCanonical requires range exactly the initial subset. The conclusion supplies existence and covers every canonical enumeration, with no additional hypothesis or arbitrary evaluation map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b45a5dc7a",
+  "group": "NC",
+  "result": "pass",
+  "note": "Statement and definitions match the node; dependencies and proof steps are valid; required report sections, docstrings, edge cases, and compiler checks pass."
  }
 }
