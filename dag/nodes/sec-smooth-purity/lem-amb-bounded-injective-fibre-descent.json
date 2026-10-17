@@ -267,5 +267,37 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-9f2b1382b (reviewer sub-agent of L); spot-checked: I read the whole item: the statement (unchanged), all 8 steps, every cited node's statement, the parent's steps 11, 13 and 14 that use it, and Stacks derived.tex at 05TG, 05TJ, lemma-j-is-exact, 05TK and remark-big-localization. The delivery has no new nodes. The mathematics is correct. I recomputed Q(b u_K)=Q(u_L E a)=Qk'_L D^+E(alpha) Q(Ek_K)^{-1} (step 5), the shift square s_{F',J}F'(u[1])tau_{I[1]}=F'(u)[1]tau_I[1]s_{F,I} (step 7), and w=vE'(u) with F''(v)sigma_J F'(u)tau_I=F''(w)sigma_{EI}tau_I (step 8). I tested E = forgetful Vect_Fp -> Ab, where EI is not injective and the proof still works because only J must be K-injective. Restricting lem-trf-filtered-localization-injective-model to the interval [0,0] really does give K^+(Inj) ~ D^+, so no duplicate node is needed. I made two citation repairs in fixes/: (C1) step 2 used, with no node, that a quasi-inverse of an exact equivalence is exact; it now builds an adjoint equivalence with conjugate shifts and cites the Mathlib leaf lem-sf-triangulated-right-adjoint. (C4) step 4 took the Hom bijection from lem-weil-pbc-kinjective-hom-derived, which states it for D and for D^+ as a subcategory of D, while the item uses D^+ as the localization of K^+; it now also cites the [0,0] Hom clause of lem-trf-filtered-localization-injective-model. proof_deps recomputed. I accept both declared tool_uses: they are generic homological tools and replace no step of the unit's route. No SGA source is used. I could not check the Mathlib-search records against the Codex search log from this machine.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedInjectiveFibreDescent",
+  "declaration": "CategoryTheory.boundedInjectiveFibreDescent",
+  "declarations": [
+   "CategoryTheory.boundedInjectiveDerived",
+   "CategoryTheory.boundedInjectiveDerived_commShift",
+   "CategoryTheory.boundedInjectiveResolutionIso",
+   "CategoryTheory.BoundedInjectiveComparison",
+   "CategoryTheory.boundedInjectiveDerived_isTriangulated",
+   "CategoryTheory.boundedInjectiveComparison_exists_unique_lift",
+   "CategoryTheory.boundedInjectiveFibreDescent",
+   "CategoryTheory.boundedInjectiveIdentityDatum",
+   "CategoryTheory.boundedInjectiveComparison_id",
+   "CategoryTheory.boundedInjectiveCompositeDatum",
+   "CategoryTheory.boundedInjectiveComparison_comp"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BoundedInjectiveFibreDescent.lean",
+  "statement": "theorem boundedInjectiveFibreDescent (F : HomotopyCategory.Plus A ⥤ HomotopyCategory.Plus B) (F' : HomotopyCategory.Plus A' ⥤ HomotopyCategory.Plus B) [F.CommShift ℤ] [F.IsTriangulated] [F'.CommShift ℤ] [F'.IsTriangulated] (E : A ⥤ A') [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E] (τ : F ⟶ E.mapHomotopyCategoryPlus ⋙ F') [NatTrans.CommShift τ ℤ] : ∃! t : boundedInjectiveDerived F ⟶ E.mapDerivedCategoryPlus ⋙ boundedInjectiveDerived F', BoundedInjectiveComparison F F' E τ t ∧ NatTrans.CommShift t ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "RF is constructed from the published exact injective-object equivalence. Supporting declarations give the resolution computation, the unique comparison lift, exactness, and identity/composition laws. No injectivity of E(I) is assumed. Equalities in HomotopyCategory.Plus express equality up to chain homotopy."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd3c1f947",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Node unchanged except its lean record; lean.statement matches the file signature and all 11 declarations are listed. Clause audit: A, A' abelian with enough injectives; B abelian; all universes independent. K+ = HomotopyCategory.Plus, D+ = DerivedCategory.Plus with Plus.Qh a localization at quasi-isos, K+(Inj) = Plus (InjectiveObject). F, F' are CommShift+IsTriangulated; E is additive and exact; tau is F ⟶ E.mapHomotopyCategoryPlus ⋙ F' with CommShift. RF is a real construction (equivalence inverse, inclusion, F, Qh); the upstream inverse's commShiftInverse and Equivalence.CommShift make the shift clause true. The comparison formula quantifies over all K, I, J, k, k', u; the unique lift u exists; the ∃! t carries the formula and CommShift t. Identity and composition laws use the canonical upstream isos (definitions read). Nothing assumes EI injective. Gates: no hollow defs; source and blueprint docstrings; only the 5 theorem proofs are sorry; no live write; no duplicate notion (upstream rightDerivedFunctorPlus/PlusBaseChange cover only functors induced from abelian categories; Mathlib totalRightDerived works along one localization and cannot express the cross-category tau). nt_compile.py --json on the snapshot module: rc 0, no errors or warnings in 2.8 s; error reporting confirmed with a deliberately broken copy; axioms are only the standard ones plus sorryAx. Note: the 'Second reading by Q125' section openly records the worker's own audit, not an independent reading; this review supplies the independent reading and earlier reviews accepted such sections."
  }
 }

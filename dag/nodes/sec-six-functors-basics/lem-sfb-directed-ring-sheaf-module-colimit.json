@@ -280,5 +280,28 @@
   "group": "Q149",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-a7ffa91f5 (reviewer sub-agent of L); spot-checked: PASS: I read the item and all 7 steps in full, plus every cited statement: lem-weil-pbc-module-sheaves-colimits-forgetful clause (2), lem-weil-pbc-independent-sheaf-tensor-colimits, def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification, def-weil-sheaf-of-modules-category and def-weil-pbc-category-colimit. I checked them against Stacks sites-modules.tex 03DB (lemma-limits-colimits, l.1358), 03EP(2) (lemma-tensor-commute-colimits, l.4001) and section 03EK. The statement is unchanged and matches its use in step 3 of lem-sfb-qlbar-flat. It serves the first sentence of the main-20261015 proof lem-sfb-qlbar-flat.proof.md (unit sk-prop-sfb-finite-extension-compatibility), and the chapter is untouched. Every step is correct: (1) the scalar compatibilities make a_ij and q_i R-linear, giving the module colimit L and u with u b_i = q_i; (2) the common-stage products are R(U)-balanced, extend through sheafification, and do not depend on the chosen upper bound; (3) swap plus 03EP(2) gives mu, and maps out of L⊗L are detected on b_i⊗b_j; (4) the unit e = b_i(1) uses nonemptiness, and commutativity, associativity in a stage above three indices, the unit laws and distributivity all hold; (5) s_L = b_i s_i, the R-action is multiplication through s_L, and u is a unital ring map; (6) the ring-colimit property gives v with v s = s_L, so v is R-linear, vu = 1 by module uniqueness and uv = 1 by ring uniqueness; (7) f = g v gives existence and uniqueness. Small cases checked: singleton I, R = 0, non-injective transitions, incomparable indices. Empty I is correctly excluded, since the ring colimit there is sheafified Z while the module colimit is 0. No new nodes. Duplicate scan: lem-weil-pbc-sheaf-algebras-directed-colimit concerns topological spaces only, and the filtered module-sheaf nodes state different things. Mathlib has only AlgCat/CommRingCat filtered-colimit preservation (AlgCat/FilteredColimits.lean:92,95). I accept both declared tool_uses (lem-weil-pbc-module-sheaves-colimits-forgetful and lem-weil-pbc-independent-sheaf-tensor-colimits) as generic infrastructure that the parent already uses as accepted tools. No SGA citation. No fixes. Minor: the report mentions citations.json and searches.jsonl, which are sandbox logs not in the branch; not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DirectedRingSheafModuleColimit",
+  "declaration": "CategoryTheory.directedRingSheaf_module_colimit",
+  "declarations": [
+   "CategoryTheory.siteRingSheafModule",
+   "CategoryTheory.directedRingSheaf_module_colimit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DirectedRingSheafModuleColimit.lean",
+  "statement": "theorem directedRingSheaf_module_colimit {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w}) (I : Type w) [PartialOrder I] [IsDirected I (· ≤ ·)] [Nonempty I] (A : I ⥤ Sheaf J CommRingCat.{w}) (sᵢ : (Functor.const I).obj R ⟶ A) (q : Cocone A) (_hq : IsColimit q) (s : R ⟶ q.pt) (_hs : ∀ i : I, sᵢ.app i ≫ q.ι.app i = s) (M : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) (fᵢ : ∀ i : I, siteRingSheafModule (sᵢ.app i) ⟶ M) (_hf : ∀ (i j : I) (h : i ≤ j) (U : Cᵒᵖ) (x : (A.obj i).obj.obj U), (fᵢ j).val.app U ((A.map (homOfLE h)).hom.app U x) = (fᵢ i).val.app U x) : ∃! f : siteRingSheafModule s ⟶ M, ∀ (i : I) (U : Cᵒᵖ) (x : (A.obj i).obj.obj U), f.val.app U ((q.ι.app i).hom.app U x) = (fᵢ i).val.app U x",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The conclusion states the explicit universal property in the node. The compatible family and factorization equations are evaluated on sections using the given ring transition and cocone maps. siteRingSheafModule is only an abbreviation for Mathlib regular module plus restriction of scalars, with no new module-category definition. Site object/morphism universes u/v remain independent of coefficient and index universe w."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c944e4c31",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: site essentially small in w with independent universes u/v/w, R and A_i as CommRingCat.{w} sheaves, nonempty directed I in w, s_i as a natural transformation from the constant functor, a specified IsColimit cocone in ring sheaves, s with q_i s_i = s, and the explicit ∃! universal property in Mod(R) stated on sections. lean.statement is verbatim in the file; no statement_change. The helper siteRingSheafModule (restrictScalars of SheafOfModules.unit) is real data, and a scratch file checks r•x = s(r)x by rfl. The existing commAlgebraSheafModule works only on topological spaces; no general-site duplicate found. Edge cases: empty I correctly excluded; zero rings, non-injective maps, empty site allowed. Only proof is sorry. Docstrings give source and blueprint and all 7 proof steps. Report has Worker report and Second reading by Q55 sections. nt_compile.py --json on the snapshot: rc 0, 3.6 s, no diagnostics."
  }
 }
