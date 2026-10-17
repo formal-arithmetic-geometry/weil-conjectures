@@ -77,7 +77,115 @@ lemma residue_eq_ord (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) U) (z : C)
     T.residue j p z ξ = (C.ord f z : ZMod N) :=
   kummerResidue_eq z hx hf hχ
 
+/-- The residue is additive in the torsor: if the Galois character of `T` is the sum of those of
+`T₁` and `T₂`, the residues of `T` are the sums of those of `T₁` and `T₂`. -/
+lemma residue_eq_add_of_galoisCharacter_eq_add {T T₁ T₂ : EtaleTorsor (ULift.{u + 1} (ZMod N)) U}
+    (h : ∀ σ, T.galoisCharacter j σ = T₁.galoisCharacter j σ + T₂.galoisCharacter j σ)
+    (z : C) : T.residue j p z = T₁.residue j p z + T₂.residue j p z := by
+  refine AddMonoidHom.ext fun ξ ↦ ?_
+  have hξ : ((ξ.toMul : kˣ) : k) ^ N = 1 := by
+    rw [← Units.val_pow_eq_pow_val, (mem_rootsOfUnity N _).1 ξ.toMul.2, Units.val_one]
+  have hξΩ : algebraMap C.functionField Ω (p.functionFieldConstants ((ξ.toMul : kˣ) : k)) ^ N =
+      1 := by
+    rw [← map_pow, ← map_pow, hξ, map_one, map_one]
+  obtain ⟨x₁, f₁, hx₁, hf₁, hχ₁⟩ := T₁.exists_kummerElement j p hξ
+  obtain ⟨x₂, f₂, hx₂, hf₂, hχ₂⟩ := T₂.exists_kummerElement j p hξ
+  rw [AddMonoidHom.add_apply, residue_apply, residue_apply, residue_apply,
+    show T.galoisCharacter j = T₁.galoisCharacter j + T₂.galoisCharacter j from funext h]
+  exact kummerResidue_add z hξΩ hx₁ hf₁ hχ₁ hx₂ hf₂ hχ₂
+
 end Residue
+
+section H1
+
+/-! ### The residue sequence in `H¹` -/
+
+variable {M : Type (u + 1)} [AddCommGroup M] [Finite M]
+
+lemma classH1_out {Y : Scheme.{u}}
+    (x : Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) 1) :
+    classH1 M Y ⟦((classH1Equiv M Y).symm x).out⟧ = x := by
+  rw [Quotient.out_eq, ← classH1Equiv_apply, Equiv.apply_symm_apply]
+
+lemma classH1_eq_classH1_iff {Y : Scheme.{u}} {t t' : EtaleTorsor M Y} :
+    classH1 M Y ⟦t⟧ = classH1 M Y ⟦t'⟧ ↔ t.IsIsomorphic t' :=
+  ⟨fun h ↦ Quotient.exact (injective_classH1 h), fun h ↦ congrArg _ (Quotient.sound h)⟩
+
+variable [TopologicalSpace M] [DiscreteTopology M]
+
+lemma monodromy_out {Y : Scheme.{u}} [ConnectedSpace Y] {Ω' : Type u} [Field Ω'] [IsSepClosed Ω']
+    (s : Spec (.of Ω') ⟶ Y)
+    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+    [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+    (x : Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) 1) :
+    ((classH1Equiv M Y).symm x).out.monodromy s G = sheafHEquivContinuousMonoidHom M s G x := by
+  rw [← sheafHEquivContinuousMonoidHom_classH1, classH1_out]
+
+variable {C U : Scheme.{u}} [IsIntegral C] [ConnectedSpace C] [ConnectedSpace U] (j : U ⟶ C)
+  [IsOpenImmersion j] [Nonempty U]
+
+variable (M) in
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: the restriction map
+`j^* : H¹(C, M) → H¹(U, M)` of the residue sequence, in the torsor model of `H¹`: the class of a
+torsor `T` on `C` is sent to the class of its base change `T ×_C U`
+(`AlgebraicGeometry.Scheme.EtaleTorsor.restrictH1_classH1`). -/
+noncomputable def restrictH1 :
+    Sheaf.H ((constantSheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) 1 →+
+    Sheaf.H ((constantSheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) 1 :=
+  AddMonoidHom.mk' (fun x ↦ classH1 M U ⟦((classH1Equiv M C).symm x).out.pullback j⟧) fun x y ↦ by
+    let s := genericGeometricPoint (C := C) j
+    obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
+    obtain ⟨G', _, _⟩ := exists_isFundamentalGroup (s ≫ j)
+    apply (sheafHEquivContinuousMonoidHom M s G).injective
+    rw [sheafHEquivContinuousMonoidHom_add, sheafHEquivContinuousMonoidHom_classH1,
+      sheafHEquivContinuousMonoidHom_classH1, sheafHEquivContinuousMonoidHom_classH1]
+    refine ContinuousMonoidHom.ext fun g ↦ ?_
+    rw [ContinuousMonoidHom.mul_apply, monodromy_pullback j s _ G G', monodromy_pullback j s _ G G',
+      monodromy_pullback j s _ G G', monodromy_out, monodromy_out, monodromy_out,
+      sheafHEquivContinuousMonoidHom_add, ContinuousMonoidHom.mul_apply]
+
+lemma restrictH1_classH1 (T : EtaleTorsor M C) :
+    restrictH1 M j (classH1 M C ⟦T⟧) = classH1 M U ⟦T.pullback j⟧ := by
+  have h : ((classH1Equiv M C).symm (classH1 M C ⟦T⟧)).out.IsIsomorphic T := by
+    rw [← classH1_eq_classH1_iff, classH1_out]
+  exact classH1_eq_classH1_iff.2 (h.pullback j)
+
+variable [IsLocallyNoetherian C] {k : Type u} [Field k] (p : C ⟶ Spec (.of k)) (N : ℕ) [NeZero N]
+  [NeZero (N : k)] [HasEnoughRootsOfUnity k N]
+
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: the residue map
+`res : H¹(U, ℤ / N) → ⊕_{z ∈ C ∖ U} Hom(μ_N(k), ℤ / N)` of the residue sequence, in the torsor
+model of `H¹`: the class of a torsor `T` is sent to its residues at the boundary points
+(`AlgebraicGeometry.Scheme.EtaleTorsor.residueH1_classH1`). Here `Hom(μ_N(k), ℤ / N)` is the
+Tate twist `ℤ / N (-1) = H⁰(z, ℤ / N (-1))`. -/
+noncomputable def residueH1 :
+    Sheaf.H ((constantSheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of (ULift.{u + 1} (ZMod N)))) 1 →+
+    ((z : ↥(Set.range j.base)ᶜ) → Additive (rootsOfUnity N k) →+ ZMod N) :=
+  AddMonoidHom.mk' (fun x z ↦ ((classH1Equiv _ U).symm x).out.residue j p z.1) fun x y ↦ by
+    let s := genericGeometricPoint (C := C) j
+    obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
+    let τ : fiber (genericGeometricPoint (C := C) j) ≅ fiber s := Iso.refl _
+    funext z
+    refine residue_eq_add_of_galoisCharacter_eq_add j p (fun σ ↦ ?_) z.1
+    rw [galoisCharacter_eq_monodromy j _ τ G, galoisCharacter_eq_monodromy j _ τ G,
+      galoisCharacter_eq_monodromy j _ τ G, monodromy_out, monodromy_out, monodromy_out,
+      sheafHEquivContinuousMonoidHom_add, ContinuousMonoidHom.mul_apply, toAdd_mul,
+      ULift.add_down]
+
+omit [ConnectedSpace C] in
+lemma residueH1_classH1 (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) U)
+    (z : ↥(Set.range j.base)ᶜ) :
+    residueH1 j p N (classH1 _ U ⟦T⟧) z = T.residue j p z.1 := by
+  have h : ((classH1Equiv _ U).symm (classH1 _ U ⟦T⟧)).out.IsIsomorphic T := by
+    rw [← classH1_eq_classH1_iff, classH1_out]
+  exact congrFun (residue_eq_of_isIsomorphic j p h) z.1
+
+end H1
 
 section Curve
 
@@ -315,6 +423,52 @@ theorem exists_isIsomorphic_pullback_iff_residue_eq_zero {N : ℕ} [NeZero N] [N
     obtain ⟨G', _, _⟩ := exists_isFundamentalGroup (s ≫ j)
     exact exists_isIsomorphic_pullback j s
       (fundamentalGroupMap_surjective_of_isRegular j (pullbackFiberIso j s) G G') T hkill
+
+omit [IsCurve p] [SmoothOfRelativeDimension 1 p] in
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: exactness of the residue sequence
+`0 → H¹(C, M) → H¹(U, M)` on the left: the restriction map is injective, for `C` connected,
+regular and locally noetherian (for instance a smooth connected curve over a field). -/
+theorem injective_restrictH1 [IsRegular C] {M : Type (u + 1)} [AddCommGroup M] [Finite M]
+    [TopologicalSpace M] [DiscreteTopology M] : Function.Injective (restrictH1 M j) := by
+  intro x y h
+  obtain ⟨T₁, rfl⟩ := (bijective_classH1 (M := M) (Y := C)).2 x
+  obtain ⟨T₂, rfl⟩ := (bijective_classH1 (M := M) (Y := C)).2 y
+  induction T₁ using Quotient.inductionOn with | h t₁ => ?_
+  induction T₂ using Quotient.inductionOn with | h t₂ => ?_
+  rw [restrictH1_classH1, restrictH1_classH1, classH1_eq_classH1_iff] at h
+  exact classH1_eq_classH1_iff.2 (isIsomorphic_of_isIsomorphic_pullback_of_isRegular h)
+
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: exactness of the residue sequence (5.1)
+
+`0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → ⊕_{z ∈ C ∖ U} ℤ / N (-1)`
+
+in the middle: the image of the restriction map is the kernel of the residue map. Here `U` is a
+nonempty open of a smooth connected curve `C` over an algebraically closed field `k`, `N` is
+invertible in `k` and `ℤ / N (-1) = Hom(μ_N(k), ℤ / N)`. -/
+theorem range_restrictH1_eq_ker_residueH1 (N : ℕ) [NeZero N] [NeZero (N : k)] :
+    (restrictH1 (ULift.{u + 1} (ZMod N)) j).range = (residueH1 j p N).ker := by
+  ext x
+  obtain ⟨T, rfl⟩ := (bijective_classH1 (M := ULift.{u + 1} (ZMod N)) (Y := U)).2 x
+  induction T using Quotient.inductionOn with | h t => ?_
+  rw [AddMonoidHom.mem_range, AddMonoidHom.mem_ker]
+  trans ∃ T' : EtaleTorsor (ULift.{u + 1} (ZMod N)) C, (T'.pullback j).IsIsomorphic t
+  · constructor
+    · rintro ⟨y, hy⟩
+      obtain ⟨T', rfl⟩ := (bijective_classH1 (M := ULift.{u + 1} (ZMod N)) (Y := C)).2 y
+      induction T' using Quotient.inductionOn with | h t' => ?_
+      rw [restrictH1_classH1, classH1_eq_classH1_iff] at hy
+      exact ⟨t', hy⟩
+    · rintro ⟨t', h⟩
+      exact ⟨classH1 _ C ⟦t'⟧, by rw [restrictH1_classH1, classH1_eq_classH1_iff]; exact h⟩
+  rw [exists_isIsomorphic_pullback_iff_residue_eq_zero (p := p)]
+  constructor
+  · intro h
+    funext z
+    rw [residueH1_classH1]
+    exact h z.1 z.2
+  · intro h z hz
+    have := congrFun h ⟨z, hz⟩
+    rwa [residueH1_classH1] at this
 
 end Curve
 
