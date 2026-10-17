@@ -177,6 +177,41 @@ theorem conj_frobeniusOperator_eq_smul_inverse_dualMap_of_isSepClosed (sq : IsPu
   conj_frobeniusOperator_eq_smul_inverse_dualMap sq γ φ ψ hψ τ hTr q hτ
     (Finite.isField_of_domain Λ) hq i j hij ℓ
 
+omit [HasTateTwist Λ] [QuasiCompact a] in
+/-- At a finite field stage, over a separably closed field, `H^i_c(X, K) = Hom(Λ_s, (Ra_! K)[i])`
+is a finite free `Λ`-module for `K ∈ D^b_{ctf}(X, Λ)`. -/
+lemma free_and_finite_hom_compactlySupported {K : DerivedCategoryModule Λ X}
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (i : ℤ) :
+    Module.Free Λ
+        (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) ∧
+      Module.Finite Λ
+        (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) := by
+  let _ := (Finite.isField_of_domain Λ).toField
+  have := (nondegenerate_comp_unit_shift_of_isSepClosed _ i
+    (finite_compactlySupportedCohomology Λ a K hK i)).1
+  exact ⟨Module.Free.of_divisionRing _ _, Module.Finite.of_finite⟩
+
+omit [QuasiCompact a] in
+/-- At a finite field stage, over a separably closed field, `H^j(X, K^∨) = Hom(Λ_s, (Ra_* K^∨)[j])`
+is a finite free `Λ`-module for `K ∈ D^b_{ctf}(X, Λ)`, `j = 2d - i`: it is dual to `H^i_c(X, K)`
+(`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_untwistedDegreewisePoincarePairing`). -/
+lemma free_and_finite_hom_lowerStar_coefficientDual (γ : TateOrientation Λ a d)
+    {K : DerivedCategoryModule Λ X} (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
+    (i j : ℤ) (hij : i + j = 2 * d)
+    (ℓ : (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ tateObject Λ (Spec (.of k)) (-d)) ≃ₗ[Λ]
+      Λ) :
+    Module.Free Λ (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶
+        ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
+          ((DerivedCategory.coefficientDual _ X).obj (op K)))⟦j⟧) ∧
+      Module.Finite Λ (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶
+        ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
+          ((DerivedCategory.coefficientDual _ X).obj (op K)))⟦j⟧) := by
+  let _ := (Finite.isField_of_domain Λ).toField
+  have := γ.isPerfPair_untwistedDegreewisePoincarePairing hK i j hij ℓ
+  obtain ⟨-, _⟩ := free_and_finite_hom_compactlySupported (a := a) hK i
+  exact ⟨Module.Free.of_divisionRing _ _, Module.Finite.equiv
+    ((γ.untwistedDegreewisePoincarePairing K i j hij).compr₂ ℓ.toLinearMap).flip.toPerfPair.symm⟩
+
 /-- Blueprint `cor-pod-reciprocal-eigenvalues`: Reciprocal eigenvalues (finite-field stage).
 This is also part (b) of blueprint `sk-thm-frobenius`.
 
@@ -185,9 +220,10 @@ This is also part (b) of blueprint `sk-thm-frobenius`.
 the eigenvalues of `F_{K^∨}` on `H^{2d-i}(X, K^∨)`, computed in an algebraically closed field `M`
 containing `Λ` and counted with algebraic multiplicity, are the `q^d / α` for the eigenvalues
 `α` of `F_{c,K}` on `H^i_c(X, K)`. No perfectness, finiteness or freeness hypothesis is needed:
-the cohomology spaces are finite-dimensional
-(`AlgebraicGeometry.Etale.finite_compactlySupportedCohomology`) and the line-valued pairing is
-perfect (`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_untwistedDegreewisePoincarePairing`,
+the spaces are finite free (`AlgebraicGeometry.Etale.TateOrientation.free_and_finite_hom_compactlySupported`,
+`AlgebraicGeometry.Etale.TateOrientation.free_and_finite_hom_lowerStar_coefficientDual`) and the
+line-valued pairing is perfect
+(`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_untwistedDegreewisePoincarePairing`,
 blueprint `thm-pod-degreewise-perfectness-over-a-field`). -/
 theorem roots_map_charpoly_frobeniusOperator_of_isSepClosed (sq : IsPullback g a a h)
     (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
@@ -207,31 +243,20 @@ theorem roots_map_charpoly_frobeniusOperator_of_isSepClosed (sq : IsPullback g a
     (ℓ : (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ tateObject Λ (Spec (.of k)) (-d)) ≃ₗ[Λ]
       Λ)
     {M : Type*} [Field M] [IsAlgClosed M] (ι : Λ →+* M) :
-    letI := Finite.isField_of_domain Λ |>.toField
+    haveI := (free_and_finite_hom_compactlySupported (a := a) hK i).1
+    haveI := (free_and_finite_hom_compactlySupported (a := a) hK i).2
+    haveI := (free_and_finite_hom_lowerStar_coefficientDual γ hK i j hij ℓ).1
+    haveI := (free_and_finite_hom_lowerStar_coefficientDual γ hK i j hij ℓ).2
     ((frobeniusOperator h (shiftWeilDatum h (lowerStarWeilDatum sq.toCommSq ψ) j)).charpoly.map
         ι).roots =
       ((frobeniusOperator h (shiftWeilDatum h (lowerShriekWeilDatum sq φ) i)).charpoly.map
-        ι).roots.map fun z ↦ ι ((q : Λ) ^ d) / z := by
-  let _ := (Finite.isField_of_domain Λ).toField
-  have hp := γ.isPerfPair_untwistedDegreewisePoincarePairing hK i j hij ℓ
-  have h₀ := (nondegenerate_comp_unit_shift_of_isSepClosed _ i
-    (finite_compactlySupportedCohomology Λ a K hK i)).1
-  have : Module.Finite Λ
-      (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) :=
-    Module.Finite.of_finite
-  have : Module.Free Λ
-      (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) :=
-    Module.Free.of_divisionRing _ _
-  have : Module.Finite Λ (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶
-      ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
-        ((DerivedCategory.coefficientDual _ X).obj (op K)))⟦j⟧) :=
-    Module.Finite.equiv
-      ((γ.untwistedDegreewisePoincarePairing K i j hij).compr₂ ℓ.toLinearMap).flip.toPerfPair.symm
-  have : Module.Free Λ (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶
-      ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
-        ((DerivedCategory.coefficientDual _ X).obj (op K)))⟦j⟧) :=
-    Module.Free.of_divisionRing _ _
-  exact roots_map_charpoly_frobeniusOperator sq γ φ ψ hψ τ hTr q hτ (Finite.isField_of_domain Λ)
+        ι).roots.map fun z ↦ ι ((q : Λ) ^ d) / z :=
+  haveI := γ.isPerfPair_untwistedDegreewisePoincarePairing hK i j hij ℓ
+  haveI := (free_and_finite_hom_compactlySupported (a := a) hK i).1
+  haveI := (free_and_finite_hom_compactlySupported (a := a) hK i).2
+  haveI := (free_and_finite_hom_lowerStar_coefficientDual γ hK i j hij ℓ).1
+  haveI := (free_and_finite_hom_lowerStar_coefficientDual γ hK i j hij ℓ).2
+  roots_map_charpoly_frobeniusOperator sq γ φ ψ hψ τ hTr q hτ (Finite.isField_of_domain Λ)
     hq i j hij ℓ ι
 
 end FiniteField
