@@ -15824,3 +15824,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:47 L: merged deliver/A2/Sheaf.Paper.IntegralResiduePullFlatModelComparison (stage 3; reviewer PASS; first push; landing 20261017T064700-L-725521 (interface); batch 20261017T064658; modules 2; new nodes 1)
 
 - 15:07 L: batch 20261017T070000 dependency take-out
+- 07:13 L: returned deliver/A2/Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized (reviewer RETURN: (the landing tools, head 07d5a89ea) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
