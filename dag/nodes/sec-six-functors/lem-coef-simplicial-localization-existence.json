@@ -255,5 +255,28 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-c7d4bbe74 (reviewer sub-agent of L); spot-checked: I read in full the item, both new nodes and the statements of the four cited nodes. I checked Kerodon online: 05ZP (proof: combine 6.3.2.9 with 4.1.3.2), 05ZL (any simplicial set C and any W; D need not be an infinity-category), 05ZJ (Q = Delta^3 with edges 02 and 13 collapsed to separate points), 05ZK (e = edge 12) and 01BP (factorization of any arrow, functorial and commuting with filtered colimits). The item's statement is unchanged, a faithful precise form of 05ZP. Edge-inversion node: matches 05ZL exactly; tested on W empty, C=Delta^1 with W={01}, and a degenerate edge. Factorization node: matches 01BP and is true by the small-object argument with finite generators. Steps: 1-3 build L = R(D) with strict functoriality, and the summand map w to a(w) handles merged markings. Step 4: inner horns are Joyal trivial cofibrations and the weak factorization system makes r a trivial cofibration, so joyal-functor-equivalence-test (i)=>(ii) applies. Step 5 composes the two equivalences, as the definition requires. Step 6 holds because filtered colimits of sets preserve injections and W_k is a subset of (C_k)_1. Steps 7-8 are the degreewise pushout and the colimit clause, using connectedness for colim Delta^0. Duplicate search with rg (05ZL/05ZJ/05ZK/05ZP/01BP, inner anodyne, filtered-colimit factorization) found no existing statement; the closest candidates (relative-marked-anodyne-replacement, coherent-inner-anodyne-equivalences, universal-localization-pushout, joyal-model-structure) are different. Proof route stays in unit sk-prop-sf-biduality-general, with no cycle, no SGA and no tool_uses. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31a325a8e",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: the SimplicialLocalizationChoice structure (L, F, Quasicategory, IsLocalizationAtEdges.{u,v}, map with a(W)⊆W', map_F, map_id, map_comp) and the theorem (I : Type u, SmallCategory, IsFiltered; D, W, hW; union-of-images marking; K identified with the strict diagram on objects and transitions, hence equivalent to the strict form; r pinned down on colimit maps with IsIso r; q the colimit of the F_i with q≫r=F). No stronger assumptions and no universe equality; v is free as in the recorded definition. Edge cases checked: empty C or W, degenerate edges, non-injective transitions, empty index excluded as in the node. Node copy differs from the side clone only by the added lean field; lean.statement is verbatim in the file; docstrings carry source, blueprint tag and proof steps; only the theorem is sorry; no hollow definition; no duplicate in Mathlib or the side Sheaf tree. nt_compile.py on the local side overlay: rc 0, no errors or warnings. The report has a real Worker report; the Second reading section is the standard direct-delivery stub, as in landed reports. Cosmetic only: the report's first line reads 'Proposition the project server' instead of '6.3.2.11'."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialLocalizationExistence",
+  "declaration": "SSet.Enhanced.exists_simplicial_localization",
+  "declarations": [
+   "SSet.Enhanced.SimplicialLocalizationChoice",
+   "SSet.Enhanced.exists_simplicial_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialLocalizationExistence.lean",
+  "statement": "theorem exists_simplicial_localization : ∃ choice : SimplicialLocalizationChoice.{u, v}, ∀ (I : Type u) [SmallCategory I] [IsFiltered I] (D : I ⥤ SSet.{u}) (W : ∀ i, Set ((D.obj i) _⦋1⦌)) (hW : ∀ {i j : I} (f : i ⟶ j) (w : (D.obj i) _⦋1⦌), w ∈ W i → (D.map f).app _ w ∈ W j), ∃ (K : I ⥤ SSet.{u}) (e : ∀ i, K.obj i ≅ choice.L (D.obj i) (W i)), (∀ {i j : I} (f : i ⟶ j), K.map f ≫ (e j).hom = (e i).hom ≫ choice.map (D.map f) (hW f)) ∧ ∃ (q : colimit D ⟶ colimit K) (r : colimit K ⟶ choice.L (colimit D) (⋃ i, (colimit.ι D i).app (op ⦋1⦌) '' W i)), IsIso r ∧ (∀ i, colimit.ι D i ≫ q = choice.F (D.obj i) (W i) ≫ (e i).inv ≫ colimit.ι K i) ∧ (∀ i, colimit.ι K i ≫ r = (e i).hom ≫ choice.map (colimit.ι D i) (by intro w hw exact Set.mem_iUnion.mpr ⟨i, Set.mem_image_of_mem _ hw⟩)) ∧ q ≫ r = choice.F (colimit D) (⋃ i, (colimit.ι D i).app (op ⦋1⦌) '' W i)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "SimplicialLocalizationChoice packages precisely the choice, localization property and strict map laws of this node. The theorem additionally supplies a localized diagram identified objectwise and on every transition map, its canonical filtered-colimit comparison isomorphism, and compatibility with the universal maps. No object is chosen from the existence theorem."
  }
 }
