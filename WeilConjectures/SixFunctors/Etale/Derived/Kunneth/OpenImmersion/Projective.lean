@@ -117,7 +117,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_forall_not_isClosed {K 
     IsIntegralHom.SpecMap_iff.2 fun x ↦ Algebra.IsIntegral.isIntegral (R := K) x
   have : IsIntegralHom u := MorphismProperty.of_isPullback hX.flip inferInstance
   have : IsIntegralHom uW := MorphismProperty.of_isPullback hW'.flip inferInstance
-  have hF' (z' : pullback q₁ u) (hz' : ¬ IsClosed ({z'} : Set (pullback q₁ u))) (k : ℤ) :
+  have hF' (z' : (pullback q₁ u : Scheme.{u}))
+      (hz' : ¬ IsClosed ({z'} : Set (pullback q₁ u : Scheme.{u}))) (k : ℤ) :
       IsIso (((pullback q₁ u).uliftPointSmallEtale z').sheafFiber.map
         (Etale.baseChangeHomologyMap Λ sq' k ((uU)^*[ModuleCat.{u + 1} Λ].obj F))) := by
     refine (Etale.isIso_sheafFiber_baseChangeHomologyMap_cube_iff Λ sq hU sq' hV hW'.w.symm he F
