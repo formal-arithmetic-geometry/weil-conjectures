@@ -214,26 +214,22 @@
   "note": "clause (1) corrected (uniqueness characterized by compatibility with the canonical maps to the neighbourhoods); 4 new nodes, one Mathlib leaf (separableClosure)"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift",
-  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationClosedLift_over",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.strictHenselizationClosedLift_over"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationClosedLift.lean",
-  "statement": "theorem strictHenselizationClosedLift_over {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s)) ≫ strictHenselizationStructuralMap s = s",
+  "module": "Sheaf.Paper.StrictHenselizationFunctoriality",
+  "declaration": "AlgebraicGeometry.strictHenselizationFunctoriality",
+  "statement": "theorem strictHenselizationFunctoriality {S T : Scheme.{v}} (g : T ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (barT : Spec (.of Ω) ⟶ T) (barS : Spec (.of Ω) ⟶ S) (hbar : barS = barT ≫ g) [Algebra (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω] [Algebra (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω] (hΩS : algebraMap (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω = (Scheme.descResidueField (Scheme.stalkClosedPointTo barS)).hom) (hΩT : algebraMap (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω = (Scheme.descResidueField (Scheme.stalkClosedPointTo barT)).hom) [IsLocalRing (Scheme.strictHenselizationRing barS)] [IsLocalRing (Scheme.strictHenselizationRing barT)] (σS : IsLocalRing.ResidueField (Scheme.strictHenselizationRing barS) ≃+* separableClosure (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω) (σT : IsLocalRing.ResidueField (Scheme.strictHenselizationRing barT) ≃+* separableClosure (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω) (hσS : ∀ j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS), Spec.map (CommRingCat.ofHom (((IntermediateField.val (separableClosure (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp σS.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barS)))) ≫ (Scheme.strictHenselizationCone barS).π.app (Opposite.op (Opposite.op j)) ≫ (Spec (Opposite.unop ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj j).2.left) (hσT : ∀ j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT), Spec.map (CommRingCat.ofHom (((IntermediateField.val (separableClosure (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp σT.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barT)))) ≫ (Scheme.strictHenselizationCone barT).π.app (Opposite.op (Opposite.op j)) ≫ (Spec (Opposite.unop ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj j).2.left) : (∀ x : Ω, x ∈ separableClosure (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω → x ∈ separableClosure (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω) ∧ ∃ h : Scheme.strictHenselizationRing barS ⟶ Scheme.strictHenselizationRing barT, IsLocalHom h.hom ∧ Spec.map h ≫ Scheme.strictHenselizationStructuralMap barS = Scheme.strictHenselizationStructuralMap barT ≫ g ∧ (((IntermediateField.val (separableClosure (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp σS.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barS))) = ((((IntermediateField.val (separableClosure (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp σT.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barT)))).comp h.hom ∧ (∀ h' : Scheme.strictHenselizationRing barS ⟶ Scheme.strictHenselizationRing barT, IsLocalHom h'.hom → Spec.map h' ≫ Scheme.strictHenselizationStructuralMap barS = Scheme.strictHenselizationStructuralMap barT ≫ g → (((IntermediateField.val (separableClosure (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp σS.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barS))) = ((((IntermediateField.val (separableClosure (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp σT.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barT)))).comp h'.hom → h' = h) ∧ (∀ (a : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS)) (b : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT)) (w : ((Scheme.AffineEtale.Spec T).obj ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj b).1).left ⟶ ((Scheme.AffineEtale.Spec S).obj ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).1).left), w ≫ ((Scheme.AffineEtale.Spec S).obj ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).1).hom = ((Scheme.AffineEtale.Spec T).obj ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj b).1).hom ≫ g → ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj b).2.left ≫ w = ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).2.left → ((Scheme.strictHenselizationCone barT).π.app (Opposite.op (Opposite.op b)) ≫ (Spec (Opposite.unop ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj b).1.left)).isoSpec.inv) ≫ w = Spec.map h ≫ (Scheme.strictHenselizationCone barS).π.app (Opposite.op (Opposite.op a)) ≫ (Spec (Opposite.unop ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).1.left)).isoSpec.inv)",
   "branch": "newtargets-dag",
-  "by": "NH",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "The recorded map interface does not expose the factorization of the original geometric point through its canonical evaluation lift, required for transporting the source of the closed fibre map. This module states exactly this factorization from clause (1). All original functoriality clauses and canonical maps remain publicly imported."
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The previous record pointed only to strictHenselizationClosedLift_over, which gives a factorization but not the canonical local map, residue compatibility, uniqueness, or neighbourhood compatibility required by this item. The published strictHenselizationFunctoriality declaration states all four clauses of the dependency and is imported directly."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-4435b5965",
-  "group": "NH",
+  "reviewer": "NT-stage2-Codex-344ae4d24",
+  "group": "NM",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, all dependencies, canonical arrows, source clauses, universes, edge cases, docstrings, and verbatim signatures. All five modules compiled cleanly through scompile.py’s local side overlay. No findings or repository changes."
+  "note": "Statement, dependencies, source proof, docstrings, edge cases, universes, and canonical-map compatibility checked; scompile.py local/server compilation passed."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

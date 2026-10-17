@@ -227,5 +227,23 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-5781c53d2 (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and the new node in full, and checked them against Stacks algebra.tex 0GIP (statement and proof of case (1)), 05WR and 092Y. The item statement is unchanged and is the finite case of 0GIP with the canonical tensor base-change map. Steps: (1) the uniqueness in functoriality clause (3) makes the two maps H_A->H_D agree, which gives c with eps_D c = eps_E. (2) C->D is finite by an explicit generator argument, and the quasi-finite-ring node (05WR) gives the two localization models plus finite local H_A->H_B with purely inseparable residue extension. (3) The localization identities H_B=V_Q~, H_D=R_P and E=U^-1 R, with U disjoint from P, are verified and acceptable as elementary. (4) The 092Y node applied to (H_A,H_B,H_C) makes E local, and E is integral over H_C. (5) ker eps_E is maximal (integral over the maximal ideal of H_C), hence equals m_E, so R\\P becomes units and E=R_P; this fills 0GIP's 'small detail omitted' correctly. (6) Spec and geometric-point compatibilities hold. proof_deps equals the union of uses, and no SGA source is cited. The new node lem-trf-integral-local-tensor-purely-inseparable is 092Y with the factors swapped, with exactly its hypotheses (local maps, one map integral, either residue extension purely inseparable). I tested it on R=S; on R=IR, S=T=C, where the hypothesis fails and the tensor product C x C is not local; and on F_p(t^{1/p}) over F_p(t), where the tensor product S[eps]/eps^p is local. It is not a duplicate: grep finds no other node citing 092Y or 0GIP that states it. Its Mathlib searches are logged with no match. The slopmaster2 declaration Algebra.isLocalRing_tensorProduct_of_isPurelyInseparable_residueField (IntegralLocal.lean:510-522, no sorry in the file) states the node exactly and can be attached. I accept both declared tool_uses: lem-weil-pbc-strict-henselization-functoriality and lem-weil-pbc-finite-ring-map-quasi-finite are generic sk-thm-p1 tools that unit sk-i-curve-zero does not cite. No fixes were needed. Full details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.StrictHenselizationTensorFinite",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_tensor_finite",
+  "statement": "theorem strictHenselization_tensor_finite {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra A C] [Module.Finite A B] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of (B ⊗[A] C))) : ∃ φ : strictTensorRing (strictTensorMapAB s) (strictTensorMapAC s) →+* strictHenselizationRing s, Function.Bijective φ ∧ φ.comp (strictTensorLeft (strictTensorMapAB s) (strictTensorMapAC s)) = strictTensorMapBD s ∧ φ.comp (strictTensorRight (strictTensorMapAB s) (strictTensorMapAC s)) = strictTensorMapCD s ∧ ∀ b c, strictHenselizationPointEvaluation s (φ (strictTensorTmul (strictTensorMapAB s) (strictTensorMapAC s) b c)) = strictHenselizationPointEvaluation (strictTensorPointB s) b * strictHenselizationPointEvaluation (strictTensorPointC s) c",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/StrictHenselizationTensorFinite.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-344ae4d24",
+  "group": "NM",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, docstrings, edge cases, universes, and canonical-map compatibility checked; scompile.py local/server compilation passed."
  }
 }
