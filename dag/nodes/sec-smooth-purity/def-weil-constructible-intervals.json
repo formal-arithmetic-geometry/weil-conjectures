@@ -187,25 +187,23 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-7ca6498be (reviewer sub-agent of L); spot-checked: Read the item, packet/report, required stage and coordination documents, exact blueprint sources, every cited dependency, and relevant Mathlib definitions. The statement preserves all hypotheses and the inclusive cohomological interval; coefficient quotient, cohomology, constructibility, amplitude, and inherited full-subcategory interpretations are correct. No proof steps or new nodes exist, searches and route metadata are valid, edge cases pass, and no base-change morphism is present to verify. Review written to review.md; no Lean/build/compiler actions performed."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible",
-  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.constructibleIn",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.DerivedCategory.constructibleIn",
-   "AlgebraicGeometry.ProEtale.DerivedCategoryConstructibleIn"
-  ],
-  "statement": "def DerivedCategory.constructibleIn (a b : ℤ) :\n    ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))",
-  "branch": "slopmaster2",
-  "by": "ND",
-  "date": "2026-10-16",
-  "existing": true,
-  "note": "Section 1(B), finite coefficient-presentation repair. The intrinsic ringed-module record imports the reorganized FiniteCoefficient.UpperLowerStar declarations, incompatible with the published exceptional and Tor interfaces that use the legacy modules. Reuse the existing upstream constructibleIn and its FullSubcategory DerivedCategoryConstructibleIn, specialized to fixed-scalar ModuleCat of ULift A_{E,n}. Their definition is bounded constructibility intersect homologyConcentratedIn a b, with no Tor premise. At the finite coefficient stages used here, bounded etale origin is equivalent to intrinsic constructibility by lem-sf-proetale-constructible-origin. No interval or tensor definition is duplicated; no nonfinite coefficient identification is made."
+  "module": "Sheaf.AlgebraicGeometry.IntrinsicConstructibleIntervals",
+  "declaration": "WeilConjectures.intrinsicConstructibleIntervalCategory",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntrinsicConstructibleIntervals.lean",
+  "statement": "abbrev intrinsicConstructibleIntervalCategory (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (T : AlgebraicGeometry.Scheme.{u}) (a b : ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "§1(B): recorded constructibleIn has ambient DerivedCategory (Sheaf ProEt.topology (ModuleCat A)), while the recorded intrinsic constructible and finite-Tor predicates use proEtaleDerivedCategory, a ringed-module category. This module states the node exactly on its intrinsic category: the full subcategory of intrinsicFiniteTorsionConstructible objects with H^i=0 outside [a,b]. It adds no etale-origin assumption, tensor condition or comparison choice.",
+  "fixed_by": "NT-stage2-Codex-255d7c8d0"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-45d0fe955",
-  "group": "ND",
+  "reviewer": "NT-stage2-Codex-255d7c8d0",
+  "group": "Q94",
   "result": "fix",
-  "note": "Reviewed all statements, dependencies, sources, declarations and edge cases. Both Lean modules compile cleanly through scompile.py. Complete fixes clarify the finite-Tor coefficient interface in the report and item record; Lean statements remain unchanged. Findings are recorded in review.md."
+  "note": "Reused the existing intrinsic interval construction through a transparent alias and corrected the report. Source, dependencies, clauses, universes, edge cases and route checks passed; corrected modules compile cleanly."
  }
 }

@@ -202,5 +202,23 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-798064a25 (reviewer sub-agent of L); spot-checked: I read the full item, its 6 steps, both cited nodes (def-trf-fs-log-blowup and the Mathlib leaf lem-trf-fg-torsionfree-group-free), the parent lem-trf-sharp-fs-orthant-embedding, the sibling lem-trf-rational-cone-dual-integral-forms, and the unit and chapter records. The delivery has one commit holding only the item and its report, with no new nodes. The statement (finite-free group completion, a pointed spanning rational polyhedral cone, P = C∩G) is true and is exactly what the parent's steps and the sibling's hypotheses need. I tested it on P={0}, N, N^2 and {(a,b): a>=b>=0}. Each hypothesis is needed: Z/2 or Z (not sharp) breaks (a)/(b), and <2,3> in N (not saturated) breaks (c). Step 1: torsion-freeness from saturation, integrality and sharpness, correct. Step 2: finite basis from the Mathlib leaf Module.basisOfFiniteTypeTorsionFree', which I checked in PID.lean around lines 382-383. Step 3: injectivity of G into V through coordinate functionals extended to the tensor product, correct. Step 4: cone generators and spanning with explicit coefficients c_j. Step 5: denominators cleared explicitly with N and A_j, then saturation. Step 6: pointedness from a+b=0 in P and sharpness. The elementary markings are honest, proof_deps is the union of the step uses, and there is no cycle. Sources: I read ILO VIII 3.1.17 (p.101) and Remark 3.1.29 (p.103) in the PDF; they only motivate the lemma, and the node correctly marks the proof as agent-written with Kato 1994 WANTED. Searching the DAG with rg for saturated, cone, sharp and torsion-free found no duplicate; fs-face-sharpening and fine-monoid-finite-saturation are different statements. Route: the item uses only a definition and a Mathlib leaf, so no tool_uses are needed. This is not a target node, so the base-change check does not apply, and no SGA source is used. Minor point, not changed: one Loogle query is recorded as 'unavailable' when it was really a parse error, but a second Loogle query is recorded properly. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.SharpConeLatticeIntersection",
+  "declaration": "AlgebraicGeometry.sharp_fs_monoid_cone_lattice_intersection",
+  "file": "lean/Sheaf/GroupTheory/SharpConeLatticeIntersection.lean",
+  "statement": "theorem sharp_fs_monoid_cone_lattice_intersection (P : Type u) [AddCommMonoid P] (hfs : IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ p : P, IsAddUnit p → p = 0) (C : PointedCone ℚ (TensorProduct ℤ ℚ (Additive (Algebra.GrothendieckGroup (Multiplicative P))))) (hC : C = PointedCone.hull ℚ (Set.range (fun p : P ↦ (1 : ℚ) ⊗ₜ[ℤ] Additive.ofMul (Algebra.GrothendieckGroup.of (Multiplicative.ofAdd p))))) : (∃ r : ℕ, Nonempty (Module.Basis (Fin r) ℤ (Additive (Algebra.GrothendieckGroup (Multiplicative P))))) ∧ Function.Injective (fun g : Additive (Algebra.GrothendieckGroup (Multiplicative P)) ↦ (1 : ℚ) ⊗ₜ[ℤ] g) ∧ (∃ (m : ℕ) (v : Fin m → Additive (Algebra.GrothendieckGroup (Multiplicative P))), C = PointedCone.hull ℚ (Set.range (fun j : Fin m ↦ (1 : ℚ) ⊗ₜ[ℤ] v j))) ∧ (∀ x : TensorProduct ℤ ℚ (Additive (Algebra.GrothendieckGroup (Multiplicative P))), x ∈ C → -x ∈ C → x = 0) ∧ (∀ x : TensorProduct ℤ ℚ (Additive (Algebra.GrothendieckGroup (Multiplicative P))), ∃ a ∈ C, ∃ b ∈ C, x = a - b) ∧ (∀ g : Additive (Algebra.GrothendieckGroup (Multiplicative P)), (1 : ℚ) ⊗ₜ[ℤ] g ∈ C ↔ ∃ p : P, Additive.ofMul (Algebra.GrothendieckGroup.of (Multiplicative.ofAdd p)) = g)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-161de4dab",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Statement and Lean clauses match; dependencies, source citations, universes, edge cases, docstrings, report sections, and route-pivot checks pass. Per-file scompile.py compilation succeeded."
  }
 }
