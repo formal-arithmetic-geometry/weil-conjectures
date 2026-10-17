@@ -15,9 +15,104 @@
   "def-trf-algebraic-space",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First let $g:U'\\to U$ be a surjective etale morphism. By [lem-trf-etale-relation-restriction-quotient], the restricted relation is etale and the quotient map is an isomorphism when $g$ is surjective. Thus a surjective etale refinement of the atlas may be used without changing the quotient.",
+   "uses": [
+    "lem-trf-etale-relation-restriction-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WW, first reduction, using Tags 02VH and 02WT."
+   }
+  },
+  {
+   "text": "Choose an affine open covering $U=\\bigcup_iU_i$ and let $U'=\\coprod_iU_i\\to U$ be the resulting surjective etale map. The scheme coproduct lemma [lem-weil-pbc-scheme-coproduct-family] makes $U'$ a scheme with the $U_i$ as pairwise disjoint open-and-closed summands. The restriction lemma, applied first to $U'\\to U$ and then to each (generally non-surjective) etale summand inclusion $U_i\\to U'$, shows that every restricted relation $R_i$ is etale; it does not identify an individual quotient $F_i=U_i/R_i$ with $F$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-etale-relation-restriction-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WW, first and second paragraphs: replace by an affine coproduct and restrict the relation."
+   }
+  },
+  {
+   "text": "For each affine $U_i$, apply [lem-trf-etale-affine-quotient-representable]. It gives representability of every base change of $h_{U_i}\\to F_i$ and representability of the diagonal of $F_i$. The kernel-pair lemma [lem-trf-etale-relation-kernel-pair] identifies $h_{R_i}$ with $h_{U_i}\\times_{F_i}h_{U_i}$. For an fppf presentation $T_j\\to T$ of a section of $F_i$, this identification gives $T_j\\times_{F_i}h_{U_i}\\cong T_j\\times_{a_j,U_i,t}R_i$, a base change of the etale map $t$; reflexivity makes $t$ surjective. Etaleness descends along the resulting fpqc cover by [lem-galois-fpqc-descend-etale], while surjectivity is checked after the same jointly surjective cover. Therefore $F_i$ is an algebraic space and $U_i\\to F_i$ is an etale surjective atlas by [def-trf-algebraic-space].",
+   "uses": [
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-kernel-pair",
+    "lem-galois-fpqc-descend-etale",
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0265 (presentation-quasi-compact), first, second and third proof steps, followed by Tag 02WV."
+   }
+  },
+  {
+   "text": "The maps $U_i\\to U$ are flat and locally of finite presentation because they are etale; the projections $s,t:R\\to U$ are surjective by reflexivity of the equivalence relation and are flat and locally of finite presentation for the same reason. Therefore [lem-trf-etale-relation-finding-opens] applies to each restriction and gives a representable open immersion $F_i\\to F$. The images cover $F$: a section of the quotient is fppf-locally represented by a map to $U$, and after refining that cover the inverse image of the affine open covering places the representative in one $U_i$.",
+   "uses": [
+    "lem-trf-etale-relation-finding-opens",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WW, affine-summand paragraph, using Tag 02WU (finding-opens)."
+   }
+  },
+  {
+   "text": "The coproduct $\\coprod_iF_i$ is an algebraic space by [lem-trf-algebraic-space-coproduct], because the coproduct of the scheme atlases $\\coprod_iU_i$ is a scheme. The sheaf $F$ and its open subfunctors $F_i$ satisfy all hypotheses of [lem-trf-algebraic-space-open-gluing]: each $F_i$ is algebraic, each map is representable and open, the family is jointly surjective, and the coproduct is algebraic. Hence $F$ is an algebraic space.",
+   "uses": [
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-algebraic-space-open-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WW, final paragraph, using Tags 02WQ and 02WR."
+   }
+  },
+  {
+   "text": "Because $F$ is now an algebraic space, its diagonal is representable, so for every scheme $T\\to F$ the fibre product $T\\times_Fh_V$ is a scheme. Choose an fppf cover $T_j\\to T$ and representatives $a_j:T_j\\to V$ of the given section. The kernel-pair lemma [lem-trf-etale-relation-kernel-pair] gives\n$T_j\\times_Fh_V\\cong T_j\\times_{a_j,V,t}R$, a base change of the etale map $t$; reflexivity makes $t$ surjective. Thus the pullback of $q$ to each $T_j$ is etale and surjective, and [lem-galois-fpqc-descend-etale] descends etaleness along the fpqc cover while surjectivity is local on the base. The same kernel-pair isomorphism gives $h_R\\cong h_V\\times_Fh_V$. Finally, the quotient-sheaf coequalizer definition gives the stated bijection from maps $F\\to G$ to maps $h_V\\to G$ equalizing $s,t$.",
+   "uses": [
+    "lem-trf-etale-relation-kernel-pair",
+    "lem-galois-fpqc-descend-etale",
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WV and the quotient-sheaf universal property used in Tag 02WW."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sheafification",
+  "lem-galois-fpqc-descend-etale",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-algebraic-space-open-gluing",
+  "lem-trf-etale-affine-quotient-representable",
+  "lem-trf-etale-relation-finding-opens",
+  "lem-trf-etale-relation-kernel-pair",
+  "lem-trf-etale-relation-restriction-quotient",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 02WW, 02WV, 02WT, 02WU, 02WQ, 02WR and Groupoids Tags 045Y/045Z; affine presentation and open-gluing proof expanded with kernel-pair and fpqc-descent inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +144,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-polarized-scheme-etale-descent",
@@ -77,5 +172,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-relation-quotient",
+  "worker": "stage1",
+  "summary": "Repair of returned delivery: separated arbitrary-etale restriction (injectivity) from the surjective-cover quotient isomorphism, corrected the summand step, added a kernel-pair support lemma, cited fpqc etale descent, and expanded the final atlas argument using the representable diagonal and local quotient calculation. The quotient and hypotheses are unchanged.",
+  "blueprint": "Realizes the blueprint ancestor lem-trf-local-term-locality place “Polarized scheme descent input to the descent sentence: first form the quotient by the etale relation (Stacks 02WW).” Steps 1–6 follow the affine-refinement, kernel-pair, fpqc-descent, open-gluing, and presentation paragraphs."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-e3652dcff",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-e3652dcff (reviewer sub-agent of L); spot-checked: Full mathematical review completed; review.md records source checks, every proof step and new node, edge cases, route compliance, and repaired prior faults. No remaining errors or repairs."
  }
 }

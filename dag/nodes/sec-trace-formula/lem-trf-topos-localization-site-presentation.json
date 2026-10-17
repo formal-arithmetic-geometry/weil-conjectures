@@ -9,11 +9,104 @@
  },
  "stmt_deps": [
   "def-weil-pbc-topos",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site",
+  "def-trf-geometric-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-topos], choose a $\\mathcal V$-small sieve-site presentation $b:\\mathcal E\\simeq\\operatorname{Sh}(\\mathcal D,J;\\operatorname{Sets}_{\\mathcal V})$. Apply [lem-trf-sieve-sheaves-covering-site] to $(\\mathcal D,J)$, obtaining a small covering-family site $\\mathcal S$ and an equivalence $q:\\mathcal E\\simeq\\operatorname{Sh}(\\mathcal S)$. Put $B=q(A)$. This application uses only the smallness and sieve-topology hypotheses actually supplied by the topos definition; no pullbacks in $\\mathcal D$ have been assumed.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "lem-trf-sieve-sheaves-covering-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CI (lemma-topos-good-site), reduction to a site presentation; arbitrary-sieve starting convention handled by the cited replacement lemma."
+   }
+  },
+  {
+   "text": "Construct the underlying category of the desired site. In $\\operatorname{Sh}(\\mathcal S)$ let $\\mathcal C_0$ be the full subcategory on $B$, the terminal singleton sheaf, and all $h_s^\\#$ for $s\\in\\mathcal S$ [def-weil-pbc-sheafification]. Given its set of objects, form $\\mathcal C_{n+1}$ by adjoining one fibre product for every cospan in $\\mathcal C_n$, retaining all earlier objects. These fibre products and the terminal object exist by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. The natural transformations between two sheaves form a subset of the product over the $\\mathcal V$-small set of objects $s$ of the sets of maps between their $\\mathcal V$-small section sets. Hence all Hom sets are $\\mathcal V$-small; each stage has only a $\\mathcal V$-small set of cospans, and $\\mathcal C=\\bigcup_{n\\geq0}\\mathcal C_n$ is $\\mathcal V$-small [def-weil-size-convention]. Any cospan in $\\mathcal C$ occurs at some finite stage, so its chosen pullback lies in the next stage. Fullness transfers its universal property to $\\mathcal C$. Together with the terminal singleton this gives finite limits: products are pullbacks over the terminal object, and the equalizer of $f,g:X\\to Y$ is the pullback of $(f,g):X\\to Y\\times Y$ along the diagonal $Y\\to Y\\times Y$. Take $U=B$ as an object of $\\mathcal C$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CI (lemma-topos-good-site), proof: iterative full-subcategory closure; only finite limits are needed here, so closure under subsheaves is unnecessary. Tag 00W2 (lemma-limit-sheaf)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-sheaf-subcategory-comparison] to the full subcategory $\\mathcal C\\subset\\operatorname{Sh}(\\mathcal S)$. Its three hypotheses hold: the objects form a set, all sheafified representables belong already to $\\mathcal C_0$, and it is closed under fibre products by step 2. Thus the epimorphic-family topology makes $\\mathcal C$ a small subcanonical site, and $N:\\operatorname{Sh}(\\mathcal S)\\simeq\\operatorname{Sh}(\\mathcal C)$ is the equivalence with $N(F)(V)=\\operatorname{Hom}(V,F)$. Set $e=Nq$. The same cited statement gives $N(B)=h_U$, so $e(A)\\cong h_U$. An equivalence of categories is an equivalence of topoi: its inverse and unit/counit give an adjunction, and the equivalence transports universal properties of finite-limit cones in both directions.",
+   "uses": [
+    "lem-weil-pbc-sheaf-subcategory-comparison",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A1 (lemma-special-equivalence), clauses (1)-(4), applied as in the final sentence of the proof of Tag 03CI."
+   }
+  },
+  {
+   "text": "Choose an isomorphism $\\theta:e(A)\\xrightarrow{\\sim}h_U$. The functor on slices sending $p:H\\to A$ to $\\theta\\circ e(p):e(H)\\to h_U$ is an equivalence: apply a quasi-inverse of $e$ and its unit/counit to construct the inverse over $A$; the unit/counit identities over the bases follow from their naturality. Since the topology is subcanonical, $h_U^\\#\\cong h_U$. Now [lem-weil-pbc-localized-sheaves-over-representable] gives an equivalence from $\\operatorname{Sh}(\\mathcal C)/h_U$ to $\\operatorname{Sh}(\\mathcal C/U)$. Its value on $(F,p)$ at $a:V\\to U$ is the fibre $\\{x\\in F(V):p_V(x)=a\\}$, with componentwise restriction. The composite is the required equivalence $\\mathcal E/A\\simeq\\operatorname{Sh}(\\mathcal C/U)$. The site $\\mathcal C/U$ is small since its objects and arrows are subsets of small sets of arrows and commutative triangles of $\\mathcal C$; its covering families are exactly the underlying covering families by [def-pur-localized-ringed-site].",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04GZ (lemma-localize-topos), proof via Tag 00Y1 (lemma-essential-image-j-shriek); localized topology in Section 00XZ."
+   }
+  },
+  {
+   "text": "The forgetful functor $v:\\mathcal C/U\\to\\mathcal C$ is continuous: it sends a covering family to the identical underlying cover, and pullbacks of covering arrows in the slice are computed by the same pullbacks in $\\mathcal C$. It is cocontinuous: given a covering family $\\{W_i\\to V\\}$ in $\\mathcal C$ and $a:V\\to U$, the arrows $(W_i\\to V\\xrightarrow a U)\\to(V\\xrightarrow a U)$ form a covering in the slice whose image is that family itself. These assertions follow directly from [def-pur-localized-ringed-site]. Apply [lem-weil-pbc-continuous-cocontinuous-topos-adjunction]: precomposition along $v$, namely $F\\mapsto F|_U$, is the inverse image of a geometric morphism. Transport this adjunction through the equivalences of steps 3 and 4; composition of inverse images is as in [def-trf-geometric-morphism]. Thus the transported functor is a geometric inverse image on $\\mathcal E/A$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Section 00XZ (section-localize), localization functor; Tag 00XR (lemma-when-shriek), continuous and cocontinuous functors, and Tag 04GZ."
+   }
+  },
+  {
+   "text": "Identify that transported functor explicitly. An equivalence preserves products by their universal property: maps from a test object into $e(H\\times A)$ correspond, after applying the quasi-inverse, to pairs of maps into $H$ and $A$, hence to maps into $e(H)\\times e(A)$. Composing with $\\theta$ identifies the slice object $(H\\times A\\to A)$ with $(e(H)\\times h_U\\xrightarrow{\\mathrm{pr}_2}h_U)$. Products of sheaves are sectionwise by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Therefore the fibre formula of [lem-weil-pbc-localized-sheaves-over-representable] sends this slice object, at $a:V\\to U$, to $\\{(x,t)\\in e(H)(V)\\times h_U(V):t=a\\}$. Projection $(x,a)\\mapsto x$ is a bijection with inverse $x\\mapsto(x,a)$. Along $b:W\\to V$ both sides restrict $x$ to $e(H)(b)(x)$ and replace $a$ by $ab$, so these bijections are natural in slice objects and in $H$. Consequently the slice geometric inverse image is precisely $H\\mapsto(H\\times A\\to A)$ and corresponds under the constructed equivalence to restriction, as claimed.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-localized-sheaves-over-representable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04GZ (lemma-localize-topos), inverse-image description; Tag 03EE (lemma-compute-j-shriek-restrict); explicit fibre calculation from Tag 00Y1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-topos",
+  "def-weil-size-convention",
+  "lem-trf-sieve-sheaves-covering-site",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-sheaf-subcategory-comparison",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Construction following Tags 03CI and 03A1 and the fibre calculation of Tags 00Y1 and 04GZ, with an explicit preliminary covering-family replacement because def-weil-pbc-topos allows arbitrary sieve sites."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -35,10 +128,38 @@
    "results": "{\"t\": \"2026-10-17T20:23:24Z\", \"tool\": \"leanfinder\", \"query\": \"A Grothendieck topos admits a small site with subcanonical topology finite limits and representing any prescribed small set of objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Subcanonical\", \"CategoryTheory.GrothendieckTopology.instSubcanonicalCanonicalTopology\", \"CategoryTheory.hasSheafifyEssentiallySmallSite\", \"CategoryTheory.Sheaf.canonicalTopology\", \"CategoryTheory.subcanonical_typesGrothendieckTopology\", \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall\", \"CategoryTheory.hasSheafComposeEssentiallySmallSite\", \"CategoryTheory.coherentTopology.subcanonical\"], \"digest\": \"45291d64a8b17edb\"}",
    "date": "2026-10-18",
    "verdict": "no match: subcanonical topology and sheafification on an already essentially small site do not construct a small presenting site representing a prescribed topos object."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every topos has a small site presentation with finite limits and a prescribed representable object",
+   "results": "{\"t\": \"2026-10-17T20:33:13Z\", \"tool\": \"leansearch\", \"query\": \"Every topos has a small site presentation with finite limits and a prescribed representable object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable\", \"CategoryTheory.Limits.LimitPresentation.limit\", \"CategoryTheory.hasLimitsEssentiallySmallSite\", \"CategoryTheory.Limits.LimitPresentation.mk\", \"CategoryTheory.ObjectProperty.LimitOfShape.toLimitPresentation\", \"CategoryTheory.Sheaf.isSheaf_of_isRepresentable\", \"CategoryTheory.Sheaf.instHasFiniteLimits\", \"CategoryTheory.Classifier.SubobjectRepresentableBy.Ω₀\"], \"digest\": \"359fb7a812bf0319\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: topology-to-pretopology conversion requires pullbacks on the original category; dense-subsite equivalences require an already constructed comparison functor and topologies. None constructs the asserted replacement for an arbitrary small sieve site."
+  },
+  {
+   "tool": "loogle",
+   "query": "GrothendieckTopology, Sheaf",
+   "results": "{\"t\": \"2026-10-17T20:33:13Z\", \"tool\": \"loogle\", \"query\": \"GrothendieckTopology, Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'GrothendieckTopology'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: topology-to-pretopology conversion requires pullbacks on the original category; dense-subsite equivalences require an already constructed comparison functor and topologies. None constructs the asserted replacement for an arbitrary small sieve site."
+  },
+  {
+   "tool": "grep",
+   "query": "subcanonical|presentation|GrothendieckTopos",
+   "results": "{\"t\": \"2026-10-17T20:33:13Z\", \"tool\": \"grep\", \"query\": \"subcanonical|presentation|GrothendieckTopos\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Types.lean\", \"Mathlib/CategoryTheory/Sites/Types.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\"], \"digest\": \"f6ab10aeae33dc37\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: topology-to-pretopology conversion requires pullbacks on the original category; dense-subsite equivalences require an already constructed comparison functor and topologies. None constructs the asserted replacement for an arbitrary small sieve site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Grothendieck topos has a small subcanonical site with finite limits containing any given object as a representable sheaf",
+   "results": "{\"t\": \"2026-10-17T20:33:13Z\", \"tool\": \"leanfinder\", \"query\": \"A Grothendieck topos has a small subcanonical site with finite limits containing any given object as a representable sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Subcanonical\", \"CategoryTheory.GrothendieckTopology.instSubcanonicalCanonicalTopology\", \"CategoryTheory.Sheaf.canonicalTopology\", \"CategoryTheory.GrothendieckTopology.Subcanonical.of_isSheaf_yoneda_obj\", \"CategoryTheory.hasSheafifyEssentiallySmallSite\", \"CategoryTheory.subcanonical_typesGrothendieckTopology\", \"CategoryTheory.GrothendieckTopology.le_canonical\", \"CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable\"], \"digest\": \"b01dc561b339af38\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: topology-to-pretopology conversion requires pullbacks on the original category; dense-subsite equivalences require an already constructed comparison functor and topologies. None constructs the asserted replacement for an arbitrary small sieve site."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -72,5 +193,39 @@
    ]
   },
   "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-topos-localization-site-presentation",
+  "worker": "stage1",
+  "summary": "Constructed a small full finite-limit closure containing the chosen sheaf, applied the existing subcategory comparison, and used the existing explicit slice equivalence and continuous/cocontinuous adjunction. Added only the sieve-site to covering-family-site bridge to respect the current topos definition. Kept the item statement unchanged.",
+  "blueprint": "The generic source-localization branch beneath lem-trf-local-term-locality: the site presentation needed for the subterminal open/complement module construction in lem-trf-topos-complement-module-stalks. Steps 2-3 implement 03CI, steps 4-6 implement the slice localization of 04GZ.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-subcategory-comparison",
+    "why": "Generic comparison on a full small pullback-closed category of sheaves; no trace-formula unit node states this site-comparison tool."
+   },
+   {
+    "node": "lem-weil-pbc-localized-sheaves-over-representable",
+    "why": "Generic explicit fibre equivalence on a slice site; no trace-formula unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "Generic construction of geometric inverse image from a continuous and cocontinuous functor; used for the slice forgetful functor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-subcategory-comparison",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-d7ebee6d8",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-d7ebee6d8 (reviewer sub-agent of L); spot-checked: The mathematics and source route pass review, including all six proof steps, the supporting sieve-to-site statement, edge cases, citations, and no-SGA/ordinary-site constraints. Fix the item node metadata: `created.item` incorrectly says `lem-trf-topos-complement-module-stalks`; it must be `lem-trf-topos-localization-site-presentation`. Review written to `review.md`."
  }
 }

@@ -11,9 +11,151 @@
   "def-weil-pbc-topos",
   "def-trf-geometric-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-topos-localization-site-presentation] to $(\\mathcal E,u)$. It supplies a small finite-limit site $\\mathcal C$ with subcanonical topology, an equivalence $\\mathcal E\\simeq\\operatorname{Sh}(\\mathcal C)$ taking $u$ to $h_U$, and $\\mathcal E/u\\simeq\\operatorname{Sh}(\\mathcal C/U)$ taking $j^{-1}A=(A\\times u\\to u)$ to restriction. Let $X$ be its terminal object. The map $U\\to X$ is mono: two maps to $U$ have equal images under the fully faithful representable functor because $h_U$ is subterminal, hence are equal. We work in these presentations and transport the results back. This uses an actual subcanonical presentation, not arbitrary representables on the original site.",
+   "uses": [
+    "lem-trf-topos-localization-site-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CI and 04GZ, good-site and slice presentations used at the start of 08LW and 08LY."
+   }
+  },
+  {
+   "text": "By [lem-trf-slice-subtopos-site-presentation] restriction and $G\\mapsto(V\\mapsto G(V\\times U/U))$ are the adjoints defining $j$. For an object $W\\to U$, subterminality gives an isomorphism $(1,t):W\\to W\\times U$, inverse to the first projection: their second components agree because maps to $U$ are unique. The cited graph formula therefore makes the counit $j^{-1}j_*G\\to G$ an isomorphism on every section. Consequently $j_*$ is fully faithful: a map $j_*G\\to j_*H$ transposes to $j^{-1}j_*G\\to H$, and precomposition with the inverse counit identifies it uniquely with a map $G\\to H$. Thus $j$ is a geometric embedding. Its essential image is, by the open-subtopos definition following 08LW, the open subtopos defined by $u$.",
+   "uses": [
+    "lem-trf-slice-subtopos-site-presentation",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 08LW, subterminal direction; graph counit computation in 00Y2 and product formula 03CE."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-closed-complement-site-construction] to this subcanonical finite-limit site and $U\\to X$. It gives $q$ with fully faithful direct image and essential image exactly the full subcategory $\\mathcal E_c$ specified in the item. A fully faithful functor is an equivalence onto its essential image: choose a preimage and an isomorphism for each object, and lift morphisms uniquely by full faithfulness. Hence $\\mathcal E_c$ is a Grothendieck topos and $q$ becomes a geometric morphism $k$ with direct image the inclusion $I:\\mathcal E_c\\to\\mathcal E$. Write $L=k^{-1}$, so $L\\dashv I$ and $L$ is left exact. This is the complementary closed subtopos by the definitions 08LZ/08M0.",
+   "uses": [
+    "lem-trf-closed-complement-site-construction",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 08LY, 08LZ, 08M0; passage from a fully faithful image to its full subcategory."
+   }
+  },
+  {
+   "text": "We will use $0\\times B\\cong0$ in any sheaf topos. Here are the details from [def-weil-pbc-topos]. On a presenting site put $Z(V)=\\{*\\}$ if the empty sieve covers $V$, and $Z(V)=\\varnothing$ otherwise. Pullback stability defines restrictions. A matching family for a covering sieve exists precisely when the empty sieve covers every domain in that sieve; transitivity makes this equivalent to the empty sieve covering $V$. It then has exactly one amalgamation. Thus $Z$ is a sheaf. Every sheaf $B$ has singleton sections on empty-covered objects, directly by its empty-family sheaf condition, so there is exactly one map $Z\\to B$ and $Z\\times B=Z$ sectionwise. Products of sheaves are sectionwise: a matching pair glues uniquely by gluing its two coordinates. Thus $Z$ is initial and proves the asserted product identity, also after transport along equivalences.",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Elementary verification from the sieve/sheaf definition; empty matching families and coordinatewise gluing."
+   }
+  },
+  {
+   "text": "For every $C\\in\\mathcal E_c$ the projection $u\\times IC\\to u$ is invertible. Its inverse supplies a map $u\\to IC$, and any other such map gives another section of this isomorphism and hence is equal. Thus $\\operatorname{Hom}_{\\mathcal E_c}(Lu,C)=\\operatorname{Hom}_{\\mathcal E}(u,IC)$ is a singleton, so $Lu$ is initial. Also $j^{-1}u=(u\\times u\\to u)\\cong(u\\xrightarrow{1}u)$ is terminal in the slice: the diagonal and either projection are inverse because $u$ is subterminal. These identify the inverse images of $u$ for the necessity directions below.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Elementary adjunction calculation from 08LY essential image and the slice inverse image of 04GZ."
+   }
+  },
+  {
+   "text": "Let $a:\\mathcal H\\to\\mathcal E$ be geometric with $a^{-1}u\\cong0$. For $B\\in\\mathcal H$, adjunction gives a unique $s:u\\to a_*B$. It yields a section $(1,s):u\\to u\\times a_*B$ of the projection. To check the other composite, compare its second projection with the second projection of the identity. Both are maps $u\\times a_*B\\to a_*B$; their transposes have domain $a^{-1}(u\\times a_*B)\\cong0\\times a^{-1}a_*B\\cong0$, by left exactness and step 4, so they are equal. The first projections agree as well, proving the two-sided inverse. Therefore $a_*B$ belongs to $\\mathcal E_c$. Define $b_*B=a_*B$ regarded in that full subcategory, and define $b_*$ on maps by the same underlying maps. Define $b^{-1}=a^{-1}I$.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent adjunction calculation completing the closed factorization formulation of 08LY; no inverse-image extension theorem is assumed."
+   }
+  },
+  {
+   "text": "For $C\\in\\mathcal E_c$ and $B\\in\\mathcal H$, the bijections $\\operatorname{Hom}_{\\mathcal H}(a^{-1}IC,B)\\cong\\operatorname{Hom}_{\\mathcal E}(IC,a_*B)=\\operatorname{Hom}_{\\mathcal E_c}(C,b_*B)$ are natural: all maps are the original adjunction maps and full-subcategory identifications. [lem-weil-pbc-adjunction-of-natural-bijection] supplies $b^{-1}\\dashv b_*$. Since $I$ is right adjoint to $L$, [lem-weil-pbc-right-adjoint-preserves-limits] makes it preserve finite limits; hence $a^{-1}I$ is left exact. Thus $b$ is geometric. The composite has direct image $Ib_*=a_*$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=b^{-1}L$, $R_1=Ib_*=a_*$, $L_2=a^{-1}$, $R_2=a_*$ and $\\delta=1$. It constructs the comparison $c:b^{-1}L\\xrightarrow{\\sim}a^{-1}$, characterized at $A$ by $a_*(c_A)\\eta^{kb}_A=\\eta^a_A$. Thus $kb\\cong a$ as adjoint pairs, with a specified compatible comparison.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent construction of both closed-factor adjoints; natural-bijection and comparison tools from categories.tex 0037, 0038, 0B65."
+   }
+  },
+  {
+   "text": "Conversely, if $a\\cong kb$, then $a^{-1}u\\cong b^{-1}Lu$ is initial: for any $B$, its maps into $B$ correspond to maps from the initial object $Lu$ to $b_*B$, a singleton. For any two geometric morphisms $b,d:\\mathcal H\\to\\mathcal E_c$, a transformation $Ib_*\\to Id_*$ has at every $B$ a unique preimage $b_*B\\to d_*B$ under the fully faithful $I$. Its naturality follows by applying the faithful $I$ to each naturality square, and composition and identities lift in the same way. Thus composition with $k$ is fully faithful on the direct-image transformations of [def-trf-geometric-morphism]. Together with steps 6–7 this is an equivalence onto the asserted full subcategory. In particular a compatible isomorphism between two composites lifts uniquely, which is precisely uniqueness of the factorization up to unique compatible isomorphism.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent completion of the closed universal property: initiality, lifted naturality squares and compatible isomorphisms."
+   }
+  },
+  {
+   "text": "Now suppose $a^{-1}u\\cong1_{\\mathcal H}$. Define $b^{-1}(V\\xrightarrow{t}u)=a^{-1}V$, acting by $a^{-1}$ on underlying maps, and $b_*B=(a_*B\\times u\\to u)$, acting by $a_*\\beta\\times1_u$. A map in the slice $(V,t)\\to b_*B$ is exactly a map $V\\to a_*B$, its other component being the prescribed $t$. The original adjunction gives natural bijections $\\operatorname{Hom}_{\\mathcal H}(b^{-1}(V,t),B)\\cong\\operatorname{Hom}_{\\mathcal E/u}((V,t),b_*B)$; naturality is that of $a^{-1}\\dashv a_*$ and pairing with $t$. By [lem-weil-pbc-adjunction-of-natural-bijection] these give the unit, counit and triangle identities for $b^{-1}\\dashv b_*$. The terminal slice object has underlying object $u$, whose image is terminal by hypothesis. Pullbacks in a slice have the underlying pullback in $\\mathcal E$ (the induced structure map is forced by the common base map), so $b^{-1}$ preserves pullbacks. Terminal objects and pullbacks construct every finite limit, so $b^{-1}$ is left exact. This explicitly constructs the open factor as a geometric morphism.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent slice-adjunction calculation proving the open universal property, with 04GZ inverse image and 08LW open localization."
+   }
+  },
+  {
+   "text": "The comparison of inverse images for $jb$ is the natural isomorphism $b^{-1}j^{-1}A=a^{-1}(A\\times u)\\xrightarrow{a^{-1}\\mathrm{pr}_1}a^{-1}A$, since $a^{-1}$ preserves products and $a^{-1}u\\cong1$. To obtain the comparison on direct images and the adjunctions as well, apply [lem-weil-pbc-conjugate-iso-unit-equation] to the opposite adjunctions: $a_*^{\\mathrm{op}}\\dashv(a^{-1})^{\\mathrm{op}}$ and $(j_*b_*)^{\\mathrm{op}}\\dashv(b^{-1}j^{-1})^{\\mathrm{op}}$, with $\\delta$ the opposite of the inverse of the displayed comparison (so $\\delta:(b^{-1}j^{-1})^{\\mathrm{op}}\\to(a^{-1})^{\\mathrm{op}}$). Taking opposites back supplies $j_*b_*\\cong a_*$ with its unit compatibility, hence $jb\\cong a$. Conversely, if $a\\cong jb$, then $a^{-1}u\\cong b^{-1}j^{-1}u\\cong b^{-1}1\\cong1$ by left exactness and step 5.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent construction of the open-composite comparison, using 04GZ product inverse image and categories.tex 0B65 on opposite adjunctions."
+   }
+  },
+  {
+   "text": "For two open factors $b,d$, a transformation $j_*b_*\\to j_*d_*$ lifts componentwise uniquely through the fully faithful $j_*$ proved in step 2; its naturality, identities and compositions are checked after the faithful $j_*$. By the direct-image convention of [def-trf-geometric-morphism], this gives exactly the bijection on $2$-morphisms. Steps 9–10 give essential surjectivity and necessity, so composition with $j$ is the asserted equivalence onto the full subcategory. Compatible isomorphisms lift uniquely as in step 8. All constructions and comparison equations transport along the chosen presentation equivalences, giving the statement for the original $\\mathcal E,u$ and every $\\mathcal H$.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent completion of open full faithfulness on morphism categories; elementary transport along equivalences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-topos",
+  "lem-trf-closed-complement-site-construction",
+  "lem-trf-slice-subtopos-site-presentation",
+  "lem-trf-topos-localization-site-presentation",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-right-adjoint-preserves-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "08LW/08LY for the embeddings; explicit adjunction, composition-comparison and transformation calculations for the universal properties. Generic categorical tools are cited in the individual steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +194,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-source-localization",
@@ -76,5 +218,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-topos-complement-factorization",
+  "worker": "stage1",
+  "summary": "Repair of returned aa51f52de595: kept the item statement unchanged; restricted the closed-site input to a subcanonical finite-limit site and obtained it from the existing localization-site-presentation node; narrowed the second new node to the explicit restriction/direct-image adjunction and graph counit, reusing the existing slice equivalence. Replaced the unsupported extension assertions by constructed open and closed adjoint pairs, checked left exactness, specified composite comparisons and proved the bijections on all direct-image transformations. Included the elementary zero-product argument and reused three existing general categorical Mathlib leaves.",
+  "blueprint": "Generic open/closed source reduction along the inherited lem-trf-local-term-locality ancestry: steps 1–3 construct the two embeddings; 4–8 prove the closed universal property; 9–11 prove the open universal property. No unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-4cdc910ce",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-4cdc910ce (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full; checked all eleven proof steps against cited statements and Stacks sources, adjunction directions, topology hypotheses, duplicate candidates, edge cases, and route constraints. No long steps, cycles, target weakening, or repairs needed. Detailed findings are in review.md."
  }
 }
